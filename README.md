@@ -1,2 +1,4 @@
 # D&D
-D&amp;D Character Generator
+D&D Tools For DM
+
+Check the Wiki
