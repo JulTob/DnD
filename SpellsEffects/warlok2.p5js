@@ -1,0 +1,79 @@
+let alto = 800;
+let ancho = 800;
+
+function setup() {
+	createCanvas(alto,ancho);
+	rectMode(CENTER);
+}
+
+let center_x = alto/2;
+let center_y = ancho/2;
+
+function rune(n){
+	// Returns one of the Futhark symbols
+	let ruth = "ᚠᚡᚢᚣᚤᚥᚦᚧᚨᚩᚪᚵᚴᚳᚲᚱᚰᚯᚮᚭᚬᚫᚶᚷᚸᚹᚺᚻᚼᚽᚾᚿᛀᛋᛊᛉᛈᛇᛆᛅᛄᛃᛂᛁᛌᛍᛎᛏᛐᛑᛒᛓᛔᛕᛖᛡᛠᛟᛞᛝᛜᛛᛚᛙᛘᛗᛢᛣᛤᛥᛦᛧᛨᛩᛪ᛫᛬᛭ᛮᛯᛰ"
+	let m = n % ruth.length;
+	return ruth.charAt(m);
+	}
+
+function unholy(n){
+	// Returns one of the symbols in the string
+	let abecedary = "⛤⛥⛦⛧۞☣༄࿓☥"
+	let m = n % abecedary.length;
+	return abecedary.charAt(m);
+	}
+
+let txtsize = 100
+let frame = 0;
+let angle = 1.1;
+
+function sol(symbol,speed, scale){
+	let cWidth = textWidth(symbol)
+	push();
+	textSize(scale*txtsize)
+	rectMode(CENTER);
+	translate(center_x, center_y);//Epicenter of rotation
+	rotate(radians(speed*angle));
+	text(symbol, 0, 0);
+	pop();
+	}
+
+function planet(symbol, speed, scale, phase, modulo){
+	push();
+	textSize(scale*txtsize)
+	translate(center_x, center_y);//Epicenter of rotation
+	rotate(radians(speed*angle+phase));
+	text(symbol, modulo, modulo); 
+	pop();
+	}
+
+function draw(){
+	textAlign(CENTER, CENTER); 
+	// Important! Manipulates symbols from the centre
+	background(10);
+	//draw a black background
+	fill(200, 100);
+	// Color and transparency of the symbols
+
+	//textSize(txtsize);
+	
+	//sol("⛦",-0.5, 4);
+	sol("𐦝", 0, 4);
+	sol("◯", 5, 4);
+	sol("⛥",0.5, 4);
+	for(let counter = 0; counter <5; counter++){
+		planet(rune(frame/160+(counter*3)), 1/10, abs(cos(frame/160+counter*360/5)), counter*360/5,200+50*cos(frame/160))
+		}
+	for(let counter = 0; counter <5; counter++){
+		planet(unholy(counter+frame/160), 1/6, abs(cos(frame/160+counter*360/5)), counter*360/5 + 125,200+50*cos(frame/160))
+		}
+	for(let counter = 0; counter <5; counter++){
+		planet(rune(2.5+frame/160+(counter*7)), -1/11, abs(sin(frame/160+counter*360/5)), counter*360/5,200+50*sin(frame/160))
+		}
+//for(let counter = 0; counter <5; counter++){
+//		planet(unholy(frame/160+(counter*11)), 1/9, abs(sin(frame/160+counter*360/5)), 125+counter*360/5,200+50*sin(frame/160))
+	//	}
+
+  frame += 1;
+	angle += 0.666
+}
