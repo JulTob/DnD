@@ -26,6 +26,7 @@ def Title():
         "The Equinox",
         "The Equivalence",
         "The Emphasising",
+        "The Emmerald", 
         "The Engine",
         "The Energy",
         "The Errant",
@@ -151,6 +152,7 @@ def Title():
         " Outlaw",
         " Pathologist",
         " Paw",
+        "Pirate",
         " Poet",
         " Prophet",
         " Ranger",
@@ -179,19 +181,15 @@ def Title():
 def Background():
     Backgrounds = [
         "Acolyte",
+        "Alchemist",
         "Archmage",
         "Assassin",
         "Bandit",
         "Berserker",
-        "Celestial", 
         "Commoner",
-        "Construct",
         "Cultist",
         "Druid",
         "Expert",
-        "Elemental",
-        "Fey",
-        "Fiend",
         "Gladiator",
         "Guard",
         "Knight", 
@@ -216,13 +214,18 @@ def Race():
         "Aberration",
         "Aven(Birdfolk)"
         "Beast",
+        "Catfolk",
+        "Celestial", 
+        "Construct",
         "Demon",
         "Dragon",
         "Elf","Elf","Elf","Elf","Elf","Elf","Elf",
         "Elemental",
-        "Fey",
+        "Fey", "Fey",
+        "Fiend",
+        "Giant",
         "Gnoll",
-        "Gnnome",
+        "Gnome",
         "Goblin",
         "Hobgoblin",
         "Kenku",
@@ -231,6 +234,7 @@ def Race():
         "Lycan",
         "Merfolk",
         "Monstrosity",
+        "Nymph",
         "Ooze",
         "Orc",
         "Plant",
@@ -238,7 +242,8 @@ def Race():
         "Undead",
         "Vampire",
         "Werewolf",
-        "Wolf"
+        "Wolf",
+        ""
         ]
     return random.choice(Races)
 
@@ -252,7 +257,7 @@ def AbilityScore():
     d2 = Dice() 
     d3 = Dice()
     d4 = Dice()
-    return d1+d2+d3+d4 - min(d1,d2,d3,d4)
+    return d1+d2+d3+d4 - min(d1,d2,d3,d4) + Dice(3) -1
     
 def NPC():
     """NPC creator"""
