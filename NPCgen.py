@@ -13,6 +13,7 @@ def Title():
         "The Autumn",
         "The Angry",
         "The Avatar",
+        "The Arcane",
         "The Battle",
         "The Baron of",
         "The Bearded", 
@@ -30,10 +31,12 @@ def Title():
         "The Champion",
         "The Chief",
         "The Chimera",
+        "The Circus",
         "The Collector",
         "The Conjurer",
         "The Coral",
         "The Clokwork",
+        "The Cursed",
         "The Deadly",
         "The Death",
         "The Dawning",
@@ -47,7 +50,7 @@ def Title():
         "The Equivalence",
         "The Emphasising",
         "The Emmerald", 
-        "The Enchanter",
+        "The Enchanted",
         "The Engine",
         "The Energy",
         "The Errant",
@@ -101,6 +104,7 @@ def Title():
         "The Old",
         "The Owl",
         "The Pain",
+        "The Paladin",
         "The Plague",
         "The Powder",
         "The Power",
@@ -120,8 +124,9 @@ def Title():
         "The Spring",
         "The Storm",
         "The Stone",
-        "The Start",
+        "The Starting",
         "The Stars",
+        "The Strong",
         "The Spark",
         "The Spell",
         "The Speaker",
@@ -155,6 +160,7 @@ def Title():
         " Alchemist",
         "Aprentice",
         " Arrow",
+        "Archer",
         "Archfey",
         "Archdruid",
         "Archmage",
@@ -241,6 +247,7 @@ def Title():
         " Of Justice",
         "Of The Abyss",
         "Of the Autumn",
+        "Of The Crown"
         " Of The Desert",
         "Of The Dead",
         " Of The East",
@@ -300,6 +307,7 @@ def Title():
         "Swashbuckler",
         " Terror",
         "Trapper",
+        "Trapecist",
         "Troll",
         "Thief",
         " Void",
@@ -328,29 +336,44 @@ def Background():
         "Acolyte",
         "Alchemist",
         "Archmage",
+        "Archaeologist",
         "Assassin",
         "Bandit",
         "Bard",
         "Berserker",
+        "Charlatan",
         "Commoner",
+        "Courtesan",
         "Cultist",
+        "Criminal",
         "Druid",
+        "Entertainer",
         "Expert",
         "Gladiator",
         "Guard",
+        "Hero",
+        "Hunter",
         "Knight", 
         "Mage",
+        "Mercenary",
         "Noble", 
+        "Outlander",
         "Priest",
         "Pirate",
+        "Sage",
         "Scout",
+        "Scholar",
+        "Soldier",
         "Student",
         "Spy",
         "Spellcaster",
         "Thug", 
+        "Traveler",
         "Tribal Warrior",
         "Veteran",
         "Warrior",
+        "Warlock",
+        "Witch",
         ""
         ]
     return random.choice(Backgrounds)
@@ -364,22 +387,26 @@ def Race():
         "Aven(Birdfolk)",
         "Beast", 
         "Beast",
+        "Beastfolk",
         "Catfolk",
         "Celestial", 
         "Centaur",
         "Construct",
         "Demon",
         "Dragon",
+        "Dragonborn", "Dragonborn",
         "Dwarf","Dwarf","Dwarf",
         "Elf","Elf","Elf","Elf","Elf","Elf",
         "Elemental",
         "Fey", "Fey",
         "Fiend",
         "Giant",
+        "Genasi",
         "Gnoll",
         "Gnome",
         "Goblin",
         "Hag",
+        "Halfling",
         "Hobgoblin",
         "Illithid",
         "Kenku",
@@ -387,6 +414,7 @@ def Race():
         "Lizardfolk",
         "Lycan",
         "Merfolk",
+        "Minotaur",
         "Monstrosity",
         "Nymph",
         "Ogre",
@@ -395,6 +423,7 @@ def Race():
         "Plant",
         "Snakefolk",
         "Spirit",
+        "Tiefling",
         "Undead",
         "Vampire",
         "Werewolf",
@@ -413,7 +442,8 @@ def AbilityScore():
     d2 = Dice() 
     d3 = Dice()
     d4 = Dice()
-    return d1+d2+d3+d4 - min(d1,d2,d3,d4) + Dice(3) -1
+    return d1+d2+d3+d4 - min(d1,d2,d3,d4) + Dice(3)-1 +Dice()+Dice() - Dice() - Dice()
+    
 def Modifier(AS):
     return int((AS-10)/2)
 
@@ -517,7 +547,10 @@ def Damage():
 
 
 
-def Spellcasting(Type=Dice(50)):
+
+
+
+def Actions(Type=Dice(50)):
     r = ""
     if Type=="Healer" or Type ==1:
         r = r+ "\n Cantrips (at will): guidance, sacred flame \n    1st level (2 slots): cure wounds"
@@ -532,6 +565,8 @@ def Spellcasting(Type=Dice(50)):
         
     elif Type == "Tribal Warrior" or Type == 5:
         r = r + "\n- Pack Tactics"
+        if Dice(2)==1:
+            r= r + "\n- Wounded Fury"
         
     elif Type == "Plant" or Type == 6: 
         r = r+ "\n- False Appereance"
@@ -567,7 +602,7 @@ def Spellcasting(Type=Dice(50)):
         if rdm == 1:
             r = r+ "\n -Grappler (DC 10+%STR)"
         if rdm == 2: 
-            r = r+ "\n -Charger (2d6, DC 10+%STR)"
+            r = r+ "\n -Charger (2d6+%STR, DC 10+%STR)"
             r = r+ "\n -Relentless"
         if rdm == 3: 
             r = r+ "\n- Water Breathing"
@@ -632,10 +667,10 @@ def Spellcasting(Type=Dice(50)):
             
 
     elif Type == "Lizardfolk" or Type == 19:
-        r = r+"\n- Hold Breath"
+        r = r+"\n\n- Hold Breath"
         rdm = Dice(2)
         if rdm == 1:
-            r = r + "\n - Chameleon Skin"
+            r = r + "\n - Chameleon Skin\n"
         return r
         
     elif Type == "Vampire" or Type == 20:
@@ -689,10 +724,14 @@ def Spellcasting(Type=Dice(50)):
             r = r+"\n- Amorphous"
             r = r+"\n- Shadow Stealth"
             r = r+"\n- Sunlight Weakness"
-        elif rdm == 1:
+        elif rdm == 2:
             r = r + "\n- Incorporeal Movement"
             r = r + "\n- Sunlight Sensitivity"
             r = r + "\n- Life Drain"
+        if Dice(2) == 1:
+            r = r + "\n- Invisibility"
+        if Dice(2) == 1:
+            r = r + "\n- Telekinetic Thrust"
 
     elif Type == "Thug" or Type == 29:
         r = r+ "\n- Pack Tactics"
@@ -777,11 +816,14 @@ def Spellcasting(Type=Dice(50)):
             r = r + "\n-False Appearance"  
 
     elif Type == "Giant" or Type == 42:
-        r = r + "\n-STR +" + Dice(12)  
+        r = r + "\n-STR +" + str(Dice(12))  
 
     elif Type == 43:
         r = r + "\n-Cantrips (at will): guidance, resistance, thaumaturgy\n 1st level (4 slots): bless, command\n 2nd level (2 slots): augury, spiritual weapon (spear) "
- 
+
+    elif Type == "Priest" or Type == 45:
+        r = r + "\nDivine Eminence"
+        r = r + "\nCantrips (at will): light, sacred flame, thaumaturgy\n 1st level (4 slots): cure wounds, guiding bolt, sanctuary \n 2nd level (3 slots): lesser restoration, spiritual weapon \n 3rd level (2 slots): dispel magic, spirit guardians"
 
     else:    
         r = r + "\n- Multiattack\n"
@@ -815,20 +857,21 @@ def NPC():
     print(bg)
     print(rc)
     print("Lvl:", Lvl, "   HP:", Lvl*(Dice(10) + Modifier(CON)))
-    print("\nSTR:", STR,
-        "  DEX:", DEX,
-        "  CON:", CON, 
-        "  INT:", INT, 
-        "  WIS:", WIS,
-        "  CHA:", CHA, "\n")
+    print("AC:", 10 + Modifier(DEX) + Modifier(Dice(Lvl+10)))
+    print("\n\t"," STR:", STR,"\t", Modifier(STR),"\n\t",
+        " DEX:", DEX," \t", Modifier(DEX),"\n\t"
+        " CON:", CON," \t",  Modifier(CON),"\n\t"
+        " INT:", INT," \t",  Modifier(INT),"\n\t"
+        " WIS:", WIS," \t", Modifier(WIS),"\n\t"
+        " CHA:", CHA," \t",  Modifier(CHA),"\n\t")
  
     print (Attack("Melee"))
     print (Attack(Dice(4)), "+", int(1 + Lvl/3) ,"d4 " + Damage() +" dmg")
 
     print("\n")
-    print(Spellcasting(bg))
-    print(Spellcasting(rc))
-    print(Spellcasting())
+    print(Actions(bg))
+    print(Actions(rc))
+    print(Actions())
     print("\n")
 
 
