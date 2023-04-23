@@ -112,6 +112,7 @@ def Title():
         "The Ruby",
         "The Rune",
         "The Sad",
+        "The Science",
         "The Shadow",
         "The Silver",
         "The Skelleton",
@@ -190,12 +191,14 @@ def Title():
         "Eclipse",
         "Enforcer",
         "Elite",
+        "Elk",
         "Elemental",
         " Fire", 
         "Fury",
         " Flutist",
         "Flame",
         "Freedomfighter",
+        "Gargoyle",
         " Genius",
         " Geneticist", 
         "Giant",
@@ -218,6 +221,7 @@ def Title():
         "Kiss",
         " Leader",
         " Licht",
+        "Lion",
         " Lotus",
         " Lord",
         " Machine",
@@ -270,7 +274,7 @@ def Title():
         "Princess",
         " Prophet",
         "Queen",
-        " Ranger",
+        "Ranger",
         "Rat",
         "Raven",
         "Revenant",
@@ -280,8 +284,10 @@ def Title():
         "Saurius",
         "Salamander",
         " Scientist",
+        "Scarecrow",
         " Shadow",
         "Shark",
+        "Shaman",
         "Sorcerer",
         "Snake",
         "Skeleton",
@@ -290,6 +296,7 @@ def Title():
         "Sucubus",
         " Spirit",
         "Spider",
+        "Specter",
         "Swashbuckler",
         " Terror",
         "Trapper",
@@ -507,6 +514,9 @@ def Damage():
     return random.choice(DamageTypes)
 
 
+
+
+
 def Spellcasting(Type=Dice(50)):
     r = ""
     if Type=="Healer" or Type ==1:
@@ -526,6 +536,23 @@ def Spellcasting(Type=Dice(50)):
     elif Type == "Plant" or Type == 6: 
         r = r+ "\n- False Appereance"
         r = r+ "\n- Entangling Plants"
+        r = r+ "\nDamage Immunities poison \n Condition Immunities blinded, charmed, frightened, paralyzed, poisoned"
+        if Dice(2) == 1:
+            r = r + "\n-Animating Spores"  
+        if Dice(2) == 1:
+            r = r + "\n-Hallucination Spores"  
+        if Dice(2) == 1:
+            r = r + "\n-Pacifying Spores"   
+        if Dice(2) == 1:
+            r = r + "\n-Rapport Spores"   
+        if Dice(2) == 1:
+            r = r + "\n-Caustic Spores"   
+        if Dice(2) == 1:
+            r = r + "\n-Infestation Spores"   
+        if Dice(2) == 1:
+            r = r + "\n-Euphoria Spores"   
+
+
         
     elif Type == "Nymph" or Type == 7: 
         r = r+ "\n- Teleport"
@@ -533,21 +560,31 @@ def Spellcasting(Type=Dice(50)):
         r = r+ "\n- Speak with Beasts and Plants"
         r = r+ "\n- At will: druidcraft\n 3/day each: entangle, goodberry \n 1/day each: barkskin, pass without trace, shillelagh"
         r = r+ "\n- Fey Charm"
+        
     elif Type == "Beast" or Type == 8: 
-        rdm = Dice(6)
+        r = r+ "\n- Keen Senses"
+        rdm = Dice(8)
         if rdm == 1:
             r = r+ "\n -Grappler (DC 10+%STR)"
         if rdm == 2: 
             r = r+ "\n -Charger (2d6, DC 10+%STR)"
+            r = r+ "\n -Relentless"
         if rdm == 3: 
-            r = r+ "\n -Keen Senses"
+            r = r+ "\n- Water Breathing"
+            r = r+ "\n- Blood Frenzy"
         if rdm == 4: 
-            r = r+ "\n -Amphibious"
+            r = r+ "\n- Amphibious"
+            r = r+ "\n- Standing Leap"
         if rdm == 5: 
-            r = r+ "\n -SpiderClimb"  
+            r = r + "\n- SpiderClimb"  
+            r = r + "\n- Web"
         if rdm == 6: 
-            r = r+ "\n -Pack Tactics"  
-            
+            r = r+ "\n - Running Leap"
+            r = r+ "\n - Pack Tactics"  
+        if rdm == 7:
+            r = r+ "\n - Pounce"
+        if rdm == 8:
+            r = r+ "\n - Constrict (restrained, 2d8 + %STR, escape DC 10+%STR)"
     elif Type == "Elf" or Type == 9:
         rdm = Dice(1)
         if rdm == 1:
@@ -559,13 +596,18 @@ def Spellcasting(Type=Dice(50)):
         r = r+ "\n- Axiomatic Mind \n- False Apperance"
         r = r+ "\n- Damage Immunities: poison, psychic \n\n Condition Immunities: blinded, charmed, deafened, exhaustion, frightened, paralyzed, petrified, poisoned \n"
     elif Type == "Goblin" or Type == 12:
-        r = r+ "Nimble Scape"
+        r = r+ "\n- Nimble Scape"
     elif Type == "Aberration" or Type == 13:
         r = r+ "Blindsight"
     elif Type == "Kenku"  or Type == 14:
         r = r+ "\n- Ambusher \n- Mimicry"
+        
+        
     elif Type == "Elemental" or Type == 15:
-        r = "False Appereance \n Death Burst"
+        r = "\n- False Appereance \n- Death Burst \n- Damage Resistances: bludgeoning, piercing, and slashing from nonmagical attacks"
+        rdm = Dice(4)
+        if rdm == 1:
+            r = "\n- Heated Body \n- Damage Immunities: fire  \n- Damage Vulnerabilities: cold"
         
     elif Type == "Fey" or Type == 16:
         r = "\n- Invisibility \n\n At will: druidcraft \n    1/day each: confusion, dancing lights, detect evil and good, detect thoughts, dispel magic, entangle, fly, phantasmal force, polymorph, sleep"
@@ -580,10 +622,14 @@ def Spellcasting(Type=Dice(50)):
         return "\n- Superior Invisibility"
         
     elif Type == "Undead" or Type == 18:
-        r = r + "\nDamage Immunities: poison"+"\n Condition Immunities: exhaustion, poisoned"
-        rdm = Dice(2)
-        if rdm == 1:
+        r = r + "\nDamage Immunities: poison"+"\n Condition Immunities: exhaustion, poisoned, charmed"
+        if Dice(2) == 1:
             r = r + "\n -Undead Fortitude"
+        if Dice(2) == 1:
+            r = r + "\n -Stench"
+        if Dice(2) == 1:
+            r = r + "\n -Turn Defiance"
+            
 
     elif Type == "Lizardfolk" or Type == 19:
         r = r+"\n- Hold Breath"
@@ -603,11 +649,21 @@ def Spellcasting(Type=Dice(50)):
     elif Type == "Gnome" or Type == 22:
         r = r + "\n - Gnome Cunning"
         r = r + "\n\n At will: nondetection (self only) \n   1/day each: blindness/deafness, blur, disguise self"
-        
+            
     elif Type == "Ooze" or Type == 23:
         r = r+ "\n- Amorphous"
         r = r+ "\n- Corrode Material"
         r = r+ "\n- False Appearance"
+        if Dice(2) == 1:
+            r = r+ "\n- Engulf"
+        if Dice(2) == 1:
+            r = r+ "\n- Gelatinous Cube"
+        if Dice(2) == 1:
+            r = r+ "\n- Transparent"
+        if Dice(2) == 1:
+            r = r+ "\n- Spider Climb"
+        if Dice(2) == 1:
+            r = r+ "\n- Split(Yellow): Lightning or Slashing"
         return r
         
     elif Type == "Hobgoblin" or Type == 24:
@@ -627,10 +683,17 @@ def Spellcasting(Type=Dice(50)):
         r = r+ "\n- Keen Hearing and Sight"
         
     elif Type == "Spirit" or Type == 28:
-        r = r+"\n- Amorphous"
-        r = r+"\n- Shadow Stealth"
-        r = r+"\n- Sunlight Weakness"
-        
+        r = r+"\nDamage Resistances: acid, cold, fire, lightning, thunder; bludgeoning, piercing, and slashing from nonmagical attacks \nDamage Immunities: necrotic, poison \nCondition Immunities: charmed, exhaustion, grappled, paralyzed, petrified, poisoned, prone, restrained, unconscious"
+        rdm = Dice(2)
+        if rdm == 1:
+            r = r+"\n- Amorphous"
+            r = r+"\n- Shadow Stealth"
+            r = r+"\n- Sunlight Weakness"
+        elif rdm == 1:
+            r = r + "\n- Incorporeal Movement"
+            r = r + "\n- Sunlight Sensitivity"
+            r = r + "\n- Life Drain"
+
     elif Type == "Thug" or Type == 29:
         r = r+ "\n- Pack Tactics"
     elif Type == "Dragon" or Type == 30:
@@ -646,20 +709,85 @@ def Spellcasting(Type=Dice(50)):
             r = r + "\n - Slowing Breath"
         elif rdm == 5:
             r = r + "\n - Euphoria Breath"
-            
-    
+        elif rdm == 6:
+            r = r + "\n - Repulsion Breath"
+        elif rdm == 7:
+            r = r + "\n - Poison Breath"
+        if Dice(2) == 1:
+            r = r + "\n - Amphibious"
+
+
     elif Type == "Dwarf" or Type == 31:
-        r = r + "\n -Resilience"
-        rdm = Dice(5)
+        r = r + "\n- Resilience"
+        rdm = Dice(2)
         if rdm == 1:
-            r = r + "\n - Sunlight Sensitivity"
-        elif rdm == 2:
-            r = r + "\n -Enlarge"
-            r = r + "\n Invisibility"
+            r = r + "\n- Sunlight Sensitivity"
+        rdm = Dice(2)
+        if rdm == 1:
+            r = r + "\n- Enlarge"
+        rdm = Dice(2)
+        if rdm == 1:
+            r = r + "\n- Invisibility"
+    elif Type == 32:
+        r = r+ "\n- Luring Song"
     
+    elif Type == "Cultist" or Type == 33:
+        r = r+ "\n- Skills Deception +4, Persuasion +4, Religion +2\n"
+        r = r+ "\n    Cantrips (at will): light, sacred flame, thaumaturgy \n 1st level (4 slots): command, inflict wounds, shield of faith. \n 2nd level (3 slots): hold person, spiritual weapon"
+        
+        
+    elif Type == "Fiend" or Type == 34:
+        r = r + "\nDamage Resistances cold, fire, lightning; bludgeoning, piercing, and slashing from nonmagical attacks \nDamage Immunities poison"
+        r = r +"\nMagic Resistance"
+        rdm = Dice(2)
+        if rdm == 1:
+            r = r + "\n- Shapechanger"
+        rdm = Dice(2)
+        if rdm == 1:
+            r = r + "\n- Scare (1/Day)."
+        rdm = Dice(2)
+        if rdm == 1:
+            r = r + "\n- Invisibility."
+    elif Type == 35:
+        r = r + "\n- Terrifying Glare"
+    elif Type == "Spy" or Type == 36:
+        r = r + "\n- Skills: Deception +5, Insight +4, Investigation +5, Perception +6, Persuasion +5, Sleight of Hand +4, Stealth +4"
+        r = r + "\n- Cunning Action \n- Sneak Attack (1/Turn)."
+    elif Type == "Berserker" or Type == 35:
+        r = r + "\n- Multiattack"
+        r = r + "\n- Reckless"
+    elif Type == 36:
+        r = r+"\n    At will: animal friendship (snakes) \n 3/day each: poison spray, suggestion"
+    elif Type == "Bandit" or Type == 36:
+        r = r + "\n- Parry\n"
+
+    elif Type == "Centaur" or Type == 37:
+        r = r + "\nSkills Athletics +6, Perception +3, Survival +3\n- Charge\n- Multiattack"
+    elif Type == 38:
+        r = r+ "\n    Cantrips (at will): sacred flame, thaumaturgy \n 1st level (3 slots): bane, shield of faith"
+    elif Type == "Druid" or Type == 39:
+        r = r + "\n- Cantrips (at will): druidcraft, produce flame, shillelagh \n 1st level (4 slots): entangle, longstrider, speak with animals, thunderwave \n2nd level (3 slots): animal messenger, barkskin\n"
+    elif Type == "Druid" or Type == 39:
+        r = r + "\n-Cantrips (at will): druidcraft, produce flame, thorn whip\n1st level (4 slots): entangle, fog cloud\n2nd level (3 slots): heat metal, spike growth\n3rd level (2 slots): conjure animals, plant growth"
+    elif Type == 40:
+        r = r + "\n-At will: mage hand (the hand is invisible) \n 3/day each: feather fall, jump, see invisibility, shield"
+    elif Type == "Monstrosity" or Type == 41:
+        r = r + "\n-Shapechanger"   
+        if Dice(2) == 1:
+            r = r + "\n-False Appearance"  
+
+    elif Type == "Giant" or Type == 42:
+        r = r + "\n-STR +" + Dice(12)  
+
+    elif Type == 43:
+        r = r + "\n-Cantrips (at will): guidance, resistance, thaumaturgy\n 1st level (4 slots): bless, command\n 2nd level (2 slots): augury, spiritual weapon (spear) "
+ 
+
     else:    
-        r = r + "\n- Multiattack\n" + Spellcasting(Dice(31))
+        r = r + "\n- Multiattack\n"
     return r
+    
+    
     
     
     
@@ -686,7 +814,7 @@ def NPC():
     print(Title())
     print(bg)
     print(rc)
-    print("Lvl:", Lvl, "   HP:", Lvl*(Dice(12) + Modifier(CON)))
+    print("Lvl:", Lvl, "   HP:", Lvl*(Dice(10) + Modifier(CON)))
     print("\nSTR:", STR,
         "  DEX:", DEX,
         "  CON:", CON, 
@@ -695,11 +823,13 @@ def NPC():
         "  CHA:", CHA, "\n")
  
     print (Attack("Melee"))
-    print (Attack(Dice(4)), "+1d4 " + Damage() +" dmg")
+    print (Attack(Dice(4)), "+", int(1 + Lvl/3) ,"d4 " + Damage() +" dmg")
 
     print("\n")
     print(Spellcasting(bg))
     print(Spellcasting(rc))
     print(Spellcasting())
-    
+    print("\n")
+
+
 NPC()
