@@ -14,8 +14,10 @@ def Title():
         "The Angry",
         "The Avatar",
         "The Arcane",
+        "The Badger",
         "The Battle",
         "The Baron of",
+        "The Bat"
         "The Bearded", 
         "The Beholder",
         "The Blending",
@@ -26,6 +28,7 @@ def Title():
         "The Brass",
         "The Bronce",
         "The Brain",
+        "The Cat",
         "The Climate",
         "The Chain",
         "The Champion",
@@ -41,6 +44,7 @@ def Title():
         "The Death",
         "The Dawning",
         "The Dark",
+        "The Devourer of",
         "The Doctor", 
         "The Deep",
         "The Divine",
@@ -70,6 +74,7 @@ def Title():
         "The Hell",
         "The High",
         "The Hive",
+        "The Hunter",
         "The Hungry",
         "The Impulse",
         "The Inkwork",
@@ -78,6 +83,7 @@ def Title():
         "The Ice",
         "The Icicle",
         "The Ink",
+        "The Intellect",
         "The Illusionist",
         "The Jewelcraft",
         "The Kraken",
@@ -103,6 +109,7 @@ def Title():
         "The Orange",
         "The Old",
         "The Owl",
+        "The Pack",
         "The Pain",
         "The Paladin",
         "The Plague",
@@ -166,6 +173,7 @@ def Title():
         "Archmage",
         " Ash",
         " Assassin",
+        "Baboon",
         " Bard", 
         " Baron",
         "Basilisk",
@@ -177,6 +185,7 @@ def Title():
         " Blade",
         "Bow",
         "Bringer",
+        "Cat",
         " Chemist",
         "Champion",
         " Collector",
@@ -193,6 +202,7 @@ def Title():
         " Drake",
         " Druid",
         "Dream",
+        "Devourer",
         " Eater",
         "Eclipse",
         "Enforcer",
@@ -220,6 +230,7 @@ def Title():
         "Hunger",
         " Inquisitor",
         "Incubus",
+        "Intellect",
         " Knight",
         " Killer",
         " Knife",
@@ -260,6 +271,7 @@ def Title():
         " Of The Mountain",
         " Of the Old One",
         " Of The Plains",
+        " Of the Pack",
         " Of The Sands",
         " Of The Sea",
         " Of The South",
@@ -305,6 +317,7 @@ def Title():
         "Spider",
         "Specter",
         "Swashbuckler",
+        "Swarm",
         " Terror",
         "Trapper",
         "Trapecist",
@@ -315,10 +328,10 @@ def Title():
         "Walker",
         " Warlock",
         "Werewolf",
+        "Wolf",
         " Wizard",
         " Witch",
         " Witchhunter",
-        " Wolf",
         " Writter" ,
         "Zombie",
         ""
@@ -326,6 +339,7 @@ def Title():
     
     title = random.choice(descriptor) + " " + random.choice(rank)
     return title
+   
    
    
    
@@ -363,6 +377,7 @@ def Background():
         "Sage",
         "Scout",
         "Scholar",
+        "Shaman",
         "Soldier",
         "Student",
         "Spy",
@@ -385,14 +400,14 @@ def Race():
         "Human","Human","Human","Human","Human","Human","Human",
         "Aberration",
         "Aven(Birdfolk)",
-        "Beast", 
-        "Beast",
+        "Beast", "Beast",
         "Beastfolk",
         "Catfolk",
         "Celestial", 
         "Centaur",
         "Construct",
         "Demon",
+        "Devil",
         "Dragon",
         "Dragonborn", "Dragonborn",
         "Dwarf","Dwarf","Dwarf",
@@ -408,7 +423,6 @@ def Race():
         "Hag",
         "Halfling",
         "Hobgoblin",
-        "Illithid",
         "Kenku",
         "Kobold",
         "Lizardfolk",
@@ -427,12 +441,54 @@ def Race():
         "Undead",
         "Vampire",
         "Werewolf",
-        "Wolf",
         ""
         ]
     return random.choice(Races)
 
- 
+
+def BeastName():
+    Names = [
+        "Baboon",
+        "Badger",
+        "Bat",
+        "Cat",
+        "Wolf",
+        "Shark",
+        "Hunter Shark",
+        ""]
+    return random.choice(Names)
+
+def MonstrosityName():
+    Names = [
+        "Griffon",
+        ""]
+    return random.choice(Names)
+
+def AberrationName():
+    Names = [
+        "Intellect Devourer",
+        ""]
+    return random.choice(Names)
+
+def PlantName():
+    Names = [
+        "Awakened Plant",
+        ""]
+    return random.choice(Names)
+    
+    
+def Name(Type):
+    if Type == "Beast": return BeastName()
+    if Type == "Monstrosity": return MonstrosityName()
+    if Type == "Aberration": return AberrationName()
+    if Type == "Plant": return PlantName()
+    Names = [
+        ""]
+    return random.choice(Names)
+
+   
+   
+   
 def Dice(D=6):
     roll = random.randint(1,D)
     return roll
@@ -446,6 +502,10 @@ def AbilityScore():
     
 def Modifier(AS):
     return int((AS-10)/2)
+
+
+        
+
 
 def Attack(Type):
     SimpleMeleeWeapons = [
@@ -550,10 +610,11 @@ def Damage():
 
 
 
-def Actions(Type=Dice(50)):
+def Actions(Type=Dice(60)):
     r = ""
     if Type=="Healer" or Type ==1:
         r = r+ "\n Cantrips (at will): guidance, sacred flame \n    1st level (2 slots): cure wounds"
+        
     elif Type == "Mage" or Type == 2:
         r = r+ "\n Cantrips (at will): firebolt, light \n    1st level (2 slots): Sleep"
         
@@ -569,7 +630,8 @@ def Actions(Type=Dice(50)):
             r= r + "\n- Wounded Fury"
         
     elif Type == "Plant" or Type == 6: 
-        r = r+ "\n- False Appereance"
+        r = r+ "\n- False Appereance: \n\t While the plant remains motionless, it is indistinguishable from a normal plant."
+        r = r+ "\n- Damage Vulnerabilities fire"
         r = r+ "\n- Entangling Plants"
         r = r+ "\nDamage Immunities poison \n Condition Immunities blinded, charmed, frightened, paralyzed, poisoned"
         if Dice(2) == 1:
@@ -586,8 +648,7 @@ def Actions(Type=Dice(50)):
             r = r + "\n-Infestation Spores"   
         if Dice(2) == 1:
             r = r + "\n-Euphoria Spores"   
-
-
+        
         
     elif Type == "Nymph" or Type == 7: 
         r = r+ "\n- Teleport"
@@ -596,30 +657,47 @@ def Actions(Type=Dice(50)):
         r = r+ "\n- At will: druidcraft\n 3/day each: entangle, goodberry \n 1/day each: barkskin, pass without trace, shillelagh"
         r = r+ "\n- Fey Charm"
         
+        
     elif Type == "Beast" or Type == 8: 
-        r = r+ "\n- Keen Senses"
-        rdm = Dice(8)
-        if rdm == 1:
+        if Dice() == 1:
+            r = r+ "\n- Climb. \n\t 30 ft."
+        if Dice() == 1:
+            r = r+ "\n- Burrow. \n\t 10 ft."  
+        if Dice() == 1:
+            r = r+ "\n- Darkvision. \n\t 30 ft."    
+        if Dice() == 1:
+            r = r+ "\n- Keen Smell. \n\t The Beast has advantage on Wisdom (Perception) checks that rely on smell."    
+        if Dice() == 1:
+            r = r+ "\n-  Pack Tactics. \n\t The Beast has advantage on an attack roll against a creature if at least one of the beast's allies is within 5 feet of the creature and the ally isn't incapacitated."
+        if Dice() == 1:
+            r = r+ "\n- Keen Senses"
+        if Dice() == 1:
             r = r+ "\n -Grappler (DC 10+%STR)"
-        if rdm == 2: 
+        if Dice() == 1:
             r = r+ "\n -Charger (2d6+%STR, DC 10+%STR)"
-            r = r+ "\n -Relentless"
-        if rdm == 3: 
+        if Dice() == 1:
+            r = r+ "\n - Relentless"
+        if Dice() == 1:
             r = r+ "\n- Water Breathing"
+        if Dice() == 1:
             r = r+ "\n- Blood Frenzy"
-        if rdm == 4: 
+        if Dice() == 1:
             r = r+ "\n- Amphibious"
+        if Dice() == 1:
             r = r+ "\n- Standing Leap"
-        if rdm == 5: 
+        if Dice() == 1:
             r = r + "\n- SpiderClimb"  
             r = r + "\n- Web"
-        if rdm == 6: 
+        if Dice() == 1:
             r = r+ "\n - Running Leap"
-            r = r+ "\n - Pack Tactics"  
-        if rdm == 7:
+        if Dice() == 1:
             r = r+ "\n - Pounce"
-        if rdm == 8:
+        if Dice() == 1:
             r = r+ "\n - Constrict (restrained, 2d8 + %STR, escape DC 10+%STR)"
+        if Dice() == 1:
+            r = r+ "\n Blinsight \n\t 60 ft"
+            r = r+ "\n Echolocation \n\t The Beast can't use its blindsight while deafened."
+            r = r+ "\n Keen Hearing. \n\t The bat has advantage on Wisdom (Perception) checks that rely on hearing."
     elif Type == "Elf" or Type == 9:
         rdm = Dice(1)
         if rdm == 1:
@@ -632,8 +710,23 @@ def Actions(Type=Dice(50)):
         r = r+ "\n- Damage Immunities: poison, psychic \n\n Condition Immunities: blinded, charmed, deafened, exhaustion, frightened, paralyzed, petrified, poisoned \n"
     elif Type == "Goblin" or Type == 12:
         r = r+ "\n- Nimble Scape"
+        
     elif Type == "Aberration" or Type == 13:
-        r = r+ "Blindsight"
+        if Dice(2)==1: 
+            r = r+"\nDamage Resistances:  \n\t bludgeoning, piercing, and slashing from nonmagical attacks"
+        if Dice(2)==1: 
+            r = r+ "\n- Blindsight: \n\t 60ft"
+        if Dice(2)==1: 
+            r = r+ "\n- Telepathy: \n\t 60ft"
+        if Dice(2)==1: 
+            r = r+ "\n- Detect Sentience: \n\t It can sense the presence and location of any creature within 300 feet of it that has an Intelligence of 3 or higher, regardless of interposing barriers, unless the creature is protected by a mind blank spell."
+        if Dice(2)==1: 
+            r = r+ "\n- Detect Sentience: \n\t It can sense the presence and location of any creature within 300 feet of it that has an Intelligence of 3 or higher, regardless of interposing barriers, unless the creature is protected by a mind blank spell."
+        if Dice(2)==1: 
+            r = r+ "\n- Devour Intellect: \n\t It targets one creature it can see within 10 feet of it that has a brain. The target must succeed on a DC [10+%DEX] Intelligence saving throw against this magic or take 11 (2d10) psychic damage. Also on a failure, roll 3d6: If the total equals or exceeds the target's Intelligence score, that score is reduced to 0. The target is stunned until it regains at least one point of Intelligence."
+        if Dice(2)==1: 
+            r = r+ "\n- Body Thief. \n\t The intellect devourer initiates an Intelligence contest with an incapacitated humanoid within 5 feet of it that isn't protected by protection from evil and good. If it wins the contest, the intellect devourer magically consumes the target's brain, teleports into the target's skull, and takes control of the target's body. While inside a creature, the intellect devourer has total cover against attacks and other effects originating outside its host. The intellect devourer retains its Intelligence, Wisdom, and Charisma scores, as well as its understanding of Deep Speech, its telepathy, and its traits. It otherwise adopts the target's statistics. It knows everything the creature knew, including spells and languages. \n\t If the host body dies, the intellect devourer must leave it. A protection from evil and good spell cast on the body drives the intellect devourer out. The intellect devourer is also forced out if the target regains its devoured brain by means of a wish. By spending 5 feet of its movement, the intellect devourer can voluntarily leave the body, teleporting to the nearest unoccupied space within 5 feet of it. The body then dies, unless its brain is restored within 1 round."
+        
     elif Type == "Kenku"  or Type == 14:
         r = r+ "\n- Ambusher \n- Mimicry"
         
@@ -676,10 +769,6 @@ def Actions(Type=Dice(50)):
     elif Type == "Vampire" or Type == 20:
         r = r + "\n - Sunlight Sensitivity"
         return r
-        
-    elif Type == "Wolf" or Type == 21:
-        r = r + "\n - Pack Tactics"
-        r = r + "\n - Keen Hearing and Smell."
         
     elif Type == "Gnome" or Type == 22:
         r = r + "\n - Gnome Cunning"
@@ -736,6 +825,7 @@ def Actions(Type=Dice(50)):
     elif Type == "Thug" or Type == 29:
         r = r+ "\n- Pack Tactics"
     elif Type == "Dragon" or Type == 30:
+        r = r+ "\n- Flight"
         r = r+ "\n- Breath Weapons"
         rdm = Dice(10)
         if rdm == 1:
@@ -806,14 +896,23 @@ def Actions(Type=Dice(50)):
         r = r+ "\n    Cantrips (at will): sacred flame, thaumaturgy \n 1st level (3 slots): bane, shield of faith"
     elif Type == "Druid" or Type == 39:
         r = r + "\n- Cantrips (at will): druidcraft, produce flame, shillelagh \n 1st level (4 slots): entangle, longstrider, speak with animals, thunderwave \n2nd level (3 slots): animal messenger, barkskin\n"
+        
     elif Type == "Druid" or Type == 39:
         r = r + "\n-Cantrips (at will): druidcraft, produce flame, thorn whip\n1st level (4 slots): entangle, fog cloud\n2nd level (3 slots): heat metal, spike growth\n3rd level (2 slots): conjure animals, plant growth"
     elif Type == 40:
         r = r + "\n-At will: mage hand (the hand is invisible) \n 3/day each: feather fall, jump, see invisibility, shield"
+
     elif Type == "Monstrosity" or Type == 41:
         r = r + "\n-Shapechanger"   
         if Dice(2) == 1:
             r = r + "\n-False Appearance"  
+        if Dice(2) == 1:
+            r = r + "\n-Stone Camouflage.\n\t The grick has advantage on Dexterity (Stealth) checks made to hide in rocky terrain.\n"  
+        if Dice(2) == 1:
+            r = r + "\n- Keen Sight.\n\t The griffon has advantage on Wisdom (Perception) checks that rely on sight.\n"  
+        if Dice(2) == 1:
+            r = r + "\n- Flight.\n\t 60 ft.\n"  
+
 
     elif Type == "Giant" or Type == 42:
         r = r + "\n-STR +" + str(Dice(12))  
@@ -824,7 +923,13 @@ def Actions(Type=Dice(50)):
     elif Type == "Priest" or Type == 45:
         r = r + "\nDivine Eminence"
         r = r + "\nCantrips (at will): light, sacred flame, thaumaturgy\n 1st level (4 slots): cure wounds, guiding bolt, sanctuary \n 2nd level (3 slots): lesser restoration, spiritual weapon \n 3rd level (2 slots): dispel magic, spirit guardians"
-
+    elif Type == "Gnoll" or Type == 46:
+        r = r + "\n Rampage.\n\t When the gnoll reduces a creature to 0 hit points with a melee attack on its turn, the gnoll can take a bonus action to move up to half its speed and make a bite attack."
+ 
+    elif Type == "Shaman" or Type == 47:
+        r = r + "\n Cantrips (at will): druidcraft, produce flame, thorn whip \n\t 1st level (4 slots): entangle, fog cloud \n\t 2nd level (3 slots): heat metal, spike growth \n\t 3rd level (2 slots): conjure animals, plant growth"
+        if Dice(2)==1:
+            r = r + "\n Change Shape: \n\t The Shaman magically polymorphs into a Beast, remaining in that form for up to 1 hour. It can revert to its true form as a bonus action. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
     else:    
         r = r + "\n- Multiattack\n"
     return r
@@ -856,6 +961,9 @@ def NPC():
     print(Title())
     print(bg)
     print(rc)
+    print(Name(rc))
+    print("\n")
+
     print("Lvl:", Lvl, "   HP:", Lvl*(Dice(10) + Modifier(CON)))
     print("AC:", 10 + Modifier(DEX) + Modifier(Dice(Lvl+10)))
     print("\n\t"," STR:", STR,"\t", Modifier(STR),"\n\t",
@@ -865,6 +973,45 @@ def NPC():
         " WIS:", WIS," \t", Modifier(WIS),"\n\t"
         " CHA:", CHA," \t",  Modifier(CHA),"\n\t")
  
+    print("Saving Throws:")
+    if Dice(3) == 1: print("Str:+",Modifier(STR), end=" ")
+    if Dice(3) == 1: print("Dex:+",Modifier(DEX), end=" ")
+    if Dice(3) == 1: print("Con:+",Modifier(CON), end=" ")
+    if Dice(3) == 1: print("Int:+",Modifier(INT), end=" ")
+    if Dice(3) == 1: print("Wis:+",Modifier(WIS), end=" ")
+    if Dice(3) == 1: print("Cha:+",Modifier(CHA), end=" ")
+    print("\n")
+   
+    print("Skills:")
+    if Dice(6) <= Modifier(STR): print("Athletics:+",Modifier(STR)*Dice(2), end=" ")
+    if Dice(6) <= Modifier(DEX): print("Acrobatics:+",Modifier(DEX)*Dice(2), end=" ")
+    if Dice(6) <= Modifier(DEX): print("Sleight of Hand:+",Modifier(DEX)*Dice(2), end=" ")
+    if Dice(6) <= Modifier(DEX): print("Stealth:+",Modifier(DEX)*Dice(2), end=" ")
+    if Dice(6) <= Modifier(INT): print("Arcana:+",Modifier(INT)*Dice(2), end=" ")
+    if Dice(6) <= Modifier(INT): print("History:+",Modifier(INT)*Dice(2), end=" ")
+    if Dice(6) <= Modifier(INT): print("Investigation:+",Modifier(INT*Dice(2)), end=" ")
+    if Dice(6) <= Modifier(INT): print("Nature:+",Modifier(INT)*Dice(2), end=" ")
+    if Dice(6) <= Modifier(INT): print("Religion:+",Modifier(INT)*Dice(2), end=" ")
+    if Dice(6) <= Modifier(WIS): print("Animal Handling:+",Modifier(WIS)*Dice(2), end=" ")
+    if Dice(6) <= Modifier(WIS): print("Insight:+",Modifier(WIS*Dice(2)), end=" ")
+    if Dice(6) <= Modifier(WIS): print("Medicine:+",Modifier(WIS)*Dice(2), end=" ")
+    if Dice(6) <= Modifier(WIS): print("Perception:+",Modifier(WIS)*Dice(2), end=" ")
+    if Dice(6) <= Modifier(WIS): print("Survival:+",Modifier(WIS)*Dice(2), end=" ")
+    if Dice(6) <= Modifier(CHA): print("Deception:+",Modifier(CHA)*Dice(2), end=" ")
+    if Dice(6) <= Modifier(CHA): print("Intimidation:+",Modifier(CHA)*Dice(2), end=" ")
+    if Dice(6) <= Modifier(CHA): print("Performance:+",Modifier(CHA)*Dice(2), end=" ")
+    if Dice(6) <= Modifier(CHA): print("Persuasion:+",Modifier(CHA)*Dice(2), end=" ")
+    print("\n")
+    
+    print("Passive Perception:", 10 + Modifier(WIS) + Modifier(Lvl) )
+
+    
+    print("\n")
+    print("Spellcasting\n Spellsave DC:", 10+ Modifier(max(INT,WIS,CHA)))
+    print(" To hit: +", Modifier(max(INT,WIS,CHA)+ Lvl/5))
+
+    print("\n")
+
     print (Attack("Melee"))
     print (Attack(Dice(4)), "+", int(1 + Lvl/3) ,"d4 " + Damage() +" dmg")
 
