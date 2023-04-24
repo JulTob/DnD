@@ -843,13 +843,14 @@ def Actions(Type=Dice(60)):
             r = r+ "\n- Amphibious"
             r = r+ "\n- Swim. \n\t 30 ft."  
             if Dice(2) == 1:
-                r = r+ "\n- Standing Leap. \n\t The Beast's long jump is up to half his speed in feet and its high jump is up to quarter his speed, with or without a running start."  
+                r = r+ "\n- Standing Leap. \n\t The Beast's long jump is up to half his speed in feet and its high jump is up to third his speed, with or without a running start."  
         if Dice() == 1:
             r = r+ "\n- Standing Leap. \n\t The Beast's long jump is up to 10 feet and its high jump is up to 5 feet, with or without a running start." 
         if Dice() == 1:
             r = r + "\n- SpiderClimb \n\t The beast can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."  
             if Dice(2) == 1:
                 r = r + "\n- Web Sense \n\t While in contact with a web, the spider knows the exact location of any other creature in contact with the same web."
+            if Dice(2) == 1:
                 r = r + "\n- Web Walker \n\t The spider ignores movement restrictions caused by webbing."
         if Dice() == 1:
             r = r+ "\n - Running Leap"
@@ -873,6 +874,11 @@ def Actions(Type=Dice(60)):
             r = r+ "\n- Beast of Burden \n\t The mule is considered to be a Large animal for the purpose of determining its carrying capacity."
         if Dice() == 1:
             r = r+ "\n- Swamp Camouflage \n\t The Beast has advantage on Dexterity (Stealth) checks made to hide in swampy terrain."
+        if Dice(4) == 1:
+            r = r+ "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 4 (1d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR). Until this grapple ends, the target is restrained, and the beast can't bite another target."
+            if Dice() == 1:
+                r = r+ "\n- Swallow. \n\t  The beast makes one bite attack against a target creature smaller than themselves it is grappling. If the attack hits, the target is swallowed, and the grapple ends. The swallowed target is blinded and restrained, it has total cover against attacks and other effects outside the beast, and it takes 6 (2d4+%CON) acid damage at the start of each of the beast's turns. The beast can have only one target swallowed at a time. If the beast dies, a swallowed creature is no longer restrained by it and can escape from the corpse using 5 feet of movement, exiting prone."
+
             
     elif Type == "Elf" or Type == 9:
         r = r+ "\nFey Ancestry.\n\t The Elf has advantage on saving throws against being charmed, and magic can't put the Elf to sleep."
@@ -1266,8 +1272,7 @@ def Legendary(Type=Dice(10)):
     if Type == "Human" or Type == 1:
         r = r+ "\n- Attack"
     else:
-        r = r+ "\n- Attack"
-        r = r+ "\n- Move: \n\t The creature moves half its speed."
+        r = r + Actions(Type)
     return r
     
     
@@ -1349,18 +1354,17 @@ def NPC():
     
     print("Passive Perception:", 10 + Modifier(WIS) + Modifier(Lvl/2) )
 
-    
+    print("\n")
+    print("COMBAT ACTIONS:")
+    print("To hit: +", Modifier(max(STR,DEX)+ Lvl/5))
+    print (Attack("Melee"))
+    print (Attack(Dice(4)), "+", Dice(Dice(int(Lvl/2))) , random.choice(["d4 ","d6 ","d8 ", "d10 ", "d12 "]) + Damage() +" dmg on a failed Saving Throw at DC ", 10 + Modifier(random.choice([STR,DEX,CON,INT,WIS,CHA ])), random.choice(["STR","DEX","CON","INT","WIS","CHA" ]), "saving throw.")
+
     print("\n")
     print("SPELLCASTING:\n Spellsave DC:", 10+ Modifier(max(INT,WIS,CHA)))
     print(" To hit: +", Modifier(max(INT,WIS,CHA)+ Lvl/5))
-
-
-    print("\n")
-    print("COMBAT ACTIONS:")
-    print (Attack("Melee"))
-
-    print (Attack(Dice(4)), "+", Dice(Dice(int(Lvl/2))) , random.choice(["d4 ","d6 ","d8 ", "d10 ", "d12 "]) + Damage() +" dmg on a failed Saving Throw at DC ", 10 + Modifier(random.choice([STR,DEX,CON,INT,WIS,CHA ])), random.choice(["STR","DEX","CON","INT","WIS","CHA" ]), "saving throw.")
-
+    
+    
     print("\n")
     print(Actions(bg))
     print(Actions(rc))
