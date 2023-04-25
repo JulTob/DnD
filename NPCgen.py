@@ -710,6 +710,48 @@ def Damage():
         ]
     return random.choice(DamageTypes)
 
+def SpecialAttack(Lvl,Mod ):
+    dmg = Damage()
+    if dmg == "Slashing":
+        st = random.choice(["STR","DEX","CON" ])
+    elif dmg == "Piercing":
+        st = random.choice(["STR","DEX","CON" ])
+    elif dmg == "Bludgeoning":
+        st = random.choice(["STR","DEX","CON"])
+    elif dmg == "Poison":
+        st = "CON"
+    elif dmg == "Acid":
+        st = random.choice(["STR","DEX","CON" ])
+    elif dmg == "Fire":
+        st = random.choice(["STR","DEX","CON"])
+    elif dmg == "Cold":
+        st = random.choice(["STR","DEX","CON" ])
+    elif dmg == "Radiant":
+        st = random.choice(["DEX","CON","INT","WIS","CHA" ])
+    elif dmg == "Necrotic":
+        st = random.choice(["STR","CON","WIS","CHA" ])
+    elif dmg == "Lightning":
+        st = random.choice(["DEX","CON","INT" ])
+    elif dmg == "Force":
+        st = random.choice(["STR","CON","CHA" ])
+    elif dmg == "Psychic":
+        st = random.choice(["INT","WIS","CHA" ])
+    elif dmg == "Thunder":
+        st = random.choice(["STR","DEX","CON" ])
+    else:
+        st = "DEX"
+
+    r = ""
+    r = r+ Attack(Dice(4)) + " +"
+    r = r+"{}".format(Dice(Dice(int(Lvl/2))))
+    r = r+random.choice(["d4 ","d6 ","d8 ", "d10 ", "d12 "])
+    r = r + Damage()
+    r = r + " dmg on a failed Saving Throw at DC"
+    r = r + str((10 + Mod)) +" "
+    r = r + random.choice(["STR","DEX","CON","INT","WIS","CHA" ])
+    r = r +  " saving throw."
+   
+    return r
 
 
 
@@ -878,7 +920,9 @@ def Actions(Type=Dice(60)):
             r = r+ "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 4 (1d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR). Until this grapple ends, the target is restrained, and the beast can't bite another target."
             if Dice() == 1:
                 r = r+ "\n- Swallow. \n\t  The beast makes one bite attack against a target creature smaller than themselves it is grappling. If the attack hits, the target is swallowed, and the grapple ends. The swallowed target is blinded and restrained, it has total cover against attacks and other effects outside the beast, and it takes 6 (2d4+%CON) acid damage at the start of each of the beast's turns. The beast can have only one target swallowed at a time. If the beast dies, a swallowed creature is no longer restrained by it and can escape from the corpse using 5 feet of movement, exiting prone."
-
+            if Dice(12) == 1:
+                r = r+ "\n-  Hold Breath. \n\t  The beast can hold its breath for 15 minutes.\n-  swimming \n\t  speed of 30 feet.)"
+                r = r+ "\n-  Spider Climb. \n\t  The beast can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
             
     elif Type == "Elf" or Type == 9:
         r = r+ "\nFey Ancestry.\n\t The Elf has advantage on saving throws against being charmed, and magic can't put the Elf to sleep."
@@ -1006,9 +1050,10 @@ def Actions(Type=Dice(60)):
 
     elif Type == "Lizardfolk" or Type == 19:
         r = r+"\n\n- Hold Breath"
-        rdm = Dice(2)
-        if rdm == 1:
-            r = r + "\n - Chameleon Skin\n"
+        if Dice(2) == 1:
+            r = r + "\n - Chameleon Skin \n\t The lizard can hold its breath for 15 minutes. (A lizard that has this trait also has a swimming speed of 30 feet.)"
+        if Dice(2) == 1:
+            r = r + "\n -  Spider Climb. \n\t The lizard can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
         return r
         
     elif Type == "Vampire" or Type == 20:
@@ -1323,12 +1368,12 @@ def NPC():
         "CHA:", CHA," \t",  Modifier(CHA),"\n\t")
  
     print("Saving Throws:")
-    if Dice(3) == 1: print("Str:+",Modifier(STR), end=" ")
-    if Dice(3) == 1: print("Dex:+",Modifier(DEX), end=" ")
-    if Dice(3) == 1: print("Con:+",Modifier(CON), end=" ")
-    if Dice(3) == 1: print("Int:+",Modifier(INT), end=" ")
-    if Dice(3) == 1: print("Wis:+",Modifier(WIS), end=" ")
-    if Dice(3) == 1: print("Cha:+",Modifier(CHA), end=" ")
+    if Dice(3) == 1: print("Str:+",Modifier(STR) + int(Lvl/5), end=" ")
+    if Dice(3) == 1: print("Dex:+",Modifier(DEX)+ int(Lvl/5), end=" ")
+    if Dice(3) == 1: print("Con:+",Modifier(CON)+ int(Lvl/5), end=" ")
+    if Dice(3) == 1: print("Int:+",Modifier(INT)+ int(Lvl/5), end=" ")
+    if Dice(3) == 1: print("Wis:+",Modifier(WIS)+ int(Lvl/5), end=" ")
+    if Dice(3) == 1: print("Cha:+",Modifier(CHA)+ int(Lvl/5), end=" ")
     print("\n")
    
     print("Skills:")
@@ -1358,7 +1403,8 @@ def NPC():
     print("COMBAT ACTIONS:")
     print("To hit: +", Modifier(max(STR,DEX)+ Lvl/5))
     print (Attack("Melee"))
-    print (Attack(Dice(4)), "+", Dice(Dice(int(Lvl/2))) , random.choice(["d4 ","d6 ","d8 ", "d10 ", "d12 "]) + Damage() +" dmg on a failed Saving Throw at DC ", 10 + Modifier(random.choice([STR,DEX,CON,INT,WIS,CHA ])), random.choice(["STR","DEX","CON","INT","WIS","CHA" ]), "saving throw.")
+    print (SpecialAttack(Lvl, Modifier(random.choice([STR,DEX,CON,INT,WIS,CHA ]))))
+
 
     print("\n")
     print("SPELLCASTING:\n Spellsave DC:", 10+ Modifier(max(INT,WIS,CHA)))
