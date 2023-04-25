@@ -65,6 +65,7 @@ def Title():
         "The Energy",
         "The Errant",
         "The Earth",
+        "The Errant",
         "The Fleshwork",
         "The Fire",
         "The Fool",
@@ -336,6 +337,7 @@ def Title():
         "Rider",
         " Ruby",
         " Rune",
+        "Sabertooth",
         "Saurius",
         "Salamander",
         " Scientist",
@@ -407,6 +409,7 @@ def Background():
         "Expert",
         "Gladiator",
         "Guard",
+        "Healer",
         "Hero",
         "Hunter",
         "Knight", 
@@ -513,6 +516,7 @@ def Race():
 
 
 
+
 def BeastName():
     Names = [
         "Baboon",
@@ -542,6 +546,7 @@ def BeastName():
         "Shark", "Hunter Shark",
         "Spider",
         "Snake", "Flying Snake", "Boa", 
+        "Tiger", "Sabertooth",
         "Vulture",
         "Wolf",
         ""]
@@ -577,6 +582,7 @@ def ConstructName():
         "Drone",
         "Homunculus",
         "Flying Sword",
+        "Living Rug",
         ""]
     return random.choice(Names)
     
@@ -710,10 +716,57 @@ def Damage():
         ]
     return random.choice(DamageTypes)
 
-def SpecialAttack(Lvl,Mod ):
-    dmg = Damage()
+def Condition(dmg):
+    ConditionsTypes = [
+        "Blinded",
+        "Charmed",
+        "Deafened",
+        "Exhaustion",
+        "Frightened",
+        "Grappled",
+        "Incapacitated",
+        "Invisible",
+        "Paralyzed",
+        "Petrified",
+        "Poisoned",
+        "Prone",
+        "Restrained",
+        "Stunned",
+        "Unconscious",
+        ""
+        ]
     if dmg == "Slashing":
-        st = random.choice(["STR","DEX","CON" ])
+        return random.choice(["Exhaustion","Incapacitated", "Paralyzed", "Poisoned", "Prone" ])
+    elif dmg == "Piercing":
+        return random.choice(["Blinded","Exhaustion", "Incapacitated", "Poisoned" ])
+    elif dmg == "Bludgeoning":
+        return random.choice(["Blinded","Deafened","Exhaustion", "Incapacitated", "Prone", "Stunned","Uncoscious" ])
+    elif dmg == "Poison":
+        return random.choice(["Blinded", "Charmed", "Exhaustion", "Frightened", "Incapacitated", "Paralyzed", "Petrified", "Poisoned", "Restrained", "Unconscious"])
+    elif dmg == "Acid":
+        return random.choice(["Blinded", "Exhaustion", "Incapacitated", "Paralyzed", "Petrified", "Poisoned", "Restrained","Unconscious"])
+    elif dmg == "Fire":
+        return random.choice(["Blinded", "Charmed", "Incapacitated", "Paralyzed", "Stunned", "Unconscious"])
+    elif dmg == "Cold":
+        return random.choice(["Exhaustion", "Incapacitated", "Paralyzed", "Petrified", "Restrained"])
+    elif dmg == "Radiant":
+        return random.choice(["Blinded", "Charmed", "Deafened", "Frightened", "Incapacitated", "Paralyzed", "Prone", "Stunned", "Unconscious"])
+    elif dmg == "Necrotic":
+        return random.choice([ "Exhaustion", "Frightened", "Incapacitated", "Paralyzed", "Poisoned", "Prone", "Restrained", "Stunned", "Unconscious"])
+    elif dmg == "Lightning":
+        return random.choice(["Blinded", "Charmed", "Deafened", "Exhaustion", "Frightened", "Grappled", "Incapacitated", "Paralyzed", "Petrified", "Prone", "Restrained", "Stunned", "Unconscious"])
+    elif dmg == "Force":
+        return random.choice(["Blinded","Deafened", "Exhaustion", "Incapacitated", "Prone", "Stunned", "Unconscious" ])
+    elif dmg == "Psychic":
+        return random.choice(["Blinded", "Charmed", "Deafened", "Exhaustion", "Frightened", "Incapacitated", "Paralyzed", "Petrified", "Poisoned", "Prone", "Restrained", "Stunned", "Unconscious"])
+    elif dmg == "Thunder":
+        return random.choice(["Blinded", "Deafened", "Exhaustion", "Incapacitated", "Paralyzed", "Prone", "Stunned"])
+    else:
+        return random.choice(ConditionsTypes)
+    
+def SavingThrow(dmg):
+    if dmg == "Slashing":
+        st = random.choice(["STR","DEX"])
     elif dmg == "Piercing":
         st = random.choice(["STR","DEX","CON" ])
     elif dmg == "Bludgeoning":
@@ -723,15 +776,15 @@ def SpecialAttack(Lvl,Mod ):
     elif dmg == "Acid":
         st = random.choice(["STR","DEX","CON" ])
     elif dmg == "Fire":
-        st = random.choice(["STR","DEX","CON"])
+        st = random.choice(["STR","DEX","CON", "CHA"])
     elif dmg == "Cold":
         st = random.choice(["STR","DEX","CON" ])
     elif dmg == "Radiant":
-        st = random.choice(["DEX","CON","INT","WIS","CHA" ])
+        st = random.choice(["DEX","CON","WIS","CHA" ])
     elif dmg == "Necrotic":
         st = random.choice(["STR","CON","WIS","CHA" ])
     elif dmg == "Lightning":
-        st = random.choice(["DEX","CON","INT" ])
+        st = random.choice(["DEX","CON","WIS", "INT" ])
     elif dmg == "Force":
         st = random.choice(["STR","CON","CHA" ])
     elif dmg == "Psychic":
@@ -740,25 +793,85 @@ def SpecialAttack(Lvl,Mod ):
         st = random.choice(["STR","DEX","CON" ])
     else:
         st = "DEX"
+    return st
 
+def Recovery(con):
+    if con == "Unconscious":
+        st = random.choice(["CON","INT","WIS","CHA" ])
+    elif con == "Stunned":
+        st = random.choice(["CON","INT","WIS","CHA" ])
+    elif con == "Restrained":
+        st = random.choice(["STR","DEX","CON"])
+    elif con == "Poisoned":
+        st = random.choice(["CON", "WIS"])
+    elif con == "Prone":
+        st = random.choice(["STR","DEX","CON"])
+    elif con == "Petrified":
+        st = random.choice(["STR", "CON","INT","WIS","CHA" ])
+    elif con == "Paralyzed":
+        st = random.choice(["STR", "CON","WIS","CHA" ]) 
+    elif con == "Invisible":
+        st = random.choice(["CON","INT","WIS","CHA" ])      
+    elif con == "Incapacitated":
+        st = random.choice(["STR","CON","WIS","CHA" ]) 
+    elif con == "Grappled":
+        st = random.choice(["STR","DEX"]) 
+    elif con == "Blinded":
+        st = random.choice(["CON","INT","WIS","CHA"]) 
+    elif con == "Frightened":
+        st = random.choice(["CON","INT","WIS","CHA"]) 
+    elif con == "Exhaustion":
+        st = random.choice(["STR","CON","CHA"]) 
+    elif con == "Deafened":
+        st = random.choice(["STR","CON","WIS"]) 
+    elif con == "Charmed":
+        st = random.choice(["CHA","WIS"]) 
+    else:
+        st = "CON"
+    return st
+
+def SpecialAttack(Lvl,Mod ):
+    dmg = Damage()
+    con = Condition(dmg)
     r = ""
+
     r = r+ Attack(Dice(4)) + " +"
     r = r+"{}".format(Dice(Dice(int(Lvl/2))))
     r = r+random.choice(["d4 ","d6 ","d8 ", "d10 ", "d12 "])
-    r = r + Damage()
-    r = r + " dmg on a failed Saving Throw at DC"
+    r = r + dmg
+    r = r + " dmg" 
+    r = r + " on a failed Saving Throw at DC"
     r = r + str((10 + Mod)) +" "
-    r = r + random.choice(["STR","DEX","CON","INT","WIS","CHA" ])
-    r = r +  " saving throw."
-   
+    r = r + SavingThrow(dmg) +  "."
+    if Dice(40) <= Dice(10+Lvl):
+        r = r + " The target is then affected by the " + con + " condition. "
+        r = r + "The Condition may be countered with a succesful " + Recovery(con) + " Saving Throw at the beggining of the target's turn."
     return r
 
 
 
+def Magic(Lvl, Race = Race(), Background = Background()):
+
+    cantrip = "Cantrips (at will): "
+    first = "First Level Spells: "
+    second = "2nd Level Spells: "
+    third = "3rd Level Spells: "
+    fourth = "4th Level Spells: "
+
+    if Background == "Priest":
+        if Dice(2) == 1:
+            cantrip =+ "\n Guidance"
+        if Dice(2) == 1:
+            cantrip =+ "\n Light"
+        if Dice(2) == 1:
+            cantrip =+ "\n Sacred Flame"
+        if Dice(2) == 1:
+            cantrip =+ "\n Thaumaturgy"
+
+    return "\n" + cantrip + "\n" + first + "\n" + second + "\n" + third + "\n" + fourth
 
 
 
-    
 
 def Actions(Type=Dice(60)):
     r = ""
@@ -897,7 +1010,7 @@ def Actions(Type=Dice(60)):
         if Dice() == 1:
             r = r+ "\n - Running Leap"
         if Dice() == 1:
-            r = r+ "\n - Pounce"
+            r = r+ "\n - Pounce \n\t If the beast moves at least 20 feet straight toward a creature and then hits it with an attack on the same turn, that target must succeed on a DC [10+%STR] Strength saving throw or be knocked prone. If the target is prone, the Beast can make one attack against it as a bonus action."
         if Dice() == 1:
             r = r+ "\n - Constrict (restrained, 2d8 + %STR, escape DC 10+%STR)"
         if Dice() == 1:
@@ -954,7 +1067,9 @@ def Actions(Type=Dice(60)):
         if Dice()==1:
             r = r+ "\n Condition Immunities:  petrified \n"
         if Dice()==1:
-            r = r+ "\n Condition Immunities: , paralyzed \n"
+            r = r+ "\n Condition Immunities: paralyzed \n"
+        if Dice()==1:
+            r = r+ "\n Condition Immunities: charmed \n"
         if Dice()==1:
             r = r+ "\n- Axiomatic Mind. \n\t The Construct can't be compelled to act in a manner contrary to its nature or its instructions."
         if Dice() == 1:
@@ -1199,7 +1314,7 @@ def Actions(Type=Dice(60)):
             if Dice(2)==1:
                 r = r + "\n Darkvision \n\t 120 ft."
         if Dice(2)==1:
-            r = r + "\n Devil's Sight. \n\t Magical darkness doesn't impede the lemure's darkvision."
+            r = r + "\n Devil's Sight. \n\t Magical darkness doesn't impede the Fiend's darkvision."
         if Dice()==1:
             r = r +"\nMagic Resistance"
         if Dice(2) == 1:
@@ -1232,8 +1347,10 @@ def Actions(Type=Dice(60)):
 
    
     elif Type == "Spy" or Type == 36:
-        r = r + "\n- Skills: Deception +5, Insight +4, Investigation +5, Perception +6, Persuasion +5, Sleight of Hand +4, Stealth +4"
-        r = r + "\n- Cunning Action \n- Sneak Attack (1/Turn)."
+        if Dice(2) == 1:
+            r = r + "\n- Cunning Action"
+        if Dice(2) == 1:
+            r = r + "\n- Sneak Attack (1/Turn)."
         
     elif Type == "Berserker" or Type == 35:
         r = r + "\n- Multiattack"
@@ -1286,7 +1403,7 @@ def Actions(Type=Dice(60)):
             
     elif Type == "Ranger" or Type == 48:
         r = r + Attack(4)
-        r = "\n Multiattack."
+        r = "\n - Multiattack."
         
     elif Type == "Bandit" or Type == 49:
         r = r + "\n- Parry \n\t The Bandit adds 2 to its AC against one melee attack that would hit it. To do so, the bandit must see the attacker and be wielding a melee weapon."
@@ -1305,7 +1422,7 @@ def Actions(Type=Dice(60)):
     elif Type == "Beastfolk" or Type == 8:
         r = r + "\n- Speak with Animal \n\t The Beastfolk can communicate simple concepts to his affinity animal when it speaks in Beast language."
     else :
-        r = r + "Multiattack"
+        r = r + "- Multiattack"
     return r
     
 
@@ -1405,11 +1522,10 @@ def NPC():
     print (Attack("Melee"))
     print (SpecialAttack(Lvl, Modifier(random.choice([STR,DEX,CON,INT,WIS,CHA ]))))
 
-
-    print("\n")
+    print("\n\n")
     print("SPELLCASTING:\n Spellsave DC:", 10+ Modifier(max(INT,WIS,CHA)))
     print(" To hit: +", Modifier(max(INT,WIS,CHA)+ Lvl/5))
-    
+    print(Magic(Lvl,rc,bg))
     
     print("\n")
     print(Actions(bg))
