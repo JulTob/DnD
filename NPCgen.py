@@ -212,7 +212,6 @@ def Title():
         "Butterfly",
         "Beetle",
         "Cat",
-        "Crab",
         " Chemist",
         "Champion",
         " Collector",
@@ -257,6 +256,7 @@ def Title():
         " Hand",
         "Hag",
         "Hawk",
+        "Hermit",
         "Hive",
         " Horror",
         "Hound",
@@ -462,7 +462,7 @@ def Race():
         "Human","Human","Human","Human","Human","Human","Human",
         "Aberration",
         "Aven",
-        "Beast", "Beast",
+        "Beast", "Beast", "Beast"
         "Beastfolk", "Beastfolk"
         "Celestial", 
         "Centaur",
@@ -483,7 +483,6 @@ def Race():
         "Goblin",
         "Hag",
         "Halfling",
-        "Hobgoblin",
         "Kobold",
         "Lizardfolk",
         "Merfolk",
@@ -1198,6 +1197,7 @@ def Actions(Type=Dice(60)):
             r = r+ "\n- Fly. \n\t 60 ft."  
             if Dice(2)==1:
                 r = r+ "\n Flyby. \n\t The beast doesn't provoke opportunity attacks when it flies out of an enemy's reach."
+                
     elif Type=="Beast" or Type=="Beastfolk" or Type == 6: 
         if Dice(2) == 1:        
             if Dice(4) == 1:
@@ -1334,7 +1334,7 @@ def Actions(Type=Dice(60)):
             r = r+ "\n- Antimagic Susceptibility:\n\t The Construct is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Construct must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute."
 
     elif Type == "Goblin" or Type == 9:
-        r = r+ "\n- Nimble Scape"
+        r = r+ "\n- Nimble Scape \n\t The goblin can take the Disengage or Hide action as a bonus action on each of its turns."
         
     elif Type == "Aberration" or Type == 10:
         if Dice()==1: 
@@ -1761,14 +1761,14 @@ def NPC():
     print("\n")
     print("COMBAT ACTIONS:")
     print("\tTo hit: +", Modifier(max(STR,DEX)+ Lvl/5))
-    print("Simple Attack:")
+    print("\n\t- Simple Attack:")
     print (Attack(Dice(4)))
-    print("Special Attack: {} Charges/Combat".format(Dice( 1 + int(Lvl/4))))
+    print("\n\t- Special Attack: {} Charges/Combat".format(Dice( 1 + int(Lvl/4))))
     print (SpecialAttack(Lvl, Modifier(random.choice([STR,DEX,CON,INT,WIS,CHA ]))))
 
     print("\n\n")
-    print("SPELLCASTING:\n Spellsave DC:", 10+ Modifier(max(INT,WIS,CHA)))
-    print(" To hit: +", Modifier(max(INT,WIS,CHA)+ Lvl/5))
+    print("SPELLCASTING:\n\t Spellsave DC:", 10+ Modifier(max(INT,WIS,CHA)))
+    print("\t To hit: +", Modifier(max(INT,WIS,CHA)+ Lvl/5))
     print(Magic(Lvl,rc,bg))
     
     print("\n\n")
