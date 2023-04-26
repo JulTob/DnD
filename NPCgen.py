@@ -531,6 +531,8 @@ def BeastName():
         "Boar",
         "Cat",
         "Camel",
+        "Dino", "TRex", "Triceratops", "Velocirraptor",
+        "Dodo",
         "Dog",
         "Crab",
         "Deer", "Elk",
@@ -1053,6 +1055,8 @@ def Magic(Lvl, race = Race(), background = Background()):
                 
         if race == "Fey":
             if Dice() == 1:
+                cantrip += "\t Teleport (Recharge 4–6). \n\t The Fey magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the dog can make one bite attack."
+            if Dice() == 1:
                 cantrip += "\t druidcraft"
             if Dice() == 1:
                 one += "\t confusion"
@@ -1133,22 +1137,31 @@ def Actions(Type=Dice(60)):
     elif Type == "Plant" or Type == 4: 
         if Dice() == 1:
             r = r+ "\n- Entangling Plants"
+    elif Type == "Plant" or Type == 5: 
         if Dice() == 1:
             r = r+ "\n Damage Immunities: poison"
+    elif Type == "Plant" or Type == 6: 
         if Dice() == 1:
             r = r+ "\n Condition Immunities:  blinded"
+    elif Type == "Plant" or Type == 7: 
         if Dice() == 1:
             r = r+ "\n Condition Immunities:  charmed"
+    elif Type == "Plant" or Type == 8: 
         if Dice() == 1:
             r = r+ "\n Condition Immunities:   poisoned"
+    elif Type == "Plant" or Type == 9: 
         if Dice() == 1:
             r = r+ "\n Condition Immunities:  frightened"
+    elif Type == "Plant" or Type == 10: 
         if Dice() == 1:
             r = r + "\n-Distress Spores. \n\t When the plant takes damage, all other plants within 240 feet of it can sense its pain."  
+    elif Type == "Plant" or Type == 11: 
         if Dice() == 1:
             r = r + "\n-Sun Sickness. \n\t While in sunlight, the plant has disadvantage on ability checks, attack rolls, and saving throws. The plant dies if it spends more than 1 hour in direct sunlight."
+    elif Type == "Plant" or Type == 12: 
         if Dice() == 1:
             r = r + "\n-Animating Spores"  
+    elif Type == "Plant" or Type == 13: 
         if Dice() == 1:
             r = r + "\n-Hallucination Spores"  
         if Dice() == 1:
@@ -1185,6 +1198,7 @@ def Actions(Type=Dice(60)):
             r = r+ "\n- Fly. \n\t 60 ft."  
             if Dice(2)==1:
                 r = r+ "\n Flyby. \n\t The beast doesn't provoke opportunity attacks when it flies out of an enemy's reach."
+    elif Type=="Beast" or Type=="Beastfolk" or Type == 6: 
         if Dice(2) == 1:        
             if Dice(4) == 1:
                 r = r+ "\n- Darkvision." 
@@ -1283,7 +1297,9 @@ def Actions(Type=Dice(60)):
         
     elif Type == "Construct" or Type == 8:
         r = r+ "\n- Damage Immunities: Poison"
+    elif Type == "Construct" or Type == 9:
         r = r+ "\n- Condition Immunities: Poisoned, Charmed"
+    elif Type == "Construct" or Type == 10:
         if Dice(2)==1:
             r = r+ "\n- Damage Immunities: psychic"
         if Dice()==1:
@@ -1509,7 +1525,6 @@ def Actions(Type=Dice(60)):
         r = r+ "\n- Luring Song"
     
     elif Type == "Cultist" or Type == 33:
-
         if Dice(2)==1:
             r = r+ "\n Dark Devotion.\n\t The cultist has advantage on saving throws against being charmed or frightened."
         
@@ -1584,9 +1599,6 @@ def Actions(Type=Dice(60)):
     elif Type == 38:
         r = r+"\n    At will: animal friendship (snakes) \n 3/day each: poison spray, suggestion"
 
-    elif Type == "Centaur" or Type == 39:
-        r = r + "\n- Charge\n- Multiattack"
-        
     elif Type == 40:
         r = r+ "\n    Cantrips (at will): sacred flame, thaumaturgy \n 1st level (3 slots): bane, shield of faith"
         
@@ -1724,31 +1736,31 @@ def NPC():
     print("\n")
    
     print("Skills:")
-    if Dice() <= Modifier(STR): print("Athletics:+",Proficiency(STR), end=" ")
-    if Dice() <= Modifier(DEX): print("Acrobatics:+",Proficiency(DEX), end=" ")
-    if Dice() <= Modifier(DEX): print("Sleight of Hand:+",Proficiency(DEX), end=" ")
-    if Dice() <= Modifier(DEX): print("Stealth:+",Proficiency(DEX), end=" ")
-    if Dice() <= Modifier(INT): print("Arcana:+",Proficiency(INT), end=" ")
-    if Dice() <= Modifier(INT): print("History:+",Proficiency(INT), end=" ")
-    if Dice() <= Modifier(INT): print("Investigation:+",Proficiency(INT), end=" ")
-    if Dice() <= Modifier(INT): print("Nature:+",Proficiency(INT), end=" ")
-    if Dice() <= Modifier(INT): print("Religion:+",Proficiency(INT), end=" ")
-    if Dice() <= Modifier(WIS): print("Animal Handling:+",Proficiency(WIS), end=" ")
-    if Dice() <= Modifier(WIS): print("Insight:+",Proficiency(WIS), end=" ")
-    if Dice() <= Modifier(WIS): print("Medicine:+",Proficiency(WIS), end=" ")
-    if Dice() <= Modifier(WIS): print("Perception:+",Proficiency(WIS), end=" ")
-    if Dice() <= Modifier(WIS): print("Survival:+",Proficiency(WIS), end=" ")
-    if Dice() <= Modifier(CHA): print("Deception:+",Proficiency(CHA), end=" ")
-    if Dice() <= Modifier(CHA): print("Intimidation:+",Proficiency(CHA), end=" ")
-    if Dice() <= Modifier(CHA): print("Performance:+",Proficiency(CHA), end=" ")
-    if Dice() <= Modifier(CHA): print("Persuasion:+",Proficiency(CHA), end=" ")
+    if Dice() <= Modifier(STR): print("\tAthletics:+",Proficiency(STR), end=" ")
+    if Dice() <= Modifier(DEX): print("\tAcrobatics:+",Proficiency(DEX), end=" ")
+    if Dice() <= Modifier(DEX): print("\tSleight of Hand:+",Proficiency(DEX), end=" ")
+    if Dice() <= Modifier(DEX): print("\tStealth:+",Proficiency(DEX), end=" ")
+    if Dice() <= Modifier(INT): print("\tArcana:+",Proficiency(INT), end=" ")
+    if Dice() <= Modifier(INT): print("\tHistory:+",Proficiency(INT), end=" ")
+    if Dice() <= Modifier(INT): print("\tInvestigation:+",Proficiency(INT), end=" ")
+    if Dice() <= Modifier(INT): print("\tNature:+",Proficiency(INT), end=" ")
+    if Dice() <= Modifier(INT): print("\tReligion:+",Proficiency(INT), end=" ")
+    if Dice() <= Modifier(WIS): print("\tAnimal Handling:+",Proficiency(WIS), end=" ")
+    if Dice() <= Modifier(WIS): print("\tInsight:+",Proficiency(WIS), end=" ")
+    if Dice() <= Modifier(WIS): print("\tMedicine:+",Proficiency(WIS), end=" ")
+    if Dice() <= Modifier(WIS): print("\tPerception:+",Proficiency(WIS), end=" ")
+    if Dice() <= Modifier(WIS): print("\tSurvival:+",Proficiency(WIS), end=" ")
+    if Dice() <= Modifier(CHA): print("\tDeception:+",Proficiency(CHA), end=" ")
+    if Dice() <= Modifier(CHA): print("\tIntimidation:+",Proficiency(CHA), end=" ")
+    if Dice() <= Modifier(CHA): print("\tPerformance:+",Proficiency(CHA), end=" ")
+    if Dice() <= Modifier(CHA): print("\tPersuasion:+",Proficiency(CHA), end=" ")
     print("\n")
     
     print("Passive Perception:", 10 + Modifier(WIS) + Modifier(Lvl/2) )
 
     print("\n")
     print("COMBAT ACTIONS:")
-    print("To hit: +", Modifier(max(STR,DEX)+ Lvl/5))
+    print("\tTo hit: +", Modifier(max(STR,DEX)+ Lvl/5))
     print("Simple Attack:")
     print (Attack(Dice(4)))
     print("Special Attack: {} Charges/Combat".format(Dice( 1 + int(Lvl/4))))
