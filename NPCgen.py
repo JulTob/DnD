@@ -95,6 +95,7 @@ def Title():
         "The Icicle",
         "The Ink",
         "The Intellect",
+        "The Innoble",
         "The Illusionist",
         "The Jewelcraft",
         "The Jackal",
@@ -162,6 +163,7 @@ def Title():
         "The Tiger",
         "The True",
         "The Troll",
+        "The Trival",
         "The Undead",
         "The Unicorn",
         "The Vampiric",
@@ -182,6 +184,7 @@ def Title():
         ]
     rank = [
         " Abomination",
+        "Acolyte",
         " Alchemist",
         "Aprentice",
         " Arrow",
@@ -367,12 +370,14 @@ def Title():
         "Vulture",
         "Walker",
         " Warlock",
+        "Warrior",
         "Werewolf",
-        "Wolf",
         " Wizard",
         " Witch",
         " Witchhunter",
         " Writter" ,
+        "Willow",
+        "Wolf",
         "Zombie",
         ""
         ] 
@@ -430,7 +435,6 @@ def Background():
         "Spellcaster",
         "Thug", 
         "Traveler",
-        "Tribal Warrior",
         "Veteran",
         "Warrior",
         "Warlock",
@@ -457,10 +461,9 @@ def Race():
     Races = [
         "Human","Human","Human","Human","Human","Human","Human",
         "Aberration",
-        "Aven(Birdfolk)",
+        "Aven",
         "Beast", "Beast",
-        "Beastfolk",
-        "Catfolk",
+        "Beastfolk", "Beastfolk"
         "Celestial", 
         "Centaur",
         "Construct",
@@ -481,10 +484,8 @@ def Race():
         "Hag",
         "Halfling",
         "Hobgoblin",
-        "Kenku",
         "Kobold",
         "Lizardfolk",
-        "Lycan",
         "Merfolk",
         "Minotaur",
         "Monstrosity",
@@ -497,8 +498,6 @@ def Race():
         "Spirit",
         "Tiefling",
         "Undead",
-        "Vampire",
-        "Werewolf",
         ""
         ]
     return random.choice(Races)
@@ -515,7 +514,13 @@ def Race():
 
 
 
-
+def AvenName():
+    Names = [
+        "Birdfolk",
+        "Kenku",
+        "Aarakocra",
+        ""]
+    return random.choice(Names)
 
 def BeastName():
     Names = [
@@ -551,7 +556,15 @@ def BeastName():
         "Wolf",
         ""]
     return random.choice(Names)
-
+    
+def BeastfolkName():
+    Names = [
+        "Centaur",
+        "Lycan",
+        "Werewolf",
+        ""]
+    return random.choice(Names)
+    
 def MonstrosityName():
     Names = [
         "Griffon",
@@ -561,6 +574,7 @@ def MonstrosityName():
 def AberrationName():
     Names = [
         "Intellect Devourer",
+        "Illithid",
         ""]
     return random.choice(Names)
 
@@ -568,12 +582,14 @@ def PlantName():
     Names = [
         "Awakened Plant",
         "Myconid",
+        "Willow"
         ""]
     return random.choice(Names)
     
 def UndeadName():
     Names = [
         "Crawling Limb",
+        "Vampire"
         ""]
     return random.choice(Names)
     
@@ -587,16 +603,23 @@ def ConstructName():
     return random.choice(Names)
     
 def Name(Type):
-    if Type == "Beast": return BeastName()
-    if Type == "Monstrosity": return MonstrosityName()
     if Type == "Aberration": return AberrationName()
-    if Type == "Plant": return PlantName()
+    if Type == "Aven": return AvenName()
+    if Type == "Beast": return BeastName()
+    if Type == "Beastfolk": return BeastfolkName()
     if Type == "Construct": return ConstructName()
+    if Type == "Monstrosity": return MonstrosityName()
+    if Type == "Plant": return PlantName()
     if Type == "Undead": return UndeadName()
     Names = [
         ""]
     return random.choice(Names)
 
+   
+   
+   
+   
+   
    
    
    
@@ -609,7 +632,7 @@ def AbilityScore():
     d2 = Dice() 
     d3 = Dice()
     d4 = Dice()
-    return d1+d2+d3+d4 - min(d1,d2,d3,d4) + Dice(3)-1 +Dice()- Dice()
+    return d1+d2+d3+d4 - min(d1,d2,d3,d4) + Dice(3)-1 + Dice(8)-Dice(8)
     
 def Modifier(AS):
     return int((AS-10)/2)
@@ -617,6 +640,13 @@ def Modifier(AS):
 def Proficiency(AS):
     return Dice(Modifier(AS)*2)
 
+        
+        
+        
+        
+        
+        
+        
         
 
 
@@ -736,7 +766,7 @@ def Condition(dmg):
         ""
         ]
     if dmg == "Slashing":
-        return random.choice(["Exhaustion","Incapacitated", "Paralyzed", "Poisoned", "Prone" ])
+        return random.choice(["Exhaustion","Incapacitated", "Poisoned", "Prone" ])
     elif dmg == "Piercing":
         return random.choice(["Blinded","Exhaustion", "Incapacitated", "Poisoned" ])
     elif dmg == "Bludgeoning":
@@ -836,67 +866,271 @@ def SpecialAttack(Lvl,Mod ):
     r = ""
 
     r = r+ Attack(Dice(4)) + " +"
-    r = r+"{}".format(Dice(Dice(int(Lvl/2))))
+    r = r+"{}".format(Dice(Dice(1+int(Lvl/4))))
     r = r+random.choice(["d4 ","d6 ","d8 ", "d10 ", "d12 "])
     r = r + dmg
     r = r + " dmg" 
-    r = r + " on a failed Saving Throw at DC"
+    r = r + " on a failed Saving Throw at DC "
     r = r + str((10 + Mod)) +" "
     r = r + SavingThrow(dmg) +  "."
     if Dice(40) <= Dice(10+Lvl):
         r = r + " The target is then affected by the " + con + " condition. "
-        r = r + "The Condition may be countered with a succesful " + Recovery(con) + " Saving Throw at the beggining of the target's turn."
+        r = r + "The Condition may be countered with a succesful " + str((10 + Mod)) + " "+ Recovery(con) + " Saving Throw at the beggining of the target's turn."
     return r
 
 
 
-def Magic(Lvl, Race = Race(), Background = Background()):
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def Magic(Lvl, race = Race(), background = Background()):
 
     cantrip = "Cantrips (at will): "
-    first = "First Level Spells: "
+    first = "1st Level Spells: "
     second = "2nd Level Spells: "
     third = "3rd Level Spells: "
     fourth = "4th Level Spells: "
 
-    if Background == "Priest":
-        if Dice(2) == 1:
-            cantrip =+ "\n Guidance"
-        if Dice(2) == 1:
-            cantrip =+ "\n Light"
-        if Dice(2) == 1:
-            cantrip =+ "\n Sacred Flame"
-        if Dice(2) == 1:
-            cantrip =+ "\n Thaumaturgy"
+    slots1 = 0
+    slots2 = 0
+    slots3 = 0
+    slots4 = 0
+    
+    one = "1/Day each: "
+    two = "2/Day each: "
+    three = "3/Day each: "
 
-    return "\n" + cantrip + "\n" + first + "\n" + second + "\n" + third + "\n" + fourth
+    for L in range(Lvl):
+
+                
+                
+        if background == "Acolyte":
+            if Dice(2) == 1:
+                cantrip +=  "\t light"
+            if Dice(2) == 1:
+                cantrip +=  "\t sacred flame"
+            if Dice(2) == 1:
+                cantrip +=  "\t thaumaturgy"
+            slots1 += Dice(3)
+            if Dice(2) == 1:
+                first += "\t bless"
+            if Dice(2) == 1:
+                first += "\t cure wounds"            
+            if Dice(2) == 1:
+                first += "\t sanctuary"            
+    
+    
+        if background == "Cultist":
+            if Dice(2) == 1:
+                cantrip +=  "\t Light"
+            if Dice(2) == 1:
+                cantrip += "\t Sacred flame"
+            if Dice(2) == 1:
+                cantrip += "\t Thaumaturgy" 
+            slots1 += Dice(4)
+            if Dice(2) == 1:
+                first += "\t Command"
+            if Dice(2) == 1:
+                first += "\t inflict wounds"
+            if Dice(2) == 1:
+                first += "\t shield of faith"
+            slots2 += Dice(3)
+            if Dice(2) == 1:
+                second += "\t hold person" 
+            if Dice(2) == 1:
+                second += "\t spiritual weapon"
+
+        if background=="Healer":
+            if Dice(2) == 1:
+                cantrip +=  "\t guidance" 
+            if Dice(2) == 1:
+                cantrip +=  "\t sacred flame"
+            slots1 += Dice(2)
+            if Dice(2) == 1:
+                first +=  "\t cure wounds"
+            
+        if background == "Mage":
+            if Dice(2) == 1:
+                cantrip +=  "\t firebolt" 
+            if Dice(2) == 1:
+                cantrip +=  "\t light" 
+            slots1 += Dice(2)
+            if Dice(2) == 1:
+                first +=  "\t Sleep"
+    
+        if background == "Priest":
+            if Dice(2) == 1:
+                cantrip += "\t Guidance"
+            if Dice(2) == 1:
+                cantrip += "\t Light"
+            if Dice(2) == 1:
+                cantrip += "\t Sacred Flame"
+            if Dice(2) == 1:
+                cantrip += "\t Thaumaturgy"
+                
+        if background == "Shaman":
+            if Dice(2) == 1:
+                cantrip +=  "\t druidcraft" 
+            if Dice(2) == 1:
+                cantrip +=  "\t produce flame" 
+            if Dice(2) == 1:
+                cantrip +=  "\t thorn whip" 
+            slots1 += Dice(4)
+            if Dice(2) == 1:
+                first +=  "\t entangle"
+            if Dice(2) == 1:
+                first +=  "\t fog cloud"
+            slots2 += Dice(3)
+            if Dice(2) == 1:
+                second +=  "\t heat metal"
+            if Dice(2) == 1:
+                second +=  "\t spike growth"
+            slots3 += Dice(2)
+            if Dice(2) == 1:
+                third +=  "\t conjure animals"
+            if Dice(2) == 1:
+                third +=  "\t plant growth"
+  
+        if race == "Aberration":
+            if Dice() == 1:
+                one += "\n- Stench Spray (1/Day). \n\t Each creature in a 15-foot cone originating from the Aberration must succeed on a DC 10 Dexterity saving throw or be coated in a foul-smelling liquid. A coated creature exudes a horrible stench for 1d4 hours. The coated creature is poisoned as long as the stench lasts, and other creatures are poisoned while with in 5 feet of the coated creature. A creature can remove the stench on itself by using a short rest to bathe in water, alcohol, or vinegar."
+
+        if race == "Aven":
+            if Dice() == 1:
+                cantrip +=  "\n- Summon Air Elemental. \n\t Five aarakocra within 30 feet of each other can magically summon an air elemental. Each of the five must use its action and movement on three consecutive turns to perform an aerial dance and must maintain concentration while doing so (as if concentrating on a spell). When all five have finished their third turn of the dance, the elemental appears in an unoccupied space within 60 feet of them. It is friendly toward them and obeys their spoken commands. It remains for 1 hour, until it or all its summoners die, or until any of its summoners dismisses it as a bonus action. A summoner can't perform the dance again until it finishes a short rest. When the elemental returns to the Elemental Plane of Air, any aarakocra within 5 feet of it can return with it."
+                
+        if race == "Celestial":
+            if Dice(2) == 1:
+                cantrip +=  "\t light" 
+            if Dice(2) == 1:
+                cantrip +=  "\t sacred flame" 
+            if Dice(2) == 1:
+                cantrip +=  "\t thaumaturgy" 
+            slots1 += Dice(3)
+            if Dice(2) == 1:
+                first +=  "\t bless" 
+            if Dice(2) == 1:
+                first +=  "\t cure wounds" 
+            if Dice(2) == 1:
+                first +=  "\t sanctuary"
+                
+        if race == "Elf":
+            if Dice() == 1:
+                cantrip += "\t dancing lights"
+            if Dice() == 1:
+                one += "\t darkness"
+            if Dice() == 1:
+                one += "\t faerie fire"
+                
+        if race == "Fey":
+            if Dice() == 1:
+                cantrip += "\t druidcraft"
+            if Dice() == 1:
+                one += "\t confusion"
+            if Dice() == 1:
+                one += "\t dancing lights"
+            if Dice() == 1:
+                one += "\t detect evil and good"   
+            if Dice() == 1:
+                one += "\t detect thoughts"   
+            if Dice() == 1:
+                one += "\t dispel magic"   
+            if Dice() == 1:
+                one += "\t entangle"   
+            if Dice() == 1:
+                one += "\t fly"   
+            if Dice() == 1:
+                one += "\t phantasmal force"   
+            if Dice() == 1:
+                one += "\t polymorph"   
+            if Dice() == 1:
+                one += "\t sleep"   
+
+                
+        if Dice(10) == 1: 
+            background = Background()
+        if Dice(10) == 1: 
+            race = Race()
+
+    r = "\n"
+    if not(cantrip == "Cantrips (at will): "):
+        r += cantrip + "\n"
+    if not(first == "1st Level Spells: "):
+        r += "[{}]".format(Dice(slots1)) + first + "\n"
+    if not( second == "2nd Level Spells: "):
+        r += "[{}]".format(Dice(slots2)) + second + "\n"
+    if not(third == "3rd Level Spells: "):
+        r += "[{}]".format(Dice(slots3)) + third + "\n"
+    if not(fourth == "4th Level Spells: "):
+        r += "[{}]".format(Dice(slots4)) + fourth + "\n"
+    if not(one == "1/Day each: "):
+        r += one
+    if not(two == "2/Day each: "):
+        r += two
+    if not(three == "3/Day each: "):
+        r += three
+    return  r
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 def Actions(Type=Dice(60)):
     r = ""
-    if Type=="Healer" or Type ==1:
-        r = r+ "\n Cantrips (at will): guidance, sacred flame \n    1st level (2 slots): cure wounds"
-        
-    elif Type == "Mage" or Type == 2:
-        r = r+ "\n Cantrips (at will): firebolt, light \n    1st level (2 slots): Sleep"
-        
-    elif Type == "Acolyte" or Type == 3:
-        r = r+ "\n Cantrips (at will): light, sacred flame, thaumaturgy \n    1st level (3 slots): bless, cure wounds, sanctuary"
-        
-    elif Type == "Celestial" or Type == 4:
-        r = r+ "\n Cantrips (at will): light, sacred flame, thaumaturgy \n    1st level (3 slots): bless, cure wounds, sanctuary"
-        
-    elif Type == "Tribal Warrior" or Type == 5:
+
+    if Type == "Warrior" or Type == 1:
         r = r + "\n- Pack Tactics \n\t The warrior has advantage on an attack roll against a creature if at least one of the warrior's allies is within 5 feet of the creature and the ally isn't incapacitated."
+    if Type == "Warrior" or Type == 2:
         if Dice(2)==1:
-            r= r + "\n- Wounded Fury"
+            r= r + "\n- Multiattack \n\t The Warrior can attack an additional time on his turn."
         
-    elif Type == "Plant" or Type == 6: 
+    elif Type == "Plant" or Type == 3: 
+        r = r+ "\n- Damage Vulnerabilities: fire"
         if Dice() == 1:
             r = r+ "\n- False Appereance: \n\t While the plant remains motionless, it is indistinguishable from a normal plant."
-        if Dice() == 1:
-            r = r+ "\n- Damage Vulnerabilities fire"
+            
+    elif Type == "Plant" or Type == 4: 
         if Dice() == 1:
             r = r+ "\n- Entangling Plants"
         if Dice() == 1:
@@ -932,7 +1166,7 @@ def Actions(Type=Dice(60)):
         if Dice() == 1:
             r = r + "\n Blindsight\n\t 30 ft"        
         
-    elif Type == "Nymph" or Type == 7: 
+    elif Type == "Nymph" or Type == 4: 
         r = r+ "\n- Teleport"
         r = r+ "\n- Magic Resistance"
         r = r+ "\n- Speak with Beasts and Plants"
@@ -940,7 +1174,7 @@ def Actions(Type=Dice(60)):
         r = r+ "\n- Fey Charm"
         
         
-    elif Type == "Beast" or Type == "Beastfolk" or Type == 8: 
+    elif Type == "Beast" or Type == "Beastfolk" or Type == 5: 
         if Dice() == 1:
             r = r+ "\n- Speed. \n\t 50 ft."
         if Dice() == 1:
@@ -951,83 +1185,80 @@ def Actions(Type=Dice(60)):
             r = r+ "\n- Fly. \n\t 60 ft."  
             if Dice(2)==1:
                 r = r+ "\n Flyby. \n\t The beast doesn't provoke opportunity attacks when it flies out of an enemy's reach."
-        if Dice(4) == 1:
-            r = r+ "\n- Darkvision." 
-            if Dice()==1:
-                r = r+ "\n\t 60 ft."
-            else:
-                r = r+ "\n\t 30 ft."
-        if Dice() == 1:
-            r = r+ "\n- Blindsight." 
-            if Dice()==1:
-                r = r+ "\n\t 60 ft."
-            else:
-                r = r+ "\n\t 30 ft."
-            if Dice()==1:
-                r = r+ "\nEcholocation. \n\t The Beast can't use its blindsight while deafened."
-                r = r+ "\nKeen Hearing. \n\t The beast has advantage on Wisdom (Perception) checks that rely on hearing."
-        if Dice() == 1:
-            r = r+ "\n- Keen Smell. \n\t The Beast has advantage on Wisdom (Perception) checks that rely on smell."    
+        if Dice(2) == 1:        
+            if Dice(4) == 1:
+                r = r+ "\n- Darkvision." 
+                if Dice(2)==1:
+                    r = r+ "\n\t 30 ft."
+                elif Dice(2) == 1:
+                    r = r+ "\n\t 60 ft."
+                else:
+                    r = r+ "\n\t 120 ft."
+        else: 
+            if Dice() == 1:
+                r = r+ "\n- Blindsight." 
+                if Dice()==1:
+                    r = r+ "\n\t 60 ft."
+                else:
+                    r = r+ "\n\t 30 ft."
+                if Dice()==1:
+                    r = r+ "\nEcholocation. \n\t The Beast can't use its blindsight while deafened."
+                    r = r+ "\nKeen Hearing. \n\t The beast has advantage on Wisdom (Perception) checks that rely on hearing."
         if Dice() == 1:
             r = r+ "\n- Keen Senses\n\t The beast has advantage on Wisdom (Perception) checks that rely on senses."
+        else:
+            if Dice() == 1:
+                r = r+ "\n- Keen Smell. \n\t The Beast has advantage on Wisdom (Perception) checks that rely on smell."    
+            if Dice() == 1:
+                r = r+ "\n- Keen Sight. \n\tThe beast has advantage on Wisdom (Perception) checks that rely on sight."
+            if Dice() == 1:
+                r = r+ "\n- Keen Hearing. \n\tThe beast has advantage on Wisdom (Perception) checks that rely on hearing."
         if Dice() == 1:
-            r = r+ "\n- Keen Sight. \n\tThe beast has advantage on Wisdom (Perception) checks that rely on sight."
-        if Dice() == 1:
-            r = r+ "\n- Keen Hearing. \n\tThe beast has advantage on Wisdom (Perception) checks that rely on hearing."
-        if Dice(2) == 1:
             r = r+ "\n-  Pack Tactics. \n\t The Beast has advantage on an attack roll against a creature if at least one of the beast's allies is within 5 feet of the creature and the ally isn't incapacitated."
-        if Dice(2) == 1:
+        if Dice() == 1:
             r = r+ "\n-  Multiattack. \n\t The Beast makes two attacks."
 
-        if Dice() == 1:
+        if Dice(8) == 1:
             r = r+ "\n - Grappler. \n\t On an attack, the target is grappled,  [DC 10+%STR]"
             if Dice(2) == 1:
                 r = r+ "\n - Constrict. \n\t Until the grapple ends, the creature is restrained. The creature can't constrict another creature."
-        if Dice() == 1:
+        if Dice(8) == 1:
             r = r+ "\n - Charge \n\t If the Beast moves at least 20 feet straight toward a target and then hits it with an attack on the same turn, the target takes an extra [2d6+%STR] bludgeoning damage. If the target is a creature, it must succeed on a DC=[10+%STR] Strength saving throw or be knocked prone."
-        if Dice() == 1:
-            r = r+ "\n - Relentless \n\t Recharges after a Short or Long Rest). \n\t If the boar takes 7 damage or less that would reduce it to 0 hit points, it is reduced to 1 hit point instead."
-        if Dice() == 1:
+        if Dice(8) == 1:
+            r = r+ "\n - Relentless \n\t Recharges after a Short or Long Rest). \n\t If the beast takes 7 damage or less that would reduce it to 0 hit points, it is reduced to 1 hit point instead."
+        if Dice(8) == 1:
             r = r+ "\n- Water Breathing. The beast can breathe underwater"
             r = r+ "\n- Swim. \n\t 60 ft."  
             if Dice(2) == 1:
                 r = r + "\n- Underwater Camouflage. \n\t The beast has advantage on Dexterity (Stealth) checks made while underwater."
         if Dice() == 1:
             r = r+ "\n- Blood Frenzy \n\t The beast has advantage on melee attack rolls against any creature that doesn't have all its hit points."
-        if Dice() == 1:
+        if Dice(8) == 1:
             r = r+ "\n- Amphibious"
             r = r+ "\n- Swim. \n\t 30 ft."  
-            if Dice(2) == 1:
+            if Dice() == 1:
                 r = r+ "\n- Standing Leap. \n\t The Beast's long jump is up to half his speed in feet and its high jump is up to third his speed, with or without a running start."  
-        if Dice() == 1:
-            r = r+ "\n- Standing Leap. \n\t The Beast's long jump is up to 10 feet and its high jump is up to 5 feet, with or without a running start." 
-        if Dice() == 1:
-            r = r + "\n- SpiderClimb \n\t The beast can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."  
+        if Dice(8) == 1:
+            r = r + "\n- Spider Climb \n\t The beast can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."  
             if Dice(2) == 1:
                 r = r + "\n- Web Sense \n\t While in contact with a web, the spider knows the exact location of any other creature in contact with the same web."
             if Dice(2) == 1:
                 r = r + "\n- Web Walker \n\t The spider ignores movement restrictions caused by webbing."
         if Dice() == 1:
             r = r+ "\n - Running Leap"
-        if Dice() == 1:
+        if Dice(8) == 1:
             r = r+ "\n - Pounce \n\t If the beast moves at least 20 feet straight toward a creature and then hits it with an attack on the same turn, that target must succeed on a DC [10+%STR] Strength saving throw or be knocked prone. If the target is prone, the Beast can make one attack against it as a bonus action."
-        if Dice() == 1:
-            r = r+ "\n - Constrict (restrained, 2d8 + %STR, escape DC 10+%STR)"
-        if Dice() == 1:
-            r = r+ "\n Blinsight \n\t 60 ft"
-            r = r+ "\n Echolocation \n\t The Beast can't use its blindsight while deafened."
-            r = r+ "\n Keen Hearing. \n\t The bat has advantage on Wisdom (Perception) checks that rely on hearing."
-        if Dice() == 1:
-            r = r+ "\nIllumination.\n\tThe beetle sheds bright light in a 10-foot radius and dim light for an additional 10 ft."
-        if Dice() == 1:
+        if Dice(8) == 1:
+            r = r+ "\n- Illumination.\n\tThe beast sheds bright light in a 10-foot radius and dim light for an additional 10 ft."
+        if Dice(8) == 1:
             r = r+ "\n-Sure-Footed \n\t The beast has advantage on Strength and Dexterity saving throws made against effects that would knock it prone."
         if Dice() == 1:
             r = r + "\n- Hold Breath. \n\t The beast can hold its breath for 30 minutes."
-        if Dice() == 1:
+        if Dice(8) == 1:
             r = r+ "\n- Mimicry \n\t The Raven can mimic simple sounds it has heard, such as a person whispering, a baby crying, or an animal chittering. A creature that hears the sounds can tell they are imitations with a successful DC 10 Wisdom (Insight) check."
-        if Dice() == 1:
+        if Dice(8) == 1:
             r = r+ "\n- Beast of Burden \n\t The mule is considered to be a Large animal for the purpose of determining its carrying capacity."
-        if Dice() == 1:
+        if Dice(8) == 1:
             r = r+ "\n- Swamp Camouflage \n\t The Beast has advantage on Dexterity (Stealth) checks made to hide in swampy terrain."
         if Dice(4) == 1:
             r = r+ "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 4 (1d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR). Until this grapple ends, the target is restrained, and the beast can't bite another target."
@@ -1037,7 +1268,7 @@ def Actions(Type=Dice(60)):
                 r = r+ "\n-  Hold Breath. \n\t  The beast can hold its breath for 15 minutes.\n-  swimming \n\t  speed of 30 feet.)"
                 r = r+ "\n-  Spider Climb. \n\t  The beast can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
             
-    elif Type == "Elf" or Type == 9:
+    elif Type == "Elf" or Type == 6:
         r = r+ "\nFey Ancestry.\n\t The Elf has advantage on saving throws against being charmed, and magic can't put the Elf to sleep."
         
         if Dice(4) <= 3:
@@ -1045,13 +1276,12 @@ def Actions(Type=Dice(60)):
         else:
             r = r+ "\n Darkvision \n\t 120ft"
             r = r+ "\nSunlight Sensitivity. \n\t While in sunlight, the Elf has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
-        if Dice() == 1:
-            r = r+ "\n At will: dancing lights\n    1/day each: darkness, faerie fire"
 
-    elif Type == "Aven(Birdfolk)" or Type == 10:
+
+    elif Type == "Aven(Birdfolk)" or Type == 7:
         r = r+ "\n- Fly \n\t 50ft"
         
-    elif Type == "Construct" or Type == 11:
+    elif Type == "Construct" or Type == 8:
         r = r+ "\n- Damage Immunities: Poison"
         r = r+ "\n- Condition Immunities: Poisoned, Charmed"
         if Dice(2)==1:
@@ -1073,7 +1303,7 @@ def Actions(Type=Dice(60)):
         if Dice()==1:
             r = r+ "\n- Axiomatic Mind. \n\t The Construct can't be compelled to act in a manner contrary to its nature or its instructions."
         if Dice() == 1:
-            r = r+"\n- Disintegration. \n\t If the duodrone dies, its body disintegrates into dust, leaving behind its weapons and anything else it was carrying."
+            r = r+"\n- Disintegration. \n\t If the Construct dies, its body disintegrates into dust, leaving behind its weapons and anything else it was carrying."
         if Dice()==1:
             r = r+ "\n- False Apperance \n\t While the Construct remains motionless in rest, it is indistinguishable from a normal object"
         if Dice()==1:
@@ -1087,10 +1317,10 @@ def Actions(Type=Dice(60)):
         if Dice()==1:
             r = r+ "\n- Antimagic Susceptibility:\n\t The Construct is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Construct must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute."
 
-    elif Type == "Goblin" or Type == 12:
+    elif Type == "Goblin" or Type == 9:
         r = r+ "\n- Nimble Scape"
         
-    elif Type == "Aberration" or Type == 13:
+    elif Type == "Aberration" or Type == 10:
         if Dice()==1: 
             r = r+"\nDamage Resistances:  \n\t bludgeoning, piercing, and slashing from nonmagical attacks"
         if Dice()==1: 
@@ -1105,28 +1335,25 @@ def Actions(Type=Dice(60)):
             r = r+ "\n- Blindsight: \n\t 60ft"
         else: 
             r = r+ "\n- Darkvision: \n\t 60ft"
-        if Dice(2)==1: 
+        if Dice()==1: 
             r = r+ "\n- Telepathy: \n\t 60ft"
-            if Dice(2)==1:
+            if Dice(3)==1:
                 r = r+ "\n-Advanced Telepathy: \n\t The Aberration can perceive the content of any telepathic communication used within 60 feet of it, and it can't be surprised by creatures with any form of telepathy."
-            if Dice(2)==1:
-                r = r+ "\n-Telepathic Shroud. \n\t The flumph is immune to any effect that would sense its emotions or read its thoughts, as well as all divination spells."
+            if Dice(3)==1:
+                r = r+ "\n-Telepathic Shroud. \n\t The Aberration is immune to any effect that would sense its emotions or read its thoughts, as well as all divination spells."
         if Dice(2)==1: 
             r = r+ "\n- Detect Sentience: \n\t It can sense the presence and location of any creature within 300 feet of it that has an Intelligence of 3 or higher, regardless of interposing barriers, unless the creature is protected by a mind blank spell."
-        if Dice(2)==1: 
-            r = r+ "\n- Detect Sentience: \n\t It can sense the presence and location of any creature within 300 feet of it that has an Intelligence of 3 or higher, regardless of interposing barriers, unless the creature is protected by a mind blank spell."
-        if Dice(2)==1: 
-            r = r+ "\n- Devour Intellect: \n\t It targets one creature it can see within 10 feet of it that has a brain. The target must succeed on a DC [10+%DEX] Intelligence saving throw against this magic or take 11 (2d10) psychic damage. Also on a failure, roll 3d6: If the total equals or exceeds the target's Intelligence score, that score is reduced to 0. The target is stunned until it regains at least one point of Intelligence."
+            if Dice()==1: 
+                r = r+ "\n- Devour Intellect: \n\t It targets one creature it can see within 10 feet of it that has a brain. The target must succeed on a DC [10+%DEX] Intelligence saving throw against this magic or take 11 (2d10) psychic damage. Also on a failure, roll 3d6: If the total equals or exceeds the target's Intelligence score, that score is reduced to 0. The target is stunned until it regains at least one point of Intelligence."
         if Dice(2)==1: 
             r = r+ "\n- Body Thief. \n\t The intellect devourer initiates an Intelligence contest with an incapacitated humanoid within 5 feet of it that isn't protected by protection from evil and good. If it wins the contest, the intellect devourer magically consumes the target's brain, teleports into the target's skull, and takes control of the target's body. While inside a creature, the intellect devourer has total cover against attacks and other effects originating outside its host. The intellect devourer retains its Intelligence, Wisdom, and Charisma scores, as well as its understanding of Deep Speech, its telepathy, and its traits. It otherwise adopts the target's statistics. It knows everything the creature knew, including spells and languages. \n\t If the host body dies, the intellect devourer must leave it. A protection from evil and good spell cast on the body drives the intellect devourer out. The intellect devourer is also forced out if the target regains its devoured brain by means of a wish. By spending 5 feet of its movement, the intellect devourer can voluntarily leave the body, teleporting to the nearest unoccupied space within 5 feet of it. The body then dies, unless its brain is restored within 1 round."
         if Dice() == 1:
             r = r+ "\n- Damage Vulnerabilities: \n\t psychic"
-        if Dice() == 1:
-            r = r+ "\n- Stench Spray (1/Day). \n\t Each creature in a 15-foot cone originating from the flumph must succeed on a DC 10 Dexterity saving throw or be coated in a foul-smelling liquid. A coated creature exudes a horrible stench for 1d4 hours. The coated creature is poisoned as long as the stench lasts, and other creatures are poisoned while with in 5 feet of the coated creature. A creature can remove the stench on itself by using a short rest to bathe in water, alcohol, or vinegar."
+
         if Dice() == 1:
             r = r+ "\n- Magic Resistance: \n\t The Aberration has advantage on saving throws against spells and other magical effects."
         
-    elif Type == "Kenku"  or Type == 14:
+    elif Type == "Aven(Birdfolk)" or Type == 14:
         r = r+ "\n- Ambusher"
         r = r+ "\n- Mimicry \n\t The Raven can mimic simple sounds it has heard, such as a person whispering, a baby crying, or an animal chittering. A creature that hears the sounds can tell they are imitations with a successful DC 10 Wisdom (Insight) check."
         
@@ -1138,8 +1365,6 @@ def Actions(Type=Dice(60)):
             r = "\n- Heated Body \n- Damage Immunities: fire  \n- Damage Vulnerabilities: cold"
         
     elif Type == "Fey" or Type == 16:
-        if Dice() == 1:
-            r = "\n At will: druidcraft \n    1/day each: confusion, dancing lights, detect evil and good, detect thoughts, dispel magic, entangle, fly, phantasmal force, polymorph, sleep"
         if Dice() == 1:
             r = r + "\n - Invisibility"
         if Dice() == 1:
@@ -1213,7 +1438,7 @@ def Actions(Type=Dice(60)):
         
     elif Type == "Lycan" or Type ==25:
         r = r+ "\n- Shapechanger"
-        r = r+"\n-Pack Tactics"
+        r = r+"\n- Pack Tactics"
         
     elif Type == "Orc" or Type == 25:
         r = r+ "\n- Aggressive"
@@ -1284,29 +1509,29 @@ def Actions(Type=Dice(60)):
         r = r+ "\n- Luring Song"
     
     elif Type == "Cultist" or Type == 33:
-        r = r+ "\n- Cantrips (at will): light, sacred flame, thaumaturgy \n 1st level (4 slots): command, inflict wounds, shield of faith. \n 2nd level (3 slots): hold person, spiritual weapon"
+
         if Dice(2)==1:
             r = r+ "\n Dark Devotion.\n\t The cultist has advantage on saving throws against being charmed or frightened."
         
         
     elif Type == "Fiend" or Type == 34:
-        if Dice()==1:
+        if Dice(3)==1:
             r = r + "\nDamage Resistances cold"
-        if Dice()==1:
+        if Dice(3)==1:
             r = r + "\nDamage Resistances: fire"
-        if Dice()==1:
+        if Dice(3)==1:
             r = r + "\nDamage Resistances: lightning"
-        if Dice()==1:
+        if Dice(3)==1:
             r = r + "\nDamage Resistances: bludgeoning, piercing, and slashing from nonmagical attacks" 
-        if Dice()==1:
+        if Dice(3)==1:
             r = r + "\nDamage Immunities: poison"
-        if Dice()==1:
+        if Dice(3)==1:
             r = r + "\nDamage Immunities: fire"
-        if Dice()==1:
+        if Dice(3)==1:
             r = r + "\nCondition Immunities: charmed"
-        if Dice()==1:
+        if Dice(3)==1:
             r = r + "\nCondition Immunities: frightened"
-        if Dice()==1:
+        if Dice(3)==1:
             r = r + "\nCondition Immunities: poisoned"
         if Dice(2)==1:
             r = r + "\n Darkvision \n\t 60 ft."
@@ -1317,7 +1542,7 @@ def Actions(Type=Dice(60)):
             r = r + "\n Devil's Sight. \n\t Magical darkness doesn't impede the Fiend's darkvision."
         if Dice()==1:
             r = r +"\nMagic Resistance"
-        if Dice(2) == 1:
+        if Dice(3) == 1:
             r = r + "\n- Shapechanger"
         if Dice(2) == 1:
             r = r + "\n- Scare (1/Day)."
@@ -1352,26 +1577,26 @@ def Actions(Type=Dice(60)):
         if Dice(2) == 1:
             r = r + "\n- Sneak Attack (1/Turn)."
         
-    elif Type == "Berserker" or Type == 35:
+    elif Type == "Berserker" or Type == 37:
         r = r + "\n- Multiattack"
         r = r + "\n- Reckless"
         
-    elif Type == 36:
+    elif Type == 38:
         r = r+"\n    At will: animal friendship (snakes) \n 3/day each: poison spray, suggestion"
 
-    elif Type == "Centaur" or Type == 37:
-        r = r + "\nSkills Athletics +6, Perception +3, Survival +3\n- Charge\n- Multiattack"
-        
-    elif Type == 38:
-        r = r+ "\n    Cantrips (at will): sacred flame, thaumaturgy \n 1st level (3 slots): bane, shield of faith"
-        
-    elif Type == "Druid" or Type == 39:
-        r = r + "\n- Cantrips (at will): druidcraft, produce flame, shillelagh \n 1st level (4 slots): entangle, longstrider, speak with animals, thunderwave \n2nd level (3 slots): animal messenger, barkskin\n"
+    elif Type == "Centaur" or Type == 39:
+        r = r + "\n- Charge\n- Multiattack"
         
     elif Type == 40:
+        r = r+ "\n    Cantrips (at will): sacred flame, thaumaturgy \n 1st level (3 slots): bane, shield of faith"
+        
+    elif Type == "Druid" or Type == 41:
+        r = r + "\n- Cantrips (at will): druidcraft, produce flame, shillelagh \n 1st level (4 slots): entangle, longstrider, speak with animals, thunderwave \n2nd level (3 slots): animal messenger, barkskin\n"
+        
+    elif Type == 42:
         r = r + "\n-At will: mage hand (the hand is invisible) \n 3/day each: feather fall, jump, see invisibility, shield"
 
-    elif Type == "Monstrosity" or Type == 41:
+    elif Type == "Monstrosity" or Type == 43:
         r = r + "\n-Shapechanger"   
         if Dice(2) == 1:
             r = r + "\n-False Appearance"  
@@ -1382,13 +1607,6 @@ def Actions(Type=Dice(60)):
         if Dice(2) == 1:
             r = r + "\n- Flight.\n\t 60 ft.\n"  
 
-
-    elif Type == "Giant" or Type == 42:
-        r = r + "\n-STR +" + str(Dice(12))  
-
-    elif Type == 43:
-        r = r + "\n-Cantrips (at will): guidance, resistance, thaumaturgy\n 1st level (4 slots): bless, command\n 2nd level (2 slots): augury, spiritual weapon (spear) "
-
     elif Type == "Priest" or Type == 45:
         r = r + "\nDivine Eminence"
         r = r + "\nCantrips (at will): light, sacred flame, thaumaturgy\n 1st level (4 slots): cure wounds, guiding bolt, sanctuary \n 2nd level (3 slots): lesser restoration, spiritual weapon \n 3rd level (2 slots): dispel magic, spirit guardians"
@@ -1397,7 +1615,6 @@ def Actions(Type=Dice(60)):
         r = r + "\n Rampage.\n\t When the gnoll reduces a creature to 0 hit points with a melee attack on its turn, the gnoll can take a bonus action to move up to half its speed and make a bite attack."
  
     elif Type == "Shaman" or Type == 47:
-        r = r + "\n Cantrips (at will): druidcraft, produce flame, thorn whip \n\t 1st level (4 slots): entangle, fog cloud \n\t 2nd level (3 slots): heat metal, spike growth \n\t 3rd level (2 slots): conjure animals, plant growth"
         if Dice(2)==1:
             r = r + "\n Change Shape: \n\t The Shaman magically polymorphs into a Beast, remaining in that form for up to 1 hour. It can revert to its true form as a bonus action. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
             
@@ -1419,12 +1636,20 @@ def Actions(Type=Dice(60)):
     elif Type == "Noble" or Type == 52:
         r = r + "\n- Parry \n\t The noble adds 2 to its AC against one melee attack that would hit it. To do so, the noble must see the attacker and be wielding a melee weapon."
     
-    elif Type == "Beastfolk" or Type == 8:
+    elif Type == "Beastfolk" or Type == 53:
         r = r + "\n- Speak with Animal \n\t The Beastfolk can communicate simple concepts to his affinity animal when it speaks in Beast language."
     else :
-        r = r + "- Multiattack"
+        if isinstance(Type, int):
+            r = r + Actions(Dice(Type - 1))
+        else:
+            r = r + Actions(Dice(100))
     return r
     
+
+
+
+
+
 
 
 
@@ -1434,8 +1659,13 @@ def Legendary(Type=Dice(10)):
     if Type == "Human" or Type == 1:
         r = r+ "\n- Attack"
     else:
-        r = r + Actions(Type)
+        if Dice(2)==1:
+            r = r + "\n- Attack: \n\t It can do a simple attack to any creature" 
+        if Dice(2)==1:
+            r += "\n- Move: \n\t It can move half their movement"
     return r
+    
+    
     
     
     
@@ -1467,7 +1697,7 @@ def NPC():
     
     Lvl = Dice(20)+Dice(20)
     rc = Race()
-    
+    if rc == "Giant": STR += Dice(12)
     
     print(Title())
     print(bg)
@@ -1477,7 +1707,7 @@ def NPC():
 
     print("Lvl:", Lvl, "   HP:", Lvl*(Dice(12) + Dice(2)*Modifier(CON)))
     print("AC:", 10 + Modifier(DEX) + Modifier(Dice(Lvl+10)))
-    print("\n\t"," STR:", STR,"\t", Modifier(STR),"\n\t",
+    print("\n\n\t"," STR:", STR,"\t", Modifier(STR),"\n\t",
         "DEX:", DEX," \t", Modifier(DEX),"\n\t"
         "CON:", CON," \t",  Modifier(CON),"\n\t"
         "INT:", INT," \t",  Modifier(INT),"\n\t"
@@ -1494,24 +1724,24 @@ def NPC():
     print("\n")
    
     print("Skills:")
-    if Dice(6) <= Modifier(STR): print("Athletics:+",Proficiency(STR), end=" ")
-    if Dice(6) <= Modifier(DEX): print("Acrobatics:+",Proficiency(DEX), end=" ")
-    if Dice(6) <= Modifier(DEX): print("Sleight of Hand:+",Proficiency(DEX), end=" ")
-    if Dice(6) <= Modifier(DEX): print("Stealth:+",Proficiency(DEX), end=" ")
-    if Dice(6) <= Modifier(INT): print("Arcana:+",Proficiency(INT), end=" ")
-    if Dice(6) <= Modifier(INT): print("History:+",Proficiency(INT), end=" ")
-    if Dice(6) <= Modifier(INT): print("Investigation:+",Proficiency(INT), end=" ")
-    if Dice(6) <= Modifier(INT): print("Nature:+",Proficiency(INT), end=" ")
-    if Dice(6) <= Modifier(INT): print("Religion:+",Proficiency(INT), end=" ")
-    if Dice(6) <= Modifier(WIS): print("Animal Handling:+",Proficiency(WIS), end=" ")
-    if Dice(6) <= Modifier(WIS): print("Insight:+",Proficiency(WIS), end=" ")
-    if Dice(6) <= Modifier(WIS): print("Medicine:+",Proficiency(WIS), end=" ")
-    if Dice(6) <= Modifier(WIS): print("Perception:+",Proficiency(WIS), end=" ")
-    if Dice(6) <= Modifier(WIS): print("Survival:+",Proficiency(WIS), end=" ")
-    if Dice(6) <= Modifier(CHA): print("Deception:+",Proficiency(CHA), end=" ")
-    if Dice(6) <= Modifier(CHA): print("Intimidation:+",Proficiency(CHA), end=" ")
-    if Dice(6) <= Modifier(CHA): print("Performance:+",Proficiency(CHA), end=" ")
-    if Dice(6) <= Modifier(CHA): print("Persuasion:+",Proficiency(CHA), end=" ")
+    if Dice() <= Modifier(STR): print("Athletics:+",Proficiency(STR), end=" ")
+    if Dice() <= Modifier(DEX): print("Acrobatics:+",Proficiency(DEX), end=" ")
+    if Dice() <= Modifier(DEX): print("Sleight of Hand:+",Proficiency(DEX), end=" ")
+    if Dice() <= Modifier(DEX): print("Stealth:+",Proficiency(DEX), end=" ")
+    if Dice() <= Modifier(INT): print("Arcana:+",Proficiency(INT), end=" ")
+    if Dice() <= Modifier(INT): print("History:+",Proficiency(INT), end=" ")
+    if Dice() <= Modifier(INT): print("Investigation:+",Proficiency(INT), end=" ")
+    if Dice() <= Modifier(INT): print("Nature:+",Proficiency(INT), end=" ")
+    if Dice() <= Modifier(INT): print("Religion:+",Proficiency(INT), end=" ")
+    if Dice() <= Modifier(WIS): print("Animal Handling:+",Proficiency(WIS), end=" ")
+    if Dice() <= Modifier(WIS): print("Insight:+",Proficiency(WIS), end=" ")
+    if Dice() <= Modifier(WIS): print("Medicine:+",Proficiency(WIS), end=" ")
+    if Dice() <= Modifier(WIS): print("Perception:+",Proficiency(WIS), end=" ")
+    if Dice() <= Modifier(WIS): print("Survival:+",Proficiency(WIS), end=" ")
+    if Dice() <= Modifier(CHA): print("Deception:+",Proficiency(CHA), end=" ")
+    if Dice() <= Modifier(CHA): print("Intimidation:+",Proficiency(CHA), end=" ")
+    if Dice() <= Modifier(CHA): print("Performance:+",Proficiency(CHA), end=" ")
+    if Dice() <= Modifier(CHA): print("Persuasion:+",Proficiency(CHA), end=" ")
     print("\n")
     
     print("Passive Perception:", 10 + Modifier(WIS) + Modifier(Lvl/2) )
@@ -1519,7 +1749,9 @@ def NPC():
     print("\n")
     print("COMBAT ACTIONS:")
     print("To hit: +", Modifier(max(STR,DEX)+ Lvl/5))
-    print (Attack("Melee"))
+    print("Simple Attack:")
+    print (Attack(Dice(4)))
+    print("Special Attack: {} Charges/Combat".format(Dice( 1 + int(Lvl/4))))
     print (SpecialAttack(Lvl, Modifier(random.choice([STR,DEX,CON,INT,WIS,CHA ]))))
 
     print("\n\n")
@@ -1527,13 +1759,13 @@ def NPC():
     print(" To hit: +", Modifier(max(INT,WIS,CHA)+ Lvl/5))
     print(Magic(Lvl,rc,bg))
     
-    print("\n")
+    print("\n\n")
     print(Actions(bg))
     print(Actions(rc))
     print(Actions())
     print("\n")
 
-    if Lvl >= 15:
+    if Dice(Lvl) >= 15:
         print("LEGENDARY ACTIONS:")
         print(Legendary(bg))
         print(Legendary(rc))
