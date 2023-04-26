@@ -465,10 +465,7 @@ def Race():
         "Beast", "Beast", "Beast"
         "Beastfolk", "Beastfolk"
         "Celestial", 
-        "Centaur",
         "Construct",
-        "Demon",
-        "Devil",
         "Dragon",
         "Dragonborn", "Dragonborn",
         "Dwarf","Dwarf","Dwarf",
@@ -486,7 +483,6 @@ def Race():
         "Kobold",
         "Lizardfolk",
         "Merfolk",
-        "Minotaur",
         "Monstrosity",
         "Nymph",
         "Ogre",
@@ -512,6 +508,12 @@ def Race():
 
 
 
+def AberrationName():
+    Names = [
+        "Intellect Devourer",
+        "Illithid",
+        ""]
+    return random.choice(Names)
 
 def AvenName():
     Names = [
@@ -561,23 +563,25 @@ def BeastName():
 def BeastfolkName():
     Names = [
         "Centaur",
-        "Lycan",
+        "Lycan", 
+        "Minotaur",
         "Werewolf",
         ""]
     return random.choice(Names)
-    
+
+def FiendName():
+    Names = [
+        "Devil",
+        "Demon",
+        ""]
+    return random.choice(Names)
+
 def MonstrosityName():
     Names = [
         "Griffon",
         ""]
     return random.choice(Names)
 
-def AberrationName():
-    Names = [
-        "Intellect Devourer",
-        "Illithid",
-        ""]
-    return random.choice(Names)
 
 def PlantName():
     Names = [
@@ -609,6 +613,7 @@ def Name(Type):
     if Type == "Beast": return BeastName()
     if Type == "Beastfolk": return BeastfolkName()
     if Type == "Construct": return ConstructName()
+    if Type == "Fiend": return FiendName()
     if Type == "Monstrosity": return MonstrosityName()
     if Type == "Plant": return PlantName()
     if Type == "Undead": return UndeadName()
