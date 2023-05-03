@@ -1,5 +1,6 @@
 # NPC creator 
 import random
+from math import floor
 
 def Title():
     descriptor = [
@@ -45,6 +46,7 @@ def Title():
         "The Clokwork",
         "The Cursed",
         "The Crab",
+        "The Crimson",
         "The Deadly",
         "The Death",
         "The Dawning",
@@ -149,6 +151,7 @@ def Title():
         "The Smiling",
         "The Smoke",
         "The Spring",
+        "The Steam",
         "The Storm",
         "The Stone",
         "The Starting",
@@ -169,6 +172,7 @@ def Title():
         "The Unicorn",
         "The Vampiric",
         "The Veteran",
+        "The Violet",
         "The Voice",
         "The Void",
         "The War",
@@ -469,7 +473,7 @@ def Race():
         "Human","Human","Human","Human","Human","Human","Human",
         "Aberration",
         "Aven",
-        "Beast", "Beast", "Beast"
+        "Beast", "Beast", "Beast",
         "Beastfolk", "Beastfolk",
         "Celestial", 
         "Construct",
@@ -532,7 +536,7 @@ def AvenName():
 
 def BeastName():
     Names = [
-        "Baboon",
+        "Ape", "Baboon", "Monkey",
         "Badger",
         "Bat",
         "Blood Hawk",
@@ -614,6 +618,7 @@ def MonstrosityName():
 def PlantName():
     Names = [
         "Awakened Plant",
+        "Fungus",
         "Myconid",
         "Willow",
         ""]
@@ -624,6 +629,7 @@ def UndeadName():
         "Crawling Limb",
         "Skelleton",
         "Vampire",
+        "Zombie",
         ""]
     return random.choice(Names)
     
@@ -665,7 +671,7 @@ def AbilityScore():
     return d1+d2+d3+d4 - min(d1,d2,d3,d4) + Dice(3)-1 + Dice(8)-Dice(8)
     
 def Modifier(AS):
-    return int((AS-10)/2)
+    return floor((AS-10)/2)
 
 def Proficiency(AS):
     return Dice(Modifier(AS)*2)
@@ -966,47 +972,82 @@ def Magic(Lvl, race = Race(), background = Background()):
         if background == "Acolyte":
             if Dice(2) == 1:
                 cantrip +=  "\t light"
+                
+        if background == "Acolyte":
             if Dice(2) == 1:
                 cantrip +=  "\t sacred flame"
+                
+        if background == "Acolyte":
             if Dice(2) == 1:
                 cantrip +=  "\t thaumaturgy"
-            slots1 += Dice(3)
+            
+        if background == "Acolyte":
             if Dice(2) == 1:
                 first += "\t bless"
+                slots1 += Dice(3)
+                
+        if background == "Acolyte":
             if Dice(2) == 1:
-                first += "\t cure wounds"            
+                first += "\t cure wounds"  
+                slots1 += Dice(3)
+                
+        if background == "Acolyte":
             if Dice(2) == 1:
-                first += "\t sanctuary"            
+                first += "\t sanctuary"   
+                slots1 += Dice(3)
     
     
         if background == "Cultist":
             if Dice(2) == 1:
                 cantrip +=  "\t Light"
+
+        if background == "Cultist":
             if Dice(2) == 1:
                 cantrip += "\t Sacred flame"
+
+        if background == "Cultist":
             if Dice(2) == 1:
                 cantrip += "\t Thaumaturgy" 
-            slots1 += Dice(4)
+
+            
+        if background == "Cultist":
             if Dice(2) == 1:
                 first += "\t Command"
+                slots1 += Dice(4)
+
+        if background == "Cultist":
             if Dice(2) == 1:
                 first += "\t inflict wounds"
+                slots1 += Dice(4)
+
+        if background == "Cultist":
             if Dice(2) == 1:
                 first += "\t shield of faith"
-            slots2 += Dice(3)
+                slots1 += Dice(4)
+            
+
+        if background == "Cultist":
             if Dice(2) == 1:
                 second += "\t hold person" 
+                slots2 += Dice(3)
+
+        if background == "Cultist":
             if Dice(2) == 1:
                 second += "\t spiritual weapon"
+                slots2 += Dice(3)
 
         if background=="Healer":
             if Dice(2) == 1:
                 cantrip +=  "\t guidance" 
+
+        if background=="Healer":
             if Dice(2) == 1:
                 cantrip +=  "\t sacred flame"
-            slots1 += Dice(2)
+
+        if background=="Healer":
             if Dice(2) == 1:
                 first +=  "\t cure wounds"
+                slots1 += Dice(2)
             
         if background == "Mage":
             if Dice(2) == 1:
@@ -1079,10 +1120,18 @@ def Magic(Lvl, race = Race(), background = Background()):
                 
         if race == "Elemental":
             if Dice() == 1:
-                cantrip += "\n Cinder Breath \t (Recharge 6). The Elemental exhales a 15-foot cone of smoldering ash. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw or be blinded until the end of the Elemental's next turn."
-                
+                one += "\t blur"
+
         if race == "Elemental":
             if Dice() == 1:
+                cantrip += "\n Cinder Breath \t (Recharge 6). The Elemental exhales a 15-foot cone of smoldering ash. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw or be blinded until the end of the Elemental's next turn."
+
+        if race == "Elemental":
+            if Dice() == 1:
+                cantrip += "\n Steam Breath \t (Recharge 6). exhales a 15-foot cone of scalding steam. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw, taking 4 (1d8) fire damage on a failed save, or half as much damage on a successful one."
+                
+        if race == "Elemental":
+            if Dice(3) == 1:
                 one += "Summon Mephits (1/Day) \n\t The Elemental has a 25 percent chance of summoning 1d4 mephits. A summoned mephit appears in an unoccupied space within 60 feet of its summoner, acts as an ally of its summoner, and can't summon other mephits. It remains for 1 minute, until it or its summoner dies, or until its summoner dismisses it as an action."
             
         if race == "Elf":
@@ -1259,13 +1308,19 @@ def Actions(Type=""):
     if Type == "Beast" or Type == "Beastfolk": 
         if Dice() == 1:
             r = r+ "\n- Speed. \n\t 50 ft."
+
+    if Type == "Beast" or Type == "Beastfolk": 
         if Dice() == 1:
             r = r+ "\n- Climb. \n\t 30 ft."
+
+    if Type == "Beast" or Type == "Beastfolk": 
         if Dice() == 1:
             r = r+ "\n- Burrow. \n\t 10 ft."  
+
+    if Type == "Beast" or Type == "Beastfolk": 
         if Dice() == 1:
             r = r+ "\n- Fly. \n\t 60 ft."  
-            if Dice(2)==1:
+            if Dice(3)==1:
                 r = r+ "\n Flyby. \n\t The beast doesn't provoke opportunity attacks when it flies out of an enemy's reach."
                 
     if Type=="Beast" or Type=="Beastfolk": 
@@ -1328,7 +1383,12 @@ def Actions(Type=""):
             r = r+ "\n- Swim. \n\t 60 ft."  
             if Dice(2) == 1:
                 r = r + "\n- Underwater Camouflage. \n\t The beast has advantage on Dexterity (Stealth) checks made while underwater."
-
+                
+    if Type=="Beast" or Type=="Beastfolk": 
+        if Dice(8) == 1:
+            r = r+ "\n- Hold Breath. The beast can hold its breath for 15 minutes"
+            r = r+ "\n- Swim. \n\t 30 ft."  
+            
     if Type=="Beast" or Type=="Beastfolk": 
         if Dice() == 1:
             r = r+ "\n- Blood Frenzy \n\t The beast has advantage on melee attack rolls against any creature that doesn't have all its hit points."
@@ -1520,7 +1580,14 @@ def Actions(Type=""):
     if Type == "Lizardfolk":
         if Dice(2) == 1:
             r = r + "\n -  Spider Climb. \n\t The lizard can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+            
+    if Type == "Lizardfolk":
+        if Dice() == 1:
+            r = r + "\n - Stench.  \n\t Any creature other than a Lizardfolk that starts its turn within 5 feet of the Lizardfolk must succeed on a DC [10+%CON] Constitution saving throw or be poisoned until the start of the creature's next turn. On a successful saving throw, the creature is immune to the stench of all Lizardfolk for 1 hour."
 
+    if Type == "Lizardfolk":
+        if Dice() == 1:
+            r = r + "\n - Sunlight Sensitivity.  \n\t While in sunlight, the troglodyte has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
       
     if Type == "Nymph": 
         r = r+ "\n- Teleport"
@@ -1570,14 +1637,16 @@ def Actions(Type=""):
         if Dice() == 1:
             r = r + "\n - Turn Immunity \n\t The Undead is immune to effects that turn undead."
 
-
-
     if Type == "Undead":
         if Dice() == 1:
             r = r + "\n - Sunlight Sensitivity"
 
+    if Type == "Undead":
+        if Dice() == 1:
+            r = r + "\n - Undead Fortitude. \n\t If damage reduces the Undead to 0 hit points, it must make a Constitution saving throw with a DC of 5 + the damage taken, unless the damage is radiant or from a critical hit. On a success, the Undead drops to 1 hit point instead."
+
             
-    elif Type == "Ooze" or Type == 23:
+    if Type == "Ooze" or Type == 23:
         if Dice() == 1:
             r = r+ "\n- Amorphous"
         if Dice() == 1:
@@ -1647,11 +1716,19 @@ def Actions(Type=""):
 
     if Type == "Plant": 
         if Dice() == 1:
+            r = r+ "\n Condition Immunities:  deafened"
+
+    if Type == "Plant": 
+        if Dice() == 1:
             r = r+ "\n Condition Immunities: charmed"
             
     if Type == "Plant": 
         if Dice() == 1:
             r = r+ "\n Condition Immunities:   poisoned"
+
+    if Type == "Plant": 
+        if Dice() == 1:
+            r = r+ "\n Condition Immunities:  frightened"
 
         
     elif Type == "Spirit":
@@ -1818,11 +1895,15 @@ def Actions(Type=""):
     elif Type =="Guard" or Type == 50:
         r = r + "\n- Parry \n\t The Guard adds 2 to its AC against one melee attack that would hit it. To do so, the Guard must see the attacker and be wielding a melee weapon."
         
-    if Type == "Kobold" or Type == 51:    
+    if Type == "Kobold":    
         r = r + "\n- Darkvision \n\t 60ft."
         r = r + "\n- Pack Tactics \n\t The kobold has advantage on an attack roll against a creature if at least one of the kobold's allies is within 5 feet of the creature and the ally isn't incapacitated."
         r = r + "\n- Sunlight Sensitivity \n\t While in sunlight, the kobold has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
-    
+
+    if Type == "Kobold":    
+        if Dice() == 1:
+            r = r+ "\n Fly \t 30ft."
+
     if Type == "Noble":
         r = r + "\n- Parry \n\t The noble adds 2 to its AC against one melee attack that would hit it. To do so, the noble must see the attacker and be wielding a melee weapon."
     
@@ -1841,32 +1922,32 @@ def Actions(Type=""):
             
     if Type == "Plant": 
         if Dice() == 1:
-            r = r + "\n-Animating Spores"  
+            r = r + "\n - Animating Spores"  
             
     if Type == "Plant": 
         if Dice() == 1:
-            r = r + "\n-Hallucination Spores"  
+            r = r + "\n - Hallucination Spores"  
 
 
     if Type == "Plant": 
         if Dice() == 1:
-            r = r + "\n-Pacifying Spores"   
+            r = r + "\n - Pacifying Spores"   
             
     if Type == "Plant": 
         if Dice() == 1:
-            r = r + "\n-Rapport Spores (3/Day).\n\t A 10-foot radius of spores extends from the plant. These spores can go around corners and affect only creatures with an Intelligence of 2 or higher that aren't undead, constructs, or elementals. Affected creatures can communicate telepathically with one another while they are within 30 feet of each other. The effect lasts for 1 hour."   
+            r = r + "\n - Rapport Spores (3/Day).\n\t A 10-foot radius of spores extends from the plant. These spores can go around corners and affect only creatures with an Intelligence of 2 or higher that aren't undead, constructs, or elementals. Affected creatures can communicate telepathically with one another while they are within 30 feet of each other. The effect lasts for 1 hour."   
             
     if Type == "Plant": 
         if Dice() == 1:
-            r = r + "\n-Caustic Spores"   
+            r = r + "\n - Caustic Spores"   
             
     if Type == "Plant": 
         if Dice() == 1:
-            r = r + "\n-Infestation Spores"   
+            r = r + "\n - Infestation Spores"   
             
     if Type == "Plant": 
         if Dice() == 1:
-            r = r + "\n-Euphoria Spores"   
+            r = r + "\n - Euphoria Spores"   
             
     if Type == "Plant": 
         if Dice() == 1:
@@ -1884,7 +1965,7 @@ def Actions(Type=""):
         if Dice(2)==1:
             r= r + "\n- Multiattack \n\t The Warrior can attack an additional time on his turn."
 
-    else :
+    if Type == "":
         if Dice(2)==1:
             return Actions(Race())
         else:
@@ -2012,7 +2093,7 @@ def NPC():
     print("\n\n")
     print(Actions(bg))
     print(Actions(rc))
-    print(Actions())
+    print(Actions(""))
     print("\n")
 
     if Dice(Lvl) >= 15:
