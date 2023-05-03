@@ -29,6 +29,7 @@ def Title():
         "The Brass",
         "The Bronce",
         "The Brain",
+        "The Bringer",
         "The Butterfly",
         "The Cat",
         "The Camel",
@@ -86,7 +87,6 @@ def Title():
         "The Hive",
         "The Hunter",
         "The Hungry",
-        "The Hyena",
         "The Impulse",
         "The Inkwork",
         "The Iron",
@@ -168,6 +168,7 @@ def Title():
         "The Unicorn",
         "The Vampiric",
         "The Veteran",
+        "The Voice",
         "The Void",
         "The War",
         "The Warlord",
@@ -295,6 +296,7 @@ def Title():
         " Nightmare",
         " Nomad",
         " Of Justice",
+        "Of Death",
         "Of The Abyss",
         "Of the Autumn",
         "Of The Crown"
@@ -311,11 +313,13 @@ def Title():
         " Of the Old One",
         " Of The Plains",
         " Of the Pack",
+        "Of The People",
         " Of The Sands",
         " Of The Sea",
         " Of The South",
         "Of The Summer",
         "Of The Spring",
+        "Of The Storm"
         " Of The West",
         " Of The Winter",
         " Oni",
@@ -325,6 +329,7 @@ def Title():
         "Owl",
         " Pathologist",
         " Paw",
+        "Pixie",
         "Pirate",
         " Poet",
         "Priest",
@@ -360,6 +365,7 @@ def Title():
         "Specter",
         "Swashbuckler",
         "Swarm",
+        "Sword",
         "Terror",
         "Trapper",
         "Trapecist",
@@ -433,8 +439,8 @@ def Background():
         "Student",
         "Spy",
         "Spellcaster",
-        "Thug", 
         "Traveler",
+        "Vandit",
         "Veteran",
         "Warrior",
         "Warlock",
@@ -569,10 +575,30 @@ def BeastfolkName():
         ""]
     return random.choice(Names)
 
+def ConstructName():
+    Names = [
+        "Drone",
+        "Homunculus",
+        "Flying Sword",
+        "Living Rug",
+        ""]
+    return random.choice(Names)
+
+def DragonName():
+    Names = [
+        ""]
+    return random.choice(Names)
+
 def FiendName():
     Names = [
         "Devil",
         "Demon",
+        ""]
+    return random.choice(Names)
+
+def FeyName():
+    Names = [
+        "Pixie",
         ""]
     return random.choice(Names)
 
@@ -598,14 +624,6 @@ def UndeadName():
         ""]
     return random.choice(Names)
     
-def ConstructName():
-    Names = [
-        "Drone",
-        "Homunculus",
-        "Flying Sword",
-        "Living Rug",
-        ""]
-    return random.choice(Names)
     
 def Name(Type):
     if Type == "Aberration": return AberrationName()
@@ -613,6 +631,9 @@ def Name(Type):
     if Type == "Beast": return BeastName()
     if Type == "Beastfolk": return BeastfolkName()
     if Type == "Construct": return ConstructName()
+    if Type == "Dragon": return DragonName()
+    if Type == "Dragonborn": return DragonName()
+    if Type == "Fey": return FeyName()
     if Type == "Fiend": return FiendName()
     if Type == "Monstrosity": return MonstrosityName()
     if Type == "Plant": return PlantName()
@@ -1060,7 +1081,7 @@ def Magic(Lvl, race = Race(), background = Background()):
         if race == "Fey":
             if Dice() == 1:
                 cantrip += "\t Teleport (Recharge 4–6). \n\t The Fey magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the dog can make one bite attack."
-            if Dice() == 1:
+            if Dice(3) == 1:
                 cantrip += "\t druidcraft"
             if Dice() == 1:
                 one += "\t confusion"
@@ -1124,66 +1145,74 @@ def Magic(Lvl, race = Race(), background = Background()):
 
 
 
-def Actions(Type=Dice(60)):
+
+
+
+
+
+
+
+def Actions():
     r = ""
 
-    if Type == "Warrior" or Type == 1:
-        r = r + "\n- Pack Tactics \n\t The warrior has advantage on an attack roll against a creature if at least one of the warrior's allies is within 5 feet of the creature and the ally isn't incapacitated."
-    if Type == "Warrior" or Type == 2:
-        if Dice(2)==1:
-            r= r + "\n- Multiattack \n\t The Warrior can attack an additional time on his turn."
-        
-    elif Type == "Plant" or Type == 3: 
-        r = r+ "\n- Damage Vulnerabilities: fire"
-        if Dice() == 1:
-            r = r+ "\n- False Appereance: \n\t While the plant remains motionless, it is indistinguishable from a normal plant."
+    if Type == "Dragon":
+        r = r+ "\n- Flight"
+
+    if Type == "Dragon":
+        r = r+ "\n- Language: Draconic"
+
+    if Type == "Dragon":
+        if Dice(2) == 1:
+            r = r+ "\n- Darkvision \n\t 60 ft"
+
+    if Type == "Dragon":
+        r = r+ "\n- Breath Weapons"
+        rdm = Dice(10)
+        if rdm == 1:
+            r = r + "\n - Fire Breath"
+        elif rdm == 2:
+            r = r + "\n - Sleep Breath"
+        elif rdm == 3:
+            r = r + "\n - Acid Breath"
+        elif rdm == 4:
+            r = r + "\n - Slowing Breath"
+        elif rdm == 5:
+            r = r + "\n - Euphoria Breath"
+        elif rdm == 6:
+            r = r + "\n - Repulsion Breath"
+        elif rdm == 7:
+            r = r + "\n - Poison Breath"
             
-    elif Type == "Plant" or Type == 4: 
+    if Type == "Dragon":
+        if Dice(2) == 1:
+            r = r + "\n - Amphibious"
+
+    if Type == "Dragon":
         if Dice() == 1:
-            r = r+ "\n- Entangling Plants"
-    elif Type == "Plant" or Type == 5: 
-        if Dice() == 1:
-            r = r+ "\n Damage Immunities: poison"
-    elif Type == "Plant" or Type == 6: 
-        if Dice() == 1:
-            r = r+ "\n Condition Immunities:  blinded"
-    elif Type == "Plant" or Type == 7: 
-        if Dice() == 1:
-            r = r+ "\n Condition Immunities:  charmed"
-    elif Type == "Plant" or Type == 8: 
-        if Dice() == 1:
-            r = r+ "\n Condition Immunities:   poisoned"
-    elif Type == "Plant" or Type == 9: 
-        if Dice() == 1:
-            r = r+ "\n Condition Immunities:  frightened"
-    elif Type == "Plant" or Type == 10: 
-        if Dice() == 1:
-            r = r + "\n-Distress Spores. \n\t When the plant takes damage, all other plants within 240 feet of it can sense its pain."  
-    elif Type == "Plant" or Type == 11: 
-        if Dice() == 1:
-            r = r + "\n-Sun Sickness. \n\t While in sunlight, the plant has disadvantage on ability checks, attack rolls, and saving throws. The plant dies if it spends more than 1 hour in direct sunlight."
-    elif Type == "Plant" or Type == 12: 
-        if Dice() == 1:
-            r = r + "\n-Animating Spores"  
-    elif Type == "Plant" or Type == 13: 
-        if Dice() == 1:
-            r = r + "\n-Hallucination Spores"  
-        if Dice() == 1:
-            r = r + "\n-Pacifying Spores"   
-        if Dice() == 1:
-            r = r + "\n-Rapport Spores (3/Day).\n\t A 10-foot radius of spores extends from the plant. These spores can go around corners and affect only creatures with an Intelligence of 2 or higher that aren't undead, constructs, or elementals. Affected creatures can communicate telepathically with one another while they are within 30 feet of each other. The effect lasts for 1 hour."   
-        if Dice() == 1:
-            r = r + "\n-Caustic Spores"   
-        if Dice() == 1:
-            r = r + "\n-Infestation Spores"   
-        if Dice() == 1:
-            r = r + "\n-Euphoria Spores"   
-        if Dice() == 1:
-            r = r + "\n Condition Immunities\n\t blinded, deafened, frightened"
-        if Dice() == 1:
-            r = r + "\n Blindsight\n\t 30 ft"        
-        
-    elif Type == "Nymph" or Type == 4: 
+            r = r + "\n - Blindsight \n\t 10 ft"
+
+    if Type == "Dragon": 
+        if Dice(2) == 1:
+            r = r+ "\n- Keen Senses \n\t The Dragon has advantage on Wisdom (Perception) checks that rely on sight, hearing, or smell."
+            
+    if Type == "Dragon": 
+        if Dice(2) == 1:
+            r = r+ "\n- Limited Telepathy \n\t The Dragon can magically communicate simple ideas, emotions, and images telepathically with any creature within 100 feet of it that can understand a language."
+            
+    if Type == "Dragon": 
+        if Dice(2) == 1:
+            r = r+ "\n- Magic Resistance \n\t The Dodragon has advantage on saving throws against spells and other magical effects."           
+            
+    if Type == "Fey": 
+        if Dice(2) == 1:
+            r = r+ "\n- Magic Resistance \n\t The Fae has advantage on saving throws against spells and other magical effects."
+
+    if Type == "Fey": 
+        if Dice(2) == 1:
+            r = r+ "\n- Superior Invisibility \n\t  The Fae magically turns invisible until its concentration ends (as if concentrating on a spell). Any equipment the Fae wears or carries is invisible with it."
+
+
+    if Type == "Nymph": 
         r = r+ "\n- Teleport"
         r = r+ "\n- Magic Resistance"
         r = r+ "\n- Speak with Beasts and Plants"
@@ -1191,7 +1220,7 @@ def Actions(Type=Dice(60)):
         r = r+ "\n- Fey Charm"
         
         
-    elif Type == "Beast" or Type == "Beastfolk" or Type == 5: 
+    if Type == "Beast" or Type == "Beastfolk": 
         if Dice() == 1:
             r = r+ "\n- Speed. \n\t 50 ft."
         if Dice() == 1:
@@ -1203,7 +1232,7 @@ def Actions(Type=Dice(60)):
             if Dice(2)==1:
                 r = r+ "\n Flyby. \n\t The beast doesn't provoke opportunity attacks when it flies out of an enemy's reach."
                 
-    elif Type=="Beast" or Type=="Beastfolk" or Type == 6: 
+    if Type=="Beast" or Type=="Beastfolk": 
         if Dice(2) == 1:        
             if Dice(4) == 1:
                 r = r+ "\n- Darkvision." 
@@ -1223,8 +1252,10 @@ def Actions(Type=Dice(60)):
                 if Dice()==1:
                     r = r+ "\nEcholocation. \n\t The Beast can't use its blindsight while deafened."
                     r = r+ "\nKeen Hearing. \n\t The beast has advantage on Wisdom (Perception) checks that rely on hearing."
+
+    if Type=="Beast" or Type=="Beastfolk": 
         if Dice() == 1:
-            r = r+ "\n- Keen Senses\n\t The beast has advantage on Wisdom (Perception) checks that rely on senses."
+            r = r+ "\n- Keen Senses\n\t The beast has advantage on Wisdom (Perception) checks that rely on sight, hearing, or smell."
         else:
             if Dice() == 1:
                 r = r+ "\n- Keen Smell. \n\t The Beast has advantage on Wisdom (Perception) checks that rely on smell."    
@@ -1232,39 +1263,60 @@ def Actions(Type=Dice(60)):
                 r = r+ "\n- Keen Sight. \n\tThe beast has advantage on Wisdom (Perception) checks that rely on sight."
             if Dice() == 1:
                 r = r+ "\n- Keen Hearing. \n\tThe beast has advantage on Wisdom (Perception) checks that rely on hearing."
+                
+    if Type=="Beast" or Type=="Beastfolk": 
         if Dice() == 1:
             r = r+ "\n-  Pack Tactics. \n\t The Beast has advantage on an attack roll against a creature if at least one of the beast's allies is within 5 feet of the creature and the ally isn't incapacitated."
+
+    if Type=="Beast" or Type=="Beastfolk": 
         if Dice() == 1:
             r = r+ "\n-  Multiattack. \n\t The Beast makes two attacks."
 
+    if Type=="Beast" or Type=="Beastfolk": 
         if Dice(8) == 1:
             r = r+ "\n - Grappler. \n\t On an attack, the target is grappled,  [DC 10+%STR]"
             if Dice(2) == 1:
                 r = r+ "\n - Constrict. \n\t Until the grapple ends, the creature is restrained. The creature can't constrict another creature."
+
+    if Type=="Beast" or Type=="Beastfolk": 
         if Dice(8) == 1:
             r = r+ "\n - Charge \n\t If the Beast moves at least 20 feet straight toward a target and then hits it with an attack on the same turn, the target takes an extra [2d6+%STR] bludgeoning damage. If the target is a creature, it must succeed on a DC=[10+%STR] Strength saving throw or be knocked prone."
+
+    if Type=="Beast" or Type=="Beastfolk": 
         if Dice(8) == 1:
             r = r+ "\n - Relentless \n\t Recharges after a Short or Long Rest). \n\t If the beast takes 7 damage or less that would reduce it to 0 hit points, it is reduced to 1 hit point instead."
+
+    if Type=="Beast" or Type=="Beastfolk": 
         if Dice(8) == 1:
             r = r+ "\n- Water Breathing. The beast can breathe underwater"
             r = r+ "\n- Swim. \n\t 60 ft."  
             if Dice(2) == 1:
                 r = r + "\n- Underwater Camouflage. \n\t The beast has advantage on Dexterity (Stealth) checks made while underwater."
+
+    if Type=="Beast" or Type=="Beastfolk": 
         if Dice() == 1:
             r = r+ "\n- Blood Frenzy \n\t The beast has advantage on melee attack rolls against any creature that doesn't have all its hit points."
+
+    if Type=="Beast" or Type=="Beastfolk": 
         if Dice(8) == 1:
             r = r+ "\n- Amphibious"
             r = r+ "\n- Swim. \n\t 30 ft."  
             if Dice() == 1:
                 r = r+ "\n- Standing Leap. \n\t The Beast's long jump is up to half his speed in feet and its high jump is up to third his speed, with or without a running start."  
+
+    if Type=="Beast" or Type=="Beastfolk": 
         if Dice(8) == 1:
             r = r + "\n- Spider Climb \n\t The beast can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."  
             if Dice(2) == 1:
                 r = r + "\n- Web Sense \n\t While in contact with a web, the spider knows the exact location of any other creature in contact with the same web."
             if Dice(2) == 1:
                 r = r + "\n- Web Walker \n\t The spider ignores movement restrictions caused by webbing."
+
+    if Type=="Beast" or Type=="Beastfolk": 
         if Dice() == 1:
             r = r+ "\n - Running Leap"
+ 
+    if Type=="Beast" or Type=="Beastfolk": 
         if Dice(8) == 1:
             r = r+ "\n - Pounce \n\t If the beast moves at least 20 feet straight toward a creature and then hits it with an attack on the same turn, that target must succeed on a DC [10+%STR] Strength saving throw or be knocked prone. If the target is prone, the Beast can make one attack against it as a bonus action."
         if Dice(8) == 1:
@@ -1287,7 +1339,10 @@ def Actions(Type=Dice(60)):
                 r = r+ "\n-  Hold Breath. \n\t  The beast can hold its breath for 15 minutes.\n-  swimming \n\t  speed of 30 feet.)"
                 r = r+ "\n-  Spider Climb. \n\t  The beast can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
             
-    elif Type == "Elf" or Type == 6:
+    if Type == "Beastfolk":
+        r = r + "\n- Speak with Animal \n\t The Beastfolk can communicate simple concepts to his affinity animal when it speaks in Beast language."
+
+    if Type == "Elf" or Type == 6:
         r = r+ "\nFey Ancestry.\n\t The Elf has advantage on saving throws against being charmed, and magic can't put the Elf to sleep."
         
         if Dice(4) <= 3:
@@ -1297,14 +1352,14 @@ def Actions(Type=Dice(60)):
             r = r+ "\nSunlight Sensitivity. \n\t While in sunlight, the Elf has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
 
 
-    elif Type == "Aven(Birdfolk)" or Type == 7:
+    if Type == "Aven(Birdfolk)" or Type == 7:
         r = r+ "\n- Fly \n\t 50ft"
         
-    elif Type == "Construct" or Type == 8:
+    if Type == "Construct" or Type == 8:
         r = r+ "\n- Damage Immunities: Poison"
-    elif Type == "Construct" or Type == 9:
+    if Type == "Construct" or Type == 9:
         r = r+ "\n- Condition Immunities: Poisoned, Charmed"
-    elif Type == "Construct" or Type == 10:
+    if Type == "Construct" or Type == 10:
         if Dice(2)==1:
             r = r+ "\n- Damage Immunities: psychic"
         if Dice()==1:
@@ -1338,10 +1393,10 @@ def Actions(Type=Dice(60)):
         if Dice()==1:
             r = r+ "\n- Antimagic Susceptibility:\n\t The Construct is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Construct must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute."
 
-    elif Type == "Goblin" or Type == 9:
+    if Type == "Goblin" or Type == 9:
         r = r+ "\n- Nimble Scape \n\t The goblin can take the Disengage or Hide action as a bonus action on each of its turns."
         
-    elif Type == "Aberration" or Type == 10:
+    if Type == "Aberration" or Type == 10:
         if Dice()==1: 
             r = r+"\nDamage Resistances:  \n\t bludgeoning, piercing, and slashing from nonmagical attacks"
         if Dice()==1: 
@@ -1385,31 +1440,42 @@ def Actions(Type=Dice(60)):
         if rdm == 1:
             r = "\n- Heated Body \n- Damage Immunities: fire  \n- Damage Vulnerabilities: cold"
         
-    elif Type == "Fey" or Type == 16:
+    elif Type == "Fey":
         if Dice() == 1:
             r = r + "\n - Invisibility"
+            
+    elif Type == "Fey":
         if Dice() == 1:
             r = r + "\n - Heart Sight"
+            
+    elif Type == "Fey":
         if Dice() == 1:
             r = r + "\n -  Teleport (Recharge 4–6). \n\t The Fey magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the Fey can make one attack."
-        return r
+
+    elif Type == "Assassin":
+        r =+ "\n- Superior Invisibility"
         
-    elif Type == "Assassin" or Type == 17:
-        return "\n- Superior Invisibility"
-        
-    elif Type == "Undead" or Type == 18:
+    elif Type == "Undead":
         r = r + "\nDamage Immunities: poison"+"\n Condition Immunities: exhaustion, poisoned, charmed"
+        
+    elif Type == "Undead":
         if Dice(2) == 1:
             r = r + "\n - Undead Fortitude"
+            
+    elif Type == "Undead":
         if Dice(2) == 1:
             r = r + "\n -Stench"
+
+    elif Type == "Undead":
         if Dice(2) == 1:
             r = r + "\n -Turn Defiance"
+
+    elif Type == "Undead":
         if Dice() == 1:
             r = r + "\n - Turn Immunity \n\t The Undead is immune to effects that turn undead."
 
 
-    elif Type == "Lizardfolk" or Type == 19:
+    elif Type == "Lizardfolk":
         r = r+"\n\n- Hold Breath"
         if Dice(2) == 1:
             r = r + "\n - Chameleon Skin \n\t The lizard can hold its breath for 15 minutes. (A lizard that has this trait also has a swimming speed of 30 feet.)"
@@ -1439,21 +1505,25 @@ def Actions(Type=Dice(60)):
             if Dice() == 1:
                 r = r+ "\n\t "
 
-
+    elif Type == "Ooze":
         if Dice() == 1:
             r = r+ "\n- False Appearance"
+    elif Type == "Ooze":
         if Dice() == 1:
             r = r+ "\n- Engulf"
+    elif Type == "Ooze":
         if Dice() == 1:
             r = r+ "\n- Gelatinous Cube"
+    elif Type == "Ooze":
         if Dice() == 1:
             r = r+ "\n- Transparent"
+    elif Type == "Ooze":
         if Dice() == 1:
             r = r+ "\n- Spider Climb"
+    elif Type == "Ooze":
         if Dice() == 1:
             r = r+ "\n- Split(Yellow): Lightning or Slashing"
-        return r
-        
+
     elif Type == "Hobgoblin" or Type == 24:
         r = r+"\n- Martial Advantage"
         
@@ -1470,14 +1540,47 @@ def Actions(Type=Dice(60)):
     elif Type == "Scout" or Type == 27:
         r = r+ "\n- Keen Senses\n\t The beast has advantage on Wisdom (Perception) checks that rely on senses."   
         
+    if Type == "Plant": 
+        r = r+ "\n- Damage Vulnerabilities: fire"
         
-    elif Type == "Spirit" or Type == 28:
+    if Type == "Plant": 
+        if Dice(3) == 1:
+            r = r+ "\n- False Appereance: \n\t While the plant remains motionless, it is indistinguishable from a normal plant."
+            
+    if Type == "Plant": 
+        if Dice() == 1:
+            r = r+ "\n- Entangling Plants"
+
+    if Type == "Plant": 
+        if Dice() == 1:
+            r = r+ "\n Damage Immunities: poison"
+
+    if Type == "Plant": 
+        if Dice() == 1:
+            r = r+ "\n Condition Immunities:  blinded"
+
+    if Type == "Plant": 
+        if Dice() == 1:
+            r = r+ "\n Condition Immunities: charmed"
+            
+    if Type == "Plant": 
+        if Dice() == 1:
+            r = r+ "\n Condition Immunities:   poisoned"
+
+        
+    elif Type == "Spirit":
         if Dice(2) == 1:
             r = r+"\n- Damage Resistances: acid, cold, fire, lightning, thunder; bludgeoning, piercing, and slashing from nonmagical attacks"
+
+    elif Type == "Spirit":
         if Dice(2) == 1:
             r = r+"\n- Damage Immunities: necrotic, poison "
+
+    elif Type == "Spirit":
         if Dice(2) == 1:
             r = r+"\n- Condition Immunities: charmed, exhaustion, grappled, paralyzed, petrified, poisoned, prone, restrained, unconscious"
+
+    elif Type == "Spirit":
         rdm = Dice(2)
         if rdm == 1:
             r = r+"\n- Amorphous"
@@ -1487,34 +1590,18 @@ def Actions(Type=Dice(60)):
             r = r + "\n- Incorporeal Movement"
             r = r + "\n- Sunlight Sensitivity"
             r = r + "\n- Life Drain"
+
+    elif Type == "Spirit":
         if Dice(2) == 1:
             r = r + "\n- Invisibility"
+
+    elif Type == "Spirit":
         if Dice(2) == 1:
             r = r + "\n- Telekinetic Thrust"
 
-    elif Type == "Thug" or Type == 29:
+    elif Type == "Vandit":
         r = r+ "\n- Pack Tactics"
         
-    elif Type == "Dragon" or Type == 30:
-        r = r+ "\n- Flight"
-        r = r+ "\n- Breath Weapons"
-        rdm = Dice(10)
-        if rdm == 1:
-            r = r + "\n - Fire Breath"
-        elif rdm == 2:
-            r = r + "\n - Sleep Breath"
-        elif rdm == 3:
-            r = r + "\n - Acid Breath"
-        elif rdm == 4:
-            r = r + "\n - Slowing Breath"
-        elif rdm == 5:
-            r = r + "\n - Euphoria Breath"
-        elif rdm == 6:
-            r = r + "\n - Repulsion Breath"
-        elif rdm == 7:
-            r = r + "\n - Poison Breath"
-        if Dice(2) == 1:
-            r = r + "\n - Amphibious"
 
 
     elif Type == "Dwarf" or Type == 31:
@@ -1645,23 +1732,83 @@ def Actions(Type=Dice(60)):
     elif Type =="Guard" or Type == 50:
         r = r + "\n- Parry \n\t The Guard adds 2 to its AC against one melee attack that would hit it. To do so, the Guard must see the attacker and be wielding a melee weapon."
         
-    elif Type == "Kobold" or Type == 51:    
+    if Type == "Kobold" or Type == 51:    
         r = r + "\n- Darkvision \n\t 60ft."
         r = r + "\n- Pack Tactics \n\t The kobold has advantage on an attack roll against a creature if at least one of the kobold's allies is within 5 feet of the creature and the ally isn't incapacitated."
         r = r + "\n- Sunlight Sensitivity \n\t While in sunlight, the kobold has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
     
-    elif Type == "Noble" or Type == 52:
+    if Type == "Noble":
         r = r + "\n- Parry \n\t The noble adds 2 to its AC against one melee attack that would hit it. To do so, the noble must see the attacker and be wielding a melee weapon."
     
-    elif Type == "Beastfolk" or Type == 53:
-        r = r + "\n- Speak with Animal \n\t The Beastfolk can communicate simple concepts to his affinity animal when it speaks in Beast language."
+
+    if Type == "Plant": 
+        if Dice() == 1:
+            r = r+ "\n Condition Immunities:  frightened"
+            
+    if Type == "Plant": 
+        if Dice() == 1:
+            r = r + "\n-Distress Spores. \n\t When the plant takes damage, all other plants within 240 feet of it can sense its pain."  
+            
+    if Type == "Plant": 
+        if Dice() == 1:
+            r = r + "\n-Sun Sickness. \n\t While in sunlight, the plant has disadvantage on ability checks, attack rolls, and saving throws. The plant dies if it spends more than 1 hour in direct sunlight."
+            
+    if Type == "Plant": 
+        if Dice() == 1:
+            r = r + "\n-Animating Spores"  
+            
+    if Type == "Plant": 
+        if Dice() == 1:
+            r = r + "\n-Hallucination Spores"  
+
+
+    if Type == "Plant": 
+        if Dice() == 1:
+            r = r + "\n-Pacifying Spores"   
+            
+    if Type == "Plant": 
+        if Dice() == 1:
+            r = r + "\n-Rapport Spores (3/Day).\n\t A 10-foot radius of spores extends from the plant. These spores can go around corners and affect only creatures with an Intelligence of 2 or higher that aren't undead, constructs, or elementals. Affected creatures can communicate telepathically with one another while they are within 30 feet of each other. The effect lasts for 1 hour."   
+            
+    if Type == "Plant": 
+        if Dice() == 1:
+            r = r + "\n-Caustic Spores"   
+            
+    if Type == "Plant": 
+        if Dice() == 1:
+            r = r + "\n-Infestation Spores"   
+            
+    if Type == "Plant": 
+        if Dice() == 1:
+            r = r + "\n-Euphoria Spores"   
+            
+    if Type == "Plant": 
+        if Dice() == 1:
+            r = r + "\n Condition Immunities\n\t blinded, deafened, frightened"
+
+    if Type == "Plant": 
+        if Dice() == 1:
+            r = r + "\n Blindsight\n\t 30 ft"        
+        
+
+    if Type == "Warrior":
+        r = r + "\n- Pack Tactics \n\t The warrior has advantage on an attack roll against a creature if at least one of the warrior's allies is within 5 feet of the creature and the ally isn't incapacitated."
+        
+    if Type == "Warrior":
+        if Dice(2)==1:
+            r= r + "\n- Multiattack \n\t The Warrior can attack an additional time on his turn."
+
     else :
-        if isinstance(Type, int):
-            r = r + Actions(Dice(Type - 1))
+        if Dice(2)==1:
+            return Actions(Race())
         else:
-            r = r + Actions(Dice(100))
+            return Actions(Background())
     return r
     
+
+
+
+
 
 
 
