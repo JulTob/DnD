@@ -1152,7 +1152,7 @@ def Magic(Lvl, race = Race(), background = Background()):
 
 
 
-def Actions():
+def Actions(Type=""):
     r = ""
 
     if Type == "Dragon":
