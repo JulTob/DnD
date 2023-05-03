@@ -15,6 +15,7 @@ def Title():
         "The Angry",
         "The Avatar",
         "The Arcane",
+        "The Ancient",
         "The Badger",
         "The Battle",
         "The Baron of",
@@ -47,6 +48,7 @@ def Title():
         "The Cursed",
         "The Crab",
         "The Crimson",
+        "The Crown",
         "The Deadly",
         "The Death",
         "The Dawning",
@@ -58,6 +60,7 @@ def Title():
         "The Divine",
         "The Diviner",
         "The Dream",
+        "The Dust",
         "The Eagle",
         "The Equinox",
         "The Equivalence",
@@ -111,7 +114,7 @@ def Title():
         "The Master",
         "The Mad",
         "The Mage",
-        "The Mind",
+        "The Mental",
         "The Mirror",
         "The Mist",
         "The Minotaur",
@@ -304,7 +307,7 @@ def Title():
         "Of Death",
         "Of The Abyss",
         "Of the Autumn",
-        "Of The Crown"
+        "Of The Crown",
         " Of The Desert",
         "Of The Dead",
         " Of The East",
@@ -671,7 +674,7 @@ def AbilityScore():
     return d1+d2+d3+d4 - min(d1,d2,d3,d4) + Dice(3)-1 + Dice(8)-Dice(8)
     
 def Modifier(AS):
-    return floor((AS-10)/2)
+    return int((AS-10)/2)
 
 def Proficiency(AS):
     return Dice(Modifier(AS)*2)
@@ -1067,7 +1070,36 @@ def Magic(Lvl, race = Race(), background = Background()):
                 cantrip += "\t Sacred Flame"
             if Dice(2) == 1:
                 cantrip += "\t Thaumaturgy"
-                
+             
+        if background == "Priest":
+            if Dice(2) == 1:
+                cantrip += "\t light"
+            if Dice(2) == 1:
+                cantrip += "\t sacred flame" 
+            if Dice(2) == 1:
+                cantrip += "\tthaumaturgy" 
+            if Dice() == 1:
+                first += "cure wounds"
+                slots1 += Dice(4)
+            if Dice() == 1:
+                first += "guiding bolt"
+                slots1 += Dice(4)
+            if Dice() == 1:
+                first += "sanctuary" 
+                slots1 += Dice(4)
+            if Dice() == 1:
+                second += "lesser restoration"
+                slots2 += Dice(3)
+            if Dice() == 1:
+                second += "spiritual weapon"
+                slots2 += Dice(3)
+            if Dice() == 1:
+                third += "dispel magic"
+                slots3 += Dice(2)
+            if Dice() == 1:
+                third += "spirit guardians"
+                slots3 += Dice(2)
+   
         if background == "Shaman":
             if Dice(2) == 1:
                 cantrip +=  "\t druidcraft" 
@@ -1090,6 +1122,8 @@ def Magic(Lvl, race = Race(), background = Background()):
                 third +=  "\t conjure animals"
             if Dice(2) == 1:
                 third +=  "\t plant growth"
+  
+  
   
         if race == "Aberration":
             if Dice() == 1:
@@ -1189,7 +1223,26 @@ def Magic(Lvl, race = Race(), background = Background()):
         if race == "Fey":
             if Dice() == 1:
                 one += "\t sleep"   
+        
+        if race == "Gnome":
+            if Dice()==1:
+                cantrip += "\t Nondetection (self only)"
 
+        if race == "Gnome":
+            if Dice()==1:
+                one += " \t Blindness/Deafness"
+
+        if race == "Gnome":
+            if Dice()==1:
+                one += " \t Blur"
+
+        if race == "Gnome":
+            if Dice()==1:
+                one += " \t Disguise Self"
+                
+        if race == "Monstrosity":
+            if Dice() == 1:
+                one += "\n Darkness Aura: \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
                 
         if Dice(10) == 1: 
             background = Background()
@@ -1244,67 +1297,6 @@ def Actions(Type=""):
     if Type == "Assassin":
         r = r + "\n- Superior Invisibility"
 
-    if Type == "Dragon":
-        r = r+ "\n- Flight"
-
-    if Type == "Dragon":
-        r = r+ "\n- Language: Draconic"
-
-    if Type == "Dragon":
-        if Dice(2) == 1:
-            r = r+ "\n- Darkvision \n\t 60 ft"
-
-    if Type == "Dragon":
-        r = r+ "\n- Breath Weapons"
-        rdm = Dice(10)
-        if rdm == 1:
-            r = r + "\n - Fire Breath"
-        elif rdm == 2:
-            r = r + "\n - Sleep Breath"
-        elif rdm == 3:
-            r = r + "\n - Acid Breath"
-        elif rdm == 4:
-            r = r + "\n - Slowing Breath"
-        elif rdm == 5:
-            r = r + "\n - Euphoria Breath"
-        elif rdm == 6:
-            r = r + "\n - Repulsion Breath"
-        elif rdm == 7:
-            r = r + "\n - Poison Breath"
-            
-    if Type == "Dragon":
-        if Dice(2) == 1:
-            r = r + "\n - Amphibious"
-
-    if Type == "Dragon":
-        if Dice() == 1:
-            r = r + "\n - Blindsight \n\t 10 ft"
-
-    if Type == "Dragon": 
-        if Dice(2) == 1:
-            r = r+ "\n- Keen Senses \n\t The Dragon has advantage on Wisdom (Perception) checks that rely on sight, hearing, or smell."
-            
-    if Type == "Dragon": 
-        if Dice(2) == 1:
-            r = r+ "\n- Limited Telepathy \n\t The Dragon can magically communicate simple ideas, emotions, and images telepathically with any creature within 100 feet of it that can understand a language."
-            
-    if Type == "Dragon": 
-        if Dice(2) == 1:
-            r = r+ "\n- Magic Resistance \n\t The Dodragon has advantage on saving throws against spells and other magical effects."           
-            
-    if Type == "Fey": 
-        if Dice(2) == 1:
-            r = r+ "\n- Magic Resistance \n\t The Fae has advantage on saving throws against spells and other magical effects."
-
-    if Type == "Fey": 
-        if Dice(2) == 1:
-            r = r+ "\n- Superior Invisibility \n\t  The Fae magically turns invisible until its concentration ends (as if concentrating on a spell). Any equipment the Fae wears or carries is invisible with it."
-
-    if Type == "Gnome":
-        r = r + "\n - Gnome Cunning"
-
-        
-        
     if Type == "Beast" or Type == "Beastfolk": 
         if Dice() == 1:
             r = r+ "\n- Speed. \n\t 50 ft."
@@ -1444,6 +1436,75 @@ def Actions(Type=""):
             
     if Type == "Beastfolk":
         r = r + "\n- Speak with Animal \n\t The Beastfolk can communicate simple concepts to his affinity animal when it speaks in Beast language."
+
+
+    if Type == "Dragon":
+        r = r+ "\n- Flight"
+
+    if Type == "Dragon":
+        r = r+ "\n- Language: Draconic"
+
+    if Type == "Dragon":
+        if Dice(2) == 1:
+            r = r+ "\n- Darkvision \n\t 60 ft"
+
+    if Type == "Dragon":
+        r = r+ "\n- Breath Weapons"
+        rdm = Dice(10)
+        if rdm == 1:
+            r = r + "\n - Fire Breath"
+        elif rdm == 2:
+            r = r + "\n - Sleep Breath"
+        elif rdm == 3:
+            r = r + "\n - Acid Breath"
+        elif rdm == 4:
+            r = r + "\n - Slowing Breath"
+        elif rdm == 5:
+            r = r + "\n - Euphoria Breath"
+        elif rdm == 6:
+            r = r + "\n - Repulsion Breath"
+        elif rdm == 7:
+            r = r + "\n - Poison Breath"
+            
+    if Type == "Dragon":
+        if Dice(2) == 1:
+            r = r + "\n - Amphibious"
+
+    if Type == "Dragon":
+        if Dice() == 1:
+            r = r + "\n - Blindsight \n\t 10 ft"
+
+    if Type == "Dragon": 
+        if Dice(2) == 1:
+            r = r+ "\n- Keen Senses \n\t The Dragon has advantage on Wisdom (Perception) checks that rely on sight, hearing, or smell."
+            
+    if Type == "Dragon": 
+        if Dice(2) == 1:
+            r = r+ "\n- Limited Telepathy \n\t The Dragon can magically communicate simple ideas, emotions, and images telepathically with any creature within 100 feet of it that can understand a language."
+            
+    if Type == "Dragon": 
+        if Dice(2) == 1:
+            r = r+ "\n- Magic Resistance \n\t The Dodragon has advantage on saving throws against spells and other magical effects."           
+            
+    if Type == "Fey": 
+        if Dice(2) == 1:
+            r = r+ "\n- Magic Resistance \n\t The Fae has advantage on saving throws against spells and other magical effects."
+
+    if Type == "Fey": 
+        if Dice(2) == 1:
+            r = r+ "\n- Superior Invisibility \n\t  The Fae magically turns invisible until its concentration ends (as if concentrating on a spell). Any equipment the Fae wears or carries is invisible with it."
+
+    if Type == "Gnoll":
+        r = r + "\n Rampage.\n\t When the gnoll reduces a creature to 0 hit points with a melee attack on its turn, the gnoll can take a bonus action to move up to half its speed and make a bite attack."
+        
+    if Type == "Gnome":
+        r = r + "\n - Gnome Cunning \n\t The gnome has advantage on Intelligence, Wisdom, and Charisma saving throws against magic."
+
+    if Type == "Gnome":
+        r = r + "\n - Stone Camouflage \n\t The gnome has advantage on Dexterity (Stealth) checks made to hide in rocky terrain."
+
+        
+        
 
     if Type == "Elf" or Type == 6:
         r = r+ "\nFey Ancestry.\n\t The Elf has advantage on saving throws against being charmed, and magic can't put the Elf to sleep."
@@ -1863,25 +1924,32 @@ def Actions(Type=""):
     elif Type == 42:
         r = r + "\n-At will: mage hand (the hand is invisible) \n 3/day each: feather fall, jump, see invisibility, shield"
 
-    elif Type == "Monstrosity" or Type == 43:
-        r = r + "\n-Shapechanger"   
+    if Type == "Monstrosity":
         if Dice(2) == 1:
-            r = r + "\n-False Appearance"  
+            r = r + "\n-Shapechanger"   
+            
+    if Type == "Monstrosity":
+        if Dice(2) == 1:
+            r = r + "\n-False Appearance \n\t While the Monstrosity remains motionless, it is indistinguishable from a natural element."  
+            
+    if Type == "Monstrosity":
         if Dice(2) == 1:
             r = r + "\n-Stone Camouflage.\n\t The grick has advantage on Dexterity (Stealth) checks made to hide in rocky terrain.\n"  
+            
+    if Type == "Monstrosity":
         if Dice(2) == 1:
             r = r + "\n- Keen Sight.\n\t The griffon has advantage on Wisdom (Perception) checks that rely on sight.\n"  
+
+    if Type == "Monstrosity":
         if Dice(2) == 1:
             r = r + "\n- Flight.\n\t 60 ft.\n"  
 
-    elif Type == "Priest" or Type == 45:
+    if Type == "Priest":
         r = r + "\nDivine Eminence"
-        r = r + "\nCantrips (at will): light, sacred flame, thaumaturgy\n 1st level (4 slots): cure wounds, guiding bolt, sanctuary \n 2nd level (3 slots): lesser restoration, spiritual weapon \n 3rd level (2 slots): dispel magic, spirit guardians"
-        
-    elif Type == "Gnoll" or Type == 46:
-        r = r + "\n Rampage.\n\t When the gnoll reduces a creature to 0 hit points with a melee attack on its turn, the gnoll can take a bonus action to move up to half its speed and make a bite attack."
+
+
  
-    elif Type == "Shaman" or Type == 47:
+    if Type == "Shaman":
         if Dice(2)==1:
             r = r + "\n Change Shape: \n\t The Shaman magically polymorphs into a Beast, remaining in that form for up to 1 hour. It can revert to its true form as a bonus action. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
             
@@ -2082,7 +2150,7 @@ def NPC():
     print("\tTo hit: +", Modifier(max(STR,DEX)+ Lvl/5))
     print("\n\t- Simple Attack:")
     print (Attack(Dice(4)))
-    print("\n\t- Special Attack: {} Charges/Combat".format(Dice( 1 + int(Lvl/4))))
+    print("\n\t- Special Attack: {} Charges/Combat".format(Dice( 1 + int(Lvl/3))))
     print (SpecialAttack(Lvl, Modifier(random.choice([STR,DEX,CON,INT,WIS,CHA ]))))
 
     print("\n\n")
