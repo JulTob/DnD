@@ -620,6 +620,7 @@ def FeyName():
         "Satyr",
         "Sprite",
         "Nymph",
+        "Dryad",
         ""]
     return random.choice(Names)
 
@@ -635,6 +636,7 @@ def MonstrosityName():
     Names = [
         "Griffon",
         "Worg",
+        "Kerberus",
         ""]
     return random.choice(Names)
 
@@ -1076,7 +1078,7 @@ def Magic(Lvl, race = Race(), background = Background()):
     two = "2/Day each: "
     three = "3/Day each: "
 
-    for L in range(int(1+Lvl/3)):
+    for L in range(int(1+Lvl/4)):
 
                 
                 
@@ -1122,28 +1124,28 @@ def Magic(Lvl, race = Race(), background = Background()):
 
             
         if background == "Cultist":
-            if Dice(2) == 1:
+            if Dice(3) == 1:
                 first += "\t Command"
-                slots1 += Dice(4)
+                slots1 += Dice(3)
 
         if background == "Cultist":
-            if Dice(2) == 1:
+            if Dice(3) == 1:
                 first += "\t inflict wounds"
                 slots1 += Dice(4)
 
         if background == "Cultist":
-            if Dice(2) == 1:
+            if Dice(3) == 1:
                 first += "\t shield of faith"
                 slots1 += Dice(4)
             
 
         if background == "Cultist":
-            if Dice(2) == 1:
+            if Dice(5) == 1:
                 second += "\t hold person" 
                 slots2 += Dice(3)
 
         if background == "Cultist":
-            if Dice(2) == 1:
+            if Dice(5) == 1:
                 second += "\t spiritual weapon"
                 slots2 += Dice(3)
 
@@ -1194,6 +1196,7 @@ def Magic(Lvl, race = Race(), background = Background()):
             if Dice() == 1:
                 first += "cure wounds"
                 slots1 += Dice(4)
+                
         if background == "Priest":
             if Dice() == 1:
                 first += "guiding bolt"
@@ -1263,13 +1266,19 @@ def Magic(Lvl, race = Race(), background = Background()):
                 cantrip +=  "\t sacred flame" 
             if Dice(2) == 1:
                 cantrip +=  "\t thaumaturgy" 
-            slots1 += Dice(3)
+                
             if Dice(2) == 1:
                 first +=  "\t bless" 
+                slots1 += Dice(3)
+                
             if Dice(2) == 1:
                 first +=  "\t cure wounds" 
+                slots1 += Dice(3)
+                
             if Dice(2) == 1:
                 first +=  "\t sanctuary"
+                slots1 += Dice(3)
+
                
         if race == "Dragon":
             cantrip += "\n- Breath Weapons"
@@ -1358,11 +1367,11 @@ def Magic(Lvl, race = Race(), background = Background()):
                 cantrip +=  "\n- Druidcraft"
 
         if race == "Fae": 
-            if Dice() == 1:
+            if Dice(3) == 1:
                 three += "\n-Entangle" 
 
         if race == "Fae": 
-            if Dice() == 1:
+            if Dice(3) == 1:
                 three += "\n-Goodberry"
    
         if race == "Fae": 
@@ -1659,7 +1668,7 @@ def Actions(Type=""):
 
 
     if Type=="Beast" or Type=="Beastfolk": 
-        if Dice(8) == 1:
+        if Dice(10) == 1:
             r = r+ "\n - Pounce \n\t If the beast moves at least 20 feet straight toward a creature and then hits it with an attack on the same turn, that target must succeed on a DC [10+%STR] Strength saving throw or be knocked prone. If the target is prone, the Beast can make one attack against it as a bonus action."
     if Type=="Beast" or Type=="Beastfolk": 
         if Dice(8) == 1:
@@ -1670,20 +1679,25 @@ def Actions(Type=""):
     if Type=="Beast" or Type=="Beastfolk": 
         if Dice() == 1:
             r = r + "\n- Hold Breath. \n\t The beast can hold its breath for 30 minutes."
+            
     if Type=="Beast" or Type=="Beastfolk": 
-        if Dice(8) == 1:
+        if Dice(10) == 1:
             r = r+ "\n- Mimicry \n\t The Raven can mimic simple sounds it has heard, such as a person whispering, a baby crying, or an animal chittering. A creature that hears the sounds can tell they are imitations with a successful DC 10 Wisdom (Insight) check."
+            
     if Type=="Beast" or Type=="Beastfolk": 
         if Dice(8) == 1:
             r = r+ "\n- Beast of Burden \n\t The Beast is considered to be a Large animal for the purpose of determining its carrying capacity."
+            
     if Type=="Beast" or Type=="Beastfolk": 
         if Dice(8) == 1:
             r = r+ "\n- Swamp Camouflage \n\t The Beast has advantage on Dexterity (Stealth) checks made to hide in swampy terrain."
+            
     if Type=="Beast" or Type=="Beastfolk": 
         if Dice(4) == 1:
             r = r+ "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 4 (1d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR). Until this grapple ends, the target is restrained, and the beast can't bite another target."
             if Dice() == 1:
                 r = r+ "\n- Swallow. \n\t  The beast makes one bite attack against a target creature smaller than themselves it is grappling. If the attack hits, the target is swallowed, and the grapple ends. The swallowed target is blinded and restrained, it has total cover against attacks and other effects outside the beast, and it takes 6 (2d4+%CON) acid damage at the start of each of the beast's turns. The beast can have only one target swallowed at a time. If the beast dies, a swallowed creature is no longer restrained by it and can escape from the corpse using 5 feet of movement, exiting prone."
+                
     if Type=="Beast" or Type=="Beastfolk": 
         if Dice(12) == 1:
             r = r+ "\n-  Hold Breath. \n\t  The beast can hold its breath for 15 minutes.\n-  swimming \n\t  speed of 30 feet.)"
@@ -1766,7 +1780,7 @@ def Actions(Type=""):
             r = r+ "\n- Damage Immunities: Acid"           
             
     if Type == "Fey": 
-        if Dice(2) == 1:
+        if Dice(3) == 1:
             r = r+ "\n- Magic Resistance \n\t The Fae has advantage on saving throws against spells and other magical effects."
 
     if Type == "Fey": 
@@ -1966,10 +1980,6 @@ def Actions(Type=""):
             
     if Type == "Fey":
         if Dice() == 1:
-            r = r + "\n - Heart Sight"
-            
-    if Type == "Fey":
-        if Dice() == 1:
             r = r + "\n -  Teleport (Recharge 4–6). \n\t The Fey magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the Fey can make one attack."
 
     if Type == "Goblin":
@@ -2013,16 +2023,18 @@ def Actions(Type=""):
 
     if Type == "Fey": 
         if Dice() == 1:
-            r = r+ "\n- Magic Resistance"
+            r = r+ "\n- Speak with Beasts and Plants \n\t The Fey can communicate with beasts and plants as if they shared a language."
+
+    if Type == "Fey": 
+        if Dice() == 1:
+            r = r+ "\n- Tree Stride \n\t Once on her turn, the Fey can use 10 feet of her movement to step magically into one living tree within her reach and emerge from a second living tree within 60 feet of the first tree, appearing in an unoccupied space within 5 feet of the second tree. Both trees must be large or bigger."
+          
             
     if Type == "Fey": 
         if Dice() == 1:
-            r = r+ "\n- Speak with Beasts and Plants"
-            
-            
-    if Type == "Fey": 
-        if Dice() == 1:
-            r = r+ "\n- Fey Charm"
+            r = r+ "\n- Fey Charm \n\t The Fey targets one humanoid or beast that she can see within 30 feet of her. If the target can see the dryad, it must succeed on a DC [10+Cha] Wisdom saving throw or be magically charmed. The charmed creature regards the Fey as a trusted friend to be heeded and protected. Although the target isn't under the Fey's control, it takes the Fey's requests or actions in the most favorable way it can. Each time the Fey or its allies do anything harmful to the target, it can repeat the saving throw, ending the effect on itself on a success. Otherwise, the effect lasts 24 hours or until the Fey dies, is on a different plane of existence from the target, or ends the effect as a bonus action. If a target's saving throw is successful, the target is immune to the Fey's Fey Charm for the next 24 hours.
+
+The dryad can have no more than one humanoid and up to three beasts charmed at a time."
 
     if Type == "Ooze":
         if Dice() == 1:
@@ -2394,6 +2406,14 @@ def Actions(Type=""):
             
     if Type == "Monstrosity":
         if Dice() == 1:
+            r = r + "\n-Two-Headed. \n\t The monstrosity has advantage on Wisdom (Perception) checks and on saving throws against being blinded, charmed, deafened, frightened, stunned, or knocked unconscious."
+
+    if Type == "Monstrosity":
+        if Dice() == 1:
+            r = r + "\n-Multiattack. \n\t The monstrosity makes two Simple attacks."
+
+    if Type == "Monstrosity":
+        if Dice() == 1:
             r = r + "\n- Stone Camouflage.\n\t The grick has advantage on Dexterity (Stealth) checks made to hide in rocky terrain.\n"  
             
     if Type == "Monstrosity":
@@ -2604,7 +2624,8 @@ def NPC():
     print("\n")
     print("COMBAT ACTIONS:")
     print("\tTo hit: +", Modifier(max(STR,DEX)+ Lvl/5))
-    print("\n\t- Simple Attack:")
+    print("\n\t- Simple Attacks:")
+    print (Attack("Melee"))
     print (Attack(Dice(4)))
     print("\n\t- Special Attack: {} Charges/Combat".format(Dice( 1 + int(Lvl/3))))
     print (SpecialAttack(Lvl, Modifier(random.choice([STR,DEX,CON,INT,WIS,CHA ]))))
