@@ -147,6 +147,7 @@ def Title():
         "The Ruby",
         "The Rune",
         "The Sad",
+        "The Sand",
         "The Science",
         "The Shadow",
         "The Silver",
@@ -288,6 +289,7 @@ def Title():
         "Lizard",
         " Lotus",
         " Lord",
+        "Man",
         " Machine",
         " Mage",
         " Master",
@@ -557,6 +559,7 @@ def BeastName():
         "Goat",
         "Horse", "Mule", "Pony",
         "Hyena",
+        "Insect", "Wasp", "Beetle",
         "Jackal",
         "Lizard",
         "Octopus",
@@ -623,6 +626,7 @@ def PlantName():
         "Awakened Plant",
         "Fungus",
         "Myconid",
+        "Spore",
         "Willow",
         ""]
     return random.choice(Names)
@@ -1158,7 +1162,15 @@ def Magic(Lvl, race = Race(), background = Background()):
 
         if race == "Elemental":
             if Dice() == 1:
+                one += "\t Sleep"
+
+        if race == "Elemental":
+            if Dice() == 1:
                 cantrip += "\n Cinder Breath \t (Recharge 6). The Elemental exhales a 15-foot cone of smoldering ash. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw or be blinded until the end of the Elemental's next turn."
+
+        if race == "Elemental":
+            if Dice() == 1:
+                cantrip += "\n Blinding Breath \t (Recharge 6). The Elemental exhales a 15-foot cone of blinding dust. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw or be blinded for one minute."
 
         if race == "Elemental":
             if Dice() == 1:
@@ -1243,7 +1255,11 @@ def Magic(Lvl, race = Race(), background = Background()):
         if race == "Monstrosity":
             if Dice() == 1:
                 one += "\n Darkness Aura: \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
-                
+            
+        if race == "Ooze":
+            if Dice()==1:
+                cantrip += " \t Psychic Crush (Recharge 5–6). \n\t The ooze targets one creature that it can sense within 60 feet of it. The target must make a DC 10 Intelligence saving throw, taking 10 (3d6) psychic damage on a failed save, or half as much damage on a successful one."
+    
         if Dice(10) == 1: 
             background = Background()
         if Dice(10) == 1: 
@@ -1497,6 +1513,9 @@ def Actions(Type=""):
     if Type == "Gnoll":
         r = r + "\n Rampage.\n\t When the gnoll reduces a creature to 0 hit points with a melee attack on its turn, the gnoll can take a bonus action to move up to half its speed and make a bite attack."
         
+    if Type == "Gnoll":
+        r = r + "\n Darkvision.\n\t 60 ft"
+
     if Type == "Gnome":
         r = r + "\n - Gnome Cunning \n\t The gnome has advantage on Intelligence, Wisdom, and Charisma saving throws against magic."
 
@@ -1597,7 +1616,10 @@ def Actions(Type=""):
         r = r+ "\n- Ambusher"
         r = r+ "\n- Mimicry \n\t The Raven can mimic simple sounds it has heard, such as a person whispering, a baby crying, or an animal chittering. A creature that hears the sounds can tell they are imitations with a successful DC 10 Wisdom (Insight) check."
         
-        
+    if Type == "Elemental":
+        if Dice() == 1:
+            r = r + "\n- Fly : 30ft."
+
     if Type == "Elemental":
         if Dice() == 1:
             r = r + "\n- False Appereance"
@@ -1608,6 +1630,8 @@ def Actions(Type=""):
         rdm = Dice(4)
         if rdm == 1:
             r = r + "The sphere is heavily obscured. Wind disperses the cloud, which otherwise lasts for 1 minute."
+        if rdm == 2:
+            r = r + "Each creature in range must succeed on a DC [10+%Cha] Constitution Saving Throw or be blinded for 1 minute."
         
     if Type == "Elemental":
         if Dice() == 1:
@@ -1617,7 +1641,11 @@ def Actions(Type=""):
     if Type == "Elemental":
         rdm = Dice(4)
         if rdm == 1:
-            r = "\n- Heated Body \n- Damage Immunities: fire  \n- Damage Vulnerabilities: cold"
+            r = r+  "\n- Heated Body"
+            r = r + "\n- Damage Immunities: fire" 
+            r = r + "\n- Damage Vulnerabilities: cold"
+        if rdm == 1:
+            r = r + "\n- Damage Vulnerabilities: fire"
         
     if Type == "Fey":
         if Dice() == 1:
@@ -1636,7 +1664,7 @@ def Actions(Type=""):
 
     if Type == "Lizardfolk":
         if Dice(2) == 1:
-            r = r + "\n - Chameleon Skin \n\t The lizard can hold its breath for 15 minutes. (A lizard that has this trait also has a swimming speed of 30 feet.)"
+            r = r + "\n - Chameleon Skin \n\t The lizard has advantage on Dexterity (Stealth) checks made to hide."
 
     if Type == "Lizardfolk":
         if Dice(2) == 1:
@@ -1656,6 +1684,87 @@ def Actions(Type=""):
         r = r+ "\n- Speak with Beasts and Plants"
         r = r+ "\n- At will: druidcraft\n 3/day each: entangle, goodberry \n 1/day each: barkskin, pass without trace, shillelagh"
         r = r+ "\n- Fey Charm"
+
+    if Type == "Ooze":
+        if Dice() == 1:
+            r = r+ "\n- Amorphous \n\t The ooze can move through a space as narrow as 1 inch wide without squeezing."
+
+    if Type == "Ooze":
+        if Dice() == 1:
+            r = r+ "\n- Corrode Material: Any nonmagical weapon made of the material that hits the ooze corrodes. After dealing damage, the weapon takes a permanent and cumulative −1 penalty to damage rolls. If its penalty drops to −5, the weapon is destroyed. Nonmagical ammunition made of the material that hits the ooze is destroyed after dealing damage. The ooze can eat through 2-inch-thick, nonmagical material in 1 round. On a hit from the Ooze, if the target is wearing nonmagical armor of the material, its armor is partly corroded and takes a permanent and cumulative −1 penalty to the AC it offers. The armor is destroyed if the penalty reduces its AC to 10."
+            if Dice() == 1:
+                r = r+ "\n\t Wood"
+            if Dice() == 1:
+                r = r+ "\n\t Metal"
+            if Dice() == 1:
+                r = r+ "\n\t Meat & Leather"
+            if Dice() == 1:
+                r = r+ "\n\t Iron"
+            if Dice() == 1:
+                r = r+ "\n\t Gold"
+            if Dice() == 1:
+                r = r+ "\n\t Silver"
+
+
+    if Type == "Ooze":
+        if Dice() == 1:
+            r = r+ "\n- False Appearance \n\t While the ooze remains motionless, it is indistinguishable from an oily pool or wet rock."
+    if Type == "Ooze":
+        if Dice() == 1:
+            r = r+ "\n- Engulf"
+    if Type == "Ooze":
+        if Dice() == 1:
+            r = r+ "\n- Gelatinous Cube"
+    if Type == "Ooze":
+        if Dice() == 1:
+            r = r+ "\n- Transparent"
+    if Type == "Ooze":
+        if Dice() == 1:
+            r = r+ "\n- Spider Climb"
+    if Type == "Ooze":
+        if Dice() == 1:
+            r = r+ "\n- Split(Yellow): Lightning or Slashing"
+
+    if Type == "Ooze":
+        if Dice() == 1:
+            r = r+ "\n- Damage Resistance: Acid"
+
+    if Type == "Ooze":
+        if Dice() == 1:
+            r = r+ "\n- Damage Resistance: Cold"
+
+    if Type == "Ooze":
+        if Dice() == 1:
+            r = r+ "\n- Damage Resistance: Fire"
+
+    if Type == "Ooze":
+        if Dice() == 1:
+            r = r+ "\n- Condition Immunities: Blinded"
+
+    if Type == "Ooze":
+        if Dice() == 1:
+            r = r+ "\n- Condition Immunities: Charmed"
+
+    if Type == "Ooze":
+        if Dice() == 1:
+            r = r+ "\n- Condition Immunities: Deafened"
+
+    if Type == "Ooze":
+        if Dice() == 1:
+            r = r+ "\n- Condition Immunities: Exhaustion"
+
+    if Type == "Ooze":
+        if Dice() == 1:
+            r = r+ "\n- Condition Immunities: Frightened"
+
+    if Type == "Ooze":
+        if Dice() == 1:
+            r = r+ "\n- Condition Immunities: Prone"
+
+    if Type == "Ooze":
+        if Dice() == 1:
+            r = r+ "\n- Blindsight: 60 ft"
+
 
 
 
@@ -1707,54 +1816,24 @@ def Actions(Type=""):
             r = r + "\n - Undead Fortitude. \n\t If damage reduces the Undead to 0 hit points, it must make a Constitution saving throw with a DC of 5 + the damage taken, unless the damage is radiant or from a critical hit. On a success, the Undead drops to 1 hit point instead."
 
             
-    if Type == "Ooze" or Type == 23:
-        if Dice() == 1:
-            r = r+ "\n- Amorphous"
-        if Dice() == 1:
-            r = r+ "\n- Corrode Material"
-            if Dice() == 1:
-                r = r+ "\n\t Wood"
-            if Dice() == 1:
-                r = r+ "\n\t Metal"
-            if Dice() == 1:
-                r = r+ "\n\t Meat & Leather"
-            if Dice() == 1:
-                r = r+ "\n\t "
-
-    elif Type == "Ooze":
-        if Dice() == 1:
-            r = r+ "\n- False Appearance"
-    elif Type == "Ooze":
-        if Dice() == 1:
-            r = r+ "\n- Engulf"
-    elif Type == "Ooze":
-        if Dice() == 1:
-            r = r+ "\n- Gelatinous Cube"
-    elif Type == "Ooze":
-        if Dice() == 1:
-            r = r+ "\n- Transparent"
-    elif Type == "Ooze":
-        if Dice() == 1:
-            r = r+ "\n- Spider Climb"
-    elif Type == "Ooze":
-        if Dice() == 1:
-            r = r+ "\n- Split(Yellow): Lightning or Slashing"
 
     elif Type == "Hobgoblin" or Type == 24:
         r = r+"\n- Martial Advantage"
         
-    elif Type == "Lycan" or Type ==25:
-        r = r+ "\n- Shapechanger"
-        r = r+"\n- Pack Tactics"
+    elif Type == "Beastfolk":
+        if Dice()==1:
+            r = r+ "\n- Shapechanger"
+        if Dice()==1:
+            r = r+"\n- Pack Tactics"
         
-    elif Type == "Orc" or Type == 25:
+    elif Type == "Orc":
         r = r+ "\n- Aggressive"
         
-    elif Type == 26:
+    if Type == "Undead":
         r = r + "\n- Blood Frenzy"
     
-    elif Type == "Scout" or Type == 27:
-        r = r+ "\n- Keen Senses\n\t The beast has advantage on Wisdom (Perception) checks that rely on senses."   
+    if Type == "Scout":
+        r = r+ "\n- Keen Senses\n\t The Scout has advantage on Wisdom (Perception) checks that rely on senses."   
         
     if Type == "Plant": 
         r = r+ "\n- Damage Vulnerabilities: fire"
@@ -1785,11 +1864,15 @@ def Actions(Type=""):
             
     if Type == "Plant": 
         if Dice() == 1:
+            r = r+ "\n Condition Immunities:  frightened"
+
+    if Type == "Plant": 
+        if Dice() == 1:
             r = r+ "\n Condition Immunities:   poisoned"
 
     if Type == "Plant": 
         if Dice() == 1:
-            r = r+ "\n Condition Immunities:  frightened"
+            r = r+ "\n Condition Immunities:   prone"
 
         
     elif Type == "Spirit":
@@ -1807,7 +1890,7 @@ def Actions(Type=""):
     elif Type == "Spirit":
         rdm = Dice(2)
         if rdm == 1:
-            r = r+"\n- Amorphous"
+            r = r+"\n- Amorphous \n\t The Spirit can move through a space as narrow as 1 inch wide without squeezing."
             r = r+"\n- Shadow Stealth"
             r = r+"\n- Sunlight Weakness"
         elif rdm == 2:
@@ -2024,7 +2107,11 @@ def Actions(Type=""):
     if Type == "Plant": 
         if Dice() == 1:
             r = r + "\n Blindsight\n\t 30 ft"        
-        
+   
+    if Type == "Plant": 
+        if Dice() == 1:
+            r = r + "\n Death Burst\n\t The Plant explodes when it drops to 0 hit points. Each creature within 20 feet of it must succeed on a DC 15 Constitution saving throw or take 10 (3d6) poison damage and become infected with a disease on a failed save. Creatures immune to the poisoned condition are immune to this disease. Spores invade an infected creature's system, killing the creature in a number of hours equal to 1d12 + the creature's Constitution score, unless the disease is removed. In half that time, the creature becomes poisoned for the rest of the duration. After the creature dies, it sprouts 2d4 Tiny gas spores that grow to full size in 7 days."        
+
 
     if Type == "Warrior":
         r = r + "\n- Pack Tactics \n\t The warrior has advantage on an attack roll against a creature if at least one of the warrior's allies is within 5 feet of the creature and the ally isn't incapacitated."
