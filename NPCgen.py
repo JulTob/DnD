@@ -1279,9 +1279,9 @@ def Magic(Lvl, race = Race(), background = Background()):
             elif Dice(10) == 2:
                 cantrip += "\n  - Sleep Breath \n\t The dragon exhales sleep gas in a 15-foot cone. Each creature in that area must succeed on a DC [10+%Con] Constitution saving throw or fall unconscious for 1 minute. This effect ends for a creature if the creature takes damage or someone uses an action to wake it."
             elif Dice(10) == 3:
-                cantrip += "\n  - Acid Breath"
+                cantrip += "\n  - Acid Breath \n\t . The dragon exhales acid in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 18 (4d8) acid damage on a failed save, or half as much damage on a successful one"
             elif Dice(10) == 4:
-                cantrip += "\n  - Slowing Breath"
+                cantrip += "\n  - Slowing Breath \n\t The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a DC [10+%Con] Constitution saving throw. On a failed save, the creature can't use reactions, its speed is halved, and it can't make more than one attack on its turn. In addition, the creature can use either an action or a bonus action on its turn, but not both. These effects last for 1 minute. The creature can repeat the saving throw at the end of each of its turns, ending the effect on itself with a successful save."
             elif Dice(10) == 5:
                 cantrip += "\n  - Euphoria Breath"
             elif Dice(10) == 6:
@@ -1718,12 +1718,18 @@ def Actions(Type=""):
                 r = r+ "\n- Flyby \n\t The dragon is an agile flier, quick to fly out of enemies' reach.The dragon doesn't provoke an opportunity attack when it flies out of an enemy's reach."
 
     if Type == "Dragon":
-        if Dice(4) == 1:
+        if Dice() == 1:
             r = r+ "\n- Burrow: 15 ft"
+
+    if Type == "Dragon":
+        if Dice() == 1:
+            r = r+ "\n- Climb: 30 ft"
 
     if Type == "Dragon":
         if Dice(2) == 1:
             r = r+ "\n- Darkvision: 60 ft"
+        elif Dice() == 1:
+                r = r+ "\n- Blindsight: 10 ft"
         elif Dice() == 1:
                 r = r+ "\n- Blindsight: 60 ft"
         elif Dice(12) == 1:
@@ -1754,6 +1760,10 @@ def Actions(Type=""):
     if Type == "Dragon": 
         if Dice() == 1:
             r = r+ "\n- Damage Immunities: Fire"           
+
+    if Type == "Dragon": 
+        if Dice() == 1:
+            r = r+ "\n- Damage Immunities: Acid"           
             
     if Type == "Fey": 
         if Dice(2) == 1:
