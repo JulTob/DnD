@@ -997,12 +997,23 @@ def Language(race = Race(), background = Background()):
         l += "Draconic"
         if Dice(3)==1:
             l += "Common"
+        if Dice()==1:
+            l += "Sylvan"
     if race == "Dwarf":
-        l += ""
+        l += "Dwarvish"
+        if Dice(3)==1:
+            l += "Common"
+        if Dice(3)==1:
+            l += "Undercommon"
+
     if race == "Elf":
         l += ""
+        
     if race == "Elemental":
         l += ""
+        if Dice(4)==1:
+            l += "Ignan"
+
         
     if race == "Fey":
         l += "Sylvan"
@@ -1292,7 +1303,7 @@ def Magic(Lvl, race = Race(), background = Background()):
             elif Dice(10) == 4:
                 cantrip += "\n  - Slowing Breath \n\t The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a DC [10+%Con] Constitution saving throw. On a failed save, the creature can't use reactions, its speed is halved, and it can't make more than one attack on its turn. In addition, the creature can use either an action or a bonus action on its turn, but not both. These effects last for 1 minute. The creature can repeat the saving throw at the end of each of its turns, ending the effect on itself with a successful save."
             elif Dice(10) == 5:
-                cantrip += "\n  - Euphoria Breath"
+                cantrip += "\n  - Euphoria Breath \n\t The dragon exhales a puff of euphoria gas at one creature within 5 feet of it. The target must succeed on a DC [10+%Con] Wisdom saving throw, or for 1 minute, the target can't take reactions and must roll a d6 at the start of each of its turns to determine its behavior during the turn: \n\t\t 1–4. The target takes no action or bonus action and uses all of its movement to move in a random direction. \n\t\t 5–6. The target doesn't move, and the only thing it can do on its turn is make a DC [10+%Con] Wisdom saving throw, ending the effect on itself on a success."
             elif Dice(10) == 6:
                 cantrip += "\n  - Repulsion Breath"
             elif Dice(10) == 7:
@@ -1302,9 +1313,40 @@ def Magic(Lvl, race = Race(), background = Background()):
             if Dice(10) == 1:
                 cantrip += "\n- Change Shape \n\t The dragon magically polymorphs into a humanoid or beast that has a challenge rating no higher than its own, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form (the dragon's choice).In a new form, the dragon retains its alignment, hit points, Hit Dice, ability to speak, proficiencies, Legendary Resistance, lair actions, and Intelligence, Wisdom, and Charisma scores, as well as this action. Its statistics and capabilities are otherwise replaced by those of the new form, except any class features or legendary actions of that form."
 
+        if race == "Dragon":
+            if Dice() == 1:
+                cantrip += "\n- Color Spray"
+
+        if race == "Dragon":
+            if Dice() == 1:
+                cantrip += "\n- Dancing Lights"
+
+        if race == "Dragon":
+            if Dice() == 1:
+                cantrip += "\n- Mage Hand"
+
+        if race == "Dragon":
+            if Dice() == 1:
+                cantrip += "\n- Minor Illusion"
+
+        if race == "Dragon":
+            if Dice(8) == 1:
+                cantrip += "\n- Mirror Image"
+
+
+
+        if race == "Dwarf":
+            if Dice() == 1:
+                cantrip += "\n- Enlarge (Recharges after a Short or Long Rest). \n\t For 1 minute, the Dwarf magically increases in size, along with anything it is wearing or carrying. While enlarged, the Dwarf is Large, doubles its damage dice on Strength-based weapon attacks (included in the attacks), and makes Strength checks and Strength saving throws with advantage. If the Dwarf lacks the room to become Large, it attains the maximum size possible in the space available."
+
+        if race == "Dwarf":
+            if Dice() == 1:
+                cantrip += "\n- Invisibility (Recharges after a Short or Long Rest). \n\t The dwarf magically turns invisible until it attacks, casts a spell, or until its concentration is broken, up to 1 hour (as if concentrating on a spell). Any equipment the Dwarf wears or carries is invisible with it."
+
+
         if race == "Elemental":
             if Dice() == 1:
-                cantrip += "\t dancing lights"
+                cantrip += "\n dancing lights"
                 
         if race == "Elemental":
             if Dice() == 1:
@@ -1765,7 +1807,7 @@ def Actions(Type=""):
             
     if Type == "Dragon": 
         if Dice() == 1:
-            r = r+ "\n- Limited Telepathy \n\t The Dragon can magically communicate simple ideas, emotions, and images telepathically with any creature within 100 feet of it that can understand a language."
+            r = r+ "\n- Limited Telepathy \n\t The Dragon can magically communicate simple ideas, emotions, and images telepathically with any creature within 100 feet of it that can understand a language. It can also communicate with any Dragon"
             
     if Type == "Dragon": 
         if Dice() == 1:
@@ -1778,7 +1820,11 @@ def Actions(Type=""):
     if Type == "Dragon": 
         if Dice() == 1:
             r = r+ "\n- Damage Immunities: Acid"           
-            
+
+    if Type == "Dragon": 
+        if Dice(2) == 1:
+            r = r+ "\n- Superior Invisibility \n\t  The Dragon magically turns invisible until its concentration ends (as if concentrating on a spell). Any equipment the Dragon wears or carries is invisible with it."
+
     if Type == "Fey": 
         if Dice(3) == 1:
             r = r+ "\n- Magic Resistance \n\t The Fae has advantage on saving throws against spells and other magical effects."
@@ -1960,7 +2006,7 @@ def Actions(Type=""):
 
     if Type == "Elemental":
         if Dice() == 1:
-            r = r+  "\n- Heated Body"
+            r = r+  "\n- Heated Body \n\t A creature that touches the Elemental or hits it with a melee attack while within 5 feet of it takes 3 (1d6) fire damage"
 
     if Type == "Elemental":
         if Dice() == 1:
@@ -2300,15 +2346,21 @@ The dryad can have no more than one humanoid and up to three beasts charmed at a
         
 
 
-    elif Type == "Dwarf" or Type == 31:
-        r = r + "\n- Resilience"
-        if Dice(2) == 1:
-            r = r + "\n- Sunlight Sensitivity"
-        if Dice(2) == 1:
-            r = r + "\n- Enlarge"
-        if Dice(2) == 1:
-            r = r + "\n- Invisibility"
+    if Type == "Dwarf":
+        r = r + "\n- Damage Resistance: Poison"
+
+    if Type == "Dwarf":
+        if Dice() == 1:
+            r = r + "\n- Darkvision 120ft"
+        else:
+            r = r + "\n- Darkvision 60ft"
+
+    if Type == "Dwarf":
+        if Dice() == 1:
+            r = r + "\n- Duergar Resilience. \n\t The Dwarf has advantage on saving throws against poison, spells, and illusions, as well as to resist being charmed or paralyzed."
+            r = r + "\n- Sunlight Sensitivity \n\t While in sunlight, the Dwarf has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
             
+
     elif Type == 32:
         r = r+ "\n- Luring Song"
     
