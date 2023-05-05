@@ -35,7 +35,6 @@ def Title():
         "The Bringer",
         "The Butterfly",
         "The Cat",
-        "The Camel",
         "The Climate",
         "The Chain",
         "The Champion",
@@ -222,6 +221,7 @@ def Title():
         "Butterfly",
         "Beetle",
         "Cat",
+        "Camel",
         " Chemist",
         "Champion",
         "Chimera",
@@ -376,6 +376,7 @@ def Title():
         "Spirit",
         "Spider",
         "Specter",
+        "Spy",
         "Swashbuckler",
         "Swarm",
         "Sword",
@@ -499,14 +500,12 @@ def Race():
         "Kobold",
         "Lizardfolk",
         "Monstrosity",
-        "Ogre",
         "Ooze",
         "Orc",
         "Plant",
         "Snakefolk",
         "Tiefling",
         "Undead",
-        "Unicorn",
         ""
         ]
     return random.choice(Races)
@@ -580,6 +579,7 @@ def BeastfolkName():
     Names = [
         "Centaur",
         "Gnoll",
+        "Insectfolk",
         "Jackalmen",
         "Kitsune",
         "Lycan", 
@@ -592,11 +592,12 @@ def BeastfolkName():
 
 def ConstructName():
     Names = [
+        "Animated Armor",
         "Drone",
         "Homunculus",
         "Flying Sword",
         "Living Rug",
-        "Animated Armor",
+        "Scarecrow",
         ""]
     return random.choice(Names)
 
@@ -666,10 +667,11 @@ def PlantName():
     
 def UndeadName():
     Names = [
-        "Crawling Limb",
+        "Crawling Limbs",
         "Ghoul",
         "Skelleton",
         "Shadow",
+        "Specter",
         "Vampire",
         "Zombie",
         ""]
@@ -1315,7 +1317,23 @@ def Magic(Lvl, race = Race(), background = Background()):
 
         if race == "Beastfolk":
             if Dice() == 1:
+                cantrip +=  "\n- Mage Hand (invisible)."
+
+        if race == "Beastfolk":
+            if Dice() == 1:
                 cantrip +=  "\n- Thaumaturgy."
+
+        if race == "Beastfolk":
+            if Dice() == 1:
+                one +=  "\n- Invisibility (self only)."
+
+        if race == "Beastfolk":
+            if Dice() == 1:
+                two +=  "\n- Blur."
+
+        if race == "Beastfolk":
+            if Dice() == 1:
+                two +=  "\n- Magic Weapon."
 
         if race == "Beastfolk":
             if Dice() == 1:
@@ -1442,11 +1460,11 @@ def Magic(Lvl, race = Race(), background = Background()):
 
         if race == "Elemental":
             if Dice() == 1:
-                one += "\n Innate Spellcasting (1/Day) \n\t The Elemental can innately cast fog cloud, requiring no material components. Its innate spellcasting ability is Charisma."
+                one += "\n Innate Spellcasting (1/Day) \n\t The Elemental can innately cast fog cloud, requiring no material components."
                 
         if race == "Elemental":
             if Dice() == 1:
-                one += "\n Innate Spellcasting (1/Day) \n\t The Elemental can innately cast heat metal, requiring no material components. Its innate spellcasting ability is Charisma."
+                one += "\n Innate Spellcasting (1/Day) \n\t The Elemental can innately cast heat metal, requiring no material components."
             
         if race == "Elf":
             if Dice() == 1:
@@ -1611,6 +1629,10 @@ def Magic(Lvl, race = Race(), background = Background()):
             if Dice(8) == 1:
                 cantrip += "\n - Strength Drain \n\t On an attack hit the target's Strength score is reduced by 1d4. The target dies if this reduces its Strength to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. \n\t If a non-evil humanoid dies from this attack, a new shadow rises from the corpse 1d4 hours later."  
 
+        if race == "Undead": 
+            if Dice(8) == 1:
+                cantrip += "\n - Life Drain \n\t On an attack hit the target's Hit Points Maximum is reduced by the damage dealt. The target dies if this reduces its Hit Points Maximum to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. "  
+                
         if Dice() == 1: 
             background = Background()
         if Dice() == 1: 
@@ -1673,7 +1695,7 @@ def Actions(Type=""):
             r = r+ "\n- Climb. \n\t 30 ft."
 
     if Type == "Beast" or Type == "Beastfolk": 
-        if Dice() == 1:
+        if Dice(7) == 1:
             r = r+ "\n- Burrow. \n\t 10 ft."  
 
     if Type == "Beast" or Type == "Beastfolk": 
@@ -1764,7 +1786,7 @@ def Actions(Type=""):
                 r = r+ "\n- Standing Leap. \n\t The Beast's long jump is up to half his speed in feet and its high jump is up to third his speed, with or without a running start."  
 
     if Type=="Beast" or Type=="Beastfolk": 
-        if Dice(8) == 1:
+        if Dice(9) == 1:
             r = r + "\n- Spider Climb \n\t The beast can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."  
             if Dice(2) == 1:
                 r = r + "\n- Web Sense \n\t While in contact with a web, the spider knows the exact location of any other creature in contact with the same web."
@@ -1791,8 +1813,9 @@ def Actions(Type=""):
     if Type=="Beast" or Type=="Beastfolk": 
         if Dice(8) == 1:
             r = r+ "\n-Sure-Footed \n\t The beast has advantage on Strength and Dexterity saving throws made against effects that would knock it prone."
+            
     if Type=="Beast" or Type=="Beastfolk": 
-        if Dice() == 1:
+        if Dice(7) == 1:
             r = r + "\n- Hold Breath. \n\t The beast can hold its breath for 30 minutes."
             
     if Type=="Beast" or Type=="Beastfolk": 
@@ -2000,9 +2023,11 @@ def Actions(Type=""):
     if Type == "Construct":
         if Dice() == 1:
             r = r+"\n- Disintegration. \n\t If the Construct dies, its body disintegrates into dust, leaving behind its weapons and anything else it was carrying."
+            
     if Type == "Construct":
         if Dice()==1:
             r = r+ "\n- False Apperance \n\t While the Construct remains motionless in rest, it is indistinguishable from a normal object"
+            
     if Type == "Construct":
         if Dice()==1:
             r = r+ "\n- Dark Vision:\n\t 60 ft"
@@ -2020,6 +2045,10 @@ def Actions(Type=""):
     if Type == "Construct":
         if Dice()==1:
             r = r+ "\n- Antimagic Susceptibility:\n\t The Construct is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Construct must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute."
+
+    if Type == "Construct":
+        if Dice()==1:
+            r = r+ "\n- Terrifying Glare:\n\t The Construct is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Construct must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute."
 
         
     if Type == "Aberration":
@@ -2157,6 +2186,10 @@ def Actions(Type=""):
         if Dice(2) == 1:
             r = r + "\n - Chameleon Skin \n\t The lizard has advantage on Dexterity (Stealth) checks made to hide."
 
+    if Type == "Beastfolk":
+        if Dice() == 1:
+            r = r + "\n - Chameleon Skin \n\t The beastfolk has advantage on Dexterity (Stealth) checks made to hide."
+            
     if Type == "Lizardfolk":
         if Dice(2) == 1:
             r = r + "\n -  Spider Climb. \n\t The lizard can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
@@ -2555,13 +2588,21 @@ def Actions(Type=""):
 
 
    
-    elif Type == "Spy" or Type == 36:
+    if Type == "Spy":
         if Dice(2) == 1:
-            r = r + "\n- Cunning Action"
+            r = r + "\n- Cunning Action \n\t On each of its turns, the spy can use a bonus action to take the Dash, Disengage, or Hide action."
+
+    if Type == "Spy":
         if Dice(2) == 1:
-            r = r + "\n- Sneak Attack (1/Turn)."
-        
-    elif Type == "Berserker" or Type == 37:
+            r = r + "\n- Sneak Attack (1/Turn). \n\t The spy deals an extra 7 (2d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 feet of an ally of the spy that isn't incapacitated and the spy doesn't have disadvantage on the attack roll." 
+            
+    if Type == "Spy":
+        if Dice(2) == 1:
+            r = r + "\n- Multiattack. \n\t The spy makes two simple melee attacks." 
+
+
+    
+    if Type == "Berserker" or Type == 37:
         r = r + "\n- Multiattack"
         r = r + "\n- Reckless"
         
@@ -2762,7 +2803,7 @@ def NPC():
     
     bg = Background()
     
-    Lvl = Dice(20)+Dice(20)
+    Lvl = Dice(40)
     rc = Race()
     nm = Name(rc)
     if rc == "Giant": STR += Dice(12)
@@ -2826,7 +2867,7 @@ def NPC():
     print (SpecialAttack(Lvl, Modifier(random.choice([STR,DEX,CON,INT,WIS,CHA ]))))
 
     print("\n\n")
-    print("SPELLCASTING:\n\t Spellsave DC:", 10+ Modifier(max(INT,WIS,CHA)))
+    print("SPELLCASTING:\t", random.choice(["INT","WIS","CHA"])  ,"\n\t Spellsave DC:", 10+ Modifier(max(INT,WIS,CHA)) )
     print("\t To hit: +", Modifier(max(INT,WIS,CHA)+ Lvl/5))
     print(Magic(Lvl,rc,bg))
     
