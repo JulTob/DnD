@@ -1021,7 +1021,7 @@ def Language(race = Race(), background = Background()):
     if race == "Celestial": 
         l += ""
     if race == "Construct":
-        l += ""
+        l += "Understands the languages of its creator. "
     if race == "Dragon":
         l += "Draconic. "
         if Dice(3)==1:
@@ -1553,6 +1553,10 @@ def Magic(Lvl, race = Race(), background = Background()):
             if Dice() == 1:
                 one += "\n Gentle Lullaby [DC 10+%Cha Wisdom saving throw] \n\t The creature falls asleep and is unconscious for 1 minute. The effect ends if the creature takes damage or if someone takes an action to shake the creature awake."   
 
+        if race == "Fiend":
+            if Dice() == 1:
+                one += "\n Scare \n\t One creature of the Fiend's choice within 20 feet of it must succeed on a DC 10 Wisdom saving throw or be frightened for 1 minute. The target can repeat the saving throw at the end of each of its turns, with disadvantage if the Fiend is within line of sight, ending the effect on itself on a success."   
+
 
         if race == "Gnome":
             if Dice()==1:
@@ -2008,9 +2012,11 @@ def Actions(Type=""):
             r = r+ "\n- Truesight:\n\t 60 ft"
         elif Dice()==1:
             r = r+ "\n- Truesight:\n\t 120 ft"
+            
     if Type == "Construct":
         if Dice()==1:
             r = r+ "\n- Telepathic Bond:\n\t While the Construct is on the same plane of existence as its master, it can magically convey what it senses to its master, and the two can communicate telepathically."
+            
     if Type == "Construct":
         if Dice()==1:
             r = r+ "\n- Antimagic Susceptibility:\n\t The Construct is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Construct must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute."
@@ -2114,7 +2120,7 @@ def Actions(Type=""):
         
     if Type == "Fey":
         if Dice() == 1:
-            r = r + "\n - Invisibility"
+            r = r + "\n - Invisibility \n\t The Fey magically turns invisible until it attacks, or until its concentration ends (as if concentrating on a spell). Any equipment the Fey wears or carries is invisible with it."
             
     if Type == "Fey":
         if Dice() == 1:
@@ -2437,7 +2443,7 @@ def Actions(Type=""):
 
     if Type == "Undead":
         if Dice(2) == 1:
-            r = r + "\n- Invisibility"
+            r = r + "\n- Invisibility \n\t The Undead magically turns invisible until it attacks, or until its concentration ends (as if concentrating on a spell). Any equipment the undead wears or carries is invisible with it."
 
     if Type == "Undead":
         if Dice(2) == 1:
@@ -2518,10 +2524,12 @@ def Actions(Type=""):
     if Type == "Fiend":
         if Dice() == 1:
             r = r + "\n- Shapechanger \n\t The fiend can use its action to polymorph into a beast form that resembles a rat (speed 20 ft.), a raven (20 ft., fly 60 ft.), or a spider (20 ft., climb 20 ft.), or back into its true form. Its statistics are the same in each form, except for the speed changes noted. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
+        elif Dice() == 1:
+            r = r + "\n- Shapechanger \n\t The fiend can use its action to polymorph into a beast form that resembles a bat (speed 10 feet fly 40 ft.), a centipede (40 ft., climb 40 ft.), or a toad (40 ft., swim 40 ft.), or back into its true form. Its statistics are the same in each form, except for the speed changes noted. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
             
     if Type == "Fiend":
         if Dice(2) == 1:
-            r = r + "\n- Invisibility. \n\t The imp magically turns invisible until it attacks, or until its concentration ends (as if concentrating on a spell). Any equipment the imp wears or carries is invisible with it."
+            r = r + "\n- Invisibility. \n\t The fiend magically turns invisible until it attacks, or until its concentration ends (as if concentrating on a spell). Any equipment the fiend wears or carries is invisible with it."
 
     if Type == "Fiend":
         if Dice()==1:
@@ -2566,9 +2574,6 @@ def Actions(Type=""):
     elif Type == "Druid" or Type == 41:
         r = r + "\n- Cantrips (at will): druidcraft, produce flame, shillelagh \n 1st level (4 slots): entangle, longstrider, speak with animals, thunderwave \n2nd level (3 slots): animal messenger, barkskin\n"
         
-    elif Type == 42:
-        r = r + "\n-At will: mage hand (the hand is invisible) \n 3/day each: feather fall, jump, see invisibility, shield"
-
     if Type == "Monstrosity":
         if Dice() == 1:
             r += "\n - Speed: 50 ft"
