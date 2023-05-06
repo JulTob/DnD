@@ -1324,7 +1324,7 @@ def Magic(Lvl, race = Race(), background = Background()):
     
         if background == "Priest":
             if Dice() == 1:
-                cantrip += "\t Guidance"
+                cantrip += "\n- Guidance"
 
         if background == "Priest":
             if Dice() == 1:
@@ -1340,56 +1340,56 @@ def Magic(Lvl, race = Race(), background = Background()):
              
         if background == "Priest":
             if Dice() == 1:
-                first += "cure wounds"
+                first += "\n- Cure wounds"
                 slots1 += Dice(4)
                 
         if background == "Priest":
             if Dice() == 1:
-                first += "guiding bolt"
+                first += "\n- Guiding bolt"
                 slots1 += Dice(4)
         if background == "Priest":
             if Dice() == 1:
-                first += "sanctuary" 
+                first += "\n- Sanctuary" 
                 slots1 += Dice(4)
         if background == "Priest":
             if Dice() == 1:
-                second += "lesser restoration"
+                second += "\n- Lesser restoration"
                 slots2 += Dice(3)
         if background == "Priest":
             if Dice() == 1:
-                second += "spiritual weapon"
+                second += "\n- Spiritual weapon"
                 slots2 += Dice(3)
         if background == "Priest":
             if Dice() == 1:
-                third += "dispel magic"
+                third += "\n- Dispel magic"
                 slots3 += Dice(2)
         if background == "Priest":
             if Dice() == 1:
-                third += "spirit guardians"
+                third += "\n- Spirit guardians"
                 slots3 += Dice(2)
    
         if background == "Shaman":
             if Dice(2) == 1:
-                cantrip +=  "\t druidcraft" 
+                cantrip +=  "\n- druidcraft" 
             if Dice(2) == 1:
-                cantrip +=  "\t produce flame" 
+                cantrip +=  "\n-  produce flame" 
             if Dice(2) == 1:
-                cantrip +=  "\t thorn whip" 
+                cantrip +=  "\n-  thorn whip" 
             slots1 += Dice(4)
             if Dice(2) == 1:
-                first +=  "\t entangle"
+                first +=  "\n-  entangle"
             if Dice(2) == 1:
-                first +=  "\t fog cloud"
+                first +=  "\n-  fog cloud"
             slots2 += Dice(3)
             if Dice(2) == 1:
-                second +=  "\t heat metal"
+                second +=  "\n-  heat metal"
             if Dice(2) == 1:
-                second +=  "\t spike growth"
+                second +=  "\n-  spike growth"
             slots3 += Dice(2)
             if Dice(2) == 1:
-                third +=  "\t conjure animals"
+                third +=  "\n-  conjure animals"
             if Dice(2) == 1:
-                third +=  "\t plant growth"
+                third +=  "\n-  plant growth"
   
   
   
