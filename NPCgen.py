@@ -99,7 +99,7 @@ def Title():
         "The Icicle",
         "The Ink",
         "The Intellect",
-        "The Innoble",
+        "The Ignoble",
         "The Illusionist",
         "The Jewelcraft",
         "The Jackal",
@@ -111,6 +111,7 @@ def Title():
         "The Lord Of the",
         "The Lord Of",
         "The Long",
+        "The Love of",
         "The Master",
         "The Mad",
         "The Mage",
@@ -295,6 +296,7 @@ def Title():
         "Lizard",
         " Lotus",
         " Lord",
+        "Lover",
         "Man",
         " Machine",
         " Mage",
@@ -365,7 +367,6 @@ def Title():
         "Sabertooth",
         "Saurius",
         "Salamander",
-        "Satyr",
         " Scientist",
         "Scarecrow",
         "Scorpion",
@@ -554,6 +555,8 @@ def AberrationName():
     Names = [
         "Intellect Devourer",
         "Illithid",
+        "A Thing",
+        "Croningberrian",
         ""]
     return random.choice(Names)
 
@@ -707,6 +710,7 @@ def UndeadName():
     Names = [
         "Crawling Limbs",
         "Ghoul",
+        "Ghast",
         "Skelleton",
         "Shadow",
         "Specter",
@@ -1206,41 +1210,41 @@ def Magic(Lvl, race = Race(), background = Background()):
                 
         if background == "Acolyte":
             if Dice(2) == 1:
-                first += "\t cure wounds"  
+                first += "\n- Cure wounds"  
                 slots1 += Dice(3)
                 
         if background == "Acolyte":
             if Dice(2) == 1:
-                first += "\t sanctuary"   
+                first += "\n- Sanctuary"   
                 slots1 += Dice(3)
     
     
         if background == "Cultist":
             if Dice(3) == 1:
-                cantrip +=  "\t Light"
+                cantrip +=  "\n- Light"
 
         if background == "Cultist":
             if Dice(3) == 1:
-                cantrip += "\t Sacred flame"
+                cantrip += "\n- Sacred flame"
 
         if background == "Cultist":
             if Dice(3) == 1:
-                cantrip += "\t Thaumaturgy" 
+                cantrip += "\n- Thaumaturgy" 
 
             
         if background == "Cultist":
             if Dice() == 1:
-                first += "\t Command"
+                first += "\n- Command"
                 slots1 += Dice(4)
 
         if background == "Cultist":
             if Dice() == 1:
-                first += "\t inflict wounds"
+                first += "\n- Inflict wounds"
                 slots1 += Dice(4)
 
         if background == "Cultist":
             if Dice() == 1:
-                first += "\n shield of faith"
+                first += "\n- Shield of faith"
                 slots1 += Dice(4)
             
 
@@ -1297,15 +1301,15 @@ def Magic(Lvl, race = Race(), background = Background()):
 
         if background=="Healer":
             if Dice(2) == 1:
-                cantrip +=  "\t guidance" 
+                cantrip +=  "\n- Guidance" 
 
         if background=="Healer":
             if Dice(2) == 1:
-                cantrip +=  "\t sacred flame"
+                cantrip +=  "\n- Sacred flame"
 
         if background=="Healer":
             if Dice(2) == 1:
-                first +=  "\t cure wounds"
+                first +=  "\n- Cure wounds"
                 slots1 += Dice(2)
             
         if background == "Mage":
@@ -1369,28 +1373,43 @@ def Magic(Lvl, race = Race(), background = Background()):
                 slots3 += Dice(2)
    
         if background == "Shaman":
-            if Dice(2) == 1:
+            if Dice() == 1:
                 cantrip +=  "\n- druidcraft" 
-            if Dice(2) == 1:
-                cantrip +=  "\n-  produce flame" 
-            if Dice(2) == 1:
+            if Dice() == 1:
+                cantrip +=  "\n-  Produce flame" 
+            if Dice() == 1:
                 cantrip +=  "\n-  thorn whip" 
-            slots1 += Dice(4)
-            if Dice(2) == 1:
+
+        if background == "Shaman":
+            if Dice() == 1:
                 first +=  "\n-  entangle"
-            if Dice(2) == 1:
+                slots1 += Dice(4)
+
+        if background == "Shaman":
+            if Dice() == 1:
                 first +=  "\n-  fog cloud"
-            slots2 += Dice(3)
+                slots1 += Dice(4)
+
+        if background == "Shaman":
             if Dice(2) == 1:
                 second +=  "\n-  heat metal"
+                slots2 += Dice(3)
+              
+        if background == "Shaman":
             if Dice(2) == 1:
                 second +=  "\n-  spike growth"
-            slots3 += Dice(2)
+                slots2 += Dice(3)
+
+        if background == "Shaman":
             if Dice(2) == 1:
                 third +=  "\n-  conjure animals"
+                slots3 += Dice(2)
+
+        if background == "Shaman":
             if Dice(2) == 1:
                 third +=  "\n-  plant growth"
-  
+                slots3 += Dice(2)
+
   
   
         if race == "Aberration":
@@ -1465,24 +1484,25 @@ def Magic(Lvl, race = Race(), background = Background()):
                 slots1 += Dice(3)
 
                
-        if race == "Dragon":
+        if race == "Dragon" and Dice(3)==1:
             cantrip += "\n- Breath Weapons"
             cantrip += "(Recharge 5-6)"
-            if Dice(10) == 1:
+            rdm = Dice(8)
+            if rdm == 1:
                 cantrip += "\n  - Fire Breath \n\t The dragon exhales fire in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 14 (4d6) fire damage on a failed save, or half as much damage on a successful one."
-            elif Dice(10) == 2:
+            elif rdm == 2:
                 cantrip += "\n  - Sleep Breath \n\t The dragon exhales sleep gas in a 15-foot cone. Each creature in that area must succeed on a DC [10+%Con] Constitution saving throw or fall unconscious for 1 minute. This effect ends for a creature if the creature takes damage or someone uses an action to wake it."
-            elif Dice(10) == 3:
+            elif rdm == 3:
                 cantrip += "\n  - Acid Breath \n\t . The dragon exhales acid in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 18 (4d8) acid damage on a failed save, or half as much damage on a successful one"
-            elif Dice(10) == 4:
+            elif rdm == 4:
                 cantrip += "\n  - Slowing Breath \n\t The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a DC [10+%Con] Constitution saving throw. On a failed save, the creature can't use reactions, its speed is halved, and it can't make more than one attack on its turn. In addition, the creature can use either an action or a bonus action on its turn, but not both. These effects last for 1 minute. The creature can repeat the saving throw at the start of each of its turns, ending the effect on itself with a successful save."
-            elif Dice(10) == 5:
+            elif rdm == 5:
                 cantrip += "\n  - Euphoria Breath \n\t The dragon exhales a puff of euphoria gas at one creature within 5 feet of it. The target must succeed on a DC [10+%Con] Wisdom saving throw, or for 1 minute, the target can't take reactions and must roll a d6 at the start of each of its turns to determine its behavior during the turn: \n\t\t 1–4. The target takes no action or bonus action and uses all of its movement to move in a random direction. \n\t\t 5–6. The target doesn't move, and the only thing it can do on its turn is make a DC [10+%Con] Wisdom saving throw, ending the effect on itself on a success."
-            elif Dice(10) == 6:
+            elif rdm == 6:
                 cantrip += "\n  - Repulsion Breath \n\t The dragon exhales repulsion energy in a 30-foot cone. Each creature in that area must succeed on a DC 12 Strength saving throw. On a failed save, the creature is pushed 30 feet away from the dragon."
-            elif Dice(10) == 7:
+            elif rdm == 7:
                 cantrip += "\n  - Poison Breath"
-            elif Dice(10) == 7:
+            elif rdm == 8:
                 cantrip += "\n  - Lightning Breath \n\t The dragon exhales lightning in a 40-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 16 (3d10) lightning damage on a failed save, or half as much damage on a successful one."
 
 
@@ -1746,7 +1766,7 @@ def Magic(Lvl, race = Race(), background = Background()):
                 one += "\n - Caustic Spores \n\t The Plant releases spores in a 30-foot cone. Each creature inside the cone must succeed on a DC [10+%Con] Dexterity saving throw or take 3 (1d6) acid damage at the start of each of the plant's turns. A creature can repeat the saving throw at the start of its turn, ending the effect on itself on a success. The save DC is 8 + the plant's Constitution modifier + the plant's proficiency bonus."  
 
         if race == "Plant": 
-            if Dice(10) == 1:
+            if Dice(11) == 1:
                 one += "\n - Infestation Spores \n\t The plant releases spores that burst out in a cloud that fills a 10-foot-radius sphere centered on it, and the cloud lingers for 1 minute. Any flesh-and-blood creature in the cloud when it appears, or that enters it later, must make a DC [10+%CON] Constitution saving throw. The save DC is 8 + the plant's Constitution modifier + the plant's proficiency bonus. On a successful save, the creature can't be infected by these spores for 24 hours. On a failed save, the creature is infected with a disease called the spores of Zuggtmoy and also gains a random form of indefinite madness (determined by rolling on the Madness of Zuggtmoy table) that lasts until the creature is cured of the disease or dies. While infected in this way, the creature can't be reinfected, and it must repeat the saving throw at the end of every 24 hours, ending the infection on a success. On a failure, the infected creature's body is slowly taken over by fungal growth, and after three such failed saves, the creature dies and is reanimated as a spore servant if it's a humanoid or a Large or smaller beast. \n d100 \t	Flaw (lasts until cured) \n 01-20 \t I see visions in the world around me that others do not. \n 21-40 \t I periodically slip into a catatonic state, staring off into the distance for long stretches at a time. \n 41-60 \t I see an altered version of reality, with my mind convincing itself that things are true even in the face of overwhelming evidence to the contrary. \n 61-80 \t My mind is slipping away, and my intelligence seems to wax and wane. \n  81-00 \t I am constantly scratching at unseen fungal infections." 
                 
         if race == "Plant": 
@@ -1778,11 +1798,11 @@ def Magic(Lvl, race = Race(), background = Background()):
     if not(fourth == "4th Level Spells: "):
         r += "[{}]".format(Dice(slots4)) + fourth + "\n"
     if not(one == "1/Day each: "):
-        r += one
+        r += "\n" + one
     if not(two == "2/Day each: "):
-        r += two
+        r +=  "\n" + two
     if not(three == "3/Day each: "):
-        r += three
+        r +=  "\n" + three
     return  r
 
 
@@ -1813,6 +1833,10 @@ def Actions(Type=""):
 
     if Type == "Assassin":
         r = r + "\n- Superior Invisibility"
+
+    if Type == "Aberration":
+        if Dice() == 1:
+            r += "\n- Blinding Spittle (Recharge 5–6). \n\t The Aberration spits a chemical glob at a point it can see within 15 feet of it. The glob explodes in a blinding flash of light on impact. Each creature within 5 feet of the flash must succeed on a DC 13 Dexterity saving throw or be blinded until the end of the aberration's next turn."
 
     if Type == "Beast" or Type == "Beastfolk": 
         if Dice() == 1:
@@ -2202,6 +2226,12 @@ def Actions(Type=""):
     if Type == "Aberration":
         if Dice(2)==1: 
             r = r+"\nDamage Resistances:  \n\t thunder"
+
+    if Type == "Aberration":
+        if Dice(2)==1: 
+            r = r+"\Condition Immunities:  \n\t prone"
+
+
     if Type == "Aberration":
         if Dice(2)==1: 
             r = r+ "\n- Blindsight: \n\t 60ft"
@@ -2229,6 +2259,14 @@ def Actions(Type=""):
     if Type == "Aberration":
         if Dice() == 1:
             r = r+ "\n- Magic Resistance: \n\t The Aberration has advantage on saving throws against spells and other magical effects."
+
+    if Type == "Aberration":
+        if Dice() == 1:
+            r = r+ "\n- Aberrant Ground: \n\t The ground in a 10-foot radius around the Aberration is doughlike difficult terrain. Each creature that starts its turn in that area must succeed on a DC 10 Strength saving throw or have its speed reduced to 0 until the start of its next turn."
+
+    if Type == "Aberration":
+        if Dice() == 1:
+            r += "\n- Gibbering. \n\t The Aberration babbles incoherently while it can see any creature and isn't incapacitated. Each creature that starts its turn within 20 feet of the Aberration and can hear the gibbering must succeed on a DC 10 Wisdom saving throw. On a failure, the creature can't take reactions until the start of its next turn and rolls a d8 to determine what it does during its turn. On a 1 to 4, the creature does nothing. On a 5 or 6, the creature takes no action or bonus action and uses all its movement to move in a randomly determined direction. On a 7 or 8, the creature makes a melee attack against a randomly determined creature within its reach or does nothing if it can't make such an attack."
         
     if Type == "Aven(Birdfolk)":
         r = r+ "\n- Ambusher"
@@ -2350,6 +2388,11 @@ def Actions(Type=""):
     if Type == "Lizardfolk":
         if Dice() == 1:
             r = r + "\n - Stench.  \n\t Any creature other than a Lizardfolk that starts its turn within 5 feet of the Lizardfolk must succeed on a DC [10+%CON] Constitution saving throw or be poisoned until the start of the creature's next turn. On a successful saving throw, the creature is immune to the stench of all Lizardfolk for 1 hour."
+
+    if Type == "Undead":
+        if Dice() == 1:
+            r = r + "\n - Stench.  \n\t Any creature that starts its turn within 5 feet of the undead must succeed on a DC 10 Constitution saving throw or be poisoned until the start of its next turn. On a successful saving throw, the creature is immune to the undead's Stench for 24 hours."
+
 
     if Type == "Lizardfolk":
         if Dice() == 1:
@@ -2523,12 +2566,8 @@ def Actions(Type=""):
             r = r + "\n - Undead Fortitude"
             
     if Type == "Undead":
-        if Dice(2) == 1:
-            r = r + "\n -Stench"
-
-    if Type == "Undead":
-        if Dice(2) == 1:
-            r = r + "\n -Turn Defiance"
+        if Dice() == 1:
+            r = r + "\n -Turn Defiance \n\t The undead and any undeads within 30 feet of it have advantage on saving throws against effects that turn undead."
 
     if Type == "Undead":
         if Dice() == 1:
@@ -2795,9 +2834,7 @@ def Actions(Type=""):
             r = r + "\n- Reckless \n\t At the start of its turn, the berserker can gain advantage on all melee weapon attack rolls during that turn, but attack rolls against it have advantage until the start of its next turn."
         
         
-    if Type == "Druid":
-        r = r + "\n- Cantrips (at will): druidcraft, produce flame, shillelagh \n 1st level (4 slots): entangle, longstrider, speak with animals, thunderwave \n2nd level (3 slots): animal messenger, barkskin\n"
-        
+
     if Type == "Monstrosity":
         if Dice() == 1:
             r += "\n - Speed: 50 ft"
@@ -3027,10 +3064,86 @@ def PlotHook():
         "Is curious",
         "Is protecting their interests",
         "They are lost",
+        "They are a freedomfighter.",
+        "They want to topple a tyrant.",
+        "They fight to preserve order",
+        "They are in pilgrimage",
+        "The lost their home, and are looking for a new life.",
+        "A higher power commanded a very important mission.",
+        "Is following orders.",
+        "They are injured. ",
+        "Is in a forbidden or impossible relationship. ",
+        "They have a legacy to mantain",
+        "They have a great rival",
+        "They pursue a goal that breaks tradition or law",
+        "They are in debt.",
+        "They lead an uprising.",
+        "Feels loyalty to two opposing causes or people",
+        "Has a crisis of faith.",
+        "Is looking for revenge",
+        "Is trying to solve a failure or tragedy",
+        "Is standing up for those who are not equipped to stand up for themselves.",
+        "They keep a great secret.",
+        "They need to unveil a great secret.",
+        "They are bored.",
+        "They are hungry.",
+        "They are trapped.",
+        "They want to create something.",
+        "They are running from justice.",
+        "They are running from justice for a crime they didn't commit.",
+        "They are optimistic, seeing events in the most positive light.",
+        "They have to make a very difficult choice",
+        "They serve an unethical and corrupt organization.",
         ""]
     return random.choice(Hooks)
     
-    
+def Trait():
+    Traits = [
+        "Adaptable: Shows flexibility and versatility regardless of the situation. Thinks quickly.",
+        "Since no one else is stepping up, I will.",
+        "Adventurous. Willing to try new experiences and take risks.",
+        "Affectionate: Shows open fondness for others",
+        "Compassionate. Will prevent damage to others. ",
+        "In Alert. Aware of and watchful for possible change or danger.",
+        "They plan ahead. Always having an exit strategy", 
+        "They are highly observant",
+        "They are Ambitious.",
+        "They are Confident and prideful",
+        "They are Analytical, Logical, Rational.",
+        "They are highly curious.",
+        "They fear making a mistake.",
+        "They are bold and intrepid.",
+        "They desire to prove oneself",
+        "They are driven by a strong sense of righteousness The belief in a higher power or purpose",
+        "They are calmed, and inclined toward tranquility and serenity",
+        "They have a higher purpose.",
+        "They have a boring personality.",
+        "They enjoy simple pleasures",
+        "They are cautious, given to prudent forethought before acting.",
+        "They are wise.",
+        "They are charming",
+        "They are confident, fully assured of themself",
+        "They are cooperative.",
+        "They are courageous.",
+        "They are courteous, friendly, and have good maners.",
+        "They are curious. Marked by the desire to investigate and learn",
+        "They have the ability to make quick, efficient decisions; lacking hesitation.",
+        "They are diplomatic: Skilled at handling people while respecting their needs",
+        "They are disciplined: Exhibiting willpower and self-control.",
+        "They are strongly dedicated to a goal or belief",
+        "They are Carefree and relaxed.",
+        "They are enthusiastic: Frequently feeling or exhibiting much excitement.",
+        "They are generous, altruistic, philanthropic.",
+        "They are harsh, brusque, and violent.",
+        "They are honorable, having noble principles and displaying integrity.",
+        "They are passionate, capable of or expressing deep feeling.",
+        "They are patient. Exhibiting self-control and composure under trial or strain.",
+        "They are patriotic. Having love for or loyalty to their country.",
+        "They are persistent: Stubbornly continuing on despite opposition, difficulty, or danger.",
+        "They are playful, immature, and cheerful.",
+        "They are protective.",
+        ""]
+    return random.choice(Traits)
     
     
     
@@ -3129,20 +3242,24 @@ def NPC():
     print("\n")
 
     if Dice(Lvl) >= 15:
-        print("LEGENDARY ACTIONS:")
+        print("\nLEGENDARY ACTIONS:")
         print(Legendary(bg))
         print(Legendary(rc))
 
-        print("LAIR ACTIONS:")
+        print("\nLAIR ACTIONS:")
         print(Lair(bg))
         print(Lair(rc))
 
-        print("REGIONAL EFFECTS:")
+        print("\nREGIONAL EFFECTS:")
         print(Region(bg))
         print(Region(rc))
 
 
     print("========== Their Story ===========")
+
+    print(Trait())
+    print(Trait())
+
     print(PlotHook())
 
 NPC()
