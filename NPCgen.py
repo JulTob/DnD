@@ -40,6 +40,7 @@ def Title():
         "The Champion",
         "The Chief",
         "The Circus",
+        "The City",
         "The Collector",
         "The Conjurer",
         "The Coral",
@@ -175,6 +176,7 @@ def Title():
         "The True",
         "The Troll",
         "The Trival",
+        "The Tomb",
         "The Vampiric",
         "The Veteran",
         "The Violet",
@@ -207,6 +209,7 @@ def Title():
         "Ash",
         "Assassin",
         "Anarchist",
+        "Anthropologist",
         "Baboon",
         "Band",
         " Bard", 
@@ -223,11 +226,13 @@ def Title():
         "Breeder",
         "Butterfly",
         "Beetle",
+        "Burglar",
         "Cat",
         "Camel",
         "Captain",
         " Chemist",
         "Champion",
+        "Charlatan",
         "Chimera",
         " Collector",
         "Collosus",
@@ -398,6 +403,7 @@ def Title():
         "Walker",
         "Warlock",
         "Warrior",
+        "Watch",
         "Werewolf",
         "Wizard",
         "Witch",
@@ -1166,6 +1172,9 @@ def Language(race = Race(), background = Background()):
 
 
 
+
+
+
 def Magic(Lvl, race = Race(), background = Background()):
     if race == "":
         race = Race()
@@ -1325,7 +1334,6 @@ def Magic(Lvl, race = Race(), background = Background()):
                 first +=  "\n - Sleep"
                 slots1 += Dice(2)
 
-    
         if background == "Priest":
             if Dice() == 1:
                 cantrip += "\n- Guidance"
@@ -1351,22 +1359,27 @@ def Magic(Lvl, race = Race(), background = Background()):
             if Dice() == 1:
                 first += "\n- Guiding bolt"
                 slots1 += Dice(4)
+                
         if background == "Priest":
             if Dice() == 1:
                 first += "\n- Sanctuary" 
                 slots1 += Dice(4)
+                
         if background == "Priest":
             if Dice() == 1:
                 second += "\n- Lesser restoration"
                 slots2 += Dice(3)
+                
         if background == "Priest":
             if Dice() == 1:
                 second += "\n- Spiritual weapon"
                 slots2 += Dice(3)
+                
         if background == "Priest":
             if Dice() == 1:
                 third += "\n- Dispel magic"
                 slots3 += Dice(2)
+                
         if background == "Priest":
             if Dice() == 1:
                 third += "\n- Spirit guardians"
@@ -1410,8 +1423,7 @@ def Magic(Lvl, race = Race(), background = Background()):
                 third +=  "\n-  plant growth"
                 slots3 += Dice(2)
 
-  
-  
+
         if race == "Aberration":
             if Dice() == 1:
                 one += "\n- Stench Spray (1/Day). \n\t Each creature in a 15-foot cone originating from the Aberration must succeed on a DC 10 Dexterity saving throw or be coated in a foul-smelling liquid. A coated creature exudes a horrible stench for 1d4 hours. The coated creature is poisoned as long as the stench lasts, and other creatures are poisoned while with in 5 feet of the coated creature. A creature can remove the stench on itself by using a short rest to bathe in water, alcohol, or vinegar."
@@ -1419,8 +1431,6 @@ def Magic(Lvl, race = Race(), background = Background()):
         if race == "Aven":
             if Dice(8) == 1:
                 cantrip +=  "\n- Summon Air Elemental. \n\t Five aarakocra within 30 feet of each other can magically summon an air elemental. Each of the five must use its action and movement on three consecutive turns to perform an aerial dance and must maintain concentration while doing so (as if concentrating on a spell). When all five have finished their third turn of the dance, the elemental appears in an unoccupied space within 60 feet of them. It is friendly toward them and obeys their spoken commands. It remains for 1 hour, until it or all its summoners die, or until any of its summoners dismisses it as a bonus action. A summoner can't perform the dance again until it finishes a short rest. When the elemental returns to the Elemental Plane of Air, any aarakocra within 5 feet of it can return with it."
-
-
 
         if race == "Beastfolk":
             if Dice(10) == 1:
@@ -1460,24 +1470,28 @@ def Magic(Lvl, race = Race(), background = Background()):
                 first +=  "\n- Shield Of Faith"
                 slots1 += Dice(3)
 
-
         if race == "Celestial":
             if Dice(2) == 1:
                 cantrip +=  "\n- Light" 
+                
         if race == "Celestial":
             if Dice(2) == 1:
                 cantrip +=  "\n- Sacred flame" 
+                
         if race == "Celestial":
             if Dice(2) == 1:
                 cantrip +=  "\n- Thaumaturgy" 
+                
         if race == "Celestial":
             if Dice(2) == 1:
                 first +=  "\n- Bless" 
                 slots1 += Dice(3)
+                
         if race == "Celestial":
             if Dice(2) == 1:
                 first +=  "\n- Cure wounds" 
                 slots1 += Dice(3)
+                
         if race == "Celestial":
             if Dice(2) == 1:
                 first +=  "\n- Sanctuary"
@@ -1542,8 +1556,6 @@ def Magic(Lvl, race = Race(), background = Background()):
             if Dice(8) == 1:
                 one += "\n- Suggestion"
 
-
-
         if race == "Dwarf":
             if Dice() == 1:
                 cantrip += "\n- Enlarge (Recharges after a Short or Long Rest). \n\t For 1 minute, the Dwarf magically increases in size, along with anything it is wearing or carrying. While enlarged, the Dwarf is Large, doubles its damage dice on Strength-based weapon attacks (included in the attacks), and makes Strength checks and Strength saving throws with advantage. If the Dwarf lacks the room to become Large, it attains the maximum size possible in the space available."
@@ -1551,7 +1563,6 @@ def Magic(Lvl, race = Race(), background = Background()):
         if race == "Dwarf":
             if Dice() == 1:
                 cantrip += "\n- Invisibility (Recharges after a Short or Long Rest). \n\t The dwarf magically turns invisible until it attacks, casts a spell, or until its concentration is broken, up to 1 hour (as if concentrating on a spell). Any equipment the Dwarf wears or carries is invisible with it."
-
 
         if race == "Elemental":
             if Dice() == 1:
@@ -1645,7 +1656,6 @@ def Magic(Lvl, race = Race(), background = Background()):
             if Dice() == 1:
                 cantrip += "\n Invisibility. \n\t The Fey  magically turns invisible until it attacks or casts a spell, or until its concentration ends (as if concentrating on a spell). Any equipment the Fey wears or carries is invisible with it."
 
-                
         if race == "Fey":
             if Dice(3) == 1:
                 cantrip += "\n- Druidcraft"
@@ -1706,7 +1716,6 @@ def Magic(Lvl, race = Race(), background = Background()):
             if Dice() == 1:
                 one += "\n Scare \n\t One creature of the Fiend's choice within 20 feet of it must succeed on a DC 10 Wisdom saving throw or be frightened for 1 minute. The target can repeat the saving throw at the end of each of its turns, with disadvantage if the Fiend is within line of sight, ending the effect on itself on a success."   
 
-
         if race == "Gnome":
             if Dice()==1:
                 cantrip += "\t Nondetection (self only)"
@@ -1723,7 +1732,6 @@ def Magic(Lvl, race = Race(), background = Background()):
             if Dice()==1:
                 one += " \t Disguise Self"
 
-
         if race == "Monstrosity":
             if Dice() == 1:
                 one += "\n - Darkness Aura: \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
@@ -1736,7 +1744,6 @@ def Magic(Lvl, race = Race(), background = Background()):
             if Dice() == 1:
                 cantrip += "\n - Acid Spray (Recharge 6): \n\t The Monstrosity spits acid in a line that is 30 feet long and 5 feet wide, provided that it has no creature grappled. Each creature in that line must make a DC [10+%Str] Dexterity saving throw, taking 10 (3d6) acid damage on a failed save, or half as much damage on a successful one."
 
-           
         if race == "Ooze":
             if Dice()==1:
                 cantrip += " \n Psychic Crush (Recharge 5–6). \n\t The ooze targets one creature that it can sense within 60 feet of it. The target must make a DC 10 Intelligence saving throw, taking 10 (3d6) psychic damage on a failed save, or half as much damage on a successful one."
@@ -2654,7 +2661,6 @@ def Actions(Type=""):
         if Dice() == 1:
             r = r+ "\n Condition Immunities:   paralyzed"
 
-        
     if Type == "Undead":
         if Dice(2) == 1:
             r = r+"\n- Damage Resistances: acid, cold, fire, lightning, thunder; bludgeoning, piercing, and slashing from nonmagical attacks"
@@ -2709,7 +2715,6 @@ def Actions(Type=""):
         if Dice(2) == 1:
             r = r+ "\n- Parry (Reaction) \n\t The Bandit adds 2 to its AC against one melee attack that would hit it. To do so, the bandit must see the attacker and be wielding a melee weapon."
 
-
     if Type == "Dwarf":
         r = r + "\n- Damage Resistance: Poison"
 
@@ -2731,7 +2736,6 @@ def Actions(Type=""):
     if Type == "Cultist":
         if Dice(2)==1:
             r = r+ "\n Multiattack.\n\t The cultist makes two simple melee attacks."
-        
         
     if Type == "Fiend":
         if Dice(3)==1:
@@ -2808,9 +2812,6 @@ def Actions(Type=""):
         if Dice()==1:
             r = r + "\nFetid Cloud (1/Day).\n\t A 10-foot radius of disgusting sulfuric gas extends out from the Demon. The gas spreads around corners, and its area is lightly obscured. It lasts for 1 minute or until a strong wind disperses it. Any creature that starts its turn in that area must succeed on a DC 11 Constitution saving throw or be poisoned until the start of its next turn. While poisoned in this way, the target can take either an action or a bonus action on its turn, not both, and can't take reactions."
 
-
-
-   
     if Type == "Spy":
         if Dice(2) == 1:
             r = r + "\n- Cunning Action \n\t On each of its turns, the spy can use a bonus action to take the Dash, Disengage, or Hide action."
@@ -2823,8 +2824,6 @@ def Actions(Type=""):
         if Dice(2) == 1:
             r = r + "\n- Multiattack. \n\t The spy makes two simple melee attacks." 
 
-
-    
     if Type == "Berserker":
         if Dice(2) == 1:
             r = r + "\n- Multiattack"
@@ -2833,8 +2832,6 @@ def Actions(Type=""):
         if Dice(2) == 1:
             r = r + "\n- Reckless \n\t At the start of its turn, the berserker can gain advantage on all melee weapon attack rolls during that turn, but attack rolls against it have advantage until the start of its next turn."
         
-        
-
     if Type == "Monstrosity":
         if Dice() == 1:
             r += "\n - Speed: 50 ft"
@@ -2906,20 +2903,18 @@ def Actions(Type=""):
     if Type == "Priest":
         r = r + "\nDivine Eminence"
 
-
- 
     if Type == "Shaman":
         if Dice(2)==1:
             r = r + "\n Change Shape: \n\t The Shaman magically polymorphs into a Beast, remaining in that form for up to 1 hour. It can revert to its true form as a bonus action. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
             
-    elif Type == "Ranger" or Type == 48:
+    elif Type == "Ranger":
         r = r + Attack(4)
         r = "\n - Multiattack."
         
-    elif Type == "Bandit" or Type == 49:
+    elif Type == "Bandit":
         r = r + "\n- Parry \n\t The Bandit adds 2 to its AC against one melee attack that would hit it. To do so, the bandit must see the attacker and be wielding a melee weapon."
         
-    elif Type =="Guard" or Type == 50:
+    elif Type =="Guard":
         r = r + "\n- Parry \n\t The Guard adds 2 to its AC against one melee attack that would hit it. To do so, the Guard must see the attacker and be wielding a melee weapon."
         
     if Type == "Kobold":    
@@ -2934,7 +2929,6 @@ def Actions(Type=""):
     if Type == "Noble":
         r = r + "\n- Parry \n\t The noble adds 2 to its AC against one melee attack that would hit it. To do so, the noble must see the attacker and be wielding a melee weapon."
     
-
     if Type == "Plant": 
         if Dice() == 1:
             r = r+ "\n Condition Immunities:  frightened"
@@ -2947,7 +2941,6 @@ def Actions(Type=""):
         if Dice() == 1:
             r = r + "\n-Sun Sickness. \n\t While in sunlight, the plant has disadvantage on ability checks, attack rolls, and saving throws. The plant dies if it spends more than 1 hour in direct sunlight."
             
-
     if Type == "Plant": 
         if Dice() == 1:
             r = r + "\n Condition Immunities\n\t blinded, deafened, frightened"
@@ -3045,8 +3038,35 @@ def Region(Type):
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 def PlotHook():
     Hooks = [
+        "Someone I loved died because of I mistake I made. That will never happen again.",
+        "I'm guilty of a terrible crime. I hope I can redeem myself for it.",
+        "I will become the greatest thief that ever lived.",
+        "Something important was taken from me, and I aim to steal it back.",
+        "My ill-gotten gains go to support my family.",
+        "I'm trying to pay off an old debt I owe to a generous benefactor.",
+        "I swindled and ruined a person who didn't deserve it. I seek to atone for my misdeeds but might never be able to forgive myself.",
+        "A powerful person killed someone I love. Some day soon, I'll have my revenge.",
+        "I come from a noble family, and one day I'll reclaim my lands and title from those who stole them from me.",
+        "Somewhere out there, I have a child who doesn't know me. I'm making the world better for him or her.",
+        "I owe everything to my mentor – a horrible person who's probably rotting in jail somewhere.",
+        "I fleeced the wrong person and must work to ensure that this individual never crosses paths with me or those I care about.",
+        "I hope to bring prestige to a library, a museum, or a university.",
+        "I won't sell an art object or other treasure that has historical significance or is one of a kind.",
+        "I have a friendly rival. Only one of us can be the best, and I aim to prove it's me.",
+        "I want to find my mentor, who disappeared on an expedition some time ago.",
+        "Ever since I was a child, I've heard stories about a lost city. I aim to find it, learn its secrets, and earn my place in the history books.",
         "Is under a curse.",
         "Is the Protector of the Land",
         "Is guarding something of great importance.",
@@ -3071,11 +3091,11 @@ def PlotHook():
         "The lost their home, and are looking for a new life.",
         "A higher power commanded a very important mission.",
         "Is following orders.",
-        "They are injured. ",
-        "Is in a forbidden or impossible relationship. ",
-        "They have a legacy to mantain",
-        "They have a great rival",
-        "They pursue a goal that breaks tradition or law",
+        "I am injured. ",
+        "I'm in a forbidden or impossible relationship. ",
+        "I have a legacy to mantain",
+        "I have a great rival",
+        "I pursue a goal that breaks tradition or law",
         "They are in debt.",
         "They lead an uprising.",
         "Feels loyalty to two opposing causes or people",
@@ -3094,11 +3114,107 @@ def PlotHook():
         "They are optimistic, seeing events in the most positive light.",
         "They have to make a very difficult choice",
         "They serve an unethical and corrupt organization.",
+        "They would die to recover an ancient relic of their faith that was lost long ago.",
+        "They will someday get revenge on the corrupt temple hierarchy who branded them a heretic.",
+        "They owe their life to the priest who took them in when their parents died.",
+        "Everything I do is for the common people.",
+        "I will do anything to protect the holy site where I serve.",
+        "I seek to preserve a sacred text that my enemies consider heretical and seek to destroy.",
+        "My mentor gave me a journal filled with lore and wisdom. Losing it would devastate me.",
+        "Having lived among the people of a primeval tribe or clan, I long to return and see how they are faring.",
+        "Years ago, tragedy struck the members of an isolated society I befriended, and I will honor them.",
+        "I want to learn more about a particular humanoid culture that fascinates me.",
+        "I seek to avenge a clan, tribe, kingdom, or empire that was wiped out.",
+        "I have a trinket that I believe is the key to finding a long-lost society.",
+        "I will overcome a rival and prove myself their better.",
+        "My mistake got someone hurt. Ill never make that mistake again.",
+        "I will be the best for the honor and glory of my home.",
         ""]
     return random.choice(Hooks)
     
-def Trait():
+def Trait(background=""):
+    
     Traits = [
+        "An innocent person is in prison for a crime that I committed. I'm okay with that.",
+        "I turn tail and run when things look bad.",
+        "I have a 'tell' that reveals when I'm lying.",
+        "If there's a plan, I'll forget it. If I don't forget it, I'll ignore it.",
+        "When faced with a choice between money and my friends, I usually choose the money.",
+        "When I see something valuable, I can't think about anything but how to steal it.",
+        "I blow up at the slightest insult.",
+        "The best way to get me to do something is to tell me I can't do it.",
+        "I don't pay attention to the risks in a situation. Never tell me the odds.",
+        "I am incredibly slow to trust. Those who seem the fairest often have the most to hide.",
+        "I would rather make a new friend than a new enemy.",
+        "The first thing I do in a new place is note the locations of everything valuable – or where such things could be hidden.",
+        "I am always calm, no matter what the situation. I never raise my voice or let my emotions control me.",
+        "I always have a plan for what to do when things go wrong.",
+        "I hate to admit it and will hate myself for it, but I'll run and preserve my own hide if the going gets tough.",
+        "I can't resist swindling people who are more powerful than me.",
+        "I'm too greedy for my own good. I can't resist taking a risk if there's money involved.",
+        "I'm convinced that no one could ever fool me the way I fool others.",
+        "I'm always in debt. I spend my ill-gotten gains on decadent luxuries faster than I bring them in.",
+        "I can't resist a pretty face.",
+        "I pocket anything I see that might have some value.",
+        "I keep multiple holy symbols on me and invoke whatever deity might come in useful at any given moment.",
+        "Sarcasm and insults are my weapons of choice.",
+        "I lie about almost everything, even when there's no good reason to.",
+        "I'm a born gambler who can't resist taking a risk for a potential payoff.",
+        "Flattery is my preferred trick for getting what I want.",
+        "I have a joke for every occasion, especially occasions where humor is inappropriate.",
+        "I fall in and out of love easily, and am always pursuing someone.",
+        "I convince people that worthless junk is worth their hard-earned money.",
+        "I run sleight-of-hand cons on street corners.",
+        "I put on new identities like clothes.",
+        "I insinuate myself into people's lives to prey on their weakness and secure their fortunes.",
+        "I shave coins or forge documents.",
+        "I cheat at games of chance.",
+        "I must be the captain of any group I join.",
+        "Any defeat or failure on my part is because my opponents cheated.",
+        "I have lingering pain of old injuries.",
+        "I ignore anyone who doesn't compete and anyone who loses to me.",
+        "I'll do absolutely anything to win.",
+        "I indulge in a habit that threatens my reputation or health.",
+        "I strive to live up to a specific hero's example.",
+        "The person who trained me is the most important person in my world.",
+        "My teammates are my family.",
+        "I get irritated if people praise someone else and not me.",
+        "Anything worth doing is worth doing best.",
+        "I love to trade banter and gibes.",
+        "When I see others struggling, I offer to help.",
+        "Obstacles exist to be overcome.",
+        "I have a daily exercise routine I refuse to break.",
+        "I don't like to sit idle.",
+        "I feel most at peace during physical exertion, whether exercise or battle.",
+        "I can't sleep except in total darkness.",
+        "When given the choice of going left or right, I always go left.",
+        "I have no time for friends or family. I spend every waking moment thinking about and preparing for my next expedition.",
+        "When I'm not exploring dungeons or ruins, I get jittery and impatient.",
+        "I can't leave a room without searching it for secret doors.",
+        "I have a secret fear of some common wild animal – and in my work, I see them everywhere.",
+        "You might think I'm a scholar, but I love a good brawl. These fists were made for punching.",
+        "I might fail, but I will never give up.",
+        "I have no qualms about stealing from the dead.",
+        "I love a good puzzle or mystery.",
+        "I'm a pack rat who never throws anything away.",
+        "I wear a tribal mask and never take it off.",
+        "I complain about everything.",
+        "I've picked up some unpleasant habits living among races such as goblins, lizardfolk, or orcs.",
+        "I believe that I'm intellectually superior to people from other cultures and have much to teach them.",
+        "Boats make me seasick.",
+        "I talk to myself, and I don't make friends easily.",
+        "When I arrive at a new settlement for the first time, I must learn all its customs.",
+        "I would risk life and limb to discover a new culture or unravel the secrets of a dead one.",
+        "By living among violent people, I have become desensitized to violence.",
+        "I would rather observe than meddle.",
+        "I prefer the company of those who aren't like me, including people of other races.",
+        "I'm a stickler when it comes to observing proper etiquette and local customs.",
+        "I judge others harshly, and myself even more severely.",
+        "I put too much trust in those who wield power within my temple's hierarchy.",
+        "My piety sometimes leads me to blindly trust those that profess faith in my god.",
+        "I am inflexible in my thinking.",
+        "I am suspicious of strangers and expect the worst of them.",
+        "Once I pick a goal, I become obsessed with it to the detriment of everything else in my life.",
         "Adaptable: Shows flexibility and versatility regardless of the situation. Thinks quickly.",
         "Since no one else is stepping up, I will.",
         "Adventurous. Willing to try new experiences and take risks.",
@@ -3119,7 +3235,7 @@ def Trait():
         "They have a higher purpose.",
         "They have a boring personality.",
         "They enjoy simple pleasures",
-        "They are cautious, given to prudent forethought before acting.",
+        "I am cautious, given to prudent forethought before acting.",
         "They are wise.",
         "They are charming",
         "They are confident, fully assured of themself",
@@ -3142,11 +3258,146 @@ def Trait():
         "They are persistent: Stubbornly continuing on despite opposition, difficulty, or danger.",
         "They are playful, immature, and cheerful.",
         "They are protective.",
-        ""]
+        "Traps don't make me nervous. Idiots who trigger traps make me nervous.",
+        "I'm happier in a dusty old tomb than I am in the centers of civilization.",
+        "Fame is more important to me than money.",
+        ""
+        ]
+        
+
+        
+    if background == "Acolyte":
+        return random.choice( [
+            "They idolize a particular hero of my faith, and constantly refer to that person's deeds and example.",
+            "I can find common ground between the fiercest enemies, empathizing with them and always working toward peace.",
+            "I see omens in every event and action. The gods try to speak to us, we just need to listen.",
+            "Nothing can shake my optimistic attitude.",
+            "I quote (or misquote) sacred texts and proverbs in almost every situation.",
+            "I am tolerant  of other faiths and respect the worship of other gods.",
+            "I am intolerant of other faiths and condemn the worship of other gods.",
+            "I've enjoyed fine food, drink, and high society among my temple's elite. Rough living grates on me.",
+            "I've spent so long in the temple that I have little practical experience dealing with people in the outside world.",
+            ""]) 
     return random.choice(Traits)
     
+
+
+
+def Ideal(background, alignment):
     
-    
+    if background == "Acolyte":
+        if "Lawful" in alignment and Dice()==1:
+            return random.choice([
+                "Tradition. The ancient traditions of worship and sacrifice must be preserved and upheld.",
+                "Faith. I trust that my deity will guide my actions. I have faith that if I work hard, things will go well."
+                ])
+        if "Good" in alignment and Dice()==1:
+            return random.choice( 
+                ["Charity. I always try to help those in need, no matter what the personal cost."
+                ])
+        if "Chaotic" in alignment and Dice()==1:
+            return random.choice( 
+                ["Change. We must help bring about the changes the gods are constantly working in the world."
+                ])
+
+    if background == "Charlatan":
+        if "Chaotic" in alignment and Dice()==1:
+            return random.choice([
+                "Independence. I am a free spirit – no one tells me what to do.",
+                "Creativity. I never run the same con twice."
+                ])
+        if "Lawful" in alignment and Dice()==1:
+            return random.choice([
+                "Fairness. I never target people who can't afford to lose a few coins."
+                ])
+        if "Good" in alignment and Dice()==1:
+            return random.choice([
+                "Fairness. I never target people who can't afford to lose a few coins.",
+                "Charity. I distribute the money I acquire to the people who really need it.",
+                "Friendship. Material goods come and go. Bonds of friendship last forever."
+                ])
+
+    if background == "Criminal":
+        if "Lawful" in alignment and Dice()==1:
+            return random.choice([
+                "Honor. I don't steal from others in the trade.",
+                ])
+        if "Chaotic" in alignment and Dice()==1:
+            return random.choice([
+                "Freedom. Chains are meant to be broken, as are those who would forge them.",
+                ])
+        if "Good" in alignment and Dice()==1:
+            return random.choice([
+                "Charity. I steal from the wealthy so that I can help people in need.",
+                "Redemption. There's a spark of good in everyone",
+                ])
+        if "Evil" in alignment and Dice()==1:
+            return random.choice([
+                "Greed. I will do whatever it takes to become wealthy.",
+                ])
+        if "Neutral" in alignment and Dice()==1:
+            return random.choice([
+                "People. I'm loyal to my friends, not to any ideals, and everyone else can take a trip down the Styx for all I care."
+                ])
+                
+                
+    if background == "Gladiator":
+        if "Chaotic" in alignment and Dice()==1:
+            return random.choice([
+                "Competition. I strive to test myself in all things."
+                ])
+        if "Evil" in alignment and Dice()==1:
+            return random.choice([
+                "Triumph. The best part of winning is seeing my rivals brought low."
+                ])
+        if "Good" in alignment and Dice()==1:
+            return random.choice([
+                "Camaraderie. The strongest bonds are forged through struggle."
+                ])
+        if "Neutral" in alignment and Dice()==1:
+            return random.choice([
+                "People. I strive to inspire my spectators."
+                ])
+        if "Lawful" in alignment and Dice()==1:
+            return random.choice([
+                "Tradition. Every game has rules, and the playing field must be level."
+                ])
+                
+    if background == "Student":
+        if "Lawful" in alignment and Dice()==1:
+            return random.choice( 
+                ["Distance. One must not interfere with the affairs of another culture – even one in need of aid.", 
+                "Power. Common people crave strong leadership, and I do my utmost to provide it.",
+                "Dignity. The dead and their belongings deserve to be treated with respect."
+                ])
+        if "Good" in alignment and Dice()==1:
+            return random.choice( 
+                ["Protection. I must do everything possible to save a society facing extinction.",
+                "Preservation. That artifact belongs in a museum."
+                ])
+        if "Evil" in alignment and Dice()==1:
+            return random.choice([
+                "Indifferent. Life is cruel. What's the point in saving people if they're going to die anyway?"
+                ])
+        if "Chaotic" in alignment and Dice()==1:
+            return random.choice([
+                "Death Wish. Nothing is more exhilarating than a narrow escape from the jaws of death."
+                ])
+
+                
+    return random.choice([
+        "Danger. With every great discovery comes grave danger. The two walk hand in hand.",
+        "Discovery. I want to be the first person to discover a lost culture.",
+        "Knowledge. By understanding other races and cultures, we learn to understand ourselves.",
+        "Immortality. All my exploring is part of a plan to find the secret of everlasting life.",
+        "Aspiration. I seek to prove myself worthy of my god's favor by matching my actions against their teachings.",
+        "Greed. I won't risk my life for nothing. I expect some kind of payment.",
+        "Growth. Lessons hide in victory and defeat",
+        "Aspiration. I'm determined to make something of myself.",
+        ""
+        ])
+                
+
     
     
     
@@ -3256,10 +3507,12 @@ def NPC():
 
 
     print("========== Their Story ===========")
-
+    print(" - Traits -")
     print(Trait())
-    print(Trait())
-
+    print(Trait(bg))
+    print(" - Ideal -")
+    print(Ideal(bg,al))    
+    print(" - Story Hook -")
     print(PlotHook())
 
 NPC()
