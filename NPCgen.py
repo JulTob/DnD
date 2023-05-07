@@ -3166,7 +3166,7 @@ def Trait(background=""):
         "I do what I can to protect the natural world.",
         "I find magic in all its forms to be compelling. The more magical a place, the more I am drawn to it.",
         "I would never break my word.",
-        "Rule of Three. Everything in the multiverse happens in threes. I see the "rule of three" everywhere.",
+        "Rule of Three. Everything in the multiverse happens in threes. I see the 'rule of three' everywhere.",
         "I can't bring myself to trust most adults.",
         "I live by my own set of weird and wonderful rules.",
         "When I have a new idea, I get wildly excited about it until I come up with another, better idea.",
