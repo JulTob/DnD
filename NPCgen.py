@@ -1430,7 +1430,7 @@ def Magic(Lvl, race = Race(), background = Background()):
 
         if race == "Aven":
             if Dice(8) == 1:
-                cantrip +=  "\n- Summon Air Elemental. \n\t Five aarakocra within 30 feet of each other can magically summon an air elemental. Each of the five must use its action and movement on three consecutive turns to perform an aerial dance and must maintain concentration while doing so (as if concentrating on a spell). When all five have finished their third turn of the dance, the elemental appears in an unoccupied space within 60 feet of them. It is friendly toward them and obeys their spoken commands. It remains for 1 hour, until it or all its summoners die, or until any of its summoners dismisses it as a bonus action. A summoner can't perform the dance again until it finishes a short rest. When the elemental returns to the Elemental Plane of Air, any aarakocra within 5 feet of it can return with it."
+                cantrip +=  "\n- Summon Air Elemental. \n\t Five Aven within 30 feet of each other can magically summon an air elemental. Each of the five must use its action and movement on three consecutive turns to perform an aerial dance and must maintain concentration while doing so (as if concentrating on a spell). When all five have finished their third turn of the dance, the elemental appears in an unoccupied space within 60 feet of them. It is friendly toward them and obeys their spoken commands. It remains for 1 hour, until it or all its summoners die, or until any of its summoners dismisses it as a bonus action. A summoner can't perform the dance again until it finishes a short rest. When the elemental returns to the Elemental Plane of Air, any Aven within 5 feet of it can return with it."
 
         if race == "Beastfolk":
             if Dice(10) == 1:
@@ -1919,7 +1919,7 @@ def Actions(Type=""):
 
     if Type=="Beast" or Type=="Beastfolk": 
         if Dice(8) == 1:
-            r = r+ "\n - Relentless \n\t Recharges after a Short or Long Rest). \n\t If the beast takes 7 damage or less that would reduce it to 0 hit points, it is reduced to 1 hit point instead."
+            r = r+ "\n - Relentless \n\t (Recharges after a Short or Long Rest). \n\t If the beast takes 7 damage or less that would reduce it to 0 hit points, it is reduced to 1 hit point instead."
 
     if Type=="Beast" or Type=="Beastfolk": 
         if Dice(8) == 1:
@@ -2882,7 +2882,7 @@ def Actions(Type=""):
             
     if Type == "Monstrosity":
         if Dice() == 1:
-            r = r + "\n- Flight.\n\t 60 ft.\n"  
+            r = r + "\n- Fly: 60 ft.\n"  
 
     if Type == "Monstrosity":
         if Dice() == 1:
@@ -3026,7 +3026,7 @@ def Lair(Type):
 
 def Region(Type):
     r = ""
-    if Type == "Dragon":
+    if Type == "Fey":
         if Dice() == 1:
             r += "\n- Compulsory Offering \n\t The first time a creature comes within 1 mile of the faerie dragon's lair, the creature must succeed on a DC 15 Wisdom saving throw or feel an overwhelming compulsion to leave an offering worth at least 5 gp stashed in an out-of-the-way place. The dragon immediately senses the location of this gift. A creature can be affected only once by this compulsion."
             
@@ -3050,6 +3050,19 @@ def Region(Type):
     
 def PlotHook():
     Hooks = [
+        "I have a tail like that of a dog or another animal, as a punishment from a Fey for an accidental insult.",
+        "I have a weakness for the exotic beauty of the people of these lands.",
+        "I do everything for those who were taken from me.",
+        "I am exceptional. I do this because no one else can, and no one can stop me.",
+        "I stand in opposition, lest the wicked go unopposed.",
+        "I've seen too many in need. I must not fail them as everyone else has.",
+        "What I do, I do for the world. The people don't realize how much they need me.",
+        "I do everything for my family. My first thought is keeping them safe.",
+        "I once satirized a noble who still wants my head. It was a mistake that I will likely repeat.",
+        "I would do anything for the other members of my old troupe.",
+        "I will do anything to prove myself superior to my hated rival.",
+        "I want to be famous, whatever it takes.",
+        "Someone stole an object precious to me, and someday I'll get it back.",
         "Someone I loved died because of I mistake I made. That will never happen again.",
         "I'm guilty of a terrible crime. I hope I can redeem myself for it.",
         "I will become the greatest thief that ever lived.",
@@ -3088,7 +3101,7 @@ def PlotHook():
         "They want to topple a tyrant.",
         "They fight to preserve order",
         "They are in pilgrimage",
-        "The lost their home, and are looking for a new life.",
+        "I lost my home, and I'm looking for a new life.",
         "A higher power commanded a very important mission.",
         "Is following orders.",
         "I am injured. ",
@@ -3132,9 +3145,86 @@ def PlotHook():
         ""]
     return random.choice(Hooks)
     
-def Trait(background=""):
     
+    
+    
+def Trait(background=""):
     Traits = [
+        "I'm always changing my mind-well, almost always.",
+        "I have many vices and tend to indulge them.",
+        "I never give away anything for free and always expect something in return.",
+        "I'm forgetful. Sometimes I can't remember even the simplest things.",
+        "I'm a kleptomaniac who covets shiny, sparkling treasure.",
+        "I'm always operating under a tight timeline, and I'm obsessed with keeping everything on schedule.",
+        "I think the whole multiverse is out to get me.",
+        "I easily lose track of time. My poor sense of time means I'm always late.",
+        "I feel indebted to a witch or fae for giving me a home and a purpose.",
+        "I'm drawn to the Feywild and long to return there, if only for a short while.",
+        "The Witchlight Carnival (Halloween) feels like home to me.",
+        "I can't bring myself to harm a Fey creature, either because I consider myself one or because I fear the repercussions.",
+        "A trusted friend is the most important thing in the multiverse to me.",
+        "I do what I can to protect the natural world.",
+        "I find magic in all its forms to be compelling. The more magical a place, the more I am drawn to it.",
+        "I would never break my word.",
+        "Rule of Three. Everything in the multiverse happens in threes. I see the "rule of three" everywhere.",
+        "I can't bring myself to trust most adults.",
+        "I live by my own set of weird and wonderful rules.",
+        "When I have a new idea, I get wildly excited about it until I come up with another, better idea.",
+        "I have never lost my childlike sense of wonder.",
+        "Wherever I go, I try to bring a little of the warmth and tranquility of home with me.",
+        "Good music makes me weep like a baby.",
+        "Like a nomad, I can't settle down in one place for very long.",
+        "I'm haunted by fey laughter that only I can hear, though I know it's just my mind playing tricks on me.",
+        "Flowers wilt in my presence.",
+        "Flowers bloom in my presence.",
+        "My skin sparkles in sunlight.",
+        "My skin sparkles in moonlight.",
+        "I have a sweet scent, like that of nectar or honey",
+        "My eyes swirl with iridescent colors.",
+        "I consider the adherents of other gods to be deluded innocents at best, or ignorant fools at worst.",
+        "I don't take kindly to some of the actions and motivations of the people of this land, because these folk are different from me.",
+        "I have a weakness for the new intoxicants and other pleasures of this land.",
+        "I pretend not to understand the local language in order to avoid interactions I would rather not have.",
+        "I am secretly (or not so secretly) convinced of the superiority of my own culture over that of this foreign land.",
+        "Though I had no choice, I lament having to leave my loved ones behind. I hope to see them again one day.",
+        "I'm fascinated by the beauty and wonder of this new land.",
+        "My freedom is my most precious possession. I'll never let anyone take it from me again.",
+        "I hold no greater cause than my service to my people.",
+        "The gods of my people are a comfort to me so far from home.",
+        "So long as I have this token from my homeland, I can face any adversity in this strange land.",
+        "I begin or end my day with small traditional rituals that are unfamiliar to those around me.",
+        "I honor my deities through practices that are foreign to this land.",
+        "I express affection or contempt in ways that are unfamiliar to others.",
+        "I have a strong code of honor or sense of propriety that others don't comprehend.",
+        "I have my own ideas about what is and is not food, and I find the eating habits of those around me fascinating, confusing, or revolting.",
+        "I have different assumptions from those around me concerning personal space, blithely invading others' space in innocence, or reacting to ignorant invasion of my own.",
+        "I see morality entirely in black and white.",
+        "I think far ahead, a detachedness often mistaken for daydreaming.",
+        "I overexert myself, sometimes needing to recuperate for a day or more.",
+        "I have no sense of humor. Laughing is uncomfortable and embarrassing.",
+        "I never make eye contact or hold it unflinchingly.",
+        "I an callous about death. It comes to us all eventually.",
+        "I am ever learning how to be among others—when to stay quiet, when to laugh.",
+        "I cultivate a single obscure hobby or study and eagerly discuss it at length.",
+        "I think far ahead, a detachedness often mistaken for daydreaming.",
+        "I sleep just as much as I need to and on an unusual schedule.",
+        "I treasure a memento of a person or instance that set me upon my path.",
+        "I strive to have no personality—it's easier to forget what's hardly there.",
+        "I'm earnest and uncommonly direct.",
+        "Despite my best efforts, I am unreliable to my friends.",
+        "I have trouble keeping my true feelings hidden. My sharp tongue lands me in trouble.",
+        "A scandal prevents me from ever going home again. That kind of trouble seems to follow me around.",
+        "I'm a sucker for a pretty face.",
+        "I'll do anything to win fame and renown.",
+        "I idolize a hero of the old tales and measure my deeds against that person's.",
+        "I change my mood or my mind as quickly as I change key in a song.",
+        "I'll settle for nothing less than perfection.",
+        "I get bitter if I'm not the center of attention.",
+        "I love a good insult, even one directed at me.",
+        "Nobody stays angry at me or around me for long, since I can defuse any amount of tension.",
+        "I'm a hopeless romantic, always searching for that 'special someone.'",
+        "Whenever I come to a new place, I collect local rumors and spread gossip.",
+        "I know a story relevant to almost every situation.",
         "An innocent person is in prison for a crime that I committed. I'm okay with that.",
         "I turn tail and run when things look bad.",
         "I have a 'tell' that reveals when I'm lying.",
@@ -3267,7 +3357,7 @@ def Trait(background=""):
 
         
     if background == "Acolyte":
-        return random.choice( [
+        return random.choice(Traits + [
             "They idolize a particular hero of my faith, and constantly refer to that person's deeds and example.",
             "I can find common ground between the fiercest enemies, empathizing with them and always working toward peace.",
             "I see omens in every event and action. The gods try to speak to us, we just need to listen.",
@@ -3278,6 +3368,12 @@ def Trait(background=""):
             "I've enjoyed fine food, drink, and high society among my temple's elite. Rough living grates on me.",
             "I've spent so long in the temple that I have little practical experience dealing with people in the outside world.",
             ""]) 
+    if background=="Entertainer":
+        return random.choice( Traits + [
+            "My instrument is my most treasured possession, and it reminds me of someone I love."
+            ])
+
+
     return random.choice(Traits)
     
 
@@ -3383,9 +3479,88 @@ def Ideal(background, alignment):
             return random.choice([
                 "Death Wish. Nothing is more exhilarating than a narrow escape from the jaws of death."
                 ])
-
                 
+    if background=="Entertainer":
+        if "Good" in alignment and Dice()==1:
+            return random.choice([
+                "Beauty. When I perform, I make the world better than it was."
+                ])
+        if "Lawful" in alignment and Dice()==1:
+            return random.choice([
+                "Tradition. The stories, legends, and songs of the past must never be forgotten, for they teach us who we are."
+                ])
+        if "Chaotic" in alignment and Dice()==1:
+            return random.choice([
+                "Creativity. The world is in need of new ideas and bold action."
+                ])
+        if "Evil" in alignment and Dice()==1:
+            return random.choice([
+                "Greed. I'm only in it for the money and fame."
+                ])
+        if "Neutral" in alignment and Dice()==1:
+            return random.choice([
+                "People. I like seeing the smiles on people's faces when I perform. That's all that matters."
+                ])               
+        if Dice()==1:
+            return random.choice([
+                "Honesty. Art should reflect the soul; it should come from within and reveal who we really are."
+                ])   
+
+    if background == "Traveler":
+        if "Good" in alignment and Dice()==1:
+            return random.choice([
+                "Friendship. I never leave a friend behind. ",
+                "Open. I have much to learn from the kindly folk I meet along my way."
+                ])
+        if "Lawful" in alignment and Dice()==1:
+            return random.choice([
+                "Reserved. As someone new to these strange lands, I am cautious and respectful in my dealings."
+                ])
+        if "Chaotic" in alignment and Dice()==1:
+            return random.choice([
+                "Wanderlust. I prefer to take the less traveled path",
+                "Adventure. I'm far from home, and everything is strange and wonderful!"
+                ])
+        if "Evil" in alignment and Dice()==1:
+            return random.choice([
+                " Cunning. Though I may not know their ways, neither do they know mine, which can be to my advantage."
+                ])
+        if "Neutral" in alignment and Dice()==1:
+            return random.choice([
+                "Inquisitive. Everything is new, but I have a thirst to learn."
+                ])
+        if Dice()==1:
+            return random.choice([
+                "Suspicious. I must be careful, for I have no way of telling friend from foe here."
+                ])
+
+    if "Good" in alignment and Dice()==1:
+        return random.choice([
+            "Empathy. No creature should be made to suffer."
+            ])
+    if "Chaotic" in alignment and Dice()==1:
+        return random.choice([
+            "Changeability. Change is good, which is why I live by an ever-changing set of rules."
+            ])
+    if "Lawful" in alignment and Dice()==1:
+        return random.choice([
+            "Honor. A deal is a deal, and I would never break one."
+            ])
+    if "Evil" in alignment and Dice()==1:
+        return random.choice([
+            "Obsession. I won't let go of a grudge",
+            "Greed. I will do whatever it takes to get what I want, regardless of the harm it might cause.",
+            "Confusion. Deception is a weapon. Strike from where your foes won't expect."
+            ])
+    if "Neutral" in alignment and Dice()==1:
+        return random.choice([
+            ])    
     return random.choice([
+        "Anonymity. It's my deeds that should be remembered, not their instrument.",
+        "Incorruptibility. Be a symbol, and leave your flawed being behind.",
+        "Infamy. My name will be a malediction, a curse that fulfills my will.",
+        "Security. Doing what must be done can't bring the innocent to harm.",
+        "Justice. Place in society shouldn't determine one's access to what is right. ",
         "Danger. With every great discovery comes grave danger. The two walk hand in hand.",
         "Discovery. I want to be the first person to discover a lost culture.",
         "Knowledge. By understanding other races and cultures, we learn to understand ourselves.",
@@ -3421,6 +3596,103 @@ def NPC():
     al = Alignment()
     
     if rc == "Giant": STR += Dice(12)
+    if rc == "Fey": CHA += Dice(12)
+    if rc == "Human": 
+        STR += Dice(2)
+        DEX += Dice(2)
+        CON += Dice(2)
+        INT += Dice(2)
+        WIS += Dice(2)
+        CHA += Dice(2)
+    if rc == "Aberration": CON += Dice(12)
+    if rc == "Aven": DEX += Dice(12)
+    if rc == "Beast": CON += Dice(12)
+    if rc == "Beastfolk":
+        CON += Dice()
+        WIS += Dice()
+    if rc == "Celestial":
+        WIS += Dice()
+        CHA += Dice()
+    if rc == "Construct":
+        STR += Dice()
+        CON += Dice()
+    if rc == "Dragon": 
+        STR += Dice()
+        DEX += Dice()
+        CON += Dice()
+        INT += Dice()
+        WIS += Dice()
+        CHA += Dice()
+    if rc == "Dwarf": 
+        STR += Dice(4)
+        CON += Dice(4)
+        WIS += Dice(4)
+    if rc == "Elf":
+        DEX += Dice(4)
+        INT += Dice(4)
+        WIS += Dice(4)
+    if rc == "Elemental":
+        CON += Dice(6)
+        WIS += Dice(6)
+    if rc == "Fiend": CHA += Dice(12)
+    if rc == "Genasi":
+        CON += Dice(6)
+        WIS += Dice(6)
+    if rc == "Gnome":
+        DEX += Dice(4)
+        INT += Dice(4)
+        CHA += Dice(4)
+    if rc == "Goblin":
+        DEX += Dice(4)
+        INT += Dice(4)
+        CHA += Dice(4)
+    if rc == "Hag":
+        CON += Dice(3)
+        INT += Dice(3)
+        WIS += Dice(3)
+        CHA += Dice(3)
+    if rc == "Halfling":
+        DEX += Dice(4)
+        INT += Dice(4)
+        CHA += Dice(4)
+    if rc == "Kobold":
+        DEX += Dice()
+        INT += Dice()
+    if rc == "Lizardfolk":
+        STR += Dice(2)
+        DEX += Dice(2)
+        CON += Dice(2)
+        INT += Dice(2)
+        WIS += Dice(2)
+        CHA += Dice(2)
+    if rc == "Monstrosity":
+        STR += Dice()
+        CON += Dice()
+    if rc == "Ooze":
+        CON += Dice(12)
+    if rc == "Orc":
+        STR += Dice(3)
+        DEX += Dice(2)
+        CON += Dice(3)
+        WIS += Dice(2)
+        CHA += Dice(2)
+    if rc == "Plant":
+        STR += Dice(4)
+        CON += Dice(4)
+        WIS += Dice(4)
+    if rc == "Snakefolk":
+        DEX += Dice(4)
+        CON += Dice(4)
+        INT += Dice(4)
+    if rc == "Tiefling":
+        CON += Dice(3)
+        INT += Dice(3)
+        WIS += Dice(3)
+        CHA += Dice(3)
+    if rc == "Undead":
+        STR += Dice(4)
+        CON += Dice(4)
+        CHA += Dice(4)
     
     print(Title())
     print("-", al, "-")
