@@ -79,6 +79,7 @@ def Title():
         "The Fullmetal",
         "The Flying",
         "The Flame",
+        "The Fury",
         "The Giant",
         "The Gas",
         "The Green",
@@ -115,7 +116,7 @@ def Title():
         "The Love of",
         "The Master",
         "The Mad",
-        "The Mage",
+        "The Magic",
         "The Magma",
         "The Mental",
         "The Mirror",
@@ -238,7 +239,7 @@ def Title():
         "Collosus",
         "Commander",
         "Cultist",
-        " Darkness",
+        "Darkness",
         " Diamond",
         "Dino",
         "Deer",
@@ -268,7 +269,6 @@ def Title():
         "Freedomfighter",
         "Gargoyle",
         " Genius",
-        " Geneticist", 
         "Giant",
         " Grandmaster",
         "Ghost",
@@ -279,6 +279,7 @@ def Title():
         "Hag",
         "Hawk",
         "Hermit",
+        "Hero",
         "Hive",
         " Horror",
         "Hound",
@@ -296,14 +297,14 @@ def Title():
         "King",
         "Kiss",
         " Leader",
-        " Licht",
         "Lion",
+        "Light",
         "Lizard",
         " Lotus",
         " Lord",
         "Lover",
         "Man",
-        " Machine",
+        "Machine",
         " Mage",
         " Master",
         "Mastermind",
@@ -449,22 +450,16 @@ def Alignment():
    
 def Background():
     Backgrounds = [
-        "Acolyte",
-        "Alchemist",
-        "Archaeologist",
-        "Artisan",
-        "Assassin",
         "Bandit",
         "Bard",
         "Berserker",
         "Charlatan",
         "Commoner",
-        "Courtesan",
         "Cultist",
         "Criminal",
         "Druid",
-        "Entertainer",
         "Expert",
+        "Explorer",
         "Gladiator",
         "Guard",
         "Healer",
@@ -473,20 +468,15 @@ def Background():
         "Hunter",
         "Knight", 
         "Mage",
-        "Mercenary",
+        "Monk",
         "Noble", 
-        "Outlander",
         "Priest",
         "Pirate",
         "Ranger",
-        "Sage",
-        "Scout",
         "Scholar",
         "Shaman",
         "Soldier",
-        "Student",
         "Spy",
-        "Spellcaster",
         "Traveler",
         "Urchin",
         "Veteran",
@@ -628,6 +618,15 @@ def BeastfolkName():
         ""]
     return random.choice(Names)
 
+def CelestialName():
+    Names = [
+        "Angel",
+        "Planetar",
+        "Seraph",
+        ""]
+    return random.choice(Names)
+
+
 def ConstructName():
     Names = [
         "Animated Armor",
@@ -717,6 +716,7 @@ def UndeadName():
         "Crawling Limbs",
         "Ghoul",
         "Ghast",
+        "Licht",
         "Skelleton",
         "Shadow",
         "Specter",
@@ -731,6 +731,7 @@ def Name(Type):
     if Type == "Aven": return AvenName()
     if Type == "Beast": return BeastName()
     if Type == "Beastfolk": return BeastfolkName()
+    if Type == "Celestial": return CelestialName()
     if Type == "Construct": return ConstructName()
     if Type == "Dragon": return DragonName()
     if Type == "Fey": return FeyName()
@@ -763,7 +764,7 @@ def AbilityScore():
     d2 = Dice() 
     d3 = Dice()
     d4 = Dice()
-    return d1+d2+d3+d4 - min(d1,d2,d3,d4) + Dice(3)-1 + Dice(6)-Dice(6)
+    return d1+d2+d3+d4 - min(d1,d2,d3,d4)
     
 def Modifier(AS):
     if AS >= 10:
@@ -899,117 +900,72 @@ def Condition(dmg):
         "Unconscious",
         ""
         ]
-    if dmg == "Slashing":
-        return random.choice(["Exhaustion","Incapacitated", "Poisoned", "Prone" ])
-    elif dmg == "Piercing":
-        return random.choice(["Blinded","Exhaustion", "Incapacitated", "Poisoned", "Grappled" ])
-    elif dmg == "Bludgeoning":
-        return random.choice(["Blinded","Deafened","Exhaustion", "Incapacitated", "Prone", "Stunned","Uncoscious", "Grappled", "Restrained" ])
-    elif dmg == "Poison":
-        return random.choice(["Blinded", "Charmed", "Exhaustion", "Frightened", "Incapacitated", "Paralyzed", "Petrified", "Poisoned", "Restrained", "Unconscious"])
-    elif dmg == "Acid":
-        return random.choice(["Blinded", "Exhaustion", "Incapacitated", "Paralyzed", "Petrified", "Poisoned", "Restrained","Unconscious"])
-    elif dmg == "Fire":
-        return random.choice(["Blinded", "Charmed", "Incapacitated", "Paralyzed", "Stunned", "Unconscious"])
-    elif dmg == "Cold":
-        return random.choice(["Exhaustion", "Incapacitated", "Paralyzed", "Petrified", "Restrained", "Grappled"])
-    elif dmg == "Radiant":
-        return random.choice(["Blinded", "Charmed", "Deafened", "Frightened", "Incapacitated", "Paralyzed", "Prone", "Stunned", "Unconscious"])
-    elif dmg == "Necrotic":
-        return random.choice([ "Exhaustion", "Frightened", "Incapacitated", "Paralyzed", "Poisoned", "Prone", "Restrained", "Stunned", "Unconscious"])
-    elif dmg == "Lightning":
-        return random.choice(["Blinded", "Charmed", "Deafened", "Exhaustion", "Frightened", "Grappled", "Incapacitated", "Paralyzed", "Petrified", "Prone", "Restrained", "Stunned", "Unconscious"])
-    elif dmg == "Force":
-        return random.choice(["Blinded","Deafened", "Exhaustion", "Incapacitated", "Prone", "Stunned", "Unconscious", "Grappled" ])
-    elif dmg == "Psychic":
-        return random.choice(["Blinded", "Charmed", "Deafened", "Exhaustion", "Frightened", "Incapacitated", "Paralyzed", "Petrified", "Poisoned", "Prone", "Restrained", "Stunned", "Unconscious"])
-    elif dmg == "Thunder":
-        return random.choice(["Blinded", "Deafened", "Exhaustion", "Incapacitated", "Paralyzed", "Prone", "Stunned"])
-    else:
-        return random.choice(ConditionsTypes)
+    if dmg == "Slashing": return random.choice(["Exhaustion","Incapacitated", "Poisoned", "Prone" ])
+    elif dmg == "Piercing": return random.choice(["Blinded","Exhaustion", "Incapacitated", "Poisoned", "Grappled" ])
+    elif dmg == "Bludgeoning": return random.choice(["Blinded","Deafened","Exhaustion", "Incapacitated", "Prone", "Stunned","Uncoscious", "Grappled", "Restrained" ])
+    elif dmg == "Poison": return random.choice(["Blinded", "Charmed", "Exhaustion", "Frightened", "Incapacitated", "Paralyzed", "Petrified", "Poisoned", "Restrained", "Unconscious"])
+    elif dmg == "Acid": return random.choice(["Blinded", "Exhaustion", "Incapacitated", "Paralyzed", "Petrified", "Poisoned", "Restrained","Unconscious"])
+    elif dmg == "Fire": return random.choice(["Blinded", "Charmed", "Incapacitated", "Paralyzed", "Stunned", "Unconscious"])
+    elif dmg == "Cold": return random.choice(["Exhaustion", "Incapacitated", "Paralyzed", "Petrified", "Restrained", "Grappled"])
+    elif dmg == "Radiant": return random.choice(["Blinded", "Charmed", "Deafened", "Frightened", "Incapacitated", "Paralyzed", "Prone", "Stunned", "Unconscious"])
+    elif dmg == "Necrotic": return random.choice([ "Exhaustion", "Frightened", "Incapacitated", "Paralyzed", "Poisoned", "Prone", "Restrained", "Stunned", "Unconscious"])
+    elif dmg == "Lightning": return random.choice(["Blinded", "Charmed", "Deafened", "Exhaustion", "Frightened", "Grappled", "Incapacitated", "Paralyzed", "Petrified", "Prone", "Restrained", "Stunned", "Unconscious"])
+    elif dmg == "Force": return random.choice(["Blinded","Deafened", "Exhaustion", "Incapacitated", "Prone", "Stunned", "Unconscious", "Grappled" ])
+    elif dmg == "Psychic": return random.choice(["Blinded", "Charmed", "Deafened", "Exhaustion", "Frightened", "Incapacitated", "Paralyzed", "Petrified", "Poisoned", "Prone", "Restrained", "Stunned", "Unconscious"])
+    elif dmg == "Thunder": return random.choice(["Blinded", "Deafened", "Exhaustion", "Incapacitated", "Paralyzed", "Prone", "Stunned"])
+    else: return random.choice(ConditionsTypes)
     
 def SavingThrow(dmg):
-    if dmg == "Slashing":
-        st = random.choice(["STR","DEX"])
-    elif dmg == "Piercing":
-        st = random.choice(["STR","DEX","CON" ])
-    elif dmg == "Bludgeoning":
-        st = random.choice(["STR","DEX","CON"])
-    elif dmg == "Poison":
-        st = "CON"
-    elif dmg == "Acid":
-        st = random.choice(["STR","DEX","CON" ])
-    elif dmg == "Fire":
-        st = random.choice(["STR","DEX","CON", "CHA"])
-    elif dmg == "Cold":
-        st = random.choice(["STR","DEX","CON" ])
-    elif dmg == "Radiant":
-        st = random.choice(["DEX","CON","WIS","CHA" ])
-    elif dmg == "Necrotic":
-        st = random.choice(["STR","CON","WIS","CHA" ])
-    elif dmg == "Lightning":
-        st = random.choice(["DEX","CON","WIS", "INT" ])
-    elif dmg == "Force":
-        st = random.choice(["STR","CON","CHA" ])
-    elif dmg == "Psychic":
-        st = random.choice(["INT","WIS","CHA" ])
-    elif dmg == "Thunder":
-        st = random.choice(["STR","DEX","CON" ])
-    else:
-        st = "DEX"
+    if dmg == "Slashing": st = random.choice(["STR","DEX"])
+    elif dmg == "Piercing": st = random.choice(["STR","DEX","CON" ])
+    elif dmg == "Bludgeoning": st = random.choice(["STR","DEX","CON"])
+    elif dmg == "Poison": st = "CON"
+    elif dmg == "Acid": st = random.choice(["STR","DEX","CON" ])
+    elif dmg == "Fire": st = random.choice(["STR","DEX","CON", "CHA"])
+    elif dmg == "Cold": st = random.choice(["STR","DEX","CON" ])
+    elif dmg == "Radiant": st = random.choice(["DEX","CON","WIS","CHA" ])
+    elif dmg == "Necrotic": st = random.choice(["STR","CON","WIS","CHA" ])
+    elif dmg == "Lightning": st = random.choice(["DEX","CON","WIS", "INT" ])
+    elif dmg == "Force": st = random.choice(["STR","CON","CHA" ])
+    elif dmg == "Psychic": st = random.choice(["INT","WIS","CHA" ])
+    elif dmg == "Thunder": st = random.choice(["STR","DEX","CON" ])
+    else: st = "DEX"
     return st
 
 def Recovery(con):
-    if con == "Unconscious":
-        st = random.choice(["CON","INT","WIS","CHA" ])
-    elif con == "Stunned":
-        st = random.choice(["CON","INT","WIS","CHA" ])
-    elif con == "Restrained":
-        st = random.choice(["STR","DEX","CON"])
-    elif con == "Poisoned":
-        st = random.choice(["CON", "WIS"])
-    elif con == "Prone":
-        st = random.choice(["STR","DEX","CON"])
-    elif con == "Petrified":
-        st = random.choice(["STR", "CON","INT","WIS","CHA" ])
-    elif con == "Paralyzed":
-        st = random.choice(["STR", "CON","WIS","CHA" ]) 
-    elif con == "Invisible":
-        st = random.choice(["CON","INT","WIS","CHA" ])      
-    elif con == "Incapacitated":
-        st = random.choice(["STR","CON","WIS","CHA" ]) 
-    elif con == "Grappled":
-        st = random.choice(["STR","DEX"]) 
-    elif con == "Blinded":
-        st = random.choice(["CON","INT","WIS","CHA"]) 
-    elif con == "Frightened":
-        st = random.choice(["CON","INT","WIS","CHA"]) 
-    elif con == "Exhaustion":
-        st = random.choice(["STR","CON","CHA"]) 
-    elif con == "Deafened":
-        st = random.choice(["STR","CON","WIS"]) 
-    elif con == "Charmed":
-        st = random.choice(["CHA","WIS"]) 
-    else:
-        st = "CON"
+    if con == "Unconscious": st = random.choice(["CON","INT","WIS","CHA" ])
+    elif con == "Stunned": st = random.choice(["CON","INT","WIS","CHA" ])
+    elif con == "Restrained": st = random.choice(["STR","DEX","CON"])
+    elif con == "Poisoned": st = random.choice(["CON", "WIS"])
+    elif con == "Prone": st = random.choice(["STR","DEX","CON"])
+    elif con == "Petrified": st = random.choice(["STR", "CON","INT","WIS","CHA" ])
+    elif con == "Paralyzed": st = random.choice(["STR", "CON","WIS","CHA" ]) 
+    elif con == "Invisible": st = random.choice(["CON","INT","WIS","CHA" ])      
+    elif con == "Incapacitated": st = random.choice(["STR","CON","WIS","CHA" ]) 
+    elif con == "Grappled": st = random.choice(["STR","DEX"]) 
+    elif con == "Blinded": st = random.choice(["CON","INT","WIS","CHA"]) 
+    elif con == "Frightened": st = random.choice(["CON","INT","WIS","CHA"]) 
+    elif con == "Exhaustion": st = random.choice(["STR","CON","CHA"]) 
+    elif con == "Deafened": st = random.choice(["STR","CON","WIS"]) 
+    elif con == "Charmed": st = random.choice(["CHA","WIS"]) 
+    else: st = "CON"
     return st
 
 def SpecialAttack(Lvl,Mod ):
     dmg = Damage()
     con = Condition(dmg)
     r = ""
-
-    r = r+ Attack(Dice(4)) + " +"
-    r = r+"{}".format(Dice(Dice(1+int(Lvl/4))))
-    r = r+random.choice(["d4 ","d6 ","d8 ", "d10 ", "d12 "])
-    r = r + dmg
-    r = r + " dmg" 
-    r = r + " on a failed Saving Throw at DC "
-    r = r + str((10 + Mod)) +" "
-    r = r + SavingThrow(dmg) +  "."
-    if Dice(40) <= Dice(10+Lvl):
-        r = r + " The target is then affected by the " + con + " condition. "
-        r = r + "The Condition may be countered with a succesful " + str((10 + Mod)) + " "+ Recovery(con) + " Saving Throw at the beggining of the target's turn."
+    r += Attack(Dice(4)) + " +"
+    r += "{}".format(Dice(Dice(1+int(Lvl/4))))
+    r += random.choice(["d4 ","d6 ","d8 ", "d10 ", "d12 "])
+    r += dmg
+    r += " dmg" 
+    r += " on a failed Saving Throw at DC "
+    r += str((10 + Mod)) +" "
+    r += SavingThrow(dmg) +  "."
+    if Dice(10)+Dice(10)+Dice(10) <= Dice(Lvl):
+        r += " The target is then affected by the " + con + " condition. "
+        r += " The Condition may be countered with a succesful " + str((10 + Mod)) + " "+ Recovery(con) + " Saving Throw at the beggining of the target's turn."
     return r
 
 
@@ -1042,144 +998,151 @@ def SpecialAttack(Lvl,Mod ):
 
 
 def Language(race = Race(), background = Background()):
-    if race == "":
-        race = Race()
-    if background == "":
-        background = Background()
+    if race == "": race = Race()
+    if background == "": background = Background()
     l = ""
-    if race == "Human":
+    if race == "Human": 
         l += "Common. "
-    if race == "Aberration":
-        l += ""
-        
-    if race == "Aven":
+        if Dice()==1: l += "Dwarvish. "
+        if Dice()==1: l += "Elvish. "
+        if Dice()==1: l += "Giant. "
+        if Dice()==1: l += "Gnomish. "
+        if Dice()==1: l += "Goblin. "
+        if Dice()==1: l += "Halfling. "
+        if Dice()==1: l += "Orc. "
+        if Dice(20)==1: l += "Abyssal. "
+        if Dice(20)==1: l += "Celestial. "
+        if Dice(20)==1: l += "Draconic. "
+        if Dice(20)==1: l += "Deep Speech. "
+        if Dice(20)==1: l += "Infernal. "
+        if Dice(20)==1: l += "Primordial. "
+        if Dice(20)==1: l += "Sylvan. "
+        if Dice(20)==1: l += "Undercommon. "
+    if race == "Aberration": 
+        l += "Deep Speech. "
+        if Dice()==1: l += "Undercommon. "
+        if Dice(20)==1: l += "Telepathy. "
+    if race == "Aven": 
         l += "Common. "
-        
+        if Dice()==1: l += "Primordial. "
     if race == "Beast":
-        if Dice()==1:
-            l += "Understands Common. "
-        if Dice()==1:
-            l += "Beastly Speech. "
-        if Dice()==1:
-            l += "Sylvan. "
-
-    if race == "Beastfolk":
+        if Dice()==1: l += "Understands Common. "
+        if Dice()==1: l += "Beastly Speech. "
+        if Dice()==1: l += "Sylvan. "
+    if race == "Beastfolk": 
         l += "Common. Beastly Speech. "
-        if Dice()==1:
-            l += "Sylvan. "
-        if Dice()==1:
-            l += "Undercommon. "
-        if Dice()==1:
-            l += "Elvish. "
-
-    if race == "Celestial": 
-        l += ""
-    if race == "Construct":
+        if Dice()==1: l += "Sylvan. "
+        if Dice()==1: l += "Undercommon. "
+        if Dice()==1: l += "Elvish. "
+    if race == "Celestial": l += "Celestial. Common."
+    if race == "Construct": 
         l += "Understands the languages of its creator. "
-        
+        if Dice(100)==1: l += "All Languages. "
     if race == "Dragon":
         l += "Draconic. "
-        if Dice(3)==1:
-            l += "Common. "
-        if Dice()==1:
-            l += "Sylvan. "
+        if Dice(3)==1: l += "Common. "
+        if Dice()==1: l += "Sylvan. "
     if race == "Dwarf":
         l += "Dwarvish. "
-        if Dice(3)==1:
-            l += "Common. "
-        if Dice(3)==1:
-            l += "Undercommon. "
-
+        if Dice(3)==1: l += "Common. "
+        if Dice(3)==1: l += "Undercommon. "
     if race == "Elf":
-        l += ""
-        
-    if race == "Elemental":
-        l += ""
-        if Dice(4)==1:
-            l += "Ignan. "
-        if Dice(4)==1:
-            l += "Terran. "
-        
+        l += "Elvish. "
+        if Dice(3)==1: l += "Common. "
+        if Dice(3)==1: l += "Sylvan. "
+    if race == "Elemental" or race == "Genasi":
+        l += "Primordial"
+        if Dice()==1: l += "Common. "
+        if Dice(4)==1: l += "Ignan. "
+        if Dice(4)==1: l += "Terran. "
     if race == "Fey":
         l += "Sylvan. "
-        if Dice(3) == 1:
-            l += "Common. "
-        if Dice(3) == 1:
-            l += "Elvish. "
-            
-    if race == "Fiend":
+        if Dice(3) == 1: l += "Common. "
+        if Dice(3) == 1: l += "Elvish. "
+    if race == "Fiend" or "Tiefling":
         l += "Common. "
-        if Dice(2) == 1:
-            l += "Infernal. "
-        if Dice(2) == 1:
-            l += "Abyssal. "
-
-    if race == "Giant":
-        l += "Common. Giant."
-    if race == "Genasi":
-        l += ""
+        if Dice(2) == 1: l += "Infernal. "
+        if Dice(2) == 1: l += "Abyssal. "
+    if race == "Giant": l += "Common. Giant. "
     if race == "Gnome":
-        l += ""
+        l += "Gnomish"
+        if Dice(3) == 1: l += "Common. "
+        if Dice(3) == 1: l += "Elvish. "
+        if Dice(3) == 1: l += "Dwarvish. "
+        if Dice(3) == 1: l += "Giant. "
+        if Dice(3) == 1: l += "Halfling. "
+        if Dice() == 1: l += "Sylvan. "
     if race == "Goblin":
         l += "Goblin. "
-        if Dice(2)==1:
-            l += "Common. "
-    if race == "Hag":
-        l += ""
-    if race == "Halfling":
-        l += ""
+        if Dice(2)==1: l += "Common. "
+    if race == "Hag": l += "Common. Sylvan. "
+    if race == "Halfling": l += "Common. Halfling. "
     if race == "Kobold":
         l += "Draconic. "
-        if Dice(3)==1:
-            l += "Common. "
+        if Dice(3)==1: l += "Common. "
     if race == "Lizardfolk":
         l += "Draconic. "
-        if Dice(2)==1:
-            l += "Common. "
+        if Dice(2)==1: l += "Common. "
     if race == "Monstrosity":
-        if Dice(2)==1:
-            l += "Common. "
-    if race == "Ooze":
-        l += ""
+        if Dice(2)==1: l += "Common. "
+        if Dice(2)==1: l += "Undercommon. "
+    if race == "Ooze": l += "Telepathy. "
     if race == "Orc":
-        l += ""
+        l += "Orc. "
+        if Dice(2)==1: l += "Common. "
     if race == "Plant":
-        if Dice(3)==1:
-            l += "Common. "
-        if Dice(3)==1:
-            l += "Sylvan. "
+        if Dice(3)==1: l += "Common. "
+        if Dice(3)==1: l += "Sylvan. "
     if race == "Snakefolk":
         l += "Draconic. "
-        if Dice(3)==1:
-            l += "Abyssal. "
-        if Dice(3)==1:
-            l += "Common. "
-    if race == "Tiefling":
-        l += ""
+        if Dice(3)==1: l += "Abyssal. "
+        if Dice(3)==1: l += "Common. "
     if race == "Undead":
         l += "Understands languages it knew in life. "
-        if Dice(2)==1:
-            l += "Common. "
-            
-    if background == "Druid":
-        l += "Druidic. "
-            
-
+        if Dice(2)==1: l += "Common. "
+        if Dice(8)==1: l += "Infernal. "
+        
+    if background ==  "Druid": l += "Druidic. " + random.choice(["Sylvan. ", "Primordial. ", "Draconic. ", "Elvish. "])
+    if background ==  "Bandit": l += "Common. Thieve's Cant. "
+    if background ==  "Bard": l += "Common. " + random.choice(["Dwarvish. ", "Elvish. ", "Gnomish. ", "Halfling. ", "Sylvan. "])
+    if background ==  "Berserker": l += "Common." + random.choice(["Dwarvish. ", "Giant. ", "Orc. ", "Undercommon. "])
+    if background ==  "Charlatan": l += "Common." + random.choice(["Elvish. ", "Gnomish. ", "Halfling"])
+    if background ==  "Commoner": l += random.choice(["Elvish. ", "Gnomish. ", "Common. ", "Dwarvish. ", "Giant. ", "Goblin. ", "Halfling. ", "Orc. "])
+    if background ==  "Cultist": l += random.choice(["Abyssal. ", "Celestial. ", "Draconic. ", "Deep Speech. ", "Infernal. ", "Primordial. ", "Sylvan. ", "Undercommon. "])
+    if background ==  "Criminal": l += "Thieve's Cant. Common. " + random.choice(["Dwarvish. ", "Giant. ", "Goblin. ", "Orc. ", "Undercommon. "])
+    if background ==  "Expert": l += random.choice(["Dwarvish. ", "Elvish. ", "Giant. ", "Gnomish. ", "Celestial. "])
+    if background ==  "Explorer": l += random.choice(["Elvish. ", "Giant. ", "Goblin. ", "Orc. "]) + random.choice(["Draconic. ", "Primordial. ", "Sylvan. "])
+    if background ==  "Gladiator": l += "Common. "
+    if background ==  "Guard": l += "Common. "
+    if background ==  "Healer": l += random.choice(["Celestial. ", "Primordial. ", "Sylvan. "])
+    if background == "Hermit": l += ""
+    if background == "Hero": l += "Common. " + random.choice(["Celestial. ", "Draconic. ", "Sylvan. "])
+    if background == "Hunter": l += "Sylvan. "
+    if background == "Knight": l += "Common. " + random.choice(["Celestial. ", "Draconic. ", "Sylvan. "])
+    if background == "Mage": l += "Common. " + random.choice(["Dwarvish. ", "Elvish. ", "Giant. ", "Gnomish. "])
+    if background == "Monk": l += "Common. " + random.choice(["Celestial. ", "Draconic. ", "Primordial. "])
+    if background == "Noble": l += "Common. " + random.choice(["Dwarvish. ", "Elvish. "])
+    if background == "Priest": l += "Common. " + "Celestial. "
+    if background == "Priest": l += "Common. " + random.choice(["Dwarvish. ", "Elvish. "])
+    if background == "Pirate": l += "Common. Thieves' Cant. "
+    if background ==  "Ranger": l += random.choice(["Elvish. ", "Giant. ", "Goblin. ", "Orc. "]) + random.choice(["Draconic. ", "Primordial. ", "Sylvan. "])
+    if background == "Scholar": l += random.choice(["Abyssal. ", "Celestial. ", "Draconic. ", "Deep Speech. ", "Infernal. ", "Primordial. ", "Sylvan. "])
+    if background == "Shaman": l += "Sylvan" + random.choice(["Elvish. ", "Giant. ", "Goblin. ", "Orc. ", "Primordial. "]) 
+    if background == "Soldier": l += "Common. "
+    if background == "Spy": l += "Common. Thieves' Cant. "
+    if background == "Traveler": l += "Common." + random.choice(["Elvish. ", "Gnomish. ", "Halfling", "Dwarvish", "Giant. ", "Goblin. ", "Orc. "])
+    if background == "Urchin": l += "Common. "
+    if background == "Veteran": l += "Common. " + random.choice(["Elvish. ", "Gnomish. ", "Halfling", "Dwarvish", "Giant. ", "Goblin. ", "Orc. "])
+    if background == "Warrior": l += "Common. " + random.choice(["Elvish. ", "Gnomish. ", "Halfling", "Dwarvish", "Giant. ", "Goblin. ", "Orc. "])
+    if background == "Warlock": l += random.choice(["Abyssal. ", "Celestial. ", "Draconic", "Deep Speech. ", "Infernal. ", "Primordial. ", "Sylvan. "])
+    if background == "Witch": l += "Common. " + random.choice(["Goblin. ", "Gnomish. ", "Sylvan"])
     return l
 
 
 
-
-
-
-
-
-
 def Magic(Lvl, race = Race(), background = Background()):
-    if race == "":
-        race = Race()
-    if background == "":
-        background = Background()
+    if race == "": race = Race()
+    if background == "": background = Background()
 
     cantrip = "Cantrips (at will): "
     first = "1st Level Spells: "
@@ -1197,520 +1160,200 @@ def Magic(Lvl, race = Race(), background = Background()):
     three = "3/Day each: "
 
     for L in range(int(1+Lvl/4)):
-
-                
-                
-        if background == "Acolyte":
-            if Dice(2) == 1:
-                cantrip +=  "\n- Light"
-                
-        if background == "Acolyte":
-            if Dice(2) == 1:
-                cantrip +=  "\n- Sacred flame"
-                
-        if background == "Acolyte":
-            if Dice(2) == 1:
-                cantrip +=  "\n- Thaumaturgy"
-            
-        if background == "Acolyte":
-            if Dice(2) == 1:
-                first += "\n- Bless"
-                slots1 += Dice(3)
-                
-        if background == "Acolyte":
-            if Dice(2) == 1:
-                first += "\n- Cure wounds"  
-                slots1 += Dice(3)
-                
-        if background == "Acolyte":
-            if Dice(2) == 1:
-                first += "\n- Sanctuary"   
-                slots1 += Dice(3)
-    
-    
-        if background == "Cultist":
-            if Dice(3) == 1:
-                cantrip +=  "\n- Light"
-
-        if background == "Cultist":
-            if Dice(3) == 1:
-                cantrip += "\n- Sacred flame"
-
-        if background == "Cultist":
-            if Dice(3) == 1:
-                cantrip += "\n- Thaumaturgy" 
-
-            
-        if background == "Cultist":
-            if Dice() == 1:
-                first += "\n- Command"
-                slots1 += Dice(4)
-
-        if background == "Cultist":
-            if Dice() == 1:
-                first += "\n- Inflict wounds"
-                slots1 += Dice(4)
-
-        if background == "Cultist":
-            if Dice() == 1:
-                first += "\n- Shield of faith"
-                slots1 += Dice(4)
-            
-
-        if background == "Cultist":
-            if Dice(8) == 1:
-                second += "\n hold person" 
-                slots2 += Dice(3)
-
-        if background == "Cultist":
-            if Dice(8) == 1:
-                second += "\n spiritual weapon"
-                slots2 += Dice(3)
-
-        if background == "Druid":
-            cantrip += "\n- Druidcraft."
-            
-        if background == "Druid":
-            if Dice() == 1:
-                cantrip += "\n- Produce Flame."
-
-        if background == "Druid":
-            if Dice() == 1:
-                cantrip += "\n- Shillelag."
-
-        if background == "Druid":
-            if Dice() == 1:
-                first += "\n Entangle"
-                slots1 += Dice(4)
-                
-        if background == "Druid":
-            if Dice() == 1:
-                first += "\n Longstrider"
-                slots1 += Dice(4)
-
-        if background == "Druid":
-            if Dice() == 1:
-                first += "\n Thunderwave"
-                slots1 += Dice(4)
-
-        if background == "Druid":
-            if Dice() == 1:
-                second += "\n Animal Messenger"
-                slots2 += Dice(3)
-
-        if background == "Druid":
-            if Dice() == 1:
-                second += "\n Barkskin"
-                slots2 += Dice(3)
-                
-        if background == "Druid":
-            if Dice() == 1:
-                first += "\n Speak With Animals"
-                slots1 += Dice(4)
-
-        if background=="Healer":
-            if Dice(2) == 1:
-                cantrip +=  "\n- Guidance" 
-
-        if background=="Healer":
-            if Dice(2) == 1:
-                cantrip +=  "\n- Sacred flame"
-
-        if background=="Healer":
-            if Dice(2) == 1:
-                first +=  "\n- Cure wounds"
-                slots1 += Dice(2)
-            
-        if background == "Mage":
-            if Dice(2) == 1:
-                cantrip +=  "\n - Firebolt" 
-
-        if background == "Mage":
-            if Dice(2) == 1:
-                cantrip +=  "\n - Light" 
-
-        if background == "Mage":
-            if Dice(2) == 1:
-                first +=  "\n - Sleep"
-                slots1 += Dice(2)
-
-        if background == "Priest":
-            if Dice() == 1:
-                cantrip += "\n- Guidance"
-
-        if background == "Priest":
-            if Dice() == 1:
-                cantrip += "\n- Light"
-                
-        if background == "Priest":
-            if Dice() == 1:
-                cantrip += "\n- Sacred Flame"
-                
-        if background == "Priest":
-            if Dice() == 1:
-                cantrip += "\n- Thaumaturgy"
-             
-        if background == "Priest":
-            if Dice() == 1:
-                first += "\n- Cure wounds"
-                slots1 += Dice(4)
-                
-        if background == "Priest":
-            if Dice() == 1:
-                first += "\n- Guiding bolt"
-                slots1 += Dice(4)
-                
-        if background == "Priest":
-            if Dice() == 1:
-                first += "\n- Sanctuary" 
-                slots1 += Dice(4)
-                
-        if background == "Priest":
-            if Dice() == 1:
-                second += "\n- Lesser restoration"
-                slots2 += Dice(3)
-                
-        if background == "Priest":
-            if Dice() == 1:
-                second += "\n- Spiritual weapon"
-                slots2 += Dice(3)
-                
-        if background == "Priest":
-            if Dice() == 1:
-                third += "\n- Dispel magic"
-                slots3 += Dice(2)
-                
-        if background == "Priest":
-            if Dice() == 1:
-                third += "\n- Spirit guardians"
-                slots3 += Dice(2)
-   
-        if background == "Shaman":
-            if Dice() == 1:
-                cantrip +=  "\n- druidcraft" 
-            if Dice() == 1:
-                cantrip +=  "\n-  Produce flame" 
-            if Dice() == 1:
-                cantrip +=  "\n-  thorn whip" 
-
-        if background == "Shaman":
-            if Dice() == 1:
-                first +=  "\n-  entangle"
-                slots1 += Dice(4)
-
-        if background == "Shaman":
-            if Dice() == 1:
-                first +=  "\n-  fog cloud"
-                slots1 += Dice(4)
-
-        if background == "Shaman":
-            if Dice(2) == 1:
-                second +=  "\n-  heat metal"
-                slots2 += Dice(3)
-              
-        if background == "Shaman":
-            if Dice(2) == 1:
-                second +=  "\n-  spike growth"
-                slots2 += Dice(3)
-
-        if background == "Shaman":
-            if Dice(2) == 1:
-                third +=  "\n-  conjure animals"
-                slots3 += Dice(2)
-
-        if background == "Shaman":
-            if Dice(2) == 1:
-                third +=  "\n-  plant growth"
-                slots3 += Dice(2)
-
-
-        if race == "Aberration":
-            if Dice() == 1:
-                one += "\n- Stench Spray (1/Day). \n\t Each creature in a 15-foot cone originating from the Aberration must succeed on a DC 10 Dexterity saving throw or be coated in a foul-smelling liquid. A coated creature exudes a horrible stench for 1d4 hours. The coated creature is poisoned as long as the stench lasts, and other creatures are poisoned while with in 5 feet of the coated creature. A creature can remove the stench on itself by using a short rest to bathe in water, alcohol, or vinegar."
-
-        if race == "Aven":
-            if Dice(8) == 1:
-                cantrip +=  "\n- Summon Air Elemental. \n\t Five Aven within 30 feet of each other can magically summon an air elemental. Each of the five must use its action and movement on three consecutive turns to perform an aerial dance and must maintain concentration while doing so (as if concentrating on a spell). When all five have finished their third turn of the dance, the elemental appears in an unoccupied space within 60 feet of them. It is friendly toward them and obeys their spoken commands. It remains for 1 hour, until it or all its summoners die, or until any of its summoners dismisses it as a bonus action. A summoner can't perform the dance again until it finishes a short rest. When the elemental returns to the Elemental Plane of Air, any Aven within 5 feet of it can return with it."
-
-        if race == "Beastfolk":
-            if Dice(10) == 1:
-                cantrip +=  "\n- Sleep Gaze. \n\t The Beastfolk gazes at one creature it can see within 30 feet of it. The target must make a DC [10+%Wis] Wisdom saving throw. On a failed save, the target succumbs to a magical slumber, falling unconscious for 10 minutes or until someone uses an action to shake the target awake. A creature that successfully saves against the effect is immune to this Beastfolk's gaze for the next 24 hours. Undead and creatures immune to being charmed aren't affected by it."
-
-        if race == "Beastfolk":
-            if Dice() == 1:
-                cantrip +=  "\n- Sacred Flame."
-
-        if race == "Beastfolk":
-            if Dice() == 1:
-                cantrip +=  "\n- Mage Hand (invisible)."
-
-        if race == "Beastfolk":
-            if Dice() == 1:
-                cantrip +=  "\n- Thaumaturgy."
-
-        if race == "Beastfolk":
-            if Dice() == 1:
-                one +=  "\n- Invisibility (self only)."
-
-        if race == "Beastfolk":
-            if Dice() == 1:
-                two +=  "\n- Blur."
-
-        if race == "Beastfolk":
-            if Dice() == 1:
-                two +=  "\n- Magic Weapon."
-
-        if race == "Beastfolk":
-            if Dice() == 1:
-                first +=  "\n- Bane"
-                slots1 += Dice(3)
-                
-        if race == "Beastfolk":
-            if Dice() == 1:
-                first +=  "\n- Shield Of Faith"
-                slots1 += Dice(3)
-
-        if race == "Celestial":
-            if Dice(2) == 1:
-                cantrip +=  "\n- Light" 
-                
-        if race == "Celestial":
-            if Dice(2) == 1:
-                cantrip +=  "\n- Sacred flame" 
-                
-        if race == "Celestial":
-            if Dice(2) == 1:
-                cantrip +=  "\n- Thaumaturgy" 
-                
-        if race == "Celestial":
-            if Dice(2) == 1:
-                first +=  "\n- Bless" 
-                slots1 += Dice(3)
-                
-        if race == "Celestial":
-            if Dice(2) == 1:
-                first +=  "\n- Cure wounds" 
-                slots1 += Dice(3)
-                
-        if race == "Celestial":
-            if Dice(2) == 1:
-                first +=  "\n- Sanctuary"
-                slots1 += Dice(3)
-
-               
-        if race == "Dragon" and Dice(3)==1:
-            cantrip += "\n- Breath Weapons"
-            cantrip += "(Recharge 5-6)"
-            rdm = Dice(8)
-            if rdm == 1:
-                cantrip += "\n  - Fire Breath \n\t The dragon exhales fire in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 14 (4d6) fire damage on a failed save, or half as much damage on a successful one."
-            elif rdm == 2:
-                cantrip += "\n  - Sleep Breath \n\t The dragon exhales sleep gas in a 15-foot cone. Each creature in that area must succeed on a DC [10+%Con] Constitution saving throw or fall unconscious for 1 minute. This effect ends for a creature if the creature takes damage or someone uses an action to wake it."
-            elif rdm == 3:
-                cantrip += "\n  - Acid Breath \n\t . The dragon exhales acid in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 18 (4d8) acid damage on a failed save, or half as much damage on a successful one"
-            elif rdm == 4:
-                cantrip += "\n  - Slowing Breath \n\t The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a DC [10+%Con] Constitution saving throw. On a failed save, the creature can't use reactions, its speed is halved, and it can't make more than one attack on its turn. In addition, the creature can use either an action or a bonus action on its turn, but not both. These effects last for 1 minute. The creature can repeat the saving throw at the start of each of its turns, ending the effect on itself with a successful save."
-            elif rdm == 5:
-                cantrip += "\n  - Euphoria Breath \n\t The dragon exhales a puff of euphoria gas at one creature within 5 feet of it. The target must succeed on a DC [10+%Con] Wisdom saving throw, or for 1 minute, the target can't take reactions and must roll a d6 at the start of each of its turns to determine its behavior during the turn: \n\t\t 1–4. The target takes no action or bonus action and uses all of its movement to move in a random direction. \n\t\t 5–6. The target doesn't move, and the only thing it can do on its turn is make a DC [10+%Con] Wisdom saving throw, ending the effect on itself on a success."
-            elif rdm == 6:
-                cantrip += "\n  - Repulsion Breath \n\t The dragon exhales repulsion energy in a 30-foot cone. Each creature in that area must succeed on a DC 12 Strength saving throw. On a failed save, the creature is pushed 30 feet away from the dragon."
-            elif rdm == 7:
-                cantrip += "\n  - Poison Breath"
-            elif rdm == 8:
-                cantrip += "\n  - Lightning Breath \n\t The dragon exhales lightning in a 40-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 16 (3d10) lightning damage on a failed save, or half as much damage on a successful one."
-
-
-        if race == "Dragon":
-            if Dice(10) == 1:
-                cantrip += "\n- Change Shape \n\t The dragon magically polymorphs into a humanoid or beast that has a challenge rating no higher than its own, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form (the dragon's choice).In a new form, the dragon retains its alignment, hit points, Hit Dice, ability to speak, proficiencies, Legendary Resistance, lair actions, and Intelligence, Wisdom, and Charisma scores, as well as this action. Its statistics and capabilities are otherwise replaced by those of the new form, except any class features or legendary actions of that form."
-
-        if race == "Dragon":
-            if Dice() == 1:
-                cantrip += "\n- Color Spray"
-
-        if race == "Dragon":
-            if Dice() == 1:
-                cantrip += "\n- Dancing Lights"
-
-        if race == "Dragon":
-            if Dice() == 1:
-                cantrip += "\n- Mage Hand"
-
-        if race == "Dragon":
-            if Dice() == 1:
-                one += "\n- Minor Illusion"
-
-        if race == "Dragon":
-            if Dice(8) == 1:
-                one += "\n- Major Image"
-
-        if race == "Dragon":
-            if Dice(8) == 1:
-                one += "\n- Mirror Image"
-
-        if race == "Dragon":
-            if Dice(8) == 1:
-                one += "\n- Polymorph"
-
-        if race == "Dragon":
-            if Dice(8) == 1:
-                one += "\n- Suggestion"
-
-        if race == "Dwarf":
-            if Dice() == 1:
-                cantrip += "\n- Enlarge (Recharges after a Short or Long Rest). \n\t For 1 minute, the Dwarf magically increases in size, along with anything it is wearing or carrying. While enlarged, the Dwarf is Large, doubles its damage dice on Strength-based weapon attacks (included in the attacks), and makes Strength checks and Strength saving throws with advantage. If the Dwarf lacks the room to become Large, it attains the maximum size possible in the space available."
-
-        if race == "Dwarf":
-            if Dice() == 1:
-                cantrip += "\n- Invisibility (Recharges after a Short or Long Rest). \n\t The dwarf magically turns invisible until it attacks, casts a spell, or until its concentration is broken, up to 1 hour (as if concentrating on a spell). Any equipment the Dwarf wears or carries is invisible with it."
-
-        if race == "Elemental":
-            if Dice() == 1:
-                cantrip += "\n- Dancing lights"
-                
-        if race == "Elemental":
-            if Dice() == 1:
-                one += "\n- blur"
-
-        if race == "Elemental":
-            if Dice() == 1:
-                one += "\n- Sleep"
-
-        if race == "Elemental":
-            if Dice() == 1:
-                cantrip += "\n Cinder Breath \t (Recharge 6). The Elemental exhales a 15-foot cone of smoldering ash. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw or be blinded until the end of the Elemental's next turn."
-
-        if race == "Elemental":
-            if Dice(7) == 1:
-                cantrip += "\n Blinding Breath \t (Recharge 6). The Elemental exhales a 15-foot cone of blinding dust. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw or be blinded for one minute."
-
-        if race == "Elemental":
-            if Dice(7) == 1:
-                cantrip += "\n Steam Breath \t (Recharge 6). The Elemental exhales a 15-foot cone of scalding steam. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw, taking 4 (1d8) fire damage on a failed save, or half as much damage on a successful one."
-
-        if race == "Elemental":
-            if Dice(8) == 1:
-                cantrip += "\n - Frost Breath \n\t (Recharge 6). The Elemental exhales a 15-foot cone of cold air. Each creature in that area must succeed on a DC [10+%Con] Dexterity saving throw, taking 5 (2d4) cold damage on a failed save, or half as much damage on a successful one."
-
-        if race == "Elemental":
-            if Dice() == 1:
-                cantrip += "\n - Fire Breath \t (Recharge 6). The Elemental exhales a 15-foot cone of cold air. Each creature in that area must succeed on a DC [10+%Con] Dexterity saving throw, taking 7 (2d6) fire damage on a failed save, or half as much damage on a successful one."
-                
-        if race == "Elemental":
-            if Dice(3) == 1:
-                one += "\n - Summon Mephits (1/Day) \n\t The Elemental has a 25 percent chance of summoning 1d4 mephits. A summoned mephit appears in an unoccupied space within 60 feet of its summoner, acts as an ally of its summoner, and can't summon other mephits. It remains for 1 minute, until it or its summoner dies, or until its summoner dismisses it as an action."
-
-        if race == "Elemental":
-            if Dice() == 1:
-                one += "\n Innate Spellcasting (1/Day) \n\t The Elemental can innately cast fog cloud, requiring no material components."
-                
-        if race == "Elemental":
-            if Dice() == 1:
-                one += "\n Innate Spellcasting (1/Day) \n\t The Elemental can innately cast heat metal, requiring no material components."
-            
-        if race == "Elf":
-            if Dice() == 1:
-                cantrip += "\n- Dancing lights"
-
-        if race == "Elf":
-            if Dice() == 1:
-                one += "\n- Darkness"
-
-        if race == "Elf":
-            if Dice() == 1:
-                one += "\n- Faerie fire"
-                
-        if race == "Fey":
-            if Dice() == 1:
-                cantrip += "\n Teleport (Recharge 4–6). \n\t The Fey magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the Fey can make one bite attack."
-
-        if race == "Fae": 
-            if Dice() == 1:
-                cantrip +=  "\n- Druidcraft"
-
-        if race == "Fae": 
-            if Dice(3) == 1:
-                three += "\n-Entangle" 
-
-        if race == "Fae": 
-            if Dice(3) == 1:
-                three += "\n-Goodberry"
-   
-        if race == "Fae": 
-            if Dice() == 1:
-                one += "\n-Barkskin"
-
-        if race == "Fae": 
-            if Dice() == 1:
-                one += "\n- Pass without trace"
-
-        if race == "Fae": 
-            if Dice() == 1:
-                one += "\n- Shillelagh"
-
-        if race == "Fey":
-            if Dice() == 1:
-                cantrip += "\n Heart Sight. \n\t The Fey touches a creature and magically knows the creature's current emotional state. If the target fails a DC [10+%Cha] Charisma saving throw, the Fey also knows the creature's alignment. Celestials, fiends, and undead automatically fail the saving throw."
-
-        if race == "Fey":
-            if Dice() == 1:
-                cantrip += "\n Invisibility. \n\t The Fey  magically turns invisible until it attacks or casts a spell, or until its concentration ends (as if concentrating on a spell). Any equipment the Fey wears or carries is invisible with it."
-
-        if race == "Fey":
-            if Dice(3) == 1:
-                cantrip += "\n- Druidcraft"
-                
-        if race == "Fey":
-            if Dice() == 1:
-                one += "\n- Confusion"
-                
-        if race == "Fey":
-            if Dice() == 1:
-                one += "\n- Dancing lights"
-                
-        if race == "Fey":
-            if Dice() == 1:
-                one += "\n- Detect evil and good"   
-                
-        if race == "Fey":
-            if Dice() == 1:
-                one += "\n- Detect thoughts"   
-                
-        if race == "Fey":
-            if Dice() == 1:
-                one += "\n- Dispel magic"   
-                
-        if race == "Fey":
-            if Dice() == 1:
-                one += "\n- Entangle"   
-                
-        if race == "Fey":
-            if Dice() == 1:
-                one += "\n - Fly"   
-                
-        if race == "Fey":
-            if Dice() == 1:
-                one += "\n - phantasmal force"   
-                
-        if race == "Fey":
-            if Dice() == 1:
-                one += "\n polymorph"   
-                
-        if race == "Fey":
-            if Dice() == 1:
-                one += "\n- Sleep"   
-
-        if race == "Fey":
-            if Dice() == 1:
-                one += "\n Charming Melody [DC 10+%Cha Wisdom saving throw]\n\t The creature is charmed by the Fey for 1 minute. If the Fey or any of its companions harms the creature, the effect on it ends immediately."   
-
-        if race == "Fey":
-            if Dice() == 1:
-                one += "\n - Frightening Strain [DC 10+%Cha Wisdom saving throw] \n\t The creature is charmed by the Fey for 1 minute. If the Fey or any of its companions harms the creature, the effect on it ends immediately."   
-
-        if race == "Fey":
-            if Dice() == 1:
-                one += "\n Gentle Lullaby [DC 10+%Cha Wisdom saving throw] \n\t The creature falls asleep and is unconscious for 1 minute. The effect ends if the creature takes damage or if someone takes an action to shake the creature awake."   
+        if background== "Fiend" and Dice()==1: one += "\nFetid Cloud (1/Day).\n\t A 10-foot radius of disgusting sulfuric gas extends out from the Fiend. The gas spreads around corners, and its area is lightly obscured. It lasts for 1 minute or until a strong wind disperses it. Any creature that starts its turn in that area must succeed on a DC 11 Constitution saving throw or be poisoned until the start of its next turn. While poisoned in this way, the target can take either an action or a bonus action on its turn, not both, and can't take reactions."
+        if background == "Priest" and Dice(2) == 1: cantrip +=  "\n- Light. "
+        if background == "Priest" and Dice(2) == 1: cantrip +=  "\n- Sacred flame. "
+        if background == "Priest" and Dice(2) == 1: cantrip +=  "\n- Thaumaturgy"
+        if background == "Priest" and Dice(2) == 1:
+            first += "\n- Bless"
+            slots1 += Dice(3)
+        if background == "Priest" and Dice(2) == 1:
+            first += "\n- Cure wounds"  
+            slots1 += Dice(3)
+        if background == "Priest" and Dice(2) == 1:
+            first += "\n- Sanctuary"   
+            slots1 += Dice(3)
+        if background == "Cultist" and Dice(3) == 1: cantrip +=  "\n- Light."
+        if background == "Cultist" and Dice(3) == 1: cantrip += "\n- Sacred flame"
+        if background == "Cultist" and Dice(3) == 1: cantrip += "\n- Thaumaturgy" 
+        if background == "Cultist" and Dice() == 1:
+            first += "\n- Command"
+            slots1 += Dice(4)
+        if background == "Cultist" and Dice() == 1:
+            first += "\n- Inflict wounds"
+            slots1 += Dice(4)
+        if background == "Cultist" and Dice() == 1:
+            first += "\n- Shield of faith"
+            slots1 += Dice(4)
+        if background == "Cultist" and Dice(8) == 1:
+            second += "\n hold person" 
+            slots2 += Dice(3)
+        if background == "Cultist" and Dice(8) == 1:
+            second += "\n spiritual weapon"
+            slots2 += Dice(3)
+        if background == "Druid": cantrip += "\n- Druidcraft."
+        if background == "Druid" and Dice() == 1: cantrip += "\n- Produce Flame."
+        if background == "Druid" and Dice() == 1: cantrip += "\n- Shillelag."
+        if background == "Druid" and Dice() == 1:
+            first += "\n Entangle"
+            slots1 += Dice(4)
+        if background == "Druid" and Dice() == 1:
+            first += "\n Longstrider"
+            slots1 += Dice(4)
+        if background == "Druid" and Dice() == 1:
+            first += "\n Thunderwave"
+            slots1 += Dice(4)
+        if background == "Druid" and Dice() == 1:
+            second += "\n Animal Messenger"
+            slots2 += Dice(3)
+        if background == "Druid"and Dice() == 1:
+            second += "\n Barkskin"
+            slots2 += Dice(3)
+        if background == "Druid" and Dice() == 1:
+            first += "\n Speak With Animals"
+            slots1 += Dice(4)
+        if background=="Healer" and Dice(2) == 1: cantrip +=  "\n- Guidance" 
+        if background=="Healer" and Dice(2) == 1: cantrip +=  "\n- Sacred flame"
+        if background=="Healer" and Dice(2) == 1:
+            first +=  "\n- Cure wounds"
+            slots1 += Dice(2)
+        if background == "Mage" and Dice(2) == 1: cantrip +=  "\n - Firebolt" 
+        if background == "Mage" and Dice(2) == 1: cantrip +=  "\n - Light" 
+        if background == "Mage" and Dice(2) == 1:
+            first +=  "\n - Sleep"
+            slots1 += Dice(2)
+        if background == "Priest" and Dice() == 1: cantrip += "\n- Guidance"
+        if background == "Priest" and Dice() == 1: cantrip += "\n- Light"
+        if background == "Priest" and Dice() == 1: cantrip += "\n- Sacred Flame"
+        if background == "Priest" and Dice() == 1: cantrip += "\n- Thaumaturgy"
+        if background == "Priest" and Dice() == 1:
+            first += "\n- Cure wounds"
+            slots1 += Dice(4)
+        if background == "Priest" and Dice() == 1:
+            first += "\n- Guiding bolt"
+            slots1 += Dice(4)
+        if background == "Priest" and Dice() == 1:
+            first += "\n- Sanctuary" 
+            slots1 += Dice(4)
+        if background == "Priest" and Dice() == 1:
+            second += "\n- Lesser restoration"
+            slots2 += Dice(3)
+        if background == "Priest" and Dice() == 1:
+            second += "\n- Spiritual weapon"
+            slots2 += Dice(3)
+        if background == "Priest" and Dice() == 1:
+            third += "\n- Dispel magic"
+            slots3 += Dice(2)
+        if background == "Priest" and Dice() == 1:
+            third += "\n- Spirit guardians"
+            slots3 += Dice(2)
+        if background == "Shaman" and Dice() == 1: cantrip +=  "\n- druidcraft" 
+        if background == "Shaman" and Dice() == 1: cantrip +=  "\n-  Produce flame" 
+        if background == "Shaman" and Dice() == 1: cantrip +=  "\n-  thorn whip" 
+        if background == "Shaman" and Dice() == 1:
+            first +=  "\n-  entangle"
+            slots1 += Dice(4)
+        if background == "Shaman" and Dice() == 1:
+            first +=  "\n-  fog cloud"
+            slots1 += Dice(4)
+        if background == "Shaman" and Dice(2) == 1:
+            second +=  "\n-  heat metal"
+            slots2 += Dice(3)
+        if background == "Shaman" and Dice(2) == 1:
+            second +=  "\n-  spike growth"
+            slots2 += Dice(3)
+        if background == "Shaman" and Dice(2) == 1:
+            third +=  "\n-  conjure animals"
+            slots3 += Dice(2)
+        if background == "Shaman" and Dice(2) == 1:
+            third +=  "\n-  plant growth"
+            slots3 += Dice(2)
+        if race == "Aberration" and Dice() == 1: one += "\n- Stench Spray (1/Day). \n\t Each creature in a 15-foot cone originating from the Aberration must succeed on a DC 10 Dexterity saving throw or be coated in a foul-smelling liquid. A coated creature exudes a horrible stench for 1d4 hours. The coated creature is poisoned as long as the stench lasts, and other creatures are poisoned while with in 5 feet of the coated creature. A creature can remove the stench on itself by using a short rest to bathe in water, alcohol, or vinegar."
+        if race == "Aven" and Dice(8) == 1: cantrip +=  "\n- Summon Air Elemental. \n\t Five Aven within 30 feet of each other can magically summon an air elemental. Each of the five must use its action and movement on three consecutive turns to perform an aerial dance and must maintain concentration while doing so (as if concentrating on a spell). When all five have finished their third turn of the dance, the elemental appears in an unoccupied space within 60 feet of them. It is friendly toward them and obeys their spoken commands. It remains for 1 hour, until it or all its summoners die, or until any of its summoners dismisses it as a bonus action. A summoner can't perform the dance again until it finishes a short rest. When the elemental returns to the Elemental Plane of Air, any Aven within 5 feet of it can return with it."
+        if race == "Beastfolk" and Dice(10) == 1: cantrip +=  "\n- Sleep Gaze. \n\t The Beastfolk gazes at one creature it can see within 30 feet of it. The target must make a DC [10+%Wis] Wisdom saving throw. On a failed save, the target succumbs to a magical slumber, falling unconscious for 10 minutes or until someone uses an action to shake the target awake. A creature that successfully saves against the effect is immune to this Beastfolk's gaze for the next 24 hours. Undead and creatures immune to being charmed aren't affected by it."
+        if race == "Beastfolk" and Dice() == 1: cantrip +=  "\n- Sacred Flame."
+        if race == "Beastfolk" and Dice() == 1: cantrip +=  "\n- Mage Hand (invisible)."
+        if race == "Beastfolk" and Dice() == 1: cantrip +=  "\n- Thaumaturgy."
+        if race == "Beastfolk" and Dice() == 1: one +=  "\n- Invisibility (self only)."
+        if race == "Beastfolk" and Dice() == 1: two +=  "\n- Blur."
+        if race == "Beastfolk" and Dice() == 1: two +=  "\n- Magic Weapon."
+        if race == "Beastfolk" and Dice() == 1:
+            first +=  "\n- Bane"
+            slots1 += Dice(3)
+        if race == "Beastfolk" and Dice() == 1:
+            first +=  "\n- Shield Of Faith"
+            slots1 += Dice(3)
+        if race == "Celestial" and Dice(2) == 1: cantrip +=  "\n- Light" 
+        if race == "Celestial" and Dice(2) == 1: cantrip +=  "\n- Sacred flame" 
+        if race == "Celestial" and Dice(2) == 1: cantrip +=  "\n- Thaumaturgy" 
+        if race == "Celestial" and Dice(2) == 1:
+            first +=  "\n- Bless" 
+            slots1 += Dice(3)
+        if race == "Celestial" and Dice(2) == 1:
+            first +=  "\n- Cure wounds" 
+            slots1 += Dice(3)
+        if race == "Celestial" and Dice(2) == 1:
+            first +=  "\n- Sanctuary"
+            slots1 += Dice(3)
+        if race == "Dragon" and Dice(3)==1: 
+            cantrip += "\n- Breath Weapons " + "(Recharge 5-6)."
+            if Dice(8) == 1: cantrip += "\n  - Fire Breath \n\t The dragon exhales fire in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 14 (4d6) fire damage on a failed save, or half as much damage on a successful one."
+            elif Dice(8) == 2: cantrip += "\n  - Sleep Breath \n\t The dragon exhales sleep gas in a 15-foot cone. Each creature in that area must succeed on a DC [10+%Con] Constitution saving throw or fall unconscious for 1 minute. This effect ends for a creature if the creature takes damage or someone uses an action to wake it."
+            elif Dice(8) == 3: cantrip += "\n  - Acid Breath \n\t . The dragon exhales acid in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 18 (4d8) acid damage on a failed save, or half as much damage on a successful one"
+            elif Dice(8) == 4: cantrip += "\n  - Slowing Breath \n\t The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a DC [10+%Con] Constitution saving throw. On a failed save, the creature can't use reactions, its speed is halved, and it can't make more than one attack on its turn. In addition, the creature can use either an action or a bonus action on its turn, but not both. These effects last for 1 minute. The creature can repeat the saving throw at the start of each of its turns, ending the effect on itself with a successful save."
+            elif Dice(8) == 5: cantrip += "\n  - Euphoria Breath \n\t The dragon exhales a puff of euphoria gas at one creature within 5 feet of it. The target must succeed on a DC [10+%Con] Wisdom saving throw, or for 1 minute, the target can't take reactions and must roll a d6 at the start of each of its turns to determine its behavior during the turn: \n\t\t 1–4. The target takes no action or bonus action and uses all of its movement to move in a random direction. \n\t\t 5–6. The target doesn't move, and the only thing it can do on its turn is make a DC [10+%Con] Wisdom saving throw, ending the effect on itself on a success."
+            elif Dice(8) == 6: cantrip += "\n  - Repulsion Breath \n\t The dragon exhales repulsion energy in a 30-foot cone. Each creature in that area must succeed on a DC 12 Strength saving throw. On a failed save, the creature is pushed 30 feet away from the dragon."
+            elif Dice(8) == 7: cantrip += "\n  - Poison Breath"
+            elif Dice(8) == 8: cantrip += "\n  - Lightning Breath \n\t The dragon exhales lightning in a 40-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 16 (3d10) lightning damage on a failed save, or half as much damage on a successful one."
+ 
+        if race == "Dragon" and Dice(12) == 1: cantrip += "\n- Change Shape \n\t The dragon magically polymorphs into a humanoid or beast that has a challenge rating no higher than its own, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form (the dragon's choice).In a new form, the dragon retains its alignment, hit points, Hit Dice, ability to speak, proficiencies, Legendary Resistance, lair actions, and Intelligence, Wisdom, and Charisma scores, as well as this action. Its statistics and capabilities are otherwise replaced by those of the new form, except any class features or legendary actions of that form."
+        if race == "Dragon" and Dice() == 1:  cantrip += "\n- Color Spray"
+        if race == "Dragon" and Dice() == 1: cantrip += "\n- Dancing Lights"
+        if race == "Dragon" and Dice() == 1: cantrip += "\n- Mage Hand"
+        if race == "Dragon" and Dice() == 1: one += "\n- Minor Illusion"
+        if race == "Dragon" and Dice(8) == 1: one += "\n- Major Image"
+        if race == "Dragon" and Dice(8) == 1: one += "\n- Mirror Image"
+        if race == "Dragon" and Dice(8) == 1: one += "\n- Polymorph"
+        if race == "Dragon" and Dice(8) == 1: one += "\n- Suggestion"
+        if race == "Dwarf" and Dice() == 1: cantrip += "\n- Enlarge (Recharges after a Short or Long Rest). \n\t For 1 minute, the Dwarf magically increases in size, along with anything it is wearing or carrying. While enlarged, the Dwarf is Large, doubles its damage dice on Strength-based weapon attacks (included in the attacks), and makes Strength checks and Strength saving throws with advantage. If the Dwarf lacks the room to become Large, it attains the maximum size possible in the space available."
+        if race == "Dwarf" and Dice() == 1: cantrip += "\n- Invisibility (Recharges after a Short or Long Rest). \n\t The dwarf magically turns invisible until it attacks, casts a spell, or until its concentration is broken, up to 1 hour (as if concentrating on a spell). Any equipment the Dwarf wears or carries is invisible with it."
+        if race == "Elemental" and Dice() == 1: cantrip += "\n- Dancing lights"
+        if race == "Elemental" and Dice() == 1: one += "\n- blur"
+        if race == "Elemental" and Dice() == 1: one += "\n- Sleep"
+        if race == "Elemental" and Dice() == 1: cantrip += "\n Cinder Breath \t (Recharge 6). The Elemental exhales a 15-foot cone of smoldering ash. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw or be blinded until the end of the Elemental's next turn."
+        if race == "Elemental" and Dice(7) == 1: cantrip += "\n Blinding Breath \t (Recharge 6). The Elemental exhales a 15-foot cone of blinding dust. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw or be blinded for one minute."
+        if race == "Elemental" and Dice(7) == 1: cantrip += "\n Steam Breath \t (Recharge 6). The Elemental exhales a 15-foot cone of scalding steam. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw, taking 4 (1d8) fire damage on a failed save, or half as much damage on a successful one."
+        if race == "Elemental" and Dice(8) == 1: cantrip += "\n - Frost Breath \n\t (Recharge 6). The Elemental exhales a 15-foot cone of cold air. Each creature in that area must succeed on a DC [10+%Con] Dexterity saving throw, taking 5 (2d4) cold damage on a failed save, or half as much damage on a successful one."
+        if race == "Elemental" and Dice() == 1: cantrip += "\n - Fire Breath \t (Recharge 6). The Elemental exhales a 15-foot cone of cold air. Each creature in that area must succeed on a DC [10+%Con] Dexterity saving throw, taking 7 (2d6) fire damage on a failed save, or half as much damage on a successful one."
+        if race == "Elemental" and Dice(3) == 1: one += "\n - Summon Mephits (1/Day) \n\t The Elemental has a 25 percent chance of summoning 1d4 mephits. A summoned mephit appears in an unoccupied space within 60 feet of its summoner, acts as an ally of its summoner, and can't summon other mephits. It remains for 1 minute, until it or its summoner dies, or until its summoner dismisses it as an action."
+        if race == "Elemental" and Dice() == 1: one += "\n Innate Spellcasting (1/Day) \n\t The Elemental can innately cast fog cloud, requiring no material components."
+        if race == "Elemental" and Dice() == 1: one += "\n Innate Spellcasting (1/Day) \n\t The Elemental can innately cast heat metal, requiring no material components."
+        if race == "Elf" and Dice() == 1: cantrip += "\n- Dancing lights"
+        if race == "Elf" and Dice() == 1: one += "\n- Darkness"
+        if race == "Elf" and Dice() == 1: one += "\n- Faerie fire"
+        if race == "Fey" and Dice() == 1: cantrip += "\n Teleport (Recharge 4–6). \n\t The Fey magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the Fey can make one bite attack."
+        if race == "Fey" and Dice() == 1: cantrip +=  "\n- Druidcraft"
+        if race == "Fey" and Dice(3) == 1: three += "\n- Entangle" 
+        if race == "Fey" and Dice(3) == 1: three += "\n- Goodberry"
+        if race == "Fey" and Dice() == 1: one += "\n- Barkskin"
+        if race == "Fey" and Dice() == 1: one += "\n- Pass without trace"
+        if race == "Fey" and Dice() == 1: one += "\n- Shillelagh"
+        if race == "Fey" and Dice() == 1: cantrip += "\n Heart Sight. \n\t The Fey touches a creature and magically knows the creature's current emotional state. If the target fails a DC [10+%Cha] Charisma saving throw, the Fey also knows the creature's alignment. Celestials, fiends, and undead automatically fail the saving throw."
+        if race == "Fey" and Dice() == 1: cantrip += "\n Invisibility. \n\t The Fey  magically turns invisible until it attacks or casts a spell, or until its concentration ends (as if concentrating on a spell). Any equipment the Fey wears or carries is invisible with it."
+        if race == "Fey" and Dice(3) == 1: cantrip += "\n- Druidcraft"
+        if race == "Fey" and Dice() == 1: one += "\n- Confusion"
+        if race == "Fey" and Dice() == 1: one += "\n- Dancing lights"
+        if race == "Fey" and Dice() == 1: one += "\n- Detect evil and good"   
+        if race == "Fey" and Dice() == 1: one += "\n- Detect thoughts"   
+        if race == "Fey" and Dice() == 1: one += "\n- Dispel magic"   
+        if race == "Fey" and Dice() == 1: one += "\n- Entangle"   
+        if race == "Fey" and Dice() == 1: one += "\n - Fly"   
+        if race == "Fey" and Dice() == 1: one += "\n - phantasmal force"   
+        if race == "Fey" and Dice() == 1: one += "\n polymorph"   
+        if race == "Fey" and Dice() == 1: one += "\n- Sleep"   
+        if race == "Fey" and Dice() == 1: one += "\n Charming Melody [DC 10+%Cha Wisdom saving throw]\n\t The creature is charmed by the Fey for 1 minute. If the Fey or any of its companions harms the creature, the effect on it ends immediately."   
+        if race == "Fey" and Dice() == 1: one += "\n - Frightening Strain [DC 10+%Cha Wisdom saving throw] \n\t The creature is charmed by the Fey for 1 minute. If the Fey or any of its companions harms the creature, the effect on it ends immediately."   
+        if race == "Fey" and Dice() == 1: one += "\n Gentle Lullaby [DC 10+%Cha Wisdom saving throw] \n\t The creature falls asleep and is unconscious for 1 minute. The effect ends if the creature takes damage or if someone takes an action to shake the creature awake."   
 
         if race == "Fiend":
             if Dice() == 1:
@@ -1736,9 +1379,8 @@ def Magic(Lvl, race = Race(), background = Background()):
             if Dice() == 1:
                 one += "\n - Darkness Aura: \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
                 
-        if race == "Monstrosity":
-            if Dice() == 1:
-                cantrip += "\n - Luring Song: \n\t The monstrosity sings a magical melody. Every humanoid and giant within 300 feet of the harpy that can hear the song must succeed on a DC [10+%Cha] Wisdom saving throw or be charmed until the song ends. The monstrosity must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time. The song ends if the monstrosity is incapacitated. While charmed by the monstrosity, a target is incapacitated and ignores the songs of other monstrosities. If the charmed target is more than 5 feet away from the monstrosity, the target must move on its turn toward the monstrosity by the most direct route. It doesn't avoid opportunity attacks, but before moving into damaging terrain, such as lava or a pit, and whenever it takes damage from a source other than the monstrosity, a target can repeat the saving throw. A creature can also repeat the saving throw at the begguining of each of its turns. If a creature's saving throw is successful, the effect ends on it. A target that successfully saves is immune to this monstrosity's song for the next 24 hours."
+        if race == "Monstrosity" and Dice() == 1:
+            cantrip += "\n - Luring Song: \n\t The monstrosity sings a magical melody. Every humanoid and giant within 300 feet of the harpy that can hear the song must succeed on a DC [10+%Cha] Wisdom saving throw or be charmed until the song ends. The monstrosity must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time. The song ends if the monstrosity is incapacitated. While charmed by the monstrosity, a target is incapacitated and ignores the songs of other monstrosities. If the charmed target is more than 5 feet away from the monstrosity, the target must move on its turn toward the monstrosity by the most direct route. It doesn't avoid opportunity attacks, but before moving into damaging terrain, such as lava or a pit, and whenever it takes damage from a source other than the monstrosity, a target can repeat the saving throw. A creature can also repeat the saving throw at the begguining of each of its turns. If a creature's saving throw is successful, the effect ends on it. A target that successfully saves is immune to this monstrosity's song for the next 24 hours."
                 
         if race == "Monstrosity":
             if Dice() == 1:
@@ -1838,7 +1480,7 @@ def Magic(Lvl, race = Race(), background = Background()):
 def Actions(Type=""):
     r = ""
 
-    if Type == "Assassin":
+    if Type == "Spy":
         r = r + "\n- Superior Invisibility"
 
     if Type == "Aberration":
@@ -2110,11 +1752,11 @@ def Actions(Type=""):
 
     if Type == "Fey": 
         if Dice(3) == 1:
-            r = r+ "\n- Magic Resistance \n\t The Fae has advantage on saving throws against spells and other magical effects."
+            r = r+ "\n- Magic Resistance \n\t The Fey has advantage on saving throws against spells and other magical effects."
 
     if Type == "Fey": 
         if Dice(2) == 1:
-            r = r+ "\n- Superior Invisibility \n\t  The Fae magically turns invisible until its concentration ends (as if concentrating on a spell). Any equipment the Fae wears or carries is invisible with it."
+            r = r+ "\n- Superior Invisibility \n\t  The Fey magically turns invisible until its concentration ends (as if concentrating on a spell). Any equipment the Fey wears or carries is invisible with it."
 
     if Type == "Giant":
         if Dice(2) == 1:
@@ -2603,8 +2245,8 @@ def Actions(Type=""):
     if Type == "Undead":
         r = r + "\n- Blood Frenzy"
     
-    if Type == "Scout":
-        r = r+ "\n- Keen Senses\n\t The Scout has advantage on Wisdom (Perception) checks that rely on senses."   
+    if Type == "Explorer" and Dice()==1:
+        r = r+ "\n- Keen Senses\n\t The Explorer has advantage on Wisdom (Perception) checks that rely on senses."   
         
     if Type == "Plant": 
         r = r+ "\n- Damage Vulnerabilities: fire"
@@ -2791,26 +2433,21 @@ def Actions(Type=""):
         if Dice(2) == 1:
             r = r + "\n- Invisibility. \n\t The fiend magically turns invisible until it attacks, or until its concentration ends (as if concentrating on a spell). Any equipment the fiend wears or carries is invisible with it."
 
-    if Type == "Fiend":
-        if Dice()==1:
-            r = r + "\n Hellish Rejuvenation. \n\t A Fiend that dies in the Nine Hells comes back to life with all its hit points in", Dice(10), "days unless it is killed by a good-aligned creature with a bless spell cast on that creature or its remains are sprinkled with holy water."
+    if Type == "Fiend" and Dice()==1:
+        r = r + "\n Hellish Rejuvenation. \n\t A Fiend that dies in the Nine Hells comes back to life with all its hit points in", Dice(10), "days unless it is killed by a good-aligned creature with a bless spell cast on that creature or its remains are sprinkled with holy water."
             
-    elif Type== "Demon" or Type == 35:
-        r = r + "\n Language. \n\t Abyssal"
-        if Dice()==1:
-            r = r + "\n Damage Resistances. \n\t cold"
-        if Dice()==1:
-            r = r + "\n Damage Resistances. \n\t fire"
-        if Dice()==1:
-            r = r + "\n Damage Resistances. \n\t lightning"
-        if Dice()==1:
-            r = r + "\n Damage Immunities. \n\t poison"
-        if Dice()==1:
-            r = r + "\n Darkvision. \n\t cold"
-        if Dice()==1:
-            r = r + "\n Telepathy. \n\t 60 ft. Only in Abyssal."
-        if Dice()==1:
-            r = r + "\nFetid Cloud (1/Day).\n\t A 10-foot radius of disgusting sulfuric gas extends out from the Demon. The gas spreads around corners, and its area is lightly obscured. It lasts for 1 minute or until a strong wind disperses it. Any creature that starts its turn in that area must succeed on a DC 11 Constitution saving throw or be poisoned until the start of its next turn. While poisoned in this way, the target can take either an action or a bonus action on its turn, not both, and can't take reactions."
+    if Type== "Fiend" and Dice()==1:
+        r += "\n Damage Resistances. \n\t cold"
+    if Type== "Fiend" and Dice()==1:
+        r += "\n Damage Resistances. \n\t fire"
+    if Type== "Fiend" and Dice()==1:
+        r += "\n Damage Resistances. \n\t lightning"
+    if Type== "Fiend" and Dice()==1:
+        r += "\n Damage Immunities. \n\t poison"
+    if Type== "Fiend" and Dice()==1:
+        r += "\n Darkvision. \n\t cold"
+    if Type== "Fiend" and Dice()==1:
+        r += "\n Telepathy. \n\t 60 ft. Only in Abyssal."
 
     if Type == "Spy":
         if Dice(2) == 1:
@@ -2914,36 +2551,31 @@ def Actions(Type=""):
     elif Type == "Bandit":
         r = r + "\n- Parry \n\t The Bandit adds 2 to its AC against one melee attack that would hit it. To do so, the bandit must see the attacker and be wielding a melee weapon."
         
-    elif Type =="Guard":
-        r = r + "\n- Parry \n\t The Guard adds 2 to its AC against one melee attack that would hit it. To do so, the Guard must see the attacker and be wielding a melee weapon."
+    elif Type =="Warrior" and  Dice()==1:
+        r = r + "\n- Parry \n\t The warrior adds 2 to its AC against one melee attack that would hit it. To do so, the warrior must see the attacker and be wielding a melee weapon."
         
     if Type == "Kobold":    
         r = r + "\n- Darkvision \n\t 60ft."
         r = r + "\n- Pack Tactics \n\t The kobold has advantage on an attack roll against a creature if at least one of the kobold's allies is within 5 feet of the creature and the ally isn't incapacitated."
         r = r + "\n- Sunlight Sensitivity \n\t While in sunlight, the kobold has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
 
-    if Type == "Kobold":    
-        if Dice() == 1:
+    if Type == "Kobold" and Dice() == 1:
             r = r+ "\n Fly \t 30ft."
 
-    if Type == "Noble":
+    if Type == "Noble" and Dice()==1:
         r = r + "\n- Parry \n\t The noble adds 2 to its AC against one melee attack that would hit it. To do so, the noble must see the attacker and be wielding a melee weapon."
     
-    if Type == "Plant": 
-        if Dice() == 1:
-            r = r+ "\n Condition Immunities:  frightened"
+    if Type == "Plant" and Dice() == 1:
+        r = r+ "\n Condition Immunities:  frightened"
             
-    if Type == "Plant": 
-        if Dice() == 1:
-            r = r + "\n-Distress Spores. \n\t When the plant takes damage, all other plants within 240 feet of it can sense its pain."  
+    if Type == "Plant" and Dice() == 1:
+        r = r + "\n-Distress Spores. \n\t When the plant takes damage, all other plants within 240 feet of it can sense its pain."  
             
-    if Type == "Plant": 
-        if Dice() == 1:
-            r = r + "\n-Sun Sickness. \n\t While in sunlight, the plant has disadvantage on ability checks, attack rolls, and saving throws. The plant dies if it spends more than 1 hour in direct sunlight."
+    if Type == "Plant" and Dice() == 1:
+        r = r + "\n-Sun Sickness. \n\t While in sunlight, the plant has disadvantage on ability checks, attack rolls, and saving throws. The plant dies if it spends more than 1 hour in direct sunlight."
             
-    if Type == "Plant": 
-        if Dice() == 1:
-            r = r + "\n Condition Immunities\n\t blinded, deafened, frightened"
+    if Type == "Plant" and Dice() == 1:
+        r = r + "\n Condition Immunities\n\t blinded, deafened, frightened"
 
     if Type == "Plant": 
         if Dice() == 1:
@@ -2951,21 +2583,18 @@ def Actions(Type=""):
         elif Dice() == 1:
             r = r + "\n Blindsight\n\t 60 ft (Blind Beyond this radius)."  
 
-    if Type == "Plant": 
-        if Dice() == 1:
-            r = r + "\n Darkvision\n\t 120 ft"        
+    if Type == "Plant" and Dice() == 1:
+        r = r + "\n Darkvision\n\t 120 ft"        
    
-    if Type == "Plant": 
-        if Dice() == 1:
-            r = r + "\n Death Burst\n\t The Plant explodes when it drops to 0 hit points. Each creature within 20 feet of it must succeed on a DC 15 Constitution saving throw or take 10 (3d6) poison damage and become infected with a disease on a failed save. Creatures immune to the poisoned condition are immune to this disease. Spores invade an infected creature's system, killing the creature in a number of hours equal to 1d12 + the creature's Constitution score, unless the disease is removed. In half that time, the creature becomes poisoned for the rest of the duration. After the creature dies, it sprouts 2d4 Tiny gas spores that grow to full size in 7 days."        
+    if Type == "Plant" and Dice() == 1:
+        r = r + "\n Death Burst\n\t The Plant explodes when it drops to 0 hit points. Each creature within 20 feet of it must succeed on a DC 15 Constitution saving throw or take 10 (3d6) poison damage and become infected with a disease on a failed save. Creatures immune to the poisoned condition are immune to this disease. Spores invade an infected creature's system, killing the creature in a number of hours equal to 1d12 + the creature's Constitution score, unless the disease is removed. In half that time, the creature becomes poisoned for the rest of the duration. After the creature dies, it sprouts 2d4 Tiny gas spores that grow to full size in 7 days."        
 
 
     if Type == "Warrior":
         r = r + "\n- Pack Tactics \n\t The warrior has advantage on an attack roll against a creature if at least one of the warrior's allies is within 5 feet of the creature and the ally isn't incapacitated."
         
-    if Type == "Warrior":
-        if Dice(2)==1:
-            r= r + "\n- Multiattack \n\t The Warrior can attack an additional time on his turn."
+    if Type == "Warrior" and Dice(2)==1:
+        r= r + "\n- Multiattack \n\t The Warrior can attack an additional time on his turn."
 
     if Type == "":
         if Dice(2)==1:
@@ -3050,6 +2679,28 @@ def Region(Type):
     
 def PlotHook():
     Hooks = [
+        "Someone I love was killed by a rival faction, and I will have revenge."
+        "I love someone from another house, but the relationship is forbidden.",
+        "I was exiled for a crime I didn't commit.",
+        "I keep my thoughts and discoveries in a journal. My journal is my legacy. I just lost it!",
+        "A monster that slaughtered dozens of innocent people spared my life, and I don’t know why. I am certain it follows me since.",
+        "I protect those who cannot protect themselves.",
+        "I have a family, but I have no idea where they are. One day, I hope to see them again.",
+        "Recruited into a lord's army, I rose to leadership and was commended for my heroism. Now I fight for them."
+        "A celestial, fey, or similar creature gave me a blessing or revealed my secret origin.",
+        "I'm breaking into a tyrant's castle to steal weapons to arm the people.",
+        "I lead a militia to fight off an invading army.",
+        "I steal from merchants to help the poor.",
+        "I'm the last hope against a terrible monster.",
+        "I want to save people of a comming disaster.",
+        "I stand up to a tyrant's agents.",
+        "I must repay my village's debt.",
+        "My destiny awaits me at the bottom of a particular pond in the Feywild.",
+        "The gods saved me during a terrible storm, and I will honor their gift.",
+        "I will hunt the many famous beasts of this land.",
+        "I will fish the many famous waters of this land.",
+        "Someone else's greed destroyed my livelihood, and I will be compensated.",
+        "I lost something important in the deep sea, and I intend to find it.",
         "I have a tail like that of a dog or another animal, as a punishment from a Fey for an accidental insult.",
         "I have a weakness for the exotic beauty of the people of these lands.",
         "I do everything for those who were taken from me.",
@@ -3126,7 +2777,7 @@ def PlotHook():
         "They are running from justice for a crime they didn't commit.",
         "They are optimistic, seeing events in the most positive light.",
         "They have to make a very difficult choice",
-        "They serve an unethical and corrupt organization.",
+        "I serve an unethical and corrupt organization.",
         "They would die to recover an ancient relic of their faith that was lost long ago.",
         "They will someday get revenge on the corrupt temple hierarchy who branded them a heretic.",
         "They owe their life to the priest who took them in when their parents died.",
@@ -3142,14 +2793,125 @@ def PlotHook():
         "I will overcome a rival and prove myself their better.",
         "My mistake got someone hurt. Ill never make that mistake again.",
         "I will be the best for the honor and glory of my home.",
+        "A proud noble once gave me a horrible beating, and I will take my revenge on any bully I encounter.",
+        "The tyrant who rules my land will stop at nothing to see me killed.",
+        "Your family has a history of practicing the dark arts. You dabbled once and felt something horrible clutch at your soul, whereupon you fled in terror.",
+        "An apparition that has haunted your family for generations now haunts you. You don’t know what it wants, and it won’t leave you alone.",
+        "An oni took your sibling one cold, dark night, and you were unable to stop it.",
+        "You were cursed with lycanthropy. You are now haunted by the innocents you slaughtered.",
+        "My torment drove away the person I love. I strive to win back the love I’ve lost.",
+        "I have a child to protect. I must make the world a safer place for them.",
+        "I am searching for spiritual enlightenment.",
+        "I am the caretaker of an ancient ruin or relic.",
+        "I have great insight into a great evil that only I can destroy.",
+        "Should my discovery come to light, it could bring ruin to the world.",
+        "I entered seclusion to hide from the ones who might still be hunting me. I must someday confront them.",
+        "I am a pilgrim in search of a person, place, or relic of spiritual significance.",
+        "A fiend possessed you as a child. You were locked away but escaped. The fiend is still inside you, but now you try to keep it locked away.",
         ""]
     return random.choice(Hooks)
     
     
     
     
+    
 def Trait(background=""):
     Traits = [
+        "My secret could get me expelled from my house.",
+        "My house and blood line make me the best!",
+        "I'm obsessed with conspiracy theories and worried about secret societies and hidden demons.",
+        "I'm fixated on following official protocols.",
+        "I'm determined to impress the leaders of my faction, and to become a leader myself.",
+        "My organization must evolve, and I'll lead the evolution.",
+        "I don't care about the organization as a whole, but I would do anything for my old mentor.",
+        "I never forget an insult against me.",
+        "I'm always looking to improve efficiency.",
+        "I like keeping secrets and won't share them with anyone.",
+        "I'd risk too much to uncover a lost bit of knowledge.",
+        "I let my need to win arguments overshadow friendships and harmony.",
+        "I am dogmatic in my thoughts and philosophy.",
+        "I harbor dark, bloodthirsty thoughts that my isolation and meditation failed to quell.",
+        "Now that I've returned to the world, I enjoy its delights a little too much.",
+        "I entered seclusion because I loved someone I could not have.",
+        "I'm still seeking the enlightenment I pursued in my seclusion, and it still eludes me.",
+        "I am working on a grand philosophical theory and love sharing my ideas.",
+        "I often get lost in my own thoughts and contemplation, becoming oblivious to my surroundings.",
+        "I connect everything that happens to me to a grand, cosmic plan.",
+        "I'm oblivious to etiquette and social expectations.",
+        "I feel tremendous empathy for all who suffer.",
+        "The leader of my community had something wise to say on every topic, and I am eager to share that wisdom.",
+        "I am utterly serene, even in the face of disaster.",
+        "I've been isolated for so long that I rarely speak, preferring gestures and the occasional grunt.",
+        "I needed to commune with nature, far from civilization.",
+        "I needed a quiet place to work on my art, literature, music, or manifesto.",
+        "I retreated from society after a life-altering event.",
+        "I talk to spirits that no one else can see.",
+        "I am a purveyor of doom and gloom who lives in a world without hope.",
+        "I have an addiction.",
+        "I feel no compassion for the dead. They’re the lucky ones.",
+        "I assume the worst in people.",
+        "I have certain rituals that I must follow every day. I can never break them.",
+        "There’s evil in me, I can feel it. It must never be set free.",
+        "A terrible guilt consumes me. I hope that I can find redemption through my actions.",
+        "I would sacrifice my life and my soul to protect the innocent.",
+        "I put no trust in divine beings.",
+        "I refuse to become a victim, and I will not allow others to be victimized.",
+        "I expect danger around every corner.",
+        "I don’t talk about the thing that torments me. I’d rather not burden others with my curse.",
+        "I live for the thrill of the hunt.",
+        "I spend money freely and live life to the fullest, knowing that tomorrow I might die.",
+        "I like to read and memorize poetry. It keeps me calm and brings me fleeting moments of happiness.",
+        "I don't run from evil. Evil runs from me.",
+        "You did terrible things to avenge the murder of someone you loved. You became a monster, and it haunts your waking dreams.",
+        "You opened an eldritch tome and saw things unfit for a sane mind. You burned the book, but its words and images are burned into your psyche.",
+        "A hag kidnapped and raised you. You escaped, but the hag still has a magical hold over you and fills your mind with evil thoughts.",
+        "I was born under a dark star. I can feel it watching me, coldly and distantly. Sometimes it beckons me in the dead of night.",
+        "I'm well known for my work, and I want to make sure everyone appreciates it. I'm always taken aback when people haven't heard of me.",
+        "I don't part with my money easily and will haggle tirelessly to get the best deal possible."
+        "I like to talk at length about my profession.",
+        "I'm rude to people who lack my commitment to hard work and fair play.",
+        "I'm full of witty aphorisms and have a proverb for every occasion.",
+        "I always want to know how things work and what makes people tick.",
+        "I'm a snob who looks down on those who can't appreciate fine art.",
+        "I believe that anything worth doing is worth doing right. I can't help it – I'm a perfectionist.",
+        "I change my mood or my mind as quickly as I change key in a song.",
+        "I'll settle for nothing less than perfection.",
+        "I get bitter if I'm not the center of attention.",
+        "I love a good insult, even one directed at me.",
+        "Nobody stays angry at me or around me for long, since I can defuse any amount of tension.",
+        "I'm a hopeless romantic, always searching for that 'special someone'."
+        "Whenever I come to a new place, I collect local rumors and spread gossip.",
+        "I know a story relevant to almost every situation.",
+        "I have trouble trusting in my allies.",
+        "Secretly, I believe that things would be better if I were a tyrant lording over the land.",
+        "I have a weakness for the vices of the city, especially hard drink.",
+        "The people who knew me when I was young know my shameful secret, so I can never go home again.",
+        "I'm convinced of the significance of my destiny, and blind to my shortcomings and the risk of failure.",
+        "I wish my childhood sweetheart had come with me to pursue my destiny.",
+        "My tools are symbols of my past life, and I carry them so that I will never forget my roots.",
+        "I worked the land, I love the land, and I will protect the land.",
+        "I get bored easily. When am I going to get on with my destiny?",
+        "I misuse long words in an attempt to sound smarter.",
+        "Thinking is for other people. I prefer action.",
+        "I'm confident in my own abilities and do what I can to instill confidence in others.",
+        "I have a strong sense of fair play and always try to find the most equitable solution to arguments.",
+        "When I set my mind to something, I follow through no matter what gets in my way.",
+        "If someone is in trouble, I'm always ready to lend help.",
+        "I judge people by their actions, not their words.",
+        "I am obsessed with catching an elusive beast, often to the detriment of other pursuits.",
+        "I work hard, but I play harder.",
+        "I am inclined to tell long-winded stories at inopportune times.",
+        "I have lived a hard life and find it difficult to empathize with others.",
+        "I become depressed and anxious if I'm away from the sea too long.",
+        "I am judgmental, especially of those I deem homebodies or otherwise lazy.",
+        "Luck favors me, and I take risks others might not.",
+        "I dislike bargaining; state your price and mean it.",
+        "I work hard; nature offers no handouts.",
+        "I laugh heartily, feel deeply, and fear nothing.",
+        "Rich folk don't know the satisfaction of hard work.",
+        "I need long stretches of quiet to clear my head.",
+        "My friends are my crew; we sink or float together.",
+        "I am unmoved by the wrath of nature.",
         "I'm always changing my mind-well, almost always.",
         "I have many vices and tend to indulge them.",
         "I never give away anything for free and always expect something in return.",
@@ -3351,13 +3113,29 @@ def Trait(background=""):
         "Traps don't make me nervous. Idiots who trigger traps make me nervous.",
         "I'm happier in a dusty old tomb than I am in the centers of civilization.",
         "Fame is more important to me than money.",
+        "I pursue wealth to secure someone's love.",
+        "I'll do anything to get my hands on something rare or priceless.",
+        "I'm quick to assume that someone is trying to cheat me.",
+        "I'm never satisfied with what I have – I always want more.",
+        "I would kill to acquire a noble title.",
+        "My faction is my family. I would do anything for it.",
         ""
         ]
         
-
-        
-    if background == "Acolyte":
+    if background == "Expert":
         return random.choice(Traits + [
+            "I'm horribly jealous of anyone who can outshine my handiwork. Everywhere I go, I'm surrounded by rivals.",
+            "No one must ever learn that I once stole money from guild coffers.",
+            "One day I will return to my guild and prove that I am the greatest artisan of them all.",
+            "The workshop where I learned my trade is the most important place in the world to me.",
+            "I created a great work for someone, and then found them unworthy to receive it. I'm still looking for someone worthy.",
+            "I owe my guild a great debt for forging me into the person I am today.",
+            "I will get revenge on the evil forces that destroyed my place of business and ruined my livelihood."
+            ])
+        
+    if background == "Priest" or background == "Cultist":
+        return random.choice(Traits + [
+            "I was partaking of communal living in accordance with the dictates of a religious order.",
             "They idolize a particular hero of my faith, and constantly refer to that person's deeds and example.",
             "I can find common ground between the fiercest enemies, empathizing with them and always working toward peace.",
             "I see omens in every event and action. The gods try to speak to us, we just need to listen.",
@@ -3367,8 +3145,9 @@ def Trait(background=""):
             "I am intolerant of other faiths and condemn the worship of other gods.",
             "I've enjoyed fine food, drink, and high society among my temple's elite. Rough living grates on me.",
             "I've spent so long in the temple that I have little practical experience dealing with people in the outside world.",
+            "Nothing is more important than the other members of my hermitage, order, or association.",
             ""]) 
-    if background=="Entertainer":
+    if background=="Bard":
         return random.choice( Traits + [
             "My instrument is my most treasured possession, and it reminds me of someone I love."
             ])
@@ -3381,7 +3160,7 @@ def Trait(background=""):
 
 def Ideal(background, alignment):
     
-    if background == "Acolyte":
+    if background == "Priest":
         if "Lawful" in alignment and Dice()==1:
             return random.choice([
                 "Tradition. The ancient traditions of worship and sacrifice must be preserved and upheld.",
@@ -3392,8 +3171,8 @@ def Ideal(background, alignment):
                 ["Charity. I always try to help those in need, no matter what the personal cost."
                 ])
         if "Chaotic" in alignment and Dice()==1:
-            return random.choice( 
-                ["Change. We must help bring about the changes the gods are constantly working in the world."
+            return random.choice([
+                "Change. We must help bring about the changes the gods are constantly working in the world."
                 ])
 
     if background == "Charlatan":
@@ -3412,7 +3191,24 @@ def Ideal(background, alignment):
                 "Charity. I distribute the money I acquire to the people who really need it.",
                 "Friendship. Material goods come and go. Bonds of friendship last forever."
                 ])
-
+    if background == "Commoner":
+        if "Good" in alignment and Dice()==1:
+            return random.choice([
+                "Camaraderie. Good people make even the longest voyage bearable."
+                ])
+        if "Lawful" in alignment and Dice()==1:
+            return random.choice([
+                "Luck. Our luck depends on respecting its rules—now throw this salt over your shoulder."
+                ])
+        if "Chaotic" in alignment and Dice()==1:
+            return random.choice([
+                "Daring. The richest bounty goes to those who risk everything."
+                ])
+        if "Neutral" in alignment and Dice()==1:
+            return random.choice([
+                "Balance. Do not fish the same spot twice in a row; suppress your greed, and nature will reward you."
+                ])
+                
     if background == "Criminal":
         if "Lawful" in alignment and Dice()==1:
             return random.choice([
@@ -3430,6 +3226,7 @@ def Ideal(background, alignment):
         if "Evil" in alignment and Dice()==1:
             return random.choice([
                 "Greed. I will do whatever it takes to become wealthy.",
+                "Plunder. Take all that you can and leave nothing for the scavengers.",
                 ])
         if "Neutral" in alignment and Dice()==1:
             return random.choice([
@@ -3459,7 +3256,7 @@ def Ideal(background, alignment):
                 "Tradition. Every game has rules, and the playing field must be level."
                 ])
                 
-    if background == "Student":
+    if background == "Scholar":
         if "Lawful" in alignment and Dice()==1:
             return random.choice( 
                 ["Distance. One must not interfere with the affairs of another culture – even one in need of aid.", 
@@ -3480,7 +3277,7 @@ def Ideal(background, alignment):
                 "Death Wish. Nothing is more exhilarating than a narrow escape from the jaws of death."
                 ])
                 
-    if background=="Entertainer":
+    if background=="Bard":
         if "Good" in alignment and Dice()==1:
             return random.choice([
                 "Beauty. When I perform, I make the world better than it was."
@@ -3509,7 +3306,6 @@ def Ideal(background, alignment):
     if background == "Traveler":
         if "Good" in alignment and Dice()==1:
             return random.choice([
-                "Friendship. I never leave a friend behind. ",
                 "Open. I have much to learn from the kindly folk I meet along my way."
                 ])
         if "Lawful" in alignment and Dice()==1:
@@ -3529,39 +3325,68 @@ def Ideal(background, alignment):
             return random.choice([
                 "Inquisitive. Everything is new, but I have a thirst to learn."
                 ])
-        if Dice()==1:
-            return random.choice([
-                "Suspicious. I must be careful, for I have no way of telling friend from foe here."
-                ])
+
 
     if "Good" in alignment and Dice()==1:
         return random.choice([
-            "Empathy. No creature should be made to suffer."
+            "Common Good. My organization serves a vital function, and its prosperity will help everyone.",
+            "Greater Good. My gifts are meant to be shared with all, not used for my own benefit.",
+            "Greater Good. I kill monsters to make the world a safer place, and to exorcise my own demons.",
+            "Selflessness. I try to help those in need, no matter what the personal cost.",
+            "Generosity. My talents were given to me so that I could use them to benefit the world.",
+            "Empathy. No creature should be made to suffer.",
+            "Respect. People deserve to be treated with dignity and respect.",
+            "Friendship. I never leave a friend behind. "
             ])
     if "Chaotic" in alignment and Dice()==1:
         return random.choice([
+            "Innovation. Abandon old traditions and find better ways to do things.",
+            "Free Thinking. Inquiry and curiosity are the pillars of progress.",
+            "Freedom. I have a dark calling that puts me above the law.",
+            "Freedom. Everyone should be free to pursue his or her own livelihood.",
+            "Freedom. Tyrants must not be allowed to oppress the people.",
             "Changeability. Change is good, which is why I live by an ever-changing set of rules."
             ])
     if "Lawful" in alignment and Dice()==1:
         return random.choice([
+            "Tradition. I uphold traditions of my house and bring honor to my family.",
+            "Logic. Emotions must not cloud our sense of what is right and true, or our logical thinking.",
+            "Logic. I like to know my enemy’s capabilities and weaknesses before rushing into battle.",
+            "Community. It is the duty of all civilized people to strengthen the bonds of community and the security of civilization.",
+            "Fairness. No one should get preferential treatment before the law, and no one is above the law.",
             "Honor. A deal is a deal, and I would never break one."
             ])
     if "Evil" in alignment and Dice()==1:
         return random.choice([
+            "Power. I want to ensure the prosperity of my house and wield its power myself.",
+            "Destruction. I’m a monster that destroys other monsters, and anything else that gets in my way.",
+            "Greed. I'm only in it for the money.",
+            "Might. If I become strong, I can take what I want – what I deserve.",
             "Obsession. I won't let go of a grudge",
             "Greed. I will do whatever it takes to get what I want, regardless of the harm it might cause.",
             "Confusion. Deception is a weapon. Strike from where your foes won't expect."
             ])
     if "Neutral" in alignment and Dice()==1:
         return random.choice([
+            "People. I'm committed to the people I care about, not to ideals.",
+            "Danger. With every great discovery comes grave danger. The two walk hand in hand.",
+            "Sincerity. There's no good in pretending to be something I'm not."
             ])    
     return random.choice([
+        "Comfort. I want to ensure that me and mine enjoy the best things in life.",
+        "Discovery. I want to learn all I can, both for my organization and for my own curiosity.",
+        "Self-Knowledge. If you know yourself, there's nothing left to know.",
+        "Live and Let Live. Meddling in the affairs of others only causes trouble.",
+        "Power. Solitude and contemplation are paths toward mystical or magical power.",
+        "Determination. I’ll stop the spirits that haunt me or die trying.",
+        "Aspiration. I work hard to be the best there is at my craft.",
+        "Suspicious. I must be careful, for I have no way of telling friend from foe here.",
+        "Destiny. Nothing and no one can steer me away from my higher calling.",
         "Anonymity. It's my deeds that should be remembered, not their instrument.",
         "Incorruptibility. Be a symbol, and leave your flawed being behind.",
         "Infamy. My name will be a malediction, a curse that fulfills my will.",
         "Security. Doing what must be done can't bring the innocent to harm.",
         "Justice. Place in society shouldn't determine one's access to what is right. ",
-        "Danger. With every great discovery comes grave danger. The two walk hand in hand.",
         "Discovery. I want to be the first person to discover a lost culture.",
         "Knowledge. By understanding other races and cultures, we learn to understand ourselves.",
         "Immortality. All my exploring is part of a plan to find the secret of everlasting life.",
@@ -3569,6 +3394,7 @@ def Ideal(background, alignment):
         "Greed. I won't risk my life for nothing. I expect some kind of payment.",
         "Growth. Lessons hide in victory and defeat",
         "Aspiration. I'm determined to make something of myself.",
+        "Hard Work. No wave can move a soul hard at work.",
         ""
         ])
                 
@@ -3590,7 +3416,7 @@ def NPC():
     
     bg = Background()
     
-    Lvl = Dice(40)
+    Lvl = Dice(30)
     rc = Race()
     nm = Name(rc)
     al = Alignment()
@@ -3695,7 +3521,7 @@ def NPC():
         CHA += Dice(4)
     
     print(Title())
-    print("-", al, "-")
+    print("-", al, "- ", random.choice(["♀", "♂", "⚥", "⚬", "?", ""]))
     print(bg)
     print(rc)
     print(nm)
