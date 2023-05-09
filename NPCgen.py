@@ -130,7 +130,7 @@ def Title():
         "The Necromancer",
         "The New",
         "The Noble",
-        "The Ocean",
+        "The Oceanic",
         "The Orange",
         "The Old",
         "The Owl",
@@ -334,6 +334,7 @@ def Title():
         "Of the Hells",
         " Of The North",
         " Of The Mountain",
+        " Of the Oceans",
         " Of the Old One",
         " Of The Plains",
         " Of the Pack",
@@ -423,6 +424,10 @@ def Title():
    
 
 
+
+
+
+
 def Alignment():
     Alignments = [
         "Lawful Good",
@@ -440,6 +445,9 @@ def Alignment():
     return random.choice(Alignments)
 
 
+   
+   
+   
    
    
    
@@ -963,7 +971,7 @@ def SpecialAttack(Lvl,Mod ):
     r += " on a failed Saving Throw at DC "
     r += str((10 + Mod)) +" "
     r += SavingThrow(dmg) +  "."
-    if Dice(10)+Dice(10)+Dice(10) <= Dice(Lvl):
+    if Dice(10)+Dice(10) <= Dice(Lvl):
         r += " The target is then affected by the " + con + " condition. "
         r += " The Condition may be countered with a succesful " + str((10 + Mod)) + " "+ Recovery(con) + " Saving Throw at the beggining of the target's turn."
     return r
@@ -1127,7 +1135,7 @@ def Language(race = Race(), background = Background()):
     if background == "Pirate": l += "Common. Thieves' Cant. "
     if background ==  "Ranger": l += random.choice(["Elvish. ", "Giant. ", "Goblin. ", "Orc. "]) + random.choice(["Draconic. ", "Primordial. ", "Sylvan. "])
     if background == "Scholar": l += random.choice(["Abyssal. ", "Celestial. ", "Draconic. ", "Deep Speech. ", "Infernal. ", "Primordial. ", "Sylvan. "])
-    if background == "Shaman": l += "Sylvan" + random.choice(["Elvish. ", "Giant. ", "Goblin. ", "Orc. ", "Primordial. "]) 
+    if background == "Shaman": l += "Sylvan. " + random.choice(["Elvish. ", "Giant. ", "Goblin. ", "Orc. ", "Primordial. "]) 
     if background == "Soldier": l += "Common. "
     if background == "Spy": l += "Common. Thieves' Cant. "
     if background == "Traveler": l += "Common." + random.choice(["Elvish. ", "Gnomish. ", "Halfling", "Dwarvish", "Giant. ", "Goblin. ", "Orc. "])
@@ -1135,7 +1143,7 @@ def Language(race = Race(), background = Background()):
     if background == "Veteran": l += "Common. " + random.choice(["Elvish. ", "Gnomish. ", "Halfling", "Dwarvish", "Giant. ", "Goblin. ", "Orc. "])
     if background == "Warrior": l += "Common. " + random.choice(["Elvish. ", "Gnomish. ", "Halfling", "Dwarvish", "Giant. ", "Goblin. ", "Orc. "])
     if background == "Warlock": l += random.choice(["Abyssal. ", "Celestial. ", "Draconic", "Deep Speech. ", "Infernal. ", "Primordial. ", "Sylvan. "])
-    if background == "Witch": l += "Common. " + random.choice(["Goblin. ", "Gnomish. ", "Sylvan"])
+    if background == "Witch": l += "Common. " + random.choice(["Goblin. ", "Gnomish. ", "Sylvan. "])
     return l
 
 
@@ -1347,111 +1355,45 @@ def Magic(Lvl, race = Race(), background = Background()):
         if race == "Fey" and Dice() == 1: one += "\n- Detect thoughts"   
         if race == "Fey" and Dice() == 1: one += "\n- Dispel magic"   
         if race == "Fey" and Dice() == 1: one += "\n- Entangle"   
-        if race == "Fey" and Dice() == 1: one += "\n - Fly"   
+        if race == "Fey" and Dice() == 1: one += "\n - Fly: 30 ft"   
         if race == "Fey" and Dice() == 1: one += "\n - phantasmal force"   
         if race == "Fey" and Dice() == 1: one += "\n polymorph"   
         if race == "Fey" and Dice() == 1: one += "\n- Sleep"   
         if race == "Fey" and Dice() == 1: one += "\n Charming Melody [DC 10+%Cha Wisdom saving throw]\n\t The creature is charmed by the Fey for 1 minute. If the Fey or any of its companions harms the creature, the effect on it ends immediately."   
         if race == "Fey" and Dice() == 1: one += "\n - Frightening Strain [DC 10+%Cha Wisdom saving throw] \n\t The creature is charmed by the Fey for 1 minute. If the Fey or any of its companions harms the creature, the effect on it ends immediately."   
-        if race == "Fey" and Dice() == 1: one += "\n Gentle Lullaby [DC 10+%Cha Wisdom saving throw] \n\t The creature falls asleep and is unconscious for 1 minute. The effect ends if the creature takes damage or if someone takes an action to shake the creature awake."   
-
-        if race == "Fiend":
-            if Dice() == 1:
-                one += "\n Scare \n\t One creature of the Fiend's choice within 20 feet of it must succeed on a DC 10 Wisdom saving throw or be frightened for 1 minute. The target can repeat the saving throw at the end of each of its turns, with disadvantage if the Fiend is within line of sight, ending the effect on itself on a success."   
-
-        if race == "Gnome":
-            if Dice()==1:
-                cantrip += "\t Nondetection (self only)"
-
-        if race == "Gnome":
-            if Dice()==1:
-                one += " \t Blindness/Deafness"
-
-        if race == "Gnome":
-            if Dice()==1:
-                one += " \n- Blur"
-
-        if race == "Gnome":
-            if Dice()==1:
-                one += " \t Disguise Self"
-
-        if race == "Monstrosity":
-            if Dice() == 1:
-                one += "\n - Darkness Aura: \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
+        if race == "Fey" and Dice() == 1: one += "\n- Gentle Lullaby [DC 10+%Cha Wisdom saving throw] \n\t The creature falls asleep and is unconscious for 1 minute. The effect ends if the creature takes damage or if someone takes an action to shake the creature awake."   
+        if race == "Fiend" and Dice() == 1: one += "\n- Scare \n\t One creature of the Fiend's choice within 20 feet of it must succeed on a DC 10 Wisdom saving throw or be frightened for 1 minute. The target can repeat the saving throw at the begguining of each of its turns, with disadvantage if the Fiend is within line of sight, ending the effect on itself on a success."   
+        if race == "Gnome" and Dice()==1: cantrip += "\t- Nondetection (self only)"
+        if race == "Gnome" and Dice()==1: one += " \t- Blindness/Deafness"
+        if race == "Gnome" and Dice()==1: one += " \n- Blur"
+        if race == "Gnome" and Dice()==1: one += " \t Disguise Self"
+        if race == "Monstrosity" and Dice() == 1: one += "\n - Darkness Aura: \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
+        if race == "Monstrosity" and Dice() == 1: cantrip += "\n - Luring Song: \n\t The monstrosity sings a magical melody. Every humanoid and giant within 300 feet of the harpy that can hear the song must succeed on a DC [10+%Cha] Wisdom saving throw or be charmed until the song ends. The monstrosity must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time. The song ends if the monstrosity is incapacitated. While charmed by the monstrosity, a target is incapacitated and ignores the songs of other monstrosities. If the charmed target is more than 5 feet away from the monstrosity, the target must move on its turn toward the monstrosity by the most direct route. It doesn't avoid opportunity attacks, but before moving into damaging terrain, such as lava or a pit, and whenever it takes damage from a source other than the monstrosity, a target can repeat the saving throw. A creature can also repeat the saving throw at the begguining of each of its turns. If a creature's saving throw is successful, the effect ends on it. A target that successfully saves is immune to this monstrosity's song for the next 24 hours."
+        if race == "Monstrosity" and Dice() == 1: cantrip += "\n - Acid Spray (Recharge 6): \n\t The Monstrosity spits acid in a line that is 30 feet long and 5 feet wide, provided that it has no creature grappled. Each creature in that line must make a DC [10+%Str] Dexterity saving throw, taking 10 (3d6) acid damage on a failed save, or half as much damage on a successful one."
+        if race == "Ooze" and Dice()==1: cantrip += " \n Psychic Crush (Recharge 5–6). \n\t The ooze targets one creature that it can sense within 60 feet of it. The target must make a DC 10 Intelligence saving throw, taking 10 (3d6) psychic damage on a failed save, or half as much damage on a successful one."
+        if race == "Snakefolk" and Dice()==1: cantrip += "\n- animal friendship (snakes only)"
+        if race == "Snakefolk" and Dice()==1: three += "\n- Poison Spray"
+        if race == "Snakefolk" and Dice()==1: three += "\n- Suggestion"
+        if race == "Plant" and Dice() == 1: three += "\n - Pacifying Spores \n\t The Plant ejects spores at one creature it can see within 5 feet of it. The target must succeed on a DC [10+%CON] Constitution saving throw or be stunned for 1 minute. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."   
+        if race == "Plant" and Dice() == 1: cantrip += "\n - Rapport Spores \n\t A 20-foot radius of spores extends from the plant. These spores can go around corners and affect only creatures with an Intelligence of 2 or higher that aren't undead, constructs, or elementals. Affected creatures can communicate telepathically with one another while they are within 30 feet of each other. The effect lasts for 1 hour."   
+        if race == "Plant" and Dice(8) == 1: one += "\n - Caustic Spores \n\t The Plant releases spores in a 30-foot cone. Each creature inside the cone must succeed on a DC [10+%Con] Dexterity saving throw or take 3 (1d6) acid damage at the start of each of the plant's turns. A creature can repeat the saving throw at the start of its turn, ending the effect on itself on a success. The save DC is 8 + the plant's Constitution modifier + the plant's proficiency bonus."  
+        if race == "Plant" and Dice(11) == 1: one += "\n - Infestation Spores \n\t The plant releases spores that burst out in a cloud that fills a 10-foot-radius sphere centered on it, and the cloud lingers for 1 minute. Any flesh-and-blood creature in the cloud when it appears, or that enters it later, must make a DC [10+%CON] Constitution saving throw. The save DC is 8 + the plant's Constitution modifier + the plant's proficiency bonus. On a successful save, the creature can't be infected by these spores for 24 hours. On a failed save, the creature is infected with a disease called the spores of Zuggtmoy and also gains a random form of indefinite madness (determined by rolling on the Madness of Zuggtmoy table) that lasts until the creature is cured of the disease or dies. While infected in this way, the creature can't be reinfected, and it must repeat the saving throw at the end of every 24 hours, ending the infection on a success. On a failure, the infected creature's body is slowly taken over by fungal growth, and after three such failed saves, the creature dies and is reanimated as a spore servant if it's a humanoid or a Large or smaller beast. \n d100 \t	Flaw (lasts until cured) \n 01-20 \t I see visions in the world around me that others do not. \n 21-40 \t I periodically slip into a catatonic state, staring off into the distance for long stretches at a time. \n 41-60 \t I see an altered version of reality, with my mind convincing itself that things are true even in the face of overwhelming evidence to the contrary. \n 61-80 \t My mind is slipping away, and my intelligence seems to wax and wane. \n  81-00 \t I am constantly scratching at unseen fungal infections." 
+        if race == "Plant" and Dice(8) == 1: one += "\n - Euphoria Spores \n\t The plant releases a cloud of spores in a 20-foot-radius sphere centered on itself. Other creatures in that area must each succeed on a DC [10+%Con] Constitution saving throw or become poisoned for 1 minute. The save DC is 8 + the plant's Constitution modifier + the plant's proficiency bonus. A creature can repeat the saving throw at the start of each of its turns, ending the effect early on itself on a success. When the effect ends on it, the creature gains one level of exhaustion."  
+        if race == "Undead" and Dice(8) == 1: cantrip += "\n - Strength Drain \n\t On an attack hit the target's Strength score is reduced by 1d4. The target dies if this reduces its Strength to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. \n\t If a non-evil humanoid dies from this attack, a new shadow rises from the corpse 1d4 hours later."  
+        if race == "Undead" and Dice(8) == 1: cantrip += "\n - Life Drain \n\t On an attack hit the target's Hit Points Maximum is reduced by the damage dealt. The target dies if this reduces its Hit Points Maximum to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. "  
                 
-        if race == "Monstrosity" and Dice() == 1:
-            cantrip += "\n - Luring Song: \n\t The monstrosity sings a magical melody. Every humanoid and giant within 300 feet of the harpy that can hear the song must succeed on a DC [10+%Cha] Wisdom saving throw or be charmed until the song ends. The monstrosity must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time. The song ends if the monstrosity is incapacitated. While charmed by the monstrosity, a target is incapacitated and ignores the songs of other monstrosities. If the charmed target is more than 5 feet away from the monstrosity, the target must move on its turn toward the monstrosity by the most direct route. It doesn't avoid opportunity attacks, but before moving into damaging terrain, such as lava or a pit, and whenever it takes damage from a source other than the monstrosity, a target can repeat the saving throw. A creature can also repeat the saving throw at the begguining of each of its turns. If a creature's saving throw is successful, the effect ends on it. A target that successfully saves is immune to this monstrosity's song for the next 24 hours."
-                
-        if race == "Monstrosity":
-            if Dice() == 1:
-                cantrip += "\n - Acid Spray (Recharge 6): \n\t The Monstrosity spits acid in a line that is 30 feet long and 5 feet wide, provided that it has no creature grappled. Each creature in that line must make a DC [10+%Str] Dexterity saving throw, taking 10 (3d6) acid damage on a failed save, or half as much damage on a successful one."
-
-        if race == "Ooze":
-            if Dice()==1:
-                cantrip += " \n Psychic Crush (Recharge 5–6). \n\t The ooze targets one creature that it can sense within 60 feet of it. The target must make a DC 10 Intelligence saving throw, taking 10 (3d6) psychic damage on a failed save, or half as much damage on a successful one."
-                
-        if race == "Snakefolk":
-            if Dice()==1:
-                cantrip += "\n- animal friendship (snakes only)"
-
-        if race == "Snakefolk":
-            if Dice()==1:
-                three += "\n- Poison Spray"
-
-        if race == "Snakefolk":
-            if Dice()==1:
-                three += "\n- Suggestion"
-
-        if race == "Plant": 
-            if Dice() == 1:
-                three += "\n - Pacifying Spores \n\t The Plant ejects spores at one creature it can see within 5 feet of it. The target must succeed on a DC [10+%CON] Constitution saving throw or be stunned for 1 minute. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."   
-
-        if race == "Plant": 
-            if Dice() == 1:
-                cantrip += "\n - Rapport Spores \n\t A 20-foot radius of spores extends from the plant. These spores can go around corners and affect only creatures with an Intelligence of 2 or higher that aren't undead, constructs, or elementals. Affected creatures can communicate telepathically with one another while they are within 30 feet of each other. The effect lasts for 1 hour."   
-                
-        if race == "Plant": 
-            if Dice(8) == 1:
-                one += "\n - Caustic Spores \n\t The Plant releases spores in a 30-foot cone. Each creature inside the cone must succeed on a DC [10+%Con] Dexterity saving throw or take 3 (1d6) acid damage at the start of each of the plant's turns. A creature can repeat the saving throw at the start of its turn, ending the effect on itself on a success. The save DC is 8 + the plant's Constitution modifier + the plant's proficiency bonus."  
-
-        if race == "Plant": 
-            if Dice(11) == 1:
-                one += "\n - Infestation Spores \n\t The plant releases spores that burst out in a cloud that fills a 10-foot-radius sphere centered on it, and the cloud lingers for 1 minute. Any flesh-and-blood creature in the cloud when it appears, or that enters it later, must make a DC [10+%CON] Constitution saving throw. The save DC is 8 + the plant's Constitution modifier + the plant's proficiency bonus. On a successful save, the creature can't be infected by these spores for 24 hours. On a failed save, the creature is infected with a disease called the spores of Zuggtmoy and also gains a random form of indefinite madness (determined by rolling on the Madness of Zuggtmoy table) that lasts until the creature is cured of the disease or dies. While infected in this way, the creature can't be reinfected, and it must repeat the saving throw at the end of every 24 hours, ending the infection on a success. On a failure, the infected creature's body is slowly taken over by fungal growth, and after three such failed saves, the creature dies and is reanimated as a spore servant if it's a humanoid or a Large or smaller beast. \n d100 \t	Flaw (lasts until cured) \n 01-20 \t I see visions in the world around me that others do not. \n 21-40 \t I periodically slip into a catatonic state, staring off into the distance for long stretches at a time. \n 41-60 \t I see an altered version of reality, with my mind convincing itself that things are true even in the face of overwhelming evidence to the contrary. \n 61-80 \t My mind is slipping away, and my intelligence seems to wax and wane. \n  81-00 \t I am constantly scratching at unseen fungal infections." 
-                
-        if race == "Plant": 
-            if Dice(8) == 1:
-                one += "\n - Euphoria Spores \n\t The plant releases a cloud of spores in a 20-foot-radius sphere centered on itself. Other creatures in that area must each succeed on a DC [10+%Con] Constitution saving throw or become poisoned for 1 minute. The save DC is 8 + the plant's Constitution modifier + the plant's proficiency bonus. A creature can repeat the saving throw at the start of each of its turns, ending the effect early on itself on a success. When the effect ends on it, the creature gains one level of exhaustion."  
-
-        if race == "Undead": 
-            if Dice(8) == 1:
-                cantrip += "\n - Strength Drain \n\t On an attack hit the target's Strength score is reduced by 1d4. The target dies if this reduces its Strength to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. \n\t If a non-evil humanoid dies from this attack, a new shadow rises from the corpse 1d4 hours later."  
-
-        if race == "Undead": 
-            if Dice(8) == 1:
-                cantrip += "\n - Life Drain \n\t On an attack hit the target's Hit Points Maximum is reduced by the damage dealt. The target dies if this reduces its Hit Points Maximum to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. "  
-                
-        if Dice() == 1: 
-            background = Background()
-        if Dice() == 1: 
-            race = Race()
+        if Dice(10) == 1: background = Background()
+        if Dice(10) == 1: race = Race()
 
     r = "\n"
-    if not(cantrip == "Cantrips (at will): "):
-        r += cantrip + "\n"
-    if not(first == "1st Level Spells: "):
-        r += "[{}]".format(Dice(slots1)) + first + "\n"
-    if not( second == "2nd Level Spells: "):
-        r += "[{}]".format(Dice(slots2)) + second + "\n"
-    if not(third == "3rd Level Spells: "):
-        r += "[{}]".format(Dice(slots3)) + third + "\n"
-    if not(fourth == "4th Level Spells: "):
-        r += "[{}]".format(Dice(slots4)) + fourth + "\n"
-    if not(one == "1/Day each: "):
-        r += "\n" + one
-    if not(two == "2/Day each: "):
-        r +=  "\n" + two
-    if not(three == "3/Day each: "):
-        r +=  "\n" + three
+    if not(cantrip == "Cantrips (at will): "): r += cantrip + "\n"
+    if not(first == "1st Level Spells: "): r += "[{}]".format(Dice(slots1)) + first + "\n"
+    if not( second == "2nd Level Spells: "): r += "[{}]".format(Dice(slots2)) + second + "\n"
+    if not(third == "3rd Level Spells: "): r += "[{}]".format(Dice(slots3)) + third + "\n"
+    if not(fourth == "4th Level Spells: "): r += "[{}]".format(Dice(slots4)) + fourth + "\n"
+    if not(one == "1/Day each: "): r += "\n" + one
+    if not(two == "2/Day each: "): r +=  "\n" + two
+    if not(three == "3/Day each: "): r +=  "\n" + three
     return  r
 
 
@@ -1480,45 +1422,33 @@ def Magic(Lvl, race = Race(), background = Background()):
 def Actions(Type=""):
     r = ""
 
-    if Type == "Spy":
-        r = r + "\n- Superior Invisibility"
 
-    if Type == "Aberration":
-        if Dice() == 1:
-            r += "\n- Blinding Spittle (Recharge 5–6). \n\t The Aberration spits a chemical glob at a point it can see within 15 feet of it. The glob explodes in a blinding flash of light on impact. Each creature within 5 feet of the flash must succeed on a DC 13 Dexterity saving throw or be blinded until the end of the aberration's next turn."
+    if Type == "Aberration" and Dice() == 1: r += "\n- Blinding Spittle (Recharge 5–6). \n\t The Aberration spits a chemical glob at a point it can see within 15 feet of it. The glob explodes in a blinding flash of light on impact. Each creature within 5 feet of the flash must succeed on a DC 13 Dexterity saving throw or be blinded until the end of the aberration's next turn."
 
-    if Type == "Beast" or Type == "Beastfolk": 
-        if Dice() == 1:
-            r = r+ "\n- Speed. \n\t 50 ft."
+    if (Type == "Beast" or Type == "Beastfolk") and Dice() == 1: r += "\n- Speed. \n\t 50 ft."
 
-    if Type == "Beast" or Type == "Beastfolk": 
-        if Dice() == 1:
+    if (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:
             r = r+ "\n- Climb. \n\t 30 ft."
 
-    if Type == "Beast" or Type == "Beastfolk": 
-        if Dice(7) == 1:
-            r = r+ "\n- Burrow. \n\t 10 ft."  
+    if (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:            
+        r = r+ "\n- Burrow. \n\t 10 ft."  
 
-    if Type == "Beast" or Type == "Beastfolk": 
-        if Dice() == 1:
+    if (Type == "Beast" or Type == "Beastfolk"):
+        if Dice(8) == 1:
             r = r+ "\n- Fly. \n\t 60 ft."  
             if Dice(3)==1:
                 r = r+ "\n Flyby. \n\t The beast doesn't provoke opportunity attacks when it flies out of an enemy's reach."
-        elif Dice() == 1: 
+        elif Dice(8) == 1: 
             r = r+ "\n- Fly. \n\t 80 ft."  
             if Dice()==1:
                 r = r+ "\n Flyby. \n\t The beast doesn't provoke opportunity attacks when it flies out of an enemy's reach."
 
-    if Type=="Beast" or Type=="Beastfolk": 
-        if Dice(2) == 1:        
-            if Dice(4) == 1:
-                r = r+ "\n- Darkvision." 
-                if Dice(2)==1:
-                    r = r+ "\n\t 30 ft."
-                elif Dice(2) == 1:
-                    r = r+ "\n\t 60 ft."
-                else:
-                    r = r+ "\n\t 120 ft."
+    if (Type == "Beast" or Type == "Beastfolk") and Dice(3) == 1:
+        if Dice(2) == 1:
+            r = r+ "\n- Darkvision." 
+            if Dice(2)==1: r += "\n\t 30 ft."
+            elif Dice(3) <= 2: r += "\n\t 60 ft."
+            else: r +=  "\n\t 120 ft."
         else: 
             if Dice() == 1:
                 r = r+ "\n- Blindsight." 
@@ -1541,13 +1471,11 @@ def Actions(Type=""):
             if Dice() == 1:
                 r = r+ "\n- Keen Hearing. \n\tThe beast has advantage on Wisdom (Perception) checks that rely on hearing."
                 
-    if Type=="Beast" or Type=="Beastfolk": 
-        if Dice() == 1:
-            r = r+ "\n-  Pack Tactics. \n\t The Beast has advantage on an attack roll against a creature if at least one of the beast's allies is within 5 feet of the creature and the ally isn't incapacitated."
+    if (Type=="Beast" or Type=="Beastfolk") and Dice(8) == 1: r += "\n-  Pack Tactics. \n\t The Beast has advantage on an attack roll against a creature if at least one of the beast's allies is within 5 feet of the creature and the ally isn't incapacitated."
 
     if Type=="Beast" or Type=="Beastfolk": 
         if Dice() == 1:
-            r = r+ "\n-  Multiattack. \n\t The Beast makes two attacks."
+            r = r+ "\n-  Multiattack. \n\t The Beast makes two simple attacks."
 
     if Type=="Beast" or Type=="Beastfolk": 
         if Dice(8) == 1:
@@ -1555,9 +1483,7 @@ def Actions(Type=""):
             if Dice(2) == 1:
                 r = r+ "\n - Constrict. \n\t Until the grapple ends, the creature is restrained. The creature can't constrict another creature."
 
-    if Type=="Beast" or Type=="Beastfolk": 
-        if Dice(8) == 1:
-            r = r+ "\n - Charge \n\t If the Beast moves at least 20 feet straight toward a target and then hits it with an attack on the same turn, the target takes an extra [2d6+%STR] bludgeoning damage. If the target is a creature, it must succeed on a DC=[10+%STR] Strength saving throw or be knocked prone."
+    if (Type=="Beast" or Type=="Beastfolk") and Dice(9) == 1: r += "\n - Charge \n\t If the Beast moves at least 20 feet straight toward a target and then hits it with an attack on the same turn, the target takes an extra [2d6+%STR] bludgeoning damage. If the target is a creature, it must succeed on a DC=[10+%STR] Strength saving throw or be knocked prone."
 
     if Type=="Beast" or Type=="Beastfolk": 
         if Dice(8) == 1:
@@ -1575,9 +1501,7 @@ def Actions(Type=""):
             r = r+ "\n- Hold Breath. \n\t The beast can hold its breath for 15 minutes"
             r = r+ "\n- Swim. \n\t 30 ft."  
             
-    if Type=="Beast" or Type=="Beastfolk": 
-        if Dice() == 1:
-            r = r+ "\n- Blood Frenzy \n\t The beast has advantage on melee attack rolls against any creature that doesn't have all its hit points."
+    if (Type=="Beast" or Type=="Beastfolk") and Dice(7) == 1: r += "\n- Blood Frenzy \n\t The beast has advantage on melee attack rolls against any creature that doesn't have all its hit points."
 
     if Type=="Beast" or Type=="Beastfolk": 
         if Dice(8) == 1:
@@ -1742,9 +1666,7 @@ def Actions(Type=""):
         if Dice() == 1:
             r = r+ "\n- Damage Immunities: Fire"           
 
-    if Type == "Dragon": 
-        if Dice() == 1:
-            r = r+ "\n- Damage Immunities: Acid"           
+    if Type == "Dragon" and Dice() == 1: r += "\n- Damage Immunities: Acid"           
 
     if Type == "Dragon": 
         if Dice(2) == 1:
@@ -1860,21 +1782,11 @@ def Actions(Type=""):
             r = r+ "\n- Terrifying Glare:\n\t The Construct is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Construct must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute."
 
         
-    if Type == "Aberration":
-        if Dice()==1: 
-            r = r+"\nDamage Resistances:  \n\t bludgeoning, piercing, and slashing from nonmagical attacks"
-    if Type == "Aberration":
-        if Dice()==1: 
-            r = r+"\nDamage Resistances:  \n\t acid"
-    if Type == "Aberration":
-        if Dice()==1: 
-            r = r+"\nDamage Resistances:  \n\t cold"
-    if Type == "Aberration":
-        if Dice()==1: 
-            r = r+"\nDamage Resistances:  \n\t lightning"
-    if Type == "Aberration":
-        if Dice(2)==1: 
-            r = r+"\nDamage Resistances:  \n\t thunder"
+    if Type == "Aberration" and Dice()==1: r += "\n- Damage Resistances:  \n\t bludgeoning, piercing, and slashing from nonmagical attacks"
+    if Type == "Aberration" and Dice()==1: r += "\n- Damage Resistances:  \n\t acid"
+    if Type == "Aberration" and Dice()==1: r += "\n- Damage Resistances:  \n\t cold"
+    if Type == "Aberration" and Dice()==1: r += "\n- Damage Resistances:  \n\t lightning"
+    if Type == "Aberration" and Dice()==1: r += "\n- Damage Resistances:  \n\t thunder"
 
     if Type == "Aberration":
         if Dice(2)==1: 
@@ -1925,9 +1837,7 @@ def Actions(Type=""):
         if Dice() == 1:
             r = r + "\n - Fly : 30ft."
 
-    if Type == "Elemental":
-        if Dice() == 1:
-            r = r + "\n - Darkvision : 60ft."
+    if Type == "Elemental" and Dice() == 1: r += "\n - Darkvision : 60ft."
 
     if Type == "Elemental":
         if Dice() == 1:
@@ -2155,6 +2065,8 @@ def Actions(Type=""):
     if Type == "Snakefolk":
         if Dice(3) == 1:
             r += "\n- Magic Resistance \n\t The Snakefolk has advantage on saving throws against spells and other magical effects."
+
+    if Type == "Spy": r += "\n- Superior Invisibility"
 
 
 
@@ -2436,18 +2348,12 @@ def Actions(Type=""):
     if Type == "Fiend" and Dice()==1:
         r = r + "\n Hellish Rejuvenation. \n\t A Fiend that dies in the Nine Hells comes back to life with all its hit points in", Dice(10), "days unless it is killed by a good-aligned creature with a bless spell cast on that creature or its remains are sprinkled with holy water."
             
-    if Type== "Fiend" and Dice()==1:
-        r += "\n Damage Resistances. \n\t cold"
-    if Type== "Fiend" and Dice()==1:
-        r += "\n Damage Resistances. \n\t fire"
-    if Type== "Fiend" and Dice()==1:
-        r += "\n Damage Resistances. \n\t lightning"
-    if Type== "Fiend" and Dice()==1:
-        r += "\n Damage Immunities. \n\t poison"
-    if Type== "Fiend" and Dice()==1:
-        r += "\n Darkvision. \n\t cold"
-    if Type== "Fiend" and Dice()==1:
-        r += "\n Telepathy. \n\t 60 ft. Only in Abyssal."
+    if Type== "Fiend" and Dice()==1: r += "\n Damage Resistances. \n\t cold"
+    if Type== "Fiend" and Dice()==1: r += "\n Damage Resistances. \n\t fire"
+    if Type== "Fiend" and Dice()==1: r += "\n Damage Resistances. \n\t lightning"
+    if Type== "Fiend" and Dice()==1: r += "\n Damage Immunities. \n\t poison"
+    if Type== "Fiend" and Dice()==1: r += "\n Darkvision. \n\t cold"
+    if Type== "Fiend" and Dice()==1: r += "\n Telepathy. \n\t 60 ft. Only in Abyssal."
 
     if Type == "Spy":
         if Dice(2) == 1:
@@ -2677,10 +2583,18 @@ def Region(Type):
     
     
     
+    
+    
 def PlotHook():
     Hooks = [
+        "I must visit all the oceans of the world and behold the ships that sail there.",
+        "I was tricked by a smuggler who stole something precious from me. I will find that thief.",
+        "After one last job, I will retire from the business.",
+        "I owe a debt that cannot be repaid in gold.",
+        "I intend to become the leader of the kind that I belong to.",
+        "My vessel was stolen from me, and I burn with the desire to recover it.",
         "Someone I love was killed by a rival faction, and I will have revenge."
-        "I love someone from another house, but the relationship is forbidden.",
+        "I love someone from another kind, but the relationship is forbidden.",
         "I was exiled for a crime I didn't commit.",
         "I keep my thoughts and discoveries in a journal. My journal is my legacy. I just lost it!",
         "A monster that slaughtered dozens of innocent people spared my life, and I don’t know why. I am certain it follows me since.",
@@ -2708,7 +2622,7 @@ def PlotHook():
         "I stand in opposition, lest the wicked go unopposed.",
         "I've seen too many in need. I must not fail them as everyone else has.",
         "What I do, I do for the world. The people don't realize how much they need me.",
-        "I do everything for my family. My first thought is keeping them safe.",
+        "I do everything for my kind. My first thought is keeping them safe.",
         "I once satirized a noble who still wants my head. It was a mistake that I will likely repeat.",
         "I would do anything for the other members of my old troupe.",
         "I will do anything to prove myself superior to my hated rival.",
@@ -2718,7 +2632,7 @@ def PlotHook():
         "I'm guilty of a terrible crime. I hope I can redeem myself for it.",
         "I will become the greatest thief that ever lived.",
         "Something important was taken from me, and I aim to steal it back.",
-        "My ill-gotten gains go to support my family.",
+        "My ill-gotten gains go to support my kind.",
         "I'm trying to pay off an old debt I owe to a generous benefactor.",
         "I swindled and ruined a person who didn't deserve it. I seek to atone for my misdeeds but might never be able to forgive myself.",
         "A powerful person killed someone I love. Some day soon, I'll have my revenge.",
@@ -2743,25 +2657,25 @@ def PlotHook():
         "Is buying something",
         "Wants to ammend a mistake.",
         "Wants to recuperate his honor",
-        "Is protecting their family",
+        "Is protecting their kind",
         "Wants to prove himself",
         "Is curious",
         "Is protecting their interests",
-        "They are lost",
-        "They are a freedomfighter.",
-        "They want to topple a tyrant.",
-        "They fight to preserve order",
-        "They are in pilgrimage",
+        "I am lost",
+        "I am a freedomfighter.",
+        "I want to topple a tyrant.",
+        "I fight to preserve order",
+        "I am in pilgrimage",
         "I lost my home, and I'm looking for a new life.",
         "A higher power commanded a very important mission.",
-        "Is following orders.",
+        "I'm just following orders.",
         "I am injured. ",
         "I'm in a forbidden or impossible relationship. ",
         "I have a legacy to mantain",
         "I have a great rival",
         "I pursue a goal that breaks tradition or law",
-        "They are in debt.",
-        "They lead an uprising.",
+        "I am in debt.",
+        "I lead an uprising.",
         "Feels loyalty to two opposing causes or people",
         "Has a crisis of faith.",
         "Is looking for revenge",
@@ -2769,16 +2683,16 @@ def PlotHook():
         "Is standing up for those who are not equipped to stand up for themselves.",
         "They keep a great secret.",
         "They need to unveil a great secret.",
-        "They are bored.",
-        "They are hungry.",
-        "They are trapped.",
-        "They want to create something.",
-        "They are running from justice.",
-        "They are running from justice for a crime they didn't commit.",
-        "They are optimistic, seeing events in the most positive light.",
-        "They have to make a very difficult choice",
+        "I am bored.",
+        "I am hungry.",
+        "I am trapped.",
+        "I want to create something.",
+        "I am running from justice.",
+        "I am running from justice for a crime I didn't commit.",
+        "I am optimistic, seeing events in the most positive light.",
+        "I have to make a very difficult choice",
         "I serve an unethical and corrupt organization.",
-        "They would die to recover an ancient relic of their faith that was lost long ago.",
+        "I would die to recover an ancient relic of my faith that was lost long ago.",
         "They will someday get revenge on the corrupt temple hierarchy who branded them a heretic.",
         "They owe their life to the priest who took them in when their parents died.",
         "Everything I do is for the common people.",
@@ -2795,7 +2709,7 @@ def PlotHook():
         "I will be the best for the honor and glory of my home.",
         "A proud noble once gave me a horrible beating, and I will take my revenge on any bully I encounter.",
         "The tyrant who rules my land will stop at nothing to see me killed.",
-        "Your family has a history of practicing the dark arts. You dabbled once and felt something horrible clutch at your soul, whereupon you fled in terror.",
+        "Your kind has a history of practicing the dark arts. You dabbled once and felt something horrible clutch at your soul, whereupon you fled in terror.",
         "An apparition that has haunted your family for generations now haunts you. You don’t know what it wants, and it won’t leave you alone.",
         "An oni took your sibling one cold, dark night, and you were unable to stop it.",
         "You were cursed with lycanthropy. You are now haunted by the innocents you slaughtered.",
@@ -2808,6 +2722,22 @@ def PlotHook():
         "I entered seclusion to hide from the ones who might still be hunting me. I must someday confront them.",
         "I am a pilgrim in search of a person, place, or relic of spiritual significance.",
         "A fiend possessed you as a child. You were locked away but escaped. The fiend is still inside you, but now you try to keep it locked away.",
+        "I owe a debt I can never repay to the person who took pity on me.",
+        "I escaped my life of poverty by robbing an important person, and I'm wanted for it.",
+        "Grand Designs. You are working on plans and schematics for a new, very fast ship. You must examine as many different kinds of vessels as possible to help ensure the success of your design.",
+        "I must find a kind of wood rumored to possess magical qualities.",
+        "I will craft a boat capable of sailing through the most dangerous of storms.",
+        "A kraken destroyed my ship; its teeth shall adorn my hearth.",
+        "I work to preserve a library, university, scriptorium, or monastery.",
+        "I have an ancient text that holds terrible secrets that must not fall into the wrong hands.",
+        "I was cheated out of my fair share of the profits, and I want to get my due.",
+        "I've been searching my whole life for the answer to a certain question.",
+        "Ruthless pirates murdered my captain and crewmates, plundered our ship, and left me to die. Vengeance will be mine.",
+        "I must ran twenty-five miles without stopping to warn my clan of an approaching horde.",
+        "I will bring terrible wrath down on the evildoers who destroyed my homeland.",
+        "I am the last of my kind, and it is up to me to ensure their names enter legend.",
+        "I suffer awful visions of a coming disaster and will do anything to prevent it.",
+        "It is my duty to provide children to sustain my kind."
         ""]
     return random.choice(Hooks)
     
@@ -2817,8 +2747,107 @@ def PlotHook():
     
 def Trait(background=""):
     Traits = [
-        "My secret could get me expelled from my house.",
-        "My house and blood line make me the best!",
+        "Don't expect me to save those who can't save themselves. It is nature's way that the strong thrive and the weak perish.",
+        "Violence is my answer to almost any challenge.",
+        "I am slow to trust members of other races, tribes, and societies.",
+        "I remember every insult I've received and nurse a silent resentment toward anyone who's ever wronged me.",
+        "There's no room for caution in a life lived to the fullest.",
+        "I am too enamored of ale, wine, and other intoxicants.",
+        "I was, in fact, raised by wolves.",
+        "I feel far more comfortable around animals than people.",
+        "I'm always picking things up, absently fiddling with them, and sometimes accidentally breaking them.",
+        "I place no stock in wealthy or well-mannered folk. Money and manners won't save you from a hungry owlbear.",
+        "I have a lesson for every situation, drawn from observing nature.",
+        "I once ran twenty-five miles without stopping to warn my clan of an approaching orc horde. I'd do it again if I had to.",
+        "I watch over my friends as if they were a litter of newborn pups.",
+        "I'm driven by a wanderlust that led me away from home.",
+        "I can't keep a secret to save my life, or anyone else's."
+        "I speak without really thinking through my words, invariably insulting others."
+        "I overlook obvious solutions in favor of complicated ones.",
+        "Unlocking an ancient mystery is worth the price of a civilization.",
+        "Most people scream and run when they see a demon. I stop and take notes on its anatomy.",
+        "I am easily distracted by the promise of information.",
+        "I sold my soul for knowledge. I hope to do great deeds and win it back.",
+        "My life's work is a series of tomes related to a specific field of lore.",
+        "I'm convinced that people are always trying to steal my secrets.",
+        "I am horribly, horribly awkward in social situations.",
+        "I… speak… slowly… when talking… to idiots,… which… almost… everyone… is… compared… to me.",
+        "I'm willing to listen to every side of an argument before I make my own judgment.",
+        "There's nothing I like more than a good mystery.",
+        "I'm used to helping out those who aren't as smart as I am, and I patiently explain anything and everything to others.",
+        "I've read every book in the world's greatest libraries – or I like to boast that I have.",
+        "I use polysyllabic words that convey the impression of great erudition.",
+        "My pride will probably lead to my destruction.",
+        "I can't help but pocket loose coins and other trinkets I come across.",
+        "Once I start drinking, it's hard for me to stop.",
+        "Once someone questions my courage, I never back down no matter how dangerous the situation.",
+        "I'll say anything to avoid having to do extra work.",
+        "I follow orders, even if I think they're wrong.",
+        "In a harbor town, I have a paramour whose eyes nearly stole me from the sea.",
+        "I'll always remember my first ship."
+        "The ship is most important – crewmates and captains come and go.",
+        "I'm loyal to my captain first, everything else second.",
+        "I don't know when to throw something away. You never know when it might be useful again.",
+        "I repair broken things to redeem what's broken in myself.",
+        "Much of the treasure I claim will be used to enrich my community.",
+        "I don't mind getting my hands dirty.",
+        "I have an endless supply of cautionary tales related to the sea.",
+        "A pipe, an ale, and the smell of the sea: paradise.",
+        "I'm not afraid of hard work—in fact, I prefer it.",
+        "I love sketching and designing objects, especially boats.",
+        "I thrive under pressure.",
+        "I'm extremely fond of puzzles.",
+        "I love talking and being heard more than I like to listen.",
+        "Mysteries of the Deep. You experienced an encounter with a possibly divine being while sailing alone. Work with your DM to determine the secret about the deep waters of the sea that this entity revealed to you.",
+        "Low Places. You have contacts in the smuggling outfits along the coast; you occasionally repair the criminals' ships in exchange for coin and favors.",
+        "Master of Armaments. You specialized in designing and mounting defenses for the navy. You easily recognize and determine the quality of such items.",
+        "Favored. You insisted on thicker planking for a merchant vessel's hull, which saved it from sinking when it smashed against a reef. You have a standing invitation to visit the merchant's distant mansion.",
+        "Solid and Sound. You patched up a war galley and prevented it from sinking. The local navy regards you as a friend.",
+        "Though I act charming, I feel nothing for others and don't know what friendship is.",
+        "Few people know the real me.",
+        "I struggle to trust the words of others.",
+        "I believe everyone has a price and am cynical toward those who present themselves as virtuous.",
+        "I tend to assess my relationships in terms of profit and loss.",
+        "Lying is reflexive, and I sometimes engage in it without realizing.",
+        "I give most of my profits to a charitable cause, and I don't like to brag about it.",
+        "I become wistful when I see the sun rise over the ocean.",
+        "I enjoy doing things others believe to be impossible.",
+        "I love gold but won't cheat a friend.",
+        "Nothing rattles me; I have a lie for every occasion.",
+        "I never stop smiling.",
+        "I think of everything in terms of monetary value.",
+        "I'd rather eat my armor than admit when I'm wrong.",
+        "I obey the law, even if the law causes misery.",
+        "My hatred of my enemies is blind and unreasoning.",
+        "I made a terrible mistake in battle that cost many lives – and I would do anything to keep that mistake secret.",
+        "I have little respect for anyone who is not a proven warrior.",
+        "The monstrous enemy we faced in battle still leaves me quivering with fear.",
+        "I fight for those who cannot fight for themselves.",
+        "Those who fight beside me are those worth dying for.",
+        "I'll never forget the crushing defeat my kind suffered or the enemies who dealt it.",
+        "My honor is my life.",
+        "Someone saved my life on the battlefield. To this day, I will never leave a friend behind.",
+        "I would still lay down my life for the people I served with.",
+        "I face problems head-on. A simple, direct solution is the best path to success.",
+        "I have a crude sense of humor.",
+        "I enjoy being strong and like breaking things.",
+        "I can stare down a hell hound without flinching.",
+        "I'm full of inspiring and cautionary tales from my military experience relevant to almost every combat situation.",
+        "I've lost too many friends, and I'm slow to make new ones.",
+        "I'm haunted by memories of war. I can't get the images of violence out of my mind.",
+        "I'm always polite and respectful.",
+        "People who can't take care of themselves get what they deserve.",
+        "It's not stealing if I need it more than someone else.",
+        "I'd rather kill someone in their sleep than fight fair.",
+        "I will never fully trust anyone other than myself.",
+        "Gold seems like a lot of money to me, and I'll do just about anything for more of it.",
+        "If I'm outnumbered, I will run away from a fight.",
+        "No one else should have to endure the hardships I've been through.",
+        "I owe my survival to another urchin who taught me to live on the streets.",
+        "I sponsor an orphanage to keep others from enduring what I was forced to endure.",
+        "My town or city is my home, and I'll fight to defend it.",
+        "My secret could get me expelled from my kind.",
+        "My kind and blood line make me the best!",
         "I'm obsessed with conspiracy theories and worried about secret societies and hidden demons.",
         "I'm fixated on following official protocols.",
         "I'm determined to impress the leaders of my faction, and to become a leader myself.",
@@ -3073,8 +3102,8 @@ def Trait(background=""):
         "Affectionate: Shows open fondness for others",
         "Compassionate. Will prevent damage to others. ",
         "In Alert. Aware of and watchful for possible change or danger.",
-        "They plan ahead. Always having an exit strategy", 
-        "They are highly observant",
+        "I plan ahead. Always having an exit strategy", 
+        "I am highly observant",
         "They are Ambitious.",
         "They are Confident and prideful",
         "They are Analytical, Logical, Rational.",
@@ -3091,7 +3120,7 @@ def Trait(background=""):
         "They are wise.",
         "They are charming",
         "They are confident, fully assured of themself",
-        "They are cooperative.",
+        "I am cooperative.",
         "They are courageous.",
         "They are courteous, friendly, and have good maners.",
         "They are curious. Marked by the desire to investigate and learn",
@@ -3118,7 +3147,27 @@ def Trait(background=""):
         "I'm quick to assume that someone is trying to cheat me.",
         "I'm never satisfied with what I have – I always want more.",
         "I would kill to acquire a noble title.",
-        "My faction is my family. I would do anything for it.",
+        "My kind are my family. I would do anything for them.",
+        "I hide scraps of food and trinkets away in my pockets.",
+        "I ask a lot of questions.",
+        "I like to squeeze into small places where no one else can get to me.",
+        "I sleep with my back to a wall or tree, with everything I own wrapped in a bundle in my arms.",
+        "I eat like a pig and have bad manners.",
+        "I think anyone who's nice to me is hiding evil intent.",
+        "I don't like to bathe.",
+        "I bluntly say what other people are hinting at or hiding.",
+        "I am no common criminal; I am a mastermind.",
+        "My friends know they can rely on me, no matter what.",
+        "I work hard so that I can play hard when the work is done.",
+        "I enjoy sailing into new ports and making new friends over a flagon of ale.",
+        "I stretch the truth for the sake of a good story.",
+        "To me, a tavern brawl is a nice way to get to know a new city.",
+        "I never pass up a friendly wager.",
+        "My language is as foul as an otyugh nest.",
+        "I like a job well done, especially if I can convince someone else to do it.",
+        "It is my duty to protect my students.",
+        "An injury to the unspoiled wilderness of my home is an injury to me.",
+        "My kind (family, clan, or tribe) is the most important thing in my life, even when they are far from me.",
         ""
         ]
         
@@ -3130,9 +3179,14 @@ def Trait(background=""):
             "The workshop where I learned my trade is the most important place in the world to me.",
             "I created a great work for someone, and then found them unworthy to receive it. I'm still looking for someone worthy.",
             "I owe my guild a great debt for forging me into the person I am today.",
-            "I will get revenge on the evil forces that destroyed my place of business and ruined my livelihood."
+            "I will get revenge on the evil forces that destroyed my place of business and ruined my livelihood.",
+            "I get frustrated to the point of distraction by shoddy craftsmanship.",
+            "Though I am an excellent crafter, my work tends to look as though it belongs on a ship.",
+            "I am so obsessed with sketching my ideas for elaborate inventions that I sometimes forget little thing like eating and sleeping.",
+            "I'm judgmental of those who are not skilled with tools of some kind.",
+            "I sometimes take things that don't belong to me, especially if they are very well made."
             ])
-        
+
     if background == "Priest" or background == "Cultist":
         return random.choice(Traits + [
             "I was partaking of communal living in accordance with the dictates of a religious order.",
@@ -3191,6 +3245,7 @@ def Ideal(background, alignment):
                 "Charity. I distribute the money I acquire to the people who really need it.",
                 "Friendship. Material goods come and go. Bonds of friendship last forever."
                 ])
+                
     if background == "Commoner":
         if "Good" in alignment and Dice()==1:
             return random.choice([
@@ -3209,7 +3264,7 @@ def Ideal(background, alignment):
                 "Balance. Do not fish the same spot twice in a row; suppress your greed, and nature will reward you."
                 ])
                 
-    if background == "Criminal":
+    if background == "Criminal" or background == "Bandit":
         if "Lawful" in alignment and Dice()==1:
             return random.choice([
                 "Honor. I don't steal from others in the trade.",
@@ -3256,6 +3311,35 @@ def Ideal(background, alignment):
                 "Tradition. Every game has rules, and the playing field must be level."
                 ])
                 
+    if background == "Pirate":
+        if "Good" in alignment and Dice()==1:
+            return random.choice( [
+                "Crew. If everyone on deck pitches in, we'll never sink.",
+                "Respect. The thing that keeps a ship together is mutual respect between captain and crew."
+                ])
+        if "Lawful" in alignment and Dice()==1:
+            return random.choice([
+                "Careful Lines. A ship must be balanced according to the laws of the universe.",
+                "Fairness. We all do the work, so we all share in the rewards."
+                ])
+        if "Chaotic" in alignment and Dice()==1:
+            return random.choice([
+                "Freedom. The sea is freedom-the freedom to go anywhere and do anything."
+                ])
+        if "Evil" in alignment and Dice()==1:
+            return random.choice([
+                "Mastery. I'm a predator, and the other ships on the sea are my prey."
+                ])
+        if "Neutral" in alignment and Dice()==1:
+            return random.choice([
+                "People. I'm committed to my crewmates, not to ideals. "
+                ])
+        if Dice()==1:
+            return random.choice([
+                "Aspiration. Someday I'll own my own ship and chart my own destiny."
+                ])
+
+                
     if background == "Scholar":
         if "Lawful" in alignment and Dice()==1:
             return random.choice( 
@@ -3288,11 +3372,13 @@ def Ideal(background, alignment):
                 ])
         if "Chaotic" in alignment and Dice()==1:
             return random.choice([
-                "Creativity. The world is in need of new ideas and bold action."
+                "Creativity. The world is in need of new ideas and bold action.",
+                "Invention. Make what you need out of whatever is at hand. "
                 ])
         if "Evil" in alignment and Dice()==1:
             return random.choice([
-                "Greed. I'm only in it for the money and fame."
+                "Greed. I'm only in it for the money and fame.",
+                "Perfection. To measure a being and find it lacking is the greatest disappointment",
                 ])
         if "Neutral" in alignment and Dice()==1:
             return random.choice([
@@ -3325,10 +3411,21 @@ def Ideal(background, alignment):
             return random.choice([
                 "Inquisitive. Everything is new, but I have a thirst to learn."
                 ])
+    
+    if background == "Criminal":
+        if "Lawful" in alignment and Dice()==1:
+            return random.choice([
+                "Smuggler's Code I uphold the unwritten rules of the smugglers, who do not cheat one another or directly harm innocents."
+                ])
+        if "Good" in alignment and Dice()==1:
+            return random.choice([
+                "Peace and Prosperity I smuggle only to achieve a greater goal that benefits my community."
+                ])
 
 
     if "Good" in alignment and Dice()==1:
         return random.choice([
+            "Greater Good. Our lot is to lay down our lives in defense of others.",
             "Common Good. My organization serves a vital function, and its prosperity will help everyone.",
             "Greater Good. My gifts are meant to be shared with all, not used for my own benefit.",
             "Greater Good. I kill monsters to make the world a safer place, and to exorcise my own demons.",
@@ -3336,43 +3433,72 @@ def Ideal(background, alignment):
             "Generosity. My talents were given to me so that I could use them to benefit the world.",
             "Empathy. No creature should be made to suffer.",
             "Respect. People deserve to be treated with dignity and respect.",
-            "Friendship. I never leave a friend behind. "
+            "Friendship. I never leave a friend behind. ",
+            "Respect. All people, rich or poor, deserve respect.",
+            "Beauty. What is beautiful points us beyond itself toward what is true.",
+            "Greater Good. It is each person's responsibility to make the most happiness for the whole tribe.",
             ])
     if "Chaotic" in alignment and Dice()==1:
         return random.choice([
+            "Change. Life is like the seasons, in constant change, and we must change with it.",
+            "No Limits. Nothing should fetter the infinite possibility inherent in all existence.",
+            "Independence. When people follow orders blindly, they embrace a kind of tyranny",
             "Innovation. Abandon old traditions and find better ways to do things.",
             "Free Thinking. Inquiry and curiosity are the pillars of progress.",
             "Freedom. I have a dark calling that puts me above the law.",
             "Freedom. Everyone should be free to pursue his or her own livelihood.",
             "Freedom. Tyrants must not be allowed to oppress the people.",
-            "Changeability. Change is good, which is why I live by an ever-changing set of rules."
+            "Changeability. Change is good, which is why I live by an ever-changing set of rules.",
+            "Change. The low are lifted up, and the high and mighty are brought down. Change is the nature of things."
             ])
     if "Lawful" in alignment and Dice()==1:
         return random.choice([
-            "Tradition. I uphold traditions of my house and bring honor to my family.",
+            "Honor. If I dishonor myself, I dishonor my whole kind.",
+            "Logic. Emotions must not cloud our logical thinking.",
+            "Responsibility. I do what I must and obey just authority.",
+            "Tradition. I uphold traditions of my kind and bring honor to my family.",
             "Logic. Emotions must not cloud our sense of what is right and true, or our logical thinking.",
             "Logic. I like to know my enemy’s capabilities and weaknesses before rushing into battle.",
             "Community. It is the duty of all civilized people to strengthen the bonds of community and the security of civilization.",
             "Fairness. No one should get preferential treatment before the law, and no one is above the law.",
-            "Honor. A deal is a deal, and I would never break one."
+            "Honor. A deal is a deal, and I would never break one.",
+            "Community. We have to take care of each other, because no one else is going to do it."
             ])
     if "Evil" in alignment and Dice()==1:
         return random.choice([
-            "Power. I want to ensure the prosperity of my house and wield its power myself.",
+            "Power. Knowledge is the path to power and domination.",
+            "All for a Coin. I'll do nearly anything if it means I turn a profit.",
+            "Might. In life as in war, the stronger force wins.",
+            "Power. I want to ensure the prosperity of my kind and wield its power myself.",
             "Destruction. I’m a monster that destroys other monsters, and anything else that gets in my way.",
             "Greed. I'm only in it for the money.",
             "Might. If I become strong, I can take what I want – what I deserve.",
             "Obsession. I won't let go of a grudge",
             "Greed. I will do whatever it takes to get what I want, regardless of the harm it might cause.",
-            "Confusion. Deception is a weapon. Strike from where your foes won't expect."
+            "Confusion. Deception is a weapon. Strike from where your foes won't expect.",
+            "Retribution. The rich need to be shown what life and death are like in the gutters.",
+            "Might. The strongest are meant to rule."
             ])
     if "Neutral" in alignment and Dice()==1:
         return random.choice([
+            "People. I help the people who help me-that's what keeps us alive.",
             "People. I'm committed to the people I care about, not to ideals.",
             "Danger. With every great discovery comes grave danger. The two walk hand in hand.",
-            "Sincerity. There's no good in pretending to be something I'm not."
+            "Sincerity. There's no good in pretending to be something I'm not.",
+            "Live and Let Live. Ideals aren't worth killing over or going to war for.",
+            "Nature. The natural world is more important than all the constructs of civilization."
             ])    
     return random.choice([
+        "Glory. I must earn glory in battle, for myself and my clan.",
+        "Self-Improvement. The goal of a life of study is the betterment of oneself.",
+        "Knowledge. The path to power and self-improvement is through knowledge.",
+        "Hope. The horizon at sea holds the greatest promise.",
+        "Reflection. Muddied water always clears in time.",
+        "Daring. I am most happy when risking everything.",
+        "People. For all my many lies, I place a high value on friendship.",
+        "Wealth. Heaps of coins in a secure vault is all I dream of.",
+        "Nation. My city, nation, or people are all that matter.",
+        "Aspiration. I'm going to prove that I'm worthy of a better life.",
         "Comfort. I want to ensure that me and mine enjoy the best things in life.",
         "Discovery. I want to learn all I can, both for my organization and for my own curiosity.",
         "Self-Knowledge. If you know yourself, there's nothing left to know.",
@@ -3528,7 +3654,7 @@ def NPC():
     print("\n")
 
     print("Lvl:", Lvl, "   HP:", Lvl*(Dice(12) + Dice(2)*Modifier(CON)))
-    print("AC:", 10 + Modifier(DEX) + Modifier(Dice(Lvl+10)))
+    print("AC:", 10 + Modifier(DEX) + Modifier(Dice(Lvl+8)))
     print("\n\n\t"," STR:", STR,"\t", Modifier(STR),"\n\t",
         "DEX:", DEX," \t", Modifier(DEX),"\n\t"
         "CON:", CON," \t",  Modifier(CON),"\n\t"
