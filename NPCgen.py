@@ -487,7 +487,6 @@ def Background():
         "Spy",
         "Traveler",
         "Urchin",
-        "Veteran",
         "Warrior",
         "Warlock",
         "Witch",
@@ -1010,71 +1009,76 @@ def Language(race = Race(), background = Background()):
     if background == "": background = Background()
     l = ""
     if race == "Human": 
-        l += "Common. "
-        if Dice()==1: l += "Dwarvish. "
-        if Dice()==1: l += "Elvish. "
-        if Dice()==1: l += "Giant. "
-        if Dice()==1: l += "Gnomish. "
-        if Dice()==1: l += "Goblin. "
-        if Dice()==1: l += "Halfling. "
-        if Dice()==1: l += "Orc. "
-        if Dice(20)==1: l += "Abyssal. "
-        if Dice(20)==1: l += "Celestial. "
-        if Dice(20)==1: l += "Draconic. "
-        if Dice(20)==1: l += "Deep Speech. "
-        if Dice(20)==1: l += "Infernal. "
-        if Dice(20)==1: l += "Primordial. "
-        if Dice(20)==1: l += "Sylvan. "
-        if Dice(20)==1: l += "Undercommon. "
+        if not("Common" in l):l += "Common. "
+        if Dice()==1 and not("Dwarvish" in l): l += "Dwarvish. "
+        if Dice()==1 and not("Elvish" in l): l += "Elvish. "
+        if Dice()==1 and not("Giant" in l): l += "Giant. "
+        if Dice()==1 and not("Gnomish" in l): l += "Gnomish. "
+        if Dice()==1 and not("Goblin" in l): l += "Goblin. "
+        if Dice()==1 and not("Halfling" in l): l += "Halfling. "
+        if Dice()==1 and not("Orc" in l): l += "Orc. "
+        if Dice(20)==1 and not("Abyssal" in l): l += "Abyssal. "
+        if Dice(20)==1 and not("Celestial" in l): l += "Celestial. "
+        if Dice(20)==1 and not("Draconic" in l): l += "Draconic. "
+        if Dice(20)==1 and not("Deep Speech" in l): l += "Deep Speech. "
+        if Dice(20)==1 and not("Infernal" in l): l += "Infernal. "
+        if Dice(20)==1 and not("Primordial" in l): l += "Primordial. "
+        if Dice(20)==1 and not("Sylvan" in l): l += "Sylvan. "
+        if Dice(20)==1 and not("Undercommon" in l): l += "Undercommon. "
     if race == "Aberration": 
-        l += "Deep Speech. "
-        if Dice()==1: l += "Undercommon. "
-        if Dice(20)==1: l += "Telepathy. "
+        if not("Deep Speech" in l): l += "Deep Speech. "
+        if Dice()==1 and not("Undercommon" in l): l += "Undercommon. "
+        if Dice(20)==1 and not("Telepathy" in l): l += "Telepathy. "
     if race == "Aven": 
-        l += "Common. "
-        if Dice()==1: l += "Primordial. "
+        if not("Common" in l):l += "Common. "
+        if Dice(10)==1 and not("Primordial" in l): l += "Primordial. "
     if race == "Beast":
-        if Dice()==1: l += "Understands Common. "
+        if not("Common" in l):l += "Understands Common. "
         if Dice()==1: l += "Beastly Speech. "
-        if Dice()==1: l += "Sylvan. "
+        if Dice()==1 and not("Sylvan" in l): l += "Sylvan. "
     if race == "Beastfolk": 
-        l += "Common. Beastly Speech. "
-        if Dice()==1: l += "Sylvan. "
-        if Dice()==1: l += "Undercommon. "
-        if Dice()==1: l += "Elvish. "
-    if race == "Celestial": l += "Celestial. Common."
+        if not("Common" in l):l += "Common. "
+        l += "Beastly Speech. "
+        if Dice()==1 and not("Sylvan" in l): l += "Sylvan. "
+        if Dice()==1 and not("Undercommon" in l): l += "Undercommon. "
+        if Dice()==1 and not("Elvish" in l): l += "Elvish. "
+    if race == "Celestial": 
+        if not("Celestial" in l): l += "Celestial. " 
+        if not("Common" in l): l += "Common. "
     if race == "Construct": 
         l += "Understands the languages of its creator. "
         if Dice(100)==1: l += "All Languages. "
     if race == "Dragon":
         l += "Draconic. "
-        if Dice(3)==1: l += "Common. "
+        if Dice(3)==1 and not("Common" in l): l += "Common. "
         if Dice()==1: l += "Sylvan. "
     if race == "Dwarf":
         l += "Dwarvish. "
-        if Dice(3)==1: l += "Common. "
+        if Dice(3)==1 and not("Common" in l): l += "Common. "
         if Dice(3)==1: l += "Undercommon. "
     if race == "Elf":
         l += "Elvish. "
-        if Dice(3)==1: l += "Common. "
+        if Dice(3)==1 and not("Common" in l): l += "Common. "
         if Dice(3)==1: l += "Sylvan. "
     if race == "Elemental" or race == "Genasi":
-        l += "Primordial"
-        if Dice()==1: l += "Common. "
+        l += "Primordial. "
+        if Dice()==1 and not("Common" in l): l += "Common. "
         if Dice(4)==1: l += "Ignan. "
         if Dice(4)==1: l += "Terran. "
     if race == "Fey":
         l += "Sylvan. "
-        if Dice(3) == 1: l += "Common. "
+        if Dice(3) == 1 and not("Common" in l): l += "Common. "
         if Dice(3) == 1: l += "Elvish. "
     if race == "Fiend" or "Tiefling":
-        l += "Common. "
+        if not("Common" in l): l += "Common. "
         if Dice(2) == 1: l += "Infernal. "
         if Dice(2) == 1: l += "Abyssal. "
-    if race == "Giant": l += "Common. Giant. "
+    if race == "Giant": 
+        if not("Common" in l): l += "Common. "
+        if not ("Giant" in l): l += "Giant. "
     if race == "Gnome":
         l += "Gnomish"
-        if Dice(3) == 1: l += "Common. "
+        if Dice(3) == 1 and not("Common" in l): l += "Common. "
         if Dice(3) == 1: l += "Elvish. "
         if Dice(3) == 1: l += "Dwarvish. "
         if Dice(3) == 1: l += "Giant. "
@@ -1082,68 +1086,227 @@ def Language(race = Race(), background = Background()):
         if Dice() == 1: l += "Sylvan. "
     if race == "Goblin":
         l += "Goblin. "
-        if Dice(2)==1: l += "Common. "
-    if race == "Hag": l += "Common. Sylvan. "
-    if race == "Halfling": l += "Common. Halfling. "
+        if Dice(2)==1 and not("Common" in l): l += "Common. "
+    if race == "Hag": 
+        if not("Common" in l): l += "Common. "
+        if not("Sylvan" in l): l += "Sylvan. "
+    if race == "Halfling": 
+        if not("Common" in l): l += "Common." 
+        if not("Halfling" in l): l += "Halfling. "
     if race == "Kobold":
         l += "Draconic. "
-        if Dice(3)==1: l += "Common. "
+        if Dice(3)==1 and not("Common" in l): l += "Common. "
     if race == "Lizardfolk":
         l += "Draconic. "
-        if Dice(2)==1: l += "Common. "
+        if Dice(2)==1 and not("Common" in l): l += "Common. "
     if race == "Monstrosity":
-        if Dice(2)==1: l += "Common. "
+        if Dice(2)==1 and not("Common" in l): l += "Common. "
         if Dice(2)==1: l += "Undercommon. "
     if race == "Ooze": l += "Telepathy. "
     if race == "Orc":
         l += "Orc. "
-        if Dice(2)==1: l += "Common. "
+        if Dice(2)==1 and not("Common" in l): l += "Common. "
     if race == "Plant":
-        if Dice(3)==1: l += "Common. "
+        if Dice(3)==1 and not("Common" in l): l += "Common. "
         if Dice(3)==1: l += "Sylvan. "
     if race == "Snakefolk":
         l += "Draconic. "
         if Dice(3)==1: l += "Abyssal. "
-        if Dice(3)==1: l += "Common. "
+        if Dice(3)==1 and not("Common" in l): l += "Common. "
     if race == "Undead":
         l += "Understands languages it knew in life. "
-        if Dice(2)==1: l += "Common. "
+        if Dice(2)==1 and not("Common" in l): l += "Common. "
         if Dice(8)==1: l += "Infernal. "
         
     if background ==  "Druid": l += "Druidic. " + random.choice(["Sylvan. ", "Primordial. ", "Draconic. ", "Elvish. "])
-    if background ==  "Bandit": l += "Common. Thieve's Cant. "
-    if background ==  "Bard": l += "Common. " + random.choice(["Dwarvish. ", "Elvish. ", "Gnomish. ", "Halfling. ", "Sylvan. "])
-    if background ==  "Berserker": l += "Common." + random.choice(["Dwarvish. ", "Giant. ", "Orc. ", "Undercommon. "])
-    if background ==  "Charlatan": l += "Common." + random.choice(["Elvish. ", "Gnomish. ", "Halfling"])
-    if background ==  "Commoner": l += random.choice(["Elvish. ", "Gnomish. ", "Common. ", "Dwarvish. ", "Giant. ", "Goblin. ", "Halfling. ", "Orc. "])
-    if background ==  "Cultist": l += random.choice(["Abyssal. ", "Celestial. ", "Draconic. ", "Deep Speech. ", "Infernal. ", "Primordial. ", "Sylvan. ", "Undercommon. "])
-    if background ==  "Criminal": l += "Thieve's Cant. Common. " + random.choice(["Dwarvish. ", "Giant. ", "Goblin. ", "Orc. ", "Undercommon. "])
-    if background ==  "Expert": l += random.choice(["Dwarvish. ", "Elvish. ", "Giant. ", "Gnomish. ", "Celestial. "])
-    if background ==  "Explorer": l += random.choice(["Elvish. ", "Giant. ", "Goblin. ", "Orc. "]) + random.choice(["Draconic. ", "Primordial. ", "Sylvan. "])
-    if background ==  "Gladiator": l += "Common. "
-    if background ==  "Guard": l += "Common. "
-    if background ==  "Healer": l += random.choice(["Celestial. ", "Primordial. ", "Sylvan. "])
-    if background == "Hermit": l += ""
-    if background == "Hero": l += "Common. " + random.choice(["Celestial. ", "Draconic. ", "Sylvan. "])
-    if background == "Hunter": l += "Sylvan. "
-    if background == "Knight": l += "Common. " + random.choice(["Celestial. ", "Draconic. ", "Sylvan. "])
-    if background == "Mage": l += "Common. " + random.choice(["Dwarvish. ", "Elvish. ", "Giant. ", "Gnomish. "])
-    if background == "Monk": l += "Common. " + random.choice(["Celestial. ", "Draconic. ", "Primordial. "])
-    if background == "Noble": l += "Common. " + random.choice(["Dwarvish. ", "Elvish. "])
-    if background == "Priest": l += "Common. " + "Celestial. "
-    if background == "Priest": l += "Common. " + random.choice(["Dwarvish. ", "Elvish. "])
-    if background == "Pirate": l += "Common. Thieves' Cant. "
-    if background ==  "Ranger": l += random.choice(["Elvish. ", "Giant. ", "Goblin. ", "Orc. "]) + random.choice(["Draconic. ", "Primordial. ", "Sylvan. "])
-    if background == "Scholar": l += random.choice(["Abyssal. ", "Celestial. ", "Draconic. ", "Deep Speech. ", "Infernal. ", "Primordial. ", "Sylvan. "])
-    if background == "Shaman": l += "Sylvan. " + random.choice(["Elvish. ", "Giant. ", "Goblin. ", "Orc. ", "Primordial. "]) 
-    if background == "Soldier": l += "Common. "
-    if background == "Spy": l += "Common. Thieves' Cant. "
-    if background == "Traveler": l += "Common." + random.choice(["Elvish. ", "Gnomish. ", "Halfling", "Dwarvish", "Giant. ", "Goblin. ", "Orc. "])
-    if background == "Urchin": l += "Common. "
-    if background == "Veteran": l += "Common. " + random.choice(["Elvish. ", "Gnomish. ", "Halfling", "Dwarvish", "Giant. ", "Goblin. ", "Orc. "])
-    if background == "Warrior": l += "Common. " + random.choice(["Elvish. ", "Gnomish. ", "Halfling", "Dwarvish", "Giant. ", "Goblin. ", "Orc. "])
-    if background == "Warlock": l += random.choice(["Abyssal. ", "Celestial. ", "Draconic", "Deep Speech. ", "Infernal. ", "Primordial. ", "Sylvan. "])
-    if background == "Witch": l += "Common. " + random.choice(["Goblin. ", "Gnomish. ", "Sylvan. "])
+    if background ==  "Bandit": 
+        if not("Common" in l): l += "Common. "
+        if not("Thieve" in l): l += "Thieve's Cant. "
+    if background ==  "Bard": 
+        if not("Common" in l): l += "Common. " 
+        if Dice()==1 and not("Dwarvish" in l): l += "Dwarvish. "
+        if Dice()==1 and not("Elvish" in l): l += "Elvish. "
+        if Dice()==1 and not("Gnomish" in l): l += "Gnomish. "
+        if Dice()==1 and not("Halfling" in l): l += "Halfling. "
+        if Dice()==1 and not("Sylvan" in l): l += "Sylvan. "
+
+    if background ==  "Berserker":
+        if not("Common" in l): l += "Common. "
+        if Dice()==1 and not("Dwarvish" in l): l += "Dwarvish. "
+        if Dice()==1 and not("Giant" in l): l += "Giant. "
+        if Dice()==1 and not("Orc" in l): l += "Orc. "
+        if Dice()==1 and not("Undercommon" in l): l += "Undercommon. "
+
+    if background ==  "Charlatan":
+        if not("Common" in l): l += "Common. "
+        if Dice()==1 and not("Elvish" in l): l += "Elvish. "
+        if Dice()==1 and not("Gnomish" in l): l += "Gnomish. "
+        if Dice()==1 and not("Halfling" in l): l += "Halfling. "
+
+    if background ==  "Cultist": 
+        if Dice(8)==1 and not("Abyssal" in l): l += "Abyssal. "
+        if Dice(8)==1 and not("Celestial" in l): l += "Celestial. "
+        if Dice(8)==1 and not("Draconic" in l): l += "Draconic. "
+        if Dice(8)==1 and not("Deep Speech" in l): l += "Deep Speech. "
+        if Dice(8)==1 and not("Infernal" in l): l += "Infernal. "
+        if Dice(8)==1 and not("Primordial" in l): l += "Primordial. "
+        if Dice(8)==1 and not("Sylvan" in l): l += "Sylvan. "
+        if Dice(8)==1 and not("Undercommon" in l): l += "Undercommon. "
+
+    if background ==  "Criminal":
+        if not("Thieve" in l): l += "Thieve's Cant. "
+        if not("Common" in l): l += "Common. "
+        if Dice()==1 and not("Dwarvish" in l): l += "Dwarvish. "
+        if Dice()==1 and not("Giant" in l): l += "Giant. "
+        if Dice()==1 and not("Goblin" in l): l += "Goblin. "
+        if Dice()==1 and not("Orc" in l): l += "Orc. "
+        if Dice()==1 and not("Undercommon" in l): l += "Undercommon. "
+
+    if background ==  "Expert": 
+        if Dice()==1 and not("Dwarvish" in l): l += "Dwarvish. "
+        if Dice()==1 and not("Elvish" in l): l += "Elvish. "
+        if Dice()==1 and not("Giant" in l): l += "Giant. "
+        if Dice()==1 and not("Gnomish" in l): l += "Gnomish. "
+        if Dice()==1 and not("Celestial" in l): l += "Celestial. "
+
+    if background ==  "Explorer": 
+        if Dice(4)==1 and not("Elvish" in l): l += "Elvish. "
+        if Dice(4)==1 and not("Giant" in l): l += "Giant. "
+        if Dice(4)==1 and not("Goblin" in l): l += "Goblin. "
+        if Dice(4)==1 and not("Orc" in l): l += "Orc. "
+        if Dice()==1 and not("Draconic" in l): l += "Draconic. "
+        if Dice()==1 and not("Primordial" in l): l += "Primordial. "
+        if Dice()==1 and not("Sylvan" in l): l += "Sylvan. "
+
+    if background ==  "Gladiator":
+        if not("Common" in l): l += "Common. "
+
+    if background ==  "Guard": 
+        if not("Common" in l): l += "Common. "
+
+    if background ==  "Healer": 
+        if Dice()==1 and not("Celestial" in l): l += "Celestial. "
+        if Dice()==1 and not("Primordial" in l): l += "Primordial. "
+        if Dice()==1 and not("Sylvan" in l): l += "Sylvan. "
+
+    if background == "Hero":
+        if not("Common" in l): l += "Common. "
+        if Dice()==1 and not("Celestial" in l): l += "Celestial. "
+        if Dice()==1 and not("Draconic" in l): l += "Draconic. "
+        if Dice()==1 and not("Sylvan" in l): l += "Sylvan. "
+
+    if background == "Hunter": 
+        if not("Sylvan" in l): l += "Sylvan. "
+    if background == "Knight":
+        if not("Common" in l): l += "Common. "
+        if Dice()==1 and not("Celestial" in l): l += "Celestial. "
+        if Dice()==1 and not("Draconic" in l): l += "Draconic. "
+        if Dice()==1 and not("Sylvan" in l): l += "Sylvan. "
+    if background == "Mage": 
+        if not("Common" in l): l += "Common. "
+        if Dice()==1 and not("Dwarvish" in l): l += "Dwarvish. "
+        if Dice()==1 and not("Elvish" in l): l += "Elvish. "
+        if Dice()==1 and not("Giant" in l): l += "Giant. "
+        if Dice()==1 and not("Gnomish" in l): l += "Gnomish. "
+
+    if background == "Monk": 
+        if not("Common" in l): l += "Common. "
+        if Dice()==1 and not("Celestial" in l): l += "Celestial. "
+        if Dice()==1 and not("Draconic" in l): l += "Draconic. "
+        if Dice()==1 and not("Primordial" in l): l += "Primordial. "
+
+    if background == "Noble": 
+        if not("Common" in l): l += "Common. "
+        if Dice()==1 and not("Dwarvish" in l): l += "Dwarvish. "
+        if Dice()==1 and not("Elvish" in l): l += "Elvish. "
+    if background == "Priest": 
+        if not("Common" in l): l += "Common. "
+        if Dice()==1 and not("Celestial" in l): l += "Celestial. "
+        if Dice()==1 and not("Infernal" in l): l += "Infernal. "
+        if Dice()==1 and not("Abyssal" in l): l += "Abyssal. "
+    if background == "Pirate":
+        if not("Common" in l): l += "Common. "
+        if not("Thieve" in l): l += "Thieve's Cant. "
+
+    if background ==  "Ranger":
+        if Dice(4)==1 and not("Elvish" in l): l += "Elvish. "
+        if Dice(4)==1 and not("Giant" in l): l += "Giant. "
+        if Dice(4)==1 and not("Goblin" in l): l += "Goblin. "
+        if Dice(4)==1 and not("Orc" in l): l += "Orc. "
+        if Dice()==1 and not("Draconic" in l): l += "Draconic. "
+        if Dice()==1 and not("Primordial" in l): l += "Primordial. "
+        if Dice()==1 and not("Sylvan" in l): l += "Sylvan. "
+
+    if background == "Scholar":
+        if Dice()==1 and not("Abyssal" in l): l += "Abyssal. "
+        if Dice()==1 and not("Celestial" in l): l += "Celestial. "
+        if Dice()==1 and not("Draconic" in l): l += "Draconic. "
+        if Dice()==1 and not("Deep Speech" in l): l += "Deep Speech. "
+        if Dice()==1 and not("Infernal" in l): l += "Infernal. "
+        if Dice()==1 and not("Primordial" in l): l += "Primordial. "
+        if Dice()==1 and not("Sylvan" in l): l += "Sylvan. "
+
+    if background == "Shaman":
+        if not("Sylvan" in l): l += "Sylvan. "
+        if not("Druidic" in l): l += "Druidic. "
+        if Dice()==1 and not("Elvish" in l): l += "Elvish. "
+        if Dice()==1 and not("Giant" in l): l += "Giant. "
+        if Dice()==1 and not("Goblin" in l): l += "Goblin. "
+        if Dice()==1 and not("Orc" in l): l += "Orc. "
+        if Dice(8)==1 and not("Primordial" in l): l += "Primordial. "
+
+    if background == "Soldier":
+        if not("Common" in l): l += "Common. "
+
+    if background == "Spy": 
+        if not("Common" in l): l += "Common. "
+        if not("Thieve" in l): l += "Thieve's Cant. "
+
+    if background == "Traveler": 
+        if not("Common" in l): l += "Common. "
+        if Dice()==1 and not("Elvish" in l): l += "Elvish. "
+        if Dice()==1 and not("Gnomish" in l): l += "Gnomish. "
+        if Dice()==1 and not("Halfling" in l): l += "Halfling. "
+        if Dice()==1 and not("Dwarvish" in l): l += "Dwarvish. "
+        if Dice()==1 and not("Giant" in l): l += "Giant. "
+        if Dice()==1 and not("Goblin" in l): l += "Goblin. "
+        if Dice()==1 and not("Orc" in l): l += "Orc. "
+
+    if background == "Urchin": 
+        if not("Common" in l): l += "Common. "
+
+
+    if background == "Warrior":
+        if not("Common" in l): l += "Common. "
+        if Dice()==1 and not("Elvish" in l): l += "Elvish. "
+        if Dice()==1 and not("Gnomish" in l): l += "Gnomish. "
+        if Dice()==1 and not("Halfling" in l): l += "Halfling. "
+        if Dice()==1 and not("Dwarvish" in l): l += "Dwarvish. "
+        if Dice()==1 and not("Giant" in l): l += "Giant. "
+        if Dice()==1 and not("Goblin" in l): l += "Goblin. "
+        if Dice()==1 and not("Orc" in l): l += "Orc. "
+    
+    if background == "Warlock": 
+        if Dice()==1 and not("Abyssal" in l): l += "Abyssal. "
+        if Dice()==1 and not("Celestial" in l): l += "Celestial. "
+        if Dice()==1 and not("Draconic" in l): l += "Draconic. "
+        if Dice()==1 and not("Deep" in l): l += "Deep Speech. "
+        if Dice()==1 and not("Infernal" in l): l += "Infernal. "
+        if Dice()==1 and not("Primordial" in l): l += "Primordial. "
+        if Dice()==1 and not("Sylvan" in l): l += "Sylvan. "
+
+    if background == "Witch": 
+        if not("Common" in l): l += "Common. "
+        if Dice()==1 and not("Abyssal" in l): l += "Abyssal. "
+        if Dice()==1 and not("Celestial" in l): l += "Celestial. "
+        if Dice()==1 and not("Draconic" in l): l += "Draconic. "
+        if Dice()==1 and not("Deep" in l): l += "Deep Speech. "
+        if Dice()==1 and not("Infernal" in l): l += "Infernal. "
+        if Dice()==1 and not("Primordial" in l): l += "Primordial. "
+        if Dice()==1 and not("Sylvan" in l): l += "Sylvan. "
+        if Dice()==1 and not("Goblin" in l): l += "Goblin. "
+        if Dice()==1 and not("Gnomish" in l): l += "Gnomish. "
+
     return l
 
 
@@ -1167,24 +1330,24 @@ def Magic(Lvl, race = Race(), background = Background()):
     two = "2/Day each: "
     three = "3/Day each: "
 
-    for L in range(int(1+Lvl/4)):
-        if background== "Fiend" and Dice()==1: one += "\nFetid Cloud (1/Day).\n\t A 10-foot radius of disgusting sulfuric gas extends out from the Fiend. The gas spreads around corners, and its area is lightly obscured. It lasts for 1 minute or until a strong wind disperses it. Any creature that starts its turn in that area must succeed on a DC 11 Constitution saving throw or be poisoned until the start of its next turn. While poisoned in this way, the target can take either an action or a bonus action on its turn, not both, and can't take reactions."
-        if background == "Priest" and Dice(2) == 1: cantrip +=  "\n- Light. "
-        if background == "Priest" and Dice(2) == 1: cantrip +=  "\n- Sacred flame. "
-        if background == "Priest" and Dice(2) == 1: cantrip +=  "\n- Thaumaturgy"
-        if background == "Priest" and Dice(2) == 1:
+    for L in range(int(1+Lvl)):
+        if background== "Fiend" and Dice()==1 and not("Fetid Cloud" in one): one += "\nFetid Cloud (1/Day).\n\t A 10-foot radius of disgusting sulfuric gas extends out from the Fiend. The gas spreads around corners, and its area is lightly obscured. It lasts for 1 minute or until a strong wind disperses it. Any creature that starts its turn in that area must succeed on a DC 11 Constitution saving throw or be poisoned until the start of its next turn. While poisoned in this way, the target can take either an action or a bonus action on its turn, not both, and can't take reactions."
+        if background == "Priest" and Dice(2) == 1 and not("Light" in cantrip): cantrip +=  "\n- Light. "
+        if background == "Priest" and Dice(2) == 1 and not("Sacred flame" in cantrip): cantrip +=  "\n- Sacred flame. "
+        if background == "Priest" and Dice(2) == 1 and not("Thaumaturgy" in cantrip): cantrip +=  "\n- Thaumaturgy"
+        if background == "Priest" and Dice(2) == 1 and not("Bless" in first):
             first += "\n- Bless"
             slots1 += Dice(3)
-        if background == "Priest" and Dice(2) == 1:
+        if background == "Priest" and Dice(2) == 1 and not("Cure wounds" in first):
             first += "\n- Cure wounds"  
             slots1 += Dice(3)
-        if background == "Priest" and Dice(2) == 1:
+        if background == "Priest" and Dice(2) == 1 and not("Sanctuary" in first):
             first += "\n- Sanctuary"   
             slots1 += Dice(3)
-        if background == "Cultist" and Dice(3) == 1: cantrip +=  "\n- Light."
-        if background == "Cultist" and Dice(3) == 1: cantrip += "\n- Sacred flame"
-        if background == "Cultist" and Dice(3) == 1: cantrip += "\n- Thaumaturgy" 
-        if background == "Cultist" and Dice() == 1:
+        if background == "Cultist" and Dice(3) == 1 and not("Light" in cantrip): cantrip +=  "\n- Light."
+        if background == "Cultist" and Dice(3) == 1 and not("Sacred flame" in cantrip): cantrip += "\n- Sacred flame"
+        if background == "Cultist" and Dice(3) == 1 and not("Thaumaturgy" in cantrip): cantrip += "\n- Thaumaturgy" 
+        if background == "Cultist" and Dice() == 1 and not("Command" in first):
             first += "\n- Command"
             slots1 += Dice(4)
         if background == "Cultist" and Dice() == 1:
@@ -1226,12 +1389,12 @@ def Magic(Lvl, race = Race(), background = Background()):
             first +=  "\n- Cure wounds"
             slots1 += Dice(2)
         if background == "Mage" and Dice(2) == 1: cantrip +=  "\n - Firebolt" 
-        if background == "Mage" and Dice(2) == 1: cantrip +=  "\n - Light" 
+        if background == "Mage" and Dice(2) == 1 and not("Light" in cantrip): cantrip +=  "\n - Light" 
         if background == "Mage" and Dice(2) == 1:
             first +=  "\n - Sleep"
             slots1 += Dice(2)
         if background == "Priest" and Dice() == 1: cantrip += "\n- Guidance"
-        if background == "Priest" and Dice() == 1: cantrip += "\n- Light"
+        if background == "Priest" and Dice() == 1 and not("Light" in cantrip): cantrip += "\n- Light"
         if background == "Priest" and Dice() == 1: cantrip += "\n- Sacred Flame"
         if background == "Priest" and Dice() == 1: cantrip += "\n- Thaumaturgy"
         if background == "Priest" and Dice() == 1:
@@ -1291,7 +1454,7 @@ def Magic(Lvl, race = Race(), background = Background()):
         if race == "Beastfolk" and Dice() == 1:
             first +=  "\n- Shield Of Faith"
             slots1 += Dice(3)
-        if race == "Celestial" and Dice(2) == 1: cantrip +=  "\n- Light" 
+        if race == "Celestial" and Dice(2) == 1 and not("Light" in cantrip): cantrip +=  "\n- Light" 
         if race == "Celestial" and Dice(2) == 1: cantrip +=  "\n- Sacred flame" 
         if race == "Celestial" and Dice(2) == 1: cantrip +=  "\n- Thaumaturgy" 
         if race == "Celestial" and Dice(2) == 1:
@@ -1316,7 +1479,7 @@ def Magic(Lvl, race = Race(), background = Background()):
  
         if race == "Dragon" and Dice(12) == 1: cantrip += "\n- Change Shape \n\t The dragon magically polymorphs into a humanoid or beast that has a challenge rating no higher than its own, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form (the dragon's choice).In a new form, the dragon retains its alignment, hit points, Hit Dice, ability to speak, proficiencies, Legendary Resistance, lair actions, and Intelligence, Wisdom, and Charisma scores, as well as this action. Its statistics and capabilities are otherwise replaced by those of the new form, except any class features or legendary actions of that form."
         if race == "Dragon" and Dice() == 1:  cantrip += "\n- Color Spray"
-        if race == "Dragon" and Dice() == 1: cantrip += "\n- Dancing Lights"
+        if race == "Dragon" and Dice() == 1 and not("Dancing Lights" in cantrip): cantrip += "\n- Dancing Lights"
         if race == "Dragon" and Dice() == 1: cantrip += "\n- Mage Hand"
         if race == "Dragon" and Dice() == 1: one += "\n- Minor Illusion"
         if race == "Dragon" and Dice(8) == 1: one += "\n- Major Image"
@@ -1325,7 +1488,7 @@ def Magic(Lvl, race = Race(), background = Background()):
         if race == "Dragon" and Dice(8) == 1: one += "\n- Suggestion"
         if race == "Dwarf" and Dice() == 1: cantrip += "\n- Enlarge (Recharges after a Short or Long Rest). \n\t For 1 minute, the Dwarf magically increases in size, along with anything it is wearing or carrying. While enlarged, the Dwarf is Large, doubles its damage dice on Strength-based weapon attacks (included in the attacks), and makes Strength checks and Strength saving throws with advantage. If the Dwarf lacks the room to become Large, it attains the maximum size possible in the space available."
         if race == "Dwarf" and Dice() == 1: cantrip += "\n- Invisibility (Recharges after a Short or Long Rest). \n\t The dwarf magically turns invisible until it attacks, casts a spell, or until its concentration is broken, up to 1 hour (as if concentrating on a spell). Any equipment the Dwarf wears or carries is invisible with it."
-        if race == "Elemental" and Dice() == 1: cantrip += "\n- Dancing lights"
+        if race == "Elemental" and Dice() == 1 and not("Dancing Lights" in cantrip): cantrip += "\n- Dancing lights"
         if race == "Elemental" and Dice() == 1: one += "\n- blur"
         if race == "Elemental" and Dice() == 1: one += "\n- Sleep"
         if race == "Elemental" and Dice() == 1: cantrip += "\n Cinder Breath \t (Recharge 6). The Elemental exhales a 15-foot cone of smoldering ash. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw or be blinded until the end of the Elemental's next turn."
@@ -1336,9 +1499,9 @@ def Magic(Lvl, race = Race(), background = Background()):
         if race == "Elemental" and Dice(3) == 1: one += "\n - Summon Mephits (1/Day) \n\t The Elemental has a 25 percent chance of summoning 1d4 mephits. A summoned mephit appears in an unoccupied space within 60 feet of its summoner, acts as an ally of its summoner, and can't summon other mephits. It remains for 1 minute, until it or its summoner dies, or until its summoner dismisses it as an action."
         if race == "Elemental" and Dice() == 1: one += "\n Innate Spellcasting (1/Day) \n\t The Elemental can innately cast fog cloud, requiring no material components."
         if race == "Elemental" and Dice() == 1: one += "\n Innate Spellcasting (1/Day) \n\t The Elemental can innately cast heat metal, requiring no material components."
-        if race == "Elf" and Dice() == 1: cantrip += "\n- Dancing lights"
+        if race == "Elf" and Dice() == 1 and not("Dancing Lights" in cantrip): cantrip += "\n- Dancing lights"
         if race == "Elf" and Dice() == 1: one += "\n- Darkness"
-        if race == "Elf" and Dice() == 1: one += "\n- Faerie fire"
+        if race == "Elf" and Dice() == 1 and not("Faerie fire" in one): one += "\n- Faerie fire"
         if race == "Fey" and Dice() == 1: cantrip += "\n Teleport (Recharge 4–6). \n\t The Fey magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the Fey can make one bite attack."
         if race == "Fey" and Dice() == 1: cantrip +=  "\n- Druidcraft"
         if race == "Fey" and Dice(3) == 1: three += "\n- Entangle" 
@@ -1350,7 +1513,7 @@ def Magic(Lvl, race = Race(), background = Background()):
         if race == "Fey" and Dice() == 1: cantrip += "\n Invisibility. \n\t The Fey  magically turns invisible until it attacks or casts a spell, or until its concentration ends (as if concentrating on a spell). Any equipment the Fey wears or carries is invisible with it."
         if race == "Fey" and Dice(3) == 1: cantrip += "\n- Druidcraft"
         if race == "Fey" and Dice() == 1: one += "\n- Confusion"
-        if race == "Fey" and Dice() == 1: one += "\n- Dancing lights"
+        if race == "Fey" and Dice() == 1 and not("Dancing Lights" in one): one += "\n- Dancing lights"
         if race == "Fey" and Dice() == 1: one += "\n- Detect evil and good"   
         if race == "Fey" and Dice() == 1: one += "\n- Detect thoughts"   
         if race == "Fey" and Dice() == 1: one += "\n- Dispel magic"   
@@ -1370,7 +1533,7 @@ def Magic(Lvl, race = Race(), background = Background()):
         if race == "Monstrosity" and Dice() == 1: one += "\n - Darkness Aura: \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
         if race == "Monstrosity" and Dice() == 1: cantrip += "\n - Luring Song: \n\t The monstrosity sings a magical melody. Every humanoid and giant within 300 feet of the harpy that can hear the song must succeed on a DC [10+%Cha] Wisdom saving throw or be charmed until the song ends. The monstrosity must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time. The song ends if the monstrosity is incapacitated. While charmed by the monstrosity, a target is incapacitated and ignores the songs of other monstrosities. If the charmed target is more than 5 feet away from the monstrosity, the target must move on its turn toward the monstrosity by the most direct route. It doesn't avoid opportunity attacks, but before moving into damaging terrain, such as lava or a pit, and whenever it takes damage from a source other than the monstrosity, a target can repeat the saving throw. A creature can also repeat the saving throw at the begguining of each of its turns. If a creature's saving throw is successful, the effect ends on it. A target that successfully saves is immune to this monstrosity's song for the next 24 hours."
         if race == "Monstrosity" and Dice() == 1: cantrip += "\n - Acid Spray (Recharge 6): \n\t The Monstrosity spits acid in a line that is 30 feet long and 5 feet wide, provided that it has no creature grappled. Each creature in that line must make a DC [10+%Str] Dexterity saving throw, taking 10 (3d6) acid damage on a failed save, or half as much damage on a successful one."
-        if race == "Ooze" and Dice()==1: cantrip += " \n Psychic Crush (Recharge 5–6). \n\t The ooze targets one creature that it can sense within 60 feet of it. The target must make a DC 10 Intelligence saving throw, taking 10 (3d6) psychic damage on a failed save, or half as much damage on a successful one."
+        if race == "Ooze" and Dice()==1: cantrip += " \n- Psychic Crush (Recharge 5–6). \n\t The ooze targets one creature that it can sense within 60 feet of it. The target must make a DC 10 Intelligence saving throw, taking 10 (3d6) psychic damage on a failed save, or half as much damage on a successful one."
         if race == "Snakefolk" and Dice()==1: cantrip += "\n- animal friendship (snakes only)"
         if race == "Snakefolk" and Dice()==1: three += "\n- Poison Spray"
         if race == "Snakefolk" and Dice()==1: three += "\n- Suggestion"
@@ -2215,21 +2378,27 @@ def Actions(Type=""):
         if Dice() == 1:
             r = r+ "\n Condition Immunities:   paralyzed"
 
-    if Type == "Undead":
-        if Dice(2) == 1:
-            r = r+"\n- Damage Resistances: acid, cold, fire, lightning, thunder; bludgeoning, piercing, and slashing from nonmagical attacks"
+    if Type == "Undead" and Dice(2) == 1: r += "\n- Damage Resistances: acid."
+    if Type == "Undead" and Dice(2) == 1: r += "\n- Damage Resistances: cold. "
+    if Type == "Undead" and Dice(2) == 1: r += "\n- Damage Resistances: fire."
+    if Type == "Undead" and Dice(2) == 1: r += "\n- Damage Resistances: lightning. "
+    if Type == "Undead" and Dice(2) == 1: r += "\n- Damage Resistances: thunder. "
+    if Type == "Undead" and Dice(2) == 1: r += "\n- Damage Resistances: bludgeoning, piercing, and slashing from nonmagical attacks. "
 
-    if Type == "Undead":
-        if Dice(2) == 1:
-            r = r+"\n- Damage Immunities: necrotic, poison "
+    if Type == "Undead" and Dice(2) == 1: r += "\n- Damage Immunities: necrotic "
+    if Type == "Undead" and Dice(2) == 1: r += "\n- Damage Immunities: poison "
 
-    elif Type == "Undead":
-        if Dice(12) == 1:
-            r = r+"\n- Condition Immunities: charmed, exhaustion, grappled, paralyzed, petrified, poisoned, prone, restrained, unconscious"
+    if Type == "Undead" and Dice(12) == 1: r += "\n- Condition Immunities: charmed"
+    if Type == "Undead" and Dice(12) == 1: r += "\n- Condition Immunities: exhaustion"
+    if Type == "Undead" and Dice(12) == 1: r += "\n- Condition Immunities: grappled"
+    if Type == "Undead" and Dice(12) == 1: r += "\n- Condition Immunities: paralyzed"
+    if Type == "Undead" and Dice(12) == 1: r += "\n- Condition Immunities: petrified"
+    if Type == "Undead" and Dice(12) == 1: r += "\n- Condition Immunities: poisoned"
+    if Type == "Undead" and Dice(12) == 1: r += "\n- Condition Immunities: prone"
+    if Type == "Undead" and Dice(12) == 1: r += "\n- Condition Immunities: restrained"
+    if Type == "Undead" and Dice(12) == 1: r += "\n- Condition Immunities: unconscious"
 
-    if Type == "Undead":
-        if Dice() == 1:
-            r = r+"\n- Amorphous \n\t The Undead can move through a space as narrow as 1 inch wide without squeezing."
+    if Type == "Undead" and Dice() == 1: r += "\n- Amorphous \n\t The Undead can move through a space as narrow as 1 inch wide without squeezing."
             
     if Type == "Undead":
         if Dice() == 1:
@@ -2349,7 +2518,8 @@ def Actions(Type=""):
         r = r + "\n Hellish Rejuvenation. \n\t A Fiend that dies in the Nine Hells comes back to life with all its hit points in", Dice(10), "days unless it is killed by a good-aligned creature with a bless spell cast on that creature or its remains are sprinkled with holy water."
             
     if Type== "Fiend" and Dice()==1: r += "\n Damage Resistances. \n\t cold"
-    if Type== "Fiend" and Dice()==1: r += "\n Damage Resistances. \n\t fire"
+    if Type== "Fiend" and Dice()==1: 
+        r += "\n Damage Resistances. \n\t fire"
     if Type== "Fiend" and Dice()==1: r += "\n Damage Resistances. \n\t lightning"
     if Type== "Fiend" and Dice()==1: r += "\n Damage Immunities. \n\t poison"
     if Type== "Fiend" and Dice()==1: r += "\n Darkvision. \n\t cold"
@@ -3520,7 +3690,7 @@ def Ideal(background, alignment):
         "Greed. I won't risk my life for nothing. I expect some kind of payment.",
         "Growth. Lessons hide in victory and defeat",
         "Aspiration. I'm determined to make something of myself.",
-        "Hard Work. No wave can move a soul hard at work.",
+        "Hard Work. No sea can beat me if I fight hard.",
         ""
         ])
                 
@@ -3653,7 +3823,7 @@ def NPC():
     print(nm)
     print("\n")
 
-    print("Lvl:", Lvl, "   HP:", Lvl*(Dice(12) + Dice(2)*Modifier(CON)))
+    print("Lvl:", Lvl, "   HP:", Lvl*(1 + Dice(12) + Dice(2)*Modifier(CON)))
     print("AC:", 10 + Modifier(DEX) + Modifier(Dice(Lvl+8)))
     print("\n\n\t"," STR:", STR,"\t", Modifier(STR),"\n\t",
         "DEX:", DEX," \t", Modifier(DEX),"\n\t"
