@@ -283,7 +283,7 @@ def Title():
         "Hive",
         " Horror",
         "Hound",
-        " Hunter",
+        "Hunter",
         "Hunger",
         "Hyena",
         "Hydra",
@@ -1383,9 +1383,9 @@ def Magic(Lvl, race = Race(), background = Background()):
         if background == "Druid" and Dice() == 1:
             first += "\n Speak With Animals"
             slots1 += Dice(4)
-        if background=="Healer" and Dice(2) == 1: cantrip +=  "\n- Guidance" 
-        if background=="Healer" and Dice(2) == 1: cantrip +=  "\n- Sacred flame"
-        if background=="Healer" and Dice(2) == 1:
+        if background=="Healer" and Dice(2) == 1 and not("Guidance" in cantrip): cantrip +=  "\n- Guidance" 
+        if background=="Healer" and Dice(2) == 1 and not("Sacred flame" in cantrip): cantrip +=  "\n- Sacred flame"
+        if background=="Healer" and Dice(2) == 1 and not("Cure wounds" in first):
             first +=  "\n- Cure wounds"
             slots1 += Dice(2)
         if background == "Mage" and Dice(2) == 1: cantrip +=  "\n - Firebolt" 
@@ -1393,17 +1393,17 @@ def Magic(Lvl, race = Race(), background = Background()):
         if background == "Mage" and Dice(2) == 1:
             first +=  "\n - Sleep"
             slots1 += Dice(2)
-        if background == "Priest" and Dice() == 1: cantrip += "\n- Guidance"
+        if background == "Priest" and Dice() == 1 and not("Guidance" in cantrip): cantrip += "\n- Guidance"
         if background == "Priest" and Dice() == 1 and not("Light" in cantrip): cantrip += "\n- Light"
-        if background == "Priest" and Dice() == 1: cantrip += "\n- Sacred Flame"
+        if background == "Priest" and Dice() == 1 and not("Sacred flame" in cantrip): cantrip += "\n- Sacred Flame"
         if background == "Priest" and Dice() == 1: cantrip += "\n- Thaumaturgy"
-        if background == "Priest" and Dice() == 1:
+        if background == "Priest" and Dice() == 1 and not("Cure wounds" in first):
             first += "\n- Cure wounds"
             slots1 += Dice(4)
         if background == "Priest" and Dice() == 1:
             first += "\n- Guiding bolt"
             slots1 += Dice(4)
-        if background == "Priest" and Dice() == 1:
+        if background == "Priest" and Dice() == 1 and not("Sanctuary" in first):
             first += "\n- Sanctuary" 
             slots1 += Dice(4)
         if background == "Priest" and Dice() == 1:
@@ -1442,7 +1442,7 @@ def Magic(Lvl, race = Race(), background = Background()):
         if race == "Aberration" and Dice() == 1: one += "\n- Stench Spray (1/Day). \n\t Each creature in a 15-foot cone originating from the Aberration must succeed on a DC 10 Dexterity saving throw or be coated in a foul-smelling liquid. A coated creature exudes a horrible stench for 1d4 hours. The coated creature is poisoned as long as the stench lasts, and other creatures are poisoned while with in 5 feet of the coated creature. A creature can remove the stench on itself by using a short rest to bathe in water, alcohol, or vinegar."
         if race == "Aven" and Dice(8) == 1: cantrip +=  "\n- Summon Air Elemental. \n\t Five Aven within 30 feet of each other can magically summon an air elemental. Each of the five must use its action and movement on three consecutive turns to perform an aerial dance and must maintain concentration while doing so (as if concentrating on a spell). When all five have finished their third turn of the dance, the elemental appears in an unoccupied space within 60 feet of them. It is friendly toward them and obeys their spoken commands. It remains for 1 hour, until it or all its summoners die, or until any of its summoners dismisses it as a bonus action. A summoner can't perform the dance again until it finishes a short rest. When the elemental returns to the Elemental Plane of Air, any Aven within 5 feet of it can return with it."
         if race == "Beastfolk" and Dice(10) == 1: cantrip +=  "\n- Sleep Gaze. \n\t The Beastfolk gazes at one creature it can see within 30 feet of it. The target must make a DC [10+%Wis] Wisdom saving throw. On a failed save, the target succumbs to a magical slumber, falling unconscious for 10 minutes or until someone uses an action to shake the target awake. A creature that successfully saves against the effect is immune to this Beastfolk's gaze for the next 24 hours. Undead and creatures immune to being charmed aren't affected by it."
-        if race == "Beastfolk" and Dice() == 1: cantrip +=  "\n- Sacred Flame."
+        if race == "Beastfolk" and Dice() == 1 and not("Sacred flame" in cantrip): cantrip +=  "\n- Sacred Flame."
         if race == "Beastfolk" and Dice() == 1: cantrip +=  "\n- Mage Hand (invisible)."
         if race == "Beastfolk" and Dice() == 1: cantrip +=  "\n- Thaumaturgy."
         if race == "Beastfolk" and Dice() == 1: one +=  "\n- Invisibility (self only)."
@@ -1455,12 +1455,12 @@ def Magic(Lvl, race = Race(), background = Background()):
             first +=  "\n- Shield Of Faith"
             slots1 += Dice(3)
         if race == "Celestial" and Dice(2) == 1 and not("Light" in cantrip): cantrip +=  "\n- Light" 
-        if race == "Celestial" and Dice(2) == 1: cantrip +=  "\n- Sacred flame" 
+        if race == "Celestial" and Dice(2) == 1 and not("Sacred flame" in cantrip): cantrip +=  "\n- Sacred flame" 
         if race == "Celestial" and Dice(2) == 1: cantrip +=  "\n- Thaumaturgy" 
         if race == "Celestial" and Dice(2) == 1:
             first +=  "\n- Bless" 
             slots1 += Dice(3)
-        if race == "Celestial" and Dice(2) == 1:
+        if race == "Celestial" and Dice(2) == 1 and not("Cure wounds" in first):
             first +=  "\n- Cure wounds" 
             slots1 += Dice(3)
         if race == "Celestial" and Dice(2) == 1:
@@ -1481,14 +1481,14 @@ def Magic(Lvl, race = Race(), background = Background()):
         if race == "Dragon" and Dice() == 1:  cantrip += "\n- Color Spray"
         if race == "Dragon" and Dice() == 1 and not("Dancing Lights" in cantrip): cantrip += "\n- Dancing Lights"
         if race == "Dragon" and Dice() == 1: cantrip += "\n- Mage Hand"
-        if race == "Dragon" and Dice() == 1: one += "\n- Minor Illusion"
+        if race == "Dragon" and Dice() == 1 and not("Minor Illusion" in one): one += "\n- Minor Illusion"
         if race == "Dragon" and Dice(8) == 1: one += "\n- Major Image"
         if race == "Dragon" and Dice(8) == 1: one += "\n- Mirror Image"
         if race == "Dragon" and Dice(8) == 1: one += "\n- Polymorph"
-        if race == "Dragon" and Dice(8) == 1: one += "\n- Suggestion"
+        if race == "Dragon" and Dice(8) == 1 and not("Suggestion" in one): one += "\n- Suggestion"
         if race == "Dwarf" and Dice() == 1: cantrip += "\n- Enlarge (Recharges after a Short or Long Rest). \n\t For 1 minute, the Dwarf magically increases in size, along with anything it is wearing or carrying. While enlarged, the Dwarf is Large, doubles its damage dice on Strength-based weapon attacks (included in the attacks), and makes Strength checks and Strength saving throws with advantage. If the Dwarf lacks the room to become Large, it attains the maximum size possible in the space available."
         if race == "Dwarf" and Dice() == 1: cantrip += "\n- Invisibility (Recharges after a Short or Long Rest). \n\t The dwarf magically turns invisible until it attacks, casts a spell, or until its concentration is broken, up to 1 hour (as if concentrating on a spell). Any equipment the Dwarf wears or carries is invisible with it."
-        if race == "Elemental" and Dice() == 1 and not("Dancing Lights" in cantrip): cantrip += "\n- Dancing lights"
+        if race == "Elemental" and Dice() == 1 and not("Dancing Lights" in cantrip): cantrip += "\n- Dancing Lights"
         if race == "Elemental" and Dice() == 1: one += "\n- blur"
         if race == "Elemental" and Dice() == 1: one += "\n- Sleep"
         if race == "Elemental" and Dice() == 1: cantrip += "\n Cinder Breath \t (Recharge 6). The Elemental exhales a 15-foot cone of smoldering ash. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw or be blinded until the end of the Elemental's next turn."
@@ -1496,11 +1496,11 @@ def Magic(Lvl, race = Race(), background = Background()):
         if race == "Elemental" and Dice(7) == 1: cantrip += "\n Steam Breath \t (Recharge 6). The Elemental exhales a 15-foot cone of scalding steam. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw, taking 4 (1d8) fire damage on a failed save, or half as much damage on a successful one."
         if race == "Elemental" and Dice(8) == 1: cantrip += "\n - Frost Breath \n\t (Recharge 6). The Elemental exhales a 15-foot cone of cold air. Each creature in that area must succeed on a DC [10+%Con] Dexterity saving throw, taking 5 (2d4) cold damage on a failed save, or half as much damage on a successful one."
         if race == "Elemental" and Dice() == 1: cantrip += "\n - Fire Breath \t (Recharge 6). The Elemental exhales a 15-foot cone of cold air. Each creature in that area must succeed on a DC [10+%Con] Dexterity saving throw, taking 7 (2d6) fire damage on a failed save, or half as much damage on a successful one."
-        if race == "Elemental" and Dice(3) == 1: one += "\n - Summon Mephits (1/Day) \n\t The Elemental has a 25 percent chance of summoning 1d4 mephits. A summoned mephit appears in an unoccupied space within 60 feet of its summoner, acts as an ally of its summoner, and can't summon other mephits. It remains for 1 minute, until it or its summoner dies, or until its summoner dismisses it as an action."
+        if race == "Elemental" and Dice(3) == 1 and not("Summon Mephits" in one): one += "\n - Summon Mephits (1/Day) \n\t The Elemental has a 25 percent chance of summoning 1d4 mephits. A summoned mephit appears in an unoccupied space within 60 feet of its summoner, acts as an ally of its summoner, and can't summon other mephits. It remains for 1 minute, until it or its summoner dies, or until its summoner dismisses it as an action."
         if race == "Elemental" and Dice() == 1: one += "\n Innate Spellcasting (1/Day) \n\t The Elemental can innately cast fog cloud, requiring no material components."
         if race == "Elemental" and Dice() == 1: one += "\n Innate Spellcasting (1/Day) \n\t The Elemental can innately cast heat metal, requiring no material components."
-        if race == "Elf" and Dice() == 1 and not("Dancing Lights" in cantrip): cantrip += "\n- Dancing lights"
-        if race == "Elf" and Dice() == 1: one += "\n- Darkness"
+        if race == "Elf" and Dice() == 1 and not("Dancing Lights" in cantrip): cantrip += "\n- Dancing Lights"
+        if race == "Elf" and Dice() == 1 and not("Darkness" in one): one += "\n- Darkness"
         if race == "Elf" and Dice() == 1 and not("Faerie fire" in one): one += "\n- Faerie fire"
         if race == "Fey" and Dice() == 1: cantrip += "\n Teleport (Recharge 4–6). \n\t The Fey magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the Fey can make one bite attack."
         if race == "Fey" and Dice() == 1: cantrip +=  "\n- Druidcraft"
@@ -1510,10 +1510,10 @@ def Magic(Lvl, race = Race(), background = Background()):
         if race == "Fey" and Dice() == 1: one += "\n- Pass without trace"
         if race == "Fey" and Dice() == 1: one += "\n- Shillelagh"
         if race == "Fey" and Dice() == 1: cantrip += "\n Heart Sight. \n\t The Fey touches a creature and magically knows the creature's current emotional state. If the target fails a DC [10+%Cha] Charisma saving throw, the Fey also knows the creature's alignment. Celestials, fiends, and undead automatically fail the saving throw."
-        if race == "Fey" and Dice() == 1: cantrip += "\n Invisibility. \n\t The Fey  magically turns invisible until it attacks or casts a spell, or until its concentration ends (as if concentrating on a spell). Any equipment the Fey wears or carries is invisible with it."
+        if race == "Fey" and Dice() == 1 and not("Invisibility" in cantrip): cantrip += "\n Invisibility. \n\t The Fey  magically turns invisible until it attacks or casts a spell, or until its concentration ends (as if concentrating on a spell). Any equipment the Fey wears or carries is invisible with it."
         if race == "Fey" and Dice(3) == 1: cantrip += "\n- Druidcraft"
         if race == "Fey" and Dice() == 1: one += "\n- Confusion"
-        if race == "Fey" and Dice() == 1 and not("Dancing Lights" in one): one += "\n- Dancing lights"
+        if race == "Fey" and Dice() == 1 and not("Dancing Lights" in one): one += "\n- Dancing Lights"
         if race == "Fey" and Dice() == 1: one += "\n- Detect evil and good"   
         if race == "Fey" and Dice() == 1: one += "\n- Detect thoughts"   
         if race == "Fey" and Dice() == 1: one += "\n- Dispel magic"   
@@ -1530,7 +1530,7 @@ def Magic(Lvl, race = Race(), background = Background()):
         if race == "Gnome" and Dice()==1: one += " \t- Blindness/Deafness"
         if race == "Gnome" and Dice()==1: one += " \n- Blur"
         if race == "Gnome" and Dice()==1: one += " \t Disguise Self"
-        if race == "Monstrosity" and Dice() == 1: one += "\n - Darkness Aura: \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
+        if race == "Monstrosity" and Dice() == 1 and not("Darkness Aura" in one): one += "\n - Darkness Aura: \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
         if race == "Monstrosity" and Dice() == 1: cantrip += "\n - Luring Song: \n\t The monstrosity sings a magical melody. Every humanoid and giant within 300 feet of the harpy that can hear the song must succeed on a DC [10+%Cha] Wisdom saving throw or be charmed until the song ends. The monstrosity must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time. The song ends if the monstrosity is incapacitated. While charmed by the monstrosity, a target is incapacitated and ignores the songs of other monstrosities. If the charmed target is more than 5 feet away from the monstrosity, the target must move on its turn toward the monstrosity by the most direct route. It doesn't avoid opportunity attacks, but before moving into damaging terrain, such as lava or a pit, and whenever it takes damage from a source other than the monstrosity, a target can repeat the saving throw. A creature can also repeat the saving throw at the begguining of each of its turns. If a creature's saving throw is successful, the effect ends on it. A target that successfully saves is immune to this monstrosity's song for the next 24 hours."
         if race == "Monstrosity" and Dice() == 1: cantrip += "\n - Acid Spray (Recharge 6): \n\t The Monstrosity spits acid in a line that is 30 feet long and 5 feet wide, provided that it has no creature grappled. Each creature in that line must make a DC [10+%Str] Dexterity saving throw, taking 10 (3d6) acid damage on a failed save, or half as much damage on a successful one."
         if race == "Ooze" and Dice()==1: cantrip += " \n- Psychic Crush (Recharge 5–6). \n\t The ooze targets one creature that it can sense within 60 feet of it. The target must make a DC 10 Intelligence saving throw, taking 10 (3d6) psychic damage on a failed save, or half as much damage on a successful one."
@@ -1945,11 +1945,11 @@ def Actions(Type=""):
             r = r+ "\n- Terrifying Glare:\n\t The Construct is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Construct must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute."
 
         
-    if Type == "Aberration" and Dice()==1: r += "\n- Damage Resistances:  \n\t bludgeoning, piercing, and slashing from nonmagical attacks"
-    if Type == "Aberration" and Dice()==1: r += "\n- Damage Resistances:  \n\t acid"
-    if Type == "Aberration" and Dice()==1: r += "\n- Damage Resistances:  \n\t cold"
-    if Type == "Aberration" and Dice()==1: r += "\n- Damage Resistances:  \n\t lightning"
-    if Type == "Aberration" and Dice()==1: r += "\n- Damage Resistances:  \n\t thunder"
+    if Type == "Aberration" and Dice()==1: r += "\n- Damage Resistances:  \t bludgeoning, piercing, and slashing from nonmagical attacks"
+    if Type == "Aberration" and Dice()==1: r += "\n- Damage Resistances:  \t acid"
+    if Type == "Aberration" and Dice()==1: r += "\n- Damage Resistances:  \t cold"
+    if Type == "Aberration" and Dice()==1: r += "\n- Damage Resistances:  \t lightning"
+    if Type == "Aberration" and Dice()==1: r += "\n- Damage Resistances:  \t thunder"
 
     if Type == "Aberration":
         if Dice(2)==1: 
@@ -2462,7 +2462,7 @@ def Actions(Type=""):
         
     if Type == "Fiend":
         if Dice(3)==1:
-            r = r + "\n- Damage Resistances cold"
+            r = r + "\n- Damage Resistances: cold"
         if Dice(3)==1:
             r = r + "\n- Damage Resistances: fire"
         if Dice(3)==1:
@@ -2517,13 +2517,12 @@ def Actions(Type=""):
     if Type == "Fiend" and Dice()==1:
         r = r + "\n Hellish Rejuvenation. \n\t A Fiend that dies in the Nine Hells comes back to life with all its hit points in", Dice(10), "days unless it is killed by a good-aligned creature with a bless spell cast on that creature or its remains are sprinkled with holy water."
             
-    if Type== "Fiend" and Dice()==1: r += "\n Damage Resistances. \n\t cold"
-    if Type== "Fiend" and Dice()==1: 
-        r += "\n Damage Resistances. \n\t fire"
-    if Type== "Fiend" and Dice()==1: r += "\n Damage Resistances. \n\t lightning"
-    if Type== "Fiend" and Dice()==1: r += "\n Damage Immunities. \n\t poison"
-    if Type== "Fiend" and Dice()==1: r += "\n Darkvision. \n\t cold"
-    if Type== "Fiend" and Dice()==1: r += "\n Telepathy. \n\t 60 ft. Only in Abyssal."
+    if Type== "Fiend" and Dice()==1: r += "\n Damage Resistances. \t cold"
+    if Type== "Fiend" and Dice()==1: r += "\n Damage Resistances. \t fire"
+    if Type== "Fiend" and Dice()==1: r += "\n Damage Resistances. \t lightning"
+    if Type== "Fiend" and Dice()==1: r += "\n Damage Immunities. \t poison"
+    if Type== "Fiend" and Dice()==1: r += "\n Darkvision. \t cold"
+    if Type== "Fiend" and Dice()==1: r += "\n Telepathy. \t 60 ft. Only in Abyssal."
 
     if Type == "Spy":
         if Dice(2) == 1:
@@ -2638,8 +2637,7 @@ def Actions(Type=""):
     if Type == "Kobold" and Dice() == 1:
             r = r+ "\n Fly \t 30ft."
 
-    if Type == "Noble" and Dice()==1:
-        r = r + "\n- Parry \n\t The noble adds 2 to its AC against one melee attack that would hit it. To do so, the noble must see the attacker and be wielding a melee weapon."
+    if Type == "Noble" and Dice()==1: r += "\n- Parry \n\t The noble adds 2 to its AC against one melee attack that would hit it. To do so, the noble must see the attacker and be wielding a melee weapon."
     
     if Type == "Plant" and Dice() == 1:
         r = r+ "\n Condition Immunities:  frightened"
@@ -2908,6 +2906,9 @@ def PlotHook():
         "I am the last of my kind, and it is up to me to ensure their names enter legend.",
         "I suffer awful visions of a coming disaster and will do anything to prevent it.",
         "It is my duty to provide children to sustain my kind."
+        "I face danger and evil to offset an unredeemable act in my past.",
+        "I'm searching for a friend captured by an elusive enemy.",
+        "My commander betrayed my unit, and I will have revenge.",
         ""]
     return random.choice(Hooks)
     
@@ -2917,6 +2918,51 @@ def PlotHook():
     
 def Trait(background=""):
     Traits = [
+        "If you do me an injury, I will crush you, ruin your name, and salt your fields.",
+        "My favor, once lost, is lost forever.",
+        "Despite my noble birth, I do not place myself above other folk. We all have the same blood.",
+        "I don't like to get my hands dirty, and I won't be caught dead in unsuitable accommodations.",
+        "I take great pains to always look my best and follow the latest fashions.",
+        "No one could doubt by looking at my regal bearing that I am a cut above the unwashed masses.",
+        "The common folk love me for my kindness and generosity.",
+        "My eloquent flattery makes everyone I talk to feel like the most wonderful and important person in the world.",
+        "I sometimes stay up all night listening to the ghosts of my fallen enemies.",
+        "I become irrational when innocent people are hurt.",
+        "I hold grudges and have difficulty forgiving others.",
+        "My intensity can drive others away.",
+        "I find civilian life difficult and struggle to say the right thing in social situations.",
+        "I grow combative and unpredictable when I drink.",
+        "Fear leads to tyranny, and both must be eradicated.",
+        "I must set an example of hope for those who have given up.",
+        "I. Will. Finish. The. Job.",
+        "When the sea is within my sight, my mood is jovial and optimistic.",
+        "I become cantankerous and quiet in the rain.",
+        "I am always working on some project or other.",
+        "I am dependable.",
+        "I enjoy being out in nature; poor weather never sours my mood.",
+        "I prefer to solve problems without violence, but I finish fights decisively.",
+        "I laugh loudly and see the humor in stressful situations.",
+        "I speak rarely but mean every word I say.",
+        "By my words and actions, I often bring shame to my family.",
+        "In fact, the world does revolve around me.",
+        "I have an insatiable desire for carnal pleasures.",
+        "I too often hear veiled insults and threats in every word addressed to me, and I'm quick to anger.",
+        "I hide a truly scandalous secret that could ruin my family forever.",
+        "I secretly believe that everyone is beneath me.",
+        "The common folk must see me as a hero of the people.",
+        "My loyalty to my sovereign is unwavering.",
+        "I am in love with the heir of a family that my family despises.",
+        "Nothing is more important than the other members of my family.",
+        "My house's alliance with another noble family must be sustained at all costs.",
+        "I will face any challenge to win the approval of my family.",
+        "If you do me an injury, I will crush you, ruin your name, and salt your fields.",
+        "My favor, once lost, is lost forever.",
+        "Despite my noble birth, I do not place myself above other folk. We all have the same blood.",
+        "I don't like to get my hands dirty, and I won't be caught dead in unsuitable accommodations.",
+        "I take great pains to always look my best and follow the latest fashions.",
+        "No one could doubt by looking at my regal bearing that I am a cut above the unwashed masses.",
+        "The common folk love me for my kindness and generosity.",
+        "My eloquent flattery makes everyone I talk to feel like the most wonderful and important person in the world.",
         "Don't expect me to save those who can't save themselves. It is nature's way that the strong thrive and the weak perish.",
         "Violence is my answer to almost any challenge.",
         "I am slow to trust members of other races, tribes, and societies.",
@@ -3382,7 +3428,19 @@ def Trait(background=""):
 
 
 
+
+
+
+
+
 def Ideal(background, alignment):
+    
+    if background == "Noble":
+        if "Good" in alignment and Dice==1:
+            return random.choice([
+                "Noble Obligation. It is my duty to protect and care for the people beneath me.",
+                "Respect. Respect is due to me because of my position, but all people regardless of station deserve to be treated with dignity."
+                ])
     
     if background == "Priest":
         if "Lawful" in alignment and Dice()==1:
@@ -3518,8 +3576,8 @@ def Ideal(background, alignment):
                 "Dignity. The dead and their belongings deserve to be treated with respect."
                 ])
         if "Good" in alignment and Dice()==1:
-            return random.choice( 
-                ["Protection. I must do everything possible to save a society facing extinction.",
+            return random.choice([
+                "Protection. I must do everything possible to save a society facing extinction.",
                 "Preservation. That artifact belongs in a museum."
                 ])
         if "Evil" in alignment and Dice()==1:
@@ -3595,6 +3653,7 @@ def Ideal(background, alignment):
 
     if "Good" in alignment and Dice()==1:
         return random.choice([
+            "Teamwork. Success depends on cooperation and communication.",
             "Greater Good. Our lot is to lay down our lives in defense of others.",
             "Common Good. My organization serves a vital function, and its prosperity will help everyone.",
             "Greater Good. My gifts are meant to be shared with all, not used for my own benefit.",
@@ -3610,6 +3669,8 @@ def Ideal(background, alignment):
             ])
     if "Chaotic" in alignment and Dice()==1:
         return random.choice([
+            "Embracing. Life is messy. Throwing yourself into the worst of it is necessary to get the job done.",
+            "Independence. I must prove that I can handle myself without the coddling of my family.",
             "Change. Life is like the seasons, in constant change, and we must change with it.",
             "No Limits. Nothing should fetter the infinite possibility inherent in all existence.",
             "Independence. When people follow orders blindly, they embrace a kind of tyranny",
@@ -3623,6 +3684,8 @@ def Ideal(background, alignment):
             ])
     if "Lawful" in alignment and Dice()==1:
         return random.choice([
+            "Code. The code provides a solution for every problem, and following it is imperative.",
+            "Responsibility. It is my duty to respect the authority of those above me, just as those below me must respect mine.",
             "Honor. If I dishonor myself, I dishonor my whole kind.",
             "Logic. Emotions must not cloud our logical thinking.",
             "Responsibility. I do what I must and obey just authority.",
@@ -3636,6 +3699,8 @@ def Ideal(background, alignment):
             ])
     if "Evil" in alignment and Dice()==1:
         return random.choice([
+            "Might. The strong train so that they might rule those who are weak.",
+            "Power. If I can attain more power, no one will tell me what to do.",
             "Power. Knowledge is the path to power and domination.",
             "All for a Coin. I'll do nearly anything if it means I turn a profit.",
             "Might. In life as in war, the stronger force wins.",
@@ -3659,6 +3724,9 @@ def Ideal(background, alignment):
             "Nature. The natural world is more important than all the constructs of civilization."
             ])    
     return random.choice([
+        "Perseverance. No injury or obstacle can turn me from my goal.",
+        "Bravery. To act when others quake in fear- this is the essence of the warrior.",
+        "Family. Blood runs thicker than water.",
         "Glory. I must earn glory in battle, for myself and my clan.",
         "Self-Improvement. The goal of a life of study is the betterment of oneself.",
         "Knowledge. The path to power and self-improvement is through knowledge.",
@@ -3686,7 +3754,7 @@ def Ideal(background, alignment):
         "Discovery. I want to be the first person to discover a lost culture.",
         "Knowledge. By understanding other races and cultures, we learn to understand ourselves.",
         "Immortality. All my exploring is part of a plan to find the secret of everlasting life.",
-        "Aspiration. I seek to prove myself worthy of my god's favor by matching my actions against their teachings.",
+        "Aspiration. I seek to prove myself worthy of my deity's favor by matching my actions against their teachings.",
         "Greed. I won't risk my life for nothing. I expect some kind of payment.",
         "Growth. Lessons hide in victory and defeat",
         "Aspiration. I'm determined to make something of myself.",
@@ -3823,7 +3891,7 @@ def NPC():
     print(nm)
     print("\n")
 
-    print("Lvl:", Lvl, "   HP:", Lvl*(1 + Dice(12) + Dice(2)*Modifier(CON)))
+    print("Lvl:", Lvl, "   HP:", Lvl*(Dice(12) + Dice(2)*Modifier(CON)))
     print("AC:", 10 + Modifier(DEX) + Modifier(Dice(Lvl+8)))
     print("\n\n\t"," STR:", STR,"\t", Modifier(STR),"\n\t",
         "DEX:", DEX," \t", Modifier(DEX),"\n\t"
