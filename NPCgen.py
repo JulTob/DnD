@@ -242,6 +242,7 @@ def Title():
         "Collosus",
         "Commander",
         "Cultist",
+        "Dancer",
         "Darkness",
         " Diamond",
         "Dino",
