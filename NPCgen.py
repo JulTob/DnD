@@ -32,7 +32,6 @@ def Title():
         "The Bronce",
         "The Brown",
         "The Brain",
-        "The Bringer",
         "The Butterfly",
         "The Cat",
         "The Climate",
@@ -121,6 +120,7 @@ def Title():
         "The Mad",
         "The Magic",
         "The Magma",
+        "The Marine",
         "The Mental",
         "The Mirror",
         "The Mist",
@@ -536,7 +536,6 @@ def Race():
         "Fey", "Fey",
         "Fiend",
         "Giant",
-        "Genasi",
         "Gnome",
         "Goblin",
         "Hag",
@@ -548,7 +547,6 @@ def Race():
         "Orc",
         "Plant",
         "Snakefolk",
-        "Tiefling",
         "Undead",
         ""
         ]
@@ -613,6 +611,7 @@ def BeastName():
         "Piranna",
         "Rat",
         "Raven",
+        "Rhinoceros",
         "Sea Horse",
         "Shark", "Hunter Shark",
         "Spider",
@@ -633,6 +632,7 @@ def BeastfolkName():
         "Lycan", 
         "Merfolk",
         "Minotaur",
+        "Ratfolk",
         "Sharkfolk",
         "Werewolf",
         ""]
@@ -671,22 +671,32 @@ def DragonName():
         "Bronce", "Silver", "Gold",
         ""]
     return random.choice(Names)
+    
+def ElementalName():
+    Names = [
+        "Genasi",
+        "Genie",
+        ""]
+    return random.choice(Names)
 
 def FiendName():
     Names = [
+        "Tiefling",
         "Devil",
         "Demon",
         "Imp",
+        "Spined Devil",
         ""]
     return random.choice(Names)
 
 def FeyName():
     Names = [
+        "Dryad",
+        "Hag",
+        "Nymph",
         "Pixie",
         "Satyr",
         "Sprite",
-        "Nymph",
-        "Dryad",
         ""]
     return random.choice(Names)
 
@@ -742,10 +752,12 @@ def UndeadName():
         "Ghoul",
         "Ghast",
         "Licht",
+        "Poltergeist",
         "Skelleton",
         "Shadow",
         "Specter",
         "Vampire",
+        "Will-O'-Wisp",
         "Zombie",
         ""]
     return random.choice(Names)
@@ -758,6 +770,7 @@ def Name(Type):
     if Type == "Celestial": return CelestialName()
     if Type == "Construct": return ConstructName()
     if Type == "Dragon": return DragonName()
+    if Type == "Elemental": return ElementalName()
     if Type == "Fey": return FeyName()
     if Type == "Fiend": return FiendName()
     if Type == "Giant": return GiantName()
@@ -810,8 +823,15 @@ def Proficiency(AS):
 def Attack(Type):
     SimpleMeleeWeapons = [
         "Rock, 1d6 + %STR Bludgeoning, 25/50 thrown", 
-        "Fists or Claws, 1d4 + %STR Bludgeoning",
+        "Fists, 1d4 + %STR Bludgeoning",
+        "Claws, 1d4 + %STR Slashing",
+        "Claws, 1d6 + %STR Slashing",
+        "Claws, 2d6 + %STR Slashing",
         "Bite, 1d4 + %STR Piercing",
+        "Bite, 1d6 + %STR Piercing",
+        "Bite, 1d8 + %STR Piercing",
+        "Bite, 1d10 + %STR Piercing",
+        "Bite, 2d6 + %STR Piercing",
         "Club, 1d4 + %STR Bludgeoning",
         "Dagger, 1d4 + %STR Piercing, 20/60 thrown",
         "Dagger, 1d4 + %DEX Piercing, 20/60 thrown",
@@ -877,16 +897,11 @@ def Attack(Type):
         ""
         ]
     
-    if Type == "Melee" or Type == 1:
-        return random.choice(SimpleMeleeWeapons)
-    elif Type == "Ranged" or Type == 2:
-        return random.choice(SimpleRangedWeapons)
-    elif Type == "Martial" or Type == "MartialMelee" or Type == 3:
-        return random.choice(MartialMeleeWeapons)
-    elif Type == "RangedMartial" or Type == 4:
-        return random.choice(MartialRangedWeapons)
-    else:
-        return random.choice(SimpleMeleeWeapons)
+    if Type == "Melee" or Type == 1: return random.choice(SimpleMeleeWeapons)
+    elif Type == "Ranged" or Type == 2: return random.choice(SimpleRangedWeapons)
+    elif Type == "Martial" or Type == "MartialMelee" or Type == 3: return random.choice(MartialMeleeWeapons)
+    elif Type == "RangedMartial" or Type == 4: return random.choice(MartialRangedWeapons)
+    else: return random.choice(SimpleMeleeWeapons)
 
 def Damage():
     DamageTypes = [
@@ -1073,28 +1088,35 @@ def Language(race = Race(), background = Background()):
     if race == "Dragon":
         l += "Draconic. "
         if Dice(3)==1 and not("Common" in l): l += "Common. "
-        if Dice()==1: l += "Sylvan. "
+        if Dice()==1 and not("Sylvan" in l): l += "Sylvan. "
+        if Dice(8)==1 and not("Dwarvish" in l): l += "Dwarvish. "
+        if Dice(8)==1 and not("Elvish" in l): l += "Elvish. "
+        if Dice(8)==1 and not("Orc" in l): l += "Orc. "
+        if Dice(8)==1 and not("Goblin" in l): l += "Goblin. "
     if race == "Dwarf":
         l += "Dwarvish. "
         if Dice(3)==1 and not("Common" in l): l += "Common. "
-        if Dice(3)==1: l += "Undercommon. "
+        if Dice(3)==1 and not("Undercommon" in l): l += "Undercommon. "
     if race == "Elf":
         l += "Elvish. "
         if Dice(3)==1 and not("Common" in l): l += "Common. "
-        if Dice(3)==1: l += "Sylvan. "
-    if race == "Elemental" or race == "Genasi":
+        if Dice(3)==1 and not("Sylvan" in l): l += "Sylvan. "
+    if race == "Elemental":
         l += "Primordial. "
         if Dice()==1 and not("Common" in l): l += "Common. "
         if Dice(4)==1: l += "Ignan. "
         if Dice(4)==1: l += "Terran. "
+        if Dice(4)==1: l += "Aquan. "
+        if Dice(4)==1: l += "Auran. "
     if race == "Fey":
         l += "Sylvan. "
         if Dice(3) == 1 and not("Common" in l): l += "Common. "
-        if Dice(3) == 1: l += "Elvish. "
-    if race == "Fiend" or "Tiefling":
+        if Dice(3) == 1 and not("Elvish" in l): l += "Elvish. "
+    if race == "Fiend":
         if not("Common" in l): l += "Common. "
-        if Dice(2) == 1: l += "Infernal. "
-        if Dice(2) == 1: l += "Abyssal. "
+        if Dice(2) == 1 and not("Infernal" in l):   l += "Infernal. "
+        if Dice(2) == 1 and not("Abyssal" in l):    l += "Abyssal. "
+        if Dice(10)==1 and not("Telepathy" in l):   l += "Telepathy. "
     if race == "Giant": 
         if not("Common" in l): l += "Common. "
         if not ("Giant" in l): l += "Giant. "
@@ -1136,13 +1158,21 @@ def Language(race = Race(), background = Background()):
         l += "Draconic. "
         if Dice(3)==1: l += "Abyssal. "
         if Dice(3)==1 and not("Common" in l): l += "Common. "
+        
     if race == "Undead":
         l += "Understands languages it knew in life. "
         if Dice(2)==1 and not("Common" in l): l += "Common. "
         if Dice(8)==1 and not("Infernal" in l): l += "Infernal. "
         if Dice(8)==1 and not("Abyssal" in l): l += "Abyssal. "
+        if Dice(8)==1 and not("Celestial" in l): l += "Celestial. "
 
-    if background ==  "Druid": l += "Druidic. " + random.choice(["Sylvan. ", "Primordial. ", "Draconic. ", "Elvish. "])
+    if background ==  "Druid": 
+        l += "Druidic. " 
+        if Dice(4)==1 and not("Sylvan" in l): l += "Sylvan. "
+        if Dice(4)==1 and not("Primordial" in l): l += "Primordial. "
+        if Dice(4)==1 and not("Draconic" in l): l += "Draconic. "
+        if Dice(4)==1 and not("Elvish" in l): l += "Elvish. "
+
     if background ==  "Bandit": 
         if not("Common" in l): l += "Common. "
         if not("Thieve" in l): l += "Thieve's Cant. "
@@ -1344,18 +1374,22 @@ def Magic(Lvl, race = Race(), background = Background()):
     second = "2nd Level Spells: "
     third = "3rd Level Spells: "
     fourth = "4th Level Spells: "
-
+    fifth = "5th Level Spells: "
+    sixth = "6th Level Spells"
+    
     slots1 = 0
     slots2 = 0
     slots3 = 0
     slots4 = 0
+    slots5 = 0
+    slots6 = 0 
+    
     
     one = "1/Day each: "
     two = "2/Day each: "
     three = "3/Day each: "
 
     for L in range(int(1+Lvl)):
-        if background== "Fiend" and Dice()==1 and not("Fetid Cloud" in one): one += "\nFetid Cloud (1/Day).\n\t A 10-foot radius of disgusting sulfuric gas extends out from the Fiend. The gas spreads around corners, and its area is lightly obscured. It lasts for 1 minute or until a strong wind disperses it. Any creature that starts its turn in that area must succeed on a DC 11 Constitution saving throw or be poisoned until the start of its next turn. While poisoned in this way, the target can take either an action or a bonus action on its turn, not both, and can't take reactions."
             
         if background == "Cultist" and Dice(3) == 1 and not("Light" in cantrip): cantrip +=  "\n- Light."
         if background == "Cultist" and Dice(3) == 1 and not("Sacred flame" in cantrip): cantrip += "\n- Sacred flame"
@@ -1421,42 +1455,67 @@ def Magic(Lvl, race = Race(), background = Background()):
         if background == "Priest" and Dice(2) == 1 and not("Thaumaturgy" in cantrip): cantrip +=  "\n- Thaumaturgy"
         if background == "Priest" and Dice() == 1 and not("Guidance" in cantrip): cantrip += "\n- Guidance"
         if background == "Priest" and Dice() == 1 and not("Resistance" in cantrip): cantrip += "\n- Resistance"
+
         if background == "Priest" and Dice(2) == 1 and not("Bless" in first):
             first += "\n- Bless"
-            slots1 += Dice(3)
+            slots1 += Dice(5)
         if background == "Priest" and Dice(2) == 1 and not("Cure wounds" in first):
             first += "\n- Cure wounds"  
-            slots1 += Dice(3)
+            slots1 += Dice(5)
         if background == "Priest" and Dice(2) == 1 and not("Sanctuary" in first):
             first += "\n- Sanctuary"   
-            slots1 += Dice(3)
+            slots1 += Dice(5)
         if background == "Priest" and Dice() == 1 and not("Cure wounds" in first):
             first += "\n- Cure wounds"
-            slots1 += Dice(4)
+            slots1 += Dice(5)
         if background == "Priest" and Dice() == 1 and not("Guiding Bolt" in first):
             first += "\n- Guiding Bolt"
-            slots1 += Dice(4)
+            slots1 += Dice(5)
         if background == "Priest" and Dice() == 1 and not("Sanctuary" in first):
             first += "\n- Sanctuary" 
-            slots1 += Dice(4)
+            slots1 += Dice(5)
         if background == "Priest" and Dice(2) == 1 and not("Command" in first):
             first += "\n- Command"
-            slots1 += Dice(3)
+            slots1 += Dice(5)
+        if background == "Priest" and Dice(2) == 1 and not("Guiding Bolt" in first):
+            first += "\n- Guiding Bolt"
+            slots1 += Dice(5)
+        if background == "Priest" and Dice(2) == 1 and not("Cure Wounds" in first):
+            first += "\n- Cure Wounds"
+            slots1 += Dice(5)
+        if background == "Priest" and Dice(2) == 1 and not("Detect Magic" in first):
+            first += "\n- Detect Magic"
+            slots1 += Dice(5)
+            
+            
         if background == "Priest" and Dice() == 1 and not("Lesser Restoration" in second):
             second += "\n- Lesser Restoration"
-            slots2 += Dice(3)
+            slots2 += Dice(4)
         if background == "Priest" and Dice() == 1 and not("Augury" in second):
             second += "\n- Augury"
-            slots2 += Dice(3)
+            slots2 += Dice(4)
         if background == "Priest" and Dice() == 1 and not("Spiritual Weapon" in second):
             second += "\n- Spiritual Weapon"
-            slots2 += Dice(3)
+            slots2 += Dice(4)
+        if background == "Priest" and Dice() == 1 and not("Lesser Restoration" in second):
+            second += "\n- Lesser Restoration"
+            slots2 += Dice(4)
+        if background == "Priest" and Dice() == 1 and not("Hold Person" in second):
+            second += "\n- Hold Person"
+            slots2 += Dice(4)
+            
         if background == "Priest" and Dice() == 1 and not("Dispel Magic" in third):
             third += "\n- Dispel Magic"
-            slots3 += Dice(2)
+            slots3 += Dice(3)
         if background == "Priest" and Dice() == 1 and not("Spirit Guardians" in third):
             third += "\n- Spirit Guardians"
-            slots3 += Dice(2)
+            slots3 += Dice(3)
+        if background == "Priest" and Dice() == 1 and not("Mass Healing Word" in third):
+            third += "\n- Mass Healing Word"
+            slots3 += Dice(3)
+        if background == "Priest" and Dice() == 1 and not("Tongues" in third):
+            third += "\n- Tongues"
+            slots3 += Dice(3)
             
         if background == "Shaman" and Dice() == 1 and not("Druidcraft" in cantrip): cantrip +=  "\n- Druidcraft" 
         if background == "Shaman" and Dice() == 1 and not("Produce Flame" in cantrip): cantrip +=  "\n-  Produce Flame" 
@@ -1486,10 +1545,10 @@ def Magic(Lvl, race = Race(), background = Background()):
 
         if race == "Aven" and Dice(8) == 1 and not("Summon Air Elemental" in cantrip ): cantrip +=  "\n- Summon Air Elemental. \n\t Five Aven within 30 feet of each other can magically summon an air elemental. Each of the five must use its action and movement on three consecutive turns to perform an aerial dance and must maintain concentration while doing so (as if concentrating on a spell). When all five have finished their third turn of the dance, the elemental appears in an unoccupied space within 60 feet of them. It is friendly toward them and obeys their spoken commands. It remains for 1 hour, until it or all its summoners die, or until any of its summoners dismisses it as a bonus action. A summoner can't perform the dance again until it finishes a short rest. When the elemental returns to the Elemental Plane of Air, any Aven within 5 feet of it can return with it."
 
-        if race == "Beastfolk" and Dice(10) == 1 and not("Sleep Gaze" in cantrip): cantrip +=  "\n- Sleep Gaze. \n\t The Beastfolk gazes at one creature it can see within 30 feet of it. The target must make a DC [10+%Wis] Wisdom saving throw. On a failed save, the target succumbs to a magical slumber, falling unconscious for 10 minutes or until someone uses an action to shake the target awake. A creature that successfully saves against the effect is immune to this Beastfolk's gaze for the next 24 hours. Undead and creatures immune to being charmed aren't affected by it."
-        if race == "Beastfolk" and Dice() == 1 and not("Sacred flame" in cantrip): cantrip +=  "\n- Sacred Flame."
-        if race == "Beastfolk" and Dice() == 1 and not("Mage Hand" in cantrip): cantrip +=  "\n- Mage Hand (invisible)."
-        if race == "Beastfolk" and Dice() == 1 and not("Thaumaturgy" in cantrip): cantrip +=  "\n- Thaumaturgy."
+        if race == "Beastfolk" and Dice(10) == 1 and not("Sleep Gaze" in cantrip):  cantrip +=  "\n- Sleep Gaze. \n\t The Beastfolk gazes at one creature it can see within 30 feet of it. The target must make a DC [10+%Wis] Wisdom saving throw. On a failed save, the target succumbs to a magical slumber, falling unconscious for 10 minutes or until someone uses an action to shake the target awake. A creature that successfully saves against the effect is immune to this Beastfolk's gaze for the next 24 hours. Undead and creatures immune to being charmed aren't affected by it."
+        if race == "Beastfolk" and Dice() == 1 and not("Sacred flame" in cantrip):  cantrip +=  "\n- Sacred Flame."
+        if race == "Beastfolk" and Dice() == 1 and not("Mage Hand" in cantrip):     cantrip +=  "\n- Mage Hand (invisible)."
+        if race == "Beastfolk" and Dice() == 1 and not("Thaumaturgy" in cantrip):   cantrip +=  "\n- Thaumaturgy."
         if race == "Beastfolk" and Dice() == 1 and not("Invisibility" in one): one +=  "\n- Invisibility (self only)."
         if race == "Beastfolk" and Dice() == 1 and not("Blur" in two): two +=  "\n- Blur."
         if race == "Beastfolk" and Dice() == 1 and not("Magic Weapon" in two): two +=  "\n- Magic Weapon."
@@ -1518,14 +1577,19 @@ def Magic(Lvl, race = Race(), background = Background()):
 
         if race == "Dragon" and Dice(3)==1: 
             cantrip += "\n- Breath Weapons " + "\t(Recharge 5-6)."
-            if Dice(8) == 1: cantrip += "\n  - Fire Breath \n\t The dragon exhales fire in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 14 (4d6) fire damage on a failed save, or half as much damage on a successful one."
-            elif Dice(8) == 2: cantrip += "\n  - Sleep Breath \n\t The dragon exhales sleep gas in a 15-foot cone. Each creature in that area must succeed on a DC [10+%Con] Constitution saving throw or fall unconscious for 1 minute. This effect ends for a creature if the creature takes damage or someone uses an action to wake it."
-            elif Dice(8) == 3: cantrip += "\n  - Acid Breath \n\t . The dragon exhales acid in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 18 (4d8) acid damage on a failed save, or half as much damage on a successful one"
-            elif Dice(8) == 4: cantrip += "\n  - Slowing Breath \n\t The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a DC [10+%Con] Constitution saving throw. On a failed save, the creature can't use reactions, its speed is halved, and it can't make more than one attack on its turn. In addition, the creature can use either an action or a bonus action on its turn, but not both. These effects last for 1 minute. The creature can repeat the saving throw at the start of each of its turns, ending the effect on itself with a successful save."
-            elif Dice(8) == 5: cantrip += "\n  - Euphoria Breath \n\t The dragon exhales a puff of euphoria gas at one creature within 5 feet of it. The target must succeed on a DC [10+%Con] Wisdom saving throw, or for 1 minute, the target can't take reactions and must roll a d6 at the start of each of its turns to determine its behavior during the turn: \n\t\t 1–4. The target takes no action or bonus action and uses all of its movement to move in a random direction. \n\t\t 5–6. The target doesn't move, and the only thing it can do on its turn is make a DC [10+%Con] Wisdom saving throw, ending the effect on itself on a success."
-            elif Dice(8) == 6: cantrip += "\n  - Repulsion Breath \n\t The dragon exhales repulsion energy in a 30-foot cone. Each creature in that area must succeed on a DC 12 Strength saving throw. On a failed save, the creature is pushed 30 feet away from the dragon."
-            elif Dice(8) == 7: cantrip += "\n  - Poison Breath \n\t The dragon exhales poisonous gas in a 15-foot cone. Each creature in that area must make a DC 11 Constitution saving throw, taking 21 (6d6) poison damage on a failed save, or half as much damage on a successful one."
-            elif Dice(8) == 8: cantrip += "\n  - Lightning Breath \n\t The dragon exhales lightning in a 40-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 16 (3d10) lightning damage on a failed save, or half as much damage on a successful one."
+            d = 12
+            if Dice(d) == 1:    cantrip += "\n  - Fire Breath \n\t The dragon exhales fire in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 14 (4d6) fire damage on a failed save, or half as much damage on a successful one."
+            elif Dice(d) == 2:  cantrip += "\n  - Sleep Breath \n\t The dragon exhales sleep gas in a 15-foot cone. Each creature in that area must succeed on a DC [10+%Con] Constitution saving throw or fall unconscious for 1 minute. This effect ends for a creature if the creature takes damage or someone uses an action to wake it."
+            elif Dice(d) == 3:  cantrip += "\n  - Acid Breath \n\t The dragon exhales acid in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 18 (4d8) acid damage on a failed save, or half as much damage on a successful one"
+            elif Dice(d) == 4:  cantrip += "\n  - Slowing Breath \n\t The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a DC [10+%Con] Constitution saving throw. On a failed save, the creature can't use reactions, its speed is halved, and it can't make more than one attack on its turn. In addition, the creature can use either an action or a bonus action on its turn, but not both. These effects last for 1 minute. The creature can repeat the saving throw at the start of each of its turns, ending the effect on itself with a successful save."
+            elif Dice(d) == 5:  cantrip += "\n  - Euphoria Breath \n\t The dragon exhales a puff of euphoria gas at one creature within 5 feet of it. The target must succeed on a DC [10+%Con] Wisdom saving throw, or for 1 minute, the target can't take reactions and must roll a d6 at the start of each of its turns to determine its behavior during the turn: \n\t\t 1–4. The target takes no action or bonus action and uses all of its movement to move in a random direction. \n\t\t 5–6. The target doesn't move, and the only thing it can do on its turn is make a DC [10+%Con] Wisdom saving throw, ending the effect on itself on a success."
+            elif Dice(d) == 6:  cantrip += "\n  - Repulsion Breath \n\t The dragon exhales repulsion energy in a 30-foot cone. Each creature in that area must succeed on a DC [10+%Con] Strength saving throw. On a failed save, the creature is pushed 30 feet away from the dragon."
+            elif Dice(d) == 7:  cantrip += "\n  - Poison Breath \n\t The dragon exhales poisonous gas in a 15-foot cone. Each creature in that area must make a DC [10+%Con] Constitution saving throw, taking 21 (6d6) poison damage on a failed save, or half as much damage on a successful one."
+            elif Dice(d) == 8:  cantrip += "\n  - Lightning Breath \n\t The dragon exhales lightning in a 40-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 16 (3d10) lightning damage on a failed save, or half as much damage on a successful one."
+            elif Dice(d) == 9:  cantrip += "\n  - Cold Breath \n\t The dragon exhales an icy blast in a 15-foot cone. Each creature in that area must make a DC [10+CON%] Constitution saving throw, taking 18 (4d8) cold damage on a failed save, or half as much damage on a successful one."
+            elif Dice(d) == 10:  cantrip += "\n  - Cold Breath \n\t The dragon exhales an icy blast in a 15-foot cone. Each creature in that area must make a DC [10+CON%] Constitution saving throw, taking 22 (5d8) cold damage on a failed save, or half as much damage on a successful one."
+            elif Dice(d) == 11: cantrip += "\n  - Paralyzing Breath \n\t The dragon exhales paralyzing gas in a 15-foot cone. Each creature in that area must succeed on a [10+CON%] Constitution saving throw or be paralyzed for 1 minute. A creature can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
+
  
         if race == "Dragon" and Dice(12) == 1 and not("Change Shape" in cantrip): cantrip += "\n- Change Shape \n\t The dragon magically polymorphs into a humanoid or beast that has a challenge rating no higher than its own, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form (the dragon's choice).In a new form, the dragon retains its alignment, hit points, Hit Dice, ability to speak, proficiencies, Legendary Resistance, lair actions, and Intelligence, Wisdom, and Charisma scores, as well as this action. Its statistics and capabilities are otherwise replaced by those of the new form, except any class features or legendary actions of that form."
         if race == "Dragon" and Dice() == 1 and not("Color Spray" in cantrip):  cantrip += "\n- Color Spray"
@@ -1556,31 +1620,72 @@ def Magic(Lvl, race = Race(), background = Background()):
         if race == "Elf" and Dice() == 1 and not("Darkness" in one): one += "\n- Darkness"
         if race == "Elf" and Dice() == 1 and not("Faerie fire" in one): one += "\n- Faerie fire"
 
-        if race == "Fey" and Dice() == 1 and not("Teleport" in cantrip): cantrip += "\n Teleport (Recharge 4–6). \n\t The Fey magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the Fey can make one bite attack."
-        if race == "Fey" and Dice() == 1 and not("Druidcraft" in cantrip): cantrip +=  "\n- Druidcraft"
-        if race == "Fey" and Dice(3) == 1 and not("Entangle" in three): three += "\n- Entangle" 
-        if race == "Fey" and Dice(3) == 1 and not("Goodberry" in three): three += "\n- Goodberry"
-        if race == "Fey" and Dice() == 1 and not("Barkskin" in one): one += "\n- Barkskin"
-        if race == "Fey" and Dice() == 1 and not("Pass Without Trace" in one): one += "\n- Pass Without Trace"
-        if race == "Fey" and Dice() == 1 and not("Shillelagh" in one): one += "\n- Shillelagh"
-        if race == "Fey" and Dice() == 1 and not("Heart Sight" in cantrip): cantrip += "\n Heart Sight. \n\t The Fey touches a creature and magically knows the creature's current emotional state. If the target fails a DC [10+%Cha] Charisma saving throw, the Fey also knows the creature's alignment. Celestials, fiends, and undead automatically fail the saving throw."
-        if race == "Fey" and Dice() == 1 and not("Invisibility" in cantrip): cantrip += "\n Invisibility. \n\t The Fey  magically turns invisible until it attacks or casts a spell, or until its concentration ends (as if concentrating on a spell). Any equipment the Fey wears or carries is invisible with it."
-        if race == "Fey" and Dice(3) == 1 and not("Druidcraft" in cantrip): cantrip += "\n- Druidcraft"
-        if race == "Fey" and Dice() == 1 and not("Confusion" in one): one += "\n- Confusion"
-        if race == "Fey" and Dice() == 1 and not("Dancing lights" in one): one += "\n- Dancing lights"
+        if race == "Fey" and Dice() == 1 and not("Teleport" in cantrip):        cantrip += "\n Teleport (Recharge 4–6). \n\t The Fey magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the Fey can make one bite attack."
+        if race == "Fey" and Dice() == 1 and not("Druidcraft" in cantrip):      cantrip +=  "\n- Druidcraft"
+        if race == "Fey" and Dice() == 1 and not("Heart Sight" in cantrip):     cantrip += "\n Heart Sight. \n\t The Fey touches a creature and magically knows the creature's current emotional state. If the target fails a DC [10+%Cha] Charisma saving throw, the Fey also knows the creature's alignment. Celestials, fiends, and undead automatically fail the saving throw."
+        if race == "Fey" and Dice() == 1 and not("Invisibility" in cantrip):    cantrip += "\n Invisibility. \n\t The Fey  magically turns invisible until it attacks or casts a spell, or until its concentration ends (as if concentrating on a spell). Any equipment the Fey wears or carries is invisible with it."
+        if race == "Fey" and Dice(3) == 1 and not("Druidcraft" in cantrip):     cantrip += "\n- Druidcraft"
+        
+        if race == "Fey" and Dice() == 1 and not("Barkskin" in one):            one += "\n- Barkskin"
+        if race == "Fey" and Dice() == 1 and not("Pass Without Trace" in one):  one += "\n- Pass Without Trace"
+        if race == "Fey" and Dice() == 1 and not("Shillelagh" in one):          one += "\n- Shillelagh"
+        if race == "Fey" and Dice() == 1 and not("Confusion" in one):           one += "\n- Confusion"
+        if race == "Fey" and Dice() == 1 and not("Dancing lights" in one):      one += "\n- Dancing lights"
         if race == "Fey" and Dice() == 1 and not("Detect Evil and Good" in one): one += "\n- Detect Evil and Good"   
-        if race == "Fey" and Dice() == 1 and not("Detect Thoughts" in one): one += "\n- Detect Thoughts"   
-        if race == "Fey" and Dice() == 1 and not("Dispel Magic" in one): one += "\n- Dispel Magic"   
-        if race == "Fey" and Dice() == 1 and not("Entangle" in one): one += "\n- Entangle"   
-        if race == "Fey" and Dice() == 1: one += "\n - Fly: 30 ft"   
-        if race == "Fey" and Dice() == 1: one += "\n - phantasmal force"   
-        if race == "Fey" and Dice() == 1: one += "\n polymorph"   
-        if race == "Fey" and Dice() == 1: one += "\n- Sleep"   
-        if race == "Fey" and Dice() == 1: one += "\n Charming Melody [DC 10+%Cha Wisdom saving throw]\n\t The creature is charmed by the Fey for 1 minute. If the Fey or any of its companions harms the creature, the effect on it ends immediately."   
-        if race == "Fey" and Dice() == 1: one += "\n - Frightening Strain [DC 10+%Cha Wisdom saving throw] \n\t The creature is charmed by the Fey for 1 minute. If the Fey or any of its companions harms the creature, the effect on it ends immediately."   
-        if race == "Fey" and Dice() == 1: one += "\n- Gentle Lullaby [DC 10+%Cha Wisdom saving throw] \n\t The creature falls asleep and is unconscious for 1 minute. The effect ends if the creature takes damage or if someone takes an action to shake the creature awake."   
+        if race == "Fey" and Dice() == 1 and not("Detect Thoughts" in one):     one += "\n- Detect Thoughts"   
+        if race == "Fey" and Dice() == 1 and not("Dispel Magic" in one):        one += "\n- Dispel Magic"   
+        if race == "Fey" and Dice() == 1 and not("Entangle" in one):            one += "\n- Entangle"   
+        if race == "Fey" and Dice() == 1 and not("Fly" in one):                 one += "\n - Fly: 30 ft"   
+        if race == "Fey" and Dice() == 1 and not("Phantasmal Force" in one):    one += "\n - Phantasmal Force"   
+        if race == "Fey" and Dice() == 1 and not("Polymorph" in one):           one += "\n Polymorph"   
+        if race == "Fey" and Dice() == 1 and not("Sleep" in one):               one += "\n- Sleep"   
+        if race == "Fey" and Dice() == 1 and not("Charming Melody" in one):     one += "\n Charming Melody [DC 10+%Cha Wisdom saving throw]\n\t The creature is charmed by the Fey for 1 minute. If the Fey or any of its companions harms the creature, the effect on it ends immediately."   
+        if race == "Fey" and Dice() == 1 and not("Frightening Strain" in one):  one += "\n - Frightening Strain [DC 10+%Cha Wisdom saving throw] \n\t The creature is charmed by the Fey for 1 minute. If the Fey or any of its companions harms the creature, the effect on it ends immediately."   
+        if race == "Fey" and Dice() == 1 and not("Gentle Lullaby" in one):      one += "\n- Gentle Lullaby [DC 10+%Cha Wisdom saving throw] \n\t The creature falls asleep and is unconscious for 1 minute. The effect ends if the creature takes damage or if someone takes an action to shake the creature awake."   
 
-        if race == "Fiend" and Dice() == 1: one += "\n- Scare \n\t One creature of the Fiend's choice within 20 feet of it must succeed on a DC 10 Wisdom saving throw or be frightened for 1 minute. The target can repeat the saving throw at the begguining of each of its turns, with disadvantage if the Fiend is within line of sight, ending the effect on itself on a success."   
+        if race == "Fey" and Dice() == 1 and not("Entangle" in three):     three += "\n- Entangle" 
+        if race == "Fey" and Dice() == 1 and not("Goodberry" in three):    three += "\n- Goodberry"
+
+        if race == "Fey" and Dice() == 1 and not("Identify" in first):
+            first +=  "\n- Identify" 
+            slots1 += Dice(3)
+        if race == "Fey" and Dice() == 1 and not("Ray Of Sickness" in first):
+            first +=  "\n- Ray Of Sickness" 
+            slots1 += Dice(3)
+        if race == "Fey" and Dice() == 1 and not("Hold Person" in second):
+            second +=  "\n- Hold Person"
+            slots2 += Dice(3)
+        if race == "Fey" and Dice() == 1 and not("Locate Object" in second):
+            second +=  "\n- Locate Object"
+            slots2 += Dice(3)
+        if race == "Fey" and Dice() == 1 and not("Bestow Curse" in third):
+            third +=  "\n- Bestow Curse"
+            slots3 += Dice(3)            
+        if race == "Fey" and Dice() == 1 and not("Counterspell" in third):
+            third +=  "\n- Counterspell"
+            slots3 += Dice(3)  
+        if race == "Fey" and Dice() == 1 and not("Lightning Bolt" in third):
+            third +=  "\n- Lightning Bolt"
+            slots3 += Dice(3)  
+        if race == "Fey" and Dice() == 1 and not("Phantasmall Killer" in fourth):
+            fourth +=  "\n- Phantasmall Killer"
+            slots4 += Dice(3)              
+        if race == "Fey" and Dice() == 1 and not("Polymorph" in fourth):
+            fourth +=  "\n- Polymorph"
+            slots4 += Dice(3)   
+        if race == "Fey" and Dice() == 1 and not("Contact Other Plane" in fifth):
+            fifth +=  "\n- Contact Other Plane"
+            slots5 += Dice(3)   
+        if race == "Fey" and Dice() == 1 and not("Scrying" in fifth):
+            fifth +=  "\n- Scrying"
+            slots5 += Dice(3)         
+        if race == "Fey" and Dice() == 1 and not("Eyebite" in sixth):
+            sixth +=  "\n- Eyebite"
+            slots6 += Dice(3)   
+            
+            
+        if race == "Fiend" and Dice() == 1 and not("Scare" in one):      one += "\n- Scare \n\t One creature of the Fiend's choice within 20 feet of it must succeed on a DC 10 Wisdom saving throw or be frightened for 1 minute. The target can repeat the saving throw at the begguining of each of its turns, with disadvantage if the Fiend is within line of sight, ending the effect on itself on a success."   
+        if race == "Fiend" and Dice()==1 and not("Fetid Cloud" in one):  one += "\nFetid Cloud (1/Day).\n\t A 10-foot radius of disgusting sulfuric gas extends out from the Fiend. The gas spreads around corners, and its area is lightly obscured. It lasts for 1 minute or until a strong wind disperses it. Any creature that starts its turn in that area must succeed on a DC 11 Constitution saving throw or be poisoned until the start of its next turn. While poisoned in this way, the target can take either an action or a bonus action on its turn, not both, and can't take reactions."
 
         if race == "Gnome" and Dice()==1: cantrip += "\t- Nondetection (self only)"
         if race == "Gnome" and Dice()==1: one += " \t- Blindness/Deafness"
@@ -1603,11 +1708,15 @@ def Magic(Lvl, race = Race(), background = Background()):
 
         if race == "Snakefolk" and Dice()==1 and not("Animal Friendship" in cantrip): cantrip += "\n- Animal Friendship (snakes only)"
         if race == "Snakefolk" and Dice()==1 and not("Poison Spray" in three): three += "\n- Poison Spray"
-        if race == "Snakefolk" and Dice()==1and not("Suggestion" in three): three += "\n- Suggestion"
+        if race == "Snakefolk" and Dice()==1 and not("Suggestion" in three): three += "\n- Suggestion"
 
         if race == "Undead" and Dice(8) == 1: cantrip += "\n - Strength Drain \n\t On an attack hit the target's Strength score is reduced by 1d4. The target dies if this reduces its Strength to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. \n\t If a non-evil humanoid dies from this attack, a new shadow rises from the corpse 1d4 hours later."  
         if race == "Undead" and Dice(8) == 1: cantrip += "\n - Life Drain \n\t On an attack hit the target's Hit Points Maximum is reduced by the damage dealt. The target dies if this reduces its Hit Points Maximum to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. "  
-                
+        if race == "Undead" and Dice(8) == 1: cantrip += "\n - Forceful Slam \n\t Magic melee attack. Hit: 10 (3d6) force damage. "  
+        if race == "Undead" and Dice(8) == 1: cantrip += "\n - Telekinetic Thrust. \n\t The poltergeist targets a creature or unattended object within 30 feet of it. A creature must be Medium or smaller to be affected by this magic, and an object can weigh up to 150 pounds. \n\t If the target is a creature, the poltergeist makes a Charisma check contested by the target's Strength check. If the poltergeist wins the contest, the poltergeist hurls the target up to 30 feet in any direction, including upward. If the target then comes into contact with a hard surface or heavy object, the target takes 1d6 damage per 10 feet moved. \n\t If the target is an object that isn't being worn or carried, the poltergeist hurls it up to 30 feet in any direction. The poltergeist can use the object as a ranged weapon, attacking one creature along the object's path (+4 to hit) and dealing 5 (2d4) bludgeoning damage on a hit."
+        
+        
+        
         if Dice(10) == 1: background = Background()
         if Dice(10) == 1: race = Race()
 
@@ -1715,9 +1824,9 @@ def Actions(Type=""):
 
     if Type == "Aven": r = r+ "\n- Fly \n\t 50ft"
     if Type == "Aven" and Dice() == 1: r = r+ "\n- Ambusher"
-    if Type == "Aven" and Dice() == 1: r = r+ "\n- Mimicry \n\t The Raven can mimic simple sounds it has heard, such as a person whispering, a baby crying, or an animal chittering. A creature that hears the sounds can tell they are imitations with a successful DC 10 Wisdom (Insight) check."
+    if Type == "Aven" and Dice() == 1: r = r+ "\n- Mimicry \n\t The Ravenfolk can mimic simple sounds it has heard, such as a person whispering, a baby crying, or an animal chittering. A creature that hears the sounds can tell they are imitations with a successful DC 10 Wisdom (Insight) check."
 
-    if (Type == "Beast" or Type == "Beastfolk") and Dice(3) == 1:
+    if (Type == "Beast" or Type == "Beastfolk"):
         if Dice(2) == 1:
             r = r+ "\n- Darkvision." 
             if Dice(2)==1: r += "\n\t 30 ft."
@@ -1735,8 +1844,7 @@ def Actions(Type=""):
                     r = r+ "\nKeen Hearing. \n\t The beast has advantage on Wisdom (Perception) checks that rely on hearing."
 
     if Type=="Beast" or Type=="Beastfolk": 
-        if Dice() == 1:
-            r = r+ "\n- Keen Senses\n\t The beast has advantage on Wisdom (Perception) checks that rely on sight, hearing, or smell."
+        if Dice() == 1:     r = r+ "\n- Keen Senses\n\t The beast has advantage on Wisdom (Perception) checks that rely on sight, hearing, or smell."
         else:
             if Dice() == 1: r = r+ "\n- Keen Smell. \n\t The Beast has advantage on Wisdom (Perception) checks that rely on smell."    
             if Dice() == 1: r = r+ "\n- Keen Sight. \n\tThe beast has advantage on Wisdom (Perception) checks that rely on sight."
@@ -1745,62 +1853,48 @@ def Actions(Type=""):
     if (Type=="Beast" or Type=="Beastfolk") and Dice(8) == 1: r += "\n-  Pack Tactics. \n\t The Beast has advantage on an attack roll against a creature if at least one of the beast's allies is within 5 feet of the creature and the ally isn't incapacitated."
     if (Type=="Beast" or Type=="Beastfolk") and Dice() == 1: r += "\n-  Multiattack. \n\t The Beast makes two simple attacks."
 
-    if Type=="Beast" or Type=="Beastfolk" and Dice(8) == 1:
+    if (Type=="Beast" or Type=="Beastfolk") and Dice(8) == 1:
         r = r+ "\n - Grappler. \n\t On an attack, the target is grappled,  [DC 10+%STR]"
         if Dice(2) == 1: r = r+ "\n - Constrict. \n\t Until the grapple ends, the creature is restrained. The creature can't constrict another creature."
 
     if (Type=="Beast" or Type=="Beastfolk") and Dice(9) == 1: r += "\n - Charge \n\t If the Beast moves at least 20 feet straight toward a target and then hits it with an attack on the same turn, the target takes an extra [2d6+%STR] bludgeoning damage. If the target is a creature, it must succeed on a DC=[10+%STR] Strength saving throw or be knocked prone."
 
-    if Type=="Beast" or Type=="Beastfolk" and Dice(8) == 1: r = r+ "\n - Relentless \n\t (Recharges after a Short or Long Rest). \n\t If the beast takes 7 damage or less that would reduce it to 0 hit points, it is reduced to 1 hit point instead."
+    if (Type=="Beast" or Type=="Beastfolk") and Dice(8) == 1: r = r+ "\n - Relentless \n\t (Recharges after a Short or Long Rest). \n\t If the beast takes 7 damage or less that would reduce it to 0 hit points, it is reduced to 1 hit point instead."
 
-    if Type=="Beast" or Type=="Beastfolk": 
-        if Dice(8) == 1:
-            r = r+ "\n- Water Breathing. The beast can breathe underwater"
-            r = r+ "\n- Swim. \n\t 60 ft."  
-            if Dice(2) == 1:
-                r = r + "\n- Underwater Camouflage. \n\t The beast has advantage on Dexterity (Stealth) checks made while underwater."
+    if (Type=="Beast" or Type=="Beastfolk") and Dice(8) == 1:
+        r = r+ "\n- Water Breathing. The beast can breathe underwater"
+        if Dice(6) == 1:    r = r+ "\n- Swim. \n\t 60 ft."  
+        elif Dice(4) == 1:  r = r+ "\n- Swim. \n\t 40 ft."  
+        elif Dice(3) == 1:  r = r+ "\n- Swim. \n\t 30 ft."  
+        else:   r += "\n- Swim. \n\t 60 ft." 
+        if Dice(4) == 1:    r = r + "\n- Underwater Camouflage. \n\t The beast has advantage on Dexterity (Stealth) checks made while underwater."
                 
-    if Type=="Beast" or Type=="Beastfolk": 
-        if Dice(8) == 1:
-            r = r+ "\n- Hold Breath. \n\t The beast can hold its breath for 15 minutes"
-            r = r+ "\n- Swim. \n\t 30 ft."  
-            
-    if (Type=="Beast" or Type=="Beastfolk") and Dice(7) == 1: r += "\n- Blood Frenzy \n\t The beast has advantage on melee attack rolls against any creature that doesn't have all its hit points."
+    if (Type=="Beast" or Type=="Beastfolk") and Dice(8) == 1:
+        r = r+ "\n- Hold Breath. \n\t The beast can hold its breath for 15 minutes"
+        if Dice(6) == 1: r = r+ "\n- Swim. \n\t 60 ft."  
+        elif Dice(4) == 1: r = r+ "\n- Swim. \n\t 40 ft."  
+        elif Dice(3) == 1: r = r+ "\n- Swim. \n\t 30 ft."  
+        else: r = r+ "\n- Swim. \n\t 60 ft."  
 
-    if Type=="Beast" or Type=="Beastfolk": 
-        if Dice(8) == 1:
-            r = r+ "\n- Amphibious"
-            r = r+ "\n- Swim. \n\t 30 ft."  
-            if Dice() == 1:
-                r = r+ "\n- Standing Leap. \n\t The Beast's long jump is up to half his speed in feet and its high jump is up to third his speed, with or without a running start."  
+    if (Type=="Beast" or Type=="Beastfolk") and Dice(7) == 1:   r += "\n- Blood Frenzy \n\t The beast has advantage on melee attack rolls against any creature that doesn't have all its hit points."
 
-    if Type=="Beast" or Type=="Beastfolk": 
-        if Dice(9) == 1:
-            r = r + "\n- Spider Climb \n\t The beast can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."  
-            if Dice(2) == 1:
-                r = r + "\n- Web Sense \n\t While in contact with a web, the spider knows the exact location of any other creature in contact with the same web."
-            if Dice(2) == 1:
-                r = r + "\n- Web Walker \n\t The spider ignores movement restrictions caused by webbing."
-            if Dice(2) == 1:
-                r += "Web (Recharge 5–6). \n\t Ranged Weapon Attack: +4 to hit, range 30/60 ft., one Large or smaller creature. Hit: The creature is restrained by webbing. As an action, the restrained creature can make a DC 11 Strength check, escaping from the webbing on a success. The effect ends if the webbing is destroyed. The webbing has AC 10, 5 hit points, is vulnerable to fire damage and immune to bludgeoning, poison and psychic damage."
+    if (Type=="Beast" or Type=="Beastfolk") and Dice(8) == 1:
+        r = r+ "\n- Amphibious"
+        r = r+ "\n- Swim. \n\t 30 ft."  
+        if Dice() == 1:    r = r+ "\n- Standing Leap. \n\t The Beast's long jump is up to half his speed in feet and its high jump is up to third his speed, with or without a running start."  
 
-    if Type=="Beast" or Type=="Beastfolk": 
-        if Dice() == 1:
-            r = r+ "\n - Running Leap"
- 
-    if Type=="Beast" or Type=="Beastfolk": 
-        if Dice() == 1:
-            r = r+ "\n - Fly \n\t 60 ft"
-            if Dice() == 1:
-                r = r+ "\n - Flyby \n\t The beast doesn't provoke opportunity attacks when it flies out of an enemy's reach."
+    if (Type=="Beast" or Type=="Beastfolk") and Dice(9) == 1:
+        r = r + "\n- Spider Climb \n\t The beast can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."  
+        if Dice(2) == 1:    r = r + "\n- Web Sense \n\t While in contact with a web, the spider knows the exact location of any other creature in contact with the same web."
+        if Dice(2) == 1:    r = r + "\n- Web Walker \n\t The spider ignores movement restrictions caused by webbing."
+        if Dice(2) == 1:    r += "Web (Recharge 5–6). \n\t Ranged Weapon Attack: +4 to hit, range 30/60 ft., one Large or smaller creature. Hit: The creature is restrained by webbing. As an action, the restrained creature can make a DC 11 Strength check, escaping from the webbing on a success. The effect ends if the webbing is destroyed. The webbing has AC 10, 5 hit points, is vulnerable to fire damage and immune to bludgeoning, poison and psychic damage."
+
+    if (Type=="Beast" or Type=="Beastfolk") and Dice() == 1:
+        r = r+ "\n - Fly \n\t 60 ft"
+        if Dice() == 1: r = r+ "\n - Flyby \n\t The beast doesn't provoke opportunity attacks when it flies out of an enemy's reach."
 
 
-    if Type=="Beast" or Type=="Beastfolk": 
-        if Dice(10) == 1:
-            r = r+ "\n - Pounce \n\t If the beast moves at least 20 feet straight toward a creature and then hits it with an attack on the same turn, that target must succeed on a DC [10+%STR] Strength saving throw or be knocked prone. If the target is prone, the Beast can make one attack against it as a bonus action."
-
-            
-
+    if (Type=="Beast" or Type=="Beastfolk") and Dice(10) == 1: r = r+ "\n - Pounce \n\t If the beast moves at least 20 feet straight toward a creature and then hits it with an attack on the same turn, that target must succeed on a DC [10+%STR] Strength saving throw or be knocked prone. If the target is prone, the Beast can make one attack against it as a bonus action."
     if (Type=="Beast" or Type=="Beastfolk") and Dice(8) == 1: r = r+ "\n- Illumination.\n\tThe beast sheds bright light in a 10-foot radius and dim light for an additional 10 ft."
     if (Type=="Beast" or Type=="Beastfolk") and Dice(8) == 1: r = r+ "\n-Sure-Footed \n\t The beast has advantage on Strength and Dexterity saving throws made against effects that would knock it prone."
     if (Type=="Beast" or Type=="Beastfolk") and Dice(8) == 1: r = r + "\n- Hold Breath. \n\t The beast can hold its breath for 30 minutes."
@@ -1808,100 +1902,80 @@ def Actions(Type=""):
     if (Type=="Beast" or Type=="Beastfolk") and Dice(8) == 1: r = r+ "\n- Beast of Burden \n\t The Beast is considered to be a Large animal for the purpose of determining its carrying capacity."
     if (Type=="Beast" or Type=="Beastfolk") and Dice(8) == 1: r = r+ "\n- Swamp Camouflage \n\t The Beast has advantage on Dexterity (Stealth) checks made to hide in swampy terrain."
             
-    if Type=="Beast" or Type=="Beastfolk": 
-        if Dice(4) == 1:
-            r = r+ "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 4 (1d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR). Until this grapple ends, the target is restrained, and the beast can't bite another target."
-            if Dice() == 1:
-                r = r+ "\n- Swallow. \n\t  The beast makes one bite attack against a target creature smaller than themselves it is grappling. If the attack hits, the target is swallowed, and the grapple ends. The swallowed target is blinded and restrained, it has total cover against attacks and other effects outside the beast, and it takes 6 (2d4+%CON) acid damage at the start of each of the beast's turns. The beast can have only one target swallowed at a time. If the beast dies, a swallowed creature is no longer restrained by it and can escape from the corpse using 5 feet of movement, exiting prone."
-                
- 
-    if (Type=="Beast" or Type=="Beastfolk") and Dice(12) == 1: r = r+ "\n-  Hold Breath. \n\t  The beast can hold its breath for 15 minutes.\n- Swimming \n\t  speed of 30 feet."
-    if (Type=="Beast" or Type=="Beastfolk") and Dice(12) == 1: r = r+ "\n-  Spider Climb. \n\t  The beast can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
-    if (Type=="Beast" or Type=="Beastfolk") and Dice(12) == 1: r = r+ "\n-  Hold Breath. \n\t  The beast can hold its breath for 1 hour."
-    if (Type=="Beast" or Type=="Beastfolk") and Dice(12) == 1: r += "\n-  Rampage. \n\t When the Beast reduces a creature to 0 hit points with a melee attack on its turn, the beast can take a bonus action to move up to half its speed and make a bite attack."
-    if (Type=="Beast" or Type=="Beastfolk") and Dice(12) == 1: r += "\n-  Slippery. \n\t The beast has advantage on ability checks and saving throws made to escape a grapple."
-    if (Type=="Beast" or Type=="Beastfolk") and Dice() == 1: r += "\n - Sunlight Sensitivity.  \n\t While in sunlight, the beastfolk has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+    if (Type=="Beast" or Type=="Beastfolk") and Dice(4) == 1:
+        r = r+ "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 4 (1d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR). Until this grapple ends, the target is restrained, and the beast can't bite another target."
+        if Dice() == 1: r = r+ "\n- Swallow. \n\t  The beast makes one bite attack against a target creature smaller than themselves it is grappling. If the attack hits, the target is swallowed, and the grapple ends. The swallowed target is blinded and restrained, it has total cover against attacks and other effects outside the beast, and it takes 6 (2d4+%CON) acid damage at the start of each of the beast's turns. The beast can have only one target swallowed at a time. If the beast dies, a swallowed creature is no longer restrained by it and can escape from the corpse using 5 feet of movement, exiting prone."
+
+    if (Type=="Beast" or Type=="Beastfolk") and Dice(12) == 1:  r = r+ "\n-  Hold Breath. \n\t  The beast can hold its breath for 15 minutes.\n- Swimming \n\t  speed of 30 feet."
+    if (Type=="Beast" or Type=="Beastfolk") and Dice(12) == 1:  r = r+ "\n-  Spider Climb. \n\t  The beast can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+    if (Type=="Beast" or Type=="Beastfolk") and Dice(12) == 1:  r = r+ "\n-  Hold Breath. \n\t  The beast can hold its breath for 1 hour."
+    if (Type=="Beast" or Type=="Beastfolk") and Dice(12) == 1:  r += "\n-  Rampage. \n\t When the Beast reduces a creature to 0 hit points with a melee attack on its turn, the beast can take a bonus action to move up to half its speed and make a bite attack."
+    if (Type=="Beast" or Type=="Beastfolk") and Dice(12) == 1:  r += "\n-  Slippery. \n\t The beast has advantage on ability checks and saving throws made to escape a grapple."
+    if (Type=="Beast" or Type=="Beastfolk") and Dice() == 1:    r += "\n - Sunlight Sensitivity.  \n\t While in sunlight, the beastfolk has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
 
     if Type == "Beastfolk": r = r + "\n- Speak with Animal \n\t The Beastfolk can communicate simple concepts to his affinity animal when it speaks in Beast language."
     if Type == "Beastfolk" and Dice()==1: r = r + "\n- Damage Immunities \n\t Bludgeoning, piercing, and slashing from nonmagical attacks that aren't silvered."
     if Type == "Beastfolk" and Dice()==1: r = r + "\n - Beast Telepathy \n\t The Beastfolk can magically command any animal it shares an affinity to within 120 feet of it, using a limited telepathy."
-    if Type == "Beastfolk" and Dice()==1: r = r+ "\n - Shapechanger \n\t The Beastfolk can use its action to polymorph into a specific Medium human or a Beast-humanoid hybrid, or back into its beast form. Other than its size, its statistics are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
-    if Type == "Beastfolk" and Dice()==1: r = r+"\n - Pack Tactics \n\t The Beastfolk has advantage on an attack roll against a creature if at least one of the Beastfolk's allies is within 5 feet of the creature and the ally isn't incapacitated."
-    if Type == "Beastfolk" and Dice()==1: r = r+"\n - Otherworldly Perception \n\t The Beastfolk can sense the presence of any creature within 30 feet of it that is invisible or on the Ethereal Plane. It can pinpoint such a creature that is moving."
+    if Type == "Beastfolk" and Dice()==1: r = r + "\n - Shapechanger \n\t The Beastfolk can use its action to polymorph into a specific Medium humanoid or a Beast-humanoid hybrid, or back into its beast form. Other than its size, its statistics are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
+    if Type == "Beastfolk" and Dice()==1: r = r + "\n - Pack Tactics \n\t The Beastfolk has advantage on an attack roll against a creature if at least one of the Beastfolk's allies is within 5 feet of the creature and the ally isn't incapacitated."
+    if Type == "Beastfolk" and Dice()==1: r = r + "\n - Otherworldly Perception \n\t The Beastfolk can sense the presence of any creature within 30 feet of it that is invisible or on the Ethereal Plane. It can pinpoint such a creature that is moving."
     if Type == "Beastfolk" and Dice()==1: r = r + "\n - Rampage.\n\t When the beastfolk reduces a creature to 0 hit points with a melee attack on its turn, the beastfolk can take a bonus action to move up to half its speed and make a bite attack."
+    if Type == "Beastfolk" and Dice()==1: r = r + "\n - Chameleon Skin \n\t The beastfolk has advantage on Dexterity (Stealth) checks made to hide."
+    if Type == "Beastfolk" and Dice()==1: r = r + "\n - Wounded Fury \n\t While it has 10 hit points or fewer, the beastfolk has advantage on attack rolls. In addition, it deals an extra 7 (2d6) damage to any target it hits with a melee attack."
+    if Type == "Beastfolk" and Dice()==1: r = r + "\n - Multiattack \n\t The Beastfolk can make two different simple attacks."
 
-    if Type == "Criminal":
-        if Dice()==1:
-            r = r+"\n - Pack Tactics \n\t The Criminal has advantage on an attack roll against a creature if at least one of the Criminal's allies is within 5 feet of the creature and the ally isn't incapacitated."
+    if Type == "Criminal" and Dice()==1: r = r+"\n - Pack Tactics \n\t The Criminal has advantage on an attack roll against a creature if at least one of the Criminal's allies is within 5 feet of the creature and the ally isn't incapacitated."
 
-    if Type == "Dragon":
-        if Dice(2) == 1:
-            r = r+ "\n- Fly: 60 ft"
-            if Dice() == 1:
-                r = r+ "\n- Flyby \n\t The dragon is an agile flier, quick to fly out of enemies' reach.The dragon doesn't provoke an opportunity attack when it flies out of an enemy's reach."
+    if Type == "Dragon" and Dice(2) == 1:
+        r = r+ "\n- Fly: 60 ft"
+        if Dice() == 1: r += "\n- Flyby \n\t The dragon is an agile flier, quick to fly out of enemies' reach. The dragon doesn't provoke an opportunity attack when it flies out of an enemy's reach."
 
-    if Type == "Dragon" and Dice() == 1: r = r+ "\n- Burrow: 15 ft"
-
+    if Type == "Dragon" and Dice() == 1: 
+        r = r+ "\n- Burrow: 15 ft"
+        if Dice() == 1:    r = r+ "\n- Tremorsense: 60 ft"
+        
     if Type == "Dragon" and Dice() == 1: r = r+ "\n- Climb: 30 ft"
 
     if Type == "Dragon":
-        if Dice(2) == 1:
-            r = r+ "\n- Darkvision: 60 ft"
-        elif Dice() == 1:
-                r = r+ "\n- Blindsight: 10 ft"
-        elif Dice() == 1:
-                r = r+ "\n- Blindsight: 60 ft"
-        elif Dice(12) == 1:
-                r = r+ "\n- Truesight: 60 ft"
+        if Dice(2) == 1:    r = r+ "\n- Darkvision: 60 ft"
+        elif Dice() == 1:   r = r+ "\n- Blindsight: 10 ft"
+        elif Dice() == 1:   r = r+ "\n- Blindsight: 60 ft"
+        elif Dice(12) == 1: r = r+ "\n- Truesight: 60 ft"
 
-    if Type == "Dragon" and Dice(3)==1: r += "\n- Swim \n\t 30ft."
-            
-    if Type == "Dragon" and Dice() == 1: r = r + "\n - Amphibious \n\t The dragon can breathe air and water."
+    if Type == "Dragon" and Dice(3)==1:     
+        r += "\n- Swim \n\t 30ft."
+        if Type == "Dragon" and Dice(4) == 1:    r = r + "\n - Amphibious \n\t The dragon can breathe air and water."
+    if Type == "Dragon" and Dice() == 1:    r = r+ "\n- Keen Senses \n\t The Dragon has advantage on Wisdom (Perception) checks that rely on sight, hearing, or smell."
+    if Type == "Dragon" and Dice() == 1:    r = r+ "\n- Limited Telepathy \n\t The Dragon can magically communicate simple ideas, emotions, and images telepathically with any creature within 100 feet of it that can understand a language. It can also communicate with any Dragon"
+    if Type == "Dragon" and Dice() == 1:    r += "\n- Superior Invisibility \n\t  The Dragon magically turns invisible until its concentration ends (as if concentrating on a spell). Any equipment the Dragon wears or carries is invisible with it."
+    if Type == "Dragon" and Dice() == 1:    r = r+ "\n- Mimicry \n\t The dragon can mimic any sounds it has heard, including voices. A creature that hears the sounds can tell they are imitations with a successful DC 10 Wisdom (Insight) check."
+    if Type == "Dragon" and Dice(12) == 1:  r = r+ "\n- Rejuvenation \n\t You might decide that dragons in your campaign, being an essential part of the Material Plane, are nearly impossible to destroy. A dragon's life essence might be preserved in the egg from which it first emerged, in its hoard, or in a cavernous hall at the center of the world, just as a lich's essence is hidden in a phylactery. \n\t If it has an essence-preserving object, a destroyed dragon gains a new body in 1d10 days, regaining all its hit points and becoming active again. The new body appears within 5 feet of the object."
 
-    if Type == "Dragon" and Dice() == 1: r = r + "\n - Blindsight \n\t 10 ft"
-
-    if Type == "Dragon" and Dice() == 1: r = r+ "\n- Keen Senses \n\t The Dragon has advantage on Wisdom (Perception) checks that rely on sight, hearing, or smell."
-            
-    if Type == "Dragon" and Dice() == 1: r = r+ "\n- Limited Telepathy \n\t The Dragon can magically communicate simple ideas, emotions, and images telepathically with any creature within 100 feet of it that can understand a language. It can also communicate with any Dragon"
-            
     if Type == "Dragon" and Dice() == 1: r += "\n- Magic Resistance \n\t The Dragon has advantage on saving throws against spells and other magical effects."           
 
     if Type == "Dragon" and Dice() == 1: r += "\n- Damage Immunities: Fire"           
     if Type == "Dragon" and Dice() == 1: r += "\n- Damage Immunities: Poison"           
-    if Type == "Dragon" and Dice() == 1: r += "\n- Damage Immunities: Acid"     
+    if Type == "Dragon" and Dice() == 1: r += "\n- Damage Immunities: Acid"  
     
     if Type == "Dragon" and Dice() == 1: r += "\n- Condition Immunities: Poisoned"         
     
-    if Type == "Dragon" and Dice() == 1: r += "\n- Superior Invisibility \n\t  The Dragon magically turns invisible until its concentration ends (as if concentrating on a spell). Any equipment the Dragon wears or carries is invisible with it."
 
     if Type=="Elemental" and Dice(8) == 1: r = r+ "\n- Illumination.\n\tThe beast sheds bright light in a 10-foot radius and dim light for an additional 10 ft."
 
-    if Type == "Fey": 
-        if Dice(3) == 1:
-            r = r+ "\n- Magic Resistance \n\t The Fey has advantage on saving throws against spells and other magical effects."
-
-    if Type == "Fey": 
-        if Dice(2) == 1:
-            r = r+ "\n- Superior Invisibility \n\t  The Fey magically turns invisible until its concentration ends (as if concentrating on a spell). Any equipment the Fey wears or carries is invisible with it."
-
-    if Type == "Giant" and Dice(2) == 1: r = r + "\n Darkvision: 60ft"
-        
-        
-
-    if Type == "Gnome":
-        r = r + "\n - Gnome Cunning \n\t The gnome has advantage on Intelligence, Wisdom, and Charisma saving throws against magic."
-
-    if Type == "Gnome":
-        r = r + "\n - Stone Camouflage \n\t The gnome has advantage on Dexterity (Stealth) checks made to hide in rocky terrain."
+    if Type == "Fey" and Dice() == 1: r = r+ "\n- Magic Resistance \n\t The Fey has advantage on saving throws against spells and other magical effects."
+    if Type == "Fey" and Dice() == 1: r = r+ "\n- Superior Invisibility \n\t  The Fey magically turns invisible until its concentration ends (as if concentrating on a spell). Any equipment the Fey wears or carries is invisible with it."
+    if Type == "Fey" and Dice() == 1: r = r+ "\n- Amphibious \n\t  The Fey can breath air and water."
+    if Type == "Fey" and Dice() == 1: 
+        r = r+ "\n- Horrific Appearance \n\t  Any humanoid that starts its turn within 30 feet of the Fey and can see the Fey's true form must make a DC 11 Wisdom saving throw. On a failed save, the creature is frightened for 1 minute. A creature can repeat the saving throw at the start of each of its turns, with disadvantage if the Fey is within line of sight, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to the Fey's Horrific Appearance for the next 24 hours. \n\t Unless the target is surprised or the revelation of the Fey's true form is sudden, the target can avert its eyes and avoid making the initial saving throw. Until the start of its next turn, a creature that averts its eyes has disadvantage on attack rolls against the Fey."
+        if Dice() ==1: r += "\n- Death Glare. \n\t The fey targets one frightened creature she can see within 30 feet of themselves. If the target can see the fey, it must succeed on a DC 11 Wisdom saving throw against this magic or drop to 0 hit points."
+    if Type == "Fey" and Dice() == 1: r = r+ "\n- Illusory Appearance \n\t  The fey covers herself and anything they are wearing or carrying with a magical illusion that makes her look like other creature of their general size and humanoid shape. The effect ends if the fey takes a bonus action to end it or if they dies. \n\t The changes wrought by this effect fail to hold up to physical inspection. For example, a hag could appear to have no claws, but someone touching her hand might feel the claws. Otherwise, a creature must take an action to visually inspect the illusion and succeed on a DC 16 Intelligence (Investigation) check to discern that the fey is disguised."
 
         
-        
 
-    if Type == "Elf":
-        r = r+ "\nFey Ancestry.\n\t The Elf has advantage on saving throws against being charmed, and magic can't put the Elf to sleep."
-        
-        if Dice(4) <= 3:
-            r = r+ "\n- Darkvision \n\t 60ft"
+    if Type == "Elf": r = r+ "\n - Fey Ancestry.\n\t The Elf has advantage on saving throws against being charmed, and magic can't put the Elf to sleep."
+     
+    if Type == "Elf":   
+        if Dice(4) <= 3: r = r+ "\n- Darkvision \n\t 60ft"
         else:
             r = r+ "\n- Darkvision \n\t 120ft"
             r = r+ "\n- Sunlight Sensitivity. \n\t While in sunlight, the Elf has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
@@ -1911,7 +1985,7 @@ def Actions(Type=""):
     if Type == "Construct": r = r+ "\n- Damage Immunities: Poison"
     if Type == "Construct": r = r+ "\n- Condition Immunities: Charmed"
     if Type == "Construct": r = r+ "\n- Condition Immunities: Poisoned"
-    if Type == "Construct" and Dice(2)==1: r = r+ "\n- Damage Immunities: psychic"
+    if Type == "Construct" and Dice()==1: r = r+ "\n- Damage Immunities: psychic"
     if Type == "Construct" and Dice()==1: r = r+ "\n Condition Immunities: blinded \n"
     if Type == "Construct" and Dice()==1: r = r+ "\n Condition Immunities: deafened \n"
     if Type == "Construct" and Dice()==1: r = r+ "\n Condition Immunities: exhaustion \n"
@@ -1921,36 +1995,30 @@ def Actions(Type=""):
     if Type == "Construct" and Dice()==1: r = r+ "\n Condition Immunities: charmed \n"
     if Type == "Construct" and Dice()==1: r = r+ "\n- Axiomatic Mind. \n\t The Construct can't be compelled to act in a manner contrary to its nature or its instructions."
     if Type == "Construct" and Dice()==1: r = r+ "\n- Disintegration. \n\t If the Construct dies, its body disintegrates into dust, leaving behind its weapons and anything else it was carrying."
-    if Type == "Construct" and Dice()==1: r = r+ "\n- False Apperance \n\t While the Construct remains motionless in rest, it is indistinguishable from a normal object"
+    if Type == "Construct" and Dice()==1: r = r+ "\n- False Apperance \n\t While the Construct remains motionless in rest, it is indistinguishable from a mundane object"
     if Type == "Construct":
-        if Dice()==1:
-            r = r+ "\n- Dark Vision:\n\t 60 ft"
-        elif Dice()==1:
-            r = r+ "\n- blindsight:\n\t 60 ft"
-        elif Dice()==1:
-            r = r+ "\n- Truesight:\n\t 60 ft"
-        elif Dice()==1:
-            r = r+ "\n- Truesight:\n\t 120 ft"
+        if Dice()==1: r = r+ "\n- Dark Vision:\n\t 60 ft"
+        elif Dice()==1: r = r+ "\n- Blindsight:\n\t 60 ft (blind beyond this radius)"
+        elif Dice()==1: r = r+ "\n- Blindsight:\n\t 60 ft"
+        elif Dice()==1: r = r+ "\n- Truesight:\n\t 60 ft"
+        elif Dice()==1: r = r+ "\n- Truesight:\n\t 120 ft"
     if Type == "Construct" and Dice()==1: r = r+ "\n- Telepathic Bond:\n\t While the Construct is on the same plane of existence as its master, it can magically convey what it senses to its master, and the two can communicate telepathically."
     if Type == "Construct" and Dice()==1: r = r+ "\n- Antimagic Susceptibility:\n\t The Construct is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Construct must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute."
     if Type == "Construct" and Dice()==1: r = r+ "\n- Terrifying Glare:\n\t The Construct is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Construct must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute."
-
+    if Type == "Construct" and Dice()==1: r = r+ "\n- Damage Transfer:\n\t While it is grappling a creature, the construct takes only half the damage dealt to it, and the creature grappled by the rug takes the other half."
+    if Type == "Construct" and Dice()==1: r = r+ "\n- Smother. \n\t Melee Weapon Attack: +5 to hit, reach 5 ft., one Medium or smaller creature. Hit: The creature is grappled (escape DC 13). Until this grapple ends, the target is restrained, blinded, and at risk of suffocating, and the construct can't smother another target. In addition, at the start of each of the target's turns, the target takes 10 (2d6 + 3) bludgeoning damage."
         
    
         
-    if Type == "Elemental":
-        if Dice() == 1:
-            r = r + "\n - Fly : 30ft."
+    if Type == "Elemental" and Dice() == 1: r = r + "\n - Fly : 30ft."
 
     if Type == "Elemental" and Dice() == 1: r += "\n - Darkvision : 60ft."
 
-    if Type == "Elemental":
-        if Dice() == 1:
-            r = r + "\n - False Appereance. While motionless, the elemental is indistinguishable from a natural feature, such as ponds, rocks, statues, etc"
+    if Type == "Elemental" and Dice() == 1: r = r + "\n - False Appereance. While motionless, the elemental is indistinguishable from a natural feature, such as ponds, rocks, statues, etc"
 
     if Type == "Elemental":
         if Dice() == 1:
-            r = r + "\n - Death Burst: \t When the Elemental dies, it leaves behind a burst of elemental essence that fills a 5-foot-radius sphere centered on its space." 
+            r = r + "\n - Death Burst: \t When the Elemental dies, it leaves behind a burst of elemental essence that fills a 5-foot-radius sphere centered on its space. " 
             rdm = Dice(4)
             if rdm == 1:
                 r = r + "The sphere is heavily obscured. Wind disperses the cloud, which otherwise lasts for 1 minute."
@@ -2006,53 +2074,25 @@ def Actions(Type=""):
         if Dice() == 1:
             r = r + "\n - Invisibility \n\t The Fey magically turns invisible until it attacks, or until its concentration ends (as if concentrating on a spell). Any equipment the Fey wears or carries is invisible with it."
             
+    if Type == "Giant" and Dice(2) == 1: r = r + "\n Darkvision: 60ft"
 
-    if Type == "Goblin":
-        if Dice()==1:
-            r = r+ "\n- Nimble Scape \n\t The goblin can take the Disengage or Hide action as a bonus action on each of its turns."
+    if Type == "Gnome": r = r + "\n - Gnome Cunning \n\t The gnome has advantage on Intelligence, Wisdom, and Charisma saving throws against magic."
+    if Type == "Gnome": r = r + "\n - Stone Camouflage \n\t The gnome has advantage on Dexterity (Stealth) checks made to hide in rocky terrain."
 
-    if Type == "Goblin":
-        if Dice()==1:
-            r = r+ "\n- Martial Advantage \n\t Once per turn, the Goblin can deal an extra 7 (2d6) damage to a creature it hits with a weapon attack if that creature is within 5 feet of an ally of the goblin that isn't incapacitated."
+        
 
-    if Type == "Goblin":
-        if Dice()==1:
-            r = r+ "\n- Brute \n\t A melee weapon deals one extra die of its damage when the Goblin hits with it (included in the attack)."
-
-    if Type == "Goblin":
-        if Dice()==1:
-            r = r+ "\n- Surprise Attack \n\t If the Goblin surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 7 (2d6) damage from the attack."
+    if Type == "Goblin" and Dice()==1:  r = r+ "\n- Nimble Scape \n\t The goblin can take the Disengage or Hide action as a bonus action on each of its turns."
+    if Type == "Goblin" and Dice()==1:  r = r+ "\n- Martial Advantage \n\t Once per turn, the Goblin can deal an extra 7 (2d6) damage to a creature it hits with a weapon attack if that creature is within 5 feet of an ally of the goblin that isn't incapacitated."
+    if Type == "Goblin" and Dice()==1:  r = r+ "\n- Brute \n\t A melee weapon deals one extra die of its damage when the Goblin hits with it (included in the attack)."
+    if Type == "Goblin" and Dice()==1:  r = r+ "\n- Surprise Attack \n\t If the Goblin surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 7 (2d6) damage from the attack."
+    if Type == "Goblin" and Dice()==1:  r = r+ "\n- Redirect Attack (Reaction) \n\t When a creature the goblin can see targets it with an attack, the goblin chooses another goblin within 5 feet of it. The two goblins swap places, and the chosen goblin becomes the target instead."
+    if Type == "Goblin" and Dice()==1:  r += "\n- Multiattack \n\t The goblin makes two Simple Attacks attacks. The second attack has disadvantage."
             
-    if Type == "Goblin":
-        if Dice()==1:
-            r = r+ "\n- Redirect Attack (Reaction) \n\t When a creature the goblin can see targets it with an attack, the goblin chooses another goblin within 5 feet of it. The two goblins swap places, and the chosen goblin becomes the target instead."
-
-    if Type == "Goblin" and Dice()==1: r += "\n- Multiattack \n\t The goblin makes two Simple Attacks attacks. The second attack has disadvantage."
-            
-    if Type == "Lizardfolk":
-        r = r+"\n- Hold Breath \n\t The lizardfolk can hold its breath for 15 minutes."
-
-    if Type == "Lizardfolk":
-        if Dice(2) == 1:
-            r = r + "\n - Chameleon Skin \n\t The lizard has advantage on Dexterity (Stealth) checks made to hide."
-
-    if Type == "Beastfolk":
-        if Dice() == 1:
-            r = r + "\n - Chameleon Skin \n\t The beastfolk has advantage on Dexterity (Stealth) checks made to hide."
-            
-    if Type == "Lizardfolk":
-        if Dice(2) == 1:
-            r = r + "\n -  Spider Climb. \n\t The lizard can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
-            
-    if Type == "Lizardfolk":
-        if Dice() == 1:
-            r = r + "\n - Stench.  \n\t Any creature other than a Lizardfolk that starts its turn within 5 feet of the Lizardfolk must succeed on a DC [10+%CON] Constitution saving throw or be poisoned until the start of the creature's next turn. On a successful saving throw, the creature is immune to the stench of all Lizardfolk for 1 hour."
-
-
-
-    if Type == "Lizardfolk":
-        if Dice() == 1:
-            r = r + "\n - Sunlight Sensitivity.  \n\t While in sunlight, the lizardfolk has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+    if Type == "Lizardfolk":    r = r+"\n - Hold Breath \n\t The lizardfolk can hold its breath for 15 minutes."
+    if Type == "Lizardfolk" and Dice(2) == 1:   r = r + "\n - Chameleon Skin \n\t The lizard has advantage on Dexterity (Stealth) checks made to hide."
+    if Type == "Lizardfolk" and Dice(2) == 1:   r = r + "\n -  Spider Climb. \n\t The lizard can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+    if Type == "Lizardfolk" and Dice() == 1:    r = r + "\n - Stench.  \n\t Any creature other than a Lizardfolk that starts its turn within 5 feet of the Lizardfolk must succeed on a DC [10+%CON] Constitution saving throw or be poisoned until the start of the creature's next turn. On a successful saving throw, the creature is immune to the stench of all Lizardfolk for 1 hour."
+    if Type == "Lizardfolk" and Dice() == 1:    r = r + "\n - Sunlight Sensitivity.  \n\t While in sunlight, the lizardfolk has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
       
 
     if Type == "Fey": 
@@ -2164,33 +2204,13 @@ def Actions(Type=""):
         if Dice() == 1:
             r = r+ "\n Damage Immunities: poison"
 
-    if Type == "Plant": 
-        if Dice() == 1:
-            r = r+ "\n Condition Immunities:  blinded"
-
-    if Type == "Plant": 
-        if Dice() == 1:
-            r = r+ "\n Condition Immunities:  deafened"
-
-    if Type == "Plant": 
-        if Dice() == 1:
-            r = r+ "\n Condition Immunities: charmed"
-            
-    if Type == "Plant": 
-        if Dice() == 1:
-            r = r+ "\n Condition Immunities:  frightened"
-
-    if Type == "Plant": 
-        if Dice() == 1:
-            r = r+ "\n Condition Immunities:   poisoned"
-
-    if Type == "Plant": 
-        if Dice() == 1:
-            r = r+ "\n Condition Immunities:   prone"
-
-    if Type == "Plant": 
-        if Dice() == 1:
-            r = r+ "\n Condition Immunities:   paralyzed"
+    if Type == "Plant" and Dice() == 1: r = r+ "\n Condition Immunities: Blinded"
+    if Type == "Plant" and Dice() == 1: r = r+ "\n Condition Immunities: Deafened"
+    if Type == "Plant" and Dice() == 1: r = r+ "\n Condition Immunities: Charmed"
+    if Type == "Plant" and Dice() == 1: r = r+ "\n Condition Immunities: Frightened"
+    if Type == "Plant" and Dice() == 1: r = r+ "\n Condition Immunities: Poisoned"
+    if Type == "Plant" and Dice() == 1: r = r+ "\n Condition Immunities: Prone"
+    if Type == "Plant" and Dice() == 1: r = r+ "\n Condition Immunities: Paralyzed"
 
          
     if Type == "Bandit":
@@ -2227,87 +2247,43 @@ def Actions(Type=""):
         if Dice(2)==1:
             r = r+ "\n Multiattack.\n\t The cultist makes two simple melee attacks."
         
-    if Type == "Fiend":
-        if Dice(3)==1:
-            r = r + "\n- Damage Resistances: cold"
-        if Dice(3)==1:
-            r = r + "\n- Damage Resistances: fire"
-        if Dice(3)==1:
-            r = r + "\n- Damage Resistances: lightning"
-        if Dice(3)==1:
-            r = r + "\n- Damage Resistances: bludgeoning, piercing, and slashing from nonmagical attacks not made with silvered weapons" 
+    if Type == "Fiend" and Dice(3)==1:      r = r + "\n- Damage Resistances: cold"
+    if Type == "Fiend" and Dice(3)==1:      r = r + "\n- Damage Resistances: fire"
+    if Type == "Fiend" and Dice(3)==1:      r = r + "\n- Damage Resistances: lightning"
+    if Type == "Fiend" and Dice(3)==1:      r = r + "\n- Damage Resistances: bludgeoning, piercing, and slashing from nonmagical attacks not made with silvered weapons" 
 
-    if Type == "Fiend":
-        if Dice(3)==1:
-            r = r + "\n- Damage Immunities: poison"
-        if Dice(3)==1:
-            r = r + "\n- Damage Immunities: fire"
+    if Type == "Fiend" and Dice(3)==1:      r = r + "\n- Damage Immunities: poison"
+    if Type == "Fiend" and Dice(3)==1:      r = r + "\n- Damage Immunities: fire"
 
-    if Type == "Fiend":
-        if Dice(3)==1:
-            r = r + "\nCondition Immunities: charmed"
-        if Dice(3)==1:
-            r = r + "\nCondition Immunities: frightened"
-        if Dice(3)==1:
-            r = r + "\nCondition Immunities: poisoned"
+    if Type == "Fiend" and Dice(3)==1:      r = r + "\nCondition Immunities: charmed"
+    if Type == "Fiend" and Dice(3)==1:      r = r + "\nCondition Immunities: frightened"
+    if Type == "Fiend" and Dice(3)==1:      r = r + "\nCondition Immunities: poisoned"
             
     if Type == "Fiend":
-        if Dice(2)==1:
-            r = r + "\n Darkvision \n\t 60 ft."
-        else: 
-            if Dice(2)==1:
-                r = r + "\n Darkvision \n\t 120 ft."
-        if Dice(2)==1:
-            r = r + "\n Devil's Sight. \n\t Magical darkness doesn't impede the Fiend's darkvision."
+        if Dice(2)==1:      r = r + "\n Darkvision \n\t 60 ft."
+        elif Dice(2)==1:    r = r + "\n Darkvision \n\t 120 ft."
+        elif Dice(2)==1:     r = r + "\n Devil's Sight. \n\t Magical darkness doesn't impede the Fiend's darkvision."
 
+    if Type == "Fiend" and Dice()==1:   r += "\n Speed 20"
+    elif Type == "Fiend" and Dice()==1: r += "\n Speed: 30 ft."
+
+    if Type == "Fiend" and Dice()==1:   r += "\n Fly 40"
+
+    if Type == "Fiend" and Dice()==1:   r = r +"\n- Magic Resistance \n\t The fiend has advantage on saving throws against spells and other magical effects."
     if Type == "Fiend":
-        if Dice()==1:
-            r += "\n Speed 20"
-            r += "\n Fly 40"
-        else:
-            r += "\n Speed: 30 ft."
+        if Dice() == 1:     r = r + "\n- Shapechanger \n\t The fiend can use its action to polymorph into a beast form that resembles a rat (speed 20 ft.), a raven (20 ft., fly 60 ft.), or a spider (20 ft., climb 20 ft.), or back into its true form. Its statistics are the same in each form, except for the speed changes noted. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
+        elif Dice() == 1:   r = r + "\n- Shapechanger \n\t The fiend can use its action to polymorph into a beast form that resembles a bat (speed 10 feet fly 40 ft.), a centipede (40 ft., climb 40 ft.), or a toad (40 ft., swim 40 ft.), or back into its true form. Its statistics are the same in each form, except for the speed changes noted. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
             
-    if Type == "Fiend":
-        if Dice()==1:
-            r = r +"\n- Magic Resistance \n\t The fiend has advantage on saving throws against spells and other magical effects."
-            
-    if Type == "Fiend":
-        if Dice() == 1:
-            r = r + "\n- Shapechanger \n\t The fiend can use its action to polymorph into a beast form that resembles a rat (speed 20 ft.), a raven (20 ft., fly 60 ft.), or a spider (20 ft., climb 20 ft.), or back into its true form. Its statistics are the same in each form, except for the speed changes noted. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
-        elif Dice() == 1:
-            r = r + "\n- Shapechanger \n\t The fiend can use its action to polymorph into a beast form that resembles a bat (speed 10 feet fly 40 ft.), a centipede (40 ft., climb 40 ft.), or a toad (40 ft., swim 40 ft.), or back into its true form. Its statistics are the same in each form, except for the speed changes noted. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
-            
-    if Type == "Fiend":
-        if Dice(2) == 1:
-            r = r + "\n- Invisibility. \n\t The fiend magically turns invisible until it attacks, or until its concentration ends (as if concentrating on a spell). Any equipment the fiend wears or carries is invisible with it."
+    if Type == "Fiend" and Dice(2) == 1:    r = r + "\n- Invisibility. \n\t The fiend magically turns invisible until it attacks, or until its concentration ends (as if concentrating on a spell). Any equipment the fiend wears or carries is invisible with it."
+    if Type == "Fiend" and Dice()==1:       r = r + "\n Hellish Rejuvenation. \n\t A Fiend that dies in the Nine Hells comes back to life with all its hit points in " + str(Dice(10)) + " days unless it is killed by a good-aligned creature with a bless spell cast on that creature or its remains are sprinkled with holy water."
+    if Type == "Fiend" and Dice(2) == 1:    r = r + "\n- Multiattack. \n\t The fiend makes two simple melee attacks."
+    
+    if Type == "Spy" and Dice(2) == 1:  r = r + "\n- Cunning Action \n\t On each of its turns, the spy can use a bonus action to take the Dash, Disengage, or Hide action."
+    if Type == "Spy" and Dice(2) == 1:  r = r + "\n- Sneak Attack (1/Turn). \n\t The spy deals an extra 7 (2d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 feet of an ally of the spy that isn't incapacitated and the spy doesn't have disadvantage on the attack roll." 
+    if Type == "Spy" and Dice(2) == 1:  r = r + "\n- Multiattack. \n\t The spy makes two simple melee attacks." 
 
-    if Type == "Fiend" and Dice()==1:
-        r = r + "\n Hellish Rejuvenation. \n\t A Fiend that dies in the Nine Hells comes back to life with all its hit points in " + str(Dice(10)) + " days unless it is killed by a good-aligned creature with a bless spell cast on that creature or its remains are sprinkled with holy water."
-            
-    if Type == "Fiend" and Dice()==1: r += "\n Damage Resistances. \t cold"
-    if Type == "Fiend" and Dice()==1: r += "\n Damage Resistances. \t fire"
-    if Type == "Fiend" and Dice()==1: r += "\n Damage Resistances. \t lightning"
-    if Type == "Fiend" and Dice()==1: r += "\n Damage Immunities. \t poison"
-    if Type == "Fiend" and Dice()==1: r += "\n Darkvision. \t cold"
-    if Type == "Fiend" and Dice()==1: r += "\n Telepathy. \t 60 ft. Only in Abyssal."
-
-    if Type == "Spy":
-        if Dice(2) == 1:
-            r = r + "\n- Cunning Action \n\t On each of its turns, the spy can use a bonus action to take the Dash, Disengage, or Hide action."
-
-    if Type == "Spy":
-        if Dice(2) == 1:
-            r = r + "\n- Sneak Attack (1/Turn). \n\t The spy deals an extra 7 (2d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 feet of an ally of the spy that isn't incapacitated and the spy doesn't have disadvantage on the attack roll." 
-            
-    if Type == "Spy":
-        if Dice(2) == 1:
-            r = r + "\n- Multiattack. \n\t The spy makes two simple melee attacks." 
-
-    if Type == "Berserker":
-        if Dice(2) == 1:
-            r = r + "\n- Multiattack"
-
-    if Type == "Berserker" and Dice(2) == 1: r = r + "\n- Reckless \n\t At the start of its turn, the berserker can gain advantage on all melee weapon attack rolls during that turn, but attack rolls against it have advantage until the start of its next turn."
+    if Type == "Berserker" and Dice(2) == 1:    r = r + "\n- Multiattack \n\t The berserker makes two simple melee attacks."
+    if Type == "Berserker" and Dice(2) == 1:    r = r + "\n- Reckless \n\t At the start of its turn, the berserker can gain advantage on all melee weapon attack rolls during that turn, but attack rolls against it have advantage until the start of its next turn."
         
     if Type == "Monstrosity":
         if Dice() == 1: r += "\n - Speed: 50 ft"
@@ -2336,7 +2312,7 @@ def Actions(Type=""):
     if Type == "Monstrosity" and Dice() == 1: r = r + "\n- Blindsight.\n\t 30 ft.\n"  
     if Type == "Monstrosity" and Dice() == 1: r = r + "\n- Spider Climb.\n\t The Monstrosity can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.\n"  
 
-    if Type == "Priest": r = r + "\n- Divine Eminence"
+    if Type == "Priest": r = r + "\n- Divine Eminence. \n\t As a bonus action, the priest can expend a spell slot to cause its melee weapon attacks to magically deal an extra 10 (3d6) radiant damage to a target on a hit. This benefit lasts until the end of the turn. If the priest expends a spell slot of 2nd level or higher, the extra damage increases by 1d6 for each level above 1st."
 
     if Type == "Shaman" and Dice(2)==1: r = r + "\n Change Shape: \n\t The Shaman magically polymorphs into a Beast, remaining in that form for up to 1 hour. It can revert to its true form as a bonus action. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
             
@@ -2351,7 +2327,8 @@ def Actions(Type=""):
     if Type == "Kobold" and Dice() == 1: r += "\n Fly \t 30ft."
 
 
-    if Type == "Undead": r = r + "\n Darkvision: 60ft"
+    if Type == "Undead" and Dice(2) == 1: r = r + "\n Darkvision: 60ft"
+    elif Type == "Undead" and Dice(2) == 1: r = r + "\n Darkvision: 120ft"
 
     if Type == "Undead" and Dice(2) == 1: r += "\n- Damage Vulnerabilities: Bludgeoning."
     if Type == "Undead" and Dice(3) == 1: r += "\n- Damage Vulnerabilities: Radiant"
@@ -2359,6 +2336,7 @@ def Actions(Type=""):
     if Type == "Undead" and Dice(2) == 1: r += "\n- Damage Resistances: Acid."
     if Type == "Undead" and Dice(2) == 1: r += "\n- Damage Resistances: Cold. "
     if Type == "Undead" and Dice(2) == 1: r += "\n- Damage Resistances: Fire."
+    if Type == "Undead" and Dice(2) == 1: r += "\n- Damage Resistances: Necrotic."
     if Type == "Undead" and Dice(2) == 1: r += "\n- Damage Resistances: Lightning. "
     if Type == "Undead" and Dice(2) == 1: r += "\n- Damage Resistances: Thunder. "
     if Type == "Undead" and Dice(2) == 1: r += "\n- Damage Resistances: bludgeoning, piercing, and slashing from nonmagical attacks. "
@@ -2376,20 +2354,25 @@ def Actions(Type=""):
     if Type == "Undead" and Dice(12) == 1: r += "\n- Condition Immunities: restrained"
     if Type == "Undead" and Dice(12) == 1: r += "\n- Condition Immunities: unconscious"
     
-    if Type == "Undead" and Dice() == 1: r += "\n- Amorphous \n\t The Undead can move through a space as narrow as 1 inch wide without squeezing."
-    if Type == "Undead" and Dice() == 1: r += "\n- Shadow Stealth \n\t While in dim light or darkness, the Undead can take the Hide action as a bonus action. Its stealth bonus is also improved to +6."
-    if Type == "Undead" and Dice() == 1: r += "\n- Sunlight Weakness \n\t While in sunlight, the shadow has disadvantage on attack rolls, ability checks, and saving throws."
-    if Type == "Undead" and Dice() == 1: r = r + "\n- Incorporeal Movement"
+    if Type == "Undead" and Dice() == 1: r += "\n - Amorphous \n\t The Undead can move through a space as narrow as 1 inch wide without squeezing."
+    if Type == "Undead" and Dice() == 1: r = r + "\n - Blood Frenzy"
+    if Type == "Undead" and Dice() == 1: r += "\n - Charge. \n\t If the undead moves at least 10 feet straight toward a target and then hits it with a simple melee attack on the same turn, the target takes an extra 9 (2d8) piercing damage. If the target is a creature, it must succeed on a DC 14 Strength saving throw or be pushed up to 10 feet away and knocked prone."
+    if Type == "Undead" and Dice() == 1: r += "\n - Consume Life. \n\t As a bonus action, the undead can target one creature it can see within 5 feet of it that has 0 hit points and is still alive. The target must succeed on a DC 10 Constitution saving throw against this magic or die. If the target dies, the undead regains 10 (3d6) hit points."
+    if Type == "Undead" and Dice() == 1: r = r + "\n - Ephemeral \n\t The Undead  can't wear or carry anything."
+    if Type == "Undead" and Dice() == 1: r = r + "\n - Incorporeal Movement \n\t The Undead  can move through other creatures and objects as if they were difficult terrain. It takes 5 (1d10) force damage if it ends its turn inside an object."
+    if Type == "Undead" and Dice() == 1: r += "\n - Stench.  \n\t Any creature that starts its turn within 5 feet of the undead must succeed on a DC 10 Constitution saving throw or be poisoned until the start of its next turn. On a successful saving throw, the creature is immune to the undead's Stench for 24 hours."
+    if Type == "Undead" and Dice() == 1: r += "\n - Shadow Stealth \n\t While in dim light or darkness, the Undead can take the Hide action as a bonus action. Its stealth bonus is also improved to +6."
+    if Type == "Undead" and Dice() == 1: r += "\n - Sunlight Weakness \n\t While in sunlight, the shadow has disadvantage on attack rolls, ability checks, and saving throws."
+    if Type == "Undead" and Dice() == 1: r += "\n - Sunlight Sensitivity  \n\t While in sunlight, the undead has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+    if Type == "Undead" and Dice() == 1: r = r + "\n- Incorporeal Movement: \n\t The undead can move through other creatures and objects as if they were difficult terrain. It takes 5 (1d10) force damage if it ends its turn inside an object."
     if Type == "Undead" and Dice() == 1: r = r + "\n- Life Drain"
-    if Type == "Undead" and Dice(2) == 1: r = r + "\n- Invisibility \n\t The Undead magically turns invisible until it attacks, or until its concentration ends (as if concentrating on a spell). Any equipment the undead wears or carries is invisible with it."
+    if Type == "Undead" and Dice(6) == 1: r = r + "\n- Invisibility \n\t The Undead magically turns invisible until it attacks, or until its concentration ends (as if concentrating on a spell). Any equipment the undead wears or carries is invisible with it."
+    elif Type == "Undead" and Dice(6) == 1: r = r + "\n- Invisibility \n\t The Undead is invisible."
     if Type == "Undead" and Dice() == 1: r = r + "\n- Telekinetic Thrust"
-    if Type == "Undead" and Dice() == 1: r = r + "\n- Blood Frenzy"
-    if Type == "Undead" and Dice() == 1: r += "\n- Charge. \n\t If the undead moves at least 10 feet straight toward a target and then hits it with a simple melee attack on the same turn, the target takes an extra 9 (2d8) piercing damage. If the target is a creature, it must succeed on a DC 14 Strength saving throw or be pushed up to 10 feet away and knocked prone."
     if Type == "Undead" and Dice() == 1: r = r + "\n - Turn Defiance \n\t The undead and any undeads within 30 feet of it have advantage on saving throws against effects that turn undead."
     if Type == "Undead" and Dice() == 1: r = r + "\n - Turn Immunity \n\t The Undead is immune to effects that turn undead."
-    if Type == "Undead" and Dice() == 1: r = r + "\n - Sunlight Sensitivity  \n\t While in sunlight, the undead has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
     if Type == "Undead" and Dice() == 1: r = r + "\n - Undead Fortitude. \n\t If damage reduces the Undead to 0 hit points, it must make a Constitution saving throw with a DC of 5 + the damage taken, unless the damage is radiant or from a critical hit. On a success, the Undead drops to 1 hit point instead."
-    if Type == "Undead" and Dice() == 1: r = r + "\n - Stench.  \n\t Any creature that starts its turn within 5 feet of the undead must succeed on a DC 10 Constitution saving throw or be poisoned until the start of its next turn. On a successful saving throw, the creature is immune to the undead's Stench for 24 hours."
+    if Type == "Undead" and Dice() == 1: r = r + "\n - Variable Illumination. \n\t IfThe undead sheds bright light in a 5 to 20-foot radius and dim light for an additional number of ft. equal to the chosen radius. The will-o'-wisp can alter the radius as a bonus action."
 
         
 
@@ -2450,38 +2433,34 @@ def Legendary(Type):
 def Lair(Type):
     r = ""
     
-    if Type == "Dragon":
-        if Dice() == 1:
-            r = r+ "\n- Chaotic Aura \n\t The dragon creates misdirecting currents of air and magic around itself. Until initiative count 20 on the next round, whenever a ranged attack roll misses the dragon, reroll the attack against a random creature within 30 feet of the dragon that doesn't have total cover against the attack."
+    if Type == "Dragon" and Dice() == 1:    r += "\n- Chaotic Aura \n\t The dragon creates misdirecting currents of air and magic around itself. Until initiative count 20 on the next round, whenever a ranged attack roll misses the dragon, reroll the attack against a random creature within 30 feet of the dragon that doesn't have total cover against the attack."
+    if Type == "Dragon" and Dice() == 1:    r = r+ "\n- Grasping Plants \n\t The dragon causes roots and vines to temporarily grow around it; until initiative count 20 on the next round, the ground within 20 feet of the dragon is difficult terrain."
 
-    if Type == "Fey":
-        if Dice() == 1:
-            r = r+ "\n- Chaotic Aura \n\t The Fey creates misdirecting currents of air and magic around itself. Until initiative count 20 on the next round, whenever a ranged attack roll misses the Fey, reroll the attack against a random creature within 30 feet of the fey that doesn't have total cover against the attack."
-            
-    if Type == "Dragon":
-        if Dice() == 1:
-            r = r+ "\n- Grasping Plants \n\t The dragon causes roots and vines to temporarily grow around it; until initiative count 20 on the next round, the ground within 20 feet of the dragon is difficult terrain."
+    if Type == "Fey" and Dice() == 1:   r = r+ "\n- Chaotic Aura \n\t The Fey creates misdirecting currents of air and magic around itself. Until initiative count 20 on the next round, whenever a ranged attack roll misses the Fey, reroll the attack against a random creature within 30 feet of the fey that doesn't have total cover against the attack."
+    if Type == "Fey" and Dice() == 1:   r = r+ "\n- Grasping Plants \n\t The fey causes roots and vines to temporarily grow around it; until initiative count 20 on the next round, the ground within 20 feet of the fey is difficult terrain."
+    if Type == "Fey" and Dice() == 1:   r = r+ "\n- Fey Walk \n\t Until initiative count 20 on the next round, the fey can pass through solid walls, doors, ceilings, and floors as if the surfaces weren't there."
+    if Type == "Fey" and Dice() == 1:   r = r+ "\n- The fey targets any number of doors and windows that they can see, causing each one to either open or close as they wish. Closed doors can be magically locked (requiring a successful DC 20 Strength check to force open) until they choose to make them unlocked, or until they use this lair action again to open them."
+    if Type == "Fey" and Dice() == 1:   r = r+ "\n- The fey fills up to four 10-foot cubes of water with ink. The inky areas are heavily obscured for 1 minute, although a steady, strong underwater current disperses the ink on initiative count 10. The fey ignores the obscuring effect of the ink."
+    if Type == "Fey" and Dice() == 1:   r = r+ "\n- The fey chooses one humanoid within the lair and instantly creates a simulacrum of that creature (as if created with the simulacrum spell). This hideous simulacrum is formed out of seaweed, slime, half-eaten fish, and other garbage, but still generally resembles the creature it is imitating. This simulacrum obeys the fey's commands and is destroyed on initiative count 20 on the next round."
 
-    if Type == "Fey":
-        if Dice() == 1:
-            r = r+ "\n- Grasping Plants \n\t The fey causes roots and vines to temporarily grow around it; until initiative count 20 on the next round, the ground within 20 feet of the fey is difficult terrain."
-            
-    if Type == "Plant":
-        if Dice() == 1:
-            r = r+ "\n- Grasping Plants \n\t The fey causes roots and vines to temporarily grow around it; until initiative count 20 on the next round, the ground within 20 feet of the fey is difficult terrain."
+    if Type == "Plant" and Dice() == 1: r = r+ "\n- Grasping Plants \n\t The fey causes roots and vines to temporarily grow around it; until initiative count 20 on the next round, the ground within 20 feet of the fey is difficult terrain."
+
     return r
     
     
 
 def Region(Type):
     r = ""
-    if Type == "Fey":
-        if Dice() == 1:
-            r += "\n- Compulsory Offering \n\t The first time a creature comes within 1 mile of the faerie dragon's lair, the creature must succeed on a DC 15 Wisdom saving throw or feel an overwhelming compulsion to leave an offering worth at least 5 gp stashed in an out-of-the-way place. The dragon immediately senses the location of this gift. A creature can be affected only once by this compulsion."
-            
-    if Type == "Fey":
-        if Dice() == 1:
-            r += "\n- Malleable Time \n\t Time is fluid within 1 mile of the fey's lair, flowing somewhere between half and twice its normal speed."
+    
+    if Type == "Fey" and Dice() == 1:   r += "\n- Compulsory Offering \n\t The first time a creature comes within 1 mile of the faerie dragon's lair, the creature must succeed on a DC 15 Wisdom saving throw or feel an overwhelming compulsion to leave an offering worth at least 5 gp stashed in an out-of-the-way place. The dragon immediately senses the location of this gift. A creature can be affected only once by this compulsion."
+    if Type == "Fey" and Dice() == 1:   r += "\n- Malleable Time \n\t Time is fluid within 1 mile of the fey's lair, flowing somewhere between half and twice its normal speed."
+    if Type == "Fey" and Dice() == 1:   r += "\n- Birds, rodents, snakes, spiders, or toads (or some other creatures appropriate to the hag) are found in great profusion."
+    if Type == "Fey" and Dice() == 1:   r += "\n- Beasts that have an Intelligence score of 2 or lower are charmed by the fey and directed to be aggressive toward intruders in the area."
+    if Type == "Fey" and Dice() == 1:   r += "\n- Strange carved figurines, twig fetishes, or rag dolls magically appear in trees."
+    if Type == "Fey" and Dice(8) == 1:  r += "\n- Most surfaces are covered by a thin film of slime, which is slick and sticks to anything that touches it."
+    if Type == "Fey" and Dice(8) == 1:  r += "\n- Currents and tides are exceptionally strong and treacherous. Any ability check made to safely navigate or control a vessel moving through these waters has disadvantage."
+    if Type == "Fey" and Dice(8) == 1:  r += "\n- Shores are littered with dead, rotting fish. The fey can sense when one of the fish is handled and cause it to speak with their voice."
+
     return r    
     
     
@@ -2643,7 +2622,8 @@ def PlotHook():
         "My torment drove away the person I love. I strive to win back the love I’ve lost.",
         "I have a child to protect. I must make the world a safer place for them.",
         "I am searching for spiritual enlightenment.",
-        "I am the caretaker of an ancient ruin or relic.",
+        "I am the caretaker of an ancient ruin.",
+        "I am the caretaker of an ancient relic.",
         "I have great insight into a great evil that only I can destroy.",
         "Should my discovery come to light, it could bring ruin to the world.",
         "I entered seclusion to hide from the ones who might still be hunting me. I must someday confront them.",
@@ -2760,7 +2740,7 @@ def Trait(background=""):
         "Once someone questions my courage, I never back down no matter how dangerous the situation.",
         "I'll say anything to avoid having to do extra work.",
         "I follow orders, even if I think they're wrong.",
-        "In a harbor town, I have a paramour whose eyes nearly stole me from the sea.",
+        "In a small town, I have a paramour whose eyes nearly stole me from my purpose.",
         "I'll always remember my first ship.",
         "The ship is most important – crewmates and captains come and go.",
         "I'm loyal to my captain first, everything else second.",
@@ -2778,7 +2758,7 @@ def Trait(background=""):
         "Mysteries of the Deep. You experienced an encounter with a possibly divine being while sailing alone. Work with your DM to determine the secret about the deep waters of the sea that this entity revealed to you.",
         "Low Places. You have contacts in the smuggling outfits along the coast; you occasionally repair the criminals' ships in exchange for coin and favors.",
         "Master of Armaments. You specialized in designing and mounting defenses for the navy. You easily recognize and determine the quality of such items.",
-        "Favored. You insisted on thicker planking for a merchant vessel's hull, which saved it from sinking when it smashed against a reef. You have a standing invitation to visit the merchant's distant mansion.",
+        "Favored. Gav e a great advice to a merchant, which saved it from ruin. You have a standing invitation to visit the merchant's distant mansion.",
         "Solid and Sound. You patched up a war galley and prevented it from sinking. The local navy regards you as a friend.",
         "Though I act charming, I feel nothing for others and don't know what friendship is.",
         "Few people know the real me.",
@@ -3589,10 +3569,10 @@ def NPC():
     if rc == "Elemental":
         CON += Dice(6)
         WIS += Dice(6)
-    if rc == "Fiend": CHA += Dice(12)
-    if rc == "Genasi":
-        CON += Dice(6)
-        WIS += Dice(6)
+    if rc == "Fiend": 
+        CON += Dice(4)
+        INT += Dice(4)
+        CHA += Dice(4)
     if rc == "Gnome":
         DEX += Dice(4)
         INT += Dice(4)
@@ -3639,11 +3619,6 @@ def NPC():
         DEX += Dice(4)
         CON += Dice(4)
         INT += Dice(4)
-    if rc == "Tiefling":
-        CON += Dice(3)
-        INT += Dice(3)
-        WIS += Dice(3)
-        CHA += Dice(3)
     if rc == "Undead":
         STR += Dice(4)
         CON += Dice(4)
@@ -3698,7 +3673,7 @@ def NPC():
     if Dice() <= Modifier(CHA): print("\tPersuasion:+",Proficiency(CHA), end=" ")
     print("\n")
     
-    print("Passive Perception:", 10 + Modifier(WIS) + Modifier(Lvl/2) )
+    print("Passive Perception:", 10 + Modifier(WIS) + Modifier(Lvl) )
     
     print("\n")
     print("Languages: ", Language(rc,bg))
@@ -3728,6 +3703,8 @@ def NPC():
         print(Legendary(rc))
 
         print("\nLAIR ACTIONS:")
+        print("Unless otherwise noted, any lair action that to make a saving throw uses the spellsave DC." + "\n On initiative count 20 (losing initiative ties), the creature can take a lair action to cause one of the following effects, but can't use the same effect two rounds in a row:"
+)
         print(Lair(bg))
         print(Lair(rc))
 
