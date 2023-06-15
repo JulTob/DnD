@@ -4341,7 +4341,7 @@ def NPC():
     if Dice(10) == 1 or bg == "Berserker":
         AC += Modifier(CON)
 
-    print(Title())
+    print("# " + Title())
     print("-", al, "- ", random.choice(["♀", "♂", "⚥", "⚬", "?", ""]))
     print(bg)
     print(rc)
@@ -4393,7 +4393,7 @@ def NPC():
     print("\n")
     print("Languages: ", Language(rc, bg))
     print("\n")
-    print("COMBAT ACTIONS:")
+    print("## " +"COMBAT ACTIONS:")
     print("\tTo hit: +", Modifier(max(STR, DEX) + Lvl/5))
     print("\n- SIMPLE ATTACKS:")
     print(Attack("Melee"))
