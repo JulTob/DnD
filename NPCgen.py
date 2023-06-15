@@ -789,23 +789,23 @@ def UndeadName():
     return random.choice(Names)
     
 def Name(Type):
-    if Type == "Aberration": return AberrationName()
-    if Type == "Aven": return AvenName()
-    if Type == "Beast": return BeastName()
-    if Type == "Beastfolk": return BeastfolkName()
-    if Type == "Celestial": return CelestialName()
-    if Type == "Construct": return ConstructName()
-    if Type == "Dragon": return DragonName()
-    if Type == "Elemental": return ElementalName()
-    if Type == "Fey": return FeyName()
-    if Type == "Fiend": return FiendName()
-    if Type == "Giant": return GiantName()
-    if Type == "Goblin": return GoblinName()
-    if Type == "Monstrosity": return MonstrosityName()
-    if Type == "Orc": return OrcName()
-    if Type == "Ooze": return OozeName()
-    if Type == "Plant": return PlantName()
-    if Type == "Undead": return UndeadName()
+    if Type == "Aberration":    return AberrationName()
+    if Type == "Aven":          return AvenName()
+    if Type == "Beast":         return BeastName()
+    if Type == "Beastfolk":     return BeastfolkName()
+    if Type == "Celestial":     return CelestialName()
+    if Type == "Construct":     return ConstructName()
+    if Type == "Dragon":        return DragonName()
+    if Type == "Elemental":     return ElementalName()
+    if Type == "Fey":           return FeyName()
+    if Type == "Fiend":         return FiendName()
+    if Type == "Giant":         return GiantName()
+    if Type == "Goblin":        return GoblinName()
+    if Type == "Monstrosity":   return MonstrosityName()
+    if Type == "Orc":           return OrcName()
+    if Type == "Ooze":          return OozeName()
+    if Type == "Plant":         return PlantName()
+    if Type == "Undead":        return UndeadName()
     Names = [
         ""]
     return random.choice(Names)
@@ -1843,9 +1843,9 @@ def Actions(Type=""):
     r = ""
 
 
-    if Type == "Aberration" and Dice() == 1: r += "\n- Blinding Spittle (Recharge 5–6). \n\t The Aberration spits a chemical glob at a point it can see within 15 feet of it. The glob explodes in a blinding flash of light on impact. Each creature within 5 feet of the flash must succeed on a DC 13 Dexterity saving throw or be blinded until the end of the aberration's next turn."
-    if Type == "Aberration" and Dice(7) == 1: r += "\n- Aberrant Ground. \n\t  The ground in a 10-foot radius around the Aberration is doughlike difficult terrain. Each creature that starts its turn in that area must succeed on a DC 10 Strength saving throw or have its speed reduced to 0 until the start of its next turn.  "
-    if Type == "Aberration" and Dice() == 1: r += "\n- Spell Reflection. \n\t  If the Aberration makes a successful saving throw against a spell, or a spell attack misses it, the aberration can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of the aberration. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature. "
+    if Type == "Aberration" and Dice() == 1:    r += "\n- Blinding Spittle (Recharge 5–6). \n\t The Aberration spits a chemical glob at a point it can see within 15 feet of it. The glob explodes in a blinding flash of light on impact. Each creature within 5 feet of the flash must succeed on a DC 13 Dexterity saving throw or be blinded until the end of the aberration's next turn."
+    if Type == "Aberration" and Dice(7) == 1:   r += "\n- Aberrant Ground. \n\t  The ground in a 10-foot radius around the Aberration is doughlike difficult terrain. Each creature that starts its turn in that area must succeed on a DC 10 Strength saving throw or have its speed reduced to 0 until the start of its next turn.  "
+    if Type == "Aberration" and Dice() == 1:    r += "\n- Spell Reflection. \n\t  If the Aberration makes a successful saving throw against a spell, or a spell attack misses it, the aberration can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of the aberration. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature. "
 
     if Type == "Aberration" and Dice()==1: r += "\n- Damage Resistances:  \t bludgeoning, piercing, and slashing from nonmagical attacks"
     if Type == "Aberration" and Dice()==1: r += "\n- Damage Resistances:  \t acid"
@@ -3727,12 +3727,13 @@ def NPC():
         "CHA:", CHA," \t",  Modifier(CHA),"\n\t")
  
     print("Saving Throws:")
-    if Dice(3) == 1: print("Str:+",Modifier(STR) + int(Lvl/5), end=" ")
-    if Dice(3) == 1: print("Dex:+",Modifier(DEX)+ int(Lvl/5), end=" ")
-    if Dice(3) == 1: print("Con:+",Modifier(CON)+ int(Lvl/5), end=" ")
-    if Dice(3) == 1: print("Int:+",Modifier(INT)+ int(Lvl/5), end=" ")
-    if Dice(3) == 1: print("Wis:+",Modifier(WIS)+ int(Lvl/5), end=" ")
-    if Dice(3) == 1: print("Cha:+",Modifier(CHA)+ int(Lvl/5), end=" ")
+    print("\t", end="")
+    if Dice(3) == 1: print("Str:+",Modifier(STR) + int(Lvl/5), end="\t")
+    if Dice(3) == 1: print("Dex:+",Modifier(DEX)+ int(Lvl/5), end="\t")
+    if Dice(3) == 1: print("Con:+",Modifier(CON)+ int(Lvl/5), end="\t")
+    if Dice(3) == 1: print("Int:+",Modifier(INT)+ int(Lvl/5), end="\t")
+    if Dice(3) == 1: print("Wis:+",Modifier(WIS)+ int(Lvl/5), end="\t")
+    if Dice(3) == 1: print("Cha:+",Modifier(CHA)+ int(Lvl/5), end="\t")
     print("\n")
    
     print("Skills:")
@@ -3763,10 +3764,10 @@ def NPC():
     print("\n")
     print("COMBAT ACTIONS:")
     print("\tTo hit: +", Modifier(max(STR,DEX)+ Lvl/5))
-    print("\n\t- Simple Attacks:")
+    print("\n- SIMPLE ATTACKS:")
     print (Attack("Melee"))
     print (Attack(Dice(4)))
-    print("\n\t- Special Attack: {} Charges/Combat".format(Dice( 1 + int(Lvl/2))))
+    print("\n- SPECIAL ATTACK: {} Charges/Combat".format(Dice( 1 + int(Lvl/2))))
     print (SpecialAttack(Lvl, Modifier(random.choice([STR,DEX,CON,INT,WIS,CHA ]))))
 
     print("\n\n")
