@@ -1678,12 +1678,9 @@ def Magic(Lvl, race=Race(), background=Background()):
             second += "\n- Spiritual Weapon"
             slots2 += Dice(3)
 
-        if background == "Druid" and not ("Druidcraft" in cantrip):
-            cantrip += "\n- Druidcraft."
-        if background == "Druid" and Dice() == 1 and not ("Produce Flame" in cantrip):
-            cantrip += "\n- Produce Flame."
-        if background == "Druid" and Dice() == 1 and not ("Shillelagh" in cantrip):
-            cantrip += "\n- Shillelagh."
+        if background == "Druid" and not ("Druidcraft" in cantrip):                     cantrip += "\n- Druidcraft."
+        if background == "Druid" and Dice() == 1 and not ("Produce Flame" in cantrip):  cantrip += "\n- Produce Flame."
+        if background == "Druid" and Dice() == 1 and not ("Shillelagh" in cantrip):     cantrip += "\n- Shillelagh."
         if background == "Druid" and Dice() == 1 and not ("Entangle" in first):
             first += "\n- Entangle"
             slots1 += Dice(4)
@@ -1995,57 +1992,31 @@ def Magic(Lvl, race=Race(), background=Background()):
         if race == "Elf" and Dice() == 1 and not ("Faerie fire" in one):
             one += "\n- Faerie fire"
 
-        if race == "Fey" and Dice() == 1 and not ("Ethereal Jaunt" in cantrip):
-            cantrip += "\n- Ethereal Jaunt \n\t As a bonus action, the fey can magically shift from the Material Plane to the Ethereal Plane, or vice versa."
-        if race == "Fey" and Dice() == 1 and not ("Teleport" in cantrip):
-            cantrip += "\n- Teleport (Recharge 4–6). \n\t The Fey magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the Fey can make one bite attack."
-        if race == "Fey" and Dice() == 1 and not ("Druidcraft" in cantrip):
-            cantrip += "\n- Druidcraft"
-        if race == "Fey" and Dice() == 1 and not ("Heart Sight" in cantrip):
-            cantrip += "\n- Heart Sight. \n\t The Fey touches a creature and magically knows the creature's current emotional state. If the target fails a DC [10+%Cha] Charisma saving throw, the Fey also knows the creature's alignment. Celestials, fiends, and undead automatically fail the saving throw."
-        if race == "Fey" and Dice() == 1 and not ("Invisibility" in cantrip):
-            cantrip += "\n- Invisibility. \n\t The Fey  magically turns invisible until it attacks or casts a spell, or until its concentration ends (as if concentrating on a spell). Any equipment the Fey wears or carries is invisible with it."
-        if race == "Fey" and Dice(3) == 1 and not ("Druidcraft" in cantrip):
-            cantrip += "\n- Druidcraft"
-        if race == "Fey" and Dice(3) == 1 and not ("Dancing Lights" in cantrip):
-            cantrip += "\n- Dancing Lights"
-        if race == "Fey" and Dice(3) == 1 and not ("Minor Illusion" in cantrip):
-            cantrip += "\n- Minor Illusion"
-        if race == "Fey" and Dice(3) == 1 and not ("Vicious Mockery" in cantrip):
-            cantrip += "\n- Vicious Mockery"
+        if race == "Fey" and Dice(8) == 1 and not ("Ethereal Jaunt" in cantrip):    cantrip += "\n- Ethereal Jaunt \n\t As a bonus action, the fey can magically shift from the Material Plane to the Ethereal Plane, or vice versa."
+        if race == "Fey" and Dice(8) == 1 and not ("Teleport" in cantrip):          cantrip += "\n- Teleport (Recharge 4–6). \n\t The Fey magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the Fey can make one bite attack."
+        if race == "Fey" and Dice(8) == 1 and not ("Heart Sight" in cantrip):       cantrip += "\n- Heart Sight. \n\t The Fey touches a creature and magically knows the creature's current emotional state. If the target fails a DC [10+%Cha] Charisma saving throw, the Fey also knows the creature's alignment. Celestials, fiends, and undead automatically fail the saving throw."
+        if race == "Fey" and Dice(8) == 1 and not ("Invisibility" in cantrip):      cantrip += "\n- Invisibility. \n\t The Fey  magically turns invisible until it attacks or casts a spell, or until its concentration ends (as if concentrating on a spell). Any equipment the Fey wears or carries is invisible with it."
+        if race == "Fey" and Dice(4) == 1 and not ("Druidcraft" in cantrip):        cantrip += "\n- Druidcraft"
+        if race == "Fey" and Dice(4) == 1 and not ("Dancing Lights" in cantrip):    cantrip += "\n- Dancing Lights"
+        if race == "Fey" and Dice(4) == 1 and not ("Minor Illusion" in cantrip):    cantrip += "\n- Minor Illusion"
+        if race == "Fey" and Dice(4) == 1 and not ("Vicious Mockery" in cantrip):   cantrip += "\n- Vicious Mockery"
 
-        if race == "Fey" and Dice() == 1 and not ("Barkskin" in one):
-            one += "\n- Barkskin"
-        if race == "Fey" and Dice() == 1 and not ("Pass Without Trace" in one):
-            one += "\n- Pass Without Trace"
-        if race == "Fey" and Dice() == 1 and not ("Shillelagh" in one):
-            one += "\n- Shillelagh"
-        if race == "Fey" and Dice() == 1 and not ("Confusion" in one):
-            one += "\n- Confusion"
-        if race == "Fey" and Dice() == 1 and not ("Dancing lights" in one):
-            one += "\n- Dancing lights"
-        if race == "Fey" and Dice() == 1 and not ("Detect Evil and Good" in one):
-            one += "\n- Detect Evil and Good"
-        if race == "Fey" and Dice() == 1 and not ("Detect Thoughts" in one):
-            one += "\n- Detect Thoughts"
-        if race == "Fey" and Dice() == 1 and not ("Dispel Magic" in one):
-            one += "\n- Dispel Magic"
-        if race == "Fey" and Dice() == 1 and not ("Entangle" in one):
-            one += "\n- Entangle"
-        if race == "Fey" and Dice() == 1 and not ("Fly" in one):
-            one += "\n - Fly: 30 ft"
-        if race == "Fey" and Dice() == 1 and not ("Phantasmal Force" in one):
-            one += "\n - Phantasmal Force"
-        if race == "Fey" and Dice() == 1 and not ("Polymorph" in one):
-            one += "\n Polymorph"
-        if race == "Fey" and Dice() == 1 and not ("Sleep" in one):
-            one += "\n- Sleep"
-        if race == "Fey" and Dice() == 1 and not ("Charming Melody" in one):
-            one += "\n- Charming Melody [DC 10+%Cha Wisdom saving throw]\n\t The creature is charmed by the Fey for 1 minute. If the Fey or any of its companions harms the creature, the effect on it ends immediately."
-        if race == "Fey" and Dice() == 1 and not ("Frightening Strain" in one):
-            one += "\n- Frightening Strain [DC 10+%Cha Wisdom saving throw] \n\t The creature is charmed by the Fey for 1 minute. If the Fey or any of its companions harms the creature, the effect on it ends immediately."
-        if race == "Fey" and Dice() == 1 and not ("Gentle Lullaby" in one):
-            one += "\n- Gentle Lullaby [DC 10+%Cha Wisdom saving throw] \n\t The creature falls asleep and is unconscious for 1 minute. The effect ends if the creature takes damage or if someone takes an action to shake the creature awake."
+        if race == "Fey" and Dice() == 1 and not ("Barkskin" in one):               one += "\n- Barkskin"
+        if race == "Fey" and Dice() == 1 and not ("Pass Without Trace" in one):     one += "\n- Pass Without Trace"
+        if race == "Fey" and Dice() == 1 and not ("Shillelagh" in one):             one += "\n- Shillelagh"
+        if race == "Fey" and Dice() == 1 and not ("Confusion" in one):              one += "\n- Confusion"
+        if race == "Fey" and Dice() == 1 and not ("Dancing lights" in one):         one += "\n- Dancing lights"
+        if race == "Fey" and Dice() == 1 and not ("Detect Evil and Good" in one):   one += "\n- Detect Evil and Good"
+        if race == "Fey" and Dice() == 1 and not ("Detect Thoughts" in one):        one += "\n- Detect Thoughts"
+        if race == "Fey" and Dice() == 1 and not ("Dispel Magic" in one):           one += "\n- Dispel Magic"
+        if race == "Fey" and Dice() == 1 and not ("Entangle" in one):               one += "\n- Entangle"
+        if race == "Fey" and Dice() == 1 and not ("Fly" in one):                    one += "\n- Fly: 30 ft"
+        if race == "Fey" and Dice() == 1 and not ("Phantasmal Force" in one):       one += "\n- Phantasmal Force"
+        if race == "Fey" and Dice() == 1 and not ("Polymorph" in one):              one += "\n- Polymorph"
+        if race == "Fey" and Dice() == 1 and not ("Sleep" in one):                  one += "\n- Sleep"
+        if race == "Fey" and Dice(8) == 1 and not ("Charming Melody" in one):       one += "\n- Charming Melody [DC 10+%Cha Wisdom saving throw]\n\t The creature is charmed by the Fey for 1 minute. If the Fey or any of its companions harms the creature, the effect on it ends immediately."
+        if race == "Fey" and Dice() == 1 and not ("Frightening Strain" in one):     one += "\n- Frightening Strain [DC 10+%Cha Wisdom saving throw] \n\t The creature is charmed by the Fey for 1 minute. If the Fey or any of its companions harms the creature, the effect on it ends immediately."
+        if race == "Fey" and Dice() == 1 and not ("Gentle Lullaby" in one):         one += "\n- Gentle Lullaby [DC 10+%Cha Wisdom saving throw] \n\t The creature falls asleep and is unconscious for 1 minute. The effect ends if the creature takes damage or if someone takes an action to shake the creature awake."
 
         if race == "Fey" and Dice() == 1 and not ("Entangle" in three):
             three += "\n- Entangle"
@@ -3413,8 +3384,8 @@ def PlotHook():
         "I have to make a very difficult choice",
         "I serve an unethical and corrupt organization.",
         "I would die to recover an ancient relic of my faith that was lost long ago.",
-        "They will someday get revenge on the corrupt temple hierarchy who branded them a heretic.",
-        "They owe their life to the priest who took them in when their parents died.",
+        "I will someday get revenge on the corrupt temple hierarchy who branded me a heretic.",
+        "I owe my life to the priest who took me in when my parents died.",
         "Everything I do is for the common people.",
         "I will do anything to protect the holy site where I serve.",
         "I seek to preserve a sacred text that my enemies consider heretical and seek to destroy.",
@@ -3429,10 +3400,10 @@ def PlotHook():
         "I will be the best for the honor and glory of my home.",
         "A proud noble once gave me a horrible beating, and I will take my revenge on any bully I encounter.",
         "The tyrant who rules my land will stop at nothing to see me killed.",
-        "Your kind has a history of practicing the dark arts. You dabbled once and felt something horrible clutch at your soul, whereupon you fled in terror.",
-        "An apparition that has haunted your family for generations now haunts you. You don’t know what it wants, and it won’t leave you alone.",
-        "An oni took your sibling one cold, dark night, and you were unable to stop it.",
-        "You were cursed with lycanthropy. You are now haunted by the innocents you slaughtered.",
+        "My kind has a history of practicing the dark arts. I dabbled once and felt something horrible clutch at my soul, whereupon I fled in terror.",
+        "An apparition that has haunted my family for generations now haunts me. I don’t know what it wants, and it won’t leave me alone.",
+        "An oni took my sibling one cold, dark night, and I was unable to stop it.",
+        "I was cursed with lycanthropy. I am now haunted by the innocents I slaughtered.",
         "My torment drove away the person I love. I strive to win back the love I’ve lost.",
         "I have a child to protect. I must make the world a safer place for them.",
         "I am searching for spiritual enlightenment.",
@@ -4455,42 +4426,24 @@ def NPC():
     print("\n")
 
     print("Skills:")
-    if Dice() <= Modifier(STR):
-        print("\tAthletics:+", Proficiency(STR), end=" ")
-    if Dice() <= Modifier(DEX):
-        print("\tAcrobatics:+", Proficiency(DEX), end=" ")
-    if Dice() <= Modifier(DEX):
-        print("\tSleight of Hand:+", Proficiency(DEX), end=" ")
-    if Dice() <= Modifier(DEX):
-        print("\tStealth:+", Proficiency(DEX), end=" ")
-    if Dice() <= Modifier(INT):
-        print("\tArcana:+", Proficiency(INT), end=" ")
-    if Dice() <= Modifier(INT):
-        print("\tHistory:+", Proficiency(INT), end=" ")
-    if Dice() <= Modifier(INT):
-        print("\tInvestigation:+", Proficiency(INT), end=" ")
-    if Dice() <= Modifier(INT):
-        print("\tNature:+", Proficiency(INT), end=" ")
-    if Dice() <= Modifier(INT):
-        print("\tReligion:+", Proficiency(INT), end=" ")
-    if Dice() <= Modifier(WIS):
-        print("\tAnimal Handling:+", Proficiency(WIS), end=" ")
-    if Dice() <= Modifier(WIS):
-        print("\tInsight:+", Proficiency(WIS), end=" ")
-    if Dice() <= Modifier(WIS):
-        print("\tMedicine:+", Proficiency(WIS), end=" ")
-    if Dice() <= Modifier(WIS):
-        print("\tPerception:+", Proficiency(WIS), end=" ")
-    if Dice() <= Modifier(WIS):
-        print("\tSurvival:+", Proficiency(WIS), end=" ")
-    if Dice() <= Modifier(CHA):
-        print("\tDeception:+", Proficiency(CHA), end=" ")
-    if Dice() <= Modifier(CHA):
-        print("\tIntimidation:+", Proficiency(CHA), end=" ")
-    if Dice() <= Modifier(CHA):
-        print("\tPerformance:+", Proficiency(CHA), end=" ")
-    if Dice() <= Modifier(CHA):
-        print("\tPersuasion:+", Proficiency(CHA), end=" ")
+    if Dice() <= Modifier(STR): print("\tAthletics:+", Proficiency(STR), end=" ")
+    if Dice() <= Modifier(DEX): print("\tAcrobatics:+", Proficiency(DEX), end=" ")
+    if Dice() <= Modifier(DEX): print("\tSleight of Hand:+", Proficiency(DEX), end=" ")
+    if Dice() <= Modifier(DEX): print("\tStealth:+", Proficiency(DEX), end=" ")
+    if Dice() <= Modifier(INT): print("\tArcana:+", Proficiency(INT), end=" ")
+    if Dice() <= Modifier(INT): print("\tHistory:+", Proficiency(INT), end=" ")
+    if Dice() <= Modifier(INT): print("\tInvestigation:+", Proficiency(INT), end=" ")
+    if Dice() <= Modifier(INT): print("\tNature:+", Proficiency(INT), end=" ")
+    if Dice() <= Modifier(INT): print("\tReligion:+", Proficiency(INT), end=" ")
+    if Dice() <= Modifier(WIS): print("\tAnimal Handling:+", Proficiency(WIS), end=" ")
+    if Dice() <= Modifier(WIS): print("\tInsight:+", Proficiency(WIS), end=" ")
+    if Dice() <= Modifier(WIS): print("\tMedicine:+", Proficiency(WIS), end=" ")
+    if Dice() <= Modifier(WIS): print("\tPerception:+", Proficiency(WIS), end=" ")
+    if Dice() <= Modifier(WIS): print("\tSurvival:+", Proficiency(WIS), end=" ")
+    if Dice() <= Modifier(CHA): print("\tDeception:+", Proficiency(CHA), end=" ")
+    if Dice() <= Modifier(CHA): print("\tIntimidation:+", Proficiency(CHA), end=" ")
+    if Dice() <= Modifier(CHA): print("\tPerformance:+", Proficiency(CHA), end=" ")
+    if Dice() <= Modifier(CHA): print("\tPersuasion:+", Proficiency(CHA), end=" ")
     print("\n")
 
     print("Passive Perception:", 10 + Modifier(WIS) + Modifier(Lvl))
