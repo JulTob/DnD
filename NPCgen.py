@@ -4446,18 +4446,12 @@ def NPC():
 
     print("Saving Throws:")
     print("\t", end="")
-    if Dice(3) == 1:
-        print("Str:+", Modifier(STR) + int(Lvl/5), end="\t")
-    if Dice(3) == 1:
-        print("Dex:+", Modifier(DEX) + int(Lvl/5), end="\t")
-    if Dice(3) == 1:
-        print("Con:+", Modifier(CON) + int(Lvl/5), end="\t")
-    if Dice(3) == 1:
-        print("Int:+", Modifier(INT) + int(Lvl/5), end="\t")
-    if Dice(3) == 1:
-        print("Wis:+", Modifier(WIS) + int(Lvl/5), end="\t")
-    if Dice(3) == 1:
-        print("Cha:+", Modifier(CHA) + int(Lvl/5), end="\t")
+    if Dice(3) == 1:    print("Str:+", Modifier(STR) + int(Lvl/5), end="\t")
+    if Dice(3) == 1:    print("Dex:+", Modifier(DEX) + int(Lvl/5), end="\t")
+    if Dice(3) == 1:    print("Con:+", Modifier(CON) + int(Lvl/5), end="\t")
+    if Dice(3) == 1:    print("Int:+", Modifier(INT) + int(Lvl/5), end="\t")
+    if Dice(3) == 1:    print("Wis:+", Modifier(WIS) + int(Lvl/5), end="\t")
+    if Dice(3) == 1:    print("Cha:+", Modifier(CHA) + int(Lvl/5), end="\t")
     print("\n")
 
     print("Skills:")
