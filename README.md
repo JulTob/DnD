@@ -1,6 +1,7 @@
 
 # D&D
-D&D Tools For DM
+
+Set of D&D Tools For DM
 
 I'm looking forward to make it updated for D&D One. But I'll update from known rules and such as they come out.
 
