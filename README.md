@@ -1,4 +1,4 @@
-theme: time-machine
+theme: merlot
 
 # D&D
 D&D Tools For DM
