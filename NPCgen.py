@@ -812,7 +812,9 @@ def Name(Type):
 
 
 def Dice(D=6):
-    roll = random.randint(1, D)
+    
+    if D >= 1: roll = random.randint(1, D)
+    else: roll = random.randint(D, 1)
     return roll
 
 
@@ -825,10 +827,8 @@ def AbilityScore():
 
 
 def Modifier(AS):
-    if AS >= 10:
-        return int((AS-10)/2)
-    else:
-        return int((AS-11)/2)
+    if AS >= 10:    return int((AS-10)/2)
+    else:           return int((AS-11)/2)
 
 
 def Proficiency(AS):
@@ -980,70 +980,40 @@ def Condition(dmg):
 
 
 def SavingThrow(dmg):
-    if dmg == "Slashing":
-        st = random.choice(["STR", "DEX"])
-    elif dmg == "Piercing":
-        st = random.choice(["STR", "DEX", "CON"])
-    elif dmg == "Bludgeoning":
-        st = random.choice(["STR", "DEX", "CON"])
-    elif dmg == "Poison":
-        st = "CON"
-    elif dmg == "Acid":
-        st = random.choice(["STR", "DEX", "CON"])
-    elif dmg == "Fire":
-        st = random.choice(["STR", "DEX", "CON", "CHA"])
-    elif dmg == "Cold":
-        st = random.choice(["STR", "DEX", "CON"])
-    elif dmg == "Radiant":
-        st = random.choice(["DEX", "CON", "WIS", "CHA"])
-    elif dmg == "Necrotic":
-        st = random.choice(["STR", "CON", "WIS", "CHA"])
-    elif dmg == "Lightning":
-        st = random.choice(["DEX", "CON", "WIS", "INT"])
-    elif dmg == "Force":
-        st = random.choice(["STR", "CON", "CHA"])
-    elif dmg == "Psychic":
-        st = random.choice(["INT", "WIS", "CHA"])
-    elif dmg == "Thunder":
-        st = random.choice(["STR", "DEX", "CON"])
-    else:
-        st = "DEX"
+    if dmg == "Slashing":       st = random.choice(["STR", "DEX"])
+    elif dmg == "Piercing":     st = random.choice(["STR", "DEX", "CON"])
+    elif dmg == "Bludgeoning":  st = random.choice(["STR", "DEX", "CON"])
+    elif dmg == "Poison":       st = "CON"
+    elif dmg == "Acid":         st = random.choice(["STR", "DEX", "CON"])
+    elif dmg == "Fire":         st = random.choice(["STR", "DEX", "CON", "CHA"])
+    elif dmg == "Cold":         st = random.choice(["STR", "DEX", "CON"])
+    elif dmg == "Radiant":      st = random.choice(["DEX", "CON", "WIS", "CHA"])
+    elif dmg == "Necrotic":     st = random.choice(["STR", "CON", "WIS", "CHA"])
+    elif dmg == "Lightning":    st = random.choice(["DEX", "CON", "WIS", "INT"])
+    elif dmg == "Force":        st = random.choice(["STR", "CON", "CHA"])
+    elif dmg == "Psychic":      st = random.choice(["INT", "WIS", "CHA"])
+    elif dmg == "Thunder":      st = random.choice(["STR", "DEX", "CON"])
+    else:                       st = "DEX"
     return st
 
 
 def Recovery(con):
-    if con == "Unconscious":
-        st = random.choice(["CON", "INT", "WIS", "CHA"])
-    elif con == "Stunned":
-        st = random.choice(["CON", "INT", "WIS", "CHA"])
-    elif con == "Restrained":
-        st = random.choice(["STR", "DEX", "CON"])
-    elif con == "Poisoned":
-        st = random.choice(["CON", "WIS"])
-    elif con == "Prone":
-        st = random.choice(["STR", "DEX", "CON"])
-    elif con == "Petrified":
-        st = random.choice(["STR", "CON", "INT", "WIS", "CHA"])
-    elif con == "Paralyzed":
-        st = random.choice(["STR", "CON", "WIS", "CHA"])
-    elif con == "Invisible":
-        st = random.choice(["CON", "INT", "WIS", "CHA"])
-    elif con == "Incapacitated":
-        st = random.choice(["STR", "CON", "WIS", "CHA"])
-    elif con == "Grappled":
-        st = random.choice(["STR", "DEX"])
-    elif con == "Blinded":
-        st = random.choice(["CON", "INT", "WIS", "CHA"])
-    elif con == "Frightened":
-        st = random.choice(["CON", "INT", "WIS", "CHA"])
-    elif con == "Exhaustion":
-        st = random.choice(["STR", "CON", "CHA"])
-    elif con == "Deafened":
-        st = random.choice(["STR", "CON", "WIS"])
-    elif con == "Charmed":
-        st = random.choice(["CHA", "WIS"])
-    else:
-        st = "CON"
+    if con == "Unconscious":    st = random.choice(["CON", "INT", "WIS", "CHA"])
+    elif con == "Stunned":      st = random.choice(["CON", "INT", "WIS", "CHA"])
+    elif con == "Restrained":   st = random.choice(["STR", "DEX", "CON"])
+    elif con == "Poisoned":     st = random.choice(["CON", "WIS"])
+    elif con == "Prone":        st = random.choice(["STR", "DEX", "CON"])
+    elif con == "Petrified":    st = random.choice(["STR", "CON", "INT", "WIS", "CHA"])
+    elif con == "Paralyzed":    st = random.choice(["STR", "CON", "WIS", "CHA"])
+    elif con == "Invisible":    st = random.choice(["CON", "INT", "WIS", "CHA"])
+    elif con == "Incapacitated":st = random.choice(["STR", "CON", "WIS", "CHA"])
+    elif con == "Grappled":     st = random.choice(["STR", "DEX"])
+    elif con == "Blinded":      st = random.choice(["CON", "INT", "WIS", "CHA"])
+    elif con == "Frightened":   st = random.choice(["CON", "INT", "WIS", "CHA"])
+    elif con == "Exhaustion":   st = random.choice(["STR", "CON", "CHA"])
+    elif con == "Deafened":     st = random.choice(["STR", "CON", "WIS"])
+    elif con == "Charmed":      st = random.choice(["CHA", "WIS"])
+    else:                       st = "CON"
     return st
 
 
