@@ -4322,7 +4322,7 @@ def NPC():
         CON += Dice(4)
         CHA += Dice(4)
 
-    AC = 10 + Modifier(DEX) + Modifier(Dice(Lvl+8))
+    AC = 10 + Modifier(DEX) + Modifier(Dice(Lvl))
     if Dice(10) == 1 or bg == "Monk":       AC += Modifier(WIS)
     if Dice(10) == 1 or bg == "Berserker":  AC += Modifier(CON)
 
