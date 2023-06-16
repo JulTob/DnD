@@ -73,6 +73,7 @@ def Title():
         "The Errant",
         "The Fleshwork",
         "The Fire",
+        "The First",
         "The Fool",
         "The Forest",
         "The Fullmetal",
@@ -108,6 +109,8 @@ def Title():
         "The Jewel",
         "The Kraken",
         "The Killer",
+        "The King's",
+        "The King of",
         "The Last",
         "The Lady",
         "The Life",
@@ -149,6 +152,8 @@ def Title():
         "The Punk",
         "The Purifying",
         "The Protector",
+        "The Queen's",
+        "The Queen of",
         "The Rat",
         "The Rainstorm",
         "The Red",
@@ -160,6 +165,8 @@ def Title():
         "The Sand",
         "The Science",
         "The Shadow",
+        "The Second",
+        "The Seventh",
         "The Silver",
         "The Skelleton",
         "The Smiling",
@@ -178,6 +185,7 @@ def Title():
         "The Solar",
         "The Summer",
         "The Tender",
+        "The Third",
         "The Thunder",
         "The Tiger",
         "The True",
@@ -266,7 +274,7 @@ def Title():
         "Enforcer",
         "Elite",
         "Elk",
-        "Elemental",
+        "Element",
         "Farmer",
         "Fanatic",
         " Fire",
@@ -2724,102 +2732,55 @@ def Actions(Type=""):
 
     if Type == "Ooze" and Dice() == 1:
         r = r + "\n- Corrode Material: Any nonmagical weapon made of the material that hits the ooze corrodes. After dealing damage, the weapon takes a permanent and cumulative −1 penalty to damage rolls. If its penalty drops to −5, the weapon is destroyed. Nonmagical ammunition made of the material that hits the ooze is destroyed after dealing damage. The ooze can eat through 2-inch-thick, nonmagical material in 1 round. On a hit from the Ooze, if the target is wearing nonmagical armor of the material, its armor is partly corroded and takes a permanent and cumulative −1 penalty to the AC it offers. The armor is destroyed if the penalty reduces its AC to 10."
-        if Dice() == 1:
-            r = r + "\n\t Wood"
-        if Dice() == 1:
-            r = r + "\n\t Metal"
-        if Dice() == 1:
-            r = r + "\n\t Meat & Leather"
-        if Dice() == 1:
-            r = r + "\n\t Iron"
-        if Dice() == 1:
-            r = r + "\n\t Gold"
-        if Dice() == 1:
-            r = r + "\n\t Silver"
+        if Dice() == 1: r = r + "\n\t Wood"
+        if Dice() == 1: r = r + "\n\t Metal"
+        if Dice() == 1: r = r + "\n\t Meat & Leather"
+        if Dice() == 1: r = r + "\n\t Iron"
+        if Dice() == 1: r = r + "\n\t Gold"
+        if Dice() == 1: r = r + "\n\t Silver"
 
     if Type == "Ooze" and Dice() == 1:
-        r = r + \
-            "\n- Split: Under the effect of certain damage types, the ooze may split in two, making a new ooze. The new Ooze has half(rounded down) hit points of the original ooze, and their size is Small. The original ooze must be 10hp or higher. "
-        if Dice(2) == 1:
-            r += "\n\t - Slashing"
-        if Dice() == 1:
-            r = r + "\n\t - (Yellow): Lightning"
-        if Dice() == 1:
-            r = r + "\n\t - (Red): Fire"
-        if Dice() == 1:
-            r = r + "\n\t - (Black): Necrotic"
-        if Dice() == 1:
-            r = r + "\n\t - (Green): Poison"
+        r += "\n- Split: Under the effect of certain damage types, the ooze may split in two, making a new ooze. The new Ooze has half(rounded down) hit points of the original ooze, and their size is Small. The original ooze must be 10hp or higher. "
+        if Dice(2) == 1:    r += "\n\t - Slashing"
+        if Dice() == 1:     r = r + "\n\t - (Yellow): Lightning"
+        if Dice() == 1:     r = r + "\n\t - (Red): Fire"
+        if Dice() == 1:     r = r + "\n\t - (Black): Necrotic"
+        if Dice() == 1:     r = r + "\n\t - (Green): Poison"
 
-    if Type == "Ooze" and Dice() == 1:
-        r = r + "\n- False Appearance \n\t While the ooze remains motionless, it is indistinguishable from an oily pool, wet rock, or a normal enviromental object"
+    if Type == "Ooze" and Dice() == 1:  r = r + "\n- False Appearance \n\t While the ooze remains motionless, it is indistinguishable from an oily pool, wet rock, or a normal enviromental object"
+    if Type == "Ooze" and Dice() == 1:  r = r + "\n- Transparent"
+    if Type == "Ooze" and Dice() == 1:  r = r + "\n- Spider Climb \n\t The ooze can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
 
-    if Type == "Ooze" and Dice() == 1:
-        r = r + "\n- Transparent"
-    if Type == "Ooze" and Dice() == 1:
-        r = r + "\n- Spider Climb \n\t The ooze can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+    if Type == "Ooze" and Dice() == 1:  r = r + "\n- Damage Resistance: Acid"
+    if Type == "Ooze" and Dice() == 1:  r = r + "\n- Damage Resistance: Cold"
+    if Type == "Ooze" and Dice() == 1:  r = r + "\n- Damage Resistance: Fire"
+    if Type == "Ooze" and Dice() == 1:  r = r + "\n- Condition Immunities: Blinded"
+    if Type == "Ooze" and Dice() == 1:  r = r + "\n- Condition Immunities: Charmed"
+    if Type == "Ooze" and Dice() == 1:  r = r + "\n- Condition Immunities: Deafened"
+    if Type == "Ooze" and Dice() == 1:  r = r + "\n- Condition Immunities: Exhaustion"
+    if Type == "Ooze" and Dice() == 1:  r = r + "\n- Condition Immunities: Frightened"
+    if Type == "Ooze" and Dice() == 1:  r = r + "\n- Condition Immunities: Prone"
 
-    if Type == "Ooze" and Dice() == 1:
-        r = r + "\n- Damage Resistance: Acid"
-    if Type == "Ooze" and Dice() == 1:
-        r = r + "\n- Damage Resistance: Cold"
-    if Type == "Ooze" and Dice() == 1:
-        r = r + "\n- Damage Resistance: Fire"
-    if Type == "Ooze" and Dice() == 1:
-        r = r + "\n- Condition Immunities: Blinded"
-    if Type == "Ooze" and Dice() == 1:
-        r = r + "\n- Condition Immunities: Charmed"
-    if Type == "Ooze" and Dice() == 1:
-        r = r + "\n- Condition Immunities: Deafened"
-    if Type == "Ooze" and Dice() == 1:
-        r = r + "\n- Condition Immunities: Exhaustion"
-    if Type == "Ooze" and Dice() == 1:
-        r = r + "\n- Condition Immunities: Frightened"
-    if Type == "Ooze" and Dice() == 1:
-        r = r + "\n- Condition Immunities: Prone"
+    if Type == "Ooze" and Dice() == 1:  r = r + "\n- Speed: 20 ft"
+    if Type == "Ooze" and Dice() == 1:  r = r + "\n- Climb: 20 ft"
 
-    if Type == "Ooze" and Dice() == 1:
-        r = r + "\n- Speed: 20 ft"
+    if Type == "Orc":   r += "\n- Darkvision \n\t 60ft."
+    if Type == "Orc":   r += "\n- Aggressive \n\t As a bonus action, the orc can move up to its speed toward a hostile creature that it can see."
+    if Type == "Orc":   r += "\n- Orkish Fury \n\t The Orc deals an extra 4(1d8) damage when it hits with a simple weapon attack."
 
-    if Type == "Ooze" and Dice() == 1:
-        r = r + "\n- Climb: 20 ft"
+    if Type == "Explorer" and Dice() == 1:  r += "\n- Keen Senses\n\t The Explorer has advantage on Wisdom (Perception) checks that rely on senses."
 
-    if Type == "Orc":
-        r = r + "\n- Darkvision \n\t 60ft."
-    if Type == "Orc":
-        r = r + "\n- Aggressive \n\t As a bonus action, the orc can move up to its speed toward a hostile creature that it can see."
-    if Type == "Orc":
-        r = r + \
-            "\n- Orkish Fury \n\t The Orc deals an extra 4(1d8) damage when it hits with a simple weapon attack."
-
-    if Type == "Explorer" and Dice() == 1:
-        r = r + \
-            "\n- Keen Senses\n\t The Explorer has advantage on Wisdom (Perception) checks that rely on senses."
-
-    if Type == "Plant":
-        r = r + "\n- Damage Vulnerabilities: fire"
-
-    if Type == "Plant" and Dice() == 1:
-        r = r + "\n - Damage Immunities: Poison"
-    if Type == "Plant" and Dice() == 1:
-        r = r + "\n - Damage Resistance: Bludgeoning"
-    if Type == "Plant" and Dice() == 1:
-        r = r + "\n - Damage Resistance: Piercing"
-
-    if Type == "Plant" and Dice() == 1:
-        r = r + "\n Condition Immunities: Blinded"
-    if Type == "Plant" and Dice() == 1:
-        r = r + "\n Condition Immunities: Deafened"
-    if Type == "Plant" and Dice() == 1:
-        r = r + "\n Condition Immunities: Charmed"
-    if Type == "Plant" and Dice() == 1:
-        r = r + "\n Condition Immunities: Frightened"
-    if Type == "Plant" and Dice() == 1:
-        r = r + "\n Condition Immunities: Poisoned"
-    if Type == "Plant" and Dice() == 1:
-        r = r + "\n Condition Immunities: Prone"
-    if Type == "Plant" and Dice() == 1:
-        r = r + "\n Condition Immunities: Paralyzed"
+    if Type == "Plant": r += "\n- Damage Vulnerabilities: fire"
+    if Type == "Plant" and Dice() == 1: r = r + "\n - Damage Immunities: Poison"
+    if Type == "Plant" and Dice() == 1: r = r + "\n - Damage Resistance: Bludgeoning"
+    if Type == "Plant" and Dice() == 1: r = r + "\n - Damage Resistance: Piercing"
+    if Type == "Plant" and Dice() == 1: r = r + "\n- Condition Immunities: Blinded"
+    if Type == "Plant" and Dice() == 1: r = r + "\n- Condition Immunities: Deafened"
+    if Type == "Plant" and Dice() == 1: r = r + "\n- Condition Immunities: Charmed"
+    if Type == "Plant" and Dice() == 1: r = r + "\n- Condition Immunities: Frightened"
+    if Type == "Plant" and Dice() == 1: r = r + "\n- Condition Immunities: Poisoned"
+    if Type == "Plant" and Dice() == 1: r = r + "\n- Condition Immunities: Prone"
+    if Type == "Plant" and Dice() == 1: r = r + "\n- Condition Immunities: Paralyzed"
 
     if Type == "Plant" and Dice(3) == 1:
         r = r + "\n- False Appereance: \n\t While the plant remains motionless, it is indistinguishable from a normal plant."
@@ -2879,50 +2840,30 @@ def Actions(Type=""):
     if Type == "Fiend" and Dice(3) == 1:
         r = r + "\n- Damage Resistances: bludgeoning, piercing, and slashing from nonmagical attacks not made with silvered weapons"
 
-    if Type == "Fiend" and Dice(3) == 1:
-        r = r + "\n- Damage Immunities: poison"
-    if Type == "Fiend" and Dice(3) == 1:
-        r = r + "\n- Damage Immunities: fire"
+    if Type == "Fiend" and Dice(3) == 1:    r = r + "\n- Damage Immunities: poison"
+    if Type == "Fiend" and Dice(3) == 1:    r = r + "\n- Damage Immunities: fire"
 
-    if Type == "Fiend" and Dice(3) == 1:
-        r = r + "\n- Condition Immunities: charmed"
-    if Type == "Fiend" and Dice(3) == 1:
-        r = r + "\n- Condition Immunities: frightened"
-    if Type == "Fiend" and Dice(3) == 1:
-        r = r + "\n- Condition Immunities: poisoned"
+    if Type == "Fiend" and Dice(3) == 1:    r = r + "\n- Condition Immunities: charmed"
+    if Type == "Fiend" and Dice(3) == 1:    r = r + "\n- Condition Immunities: frightened"
+    if Type == "Fiend" and Dice(3) == 1:    r = r + "\n- Condition Immunities: poisoned"
 
     if Type == "Fiend":
-        if Dice(2) == 1:
-            r = r + "\n Darkvision \n\t 60 ft."
-        elif Dice(2) == 1:
-            r = r + "\n Darkvision \n\t 120 ft."
-        elif Dice(2) == 1:
-            r = r + "\n Devil's Sight. \n\t Magical darkness doesn't impede the Fiend's darkvision."
+        if Dice(2) == 1:    r = r + "\n- Darkvision \n\t 60 ft."
+        elif Dice(2) == 1:  r = r + "\n- Darkvision \n\t 120 ft."
+        elif Dice(2) == 1:  r = r + "\n- Devil's Sight. \n\t Magical darkness doesn't impede the Fiend's darkvision."
 
-    if Type == "Fiend" and Dice() == 1:
-        r += "\n Speed 20"
-    elif Type == "Fiend" and Dice() == 1:
-        r += "\n Speed: 30 ft."
+    if Type == "Fiend" and Dice() == 1:     r += "\n- Speed: 20"
+    elif Type == "Fiend" and Dice() == 1:   r += "\n- Speed: 30 ft."
 
-    if Type == "Fiend" and Dice() == 1:
-        r += "\n Fly 40"
+    if Type == "Fiend" and Dice() == 1:     r += "\n- Fly 40"
 
-    if Type == "Fiend" and Dice() == 1:
-        r = r + "\n- Magic Resistance \n\t The fiend has advantage on saving throws against spells and other magical effects."
+    if Type == "Fiend" and Dice() == 1: r = r + "\n- Magic Resistance \n\t The fiend has advantage on saving throws against spells and other magical effects."
     if Type == "Fiend":
-        if Dice() == 1:
-            r = r + \
-                "\n- Shapechanger \n\t The fiend can use its action to polymorph into a beast form that resembles a rat (speed 20 ft.), a raven (20 ft., fly 60 ft.), or a spider (20 ft., climb 20 ft.), or back into its true form. Its statistics are the same in each form, except for the speed changes noted. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
-        elif Dice() == 1:
-            r = r + \
-                "\n- Shapechanger \n\t The fiend can use its action to polymorph into a beast form that resembles a bat (speed 10 feet fly 40 ft.), a centipede (40 ft., climb 40 ft.), or a toad (40 ft., swim 40 ft.), or back into its true form. Its statistics are the same in each form, except for the speed changes noted. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
+        if Dice() == 1:     r = r + "\n- Shapechanger \n\t The fiend can use its action to polymorph into a beast form that resembles a rat (speed 20 ft.), a raven (20 ft., fly 60 ft.), or a spider (20 ft., climb 20 ft.), or back into its true form. Its statistics are the same in each form, except for the speed changes noted. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
+        elif Dice() == 1:   r = r + "\n- Shapechanger \n\t The fiend can use its action to polymorph into a beast form that resembles a bat (speed 10 feet fly 40 ft.), a centipede (40 ft., climb 40 ft.), or a toad (40 ft., swim 40 ft.), or back into its true form. Its statistics are the same in each form, except for the speed changes noted. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
 
-    if Type == "Fiend" and Dice(2) == 1:
-        r = r + \
-            "\n- Invisibility. \n\t The fiend magically turns invisible until it attacks, or until its concentration ends (as if concentrating on a spell). Any equipment the fiend wears or carries is invisible with it."
-    if Type == "Fiend" and Dice() == 1:
-        r = r + "\n- Hellish Rejuvenation. \n\t A Fiend that dies in the Nine Hells comes back to life with all its hit points in " + \
-            str(Dice(10)) + " days unless it is killed by a good-aligned creature with a bless spell cast on that creature or its remains are sprinkled with holy water."
+    if Type == "Fiend" and Dice(2) == 1:    r += "\n- Invisibility. \n\t The fiend magically turns invisible until it attacks, or until its concentration ends (as if concentrating on a spell). Any equipment the fiend wears or carries is invisible with it."
+    if Type == "Fiend" and Dice() == 1:     r += "\n- Hellish Rejuvenation. \n\t A Fiend that dies in the Nine Hells comes back to life with all its hit points in " + str(Dice(10)) + " days unless it is killed by a good-aligned creature with a bless spell cast on that creature or its remains are sprinkled with holy water."
     if Type == "Fiend" and Dice() == 1:
         r = r + "\n- Multiattack. \n\t The fiend makes two simple melee attacks."
     if Type == "Fiend" and Dice() == 1:
@@ -3719,7 +3660,8 @@ def Trait(background=""):
         "I think far ahead, a detachedness often mistaken for daydreaming.",
         "I overexert myself, sometimes needing to recuperate for a day or more.",
         "I have no sense of humor. Laughing is uncomfortable and embarrassing.",
-        "I never make eye contact or hold it unflinchingly.",
+        "I never make eye contact.",
+        "I always make eye contact and hold it unflinchingly.",
         "I an callous about death. It comes to us all eventually.",
         "I am ever learning how to be among others—when to stay quiet, when to laugh.",
         "I cultivate a single obscure hobby or study and eagerly discuss it at length.",
@@ -4386,7 +4328,7 @@ def NPC():
     if Dice(10) == 1 or bg == "Berserker":
         AC += Modifier(CON)
 
-    print(Title())
+    print("# " + Title())
     print("-", al, "- ", random.choice(["♀", "♂", "⚥", "⚬", "?", ""]))
     print(bg)
     print(rc)
