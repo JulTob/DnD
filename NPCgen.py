@@ -4323,12 +4323,10 @@ def NPC():
         CHA += Dice(4)
 
     AC = 10 + Modifier(DEX) + Modifier(Dice(Lvl+8))
-    if Dice(10) == 1 or bg == "Monk":
-        AC += Modifier(WIS)
-    if Dice(10) == 1 or bg == "Berserker":
-        AC += Modifier(CON)
+    if Dice(10) == 1 or bg == "Monk":       AC += Modifier(WIS)
+    if Dice(10) == 1 or bg == "Berserker":  AC += Modifier(CON)
 
-    print("# " + Title())
+    print("&lt;h1&gt;" + Title() + "&lt;/h1&gt;")
     print("-", al, "- ", random.choice(["♀", "♂", "⚥", "⚬", "?", ""]))
     print(bg)
     print(rc)
