@@ -1046,38 +1046,22 @@ def Language(race=Race(), background=Background()):
     l = ""
 
     if race == "Human":
-        if not ("Common" in l):
-            l += "Common. "
-        if Dice() == 1 and not ("Dwarvish" in l):
-            l += "Dwarvish. "
-        if Dice() == 1 and not ("Elvish" in l):
-            l += "Elvish. "
-        if Dice() == 1 and not ("Giant" in l):
-            l += "Giant. "
-        if Dice() == 1 and not ("Gnomish" in l):
-            l += "Gnomish. "
-        if Dice() == 1 and not ("Goblin" in l):
-            l += "Goblin. "
-        if Dice() == 1 and not ("Halfling" in l):
-            l += "Halfling. "
-        if Dice() == 1 and not ("Orc" in l):
-            l += "Orc. "
-        if Dice(20) == 1 and not ("Abyssal" in l):
-            l += "Abyssal. "
-        if Dice(20) == 1 and not ("Celestial" in l):
-            l += "Celestial. "
-        if Dice(20) == 1 and not ("Draconic" in l):
-            l += "Draconic. "
-        if Dice(20) == 1 and not ("Deep Speech" in l):
-            l += "Deep Speech. "
-        if Dice(20) == 1 and not ("Infernal" in l):
-            l += "Infernal. "
-        if Dice(20) == 1 and not ("Primordial" in l):
-            l += "Primordial. "
-        if Dice(20) == 1 and not ("Sylvan" in l):
-            l += "Sylvan. "
-        if Dice(20) == 1 and not ("Undercommon" in l):
-            l += "Undercommon. "
+        if not ("Common" in l):                         l += "Common. "
+        if Dice() == 1 and not ("Dwarvish" in l):       l += "Dwarvish. "
+        if Dice() == 1 and not ("Elvish" in l):         l += "Elvish. "
+        if Dice() == 1 and not ("Giant" in l):          l += "Giant. "
+        if Dice() == 1 and not ("Gnomish" in l):        l += "Gnomish. "
+        if Dice() == 1 and not ("Goblin" in l):         l += "Goblin. "
+        if Dice() == 1 and not ("Halfling" in l):       l += "Halfling. "
+        if Dice() == 1 and not ("Orc" in l):            l += "Orc. "
+        if Dice(20) == 1 and not ("Abyssal" in l):      l += "Abyssal. "
+        if Dice(20) == 1 and not ("Celestial" in l):    l += "Celestial. "
+        if Dice(20) == 1 and not ("Draconic" in l):     l += "Draconic. "
+        if Dice(20) == 1 and not ("Deep Speech" in l):  l += "Deep Speech. "
+        if Dice(20) == 1 and not ("Infernal" in l):     l += "Infernal. "
+        if Dice(20) == 1 and not ("Primordial" in l):   l += "Primordial. "
+        if Dice(20) == 1 and not ("Sylvan" in l):       l += "Sylvan. "
+        if Dice(20) == 1 and not ("Undercommon" in l):  l += "Undercommon. "
 
     if race == "Aberration":
         if not ("Deep Speech" in l):
@@ -1399,28 +1383,19 @@ def Language(race=Race(), background=Background()):
             l += "Sylvan. "
 
     if background == "Hero":
-        if not ("Common" in l):
-            l += "Common. "
-        if Dice() == 1 and not ("Celestial" in l):
-            l += "Celestial. "
-        if Dice() == 1 and not ("Draconic" in l):
-            l += "Draconic. "
-        if Dice() == 1 and not ("Sylvan" in l):
-            l += "Sylvan. "
+        if not ("Common" in l):                     l += "Common. "
+        if Dice() == 1 and not ("Celestial" in l):  l += "Celestial. "
+        if Dice() == 1 and not ("Draconic" in l):   l += "Draconic. "
+        if Dice() == 1 and not ("Sylvan" in l):     l += "Sylvan. "
 
     if background == "Hunter":
-        if not ("Sylvan" in l):
-            l += "Sylvan. "
+        if not ("Sylvan" in l): l += "Sylvan. "
 
     if background == "Knight":
-        if not ("Common" in l):
-            l += "Common. "
-        if Dice() == 1 and not ("Celestial" in l):
-            l += "Celestial. "
-        if Dice() == 1 and not ("Draconic" in l):
-            l += "Draconic. "
-        if Dice() == 1 and not ("Sylvan" in l):
-            l += "Sylvan. "
+        if not ("Common" in l):                         l += "Common. "
+        if Dice() == 1 and not ("Celestial" in l):      l += "Celestial. "
+        if Dice() == 1 and not ("Draconic" in l):       l += "Draconic. "
+        if Dice() == 1 and not ("Sylvan" in l):         l += "Sylvan. "
 
     if background == "Mage":
         if not ("Common" in l):
@@ -2229,39 +2204,24 @@ def Actions(Type=""):
     if (Type == "Beast" or Type == "Beastfolk"):
         if Dice(2) == 1:
             r = r + "\n- Darkvision."
-            if Dice(2) == 1:
-                r += "\n\t 30 ft."
-            elif Dice(3) <= 2:
-                r += "\n\t 60 ft."
-            else:
-                r += "\n\t 120 ft."
+            if Dice(2) == 1:        r += "\n\t 30 ft."
+            elif Dice(3) <= 2:      r += "\n\t 60 ft."
+            else:                   r += "\n\t 120 ft."
         elif Dice() == 1:
             r += "\n- Blindsight."
-            if Dice(12) == 1:
-                r += "\n\t 120 ft."
-            elif Dice() == 1:
-                r = r + "\n\t 60 ft."
-            else:
-                r = r + "\n\t 30 ft."
+            if Dice(12) == 1:   r += "\n\t 120 ft."
+            elif Dice() == 1:   r += "\n\t 60 ft."
+            else:               r += "\n\t 30 ft."
             if Dice(4) == 1:
                 r = r + "\n- Echolocation. \n\t The Beast can't use its blindsight while deafened."
-                r = r + \
-                    "\n- Keen Hearing. \n\t The beast has advantage on Wisdom (Perception) checks that rely on hearing."
+                r = r + "\n- Keen Hearing. \n\t The beast has advantage on Wisdom (Perception) checks that rely on hearing."
 
     if Type == "Beast" or Type == "Beastfolk":
-        if Dice() == 1:
-            r = r + \
-                "\n- Keen Senses\n\t The beast has advantage on Wisdom (Perception) checks that rely on sight, hearing, or smell."
+        if Dice() == 1:     r += "\n- Keen Senses\n\t The beast has advantage on Wisdom (Perception) checks that rely on sight, hearing, or smell."
         else:
-            if Dice() == 1:
-                r = r + \
-                    "\n- Keen Smell. \n\t The Beast has advantage on Wisdom (Perception) checks that rely on smell."
-            if Dice() == 1:
-                r = r + \
-                    "\n- Keen Sight. \n\tThe beast has advantage on Wisdom (Perception) checks that rely on sight."
-            if Dice() == 1:
-                r = r + \
-                    "\n- Keen Hearing. \n\tThe beast has advantage on Wisdom (Perception) checks that rely on hearing."
+            if Dice() == 1: r += "\n- Keen Smell. \n\t The Beast has advantage on Wisdom (Perception) checks that rely on smell."
+            if Dice() == 1: r += "\n- Keen Sight. \n\tThe beast has advantage on Wisdom (Perception) checks that rely on sight."
+            if Dice() == 1: r += "\n- Keen Hearing. \n\tThe beast has advantage on Wisdom (Perception) checks that rely on hearing."
 
     if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:
         r += "\n-  Pack Tactics. \n\t The Beast has advantage on an attack roll against a creature if at least one of the beast's allies is within 5 feet of the creature and the ally isn't incapacitated."
@@ -2458,81 +2418,51 @@ def Actions(Type=""):
     if Type == "Construct" and Dice() == 1:
         r = r + "\n- False Apperance \n\t While the Construct remains motionless in rest, it is indistinguishable from a mundane object"
     if Type == "Construct":
-        if Dice() == 1:
-            r += "\n- Dark Vision:\n\t 60 ft"
-        elif Dice() == 1:
-            r = r + "\n- Blindsight:\n\t 60 ft (blind beyond this radius)"
-        elif Dice() == 1:
-            r = r + "\n- Blindsight:\n\t 60 ft"
-        elif Dice() == 1:
-            r = r + "\n- Truesight:\n\t 60 ft"
-        elif Dice() == 1:
-            r = r + "\n- Truesight:\n\t 120 ft"
-    if Type == "Construct" and Dice() == 1:
-        r = r + "\n- Telepathic Bond:\n\t While the Construct is on the same plane of existence as its master, it can magically convey what it senses to its master, and the two can communicate telepathically."
-    if Type == "Construct" and Dice() == 1:
-        r = r + "\n- Antimagic Susceptibility:\n\t The Construct is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Construct must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute."
-    if Type == "Construct" and Dice() == 1:
-        r = r + "\n- Terrifying Glare:\n\t The Construct is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Construct must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute."
-    if Type == "Construct" and Dice() == 1:
-        r = r + "\n- Damage Transfer:\n\t While it is grappling a creature, the construct takes only half the damage dealt to it, and the creature grappled by the rug takes the other half."
-    if Type == "Construct" and Dice() == 1:
-        r = r + \
-            "\n- Smother. \n\t Melee Weapon Attack: +5 to hit, reach 5 ft., one Medium or smaller creature. Hit: The creature is grappled (escape DC 13). Until this grapple ends, the target is restrained, blinded, and at risk of suffocating, and the construct can't smother another target. In addition, at the start of each of the target's turns, the target takes 10 (2d6 + 3) bludgeoning damage."
+        if Dice() == 1:     r += "\n- Dark Vision:\n\t 60 ft"
+        elif Dice() == 1:   r += "\n- Blindsight:\n\t 60 ft (blind beyond this radius)"
+        elif Dice() == 1:   r += "\n- Blindsight:\n\t 60 ft"
+        elif Dice() == 1:   r += "\n- Truesight:\n\t 60 ft"
+        elif Dice() == 1:   r += "\n- Truesight:\n\t 120 ft"
+    if Type == "Construct" and Dice() == 1:     r = r + "\n- Telepathic Bond:\n\t While the Construct is on the same plane of existence as its master, it can magically convey what it senses to its master, and the two can communicate telepathically."
+    if Type == "Construct" and Dice() == 1:     r = r + "\n- Antimagic Susceptibility:\n\t The Construct is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Construct must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute."
+    if Type == "Construct" and Dice() == 1:     r = r + "\n- Terrifying Glare:\n\t The Construct is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Construct must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute."
+    if Type == "Construct" and Dice() == 1:     r = r + "\n- Damage Transfer:\n\t While it is grappling a creature, the construct takes only half the damage dealt to it, and the creature grappled by the rug takes the other half."
+    if Type == "Construct" and Dice() == 1:     r = r + "\n- Smother. \n\t Melee Weapon Attack: +5 to hit, reach 5 ft., one Medium or smaller creature. Hit: The creature is grappled (escape DC 13). Until this grapple ends, the target is restrained, blinded, and at risk of suffocating, and the construct can't smother another target. In addition, at the start of each of the target's turns, the target takes 10 (2d6 + 3) bludgeoning damage."
 
     if Type == "Dragon" and Dice(2) == 1:
         r = r + "\n- Fly: 60 ft"
-        if Dice() == 1:
-            r += "\n- Flyby \n\t The dragon is an agile flier, quick to fly out of enemies' reach. The dragon doesn't provoke an opportunity attack when it flies out of an enemy's reach."
+        if Dice() == 1:     r += "\n- Flyby \n\t The dragon is an agile flier, quick to fly out of enemies' reach. The dragon doesn't provoke an opportunity attack when it flies out of an enemy's reach."
 
     if Type == "Dragon" and Dice() == 1:
         r = r + "\n- Burrow: 15 ft"
-        if Dice() == 1:
-            r = r + "\n- Tremorsense: 60 ft"
+        if Dice() == 1: r = r + "\n- Tremorsense: 60 ft"
 
-    if Type == "Dragon" and Dice() == 1:
-        r = r + "\n- Climb: 30 ft"
+    if Type == "Dragon" and Dice() == 1:    r = r + "\n- Climb: 30 ft"
 
     if Type == "Dragon":
-        if Dice(2) == 1:
-            r = r + "\n- Darkvision: 60 ft"
-        if Dice() == 1:
-            r = r + "\n- Blindsight: 10 ft"
-        elif Dice() == 1:
-            r = r + "\n- Blindsight: 60 ft"
-        elif Dice() == 1:
-            r = r + "\n- Truesight: 60 ft"
+        if Dice(2) == 1:    r = r + "\n- Darkvision: 60 ft"
+        if Dice() == 1:     r = r + "\n- Blindsight: 10 ft"
+        elif Dice() == 1:   r = r + "\n- Blindsight: 60 ft"
+        elif Dice() == 1:   r = r + "\n- Truesight: 60 ft"
 
     if Type == "Dragon" and Dice(3) == 1:
         r += "\n- Swim: 30ft."
-        if Type == "Dragon" and Dice(4) == 1:
-            r = r + "\n - Amphibious \n\t The dragon can breathe air and water."
+        if Type == "Dragon" and Dice(4) == 1:   r = r + "\n - Amphibious \n\t The dragon can breathe air and water."
 
-    if Type == "Dragon" and Dice() == 1:
-        r += "\n- Keen Senses \n\t The Dragon has advantage on Wisdom (Perception) checks that rely on sight, hearing, or smell."
-    if Type == "Dragon" and Dice() == 1:
-        r += "\n- Limited Telepathy \n\t The Dragon can magically communicate simple ideas, emotions, and images telepathically with any creature within 100 feet of it that can understand a language. It can also communicate with any Dragon"
-    if Type == "Dragon" and Dice() == 1:
-        r += "\n- Superior Invisibility \n\t  The Dragon magically turns invisible until its concentration ends (as if concentrating on a spell). Any equipment the Dragon wears or carries is invisible with it."
-    if Type == "Dragon" and Dice() == 1:
-        r += "\n- Mimicry \n\t The dragon can mimic any sounds it has heard, including voices. A creature that hears the sounds can tell they are imitations with a successful DC 10 Wisdom (Insight) check."
-    if Type == "Dragon" and Dice(12) == 1:
-        r += "\n- Rejuvenation \n\t You might decide that dragons in your campaign, being an essential part of the Material Plane, are nearly impossible to destroy. A dragon's life essence might be preserved in the egg from which it first emerged, in its hoard, or in a cavernous hall at the center of the world, just as a lich's essence is hidden in a phylactery. \n\t If it has an essence-preserving object, a destroyed dragon gains a new body in 1d10 days, regaining all its hit points and becoming active again. The new body appears within 5 feet of the object."
+    if Type == "Dragon" and Dice() == 1:    r += "\n- Keen Senses \n\t The Dragon has advantage on Wisdom (Perception) checks that rely on sight, hearing, or smell."
+    if Type == "Dragon" and Dice() == 1:    r += "\n- Limited Telepathy \n\t The Dragon can magically communicate simple ideas, emotions, and images telepathically with any creature within 100 feet of it that can understand a language. It can also communicate with any Dragon"
+    if Type == "Dragon" and Dice() == 1:    r += "\n- Superior Invisibility \n\t  The Dragon magically turns invisible until its concentration ends (as if concentrating on a spell). Any equipment the Dragon wears or carries is invisible with it."
+    if Type == "Dragon" and Dice() == 1:    r += "\n- Mimicry \n\t The dragon can mimic any sounds it has heard, including voices. A creature that hears the sounds can tell they are imitations with a successful DC 10 Wisdom (Insight) check."
+    if Type == "Dragon" and Dice(12) == 1:  r += "\n- Rejuvenation \n\t You might decide that dragons in your campaign, being an essential part of the Material Plane, are nearly impossible to destroy. A dragon's life essence might be preserved in the egg from which it first emerged, in its hoard, or in a cavernous hall at the center of the world, just as a lich's essence is hidden in a phylactery. \n\t If it has an essence-preserving object, a destroyed dragon gains a new body in 1d10 days, regaining all its hit points and becoming active again. The new body appears within 5 feet of the object."
 
-    if Type == "Dragon" and Dice() == 1:
-        r += "\n- Magic Resistance \n\t The Dragon has advantage on saving throws against spells and other magical effects."
+    if Type == "Dragon" and Dice() == 1:    r += "\n- Magic Resistance \n\t The Dragon has advantage on saving throws against spells and other magical effects."
 
-    if Type == "Dragon" and Dice() == 1:
-        r += "\n- Damage Immunities: Fire"
-    if Type == "Dragon" and Dice() == 1:
-        r += "\n- Damage Immunities: Lightning"
-    if Type == "Dragon" and Dice() == 1:
-        r += "\n- Damage Immunities: Poison"
-    if Type == "Dragon" and Dice() == 1:
-        r += "\n- Damage Immunities: Acid"
+    if Type == "Dragon" and Dice() == 1:    r += "\n- Damage Immunities: Fire"
+    if Type == "Dragon" and Dice() == 1:    r += "\n- Damage Immunities: Lightning"
+    if Type == "Dragon" and Dice() == 1:    r += "\n- Damage Immunities: Poison"
+    if Type == "Dragon" and Dice() == 1:    r += "\n- Damage Immunities: Acid"
 
-    if Type == "Dragon" and Dice() == 1:
-        r += "\n- Condition Immunities: Poisoned"
+    if Type == "Dragon" and Dice() == 1:    r += "\n- Condition Immunities: Poisoned"
 
     if Type == "Fey" and Dice() == 1:
         r = r + "\n- Magic Resistance \n\t The Fey has advantage on saving throws against spells and other magical effects."
@@ -4296,7 +4226,8 @@ def NPC():
     if Dice(10) == 1 or bg == "Monk":       AC += Modifier(WIS)
     if Dice(10) == 1 or bg == "Berserker":  AC += Modifier(CON)
 
-    print("# " + Title() )
+    r = "# " + Title()
+    print(r)
     print("-", al, "- ", random.choice(["♀", "♂", "⚥", "⚬", "?", ""]))
     print(bg)
     print(rc)
