@@ -4226,7 +4226,7 @@ def NPC():
     if Dice(10) == 1 or bg == "Monk":       AC += Modifier(WIS)
     if Dice(10) == 1 or bg == "Berserker":  AC += Modifier(CON)
 
-    r = "# " + Title()
+    r = "# 1." + Title()
     print(r)
     print("-", al, "- ", random.choice(["♀", "♂", "⚥", "⚬", "?", ""]))
     print(bg)
