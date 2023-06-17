@@ -4215,12 +4215,9 @@ def NPC():
     print(Attack("Melee"))
     print(Attack(Dice(4)))
     print("\n- SPECIAL ATTACK: {} Charges/Combat".format(Dice(1 + int(Lvl/2))))
-    print(SpecialAttack(Lvl, Modifier(
-        random.choice([STR, DEX, CON, INT, WIS, CHA]))))
-
+    print(SpecialAttack(Lvl, Modifier(random.choice([STR, DEX, CON, INT, WIS, CHA]))))
     print("\n\n")
-    print("SPELLCASTING:\t", random.choice(
-        ["INT", "WIS", "CHA"]), "\n\t Spellsave DC:", 10 + Modifier(max(INT, WIS, CHA)))
+    print("SPELLCASTING:\t", random.choice(["INT", "WIS", "CHA"]), f"\n\t Spellsave DC:{10 + Modifier(max(INT, WIS, CHA))}")
     print("\t To hit: +{}".format( Modifier(max(INT, WIS, CHA) + Lvl/5)))
     print(Magic(Lvl, rc, bg))
 
