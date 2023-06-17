@@ -4291,7 +4291,7 @@ def NPC():
     print("\n\n")
     print("SPELLCASTING:\t", random.choice(
         ["INT", "WIS", "CHA"]), "\n\t Spellsave DC:", 10 + Modifier(max(INT, WIS, CHA)))
-    print("\t To hit: +", Modifier(max(INT, WIS, CHA) + Lvl/5))
+    print("\t To hit: +{}".format( Modifier(max(INT, WIS, CHA) + Lvl/5)))
     print(Magic(Lvl, rc, bg))
 
     print("\n\n")
