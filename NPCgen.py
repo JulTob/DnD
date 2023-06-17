@@ -4228,7 +4228,7 @@ def NPC():
 
     r = "# 1." + Title()
     print(r)
-    print("-", al, "- ", random.choice(["♀", "♂", "⚥", "⚬", "?", ""]))
+    print("- {} - ".format(al) + random.choice(["♀", "♂", "⚥", "⚬", "?", ""]))
     print(bg)
     print(rc)
     print(nm)
@@ -4274,13 +4274,13 @@ def NPC():
     if Dice() <= Modifier(CHA): print("\tPersuasion:+", Proficiency(CHA), end=" ")
     print("\n")
 
-    print("Passive Perception:", 10 + Modifier(WIS) + Modifier(Lvl))
+    print("Passive Perception: {}".format( 10 + Modifier(WIS) + Modifier(Lvl)))
 
     print("\n")
     print("Languages: ", Language(rc, bg))
     print("\n")
     print("COMBAT ACTIONS:")
-    print("\tTo hit: +", Modifier(max(STR, DEX) + Lvl/5))
+    print("\tTo hit: +{}".format( Modifier(max(STR, DEX) + Lvl/5)))
     print("\n- SIMPLE ATTACKS:")
     print(Attack("Melee"))
     print(Attack(Dice(4)))
