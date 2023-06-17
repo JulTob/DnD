@@ -4155,7 +4155,7 @@ def NPC():
     if Dice(10) == 1 or bg == "Monk":       AC += Modifier(WIS)
     if Dice(10) == 1 or bg == "Berserker":  AC += Modifier(CON)
 
-    r = "# 1." + Title()
+    r = "# " + Title()
     print(r)
     print("- {} - ".format(al) + random.choice(["♀", "♂", "⚥", "⚬", "?", ""]))
     print(bg)
@@ -4164,7 +4164,7 @@ def NPC():
     print("\n")
 
     print("Lvl: {}".format(Lvl), "   HP: {}".format( Lvl*(Dice(12) + Dice(2)*Modifier(CON))))
-    print(f"AC: {AC})
+    print(f"AC: {AC}")
     print("\n\n\t",
           f"STR: {STR} \t |  {Modifier(STR)} \n\t",
           f"DEX: {DEX} \t |  {Modifier(DEX)} \n\t",
@@ -4175,12 +4175,12 @@ def NPC():
 
     print("Saving Throws:")
     print("\t", end="")
-    if Dice(3) == 1:    print("Str:+", Modifier(STR) + int(Lvl/5), end="\t")
-    if Dice(3) == 1:    print("Dex:+", Modifier(DEX) + int(Lvl/5), end="\t")
-    if Dice(3) == 1:    print("Con:+", Modifier(CON) + int(Lvl/5), end="\t")
-    if Dice(3) == 1:    print("Int:+", Modifier(INT) + int(Lvl/5), end="\t")
-    if Dice(3) == 1:    print("Wis:+", Modifier(WIS) + int(Lvl/5), end="\t")
-    if Dice(3) == 1:    print("Cha:+", Modifier(CHA) + int(Lvl/5), end="\t")
+    if Dice(3) == 1:    print(f"Str:+ {Modifier(STR) + int(Lvl/5)}", end="\t")
+    if Dice(3) == 1:    print(f"Dex:+ {Modifier(DEX) + int(Lvl/5)}", end="\t")
+    if Dice(3) == 1:    print(f"Con:+ {Modifier(CON) + int(Lvl/5)}", end="\t")
+    if Dice(3) == 1:    print(f"Int:+ {Modifier(INT) + int(Lvl/5)}", end="\t")
+    if Dice(3) == 1:    print(f"Wis:+ {Modifier(WIS) + int(Lvl/5)}", end="\t")
+    if Dice(3) == 1:    print(f"Cha:+ {Modifier(CHA) + int(Lvl/5)}", end="\t")
     print("\n")
 
     print("Skills:")
