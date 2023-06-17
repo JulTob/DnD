@@ -772,40 +772,23 @@ def UndeadName():
 
 
 def Name(Type):
-    if Type == "Aberration":
-        return AberrationName()
-    if Type == "Aven":
-        return AvenName()
-    if Type == "Beast":
-        return BeastName()
-    if Type == "Beastfolk":
-        return BeastfolkName()
-    if Type == "Celestial":
-        return CelestialName()
-    if Type == "Construct":
-        return ConstructName()
-    if Type == "Dragon":
-        return DragonName()
-    if Type == "Elemental":
-        return ElementalName()
-    if Type == "Fey":
-        return FeyName()
-    if Type == "Fiend":
-        return FiendName()
-    if Type == "Giant":
-        return GiantName()
-    if Type == "Goblin":
-        return GoblinName()
-    if Type == "Monstrosity":
-        return MonstrosityName()
-    if Type == "Orc":
-        return OrcName()
-    if Type == "Ooze":
-        return OozeName()
-    if Type == "Plant":
-        return PlantName()
-    if Type == "Undead":
-        return UndeadName()
+    if Type == "Aberration":    return AberrationName()
+    if Type == "Aven":          return AvenName()
+    if Type == "Beast":         return BeastName()
+    if Type == "Beastfolk":     return BeastfolkName()
+    if Type == "Celestial":     return CelestialName()
+    if Type == "Construct":     return ConstructName()
+    if Type == "Dragon":        return DragonName()
+    if Type == "Elemental":     return ElementalName()
+    if Type == "Fey":           return FeyName()
+    if Type == "Fiend":         return FiendName()
+    if Type == "Giant":         return GiantName()
+    if Type == "Goblin":        return GoblinName()
+    if Type == "Monstrosity":   return MonstrosityName()
+    if Type == "Orc":           return OrcName()
+    if Type == "Ooze":          return OozeName()
+    if Type == "Plant":         return PlantName()
+    if Type == "Undead":        return UndeadName()
     Names = [
         ""]
     return random.choice(Names)
@@ -4181,7 +4164,7 @@ def NPC():
     print("\n")
 
     print("Lvl: {}".format(Lvl), "   HP: {}".format( Lvl*(Dice(12) + Dice(2)*Modifier(CON))))
-    print("AC:", AC)
+    print(f"AC: {AC})
     print("\n\n\t",
           f"STR: {STR} \t  {Modifier(STR)} \n\t",
           f"DEX: {DEX} \t  {Modifier(DEX)} \n\t",
