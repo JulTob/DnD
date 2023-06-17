@@ -2687,58 +2687,37 @@ def Actions(Type=""):
     if Type == "Plant" and Dice() == 1:
         r = r + "\n- Entangling Plants"
 
-    if Type == "Snakefolk":
-        r += "\n- Darkvision: 60 ft"
-    if Type == "Snakefolk":
-        r += "\n- Damage Immunities \t Poison"
-    if Type == "Snakefolk":
-        r += "\n- Condition Immunities \t Poisoned"
-    if Type == "Snakefolk" and Dice(3) == 1:
-        r += "\n- Magic Resistance \n\t The Snakefolk has advantage on saving throws against spells and other magical effects."
-    if Type == "Snakefolk" and Dice() == 1:
-        r += "\n- Shapechanger \n\t The Snakefolk can use its action to polymorph into a Medium snake, or back into its true form. Its statistics are the same in each form. Any equipment it is wearing or carrying isn't transformed. It doesn't change form if it dies."
-    if Type == "Snakefolk" and Dice() == 1:
-        r += "\n- Multiattack \n\t The Snakefolk makes two ranged attacks or two melee attacks."
-    if Type == "Snakefolk" and Dice() == 1:
-        r += "\n- Constrict \n\t Melee Weapon Attack, reach 5 ft., one target. Hit: 10 (2d6 + 3) bludgeoning damage, and the target is grappled (escape DC [10+%STR]). Until this grapple ends, the target is restrained, and the Snakefolk can't constrict another target."
+    if Type == "Snakefolk":                     r += "\n- Darkvision: 60 ft"
+    if Type == "Snakefolk":                     r += "\n- Damage Immunities \t Poison"
+    if Type == "Snakefolk":                     r += "\n- Condition Immunities \t Poisoned"
+    if Type == "Snakefolk" and Dice(3) == 1:    r += "\n- Magic Resistance \n\t The Snakefolk has advantage on saving throws against spells and other magical effects."
+    if Type == "Snakefolk" and Dice() == 1:     r += "\n- Shapechanger \n\t The Snakefolk can use its action to polymorph into a Medium snake, or back into its true form. Its statistics are the same in each form. Any equipment it is wearing or carrying isn't transformed. It doesn't change form if it dies."
+    if Type == "Snakefolk" and Dice() == 1:     r += "\n- Multiattack \n\t The Snakefolk makes two ranged attacks or two melee attacks."
+    if Type == "Snakefolk" and Dice() == 1:     r += "\n- Constrict \n\t Melee Weapon Attack, reach 5 ft., one target. Hit: 10 (2d6 + 3) bludgeoning damage, and the target is grappled (escape DC [10+%STR]). Until this grapple ends, the target is restrained, and the Snakefolk can't constrict another target."
 
-    if Type == "Spy":
-        r += "\n- Superior Invisibility"
+    if Type == "Spy":   r += "\n- Superior Invisibility"
 
-    if Type == "Bandit" and Dice(2) == 1:
-        r = r + "\n- Pack Tactics \n\t The Bandit has advantages on attack on targets within 5ft of an ally of the bandit."
-    if Type == "Bandit" and Dice(2) == 1:
-        r = r + "\n- Multiattack \n\t The Bandit makes three simple melee attacks. Or the Bandit makes two ranged or special attacks."
-    if Type == "Bandit" and Dice(2) == 1:
-        r = r + "\n- Parry (Reaction) \n\t The Bandit adds 2 to its AC against one melee attack that would hit it. To do so, the bandit must see the attacker and be wielding a melee weapon."
+    if Type == "Bandit" and Dice(2) == 1:   r = r + "\n- Pack Tactics \n\t The Bandit has advantages on attack on targets within 5ft of an ally of the bandit."
+    if Type == "Bandit" and Dice(2) == 1:   r = r + "\n- Multiattack \n\t The Bandit makes three simple melee attacks. Or the Bandit makes two ranged or special attacks."
+    if Type == "Bandit" and Dice(2) == 1:   r = r + "\n- Parry (Reaction) \n\t The Bandit adds 2 to its AC against one melee attack that would hit it. To do so, the bandit must see the attacker and be wielding a melee weapon."
+
+    if Type == "Dwarf":     r = r + "\n- Damage Resistance: Poison"
 
     if Type == "Dwarf":
-        r = r + "\n- Damage Resistance: Poison"
-
-    if Type == "Dwarf":
-        if Dice() == 1:
-            r = r + "\n- Darkvision 120ft"
-        else:
-            r = r + "\n- Darkvision 60ft"
+        if Dice() == 1:     r = r + "\n- Darkvision 120ft"
+        else:               r = r + "\n- Darkvision 60ft"
 
     if Type == "Dwarf" and Dice() == 1:
         r = r + "\n- Duergar Resilience. \n\t The Dwarf has advantage on saving throws against poison, spells, and illusions, as well as to resist being charmed or paralyzed."
-        r = r + \
-            "\n- Sunlight Sensitivity \n\t While in sunlight, the Dwarf has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+        r = r + "\n- Sunlight Sensitivity \n\t While in sunlight, the Dwarf has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
 
-    if Type == "Cultist" and Dice(2) == 1:
-        r = r + "\n Dark Devotion.\n\t The cultist has advantage on saving throws against being charmed or frightened."
-    if Type == "Cultist" and Dice(2) == 1:
-        r = r + "\n Multiattack.\n\t The cultist makes two simple melee attacks."
+    if Type == "Cultist" and Dice(2) == 1:  r = r + "\n Dark Devotion.\n\t The cultist has advantage on saving throws against being charmed or frightened."
+    if Type == "Cultist" and Dice(2) == 1:  r = r + "\n Multiattack.\n\t The cultist makes two simple melee attacks."
 
-    if Type == "Fiend" and Dice(3) == 1:
-        r = r + "\n- Damage Resistances: cold"
-    if Type == "Fiend" and Dice(3) == 1:
-        r = r + "\n- Damage Resistances: fire"
-    if Type == "Fiend" and Dice(3) == 1:
-        r = r + "\n- Damage Resistances: lightning"
-    if Type == "Fiend" and Dice(3) == 1:
-        r = r + "\n- Damage Resistances: bludgeoning, piercing, and slashing from nonmagical attacks not made with silvered weapons"
+    if Type == "Fiend" and Dice(3) == 1:    r = r + "\n- Damage Resistances: cold"
+    if Type == "Fiend" and Dice(3) == 1:    r = r + "\n- Damage Resistances: fire"
+    if Type == "Fiend" and Dice(3) == 1:    r = r + "\n- Damage Resistances: lightning"
+    if Type == "Fiend" and Dice(3) == 1:    r = r + "\n- Damage Resistances: bludgeoning, piercing, and slashing from nonmagical attacks not made with silvered weapons"
 
     if Type == "Fiend" and Dice(3) == 1:    r = r + "\n- Damage Immunities: poison"
     if Type == "Fiend" and Dice(3) == 1:    r = r + "\n- Damage Immunities: fire"
@@ -2914,70 +2893,37 @@ def Actions(Type=""):
     if Type == "Undead" and Dice(2) == 1:
         r += "\n- Damage Immunities: poison "
 
-    if Type == "Undead" and Dice() == 1:
-        r += "\n- Condition Immunities: charmed"
-    if Type == "Undead" and Dice() == 1:
-        r += "\n- Condition Immunities: exhaustion"
-    if Type == "Undead" and Dice() == 1:
-        r += "\n- Condition Immunities: grappled"
-    if Type == "Undead" and Dice() == 1:
-        r += "\n- Condition Immunities: frightened"
-    if Type == "Undead" and Dice() == 1:
-        r += "\n- Condition Immunities: paralyzed"
-    if Type == "Undead" and Dice() == 1:
-        r += "\n- Condition Immunities: petrified"
-    if Type == "Undead" and Dice() == 1:
-        r += "\n- Condition Immunities: poisoned"
-    if Type == "Undead" and Dice() == 1:
-        r += "\n- Condition Immunities: prone"
-    if Type == "Undead" and Dice() == 1:
-        r += "\n- Condition Immunities: restrained"
-    if Type == "Undead" and Dice() == 1:
-        r += "\n- Condition Immunities: unconscious"
+    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: charmed"
+    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: exhaustion"
+    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: grappled"
+    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: frightened"
+    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: paralyzed"
+    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: petrified"
+    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: poisoned"
+    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: prone"
+    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: restrained"
+    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: unconscious"
 
-    if Type == "Undead" and Dice() == 1:
-        r += "\n - Amorphous \n\t The Undead can move through a space as narrow as 1 inch wide without squeezing."
-    if Type == "Undead" and Dice() == 1:
-        r = r + "\n- Blood Frenzy \n\t The beast has advantage on melee attack rolls against any creature that doesn't have all its hit points."
-    if Type == "Undead" and Dice() == 1:
-        r += "\n - Charge. \n\t If the undead moves at least 10 feet straight toward a target and then hits it with a simple melee attack on the same turn, the target takes an extra 9 (2d8) piercing damage. If the target is a creature, it must succeed on a DC 14 Strength saving throw or be pushed up to 10 feet away and knocked prone."
-    if Type == "Undead" and Dice() == 1:
-        r += "\n - Consume Life. \n\t As a bonus action, the undead can target one creature it can see within 5 feet of it that has 0 hit points and is still alive. The target must succeed on a DC 10 Constitution saving throw against this magic or die. If the target dies, the undead regains 10 (3d6) hit points."
-    if Type == "Undead" and Dice() == 1:
-        r += "\n - Detect Life. \n\t The undead can magically sense the presence of living creatures up to 5 miles away that aren't undead or constructs. She knows the general direction they're in but not their exact locations."
-    if Type == "Undead" and Dice() == 1:
-        r = r + "\n - Ephemeral \n\t The Undead  can't wear or carry anything."
-    if Type == "Undead" and Dice() == 1:
-        r = r + \
-            "\n - Incorporeal Movement \n\t The Undead  can move through other creatures and objects as if they were difficult terrain. It takes 5 (1d10) force damage if it ends its turn inside an object."
-    if Type == "Undead" and Dice() == 1:
-        r += "\n - Stench.  \n\t Any creature that starts its turn within 5 feet of the undead must succeed on a DC 10 Constitution saving throw or be poisoned until the start of its next turn. On a successful saving throw, the creature is immune to the undead's Stench for 24 hours."
-    if Type == "Undead" and Dice() == 1:
-        r += "\n - Shadow Stealth \n\t While in dim light or darkness, the Undead can take the Hide action as a bonus action. Its stealth bonus is also improved to +6."
-    if Type == "Undead" and Dice() == 1:
-        r += "\n - Sunlight Weakness \n\t While in sunlight, the shadow has disadvantage on attack rolls, ability checks, and saving throws."
-    if Type == "Undead" and Dice() == 1:
-        r += "\n - Sunlight Sensitivity  \n\t While in sunlight, the undead has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
-    if Type == "Undead" and Dice() == 1:
-        r = r + \
-            "\n- Incorporeal Movement: \n\t The undead can move through other creatures and objects as if they were difficult terrain. It takes 5 (1d10) force damage if it ends its turn inside an object."
-    if Type == "Undead" and Dice() == 1:
-        r = r + "\n- Life Drain \n\t Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 5 (1d6 + 2) necrotic damage. The target must succeed on a DC 13 Constitution saving throw or its hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0. \n\t A humanoid slain by this attack rises 24 hours later as a zombie under the wight's control, unless the humanoid is restored to life or its body is destroyed. The wight can have no more than twelve zombies under its control at one time."
-    if Type == "Undead" and Dice(6) == 1:
-        r = r + \
-            "\n- Invisibility \n\t The Undead magically turns invisible until it attacks, or until its concentration ends (as if concentrating on a spell). Any equipment the undead wears or carries is invisible with it."
-    elif Type == "Undead" and Dice(6) == 1:
-        r = r + "\n- Invisibility \n\t The Undead is invisible."
-    if Type == "Undead" and Dice() == 1:
-        r = r + "\n- Telekinetic Thrust"
-    if Type == "Undead" and Dice() == 1:
-        r = r + "\n - Turn Defiance \n\t The undead and any undeads within 30 feet of it have advantage on saving throws against effects that turn undead."
-    if Type == "Undead" and Dice() == 1:
-        r = r + "\n - Turn Immunity \n\t The Undead is immune to effects that turn undead."
-    if Type == "Undead" and Dice() == 1:
-        r = r + "\n - Undead Fortitude. \n\t If damage reduces the Undead to 0 hit points, it must make a Constitution saving throw with a DC of 5 + the damage taken, unless the damage is radiant or from a critical hit. On a success, the Undead drops to 1 hit point instead."
-    if Type == "Undead" and Dice() == 1:
-        r = r + "\n - Variable Illumination. \n\t IfThe undead sheds bright light in a 5 to 20-foot radius and dim light for an additional number of ft. equal to the chosen radius. The will-o'-wisp can alter the radius as a bonus action."
+    if Type == "Undead" and Dice() == 1:    r += "\n - Amorphous \n\t The Undead can move through a space as narrow as 1 inch wide without squeezing."
+    if Type == "Undead" and Dice() == 1:    r += "\n- Blood Frenzy \n\t The beast has advantage on melee attack rolls against any creature that doesn't have all its hit points."
+    if Type == "Undead" and Dice() == 1:    r += "\n - Charge. \n\t If the undead moves at least 10 feet straight toward a target and then hits it with a simple melee attack on the same turn, the target takes an extra 9 (2d8) piercing damage. If the target is a creature, it must succeed on a DC 14 Strength saving throw or be pushed up to 10 feet away and knocked prone."
+    if Type == "Undead" and Dice() == 1:    r += "\n - Consume Life. \n\t As a bonus action, the undead can target one creature it can see within 5 feet of it that has 0 hit points and is still alive. The target must succeed on a DC 10 Constitution saving throw against this magic or die. If the target dies, the undead regains 10 (3d6) hit points."
+    if Type == "Undead" and Dice() == 1:    r += "\n - Detect Life. \n\t The undead can magically sense the presence of living creatures up to 5 miles away that aren't undead or constructs. She knows the general direction they're in but not their exact locations."
+    if Type == "Undead" and Dice() == 1:    r += "\n - Ephemeral \n\t The Undead  can't wear or carry anything."
+    if Type == "Undead" and Dice() == 1:    r += "\n - Incorporeal Movement \n\t The Undead  can move through other creatures and objects as if they were difficult terrain. It takes 5 (1d10) force damage if it ends its turn inside an object."
+    if Type == "Undead" and Dice() == 1:    r += "\n - Stench.  \n\t Any creature that starts its turn within 5 feet of the undead must succeed on a DC 10 Constitution saving throw or be poisoned until the start of its next turn. On a successful saving throw, the creature is immune to the undead's Stench for 24 hours."
+    if Type == "Undead" and Dice() == 1:    r += "\n - Shadow Stealth \n\t While in dim light or darkness, the Undead can take the Hide action as a bonus action. Its stealth bonus is also improved to +6."
+    if Type == "Undead" and Dice() == 1:    r += "\n - Sunlight Weakness \n\t While in sunlight, the shadow has disadvantage on attack rolls, ability checks, and saving throws."
+    if Type == "Undead" and Dice() == 1:    r += "\n - Sunlight Sensitivity  \n\t While in sunlight, the undead has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+    if Type == "Undead" and Dice() == 1:    r += "\n- Incorporeal Movement: \n\t The undead can move through other creatures and objects as if they were difficult terrain. It takes 5 (1d10) force damage if it ends its turn inside an object."
+    if Type == "Undead" and Dice() == 1:    r += "\n- Life Drain \n\t Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 5 (1d6 + 2) necrotic damage. The target must succeed on a DC 13 Constitution saving throw or its hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0. \n\t A humanoid slain by this attack rises 24 hours later as a zombie under the wight's control, unless the humanoid is restored to life or its body is destroyed. The wight can have no more than twelve zombies under its control at one time."
+    if Type == "Undead" and Dice(6) == 1:   r += "\n- Invisibility \n\t The Undead magically turns invisible until it attacks, or until its concentration ends (as if concentrating on a spell). Any equipment the undead wears or carries is invisible with it."
+    elif Type == "Undead" and Dice(6) == 1: r = r + "\n- Invisibility \n\t The Undead is invisible."
+    if Type == "Undead" and Dice() == 1:    r = r + "\n- Telekinetic Thrust"
+    if Type == "Undead" and Dice() == 1:    r = r + "\n - Turn Defiance \n\t The undead and any undeads within 30 feet of it have advantage on saving throws against effects that turn undead."
+    if Type == "Undead" and Dice() == 1:    r = r + "\n - Turn Immunity \n\t The Undead is immune to effects that turn undead."
+    if Type == "Undead" and Dice() == 1:    r = r + "\n - Undead Fortitude. \n\t If damage reduces the Undead to 0 hit points, it must make a Constitution saving throw with a DC of 5 + the damage taken, unless the damage is radiant or from a critical hit. On a success, the Undead drops to 1 hit point instead."
+    if Type == "Undead" and Dice() == 1:    r = r + "\n - Variable Illumination. \n\t The undead sheds bright light in a 5 to 20-foot radius and dim light for an additional number of ft. equal to the chosen radius. The will-o'-wisp can alter the radius as a bonus action."
 
     if Type == "Noble" and Dice() == 1:
         r += "\n- Parry \n\t The noble adds 2 to its AC against one melee attack that would hit it. To do so, the noble must see the attacker and be wielding a melee weapon."
@@ -4236,11 +4182,12 @@ def NPC():
 
     print("Lvl: {}".format(Lvl), "   HP: {}".format( Lvl*(Dice(12) + Dice(2)*Modifier(CON))))
     print("AC:", AC)
-    print("\n\n\t", " STR:", STR, "\t", Modifier(STR), "\n\t",
-          "DEX:", DEX, " \t", Modifier(DEX), "\n\t"
-          "CON:", CON, " \t",  Modifier(CON), "\n\t"
-          "INT:", INT, " \t",  Modifier(INT), "\n\t"
-          "WIS:", WIS, " \t", Modifier(WIS), "\n\t"
+    print("\n\n\t",
+          "STR:", STR, " \t",  Modifier(STR), "\n\t",
+          "DEX:", DEX, " \t",  Modifier(DEX), "\n\t",
+          "CON:", CON, " \t",  Modifier(CON), "\n\t",
+          "INT:", INT, " \t",  Modifier(INT), "\n\t",
+          "WIS:", WIS, " \t",  Modifier(WIS), "\n\t",
           "CHA:", CHA, " \t",  Modifier(CHA), "\n\t")
 
     print("Saving Throws:")
