@@ -4234,7 +4234,7 @@ def NPC():
     print(nm)
     print("\n")
 
-    print("Lvl:", Lvl, "   HP:", Lvl*(Dice(12) + Dice(2)*Modifier(CON)))
+    print("Lvl: {}".format(Lvl), "   HP: {}".format( Lvl*(Dice(12) + Dice(2)*Modifier(CON))))
     print("AC:", AC)
     print("\n\n\t", " STR:", STR, "\t", Modifier(STR), "\n\t",
           "DEX:", DEX, " \t", Modifier(DEX), "\n\t"
