@@ -362,7 +362,7 @@ def Title():
         "Of The South",
         "Of The Summer",
         "Of The Spring",
-        "Of The Storm"
+        "Of The Storm",
         "Of The West",
         "Of The Winter",
         "Of Thor",
@@ -2170,7 +2170,7 @@ def Actions(Type=""):
     elif Type == "Goblin" and Dice(10) == 1:r += "\n- Martial Advantage \n\t Once per turn, the Goblin can deal an extra 10 (3d6) damage to a creature it hits with a weapon attack if that creature is within 5 feet of an ally of the goblin that isn't incapacitated."
     if Type == "Goblin" and Dice() == 1:    r += "\n- Brute \n\t A melee weapon deals one extra die of its damage when the Goblin hits with it (included in the attack)."
     if Type == "Goblin" and Dice() == 1:    r += "\n- Surprise Attack \n\t If the Goblin surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 7 (2d6) damage from the attack."
-    if Type == "Goblin" and Dice() == 1:    r += "\n- Redirect Attack (Reaction) \n\t When a creature the goblin can see targets it with an attack, the goblin chooses another goblin within 5 feet of it. The two goblins swap places, and the chosen goblin becomes the target instead."
+    if Type == "Goblin" and Dice(8) == 1:   r += "\n- Redirect Attack (Reaction) \n\t When a creature the goblin can see targets it with an attack, the goblin chooses another goblin within 5 feet of it. The two goblins swap places, and the chosen goblin becomes the target instead."
     if Type == "Goblin" and Dice() == 1:    r += "\n- Multiattack \n\t The goblin makes two Simple Attacks attacks. The second attack has disadvantage."
     elif Type == "Goblin" and Dice() == 1:  r += "\n- Multiattack \n\t The goblin makes two Simple Attacks attacks."
     if Type == "Goblin" and Dice() == 1:    r += "\n- Heart of Hruggek \n\t The goblin has advantage on saving throws against being charmed, frightened, paralyzed, poisoned, stunned, or put to sleep."
@@ -3530,7 +3530,7 @@ def NPC():
     bg = Background()
 
     Lvl = Dice(30)
-    Lvl = 1
+    #Lvl = 1
     rc = Race()
     nm = Name(rc)
     al = Alignment()
