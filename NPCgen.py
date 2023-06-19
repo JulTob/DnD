@@ -1144,8 +1144,8 @@ def Language(race=Race(), background=Background()):
     if race == "Goblin":
         if not ("Goblin" in l):            l += "Goblin. "
         if Dice(2) == 1 and not ("Common" in l):            l += "Common. "
-        if Dice() == 1 and not ("Giant" in l)               l += "Giant. "
-        if Dice(10) == 1 and not ("Draconic" in l)          l += "Draconic. "
+        if Dice() == 1 and not ("Giant" in l):              l += "Giant. "
+        if Dice(10) == 1 and not ("Draconic" in l):         l += "Draconic. "
 
     if race == "Halfling":
         if not ("Common" in l):         l += "Common."
@@ -1289,7 +1289,7 @@ def Language(race=Race(), background=Background()):
     if background == "Monk":
         if not ("Common" in l):            l += "Common. "
         if Dice() == 1 and not ("Celestial" in l):           l += "Celestial. "
-        if Dice() == 1 and not ("Draconic" in l)             l += "Draconic. "
+        if Dice() == 1 and not ("Draconic" in l):            l += "Draconic. "
         if Dice() == 1 and not ("Primordial" in l):          l += "Primordial. "
 
     if background == "Noble":
@@ -1858,12 +1858,14 @@ def Actions(Type=""):
         else:                      r = r + "\n- Darkvision: \n\t 60ft"
 
     if Type == "Aberration":
-        if Dice() == 1:         r = r + "\n- Telepathy: \n\t 60ft"
+        if Dice() == 1:
+            r = r + "\n- Telepathy: \n\t 60ft"
             if Dice(3) == 1:    r = r + "\n- Advanced Telepathy: \n\t The Aberration can perceive the content of any telepathic communication used within 60 feet of it, and it can't be surprised by creatures with any form of telepathy."
             if Dice(3) == 1:    r = r + "\n- Telepathic Shroud. \n\t The Aberration is immune to any effect that would sense its emotions or read its thoughts, as well as all divination spells."
 
     if Type == "Aberration":
-        if Dice() == 1:            r = r + "\n- Detect Sentience: \n\t It can sense the presence and location of any creature within 300 feet of it that has an Intelligence of 3 or higher, regardless of interposing barriers, unless the creature is protected by a mind blank spell."
+        if Dice() == 1:
+            r = r + "\n- Detect Sentience: \n\t It can sense the presence and location of any creature within 300 feet of it that has an Intelligence of 3 or higher, regardless of interposing barriers, unless the creature is protected by a mind blank spell."
             if Dice() == 1:        r = r + "\n- Devour Intellect: \n\t It targets one creature it can see within 10 feet of it that has a brain. The target must succeed on a DC [10+%DEX] Intelligence saving throw against this magic or take 11 (2d10) psychic damage. Also on a failure, roll 3d6: If the total equals or exceeds the target's Intelligence score, that score is reduced to 0. The target is stunned until it regains at least one point of Intelligence."
 
     if Type == "Aberration" and Dice() == 1:        r = r + "\n- Body Thief. \n\t The intellect devourer initiates an Intelligence contest with an incapacitated humanoid within 5 feet of it that isn't protected by protection from evil and good. If it wins the contest, the intellect devourer magically consumes the target's brain, teleports into the target's skull, and takes control of the target's body. While inside a creature, the intellect devourer has total cover against attacks and other effects originating outside its host. The intellect devourer retains its Intelligence, Wisdom, and Charisma scores, as well as its understanding of Deep Speech, its telepathy, and its traits. It otherwise adopts the target's statistics. It knows everything the creature knew, including spells and languages. \n\t If the host body dies, the intellect devourer must leave it. A protection from evil and good spell cast on the body drives the intellect devourer out. The intellect devourer is also forced out if the target regains its devoured brain by means of a wish. By spending 5 feet of its movement, the intellect devourer can voluntarily leave the body, teleporting to the nearest unoccupied space within 5 feet of it. The body then dies, unless its brain is restored within 1 round."
@@ -1875,7 +1877,8 @@ def Actions(Type=""):
     if Type == "Aven" and Dice() == 1:        r += "\n- Ambusher"
     if Type == "Aven" and Dice() == 1:        r += "\n- Mimicry \n\t The Ravenfolk can mimic simple sounds it has heard, such as a person whispering, a baby crying, or an animal chittering. A creature that hears the sounds can tell they are imitations with a successful DC 10 Wisdom (Insight) check."
 
-    if (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:        r += "\n- Damage Immunities. \t cold."
+    if (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:
+        r += "\n- Damage Immunities. \t cold."
         if Dice(4) == 1:   r += "\n- Snow Camouflage. \t The beast has advantage on Dexterity (Stealth) checks made to hide in snowy terrain."
 
     if (Type == "Beast" or Type == "Beastfolk"):
@@ -1885,9 +1888,11 @@ def Actions(Type=""):
     if (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:        r = r + "\n- Climb. \n\t 30 ft."
     if (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:        r = r + "\n- Burrow. \n\t 10 ft."
     if (Type == "Beast" or Type == "Beastfolk"):
-        if Dice(8) == 1:            r = r + "\n- Fly. \n\t 60 ft."
+        if Dice(8) == 1:
+            r = r + "\n- Fly. \n\t 60 ft."
             if Dice(3) == 1:        r = r + "\n- Flyby. \n\t The beast doesn't provoke opportunity attacks when it flies out of an enemy's reach."
-        elif Dice(8) == 1:          r = r + "\n- Fly. \n\t 80 ft."
+        elif Dice(8) == 1:
+            r = r + "\n- Fly. \n\t 80 ft."
             if Dice() == 1:         r = r + "\n- Flyby. \n\t The beast doesn't provoke opportunity attacks when it flies out of an enemy's reach."
 
     if (Type == "Beast" or Type == "Beastfolk"):
