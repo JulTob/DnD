@@ -227,15 +227,15 @@ def Title():
         "Anthropologist",
         "Baboon",
         "Band",
-        " Bard",
-        " Baron",
+        "Bard",
+        "Baron",
         "Basilisk",
-        " Battle",
-        " Benefactor",
-        " Berserker",
+        "Battle",
+        "Benefactor",
+        "Berserker",
         "Bear",
         "Beholder",
-        " Blade",
+        "Blade",
         "Bow",
         "Bringer",
         "Breeder",
@@ -245,31 +245,31 @@ def Title():
         "Cat",
         "Camel",
         "Captain",
-        " Chemist",
+        "Chemist",
         "Champion",
         "Charlatan",
         "Chimera",
-        " Collector",
+        "Collector",
         "Collosus",
         "Commander",
         "Cultist",
         "Dancer",
         "Darkness",
-        " Diamond",
+        "Diamond",
         "Dino",
         "Deer",
-        " Death",
-        " Devil",
-        " Doctor",
-        " Doom",
-        " Dragon",
-        " Drake",
-        " Druid",
+        "Death",
+        "Devil",
+        "Doctor",
+        "Doom",
+        "Dragon",
+        "Drake",
+        "Druid",
         "Dream",
         "Drone",
         "Devourer",
         "Eagle",
-        " Eater",
+        "Eater",
         "Eclipse",
         "Enforcer",
         "Elite",
@@ -277,42 +277,42 @@ def Title():
         "Element",
         "Farmer",
         "Fanatic",
-        " Fire",
+        "Fire",
         "Fury",
-        " Flutist",
+        "Flutist",
         "Flame",
         "Freedomfighter",
         "Gargoyle",
-        " Genius",
+        "Genius",
         "Giant",
-        " Grandmaster",
+        "Grandmaster",
         "Ghost",
         "Golem",
         "Goat",
         "Guard",
-        " Hand",
+        "Hand",
         "Hag",
         "Hawk",
         "Heir",
         "Hermit",
         "Hero",
         "Hive",
-        " Horror",
+        "Horror",
         "Hound",
         "Hunter",
         "Hunger",
         "Hyena",
         "Hydra",
-        " Inquisitor",
+        "Inquisitor",
         "Incubus",
         "Intellect",
         "Jackal",
         "Knight",
-        " Killer",
-        " Knife",
+        "Killer",
+        "Knife",
         "King",
         "Kiss",
-        " Leader",
+        "Leader",
         "Lion",
         "Light",
         "Lizard",
@@ -321,12 +321,12 @@ def Title():
         "Lover",
         "Man",
         "Machine",
-        " Mage",
-        " Master",
+        "Mage",
+        "Master",
         "Mastermind",
         "Mastiff",
-        " Martyr",
-        " Mind",
+        "Martyr",
+        "Mind",
         "Mist",
         "Monk",
         "Monster",
@@ -1080,290 +1080,189 @@ def Language(race=Race(), background=Background()):
             l += "Elvish. "
 
     if race == "Celestial":
-        if not ("Celestial" in l):
-            l += "Celestial. "
-        if not ("Common" in l):
-            l += "Common. "
-        if Dice() == 1 and not ("Sylvan" in l):
-            l += "Sylvan. "
-        if Dice(20) == 1 and not ("All languages" in l):
-            l += "All languages. "
-        if Dice(20) == 1 and not ("Telepathy" in l):
-            l += "Telepathy. "
+        if not ("Celestial" in l):      l += "Celestial. "
+        if not ("Common" in l):         l += "Common. "
+        if Dice() == 1 and not ("Sylvan" in l):             l += "Sylvan. "
+        if Dice(20) == 1 and not ("All languages" in l):    l += "All languages. "
+        if Dice(20) == 1 and not ("Telepathy" in l):        l += "Telepathy. "
 
     if race == "Construct":
         l += "Understands the languages of its creator. "
-        if Dice(20) == 1 and not ("All languages" in l):
-            l += "All languages. "
+        if Dice(20) == 1 and not ("All languages" in l):    l += "All languages. "
 
     if race == "Dragon":
         l += "Draconic. "
-        if Dice(3) == 1 and not ("Common" in l):
-            l += "Common. "
-        if Dice() == 1 and not ("Sylvan" in l):
-            l += "Sylvan. "
-        if Dice(8) == 1 and not ("Dwarvish" in l):
-            l += "Dwarvish. "
-        if Dice(8) == 1 and not ("Elvish" in l):
-            l += "Elvish. "
-        if Dice(8) == 1 and not ("Orc" in l):
-            l += "Orc. "
-        if Dice(8) == 1 and not ("Goblin" in l):
-            l += "Goblin. "
+        if Dice(3) == 1 and not ("Common" in l):            l += "Common. "
+        if Dice() == 1 and not ("Sylvan" in l):             l += "Sylvan. "
+        if Dice(8) == 1 and not ("Dwarvish" in l):          l += "Dwarvish. "
+        if Dice(8) == 1 and not ("Elvish" in l):            l += "Elvish. "
+        if Dice(8) == 1 and not ("Orc" in l):               l += "Orc. "
+        if Dice(8) == 1 and not ("Goblin" in l):            l += "Goblin. "
 
     if race == "Dwarf":
         l += "Dwarvish. "
-        if Dice(3) == 1 and not ("Common" in l):
-            l += "Common. "
-        if Dice(3) == 1 and not ("Undercommon" in l):
-            l += "Undercommon. "
+        if Dice(3) == 1 and not ("Common" in l):            l += "Common. "
+        if Dice(3) == 1 and not ("Undercommon" in l):       l += "Undercommon. "
 
     if race == "Elf":
         l += "Elvish. "
-        if Dice(3) == 1 and not ("Common" in l):
-            l += "Common. "
-        if Dice(3) == 1 and not ("Sylvan" in l):
-            l += "Sylvan. "
+        if Dice(3) == 1 and not ("Common" in l):            l += "Common. "
+        if Dice(3) == 1 and not ("Sylvan" in l):            l += "Sylvan. "
 
     if race == "Elemental":
         l += "Primordial. "
-        if Dice() == 1 and not ("Common" in l):
-            l += "Common. "
-        if Dice(4) == 1:
-            l += "Ignan. "
-        if Dice(4) == 1:
-            l += "Terran. "
-        if Dice(4) == 1:
-            l += "Aquan. "
-        if Dice(4) == 1:
-            l += "Auran. "
+        if Dice() == 1 and not ("Common" in l):            l += "Common. "
+        if Dice(4) == 1:            l += "Ignan. "
+        if Dice(4) == 1:            l += "Terran. "
+        if Dice(4) == 1:            l += "Aquan. "
+        if Dice(4) == 1:            l += "Auran. "
 
     if race == "Fey":
         l += "Sylvan. "
-        if Dice(3) == 1 and not ("Common" in l):
-            l += "Common. "
-        if Dice(3) == 1 and not ("Elvish" in l):
-            l += "Elvish. "
+        if Dice(3) == 1 and not ("Common" in l):            l += "Common. "
+        if Dice(3) == 1 and not ("Elvish" in l):            l += "Elvish. "
 
     if race == "Fiend":
-        if not ("Common" in l):
-            l += "Common. "
-        if Dice(2) == 1 and not ("Infernal" in l):
-            l += "Infernal. "
-        if Dice(2) == 1 and not ("Abyssal" in l):
-            l += "Abyssal. "
-        if Dice(10) == 1 and not ("Telepathy" in l):
-            l += "Telepathy. "
+        if not ("Common" in l):            l += "Common. "
+        if Dice(2) == 1 and not ("Infernal" in l):           l += "Infernal. "
+        if Dice(2) == 1 and not ("Abyssal" in l):            l += "Abyssal. "
+        if Dice(10) == 1 and not ("Telepathy" in l):         l += "Telepathy. "
 
     if race == "Giant":
-        if not ("Common" in l):
-            l += "Common. "
-        if not ("Giant" in l):
-            l += "Giant. "
+        if not ("Common" in l):         l += "Common. "
+        if not ("Giant" in l):          l += "Giant. "
 
     if race == "Gnome":
         l += "Gnomish. "
-        if Dice(3) == 1 and not ("Common" in l):
-            l += "Common. "
-        if Dice(3) == 1:
-            l += "Elvish. "
-        if Dice(3) == 1:
-            l += "Dwarvish. "
-        if Dice(3) == 1:
-            l += "Giant. "
-        if Dice(3) == 1:
-            l += "Halfling. "
-        if Dice() == 1:
-            l += "Sylvan. "
+        if Dice(3) == 1 and not ("Common" in l):            l += "Common. "
+        if Dice(3) == 1 and not ("Elvish" in l):            l += "Elvish. "
+        if Dice(3) == 1 and not ("Dwarvish" in l):          l += "Dwarvish. "
+        if Dice(3) == 1 and not ("Giant" in l):             l += "Giant. "
+        if Dice(3) == 1 and not ("Halfling" in l):          l += "Halfling. "
+        if Dice() == 1 and not ("Sylvan" in l):             l += "Sylvan. "
 
     if race == "Goblin":
-        if not ("Goblin" in l):
-            l += "Goblin. "
-        if Dice(2) == 1 and not ("Common" in l):
-            l += "Common. "
-        if Dice() == 1 and not ("Giant" in l):
-            l += "Giant. "
-        if Dice(10) == 1 and not ("Draconic" in l):
-            l += "Draconic. "
+        if not ("Goblin" in l):            l += "Goblin. "
+        if Dice(2) == 1 and not ("Common" in l):            l += "Common. "
+        if Dice() == 1 and not ("Giant" in l)               l += "Giant. "
+        if Dice(10) == 1 and not ("Draconic" in l)          l += "Draconic. "
 
     if race == "Halfling":
-        if not ("Common" in l):
-            l += "Common."
-        if not ("Halfling" in l):
-            l += "Halfling. "
+        if not ("Common" in l):         l += "Common."
+        if not ("Halfling" in l):       l += "Halfling. "
+        
     if race == "Kobold":
-        l += "Draconic. "
-        if Dice(3) == 1 and not ("Common" in l):
-            l += "Common. "
+        if not ("Draconic" in l):   l += "Draconic. "
+        if Dice(3) == 1 and not ("Common" in l):    l += "Common. "
+        
     if race == "Lizardfolk":
-        l += "Draconic. "
-        if Dice(2) == 1 and not ("Common" in l):
-            l += "Common. "
+        if not ("Draconic" in l): l += "Draconic. "
+        if Dice(2) == 1 and not ("Common" in l):    l += "Common. "
+        
     if race == "Monstrosity":
-        if Dice(2) == 1 and not ("Common" in l):
-            l += "Common. "
-        if Dice() == 1 and not ("Undercommon" in l):
-            l += "Undercommon. "
-        if Dice() == 1 and not ("Sylvan" in l):
-            l += "Sylvan. "
+        if Dice(2) == 1 and not ("Common" in l):            l += "Common. "
+        if Dice() == 1 and not ("Undercommon" in l):        l += "Undercommon. "
+        if Dice() == 1 and not ("Sylvan" in l):             l += "Sylvan. "
+        
     if race == "Ooze":
         l += "Telepathy. "
+        
     if race == "Orc":
         l += "Orc. "
-        if Dice(2) == 1 and not ("Common" in l):
-            l += "Common. "
+        if Dice(2) == 1 and not ("Common" in l):            l += "Common. "
+        
     if race == "Plant":
-        if Dice(3) == 1 and not ("Common" in l):
-            l += "Common. "
-        if Dice(3) == 1:
-            l += "Sylvan. "
+        if Dice(3) == 1 and not ("Common" in l):            l += "Common. "
+        if Dice(3) == 1 and not ("Sylvan" in l):            l += "Sylvan. "
+        
     if race == "Snakefolk":
-        l += "Draconic. "
-        if Dice(3) == 1:
-            l += "Abyssal. "
-        if Dice(3) == 1 and not ("Common" in l):
-            l += "Common. "
+        if not ("Draconic" in l): l += "Draconic. "
+        if Dice(3) == 1 and not ("Abyssal" in l):           l += "Abyssal. "
+        if Dice(3) == 1 and not ("Common" in l):            l += "Common. "
 
     if race == "Undead":
         l += "Understands languages it knew in life. "
-        if Dice(2) == 1 and not ("Common" in l):
-            l += "Common. "
-        if Dice(8) == 1 and not ("Infernal" in l):
-            l += "Infernal. "
-        if Dice(8) == 1 and not ("Abyssal" in l):
-            l += "Abyssal. "
-        if Dice(8) == 1 and not ("Celestial" in l):
-            l += "Celestial. "
+        if Dice(2) == 1 and not ("Common" in l):            l += "Common. "
+        if Dice(8) == 1 and not ("Infernal" in l):          l += "Infernal. "
+        if Dice(8) == 1 and not ("Abyssal" in l):           l += "Abyssal. "
+        if Dice(8) == 1 and not ("Celestial" in l):         l += "Celestial. "
 
     if background == "Druid":
         l += "Druidic. "
-        if Dice(4) == 1 and not ("Sylvan" in l):
-            l += "Sylvan. "
-        if Dice(4) == 1 and not ("Primordial" in l):
-            l += "Primordial. "
-        if Dice(4) == 1 and not ("Draconic" in l):
-            l += "Draconic. "
-        if Dice(4) == 1 and not ("Elvish" in l):
-            l += "Elvish. "
+        if Dice(4) == 1 and not ("Sylvan" in l):            l += "Sylvan. "
+        if Dice(4) == 1 and not ("Primordial" in l):        l += "Primordial. "
+        if Dice(4) == 1 and not ("Draconic" in l):          l += "Draconic. "
+        if Dice(4) == 1 and not ("Elvish" in l):            l += "Elvish. "
 
     if background == "Bandit":
-        if not ("Common" in l):
-            l += "Common. "
-        if not ("Thieve" in l):
-            l += "Thieve's Cant. "
+        if not ("Common" in l):            l += "Common. "
+        if not ("Thieve" in l):            l += "Thieve's Cant. "
     if background == "Bard":
-        if not ("Common" in l):
-            l += "Common. "
-        if Dice() == 1 and not ("Dwarvish" in l):
-            l += "Dwarvish. "
-        if Dice() == 1 and not ("Elvish" in l):
-            l += "Elvish. "
-        if Dice() == 1 and not ("Gnomish" in l):
-            l += "Gnomish. "
-        if Dice() == 1 and not ("Halfling" in l):
-            l += "Halfling. "
-        if Dice() == 1 and not ("Sylvan" in l):
-            l += "Sylvan. "
+        if not ("Common" in l):            l += "Common. "
+        if Dice() == 1 and not ("Dwarvish" in l):          l += "Dwarvish. "
+        if Dice() == 1 and not ("Elvish" in l):            l += "Elvish. "
+        if Dice() == 1 and not ("Gnomish" in l):           l += "Gnomish. "
+        if Dice() == 1 and not ("Halfling" in l):          l += "Halfling. "
+        if Dice() == 1 and not ("Sylvan" in l):            l += "Sylvan. "
 
     if background == "Berserker":
-        if not ("Common" in l):
-            l += "Common. "
-        if Dice() == 1 and not ("Dwarvish" in l):
-            l += "Dwarvish. "
-        if Dice() == 1 and not ("Giant" in l):
-            l += "Giant. "
-        if Dice() == 1 and not ("Orc" in l):
-            l += "Orc. "
-        if Dice() == 1 and not ("Undercommon" in l):
-            l += "Undercommon. "
+        if not ("Common" in l):            l += "Common. "
+        if Dice() == 1 and not ("Dwarvish" in l):         l += "Dwarvish. "
+        if Dice() == 1 and not ("Giant" in l):            l += "Giant. "
+        if Dice() == 1 and not ("Orc" in l):              l += "Orc. "
+        if Dice() == 1 and not ("Undercommon" in l):      l += "Undercommon. "
 
     if background == "Charlatan":
-        if not ("Common" in l):
-            l += "Common. "
-        if Dice() == 1 and not ("Elvish" in l):
-            l += "Elvish. "
-        if Dice() == 1 and not ("Gnomish" in l):
-            l += "Gnomish. "
-        if Dice() == 1 and not ("Halfling" in l):
-            l += "Halfling. "
+        if not ("Common" in l):            l += "Common. "
+        if Dice() == 1 and not ("Elvish" in l):         l += "Elvish. "
+        if Dice() == 1 and not ("Gnomish" in l):        l += "Gnomish. "
+        if Dice() == 1 and not ("Halfling" in l):       l += "Halfling. "
 
     if background == "Cultist":
-        if Dice(8) == 1 and not ("Abyssal" in l):
-            l += "Abyssal. "
-        if Dice(8) == 1 and not ("Celestial" in l):
-            l += "Celestial. "
-        if Dice(8) == 1 and not ("Draconic" in l):
-            l += "Draconic. "
-        if Dice(8) == 1 and not ("Deep Speech" in l):
-            l += "Deep Speech. "
-        if Dice(8) == 1 and not ("Infernal" in l):
-            l += "Infernal. "
-        if Dice(8) == 1 and not ("Primordial" in l):
-            l += "Primordial. "
-        if Dice(8) == 1 and not ("Sylvan" in l):
-            l += "Sylvan. "
-        if Dice(8) == 1 and not ("Undercommon" in l):
-            l += "Undercommon. "
+        if Dice(8) == 1 and not ("Abyssal" in l):            l += "Abyssal. "
+        if Dice(8) == 1 and not ("Celestial" in l):          l += "Celestial. "
+        if Dice(8) == 1 and not ("Draconic" in l):           l += "Draconic. "
+        if Dice(8) == 1 and not ("Deep Speech" in l):        l += "Deep Speech. "
+        if Dice(8) == 1 and not ("Infernal" in l):           l += "Infernal. "
+        if Dice(8) == 1 and not ("Primordial" in l):         l += "Primordial. "
+        if Dice(8) == 1 and not ("Sylvan" in l):             l += "Sylvan. "
+        if Dice(8) == 1 and not ("Undercommon" in l):        l += "Undercommon. "
 
     if background == "Criminal":
-        if not ("Thieve" in l):
-            l += "Thieve's Cant. "
-        if not ("Common" in l):
-            l += "Common. "
-        if Dice() == 1 and not ("Dwarvish" in l):
-            l += "Dwarvish. "
-        if Dice() == 1 and not ("Giant" in l):
-            l += "Giant. "
-        if Dice() == 1 and not ("Goblin" in l):
-            l += "Goblin. "
-        if Dice() == 1 and not ("Orc" in l):
-            l += "Orc. "
-        if Dice() == 1 and not ("Undercommon" in l):
-            l += "Undercommon. "
+        if not ("Thieve" in l):            l += "Thieve's Cant. "
+        if not ("Common" in l):            l += "Common. "
+        if Dice() == 1 and not ("Dwarvish" in l):         l += "Dwarvish. "
+        if Dice() == 1 and not ("Giant" in l):            l += "Giant. "
+        if Dice() == 1 and not ("Goblin" in l):           l += "Goblin. "
+        if Dice() == 1 and not ("Orc" in l):              l += "Orc. "
+        if Dice() == 1 and not ("Undercommon" in l):      l += "Undercommon. "
 
     if background == "Expert":
-        if Dice() == 1 and not ("Dwarvish" in l):
-            l += "Dwarvish. "
-        if Dice() == 1 and not ("Elvish" in l):
-            l += "Elvish. "
-        if Dice() == 1 and not ("Giant" in l):
-            l += "Giant. "
-        if Dice() == 1 and not ("Gnomish" in l):
-            l += "Gnomish. "
-        if Dice() == 1 and not ("Celestial" in l):
-            l += "Celestial. "
+        if Dice() == 1 and not ("Dwarvish" in l):         l += "Dwarvish. "
+        if Dice() == 1 and not ("Elvish" in l):           l += "Elvish. "
+        if Dice() == 1 and not ("Giant" in l):            l += "Giant. "
+        if Dice() == 1 and not ("Gnomish" in l):          l += "Gnomish. "
+        if Dice() == 1 and not ("Celestial" in l):        l += "Celestial. "
 
     if background == "Explorer":
-        if Dice(4) == 1 and not ("Elvish" in l):
-            l += "Elvish. "
-        if Dice(4) == 1 and not ("Giant" in l):
-            l += "Giant. "
-        if Dice(4) == 1 and not ("Goblin" in l):
-            l += "Goblin. "
-        if Dice(4) == 1 and not ("Orc" in l):
-            l += "Orc. "
-        if Dice() == 1 and not ("Draconic" in l):
-            l += "Draconic. "
-        if Dice() == 1 and not ("Primordial" in l):
-            l += "Primordial. "
-        if Dice() == 1 and not ("Sylvan" in l):
-            l += "Sylvan. "
+        if Dice(4) == 1 and not ("Elvish" in l):          l += "Elvish. "
+        if Dice(4) == 1 and not ("Giant" in l):           l += "Giant. "
+        if Dice(4) == 1 and not ("Goblin" in l):          l += "Goblin. "
+        if Dice(4) == 1 and not ("Orc" in l):             l += "Orc. "
+        if Dice() == 1 and not ("Draconic" in l):         l += "Draconic. "
+        if Dice() == 1 and not ("Primordial" in l):       l += "Primordial. "
+        if Dice() == 1 and not ("Sylvan" in l):           l += "Sylvan. "
 
     if background == "Gladiator":
-        if not ("Common" in l):
-            l += "Common. "
+        if not ("Common" in l):            l += "Common. "
 
     if background == "Guard":
-        if not ("Common" in l):
-            l += "Common. "
+        if not ("Common" in l):            l += "Common. "
 
     if background == "Healer":
-        if Dice() == 1 and not ("Celestial" in l):
-            l += "Celestial. "
-        if Dice() == 1 and not ("Primordial" in l):
-            l += "Primordial. "
-        if Dice() == 1 and not ("Sylvan" in l):
-            l += "Sylvan. "
+        if Dice() == 1 and not ("Celestial" in l):            l += "Celestial. "
+        if Dice() == 1 and not ("Primordial" in l):           l += "Primordial. "
+        if Dice() == 1 and not ("Sylvan" in l):               l += "Sylvan. "
 
     if background == "Hero":
         if not ("Common" in l):                     l += "Common. "
@@ -1381,195 +1280,117 @@ def Language(race=Race(), background=Background()):
         if Dice() == 1 and not ("Sylvan" in l):         l += "Sylvan. "
 
     if background == "Mage":
-        if not ("Common" in l):
-            l += "Common. "
-        if Dice() == 1 and not ("Dwarvish" in l):
-            l += "Dwarvish. "
-        if Dice() == 1 and not ("Elvish" in l):
-            l += "Elvish. "
-        if Dice() == 1 and not ("Giant" in l):
-            l += "Giant. "
-        if Dice() == 1 and not ("Gnomish" in l):
-            l += "Gnomish. "
+        if not ("Common" in l):            l += "Common. "
+        if Dice() == 1 and not ("Dwarvish" in l):           l += "Dwarvish. "
+        if Dice() == 1 and not ("Elvish" in l):             l += "Elvish. "
+        if Dice() == 1 and not ("Giant" in l):              l += "Giant. "
+        if Dice() == 1 and not ("Gnomish" in l):            l += "Gnomish. "
 
     if background == "Monk":
-        if not ("Common" in l):
-            l += "Common. "
-        if Dice() == 1 and not ("Celestial" in l):
-            l += "Celestial. "
-        if Dice() == 1 and not ("Draconic" in l):
-            l += "Draconic. "
-        if Dice() == 1 and not ("Primordial" in l):
-            l += "Primordial. "
+        if not ("Common" in l):            l += "Common. "
+        if Dice() == 1 and not ("Celestial" in l):           l += "Celestial. "
+        if Dice() == 1 and not ("Draconic" in l)             l += "Draconic. "
+        if Dice() == 1 and not ("Primordial" in l):          l += "Primordial. "
 
     if background == "Noble":
-        if not ("Common" in l):
-            l += "Common. "
-        if Dice() == 1 and not ("Dwarvish" in l):
-            l += "Dwarvish. "
-        if Dice() == 1 and not ("Elvish" in l):
-            l += "Elvish. "
+        if not ("Common" in l):            l += "Common. "
+        if Dice() == 1 and not ("Dwarvish" in l):          l += "Dwarvish. "
+        if Dice() == 1 and not ("Elvish" in l):            l += "Elvish. "
 
     if background == "Priest":
-        if not ("Common" in l):
-            l += "Common. "
-        if Dice() == 1 and not ("Celestial" in l):
-            l += "Celestial. "
-        if Dice() == 1 and not ("Infernal" in l):
-            l += "Infernal. "
-        if Dice() == 1 and not ("Abyssal" in l):
-            l += "Abyssal. "
+        if not ("Common" in l):            l += "Common. "
+        if Dice() == 1 and not ("Celestial" in l):           l += "Celestial. "
+        if Dice() == 1 and not ("Infernal" in l):            l += "Infernal. "
+        if Dice() == 1 and not ("Abyssal" in l):             l += "Abyssal. "
 
     if background == "Pirate":
-        if not ("Common" in l):
-            l += "Common. "
-        if not ("Thieve" in l):
-            l += "Thieve's Cant. "
+        if not ("Common" in l):            l += "Common. "
+        if not ("Thieve" in l):            l += "Thieve's Cant. "
 
     if background == "Ranger":
-        if Dice(4) == 1 and not ("Elvish" in l):
-            l += "Elvish. "
-        if Dice(4) == 1 and not ("Giant" in l):
-            l += "Giant. "
-        if Dice(4) == 1 and not ("Goblin" in l):
-            l += "Goblin. "
-        if Dice(4) == 1 and not ("Orc" in l):
-            l += "Orc. "
-        if Dice() == 1 and not ("Draconic" in l):
-            l += "Draconic. "
-        if Dice() == 1 and not ("Primordial" in l):
-            l += "Primordial. "
-        if Dice() == 1 and not ("Sylvan" in l):
-            l += "Sylvan. "
+        if Dice(4) == 1 and not ("Elvish" in l):           l += "Elvish. "
+        if Dice(4) == 1 and not ("Giant" in l):            l += "Giant. "
+        if Dice(4) == 1 and not ("Goblin" in l):           l += "Goblin. "
+        if Dice(4) == 1 and not ("Orc" in l):              l += "Orc. "
+        if Dice() == 1 and not ("Draconic" in l):          l += "Draconic. "
+        if Dice() == 1 and not ("Primordial" in l):        l += "Primordial. "
+        if Dice() == 1 and not ("Sylvan" in l):            l += "Sylvan. "
 
     if background == "Scholar":
-        if Dice() == 1 and not ("Abyssal" in l):
-            l += "Abyssal. "
-        if Dice() == 1 and not ("Celestial" in l):
-            l += "Celestial. "
-        if Dice() == 1 and not ("Draconic" in l):
-            l += "Draconic. "
-        if Dice() == 1 and not ("Deep Speech" in l):
-            l += "Deep Speech. "
-        if Dice() == 1 and not ("Infernal" in l):
-            l += "Infernal. "
-        if Dice() == 1 and not ("Primordial" in l):
-            l += "Primordial. "
-        if Dice() == 1 and not ("Sylvan" in l):
-            l += "Sylvan. "
+        if Dice() == 1 and not ("Abyssal" in l):            l += "Abyssal. "
+        if Dice() == 1 and not ("Celestial" in l):          l += "Celestial. "
+        if Dice() == 1 and not ("Draconic" in l):           l += "Draconic. "
+        if Dice() == 1 and not ("Deep Speech" in l):        l += "Deep Speech. "
+        if Dice() == 1 and not ("Infernal" in l):           l += "Infernal. "
+        if Dice() == 1 and not ("Primordial" in l):         l += "Primordial. "
+        if Dice() == 1 and not ("Sylvan" in l):             l += "Sylvan. "
 
     if background == "Shaman":
-        if not ("Sylvan" in l):
-            l += "Sylvan. "
-        if not ("Druidic" in l):
-            l += "Druidic. "
-        if Dice() == 1 and not ("Elvish" in l):
-            l += "Elvish. "
-        if Dice() == 1 and not ("Giant" in l):
-            l += "Giant. "
-        if Dice() == 1 and not ("Goblin" in l):
-            l += "Goblin. "
-        if Dice() == 1 and not ("Orc" in l):
-            l += "Orc. "
-        if Dice(8) == 1 and not ("Primordial" in l):
-            l += "Primordial. "
+        if not ("Sylvan" in l):            l += "Sylvan. "
+        if not ("Druidic" in l):           l += "Druidic. "
+        if Dice() == 1 and not ("Elvish" in l):             l += "Elvish. "
+        if Dice() == 1 and not ("Giant" in l):              l += "Giant. "
+        if Dice() == 1 and not ("Goblin" in l):             l += "Goblin. "
+        if Dice() == 1 and not ("Orc" in l):                l += "Orc. "
+        if Dice(8) == 1 and not ("Primordial" in l):        l += "Primordial. "
 
     if background == "Soldier":
-        if not ("Common" in l):
-            l += "Common. "
+        if not ("Common" in l):            l += "Common. "
 
     if background == "Spy":
-        if not ("Common" in l):
-            l += "Common. "
-        if not ("Thieve" in l):
-            l += "Thieve's Cant. "
+        if not ("Common" in l):            l += "Common. "
+        if not ("Thieve" in l):            l += "Thieve's Cant. "
 
     if background == "Traveler":
-        if not ("Common" in l):
-            l += "Common. "
-        if Dice() == 1 and not ("Elvish" in l):
-            l += "Elvish. "
-        if Dice() == 1 and not ("Gnomish" in l):
-            l += "Gnomish. "
-        if Dice() == 1 and not ("Halfling" in l):
-            l += "Halfling. "
-        if Dice() == 1 and not ("Dwarvish" in l):
-            l += "Dwarvish. "
-        if Dice() == 1 and not ("Giant" in l):
-            l += "Giant. "
-        if Dice() == 1 and not ("Goblin" in l):
-            l += "Goblin. "
-        if Dice() == 1 and not ("Orc" in l):
-            l += "Orc. "
+        if not ("Common" in l):            l += "Common. "
+        if Dice() == 1 and not ("Elvish" in l):            l += "Elvish. "
+        if Dice() == 1 and not ("Gnomish" in l):           l += "Gnomish. "
+        if Dice() == 1 and not ("Halfling" in l):          l += "Halfling. "
+        if Dice() == 1 and not ("Dwarvish" in l):          l += "Dwarvish. "
+        if Dice() == 1 and not ("Giant" in l):             l += "Giant. "
+        if Dice() == 1 and not ("Goblin" in l):            l += "Goblin. "
+        if Dice() == 1 and not ("Orc" in l):               l += "Orc. "
 
     if background == "Urchin":
-        if not ("Common" in l):
-            l += "Common. "
+        if not ("Common" in l):            l += "Common. "
 
     if background == "Warrior":
-        if not ("Common" in l):
-            l += "Common. "
-        if Dice() == 1 and not ("Elvish" in l):
-            l += "Elvish. "
-        if Dice() == 1 and not ("Gnomish" in l):
-            l += "Gnomish. "
-        if Dice() == 1 and not ("Halfling" in l):
-            l += "Halfling. "
-        if Dice() == 1 and not ("Dwarvish" in l):
-            l += "Dwarvish. "
-        if Dice() == 1 and not ("Giant" in l):
-            l += "Giant. "
-        if Dice() == 1 and not ("Goblin" in l):
-            l += "Goblin. "
-        if Dice() == 1 and not ("Orc" in l):
-            l += "Orc. "
+        if not ("Common" in l):            l += "Common. "
+        if Dice() == 1 and not ("Elvish" in l):              l += "Elvish. "
+        if Dice() == 1 and not ("Gnomish" in l):             l += "Gnomish. "
+        if Dice() == 1 and not ("Halfling" in l):            l += "Halfling. "
+        if Dice() == 1 and not ("Dwarvish" in l):            l += "Dwarvish. "
+        if Dice() == 1 and not ("Giant" in l):               l += "Giant. "
+        if Dice() == 1 and not ("Goblin" in l):              l += "Goblin. "
+        if Dice() == 1 and not ("Orc" in l):                 l += "Orc. "
 
     if background == "Warlock":
-        if Dice() == 1 and not ("Abyssal" in l):
-            l += "Abyssal. "
-        if Dice() == 1 and not ("Celestial" in l):
-            l += "Celestial. "
-        if Dice() == 1 and not ("Draconic" in l):
-            l += "Draconic. "
-        if Dice() == 1 and not ("Deep" in l):
-            l += "Deep Speech. "
-        if Dice() == 1 and not ("Infernal" in l):
-            l += "Infernal. "
-        if Dice() == 1 and not ("Primordial" in l):
-            l += "Primordial. "
-        if Dice() == 1 and not ("Sylvan" in l):
-            l += "Sylvan. "
+        if Dice() == 1 and not ("Abyssal" in l):            l += "Abyssal. "
+        if Dice() == 1 and not ("Celestial" in l):          l += "Celestial. "
+        if Dice() == 1 and not ("Draconic" in l):           l += "Draconic. "
+        if Dice() == 1 and not ("Deep" in l):               l += "Deep Speech. "
+        if Dice() == 1 and not ("Infernal" in l):           l += "Infernal. "
+        if Dice() == 1 and not ("Primordial" in l):         l += "Primordial. "
+        if Dice() == 1 and not ("Sylvan" in l):             l += "Sylvan. "
 
     if background == "Witch":
-        if not ("Common" in l):
-            l += "Common. "
-        if Dice() == 1 and not ("Abyssal" in l):
-            l += "Abyssal. "
-        if Dice() == 1 and not ("Celestial" in l):
-            l += "Celestial. "
-        if Dice() == 1 and not ("Draconic" in l):
-            l += "Draconic. "
-        if Dice() == 1 and not ("Deep" in l):
-            l += "Deep Speech. "
-        if Dice() == 1 and not ("Infernal" in l):
-            l += "Infernal. "
-        if Dice() == 1 and not ("Primordial" in l):
-            l += "Primordial. "
-        if Dice() == 1 and not ("Sylvan" in l):
-            l += "Sylvan. "
-        if Dice() == 1 and not ("Goblin" in l):
-            l += "Goblin. "
-        if Dice() == 1 and not ("Gnomish" in l):
-            l += "Gnomish. "
+        if not ("Common" in l):            l += "Common. "
+        if Dice() == 1 and not ("Abyssal" in l):            l += "Abyssal. "
+        if Dice() == 1 and not ("Celestial" in l):          l += "Celestial. "
+        if Dice() == 1 and not ("Draconic" in l):           l += "Draconic. "
+        if Dice() == 1 and not ("Deep" in l):               l += "Deep Speech. "
+        if Dice() == 1 and not ("Infernal" in l):           l += "Infernal. "
+        if Dice() == 1 and not ("Primordial" in l):         l += "Primordial. "
+        if Dice() == 1 and not ("Sylvan" in l):             l += "Sylvan. "
+        if Dice() == 1 and not ("Goblin" in l):             l += "Goblin. "
+        if Dice() == 1 and not ("Gnomish" in l):            l += "Gnomish. "
 
     return l
 
 
 def Magic(Lvl, race=Race(), background=Background()):
-    if race == "":
-        race = Race()
-    if background == "":
-        background = Background()
+    if race == "":          race = Race()
+    if background == "":    background = Background()
 
     cantrip = "Cantrips (at will): "
     first = "1st Level Spells: "
@@ -1592,12 +1413,9 @@ def Magic(Lvl, race=Race(), background=Background()):
 
     for L in range(int(1+Lvl)):
 
-        if background == "Cultist" and Dice(3) == 1 and not ("Light" in cantrip):
-            cantrip += "\n- Light."
-        if background == "Cultist" and Dice(3) == 1 and not ("Sacred flame" in cantrip):
-            cantrip += "\n- Sacred flame"
-        if background == "Cultist" and Dice(3) == 1 and not ("Thaumaturgy" in cantrip):
-            cantrip += "\n- Thaumaturgy"
+        if background == "Cultist" and Dice(3) == 1 and not ("Light" in cantrip):            cantrip += "\n- Light."
+        if background == "Cultist" and Dice(3) == 1 and not ("Sacred flame" in cantrip):     cantrip += "\n- Sacred flame"
+        if background == "Cultist" and Dice(3) == 1 and not ("Thaumaturgy" in cantrip):      cantrip += "\n- Thaumaturgy"
         if background == "Cultist" and Dice() == 1 and not ("Command" in first):
             first += "\n- Command"
             slots1 += Dice(4)
@@ -1967,185 +1785,110 @@ def Magic(Lvl, race=Race(), background=Background()):
         if race == "Goblin" and Dice() == 1 and not ("Leadership" in cantrip):
             cantrip += " \n- Leadership (Recharges after a Short or Long Rest). \n\t For 1 minute, the goblin can utter a special command or warning whenever a nonhostile creature that it can see within 30 feet of it makes an attack roll or a saving throw. The creature can add a d4 to its roll provided it can hear and understand the goblin. A creature can benefit from only one Leadership die at a time. This effect ends if the goblin is incapacitated."
 
-        if race == "Monstrosity" and Dice() == 1 and not ("Darkness Aura" in one):
-            one += "\n - Darkness Aura: \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
-        if race == "Monstrosity" and Dice() == 1 and not ("Acid Spray" in cantrip):
-            cantrip += "\n - Acid Spray (Recharge 6): \n\t The Monstrosity spits acid in a line that is 30 feet long and 5 feet wide, provided that it has no creature grappled. Each creature in that line must make a DC [10+%Str] Dexterity saving throw, taking 10 (3d6) acid damage on a failed save, or half as much damage on a successful one."
-        if race == "Monstrosity" and Dice() == 1 and not ("Luring Song" in cantrip):
-            cantrip += "\n - Luring Song: \n\t The monstrosity sings a magical melody. Every humanoid and giant within 300 feet of the monstrosity that can hear the song must succeed on a DC [10+%Cha] Wisdom saving throw or be charmed until the song ends. The monstrosity must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time. The song ends if the monstrosity is incapacitated. While charmed by the monstrosity, a target is incapacitated and ignores the songs of other monstrosities. If the charmed target is more than 5 feet away from the monstrosity, the target must move on its turn toward the monstrosity by the most direct route. It doesn't avoid opportunity attacks, but before moving into damaging terrain, such as lava or a pit, and whenever it takes damage from a source other than the monstrosity, a target can repeat the saving throw. A creature can also repeat the saving throw at the begguining of each of its turns. If a creature's saving throw is successful, the effect ends on it. A target that successfully saves is immune to this monstrosity's song for the next 24 hours."
-        if race == "Monstrosity" and Dice() == 1 and not ("Petrifying Gaze" in cantrip):
-            cantrip += "\n - Petrifying Gaze: \n\t If a creature starts its turn within 30 feet of the monstrosity and the two of them can see each other, the monstrosity can force the creature to make a DC [10+%CON] Constitution saving throw if the monstrosity isn't incapacitated. On a failed save, the creature magically begins to turn to stone and is restrained. It must repeat the saving throw at the start of its next turn. On a success, the effect ends. On a third failure, the creature is petrified until freed by the greater restoration spell or other magic. \n\t A creature that isn't surprised can avert its eyes to avoid the saving throw at the start of its turn. If it does so, it can't see the monstrosity until the start of its next turn, when it can avert its eyes again. If it looks at the monstrosity in the meantime, it must immediately make the save. \n\t If the monstrosity sees its reflection within 30 feet of it in bright light, it mistakes itself for a rival and targets itself with its gaze."
-        if race == "Monstrosity" and Dice() == 1 and not ("Read Thoughts" in cantrip):
-            cantrip += "\n - Read Thoughts: \n\t The monstrosity magically reads the surface thoughts of one creature within 60 feet of it. The effect can penetrate barriers, but 3 feet of wood or dirt, 2 feet of stone, 2 inches of metal, or a thin sheet of lead blocks it. While the target is in range, the monstrosity can continue reading its thoughts, as long as the monstrosity's concentration isn't broken (as if concentrating on a spell). While reading the target's mind, the monstrosity has advantage on Wisdom (Insight) and Charisma (Deception, Intimidation, and Persuasion) checks against the target."
-        if race == "Monstrosity" and Dice() == 1 and not ("Chilling Gaze" in cantrip):
-            cantrip += "\n - Chilling Gaze: \n\t The monstrosity targets one creature it can see within 30 feet of it. If the target can see the monstrosity, the target must succeed on a DC [10+%CON] Constitution saving throw against this magic or take 10 (3d6) cold damage and then be paralyzed for 1 minute, unless it is immune to cold damage. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success. If the target's saving throw is successful, or if the effect ends on it, the target is immune to the Chilling Gaze of all monstrosities for 1 hour."
+        if race == "Monstrosity" and Dice() == 1 and not ("Acid Spray" in cantrip):           cantrip += "\n - Acid Spray (Recharge 6): \n\t The Monstrosity spits acid in a line that is 30 feet long and 5 feet wide, provided that it has no creature grappled. Each creature in that line must make a DC [10+%Str] Dexterity saving throw, taking 10 (3d6) acid damage on a failed save, or half as much damage on a successful one."
+        if race == "Monstrosity" and Dice() == 1 and not ("Luring Song" in cantrip):          cantrip += "\n - Luring Song: \n\t The monstrosity sings a magical melody. Every humanoid and giant within 300 feet of the monstrosity that can hear the song must succeed on a DC [10+%Cha] Wisdom saving throw or be charmed until the song ends. The monstrosity must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time. The song ends if the monstrosity is incapacitated. While charmed by the monstrosity, a target is incapacitated and ignores the songs of other monstrosities. If the charmed target is more than 5 feet away from the monstrosity, the target must move on its turn toward the monstrosity by the most direct route. It doesn't avoid opportunity attacks, but before moving into damaging terrain, such as lava or a pit, and whenever it takes damage from a source other than the monstrosity, a target can repeat the saving throw. A creature can also repeat the saving throw at the begguining of each of its turns. If a creature's saving throw is successful, the effect ends on it. A target that successfully saves is immune to this monstrosity's song for the next 24 hours."
+        if race == "Monstrosity" and Dice() == 1 and not ("Petrifying Gaze" in cantrip):      cantrip += "\n - Petrifying Gaze: \n\t If a creature starts its turn within 30 feet of the monstrosity and the two of them can see each other, the monstrosity can force the creature to make a DC [10+%CON] Constitution saving throw if the monstrosity isn't incapacitated. On a failed save, the creature magically begins to turn to stone and is restrained. It must repeat the saving throw at the start of its next turn. On a success, the effect ends. On a third failure, the creature is petrified until freed by the greater restoration spell or other magic. \n\t A creature that isn't surprised can avert its eyes to avoid the saving throw at the start of its turn. If it does so, it can't see the monstrosity until the start of its next turn, when it can avert its eyes again. If it looks at the monstrosity in the meantime, it must immediately make the save. \n\t If the monstrosity sees its reflection within 30 feet of it in bright light, it mistakes itself for a rival and targets itself with its gaze."
+        if race == "Monstrosity" and Dice() == 1 and not ("Read Thoughts" in cantrip):        cantrip += "\n - Read Thoughts: \n\t The monstrosity magically reads the surface thoughts of one creature within 60 feet of it. The effect can penetrate barriers, but 3 feet of wood or dirt, 2 feet of stone, 2 inches of metal, or a thin sheet of lead blocks it. While the target is in range, the monstrosity can continue reading its thoughts, as long as the monstrosity's concentration isn't broken (as if concentrating on a spell). While reading the target's mind, the monstrosity has advantage on Wisdom (Insight) and Charisma (Deception, Intimidation, and Persuasion) checks against the target."
+        if race == "Monstrosity" and Dice() == 1 and not ("Chilling Gaze" in cantrip):        cantrip += "\n - Chilling Gaze: \n\t The monstrosity targets one creature it can see within 30 feet of it. If the target can see the monstrosity, the target must succeed on a DC [10+%CON] Constitution saving throw against this magic or take 10 (3d6) cold damage and then be paralyzed for 1 minute, unless it is immune to cold damage. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success. If the target's saving throw is successful, or if the effect ends on it, the target is immune to the Chilling Gaze of all monstrosities for 1 hour."
+        if race == "Monstrosity" and Dice() == 1 and not ("Darkness Aura" in one):            one += "\n - Darkness Aura: \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
 
-        if race == "Ooze" and Dice() == 1 and not ("Psychic Crush" in cantrip):
-            cantrip += " \n- Psychic Crush (Recharge 5–6). \n\t The ooze targets one creature that it can sense within 60 feet of it. The target must make a DC 10 Intelligence saving throw, taking 10 (3d6) psychic damage on a failed save, or half as much damage on a successful one."
+        if race == "Ooze" and Dice() == 1 and not ("Psychic Crush" in cantrip):     cantrip += " \n- Psychic Crush (Recharge 5–6). \n\t The ooze targets one creature that it can sense within 60 feet of it. The target must make a DC 10 Intelligence saving throw, taking 10 (3d6) psychic damage on a failed save, or half as much damage on a successful one."
 
-        if race == "Plant" and Dice() == 1:
-            cantrip += "\n - Hallucination Spores \n\t The plant ejects spores at one creature it can see within 5 feet of it. The target must succeed on a DC 10+%CON Constitution saving throw or be poisoned for 1 minute. The poisoned target is incapacitated while it hallucinates. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
-        if race == "Plant" and Dice() == 1:
-            cantrip += "\n - Rapport Spores \n\t A 20-foot radius of spores extends from the plant. These spores can go around corners and affect only creatures with an Intelligence of 2 or higher that aren't undead, constructs, or elementals. Affected creatures can communicate telepathically with one another while they are within 30 feet of each other. The effect lasts for 1 hour."
-        if race == "Plant" and Dice() == 1:
-            one += "\n - Caustic Spores \n\t The Plant releases spores in a 30-foot cone. Each creature inside the cone must succeed on a DC [10+%Con] Dexterity saving throw or take 3 (1d6) acid damage at the start of each of the plant's turns. A creature can repeat the saving throw at the start of its turn, ending the effect on itself on a success."
-        if race == "Plant" and Dice() == 1:
-            one += "\n - Infestation Spores \n\t The plant releases spores that burst out in a cloud that fills a 10-foot-radius sphere centered on it, and the cloud lingers for 1 minute. Any flesh-and-blood creature in the cloud when it appears, or that enters it later, must make a DC [10+%CON] Constitution saving throw. On a successful save, the creature can't be infected by these spores for 24 hours. On a failed save, the creature is infected with a disease called the spores of Zuggtmoy and also gains a random form of indefinite madness (determined by rolling on the Madness of Zuggtmoy table) that lasts until the creature is cured of the disease or dies. While infected in this way, the creature can't be reinfected, and it must repeat the saving throw at the end of every 24 hours, ending the infection on a success. On a failure, the infected creature's body is slowly taken over by fungal growth, and after three such failed saves, the creature dies and is reanimated as a spore servant if it's a humanoid or a Large or smaller beast. \n d100 \t	Flaw (lasts until cured) \n 01-20 \t I see visions in the world around me that others do not. \n 21-40 \t I periodically slip into a catatonic state, staring off into the distance for long stretches at a time. \n 41-60 \t I see an altered version of reality, with my mind convincing itself that things are true even in the face of overwhelming evidence to the contrary. \n 61-80 \t My mind is slipping away, and my intelligence seems to wax and wane. \n  81-00 \t I am constantly scratching at unseen fungal infections."
-        if race == "Plant" and Dice() == 1:
-            one += "\n - Euphoria Spores \n\t The plant releases a cloud of spores in a 20-foot-radius sphere centered on itself. Other creatures in that area must each succeed on a DC [10+%Con] Constitution saving throw or become poisoned for 1 minute. A creature can repeat the saving throw at the start of each of its turns, ending the effect early on itself on a success. When the effect ends on it, the creature gains one level of exhaustion."
-        if race == "Plant" and Dice() == 1:
-            three += "\n - Pacifying Spores \n\t The Plant ejects spores at one creature it can see within 5 feet of it. The target must succeed on a DC [10+%CON] Constitution saving throw or be stunned for 1 minute. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
-        if race == "Plant" and Dice() == 1:
-            three += "\n - Animating Spores \n\t The Plant targets one corpse of a humanoid or a Large or smaller beast within 5 feet of it and releases spores at the corpse. In 24 hours, the corpse rises as a spore servant. The corpse stays animated for 1d4 + 1 weeks or until destroyed, and it can't be animated again in this way."
+        if race == "Plant" and Dice() == 1:            cantrip += "\n - Hallucination Spores \n\t The plant ejects spores at one creature it can see within 5 feet of it. The target must succeed on a DC 10+%CON Constitution saving throw or be poisoned for 1 minute. The poisoned target is incapacitated while it hallucinates. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
+        if race == "Plant" and Dice() == 1:            cantrip += "\n - Rapport Spores \n\t A 20-foot radius of spores extends from the plant. These spores can go around corners and affect only creatures with an Intelligence of 2 or higher that aren't undead, constructs, or elementals. Affected creatures can communicate telepathically with one another while they are within 30 feet of each other. The effect lasts for 1 hour."
+        if race == "Plant" and Dice() == 1:            one += "\n - Caustic Spores \n\t The Plant releases spores in a 30-foot cone. Each creature inside the cone must succeed on a DC [10+%Con] Dexterity saving throw or take 3 (1d6) acid damage at the start of each of the plant's turns. A creature can repeat the saving throw at the start of its turn, ending the effect on itself on a success."
+        if race == "Plant" and Dice() == 1:            one += "\n - Infestation Spores \n\t The plant releases spores that burst out in a cloud that fills a 10-foot-radius sphere centered on it, and the cloud lingers for 1 minute. Any flesh-and-blood creature in the cloud when it appears, or that enters it later, must make a DC [10+%CON] Constitution saving throw. On a successful save, the creature can't be infected by these spores for 24 hours. On a failed save, the creature is infected with a disease called the spores of Zuggtmoy and also gains a random form of indefinite madness (determined by rolling on the Madness of Zuggtmoy table) that lasts until the creature is cured of the disease or dies. While infected in this way, the creature can't be reinfected, and it must repeat the saving throw at the end of every 24 hours, ending the infection on a success. On a failure, the infected creature's body is slowly taken over by fungal growth, and after three such failed saves, the creature dies and is reanimated as a spore servant if it's a humanoid or a Large or smaller beast. \n d100 \t	Flaw (lasts until cured) \n 01-20 \t I see visions in the world around me that others do not. \n 21-40 \t I periodically slip into a catatonic state, staring off into the distance for long stretches at a time. \n 41-60 \t I see an altered version of reality, with my mind convincing itself that things are true even in the face of overwhelming evidence to the contrary. \n 61-80 \t My mind is slipping away, and my intelligence seems to wax and wane. \n  81-00 \t I am constantly scratching at unseen fungal infections."
+        if race == "Plant" and Dice() == 1:            one += "\n - Euphoria Spores \n\t The plant releases a cloud of spores in a 20-foot-radius sphere centered on itself. Other creatures in that area must each succeed on a DC [10+%Con] Constitution saving throw or become poisoned for 1 minute. A creature can repeat the saving throw at the start of each of its turns, ending the effect early on itself on a success. When the effect ends on it, the creature gains one level of exhaustion."
+        if race == "Plant" and Dice() == 1:            three += "\n - Pacifying Spores \n\t The Plant ejects spores at one creature it can see within 5 feet of it. The target must succeed on a DC [10+%CON] Constitution saving throw or be stunned for 1 minute. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
+        if race == "Plant" and Dice() == 1:            three += "\n - Animating Spores \n\t The Plant targets one corpse of a humanoid or a Large or smaller beast within 5 feet of it and releases spores at the corpse. In 24 hours, the corpse rises as a spore servant. The corpse stays animated for 1d4 + 1 weeks or until destroyed, and it can't be animated again in this way."
 
-        if race == "Snakefolk" and Dice() == 1 and not ("Animal Friendship" in cantrip):
-            cantrip += "\n- Animal Friendship (snakes only)"
-        if race == "Snakefolk" and Dice() == 1 and not ("Poison Spray" in three):
-            three += "\n- Poison Spray"
-        if race == "Snakefolk" and Dice() == 1 and not ("Suggestion" in three):
-            three += "\n- Suggestion"
+        if race == "Snakefolk" and Dice() == 1 and not ("Animal Friendship" in cantrip):            cantrip += "\n- Animal Friendship (snakes only)"
+        if race == "Snakefolk" and Dice() == 1 and not ("Poison Spray" in three):           three += "\n- Poison Spray"
+        if race == "Snakefolk" and Dice() == 1 and not ("Suggestion" in three):             three += "\n- Suggestion"
 
-        if race == "Undead" and Dice(8) == 1 and not ("Corrupting Touch" in cantrip):
-            cantrip += "\n - Corrupting Touch \n\t Melee Spell Attack: reach 5 ft., one target. Hit: 10 (3d6) necrotic damage."
-        if race == "Undead" and Dice(8) == 1 and not ("Dreadful Glare" in cantrip):
-            cantrip += "\n - Dreadful Glare. \n\t The undead targets one creature it can see within 60 feet of it. If the target can see the undead, it must succeed on a DC [10+%CHA] Wisdom saving throw against this magic or become frightened until the end of the undead's next turn. If the target fails the saving throw by 5 or more, it is also paralyzed for the same duration. A target that succeeds on the saving throw is immune to the Dreadful Glare of all undead for the next 24 hours."
-        if race == "Undead" and Dice(8) == 1 and not ("Horrifying Visage" in cantrip):
-            cantrip += "\n - Horrifying Visage \n\t Each non-undead creature within 60 feet of the Undead that can see them must succeed on a DC [10+%CHA] Wisdom saving throw or be frightened for 1 minute. A frightened target can repeat the saving throw at the start of each of its turns, with disadvantage if the Undead is within line of sight, ending the effect on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to the Undead's Horrifying Visage for the next 24 hours. "
-        if race == "Undead" and Dice(8) == 1 and not ("Forceful Slam" in cantrip):
-            cantrip += "\n - Forceful Slam \n\t Magic melee attack. Hit: 10 (3d6) force damage. "
-        if race == "Undead" and Dice(8) == 1 and not ("Life Drain" in cantrip):
-            cantrip += "\n - Life Drain \n\t On an attack hit the target's Hit Points Maximum is reduced by the damage dealt. The target dies if this reduces its Hit Points Maximum to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. "
-        if race == "Undead" and Dice(8) == 1 and not ("Rotting Fist" in cantrip):
-            cantrip += "\n - Rotting Fist. \n\t Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) bludgeoning damage plus 10 (3d6) necrotic damage. If the target is a creature, it must succeed on a DC [10+%CHA] Constitution saving throw or be cursed with undead rot. The cursed target can't regain hit points, and its hit point maximum decreases by 10 (3d6) for every 24 hours that elapse. If the curse reduces the target's hit point maximum to 0, the target dies, and its body turns to dust. The curse lasts until removed by the remove curse spell or other magic."
-        if race == "Undead" and Dice(8) == 1 and not ("Strength Drain" in cantrip):
-            cantrip += "\n - Strength Drain \n\t On an attack hit the target's Strength score is reduced by 1d4. The target dies if this reduces its Strength to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. \n\t If a non-evil humanoid dies from this attack, a new shadow rises from the corpse 1d4 hours later."
-        if race == "Undead" and Dice(8) == 1 and not ("Telekinetic Thrust" in cantrip):
-            cantrip += "\n - Telekinetic Thrust. \n\t The undead targets a creature or unattended object within 30 feet of it. A creature must be Medium or smaller to be affected by this magic, and an object can weigh up to 150 pounds. \n\t If the target is a creature, the undead makes a Charisma check contested by the target's Strength check. If the undead wins the contest, the undead hurls the target up to 30 feet in any direction, including upward. If the target then comes into contact with a hard surface or heavy object, the target takes 1d6 damage per 10 feet moved. \n\t If the target is an object that isn't being worn or carried, the undead hurls it up to 30 feet in any direction. The undead can use the object as a ranged weapon, attacking one creature along the object's path (+4 to hit) and dealing 5 (2d4) bludgeoning damage on a hit."
+        if race == "Undead" and Dice(8) == 1 and not ("Corrupting Touch" in cantrip):           cantrip += "\n - Corrupting Touch \n\t Melee Spell Attack: reach 5 ft., one target. Hit: 10 (3d6) necrotic damage."
+        if race == "Undead" and Dice(8) == 1 and not ("Dreadful Glare" in cantrip):             cantrip += "\n - Dreadful Glare. \n\t The undead targets one creature it can see within 60 feet of it. If the target can see the undead, it must succeed on a DC [10+%CHA] Wisdom saving throw against this magic or become frightened until the end of the undead's next turn. If the target fails the saving throw by 5 or more, it is also paralyzed for the same duration. A target that succeeds on the saving throw is immune to the Dreadful Glare of all undead for the next 24 hours."
+        if race == "Undead" and Dice(8) == 1 and not ("Horrifying Visage" in cantrip):          cantrip += "\n - Horrifying Visage \n\t Each non-undead creature within 60 feet of the Undead that can see them must succeed on a DC [10+%CHA] Wisdom saving throw or be frightened for 1 minute. A frightened target can repeat the saving throw at the start of each of its turns, with disadvantage if the Undead is within line of sight, ending the effect on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to the Undead's Horrifying Visage for the next 24 hours. "
+        if race == "Undead" and Dice(8) == 1 and not ("Forceful Slam" in cantrip):              cantrip += "\n - Forceful Slam \n\t Magic melee attack. Hit: 10 (3d6) force damage. "
+        if race == "Undead" and Dice(8) == 1 and not ("Life Drain" in cantrip):                 cantrip += "\n - Life Drain \n\t On an attack hit the target's Hit Points Maximum is reduced by the damage dealt. The target dies if this reduces its Hit Points Maximum to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. "
+        if race == "Undead" and Dice(8) == 1 and not ("Rotting Fist" in cantrip):               cantrip += "\n - Rotting Fist. \n\t Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) bludgeoning damage plus 10 (3d6) necrotic damage. If the target is a creature, it must succeed on a DC [10+%CHA] Constitution saving throw or be cursed with undead rot. The cursed target can't regain hit points, and its hit point maximum decreases by 10 (3d6) for every 24 hours that elapse. If the curse reduces the target's hit point maximum to 0, the target dies, and its body turns to dust. The curse lasts until removed by the remove curse spell or other magic."
+        if race == "Undead" and Dice(8) == 1 and not ("Strength Drain" in cantrip):             cantrip += "\n - Strength Drain \n\t On an attack hit the target's Strength score is reduced by 1d4. The target dies if this reduces its Strength to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. \n\t If a non-evil humanoid dies from this attack, a new shadow rises from the corpse 1d4 hours later."
+        if race == "Undead" and Dice(8) == 1 and not ("Telekinetic Thrust" in cantrip):         cantrip += "\n - Telekinetic Thrust. \n\t The undead targets a creature or unattended object within 30 feet of it. A creature must be Medium or smaller to be affected by this magic, and an object can weigh up to 150 pounds. \n\t If the target is a creature, the undead makes a Charisma check contested by the target's Strength check. If the undead wins the contest, the undead hurls the target up to 30 feet in any direction, including upward. If the target then comes into contact with a hard surface or heavy object, the target takes 1d6 damage per 10 feet moved. \n\t If the target is an object that isn't being worn or carried, the undead hurls it up to 30 feet in any direction. The undead can use the object as a ranged weapon, attacking one creature along the object's path (+4 to hit) and dealing 5 (2d4) bludgeoning damage on a hit."
 
-        if race == "Undead" and Dice(8) == 1 and not ("Wail" in one):
-            one += "\n - Wail. \n\t The undead releases a mournful wail, provided that they aren't in sunlight. This wail has no effect on constructs and undead. All other creatures within 30 feet of them that can hear them must make a DC [10+%CHA] Constitution saving throw. On a failure, a creature drops to 0 hit points. On a success, a creature takes 10 (3d6) psychic damage."
+        if race == "Undead" and Dice(8) == 1 and not ("Wail" in one):   one += "\n - Wail. \n\t The undead releases a mournful wail, provided that they aren't in sunlight. This wail has no effect on constructs and undead. All other creatures within 30 feet of them that can hear them must make a DC [10+%CHA] Constitution saving throw. On a failure, a creature drops to 0 hit points. On a success, a creature takes 10 (3d6) psychic damage."
 
-        if Dice(10) == 1:
-            background = Background()
-        if Dice(10) == 1:
-            race = Race()
+        if Dice(10) == 1:            background = Background()
+        if Dice(10) == 1:            race = Race()
 
     r = "\n"
-    if not (cantrip == "Cantrips (at will): "):
-        r += cantrip + "\n"
-    if not (first == "1st Level Spells: "):
-        r += "[{}]".format(Dice(slots1)) + first + "\n"
-    if not (second == "2nd Level Spells: "):
-        r += "[{}]".format(Dice(slots2)) + second + "\n"
-    if not (third == "3rd Level Spells: "):
-        r += "[{}]".format(Dice(slots3)) + third + "\n"
-    if not (fourth == "4th Level Spells: "):
-        r += "[{}]".format(Dice(slots4)) + fourth + "\n"
-    if not (one == "1/Day each: "):
-        r += "\n" + one
-    if not (two == "2/Day each: "):
-        r += "\n" + two
-    if not (three == "3/Day each: "):
-        r += "\n" + three
+    if not (cantrip == "Cantrips (at will): "):         r += cantrip + "\n"
+    if not (first == "1st Level Spells: "):             r += "[{}]".format(Dice(slots1)) + first + "\n"
+    if not (second == "2nd Level Spells: "):            r += "[{}]".format(Dice(slots2)) + second + "\n"
+    if not (third == "3rd Level Spells: "):             r += "[{}]".format(Dice(slots3)) + third + "\n"
+    if not (fourth == "4th Level Spells: "):            r += "[{}]".format(Dice(slots4)) + fourth + "\n"
+    if not (one == "1/Day each: "):        r += "\n" + one
+    if not (two == "2/Day each: "):        r += "\n" + two
+    if not (three == "3/Day each: "):      r += "\n" + three
     return r
 
 
 def Actions(Type=""):
     r = ""
 
-    if Type == "Aberration" and Dice() == 1:
-        r += "\n- Blinding Spittle (Recharge 5–6). \n\t The Aberration spits a chemical glob at a point it can see within 15 feet of it. The glob explodes in a blinding flash of light on impact. Each creature within 5 feet of the flash must succeed on a DC 13 Dexterity saving throw or be blinded until the end of the aberration's next turn."
-    if Type == "Aberration" and Dice(7) == 1:
-        r += "\n- Aberrant Ground. \n\t  The ground in a 10-foot radius around the Aberration is doughlike difficult terrain. Each creature that starts its turn in that area must succeed on a DC 10 Strength saving throw or have its speed reduced to 0 until the start of its next turn.  "
-    if Type == "Aberration" and Dice() == 1:
-        r += "\n- Spell Reflection. \n\t  If the Aberration makes a successful saving throw against a spell, or a spell attack misses it, the aberration can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of the aberration. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature. "
+    if Type == "Aberration" and Dice() == 1:        r += "\n- Blinding Spittle (Recharge 5–6). \n\t The Aberration spits a chemical glob at a point it can see within 15 feet of it. The glob explodes in a blinding flash of light on impact. Each creature within 5 feet of the flash must succeed on a DC 13 Dexterity saving throw or be blinded until the end of the aberration's next turn."
+    if Type == "Aberration" and Dice(7) == 1:       r += "\n- Aberrant Ground. \n\t  The ground in a 10-foot radius around the Aberration is doughlike difficult terrain. Each creature that starts its turn in that area must succeed on a DC 10 Strength saving throw or have its speed reduced to 0 until the start of its next turn.  "
+    if Type == "Aberration" and Dice() == 1:        r += "\n- Spell Reflection. \n\t  If the Aberration makes a successful saving throw against a spell, or a spell attack misses it, the aberration can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of the aberration. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature. "
 
-    if Type == "Aberration" and Dice() == 1:
-        r += "\n- Damage Resistances:  \t bludgeoning, piercing, and slashing from nonmagical attacks"
-    if Type == "Aberration" and Dice() == 1:
-        r += "\n- Damage Resistances:  \t acid"
-    if Type == "Aberration" and Dice() == 1:
-        r += "\n- Damage Resistances:  \t cold"
-    if Type == "Aberration" and Dice() == 1:
-        r += "\n- Damage Resistances:  \t lightning"
-    if Type == "Aberration" and Dice() == 1:
-        r += "\n- Damage Resistances:  \t thunder"
+    if Type == "Aberration" and Dice() == 1:        r += "\n- Damage Resistances:  \t bludgeoning, piercing, and slashing from nonmagical attacks"
+    if Type == "Aberration" and Dice() == 1:        r += "\n- Damage Resistances:  \t acid"
+    if Type == "Aberration" and Dice() == 1:        r += "\n- Damage Resistances:  \t cold"
+    if Type == "Aberration" and Dice() == 1:        r += "\n- Damage Resistances:  \t lightning"
+    if Type == "Aberration" and Dice() == 1:        r += "\n- Damage Resistances:  \t thunder"
 
-    if Type == "Aberration" and Dice() == 1:
-        r = r + "\n- Damage Vulnerabilities: \n\t psychic"
+    if Type == "Aberration" and Dice() == 1:        r = r + "\n- Damage Vulnerabilities: \n\t psychic"
 
-    if Type == "Aberration" and Dice() == 1:
-        r += "\n- Condition Immunities:  \n\t Prone"
-    if Type == "Aberration" and Dice() == 1:
-        r += "\n- Condition Immunities:  \n\t Blinded"
+    if Type == "Aberration" and Dice() == 1:        r += "\n- Condition Immunities:  \n\t Prone"
+    if Type == "Aberration" and Dice() == 1:        r += "\n- Condition Immunities:  \n\t Blinded"
 
-    if Type == "Aberration" and Dice() == 1:
-        r = r + "\n- Magic Resistance: \n\t The Aberration has advantage on saving throws against spells and other magical effects."
+    if Type == "Aberration" and Dice() == 1:        r = r + "\n- Magic Resistance: \n\t The Aberration has advantage on saving throws against spells and other magical effects."
 
     if Type == "Aberration":
-        if Dice() == 1:
-            r = r + "\n- Blindsight: \n\t 60ft"
-        elif Dice() == 1:
-            r = r + "\n- Darkvision: \n\t 120ft"
-        else:
-            r = r + "\n- Darkvision: \n\t 60ft"
+        if Dice() == 1:            r = r + "\n- Blindsight: \n\t 60ft"
+        elif Dice() == 1:          r = r + "\n- Darkvision: \n\t 120ft"
+        else:                      r = r + "\n- Darkvision: \n\t 60ft"
 
     if Type == "Aberration":
-        if Dice() == 1:
-            r = r + "\n- Telepathy: \n\t 60ft"
-            if Dice(3) == 1:
-                r = r + "\n- Advanced Telepathy: \n\t The Aberration can perceive the content of any telepathic communication used within 60 feet of it, and it can't be surprised by creatures with any form of telepathy."
-            if Dice(3) == 1:
-                r = r + "\n- Telepathic Shroud. \n\t The Aberration is immune to any effect that would sense its emotions or read its thoughts, as well as all divination spells."
+        if Dice() == 1:         r = r + "\n- Telepathy: \n\t 60ft"
+            if Dice(3) == 1:    r = r + "\n- Advanced Telepathy: \n\t The Aberration can perceive the content of any telepathic communication used within 60 feet of it, and it can't be surprised by creatures with any form of telepathy."
+            if Dice(3) == 1:    r = r + "\n- Telepathic Shroud. \n\t The Aberration is immune to any effect that would sense its emotions or read its thoughts, as well as all divination spells."
 
     if Type == "Aberration":
-        if Dice() == 1:
-            r = r + "\n- Detect Sentience: \n\t It can sense the presence and location of any creature within 300 feet of it that has an Intelligence of 3 or higher, regardless of interposing barriers, unless the creature is protected by a mind blank spell."
-            if Dice() == 1:
-                r = r + \
-                    "\n- Devour Intellect: \n\t It targets one creature it can see within 10 feet of it that has a brain. The target must succeed on a DC [10+%DEX] Intelligence saving throw against this magic or take 11 (2d10) psychic damage. Also on a failure, roll 3d6: If the total equals or exceeds the target's Intelligence score, that score is reduced to 0. The target is stunned until it regains at least one point of Intelligence."
+        if Dice() == 1:            r = r + "\n- Detect Sentience: \n\t It can sense the presence and location of any creature within 300 feet of it that has an Intelligence of 3 or higher, regardless of interposing barriers, unless the creature is protected by a mind blank spell."
+            if Dice() == 1:        r = r + "\n- Devour Intellect: \n\t It targets one creature it can see within 10 feet of it that has a brain. The target must succeed on a DC [10+%DEX] Intelligence saving throw against this magic or take 11 (2d10) psychic damage. Also on a failure, roll 3d6: If the total equals or exceeds the target's Intelligence score, that score is reduced to 0. The target is stunned until it regains at least one point of Intelligence."
 
-    if Type == "Aberration" and Dice() == 1:
-        r = r + "\n- Body Thief. \n\t The intellect devourer initiates an Intelligence contest with an incapacitated humanoid within 5 feet of it that isn't protected by protection from evil and good. If it wins the contest, the intellect devourer magically consumes the target's brain, teleports into the target's skull, and takes control of the target's body. While inside a creature, the intellect devourer has total cover against attacks and other effects originating outside its host. The intellect devourer retains its Intelligence, Wisdom, and Charisma scores, as well as its understanding of Deep Speech, its telepathy, and its traits. It otherwise adopts the target's statistics. It knows everything the creature knew, including spells and languages. \n\t If the host body dies, the intellect devourer must leave it. A protection from evil and good spell cast on the body drives the intellect devourer out. The intellect devourer is also forced out if the target regains its devoured brain by means of a wish. By spending 5 feet of its movement, the intellect devourer can voluntarily leave the body, teleporting to the nearest unoccupied space within 5 feet of it. The body then dies, unless its brain is restored within 1 round."
-    if Type == "Aberration" and Dice() == 1:
-        r = r + "\n- Aberrant Ground: \n\t The ground in a 10-foot radius around the Aberration is doughlike difficult terrain. Each creature that starts its turn in that area must succeed on a DC 10 Strength saving throw or have its speed reduced to 0 until the start of its next turn."
-    if Type == "Aberration" and Dice() == 1:
-        r += "\n- Gibbering. \n\t The Aberration babbles incoherently while it can see any creature and isn't incapacitated. Each creature that starts its turn within 20 feet of the Aberration and can hear the gibbering must succeed on a DC 10 Wisdom saving throw. On a failure, the creature can't take reactions until the start of its next turn and rolls a d8 to determine what it does during its turn. On a 1 to 4, the creature does nothing. On a 5 or 6, the creature takes no action or bonus action and uses all its movement to move in a randomly determined direction. On a 7 or 8, the creature makes a melee attack against a randomly determined creature within its reach or does nothing if it can't make such an attack."
-    if Type == "Aberration" and Dice() == 1:
-        r += "\n- Tentacles. \n\t Reach 10 ft., one creature. Hit: 7 (1d10 + 2) piercing damage, and the target must succeed on a DC [10+%CON] Constitution saving throw or be poisoned for 1 minute. The poisoned target is paralyzed, and it can repeat the saving throw at the start of each of its turns, ending the effect on a success. \n\t The target is also grappled (escape DC [10+%STR]). If the target is Medium or smaller, it is also restrained until this grapple ends. While grappling the target, the aberration has advantage on attack rolls against it and can 't use this attack against other targets. When the aberration moves, any Medium or smaller target it is grappling moves with it."
+    if Type == "Aberration" and Dice() == 1:        r = r + "\n- Body Thief. \n\t The intellect devourer initiates an Intelligence contest with an incapacitated humanoid within 5 feet of it that isn't protected by protection from evil and good. If it wins the contest, the intellect devourer magically consumes the target's brain, teleports into the target's skull, and takes control of the target's body. While inside a creature, the intellect devourer has total cover against attacks and other effects originating outside its host. The intellect devourer retains its Intelligence, Wisdom, and Charisma scores, as well as its understanding of Deep Speech, its telepathy, and its traits. It otherwise adopts the target's statistics. It knows everything the creature knew, including spells and languages. \n\t If the host body dies, the intellect devourer must leave it. A protection from evil and good spell cast on the body drives the intellect devourer out. The intellect devourer is also forced out if the target regains its devoured brain by means of a wish. By spending 5 feet of its movement, the intellect devourer can voluntarily leave the body, teleporting to the nearest unoccupied space within 5 feet of it. The body then dies, unless its brain is restored within 1 round."
+    if Type == "Aberration" and Dice() == 1:        r = r + "\n- Aberrant Ground: \n\t The ground in a 10-foot radius around the Aberration is doughlike difficult terrain. Each creature that starts its turn in that area must succeed on a DC 10 Strength saving throw or have its speed reduced to 0 until the start of its next turn."
+    if Type == "Aberration" and Dice() == 1:        r += "\n- Gibbering. \n\t The Aberration babbles incoherently while it can see any creature and isn't incapacitated. Each creature that starts its turn within 20 feet of the Aberration and can hear the gibbering must succeed on a DC 10 Wisdom saving throw. On a failure, the creature can't take reactions until the start of its next turn and rolls a d8 to determine what it does during its turn. On a 1 to 4, the creature does nothing. On a 5 or 6, the creature takes no action or bonus action and uses all its movement to move in a randomly determined direction. On a 7 or 8, the creature makes a melee attack against a randomly determined creature within its reach or does nothing if it can't make such an attack."
+    if Type == "Aberration" and Dice() == 1:        r += "\n- Tentacles. \n\t Reach 10 ft., one creature. Hit: 7 (1d10 + 2) piercing damage, and the target must succeed on a DC [10+%CON] Constitution saving throw or be poisoned for 1 minute. The poisoned target is paralyzed, and it can repeat the saving throw at the start of each of its turns, ending the effect on a success. \n\t The target is also grappled (escape DC [10+%STR]). If the target is Medium or smaller, it is also restrained until this grapple ends. While grappling the target, the aberration has advantage on attack rolls against it and can 't use this attack against other targets. When the aberration moves, any Medium or smaller target it is grappling moves with it."
 
-    if Type == "Aven":
-        r = r + "\n- Fly \n\t 50ft"
-    if Type == "Aven" and Dice() == 1:
-        r = r + "\n- Ambusher"
-    if Type == "Aven" and Dice() == 1:
-        r = r + \
-            "\n- Mimicry \n\t The Ravenfolk can mimic simple sounds it has heard, such as a person whispering, a baby crying, or an animal chittering. A creature that hears the sounds can tell they are imitations with a successful DC 10 Wisdom (Insight) check."
+    if Type == "Aven":        r = r + "\n- Fly \n\t 50ft"
+    if Type == "Aven" and Dice() == 1:        r += "\n- Ambusher"
+    if Type == "Aven" and Dice() == 1:        r += "\n- Mimicry \n\t The Ravenfolk can mimic simple sounds it has heard, such as a person whispering, a baby crying, or an animal chittering. A creature that hears the sounds can tell they are imitations with a successful DC 10 Wisdom (Insight) check."
 
-    if (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:
-        r += "\n- Damage Immunities. \t cold."
-        if Dice(4) == 1:
-            r += "\n- Snow Camouflage. \t The beast has advantage on Dexterity (Stealth) checks made to hide in snowy terrain."
+    if (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:        r += "\n- Damage Immunities. \t cold."
+        if Dice(4) == 1:   r += "\n- Snow Camouflage. \t The beast has advantage on Dexterity (Stealth) checks made to hide in snowy terrain."
 
     if (Type == "Beast" or Type == "Beastfolk"):
-        if Dice() == 1:
-            r += "\n- Speed. \n\t 40 ft."
-        elif Dice() == 1:
-            r += "\n- Speed. \n\t 50 ft."
+        if Dice() == 1:            r += "\n- Speed. \n\t 40 ft."
+        elif Dice() == 1:          r += "\n- Speed. \n\t 50 ft."
 
-    if (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:
-        r = r + "\n- Climb. \n\t 30 ft."
-    if (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:
-        r = r + "\n- Burrow. \n\t 10 ft."
+    if (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:        r = r + "\n- Climb. \n\t 30 ft."
+    if (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:        r = r + "\n- Burrow. \n\t 10 ft."
     if (Type == "Beast" or Type == "Beastfolk"):
-        if Dice(8) == 1:
-            r = r + "\n- Fly. \n\t 60 ft."
-            if Dice(3) == 1:
-                r = r + "\n Flyby. \n\t The beast doesn't provoke opportunity attacks when it flies out of an enemy's reach."
-        elif Dice(8) == 1:
-            r = r + "\n- Fly. \n\t 80 ft."
-            if Dice() == 1:
-                r = r + "\n Flyby. \n\t The beast doesn't provoke opportunity attacks when it flies out of an enemy's reach."
+        if Dice(8) == 1:            r = r + "\n- Fly. \n\t 60 ft."
+            if Dice(3) == 1:        r = r + "\n- Flyby. \n\t The beast doesn't provoke opportunity attacks when it flies out of an enemy's reach."
+        elif Dice(8) == 1:          r = r + "\n- Fly. \n\t 80 ft."
+            if Dice() == 1:         r = r + "\n- Flyby. \n\t The beast doesn't provoke opportunity attacks when it flies out of an enemy's reach."
 
     if (Type == "Beast" or Type == "Beastfolk"):
         if Dice(2) == 1:
@@ -2169,61 +1912,36 @@ def Actions(Type=""):
             if Dice() == 1: r += "\n- Keen Sight. \n\tThe beast has advantage on Wisdom (Perception) checks that rely on sight."
             if Dice() == 1: r += "\n- Keen Hearing. \n\tThe beast has advantage on Wisdom (Perception) checks that rely on hearing."
 
-    if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:
-        r += "\n-  Pack Tactics. \n\t The Beast has advantage on an attack roll against a creature if at least one of the beast's allies is within 5 feet of the creature and the ally isn't incapacitated."
+    if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:        r += "\n-  Pack Tactics. \n\t The Beast has advantage on an attack roll against a creature if at least one of the beast's allies is within 5 feet of the creature and the ally isn't incapacitated."
 
-    if (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:
-        r += "\n-  Multiattack. \n\t The Beast makes two simple attacks."
-    elif (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:
-        r += "\n-  Multiattack. \n\t The Beast makes three simple attacks."
-    elif (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:
-        r += "\n-  Multiattack. \n\t The Beast makes one special attack and a simple attacks."
+    if (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:        r += "\n-  Multiattack. \n\t The Beast makes two simple attacks."
+    elif (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:      r += "\n-  Multiattack. \n\t The Beast makes three simple attacks."
+    elif (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:      r += "\n-  Multiattack. \n\t The Beast makes one special attack and a simple attacks."
 
     if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:
-        r = r + \
-            "\n - Grappler. \n\t On an attack, the target is grappled,  [DC 10+%STR]"
-        if Dice(2) == 1:
-            r = r + "\n - Constrict. \n\t Until the grapple ends, the creature is restrained. The creature can't constrict another creature."
+        r += "\n - Grappler. \n\t On an attack, the target is grappled,  [DC 10+%STR]"
+        if Dice(2) == 1:    r += "\n - Constrict. \n\t Until the grapple ends, the creature is restrained. The creature can't constrict another creature."
 
-    if (Type == "Beast" or Type == "Beastfolk") and Dice(9) == 1:
-        r += "\n - Charge \n\t If the Beast moves at least 20 feet straight toward a target and then hits it with an attack on the same turn, the target takes an extra [2d6+%STR] bludgeoning damage. If the target is a creature, it must succeed on a DC=[10+%STR] Strength saving throw or be knocked prone."
-    elif (Type == "Beast" or Type == "Beastfolk") and Dice(9) == 1:
-        r += "\n - Charge \n\t If the Beast moves at least 10 feet straight toward a target and then hits it with an attack on the same turn, the target takes an extra [2d8+%STR] piercing damage. If the target is a creature, it must succeed on a DC=[10+%STR] Strength saving throw or be pushed up to 10 feet away and knocked prone."
-
-    if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:
-        r = r + \
-            "\n - Relentless \n\t (Recharges after a Short or Long Rest). \n\t If the beast takes 7 damage or less that would reduce it to 0 hit points, it is reduced to 1 hit point instead."
+    if (Type == "Beast" or Type == "Beastfolk") and Dice(9) == 1:        r += "\n - Charge \n\t If the Beast moves at least 20 feet straight toward a target and then hits it with an attack on the same turn, the target takes an extra [2d6+%STR] bludgeoning damage. If the target is a creature, it must succeed on a DC=[10+%STR] Strength saving throw or be knocked prone."
+    elif (Type == "Beast" or Type == "Beastfolk") and Dice(9) == 1:      r += "\n - Charge \n\t If the Beast moves at least 10 feet straight toward a target and then hits it with an attack on the same turn, the target takes an extra [2d8+%STR] piercing damage. If the target is a creature, it must succeed on a DC=[10+%STR] Strength saving throw or be pushed up to 10 feet away and knocked prone."
+    if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:        r += "\n - Relentless \n\t (Recharges after a Short or Long Rest). \n\t If the beast takes 7 damage or less that would reduce it to 0 hit points, it is reduced to 1 hit point instead."
 
     if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:
         r = r + "\n- Water Breathing. The beast can breathe underwater"
-        if Dice(6) == 1:
-            r = r + "\n- Swim. \n\t 60 ft."
-        elif Dice(4) == 1:
-            r = r + "\n- Swim. \n\t 40 ft."
-        elif Dice(3) == 1:
-            r = r + "\n- Swim. \n\t 30 ft."
-        else:
-            r += "\n- Swim. \n\t 60 ft."
-        if Dice(4) == 1:
-            r = r + \
-                "\n- Underwater Camouflage. \n\t The beast has advantage on Dexterity (Stealth) checks made while underwater."
+        if Dice() == 1:         r = r + "\n- Swim. \n\t 30 ft."
+        elif Dice() == 1:       r = r + "\n- Swim. \n\t 40 ft."
+        elif Dice() == 1:       r = r + "\n- Swim. \n\t 60 ft."
+        if Dice(4) == 1:        r = r + "\n- Underwater Camouflage. \n\t The beast has advantage on Dexterity (Stealth) checks made while underwater."
 
     if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:
-        if Dice() == 1:
-            r = r + "\n- Hold Breath. \n\t The beast can hold its breath for 15 minutes"
-        elif Dice() == 1:
-            r = r + "\n- Hold Breath. \n\t The beast can hold its breath for 30 minutes"
-        if Dice() == 1:
-            r = r + "\n- Swim. \n\t 60 ft."
-        elif Dice(4) == 1:
-            r = r + "\n- Swim. \n\t 40 ft."
-        elif Dice(3) == 1:
-            r = r + "\n- Swim. \n\t 30 ft."
-        else:
-            r = r + "\n- Swim. \n\t 20 ft."
+        if Dice() == 1:            r = r + "\n- Hold Breath. \n\t The beast can hold its breath for 15 minutes"
+        elif Dice() == 1:          r = r + "\n- Hold Breath. \n\t The beast can hold its breath for 30 minutes"
+        if Dice() == 1:            r = r + "\n- Swim. \n\t 60 ft."
+        elif Dice() == 1:         r = r + "\n- Swim. \n\t 40 ft."
+        elif Dice() == 1:         r = r + "\n- Swim. \n\t 30 ft."
+        else:                      r = r + "\n- Swim. \n\t 20 ft."
 
-    if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:
-        r += "\n- Blood Frenzy \n\t The beast has advantage on melee attack rolls against any creature that doesn't have all its hit points."
+    if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:        r += "\n- Blood Frenzy \n\t The beast has advantage on melee attack rolls against any creature that doesn't have all its hit points."
 
     if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:
         r = r + "\n- Amphibious"
@@ -2606,101 +2324,60 @@ def Actions(Type=""):
             r += "\n - Tremorsense: 60 ft.\n"
 
     if Type == "Monstrosity":
-        if Dice() == 1:
-            r += "\n - Speed: 50 ft"
-        elif Dice() == 1:
-            r += "\n - Speed: 40 ft"
-        else:
-            r += "\n - Speed: 30 ft"
+        if Dice() == 1:            r += "\n - Speed: 50 ft"
+        elif Dice() == 1:          r += "\n - Speed: 40 ft"
+        else:                      r += "\n - Speed: 30 ft"
 
     if Type == "Monstrosity":
-        if Dice() == 1:
-            r += "\n - Fly: 30 ft"
-        elif Dice() == 1:
-            r += "\n - Fly: 40 ft"
+        if Dice() == 1:            r += "\n - Fly: 30 ft"
+        elif Dice() == 1:          r += "\n - Fly: 40 ft"
         elif Dice() == 1:
             r += "\n - Fly: 60 ft"
-            if Dice(3) == 1:
-                r += "\n- Dive Attack: \n\t If the monster is flying and dives at least 30 feet straight toward a target and then hits it with a melee weapon attack, the attack deals an extra 9 (2d8) damage to the target."
-            if Dice(3) == 1:
-                r += "\n- Flyby: \n\t If the monster doesn't provoke an opportunity attack when it flies out of an enemy's reach."
+            if Dice(3) == 1:       r += "\n- Dive Attack: \n\t If the monster is flying and dives at least 30 feet straight toward a target and then hits it with a melee weapon attack, the attack deals an extra 9 (2d8) damage to the target."
+            if Dice(3) == 1:       r += "\n- Flyby: \n\t If the monster doesn't provoke an opportunity attack when it flies out of an enemy's reach."
 
-    if Type == "Monstrosity" and Dice() == 1:
-        r += "\n - Borrow: \n\t 10 ft"
+    if Type == "Monstrosity" and Dice() == 1:        r += "\n - Borrow: \n\t 10 ft"
 
-    if Type == "Monstrosity" and Dice() == 1:
-        r += "\n - Damage Immunities: \t cold"
+    if Type == "Monstrosity" and Dice() == 1:        r += "\n - Damage Immunities: \t cold"
 
-    if Type == "Monstrosity" and Dice() == 1:
-        r += "\n- Avoidance.\n\t If the Monstrosity is subjected to an effect that allows it to make a saving throw to take only half damage, it instead takes no damage if it succeeds on the saving throw, and only half damage if it fails.\n"
-    if Type == "Monstrosity" and Dice() == 1:
-        r += "\n- Ambusher.\n\t In the first round of a combat, the Monstrosity has advantage on attack rolls against any creature it surprised.\n"
-    if Type == "Monstrosity" and Dice() == 1:
-        r += "\n- False Appearance \n\t While the Monstrosity remains motionless, it is indistinguishable from a natural element, ordinary object, or innofensive creature."
-    if Type == "Monstrosity" and Dice() == 1:
-        r += "\n- Fear of Fire. \n\t If the Monstrosity takes fire damage, it has disadvantage on attack rolls and ability checks until the end of its next turn."
-    if Type == "Monstrosity" and Dice() == 1:
-        r += "\n- Multiattack. \n\t The monstrosity makes two Simple attacks."
-    if Type == "Monstrosity" and Dice() == 1:
-        r += "\n- Keen Sight.\n\t The monstrosity has advantage on Wisdom (Perception) checks that rely on sight.\n"
-    if Type == "Monstrosity" and Dice() == 1:
-        r += "\n- Keen Smell.\n\t The monstrosity has advantage on Wisdom (Perception) checks that rely on smell.\n"
-    if Type == "Monstrosity" and Dice() == 1:
-        r += "\n- Grappler. \n\t On a simple melee attack, the target is grappled,  [DC 10+%STR]"
-    if Type == "Monstrosity" and Dice() == 1:
-        r += "\n- Displacement.\n\t The Monstrosity projects a magical illusion that makes it appear to be standing near its actual location, causing attack rolls against it to have disadvantage. If it is hit by an attack, this trait is disrupted until the end of its next turn. This trait is also disrupted while the displacer beast is incapacitated or has a speed of 0.\n"
-    if Type == "Monstrosity" and Dice() == 1:
-        r += "\n- Shapechanger \n\t The monstrosity can use its action to polymorph into an object or back into its true, amorphous form. Its statistics are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
-    elif Type == "Monstrosity" and Dice() == 1:
-        r += "\n- Shapechanger \n\t The monstrosity can use its action to polymorph into a Small or Medium humanoid it has seen, or back into its true form. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
-    if Type == "Monstrosity" and Dice() == 1:
-        r += "\n- Surprise Attack \n\t  If the monstrosity surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 10 (3d6) damage from the attack."
-    if Type == "Monstrosity" and Dice() == 1:
-        r += "\n- Stone Camouflage.\n\t The monstrosity has advantage on Dexterity (Stealth) checks made to hide in rocky terrain.\n"
-    if Type == "Monstrosity" and Dice() == 1:
-        r += "\n- Spider Climb.\n\t The Monstrosity can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.\n"
-    if Type == "Monstrosity" and Dice() == 1:
-        r += "\n- Snow Camouflage. \n\t The Monstrosity has advantage on Dexterity (Stealth) checks made to hide in snowy terrain."
-    if Type == "Monstrosity" and Dice() == 1:
-        r += "\n- Two-Headed. \n\t The monstrosity has advantage on Wisdom (Perception) checks and on saving throws against being blinded, charmed, deafened, frightened, stunned, or knocked unconscious."
+    if Type == "Monstrosity" and Dice() == 1:        r += "\n- Avoidance.\n\t If the Monstrosity is subjected to an effect that allows it to make a saving throw to take only half damage, it instead takes no damage if it succeeds on the saving throw, and only half damage if it fails.\n"
+    if Type == "Monstrosity" and Dice() == 1:        r += "\n- Ambusher.\n\t In the first round of a combat, the Monstrosity has advantage on attack rolls against any creature it surprised.\n"
+    if Type == "Monstrosity" and Dice() == 1:        r += "\n- False Appearance \n\t While the Monstrosity remains motionless, it is indistinguishable from a natural element, ordinary object, or innofensive creature."
+    if Type == "Monstrosity" and Dice() == 1:        r += "\n- Fear of Fire. \n\t If the Monstrosity takes fire damage, it has disadvantage on attack rolls and ability checks until the end of its next turn."
+    if Type == "Monstrosity" and Dice() == 1:        r += "\n- Multiattack. \n\t The monstrosity makes two Simple attacks."
+    if Type == "Monstrosity" and Dice() == 1:        r += "\n- Keen Sight.\n\t The monstrosity has advantage on Wisdom (Perception) checks that rely on sight.\n"
+    if Type == "Monstrosity" and Dice() == 1:        r += "\n- Keen Smell.\n\t The monstrosity has advantage on Wisdom (Perception) checks that rely on smell.\n"
+    if Type == "Monstrosity" and Dice() == 1:        r += "\n- Grappler. \n\t On a simple melee attack, the target is grappled,  [DC 10+%STR]"
+    if Type == "Monstrosity" and Dice() == 1:        r += "\n- Displacement.\n\t The Monstrosity projects a magical illusion that makes it appear to be standing near its actual location, causing attack rolls against it to have disadvantage. If it is hit by an attack, this trait is disrupted until the end of its next turn. This trait is also disrupted while the displacer beast is incapacitated or has a speed of 0.\n"
+    if Type == "Monstrosity" and Dice() == 1:        r += "\n- Shapechanger \n\t The monstrosity can use its action to polymorph into an object or back into its true, amorphous form. Its statistics are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
+    elif Type == "Monstrosity" and Dice() == 1:      r += "\n- Shapechanger \n\t The monstrosity can use its action to polymorph into a Small or Medium humanoid it has seen, or back into its true form. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
+    if Type == "Monstrosity" and Dice() == 1:        r += "\n- Surprise Attack \n\t  If the monstrosity surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 10 (3d6) damage from the attack."
+    if Type == "Monstrosity" and Dice() == 1:        r += "\n- Stone Camouflage.\n\t The monstrosity has advantage on Dexterity (Stealth) checks made to hide in rocky terrain.\n"
+    if Type == "Monstrosity" and Dice() == 1:        r += "\n- Spider Climb.\n\t The Monstrosity can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.\n"
+    if Type == "Monstrosity" and Dice() == 1:        r += "\n- Snow Camouflage. \n\t The Monstrosity has advantage on Dexterity (Stealth) checks made to hide in snowy terrain."
+    if Type == "Monstrosity" and Dice() == 1:        r += "\n- Two-Headed. \n\t The monstrosity has advantage on Wisdom (Perception) checks and on saving throws against being blinded, charmed, deafened, frightened, stunned, or knocked unconscious."
 
-    if Type == "Ranger":
-        r = r + "\n- " + Attack("RangedMartial")
-    if Type == "Ranger":
-        r = "\n - Multiattack. \n\t The Ranger can do two ranged attacks."
+    if Type == "Ranger":        r += "\n- " + Attack("RangedMartial")
+    if Type == "Ranger":        r += "\n - Multiattack. \n\t The Ranger can do two ranged attacks."
 
-    if Type == "Priest":
-        r = r + \
-            "\n- Divine Eminence. \n\t As a bonus action, the priest can expend a spell slot to cause its melee weapon attacks to magically deal an extra 10 (3d6) radiant damage to a target on a hit. This benefit lasts until the end of the turn. If the priest expends a spell slot of 2nd level or higher, the extra damage increases by 1d6 for each level above 1st."
+    if Type == "Priest":        r += "\n- Divine Eminence. \n\t As a bonus action, the priest can expend a spell slot to cause its melee weapon attacks to magically deal an extra 10 (3d6) radiant damage to a target on a hit. This benefit lasts until the end of the turn. If the priest expends a spell slot of 2nd level or higher, the extra damage increases by 1d6 for each level above 1st."
 
-    if Type == "Shaman" and Dice(2) == 1:
-        r = r + "\n Change Shape: \n\t The Shaman magically polymorphs into a Beast, remaining in that form for up to 1 hour. It can revert to its true form as a bonus action. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
+    if Type == "Shaman" and Dice(2) == 1:        r = r + "\n Change Shape: \n\t The Shaman magically polymorphs into a Beast, remaining in that form for up to 1 hour. It can revert to its true form as a bonus action. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
 
-    if Type == "Soldier":
-        r = r + "\n- " + Attack("Martial")
-    if Type == "Soldier":
-        r = "\n - Multiattack \n\t The Soldier can do two martial attacks and one simple attack."
+    if Type == "Soldier":        r += "\n- " + Attack("Martial")
+    if Type == "Soldier":        r += "\n - Multiattack \n\t The Soldier can do two martial attacks and one simple attack."
 
-    if Type == "Spy" and Dice(2) == 1:
-        r = r + "\n- Cunning Action \n\t On each of its turns, the spy can use a bonus action to take the Dash, Disengage, or Hide action."
-    if Type == "Spy" and Dice(2) == 1:
-        r = r + "\n- Sneak Attack (1/Turn). \n\t The spy deals an extra 7 (2d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 feet of an ally of the spy that isn't incapacitated and the spy doesn't have disadvantage on the attack roll."
-    if Type == "Spy" and Dice(2) == 1:
-        r = r + "\n- Multiattack. \n\t The spy makes two simple melee attacks."
+    if Type == "Spy" and Dice(2) == 1:        r = r + "\n- Cunning Action \n\t On each of its turns, the spy can use a bonus action to take the Dash, Disengage, or Hide action."
+    if Type == "Spy" and Dice(2) == 1:        r = r + "\n- Sneak Attack (1/Turn). \n\t The spy deals an extra 7 (2d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 feet of an ally of the spy that isn't incapacitated and the spy doesn't have disadvantage on the attack roll."
+    if Type == "Spy" and Dice(2) == 1:        r = r + "\n- Multiattack. \n\t The spy makes two simple melee attacks."
 
-    if Type == "Kobold":
-        r += "\n- Darkvision \n\t 60ft."
-    if Type == "Kobold":
-        r += "\n- Pack Tactics \n\t The kobold has advantage on an attack roll against a creature if at least one of the kobold's allies is within 5 feet of the creature and the ally isn't incapacitated."
-    if Type == "Kobold":
-        r += "\n- Sunlight Sensitivity \n\t While in sunlight, the kobold has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
-    if Type == "Kobold" and Dice() == 1:
-        r += "\n Fly \t 30ft."
+    if Type == "Kobold":        r += "\n- Darkvision \n\t 60ft."
+    if Type == "Kobold":        r += "\n- Pack Tactics \n\t The kobold has advantage on an attack roll against a creature if at least one of the kobold's allies is within 5 feet of the creature and the ally isn't incapacitated."
+    if Type == "Kobold":        r += "\n- Sunlight Sensitivity \n\t While in sunlight, the kobold has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+    if Type == "Kobold" and Dice() == 1:        r += "\n Fly \t 30ft."
 
-    if Type == "Undead" and Dice(2) == 1:
-        r = r + "\n Darkvision: 60ft"
-    elif Type == "Undead" and Dice(2) == 1:
-        r = r + "\n Darkvision: 120ft"
+    if Type == "Undead" and Dice(2) == 1:        r = r + "\n Darkvision: 60ft"
+    elif Type == "Undead" and Dice(2) == 1:      r = r + "\n Darkvision: 120ft"
 
     if Type == "Undead" and Dice(2) == 1:   r += "\n- Damage Vulnerabilities: Bludgeoning."
     if Type == "Undead" and Dice(3) == 1:   r += "\n- Damage Vulnerabilities: Radiant"
