@@ -1406,60 +1406,56 @@ def Magic(Lvl, race=Race(), background=Background()):
         if background == "Cultist" and Dice(3) == 1 and not ("Thaumaturgy" in cantrip):      cantrip += "\n- Thaumaturgy"
         if background == "Cultist" and Dice() == 1 and not ("Command" in first):
             first += "\n- Command"
-            slots1 += Dice(4)
+            slots1 += Dice()
         if background == "Cultist" and Dice() == 1 and not ("Inflict Wounds" in first):
             first += "\n- Inflict Wounds"
-            slots1 += Dice(4)
+            slots1 += Dice()
         if background == "Cultist" and Dice() == 1 and not ("Shield Of Faith" in first):
             first += "\n- Shield Of Faith"
-            slots1 += Dice(4)
+            slots1 += Dice()
         if background == "Cultist" and Dice(8) == 1 and not ("Hold Person" in second):
             second += "\n- Hold Person"
-            slots2 += Dice(3)
+            slots2 += Dice(5)
         if background == "Cultist" and Dice(8) == 1 and not ("Spiritual Weapon" in second):
             second += "\n- Spiritual Weapon"
-            slots2 += Dice(3)
+            slots2 += Dice(5)
 
         if background == "Druid" and not ("Druidcraft" in cantrip):                     cantrip += "\n- Druidcraft."
         if background == "Druid" and Dice() == 1 and not ("Produce Flame" in cantrip):  cantrip += "\n- Produce Flame."
         if background == "Druid" and Dice() == 1 and not ("Shillelagh" in cantrip):     cantrip += "\n- Shillelagh."
         if background == "Druid" and Dice() == 1 and not ("Entangle" in first):
             first += "\n- Entangle"
-            slots1 += Dice(4)
+            slots1 += Dice()
         if background == "Druid" and Dice() == 1 and not ("Longstrider" in first):
             first += "\n- Longstrider"
-            slots1 += Dice(4)
+            slots1 += Dice()
         if background == "Druid" and Dice() == 1 and not ("Thunderwave" in first):
             first += "\n- Thunderwave"
-            slots1 += Dice(4)
+            slots1 += Dice()
         if background == "Druid" and Dice() == 1 and not ("Animal Messenger" in second):
             second += "\n- Animal Messenger"
-            slots2 += Dice(3)
+            slots2 += Dice(5)
         if background == "Druid" and Dice() == 1 and not ("Barkskin" in second):
             second += "\n- Barkskin"
-            slots2 += Dice(3)
+            slots2 += Dice(5)
         if background == "Druid" and Dice() == 1 and not ("Speak With Animals" in first):
             first += "\n- Speak With Animals"
-            slots1 += Dice(4)
+            slots1 += Dice(5)
 
-        if background == "Healer" and Dice(2) == 1 and not ("Guidance" in cantrip):
-            cantrip += "\n- Guidance"
-        if background == "Healer" and Dice(2) == 1 and not ("Sacred flame" in cantrip):
-            cantrip += "\n- Sacred flame"
+        if background == "Healer" and Dice(2) == 1 and not ("Guidance" in cantrip):            cantrip += "\n- Guidance"
+        if background == "Healer" and Dice(2) == 1 and not ("Sacred flame" in cantrip):        cantrip += "\n- Sacred flame"
         if background == "Healer" and Dice(2) == 1 and not ("Cure wounds" in first):
             first += "\n- Cure wounds"
-            slots1 += Dice(2)
+            slots1 += Dice()
 
-        if background == "Knight" and Dice() == 1 and not ("Guidance" in cantrip):
-            cantrip += "\n- Guidance"
-        if background == "Knight" and Dice() == 1 and not ("Leadership" in cantrip):
-            cantrip += "\n- Leadership (Recharges after a Short or Long Rest). \n\t For 1 minute, the knight can utter a special command or warning whenever a nonhostile creature that it can see within 30 feet of it makes an attack roll or a saving throw. The creature can add a d4 to its roll provided it can hear and understand the knight. A creature can benefit from only one Leadership die at a time. This effect ends if the knight is incapacitated."
+        if background == "Knight" and Dice() == 1 and not ("Guidance" in cantrip):            cantrip += "\n- Guidance"
+        if background == "Knight" and Dice() == 1 and not ("Leadership" in cantrip):          cantrip += "\n- Leadership (Recharges after a Short or Long Rest). \n\t For 1 minute, the knight can utter a special command or warning whenever a nonhostile creature that it can see within 30 feet of it makes an attack roll or a saving throw. The creature can add a d4 to its roll provided it can hear and understand the knight. A creature can benefit from only one Leadership die at a time. This effect ends if the knight is incapacitated."
 
         if background == "Mage" and Dice(2) == 1 and not ("Firebolt" in cantrip):       cantrip += "\n - Firebolt"
         if background == "Mage" and Dice(2) == 1 and not ("Light" in cantrip):          cantrip += "\n - Light"
         if background == "Mage" and Dice(2) == 1 and not ("Sleep" in first):
             first += "\n - Sleep"
-            slots1 += Dice(2)
+            slots1 += Dice()
 
         if background == "Monk" and Dice(2) == 1 and not ("Mage Hand" in cantrip):          cantrip += "\n- Mage Hand"
         if background == "Monk" and Dice(2) == 1 and not ("Feather Fall" in three):         three += "\n- Feather Fall"
@@ -1475,65 +1471,65 @@ def Magic(Lvl, race=Race(), background=Background()):
         if background == "Priest" and Dice() == 1 and not ("Guidance" in cantrip):          cantrip += "\n- Guidance"
         if background == "Priest" and Dice() == 1 and not ("Resistance" in cantrip):        cantrip += "\n- Resistance"
 
-        if background == "Priest" and Dice(2) == 1 and not ("Bless" in first):
+        if background == "Priest" and Dice() == 1 and not ("Bless" in first):
             first += "\n- Bless"
-            slots1 += Dice(5)
-        if background == "Priest" and Dice(2) == 1 and not ("Cure wounds" in first):
-            first += "\n- Cure wounds"
-            slots1 += Dice(5)
-        if background == "Priest" and Dice(2) == 1 and not ("Sanctuary" in first):
-            first += "\n- Sanctuary"
-            slots1 += Dice(5)
+            slots1 += Dice()
         if background == "Priest" and Dice() == 1 and not ("Cure wounds" in first):
             first += "\n- Cure wounds"
-            slots1 += Dice(5)
-        if background == "Priest" and Dice() == 1 and not ("Guiding Bolt" in first):
-            first += "\n- Guiding Bolt"
-            slots1 += Dice(5)
+            slots1 += Dice()
         if background == "Priest" and Dice() == 1 and not ("Sanctuary" in first):
             first += "\n- Sanctuary"
-            slots1 += Dice(5)
-        if background == "Priest" and Dice(2) == 1 and not ("Command" in first):
-            first += "\n- Command"
-            slots1 += Dice(5)
-        if background == "Priest" and Dice(2) == 1 and not ("Guiding Bolt" in first):
+            slots1 += Dice()
+        if background == "Priest" and Dice() == 1 and not ("Cure wounds" in first):
+            first += "\n- Cure wounds"
+            slots1 += Dice()
+        if background == "Priest" and Dice() == 1 and not ("Guiding Bolt" in first):
             first += "\n- Guiding Bolt"
-            slots1 += Dice(5)
-        if background == "Priest" and Dice(2) == 1 and not ("Cure Wounds" in first):
+            slots1 += Dice()
+        if background == "Priest" and Dice() == 1 and not ("Sanctuary" in first):
+            first += "\n- Sanctuary"
+            slots1 += Dice()
+        if background == "Priest" and Dice() == 1 and not ("Command" in first):
+            first += "\n- Command"
+            slots1 += Dice()
+        if background == "Priest" and Dice() == 1 and not ("Guiding Bolt" in first):
+            first += "\n- Guiding Bolt"
+            slots1 += Dice()
+        if background == "Priest" and Dice() == 1 and not ("Cure Wounds" in first):
             first += "\n- Cure Wounds"
-            slots1 += Dice(5)
-        if background == "Priest" and Dice(2) == 1 and not ("Detect Magic" in first):
+            slots1 += Dice()
+        if background == "Priest" and Dice() == 1 and not ("Detect Magic" in first):
             first += "\n- Detect Magic"
-            slots1 += Dice(5)
+            slots1 += Dice()
 
         if background == "Priest" and Dice() == 1 and not ("Lesser Restoration" in second):
             second += "\n- Lesser Restoration"
-            slots2 += Dice(4)
+            slots2 += Dice(5)
         if background == "Priest" and Dice() == 1 and not ("Augury" in second):
             second += "\n- Augury"
-            slots2 += Dice(4)
+            slots2 += Dice(5)
         if background == "Priest" and Dice() == 1 and not ("Spiritual Weapon" in second):
             second += "\n- Spiritual Weapon"
-            slots2 += Dice(4)
+            slots2 += Dice(5)
         if background == "Priest" and Dice() == 1 and not ("Lesser Restoration" in second):
             second += "\n- Lesser Restoration"
-            slots2 += Dice(4)
+            slots2 += Dice(5)
         if background == "Priest" and Dice() == 1 and not ("Hold Person" in second):
             second += "\n- Hold Person"
-            slots2 += Dice(4)
+            slots2 += Dice(5)
 
         if background == "Priest" and Dice() == 1 and not ("Dispel Magic" in third):
             third += "\n- Dispel Magic"
-            slots3 += Dice(3)
+            slots3 += Dice(4)
         if background == "Priest" and Dice() == 1 and not ("Spirit Guardians" in third):
             third += "\n- Spirit Guardians"
-            slots3 += Dice(3)
+            slots3 += Dice(4)
         if background == "Priest" and Dice() == 1 and not ("Mass Healing Word" in third):
             third += "\n- Mass Healing Word"
-            slots3 += Dice(3)
+            slots3 += Dice(4)
         if background == "Priest" and Dice() == 1 and not ("Tongues" in third):
             third += "\n- Tongues"
-            slots3 += Dice(3)
+            slots3 += Dice(4)
 
         if background == "Shaman" and Dice() == 1 and not ("Druidcraft" in cantrip):        cantrip += "\n- Druidcraft"
         if background == "Shaman" and Dice() == 1 and not ("Produce Flame" in cantrip):     cantrip += "\n-  Produce Flame"
@@ -1684,25 +1680,25 @@ def Magic(Lvl, race=Race(), background=Background()):
 
         if race == "Fey" and Dice() == 1 and not ("Identify" in first):
             first += "\n- Identify"
-            slots1 += Dice(3)
+            slots1 += Dice()
         if race == "Fey" and Dice() == 1 and not ("Ray Of Sickness" in first):
             first += "\n- Ray Of Sickness"
-            slots1 += Dice(3)
+            slots1 += Dice()
         if race == "Fey" and Dice() == 1 and not ("Hold Person" in second):
             second += "\n- Hold Person"
-            slots2 += Dice(3)
+            slots2 += Dice(5)
         if race == "Fey" and Dice() == 1 and not ("Locate Object" in second):
             second += "\n- Locate Object"
-            slots2 += Dice(3)
+            slots2 += Dice(5)
         if race == "Fey" and Dice() == 1 and not ("Bestow Curse" in third):
             third += "\n- Bestow Curse"
-            slots3 += Dice(3)
+            slots3 += Dice(4)
         if race == "Fey" and Dice() == 1 and not ("Counterspell" in third):
             third += "\n- Counterspell"
-            slots3 += Dice(3)
+            slots3 += Dice(4)
         if race == "Fey" and Dice() == 1 and not ("Lightning Bolt" in third):
             third += "\n- Lightning Bolt"
-            slots3 += Dice(3)
+            slots3 += Dice(4)
         if race == "Fey" and Dice() == 1 and not ("Phantasmall Killer" in fourth):
             fourth += "\n- Phantasmall Killer"
             slots4 += Dice(3)
@@ -1711,13 +1707,13 @@ def Magic(Lvl, race=Race(), background=Background()):
             slots4 += Dice(3)
         if race == "Fey" and Dice() == 1 and not ("Contact Other Plane" in fifth):
             fifth += "\n- Contact Other Plane"
-            slots5 += Dice(3)
+            slots5 += Dice(2)
         if race == "Fey" and Dice() == 1 and not ("Scrying" in fifth):
             fifth += "\n- Scrying"
-            slots5 += Dice(3)
+            slots5 += Dice(2)
         if race == "Fey" and Dice() == 1 and not ("Eyebite" in sixth):
             sixth += "\n- Eyebite"
-            slots6 += Dice(3)
+            slots6 += 1
 
         if race == "Fiend" and Dice() == 1 and not ("Fire Breath" in cantrip):            cantrip += "\n- Fire Breath (Recharge 5-6).\n\t The fiend exhales fire in a 15-foot cone. Each creature in that area must make a DC [10+%CON] Dexterity saving throw, taking 21 (6d6) fire damage on a failed save, or half as much damage on a successful one."
         if race == "Fiend" and Dice() == 1 and not ("Ethereal Stride" in cantrip):        cantrip += "\n- Ethereal Stride.\n\t The fiend and up to three willing creatures within 5 feet of it magically enter the Ethereal Plane from the Material Plane, or vice versa."
@@ -1926,18 +1922,13 @@ def Actions(Type=""):
     if (Type == "Beast" or Type == "Beastfolk") and Dice(4) == 1:
         r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 4 (1d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR). Until this grapple ends, the target is restrained, and the beast can't bite another target."
         if Dice() == 1: r = r + "\n- Swallow. \n\t  The beast makes one bite attack against a target creature smaller than themselves it is grappling. If the attack hits, the target is swallowed, and the grapple ends. The swallowed target is blinded and restrained, it has total cover against attacks and other effects outside the beast, and it takes 6 (2d4+%CON) acid damage at the start of each of the beast's turns. The beast can have only one target swallowed at a time. If the beast dies, a swallowed creature is no longer restrained by it and can escape from the corpse using 5 feet of movement, exiting prone."
-    elif (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:
-        r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 8 (2d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR). Until this grapple ends, the target is restrained, and the beast can't bite another target."
-    elif (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:
-        r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 10 (3d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR). Until this grapple ends, the target is restrained, and the beast can't bite another target."
-    elif (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:
-        r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 15 (4d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR)."
-    elif (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:
-        r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 20 (5d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR)."
-    elif (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:
-        r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 7 (1d10 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR) and the target must make a DC [10+%CON] Constitution saving throw, taking 18 (4d8) poison damage on a failed save, or half as much damage on a successful one. If the poison damage reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way."
+    elif (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:        r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 8 (2d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR). Until this grapple ends, the target is restrained, and the beast can't bite another target."
+    elif (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:        r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 10 (3d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR). Until this grapple ends, the target is restrained, and the beast can't bite another target."
+    elif (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:        r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 15 (4d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR)."
+    elif (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:        r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 20 (5d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR)."
+    elif (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:        r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 7 (1d10 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR) and the target must make a DC [10+%CON] Constitution saving throw, taking 18 (4d8) poison damage on a failed save, or half as much damage on a successful one. If the poison damage reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way."
     elif (Type == "Beast" or Type == "Beastfolk") and Dice(4) == 1:
-        r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 5 (1d8 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR) and the target must make a DC [10+%CON] Constitution saving throw, taking 18 (4d8) poison damage on a failed save, or half as much damage on a successful one. If the poison damage reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way."
+        r += "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 5 (1d8 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR) and the target must make a DC [10+%CON] Constitution saving throw, taking 18 (4d8) poison damage on a failed save, or half as much damage on a successful one. If the poison damage reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way."
         r += "\n- Lycan Curse \n\t When a Bite attack hits, the target must succeed on a DC[10+%CON] Constitution saving throw or be cursed with the lycanthropy curse of the affinity beast."
 
     if (Type == "Beast" or Type == "Beastfolk") and Dice(12) == 1:      r += "\n- Hold Breath. \n\t  The beast can hold its breath for 15 minutes.\n- Swimming \n\t  speed of 30 feet."
@@ -2227,16 +2218,11 @@ def Actions(Type=""):
 
     if Type == "Fiend" and Dice(2) == 1:    r += "\n- Invisibility. \n\t The fiend magically turns invisible until it attacks, or until its concentration ends (as if concentrating on a spell). Any equipment the fiend wears or carries is invisible with it."
     if Type == "Fiend" and Dice() == 1:     r += "\n- Hellish Rejuvenation. \n\t A Fiend that dies in the Nine Hells comes back to life with all its hit points in " + str(Dice(10)) + " days unless it is killed by a good-aligned creature with a bless spell cast on that creature or its remains are sprinkled with holy water."
-    if Type == "Fiend" and Dice() == 1:
-        r = r + "\n- Multiattack. \n\t The fiend makes two simple melee attacks."
-    if Type == "Fiend" and Dice() == 1:
-        r = r + "\n- Steadfast. \n\t The fiend can't be frightened while it can see an allied creature within 30 feet of it."
-    if Type == "Fiend" and Dice(12) == 1:
-        r = r + \
-            "\n- Keen Hearing and Smell. \n\t The fiend has advantage on Wisdom (Perception) checks that rely on hearing or smell."
+    if Type == "Fiend" and Dice() == 1:         r = r + "\n- Multiattack. \n\t The fiend makes two simple melee attacks."
+    if Type == "Fiend" and Dice() == 1:         r = r + "\n- Steadfast. \n\t The fiend can't be frightened while it can see an allied creature within 30 feet of it."
+    if Type == "Fiend" and Dice(12) == 1:       r = r + "\n- Keen Hearing and Smell. \n\t The fiend has advantage on Wisdom (Perception) checks that rely on hearing or smell."
 
-    if Type == "Monk" and Dice(2) == 1:
-        r = r + "\n- Multiattack. \n\t The monk makes two attacks."
+    if Type == "Monk" and Dice(2) == 1:        r = r + "\n- Multiattack. \n\t The monk makes two attacks."
 
     if Type == "Monstrosity":
         if Dice() == 1:            r += "\n - Darkvision: 60 ft.\n"
@@ -2407,21 +2393,26 @@ def Lair(Type):
 
 def Region(Type):
     r = ""
-
     if Type == "Fey" and Dice() == 1:        r += "\n- Compulsory Offering \n\t The first time a creature comes within 1 mile of the faerie dragon's lair, the creature must succeed on a DC 15 Wisdom saving throw or feel an overwhelming compulsion to leave an offering worth at least 5 gp stashed in an out-of-the-way place. The dragon immediately senses the location of this gift. A creature can be affected only once by this compulsion."
     if Type == "Fey" and Dice() == 1:        r += "\n- Malleable Time \n\t Time is fluid within 1 mile of the fey's lair, flowing somewhere between half and twice its normal speed."
     if Type == "Fey" and Dice() == 1:        r += "\n- Birds, rodents, snakes, spiders, or toads (or some other creatures appropriate to the hag) are found in great profusion."
     if Type == "Fey" and Dice() == 1:        r += "\n- Beasts that have an Intelligence score of 2 or lower are charmed by the fey and directed to be aggressive toward intruders in the area."
     if Type == "Fey" and Dice() == 1:        r += "\n- Strange carved figurines, twig fetishes, or rag dolls magically appear in trees."
-    if Type == "Fey" and Dice(8) == 1:        r += "\n- Most surfaces are covered by a thin film of slime, which is slick and sticks to anything that touches it."
-    if Type == "Fey" and Dice(8) == 1:        r += "\n- Currents and tides are exceptionally strong and treacherous. Any ability check made to safely navigate or control a vessel moving through these waters has disadvantage."
-    if Type == "Fey" and Dice(8) == 1:        r += "\n- Shores are littered with dead, rotting fish. The fey can sense when one of the fish is handled and cause it to speak with their voice."
-
+    if Type == "Fey" and Dice(8) == 1:       r += "\n- Most surfaces are covered by a thin film of slime, which is slick and sticks to anything that touches it."
+    if Type == "Fey" and Dice(8) == 1:       r += "\n- Currents and tides are exceptionally strong and treacherous. Any ability check made to safely navigate or control a vessel moving through these waters has disadvantage."
+    if Type == "Fey" and Dice(8) == 1:       r += "\n- Shores are littered with dead, rotting fish. The fey can sense when one of the fish is handled and cause it to speak with their voice."
     return r
 
 
 def PlotHook():
     Hooks = [
+        "I am connected to the spirits of my kind. They carry a purpose for me that I shall carry on my shoulders.",
+        "I lost all hope in my civilization. I shall make something new.",
+        "I lost my purpose long ago. I'm looking for something new to care for.",
+        "My kind carries an ancient curse. I shall cleanse our souls.",
+        "My kind is alienated in these lands. We just try to survive, but anger folows wherever we go. ",
+        "I run away from the opression of my kind",
+        "My kind is under repression. I aim to liberate them.",
         "I was unjustly imprisoned by a rival, I will get my revenge and then more. ",
         "I've been away of home to fight a war. I now want to go back to my loved ones.",
         "I was promised for a convenience marriage. I decided to run away.",
