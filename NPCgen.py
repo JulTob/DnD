@@ -3289,7 +3289,8 @@ def NPC():
 
     HP = Lvl*(Dice(12) + Modifier(CON))
 
-    print(r)
+
+    r = ""
     print("- {} - ".format(al) + random.choice(["♀", "♂", "⚥", "⚬", "?", ""]))
     print(bg)
     print(rc)
