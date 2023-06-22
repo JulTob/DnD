@@ -3288,7 +3288,7 @@ def NPC():
     if Dice(10) == 1 or bg == "Berserker":  AC += Modifier(CON)
 
     HP = Lvl*(Dice(12) + Modifier(CON))
-    r = "# " + Title()
+
     print(r)
     print("- {} - ".format(al) + random.choice(["♀", "♂", "⚥", "⚬", "?", ""]))
     print(bg)
