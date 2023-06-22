@@ -370,7 +370,7 @@ def AbilityScore():
     d2 = Dice()
     d3 = Dice()
     d4 = Dice()
-    return d1+d2+d3+d4 - min(d1, d2, d3, d4) + Dice(8) - Dice(8)
+    return d1+d2+d3+d4 - min(d1, d2, d3, d4) 
 
 
 def Modifier(AS):
@@ -1289,34 +1289,34 @@ def Magic(Lvl, race=Race(), background=Background()):
         if race == "Fey" and Dice() == 1 and not ("Ray Of Sickness" in first):
             first += "\n- Ray Of Sickness"
             slots1 += Dice()
-        if race == "Fey" and Dice() == 1 and not ("Hold Person" in second):
+        if race == "Fey" and Dice(7) == 1 and not ("Hold Person" in second):
             second += "\n- Hold Person"
             slots2 += Dice(5)
-        if race == "Fey" and Dice() == 1 and not ("Locate Object" in second):
+        if race == "Fey" and Dice(7) == 1 and not ("Locate Object" in second):
             second += "\n- Locate Object"
             slots2 += Dice(5)
-        if race == "Fey" and Dice() == 1 and not ("Bestow Curse" in third):
+        if race == "Fey" and Dice(8) == 1 and not ("Bestow Curse" in third):
             third += "\n- Bestow Curse"
             slots3 += Dice(4)
-        if race == "Fey" and Dice() == 1 and not ("Counterspell" in third):
+        if race == "Fey" and Dice(8) == 1 and not ("Counterspell" in third):
             third += "\n- Counterspell"
             slots3 += Dice(4)
-        if race == "Fey" and Dice() == 1 and not ("Lightning Bolt" in third):
+        if race == "Fey" and Dice(8) == 1 and not ("Lightning Bolt" in third):
             third += "\n- Lightning Bolt"
             slots3 += Dice(4)
-        if race == "Fey" and Dice() == 1 and not ("Phantasmall Killer" in fourth):
+        if race == "Fey" and Dice(9) == 1 and not ("Phantasmall Killer" in fourth):
             fourth += "\n- Phantasmall Killer"
             slots4 += Dice(3)
-        if race == "Fey" and Dice() == 1 and not ("Polymorph" in fourth):
+        if race == "Fey" and Dice(9) == 1 and not ("Polymorph" in fourth):
             fourth += "\n- Polymorph"
             slots4 += Dice(3)
-        if race == "Fey" and Dice() == 1 and not ("Contact Other Plane" in fifth):
+        if race == "Fey" and Dice(10) == 1 and not ("Contact Other Plane" in fifth):
             fifth += "\n- Contact Other Plane"
             slots5 += Dice(2)
-        if race == "Fey" and Dice() == 1 and not ("Scrying" in fifth):
+        if race == "Fey" and Dice(10) == 1 and not ("Scrying" in fifth):
             fifth += "\n- Scrying"
             slots5 += Dice(2)
-        if race == "Fey" and Dice() == 1 and not ("Eyebite" in sixth):
+        if race == "Fey" and Dice(11) == 1 and not ("Eyebite" in sixth):
             sixth += "\n- Eyebite"
             slots6 += 1
 
@@ -3197,103 +3197,97 @@ def NPC():
     al = Alignment()
 
     if rc == "Giant":
-        STR += Dice(12)
+        STR += Dice(6)
     if rc == "Fey":
-        CHA += Dice(12)
+        CHA += Dice(6)
     if rc == "Human":
-        STR += Dice(2)
-        DEX += Dice(2)
-        CON += Dice(2)
-        INT += Dice(2)
-        WIS += Dice(2)
-        CHA += Dice(2)
+        STR += 1
+        DEX += 1
+        CON += 1
+        INT += 1
+        WIS += 1
+        CHA += 1
     if rc == "Aberration":
-        CON += Dice(12)
-    if rc == "Aven":
-        DEX += Dice(12)
-    if rc == "Beast":
-        CON += Dice(12)
-    if rc == "Beastfolk":
-        CON += Dice()
-        WIS += Dice()
-    if rc == "Celestial":
-        WIS += Dice()
-        CHA += Dice()
-    if rc == "Construct":
-        STR += Dice()
-        CON += Dice()
-    if rc == "Dragon":
-        STR += Dice()
-        DEX += Dice()
-        CON += Dice()
-        INT += Dice()
-        WIS += Dice()
-        CHA += Dice()
-    if rc == "Dwarf":
-        STR += Dice(4)
-        CON += Dice(4)
-        WIS += Dice(4)
-    if rc == "Elf":
-        DEX += Dice(4)
-        INT += Dice(4)
-        WIS += Dice(4)
-    if rc == "Elemental":
         CON += Dice(6)
-        WIS += Dice(6)
-    if rc == "Fiend":
-        CON += Dice(4)
-        INT += Dice(4)
-        CHA += Dice(4)
-    if rc == "Gnome":
-        DEX += Dice(4)
-        INT += Dice(4)
-        CHA += Dice(4)
-    if rc == "Goblin":
-        DEX += Dice(4)
-        INT += Dice(4)
-        CHA += Dice(4)
-    if rc == "Hag":
+    if rc == "Aven":
+        DEX += Dice(6)
+    if rc == "Beast":
+        CON += Dice(6)
+    if rc == "Beastfolk":
+        CON += Dice(3)
+        WIS += Dice(3)
+    if rc == "Celestial":
+        WIS += Dice(3)
+        CHA += Dice(3)
+    if rc == "Construct":
+        STR += Dice(3)
+        CON += Dice(3)
+    if rc == "Dragon":
+        STR += Dice(3)
+        DEX += Dice(3)
         CON += Dice(3)
         INT += Dice(3)
         WIS += Dice(3)
         CHA += Dice(3)
-    if rc == "Halfling":
-        DEX += Dice(4)
-        INT += Dice(4)
-        CHA += Dice(4)
-    if rc == "Kobold":
-        DEX += Dice()
-        INT += Dice()
-    if rc == "Lizardfolk":
+    if rc == "Dwarf":
         STR += Dice(2)
-        DEX += Dice(2)
         CON += Dice(2)
+        WIS += Dice(2)
+    if rc == "Elf":
+        DEX += Dice(2)
+        INT += Dice(2)
+        WIS += Dice(2)
+    if rc == "Elemental":
+        CON += Dice(3)
+        WIS += Dice(3)
+    if rc == "Fiend":
+        CON += Dice(2)
+        INT += Dice(2)
+        CHA += Dice(2)
+    if rc == "Gnome":
+        DEX += Dice(2)
+        INT += Dice(2)
+        CHA += Dice(2)
+    if rc == "Goblin":
+        DEX += Dice(2)
+        INT += Dice(2)
+        CHA += Dice(2)
+    if rc == "Hag":
         INT += Dice(2)
         WIS += Dice(2)
         CHA += Dice(2)
-    if rc == "Monstrosity":
-        STR += Dice()
-        CON += Dice()
-    if rc == "Ooze":
-        CON += Dice(12)
-    if rc == "Orc":
-        STR += Dice(3)
+    if rc == "Halfling":
         DEX += Dice(2)
-        CON += Dice(3)
-        WIS += Dice(2)
+        INT += Dice(2)
         CHA += Dice(2)
+    if rc == "Kobold":
+        DEX += Dice(3)
+        INT += Dice(3)
+    if rc == "Lizardfolk":
+        STR += Dice(2)
+        CON += Dice(2)
+        CHA += Dice(2)
+    if rc == "Monstrosity":
+        STR += Dice(3)
+        CON += Dice(3)
+    if rc == "Ooze":
+        CON += Dice(6)
+    if rc == "Orc":
+        STR += Dice(2)
+        CON += Dice(2)
+        WIS += Dice(2)
     if rc == "Plant":
-        STR += Dice(4)
-        CON += Dice(4)
-        WIS += Dice(4)
+        STR += Dice(2)
+        CON += Dice(2)
+        WIS += Dice(2)
     if rc == "Snakefolk":
-        DEX += Dice(4)
-        CON += Dice(4)
-        INT += Dice(4)
+        DEX += Dice(2)
+        CON += Dice(2)
+        INT += Dice(2)
     if rc == "Undead":
-        STR += Dice(4)
-        CON += Dice(4)
-        CHA += Dice(4)
+        STR += Dice(2)
+        CON += Dice(2)
+        CHA += Dice(2)
 
     AC = 10 + Modifier(DEX) + Dice(Modifier(Lvl+8))
     if Dice(10) == 1 or bg == "Monk":       AC += Modifier(WIS)
