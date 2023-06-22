@@ -1,3 +1,8 @@
+# NPC creator
+import random
+
+
+def Title():
     descriptor = [
         "The Air",
         "The Alcoholic",
@@ -436,4 +441,4 @@
     title = random.choice(descriptor) + " " + random.choice(rank)
     return title
 
-Title()
+print(Title())
