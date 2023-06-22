@@ -953,7 +953,11 @@ def Magic(Lvl, race=Race(), background=Background()):
     third = "3rd Level Spells: "
     fourth = "4th Level Spells: "
     fifth = "5th Level Spells: "
-    sixth = "6th Level Spells"
+    sixth = "6th Level Spells: "
+    seventh = "7th Level Spells: "
+    eigth = "8th Level Spells: "
+    ninth = "9th Level Spells: "
+
 
     slots1 = 0
     slots2 = 0
@@ -961,6 +965,9 @@ def Magic(Lvl, race=Race(), background=Background()):
     slots4 = 0
     slots5 = 0
     slots6 = 0
+    slots7 = 0
+    slots8 = 0
+    slots9 = 0
 
     one = "1/Day each: "
     two = "2/Day each: "
@@ -1396,10 +1403,15 @@ def Magic(Lvl, race=Race(), background=Background()):
 
     r = "\n"
     if not (cantrip == "Cantrips (at will): "):         r += cantrip + "\n"
-    if not (first == "1st Level Spells: "):             r += "[{}]".format(Dice(slots1)) + first + "\n"
+    if not (first == "1st Level Spells: "):             r += "[{}]".format(Dice(slots1)) + first  + "\n"
     if not (second == "2nd Level Spells: "):            r += "[{}]".format(Dice(slots2)) + second + "\n"
-    if not (third == "3rd Level Spells: "):             r += "[{}]".format(Dice(slots3)) + third + "\n"
+    if not (third == "3rd Level Spells: "):             r += "[{}]".format(Dice(slots3)) + third  + "\n"
     if not (fourth == "4th Level Spells: "):            r += "[{}]".format(Dice(slots4)) + fourth + "\n"
+    if not (fifth == "5th Level Spells: "):             r += "[{}]".format(Dice(slots5)) + fifth  + "\n"
+    if not (sixth == "6th Level Spells: "):             r += "[{}]".format(Dice(slots6)) + sixth  + "\n"
+    if not (seventh == "7th Level Spells: "):           r += "[{}]".format(Dice(slots7)) + seventh + "\n"
+    if not (eigth == "8th Level Spells: "):             r += "[{}]".format(Dice(slots8)) + eigth  + "\n"
+    if not (ninth == "9th Level Spells: "):             r += "[{}]".format(Dice(slots9)) + ninth  + "\n"
     if not (one == "1/Day each: "):        r += "\n" + one
     if not (two == "2/Day each: "):        r += "\n" + two
     if not (three == "3/Day each: "):      r += "\n" + three
