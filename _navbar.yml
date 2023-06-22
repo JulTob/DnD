@@ -1,0 +1,13 @@
+name: "DnD"
+title: "DnDTools"
+type: inverse
+left:
+
+  - text: "Generator Tools"
+    menu:
+       - text: "NPC Generator"
+         href: ./call.html
+
+right:
+  - icon: fa-github fa-lg
+    href: https://github.com/JulTob
