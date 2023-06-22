@@ -3179,7 +3179,7 @@ def NPC():
     bg = Background()
 
     Lvl = Dice(30)
-    #Lvl = 1
+    Lvl = 1
     rc = Race()
     nm = Name(rc)
     al = Alignment()
