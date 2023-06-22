@@ -1,0 +1,81 @@
+//  https://openprocessing.org/sketch/create#
+
+
+let alto = 800;
+let ancho = 800;
+
+function setup() {
+	createCanvas(alto,ancho);
+	rectMode(CENTER);
+}
+
+let center_x = alto/2;
+let center_y = ancho/2;
+
+function rune(n){
+	// Returns one of the Futhark symbols
+	let ruth = "✦✧★✯✭✮✶✷✵✸✹✿❀❁❤︎✰☙❧❦★♥︎♡"
+	let m = n % ruth.length;
+	return ruth.charAt(m);
+	}
+
+let txtsize = 100
+let frame = 0;
+let angle = 1.1;
+
+function sol(symbol,speed, scale){
+	let cWidth = textWidth(symbol)
+	push();
+	textSize(scale*txtsize)
+	rectMode(CENTER);
+	translate(center_x, center_y);//Epicenter of rotation
+	rotate(radians(speed*angle));
+	text(symbol, 0, 0);
+	pop();
+	}
+
+function planet(symbol, speed, scale, phase, modulo){
+	push();
+	textSize(scale*txtsize)
+	translate(center_x, center_y);//Epicenter of rotation
+	rotate(radians(speed*angle+phase));
+	text(symbol, modulo, modulo); 
+	pop();
+	}
+
+function draw(){
+	textAlign(CENTER, CENTER); 
+	// Important! Manipulates symbols from the centre
+	background(10);
+	//draw a black background
+	fill(200, 100);
+	// Color and transparency of the symbols
+
+	//textSize(txtsize);
+
+	
+	sol("♥",-1.5, 1+cos(frame/40));
+	sol("⚜", 0, 3+cos(frame/60));
+	sol("♡",1.5, 1+cos(frame/40));
+		
+	planet(rune(frame/160+2),    1/2, abs(cos(frame/160+360/2)),   360/5, 200+50*cos(frame/160));
+	planet(rune(frame/160+(3)),  1/3, abs(cos(frame/160+360/3)),   360/7, 200+50*cos(frame/160));
+	planet(rune(frame/160+(5)),  1/5, abs(cos(frame/160+360/5)),   360/8, 200+50*cos(frame/160));
+	planet(rune(frame/160+(7)),  1/7, abs(cos(frame/160+360/7)),   360/9, 200+50*cos(frame/160));
+	planet(rune(frame/160+(11)), 1/11, abs(cos(frame/160+360/11)),  360/11,200+50*cos(frame/160));
+
+	// planet(symbol, speed, scale, phase, modulo)
+	  
+	for(let counter = 0; counter <5; counter++){
+		planet("⬨", 1/6, abs(cos(frame/160+counter*360/5)), counter*360/5 + 125,200+50*cos(frame/160))
+		}
+	for(let counter = 0; counter <5; counter++){
+		planet(rune(2.5+frame/160+(counter*11)), -1/11, abs(sin(frame/160+counter*360/5)), counter*360/5,200+50*sin(frame/160))
+		}
+for(let counter = 0; counter <5; counter++){
+		planet("☥",1/5, abs(sin(frame/160+counter*360/5)), 125+counter*360/5,200+50*sin(frame/160))
+		}
+
+  frame += 1;
+	angle += 0.666
+}
