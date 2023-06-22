@@ -702,7 +702,7 @@ def Language(race=Race(), background=Background()):
         if Dice(10) == 1 and not ("Draconic" in l):         l += "Draconic. "
 
     if race == "Halfling":
-        if not ("Common" in l):         l += "Common."
+        if not ("Common" in l):         l += "Common. "
         if not ("Halfling" in l):       l += "Halfling. "
         
     if race == "Kobold":
@@ -1694,6 +1694,8 @@ def Actions(Type=""):
         if Dice() == 1:     r += "\n- Telepathic Bond:\n\t While the Construct is on the same plane of existence as its master, it can magically convey what it senses to its master, and the two can communicate telepathically."
         if Dice() == 1:     r += "\n- Terrifying Glare:\n\t The Construct is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Construct must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute."
 
+    # Dragons
+    ## Movement
     if Type == "Dragon" and Dice(2) == 1:
         r = r + "\n- Fly: 60 ft"
         if Dice() == 1:     r += "\n- Flyby \n\t The dragon is an agile flier, quick to fly out of enemies' reach. The dragon doesn't provoke an opportunity attack when it flies out of an enemy's reach."
@@ -1704,22 +1706,21 @@ def Actions(Type=""):
 
     if Type == "Dragon" and Dice() == 1:    r = r + "\n- Climb: 30 ft"
 
+    if Type == "Dragon" and Dice(3) == 1:
+        r += "\n- Swim: 30ft."
+        if Type == "Dragon" and Dice(4) == 1:   r = r + "\n - Amphibious \n\t The dragon can breathe air and water."
+
+    ## Senses
     if Type == "Dragon":
         if Dice(2) == 1:    r = r + "\n- Darkvision: 60 ft"
         elif Dice() == 1:   r = r + "\n- Blindsight: 10 ft"
         elif Dice() == 1:   r = r + "\n- Blindsight: 60 ft"
         elif Dice() == 1:   r = r + "\n- Truesight: 60 ft"
 
-    if Type == "Dragon" and Dice(3) == 1:
-        r += "\n- Swim: 30ft."
-        if Type == "Dragon" and Dice(4) == 1:   r = r + "\n - Amphibious \n\t The dragon can breathe air and water."
-
     if Type == "Dragon" and Dice() == 1:    r += "\n- Keen Senses \n\t The Dragon has advantage on Wisdom (Perception) checks that rely on sight, hearing, or smell."
     if Type == "Dragon" and Dice() == 1:    r += "\n- Limited Telepathy \n\t The Dragon can magically communicate simple ideas, emotions, and images telepathically with any creature within 100 feet of it that can understand a language. It can also communicate with any Dragon"
-    if Type == "Dragon" and Dice() == 1:    r += "\n- Superior Invisibility \n\t  The Dragon magically turns invisible until its concentration ends (as if concentrating on a spell). Any equipment the Dragon wears or carries is invisible with it."
-    if Type == "Dragon" and Dice() == 1:    r += "\n- Mimicry \n\t The dragon can mimic any sounds it has heard, including voices. A creature that hears the sounds can tell they are imitations with a successful DC 10 Wisdom (Insight) check."
-    if Type == "Dragon" and Dice(12) == 1:  r += "\n- Rejuvenation \n\t You might decide that dragons in your campaign, being an essential part of the Material Plane, are nearly impossible to destroy. A dragon's life essence might be preserved in the egg from which it first emerged, in its hoard, or in a cavernous hall at the center of the world, just as a lich's essence is hidden in a phylactery. \n\t If it has an essence-preserving object, a destroyed dragon gains a new body in 1d10 days, regaining all its hit points and becoming active again. The new body appears within 5 feet of the object."
 
+    ## Strengths and Weaknesses
     if Type == "Dragon" and Dice() == 1:    r += "\n- Magic Resistance \n\t The Dragon has advantage on saving throws against spells and other magical effects."
 
     if Type == "Dragon" and Dice() == 1:    r += "\n- Damage Immunities: Fire"
@@ -1728,6 +1729,12 @@ def Actions(Type=""):
     if Type == "Dragon" and Dice() == 1:    r += "\n- Damage Immunities: Acid"
 
     if Type == "Dragon" and Dice() == 1:    r += "\n- Condition Immunities: Poisoned"
+
+    ## Skills
+    if Type == "Dragon" and Dice() == 1:    r += "\n- Superior Invisibility \n\t  The Dragon magically turns invisible until its concentration ends (as if concentrating on a spell). Any equipment the Dragon wears or carries is invisible with it."
+    if Type == "Dragon" and Dice() == 1:    r += "\n- Mimicry \n\t The dragon can mimic any sounds it has heard, including voices. A creature that hears the sounds can tell they are imitations with a successful DC 10 Wisdom (Insight) check."
+    if Type == "Dragon" and Dice(12) == 1:  r += "\n- Rejuvenation \n\t You might decide that dragons in your campaign, being an essential part of the Material Plane, are nearly impossible to destroy. A dragon's life essence might be preserved in the egg from which it first emerged, in its hoard, or in a cavernous hall at the center of the world, just as a lich's essence is hidden in a phylactery. \n\t If it has an essence-preserving object, a destroyed dragon gains a new body in 1d10 days, regaining all its hit points and becoming active again. The new body appears within 5 feet of the object."
+
 
     if Type == "Fey" and Dice() == 1:   r += "\n- Magic Resistance \n\t The Fey has advantage on saving throws against spells and other magical effects."
     if Type == "Fey" and Dice() == 1:   r += "\n- Superior Invisibility \n\t  The Fey magically turns invisible until its concentration ends (as if concentrating on a spell). Any equipment the Fey wears or carries is invisible with it."
