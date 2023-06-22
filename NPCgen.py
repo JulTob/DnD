@@ -1126,7 +1126,7 @@ def Magic(Lvl, race=Race(), background=Background()):
             second += "\n- Heat Metal"
             slots2 += Dice(3)
         if background == "Shaman" and Dice(2) == 1 and not ("Spike Growth" in second):
-            second += "\n-  Spike Growth"
+            second += "\n- Spike Growth"
             slots2 += Dice(3)
         if background == "Shaman" and Dice() == 1 and not ("Conjure Animals" in third):
             third += "\n- Conjure Animals"
@@ -1369,6 +1369,8 @@ def Magic(Lvl, race=Race(), background=Background()):
 
         if race == "Ooze" and Dice() == 1 and not ("Psychic Crush" in cantrip):     cantrip += " \n- Psychic Crush (Recharge 5–6). \n\t The ooze targets one creature that it can sense within 60 feet of it. The target must make a DC 10 Intelligence saving throw, taking 10 (3d6) psychic damage on a failed save, or half as much damage on a successful one."
 
+        # PLANTS
+        # Spores
         if race == "Plant" and Dice(8) == 1 and not ("Hallucination Spores" in cantrip):         cantrip += "\n - Hallucination Spores \n\t The plant ejects spores at one creature it can see within 5 feet of it. The target must succeed on a DC 10+%CON Constitution saving throw or be poisoned for 1 minute. The poisoned target is incapacitated while it hallucinates. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
         if race == "Plant" and Dice(8) == 1 and not ("Rapport Spores" in cantrip):               cantrip += "\n - Rapport Spores \n\t A 20-foot radius of spores extends from the plant. These spores can go around corners and affect only creatures with an Intelligence of 2 or higher that aren't undead, constructs, or elementals. Affected creatures can communicate telepathically with one another while they are within 30 feet of each other. The effect lasts for 1 hour."
         if race == "Plant" and Dice(8) == 1 and not ("Caustic Spores" in one):           one += "\n - Caustic Spores \n\t The Plant releases spores in a 30-foot cone. Each creature inside the cone must succeed on a DC [10+%Con] Dexterity saving throw or take 3 (1d6) acid damage at the start of each of the plant's turns. A creature can repeat the saving throw at the start of its turn, ending the effect on itself on a success."
@@ -2459,7 +2461,7 @@ def PlotHook():
         "I will bring terrible wrath down on the evildoers who destroyed my homeland.",
         "I am the last of my kind, and it is up to me to ensure their names enter legend.",
         "I suffer awful visions of a coming disaster and will do anything to prevent it.",
-        "It is my duty to provide children to sustain my kind."
+        "It is my duty to raise children to mantain my kind.",
         "I face danger and evil to offset an unredeemable act in my past.",
         "I'm searching for a friend captured by an elusive enemy.",
         "My commander betrayed my unit, and I will have revenge.",
