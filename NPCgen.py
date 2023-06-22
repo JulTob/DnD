@@ -3306,7 +3306,6 @@ def NPC():
     print("- {} - ".format(al) + random.choice(["♀", "♂", "⚥", "⚬", "?", ""]))
     print(bg)
     print(f"{rc}: {nm}")
-    print(nm)
     print("\n")
 
     print("Lvl: {}".format(Lvl), "   HP: {}".format(HP))
