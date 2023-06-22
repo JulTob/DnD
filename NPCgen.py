@@ -1405,13 +1405,18 @@ def Magic(Lvl, race=Race(), background=Background()):
     if not (cantrip == "Cantrips (at will): "):         r += cantrip + "\n"
     if not (first == "1st Level Spells: "):             r += "[{}]".format(Dice(slots1)) + first  + "\n"
     if not (second == "2nd Level Spells: "):            r += "[{}]".format(Dice(slots2)) + second + "\n"
-    if not (third == "3rd Level Spells: "):             r += "[{}]".format(Dice(slots3)) + third  + "\n"
-    if not (fourth == "4th Level Spells: "):            r += "[{}]".format(Dice(slots4)) + fourth + "\n"
-    if not (fifth == "5th Level Spells: "):             r += "[{}]".format(Dice(slots5)) + fifth  + "\n"
-    if not (sixth == "6th Level Spells: "):             r += "[{}]".format(Dice(slots6)) + sixth  + "\n"
-    if not (seventh == "7th Level Spells: "):           r += "[{}]".format(Dice(slots7)) + seventh + "\n"
-    if not (eigth == "8th Level Spells: "):             r += "[{}]".format(Dice(slots8)) + eigth  + "\n"
-    if not (ninth == "9th Level Spells: "):             r += "[{}]".format(Dice(slots9)) + ninth  + "\n"
+    if Lvl>=5:
+        if not (third == "3rd Level Spells: "):             r += "[{}]".format(Dice(slots3)) + third  + "\n"
+        if not (fourth == "4th Level Spells: "):            r += "[{}]".format(Dice(slots4)) + fourth + "\n"
+    if Lvl>=10:
+        if not (fifth == "5th Level Spells: "):             r += "[{}]".format(Dice(slots5)) + fifth  + "\n"
+        if not (sixth == "6th Level Spells: "):             r += "[{}]".format(Dice(slots6)) + sixth  + "\n"
+    if Lvl>=15:
+        if not (seventh == "7th Level Spells: "):           r += "[{}]".format(Dice(slots7)) + seventh + "\n"
+    if Lvl>=17:
+        if not (eigth == "8th Level Spells: "):             r += "[{}]".format(Dice(slots8)) + eigth  + "\n"
+    if Lvl>=20:
+        if not (ninth == "9th Level Spells: "):             r += "[{}]".format(Dice(slots9)) + ninth  + "\n"
     if not (one == "1/Day each: "):        r += "\n" + one
     if not (two == "2/Day each: "):        r += "\n" + two
     if not (three == "3/Day each: "):      r += "\n" + three
@@ -1701,7 +1706,7 @@ def Actions(Type=""):
 
     if Type == "Dragon":
         if Dice(2) == 1:    r = r + "\n- Darkvision: 60 ft"
-        if Dice() == 1:     r = r + "\n- Blindsight: 10 ft"
+        elif Dice() == 1:   r = r + "\n- Blindsight: 10 ft"
         elif Dice() == 1:   r = r + "\n- Blindsight: 60 ft"
         elif Dice() == 1:   r = r + "\n- Truesight: 60 ft"
 
@@ -2023,8 +2028,9 @@ def Actions(Type=""):
     if Type == "Undead" and Dice() == 1:    r = r + "\n- Speed: 0 \n- Fly: 40 ft (hover)"
 
     # Senses
-    if Type == "Undead" and Dice(2) == 1:        r = r + "\n- Darkvision: 60ft"
-    elif Type == "Undead" and Dice(2) == 1:      r = r + "\n- Darkvision: 120ft"
+    if Type == "Undead":
+        if Dice(2) == 1:        r = r + "\n- Darkvision: 60ft"
+        elif Dice(2) == 1:      r = r + "\n- Darkvision: 120ft"
 
     # Weaknesses and Strengths
     if Type == "Undead" and Dice(2) == 1:   r += "\n- Damage Vulnerabilities: Bludgeoning."
@@ -3299,7 +3305,7 @@ def NPC():
     r = ""
     print("- {} - ".format(al) + random.choice(["♀", "♂", "⚥", "⚬", "?", ""]))
     print(bg)
-    print(rc)
+    print(f"{rc}: {nm}")
     print(nm)
     print("\n")
 
