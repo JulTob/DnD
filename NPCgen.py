@@ -3310,7 +3310,7 @@ def NPC():
 
     print("Lvl: {}".format(Lvl), "   HP: {}".format(HP))
     print(f"AC: {AC}")
-    print("\n\n\t",
+    print("\n\t" +
           f"STR: {STR} \t |  {Modifier(STR)} \n\t" +
           f"DEX: {DEX} \t |  {Modifier(DEX)} \n\t" +
           f"CON: {CON} \t |  {Modifier(CON)} \n\t" +
@@ -3366,7 +3366,7 @@ def NPC():
     print("\t To hit: +{}".format( Modifier(max(INT, WIS, CHA) + Lvl/5)))
     print(Magic(Lvl, rc, bg))
 
-    print("\n\n- Skills:")
+    print("\n\nSKILLS:")
     print(Actions(bg))
     print(Actions(rc))
     print(Actions(""))
