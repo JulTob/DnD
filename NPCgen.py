@@ -3355,7 +3355,7 @@ def NPC():
     print("\t To hit: +{}".format( Modifier(max(INT, WIS, CHA) + Lvl/5)))
     print(Magic(Lvl, rc, bg))
 
-    print("\n\n")
+    print("\n\n- Skills:")
     print(Actions(bg))
     print(Actions(rc))
     print(Actions(""))
