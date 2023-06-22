@@ -3341,7 +3341,7 @@ def NPC():
     print("Passive Perception: {}".format( 10 + Modifier(WIS) + Modifier(Lvl)))
 
     print("\n")
-    print("Languages: ", Language(rc, bg))
+    print("Languages: \n\t{}".format(Language(rc, bg)))
     print("\n")
     print("COMBAT ACTIONS:")
     print("\tTo hit: +{}".format( Modifier(max(STR, DEX) + Lvl/5)))
