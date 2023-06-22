@@ -1,3 +1,8 @@
+# NPC creator
+import random
+
+
+def Title():
     descriptor = [
         "The Air",
         "The Alcoholic",
