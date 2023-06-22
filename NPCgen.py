@@ -1046,14 +1046,14 @@ def Magic(Lvl, race=Race(), background=Background()):
         if background == "Priest" and Dice() == 1 and not ("Bless" in first):
             first += "\n- Bless"
             slots1 += Dice()
-        if background == "Priest" and Dice() == 1 and not ("Cure wounds" in first):
-            first += "\n- Cure wounds"
+        if background == "Priest" and Dice() == 1 and not ("Cure Wounds" in first):
+            first += "\n- Cure Wounds"
             slots1 += Dice()
         if background == "Priest" and Dice() == 1 and not ("Sanctuary" in first):
             first += "\n- Sanctuary"
             slots1 += Dice()
-        if background == "Priest" and Dice() == 1 and not ("Cure wounds" in first):
-            first += "\n- Cure wounds"
+        if background == "Priest" and Dice() == 1 and not ("Cure Wounds" in first):
+            first += "\n- Cure Wounds"
             slots1 += Dice()
         if background == "Priest" and Dice() == 1 and not ("Guiding Bolt" in first):
             first += "\n- Guiding Bolt"
@@ -1176,8 +1176,8 @@ def Magic(Lvl, race=Race(), background=Background()):
         if race == "Celestial" and Dice() == 1 and not ("Bless" in first):
             first += "\n- Bless"
             slots1 += Dice()
-        if race == "Celestial" and Dice() == 1 and not ("Cure wounds" in first):
-            first += "\n- Cure wounds"
+        if race == "Celestial" and Dice() == 1 and not ("Cure Wounds" in first):
+            first += "\n- Cure Wounds"
             slots1 += Dice()
         if race == "Celestial" and Dice() == 1 and not ("Sanctuary" in first):
             first += "\n- Sanctuary"
