@@ -3300,11 +3300,11 @@ def NPC():
     print("Lvl: {}".format(Lvl), "   HP: {}".format(HP))
     print(f"AC: {AC}")
     print("\n\n\t",
-          f"STR: {STR} \t |  {Modifier(STR)} \n\t",
-          f"DEX: {DEX} \t |  {Modifier(DEX)} \n\t",
-          f"CON: {CON} \t |  {Modifier(CON)} \n\t",
-          f"INT: {INT} \t |  {Modifier(INT)} \n\t",
-          f"WIS: {WIS} \t |  {Modifier(WIS)} \n\t",
+          f"STR: {STR} \t |  {Modifier(STR)} \n\t" +
+          f"DEX: {DEX} \t |  {Modifier(DEX)} \n\t" +
+          f"CON: {CON} \t |  {Modifier(CON)} \n\t" +
+          f"INT: {INT} \t |  {Modifier(INT)} \n\t" +
+          f"WIS: {WIS} \t |  {Modifier(WIS)} \n\t" +
           f"CHA: {CHA} \t |  {Modifier(CHA)} \n\t")
 
     print("Saving Throws:")
