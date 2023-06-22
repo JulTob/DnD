@@ -1993,11 +1993,11 @@ def Actions(Type=""):
     if Type == "Fiend" and Dice(12) == 1:   r += "\n- Keen Hearing and Smell. \n\t The fiend has advantage on Wisdom (Perception) checks that rely on hearing or smell."
 
     # Movement
-    if Type == "Fiend"
+    if Type == "Fiend":
         if Dice() == 1:         r += "\n- Speed: 20"
-        elif and Dice() == 1:   r += "\n- Speed: 30 ft."
+        elif Dice() == 1:   r += "\n- Speed: 30 ft."
 
-    if Type == "Fiend"
+    if Type == "Fiend":
         if Dice() == 1:     r += "\n- Fly 20"
         elif Dice() == 1:   r += "\n- Fly 30"
         elif Dice() == 1:   r += "\n- Fly 40"
