@@ -3318,8 +3318,7 @@ def NPC():
           f"WIS: {WIS} \t |  {Modifier(WIS)} \n\t" +
           f"CHA: {CHA} \t |  {Modifier(CHA)} \n\t")
 
-    print("Saving Throws:")
-    print("\t", end="")
+    print("Saving Throws:" + "\t", end="")
     if Dice(3) == 1:    print(f"Str:+ {Modifier(STR) + int(Lvl/5)}", end="\t")
     if Dice(3) == 1:    print(f"Dex:+ {Modifier(DEX) + int(Lvl/5)}", end="\t")
     if Dice(3) == 1:    print(f"Con:+ {Modifier(CON) + int(Lvl/5)}", end="\t")
