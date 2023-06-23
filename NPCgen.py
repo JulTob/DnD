@@ -3537,7 +3537,7 @@ def NPC():
     print("\n- SPECIAL ATTACK: {} Charges/Combat".format(Dice(1 + int(Lvl/2))))
     print(SpecialAttack(Lvl, Modifier(random.choice([STR, DEX, CON, INT, WIS, CHA]))))
     print("\n\n")
-    print("༼🜃 SPELLCASTING:\t{} 🜁༽".format(random.choice(["INT", "WIS", "CHA"]), f"\n\t Spellsave DC:{10 + Modifier(max(INT, WIS, CHA))}"))
+    print("༼ SPELLCASTING:\t{} ༽".format(random.choice(["INT", "WIS", "CHA"]), f"\n\t Spellsave DC:{10 + Modifier(max(INT, WIS, CHA))}"))
     print("\t To hit: +{}".format( Modifier(max(INT, WIS, CHA) + Lvl/5)))
     print(Magic(Lvl, rc, bg))
 
@@ -3562,7 +3562,7 @@ def NPC():
         print(Region(bg))
         print(Region(rc))
 
-    print("=꧁ Their Story ꧂")
+    print("꧁ Their Story ꧂")
     print(" - Traits -")
     print(Trait())
     print(Trait(bg))
