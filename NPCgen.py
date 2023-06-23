@@ -192,6 +192,7 @@ def ConstructName():
     Names = [
         "Animated Armor",
         "Drone",
+        "Golem",
         "Homunculus",
         "Flying Sword",
         "Living Rug",
@@ -214,6 +215,8 @@ def ElementalName():
     Names = [
         "Genasi",
         "Genie",
+        "Primordial",
+        "Titan",
         ""]
     return random.choice(Names)
 
@@ -408,6 +411,8 @@ def Attack(Type):
         "Quarterstaff, 1d6 + %STR Bludgeoning",
         "Quarterstaff, 1d8 + %STR Bludgeoning",
         "Sickle, 1d4 + %STR Slashing",
+        "Slam, 1d8 + %STR Bludgeoning",
+        "Slam, 2d8 + %STR Bludgeoning",
         "Spear, 1d6 + %STR Piercing, 20/60 thrown",
         "Spear, 1d8 + %STR Piercing, 20/60 thrown",
         "Spear, 2d8 + %STR Piercing, 20/60 thrown",
@@ -1216,21 +1221,21 @@ def Magic(Lvl, race=Race(), background=Background()):
         #Breath weapons
         if race == "Dragon" and Dice(3) == 1:
             d = 20
-            if Dice(d) == 1:    cantrip += "\n  - Fire Breath \n\t(Recharge 5-6) The dragon exhales fire in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 14 (4d6) fire damage on a failed save, or half as much damage on a successful one."
-            elif Dice(d) == 1:  cantrip += "\n  - Fire Breath \n\t(Recharge 5-6) The dragon exhales fire in a 15-foot cone. Each creature in that area must make a DC [10+%Con] Dexterity saving throw, taking 22 (4d10) fire damage on a failed save, or half as much damage on a successful one."
-            elif Dice(d) == 1:  cantrip += "\n  - Fire Breath \n\t(Recharge 5-6) The dragon exhales fire in a 15-foot cone. Each creature in that area must make a DC [10+%Con] Dexterity saving throw, taking 24 (7d6) fire damage on a failed save, or half as much damage on a successful one."
-            if Dice(d) == 2:    cantrip += "\n  - Sleep Breath \n\t(Recharge 5-6) The dragon exhales sleep gas in a 15-foot cone. Each creature in that area must succeed on a DC [10+%Con] Constitution saving throw or fall unconscious for 1 minute. This effect ends for a creature if the creature takes damage or someone uses an action to wake it."
-            if Dice(d) == 3:    cantrip += "\n  - Acid Breath \n\t(Recharge 5-6) The dragon exhales acid in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 18 (4d8) acid damage on a failed save, or half as much damage on a successful one"
-            if Dice(d) == 4:    cantrip += "\n  - Slowing Breath \n\t(Recharge 5-6) The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a DC [10+%Con] Constitution saving throw. On a failed save, the creature can't use reactions, its speed is halved, and it can't make more than one attack on its turn. In addition, the creature can use either an action or a bonus action on its turn, but not both. These effects last for 1 minute. The creature can repeat the saving throw at the start of each of its turns, ending the effect on itself with a successful save."
-            if Dice(d) == 5:    cantrip += "\n  - Euphoria Breath \n\t(Recharge 5-6) The dragon exhales a puff of euphoria gas at one creature within 5 feet of it. The target must succeed on a DC [10+%Con] Wisdom saving throw, or for 1 minute, the target can't take reactions and must roll a d6 at the start of each of its turns to determine its behavior during the turn: \n\t\t 1–4. The target takes no action or bonus action and uses all of its movement to move in a random direction. \n\t\t 5–6. The target doesn't move, and the only thing it can do on its turn is make a DC [10+%Con] Wisdom saving throw, ending the effect on itself on a success."
-            if Dice(d) == 6:    cantrip += "\n  - Repulsion Breath \n\t(Recharge 5-6) The dragon exhales repulsion energy in a 30-foot cone. Each creature in that area must succeed on a DC [10+%Con] Strength saving throw. On a failed save, the creature is pushed 30 feet away from the dragon."
-            if Dice(d) == 7:    cantrip += "\n  - Poison Breath \n\t(Recharge 5-6) The dragon exhales poisonous gas in a 15-foot cone. Each creature in that area must make a DC [10+%Con] Constitution saving throw, taking 21 (6d6) poison damage on a failed save, or half as much damage on a successful one."
-            if Dice(d) == 8:    cantrip += "\n  - Lightning Breath \n\t(Recharge 5-6) The dragon exhales lightning in a 40-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 16 (3d10) lightning damage on a failed save, or half as much damage on a successful one."
-            elif Dice(d) == 8:  cantrip += "\n  - Lightning Breath \n\t(Recharge 5-6) The dragon exhales lightning in a 30-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 22 (4d10) lightning damage on a failed save, or half as much damage on a successful one."
-            if Dice(d) == 9:    cantrip += "\n  - Cold Breath \n\t(Recharge 5-6) The dragon exhales an icy blast in a 15-foot cone. Each creature in that area must make a DC [10+CON%] Constitution saving throw, taking 18 (4d8) cold damage on a failed save, or half as much damage on a successful one."
-            elif Dice(d) == 10: cantrip += "\n  - Cold Breath \n\t(Recharge 5-6) The dragon exhales an icy blast in a 15-foot cone. Each creature in that area must make a DC [10+CON%] Constitution saving throw, taking 22 (5d8) cold damage on a failed save, or half as much damage on a successful one."
-            if Dice(d) == 11:   cantrip += "\n  - Paralyzing Breath \n\t(Recharge 5-6) The dragon exhales paralyzing gas in a 15-foot cone. Each creature in that area must succeed on a [10+CON%] Constitution saving throw or be paralyzed for 1 minute. A creature can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
-            if Dice(d) == 12:   cantrip += "\n  - Weakening Breath \n\t(Recharge 5-6) The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a DC [10+CON%] Strength saving throw or have disadvantage on Strength-based attack rolls, Strength checks, and Strength saving throws for 1 minute. A creature can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
+            if Dice(d) == 1 and not (" Fire Breath" in cantrip):        cantrip += "\n  - Fire Breath \n\t(Recharge 5-6) The dragon exhales fire in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 14 (4d6) fire damage on a failed save, or half as much damage on a successful one."
+            elif Dice(d) == 1 and not ("Fire Breath" in cantrip):       cantrip += "\n  - Fire Breath \n\t(Recharge 5-6) The dragon exhales fire in a 15-foot cone. Each creature in that area must make a DC [10+%Con] Dexterity saving throw, taking 22 (4d10) fire damage on a failed save, or half as much damage on a successful one."
+            elif Dice(d) == 1 and not ("Fire Breath" in cantrip):       cantrip += "\n  - Fire Breath \n\t(Recharge 5-6) The dragon exhales fire in a 15-foot cone. Each creature in that area must make a DC [10+%Con] Dexterity saving throw, taking 24 (7d6) fire damage on a failed save, or half as much damage on a successful one."
+            if Dice(d) == 2 and not ("Sleep Breath" in cantrip):        cantrip += "\n  - Sleep Breath \n\t(Recharge 5-6) The dragon exhales sleep gas in a 15-foot cone. Each creature in that area must succeed on a DC [10+%Con] Constitution saving throw or fall unconscious for 1 minute. This effect ends for a creature if the creature takes damage or someone uses an action to wake it."
+            if Dice(d) == 3 and not ("Acid Breath" in cantrip):         cantrip += "\n  - Acid Breath \n\t(Recharge 5-6) The dragon exhales acid in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 18 (4d8) acid damage on a failed save, or half as much damage on a successful one"
+            if Dice(d) == 4 and not ("Slowing Breath" in cantrip):      cantrip += "\n  - Slowing Breath \n\t(Recharge 5-6) The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a DC [10+%Con] Constitution saving throw. On a failed save, the creature can't use reactions, its speed is halved, and it can't make more than one attack on its turn. In addition, the creature can use either an action or a bonus action on its turn, but not both. These effects last for 1 minute. The creature can repeat the saving throw at the start of each of its turns, ending the effect on itself with a successful save."
+            if Dice(d) == 5 and not ("Euphoria Breath" in cantrip):     cantrip += "\n  - Euphoria Breath \n\t(Recharge 5-6) The dragon exhales a puff of euphoria gas at one creature within 5 feet of it. The target must succeed on a DC [10+%Con] Wisdom saving throw, or for 1 minute, the target can't take reactions and must roll a d6 at the start of each of its turns to determine its behavior during the turn: \n\t\t 1–4. The target takes no action or bonus action and uses all of its movement to move in a random direction. \n\t\t 5–6. The target doesn't move, and the only thing it can do on its turn is make a DC [10+%Con] Wisdom saving throw, ending the effect on itself on a success."
+            if Dice(d) == 6 and not ("Repulsion Breath" in cantrip):    cantrip += "\n  - Repulsion Breath \n\t(Recharge 5-6) The dragon exhales repulsion energy in a 30-foot cone. Each creature in that area must succeed on a DC [10+%Con] Strength saving throw. On a failed save, the creature is pushed 30 feet away from the dragon."
+            if Dice(d) == 7 and not ("Poison Breath" in cantrip):       cantrip += "\n  - Poison Breath \n\t(Recharge 5-6) The dragon exhales poisonous gas in a 15-foot cone. Each creature in that area must make a DC [10+%Con] Constitution saving throw, taking 21 (6d6) poison damage on a failed save, or half as much damage on a successful one."
+            if Dice(d) == 8 and not ("Lightning Breath" in cantrip):    cantrip += "\n  - Lightning Breath \n\t(Recharge 5-6) The dragon exhales lightning in a 40-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 16 (3d10) lightning damage on a failed save, or half as much damage on a successful one."
+            elif Dice(d) == 8 and not ("Lightning Breath" in cantrip):  cantrip += "\n  - Lightning Breath \n\t(Recharge 5-6) The dragon exhales lightning in a 30-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 22 (4d10) lightning damage on a failed save, or half as much damage on a successful one."
+            if Dice(d) == 9 and not ("Cold Breath" in cantrip):         cantrip += "\n  - Cold Breath \n\t(Recharge 5-6) The dragon exhales an icy blast in a 15-foot cone. Each creature in that area must make a DC [10+CON%] Constitution saving throw, taking 18 (4d8) cold damage on a failed save, or half as much damage on a successful one."
+            elif Dice(d) == 10 and not ("Cold Breath" in cantrip):      cantrip += "\n  - Cold Breath \n\t(Recharge 5-6) The dragon exhales an icy blast in a 15-foot cone. Each creature in that area must make a DC [10+CON%] Constitution saving throw, taking 22 (5d8) cold damage on a failed save, or half as much damage on a successful one."
+            if Dice(d) == 11 and not ("Paralyzing Breath" in cantrip):  cantrip += "\n  - Paralyzing Breath \n\t(Recharge 5-6) The dragon exhales paralyzing gas in a 15-foot cone. Each creature in that area must succeed on a [10+CON%] Constitution saving throw or be paralyzed for 1 minute. A creature can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
+            if Dice(d) == 12 and not ("WeakeningBreath" in cantrip):    cantrip += "\n  - Weakening Breath \n\t(Recharge 5-6) The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a DC [10+CON%] Strength saving throw or have disadvantage on Strength-based attack rolls, Strength checks, and Strength saving throws for 1 minute. A creature can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
 
         if race == "Dragon" and Dice(12) == 1 and not ("Change Shape" in cantrip):  cantrip += "\n- Change Shape \n\t The dragon magically polymorphs into a humanoid or beast that has a challenge rating no higher than its own, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form (the dragon's choice).In a new form, the dragon retains its alignment, hit points, Hit Dice, ability to speak, proficiencies, Legendary Resistance, lair actions, and Intelligence, Wisdom, and Charisma scores, as well as this action. Its statistics and capabilities are otherwise replaced by those of the new form, except any class features or legendary actions of that form."
         if race == "Dragon" and Dice() == 1 and not ("Color Spray" in cantrip):     cantrip += "\n- Color Spray"
@@ -1731,7 +1736,7 @@ def Actions(Type=""):
 
     # Strengths and Weaknesses
     if Type == "Construct":
-        if Dice() == 1:     r += "\n- Damage Resistances: Bludgeoning, piercing, and slashing from nonmagical attacks that aren's adamantine."
+        if Dice() == 1:     r += "\n- Damage Resistances: Bludgeoning, piercing, and slashing from nonmagical attacks that aren't adamantine."
         if Dice() == 1:     r += "\n- Damage Immunities: Force"
         if Dice() == 1:     r += "\n- Damage Immunities: Necrotic"
         r += "\n- Damage Immunities: Poison"
@@ -1758,8 +1763,18 @@ def Actions(Type=""):
         if Dice() == 1:     r += "\n- Spell Immunity. \n\t The construct is immune to three spells chosen by its creator. Typical immunities include fireball, heat metal, and lightning bolt."
         if Dice() == 1:     r += "\n- Telepathic Bond:\n\t While the Construct is on the same plane of existence as its master, it can magically convey what it senses to its master, and the two can communicate telepathically."
         if Dice() == 1:     r += "\n- Terrifying Glare:\n\t The Construct is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Construct must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute."
+        if Dice() == 1:     r += "\n- Aversion of Fire:\n\t If the golem takes fire damage, it has disadvantage on attack rolls and ability checks until the end of its next turn."
+        if Dice() == 1:     r += "\n- Berserk:\n\t Whenever the golem starts its turn with 40 hit points or fewer, roll a d6. On a 6, the golem goes berserk. On each of its turns while berserk, the golem attacks the nearest creature it can see. If no creature is near enough to move to and attack, the golem attacks an object, with preference for an object smaller than itself. Once the golem goes berserk, it continues to do so until it is destroyed or regains all its hit points. \n\t The golem's creator, if within 60 feet of the berserk golem, can try to calm it by speaking firmly and persuasively. The golem must be able to hear its creator, who must take an action to make a DC 15 Charisma (Persuasion) check. If the check succeeds, the golem ceases being berserk. If it takes damage while still at 40 hit points or fewer, the golem might go berserk again."
+        if Dice() == 1:     r += "\n- Immutable Form:\n\t The golem is immune to any spell or effect that would alter its form."
+        if Dice() == 1:     r += "\n- Lightning Absorption:\n\t Whenever the golem is subjected to lightning damage, it takes no damage and instead regains a number of hit points equal to the lightning damage dealt."
+        if Dice() == 1:     r += "\n- Magic Weapons:\n\t The golem's weapon attacks are magical."
 
-    # Dragons
+
+        
+
+
+
+    #Dragons
     ## Movement
     if Type == "Dragon" and Dice(2) == 1:
         r = r + "\n- Fly: 60 ft"
@@ -1826,7 +1841,10 @@ def Actions(Type=""):
 
     # ELEMENTALS
     ## Movement
+
     if Type == "Elemental" and Dice() == 1: r += "\n - Fly : 30ft."
+
+    if Type == "Elemental" and Dice() == 1: r += "\n - Burrow : 30ft."
 
     if Type == "Elemental" and Dice() == 1: r += "\n - Swim : 60ft."
 
@@ -1835,20 +1853,23 @@ def Actions(Type=""):
     if Type == "Elemental" and Dice() == 1:     r += "\n - Darkvision : 60ft."
     elif Type == "Elemental" and Dice() == 1:   r += "\n - Blindsight : 30ft."
 
+    if Type == "Elemental" and Dice() == 1:     r += "\n - Tremorsense : 60ft."
+
     ## Strengths and Weaknesses
     if Type == "Elemental" and Dice() == 1: r += "\n - Damage Resistances: bludgeoning, piercing, and slashing from nonmagical attacks"
 
     if Type == "Elemental" and Dice() == 1:     r += "\n - Damage Resistances: fire"
     elif Type == "Elemental" and Dice() == 1:   r += "\n - Damage Immunities: fire"
-    
+    elif Type == "Elemental" and Dice() == 1:   r += "\n - Damage Vulnerabilities: fire"
+
     if Type == "Elemental" and Dice() == 1:     r += "\n - Damage Resistances: lightning"
 
-    if Type == "Elemental" and Dice() == 1: r += "\n - Damage Immunities: poison"
+    if Type == "Elemental" and Dice(4) == 1:    r += "\n - Damage Immunities: poison"
     
     if Type == "Elemental" and Dice() == 1:     r += "\n - Damage Resistances: thunder"
+    elif Type == "Elemental" and Dice() == 1:   r += "\n - Damage Vulnerabilities: thunder"
 
     if Type == "Elemental" and Dice() == 1: r += "\n - Damage Vulnerabilities: cold"
-    if Type == "Elemental" and Dice() == 1: r += "\n - Damage Vulnerabilities: fire"
     
     if Type == "Elemental" and Dice() == 1: r += "\n - Condition Immunities: Exhaustion"
     if Type == "Elemental" and Dice() == 1: r += "\n - Condition Immunities: Grappled"
@@ -1866,6 +1887,13 @@ def Actions(Type=""):
     elif Type == "Elemental" and Dice() == 1:   r += "\n - Ignited Illumination. \n\t As a bonus action, the Elemental can set itself ablaze or extinguish its flames. While ablaze, the Elemental sheds bright light in a 10-foot radius and dim light for an additional 10 feet."
     if Type == "Elemental" and Dice() == 1:     r += "\n - Invisible in Water \n\t The Elemental is invisible while fully immersed in water."
     if Type == "Elemental" and Dice() == 1:     r += "\n - Water Bound \n\t The Elemental dies if it leaves the water body to which it is bound or if that water is destroyed."
+    if Type == "Elemental" and Dice() == 1:     r += "\n - Earth Glide \n\t The elemental can burrow through nonmagical, unworked earth and stone. While doing so, the elemental doesn't disturb the material it moves through."
+    if Type == "Elemental" and Dice() == 1:     r += "\n - Siege Monster \n\t The elemental deals double damage to objects and structures."
+    if Type == "Elemental" and Dice() == 1:     r += "\n - Fire Form \n\t The elemental can move through a space as narrow as 1 inch wide without squeezing. A creature that touches the elemental or hits it with a melee attack while within 5 feet of it takes 5 (1d10) fire damage. In addition, the elemental can enter a hostile creature's space and stop there. The first time it enters a creature's space on a turn, that creature takes 5 (1d10) fire damage and catches fire; until someone takes an action to douse the fire, the creature takes 5 (1d10) fire damage at the start of each of its turns."
+    if Type == "Elemental" and Dice() == 1:     r += "\n - Illumination \n\t The elemental sheds bright light in a 30-foot radius and dim light in an additional 30 feet."
+    if Type == "Elemental" and Dice() == 1:     r += "\n - Water Susceptibility \n\t For every 5 feet the elemental moves in water, or for every gallon of water splashed on it, it takes 1 cold damage."
+    if Type == "Elemental" and Dice() == 1:     r += "\n - Fire Touch \n\t Melee Weapon Attack \t Hit: 10 (2d6 + %CON) fire damage. If the target is a creature or a flammable object, it ignites. Until a creature takes an action to douse the fire, the target takes 5 (1d10) fire damage at the start of each of its turns."
+
 
     if Type == "Elemental":
         if Dice() == 1:
@@ -1878,6 +1906,7 @@ def Actions(Type=""):
 
 
 
+    # FEY
     if Type == "Fey" and Dice() == 1:   r += "\n - Invisibility \n\t The Fey magically turns invisible until it attacks, or until its concentration ends (as if concentrating on a spell). Any equipment the Fey wears or carries is invisible with it."
     if Type == "Fey" and Dice() == 1:   r += "\n- Speak with Beasts and Plants \n\t The Fey can communicate with beasts and plants as if they shared a language."
     if Type == "Fey" and Dice() == 1:   r += "\n- Tree Stride \n\t Once on her turn, the Fey can use 10 feet of her movement to step magically into one living tree within her reach and emerge from a second living tree within 60 feet of the first tree, appearing in an unoccupied space within 5 feet of the second tree. Both trees must be large or bigger."
