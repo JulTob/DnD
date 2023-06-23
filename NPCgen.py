@@ -1341,7 +1341,15 @@ def Magic(Lvl, race=Race(), background=Background()):
         if race == "Fiend":
             if Dice() == 1 and not ("Scare" in one):            one += "\n- Scare \n\t One creature of the Fiend's choice within 20 feet of it must succeed on a DC 10 Wisdom saving throw or be frightened for 1 minute. The target can repeat the saving throw at the begguining of each of its turns, with disadvantage if the Fiend is within line of sight, ending the effect on itself on a success."
             if Dice() == 1 and not ("Fetid Cloud" in one):      one += "\n- Fetid Cloud.\n\t A 10-foot radius of disgusting sulfuric gas extends out from the Fiend. The gas spreads around corners, and its area is lightly obscured. It lasts for 1 minute or until a strong wind disperses it. Any creature that starts its turn in that area must succeed on a DC 11 Constitution saving throw or be poisoned until the start of its next turn. While poisoned in this way, the target can take either an action or a bonus action on its turn, not both, and can't take reactions."
+            if Dice() == 1 and not ("Entangle" in one):         one += "\n- Entangle."
+            if Dice() == 1 and not ("Phantasmal Force" in one): one += "\n- Phantasmal Force."
 
+        # Twice a day
+        if race == "Fiend":
+            if Dice() == 1 and not ("Disguise Self" in two):    two += "\n- Disguise Self."
+            if Dice() == 1 and not ("Invisibility" in two):     two += "\n- Invisibility (self only)."
+
+        
         if race == "Gnome" and Dice() == 1 and not ("Nondetection" in cantrip):          cantrip += "\n- Nondetection (self only)"
         if race == "Gnome" and Dice() == 1 and not ("Blindness/Deafness" in one):        one += " \n- Blindness/Deafness"
         if race == "Gnome" and Dice() == 1 and not ("Blur" in one):                      one += " \n- Blur"
@@ -1838,7 +1846,7 @@ def Actions(Type=""):
     if Type == "Fey" and Dice() == 1:   r += "\n - Invisibility \n\t The Fey magically turns invisible until it attacks, or until its concentration ends (as if concentrating on a spell). Any equipment the Fey wears or carries is invisible with it."
     if Type == "Fey" and Dice() == 1:   r += "\n- Speak with Beasts and Plants \n\t The Fey can communicate with beasts and plants as if they shared a language."
     if Type == "Fey" and Dice() == 1:   r += "\n- Tree Stride \n\t Once on her turn, the Fey can use 10 feet of her movement to step magically into one living tree within her reach and emerge from a second living tree within 60 feet of the first tree, appearing in an unoccupied space within 5 feet of the second tree. Both trees must be large or bigger."
-    if Type == "Fey" and Dice() == 1:   r += "\n- Fey Charm \n\t The Fey targets one humanoid or beast that she can see within 30 feet of her. If the target can see the dryad, it must succeed on a DC [10+Cha] Wisdom saving throw or be magically charmed. The charmed creature regards the Fey as a trusted friend to be heeded and protected. Although the target isn't under the Fey's control, it takes the Fey's requests or actions in the most favorable way it can. Each time the Fey or its allies do anything harmful to the target, it can repeat the saving throw, ending the effect on itself on a success. Otherwise, the effect lasts 24 hours or until the Fey dies, is on a different plane of existence from the target, or ends the effect as a bonus action. If a target's saving throw is successful, the target is immune to the Fey's Fey Charm for the next 24 hours. The Fey can have no more than one humanoid and up to three beasts charmed at a time."
+    if Type == "Fey" and Dice() == 1:   r += "\n- Fey Charm \n\t The Fey targets one humanoid or beast that she can see within 30 feet of her. If the target can see the Fey, it must succeed on a DC [10+Cha] Wisdom saving throw or be magically charmed. The charmed creature regards the Fey as a trusted friend to be heeded and protected. Although the target isn't under the Fey's control, it takes the Fey's requests or actions in the most favorable way it can. Each time the Fey or its allies do anything harmful to the target, it can repeat the saving throw, ending the effect on itself on a success. Otherwise, the effect lasts 24 hours or until the Fey dies, is on a different plane of existence from the target, or ends the effect as a bonus action. If a target's saving throw is successful, the target is immune to the Fey's Fey Charm for the next 24 hours. The Fey can have no more than one humanoid and up to three beasts charmed at a time."
 
     # GIANTS
     
@@ -1988,9 +1996,10 @@ def Actions(Type=""):
 
     # Senses
     if Type == "Fiend":
-        if Dice(2) == 1:    r = r + "\n- Darkvision \n\t 60 ft."
-        elif Dice(2) == 1:  r = r + "\n- Darkvision \n\t 120 ft."
-        if Dice() == 1:  r = r + "\n- Devil's Sight. \n\t Magical darkness doesn't impede the Fiend's darkvision."
+        if Dice(2) == 1:    r += "\n- Darkvision \n\t 60 ft."
+        elif Dice(2) == 1:  r += "\n- Darkvision \n\t 120 ft."
+        if Dice() == 1:     r += "\n- Blindsight \n\t 30 ft."
+        if Dice() == 1:     r += "\n- Devil's Sight. \n\t Magical darkness doesn't impede the Fiend's darkvision."
 
     if Type == "Fiend" and Dice(12) == 1:   r += "\n- Keen Hearing and Smell. \n\t The fiend has advantage on Wisdom (Perception) checks that rely on hearing or smell."
 
@@ -1998,11 +2007,15 @@ def Actions(Type=""):
     if Type == "Fiend":
         if Dice() == 1:         r += "\n- Speed: 20"
         elif Dice() == 1:   r += "\n- Speed: 30 ft."
+        elif Dice() == 1:   r += "\n- Speed: 40 ft."
 
     if Type == "Fiend":
         if Dice() == 1:     r += "\n- Fly 20"
         elif Dice() == 1:   r += "\n- Fly 30"
         elif Dice() == 1:   r += "\n- Fly 40"
+
+    if Type == "Fiend":
+        if Dice() == 1:     r += "\n- Climb 40"
 
     if Type == "Fiend" and Dice(10) == 1:     r += "\n- Incorporeal Movement. \n\t The demon can move through other creatures and objects as if they were difficult terrain. It takes 5 (1d10) force damage if it ends its turn inside an object."
 
@@ -2063,6 +2076,8 @@ def Actions(Type=""):
     if Type == "Fiend" and Dice() == 1:         r += "\n- Multiattack. \n\t The fiend makes two simple melee attacks."
     if Type == "Fiend" and Dice(12) == 1:       r += "\n- Rampage. \n\t When the Beast reduces a creature to 0 hit points with a melee attack on its turn, the beast can take a bonus action to move up to half its speed and make a bite attack."
     if Type == "Fiend" and Dice() == 1:         r += "\n- Steadfast. \n\t The fiend can't be frightened while it can see an allied creature within 30 feet of it."
+    if Type == "Fiend" and Dice(12) == 1:       r += "\n- Reckless. \n\t At the start of its turn, the fiend can gain advantage on all melee weapon attack rolls it makes during that turn, but attack rolls against it have advantage until the start of its next turn."
+    if Type == "Fiend" and Dice(12) == 1:       r += "\n- Running Leap. \n\t The fiend's long jump is up to 40 feet and its high jump is up to 20 feet when it has a running start"
 
 
 
