@@ -317,6 +317,7 @@ def PlantName():
 
 def UndeadName():
     Names = [
+        "Monster Zombie",
         "Crawling Limbs",
         "Ghoul",
         "Ghast",
@@ -718,6 +719,7 @@ def Language(race=Race(), background=Background()):
     if race == "Monstrosity":
         if Dice(2) == 1 and not ("Common" in l):            l += "Common. "
         if Dice() == 1 and not ("Undercommon" in l):        l += "Undercommon. "
+        if Dice() == 1 and not ("Deep Speech" in l):        l += "Deep Speech. "
         if Dice() == 1 and not ("Sylvan" in l):             l += "Sylvan. "
         if Dice(8) == 1 and not ("Abyssal" in l):           l += "Abyssal. "
         
@@ -1366,6 +1368,12 @@ def Magic(Lvl, race=Race(), background=Background()):
         if race == "Monstrosity" and Dice() == 1 and not ("Read Thoughts" in cantrip):        cantrip += "\n - Read Thoughts: \n\t The monstrosity magically reads the surface thoughts of one creature within 60 feet of it. The effect can penetrate barriers, but 3 feet of wood or dirt, 2 feet of stone, 2 inches of metal, or a thin sheet of lead blocks it. While the target is in range, the monstrosity can continue reading its thoughts, as long as the monstrosity's concentration isn't broken (as if concentrating on a spell). While reading the target's mind, the monstrosity has advantage on Wisdom (Insight) and Charisma (Deception, Intimidation, and Persuasion) checks against the target."
         if race == "Monstrosity" and Dice() == 1 and not ("Chilling Gaze" in cantrip):        cantrip += "\n - Chilling Gaze: \n\t The monstrosity targets one creature it can see within 30 feet of it. If the target can see the monstrosity, the target must succeed on a DC [10+%CON] Constitution saving throw against this magic or take 10 (3d6) cold damage and then be paralyzed for 1 minute, unless it is immune to cold damage. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success. If the target's saving throw is successful, or if the effect ends on it, the target is immune to the Chilling Gaze of all monstrosities for 1 hour."
         if race == "Monstrosity" and Dice() == 1 and not ("Disguise Self" in cantrip):        cantrip += "\n - Disguise self (humanoid form) Aura: \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
+        if race == "Monstrosity":
+            if Dice() == 1 and not ("Paralyzing Ray" in cantrip):   cantrip += "\n - Paralyzing Ray \n\t The targeted creature must succeed on a DC [11+%CON] Constitution saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
+            if Dice() == 1 and not ("Fear Ray" in cantrip):         cantrip += "\n - Fear Ray \n\t The targeted creature must succeed on a DC [11+%CON] Wisdom saving throw or be frightened for 1 minute. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
+            if Dice() == 1 and not ("Enervation Ray" in cantrip):   cantrip += "\n - Enervation Ray \n\t The targeted creature must make a DC [11+%CON] Constitution saving throw, taking 36 (8d8) necrotic damage on a failed save, or half as much damage on a successful one."
+            if Dice() == 1 and not ("Disintegration Ray" in cantrip):   cantrip += "\n - Disintegration Ray. \n\t If the target is a creature, it must succeed on a DC [11+%CON] Dexterity saving throw or take 45 (10d8) force damage. If this damage reduces the creature to 0 hit points, its body becomes a pile of fine gray dust. \n\t If the target is a Large or smaller nonmagical object or creation of magical force, it is disintegrated without a saving throw. If the target is a Huge or larger nonmagical object or creation of magical force, this ray disintegrates a 10-foot cube of it."
+
         ## Once a day
         if race == "Monstrosity" and Dice() == 1 and not ("Darkness Aura" in one):      one += "\n - Darkness Aura: \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
         if race == "Monstrosity" and Dice() == 1 and not ("Geas" in one):               one += "\n - Geas."
@@ -1375,6 +1383,7 @@ def Magic(Lvl, race=Race(), background=Background()):
         if race == "Monstrosity" and Dice() == 1 and not ("Scrying" in three):      three += "\n - Scrying."
         if race == "Monstrosity" and Dice() == 1 and not ("Suggestion" in three):   three += "\n - Suggestion."
 
+        # OOZE
         if race == "Ooze" and Dice() == 1 and not ("Psychic Crush" in cantrip):     cantrip += " \n- Psychic Crush (Recharge 5–6). \n\t The ooze targets one creature that it can sense within 60 feet of it. The target must make a DC 10 Intelligence saving throw, taking 10 (3d6) psychic damage on a failed save, or half as much damage on a successful one."
 
         # PLANTS
@@ -2089,14 +2098,16 @@ def Actions(Type=""):
     # MONSTROSITIES
     # Senses
     if Type == "Monstrosity":
-        if Dice() == 1:            r += "\n - Darkvision: 60 ft.\n"
-        elif Dice() == 1:          r += "\n - Blindsight: 30 ft.\n"
+        if Dice() == 1:
+            r += "\n - Darkvision: 60 ft.\n"
+        elif Dice() == 1:
+            r += "\n - Blindsight: 30 ft.\n"
         elif Dice() == 1:
             r += "\n - Blindsight: 60 ft.\n"
             if Dice() == 1:
                 r += "\n - Echolocation: The monster can't use its blindsight while deafened.\n"
                 r += "\n - Keen Hearing: The monster has advantage on Wisdom (Perception) checks that rely on hearing.\n"
-        elif Dice() == 1:
+        if Dice() == 1:
             r += "\n - Tremorsense: 60 ft.\n"
             
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Keen Sight.\n\t The monstrosity has advantage on Wisdom (Perception) checks that rely on sight.\n"
@@ -2109,11 +2120,13 @@ def Actions(Type=""):
         else:                      r += "\n - Speed: 30 ft"
         
     if Type == "Monstrosity":
-        if Dice() == 1:        r += "\n - Borrow: \n\t 10 ft"
+        if Dice() == 1:         r += "\n - Burrow: \t 10 ft"
+        elif Dice() == 1:       r += "\n - Burrow: \t 40 ft"
 
     if Type == "Monstrosity":
-        if Dice() == 1:            r += "\n - Fly: 30 ft"
-        elif Dice() == 1:          r += "\n - Fly: 40 ft"
+        if Dice() == 1:         r += "\n- Speed: 0 ft. \n- Fly: 20 ft(Hover)"
+        elif Dice() == 1:       r += "\n- Fly: 30 ft"
+        elif Dice() == 1:       r += "\n- Fly: 40 ft"
         elif Dice() == 1:
             r += "\n - Fly: 60 ft"
             if Dice(3) == 1:       r += "\n- Dive Attack: \n\t If the monster is flying and dives at least 30 feet straight toward a target and then hits it with a melee weapon attack, the attack deals an extra 9 (2d8) damage to the target."
@@ -2129,6 +2142,7 @@ def Actions(Type=""):
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Avoidance.\n\t If the Monstrosity is subjected to an effect that allows it to make a saving throw to take only half damage, it instead takes no damage if it succeeds on the saving throw, and only half damage if it fails.\n"
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Ambusher.\n\t In the first round of a combat, the Monstrosity has advantage on attack rolls against any creature it surprised.\n"
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Displacement.\n\t The Monstrosity projects a magical illusion that makes it appear to be standing near its actual location, causing attack rolls against it to have disadvantage. If it is hit by an attack, this trait is disrupted until the end of its next turn. This trait is also disrupted while the displacer beast is incapacitated or has a speed of 0.\n"
+    if Type == "Monstrosity" and Dice(8) == 1:       r += "\n- Deadly Leap.\n\t  If the monstrosity jumps at least 15 feet as part of its movement, it can then use this action to land on its feet in a space that contains one or more other creatures. Each of those creatures must succeed on a DC [11+%STR] Strength or Dexterity saving throw (target's choice) or be knocked prone and take 14 (3d6 + %STR) bludgeoning damage plus 14 (3d6 + %STR) slashing damage. On a successful save, the creature takes only half the damage, isn't knocked prone, and is pushed 5 feet out of the monster's space into an unoccupied space of the creature's choice. If no unoccupied space is within range, the creature instead falls prone in the monster's space."
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- False Appearance \n\t While the Monstrosity remains motionless, it is indistinguishable from a natural element, ordinary object, or innofensive creature."
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Grappler. \n\t On a simple melee attack, the target is grappled,  [DC 10+%STR]"
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Intoxicating Touch. \n\t On a simple melee attack, The target is magically cursed for 1 hour. Until the curse ends, the target has disadvantage on Wisdom saving throws and all ability checks."
@@ -2140,6 +2154,8 @@ def Actions(Type=""):
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Stone Camouflage.\n\t The monstrosity has advantage on Dexterity (Stealth) checks made to hide in rocky terrain.\n"
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Snow Camouflage. \n\t The Monstrosity has advantage on Dexterity (Stealth) checks made to hide in snowy terrain."
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Two-Headed. \n\t The monstrosity has advantage on Wisdom (Perception) checks and on saving throws against being blinded, charmed, deafened, frightened, stunned, or knocked unconscious."
+    # Special Attacks
+    if Type == "Monstrosity" and Dice() == 1:        r += "\n- Bite. \n\t Reach 5ft. Hit: 30 (4d12 + %STR) piercing damage. ."
 
     if Type == "Ranger":        r += "\n- " + Attack("RangedMartial")
     if Type == "Ranger":        r += "\n - Multiattack. \n\t The Ranger can do two ranged attacks."
