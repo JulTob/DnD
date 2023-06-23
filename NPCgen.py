@@ -1400,7 +1400,7 @@ def Magic(Lvl, race=Race(), background=Background()):
         if race == "Monstrosity" and Dice() == 1 and not ("Suggestion" in three):   three += "\n - Suggestion."
 
         # OOZE
-        if race == "Ooze" and Dice() == 1 and not ("Psychic Crush" in cantrip):     cantrip += " \n- Psychic Crush (Recharge 5–6). \n\t The ooze targets one creature that it can sense within 60 feet of it. The target must make a DC 10 Intelligence saving throw, taking 10 (3d6) psychic damage on a failed save, or half as much damage on a successful one."
+        if race == "Ooze" and Dice() == 1 and not ("Psychic Crush" in cantrip):     cantrip += " \n- Psychic Crush (Recharge 5–6). \n\t The ooze targets one creature that it can sense within 60 feet of it. The target must make a DC [10+%INT] Intelligence saving throw, taking 10 (3d6) psychic damage on a failed save, or half as much damage on a successful one."
 
         # PLANTS
         # Spores
@@ -1956,7 +1956,7 @@ def Actions(Type=""):
         if Dice() == 1:     r = r + "\n\t - (Green): Poison"
 
     if Type == "Ooze" and Dice() == 1:  r = r + "\n- False Appearance \n\t While the ooze remains motionless, it is indistinguishable from an oily pool, wet rock, or a normal enviromental object"
-    if Type == "Ooze" and Dice() == 1:  r = r + "\n- Transparent"
+    if Type == "Ooze" and Dice() == 1:  r = r + "\n- Transparent \n\t The Ooze has advantage on stealth checks against creatures without tremorsense or blindsight."
     if Type == "Ooze" and Dice() == 1:  r = r + "\n- Spider Climb \n\t The ooze can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
 
     if Type == "Ooze" and Dice() == 1:  r = r + "\n- Damage Resistance: Acid"
@@ -2279,9 +2279,9 @@ def Actions(Type=""):
     if Type == "Plant" and Dice() == 1:        r = r + "\n- Condition Immunities\n\t Deafened"
     if Type == "Plant" and Dice() == 1:        r = r + "\n- Condition Immunities\n\t Frightened"
     if Type == "Plant":
-        if Dice() == 1:         r = r + "\n- Blindsight\n\t 30 ft"
-        elif Dice() == 1:       r = r + "\n- Blindsight\n\t 60 ft (Blind Beyond this radius)."
-    if Type == "Plant" and Dice() == 1:        r = r + "\n- Darkvision\n\t 120 ft"
+        if Dice() == 1:         r = r + "\n- Blindsight\t 30 ft"
+        elif Dice() == 1:       r = r + "\n- Blindsight\t 60 ft (Blind Beyond this radius)."
+    if Type == "Plant" and Dice() == 1:        r = r + "\n- Darkvision\t 120 ft"
     if Type == "Plant" and Dice() == 1:        r = r + "\n- Death Burst\n\t The Plant explodes when it drops to 0 hit points. Each creature within 20 feet of it must succeed on a DC 15 Constitution saving throw or take 10 (3d6) poison damage and become infected with a disease on a failed save. Creatures immune to the poisoned condition are immune to this disease. Spores invade an infected creature's system, killing the creature in a number of hours equal to 1d12 + the creature's Constitution score, unless the disease is removed. In half that time, the creature becomes poisoned for the rest of the duration. After the creature dies, it sprouts 2d4 Tiny gas spores that grow to full size in 7 days."
     if Type == "Plant" and Dice() == 1:        r = r + "\n- Multiattack\n\t The Plant can do one special attack and a simple attack each turn."
 
@@ -3529,7 +3529,7 @@ def NPC():
     print("\n")
     print("Languages: \n\t{}".format(Language(rc, bg)))
     print("\n")
-    print("COMBAT ACTIONS:")
+    print("⫷COMBAT ACTIONS⫸:")
     print("\tTo hit: +{}".format( Modifier(max(STR, DEX) + Lvl/5)))
     print("\n- SIMPLE ATTACKS:")
     print(Attack("Melee"))
@@ -3537,11 +3537,11 @@ def NPC():
     print("\n- SPECIAL ATTACK: {} Charges/Combat".format(Dice(1 + int(Lvl/2))))
     print(SpecialAttack(Lvl, Modifier(random.choice([STR, DEX, CON, INT, WIS, CHA]))))
     print("\n\n")
-    print("SPELLCASTING:\t{}".format(random.choice(["INT", "WIS", "CHA"]), f"\n\t Spellsave DC:{10 + Modifier(max(INT, WIS, CHA))}"))
+    print("༼🜃 SPELLCASTING:\t{} 🜁༽".format(random.choice(["INT", "WIS", "CHA"]), f"\n\t Spellsave DC:{10 + Modifier(max(INT, WIS, CHA))}"))
     print("\t To hit: +{}".format( Modifier(max(INT, WIS, CHA) + Lvl/5)))
     print(Magic(Lvl, rc, bg))
 
-    print("\n------SKILLS & ACCTIONS:------")
+    print("\n───────SKILLS & ACCTIONS:───────")
     print(Actions(bg))
     print(Actions(rc))
     print(Actions(""))
@@ -3562,7 +3562,7 @@ def NPC():
         print(Region(bg))
         print(Region(rc))
 
-    print("========== Their Story ===========")
+    print("=꧁ Their Story ꧂")
     print(" - Traits -")
     print(Trait())
     print(Trait(bg))
