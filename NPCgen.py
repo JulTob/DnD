@@ -3529,7 +3529,7 @@ def NPC():
     print("\n")
     print("Languages: \n\t{}".format(Language(rc, bg)))
     print("\n")
-    print("⫷COMBAT ACTIONS⫸:")
+    print("⫷   COMBAT ACTIONS:   ⫸")
     print("\tTo hit: +{}".format( Modifier(max(STR, DEX) + Lvl/5)))
     print("\n- SIMPLE ATTACKS:")
     print(Attack("Melee"))
@@ -3541,7 +3541,7 @@ def NPC():
     print("\t To hit: +{}".format( Modifier(max(INT, WIS, CHA) + Lvl/5)))
     print(Magic(Lvl, rc, bg))
 
-    print("\n───────SKILLS & ACCTIONS:───────")
+    print("\n⚔︎    SKILLS & ACCTIONS:   ⚔︎")
     print(Actions(bg))
     print(Actions(rc))
     print(Actions(""))
