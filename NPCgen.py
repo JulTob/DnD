@@ -659,8 +659,9 @@ def Language(race=Race(), background=Background()):
 
     if race == "Elf":
         l += "Elvish. "
-        if Dice(3) == 1 and not ("Common" in l):    l += "Common. "
-        if Dice(3) == 1 and not ("Sylvan" in l):    l += "Sylvan. "
+        if Dice(3) == 1 and not ("Common" in l):        l += "Common. "
+        if Dice() == 1 and not ("Sylvan" in l):         l += "Sylvan. "
+        if Dice() == 1 and not ("Undercommon" in l):    l += "Undercommon. "
 
     if race == "Elemental":
         l += "Primordial. "
@@ -1258,10 +1259,13 @@ def Magic(Lvl, race=Race(), background=Background()):
         if race == "Elemental" and Dice() == 1 and not ("Blur" in one):                         one += "\n- Blur"
         if race == "Elemental" and Dice() == 1 and not ("Sleep" in one):                        one += "\n- Sleep"
 
+        # ELF
         if race == "Elf" and Dice() == 1 and not ("Dancing lights" in cantrip):     cantrip += "\n- Dancing lights"
         if race == "Elf" and Dice() == 1 and not ("Darkness" in one):               one += "\n- Darkness"
         if race == "Elf" and Dice() == 1 and not ("Faerie fire" in one):            one += "\n- Faerie fire"
+        if race == "Elf" and Dice(8) == 1 and not ("Levitate" in one):              one += "\n- Levitate (Self Only)"
 
+        # FAE
         if race == "Fey" and Dice(8) == 1 and not ("Ethereal Jaunt" in cantrip):    cantrip += "\n- Ethereal Jaunt \n\t As a bonus action, the fey can magically shift from the Material Plane to the Ethereal Plane, or vice versa."
         if race == "Fey" and Dice(8) == 1 and not ("Teleport" in cantrip):          cantrip += "\n- Teleport (Recharge 4–6). \n\t The Fey magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the Fey can make one bite attack."
         if race == "Fey" and Dice(8) == 1 and not ("Heart Sight" in cantrip):       cantrip += "\n- Heart Sight. \n\t The Fey touches a creature and magically knows the creature's current emotional state. If the target fails a DC [10+%Cha] Charisma saving throw, the Fey also knows the creature's alignment. Celestials, fiends, and undead automatically fail the saving throw."
@@ -1330,14 +1334,18 @@ def Magic(Lvl, race=Race(), background=Background()):
 
         # FIENDS
         # Cantrips and at-will magic
+
         if race == "Fiend":
-            if Dice() == 1 and not ("Charm" in cantrip):
-                cantrip += "\n- Charm \n\t One humanoid the fiend can see within 30 feet of it must succeed on a DC [10+%CHA] Wisdom saving throw or be magically charmed for 1 day. The charmed target obeys the fiend's verbal or telepathic commands. If the target suffers any harm or receives a suicidal command, it can repeat the saving throw, ending the effect on a success. If the target successfully saves against the effect, or if the effect on it ends, the target is immune to this fiend's Charm for the next 24 hours. \n\t The fiend can have only one target charmed at a time. If it charms another, the effect on the previous target ends. "
-                if Dice() == 1 and not ("Draining Kiss" in cantrip):
-                    cantrip += "\n- Draining Kiss \n\t The fiend kisses a creature charmed by it or a willing creature. The target must make a DC 15 Constitution saving throw against this magic, taking 32 (5d10 + 5) psychic damage on a failed save, or half as much damage on a successful one. The target's hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0. "
+            if Dice()==1 and not ("Charm" in cantrip):
+                if Dice(2)==1:  cantrip += "\n- Charm \n\t One humanoid the fiend can see within 30 feet of it must succeed on a DC [10+%CHA] Wisdom saving throw or be magically charmed for 1 day. The charmed target obeys the fiend's verbal or telepathic commands. If the target suffers any harm or receives a suicidal command, it can repeat the saving throw, ending the effect on a success. If the target successfully saves against the effect, or if the effect on it ends, the target is immune to this fiend's Charm for the next 24 hours. \n\t The fiend can have only one target charmed at a time. If it charms another, the effect on the previous target ends. "
+                else:           cantrip += "\n- Fiendish Charm. \n\t One humanoid the fiend can see within 30 feet of it must succeed on a DC [11+%CHA] Wisdom saving throw or be magically charmed for 1 day. The charmed target obeys the fiend's spoken commands. If the target suffers any harm from the fiend or another creature or receives a suicidal command from the fiend, the target can repeat the saving throw, ending the effect on itself on a success. If a target's saving throw is successful, or if the effect ends for it, the creature is immune to the fiend's Fiendish Charm for the next 24 hours."
+                if Dice()==1 and not ("Draining Kiss" in cantrip):    cantrip += "\n- Draining Kiss \n\t The fiend kisses a creature charmed by it or a willing creature. The target must make a DC 15 Constitution saving throw against this magic, taking 32 (5d10 + 5) psychic damage on a failed save, or half as much damage on a successful one. The target's hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0. "
+                if Dice()==1 and not ("Telepathic Bond" in cantrip):    cantrip += "\n- Telepathic Bond. \n\t The fiend ignores the range restriction on its telepathy when communicating with a creature it has charmed. The two don't even need to be on the same plane of existence."
+
             if Dice() == 1 and not ("Ethereal Stride" in cantrip):      cantrip += "\n- Ethereal Stride.\n\t The fiend and up to three willing creatures within 5 feet of it magically enter the Ethereal Plane from the Material Plane, or vice versa."
             if Dice() == 1 and not ("Etherealness" in cantrip):         cantrip += "\n- Etherealness.\n\t The fiend magically enters the Ethereal Plane from the Material Plane, or vice versa."
             if Dice() == 1 and not ("Fire Breath" in cantrip):          cantrip += "\n- Fire Breath (Recharge 5-6).\n\t The fiend exhales fire in a 15-foot cone. Each creature in that area must make a DC [10+%CON] Dexterity saving throw, taking 21 (6d6) fire damage on a failed save, or half as much damage on a successful one."
+            if Dice() == 1 and not ("Fire Ray" in cantrip):             cantrip += "\n- Fire Ray \n\t Ranged Spell Attack. Range 120ft. One target. Hit: 10(3d6) fire damage."
 
         # Once a day
         if race == "Fiend":
@@ -1345,18 +1353,26 @@ def Magic(Lvl, race=Race(), background=Background()):
             if Dice() == 1 and not ("Fetid Cloud" in one):      one += "\n- Fetid Cloud.\n\t A 10-foot radius of disgusting sulfuric gas extends out from the Fiend. The gas spreads around corners, and its area is lightly obscured. It lasts for 1 minute or until a strong wind disperses it. Any creature that starts its turn in that area must succeed on a DC 11 Constitution saving throw or be poisoned until the start of its next turn. While poisoned in this way, the target can take either an action or a bonus action on its turn, not both, and can't take reactions."
             if Dice() == 1 and not ("Entangle" in one):         one += "\n- Entangle."
             if Dice() == 1 and not ("Phantasmal Force" in one): one += "\n- Phantasmal Force."
+            if Dice() == 1 and not ("Plane Shift" in one):      one += "\n- Plane Shift."
 
         # Twice a day
         if race == "Fiend":
             if Dice() == 1 and not ("Disguise Self" in two):    two += "\n- Disguise Self."
             if Dice() == 1 and not ("Invisibility" in two):     two += "\n- Invisibility (self only)."
 
-        
+        # Three times a day
+        if race == "Fiend":
+            if Dice() == 1 and not ("Alter Self" in three):     three += "\n- Alter Self"
+            if Dice() == 1 and not ("Command" in three):        three += "\n- Command"
+            if Dice() == 1 and not ("Detect Magic" in three):   three += "\n- Detect Magic"
+
+        # GNOME
         if race == "Gnome" and Dice() == 1 and not ("Nondetection" in cantrip):          cantrip += "\n- Nondetection (self only)"
         if race == "Gnome" and Dice() == 1 and not ("Blindness/Deafness" in one):        one += " \n- Blindness/Deafness"
         if race == "Gnome" and Dice() == 1 and not ("Blur" in one):                      one += " \n- Blur"
         if race == "Gnome" and Dice() == 1 and not ("Disguise Self" in one):             one += " \n- Disguise Self"
 
+        # GOBLIN
         if race == "Goblin" and Dice() == 1 and not ("Leadership" in cantrip):           cantrip += " \n- Leadership (Recharges after a Short or Long Rest). \n\t For 1 minute, the goblin can utter a special command or warning whenever a nonhostile creature that it can see within 30 feet of it makes an attack roll or a saving throw. The creature can add a d4 to its roll provided it can hear and understand the goblin. A creature can benefit from only one Leadership die at a time. This effect ends if the goblin is incapacitated."
 
         #MONSTROSITIES
@@ -1459,7 +1475,15 @@ def Magic(Lvl, race=Race(), background=Background()):
     return r
 
 
+
+
+
+
 def Actions(Type=""):
+    if Type == "":
+        if Dice(0) == 1:    Type= Race()
+        else:               Type= Background()
+
     r = ""
 
     # ABERRATIONS
@@ -1788,6 +1812,8 @@ def Actions(Type=""):
     if Type == "Fey" and Dice() == 1:   r += "\n- Illusory Appearance \n\t  The fey covers herself and anything they are wearing or carrying with a magical illusion that makes her look like other creature of their general size and humanoid shape. The effect ends if the fey takes a bonus action to end it or if they dies. \n\t The changes wrought by this effect fail to hold up to physical inspection. For example, a hag could appear to have no claws, but someone touching her hand might feel the claws. Otherwise, a creature must take an action to visually inspect the illusion and succeed on a DC [10+2·%CHA] Intelligence (Investigation) check to discern that the fey is disguised."
     if Type == "Fey" and Dice() == 1:   r += "\n- Invisible Passage \n\t  The Fey magically turns invisible until they attack or cast a spell, or until their concentration ends (as if concentrating on a spell). While invisible, they leave no physical evidence of their passage, so they can be tracked only by magic. Any equipment they wear or carry is invisible with them."
 
+
+    # ELFS
     if Type == "Elf":   r += "\n - Fey Ancestry.\n\t The Elf has advantage on saving throws against being charmed, and magic can't put the Elf to sleep."
 
     if Type == "Elf":
@@ -1991,8 +2017,8 @@ def Actions(Type=""):
     if Type == "Dwarf":     r = r + "\n- Damage Resistance: Poison"
 
     if Type == "Dwarf":
-        if Dice() == 1:     r = r + "\n- Darkvision 60ft"
-        else:               r = r + "\n- Darkvision 120ft"
+        if Dice() == 1:     r = r + "\n- Darkvision: 60ft"
+        else:               r = r + "\n- Darkvision: 120ft"
 
     if Type == "Dwarf" and Dice() == 1:
         r = r + "\n- Duergar Resilience. \n\t The Dwarf has advantage on saving throws against poison, spells, and illusions, as well as to resist being charmed or paralyzed."
@@ -2005,26 +2031,27 @@ def Actions(Type=""):
 
     # Senses
     if Type == "Fiend":
-        if Dice(2) == 1:    r += "\n- Darkvision \n\t 60 ft."
-        elif Dice(2) == 1:  r += "\n- Darkvision \n\t 120 ft."
-        if Dice() == 1:     r += "\n- Blindsight \n\t 30 ft."
+        if Dice(2) == 1:    r += "\n- Darkvision: \t 60 ft."
+        elif Dice(2) == 1:  r += "\n- Darkvision: \t 120 ft."
+        if Dice() == 1:     r += "\n- Blindsight: \t 30 ft."
         if Dice() == 1:     r += "\n- Devil's Sight. \n\t Magical darkness doesn't impede the Fiend's darkvision."
 
     if Type == "Fiend" and Dice(12) == 1:   r += "\n- Keen Hearing and Smell. \n\t The fiend has advantage on Wisdom (Perception) checks that rely on hearing or smell."
 
     # Movement
     if Type == "Fiend":
-        if Dice() == 1:         r += "\n- Speed: 20"
+        if Dice() == 1:     r += "\n- Speed: 20 ft."
         elif Dice() == 1:   r += "\n- Speed: 30 ft."
         elif Dice() == 1:   r += "\n- Speed: 40 ft."
 
     if Type == "Fiend":
-        if Dice() == 1:     r += "\n- Fly 20"
-        elif Dice() == 1:   r += "\n- Fly 30"
-        elif Dice() == 1:   r += "\n- Fly 40"
+        if Dice() == 1:     r += "\n- Fly: 20 ft."
+        elif Dice() == 1:   r += "\n- Fly: 30 ft."
+        elif Dice() == 1:   r += "\n- Fly: 40 ft."
+        elif Dice() == 1:   r += "\n- Fly: 60 ft."
 
     if Type == "Fiend":
-        if Dice() == 1:     r += "\n- Climb 40"
+        if Dice() == 1:     r += "\n- Climb: 40 ft."
 
     if Type == "Fiend" and Dice(10) == 1:     r += "\n- Incorporeal Movement. \n\t The demon can move through other creatures and objects as if they were difficult terrain. It takes 5 (1d10) force damage if it ends its turn inside an object."
 
@@ -2075,10 +2102,6 @@ def Actions(Type=""):
     if Type == "Fiend" and Dice() == 1:    r += "\n- Shadow Stealth. \n\t While in dim light or darkness, the demon can take the Hide action as a bonus action."
     if Type == "Fiend" and Dice() == 1:    r += "\n- Etherealness. \n\t The fiend magically enters the Ethereal Plane from the Material Plane, or vice versa."
 
-    if Type == "Fiend" and Dice() == 1:
-        r += "\n- Charm. \n\t One humanoid the fiend can see within 30 feet of it must succeed on a DC 15 Wisdom saving throw or be magically charmed for 1 day. The charmed target obeys the fiend's verbal or telepathic commands. If the target suffers any harm or receives a suicidal command, it can repeat the saving throw, ending the effect on a success. If the target successfully saves against the effect, or if the effect on it ends, the target is immune to this fiend's Charm for the next 24 hours. \n\t The fiend can have only one target charmed at a time. If it charms another, the effect on the previous target ends."
-        if Dice()==1:   r += "\n- Draining Kiss. \n\t The fiend kisses a creature charmed by it or a willing creature. The target must make a DC 15 Constitution saving throw against this magic, taking 32 (5d10 + 5) psychic damage on a failed save, or half as much damage on a successful one. The target's hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0."
-        if Dice()==1:   r += "\n- Telepathic Bond. \n\t The fiend ignores the range restriction on its telepathy when communicating with a creature it has charmed. The two don't even need to be on the same plane of existence."
 
     # Combat
     if Type == "Fiend" and Dice() == 1:         r += "\n- Hellish Rejuvenation. \n\t A Fiend that dies in the Nine Hells comes back to life with all its hit points in " + str(Dice(10)) + " days unless it is killed by a good-aligned creature with a bless spell cast on that creature or its remains are sprinkled with holy water."
@@ -2087,28 +2110,28 @@ def Actions(Type=""):
     if Type == "Fiend" and Dice() == 1:         r += "\n- Steadfast. \n\t The fiend can't be frightened while it can see an allied creature within 30 feet of it."
     if Type == "Fiend" and Dice(12) == 1:       r += "\n- Reckless. \n\t At the start of its turn, the fiend can gain advantage on all melee weapon attack rolls it makes during that turn, but attack rolls against it have advantage until the start of its next turn."
     if Type == "Fiend" and Dice(12) == 1:       r += "\n- Running Leap. \n\t The fiend's long jump is up to 40 feet and its high jump is up to 20 feet when it has a running start"
+    if Type == "Fiend" and Dice(12) == 1:       r += "\n- Fiendish Blessing. \n\t Add the Charisma modifier bonus to the Fiend's AC"
+    if Type == "Fiend" and Dice(12) == 1:       r += "\n- Horned One's Call. \n\t When the fiend targets only one creature within all their turn's attacks, it can choose one ally it can see within 30 feet. That ally can use its reaction to make one melee attack against a target of its choice."
+    if Type == "Fiend" and Dice(12) == 1:       r += "\n- Spawn of the Grave. \n\t At the end of each of the fiend's turns, each undead of its choice that it can see within 30 feet gains 10 temporary hit points, provided the fiend isn't incapacitated. \n\t In addition, this fiend can use its Innate Spellcasting ability to cast animate dead three times per day."
+    
 
 
 
-
-
+    # MONK
     if Type == "Monk" and Dice(2) == 1:        r = r + "\n- Multiattack. \n\t The monk makes two attacks."
 
 
     # MONSTROSITIES
     # Senses
     if Type == "Monstrosity":
-        if Dice() == 1:
-            r += "\n - Darkvision: 60 ft.\n"
-        elif Dice() == 1:
-            r += "\n - Blindsight: 30 ft.\n"
+        if Dice() == 1:     r += "\n - Darkvision: 60 ft.\n"
+        elif Dice() == 1:   r += "\n - Blindsight: 30 ft.\n"
         elif Dice() == 1:
             r += "\n - Blindsight: 60 ft.\n"
             if Dice() == 1:
                 r += "\n - Echolocation: The monster can't use its blindsight while deafened.\n"
                 r += "\n - Keen Hearing: The monster has advantage on Wisdom (Perception) checks that rely on hearing.\n"
-        if Dice() == 1:
-            r += "\n - Tremorsense: 60 ft.\n"
+        if Dice() == 1: r += "\n - Tremorsense: 60 ft.\n"
             
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Keen Sight.\n\t The monstrosity has advantage on Wisdom (Perception) checks that rely on sight.\n"
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Keen Smell.\n\t The monstrosity has advantage on Wisdom (Perception) checks that rely on smell.\n"
@@ -2262,13 +2285,12 @@ def Actions(Type=""):
     if Type == "Plant" and Dice() == 1:        r = r + "\n- Death Burst\n\t The Plant explodes when it drops to 0 hit points. Each creature within 20 feet of it must succeed on a DC 15 Constitution saving throw or take 10 (3d6) poison damage and become infected with a disease on a failed save. Creatures immune to the poisoned condition are immune to this disease. Spores invade an infected creature's system, killing the creature in a number of hours equal to 1d12 + the creature's Constitution score, unless the disease is removed. In half that time, the creature becomes poisoned for the rest of the duration. After the creature dies, it sprouts 2d4 Tiny gas spores that grow to full size in 7 days."
     if Type == "Plant" and Dice() == 1:        r = r + "\n- Multiattack\n\t The Plant can do one special attack and a simple attack each turn."
 
+    # WARRIOR
     if Type == "Warrior" and Dice() == 1:       r = r + "\n- Parry \n\t The warrior adds 2 to its AC against one melee attack that would hit it. To do so, the warrior must see the attacker and be wielding a melee weapon."
+    elif Type == "Warrior" and Dice() == 1:     r = r + "\n- Parry \n\t The warrior adds 3 to its AC against one melee attack that would hit it. To do so, the warrior must see the attacker and be wielding a melee weapon."
     if Type == "Warrior" and Dice(2) == 1:      r = r + "\n- Pack Tactics \n\t The warrior has advantage on an attack roll against a creature if at least one of the warrior's allies is within 5 feet of the creature and the ally isn't incapacitated."
-    if Type == "Warrior" and Dice(2) == 1:      r = r + "\n- Multiattack \n\t The Warrior can attack an additional time on his turn."
+    if Type == "Warrior" and Dice(2) == 1:      r = r + "\n- Multiattack \n\t The Warrior can attack twice with their simple melee attack on his turn."
 
-    if Type == "":
-        if Dice(2) == 1:    return Actions(Race())
-        else:               return Actions(Background())
     return r
 
 
