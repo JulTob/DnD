@@ -1673,7 +1673,8 @@ def Actions(Type=""):
 
 
     if (Type == "Beast" or Type == "Beastfolk"):
-        if Dice(4) == 1:    r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one  target. Hit: 4 (1d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR). Until this grapple ends, the target is restrained, and the beast can't bite another target."
+        if Dice(4) == 1:
+            r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one  target. Hit: 4 (1d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR). Until this grapple ends, the target is restrained, and the beast can't bite another target."
             if Dice() == 1: r = r + "\n- Swallow. \n\t  The beast makes one bite attack against a target creature smaller than themselves it is grappling. If the attack hits, the target is swallowed, and the grapple ends. The swallowed target is blinded and restrained, it has total cover against attacks and other effects outside the beast, and it takes 6 (2d4+%CON) acid damage at the start of each of the beast's turns. The beast can have only one target swallowed at a time. If the beast dies, a swallowed creature is no longer restrained by it and can escape from the corpse using 5 feet of movement, exiting prone."
         elif Dice() == 1:   r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 8 (2d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR). Until this grapple ends, the target is restrained, and the beast can't bite another target."
         elif Dice() == 1:        r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 10 (3d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR). Until this grapple ends, the target is restrained, and the beast can't bite another target."
@@ -2330,7 +2331,7 @@ def Actions(Type=""):
     if Type == "Warrior" and Dice(2) == 1:      r += "\n- Pack Tactics \n\t The warrior has advantage on an attack roll against a creature if at least one of the warrior's allies is within 5 feet of the creature and the ally isn't incapacitated."
     if Type == "Warrior":
         if Dice() == 1:         r += "\n- Multiattack \n\t The Warrior can attack twice with their simple melee attack on his turn."
-        elif Dice() == 1:       r += "\n- Multiattack \n\t The Warrior makes three melee attacks or two ranged attacks.
+        elif Dice() == 1:       r += "\n- Multiattack \n\t The Warrior makes three melee attacks or two ranged attacks."
     if Type == "Warrior" and Dice() == 1:       r += "\n- Brave \n\t The warrior has advantage on saving throws against being frightened."
     if Type == "Warrior" and Dice() == 1:       r += "\n- Brute \n\t A melee weapon deals one extra die of its damage when the warrior hits with it (included in the attack)."
 
@@ -3595,7 +3596,7 @@ def NPC():
     print(SpecialAttack(Lvl, Modifier(random.choice([STR, DEX, CON, INT, WIS, CHA]))))
     print("\n\n")
     print("༼ SPELLCASTING:\t{} ༽".format(random.choice(["INT", "WIS", "CHA"])))
-    print(f"\n\t Spellsave DC:{10 + Modifier(max(INT, WIS, CHA))}")
+    print("\t Spellsave DC+{}".format(10 + Modifier(max(INT, WIS, CHA) + Lvl/5 )))
     print("\t To hit: +{}".format( Modifier(max(INT, WIS, CHA) + Lvl/5)))
     print(Magic(Lvl, rc, bg))
 
