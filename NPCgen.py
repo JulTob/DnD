@@ -279,6 +279,7 @@ def MonstrosityName():
         "Basilisk",
         "Displacer",
         "Doppelganger",
+        "Gorgon",
         "Griffon",
         "Harpy",
         "Horror",
@@ -817,9 +818,6 @@ def Language(race=Race(), background=Background()):
         if Dice() == 1 and not ("Draconic" in l):         l += "Draconic. "
         if Dice() == 1 and not ("Primordial" in l):       l += "Primordial. "
         if Dice() == 1 and not ("Sylvan" in l):           l += "Sylvan. "
-
-    if background == "Gladiator":
-        if not ("Common" in l):            l += "Common. "
 
     if background == "Guard":
         if not ("Common" in l):            l += "Common. "
@@ -1386,6 +1384,7 @@ def Magic(Lvl, race=Race(), background=Background()):
         if race == "Monstrosity" and Dice() == 1 and not ("Major Image" in cantrip):          cantrip += "\n - Major Image."
         if race == "Monstrosity" and Dice() == 1 and not ("Luring Song" in cantrip):          cantrip += "\n - Luring Song: \n\t The monstrosity sings a magical melody. Every humanoid and giant within 300 feet of the monstrosity that can hear the song must succeed on a DC [10+%Cha] Wisdom saving throw or be charmed until the song ends. The monstrosity must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time. The song ends if the monstrosity is incapacitated. While charmed by the monstrosity, a target is incapacitated and ignores the songs of other monstrosities. If the charmed target is more than 5 feet away from the monstrosity, the target must move on its turn toward the monstrosity by the most direct route. It doesn't avoid opportunity attacks, but before moving into damaging terrain, such as lava or a pit, and whenever it takes damage from a source other than the monstrosity, a target can repeat the saving throw. A creature can also repeat the saving throw at the begguining of each of its turns. If a creature's saving throw is successful, the effect ends on it. A target that successfully saves is immune to this monstrosity's song for the next 24 hours."
         if race == "Monstrosity" and Dice() == 1 and not ("Petrifying Gaze" in cantrip):      cantrip += "\n - Petrifying Gaze: \n\t If a creature starts its turn within 30 feet of the monstrosity and the two of them can see each other, the monstrosity can force the creature to make a DC [10+%CON] Constitution saving throw if the monstrosity isn't incapacitated. On a failed save, the creature magically begins to turn to stone and is restrained. It must repeat the saving throw at the start of its next turn. On a success, the effect ends. On a third failure, the creature is petrified until freed by the greater restoration spell or other magic. \n\t A creature that isn't surprised can avert its eyes to avoid the saving throw at the start of its turn. If it does so, it can't see the monstrosity until the start of its next turn, when it can avert its eyes again. If it looks at the monstrosity in the meantime, it must immediately make the save. \n\t If the monstrosity sees its reflection within 30 feet of it in bright light, it mistakes itself for a rival and targets itself with its gaze."
+        if race == "Monstrosity" and Dice() == 1 and not ("Petrifying Breath" in cantrip):    cantrip += "\n - Petrifying Breath (Recharge 5-6): \n\t The monstrosity exhales petrifying gas in a 30-foot cone. Each creature in that area must succeed on a Constitution saving throw (against the DC. On a failed save, a target begins to turn to stone and is restrained. The restrained target must repeat the saving throw at the end of its next turn. On a success, the effect ends on the target. On a failure, the target is petrified until freed by the greater restoration spell or other magic."
         if race == "Monstrosity" and Dice() == 1 and not ("Read Thoughts" in cantrip):        cantrip += "\n - Read Thoughts: \n\t The monstrosity magically reads the surface thoughts of one creature within 60 feet of it. The effect can penetrate barriers, but 3 feet of wood or dirt, 2 feet of stone, 2 inches of metal, or a thin sheet of lead blocks it. While the target is in range, the monstrosity can continue reading its thoughts, as long as the monstrosity's concentration isn't broken (as if concentrating on a spell). While reading the target's mind, the monstrosity has advantage on Wisdom (Insight) and Charisma (Deception, Intimidation, and Persuasion) checks against the target."
         if race == "Monstrosity" and Dice() == 1 and not ("Chilling Gaze" in cantrip):        cantrip += "\n - Chilling Gaze: \n\t The monstrosity targets one creature it can see within 30 feet of it. If the target can see the monstrosity, the target must succeed on a DC [10+%CON] Constitution saving throw against this magic or take 10 (3d6) cold damage and then be paralyzed for 1 minute, unless it is immune to cold damage. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success. If the target's saving throw is successful, or if the effect ends on it, the target is immune to the Chilling Gaze of all monstrosities for 1 hour."
         if race == "Monstrosity" and Dice() == 1 and not ("Disguise Self" in cantrip):        cantrip += "\n - Disguise self (humanoid form) Aura: \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
@@ -1583,27 +1582,32 @@ def Actions(Type=""):
 
     ## Movement
     if (Type == "Beast" or Type == "Beastfolk"):
-        if Dice() == 1:            r += "\n- Speed. \n\t 40 ft."
-        elif Dice() == 1:          r += "\n- Speed. \n\t 50 ft."
-        
-        if Dice() == 1:        r = r + "\n- Climb. \n\t 30 ft."
-        
-        if Dice() == 1:        r = r + "\n- Burrow. \n\t 10 ft."
+        if Dice() == 1:         r += "\n- Speed. \t 20 ft."
+        elif Dice() == 1:       r += "\n- Speed. \t 30 ft."
+        elif Dice() == 1:       r += "\n- Speed. \t 40 ft."
+        elif Dice() == 1:       r += "\n- Speed. \t 50 ft."
 
     if (Type == "Beast" or Type == "Beastfolk"):
-        if Dice(8) == 1:
+        if Dice() == 1:        r = r + "\n- Climb. \t 30 ft."
+        
+    if (Type == "Beast" or Type == "Beastfolk"):        
+        if Dice() == 1:        r = r + "\n- Burrow. \t 10 ft."
+
+    if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:
+        if Dice(2) == 1:
             r += "\n- Fly. \n\t 60 ft."
             if Dice(3) == 1:        r = r + "\n- Flyby. \n\t The beast doesn't provoke opportunity attacks when it flies out of an enemy's reach."
-        elif Dice(8) == 1:
+        elif Dice(2) == 1:
             r += "\n- Fly. \n\t 80 ft."
             if Dice() == 1:         r = r + "\n- Flyby. \n\t The beast doesn't provoke opportunity attacks when it flies out of an enemy's reach."
 
     if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:
-        r += "\n- Water Breathing. The beast can breathe underwater"
-        if Dice() == 1:     r += "\n- Swim. \n\t 60 ft."
-        elif Dice() == 1:   r += "\n- Swim. \n\t 40 ft."
-        elif Dice() == 1:   r += "\n- Swim. \n\t 30 ft."
-        else:               r += "\n- Swim. \n\t 20 ft."
+        if Dice(2) == 1:    r += "\n- Water Breathing. The beast can breathe underwater"
+        if Dice() == 1:     r += "\n- Swim. \t 60 ft."
+        elif Dice() == 1:   r += "\n- Swim. \t 50 ft."
+        elif Dice() == 1:   r += "\n- Swim. \t 40 ft."
+        elif Dice() == 1:   r += "\n- Swim. \t 30 ft."
+        else:               r += "\n- Swim. \t 20 ft."
         
         if Dice(4) == 1:    r += "\n- Underwater Camouflage. \n\t The beast has advantage on Dexterity (Stealth) checks made while underwater."
 
@@ -1627,8 +1631,6 @@ def Actions(Type=""):
         r += "\n- Damage Immunities. \t cold."
         if Dice(4) == 1:   r += "\n- Snow Camouflage. \t The beast has advantage on Dexterity (Stealth) checks made to hide in snowy terrain."
 
-    if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:        r += "\n-  Pack Tactics. \n\t The Beast has advantage on an attack roll against a creature if at least one of the beast's allies is within 5 feet of the creature and the ally isn't incapacitated."
-
     if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:        r += "\n - Relentless \n\t (Recharges after a Short or Long Rest). \n\t If the beast takes 7 damage or less that would reduce it to 0 hit points, it is reduced to 1 hit point instead."
 
     if (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:         r += "\n - Damage Immunities \n\t bludgeoning, piercing, and slashing from nonmagical attacks that aren't silvered."
@@ -1644,10 +1646,13 @@ def Actions(Type=""):
     if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:         r = r + "\n- Labyrinthine Recall \n\t The Beast can perfectly recall any path it has traveled."
 
 
-    ## Attacks 
-    if (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:        r += "\n-  Multiattack. \n\t The Beast makes two simple attacks."
-    elif (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:      r += "\n-  Multiattack. \n\t The Beast makes three simple attacks."
-    elif (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:     r += "\n-  Multiattack. \n\t The Beast makes one special attack and a simple attacks."
+    ## Attacks
+    if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:        r += "\n-  Pack Tactics. \n\t The Beast has advantage on an attack roll against a creature if at least one of the beast's allies is within 5 feet of the creature and the ally isn't incapacitated."
+
+    if (Type == "Beast" or Type == "Beastfolk"):
+        if Dice() == 1:        r += "\n-  Multiattack. \n\t The Beast makes two simple attacks."
+        elif Dice() == 1:      r += "\n-  Multiattack. \n\t The Beast makes three simple attacks."
+        elif Dice(8) == 1:     r += "\n-  Multiattack. \n\t The Beast makes one special attack and a simple attacks."
 
     if (Type == "Beast" or Type == "Beastfolk") and Dice(9) == 1:
         r += "\n - Grappler. \n\t On an attack, the target is grappled,  [DC 10+%STR]"
@@ -1659,24 +1664,26 @@ def Actions(Type=""):
         elif Dice(9) == 1:      r += "\n - Charge \n\t If the Beast moves at least 10 feet straight toward a target and then hits it with an attack on the same turn, the target takes an extra [2d8+%STR] piercing damage. If the target is a creature, it must succeed on a DC=[10+%STR] Strength saving throw or be pushed up to 10 feet away and knocked prone."
         elif Dice(9) == 1:      r += "\n - Trampling Charge \n\t If the Beast moves at least 20 feet straight toward a creature and then hits it with an attack on the same turn, that target must succeed on a DC [10+%STR] Strength saving throw or be knocked prone. If the target is prone, the beast can make one stomp attack against it as a bonus action."
 
-    if (Type == "Beast" or Type == "Beastfolk") and Dice(9) == 1:        r += "\n- Blood Frenzy \n\t The beast has advantage on melee attack rolls against any creature that doesn't have all its hit points."
+    if (Type == "Beast" or Type == "Beastfolk"):
+        if Dice(9) == 1:        r += "\n- Blood Frenzy \n\t The beast has advantage on melee attack rolls against any creature that doesn't have all its hit points."
 
     if (Type == "Beast" or Type == "Beastfolk"):
         if Dice(10) == 1:     r = r + "\n- Pounce \n\t If the beast moves at least 20 feet straight toward a creature and then hits it with an attack on the same turn, that target must succeed on a DC [10+%STR] Strength saving throw or be knocked prone. If the target is prone, the Beast can make one attack against it as a bonus action."
         elif Dice(10) == 1:   r = r + "\n- Pounce \n\t If the beast moves at least 15 feet straight toward a creature and then hits it with an attack on the same turn, that target must succeed on a DC [10+%STR] Strength saving throw or be knocked prone. If the target is prone, the Beast can make one attack against it as a bonus action."
 
 
-    if (Type == "Beast" or Type == "Beastfolk") and Dice(4) == 1:
-        r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one  target. Hit: 4 (1d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR). Until this grapple ends, the target is restrained, and the beast can't bite another target."
-        if Dice() == 1: r = r + "\n- Swallow. \n\t  The beast makes one bite attack against a target creature smaller than themselves it is grappling. If the attack hits, the target is swallowed, and the grapple ends. The swallowed target is blinded and restrained, it has total cover against attacks and other effects outside the beast, and it takes 6 (2d4+%CON) acid damage at the start of each of the beast's turns. The beast can have only one target swallowed at a time. If the beast dies, a swallowed creature is no longer restrained by it and can escape from the corpse using 5 feet of movement, exiting prone."
-    elif (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:        r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 8 (2d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR). Until this grapple ends, the target is restrained, and the beast can't bite another target."
-    elif (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:        r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 10 (3d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR). Until this grapple ends, the target is restrained, and the beast can't bite another target."
-    elif (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:        r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 15 (4d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR)."
-    elif (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:        r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 20 (5d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR)."
-    elif (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:        r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 7 (1d10 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR) and the target must make a DC [10+%CON] Constitution saving throw, taking 18 (4d8) poison damage on a failed save, or half as much damage on a successful one. If the poison damage reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way."
-    elif (Type == "Beast" or Type == "Beastfolk") and Dice(4) == 1:
-        r += "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 5 (1d8 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR) and the target must make a DC [10+%CON] Constitution saving throw, taking 18 (4d8) poison damage on a failed save, or half as much damage on a successful one. If the poison damage reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way."
-        r += "\n- Lycan Curse \n\t When a Bite attack hits, the target must succeed on a DC[10+%CON] Constitution saving throw or be cursed with the lycanthropy curse of the affinity beast."
+    if (Type == "Beast" or Type == "Beastfolk"):
+        if Dice(4) == 1:    r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one  target. Hit: 4 (1d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR). Until this grapple ends, the target is restrained, and the beast can't bite another target."
+            if Dice() == 1: r = r + "\n- Swallow. \n\t  The beast makes one bite attack against a target creature smaller than themselves it is grappling. If the attack hits, the target is swallowed, and the grapple ends. The swallowed target is blinded and restrained, it has total cover against attacks and other effects outside the beast, and it takes 6 (2d4+%CON) acid damage at the start of each of the beast's turns. The beast can have only one target swallowed at a time. If the beast dies, a swallowed creature is no longer restrained by it and can escape from the corpse using 5 feet of movement, exiting prone."
+        elif Dice() == 1:   r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 8 (2d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR). Until this grapple ends, the target is restrained, and the beast can't bite another target."
+        elif Dice() == 1:        r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 10 (3d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR). Until this grapple ends, the target is restrained, and the beast can't bite another target."
+        elif Dice() == 1:        r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 15 (4d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR)."
+        elif Dice() == 1:        r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 20 (5d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR)."
+        elif Dice() == 1:        r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 7 (1d10 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR) and the target must make a DC [10+%CON] Constitution saving throw, taking 18 (4d8) poison damage on a failed save, or half as much damage on a successful one. If the poison damage reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way."
+        elif Dice(8) == 1:       r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 23 (3d10 + %STR) piercing damage."
+        elif Dice(4) == 1:
+            r += "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 5 (1d8 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR) and the target must make a DC [10+%CON] Constitution saving throw, taking 18 (4d8) poison damage on a failed save, or half as much damage on a successful one. If the poison damage reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way."
+            r += "\n- Lycan Curse \n\t When a Bite attack hits, the target must succeed on a DC[10+%CON] Constitution saving throw or be cursed with the lycanthropy curse of the affinity beast."
 
     if (Type == "Beast" or Type == "Beastfolk") and Dice(12) == 1:      r += "\n- Hold Breath. \n\t  The beast can hold its breath for 15 minutes.\n- Swimming \n\t  speed of 30 feet."
     elif (Type == "Beast" or Type == "Beastfolk") and Dice(12) == 1:    r += "\n- Hold Breath. \n\t  The beast can hold its breath for 1 hour."
@@ -2317,11 +2324,20 @@ def Actions(Type=""):
     if Type == "Plant" and Dice() == 1:        r = r + "\n- Multiattack\n\t The Plant can do one special attack and a simple attack each turn."
 
     # WARRIOR
-    if Type == "Warrior" and Dice() == 1:       r = r + "\n- Parry \n\t The warrior adds 2 to its AC against one melee attack that would hit it. To do so, the warrior must see the attacker and be wielding a melee weapon."
-    elif Type == "Warrior" and Dice() == 1:     r = r + "\n- Parry \n\t The warrior adds 3 to its AC against one melee attack that would hit it. To do so, the warrior must see the attacker and be wielding a melee weapon."
-    if Type == "Warrior" and Dice(2) == 1:      r = r + "\n- Pack Tactics \n\t The warrior has advantage on an attack roll against a creature if at least one of the warrior's allies is within 5 feet of the creature and the ally isn't incapacitated."
-    if Type == "Warrior" and Dice(2) == 1:      r = r + "\n- Multiattack \n\t The Warrior can attack twice with their simple melee attack on his turn."
+    if Type == "Warrior":
+        if Dice() == 1:       r += "\n- Parry \n\t The warrior adds 2 to its AC against one melee attack that would hit it. To do so, the warrior must see the attacker and be wielding a melee weapon."
+        elif Dice() == 1:     r += "\n- Parry \n\t The warrior adds 3 to its AC against one melee attack that would hit it. To do so, the warrior must see the attacker and be wielding a melee weapon."
+    if Type == "Warrior" and Dice(2) == 1:      r += "\n- Pack Tactics \n\t The warrior has advantage on an attack roll against a creature if at least one of the warrior's allies is within 5 feet of the creature and the ally isn't incapacitated."
+    if Type == "Warrior":
+        if Dice() == 1:         r += "\n- Multiattack \n\t The Warrior can attack twice with their simple melee attack on his turn."
+        elif Dice() == 1:       r += "\n- Multiattack \n\t The Warrior makes three melee attacks or two ranged attacks.
+    if Type == "Warrior" and Dice() == 1:       r += "\n- Brave \n\t The warrior has advantage on saving throws against being frightened."
+    if Type == "Warrior" and Dice() == 1:       r += "\n- Brute \n\t A melee weapon deals one extra die of its damage when the warrior hits with it (included in the attack)."
 
+    if Type == "Warrior" and Dice() == 1:       r += "Shield Bash. \n\t Melee Weapon Attack: Reach 5 ft., one creature. Hit: 9 (2d4 + %STR) bludgeoning damage. If the target is a Medium or smaller creature, it must succeed on a DC [11+%STR] Strength saving throw or be knocked prone."
+
+
+    # RETURN the skills' string
     return r
 
 
@@ -2368,6 +2384,9 @@ def Region(Type):
 
 def PlotHook():
     Hooks = [
+        "I am a gladiator entertainer. I need to give a good spectacle to provide for my kind.",
+        "I shall prove myself in the Arena.",
+        "I shall gain fame and fortune in the Arena.",
         "One from my kind was killed. I seek revenge.",
         "One from my kind was harmed. I seek compensation.",
         "I was slaved for a long time. I seek revenge.",      
@@ -3152,27 +3171,6 @@ def Ideal(background, alignment):
                 "People. I'm loyal to my friends, not to any ideals, and everyone else can take a trip down the Styx for all I care."
             ])
 
-    if background == "Gladiator":
-        if "Chaotic" in alignment and Dice() == 1:
-            return random.choice([
-                "Competition. I strive to test myself in all things."
-            ])
-        if "Evil" in alignment and Dice() == 1:
-            return random.choice([
-                "Triumph. The best part of winning is seeing my rivals brought low."
-            ])
-        if "Good" in alignment and Dice() == 1:
-            return random.choice([
-                "Camaraderie. The strongest bonds are forged through struggle."
-            ])
-        if "Neutral" in alignment and Dice() == 1:
-            return random.choice([
-                "People. I strive to inspire my spectators."
-            ])
-        if "Lawful" in alignment and Dice() == 1:
-            return random.choice([
-                "Tradition. Every game has rules, and the playing field must be level."
-            ])
 
     if background == "Pirate":
         if "Good" in alignment and Dice() == 1:
@@ -3282,6 +3280,28 @@ def Ideal(background, alignment):
         if "Good" in alignment and Dice() == 1:
             return random.choice([
                 "Peace and Prosperity I smuggle only to achieve a greater goal that benefits my community."
+            ])
+        
+    if background == "Warrior":
+        if "Chaotic" in alignment and Dice() == 1:
+            return random.choice([
+                "Competition. I strive to test myself in all things."
+            ])
+        if "Evil" in alignment and Dice() == 1:
+            return random.choice([
+                "Triumph. The best part of winning is seeing my rivals brought low."
+            ])
+        if "Good" in alignment and Dice() == 1:
+            return random.choice([
+                "Camaraderie. The strongest bonds are forged through struggle."
+            ])
+        if "Neutral" in alignment and Dice() == 1:
+            return random.choice([
+                "People. I strive to inspire my spectators."
+            ])
+        if "Lawful" in alignment and Dice() == 1:
+            return random.choice([
+                "Tradition. Every game has rules, and the playing field must be level."
             ])
 
     if "Good" in alignment and Dice() == 1:
@@ -3574,7 +3594,8 @@ def NPC():
     print("\n- SPECIAL ATTACK: {} Charges/Combat".format(Dice(1 + int(Lvl/2))))
     print(SpecialAttack(Lvl, Modifier(random.choice([STR, DEX, CON, INT, WIS, CHA]))))
     print("\n\n")
-    print("༼ SPELLCASTING:\t{} ༽".format(random.choice(["INT", "WIS", "CHA"]), f"\n\t Spellsave DC:{10 + Modifier(max(INT, WIS, CHA))}"))
+    print("༼ SPELLCASTING:\t{} ༽".format(random.choice(["INT", "WIS", "CHA"])))
+    print(f"\n\t Spellsave DC:{10 + Modifier(max(INT, WIS, CHA))}")
     print("\t To hit: +{}".format( Modifier(max(INT, WIS, CHA) + Lvl/5)))
     print(Magic(Lvl, rc, bg))
 
