@@ -2086,38 +2086,40 @@ def Actions(Type=""):
 
 
     # Strengths and Weaknesses
-    if Type == "Fiend" and Dice() == 1:     r += "\n- Damage Vulnerabilities: Radiant"
+    if Type == "Fiend":
+        if Dice() == 1:     r += "\n- Damage Vulnerabilities: Radiant"
     
-    if Type == "Fiend" and Dice() == 1:     r += "\n- Damage Resistances: acid"
+        if Dice() == 1:     r += "\n- Damage Resistances: acid"
 
-    if Type == "Fiend" and Dice() == 1:     r += "\n- Damage Resistances: bludgeoning, piercing, and slashing from nonmagical attacks not made with silvered weapons."
-    elif Type == "Fiend" and Dice() == 1:   r += "\n- Damage Resistances: bludgeoning, piercing, and slashing from nonmagical attacks."
+        if Dice() == 1:     r += "\n- Damage Resistances: bludgeoning, piercing, and slashing from nonmagical attacks not made with silvered weapons."
+        elif Dice() == 1:   r += "\n- Damage Resistances: bludgeoning, piercing, and slashing from nonmagical attacks."
 
-    if Type == "Fiend" and Dice() == 1:     r += "\n- Damage Resistances: cold"
-    elif Type == "Fiend" and Dice() == 1:   r += "\n- Damage Immunities: cold"
+        if Dice() == 1:     r += "\n- Damage Resistances: cold"
+        elif Dice() == 1:   r += "\n- Damage Immunities: cold"
     
-    if Type == "Fiend" and Dice() == 1:     r += "\n- Damage Resistances: fire"
-    elif Type == "Fiend" and Dice() == 1:   r = r + "\n- Damage Immunities: fire"
+        if Dice() == 1:     r += "\n- Damage Resistances: fire"
+        elif Dice() == 1:   r += "\n- Damage Immunities: fire"
 
-    if Type == "Fiend" and Dice() == 1:     r += "\n- Damage Resistances: necrotic"
+        if Dice() == 1:     r += "\n- Damage Resistances: necrotic"
 
-    if Type == "Fiend" and Dice() == 1:     r += "\n- Damage Resistances: lightning"
-    elif Type == "Fiend" and Dice() == 1:   r += "\n- Damage Immunities: lightning"
+        if Dice() == 1:     r += "\n- Damage Resistances: lightning"
+        elif Dice() == 1:   r += "\n- Damage Immunities: lightning"
 
-    if Type == "Fiend" and Dice() == 1:     r = r + "\n- Damage Resistances: poison"
-    elif Type == "Fiend" and Dice() == 1:   r = r + "\n- Damage Immunities: poison"
+        if Dice() == 1:     r += "\n- Damage Resistances: poison"
+        elif Dice() == 1:   r += "\n- Damage Immunities: poison"
 
-    if Type == "Fiend" and Dice() == 1:     r += "\n- Damage Resistances: thunder"
+        if Dice() == 1:     r += "\n- Damage Resistances: thunder"
 
-    if Type == "Fiend" and Dice() == 1:    r = r + "\n- Condition Immunities: charmed"
-    if Type == "Fiend" and Dice() == 1:    r = r + "\n- Condition Immunities: exhaustion"
-    if Type == "Fiend" and Dice() == 1:    r = r + "\n- Condition Immunities: frightened"
-    if Type == "Fiend" and Dice() == 1:    r = r + "\n- Condition Immunities: grappled"
-    if Type == "Fiend" and Dice() == 1:    r = r + "\n- Condition Immunities: paralyzed"
-    if Type == "Fiend" and Dice() == 1:    r = r + "\n- Condition Immunities: petrified"
-    if Type == "Fiend" and Dice() == 1:    r = r + "\n- Condition Immunities: poisoned"
-    if Type == "Fiend" and Dice() == 1:    r = r + "\n- Condition Immunities: prone"
-    if Type == "Fiend" and Dice(10) == 1:  r = r + "\n- Condition Immunities: restrained"
+    if Type == "Fiend":
+        if Dice() == 1:    r += "\n- Condition Immunities: charmed"
+        if Dice() == 1:    r += "\n- Condition Immunities: exhaustion"
+        if Dice() == 1:    r += "\n- Condition Immunities: frightened"
+        if Dice() == 1:    r += "\n- Condition Immunities: grappled"
+        if Dice() == 1:    r += "\n- Condition Immunities: paralyzed"
+        if Dice() == 1:    r += "\n- Condition Immunities: petrified"
+        if Dice() == 1:    r += "\n- Condition Immunities: poisoned"
+        if Dice() == 1:    r += "\n- Condition Immunities: prone"
+        if Dice(10) == 1:  r += "\n- Condition Immunities: restrained"
 
     if Type == "Fiend" and Dice() == 1: r = r + "\n- Magic Resistance \n\t The fiend has advantage on saving throws against spells and other magical effects."
 
@@ -2366,6 +2368,12 @@ def Region(Type):
 
 def PlotHook():
     Hooks = [
+        "One from my kind was killed. I seek revenge.",
+        "One from my kind was harmed. I seek compensation.",
+        "I was slaved for a long time. I seek revenge.",      
+        "I was slaved for a long time. I seek to liberate others in chains.",      
+        "A partner was taken in battle. I will liberate them or die trying.",
+        "One from my kind has been taken by slavers. I will liberate them or die trying.",
         "I am connected to the spirits of my kind. They carry a purpose for me that I shall carry on my shoulders.",
         "I lost all hope in my civilization. I shall make something new.",
         "I lost my purpose long ago. I'm looking for something new to care for.",
