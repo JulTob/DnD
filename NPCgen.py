@@ -329,6 +329,7 @@ def UndeadName():
         "Licht",
         "Mummy",
         "Poltergeist",
+        "Revenant",
         "Skelleton",
         "Skull",
         "Shadow",
@@ -621,7 +622,7 @@ def Language(race=Race(), background=Background()):
     if race == "Aberration":
         if not ("Deep Speech" in l):                    l += "Deep Speech. "
         if Dice() == 1 and not ("Undercommon" in l):    l += "Undercommon. "
-        if Dice(20) == 1 and not ("Telepathy" in l):    l += "Telepathy. "
+        if Dice(20) == 1 and not ("Telepathy" in l):    l += "Telepathy (60 ft.) "
 
     if race == "Aven":
         if not ("Common" in l):                         l += "Common. "
@@ -1294,8 +1295,8 @@ def Magic(Lvl, race=Race(), background=Background()):
         
 
         ## Three times a Day
-        if race == "Celestial" and Dice() == 1 and not ("Bless" in three):          three += "\n- Bless"
-        if race == "Celestial" and Dice() == 1 and not ("Cure Wounds" in three):    three += "\n- Cure Wounds"
+        if race == "Celestial" and Dice() == 1 and not ("Bless" in three):                  three += "\n- Bless"
+        if race == "Celestial" and Dice() == 1 and not ("Cure Wounds" in three):            three += "\n- Cure Wounds"
         if race == "Celestial" and Dice() == 1 and not ("Create Food And Water" in three):  three += "\n- Create Food And Water"
         if race == "Celestial" and Dice() == 1 and not ("Lesser Restoration" in three):     three += "\n- Lesser Restoration"
         if race == "Celestial" and Dice() == 1 and not ("Protection From Poison" in three): three += "\n- Protection From Poison"
@@ -1303,9 +1304,9 @@ def Magic(Lvl, race=Race(), background=Background()):
         if race == "Celestial" and Dice() == 1 and not ("Shield" in three):                 three += "\n- Shield"
 
         ## One time a Day
-        if race == "Celestial" and Dice() == 1 and not ("Dream" in one):    one += "\n- Dream"
-        if race == "Celestial" and Dice() == 1 and not ("Greater Restoration" in one):    one += "\n- Greater Restoration"
-        if race == "Celestial" and Dice() == 1 and not ("Scrying" in one):    one += "\n- Scrying"
+        if race == "Celestial" and Dice() == 1 and not ("Dream" in one):                    one += "\n- Dream"
+        if race == "Celestial" and Dice() == 1 and not ("Greater Restoration" in one):      one += "\n- Greater Restoration"
+        if race == "Celestial" and Dice() == 1 and not ("Scrying" in one):                  one += "\n- Scrying"
 
         # CONSTRUCTS.
         if race == "Construct" and Dice(2) == 1 and not ("Light" in cantrip):           cantrip += "\n- Light"
@@ -1591,21 +1592,25 @@ def Actions(Type=""):
         elif Dice() == 1:          r = r + "\n- Swim: \n\t 50ft"
 
     ## Resistances and Weaknesses
-    if Type == "Aberration" and Dice() == 1:        r += "\n- Damage Resistances:  \t bludgeoning, piercing, and slashing from nonmagical attacks"
     if Type == "Aberration" and Dice() == 1:        r += "\n- Damage Resistances:  \t acid"
+    if Type == "Aberration" and Dice() == 1:        r += "\n- Damage Resistances:  \t bludgeoning, piercing, and slashing from nonmagical attacks"
     if Type == "Aberration" and Dice() == 1:        r += "\n- Damage Resistances:  \t cold"
+    if Type == "Aberration" and Dice() == 1:        r += "\n- Damage Resistances:  \t fire"
     if Type == "Aberration" and Dice() == 1:        r += "\n- Damage Resistances:  \t lightning"
-    if Type == "Aberration" and Dice() == 1:        r += "\n- Damage Resistances:  \t thunder"
 
     if Type == "Aberration" and Dice() == 1:        r += "\n- Damage Immunities:  \t poison"
 
     if Type == "Aberration" and Dice() == 1:        r = r + "\n- Damage Vulnerabilities: \n\t psychic"
+
+    if Type == "Aberration" and Dice() == 1:        r += "\n- Damage Resistances:  \t thunder"
 
     if Type == "Aberration" and Dice() == 1:        r += "\n- Condition Immunities:  \n\t Prone"
     if Type == "Aberration" and Dice() == 1:        r += "\n- Condition Immunities:  \n\t Blinded"
     if Type == "Aberration" and Dice() == 1:        r += "\n- Condition Immunities:  \n\t Poisoned"
 
     if Type == "Aberration" and Dice() == 1:        r = r + "\n- Magic Resistance: \n\t The Aberration has advantage on saving throws against spells and other magical effects."
+    if Type == "Aberration" and Dice() == 1:        r = r + "\n- Regeneration: \n\t The Aberration regains 10 hit points at the start of its turn if it has at least 1 hit point."
+
 
     ## Combat Actions
     if Type == "Aberration" and Dice() == 1:        r += "\n- Blinding Spittle (Recharge 5–6). \n\t The Aberration spits a chemical glob at a point it can see within 15 feet of it. The glob explodes in a blinding flash of light on impact. Each creature within 5 feet of the flash must succeed on a DC 13 Dexterity saving throw or be blinded until the end of the aberration's next turn."
@@ -2159,7 +2164,7 @@ def Actions(Type=""):
         if Dice(2) == 1:    r += "\n- Darkvision: \t 60 ft."
         elif Dice(2) == 1:  r += "\n- Darkvision: \t 120 ft."
         if Dice() == 1:     r += "\n- Blindsight: \t 30 ft."
-        elif Dice() == 1:     r += "\n- Blindsight: \t 60 ft."
+        elif Dice() == 1:   r += "\n- Blindsight: \t 60 ft."
         if Dice() == 1:     r += "\n- Devil's Sight. \n\t Magical darkness doesn't impede the Fiend's darkvision."
 
     if Type == "Fiend" and Dice(12) == 1:   r += "\n- Keen Hearing and Smell. \n\t The fiend has advantage on Wisdom (Perception) checks that rely on hearing or smell."
@@ -2310,9 +2315,15 @@ def Actions(Type=""):
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Stone Camouflage.\n\t The monstrosity has advantage on Dexterity (Stealth) checks made to hide in rocky terrain.\n"
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Snow Camouflage. \n\t The Monstrosity has advantage on Dexterity (Stealth) checks made to hide in snowy terrain."
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Two-Headed. \n\t The monstrosity has advantage on Wisdom (Perception) checks and on saving throws against being blinded, charmed, deafened, frightened, stunned, or knocked unconscious."
-    # Special Attacks
+    # Special Attacks. 
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Bite. \n\t Reach 5ft. Hit: 30 (4d12 + %STR) piercing damage. ."
+    if Type == "Monstrosity" and Dice() == 1:
+        r += "\n- Tendril. \n\t Melee Weapon Attack: Reach 50 ft., one creature. Hit: The target is grappled (escape DC [11+%STR]). Until the grapple ends, the target is restrained and has disadvantage on Strength checks and Strength saving throws, and the monstrosity can't use the same tendril on another target."
+        if Dice() == 1: r += "\n- Grasping Tendrils. \n\t The monstrosity can have up to [1d6] tendrils at a time. Each tendril can be attacked (AC 20; 10 hit points; immunity to poison and psychic damage). Destroying a tendril deals no damage to the monstrosity, which can extrude a replacement tendril on its next turn. A tendril can also be broken if a creature takes an action and succeeds on a DC 15 Strength check against it."
+        if Dice() == 1: r += "\n-  Reel. \n\t The roper pulls each creature grappled by it up to 25 feet straight toward it."
 
+
+    # RANGER. 
     if Type == "Ranger":        r += "\n- " + Attack("RangedMartial")
     if Type == "Ranger":        r += "\n - Multiattack. \n\t The Ranger can do two ranged attacks."
 
@@ -2343,36 +2354,56 @@ def Actions(Type=""):
         elif Dice(2) == 1:      r = r + "\n- Darkvision: 120ft"
 
     # Weaknesses and Strengths
-    if Type == "Undead" and Dice(2) == 1:   r += "\n- Damage Vulnerabilities: Bludgeoning."
-    if Type == "Undead" and Dice(3) == 1:   r += "\n- Damage Vulnerabilities: Radiant"
-    if Type == "Undead" and Dice() == 1:    r += "\n- Damage Vulnerabilities: Fire"
 
     if Type == "Undead" and Dice() == 1:        r += "\n- Damage Resistances: Acid."
+    
     if Type == "Undead" and Dice() == 1:        r += "\n- Damage Resistances: Bludgeoning, piercing, and slashing from nonmagical attacks. "
+    elif Type == "Undead" and Dice(2) == 1:     r += "\n- Damage Vulnerabilities: Bludgeoning."
+    elif Type == "Undead" and Dice() == 1:      r += "\n- Damage Resistances: Piercing. "
+
     if Type == "Undead" and Dice() == 1:        r += "\n- Damage Resistances: Cold. "
-    if Type == "Undead" and Dice() == 1:        r += "\n- Damage Resistances: Fire."
-    if Type == "Undead" and Dice() == 1:        r += "\n- Damage Resistances: Necrotic."
+    elif Type == "Undead" and Dice() == 1:      r += "\n- Damage Immunities: Cold "
+
+    if Type == "Undead" and Dice() == 1:        r += "\n- Damage Vulnerabilities: Fire"
+    elif Type == "Undead" and Dice() == 1:      r += "\n- Damage Resistances: Fire."
+    elif Type == "Undead" and Dice() == 1:      r += "\n- Damage Immunities: Fire "
+
     if Type == "Undead" and Dice() == 1:        r += "\n- Damage Resistances: Lightning. "
+
+    if Type == "Undead" and Dice() == 1:        r += "\n- Damage Resistances: Necrotic."
+    elif Type == "Undead" and Dice(2) == 1:     r += "\n- Damage Immunities: Necrotic "
+
+    if Type == "Undead" and Dice(2) == 1:       r += "\n- Damage Resistances: Psychic "
+    if Type == "Undead" and Dice(2) == 1:       r += "\n- Damage Immunities: Psychic "
+    
+    if Type == "Undead" and Dice() == 1:        r += "\n- Damage Resistances: Poison "
+    elif Type == "Undead" and Dice() == 1:      r += "\n- Damage Immunities: Poison "
+    
+    if Type == "Undead" and Dice(3) == 1:       r += "\n- Damage Vulnerabilities: Radiant"
+
     if Type == "Undead" and Dice() == 1:        r += "\n- Damage Resistances: Thunder. "
-    if Type == "Undead" and Dice() == 1:        r += "\n- Damage Resistances: Piercing. "
 
-    if Type == "Undead" and Dice() == 1:        r += "\n- Damage Immunities: cold "
-    if Type == "Undead" and Dice() == 1:        r += "\n- Damage Immunities: fire "
-    if Type == "Undead" and Dice(2) == 1:       r += "\n- Damage Immunities: necrotic "
-    if Type == "Undead" and Dice(2) == 1:       r += "\n- Damage Immunities: poison "
 
-    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: charmed"
-    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: exhaustion"
-    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: grappled"
-    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: frightened"
-    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: paralyzed"
-    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: petrified"
-    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: poisoned"
-    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: prone"
-    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: restrained"
-    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: unconscious"
+    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: Charmed"
+    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: Exhaustion"
+    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: Grappled"
+    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: Frightened"
+    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: Paralyzed"
+    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: Petrified"
+    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: Poisoned"
+    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: Prone"
+    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: Restrained"
+    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: Stunned"
+    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: Unconscious"
 
-    if Type == "Undead" and Dice() == 1:    r += "\n- Magic Resistance: The undead has advantage on saving throws against spells and other magical effects."
+    if Type == "Undead" and Dice() == 1:    r += "\n- Magic Resistance \n\t The undead has advantage on saving throws against spells and other magical effects."
+    if Type == "Undead" and Dice() == 1:    r += "\n- Regeneration\n\t The undead regains 10 hit points at the start of its turn. If the undead takes fire or radiant damage, this trait doesn't function at the start of the undead's next turn. The undead's body is destroyed only if it starts its turn with 0 hit points and doesn't regenerate."
+    if Type == "Undead" and Dice() == 1:    r += "\n- Rejuvenation\n\t When the undead's body is destroyed, its soul lingers. After 24 hours, the soul inhabits and animates another humanoid corpse on the same plane of existence and regains all its hit points. While the soul is bodiless, a wish spell can be used to force the soul to go to the afterlife and not return."
+    if Type == "Undead" and Dice() == 1:    r += "\n- Turn Defiance \n\t The undead and any undeads within 30 feet of it have advantage on saving throws against effects that turn undead."
+    if Type == "Undead" and Dice() == 1:    r += "\n- Turn Immunity \n\t The Undead is immune to effects that turn undead."
+
+
+    
 
     # Skills
     if Type == "Undead" and Dice(7) == 1:   r += "\n - Amorphous \n\t The Undead can move through a space as narrow as 1 inch wide without squeezing."
@@ -2389,9 +2420,9 @@ def Actions(Type=""):
     if Type == "Undead" and Dice() == 1:    r += "\n - Rejuvenation \n\t If the undead is destroyed, it regains all its hit points in 1 hour unless holy water is sprinkled on its remains or a dispel magic or remove curse spell is cast on them."
     if Type == "Undead" and Dice() == 1:    r += "\n - Shadow Stealth \n\t While in dim light or darkness, the Undead can take the Hide action as a bonus action. Its stealth bonus is also improved to +6."
     if Type == "Undead" and Dice() == 1:    r += "\n - Telekinetic Thrust"
-    if Type == "Undead" and Dice() == 1:    r += "\n - Turn Defiance \n\t The undead and any undeads within 30 feet of it have advantage on saving throws against effects that turn undead."
-    if Type == "Undead" and Dice() == 1:    r += "\n - Turn Immunity \n\t The Undead is immune to effects that turn undead."
     if Type == "Undead" and Dice() == 1:    r += "\n - Variable Illumination. \n\t The undead sheds bright light in a 5 to 20-foot radius and dim light for an additional number of ft. equal to the chosen radius. The will-o'-wisp can alter the radius as a bonus action."
+    if Type == "Undead" and Dice() == 1:    r += "\n - Vengeful Tracker. \n\t The undead knows the distance to and direction of any creature against which it seeks revenge, even if the creature and the undead are on different planes of existence. If the creature being tracked by the undead dies, the undead knows. \n\t If the undead hits the creaure has sworn vengance against, the creature recives an extra 4d6 bludgeoning damage."
+
 
     # Combat Skills
     if Type == "Undead" and Dice(7) == 1:   r += "\n - Blood Frenzy \n\t The undead has advantage on melee attack rolls against any creature that doesn't have all its hit points."
@@ -2402,6 +2433,11 @@ def Actions(Type=""):
     if Type == "Undead" and Dice() == 1:    r += "\n - Sunlight Weakness \n\t While in sunlight, the shadow has disadvantage on attack rolls, ability checks, and saving throws."
     if Type == "Undead" and Dice() == 1:    r += "\n - Sunlight Sensitivity  \n\t While in sunlight, the undead has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
     if Type == "Undead" and Dice() == 1:    r += "\n - Undead Fortitude. \n\t If damage reduces the Undead to 0 hit points, it must make a Constitution saving throw with a DC of 5 + the damage taken, unless the damage is radiant or from a critical hit. On a success, the Undead drops to 1 hit point instead."
+    if Type == "Undead" and Dice() == 1:    r += "\n - Multiattack. \n\t The revenant makes two fist attacks."
+
+
+
+    
 
     # NOBLE
     if Type == "Noble" and Dice() == 1:        r += "\n- Parry \n\t The noble adds 2 to its AC against one melee attack that would hit it. To do so, the noble must see the attacker and be wielding a melee weapon."
