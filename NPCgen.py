@@ -1351,8 +1351,8 @@ def Magic(Lvl, race=Race(), background=Background()):
         if race == "Dragon" and Dice(8) == 1 and not ("Suggestion" in one):         one += "\n- Suggestion"
 
         # DWARF.
-        if race == "Dwarf" and Dice() == 1 and not ("Enlarge" in cantrip):            cantrip += "\n- Enlarge (Recharges after a Short or Long Rest). \n\t For 1 minute, the Dwarf magically increases in size, along with anything it is wearing or carrying. While enlarged, the Dwarf is Large, doubles its damage dice on Strength-based weapon attacks (included in the attacks), and makes Strength checks and Strength saving throws with advantage. If the Dwarf lacks the room to become Large, it attains the maximum size possible in the space available."
-        if race == "Dwarf" and Dice() == 1 and not ("Invisibility" in cantrip):       cantrip += "\n- Invisibility (Recharges after a Short or Long Rest). \n\t The dwarf magically turns invisible until it attacks, casts a spell, or until its concentration is broken, up to 1 hour (as if concentrating on a spell). Any equipment the Dwarf wears or carries is invisible with it."
+        if race == "Dwarf" and Dice(7) == 1 and not ("Enlarge" in cantrip):            cantrip += "\n- Enlarge (Recharges after a Short or Long Rest). \n\t For 1 minute, the Dwarf magically increases in size, along with anything it is wearing or carrying. While enlarged, the Dwarf is Large, doubles its damage dice on Strength-based weapon attacks (included in the attacks), and makes Strength checks and Strength saving throws with advantage. If the Dwarf lacks the room to become Large, it attains the maximum size possible in the space available."
+        if race == "Dwarf" and Dice(7) == 1 and not ("Invisibility" in cantrip):       cantrip += "\n- Invisibility (Recharges after a Short or Long Rest). \n\t The dwarf magically turns invisible until it attacks, casts a spell, or until its concentration is broken, up to 1 hour (as if concentrating on a spell). Any equipment the Dwarf wears or carries is invisible with it."
 
 
         
@@ -2437,7 +2437,7 @@ def Actions(Type=""):
     if Type == "Undead" and Dice() == 1:    r += "\n - Horrifying Visage. \n\t Each non-undead creature within 60 feet of the undead that can see it must succeed on a DC [10+%CHA] Wisdom saving throw or be frightened for 1 minute. If the save fails by 5 or more, the target also ages 1d4 × 10 years. A frightened target can repeat the saving throw at the end of each of its turns, ending the frightened condition on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to this undead's Horrifying Visage for the next 24 hours. The aging effect can be reversed with a greater restoration spell, but only within 24 hours of it occurring."
     if Type == "Undead" and Dice() == 1:    r += "\n - Possession (Recharge 6).  \n\t One humanoid that the undead can see within 5 feet of it must succeed on a DC 13 Charisma saving throw or be possessed by the undead; the undead then disappears, and the target is incapacitated and loses control of its body. The undead now controls the body but doesn't deprive the target of awareness. The undead can't be targeted by any attack, spell, or other effect, except ones that turn undead, and it retains its alignment, Intelligence, Wisdom, Charisma, and immunity to being charmed and frightened. It otherwise uses the possessed target's statistics, but doesn't gain access to the target's knowledge, class features, or proficiencies. \n\t The possession lasts until the body drops to 0 hit points, the undead ends it as a bonus action, or the undead is turned or forced out by an effect like the dispel evil and good spell. When the possession ends, the undead reappears in an unoccupied space within 5 feet of the body. The target is immune to this undead's Possession for 24 hours after succeeding on the saving throw or after the possession ends."
     if Type == "Undead" and Dice() == 1:    r += "\n - Stench.  \n\t Any creature that starts its turn within 5 feet of the undead must succeed on a DC 10 Constitution saving throw or be poisoned until the start of its next turn. On a successful saving throw, the creature is immune to the undead's Stench for 24 hours."
-    if Type == "Undead" and Dice() == 1:    r += "\n - Sunlight Weakness \n\t While in sunlight, the shadow has disadvantage on attack rolls, ability checks, and saving throws."
+    if Type == "Undead" and Dice() == 1:    r += "\n - Sunlight Weakness \n\t While in sunlight, the undead has disadvantage on attack rolls, ability checks, and saving throws."
     if Type == "Undead" and Dice() == 1:    r += "\n - Sunlight Sensitivity  \n\t While in sunlight, the undead has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
     if Type == "Undead" and Dice() == 1:    r += "\n - Undead Fortitude. \n\t If damage reduces the Undead to 0 hit points, it must make a Constitution saving throw with a DC of 5 + the damage taken, unless the damage is radiant or from a critical hit. On a success, the Undead drops to 1 hit point instead."
     if Type == "Undead" and Dice() == 1:    r += "\n - Multiattack. \n\t The revenant makes two fist attacks."
@@ -2674,7 +2674,6 @@ def PlotHook():
         "I want to create something.",
         "I am running from justice.",
         "I am running from justice for a crime I didn't commit.",
-        "I am optimistic, seeing events in the most positive light.",
         "I have to make a very difficult choice",
         "I serve an unethical and corrupt organization.",
         "I would die to recover an ancient relic of my faith that was lost long ago.",
@@ -2736,6 +2735,7 @@ def PlotHook():
 
 def Trait(background=""):
     Traits = [
+        "I am optimistic, seeing events in the most positive light.",   
         "If you do me an injury, I will crush you, ruin your name, and salt your fields.",
         "My favor, once lost, is lost forever.",
         "Despite my noble birth, I do not place myself above other folk. We all have the same blood.",
@@ -3767,7 +3767,7 @@ def NPC():
         print(Legendary(rc))
 
         print("\nLAIR ACTIONS:")
-        print("Unless otherwise noted, any lair action that to make a saving throw uses the spellsave DC." + "\n On initiative count 20 (losing initiative ties), the creature can take a lair action to cause one of the following effects, but can't use the same effect two rounds in a row:"
+        print("Unless otherwise noted, any lair action that demands a saving throw uses the spellsave DC above." + "\n On initiative count 20 (losing initiative ties), the creature can take a lair action to cause one of the following effects, but can't use the same effect two rounds in a row:"
               )
         print(Lair(bg))
         print(Lair(rc))
