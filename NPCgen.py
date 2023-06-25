@@ -370,6 +370,13 @@ def Dice(D=6):
     else: roll = random.randint(D, 1)
     return roll
 
+def Dice(D=6,N=1):
+    roll = 0
+    for m in range(N):
+        if D >= 1: roll += random.randint(1, D)
+        else: roll += random.randint(D, 1)
+    return roll
+
 
 def AbilityScore():
     d1 = Dice()
@@ -3681,7 +3688,7 @@ def NPC():
     if Dice(10) == 1 or bg == "Monk":       AC += Modifier(WIS)
     if Dice(10) == 1 or bg == "Berserker":  AC += Modifier(CON)
 
-    HP = Lvl*(Dice(12) + Modifier(CON))
+    HP = Dice(12, Lvl) + Lvl*Modifier(CON)
 
 
     r = ""
@@ -3690,8 +3697,8 @@ def NPC():
     print(f"{rc}: {nm}")
     print("\n")
 
-    print("Lvl: {}".format(Lvl), "   HP: {}".format(HP))
-    print(f"AC: {AC}")
+   # print("Lvl: {}".format(Lvl), "   HP: {}".format(HP))
+    print(f"Lvl: {Lvl}\t    HP: {HP}\t    AC: {AC}")
     print("\n\t" +
           f"STR: {STR} \t |  {Modifier(STR)} \n\t" +
           f"DEX: {DEX} \t |  {Modifier(DEX)} \n\t" +
