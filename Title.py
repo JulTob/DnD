@@ -24,6 +24,7 @@ def Title():
         "The Beholder",
         "The Blending",
         "The Black",
+        "The Blind",
         "The Blue",
         "The Blood",
         "The Bone",
