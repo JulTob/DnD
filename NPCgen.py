@@ -2577,7 +2577,7 @@ def PlotHook():
         "A monster that slaughtered dozens of innocent people spared my life, and I don’t know why. I am certain it follows me since.",
         "I protect those who cannot protect themselves.",
         "I have a family, but I have no idea where they are. One day, I hope to see them again.",
-        "Recruited into a lord's army, I rose to leadership and was commended for my heroism. Now I fight for them."
+        "Recruited into a lord's army, I rose to leadership and was commended for my heroism. Now I fight for them.",
         "A celestial, fey, or similar creature gave me a blessing or revealed my secret origin.",
         "I'm breaking into a tyrant's castle to steal weapons to arm the people.",
         "I lead a militia to fight off an invading army.",
