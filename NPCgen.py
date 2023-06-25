@@ -3698,7 +3698,7 @@ def NPC():
     print("\n")
 
    # print("Lvl: {}".format(Lvl), "   HP: {}".format(HP))
-    print(f"Lvl: {Lvl}\t    HP: {HP}\t    AC: {AC}")
+    print(f"Lvl: {Lvl}⚜︎\t    HP: {HP}♡\t    AC: {AC}⛨️")
     print("\n\t" +
           f"STR: {STR}  \t |  {Modifier(STR)} \n\t" +
           f"DEX: {DEX}  \t |  {Modifier(DEX)} \n\t" +
@@ -3708,12 +3708,12 @@ def NPC():
           f"CHA: {CHA}  \t |  {Modifier(CHA)} \n\t")
 
     print("Saving Throws:" + "\t", end="")
-    if Dice(3) == 1:    print(f"Str:+ {Modifier(STR) + int(Lvl/5)}", end="\t")
-    if Dice(3) == 1:    print(f"Dex:+ {Modifier(DEX) + int(Lvl/5)}", end="\t")
-    if Dice(3) == 1:    print(f"Con:+ {Modifier(CON) + int(Lvl/5)}", end="\t")
-    if Dice(3) == 1:    print(f"Int:+ {Modifier(INT) + int(Lvl/5)}", end="\t")
-    if Dice(3) == 1:    print(f"Wis:+ {Modifier(WIS) + int(Lvl/5)}", end="\t")
-    if Dice(3) == 1:    print(f"Cha:+ {Modifier(CHA) + int(Lvl/5)}", end="\t")
+    if Dice(4) == 1:    print(f"Str:+ {Modifier(STR) + int(Lvl/5)}", end="\t")
+    if Dice(4) == 1:    print(f"Dex:+ {Modifier(DEX) + int(Lvl/5)}", end="\t")
+    if Dice(4) == 1:    print(f"Con:+ {Modifier(CON) + int(Lvl/5)}", end="\t")
+    if Dice(4) == 1:    print(f"Int:+ {Modifier(INT) + int(Lvl/5)}", end="\t")
+    if Dice(4) == 1:    print(f"Wis:+ {Modifier(WIS) + int(Lvl/5)}", end="\t")
+    if Dice(4) == 1:    print(f"Cha:+ {Modifier(CHA) + int(Lvl/5)}", end="\t")
     print("\n")
 
     print("Skills:")
