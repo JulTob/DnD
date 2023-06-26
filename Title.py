@@ -208,6 +208,7 @@ def Title():
         "The Wise",
         "The Wind",
         "The Winter",
+        "The Wild",
         "The Wolf",
         "The Young",
         "The Zombie",
