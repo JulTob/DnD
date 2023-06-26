@@ -326,6 +326,8 @@ def Title():
         "Man",
         "Machine",
         "Mage",
+        "Magus",
+        "Magister",
         "Master",
         "Mastermind",
         "Mastiff",
