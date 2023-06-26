@@ -2111,7 +2111,7 @@ def Actions(Type=""):
 
     # ORCS
     # Senses
-    if Type == "Orc":   r += "\n- Darkvision \n\t 60ft."
+    if Type == "Orc":   r += "\n- Darkvision \t 60ft."
 
     # Combat Skills
     if Type == "Orc":
@@ -2345,7 +2345,7 @@ def Actions(Type=""):
     if Type == "Spy" and Dice(2) == 1:        r = r + "\n- Sneak Attack (1/Turn). \n\t The spy deals an extra 7 (2d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 feet of an ally of the spy that isn't incapacitated and the spy doesn't have disadvantage on the attack roll."
     if Type == "Spy" and Dice(2) == 1:        r = r + "\n- Multiattack. \n\t The spy makes two simple melee attacks."
 
-    if Type == "Kobold":        r += "\n- Darkvision \n\t 60ft."
+    if Type == "Kobold":        r += "\n- Darkvision \t 60ft."
     if Type == "Kobold":        r += "\n- Pack Tactics \n\t The kobold has advantage on an attack roll against a creature if at least one of the kobold's allies is within 5 feet of the creature and the ally isn't incapacitated."
     if Type == "Kobold":        r += "\n- Sunlight Sensitivity \n\t While in sunlight, the kobold has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
     if Type == "Kobold" and Dice() == 1:        r += "\n Fly \t 30ft."
