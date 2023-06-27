@@ -3850,19 +3850,19 @@ def NPC():
     print("\n")
 
     if Dice(Lvl) >= 10:
-        print("\nLEGENDARY ACTIONS:")
+        print("\n✯    LEGENDARY ACTIONS:    ✯")
         print(f"The {bg} {rc} can take {Dice(Lvl)} legendary actions. Choosing from the options below. Only one legendary action can be used at a time, and only at the end of another creature's turn. The {bg} {rc} regains spent legendary actions at the start of its turn.")
         print(Legendary(bg))
         print(Legendary(rc))
 
     if Dice(Lvl) >= 15:
-        print("\nLAIR ACTIONS:")
+        print("\n⛫   LAIR ACTIONS:   ⛫")
         print("Unless otherwise noted, any lair action that demands a saving throw uses the spellsave DC above." + "\n On initiative count 20 (losing initiative ties), the creature can take a lair action to cause one of the following effects, but can't use the same effect two rounds in a row:")
         print(Lair(bg))
         print(Lair(rc))
 
     if Dice(Lvl) >= 10:
-        print("\nREGIONAL EFFECTS:")
+        print("\n♕   REGIONAL EFFECTS:   ♛")
         print(f"The {bg} {rc} has an effect on its domains that may include any of the followin magical effects:")
         print(Region(bg))
         print(Region(rc))
