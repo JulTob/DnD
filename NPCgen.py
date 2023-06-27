@@ -2743,7 +2743,8 @@ def PlotHook():
         "I pursue a goal that breaks tradition or law",
         "I am in debt.",
         "I lead an uprising.",
-        "Feels loyalty to two opposing causes or people",
+        "Feels loyalty to two opposing causes.",
+        "Feels loyalty to two opposing kinds.",
         "Has a crisis of faith.",
         "Is looking for revenge",
         "Is trying to solve a failure.",
@@ -3851,7 +3852,7 @@ def NPC():
 
     if Dice(Lvl) >= 10:
         print("\n✯    LEGENDARY ACTIONS:    ✯")
-        print(f"The {bg} {rc} can take {Dice(Lvl)} legendary actions. Choosing from the options below. Only one legendary action can be used at a time, and only at the end of another creature's turn. The {bg} {rc} regains spent legendary actions at the start of its turn.")
+        print(f"The {bg} {rc} can take {Dice()} legendary actions, choosing from the options below. \n\t Only one legendary action can be used at a time, and only at the end of another creature's turn. \n\t The {bg} {rc} regains spent legendary actions at the start of its turn.")
         print(Legendary(bg))
         print(Legendary(rc))
 
