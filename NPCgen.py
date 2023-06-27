@@ -2622,6 +2622,8 @@ def Region(Type):
 
 def PlotHook():
     Hooks = [
+        "I'm infiltrating a corrupt organization to take it down from the inside.",
+        "I'm looking for a child that was taken from my kind.",
         "I am a gladiator entertainer. I need to give a good spectacle to provide for my kind.",
         "I shall prove myself in the Arena.",
         "I shall gain fame and fortune in the Arena.",
@@ -2637,6 +2639,7 @@ def PlotHook():
         "My kind carries an ancient curse. I shall cleanse our souls.",
         "My kind is alienated in these lands. We just try to survive, but anger folows wherever we go. ",
         "I run away from the opression of my kind",
+        "I fight against the opression of my kind",
         "My kind is under repression. I aim to liberate them.",
         "I was unjustly imprisoned by a rival, I will get my revenge and then more. ",
         "I've been away of home to fight a war. I now want to go back to my loved ones.",
