@@ -109,7 +109,7 @@ def Title():
         "The Jewelcraft",
         "The Jackal",
         "The Jewel",
-        "The Kraken",
+        "The Kraken's",
         "The Killer",
         "The King's",
         "The King of",
