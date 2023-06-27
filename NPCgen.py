@@ -2565,7 +2565,11 @@ def Legendary(Type=""):
     return Legendary()
 
 
-def Lair(Type):
+def Lair(Type=""):
+    if Type == "":
+        if Dice(0) == 1:    Type= Race()
+        else:               Type= Background()
+
     r = ""
 
     if Type == "Dragon" and Dice() == 1:        r += "\n- Chaotic Aura \n\t The dragon creates misdirecting currents of air and magic around itself. Until initiative count 20 on the next round, whenever a ranged attack roll misses the dragon, reroll the attack against a random creature within 30 feet of the dragon that doesn't have total cover against the attack."
@@ -2583,12 +2587,17 @@ def Lair(Type):
     if Type == "Fiend" and Dice() == 1:     r += "\n- The fiend targets up to three creatures that they can see within 60 feet of them. Each target must succeed on a Constitution saving throw or be flung up to 30 feet through the air. A creature that strikes a solid object or is released in midair takes 1d6 bludgeoning damage for every 10 feet moved or fallen."
 
 
-    if Type == "Plant" and Dice() == 1:        r += "\n- Grasping Plants \n\t The fey causes roots and vines to temporarily grow around it; until initiative count 20 on the next round, the ground within 20 feet of the fey is difficult terrain."
+    if Type == "Plant" and Dice() == 1:        r += "\n- Grasping Plants \n\t The plant causes roots and vines to temporarily grow around it; until initiative count 20 on the next round, the ground within 20 feet of the plant is difficult terrain."
 
+    if r == "": return  Lair()
     return r
 
 
-def Region(Type):
+def Region(Type = ""):
+    if Type == "":
+        if Dice(0) == 1:    Type= Race()
+        else:               Type= Background()
+
     r = ""
     
 
@@ -2616,7 +2625,7 @@ def Region(Type):
         if Dice() == 1:        r += "\n- Intelligent creatures see hallucinations of dead friends, family members, and even themselves littering the fiendish realm. Any attempt to interact with a hallucinatory image causes it to disappear."
 
 
-
+    if r == "": return  Region()
     return r
 
 
