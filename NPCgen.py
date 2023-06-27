@@ -2605,7 +2605,11 @@ def Region(Type = ""):
         if Dice() == 1:        r += "\n- Beasts that have an Intelligence score of 2 or lower are charmed by the beastfolk and directed to be aggressive toward intruders in the area."
 
     if Type == "Celestial":
-        if Dice() == 1:        r += "\n- Beasts that have an Intelligence score of 2 or lower are charmed by the beastfolk and directed to be aggressive toward intruders in the area."
+        if Dice() == 1:        r += "\n- Open flames of a non magical nature are extinguished within the celestial's domain. Torches and campfires refuse to burn, but closed lanterns are unaffected."
+        if Dice() == 1:        r += "\n- Creatures native to the celestial's domain have an easier time hiding; they have advantage on all Dexterity (Stealth) checks made to hide."
+        if Dice() == 1:        r += "\n- When a good-aligned creature casts a spell or uses a magical effect that causes another good-aligned creature to regain hit points, the target regains the maximum number of hit points possible for the spell or effect."
+        if Dice() == 1:        r += "\n- Curses affecting any good-aligned creature are suppressed."
+        
 
     
     if Type == "Fey":
@@ -3879,6 +3883,8 @@ def NPC():
         print(f"The {bg} {rc} has an effect on its domains that may include any of the followin magical effects:")
         print(Region(bg))
         print(Region(rc))
+        print(f"If the {bg} {rc} dies, these effects dissipate during the next {Dice(6,2)} days.")
+
 
     print("꧁ Their Story ꧂")
     print(" - Traits -")
