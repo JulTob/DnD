@@ -213,10 +213,19 @@ def DragonName():
 
 def ElementalName():
     Names = [
+        "Atlantian",
+        "Cronusian",
+        "Eosian",
         "Genasi",
         "Genie",
+        "Gaians",
+        "Hyperian",
+        "Oceanians",
         "Primordial",
+        "Promethean",
+        "Salamander",
         "Titan",
+        "Uranians",
         ""]
     return random.choice(Names)
 
@@ -311,6 +320,7 @@ def OrcName():
 def PlantName():
     Names = [
         "Awakened Plant",
+        "Colony",
         "Fungus",
         "Myconid",
         "Spore",
@@ -424,6 +434,7 @@ def Attack(Type):
         "Slam, 1d8 + %STR Bludgeoning",
         "Slam, 2d8 + %STR Bludgeoning",
         "Spear, 1d6 + %STR Piercing, 20/60 thrown",
+        "Spear, 2d6 + %STR Piercing, 20/60 thrown",
         "Spear, 1d8 + %STR Piercing, 20/60 thrown",
         "Spear, 2d8 + %STR Piercing, 20/60 thrown",
         ""
@@ -458,6 +469,7 @@ def Attack(Type):
         "Scimitar, 1d6 + %DEX Slashing, Finesse, light",
         "Shortsword, 1d6 + %STR Slashing, Finesse, light",
         "Shortsword, 1d6 + %DEX Slashing, Finesse, light",
+        "Stomp, 3d10 + %STR bludgeoning. Special: Only against prone creatures.",
         "Trident, 1d6 + %STR Piercing, 20/60 thrown",
         "Trident, 1d8 + %STR Piercing, 20/60 thrown",
         "War pick, 1d8 + %STR Bludgeoning",
@@ -484,7 +496,7 @@ def Attack(Type):
     elif Type == "RangedMartial" or Type == 4:
         return random.choice(MartialRangedWeapons)
     else:
-        return random.choice(SimpleMeleeWeapons)
+        return random.choice(Dice(4))
 
 
 def Damage():
@@ -1006,7 +1018,7 @@ def Magic(Lvl, race=Race(), background=Background()):
 
         if background == "Cultist":
             if Dice(3) == 1 and not ("Light" in cantrip):            cantrip += "\n- Light."
-            if Dice(3) == 1 and not ("Sacred flame" in cantrip):     cantrip += "\n- Sacred flame"
+            if Dice(3) == 1 and not ("Sacred Flame" in cantrip):     cantrip += "\n- Sacred Flame"
             if Dice(3) == 1 and not ("Thaumaturgy" in cantrip):      cantrip += "\n- Thaumaturgy"
 
         if background == "Cultist":
@@ -1060,7 +1072,7 @@ def Magic(Lvl, race=Race(), background=Background()):
     # Guard
     # Healer
         if background == "Healer" and Dice(2) == 1 and not ("Guidance" in cantrip):            cantrip += "\n- Guidance"
-        if background == "Healer" and Dice(2) == 1 and not ("Sacred flame" in cantrip):        cantrip += "\n- Sacred flame"
+        if background == "Healer" and Dice(2) == 1 and not ("Sacred Flame" in cantrip):        cantrip += "\n- Sacred Flame"
         if background == "Healer" and Dice(2) == 1 and not ("Cure Wounds" in first):
             first += "\n- Cure Wounds"
             slots1 += Dice()
@@ -1095,7 +1107,7 @@ def Magic(Lvl, race=Race(), background=Background()):
     # Priest
 
         if background == "Priest" and Dice(2) == 1 and not ("Light" in cantrip):            cantrip += "\n- Light. "
-        if background == "Priest" and Dice(2) == 1 and not ("Sacred flame" in cantrip):     cantrip += "\n- Sacred flame. "
+        if background == "Priest" and Dice(2) == 1 and not ("Sacred Flame" in cantrip):     cantrip += "\n- Sacred Flame. "
         if background == "Priest" and Dice(2) == 1 and not ("Thaumaturgy" in cantrip):      cantrip += "\n- Thaumaturgy"
         if background == "Priest" and Dice() == 1 and not ("Guidance" in cantrip):          cantrip += "\n- Guidance"
         if background == "Priest" and Dice() == 1 and not ("Resistance" in cantrip):        cantrip += "\n- Resistance"
@@ -1277,7 +1289,7 @@ def Magic(Lvl, race=Race(), background=Background()):
         if race == "Beast" and Dice() == 1 and not ("Cold Breath" in cantrip):      cantrip += "\n- Cold Breath. \t (Recharge 5–6). \n\t The beast exhales a blast of freezing wind in a 15-foot cone. Each creature in that area must make a DC [10+%CON] Dexterity saving throw, taking 18 (4d8) cold damage on a failed save, or half as much damage on a successful one."
 
         if race == "Beastfolk" and Dice(10) == 1 and not ("Sleep Gaze" in cantrip): cantrip += "\n- Sleep Gaze. \n\t The Beastfolk gazes at one creature it can see within 30 feet of it. The target must make a DC [10+%Wis] Wisdom saving throw. On a failed save, the target succumbs to a magical slumber, falling unconscious for 10 minutes or until someone uses an action to shake the target awake. A creature that successfully saves against the effect is immune to this Beastfolk's gaze for the next 24 hours. Undead and creatures immune to being charmed aren't affected by it."
-        if race == "Beastfolk" and Dice() == 1 and not ("Sacred flame" in cantrip): cantrip += "\n- Sacred Flame."
+        if race == "Beastfolk" and Dice() == 1 and not ("Sacred Flame" in cantrip): cantrip += "\n- Sacred Flame."
         if race == "Beastfolk" and Dice() == 1 and not ("Mage Hand" in cantrip):    cantrip += "\n- Mage Hand (invisible)."
         if race == "Beastfolk" and Dice() == 1 and not ("Thaumaturgy" in cantrip):  cantrip += "\n- Thaumaturgy."
         if race == "Beastfolk" and Dice() == 1 and not ("Feather Fall" in cantrip): cantrip += "\n- Feather Fall."
@@ -1294,7 +1306,7 @@ def Magic(Lvl, race=Race(), background=Background()):
         # CELESTIALS.
         ## Cantrips and At Will magic
         if race == "Celestial" and Dice() == 1 and not ("Light" in cantrip):                cantrip += "\n- Light"
-        if race == "Celestial" and Dice() == 1 and not ("Sacred flame" in cantrip):         cantrip += "\n- Sacred flame"
+        if race == "Celestial" and Dice() == 1 and not ("Sacred Flame" in cantrip):         cantrip += "\n- Sacred Flame"
         if race == "Celestial" and Dice() == 1 and not ("Thaumaturgy" in cantrip):          cantrip += "\n- Thaumaturgy"
         if race == "Celestial" and Dice() == 1 and not ("Detect Evil And Good" in cantrip): cantrip += "\n- Detect Evil And Good"
         if race == "Celestial" and Dice() == 1 and not ("Detect Magic" in cantrip):         cantrip += "\n- Detect Magic."
@@ -1654,9 +1666,9 @@ def Actions(Type=""):
     if (Type == "Beast" or Type == "Beastfolk"):
         if Dice(2) == 1:
             r = r + "\n- Darkvision."
-            if Dice(2) == 1:        r += "\n\t 30 ft."
-            elif Dice(3) <= 2:      r += "\n\t 60 ft."
-            else:                   r += "\n\t 120 ft."
+            if Dice() == 1:   r += "\n\t 120 ft."
+            elif Dice(3) == 1:   r += "\n\t 60 ft."
+            else:               r += "\n\t 30 ft."
         elif Dice() == 1:
             r += "\n- Blindsight."
             if Dice(12) == 1:   r += "\n\t 120 ft."
@@ -1739,8 +1751,9 @@ def Actions(Type=""):
     if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:         r = r + "\n- Labyrinthine Recall \n\t The Beast can perfectly recall any path it has traveled."
 
 
-    ## Attacks
-    if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:        r += "\n-  Pack Tactics. \n\t The Beast has advantage on an attack roll against a creature if at least one of the beast's allies is within 5 feet of the creature and the ally isn't incapacitated."
+    ## Combat Skills
+    if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:
+        r += "\n-  Pack Tactics. \n\t The Beast has advantage on an attack roll against a creature if at least one of the beast's allies is within 5 feet of the creature and the ally isn't incapacitated."
 
     if (Type == "Beast" or Type == "Beastfolk"):
         if Dice() == 1:        r += "\n-  Multiattack. \n\t The Beast makes two simple attacks."
@@ -1755,7 +1768,7 @@ def Actions(Type=""):
         if Dice(9) == 1:        r += "\n - Charge \n\t If the Beast moves at least 20 feet straight toward a target and then hits it with an attack on the same turn, the target takes an extra [2d6+%STR] bludgeoning damage. If the target is a creature, it must succeed on a DC=[10+%STR] Strength saving throw or be knocked prone."
         elif Dice(9) == 1:      r += "\n - Charge \n\t If the Beast moves at least 15 feet straight toward a target and then hits it with an attack on the same turn, the target takes an extra [2d6+%STR] slashing damage. If the target is a creature, it must succeed on a DC=[10+%STR] Strength saving throw or be knocked prone."
         elif Dice(9) == 1:      r += "\n - Charge \n\t If the Beast moves at least 10 feet straight toward a target and then hits it with an attack on the same turn, the target takes an extra [2d8+%STR] piercing damage. If the target is a creature, it must succeed on a DC=[10+%STR] Strength saving throw or be pushed up to 10 feet away and knocked prone."
-        elif Dice(9) == 1:      r += "\n - Trampling Charge \n\t If the Beast moves at least 20 feet straight toward a creature and then hits it with an attack on the same turn, that target must succeed on a DC [10+%STR] Strength saving throw or be knocked prone. If the target is prone, the beast can make one stomp attack against it as a bonus action."
+        elif Dice(9) == 1:      r += "\n - Trampling Charge \n\t If the Beast moves at least 20 feet straight toward a creature and then hits it with an attack on the same turn, that target must succeed on a DC [10+%STR] Strength saving throw or be knocked prone. If the target is prone, the beast can make one simple attack against it as a bonus action."
 
     if (Type == "Beast" or Type == "Beastfolk"):
         if Dice(9) == 1:        r += "\n- Blood Frenzy \n\t The beast has advantage on melee attack rolls against any creature that doesn't have all its hit points."
@@ -1951,6 +1964,7 @@ def Actions(Type=""):
     if Type == "Elemental" and Dice() == 1: r += "\n - Swim : 60ft."
 
     if Type == "Elemental" and Dice() == 1: r += " Air Form. \n\t The elemental can enter a hostile creature's space and stop there. It can move through a space as narrow as 1 inch wide without squeezing."
+
     ## Senses
     if Type == "Elemental" and Dice() == 1:     r += "\n - Darkvision : 60ft."
     elif Type == "Elemental" and Dice() == 1:   r += "\n - Blindsight : 30ft."
@@ -1983,18 +1997,23 @@ def Actions(Type=""):
     if Type == "Elemental" and Dice() == 1: r += "\n - Condition Immunities: Unconscious"
 
     ## Combat Skills
-    if Type == "Elemental" and Dice() == 1:     r += "\n - Heated Body \n\t A creature that touches the Elemental or hits it with a melee attack while within 5 feet of it takes 3 (1d6) fire damage"
+    if Type == "Elemental" and Dice() == 1:     r += "\n - Multiattack \n\t The elemental makes two simple attacks."
+
+    if Type == "Elemental" and Dice() == 1:     r += "\n - Earth Glide \n\t The elemental can burrow through nonmagical, unworked earth and stone. While doing so, the elemental doesn't disturb the material it moves through."
     if Type == "Elemental" and Dice() == 1:     r += "\n - False Appereance. \n\t While motionless, the elemental is indistinguishable from a natural feature, such as ponds, rocks, statues, etc"
+    if Type == "Elemental" and Dice() == 1:     r += "\n - Fire Form \n\t The elemental can move through a space as narrow as 1 inch wide without squeezing. A creature that touches the elemental or hits it with a melee attack while within 5 feet of it takes 5 (1d10) fire damage. In addition, the elemental can enter a hostile creature's space and stop there. The first time it enters a creature's space on a turn, that creature takes 5 (1d10) fire damage and catches fire; until someone takes an action to douse the fire, the creature takes 5 (1d10) fire damage at the start of each of its turns."
+    elif Type == "Elemental" and Dice() == 1:   r += "\n - Fire Form \n\t The elemental can move through a space as narrow as 1 inch wide without squeezing. A creature that touches the elemental or hits it with a melee attack while within 5 feet of it takes 10 (2d10) fire damage. In addition, the elemental can enter a hostile creature's space and stop there. The first time it enters a creature's space on a turn, that creature takes 5 (1d10) fire damage and catches fire; until someone takes an action to douse the fire, the creature takes 5 (1d10) fire damage at the start of each of its turns."
+    if Type == "Elemental" and Dice() == 1:     r += "\n - Fire Touch \n\t Melee Weapon Attack \t Hit: 10 (2d6 + %CON) fire damage. If the target is a creature or a flammable object, it ignites. Until a creature takes an action to douse the fire, the target takes 5 (1d10) fire damage at the start of each of its turns."
+    if Type == "Elemental" and Dice() == 1:     r += "\n - Heated Body \n\t A creature that touches the Elemental or hits it with a melee attack while within 5 feet of it takes 3 (1d6) fire damage"
+    elif Type == "Elemental" and Dice() == 1:   r += "\n - Heated Body \n\t Any metal melee weapon the elemental wields deals an extra 3 (1d6) fire damage on a hit (included in the attack)."
+    if Type == "Elemental" and Dice() == 1:     r += "\n - Heated Weapons \n\t A creature that touches the Elemental or hits it with a melee attack while within 5 feet of it takes 7 (2d6) fire damage"
     if Type == "Elemental" and Dice(8) == 1:    r += "\n - Illumination.\n\t The beast sheds bright light in a 10-foot radius and dim light for an additional 10 ft."
+    elif Type == "Elemental" and Dice() == 1:   r += "\n - Illumination \n\t The elemental sheds bright light in a 30-foot radius and dim light in an additional 30 feet."
     elif Type == "Elemental" and Dice() == 1:   r += "\n - Ignited Illumination. \n\t As a bonus action, the Elemental can set itself ablaze or extinguish its flames. While ablaze, the Elemental sheds bright light in a 10-foot radius and dim light for an additional 10 feet."
     if Type == "Elemental" and Dice() == 1:     r += "\n - Invisible in Water \n\t The Elemental is invisible while fully immersed in water."
-    if Type == "Elemental" and Dice() == 1:     r += "\n - Water Bound \n\t The Elemental dies if it leaves the water body to which it is bound or if that water is destroyed."
-    if Type == "Elemental" and Dice() == 1:     r += "\n - Earth Glide \n\t The elemental can burrow through nonmagical, unworked earth and stone. While doing so, the elemental doesn't disturb the material it moves through."
     if Type == "Elemental" and Dice() == 1:     r += "\n - Siege Monster \n\t The elemental deals double damage to objects and structures."
-    if Type == "Elemental" and Dice() == 1:     r += "\n - Fire Form \n\t The elemental can move through a space as narrow as 1 inch wide without squeezing. A creature that touches the elemental or hits it with a melee attack while within 5 feet of it takes 5 (1d10) fire damage. In addition, the elemental can enter a hostile creature's space and stop there. The first time it enters a creature's space on a turn, that creature takes 5 (1d10) fire damage and catches fire; until someone takes an action to douse the fire, the creature takes 5 (1d10) fire damage at the start of each of its turns."
-    if Type == "Elemental" and Dice() == 1:     r += "\n - Illumination \n\t The elemental sheds bright light in a 30-foot radius and dim light in an additional 30 feet."
     if Type == "Elemental" and Dice() == 1:     r += "\n - Water Susceptibility \n\t For every 5 feet the elemental moves in water, or for every gallon of water splashed on it, it takes 1 cold damage."
-    if Type == "Elemental" and Dice() == 1:     r += "\n - Fire Touch \n\t Melee Weapon Attack \t Hit: 10 (2d6 + %CON) fire damage. If the target is a creature or a flammable object, it ignites. Until a creature takes an action to douse the fire, the target takes 5 (1d10) fire damage at the start of each of its turns."
+    if Type == "Elemental" and Dice() == 1:     r += "\n - Water Bound \n\t The Elemental dies if it leaves the water body to which it is bound or if that water is destroyed."
 
 
     if Type == "Elemental":
@@ -2122,21 +2141,40 @@ def Actions(Type=""):
 
     if Type == "Explorer" and Dice() == 1:  r += "\n- Keen Senses\n\t The Explorer has advantage on Wisdom (Perception) checks that rely on senses."
 
-    if Type == "Plant": r += "\n- Damage Vulnerabilities: fire"
-    if Type == "Plant" and Dice() == 1: r = r + "\n - Damage Immunities: Poison"
-    if Type == "Plant" and Dice() == 1: r = r + "\n - Damage Resistance: Bludgeoning"
-    if Type == "Plant" and Dice() == 1: r = r + "\n - Damage Resistance: Piercing"
+    # PLANTS
+
+    ## Weaknesses and Strengths
+    
+    if Type == "Plant" and Dice() == 1:     r += "\n - Damage Resistance: Bludgeoning"
+    if Type == "Plant" and Dice() == 1:     r += "\n - Damage Resistance: Cold"
+
+    if Type == "Plant": r += "\n- Damage Vulnerabilities: Fire"
+    
+    if Type == "Plant" and Dice(9) == 1:    r += "\n - Damage Immunities: Lightning"
+    if Type == "Plant" and Dice() == 1:     r += "\n - Damage Immunities: Poison"
+    if Type == "Plant" and Dice() == 1:     r += "\n - Damage Resistance: Piercing"
+    
     if Type == "Plant" and Dice() == 1: r = r + "\n- Condition Immunities: Blinded"
-    if Type == "Plant" and Dice() == 1: r = r + "\n- Condition Immunities: Deafened"
     if Type == "Plant" and Dice() == 1: r = r + "\n- Condition Immunities: Charmed"
+    if Type == "Plant" and Dice() == 1: r = r + "\n- Condition Immunities: Deafened"
+    if Type == "Plant" and Dice(9) == 1: r = r + "\n- Condition Immunities: Exhaustion"
     if Type == "Plant" and Dice() == 1: r = r + "\n- Condition Immunities: Frightened"
     if Type == "Plant" and Dice() == 1: r = r + "\n- Condition Immunities: Poisoned"
     if Type == "Plant" and Dice() == 1: r = r + "\n- Condition Immunities: Prone"
     if Type == "Plant" and Dice() == 1: r = r + "\n- Condition Immunities: Paralyzed"
 
+    ## Combat Skill
+    if Type == "Plant" and Dice() == 1:        r += "\n- Entangling Plants. \n\t Grasping roots and vines sprout in a 15-foot radius centered on the blight, withering away after 1 minute. For the duration, that area is difficult terrain."
+    if Type == "Plant" and Dice() == 1:        r += "\n- Engulf \n\t The plant engulfs a Medium or smaller creature grappled by it. The engulfed target is blinded, restrained, and unable to breathe, and it must succeed on a DC [10+%STR] Constitution saving throw at the start of each of the plant's turns or take 8 (2d8 + %STR) bludgeoning damage. If the plant moves, the engulfed target moves with it. The plant can have only one creature engulfed at a time."
     if Type == "Plant" and Dice(3) == 1:       r += "\n- False Appereance: \n\t While the plant remains motionless, it is indistinguishable from a normal plant."
-    if Type == "Plant" and Dice() == 1:        r += "\n- Entangling Plants"
+    if Type == "Plant" and Dice(9) == 1:       r += "\n- Lightning Absorption: \n\t Whenever the plant is subjected to lightning damage, it takes no damage and regains a number of hit points equal to the lightning damage dealt."
 
+
+    if Type == "Plant" and Dice() == 1:         r += "\n- Multiattack: \n\t The plant makes two simple attacks."
+    elif Type == "Plant" and Dice() == 1:       r += "\n- Multiattack: \n\t The plant makes two simple attacks. If both hit a Medium or smaller creature, the target is grappled (escape DC[10+%STR])"
+
+
+    # SNAKEFOLK
     if Type == "Snakefolk":                     r += "\n- Darkvision: 60 ft"
     if Type == "Snakefolk":                     r += "\n- Damage Immunities \t Poison"
     if Type == "Snakefolk":                     r += "\n- Condition Immunities \t Poisoned"
