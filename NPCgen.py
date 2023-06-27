@@ -184,6 +184,7 @@ def CelestialName():
         "Planetar",
         "Seraph",
         "Throne",
+        "Unicorn",
         ""]
     return random.choice(Names)
 
@@ -270,6 +271,7 @@ def FeyName():
 def GiantName():
     Names = [
         "Ogre",
+        "Troll",
         ""]
     return random.choice(Names)
 
@@ -409,15 +411,15 @@ def Attack(Type):
     SimpleMeleeWeapons = [
         "Rock, 1d6 + %STR Bludgeoning, 25/50 thrown",
         "Fists, 1d4 + %STR Bludgeoning",
-        "Claws, 1d4 + %STR Slashing",
-        "Claws, 1d6 + %STR Slashing",
-        "Claws, 2d6 + %STR Slashing",
-        "Claws, 2d8 + %STR Slashing",
         "Bite, 1d4 + %STR Piercing",
         "Bite, 1d6 + %STR Piercing",
         "Bite, 1d8 + %STR Piercing",
         "Bite, 1d10 + %STR Piercing",
         "Bite, 2d6 + %STR Piercing",
+        "Claws, 1d4 + %STR Slashing",
+        "Claws, 1d6 + %STR Slashing",
+        "Claws, 2d6 + %STR Slashing",
+        "Claws, 2d8 + %STR Slashing",
         "Club, 1d4 + %STR Bludgeoning",
         "Dagger, 1d4 + %STR Piercing, 20/60 thrown",
         "Dagger, 1d4 + %DEX Piercing, 20/60 thrown",
@@ -437,8 +439,8 @@ def Attack(Type):
         "Spear, 2d6 + %STR Piercing, 20/60 thrown",
         "Spear, 1d8 + %STR Piercing, 20/60 thrown",
         "Spear, 2d8 + %STR Piercing, 20/60 thrown",
-        ""
-    ]
+        ""]
+    
     SimpleRangedWeapons = [
         "Rock, 1d6 + %STR Bludgeoning, 25/50 thrown",
         "Light Crossbow, 1d8 + %DEX Piercing, 80/320 range",
@@ -446,8 +448,8 @@ def Attack(Type):
         "Dart, 1d4 + %STR Piercing, 20/60 range",
         "Shortbow, 1d6 + %DEX Piercing, 80/320 range",
         "Sling, 1d4 + %DEX Bludgeoning, 30/120 range",
-        ""
-    ]
+        ""]
+    
     MartialMeleeWeapons = [
         "Battleaxe, 1d8 + %STR Slashing",
         "Battleaxe, 1d10 + %STR Slashing",
@@ -476,16 +478,15 @@ def Attack(Type):
         "Warhammer, 1d8 + %STR Bludgeoning",
         "Warhammer, 1d10 + %STR Bludgeoning",
         "Whip, 1d4 + %STR Slashing, Finesse, reach",
-        ""
-    ]
+        ""]
+    
     MartialRangedWeapons = [
         "Blowgun, 1 + %DEX piercing, 25/100 range",
         "Hand Crossbow, 1d6 + %DEX piercing, 30/120 range",
         "Heavy Crossbow, 1d10 + %DEX piercing, 100/400 range",
         "Longbow, 1d8 + %DEX piercing, 150/600 range",
         "Net, Special, 5/15 range",
-        ""
-    ]
+        ""]
 
     if Type == "Melee" or Type == 1:
         return random.choice(SimpleMeleeWeapons)
@@ -663,8 +664,10 @@ def Language(race=Race(), background=Background()):
         if not ("Celestial" in l):      l += "Celestial. "
         if not ("Common" in l):         l += "Common. "
         if Dice() == 1 and not ("Sylvan" in l):             l += "Sylvan. "
+        if Dice() == 1 and not ("Elvish" in l):             l += "Elvish. "
         if Dice(20) == 1 and not ("All languages" in l):    l += "All languages. "
-        if Dice(20) == 1 and not ("Telepathy" in l):        l += "Telepathy. (120 feet)."
+        if Dice(10) == 1 and not ("Telepathy" in l):        l += "Telepathy. (60 feet)."
+        elif Dice(20) == 1 and not ("Telepathy" in l):      l += "Telepathy. (120 feet)."
 
     if race == "Construct":
         l += "Understands the languages of its creator. "
@@ -748,7 +751,7 @@ def Language(race=Race(), background=Background()):
         if Dice(2) == 1 and not ("Common" in l):            l += "Common. "
         if Dice() == 1 and not ("Undercommon" in l):        l += "Undercommon. "
         if Dice() == 1 and not ("Deep Speech" in l):        l += "Deep Speech. "
-        if Dice() == 1 and not ("Sylvan" in l):             l += "Sylvan. "
+        if Dice(8) == 1 and not ("Sylvan" in l):             l += "Sylvan. "
         if Dice(8) == 1 and not ("Abyssal" in l):           l += "Abyssal. "
         
     if race == "Ooze":
@@ -1311,6 +1314,8 @@ def Magic(Lvl, race=Race(), background=Background()):
         if race == "Celestial" and Dice() == 1 and not ("Detect Evil And Good" in cantrip): cantrip += "\n- Detect Evil And Good"
         if race == "Celestial" and Dice() == 1 and not ("Detect Magic" in cantrip):         cantrip += "\n- Detect Magic."
         if race == "Celestial" and Dice() == 1 and not ("Detect Thoughts" in cantrip):      cantrip += "\n- Detect Thoughts."
+        if race == "Celestial" and Dice() == 1 and not ("Druidcraft" in cantrip):           cantrip += "\n- Druidcraft."
+        if race == "Celestial" and Dice() == 1 and not ("Pass Without Trace" in cantrip):   cantrip += "\n- Pass Without Trace."
         
 
         ## Three times a Day
@@ -1321,11 +1326,16 @@ def Magic(Lvl, race=Race(), background=Background()):
         if race == "Celestial" and Dice() == 1 and not ("Protection From Poison" in three): three += "\n- Protection From Poison"
         if race == "Celestial" and Dice() == 1 and not ("Sanctuary" in three):              three += "\n- Sanctuary"
         if race == "Celestial" and Dice() == 1 and not ("Shield" in three):                 three += "\n- Shield"
+        if race == "Celestial" and Dice() == 1 and not ("Healing Touch" in three):          three += "\n- Healing Touch \n\t The celestial touches another creature. The target magically regains 10 (2d8 + %CON) hit points. In addition, the touch removes all diseases and neutralizes all poisons afflicting the target."
 
         ## One time a Day
         if race == "Celestial" and Dice() == 1 and not ("Dream" in one):                    one += "\n- Dream"
         if race == "Celestial" and Dice() == 1 and not ("Greater Restoration" in one):      one += "\n- Greater Restoration"
         if race == "Celestial" and Dice() == 1 and not ("Scrying" in one):                  one += "\n- Scrying"
+        if race == "Celestial" and Dice() == 1 and not ("Calm Emotions" in one):            one += "\n- Calm Emotions"
+        if race == "Celestial" and Dice() == 1 and not ("Dispel Evil And Good" in one):     one += "\n- Dispel Evil And Good"
+        if race == "Celestial" and Dice() == 1 and not ("Entangle" in one):                 one += "\n- Entangle"
+        if race == "Celestial" and Dice() == 1 and not ("Teleport" in one):                 one += "\n- Teleport \n\t The celestial magically teleports itself and up to three willing creatures it can see within 5 feet of it, along with any equipment they are wearing or carrying, to a location the celestial is familiar with, up to 1 mile away."
 
         # CONSTRUCTS.
         if race == "Construct" and Dice(2) == 1 and not ("Light" in cantrip):           cantrip += "\n- Light"
@@ -1497,8 +1507,9 @@ def Magic(Lvl, race=Race(), background=Background()):
         if race == "Monstrosity" and Dice() == 1 and not ("Acid Spray" in cantrip):           cantrip += "\n - Acid Spray (Recharge 6): \n\t The Monstrosity spits acid in a line that is 30 feet long and 5 feet wide, provided that it has no creature grappled. Each creature in that line must make a DC [10+%Str] Dexterity saving throw, taking 10 (3d6) acid damage on a failed save, or half as much damage on a successful one."
         if race == "Monstrosity" and Dice() == 1 and not ("Major Image" in cantrip):          cantrip += "\n - Major Image."
         if race == "Monstrosity" and Dice() == 1 and not ("Luring Song" in cantrip):          cantrip += "\n - Luring Song: \n\t The monstrosity sings a magical melody. Every humanoid and giant within 300 feet of the monstrosity that can hear the song must succeed on a DC [10+%Cha] Wisdom saving throw or be charmed until the song ends. The monstrosity must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time. The song ends if the monstrosity is incapacitated. While charmed by the monstrosity, a target is incapacitated and ignores the songs of other monstrosities. If the charmed target is more than 5 feet away from the monstrosity, the target must move on its turn toward the monstrosity by the most direct route. It doesn't avoid opportunity attacks, but before moving into damaging terrain, such as lava or a pit, and whenever it takes damage from a source other than the monstrosity, a target can repeat the saving throw. A creature can also repeat the saving throw at the begguining of each of its turns. If a creature's saving throw is successful, the effect ends on it. A target that successfully saves is immune to this monstrosity's song for the next 24 hours."
-        if race == "Monstrosity" and Dice() == 1 and not ("Petrifying Gaze" in cantrip):      cantrip += "\n - Petrifying Gaze: \n\t If a creature starts its turn within 30 feet of the monstrosity and the two of them can see each other, the monstrosity can force the creature to make a DC [10+%CON] Constitution saving throw if the monstrosity isn't incapacitated. On a failed save, the creature magically begins to turn to stone and is restrained. It must repeat the saving throw at the start of its next turn. On a success, the effect ends. On a third failure, the creature is petrified until freed by the greater restoration spell or other magic. \n\t A creature that isn't surprised can avert its eyes to avoid the saving throw at the start of its turn. If it does so, it can't see the monstrosity until the start of its next turn, when it can avert its eyes again. If it looks at the monstrosity in the meantime, it must immediately make the save. \n\t If the monstrosity sees its reflection within 30 feet of it in bright light, it mistakes itself for a rival and targets itself with its gaze."
-        if race == "Monstrosity" and Dice() == 1 and not ("Petrifying Breath" in cantrip):    cantrip += "\n - Petrifying Breath (Recharge 5-6): \n\t The monstrosity exhales petrifying gas in a 30-foot cone. Each creature in that area must succeed on a Constitution saving throw (against the creature's Spellsave DC). On a failed save, a target begins to turn to stone and is restrained. The restrained target must repeat the saving throw at the start of its next turn. On a success, the effect ends on the target. On a failure, the target is petrified until freed by the greater restoration spell or other magic."
+        if race == "Monstrosity" and Dice(9) == 1 and not ("Petrifying Gaze" in cantrip):      cantrip += "\n - Petrifying Gaze: \n\t If a creature starts its turn within 30 feet of the monstrosity and the two of them can see each other, the monstrosity can force the creature to make a DC [10+%CON] Constitution saving throw if the monstrosity isn't incapacitated. On a failed save, the creature magically begins to turn to stone and is restrained. It must repeat the saving throw at the start of its next turn. On a success, the effect ends. On a third failure, the creature is petrified until freed by the greater restoration spell or other magic. \n\t A creature that isn't surprised can avert its eyes to avoid the saving throw at the start of its turn. If it does so, it can't see the monstrosity until the start of its next turn, when it can avert its eyes again. If it looks at the monstrosity in the meantime, it must immediately make the save. \n\t If the monstrosity sees its reflection within 30 feet of it in bright light, it mistakes itself for a rival and targets itself with its gaze."
+        if race == "Monstrosity" and Dice(9) == 1 and not ("Confusing Gaze" in cantrip):        cantrip += "\n - Confusing Gaze: \n\t When a creature starts its turn within 30 feet of the monstrosity and is able to see the monstrosity's eyes, the monstrosity can magically force it to make a DC [11+%CON] Charisma saving throw, unless the monstrosity is incapacitated. \n\t On a failed saving throw, the creature can't take reactions until the start of its next turn and rolls a d8 to determine what it does during that turn. On a 1 to 4, the creature does nothing. On a 5 or 6, the creature takes no action but uses all its movement to move in a random direction. On a 7 or 8, the creature makes one melee attack against a random creature, or it does nothing if no creature is within reach. \n\t Unless surprised, a creature can avert its eyes to avoid the saving throw at the start of its turn. If the creature does so, it can't see the monstrosity until the start of its next turn, when it can avert its eyes again. If the creature looks at the monstrosity in the meantime, it must immediately make the save." 
+        if race == "Monstrosity" and Dice(9) == 1 and not ("Petrifying Breath" in cantrip):    cantrip += "\n - Petrifying Breath (Recharge 5-6): \n\t The monstrosity exhales petrifying gas in a 30-foot cone. Each creature in that area must succeed on a Constitution saving throw (against the creature's Spellsave DC). On a failed save, a target begins to turn to stone and is restrained. The restrained target must repeat the saving throw at the start of its next turn. On a success, the effect ends on the target. On a failure, the target is petrified until freed by the greater restoration spell or other magic."
         if race == "Monstrosity" and Dice() == 1 and not ("Read Thoughts" in cantrip):        cantrip += "\n - Read Thoughts: \n\t The monstrosity magically reads the surface thoughts of one creature within 60 feet of it. The effect can penetrate barriers, but 3 feet of wood or dirt, 2 feet of stone, 2 inches of metal, or a thin sheet of lead blocks it. While the target is in range, the monstrosity can continue reading its thoughts, as long as the monstrosity's concentration isn't broken (as if concentrating on a spell). While reading the target's mind, the monstrosity has advantage on Wisdom (Insight) and Charisma (Deception, Intimidation, and Persuasion) checks against the target."
         if race == "Monstrosity" and Dice() == 1 and not ("Chilling Gaze" in cantrip):        cantrip += "\n - Chilling Gaze: \n\t The monstrosity targets one creature it can see within 30 feet of it. If the target can see the monstrosity, the target must succeed on a DC [10+%CON] Constitution saving throw against this magic or take 10 (3d6) cold damage and then be paralyzed for 1 minute, unless it is immune to cold damage. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success. If the target's saving throw is successful, or if the effect ends on it, the target is immune to the Chilling Gaze of all monstrosities for 1 hour."
         if race == "Monstrosity" and Dice() == 1 and not ("Disguise Self" in cantrip):        cantrip += "\n - Disguise self (humanoid form) Aura: \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
@@ -1829,13 +1840,18 @@ def Actions(Type=""):
     if Type == "Celestial" and Dice() == 1:     r += "\n- Damage Immunities: \t Psychic."
     if Type == "Celestial" and Dice() == 1:     r += "\n- Damage Immunities: \t Bludgeoning, Piercing, and slashing from nonmagical attacks."
 
+    if Type == "Celestial" and Dice() == 1:     r += "\n- Magic Resistance: \t The Celestial's has advantage on saving throws against magical effects."
     if Type == "Celestial" and Dice() == 1:     r += "\n- Magic Weapons: \t The Celestial's attacks are magical."
     if Type == "Celestial" and Dice() == 1:     r += "\n- Shielded Mind \t The Celestial is immune to any effect that would sense its emotions, read its thoughts, or detect its location."
 
     ## Actions
     if Type == "Celestial" and Dice() == 1:     r += "\n- Change Shape. \n\t The Celestial magically polymorphs into a humanoid or beast that has a challenge rating equal to or less than 4, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form (the couatl's choice). \n\t In a new form, the couatl retains its game statistics and ability to speak, but its AC, movement modes, Strength, Dexterity, and other actions are replaced by those of the new form, and it gains any statistics and capabilities (except class features, legendary actions, and lair actions) that the new form has but that it lacks. The Celestial can still use its special attacks."
 
+    ## Combat skills
+    if Type == "Celestial" and Dice() == 1:     r += "\n- Multiattack: \t The Celestial's can attack once with a Special Attack and once with a Simple Attack."
 
+
+    # CRIMINALS
     if Type == "Criminal" and Dice() == 1:  r += "\n- Pack Tactics \n\t The Criminal has advantage on an attack roll against a creature if at least one of the Criminal's allies is within 5 feet of the creature and the ally isn't incapacitated."
 
     # CONSTRUCTS
@@ -2037,6 +2053,7 @@ def Actions(Type=""):
     
     ## Senses
     if Type == "Giant" and Dice(2) == 1:    r += "\n Darkvision: 60ft"
+    if Type == "Giant" and Dice() == 1:     r += "\n Keen Smell \n\t The giant has advantage on Wisdom (Perception) checks that rely on smell."
     
     ## Movement
     if Type == "Giant" and Dice() == 1:     r += "\n Speed: 40ft"
@@ -2044,7 +2061,10 @@ def Actions(Type=""):
     ## Skills
     if Type == "Giant" and Dice() == 1:     r += "\n Two Heads \n\t The giant has advantage on Wisdom (Perception) checks and on saving throws against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious."
 
-    ## Attacks
+    if Type == "Giant" and Dice() == 1:     r += "\n Regeneration \n\t The giant regains 10 hit points at the start of its turn. If the giant takes acid or fire damage, this trait doesn't function at the start of the giant's next turn. The giant dies only if it starts its turn with 0 hit points and doesn't regenerate."
+    elif Type == "Giant" and Dice() == 1:   r += "\n Regeneration \n\t The giant regains 10 hit points at the start of its turn. If the giant takes " + Damage() + " damage, this trait doesn't function at the start of the giant's next turn. The giant dies only if it starts its turn with 0 hit points and doesn't regenerate."
+
+    ## Combat
     if Type == "Giant" and Dice() == 1:     r += "\n Greatclub \n\t reach 10 ft., one target. Hit: 18 (3d8 + %STR) bludgeoning damage."
     if Type == "Giant" and Dice() == 1:     r += "\n Rock \n\t range 60/240 ft., one target. Hit: 21 (3d10 + %STR) bludgeoning damage."
     if Type == "Giant" and Dice() == 1:     r += "\n Squash \n\t Some giants like to hurl themselves bodily at smaller foes and crush them beneath their bulk. Melee Weapon Attack: Reach 5 ft., one Medium or Smaller creature. Hit: 26 (6d6 + %STR) bludgeoning damage, the giant lands prone in the target's space, and the target is grappled (escape DC 10+%STR). Until this grapple ends, the target is prone. The grapple ends early if the giant stands up."
@@ -2323,11 +2343,14 @@ def Actions(Type=""):
     if Type == "Monstrosity":
         if Dice() == 1:            r += "\n - Speed: 50 ft"
         elif Dice() == 1:          r += "\n - Speed: 40 ft"
-        else:                      r += "\n - Speed: 30 ft"
+        elif Dice() == 1:          r += "\n - Speed: 30 ft"
+        else:                      r += "\n - Speed: 20 ft"
         
-    if Type == "Monstrosity":
-        if Dice() == 1:         r += "\n - Burrow: \t 10 ft"
-        elif Dice() == 1:       r += "\n - Burrow: \t 40 ft"
+    if Type == "Monstrosity" and Dice()==1:
+        if Dice() == 1:         r += "\n - Burrow: \t 40 ft"
+        elif Dice() == 1:       r += "\n - Burrow: \t 20 ft"
+        else:                   r += "\n - Burrow: \t 10 ft"
+        if Dice() == 1:         r += "\n - Tunneler: \t The monstrosity can burrow through solid rock at half its burrowing speed and leaves a 5 foot-wide, 8-foot-high tunnel in its wake."
 
     if Type == "Monstrosity":
         if Dice() == 1:         r += "\n- Speed: 0 ft. \n- Fly: 20 ft(Hover)"
@@ -2360,8 +2383,15 @@ def Actions(Type=""):
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Stone Camouflage.\n\t The monstrosity has advantage on Dexterity (Stealth) checks made to hide in rocky terrain.\n"
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Snow Camouflage. \n\t The Monstrosity has advantage on Dexterity (Stealth) checks made to hide in snowy terrain."
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Two-Headed. \n\t The monstrosity has advantage on Wisdom (Perception) checks and on saving throws against being blinded, charmed, deafened, frightened, stunned, or knocked unconscious."
-    # Special Attacks. 
-    if Type == "Monstrosity" and Dice() == 1:        r += "\n- Bite. \n\t Reach 5ft. Hit: 30 (4d12 + %STR) piercing damage. ."
+
+    # Special Attacks.
+    
+    if Type == "Monstrosity" and Dice() == 1:
+        r += "\n- Multiattack. \n\t The monstrosity makes three simple attacks."
+
+    if Type == "Monstrosity" and Dice(9) == 1: r += "\n- Bite. \n\t Reach 5ft. Hit: 30 (4d12 + %STR) piercing damage. "
+    elif Type == "Monstrosity" and Dice() == 1: r += "\n- Bite. \n\t Reach 5ft. Hit: 9 (dd8 + %STR) slashing damage. "
+
     if Type == "Monstrosity" and Dice() == 1:
         r += "\n- Tendril. \n\t Melee Weapon Attack: Reach 50 ft., one creature. Hit: The target is grappled (escape DC [11+%STR]). Until the grapple ends, the target is restrained and has disadvantage on Strength checks and Strength saving throws, and the monstrosity can't use the same tendril on another target."
         if Dice() == 1: r += "\n- Grasping Tendrils. \n\t The monstrosity can have up to [1d6] tendrils at a time. Each tendril can be attacked (AC 20; 10 hit points; immunity to poison and psychic damage). Destroying a tendril deals no damage to the monstrosity, which can extrude a replacement tendril on its next turn. A tendril can also be broken if a creature takes an action and succeeds on a DC 15 Strength check against it."
@@ -2518,13 +2548,21 @@ def Actions(Type=""):
     return r
 
 
-def Legendary(Type):
-    r = ""
-    if Type == "Human" or Type == 1:        r = r + "\n- Attack"
-    else:
-        if Dice(2) == 1:            r += "\n- Attack: \n\t It can do a simple attack to any creature"
-        if Dice(2) == 1:            r += "\n- Move: \n\t It can move half their movement"
-    return r
+def Legendary(Type=""):
+    if Type == "":
+        if Dice(0) == 1:    Type= Race()
+        else:               Type= Background()
+
+    if Type == "Human":
+        if Dice()==1:        return "\n- Attack \n\t It can do one simple attack to any creature"
+        if Dice()==1:        return "\n- Move: \n\t It can move half their movement"
+
+    if Type == "Celestial":
+        if Dice()==1:        return "\n- Attack \n\t It can do one simple attack to any creature"
+        if Dice()==1:        return "\n- Shimmering Shield (Costs 2 Actions). The Celestial creates a shimmering, magical field around itself or another creature it can see within 60 feet of it. The target gains a +2 bonus to AC until the end of the celestial's next turn."
+        if Dice()==1:        return "\n- Heal Self (Costs 3 Actions). \n\t The celestial magically regains 8 (2d8 + %CON) hit points."
+       
+    return Legendary()
 
 
 def Lair(Type):
@@ -2553,22 +2591,29 @@ def Lair(Type):
 def Region(Type):
     r = ""
     
-    if Type == "Beastfolk" and Dice() == 1:        r += "\n- Beasts that have an Intelligence score of 2 or lower are charmed by the beastfolk and directed to be aggressive toward intruders in the area."
+
+    if Type == "Beastfolk":
+        if Dice() == 1:        r += "\n- Beasts that have an Intelligence score of 2 or lower are charmed by the beastfolk and directed to be aggressive toward intruders in the area."
+
+    if Type == "Celestial":
+        if Dice() == 1:        r += "\n- Beasts that have an Intelligence score of 2 or lower are charmed by the beastfolk and directed to be aggressive toward intruders in the area."
 
     
-    if Type == "Fey" and Dice() == 1:        r += "\n- Compulsory Offering \n\t The first time a creature comes within 1 mile of the faerie dragon's lair, the creature must succeed on a DC 15 Wisdom saving throw or feel an overwhelming compulsion to leave an offering worth at least 5 gp stashed in an out-of-the-way place. The dragon immediately senses the location of this gift. A creature can be affected only once by this compulsion."
-    if Type == "Fey" and Dice() == 1:        r += "\n- Malleable Time \n\t Time is fluid within 1 mile of the fey's lair, flowing somewhere between half and twice its normal speed."
-    if Type == "Fey" and Dice() == 1:        r += "\n- Birds, rodents, snakes, spiders, or toads (or some other creatures appropriate to the fey) are found in great profusion."
-    if Type == "Fey" and Dice() == 1:        r += "\n- Beasts that have an Intelligence score of 2 or lower are charmed by the fey and directed to be aggressive toward intruders in the area."
-    if Type == "Fey" and Dice() == 1:        r += "\n- Strange carved figurines, twig fetishes, or rag dolls magically appear in trees."
-    if Type == "Fey" and Dice(8) == 1:       r += "\n- Most surfaces are covered by a thin film of slime, which is slick and sticks to anything that touches it."
-    if Type == "Fey" and Dice(8) == 1:       r += "\n- Currents and tides are exceptionally strong and treacherous. Any ability check made to safely navigate or control a vessel moving through these waters has disadvantage."
-    if Type == "Fey" and Dice(8) == 1:       r += "\n- Shores are littered with dead, rotting fish. The fey can sense when one of the fish is handled and cause it to speak with their voice."
+    if Type == "Fey":
+        if Dice() == 1:        r += "\n- Compulsory Offering \n\t The first time a creature comes within 1 mile of the faerie dragon's lair, the creature must succeed on a DC 15 Wisdom saving throw or feel an overwhelming compulsion to leave an offering worth at least 5 gp stashed in an out-of-the-way place. The dragon immediately senses the location of this gift. A creature can be affected only once by this compulsion."
+        if Dice() == 1:        r += "\n- Malleable Time \n\t Time is fluid within 1 mile of the fey's lair, flowing somewhere between half and twice its normal speed."
+        if Dice() == 1:        r += "\n- Birds, rodents, snakes, spiders, or toads (or some other creatures appropriate to the fey) are found in great profusion."
+        if Dice() == 1:        r += "\n- Beasts that have an Intelligence score of 2 or lower are charmed by the fey and directed to be aggressive toward intruders in the area."
+        if Dice() == 1:        r += "\n- Strange carved figurines, twig fetishes, or rag dolls magically appear in trees."
+        if Dice(8) == 1:       r += "\n- Most surfaces are covered by a thin film of slime, which is slick and sticks to anything that touches it."
+        if Dice(8) == 1:       r += "\n- Currents and tides are exceptionally strong and treacherous. Any ability check made to safely navigate or control a vessel moving through these waters has disadvantage."
+        if Dice(8) == 1:       r += "\n- Shores are littered with dead, rotting fish. The fey can sense when one of the fish is handled and cause it to speak with their voice."
 
-    if Type == "Fiend" and Dice() == 1:        r += "\n- Birds, rodents, snakes, spiders, or toads (or some other creatures appropriate to the fiend) are found in great profusion."
-    if Type == "Fiend" and Dice() == 1:        r += "\n- Shadows seem abnormally gaunt and sometimes move on their own as though alive."
-    if Type == "Fiend" and Dice() == 1:        r += "\n- Creatures are transported to a harmless but eerie demiplane filled with shadowy forms, waxy corpses, and cackling. The creatures are trapped there for a minute or two, and then returned to the place where they vanished from."
-    if Type == "Fiend" and Dice() == 1:        r += "\n- Intelligent creatures see hallucinations of dead friends, family members, and even themselves littering the fiendish realm. Any attempt to interact with a hallucinatory image causes it to disappear."
+    if Type == "Fiend":
+        if Dice() == 1:        r += "\n- Birds, rodents, snakes, spiders, or toads (or some other creatures appropriate to the fiend) are found in great profusion."
+        if Dice() == 1:        r += "\n- Shadows seem abnormally gaunt and sometimes move on their own as though alive."
+        if Dice() == 1:        r += "\n- Creatures are transported to a harmless but eerie demiplane filled with shadowy forms, waxy corpses, and cackling. The creatures are trapped there for a minute or two, and then returned to the place where they vanished from."
+        if Dice() == 1:        r += "\n- Intelligent creatures see hallucinations of dead friends, family members, and even themselves littering the fiendish realm. Any attempt to interact with a hallucinatory image causes it to disappear."
 
 
 
@@ -3804,18 +3849,21 @@ def NPC():
     print(Actions(""))
     print("\n")
 
-    if Dice(Lvl) >= 15:
+    if Dice(Lvl) >= 10:
         print("\nLEGENDARY ACTIONS:")
+        print(f"The {bg} {rc} can take {Dice(Lvl)} legendary actions. Choosing from the options below. Only one legendary action can be used at a time, and only at the end of another creature's turn. The {bg} {rc} regains spent legendary actions at the start of its turn.")
         print(Legendary(bg))
         print(Legendary(rc))
 
+    if Dice(Lvl) >= 15:
         print("\nLAIR ACTIONS:")
-        print("Unless otherwise noted, any lair action that demands a saving throw uses the spellsave DC above." + "\n On initiative count 20 (losing initiative ties), the creature can take a lair action to cause one of the following effects, but can't use the same effect two rounds in a row:"
-              )
+        print("Unless otherwise noted, any lair action that demands a saving throw uses the spellsave DC above." + "\n On initiative count 20 (losing initiative ties), the creature can take a lair action to cause one of the following effects, but can't use the same effect two rounds in a row:")
         print(Lair(bg))
         print(Lair(rc))
 
+    if Dice(Lvl) >= 10:
         print("\nREGIONAL EFFECTS:")
+        print(f"The {bg} {rc} has an effect on its domains that may include any of the followin magical effects:")
         print(Region(bg))
         print(Region(rc))
 
