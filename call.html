@@ -16,6 +16,7 @@
         text-align: center;
         font-family: Garamond, Georgia, "Times New Roman";
         background-color: rgba(255, 0, 0, 0.3);
+        width:100%;
         }
       div {
         background-color: rgba(255, 200, 0, 0.1);
@@ -23,6 +24,16 @@
         text-align: center; 
         margin: auto;
         text-justify: inter-word;
+        width:100%;
+        }
+      pre {
+        overflow-x: auto;
+        white-space: pre-line;
+        white-space: pre-wrap;       /* Since CSS 2.1 */
+        white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+        white-space: -pre-wrap;      /* Opera 4-6 */
+        white-space: -o-pre-wrap;    /* Opera 7 */
+        word-wrap: break-word;       /* Internet Explorer 5.5+ */
         }
       </style>
     </head>
@@ -33,7 +44,7 @@
       </py-script>
       </h1></strong>
     <div>
-      <pre>
+      <pre style="width:100%;overflow:auto">
         <py-script src="https://raw.githubusercontent.com/JulTob/DnD/main/NPCgen.py">
         </py-script>
         </pre>
