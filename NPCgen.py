@@ -2655,6 +2655,14 @@ def Region(Type = ""):
 
 def PlotHook():
     Hooks = [
+        "I received a message from a God, but it was unclear. I must find a long forgotten shrine to talk to him again.", 
+        "I must find a rare alchemist element to make a medicine needed for my kind.",
+        "I was chosen to defeat the enemy of my kind.",
+        "I must contact a spirit that belongs to this place.",
+        "I lost somebody. There may be a way to have them back in this place.",
+        "There is something trapped in this place. I seek to liberate them.",
+        "There is something trapped in this place. I seek to keep it that way.",
+        "I'm trapped. Could you please help me?",
         "I'm infiltrating a corrupt organization to take it down from the inside.",
         "I'm looking for a child that was taken from my kind.",
         "I am a gladiator entertainer. I need to give a good spectacle to provide for my kind.",
