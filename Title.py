@@ -447,6 +447,7 @@ def Title():
         "Writter",
         "Willow",
         "Wolf",
+        "Wraith",
         "Zombie",
         ""
     ]
