@@ -115,6 +115,7 @@ def AvenName():
 
 def BeastName():
     Names = [
+        "Armored Bear", 
         "Ape", "Baboon", "Monkey",
         "Badger",
         "Bat",
@@ -157,7 +158,7 @@ def BeastName():
 
 def BeastfolkName():
     Names = [
-        "Armored Bear",
+        "Aracnidfolk",
         "Centaur",
         "Gnoll",
         "Insectfolk",
@@ -167,6 +168,7 @@ def BeastfolkName():
         "Merfolk",
         "Minotaur",
         "Ratfolk",
+        "Scorpionfolk",
         "Sharkfolk",
         "Werebear",
         "Werewolf",
@@ -663,7 +665,7 @@ def Language(race=Race(), background=Background()):
         l += "Beastly Speech. "
         if Dice() == 1 and not ("Sylvan" in l):             l += "Sylvan. "
         if Dice() == 1 and not ("Undercommon" in l):        l += "Undercommon. "
-        if Dice() == 1 and not ("Elvish" in l):             l += "Elvish. "
+        if Dice(8) == 1 and not ("Elvish" in l):             l += "Elvish. "
 
     if race == "Celestial":
         if not ("Celestial" in l):      l += "Celestial. "
