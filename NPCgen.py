@@ -157,6 +157,7 @@ def BeastName():
 
 def BeastfolkName():
     Names = [
+        "Armored Bear",
         "Centaur",
         "Gnoll",
         "Insectfolk",
@@ -167,6 +168,7 @@ def BeastfolkName():
         "Minotaur",
         "Ratfolk",
         "Sharkfolk",
+        "Werebear",
         "Werewolf",
         ""]
     return random.choice(Names)
@@ -419,6 +421,7 @@ def Attack(Type):
         "Claws, 1d4 + %STR Slashing",
         "Claws, 1d6 + %STR Slashing",
         "Claws, 2d6 + %STR Slashing",
+        "Claws, 2d4 + %STR Slashing",
         "Claws, 2d8 + %STR Slashing",
         "Club, 1d4 + %STR Bludgeoning",
         "Dagger, 1d4 + %STR Piercing, 20/60 thrown",
@@ -1009,7 +1012,7 @@ def Magic(Lvl, race=Race(), background=Background()):
     two     = "2/Day each: "
     three   = "3/Day each: "
 
-    for L in range(int(1+Lvl)):
+    for L in range(Dice(int(1+Lvl))):
 
 # BACKGROUNDS:
     # Bandit
@@ -1983,6 +1986,8 @@ def Actions(Type=""):
 
     if Type == "Elemental" and Dice() == 1: r += " Air Form. \n\t The elemental can enter a hostile creature's space and stop there. It can move through a space as narrow as 1 inch wide without squeezing."
 
+    if Type == "Elemental" and Dice() == 1: r += " Water Form. \n\t The elemental can enter a hostile creature's space and stop there. It can move through a space as narrow as 1 inch wide without squeezing."
+
     ## Senses
     if Type == "Elemental" and Dice() == 1:     r += "\n - Darkvision : 60ft."
     elif Type == "Elemental" and Dice() == 1:   r += "\n - Blindsight : 30ft."
@@ -1990,6 +1995,9 @@ def Actions(Type=""):
     if Type == "Elemental" and Dice() == 1:     r += "\n - Tremorsense : 60ft."
 
     ## Strengths and Weaknesses
+
+    if Type == "Elemental" and Dice() == 1: r += "\n - Damage Resistances: Acid"
+
     if Type == "Elemental" and Dice() == 1: r += "\n - Damage Resistances: bludgeoning, piercing, and slashing from nonmagical attacks"
 
     if Type == "Elemental" and Dice() == 1:     r += "\n - Damage Resistances: fire"
@@ -2014,6 +2022,8 @@ def Actions(Type=""):
     if Type == "Elemental" and Dice() == 1: r += "\n - Condition Immunities: Restrained"
     if Type == "Elemental" and Dice() == 1: r += "\n - Condition Immunities: Unconscious"
 
+    if Type == "Elemental" and Dice() == 1: r += "\n - Freeze: If the elemental takes cold damage, it partially freezes; its speed is reduced by 20 feet until the end of its next turn."
+
     ## Combat Skills
     if Type == "Elemental" and Dice() == 1:     r += "\n - Multiattack \n\t The elemental makes two simple attacks."
 
@@ -2032,8 +2042,11 @@ def Actions(Type=""):
     if Type == "Elemental" and Dice() == 1:     r += "\n - Siege Monster \n\t The elemental deals double damage to objects and structures."
     if Type == "Elemental" and Dice() == 1:     r += "\n - Water Susceptibility \n\t For every 5 feet the elemental moves in water, or for every gallon of water splashed on it, it takes 1 cold damage."
     if Type == "Elemental" and Dice() == 1:     r += "\n - Water Bound \n\t The Elemental dies if it leaves the water body to which it is bound or if that water is destroyed."
+    if Type == "Elemental" and Dice() == 1:     r += "\n - Whelm (Recharge 4–6). \n\t Each creature in the elemental's space must make a DC 15 Strength saving throw. On a failure, a target takes 13 (2d8 + 4) bludgeoning damage. If it is Large or smaller, it is also grappled (escape DC 14). Until this grapple ends, the target is restrained and unable to breathe unless it can breathe water. If the saving throw is successful, the target is pushed out of the elemental's space. \n\t The elemental can grapple one Large creature or up to two Medium or smaller creatures at one time. At the start of each of the elemental's turns, each target grappled by it takes 13 (2d8 + 4) bludgeoning damage. A creature within 5 feet of the elemental can pull a creature or object out of it by taking an action to make a DC 14 Strength check and succeeding."
 
 
+
+    
     if Type == "Elemental":
         if Dice() == 1:
             r = r + "\n - Death Burst: \n\t When the Elemental dies, it leaves behind a burst of elemental essence that fills a 5-foot-radius sphere centered on its space. \n\t"
@@ -2485,11 +2498,20 @@ def Actions(Type=""):
 
     if Type == "Undead":
         if Dice() == 1:
-            r += "\n Vampire Weaknesses \n\t The undead has the following flaws:"
+            r += "\nVampire Weaknesses \n\t The undead has the following flaws:"
             r += "\n- Forbiddance \n\t The vampire can't enter a residence without an invitation from one of the occupants."
             r += "\n- Harmed by Running Water \n\t The vampire takes 20 acid damage when it ends its turn in running water."
             r += "\n- Stake to the Heart. \n\tThe vampire is destroyed if a piercing weapon made of wood is driven into its heart while it is incapacitated in its resting place."
             r += "\n- Sunlight Hypersensitivity. \n\t The vampire takes 20 radiant damage when it starts its turn in sunlight. While in sunlight, it has disadvantage on attack rolls and ability checks."
+        else:
+            if Dice() == 1:
+                r += "\n- Forbiddance \n\t The undead can't enter a residence without an invitation from one of the occupants."
+            if Dice() == 1:
+                r += "\n- Harmed by Running Water \n\t The undead takes 20 acid damage when it ends its turn in running water."
+            if Dice() == 1:
+                r += "\n- Stake to the Heart. \n\tThe undead is destroyed if a piercing weapon made of wood is driven into its heart while it is incapacitated in its resting place."
+            if Dice() == 1:
+                r += "\n- Sunlight Hypersensitivity. \n\t The undead takes 20 radiant damage when it starts its turn in sunlight. While in sunlight, it has disadvantage on attack rolls and ability checks."
 
     if Type == "Undead" and Dice() == 1:    r += "\n - Sunlight Weakness \n\t While in sunlight, the undead has disadvantage on attack rolls, ability checks, and saving throws."
     if Type == "Undead" and Dice() == 1:    r += "\n - Sunlight Sensitivity  \n\t While in sunlight, the undead has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
@@ -2528,10 +2550,11 @@ def Actions(Type=""):
 
     if Type == "Undead" and Dice() == 1:    r += "\n - Life Drain \n\t Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 5 (1d6 + 2) necrotic damage. The target must succeed on a DC 13 Constitution saving throw or its hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0. \n\t A humanoid slain by this attack rises 24 hours later as a zombie under the wight's control, unless the humanoid is restored to life or its body is destroyed. The wight can have no more than twelve zombies under its control at one time."
     if Type == "Undead" and Dice() == 1:
-        r += "\n - Bite \n\t Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 5 (1d6 + 2) necrotic damage. The target must succeed on a DC 13 Constitution saving throw or its hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0. \n\t A humanoid slain by this attack rises 24 hours later as a zombie under the wight's control, unless the humanoid is restored to life or its body is destroyed. The wight can have no more than twelve zombies under its control at one time."
+        r += "\n - Bite \n\t Melee Weapon Attack: Reach 5 ft., one creature. Hit: 5 (1d6 + 2) necrotic damage. The target must succeed on a DC 13 Constitution saving throw or its hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0. \n\t A humanoid slain by this attack rises 24 hours later as a zombie under the wight's control, unless the humanoid is restored to life or its body is destroyed. The wight can have no more than twelve zombies under its control at one time."
         r += "\n - Grappling Attack \n\t When the undead makes a simple attack, it can grapple the creature instead of dealing damage (escape DC 10+%STR)." 
-
-
+    elif Type == "Undead" and Dice() == 1:
+        r += "\n - Bite \n\t Melee Weapon Attack: Reach 5 ft., one willing creature, or a creature that is grappled by the undead, incapacitated, or restrained. Hit: 6 (1d6 + %CON) piercing damage plus 7 (2d6) necrotic damage. The target's hit point maximum is reduced by an amount equal to the necrotic damage taken, and the undead regains hit points equal to that amount. The reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0.
+        
     
 
     # NOBLE
