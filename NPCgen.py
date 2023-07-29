@@ -1552,12 +1552,14 @@ def Magic(Lvl, race=Race(), background=Background()):
 
         # UNDEAD
         if race == "Undead":
+            if Dice(8) == 1 and not ("Create Specter" in cantrip):             cantrip += "\n - Create Specter \n\t The undead targets a humanoid within 10 feet of it that has been dead for no longer than 1 minute and died violently. The target's spirit rises as a specter in the space of its corpse or in the nearest unoccupied space. The specter is under the undead's control. The undead can have no more than seven specters under its control at one time." 
             if Dice(8) == 1 and not ("Corrupting Touch" in cantrip):           cantrip += "\n - Corrupting Touch \n\t Melee Spell Attack: reach 5 ft., one target. Hit: 10 (3d6) necrotic damage."
             if Dice(8) == 1 and not ("Dreadful Glare" in cantrip):             cantrip += "\n - Dreadful Glare. \n\t The undead targets one creature it can see within 60 feet of it. If the target can see the undead, it must succeed on a DC [10+%CHA] Wisdom saving throw against this magic or become frightened until the end of the undead's next turn. If the target fails the saving throw by 5 or more, it is also paralyzed for the same duration. A target that succeeds on the saving throw is immune to the Dreadful Glare of all undead for the next 24 hours."
             if Dice(8) == 1 and not ("Forceful Slam" in cantrip):              cantrip += "\n - Forceful Slam \n\t Magic melee attack. Hit: 10 (3d6) force damage. "
             if Dice(8) == 1 and not ("Fire Ray" in cantrip):                   cantrip += "\n - Fire Ray \n\t Magic attack. Range 30 ft. Hit: 10 (3d6) fire damage. "
             if Dice(8) == 1 and not ("Horrifying Visage" in cantrip):          cantrip += "\n - Horrifying Visage \n\t Each non-undead creature within 60 feet of the Undead that can see them must succeed on a DC [10+%CHA] Wisdom saving throw or be frightened for 1 minute. A frightened target can repeat the saving throw at the start of each of its turns, with disadvantage if the Undead is within line of sight, ending the effect on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to the Undead's Horrifying Visage for the next 24 hours. "
-            if Dice(8) == 1 and not ("Life Drain" in cantrip):                 cantrip += "\n - Life Drain \n\t On an attack hit the target's Hit Points Maximum is reduced by the damage dealt. The target dies if this reduces its Hit Points Maximum to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. "
+            if Dice(8) == 1 and not ("Life Drain" in cantrip):                 cantrip += "\n - Life Drain \n\t On an hit, the target's Hit Points Maximum is reduced by the damage dealt. The target dies if this reduces its Hit Points Maximum to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. "
+            elif Dice(8) == 1 and not ("Life Drain" in cantrip):               cantrip += "\n - Life Drain \n\t On an hit, the target makes a Constitution saving throw. On a fail, the target takes 4d6 necrotic damage. The target's Hit Points Maximum is reduced by the necrotic damage dealt. The target dies if this reduces its Hit Points Maximum to 0. Otherwise, the reduction lasts until the target finishes a long rest. "
             if Dice(8) == 1 and not ("Mage Hand" in cantrip):                  cantrip += "\n - Mage Hand "
             if Dice(8) == 1 and not ("Rotting Fist" in cantrip):               cantrip += "\n - Rotting Fist. \n\t Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) bludgeoning damage plus 10 (3d6) necrotic damage. If the target is a creature, it must succeed on a DC [10+%CHA] Constitution saving throw or be cursed with undead rot. The cursed target can't regain hit points, and its hit point maximum decreases by 10 (3d6) for every 24 hours that elapse. If the curse reduces the target's hit point maximum to 0, the target dies, and its body turns to dust. The curse lasts until removed by the remove curse spell or other magic."
             if Dice(8) == 1 and not ("Strength Drain" in cantrip):             cantrip += "\n - Strength Drain \n\t On an attack hit the target's Strength score is reduced by 1d4. The target dies if this reduces its Strength to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. \n\t If a non-evil humanoid dies from this attack, a new shadow rises from the corpse 1d4 hours later."
@@ -1982,7 +1984,8 @@ def Actions(Type=""):
 
     if Type == "Elemental" and Dice() == 1: r += "\n - Burrow : 30ft."
 
-    if Type == "Elemental" and Dice() == 1: r += "\n - Swim : 60ft."
+    if Type == "Elemental" and Dice() == 1:     r += "\n - Swim : 30ft."
+    elif Type == "Elemental" and Dice() == 1:   r += "\n - Swim : 60ft."
 
     if Type == "Elemental" and Dice() == 1: r += " Air Form. \n\t The elemental can enter a hostile creature's space and stop there. It can move through a space as narrow as 1 inch wide without squeezing."
 
@@ -1990,7 +1993,8 @@ def Actions(Type=""):
 
     ## Senses
     if Type == "Elemental" and Dice() == 1:     r += "\n - Darkvision : 60ft."
-    elif Type == "Elemental" and Dice() == 1:   r += "\n - Blindsight : 30ft."
+
+    if Type == "Elemental" and Dice() == 1:     r += "\n - Blindsight : 30ft."
 
     if Type == "Elemental" and Dice() == 1:     r += "\n - Tremorsense : 60ft."
 
@@ -1999,6 +2003,7 @@ def Actions(Type=""):
     if Type == "Elemental" and Dice() == 1: r += "\n - Damage Resistances: Acid"
 
     if Type == "Elemental" and Dice() == 1: r += "\n - Damage Resistances: bludgeoning, piercing, and slashing from nonmagical attacks"
+    elif Type == "Elemental" and Dice() == 1: r += "\n - Damage Resistances: bludgeoning, piercing, and slashing from nonmagical attacks that aren't adamantine."
 
     if Type == "Elemental" and Dice() == 1:     r += "\n - Damage Resistances: fire"
     elif Type == "Elemental" and Dice() == 1:   r += "\n - Damage Immunities: fire"
@@ -2026,6 +2031,7 @@ def Actions(Type=""):
 
     ## Combat Skills
     if Type == "Elemental" and Dice() == 1:     r += "\n - Multiattack \n\t The elemental makes two simple attacks."
+    elif Type == "Elemental" and Dice() == 1:   r += "\n - Multiattack \n\t The elemental makes three simple attacks."
 
     if Type == "Elemental" and Dice() == 1:     r += "\n - Earth Glide \n\t The elemental can burrow through nonmagical, unworked earth and stone. While doing so, the elemental doesn't disturb the material it moves through."
     if Type == "Elemental" and Dice() == 1:     r += "\n - False Appereance. \n\t While motionless, the elemental is indistinguishable from a natural feature, such as ponds, rocks, statues, etc"
@@ -2040,6 +2046,8 @@ def Actions(Type=""):
     elif Type == "Elemental" and Dice() == 1:   r += "\n - Ignited Illumination. \n\t As a bonus action, the Elemental can set itself ablaze or extinguish its flames. While ablaze, the Elemental sheds bright light in a 10-foot radius and dim light for an additional 10 feet."
     if Type == "Elemental" and Dice() == 1:     r += "\n - Invisible in Water \n\t The Elemental is invisible while fully immersed in water."
     if Type == "Elemental" and Dice() == 1:     r += "\n - Siege Monster \n\t The elemental deals double damage to objects and structures."
+    if Type == "Elemental" and Dice() == 1:     r += "\n - Stone Camouflage. \n\t The elemental has advantage on Dexterity (Stealth) checks made to hide in rocky terrain."
+    if Type == "Elemental" and Dice() == 1:     r += "\n - Treasure Sense. \n\t The elemental can pinpoint, by scent, the location of precious metals and stones, such as coins and gems, within 60 feet of it."
     if Type == "Elemental" and Dice() == 1:     r += "\n - Water Susceptibility \n\t For every 5 feet the elemental moves in water, or for every gallon of water splashed on it, it takes 1 cold damage."
     if Type == "Elemental" and Dice() == 1:     r += "\n - Water Bound \n\t The Elemental dies if it leaves the water body to which it is bound or if that water is destroyed."
     if Type == "Elemental" and Dice() == 1:     r += "\n - Whelm (Recharge 4–6). \n\t Each creature in the elemental's space must make a DC 15 Strength saving throw. On a failure, a target takes 13 (2d8 + 4) bludgeoning damage. If it is Large or smaller, it is also grappled (escape DC 14). Until this grapple ends, the target is restrained and unable to breathe unless it can breathe water. If the saving throw is successful, the target is pushed out of the elemental's space. \n\t The elemental can grapple one Large creature or up to two Medium or smaller creatures at one time. At the start of each of the elemental's turns, each target grappled by it takes 13 (2d8 + 4) bludgeoning damage. A creature within 5 feet of the elemental can pull a creature or object out of it by taking an action to make a DC 14 Strength check and succeeding."
@@ -2243,8 +2251,11 @@ def Actions(Type=""):
     if Type == "Fiend":
         if Dice(2) == 1:    r += "\n- Darkvision: \t 60 ft."
         elif Dice(2) == 1:  r += "\n- Darkvision: \t 120 ft."
-        if Dice() == 1:     r += "\n- Blindsight: \t 30 ft."
+        
+        if Dice() == 1:     r += "\n- Blindsight: \t 10 ft."
+        elif Dice() == 1:   r += "\n- Blindsight: \t 30 ft."
         elif Dice() == 1:   r += "\n- Blindsight: \t 60 ft."
+        
         if Dice() == 1:     r += "\n- Devil's Sight. \n\t Magical darkness doesn't impede the Fiend's darkvision."
 
     if Type == "Fiend" and Dice(12) == 1:   r += "\n- Keen Hearing and Smell. \n\t The fiend has advantage on Wisdom (Perception) checks that rely on hearing or smell."
@@ -2267,6 +2278,9 @@ def Actions(Type=""):
     if Type == "Fiend" and Dice(10) == 1:     r += "\n- Incorporeal Movement. \n\t The demon can move through other creatures and objects as if they were difficult terrain. It takes 5 (1d10) force damage if it ends its turn inside an object."
 
     if Type == "Fiend" and Dice(10) == 1:     r += "\n- Teleport. \n\t The fiend magically teleports, along with any equipment it is wearing or carrying, up to 60 feet to an unoccupied space it can see."
+
+    if Type == "Fiend" and Dice(10) == 1:
+        r += "\n- Spider Climb. \n\t The fiend can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
 
 
     # Strengths and Weaknesses
@@ -2330,6 +2344,7 @@ def Actions(Type=""):
     if Type == "Fiend" and Dice(12) == 1:       r += "\n- Horned One's Call. \n\t When the fiend targets only one creature within all their turn's attacks, it can choose one ally it can see within 30 feet. That ally can use its reaction to make one melee attack against a target of its choice."
     if Type == "Fiend" and Dice(12) == 1:       r += "\n- Spawn of the Grave. \n\t At the end of each of the fiend's turns, each undead of its choice that it can see within 30 feet gains 10 temporary hit points, provided the fiend isn't incapacitated. \n\t In addition, this fiend can use its Innate Spellcasting ability to cast animate dead three times per day."
     if Type == "Fiend" and Dice(12) == 1:       r += "\n- Magic Weapons. \n\t The fiend's weapon attacks are magical."
+    if Type == "Fiend" and Dice(12) == 1:       r += "\n- Fiendish Noise. \n\t The fiend produces a horrid sound to which demons are immune. Any other creature that starts its turn with in 30 feet of the fiend must succeed on a DC[11+%CON] Constitution saving throw or fall unconscious for 10 minutes. A creature that can't hear the drone automatically succeeds on the save. The effect on the creature ends if it takes damage or if another creature takes an action to splash it with holy water. If a creature's saving throw is successful or the effect ends for it, it is immune to the noise for the next 24 hours."
     
     
 
@@ -2342,17 +2357,25 @@ def Actions(Type=""):
     # MONSTROSITIES
     # Senses
     if Type == "Monstrosity":
-        if Dice() == 1:     r += "\n - Darkvision: 60 ft.\n"
-        elif Dice() == 1:   r += "\n - Blindsight: 30 ft.\n"
+        if Dice() == 1:
+            r += "\n - Darkvision: 60 ft.\n"
+        
+        if Dice() == 1:
+            r += "\n - Blindsight: 30 ft.\n"
         elif Dice() == 1:
             r += "\n - Blindsight: 60 ft.\n"
             if Dice() == 1:
                 r += "\n - Echolocation: The monster can't use its blindsight while deafened.\n"
                 r += "\n - Keen Hearing: The monster has advantage on Wisdom (Perception) checks that rely on hearing.\n"
+
         if Dice() == 1: r += "\n - Tremorsense: 60 ft.\n"
             
-    if Type == "Monstrosity" and Dice() == 1:        r += "\n- Keen Sight.\n\t The monstrosity has advantage on Wisdom (Perception) checks that rely on sight.\n"
-    if Type == "Monstrosity" and Dice() == 1:        r += "\n- Keen Smell.\n\t The monstrosity has advantage on Wisdom (Perception) checks that rely on smell.\n"
+    if Type == "Monstrosity":
+        if Dice() == 1:
+            r += "\n- Keen Sight.\n\t The monstrosity has advantage on Wisdom (Perception) checks that rely on sight.\n"
+
+        if Dice() == 1:
+            r += "\n- Keen Smell.\n\t The monstrosity has advantage on Wisdom (Perception) checks that rely on smell.\n"
 
     # Movement
     if Type == "Monstrosity":
@@ -2379,7 +2402,10 @@ def Actions(Type=""):
     if Type == "Monstrosity" and Dice() == 1:   r += "\n- Spider Climb.\n\t The Monstrosity can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.\n"
 
     # Strengths and weaknesses
-    if Type == "Monstrosity" and Dice() == 1:   r += "\n- Damage Immunities: \t cold"
+    if Type == "Monstrosity":
+        if Dice() == 1:   r += "\n- Damage Immunities: \t cold"
+        if Dice() == 1:   r += "\n- Damage Immunities: \t fire"
+        
     if Type == "Monstrosity" and Dice() == 1:   r += "\n- Fear of Fire. \n\t If the Monstrosity takes fire damage, it has disadvantage on attack rolls and ability checks until the end of its next turn."
 
     # Fight skills
@@ -2389,6 +2415,7 @@ def Actions(Type=""):
     if Type == "Monstrosity" and Dice(8) == 1:       r += "\n- Deadly Leap.\n\t  If the monstrosity jumps at least 15 feet as part of its movement, it can then use this action to land on its feet in a space that contains one or more other creatures. Each of those creatures must succeed on a DC [11+%STR] Strength or Dexterity saving throw (target's choice) or be knocked prone and take 14 (3d6 + %STR) bludgeoning damage plus 14 (3d6 + %STR) slashing damage. On a successful save, the creature takes only half the damage, isn't knocked prone, and is pushed 5 feet out of the monster's space into an unoccupied space of the creature's choice. If no unoccupied space is within range, the creature instead falls prone in the monster's space."
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- False Appearance \n\t While the Monstrosity remains motionless, it is indistinguishable from a natural element, ordinary object, or innofensive creature."
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Grappler. \n\t On a simple melee attack, the target is grappled,  [DC 10+%STR]"
+    if Type == "Monstrosity" and Dice() == 1:        r += "\n- Heated Body. \n\t A creature that touches the monstrosity or hits it with a melee attack while within 5 feet of it takes 7 (2d6) fire damage."
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Intoxicating Touch. \n\t On a simple melee attack, The target is magically cursed for 1 hour. Until the curse ends, the target has disadvantage on Wisdom saving throws and all ability checks."
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Multiattack. \n\t The monstrosity makes two Simple attacks."
     if Type == "Monstrosity":
