@@ -272,6 +272,7 @@ def FeyName():
 
 def GiantName():
     Names = [
+        "Cyclops",
         "Ogre",
         "Troll",
         ""]
@@ -290,6 +291,7 @@ def GoblinName():
 def MonstrosityName():
     Names = [
         "Basilisk",
+        "Chimera",
         "Displacer",
         "Doppelganger",
         "Gorgon",
@@ -754,8 +756,9 @@ def Language(race=Race(), background=Background()):
         if Dice(2) == 1 and not ("Common" in l):            l += "Common. "
         if Dice() == 1 and not ("Undercommon" in l):        l += "Undercommon. "
         if Dice() == 1 and not ("Deep Speech" in l):        l += "Deep Speech. "
-        if Dice(8) == 1 and not ("Sylvan" in l):             l += "Sylvan. "
+        if Dice(8) == 1 and not ("Sylvan" in l):            l += "Sylvan. "
         if Dice(8) == 1 and not ("Abyssal" in l):           l += "Abyssal. "
+        if Dice(12) == 1 and not ("Draconic" in l):         l += "Draconic. "
         
     if race == "Ooze":
         l += "Telepathy. "
@@ -1507,15 +1510,27 @@ def Magic(Lvl, race=Race(), background=Background()):
 
         #MONSTROSITIES.
         ## At will:
-        if race == "Monstrosity" and Dice() == 1 and not ("Acid Spray" in cantrip):           cantrip += "\n - Acid Spray (Recharge 6): \n\t The Monstrosity spits acid in a line that is 30 feet long and 5 feet wide, provided that it has no creature grappled. Each creature in that line must make a DC [10+%Str] Dexterity saving throw, taking 10 (3d6) acid damage on a failed save, or half as much damage on a successful one."
-        if race == "Monstrosity" and Dice() == 1 and not ("Major Image" in cantrip):          cantrip += "\n - Major Image."
-        if race == "Monstrosity" and Dice() == 1 and not ("Luring Song" in cantrip):          cantrip += "\n - Luring Song: \n\t The monstrosity sings a magical melody. Every humanoid and giant within 300 feet of the monstrosity that can hear the song must succeed on a DC [10+%Cha] Wisdom saving throw or be charmed until the song ends. The monstrosity must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time. The song ends if the monstrosity is incapacitated. While charmed by the monstrosity, a target is incapacitated and ignores the songs of other monstrosities. If the charmed target is more than 5 feet away from the monstrosity, the target must move on its turn toward the monstrosity by the most direct route. It doesn't avoid opportunity attacks, but before moving into damaging terrain, such as lava or a pit, and whenever it takes damage from a source other than the monstrosity, a target can repeat the saving throw. A creature can also repeat the saving throw at the begguining of each of its turns. If a creature's saving throw is successful, the effect ends on it. A target that successfully saves is immune to this monstrosity's song for the next 24 hours."
-        if race == "Monstrosity" and Dice(9) == 1 and not ("Petrifying Gaze" in cantrip):      cantrip += "\n - Petrifying Gaze: \n\t If a creature starts its turn within 30 feet of the monstrosity and the two of them can see each other, the monstrosity can force the creature to make a DC [10+%CON] Constitution saving throw if the monstrosity isn't incapacitated. On a failed save, the creature magically begins to turn to stone and is restrained. It must repeat the saving throw at the start of its next turn. On a success, the effect ends. On a third failure, the creature is petrified until freed by the greater restoration spell or other magic. \n\t A creature that isn't surprised can avert its eyes to avoid the saving throw at the start of its turn. If it does so, it can't see the monstrosity until the start of its next turn, when it can avert its eyes again. If it looks at the monstrosity in the meantime, it must immediately make the save. \n\t If the monstrosity sees its reflection within 30 feet of it in bright light, it mistakes itself for a rival and targets itself with its gaze."
-        if race == "Monstrosity" and Dice(9) == 1 and not ("Confusing Gaze" in cantrip):        cantrip += "\n - Confusing Gaze: \n\t When a creature starts its turn within 30 feet of the monstrosity and is able to see the monstrosity's eyes, the monstrosity can magically force it to make a DC [11+%CON] Charisma saving throw, unless the monstrosity is incapacitated. \n\t On a failed saving throw, the creature can't take reactions until the start of its next turn and rolls a d8 to determine what it does during that turn. On a 1 to 4, the creature does nothing. On a 5 or 6, the creature takes no action but uses all its movement to move in a random direction. On a 7 or 8, the creature makes one melee attack against a random creature, or it does nothing if no creature is within reach. \n\t Unless surprised, a creature can avert its eyes to avoid the saving throw at the start of its turn. If the creature does so, it can't see the monstrosity until the start of its next turn, when it can avert its eyes again. If the creature looks at the monstrosity in the meantime, it must immediately make the save." 
-        if race == "Monstrosity" and Dice(9) == 1 and not ("Petrifying Breath" in cantrip):    cantrip += "\n - Petrifying Breath (Recharge 5-6): \n\t The monstrosity exhales petrifying gas in a 30-foot cone. Each creature in that area must succeed on a Constitution saving throw (against the creature's Spellsave DC). On a failed save, a target begins to turn to stone and is restrained. The restrained target must repeat the saving throw at the start of its next turn. On a success, the effect ends on the target. On a failure, the target is petrified until freed by the greater restoration spell or other magic."
-        if race == "Monstrosity" and Dice() == 1 and not ("Read Thoughts" in cantrip):        cantrip += "\n - Read Thoughts: \n\t The monstrosity magically reads the surface thoughts of one creature within 60 feet of it. The effect can penetrate barriers, but 3 feet of wood or dirt, 2 feet of stone, 2 inches of metal, or a thin sheet of lead blocks it. While the target is in range, the monstrosity can continue reading its thoughts, as long as the monstrosity's concentration isn't broken (as if concentrating on a spell). While reading the target's mind, the monstrosity has advantage on Wisdom (Insight) and Charisma (Deception, Intimidation, and Persuasion) checks against the target."
-        if race == "Monstrosity" and Dice() == 1 and not ("Chilling Gaze" in cantrip):        cantrip += "\n - Chilling Gaze: \n\t The monstrosity targets one creature it can see within 30 feet of it. If the target can see the monstrosity, the target must succeed on a DC [10+%CON] Constitution saving throw against this magic or take 10 (3d6) cold damage and then be paralyzed for 1 minute, unless it is immune to cold damage. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success. If the target's saving throw is successful, or if the effect ends on it, the target is immune to the Chilling Gaze of all monstrosities for 1 hour."
-        if race == "Monstrosity" and Dice() == 1 and not ("Disguise Self" in cantrip):        cantrip += "\n - Disguise self (humanoid form) Aura: \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
+        if race == "Monstrosity":
+            if Dice() == 1 and not ("Acid Spray" in cantrip):
+                cantrip += "\n - Acid Spray (Recharge 6): \n\t The Monstrosity spits acid in a line that is 30 feet long and 5 feet wide, provided that it has no creature grappled. Each creature in that line must make a DC [10+%Str] Dexterity saving throw, taking 10 (3d6) acid damage on a failed save, or half as much damage on a successful one."
+            if Dice(9) == 1 and not ("Confusing Gaze" in cantrip):
+                cantrip += "\n - Confusing Gaze: \n\t When a creature starts its turn within 30 feet of the monstrosity and is able to see the monstrosity's eyes, the monstrosity can magically force it to make a DC [11+%CON] Charisma saving throw, unless the monstrosity is incapacitated. \n\t On a failed saving throw, the creature can't take reactions until the start of its next turn and rolls a d8 to determine what it does during that turn. On a 1 to 4, the creature does nothing. On a 5 or 6, the creature takes no action but uses all its movement to move in a random direction. On a 7 or 8, the creature makes one melee attack against a random creature, or it does nothing if no creature is within reach. \n\t Unless surprised, a creature can avert its eyes to avoid the saving throw at the start of its turn. If the creature does so, it can't see the monstrosity until the start of its next turn, when it can avert its eyes again. If the creature looks at the monstrosity in the meantime, it must immediately make the save." 
+            if Dice() == 1 and not ("Chilling Gaze" in cantrip):
+                cantrip += "\n - Chilling Gaze: \n\t The monstrosity targets one creature it can see within 30 feet of it. If the target can see the monstrosity, the target must succeed on a DC [10+%CON] Constitution saving throw against this magic or take 10 (3d6) cold damage and then be paralyzed for 1 minute, unless it is immune to cold damage. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success. If the target's saving throw is successful, or if the effect ends on it, the target is immune to the Chilling Gaze of all monstrosities for 1 hour."
+            if Dice() == 1 and not ("Disguise Self" in cantrip):
+                cantrip += "\n - Disguise self (humanoid form) Aura: \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
+            if Dice() == 1 and not ("Fire Breath" in cantrip):
+                cantrip += "\n -  Fire Breath (Recharge 5–6). \n\t The monstrosity exhales fire in a 15-foot cone. Each creature in that area must make a DC[11+%CON] Dexterity saving throw, taking 31 (7d8) fire damage on a failed save, or half as much damage on a successful one."
+                
+            if Dice() == 1 and not ("Luring Song" in cantrip):
+                cantrip += "\n - Luring Song: \n\t The monstrosity sings a magical melody. Every humanoid and giant within 300 feet of the monstrosity that can hear the song must succeed on a DC [10+%Cha] Wisdom saving throw or be charmed until the song ends. The monstrosity must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time. The song ends if the monstrosity is incapacitated. While charmed by the monstrosity, a target is incapacitated and ignores the songs of other monstrosities. If the charmed target is more than 5 feet away from the monstrosity, the target must move on its turn toward the monstrosity by the most direct route. It doesn't avoid opportunity attacks, but before moving into damaging terrain, such as lava or a pit, and whenever it takes damage from a source other than the monstrosity, a target can repeat the saving throw. A creature can also repeat the saving throw at the begguining of each of its turns. If a creature's saving throw is successful, the effect ends on it. A target that successfully saves is immune to this monstrosity's song for the next 24 hours."
+
+            if Dice() == 1 and not ("Major Image" in cantrip):          cantrip += "\n - Major Image."
+            if Dice(9) == 1 and not ("Petrifying Breath" in cantrip):    cantrip += "\n - Petrifying Breath (Recharge 5-6): \n\t The monstrosity exhales petrifying gas in a 30-foot cone. Each creature in that area must succeed on a Constitution saving throw (against the creature's Spellsave DC). On a failed save, a target begins to turn to stone and is restrained. The restrained target must repeat the saving throw at the start of its next turn. On a success, the effect ends on the target. On a failure, the target is petrified until freed by the greater restoration spell or other magic."
+            if Dice(9) == 1 and not ("Petrifying Gaze" in cantrip):      cantrip += "\n - Petrifying Gaze: \n\t If a creature starts its turn within 30 feet of the monstrosity and the two of them can see each other, the monstrosity can force the creature to make a DC [10+%CON] Constitution saving throw if the monstrosity isn't incapacitated. On a failed save, the creature magically begins to turn to stone and is restrained. It must repeat the saving throw at the start of its next turn. On a success, the effect ends. On a third failure, the creature is petrified until freed by the greater restoration spell or other magic. \n\t A creature that isn't surprised can avert its eyes to avoid the saving throw at the start of its turn. If it does so, it can't see the monstrosity until the start of its next turn, when it can avert its eyes again. If it looks at the monstrosity in the meantime, it must immediately make the save. \n\t If the monstrosity sees its reflection within 30 feet of it in bright light, it mistakes itself for a rival and targets itself with its gaze."
+            if Dice() == 1 and not ("Read Thoughts" in cantrip):        cantrip += "\n - Read Thoughts: \n\t The monstrosity magically reads the surface thoughts of one creature within 60 feet of it. The effect can penetrate barriers, but 3 feet of wood or dirt, 2 feet of stone, 2 inches of metal, or a thin sheet of lead blocks it. While the target is in range, the monstrosity can continue reading its thoughts, as long as the monstrosity's concentration isn't broken (as if concentrating on a spell). While reading the target's mind, the monstrosity has advantage on Wisdom (Insight) and Charisma (Deception, Intimidation, and Persuasion) checks against the target."
+
+
         if race == "Monstrosity":
             if Dice() == 1 and not ("Paralyzing Ray" in cantrip):   cantrip += "\n - Paralyzing Ray \n\t The targeted creature must succeed on a DC [11+%CON] Constitution saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
             if Dice() == 1 and not ("Fear Ray" in cantrip):         cantrip += "\n - Fear Ray \n\t The targeted creature must succeed on a DC [11+%CON] Wisdom saving throw or be frightened for 1 minute. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
@@ -2075,8 +2090,12 @@ def Actions(Type=""):
     # GIANTS
     
     ## Senses
-    if Type == "Giant" and Dice(2) == 1:    r += "\n Darkvision: 60ft"
-    if Type == "Giant" and Dice() == 1:     r += "\n Keen Smell \n\t The giant has advantage on Wisdom (Perception) checks that rely on smell."
+    if Type == "Giant" and Dice(2) == 1: r += "\n Darkvision: 60ft"
+        
+    if Type == "Giant" and Dice() == 1: r += "\n Keen Smell \n\t The giant has advantage on Wisdom (Perception) checks that rely on smell."
+
+    if Type == "Giant" and Dice() == 1: r += "\n Poor Depth Perception. \n\t  The giant has disadvantage on any attack roll against a target more than 30 feet away."
+    
     
     ## Movement
     if Type == "Giant" and Dice() == 1:     r += "\n Speed: 40ft"
@@ -2088,8 +2107,13 @@ def Actions(Type=""):
     elif Type == "Giant" and Dice() == 1:   r += "\n Regeneration \n\t The giant regains 10 hit points at the start of its turn. If the giant takes " + Damage() + " damage, this trait doesn't function at the start of the giant's next turn. The giant dies only if it starts its turn with 0 hit points and doesn't regenerate."
 
     ## Combat
+    if Type == "Giant" and Dice() == 1:     r += "\n Multiattack \n\t The giant makes two simple attacks."
+    
     if Type == "Giant" and Dice() == 1:     r += "\n Greatclub \n\t reach 10 ft., one target. Hit: 18 (3d8 + %STR) bludgeoning damage."
-    if Type == "Giant" and Dice() == 1:     r += "\n Rock \n\t range 60/240 ft., one target. Hit: 21 (3d10 + %STR) bludgeoning damage."
+
+    if Type == "Giant":
+        if Dice() == 1:     r += "\n Rock \n\t range 30/120 ft., one target. Hit: 28 (4d10 + %STR) bludgeoning damage."
+        elif Dice() == 1:   r += "\n Rock \n\t range 60/240 ft., one target. Hit: 21 (3d10 + %STR) bludgeoning damage."
     if Type == "Giant" and Dice() == 1:     r += "\n Squash \n\t Some giants like to hurl themselves bodily at smaller foes and crush them beneath their bulk. Melee Weapon Attack: Reach 5 ft., one Medium or Smaller creature. Hit: 26 (6d6 + %STR) bludgeoning damage, the giant lands prone in the target's space, and the target is grappled (escape DC 10+%STR). Until this grapple ends, the target is prone. The grapple ends early if the giant stands up."
 
 
@@ -2275,9 +2299,11 @@ def Actions(Type=""):
     if Type == "Fiend":
         if Dice() == 1:     r += "\n- Climb: 40 ft."
 
-    if Type == "Fiend" and Dice(10) == 1:     r += "\n- Incorporeal Movement. \n\t The demon can move through other creatures and objects as if they were difficult terrain. It takes 5 (1d10) force damage if it ends its turn inside an object."
+    if Type == "Fiend" and Dice(10) == 1:
+        r += "\n- Incorporeal Movement. \n\t The demon can move through other creatures and objects as if they were difficult terrain. It takes 5 (1d10) force damage if it ends its turn inside an object."
 
-    if Type == "Fiend" and Dice(10) == 1:     r += "\n- Teleport. \n\t The fiend magically teleports, along with any equipment it is wearing or carrying, up to 60 feet to an unoccupied space it can see."
+    if Type == "Fiend" and Dice(10) == 1:
+        r += "\n- Teleport. \n\t The fiend magically teleports, along with any equipment it is wearing or carrying, up to 60 feet to an unoccupied space it can see."
 
     if Type == "Fiend" and Dice(10) == 1:
         r += "\n- Spider Climb. \n\t The fiend can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
@@ -2346,7 +2372,7 @@ def Actions(Type=""):
     if Type == "Fiend" and Dice(12) == 1:       r += "\n- Magic Weapons. \n\t The fiend's weapon attacks are magical."
     if Type == "Fiend" and Dice(12) == 1:       r += "\n- Fiendish Noise. \n\t The fiend produces a horrid sound to which demons are immune. Any other creature that starts its turn with in 30 feet of the fiend must succeed on a DC[11+%CON] Constitution saving throw or fall unconscious for 10 minutes. A creature that can't hear the drone automatically succeeds on the save. The effect on the creature ends if it takes damage or if another creature takes an action to splash it with holy water. If a creature's saving throw is successful or the effect ends for it, it is immune to the noise for the next 24 hours."
     
-    
+    if Type == "Fiend" and Dice(12) == 1:       r += "\n- Life Consumtion. \n\t A simple attack deals an extra damage 24 (7d6) necrotic damage, and the target's hit point maximum is reduced by an amount equal to the necrotic damage taken. If this effect reduces a creature's hit point maximum to 0, the creature dies. This reduction to a creature's hit point maximum lasts until the creature finishes a long rest or until it is affected by a spell like greater restoration."
 
 
 
@@ -2417,7 +2443,11 @@ def Actions(Type=""):
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Grappler. \n\t On a simple melee attack, the target is grappled,  [DC 10+%STR]"
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Heated Body. \n\t A creature that touches the monstrosity or hits it with a melee attack while within 5 feet of it takes 7 (2d6) fire damage."
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Intoxicating Touch. \n\t On a simple melee attack, The target is magically cursed for 1 hour. Until the curse ends, the target has disadvantage on Wisdom saving throws and all ability checks."
-    if Type == "Monstrosity" and Dice() == 1:        r += "\n- Multiattack. \n\t The monstrosity makes two Simple attacks."
+    if Type == "Monstrosity":
+        if Dice() == 1:
+            r += "\n- Multiattack. \n\t The monstrosity makes two Simple attacks."
+        elif Dice() == 1:
+            r += "\n- Multiattack. \n\t The monstrosity makes three Simple attacks."
     if Type == "Monstrosity":
         if Dice() == 1:        r += "\n- Shapechanger \n\t The monstrosity can use its action to polymorph into an object or back into its true, amorphous form. Its statistics are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
         elif Dice() == 1:      r += "\n- Shapechanger \n\t The monstrosity can use its action to polymorph into a Small or Medium humanoid it has seen, or back into its true form. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
@@ -2580,7 +2610,7 @@ def Actions(Type=""):
         r += "\n - Bite \n\t Melee Weapon Attack: Reach 5 ft., one creature. Hit: 5 (1d6 + 2) necrotic damage. The target must succeed on a DC 13 Constitution saving throw or its hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0. \n\t A humanoid slain by this attack rises 24 hours later as a zombie under the wight's control, unless the humanoid is restored to life or its body is destroyed. The wight can have no more than twelve zombies under its control at one time."
         r += "\n - Grappling Attack \n\t When the undead makes a simple attack, it can grapple the creature instead of dealing damage (escape DC 10+%STR)." 
     elif Type == "Undead" and Dice() == 1:
-        r += "\n - Bite \n\t Melee Weapon Attack: Reach 5 ft., one willing creature, or a creature that is grappled by the undead, incapacitated, or restrained. Hit: 6 (1d6 + %CON) piercing damage plus 7 (2d6) necrotic damage. The target's hit point maximum is reduced by an amount equal to the necrotic damage taken, and the undead regains hit points equal to that amount. The reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0.
+        r += "\n - Bite \n\t Melee Weapon Attack: Reach 5 ft., one willing creature, or a creature that is grappled by the undead, incapacitated, or restrained. Hit: 6 (1d6 + %CON) piercing damage plus 7 (2d6) necrotic damage. The target's hit point maximum is reduced by an amount equal to the necrotic damage taken, and the undead regains hit points equal to that amount. The reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0."
         
     
 
