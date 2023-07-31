@@ -1223,6 +1223,12 @@ def Magic(Lvl, race=Race(), background=Background()):
     # Warrior
     
     # Warlock
+        if background == "Warlock" and Dice() == 1 and not ("Poison Spray" in cantrip):
+            cantrip += "\n- Poison Spray"
+            
+        if background == "Warlock" and Dice() == 1 and not ("Thaumaturgy" in cantrip):
+            cantrip += "\n- Thaumaturgy"
+
         if background == "Warlock" and Dice() == 1 and not ("Magic Missile" in first):
             first += "\n- Magic Missile"
             slots1 += Dice()
@@ -1231,19 +1237,56 @@ def Magic(Lvl, race=Race(), background=Background()):
             first += "\n- Shield"
             slots1 += Dice()
 
+        if background == "Warlock" and Dice() == 1 and not ("Bane" in first):
+            first += "\n- Bane"
+            slots1 += Dice()
+
+        if background == "Warlock" and Dice() == 1 and not ("Detect Magic" in first):
+            first += "\n- Detect Magic"
+            slots1 += Dice()
+            
+        if background == "Warlock" and Dice() == 1 and not ("Sanctuary" in first):
+            first += "\n- Sanctuary"
+            slots1 += Dice()
+
+
         if background == "Warlock" and Dice() == 1 and not ("Blur" in second):
             second += "\n- Blur"
+            slots2 += Dice(5)
+
+        if background == "Warlock" and Dice() == 1 and not ("Hold Person" in second):
+            second += "\n- Hold Person"
             slots2 += Dice(5)
 
         if background == "Warlock" and Dice() == 1 and not ("Flaming Sphere" in second):
             second += "\n- Flaming Sphere"
             slots2 += Dice(5)
 
+        if background == "Warlock" and Dice() == 1 and not ("Silence" in second):
+            second += "\n- Silence"
+            slots2 += Dice(5)
+            
         if background == "Warlock" and Dice() == 1 and not ("Fireball" in third):
             third += "\n- Fireball"
             slots3 += Dice(4)
-            
-    # Witch
+
+        if background == "Warlock" and Dice() == 1 and not ("Clairvoyance" in third):
+            third += "\n- Clairvoyance"
+            slots3 += Dice(4)
+
+        if background == "Warlock" and Dice() == 1 and not ("Dispel Magic" in third):
+            third += "\n- Dispel Magic"
+            slots3 += Dice(4)
+
+        if background == "Warlock" and Dice() == 1 and not ("Divination" in third):
+            fourth += "\n- Divination"
+            slots4 += Dice(3)
+
+        if background == "Warlock" and Dice() == 1 and not ("Freedom Of Movement" in third):
+            fourth += "\n- Freedom Of Movement"
+            slots4 += Dice(3)
+
+        # Witch
         if background == "Witch" and Dice() == 1 and not ("Identify" in first):
             first += "\n- Identify"
             slots1 += Dice()
@@ -1304,11 +1347,17 @@ def Magic(Lvl, race=Race(), background=Background()):
         if race == "Beastfolk" and Dice() == 1 and not ("Mage Hand" in cantrip):        cantrip += "\n- Mage Hand (invisible)."
         if race == "Beastfolk" and Dice() == 1 and not ("Thaumaturgy" in cantrip):      cantrip += "\n- Thaumaturgy."
         if race == "Beastfolk" and Dice() == 1 and not ("Feather Fall" in cantrip):     cantrip += "\n- Feather Fall."
+        if race == "Beastfolk" and Dice() == 1 and not ("Dancing Lights" in cantrip):   cantrip += "\n- Dancing Lights."
+        if race == "Beastfolk" and Dice() == 1 and not ("Poison Spray" in cantrip):     cantrip += "\n- Poison Spray."
+
         if race == "Beastfolk" and Dice() == 1 and not ("Invisibility" in one):     one += "\n- Invisibility (self only)."
         if race == "Beastfolk" and Dice() == 1 and not ("Cure Wounds" in one):      one += "\n- Cure Wounds."
         if race == "Beastfolk" and Dice() == 1 and not ("Enlarge/Reduce" in one):   one += "\n- Enlarge/Reduce."
         if race == "Beastfolk" and Dice() == 1 and not ("Heat Metal" in one):       one += "\n- Heat Metal."
         if race == "Beastfolk" and Dice() == 1 and not ("Mirror Image" in one):     one += "\n- Mirror Image."
+        if race == "Beastfolk" and Dice() == 1 and not ("Darkness" in one):         one += "\n- Darkness."
+        if race == "Beastfolk" and Dice() == 1 and not ("Faerie Fire" in one):      one += "\n- Faerie Fire."
+
         if race == "Beastfolk" and Dice() == 1 and not ("Blur" in two):             two += "\n- Blur."
         if race == "Beastfolk" and Dice() == 1 and not ("Magic Weapon" in two):     two += "\n- Magic Weapon."
 
@@ -1775,6 +1824,12 @@ def Actions(Type=""):
 
     if (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:         r += "\n - Damage Immunities \n\t bludgeoning, piercing, and slashing from nonmagical attacks that aren't silvered."
 
+    if (Type == "Beastfolk") and Dice(12) == 1:
+        r += "\n - Sunlight Sensitivity. \n\t While in sunlight, the drider has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+
+    if (Type == "Beastfolk") and Dice(12) == 1:
+        r += "\n - Fey Ancestry \n\t The beastfolk has advantage on saving throws against being charmed, and magic can't put the beastfolk to sleep."
+
 
     ## Skills
     if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:         r = r + "\n- Illumination.\n\tThe beast sheds bright light in a 10-foot radius and dim light for an additional 10 ft."
@@ -1793,6 +1848,7 @@ def Actions(Type=""):
     if (Type == "Beast" or Type == "Beastfolk"):
         if Dice() == 1:        r += "\n-  Multiattack. \n\t The Beast makes two simple attacks."
         elif Dice() == 1:      r += "\n-  Multiattack. \n\t The Beast makes three simple attacks."
+        elif Dice() == 1:      r += "\n-  Multiattack. \n\t The Beast makes three simple attacks. It can replace two of those for a special attack."
         elif Dice(8) == 1:     r += "\n-  Multiattack. \n\t The Beast makes one special attack and a simple attacks."
 
     if (Type == "Beast" or Type == "Beastfolk") and Dice(9) == 1:
@@ -2896,7 +2952,11 @@ def PlotHook():
         "Having lived among the people of a primeval tribe or clan, I long to return and see how they are faring.",
         "Years ago, tragedy struck the members of an isolated society I befriended, and I will honor them.",
         "I want to learn more about a particular humanoid culture that fascinates me.",
-        "I seek to avenge a clan, tribe, kingdom, or empire that was wiped out.",
+        "I seek to avenge a clan that was wiped out.",
+        "I seek to avenge a tribe that was wiped out.",
+        "I seek to avenge a kingdom that was wiped out.",
+        "I seek to avenge an empire that was wiped out.",
+        "I seek to avenge my kind, that was wiped out.",
         "I have a trinket that I believe is the key to finding a long-lost society.",
         "I will overcome a rival and prove myself their better.",
         "My mistake got someone hurt. Ill never make that mistake again.",
