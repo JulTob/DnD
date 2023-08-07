@@ -1436,18 +1436,31 @@ def Magic(Lvl, race=Race(), background=Background()):
 
         
         # ELEMENTAL.
-        if race == "Elemental" and Dice() == 1 and not ("Whirlwind" in cantrip):            cantrip += "\n- Whirlwind (Recharge 4–6). \n\t Each creature in the elemental's space must make a DC [11+%STR] Strength saving throw. On a failure, a target takes 15 (3d8 + 2) bludgeoning damage and is flung up 20 feet away from the elemental in a random direction and knocked prone. If a thrown target strikes an object, such as a wall or floor, the target takes 3 (1d6) bludgeoning damage for every 10 feet it was thrown. If the target is thrown at another creature, that creature must succeed on a DC 13 Dexterity saving throw or take the same damage and be knocked prone. /n/t If the saving throw is successful, the target takes half the bludgeoning damage and isn't flung away or knocked prone."
-        if race == "Elemental" and Dice() == 1 and not ("Dancing lights" in cantrip):       cantrip += "\n- Dancing lights"
-        if race == "Elemental" and Dice(8) == 1 and not ("Cinder breath" in cantrip):       cantrip += "\n- Cinder breath \n\t (Recharge 6). The Elemental exhales a 15-foot cone of smoldering ash. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw or be blinded until the end of the Elemental's next turn."
-        if race == "Elemental" and Dice(8) == 1 and not ("Blinding breath" in cantrip):     cantrip += "\n- Blinding breath \n\t (Recharge 6). The Elemental exhales a 15-foot cone of blinding dust. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw or be blinded for one minute."
-        if race == "Elemental" and Dice(8) == 1 and not ("Steam breath" in cantrip):        cantrip += "\n- Steam breath \n\t (Recharge 6). The Elemental exhales a 15-foot cone of scalding steam. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw, taking 4 (1d8) fire damage on a failed save, or half as much damage on a successful one."
-        if race == "Elemental" and Dice(8) == 1 and not ("Frost Breath" in cantrip):        cantrip += "\n- Frost Breath \n\t (Recharge 6). The Elemental exhales a 15-foot cone of cold air. Each creature in that area must succeed on a DC [10+%Con] Dexterity saving throw, taking 5 (2d4) cold damage on a failed save, or half as much damage on a successful one."
-        if race == "Elemental" and Dice(8) == 1 and not ("Fire Breath" in cantrip):         cantrip += "\n- Fire Breath \n\t (Recharge 6). The Elemental exhales a 15-foot cone of cold air. Each creature in that area must succeed on a DC [10+%Con] Dexterity saving throw, taking 7 (2d6) fire damage on a failed save, or half as much damage on a successful one."
-        if race == "Elemental" and Dice(8) == 1 and not ("Summon Mephits" in one):              one += "\n- Summon Mephits (1/Day) \n\t The Elemental has a 25 percent chance of summoning 1d4 mephits. A summoned mephit appears in an unoccupied space within 60 feet of its summoner, acts as an ally of its summoner, and can't summon other mephits. It remains for 1 minute, until it or its summoner dies, or until its summoner dismisses it as an action."
-        if race == "Elemental" and Dice() == 1 and not ("Innate Spellcasting" in one):          one += "\n-  Innate Spellcasting (1/Day) \n\t The Elemental can innately cast fog cloud, requiring no material components."
-        if race == "Elemental" and Dice() == 1 and not ("Innate Spellcasting" in one):          one += "\n-  Innate Spellcasting (1/Day) \n\t The Elemental can innately cast heat metal, requiring no material components."
-        if race == "Elemental" and Dice() == 1 and not ("Blur" in one):                         one += "\n- Blur"
-        if race == "Elemental" and Dice() == 1 and not ("Sleep" in one):                        one += "\n- Sleep"
+        if race == "Elemental" and Dice() == 1 and not ("Whirlwind" in cantrip):
+            cantrip += "\n- Whirlwind (Recharge 4–6). \n\t Each creature in the elemental's space must make a DC [11+%STR] Strength saving throw. On a failure, a target takes 15 (3d8 + 2) bludgeoning damage and is flung up 20 feet away from the elemental in a random direction and knocked prone. If a thrown target strikes an object, such as a wall or floor, the target takes 3 (1d6) bludgeoning damage for every 10 feet it was thrown. If the target is thrown at another creature, that creature must succeed on a DC 13 Dexterity saving throw or take the same damage and be knocked prone. /n/t If the saving throw is successful, the target takes half the bludgeoning damage and isn't flung away or knocked prone."
+        if race == "Elemental" and Dice() == 1 and not ("Dancing lights" in cantrip):
+            cantrip += "\n- Dancing lights"
+        if race == "Elemental" and Dice(8) == 1 and not ("Cinder breath" in cantrip):
+            cantrip += "\n- Cinder breath \n\t (Recharge 6). The Elemental exhales a 15-foot cone of smoldering ash. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw or be blinded until the end of the Elemental's next turn."
+        if race == "Elemental" and Dice(8) == 1 and not ("Blinding breath" in cantrip):
+            cantrip += "\n- Blinding breath \n\t (Recharge 6). The Elemental exhales a 15-foot cone of blinding dust. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw or be blinded for one minute."
+        if race == "Elemental" and Dice(8) == 1 and not ("Steam breath" in cantrip):
+            cantrip += "\n- Steam breath \n\t (Recharge 6). The Elemental exhales a 15-foot cone of scalding steam. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw, taking 4 (1d8) fire damage on a failed save, or half as much damage on a successful one."
+        if race == "Elemental" and Dice(8) == 1 and not ("Frost Breath" in cantrip):
+            cantrip += "\n- Frost Breath \n\t (Recharge 6). The Elemental exhales a 15-foot cone of cold air. Each creature in that area must succeed on a DC [10+%Con] Dexterity saving throw, taking 5 (2d4) cold damage on a failed save, or half as much damage on a successful one."
+        if race == "Elemental" and Dice(8) == 1 and not ("Fire Breath" in cantrip):
+            cantrip += "\n- Fire Breath \n\t (Recharge 6). The Elemental exhales a 15-foot cone of cold air. Each creature in that area must succeed on a DC [10+%Con] Dexterity saving throw, taking 7 (2d6) fire damage on a failed save, or half as much damage on a successful one."
+        if race == "Elemental":
+            if Dice(8) == 1 and not ("Summon Mephits" in one):
+                one += "\n- Summon Mephits (1/Day) \n\t The Elemental has a 25 percent chance of summoning 1d4 mephits. A summoned mephit appears in an unoccupied space within 60 feet of its summoner, acts as an ally of its summoner, and can't summon other mephits. It remains for 1 minute, until it or its summoner dies, or until its summoner dismisses it as an action."
+            if Dice() == 1 and not ("Innate Spellcasting" in one):
+                one += "\n-  Innate Spellcasting (1/Day) \n\t The Elemental can innately cast fog cloud, requiring no material components."
+            if Dice() == 1 and not ("Innate Spellcasting" in one):
+                one += "\n-  Innate Spellcasting (1/Day) \n\t The Elemental can innately cast heat metal, requiring no material components."
+            if Dice() == 1 and not ("Blur" in one):
+                one += "\n- Blur"
+            if Dice() == 1 and not ("Sleep" in one):
+                one += "\n- Sleep"
 
         # ELF.
         if race == "Elf" and Dice() == 1 and not ("Dancing lights" in cantrip): cantrip += "\n- Dancing lights"
@@ -2075,8 +2088,10 @@ def Actions(Type=""):
 
     if Type == "Elemental" and Dice() == 1: r += "\n - Damage Resistances: Acid"
 
-    if Type == "Elemental" and Dice() == 1: r += "\n - Damage Resistances: bludgeoning, piercing, and slashing from nonmagical attacks"
-    elif Type == "Elemental" and Dice() == 1: r += "\n - Damage Resistances: bludgeoning, piercing, and slashing from nonmagical attacks that aren't adamantine."
+    if Type == "Elemental" and Dice() == 1:
+        r += "\n - Damage Resistances: bludgeoning, piercing, and slashing from nonmagical attacks"
+    elif Type == "Elemental" and Dice() == 1:
+        r += "\n - Damage Resistances: bludgeoning, piercing, and slashing from nonmagical attacks that aren't adamantine."
 
     if Type == "Elemental" and Dice() == 1:     r += "\n - Damage Resistances: fire"
     elif Type == "Elemental" and Dice() == 1:   r += "\n - Damage Immunities: fire"
@@ -2106,8 +2121,11 @@ def Actions(Type=""):
     if Type == "Elemental" and Dice() == 1:     r += "\n - Multiattack \n\t The elemental makes two simple attacks."
     elif Type == "Elemental" and Dice() == 1:   r += "\n - Multiattack \n\t The elemental makes three simple attacks."
 
+    if Type == "Elemental" and Dice() == 1:
+        r += "\n -Charge \n\t If the elemental moves at least 20 feet straight toward a target and then hits it with a simple attack on the same turn, the target takes an extra 7 (2d6) bludgeoning damage. If the target is a creature, it must succeed on a DC 16 Strength saving throw or be knocked prone."
+        
     if Type == "Elemental" and Dice() == 1:     r += "\n - Earth Glide \n\t The elemental can burrow through nonmagical, unworked earth and stone. While doing so, the elemental doesn't disturb the material it moves through."
-    if Type == "Elemental" and Dice() == 1:     r += "\n - False Appereance. \n\t While motionless, the elemental is indistinguishable from a natural feature, such as ponds, rocks, statues, etc"
+    if Type == "Elemental" and Dice() == 1:     r += "\n - False Appereance. \n\t While motionless, the elemental is indistinguishable from a natural feature, such as ponds, rocks, statues, campfires, etc"
     if Type == "Elemental" and Dice() == 1:     r += "\n - Fire Form \n\t The elemental can move through a space as narrow as 1 inch wide without squeezing. A creature that touches the elemental or hits it with a melee attack while within 5 feet of it takes 5 (1d10) fire damage. In addition, the elemental can enter a hostile creature's space and stop there. The first time it enters a creature's space on a turn, that creature takes 5 (1d10) fire damage and catches fire; until someone takes an action to douse the fire, the creature takes 5 (1d10) fire damage at the start of each of its turns."
     elif Type == "Elemental" and Dice() == 1:   r += "\n - Fire Form \n\t The elemental can move through a space as narrow as 1 inch wide without squeezing. A creature that touches the elemental or hits it with a melee attack while within 5 feet of it takes 10 (2d10) fire damage. In addition, the elemental can enter a hostile creature's space and stop there. The first time it enters a creature's space on a turn, that creature takes 5 (1d10) fire damage and catches fire; until someone takes an action to douse the fire, the creature takes 5 (1d10) fire damage at the start of each of its turns."
     if Type == "Elemental" and Dice() == 1:     r += "\n - Fire Touch \n\t Melee Weapon Attack \t Hit: 10 (2d6 + %CON) fire damage. If the target is a creature or a flammable object, it ignites. Until a creature takes an action to douse the fire, the target takes 5 (1d10) fire damage at the start of each of its turns."
