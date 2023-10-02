@@ -4040,7 +4040,7 @@ def NPC():
     print("\n- SIMPLE ATTACKS:")
     print(Attack("Melee"))
     print(Attack(Dice(4)))
-    print("\n- SPECIAL ATTACK: {} Charges/Combat".format(Dice(1 + int(Lvl/2))))
+    print("\n- SPECIAL ATTACK: {} Uses/Combat".format(Dice(1 + int(Lvl/2))))
     print(SpecialAttack(Lvl, Modifier(random.choice([STR, DEX, CON, INT, WIS, CHA]))))
     print("\n\n")
     print("༼ SPELLCASTING:\t{} ༽".format(random.choice(["INT", "WIS", "CHA"])))
