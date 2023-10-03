@@ -1,6 +1,22 @@
 # NPC creator
 import random
+import openai
 
+def AskAI(prompt, model="gpt-3.5-turbo"):
+
+    messages = [{"role": "user", "content": prompt}]
+
+    response = openai.ChatCompletion.create(
+
+    model=model,
+
+    messages=messages,
+
+    temperature=0.5,
+
+    )
+
+    return response.choices[0].message["content"]
 
 def Alignment():
     Alignments = [
@@ -412,7 +428,11 @@ def Modifier(AS):
 def Proficiency(AS):
     return Dice(Modifier(AS)*2)
 
+def PB(Lvl):
+    PB = 2 + int(Lvl / 5)
+    return PB
 
+    
 def Attack(Type):
     SimpleMeleeWeapons = [
         "Rock, 1d6 + %STR Bludgeoning, 25/50 thrown",
@@ -605,7 +625,7 @@ def SpecialAttack(Lvl, Mod):
     con = Condition(dmg)
     r = ""
     r += Attack(Dice(4)) + " +"
-    r += "{}".format(Dice(Dice(1+int(Lvl/4))))
+    r += "{}".format(Dice(Dice( + PB(Lvl))))
     r += random.choice(["d4 ", "d6 ", "d8 ", "d10 ", "d12 "])
     r += dmg
     r += " dmg"
@@ -1017,7 +1037,7 @@ def Magic(Lvl, race=Race(), background=Background()):
     two     = "2/Day each: "
     three   = "3/Day each: "
 
-    for L in range(Dice(int(1+Lvl))):
+    for L in range(PB(Lvl)):
 
 # BACKGROUNDS:
     # Bandit
@@ -1938,7 +1958,7 @@ def Actions(Type=""):
     if Type == "Celestial" and Dice() == 1:     r += "\n- Shielded Mind \t The Celestial is immune to any effect that would sense its emotions, read its thoughts, or detect its location."
 
     ## Actions
-    if Type == "Celestial" and Dice() == 1:     r += "\n- Change Shape. \n\t The Celestial magically polymorphs into a humanoid or beast that has a challenge rating equal to or less than 4, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form (the couatl's choice). \n\t In a new form, the couatl retains its game statistics and ability to speak, but its AC, movement modes, Strength, Dexterity, and other actions are replaced by those of the new form, and it gains any statistics and capabilities (except class features, legendary actions, and lair actions) that the new form has but that it lacks. The Celestial can still use its special attacks."
+    if Type == "Celestial" and Dice() == 1:     r += "\n- Change Shape. \n\t The Celestial magically polymorphs into a humanoid or beast that has a challenge rating equal to or less than 4, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form (the celestial's choice). \n\t In a new form, the celestial retains its game statistics and ability to speak, but its AC, movement modes, Strength, Dexterity, and other actions are replaced by those of the new form, and it gains any statistics and capabilities (except class features, legendary actions, and lair actions) that the new form has but that it lacks. The Celestial can still use its special attacks."
 
     ## Combat skills
     if Type == "Celestial" and Dice() == 1:     r += "\n- Multiattack: \t The Celestial's can attack once with a Special Attack and once with a Simple Attack."
@@ -3879,6 +3899,7 @@ def NPC():
     bg = Background()
 
     Lvl = Dice(30)
+
     #Lvl = 1
     rc = Race()
     nm = Name(rc)
@@ -3977,7 +3998,7 @@ def NPC():
         CON += Dice(2)
         CHA += Dice(2)
 
-    AC = 10 + Modifier(DEX) + Dice(Modifier(Lvl+8))
+    AC = 10 + Modifier(DEX) + Dice( PB(Lvl))
     if Dice(10) == 1 or bg == "Monk":       AC += Modifier(WIS)
     if Dice(10) == 1 or bg == "Berserker":  AC += Modifier(CON)
 
@@ -3985,103 +4006,152 @@ def NPC():
 
 
     r = ""
-    print("- {} - ".format(al) + random.choice(["♀", "♂", "⚥", "⚬", "?", ""]))
-    print(bg)
-    print(f"{rc}: {nm}")
-    print("\n")
+    r += "- {} - ".format(al) + random.choice(["♀", "♂", "⚥", "⚬", "?", ""])
+    r += "\n"
+    r += bg
+    r += "\n"
+    r += f"{rc}: {nm}"
+    r += "\n"
+    r += "\n"
+
 
    # print("Lvl: {}".format(Lvl), "   HP: {}".format(HP))
-    print(f"Lvl: {Lvl}⚜︎\t    HP: {HP}♡\t    AC: {AC}⛨️")
-    print("\n\t" +
+    r += f"Lvl: {Lvl}⚜︎\t    HP: {HP}♡\t    AC: {AC}⛨️"
+    r += ("\n\t" +
           f"STR: {STR}  \t |  {Modifier(STR)} \n\t" +
           f"DEX: {DEX}  \t |  {Modifier(DEX)} \n\t" +
           f"CON: {CON}  \t |  {Modifier(CON)} \n\t" +
           f"INT: {INT}  \t |  {Modifier(INT)} \n\t" +
           f"WIS: {WIS}  \t |  {Modifier(WIS)} \n\t" +
           f"CHA: {CHA}  \t |  {Modifier(CHA)} \n\t")
+    r += "\n"
 
-    print("Saving Throws:" + "\t", end="")
-    if Dice(4) == 1:    print(f"Str:+ {Modifier(STR) + int(Lvl/5)}", end="\t")
-    if Dice(4) == 1:    print(f"Dex:+ {Modifier(DEX) + int(Lvl/5)}", end="\t")
-    if Dice(4) == 1:    print(f"Con:+ {Modifier(CON) + int(Lvl/5)}", end="\t")
-    if Dice(4) == 1:    print(f"Int:+ {Modifier(INT) + int(Lvl/5)}", end="\t")
-    if Dice(4) == 1:    print(f"Wis:+ {Modifier(WIS) + int(Lvl/5)}", end="\t")
-    if Dice(4) == 1:    print(f"Cha:+ {Modifier(CHA) + int(Lvl/5)}", end="\t")
-    print("\n")
 
-    print("Skills:")
-    if Dice(8) <= Modifier(STR): print(f"\tAthletics:+{Proficiency(STR)}",  end=" ")
-    if Dice(8) <= Modifier(DEX): print(f"\tAcrobatics:+{Proficiency(DEX)}", end=" ")
-    if Dice(8) <= Modifier(DEX): print(f"\tSleight of Hand:+{Proficiency(DEX)}", end=" ")
-    if Dice(8) <= Modifier(DEX): print(f"\tStealth:+{Proficiency(DEX)}", end=" ")
-    if Dice(8) <= Modifier(INT): print(f"\tArcana:+{Proficiency(INT)}", end=" ")
-    if Dice(8) <= Modifier(INT): print(f"\tHistory:+{Proficiency(INT)}", end=" ")
-    if Dice(8) <= Modifier(INT): print(f"\tInvestigation:+{Proficiency(INT)}", end=" ")
-    if Dice(8) <= Modifier(INT): print(f"\tNature:+{Proficiency(INT)}", end=" ")
-    if Dice(8) <= Modifier(INT): print(f"\tReligion:+{Proficiency(INT)}", end=" ")
-    if Dice(8) <= Modifier(WIS): print(f"\tAnimal Handling:+{Proficiency(WIS)}", end=" ")
-    if Dice(8) <= Modifier(WIS): print(f"\tInsight:+{Proficiency(WIS)}", end=" ")
-    if Dice(8) <= Modifier(WIS): print(f"\tMedicine:+{Proficiency(WIS)}", end=" ")
-    if Dice(8) <= Modifier(WIS): print(f"\tPerception:+{Proficiency(WIS)}", end=" ")
-    if Dice(8) <= Modifier(WIS): print(f"\tSurvival:+{Proficiency(WIS)}", end=" ")
-    if Dice(8) <= Modifier(CHA): print(f"\tDeception:+{Proficiency(CHA)}", end=" ")
-    if Dice(8) <= Modifier(CHA): print(f"\tIntimidation:+{Proficiency(CHA)}", end=" ")
-    if Dice(8) <= Modifier(CHA): print(f"\tPerformance:+{Proficiency(CHA)}", end=" ")
-    if Dice(8) <= Modifier(CHA): print(f"\tPersuasion:+{Proficiency(CHA)}", end=" ")
-    print("\n")
+    r += "Saving Throws:" + "\t"
+    if Dice(4) == 1:    r += f"Str:+ {Modifier(STR) + PB(Lvl)}" + "\t"
+    if Dice(4) == 1:    r += f"Dex:+ {Modifier(DEX) + PB(Lvl)}" + "\t"
+    if Dice(4) == 1:    r += f"Con:+ {Modifier(CON) + PB(Lvl)}" + "\t"
+    if Dice(4) == 1:    r += f"Int:+ {Modifier(INT) + PB(Lvl)}" + "\t"
+    if Dice(4) == 1:    r += f"Wis:+ {Modifier(WIS) + PB(Lvl)}" + "\t"
+    if Dice(4) == 1:    r += f"Cha:+ {Modifier(CHA) + PB(Lvl)}" + "\t"
+    r += "\n"
 
-    print("Passive Perception: {}".format( 10 + Modifier(WIS) + Modifier(Lvl)))
+    r += "Skills:"
+    if Dice(8) <= Modifier(STR): r += f"\tAthletics:+{Proficiency(STR) + PB(Lvl)}"
+    if Dice(8) <= Modifier(DEX): r += f"\tAcrobatics:+{Proficiency(DEX) + PB(Lvl)}"
+    if Dice(8) <= Modifier(DEX): r += f"\tSleight of Hand:+{Proficiency(DEX) + PB(Lvl)}"
+    if Dice(8) <= Modifier(DEX): r += f"\tStealth:+{Proficiency(DEX) + PB(Lvl)}"
+    if Dice(8) <= Modifier(INT): r += f"\tArcana:+{Proficiency(INT) + PB(Lvl)}"
+    if Dice(8) <= Modifier(INT): r += f"\tHistory:+{Proficiency(INT) + PB(Lvl)}"
+    if Dice(8) <= Modifier(INT): r += f"\tInvestigation:+{Proficiency(INT) + PB(Lvl)}"
+    if Dice(8) <= Modifier(INT): r += f"\tNature:+{Proficiency(INT) + PB(Lvl)}"
+    if Dice(8) <= Modifier(INT): r += f"\tReligion:+{Proficiency(INT) + PB(Lvl)}"
+    if Dice(8) <= Modifier(WIS): r += f"\tAnimal Handling:+{Proficiency(WIS) + PB(Lvl)}"
+    if Dice(8) <= Modifier(WIS): r += f"\tInsight:+{Proficiency(WIS) + PB(Lvl)}"
+    if Dice(8) <= Modifier(WIS): r += f"\tMedicine:+{Proficiency(WIS) + PB(Lvl)}"
+    if Dice(8) <= Modifier(WIS): r += f"\tPerception:+{Proficiency(WIS) + PB(Lvl)}"
+    if Dice(8) <= Modifier(WIS): r += f"\tSurvival:+{Proficiency(WIS) + PB(Lvl)}"
+    if Dice(8) <= Modifier(CHA): r += f"\tDeception:+{Proficiency(CHA) + PB(Lvl)}"
+    if Dice(8) <= Modifier(CHA): r += f"\tIntimidation:+{Proficiency(CHA) + PB(Lvl)}"
+    if Dice(8) <= Modifier(CHA): r += f"\tPerformance:+{Proficiency(CHA) + PB(Lvl)}"
+    if Dice(8) <= Modifier(CHA): r += f"\tPersuasion:+{Proficiency(CHA) + PB(Lvl)}"
+    r += "\n"
 
-    print("\n")
-    print("Languages: \n\t{}".format(Language(rc, bg)))
-    print("\n")
-    print("⫷   COMBAT ACTIONS:   ⫸")
-    print("\tTo hit: +{}".format( Modifier(max(STR, DEX) + Lvl/5)))
-    print("\n- SIMPLE ATTACKS:")
-    print(Attack("Melee"))
-    print(Attack(Dice(4)))
-    print("\n- SPECIAL ATTACK: {} Uses/Combat".format(Dice(1 + int(Lvl/2))))
-    print(SpecialAttack(Lvl, Modifier(random.choice([STR, DEX, CON, INT, WIS, CHA]))))
-    print("\n\n")
-    print("༼ SPELLCASTING:\t{} ༽".format(random.choice(["INT", "WIS", "CHA"])))
-    print("\t Spellsave DC {}".format(10 + Modifier(max(INT, WIS, CHA) + Lvl/5 )))
-    print("\t To hit: +{}".format( Modifier(max(INT, WIS, CHA) + Lvl/5)))
-    print(Magic(Lvl, rc, bg))
+    r += "\n"
+    r += "Passive Perception: {}".format( 10 + Modifier(WIS) + PB(Lvl))
+    r += "\n"
+    r += "Proficiency Bonus: +{}".format( PB(Lvl))
+    r += "\n"
 
-    print("\n⚔︎    SKILLS & ACCTIONS:   ⚔︎")
-    print(Actions(bg))
-    print(Actions(rc))
-    print(Actions(""))
-    print("\n")
+    r += "\n"
+    r += "Languages: \n\t{}".format(Language(rc, bg))
+    r += "\n"
+    r += "⫷   COMBAT ACTIONS:   ⫸"
+    r += "\n"
+    r += "\tTo hit: +{}".format( Modifier(max(STR, DEX) + PB(Lvl)))
+    r += "\n- SIMPLE ATTACKS:"
+    r += "\n"
+    r += Attack("Melee")
+    r += "\n"
+    r += Attack(Dice(4))
+    r += "\n"
+    r += "\n- SPECIAL ATTACK: {} Uses/Combat".format(Dice(PB(Lvl)))
+    r += "\n"
+    r += SpecialAttack(Lvl, Modifier(random.choice([STR, DEX, CON, INT, WIS, CHA])))
+    r += "\n\n"
+    r += "༼ SPELLCASTING:\t{} ༽".format(random.choice(["INT", "WIS", "CHA"]))
+    r += "\n"
+    r += "\t Spellsave DC {}".format(10 + Modifier(max(INT, WIS, CHA)+ PB(Lvl) ))
+    r += "\n"
+    r += "\t To hit: +{}".format( Modifier(max(INT, WIS, CHA) + PB(Lvl)))
+    r += "\n"
+    r += Magic(Lvl, rc, bg)
+
+    r += "\n"
+    r += "\n⚔︎    SKILLS & ACCTIONS:   ⚔︎"
+    r += "\n"
+    r += Actions(bg)
+    r += "\n"
+    r += Actions(rc)
+    r += "\n"
+    r += Actions("")
+    r += "\n"
 
     if Dice(Lvl) >= 10:
-        print("\n✯    LEGENDARY ACTIONS:    ✯")
-        print(f"The {bg} {rc} can take {Dice()} legendary actions, choosing from the options below. \n\t Only one legendary action can be used at a time, and only at the end of another creature's turn. \n\t The {bg} {rc} regains spent legendary actions at the start of its turn.")
-        print(Legendary(bg))
-        print(Legendary(rc))
+        r += "\n✯    LEGENDARY ACTIONS:    ✯"
+        r += "\n"
+        r += f"The {bg} {rc} can take {Dice()} legendary actions, choosing from the options below. \n\t Only one legendary action can be used at a time, and only at the end of another creature's turn. \n\t The {bg} {rc} regains spent legendary actions at the start of its turn."
+        r += "\n"
+        r += Legendary(bg)
+        r += "\n"
+        r += Legendary(rc)
+        r += "\n"
 
     if Dice(Lvl) >= 15:
-        print("\n⛫   LAIR ACTIONS:   ⛫")
-        print("Unless otherwise noted, any lair action that demands a saving throw uses the spellsave DC above." + "\n On initiative count 20 (losing initiative ties), the creature can take a lair action to cause one of the following effects, but can't use the same effect two rounds in a row:")
-        print(Lair(bg))
-        print(Lair(rc))
+        r += "\n⛫   LAIR ACTIONS:   ⛫"
+        r += "\n"
+        r += "Unless otherwise noted, any lair action that demands a saving throw uses the spellsave DC above." + "\n On initiative count 20 (losing initiative ties), the creature can take a lair action to cause one of the following effects, but can't use the same effect two rounds in a row:"
+        r += "\n"
+        r += Lair(bg)
+        r += "\n"
+        r += Lair(rc)
 
     if Dice(Lvl) >= 10:
-        print("\n♕   REGIONAL EFFECTS:   ♛")
-        print(f"The {bg} {rc} has an effect on its domains that may include any of the followin magical effects:")
-        print(Region(bg))
-        print(Region(rc))
-        print(f"If the {bg} {rc} dies, these effects dissipate during the next {Dice(6,2)} days.")
+        r += "\n♕   REGIONAL EFFECTS:   ♛"
+        r += "\n"
+        r += f"The {bg} {rc} has an effect on its domains that may include any of the followin magical effects:"
+        r += "\n"
+        r += Region(bg)
+        r += "\n"
+        r += Region(rc)
+        r += "\n"
+        r += f"If the {bg} {rc} dies, these effects dissipate during the next {Dice(6,2)} days."
 
+    r += "\n"
+    r += "꧁ Their Story ꧂"
+    r += "\n"
+    r += " - Traits -"
+    r += "\n"
+    r += Trait()
+    r += "\n"
+    r += Trait(bg)
+    r += "\n"
+    r += " - Ideal -"
+    r += "\n"
+    r += Ideal(bg, al)
+    r += "\n"
+    r += " - Story Hook -"
+    r += "\n"
+    r += PlotHook()
 
-    print("꧁ Their Story ꧂")
-    print(" - Traits -")
-    print(Trait())
-    print(Trait(bg))
-    print(" - Ideal -")
-    print(Ideal(bg, al))
-    print(" - Story Hook -")
-    print(PlotHook())
+    print(r)
 
+    keyfile = open("key.txt", "r")
+    openai.api_key = keyfile.read()
+    keyfile.close()
 
+    question = "calculate 2+1999"
+    answer = AskAI(question)
+    print(answer)
+    
 NPC()
