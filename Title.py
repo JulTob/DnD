@@ -38,7 +38,7 @@ def Title():
         "The Cat",
         "The Climate",
         "The Chain",
-        "The Champion",
+        "The Champion of",
         "The Chief",
         "The Circus",
         "The City",
