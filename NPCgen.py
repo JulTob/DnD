@@ -2,20 +2,14 @@
 import random
 import openai
 
-def AskAI(prompt, model="gpt-3.5-turbo"):
+def AskGPT(prompt, model="gpt-3.5-turbo"):
 
     messages = [{"role": "user", "content": prompt}]
-
     response = openai.ChatCompletion.create(
-
-    model=model,
-
-    messages=messages,
-
-    temperature=0.5,
-
-    )
-
+        model=model,
+        messages=messages,
+        temperature=0.5,
+        )
     return response.choices[0].message["content"]
 
 def Alignment():
@@ -4127,31 +4121,37 @@ def NPC():
         r += "\n"
         r += f"If the {bg} {rc} dies, these effects dissipate during the next {Dice(6,2)} days."
 
-    r += "\n"
-    r += "꧁ Their Story ꧂"
-    r += "\n"
-    r += " - Traits -"
-    r += "\n"
-    r += Trait()
-    r += "\n"
-    r += Trait(bg)
-    r += "\n"
-    r += " - Ideal -"
-    r += "\n"
-    r += Ideal(bg, al)
-    r += "\n"
-    r += " - Story Hook -"
-    r += "\n"
-    r += PlotHook()
+    s = ""
+    s += "\n"
+    s += "꧁ Their Story ꧂"
+    s += "\n"
+    s += " - Traits -"
+    s += "\n"
+    s += Trait()
+    s += "\n"
+    s += Trait(bg)
+    s += "\n"
+    s += " - Ideal -"
+    s += "\n"
+    s += Ideal(bg, al)
+    s += "\n"
+    s += " - Story Hook -"
+    s += "\n"
+    s += PlotHook()
 
     print(r)
+    print(s)
 
+
+    """
     keyfile = open("key.txt", "r")
     openai.api_key = keyfile.read()
     keyfile.close()
 
+    
     question = "calculate 2+1999"
-    answer = AskAI(question)
+    answer = AskGPT(question)
     print(answer)
+    """
     
 NPC()
