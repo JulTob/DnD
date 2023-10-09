@@ -1,16 +1,32 @@
 # NPC creator
 import random
+import json
 import openai
 
-def AskGPT(prompt, model="gpt-3.5-turbo"):
+# Open AI Key
+keyFile = open("key.txt", "r")
+key = keyFile.read()
+openai.api_key = key
+keyFile.close()
 
+
+def AskGPT(prompt, model="gpt-3.5-turbo"):
     messages = [{"role": "user", "content": prompt}]
     response = openai.ChatCompletion.create(
         model=model,
         messages=messages,
-        temperature=0.5,
         )
     return response.choices[0].message["content"]
+
+def ask_chatgpt(question):
+    # Use the Completion API to ask the question
+    response = openai.Completion.create(
+        model="text-davinci-002",  # You can specify other models as well
+        prompt=question,
+        max_tokens=150,  # Limit the response length, adjust as needed
+        temperature=0.5
+    )
+    return response.choices[0].text.strip()
 
 def Alignment():
     Alignments = [
@@ -2931,7 +2947,7 @@ def PlotHook():
         "I'm guarding something of great importance.",
         "I'm protecting someone of great importance.",
         "I'm looking for a special thing",
-        "I just want to have fun",
+        "I I just want to have fun",
         "I'm looking for someone",
         "I want to get rich",
         "I'm selling something",
@@ -4121,37 +4137,45 @@ def NPC():
         r += "\n"
         r += f"If the {bg} {rc} dies, these effects dissipate during the next {Dice(6,2)} days."
 
+
+    print("\n꧁ Their Story ꧂")
     s = ""
-    s += "\n"
-    s += "꧁ Their Story ꧂"
     s += "\n"
     s += " - Traits -"
     s += "\n"
-    s += Trait()
-    s += "\n"
-    s += Trait(bg)
-    s += "\n"
+    tr = Trait()
+    tr += "\n"
+    tr += Trait(bg)
+    tr += "\n"
+    s += tr
     s += " - Ideal -"
     s += "\n"
-    s += Ideal(bg, al)
+    idl = Ideal(bg, al)
+    s += idl
     s += "\n"
     s += " - Story Hook -"
     s += "\n"
-    s += PlotHook()
+    ph = PlotHook()
+    s += ph
 
     print(r)
-    print(s)
 
-
-    """
-    keyfile = open("key.txt", "r")
-    openai.api_key = keyfile.read()
-    keyfile.close()
 
     
-    question = "calculate 2+1999"
-    answer = AskGPT(question)
-    print(answer)
-    """
+
+
+    try: 
+        question = "Write a record for a character. "
+        question += "\n They are a " + nm + ", a kind of " + rc
+        question += "| Their background is that of a " + bg
+        question += "\n They have the following traits: " + tr
+        question += "\n The Following ideal: " + idl
+        question += "n\ And a plot hook with the following premise: " + ph 
+        answer = ask_chatgpt(question)
+        print(answer)
+    except Exception as e:
+        print(s)
+        print(f"Encountered an error: {e}")
+
     
 NPC()
