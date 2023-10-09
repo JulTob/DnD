@@ -14,7 +14,7 @@ keyFile.close()
 def ask_chatgpt(question):
     # Use the Completion API to ask the question
     response = openai.Completion.create(
-        model = "text-davinci-002", ## You can specify other models as well: "text-davinci-002", "curie", "ada
+        model = "gpt-3.5-turbo-instruct", #"text-davinci-002", ## You can specify other models as well: "text-davinci-002", "curie", "ada
         prompt=question,
         max_tokens=500,  # Limit the response length, adjust as needed
         temperature=1
@@ -29,7 +29,27 @@ def Style():
         "George R. R. Martin",
         "Terry Pratchett",
         "Neil Gaiman",
-        "Patrick Rothfuss"
+        "Patrick Rothfuss",
+        "Ursula K. Le Guin",
+        "Stephen King",
+        "H. P. Lovecraft",
+        "Isaac Asimov",
+        "Bram Stoker",
+        "Erin Morgenstern",
+        "Madeline Miller",
+        "Phillip Pullman",
+        "F. Scott Fitzgerald",
+        "Mark Twain",
+        "George Orwell",
+        "Fyodor Dostoevsky",
+        "Mary Shelley",
+        "Lord Byron",
+        "William Shakespeare",
+        "Fran Kafka",
+        "C.S. Lewis",
+        "Jorge Luis Borges",
+        "Hermann Hesse",
+        "Richard Bach"
     ]
     return random.choice(Alignments)
 
