@@ -64,59 +64,32 @@ def Style():
 
 def Title():
     descriptor = [
-        "Abyssal",
-        "Aegean",
-        "Amazonian",
-        "Ancestral",
-        "Angelic",
-        "Asgardian",
-        "Atlantean",
-        "Babylonian",
-        "Cosmic",         "Celestial",
-        "Celtic",
-        "Chimeric",
-        "Cyclopean",
-        "Dawn",
-        "Eternal",
-        "Galactic",
+        "Abyssal",  "Air",  "Ageless",  "Astral",   "Anachronistic",    "Ancient",  "Antediluvian",     "Archaic",  "Atemporal",    "Alcoholic",    "Alpha",    "Aberrant", "Aprendice of", "Archfey",  "Awakened", "Autumn",   "Angry",    "Avatar",   "Arcane",   "Ancient",  "Aegean",   "Amazonian",    "Ancestral",    "Angelic",  "Asgardian",    "Atlantean",
+        "Brave",    "Babylonian",   "Badger",   "Battle",   "Baron of", "Bat",  "Bearded",  "Beholder", "Blending", "Black",    "Blind",    "Blue", "Blood",    "Bone", "Bursting", "Brass",    "Bronce",   "Brown",    "Brain",    "Book", "Butterfly",
+        "Celestial", "Cosmic",   "Celestial",    "Cryptic",  "Cheerful", "Cat",  "Cobalt",   "Climate",  "Chain",    "Champion of",  "Chief",    "Circus",   "City", "Collector",    "Conjurer", "Coral",    "Clockwork",    "Copper",   "Cursed",   "Crab", "Crimson",  "Crown",    "Content",  "Celtic",   "Chimeric", "Cyclopean",
+        "Desert", "Dawn", "Daemonian",    "Divine",   "Draconian",    "Dwarven",  "Dusk",
+        "Eternal",  "Eldritch",  "Elven",   "Enchanted",    "Epicurean",
+        "Fuchsia", "Fierce",
+        "Glacial", "Galactic", "Goldenrod",
+        "Icy", "Indigo",
+        "Lunar", "Luminous",
+        "Mountain", "Midnight", "Momentary", "Mysterious", "Misty",
         "Nebulous",
-        "Stellar",
-        "Voidborne", 
-        "Momentary",
-        "Dusk",
-        "Midnight",
-        "Timeless",
-        "Swift",
-        "Brave",
-        "Luminous",
-        "Silent",
-        "Mysterious",
-        "Radiant",
-        "Fierce",
-        "Scarlet",
-        "Turquoise",
-        "Indigo",
-        "Goldenrod",
-        "Fuchsia",
-        "Cobalt", 
-        "Windy",
-        "Icy",
-        "Solar",
-        "Lunar",
-        "Thundering",
-        "Misty",
-        "Celestial",
-        "Mountain",
-        "Valley",
-        "River",
         "Oceanic",
-        "Desert",
-        "Glacial",
+        "Radiant",  "River",
+        "Solar", "Stellar",  "Swift",    "Silent", "Scarlet",
+        "Thundering", "Timeless", "Tartarean", "Titanic", "Trojan", "Turquoise",
+        "Valley",
+        "Windy",
+        
+        
+        
+       
+        
         "Joyful",
         "Melancholy",
         "Stoic",
         "Passionate",
-        "Wrathful",
         "Olympian",
         "Nemean",
         "Valkyrian",
@@ -299,7 +272,6 @@ def Title():
         "Victorian",  # Relating to the time when Victoria was queen of the UK (1837–1901)
         "Viking",
         "Zen",  # Relating to a Japanese school of Mahayana Buddhism emphasizing meditation
-        "Astral",
         "Black Hole",
         "Celestial",
         "Cometary",  # Relating to comets
@@ -337,12 +309,6 @@ def Title():
         "X-ray",  # Relating to X-ray radiation
         "Zenith",  # The point in the sky directly above an observer
         "Zodiacal"  # Relating to the zodiac, which is the circle of constellations that the sun seems to pass through each year
-        "Ageless",
-        "Anachronistic",
-        "Ancient",
-        "Antediluvian",  # Referring to the time before the biblical flood
-        "Archaic",
-        "Atemporal",  # Existing outside of time
         "Bygone",
         "Chronal",  # Relating to time
         "Cyclic",
@@ -383,14 +349,6 @@ def Title():
         "Vesperal",  # Of, relating to, or occurring in the evening
         "Vintage",
         "Yesteryear"  # Last year or the recent past
-        "Daemonian",
-        "Divine",
-        "Draconian",
-        "Dwarven",
-        "Eldritch",
-        "Elven",
-        "Enchanted",
-        "Epicurean",
         "Faerie",
         "Fenririan",
         "Gorgonian",
@@ -431,9 +389,6 @@ def Title():
         "Sirenian",
         "Solar",
         "Stygian",
-        "Tartarean",
-        "Titanic",
-        "Trojan",
         "Uranian",
         "Valkyrian",
         "Vampiric",
@@ -447,8 +402,6 @@ def Title():
         "Ecstatic",
         "Elated",
         "Happy",
-        "Cheerful",
-        "Content",
         "Pleased",
         "Serene",
         "Peaceful",
@@ -958,7 +911,6 @@ def Title():
         "Stoic",
         "Dynamic",
         "Erratic",
-        "Cryptic",
         "Sacred",
         "Profane",
         "Unstoppable",
@@ -992,53 +944,6 @@ def Title():
         "Tenacious",
         "Eloquent",
         "Gallant"
-        "Air",
-        "Alcoholic",
-        "Alpha",
-        "Aberrant",
-        "Aprendice of",
-        "Archfey",
-        "Awakened",
-        "Autumn",
-        "Angry",
-        "Avatar",
-        "Arcane",
-        "Ancient",
-        "Badger",
-        "Battle",
-        "Baron of",
-        "Bat",
-        "Bearded",
-        "Beholder",
-        "Blending",
-        "Black",
-        "Blind",
-        "Blue",
-        "Blood",
-        "Bone",
-        "Bursting",
-        "Brass",
-        "Bronce",
-        "Brown",
-        "Brain",
-        "Book",
-        "Butterfly",
-        "Cat",
-        "Climate",
-        "Chain",
-        "Champion of",
-        "Chief",
-        "Circus",
-        "City",
-        "Collector",
-        "Conjurer",
-        "Coral",
-        "Clockwork",
-        "Copper",
-        "Cursed",
-        "Crab",
-        "Crimson",
-        "Crown",
         "Deadly",
         "Death",
         "Dawning",
@@ -1188,8 +1093,8 @@ def Title():
         "Veteran",
         "Violet",
         "Voice",
-        "Void",
-        "War",
+        "Void",         "Voidborne", 
+        "War",        "Wrathful",
         "Warlord",
         "Warping",
         "Water",
@@ -6050,7 +5955,7 @@ def NPC():
     
     r += "⫷   COMBAT ACTIONS:   ⫸"
     r += "\n"
-    r += "\tTo hit: +{}".format( Modifier(max(STR, DEX) + PB(Lvl)))
+    r += "\tTo hit: +{}".format( Modifier(max(STR, DEX)) + PB(Lvl))
     
     r += "\n- SIMPLE ATTACKS:"
     r += "\n"
@@ -6085,7 +5990,7 @@ def NPC():
     if Dice(Lvl) >= 10:
         r += "\n✯    LEGENDARY ACTIONS:    ✯"
         r += "\n"
-        r += f"The {bg} {rc} can take {Dice(PB(LvL))} legendary actions, choosing from the options below. \n\t Only one legendary action can be used at a time, and only at the end of another creature's turn. \n\t The {bg} {rc} regains spent legendary actions at the start of its turn."
+        r += f"The {bg} {rc} can take {Dice(PB(Lvl))} legendary actions, choosing from the options below. \n\t Only one legendary action can be used at a time, and only at the end of another creature's turn. \n\t The {bg} {rc} regains spent legendary actions at the start of its turn."
         r += "\n"
         r += Legendary(bg)
         r += "\n"
