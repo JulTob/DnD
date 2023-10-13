@@ -64,68 +64,34 @@ def Style():
 
 def Title():
     descriptor = [
-        "Abyssal",  "Air",  "Ageless",  "Astral",   "Anachronistic",    "Ancient",  "Antediluvian",     "Archaic",  "Atemporal",    "Alcoholic",    "Alpha",    "Aberrant", "Aprendice of", "Archfey",  "Awakened", "Autumn",   "Angry",    "Avatar",   "Arcane",   "Ancient",  "Aegean",   "Amazonian",    "Ancestral",    "Angelic",  "Asgardian",    "Atlantean",
-        "Brave",    "Babylonian",   "Badger",   "Battle",   "Baron of", "Bat",  "Bearded",  "Beholder", "Blending", "Black",    "Blind",    "Blue", "Blood",    "Bone", "Bursting", "Brass",    "Bronce",   "Brown",    "Brain",    "Book", "Butterfly",
-        "Celestial", "Cosmic",   "Celestial",    "Cryptic",  "Cheerful", "Cat",  "Cobalt",   "Climate",  "Chain",    "Champion of",  "Chief",    "Circus",   "City", "Collector",    "Conjurer", "Coral",    "Clockwork",    "Copper",   "Cursed",   "Crab", "Crimson",  "Crown",    "Content",  "Celtic",   "Chimeric", "Cyclopean",
-        "Desert", "Dawn", "Daemonian",    "Divine",   "Draconian",    "Dwarven",  "Dusk",
-        "Eternal",  "Eldritch",  "Elven",   "Enchanted",    "Epicurean",
-        "Fuchsia", "Fierce",
-        "Glacial", "Galactic", "Goldenrod",
-        "Icy", "Indigo",
-        "Lunar", "Luminous",
-        "Mountain", "Midnight", "Momentary", "Mysterious", "Misty",
-        "Nebulous",
-        "Oceanic",
-        "Radiant",  "River",
-        "Solar", "Stellar",  "Swift",    "Silent", "Scarlet",
-        "Thundering", "Timeless", "Tartarean", "Titanic", "Trojan", "Turquoise",
-        "Valley",
-        "Windy",
-        
-        
-        
-       
-        
-        "Joyful",
-        "Melancholy",
-        "Stoic",
-        "Passionate",
-        "Olympian",
-        "Nemean",
-        "Valkyrian",
-        "Sirenic",
-        "Draconic",
-        "Eternal",
-        "Momentary",
-        "Dusk",
-        "Dawn",
-        "Midnight",
-        "Timeless",
-        "Victorian",
-        "Edo",
-        "Renaissance",
-        "Nomadic",
-        "Byzantine",
-        "Sword",
-        "Mask",
-        "Feathered",
-        "Gemmed",
-        "Orb",
-        "Feathered",
+        "Avian", "Arachnid", "Aquatic", "Antlered", "Abyssal",  "Air",  "Ageless",  "Astral",   "Anachronistic",    "Ancient",  "Antediluvian",     "Archaic",  "Atemporal",    "Alcoholic",    "Alpha",    "Aberrant", "Aprendice of", "Archfey",  "Awakened", "Autumn",   "Angry",    "Avatar",   "Arcane",   "Ancient",  "Aegean",   "Amazonian",    "Ancestral",    "Angelic",  "Asgardian",    "Atlantean",
+        "Boar-tusked", "Bipedal", "Brave",    "Babylonian",   "Badger",   "Battle",   "Baron of", "Bat",  "Bearded",  "Beholder", "Blending", "Black",    "Blind",    "Blue", "Blood",    "Bone", "Bursting", "Brass",    "Bronce",   "Brown",    "Brain",    "Book", "Butterfly", "Byzantine",
+        "Cyclopean","Crested","Chiropteran", "Celestial", "Cosmic",   "Celestial",    "Cryptic",  "Cheerful", "Cat",  "Cobalt",   "Climate",  "Chain",    "Champion of",  "Chief",    "Circus",   "City", "Collector",    "Conjurer", "Coral",    "Clockwork",    "Copper",   "Cursed",   "Crab", "Crimson",  "Crown",    "Content",  "Celtic",   "Chimeric", "Cyclopean",
+        "Draconic","Desert", "Dawn", "Daemonian",    "Divine",   "Draconian", "Draconic",    "Dwarven",  "Dusk",
+        "Edo", "Eternal",  "Eldritch",  "Elven",   "Enchanted",    "Epicurean",
+        "Fanged", "Feathered", "Fuchsia", "Fierce",
+        "Gemmed", "Glacial", "Galactic", "Goldenrod",
         "Horned",
-        "Scaled",
-        "Fanged",
-        "Tailed",
-        "Antlered",
-        "Aquatic",
-        "Arachnid",
-        "Avian",
-        "Bipedal",
-        "Boar-tusked",
-        "Chiropteran",  # Relating to bats
-        "Crested",  # Often refers to a comb or ridge on an animal's head
-        "Cyclopean",  # Having a single eye
-        "Draconic",  # Dragon-like
+        "Icy", "Indigo",
+        "Joyful",
+        "Lunar", "Luminous",
+        "Mask", "Melancholy", "Mountain", "Midnight", "Momentary", "Mysterious", "Misty",
+        "Nebulous", "Nemean", "Nomadic",
+        "Orb", "Oceanic", "Olympian",
+        "Passionate",
+        "Radiant", "Renaissance", "River",
+        "Scaled", "Scarlet", "Sirenic", "Silent", "Solar", "Stellar", "Stoic", "Swift", "Sword", 
+        "Tailed", "Thundering", "Timeless", "Tartarean", "Titanic", "Trojan", "Turquoise",
+        "Valley", "Valkyrian", "Victorian",
+        "Windy",
+    
+        
+        
+        
+         
+        
+        
+        
         "Eagle-eyed",
         "Echinate",  # Covered with spines or spikes
         "Fanged",
@@ -1108,7 +1074,161 @@ def Title():
         "Zombie",
         ""
     ]
+    
     rank = [
+        "Blossom",
+        "Briar",
+        "Cedar",
+        "Daisy",
+        "Fern",
+        "Gale",
+        "Heather",
+        "Holly",
+        "Ivy",
+        "Jasmine",
+        "Juniper",
+        "Lark",
+        "Laurel",
+        "Lily",
+        "Marigold",
+        "Moss",
+        "Orchid",
+        "Petal",
+        "Poppy",
+        "Primrose",
+        "Reed",
+        "Rose",
+        "Rowan",
+        "Rue",
+        "Sage",
+        "Sorrel",
+        "Thistle",
+        "Violet",
+        "Willow",
+        "Yarrow",
+        "Zinnia"
+        "Antler",
+        "Badger",
+        "Bear",
+        "Beetle",
+        "Bison",
+        "Boar",
+        "Buzzard",
+        "Cheetah",
+        "Claw",
+        "Cobra",
+        "Cougar",
+        "Crow",
+        "Dolphin",
+        "Dove",
+        "Eagle",
+        "Falcon",
+        "Fawn",
+        "Feather",
+        "Ferret",
+        "Fin",
+        "Fox",
+        "Frog",
+        "Gazelle",
+        "Gull",
+        "Hawk",
+        "Heron",
+        "Horse",
+        "Hummingbird",
+        "Jackal",
+        "Jaguar",
+        "Jay",
+        "Kestrel",
+        "Lark",
+        "Leopard",
+        "Lynx",
+        "Mantis",
+        "Mare",
+        "Moth",
+        "Nightingale",
+        "Otter",
+        "Owl",
+        "Panther",
+        "Parrot",
+        "Paw",
+        "Peregrine",
+        "Puma",
+        "Quail",
+        "Rabbit",
+        "Raptor",
+        "Raven",
+        "Serpent",
+        "Shark",
+        "Sparrow",
+        "Stag",
+        "Stingray",
+        "Swallow",
+        "Swan",
+        "Talon",
+        "Tiger",
+        "Turtle",
+        "Viper",
+        "Whale",
+        "Wolf"
+        "Advent",
+        "Aero",
+        "Archer",
+        "Argonaut",
+        "Atlas",
+        "Blaze",
+        "Buccaneer",
+        "Captain",
+        "Cartographer",
+        "Climber",
+        "Corsair",
+        "Courage",
+        "Crusader",
+        "Daredevil",
+        "Discoverer",
+        "Drifter",
+        "Endeavor",
+        "Expedition",
+        "Explorer",
+        "Farwalker",
+        "Frontier",
+        "Globetrotter",
+        "Guardian",
+        "Guide",
+        "Horizon",
+        "Hunter",
+        "Journey",
+        "Jungle",
+        "Legend",
+        "Marauder",
+        "Mariner",
+        "Mountaineer",
+        "Mystic",
+        "Navigator",
+        "Odyssey",
+        "Outlander",
+        "Outrider",
+        "Pioneer",
+        "Quest",
+        "Ranger",
+        "Rider",
+        "Rogue",
+        "Sailor",
+        "Scout",
+        "Seeker",
+        "Skyward",
+        "Sorcerer",
+        "Trailblazer",
+        "Traveler",
+        "Treasure",
+        "Vagabond",
+        "Vanguard",
+        "Voyager",
+        "Wanderer",
+        "Wayfarer",
+        "Whirlwind",
+        "Wild",
+        "Windrider"
+
         "Abyssal",
         "Afterlife",
         "Apparition",
@@ -1565,6 +1685,33 @@ def Alignment():
 
 def Background():
     Backgrounds = [
+        "Abyss",
+        "Bane",
+        "Blight",
+        "Cruor",
+        "Dread",
+        "Enigma",
+        "Fang",
+        "Ghoul",
+        "Hex",
+        "Inferno",
+        "Jinx",
+        "Krait",
+        "Lurk",
+        "Malefic",
+        "Nefarious",
+        "Oblivion",
+        "Pestilence",
+        "Quake",
+        "Rancor",
+        "Sable",
+        "Torment",
+        "Umbra",
+        "Vex",
+        "Wraith",
+        "Xeno",
+        "Yielder",
+        "Zenithar"
         "Bandit",
         "Bard",
         "Berserker",
@@ -1597,9 +1744,284 @@ def Background():
         "Warrior",
         "Warlock",
         "Witch",
+        "Commoner",
+        "Nomad",
+        "Wanderer",
+        "Peasant",
+        "Squire",
+        "Mortal",
+        "Kinsman",
+        "Vagrant",
+        "Pilgrim",
+        "Settler"
         ""
     ]
     return random.choice(Backgrounds)
+
+# Racial Names
+def Racial_Names(Type):
+    Names = ["Caspian", "Nemo", "Ada", "Pascal", "Byron", "Arthurius", "Neo", "Aberrant", "Dorian", "Narkia", "Anarkia", "Anakin", "Draven", "Furiosa", "Goku", "Jareth", "Maleficent", "Kratos", "Xena", "Zorro", "Forajido", "Parangon", "Amelia"]
+    Humans = [
+"Emelot", "Jean", "Frank", "Albertus", "Isildur", "Aragorn", "Theoden", "Lancellot", "Ansellus", "Tomas", "Nicole", "Herbin", "Elizabez",
+"Kazerina", "Beaux", "Reginaldus", "Erart", "Aubert", "Niel", "Cazal", "Denis", "Menard", "Sabilina", "Eufemia", "Rapace", "Lucy", "Sabilina", "Oda", "Neri", "Osanna", "Lazard", "Lazaro", "Blanchet", "Caterina",
+"Regina", "Jaspar", "Anastasia", "Mathilda", "Sole", "Ansellus", "Brion", "George", "Colart",
+"Jaubert", "Jenas", "William", "Nathaniel", "Edric", "Edward", "Christopher", "Martin", "Emma",
+"Avis", "Wilmot", "Audrey", "Cecilia", "Joy", "Joan", "Tobias", "Mark", "Solomon", "Eve", "Alice",
+"Berthol", "Hipatia", "Pitagoras", "Heracles", "Euler", "Pascal", "Einstein", "Marie", "Curie",
+"Bruce", "Clark", "Bertin", "Maras", "Arthur", "Wielia", "Certhel", "Niera", "Luris", "Aseir",
+"Bardeid", "Haseid", "Mehmen", "Sudeiman", "Zasheir", "Atala", "Ceidil", "Hama", "Jasmal",
+"Meilil", "Seipora", "Yasheira", "Zasheida", "Basha", "Dumein", "Jassan", "Khalid", "Mostana",
+"Pashar", "Rein", "Darvin", "Dorn", "Evendur", "Gorstag", "Grim", "Helm", "Malark", "Morn",
+"Randal", "Stedd", "Arveene", "Esvele", "Jhessail", "Kerri", "Lureene", "Miri", "Rowan",
+"Shandri", "Tessele", "Bor", "Fodel", "Glar", "Grigor", "Igan", "Ivor", "Kosef", "Mival", "Orel",
+"Pavel", "Sergor", "Alethra", "Kara", "Katernin", "Mara", "Natali", "Olma", "Tana", "Zora",
+"Ander", "Blath", "Bran", "Frath", "Geth", "Lander", "Luth", "Malcer", "Stor", "Taman", "Urth",
+"Amafrey", "Betha", "Cefrey", "Kethra", "Mara", "Olga", "Silifrey", "Westra", "Aoth",
+"Bareris", "Ehput", "Kethoth", "Mumed", "Ramas", "Kehur", "Thazar", "Urhur", "Arizima", "Chathi",
+"Nephis", "Nulara", "Murithi", "Sefris", "Thola", "Umara", "Zolis", "Borivik", "Faurgar",
+"Jandar", "Kanithar", "Madislak", "Ralmevik", "Shaumar", "Vladislak", "Fyevarra",
+"Hulmarra", "Immith", "Imzel", "Navarra", "Shevarra", "Tammith", "Yuldra", "An", "Chen", "Chi", "Fai",
+"Jiang", "Jun", "Lian", "Long", "Meng", "On", "Shan", "Shui", "Wen", "Bai", "Chao", "Jia",
+"Lei", "Mei", "Qiao", "Shui", "Tai", "Anton", "Diero", "Marcon", "Pieron", "Rimardo",
+"Romero", "Salazar", "Umbero", "Balama", "Dona", "Faila", "Jalana", "Luisa", "Marta",
+"Quara", "Selise", "Vonda", "Aramis", "Arne", "Arthur", "Astrid", "Athos", "Portos",
+"Baldric", "Banderliss", "Barathor", "Bark", "Bodil", "Clagnemart", "Dartagnan", "Dartañan",
+"Donael", "Griffin", "Tesla", "Douglas", "Merlin", "Lancelot", "Arthur", "Francesca", "Herman",
+"Byrius", "Dont", "Ara", "Adal", "Neor", "Conan", "Mia", "David", "Dilan", "Jack", "Belladona",
+"Lancelot", "Lancelotte", "Dartagnan", "Dartañan", "Slayer", "Violet", "Falchion", "Percy",
+"Percival", "Vigo", "Albus", "Issabella", "Gales", "Louis", "Jeremias", "Luz", "Belos", "Hunter" 
+    ]
+    if Type == "Human": return Humans
+    Names += Humans
+    
+    Elves =[
+    "Eldar",
+    "Moonchild",
+    "Sunweaver",
+    "Starcaller",
+    "Leafdancer",
+    "Nightrunner",
+    "Twilightseeker",
+    "Woodlander",
+    "Astralborn",
+    "Silverkin"]
+    if Type == "Elf": return Elves
+    Names += Elves
+
+    Orcs =[
+    "Warbrute",
+    "Bladebreaker",
+    "Ironclad",
+    "Tusker",
+    "Bonecrusher",
+    "Stormhowler",
+    "Mudwalker",
+    "Beastmaster",
+    "Bloodfist",
+    "Thunderlord"]
+    if Type == "Orc": return Orcs
+    Names += Orcs
+
+
+    Dwarves = [
+    "Stonewrought",
+    "Forgekeeper",
+    "Gemseeker",
+    "Deepdelver",
+    "Mountainborn",
+    "Anvilbender",
+    "Goldbeard",
+    "Runebearer",
+    "Earthshaker",
+    "Fireforge"]
+    if Type == "Dwarf": return Dwarves
+    Names += Dwarves
+
+    Halflings = [
+    "Meadowrover",
+    "Hearthkeeper",
+    "Merrymaker",
+    "Piebaker",
+    "Ciderbrewer",
+    "Riverfriend",
+    "Hillhugger",
+    "Woolspinner",
+    "Greenpatcher",
+    "Fieldwhistler"]
+    if Type == "Halfling": return Halflings
+    Names += Halflings
+
+    Gnomes = [
+    "Gearspinner",
+    "Mindtwister",
+    "Aetherwisp",
+    "Tinkerfoot",
+    "Starwhisperer",
+    "Clockfixer",
+    "Mysticmechanic",
+    "Illusionweaver",
+    "Sparkjumper",
+    "Gadgetgrabber"]
+    if Type == "Gnome": return Gnomes
+    Names += Gnomes
+
+    Tieflings = [
+    "Hellkin",
+    "Nightshade",
+    "Doombringer",
+    "Ashcaller",
+    "Soulbinder",
+    "Fireheart",
+    "Demonblood",
+    "Sinwhisperer",
+    "Darkmender",
+    "Brimstonetouched",
+    "Kurzam", "Rhul", "Zorlarg", "Steamsable", "Onyxmaw", "Kral", "Moltenhorn", "Crimsonhorn", "Gloomhorn", "Madhorn", "Killsin", "Purific", "Nye", "Assurance", "Watson", "Faith", "Harris", "Ashes", "Shepard", "Tenacious", "Coleman", "Desire", "Llwyd", "Vanity", "Temple", "Submit", "French", "Fear", "Reynolds", "Wheelwright", "Called", "Burroughs", "Confidence", "Udal", "Remember", "Bond", "Recuerdo", "Miedo", "Obedience", "Young", "Faint", "Gilby", "Abuse", "Cawdrey", "Constant", "Calamy", "Calamidad", "Vanity", "Twisse", "Discretion", "Boston", "Buried", "Sampson", "Hate-ill", "Burton", "Forsaken", "Williams", "Virtue", "Shepard", "Amynus", "Smen", "Apronadius", "Abdamelek", "Xonsu", "Aziza", "Ramla", "Neema", "Cleopatra", "Jendayi", "At", "Sahura", "Hor", "Zesiro", "Nub", "Bubastis", "Tauret", "Sarapous", "Ma", "Sapt", "Ritho", "Nenet", "Sanura", "Sethenes", "Sept", "Uetu", "Kashto", "Clémence", "firefur", "gloomtail", "nuuch", "Zenglac", "Ablo", "Gadreel", "Uzza", "Musique", "Haine", "Gloire", "Pyra", "Désespoir", "Doute", "Chagrin", "Terreur", "Ambition", "Vice", "Ouverture", "Amour", "Témérité", "Credo", "Charogne", "Chagrin", "Hasard", "Astaro", "Kali", "Brave", "Crash", "Delver", "Helm", "Hungry", "Violence", "Providence", "Surprise", "Conqueror", "Defender", "Invader", "Juvileo", "Nephelin", "Nefelin", "Serafina", "Luz", "Carolin", "Dilan", "Kurt", "Freddie", "Pride", "Bulur", "Abyx", "Apolion", "Abezetibou", "Abigor", "Abraxas", "Abraxis", "Solomon", "Aexma", "Acaos", "Adramalek", "Agares", "Ariman", "Agraz", "Ainin", "Alloces", "Alp", "Amduscias", "Amenadiel", "Amon", "Amorth", "Gabriele", "Andra", "Indra", "Andras", "Andrealfus", "Mastemoth", "Andromalius", "Angra", "Antaura", "Antichrist", "Armadiel", "Aseliel", "Asmodeus", "Aeshma", "Ashmedai", "Asmodius", "Sydonay", "Astaroth", "Azael", "Azazel", "Baal", "Bael", "Balam", "Baphomet", "Bafomet", "Barbiel", "Barbuel", "Barmiel", "Baruchas", "Bathin", "Barbatos", "Beelxebub", "Belzebub", "Satan", "Ornias", "Nicodemus", "Behemoth", "Lucifer", "Madilon", "Solymo", "Saroy", "Zeu", "Ameclo", "Sagrael", "Praredun", "Venite", "Amen", "Leviatan", "Beherit", "Belet", "Bilet", "Belfegor", "Belial", "Beliar", "Bernael", "Bidiel", "Beriz", "Balberiz", "Beal", "Bofi", "Bolfri", "Elberiz", "Bidiel", "Bifrons", "Botis", "Otis", "Buer", "Buriel", "Busyasta", "Cabariel", "Calder", "Camuel", "Caim", "Camion", "Carnesiel", "Caspiel", "Cassian", "Kerberos", "Cerberus", "Cesmak", "Coronzon", "Cimeries", "Constantine", "Crowley", "Daeva", "Deva", "Dev", "Daimon", "Agato", "Agatodaimon", "Kako", "Kakodaimon", "Dalkiel", "Dantanian", "Decarabia", "Carabia", "Demoriel", "Faustus", "Eligor", "Emoniel", "Erinyes", "Fury", "Furia", "Eurynomus", "Forneus", "Fortea", "Flauros", "Hauras", "Haurus", "Foras", "Furcas", "Furfur", "Gadreel", "Gadriel", "Garadriel", "Gediel", "Gemori", "Gamaliel", "Gamigin", "Solomon", "Gusion", "Hades", "Hagenti", "Harlequin", "Halahel", "Halpas", "Hecataea", "Hel", "Hemah", "Hutriel", "Iblis", "Icosiel", "Incubus", "Imp", "Ipos", "Isacaron", "Leviatan", "Cabala", "Sephirot", "Sefirot", "Kezer", "Kokmah", "Binah", "Kesed", "Geburah", "Tifarez", "Netzak", "Hod", "Yesod", "Malkut", "Kababiel", "Kesilim", "Kunda", "Kabiel", "Kokab", "Labartu", "Lahmu", "Lamastu", "Legion", "Lerajie", "Oary", "Leviatan", "Liliz", "Lucifer", "Luzer", "LutinMacariel", "Malgaras", "Malphas", "Malpas", "Marbas", "Maseriel", "Mazaquin", "Mazzikin", "Mazikin", "Mazakin", "Menadiel", "Mefistofeles", "Moloch", "Morax", "Murmur", "Naberius", "Nephilim", "Nefilim", "Nemesis", "Nisroc", "Onoskelis", "Orias", "Ornias", "Orobas", "Ose", "Padiel", "Pamersiel", "Paimon", "Pairikas", "Pazuzu", "Santeria", "Purson", "CUrson", "Rabisu", "Raum", "Ravana", "Raysiel", "Rimmon", "Ronove", "Roneve", "Sabbat", "Sabnak", "Salem", "Saleos", "Salt", "Samael", "Sammael", "Sariel", "Sarakiel", "Suriel", "Uriel", "Zerakiel", "Satanael", "Scepter", "Skepter", "Shamsiel", "Shax", "Chax", "Scox", "Shedim", "Sinistrari", "Lodovico", "Sitri", "Solas", "Soleviel", "Soraz", "Orleans", "Surin", "Symiel", "Taru", "TaseTeofilus", "Udug", "Ukobach", "Usiel", "Uziel", "Uzza", "Uriel", "Valac", "Valefor", "Vapula", "Vassago", "Veltis", "Vepar", "Separ", "Vine", "Warren", "Zaffis", "Zarika", "Zepar", "Zohk", "Zoroastra", "Zohak", "Disaster", "Strong", "Forte", "Glory", "Hawk", "Falcon", "Sinner", "Dawn", "Crepusculo", "Flama", "Flame", "Sunrise", "Alba", "Star", "Estrella", "Estela", "Legend", "Blood", "Aeon", "Veil", "Victor", "Victoria", "Honor", "Noble", "Ley", "Law", "Melody", "Purity", "Rune", "Ron", "Gin", "Sinfinder", "Sinner", "Song", "Cult", "Culto", "Prayer", "Pray", "Gunner", "Katana", "Jester", "King", "Dante", "Danza", "Apocalypse", "Astaroz", "Astaroth", "Khemed", "Ahset", "Amunet", "Aneksi", "Atet", "Baketamon", "Bunefer", "Hentie", "Herit", "Heteferes", "Ipuet", "Itet", "Joba", "Kasmut", "Kemanub", "Khemut", "Maia", "Menhet", "Merit", "Nebet", "Neferu", "Nit", "Nofret", "Nubemiunu", "Peseshet", "Rai", "Sadeh", "Sadek", "Sitamun", "Sitre", "Takhat", "Tarset", "Werenro", "Ahmose", "Amasis", "Amenemhet", "Anen", "Banefre", "Bek", "Henenu", "Huya", "Ibebi", "Idu", "Ineni", "Ipuki", "Irsu", "Kawad", "Kawab", "Kenamon", "Kewap", "Khafra", "Khuesebek", "Masaharta", "Meketre", "Merenre", "Metjen", "Nebamun", "Nehi", "Nekure", "Nessumontu", "Pawah", "Ramose", "Rudjek", "Sabaf", "Sebni", "Senusret", "Shabaka", "Somintu", "Thaneni", "Theti", "Aktas", "Anakis", "Armara", "Astaro", "Astaroz", "Azza", "Belez", "Bune", "Criella", "Damaia", "Ishte", "Jezebez", "Kali", "Kallista", "Kasdeya", "Lilith", "Makaria", "Markosian", "Nemeian", "Nija", "Oriana", "Osah", "Felaia", "Pura", "Pyra", "Rieta", "Sekhmet", "Semyaza", "Shava", "Zendaya", "Shax", "Vapula", "Vepar", "Verin", "Akmen", "Amon", "Astar", "Balam", "Bazin", "Cain", "Caim", "Cimer", "Damakos", "Euron", "Kairon", "Nicor", "Oriax", "Paymon", "Atraxas", "Samal", "Zamuz", "Valafar", "Zezan", "Ambition", "Art", "Carrion", "Chant", "Canto", "Creed", "Death", "Despair", "Doom", "Doubt", "Dread", "Ecstasy", "Ennui", "Entropy", "Excellence", "Fear", "Miedo", "Glory", "Gloria", "Gluttony", "Grief", "Hate", "Hope", "Horror", "Ideal", "Ignominy", "Risa", "Love", "Amor", "Lust", "Mayhem", "Mockery", "Murder", "Muse", "Musa", "Music", "Mystery", "Nowhere", "Open", "Pain", "Passion", "Poetry", "Quest", "Random", "Reverence", "Revulsion", "Sorrow", "Temerity", "Torment", "Tragedy", "Vice", "Virtue", "Weary", "Ariatari", "Grace", "Caos", "Piety", "Azizi", "Wit", "Dawala", "Crimson", "Umayma", "Nushim", "Abrasax", "Liberty", "Luz", "Luzimer"]
+    if Type == "Fiend": return Tieflings
+    Names += Tieflings
+
+    return (Names)
+
+# Surname lists
+def Racial_Surnames(Type):
+    Names = [""]
+    Humans = [
+    "Commoner",
+    "Nomad",
+    "Wanderer",
+    "Peasant",
+    "Squire",
+    "Mortal",
+    "Kinsman",
+    "Vagrant",
+    "Pilgrim",
+    "Settler", "Amblecrown", "Buckman", "Evenwood", "Greycastle", "Tallstag", "Bersk", "Chernin", "Dotsk", "Kulenov", "Marsk", "Nemetsk", "Shemov", "Starag", "Brightwood", "Helder", "Hornraven", "Lackman", "Stormwind", "Windriver", "Ankhalab", "Anskuld", "Fezim", "Hahpet", "Nathandem", "Sepret", "Uuthrakt", "Chergoba", "Dyernina", "Iltazyara", "Murnyethara", "Stayanoga", "Ulmokina", "Chien", "Huang", "Kao", "Kung", "Lao", "Ling", "Mei", "Pin", "Shin", "Sum", "Tan", "Wan", "Agosto", "Astorio", "Calabra", "Domine", "Falone", "Marivaldi", "Pisacar", "Ramondo", "Picasso", "Blackbeast", "Blackbeard", "Blackbear", "Violetdawn", "Rosedawn", "Wanderlust", "Dostoyevsky", "Dundragon", "Pendragon", "Clawthorne"]
+    if Type == "Human": return Humans
+    Names += Humans
+    Elves =[
+    "Eldar",
+    "Moonchild",
+    "Sunweaver",
+    "Starcaller",
+    "Leafdancer",
+    "Nightrunner",
+    "Twilightseeker",
+    "Woodlander",
+    "Astralborn",
+    "Silverkin"]
+    if Type == "Elf": return Elves
+    Names += Elves
+
+    Orcs =[
+    "Warbrute",
+    "Bladebreaker",
+    "Ironclad",
+    "Tusker",
+    "Bonecrusher",
+    "Stormhowler",
+    "Mudwalker",
+    "Beastmaster",
+    "Bloodfist",
+    "Thunderlord"]
+    if Type == "Orc": return Orcs
+    Names += Orcs
+
+
+    Dwarves = [
+    "Stonewrought",
+    "Forgekeeper",
+    "Gemseeker",
+    "Deepdelver",
+    "Mountainborn",
+    "Anvilbender",
+    "Goldbeard",
+    "Runebearer",
+    "Earthshaker",
+    "Fireforge"]
+    if Type == "Dwarf": return Dwarves
+    Names += Dwarves
+
+    Halflings = [
+    "Meadowrover",
+    "Hearthkeeper",
+    "Merrymaker",
+    "Piebaker",
+    "Ciderbrewer",
+    "Riverfriend",
+    "Hillhugger",
+    "Woolspinner",
+    "Greenpatcher",
+    "Fieldwhistler"
+    "Pomme", "Avocat", "Banane", "Mure", "Cerise", "Chataigne", "Clementine", "Coco", "Datte", "Figue", "Goyave", "Raisin", "Pamplemousse", "Kiwi", "Lime", "Mandarine", "Mangue", "Melon", "Olive", "Orange", "Papaye", "Peche", "Poire", "Anananas", "Prune", "Pomelo", "Framboise", "Fraise", "Melon", "Groseille", "Boire", "Jouer", "Jus", "Tomate", "Raisin", "Limonade", "Lait", "Fromage", "Glace", "Champagne", "Vin", "Bonbon", "Oeuf", "Pain", "Fromage", "Fruit", "Salade", "Mere", "Fleurdepomme", "Noisette", "Noix", "Citron"]
+    if Type == "Halfling": return Halflings
+    Names += Halflings
+
+    Gnomes = [
+    "Gearspinner",
+    "Mindtwister",
+    "Aetherwisp",
+    "Tinkerfoot",
+    "Starwhisperer",
+    "Clockfixer",
+    "Mysticmechanic",
+    "Illusionweaver",
+    "Sparkjumper",
+    "Gadgetgrabber"]
+    if Type == "Gnome": return Gnomes
+    Names += Gnomes
+
+    Tieflings = [
+    "Hellkin",
+    "Nightshade",
+    "Doombringer",
+    "Ashcaller",
+    "Soulbinder",
+    "Fireheart",
+    "Demonblood",
+    "Sinwhisperer",
+    "Darkmender",
+    "Brimstonetouched"]
+    if Type == "Fiend": return Tieflings
+    Names += Tieflings
+
+    return (Names)
+
+
+class MarkovNameGenerator:
+    def __init__(self, training_data, order=2):
+        self.order = order
+        self.group_size = order + 1
+        self.text = training_data
+        self.graph = {}
+
+        self._generate_graph()
+
+    def _generate_graph(self):
+        for i in range(0, len(self.text) - self.group_size):
+            key = self.text[i:i + self.order]
+            value = self.text[i + self.order]
+            if key not in self.graph:
+                self.graph[key] = []
+            self.graph[key].append(value)
+
+    def _get_next_letter(self, current_sequence):
+        return random.choice(self.graph[current_sequence])
+
+    def generate_name(self, length=5):
+        index = random.randint(0, len(self.text) - self.order)
+        result = self.text[index:index + self.order]
+        current_sequence = result
+        for _ in range(length - self.order):
+            current_sequence = result[-self.order:]
+            if current_sequence not in self.graph:
+                break
+            next_letter = self._get_next_letter(current_sequence)
+            result += next_letter
+
+        # Capitalize the name
+        return result.capitalize()
+
+
 
 
 def Race():
@@ -5428,7 +5850,6 @@ def NPC():
 
     ### Title 
     Ttl = Title()
-    print(Ttl)
 
     ### Background
     bg = Background()
@@ -5442,6 +5863,20 @@ def NPC():
     rc = Race()
     mn = Monster(rc)
     al = Alignment()
+
+    # Markov
+    training_names = Racial_Names(rc)
+    generator = MarkovNameGenerator(training_names)
+
+    Name = (generator.generate_name())
+    
+    training_names = Racial_Surnames(rc)
+    Surgenerator = MarkovNameGenerator(training_names)
+
+    Name += f" {Surgenerator.generate_name()}
+
+    print(f"{Name}, {Ttl}")
+
 
     ### Race-based Ability Score Adjustments
 
@@ -6072,6 +6507,7 @@ def NPC():
     r += f"{rc}: {mn}"
     r += "\n"
     r += "\n"
+
 
 
     r += f"Lvl: {Lvl}⚜︎\t    HP: {HP}♡\t    AC: {AC}⛨️"
