@@ -5866,14 +5866,14 @@ def NPC():
 
     # Markov
     training_names = Racial_Names(rc)
-    generator = MarkovNameGenerator(training_names)
+    generator = MarkovNameGenerator(" ".join(training_names))
 
     Name = (generator.generate_name())
     
     training_names = Racial_Surnames(rc)
-    Surgenerator = MarkovNameGenerator(training_names)
+    Surgenerator = MarkovNameGenerator(" ".join(training_names))
 
-    Name += f" {Surgenerator.generate_name()}
+    Name += " " + Surgenerator.generate_name()
 
     print(f"{Name}, {Ttl}")
 
