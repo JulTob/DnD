@@ -68,58 +68,23 @@ def Title():
         "Boar-tusked", "Bipedal", "Brave",    "Babylonian",   "Badger",   "Battle",   "Baron of", "Bat",  "Bearded",  "Beholder", "Blending", "Black",    "Blind",    "Blue", "Blood",    "Bone", "Bursting", "Brass",    "Bronce",   "Brown",    "Brain",    "Book", "Butterfly", "Byzantine",
         "Cyclopean","Crested","Chiropteran", "Celestial", "Cosmic",   "Celestial",    "Cryptic",  "Cheerful", "Cat",  "Cobalt",   "Climate",  "Chain",    "Champion of",  "Chief",    "Circus",   "City", "Collector",    "Conjurer", "Coral",    "Clockwork",    "Copper",   "Cursed",   "Crab", "Crimson",  "Crown",    "Content",  "Celtic",   "Chimeric", "Cyclopean",
         "Draconic","Desert", "Dawn", "Daemonian",    "Divine",   "Draconian", "Draconic",    "Dwarven",  "Dusk",
-        "Edo", "Eternal",  "Eldritch",  "Elven",   "Enchanted",    "Epicurean",
-        "Fanged", "Feathered", "Fuchsia", "Fierce",
-        "Gemmed", "Glacial", "Galactic", "Goldenrod",
-        "Horned",
-        "Icy", "Indigo",
+        "Echinate", "Eagle-eyed", "Edo", "Eternal",  "Eldritch",  "Elven",   "Enchanted",    "Epicurean",
+        "Furred", "Fire-breathing", "Finned", "Feline", "Fanged", "Feathered", "Fuchsia", "Fierce",
+        "Griffon-winged", "Goat-footed", "Gilled", "Gemmed", "Glacial", "Galactic", "Goldenrod",
+        "Horned", "Hoofed", "Horned",
+        "Insectoid", "Icy", "Indigo",
         "Joyful",
-        "Lunar", "Luminous",
-        "Mask", "Melancholy", "Mountain", "Midnight", "Momentary", "Mysterious", "Misty",
-        "Nebulous", "Nemean", "Nomadic",
-        "Orb", "Oceanic", "Olympian",
-        "Passionate",
+        "Lupine","Lion-hearted", "Leech-mouthed", "Lunar", "Luminous",
+        "Mollusk", "Mermaid-tailed", "Maned", "Mammalian", "Mask", "Melancholy", "Mountain", "Midnight", "Momentary", "Mysterious", "Misty",
+        "Nocturnal","Nebulous", "Nemean", "Nomadic",
+        "Owl-eyed","Ophidian","Orb", "Oceanic", "Olympian",
+        "Plumed","Piscine","Pegasus-winged","Pawed","Passionate",
         "Radiant", "Renaissance", "River",
         "Scaled", "Scarlet", "Sirenic", "Silent", "Solar", "Stellar", "Stoic", "Swift", "Sword", 
         "Tailed", "Thundering", "Timeless", "Tartarean", "Titanic", "Trojan", "Turquoise",
         "Valley", "Valkyrian", "Victorian",
         "Windy",
-    
-        
-        
-        
          
-        
-        
-        
-        "Eagle-eyed",
-        "Echinate",  # Covered with spines or spikes
-        "Fanged",
-        "Feathered",
-        "Feline",
-        "Finned",
-        "Fire-breathing",
-        "Furred",
-        "Gilled",
-        "Goat-footed",
-        "Griffon-winged",
-        "Hoofed",
-        "Horned",
-        "Insectoid",
-        "Leech-mouthed",
-        "Lion-hearted",
-        "Lupine",  # Wolf-like
-        "Mammalian",
-        "Maned",
-        "Mermaid-tailed",
-        "Mollusk",  # Soft-bodied, often with a hard shell
-        "Nocturnal",
-        "Ophidian",  # Snake-like
-        "Owl-eyed",
-        "Pawed",
-        "Pegasus-winged",
-        "Piscine",  # Fish-like
-        "Plumed",  # Having or decorated with feathers
         "Raptor-clawed",
         "Raven-haired",
         "Reptilian",
@@ -1941,6 +1906,15 @@ def Racial_Surnames(Type):
     if Type == "Dwarf": return Dwarves
     Names += Dwarves
 
+    Elementals = [
+        "Aqua", "Atlantic", "Pacific", "Indian", "Arctic", "Antartic", "Argonaut", "Lotus", "Kailani", "Neptune", "Neptuno", "India", "Maren", "Mar", "Oceano", "Lake", "Kai", "Bay", "Lake", "Bahia", "River", "Nile", "Kai", "Caspian", "Cora", "Maya", "Amalia", "Maia", "Mira", "Talia", "Amaya", "Tallulah", "Ren", "Rene", "Well", "Marin", "Severn", "Marina", "Tiber", "Tiberius", "Jennifer", "Jen", "Rain", "Wade", "Ocen", "Oceanus", "Beck", "Malik", "Malek", "Irv", "Clyde", "Indus", "Indo", "Nimue", "Nim", "Avalon", "Merlin", "Nixie", "Doris", "Kent", "Kendall", "Rio", "Cove", "Bahia", "Innes", "Moses", "Fuji", "Anahita", "Ginevra", "Gin", "Ginebra", "Jordan", "Rayan", "Kelvin", "Nori", "Arno", "Saga", "Lago", "Struan", "Stream", "Varsha", "Shannon", "Ondine", "Onda", "Misty", "Monroe", "Arnav", "Ama", "Lynn", "Moishe", "Yara", "Yareli", "Oceane", "Thalassa", "Bay", "Bey", "Neptune", "Neptuna", "Sea", "Kairi", "Ria", "Indra", "Kano", "Aarna", "Niara", "Niagara", "Nebula", "Delta", "Aalto", "Po", "Araluen", "Jora", "Naim", "Narelle", "Nahla", "Nerida", "Nereida", "Neri", "Cherith", "Adair", "Lir", "Reva", "Sereia", "Aqua", "Eyre", "Mar", "Moana", "Triton", "Euna", "Undine", "Nebula", "Meara", "Loch", "Naida", "Oceana", "Gali", "Tal", "Loire", "Rilla", "Varuna", "Maayan", "Oceanus", "Kalani", "Aquarius", "Acuario", "Danu", "Danubio", "Tarka", "Nen", "Gal", "Rivo", "Duna", "Zarya", "Laguna", "Seine", "Sena", "Alun", "Kallan", "Cascada", "Danube", "Onda", "Wave", "Baia", "Nile", "Nilo", "Maree", "Marea", "Adria", "Adriana", "Alda", "Alma", "Amaya", "Anahita", "Asita", "Cherith", "Darya", "Dayla", "Hali", "Kendra", "Loire", "Marella", "Michal", "Mira", "Nahla", "Namra", "Reva", "Ria", "Salila", "Sarita", "Talia", "Zarna", "Zarya", "Adair", "Afron", "Alon", "Andreus", "Arnon", "Bahari", "Gafar", "Haf", "Jafar", "Kallan", "Kaveri", "Malik", "Ninad", "Odine", "Pavati", "Pulin", "Sagara", "Siva", "Wade", "Adva", "Ara", "Arna", "Baia", "Bay", "Cascade", "Cascada", "Coral", "Eira", "Euri", "Isa", "Ice", "Snow", "Isla", "Jamaica", "Jordan", "Jubal", "Kai", "Kenga", "Kline", "Lago", "Laguna", "Laco", "Lake", "Laik", "Maris", "Morgan", "Morgana", "Nira", "Rayan", "Shandy", "Shannon", "Shore", "Adair", "Amaya", "Cary", "Kisima", "Laguna", "Narelle", "Nile", "Nilo", "Nimue", "Serena", "Sereno", "Yara", "Alon", "Kano", "Wade", "Naia", "Tide", "Adriatic", "Ariel", "Athena", "Atena", "Azena", "Eldoris", "Marin", "Kona", "Argo", "Arcadia", "Blue", "Lima", "Andaya", "Niar", "Mora", "Amal", "Kaya", "Dorian",
+        "Fuocco", "Phoenix", "Ember", "Cyrus", "Rhys", "Apollo", "Kenna", "Blaze", "Flame", "Arsenic", "Kenna", "Ravi", "Aster", "Ignatius", "Ignacio", "Ignatio", "Hera", "Uri", "Edris", "Satish", "Calcifer", "Sol", "Solina", "Solin", "Salamander", "Ardea", "Ravee", "Vulcan", "Eldir", "Hito", "Agni", "Waru", "Alev", "Haco", "Adar", "Agni", "Aiden", "Adish", "Afi", "Ardere", "Ash", "Ashbel", "Atesh", "Blaze", "Bodaway", "Brand", "Brando", "Branton", "Brent", "Conleth", "Cimbeline", "Cyrus", "Cirio", "Egan", "Finlo", "Fintan", "Flint", "Haco", "Hagan", "Hakan", "Helios", "Elio", "Inigo", "Iñigo", "Ishaan", "Keahi", "Keegan", "Kenneth", "Kiran", "Maccoy", "Nuri", "Prometheus", "Prometeo", "Promezeus", "Prometeus", "Ra", "Rhys", "Tyson", "Uri", "Vulcan", "Aalish", "Aidan", "Adar", "Aithne", "Aizne", "Alinta", "Anala", "Azar", "Barbara", "Calida", "Candace", "Cinder", "Ceniza", "Cinderella", "Cinderel", "Edan", "Ember", "Ambar", "Amber", "Ena", "Enya", "Anya", "Fiamma", "Flama", "Idris", "Kalama", "Kenna", "Pele", "Fenix", "Shula", "Souzan", "Tana", "Burn", "Abenanka", "Aguya", "Aithne", "Alinta", "Bedelia", "Brid", "Calida", "Calina", "Enya", "Eña", "Enia", "Ember", "Fiamma", "Nina", "Shula", "Tana", "Tanwen", "Admani", "Agni", "Aiden", "Anala", "Aodh", "Brandr", "Branton", "Blaze", "Brand", "Cinaed", "Conleth", "Conlez", "Egan", "Edan", "Edana", "Flint", "Fintan", "Hagan", "Haco", "Vela", "Ignacio", "Inigo", "Iñigo", "Ignatius", "Kenez", "McCoy", "Mishal", "Mogotsi", "Nuri", "Nuria", "Plamen", "Pirro", "Pyrrhus", "Pirrus", "Tanguy", "Tito", "Titus", "Uri", "Vatroslav", "Azar", "Hayden", "Keahi", "Liekki", "Fenix", "Rhys", "Igno", "Kenez", "Blaise", "Blaze", "Aalish", "Aatish", "Aatix", "Atix", "Aarush", "Aarux", "Arux", "Abenanka", "Adara", "Adeen", "Adish", "Admani", "Amani", "Adurnarseh", "Aed", "Afi", "Agneya", "Agnes", "Agni", "Agnimitra", "Agnivo", "Aguya", "Ahdan", "Aidan", "Aiden", "Aine", "Aithne", "Aizne", "AkihoAldebrand", "Alev", "Alinta", "Amarkeeri", "Anala", "Angarika", "Apoy", "Ardere", "Arder", "Ardor", "Atsila", "Azar", "Azula", "Azarnoosh", "Basia", "Bedelia", "Brantley", "Brigid", "Brit", "Cemre", "Chantico", "Conlez", "Conleth", "Conley", "Fajra", "Faira", "Fiamma", "Flama", "Fiama", "Felio", "Felia", "Felios", "Hurik", "Idris", "Ignacia", "Ishat", "Kamar", "Kazuya", "Keahi", "Keegan", "Kenna", "Kindle", "Kai", "Lieki", "Mahuika", "Mashal", "Torch", "Antorcha", "Torcha", "Mogotsi", "Nina", "Nootau", "Nutau", "Oya", "Plamen", "Pyro", "Piro", "Piros", "Pirus", "Ris", "Piris", "Shohreh", "Sore", "Shula", "Souzan", "Tanguy", "Ugne", "Igne", "Ignea", "Azar", "Calida", "Calido", "Fuji", "Neri", "Aiden", "Adal", "Cora", "Areli", "Brina", "Arian", "Igna", "Kalal", "Pikah", "Alen", "Brind", "Cosha", "Ari", "Keri", "Cider", "Cavo", "Fenix", "Adarin", "Bris", "Azam", "Calan", "Arur",
+        "Terra", "Onix", "Opal", "Aluminum", "Gallium", "Indium", "Tin", "Thallium", "Lead", "Bismuth", "Nihonium", "Igneus", "Igneous", "Igneo", "Ignea", "Sedimentar", "Sedimentario", "Sedimentaria", "Metamor", "Metam", "Dacite", "Basalt", "Granite", "Pegmatite", "Basalt", "Obsidian", "Stone", "Chalk", "Sand", "Iron", "Slate", "Skist", "Garnet", "Marble", "Jade", "Ore", "Adakite", "Andesite", "Alkali", "Basalt", "Basanite", "Magnesium", "Lava", "Volcan", "Potassium", "Silica", "Rock", "Carbon", "Carbonite", "Ender", "Dacite", "Dolerite", "Corsite", "Dunite", "Olivine", "Essexite", "Granite", "Grane", "Dune", "Pluton", "Kimberlite", "Diamond", "Latite", "Obsidian", "Pumice", "Scoria", "Sovite", "Dolomite", "Chalk", "Coal", "Quartz", "Cuarzo", "Salt", "Marble", "Granite", "Lapislazuli", "Lapis", "Lazuli", "Adamite", "Adelite", "Arenite", "Almandite", "Alumn", "Alunite", "Amarantite", "Anandite", "Antimony", "Azurite", "Adamantine", "Agate", "Alabaster", "Bismite", "Bismut", "Bronce", "Cadmium", "Cerite", "Carvonite", "Crystal", "Copper", "Cobre", "Cementite", "Emerald", "Diamond", "Mine", "Fluorite", "Garnet", "Gold", "Hematite", "Magnetite", "Manganite", "Mesolite", "Mimetite", "Mica", "Magnesia", "Neptinite", "Pyrite", "Pirite", "Quartz", "Ruby", "Titanite", "Turquesa", "Turkis", "Turquoise", "Tremor", "Uralite", "Zeolite", "Zinc", "Zircon", "Lithium", "Sodium", "Potassium", "Rubidium", "Cesium", "Francium", "Berillium", "Magnesium", "Calcium", "Strontium", "Barium", "Radium", "Aluminium", "Gallium", "Indium", "Tin", "Thallium", "Lead", "Bismuto", "Titanium", "Vanadium", "Chromium", "Manganese", "Iron", "Cobalt", "Nickel", "Copper", "Zinc", "Zirconium", "Rodium", "Palladium", "Silver", "Cadmium", "Tunsten", "Osmium", "Platinum", "Gold", "Mercury", "Plata", "Oro", "Copernicium", "Uranium", "Plutonium", "Curium", "Californium", "Einstenium", "Fermium", "Nobelium", "Lithium", "Berilium", "Sodium", "Magnesium", "Potasium", "Calcium", "Titanium", "Vanadium", "Chrome", "Chromium", "Manganese", "Iron", "Cobalt", "Nickel", "Copper", "Zinc", "Gallium", "Rubidium", "Strontium", "Zirconium", "Niobium", "Rodium", "Silver", "Cadmium", "Indium", "Tin", "Cesium", "Cerium", "Promethium", "Iridium", "Platinum", "Mercury", "Mercurium", "Lead", "Bismutium", "Polonium", "Uranium", "Alabaster", "Argento", "Berilio", "Clay", "Coal", "Cobalt", "Dustin", "Elessar", "Emerald", "Ferro", "Granite", "Mercury", "Mica", "Oriol", "Oro", "Peter", "Pedro", "Saphir", "Silver", "Steel", "Stone", "Zircon", "Bronze", "Iron", "Ferro", "Electrum", "Sterling", "Argentium", "Titanium", "Cole", "Arena", "Arenita", "Flint", "Duna", "Amatist", "Gravel", "Gaia", "Boulder", "Bould", "Atlas", "Avalanche", "Midas", "Flint", "Basalt", "Jade", "Mita", "Coba",
+        "Aero", "Aelio", "Aeolian", "Gale", "Zefir", "Zefyr", "Zephyr", "Zefirus", "Wuzer", "Wuther", "Haboob", "Abroholos", "Auster", "Austru", "Barat", "Barber", "Bayamo", "Bora", "Borasco", "Boreas", "Boreal", "Aurora", "Brisa", "Briza", "Brisot", "Brubu", "Cave", "Kaver", "Chubasco", "Cierzo", "Contrastes", "Cordonazo", "Cyclone", "Etesian", "Euros", "Hurricane", "Huracan", "Wind", "Viento", "Leste", "Levanter", "Levante", "Levantera", "Levanto", "Leveche", "Mistral", "Norte", "Noreaster", "Norestero", "Norwester", "Noroestero", "Nortero", "Ostria", "Pali", "Santana", "Shamal", "Sharki", "Siroco", "Sumatra", "Tramontana", "Tifon", "Zefiros", "Zefiro", "Zefir", "Bora", "Etesian", "Levant", "Levante", "Leveche", "Harmatan", "Karaburan", "Buran", "Orosi", "Sarma", "Shamal", "Alisio", "Alize", "Bayamo", "Brisote", "Caju", "Nordeste", "Minuano", "Zonda", "Pampero", "Sudestada", "Cordonazo", "Coromuel", "Norte", "Autan", "Bise", "Brise", "Brisa", "Burle", "Cers", "Cierzo", "Etesian", "Euroclydon", "Fohn", "Gregale", "Helm", "Leveche", "Lodos", "Maestro", "Marin", "Mistral", "Nordes", "Ostro", "Poliente", "Solano", "Tramontane", "Vendavel", "Kona", "Abel", "Aeolus", "AkashAmun", "Anan", "Cloud", "Anil", "Nube", "Anore", "Arkansas", "Avel", "Barak", "Baran", "Brontes", "Caelus", "Corentin", "EnlilErjon", "Esen", "Guntur", "Keanu", "Matuu", "Mellan", "Moe", "Myrsky", "Naseem", "Neifion", "Neil", "Neve", "Nigel", "Notus", "Payne", "Perun", "Firun", "Samir", "Sepher", "Shu", "Sky", "Stromur", "Sturm", "Thor", "Thunder", "Storm", "Torm", "Tufani", "Van", "Zenith", "Zephyr", "Zeus", "Aella", "Aethra", "Ahana", "Alize", "Amihan", "Anemos", "Anila", "Araceli", "Audra", "Aura", "Auretta", "Awen", "Azure", "Bonaria", "Ciela", "Cielo", "Dangira", "Dima", "Ekaitza", "Era", "Glaw", "Haizea", "Haneul", "Inanna", "Iris", "Kafeira", "Cafeira", "Minnesota", "Misty", "Mist", "Nephele", "Ninlil", "Nuit", "Pilvi", "Puleng", "Rain", "Rakia", "Samira", "Sema", "Skye", "Stormy", "Tempest", "Tondra", "Varsha", "Vetra", "Zerua", "Zilan", "Mistral", "Gibli", "Zonda", "Etesian", "Shamal", "Aither", "Akash", "AlizehAmphorn", "Amun", "Anan", "AnilAnore", "Anvindr", "Ayaz", "Bayu", "Boreas", "Caelus", "Corentin", "Enlil", "Erjon", "Ermir", "Esen", "Eyvinder", "FujinGokcan", "Govad", "Guzrie", "Hayate", "Ilmari", "Keyne", "Naseem", "Neven", "Notus", "Ouranos", "Payne", "Rabi", "Samir", "Sepher", "Soma", "Sota", "Tifon", "Vayu", "Zeferino", "Zenit", "Zefir", "Zeru", "Zeus", "Aella", "Aethra", "Ahana", "Alizee", "Alizeh", "Alya", "Amaterasu", "Amihan", "Anila", "Aria", "Aureole", "Auretta", "Azure", "Bonaria", "Breeze", "Brisa", "Ciela", "CoroEra", "Esen", "Eteri", "Haizea", "Haneul", "Ilma", "Kailani", "Kalani", "Lulani", "Makani", "Meltem", "Miku", "Mystral", "Nasima", "Ninlil", "Nuit", "Rakia", "Samira", "Sciron", "Scirocco", "Sefarina", "Sema", "Skye", "Tadita", "Wind", "Zephyrine", "Zerua", "Damini", "Oya", "Nebula", "Misty", "Mist", "Wind", "Brenna", "Sail", "Vela", "Katrina", "Amakir", "Abub", "Zeam", "Vesha", "Nura", "Wura", "Enarise", "Amana", "Aeana", "Akades", "Miste", "Zecori", "Sirocco", "Siroco", "Aura", "Zepherien", "Sior", "Annora", "Ael",
+        "Element"
+    ]
+    if Type == "Elemental": return Elementals
+    
     Halflings = [
     "Meadowrover",
     "Hearthkeeper",
@@ -1986,7 +1960,29 @@ def Racial_Surnames(Type):
 
     return (Names)
 
+class SimpleMarkov:
+    def __init__(self):
+        self.transitions = {}
 
+    def train(self, data):
+        for i in range(len(data) - 1):
+            current_element = data[i]
+            next_element = data[i + 1]
+            if current_element not in self.transitions:
+                self.transitions[current_element] = []
+            self.transitions[current_element].append(next_element)
+
+def generate(self, starting_element):
+    output = [starting_element]
+    while True:
+        if output[-1] in self.transitions:
+            next_element = random.choice(self.transitions[output[-1]])
+            output.append(next_element)
+        else:
+            break
+    return output
+
+    
 class MarkovNameGenerator:
     def __init__(self, training_data, order=2):
         self.order = order
@@ -5864,14 +5860,14 @@ def NPC():
     mn = Monster(rc)
     al = Alignment()
 
-    # Markov
+    # Markov String
     training_names = Racial_Names(rc)
-    generator = MarkovNameGenerator(" ".join(training_names))
+    generator = SimpleMarkov(training_names)
 
     Name = (generator.generate_name())
     
     training_names = Racial_Surnames(rc)
-    Surgenerator = MarkovNameGenerator(" ".join(training_names))
+    Surgenerator = SimpleMarkov(training_names)
 
     Name += " " + Surgenerator.generate_name()
 
@@ -6689,11 +6685,9 @@ def NPC():
         question += "\n They are" + tr1 + " They also are " + tr2
         question += "\n They follow the ideal of " + idl
         question += "\n Also, there's an event in their life that greatly shaped them: " + ph 
-        question += "\n Based on their statistics, but don't mention them directly, they have a strength of " + str(STR) + ", dexterity of " + str(DEX) + ", constitution of " + str(CON) + ", intelligence of " + str(INT) + ", wisdom of " + str(WIS) + ", and charisma of " + str(CHA)
-        question += "\n Their combat capabilities include an AC of " + str(AC) + ", HP of " + str(HP) + ", and proficiency bonus of " + str(PB(Lvl)) + ", but don't mention directly."
         question += "\n Based on their race and background, what would be a plausible story for them?"
         question += "\n Write it in the style of " + Style()
-        question += "\n Write it in first person, as if he was introducing himself, and use three paragraphs of about 100 words each, expanding where appropiate. The first paragraph must contain information of their name and background. The second paragraph must express their ideals and goals. The third paragraph must explain why the player's characters may cross paths with the NPC."  
+        question += "\n Write it in first person, as if he was introducing himself, and use three paragraphs of about 100 words each, expanding where appropiate. The first paragraph must contain information of their name and background. The second paragraph must express their ideals and goals. The third paragraph must explain why the player's characters may help or confront the NPC."  
         answer = ask_chatgpt(question)
         print(answer)
         print(s)
