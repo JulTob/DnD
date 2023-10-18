@@ -25,7 +25,7 @@ def ask_chatgpt(question):
         )
         return response.choices[0].text.strip()
     except:
-        return "I'm the chosen one."
+        return ""
 
 def Style():
     styles = [
