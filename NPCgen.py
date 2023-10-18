@@ -1,25 +1,31 @@
 # NPC creator
 import random
 import json
-import openai
 
-# Open AI Key
-keyFile = open("key.txt", "r")
-key = keyFile.read()
-openai.api_key = key
-keyFile.close()
+
 
 
 
 def ask_chatgpt(question):
-    # Use the Completion API to ask the question
-    response = openai.Completion.create(
-        model = "gpt-3.5-turbo-instruct", #"text-davinci-002", ## You can specify other models as well: "text-davinci-002", "curie", "ada
-        prompt=question,
-        max_tokens=500,  # Limit the response length, adjust as needed
-        temperature=1
-    )
-    return response.choices[0].text.strip()
+    try: 
+        import openai
+
+        # Open AI Key
+        keyFile = open("key.txt", "r")
+        key = keyFile.read()
+        openai.api_key = key
+        keyFile.close()
+
+        # Use the Completion API to ask the question
+        response = openai.Completion.create(
+            model = "gpt-3.5-turbo-instruct", #"text-davinci-002", ## You can specify other models as well: "text-davinci-002", "curie", "ada
+            prompt=question,
+            max_tokens=500,  # Limit the response length, adjust as needed
+            temperature=1
+        )
+        return response.choices[0].text.strip()
+    except:
+        return "I'm the chosen one."
 
 def Style():
     styles = [
@@ -519,6 +525,7 @@ def Title():
         "Lunar",
         "Lupine",
         "Lush",
+        "Lyre",  
         "Mad",
         "Magenta",
         "Magic",
@@ -652,6 +659,7 @@ def Title():
         "Prophetic",
         "Proud",
         "Pulsar",
+        "Pharaoh's",
         "Pyroclastic",
         "Quagmire",
         "Quarry",
@@ -826,6 +834,8 @@ def Title():
         "Woody",
         "Workshop",
         "Worried",
+        "War",
+        "Wormhole", 
         "Yesteryear",  
         "Young",
         "Zealous",
@@ -836,8 +846,6 @@ def Title():
         "Zombie",
         "Zoo", 
         "Talon-clawed", 
-        "War","Wormhole", 
-        "Lyre",  
         "Gavel",  
         "X-ray",  
         "Elixir",  
@@ -905,7 +913,6 @@ def Title():
         "Stellar",   
         "Extraterrestrial",  
         "Infinite",   
-        "Ultraviolet",
         "Bat",
         "Bipedal",
         "Black",
@@ -975,10 +982,10 @@ def Title():
         "Timeless",
         "Titanic",
         "Trojan",
+        "Ultraviolet",
         "Valkyrian",
         "Vampiric",
         "Voidborne",
-        "Winged",
         "Byzantine", 
         "Medieval", 
         "Staff", 
@@ -1053,7 +1060,6 @@ def Title():
         "Speaker",
         "Spell",
         "Sphinx",
-        "Sphinx-faced",
         "Spined",
         "Spring",
         "Squirrel-tailed",
@@ -1087,6 +1093,7 @@ def Title():
         "Voice",
         "Void",
         "Vulpine",
+        "Winged",
         "Wandering",
         "Warm",
         "Wary",
@@ -1280,7 +1287,6 @@ def Title():
         "Doctor",
         "Dolphin",
         "Dominator",
-        "Doom",
         "Doom",
         "Dove",
         "Dragon",
@@ -1502,7 +1508,6 @@ def Title():
         "Mythical Beast Rider",
         "Naga",
         "Navigator",
-        "Navigator",
         "Necro",
         "Necromancer",
         "Nether",
@@ -1512,7 +1517,6 @@ def Title():
         "Noble",
         "Nocturnal",
         "Nomad",
-        "Trader",
         "Odyssey",
         "Of Death",
         "Of Heaven",
@@ -1642,6 +1646,7 @@ def Title():
         "Snake",
         "Skeleton",
         "Skull",
+        "Stagecoach",
         "Surgeon",
         "Sucubus",
         "Spirit",
@@ -1787,14 +1792,12 @@ def Title():
         "Acolyte",
         "Celestian",
         "Of Athena",
-        "Flight",
         "Alchemist",
         "Algonquin's Light",
         "Alpha",
         "Heart",
         "Ambassador",
         "High Ambassador",
-        "Ambassador",
         "Ambition",
         "Appetite",
         "Anthropologist",
@@ -1804,7 +1807,7 @@ def Title():
         "Archduke",
         "Archer",
         "Archivist",
-        "Archmage of the Divine",
+        "Archmage",
         "Argonaut's Heir",
         "Artificer",
         "Ascendant",
@@ -1823,8 +1826,8 @@ def Title():
         "Banneret",
         "Banshee Wailmistress",
         "Banshee's Wail Seeker",
+        "Flight",
         "Voyage",
-        "Wisdom",
         "Barbarian",
         "Bard",
         "Baron",
@@ -1894,7 +1897,7 @@ def Title():
         "Claim Jumper",
         "Cleric",
         "Cloudcaller",
-        "Codex Keeper of the Yucatan",
+        "Codex Keeper",
         "Coil",
         "Combat Priest",
         "Commander",
@@ -2241,7 +2244,7 @@ def Title():
         "Numerologist",
         "Nun",
         "Nyami Nyami's Wrath",
-        "O.K. Corral's Echo",
+        "Echo",
         "Occultist",
         "Odin's Whisperer",
         "Ogre Mountainbreak",
@@ -2260,19 +2263,18 @@ def Title():
         "Outlaw",
         "Outlaw's Kin",
         "Overseer",
+        "of the Divine",
         "Paladin",
-        "Paladin",
-        "Paladin",
-        "Pangu's Fragment",
-        "Panning Pioneer",
+        "Fragment",
+        "Pioneer",
         "Pathfinder",
         "Patriarch",
         "Pedagogue",
-        "Perun's Stormcaller",
-        "Peyote Visionary",
+        "Stormcaller",
+        "Visionary",
         "Phalanx Leader",
         "Pharaoh",
-        "Pharaoh's Legacy",
+        "Legacy",
         "Philosopher",
         "Pikeman",
         "Piper",
@@ -2334,74 +2336,70 @@ def Title():
         "Rhythm",
         "Riddlemaster",
         "River's Gem" 
-        "Riverlord Habaek",
-        "Rivermancer of the Kappa",
-        "Roanoke's Lost Settler",
+        "Riverlord",
+        "Rivermancer",
+        "Lost Settler",
         "Roar",
         "Rodeo Star",
         "Rombo's Horn",
         "Ronin",
         "Ruler",
         "Rune Knight",
+        "Runebearer",
         "Runebearer of Midgard",
         "Runechanter",
         "Runekeeper",
-        "Runekeeper",
-        "Rusalka's Lament",
-        "Rustler's Bane",
+        "Lament",
+        "Bane",
         "Sacred Keeper",
         "Sacred Speaker",
-        "Saddle's Scar",
-        "Safari's Spirit",
+        "Scar",
+        "Spirit",
         "Saga",
         "Sage",
         "Saint",
-        "Saloon's Whisper",
-        "Samhain's Sentinel",
+        "Whisper",
+        "Sentinel",
         "Samurai",
         "Sandkeeper",
-        "Sankofa's Seeker",
-        "Sarsaparilla Slinger",
-        "Sasquatch's Kin",
-        "Satyr Piper",
+        "Seeker",
+        "Slinger",
+        "Sasquatch",
+        "Piper",
         "Scholar",
         "Secret",
         "Secretary",
-        "Seeker of the Underworld Gate",
-        "Seer",
+        "of the Underworld Gate",
+        "Seeker",
         "Seer",
         "Sellsword",
-        "Sellsword",
+        "Spellsword",
         "Senator",
         "Sentinel",
-        "Sequoia's Strength",
+        "Strength",
         "Sergeant",
-        "Serpent's Scale",
+        "Scale",
         "Serpentlord",
-        "Serpentseer Fuxi",
+        "Serpent",
         "Shadow",
         "Shadowcrafter",
         "Shadowmancer",
         "Shadowseer",
         "Shaman",
-        "Shaman",
-        "Shaman",
         "Shaolin",
-        "Sheba's Radiance",
-        "Sheriff",
+        "Radiance",
         "Sheriff",
         "Shield",
         "Shieldbearer",
         "Shogun",
-        "Shogun",
         "Siege Master",
-        "Silver Mountains Seeker",  
-        "Silver Spur",
+        "Mountains Seeker",  
+        "Silver",
         "Silverspeaker",
-        "Simba's Pride",
+        "Pride",
         "Sirensong",
         "Six-Shooter Sage",
-        "Skald of the Eternal Sagas",
+        "of the Eternal Sagas",
         "Skymaiden",
         "Skyrider of the Buraq",
         "Skyrider",
@@ -2409,7 +2407,7 @@ def Title():
         "Skywarden",
         "Skyweaver",
         "Song",
-        "Songblade of Bihyeongrang",
+        "Songblade",
         "Songstress",
         "Sorcerer",
         "Sorcerer-Bishop",
@@ -2425,13 +2423,12 @@ def Title():
         "Spellweaver",
         "Spellwoven",
         "Spelunker",
-        "Sphinx Riddlemaster",
         "Sphinx's Riddle",
-        "Spiderwoman's Web",  
+        "Spider's Web",  
         "Spiritguide",
         "Spiritualist",
         "Sprite Sparkweaver",
-        "Stagecoach Guardian",
+        "Guardian",
         "Stampede's Roar",
         "Star Quilter",
         "Star Whisperer",
@@ -2532,7 +2529,7 @@ def Title():
         "Volva's Visionary",
         "Vizier",
         "of the Endless Sands",
-        "Wagon Train's Heart",
+        "Heart",
         "Wanderer",
         "War Druid",
         "War Witch",
@@ -2540,10 +2537,11 @@ def Title():
         "Warcaster",
         "Warchief",
         "Warden",
+        "Wisdom",
         "Warden",
         "Warder of the Gods",
         "Wardmaster",
-        "Warforged Prime",
+        "Warforger",
         "Warhawk",
         "Warlord",
         "Warlord",
@@ -9176,7 +9174,7 @@ def AbilityScoresGeneration(rc = ""):
     if rc == "Goblin":
         DEX += Dice(3)                      # For their nimbleness.
         INT += Dice(3)                      # For their cunning and potential for strategy or invention.
-        CHA += Deice(2)                     # For their often charismatic or manipulative nature.
+        CHA += Dice(2)                      # For their often charismatic or manipulative nature.
         goblin_type = random.choice(["Skirmisher", "Tinkerer", "Shaman", "Warlord", "Schemer"])
 
         if goblin_type == "Skirmisher":
