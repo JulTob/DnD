@@ -2782,7 +2782,7 @@ def Background():
         "Scholar",
         "Soldier",
         "Rogue",
-        "Scholar";
+        "Scholar",
         "Shaman",
         "Soldier",
         "Spy",
