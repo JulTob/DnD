@@ -105,6 +105,7 @@ def Title():
         "Aquatic",
         "Archfey",
         "Avian",
+        "Azure",
         "Babylonian",
         "Baobab's",
         "Blind",
@@ -244,7 +245,7 @@ def Title():
         "Cometary",
         "Compassionate",
         "Confident",
-        "Confucian",
+        "Confused",
         "Copper",
         "Coppice",
         "Coral",
@@ -290,6 +291,7 @@ def Title():
         "Doctor",
         "Dormant",
         "Drained",
+        "Dragon's",
         "Dream",
         "Driftwood",
         "Dune",
@@ -525,7 +527,8 @@ def Title():
         "Lunar",
         "Lupine",
         "Lush",
-        "Lyre",  
+        "Lyre",
+        
         "Mad",
         "Magenta",
         "Magic",
@@ -573,7 +576,6 @@ def Title():
         "Moor",
         "Morass",
         "Moss",
-        "Mossy",
         "Motivated",
         "Mountain", 
         "Mountainous",
@@ -587,6 +589,7 @@ def Title():
         "Myrmidonic",
         "Mysterious",
         "Mystical",
+        "Mythical", 
         "Nebulous",
         "Nemean",
         "Nervous",
@@ -692,6 +695,7 @@ def Title():
         "Ruins",
         "Rust",
         "Ruthless",
+        
         "Sacred",
         "Sad",
         "Salmon",
@@ -838,13 +842,6 @@ def Title():
         "Wormhole", 
         "Yesteryear",  
         "Young",
-        "Zealous",
-        "Zen",
-        "Zephyr",
-        "Zeusian"
-        "Joyful",
-        "Zombie",
-        "Zoo", 
         "Talon-clawed", 
         "Gavel",  
         "X-ray",  
@@ -1070,6 +1067,7 @@ def Title():
         "Storm",
         "Strong",
         "Summer",
+        
         "Tailed",
         "Tamer of",
         "Tentacled",
@@ -1082,7 +1080,10 @@ def Title():
         "Trival",
         "True",
         "Turquoise",
+        
         "Undying",
+        "Underworld",
+        
         "Vampiric",
         "Venomous",
         "Veteran",
@@ -1093,6 +1094,9 @@ def Title():
         "Voice",
         "Void",
         "Vulpine",
+        "Vengeful",
+        "Valkyrie's",
+        
         "Winged",
         "Wandering",
         "Warm",
@@ -1119,10 +1123,21 @@ def Title():
         "Wolf-pawed"
         "Wrathful",
         "Wight",
+        
         "Zodiacal",   
-
+        "Zealous",
+        "Zen",
+        "Zephyr",
+        "Zeusian"
+        "Joyful",
+        "Zombie",
+        "Zoo", 
         ""
     ]
+
+
+
+
     
     rank = [
     
@@ -1168,6 +1183,7 @@ def Title():
         "Atlas",
         "Augur",
         "Avatar",
+        
         "Baboon",
         "Badger",
         "Baker",
@@ -1190,7 +1206,6 @@ def Title():
         "Bishop",
         "Bison",
         "Blacksmith",
-        "Blacksmith",
         "Blade",
         "Blaze",
         "Blighted",
@@ -1212,6 +1227,8 @@ def Title():
         "Butcher",
         "Butterfly",
         "Buzzard",
+
+        "Cat",
         "Cadaver",
         "Cairn",
         "Camel",
@@ -1219,8 +1236,6 @@ def Title():
         "Captain",
         "Captain",
         "Cartographer",
-        "Cartographer",
-        "Cat",
         "Cedar",
         "Celestial Mapper",
         "Centurion",
@@ -1258,6 +1273,7 @@ def Title():
         "Cursed",
         "Cursed",
         "Cyclops",
+        
         "Daisy",
         "Dame",
         "Dancer",
@@ -1300,6 +1316,7 @@ def Title():
         "Duchess",
         "Duke",
         "Dungeon Delver",
+        
         "Eagle",
         "Eagle",
         "Eater",
@@ -1326,10 +1343,8 @@ def Title():
         "Exorcist",
         "Expedition",
         "Explorer",
-        "Explorer",
-        "Explorer",
+
         "Falcon",
-        "Falconer",
         "Falconer",
         "Fallen",
         "Fanatic",
@@ -1356,6 +1371,7 @@ def Title():
         "Frontier",
         "Frost",
         "Fury",
+        
         "Gale",
         "Gambler of Fate",
         "Gargoyle",
@@ -1381,6 +1397,7 @@ def Title():
         "Guide",
         "Gull",
         "Guru",
+        
         "Hag",
         "Hand",
         "Harbinger",
@@ -1410,13 +1427,15 @@ def Title():
         "Hunter",
         "Hydra",
         "Hyena",
+        
         "Incubus",
         "Infernal",
         "Inquisitor",
         "Intellect",
         "Ivy",
+        
         "Jackal",
-        "Jackal",
+        "Jackal's",
         "Jaguar",
         "Jasmine",
         "Jay",
@@ -1426,6 +1445,7 @@ def Title():
         "Juggernaut",
         "Jungle",
         "Juniper",
+        
         "Kaiju",
         "Keeper",
         "Kestrel",
@@ -1435,6 +1455,7 @@ def Title():
         "Kiss",
         "Knife",
         "Knight",
+        
         "Lark",
         "Lark",
         "Laurel",
@@ -1454,6 +1475,7 @@ def Title():
         "Lotus",
         "Lover",
         "Lynx",
+        
         "Machine",
         "Mage",
         "Mage for Hire",
@@ -1497,15 +1519,15 @@ def Title():
         "Morgue",
         "Mortal",
         "Mortal",
-        "Moss",
         "Moth",
         "Mountaineer",
         "Mourner",
         "Mule",
+        "Mystic",
+        "Mystic Investigator",
         "Mystic Artisan",
-        "Mystic",
-        "Mystic",
-        "Mythical Beast Rider",
+        "Beast Rider",
+        
         "Naga",
         "Navigator",
         "Necro",
@@ -1517,6 +1539,7 @@ def Title():
         "Noble",
         "Nocturnal",
         "Nomad",
+        
         "Odyssey",
         "Of Death",
         "Of Heaven",
@@ -1566,6 +1589,7 @@ def Title():
         "Overlord",
         "Owl",
         "Owlbear",
+        
         "Paladin",
         "Pale",
         "Panther",
@@ -1602,9 +1626,11 @@ def Title():
         "Princess",
         "Prophet",
         "Punk",
+        
         "Quail",
         "Queen",
         "Quest",
+        
         "Rabbit",
         "Raider",
         "Ranger",
@@ -1633,6 +1659,7 @@ def Title():
         "Rowan",
         "Rue",
         "Runesmith",
+        
         "Sabertooth",
         "Saurius",
         "Salamander",
@@ -1704,6 +1731,8 @@ def Title():
         "Storm Chaser",
         "Swallow",
         "Swan",
+        "Skywarden",
+        
         "Tailor",
         "Talon",
         "Tanner",
@@ -1729,14 +1758,15 @@ def Title():
         "Treasure",
         "Turtle",
         "Tyrant",
-        "Underworld Guide",
+        
+        "Guide",
         "Unholy",
+        
         "Vagabond",
         "Valkyrie",
         "Vampire",
         "Vanguard",
         "Vanguard",
-        "Vengeful",
         "Vicar",
         "Vigilante",
         "Vigilante",
@@ -1751,6 +1781,7 @@ def Title():
         "Vulture",
         "Vagrant",
         "Voyager",
+        
         "Wail",
         "Walker",
         "Warlock",
@@ -1780,12 +1811,8 @@ def Title():
         "Witchfinder",
         "Wolf"
         "Wraith",
-        "Yarrow",
-        "Zealot"
-        "Zinnia"
-        "Zombie"
-        "Zombie",
-        "Skywarden",
+        
+        
         "Abbess",
         "Abbot",
         "Abysswalker",
@@ -1820,14 +1847,15 @@ def Title():
         "Avalon's Lost Knight",
         "Avatar",
         "Aztec Avenger",
-        "Azure Dragon Sentinel",
+        "Sentinel",
         "Baba Yaga's Apprentice",
         "Bandana Masked",
         "Banneret",
         "Banshee Wailmistress",
         "Banshee's Wail Seeker",
         "Flight",
-        "Voyage",
+        
+        "Baron",
         "Barbarian",
         "Bard",
         "Baron",
@@ -1925,7 +1953,7 @@ def Title():
         "Cunning",
         "Curator",
         "Czar",
-        "Daimyo",
+
         "Dance",
         "Dangun's Heir",
         "Dawnbringer of Amaterasu",
@@ -2012,7 +2040,9 @@ def Title():
         "Etherbound",
         "Etherscribe",
         "Ethnographer",
-        "Exile of the Bamboo Grove",
+        "Exile",
+        "of the Bamboo Grove",
+        
         "Faith",
         "Fatesealer",
         "Faun Grovekeeper",
@@ -2037,6 +2067,7 @@ def Title():
         "Frostweaver",
         "Fulani's Journey",
         "Fury",
+        
         "Galeweaver",
         "Gaucho",
         "Gaze",
@@ -2123,12 +2154,13 @@ def Title():
         "Kenku Storyteller",
         "Khan",
         "King",
-        "Kintu's Quest",
+        "'s Quest",
         "Knight",
         "Knight",
-        "Kobold Tunnelchief",
-        "Kokopelli's Song",
-        "Koschei's Bane",
+        "Tunnelchief",
+        "Song",
+        "Bane",
+        
         "Lady",
         "Lamia's Enchanter",
         "Lampbearer of the Forbidden Cave",
@@ -2161,6 +2193,7 @@ def Title():
         "Lunarblade",
         "Lycan Alpha",
         "Lynch Mob's Fear",
+        
         "Maasai's Spear",
         "Maestro",
         "Mage-Priest",
@@ -2182,14 +2215,14 @@ def Title():
         "Matador",
         "Matriarch",
         "Matriarch",
-        "Mau Mau's Might",
-        "Mayan Moonmage",
+        "Might",
+        "Moonmage",
         "Mayor",
         "Maze Runner",  
         "Mazulu's Grace",
         "Medusa's Adversary",
         "Melody",
-        "Mender of the Celestial Rift",
+        "Mender",
         "Mercenary Leader",
         "Mercenary",
         "Merfolk Tidecaller",
@@ -2225,6 +2258,7 @@ def Title():
         "Mystic",
         "Mystshroud",
         "Mystweaver",
+        
         "Naga Siren",
         "Nazca Enigma",  
         "Necrologist",
@@ -2243,16 +2277,20 @@ def Title():
         "Nomad",
         "Numerologist",
         "Nun",
-        "Nyami Nyami's Wrath",
+        
+        "Sky's Wrath",
+        
         "Echo",
+        
         "Occultist",
         "Odin's Whisperer",
-        "Ogre Mountainbreak",
-        "Ogun's Forge",
-        "Olmec's Legacy",
-        "Olokun's Depth",
-        "Oni Demonmask",
-        "Oni Warcaller",
+        "Oni",
+        "Mountainbreak",
+        "Forge",
+        "Legacy",
+        "Depth",
+        "Demonmask",
+        "Warcaller",
         "Oracle of Delphic Echoes",
         "Oracle",
         "Oracle",
@@ -2264,8 +2302,11 @@ def Title():
         "Outlaw's Kin",
         "Overseer",
         "of the Divine",
-        "Paladin",
+        
+        
         "Fragment",
+        
+        "Paladin",
         "Pioneer",
         "Pathfinder",
         "Patriarch",
@@ -2279,8 +2320,9 @@ def Title():
         "Pikeman",
         "Piper",
         "Pirate",
-        "Pirate's Ghost of Port Royal",
-        "Pistolero's Poise",
+        "Pirate's Ghost",
+        "of Port Royal",
+        "Pistolero",
         "Plains Wanderer",
         "Planar Researcher",
         "Poem",
@@ -2313,8 +2355,10 @@ def Title():
         "Psion",
         "Puma's Shadow",
         "Pyramid's Secret",
+        
         "Queen",
         "Quetzal Feathered",
+        
         "Radiance",
         "Radiantstar",
         "Railroad Pioneer",
@@ -2349,8 +2393,11 @@ def Title():
         "Runebearer of Midgard",
         "Runechanter",
         "Runekeeper",
+        
         "Lament",
+        
         "Bane",
+        
         "Sacred Keeper",
         "Sacred Speaker",
         "Scar",
@@ -2358,7 +2405,8 @@ def Title():
         "Saga",
         "Sage",
         "Saint",
-        "Whisper",
+        
+        
         "Sentinel",
         "Samurai",
         "Sandkeeper",
@@ -2506,10 +2554,13 @@ def Title():
         "Turtle Islander",  
         "Treasure",
         "Twilight Herald",
+        
         "Elder",
+        
+        "Voyage",        
         "Valkyrie Skymaiden",
         "Valkyrie",
-        "Valkyrie's Chosen",
+        "Chosen",
         "Valor",
         "Valorblade of Mulan",
         "Vampire Lord",
@@ -2528,7 +2579,9 @@ def Title():
         "Voidtouched",
         "Volva's Visionary",
         "Vizier",
+        
         "of the Endless Sands",
+        
         "Heart",
         "Wanderer",
         "War Druid",
@@ -2554,7 +2607,7 @@ def Title():
         "Whisper",
         "Whisperer",
         "Whitescale Enchanter",
-        "Baron",
+        "Whisper",
         "Wild West Wanderer",
         "Windcaller",
         "Windrider",
@@ -2597,49 +2650,87 @@ def Title():
         "Daimyo","Deacon","Dean","Dread",
         "Eldorado Seeker",
         "Enigma","Ensign",
-        "Fang","Friar","Fellow",
-        "General","Ghoul",
+        "Fang",
+        "Friar",
+        "Fellow",
+        "General",
+        "Ghoul",
         "Gilded Voyager",
         "Guardian of the Golden City",
-        "Guardian", "Sentinel", "Vanguard", "Seeker", "Harbinger", "Progenitor", "Elder", "Pioneer", "Forerunner", "Exemplar", "Paragon", "Renegade", "Virtuoso", "Maestro", "Prodigy", "Patriarch", "Matriarch",
-        "of Eldorado",
+        "Guardian",
+        "Sentinel",
+        "Vanguard",
+        "Seeker",
+        "Harbinger",
+        "Progenitor",
+        "Elder",
+        "Pioneer",
+        "Forerunner",
+        "Exemplar",
+        "Paragon",
+        
+        "Conquistador",
+        
         "High Priest",
+        
         "Illusionist",
         "Immortal",
         "Infernal",
         "Invoker",
+        
         "Lama",
         "Lecturer",
         "Legate",
         "Librarian",
         "Lieutenant",
-        "Conquistador of Eldorado",
+
+        "Matriarch",
+        "Maestro",
         "Major",
         "Marshal",
         "Matriarch",
         "Mogul",
         "Monk",
+        
         "Nun",
         "Ninja",
+
+        "of El Dorado",
+        "of Eldorado"
+        
         "Patriarch",
         "Pharaoh",
         "Professor",
         "Pasha",
         "Prelate",
         "Priestess",
+        "Prodigy",
+        "Patriarch",
+        
         "Raj",
         "Reader",
+        "Renegade",
+        
         "Samurai",
         "Scholar",
         "Sergeant",
         "Shaman",
+        
         "Tutor",
         "Tribe Leader",
+        
         "Vicar",
+        "Virtuoso",
+        
         "Warlord",
+        
+        "Yarrow",
+
         "Zenithar",
-
-
+        "Zealot"
+        "Zinnia"
+        "Zombie"
+        "Zombie",
         ""
     ]
 
@@ -2663,28 +2754,43 @@ def Alignment():
 def Background():
     Backgrounds = [
         "Artist",
+        "Bandit",
         "Bard",
         "Barbarian",
+        "Berserker",
+        "Charlatan",
         "Cleric",
         "Crafter",
         "Criminal",
         "Commoner",
+        "Cultist",
         "Druid",
         "Expert",
+        "Explorer",
         "Guard",
+        "Healer",
         "Hero",
+        "Hunter",
         "Knight",
         "Mage",
         "Monk",
         "Merchant",
         "Noble",
+        "Priest",
+        "Pirate",
         "Ranger",
         "Scholar",
         "Soldier",
         "Rogue",
+        "Scholar";
+        "Shaman",
+        "Soldier",
+        "Spy",
         "Traveler",
+        "Urchin",
         "Warrior",
         "Warlock",
+        "Witch",
         ""
         ]
     return random.choice(Backgrounds)
@@ -2721,7 +2827,7 @@ def Race():
         "Plant": 3,
         "Snakefolk": 2,
         "Undead": 7,
-        "": 1
+        "": 0
     }
     
     return random.choices(list(race_weights.keys()), weights=race_weights.values(), k=1)[0]
@@ -2950,103 +3056,246 @@ def Racial_Names(Type):
         "Edric", "Edward", "Christopher", "Martin", "Emma",
         "Avis", 
         "Wilmot",
-        "Audrey", "Cecilia",
-        "Joy", "Joan",
-        "Tobias", "Mark",
-        "Solomon", "Eve",
+        "Audrey",
+        "Cecilia",
+        "Joy",
+        "Joan",
+        "Tobias",
+        "Mark",
+        "Solomon",
+        "Eve",
         "Alice", 
         "Berthold",
-        "Hypatia", "Pythagoras",
-        "Hercules", "Pascal", "Marie", "Curie", "Bruce", 
-        "Merlin", "Galahad",
-        "Tristan", "Isolde", "Robin", "Marian", "Sigurd",
+        "Hypatia",
+        "Pythagoras",
+        "Hercules",
+        "Pascal",
+        "Marie",
+        "Curie",
+        "Bruce", 
+        "Merlin",
+        "Galahad",
+        "Tristan",
+        "Isolde",
+        "Robin",
+        "Marian",
+        "Sigurd",
         "Brunhild", 
         "Ragnar",
-        "Roland", "Roderick", "Elaine", "Morgana", "Uther", "Iseult", "Geraint", 
-        "Percival", "Gawain", "Bedivere", "Cedric", "Leif",
-        "Erik", "Harald", "Olaf", "Charlemagne", 
-        "Frederick", "Louis", "Eleanor",
+        "Roland",
+        "Roderick",
+        "Elaine",
+        "Morgana",
+        "Uther",
+        "Iseult",
+        "Geraint", 
+        "Percival",
+        "Gawain",
+        "Bedivere",
+        "Cedric",
+        "Leif",
+        "Erik",
+        "Harald",
+        "Olaf",
+        "Charlemagne", 
+        "Frederick",
+        "Louis",
+        "Eleanor",
         "Isabella",
         "Ferdinand",
         "Alfred", 
         "Edward",
         "Matilda",
         "Henry",
-        "Richard", "Philip", "Joan",
-        "Eloise", "Abelard", 
-        "Daedalus", "Theseus",
-        "Odysseus", "Penelope",
+        "Richard",
+        "Philip",
+        "Joan",
+        "Eloise",
+        "Abelard", 
+        "Daedalus",
+        "Theseus",
+        "Odysseus",
+        "Penelope",
         "Helen",
         "Paris",
         "Hector",
         "Orpheus", 
-        "Eurydice", "Siegfried",
+        "Eurydice",
+        "Siegfried",
         "Gudrun",
-        "Attila",
-        "Boudicca", "Vercingetorix", "Augustus", 
-        "Julius",   "Marcus", "Lucius", "Octavia",
+        "Vercingetorix",
+        "Julius",
+        "Marcus",
+        "Lucius",
+        "Octavia",
         "Titus",
         "Claudius", 
         "Nero",
         "Spartacus",
-        "Ovid", "Virgil",
-        "Horace",  "Gregory", 
-        "Jerome", "Rollo",
-        "Ivan", "Peter",
+        "Ovid",
+        "Virgil",
+        "Horace",
+        "Gregory", 
+        "Jerome",
+        "Rollo",
+        "Ivan",
+        "Peter",
         "Catherine",
         "Nicholas", 
         "Rasputin",
         "Vladimir",
-        "Alexei", "Maria", "Olga",
-        "Tatiana", "Percy","Percival",
-        "Vigo", "Isabella",
-        "Louis", "Jeremias", "Luz"
-        ]
+        "Maria",
+        "Olga",
+
+        
+        "Augustus", 
+        "Alexei",
+        "Attila",
+
+        "Boudicca",
+
+        "Isabella",
+
+        "Jeremias",
+        
+        "Luz",
+        "Louis",
+
+        "Percy",
+        "Percival",
+        
+        "Tatiana",
+  
+        "Vigo",
+        
+        ""]
     
     Human_Surnames = [
-        "DuLac", "DeLion",
-        "Gondor", "Rohan", "Montague", "Capulet",
-        "Plantagenet", "Camelot",
-        "d'Anjou", "Valois", "Normandy",
-        "Wessex", "Tudor", "Stuart", "Romanov",
+        "Aragon", 
+
+        "Borgia",
+
+        "Capulet",
+        "Camelot",
+        "Castilla",
+        "Capetian",
+        
+        "DuLac",
+        "DeLion",
+        "d'Anjou",
+        "d'Arc",
+        "d'Aquitaine",
+        
+        "Gondor",
+
         "Hohenstaufen",
-        "Borgia", "Medici",
-        "Pendragon", "d'Arc",
-        "d'Aquitaine", "Castilla", "Aragon", 
-        "Visigoth", "Valdemar",
-        "Capetian", "Bourbon", "York", "Lancaster",
-        "Windsor", "Sforza",
-        "Navarre", "Hapsburg",
-        "Plantin", "Rurikid",
-        "Palaiologos", "Comnenus", "Dragomir", 
-        "Valerius", "Aurelius",
-        "Tiberius", "Antonius", "Flavius",
-        "Merovingian", "Carolingian", 
-        "Athens", "Sparta", "Macedon",
-        "Scipio", "Brutus", "Gallico",
-        "Varangian", "Kiev", "Byzantine",
-        "Ostrogoth", "Visconti", "Guelph", 
-        "Hohenzollern", "Teutonic", "Gaul",
-        "Pict", "Ravenclaw", "Eagleshield", 
-        "Wolfheart", "DeLeon", "Dragonbane",
-        "Fitzroy", "Hawklight",
-        "Northwind", "Sterlingshire", 
-        "Brightstar", "Courtenay",
-        "Isles", "Sunshield", "Dawnbringer",
+
+        "Montague",
+        "Medici",
+
+        "Normandy",
+
+        "Plantagenet",
+        "Pendragon",
+        
+        "Rohan",
+        "Romanov",
+
+        "Stuart",
+
+        "Tudor",
+        
+        "Valois",
+        "Visigoth",
+        "Valdemar",
+        
+        "Wessex",
+
+        "Bourbon",
+        "York",
+        "Lancaster",
+        "Windsor",
+        "Sforza",
+        "Navarre",
+        "Hapsburg",
+        "Plantin",
+        "Rurikid",
+        "Palaiologos",
+        "Comnenus",
+        "Dragomir", 
+        "Valerius",
+        "Aurelius",
+        "Tiberius",
+        "Antonius",
+        "Flavius",
+        "Merovingian",
+        "Carolingian", 
+        "Athens",
+        "Sparta",
+        "Macedon",
+        "Scipio",
+        "Brutus",
+        "Gallico",
+        "Varangian",
+        "Kiev",
+        "Byzantine",
+        "Ostrogoth",
+        "Visconti",
+        "Guelph", 
+        "Hohenzollern",
+        "Teutonic",
+        "Gaul",
+        "Pict",
+        "Ravenclaw",
+        "Eagleshield", 
+        "Wolfheart",
+        "DeLeon",
+        "Dragonbane",
+        "Fitzroy",
+        "Hawklight",
+        "Northwind",
+        "Sterlingshire", 
+        "Brightstar",
+        "Courtenay",
+        "Isles",
+        "Sunshield",
+        "Dawnbringer",
         "Elmsworth", 
         "Lockewood",
-        "Riversend", "Troy", "Thracian",
-        "Thebes", "Alighieri", "Pazzi", 
-        "Novgorod", "Moorheart", "Grimaldi",
-        "Toledo", "Dumnonia", "Rhodes",
+        "Riversend",
+        "Troy",
+        "Thracian",
+        "Thebes",
+        "Alighieri",
+        "Pazzi", 
+        "Novgorod",
+        "Moorheart",
+        "Grimaldi",
+        "Toledo",
+        "Dumnonia",
+        "Rhodes",
         "Salamis", 
         "Beauharnais",
-        "Marathon", "Delphini", "Bardic",
-        "Gothicus", "Eboracum", "Caledonia", 
-        "Gothland", "Magnusson", "Vandale",
-        "Thule", "Corinth", "Argos", "Lusitan", 
-        "Valkyrja", "Saxony", "Bavaria",
-        "Corinthia", "Moldavia", "Merovian", "Uralic",
+        "Marathon",
+        "Delphini",
+        "Bardic",
+        "Gothicus",
+        "Eboracum",
+        "Caledonia", 
+        "Gothland",
+        "Magnusson",
+        "Vandale",
+        "Thule",
+        "Corinth",
+        "Argos",
+        "Lusitan", 
+        "Valkyrja",
+        "Saxony",
+        "Bavaria",
+        "Corinthia",
+        "Moldavia",
+        "Merovian",
+        "Uralic",
         "Commoner",
         "Nomad",
         "Wanderer",
@@ -3057,109 +3306,139 @@ def Racial_Names(Type):
         "Vagrant",
         "Pilgrim",
         "Settler",
-        "Amblecrown", "Buckman", "Evenwood",
-        "Greycastle", "Tallstag", "Bersk", "Chernin", "Dotsk", "Kulenov", "Marsk", "Nemetsk",
-        "Shemov", "Starag", "Brightwood", "Helder", "Hornraven", "Lackman", "Stormwind",
-        "Windriver", "Ankhalab", "Anskuld", "Fezim", "Hahpet", "Nathandem", "Sepret",
-        "Uuthrakt", "Chergoba", "Dyernina", "Iltazyara", "Murnyethara", "Stayanoga",
-        "Ulmokina", "Chien", "Huang", "Kao", "Kung", "Lao", "Ling", "Mei", "Pin", "Shin",
-        "Sum", "Tan",
-        "Wan", "Agosto", "Astorio", "Calabra", "Domine", "Falone",
-        "Marivaldi", "Pisacar",
-        "Ramondo", "Picasso", "Blackbeast", "Blackbeard",
-        "Blackbear", "Violetdawn",
-        "Rosedawn", "Wanderlust", "Dostoyevsky", "Dundragon",
+        "Amblecrown",
+        "Buckman",
+        "Evenwood",
+        "Greycastle",
+        "Tallstag",
+        "Bersk",
+        "Chernin",
+        "Dotsk",
+        "Kulenov",
+        "Marsk",
+        "Nemetsk",
+        "Shemov",
+        "Starag",
+        "Brightwood",
+        "Helder",
+        "Hornraven",
+        "Lackman",
+        "Stormwind",
+        "Windriver",
+        "Ankhalab",
+        "Anskuld",
+        "Fezim",
+        "Hahpet",
+        "Nathandem",
+        "Sepret",
+        "Uuthrakt",
+        "Chergoba",
+        "Dyernina",
+        "Iltazyara",
+        "Murnyethara",
+        "Stayanoga",
+        "Ulmokina",
+        "Chien",
+        "Huang",
+        "Kao",
+        "Kung",
+        "Lao",
+        "Ling",
+        "Mei",
+        "Pin",
+        "Shin",
+        "Sum",
+        "Tan",
+        "Agosto",
+        "Astorio",
+        "Calabra",
+        "Domine",
+        "Falone",
+        "Marivaldi",
+        "Pisacar",
+        "Ramondo",
+        "Picasso",
+        "Blackbeast",
+        "Blackbeard",
+        "Blackbear",
+        "Violetdawn",
+        "Rosedawn",
+        "Wanderlust",
+        "Dostoyevsky",
+        "Dundragon",
         "Pendragon",
         "Clawthorne"
         ]
     if Type == "Human":
-        Names += Humans
-        Surnames += Human_Surnames
+        Names = Humans
+        Surnames = Human_Surnames
         FullNames =  random.choice(Names) + ' ' + random.choice(Surnames) 
         return FullNames
 
     Elves =[
-        "Aegnor",    "Ael",
-        "Aelar",    "Aeol",    "Aerandir",    "Aeris",
-        "Aero", "Adalara",
-        "Adalin", "Adran", "Adrie", "Ag", "Alador",
-        "Alagos", "Alathaea",
-        "Aldovale", "Alima", "Alorio", "Althaea",
-        "Althos", "Amastacia",
-        "Amelia", "Amity", "Anali", "Anakin", 
-        "Andraste", "Ang", "Angorn",
-        "Angrod", "Annon", "Anastriana",
-        "Antinua", "Anthon", "Ara",
-        "Aramil", "Aranel", "Aranis", "Araphor",
-        "Arathorn", "Aratlion", "Arondir",
-        "Arthern", "Arannis", "Arn", "Aro",
-        "Arphor", "Arros", "Arthalion",
-        "Arthriol", "Asur", 
-        "Astrid", "Athos",
-        "Atro", "Aubren", "Aust", "Austio",
-        "Autumnfall", "Ava", "Avafi",
-        "Azaki", "Austio", "Austarion", "Autumn",
-        "Baldric", "Banderliss", "Bark",
-        "Barathor", "Basha", "Bella", "Belladonna",
-        "Beren", "Bertin", "Birel", "Birel",
-        "Bleonal",
-        "Blim",
-        "Blorin", "Bodil", "Bor", "Borivik", "Boromir",
-        "Bral", "Brannon", "Brath", "Brithiel",
-        "Brodin", "Broe", "Brom",
-        "Bryn", "Brueral",
-        "Byrius", "Cael", "Caelin", "Caelum", "Caladwen",
-        "Caran", "Carric",
-        "Caspian",
-        "Celtana",
-        "Certhel",
-        "Celeborn",
-        "Celebrian", "Celebriel", "Celebrimbor",
-        "Certhel", "Chel",
-        "Chelri",
-        "Cirdan",
-        "Clagna", "Claira", "Cothiel",
-        "Curufin", "Curulire",
-        "Cuthalion",
-        "Daeron",
-        "Dalanzal", "Danel", "Dartagnan",
-        "Dawnpath", "Del", "Delian",
-        "Deloth", 
-        "Denethor",
-        "Denir", "Dilon", "Dinendal",
-        "Dineloth", "Donael",
-        "Donathan", "Dor", "Dorin", "Dorn", "Douglas", "Draven", "Driel",
-        "Drusilia", "Durin",
-        "Durgwen",
-        "Earendil",
-        "Eariol", "Earwen", "Eda", "Edalin",
-        "Edan", "Edrial", "Edriol", "Eero",
-        "Egorn", 
-        "Eilinora",
-        "Eilri", "Eiro", "Elandrial", "Elanor",
-        "Ela", "Elenia", "Eleonor", "Elendil",
-        "Elendithas", "Elennanor", "Elenwe", 
-        "Elestirne", "Elessar", "Elhalyn",
-        "Elion", "Elmo", "Elphir", "Elriol",
-        "Elrond", "Elros", "Elrohir", "Elu",
-        "Elwen", "Elwing",
-        "Elion", "Eli",
-        "Elian", "Elior",
-        "Elinor", "Elwe",
-        "Elyan",
-        "Elerian", "Elthorin",
-        "Elerossë", "Elphir", "Elvandar", "Eol", 
-        "Eolande", "Eoliel", "Eoloriel",
-        "Eorl", "Ephelion", "Erevan",
-        "Eriol", "Erin", "Ermo", "Ero",
-        "Erol", "Eru", "Erwen", "Eryn",
-        "Ethalion", "Ethir", "Faelir",
-        "Fae", "Faen", "Fael", "Faelon",
-        "Faenor", "Fara", "Farin",
-        "Faral", "Felosial", "Fen", "Fera",
-        "Ferumbras",
-        "Feantur",
-        "Feanor",
+        "Aegnor",
+        "Ael",
+        "Aelar",
+        "Aeol",
+        "Aerandir",
+        "Aeris",
+        "Aero",
+        "Adalara",
+        "Adalin",
+        "Adran",
+        "Adrie",
+        "Ag",
+        "Alador",
+        "Alagos",
+        "Alathaea",
+        "Aldovale",
+        "Alima",
+        "Alorio",
+        "Althaea",
+        "Althos",
+        "Amastacia",
+        "Amelia",
+        "Amity",
+        "Anali",
+        "Anakin", 
+        "Andraste",
+        "Ang",
+        "Angorn",
+        "Angrod",
+        "Annon",
+        "Anastriana",
+        "Antinua",
+        "Anthon",
+        "Ara",
+        "Aramil",
+        "Aranel",
+        "Aranis",
+        "Araphor",
+        "Arathorn",
+        "Aratlion",
+        "Arondir",
+        "Arthern",
+        "Arannis",
+        "Arn",
+        "Aro",
+        "Arphor",
+        "Arros",
+        "Arthalion",
+        "Arthriol",
+        "Asur", 
+        "Astrid",
+        "Athos",
+        "Atro",
+        "Aubren",
+        "Aust",
+        "Austio",
+        "Autumnfall",
+        "Ava",
+        "Avafi",
+        "Azaki",
+        "Austio",
+        "Austarion",
+        "Autumn",
         "Aelthion",
         "Adalara",
         "Adal",
@@ -3167,38 +3446,285 @@ def Racial_Names(Type):
         "Adran",
         "Adrie", 
         "Aera",
-        "Aevis", "Aldovale", "Alagos", "Alador", "Alimo", "Alima",
-        "Alyssum", "Amastacia", "Amberpath", 
-        "Amelia", "Amity",
-        "Anali", "Andraste",
-        "Ang", "Angorn", "Anastriana", "Anarkia", "Anakin", "Antinua", 
-        "Ara", "Aralph", "Aramil", "Arandin", "Araran", "Aranis", "Arathor",
-        "Ari", "Arizima", "Arondir", 
-        "Arn", "Aro", "Arthurius", "Arthur", "Arzein", "Arne", "Aro",
-        "Aslyssum", "Astrid", "Atala", 
-        "Aubert", "Aust", "Austio", "Autumn", "Autumnheart", "Awaldiel", "Avis",
-        "Azaki", "Bai", "Baldric", 
-        "Banderliss", "Barathor", "Bark", "Basha", "Beaux", "Beiro", "Belos",
-        "Bella", "Belladona", "Berevan", 
-        "Berrian", "Betha", "Bertin",
-        "Birel", "Birel", "Blath", "Blein",
-        "Blanchet", "Bleonal", "Blim", 
-        "Bodil", "Bor", "Borivik", "Bram", "Bran", "Bri", "Brion", "Brim", "Broe", "Brueral", 
-        "Bryn", "Bryn", "Byron", "Byrius", "Cael", "Caelin", "Cael", "Caelin", "Caladwen", "Carric", 
-        "Caspian", "Catarina", "Cecilia", "Celeborn", "Celebrimbor", "Celebros", "Celtana", "Certhel", "Cezar", "Chaelana", 
-        "Chathi", "Chen", "Chi", "Christopher", "Clagnemart", "Claira", "Clark", "Colart", "Conan", "Constance", 
+        "Aevis",
+        "Aldovale",
+        "Alagos",
+        "Alador",
+        "Alimo",
+        "Alima",
+        "Alyssum",
+        "Amastacia",
+        "Amberpath", 
+        "Amelia",
+        "Amity",
+        "Anali",
+        "Andraste",
+        "Ang",
+        "Angorn",
+        "Anastriana",
+        "Anarkia",
+        "Anakin",
+        "Antinua", 
+        "Ara",
+        "Aralph",
+        "Aramil",
+        "Arandin",
+        "Araran",
+        "Aranis",
+        "Arathor",
+        "Ari",
+        "Arizima",
+        "Arondir", 
+        "Arn",
+        "Aro",
+        "Arthurius",
+        "Arthur",
+        "Arzein",
+        "Arne",
+        "Aro",
+        "Aslyssum",
+        "Astrid",
+        "Atala", 
+        "Aubert",
+        "Aust",
+        "Austio",
+        "Autumn",
+        "Autumnheart",
+        "Awaldiel",
+        "Avis",
+        "Azaki",
+        
+        "Baldric",
+        "Banderliss",
+        "Bark",
+        "Barathor",
+        "Basha",
+        "Bella",
+        "Belladonna",
+        "Beren",
+        "Bertin",
+        "Birel",
+        "Birel",
+        "Bleonal",
+        "Blim",
+        "Blorin",
+        "Bodil",
+        "Bor",
+        "Borivik",
+        "Boromir",
+        "Bral",
+        "Brannon",
+        "Brath",
+        "Brithiel",
+        "Brodin",
+        "Broe",
+        "Brom",
+        "Bryn",
+        "Brueral",
+        "Byrius",
+
+        "Cael",
+        "Caelin",
+        "Caelum",
+        "Caladwen",
+        "Caran",
+        "Carric",
+        "Caspian",
+        "Celtana",
+        "Certhel",
+        "Celeborn",
+        "Celebrian",
+        "Celebriel",
+        "Celebrimbor",
+        "Certhel",
+        "Chel",
+        "Chelri",
+        "Cirdan",
+        "Clagna",
+        "Claira",
+        "Cothiel",
+        "Curufin",
+        "Curulire",
+        "Cuthalion",
+        
+        "Daeron",
+        "Dalanzal",
+        "Danel",
+        "Dartagnan",
+        "Dawnpath",
+        "Del",
+        "Delian",
+        "Deloth", 
+        "Denethor",
+        "Denir",
+        "Dilon",
+        "Dinendal",
+        "Dineloth",
+        "Donael",
+        "Donathan",
+        "Dor",
+        "Dorin",
+        "Dorn",
+        "Douglas",
+        "Draven",
+        "Driel",
+        "Drusilia",
+        "Durin",
+        "Durgwen",
+        
+        "Earendil",
+        "Eariol",
+        "Earwen",
+        "Eda",
+        "Edalin",
+        "Edan",
+        "Edrial",
+        "Edriol",
+        "Eero",
+        "Egorn", 
+        "Eilinora",
+        "Eilri",
+        "Eiro",
+        "Elandrial",
+        "Elanor",
+        "Ela",
+        "Elenia",
+        "Eleonor",
+        "Elendil",
+        "Elendithas",
+        "Elennanor",
+        "Elenwe", 
+        "Elestirne",
+        "Elessar",
+        "Elhalyn",
+        "Elion",
+        "Elmo",
+        "Elphir",
+        "Elriol",
+        "Elrond",
+        "Elros",
+        "Elrohir",
+        "Elu",
+        "Elwen",
+        "Elwing",
+        "Elion",
+        "Eli",
+        "Elian",
+        "Elior",
+        "Elinor",
+        "Elwe",
+        "Elyan",
+        "Elerian",
+        "Elthorin",
+        "Elerossë",
+        "Elphir",
+        "Elvandar",
+        "Eol", 
+        "Eolande",
+        "Eoliel",
+        "Eoloriel",
+        "Eorl",
+        "Ephelion",
+        "Erevan",
+        "Eriol",
+        "Erin",
+        "Ermo",
+        "Ero",
+        "Erol",
+        "Eru",
+        "Erwen",
+        "Eryn",
+        "Ethalion",
+        "Ethir",
+        
+        "Faelir",
+        "Fae",
+        "Faen",
+        "Fael",
+        "Faelon",
+        "Faenor",
+        "Fara",
+        "Farin",
+        "Faral",
+        "Felosial",
+        "Fen",
+        "Fera",
+        "Ferumbras",
+        "Feantur",
+        "Feanor",
+        
+        "Bai",
+        "Baldric", 
+        "Banderliss",
+        "Barathor",
+        "Bark",
+        "Basha",
+        "Beaux",
+        "Beiro",
+        "Belos",
+        "Bella",
+        "Belladona",
+        "Berevan", 
+        "Berrian",
+        "Betha",
+        "Bertin",
+        "Birel",
+        "Birel",
+        "Blath",
+        "Blein",
+        "Blanchet",
+        "Bleonal",
+        "Blim", 
+        "Bodil",
+        "Bor",
+        "Borivik",
+        "Bram",
+        "Bran",
+        "Bri",
+        "Brion",
+        "Brim",
+        "Broe",
+        "Brueral", 
+        "Bryn",
+        "Bryn",
+        "Byron",
+        "Byrius",
+        "Cael",
+        "Caelin",
+        "Cael",
+        "Caelin",
+        "Caladwen",
+        "Carric", 
+        "Caspian",
+        "Catarina",
+        "Cecilia",
+        "Celeborn",
+        "Celebrimbor",
+        "Celebros",
+        "Celtana", "Certhel", "Cezar", "Chaelana", 
+        "Chathi", "Chen", "Chi", "Christopher", "Clagnemart",
+        "Claira", "Clark", "Colart", "Conan", "Constance", 
         "Cuarion", "Curie", "Curu", "Daneloth", "Dartagnan", "Dartañan",
         "Dartagnan", "Dartañan", "David", "Dawnpath", 
-        "Dawnwalker", "Del", "Dilan", "Dineloth", "Donael", "Douglas", "Dont", "Dorn", "Dorian", "Doliel", 
-        "Dorn", "Dramo", "Draven", "Drusilia", "Dumein", "Durgwen", "Earendil", "Eberk", "Eda", "Edric", 
-        "Ela", "Elandrial", "Elama", "Elari", "Elbereth", "Elenia", "Elendil", "Elendil", "Elenia", "Ele", 
-        "Elendil", "Elerinna", "Elevas", "Eli", "Elia", "Eli", "Elidyr", "Elien", "Elin", "Elle", 
-        "Elladan", "Elma", "Elphaba", "Elpetor", "Elrieth", "Elrohir", "Elros", "Eluin", "Elwing", "Elzevir", 
-        "Elye", "Elyl", "Elys", "Ema", "Emma", "Emmy", "Ender", "Endor", "Enialis", "Enna", 
-        "Eol", "Erafe", "Eran", "Erdan", "Erestor", "Erevan", "Erwin", "Espar", "Esmeralda", "Esvele", 
+        "Dawnwalker", "Del", "Dilan", "Dineloth",
+        "Donael", "Douglas", "Dont", "Dorn", "Dorian", "Doliel", 
+        "Dorn", "Dramo", "Draven", "Drusilia", "Dumein",
+        "Durgwen", "Earendil", "Eberk", "Eda", "Edric", 
+        "Ela", "Elandrial", "Elama", "Elari", "Elbereth",
+        "Elenia", "Elendil", "Elendil", "Elenia", "Ele", 
+        "Elendil", "Elerinna", "Elevas", "Eli", "Elia",
+        "Eli", "Elidyr", "Elien", "Elin", "Elle", 
+        "Elladan", "Elma", "Elphaba", "Elpetor",
+        "Elrieth", "Elrohir", "Elros", "Eluin",
+        "Elwing", "Elzevir", 
+        "Elye", "Elyl", "Elys", "Ema", "Emma",
+        "Emmy", "Ender", "Endor", "Enialis", "Enna", 
+        "Eol", "Erafe", "Eran", "Erdan",
+        "Erestor", "Erevan", "Erwin", "Espar", "Esmeralda", "Esvele", 
         "Eufemia", "Euler", "Eurin", "Evadne", "Evandel", "Evanescense", "Eve",
         "Evidam", "Eyla", "Faelir", 
-        "Faen", "Faera", "Fae", "Faethis", "Faila", "Fai", "Falchion",
+        "Faen", "Faera", "Fae", "Faethis",
+        "Faila", "Fai", "Falchion",
         "Fandel", "Fan", "Fanal", 
         "Faelir", "Faen", "Faera", "Faethis", "Fai", "Faila", "Falchion", "Fandel", "Fan", "Fanal",
         "Fandel", "Fandral", "Fara", "Faral", "Faelorn", "Faralin",
@@ -3212,8 +3738,10 @@ def Racial_Names(Type):
         "Goldleaf", "Gus", "Goku", "Galdric", "Galin", "Galor", "Galthor", "Glyn", "Haedir", "Hadarai",
         "Halana", "Heian", "Holara", "Horatio", "Horneth", "Huroz",
         "Iannien", "Iellan", "Ienor", "Ilanis",
-        "Ilebellis", "Ilima", "Immeral", "Innil", "Irion", "Ira", "Irui", "Iorhel", "Isolde", "Ivellios",
-        "Iusus", "Iylar", "Jareth", "Jar", "Jarsali", "Jay", "Jelenet", "Jorel", "Kai", "Kalel",
+        "Ilebellis", "Ilima", "Immeral", "Innil",
+        "Irion", "Ira", "Irui", "Iorhel", "Isolde", "Ivellios",
+        "Iusus", "Iylar", "Jareth", "Jar",
+        "Jarsali", "Jay", "Jelenet", "Jorel", "Kai", "Kalel",
         "Kan", "Kari", "Karnwyl", "Karn", "Kay", "Keiro", "Keyleth",
         "Kern", "Kratos", "Kylar",
         "Laucian", "Lael", "Laer", "Larin", "Lauriel", "Laurin",
@@ -3226,12 +3754,14 @@ def Racial_Names(Type):
         "Morhel", "Morwen", "Mya", "Mykar", "Myla", "Myr", "Nae",
         "Naeris", "Naivara", "Nail",
         "Naila", "Nailo", "Narkia", "Narn", "Neo", "Neuse", "Newa", "Noarnad", "Nora", "Norul",
-        "Oceania", "Oceanwalker", "Odalia", "Ofandrus", "Oi", "Olimion", "Ol", "Oren", "Ostoroth", "Oromis",
+        "Oceania", "Oceanwalker", "Odalia",
+        "Ofandrus", "Oi", "Olimion", "Ol", "Oren", "Ostoroth", "Oromis",
         "Paelia", "Pascal", "Pegnith", "Peren", "Peri", "Peria",
         "Pharana", "Quildohtare", "Quelenna", "Quinar",
         "Rain", "Raine", "Raingaze", "Rael", "Raelim", "Raer",
         "Raen", "Ravenflow", "Ravenwatcher", "Ridaro",
-        "Relix", "Ren", "Reseo", "Riardon", "Rithel", "Rocenel", "Roden", "Roen", "Rolan", "Rolen",
+        "Relix", "Ren", "Reseo", "Riardon",
+        "Rithel", "Rocenel", "Roden", "Roen", "Rolan", "Rolen",
         "Rua", "Rumathran", "Ryann", "Ryer", "Rym", "Sael", "Sai",
         "Sann", "Sariel", "Saynal",
         "Shava", "Soderac", "Sovelis", "Starwatcher", "Starwhisper",
@@ -3240,7 +3770,8 @@ def Racial_Names(Type):
         "Thranduil", "Tindecet", "Tris",
         "Trian", "Valance", "Vadan", "Valna",
         "Vanimial", "Vall",
-        "Van", "Vanes", "Vax", "Vaxeldan",
+        "Van",
+        "Vanes", "Vax", "Vaxeldan",
         "Vex", "Vexhalia", "Viasta", "Wasanzi",
         "Wil", "Wenion", "Xanapia", "Xyrkraken", "Xylia", "Yael",
         "Yaeldrin", "Yesstina",
@@ -3274,15 +3805,23 @@ def Racial_Names(Type):
         "Sunglow",
         "Thornheart",
         "Lightbearer", "Twilightveil", 
-        "Morningstar", "Dreamweaver", "Whisperwind",
-        "Duskweaver", "Raindancer", "Sunshadow", 
-        "Starfall", "Mistwood", "Dreamshade",
-        "Frostvale", "Leafshade", "Goldenbough",
+        "Morningstar", "Dreamweaver",
+        "Whisperwind",
+        "Duskweaver", "Raindancer",
+        "Sunshadow", 
+        "Starfall", "Mistwood",
+        "Dreamshade",
+        "Frostvale", "Leafshade",
+        "Goldenbough",
         "Silverpine",
-        "Mistwalker", "Dawnshadow", "Dreamsong",
-        "Nightshade", "Starleaf", "Moonrise", "Sunblade", 
-        "Mistbreeze", "Eveningstar", "Sundancer",
-        "Whisperleaf", "Dreamcatcher", "Leafwhisper", 
+        "Mistwalker", "Dawnshadow",
+        "Dreamsong",
+        "Nightshade", "Starleaf",
+        "Moonrise", "Sunblade", 
+        "Mistbreeze", "Eveningstar",
+        "Sundancer",
+        "Whisperleaf", "Dreamcatcher",
+        "Leafwhisper", 
         "Starweaver", "Sunshard", "Silentbrook",
         "Glimmermoon", "Nightriver", "Silverwind", 
         "Lightshade", "Moondancer", "Frostleaf",
@@ -3324,58 +3863,122 @@ def Racial_Names(Type):
         ]
 
     if Type == "Elf":
-        Names += Elves
-        Surnames += ElvenSurnames
+        Names = Elves
+        Surnames = ElvenSurnames
         FullNames =  random.choice(Names) + ' ' + random.choice(Surnames) 
 
         return FullNames
 
     Giant = [
-        "Rotder", "Flunfum", "Bunce", "Calamundis", "Droroc", "Gerdur", "Grad", "Bridget", "Ananias", "Atlas", "Bunari", "Casade", "Atlumun", "Coeus", "Crius", "Hyperion", "Iapetus", "Cronus", "Thea", "Rhea", "Themis", "Memosyne", "Foebe", "Tethis", "Tezis", "Tethys", "Bunasas", "Calan", "Brasan", "Tialam", "Bundero", "Atlar", "Caramu", "Cadet", "Flasari", "Geroro", "Bundun", "Andurd", "Draro", "Tisar", "Coni", "Bunfunfu", "Atlaria", "Bundunde", "Candu", "Teri", "Casaris", "Candun", "Andun", "Caris", "Bunasa", "Tialas", "Brisar", "Bumo", "Bunde", "Ragnarok", "Arzur", "Arturus", "Bedivere", "Bedwyr", "Bohort", "Bors", "Cai", "Caradoc", "Caradog", "Culch", "Elaine", "Enid", "Enide", "Gaheriet", "Gaheris", "Galaad", "Galahad", "Gareth", "Garez", "Gauvain", "Goven", "Gawain", "Geraint", "Gualguainus", "Guendolen", "Guendolena", "Guenevere", "Guinivere", "Guiomar", "GynezGyneth", "Hector", "Hoel", "Igerna", "Igraine", "Iseult", "Iseut", "Isolda", "Isolde", "Kay", "Lancelot", "Loncelote", "Lancelote", "Laudine", "Linet", "Lionel", "Lionesse", "Lionors", "Lohengrin", "Loherangrin", "Lot", "Luned", "Lunete", "Lynet", "Lynette", "Lyones", "Lyonesse", "Lyonors", "Medraut", "Medrod", "Mordred", "MerlinMyrdin", "Merlinus", "Merdinus", "Modred", "Mordred", "Morgaine", "Morgen", "Nimue", "Vivien", "Niniane", "Olwen", "Owain", "Parsifal", "Parzival", "Percival", "Pellam", "Pelleas", "Pellehand", "Pellehan", "Pelles", "Beli", "Pellinore", "Percival", "Peredur", "Tristan", "Drust", "Drustan", "Urien", "Uther", "Uthyr", "Walganus", "Yseut", "Iseult", "Ysolt", "Iseult", "Yvain", "Owain", "Ywain", "Lynn", "Lunete", "Eluned", "Lohengrin", "Lorraine", "Lot", "Gaius", "Iseult", "Gawain", "Garez", "Enid", "Helen", "Caratacos", "Caradog", "Bors", "Bedivere", "Tigsar", "Morgan", "Arthur", "Oceanus"
+        "Rotder", "Flunfum", "Bunce", "Calamundis",
+        "Droroc", "Gerdur", "Grad", "Bridget", "Ananias",
+        "Atlas", "Bunari", "Casade", "Atlumun", "Coeus",
+        "Crius", "Hyperion", "Iapetus", "Cronus", "Thea",
+        "Rhea", "Themis", "Memosyne", "Foebe", "Tethis", "Tezis",
+        "Tethys", "Bunasas", "Calan", "Brasan", "Tialam", "Bundero", "Atlar", "Caramu", "Cadet", "Flasari", "Geroro", "Bundun", "Andurd", "Draro", "Tisar", "Coni", "Bunfunfu", "Atlaria", "Bundunde", "Candu", "Teri", "Casaris", "Candun", "Andun", "Caris", "Bunasa", "Tialas", "Brisar", "Bumo", "Bunde", "Ragnarok", "Arzur", "Arturus", "Bedivere", "Bedwyr", "Bohort", "Bors", "Cai", "Caradoc", "Caradog", "Culch", "Elaine", "Enid", "Enide", "Gaheriet", "Gaheris", "Galaad", "Galahad", "Gareth", "Garez", "Gauvain", "Goven", "Gawain", "Geraint", "Gualguainus", "Guendolen", "Guendolena", "Guenevere", "Guinivere", "Guiomar", "GynezGyneth", "Hector", "Hoel", "Igerna", "Igraine", "Iseult", "Iseut", "Isolda", "Isolde", "Kay", "Lancelot", "Loncelote", "Lancelote", "Laudine", "Linet", "Lionel", "Lionesse", "Lionors", "Lohengrin", "Loherangrin", "Lot", "Luned", "Lunete", "Lynet", "Lynette", "Lyones", "Lyonesse", "Lyonors", "Medraut", "Medrod", "Mordred", "MerlinMyrdin", "Merlinus", "Merdinus", "Modred", "Mordred", "Morgaine", "Morgen", "Nimue", "Vivien", "Niniane", "Olwen", "Owain", "Parsifal", "Parzival", "Percival", "Pellam", "Pelleas", "Pellehand", "Pellehan", "Pelles", "Beli", "Pellinore", "Percival", "Peredur", "Tristan", "Drust", "Drustan", "Urien", "Uther", "Uthyr", "Walganus", "Yseut", "Iseult", "Ysolt", "Iseult", "Yvain", "Owain", "Ywain", "Lynn", "Lunete", "Eluned", "Lohengrin", "Lorraine", "Lot", "Gaius", "Iseult", "Gawain", "Garez", "Enid", "Helen", "Caratacos", "Caradog", "Bors", "Bedivere", "Tigsar", "Morgan", "Arthur", "Oceanus"
         ]
     if Type == "Giant":
-        Names += Giant
-        Surnames += Giant
+        Names = Giant
+        Surnames = Giant
         FullNames =  random.choice(Names) + ' ' + random.choice(Surnames)  + "son"
         return FullNames
 
     Orcs =[
-        "Aldis", "Arn", "Asfrid",
-        "Asterix", "Axe", "Balli", "Bjorn",
-        "Blod", "Bulak", "Carguk",
-        "Erek", "Erik", "Engli",
-        "Farkang", "Gell", "Gnarsh",
-        "Gorga", "Grog", "Grigi", "Gro",
-        "Greiland", "Henk", "Holg",
-        "Hosvir", "Idefix", "Ingrid",
-        "Iuli", "Jor", "Lagazi", 
-        "Merida", "Obelix", "Olof",
-        "Ovif", "Ozerix", "Panoramix",
-        "Ragnar", "Sagu", "Sarod", 
-        "Skegg", "Skard", "Skuf",
-        "Sveik", "Svein", "Svafar",
-        "Steinolf", "Steg", "Thorkell", 
-        "Thorald", "Thorlak", "Trag", "Trarik",
-        "Tyrfing", "Torrad", "Vifil",
-        "York", "Yurk", "Ñor",
-        "Agmund", "Alrek", "Bjarte",
-        "Brondar", "Dagfinn", "Einar",
-        "Eyvind", "Frode",
+        "Aldis",
+        "Arn",
+        "Asfrid",
+        "Asterix",
+        "Axe",
+        "Balli",
+        "Bjorn",
+        "Blod",
+        "Bulak",
+        "Carguk",
+        "Erek",
+        "Erik",
+        "Engli",
+        "Farkang",
+        "Gell",
+        "Gnarsh",
+        "Gorga",
+        "Grog",
+        "Grigi",
+        "Gro",
+        "Greiland",
+        "Henk",
+        "Holg",
+        "Hosvir",
+        "Idefix",
+        "Ingrid",
+        "Iuli",
+        "Jor",
+        "Lagazi", 
+        "Merida",
+        "Obelix",
+        "Olof",
+        "Ovif",
+        "Ozerix",
+        "Panoramix",
+        "Ragnar",
+        "Sagu",
+        "Sarod", 
+        "Skegg",
+        "Skard",
+        "Skuf",
+        "Sveik",
+        "Svein",
+        "Svafar",
+        "Steinolf",
+        "Steg",
+        "Thorkell", 
+        "Thorald",
+        "Thorlak",
+        "Trag",
+        "Trarik",
+        "Tyrfing",
+        "Torrad",
+        "Vifil",
+        "York",
+        "Yurk",
+        "Ñor",
+        "Agmund",
+        "Alrek",
+        "Bjarte",
+        "Brondar",
+        "Dagfinn",
+        "Einar",
+        "Eyvind",
+        "Frode",
         "Geirmund",
         "Gunnar",
-        "Halvard", "Harald", "Inge",
-        "Ivar", "Jarl", "Ketil",
-        "Knute", "Leif", "Magnar",
-        "Oddr", "Ormr", "Ragnarr",
-        "Rolf", "Sigurd",
-        "Skarde", "Snorri", "Sorli",
+        "Halvard",
+        "Harald",
+        "Inge",
+        "Ivar",
+        "Jarl",
+        "Ketil",
+        "Knute",
+        "Leif",
+        "Magnar",
+        "Oddr",
+        "Ormr",
+        "Ragnarr",
+        "Rolf",
+        "Sigurd",
+        "Skarde",
+        "Snorri",
+        "Sorli",
         "Steinar", 
-        "Thrainn", "Ulf",
+        "Thrainn",
+        "Ulf",
         "Valgard",
-        "Vidar", "Yngvar",
-        "Orm", "Hakon",
+        "Vidar",
+        "Yngvar",
+        "Orm",
+        "Hakon",
         "Bragi",
-        "Toste", "Trygg"
+        "Toste",
+        "Trygg"
         
         ]
     OrcSurnames = [
@@ -3386,13 +3989,15 @@ def Racial_Names(Type):
         "Orksson", "Fangsson", "Ardisson", "Arksson",
         "Wasson", "Hosvirsson", "Skegsson",
         "Thoralsson",
-        "Olofsson", "Aldisson", "Herdisson",
+        "Olofsson", "Aldisson",
+        "Herdisson",
         "Ingrisson", "Skusson", "Svasson",
         "Ensson", "Vifsson",
         "Iulisson", "Sveinsson",
         "Throlaksson", "Jorsson",
         "Ballisson",
-        "Yorksson", "Yurksson",
+        "Yorksson",
+        "Yurksson",
         "Ereksson", "Eriksson",
         "Arnsson",
         "Battlebreaker", "Warfist",
@@ -3408,7 +4013,8 @@ def Racial_Names(Type):
         "Warblade", "Goreaxe",
         "Frostmaul", "Darkfury", 
         "Stormblade", "Earthshaker",
-        "Firefist", "Blooddrinker", "Ragefury",
+        "Firefist",
+        "Blooddrinker", "Ragefury",
         "Warsong", 
         "Battlerager",
         "Goreclaw", "Steelbite",
@@ -3418,15 +4024,19 @@ def Racial_Names(Type):
         "Firemaul", "Shadowclaw",
         "Thundermaul",
         "Warfang", 
-        "Ironmaul", "Bonecrusher",
-        "Rageblade", "Battleshout",
+        "Ironmaul",
+        "Bonecrusher",
+        "Rageblade",
+        "Battleshout",
         "Goremaul",
         "Thunderaxe", 
         "Stormrend",
         "Bladeshadow", "Gorebrand",
-        "Warthorn", "Frostfury", "Shadowmaul", 
+        "Warthorn",
+        "Frostfury", "Shadowmaul", 
         "Battlemaw", "Warclaw",
-        "Rageclaw", "Bladefury", "Gorethorn",
+        "Rageclaw",
+        "Bladefury", "Gorethorn",
         "Warbreaker", 
         "Frostclaw", "Thunderfist",
         "Skullcrusher",
@@ -3442,16 +4052,21 @@ def Racial_Names(Type):
         "Battlerage"
         ]
     if Type == "Orc":
-        Names += Orcs
-        Surnames += OrcSurnames
+        Names = Orcs
+        Surnames = OrcSurnames
         FullNames =  random.choice(Names) + ' ' + random.choice(Surnames) 
         return FullNames
     Dwarves = [
-        "Graviel", "Juan", "Fernan", "Enrique",
-        "Mariana", "Aularia", "Inés",
-        "Blanca", "Ignacio",
-        "Gonzalo", "Rafael", "Igon",
-        "Marian", "Aurelio", "Alfredo",
+        "Graviel", "Juan",
+        "Fernan", "Enrique",
+        "Mariana",
+        "Aularia", "Inés",
+        "Blanca",
+        "Ignacio",
+        "Gonzalo", "Rafael",
+        "Igon",
+        "Marian", "Aurelio",
+        "Alfredo",
         "Ramon", "Ramona",
         "Eulario", "Paca", "Francisca",
         "Paco", "Francisco", "Antonio",
@@ -3466,7 +4081,9 @@ def Racial_Names(Type):
         "Miguel", "Bernardo", "Alberto",
         "Adelaida", "Adelita",
         "Adora", "Adrian", "Agustin",
-        "Agustina", "Ainara", "Ainoa",
+        "Agustina",
+        "Ainara",
+        "Ainoa",
         "Aitana", "Aitor",
         "Alba", "Alejandra", "Alejandro",
         "Alejo", "Alex", "Alfonso", "Alfredo",
@@ -3518,13 +4135,21 @@ def Racial_Names(Type):
         "Emiliano", "Emilio",
         "Encarnación", "Enriqueta",
         "Erasmo", "Esmeralda", "Esperanza",
-        "Opalo", "Esteban", "Estefanía", "Eulogia",
-        "Eulogio", "Eustaquio", "Eva", "Evangelina",
-        "Evaristo", "Ezequiel", "Fabián", "Fabiola",
-        "Facundo", "Fátima", "Faustina", "Federico",
-        "Felipe", "Fernanda", "Fernando", "Filomena",
-        "Fina", "Flavia", "Flavio", "Flora", "Floro",
-        "Fulgencio", "Gabriel",
+        "Opalo", "Esteban",
+        "Estefanía", "Eulogia",
+        "Eulogio", "Eustaquio",
+        "Eva", "Evangelina",
+        "Evaristo", "Ezequiel",
+        "Fabián", "Fabiola",
+        "Facundo", "Fátima",
+        "Faustina", "Federico",
+        "Felipe", "Fernanda",
+        "Fernando", "Filomena",
+        "Fina", "Flavia",
+        "Flavio", "Flora", "Floro",
+        "Fulgencio",
+        "Fabio",
+        "Gabriel",
         "Geraldo", "Gilberta",
         "Godofredo", "Gonzalo", "Gregoria",
         "Gregorio", "Grimaldo",
@@ -3550,121 +4175,305 @@ def Racial_Names(Type):
         "Kiko", "Laura", "Lázaro",
         "Leandro", "Lope", "Lucas",
         "Lucrecio",
-        "Lucrecia", "Luisa", "Manolo", "Manola",
-        "Manuel", "Marcelo", "Marcela", "Marcos",
-        "Margarita", "Maribel", "Mario", "Marta",
-        "Martín", "Mateo", "Mauro", "Melania",
-        "Mercedes", "Ignacio",
-        "Natalio", "Nicodemo",
-        "Nieves", "Norberto", "Octavia",
-        "Octavio", "Olegario",
-        "Pascual", "Pascuala",
-        "Patricia", "Patricio", "Patrocinia",
-        "Patrocinio", "Paulino", "Pedro", "Pelayo",
-        "Placido", "Placida", "Prospero", "Raimundo",
-        "Ramón", "Raúl", "Remedios", "Ricardo",
-        "Roberta", "Robertina", "Roberto", "Rocío",
-        "Rodrigo", "Rogelio", "Rolando", "Rosendo",
-        "Rufina", "Rufino", "Roberto", "Roberta",
-        "Sabrino", "Saturnino", "Sebastiana",
-        "Segismundo", "Severiano", "Severo",
+        "Lucrecia", "Luisa",
+        "Manolo", "Manola",
+        "Manuel", "Marcelo",
+        "Marcela", "Marcos",
+        "Margarita", "Maribel",
+        "Mario", "Marta",
+        "Martín", "Mateo",
+        "Mauro", "Melania",
+        "Mercedes",
+        "Ignacio",
+        "Natalio",
+        "Nicodemo",
+        "Nieves",
+        "Norberto",
+        "Octavia",
+        "Octavio",
+        "Olegario",
+        
+        "Pascual",
+        "Pascuala",
+        "Patricia",
+        "Patricio",
+        "Patrocinia",
+        "Patrocinio",
+        "Paulino",
+        "Pedro",
+        "Pelayo",
+        "Placido",
+        "Placida",
+        "Prospero",
+        
+        "Raimundo",
+        "Ramón",
+        "Raúl",
+        "Remedios",
+        "Ricardo",
+        "Roberta",
+        "Robertina",
+        "Roberto",
+        "Rocío",
+        "Rodrigo",
+        "Rogelio",
+        "Rolando",
+        "Rosendo",
+        "Rufina",
+        "Rufino",
+        "Roberto",
+        "Roberta",
+        
+        "Sabrino",
+        "Saturnino",
+        "Sebastiana",
+        "Segismundo",
+        "Severiano",
+        "Severo",
         "Silvestre",
-        "Simón", "Susana", "Tácito", "Tadeo",
-        "Telesforo", "Teodomiro",
-        "Teodora", "Teodosio",
-        "Trinidad", "Tristán", "Tulio", "Ulises",
-        "Urbana", "Urbano", "Valente", "Valeria",
-        "Vanesa", "Varinia", "Verónica", "Vicenta",
-        "Victoriano", "Virgilio",
-        "Virtudes", "Yago",
-        "Fabio", "Diego", "Lorencio",
-        "Nuño", "Sans",
-        "Sancho", "Sancha", "Suero", "Velasco",
-        "Ximeno", "Jimeno", "Brostan", "Amón",
-        "Igoberto", "Rigoberto",
-        "Astualso", "Alosa",
-        "Isiarino", "Rordrigo", "Daya", "Justosa",
-        "Fiosio", "Eloseva", "Daniano", "Costo",
-        "Anodino", "Sonio", "Béforo", "Teoberon",
-        "Jalisto", "Rostino", "Romartín", "Rorto",
-        "Prospero", "Rosto", "Seldo",
+        "Simón",
+        "Susana",
+
+        "Tácito",
+        "Tadeo",
+        "Telesforo",
+        "Teodomiro",
+        "Teodora",
+        "Teodosio",
+        "Trinidad",
+        "Tristán",
+        "Tulio",
+
+        "Ulises",
+        "Urbana",
+        "Urbano",
+
+        "Valente",
+        "Valeria",
+        "Vanesa",
+        "Varinia",
+        "Verónica",
+        "Vicenta",
+        "Victoriano",
+        "Virgilio",
+        "Virtudes",
+
+        "Yago",
+        
+        "Diego",
+        
+        "Lorencio",
+        
+        "Nuño",
+        
+        "Sans",
+        "Sancho",
+        "Sancha",
+        "Suero",
+        
+        "Velasco",
+        
+        "Ximeno",
+        
+        "Jimeno",
+        
+        "Brostan",
+        "Amón",
+        "Igoberto",
+        "Rigoberto",
+        "Astualso",
+        "Alosa",
+        "Isiarino",
+        "Rordrigo",
+        "Daya",
+        "Justosa",
+        "Fiosio",
+        "Eloseva",
+        "Daniano",
+        "Costo",
+        "Anodino",
+        "Sonio",
+        "Béforo", "Teoberon",
+        "Jalisto", "Rostino",
+        "Romartín", "Rorto",
+        "Prospero", "Rosto",
+        "Seldo",
         "Selda", "Aunara",
-        "Artosta", "Juriano", "Juro", "Joseros",
-        "Rosero", "Rosera", "Jura",
+        "Artosta", "Juriano",
+        "Juro", "Joseros",
+        "Rosero", "Rosera",
+        "Jura",
         "Jácaro", "Rosario",
-        "Fingido", "Anancio", "Anancia",
+        "Fingido", "Anancio",
+        "Anancia",
         "Pansiano", "Fertilio",
         "Constantina", "Jarana",
-        "Morana", "Nora", "Olivia", "Olivio",
-        "Noro", "Jarano", "Valido",
+        "Morana", "Nora",
+        "Olivia", "Olivio",
+        "Noro", "Jarano",
+        "Valido",
         "Valida", "Abela",
-        "Adalina", "Adora", "Adriana", "Ana",
-        "Antonia", "Basilia", "Beatriz", "Bonita",
-        "Camila", "Candela", "Carmen", "Catalina",
-        "Dolores", "Dominga", "Dorotea", "Elena",
+        "Adalina", "Adora",
+        "Adriana", "Ana",
+        "Antonia", "Basilia",
+        "Beatriz", "Bonita",
+        "Camila", "Candela",
+        "Carmen", "Catalina",
+        "Dolores", "Dominga",
+        "Dorotea", "Elena",
         "Elicia", "Esmeralda",
         "Felipina", "Francisca",
         "Gabriela", "Imelda",
-        "Ines", "Isabel", "Juana",
-        "Leocadia", "Leonor", "Leta", "Lucinda",
-        "Marisol", "Maria",
-        "Maricela", "Matilde",
-        "Melania", "Monica", "Nieves", "Nilda",
-        "Petrona", "Rafaela",
-        "Ramira", "Rosario",
-        "Sofia", "Consuelo", "Teresa", "Tomasa",
-        "Valentia", "Veronica", "Ines", "Isabel",
-        "Alejandro", "Alfonso",
-        "Alonso", "Anton",
-        "Arcos", "Arnoto", "Arturo", "Bartolomeo",
-        "Benito", "Bernardo", "Blasco", "Carlos",
-        "Damian", "Diego", "Domingo", "Enrique",
-        "Escobar", "Aitor",
-        "Fernando", "Francisco",
-        "Gabriel", "Garcia", "Gaspar", "Gilberto",
-        "Gonzalo", "Gostantin", "Jaime", "Joan",
-        "Juanito", "Jorge",
-        "Jose", "Juan", "Martino",
-        "Mateo", "Miguel", "Nicolas", "Pascual",
-        "Pedro", "Ramiro", "Ramon", "Rodrigo",
-        "Sebastian", "Salvador", "Simon", "Tomas",
-        "Tristan", "Valeriano",
-        "Iñigo", "Justoso",
-        "Vandina", "Favio",
-        "Rodrigo", "Antonia",
-        "Iñigo", "Juana",
-        "Ramonet", "Apolonia",
+        "Ines", "Isabel",
+        "Juana",
+        "Leocadia", "Leonor",
+        "Leta", "Lucinda",
+        "Marisol",
+        "Maria",
+        "Maricela",
+        "Matilde",
+        "Melania",
+        "Monica",
+        "Nieves",
+        "Nilda",
+        "Petrona",
+        "Rafaela",
+        "Ramira",
+        "Rosario",
+        
+        "Sofia",
+        "Consuelo",
+        "Teresa",
+        "Tomasa",
+        "Valentia",
+        "Veronica",
+        "Ines",
+        "Isabel",
+        "Alejandro",
+        "Alfonso",
+        "Alonso",
+        "Anton",
+        "Arcos",
+        "Arnoto",
+        "Arturo",
+        "Bartolomeo",
+        "Benito",
+        "Bernardo",
+        "Blasco",
+        "Carlos",
+        "Damian",
+        "Diego",
+        "Domingo",
+        "Enrique",
+        "Escobar",
+        "Aitor",
+        "Fernando",
+        "Francisco",
+        "Gabriel",
+        "Garcia",
+        "Gaspar",
+        "Gilberto",
+        "Gonzalo",
+        "Gostantin",
+        "Jaime",
+        "Joan",
+        "Juanito",
+        "Jorge",
+        "Jose",
+        "Juan",
+        "Martino",
+        "Mateo",
+        "Miguel",
+        "Nicolas",
+        "Pascual",
+        "Pedro",
+        "Ramiro",
+        "Ramon",
+        "Rodrigo",
+        "Sebastian",
+        "Salvador",
+        "Simon",
+        "Tomas",
+        "Tristan",
+        "Valeriano",
+        "Iñigo",
+        "Justoso",
+        "Vandina",
+        "Favio",
+        "Rodrigo",
+        "Antonia",
+        "Iñigo",
+        "Juana",
+        "Ramonet",
+        "Apolonia",
         "Aida",
-        "Adolfo", "Alvar", "Baldomar", "Beltran",
-        "Carmelo", "Dorando", "Elvio", "Fernan",
-        "Gerardo", "Heraldo",
-        "Isandro", "Jovito",
-        "Ladislao", "Maximo", "Nando", "Orlando",
-        "Paco", "Quinto", "Ricardo", "Santiago",
-        "Teodoro", "Ubaldo",
-        "Vidal", "Wilfredo",
-        "Ximen", "Yago", "Zaragoza", "Esteban",
-        "Ignacio", "Julio",
-        "Mauricio", "Nestor", 
-        "Oscar", "Pablo", "Quirino", "Reynaldo",
-        "Sergio", "Teo", "Ulises", "Vicente",
-        "Xavier", "Ysmael", "Zeferino", "Felipe",
-        "Gerardo", "Horacio", "Isidro", "Jacobo",
-        "Lorenzo", "Maceo",
-        "Norberto", "Octavio",
-        "Ponce", "Quique", "Raul", "Silverio", 
-        "Toribio", "Ugo", "Victorino", "Waldo",
-        "Xerxes", "Yesid", "Zacarias", "Adan", 
-        "Bartolome", "Celestino", "Demetrio",
-        "Ernesto", "Fidel",
-        "Guillermo", "Hilario", 
-        "Indalecio", "Joaquin", "Luis", "Manolo",
-        "Narciso", "Osvaldo", "Pedro", "Ramon",
-        "Sancho", "Timoteo",
-        "Urbano", "Valentino",
-        "Wilmer", "Xico",
-        "Ysidro", "Zenon"
-            ]
+        "Adolfo",
+        "Alvar",
+        "Baldomar",
+        "Beltran",
+        "Carmelo",
+        "Dorando",
+        "Elvio",
+        "Fernan",
+        "Gerardo",
+        "Heraldo",
+        "Isandro",
+        "Jovito",
+        "Ladislao", "Maximo",
+        "Nando", "Orlando",
+        "Paco", "Quinto",
+        "Ricardo", "Santiago",
+        "Teodoro",
+        "Ubaldo",
+        "Vidal",
+        "Wilfredo",
+        "Ximen", "Yago",
+        "Zaragoza", "Esteban",
+        "Ignacio",
+        "Julio",
+        "Mauricio",
+        "Nestor", 
+        "Oscar", "Pablo",
+        "Quirino", "Reynaldo",
+        "Sergio", "Teo",
+        "Ulises", "Vicente",
+        "Xavier", "Ysmael",
+        "Zeferino", "Felipe",
+        "Gerardo", "Horacio",
+        "Isidro", "Jacobo",
+        "Lorenzo",
+        "Maceo",
+        "Norberto",
+        "Octavio",
+        "Ponce", "Quique",
+        "Raul", "Silverio", 
+        "Toribio", "Ugo",
+        "Victorino", "Waldo",
+        "Xerxes", "Yesid",
+        "Zacarias", "Adan", 
+        "Bartolome", "Celestino",
+        "Demetrio",
+        "Ernesto",
+        "Fidel",
+        "Guillermo",
+        "Hilario", 
+        "Indalecio", "Joaquin",
+        "Luis",
+        "Manolo",
+        "Narciso",
+        "Osvaldo",
+        "Pedro",
+        "Ramon",
+        "Sancho",
+        "Timoteo",
+        "Urbano",
+        "Valentino",
+        "Wilmer",
+        "Xico",
+        "Ysidro",
+        "Zenon"
+        ]
+    
     DwarvenSurnames = [
         "Stonewrought",
         "Forgekeeper",
@@ -3708,43 +4517,71 @@ def Racial_Names(Type):
         "Trejo",
         "Bolivar",
         "De la Fuente",
-        "Moreno", "Pizarro",
-        "Velazquez", "Estrella",
-        "Salcedo", "Machado",
-        "De Santiago", "Del Rio",
-        "Luna", "Solis", "Miranda",
-        "Rojas", "Ortega",
-        "Ponce de Leon", "Marquez",
+        "Moreno",
+        "Pizarro",
+        "Velazquez",
+        "Estrella",
+        "Salcedo",
+        "Machado",
+        "De Santiago",
+        "Del Rio",
+        "Luna", "Solis",
+        "Miranda",
+        "Rojas",
+        "Ortega",
+        "Ponce de Leon",
+        "Marquez",
         "Fuentes", 
-        "Dorado", "Belmonte",
-        "Guevara", "Cordero", "Rico",
-        "De la Mora", "Trujillo",
+        "Dorado",
+        "Belmonte",
+        "Guevara", "Cordero",
+        "Rico",
+        "De la Mora",
+        "Trujillo",
         "Andino",
-        "Sierra", "De las Casas",
-        "Valiente", "Santos",
-        "Mojica", "Reyes de Oro",
+        "Sierra",
+        "De las Casas",
+        "Valiente",
+        "Santos",
+        "Mojica",
+        "Reyes de Oro",
         "Briseno",
-        "De la Torre", "Montes",
-        "Barrios", "Orellana",
-        "Valero", "Escobar",
+        "De la Torre",
+        "Montes",
+        "Barrios",
+        "Orellana",
+        "Valero",
+        "Escobar",
         "Nunez del Prado", 
-        "Cazares", "Zaragoza",
-        "Alcantar", "Del Monte",
-        "De la Rosa", "Toledo",
+        "Cazares",
+        "Zaragoza",
+        "Alcantar",
+        "Del Monte",
+        "De la Rosa",
+        "Toledo",
         "Paredes", 
-        "Rendon", "Giron", "Vargas",
-        "De Alba", "Cazador",
-        "De la Garza", "Salvador",
+        "Rendon",
+        "Giron",
+        "Vargas",
+        "De Alba",
+        "Cazador",
+        "De la Garza",
+        "Salvador",
         "Rios",
-        "Oronegro", "Hierrofino",
+        "Oronegro",
+        "Hierrofino",
         "Piedrapreciosa",
-        "Minadeplata", "Piedrajoya",
+        "Minadeplata",
+        "Piedrajoya",
         "Oroazul",  
-        "Plataclara", "Rubirote",
+        "Plataclara",
+        "Rubirote",
         "Joyadelmar",
-        "Montediamante", "Ororico",
+        "Montediamante",
+        "Ororico",
         "Cavernaoro",  
-        "Platafuerte", "Gemaestrella",
+        "Platafuerte",
+        "Gemaestrella",
         "Hierroprofundo",
         "Metalbrillante",  
         "Oradelfuego",  
@@ -3859,23 +4696,41 @@ def Racial_Names(Type):
         "Gotaesmeralda"  
         ]
     if Type == "Dwarf": 
-        Names += Dwarves
-        Surnames += DwarvenSurnames
+        Names = Dwarves
+        Surnames = DwarvenSurnames
         FullNames =  random.choice(Names) + ' ' + random.choice(Names) + ' ' + random.choice(Surnames)
         return FullNames
 
     Elementals = [
         # Water Elementals
         "Aqualis",
-        "Vatnavi", "Suyasha",
-        "Neptaline", "Llyncor",
-        "Aqua", "Atlantic", "Pacific",
-        "Indian", "Arctic", "Antartic",
+        "Vatnavi",
+        "Suyasha",
+        "Neptaline",
+        "Llyncor",
+        "Aqua",
+        "Atlantic",
+        "Pacific",
+        "Indian",
+        "Arctic",
+        "Antartic",
         "Argonaut",
-        "Lotus", "Kailani", "Neptune",
-        "Neptuno", "India", "Maren", "Mar",
-        "Oceano", "Lake", "Kai", "Bay", "Lake",
-        "Bahia", "River", "Nile", "Kai", "Caspian",
+        "Lotus",
+        "Kailani",
+        "Neptune",
+        "Neptuno",
+        "India",
+        "Maren",
+        "Mar",
+        "Oceano",
+        "Lake",
+        "Kai",
+        "Bay",
+        "Lake",
+        "Bahia",
+        "River",
+        "Nile",
+        "Kai", "Caspian",
         "Cora", "Maya", "Amalia", "Maia", "Mira",
         "Talia", "Amaya", "Tallulah", "Ren", "Rene",
         "Well", "Marin", "Severn", "Marina", "Tiber",
@@ -3887,77 +4742,277 @@ def Racial_Names(Type):
         "Moses", "Fuji", "Anahita", "Ginevra", "Gin",
         "Ginebra", "Jordan", "Rayan", "Kelvin", "Nori",
         "Arno", "Saga", "Lago", "Struan", "Stream", "Varsha",
-        "Shannon", "Ondine", "Onda", "Misty", "Monroe", "Arnav",
-        "Ama", "Lynn", "Moishe", "Yara", "Yareli", "Oceane", "Thalassa",
-        "Bay", "Bey", "Neptune", "Neptuna", "Sea", "Kairi", "Ria", "Indra",
-        "Kano", "Aarna", "Niara", "Niagara", "Nebula", "Delta", "Aalto",
-        "Po", "Araluen", "Jora", "Naim", "Narelle", "Nahla", "Nerida",
-        "Nereida", "Neri", "Cherith", "Adair", "Lir", "Reva", "Sereia",
-        "Aqua", "Eyre", "Mar", "Moana", "Triton", "Euna", "Undine", "Nebula",
-        "Meara", "Loch", "Naida", "Oceana", "Gali", "Tal", "Loire", "Rilla",
-        "Varuna", "Maayan", "Oceanus", "Kalani", "Aquarius", "Acuario", "Danu",
-        "Danubio", "Tarka", "Nen", "Gal", "Rivo", "Duna", "Zarya", "Laguna",
-        "Seine", "Sena", "Alun", "Kallan", "Cascada", "Danube", "Onda", "Wave",
-        "Baia", "Nile", "Nilo", "Maree", "Marea", "Adria", "Adriana", "Alda",
-        "Alma", "Amaya", "Anahita", "Asita", "Cherith", "Darya", "Dayla", "Hali",
-        "Kendra", "Loire", "Marella", "Michal", "Mira", "Nahla", "Namra", "Reva",
-        "Ria", "Salila", "Sarita", "Talia", "Zarna", "Zarya", "Adair", "Afron", "Alon",
-        "Andreus", "Arnon", "Bahari", "Gafar", "Haf", "Jafar", "Kallan", "Kaveri", "Malik",
-        "Ninad", "Odine", "Pavati", "Pulin", "Sagara", "Siva", "Wade", "Adva", "Ara", "Arna",
-        "Baia", "Bay", "Cascade", "Cascada", "Coral", "Eira", "Euri", "Isa", "Ice", "Snow",
-        "Isla", "Jamaica", "Jordan", "Jubal", "Kai", "Kenga", "Kline", "Lago", "Laguna",
-        "Laco", "Lake", "Laik", "Maris", "Morgan", "Morgana", "Nira", "Rayan", "Shandy",
-        "Shannon", "Shore", "Adair", "Amaya", "Cary", "Kisima", "Laguna", "Narelle", "Nile",
-        "Nilo", "Nimue", "Serena", "Sereno", "Yara", "Alon", "Kano", "Wade", "Naia", "Tide",
-        "Adriatic", "Ariel", "Athena", "Atena", "Azena", "Eldoris", "Marin", "Kona", "Argo",
-        "Arcadia", "Blue", "Lima", "Andaya", "Niar", "Mora", "Amal", "Kaya", "Dorian",
+        "Shannon", "Ondine", "Onda",
+        "Misty", "Monroe", "Arnav",
+        "Ama", "Lynn", "Moishe", "Yara",
+        "Yareli", "Oceane", "Thalassa",
+        "Bay", "Bey", "Neptune",
+        "Neptuna", "Sea", "Kairi",
+        "Ria", "Indra",
+        "Kano", "Aarna", "Niara",
+        "Niagara", "Nebula",
+        "Delta", "Aalto",
+        "Po", "Araluen", "Jora",
+        "Naim", "Narelle", "Nahla", "Nerida",
+        "Nereida", "Neri", "Cherith",
+        "Adair", "Lir", "Reva", "Sereia",
+        "Aqua", "Eyre", "Mar", "Moana",
+        "Triton", "Euna", "Undine", "Nebula",
+        "Meara", "Loch", "Naida", "Oceana",
+        "Gali", "Tal", "Loire", "Rilla",
+        "Varuna", "Maayan", "Oceanus",
+        "Kalani", "Aquarius", "Acuario", "Danu",
+        "Danubio", "Tarka", "Nen", "Gal",
+        "Rivo", "Duna", "Zarya", "Laguna",
+        "Seine", "Sena", "Alun", "Kallan",
+        "Cascada", "Danube", "Onda", "Wave",
+        "Baia", "Nile", "Nilo", "Maree",
+        "Marea", "Adria", "Adriana", "Alda",
+        "Alma", "Amaya", "Anahita",
+        "Asita", "Cherith", "Darya",
+        "Dayla", "Hali",
+        "Kendra", "Loire",
+        "Marella",
+        "Michal", "Mira",
+        "Nahla", "Namra", "Reva",
+        "Ria", "Salila",
+        "Sarita", "Talia",
+        "Zarna", "Zarya",
+        "Adair", "Afron", "Alon",
+        "Andreus", "Arnon",
+        "Bahari", "Gafar",
+        "Haf", "Jafar", "Kallan",
+        "Kaveri", "Malik",
+        "Ninad", "Odine",
+        "Pavati", "Pulin",
+        "Sagara", "Siva",
+        "Wade", "Adva", "Ara",
+        "Arna",
+        "Baia", "Bay", "Cascade",
+        "Cascada",
+        "Coral", "Eira", "Euri",
+        "Isa", "Ice", "Snow",
+        "Isla", "Jamaica",
+        "Jordan", "Jubal",
+        "Kai", "Kenga", "Kline",
+        "Lago", "Laguna",
+        "Laco", "Lake", "Laik",
+        "Maris", "Morgan",
+        "Morgana", "Nira",
+        "Rayan", "Shandy",
+        "Shannon", "Shore",
+        "Adair", "Amaya",
+        "Cary", "Kisima",
+        "Laguna", "Narelle", "Nile",
+        "Nilo", "Nimue", "Serena", "Sereno",
+        "Yara", "Alon", "Kano", "Wade", "Naia", "Tide",
+        "Adriatic", "Ariel", "Athena",
+        "Atena", "Azena",
+        "Eldoris", "Marin",
+        "Kona", "Argo",
+        "Arcadia",
+        "Blue", "Lima",
+        "Andaya",
+        "Niar", "Mora",
+        "Amal",
+        "Kaya", "Dorian",
         # Fire Elementals
-        "Pyraan", "Agnivir", "Tulikor", "Igniferro", "Lavasol",
-        "Fuocco", "Phoenix", "Ember", "Cyrus", "Rhys", "Apollo", "Kenna", "Blaze",
-        "Flame", "Arsenic", "Kenna", "Ravi", "Aster", "Ignatius", "Ignacio", "Ignatio",
-        "Hera", "Uri", "Edris", "Satish", "Calcifer", "Sol", "Solina", "Solin", "Salamander",
-        "Ardea", "Ravee", "Vulcan", "Eldir", "Hito", "Agni", "Waru", "Alev", "Haco", "Adar",
-        "Agni", "Aiden", "Adish", "Afi", "Ardere", "Ash", "Ashbel", "Atesh", "Blaze",
-        "Bodaway", "Brand", "Brando", "Branton", "Brent", "Conleth", "Cimbeline",
-        "Cyrus", "Cirio", "Egan", "Finlo", "Fintan", "Flint", "Haco", "Hagan", "Hakan",
-        "Helios", "Elio", "Inigo", "Iñigo", "Ishaan", "Keahi", "Keegan", "Kenneth", "Kiran",
-        "Maccoy", "Nuri", "Prometheus", "Prometeo", "Promezeus", "Prometeus", "Ra", "Rhys",
-        "Tyson", "Uri", "Vulcan", "Aalish", "Aidan", "Adar", "Aithne", "Aizne", "Alinta",
-        "Anala", "Azar", "Barbara", "Calida", "Candace", "Cinder", "Ceniza", "Cinderella",
-        "Cinderel", "Edan", "Ember", "Ambar", "Amber", "Ena", "Enya", "Anya", "Fiamma",
-        "Flama", "Idris", "Kalama", "Kenna", "Pele", "Fenix", "Shula", "Souzan", "Tana",
-        "Burn", "Abenanka", "Aguya", "Aithne", "Alinta", "Bedelia", "Brid", "Calida",
-        "Calina", "Enya", "Eña", "Enia", "Ember", "Fiamma", "Nina", "Shula", "Tana",
-        "Tanwen", "Admani", "Agni", "Aiden", "Anala", "Aodh", "Brandr", "Branton",
-        "Blaze", "Brand", "Cinaed", "Conleth", "Conlez", "Egan", "Edan", "Edana",
-        "Flint", "Fintan", "Hagan", "Haco", "Vela", "Ignacio", "Inigo", "Iñigo", "Ignatius",
-        "Kenez", "McCoy", "Mishal", "Mogotsi", "Nuri", "Nuria", "Plamen", "Pirro", "Pyrrhus",
-        "Pirrus", "Tanguy", "Tito", "Titus", "Uri", "Vatroslav", "Azar", "Hayden", "Keahi",
-        "Liekki", "Fenix", "Rhys", "Igno", "Kenez", "Blaise", "Blaze", "Aalish", "Aatish",
-        "Aatix", "Atix", "Aarush", "Aarux", "Arux", "Abenanka", "Adara", "Adeen", "Adish",
-        "Admani", "Amani", "Adurnarseh", "Aed", "Afi", "Agneya", "Agnes", "Agni", "Agnimitra",
-        "Agnivo", "Aguya", "Ahdan", "Aidan", "Aiden", "Aine", "Aithne", "Aizne", "Akiho",
-        "Aldebrand", "Alev", "Alinta", "Amarkeeri", "Anala", "Angarika", "Apoy", "Ardere",
-        "Arder", "Ardor", "Atsila", "Azar", "Azula", "Azarnoosh", "Basia", "Bedelia",
-        "Brantley", "Brigid", "Brit", "Cemre", "Chantico", "Conlez", "Conleth", "Conley",
-        "Fajra", "Faira", "Fiamma", "Flama", "Fiama", "Felio", "Felia", "Felios", "Hurik",
-        "Idris", "Ignacia", "Ishat", "Kamar", "Kazuya", "Keahi", "Keegan", "Kenna", "Kindle",
-        "Kai", "Lieki", "Mahuika", "Mashal", "Torch", "Antorcha", "Torcha", "Mogotsi", "Nina",
-        "Nootau", "Nutau", "Oya", "Plamen", "Pyro", "Piro", "Piros", "Pirus", "Ris", "Piris",
-        "Shohreh", "Sore", "Shula", "Souzan", "Tanguy", "Ugne", "Igne", "Ignea", "Azar",
-        "Calida", "Calido", "Fuji", "Neri", "Aiden", "Adal", "Cora", "Areli", "Brina",
-        "Arian", "Igna", "Kalal", "Pikah", "Alen", "Brind", "Cosha", "Ari", "Keri",
-        "Cider", "Cavo", "Fenix", "Adarin", "Bris", "Azam", "Calan", "Arur",
+        "Pyraan",
+        "Agnivir", "Tulikor",
+        "Igniferro", "Lavasol",
+        "Fuocco", "Phoenix", "Ember",
+        "Cyrus", "Rhys",
+        "Apollo", "Kenna", "Blaze",
+        "Flame", "Arsenic",
+        "Kenna", "Ravi",
+        "Aster", "Ignatius",
+        "Ignacio", "Ignatio",
+        "Hera", "Uri",
+        "Edris", "Satish",
+        "Calcifer", "Sol",
+        "Solina", "Solin", "Salamander",
+        "Ardea", "Ravee",
+        "Vulcan", "Eldir",
+        "Hito", "Agni", "Waru",
+        "Alev", "Haco", "Adar",
+        "Agni", "Aiden",
+        "Adish", "Afi",
+        "Ardere", "Ash",
+        "Ashbel", "Atesh", "Blaze",
+        "Bodaway", "Brand",
+        "Brando",
+        "Branton", "Brent",
+        "Conleth", "Cimbeline",
+        "Cyrus", "Cirio", "Egan", "Finlo",
+        "Fintan", "Flint", "Haco", "Hagan", "Hakan",
+        "Helios", "Elio", "Inigo", "Iñigo",
+        "Ishaan", "Keahi",
+        "Keegan", "Kenneth",
+        "Kiran",
+        "Maccoy", "Nuri",
+        "Prometheus",
+        "Prometeo", "Promezeus",
+        "Prometeus", "Ra",
+        "Rhys",
+        "Tyson", "Uri",
+        "Vulcan", "Aalish",
+        "Aidan", "Adar",
+        "Aithne", "Aizne",
+        "Alinta",
+        "Anala", "Azar",
+        "Barbara", "Calida",
+        "Candace", "Cinder",
+        "Ceniza", "Cinderella",
+        "Cinderel", "Edan",
+        "Ember", "Ambar",
+        "Amber", "Ena",
+        "Enya", "Anya", "Fiamma",
+        "Flama",
+        "Idris",
+        "Kalama",
+        "Kenna",
+        "Pele", "Fenix",
+        "Shula", "Souzan", "Tana",
+        "Burn", "Abenanka",
+        "Aguya", "Aithne",
+        "Alinta", "Bedelia",
+        "Brid", "Calida",
+        "Calina", "Enya",
+        "Eña", "Enia", "Ember",
+        "Fiamma", "Nina",
+        "Shula", "Tana",
+        "Tanwen", "Admani",
+        "Agni", "Aiden",
+        "Anala", "Aodh",
+        "Brandr", "Branton",
+        "Blaze", "Brand",
+        "Cinaed", "Conleth",
+        "Conlez", "Egan",
+        "Edan", "Edana",
+        "Flint", "Fintan",
+        "Hagan", "Haco",
+        "Vela", "Ignacio",
+        "Inigo", "Iñigo",
+        "Ignatius",
+        "Kenez", "McCoy",
+        "Mishal", "Mogotsi",
+        "Nuri",
+        "Nuria", "Plamen",
+        "Pirro", "Pyrrhus",
+        "Pirrus", "Tanguy",
+        "Tito", "Titus",
+        "Uri", "Vatroslav",
+        "Azar", "Hayden",
+        "Keahi",
+        "Liekki", "Fenix",
+        "Rhys", "Igno",
+        "Kenez",
+        "Blaise", "Blaze",
+        "Aalish", "Aatish",
+        "Aatix", "Atix",
+        "Aarush", "Aarux",
+        "Arux",
+        "Abenanka", "Adara",
+        "Adeen", "Adish",
+        "Admani", "Amani",
+        "Adurnarseh", "Aed",
+        "Afi", "Agneya", "Agnes", "Agni", "Agnimitra",
+        "Agnivo", "Aguya", "Ahdan", "Aidan",
+        "Aiden", "Aine", "Aithne", "Aizne", "Akiho",
+        "Aldebrand", "Alev", "Alinta", "Amarkeeri",
+        "Anala", "Angarika", "Apoy", "Ardere",
+        "Arder", "Ardor", "Atsila", "Azar",
+        "Azula", "Azarnoosh", "Basia", "Bedelia",
+        "Brantley", "Brigid", "Brit", "Cemre",
+        "Chantico", "Conlez", "Conleth", "Conley",
+        "Fajra", "Faira", "Fiamma", "Flama",
+        "Fiama", "Felio", "Felia", "Felios", "Hurik",
+        "Idris", "Ignacia", "Ishat", "Kamar",
+        "Kazuya", "Keahi", "Keegan", "Kenna", "Kindle",
+        "Kai", "Lieki", "Mahuika", "Mashal",
+        "Torch", "Antorcha", "Torcha", "Mogotsi", "Nina",
+        "Nootau", "Nutau", "Oya", "Plamen",
+        "Pyro", "Piro", "Piros", "Pirus", "Ris", "Piris",
+        "Shohreh", "Sore", "Shula", "Souzan",
+        "Tanguy", "Ugne", "Igne", "Ignea", "Azar",
+        "Calida", "Calido", "Fuji", "Neri",
+        "Aiden", "Adal", "Cora", "Areli", "Brina",
+        "Arian", "Igna", "Kalal", "Pikah",
+        "Alen", "Brind", "Cosha", "Ari", "Keri",
+        "Cider", "Cavo", "Fenix", "Adarin",
+        "Bris", "Azam", "Calan", "Arur",
         # Earth Elementals
-        "Terraque", "Muldor", "Rocalia", "Kivinari", "Prithvani",
-        "Terra", "Onix", "Opal", "Aluminum", "Gallium", "Indium", "Tin", "Thallium",
-        "Lead", "Bismuth", "Nihonium", "Igneus", "Igneous", "Igneo", "Ignea", "Sedimentar",
-        "Sedimentario", "Sedimentaria", "Metamor", "Metam", "Dacite", "Basalt", "Granite", "Pegmatite", "Basalt", "Obsidian", "Stone", "Chalk", "Sand", "Iron", "Slate", "Skist", "Garnet", "Marble", "Jade", "Ore", "Adakite", "Andesite", "Alkali", "Basalt", "Basanite", "Magnesium", "Lava", "Volcan", "Potassium", "Silica", "Rock", "Carbon", "Carbonite", "Ender", "Dacite", "Dolerite", "Corsite", "Dunite", "Olivine", "Essexite", "Granite", "Grane", "Dune", "Pluton", "Kimberlite", "Diamond", "Latite", "Obsidian", "Pumice", "Scoria", "Sovite", "Dolomite", "Chalk", "Coal", "Quartz", "Cuarzo", "Salt", "Marble", "Granite", "Lapislazuli", "Lapis", "Lazuli", "Adamite", "Adelite", "Arenite", "Almandite", "Alumn", "Alunite", "Amarantite", "Anandite", "Antimony", "Azurite", "Adamantine", "Agate", "Alabaster", "Bismite", "Bismut", "Bronce", "Cadmium", "Cerite", "Carvonite", "Crystal", "Copper", "Cobre", "Cementite", "Emerald", "Diamond", "Mine", "Fluorite", "Garnet", "Gold", "Hematite", "Magnetite", "Manganite", "Mesolite", "Mimetite", "Mica", "Magnesia", "Neptinite", "Pyrite", "Pirite", "Quartz", "Ruby", "Titanite", "Turquesa", "Turkis", "Turquoise", "Tremor", "Uralite", "Zeolite", "Zinc", "Zircon", "Lithium", "Sodium", "Potassium", "Rubidium", "Cesium", "Francium", "Berillium", "Magnesium", "Calcium", "Strontium", "Barium", "Radium", "Aluminium", "Gallium", "Indium", "Tin", "Thallium", "Lead", "Bismuto", "Titanium", "Vanadium", "Chromium", "Manganese", "Iron", "Cobalt", "Nickel", "Copper", "Zinc", "Zirconium", "Rodium", "Palladium", "Silver", "Cadmium", "Tunsten", "Osmium", "Platinum", "Gold", "Mercury", "Plata", "Oro", "Copernicium", "Uranium", "Plutonium", "Curium", "Californium", "Einstenium", "Fermium", "Nobelium", "Lithium", "Berilium", "Sodium", "Magnesium", "Potasium", "Calcium", "Titanium", "Vanadium", "Chrome", "Chromium", "Manganese", "Iron", "Cobalt", "Nickel", "Copper", "Zinc", "Gallium", "Rubidium", "Strontium", "Zirconium", "Niobium", "Rodium", "Silver", "Cadmium", "Indium", "Tin", "Cesium", "Cerium", "Promethium", "Iridium", "Platinum", "Mercury", "Mercurium", "Lead", "Bismutium", "Polonium", "Uranium", "Alabaster", "Argento", "Berilio", "Clay", "Coal", "Cobalt", "Dustin", "Elessar", "Emerald", "Ferro", "Granite", "Mercury", "Mica", "Oriol", "Oro", "Peter", "Pedro", "Saphir", "Silver", "Steel", "Stone", "Zircon", "Bronze", "Iron", "Ferro", "Electrum", "Sterling", "Argentium", "Titanium", "Cole", "Arena", "Arenita", "Flint", "Duna", "Amatist", "Gravel", "Gaia", "Boulder", "Bould", "Atlas", "Avalanche", "Midas", "Flint", "Basalt", "Jade", "Mita", "Coba",
+        "Terraque", "Muldor", "Rocalia",
+        "Kivinari", "Prithvani",
+        "Terra", "Onix", "Opal", "Aluminum",
+        "Gallium", "Indium", "Tin", "Thallium",
+        "Lead", "Bismuth", "Nihonium", "Igneus",
+        "Igneous", "Igneo", "Ignea", "Sedimentar",
+        "Sedimentario", "Sedimentaria", "Metamor",
+        "Metam", "Dacite", "Basalt", "Granite",
+        "Pegmatite", "Basalt", "Obsidian", "Stone",
+        "Chalk", "Sand", "Iron", "Slate", "Skist",
+        "Garnet", "Marble",
+        "Jade", "Ore", "Adakite",
+        "Andesite", "Alkali", "Basalt", "Basanite",
+        "Magnesium", "Lava", "Volcan", "Potassium",
+        "Silica", "Rock", "Carbon", "Carbonite",
+        "Ender", "Dacite", "Dolerite", "Corsite",
+        "Dunite", "Olivine", "Essexite", "Granite",
+        "Grane", "Dune", "Pluton",
+        "Kimberlite", "Diamond", "Latite",
+        "Obsidian", "Pumice", "Scoria", "Sovite",
+        "Dolomite", "Chalk", "Coal", "Quartz", "Cuarzo",
+        "Salt", "Marble", "Granite", "Lapislazuli", "Lapis",
+        "Lazuli", "Adamite", "Adelite", "Arenite", "Almandite",
+        "Alumn", "Alunite", "Amarantite", "Anandite", "Antimony",
+        "Azurite", "Adamantine", "Agate", "Alabaster", "Bismite",
+        "Bismut", "Bronce", "Cadmium", "Cerite", "Carvonite", "Crystal",
+        "Copper", "Cobre", "Cementite", "Emerald", "Diamond", "Mine", "Fluorite",
+        "Garnet", "Gold", "Hematite", "Magnetite", "Manganite", "Mesolite", "Mimetite",
+        "Mica", "Magnesia", "Neptinite", "Pyrite", "Pirite", "Quartz", "Ruby", "Titanite",
+        "Turquesa", "Turkis", "Turquoise", "Tremor", "Uralite", "Zeolite", "Zinc", "Zircon",
+        "Lithium", "Sodium", "Potassium", "Rubidium", "Cesium", "Francium", "Berillium", "Magnesium",
+        "Calcium", "Strontium", "Barium", "Radium", "Aluminium", "Gallium", "Indium", "Tin", "Thallium",
+        "Lead", "Bismuto", "Titanium", "Vanadium", "Chromium", "Manganese", "Iron", "Cobalt", "Nickel",
+        "Copper", "Zinc", "Zirconium", "Rodium", "Palladium", "Silver", "Cadmium", "Tunsten", "Osmium",
+        "Platinum", "Gold", "Mercury", "Plata", "Oro", "Copernicium", "Uranium", "Plutonium", "Curium",
+        "Californium", "Einstenium", "Fermium", "Nobelium", "Lithium", "Berilium", "Sodium", "Magnesium",
+        "Potasium", "Calcium", "Titanium", "Vanadium", "Chrome", "Chromium", "Manganese", "Iron",
+        "Cobalt", "Nickel", "Copper", "Zinc", "Gallium", "Rubidium", "Strontium", "Zirconium", "Niobium",
+        "Rodium", "Silver", "Cadmium", "Indium", "Tin", "Cesium", "Cerium", "Promethium", "Iridium",
+        "Platinum", "Mercury", "Mercurium", "Lead", "Bismutium", "Polonium", "Uranium", "Alabaster",
+        "Argento", "Berilio", "Clay", "Coal", "Cobalt", "Dustin", "Elessar", "Emerald", "Ferro", "Granite", "Mercury", "Mica", "Oriol", "Oro", "Peter", "Pedro", "Saphir", "Silver", "Steel", "Stone", "Zircon", "Bronze", "Iron", "Ferro", "Electrum", "Sterling", "Argentium", "Titanium", "Cole", "Arena", "Arenita", "Flint", "Duna", "Amatist", "Gravel", "Gaia", "Boulder", "Bould", "Atlas", "Avalanche", "Midas", "Flint", "Basalt", "Jade", "Mita", "Coba",
         # Air Elementals
         "Aerlyn", "Vaataan", "Tuulikas", "Ilmara", "Caelistis",
         "Aero", "Aelio", "Aeolian", "Gale", "Zefir", "Zefyr", "Zephyr", "Zefirus",
-        "Wuzer", "Wuther", "Haboob", "Abroholos", "Auster", "Austru", "Barat", "Barber",
-        "Bayamo", "Bora", "Borasco", "Boreas", "Boreal", "Aurora", "Brisa", "Briza", "Brisot", "Brubu", "Cave", "Kaver", "Chubasco", "Cierzo", "Contrastes", "Cordonazo", "Cyclone", "Etesian", "Euros", "Hurricane", "Huracan", "Wind", "Viento", "Leste", "Levanter", "Levante", "Levantera", "Levanto", "Leveche", "Mistral", "Norte", "Noreaster", "Norestero", "Norwester", "Noroestero", "Nortero", "Ostria", "Pali", "Santana", "Shamal", "Sharki", "Siroco", "Sumatra", "Tramontana", "Tifon", "Zefiros", "Zefiro", "Zefir", "Bora", "Etesian", "Levant", "Levante", "Leveche", "Harmatan", "Karaburan", "Buran", "Orosi", "Sarma", "Shamal", "Alisio", "Alize", "Bayamo", "Brisote", "Caju", "Nordeste", "Minuano", "Zonda", "Pampero", "Sudestada", "Cordonazo", "Coromuel", "Norte", "Autan", "Bise", "Brise", "Brisa", "Burle", "Cers", "Cierzo", "Etesian", "Euroclydon", "Fohn", "Gregale", "Helm", "Leveche", "Lodos", "Maestro", "Marin", "Mistral", "Nordes", "Ostro", "Poliente", "Solano", "Tramontane", "Vendavel", "Kona", "Abel", "Aeolus", "AkashAmun", "Anan", "Cloud", "Anil", "Nube", "Anore", "Arkansas", "Avel", "Barak", "Baran", "Brontes", "Caelus", "Corentin", "EnlilErjon", "Esen", "Guntur", "Keanu", "Matuu", "Mellan", "Moe", "Myrsky", "Naseem", "Neifion", "Neil", "Neve", "Nigel", "Notus", "Payne", "Perun", "Firun", "Samir", "Sepher", "Shu", "Sky", "Stromur", "Sturm", "Thor", "Thunder", "Storm", "Torm", "Tufani", "Van", "Zenith", "Zephyr", "Zeus", "Aella", "Aethra", "Ahana", "Alize", "Amihan", "Anemos", "Anila", "Araceli", "Audra", "Aura", "Auretta", "Awen", "Azure", "Bonaria", "Ciela", "Cielo", "Dangira", "Dima", "Ekaitza", "Era", "Glaw", "Haizea", "Haneul", "Inanna", "Iris", "Kafeira", "Cafeira", "Minnesota", "Misty", "Mist", "Nephele", "Ninlil", "Nuit", "Pilvi", "Puleng", "Rain", "Rakia", "Samira", "Sema", "Skye", "Stormy", "Tempest", "Tondra", "Varsha", "Vetra", "Zerua", "Zilan", "Mistral", "Gibli", "Zonda", "Etesian", "Shamal", "Aither", "Akash", "AlizehAmphorn", "Amun", "Anan", "AnilAnore", "Anvindr", "Ayaz", "Bayu", "Boreas", "Caelus", "Corentin", "Enlil", "Erjon", "Ermir", "Esen", "Eyvinder", "FujinGokcan", "Govad", "Guzrie", "Hayate", "Ilmari", "Keyne", "Naseem", "Neven", "Notus", "Ouranos", "Payne", "Rabi", "Samir", "Sepher", "Soma", "Sota", "Tifon", "Vayu", "Zeferino", "Zenit", "Zefir", "Zeru", "Zeus", "Aella", "Aethra", "Ahana", "Alizee", "Alizeh", "Alya", "Amaterasu", "Amihan", "Anila", "Aria", "Aureole", "Auretta", "Azure", "Bonaria", "Breeze", "Brisa", "Ciela", "CoroEra", "Esen", "Eteri", "Haizea", "Haneul", "Ilma", "Kailani", "Kalani", "Lulani", "Makani", "Meltem", "Miku", "Mystral", "Nasima", "Ninlil", "Nuit", "Rakia", "Samira", "Sciron", "Scirocco", "Sefarina", "Sema", "Skye", "Tadita", "Wind", "Zephyrine", "Zerua", "Damini", "Oya", "Nebula", "Misty", "Mist", "Wind", "Brenna", "Sail", "Vela", "Katrina", "Amakir", "Abub", "Zeam", "Vesha", "Nura", "Wura", "Enarise", "Amana", "Aeana", "Akades", "Miste", "Zecori", "Sirocco", "Siroco", "Aura", "Zepherien", "Sior", "Annora", "Ael",
+        "Wuzer", "Wuther", "Haboob", "Abroholos",
+        "Auster", "Austru", "Barat", "Barber",
+        "Bayamo", "Bora", "Borasco", "Boreas", "Boreal",
+        "Aurora", "Brisa", "Briza", "Brisot", "Brubu", "Cave",
+        "Kaver", "Chubasco", "Cierzo", "Contrastes", "Cordonazo",
+        "Cyclone", "Etesian", "Euros", "Hurricane", "Huracan", "Wind",
+        "Viento", "Leste", "Levanter", "Levante", "Levantera", "Levanto",
+        "Leveche", "Mistral", "Norte", "Noreaster", "Norestero", "Norwester",
+        "Noroestero",
+        "Nortero", "Ostria", "Pali", "Santana", "Shamal", "Sharki",
+        "Siroco", "Sumatra", "Tramontana", "Tifon", "Zefiros", "Zefiro", "Zefir",
+        "Bora", "Etesian", "Levant", "Levante", "Leveche", "Harmatan", "Karaburan",
+        "Buran", "Orosi", "Sarma", "Shamal", "Alisio", "Alize", "Bayamo", "Brisote",
+        "Caju", "Nordeste", "Minuano", "Zonda", "Pampero", "Sudestada", "Cordonazo",
+        "Coromuel", "Norte", "Autan", "Bise", "Brise", "Brisa", "Burle", "Cers",
+        "Cierzo", "Etesian", "Euroclydon", "Fohn", "Gregale", "Helm", "Leveche",
+        "Lodos", "Maestro", "Marin", "Mistral", "Nordes", "Ostro", "Poliente",
+        "Solano", "Tramontane", "Vendavel", "Kona", "Abel", "Aeolus", "AkashAmun",
+        "Anan", "Cloud", "Anil", "Nube", "Anore", "Arkansas", "Avel", "Barak",
+        "Baran", "Brontes", "Caelus", "Corentin", "EnlilErjon", "Esen", "Guntur",
+        "Keanu", "Matuu", "Mellan", "Moe", "Myrsky", "Naseem", "Neifion", "Neil",
+        "Neve", "Nigel", "Notus", "Payne", "Perun", "Firun", "Samir", "Sepher",
+        "Shu", "Sky", "Stromur", "Sturm", "Thor", "Thunder", "Storm", "Torm", "Tufani",
+        "Van", "Zenith", "Zephyr", "Zeus", "Aella", "Aethra", "Ahana", "Alize", "Amihan",
+        "Anemos", "Anila", "Araceli", "Audra", "Aura", "Auretta", "Awen", "Azure", "Bonaria",
+        "Ciela", "Cielo", "Dangira", "Dima", "Ekaitza", "Era", "Glaw", "Haizea", "Haneul",
+        "Inanna", "Iris", "Kafeira", "Cafeira", "Minnesota", "Misty", "Mist", "Nephele", "Ninlil", "Nuit", "Pilvi", "Puleng", "Rain", "Rakia", "Samira", "Sema", "Skye", "Stormy", "Tempest", "Tondra", "Varsha", "Vetra", "Zerua", "Zilan", "Mistral", "Gibli", "Zonda", "Etesian", "Shamal", "Aither", "Akash", "AlizehAmphorn", "Amun", "Anan", "AnilAnore", "Anvindr", "Ayaz", "Bayu", "Boreas", "Caelus", "Corentin", "Enlil", "Erjon", "Ermir", "Esen", "Eyvinder", "FujinGokcan", "Govad", "Guzrie", "Hayate", "Ilmari", "Keyne", "Naseem", "Neven", "Notus", "Ouranos", "Payne", "Rabi", "Samir", "Sepher", "Soma", "Sota", "Tifon", "Vayu", "Zeferino", "Zenit", "Zefir", "Zeru", "Zeus", "Aella", "Aethra", "Ahana", "Alizee", "Alizeh", "Alya", "Amaterasu", "Amihan", "Anila", "Aria", "Aureole", "Auretta", "Azure", "Bonaria", "Breeze", "Brisa", "Ciela", "CoroEra", "Esen", "Eteri", "Haizea", "Haneul", "Ilma", "Kailani", "Kalani", "Lulani", "Makani", "Meltem", "Miku", "Mystral", "Nasima", "Ninlil", "Nuit", "Rakia", "Samira", "Sciron", "Scirocco", "Sefarina", "Sema", "Skye", "Tadita", "Wind", "Zephyrine", "Zerua", "Damini", "Oya", "Nebula", "Misty", "Mist", "Wind", "Brenna", "Sail", "Vela", "Katrina", "Amakir", "Abub", "Zeam", "Vesha", "Nura", "Wura", "Enarise", "Amana", "Aeana", "Akades", "Miste", "Zecori", "Sirocco", "Siroco", "Aura", "Zepherien", "Sior", "Annora", "Ael",
 
         # Additional Elemental References
         "Lignan", "Metallor", "Astrelitz", "Fulgarnis",
@@ -3967,8 +5022,8 @@ def Racial_Names(Type):
         "Element"
     ]
     if Type == "Elemental": 
-        Names += Elementals
-        Surnames += Elementals
+        Names = Elementals
+        Surnames = Elementals
         FullNames =  random.choice(Names) + ' ' + random.choice(Surnames)
         return FullNames
 
@@ -4091,19 +5146,25 @@ def Racial_Names(Type):
         ]
    
     if Type == "Aven": 
-        Names += Avens
+        Names = Avens
         FullNames =  random.choice(Names) + ' ' + random.choice(Surnames)
         return FullNames
 
     Halflings = [
         "Grinhand", "Adaldrida", "Lifwalker",
         "Regina", "Jasmine", "Sam", "Pipim", "Crim",
-        "Pint", "Chocolaty", "Love", "Afiry", "Cuki", "Chunk", "Dairy", "Peanut", "Buter",
-        "Cake", "Milk", "Cone", "Canoli", "Caramel", "Canela", "Chis", "Chery", "Chip",
-        "Browny", "Chuby", "Tofy", "Cofy", "Dublin", "Bake", "Joint", "Widy", "Milky",
-        "Minty", "Cuky", "Pistacho", "Pumpin", "Almond", "Fresy", "Berry", "Cake", "Vanilla",
-        "Sutra", "Tiramisu", "Whisky", "Bacon", "Banana", "Beer", "Bluemoon", "Bubble", "Gum",
-        "Coffee", "Apple", "Cream", "Candy", "Cotton", "Dulce", "Garlic", "Grape", "Punch",
+        "Pint", "Chocolaty", "Love", "Afiry", "Cuki",
+        "Chunk", "Dairy", "Peanut", "Buter",
+        "Cake", "Milk", "Cone", "Canoli",
+        "Caramel", "Canela", "Chis", "Chery", "Chip",
+        "Browny", "Chuby", "Tofy", "Cofy",
+        "Dublin", "Bake", "Joint", "Widy", "Milky",
+        "Minty", "Cuky", "Pistacho", "Pumpin",
+        "Almond", "Fresy", "Berry", "Cake", "Vanilla",
+        "Sutra", "Tiramisu", "Whisky", "Bacon",
+        "Banana", "Beer", "Bluemoon", "Bubble", "Gum",
+        "Coffee", "Apple", "Cream", "Candy", "Cotton",
+        "Dulce", "Garlic", "Grape", "Punch",
         "Ponche", "Uva", "Grape", "Tea", "Lucuma", "Mango", "Maple", "Chip", "Napolito",
         "Napolita", "Pistacho", "Mora", "Rum", "Ron", "Ginebra", "Gin", "Martin", "Martini",
         "Martina", "Licor", "Melon", "Almond", "Almendra", "Manela", "Manzana", "Apple",
@@ -4281,8 +5342,8 @@ def Racial_Names(Type):
         "Citron"
         ]
     if Type == "Halfling": 
-        Names += Halflings
-        Surnames += HalflingSurnames
+        Names = Halflings
+        Surnames = HalflingSurnames
         FullNames =  random.choice(Names) + ' ' + random.choice(Names) + ' ' + random.choice(Surnames)
         return FullNames
     
@@ -4304,7 +5365,8 @@ def Racial_Names(Type):
         "Fabiano", "Calis",
         "Vasari", "Vittoria",
         "Caliara", "Flora",
-        "Catalina", "Corner",
+        "Catalina",
+        "Corner",
         "Mudazo", "Loredana",
         "Grana", "Fiorensi",
         "Joanna", "Bascio",
@@ -4429,14 +5491,17 @@ def Racial_Names(Type):
         "Parco",
         "Fontanella",
         "Mondello",
-        "Vigneto", "Orchardino",
-        "Frutteto", "Bacino",
-        "Lago", "Ruscello"
+        "Vigneto",
+        "Orchardino",
+        "Frutteto",
+        "Bacino",
+        "Lago",
+        "Ruscello"
         ]
     
     if Type == "Gnome": 
-        Names += Gnomes
-        Surnames += GnomesSurnames
+        Names = Gnomes
+        Surnames = GnomesSurnames
         FullNames =  random.choice(Names) + ' ' + random.choice(Names) + ' ' + random.choice(Names) + ' ' + random.choice(Surnames) + ' ' + random.choice(Surnames) + ' ' + random.choice(Surnames)
         return FullNames
 
@@ -4444,12 +5509,17 @@ def Racial_Names(Type):
         "Hope",
         "Valor",
         "Mystery",
-        "Quiet", "Song",
-        "Charm", "Glimmer",
+        "Quiet",
+        "Song",
+        "Charm",
+        "Glimmer",
         "Glory",
-        "Noble", "Lumin",
-        "Whisper", "Dancer",
-        "Mirth", "Revel",
+        "Noble",
+        "Lumin",
+        "Whisper",
+        "Dancer",
+        "Mirth",
+        "Revel",
         "Wry",
         "Prayer",
         "Pursuit",
@@ -4459,7 +5529,8 @@ def Racial_Names(Type):
         "Eager",
         "Endure",
         "Hallow",
-        "Luster", "Mend",
+        "Luster",
+        "Mend",
         "Riddle",
         "Shade", "Wander",
         "Penance", "Dream",
@@ -4742,32 +5813,94 @@ def Racial_Names(Type):
         "Rabisu", "Raum", "Ravana", "Raysiel",
         "Rimmon", "Ronove", "Roneve", "Sabbat", "Sabnak",
         "Salem", "Saleos", "Salt", "Samael", "Sammael",
-        "Sariel", "Sarakiel", "Suriel", "Uriel",
-        "Zerakiel", "Satanael", "Scepter",
-        "Skepter", "Shamsiel", "Shax", "Chax", "Scox",
-        "Shedim", "Sinistrari", "Lodovico", "Sitri",
-        "Solas", "Soleviel", "Soraz", "Orleans",
-        "Surin", "Symiel", "Taru", "TaseTeofilus",
-        "Udug", "Ukobach", "Usiel", "Uziel", "Uzza",
-        "Uriel", "Valac", "Valefor", "Vapula",
-        "Vassago", "Veltis", "Vepar", "Separ", "Vine",
-        "Warren", "Zaffis", "Zarika", "Zepar", "Zohk",
-        "Zoroastra", "Zohak", "Disaster",
-        "Strong", "Forte", "Glory", "Hawk",
-        "Falcon", "Sinner", "Dawn", "Crepusculo", "Flama",
-        "Flame", "Sunrise", "Alba", "Star", "Estrella",
-        "Estela", "Legend", "Blood", "Aeon",
-        "Veil", "Victor", "Victoria", "Honor",
-        "Noble", "Ley", "Law", "Melody", "Purity",
-        "Rune", "Ron", "Gin", "Sinfinder",
-        "Sinner", "Song", "Cult", "Culto", "Prayer",
+        "Sariel", "Sarakiel",
+        "Suriel",
+        "Uriel",
+        "Zerakiel",
+        "Satanael",
+        "Scepter",
+        "Skepter",
+        "Shamsiel",
+        "Shax",
+        "Chax", "Scox",
+        "Shedim", "Sinistrari",
+        "Lodovico", "Sitri",
+        "Solas", "Soleviel",
+        "Soraz", "Orleans",
+        "Surin", "Symiel",
+        "Taru", "TaseTeofilus",
+        "Udug", "Ukobach",
+        "Usiel", "Uziel",
+        "Uzza",
+        "Uriel", "Valac",
+        "Valefor", "Vapula",
+        "Vassago", "Veltis",
+        "Vepar", "Separ",
+        "Vine",
+        "Warren",
+        "Zaffis",
+        "Zarika",
+        "Zepar",
+        "Zohk",
+        "Zoroastra",
+        "Zohak",
+        "Disaster",
+        "Strong",
+        "Forte",
+        "Glory",
+        "Hawk",
+        "Falcon",
+        "Sinner",
+        "Dawn",
+        "Crepusculo",
+        "Flama",
+        "Flame",
+        "Sunrise",
+        "Alba",
+        "Star",
+        "Estrella",
+        "Estela",
+        "Legend",
+        "Blood",
+        "Aeon",
+        "Veil",
+        "Victor",
+        "Victoria",
+        "Honor",
+        "Noble",
+        "Ley",
+        "Law",
+        "Melody",
+        "Purity",
+        "Rune",
+        "Ron",
+        "Gin",
+        "Sinfinder",
+        "Sinner",
+        "Song",
+        "Cult",
+        "Culto",
+        "Prayer",
         "Pray",
-        "Gunner", "Katana", "Jester", "King", "Dante",
-        "Danza", "Apocalypse", "Astaroz",
-        "Astaroth", "Khemed", "Ahset",
-        "Amunet", "Aneksi", "Atet", "Baketamon",
+        "Gunner",
+        "Katana",
+        "Jester",
+        "King",
+        "Dante",
+        "Danza",
+        "Apocalypse",
+        "Astaroz",
+        "Astaroth",
+        "Khemed",
+        "Ahset",
+        "Amunet", "Aneksi",
+        "Atet", "Baketamon",
         "Bunefer",
-        "Hentie", "Herit", "Heteferes", "Ipuet", "Itet",
+        "Hentie",
+        "Herit",
+        "Heteferes",
+        "Ipuet",
+        "Itet",
         "Joba", "Kasmut", "Kemanub", "Khemut",
         "Maia", "Menhet", "Merit", "Nebet",
         "Neferu", "Nit", "Nofret", "Nubemiunu",
@@ -4861,7 +5994,7 @@ def Racial_Names(Type):
         "Luzimer"
         ]
     if Type == "Fiend":
-        Names += Tieflings
+        Names = Tieflings
         
         return random.choice(Names)
 
@@ -4869,6 +6002,12 @@ def Racial_Names(Type):
 
 
 
+    if Type == "Undead":
+        Names += Tieflings + Gnomes + Halflings + Avens + Elementals + Dwarves + Orcs + Giants + Elves + Humans
+        
+        return random.choice(Names)
+
+    return random.choice(Names)
 
 
 
@@ -4957,7 +6096,7 @@ def Beastfolks():
         }
     return random.choices(list(Names.keys()), weights=Names.values(), k=1)[0]
 
-
+def Celestials():
     Names = {
         "Angel": 9,               # Classic representatives of good, messengers of deities.
         "Ascended": 8,            # Mortals who have risen to a divine or semi-divine status.
@@ -5064,7 +6203,7 @@ def Elementals():
 
 def Fiends():
     Names = {
-        "Tiefling": 16,
+        "Tiefling": 20,
         "Devil": 10,
         "Demon": 10,
         "Imp": 8,
@@ -5255,54 +6394,133 @@ def Plants():
 
 
 def Undeads():
-    Names = [
-        "Monster Zombie",
-        "Crawling Limbs",
-        "Ghoul",
-        "Ghast",
-        "Ghost",
-        "Licht",
-        "Mummy",
-        "Poltergeist",
-        "Revenant",
-        "Skelleton",
-        "Skull",
-        "Shadow",
-        "Specter",
-        "Vampire",
-        "Will-O'-Wisp",
-        "Wight",
-        "Zombie",
-        ""]
-    return random.choice(Names)
+    Names = {
+            "Death Knight": 5,           # Elite undead warriors, remnants of former knights or warlords.
+            "Honor Phantom": 7,          # Ethereal spirits bound by duty or a promise made in life.
+            "Regret Ghost": 8,           # Souls trapped due to unfinished business or profound regrets.
+            "Lich": 4,                   # Undying mages who sought eternal life through dark rituals.
+            "Pride Mummy": 6,            # Preserved dead, animated to guard ancient tombs and relics.
+            "Mischief Poltergeist": 7,   # Playful spirits, causing disturbances to attract attention.
+            "Vengeful Revenant": 5,      # Resurrected by sheer force of will to enact revenge.
+            "Skeleton Protector": 9,     # Animated skeletal guardians, defending locations or treasures.
+            "Thinker Skull": 7,          # Knowledgeable remnants, often used by dark mages for counsel.
+            "Fear Shadow": 7,            # Undead born from intense fear, lurking in darkness.
+            "Despair Specter": 8,        # Souls that suffered tremendous despair, wishing the same for the living.
+            "Vampire": 5,                # Bloodsucking undead, intelligent and driven by hunger and desire.
+            "Prideful Wight": 6,         # Powerful undead often found leading other lesser undead.
+            "Cursed Eternal": 7,         # Mindless undead, driven by a hunger for the living.
+            "Wraith": 6,                 # Souls consumed by anger, seeking to draw others into death.
+            "Lone Lover": 6,             # Animated by profound love or loss, searching for their beloved.
+            "Weeping Howler": 5,         # Spirits that mourn and wail, often announcing death.
+            "Tomb's Hoarder": 5,         # Guardians of burial sites, obsessed with their treasures.
+            "Penance Wraith": 5,         # Souls seeking atonement for sins committed in life.
+            "Protector Spirit": 7        # Benevolent spirits still guarding a place, object, or person.
+        }
+    return random.choices(list(Names.keys()), weights=Names.values(), k=1)[0]
 
+def Humans():
+    Types = {
+        "Local": 30,       
+        "Foreigner": 20,    
+        "Exotic": 10,       
+        "Well dressed":10,
+        "Humble":10,
+        "Healty": 20,
+        "Strong": 5,
+        "Big": 6,
+        "Thin": 4,
+        "Athletic": 5,
+        "Sickly": 5,
+        "Pretty": 5,
+        "Rough": 5,
+        "Elegant": 5,
+        "Old":5,
+        "Young":5,
+        "Attractive":5
+        }
+    
+    chosen_type = random.choices(list(Types.keys()), weights=Types.values(), k=1)[0]
+    
+    return f"{chosen_type} "
+
+
+def Elves():
+    Types = {
+        "High": 15,       
+        "Sylvan": 15,    
+        "Wood": 15,    
+        "Dark": 15,
+        "Night": 8,
+        "Feywild": 5,       
+        "Shadow": 5,       
+        "Sea": 10,       
+        "Nomadic": 10,       
+        "Snow":5,
+        "Sun": 3,
+        "Eclipse":1,
+        "Moon": 3,
+        "Wild": 3,
+        "Urban": 10,
+        "Sands": 7
+        }
+    
+    chosen_type = random.choices(list(Types.keys()), weights=Types.values(), k=1)[0]
+    
+    return f"{chosen_type} "
+
+def Dwarfs():
+    Types = {
+        "Mountain": 20,
+        "Conquistador": 10,        
+        "Seawolf": 10,        
+        "Tinkerer": 10,        
+        "Roadbarter": 10,        
+        "Urbanite": 12,        
+        "Stonemason": 7,        
+        "Dark":5,
+        "Crystal Cavern": 3,
+        "Canyon Dweller":5,
+        "Bank Templar":5,
+        "Forgeclan": 5
+        }
+    
+    chosen_type = random.choices(list(Types.keys()), weights=Types.values(), k=1)[0]
+    
+    return f"{chosen_type} "
 
 def Monster(Type):
-    if Type == "Aberration":    return Aberrations()
-    if Type == "Aven":          return Avens()
-    if Type == "Beast":         return Beasts()
-    if Type == "Beastfolk":     return Beastfolks()
-    if Type == "Celestial":     return Celestials()
-    if Type == "Construct":     return Constructs()
-    if Type == "Dragon":        return Dragons()
-    if Type == "Elemental":     return Elementals()
-    if Type == "Fey":           return Feys()
-    if Type == "Fiend":         return Fiends()
-    if Type == "Giant":         return Giants()
-    if Type == "Goblin":        return Goblins()
-    if Type == "Monstrosity":   return Monstrosities()
-    if Type == "Orc":           return Orcs()
-    if Type == "Ooze":          return Oozes()
-    if Type == "Plant":         return Plants()
-    if Type == "Undead":        return Undeads()
-    Names = [
-        ""]
-    return random.choice(Names)
+    type_function_map = {
+        "Aberration": Aberrations,
+        "Aven": Avens,
+        "Beast": Beasts,
+        "Beastfolk": Beastfolks,
+        "Celestial": Celestials,
+        "Construct": Constructs,
+        "Dragon": Dragons,
+        "Elemental": Elementals,
+        "Elf": Elves,
+        "Fey": Feys,
+        "Fiend": Fiends,
+        "Giant": Giants,
+        "Goblin": Goblins,
+        "Human": Humans,
+        "Monstrosity": Monstrosities,
+        "Orc": Orcs,
+        "Ooze": Oozes,
+        "Plant": Plants,
+        "Undead": Undeads
+    }
+
+    if Type in type_function_map:
+        return type_function_map[Type]()
+    else:
+        return f"Is an unknown type of {Type}!"
 
 
 def Dice(D=6):
-    if D >= 1: roll = random.randint(1, D)
-    else: roll = random.randint(D, 1)
+    """Rolls a dice with D sides. If D is 0, simulates a coin flip."""
+    if D < 1: roll = random.randint(D, 1) 
+    else: roll = random.randint(1, D)
     return roll
 
 def Dice(D=6,N=1):
@@ -5314,107 +6532,108 @@ def Dice(D=6,N=1):
 
 
 def AbilityScore():
-    d1 = Dice(5)
-    d2 = Dice(5)
-    d3 = Dice(5)
-    d4 = Dice(5)
+    d1 = Dice()
+    d2 = Dice()
+    d3 = Dice()
+    d4 = Dice()
     return d1+d2+d3+d4 - min(d1, d2, d3, d4) 
 
 
-def Modifier(AS):
-    if AS >= 10:    return int((AS-10)/2)
-    else:           return int((AS-11)/2)
+#def Modifier(AS):
+#    if AS >= 10:    return int((AS-10)/2)
+#    else:           return int((AS-11)/2)
 
+def Modifier(AS):
+    return (AS - 10) // 2
 
 def Proficiency(AS):
     return Dice(Modifier(AS)*2)
 
 def PB(Lvl):
-    PB = 2 + int(Lvl / 5)
-    return PB
-
+    if Lvl < 5:
+        return 2
+    else:
+        return 2 + (Lvl - 1) // 4
     
-def Attack(Type):
+def Attack(Type,PB = 2, STR =10,  DEX = 10 ):
+    STR = Modifier(STR)
+    DEX = Modifier(DEX)
+
     SimpleMeleeWeapons = [
-        "Rock, 1d6 + %STR Bludgeoning, 25/50 thrown",
-        "Fists, 1d4 + %STR Bludgeoning",
-        "Bite, 1d4 + %STR Piercing",
-        "Bite, 1d6 + %STR Piercing",
-        "Bite, 1d8 + %STR Piercing",
-        "Bite, 1d10 + %STR Piercing",
-        "Bite, 2d6 + %STR Piercing",
-        "Claws, 1d4 + %STR Slashing",
-        "Claws, 1d6 + %STR Slashing",
-        "Claws, 2d6 + %STR Slashing",
-        "Claws, 2d4 + %STR Slashing",
-        "Claws, 2d8 + %STR Slashing",
-        "Club, 1d4 + %STR Bludgeoning",
-        "Dagger, 1d4 + %STR Piercing, 20/60 thrown",
-        "Dagger, 1d4 + %DEX Piercing, 20/60 thrown",
-        "GreatClub, 1d8 + %STR Bludgeoning",
-        "GreatClub, 2d8 + %STR Bludgeoning",
-        "Handaxe, 1d6 + %STR Slashing, 20/60 thrown",
-        "Javelin, 1d6 + %STR Piercing, 30/120 thrown",
-        "Javelin, 2d6 + %STR Piercing, 30/120 thrown",
-        "Light Hammer, 1d4 + %STR Bludgeoning, 20/60 thrown",
-        "Mace, 1d6 + %STR Bludgeoning",
-        "Quarterstaff, 1d6 + %STR Bludgeoning",
-        "Quarterstaff, 1d8 + %STR Bludgeoning",
-        "Sickle, 1d4 + %STR Slashing",
-        "Slam, 1d8 + %STR Bludgeoning",
-        "Slam, 2d8 + %STR Bludgeoning",
-        "Spear, 1d6 + %STR Piercing, 20/60 thrown",
-        "Spear, 2d6 + %STR Piercing, 20/60 thrown",
-        "Spear, 1d8 + %STR Piercing, 20/60 thrown",
-        "Spear, 2d8 + %STR Piercing, 20/60 thrown",
-        ""]
+        f"Rock, {Dice(PB-1)}d6 + {STR} Bludgeoning, 25/50 thrown",
+        f"Fists, {Dice(PB-1)}d4 + {STR} Bludgeoning",
+        f"Brass Knuckles, {Dice(PB-1)}d4 + {STR} Bludgeoning",
+        f"Bite, {Dice(PB-1)}d4 + {STR} Piercing",
+        f"Bite, {Dice(PB-1)}d6 + {STR} Piercing",
+        f"Claws, {Dice(PB-1)}d4 + {STR} Slashing",
+        f"Claws, {Dice(PB-1)}d6 + {STR} Slashing",
+        f"Club, {Dice(PB-1)}d4 + {STR} Bludgeoning",
+        f"Dagger, {Dice(PB-1)}d4 + {STR} Piercing, 20/60 thrown",
+        f"Dagger, {Dice(PB-1)}d4 + {DEX} Piercing, 20/60 thrown",
+        f"GreatClub, {Dice(PB-1)}d8 + {STR} Bludgeoning",
+        f"Handaxe, {Dice(PB-1)}d6 + {STR} Slashing, 20/60 thrown",
+        f"Javelin, {Dice(PB-1)}d6 + {STR} Piercing, 30/120 thrown",
+        f"Light Hammer, {Dice(PB-1)}d4 + {STR} Bludgeoning, 20/60 thrown",
+        f"Mace, {Dice(PB-1)}d6 + {STR} Bludgeoning",
+        f"Quarterstaff, {Dice(PB-1)}d6 + {STR} Bludgeoning",
+        f"Quarterstaff, {Dice(PB-1)}d8 + {STR} Bludgeoning",
+        f"Sickle, {Dice(PB-1)}d4 + {STR} Slashing",
+        f"Slam, {Dice(PB-1)}d8 + {STR} Bludgeoning",
+        f"Spear, {Dice(PB-1)}d6 + {STR} Piercing, 20/60 thrown",
+        f"Spear, {Dice(PB)+1}d8 + {STR} Piercing, 20/60 thrown",
+        f"Nunchaku, {Dice(PB-1)}d6 + {STR} Bludgeoning"
+        ]
     
     SimpleRangedWeapons = [
-        "Rock, 1d6 + %STR Bludgeoning, 25/50 thrown",
-        "Light Crossbow, 1d8 + %DEX Piercing, 80/320 range",
-        "Dart, 1d4 + %DEX Piercing, 20/60 range",
-        "Dart, 1d4 + %STR Piercing, 20/60 range",
-        "Shortbow, 1d6 + %DEX Piercing, 80/320 range",
-        "Sling, 1d4 + %DEX Bludgeoning, 30/120 range",
-        ""]
+        f"Rock, {Dice(PB-1)}d6 + {STR} Bludgeoning, 25/50 thrown",
+        f"Light Crossbow, {Dice(PB-1)}d8 + {DEX} Piercing, 80/320 range",
+        f"Dart, {Dice(PB-1)}d4 + {DEX} Piercing, 20/60 range",
+        f"Dart, {Dice(PB-1)}d4 + {STR} Piercing, 20/60 range",
+        f"Shortbow, {Dice(PB-1)}d6 + {DEX} Piercing, 80/320 range",
+        f"Sling, {Dice(PB-1)}d4 + {DEX} Bludgeoning, 30/120 range",
+        f"Light Crossbow, {Dice(PB-1)}d8 + {DEX} Piercing, 80/320 range, loading, two handed"
+        ]
     
     MartialMeleeWeapons = [
-        "Battleaxe, 1d8 + %STR Slashing",
-        "Battleaxe, 1d10 + %STR Slashing",
-        "Flail, 1d8 + %STR Bludgeoning",
-        "Glaive, 1d10 + %STR Bludgeoning, reach",
-        "Greataxe, 1d12 + %STR Slashing, reach",
-        "Greatsword, 2d6 + %STR Slashing",
-        "Halberd, 1d10 + %STR Slashing, reach",
-        "Lance, 1d12 + %STR Piercing, reach",
-        "Longsword, 1d8 + %STR Slashing",
-        "Longsword, 1d10 + %STR Slashing",
-        "Maul, 2d6 + %STR Bludgeoning",
-        "Morningstar, 1d8 + %STR Piercing",
-        "Morningstar, 2d8 + %STR Bludgeoning",
-        "Pike, 1d10 + %STR Piercing, reach",
-        "Rapier, 1d8 + %STR Piercing, Finesse",
-        "Rapier, 1d8 + %DEX Piercing, Finesse",
-        "Scimitar, 1d6 + %STR Slashing, Finesse, light",
-        "Scimitar, 1d6 + %DEX Slashing, Finesse, light",
-        "Shortsword, 1d6 + %STR Slashing, Finesse, light",
-        "Shortsword, 1d6 + %DEX Slashing, Finesse, light",
-        "Stomp, 3d10 + %STR bludgeoning. Special: Only against prone creatures.",
-        "Trident, 1d6 + %STR Piercing, 20/60 thrown",
-        "Trident, 1d8 + %STR Piercing, 20/60 thrown",
-        "War pick, 1d8 + %STR Bludgeoning",
-        "Warhammer, 1d8 + %STR Bludgeoning",
-        "Warhammer, 1d10 + %STR Bludgeoning",
-        "Whip, 1d4 + %STR Slashing, Finesse, reach",
-        ""]
+        f"Battleaxe, {Dice(PB-1)}d8 + {STR} Slashing",
+        f"Battleaxe, {Dice(PB-1)}d10 + {STR} Slashing",
+        f"Flail, {Dice(PB-1)}d8 + {STR} Bludgeoning",
+        f"Glaive, {Dice(PB-1)}d10 + {STR} Bludgeoning, reach",
+        f"Greataxe, {Dice(PB-1)}d12 + {STR} Slashing, reach",
+        f"Greatsword, {Dice(PB)+1}d6 + {STR} Slashing",
+        f"Halberd, {Dice(PB-1)}d10 + {STR} Slashing, reach",
+        f"Lance, {Dice(PB-1)}d12 + {STR} Piercing, reach",
+        f"Longsword, {Dice(PB-1)}d8 + {STR} Slashing",
+        f"Longsword, {Dice(PB-1)}d10 + {STR} Slashing",
+        f"Maul, {Dice(PB)+1}d6 + {STR} Bludgeoning",
+        f"Morningstar, {Dice(PB-1)}d8 + {STR} Piercing",
+        f"Pike, {Dice(PB-1)}d10 + {STR} Piercing, reach",
+        f"Rapier, {Dice(PB-1)}d8 + {STR} Piercing, Finesse",
+        f"Rapier, {Dice(PB-1)}d8 + {DEX} Piercing, Finesse",
+        f"Scimitar, {Dice(PB-1)}d6 + {STR} Slashing, Finesse, light",
+        f"Scimitar, {Dice(PB-1)}d6 + {DEX} Slashing, Finesse, light",
+        f"Shortsword, {Dice(PB-1)}d6 + {STR} Slashing, Finesse, light",
+        f"Shortsword, {Dice(PB-1)}d6 + {DEX} Slashing, Finesse, light",
+        f"Trident, {Dice(PB-1)}d6 + {STR} Piercing, 20/60 thrown",
+        f"Trident, {Dice(PB-1)}d8 + {STR} Piercing, 20/60 thrown",
+        f"War pick, {Dice(PB-1)}d8 + {STR} Bludgeoning",
+        f"Warhammer, {Dice(PB-1)}d8 + {STR} Bludgeoning",
+        f"Warhammer, {Dice(PB-1)}d10 + {STR} Bludgeoning",
+        f"Whip, {Dice(PB-1)}d4 + {STR} Slashing, Finesse, reach"
+        f"Whip, {Dice(PB-1)}d4 + {DEX} Slashing, Finesse, reach"
+        ]
     
     MartialRangedWeapons = [
-        "Blowgun, 1 + %DEX piercing, 25/100 range",
-        "Hand Crossbow, 1d6 + %DEX piercing, 30/120 range",
-        "Heavy Crossbow, 1d10 + %DEX piercing, 100/400 range",
-        "Longbow, 1d8 + %DEX piercing, 150/600 range",
-        "Net, Special, 5/15 range",
-        ""]
+        f"Blowgun, 1 piercing, 25/100 range, Ammunition, Loading",
+        f"Hand Crossbow, {Dice(PB-1)}d6 + {DEX} piercing, 30/120 range, Ammunition, Light, Loading",
+        f"Heavy Crossbow, {Dice(PB-1)}d10 + {DEX} piercing, 100/400 range, Ammunition, Heavy, Loading, Two-Handed",
+        f"Longbow, {Dice(PB-1)}d8 + {DEX} piercing, 150/600 range, Ammunition, Heavy, Two-Handed",
+        f"Net, Special, 5/15 range, Thrown",
+        f"Throwing Axe, {Dice(PB-1)}d6 + {STR} slashing, 20/60 range, Thrown",
+        f"Flintlock Pistol, {Dice(PB-1)}d8 + {DEX} piercing, 30/90 range, Loading, Jamming: On an attack roll of 1, the gun jams and requires an action to clear before it can be fired again.",
+        f"Musket, {Dice(PB)+1}d10 + {DEX} piercing, 60/180 range, Loading, Jamming: On an attack roll of 1, the gun jams and requires an action to clear before it can be fired again.",
+        f"Blunderbuss, {Dice(PB)+2}d10 + {DEX} fire, 10/30 range, Loading, Exploding: On an attack roll of 1, the gun explodes and requires a long rest fixing it before it can be fired again."
+        ]
 
     if Type == "Melee" or Type == 1:
         return random.choice(SimpleMeleeWeapons)
@@ -5425,7 +6644,7 @@ def Attack(Type):
     elif Type == "RangedMartial" or Type == 4:
         return random.choice(MartialRangedWeapons)
     else:
-        return random.choice(Dice(4))
+        return random.choice(Attack(random.choice(["Melee","Ranged","Martial","RangedMartial"]),STR,DEX))
 
 
 def Damage():
@@ -5525,14 +6744,23 @@ def SpecialAttack(Lvl, Mod):
     dmg = Damage()
     con = Condition(dmg)
     r = ""
+
+    # Basic attack description    
     r += Attack(Dice(4)) + " +"
-    r += "{}".format(Dice(Dice( + PB(Lvl))))
-    r += random.choice(["d4 ", "d6 ", "d8 ", "d10 ", "d12 "])
+
+    # Damage calculation
+    damage_die = random.choice(["d4", "d6", "d8", "d10", "d12"])
+    r += "{}".format(Dice(PB(Lvl)//2) + Dice(2))
+    r += damage_die
     r += dmg
     r += " dmg"
+
+    # Saving throw description    
     r += " on a failed Saving Throw at DC "
     r += str((10 + Mod)) + " "
     r += SavingThrow(dmg) + "."
+
+    # Potential condition application 
     if Dice(10)+Dice(10) <= Dice(Lvl):
         r += " The target is then affected by the " + con + " condition. "
         r += " The Condition may be countered with a succesful " + \
@@ -5541,182 +6769,677 @@ def SpecialAttack(Lvl, Mod):
     return r
 
 
+def add_language(languages, language, chance=6):
+    """Try to add a language based on a dice roll and chance."""
+    if Dice(chance) == 1 and language not in languages:
+        languages.append(language)
+
+
+        
 def Language(race=Race(), background=Background()):
     if race == "":
         race = Race()
     if background == "":
         background = Background()
 
-    l = ""
+    languages = [""]
 
+    if race == "base":
+        languages = {
+            "Common":20,
+            "Dwarvish": 20,
+            "Elvish": 20,
+            "Giant": 20,
+            "Gnomish": 20,
+            "Goblin": 20,
+            "Halfling": 20,
+            "Orc": 20,
+            "Abyssal": 20,
+            "Celestial": 20,
+            "Draconic": 20,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 20,
+            "Sylvan": 20,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+            
     if race == "Human":
-        if not ("Common" in l):                         l += "Common. "
-        if Dice() == 1 and not ("Dwarvish" in l):       l += "Dwarvish. "
-        if Dice() == 1 and not ("Elvish" in l):         l += "Elvish. "
-        if Dice() == 1 and not ("Giant" in l):          l += "Giant. "
-        if Dice() == 1 and not ("Gnomish" in l):        l += "Gnomish. "
-        if Dice() == 1 and not ("Goblin" in l):         l += "Goblin. "
-        if Dice() == 1 and not ("Halfling" in l):       l += "Halfling. "
-        if Dice() == 1 and not ("Orc" in l):            l += "Orc. "
-        if Dice(20) == 1 and not ("Abyssal" in l):      l += "Abyssal. "
-        if Dice(20) == 1 and not ("Celestial" in l):    l += "Celestial. "
-        if Dice(20) == 1 and not ("Draconic" in l):     l += "Draconic. "
-        if Dice(20) == 1 and not ("Deep Speech" in l):  l += "Deep Speech. "
-        if Dice(20) == 1 and not ("Infernal" in l):     l += "Infernal. "
-        if Dice(20) == 1 and not ("Primordial" in l):   l += "Primordial. "
-        if Dice(20) == 1 and not ("Sylvan" in l):       l += "Sylvan. "
-        if Dice(20) == 1 and not ("Undercommon" in l):  l += "Undercommon. "
+        languages = {
+            "Common":1,
+            "Dwarvish": 6,
+            "Elvish": 6,
+            "Giant": 6,
+            "Gnomish": 6,
+            "Goblin": 6,
+            "Halfling": 6,
+            "Orc": 6,
+            "Abyssal": 20,
+            "Celestial": 20,
+            "Draconic": 20,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 20,
+            "Sylvan": 20,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
 
     if race == "Aberration":
-        if not ("Deep Speech" in l):                    l += "Deep Speech. "
-        if Dice() == 1 and not ("Undercommon" in l):    l += "Undercommon. "
-        if Dice(20) == 1 and not ("Telepathy" in l):    l += "Telepathy (60 ft.) "
+        languages = {
+            "Common":4,
+            "Dwarvish": 20,
+            "Elvish": 20,
+            "Giant": 10,
+            "Gnomish": 20,
+            "Goblin": 10,
+            "Halfling": 20,
+            "Orc": 10,
+            "Abyssal": 8,
+            "Celestial": 20,
+            "Draconic": 10,
+            "Deep Speech": 1,
+            "Infernal": 10,
+            "Primordial": 20,
+            "Sylvan": 20,
+            "Undercommon": 6,
+            "Telepathy (60 ft.) ": 6
+            }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)      
 
     if race == "Aven":
-        if not ("Common" in l):                         l += "Common. "
-        if Dice(10) == 1 and not ("Primordial" in l):   l += "Primordial. "
+        languages = {
+            "Common":1,
+            "Dwarvish": 10,
+            "Elvish": 10,
+            "Giant": 15,
+            "Gnomish": 20,
+            "Goblin": 20,
+            "Halfling": 15,
+            "Orc": 20,
+            "Abyssal": 20,
+            "Celestial": 10,
+            "Draconic": 10,
+            "Deep Speech": 100,
+            "Infernal": 100,
+            "Primordial": 4,
+            "Sylvan": 6,
+            "Undercommon": 100
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
 
     if race == "Beast":
-        if not ("Common" in l):                     l += "Understands Common. "
-        if Dice() == 1:                             l += "Beastly Speech. "
-        if Dice() == 1 and not ("Sylvan" in l):     l += "Sylvan. "
+        languages = {
+            "Common":5,
+            "Beastly Speech":1
+            "Dwarvish": 20,
+            "Elvish": 10,
+            "Giant": 20,
+            "Gnomish": 10,
+            "Goblin": 10,
+            "Halfling": 20,
+            "Orc": 20,
+            "Abyssal": 20,
+            "Celestial": 10,
+            "Draconic": 20,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 10,
+            "Sylvan": 2,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
 
     if race == "Beastfolk":
-        if not ("Common" in l):           l += "Common. "
-        l += "Beastly Speech. "
-        if Dice() == 1 and not ("Sylvan" in l):             l += "Sylvan. "
-        if Dice() == 1 and not ("Undercommon" in l):        l += "Undercommon. "
-        if Dice(8) == 1 and not ("Elvish" in l):             l += "Elvish. "
+        languages = {
+            "Common":1,
+            "Beastly Speech":1
+            "Dwarvish": 20,
+            "Elvish": 8,
+            "Giant": 15,
+            "Gnomish": 6,
+            "Goblin": 6,
+            "Halfling": 20,
+            "Orc": 20,
+            "Abyssal": 10,
+            "Celestial": 10,
+            "Draconic": 10,
+            "Deep Speech": 20,
+            "Infernal": 10,
+            "Primordial": 10,
+            "Sylvan": 4,
+            "Undercommon": 10
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+            
 
     if race == "Celestial":
-        if not ("Celestial" in l):      l += "Celestial. "
-        if not ("Common" in l):         l += "Common. "
-        if Dice() == 1 and not ("Sylvan" in l):             l += "Sylvan. "
-        if Dice() == 1 and not ("Elvish" in l):             l += "Elvish. "
-        if Dice(20) == 1 and not ("All languages" in l):    l += "All languages. "
-        if Dice(10) == 1 and not ("Telepathy" in l):        l += "Telepathy. (60 feet)."
-        elif Dice(20) == 1 and not ("Telepathy" in l):      l += "Telepathy. (120 feet)."
+        languages = {
+            "Common":1,
+            "Dwarvish": 10,
+            "Elvish": 8,
+            "Giant": 10,
+            "Gnomish": 10,
+            "Goblin": 10,
+            "Halfling": 10,
+            "Orc": 10,
+            "Abyssal": 8,
+            "Celestial": 1,
+            "Draconic": 10,
+            "Deep Speech": 20,
+            "Infernal": 8,
+            "Primordial": 20,
+            "Sylvan": 6,
+            "Undercommon": 20,
+            "All languages":8,
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+   
+        if Dice(2): add_language(l, "Telepathy. (60 feet).", 8) 
+        else: add_language(l, "Telepathy. (120 feet).", 10) 
 
     if race == "Construct":
-        l += "Understands the languages of its creator. "
-        if Dice(20) == 1 and not ("All languages" in l):    l += "All languages. "
+        add_language(l, "Understands the languages of its creator.", 1) 
+        add_language(l, "All languages.", 5) 
 
     if race == "Dragon":
-        l += "Draconic. "
-        if Dice(3) == 1 and not ("Common" in l):        l += "Common. "
-        if Dice() == 1 and not ("Sylvan" in l):         l += "Sylvan. "
-        if Dice(8) == 1 and not ("Dwarvish" in l):      l += "Dwarvish. "
-        if Dice(8) == 1 and not ("Elvish" in l):        l += "Elvish. "
-        if Dice(8) == 1 and not ("Orc" in l):           l += "Orc. "
-        if Dice(8) == 1 and not ("Goblin" in l):        l += "Goblin. "
+        languages = {
+            "Common":2,
+            "Dwarvish": 8,
+            "Elvish": 8,
+            "Giant": 8,
+            "Gnomish": 8,
+            "Goblin": 8,
+            "Halfling": 8,
+            "Orc": 8,
+            "Abyssal": 8,
+            "Celestial": 8,
+            "Draconic": 1,
+            "Deep Speech": 10,
+            "Infernal": 8,
+            "Primordial": 10,
+            "Sylvan": 4,
+            "Undercommon": 10
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
 
     if race == "Dwarf":
-        l += "Dwarvish. "
-        if Dice(3) == 1 and not ("Common" in l):            l += "Common. "
-        if Dice(3) == 1 and not ("Undercommon" in l):       l += "Undercommon. "
+        languages = {
+            "Common":2,
+            "Dwarvish": 1,
+            "Elvish": 5,
+            "Giant": 5,
+            "Gnomish": 16,
+            "Goblin": 16,
+            "Halfling": 8,
+            "Orc": 20,
+            "Abyssal": 18,
+            "Celestial": 16,
+            "Draconic": 12,
+            "Deep Speech": 3,
+            "Infernal": 12,
+            "Primordial": 12,
+            "Sylvan": 20,
+            "Undercommon": 4
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
 
     if race == "Elf":
-        l += "Elvish. "
-        if Dice(3) == 1 and not ("Common" in l):        l += "Common. "
-        if Dice() == 1 and not ("Sylvan" in l):         l += "Sylvan. "
-        if Dice() == 1 and not ("Undercommon" in l):    l += "Undercommon. "
+        languages = {
+            "Common":4,
+            "Dwarvish": 6,
+            "Elvish": 1,
+            "Giant": 12,
+            "Gnomish": 6,
+            "Goblin": 18,
+            "Halfling": 12,
+            "Orc": 20,
+            "Abyssal": 8,
+            "Celestial": 8,
+            "Draconic": 8,
+            "Deep Speech": 16,
+            "Infernal": 8,
+            "Primordial": 6,
+            "Sylvan": 4,
+            "Undercommon": 6
+        }
 
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+            
     if race == "Elemental":
-        l += "Primordial. "
-        if Dice() == 1 and not ("Common" in l):            l += "Common. "
-        if Dice(4) == 1:            l += "Ignan. "
-        if Dice(4) == 1:            l += "Terran. "
-        if Dice(4) == 1:            l += "Aquan. "
-        if Dice(4) == 1:            l += "Auran. "
+        languages = {
+            "Common":4,
+            "Dwarvish": 8,
+            "Elvish": 8,
+            "Giant": 8,
+            "Gnomish": 8,
+            "Goblin": 18,
+            "Halfling": 18,
+            "Orc": 12,
+            "Abyssal": 12,
+            "Celestial": 12,
+            "Draconic": 12,
+            "Deep Speech": 20,
+            "Infernal": 12,
+            "Primordial": 1,
+            "Sylvan": 4,
+            "Undercommon": 10,
+            "Ignan": 4,
+            "Terran":4,
+            "Aquan":4,
+            "Auran":4
+            
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
 
     if race == "Fey":
-        l += "Sylvan. "
-        if Dice(3) == 1 and not ("Common" in l):    l += "Common. "
-        if Dice(3) == 1 and not ("Elvish" in l):    l += "Elvish. "
+        languages = {
+            "Common":3,
+            "Dwarvish": 14,
+            "Elvish": 3,
+            "Giant": 10,
+            "Gnomish": 8,
+            "Goblin": 4,
+            "Halfling": 16,
+            "Orc": 16,
+            "Abyssal": 16,
+            "Celestial": 16,
+            "Draconic": 8,
+            "Deep Speech": 20,
+            "Infernal": 16,
+            "Primordial": 8,
+            "Sylvan": 1,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
 
     if race == "Fiend":
-        if not ("Common" in l):                              l += "Common. "
-        if Dice(2) == 1 and not ("Infernal" in l):           l += "Infernal. "
-        if Dice(2) == 1 and not ("Abyssal" in l):            l += "Abyssal. "
-        if Dice(10) == 1 and not ("Telepathy" in l):         l += "Telepathy. (60 ft)."
-        elif Dice(12) == 1 and not ("Telepathy" in l):       l += "Telepathy. (120 ft)."
+        languages = {
+            "Common":1,
+            "Dwarvish": 4,
+            "Elvish": 4,
+            "Giant": 8,
+            "Gnomish": 4,
+            "Goblin": 2,
+            "Halfling": 12,
+            "Orc": 4,
+            "Abyssal": 2,
+            "Celestial": 20,
+            "Draconic": 18,
+            "Deep Speech": 20,
+            "Infernal": 2,
+            "Primordial": 20,
+            "Sylvan": 20,
+            "Undercommon": 8,
+            "Telepathy (60 ft.)": 10,
+            "Telepathy (120 ft.)": 12            
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
 
     if race == "Giant":
-        if not ("Common" in l):                 l += "Common. "
-        if not ("Giant" in l):                  l += "Giant. "
-        if Dice(8) == 1 and not ("Orc" in l):   l += "Orc. "
+        languages = {
+            "Common":1,
+            "Dwarvish": 4,
+            "Elvish": 20,
+            "Giant": 1,
+            "Gnomish": 8,
+            "Goblin": 8,
+            "Halfling": 20,
+            "Orc": 8,
+            "Abyssal": 12,
+            "Celestial": 12,
+            "Draconic": 20,
+            "Deep Speech": 20,
+            "Infernal": 12,
+            "Primordial": 16,
+            "Sylvan": 8,
+            "Undercommon": 20
+        }
 
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
 
     if race == "Gnome":
-        l += "Gnomish. "
-        if Dice(3) == 1 and not ("Common" in l):            l += "Common. "
-        if Dice(3) == 1 and not ("Elvish" in l):            l += "Elvish. "
-        if Dice(3) == 1 and not ("Dwarvish" in l):          l += "Dwarvish. "
-        if Dice(3) == 1 and not ("Giant" in l):             l += "Giant. "
-        if Dice(3) == 1 and not ("Halfling" in l):          l += "Halfling. "
-        if Dice() == 1 and not ("Sylvan" in l):             l += "Sylvan. "
+        languages = {
+            "Common":2,
+            "Dwarvish": 3,
+            "Elvish": 3,
+            "Giant": 3,
+            "Gnomish": 1,
+            "Goblin": 6,
+            "Halfling": 6,
+            "Orc": 10,
+            "Abyssal": 12,
+            "Celestial": 12,
+            "Draconic": 12,
+            "Deep Speech": 12,
+            "Infernal": 12,
+            "Primordial": 12,
+            "Sylvan": 4,
+            "Undercommon": 12
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
 
     if race == "Goblin":
-        if not ("Goblin" in l):                             l += "Goblin. "
-        if Dice(2) == 1 and not ("Common" in l):            l += "Common. "
-        if Dice() == 1 and not ("Giant" in l):              l += "Giant. "
-        if Dice(10) == 1 and not ("Draconic" in l):         l += "Draconic. "
+        languages = {
+            "Common":2,
+            "Dwarvish": 18,
+            "Elvish": 16,
+            "Giant": 10,
+            "Gnomish": 18,
+            "Goblin": 1,
+            "Halfling": 18,
+            "Orc": 4,
+            "Abyssal": 10,
+            "Celestial": 18,
+            "Draconic": 6,
+            "Deep Speech": 10,
+            "Infernal": 10,
+            "Primordial": 20,
+            "Sylvan": 2,
+            "Undercommon": 2
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
 
     if race == "Halfling":
-        if not ("Common" in l):         l += "Common. "
-        if not ("Halfling" in l):       l += "Halfling. "
-        
+        languages = {
+            "Common":1,
+            "Dwarvish": 4,
+            "Elvish": 4,
+            "Giant": 20,
+            "Gnomish": 4,
+            "Goblin": 20,
+            "Halfling": 1,
+            "Orc": 20,
+            "Abyssal": 20,
+            "Celestial": 4,
+            "Draconic": 6,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 18,
+            "Sylvan": 18,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
+
     if race == "Kobold":
-        if not ("Draconic" in l):   l += "Draconic. "
-        if Dice(3) == 1 and not ("Common" in l):    l += "Common. "
+        languages = {
+            "Common":3,
+            "Dwarvish": 6,
+            "Elvish": 18,
+            "Giant": 20,
+            "Gnomish": 20,
+            "Goblin": 8,
+            "Halfling": 20,
+            "Orc": 12,
+            "Abyssal": 8,
+            "Celestial": 10,
+            "Draconic": 1,
+            "Deep Speech": 8,
+            "Infernal": 8,
+            "Primordial": 20,
+            "Sylvan": 16,
+            "Undercommon": 6
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+            
         
     if race == "Lizardfolk":
-        if not ("Draconic" in l): l += "Draconic. "
-        if Dice(2) == 1 and not ("Common" in l):    l += "Common. "
-        if Dice(12) == 1 and not ("Abyssal" in l):    l += "Abyssal. "
-        
-    if race == "Monstrosity":
-        if Dice(2) == 1 and not ("Common" in l):            l += "Common. "
-        if Dice() == 1 and not ("Undercommon" in l):        l += "Undercommon. "
-        if Dice() == 1 and not ("Deep Speech" in l):        l += "Deep Speech. "
-        if Dice(8) == 1 and not ("Sylvan" in l):            l += "Sylvan. "
-        if Dice(8) == 1 and not ("Abyssal" in l):           l += "Abyssal. "
-        if Dice(12) == 1 and not ("Draconic" in l):         l += "Draconic. "
-        
-    if race == "Ooze":
-        l += "Telepathy. "
-        
-    if race == "Orc":
-        l += "Orc. "
-        if Dice(2) == 1 and not ("Common" in l):            l += "Common. "
-        
-    if race == "Plant":
-        if Dice(3) == 1 and not ("Common" in l):            l += "Common. "
-        if Dice(3) == 1 and not ("Sylvan" in l):            l += "Sylvan. "
-        
-    if race == "Snakefolk":
-        if not ("Draconic" in l): l += "Draconic. "
-        if Dice(3) == 1 and not ("Abyssal" in l):           l += "Abyssal. "
-        if Dice(3) == 1 and not ("Common" in l):            l += "Common. "
+        languages = {
+            "Common":2,
+            "Dwarvish": 20,
+            "Elvish": 20,
+            "Giant": 10,
+            "Gnomish": 20,
+            "Goblin": 10,
+            "Halfling": 20,
+            "Orc": 4,
+            "Abyssal": 4,
+            "Celestial": 20,
+            "Draconic": 1,
+            "Deep Speech": 4,
+            "Infernal": 4,
+            "Primordial": 4,
+            "Sylvan": 4,
+            "Undercommon": 20
+        }
 
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
+    if race == "Monstrosity":
+        languages = {
+            "Common":2,
+            "Dwarvish": 8,
+            "Elvish": 20,
+            "Giant": 8,
+            "Gnomish": 20,
+            "Goblin": 10,
+            "Halfling": 20,
+            "Orc": 6,
+            "Abyssal": 4,
+            "Celestial": 20,
+            "Draconic": 4,
+            "Deep Speech": 1,
+            "Infernal": 4,
+            "Primordial": 10,
+            "Sylvan": 8,
+            "Undercommon": 1
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
+
+    
+    if race == "Ooze":
+        add_language(l, "Telepathy. ", 1)
+
+    if race == "Orc":
+        languages = {
+            "Common":2,
+            "Dwarvish": 10,
+            "Elvish": 10,
+            "Giant": 4,
+            "Gnomish": 20,
+            "Goblin": 2,
+            "Halfling": 20,
+            "Orc": 1,
+            "Abyssal": 8,
+            "Celestial": 8,
+            "Draconic": 8,
+            "Deep Speech": 20,
+            "Infernal": 8,
+            "Primordial": 8,
+            "Sylvan": 8,
+            "Undercommon": 8
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
+    if race == "Plant":
+        languages = {
+            "Common":3,
+            "Dwarvish": 20,
+            "Elvish": 5,
+            "Giant": 20,
+            "Gnomish": 20,
+            "Goblin": 20,
+            "Halfling": 20,
+            "Orc": 20,
+            "Abyssal": 20,
+            "Celestial": 10,
+            "Draconic": 20,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 2,
+            "Sylvan": 1,
+            "Undercommon": 8,
+            "Telepathy":4
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
+    if race == "Snakefolk":
+        languages = {
+            "Common":4,
+            "Dwarvish": 20,
+            "Elvish": 20,
+            "Giant": 20,
+            "Gnomish": 20,
+            "Goblin": 20,
+            "Halfling": 20,
+            "Orc": 20,
+            "Abyssal": 2,
+            "Celestial": 20,
+            "Draconic": 1,
+            "Deep Speech": 2,
+            "Infernal": 10,
+            "Primordial": 4,
+            "Sylvan": 8,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+        
     if race == "Undead":
-        l += "Understands languages it knew in life. "
-        if Dice(2) == 1 and not ("Common" in l):            l += "Common. "
-        if Dice(8) == 1 and not ("Infernal" in l):          l += "Infernal. "
-        if Dice(8) == 1 and not ("Abyssal" in l):           l += "Abyssal. "
-        if Dice(8) == 1 and not ("Celestial" in l):         l += "Celestial. "
+        languages = {
+            "Common":2,
+            "Dwarvish": 6,
+            "Elvish": 6,
+            "Giant": 6,
+            "Gnomish": 6,
+            "Goblin": 6,
+            "Halfling": 6,
+            "Orc": 6,
+            "Abyssal": 2,
+            "Celestial": 2,
+            "Draconic": 6,
+            "Deep Speech": 2,
+            "Infernal": 2,
+            "Primordial": 20,
+            "Sylvan": 20,
+            "Undercommon": 4
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
+    # BACKGROUNDS
+    if background == "base":
+        languages = {
+            "Common":20,
+            "Dwarvish": 20,
+            "Elvish": 20,
+            "Giant": 20,
+            "Gnomish": 20,
+            "Goblin": 20,
+            "Halfling": 20,
+            "Orc": 20,
+            "Abyssal": 20,
+            "Celestial": 20,
+            "Draconic": 20,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 20,
+            "Sylvan": 20,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
 
     if background == "Druid":
-        l += "Druidic. "
-        if Dice(4) == 1 and not ("Sylvan" in l):            l += "Sylvan. "
-        if Dice(4) == 1 and not ("Primordial" in l):        l += "Primordial. "
-        if Dice(4) == 1 and not ("Draconic" in l):          l += "Draconic. "
-        if Dice(4) == 1 and not ("Elvish" in l):            l += "Elvish. "
+        languages = {
+            "Druidic":1
+            "Common":4,
+            "Dwarvish": 20,
+            "Elvish": 4,
+            "Giant": 20,
+            "Gnomish": 10,
+            "Goblin": 10,
+            "Halfling": 20,
+            "Orc": 20,
+            "Abyssal": 20,
+            "Celestial": 16,
+            "Draconic": 4,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 4,
+            "Sylvan": 4,
+            "Undercommon": 20
+        }
 
-    if background == "Bandit":
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
+    
+    if background == "":
         if not ("Common" in l):            l += "Common. "
         if not ("Thieve" in l):            l += "Thieve's Cant. "
-        
+
+    if background == "Bandit":
+        languages = {
+            "Common":20,
+            "Dwarvish": 20,
+            "Elvish": 20,
+            "Giant": 20,
+            "Gnomish": 20,
+            "Goblin": 20,
+            "Halfling": 20,
+            "Orc": 20,
+            "Abyssal": 20,
+            "Celestial": 20,
+            "Draconic": 20,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 20,
+            "Sylvan": 20,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+            
     if background == "Bard":
         if not ("Common" in l):            l += "Common. "
         if Dice() == 1 and not ("Dwarvish" in l):          l += "Dwarvish. "
@@ -5907,8 +7630,6 @@ def Language(race=Race(), background=Background()):
 
 
 def Magic(Lvl, race=Race(), background=Background()):
-    if race == "":          race = Race()
-    if background == "":    background = Background()
 
 
 
@@ -5938,7 +7659,6 @@ def Magic(Lvl, race=Race(), background=Background()):
     two     = "2/Day each: "
     three   = "3/Day each: "
 
-    for L in range(PB(Lvl)):
 
 # BACKGROUNDS:
     # Bandit
@@ -5948,161 +7668,172 @@ def Magic(Lvl, race=Race(), background=Background()):
     # Commoner
     # Cultist
 
-        if background == "Cultist":
-            if Dice(3) == 1 and not ("Light" in cantrip):            cantrip += "\n- Light."
-            if Dice(3) == 1 and not ("Sacred Flame" in cantrip):     cantrip += "\n- Sacred Flame"
-            if Dice(3) == 1 and not ("Thaumaturgy" in cantrip):      cantrip += "\n- Thaumaturgy"
+    if background == "Cultist":
 
-        if background == "Cultist":
-            if Dice() == 1 and not ("Command" in first):
-                first += "\n- Command"
-                slots1 += Dice()
-            if Dice() == 1 and not ("Inflict Wounds" in first):
-                first += "\n- Inflict Wounds"
-                slots1 += Dice()
-            if Dice() == 1 and not ("Shield Of Faith" in first):
-                first += "\n- Shield Of Faith"
-                slots1 += Dice()
+        if Dice(0) < Dice(Lvl) and not ("Light" in cantrip):            cantrip += "\n- Light."
+        if Dice(0) < Dice(Lvl) and not ("Sacred Flame" in cantrip):     cantrip += "\n- Sacred Flame"
+        if Dice(0) < Dice(Lvl) and not ("Thaumaturgy" in cantrip):      cantrip += "\n- Thaumaturgy"
 
-        if background == "Cultist":
-            if Dice(7) == 1 and not ("Hold Person" in second):
-                second += "\n- Hold Person"
-                slots2 += Dice(5)
-            if Dice(7) == 1 and not ("Spiritual Weapon" in second):
-                second += "\n- Spiritual Weapon"
-                slots2 += Dice(5)
+
+    if background == "Cultist":
+        if Dice(2) < Dice(Lvl) and not ("Command" in first):
+            first += "\n- Command"
+            slots1 += Dice()
+        if Dice(2) < Dice(Lvl) and not ("Inflict Wounds" in first):
+            first += "\n- Inflict Wounds"
+            slots1 += Dice()
+        if Dice(2) < Dice(Lvl) and not ("Shield Of Faith" in first):
+            first += "\n- Shield Of Faith"
+            slots1 += Dice()
+                
+
+    if background == "Cultist":
+        if Dice(5) < Dice(Lvl) and not ("Hold Person" in second):
+            second += "\n- Hold Person"
+            slots2 += Dice(5)
+        if Dice(5) < Dice(Lvl) and not ("Spiritual Weapon" in second):
+            second += "\n- Spiritual Weapon"
+            slots2 += Dice(5)
 
     # Criminal
     # Druid
 
 
-        if background == "Druid" and not ("Druidcraft" in cantrip):                     cantrip += "\n- Druidcraft."
-        if background == "Druid" and Dice() == 1 and not ("Produce Flame" in cantrip):  cantrip += "\n- Produce Flame."
-        if background == "Druid" and Dice() == 1 and not ("Shillelagh" in cantrip):     cantrip += "\n- Shillelagh."
-        if background == "Druid" and Dice() == 1 and not ("Entangle" in first):
-            first += "\n- Entangle"
-            slots1 += Dice()
-        if background == "Druid" and Dice() == 1 and not ("Longstrider" in first):
-            first += "\n- Longstrider"
-            slots1 += Dice()
-        if background == "Druid" and Dice() == 1 and not ("Thunderwave" in first):
-            first += "\n- Thunderwave"
-            slots1 += Dice()
-        if background == "Druid" and Dice() == 1 and not ("Animal Messenger" in second):
-            second += "\n- Animal Messenger"
-            slots2 += Dice(5)
-        if background == "Druid" and Dice() == 1 and not ("Barkskin" in second):
-            second += "\n- Barkskin"
-            slots2 += Dice(5)
-        if background == "Druid" and Dice() == 1 and not ("Speak With Animals" in first):
-            first += "\n- Speak With Animals"
-            slots1 += Dice(5)
+    if background == "Druid" and not ("Druidcraft" in cantrip):                     cantrip += "\n- Druidcraft."
+
+    if background == "Druid" and Dice(0) < Dice(Lvl) and not ("Produce Flame" in cantrip):  cantrip += "\n- Produce Flame."
+    if background == "Druid" and Dice(0) < Dice(Lvl) and not ("Shillelagh" in cantrip):     cantrip += "\n- Shillelagh."
+    if background == "Druid" and Dice(2) < Dice(Lvl) and not ("Entangle" in first):
+        first += "\n- Entangle"
+        slots1 += Dice()
+    if background == "Druid" and Dice(2) < Dice(Lvl) and not ("Longstrider" in first):
+        first += "\n- Longstrider"
+        slots1 += Dice()
+    if background == "Druid" and Dice(2) < Dice(Lvl) and not ("Thunderwave" in first):
+        first += "\n- Thunderwave"
+        slots1 += Dice()
+    if background == "Druid" and Dice(5) < Dice(Lvl) and not ("Animal Messenger" in second):
+        second += "\n- Animal Messenger"
+        slots2 += Dice(5)
+    if background == "Druid" and Dice(5) < Dice(Lvl) and not ("Barkskin" in second):
+        second += "\n- Barkskin"
+        slots2 += Dice(5)
+    if background == "Druid" and Dice(5) < Dice(Lvl) and not ("Speak With Animals" in first):
+        first += "\n- Speak With Animals"
+        slots1 += Dice()
 
     # Expert
     # Explorer
     # Gladiator
     # Guard
     # Healer
-        if background == "Healer" and Dice(2) == 1 and not ("Guidance" in cantrip):            cantrip += "\n- Guidance"
-        if background == "Healer" and Dice(2) == 1 and not ("Sacred Flame" in cantrip):        cantrip += "\n- Sacred Flame"
-        if background == "Healer" and Dice(2) == 1 and not ("Cure Wounds" in first):
-            first += "\n- Cure Wounds"
-            slots1 += Dice()
+
+    if background == "Healer" and Dice(0) < Dice(Lvl) and not ("Guidance" in cantrip):            cantrip += "\n- Guidance"
+    if background == "Healer" and Dice(0) < Dice(Lvl) and not ("Sacred Flame" in cantrip):        cantrip += "\n- Sacred Flame"
+    if background == "Healer" and Dice(2) < Dice(Lvl) and not ("Cure Wounds" in first):
+        first += "\n- Cure Wounds"
+        slots1 += Dice()
+
 
     # Hermit
     # Hero
     # Hunter
     # Knight
 
-        if background == "Knight" and Dice() == 1 and not ("Guidance" in cantrip):            cantrip += "\n- Guidance"
-        if background == "Knight" and Dice() == 1 and not ("Leadership" in cantrip):          cantrip += "\n- Leadership (Recharges after a Short or Long Rest). \n\t For 1 minute, the knight can utter a special command or warning whenever a nonhostile creature that it can see within 30 feet of it makes an attack roll or a saving throw. The creature can add a d4 to its roll provided it can hear and understand the knight. A creature can benefit from only one Leadership die at a time. This effect ends if the knight is incapacitated."
+    if background == "Knight" and Dice(6) < Dice(Lvl) and not ("Guidance" in cantrip):            cantrip += "\n- Guidance"
+    if background == "Knight" and Dice(6) < Dice(Lvl) and not ("Leadership" in cantrip):          cantrip += "\n- Leadership (Recharges after a Short or Long Rest). \n\t For 1 minute, the knight can utter a special command or warning whenever a nonhostile creature that it can see within 30 feet of it makes an attack roll or a saving throw. The creature can add a d4 to its roll provided it can hear and understand the knight. A creature can benefit from only one Leadership die at a time. This effect ends if the knight is incapacitated."
+
 
     # Mage
 
-        if background == "Mage" and Dice(2) == 1 and not ("Firebolt" in cantrip):       cantrip += "\n - Firebolt"
-        if background == "Mage" and Dice(2) == 1 and not ("Light" in cantrip):          cantrip += "\n - Light"
-        if background == "Mage" and Dice(2) == 1 and not ("Sleep" in first):
-            first += "\n - Sleep"
-            slots1 += Dice()
+    if background == "Mage" and Dice(0) < Dice(Lvl) and not ("Firebolt" in cantrip):       cantrip += "\n - Firebolt"
+    if background == "Mage" and Dice(0) < Dice(Lvl) and not ("Light" in cantrip):          cantrip += "\n - Light"
+    if background == "Mage" and Dice(3) < Dice(Lvl) and not ("Sleep" in first):
+        first += "\n - Sleep"
+        slots1 += Dice(6)
 
     # Monk
 
-        if background == "Monk" and Dice(2) == 1 and not ("Mage Hand" in cantrip):          cantrip += "\n- Mage Hand"
-        if background == "Monk" and Dice(2) == 1 and not ("Feather Fall" in three):         three += "\n- Feather Fall"
-        if background == "Monk" and Dice(2) == 1 and not ("Jump" in three):                 three += "\n- Jump"
-        if background == "Monk" and Dice(2) == 1 and not ("See Invisibility" in three):     three += "\n- See Invisibility"
-        if background == "Monk" and Dice(2) == 1 and not ("Shield" in three):               three += "\n- Shield"
-        if background == "Monk" and Dice(2) == 1 and not ("Misty Step" in three):           three += "\n- Misty Step"
-        if background == "Monk" and Dice(2) == 1 and not ("Nondetection" in three):         three += "\n- Nondetection, self Only."
+    if background == "Monk" and Dice(0) < Dice(Lvl) and not ("Mage Hand" in cantrip):          cantrip += "\n- Mage Hand"
+    if background == "Monk" and Dice(10) < Dice(Lvl) and not ("Feather Fall" in three):         three += "\n- Feather Fall"
+    if background == "Monk" and Dice(10) < Dice(Lvl) and not ("Jump" in three):                 three += "\n- Jump"
+    if background == "Monk" and Dice(10) < Dice(Lvl) and not ("See Invisibility" in three):     three += "\n- See Invisibility"
+    if background == "Monk" and Dice(10) < Dice(Lvl) and not ("Shield" in three):               three += "\n- Shield"
+    if background == "Monk" and Dice(20) < Dice(Lvl) and not ("Misty Step" in three):           three += "\n- Misty Step"
+    if background == "Monk" and Dice(20) < Dice(Lvl) and not ("Nondetection" in three):         three += "\n- Nondetection, self Only."
 
     # Noble
     # Priest
 
-        if background == "Priest" and Dice(2) == 1 and not ("Light" in cantrip):            cantrip += "\n- Light. "
-        if background == "Priest" and Dice(2) == 1 and not ("Sacred Flame" in cantrip):     cantrip += "\n- Sacred Flame. "
-        if background == "Priest" and Dice(2) == 1 and not ("Thaumaturgy" in cantrip):      cantrip += "\n- Thaumaturgy"
-        if background == "Priest" and Dice() == 1 and not ("Guidance" in cantrip):          cantrip += "\n- Guidance"
-        if background == "Priest" and Dice() == 1 and not ("Resistance" in cantrip):        cantrip += "\n- Resistance"
+    if background == "Priest" and Dice(0) < Dice(Lvl) and not ("Light" in cantrip):            cantrip += "\n- Light. "
+    if background == "Priest" and Dice(0) < Dice(Lvl) and not ("Sacred Flame" in cantrip):     cantrip += "\n- Sacred Flame. "
+    if background == "Priest" and Dice(0) < Dice(Lvl) and not ("Thaumaturgy" in cantrip):      cantrip += "\n- Thaumaturgy"
+    if background == "Priest" and Dice(2) < Dice(Lvl) and not ("Guidance" in cantrip):          cantrip += "\n- Guidance"
+    if background == "Priest" and Dice(2) < Dice(Lvl) and not ("Resistance" in cantrip):        cantrip += "\n- Resistance"
 
-        if background == "Priest" and Dice() == 1 and not ("Bless" in first):
-            first += "\n- Bless"
-            slots1 += Dice()
-        if background == "Priest" and Dice() == 1 and not ("Cure Wounds" in first):
-            first += "\n- Cure Wounds"
-            slots1 += Dice()
-        if background == "Priest" and Dice() == 1 and not ("Sanctuary" in first):
-            first += "\n- Sanctuary"
-            slots1 += Dice()
-        if background == "Priest" and Dice() == 1 and not ("Cure Wounds" in first):
-            first += "\n- Cure Wounds"
-            slots1 += Dice()
-        if background == "Priest" and Dice() == 1 and not ("Guiding Bolt" in first):
-            first += "\n- Guiding Bolt"
-            slots1 += Dice()
-        if background == "Priest" and Dice() == 1 and not ("Sanctuary" in first):
-            first += "\n- Sanctuary"
-            slots1 += Dice()
-        if background == "Priest" and Dice() == 1 and not ("Command" in first):
-            first += "\n- Command"
-            slots1 += Dice()
-        if background == "Priest" and Dice() == 1 and not ("Guiding Bolt" in first):
-            first += "\n- Guiding Bolt"
-            slots1 += Dice()
-        if background == "Priest" and Dice() == 1 and not ("Cure Wounds" in first):
-            first += "\n- Cure Wounds"
-            slots1 += Dice()
-        if background == "Priest" and Dice() == 1 and not ("Detect Magic" in first):
-            first += "\n- Detect Magic"
-            slots1 += Dice()
 
-        if background == "Priest" and Dice() == 1 and not ("Lesser Restoration" in second):
-            second += "\n- Lesser Restoration"
-            slots2 += Dice(5)
-        if background == "Priest" and Dice() == 1 and not ("Augury" in second):
-            second += "\n- Augury"
-            slots2 += Dice(5)
-        if background == "Priest" and Dice() == 1 and not ("Spiritual Weapon" in second):
-            second += "\n- Spiritual Weapon"
-            slots2 += Dice(5)
-        if background == "Priest" and Dice() == 1 and not ("Lesser Restoration" in second):
-            second += "\n- Lesser Restoration"
-            slots2 += Dice(5)
-        if background == "Priest" and Dice() == 1 and not ("Hold Person" in second):
-            second += "\n- Hold Person"
-            slots2 += Dice(5)
+    if background == "Priest" and Dice(6) < Dice(Lvl) and not ("Bless" in first):
+        first += "\n- Bless"
+        slots1 += Dice()
+    if background == "Priest" and Dice(6) < Dice(Lvl) and not ("Cure Wounds" in first):
+        first += "\n- Cure Wounds"
+        slots1 += Dice()
+    if background == "Priest" and Dice(6) < Dice(Lvl) and not ("Sanctuary" in first):
+        first += "\n- Sanctuary"
+        slots1 += Dice()
+    if background == "Priest" and Dice(6) < Dice(Lvl) and not ("Cure Wounds" in first):
+        first += "\n- Cure Wounds"
+        slots1 += Dice()
+    if background == "Priest" and Dice(6) < Dice(Lvl) and not ("Guiding Bolt" in first):
+        first += "\n- Guiding Bolt"
+        slots1 += Dice()
+    if background == "Priest" and Dice(6) < Dice(Lvl) and not ("Sanctuary" in first):
+        first += "\n- Sanctuary"
+        slots1 += Dice()
+    if background == "Priest" and Dice(6) < Dice(Lvl) and not ("Command" in first):
+        first += "\n- Command"
+        slots1 += Dice()
+    if background == "Priest" and Dice(6) < Dice(Lvl) and not ("Guiding Bolt" in first):
+        first += "\n- Guiding Bolt"
+        slots1 += Dice()
+    if background == "Priest" and Dice(6) < Dice(Lvl) and not ("Cure Wounds" in first):
+        first += "\n- Cure Wounds"
+        slots1 += Dice()
+    if background == "Priest" and Dice(6) < Dice(Lvl) and not ("Detect Magic" in first):
+        first += "\n- Detect Magic"
+        slots1 += Dice()
 
-        if background == "Priest" and Dice() == 1 and not ("Dispel Magic" in third):
-            third += "\n- Dispel Magic"
-            slots3 += Dice(4)
-        if background == "Priest" and Dice() == 1 and not ("Spirit Guardians" in third):
-            third += "\n- Spirit Guardians"
-            slots3 += Dice(4)
-        if background == "Priest" and Dice() == 1 and not ("Mass Healing Word" in third):
-            third += "\n- Mass Healing Word"
-            slots3 += Dice(4)
-        if background == "Priest" and Dice() == 1 and not ("Tongues" in third):
-            third += "\n- Tongues"
-            slots3 += Dice(4)
+            
+
+    if background == "Priest" and Dice() == 1 and not ("Lesser Restoration" in second):
+        second += "\n- Lesser Restoration"
+        slots2 += Dice(5)
+    if background == "Priest" and Dice() == 1 and not ("Augury" in second):
+        second += "\n- Augury"
+        slots2 += Dice(5)
+    if background == "Priest" and Dice() == 1 and not ("Spiritual Weapon" in second):
+        second += "\n- Spiritual Weapon"
+        slots2 += Dice(5)
+    if background == "Priest" and Dice() == 1 and not ("Lesser Restoration" in second):
+        second += "\n- Lesser Restoration"
+        slots2 += Dice(5)
+    if background == "Priest" and Dice() == 1 and not ("Hold Person" in second):
+        second += "\n- Hold Person"
+        slots2 += Dice(5)
+
+
+    if background == "Priest" and Dice() == 1 and not ("Dispel Magic" in third):
+        third += "\n- Dispel Magic"
+        slots3 += Dice(4)
+    if background == "Priest" and Dice() == 1 and not ("Spirit Guardians" in third):
+        third += "\n- Spirit Guardians"
+        slots3 += Dice(4)
+    if background == "Priest" and Dice() == 1 and not ("Mass Healing Word" in third):
+        third += "\n- Mass Healing Word"
+        slots3 += Dice(4)
+    if background == "Priest" and Dice() == 1 and not ("Tongues" in third):
+        third += "\n- Tongues"
+        slots3 += Dice(4)
 
     # Pirate
     # Ranger
@@ -6110,33 +7841,33 @@ def Magic(Lvl, race=Race(), background=Background()):
     # Scholar
     # Shaman
 
-        if background == "Shaman" and Dice() == 1 and not ("Druidcraft" in cantrip):        cantrip += "\n- Druidcraft"
-        if background == "Shaman" and Dice() == 1 and not ("Produce Flame" in cantrip):     cantrip += "\n-  Produce Flame"
-        if background == "Shaman" and Dice() == 1 and not ("Thorn Whip" in cantrip):        cantrip += "\n-  Thorn Whip"
-        if background == "Shaman" and Dice() == 1 and not ("Entangle" in first):
-            first += "\n- Entangle"
-            slots1 += Dice()
-        if background == "Shaman" and Dice() == 1 and not ("Fog Cloud" in first):
-            first += "\n- Fog Cloud"
-            slots1 += Dice()
-        if background == "Shaman" and Dice() == 1 and not ("Bane" in first):
-            first += "\n- Bane"
-            slots1 += Dice()
-        if background == "Shaman" and Dice() == 1 and not ("Shield Of Faith" in first):
-            first += "\n- Shield Of Faith"
-            slots1 += Dice()
-        if background == "Shaman" and Dice(2) == 1 and not ("Heat Metal" in second):
-            second += "\n- Heat Metal"
-            slots2 += Dice(5)
-        if background == "Shaman" and Dice(2) == 1 and not ("Spike Growth" in second):
-            second += "\n- Spike Growth"
-            slots2 += Dice(5)
-        if background == "Shaman" and Dice() == 1 and not ("Conjure Animals" in third):
-            third += "\n- Conjure Animals"
-            slots3 += Dice(4)
-        if background == "Shaman" and Dice() == 1 and not ("Plant Growth" in third):
-            third += "\n- Plant Growth"
-            slots3 += Dice(4)
+    if background == "Shaman" and Dice() == 1 and not ("Druidcraft" in cantrip):        cantrip += "\n- Druidcraft"
+    if background == "Shaman" and Dice() == 1 and not ("Produce Flame" in cantrip):     cantrip += "\n-  Produce Flame"
+    if background == "Shaman" and Dice() == 1 and not ("Thorn Whip" in cantrip):        cantrip += "\n-  Thorn Whip"
+    if background == "Shaman" and Dice() == 1 and not ("Entangle" in first):
+        first += "\n- Entangle"
+        slots1 += Dice()
+    if background == "Shaman" and Dice() == 1 and not ("Fog Cloud" in first):
+        first += "\n- Fog Cloud"
+        slots1 += Dice()
+    if background == "Shaman" and Dice() == 1 and not ("Bane" in first):
+        first += "\n- Bane"
+        slots1 += Dice()
+    if background == "Shaman" and Dice() == 1 and not ("Shield Of Faith" in first):
+        first += "\n- Shield Of Faith"
+        slots1 += Dice()
+    if background == "Shaman" and Dice(2) == 1 and not ("Heat Metal" in second):
+        second += "\n- Heat Metal"
+        slots2 += Dice(5)
+    if background == "Shaman" and Dice(2) == 1 and not ("Spike Growth" in second):
+        second += "\n- Spike Growth"
+        slots2 += Dice(5)
+    if background == "Shaman" and Dice() == 1 and not ("Conjure Animals" in third):
+        third += "\n- Conjure Animals"
+        slots3 += Dice(4)
+    if background == "Shaman" and Dice() == 1 and not ("Plant Growth" in third):
+        third += "\n- Plant Growth"
+        slots3 += Dice(4)
     # Soldier
     # Spy
     # Traveler
@@ -6144,434 +7875,432 @@ def Magic(Lvl, race=Race(), background=Background()):
     # Warrior
     
     # Warlock
-        if background == "Warlock" and Dice() == 1 and not ("Poison Spray" in cantrip):
-            cantrip += "\n- Poison Spray"
+    if background == "Warlock" and Dice() == 1 and not ("Poison Spray" in cantrip):
+        cantrip += "\n- Poison Spray"
             
-        if background == "Warlock" and Dice() == 1 and not ("Thaumaturgy" in cantrip):
-            cantrip += "\n- Thaumaturgy"
+    if background == "Warlock" and Dice() == 1 and not ("Thaumaturgy" in cantrip):
+        cantrip += "\n- Thaumaturgy"
 
-        if background == "Warlock" and Dice() == 1 and not ("Magic Missile" in first):
-            first += "\n- Magic Missile"
-            slots1 += Dice()
+    if background == "Warlock" and Dice() == 1 and not ("Magic Missile" in first):
+        first += "\n- Magic Missile"
+        slots1 += Dice()
 
-        if background == "Warlock" and Dice() == 1 and not ("Shield" in first):
-            first += "\n- Shield"
-            slots1 += Dice()
+    if background == "Warlock" and Dice() == 1 and not ("Shield" in first):
+        first += "\n- Shield"
+        slots1 += Dice()
 
-        if background == "Warlock" and Dice() == 1 and not ("Bane" in first):
-            first += "\n- Bane"
-            slots1 += Dice()
+    if background == "Warlock" and Dice() == 1 and not ("Bane" in first):
+        first += "\n- Bane"
+        slots1 += Dice()
 
-        if background == "Warlock" and Dice() == 1 and not ("Detect Magic" in first):
-            first += "\n- Detect Magic"
-            slots1 += Dice()
+    if background == "Warlock" and Dice() == 1 and not ("Detect Magic" in first):
+        first += "\n- Detect Magic"
+        slots1 += Dice()
             
-        if background == "Warlock" and Dice() == 1 and not ("Sanctuary" in first):
-            first += "\n- Sanctuary"
-            slots1 += Dice()
+    if background == "Warlock" and Dice() == 1 and not ("Sanctuary" in first):
+        first += "\n- Sanctuary"
+        slots1 += Dice()
 
 
-        if background == "Warlock" and Dice() == 1 and not ("Blur" in second):
-            second += "\n- Blur"
-            slots2 += Dice(5)
+    if background == "Warlock" and Dice() == 1 and not ("Blur" in second):
+        second += "\n- Blur"
+        slots2 += Dice(5)
 
-        if background == "Warlock" and Dice() == 1 and not ("Hold Person" in second):
-            second += "\n- Hold Person"
-            slots2 += Dice(5)
+    if background == "Warlock" and Dice() == 1 and not ("Hold Person" in second):
+        second += "\n- Hold Person"
+        slots2 += Dice(5)
 
-        if background == "Warlock" and Dice() == 1 and not ("Flaming Sphere" in second):
-            second += "\n- Flaming Sphere"
-            slots2 += Dice(5)
+    if background == "Warlock" and Dice() == 1 and not ("Flaming Sphere" in second):
+        second += "\n- Flaming Sphere"
+        slots2 += Dice(5)
 
-        if background == "Warlock" and Dice() == 1 and not ("Silence" in second):
-            second += "\n- Silence"
-            slots2 += Dice(5)
+    if background == "Warlock" and Dice() == 1 and not ("Silence" in second):
+        second += "\n- Silence"
+        slots2 += Dice(5)
             
-        if background == "Warlock" and Dice() == 1 and not ("Fireball" in third):
-            third += "\n- Fireball"
-            slots3 += Dice(4)
+    if background == "Warlock" and Dice() == 1 and not ("Fireball" in third):
+        third += "\n- Fireball"
+        slots3 += Dice(4)
 
-        if background == "Warlock" and Dice() == 1 and not ("Clairvoyance" in third):
-            third += "\n- Clairvoyance"
-            slots3 += Dice(4)
+    if background == "Warlock" and Dice() == 1 and not ("Clairvoyance" in third):
+        third += "\n- Clairvoyance"
+        slots3 += Dice(4)
 
-        if background == "Warlock" and Dice() == 1 and not ("Dispel Magic" in third):
-            third += "\n- Dispel Magic"
-            slots3 += Dice(4)
+    if background == "Warlock" and Dice() == 1 and not ("Dispel Magic" in third):
+        third += "\n- Dispel Magic"
+        slots3 += Dice(4)
 
-        if background == "Warlock" and Dice() == 1 and not ("Divination" in third):
-            fourth += "\n- Divination"
-            slots4 += Dice(3)
+    if background == "Warlock" and Dice() == 1 and not ("Divination" in third):
+        fourth += "\n- Divination"
+        slots4 += Dice(3)
 
-        if background == "Warlock" and Dice() == 1 and not ("Freedom Of Movement" in third):
-            fourth += "\n- Freedom Of Movement"
-            slots4 += Dice(3)
+    if background == "Warlock" and Dice() == 1 and not ("Freedom Of Movement" in third):
+        fourth += "\n- Freedom Of Movement"
+        slots4 += Dice(3)
 
         # Witch
-        if background == "Witch" and Dice() == 1 and not ("Identify" in first):
-            first += "\n- Identify"
-            slots1 += Dice()
-        if background == "Witch" and Dice() == 1 and not ("Ray Of Sickness" in first):
-            first += "\n- Ray Of Sickness"
-            slots1 += Dice()
-        if background == "Witch" and Dice(7) == 1 and not ("Hold Person" in second):
-            second += "\n- Hold Person"
-            slots2 += Dice(5)
-        if background == "Witch" and Dice(7) == 1 and not ("Locate Object" in second):
-            second += "\n- Locate Object"
-            slots2 += Dice(5)
-        if background == "Witch" and Dice(8) == 1 and not ("Bestow Curse" in third):
-            third += "\n- Bestow Curse"
-            slots3 += Dice(4)
-        if background == "Witch" and Dice(8) == 1 and not ("Counterspell" in third):
-            third += "\n- Counterspell"
-            slots3 += Dice(4)
-        if background == "Witch" and Dice(8) == 1 and not ("Lightning Bolt" in third):
-            third += "\n- Lightning Bolt"
-            slots3 += Dice(4)
-        if background == "Witch" and Dice(9) == 1 and not ("Phantasmall Killer" in fourth):
-            fourth += "\n- Phantasmall Killer"
-            slots4 += Dice(3)
-        if background == "Witch" and Dice(9) == 1 and not ("Polymorph" in fourth):
-            fourth += "\n- Polymorph"
-            slots4 += Dice(3)
-        if background == "Witch" and Dice(10) == 1 and not ("Contact Other Plane" in fifth):
-            fifth += "\n- Contact Other Plane"
-            slots5 += Dice(2)
-        if background == "Witch" and Dice(10) == 1 and not ("Scrying" in fifth):
-            fifth += "\n- Scrying"
-            slots5 += Dice(2)
-        if background == "Witch" and Dice(11) == 1 and not ("Eyebite" in sixth):
-            sixth += "\n- Eyebite"
-            slots6 += 1
+    if background == "Witch" and Dice() == 1 and not ("Identify" in first):
+        first += "\n- Identify"
+        slots1 += Dice()
+    if background == "Witch" and Dice() == 1 and not ("Ray Of Sickness" in first):
+        first += "\n- Ray Of Sickness"
+        slots1 += Dice()
+    if background == "Witch" and Dice(7) == 1 and not ("Hold Person" in second):
+        second += "\n- Hold Person"
+        slots2 += Dice(5)
+    if background == "Witch" and Dice(7) == 1 and not ("Locate Object" in second):
+        second += "\n- Locate Object"
+        slots2 += Dice(5)
+    if background == "Witch" and Dice(8) == 1 and not ("Bestow Curse" in third):
+        third += "\n- Bestow Curse"
+        slots3 += Dice(4)
+    if background == "Witch" and Dice(8) == 1 and not ("Counterspell" in third):
+        third += "\n- Counterspell"
+        slots3 += Dice(4)
+    if background == "Witch" and Dice(8) == 1 and not ("Lightning Bolt" in third):
+        third += "\n- Lightning Bolt"
+        slots3 += Dice(4)
+    if background == "Witch" and Dice(9) == 1 and not ("Phantasmall Killer" in fourth):
+        fourth += "\n- Phantasmall Killer"
+        slots4 += Dice(3)
+    if background == "Witch" and Dice(9) == 1 and not ("Polymorph" in fourth):
+        fourth += "\n- Polymorph"
+        slots4 += Dice(3)
+    if background == "Witch" and Dice(10) == 1 and not ("Contact Other Plane" in fifth):
+        fifth += "\n- Contact Other Plane"
+        slots5 += Dice(2)
+    if background == "Witch" and Dice(10) == 1 and not ("Scrying" in fifth):
+        fifth += "\n- Scrying"
+        slots5 += Dice(2)
+    if background == "Witch" and Dice(11) == 1 and not ("Eyebite" in sixth):
+        sixth += "\n- Eyebite"
+        slots6 += 1
 
 ## RACES
 
         # ABERRATION.
-        if race == "Aberration" and Dice() == 1 and not ("Create Food and Water" in cantrip):   cantrip += "\n- Create Food and Water. \n\t The monstrosity magically creates enough food and water to sustain itself for 24 hours."
-        if race == "Aberration" and Dice() == 1 and not ("Rotting Gaze" in cantrip):            cantrip += "\n- Rotting Gaze. \n\t The aberration targets one creature it can see within 30 feet of it. The target must succeed on a DC 10+%CON Constitution saving throw against this magic or take 10 (3d6) necrotic damage."
-        if race == "Aberration" and Dice(7) == 1 and not ("Weird Insight" in cantrip):          cantrip += "\n- Weird Insight. \n\t The aberration targets one creature it can see within 30 feet of it. The target must contest its Charisma (Deception) check against the aberration's Wisdom (Insight) check. If the aberration wins, it magically learns one fact or secret about the target. The target automatically wins if it is immune to being charmed."
-        if race == "Aberration" and Dice() == 1 and not ("Confusion Ray" in cantrip):           cantrip += "\n- Confusion Ray. \n\t The target must succeed on a DC 13 Wisdom saving throw, or it can't take reactions until the end of its next turn. On its turn, the target can't move, and it uses its action to make a melee or ranged attack against a randomly determined creature within range. If the target can't attack, it does nothing on its turn."
-        if race == "Aberration" and Dice(7) == 1 and not ("Paralyzing Ray" in cantrip):         cantrip += "\n- Paralyzing Ray. \n\t The target must succeed on a DC 13 Constitution saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
-        if race == "Aberration" and Dice() == 1 and not ("Fear Ray" in cantrip):                cantrip += "\n- Fear Ray. \n\t The target must succeed on a DC 13 Wisdom saving throw or be frightened for 1 minute. The target can repeat the saving throw at the end of each of its turns, with disadvantage if the monstrosity is visible to the target, ending the effect on itself on a success."
-        if race == "Aberration" and Dice() == 1 and not ("Wounding Ray" in cantrip):            cantrip += "\n- Wounding Ray. \n\t The target must make a DC 13 Constitution saving throw, taking 16 (3d10) necrotic damage on a failed save, or half as much damage on a successful one."
-        if race == "Aberration" and Dice(7) == 1 and not ("Stench Spray" in one):       one += "\n- Stench Spray (1/Day). \n\t Each creature in a 15-foot cone originating from the Aberration must succeed on a DC 10 Dexterity saving throw or be coated in a foul-smelling liquid. A coated creature exudes a horrible stench for 1d4 hours. The coated creature is poisoned as long as the stench lasts, and other creatures are poisoned while with in 5 feet of the coated creature. A creature can remove the stench on itself by using a short rest to bathe in water, alcohol, or vinegar."
+    if race == "Aberration" and Dice() == 1 and not ("Create Food and Water" in cantrip):   cantrip += "\n- Create Food and Water. \n\t The monstrosity magically creates enough food and water to sustain itself for 24 hours."
+    if race == "Aberration" and Dice() == 1 and not ("Rotting Gaze" in cantrip):            cantrip += "\n- Rotting Gaze. \n\t The aberration targets one creature it can see within 30 feet of it. The target must succeed on a DC 10+%CON Constitution saving throw against this magic or take 10 (3d6) necrotic damage."
+    if race == "Aberration" and Dice(7) == 1 and not ("Weird Insight" in cantrip):          cantrip += "\n- Weird Insight. \n\t The aberration targets one creature it can see within 30 feet of it. The target must contest its Charisma (Deception) check against the aberration's Wisdom (Insight) check. If the aberration wins, it magically learns one fact or secret about the target. The target automatically wins if it is immune to being charmed."
+    if race == "Aberration" and Dice() == 1 and not ("Confusion Ray" in cantrip):           cantrip += "\n- Confusion Ray. \n\t The target must succeed on a DC 13 Wisdom saving throw, or it can't take reactions until the end of its next turn. On its turn, the target can't move, and it uses its action to make a melee or ranged attack against a randomly determined creature within range. If the target can't attack, it does nothing on its turn."
+    if race == "Aberration" and Dice(7) == 1 and not ("Paralyzing Ray" in cantrip):         cantrip += "\n- Paralyzing Ray. \n\t The target must succeed on a DC 13 Constitution saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
+    if race == "Aberration" and Dice() == 1 and not ("Fear Ray" in cantrip):                cantrip += "\n- Fear Ray. \n\t The target must succeed on a DC 13 Wisdom saving throw or be frightened for 1 minute. The target can repeat the saving throw at the end of each of its turns, with disadvantage if the monstrosity is visible to the target, ending the effect on itself on a success."
+    if race == "Aberration" and Dice() == 1 and not ("Wounding Ray" in cantrip):            cantrip += "\n- Wounding Ray. \n\t The target must make a DC 13 Constitution saving throw, taking 16 (3d10) necrotic damage on a failed save, or half as much damage on a successful one."
+    if race == "Aberration" and Dice(7) == 1 and not ("Stench Spray" in one):       one += "\n- Stench Spray (1/Day). \n\t Each creature in a 15-foot cone originating from the Aberration must succeed on a DC 10 Dexterity saving throw or be coated in a foul-smelling liquid. A coated creature exudes a horrible stench for 1d4 hours. The coated creature is poisoned as long as the stench lasts, and other creatures are poisoned while with in 5 feet of the coated creature. A creature can remove the stench on itself by using a short rest to bathe in water, alcohol, or vinegar."
 
         # AVEN
-        if race == "Aven" and Dice(8) == 1 and not ("Summon Air Elemental" in cantrip):     cantrip += "\n- Summon Air Elemental. \n\t Five Aven within 30 feet of each other can magically summon an air elemental. Each of the five must use its action and movement on three consecutive turns to perform an aerial dance and must maintain concentration while doing so (as if concentrating on a spell). When all five have finished their third turn of the dance, the elemental appears in an unoccupied space within 60 feet of them. It is friendly toward them and obeys their spoken commands. It remains for 1 hour, until it or all its summoners die, or until any of its summoners dismisses it as a bonus action. A summoner can't perform the dance again until it finishes a short rest. When the elemental returns to the Elemental Plane of Air, any Aven within 5 feet of it can return with it."
+    if race == "Aven" and Dice(8) == 1 and not ("Summon Air Elemental" in cantrip):     cantrip += "\n- Summon Air Elemental. \n\t Five Aven within 30 feet of each other can magically summon an air elemental. Each of the five must use its action and movement on three consecutive turns to perform an aerial dance and must maintain concentration while doing so (as if concentrating on a spell). When all five have finished their third turn of the dance, the elemental appears in an unoccupied space within 60 feet of them. It is friendly toward them and obeys their spoken commands. It remains for 1 hour, until it or all its summoners die, or until any of its summoners dismisses it as a bonus action. A summoner can't perform the dance again until it finishes a short rest. When the elemental returns to the Elemental Plane of Air, any Aven within 5 feet of it can return with it."
 
-        # BEASTS AND BEASTFOLK
-        if race == "Beast" and Dice() == 1 and not ("Cold Breath" in cantrip):      cantrip += "\n- Cold Breath. \t (Recharge 5–6). \n\t The beast exhales a blast of freezing wind in a 15-foot cone. Each creature in that area must make a DC [10+%CON] Dexterity saving throw, taking 18 (4d8) cold damage on a failed save, or half as much damage on a successful one."
+    # BEASTS AND BEASTFOLK
+    if race == "Beast" and Dice() == 1 and not ("Cold Breath" in cantrip):      cantrip += "\n- Cold Breath. \t (Recharge 5–6). \n\t The beast exhales a blast of freezing wind in a 15-foot cone. Each creature in that area must make a DC [10+%CON] Dexterity saving throw, taking 18 (4d8) cold damage on a failed save, or half as much damage on a successful one."
 
-        if race == "Beastfolk" and Dice(10) == 1 and not ("Sleep Gaze" in cantrip):     cantrip += "\n- Sleep Gaze. \n\t The Beastfolk gazes at one creature it can see within 30 feet of it. The target must make a DC [10+%Wis] Wisdom saving throw. On a failed save, the target succumbs to a magical slumber, falling unconscious for 10 minutes or until someone uses an action to shake the target awake. A creature that successfully saves against the effect is immune to this Beastfolk's gaze for the next 24 hours. Undead and creatures immune to being charmed aren't affected by it."
-        if race == "Beastfolk" and Dice(10) == 1 and not ("Sacred Flame" in cantrip):   cantrip += "\n- Sacred Flame."
-        if race == "Beastfolk" and Dice() == 1 and not ("Mage Hand" in cantrip):        cantrip += "\n- Mage Hand (invisible)."
-        if race == "Beastfolk" and Dice() == 1 and not ("Thaumaturgy" in cantrip):      cantrip += "\n- Thaumaturgy."
-        if race == "Beastfolk" and Dice() == 1 and not ("Feather Fall" in cantrip):     cantrip += "\n- Feather Fall."
-        if race == "Beastfolk" and Dice() == 1 and not ("Dancing Lights" in cantrip):   cantrip += "\n- Dancing Lights."
-        if race == "Beastfolk" and Dice() == 1 and not ("Poison Spray" in cantrip):     cantrip += "\n- Poison Spray."
+    if race == "Beastfolk" and Dice(10) == 1 and not ("Sleep Gaze" in cantrip):     cantrip += "\n- Sleep Gaze. \n\t The Beastfolk gazes at one creature it can see within 30 feet of it. The target must make a DC [10+%Wis] Wisdom saving throw. On a failed save, the target succumbs to a magical slumber, falling unconscious for 10 minutes or until someone uses an action to shake the target awake. A creature that successfully saves against the effect is immune to this Beastfolk's gaze for the next 24 hours. Undead and creatures immune to being charmed aren't affected by it."
+    if race == "Beastfolk" and Dice(10) == 1 and not ("Sacred Flame" in cantrip):   cantrip += "\n- Sacred Flame."
+    if race == "Beastfolk" and Dice() == 1 and not ("Mage Hand" in cantrip):        cantrip += "\n- Mage Hand (invisible)."
+    if race == "Beastfolk" and Dice() == 1 and not ("Thaumaturgy" in cantrip):      cantrip += "\n- Thaumaturgy."
+    if race == "Beastfolk" and Dice() == 1 and not ("Feather Fall" in cantrip):     cantrip += "\n- Feather Fall."
+    if race == "Beastfolk" and Dice() == 1 and not ("Dancing Lights" in cantrip):   cantrip += "\n- Dancing Lights."
+    if race == "Beastfolk" and Dice() == 1 and not ("Poison Spray" in cantrip):     cantrip += "\n- Poison Spray."
 
-        if race == "Beastfolk" and Dice() == 1 and not ("Invisibility" in one):     one += "\n- Invisibility (self only)."
-        if race == "Beastfolk" and Dice() == 1 and not ("Cure Wounds" in one):      one += "\n- Cure Wounds."
-        if race == "Beastfolk" and Dice() == 1 and not ("Enlarge/Reduce" in one):   one += "\n- Enlarge/Reduce."
-        if race == "Beastfolk" and Dice() == 1 and not ("Heat Metal" in one):       one += "\n- Heat Metal."
-        if race == "Beastfolk" and Dice() == 1 and not ("Mirror Image" in one):     one += "\n- Mirror Image."
-        if race == "Beastfolk" and Dice() == 1 and not ("Darkness" in one):         one += "\n- Darkness."
-        if race == "Beastfolk" and Dice() == 1 and not ("Faerie Fire" in one):      one += "\n- Faerie Fire."
+    if race == "Beastfolk" and Dice() == 1 and not ("Invisibility" in one):     one += "\n- Invisibility (self only)."
+    if race == "Beastfolk" and Dice() == 1 and not ("Cure Wounds" in one):      one += "\n- Cure Wounds."
+    if race == "Beastfolk" and Dice() == 1 and not ("Enlarge/Reduce" in one):   one += "\n- Enlarge/Reduce."
+    if race == "Beastfolk" and Dice() == 1 and not ("Heat Metal" in one):       one += "\n- Heat Metal."
+    if race == "Beastfolk" and Dice() == 1 and not ("Mirror Image" in one):     one += "\n- Mirror Image."
+    if race == "Beastfolk" and Dice() == 1 and not ("Darkness" in one):         one += "\n- Darkness."
+    if race == "Beastfolk" and Dice() == 1 and not ("Faerie Fire" in one):      one += "\n- Faerie Fire."
 
-        if race == "Beastfolk" and Dice() == 1 and not ("Blur" in two):             two += "\n- Blur."
-        if race == "Beastfolk" and Dice() == 1 and not ("Magic Weapon" in two):     two += "\n- Magic Weapon."
+    if race == "Beastfolk" and Dice() == 1 and not ("Blur" in two):             two += "\n- Blur."
+    if race == "Beastfolk" and Dice() == 1 and not ("Magic Weapon" in two):     two += "\n- Magic Weapon."
 
 
     
-        # CELESTIALS.
-        ## Cantrips and At Will magic
-        if race == "Celestial" and Dice() == 1 and not ("Light" in cantrip):                cantrip += "\n- Light"
-        if race == "Celestial" and Dice() == 1 and not ("Sacred Flame" in cantrip):         cantrip += "\n- Sacred Flame"
-        if race == "Celestial" and Dice() == 1 and not ("Thaumaturgy" in cantrip):          cantrip += "\n- Thaumaturgy"
-        if race == "Celestial" and Dice() == 1 and not ("Detect Evil And Good" in cantrip): cantrip += "\n- Detect Evil And Good"
-        if race == "Celestial" and Dice() == 1 and not ("Detect Magic" in cantrip):         cantrip += "\n- Detect Magic."
-        if race == "Celestial" and Dice() == 1 and not ("Detect Thoughts" in cantrip):      cantrip += "\n- Detect Thoughts."
-        if race == "Celestial" and Dice() == 1 and not ("Druidcraft" in cantrip):           cantrip += "\n- Druidcraft."
-        if race == "Celestial" and Dice() == 1 and not ("Pass Without Trace" in cantrip):   cantrip += "\n- Pass Without Trace."
+    # CELESTIALS.
+    ## Cantrips and At Will magic
+    if race == "Celestial" and Dice() == 1 and not ("Light" in cantrip):                cantrip += "\n- Light"
+    if race == "Celestial" and Dice() == 1 and not ("Sacred Flame" in cantrip):         cantrip += "\n- Sacred Flame"
+    if race == "Celestial" and Dice() == 1 and not ("Thaumaturgy" in cantrip):          cantrip += "\n- Thaumaturgy"
+    if race == "Celestial" and Dice() == 1 and not ("Detect Evil And Good" in cantrip): cantrip += "\n- Detect Evil And Good"
+    if race == "Celestial" and Dice() == 1 and not ("Detect Magic" in cantrip):         cantrip += "\n- Detect Magic."
+    if race == "Celestial" and Dice() == 1 and not ("Detect Thoughts" in cantrip):      cantrip += "\n- Detect Thoughts."
+    if race == "Celestial" and Dice() == 1 and not ("Druidcraft" in cantrip):           cantrip += "\n- Druidcraft."
+    if race == "Celestial" and Dice() == 1 and not ("Pass Without Trace" in cantrip):   cantrip += "\n- Pass Without Trace."
         
 
         ## Three times a Day
-        if race == "Celestial" and Dice() == 1 and not ("Bless" in three):                  three += "\n- Bless"
-        if race == "Celestial" and Dice() == 1 and not ("Cure Wounds" in three):            three += "\n- Cure Wounds"
-        if race == "Celestial" and Dice() == 1 and not ("Create Food And Water" in three):  three += "\n- Create Food And Water"
-        if race == "Celestial" and Dice() == 1 and not ("Lesser Restoration" in three):     three += "\n- Lesser Restoration"
-        if race == "Celestial" and Dice() == 1 and not ("Protection From Poison" in three): three += "\n- Protection From Poison"
-        if race == "Celestial" and Dice() == 1 and not ("Sanctuary" in three):              three += "\n- Sanctuary"
-        if race == "Celestial" and Dice() == 1 and not ("Shield" in three):                 three += "\n- Shield"
-        if race == "Celestial" and Dice() == 1 and not ("Healing Touch" in three):          three += "\n- Healing Touch \n\t The celestial touches another creature. The target magically regains 10 (2d8 + %CON) hit points. In addition, the touch removes all diseases and neutralizes all poisons afflicting the target."
+    if race == "Celestial" and Dice() == 1 and not ("Bless" in three):                  three += "\n- Bless"
+    if race == "Celestial" and Dice() == 1 and not ("Cure Wounds" in three):            three += "\n- Cure Wounds"
+    if race == "Celestial" and Dice() == 1 and not ("Create Food And Water" in three):  three += "\n- Create Food And Water"
+    if race == "Celestial" and Dice() == 1 and not ("Lesser Restoration" in three):     three += "\n- Lesser Restoration"
+    if race == "Celestial" and Dice() == 1 and not ("Protection From Poison" in three): three += "\n- Protection From Poison"
+    if race == "Celestial" and Dice() == 1 and not ("Sanctuary" in three):              three += "\n- Sanctuary"
+    if race == "Celestial" and Dice() == 1 and not ("Shield" in three):                 three += "\n- Shield"
+    if race == "Celestial" and Dice() == 1 and not ("Healing Touch" in three):          three += "\n- Healing Touch \n\t The celestial touches another creature. The target magically regains 10 (2d8 + %CON) hit points. In addition, the touch removes all diseases and neutralizes all poisons afflicting the target."
 
         ## One time a Day
-        if race == "Celestial" and Dice() == 1 and not ("Dream" in one):                    one += "\n- Dream"
-        if race == "Celestial" and Dice() == 1 and not ("Greater Restoration" in one):      one += "\n- Greater Restoration"
-        if race == "Celestial" and Dice() == 1 and not ("Scrying" in one):                  one += "\n- Scrying"
-        if race == "Celestial" and Dice() == 1 and not ("Calm Emotions" in one):            one += "\n- Calm Emotions"
-        if race == "Celestial" and Dice() == 1 and not ("Dispel Evil And Good" in one):     one += "\n- Dispel Evil And Good"
-        if race == "Celestial" and Dice() == 1 and not ("Entangle" in one):                 one += "\n- Entangle"
-        if race == "Celestial" and Dice() == 1 and not ("Teleport" in one):                 one += "\n- Teleport \n\t The celestial magically teleports itself and up to three willing creatures it can see within 5 feet of it, along with any equipment they are wearing or carrying, to a location the celestial is familiar with, up to 1 mile away."
+    if race == "Celestial" and Dice() == 1 and not ("Dream" in one):                    one += "\n- Dream"
+    if race == "Celestial" and Dice() == 1 and not ("Greater Restoration" in one):      one += "\n- Greater Restoration"
+    if race == "Celestial" and Dice() == 1 and not ("Scrying" in one):                  one += "\n- Scrying"
+    if race == "Celestial" and Dice() == 1 and not ("Calm Emotions" in one):            one += "\n- Calm Emotions"
+    if race == "Celestial" and Dice() == 1 and not ("Dispel Evil And Good" in one):     one += "\n- Dispel Evil And Good"
+    if race == "Celestial" and Dice() == 1 and not ("Entangle" in one):                 one += "\n- Entangle"
+    if race == "Celestial" and Dice() == 1 and not ("Teleport" in one):                 one += "\n- Teleport \n\t The celestial magically teleports itself and up to three willing creatures it can see within 5 feet of it, along with any equipment they are wearing or carrying, to a location the celestial is familiar with, up to 1 mile away."
 
-        # CONSTRUCTS.
-        if race == "Construct" and Dice(2) == 1 and not ("Light" in cantrip):           cantrip += "\n- Light"
-        if race == "Construct" and Dice(2) == 1 and not ("Paralysis Gas" in cantrip):   cantrip += "\n- Paralysis Gas (Recharge 5–6). \n\t The construct exhales a 30-foot cone of gas. Each creature in that area must succeed on a DC 10+%CON Constitution saving throw or be paralyzed for 1 minute. A creature can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
+    # CONSTRUCTS.
+    if race == "Construct" and Dice(2) == 1 and not ("Light" in cantrip):           cantrip += "\n- Light"
+    if race == "Construct" and Dice(2) == 1 and not ("Paralysis Gas" in cantrip):   cantrip += "\n- Paralysis Gas (Recharge 5–6). \n\t The construct exhales a 30-foot cone of gas. Each creature in that area must succeed on a DC 10+%CON Constitution saving throw or be paralyzed for 1 minute. A creature can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
 
-        # DRAGONS.
+    # DRAGONS.
 
-        #Breath weapons
-        if race == "Dragon" and Dice(3) == 1:
-            d = 20
-            if Dice(d) == 1 and not (" Fire Breath" in cantrip):        cantrip += "\n  - Fire Breath \n\t(Recharge 5-6) The dragon exhales fire in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 14 (4d6) fire damage on a failed save, or half as much damage on a successful one."
-            elif Dice(d) == 1 and not ("Fire Breath" in cantrip):       cantrip += "\n  - Fire Breath \n\t(Recharge 5-6) The dragon exhales fire in a 15-foot cone. Each creature in that area must make a DC [10+%Con] Dexterity saving throw, taking 22 (4d10) fire damage on a failed save, or half as much damage on a successful one."
-            elif Dice(d) == 1 and not ("Fire Breath" in cantrip):       cantrip += "\n  - Fire Breath \n\t(Recharge 5-6) The dragon exhales fire in a 15-foot cone. Each creature in that area must make a DC [10+%Con] Dexterity saving throw, taking 24 (7d6) fire damage on a failed save, or half as much damage on a successful one."
-            if Dice(d) == 2 and not ("Sleep Breath" in cantrip):        cantrip += "\n  - Sleep Breath \n\t(Recharge 5-6) The dragon exhales sleep gas in a 15-foot cone. Each creature in that area must succeed on a DC [10+%Con] Constitution saving throw or fall unconscious for 1 minute. This effect ends for a creature if the creature takes damage or someone uses an action to wake it."
-            if Dice(d) == 3 and not ("Acid Breath" in cantrip):         cantrip += "\n  - Acid Breath \n\t(Recharge 5-6) The dragon exhales acid in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 18 (4d8) acid damage on a failed save, or half as much damage on a successful one"
-            if Dice(d) == 4 and not ("Slowing Breath" in cantrip):      cantrip += "\n  - Slowing Breath \n\t(Recharge 5-6) The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a DC [10+%Con] Constitution saving throw. On a failed save, the creature can't use reactions, its speed is halved, and it can't make more than one attack on its turn. In addition, the creature can use either an action or a bonus action on its turn, but not both. These effects last for 1 minute. The creature can repeat the saving throw at the start of each of its turns, ending the effect on itself with a successful save."
-            if Dice(d) == 5 and not ("Euphoria Breath" in cantrip):     cantrip += "\n  - Euphoria Breath \n\t(Recharge 5-6) The dragon exhales a puff of euphoria gas at one creature within 5 feet of it. The target must succeed on a DC [10+%Con] Wisdom saving throw, or for 1 minute, the target can't take reactions and must roll a d6 at the start of each of its turns to determine its behavior during the turn: \n\t\t 1–4. The target takes no action or bonus action and uses all of its movement to move in a random direction. \n\t\t 5–6. The target doesn't move, and the only thing it can do on its turn is make a DC [10+%Con] Wisdom saving throw, ending the effect on itself on a success."
-            if Dice(d) == 6 and not ("Repulsion Breath" in cantrip):    cantrip += "\n  - Repulsion Breath \n\t(Recharge 5-6) The dragon exhales repulsion energy in a 30-foot cone. Each creature in that area must succeed on a DC [10+%Con] Strength saving throw. On a failed save, the creature is pushed 30 feet away from the dragon."
-            if Dice(d) == 7 and not ("Poison Breath" in cantrip):       cantrip += "\n  - Poison Breath \n\t(Recharge 5-6) The dragon exhales poisonous gas in a 15-foot cone. Each creature in that area must make a DC [10+%Con] Constitution saving throw, taking 21 (6d6) poison damage on a failed save, or half as much damage on a successful one."
-            if Dice(d) == 8 and not ("Lightning Breath" in cantrip):    cantrip += "\n  - Lightning Breath \n\t(Recharge 5-6) The dragon exhales lightning in a 40-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 16 (3d10) lightning damage on a failed save, or half as much damage on a successful one."
-            elif Dice(d) == 8 and not ("Lightning Breath" in cantrip):  cantrip += "\n  - Lightning Breath \n\t(Recharge 5-6) The dragon exhales lightning in a 30-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 22 (4d10) lightning damage on a failed save, or half as much damage on a successful one."
-            if Dice(d) == 9 and not ("Cold Breath" in cantrip):         cantrip += "\n  - Cold Breath \n\t(Recharge 5-6) The dragon exhales an icy blast in a 15-foot cone. Each creature in that area must make a DC [10+CON%] Constitution saving throw, taking 18 (4d8) cold damage on a failed save, or half as much damage on a successful one."
-            elif Dice(d) == 10 and not ("Cold Breath" in cantrip):      cantrip += "\n  - Cold Breath \n\t(Recharge 5-6) The dragon exhales an icy blast in a 15-foot cone. Each creature in that area must make a DC [10+CON%] Constitution saving throw, taking 22 (5d8) cold damage on a failed save, or half as much damage on a successful one."
-            if Dice(d) == 11 and not ("Paralyzing Breath" in cantrip):  cantrip += "\n  - Paralyzing Breath \n\t(Recharge 5-6) The dragon exhales paralyzing gas in a 15-foot cone. Each creature in that area must succeed on a [10+CON%] Constitution saving throw or be paralyzed for 1 minute. A creature can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
-            if Dice(d) == 12 and not ("WeakeningBreath" in cantrip):    cantrip += "\n  - Weakening Breath \n\t(Recharge 5-6) The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a DC [10+CON%] Strength saving throw or have disadvantage on Strength-based attack rolls, Strength checks, and Strength saving throws for 1 minute. A creature can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
+    #Breath weapons
+    if race == "Dragon" and Dice(3) == 1:
+        d = 20
+        if Dice(d) == 1 and not (" Fire Breath" in cantrip):        cantrip += "\n  - Fire Breath \n\t(Recharge 5-6) The dragon exhales fire in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 14 (4d6) fire damage on a failed save, or half as much damage on a successful one."
+        elif Dice(d) == 1 and not ("Fire Breath" in cantrip):       cantrip += "\n  - Fire Breath \n\t(Recharge 5-6) The dragon exhales fire in a 15-foot cone. Each creature in that area must make a DC [10+%Con] Dexterity saving throw, taking 22 (4d10) fire damage on a failed save, or half as much damage on a successful one."
+        elif Dice(d) == 1 and not ("Fire Breath" in cantrip):       cantrip += "\n  - Fire Breath \n\t(Recharge 5-6) The dragon exhales fire in a 15-foot cone. Each creature in that area must make a DC [10+%Con] Dexterity saving throw, taking 24 (7d6) fire damage on a failed save, or half as much damage on a successful one."
+        if Dice(d) == 2 and not ("Sleep Breath" in cantrip):        cantrip += "\n  - Sleep Breath \n\t(Recharge 5-6) The dragon exhales sleep gas in a 15-foot cone. Each creature in that area must succeed on a DC [10+%Con] Constitution saving throw or fall unconscious for 1 minute. This effect ends for a creature if the creature takes damage or someone uses an action to wake it."
+        if Dice(d) == 3 and not ("Acid Breath" in cantrip):         cantrip += "\n  - Acid Breath \n\t(Recharge 5-6) The dragon exhales acid in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 18 (4d8) acid damage on a failed save, or half as much damage on a successful one"
+        if Dice(d) == 4 and not ("Slowing Breath" in cantrip):      cantrip += "\n  - Slowing Breath \n\t(Recharge 5-6) The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a DC [10+%Con] Constitution saving throw. On a failed save, the creature can't use reactions, its speed is halved, and it can't make more than one attack on its turn. In addition, the creature can use either an action or a bonus action on its turn, but not both. These effects last for 1 minute. The creature can repeat the saving throw at the start of each of its turns, ending the effect on itself with a successful save."
+        if Dice(d) == 5 and not ("Euphoria Breath" in cantrip):     cantrip += "\n  - Euphoria Breath \n\t(Recharge 5-6) The dragon exhales a puff of euphoria gas at one creature within 5 feet of it. The target must succeed on a DC [10+%Con] Wisdom saving throw, or for 1 minute, the target can't take reactions and must roll a d6 at the start of each of its turns to determine its behavior during the turn: \n\t\t 1–4. The target takes no action or bonus action and uses all of its movement to move in a random direction. \n\t\t 5–6. The target doesn't move, and the only thing it can do on its turn is make a DC [10+%Con] Wisdom saving throw, ending the effect on itself on a success."
+        if Dice(d) == 6 and not ("Repulsion Breath" in cantrip):    cantrip += "\n  - Repulsion Breath \n\t(Recharge 5-6) The dragon exhales repulsion energy in a 30-foot cone. Each creature in that area must succeed on a DC [10+%Con] Strength saving throw. On a failed save, the creature is pushed 30 feet away from the dragon."
+        if Dice(d) == 7 and not ("Poison Breath" in cantrip):       cantrip += "\n  - Poison Breath \n\t(Recharge 5-6) The dragon exhales poisonous gas in a 15-foot cone. Each creature in that area must make a DC [10+%Con] Constitution saving throw, taking 21 (6d6) poison damage on a failed save, or half as much damage on a successful one."
+        if Dice(d) == 8 and not ("Lightning Breath" in cantrip):    cantrip += "\n  - Lightning Breath \n\t(Recharge 5-6) The dragon exhales lightning in a 40-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 16 (3d10) lightning damage on a failed save, or half as much damage on a successful one."
+        elif Dice(d) == 8 and not ("Lightning Breath" in cantrip):  cantrip += "\n  - Lightning Breath \n\t(Recharge 5-6) The dragon exhales lightning in a 30-foot line that is 5 feet wide. Each creature in that line must make a DC [10+%Con] Dexterity saving throw, taking 22 (4d10) lightning damage on a failed save, or half as much damage on a successful one."
+        if Dice(d) == 9 and not ("Cold Breath" in cantrip):         cantrip += "\n  - Cold Breath \n\t(Recharge 5-6) The dragon exhales an icy blast in a 15-foot cone. Each creature in that area must make a DC [10+CON%] Constitution saving throw, taking 18 (4d8) cold damage on a failed save, or half as much damage on a successful one."
+        elif Dice(d) == 10 and not ("Cold Breath" in cantrip):      cantrip += "\n  - Cold Breath \n\t(Recharge 5-6) The dragon exhales an icy blast in a 15-foot cone. Each creature in that area must make a DC [10+CON%] Constitution saving throw, taking 22 (5d8) cold damage on a failed save, or half as much damage on a successful one."
+        if Dice(d) == 11 and not ("Paralyzing Breath" in cantrip):  cantrip += "\n  - Paralyzing Breath \n\t(Recharge 5-6) The dragon exhales paralyzing gas in a 15-foot cone. Each creature in that area must succeed on a [10+CON%] Constitution saving throw or be paralyzed for 1 minute. A creature can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
+        if Dice(d) == 12 and not ("WeakeningBreath" in cantrip):    cantrip += "\n  - Weakening Breath \n\t(Recharge 5-6) The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a DC [10+CON%] Strength saving throw or have disadvantage on Strength-based attack rolls, Strength checks, and Strength saving throws for 1 minute. A creature can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
 
-        if race == "Dragon" and Dice(12) == 1 and not ("Change Shape" in cantrip):  cantrip += "\n- Change Shape \n\t The dragon magically polymorphs into a humanoid or beast that has a challenge rating no higher than its own, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form (the dragon's choice).In a new form, the dragon retains its alignment, hit points, Hit Dice, ability to speak, proficiencies, Legendary Resistance, lair actions, and Intelligence, Wisdom, and Charisma scores, as well as this action. Its statistics and capabilities are otherwise replaced by those of the new form, except any class features or legendary actions of that form."
-        if race == "Dragon" and Dice() == 1 and not ("Color Spray" in cantrip):     cantrip += "\n- Color Spray"
-        if race == "Dragon" and Dice() == 1 and not ("Dancing lights" in cantrip):  cantrip += "\n- Dancing lights"
-        if race == "Dragon" and Dice() == 1 and not ("Mage Hand" in cantrip):       cantrip += "\n- Mage Hand"
-        if race == "Dragon" and Dice() == 1 and not ("Minor Illusion" in one):      one += "\n- Minor Illusion"
-        if race == "Dragon" and Dice(8) == 1 and not ("Major Image" in one):        one += "\n- Major Image"
-        if race == "Dragon" and Dice(8) == 1 and not ("Mirror Image" in one):       one += "\n- Mirror Image"
-        if race == "Dragon" and Dice(8) == 1 and not ("Polymorph" in one):          one += "\n- Polymorph"
-        if race == "Dragon" and Dice(8) == 1 and not ("Suggestion" in one):         one += "\n- Suggestion"
+    if race == "Dragon" and Dice(12) == 1 and not ("Change Shape" in cantrip):  cantrip += "\n- Change Shape \n\t The dragon magically polymorphs into a humanoid or beast that has a challenge rating no higher than its own, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form (the dragon's choice).In a new form, the dragon retains its alignment, hit points, Hit Dice, ability to speak, proficiencies, Legendary Resistance, lair actions, and Intelligence, Wisdom, and Charisma scores, as well as this action. Its statistics and capabilities are otherwise replaced by those of the new form, except any class features or legendary actions of that form."
+    if race == "Dragon" and Dice() == 1 and not ("Color Spray" in cantrip):     cantrip += "\n- Color Spray"
+    if race == "Dragon" and Dice() == 1 and not ("Dancing lights" in cantrip):  cantrip += "\n- Dancing lights"
+    if race == "Dragon" and Dice() == 1 and not ("Mage Hand" in cantrip):       cantrip += "\n- Mage Hand"
+    if race == "Dragon" and Dice() == 1 and not ("Minor Illusion" in one):      one += "\n- Minor Illusion"
+    if race == "Dragon" and Dice(8) == 1 and not ("Major Image" in one):        one += "\n- Major Image"
+    if race == "Dragon" and Dice(8) == 1 and not ("Mirror Image" in one):       one += "\n- Mirror Image"
+    if race == "Dragon" and Dice(8) == 1 and not ("Polymorph" in one):          one += "\n- Polymorph"
+    if race == "Dragon" and Dice(8) == 1 and not ("Suggestion" in one):         one += "\n- Suggestion"
 
-        # DWARF.
-        if race == "Dwarf" and Dice(7) == 1 and not ("Enlarge" in cantrip):            cantrip += "\n- Enlarge (Recharges after a Short or Long Rest). \n\t For 1 minute, the Dwarf magically increases in size, along with anything it is wearing or carrying. While enlarged, the Dwarf is Large, doubles its damage dice on Strength-based weapon attacks (included in the attacks), and makes Strength checks and Strength saving throws with advantage. If the Dwarf lacks the room to become Large, it attains the maximum size possible in the space available."
-        if race == "Dwarf" and Dice(7) == 1 and not ("Invisibility" in cantrip):       cantrip += "\n- Invisibility (Recharges after a Short or Long Rest). \n\t The dwarf magically turns invisible until it attacks, casts a spell, or until its concentration is broken, up to 1 hour (as if concentrating on a spell). Any equipment the Dwarf wears or carries is invisible with it."
+    # DWARF.
+    if race == "Dwarf" and Dice(7) == 1 and not ("Enlarge" in cantrip):            cantrip += "\n- Enlarge (Recharges after a Short or Long Rest). \n\t For 1 minute, the Dwarf magically increases in size, along with anything it is wearing or carrying. While enlarged, the Dwarf is Large, doubles its damage dice on Strength-based weapon attacks (included in the attacks), and makes Strength checks and Strength saving throws with advantage. If the Dwarf lacks the room to become Large, it attains the maximum size possible in the space available."
+    if race == "Dwarf" and Dice(7) == 1 and not ("Invisibility" in cantrip):       cantrip += "\n- Invisibility (Recharges after a Short or Long Rest). \n\t The dwarf magically turns invisible until it attacks, casts a spell, or until its concentration is broken, up to 1 hour (as if concentrating on a spell). Any equipment the Dwarf wears or carries is invisible with it."
 
 
         
-        # ELEMENTAL.
-        if race == "Elemental" and Dice() == 1 and not ("Whirlwind" in cantrip):
-            cantrip += "\n- Whirlwind (Recharge 4–6). \n\t Each creature in the elemental's space must make a DC [11+%STR] Strength saving throw. On a failure, a target takes 15 (3d8 + 2) bludgeoning damage and is flung up 20 feet away from the elemental in a random direction and knocked prone. If a thrown target strikes an object, such as a wall or floor, the target takes 3 (1d6) bludgeoning damage for every 10 feet it was thrown. If the target is thrown at another creature, that creature must succeed on a DC 13 Dexterity saving throw or take the same damage and be knocked prone. /n/t If the saving throw is successful, the target takes half the bludgeoning damage and isn't flung away or knocked prone."
-        if race == "Elemental" and Dice() == 1 and not ("Dancing lights" in cantrip):
-            cantrip += "\n- Dancing lights"
-        if race == "Elemental" and Dice(8) == 1 and not ("Cinder breath" in cantrip):
-            cantrip += "\n- Cinder breath \n\t (Recharge 6). The Elemental exhales a 15-foot cone of smoldering ash. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw or be blinded until the end of the Elemental's next turn."
-        if race == "Elemental" and Dice(8) == 1 and not ("Blinding breath" in cantrip):
-            cantrip += "\n- Blinding breath \n\t (Recharge 6). The Elemental exhales a 15-foot cone of blinding dust. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw or be blinded for one minute."
-        if race == "Elemental" and Dice(8) == 1 and not ("Steam breath" in cantrip):
-            cantrip += "\n- Steam breath \n\t (Recharge 6). The Elemental exhales a 15-foot cone of scalding steam. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw, taking 4 (1d8) fire damage on a failed save, or half as much damage on a successful one."
-        if race == "Elemental" and Dice(8) == 1 and not ("Frost Breath" in cantrip):
-            cantrip += "\n- Frost Breath \n\t (Recharge 6). The Elemental exhales a 15-foot cone of cold air. Each creature in that area must succeed on a DC [10+%Con] Dexterity saving throw, taking 5 (2d4) cold damage on a failed save, or half as much damage on a successful one."
-        if race == "Elemental" and Dice(8) == 1 and not ("Fire Breath" in cantrip):
-            cantrip += "\n- Fire Breath \n\t (Recharge 6). The Elemental exhales a 15-foot cone of cold air. Each creature in that area must succeed on a DC [10+%Con] Dexterity saving throw, taking 7 (2d6) fire damage on a failed save, or half as much damage on a successful one."
-        if race == "Elemental":
-            if Dice(8) == 1 and not ("Summon Mephits" in one):
-                one += "\n- Summon Mephits (1/Day) \n\t The Elemental has a 25 percent chance of summoning 1d4 mephits. A summoned mephit appears in an unoccupied space within 60 feet of its summoner, acts as an ally of its summoner, and can't summon other mephits. It remains for 1 minute, until it or its summoner dies, or until its summoner dismisses it as an action."
-            if Dice() == 1 and not ("Innate Spellcasting" in one):
-                one += "\n-  Innate Spellcasting (1/Day) \n\t The Elemental can innately cast fog cloud, requiring no material components."
-            if Dice() == 1 and not ("Innate Spellcasting" in one):
-                one += "\n-  Innate Spellcasting (1/Day) \n\t The Elemental can innately cast heat metal, requiring no material components."
-            if Dice() == 1 and not ("Blur" in one):
-                one += "\n- Blur"
-            if Dice() == 1 and not ("Sleep" in one):
-                one += "\n- Sleep"
+    # ELEMENTAL.
+    if race == "Elemental" and Dice() == 1 and not ("Whirlwind" in cantrip):
+        cantrip += "\n- Whirlwind (Recharge 4–6). \n\t Each creature in the elemental's space must make a DC [11+%STR] Strength saving throw. On a failure, a target takes 15 (3d8 + 2) bludgeoning damage and is flung up 20 feet away from the elemental in a random direction and knocked prone. If a thrown target strikes an object, such as a wall or floor, the target takes 3 (1d6) bludgeoning damage for every 10 feet it was thrown. If the target is thrown at another creature, that creature must succeed on a DC 13 Dexterity saving throw or take the same damage and be knocked prone. /n/t If the saving throw is successful, the target takes half the bludgeoning damage and isn't flung away or knocked prone."
+    if race == "Elemental" and Dice() == 1 and not ("Dancing lights" in cantrip):
+        cantrip += "\n- Dancing lights"
+    if race == "Elemental" and Dice(8) == 1 and not ("Cinder breath" in cantrip):
+        cantrip += "\n- Cinder breath \n\t (Recharge 6). The Elemental exhales a 15-foot cone of smoldering ash. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw or be blinded until the end of the Elemental's next turn."
+    if race == "Elemental" and Dice(8) == 1 and not ("Blinding breath" in cantrip):
+        cantrip += "\n- Blinding breath \n\t (Recharge 6). The Elemental exhales a 15-foot cone of blinding dust. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw or be blinded for one minute."
+    if race == "Elemental" and Dice(8) == 1 and not ("Steam breath" in cantrip):
+        cantrip += "\n- Steam breath \n\t (Recharge 6). The Elemental exhales a 15-foot cone of scalding steam. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw, taking 4 (1d8) fire damage on a failed save, or half as much damage on a successful one."
+    if race == "Elemental" and Dice(8) == 1 and not ("Frost Breath" in cantrip):
+        cantrip += "\n- Frost Breath \n\t (Recharge 6). The Elemental exhales a 15-foot cone of cold air. Each creature in that area must succeed on a DC [10+%Con] Dexterity saving throw, taking 5 (2d4) cold damage on a failed save, or half as much damage on a successful one."
+    if race == "Elemental" and Dice(8) == 1 and not ("Fire Breath" in cantrip):
+        cantrip += "\n- Fire Breath \n\t (Recharge 6). The Elemental exhales a 15-foot cone of cold air. Each creature in that area must succeed on a DC [10+%Con] Dexterity saving throw, taking 7 (2d6) fire damage on a failed save, or half as much damage on a successful one."
+    if race == "Elemental":
+        if Dice(8) == 1 and not ("Summon Mephits" in one):
+            one += "\n- Summon Mephits (1/Day) \n\t The Elemental has a 25 percent chance of summoning 1d4 mephits. A summoned mephit appears in an unoccupied space within 60 feet of its summoner, acts as an ally of its summoner, and can't summon other mephits. It remains for 1 minute, until it or its summoner dies, or until its summoner dismisses it as an action."
+        if Dice() == 1 and not ("Innate Spellcasting" in one):
+            one += "\n-  Innate Spellcasting (1/Day) \n\t The Elemental can innately cast fog cloud, requiring no material components."
+        if Dice() == 1 and not ("Innate Spellcasting" in one):
+            one += "\n-  Innate Spellcasting (1/Day) \n\t The Elemental can innately cast heat metal, requiring no material components."
+        if Dice() == 1 and not ("Blur" in one):
+            one += "\n- Blur"
+        if Dice() == 1 and not ("Sleep" in one):
+            one += "\n- Sleep"
 
-        # ELF.
-        if race == "Elf" and Dice() == 1 and not ("Dancing lights" in cantrip): cantrip += "\n- Dancing lights"
-        if race == "Elf" and Dice() == 1 and not ("Darkness" in one):               one += "\n- Darkness"
-        if race == "Elf" and Dice() == 1 and not ("Faerie fire" in one):            one += "\n- Faerie fire"
-        if race == "Elf" and Dice(8) == 1 and not ("Levitate" in one):              one += "\n- Levitate (Self Only)"
+    # ELF.
+    if race == "Elf" and Dice() == 1 and not ("Dancing lights" in cantrip): cantrip += "\n- Dancing lights"
+    if race == "Elf" and Dice() == 1 and not ("Darkness" in one):               one += "\n- Darkness"
+    if race == "Elf" and Dice() == 1 and not ("Faerie fire" in one):            one += "\n- Faerie fire"
+    if race == "Elf" and Dice(8) == 1 and not ("Levitate" in one):              one += "\n- Levitate (Self Only)"
 
-        # FAE.
-        if race == "Fey" and Dice(8) == 1 and not ("Ethereal Jaunt" in cantrip):    cantrip += "\n- Ethereal Jaunt \n\t As a bonus action, the fey can magically shift from the Material Plane to the Ethereal Plane, or vice versa."
-        if race == "Fey" and Dice(10) == 1 and not ("Teleport" in cantrip):         cantrip += "\n- Teleport (Recharge 4–6). \n\t The Fey magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the Fey can make one bite attack."
-        if race == "Fey" and Dice(10) == 1 and not ("Heart Sight" in cantrip):      cantrip += "\n- Heart Sight. \n\t The Fey touches a creature and magically knows the creature's current emotional state. If the target fails a DC [10+%Cha] Charisma saving throw, the Fey also knows the creature's alignment. Celestials, fiends, and undead automatically fail the saving throw."
-        if race == "Fey" and Dice(10) == 1 and not ("Invisibility" in cantrip):     cantrip += "\n- Invisibility. \n\t The Fey  magically turns invisible until it attacks or casts a spell, or until its concentration ends (as if concentrating on a spell). Any equipment the Fey wears or carries is invisible with it."
-        if race == "Fey" and Dice() == 1 and not ("Druidcraft" in cantrip):         cantrip += "\n- Druidcraft"
-        if race == "Fey" and Dice() == 1 and not ("Dancing Lights" in cantrip):     cantrip += "\n- Dancing Lights"
-        if race == "Fey" and Dice() == 1 and not ("Detect Magic" in cantrip):       cantrip += "\n- Detect Magic"
-        if race == "Fey" and Dice(8) == 1 and not ("Minor Illusion" in cantrip):    cantrip += "\n- Minor Illusion"
-        if race == "Fey" and Dice() == 1 and not ("Magic Missile" in cantrip):      cantrip += "\n- Minor Illusion"
-        if race == "Fey" and Dice() == 1 and not ("Vicious Mockery" in cantrip):    cantrip += "\n- Vicious Mockery"
-        if race == "Fey" and Dice(8) == 1 and not ("Change Shape" in cantrip):      cantrip += "\n- Change Shape. \n\t The fey magically polymorphs into a Small or Medium humanoid, or back into their true form. Their statistics are the same in each form. Any equipment they are wearing or carrying isn't transformed. They reverts to their true form if they dies."
-        if race == "Fey" and Dice() == 1 and not ("Etherealness" in cantrip):       cantrip += "\n- Etherealness. \n\t The fey magically enters the Ethereal Plane from the Material Plane, or vice versa. To do so, the fey must have a heartstone in her possession."
-
-
-
-        if race == "Fey" and Dice() == 1 and not ("Barkskin" in one):               one += "\n- Barkskin"
-        if race == "Fey" and Dice() == 1 and not ("Pass Without Trace" in one):     one += "\n- Pass Without Trace"
-        if race == "Fey" and Dice() == 1 and not ("Shillelagh" in one):             one += "\n- Shillelagh"
-        if race == "Fey" and Dice() == 1 and not ("Confusion" in one):              one += "\n- Confusion"
-        if race == "Fey" and Dice() == 1 and not ("Dancing lights" in one):         one += "\n- Dancing lights"
-        if race == "Fey" and Dice() == 1 and not ("Detect Evil and Good" in one):   one += "\n- Detect Evil and Good"
-        if race == "Fey" and Dice() == 1 and not ("Detect Thoughts" in one):        one += "\n- Detect Thoughts"
-        if race == "Fey" and Dice() == 1 and not ("Dispel Magic" in one):           one += "\n- Dispel Magic"
-        if race == "Fey" and Dice() == 1 and not ("Entangle" in one):               one += "\n- Entangle"
-        if race == "Fey" and Dice() == 1 and not ("Fly" in one):                    one += "\n- Fly: 30 ft"
-        if race == "Fey" and Dice() == 1 and not ("Phantasmal Force" in one):       one += "\n- Phantasmal Force"
-        if race == "Fey" and Dice() == 1 and not ("Polymorph" in one):              one += "\n- Polymorph"
-        if race == "Fey" and Dice(8) == 1 and not ("Sleep" in one):                 one += "\n- Sleep"
-        if race == "Fey" and Dice(8) == 1 and not ("Charming Melody" in one):       one += "\n- Charming Melody [DC 10+%Cha Wisdom saving throw]\n\t The creature is charmed by the Fey for 1 minute. If the Fey or any of its companions harms the creature, the effect on it ends immediately."
-        if race == "Fey" and Dice(8) == 1 and not ("Frightening Strain" in one):    one += "\n- Frightening Strain [DC 10+%Cha Wisdom saving throw] \n\t The creature is charmed by the Fey for 1 minute. If the Fey or any of its companions harms the creature, the effect on it ends immediately."
-        if race == "Fey" and Dice(8) == 1 and not ("Gentle Lullaby" in one):        one += "\n- Gentle Lullaby [DC 10+%Cha Wisdom saving throw] \n\t The creature falls asleep and is unconscious for 1 minute. The effect ends if the creature takes damage or if someone takes an action to shake the creature awake."
-        if race == "Fey" and Dice(8) == 1 and not ("Nightmare Haunting" in one):    one += "\n- Nightmare Haunting \n\t While on the Ethereal Plane, the fey magically touches a sleeping humanoid on the Material Plane. A protection from evil and good spell cast on the target prevents this contact, as does a magic circle. As long as the contact persists, the target has dreadful visions. If these visions last for at least 1 hour, the target gains no benefit from its rest, and its hit point maximum is reduced by 5 (1d10). If this effect reduces the target's hit point maximum to 0, the target dies, and if the target was evil, its soul is trapped in the fey's soul bag. The reduction to the target's hit point maximum lasts until removed by the greater restoration spell or similar magic."
+    # FAE.
+    if race == "Fey" and Dice(8) == 1 and not ("Ethereal Jaunt" in cantrip):    cantrip += "\n- Ethereal Jaunt \n\t As a bonus action, the fey can magically shift from the Material Plane to the Ethereal Plane, or vice versa."
+    if race == "Fey" and Dice(10) == 1 and not ("Teleport" in cantrip):         cantrip += "\n- Teleport (Recharge 4–6). \n\t The Fey magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the Fey can make one bite attack."
+    if race == "Fey" and Dice(10) == 1 and not ("Heart Sight" in cantrip):      cantrip += "\n- Heart Sight. \n\t The Fey touches a creature and magically knows the creature's current emotional state. If the target fails a DC [10+%Cha] Charisma saving throw, the Fey also knows the creature's alignment. Celestials, fiends, and undead automatically fail the saving throw."
+    if race == "Fey" and Dice(10) == 1 and not ("Invisibility" in cantrip):     cantrip += "\n- Invisibility. \n\t The Fey  magically turns invisible until it attacks or casts a spell, or until its concentration ends (as if concentrating on a spell). Any equipment the Fey wears or carries is invisible with it."
+    if race == "Fey" and Dice() == 1 and not ("Druidcraft" in cantrip):         cantrip += "\n- Druidcraft"
+    if race == "Fey" and Dice() == 1 and not ("Dancing Lights" in cantrip):     cantrip += "\n- Dancing Lights"
+    if race == "Fey" and Dice() == 1 and not ("Detect Magic" in cantrip):       cantrip += "\n- Detect Magic"
+    if race == "Fey" and Dice(8) == 1 and not ("Minor Illusion" in cantrip):    cantrip += "\n- Minor Illusion"
+    if race == "Fey" and Dice() == 1 and not ("Magic Missile" in cantrip):      cantrip += "\n- Minor Illusion"
+    if race == "Fey" and Dice() == 1 and not ("Vicious Mockery" in cantrip):    cantrip += "\n- Vicious Mockery"
+    if race == "Fey" and Dice(8) == 1 and not ("Change Shape" in cantrip):      cantrip += "\n- Change Shape. \n\t The fey magically polymorphs into a Small or Medium humanoid, or back into their true form. Their statistics are the same in each form. Any equipment they are wearing or carrying isn't transformed. They reverts to their true form if they dies."
+    if race == "Fey" and Dice() == 1 and not ("Etherealness" in cantrip):       cantrip += "\n- Etherealness. \n\t The fey magically enters the Ethereal Plane from the Material Plane, or vice versa. To do so, the fey must have a heartstone in her possession."
 
 
-        if race == "Fey" and Dice() == 1 and not ("Plane Shift" in two):            two += "\n- Plane Shift (self only)"
-        if race == "Fey" and Dice() == 1 and not ("Ray Of Enfeeblement" in two):    two += "\n- Ray Of Enfeeblement"
-        if race == "Fey" and Dice() == 1 and not ("Sleep" in two):                  two += "\n- Sleep"
+
+    if race == "Fey" and Dice() == 1 and not ("Barkskin" in one):               one += "\n- Barkskin"
+    if race == "Fey" and Dice() == 1 and not ("Pass Without Trace" in one):     one += "\n- Pass Without Trace"
+    if race == "Fey" and Dice() == 1 and not ("Shillelagh" in one):             one += "\n- Shillelagh"
+    if race == "Fey" and Dice() == 1 and not ("Confusion" in one):              one += "\n- Confusion"
+    if race == "Fey" and Dice() == 1 and not ("Dancing lights" in one):         one += "\n- Dancing lights"
+    if race == "Fey" and Dice() == 1 and not ("Detect Evil and Good" in one):   one += "\n- Detect Evil and Good"
+    if race == "Fey" and Dice() == 1 and not ("Detect Thoughts" in one):        one += "\n- Detect Thoughts"
+    if race == "Fey" and Dice() == 1 and not ("Dispel Magic" in one):           one += "\n- Dispel Magic"
+    if race == "Fey" and Dice() == 1 and not ("Entangle" in one):               one += "\n- Entangle"
+    if race == "Fey" and Dice() == 1 and not ("Fly" in one):                    one += "\n- Fly: 30 ft"
+    if race == "Fey" and Dice() == 1 and not ("Phantasmal Force" in one):       one += "\n- Phantasmal Force"
+    if race == "Fey" and Dice() == 1 and not ("Polymorph" in one):              one += "\n- Polymorph"
+    if race == "Fey" and Dice(8) == 1 and not ("Sleep" in one):                 one += "\n- Sleep"
+    if race == "Fey" and Dice(8) == 1 and not ("Charming Melody" in one):       one += "\n- Charming Melody [DC 10+%Cha Wisdom saving throw]\n\t The creature is charmed by the Fey for 1 minute. If the Fey or any of its companions harms the creature, the effect on it ends immediately."
+    if race == "Fey" and Dice(8) == 1 and not ("Frightening Strain" in one):    one += "\n- Frightening Strain [DC 10+%Cha Wisdom saving throw] \n\t The creature is charmed by the Fey for 1 minute. If the Fey or any of its companions harms the creature, the effect on it ends immediately."
+    if race == "Fey" and Dice(8) == 1 and not ("Gentle Lullaby" in one):        one += "\n- Gentle Lullaby [DC 10+%Cha Wisdom saving throw] \n\t The creature falls asleep and is unconscious for 1 minute. The effect ends if the creature takes damage or if someone takes an action to shake the creature awake."
+    if race == "Fey" and Dice(8) == 1 and not ("Nightmare Haunting" in one):    one += "\n- Nightmare Haunting \n\t While on the Ethereal Plane, the fey magically touches a sleeping humanoid on the Material Plane. A protection from evil and good spell cast on the target prevents this contact, as does a magic circle. As long as the contact persists, the target has dreadful visions. If these visions last for at least 1 hour, the target gains no benefit from its rest, and its hit point maximum is reduced by 5 (1d10). If this effect reduces the target's hit point maximum to 0, the target dies, and if the target was evil, its soul is trapped in the fey's soul bag. The reduction to the target's hit point maximum lasts until removed by the greater restoration spell or similar magic."
+
+
+    if race == "Fey" and Dice() == 1 and not ("Plane Shift" in two):            two += "\n- Plane Shift (self only)"
+    if race == "Fey" and Dice() == 1 and not ("Ray Of Enfeeblement" in two):    two += "\n- Ray Of Enfeeblement"
+    if race == "Fey" and Dice() == 1 and not ("Sleep" in two):                  two += "\n- Sleep"
         
-        if race == "Fey" and Dice() == 1 and not ("Entangle" in three):           three += "\n- Entangle"
-        if race == "Fey" and Dice() == 1 and not ("Goodberry" in three):          three += "\n- Goodberry"
+    if race == "Fey" and Dice() == 1 and not ("Entangle" in three):           three += "\n- Entangle"
+    if race == "Fey" and Dice() == 1 and not ("Goodberry" in three):          three += "\n- Goodberry"
 
 
 
-        # FIENDS.
-        # Cantrips and at-will magic
+    # FIENDS.
+    # Cantrips and at-will magic
 
-        if race == "Fiend":
-            if Dice()==1 and not ("Charm" in cantrip):
-                if Dice(2)==1:  cantrip += "\n- Charm \n\t One humanoid the fiend can see within 30 feet of it must succeed on a DC [10+%CHA] Wisdom saving throw or be magically charmed for 1 day. The charmed target obeys the fiend's verbal or telepathic commands. If the target suffers any harm or receives a suicidal command, it can repeat the saving throw, ending the effect on a success. If the target successfully saves against the effect, or if the effect on it ends, the target is immune to this fiend's Charm for the next 24 hours. \n\t The fiend can have only one target charmed at a time. If it charms another, the effect on the previous target ends. "
-                else:           cantrip += "\n- Fiendish Charm. \n\t One humanoid the fiend can see within 30 feet of it must succeed on a DC [11+%CHA] Wisdom saving throw or be magically charmed for 1 day. The charmed target obeys the fiend's spoken commands. If the target suffers any harm from the fiend or another creature or receives a suicidal command from the fiend, the target can repeat the saving throw, ending the effect on itself on a success. If a target's saving throw is successful, or if the effect ends for it, the creature is immune to the fiend's Fiendish Charm for the next 24 hours."
-                if Dice()==1 and not ("Draining Kiss" in cantrip):      cantrip += "\n- Draining Kiss \n\t The fiend kisses a creature charmed by it or a willing creature. The target must make a DC 15 Constitution saving throw against this magic, taking 32 (5d10 + 5) psychic damage on a failed save, or half as much damage on a successful one. The target's hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0. "
-                if Dice()==1 and not ("Telepathic Bond" in cantrip):    cantrip += "\n- Telepathic Bond. \n\t The fiend ignores the range restriction on its telepathy when communicating with a creature it has charmed. The two don't even need to be on the same plane of existence."
+    if race == "Fiend":
+        if Dice()==1 and not ("Charm" in cantrip):
+            if Dice(2)==1:  cantrip += "\n- Charm \n\t One humanoid the fiend can see within 30 feet of it must succeed on a DC [10+%CHA] Wisdom saving throw or be magically charmed for 1 day. The charmed target obeys the fiend's verbal or telepathic commands. If the target suffers any harm or receives a suicidal command, it can repeat the saving throw, ending the effect on a success. If the target successfully saves against the effect, or if the effect on it ends, the target is immune to this fiend's Charm for the next 24 hours. \n\t The fiend can have only one target charmed at a time. If it charms another, the effect on the previous target ends. "
+            else:           cantrip += "\n- Fiendish Charm. \n\t One humanoid the fiend can see within 30 feet of it must succeed on a DC [11+%CHA] Wisdom saving throw or be magically charmed for 1 day. The charmed target obeys the fiend's spoken commands. If the target suffers any harm from the fiend or another creature or receives a suicidal command from the fiend, the target can repeat the saving throw, ending the effect on itself on a success. If a target's saving throw is successful, or if the effect ends for it, the creature is immune to the fiend's Fiendish Charm for the next 24 hours."
+            if Dice()==1 and not ("Draining Kiss" in cantrip):      cantrip += "\n- Draining Kiss \n\t The fiend kisses a creature charmed by it or a willing creature. The target must make a DC 15 Constitution saving throw against this magic, taking 32 (5d10 + 5) psychic damage on a failed save, or half as much damage on a successful one. The target's hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0. "
+            if Dice()==1 and not ("Telepathic Bond" in cantrip):    cantrip += "\n- Telepathic Bond. \n\t The fiend ignores the range restriction on its telepathy when communicating with a creature it has charmed. The two don't even need to be on the same plane of existence."
 
-            if Dice() == 1 and not ("Ethereal Stride" in cantrip):      cantrip += "\n- Ethereal Stride.\n\t The fiend and up to three willing creatures within 5 feet of it magically enter the Ethereal Plane from the Material Plane, or vice versa."
-            if Dice() == 1 and not ("Etherealness" in cantrip):         cantrip += "\n- Etherealness.\n\t The fiend magically enters the Ethereal Plane from the Material Plane, or vice versa."
-            if Dice() == 1 and not ("Fire Breath" in cantrip):          cantrip += "\n- Fire Breath (Recharge 5-6).\n\t The fiend exhales fire in a 15-foot cone. Each creature in that area must make a DC [10+%CON] Dexterity saving throw, taking 21 (6d6) fire damage on a failed save, or half as much damage on a successful one."
-            if Dice() == 1 and not ("Fire Ray" in cantrip):             cantrip += "\n- Fire Ray \n\t Ranged Spell Attack. Range 120ft. One target. Hit: 10(3d6) fire damage."
+        if Dice() == 1 and not ("Ethereal Stride" in cantrip):      cantrip += "\n- Ethereal Stride.\n\t The fiend and up to three willing creatures within 5 feet of it magically enter the Ethereal Plane from the Material Plane, or vice versa."
+        if Dice() == 1 and not ("Etherealness" in cantrip):         cantrip += "\n- Etherealness.\n\t The fiend magically enters the Ethereal Plane from the Material Plane, or vice versa."
+        if Dice() == 1 and not ("Fire Breath" in cantrip):          cantrip += "\n- Fire Breath (Recharge 5-6).\n\t The fiend exhales fire in a 15-foot cone. Each creature in that area must make a DC [10+%CON] Dexterity saving throw, taking 21 (6d6) fire damage on a failed save, or half as much damage on a successful one."
+        if Dice() == 1 and not ("Fire Ray" in cantrip):             cantrip += "\n- Fire Ray \n\t Ranged Spell Attack. Range 120ft. One target. Hit: 10(3d6) fire damage."
 
-        # Once a day
-        if race == "Fiend":
-            if Dice() == 1 and not ("Scare" in one):            one += "\n- Scare \n\t One creature of the Fiend's choice within 20 feet of it must succeed on a DC 10 Wisdom saving throw or be frightened for 1 minute. The target can repeat the saving throw at the begguining of each of its turns, with disadvantage if the Fiend is within line of sight, ending the effect on itself on a success."
-            if Dice() == 1 and not ("Fetid Cloud" in one):      one += "\n- Fetid Cloud.\n\t A 10-foot radius of disgusting sulfuric gas extends out from the Fiend. The gas spreads around corners, and its area is lightly obscured. It lasts for 1 minute or until a strong wind disperses it. Any creature that starts its turn in that area must succeed on a DC 11 Constitution saving throw or be poisoned until the start of its next turn. While poisoned in this way, the target can take either an action or a bonus action on its turn, not both, and can't take reactions."
-            if Dice() == 1 and not ("Entangle" in one):         one += "\n- Entangle."
-            if Dice() == 1 and not ("Phantasmal Force" in one): one += "\n- Phantasmal Force."
-            if Dice() == 1 and not ("Plane Shift" in one):      one += "\n- Plane Shift."
-            if Dice() == 1 and not ("Cloudkill" in one):        one += "\n- Cloudkill."
-            if Dice() == 1 and not ("Summon Yugoloth" in one):  one += "\n- Summon Yugoloth. \n\t The fiend attempts a magical summoning. \n\t A fiend has a 30 percent chance of summoning one mezzoloth. \n\t A summoned yugoloth appears in an unoccupied space within 60 feet of its summoner, does as it pleases, and can't summon other yugoloths. The summoned yugoloth remains for 1 minute, until it or its summoner dies, or until its summoner takes a bonus action to dismiss it."
+    # Once a day
+    if race == "Fiend":
+        if Dice() == 1 and not ("Scare" in one):            one += "\n- Scare \n\t One creature of the Fiend's choice within 20 feet of it must succeed on a DC 10 Wisdom saving throw or be frightened for 1 minute. The target can repeat the saving throw at the begguining of each of its turns, with disadvantage if the Fiend is within line of sight, ending the effect on itself on a success."
+        if Dice() == 1 and not ("Fetid Cloud" in one):      one += "\n- Fetid Cloud.\n\t A 10-foot radius of disgusting sulfuric gas extends out from the Fiend. The gas spreads around corners, and its area is lightly obscured. It lasts for 1 minute or until a strong wind disperses it. Any creature that starts its turn in that area must succeed on a DC 11 Constitution saving throw or be poisoned until the start of its next turn. While poisoned in this way, the target can take either an action or a bonus action on its turn, not both, and can't take reactions."
+        if Dice() == 1 and not ("Entangle" in one):         one += "\n- Entangle."
+        if Dice() == 1 and not ("Phantasmal Force" in one): one += "\n- Phantasmal Force."
+        if Dice() == 1 and not ("Plane Shift" in one):      one += "\n- Plane Shift."
+        if Dice() == 1 and not ("Cloudkill" in one):        one += "\n- Cloudkill."
+        if Dice() == 1 and not ("Summon Yugoloth" in one):  one += "\n- Summon Yugoloth. \n\t The fiend attempts a magical summoning. \n\t A fiend has a 30 percent chance of summoning one mezzoloth. \n\t A summoned yugoloth appears in an unoccupied space within 60 feet of its summoner, does as it pleases, and can't summon other yugoloths. The summoned yugoloth remains for 1 minute, until it or its summoner dies, or until its summoner takes a bonus action to dismiss it."
             
             
 
-        # Twice a day
-        if race == "Fiend":
-            if Dice() == 1 and not ("Disguise Self" in two):    two += "\n- Disguise Self."
-            if Dice() == 1 and not ("Invisibility" in two):     two += "\n- Invisibility (self only)."
-            if Dice() == 1 and not ("Darkness" in two):         two += "\n- Darkness."
-            if Dice() == 1 and not ("Dispel Magic" in two):     two += "\n- Dispel Magic."
+    # Twice a day
+    if race == "Fiend":
+        if Dice() == 1 and not ("Disguise Self" in two):    two += "\n- Disguise Self."
+        if Dice() == 1 and not ("Invisibility" in two):     two += "\n- Invisibility (self only)."
+        if Dice() == 1 and not ("Darkness" in two):         two += "\n- Darkness."
+        if Dice() == 1 and not ("Dispel Magic" in two):     two += "\n- Dispel Magic."
 
-        # Three times a day
-        if race == "Fiend":
-            if Dice() == 1 and not ("Alter Self" in three):     three += "\n- Alter Self"
-            if Dice() == 1 and not ("Command" in three):        three += "\n- Command"
-            if Dice() == 1 and not ("Detect Magic" in three):   three += "\n- Detect Magic"
+    # Three times a day
+    if race == "Fiend":
+        if Dice() == 1 and not ("Alter Self" in three):     three += "\n- Alter Self"
+        if Dice() == 1 and not ("Command" in three):        three += "\n- Command"
+        if Dice() == 1 and not ("Detect Magic" in three):   three += "\n- Detect Magic"
 
-        # GIANT.
+    # GIANT.
 
-        # GNOME.
-        if race == "Gnome" and Dice() == 1 and not ("Nondetection" in cantrip):          cantrip += "\n- Nondetection (self only)"
-        if race == "Gnome" and Dice() == 1 and not ("Blindness/Deafness" in one):        one += " \n- Blindness/Deafness"
-        if race == "Gnome" and Dice() == 1 and not ("Blur" in one):                      one += " \n- Blur"
-        if race == "Gnome" and Dice() == 1 and not ("Disguise Self" in one):             one += " \n- Disguise Self"
+    # GNOME.
+    if race == "Gnome" and Dice() == 1 and not ("Nondetection" in cantrip):          cantrip += "\n- Nondetection (self only)"
+    if race == "Gnome" and Dice() == 1 and not ("Blindness/Deafness" in one):        one += " \n- Blindness/Deafness"
+    if race == "Gnome" and Dice() == 1 and not ("Blur" in one):                      one += " \n- Blur"
+    if race == "Gnome" and Dice() == 1 and not ("Disguise Self" in one):             one += " \n- Disguise Self"
 
-        # GOBLIN.
-        if race == "Goblin" and Dice() == 1 and not ("Leadership" in cantrip):           cantrip += " \n- Leadership (Recharges after a Short or Long Rest). \n\t For 1 minute, the goblin can utter a special command or warning whenever a nonhostile creature that it can see within 30 feet of it makes an attack roll or a saving throw. The creature can add a d4 to its roll provided it can hear and understand the goblin. A creature can benefit from only one Leadership die at a time. This effect ends if the goblin is incapacitated."
+    # GOBLIN.
+    if race == "Goblin" and Dice() == 1 and not ("Leadership" in cantrip):           cantrip += " \n- Leadership (Recharges after a Short or Long Rest). \n\t For 1 minute, the goblin can utter a special command or warning whenever a nonhostile creature that it can see within 30 feet of it makes an attack roll or a saving throw. The creature can add a d4 to its roll provided it can hear and understand the goblin. A creature can benefit from only one Leadership die at a time. This effect ends if the goblin is incapacitated."
 
-        # HALFLING. 
+    # HALFLING. 
 
-        # HUMAN. 
+    # HUMAN. 
 
-        # KOBOLDS.
+    # KOBOLDS.
 
-        # LIZARDFOLK.
+    # LIZARDFOLK.
         
 
-        #MONSTROSITIES.
-        ## At will:
-        if race == "Monstrosity":
-            if Dice() == 1 and not ("Acid Spray" in cantrip):
-                cantrip += "\n - Acid Spray (Recharge 6): \n\t The Monstrosity spits acid in a line that is 30 feet long and 5 feet wide, provided that it has no creature grappled. Each creature in that line must make a DC [10+%Str] Dexterity saving throw, taking 10 (3d6) acid damage on a failed save, or half as much damage on a successful one."
-            if Dice(9) == 1 and not ("Confusing Gaze" in cantrip):
-                cantrip += "\n - Confusing Gaze: \n\t When a creature starts its turn within 30 feet of the monstrosity and is able to see the monstrosity's eyes, the monstrosity can magically force it to make a DC [11+%CON] Charisma saving throw, unless the monstrosity is incapacitated. \n\t On a failed saving throw, the creature can't take reactions until the start of its next turn and rolls a d8 to determine what it does during that turn. On a 1 to 4, the creature does nothing. On a 5 or 6, the creature takes no action but uses all its movement to move in a random direction. On a 7 or 8, the creature makes one melee attack against a random creature, or it does nothing if no creature is within reach. \n\t Unless surprised, a creature can avert its eyes to avoid the saving throw at the start of its turn. If the creature does so, it can't see the monstrosity until the start of its next turn, when it can avert its eyes again. If the creature looks at the monstrosity in the meantime, it must immediately make the save." 
-            if Dice() == 1 and not ("Chilling Gaze" in cantrip):
-                cantrip += "\n - Chilling Gaze: \n\t The monstrosity targets one creature it can see within 30 feet of it. If the target can see the monstrosity, the target must succeed on a DC [10+%CON] Constitution saving throw against this magic or take 10 (3d6) cold damage and then be paralyzed for 1 minute, unless it is immune to cold damage. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success. If the target's saving throw is successful, or if the effect ends on it, the target is immune to the Chilling Gaze of all monstrosities for 1 hour."
-            if Dice() == 1 and not ("Disguise Self" in cantrip):
-                cantrip += "\n - Disguise self (humanoid form) Aura: \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
-            if Dice() == 1 and not ("Fire Breath" in cantrip):
-                cantrip += "\n -  Fire Breath (Recharge 5–6). \n\t The monstrosity exhales fire in a 15-foot cone. Each creature in that area must make a DC[11+%CON] Dexterity saving throw, taking 31 (7d8) fire damage on a failed save, or half as much damage on a successful one."
+    #MONSTROSITIES.
+    ## At will:
+    if race == "Monstrosity":
+        if Dice(8) == 1 and not ("Acid Spray" in cantrip):
+            cantrip += "\n - Acid Spray (Recharge 6): \n\t The Monstrosity spits acid in a line that is 30 feet long and 5 feet wide, provided that it has no creature grappled. Each creature in that line must make a DC [10+%Str] Dexterity saving throw, taking 10 (3d6) acid damage on a failed save, or half as much damage on a successful one."
+        if Dice(10) == 1 and not ("Confusing Gaze" in cantrip):
+            cantrip += "\n - Confusing Gaze: \n\t When a creature starts its turn within 30 feet of the monstrosity and is able to see the monstrosity's eyes, the monstrosity can magically force it to make a DC [11+%CON] Charisma saving throw, unless the monstrosity is incapacitated. \n\t On a failed saving throw, the creature can't take reactions until the start of its next turn and rolls a d8 to determine what it does during that turn. On a 1 to 4, the creature does nothing. On a 5 or 6, the creature takes no action but uses all its movement to move in a random direction. On a 7 or 8, the creature makes one melee attack against a random creature, or it does nothing if no creature is within reach. \n\t Unless surprised, a creature can avert its eyes to avoid the saving throw at the start of its turn. If the creature does so, it can't see the monstrosity until the start of its next turn, when it can avert its eyes again. If the creature looks at the monstrosity in the meantime, it must immediately make the save." 
+        if Dice() == 1 and not ("Chilling Gaze" in cantrip):
+            cantrip += "\n - Chilling Gaze: \n\t The monstrosity targets one creature it can see within 30 feet of it. If the target can see the monstrosity, the target must succeed on a DC [10+%CON] Constitution saving throw against this magic or take 10 (3d6) cold damage and then be paralyzed for 1 minute, unless it is immune to cold damage. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success. If the target's saving throw is successful, or if the effect ends on it, the target is immune to the Chilling Gaze of all monstrosities for 1 hour."
+        if Dice() == 1 and not ("Disguise Self" in cantrip):
+            cantrip += "\n - Disguise self (humanoid form) Aura: \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
+        if Dice(8) == 1 and not ("Fire Breath" in cantrip):
+            cantrip += "\n -  Fire Breath (Recharge 5–6). \n\t The monstrosity exhales fire in a 15-foot cone. Each creature in that area must make a DC[11+%CON] Dexterity saving throw, taking 31 (7d8) fire damage on a failed save, or half as much damage on a successful one."
                 
-            if Dice() == 1 and not ("Luring Song" in cantrip):
-                cantrip += "\n - Luring Song: \n\t The monstrosity sings a magical melody. Every humanoid and giant within 300 feet of the monstrosity that can hear the song must succeed on a DC [10+%Cha] Wisdom saving throw or be charmed until the song ends. The monstrosity must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time. The song ends if the monstrosity is incapacitated. While charmed by the monstrosity, a target is incapacitated and ignores the songs of other monstrosities. If the charmed target is more than 5 feet away from the monstrosity, the target must move on its turn toward the monstrosity by the most direct route. It doesn't avoid opportunity attacks, but before moving into damaging terrain, such as lava or a pit, and whenever it takes damage from a source other than the monstrosity, a target can repeat the saving throw. A creature can also repeat the saving throw at the begguining of each of its turns. If a creature's saving throw is successful, the effect ends on it. A target that successfully saves is immune to this monstrosity's song for the next 24 hours."
+        if Dice(8) == 1 and not ("Luring Song" in cantrip):
+            cantrip += "\n - Luring Song: \n\t The monstrosity sings a magical melody. Every humanoid and giant within 300 feet of the monstrosity that can hear the song must succeed on a DC [10+%Cha] Wisdom saving throw or be charmed until the song ends. The monstrosity must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time. The song ends if the monstrosity is incapacitated. While charmed by the monstrosity, a target is incapacitated and ignores the songs of other monstrosities. If the charmed target is more than 5 feet away from the monstrosity, the target must move on its turn toward the monstrosity by the most direct route. It doesn't avoid opportunity attacks, but before moving into damaging terrain, such as lava or a pit, and whenever it takes damage from a source other than the monstrosity, a target can repeat the saving throw. A creature can also repeat the saving throw at the begguining of each of its turns. If a creature's saving throw is successful, the effect ends on it. A target that successfully saves is immune to this monstrosity's song for the next 24 hours."
 
-            if Dice() == 1 and not ("Major Image" in cantrip):          cantrip += "\n - Major Image."
-            if Dice(9) == 1 and not ("Petrifying Breath" in cantrip):    cantrip += "\n - Petrifying Breath (Recharge 5-6): \n\t The monstrosity exhales petrifying gas in a 30-foot cone. Each creature in that area must succeed on a Constitution saving throw (against the creature's Spellsave DC). On a failed save, a target begins to turn to stone and is restrained. The restrained target must repeat the saving throw at the start of its next turn. On a success, the effect ends on the target. On a failure, the target is petrified until freed by the greater restoration spell or other magic."
-            if Dice(9) == 1 and not ("Petrifying Gaze" in cantrip):      cantrip += "\n - Petrifying Gaze: \n\t If a creature starts its turn within 30 feet of the monstrosity and the two of them can see each other, the monstrosity can force the creature to make a DC [10+%CON] Constitution saving throw if the monstrosity isn't incapacitated. On a failed save, the creature magically begins to turn to stone and is restrained. It must repeat the saving throw at the start of its next turn. On a success, the effect ends. On a third failure, the creature is petrified until freed by the greater restoration spell or other magic. \n\t A creature that isn't surprised can avert its eyes to avoid the saving throw at the start of its turn. If it does so, it can't see the monstrosity until the start of its next turn, when it can avert its eyes again. If it looks at the monstrosity in the meantime, it must immediately make the save. \n\t If the monstrosity sees its reflection within 30 feet of it in bright light, it mistakes itself for a rival and targets itself with its gaze."
-            if Dice() == 1 and not ("Read Thoughts" in cantrip):        cantrip += "\n - Read Thoughts: \n\t The monstrosity magically reads the surface thoughts of one creature within 60 feet of it. The effect can penetrate barriers, but 3 feet of wood or dirt, 2 feet of stone, 2 inches of metal, or a thin sheet of lead blocks it. While the target is in range, the monstrosity can continue reading its thoughts, as long as the monstrosity's concentration isn't broken (as if concentrating on a spell). While reading the target's mind, the monstrosity has advantage on Wisdom (Insight) and Charisma (Deception, Intimidation, and Persuasion) checks against the target."
+        if Dice(8) == 1 and not ("Major Image" in cantrip):          cantrip += "\n - Major Image."
+        if Dice(10) == 1 and not ("Petrifying Breath" in cantrip):    cantrip += "\n - Petrifying Breath (Recharge 5-6): \n\t The monstrosity exhales petrifying gas in a 30-foot cone. Each creature in that area must succeed on a Constitution saving throw (against the creature's Spellsave DC). On a failed save, a target begins to turn to stone and is restrained. The restrained target must repeat the saving throw at the start of its next turn. On a success, the effect ends on the target. On a failure, the target is petrified until freed by the greater restoration spell or other magic."
+        if Dice(10) == 1 and not ("Petrifying Gaze" in cantrip):      cantrip += "\n - Petrifying Gaze: \n\t If a creature starts its turn within 30 feet of the monstrosity and the two of them can see each other, the monstrosity can force the creature to make a DC [10+%CON] Constitution saving throw if the monstrosity isn't incapacitated. On a failed save, the creature magically begins to turn to stone and is restrained. It must repeat the saving throw at the start of its next turn. On a success, the effect ends. On a third failure, the creature is petrified until freed by the greater restoration spell or other magic. \n\t A creature that isn't surprised can avert its eyes to avoid the saving throw at the start of its turn. If it does so, it can't see the monstrosity until the start of its next turn, when it can avert its eyes again. If it looks at the monstrosity in the meantime, it must immediately make the save. \n\t If the monstrosity sees its reflection within 30 feet of it in bright light, it mistakes itself for a rival and targets itself with its gaze."
+        if Dice(8) == 1 and not ("Read Thoughts" in cantrip):        cantrip += "\n - Read Thoughts: \n\t The monstrosity magically reads the surface thoughts of one creature within 60 feet of it. The effect can penetrate barriers, but 3 feet of wood or dirt, 2 feet of stone, 2 inches of metal, or a thin sheet of lead blocks it. While the target is in range, the monstrosity can continue reading its thoughts, as long as the monstrosity's concentration isn't broken (as if concentrating on a spell). While reading the target's mind, the monstrosity has advantage on Wisdom (Insight) and Charisma (Deception, Intimidation, and Persuasion) checks against the target."
 
 
-        if race == "Monstrosity":
-            if Dice() == 1 and not ("Paralyzing Ray" in cantrip):   cantrip += "\n - Paralyzing Ray \n\t The targeted creature must succeed on a DC [11+%CON] Constitution saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
-            if Dice() == 1 and not ("Fear Ray" in cantrip):         cantrip += "\n - Fear Ray \n\t The targeted creature must succeed on a DC [11+%CON] Wisdom saving throw or be frightened for 1 minute. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
-            if Dice() == 1 and not ("Enervation Ray" in cantrip):   cantrip += "\n - Enervation Ray \n\t The targeted creature must make a DC [11+%CON] Constitution saving throw, taking 36 (8d8) necrotic damage on a failed save, or half as much damage on a successful one."
-            if Dice() == 1 and not ("Disintegration Ray" in cantrip):   cantrip += "\n - Disintegration Ray. \n\t If the target is a creature, it must succeed on a DC [11+%CON] Dexterity saving throw or take 45 (10d8) force damage. If this damage reduces the creature to 0 hit points, its body becomes a pile of fine gray dust. \n\t If the target is a Large or smaller nonmagical object or creation of magical force, it is disintegrated without a saving throw. If the target is a Huge or larger nonmagical object or creation of magical force, this ray disintegrates a 10-foot cube of it."
+    if race == "Monstrosity":
+        if Dice(10) == 1 and not ("Paralyzing Ray" in cantrip):   cantrip += "\n - Paralyzing Ray \n\t The targeted creature must succeed on a DC [11+%CON] Constitution saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
+        if Dice(10) == 1 and not ("Fear Ray" in cantrip):         cantrip += "\n - Fear Ray \n\t The targeted creature must succeed on a DC [11+%CON] Wisdom saving throw or be frightened for 1 minute. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
+        if Dice(10) == 1 and not ("Enervation Ray" in cantrip):   cantrip += "\n - Enervation Ray \n\t The targeted creature must make a DC [11+%CON] Constitution saving throw, taking 36 (8d8) necrotic damage on a failed save, or half as much damage on a successful one."
+        if Dice(10) == 1 and not ("Disintegration Ray" in cantrip):   cantrip += "\n - Disintegration Ray. \n\t If the target is a creature, it must succeed on a DC [11+%CON] Dexterity saving throw or take 45 (10d8) force damage. If this damage reduces the creature to 0 hit points, its body becomes a pile of fine gray dust. \n\t If the target is a Large or smaller nonmagical object or creation of magical force, it is disintegrated without a saving throw. If the target is a Huge or larger nonmagical object or creation of magical force, this ray disintegrates a 10-foot cube of it."
 
-        ## Once a day
-        if race == "Monstrosity" and Dice() == 1 and not ("Darkness Aura" in one):      one += "\n - Darkness Aura: \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
-        if race == "Monstrosity" and Dice() == 1 and not ("Geas" in one):               one += "\n - Geas."
-        ## Three a day
-        if race == "Monstrosity" and Dice() == 1 and not ("Charm Person" in three): three += "\n - Charm Person."
-        if race == "Monstrosity" and Dice() == 1 and not ("Mirror Image" in three): three += "\n - Mirror Image."
-        if race == "Monstrosity" and Dice() == 1 and not ("Scrying" in three):      three += "\n - Scrying."
-        if race == "Monstrosity" and Dice() == 1 and not ("Suggestion" in three):   three += "\n - Suggestion."
+    ## Once a day
+    if race == "Monstrosity" and Dice() == 1 and not ("Darkness Aura" in one):      one += "\n - Darkness Aura: \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
+    if race == "Monstrosity" and Dice() == 1 and not ("Geas" in one):               one += "\n - Geas."
+    ## Three a day
+    if race == "Monstrosity" and Dice() == 1 and not ("Charm Person" in three): three += "\n - Charm Person."
+    if race == "Monstrosity" and Dice() == 1 and not ("Mirror Image" in three): three += "\n - Mirror Image."
+    if race == "Monstrosity" and Dice() == 1 and not ("Scrying" in three):      three += "\n - Scrying."
+    if race == "Monstrosity" and Dice() == 1 and not ("Suggestion" in three):   three += "\n - Suggestion."
 
-        # OOZE
-        if race == "Ooze" and Dice() == 1 and not ("Psychic Crush" in cantrip):     cantrip += " \n- Psychic Crush (Recharge 5–6). \n\t The ooze targets one creature that it can sense within 60 feet of it. The target must make a DC [10+%INT] Intelligence saving throw, taking 10 (3d6) psychic damage on a failed save, or half as much damage on a successful one."
+    # OOZE
+    if race == "Ooze" and Dice() == 1 and not ("Psychic Crush" in cantrip):     cantrip += " \n- Psychic Crush (Recharge 5–6). \n\t The ooze targets one creature that it can sense within 60 feet of it. The target must make a DC [10+%INT] Intelligence saving throw, taking 10 (3d6) psychic damage on a failed save, or half as much damage on a successful one."
 
-        # ORCS
+    # ORCS
         
-        # PLANTS
-        # Spores
-        if race == "Plant" and Dice(8) == 1 and not ("Hallucination Spores" in cantrip):         cantrip += "\n - Hallucination Spores \n\t The plant ejects spores at one creature it can see within 5 feet of it. The target must succeed on a DC 10+%CON Constitution saving throw or be poisoned for 1 minute. The poisoned target is incapacitated while it hallucinates. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
-        if race == "Plant" and Dice(8) == 1 and not ("Rapport Spores" in cantrip):               cantrip += "\n - Rapport Spores \n\t A 20-foot radius of spores extends from the plant. These spores can go around corners and affect only creatures with an Intelligence of 2 or higher that aren't undead, constructs, or elementals. Affected creatures can communicate telepathically with one another while they are within 30 feet of each other. The effect lasts for 1 hour."
-        if race == "Plant" and Dice(8) == 1 and not ("Caustic Spores" in one):           one += "\n - Caustic Spores \n\t The Plant releases spores in a 30-foot cone. Each creature inside the cone must succeed on a DC [10+%Con] Dexterity saving throw or take 3 (1d6) acid damage at the start of each of the plant's turns. A creature can repeat the saving throw at the start of its turn, ending the effect on itself on a success."
-        if race == "Plant" and Dice(8) == 1 and not ("Infestation Spores" in one):       one += "\n - Infestation Spores \n\t The plant releases spores that burst out in a cloud that fills a 10-foot-radius sphere centered on it, and the cloud lingers for 1 minute. Any flesh-and-blood creature in the cloud when it appears, or that enters it later, must make a DC [10+%CON] Constitution saving throw. On a successful save, the creature can't be infected by these spores for 24 hours. On a failed save, the creature is infected with a disease called the spores of Zuggtmoy and also gains a random form of indefinite madness (determined by rolling on the Madness of Zuggtmoy table) that lasts until the creature is cured of the disease or dies. While infected in this way, the creature can't be reinfected, and it must repeat the saving throw at the end of every 24 hours, ending the infection on a success. On a failure, the infected creature's body is slowly taken over by fungal growth, and after three such failed saves, the creature dies and is reanimated as a spore servant if it's a humanoid or a Large or smaller beast. \n d100 \t	Flaw (lasts until cured) \n 01-20 \t I see visions in the world around me that others do not. \n 21-40 \t I periodically slip into a catatonic state, staring off into the distance for long stretches at a time. \n 41-60 \t I see an altered version of reality, with my mind convincing itself that things are true even in the face of overwhelming evidence to the contrary. \n 61-80 \t My mind is slipping away, and my intelligence seems to wax and wane. \n  81-00 \t I am constantly scratching at unseen fungal infections."
-        if race == "Plant" and Dice(8) == 1 and not ("Euphoria Spores" in one):          one += "\n - Euphoria Spores \n\t The plant releases a cloud of spores in a 20-foot-radius sphere centered on itself. Other creatures in that area must each succeed on a DC [10+%Con] Constitution saving throw or become poisoned for 1 minute. A creature can repeat the saving throw at the start of each of its turns, ending the effect early on itself on a success. When the effect ends on it, the creature gains one level of exhaustion."
-        if race == "Plant" and Dice(8) == 1 and not ("Pacifying Spores" in three):            three += "\n - Pacifying Spores \n\t The Plant ejects spores at one creature it can see within 5 feet of it. The target must succeed on a DC [10+%CON] Constitution saving throw or be stunned for 1 minute. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
-        if race == "Plant" and Dice(8) == 1 and not ("Animating Spores" in three):            three += "\n - Animating Spores \n\t The Plant targets one corpse of a humanoid or a Large or smaller beast within 5 feet of it and releases spores at the corpse. In 24 hours, the corpse rises as a spore servant. The corpse stays animated for 1d4 + 1 weeks or until destroyed, and it can't be animated again in this way."
+    # PLANTS
+    # Spores
+    if race == "Plant" and Dice(8) == 1 and not ("Hallucination Spores" in cantrip):         cantrip += "\n - Hallucination Spores \n\t The plant ejects spores at one creature it can see within 5 feet of it. The target must succeed on a DC 10+%CON Constitution saving throw or be poisoned for 1 minute. The poisoned target is incapacitated while it hallucinates. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
+    if race == "Plant" and Dice(8) == 1 and not ("Rapport Spores" in cantrip):               cantrip += "\n - Rapport Spores \n\t A 20-foot radius of spores extends from the plant. These spores can go around corners and affect only creatures with an Intelligence of 2 or higher that aren't undead, constructs, or elementals. Affected creatures can communicate telepathically with one another while they are within 30 feet of each other. The effect lasts for 1 hour."
+    if race == "Plant" and Dice(8) == 1 and not ("Caustic Spores" in one):           one += "\n - Caustic Spores \n\t The Plant releases spores in a 30-foot cone. Each creature inside the cone must succeed on a DC [10+%Con] Dexterity saving throw or take 3 (1d6) acid damage at the start of each of the plant's turns. A creature can repeat the saving throw at the start of its turn, ending the effect on itself on a success."
+    if race == "Plant" and Dice(8) == 1 and not ("Infestation Spores" in one):       one += "\n - Infestation Spores \n\t The plant releases spores that burst out in a cloud that fills a 10-foot-radius sphere centered on it, and the cloud lingers for 1 minute. Any flesh-and-blood creature in the cloud when it appears, or that enters it later, must make a DC [10+%CON] Constitution saving throw. On a successful save, the creature can't be infected by these spores for 24 hours. On a failed save, the creature is infected with a disease called the spores of Zuggtmoy and also gains a random form of indefinite madness (determined by rolling on the Madness of Zuggtmoy table) that lasts until the creature is cured of the disease or dies. While infected in this way, the creature can't be reinfected, and it must repeat the saving throw at the end of every 24 hours, ending the infection on a success. On a failure, the infected creature's body is slowly taken over by fungal growth, and after three such failed saves, the creature dies and is reanimated as a spore servant if it's a humanoid or a Large or smaller beast. \n d100 \t	Flaw (lasts until cured) \n 01-20 \t I see visions in the world around me that others do not. \n 21-40 \t I periodically slip into a catatonic state, staring off into the distance for long stretches at a time. \n 41-60 \t I see an altered version of reality, with my mind convincing itself that things are true even in the face of overwhelming evidence to the contrary. \n 61-80 \t My mind is slipping away, and my intelligence seems to wax and wane. \n  81-00 \t I am constantly scratching at unseen fungal infections."
+    if race == "Plant" and Dice(8) == 1 and not ("Euphoria Spores" in one):          one += "\n - Euphoria Spores \n\t The plant releases a cloud of spores in a 20-foot-radius sphere centered on itself. Other creatures in that area must each succeed on a DC [10+%Con] Constitution saving throw or become poisoned for 1 minute. A creature can repeat the saving throw at the start of each of its turns, ending the effect early on itself on a success. When the effect ends on it, the creature gains one level of exhaustion."
+    if race == "Plant" and Dice(8) == 1 and not ("Pacifying Spores" in three):            three += "\n - Pacifying Spores \n\t The Plant ejects spores at one creature it can see within 5 feet of it. The target must succeed on a DC [10+%CON] Constitution saving throw or be stunned for 1 minute. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
+    if race == "Plant" and Dice(8) == 1 and not ("Animating Spores" in three):            three += "\n - Animating Spores \n\t The Plant targets one corpse of a humanoid or a Large or smaller beast within 5 feet of it and releases spores at the corpse. In 24 hours, the corpse rises as a spore servant. The corpse stays animated for 1d4 + 1 weeks or until destroyed, and it can't be animated again in this way."
 
-        if race == "Snakefolk" and Dice() == 1 and not ("Animal Friendship" in cantrip):            cantrip += "\n- Animal Friendship (snakes only)"
-        if race == "Snakefolk" and Dice() == 1 and not ("Poison Spray" in three):           three += "\n- Poison Spray"
-        if race == "Snakefolk" and Dice() == 1 and not ("Suggestion" in three):             three += "\n- Suggestion"
+    if race == "Snakefolk" and Dice() == 1 and not ("Animal Friendship" in cantrip):            cantrip += "\n- Animal Friendship (snakes only)"
+    if race == "Snakefolk" and Dice() == 1 and not ("Poison Spray" in three):           three += "\n- Poison Spray"
+    if race == "Snakefolk" and Dice() == 1 and not ("Suggestion" in three):             three += "\n- Suggestion"
 
-        # UNDEAD
-        if race == "Undead":
-            if Dice(8) == 1 and not ("Create Specter" in cantrip):             cantrip += "\n - Create Specter \n\t The undead targets a humanoid within 10 feet of it that has been dead for no longer than 1 minute and died violently. The target's spirit rises as a specter in the space of its corpse or in the nearest unoccupied space. The specter is under the undead's control. The undead can have no more than seven specters under its control at one time." 
-            if Dice(8) == 1 and not ("Corrupting Touch" in cantrip):           cantrip += "\n - Corrupting Touch \n\t Melee Spell Attack: reach 5 ft., one target. Hit: 10 (3d6) necrotic damage."
-            if Dice(8) == 1 and not ("Dreadful Glare" in cantrip):             cantrip += "\n - Dreadful Glare. \n\t The undead targets one creature it can see within 60 feet of it. If the target can see the undead, it must succeed on a DC [10+%CHA] Wisdom saving throw against this magic or become frightened until the end of the undead's next turn. If the target fails the saving throw by 5 or more, it is also paralyzed for the same duration. A target that succeeds on the saving throw is immune to the Dreadful Glare of all undead for the next 24 hours."
-            if Dice(8) == 1 and not ("Forceful Slam" in cantrip):              cantrip += "\n - Forceful Slam \n\t Magic melee attack. Hit: 10 (3d6) force damage. "
-            if Dice(8) == 1 and not ("Fire Ray" in cantrip):                   cantrip += "\n - Fire Ray \n\t Magic attack. Range 30 ft. Hit: 10 (3d6) fire damage. "
-            if Dice(8) == 1 and not ("Horrifying Visage" in cantrip):          cantrip += "\n - Horrifying Visage \n\t Each non-undead creature within 60 feet of the Undead that can see them must succeed on a DC [10+%CHA] Wisdom saving throw or be frightened for 1 minute. A frightened target can repeat the saving throw at the start of each of its turns, with disadvantage if the Undead is within line of sight, ending the effect on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to the Undead's Horrifying Visage for the next 24 hours. "
-            if Dice(8) == 1 and not ("Life Drain" in cantrip):                 cantrip += "\n - Life Drain \n\t On an hit, the target's Hit Points Maximum is reduced by the damage dealt. The target dies if this reduces its Hit Points Maximum to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. "
-            elif Dice(8) == 1 and not ("Life Drain" in cantrip):               cantrip += "\n - Life Drain \n\t On an hit, the target makes a Constitution saving throw. On a fail, the target takes 4d6 necrotic damage. The target's Hit Points Maximum is reduced by the necrotic damage dealt. The target dies if this reduces its Hit Points Maximum to 0. Otherwise, the reduction lasts until the target finishes a long rest. "
-            if Dice(8) == 1 and not ("Mage Hand" in cantrip):                  cantrip += "\n - Mage Hand "
-            if Dice(8) == 1 and not ("Rotting Fist" in cantrip):               cantrip += "\n - Rotting Fist. \n\t Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) bludgeoning damage plus 10 (3d6) necrotic damage. If the target is a creature, it must succeed on a DC [10+%CHA] Constitution saving throw or be cursed with undead rot. The cursed target can't regain hit points, and its hit point maximum decreases by 10 (3d6) for every 24 hours that elapse. If the curse reduces the target's hit point maximum to 0, the target dies, and its body turns to dust. The curse lasts until removed by the remove curse spell or other magic."
-            if Dice(8) == 1 and not ("Strength Drain" in cantrip):             cantrip += "\n - Strength Drain \n\t On an attack hit the target's Strength score is reduced by 1d4. The target dies if this reduces its Strength to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. \n\t If a non-evil humanoid dies from this attack, a new shadow rises from the corpse 1d4 hours later."
-            if Dice(8) == 1 and not ("Telekinetic Thrust" in cantrip):         cantrip += "\n - Telekinetic Thrust. \n\t The undead targets a creature or unattended object within 30 feet of it. A creature must be Medium or smaller to be affected by this magic, and an object can weigh up to 150 pounds. \n\t If the target is a creature, the undead makes a Charisma check contested by the target's Strength check. If the undead wins the contest, the undead hurls the target up to 30 feet in any direction, including upward. If the target then comes into contact with a hard surface or heavy object, the target takes 1d6 damage per 10 feet moved. \n\t If the target is an object that isn't being worn or carried, the undead hurls it up to 30 feet in any direction. The undead can use the object as a ranged weapon, attacking one creature along the object's path (+4 to hit) and dealing 5 (2d4) bludgeoning damage on a hit."
+    # UNDEAD
+    if race == "Undead":
+        if Dice(8) == 1 and not ("Create Specter" in cantrip):             cantrip += "\n - Create Specter \n\t The undead targets a humanoid within 10 feet of it that has been dead for no longer than 1 minute and died violently. The target's spirit rises as a specter in the space of its corpse or in the nearest unoccupied space. The specter is under the undead's control. The undead can have no more than seven specters under its control at one time." 
+        if Dice(8) == 1 and not ("Corrupting Touch" in cantrip):           cantrip += "\n - Corrupting Touch \n\t Melee Spell Attack: reach 5 ft., one target. Hit: 10 (3d6) necrotic damage."
+        if Dice(8) == 1 and not ("Dreadful Glare" in cantrip):             cantrip += "\n - Dreadful Glare. \n\t The undead targets one creature it can see within 60 feet of it. If the target can see the undead, it must succeed on a DC [10+%CHA] Wisdom saving throw against this magic or become frightened until the end of the undead's next turn. If the target fails the saving throw by 5 or more, it is also paralyzed for the same duration. A target that succeeds on the saving throw is immune to the Dreadful Glare of all undead for the next 24 hours."
+        if Dice(8) == 1 and not ("Forceful Slam" in cantrip):              cantrip += "\n - Forceful Slam \n\t Magic melee attack. Hit: 10 (3d6) force damage. "
+        if Dice(8) == 1 and not ("Fire Ray" in cantrip):                   cantrip += "\n - Fire Ray \n\t Magic attack. Range 30 ft. Hit: 10 (3d6) fire damage. "
+        if Dice(8) == 1 and not ("Horrifying Visage" in cantrip):          cantrip += "\n - Horrifying Visage \n\t Each non-undead creature within 60 feet of the Undead that can see them must succeed on a DC [10+%CHA] Wisdom saving throw or be frightened for 1 minute. A frightened target can repeat the saving throw at the start of each of its turns, with disadvantage if the Undead is within line of sight, ending the effect on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to the Undead's Horrifying Visage for the next 24 hours. "
+        if Dice(8) == 1 and not ("Life Drain" in cantrip):                 cantrip += "\n - Life Drain \n\t On an hit, the target's Hit Points Maximum is reduced by the damage dealt. The target dies if this reduces its Hit Points Maximum to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. "
+        elif Dice(8) == 1 and not ("Life Drain" in cantrip):               cantrip += "\n - Life Drain \n\t On an hit, the target makes a Constitution saving throw. On a fail, the target takes 4d6 necrotic damage. The target's Hit Points Maximum is reduced by the necrotic damage dealt. The target dies if this reduces its Hit Points Maximum to 0. Otherwise, the reduction lasts until the target finishes a long rest. "
+        if Dice(8) == 1 and not ("Mage Hand" in cantrip):                  cantrip += "\n - Mage Hand "
+        if Dice(8) == 1 and not ("Rotting Fist" in cantrip):               cantrip += "\n - Rotting Fist. \n\t Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) bludgeoning damage plus 10 (3d6) necrotic damage. If the target is a creature, it must succeed on a DC [10+%CHA] Constitution saving throw or be cursed with undead rot. The cursed target can't regain hit points, and its hit point maximum decreases by 10 (3d6) for every 24 hours that elapse. If the curse reduces the target's hit point maximum to 0, the target dies, and its body turns to dust. The curse lasts until removed by the remove curse spell or other magic."
+        if Dice(8) == 1 and not ("Strength Drain" in cantrip):             cantrip += "\n - Strength Drain \n\t On an attack hit the target's Strength score is reduced by 1d4. The target dies if this reduces its Strength to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. \n\t If a non-evil humanoid dies from this attack, a new shadow rises from the corpse 1d4 hours later."
+        if Dice(8) == 1 and not ("Telekinetic Thrust" in cantrip):         cantrip += "\n - Telekinetic Thrust. \n\t The undead targets a creature or unattended object within 30 feet of it. A creature must be Medium or smaller to be affected by this magic, and an object can weigh up to 150 pounds. \n\t If the target is a creature, the undead makes a Charisma check contested by the target's Strength check. If the undead wins the contest, the undead hurls the target up to 30 feet in any direction, including upward. If the target then comes into contact with a hard surface or heavy object, the target takes 1d6 damage per 10 feet moved. \n\t If the target is an object that isn't being worn or carried, the undead hurls it up to 30 feet in any direction. The undead can use the object as a ranged weapon, attacking one creature along the object's path (+4 to hit) and dealing 5 (2d4) bludgeoning damage on a hit."
 
-        if race == "Undead":
-            if Dice(8) == 1 and not ("Wail" in one):   one += "\n - Wail. \n\t The undead releases a mournful wail, provided that they aren't in sunlight. This wail has no effect on constructs and undead. All other creatures within 30 feet of them that can hear them must make a DC [10+%CHA] Constitution saving throw. On a failure, a creature drops to 0 hit points. On a success, a creature takes 10 (3d6) psychic damage."
-
+    if race == "Undead":
+        if Dice(8) == 1 and not ("Wail" in one):   one += "\n - Wail. \n\t The undead releases a mournful wail, provided that they aren't in sunlight. This wail has no effect on constructs and undead. All other creatures within 30 feet of them that can hear them must make a DC [10+%CHA] Constitution saving throw. On a failure, a creature drops to 0 hit points. On a success, a creature takes 10 (3d6) psychic damage."
+        
 
             
-        if Dice(10) == 1:            background = Background()
-        if Dice(10) == 1:            race = Race()
 
     r = "\n"
     if not (cantrip == "Cantrips (at will): "):         r += cantrip + "\n"
@@ -7209,14 +8938,14 @@ def Abilities(Type=""):
 
     ## Weaknesses and Strengths
     
-    if Type == "Plant" and Dice() == 1:     r += "\n - Damage Resistance: Bludgeoning"
-    if Type == "Plant" and Dice() == 1:     r += "\n - Damage Resistance: Cold"
+    if Type == "Plant" and Dice() == 1:     r += "\n- Damage Resistance: Bludgeoning"
+    if Type == "Plant" and Dice() == 1:     r += "\n- Damage Resistance: Cold"
 
     if Type == "Plant": r += "\n- Damage Vulnerabilities: Fire"
     
-    if Type == "Plant" and Dice(9) == 1:    r += "\n - Damage Immunities: Lightning"
-    if Type == "Plant" and Dice() == 1:     r += "\n - Damage Immunities: Poison"
-    if Type == "Plant" and Dice() == 1:     r += "\n - Damage Resistance: Piercing"
+    if Type == "Plant" and Dice(9) == 1:    r += "\n- Damage Immunities: Lightning"
+    if Type == "Plant" and Dice() == 1:     r += "\n- Damage Immunities: Poison"
+    if Type == "Plant" and Dice() == 1:     r += "\n- Damage Resistance: Piercing"
     
     if Type == "Plant" and Dice() == 1: r = r + "\n- Condition Immunities: Blinded"
     if Type == "Plant" and Dice() == 1: r = r + "\n- Condition Immunities: Charmed"
@@ -8317,7 +10046,7 @@ def Trait(background=""):
         "I convince people that worthless junk is worth their hard-earned money.",
         "I run sleight-of-hand cons on street corners.",
         "I put on new identities like clothes.",
-        "I insinuate myself into people's lives to prey on their weakness and secure their fortunes.",
+        "I insinuate myself into people's lives to secure their fortunes.",
         "I shave coins or forge documents.",
         "I cheat at games of chance.",
         "I must be the captain of any group I join.",
@@ -9562,10 +11291,10 @@ def NPC():
     
     r += "\n- SIMPLE ATTACKS:"
     r += "\n"
-    r += Attack("Melee")
-    r += "\n"
-    r += Attack(Dice(4)) # Random attack
-    r += "\n"
+    num_weapons = Dice(3)
+    for i in range (num_weapons):
+        r += Attack(Dice(4), STR = STR, DEX = DEX, PB = PB(Lvl))
+        r += "\n"
     
     r += "\n- SPECIAL ATTACK: {} Uses/Combat".format(Dice(PB(Lvl)))
     r += "\n"
@@ -9587,10 +11316,8 @@ def NPC():
     r += "\n"
     r += Abilities(rc)
     r += "\n"
-    r += Abilities("") # Random Extra Ability
-    r += "\n"
 
-    if Dice(Lvl) >= 10:
+    if Dice(Lvl) >= 15:
         r += "\n✯    LEGENDARY ACTIONS:    ✯"
         r += "\n"
         r += f"The {bg} {rc} can take {Dice(PB(Lvl))} legendary actions, choosing from the options below. \n\t Only one legendary action can be used at a time, and only at the end of another creature's turn. \n\t The {bg} {rc} regains spent legendary actions at the start of its turn."
@@ -9600,7 +11327,7 @@ def NPC():
         r += Legendary(rc)
         r += "\n"
 
-    if Dice(Lvl) >= 15:
+    if Dice(Lvl) >= 20:
         r += "\n⛫   LAIR ACTIONS:   ⛫"
         r += "\n"
         r += "Unless otherwise noted, any lair action that demands a saving throw uses the spellsave DC above."
@@ -9656,8 +11383,8 @@ def NPC():
         question += "\n They are known for being a " + bg
         question += "\n They are" + tr1 + " They also are " + tr2
         question += "\n They follow the ideal of " + idl
-        question += "\n Also, there's an event in their life that greatly shaped them: " + ph 
-        question += "\n Based on their race and background, what would be a plausible story for them?"
+        question += "\n Also, there's a problem whith which they need urgent help, related to the following Plot Hook: " + ph 
+        question += "\n Based on their race and background, what would be a plausible story for them? And a problem that leads to a D&D adventure?"
         question += "\n Write it in the style of " + Style()
         question += "\n Write it in first person, as if he was introducing himself, and use three paragraphs of about 100 words each, expanding where appropiate. The first paragraph must contain information of their name and background. The second paragraph must express their ideals and goals. The third paragraph must explain why the player's characters may help or confront the NPC."  
         answer = ask_chatgpt(question)
