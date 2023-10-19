@@ -6880,7 +6880,7 @@ def Language(race=Race(), background=Background()):
     if race == "Beast":
         languages = {
             "Common":5,
-            "Beastly Speech":1
+            "Beastly Speech":1,
             "Dwarvish": 20,
             "Elvish": 10,
             "Giant": 20,
@@ -6904,7 +6904,7 @@ def Language(race=Race(), background=Background()):
     if race == "Beastfolk":
         languages = {
             "Common":1,
-            "Beastly Speech":1
+            "Beastly Speech":1,
             "Dwarvish": 20,
             "Elvish": 8,
             "Giant": 15,
@@ -7390,7 +7390,7 @@ def Language(race=Race(), background=Background()):
 
     if background == "Druid":
         languages = {
-            "Druidic":1
+            "Druidic":1,
             "Common":4,
             "Dwarvish": 20,
             "Elvish": 4,
@@ -7413,10 +7413,6 @@ def Language(race=Race(), background=Background()):
             add_language(l, lang, chance)
 
     
-    if background == "":
-        if not ("Common" in l):            l += "Common. "
-        if not ("Thieve" in l):            l += "Thieve's Cant. "
-
     if background == "Bandit":
         languages = {
             "Common":20,
@@ -7440,191 +7436,667 @@ def Language(race=Race(), background=Background()):
         for lang, chance in languages.items():
             add_language(l, lang, chance)
             
+
     if background == "Bard":
-        if not ("Common" in l):            l += "Common. "
-        if Dice() == 1 and not ("Dwarvish" in l):          l += "Dwarvish. "
-        if Dice() == 1 and not ("Elvish" in l):            l += "Elvish. "
-        if Dice() == 1 and not ("Gnomish" in l):           l += "Gnomish. "
-        if Dice() == 1 and not ("Halfling" in l):          l += "Halfling. "
-        if Dice() == 1 and not ("Sylvan" in l):            l += "Sylvan. "
+        languages = {
+            "Common":1,
+            "Dwarvish": 6,
+            "Elvish": 6,
+            "Giant": 20,
+            "Gnomish": 6,
+            "Goblin": 6,
+            "Halfling": 6,
+            "Orc": 6,
+            "Abyssal": 20,
+            "Celestial": 20,
+            "Draconic": 20,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 20,
+            "Sylvan": 6,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
 
     if background == "Berserker":
-        if not ("Common" in l):            l += "Common. "
-        if Dice() == 1 and not ("Dwarvish" in l):         l += "Dwarvish. "
-        if Dice() == 1 and not ("Giant" in l):            l += "Giant. "
-        if Dice() == 1 and not ("Orc" in l):              l += "Orc. "
-        if Dice() == 1 and not ("Undercommon" in l):      l += "Undercommon. "
+        languages = {
+            "Common":1,
+            "Dwarvish": 6,
+            "Elvish": 20,
+            "Giant": 6,
+            "Gnomish": 20,
+            "Goblin": 20,
+            "Halfling": 20,
+            "Orc": 6,
+            "Abyssal": 12,
+            "Celestial": 20,
+            "Draconic": 16,
+            "Deep Speech": 16,
+            "Infernal": 12,
+            "Primordial": 16,
+            "Sylvan": 20,
+            "Undercommon": 6
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+            
+
 
     if background == "Charlatan":
-        if not ("Common" in l):            l += "Common. "
-        if Dice() == 1 and not ("Elvish" in l):         l += "Elvish. "
-        if Dice() == 1 and not ("Gnomish" in l):        l += "Gnomish. "
-        if Dice() == 1 and not ("Halfling" in l):       l += "Halfling. "
+        languages = {
+            "Common":1,
+            "Dwarvish": 6,
+            "Elvish": 6,
+            "Giant": 20,
+            "Gnomish": 6,
+            "Goblin": 6,
+            "Halfling": 6,
+            "Orc": 20,
+            "Abyssal": 20,
+            "Celestial": 20,
+            "Draconic": 20,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 20,
+            "Sylvan": 20,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
 
     if background == "Cultist":
-        if Dice(8) == 1 and not ("Abyssal" in l):            l += "Abyssal. "
-        if Dice(8) == 1 and not ("Celestial" in l):          l += "Celestial. "
-        if Dice(8) == 1 and not ("Draconic" in l):           l += "Draconic. "
-        if Dice(8) == 1 and not ("Deep Speech" in l):        l += "Deep Speech. "
-        if Dice(8) == 1 and not ("Infernal" in l):           l += "Infernal. "
-        if Dice(8) == 1 and not ("Primordial" in l):         l += "Primordial. "
-        if Dice(8) == 1 and not ("Sylvan" in l):             l += "Sylvan. "
-        if Dice(8) == 1 and not ("Undercommon" in l):        l += "Undercommon. "
+        languages = {
+            "Common":20,
+            "Dwarvish": 20,
+            "Elvish": 20,
+            "Giant": 20,
+            "Gnomish": 20,
+            "Goblin": 20,
+            "Halfling": 20,
+            "Orc": 20,
+            "Abyssal": 8,
+            "Celestial": 8,
+            "Draconic": 8,
+            "Deep Speech": 8,
+            "Infernal": 8,
+            "Primordial": 8,
+            "Sylvan": 20,
+            "Undercommon": 8
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
+
 
     if background == "Criminal":
-        if not ("Thieve" in l):            l += "Thieve's Cant. "
-        if not ("Common" in l):            l += "Common. "
-        if Dice() == 1 and not ("Dwarvish" in l):         l += "Dwarvish. "
-        if Dice() == 1 and not ("Giant" in l):            l += "Giant. "
-        if Dice() == 1 and not ("Goblin" in l):           l += "Goblin. "
-        if Dice() == 1 and not ("Orc" in l):              l += "Orc. "
-        if Dice() == 1 and not ("Undercommon" in l):      l += "Undercommon. "
+        languages = {
+            "Thieve's Cant":1,
+            "Common":6,
+            "Dwarvish": 12,
+            "Elvish": 12,
+            "Giant": 20,
+            "Gnomish": 12,
+            "Goblin": 12,
+            "Halfling": 12,
+            "Orc": 12,
+            "Abyssal": 20,
+            "Celestial": 20,
+            "Draconic": 20,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 20,
+            "Sylvan": 20,
+            "Undercommon": 4
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
 
     if background == "Expert":
-        if Dice() == 1 and not ("Dwarvish" in l):         l += "Dwarvish. "
-        if Dice() == 1 and not ("Elvish" in l):           l += "Elvish. "
-        if Dice() == 1 and not ("Giant" in l):            l += "Giant. "
-        if Dice() == 1 and not ("Gnomish" in l):          l += "Gnomish. "
-        if Dice() == 1 and not ("Celestial" in l):        l += "Celestial. "
+        languages = {
+            "Common":1,
+            "Dwarvish": 6,
+            "Elvish": 6,
+            "Giant": 6,
+            "Gnomish": 6,
+            "Goblin": 20,
+            "Halfling": 20,
+            "Orc": 20,
+            "Abyssal": 20,
+            "Celestial": 6,
+            "Draconic": 20,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 20,
+            "Sylvan": 20,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
 
     if background == "Explorer":
-        if Dice(4) == 1 and not ("Elvish" in l):          l += "Elvish. "
-        if Dice(4) == 1 and not ("Giant" in l):           l += "Giant. "
-        if Dice(4) == 1 and not ("Goblin" in l):          l += "Goblin. "
-        if Dice(4) == 1 and not ("Orc" in l):             l += "Orc. "
-        if Dice() == 1 and not ("Draconic" in l):         l += "Draconic. "
-        if Dice() == 1 and not ("Primordial" in l):       l += "Primordial. "
-        if Dice() == 1 and not ("Sylvan" in l):           l += "Sylvan. "
+        languages = {
+            "Common":1,
+            "Dwarvish": 4,
+            "Elvish": 4,
+            "Giant": 4,
+            "Gnomish": 4,
+            "Goblin": 4,
+            "Halfling": 4,
+            "Orc": 4,
+            "Abyssal": 20,
+            "Celestial": 20,
+            "Draconic": 4,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 20,
+            "Sylvan": 20,
+            "Undercommon": 20
+        }
 
-    if background == "Guard":
-        if not ("Common" in l):            l += "Common. "
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
+
+    if background == "base":
+        languages = {
+            "Common":1,
+            "Dwarvish": 6,
+            "Elvish": 6,
+            "Giant": 20,
+            "Gnomish": 6,
+            "Goblin": 6,
+            "Halfling": 6,
+            "Orc": 6,
+            "Abyssal": 20,
+            "Celestial": 20,
+            "Draconic": 20,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 20,
+            "Sylvan": 20,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
 
     if background == "Healer":
-        if Dice() == 1 and not ("Celestial" in l):            l += "Celestial. "
-        if Dice() == 1 and not ("Primordial" in l):           l += "Primordial. "
-        if Dice() == 1 and not ("Sylvan" in l):               l += "Sylvan. "
+        languages = {
+            "Common":20,
+            "Dwarvish": 20,
+            "Elvish": 20,
+            "Giant": 10,
+            "Gnomish": 20,
+            "Goblin": 20,
+            "Halfling": 20,
+            "Orc": 20,
+            "Abyssal": 20,
+            "Celestial": 4,
+            "Draconic": 20,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 4,
+            "Sylvan": 4,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
 
     if background == "Hero":
-        if not ("Common" in l):                     l += "Common. "
-        if Dice() == 1 and not ("Celestial" in l):  l += "Celestial. "
-        if Dice() == 1 and not ("Draconic" in l):   l += "Draconic. "
-        if Dice() == 1 and not ("Sylvan" in l):     l += "Sylvan. "
+        languages = {
+            "Common":1,
+            "Dwarvish": 20,
+            "Elvish": 20,
+            "Giant": 20,
+            "Gnomish": 20,
+            "Goblin": 20,
+            "Halfling": 20,
+            "Orc": 20,
+            "Abyssal": 20,
+            "Celestial": 6,
+            "Draconic": 6,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 20,
+            "Sylvan": 6,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
 
     if background == "Hunter":
-        if not ("Sylvan" in l): l += "Sylvan. "
+        languages = {
+            "Common":20,
+            "Dwarvish": 20,
+            "Elvish": 20,
+            "Giant": 20,
+            "Gnomish": 20,
+            "Goblin": 20,
+            "Halfling": 20,
+            "Orc": 20,
+            "Abyssal": 20,
+            "Celestial": 20,
+            "Draconic": 6,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 6,
+            "Sylvan": 1,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
 
     if background == "Knight":
-        if not ("Common" in l):                         l += "Common. "
-        if Dice() == 1 and not ("Celestial" in l):      l += "Celestial. "
-        if Dice() == 1 and not ("Draconic" in l):       l += "Draconic. "
-        if Dice() == 1 and not ("Sylvan" in l):         l += "Sylvan. "
+        languages = {
+            "Common":1,
+            "Dwarvish": 20,
+            "Elvish": 20,
+            "Giant": 20,
+            "Gnomish": 20,
+            "Goblin": 20,
+            "Halfling": 20,
+            "Orc": 20,
+            "Abyssal": 20,
+            "Celestial": 6,
+            "Draconic": 6,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 20,
+            "Sylvan": 6,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
 
     if background == "Mage":
-        if not ("Common" in l):            l += "Common. "
-        if Dice() == 1 and not ("Dwarvish" in l):           l += "Dwarvish. "
-        if Dice() == 1 and not ("Elvish" in l):             l += "Elvish. "
-        if Dice() == 1 and not ("Giant" in l):              l += "Giant. "
-        if Dice() == 1 and not ("Gnomish" in l):            l += "Gnomish. "
+        languages = {
+            "Common":1,
+            "Dwarvish": 6,
+            "Elvish": 6,
+            "Giant": 6,
+            "Gnomish": 6,
+            "Goblin": 20,
+            "Halfling": 20,
+            "Orc": 20,
+            "Abyssal": 6,
+            "Celestial": 6,
+            "Draconic": 6,
+            "Deep Speech": 6,
+            "Infernal": 6,
+            "Primordial": 6,
+            "Sylvan": 6,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
 
     if background == "Monk":
-        if not ("Common" in l):            l += "Common. "
-        if Dice() == 1 and not ("Celestial" in l):           l += "Celestial. "
-        if Dice() == 1 and not ("Draconic" in l):            l += "Draconic. "
-        if Dice() == 1 and not ("Primordial" in l):          l += "Primordial. "
+        languages = {
+            "Common":1,
+            "Dwarvish": 20,
+            "Elvish": 20,
+            "Giant": 20,
+            "Gnomish": 20,
+            "Goblin": 20,
+            "Halfling": 20,
+            "Orc": 20,
+            "Abyssal": 20,
+            "Celestial": 6,
+            "Draconic": 6,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 6,
+            "Sylvan": 20,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
+
+
 
     if background == "Noble":
-        if not ("Common" in l):            l += "Common. "
-        if Dice() == 1 and not ("Dwarvish" in l):          l += "Dwarvish. "
-        if Dice() == 1 and not ("Elvish" in l):            l += "Elvish. "
+        languages = {
+            "Common":1,
+            "Dwarvish": 6,
+            "Elvish": 6,
+            "Giant": 20,
+            "Gnomish": 20,
+            "Goblin": 20,
+            "Halfling": 20,
+            "Orc": 20,
+            "Abyssal": 20,
+            "Celestial": 12,
+            "Draconic": 12,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 20,
+            "Sylvan": 20,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
+
 
     if background == "Priest":
-        if not ("Common" in l):            l += "Common. "
-        if Dice() == 1 and not ("Celestial" in l):           l += "Celestial. "
-        if Dice() == 1 and not ("Infernal" in l):            l += "Infernal. "
-        if Dice() == 1 and not ("Abyssal" in l):             l += "Abyssal. "
+        languages = {
+            "Common":1,
+            "Dwarvish": 20,
+            "Elvish": 20,
+            "Giant": 20,
+            "Gnomish": 20,
+            "Goblin": 20,
+            "Halfling": 20,
+            "Orc": 20,
+            "Abyssal": 6,
+            "Celestial": 6,
+            "Draconic": 20,
+            "Deep Speech": 20,
+            "Infernal": 6,
+            "Primordial": 20,
+            "Sylvan": 20,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
+
 
     if background == "Pirate":
-        if not ("Common" in l):            l += "Common. "
-        if not ("Thieve" in l):            l += "Thieve's Cant. "
+        languages = {
+            "Thieve's Cant":1,
+            "Common":1,
+            "Dwarvish": 20,
+            "Elvish": 20,
+            "Giant": 20,
+            "Gnomish": 20,
+            "Goblin": 20,
+            "Halfling": 20,
+            "Orc": 20,
+            "Abyssal": 20,
+            "Celestial": 20,
+            "Draconic": 20,
+            "Deep Speech": 12,
+            "Infernal": 20,
+            "Primordial": 12,
+            "Sylvan": 20,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
 
     if background == "Ranger":
-        if Dice(4) == 1 and not ("Elvish" in l):           l += "Elvish. "
-        if Dice(4) == 1 and not ("Giant" in l):            l += "Giant. "
-        if Dice(4) == 1 and not ("Goblin" in l):           l += "Goblin. "
-        if Dice(4) == 1 and not ("Orc" in l):              l += "Orc. "
-        if Dice() == 1 and not ("Draconic" in l):          l += "Draconic. "
-        if Dice() == 1 and not ("Primordial" in l):        l += "Primordial. "
-        if Dice() == 1 and not ("Sylvan" in l):            l += "Sylvan. "
+        languages = {
+            "Common":20,
+            "Dwarvish": 20,
+            "Elvish": 4,
+            "Giant": 4,
+            "Gnomish": 20,
+            "Goblin": 4,
+            "Halfling": 20,
+            "Orc": 4,
+            "Abyssal": 20,
+            "Celestial": 20,
+            "Draconic": 6,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 6,
+            "Sylvan": 6,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
 
     if background == "Scholar":
-        if Dice() == 1 and not ("Abyssal" in l):            l += "Abyssal. "
-        if Dice() == 1 and not ("Celestial" in l):          l += "Celestial. "
-        if Dice() == 1 and not ("Draconic" in l):           l += "Draconic. "
-        if Dice() == 1 and not ("Deep Speech" in l):        l += "Deep Speech. "
-        if Dice() == 1 and not ("Infernal" in l):           l += "Infernal. "
-        if Dice() == 1 and not ("Primordial" in l):         l += "Primordial. "
-        if Dice() == 1 and not ("Sylvan" in l):             l += "Sylvan. "
+        languages = {
+            "Common":20,
+            "Dwarvish": 20,
+            "Elvish": 20,
+            "Giant": 20,
+            "Gnomish": 20,
+            "Goblin": 20,
+            "Halfling": 20,
+            "Orc": 20,
+            "Abyssal": 6,
+            "Celestial": 6,
+            "Draconic": 6,
+            "Deep Speech": 6,
+            "Infernal": 6,
+            "Primordial": 6,
+            "Sylvan": 6,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
 
     if background == "Shaman":
-        if not ("Sylvan" in l):            l += "Sylvan. "
-        if not ("Druidic" in l):           l += "Druidic. "
-        if Dice() == 1 and not ("Elvish" in l):             l += "Elvish. "
-        if Dice() == 1 and not ("Giant" in l):              l += "Giant. "
-        if Dice() == 1 and not ("Goblin" in l):             l += "Goblin. "
-        if Dice() == 1 and not ("Orc" in l):                l += "Orc. "
-        if Dice(8) == 1 and not ("Primordial" in l):        l += "Primordial. "
+        languages = {
+            "Druidic":1,
+            "Common":20,
+            "Dwarvish": 20,
+            "Elvish": 6,
+            "Giant": 6,
+            "Gnomish": 20,
+            "Goblin": 6,
+            "Halfling": 20,
+            "Orc": 6,
+            "Abyssal": 20,
+            "Celestial": 20,
+            "Draconic": 20,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 8,
+            "Sylvan": 1,
+            "Undercommon": 20
+        }
 
-    if background == "Soldier":
-        if not ("Common" in l):            l += "Common. "
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
+
+    if background == "base":
+        languages = {
+            "Common":1,
+            "Dwarvish": 20,
+            "Elvish": 20,
+            "Giant": 20,
+            "Gnomish": 20,
+            "Goblin": 20,
+            "Halfling": 20,
+            "Orc": 20,
+            "Abyssal": 20,
+            "Celestial": 20,
+            "Draconic": 20,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 20,
+            "Sylvan": 20,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
+
 
     if background == "Spy":
-        if not ("Common" in l):            l += "Common. "
-        if not ("Thieve" in l):            l += "Thieve's Cant. "
+        languages = {
+            "Common":1,
+            "Thieve's Cant":1,
+            "Dwarvish": 20,
+            "Elvish": 20,
+            "Giant": 20,
+            "Gnomish": 20,
+            "Goblin": 20,
+            "Halfling": 20,
+            "Orc": 20,
+            "Abyssal": 20,
+            "Celestial": 20,
+            "Draconic": 20,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 20,
+            "Sylvan": 20,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+            
 
     if background == "Traveler":
-        if not ("Common" in l):            l += "Common. "
-        if Dice() == 1 and not ("Elvish" in l):            l += "Elvish. "
-        if Dice() == 1 and not ("Gnomish" in l):           l += "Gnomish. "
-        if Dice() == 1 and not ("Halfling" in l):          l += "Halfling. "
-        if Dice() == 1 and not ("Dwarvish" in l):          l += "Dwarvish. "
-        if Dice() == 1 and not ("Giant" in l):             l += "Giant. "
-        if Dice() == 1 and not ("Goblin" in l):            l += "Goblin. "
-        if Dice() == 1 and not ("Orc" in l):               l += "Orc. "
+        languages = {
+            "Common":1,
+            "Dwarvish": 6,
+            "Elvish": 6,
+            "Giant": 6,
+            "Gnomish": 6,
+            "Goblin": 6,
+            "Halfling": 6,
+            "Orc": 6,
+            "Abyssal": 20,
+            "Celestial": 20,
+            "Draconic": 12,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 20,
+            "Sylvan": 20,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+
 
     if background == "Urchin":
-        if not ("Common" in l):            l += "Common. "
+        languages = {
+            "Common":1,
+            "Dwarvish": 20,
+            "Elvish": 20,
+            "Giant": 20,
+            "Gnomish": 20,
+            "Goblin": 20,
+            "Halfling": 20,
+            "Orc": 20,
+            "Abyssal": 20,
+            "Celestial": 20,
+            "Draconic": 20,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 20,
+            "Sylvan": 20,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+            
 
     if background == "Warrior":
-        if not ("Common" in l):            l += "Common. "
-        if Dice() == 1 and not ("Elvish" in l):              l += "Elvish. "
-        if Dice() == 1 and not ("Gnomish" in l):             l += "Gnomish. "
-        if Dice() == 1 and not ("Halfling" in l):            l += "Halfling. "
-        if Dice() == 1 and not ("Dwarvish" in l):            l += "Dwarvish. "
-        if Dice() == 1 and not ("Giant" in l):               l += "Giant. "
-        if Dice() == 1 and not ("Goblin" in l):              l += "Goblin. "
-        if Dice() == 1 and not ("Orc" in l):                 l += "Orc. "
+        languages = {
+            "Common":1,
+            "Dwarvish": 6,
+            "Elvish": 6,
+            "Giant": 6,
+            "Gnomish": 6,
+            "Goblin": 6,
+            "Halfling": 6,
+            "Orc": 6,
+            "Abyssal": 20,
+            "Celestial": 20,
+            "Draconic": 20,
+            "Deep Speech": 20,
+            "Infernal": 20,
+            "Primordial": 20,
+            "Sylvan": 20,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+            
+
+
 
     if background == "Warlock":
-        if Dice() == 1 and not ("Abyssal" in l):            l += "Abyssal. "
-        if Dice() == 1 and not ("Celestial" in l):          l += "Celestial. "
-        if Dice() == 1 and not ("Draconic" in l):           l += "Draconic. "
-        if Dice() == 1 and not ("Deep" in l):               l += "Deep Speech. "
-        if Dice() == 1 and not ("Infernal" in l):           l += "Infernal. "
-        if Dice() == 1 and not ("Primordial" in l):         l += "Primordial. "
-        if Dice() == 1 and not ("Sylvan" in l):             l += "Sylvan. "
+        languages = {
+            "Common":20,
+            "Dwarvish": 20,
+            "Elvish": 20,
+            "Giant": 20,
+            "Gnomish": 20,
+            "Goblin": 20,
+            "Halfling": 20,
+            "Orc": 20,
+            "Abyssal": 6,
+            "Celestial": 6,
+            "Draconic": 6,
+            "Deep Speech": 6,
+            "Infernal": 6,
+            "Primordial": 6,
+            "Sylvan": 6,
+            "Undercommon": 20
+        }
+
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+            
+
 
     if background == "Witch":
-        if not ("Common" in l):            l += "Common. "
-        if Dice() == 1 and not ("Abyssal" in l):            l += "Abyssal. "
-        if Dice() == 1 and not ("Celestial" in l):          l += "Celestial. "
-        if Dice() == 1 and not ("Draconic" in l):           l += "Draconic. "
-        if Dice() == 1 and not ("Deep" in l):               l += "Deep Speech. "
-        if Dice() == 1 and not ("Infernal" in l):           l += "Infernal. "
-        if Dice() == 1 and not ("Primordial" in l):         l += "Primordial. "
-        if Dice() == 1 and not ("Sylvan" in l):             l += "Sylvan. "
-        if Dice() == 1 and not ("Goblin" in l):             l += "Goblin. "
-        if Dice() == 1 and not ("Gnomish" in l):            l += "Gnomish. "
+        languages = {
+            "Common":1,
+            "Dwarvish": 20,
+            "Elvish": 20,
+            "Giant": 12,
+            "Gnomish": 20,
+            "Goblin": 6,
+            "Halfling": 20,
+            "Orc": 20,
+            "Abyssal": 6,
+            "Celestial": 6,
+            "Draconic": 6,
+            "Deep Speech": 6,
+            "Infernal": 6,
+            "Primordial": 6,
+            "Sylvan": 12,
+            "Undercommon": 20
+        }
 
+        for lang, chance in languages.items():
+            add_language(l, lang, chance)
+            
     return l
 
 
