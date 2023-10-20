@@ -240,7 +240,6 @@ def Title():
         "Coast",
         "Cobalt",
         "Cold",
-        "Coliseum",
         "Colonial",
         "Cometary",
         "Compassionate",
@@ -930,7 +929,7 @@ def Title():
         "Daemonian",
         "Dawn",
         "Draconic",
-        "Eagle-eyed",
+        "Eagle",
         "Edo",
         "Eternal",
         "Fanged",
@@ -1259,6 +1258,7 @@ def Title():
         "Corsair",
         "Corsair",
         "Cougar",
+        "of the Coliseum",
         "Counselor",
         "Courage",
         "Crow",
@@ -2614,7 +2614,7 @@ def Title():
         "Winglord of the Tengu",
         "Wisdom",
         "Witchdoctor",
-        "Wolfkin of Fenrir",
+        "Wolfkin",
         "Rebellion",
         "Drum",
         "Serpentlord",
@@ -4134,7 +4134,9 @@ def Racial_Names(Type):
         "Eliseo", "Elodia", "Emigdia",
         "Emiliano", "Emilio",
         "Encarnación", "Enriqueta",
-        "Erasmo", "Esmeralda", "Esperanza",
+        "Erasmo",
+        "Esmeralda",
+        "Esperanza",
         "Opalo", "Esteban",
         "Estefanía", "Eulogia",
         "Eulogio", "Eustaquio",
@@ -4419,10 +4421,14 @@ def Racial_Names(Type):
         "Heraldo",
         "Isandro",
         "Jovito",
-        "Ladislao", "Maximo",
-        "Nando", "Orlando",
-        "Paco", "Quinto",
-        "Ricardo", "Santiago",
+        "Ladislao",
+        "Maximo",
+        "Nando",
+        "Orlando",
+        "Paco",
+        "Quinto",
+        "Ricardo",
+        "Santiago",
         "Teodoro",
         "Ubaldo",
         "Vidal",
@@ -4931,7 +4937,8 @@ def Racial_Names(Type):
         "Kazuya", "Keahi", "Keegan", "Kenna", "Kindle",
         "Kai", "Lieki", "Mahuika", "Mashal",
         "Torch", "Antorcha", "Torcha", "Mogotsi", "Nina",
-        "Nootau", "Nutau", "Oya", "Plamen",
+        "Nootau", "Nutau",
+        "Oya", "Plamen",
         "Pyro", "Piro", "Piros", "Pirus", "Ris", "Piris",
         "Shohreh", "Sore", "Shula", "Souzan",
         "Tanguy", "Ugne", "Igne", "Ignea", "Azar",
@@ -5132,17 +5139,24 @@ def Racial_Names(Type):
         "Quetzyx", "Cotingar",
 
         # Game Birds-inspired:
-        "Quailfire", "Pheasanar", "Grousewind",
-        "Turkshade", "Guineaflare", "Peacox",
+        "Quailfire",
+        "Pheasanar",
+        "Grousewind",
+        "Turkshade",
+        "Guineaflare",
+        "Peacox",
         "Ptarmyx",
 
         # Miscellaneous-inspired:
         "Owlspire", "Dovewind", "Pigeonyx",
-        "Magpyre", "Jayshade", "Lyrebyrd", "Kiwix",
+        "Magpyre", "Jayshade",
+        "Lyrebyrd", "Kiwix",
         "Pengshade", "Emurion", "Ostrix",
         "Cassowar", "Flamyn", "Cranar",
-        "Storkwind", "Kingfisar", "Hummshade", "Woodpyre",
-        "Ibix", "Tropicar"
+        "Storkwind", "Kingfisar",
+        "Hummshade", "Woodpyre",
+        "Ibix",
+        "Tropicar"
         ]
    
     if Type == "Aven": 
@@ -5166,7 +5180,8 @@ def Racial_Names(Type):
         "Coffee", "Apple", "Cream", "Candy", "Cotton",
         "Dulce", "Garlic", "Grape", "Punch",
         "Ponche", "Uva", "Grape", "Tea", "Lucuma", "Mango", "Maple", "Chip", "Napolito",
-        "Napolita", "Pistacho", "Mora", "Rum", "Ron", "Ginebra", "Gin", "Martin", "Martini",
+        "Napolita", "Pistacho",
+        "Mora", "Rum", "Ron", "Ginebra", "Gin", "Martin", "Martini",
         "Martina", "Licor", "Melon", "Almond", "Almendra", "Manela", "Manzana", "Apple",
         "Apricot", "Balsamic", "Basil", "Berry", "Pepper", "Bourbon", "Bread", "Sugar",
         "Palomita", "Palomito", "Cacao", "Corn", "Caramel", "Carrot", "Cardamom", "Cheddar",
@@ -5452,12 +5467,17 @@ def Racial_Names(Type):
         "Holzcraft",
         "Steinleaf",
         "Wundergear",
-        "Florenbolt", "Bergvene",
-        "Luminwald", "Pietravalle",
-        "Luccinetti", "Bellamonte",
-        "Verdini", "Montefiore",
+        "Florenbolt",
+        "Bergvene",
+        "Luminwald",
+        "Pietravalle",
+        "Luccinetti",
+        "Bellamonte",
+        "Verdini",
+        "Montefiore",
         "Ferrato",
-        "D'Argento", "Zaffiro",
+        "D'Argento",
+        "Zaffiro",
         "Granatello", "Pietradura",
         "Olivetti", "Rovellino",
         "Bianchetti", "Morosini",
@@ -6281,6 +6301,18 @@ def Giants():
     }
     return random.choices(list(Names.keys()), weights=Names.values(), k=1)[0]
 
+def Gnomes():
+    Names = {
+        "Mountain": 8,
+        "Forest": 8,
+        "Garden": 1,
+        "Tinker": 4,
+        "Crossroad": 3,
+        "Trickster": 3,
+        "Wandering": 3
+    }
+    return random.choices(list(Names.keys()), weights=Names.values(), k=1)[0]
+
 
 def Goblins():
     Names = {
@@ -6740,18 +6772,18 @@ def Recovery(con):
     return st
 
 
-def SpecialAttack(Lvl, Mod):
+def SpecialAttack(Lvl, Mod, STR=0, DEX=0):
     dmg = Damage()
     con = Condition(dmg)
     r = ""
 
     # Basic attack description    
-    r += Attack(Dice(4)) + " +"
+    r += Attack(Dice(4), STR = STR, DEX = DEX) + " +"
 
     # Damage calculation
     damage_die = random.choice(["d4", "d6", "d8", "d10", "d12"])
     r += "{}".format(Dice(PB(Lvl)//2) + Dice(2))
-    r += damage_die
+    r += damage_die + " "
     r += dmg
     r += " dmg"
 
@@ -6785,8 +6817,7 @@ def Language(race=Race(), background=Background()):
     languages = [""]
 
     if race == "base":
-        languages = {
-            "Common":20,
+        langs = {
             "Dwarvish": 20,
             "Elvish": 20,
             "Giant": 20,
@@ -6804,12 +6835,11 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
             
     if race == "Human":
-        languages = {
-            "Common":1,
+        langs = {
             "Dwarvish": 6,
             "Elvish": 6,
             "Giant": 6,
@@ -6827,12 +6857,11 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
     if race == "Aberration":
-        languages = {
-            "Common":4,
+        langs = {
             "Dwarvish": 20,
             "Elvish": 20,
             "Giant": 10,
@@ -6851,12 +6880,11 @@ def Language(race=Race(), background=Background()):
             "Telepathy (60 ft.) ": 6
             }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)      
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)      
 
     if race == "Aven":
-        languages = {
-            "Common":1,
+        langs = {
             "Dwarvish": 10,
             "Elvish": 10,
             "Giant": 15,
@@ -6874,12 +6902,11 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 100
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
     if race == "Beast":
-        languages = {
-            "Common":5,
+        langs = {
             "Beastly Speech":1,
             "Dwarvish": 20,
             "Elvish": 10,
@@ -6898,12 +6925,11 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
     if race == "Beastfolk":
-        languages = {
-            "Common":1,
+        langs = {
             "Beastly Speech":1,
             "Dwarvish": 20,
             "Elvish": 8,
@@ -6922,13 +6948,12 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 10
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
             
 
     if race == "Celestial":
-        languages = {
-            "Common":1,
+        langs = {
             "Dwarvish": 10,
             "Elvish": 8,
             "Giant": 10,
@@ -6947,19 +6972,18 @@ def Language(race=Race(), background=Background()):
             "All languages":8,
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
    
         if Dice(2): add_language(l, "Telepathy. (60 feet).", 8) 
-        else: add_language(l, "Telepathy. (120 feet).", 10) 
+        else: add_language(languages, "Telepathy. (120 feet).", 10) 
 
     if race == "Construct":
-        add_language(l, "Understands the languages of its creator.", 1) 
-        add_language(l, "All languages.", 5) 
+        add_language(languages, "Understands the languages of its creator.", 1) 
+        add_language(languages, "All languages.", 5) 
 
     if race == "Dragon":
-        languages = {
-            "Common":2,
+        langs = {
             "Dwarvish": 8,
             "Elvish": 8,
             "Giant": 8,
@@ -6977,12 +7001,11 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 10
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
     if race == "Dwarf":
-        languages = {
-            "Common":2,
+        langs = {
             "Dwarvish": 1,
             "Elvish": 5,
             "Giant": 5,
@@ -7000,12 +7023,11 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 4
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
     if race == "Elf":
-        languages = {
-            "Common":4,
+        langs = {
             "Dwarvish": 6,
             "Elvish": 1,
             "Giant": 12,
@@ -7023,12 +7045,11 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 6
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
             
     if race == "Elemental":
-        languages = {
-            "Common":4,
+        langs = {
             "Dwarvish": 8,
             "Elvish": 8,
             "Giant": 8,
@@ -7051,13 +7072,12 @@ def Language(race=Race(), background=Background()):
             
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
 
     if race == "Fey":
-        languages = {
-            "Common":3,
+        langs = {
             "Dwarvish": 14,
             "Elvish": 3,
             "Giant": 10,
@@ -7075,12 +7095,11 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
     if race == "Fiend":
-        languages = {
-            "Common":1,
+        langs = {
             "Dwarvish": 4,
             "Elvish": 4,
             "Giant": 8,
@@ -7100,12 +7119,11 @@ def Language(race=Race(), background=Background()):
             "Telepathy (120 ft.)": 12            
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
     if race == "Giant":
-        languages = {
-            "Common":1,
+        langs = {
             "Dwarvish": 4,
             "Elvish": 20,
             "Giant": 1,
@@ -7123,12 +7141,11 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
     if race == "Gnome":
-        languages = {
-            "Common":2,
+        langs = {
             "Dwarvish": 3,
             "Elvish": 3,
             "Giant": 3,
@@ -7146,12 +7163,11 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 12
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
     if race == "Goblin":
-        languages = {
-            "Common":2,
+        langs = {
             "Dwarvish": 18,
             "Elvish": 16,
             "Giant": 10,
@@ -7169,12 +7185,11 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 2
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
     if race == "Halfling":
-        languages = {
-            "Common":1,
+        langs = {
             "Dwarvish": 4,
             "Elvish": 4,
             "Giant": 20,
@@ -7190,15 +7205,13 @@ def Language(race=Race(), background=Background()):
             "Primordial": 18,
             "Sylvan": 18,
             "Undercommon": 20
-        }
-
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+            }
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
 
     if race == "Kobold":
-        languages = {
-            "Common":3,
+        langs = {
             "Dwarvish": 6,
             "Elvish": 18,
             "Giant": 20,
@@ -7216,13 +7229,12 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 6
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
             
         
     if race == "Lizardfolk":
-        languages = {
-            "Common":2,
+        langs = {
             "Dwarvish": 20,
             "Elvish": 20,
             "Giant": 10,
@@ -7240,12 +7252,11 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
     if race == "Monstrosity":
-        languages = {
-            "Common":2,
+        langs = {
             "Dwarvish": 8,
             "Elvish": 20,
             "Giant": 8,
@@ -7263,8 +7274,8 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 1
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
 
     
@@ -7272,8 +7283,7 @@ def Language(race=Race(), background=Background()):
         add_language(l, "Telepathy. ", 1)
 
     if race == "Orc":
-        languages = {
-            "Common":2,
+        langs = {
             "Dwarvish": 10,
             "Elvish": 10,
             "Giant": 4,
@@ -7291,12 +7301,11 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 8
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
     if race == "Plant":
-        languages = {
-            "Common":3,
+        langs = {
             "Dwarvish": 20,
             "Elvish": 5,
             "Giant": 20,
@@ -7315,12 +7324,11 @@ def Language(race=Race(), background=Background()):
             "Telepathy":4
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
     if race == "Snakefolk":
-        languages = {
-            "Common":4,
+        langs = {
             "Dwarvish": 20,
             "Elvish": 20,
             "Giant": 20,
@@ -7338,12 +7346,11 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
         
     if race == "Undead":
-        languages = {
-            "Common":2,
+        langs = {
             "Dwarvish": 6,
             "Elvish": 6,
             "Giant": 6,
@@ -7361,13 +7368,12 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 4
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
     # BACKGROUNDS
     if background == "base":
-        languages = {
-            "Common":20,
+        langs = {
             "Dwarvish": 20,
             "Elvish": 20,
             "Giant": 20,
@@ -7385,13 +7391,12 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
     if background == "Druid":
-        languages = {
+        langs = {
             "Druidic":1,
-            "Common":4,
             "Dwarvish": 20,
             "Elvish": 4,
             "Giant": 20,
@@ -7409,13 +7414,12 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
     
     if background == "Bandit":
-        languages = {
-            "Common":20,
+        langs = {
             "Dwarvish": 20,
             "Elvish": 20,
             "Giant": 20,
@@ -7433,13 +7437,12 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
             
 
     if background == "Bard":
-        languages = {
-            "Common":1,
+        langs = {
             "Dwarvish": 6,
             "Elvish": 6,
             "Giant": 20,
@@ -7457,13 +7460,12 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
 
     if background == "Berserker":
-        languages = {
-            "Common":1,
+        langs = {
             "Dwarvish": 6,
             "Elvish": 20,
             "Giant": 6,
@@ -7481,14 +7483,13 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 6
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
             
 
 
     if background == "Charlatan":
-        languages = {
-            "Common":1,
+        langs = {
             "Dwarvish": 6,
             "Elvish": 6,
             "Giant": 20,
@@ -7506,13 +7507,12 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
 
     if background == "Cultist":
-        languages = {
-            "Common":20,
+        langs = {
             "Dwarvish": 20,
             "Elvish": 20,
             "Giant": 20,
@@ -7530,15 +7530,14 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 8
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
 
 
     if background == "Criminal":
-        languages = {
+        langs = {
             "Thieve's Cant":1,
-            "Common":6,
             "Dwarvish": 12,
             "Elvish": 12,
             "Giant": 20,
@@ -7556,13 +7555,12 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 4
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
 
     if background == "Expert":
-        languages = {
-            "Common":1,
+        langs = {
             "Dwarvish": 6,
             "Elvish": 6,
             "Giant": 6,
@@ -7580,12 +7578,11 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
     if background == "Explorer":
-        languages = {
-            "Common":1,
+        langs = {
             "Dwarvish": 4,
             "Elvish": 4,
             "Giant": 4,
@@ -7603,13 +7600,12 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
 
     if background == "base":
-        languages = {
-            "Common":1,
+        langs = {
             "Dwarvish": 6,
             "Elvish": 6,
             "Giant": 20,
@@ -7627,13 +7623,12 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
 
     if background == "Healer":
-        languages = {
-            "Common":20,
+        langs = {
             "Dwarvish": 20,
             "Elvish": 20,
             "Giant": 10,
@@ -7651,13 +7646,12 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
 
     if background == "Hero":
-        languages = {
-            "Common":1,
+        langs = {
             "Dwarvish": 20,
             "Elvish": 20,
             "Giant": 20,
@@ -7675,13 +7669,12 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
 
     if background == "Hunter":
-        languages = {
-            "Common":20,
+        langs = {
             "Dwarvish": 20,
             "Elvish": 20,
             "Giant": 20,
@@ -7699,13 +7692,12 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
 
     if background == "Knight":
-        languages = {
-            "Common":1,
+        langs = {
             "Dwarvish": 20,
             "Elvish": 20,
             "Giant": 20,
@@ -7723,13 +7715,12 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
 
     if background == "Mage":
-        languages = {
-            "Common":1,
+        langs = {
             "Dwarvish": 6,
             "Elvish": 6,
             "Giant": 6,
@@ -7747,13 +7738,12 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
 
     if background == "Monk":
-        languages = {
-            "Common":1,
+        langs = {
             "Dwarvish": 20,
             "Elvish": 20,
             "Giant": 20,
@@ -7771,15 +7761,14 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
 
 
 
     if background == "Noble":
-        languages = {
-            "Common":1,
+        langs = {
             "Dwarvish": 6,
             "Elvish": 6,
             "Giant": 20,
@@ -7797,14 +7786,13 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
 
 
     if background == "Priest":
-        languages = {
-            "Common":1,
+        langs = {
             "Dwarvish": 20,
             "Elvish": 20,
             "Giant": 20,
@@ -7822,15 +7810,14 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
 
 
     if background == "Pirate":
-        languages = {
+        langs = {
             "Thieve's Cant":1,
-            "Common":1,
             "Dwarvish": 20,
             "Elvish": 20,
             "Giant": 20,
@@ -7848,13 +7835,12 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
 
     if background == "Ranger":
-        languages = {
-            "Common":20,
+        langs = {
             "Dwarvish": 20,
             "Elvish": 4,
             "Giant": 4,
@@ -7872,13 +7858,12 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
 
     if background == "Scholar":
-        languages = {
-            "Common":20,
+        langs = {
             "Dwarvish": 20,
             "Elvish": 20,
             "Giant": 20,
@@ -7896,14 +7881,13 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
 
     if background == "Shaman":
-        languages = {
+        langs = {
             "Druidic":1,
-            "Common":20,
             "Dwarvish": 20,
             "Elvish": 6,
             "Giant": 6,
@@ -7921,13 +7905,12 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
 
     if background == "base":
-        languages = {
-            "Common":1,
+        langs = {
             "Dwarvish": 20,
             "Elvish": 20,
             "Giant": 20,
@@ -7945,14 +7928,13 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
 
 
     if background == "Spy":
-        languages = {
-            "Common":1,
+        langs = {
             "Thieve's Cant":1,
             "Dwarvish": 20,
             "Elvish": 20,
@@ -7971,13 +7953,12 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
             
 
     if background == "Traveler":
-        languages = {
-            "Common":1,
+        langs = {
             "Dwarvish": 6,
             "Elvish": 6,
             "Giant": 6,
@@ -7995,13 +7976,12 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
 
 
     if background == "Urchin":
-        languages = {
-            "Common":1,
+        langs = {
             "Dwarvish": 20,
             "Elvish": 20,
             "Giant": 20,
@@ -8019,13 +7999,12 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
             
 
     if background == "Warrior":
-        languages = {
-            "Common":1,
+        langs = {
             "Dwarvish": 6,
             "Elvish": 6,
             "Giant": 6,
@@ -8043,15 +8022,14 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
             
 
 
 
     if background == "Warlock":
-        languages = {
-            "Common":20,
+        langs = {
             "Dwarvish": 20,
             "Elvish": 20,
             "Giant": 20,
@@ -8069,14 +8047,13 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
             
 
 
     if background == "Witch":
-        languages = {
-            "Common":1,
+        langs = {
             "Dwarvish": 20,
             "Elvish": 20,
             "Giant": 12,
@@ -8094,10 +8071,10 @@ def Language(race=Race(), background=Background()):
             "Undercommon": 20
         }
 
-        for lang, chance in languages.items():
-            add_language(l, lang, chance)
+        for lang, chance in langs.items():
+            add_language(languages, lang, chance)
             
-    return l
+    return "Common" + ", ".join(languages)
 
 
 
@@ -11768,9 +11745,9 @@ def NPC():
         r += Attack(Dice(4), STR = STR, DEX = DEX, PB = PB(Lvl))
         r += "\n"
     
-    r += "\n- SPECIAL ATTACK: {} Uses/Combat".format(Dice(PB(Lvl)))
+    r += "\n- SPECIAL ATTACK: {} Uses per Combat".format(Dice(PB(Lvl)))
     r += "\n"
-    r += SpecialAttack(Lvl, Modifier(random.choice([STR, DEX, CON, INT, WIS, CHA])))
+    r += SpecialAttack(Lvl, Modifier(random.choice([STR, DEX, CON, INT, WIS, CHA])), STR, DEX)
     r += "\n\n"
     
     r += "༼ SPELLCASTING:\t{} ༽".format(random.choice(["INT", "WIS", "CHA"]))
