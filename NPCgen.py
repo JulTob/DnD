@@ -63,7 +63,8 @@ def Style():
         "Chinua Achebe",
         "Virginia Woolf",
         "Salman Rushdie",
-        "Toni Morrison"
+        "Toni Morrison",
+        "Monty Pythons"
         ]
     return random.choice(styles)
 
@@ -447,6 +448,7 @@ def Title():
         "Hunter",
         "Hunter's",
         "Hydra's",
+        
         "Icarian",
         "Ice",
         "Icicle",
@@ -500,6 +502,7 @@ def Title():
         "King's",
         "Kraken's",
         "Krakenesque",
+        
         "Lab",
         "Laboratory"
         "Labyrinth",
@@ -7506,17 +7509,17 @@ def Language(race=Race(), background=Background()):
 
     if race == "Orc":
         langs = {
-            "Dwarvish": 10,
-            "Elvish": 10,
+            "Dwarvish": 12,
+            "Elvish": 12,
             "Giant": 4,
-            "Gnomish": 20,
+            "Gnomish": 22,
             "Goblin": 2,
-            "Halfling": 20,
+            "Halfling": 22,
             "Orc": 1,
             "Abyssal": 8,
             "Celestial": 8,
             "Draconic": 8,
-            "Deep Speech": 20,
+            "Deep Speech": 22,
             "Infernal": 8,
             "Primordial": 8,
             "Sylvan": 8,
@@ -8299,9 +8302,25 @@ def Language(race=Race(), background=Background()):
     return "Common" + ", ".join(languages)
 
 
+def get_max_spell_level(character_level, difficulty = 1):
+    if difficulty < 1: difficulty = 1
+    if difficulty > 8: difficulty = 8
+    
+    return max(0,(character_level + 2 - difficulty) // (2 * difficulty) )
+        
+def add_spell(spell_list, spell_name, spell_level, slots, max_spell_level, spell_definition=""):
+
+    # Check if the spell level is within the allowable range
+    if spell_level > max_spell_level:
+        return spell_list, slots
+    # Check if the character has a high enough level to cast the spell and if the spell is not already in the list
+    if Dice(level - 2) < Dice(max_spell_level) and spell_name not in spell_list:
+        spell_list += f"\n- {spell_name}"
+        if spell_definition: spell_list += f": {spell_definition}"
+        slots += Dice(max(1, 1 + max_spell_level - spell_level))
+    return spell_list, slots
 
 def Magic(Lvl, race=Race(), background=Background()):
-
 
 
     cantrip = "Cantrips (at will): "
@@ -8332,39 +8351,648 @@ def Magic(Lvl, race=Race(), background=Background()):
 
 
 # BACKGROUNDS:
+
     # Bandit
+    if background == "Bandit":
+
+        difficulty = 5 # One Fifth Caster. Limited abilities
+        max_level = get_max_spell_level(Lvl,difficulty)
+
+        cantrips_list = [
+            "Mage Hand",
+            "Minor Illusion",
+            "Prestidigitation",
+            "Message",
+            "Thaumaturgy"
+            ]
+        for c in cantrips_list:
+            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
+
+        first_list = [
+            "Charm Person",
+            "Disguise Self",
+            "Expeditious Retreat",
+            "Fog Cloud",
+            "Sleep"
+            ]
+        for s in first_list:
+            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)  
+
+        second_list = [
+            "Darkness",
+            "Pass Without Trace",
+            "Silence",
+            "Invisibility",
+            "Alter Self"
+            ]
+        for s in second_list:
+            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
+        
+        third_list = [
+            "Hypnotic Pattern",
+            "Leomund’s Tiny Hut",
+            "Nondetection",
+            "Dispel Magic",
+            "Blink"
+                      ]
+        for s in third_list:
+            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
+
+        fourth_list = [
+            "Dimension Door",
+            "Greater Invisibility",
+            "Arcane Eye",
+            "Locate Creature",
+            "Confusion"
+                      ]
+        for s in fourth_list:
+            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
+
+        fifth_list = [
+            "Mislead",
+            "Modify Memory",
+            "Passwall",
+            "Seeming",
+            "Teleportation Circle"
+                      ]
+        for s in fifth_list:
+            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
+        
+        sixth_list = [
+            "True Seeing",
+            "Contingency",
+            "Mass Suggestion"
+                      ]
+        for s in sixth_list:
+            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
+
+        seventh_list = [
+            "Teleport",
+            "Mirage Arcane",
+            "Project Image"
+                      ]
+        for s in seventh_list:
+            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
+
+        eighth_list = [
+            "Antimagic Field",
+            "Mind Blank",
+            "Demiplane"
+                      ]
+        for s in eighth_list:
+            eigth, slots8 = add_spell(eigth, s, 8, slots8, max_spell_level)
+
+        ninth_list = [
+            "Time Stop",
+            "Foresight",
+            "Imprisonment"
+                      ]
+        for s in ninth_list:
+            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+
     # Bard
+    if background == "Bard":
+
+        difficulty = 1  # Full Caster
+        max_level = get_max_spell_level(Lvl, difficulty)
+
+        # Cantrips
+        cantrips_list = [
+            "Dancing Lights",
+            "Vicious Mockery",
+            "Mage Hand",
+            "Minor Illusion",
+            "Prestidigitation", "Light",
+            "Message",
+            "Mending",
+            "Friends"
+        ]
+        for c in cantrips_list:
+            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
+
+        # 1st Level Spells
+        first_list = [
+            "Disguise Self",
+            "Healing Word",
+            "Identify",
+            "Faerie Fire",
+            "Charm Person",
+            "Silent Image",
+            "Sleep",
+            "Tasha’s Hideous Laughter",
+            "Unseen Servant",
+            "Speak With Animals"
+        ]
+        for s in first_list:
+            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)  
+
+        # 2nd Level Spells
+        second_list = [
+            "Invisibility",
+            "Knock",
+            "Detect Thoughts",
+            "Enhance Ability",
+            "Lesser Restoration",
+            "Zone of Truth",
+            "Calm Emotions",
+            "Heat Metal",
+            "Suggestion",
+            "Phantasmal Force"
+        ]
+        for s in second_list:
+            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
+        
+        # 3rd Level Spells
+        third_list = [
+            "Dispel Magic",
+            "Leomund’s Tiny Hut",
+            "Hypnotic Pattern",
+            "Major Image",
+            "Sending",
+            "Tongues",
+            "Fear",
+            "Charm Monster",
+            "Stinking Cloud",
+            "Speak with Dead"
+        ]
+        for s in third_list:
+            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
+
+        # 4th Level Spells
+        fourth_list = [
+            "Dimension Door",
+            "Polymorph",
+            "Greater Invisibility",
+            "Freedom of Movement",
+            "Hallucinatory Terrain",
+            "Locate Creature",
+            "Compulsion",
+            "Confusion",
+            "Geas",
+            "Stone Shape"
+        ]
+        for s in fourth_list:
+            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
+
+        # 5th Level Spells
+        fifth_list = [
+            "Mass Cure Wounds",
+            "Raise Dead",
+            "Greater Restoration",
+            "Teleportation Circle",
+            "Mislead",
+            "Modify Memory",
+            "Animate Objects",
+            "Awaken",
+            "Scrying",
+            "Dominate Person"
+        ]
+        for s in fifth_list:
+            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
+        
+        # 6th Level Spells
+        sixth_list = [
+            "True Seeing",
+            "Otto’s Irresistible Dance",
+            "Programmed Illusion",
+            "Mass Suggestion",
+            "Heroes’ Feast",
+            "Find The Path",
+            "Eyebite",
+            "Countercharm"
+        ]
+        for s in sixth_list:
+            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
+
+        # 7th Level Spells
+        seventh_list = [
+            "Teleport",
+            "Resurrection",
+            "Regenerate",
+            "Mirage Arcane",
+            "Etherealness",
+            "Symphony Of The Masked",
+            "Forcecage",
+            "Dream Of The Blue Veil"
+        ]
+        for s in seventh_list:
+            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
+
+        # 8th Level Spells
+        eighth_list = [
+            "Power Word Stun",
+            "Mind Blank",
+            "Maze",
+            "Glibness",
+            "Dominate Monster",
+            "Antimagic Field",
+            "Foresight",
+            "Feeblemind"
+        ]
+        for s in eighth_list:
+            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
+
+        # 9th Level Spells
+        ninth_list = [
+            "Power Word Kill",
+            "True Polymorph",
+            "Time Stop",
+            "Psychic Scream",
+            "Prismatic Wall",
+            "Mass Polymorph",
+            "Foresight",
+            "Meteor Swarm"
+        ]
+        for s in ninth_list:
+            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+
+
+
+
     # Berserker
+    if background == "Berserker":
+
+        difficulty = 7  # 1/7 Caster
+        max_level = get_max_spell_level(Lvl, difficulty)
+
+        # Cantrips
+        cantrips_list = [
+            "Blade Ward",
+            "Thaumaturgy",
+            "True Strike",
+            "Guidance"
+        ]
+        for c in cantrips_list:
+            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
+
+        # 1st Level Spells
+        first_list = [
+            "Bane",
+            "Compelled Duel",
+            "Wrathful Smite",
+            "Searing Smite"
+        ]
+        for s in first_list:
+            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)  
+
+        # 2nd Level Spells
+        second_list = [
+            "Branding Smite",
+            "Magic Weapon",
+            "Find Steed"
+        ]
+        for s in second_list:
+            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
+
+        second, slots2 = add_spell(second, "Enhance Ability", 2, slots2, max_spell_level, "Bull's Strength")
+
+        # 3rd Level Spells
+        third_list = [
+            "Crusader's Mantle",
+            "Elemental Weapon",
+            "Fear",
+            "Spirit Guardians"
+        ]
+        for s in third_list:
+            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
+
+        # 4th Level Spells
+        fourth_list = [
+            "Stoneskin",
+            "Freedom Of Movement",
+            "Compulsion",
+            "Grasping Vine"
+        ]
+        for s in fourth_list:
+            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
+
+        # 5th Level Spells
+        fifth_list = [
+            "Destructive Wave",
+            "Flame Strike",
+            "Geas",
+            "Commune With Nature"
+        ]
+        for s in fifth_list:
+            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
+        
+        # 6th Level Spells
+        sixth_list = [
+            "Heroes' Feast",
+            "Find the Path",
+            "Wind Walk"
+        ]
+        for s in sixth_list:
+            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
+
+        # 7th Level Spells
+        seventh_list = [
+            "Regenerate",
+            "Fire Storm",
+            "Resurrection"
+        ]
+        for s in seventh_list:
+            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
+
+        # 8th Level Spells
+        eighth_list = [
+            "Earthquake",
+            "Control Weather",
+            "Animal Shapes"
+        ]
+        for s in eighth_list:
+            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
+
+        # 9th Level Spells
+        ninth_list = [
+            "Storm of Vengeance",
+            "True Resurrection",
+            "Shapechange"
+        ]
+        for s in ninth_list:
+            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+
+
     # Charlatan
+    if background == "Charlatan":
+
+        difficulty = 4  # 1/4 Caster
+        max_level = get_max_spell_level(Lvl, difficulty)
+
+        # Cantrips
+        cantrips_list = [
+            "Minor Illusion",
+            "Prestidigitation",
+            "Mage Hand",
+            "Friends"
+        ]
+        for c in cantrips_list:
+            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
+
+        # 1st Level Spells
+        first_list = [
+            "Disguise Self",
+            "Charm Person",
+            "Illusory Script",
+            "Sleep"
+        ]
+        for s in first_list:
+            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)  
+
+        # 2nd Level Spells
+        second_list = [
+            "Invisibility",
+            "Suggestion",
+            "Alter Self",
+            "Mirror Image"
+        ]
+        for s in second_list:
+            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
+        
+        # 3rd Level Spells
+        third_list = [
+            "Hypnotic Pattern",
+            "Major Image",
+            "Nondetection",
+            "Gaseous Form"
+        ]
+        for s in third_list:
+            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
+
+        # 4th Level Spells
+        fourth_list = [
+            "Greater Invisibility",
+            "Confusion",
+            "Dimension Door",
+            "Polymorph"
+        ]
+        for s in fourth_list:
+            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
+
+        # 5th Level Spells
+        fifth_list = [
+            "Mislead",
+            "Seeming",
+            "Modify Memory",
+            "Dominate Person"
+        ]
+        for s in fifth_list:
+            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
+        
+        # 6th Level Spells
+        sixth_list = [
+            "Programmed Illusion",
+            "True Seeing",
+            "Mass Suggestion"
+        ]
+        for s in sixth_list:
+            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
+
+        # 7th Level Spells
+        seventh_list = [
+            "Mirage Arcane",
+            "Project Image",
+            "Simulacrum"
+        ]
+        for s in seventh_list:
+            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
+
+        # 8th Level Spells
+        eighth_list = [
+            "Mind Blank",
+            "Dominate Monster",
+            "Power Word Stun"
+        ]
+        for s in eighth_list:
+            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
+
+        # 9th Level Spells
+        ninth_list = [
+            "Time Stop",
+            "True Polymorph",
+            "Foresight"
+        ]
+        for s in ninth_list:
+            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+            
     # Commoner
+    if background == "Commoner":
+
+        difficulty = 8  # 1/8 Caster, very limited magical ability
+        max_level = get_max_spell_level(Lvl, difficulty)
+
+        # Cantrips
+        cantrips_list = [
+            "Mending",
+            "Prestidigitation",
+            "Message",
+            "Guidance"
+        ]
+        for c in cantrips_list:
+            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
+
+        # 1st Level Spells
+        first_list = [
+            "Cure Wounds",
+            "Purify Food And Drink",
+            "Alarm",
+            "Goodberry"
+        ]
+        for s in first_list:
+            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)  
+
+        # 2nd Level Spells
+        second_list = [
+            "Lesser Restoration",
+            "Animal Messenger",
+            "Find Steed",
+            "Locate Animals Or Plants"
+        ]
+        for s in second_list:
+            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
+        
+        # 3rd Level Spells
+        third_list = [
+            "Create Food And Water",
+            "Sending",
+            "Tiny Hut",
+            "Speak With Plants"
+        ]
+        for s in third_list:
+            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
+
+        # 4th Level Spells
+        fourth_list = [
+            "Control Water",
+            "Stone Shape",
+            "Locate Creature",
+            "Fabricate"
+        ]
+        for s in fourth_list:
+            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
+
+        # 5th Level Spells
+        fifth_list = [
+            "Awaken",
+            "Commune With Nature",
+            "Greater Restoration",
+            "Teleportation Circle"
+        ]
+        for s in fifth_list:
+            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
+        
+        # 6th Level Spells
+        sixth_list = [
+            "Heroes' Feast",
+            "Move Earth",
+            "Heal"
+        ]
+        for s in sixth_list:
+            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
+
+        # 7th Level Spells
+        seventh_list = [
+            "Regenerate",
+            "Resurrection",
+            "Miracle"  # Miracle is a 9th level spell, but it's here to represent extraordinary luck or divine intervention
+        ]
+        for s in seventh_list:
+            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
+
+        # 8th Level Spells
+        eighth_list = [
+            "Control Weather",
+            "Earthquake",
+            "Holy Aura"  # Holy Aura could represent a divine protection over the community
+        ]
+        for s in eighth_list:
+            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
+
+        # 9th Level Spells
+        ninth_list = [
+            "True Resurrection",
+            "Storm of Vengeance",
+        ]
+        for s in ninth_list:
+            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+        ninth, slots9 = add_spell(ninth, "Wish" , 9, slots9, max_spell_level, "One per Lifetime")
+
     # Cultist
 
     if background == "Cultist":
 
-        if Dice(0) < Dice(Lvl) and not ("Light" in cantrip):            cantrip += "\n- Light."
-        if Dice(0) < Dice(Lvl) and not ("Sacred Flame" in cantrip):     cantrip += "\n- Sacred Flame"
-        if Dice(0) < Dice(Lvl) and not ("Thaumaturgy" in cantrip):      cantrip += "\n- Thaumaturgy"
+        difficulty = 1.5 # Assuming Cultists are full casters
+        max_level = get_max_spell_level(Lvl,difficulty)
+
+        cantrips_list = [
+            "Chill Touch",
+            "Eldritch Blast", "Guidance",
+                         "Infestation", "Light", "Sacred Flame", "Thaumaturgy",
+                         "Toll The Dead", "Vicious Mockery"]
+        for c in cantrips_list:
+            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
+
+        first_list = ["Bane", "Cause Fear","Command","Hex","Inflict Wounds",
+                      "Protection From Good And Evil", "Shield Of Faith", "Unseen Servant"]
+        for s in first_list:
+            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)  
+
+        second_list = ["Blindness/Deafness", "Darkness", "Enthrall", "Hold Person",
+                       "Mind Spike", "Ray Of Enfeeblement", "Silence", "Spiritual Weapon"]
+        for s in second_list:
+            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
+        
+        third_list = ["Animate Dead", "Bestow Curse", "Fear", "Hypnotic Pattern",
+                      "Speak With Dead", "Vampiric Touch", "Tongues", "Spirit Guardians"
+                      ]
+        for s in third_list:
+            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
+
+        fourth_list = ["Blight", "Death Ward", "Hallucinatory Terrain",
+                       "Locate Creature", "Phantasmal Killer",
+                       "Shadow Of Moil", "Sickening Radiance",
+                       "Summon Greater Demon"
+                      ]
+        for s in fourth_list:
+            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
+
+        fifth_list = ["Contagion","Danse Macabre","Geas","Hold Monster",
+                      "Insect Plague","Mass Cure Wounds","Scrying",
+                      "Wrath Of Nature"
+                      ]
+        for s in fifth_list:
+            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
+        
+        sixth_list = ["Circle Of Death", "Create Undead", "Eyebite",
+                      "Harm", "Heroes' Feast", "Mass Suggestion",
+                      "True Seeing","Word Of Recall"
+                      ]
+        for s in sixth_list:
+            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
+
+        seventh_list = ["Finger Of Death", "Plane Shift", "Regenerate",
+                        "Resurrection", "Symbol", "Teleport", "Etherealness",
+                        "Fire Storm"
+                      ]
+        for s in seventh_list:
+            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
+
+        eighth_list = ["Antimagic Field", "Dominate Monster", "Feeblemind",
+                        "Holy Aura", "Incendiary Cloud", "Maze", "Power Word Stun",
+                        "Sunburst"
+                      ]
+        for s in eighth_list:
+            eigth, slots8 = add_spell(eigth, s, 8, slots8, max_spell_level)
+
+        ninth_list = ["Astral Projection", "Gate", "Implosion",
+                        "Mass Heal", "Power Word Kill", "Psychic Scream", "True Resurrection",
+                        "Weird"
+                      ]
+        for s in ninth_list:
+            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
 
 
-    if background == "Cultist":
-        if Dice(2) < Dice(Lvl) and not ("Command" in first):
-            first += "\n- Command"
-            slots1 += Dice()
-        if Dice(2) < Dice(Lvl) and not ("Inflict Wounds" in first):
-            first += "\n- Inflict Wounds"
-            slots1 += Dice()
-        if Dice(2) < Dice(Lvl) and not ("Shield Of Faith" in first):
-            first += "\n- Shield Of Faith"
-            slots1 += Dice()
-                
 
-    if background == "Cultist":
-        if Dice(5) < Dice(Lvl) and not ("Hold Person" in second):
-            second += "\n- Hold Person"
-            slots2 += Dice(5)
-        if Dice(5) < Dice(Lvl) and not ("Spiritual Weapon" in second):
-            second += "\n- Spiritual Weapon"
-            slots2 += Dice(5)
 
     # Criminal
     # Druid
@@ -8539,7 +9167,68 @@ def Magic(Lvl, race=Race(), background=Background()):
     if background == "Shaman" and Dice() == 1 and not ("Plant Growth" in third):
         third += "\n- Plant Growth"
         slots3 += Dice(4)
+        
     # Soldier
+    if background == "Soldier":
+
+        difficulty = 2 # Half casters
+        max_level = get_max_spell_level(Lvl,difficulty)
+
+        cantrips_list = ["Blade Ward", "True Strike", "Message"]
+        for c in cantrips_list:
+            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
+
+        first_list = ["Heroism", "Shield of Faith", "Cure Wounds"]
+        for s in first_list:
+            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)  
+
+        second_list = ["Aid", "Magic Weapon", "Warding Bond"
+                       ]
+        for s in second_list:
+            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
+        
+        third_list = ["Crusader's Mantle",
+                      "Haste",
+                      "Protection From Energy"
+                      ]
+        for s in third_list:
+            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
+
+        fourth_list = [
+                      ]
+        for s in fourth_list:
+            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
+
+        fifth_list = [
+                      ]
+        for s in fifth_list:
+            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
+        
+        sixth_list = [
+            
+                      ]
+        for s in sixth_list:
+            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
+
+        seventh_list = [
+                        
+                      ]
+        for s in seventh_list:
+            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
+
+        eighth_list = [
+            
+                      ]
+        for s in eighth_list:
+            eigth, slots8 = add_spell(eigth, s, 8, slots8, max_spell_level)
+
+        ninth_list = [
+            
+                      ]
+        for s in ninth_list:
+            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+
+
     # Spy
     # Traveler
     # Urchin
