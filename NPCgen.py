@@ -6220,7 +6220,7 @@ def Racial_Names(Type):
     if Type == "Goblin":
         Names = Goblins 
         
-        return random.choice(Names) + "of the " random.choice(Clans)
+        return random.choice(Names) + "of the " + random.choice(Clans)
 
     return random.choice(Names)
 
