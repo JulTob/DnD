@@ -143,6 +143,7 @@ def Title():
         "Baron of",
         "Blue",
         "Brain",
+        
         "Circus",
         "Clockwork",
         "Content",
@@ -162,21 +163,29 @@ def Title():
         "Champion of",
         "Crab",
         "Cryptic",
+        
         "Divine",
         "Draconian",
         "Dusk",
         "Dwarven",
+        
         "Enchanted",
         "Eldritch",
         "Elven",
         "Epicurean",
+        
         "Fierce",
+        
         "Goldenrod",
+        
         "Midnight",
+        
         "Protector",
+        
         "Scarlet",
         "Stinger-tailed",
-        "Tusked",
+        
+        
         "Abbey",
         "Abyssal",
         "Academy",
@@ -200,6 +209,7 @@ def Title():
         "Austere",
         "Aztec",
         "Azure",
+        
         "Badland",
         "Baroque",
         "Barracks",
@@ -819,6 +829,7 @@ def Title():
         "Tower",
         "Town",
         "Transient",
+        "Tusked",
         "Tudor",
         "Tundra",
         "Tunnel",
@@ -877,7 +888,6 @@ def Title():
         "War",
         "Wormhole",
 
-        "X-ray",  
 
 
         
@@ -1182,7 +1192,7 @@ def Title():
         "Watery",
         "Wavy",
         "Web",
-        "Werewolfish",
+        "Werewolf's",
         "Wheel",
         "Whispering",
         "Whistle"
@@ -1197,10 +1207,12 @@ def Title():
         "Winter",
         "Wise",
         "Wolf",
-        "Wolf-pawed"
+        "Wolf's"
         "Wrathful",
         "Wight",
-        
+
+        "X-ray",  
+
         "Yesteryear",  
         "Young",
         
@@ -1884,35 +1896,7 @@ def Title():
         "Vagrant",
         "Voyager",
         
-        "Wail",
-        "Walker",
-        "Warlock",
-        "Warrior",
-        "Watch",
-        "Werewolf",
-        "Wizard",
-        "Witch",
-        "Witchhunter",
-        "Writter",
-        "Willow",
-        "Wolf",
-        "Wraith",
-        "Wanderer",
-        "Wandering Healer",
-        "Warden",
-        "Warlord",
-        "Warrior Poet",
-        "Wayfarer",
-        "Whale",
-        "Whirlwind",
-        "Whisper",
-        "Wight",
-        "Wild",
-        "Willow",
-        "Windrider"
-        "Witchfinder",
-        "Wolf"
-        "Wraith",
+
         
         
         "Abbess",
@@ -2720,6 +2704,35 @@ def Title():
         "Wisdom",
         "Witchdoctor",
         "Wolfkin",
+        "Wail",
+        "Walker",
+        "Warlock",
+        "Warrior",
+        "Watch",
+        "Werewolf",
+        "Wizard",
+        "Witch",
+        "Witchhunter",
+        "Writter",
+        "Willow",
+        "Wolf",
+        "Wraith",
+        "Wanderer",
+        "Wandering Healer",
+        "Warden",
+        "Warlord",
+        "Warrior Poet",
+        "Wayfarer",
+        "Whale",
+        "Whirlwind",
+        "Whisper",
+        "Wight",
+        "Wild",
+        "Willow",
+        "Windrider"
+        "Witchfinder",
+        "Wolf"
+        "Wraith",
         
         "Rebellion",
         "Drum",
@@ -2783,7 +2796,6 @@ def Title():
         "Pioneer",
         "Forerunner",
         "Exemplar",
-        "Paragon",
         
         "Conquistador",
         
@@ -2814,6 +2826,7 @@ def Title():
         "of El Dorado",
         "of Eldorado"
         
+        "Paragon",
         "Patriarch",
         "Pharaoh",
         "Professor",
@@ -2929,34 +2942,34 @@ def Background():
 
 def Race():
     race_weights = {
-        "Human": 9,
-        "Aberration": 3,
-        "Aven": 3,
-        "Beast": 5,
-        "Beastfolk": 4,
-        "Celestial": 3,
-        "Construct": 3,
-        "Dragon": 4,
-        "Dwarf": 5,
-        "Elf": 5,
-        "Elemental": 4,
-        "Fey": 3,
-        "Fiend": 3,
-        "Giant": 3,
-        "Gnome": 4,
-        "Goblin": 5,
-        "Halfling": 5,
-        "Kobold": 5,
-        "Lizardfolk": 3,
-        "Monstrosity": 4,
-        "Ooze": 3,
-        "Orc": 6,
-        "Plant": 4,
-        "Snakefolk": 3,
-        "Undead": 6,
-        "Beholder": 2,
-        "Illithid":3,
-        "Vampire":2,
+        "Human": 10,
+        "Aberration": 4,
+        "Aven": 4,
+        "Beast": 6,
+        "Beastfolk": 5,
+        "Celestial": 4,
+        "Construct": 4,
+        "Dragon": 5,
+        "Dwarf": 6,
+        "Elf": 6,
+        "Elemental": 5,
+        "Fey": 4,
+        "Fiend": 4,
+        "Giant": 4,
+        "Gnome": 5,
+        "Goblin": 6,
+        "Halfling": 6,
+        "Kobold": 6,
+        "Lizardfolk": 4,
+        "Monstrosity": 5,
+        "Ooze": 4,
+        "Orc": 7,
+        "Plant": 5,
+        "Snakefolk": 4,
+        "Undead": 7,
+        "Beholder": 3,
+        "Illithid":4,
+        "Vampire":3,
         "": 0
     }
     
@@ -2975,50 +2988,73 @@ def Race():
 # Racial Names
 def Racial_Names(Type):
     Names = [
-        "Caspian",
-        "Nemo",
-        "Ada",
-        "Pascal",
-        "Byron",
         "Arthurius",
-        "Neo",
+        "Ada",
         "AbErrant",
-        "Dorian", 
-        "Narkia",
+        "Amelia", 
         "Anarkia",
         "Anakin",
+        "Ares",
+        "Alucard",
+        "Arya",
+        "Athena",
+        "Azrael",
+        "Altair",
+        "Aelin",
+
+        "Byron",
+        
+        "Caspian",
+        
+        "Dorian", 
         "Draven",
+        "Dante",
+
+        "Elektra",
+
         "Furiosa",
-        "Goku",
-        "Jareth",
-        "Maleficent", 
-        "Kratos",
-        "Xena",
-        "Zorro",
         "Forajido",
-        "Paragon",
-        "Amelia", 
-        "Morpheus",
-        "Trinity",
-        "Ripley",
+
+        "Goku",
+
+        "Loki",
         "Leia",
         "Luke",
-        "Maximus",
-        "Arya",
-        "Odin", 
-        "Ragnar",
-        "Loki",
-        "Athena",
-        "Dante",
-        "Orion",
-        "Alucard",
-        "Thorin",
         "Legolas", 
+        "Logan",
+
+        "Maleficent", 
+        "Morpheus",
+        "Maximus",
+
+        "Nemo",
+        "Neo",
+        "Narkia",
+
+        "Odin", 
+        "Orion",
+        
+        "Pascal",
+        "Paragon",
+
+        "Ripley",
+        "Ragnar",
+
         "Strider",
         "Spartacus",
-        "Elektra",
         "Storm",
-        "Logan",
+
+        "Trinity",
+        "Thorin",
+
+        "Jareth",
+        
+        "Kratos",
+        
+        "Xena",
+        
+        "Zorro",
+        
         "Wolverine",
         "Rogue", 
         "Phoenix",
@@ -3031,7 +3067,6 @@ def Racial_Names(Type):
         "Raven",
         "Sabrina",
         "Seraph",
-        "Azrael",
         "Lucifer",
         "Castiel",
         "Crowley", 
@@ -3046,16 +3081,13 @@ def Racial_Names(Type):
         "Medusa",
         "Tyrion",
         "Lysandra",
-        "Aelin",
         "Rowan",
         "Daemon",
-        "Altair",
         "Ezio", 
         "Desmond",
         "Leonardo",
         "Ramses",
         "Cleopatra",
-        "Ares",
         "Hera",
         "Zeus", 
         "Midas",
@@ -3167,25 +3199,48 @@ def Racial_Names(Type):
         "Anselm",
         "Augustine",
         "Anastasia",
-        "Beowulf","Belos",
+        "Beowulf",
+        "Belos",
         "Cid",
-        "Cicero","Caesar",
+        "Cicero",
+        "Caesar",
         "Cleopatra",
         "Denis",
-        "Emelot", "Jean", "Frank",  "Isildur",
-        "Theoden", "Lancelot", 
+        "Emelot",
+        "Jean",
+        "Frank",
+        "Isildur",
+        "Theoden",
+        "Lancelot", 
         "Thomas",
-        "Nicole", "Herbin",
-        "Elisabeth", "Katarina", "Beau",
-        "Reginald", "Ernest", "Aubert", 
-        "Neil",  "Menard", "Euphemia",
-        "Lucy", "Oda", "Lazarus", "Blanche",
+        "Nicole",
+        "Herbin",
+        "Elisabeth",
+        "Katarina",
+        "Beau",
+        "Reginald",
+        "Ernest",
+        "Aubert", 
+        "Neil",
+        "Menard",
+        "Euphemia",
+        "Lucy",
+        "Oda",
+        "Lazarus",
+        "Blanche",
         "Regina", 
         "Jasper",
-        "Anastasia", "Mathilda", "Brian",
-        "George", "Colbert", "Hubert", "James", 
-        "William", "Nathaniel",
-        "Edric", "Edward",
+        "Anastasia",
+        "Mathilda",
+        "Brian",
+        "George",
+        "Colbert",
+        "Hubert",
+        "James", 
+        "William",
+        "Nathaniel",
+        "Edric",
+        "Edward",
         "Christopher",
         "Martin",
         "Emma",
@@ -3272,13 +3327,11 @@ def Racial_Names(Type):
         "Horace",
         "Gregory", 
         "Jerome",
-        "Rollo",
         "Ivan",
         "Peter",
         "Catherine",
         "Nicholas", 
         "Rasputin",
-        "Vladimir",
         "Maria",
         "Olga",
 
@@ -3298,10 +3351,13 @@ def Racial_Names(Type):
 
         "Percy",
         "Percival",
+
+        "Rollo",
         
         "Tatiana",
   
         "Vigo",
+        "Vladimir",
         
         ""]
     
@@ -3351,8 +3407,6 @@ def Racial_Names(Type):
         
         "Wessex",
         "Windsor",
-
-        "York",
         
         "Hapsburg",
         "Plantin",
@@ -3506,8 +3560,10 @@ def Racial_Names(Type):
         "Dostoyevsky",
         "Dundragon",
         "Pendragon",
-        "Clawthorne"
-        ]
+        "Clawthorne",
+        "York",
+
+        ""]
     if Type == "Human":
         Names = Humans
         Surnames = Human_Surnames
@@ -3888,7 +3944,8 @@ def Racial_Names(Type):
         "Laucian", "Lael", "Laer", "Larin", "Lauriel", "Laurin",
         "Leshanna", "Lia", "Liliandil", "Liadon",
         "Lilis", "Lirn", "Lithor", "Lora",
-        "Loria", "Loria", "Loriel", "Lorin", "Lue", "Lura",
+        "Loria", "Loria",
+        "Loriel", "Lorin", "Lue", "Lura",
         "Luthien", "Lyfaen", "Lyrial",
         "Mai", "Maindaer", "Malkis",
         "Mara", "Maleficent", "Maralen", "Maur",
@@ -3920,7 +3977,9 @@ def Racial_Names(Type):
         "Van",
         "Vanes", "Vax", "Vaxeldan",
         "Vex", "Vexhalia", "Viasta", "Wasanzi",
-        "Wil", "Wenion", "Xanapia", "Xyrkraken", "Xylia", "Yael",
+        "Wil", "Wenion",
+        "Xanapia", "Xyrkraken",
+        "Xylia", "Yael",
         "Yaeldrin", "Yesstina",
         "Zamior", "Zarivol",
         "Zay", "Zelaerys",
@@ -3969,7 +4028,8 @@ def Racial_Names(Type):
         "Moonrise", "Sunblade", 
         "Mistbreeze", "Eveningstar",
         "Sundancer",
-        "Whisperleaf", "Dreamcatcher",
+        "Whisperleaf",
+        "Dreamcatcher",
         "Leafwhisper", 
         "Starweaver",
         "Sunshard",
@@ -3977,8 +4037,10 @@ def Racial_Names(Type):
         "Glimmermoon",
         "Nightriver",
         "Silverwind", 
-        "Lightshade", "Moondancer", "Frostleaf",
-        "Starbloom", "Rainwhisper", "Glimmerstone", 
+        "Lightshade", "Moondancer",
+        "Frostleaf",
+        "Starbloom", "Rainwhisper",
+        "Glimmerstone", 
         "Silverfrost", "Goldensong", "Sunspark",
         "Nightglow",
         "Starflight", "Rainshadow", 
@@ -4184,21 +4246,30 @@ def Racial_Names(Type):
         "Yurksson",
         "Ereksson", "Eriksson",
         "Arnsson",
-        "Battlebreaker", "Warfist",
+        "Battlebreaker",
+        "Warfist",
         "Strongaxe", "Ironclaw",
         "Stoneheart", "Firebrand", 
         "Stormcaller", "Thunderfury",
         "Battlescream", "Warchief",
         "Bloodaxe", "Skullsmasher", 
-        "Ironjaw", "Shadowfury",
-        "Bladesinger", "Marrowrend",
-        "Ragehorn", "Boneshatter", 
-        "Stonebreaker", "Thunderclap",
-        "Warblade", "Goreaxe",
-        "Frostmaul", "Darkfury", 
-        "Stormblade", "Earthshaker",
+        "Ironjaw",
+        "Shadowfury",
+        "Bladesinger",
+        "Marrowrend",
+        "Ragehorn",
+        "Boneshatter", 
+        "Stonebreaker",
+        "Thunderclap",
+        "Warblade",
+        "Goreaxe",
+        "Frostmaul",
+        "Darkfury", 
+        "Stormblade",
+        "Earthshaker",
         "Firefist",
-        "Blooddrinker", "Ragefury",
+        "Blooddrinker",
+        "Ragefury",
         "Warsong", 
         "Battlerager",
         "Goreclaw",
@@ -4485,7 +4556,6 @@ def Racial_Names(Type):
         
         "Velasco",
         
-        "Ximeno",
         
         "Jimeno",
         
@@ -4522,7 +4592,8 @@ def Racial_Names(Type):
         "Jácaro", "Rosario",
         "Fingido", "Anancio",
         "Anancia",
-        "Pansiano", "Fertilio",
+        "Pansiano",
+        "Fertilio",
         "Constantina", "Jarana",
         "Morana", "Nora",
         "Olivia", "Olivio",
@@ -4686,40 +4757,101 @@ def Racial_Names(Type):
         "Toribio", "Ugo",
         "Victorino", "Waldo",
         "Xerxes", "Yesid",
-        "Zacarias", "Adan", 
-        "Bartolome", "Celestino",
-        "Demetrio",
-        "Ernesto",
-        "Fidel",
-        "Guillermo",
-        "Hilario", 
-        "Indalecio",
-        "Joaquin",
-        "Luis",
-        "Manolo",
-        "Narciso",
-        "Osvaldo",
-        "Pedro",
-        "Ramon",
-        "Sancho",
-        "Timoteo",
-        "Urbano",
-        "Valentino",
-        "Wilmer",
-        "Xico",
-        "Ysidro",
-        "Zenon",
-        "Zeferino"
 
-        ]
+        "Adan",
+        
+        "Bartolome",
+
+        "Celestino",
+        
+        "Demetrio",
+        
+        "Ernesto",
+        
+        "Fidel",
+        
+        "Guillermo",
+        
+        "Hilario",
+        
+        "Indalecio",
+        
+        "Joaquin",
+        
+        "Luis",
+        
+        "Manolo",
+        
+        "Narciso",
+        
+        "Osvaldo",
+        
+        "Pedro",
+        
+        "Ramon",
+        
+        "Sancho",
+        
+        "Timoteo",
+        
+        "Urbano",
+        
+        "Valentino",
+        
+        "Wilmer",
+        
+        "Xico",
+        "Ximeno",
+        
+        "Ysidro",
+        
+        "Zenon",
+        "Zeferino",
+        "Zacarias",
+
+        ""]
     
     DwarvenSurnames = [
-        "Stonewrought",
-        "Forgekeeper",
-        "Gemseeker",
-        "Deepdelver",
+        "Anvilado",
+        "Aguamarinaclara",  
+        "Aullidometálico",   
+
+        "Buscagemas",
+        
+        "Forjanegra",
+        "Forjablanca",
+        "Forjaroja",
+        "Forjareal",
+        "Forjadoro",
+        "Forjaura",
+        "Forjador",
+        "Forjarocas",
+        "Forjalmas",
+        "Forjalta",
+        "Forjabaja",
+        "Forjagemas",
+        "Forjaplata",
+        "Forjaferro",
+        "Forjamares",
+        "Forjaestaño",
+        "Forjargenta",
+        "Forjasangre",
+        "Forjafilos",
+        "Forjachizos",
+        "Forjaruna",
+        "Forjayunques",
+        "Forjafuegos",
+        "Forjaflama",
+        "Forjaespina",
+        "Leáforja",
+
+        "Profundador",
+
+
+        "Rocantinero",
+        
+        
         "Mountainborn",
-        "Anvilbender",
         "Goldbeard",
         "Runebearer",
         "Earthshaker",
@@ -4905,7 +5037,12 @@ def Racial_Names(Type):
         "Cristalreal",  
         "Monteescudo",   
         "Orablanco",  
+        "Oroblanco",
+        "Oronegro",
+        "Ororojo",
+        
         "Luzdeambar",   
+        "Luzambar",   
         "Guardiándeplata",  
         "Espiraldehierro",  
         "Tesoroabierto",   
@@ -4913,8 +5050,6 @@ def Racial_Names(Type):
         "Sueñodeoro",  
         "Piedrasagaz",  
         "Cadenadeacero",   
-        "Aguamarinaclara",  
-        "Aullidometálico",   
         "Torrejoya",  
         "Pilardeoro",   
         "Lanzadeplata",   
