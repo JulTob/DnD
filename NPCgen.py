@@ -4843,7 +4843,7 @@ def Racial_Names(Type):
         "Forjafuegos",
         "Forjaflama",
         "Forjaespina",
-        "Leáforja",
+        "Leñaforja",
 
         "Profundador",
 
@@ -4851,16 +4851,20 @@ def Racial_Names(Type):
         "Rocantinero",
         
         
-        "Mountainborn",
-        "Goldbeard",
-        "Runebearer",
-        "Earthshaker",
-        "Fireforge", 
+        "Montealtivo",
+        
+        "Barboro",
+        "Prtarrunas",
+        "Temblaterra",
+        "Fuegoforja", 
         "Oropeza",
         "Montoya",
         "Castillo",
         "Valencia",
         "De la Vega",
+        "De la Monta",
+        "Delmonte",
+        "Belmonte",
         "Cortez",
         "Navarro",
         "Esparza",
@@ -4869,11 +4873,17 @@ def Racial_Names(Type):
         "Cervantes",
         "Mendoza",
         "Lopez de Oro",
+        "Lopez",
+        "Topacio",
+
         "Zambrano",
         "Arroyo",
         "Bernal",
         "Herrera",
         "De la Cruz",
+        "De las Nieves",
+        "Piconevado",
+        "De la Beta",
         "Serrano",
         "Villanueva",
         "Galindo",
@@ -4920,6 +4930,35 @@ def Racial_Names(Type):
         "Briseno",
         "De la Torre",
         "Montes",
+        "Montellano",
+        "Monteagudo",
+        "Montenueva",
+        "Montenuevo",
+        "Monteviejo",
+        "Bellomonte",
+        "Noblemonte",
+        "Monterroble",
+        "Roblemonte",
+        "Montepicado",
+        "Montanza",
+        "Montarazo",
+        "Guardamonte",
+        "Guardapico",
+        "Guardagema",
+        "Guardaoro",
+        "Argenta",
+        "Argentez",
+        "Guardargenta",
+        "Guardahierros",
+        "Guardaferro",
+        "Guardaferrea",
+        "Guardaluna",
+        "Guardasol",
+        "Soloro",
+        "Orosol",
+        "Arguna",
+        "Arguña",
+        "Uranio",
         "Barrios",
         "Orellana",
         "Valero",
@@ -4943,52 +4982,79 @@ def Racial_Names(Type):
         "Oronegro",
         "Hierrofino",
         "Piedrapreciosa",
-        "Minadeplata",
+        "Piedraociosa",
+        "Minaplata",
         "Piedrajoya",
         "Oroazul",  
+        "Oroclaro",  
         "Plataclara",
         "Rubirote",
-        "Joyadelmar",
+        "Joyamar",
         "Montediamante",
+        "Monteamante",
+        "Montemante",
         "Ororico",
-        "Cavernaoro",  
+        "Cavernoro",  
         "Platafuerte",
-        "Gemaestrella",
+        "Gemestrella",
         "Hierroprofundo",
+        "Hierrofundo",
         "Metalbrillante",  
+        "Metalante",  
         "Oradelfuego",  
+        "Orafuego",  
         "Fraguamaestra", 
+        "Fraguaestra", 
         "Mazodehierro",  
+        "Mazohierro",  
+        "Mazoferro",  
         "Escudopiedra", 
-        "Corazóndorada",   
+        "Escupiedra", 
+        "Corazondorada",   
+        "Corazondoro",   
         "Martillazo", 
         "Picoagudo",  
+        "Picogudo",  
         "Lingotedeoro",  
+        "Lingoteoro",  
+        "Lingoro",  
         "Cristalclaro",  
+        "Crisclaro",  
         "Montañaminera",   
+        "Montinera",   
         "Escudojoya",  
+        "Escujoya",  
         "Ardorfuego",   
         "Aceroantiguo",  
         "Cascoduro",   
         "Piedrafuerte",  
         "Esmeraldaeterna",  
+        "Esmeralterna",  
         "Piedradeluz",  
+        "Piedraluz",  
         "Oroescondido",   
+        "Orondido",   
         "Luzdemina",  
+        "Luzmina",  
         "Relucienteplata",   
         "Hierrosagrado",  
         "Agujerojoya",  
+        "Agujoya",  
         "Piedradevalor",   
         "Riolatente",  
         "Corazóndeacero",  
         "Oradelsol",  
         "Minadellago",  
+        "Minalago",  
         "Grialdeplata",   
         "Escoriabrillante",  
+        "Escoriante",  
         "Monteplata",  
         "Astilladehierro",   
         "Fuentedeoro",  
+        "Fuenteoro",  
         "Cascodediamante",  
+        "Cascodiamante",  
         "Reflejometálico",   
         "Torredelmina",   
         "Guardiánmetal",   
@@ -5005,6 +5071,7 @@ def Racial_Names(Type):
         "Rocaeterna",  
         "Platacasta",   
         "Cristalazul",  
+        "Cristazul",  
         "Orofrío",  
         "Escudorubi",  
         "Hierroestelar",  
@@ -5080,7 +5147,6 @@ def Racial_Names(Type):
     Elementals = [
         # Water Elementals
         "Aqualis",
-        "Vatnavi",
         "Suyasha",
         "Neptaline",
         "Llyncor",
@@ -5112,7 +5178,8 @@ def Racial_Names(Type):
         "Well", "Marin", "Severn", "Marina", "Tiber",
         "Tiberius", "Jennifer", "Jen", "Rain", "Wade",
         "Ocen", "Oceanus", "Beck", "Malik", "Malek",
-        "Irv", "Clyde", "Indus", "Indo", "Nimue", "Nim",
+        "Irv", "Clyde",
+        "Indus", "Indo", "Nimue", "Nim",
         "Avalon", "Merlin", "Nixie", "Doris", "Kent",
         "Kendall", "Rio", "Cove", "Bahia", "Innes",
         "Moses", "Fuji", "Anahita", "Ginevra", "Gin",
@@ -5186,82 +5253,136 @@ def Racial_Names(Type):
         "Cary", "Kisima",
         "Laguna",
         "Narelle", "Nile",
-        "Nilo", "Nimue", "Serena", "Sereno",
-        "Yara", "Alon", "Kano",
-        "Wade", "Naia", "Tide",
-        "Adriatic", "Ariel", "Athena",
-        "Atena", "Azena",
-        "Eldoris", "Marin",
-        "Kona", "Argo",
+        "Nilo",
+        "Nimue",
+        "Serena",
+        "Sereno",
+        "Yara",
+        "Alon",
+        "Kano",
+        "Wade",
+        "Naia",
+        "Tide",
+        "Adriatic",
+        "Ariel",
+        "Athena",
+        "Atena",
+        "Azena",
+        "Eldoris",
+        "Marin",
+        "Kona",
+        "Argo",
         "Arcadia",
-        "Blue", "Lima",
+        "Blue",
+        "Lima",
         "Andaya",
-        "Niar", "Mora",
+        "Niar",
+        "Mora",
         "Amal",
-        "Kaya", "Dorian",
+        "Kaya",
+        "Dorian",
+        "Vatnavi",
         # Fire Elementals
         "Pyraan",
-        "Agnivir", "Tulikor",
-        "Igniferro", "Lavasol",
-        "Fuocco", "Phoenix", "Ember",
-        "Cyrus", "Rhys",
-        "Apollo", "Kenna", "Blaze",
-        "Flame", "Arsenic",
-        "Kenna", "Ravi",
+        "Agnivir",
+        "Tulikor",
+        "Igniferro",
+        "Lavasol",
+        "Fuocco",
+        "Phoenix",
+        "Ember",
+        "Cyrus",
+        "Rhys",
+        "Apollo",
+        "Kenna",
+        "Blaze",
+        "Flame",
+        "Arsenic",
+        "Kenna",
+        "Ravi",
         "Aster", "Ignatius",
         "Ignacio", "Ignatio",
         "Hera", "Uri",
         "Edris", "Satish",
         "Calcifer", "Sol",
-        "Solina", "Solin", "Salamander",
+        "Solina", "Solin",
+        "Salamander",
         "Ardea", "Ravee",
         "Vulcan", "Eldir",
-        "Hito", "Agni", "Waru",
-        "Alev", "Haco", "Adar",
-        "Agni", "Aiden",
-        "Adish", "Afi",
-        "Ardere", "Ash",
-        "Ashbel", "Atesh", "Blaze",
+        "Hito", "Agni",
+        "Waru",
+        "Alev", "Haco",
+        "Adar",
+        "Agni",
+        "Aiden",
+        "Adish",
+        "Afi",
+        "Ardere",
+        "Ash",
+        "Ashbel",
+        "Atesh",
+        "Blaze",
         "Bodaway", "Brand",
         "Brando",
         "Branton", "Brent",
         "Conleth", "Cimbeline",
-        "Cyrus", "Cirio", "Egan", "Finlo",
+        "Cyrus", "Cirio",
+        "Egan", "Finlo",
         "Fintan", "Flint",
-        "Haco", "Hagan", "Hakan",
-        "Helios", "Elio", "Inigo", "Iñigo",
+        "Haco", "Hagan",
+        "Hakan",
+        "Helios", "Elio",
+        "Inigo", "Iñigo",
         "Ishaan", "Keahi",
-        "Keegan", "Kenneth",
+        "Keegan",
+        "Kenneth",
         "Kiran",
         "Maccoy", "Nuri",
         "Prometheus",
-        "Prometeo", "Promezeus",
-        "Prometeus", "Ra",
+        "Prometeo",
+        "Promezeus",
+        "Prometeus",
+        "Ra",
         "Rhys",
         "Tyson", "Uri",
-        "Vulcan", "Aalish",
+        "Vulcan",
+        "Aalish",
         "Aidan", "Adar",
-        "Aithne", "Aizne",
+        "Aithne",
+        "Aizne",
         "Alinta",
         "Anala", "Azar",
         "Barbara", "Calida",
         "Candace", "Cinder",
-        "Ceniza", "Cinderella",
-        "Cinderel", "Edan",
+        "Ceniza",
+        "Cenicienta",
+        "Cinderella",
+        "Cinderel",
+        "Edan",
         "Ember", "Ambar",
         "Amber", "Ena",
-        "Enya", "Anya", "Fiamma",
+        "Enya",
+        "Anya",
+        "Fiamma",
         "Flama",
         "Idris",
         "Kalama",
         "Kenna",
-        "Pele", "Fenix",
-        "Shula", "Souzan", "Tana",
-        "Burn", "Abenanka",
-        "Aguya", "Aithne",
-        "Alinta", "Bedelia",
-        "Brid", "Calida",
-        "Calina", "Enya",
+        "Pele",
+        "Fenix",
+        "Shula",
+        "Souzan",
+        "Tana",
+        "Burn",
+        "Abenanka",
+        "Aguya",
+        "Aithne",
+        "Alinta",
+        "Bedelia",
+        "Brid",
+        "Calida",
+        "Calina",
+        "Enya",
         "Eña",
         "Enia",
         "Ember",
@@ -5377,40 +5498,69 @@ def Racial_Names(Type):
         "Azurite", "Adamantine", "Agate", "Alabaster", "Bismite",
         "Bismut", "Bronce", "Cadmium", "Cerite", "Carvonite", "Crystal",
         "Copper", "Cobre", "Cementite", "Emerald", "Diamond", "Mine", "Fluorite",
-        "Garnet", "Gold", "Hematite", "Magnetite", "Manganite", "Mesolite", "Mimetite",
-        "Mica", "Magnesia", "Neptinite", "Pyrite", "Pirite", "Quartz", "Ruby", "Titanite",
+        "Garnet", "Gold",
+        "Hematite", "Magnetite",
+        "Manganite", "Mesolite", "Mimetite",
+        "Mica", "Magnesia",
+        "Neptinite", "Pyrite",
+        "Pirite", "Quartz",
+        "Ruby", "Titanite",
         "Turquesa", "Turkis",
-        "Turquoise", "Tremor", "Uralite", "Zeolite", "Zinc", "Zircon",
+        "Turquoise", "Tremor",
+        "Uralite", "Zeolite",
+        "Zinc", "Zircon",
         "Lithium", "Sodium",
-        "Potassium", "Rubidium", "Cesium", "Francium", "Berillium", "Magnesium",
-        "Calcium", "Strontium", "Barium", "Radium", "Aluminium", "Gallium", "Indium", "Tin", "Thallium",
+        "Potassium", "Rubidium",
+        "Cesium", "Francium", "Berillium", "Magnesium",
+        "Calcium", "Strontium",
+        "Barium", "Radium", "Aluminium", "Gallium", "Indium", "Tin", "Thallium",
         "Lead", "Bismuto", "Titanium",
-        "Vanadium", "Chromium", "Manganese", "Iron", "Cobalt", "Nickel",
+        "Vanadium", "Chromium",
+        "Manganese", "Iron", "Cobalt", "Nickel",
         "Copper", "Zinc", "Zirconium",
-        "Rodium", "Palladium", "Silver", "Cadmium", "Tunsten", "Osmium",
-        "Platinum", "Gold", "Mercury", "Plata",
-        "Oro", "Copernicium", "Uranium", "Plutonium", "Curium",
-        "Californium", "Einstenium", "Fermium",
+        "Rodium", "Palladium",
+        "Silver", "Cadmium", "Tunsten", "Osmium",
+        "Platinum", "Gold",
+        "Mercury", "Plata",
+        "Oro", "Copernicium",
+        "Uranium", "Plutonium", "Curium",
+        "Californium", "Einstenium",
+        "Fermium",
         "Nobelium", "Lithium",
-        "Berilium", "Sodium", "Magnesium",
-        "Potasium", "Calcium", "Titanium",
-        "Vanadium", "Chrome", "Chromium", "Manganese", "Iron",
+        "Berilium", "Sodium",
+        "Magnesium",
+        "Potasium", "Calcium",
+        "Titanium",
+        "Vanadium", "Chrome",
+        "Chromium", "Manganese", "Iron",
         "Cobalt", "Nickel", "Copper", "Zinc",
-        "Gallium", "Rubidium", "Strontium", "Zirconium", "Niobium",
+        "Gallium", "Rubidium",
+        "Strontium", "Zirconium", "Niobium",
         "Rodium", "Silver", "Cadmium", "Indium",
-        "Tin", "Cesium", "Cerium", "Promethium", "Iridium",
+        "Tin", "Cesium", "Cerium",
+        "Promethium", "Iridium",
         "Platinum", "Mercury", "Mercurium",
-        "Lead", "Bismutium", "Polonium", "Uranium", "Alabaster",
-        "Argento", "Berilio", "Clay", "Coal",
+        "Lead", "Bismutium",
+        "Polonium", "Uranium",
+        "Alabaster",
+        "Argento", "Berilio",
+        "Clay", "Coal",
         "Cobalt",
-        "Dustin", "Elessar", "Emerald",
+        "Dustin", "Elessar",
+        "Emerald",
         "Ferro", "Granite",
-        "Mercury", "Mica", "Oriol", "Oro",
+        "Mercury", "Mica",
+        "Oriol", "Oro",
         "Peter", "Pedro",
-        "Saphir", "Silver", "Steel",
-        "Stone", "Zircon", "Bronze",
-        "Iron", "Ferro", "Electrum",
-        "Sterling", "Argentium", "Titanium",
+        "Saphir", "Silver",
+        "Steel",
+        "Stone", "Zircon",
+        "Bronze",
+        "Iron", "Ferro",
+        "Electrum",
+        "Sterling",
+        "Argentium",
+        "Titanium",
         "Cole",
         "Arena",
         "Arenita",
@@ -5460,36 +5610,67 @@ def Racial_Names(Type):
         "Cierzo", "Etesian", "Euroclydon", "Fohn", "Gregale", "Helm", "Leveche",
         "Lodos", "Maestro", "Marin", "Mistral", "Nordes", "Ostro", "Poliente",
         "Solano", "Tramontane", "Vendavel", "Kona", "Abel", "Aeolus", "AkashAmun",
-        "Anan", "Cloud", "Anil", "Nube", "Anore", "Arkansas", "Avel", "Barak",
-        "Baran", "Brontes", "Caelus", "Corentin", "EnlilErjon", "Esen", "Guntur",
-        "Keanu", "Matuu", "Mellan", "Moe", "Myrsky", "Naseem", "Neifion", "Neil",
-        "Neve", "Nigel", "Notus", "Payne", "Perun", "Firun", "Samir", "Sepher",
-        "Shu", "Sky", "Stromur", "Sturm", "Thor", "Thunder", "Storm", "Torm", "Tufani",
-        "Van", "Zenith", "Zephyr", "Zeus", "Aella", "Aethra", "Ahana", "Alize", "Amihan",
-        "Anemos", "Anila", "Araceli", "Audra", "Aura", "Auretta", "Awen", "Azure", "Bonaria",
-        "Ciela", "Cielo", "Dangira", "Dima", "Ekaitza", "Era", "Glaw", "Haizea", "Haneul",
-        "Inanna", "Iris", "Kafeira", "Cafeira", "Minnesota", "Misty", "Mist",
-        "Nephele", "Ninlil", "Nuit", "Pilvi", "Puleng", "Rain", "Rakia", "Samira", "Sema",
-        "Skye", "Stormy", "Tempest", "Tondra", "Varsha", "Vetra", "Zerua", "Zilan", "Mistral",
-        "Gibli", "Zonda", "Etesian", "Shamal", "Aither", "Akash", "AlizehAmphorn", "Amun", "Anan",
-        "AnilAnore", "Anvindr", "Ayaz", "Bayu", "Boreas", "Caelus", "Corentin", "Enlil", "Erjon",
-        "Ermir", "Esen", "Eyvinder", "FujinGokcan", "Govad", "Guzrie", "Hayate", "Ilmari", "Keyne",
-        "Naseem", "Neven", "Notus", "Ouranos", "Payne", "Rabi", "Samir", "Sepher", "Soma", "Sota",
-        "Tifon", "Vayu", "Zeferino", "Zenit", "Zefir", "Zeru", "Zeus", "Aella", "Aethra", "Ahana",
-        "Alizee", "Alizeh", "Alya", "Amaterasu", "Amihan", "Anila", "Aria", "Aureole", "Auretta",
-        "Azure", "Bonaria", "Breeze", "Brisa", "Ciela", "CoroEra", "Esen", "Eteri", "Haizea", "Haneul",
-        "Ilma", "Kailani", "Kalani", "Lulani", "Makani", "Meltem", "Miku", "Mystral", "Nasima", "Ninlil",
-        "Nuit", "Rakia", "Samira", "Sciron", "Scirocco", "Sefarina", "Sema", "Skye", "Tadita", "Wind",
-        "Zephyrine", "Zerua", "Damini", "Oya", "Nebula", "Misty", "Mist", "Wind", "Brenna", "Sail", "Vela",
-        "Katrina", "Amakir", "Abub", "Zeam", "Vesha", "Nura", "Wura", "Enarise", "Amana", "Aeana", "Akades",
-        "Miste", "Zecori", "Sirocco", "Siroco", "Aura", "Zepherien", "Sior", "Annora", "Ael",
+        "Anan", "Cloud", "Anil", "Nube",
+        "Anore", "Arkansas", "Avel", "Barak",
+        "Baran", "Brontes", "Caelus", "Corentin",
+        "EnlilErjon", "Esen", "Guntur",
+        "Keanu", "Matuu", "Mellan", "Moe", "Myrsky",
+        "Naseem", "Neifion", "Neil",
+        "Neve", "Nigel", "Notus", "Payne", "Perun",
+        "Firun", "Samir", "Sepher",
+        "Shu", "Sky", "Stromur", "Sturm", "Thor",
+        "Thunder", "Storm", "Torm", "Tufani",
+        "Van", "Zenith", "Zephyr", "Zeus", "Aella",
+        "Aethra", "Ahana", "Alize", "Amihan",
+        "Anemos", "Anila", "Araceli", "Audra",
+        "Aura", "Auretta", "Awen", "Azure", "Bonaria",
+        "Ciela", "Cielo", "Dangira", "Dima",
+        "Ekaitza", "Era", "Glaw", "Haizea", "Haneul",
+        "Inanna", "Iris", "Kafeira", "Cafeira",
+        "Minnesota", "Misty", "Mist",
+        "Nephele", "Ninlil", "Nuit", "Pilvi",
+        "Puleng", "Rain", "Rakia", "Samira", "Sema",
+        "Skye", "Stormy", "Tempest", "Tondra",
+        "Varsha", "Vetra", "Zerua", "Zilan", "Mistral",
+        "Gibli", "Zonda", "Etesian", "Shamal",
+        "Aither", "Akash", "AlizehAmphorn", "Amun", "Anan",
+        "AnilAnore", "Anvindr", "Ayaz", "Bayu",
+        "Boreas", "Caelus", "Corentin", "Enlil", "Erjon",
+        "Ermir", "Esen", "Eyvinder", "FujinGokcan",
+        "Govad", "Guzrie", "Hayate", "Ilmari", "Keyne",
+        "Naseem", "Neven", "Notus", "Ouranos", "Payne",
+        "Rabi", "Samir", "Sepher", "Soma", "Sota",
+        "Tifon", "Vayu", "Zeferino", "Zenit", "Zefir",
+        "Zeru", "Zeus", "Aella", "Aethra", "Ahana",
+        "Alizee", "Alizeh", "Alya", "Amaterasu",
+        "Amihan", "Anila", "Aria", "Aureole", "Auretta",
+        "Azure", "Bonaria", "Breeze", "Brisa", "Ciela",
+        "CoroEra", "Esen", "Eteri", "Haizea", "Haneul",
+        "Ilma", "Kailani", "Kalani", "Lulani", "Makani",
+        "Meltem", "Miku", "Mystral", "Nasima", "Ninlil",
+        "Nuit", "Rakia", "Samira", "Sciron", "Scirocco",
+        "Sefarina", "Sema", "Skye", "Tadita", "Wind",
+        "Zephyrine", "Zerua", "Damini", "Oya", "Nebula",
+        "Misty", "Mist", "Wind", "Brenna", "Sail", "Vela",
+        "Katrina", "Amakir", "Abub",
+        "Zeam", "Vesha", "Nura",
+        "Wura", "Enarise", "Amana",
+        "Aeana", "Akades",
+        "Miste", "Zecori",
+        "Sirocco",
+        "Siroco", "Aura",
+        "Zepherien", "Sior",
+        "Annora", "Ael",
 
         # Additional Elemental References
-        "Lignan", "Metallor", "Astrelitz",
+        "Lignan",
+        "Metallor",
+        "Astrelitz",
         "Fulgarnis",
         "Glacialyne", 
         "Rayostrike",
-        "Jääspirit", "Ombrosyl",
+        "Jääspirit",
+        "Ombrosyl",
         "Element"
     ]
     if Type == "Elemental": 
@@ -5517,15 +5698,22 @@ def Racial_Names(Type):
         "Gagak", "Kakka",
         "Vrana", "Kraischen",
         "Nnamungoona", "Libata", "Varna", "Fung",
-        "Zax", "Blak", "Bod", "Black", "Karga", "Igikona",
+        "Zax", "Blak", "Bod",
+        "Black", "Karga", "Igikona",
         "Qarga", "Manuk", "Gagak",
         "Karasu", "Corvo", "Kraka", "Preachan", "Crow",
-        "Raven", "Rook", "Corax", "Burung",
+        "Raven", "Rook",
+        "Corax", "Burung",
         "Gagak", "Uwak", "Uko", "Varju", "Tsov", "Kaua",
-        "Koo", "Hankaka", "Kagado", "Yryvu",
-        "Koraki", "Qvavi", "Kaga", "Krake", "Qurruu",
-        "Kam", "Wrona", "Corvo", "Cuervo",
-        "Cioara", "Vorona", "Matuu", "Legokobu", "Vrana",
+        "Koo", "Hankaka",
+        "Kagado", "Yryvu",
+        "Koraki", "Qvavi",
+        "Kaga", "Krake",
+        "Qurruu",
+        "Kam", "Wrona",
+        "Corvo", "Cuervo",
+        "Cioara", "Vorona",
+        "Matuu", "Legokobu", "Vrana",
         "Lekgwaba", "Gunguwo", "Tuke",
         "Kunguru", "Gala", "Gagak", "Uwak", "Xika",
         "Kakam", "Kapra", "Zoq", "Kaki",
@@ -5539,22 +5727,34 @@ def Racial_Names(Type):
         "Karok", "Corak",
         "Kavue", "Kakur", "Karaga",
         "Kakor", "Kaerv", "Kagaka", "Comunko",
-        "Corv", "Krueng", "Karak", "Kalaa", "Cabur",
-        "Kara", "Kak", "Karvis", "Korvun",
-        "Corvi", "Kukurv", "Haden", "Kanak", "Lera",
-        "Krai", "Kabak", "Unkur", "Kagan",
+        "Corv", "Krueng",
+        "Karak", "Kalaa", "Cabur",
+        "Kara", "Kak",
+        "Karvis", "Korvun",
+        "Corvi", "Kukurv",
+        "Haden", "Kanak", "Lera",
+        "Krai", "Kabak",
+        "Unkur", "Kagan",
         "Kakur", "Krara", "Koror", "Kakara", "Kar",
-        "Kaa", "Corr", "Kavon", "Kanaka",
-        "Kakut", "Kakak", "Kax", "Koke", "Kaeru",
-        "Karva", "Covar", "Karu", "Kakar",
-        "Kana", "Kav", "Draven",
+        "Kaa", "Corr",
+        "Kavon", "Kanaka",
+        "Kakut", "Kakak",
+        "Kax", "Koke", "Kaeru",
+        "Karva", "Covar",
+        "Karu", "Kakar",
+        "Kana", "Kav",
+        "Draven",
         "Kenku",
         "Chirrik", "Flit", "Glide", "Mimic", "Echo",
         "Shimmer", "Talon", "Plume", 
-        "Soar", "Shade", "Dusk", "Dawn", "Twilight",
-        "Nightcall", "Wingbeat", 
+        "Soar", "Shade",
+        "Dusk", "Dawn",
+        "Twilight",
+        "Nightcall",
+        "Wingbeat", 
         "Rustle",
-        "Murmur", "Feather", "Perch",
+        "Murmur", "Feather",
+        "Perch",
         "Roost", "Glitter", "Beaksharp", 
         "Swoop", "Windrider",
         "Cloudwing", "Skydance",
@@ -5609,14 +5809,19 @@ def Racial_Names(Type):
         "Chickador", "Wrenshade", "Nightinglare",
 
         # Waterfowl-inspired:
-        "Duckshade", "Gooslyn", "Swanpeak",
-        "Pintar", "Mallarion", "Tealis", "Pelicarn",
-        "Heronshade", "Egryx", "Loonspire",
+        "Duckshade", "Gooslyn",
+        "Swanpeak",
+        "Pintar", "Mallarion",
+        "Tealis", "Pelicarn",
+        "Heronshade", "Egryx",
+        "Loonspire",
 
         # Ocean Birds-inspired:
-        "Gullwind", "Terrix", "Albatrosar",
+        "Gullwind", "Terrix",
+        "Albatrosar",
         "Puffinox",
-        "Cormorantyx", "Petralis",
+        "Cormorantyx",
+        "Petralis",
         "Skuarion",
         "Shearshade",
 
@@ -5695,18 +5900,34 @@ def Racial_Names(Type):
         "Olive", "Pear", "Peppermint",
         "Pickle", "Pineaple", "Pistachio",
         "Plum", "Praline",
-        "Vino", "Pumpkin", "Raisin", "Rose",
-        "Rum", "Tangerine", "Violet", "Walnut", "Oreo",
-        "Avocado", "Amaretto", "Almendra",
-        "Aguacate", "Amarula", "Aqua", "Burbon", "Cognac",
-        "Chai", "Creme", "Coconut", "Pie",
-        "Tarta", "Choc", "Custard", "Dorian",
-        "Elderflower", "Evermint",
-        "Fresa", "Fraise", "Fejoa", "Fragola", "Fruitella",
-        "Granada", "Granadilla", "Macedonia",
-        "Grosella", "Guava",
-        "Hazelnut", "Honeycomb",
-        "Habanero", "Puro", "Cigarro",
+        "Vino", "Pumpkin",
+        "Raisin", "Rose",
+        "Rum", "Tangerine",
+        "Violet", "Walnut", "Oreo",
+        "Avocado", "Amaretto",
+        "Almendra",
+        "Aguacate", "Amarula",
+        "Aqua", "Burbon",
+        "Cognac",
+        "Chai", "Creme",
+        "Coconut", "Pie",
+        "Tarta", "Choc",
+        "Custard", "Dorian",
+        "Elderflower",
+        "Evermint",
+        "Fresa", "Fraise",
+        "Fejoa", "Fragola",
+        "Fruitella",
+        "Granada",
+        "Granadilla",
+        "Macedonia",
+        "Grosella",
+        "Guava",
+        "Hazelnut",
+        "Honeycomb",
+        "Habanero",
+        "Puro",
+        "Cigarro",
         "Hunny", "Honey", "Miel",
         "Crema", "Limon", "Cafe",
         "Kinder", "Kitkat", "Leche",
@@ -5722,13 +5943,19 @@ def Racial_Names(Type):
         "Peach", "Pomme", "Pera",
         "Rubarb",
         "Raisin",
-        "Toblerone", "Truffle",
+        "Toblerone",
+        "Truffle",
         "Walnuss",
-        "Waffle", "Yogurt", "Yema",
-        "Yuzu", "Carlota",
-        "Carrot", "Zanahoria",
+        "Waffle",
+        "Yogurt",
+        "Yema",
+        "Yuzu",
+        "Carlota",
+        "Carrot",
+        "Zanahoria",
         "Zitron",
-        "Picho", "Beler",
+        "Picho",
+        "Beler",
         "Sune",
         "Numea", "Orelle",
         "Trafa",
@@ -5740,27 +5967,38 @@ def Racial_Names(Type):
         "Perry", "Pipin", "Caramel",
         "Gamwick", "Mint",
         "Herleva", "Fairfut", "Berta",
-        "Underfut", "Pamfila", "Punkin",
+        "Underfut",
+        "Pamfila", "Punkin",
         "Bramblefoot", "Tansy",
         "Loras", "Faela", "Primrose", 
-        "Celandine", "Bramber", "Eldo",
+        "Celandine",
+        "Bramber", "Eldo",
         "Lalia", "Thistle", 
         "Honeybun", "Ciderpress",
         "Butterscotch", "Tiramis",
         "Muffinette", 
-        "Truffelino", "Raisinet",
-        "Orangetwist", "Gelatino",
+        "Truffelino",
+        "Raisinet",
+        "Orangetwist",
+        "Gelatino",
         "Sorbetta", 
-        "Pesto", "Cinnamelle",
-        "Pistachio", "Creampuff",
+        "Pesto",
+        "Cinnamelle",
+        "Pistachio",
+        "Creampuff",
         "Nutmeggy", 
-        "Frappucin", "Caramelita",
-        "Marshmellowy", "Puddington",
+        "Frappucin",
+        "Caramelita",
+        "Marshmellowy",
+        "Puddington",
         "Lemonella", 
-        "Gingerspice", "Briochee",
+        "Gingerspice",
+        "Briochee",
         "Cappuccina",
-        "Cherrybelle", "Brownieboots", 
-        "Jollybean", "Gigglepot",
+        "Cherrybelle",
+        "Brownieboots", 
+        "Jollybean",
+        "Gigglepot",
         "Merrychuckle",
         "Twinkletoes", "Gleeheart", 
         "Sunshine", "Chuckleberry",
@@ -6048,20 +6286,31 @@ def Racial_Names(Type):
         "Morosini",
         "Dorato",
         "Marmorini",
-        "Fabbretti", "Stellato",
+        "Fabbretti",
+        "Stellato",
         "Orlandini",
         "Grazzini",
-        "Lapidello", "Smeraldini",
-        "Rubinelli", "Diamante",
-        "Vespucci", "Palladino",
-        "Ghirlanda", "Lunetti",
-        "Solari", "Venturino",
-        "Piccolino", "Peruzzini",
+        "Lapidello",
+        "Smeraldini",
+        "Rubinelli",
+        "Diamante",
+        "Diamantinno",
+        "Vespucci",
+        "Palladino",
+        "Ghirlanda",
+        "Lunetti",
+        "Solari",
+        "Venturino",
+        "Piccolino",
+        "Peruzzini",
         "Baldovini",
         "Veneziano",
-        "Fiorentini", "Milanesi",
-        "Romanelli", "Napolitano",
-        "Torresi", "Siciliano",
+        "Fiorentini",
+        "Milanesi",
+        "Romanelli",
+        "Napolitano",
+        "Torresi",
+        "Siciliano",
         "Pescatore",
         "Montanari",
         "Riviero",
@@ -6288,14 +6537,19 @@ def Racial_Names(Type):
         "Calamidad", "Vanity",
         "Twisse", "Discretion",
         "Boston",
-        "Buried", "Sampson",
-        "Hate-ill", "Burton",
+        "Buried",
+        "Sampson",
+        "Hateill",
+        "Burton",
         "Forsaken",
         "Williams",
-        "Virtue", "Shepard",
+        "Virtue",
+        "Shepard",
         "Amynus",
         "Smen",
-        "Apronadius", "Abdamelek", "Xonsu",
+        "Apronadius",
+        "Abdamelek",
+        "Xonsu",
         "Aziza", "Ramla",
         "Neema", "Cleopatra",
         "Jendayi", "At",
@@ -6561,9 +6815,14 @@ def Racial_Names(Type):
         "Tarset",
         "Werenro",
         "Ahmose",
-        "Amasis", "Amenemhet", "Anen", "Banefre",
-        "Bek", "Henenu", "Huya", "Ibebi", "Idu",
-        "Ineni", "Ipuki", "Irsu", "Kawad", "Kawab",
+        "Amasis", "Amenemhet",
+        "Anen", "Banefre",
+        "Bek", "Henenu",
+        "Huya", "Ibebi",
+        "Idu",
+        "Ineni", "Ipuki",
+        "Irsu", "Kawad",
+        "Kawab",
         "Kenamon", "Kewap", "Khafra", "Khuesebek",
         "Masaharta", "Meketre", "Merenre", "Metjen",
         "Nebamun", "Nehi",
@@ -6864,7 +7123,6 @@ def Racial_Names(Type):
 
 
     if Type == "Undead":
-        Names += Goblins + Tieflings + Gnomes + Halflings + Avens + Elementals + Dwarves + Orcs + Giants + Elves + Humans + Beasts
         
         return random.choice(Names)
 
@@ -11811,7 +12069,9 @@ def Magic(Lvl, race=Race(), background=Background()):
             one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day")
 
         # 2/Day each
-        two_day_each_list = ["Magic Weapon", "Aid"]
+        two_day_each_list = [
+            "Magic Weapon",
+            "Aid"]
         for s in two_day_each_list:
             two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day")
 
@@ -12136,7 +12396,8 @@ def Magic(Lvl, race=Race(), background=Background()):
             third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
 
         # 4th Level Spells
-        fourth_list = ["Freedom of Movement", "Stoneskin", "Greater Invisibility", "Death Ward", "Banishment"]
+        fourth_list = [
+            "Freedom of Movement", "Stoneskin", "Greater Invisibility", "Death Ward", "Banishment"]
         for s in fourth_list:
             fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
 
@@ -12487,7 +12748,8 @@ def Magic(Lvl, race=Race(), background=Background()):
             three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day each")
 
         # 1st Level Spells
-        first_list = ["Feather Fall", "Jump", "Expeditious Retreat", "Longstrider", "Fog Cloud"]
+        first_list = [
+            "Feather Fall", "Jump", "Expeditious Retreat", "Longstrider", "Fog Cloud"]
         for s in first_list:
             first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
 
@@ -12835,7 +13097,8 @@ def Magic(Lvl, race=Race(), background=Background()):
         # 8th Level Spells
         eighth_list = [
             "Antimagic Field",
-            "Control Weather", "Demiplane", "Mind Blank", "Telepathy"]
+            "Control Weather",
+            "Demiplane", "Mind Blank", "Telepathy"]
         for s in eighth_list:
             eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
 
@@ -13406,7 +13669,8 @@ def Magic(Lvl, race=Race(), background=Background()):
             three, _ = add_spell(three, s, max_spell_level-3, 0, max_spell_level, spell_definition="3/Day each")
 
         # 1st Level Spells
-        first_list = ["Earth Tremor", "Entangle", "Longstrider", "Shield of Faith", "Thunderwave"]
+        first_list = [
+            "Earth Tremor", "Entangle", "Longstrider", "Shield of Faith", "Thunderwave"]
         for s in first_list:
             first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
 
@@ -13737,7 +14001,8 @@ def Magic(Lvl, race=Race(), background=Background()):
     if race == "Human":
 
         # Cantrips
-        cantrips_list = ["Prestidigitation", "Thaumaturgy", "Light", "Mending"]
+        cantrips_list = [
+            "Prestidigitation", "Thaumaturgy", "Light", "Mending"]
         for c in cantrips_list:
             cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
 
@@ -14196,12 +14461,14 @@ def Magic(Lvl, race=Race(), background=Background()):
             sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
 
         # 7th Level Spells
-        seventh_list = ["Regenerate", "Resurrection", "Symbol", "Conjure Celestial", "Fire Storm"]
+        seventh_list = [
+            "Regenerate", "Resurrection", "Symbol", "Conjure Celestial", "Fire Storm"]
         for s in seventh_list:
             seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
 
         # 8th Level Spells
-        eighth_list = ["Earthquake", "Holy Aura", "Antipathy/Sympathy", "Control Weather", "Giant Form"]
+        eighth_list = [
+            "Earthquake", "Holy Aura", "Antipathy/Sympathy", "Control Weather", "Giant Form"]
         for s in eighth_list:
             eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
 
@@ -14233,7 +14500,8 @@ def Magic(Lvl, race=Race(), background=Background()):
 
         # Cantrips
         cantrips_list = [
-            "Druidcraft", "Shillelagh", "Poison Spray", "Thorn Whip"]
+            "Druidcraft",
+            "Shillelagh", "Poison Spray", "Thorn Whip"]
         for c in cantrips_list:
             cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
 
@@ -14579,7 +14847,7 @@ def Senses(race = Race(), background = Background()):
         telepathy   += Dice(0) * Dice(3) * 10
         truesight   += Dice(0) * Dice(6) * 10
 
-        extras += f"Keen Senses: Advantage on Wisdom (Perception) checks that rely on one of their senses"
+        extras += f"\n- Keen Senses: Advantage on Wisdom (Perception) checks that rely on one of their senses"
         if Dice()==1: extras += enhanced_smell
         if Dice()==1: extras += enhanced_hearing
         if Dice()==1: extras += enhanced_taste
@@ -14601,7 +14869,7 @@ def Senses(race = Race(), background = Background()):
         telepathy   += Dice(0) * Dice(6) * 10
         truesight   += Dice(0) * Dice(3) * 10
 
-        extras += f"Keen Senses: Advantage on Wisdom (Perception) checks that rely on one of their senses"
+        extras += f"\n- Keen Senses: Advantage on Wisdom (Perception) checks that rely on one of their senses"
         
         if Dice()==1: extras += enhanced_smell
         if Dice()==1: extras += enhanced_hearing
@@ -14623,7 +14891,7 @@ def Senses(race = Race(), background = Background()):
         telepathy   += Dice(0) * Dice(10) * 20
         truesight   += Dice(0) * Dice(6) * 10
 
-        extras += f"Radiant Sight: Can see divine auras and celestial beings within a {normal} range."
+        extras += f"\n- Radiant Sight: Can see divine auras and celestial beings within a {normal} range."
         if Dice()==1: extras += aura_sense
         if Dice()==1: extras += empathy
         if Dice()==1: extras += precognition
@@ -14694,7 +14962,7 @@ def Senses(race = Race(), background = Background()):
         telepathy   += Dice(0) * Dice(3) * 10
         truesight   += Dice(0) * Dice(0) * 10
 
-        extras += f"Keen Senses: Advantage on Wisdom (Perception) checks that rely on sight and hearing."
+        extras += f"\n- Keen Senses: Advantage on Wisdom (Perception) checks that rely on sight and hearing."
         if Dice()==1: extras += enhanced_hearing
         if Dice()==1: extras += blind_fighting
 
@@ -14719,7 +14987,7 @@ def Senses(race = Race(), background = Background()):
         telepathy   += Dice(2) * Dice(6) * 10
         truesight   += Dice(0) * Dice(6) * 10
 
-        extras += f"Fey Sight: Can see through magical darkness and illusions up to {normal} feet."
+        extras += f"\n- Fey Sight: Can see through magical darkness and illusions up to {normal} feet."
         
         if Dice()==1: extras += aura_sense
         if Dice()==1: extras += empathy
@@ -15781,21 +16049,168 @@ def ConditionImmunities(race=Race(), background=Background()):
     "Unconscious": 1,
 },
 
+"Lizardfolk": {
+    "Blinded": 3,
+    "Charmed": 3,
+    "Deafened": 3,
+    "Frightened": 4,
+    "Grappled": 4,
+    "Incapacitated": 3,
+    "Paralyzed": 3,
+    "Petrified": 2,
+    "Poisoned": 5,
+    "Prone": 3,
+    "Restrained": 4,
+    "Stunned": 4,
+    "Unconscious": 2,
+},
+"Monstrosity": {
+    "Blinded": 3,
+    "Charmed": 2,
+    "Deafened": 3,
+    "Frightened": 2,
+    "Grappled": 4,
+    "Incapacitated": 3,
+    "Paralyzed": 3,
+    "Petrified": 3,
+    "Poisoned": 5,
+    "Prone": 4,
+    "Restrained": 4,
+    "Stunned": 3,
+    "Unconscious": 2,
+},
+"Ooze": {
+    "Blinded": 0,
+    "Charmed": 10,
+    "Deafened": 0,
+    "Frightened": 10,
+    "Grappled": 0,
+    "Incapacitated": 5,
+    "Paralyzed": 5,
+    "Petrified": 5,
+    "Poisoned": 0,
+    "Prone": 0,
+    "Restrained": 0,
+    "Stunned": 5,
+    "Unconscious": 0,
+},
 
-
+"Orc": {
+    "Blinded": 1,
+    "Charmed": 2,
+    "Deafened": 1,
+    "Frightened": 8,
+    "Grappled": 4,
+    "Incapacitated": 1,
+    "Paralyzed": 2,
+    "Petrified": 1,
+    "Poisoned": 3,
+    "Prone": 4,
+    "Restrained": 3,
+    "Stunned": 2,
+    "Unconscious": 1,
+},
+"Plant": {
+    "Blinded": 0,
+    "Charmed": 0,
+    "Deafened": 0,
+    "Frightened": 0,
+    "Grappled": 10,
+    "Incapacitated": 5,
+    "Paralyzed": 1,
+    "Petrified": 2,
+    "Poisoned": 1,
+    "Prone": 0,
+    "Restrained": 10,
+    "Stunned": 1,
+    "Unconscious": 0,
+},
+"Snakefolk": {
+    "Blinded": 2,
+    "Charmed": 5,
+    "Deafened": 2,
+    "Frightened": 3,
+    "Grappled": 3,
+    "Incapacitated": 2,
+    "Paralyzed": 1,
+    "Petrified": 1,
+    "Poisoned": 8,
+    "Prone": 2,
+    "Restrained": 2,
+    "Stunned": 1,
+    "Unconscious": 1,
+},
+"Undead": {
+    "Blinded": 10,
+    "Charmed": 10,
+    "Deafened": 10,
+    "Frightened": 10,
+    "Grappled": 5,
+    "Incapacitated": 1,
+    "Paralyzed": 10,
+    "Petrified": 10,
+    "Poisoned": 10,
+    "Prone": 5,
+    "Restrained": 5,
+    "Stunned": 10,
+    "Unconscious": 10,
+}
 
     }
 
+
+
+
     # Fetch the condition immunities for the selected race, or use an empty dictionary if the race is not defined
-    condition_immunity_weights = race_condition_immunities.get(race.name, {})
+    condition_immunity_weights = race_condition_immunities.get(race, {})
 
     # Randomly determine condition immunities based on the weights
     for condition, weight in condition_immunity_weights.items():
         if random.choices([True, False], [weight, 10 - weight])[0]:
             condition_immunities.append(condition)
 
-    return condition_immunities
+    # Format the output
+    if condition_immunities:
+        return "Condition Immunities: " + ", ".join(condition_immunities)
+    else:
+        return "No condition immunities"
 
+
+def Extra_Defenses(race, background):
+    # Definitions of extra defenses
+    magic_resistance = "\n- Magic Resistance: \n\t The {} has advantage on saving throws against spells and other magical effects."
+    regeneration = "\n- Regeneration: \n\t The {} regains 10 hit points at the start of its turn if it has at least 1 hit point."
+    parry = "\n- Parry: \n\t The {} can add 2 to its AC against one melee attack that would hit it."
+    berserker_resistance = "\n- Berserker Resistance: \n\t The {} has resistance to bludgeoning, piercing, and slashing damage."
+
+    # Dictionary to store possible extra defenses for each race
+    extra_defenses_race = {
+        "Aberration": [magic_resistance, regeneration],
+        # Add other races and their possible extra defenses here
+    }
+
+    # Dictionary to store possible extra defenses for each background
+    extra_defenses_background = {
+        "Noble": [parry],
+        "Berserker": [berserker_resistance],
+        # Add other backgrounds and their possible extra defenses here
+    }
+
+    # Fetch the extra defenses for the selected race and background
+    possible_extra_defenses_race = extra_defenses_race.get(race, [])
+    possible_extra_defenses_background = extra_defenses_background.get(background, [])
+
+    # Combine race and background defenses
+    possible_extra_defenses = possible_extra_defenses_race + possible_extra_defenses_background
+
+    # Randomly determine which extra defenses the character has
+    if possible_extra_defenses:
+        selected_defenses = random.choice(possible_extra_defenses)
+        formatted_defenses = selected_defenses.format(race)
+    else:
+        formatted_defenses = ""
+
+    return formatted_defenses
 
 
 def Abilities(race = Race(), background = Background()):
@@ -15815,32 +16230,7 @@ def Abilities(race = Race(), background = Background()):
     r += Movement(race, background) + "\n"
     r += Resistances(race, background) + "\n"
     r += ConditionImmunities(race, background) + "\n"
-    
-
-    if race == "Aberration":
-
-        
-        condition_immunities = [
-                "Prone",
-                "Blinded",
-                "Poisoned"
-            ]
-        for immune in condition_immunities:
-            if Dice() == 1:
-                r += f"\n- Damage Immunities: \t {immune}"
-                
-        damage_vulnerabilities = [  
-            "psychic"
-            ]
-        for vuln in damage_vulnerabilities:
-            if Dice() == 1:
-                r += f"\n- Damage Immunities: \t {immune}"
-
-        if Dice() == 1:
-            r = r + f"\n- Magic Resistance: \n\t The {Type} has advantage on saving throws against spells and other magical effects."
-        if Dice() == 1:
-            r = r + f"\n- Regeneration: \n\t The {Type} regains 10 hit points at the start of its turn if it has at least 1 hit point."
-
+    r += Extra_Defenses(race, background) + "\n"
 
     ## Combat Actions
     if Type == "Aberration" and Dice() == 1:        r += "\n- Blinding Spittle (Recharge 5–6). \n\t The Aberration spits a chemical glob at a point it can see within 15 feet of it. The glob explodes in a blinding flash of light on impact. Each creature within 5 feet of the flash must succeed on a DC 13 Dexterity saving throw or be blinded until the end of the aberration's next turn."
