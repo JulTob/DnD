@@ -2,104 +2,12 @@
 import random
 import json
 
-import npc_namer
+#import npc_namer
 
 
+from backgrounds import Background
 
-
-    
-
-
-
-
-
-
-
-
-
-
-def Background():
-    Backgrounds = [
-        "Artist",
-        "Bandit",
-        "Bard",
-        "Barbarian",
-        "Berserker",
-        "Charlatan",
-        "Cleric",
-        "Crafter",
-        "Criminal",
-        "Commoner",
-        "Cultist",
-        "Druid",
-        "Expert",
-        "Explorer",
-        "Guard",
-        "Healer",
-        "Hero",
-        "Hunter",
-        "Knight",
-        "Mage",
-        "Monk",
-        "Merchant",
-        "Noble",
-        "Priest",
-        "Pirate",
-        "Ranger",
-        "Scholar",
-        "Soldier",
-        "Rogue",
-        "Scholar",
-        "Shaman",
-        "Soldier",
-        "Spy",
-        "Traveler",
-        "Urchin",
-        "Warrior",
-        "Warlock",
-        "Witch"
-        ]
-    return random.choice(Backgrounds)
-
-
-
-
-
-
-def Race():
-    race_weights = {
-        "Human": 26,
-        "Aberration": 16,
-        "Aven": 16,
-        "Beast": 18,
-        "Beastfolk": 17,
-        "Celestial": 16,
-        "Construct": 16,
-        "Dragon": 17,
-        "Dwarf": 20,
-        "Elf": 20,
-        "Elemental": 17,
-        "Fey": 16,
-        "Fiend": 16,
-        "Giant": 16,
-        "Gnome": 17,
-        "Goblin": 20,
-        "Halfling": 19,
-        "Kobold": 20,
-        "Lizardfolk": 16,
-        "Monstrosity": 17,
-        "Ooze": 16,
-        "Orc": 21,
-        "Plant": 17,
-        "Snakefolk": 16,
-        "Undead": 19,
-        "Beholder": 0,
-        "Vampire":0,
-        "": 0
-    }
-    
-    return random.choices(list(race_weights.keys()), weights=race_weights.values(), k=1)[0]
-
+from races import Races
 
 
 def Dice(D=6):
@@ -128,8 +36,6 @@ def AbilityScore():
     d4 = Dice()
     return d1+d2+d3+d4 - min(d1, d2, d3, d4) 
 
-
-
 def Modifier(AS):
     return (AS - 10) // 2
 
@@ -141,8 +47,6 @@ def PB(Lvl):
         return 2
     else:
         return 2 + (Lvl - 1) // 4
-
-
 
 def ask_chatgpt(question):
     try: 
