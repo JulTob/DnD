@@ -2,7 +2,145 @@
 import random
 import json
 
+import npc_namer
 
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+def Background():
+    Backgrounds = [
+        "Artist",
+        "Bandit",
+        "Bard",
+        "Barbarian",
+        "Berserker",
+        "Charlatan",
+        "Cleric",
+        "Crafter",
+        "Criminal",
+        "Commoner",
+        "Cultist",
+        "Druid",
+        "Expert",
+        "Explorer",
+        "Guard",
+        "Healer",
+        "Hero",
+        "Hunter",
+        "Knight",
+        "Mage",
+        "Monk",
+        "Merchant",
+        "Noble",
+        "Priest",
+        "Pirate",
+        "Ranger",
+        "Scholar",
+        "Soldier",
+        "Rogue",
+        "Scholar",
+        "Shaman",
+        "Soldier",
+        "Spy",
+        "Traveler",
+        "Urchin",
+        "Warrior",
+        "Warlock",
+        "Witch"
+        ]
+    return random.choice(Backgrounds)
+
+
+
+
+
+
+def Race():
+    race_weights = {
+        "Human": 26,
+        "Aberration": 16,
+        "Aven": 16,
+        "Beast": 18,
+        "Beastfolk": 17,
+        "Celestial": 16,
+        "Construct": 16,
+        "Dragon": 17,
+        "Dwarf": 20,
+        "Elf": 20,
+        "Elemental": 17,
+        "Fey": 16,
+        "Fiend": 16,
+        "Giant": 16,
+        "Gnome": 17,
+        "Goblin": 20,
+        "Halfling": 19,
+        "Kobold": 20,
+        "Lizardfolk": 16,
+        "Monstrosity": 17,
+        "Ooze": 16,
+        "Orc": 21,
+        "Plant": 17,
+        "Snakefolk": 16,
+        "Undead": 19,
+        "Beholder": 0,
+        "Vampire":0,
+        "": 0
+    }
+    
+    return random.choices(list(race_weights.keys()), weights=race_weights.values(), k=1)[0]
+
+
+
+def Dice(D=6):
+    """Rolls a dice with D sides. If D is 0, simulates a coin flip."""
+    if D < 1: roll = random.randint(D, 1) 
+    else: roll = random.randint(1, D)
+    return roll
+
+def Dice(D=6,N=1):
+    roll = 0
+    for m in range(N):
+        if D >= 1: roll += random.randint(1, D)
+        else: roll += random.randint(D, 1)
+    return roll
+
+def Dizero(D=6):
+    """Rolls a dice with D sides. If D is 0, simulates a coin flip."""
+    if D < 0: roll = random.randint(D, 0) 
+    else: roll = random.randint(0, D)
+    return roll
+
+def AbilityScore():
+    d1 = Dice()
+    d2 = Dice()
+    d3 = Dice()
+    d4 = Dice()
+    return d1+d2+d3+d4 - min(d1, d2, d3, d4) 
+
+
+
+def Modifier(AS):
+    return (AS - 10) // 2
+
+def Proficiency(AS):
+    return Dice(Modifier(AS)*2)
+
+def PB(Lvl):
+    if Lvl < 5:
+        return 2
+    else:
+        return 2 + (Lvl - 1) // 4
 
 
 
@@ -90,23 +228,20 @@ def Style():
 
 def Title():
     descriptor = [
-        "Aberrant",           
+        "Aberrant", 
+        "Academy",
+        "Aegean",
         "Ageless",
         "Air",
         "Amazon's",
         "Anachronistic",
         "Ancient",
         "Angry",
-        "Arcane",
-        "Aegean",
         "Antediluvian",
         "Asgardian",
         "Amazonian",
-        "Arachnid",
-        "Astral",
         "Atemporal",
         "Autumn",
-        "Aprendice of",
         "Archaic",
         "Alcoholic",
         "Alpha",
@@ -118,16 +253,43 @@ def Title():
         "Abyssal",
         "Amulet",
         "Anvil",
-        "Arch",
-        "Awakened",        
         "Antlered",
         "Apothecary",
         "Aquatic",
+        "Astral",
+        "Abbey",
+        "Abyssal",
+        "Aerial",
+        "Affectionate",
+        "Aggressive",
+        "Alienated",
+        "Amber",
+        "Ancient",
+        "Angry",
+        "Annoyed",
+        "Anxious",
+        "Apathetic",
+        "Apprehensive",
+        "Aprendice of",
+        "Aquatic",
+        "Arcane",
+        "Arcanic",
+        "Arch",
+        "Archipelago",
         "Archfey",
+        "Ardent",
+        "Arena",
+        "Arrogant",
+        "Arachnid",
+        "Astral",
+        "Atmospheric",
+        "Auburn",
+        "Austere",
         "Avian",
+        "Awakened",        
+        "Aztec",
         "Azure",
 
-        
         "Babylonian",
         "Baobab's",
         "Blind",
@@ -143,73 +305,7 @@ def Title():
         "Baron of",
         "Blue",
         "Brain",
-        
-        "Circus",
-        "Clockwork",
-        "Content",
-        "Copper",
-        "Celestial",
-        "Chimeric",
-        "City",
-        "Climate",
-        "Cursed",
-        "Celtic",
-        "Chain",
-        "Cheerful",
-        "Chief",
-        "Cobalt",
-        "Crown",
-        "Candle",
-        "Champion of",
-        "Crab",
-        "Cryptic",
-        
-        "Divine",
-        "Draconian",
-        "Dusk",
-        "Dwarven",
-        
-        "Enchanted",
-        "Eldritch",
-        "Elven",
-        "Epicurean",
-        
-        "Fierce",
-        
-        "Goldenrod",
-        
-        "Midnight",
-        
-        "Protector",
-        
-        "Scarlet",
-        "Stinger-tailed",
-        
-        
-        "Abbey",
-        "Abyssal",
-        "Academy",
-        "Aerial",
-        "Affectionate",
-        "Aggressive",
-        "Alienated",
-        "Amber",
-        "Angry",
-        "Annoyed",
-        "Anxious",
-        "Apathetic",
-        "Apprehensive",
-        "Aquatic",
-        "Archipelago",
-        "Ardent",
-        "Arena",
-        "Arrogant",
-        "Atmospheric",
-        "Auburn",
-        "Austere",
-        "Aztec",
-        "Azure",
-        
+        "Baba Yaga's",
         "Badland",
         "Baroque",
         "Barracks",
@@ -239,6 +335,26 @@ def Title():
         "Budding",
         "Burgundy",
         "Burned-out"
+
+        "Circus",
+        "Clockwork",
+        "Content",
+        "Copper",
+        "Celestial",
+        "Chimeric",
+        "City",
+        "Climate",
+        "Cursed",
+        "Celtic",
+        "Chain",
+        "Cheerful",
+        "Chief",
+        "Cobalt",
+        "Crown",
+        "Candle",
+        "Champion of",
+        "Crab",
+        "Cryptic",
         "Cannon",
         "Castle",
         "Calm",
@@ -293,7 +409,8 @@ def Title():
         "Cyan",
         "Cyclonic",
         "Cyclopean",
-        
+
+        "Divine",
         "Dagger",
         "Darkness",
         "Dark",
@@ -311,7 +428,6 @@ def Title():
         "Desperate",
         "Despondent",
         "Detached",
-        "Devourer of",
         "Dewy",
         "Diadem",
         "Disappointed",
@@ -333,6 +449,15 @@ def Title():
         "Dusky",
         "Dust",
         "Dynamic",
+        "Divine",
+        "Draconian",
+        "Dusk",
+        "Dwarven",
+        
+        "Enchanted",
+        "Eldritch",
+        "Elven",
+        "Epicurean", 
         "Eager",
         "Eagle",
         "Earth",
@@ -367,6 +492,7 @@ def Title():
         "Evanescent",
         "Excited",
         "Exhausted",
+        "Elixir",  
         
         "Factory",
         "Faerie",
@@ -404,6 +530,7 @@ def Title():
         "Furred",
         "Fury",
         "Futuristic",
+        "Fierce",
         
         "Galactic",
         "Gallant"
@@ -447,9 +574,11 @@ def Title():
         "Guildhall",
         "Gulf",
         "Ghost",
+        "Goldenrod",
         
         "Hamlet",
         "Happy",
+        "Harpist",
         "Harbor",
         "Harlequin",
         "Harmonious",
@@ -515,6 +644,7 @@ def Title():
         "Islet",
         "Isolated",
         "Ivory",
+        
         "Jackal",
         "Jacobean",
         "Jade",
@@ -525,6 +655,7 @@ def Title():
         "Jotunn",
         "Joyful",
         "Jungle",
+        
         "Keep",
         "Key",
         "Killer",
@@ -598,6 +729,7 @@ def Title():
         "Meteoric",
         "Meteoritic",
         "Metropolis",
+        "Medallion",   
         "Mine",
         "Minotaur",
         "Minotaurine",
@@ -605,8 +737,6 @@ def Title():
         "Mirthful",
         "Mist",
         "Mistral",
-        "Mjolnirian",
-        "Mollusk",
         "Molten",
         "Momentary",
         "Monastery",
@@ -626,8 +756,11 @@ def Title():
         "Mutant",
         "Myrmidonic",
         "Mysterious",
+        "Mystic",
         "Mystical",
         "Mythical",
+        "Midnight",
+        
         
         "Nebulous",
         "Nemean",
@@ -659,7 +792,7 @@ def Title():
         "Orphean",
         "Outpost",
         "Outraged",
-        "Owl-eyed",
+        "Owl's",
         "Ozone",
         "Odin's",
         
@@ -673,8 +806,7 @@ def Title():
         "Peach",
         "Pearl",
         "Pebble",
-        "Pegasusian",
-        "Pendulum",
+        "Pegasus",
         "Pensive",
         "Perceptive",
         "Perennial",
@@ -704,6 +836,8 @@ def Title():
         "Pulsar",
         "Pharaoh's",
         "Pyro",
+        "Protector",
+        
         
         "Quagmire",
         "Quarry",
@@ -722,6 +856,7 @@ def Title():
         "Reef",
         "Relaxed",
         "Relentless",
+        "Relic",   
         "Reptilian",
         "Resentful",
         "Resilient",
@@ -738,7 +873,9 @@ def Title():
         "Ruins",
         "Rust",
         "Ruthless",
-        
+
+        "Scarlet",
+        "Stinger",        
         "Sacred",
         "Sad",
         "Salmon",
@@ -754,7 +891,6 @@ def Title():
         "School",
         "Scrub",
         "Sea",
-        "Seal",
         "Seashore",
         "Secular",
         "Seismic",
@@ -803,43 +939,16 @@ def Title():
         "Sword",
         "Sylvan",
         "Sympathetic",
-        
-        "Tangerine",
-        "Tapestry",
-        "Taupe",
-        "Tavern",
-        "Tawny",
-        "Teal",
-        "Tectonic",
-        "Tempestuous",
-        "Temple",
-        "Tenacious",
-        "Tender",
-        "Terrified",
-        "Theater",
-        "Thicket",
-        "Thorny",
-        "Thundering",
-        "Tidal",
-        "Tide",
-        "Timely",
-        "Tomb",
-        "Topaz",
-        "Totem",
-        "Tower",
-        "Town",
-        "Transient",
-        "Tusked",
-        "Tudor",
-        "Tundra",
-        "Tunnel",
-        "Turquoise",
-        "Twilight",
-        "Twisted",
-        "Typhoon",
-        
-        "Fiery",
         "Swift",
+        "Scepter",   
+        
+          
+        
+        "Feather",   
+        "Fiery",
+
+        "Gavel",
+        "Goblet",    
 
         "Ubiquitous"
         "Ultramarine",
@@ -849,62 +958,12 @@ def Title():
         "Unstoppable",
         "Unyielding",
         "Uranian",
-        "Ursine",
-        
-        "Ancient",
-
-        "Valiant",
-        "Valkyrian",
-        "Valley",
-        "Vampiric",
-        "Vanirian",
-        "Vapor",
-        "Vellum",
-        "Venusian",
-        "Verdant",
-        "Vermilion",
-        "Vernal",
-        "Vexing",
-        "Vibrant",
-        "Vigilant",
-        "Village",
-        "Vine",
-        "Volcanic",
-        "Volcano",
-        "Voracious",
-        "Vulcanian",
-        "Vecna's",
-        
-        "Wily",
-        "Windy",
-        "Winged",
-        "Witchy",
-        "Withering"
-        "Woodland",
-        "Woods",
-        "Woody",
-        "Workshop",
-        "Worried",
-        "War",
-        "Wormhole",
-
-
-
-        
-        "Talon-clawed",
-        
-        "Gavel",
-        
-        "Elixir",  
-        "Scepter",   
-        "Medallion",   
-        "Feather",   
-        "Goblet",    
         "Urn",   
-        "Relic",   
-        "Wand",   
-        "Parchment",   
-        "Telescopic",  
+        "Ursine",
+
+        
+        
+        
         "Mantle",
         "Radiant",   
         "Spire",
@@ -949,7 +1008,7 @@ def Title():
         "Interstellar",    
         "Elizabethan",  
         "Feudal",   
-        "Jazz Age",   
+        "Age",   
         "Cyclic",  
         "Timeless",   
         "Zenith",   
@@ -981,8 +1040,10 @@ def Title():
         "Daemonian",
         "Dawn",
         "Draconic",
+        "Dimensional",
         
         "Eagle",
+        "Eagle's",
         "Edo",
         "Eternal",
         "Extraterrestrial",  
@@ -998,9 +1059,9 @@ def Title():
         "Gemmed",
         "Gilled",
         "Glacial",
-        "Goat-footed",
+        "Goblin's",
+        "Gambler",
         
-        "Hoofed",
         "Horned",
         
         "Icy",
@@ -1020,6 +1081,7 @@ def Title():
         "Misty",
         "Minotaur's",
         "Momentary",
+        "Moonlit",
         "Mountain",
         "Mysterious",
         
@@ -1039,51 +1101,49 @@ def Title():
         "Stoic",
         "Swift",
         "Sword",
+        "Sphinx's ",
         
-        "Tartarean",
-        "Thundering",
-        "Timeless",
-        "Titanic",
-        "Trojan",
-        "Totem's",
-        "Troll's",
+       
         
-        "Ultraviolet",
+
         
-        "Valkyrian",
-        "Vampiric",
-        "Voidborne",
-        
-        "Byzantine", 
-        "Medieval", 
         "Staff", 
         "Rune", 
-        "Celtic", 
         "Shield", 
         "Mughal", 
-        "Vesperal", 
-        "Vintage", 
         "Ottoman", 
-        "Quasar", 
-        "Incan", 
+        "Quasar",
+
+        "Alchemical",
         
         "Bygone",
         "Banner",
         "Blade",
         "Brooch",
+        "Buccaneer",
+        "Byzantine",
         
         "Chiropteran",
         "Crested",
+        "Curse",
+        "Cursed",
+        "Celestial",
+        "Celtic", 
+        
         
         "Desert",
 
         "Eldritch",
         
-        "Fountain of Youth",
+        "Fountain",
         
         "Hermitage",
         
+        "Incan", 
+        
         "Lion-hearted",
+        
+        "Medieval", 
         
         "Nebulous",
         "Necromancer",
@@ -1103,6 +1163,7 @@ def Title():
         "Pawed",
         "Pegasus-winged",
         "Piscine",
+        "Pirate's",
         "Plague",
         "Poisonous",
         "Powder",
@@ -1113,8 +1174,8 @@ def Title():
         
         "Radiant",
         "Rainstorm",
-        "Raptor-clawed",
-        "Raven-haired",
+        "Raptor",
+        "Raven",
         "Red",
         "River",
         "River's"
@@ -1127,6 +1188,7 @@ def Title():
         "Science",
         "Second",
         "Serpentine",
+        "Serpent's",
         "Seventh",
         "Shadow",
         "Shaman's",
@@ -1139,6 +1201,7 @@ def Title():
         "Smoke",
         "Snail-shelled",
         "Solar",
+        "Sorcerous",
         "Spark",
         "Speaker",
         "Spell",
@@ -1153,6 +1216,7 @@ def Title():
         "Storm",
         "Strong",
         "Summer",
+        "Sun Stone's",
         
         "Temporal", 
         "Tailed",
@@ -1167,11 +1231,63 @@ def Title():
         "Trival",
         "True",
         "Turquoise",
+        "Tartarean",
+        "Thundering",
+        "Timeless",
+        "Titanic",
+        "Trojan",
+        "Totem's",
+        "Troll's",
+        "Tailed",
+        "Talon",
+        "Tangerine",
+        "Tapestry",
+        "Taupe",
+        "Tavern",
+        "Tawny",
+        "Teal",
+        "Tectonic",
+        "Tempestuous",
+        "Temple",
+        "Tenacious",
+        "Tender",
+        "Terrified",
+        "Theater",
+        "Thicket",
+        "Thorny",
+        "Thundering",
+        "Tidal",
+        "Tide",
+        "Timely",
+        "Tomb",
+        "Topaz",
+        "Totem",
+        "Tower",
+        "Town",
+        "Transient",
+        "Tusked",
+        "Tudor",
+        "Tundra",
+        "Tunnel",
+        "Turquoise",
+        "Twilight",
+        "Twisted",
+        "Typhoon",
+        "Traveling",
         
         "Undying",
         "Underworld",
+        "Ultraviolet",
         
+        "Valiant",
+        "Valley",
+        "Vanirian",
+        "Vapor",
         "Vampiric",
+        "Vampire's",
+        "Valkyrian",
+        "Valkyrie's",
+        "Vengeful",
         "Venomous",
         "Veteran",
         "Victorian",
@@ -1180,10 +1296,37 @@ def Title():
         "Violet",
         "Voice",
         "Void",
+        "Voidborne",
         "Vulpine",
-        "Vengeful",
-        "Valkyrie's",
+        "Vellum",
+        "Venusian",
+        "Verdant",
+        "Vermilion",
+        "Vernal",
+        "Vexing",
+        "Vibrant",
+        "Vigilant",
+        "Village",
+        "Vine",
+        "Volcanic",
+        "Volcano",
+        "Voracious",
+        "Vulcanian",
+        "Vecna's",
+        "Vesperal", 
+        "Vintage", 
         
+        "Windy",
+        "Winged",
+        "Witchy",
+        "Withering"
+        "Woodland",
+        "Woods",
+        "Woody",
+        "Workshop",
+        "Worried",
+        "War",
+        "Wormhole",
         "Winged",
         "Wandering",
         "Warm",
@@ -1193,7 +1336,7 @@ def Title():
         "Wavy",
         "Web",
         "Werewolf's",
-        "Wheel",
+        "Wheelbraker",
         "Whispering",
         "Whistle"
         "Warlord",
@@ -1210,6 +1353,8 @@ def Title():
         "Wolf's"
         "Wrathful",
         "Wight",
+        "Western", 
+        "Wand",   
 
         "X-ray",  
 
@@ -1269,7 +1414,6 @@ def Title():
         "Aero",
         "Afterlife",
         "Agent",
-        "Alchemical Brewer",
         "Alchemist",
         "Alpha",
         "Ambassador",
@@ -1281,7 +1425,6 @@ def Title():
         "Apparition",
         "Apparition",
         "Aprentice",
-        "Arcane Detective",
         "Archer",
         "Archer",
         "Archfey",
@@ -1293,7 +1436,7 @@ def Title():
         "Ash",
         "Assassin",
         "Assassin",
-        "Astral Navigator",
+        "Navigator",
         "Atlas",
         "Augur",
         "Avatar",
@@ -1341,6 +1484,7 @@ def Title():
         "Butcher",
         "Butterfly",
         "Buzzard",
+        "Brewer",
 
         "Cat",
         "Cadaver",
@@ -1351,7 +1495,7 @@ def Title():
         "Captain",
         "Cartographer",
         "Cedar",
-        "Celestial Mapper",
+        "Mapper",
         "Centurion",
         "Champion",
         "Charlatan",
@@ -1371,19 +1515,16 @@ def Title():
         "Conjurer",
         "Conqueror",
         "Corsair",
-        "Corsair",
         "Cougar",
-        "of the Coliseum",
         "Counselor",
         "Courage",
         "Crow",
-        "Crusader",
         "Crusader",
         "Crypt",
         "Cultist",
         "Curator",
         "Curse Breaker",
-        "Curse Collector",
+        "Collector",
         "Cursed Wanderer",
         "Cursed",
         "Cursed",
@@ -1404,12 +1545,13 @@ def Title():
         "Demigod",
         "Demon",
         "Demonhunter",
+        "Detective",
         "Desolate",
         "Despot",
         "Devil",
         "Devourer",
         "Diamond",
-        "Dimensional Traveler",
+        "Traveler",
         "Dino",
         "Diplomat",
         "Disciple",
@@ -1441,7 +1583,7 @@ def Title():
         "Elder",
         "Scholar",
         "Element",
-        "Elemental Whisperer",
+        "Whisperer",
         "Elite",
         "Elk",
         "Emperor",
@@ -1450,7 +1592,7 @@ def Title():
         "Endeavor",
         "Enforcer",
         "Envoy",
-        "Ethereal Fisher",
+        "Fisher",
         "Ethereal",
         "Exarch",
         "Executioner",
@@ -1486,9 +1628,10 @@ def Title():
         "Frontier",
         "Frost",
         "Fury",
+        "for Hire",
+
         
         "Gale",
-        "Gambler of Fate",
         "Gargoyle",
         "Gazelle",
         "General",
@@ -1536,6 +1679,8 @@ def Title():
         "Horror",
         "Horse",
         "Hound",
+        "Hoof",
+        
         "Thunderbird",
         "Hunger",
         "Hunter",
@@ -1630,7 +1775,7 @@ def Title():
         "Monster Hunter",
         "Monster",
         "Moon",
-        "Moonlit Merchant",
+        "Merchant",
         "Morgue",
         "Mortal",
         "Mortal",
@@ -1639,8 +1784,8 @@ def Title():
         "Mourner",
         "Mule",
         "Mystic",
-        "Mystic Investigator",
-        "Mystic Artisan",
+        "Investigator",
+        "Artisan",
         "Beastrider",
         
         "Naga",
@@ -1657,11 +1802,13 @@ def Title():
         
         "Odyssey",
         "Of Death",
+        "Of Fate",
         "Of Heaven",
         "Of Justice",
         "Of Odin",
         "Of The Abyss",
         "Of the Autumn",
+        "Of the Coliseum",
         "Of The Crown",
         "Of The Dead",
         "Of The Desert",
@@ -1691,6 +1838,7 @@ def Title():
         "Of The West",
         "Of The Winter",
         "Of Thor",
+        "Of Youth",
         "Of Zeus",
         "One",
         "Oni",
@@ -1713,6 +1861,7 @@ def Title():
         "Pathologist",
         "Paw",
         "Pegasus",
+        "Pendulum",
         "Pixie",
         "Pirate",
         "Piromaniac",
@@ -1746,155 +1895,12 @@ def Title():
         "Queen",
         "Quest",
         
-        "Rabbit",
-        "Raider",
-        "Ranger",
-        "Rat",
-        "Raven",
-        "Revenant",
-        "Reptile",
-        "Rider",
-        "Rose",
-        "Ruby",
-        "Rune",
-        "Raptor",
-        "Raven",
-        "Reaper",
-        "Reclaimer",
-        "Reed",
-        "Relic Seeker",
-        "Requiem",
-        "Restless",
-        "Rider",
-        "Risen",
-        "Ritualist",
-        "Rogue",
-        "Rogue",
-        "Rose",
-        "Rowan",
-        "Rue",
-        "Runesmith",
         
-        "Sabertooth",
-        "Saurius",
-        "Salamander",
-        "Scientist",
-        "Scarecrow",
-        "Scorpion",
-        "Shadow",
-        "Shark",
-        "Sorcerer",
-        "Snake",
-        "Skeleton",
-        "Skull",
-        "Stagecoach",
-        "Surgeon",
-        "Sucubus",
-        "Spirit",
-        "Spider",
-        "Specter",
-        "Spy",
-        "Swashbuckler",
-        "Swarm",
-        "Sword",
-        "Sage",
-        "Sage",
-        "Sailor",
-        "Saint",
-        "Satyr",
-        "Savant",
-        "Savior",
-        "Scout",
-        "Scribe",
-        "Sea Captain",
-        "Seeker",
-        "Seer",
-        "Sentinel",
-        "Sepulcher",
-        "Serpent",
-        "Serpent",
-        "Shade",
-        "Shadow",
-        "Shark",
-        "Shepherd",
-        "Sheriff",
-        "Shield",
-        "Sire",
-        "Skeletal",
-        "Skyward",
-        "Smith",
-        "Smuggler",
-        "Sorcerer",
-        "Sorcerous Duelist",
-        "Sorrel",
-        "Soul",
-        "Soulless",
-        "Sparrow",
-        "Specter",
-        "Spectre",
-        "Spellbinder",
-        "Spirit",
-        "Spook",
-        "Spy",
-        "Squire",
-        "Squire",
-        "Settler"
-        "Stag",
-        "Starship Pilot",
-        "Stingray",
-        "Storm Chaser",
-        "Swallow",
-        "Swan",
-        "Skywarden",
+
         
-        "Tailor",
-        "Talon",
-        "Tanner",
-        "Tempest",
-        "Templar",
-        "Thistle",
-        "Tiger",
-        "Tiger",
-        "Terror",
-        "Trapper",
-        "Trapecist",
-        "Troll",
-        "Thief",
-        "Time Jumper",
-        "Titan",
-        "Tomb Raider",
-        "Tomb",
-        "Tormented",
-        "Tormentor",
-        "Trailblazer",
-        "Traveler",
-        "Treasure Hunter",
-        "Treasure",
-        "Turtle",
-        "Tyrant",
         
-        "Guide",
-        "Unholy",
         
-        "Vagabond",
-        "Valkyrie",
-        "Vampire",
-        "Vanguard",
-        "Vanguard",
-        "Vicar",
-        "Vigilante",
-        "Vigilante",
-        "Viking",
-        "Vintner",
-        "Violet",
-        "Viper",
-        "Viscount",
-        "Void",
-        "Voidwalker",
-        "Vampire",
-        "Vulture",
-        "Vagrant",
-        "Voyager",
+        
         
 
         
@@ -1902,15 +1908,11 @@ def Title():
         "Abbess",
         "Abbot",
         "Abysswalker",
-        "Acolyte",
-        "Celestian",
-        "Of Athena",
+        "Acolyte",        
         "Alchemist",
         "Algonquin's Light",
         "Alpha",
-        "Heart",
         "Ambassador",
-        "High Ambassador",
         "Ambition",
         "Appetite",
         "Anthropologist",
@@ -1932,12 +1934,20 @@ def Title():
         "Auramancer",
         "Avalon's Lost Knight",
         "Avatar",
-        "Aztec Avenger",
+        "Avenger",
+        "Apprentice",
+
+        "Celestian",
+        
+        "Guide",
+        
+        "Heart",
+        "High Ambassador",
+
         "Sentinel",
-        "Baba Yaga's Apprentice",
         "Bandana Masked",
         "Banneret",
-        "Banshee Wailmistress",
+        "Wailmistress",
         "Banshee's Wail Seeker",
         "Flight",
         
@@ -1972,36 +1982,36 @@ def Title():
         "Bow",
         "Breath",
         "Brigadier",
-        "Buccaneer of the Burning Seas",
+        "of the Burning Seas",
         "Buffalo Soldier",
         "Buffalo Whisperer",
         "Bushman's Dance",
-        "Cacao Bringer",  
-        "Cacao Mystic",
-        "Calico's Cursebreaker",
+        "Bringer",  
+        "Mystic",
+        "Cursebreaker",
         "Caliph",
         "Cantor",
         "Captain",
         "Cardinal",
-        "Cattle Baron",
-        "Cauldronbearer of Cerridwen",
+        "Baron",
+        "Cauldron",
         "Cavalier",
         "Celestial Priest",
         "Celestialist",
         "Celestian",
         "Celestwarden",
-        "Centaur Alpha",
+        "Alpha",
         "Centurion",
         "Centurion",
-        "Chameleon's Change",
+        "Change",
         "Champion",
         "Chancellor",
         "Chancellor",
-        "Chaneque's Chosen",
-        "Changeling Mimic",
+        "Chosen",
+        "Mimic",
         "Chaplain",
         "Charm",
-        "Cheetah's Chase",
+        "Chase",
         "Chief",
         "Chief",
         "Chieftain",
@@ -2017,7 +2027,7 @@ def Title():
         "Commander",
         "Commander",
         "Condor's Wing",
-        "Congo Serpent's Scale",
+        "Scale",
         "Conquistador",
         "Consul",
         "Consul",
@@ -2059,17 +2069,17 @@ def Title():
         "Despot",
         "Devotion",
         "Dictator",
-        "Divine Artisan",
-        "Divine Emissary",
-        "Divine Herald",
-        "Divine Sage",
+        "Artisan",
+        "Emissary",
+        "Herald",
+        "Sage",
         "Djinn Sultan",
         "Djinn Whisperer",
         "Djinn's Whimsy",
         "Domovoi's Guardian",
         "Doomsayer",
         "Dragon Knight",
-        "Dragonborn Flamecrest",
+        "Dragonson",
         "Dragoon",
         "Dragoon",
         "Dreambinder",
@@ -2079,22 +2089,21 @@ def Title():
         "Dreamweaver of Zhuang",
         "Dreamweaver",
         "Dreamweaver",
-        "Drow Nightshade",
-        "Druid of the Enchanted Grove",
+        "Nightshade",
+        "of the Swamp",
         "Druid",
-        "Dryad Treebinder",
+        "Dryad",
         "Duchess",
-        "Duel's Dawn",
+        "Dawn",
         "Duelist",
-        "Duende's Mischiefmate",
+        "Duende",
         "Duke",
         "Duke",
         "Dungeon Delver",
         "Duskwielder",
         "Dusty Boots",
-        "Dwarven Thane",
         
-        "Eagle's Eye",
+        "Eye",
         "Earl",
         "Earthkeeper",
         "Earthshaper",
@@ -2143,7 +2152,6 @@ def Title():
         "Flamekeeper",
         "Flamekeeper",
         "Flight",
-        "Flute",
         "of Vasilisa",
         "'s Guardian",
         "Freya's Heartshield",
@@ -2176,11 +2184,10 @@ def Title():
         "Gloomshade",
         "Glow",
         "Gnomish Mastermind",
-        "Goblin King",
+        "King",
         "Godsbane Priest",
         "Godspeaker",
-        "Gold Nugget's Glint",
-        "Gold Rush Seeker",
+        "Seeker",
         "Governor",
         "Governor",
         "Grace",
@@ -2194,14 +2201,15 @@ def Title():
         "of the Thousand Tears",
         "Guardian",
         "Guardian",
-        "Gunslinger's Grit",
-        "Haetae's Stoneguard",
-        "Halfling Leafdancer",
+        "Gunslinger",
+        
+        "Stoneguard",
+        "Leafdancer",
         "Hangman's Noose",
         "Harbinger of Fate"
-        "Harpist of Elysium",
-        "Harpy Matriarch",
-        "Harvestshade of Jacheongbi",
+        "of Elysium",
+        "Matriarch",
+        "Harvestshade",
         "Head of State",
         "Heir",
         "Hellstrider",
@@ -2347,26 +2355,25 @@ def Title():
         "Mystshroud",
         "Mystweaver",
         
-        "Naga Siren",
-        "Nazca Enigma",  
+        "Siren",
+        "Enigma",  
         "Necrologist",
-        "Nefertiti's Elegance",
+        "Elegance",
         "Nemesis",
-        "Nemesis' Vengeance",
+        "Vengeance",
         "Netherbound",
-        "Night's Last Storyteller",
+        "Storyteller",
         "Nightshade",
         "Nightshade",
         "Nightveil",
-        "Nine-Tail Illusionist",
+        "Illusionist",
         "Ninja",
-        "Ninki Nanka's Kin",
-        "Noble Sachem",
+        "Noble",
         "Nomad",
         "Numerologist",
         "Nun",
         
-        "Sky's Wrath",
+        "Wrath",
         
         "Echo",
         
@@ -2380,7 +2387,10 @@ def Title():
         "Demonmask",
         "Warcaller",
         
-        "Oracle of Delphic Echoes",
+        "Echoes",
+
+        "Fragment",
+        
         "Oracle",
         "Oracle",
         "Oracle",
@@ -2390,10 +2400,12 @@ def Title():
         "Outlaw",
         "Outlaw's Kin",
         "Overseer",
-        "of the Divine",
+        "Of Athena",
+        "Of the Divine",
+        "of Delphos",
+        "of the Underworld Gate",
+        "of the Underworld",
         
-        
-        "Fragment",
         
         "Paladin",
         "Pioneer",
@@ -2409,22 +2421,22 @@ def Title():
         "Pikeman",
         "Piper",
         "Pirate",
-        "Pirate's Ghost",
+        "Ghost",
         "of Port Royal",
         "Pistolero",
         "Plains Wanderer",
         "Planar Researcher",
         "Poem",
         "Poker Face",
-        "Poncho's Pride",
-        "Pony Express's Wind",
+        "Pride",
+        "Wind",
         "Pope",
-        "Posse Leader",
-        "Potato Sage",  
+        "Leader",
+        "Potato",  
         "Potion Master",
         "Praetor",
         "Praetor",
-        "Prairie's Shadow",
+        "Shadow",
         "Prefect",
         "Prefect",
         "Prelate",
@@ -2456,8 +2468,9 @@ def Title():
         "Rajput",
         "Rakshasa Deceiver",
         "Ranger",
-        "Rattlesnake's Fang",
-        "Raven's Tale",
+        "Rattlesnake's",
+        "Fang",
+        "Raven's",
         "Realmstrider",
         "Regent",
         "Regent",
@@ -2482,20 +2495,120 @@ def Title():
         "Runebearer of Midgard",
         "Runechanter",
         "Runekeeper",
+        "Rabbit",
+        "Raider",
+        "Ranger",
+        "Rat",
+        "Raven",
+        "Raven",
+        "Revenant",
+        "Reptile",
+        "Rider",
+        "Rose",
+        "Ruby",
+        "Rune",
+        "Raptor",
+        "Reaper",
+        "Reclaimer",
+        "Reed",
+        "Relic Seeker",
+        "Requiem",
+        "Restless",
+        "Rider",
+        "Risen",
+        "Ritualist",
+        "Rogue",
+        "Rogue",
+        "Rose",
+        "Rowan",
+        "Rue",
+        "Runesmith",
+
+        "Keeper",
         
         "Lament",
         
         "Bane",
         
+        
         "Sacred Keeper",
         "Sacred Speaker",
+        "Speaker",
         "Scar",
         "Spirit",
         "Saga",
         "Sage",
         "Saint",
-        
-        
+        "Sabertooth",
+        "Saurius",
+        "Salamander",
+        "Scientist",
+        "Scarecrow",
+        "Scorpion",
+        "Shadow",
+        "Shark",
+        "Sorcerer",
+        "Snake",
+        "Skeleton",
+        "Skull",
+        "Stagecoach",
+        "Surgeon",
+        "Sucubus",
+        "Spirit",
+        "Spider",
+        "Specter",
+        "Spy",
+        "Swashbuckler",
+        "Swarm",
+        "Sword",
+        "Sage",
+        "Sage",
+        "Sailor",
+        "Saint",
+        "Satyr",
+        "Savant",
+        "Savior",
+        "Scout",
+        "Scribe",
+        "Sea Captain",
+        "Seeker",
+        "Seer",
+        "Sentinel",
+        "Sepulcher",
+        "Serpent",
+        "Shade",
+        "Shadow",
+        "Shark",
+        "Shepherd",
+        "Sheriff",
+        "Shield",
+        "Sire",
+        "Skeletal",
+        "Skyward",
+        "Smith",
+        "Smuggler",
+        "Sorcerer",
+        "Duelist",
+        "Sorrel",
+        "Soul",
+        "Soulless",
+        "Sparrow",
+        "Specter",
+        "Spectre",
+        "Spellbinder",
+        "Spirit",
+        "Spook",
+        "Spy",
+        "Squire",
+        "Squire",
+        "Settler"
+        "Stag",
+        "Starship Pilot",
+        "Stingray",
+        "Storm Chaser",
+        "Swallow",
+        "Swan",
+        "Skywarden",        
         "Sentinel",
         "Samurai",
         "Sandkeeper",
@@ -2506,7 +2619,6 @@ def Title():
         "Scholar",
         "Secret",
         "Secretary",
-        "of the Underworld Gate",
         "Seeker",
         "Seer",
         "Sellsword",
@@ -2562,7 +2674,7 @@ def Title():
         "Spellweaver",
         "Spellwoven",
         "Spelunker",
-        "Sphinx's Riddle",
+        "Riddle",
         "Spider's Web",  
         "Spiritguide",
         "Spiritualist",
@@ -2589,17 +2701,44 @@ def Title():
         "Sultan",
         "Sultan",
         "Sun Caller",
-        "Sun Stone's Keeper",  
+        "Keeper",  
         "Sunblessed",
         "Sundiata's Valor",
         "Sunlord",
         "Sunscale",
         "Sunstrider",
         "Supreme Leader",
-        "Sworddancer of Covadonga",
+        "Sworddancer",
         "Swordmaster",
-        "Sylph Windcaller",
-        "Tabaxi Prowlmaster",
+        "Windcaller",
+        
+        "Prowlmaster",
+
+                "Tailor",
+        "Talon",
+        "Tanner",
+        "Tempest",
+        "Templar",
+        "Thistle",
+        "Tiger",
+        "Tiger",
+        "Terror",
+        "Trapper",
+        "Trapecist",
+        "Troll",
+        "Thief",
+        "Time Jumper",
+        "Titan",
+        "Tomb Raider",
+        "Tomb",
+        "Tormented",
+        "Tormentor",
+        "Trailblazer",
+        "Traveler",
+        "Treasure Hunter",
+        "Treasure",
+        "Turtle",
+        "Tyrant",
         "Tactics",
         "Talespinner",
         "Technomancer",
@@ -2621,11 +2760,16 @@ def Title():
         "Tideturner",
         "Tiefling Hellstrider",
         "Tale",
+        
         "Star",
         "Seer",
         "Spirit",
+        
         "Echo",
+        
         "Voice",
+
+        
         "Treasure Fleet's Scourge",
         "Treasure",
         "Treebinder",
@@ -2642,36 +2786,61 @@ def Title():
         "Tunnelchief",
         "Turtle Islander",  
         "Treasure",
-        "Twilight Herald",
+        "Twilight",
+        "Herald",
+
+        "Unholy",
         
         "Elder",
         
         "Voyage",        
-        "Valkyrie Skymaiden",
+        "Valkyrie",
+        "Skymaiden",
         "Valkyrie",
         "Chosen",
         "Valor",
-        "Valorblade of Mulan",
+        "Valorblade",
         "Vampire Lord",
         "Vanguard",
-        "Veles' Serpent Kin",
+        "Serpent",
         "Venerable One",
         "Vicar",
         "Viking",
-        "Vinland Voyager",
+        "Voyager",
         "Viscount",
         "Vision",
         "Vizier",
-        "Vodun Viceroy of Hispaniola",
-        "Vodyanoy's Rival",
+        "Viceroy",
+        "of Hispaniola",
+        "Rival",
         "Voidseer",
         "Voidtouched",
-        "Volva's Visionary",
+        "Visionary",
         "Vizier",
+        "Vagabond",
+        "Valkyrie",
+        "Vampire",
+        "Vanguard",
+        "Vanguard",
+        "Vicar",
+        "Vigilante",
+        "Vigilante",
+        "Viking",
+        "Vintner",
+        "Violet",
+        "Viper",
+        "Viscount",
+        "Void",
+        "Voidwalker",
+        "Vampire",
+        "Vulture",
+        "Vagrant",
+        "Voyager",
         
         "of the Endless Sands",
         
         "Heart",
+        
         "Wanderer",
         "War Druid",
         "War Witch",
@@ -2681,7 +2850,7 @@ def Title():
         "Warden",
         "Wisdom",
         "Warden",
-        "Warder of the Gods",
+        "of the Gods",
         "Wardmaster",
         "Warforger",
         "Warhawk",
@@ -2690,14 +2859,16 @@ def Title():
         "Warmaster",
         "Warmonger",
         "Wavecommander",
-        "Wendigo's Kin",
-        "Westward Pilgrim",
-        "Whiskey Trader",
+        "Wendigo",
+        "Pilgrim",
+        "Whiskey",
+        "Trader",
         "Whisper",
         "Whisperer",
-        "Whitescale Enchanter",
+        "Whitescale",
+        "Enchanter",
         "Whisper",
-        "Wild West Wanderer",
+        "Wanderer",
         "Windcaller",
         "Windrider",
         "Winglord of the Tengu",
@@ -2737,7 +2908,6 @@ def Title():
         "Rebellion",
         "Drum",
         "Serpentlord",
-        "Zoologist",
         "Dawnbringer",
         "Zulu",
         "Colonel",
@@ -2784,22 +2954,22 @@ def Title():
         "Fellow",
         "General",
         "Ghoul",
-        "Voyager",
         "of the Golden City",
-        "Guardian",
         "Sentinel",
         "Vanguard",
         "Seeker",
-        "Harbinger",
-        "Progenitor",
-        "Elder",
-        "Pioneer",
-        "Forerunner",
-        "Exemplar",
         
         "Conquistador",
+
+        "Exemplar",
+        "Elder",
+
+        "Forerunner",
+
+        "Guardian",
         
         "High Priest",
+        "Harbinger",
         
         "Illusionist",
         "Immortal",
@@ -2835,6 +3005,8 @@ def Title():
         "Priestess",
         "Prodigy",
         "Patriarch",
+        "Progenitor",
+        "Pioneer",
         
         "Raj",
         "Reader",
@@ -2850,6 +3022,7 @@ def Title():
         
         "Vicar",
         "Virtuoso",
+        "Voyager",
         
         "Warlord",
         
@@ -2859,7 +3032,7 @@ def Title():
         "Zealot"
         "Zinnia"
         "Zombie"
-        "Zombie",
+        "Zoologist",
         ""
     ]
 
@@ -2875,107 +3048,6 @@ def Title():
 
 
 
-def Alignment():
-    Alignments = [
-        "Lawful Good",          "Neutral Good",        "Chaotic Good",
-        "Lawful Neutral",       "True Neutral",        "Chaotic Neutral",
-        "Lawful Evil",          "Neutral Evil",        "Chaotic Evil",
-        "Unaligned",            ""
-        ]
-    return random.choice(Alignments)
-
-
-
-
-
-
-
-
-
-def Background():
-    Backgrounds = [
-        "Artist",
-        "Bandit",
-        "Bard",
-        "Barbarian",
-        "Berserker",
-        "Charlatan",
-        "Cleric",
-        "Crafter",
-        "Criminal",
-        "Commoner",
-        "Cultist",
-        "Druid",
-        "Expert",
-        "Explorer",
-        "Guard",
-        "Healer",
-        "Hero",
-        "Hunter",
-        "Knight",
-        "Mage",
-        "Monk",
-        "Merchant",
-        "Noble",
-        "Priest",
-        "Pirate",
-        "Ranger",
-        "Scholar",
-        "Soldier",
-        "Rogue",
-        "Scholar",
-        "Shaman",
-        "Soldier",
-        "Spy",
-        "Traveler",
-        "Urchin",
-        "Warrior",
-        "Warlock",
-        "Witch"
-        ]
-    return random.choice(Backgrounds)
-
-
-
-
-
-
-def Race():
-    race_weights = {
-        "Human": 10,
-        "Aberration": 4,
-        "Aven": 4,
-        "Beast": 6,
-        "Beastfolk": 5,
-        "Celestial": 4,
-        "Construct": 4,
-        "Dragon": 5,
-        "Dwarf": 6,
-        "Elf": 6,
-        "Elemental": 5,
-        "Fey": 4,
-        "Fiend": 4,
-        "Giant": 4,
-        "Gnome": 5,
-        "Goblin": 6,
-        "Halfling": 6,
-        "Kobold": 6,
-        "Lizardfolk": 4,
-        "Monstrosity": 5,
-        "Ooze": 4,
-        "Orc": 7,
-        "Plant": 5,
-        "Snakefolk": 4,
-        "Undead": 7,
-        "Beholder": 3,
-        "Illithid":4,
-        "Vampire":3,
-        "": 0
-    }
-    
-    return random.choices(list(race_weights.keys()), weights=race_weights.values(), k=1)[0]
-
-
 
 
 
@@ -2986,7 +3058,8 @@ def Race():
 
 
 # Racial Names
-def Racial_Names(Type):
+def Racial_Names(npc):
+    Type = npc.race    
     Names = [
         "Arthurius",
         "Ada",
@@ -3003,12 +3076,15 @@ def Racial_Names(Type):
         "Aelin",
 
         "Byron",
+        "Brienne",
         
         "Caspian",
+        "Cersei",
         
         "Dorian", 
         "Draven",
         "Dante",
+        "Daenerys",
 
         "Elektra",
 
@@ -3016,6 +3092,8 @@ def Racial_Names(Type):
         "Forajido",
 
         "Goku",
+
+        "Khal",
 
         "Loki",
         "Leia",
@@ -3026,6 +3104,7 @@ def Racial_Names(Type):
         "Maleficent", 
         "Morpheus",
         "Maximus",
+        "Mystique",
 
         "Nemo",
         "Neo",
@@ -3033,41 +3112,38 @@ def Racial_Names(Type):
 
         "Odin", 
         "Orion",
+        "Oberyn", 
         
         "Pascal",
         "Paragon",
+        "Phoenix",
 
         "Ripley",
         "Ragnar",
+        "Rogue", 
+        "Raven",
 
         "Strider",
         "Spartacus",
         "Storm",
+        "Sabrina",
+        "Seraph",
 
         "Trinity",
         "Thorin",
+        "Thalia",
+        "Titan",
 
         "Jareth",
         
         "Kratos",
+
+        "Wolverine",
         
         "Xena",
         
         "Zorro",
         
-        "Wolverine",
-        "Rogue", 
-        "Phoenix",
-        "Mystique",
-        "Cersei",
-        "Daenerys",
-        "Khal",
-        "Brienne",
-        "Oberyn", 
-        "Raven",
-        "Sabrina",
-        "Seraph",
-        "Lucifer",
         "Castiel",
         "Crowley", 
         "Maverick",
@@ -3102,10 +3178,13 @@ def Racial_Names(Type):
         "Bellatrix",
         "Vega",
         "Nyx",
-        "Thalia",
-        "Titan",
         "Nova",
-        "Solaris"
+        
+        "Lucifer",
+
+        "Solaris",
+        "Grendel", "Kaiju", "Mothra", "Balrog", "Jabberwock", "Chimera",
+        "Basilisk", "Gorgon", "Behemoth", "Leviathan", "Rodan", "Cerberus",
         ]
     
     Surnames = [
@@ -3185,7 +3264,6 @@ def Racial_Names(Type):
         "Stormforge",
         "Whitewave",
         "Greycloud",
-        "Silverleaf",
         "Flameseeker"
     ]
 
@@ -3198,29 +3276,38 @@ def Racial_Names(Type):
         "Aragorn",
         "Anselm",
         "Augustine",
+        "Aubert", 
         "Anastasia",
+        
         "Beowulf",
         "Belos",
+        
         "Cid",
         "Cicero",
         "Caesar",
         "Cleopatra",
+        
         "Denis",
+        
         "Emelot",
-        "Jean",
+
         "Frank",
+
         "Isildur",
+        
+        "Jean",
+
+        "Katarina",
+        
         "Theoden",
         "Lancelot", 
         "Thomas",
         "Nicole",
         "Herbin",
         "Elisabeth",
-        "Katarina",
         "Beau",
         "Reginald",
         "Ernest",
-        "Aubert", 
         "Neil",
         "Menard",
         "Euphemia",
@@ -3896,52 +3983,120 @@ def Racial_Names(Type):
         "Celeborn",
         "Celebrimbor",
         "Celebros",
-        "Celtana", "Certhel", "Cezar", "Chaelana", 
-        "Chathi", "Chen", "Chi", "Christopher", "Clagnemart",
-        "Claira", "Clark", "Colart", "Conan", "Constance", 
-        "Cuarion", "Curie", "Curu", "Daneloth", "Dartagnan", "Dartañan",
-        "Dartagnan", "Dartañan", "David", "Dawnpath", 
-        "Dawnwalker", "Del", "Dilan", "Dineloth",
-        "Donael", "Douglas", "Dont", "Dorn", "Dorian", "Doliel", 
-        "Dorn", "Dramo", "Draven", "Drusilia", "Dumein",
-        "Durgwen", "Earendil", "Eberk", "Eda", "Edric", 
-        "Ela", "Elandrial", "Elama", "Elari", "Elbereth",
-        "Elenia", "Elendil", "Elendil", "Elenia", "Ele", 
-        "Elendil", "Elerinna", "Elevas", "Eli", "Elia",
-        "Eli", "Elidyr", "Elien", "Elin", "Elle", 
-        "Elladan", "Elma", "Elphaba", "Elpetor",
-        "Elrieth", "Elrohir", "Elros", "Eluin",
+        "Celtana",
+        "Certhel",
+        "Cezar",
+        "Chaelana", 
+        "Chathi",
+        "Chen",
+        "Chi",
+        "Christopher",
+        "Clagnemart",
+        "Claira", "Clark",
+        "Colart", "Conan",
+        "Constance", 
+        "Cuarion", "Curie", "Curu",
+        "Daneloth", "Dartagnan", "Dartañan",
+        "Dartagnan", "Dartañan",
+        "David", "Dawnpath", 
+        "Dawnwalker", "Del",
+        "Dilan", "Dineloth",
+        "Donael", "Douglas", "Dont",
+        "Dorn", "Dorian", "Doliel", 
+        "Dorn", "Dramo",
+        "Draven", "Drusilia", "Dumein",
+        "Durgwen", "Earendil",
+        "Eberk", "Eda", "Edric", 
+        "Ela", "Elandrial",
+        "Elama", "Elari", "Elbereth",
+        "Elenia", "Elendil",
+        "Elendil", "Elenia", "Ele", 
+        "Elendil", "Elerinna",
+        "Elevas", "Eli", "Elia",
+        "Eli", "Elidyr", "Elien",
+        "Elin", "Elle", 
+        "Elladan", "Elma",
+        "Elphaba", "Elpetor",
+        "Elrieth", "Elrohir",
+        "Elros", "Eluin",
         "Elwing", "Elzevir", 
-        "Elye", "Elyl", "Elys", "Ema", "Emma",
-        "Emmy", "Ender", "Endor", "Enialis", "Enna", 
-        "Eol", "Erafe", "Eran", "Erdan",
-        "Erestor", "Erevan", "Erwin", "Espar", "Esmeralda", "Esvele", 
-        "Eufemia", "Euler", "Eurin", "Evadne", "Evandel", "Evanescense", "Eve",
+        "Elye", "Elyl", "Elys",
+        "Ema", "Emma",
+        "Emmy", "Ender",
+        "Endor", "Enialis",
+        "Enna", 
+        "Eol", "Erafe",
+        "Eran", "Erdan",
+        "Erestor", "Erevan",
+        "Erwin",
+        "Espar", "Esmeralda",
+        "Esvele", 
+        "Eufemia",
+        "Euler", "Eurin",
+        "Evadne", "Evandel",
+        "Evanescense", "Eve",
         "Evidam", "Eyla", "Faelir", 
-        "Faen", "Faera", "Fae", "Faethis",
+        "Faen", "Faera",
+        "Fae", "Faethis",
         "Faila", "Fai", "Falchion",
         "Fandel", "Fan", "Fanal", 
-        "Faelir", "Faen", "Faera", "Faethis", "Fai", "Faila", "Falchion", "Fandel", "Fan", "Fanal",
-        "Fandel", "Fandral", "Fara", "Faral", "Faelorn", "Faralin",
+        "Faelir", "Faen", "Faera",
+        "Faethis",
+        "Fai", "Faila", "Falchion",
+        "Fandel", "Fan", "Fanal",
+        "Fandel", "Fandral", "Fara",
+        "Faral", "Faelorn", "Faralin",
         "Farol", "Feanor", "Felicity", "Felosial",
-        "Fen", "Fera", "Feralia", "Featherspark", "Felan", "Feravel",
+        "Fen", "Fera", "Feralia",
+        "Featherspark", "Felan", "Feravel",
         "Feremar", "Feyla", "Feylin", "Filius",
         "Fingolfin", "Firael", "Foli",
-        "Forestmoon", "Forestflower", "Forestheart", "Forojol", "Fral", "Frelia", "Freya",
-        "Froemar", "Galadriel", "Galdor", "Galindan", "Gara", "Gawain",
-        "Gael", "Gara", "Gerngwen",
+        "Forestmoon", "Forestflower",
+        "Forestheart", "Forojol",
+        "Fral", "Frelia", "Freya",
+        "Froemar", "Galadriel",
+        "Galdor",
+        "Galindan",
+        "Gara",
+        "Gawain",
+        "Gael",
+        "Gara",
+        "Gerngwen",
         "Glorfindel",
-        "Goldleaf", "Gus", "Goku", "Galdric", "Galin", "Galor", "Galthor", "Glyn", "Haedir", "Hadarai",
-        "Halana", "Heian", "Holara", "Horatio", "Horneth", "Huroz",
-        "Iannien", "Iellan", "Ienor", "Ilanis",
-        "Ilebellis", "Ilima", "Immeral", "Innil",
-        "Irion", "Ira", "Irui", "Iorhel", "Isolde", "Ivellios",
+        "Goldleaf",
+        "Gus",
+        "Goku",
+        "Gokun",
+        "Gokune",
+        "Galdric",
+        "Galin",
+        "Galor",
+        "Galthor",
+        "Glyn",
+        "Haedir",
+        "Hadarai",
+        "Halana",
+        "Heian",
+        "Holara",
+        "Horatio",
+        "Horneth",
+        "Huroz",
+        "Iannien",
+        "Iellan",
+        "Ienor",
+        "Ilanis",
+        "Ilebellis", "Ilima",
+        "Immeral", "Innil",
+        "Irion", "Ira", "Irui",
+        "Iorhel", "Isolde", "Ivellios",
         "Iusus", "Iylar", "Jareth", "Jar",
-        "Jarsali", "Jay", "Jelenet", "Jorel", "Kai", "Kalel",
+        "Jarsali", "Jay", "Jelenet",
+        "Jorel", "Kai", "Kalel",
         "Kan", "Kari", "Karnwyl",
         "Karn", "Kay", "Keiro", "Keyleth",
         "Kern", "Kratos", "Kylar",
-        "Laucian", "Lael", "Laer", "Larin", "Lauriel", "Laurin",
+        "Laucian", "Lael", "Laer",
+        "Larin", "Lauriel", "Laurin",
         "Leshanna", "Lia", "Liliandil", "Liadon",
         "Lilis", "Lirn", "Lithor", "Lora",
         "Loria", "Loria",
@@ -3949,40 +4104,77 @@ def Racial_Names(Type):
         "Luthien", "Lyfaen", "Lyrial",
         "Mai", "Maindaer", "Malkis",
         "Mara", "Maleficent", "Maralen", "Maur",
-        "Melehtion", "Melwen", "Mella", "Meriele", "Merric", "Mialee",
+        "Melehtion", "Melwen", "Mella",
+        "Meriele", "Merric", "Mialee",
         "Mial", "Mindartis", "Mial", "Mistwatcher",
-        "Morhel", "Morwen", "Mya", "Mykar", "Myla", "Myr", "Nae",
+        "Morhel", "Morwen", "Mya",
+        "Mykar", "Myla", "Myr", "Nae",
         "Naeris", "Naivara", "Nail",
-        "Naila", "Nailo", "Narkia", "Narn", "Neo", "Neuse", "Newa", "Noarnad", "Nora", "Norul",
+        "Naila", "Nailo", "Narkia", "Narn",
+        "Neo", "Neuse", "Newa", "Noarnad",
+        "Nora", "Norul",
         "Oceania", "Oceanwalker", "Odalia",
-        "Ofandrus", "Oi", "Olimion", "Ol", "Oren", "Ostoroth", "Oromis",
-        "Paelia", "Pascal", "Pegnith", "Peren", "Peri", "Peria",
-        "Pharana", "Quildohtare", "Quelenna", "Quinar",
-        "Rain", "Raine", "Raingaze", "Rael", "Raelim", "Raer",
-        "Raen", "Ravenflow", "Ravenwatcher", "Ridaro",
+        "Ofandrus", "Oi", "Olimion", "Ol",
+        "Oren", "Ostoroth", "Oromis",
+        "Paelia", "Pascal", "Pegnith",
+        "Peren", "Peri", "Peria",
+        "Pharana", "Quildohtare",
+        "Quelenna", "Quinar",
+        "Rain", "Raine", "Raingaze",
+        "Rael", "Raelim", "Raer",
+        "Raen",
+        "Ravenflow",
+        "Ravenwatcher",
+        "Ravenwatch",
+        "Ridaro",
         "Relix", "Ren", "Reseo", "Riardon",
-        "Rithel", "Rocenel", "Roden", "Roen", "Rolan", "Rolen",
-        "Rua", "Rumathran", "Ryann", "Ryer", "Rym", "Sael", "Sai",
+        "Rithel", "Rocenel", "Roden",
+        "Roen", "Rolan", "Rolen",
+        "Rua", "Rumathran", "Ryann",
+        "Ryer", "Rym", "Sael", "Sai",
         "Sann", "Sariel",
         "Saynal",
         "Shava",
-        "Soderac", "Sovelis", "Starwatcher", "Starwhisper",
-        "Sudelrin", "Sumi", "Sumnes",
+        "Soderac", "Sovelis",
+        "Starwatcher",
+        "Starwhisper",
+        "Sudelrin",
+        "Sumi",
+        "Sumnes",
         "Syllin",
         "Sylvaranz",
-        "Sylv", "Tauriel", "Thia",
-        "Thranduil", "Tindecet", "Tris",
-        "Trian", "Valance", "Vadan", "Valna",
-        "Vanimial", "Vall",
+        "Sylv",
+        "Tauriel",
+        "Thia",
+        "Thranduil",
+        "Tindecet",
+        "Tris",
+        "Trian",
+        "Valance",
+        "Vadan",
+        "Valna",
+        "Vanimial",
+        "Vall",
         "Van",
-        "Vanes", "Vax", "Vaxeldan",
-        "Vex", "Vexhalia", "Viasta", "Wasanzi",
-        "Wil", "Wenion",
-        "Xanapia", "Xyrkraken",
-        "Xylia", "Yael",
-        "Yaeldrin", "Yesstina",
-        "Zamior", "Zarivol",
-        "Zay", "Zelaerys",
+        "Vanes",
+        "Vax",
+        "Vaxeldan",
+        "Vex",
+        "Vexhalia",
+        "Viasta",
+        "Wasanzi",
+        "Wil",
+        "Wenion",
+        "Xanapia",
+        "Xyrkraken",
+        "Xylia",
+        "Yael",
+        "Yaeldrin",
+        "Yesstina",
+        "Zamior",
+        "Zarivol",
+        "Zay",
+        "Zelaerys",
         "Zelir",
         "Zeren",
         "Zia",
@@ -3990,6 +4182,7 @@ def Racial_Names(Type):
         ]
 
     ElvenSurnames = [
+        "Silverleaf",
         "Moonshadow",
         "Nightbreeze",
         "Sunweaver",
@@ -4015,18 +4208,25 @@ def Racial_Names(Type):
         "Morningstar",
         "Dreamweaver",
         "Whisperwind",
-        "Duskweaver", "Raindancer",
+        "Duskweaver",
+        "Raindancer",
         "Sunshadow", 
-        "Starfall", "Mistwood",
+        "Starfall",
+        "Mistwood",
         "Dreamshade",
-        "Frostvale", "Leafshade",
+        "Frostvale",
+        "Leafshade",
         "Goldenbough",
         "Silverpine",
-        "Mistwalker", "Dawnshadow",
+        "Mistwalker",
+        "Dawnshadow",
         "Dreamsong",
-        "Nightshade", "Starleaf",
-        "Moonrise", "Sunblade", 
-        "Mistbreeze", "Eveningstar",
+        "Nightshade",
+        "Starleaf",
+        "Moonrise",
+        "Sunblade", 
+        "Mistbreeze",
+        "Eveningstar",
         "Sundancer",
         "Whisperleaf",
         "Dreamcatcher",
@@ -4037,19 +4237,32 @@ def Racial_Names(Type):
         "Glimmermoon",
         "Nightriver",
         "Silverwind", 
-        "Lightshade", "Moondancer",
+        "Lightshade",
+        "Moondancer",
         "Frostleaf",
-        "Starbloom", "Rainwhisper",
+        "Starbloom",
+        "Rainwhisper",
         "Glimmerstone", 
-        "Silverfrost", "Goldensong", "Sunspark",
+        "Silverfrost",
+        "Goldensong",
+        "Sunspark",
         "Nightglow",
-        "Starflight", "Rainshadow", 
-        "Goldenleaf", "Whisperbreeze", "Moonlace",
+        "Starflight",
+        "Rainshadow", 
+        "Goldenleaf",
+        "Whisperbreeze",
+        "Moonlace",
         "Dewshine",
-        "Twilightbloom", "Moonstone", 
-        "Sunsinger", "Shadowsong", "Ebonwood",
-        "Goldenrain", "Skywhisper", "Starfire", 
-        "Sunstone", "Moonbrook",
+        "Twilightbloom",
+        "Moonstone", 
+        "Sunsinger",
+        "Shadowsong",
+        "Ebonwood",
+        "Goldenrain",
+        "Skywhisper",
+        "Starfire", 
+        "Sunstone",
+        "Moonbrook",
         "Nightsinger",
         "Goldenstar",
         "Shimmerwood",
@@ -4064,9 +4277,11 @@ def Racial_Names(Type):
         "Dreamlight",
         "Whispershade",
         "Glimmerleaf",
-        "Silentmoon", "Shadowvale", 
+        "Silentmoon",
+        "Shadowvale", 
         "Dawnlight",
-        "Glimmershade", "Goldendew",
+        "Glimmershade",
+        "Goldendew",
         "Nightstar",
         "Twilightmist",
         "Eldar",
@@ -4091,13 +4306,38 @@ def Racial_Names(Type):
         return FullNames
 
     Giant = [
-        "Rotder", "Flunfum", "Bunce", "Calamundis",
-        "Droroc", "Gerdur", "Grad", "Bridget", "Ananias",
-        "Atlas", "Bunari", "Casade", "Atlumun", "Coeus",
-        "Crius", "Hyperion", "Iapetus", "Cronus", "Thea",
-        "Rhea", "Themis", "Memosyne", "Foebe", "Tethis", "Tezis",
-        "Tethys", "Bunasas", "Calan",
-        "Brasan", "Tialam", "Bundero", "Atlar",
+        "Rotder",
+        "Flunfum",
+        "Bunce",
+        "Calamundis",
+        "Droroc",
+        "Gerdur",
+        "Grad",
+        "Bridget",
+        "Ananias",
+        "Atlas",
+        "Bunari",
+        "Casade",
+        "Atlumun",
+        "Coeus",
+        "Crius",
+        "Hyperion",
+        "Iapetus",
+        "Cronus",
+        "Thea",
+        "Rhea",
+        "Themis",
+        "Memosyne",
+        "Foebe",
+        "Tethis",
+        "Tezis",
+        "Tethys",
+        "Bunasas",
+        "Calan",
+        "Brasan",
+        "Tialam",
+        "Bundero",
+        "Atlar",
         "Caramu", "Cadet", "Flasari", "Geroro",
         "Bundun", "Andurd", "Draro", "Tisar", "Coni",
         "Bunfunfu", "Atlaria", "Bundunde", "Candu", "Teri",
@@ -4106,19 +4346,35 @@ def Racial_Names(Type):
         "Bedivere", "Bedwyr", "Bohort", "Bors", "Cai", "Caradoc",
         "Caradog", "Culch", "Elaine", "Enid", "Enide", "Gaheriet",
         "Gaheris", "Galaad", "Galahad", "Gareth", "Garez", "Gauvain",
-        "Goven", "Gawain", "Geraint", "Gualguainus", "Guendolen", "Guendolena",
-        "Guenevere", "Guinivere", "Guiomar", "GynezGyneth", "Hector", "Hoel", "Igerna",
-        "Igraine", "Iseult", "Iseut", "Isolda", "Isolde", "Kay", "Lancelot", "Loncelote",
-        "Lancelote", "Laudine", "Linet", "Lionel", "Lionesse", "Lionors", "Lohengrin",
-        "Loherangrin", "Lot", "Luned", "Lunete", "Lynet", "Lynette", "Lyones", "Lyonesse",
-        "Lyonors", "Medraut", "Medrod", "Mordred", "MerlinMyrdin", "Merlinus", "Merdinus",
-        "Modred", "Mordred", "Morgaine", "Morgen", "Nimue", "Vivien", "Niniane", "Olwen",
-        "Owain", "Parsifal", "Parzival", "Percival", "Pellam", "Pelleas", "Pellehand", "Pellehan",
-        "Pelles", "Beli", "Pellinore", "Percival", "Peredur", "Tristan", "Drust", "Drustan", "Urien",
-        "Uther", "Uthyr", "Walganus", "Yseut", "Iseult", "Ysolt", "Iseult", "Yvain", "Owain", "Ywain",
-        "Lynn", "Lunete", "Eluned", "Lohengrin", "Lorraine", "Lot", "Gaius", "Iseult", "Gawain", "Garez",
+        "Goven", "Gawain", "Geraint",
+        "Gualguainus", "Guendolen", "Guendolena",
+        "Guenevere", "Guinivere",
+        "Guiomar", "GynezGyneth",
+        "Hector", "Hoel", "Igerna",
+        "Igraine", "Iseult", "Iseut",
+        "Isolda", "Isolde", "Kay",
+        "Lancelot", "Loncelote",
+        "Lancelote", "Laudine", "Linet",
+        "Lionel", "Lionesse", "Lionors",
+        "Lohengrin",
+        "Loherangrin", "Lot", "Luned",
+        "Lunete", "Lynet", "Lynette", "Lyones", "Lyonesse",
+        "Lyonors", "Medraut", "Medrod",
+        "Mordred", "MerlinMyrdin", "Merlinus", "Merdinus",
+        "Modred", "Mordred", "Morgaine",
+        "Morgen", "Nimue", "Vivien", "Niniane", "Olwen",
+        "Owain", "Parsifal", "Parzival",
+        "Percival", "Pellam", "Pelleas", "Pellehand", "Pellehan",
+        "Pelles", "Beli", "Pellinore",
+        "Percival", "Peredur", "Tristan", "Drust", "Drustan", "Urien",
+        "Uther", "Uthyr", "Walganus",
+        "Yseut", "Iseult", "Ysolt", "Iseult", "Yvain", "Owain", "Ywain",
+        "Lynn", "Lunete", "Eluned",
+        "Lohengrin", "Lorraine", "Lot",
+        "Gaius", "Iseult", "Gawain", "Garez",
         "Enid", "Helen", "Caratacos",
-        "Caradog", "Bors", "Bedivere", "Tigsar", "Morgan", "Arthur", "Oceanus"
+        "Caradog", "Bors", "Bedivere",
+        "Tigsar", "Morgan", "Arthur", "Oceanus"
         ]
     if Type == "Giant":
         Names = Giant
@@ -4274,9 +4530,11 @@ def Racial_Names(Type):
         "Battlerager",
         "Goreclaw",
         "Steelbite",
-        "Bladestorm", "Skullsplitter",
+        "Bladestorm",
+        "Skullsplitter",
         "Maulfist", 
-        "Bloodscream", "Stormfist",
+        "Bloodscream",
+        "Stormfist",
         "Firemaul",
         "Shadowclaw",
         "Thundermaul",
@@ -4288,25 +4546,34 @@ def Racial_Names(Type):
         "Goremaul",
         "Thunderaxe", 
         "Stormrend",
-        "Bladeshadow", "Gorebrand",
+        "Bladeshadow",
+        "Gorebrand",
         "Warthorn",
-        "Frostfury", "Shadowmaul", 
-        "Battlemaw", "Warclaw",
+        "Frostfury",
+        "Shadowmaul", 
+        "Battlemaw",
+        "Warclaw",
         "Rageclaw",
-        "Bladefury", "Gorethorn",
+        "Bladefury",
+        "Gorethorn",
         "Warbreaker", 
         "Frostclaw",
         "Thunderfist",
         "Skullcrusher",
-        "Shadowbreaker", "Ironfury",
+        "Shadowbreaker",
+        "Ironfury",
         "Bloodfury", 
         "Ragesong",
-        "Battleclaw", "Warmaul",
+        "Battleclaw",
+        "Warmaul",
         "Bladebreaker",
-        "Stormfury", "Firethorn", 
-        "Shadowrend", "Thunderblade",
+        "Stormfury",
+        "Firethorn", 
+        "Shadowrend",
+        "Thunderblade",
         "Gorebreaker",
-        "Ironblade", "Bloodmaul",
+        "Ironblade",
+        "Bloodmaul",
         "Battlerage"
         ]
     if Type == "Orc":
@@ -4315,10 +4582,13 @@ def Racial_Names(Type):
         FullNames =  random.choice(Names) + ' ' + random.choice(Surnames) 
         return FullNames
     Dwarves = [
-        "Graviel", "Juan",
-        "Fernan", "Enrique",
+        "Graviel",
+        "Juan",
+        "Fernan",
+        "Enrique",
         "Mariana",
-        "Aularia", "Inés",
+        "Aularia",
+        "Inés",
         "Blanca",
         "Ignacio",
         "Gonzalo",
@@ -4331,7 +4601,8 @@ def Racial_Names(Type):
         "Paco", "Francisco", "Antonio",
         "Leonor", "Juanes",
         "Juliana", "Ramono", "Angela",
-        "Arturo", "Leandro", "Cornelio",
+        "Arturo",
+        "Leandro", "Cornelio",
         "Feliz", "Jose",
         "Josejuan",
         "Joseramon", "Josealberto",
@@ -4359,7 +4630,8 @@ def Racial_Names(Type):
         "Anibal", "Anselmo",
         "Antonio", "Apolonio",
         "Araceli", "Armando",
-        "Aroa", "Arsenio", "Arturo", "Ascensión",
+        "Aroa", "Arsenio",
+        "Arturo", "Ascensión",
         "Asunción", "Atanasio",
         "Atilio", "Aureliano",
         "Aurelio",
@@ -4391,7 +4663,8 @@ def Racial_Names(Type):
         "Damian", "Daniel",
         "Daniela", "Danilo",
         "Dariel", "Darío",
-        "Debora", "Demetrio",
+        "Debora",
+        "Demetrio",
         "Desideria", "Desiderio",
         "Diego", "Domingo",
         "Domitilda", "Eberardo",
@@ -4439,25 +4712,36 @@ def Racial_Names(Type):
         "Joseantonio",
         "Josefa",
         "Joseluis",
-        "Josemanuel", "Josemari",
-        "Josemaria", "Juan",
-        "Juana", "Juancho",
-        "Juancarlos", "Juanfran",
-        "Juanita", "Juanjosé",
-        "Juanma", "Juanpablo",
+        "Josemanuel",
+        "Josemari",
+        "Josemaria",
+        "Juan",
+        "Juana",
+        "Juancho",
+        "Juancarlos",
+        "Juanfran",
+        "Juanita",
+        "Juanjosé",
+        "Juanma",
+        "Juanpablo",
         "Justina",
-        "Justino", "Justo",
-        "Kiko", "Laura",
+        "Justino",
+        "Justo",
+        "Kiko",
+        "Laura",
         "Lázaro",
-        "Leandro", "Lope",
+        "Leandro",
+        "Lope",
         "Lucas",
         "Lucrecio",
         "Lucrecia",
         "Luisa",
         "Manolo",
         "Manola",
-        "Manuel", "Marcelo",
-        "Marcela", "Marcos",
+        "Manuel",
+        "Marcelo",
+        "Marcela",
+        "Marcos",
         "Margarita",
         "Maribel",
         "Mario",
@@ -4557,7 +4841,6 @@ def Racial_Names(Type):
         "Velasco",
         
         
-        "Jimeno",
         
         "Brostan",
         "Amón",
@@ -4584,24 +4867,36 @@ def Racial_Names(Type):
         "Prospero",
         "Rosto",
         "Seldo",
-        "Selda", "Aunara",
-        "Artosta", "Juriano",
-        "Juro", "Joseros",
-        "Rosero", "Rosera",
+        "Selda",
+        "Aunara",
+        "Artosta",
+        "Juriano",
+        "Juro",
+        "Joseros",
+        "Rosero",
+        "Rosera",
         "Jura",
-        "Jácaro", "Rosario",
-        "Fingido", "Anancio",
+        "Jácaro",
+        "Jimeno",
+        "Rosario",
+        "Fingido",
+        "Anancio",
         "Anancia",
         "Pansiano",
         "Fertilio",
-        "Constantina", "Jarana",
-        "Morana", "Nora",
-        "Olivia", "Olivio",
-        "Noro", "Jarano",
+        "Constantina",
+        "Jarana",
+        "Morana",
+        "Nora",
+        "Olivia",
+        "Olivio",
+        "Noro",
+        "Jarano",
         "Valido",
         "Valida",
         "Abela",
-        "Adalina", "Adora",
+        "Adalina",
+        "Adora",
         "Adriana", "Ana",
         "Antonia", "Basilia",
         "Beatriz", "Bonita",
@@ -4745,7 +5040,8 @@ def Racial_Names(Type):
         "Felipe",
         "Gerardo",
         "Horacio",
-        "Isidro", "Jacobo",
+        "Isidro",
+        "Jacobo",
         "Lorenzo",
         "Maceo",
         "Norberto",
@@ -4754,9 +5050,11 @@ def Racial_Names(Type):
         "Quique",
         "Raul",
         "Silverio", 
-        "Toribio", "Ugo",
-        "Victorino", "Waldo",
-        "Xerxes", "Yesid",
+        "Toribio",
+        "Ugo",
+        "Victorino",
+        "Waldo",
+        "Xerxes",
 
         "Adan",
         
@@ -4804,6 +5102,7 @@ def Racial_Names(Type):
         "Ximeno",
         
         "Ysidro",
+        "Yesid",
         
         "Zenon",
         "Zeferino",
@@ -5055,8 +5354,6 @@ def Racial_Names(Type):
         "Fuenteoro",  
         "Cascodediamante",  
         "Cascodiamante",  
-        "Reflejometálico",   
-        "Torredelmina",   
         "Guardiánmetal",   
         "Aurorubí",  
         "Luzdeesmeralda",  
@@ -5108,16 +5405,14 @@ def Racial_Names(Type):
         "Oronegro",
         "Ororojo",
         
-        "Luzdeambar",   
-        "Luzambar",   
         "Guardiándeplata",  
         "Espiraldehierro",  
         "Tesoroabierto",   
         "Cumbredelplata",   
-        "Sueñodeoro",  
+        "Cumbreplata",   
         "Piedrasagaz",  
         "Cadenadeacero",   
-        "Torrejoya",  
+        "Cadenaferro",   
         "Pilardeoro",   
         "Lanzadeplata",   
         "Piedrasusurro",  
@@ -5125,7 +5420,6 @@ def Racial_Names(Type):
         "Lagodeesmeralda",
         "Valledejoyas",  
         "Manantialdeacero",  
-        "Oronevado",  
         "Espadacristal",  
         "Cordilleraacero",
         "Almadeplata",  
@@ -5136,12 +5430,28 @@ def Racial_Names(Type):
         "Cavernaclaridad",  
         "Orígenpiedra",  
         "Gotaesmeralda",
-        "Lingotazo"
-        ]
+        
+        "Lingotazo",
+        "Luzdeambar",   
+        "Luzambar",   
+
+        "Oronevado",  
+        
+        "Reflejometálico",
+        
+        "Sueñodeoro",  
+        "Sueñoaureo",
+        
+        "Torredelmina",   
+        "Torrealmina",   
+        "Torremina",   
+        "Torrejoya",  
+        "Torreaurea",  
+        ""]
     if Type == "Dwarf": 
         Names = Dwarves
         Surnames = DwarvenSurnames
-        FullNames =  random.choice(Names) + ' ' + random.choice(Names) + ' ' + random.choice(Surnames)
+        FullNames =  random.choice(Names) + ' ' + random.choice(Names) + ' ' + random.choice(Surnames) + ' ' + random.choice(Surnames)
         return FullNames
 
     Elementals = [
@@ -5173,21 +5483,40 @@ def Racial_Names(Type):
         "River",
         "Nile",
         "Kai", "Caspian",
-        "Cora", "Maya", "Amalia", "Maia", "Mira",
-        "Talia", "Amaya", "Tallulah", "Ren", "Rene",
-        "Well", "Marin", "Severn", "Marina", "Tiber",
-        "Tiberius", "Jennifer", "Jen", "Rain", "Wade",
-        "Ocen", "Oceanus", "Beck", "Malik", "Malek",
+        "Cora", "Maya",
+        "Amalia", "Maia", "Mira",
+        "Talia", "Amaya",
+        "Tallulah", "Ren", "Rene",
+        "Well", "Marin",
+        "Severn", "Marina", "Tiber",
+        "Tiberius", "Jennifer",
+        "Jen", "Rain", "Wade",
+        "Ocen", "Oceanus", "Beck",
+        "Malik", "Malek",
         "Irv", "Clyde",
-        "Indus", "Indo", "Nimue", "Nim",
-        "Avalon", "Merlin", "Nixie", "Doris", "Kent",
-        "Kendall", "Rio", "Cove", "Bahia", "Innes",
-        "Moses", "Fuji", "Anahita", "Ginevra", "Gin",
-        "Ginebra", "Jordan", "Rayan", "Kelvin", "Nori",
-        "Arno", "Saga", "Lago",
-        "Struan", "Stream", "Varsha",
-        "Shannon", "Ondine", "Onda",
-        "Misty", "Monroe", "Arnav",
+        "Indus", "Indo",
+        "Nimue", "Nim",
+        "Avalon", "Merlin",
+        "Nixie", "Doris", "Kent",
+        "Kendall", "Rio",
+        "Cove", "Bahia", "Innes",
+        "Moses", "Fuji",
+        "Anahita", "Ginevra",
+        "Gin",
+        "Ginebra", "Jordan",
+        "Rayan", "Kelvin",
+        "Nori",
+        "Arno", "Saga",
+        "Lago",
+        "Struan",
+        "Stream",
+        "Varsha",
+        "Shannon",
+        "Ondine",
+        "Onda",
+        "Misty",
+        "Monroe",
+        "Arnav",
         "Ama", "Lynn",
         "Moishe", "Yara",
         "Yareli", "Oceane",
@@ -5201,42 +5530,79 @@ def Racial_Names(Type):
         "Po", "Araluen", "Jora",
         "Naim", "Narelle",
         "Nahla", "Nerida",
-        "Nereida", "Neri", "Cherith",
-        "Adair", "Lir", "Reva",
+        "Nereida", "Neri",
+        "Cherith",
+        "Adair",
+        "Lir",
+        "Reva",
         "Sereia",
-        "Aqua", "Eyre", "Mar", "Moana",
-        "Triton", "Euna", "Undine", "Nebula",
-        "Meara", "Loch", "Naida", "Oceana",
-        "Gali", "Tal", "Loire", "Rilla",
-        "Varuna", "Maayan", "Oceanus",
-        "Kalani", "Aquarius", "Acuario", "Danu",
-        "Danubio", "Tarka", "Nen", "Gal",
-        "Rivo", "Duna", "Zarya", "Laguna",
-        "Seine", "Sena", "Alun", "Kallan",
-        "Cascada", "Danube", "Onda", "Wave",
-        "Baia", "Nile", "Nilo", "Maree",
-        "Marea", "Adria", "Adriana", "Alda",
-        "Alma", "Amaya", "Anahita",
-        "Asita", "Cherith", "Darya",
-        "Dayla", "Hali",
-        "Kendra", "Loire",
+        "Aqua", "Eyre",
+        "Mar", "Moana",
+        "Triton", "Euna",
+        "Undine", "Nebula",
+        "Meara", "Loch",
+        "Naida", "Oceana",
+        "Gali", "Tal",
+        "Loire", "Rilla",
+        "Varuna",
+        "Maayan",
+        "Oceanus",
+        "Kalani",
+        "Aquarius",
+        "Acuario",
+        "Danu",
+        "Danubio", "Tarka",
+        "Nen", "Gal",
+        "Rivo", "Duna",
+        "Zarya", "Laguna",
+        "Seine", "Sena",
+        "Alun", "Kallan",
+        "Cascada", "Danube",
+        "Onda", "Wave",
+        "Baia", "Nile",
+        "Nilo", "Maree",
+        "Marea",
+        "Adria",
+        "Adriana",
+        "Alda",
+        "Alma",
+        "Amaya",
+        "Anahita",
+        "Asita",
+        "Cherith",
+        "Darya",
+        "Dayla",
+        "Hali",
+        "Kendra",
+        "Loire",
         "Marella",
         "Michal", "Mira",
         "Nahla", "Namra", "Reva",
         "Ria", "Salila",
         "Sarita", "Talia",
-        "Zarna", "Zarya",
-        "Adair", "Afron", "Alon",
-        "Andreus", "Arnon",
-        "Bahari", "Gafar",
-        "Haf", "Jafar", "Kallan",
-        "Kaveri", "Malik",
+        "Zarna",
+        "Zarya",
+        "Adair",
+        "Afron",
+        "Alon",
+        "Andreus",
+        "Arnon",
+        "Bahari",
+        "Gafar",
+        "Haf",
+        "Jafar",
+        "Kallan",
+        "Kaveri",
+        "Malik",
         "Ninad", "Odine",
         "Pavati", "Pulin",
         "Sagara", "Siva",
-        "Wade", "Adva", "Ara",
+        "Wade",
+        "Adva",
+        "Ara",
         "Arna",
-        "Baia", "Bay", "Cascade",
+        "Baia",
+        "Bay", "Cascade",
         "Cascada",
         "Coral", "Eira", "Euri",
         "Isa", "Ice", "Snow",
@@ -5283,6 +5649,8 @@ def Racial_Names(Type):
         "Dorian",
         "Vatnavi",
         # Fire Elementals
+        "Neron",
+        "Nero",
         "Pyraan",
         "Agnivir",
         "Tulikor",
@@ -5300,12 +5668,18 @@ def Racial_Names(Type):
         "Arsenic",
         "Kenna",
         "Ravi",
-        "Aster", "Ignatius",
-        "Ignacio", "Ignatio",
-        "Hera", "Uri",
-        "Edris", "Satish",
-        "Calcifer", "Sol",
-        "Solina", "Solin",
+        "Aster",
+        "Ignatius",
+        "Ignacio",
+        "Ignatio",
+        "Hera",
+        "Uri",
+        "Edris",
+        "Satish",
+        "Calcifer",
+        "Sol",
+        "Solina",
+        "Solin",
         "Salamander",
         "Ardea", "Ravee",
         "Vulcan", "Eldir",
@@ -5417,21 +5791,33 @@ def Racial_Names(Type):
         "Ignatius",
         "Kenez",
         "McCoy",
-        "Mishal", "Mogotsi",
+        "Mishal",
+        "Mogotsi",
         "Nuri",
-        "Nuria", "Plamen",
-        "Pirro", "Pyrrhus",
-        "Pirrus", "Tanguy",
-        "Tito", "Titus",
-        "Uri", "Vatroslav",
-        "Azar", "Hayden",
+        "Nuria",
+        "Plamen",
+        "Pirro",
+        "Pyrrhus",
+        "Pirrus",
+        "Tanguy",
+        "Tito",
+        "Titus",
+        "Uri",
+        "Vatroslav",
+        "Azar",
+        "Hayden",
         "Keahi",
-        "Liekki", "Fenix",
-        "Rhys", "Igno",
+        "Liekki",
+        "Fenix",
+        "Rhys",
+        "Igno",
         "Kenez",
-        "Blaise", "Blaze",
-        "Aalish", "Aatish",
-        "Aatix", "Atix",
+        "Blaise",
+        "Blaze",
+        "Aalish",
+        "Aatish",
+        "Aatix",
+        "Atix",
         "Aarush",
         "Aarux",
         "Arux",
@@ -5439,29 +5825,58 @@ def Racial_Names(Type):
         "Adara",
         "Adeen",
         "Adish",
-        "Admani", "Amani",
-        "Adurnarseh", "Aed",
-        "Afi", "Agneya", "Agnes", "Agni", "Agnimitra",
-        "Agnivo", "Aguya",
-        "Ahdan", "Aidan",
-        "Aiden", "Aine", "Aithne", "Aizne", "Akiho",
-        "Aldebrand", "Alev", "Alinta", "Amarkeeri",
+        "Admani",
+        "Amani",
+        "Adurnarseh",
+        "Aed",
+        "Afi",
+        "Agneya",
+        "Agnes",
+        "Agni",
+        "Agnimitra",
+        "Agnivo",
+        "Aguya",
+        "Ahdan",
+        "Aidan",
+        "Aiden",
+        "Aine",
+        "Aithne",
+        "Aizne",
+        "Akiho",
+        "Aldebrand", "Alev",
+        "Alinta", "Amarkeeri",
         "Anala", "Angarika",
         "Apoy", "Ardere",
-        "Arder", "Ardor", "Atsila", "Azar",
-        "Azula", "Azarnoosh", "Basia", "Bedelia",
-        "Brantley", "Brigid", "Brit", "Cemre",
-        "Chantico", "Conlez", "Conleth", "Conley",
-        "Fajra", "Faira", "Fiamma", "Flama",
-        "Fiama", "Felio", "Felia", "Felios", "Hurik",
-        "Idris", "Ignacia", "Ishat", "Kamar",
-        "Kazuya", "Keahi", "Keegan", "Kenna", "Kindle",
-        "Kai", "Lieki", "Mahuika", "Mashal",
-        "Torch", "Antorcha", "Torcha", "Mogotsi", "Nina",
-        "Nootau", "Nutau",
+        "Arder", "Ardor",
+        "Atsila", "Azar",
+        "Azula", "Azarnoosh",
+        "Basia", "Bedelia",
+        "Brantley", "Brigid",
+        "Brit", "Cemre",
+        "Chantico", "Conlez",
+        "Conleth", "Conley",
+        "Fajra", "Faira",
+        "Fiamma", "Flama",
+        "Fiama", "Felio",
+        "Felia", "Felios",
+        "Hurik",
+        "Idris", "Ignacia",
+        "Ishat", "Kamar",
+        "Kazuya", "Keahi",
+        "Keegan", "Kenna",
+        "Kindle",
+        "Kai", "Lieki",
+        "Mahuika", "Mashal",
+        "Torch", "Antorcha",
+        "Torcha", "Mogotsi",
+        "Nina",
+        "Nootau",
+        "Nutau",
         "Oya", "Plamen",
-        "Pyro", "Piro", "Piros", "Pirus", "Ris", "Piris",
-        "Shohreh", "Sore", "Shula", "Souzan",
+        "Pyro", "Piro", "Piros",
+        "Pirus", "Ris", "Piris",
+        "Shohreh", "Sore",
+        "Shula", "Souzan",
         "Tanguy", "Ugne", "Igne", "Ignea", "Azar",
         "Calida", "Calido", "Fuji", "Neri",
         "Aiden", "Adal", "Cora", "Areli", "Brina",
@@ -5471,7 +5886,8 @@ def Racial_Names(Type):
         "Cider", "Cavo", "Fenix", "Adarin",
         "Bris", "Azam", "Calan", "Arur",
         # Earth Elementals
-        "Terraque", "Muldor", "Rocalia",
+        "Terraque",
+        "Muldor", "Rocalia",
         "Kivinari", "Prithvani",
         "Terra", "Onix", "Opal", "Aluminum",
         "Gallium", "Indium", "Tin", "Thallium",
@@ -5486,54 +5902,138 @@ def Racial_Names(Type):
         "Andesite", "Alkali", "Basalt", "Basanite",
         "Magnesium", "Lava", "Volcan", "Potassium",
         "Silica", "Rock", "Carbon", "Carbonite",
-        "Ender", "Dacite", "Dolerite", "Corsite",
-        "Dunite", "Olivine", "Essexite", "Granite",
-        "Grane", "Dune", "Pluton",
-        "Kimberlite", "Diamond", "Latite",
-        "Obsidian", "Pumice", "Scoria", "Sovite",
-        "Dolomite", "Chalk", "Coal", "Quartz", "Cuarzo",
-        "Salt", "Marble", "Granite", "Lapislazuli", "Lapis",
-        "Lazuli", "Adamite", "Adelite", "Arenite", "Almandite",
-        "Alumn", "Alunite", "Amarantite", "Anandite", "Antimony",
-        "Azurite", "Adamantine", "Agate", "Alabaster", "Bismite",
-        "Bismut", "Bronce", "Cadmium", "Cerite", "Carvonite", "Crystal",
-        "Copper", "Cobre", "Cementite", "Emerald", "Diamond", "Mine", "Fluorite",
-        "Garnet", "Gold",
-        "Hematite", "Magnetite",
-        "Manganite", "Mesolite", "Mimetite",
-        "Mica", "Magnesia",
-        "Neptinite", "Pyrite",
-        "Pirite", "Quartz",
-        "Ruby", "Titanite",
-        "Turquesa", "Turkis",
-        "Turquoise", "Tremor",
-        "Uralite", "Zeolite",
-        "Zinc", "Zircon",
-        "Lithium", "Sodium",
-        "Potassium", "Rubidium",
-        "Cesium", "Francium", "Berillium", "Magnesium",
-        "Calcium", "Strontium",
-        "Barium", "Radium", "Aluminium", "Gallium", "Indium", "Tin", "Thallium",
+        "Ender", "Dacite",
+        "Dolerite", "Corsite",
+        "Dunite", "Olivine",
+        "Essexite",
+        "Granite",
+        "Grane",
+        "Dune",
+        "Duna",
+        "Pluton",
+        "Kimberlite",
+        "Diamond",
+        "Latite",
+        "Obsidian",
+        "Pumice",
+        "Scoria",
+        "Sovite",
+        "Dolomite",
+        "Chalk",
+        "Coal",
+        "Quartz",
+        "Cuarzo",
+        "Salt",
+        "Marble",
+        "Granite",
+        "Lapislazuli",
+        "Lapis",
+        "Lazuli",
+        "Adamite",
+        "Adelite",
+        "Arenite",
+        "Almandite",
+        "Alumn",
+        "Alunite",
+        "Amarantite",
+        "Anandite",
+        "Antimony",
+        "Azurite",
+        "Adamantine",
+        "Agate",
+        "Alabaster",
+        "Bismite",
+        "Bismut",
+        "Bronce",
+        "Cadmium",
+        "Cerite",
+        "Carvonite",
+        "Crystal",
+        "Copper",
+        "Cobre",
+        "Cementite",
+        "Emerald",
+        "Diamond",
+        "Mine",
+        "Fluorite",
+        "Garnet",
+        "Gold",
+        "Hematite",
+        "Magnetite",
+        "Manganite",
+        "Mesolite",
+        "Mimetite",
+        "Mica",
+        "Magnesia",
+        "Neptinite",
+        "Pyrite",
+        "Pirite",
+        "Quartz",
+        "Ruby",
+        "Titanite",
+        "Turquesa",
+        "Turkis",
+        "Turquoise",
+        "Tremor",
+        "Uralite",
+        "Zeolite",
+        "Zinc",
+        "Zircon",
+        "Lithium",
+        "Sodium",
+        "Potassium",
+        "Rubidium",
+        "Cesium",
+        "Francium",
+        "Berillium",
+        "Magnesium",
+        "Calcium",
+        "Strontium",
+        "Barium",
+        "Radium",
+        "Aluminium",
+        "Gallium",
+        "Indium",
+        "Tin",
+        "Thallium",
         "Lead", "Bismuto", "Titanium",
-        "Vanadium", "Chromium",
-        "Manganese", "Iron", "Cobalt", "Nickel",
-        "Copper", "Zinc", "Zirconium",
-        "Rodium", "Palladium",
-        "Silver", "Cadmium", "Tunsten", "Osmium",
+        "Vanadium",
+        "Chromium",
+        "Manganese", "Iron",
+        "Cobalt", "Nickel",
+        "Copper", "Zinc",
+        "Zirconium",
+        "Rodium",
+        "Palladium",
+        "Silver", "Cadmium",
+        "Tunsten", "Osmium",
         "Platinum", "Gold",
         "Mercury", "Plata",
-        "Oro", "Copernicium",
-        "Uranium", "Plutonium", "Curium",
-        "Californium", "Einstenium",
+        "Oro",
+        "Copernicium",
+        "Uranium",
+        "Plutonium",
+        "Curium",
+        "Californium",
+        "Einstenium",
         "Fermium",
-        "Nobelium", "Lithium",
-        "Berilium", "Sodium",
+        "Nobelium",
+        "Lithium",
+        "Berilium",
+        "Sodium",
         "Magnesium",
-        "Potasium", "Calcium",
+        "Potasium",
+        "Calcium",
         "Titanium",
-        "Vanadium", "Chrome",
-        "Chromium", "Manganese", "Iron",
-        "Cobalt", "Nickel", "Copper", "Zinc",
+        "Vanadium",
+        "Chrome",
+        "Chromium",
+        "Manganese",
+        "Iron",
+        "Cobalt",
+        "Nickel",
+        "Copper",
+        "Zinc",
         "Gallium", "Rubidium",
         "Strontium", "Zirconium", "Niobium",
         "Rodium", "Silver", "Cadmium", "Indium",
@@ -5568,17 +6068,27 @@ def Racial_Names(Type):
         "Duna",
         "Amatist",
         "Gravel",
-        "Gaia", "Boulder", "Bould",
-        "Atlas", "Avalanche",
-        "Midas", "Flint",
-        "Basalt", "Jade", "Mita",
+        "Gaia",
+        "Boulder",
+        "Bould",
+        "Atlas",
+        "Avalanche",
+        "Midas",
+        "Flint",
+        "Basalt",
+        "Jade",
+        "Mita",
         "Coba",
         # Air Elementals
-        "Aerlyn", "Vaataan", "Tuulikas",
+        "Aerlyn",
+        "Vaataan",
+        "Tuulikas",
         "Ilmara", "Caelistis",
-        "Aero", "Aelio", "Aeolian", "Gale", "Zefir",
+        "Aero", "Aelio",
+        "Aeolian", "Gale", "Zefir",
         "Zefyr", "Zephyr", "Zefirus",
-        "Wuzer", "Wuther", "Haboob", "Abroholos",
+        "Wuzer", "Wuther",
+        "Haboob", "Abroholos",
         "Auster", "Austru", "Barat",
         "Berber",
         "Bayamo", "Bora",
@@ -5634,7 +6144,8 @@ def Racial_Names(Type):
         "Varsha", "Vetra", "Zerua", "Zilan", "Mistral",
         "Gibli", "Zonda", "Etesian", "Shamal",
         "Aither", "Akash", "AlizehAmphorn", "Amun", "Anan",
-        "AnilAnore", "Anvindr", "Ayaz", "Bayu",
+        "AnilAnore", "Anvindr",
+        "Ayaz", "Bayu",
         "Boreas", "Caelus", "Corentin", "Enlil", "Erjon",
         "Ermir", "Esen", "Eyvinder", "FujinGokcan",
         "Govad", "Guzrie", "Hayate", "Ilmari", "Keyne",
@@ -5645,22 +6156,38 @@ def Racial_Names(Type):
         "Alizee", "Alizeh", "Alya", "Amaterasu",
         "Amihan", "Anila", "Aria", "Aureole", "Auretta",
         "Azure", "Bonaria", "Breeze", "Brisa", "Ciela",
-        "CoroEra", "Esen", "Eteri", "Haizea", "Haneul",
+        "CoroEra", "Esen",
+        "Eteri", "Haizea", "Haneul",
         "Ilma", "Kailani", "Kalani", "Lulani", "Makani",
-        "Meltem", "Miku", "Mystral", "Nasima", "Ninlil",
+        "Meltem", "Miku",
+        "Mystral", "Nasima", "Ninlil",
         "Nuit", "Rakia", "Samira", "Sciron", "Scirocco",
-        "Sefarina", "Sema", "Skye", "Tadita", "Wind",
-        "Zephyrine", "Zerua", "Damini", "Oya", "Nebula",
-        "Misty", "Mist", "Wind", "Brenna", "Sail", "Vela",
-        "Katrina", "Amakir", "Abub",
-        "Zeam", "Vesha", "Nura",
-        "Wura", "Enarise", "Amana",
-        "Aeana", "Akades",
-        "Miste", "Zecori",
+        "Sefarina", "Sema", "Skye",
+        "Tadita", "Wind",
+        "Zephyrine", "Zerua",
+        "Damini", "Oya", "Nebula",
+        "Misty", "Mist", "Wind",
+        "Brenna", "Sail", "Vela",
+        "Katrina",
+        "Amakir",
+        "Abub",
+        "Zeam",
+        "Vesha",
+        "Nura",
+        "Wura",
+        "Enarise",
+        "Amana",
+        "Aeana",
+        "Akades",
+        "Miste",
+        "Zecori",
         "Sirocco",
-        "Siroco", "Aura",
-        "Zepherien", "Sior",
-        "Annora", "Ael",
+        "Siroco",
+        "Aura",
+        "Zepherien",
+        "Sior",
+        "Annora",
+        "Ael",
 
         # Additional Elemental References
         "Lignan",
@@ -5680,31 +6207,68 @@ def Racial_Names(Type):
         return FullNames
 
     Avens = [
-        "Murder", "Corvid",
-        "Corvus", "Cuervo",
-        "Raven", "Murderfoe", "Corvo", "Crow",
-        "Kraai", "Taruja", "Sorre", "Krahe",
-        "Alghurab", "Agrrav", "Qarga", "KaKasi",
-        "Kaka", "Varona", "Kyaeekaann", "Vrana",
-        "Kaek", "Kage", "Corb", "Uwak",
-        "Khwangwala", "Wuya", "Kaputa", "Kamagwi",
-        "Corbu", "Kok", "Krage", "Kaalhu",
-        "Cuervo", "Korbo",
-        "Vares", "Belea", "Akpavia",
-        "Varis", "Corbeau", "Feannag",
+        "Murder",
+        "Corvid",
+        "Corvus",
+        "Cuervo",
+        "Raven",
+        "Murderfoe",
+        "Corvo",
+        "Crow",
+        "Kraai",
+        "Taruja",
+        "Sorre",
+        "Krahe",
+        "Alghurab",
+        "Agrrav",
+        "Qarga",
+        "KaKasi",
+        "Kaka",
+        "Varona",
+        "Kyaeekaann",
+        "Vrana",
+        "Kaek",
+        "Kage",
+        "Corb",
+        "Uwak",
+        "Khwangwala",
+        "Wuya",
+        "Kaputa",
+        "Kamagwi",
+        "Corbu",
+        "Kok",
+        "Krage",
+        "Kaalhu",
+        "Cuervo",
+        "Korbo",
+        "Vares",
+        "Belea",
+        "Akpavia",
+        "Varis",
+        "Corbeau",
+        "Feannag",
         "Fran", "Corvo",
-        "Kheree", "Choak", "Kavala",
-        "Kaokao", "Cawla", "Caw", "Goaika",
+        "Kheree", "Choak",
+        "Kavala",
+        "Kaokao", "Cawla",
+        "Caw", "Goaika",
         "Gagak", "Kakka",
         "Vrana", "Kraischen",
-        "Nnamungoona", "Libata", "Varna", "Fung",
+        "Nnamungoona", "Libata",
+        "Varna", "Fung",
         "Zax", "Blak", "Bod",
-        "Black", "Karga", "Igikona",
-        "Qarga", "Manuk", "Gagak",
-        "Karasu", "Corvo", "Kraka", "Preachan", "Crow",
-        "Raven", "Rook",
+        "Black", "Karga",
+        "Igikona",
+        "Qarga", "Manuk",
+        "Gagak",
+        "Karasu", "Corvo",
+        "Kraka", "Preachan",
+        "Crow",
+        "Raven",
+        "Rook",
         "Corax", "Burung",
-        "Gagak", "Uwak", "Uko", "Varju", "Tsov", "Kaua",
+        "Gagak", "Uwak", "Uko",
+        "Varju", "Tsov", "Kaua",
         "Koo", "Hankaka",
         "Kagado", "Yryvu",
         "Koraki", "Qvavi",
@@ -5713,9 +6277,12 @@ def Racial_Names(Type):
         "Kam", "Wrona",
         "Corvo", "Cuervo",
         "Cioara", "Vorona",
-        "Matuu", "Legokobu", "Vrana",
-        "Lekgwaba", "Gunguwo", "Tuke",
-        "Kunguru", "Gala", "Gagak", "Uwak", "Xika",
+        "Matuu", "Legokobu",
+        "Vrana",
+        "Lekgwaba", "Gunguwo",
+        "Tuke",
+        "Kunguru", "Gala",
+        "Gagak", "Uwak", "Xika",
         "Kakam", "Kapra", "Zoq", "Kaki",
         "Vukuvuku", "Karga",
         "Garga", "Kwaakwaadabi",
@@ -5725,27 +6292,40 @@ def Racial_Names(Type):
         "Kak", "Kakab",
         "Kargw", "Kri",
         "Karok", "Corak",
-        "Kavue", "Kakur", "Karaga",
-        "Kakor", "Kaerv", "Kagaka", "Comunko",
+        "Kavue", "Kakur",
+        "Karaga",
+        "Kakor", "Kaerv",
+        "Kagaka",
+        "Comunko",
         "Corv", "Krueng",
-        "Karak", "Kalaa", "Cabur",
+        "Karak",
+        "Kalaa",
+        "Cabur",
         "Kara", "Kak",
         "Karvis", "Korvun",
         "Corvi", "Kukurv",
         "Haden", "Kanak", "Lera",
         "Krai", "Kabak",
         "Unkur", "Kagan",
-        "Kakur", "Krara", "Koror", "Kakara", "Kar",
+        "Kakur", "Krara",
+        "Koror", "Kakara",
+        "Kar",
         "Kaa", "Corr",
         "Kavon", "Kanaka",
         "Kakut", "Kakak",
-        "Kax", "Koke", "Kaeru",
-        "Karva", "Covar",
-        "Karu", "Kakar",
-        "Kana", "Kav",
+        "Kax",
+        "Koke",
+        "Kaeru",
+        "Karva",
+        "Covar",
+        "Karu",
+        "Kakar",
+        "Kana",
+        "Kav",
         "Draven",
         "Kenku",
-        "Chirrik", "Flit", "Glide", "Mimic", "Echo",
+        "Chirrik",
+        "Flit", "Glide", "Mimic", "Echo",
         "Shimmer", "Talon", "Plume", 
         "Soar", "Shade",
         "Dusk", "Dawn",
@@ -5774,11 +6354,20 @@ def Racial_Names(Type):
         "Eclipsing", "Shadowplay", "Sunshadow",
         "Pinnacle", "Crest", "Echoflap", 
         "Nestling", "Skyward", "Sable", "Flock",
-        "Whistle", "Hush", "Lustrous", 
-        "Mottle", "Pepper", "Tint", "Hue",
-        "Canvas", "Sketch", "Inkfeather", 
-        "Jewel", "Gemwing", "Prism", "Spectra",
-        "Ripple", "Glisten", "Gleam", 
+        "Whistle",
+        "Hush",
+        "Lustrous", 
+        "Mottle",
+        "Pepper",
+        "Tint",
+        "Hue",
+        "Canvas",
+        "Sketch",
+        "Inkfeather", 
+        "Jewel", "Gemwing",
+        "Prism", "Spectra",
+        "Ripple", "Glisten",
+        "Gleam", 
         "Harmony", "Rhythm",
         "Melody", "Crescendo",
         "Lilt", "Aria",
@@ -5791,7 +6380,8 @@ def Racial_Names(Type):
         "Soarer", "Glider", "Diver", "Migrant",
         "Nester", "Chirper", "Hover", "Plumage",
         "Beak", "Wing",
-        "Feather", "Claw",
+        "Feather",
+        "Claw",
         "Talon", "Beacon",
         "Singer", "Caller",
         "Flight", "Skyward",
@@ -5817,7 +6407,8 @@ def Racial_Names(Type):
         "Loonspire",
 
         # Ocean Birds-inspired:
-        "Gullwind", "Terrix",
+        "Gullwind",
+        "Terrix",
         "Albatrosar",
         "Puffinox",
         "Cormorantyx",
@@ -5826,10 +6417,14 @@ def Racial_Names(Type):
         "Shearshade",
 
         # Tropical Birds-inspired:
-        "Parroshade", "Macawind", "Toucanar",
+        "Parroshade",
+        "Macawind",
+        "Toucanar",
         "Hoopion",
-        "Sunbyrd", "Hornbillar",
-        "Quetzyx", "Cotingar",
+        "Sunbyrd",
+        "Hornbillar",
+        "Quetzyx",
+        "Cotingar",
 
         # Game Birds-inspired:
         "Quailfire",
@@ -5841,11 +6436,16 @@ def Racial_Names(Type):
         "Ptarmyx",
 
         # Miscellaneous-inspired:
-        "Owlspire", "Dovewind", "Pigeonyx",
-        "Magpyre", "Jayshade",
-        "Lyrebyrd", "Kiwix",
+        "Owlspire",
+        "Dovewind",
+        "Pigeonyx",
+        "Magpyre",
+        "Jayshade",
+        "Lyrebyrd",
+        "Kiwix",
         "Pengshade",
-        "Emurion", "Ostrix",
+        "Emurion",
+        "Ostrix",
         "Cassowar",
         "Flamyn",
         "Cranar",
@@ -5863,9 +6463,16 @@ def Racial_Names(Type):
         return FullNames
 
     Halflings = [
-        "Grinhand", "Adaldrida", "Lifwalker",
-        "Regina", "Jasmine", "Sam", "Pipim", "Crim",
-        "Pint", "Chocolaty", "Love", "Afiry", "Cuki",
+        "Grinhand",
+        "Adaldrida",
+        "Lifwalker",
+        "Regina",
+        "Jasmine",
+        "Sam",
+        "Pipim",
+        "Crim",
+        "Pint",
+        "Chocolaty", "Love", "Afiry", "Cuki",
         "Chunk", "Dairy", "Peanut", "Buter",
         "Cake", "Milk", "Cone", "Canoli",
         "Caramel", "Canela", "Chis", "Chery", "Chip",
@@ -5894,7 +6501,8 @@ def Racial_Names(Type):
         "Ferrero", "Fig", "Garlic",
         "Ginger", "Guinness",
         "Hazelnut", "Honey", "Jam", "Bean",
-        "Jelly", "Kaffir", "Lime", "Kiwi", "Fruit",
+        "Jelly", "Kaffir",
+        "Lime", "Kiwi", "Fruit",
         "Lemon", "Macadamia", "Mango", "Maple",
         "Mocha", "Nutella", "Nocciola", "Nuts",
         "Olive", "Pear", "Peppermint",
@@ -5939,7 +6547,8 @@ def Racial_Names(Type):
         "Onion",
         "Cebolla",
         "Oresos", "Orchid",
-        "Orangina", "Cacahuete", "Mani",
+        "Orangina",
+        "Cacahuete", "Mani",
         "Peach", "Pomme", "Pera",
         "Rubarb",
         "Raisin",
@@ -5957,20 +6566,37 @@ def Racial_Names(Type):
         "Picho",
         "Beler",
         "Sune",
-        "Numea", "Orelle",
+        "Numea",
+        "Orelle",
         "Trafa",
-        "Marb", "Sanue", "Nenara",
+        "Marb",
+        "Sanue",
+        "Nenara",
         "Nanut",
-        "Egumugoni", "Maximus", "Maximo", "Meridio",
-        "Bilbo", "Samwise", "Trim",
+        "Egumugoni",
+        "Maximus",
+        "Maximo",
+        "Meridio",
+        "Bilbo",
+        "Samwise",
+        "Trim",
         "Milo",
-        "Perry", "Pipin", "Caramel",
-        "Gamwick", "Mint",
-        "Herleva", "Fairfut", "Berta",
+        "Perry",
+        "Pipin",
+        "Caramel",
+        "Gamwick",
+        "Mint",
+        "Herleva",
+        "Fairfut",
+        "Berta",
         "Underfut",
-        "Pamfila", "Punkin",
-        "Bramblefoot", "Tansy",
-        "Loras", "Faela", "Primrose", 
+        "Pamfila",
+        "Punkin",
+        "Bramblefoot",
+        "Tansy",
+        "Loras",
+        "Faela",
+        "Primrose", 
         "Celandine",
         "Bramber", "Eldo",
         "Lalia", "Thistle", 
@@ -6000,12 +6626,17 @@ def Racial_Names(Type):
         "Jollybean",
         "Gigglepot",
         "Merrychuckle",
-        "Twinkletoes", "Gleeheart", 
-        "Sunshine", "Chuckleberry",
+        "Twinkletoes",
+        "Gleeheart", 
+        "Sunshine",
+        "Chuckleberry",
         "Lightheart",
-        "Giddyup", "Delighta", 
-        "Gingersnap", "Berry",
-        "Mocha", "Taffy",
+        "Giddyup",
+        "Delighta", 
+        "Gingersnap",
+        "Berry",
+        "Mocha",
+        "Taffy",
         "Nectarina", 
         "Hopskip",
         "Crumblecake",
@@ -6183,25 +6814,40 @@ def Racial_Names(Type):
         "Basariona",
         "Maneli", "Candet",
         "Wedekind", "Romuald",
-        "Guido", "Reinhold", "Hartwig", "Sunnhild", "Linde",
-        "Gerlinde", "Huguette", "Engel", "Ralf", "Norbert",
-        "Alberich", "Waldemar", "Markolf",
-        "Guerino", "Hugo", "Hugh", "Donella",
-        "Cristofano", "Bernardo", "Martinella",
-        "Caldarini", "Ludovico",     "Lorenzino",
+        "Guido", "Reinhold",
+        "Hartwig", "Sunnhild",
+        "Linde",
+        "Gerlinde", "Huguette",
+        "Engel", "Ralf", "Norbert",
+        "Alberich", "Waldemar",
+        "Markolf",
+        "Guerino", "Hugo",
+        "Hugh", "Donella",
+        "Cristofano", "Bernardo",
+        "Martinella",
+        "Caldarini", "Ludovico",
+        "Lorenzino",
         "Fiorino",
         "Bellando",
-        "Cerzino", "Ortanio", "Dellini", "Vezzoli", 
-        "Zanetti", "Graziano", "Orlando",
+        "Cerzino", "Ortanio",
+        "Dellini", "Vezzoli", 
+        "Zanetti",
+        "Graziano",
+        "Orlando",
         "Ruffino",
         "Masetti",
-        "Ambrogio", "Bonzino", 
-        "Chiaro", "Novelli",
-        "Baldassare", "Calvio",
-        "D'Este", "Antonello",
+        "Ambrogio",
+        "Bonzino", 
+        "Chiaro",
+        "Novelli",
+        "Baldassare",
+        "Calvio",
+        "D'Este",
+        "Antonello",
         "Bartolini", 
         "Amedeo",
-        "Federica", "Malatesta",
+        "Federica",
+        "Malatesta",
         "Barbato",
         "Fabbretti", "Calisto",
         "Venturi", 
@@ -6314,14 +6960,19 @@ def Racial_Names(Type):
         "Pescatore",
         "Montanari",
         "Riviero",
-        "Valentini", "Fontana",
+        "Valentini",
+        "Fontana",
         "Molinari",
-        "Bosco", "Castello",
+        "Bosco",
+        "Castello",
         "Palazzo",
-        "Villa", "Mura",
+        "Villa",
+        "Mura",
         "Piazza",
-        "Borgo", "Costa",
-        "Grotta", "Rocca",
+        "Borgo",
+        "Costa",
+        "Grotta",
+        "Rocca",
         "Ponte",
         "Giardino",
         "Parco",
@@ -6340,6 +6991,7 @@ def Racial_Names(Type):
         Surnames = GnomesSurnames
         FullNames =  random.choice(Names) + ' ' + random.choice(Names) + ' ' + random.choice(Surnames) + ' ' + random.choice(Surnames) + ' ' + random.choice(Surnames) + ' ' + random.choice(Surnames)
         return FullNames
+
 
     Tieflings = [
         "Hope",
@@ -6368,9 +7020,12 @@ def Racial_Names(Type):
         "Luster",
         "Mend",
         "Riddle",
-        "Shade", "Wander",
-        "Penance", "Dream",
-        "Serenity", "Bliss",
+        "Shade",
+        "Wander",
+        "Penance",
+        "Dream",
+        "Serenity",
+        "Bliss",
         "Fury",
         "Glee",
         "Insight",
@@ -6380,22 +7035,32 @@ def Racial_Names(Type):
         "Grace",
         "Truth",
         "Honor",
-        "Vigor", "Rapture",
-        "Zeal", "Oath",
-        "Radiant", "Sacred", "Bravery",
-        "Cunning", "Defiance",
-        "Elude", "Freedom",
+        "Vigor",
+        "Rapture",
+        "Zeal",
+        "Oath",
+        "Radiant",
+        "Sacred",
+        "Bravery",
+        "Cunning",
+        "Defiance",
+        "Elude",
+        "Freedom",
         "Justice",
         "Mercy",
         "Temperance",
         "Trust",
-        "Victory", "Vow",
-        "Watch", "Will",
+        "Victory",
+        "Vow",
+        "Watch",
+        "Will",
         "Silent",
         "Solace",
         "Subtle",
-        "Thrift", "Vivid",
-        "Abyss", "Serene",
+        "Thrift",
+        "Vivid",
+        "Abyss",
+        "Serene",
         "Blaze",
         "Glimmer",
         "Torment",
@@ -6520,22 +7185,46 @@ def Racial_Names(Type):
         "Crimsonhorn",
         "Gloomhorn",
         "Madhorn",
-        "Killsin", "Purific",
-        "Nye", "Assurance",
-        "Watson", "Faith", "Harris", "Ashes",
-        "Shepard", "Tenacious",
-        "Coleman", "Desire",
-        "Llwyd", "Vanity", "Temple",
-        "Submit", "French", "Fear",
-        "Reynolds", "Wheelwright",
-        "Called", "Burroughs",
-        "Confidence", "Udal", "Remember",
-        "Bond", "Recuerdo", "Miedo",
-        "Obedience", "Young", "Faint",
-        "Gilby", "Abuse", "Cawdrey",
-        "Constant", "Calamy",
-        "Calamidad", "Vanity",
-        "Twisse", "Discretion",
+        "Killsin",
+        "Purific",
+        "Nye",
+        "Assurance",
+        "Watson",
+        "Faith",
+        "Harris",
+        "Ashes",
+        "Shepard",
+        "Tenacious",
+        "Coleman",
+        "Desire",
+        "Llwyd",
+        "Vanity",
+        "Temple",
+        "Submit",
+        "French",
+        "Fear",
+        "Reynolds",
+        "Wheelwright",
+        "Called",
+        "Burroughs",
+        "Confidence",
+        "Udal",
+        "Remember",
+        "Bond",
+        "Recuerdo",
+        "Miedo",
+        "Obedience",
+        "Young",
+        "Faint",
+        "Gilby",
+        "Abuse",
+        "Cawdrey",
+        "Constant",
+        "Calamy",
+        "Calamidad",
+        "Vanity",
+        "Twisse",
+        "Discretion",
         "Boston",
         "Buried",
         "Sampson",
@@ -6550,29 +7239,46 @@ def Racial_Names(Type):
         "Apronadius",
         "Abdamelek",
         "Xonsu",
-        "Aziza", "Ramla",
-        "Neema", "Cleopatra",
-        "Jendayi", "At",
-        "Sahura", "Hor",
-        "Zesiro", "Nub",
+        "Aziza",
+        "Ramla",
+        "Neema",
+        "Cleopatra",
+        "Jendayi",
+        "At",
+        "Sahura",
+        "Hor",
+        "Zesiro",
+        "Nub",
         "Bubastis",
         "Tauret",
         "Sarapous",
         "Ma",
-        "Sapt", "Ritho",
-        "Nenet", "Sanura",
-        "Sethenes", "Sept",
-        "Uetu", "Kashto",
+        "Sapt",
+        "Ritho",
+        "Nenet",
+        "Sanura",
+        "Sethenes",
+        "Sept",
+        "Uetu",
+        "Kashto",
         "Clémence",
-        "Firefur", "Gloomtail",
-        "Nuuch", "Zenglac",
-        "Ablo", "Gadreel",
+        "Firefur",
+        "Gloomtail",
+        "Nuuch",
+        "Zenglac",
+        "Ablo",
+        "Gadreel",
         "Uzza",
         "Musique",
-        "Haine", "Gloire",
-        "Pyra", "Désespoir",
-        "Doute", "Chagrin", "Terreur",
-        "Ambition", "Vice",
+        "Haine",
+        "Gloire",
+        "Pyra",
+        "Désespoir",
+        "Doute",
+        "Chagrin",
+        "Terreur",
+        "Ambition",
+        "Vice",
         "Ouverture", "Amour",
         "Témérité", "Credo",
         "Charogne",
@@ -6598,22 +7304,38 @@ def Racial_Names(Type):
         "Abraxas", "Abraxis",
         "Solomon", "Aexma",
         "Acaos",
-        "Adramalek", "Agares", "Ariman", "Agraz",
-        "Ainin", "Alloces",
-        "Alp", "Amduscias",
+        "Adramalek",
+        "Agares",
+        "Ariman",
+        "Agraz",
+        "Ainin",
+        "Alloces",
+        "Alp",
+        "Amduscias",
         "Amenadiel",
-        "Amon", "Amorth", "Gabriele", "Andra",
-        "Indra", "Andras", "Andrealfus",
-        "Mastemoth", "Andromalius", "Angra",
+        "Amon",
+        "Amorth",
+        "Gabriele",
+        "Andra",
+        "Indra",
+        "Andras",
+        "Andrealfus",
+        "Mastemoth",
+        "Andromalius",
+        "Angra",
         "Antaura",
         "Antichrist",
         "Antichristian",
-        "Armadiel", "Aseliel",
-        "Asmodeus", "Aeshma",
+        "Armadiel",
+        "Aseliel",
+        "Asmodeus",
+        "Aeshma",
         "Ashmedai",
-        "Asmodius", "Sydonay",
+        "Asmodius",
+        "Sydonay",
         "Astaroth",
-        "Azael", "Azazel",
+        "Azael",
+        "Azazel",
         "Baal",
         "Bael",
         "Balam",
@@ -6655,55 +7377,143 @@ def Racial_Names(Type):
         "Beal",
         "Bofi",
         "Bolfri",
-        "Elberiz", "Bidiel",
+        "Elberiz",
+        "Bidiel",
         "Bifrons",
-        "Botis", "Otis",
-        "Buer", "Buriel",
+        "Botis",
+        "Otis",
+        "Buer",
+        "Buriel",
         "Busyasta",
-        "Cabariel", "Calder", "Camuel",
+        "Cabariel",
+        "Calder",
+        "Camuel",
         "Caim",
-        "Camion", "Carnesiel",
+        "Camion",
+        "Carnesiel",
         "Caspiel",
         "Cassian",
-        "Kerberos", "Cerberus", "Cesmak",
+        "Kerberos",
+        "Cerberus",
+        "Cesmak",
         "Coronzon",
-        "Cimeries", "Constantine", "Crowley",
-        "Daeva", "Deva", "Dev", "Daimon",
+        "Cimeries",
+        "Constantine",
+        "Crowley",
+        "Daeva",
+        "Deva",
+        "Dev",
+        "Daimon",
         "Agato",
-        "Agatodaimon", "Kako", "Kakodaimon",
-        "Dalkiel", "Dantanian", "Decarabia",
+        "Agatodaimon",
+        "Kako",
+        "Kakodaimon",
+        "Dalkiel",
+        "Dantanian",
+        "Decarabia",
         "Carabia",
-        "Demoriel", "Faustus", "Eligor", "Emoniel",
-        "Erinyes", "Fury", "Furia", "Eurynomus",
-        "Forneus", "Fortea", "Flauros", "Hauras",
-        "Haurus", "Foras", "Furcas", "Furfur", "Gadreel",
-        "Gadriel", "Garadriel", "Gediel", "Gemori",
+        "Demoriel",
+        "Faustus",
+        "Eligor",
+        "Emoniel",
+        "Erinyes",
+        "Fury",
+        "Furia",
+        "Eurynomus",
+        "Forneus", "Fortea",
+        "Flauros", "Hauras",
+        "Haurus", "Foras",
+        "Furcas", "Furfur",
+        "Gadreel",
+        "Gadriel", "Garadriel",
+        "Gediel", "Gemori",
         "Gamaliel", "Gamigin",
         "Solomon", "Gusion",
-        "Hades", "Hagenti", "Harlequin", "Halahel",
-        "Halpas", "Hecataea", "Hel", "Hemah", "Hutriel",
-        "Iblis", "Icosiel", "Incubus", "Imp", "Ipos",
-        "Isacaron", "Leviatan", "Cabala", "Sephirot",
-        "Sefirot", "Kezer", "Kokmah", "Binah", "Kesed",
-        "Geburah", "Tifarez", "Netzak", "Hod",
-        "Yesod", "Malkut", "Kababiel", "Kesilim",
-        "Kunda", "Kabiel", "Kokab", "Labartu", "Lahmu",
-        "Lamastu", "Legion", "Lerajie", "Oary",
-        "Leviatan", "Liliz", "Lucifer", "Luzer", "Lutin",
+        "Hades",
+        "Hagenti",
+        "Harlequin",
+        "Halahel",
+        "Halpas",
+        "Hecataea",
+        "Hel",
+        "Hemah",
+        "Hutriel",
+        "Iblis",
+        "Icosiel",
+        "Incubus",
+        "Imp",
+        "Ipos",
+        "Isacaron",
+        "Leviatan",
+        "Cabala",
+        "Sephirot",
+        "Sefirot",
+        "Kezer",
+        "Kokmah",
+        "Binah",
+        "Kesed",
+        "Geburah",
+        "Tifarez",
+        "Netzak",
+        "Hod",
+        "Yesod",
+        "Malkut",
+        "Kababiel",
+        "Kesilim",
+        "Kunda",
+        "Kabiel",
+        "Kokab",
+        "Labartu",
+        "Lahmu",
+        "Lamastu",
+        "Legion",
+        "Lerajie",
+        "Oary",
+        "Leviatan",
+        "Liliz", "Lucifer", "Luzer", "Lutin",
         "Macariel", "Malgaras", "Malphas", "Malpas",
         "Marbas", "Maseriel", "Mazaquin", "Mazzikin",
-        "Mazikin", "Mazakin", "Menadiel", "Mefistofeles",
-        "Moloch", "Morax", "Murmur", "Naberius",
-        "Nephilim", "Nefilim", "Nemesis", "Nisroc",
-        "Onoskelis", "Orias",
-        "Ornias", "Orobas", "Ose",
-        "Padiel", "Pamersiel", "Paimon", "Pairikas",
-        "Pazuzu", "Santeria", "Purson", "Curson",
-        "Rabisu", "Raum", "Ravana", "Raysiel",
-        "Rimmon", "Ronove", "Roneve", "Sabbat", "Sabnak",
-        "Salem", "Saleos", "Salt",
-        "Samael", "Sammael",
-        "Sariel", "Sarakiel",
+        "Mazikin",
+        "Mazakin",
+        "Menadiel",
+        "Mefistofeles",
+        "Moloch",
+        "Morax",
+        "Murmur",
+        "Naberius",
+        "Nephilim",
+        "Nefilim",
+        "Nemesis",
+        "Nisroc",
+        "Onoskelis",
+        "Orias",
+        "Ornias",
+        "Orobas",
+        "Ose",
+        "Padiel",
+        "Pamersiel",
+        "Paimon",
+        "Pairikas",
+        "Pazuzu",
+        "Santeria",
+        "Purson",
+        "Curson",
+        "Rabisu",
+        "Raum",
+        "Ravana",
+        "Raysiel",
+        "Rimmon",
+        "Ronove",
+        "Roneve",
+        "Sabbat",
+        "Sabnak",
+        "Salem",
+        "Saleos",
+        "Salt",
+        "Samael",
+        "Sammael",
+        "Sariel",
+        "Sarakiel",
         "Suriel",
         "Uriel",
         "Zerakiel",
@@ -6712,21 +7522,34 @@ def Racial_Names(Type):
         "Skepter",
         "Shamsiel",
         "Shax",
-        "Chax", "Scox",
-        "Shedim", "Sinistrari",
-        "Lodovico", "Sitri",
-        "Solas", "Soleviel",
-        "Soraz", "Orleans",
-        "Surin", "Symiel",
+        "Chax",
+        "Scox",
+        "Shedim",
+        "Sinistrari",
+        "Lodovico",
+        "Sitri",
+        "Solas",
+        "Soleviel",
+        "Soraz",
+        "Orleans",
+        "Surin",
+        "Symiel",
         "Taru",
-        "TaseTeofilus",
-        "Udug", "Ukobach",
-        "Usiel", "Uziel",
+        "Tase",
+        "Teofilus",
+        "Udug",
+        "Ukobach",
+        "Usiel",
+        "Uziel",
         "Uzza",
-        "Uriel", "Valac",
-        "Valefor", "Vapula",
-        "Vassago", "Veltis",
-        "Vepar", "Separ",
+        "Uriel",
+        "Valac",
+        "Valefor",
+        "Vapula",
+        "Vassago",
+        "Veltis",
+        "Vepar",
+        "Separ",
         "Vine",
         "Warren",
         "Zaffis",
@@ -6832,21 +7655,36 @@ def Racial_Names(Type):
         "Thaneni", "Theti", "Aktas", "Anakis",
         "Armara", "Astaro",
         "Astaroz", "Azza", "Belez",
-        "Bune", "Criella", "Damaia", "Ishte", "Jezebez",
+        "Bune", "Criella",
+        "Damaia", "Ishte",
+        "Jezebez",
         "Kali", "Kallista",
         "Kasdeya", "Lilith",
         "Makaria", "Markosian", "Nemeian", "Nija",
         "Oriana", "Osah", "Felaia", "Pura", "Pyra",
-        "Rieta", "Sekhmet", "Semyaza", "Shava", "Zendaya",
+        "Rieta", "Sekhmet", "Semyaza",
+        "Shava", "Zendaya",
         "Shax", "Vapula", "Vepar", "Verin",
-        "Akmen", "Amon", "Astar", "Balam",
-        "Bazin", "Cain", "Caim",
-        "Cimer", "Damakos", "Euron",
-        "Kairon", "Nicor",
-        "Oriax", "Paymon", "Atraxas",
-        "Samal", "Zamuz", "Valafar", "Zezan",
-        "Ambition", "Art",
-        "Carrion", "Chant",
+        "Akmen", "Amon",
+        "Astar", "Balam",
+        "Bazin", "Cain",
+        "Caim",
+        "Cimer",
+        "Damakos",
+        "Euron",
+        "Kairon",
+        "Nicor",
+        "Oriax",
+        "Paymon",
+        "Atraxas",
+        "Samal",
+        "Zamuz",
+        "Valafar",
+        "Zezan",
+        "Ambition",
+        "Art",
+        "Carrion",
+        "Chant",
         "Canto",
         "Creed",
         "Death",
@@ -6919,33 +7757,96 @@ def Racial_Names(Type):
 
 
     Goblins = [
-        "Dobby", "Chal", "Alsi",
-        "Ax", "Pilb", "Eg", "Udag", "Pilsi", "Pil", "Amal",
-        "Valaravanx", "Azarid",
-        "Walajmar", "Roduulf", "Aidoingux", "Azanagi", "Agila",
-        "Gainax", "Selenax",
-        "Melisanda", "Radegond",
-        "Seda", "Gaxa", "Amalafrida", "Duda",
-        "Wamba", "Ariux", "Azarid",
-        "Gunteric", "Tanaix", "Jordanex", "Badua", "Braja", "Narin",
+        "Dobby",
+        "Chal",
+        "Alsi",
+        "Ax",
+        "Pilb",
+        "Eg",
+        "Udag",
+        "Pilsi",
+        "Pil",
+        "Amal",
+        "Valaravanx",
+        "Azarid",
+        "Walajmar",
+        "Roduulf",
+        "Aidoingux",
+        "Azanagi",
+        "Agila",
+        "Gainax",
+        "Selenax",
+        "Melisanda",
+        "Radegond",
+        "Seda",
+        "Gaxa",
+        "Amalafrida",
+        "Duda",
+        "Wamba",
+        "Ariux",
+        "Azarid",
+        "Gunteric",
+        "Tanaix",
+        "Jordanex", "Badua",
+        "Braja", "Narin",
         "Giso", "Elisaweta", "Raxa",
-        "Amalgard", "Sunnia", "Wella", "Aoric", "Aligern", "Unigild",
-        "Razaladar", "Alsiu", "Amanal", "Dund", "Megi", "Pinag", "Budan", "Agala", "Selx", "Gudus",
-        "Dona", "Bunging", "Udaler", "Arnensi", "Ravava", "Wagic", "Ambanda", "Sellalby",
-        "Azadusar", "Azaz", "Walsi", "Nardu", "Ralaga", "Rajar", "Arida", "Doril", "Rand",
+        "Amalgard", "Sunnia",
+        "Wella", "Aoric", "Aligern",
+        "Unigild",
+        "Razaladar", "Alsiu",
+        "Amanal", "Dund",
+        "Megi", "Pinag", "Budan",
+        "Agala", "Selx", "Gudus",
+        "Dona", "Bunging",
+        "Udaler", "Arnensi",
+        "Ravava", "Wagic",
+        "Ambanda", "Sellalby",
+        "Azadusar", "Azaz",
+        "Walsi", "Nardu",
+        "Ralaga", "Rajar",
+        "Arida", "Doril",
+        "Rand",
         "Azari", "Amand", "Azawe",
-        "Azal", "Axar", "Xavan", "Rada", "Selala", "Galar", "Druzol",
-        "Azal", "Azar", "Udarn", "Azava", "Alal", "Elba", "Alil", "Amaxa", "Azana", "Ralel",
-        "Amaxa", "Arinele", "Azoba", "Garag", "Axal", "Axagi", "Talala", "Azari", "Rajma", "Axar",
-        "Ralan", "Azax", "Vala", "Radus", "Azava", "Pilax", "Talxa", "Azar", "Azahar", "Rhana",
-        "Azaja", "Aldan", "Selan", "Azals", "Chandar", "Azav", "Doby", "Susal", "Azag", "Azan",
+        "Azal", "Axar", "Xavan", "Rada",
+        "Selala", "Galar", "Druzol",
+        "Azal", "Azar", "Udarn",
+        "Azava", "Alal", "Elba", "Alil",
+        "Amaxa", "Azana", "Ralel",
+        "Amaxa", "Arinele", "Azoba",
+        "Garag", "Axal", "Axagi",
+        "Talala", "Azari", "Rajma", "Axar",
+        "Ralan", "Azax", "Vala", "Radus", "Azava",
+        "Pilax", "Talxa", "Azar", "Azahar", "Rhana",
+        "Azaja", "Aldan", "Selan", "Azals", "Chandar",
+        "Azav", "Doby", "Susal", "Azag", "Azan",
         "Azal", "Wari", "Azag",
-        "Azaril", "Nadag", "Azaja", "Gungi", "Buda", "Ralar", "Udala",
-        "Elge", "Azaxar", "Dris", "Gana", "Udar", "Elida", "Azan", "Alad", "Ravanda", "Nals",
-        "Pic", "Aby", "Mada", "Rorna", "Amba", "Ardun", "Azariga", "Duna", "Buada", "Vagi",
-        "Azava", "Guna", "Amal", "Azav", "Ralan", "Ralav", "Rajad", "Talsi", "Amal", "Rarid",
-        "Randa", "Amazo", "Wava", "Magus", "Guna", "Slay", "Dasker", "Kexam", "Mukert", "Rensox",
-        "Xembor", "Guknag", "Sabsen", "Gundobag", "Burk", "Azava", "Zasiki", "Warishi"
+        "Azaril", "Nadag", "Azaja",
+        "Gungi", "Buda", "Ralar", "Udala",
+        "Elge", "Azaxar", "Dris",
+        "Gana", "Udar", "Elida",
+        "Azan", "Alad", "Ravanda", "Nals",
+        "Pic", "Aby", "Mada", "Rorna", "Amba",
+        "Ardun", "Azariga", "Duna",
+        "Buada", "Vagi",
+        "Azava", "Guna", "Amal", "Azav", "Ralan",
+        "Ralav", "Rajad", "Talsi",
+        "Amal", "Rarid",
+        "Randa", "Amazo",
+        "Wava", "Magus",
+        "Guna",
+        "Slay",
+        "Dasker",
+        "Kexam",
+        "Mukert",
+        "Rensox",
+        "Xembor",
+        "Guknag",
+        "Sabsen",
+        "Gundobag",
+        "Burk",
+        "Azava",
+        "Zasiki",
+        "Warishi"
                ]
     Clans = [
         "Redhats",
@@ -7110,7 +8011,7 @@ def Racial_Names(Type):
     if Type == "Goblin":
         Names = Goblins 
         
-        return random.choice(Names) + "of the " + random.choice(Clans)
+        return random.choice(Names) + " of the " + random.choice(Clans)
 
 
 
@@ -7119,16 +8020,463 @@ def Racial_Names(Type):
         
         Names += Beasts
         
-        return random.choice(Names)
-
+    
+    if Type == "Plant":
+        Plants = [
+            "Dalia",
+            "Numia",
+            "Nustia",
+            "Talria",
+            "Naussia",
+            "Jussia",
+            "Ejamia",
+            "Elyria",
+            "Venusia",
+            "Artemisia",
+            "Aidenia",
+            "Rihannia",
+            "Calliopia",
+            "Tallia",
+            "Talia",
+            "Artemia",
+            "Ardenia",
+            "Nusia",
+            "Nalia",
+            "Vemia",
+            "Alia",
+            "Nusia",
+            "Nalia",
+            "Venasia",
+            "Artenia",
+            "Elisia",
+            "Venia",
+            "Sinia",
+            "Rosia",
+            "Celestia",
+            "Titania",
+            "Amelia",
+            ]
+        
+        Names += Plants
+        
 
     if Type == "Undead":
+        Undeads = []
+        Names += Plants
+
         
-        return random.choice(Names)
+
+    if Type == "Lizardfolk":
+        Lizardfolk = [
+            "Gojira",
+            "Gozilla",
+            "Leonardo",
+            "Raphael",
+            "Michelangelo",
+            "Donatello",
+            "Kermit",
+            "Lizzy",
+            "Argonian",
+            "Kroxigor",
+            "Throgg",
+            "Sobek",
+            "Kaa",
+            "Slippy",
+            "Frogger",
+            "Jabba",
+            "Godzilla",
+            "Gorn",
+            "Reptar",
+            "Rango",
+            "Charizard",
+            "Lickitung",
+            "Salazzle",
+            "Bowser",
+            "Koopa",
+            "Rath",
+            "Gex",
+            "Turok",
+            "Crocomire",
+            "Leatherhead",
+            "Killcroak",
+            "Thornback"
+            ]
+        Names += Lizardfolk
+
+    if Type == "Kobold":
+        Kobold_Names = [
+            "Deekin",
+            "Meepo",
+            "Tucker",
+            "Snick",
+            "Kib",
+            "Sniv",
+            "Eek",
+            "Pog",
+            "Urdo",
+            "Kurtulmak",
+            "Durnn",
+            "Hox",
+            "Zik",
+            "Slythe",
+            "Grit",
+            "Nak-Nak",
+            "Fizban",
+            "Zax",
+            "Skizziks",
+            "Gnarl",
+            "Torch",
+            "Grizzle",
+            "Squee",
+            "Sqwik",
+            "Kratch",
+            "Whiskar",
+            "Scamp",
+            "Ratch",
+            "Yipper",
+            "Snarl"
+        ]
+        Names += Kobold_Names
 
 
-    # Final Option ?
-    return random.choice(Names)
+
+    if Type == "Monstrosity":
+
+        Monstrosity_Names = [
+            "Zarvox",
+            "Thyrm",
+            "Kragma",
+            "Slytherr",
+            "Vorlash",
+            "Grindle",
+            "Morgax",
+            "Draknos",
+            "Venomar",
+            "Thrashtalon",
+            "Skreech",
+            "Vorgash",
+            "Charron",
+            "Gloomclaw",
+            "Ravix",
+            "Snarlgrim",
+            "Blightfang",
+            "Kryx",
+            "Zephyros",
+            "Stormrend",
+            "Nemnir",
+            "Gastrix",
+            "Varthrax",
+            "Sunderbeak",
+            "Cyclonix",
+            "Razorfang",
+            "Shriekshell",
+            "Dreadmaw",
+            "Gorgath",
+            "Fenroar",
+            "Quillspike",
+            "Marlgoth",
+            "Ironscale",
+            "Ebonclaw",
+            "Thornback",
+            "Wrathmore",
+            "Skyterror",
+            "Grizzlemaul",
+            "Slitherfang",
+            "Bramblethorn",
+            "Nightscream",
+            "Cragjaw",
+            "Echo",
+            "Frostgaze",
+            "Infernox",
+            "Mudgraw",
+            "Obsidion",
+            "Ripple",
+            "Squall",
+            "Tempest",
+            "Whisper",
+            "Zephyr"
+            "Grendel",  # From "Beowulf"
+            "Kaiju",  # Generic term from Japanese monster movies
+            "Mothra",  # From the Godzilla franchise
+            "Balrog",  # From "The Lord of the Rings"
+            "Jabberwock",  # From "Through the Looking-Glass" by Lewis Carroll
+            "Chimera",  # From Greek mythology
+            "Basilisk",  # From European folklore and "Harry Potter"
+            "Gorgon",  # From Greek mythology
+            "Behemoth",  # From the Bible
+            "Leviathan",  # From the Bible
+            "Rodan",  # From the Godzilla franchise
+            "Cerberus",  # From Greek mythology
+            "King Ghidorah",  # From the Godzilla franchise
+            "Hydra",  # From Greek mythology
+            "Argus",  # From Greek mythology, referring to Argus Panoptes
+            "Minotaur",  # From Greek mythology
+            "Orthrus",  # A two-headed dog from Greek mythology
+            "Skoll",  # A wolf from Norse mythology
+            "Hati",  # Another wolf from Norse mythology
+            "Nemean",  # Referring to the Nemean lion from Greek mythology
+            "Typhon",  # From Greek mythology
+            "Echidna",  # Mother of monsters in Greek mythology
+            "Scylla",  # From Greek mythology
+            "Charybdis",  # From Greek mythology
+            "Manticore",  # A mythical beast from Persian lore
+            "Griffin",  # A creature with the body of a lion and the head and wings of an eagle
+            "Sphinx",  # From Greek mythology
+            "Cthulhu",  # From H.P. Lovecraft's stories
+            "Dagon",  # From H.P. Lovecraft's stories and biblical mythology
+            "Yog-Sothoth",  # From H.P. Lovecraft's stories
+            "Nyarlathotep",  # From H.P. Lovecraft's stories
+            "Shub-Niggurath",  # From H.P. Lovecraft's stories
+            "Fenrir",  # A monstrous wolf from Norse mythology
+            "Jormungandr",  # The Midgard Serpent from Norse mythology
+            "Tiamat",  # A dragon goddess from Mesopotamian mythology
+            "Gojira",  # The original Japanese name for Godzilla
+            "Zuul",  # From the film "Ghostbusters"
+            "Vincent",  # A nod to Vincent Price, often associated with horror
+            "Orlok",  # Count Orlok from "Nosferatu"
+            "Audrey II",  # From "Little Shop of Horrors"
+            "Asmodeus",  # A demon king from the Apocrypha and later occult lore
+            "Pazuzu",  # From Assyrian and Babylonian mythology, known from "The Exorcist"
+            "Ghoul",  # A monster or evil spirit from Arabic mythology
+            "Bunyip",  # A creature from Aboriginal Australian mythology
+            "Quetzalcoatl",  # A feathered serpent deity from Mesoamerican culture
+            "Anansi",  # A trickster god in the form of a spider from African folklore
+            "Wendigo",  # A mythological creature or evil spirit from the folklore of the First Nations Algonquin tribes
+            "Jersey",  # Referring to the Jersey Devil of American folklore
+            "Kracken",  # A legendary sea monster of giant size
+            "Tarrasque",
+            "Chimera",
+            "Basilisk",
+            "Kraken",
+            "Hydra",
+            "Manticore",
+            "Gorgon",
+            "Roc",
+            "Behemoth",
+            "Leviathan",
+            "Minotaur",
+            "Cerberus",
+            "Griffin",
+            "Wyvern",
+            "Sphinx",
+            "Bunyip",
+            "Cockatrice",
+            "Naga",
+            "Harpy",
+            "Centaur",
+            "Lamia",
+            "Scylla",
+            "Orthros",
+            "Typhon",
+            "Echidna",
+            "Balor",
+            "JerseyDevil",
+            "Mothman",
+            "Wendigo",
+            "Yeti",
+            "Sasquatch",
+            "Chupacabra",
+            "Grendel",
+            "Fenrir",
+            "Jormungandr",
+            "Skoll",
+            "Hati",
+            "Ogre",
+            "Troll",
+            "UmberHulk",
+            "GelatinousCube",
+            "Behir",
+            "Doppelganger",
+            "Rakshasa",
+            "RustMonster",
+            "Owlbear",
+            "Bulette",
+            "Cloaker",
+            "DisplacerBeast",
+            "GibberingMouther",
+            "Ankheg",
+            "Aboleth"
+
+        ]
+
+        Names += Monstrosity_Names
+
+
+    if npc.race == "Celestial":
+        Celestials = [
+            "Morpheus",  
+            "Auriel",
+            "Azrael",
+            "Cassiel",
+            "Gabriel",
+            "Haniel",
+            "Israfil",
+            "Jophiel",
+            "Lumiel",
+            "Metatron",
+            "Raguel",
+            "Raphael",
+            "Sariel",
+            "Seraphiel",
+            "Uriel",
+            "Zadkiel",
+            "Zaphkiel",
+            "Zerachiel",
+            "Alpheratz",
+            "Altair",
+            "Antares",
+            "Arcturus",
+            "Betelgeuse",
+            "Canopus",
+            "Deneb",
+            "Electra",
+            "Maia",
+            "Merope",
+            "Polaris",
+            "Procyon",
+            "Rigel",
+            "Sirius",
+            "Spica",
+            "Vega",
+            "Tienmu",  # Chinese god of lightning
+            "Indra",    # Hindu god of thunder and king of the gods
+            "Nyx",      # Greek goddess of the night
+            "Eos",      # Greek goddess of the dawn
+            "Hemera",   # Greek goddess of the day
+            "Selene",   # Greek goddess of the moon
+            "Elion",    # A name that evokes "light"
+            "Caelum",   # Latin for "heaven" or "sky"
+            "Aether",   # Greek personification of the upper air, breathed by the gods
+            "Astral",
+            "Celestine",
+            "Etheria",
+            "Galaxia",
+            "Luminara",
+            "Nova",
+            "Orion",
+            "Solara",
+            "Stellaris",
+            "Zenith",
+            "Aeon",
+            "Anahita",  # Persian goddess of fertility, water, and wisdom
+            "Asteria",  # Greek titaness, name means "of the stars"
+            "Astrophel",  # A name coined by the poet Sir Philip Sidney, meaning "star lover"
+            "Caelestis",  # Latin term for "heavenly" or "celestial"
+            "Deva",  # Sanskrit for "heavenly, divine", refers to celestial beings in Hinduism
+            "Elara",  # One of Zeus' lovers in Greek mythology, and a moon of Jupiter
+            "Elyon",  # A Hebrew name meaning "Most High" or "Exalted"
+            "Hyperion",  # A titan in Greek mythology, associated with heavenly light
+            "Izar",  # Basque name meaning "star"
+            "Juno",  # Roman goddess, equivalent to the Greek Hera
+            "Kalypso",  # Greek name meaning "to cover", "to conceal", "to hide", or "to deceive"
+            "Levana",  # Hebrew name meaning "white", "moon", or "to rise"
+            "Meissa",  # A star in the constellation Orion
+            "Naharai",  # Hebrew name meaning "light" or "shiny"
+            "Oriel",  # A name derived from "Aura", means light or gold
+            "Pavati",  # Hindi for "clear water", also a goddess of the river
+            "Quirinus",  # An early Roman god of the Roman state
+            "Raziel",  # Angel in Jewish mysticism, keeper of secrets
+            "Sorin",  # A name of Romanian origin, possibly derived from "Soare" meaning "sun"
+            "Talitha",  # A star in the constellation Ursa Major
+            "Thalassa",  # Greek sea goddess, represents the Mediterranean Sea
+            "Vela",  # A constellation in the southern sky, means "sails (of a ship)"
+            "Zephyr",  # The Greek god of the west wind
+            "Selene",      # Greek goddess of the moon
+            "Helios",      # Greek god of the sun
+            "Atlas",       # A titan tasked to hold up the sky in Greek mythology
+            "Aurora",      # Roman goddess of the dawn
+            "Orion",       # A great hunter and a constellation in Greek mythology
+            "Gaia",        # Greek personification of Earth
+            "Artemis",     # Greek goddess of the hunt and moon
+            "Apollo",      # Greek god of the sun, music, and prophecy
+            "Hestia",      # Greek goddess of the hearth and home
+            "Rhea",        # A titaness in Greek mythology, mother of the Olympian gods
+            "Chronos",     # Personification of time in pre-Socratic philosophy and later literature
+            "Urania",      # Greek muse of astronomy and astrology
+            "Electra",     # One of the Pleiades in Greek mythology
+            "Maia",        # Eldest of the Pleiades and mother of Hermes in Greek mythology
+            "Perseus",     # Greek hero who slew Medusa
+            "Callisto",    # A nymph, and a lover of Zeus in Greek mythology
+            "Dione",       # A prophetic titaness in Greek mythology
+            "Eos",         # Greek goddess of the dawn
+            "Aether",      # The personification of the "upper sky", space, and heaven, in Greek mythology
+            "Ananke",      # The personification of inevitability, compulsion, and necessity in Greek mythology
+            "Chaos",       # The void state preceding the creation of the universe or cosmos in Greek mythology
+            "Erebus",      # Personification of darkness and shadow in Greek mythology
+            "Nyx",         # Greek goddess of the night
+            "Tartarus",    # The deep abyss in Greek mythology, used as a dungeon of torment
+            "Thalassa",    # Primeval spirit of the sea in Greek mythology
+            "Pontus",      # Pre-Olympian sea god in Greek mythology
+            "Ouranos",     # The personification of the sky and one of the Greek primordial deities
+            "Hemera",      # The personification of day in Greek mythology
+            "Nemesis",     # Greek goddess of retribution
+            "Tyche",       # Greek goddess of fortune and prosperity of a city
+            "Metatron",    # An archangel in Judaism and some branches of Christianity
+            "Raziel",      # The keeper of secrets and the angel of mysteries in Jewish mysticism
+            "Jophiel",     # An archangel of wisdom, understanding, and judgment in some traditions
+            "Israfil",     # An archangel who will blow the trumpet to announce the Day of Judgment in Islam
+            "Mithra",      # A divinity in Zoroastrianism and later Roman mythology, associated with the sun
+            "Tien",        # The term for heaven or sky in Chinese religions and philosophy
+            "Amaterasu",   # The sun goddess in Shinto religion of Japan
+            "Tenshi",      # Japanese for "angel" or "celestial being"
+            "Indra",       # A deity in Hinduism, king of the highest heaven called Saudharmakalpa
+            "Gandharvas",  # Male nature spirits and celestial musicians in Hinduism
+            "Apsaras",     # Female spirits of the clouds and waters in Hindu and Buddhist culture
+            "Barong",      # A lion-like creature and character in the mythology of Bali, Indonesia
+            "Kinnara",     # Celestial musicians in Hinduism, Buddhism, and Jainism
+            "Tianlong",    # Celestial dragons in Chinese mythology
+            "Devas",       # Godlike beings in Hinduism and Buddhism
+            "Sraosha",     # An angel in Zoroastrianism who leads the soul to the afterlife
+            "Valkyries",   # Female figures in Norse mythology who choose those who may die or live in battle
+            "Heimdallr",   # A Norse god who possesses the resounding horn Gjallarhorn
+            "Gabriel",     # An archangel in Judaism, Christianity, and Islam
+            "Michael",     # An archangel in Jewish, Christian, and Islamic teachings
+            "Uriel",       # An archangel in some Jewish and Christian traditions
+            "Cherubim",    # A type of angelic being in the Abrahamic religions
+            "Seraphim",    # The highest order of angels in Christian angelology
+            "Anael",       # In some Christian traditions, Anael is one of the seven archangels
+            "Azrael",      # Often identified with the Angel of Death in Islam and some Jewish traditions
+            "Itherael",    # A name created from the Hebrew elements for "abundance" and "God"
+            "Raphael",     # An archangel responsible for healing in the traditions of most Abrahamic religions
+            "Cassiel",     # An angel in post-biblical Judeo-Christian religion, particularly in the Kabbalah
+            ]
+        Names += Celestials
+
+        
+
+    namer = MarkovNameGenerator(Names)
+    return namer.generate_name()
+
+
+from collections import defaultdict
+
+class MarkovNameGenerator:
+    def __init__(self, names, order=2):
+        self.order = order
+        self.markov_chain = defaultdict(list)
+        self.populate_markov_chain(names)
+
+    def populate_markov_chain(self, names):
+        for name in names:
+            padded_name = name.lower() + ' '  # Add a padding character to signify the end of a name
+            for i in range(len(padded_name) - self.order):
+                state = padded_name[i:i + self.order]
+                next_state = padded_name[i + self.order]
+                self.markov_chain[state].append(next_state)
+
+    def generate_name(self, min_length=5, max_length=10):
+        name = ''
+        state = random.choice(list(self.markov_chain.keys()))
+        while len(name) < max_length:
+            name += state[0]
+            next_states = self.markov_chain.get(state, [' '])
+            if ' ' in next_states and len(name) >= min_length:
+                break
+            state = state[1:] + random.choice(next_states)
+        return name.title().strip()
+
+
+
 
 
 
@@ -7157,12 +8505,12 @@ def Aberrations():
 
 def Avens():
     Names = {
-        "Birdfolk": 6,    # Generic birdfolk, versatile in nature.
-        "Kenku": 8,       # Unique mimicry ability and urban setting.
-        "Aarakocra": 7,   # High-flying and more spiritual.
-        "Tengu": 5,       # Martial arts and folklore connections.
-        "Raptoran": 4,    # Mountain dwellers with a unique flight lifecycle.
-        "Owlin": 4,      # Owl-like Nocturnal and wise.
+        "Birdfolk": 7,    # Generic birdfolk, versatile in nature.
+        "Kenku": 9,       # Unique mimicry ability and urban setting.
+        "Aarakocra": 8,   # High-flying and more spiritual.
+        "Tengu": 6,       # Martial arts and folklore connections.
+        "Raptoran": 5,    # Mountain dwellers with a unique flight lifecycle.
+        "Owlin": 5,       # Owl-like Nocturnal and wise.
         "": 0             # Empty choice for variety.
     }
     return random.choices(list(Names.keys()), weights=Names.values(), k=1)[0]
@@ -7173,7 +8521,7 @@ def Beasts():
         "Armored Bear": 8,          # From Philip Pullman's His Dark Materials series.
         "Monkey King": 9,
         "Guardian Kong": 7,
-        "Giant Eagle": 8,           # Inspired by Tolkien.
+        "Giant Eagle": 8,           
         "Golden Lion": 7, 
         "White Tiguer": 6,
         "Vulture Spirit": 5,
@@ -7188,7 +8536,7 @@ def Beasts():
         "Kerberus Dog": 7,
         "Sun Scarab": 9,
         "Moon Jackal": 6,
-        "Godess Spider Queen": 7,
+        "Spider Queen": 7,
         "World Serpent's Spawn": 7,
         "Elder Elephant": 8 ,
         "":1}
@@ -7205,15 +8553,16 @@ def Beastfolks():
         "Jackalmen": 6,        # Often seen in Egyptian mythologies, associated with the afterlife.
         "Kitsune": 8,          # Japanese fox spirits, both mischievous and wise.
         "Lycan": 7,            # General term for were-creatures, known for their cursed transformations.
-        "Lions": 5,
+        "Lion": 5,
         "Merfolk": 9,          # Classic creatures of the sea, representing both beauty and danger.
         "Minotaur": 8,         # The embodiment of the labyrinth's mystery and challenge.
         "Ratfolk": 7,          # Clever, opportunistic, and often seen in urban settings.
         "Scorpionfolk": 5,     # Dangerous and venomous, often used as guardians in myths.
         "Sharkfolk": 7,        # Predators of the sea, representing both fear and respect.
+        "Skinwalker": 5,
         "Werebear": 6,         # A more noble version of lycanthropes, often associated with strength and protection.
         "Werewolf": 9,         # One of the most recognized lycanthropes, representing the untamed side of humanity.
-        "Harpies": 7,          # Half-bird, half-woman, often seen as omens.
+        "Harpy": 7,          # Half-bird, half-woman, often seen as omens.
         "Satyr": 8,            # Revelers and musicians, representing the carefree side of nature.
         "": 0
         }
@@ -7234,7 +8583,7 @@ def Celestials():
         "Seraph": 9,              # Burning ones, highest order of angels.
         "Throne": 8,              # Angels associated with celestial justice and maintaining the cosmic order.
         "Unicorn": 7,             # Pure and gentle creatures, often associated with forests and healing.
-        "Celestial Dragon": 8,    # Dragons that reside in the heavens, symbols of power and majesty.
+        "Celestial Serpent": 8,   # Dragons that reside in the heavens, symbols of power and majesty.
         "Valkyrie": 7,            # Choosers of the slain, guiding heroes to the afterlife.
         "Solar": 9,               # Extremely powerful celestial beings, champions of deities.
         "Ki-rin": 7,              # Eastern counterpart to unicorns, symbols of wisdom.
@@ -7254,26 +8603,26 @@ def Constructs():
         "Flying Sword": 7,           # Enchanted weapons that move on their own.
         "Living Rug": 6,             # Animated carpets or rugs, often serving as traps.
         "Scarecrow": 7,              # Animated scarecrows, often created to protect crops but can be sinister.
-        "Clockwork Construct": 8,   # Intricate mechanical beings, often steampunk-inspired.
+        "Clockwork Construct": 8,    # Intricate mechanical beings, often steampunk-inspired.
         "Warforged": 9,              # Sentient constructs made for war, often searching for purpose after conflict.
         "Modron": 8,                 # Geometrically inspired beings from a plane of utter order.
-        "Shield Guardian": 8,       # Created to protect its creator, often bound by an amulet.
-        "Tome Guardian": 7,         # Animated books or beings made of paper, protecting knowledge.
+        "Shield Guardian": 8,        # Created to protect its creator, often bound by an amulet.
+        "Tome Guardian": 7,          # Animated books or beings made of paper, protecting knowledge.
         "Effigy": 8                  # Ritualistic statues or figures, animated for various purposes.
     }
     return random.choices(list(Names.keys()), weights=Names.values(), k=1)[0]
 
 def Dragons():
     DragonTypes = {
-        "Dragonborn": 20,         # Dragon-like humanoids.
-        "Wyrmling": 8,            # Baby dragons.
-        "Young Dragon": 7,        # Adolescent dragons, coming into their power.
-        "Dragon": 6,              # Fully grown, mature dragons.
-        "Drake": 5,               
-        "Draco": 4,               
-        "Sky Serpent": 3,       
-        "Half Dragon": 1,
-        "Dragon Turtle": 1
+        "Dragonborn": 22,         # Dragon-like humanoids.
+        "Wyrmling": 10,            # Baby dragons.
+        "Young Dragon": 9,        # Adolescent dragons, coming into their power.
+        "Dragon": 8,              # Fully grown, mature dragons.
+        "Drake": 7,               
+        "Draco": 6,               
+        "Sky Serpent": 5,       
+        "Half Dragon": 4,
+        "Dragon Turtle": 4
     }
 
     DragonColors = {
@@ -7303,73 +8652,74 @@ def Dragons():
 
 def Elementals():
     Names = {
-    "Atlantian": 8,      # Connection to water or ancient technology.
-    "Cronusian": 4,      # Representing time and age.
-    "Eosian": 7,         # Tied to the rising sun.
-    "Genasi": 19,        # Representing air, earth, fire, and water.
-    "Genie": 9,          # Powerful magical entities.
-    "Gaians": 8,         # Essence of the earth.
-    "Hyperian": 6,       # Radiant, solar-powered.
-    "Oceanians": 8,      # Depths, tides, storms.
-    "Primordial": 5,     # Fundamental forces of reality.
-    "Promethean": 7,     # Fire or spirit of innovation.
-    "Salamander": 9,     # Associated with fire.
-    "Titan": 6,          # Raw elemental power.
-    "Uranians": 7,       # Sky, stars, celestial magic.
-    "Magmaforged": 8,    # Fusion of earth and fire.
-    "Zephyrians": 8,     # Gentle airs.
-    "Abyssal": 7,        # Dark ocean depths.
-    "Theian": 7,         # Ether and the heavenly shine.
-    "Criusian": 7,       # Elemental related to constellations and stars.
-    "Coean": 5,          # Intellect, heavenly revolutions and gravity.
-    "Tundran": 7         # Harsh icy landscapes.
+    "Atlantian": 9,      # Connection to water or ancient technology.
+    "Cronusian": 5,      # Representing time and age.
+    "Eosian": 8,         # Tied to the rising sun.
+    "Genasi": 20,        # Representing air, earth, fire, and water.
+    "Genie": 10,         # Powerful primordial entities.
+    "Gaians": 9,         # Essence of the earth.
+    "Hyperian": 7,       # Radiant, solar-powered.
+    "Oceanians": 9,      # Depths, tides, storms.
+    "Primordial": 7,     # Fundamental forces of reality.
+    "Promethean": 8,     # Fire or spirit of innovation.
+    "Salamandrian": 10,  # Associated with fire.
+    "Titan": 8,          # Raw elemental power.
+    "Uranians": 8,       # Sky, stars, celestial magic.
+    "Magmaforged": 9,    # Fusion of earth and fire.
+    "Zephyrian": 9,      # Gentle airs.
+    "Tartarian": 8,      # Dark ocean depths.
+    "Etherian": 8,        # Ether and the heavenly shine.
+    "Galaxian": 8,       # Elemental related to constellations and stars.
+    "Chronian": 6,       # Time elementals
+    "Tundran": 8         # Harsh icy landscapes.
     }
     return random.choices(list(Names.keys()), weights=Names.values(), k=1)[0]
 
 
 def Fiends():
     Names = {
-        "Tiefling": 20,
-        "Devil": 10,
-        "Demon": 10,
-        "Imp": 8,
-        "Incubus/Succubus": 7,  
-        "Dwarvendevil": 3,
-        "Elvendevil": 3,
-        "Gnolldevil": 3,
-        "Orkishdevil": 3,
-        "Goblindevil": 3,
-        "Dwarvendemon": 2,
-        "Elvendemon": 2,
-        "Demongnoll": 2,
-        "Orkishdemon": 2,
-        "Goblindemon": 2,
-        "Nightmare": 5,
-        "Rakshasa": 3,
-        "Fallen Angel": 6,
-        "Hellbound Hunter": 7,
-        "Leviathan": 4,
-        "Behemoth": 4,
-        "Shinigami":2,
-        "Hell's Rider": 7,
-        "Soul Collector": 6,
-        "Infernal Detective": 5,
-        "Dread Enforcer": 5,
-        "Sin Investigator": 4,
-        "Infernal Warlord": 4,
-        "Infernal Justiciar": 6,
-        "Vengeance Spirit": 5,
-        "Retributioner": 5,
-        "Pact Enforcer": 6,
-        "Soulclaimer": 6,
-        "Infernal Marshal": 5
+        "Tiefling": 22,
+        "Devil": 12,
+        "Demon": 12,
+        "Imp": 10,
+        "Cubus": 6,
+        "Incubus": 6,
+        "Succubus": 6,
+        "Concubus": 3,
+        "Dwarvendevil": 5,
+        "Elvendevil": 5,
+        "Gnolldevil": 5,
+        "Orkishdevil": 5,
+        "Goblindevil": 5,
+        "Dwarvendemon": 4,
+        "Elvendemon": 4,
+        "Demongnoll": 4,
+        "Orkishdemon": 4,
+        "Goblindemon": 4,
+        "Nightmare": 8,
+        "Rakshasa": 7,
+        "Fallen Angel": 10,
+        "Hellbound Hunter": 9,
+        "Leviathan": 7,
+        "Behemoth": 7,
+        "Shinigami":6,
+        "Hell's Rider": 10,
+        "Soul Collector": 8,
+        "Infernal Finder": 7,
+        "Sin Investigator": 6,
+        "Infernal Warlord": 7,
+        "Infernal Justiciar": 8,
+        "Vengeance Spirit": 7,
+        "Retributioner": 7,
+        "Pact Enforcer": 8,
+        "Soulclaimer": 8,
+        "Infernal Enforcer": 8
         }
     return random.choices(list(Names.keys()), weights=Names.values(), k=1)[0]
 
 
 def Feys():
     Names = {
-        "Dryad": 10,    # Tree spirits
         "Hag": 8,       # Witches often associated with dark magic
         "Nymph": 9,     # Spirits of nature: water, forest, etc.
         "Pixie": 8,     # Tiny, mischievous spirits
@@ -7525,7 +8875,7 @@ def Plants():
         "Lichen Gravetaker": 7,
         "Cactoid Nomad": 6,
         "Vegetation Abomination":3,
-        "Dryad":7,
+        "Dryad":12,
         "Fungical Intellectual": 5
         
     }
@@ -7585,22 +8935,22 @@ def Humans():
 
 def Elves():
     Types = {
-        "High": 15,       
-        "Sylvan": 15,    
-        "Wood": 15,    
-        "Dark": 15,
-        "Night": 8,
-        "Feywild": 5,       
-        "Shadow": 5,       
-        "Sea": 10,       
-        "Nomadic": 10,       
-        "Snow":5,
-        "Sun": 3,
-        "Eclipse":1,
-        "Moon": 3,
-        "Wild": 3,
-        "Urban": 10,
-        "Sands": 7
+        "High": 16,       
+        "Sylvan": 16,    
+        "Wood": 16,    
+        "Dark": 16,
+        "Night": 9,
+        "Feywild": 6,       
+        "Shadow": 6,       
+        "Sea": 11,       
+        "Nomadic": 11,       
+        "Snow":6,
+        "Sun": 4,
+        "Eclipse":2,
+        "Moon": 4,
+        "Wild": 4,
+        "Urban": 11,
+        "Sands": 8
         }
     
     chosen_type = random.choices(list(Types.keys()), weights=Types.values(), k=1)[0]
@@ -7721,128 +9071,90 @@ def Monster(Type):
     else:
         return f"Is an unknown type of {Type}!"
 
-
-def Dice(D=6):
-    """Rolls a dice with D sides. If D is 0, simulates a coin flip."""
-    if D < 1: roll = random.randint(D, 1) 
-    else: roll = random.randint(1, D)
-    return roll
-
-def Dice(D=6,N=1):
-    roll = 0
-    for m in range(N):
-        if D >= 1: roll += random.randint(1, D)
-        else: roll += random.randint(D, 1)
-    return roll
-
-def Dizero(D=6):
-    """Rolls a dice with D sides. If D is 0, simulates a coin flip."""
-    if D < 0: roll = random.randint(D, 0) 
-    else: roll = random.randint(0, D)
-    return roll
-
-def AbilityScore():
-    d1 = Dice()
-    d2 = Dice()
-    d3 = Dice()
-    d4 = Dice()
-    return d1+d2+d3+d4 - min(d1, d2, d3, d4) 
-
-
-#def Modifier(AS):
-#    if AS >= 10:    return int((AS-10)/2)
-#    else:           return int((AS-11)/2)
-
-def Modifier(AS):
-    return (AS - 10) // 2
-
-def Proficiency(AS):
-    return Dice(Modifier(AS)*2)
-
-def PB(Lvl):
-    if Lvl < 5:
-        return 2
-    else:
-        return 2 + (Lvl - 1) // 4
     
-def Attack(Type,PB = 2, STR =10,  DEX = 10 ):
-    STR = Modifier(STR)
-    DEX = Modifier(DEX)
+def Attack(Type,npc):
+    PB = npc.proficiency_bonus
+    STR = npc.ability_scores.str_mod
+    DEX = npc.ability_scores.dex_mod
+    
+    sign_str = '+' if STR >= 0 else ''
+    sign_dex = '+' if DEX >= 0 else ''
+    
 
     SimpleMeleeWeapons = [
-        f"Rock, {Dice(PB-1)}d6 + {STR} Bludgeoning, 25/50 thrown",
-        f"Fists, {Dice(PB-1)}d4 + {STR} Bludgeoning",
-        f"Brass Knuckles, {Dice(PB-1)}d4 + {STR} Bludgeoning",
-        f"Bite, {Dice(PB-1)}d4 + {STR} Piercing",
-        f"Bite, {Dice(PB-1)}d6 + {STR} Piercing",
-        f"Claws, {Dice(PB-1)}d4 + {STR} Slashing",
-        f"Claws, {Dice(PB-1)}d6 + {STR} Slashing",
-        f"Club, {Dice(PB-1)}d4 + {STR} Bludgeoning",
-        f"Dagger, {Dice(PB-1)}d4 + {STR} Piercing, 20/60 thrown",
-        f"Dagger, {Dice(PB-1)}d4 + {DEX} Piercing, 20/60 thrown",
-        f"GreatClub, {Dice(PB-1)}d8 + {STR} Bludgeoning",
-        f"Handaxe, {Dice(PB-1)}d6 + {STR} Slashing, 20/60 thrown",
-        f"Javelin, {Dice(PB-1)}d6 + {STR} Piercing, 30/120 thrown",
-        f"Light Hammer, {Dice(PB-1)}d4 + {STR} Bludgeoning, 20/60 thrown",
-        f"Mace, {Dice(PB-1)}d6 + {STR} Bludgeoning",
-        f"Quarterstaff, {Dice(PB-1)}d6 + {STR} Bludgeoning",
-        f"Quarterstaff, {Dice(PB-1)}d8 + {STR} Bludgeoning",
-        f"Sickle, {Dice(PB-1)}d4 + {STR} Slashing",
-        f"Slam, {Dice(PB-1)}d8 + {STR} Bludgeoning",
-        f"Spear, {Dice(PB-1)}d6 + {STR} Piercing, 20/60 thrown",
-        f"Spear, {Dice(PB)+1}d8 + {STR} Piercing, 20/60 thrown",
-        f"Nunchaku, {Dice(PB-1)}d6 + {STR} Bludgeoning"
+        f"Rock, {Dice(PB-1)}d6 {sign_str}{STR} Bludgeoning, 25/50 thrown",
+        f"Fists, {Dice(PB-1)}d4 {sign_str}{STR} Bludgeoning",
+        f"Brass Knuckles, {Dice(PB-1)}d4 {sign_str}{STR} Bludgeoning",
+        f"Bite, {Dice(PB-1)}d4 {sign_str}{STR} Piercing",
+        f"Bite, {Dice(PB-1)}d6 {sign_str}{STR} Piercing",
+        f"Claws, {Dice(PB-1)}d4 {sign_str}{STR} Slashing",
+        f"Claws, {Dice(PB-1)}d6 {sign_str}{STR} Slashing",
+        f"Club, {Dice(PB-1)}d4 {sign_str}{STR} Bludgeoning",
+        f"Dagger, {Dice(PB-1)}d4 {sign_str}{STR}Piercing, 20/60 thrown",
+        f"Dagger, {Dice(PB-1)}d4 {sign_dex}{DEX} Piercing, 20/60 thrown",
+        f"GreatClub, {Dice(PB-1)}d8 {sign_str}{STR} Bludgeoning",
+        f"Handaxe, {Dice(PB-1)}d6 {sign_str}{STR} Slashing, 20/60 thrown",
+        f"Javelin, {Dice(PB-1)}d6 {sign_str}{STR} Piercing, 30/120 thrown",
+        f"Light Hammer, {Dice(PB-1)}d4 {sign_str}{STR} Bludgeoning, 20/60 thrown",
+        f"Mace, {Dice(PB-1)}d6 {sign_str}{STR} Bludgeoning",
+        f"Quarterstaff, {Dice(PB-1)}d6 {sign_str}{STR} Bludgeoning",
+        f"Quarterstaff, {Dice(PB-1)}d8 {sign_str}{STR} Bludgeoning",
+        f"Sickle, {Dice(PB-1)}d4 {sign_str}{STR} Slashing",
+        f"Slam, {Dice(PB-1)}d8 {sign_str}{STR} Bludgeoning",
+        f"Spear, {Dice(PB-1)}d6 {sign_str}{STR} Piercing, 20/60 thrown",
+        f"Spear, {Dice(PB)+1}d8 {sign_str}{STR} Piercing, 20/60 thrown",
+        f"Nunchaku, {Dice(PB-1)}d6 {sign_str}{STR} Bludgeoning"
         ]
     
     SimpleRangedWeapons = [
-        f"Rock, {Dice(PB-1)}d6 + {STR} Bludgeoning, 25/50 thrown",
-        f"Light Crossbow, {Dice(PB-1)}d8 + {DEX} Piercing, 80/320 range",
-        f"Dart, {Dice(PB-1)}d4 + {DEX} Piercing, 20/60 range",
-        f"Dart, {Dice(PB-1)}d4 + {STR} Piercing, 20/60 range",
-        f"Shortbow, {Dice(PB-1)}d6 + {DEX} Piercing, 80/320 range",
-        f"Sling, {Dice(PB-1)}d4 + {DEX} Bludgeoning, 30/120 range",
-        f"Light Crossbow, {Dice(PB-1)}d8 + {DEX} Piercing, 80/320 range, loading, two handed"
+        f"Rock, {Dice(PB-1)}d6 {sign_str}{STR} Bludgeoning, 25/50 thrown",
+        f"Light Crossbow, {Dice(PB-1)}d8 {sign_dex}{DEX} Piercing, 80/320 range",
+        f"Dart, {Dice(PB-1)}d4 {sign_dex}{DEX} Piercing, 20/60 range",
+        f"Dart, {Dice(PB-1)}d4 {sign_str}{STR} Piercing, 20/60 range",
+        f"Shortbow, {Dice(PB-1)}d6 {sign_dex}{DEX} Piercing, 80/320 range",
+        f"Sling, {Dice(PB-1)}d4 {sign_dex}{DEX} Bludgeoning, 30/120 range",
+        f"Light Crossbow, {Dice(PB-1)}d8 {sign_dex}{DEX} Piercing, 80/320 range, loading, two handed"
         ]
     
     MartialMeleeWeapons = [
-        f"Battleaxe, {Dice(PB-1)}d8 + {STR} Slashing",
-        f"Battleaxe, {Dice(PB-1)}d10 + {STR} Slashing",
-        f"Flail, {Dice(PB-1)}d8 + {STR} Bludgeoning",
-        f"Glaive, {Dice(PB-1)}d10 + {STR} Bludgeoning, reach",
-        f"Greataxe, {Dice(PB-1)}d12 + {STR} Slashing, reach",
-        f"Greatsword, {Dice(PB)+1}d6 + {STR} Slashing",
-        f"Halberd, {Dice(PB-1)}d10 + {STR} Slashing, reach",
-        f"Lance, {Dice(PB-1)}d12 + {STR} Piercing, reach",
-        f"Longsword, {Dice(PB-1)}d8 + {STR} Slashing",
-        f"Longsword, {Dice(PB-1)}d10 + {STR} Slashing",
-        f"Maul, {Dice(PB)+1}d6 + {STR} Bludgeoning",
-        f"Morningstar, {Dice(PB-1)}d8 + {STR} Piercing",
-        f"Pike, {Dice(PB-1)}d10 + {STR} Piercing, reach",
-        f"Rapier, {Dice(PB-1)}d8 + {STR} Piercing, Finesse",
-        f"Rapier, {Dice(PB-1)}d8 + {DEX} Piercing, Finesse",
-        f"Scimitar, {Dice(PB-1)}d6 + {STR} Slashing, Finesse, light",
-        f"Scimitar, {Dice(PB-1)}d6 + {DEX} Slashing, Finesse, light",
-        f"Shortsword, {Dice(PB-1)}d6 + {STR} Slashing, Finesse, light",
-        f"Shortsword, {Dice(PB-1)}d6 + {DEX} Slashing, Finesse, light",
-        f"Trident, {Dice(PB-1)}d6 + {STR} Piercing, 20/60 thrown",
-        f"Trident, {Dice(PB-1)}d8 + {STR} Piercing, 20/60 thrown",
-        f"War pick, {Dice(PB-1)}d8 + {STR} Bludgeoning",
-        f"Warhammer, {Dice(PB-1)}d8 + {STR} Bludgeoning",
-        f"Warhammer, {Dice(PB-1)}d10 + {STR} Bludgeoning",
-        f"Whip, {Dice(PB-1)}d4 + {STR} Slashing, Finesse, reach"
-        f"Whip, {Dice(PB-1)}d4 + {DEX} Slashing, Finesse, reach"
+        f"Battleaxe, {Dice(PB-1)}d8 {sign_str}{STR} Slashing",
+        f"Battleaxe, {Dice(PB-1)}d10 {sign_str}{STR} Slashing",
+        f"Flail, {Dice(PB-1)}d8 {sign_str}{STR} Bludgeoning",
+        f"Glaive, {Dice(PB-1)}d10 {sign_str}{STR} Bludgeoning, reach",
+        f"Greataxe, {Dice(PB-1)}d12 {sign_str}{STR} Slashing, reach",
+        f"Greatsword, {Dice(PB)+1}d6 {sign_str}{STR} Slashing",
+        f"Halberd, {Dice(PB-1)}d10 {sign_str}{STR} Slashing, reach",
+        f"Lance, {Dice(PB-1)}d12 {sign_str}{STR} Piercing, reach",
+        f"Longsword, {Dice(PB-1)}d8 {sign_str}{STR} Slashing",
+        f"Longsword, {Dice(PB-1)}d10 {sign_str}{STR} Slashing",
+        f"Maul, {Dice(PB)+1}d6 {sign_str}{STR} Bludgeoning",
+        f"Morningstar, {Dice(PB-1)}d8 {sign_str}{STR} Piercing",
+        f"Pike, {Dice(PB-1)}d10 {sign_str}{STR} Piercing, reach",
+        f"Rapier, {Dice(PB-1)}d8 {sign_str}{STR} Piercing, Finesse",
+        f"Rapier, {Dice(PB-1)}d8 {sign_dex}{DEX} Piercing, Finesse",
+        f"Scimitar, {Dice(PB-1)}d6 {sign_str}{STR} Slashing, Finesse, light",
+        f"Scimitar, {Dice(PB-1)}d6 {sign_dex}{DEX} Slashing, Finesse, light",
+        f"Shortsword, {Dice(PB-1)}d6 {sign_str}{STR} Slashing, Finesse, light",
+        f"Shortsword, {Dice(PB-1)}d6 {sign_dex}{DEX} Slashing, Finesse, light",
+        f"Trident, {Dice(PB-1)}d6 {sign_str}{STR} Piercing, 20/60 thrown",
+        f"Trident, {Dice(PB-1)}d8 {sign_str}{STR} Piercing, 20/60 thrown",
+        f"War pick, {Dice(PB-1)}d8 {sign_str}{STR} Bludgeoning",
+        f"Warhammer, {Dice(PB-1)}d8 {sign_str}{STR} Bludgeoning",
+        f"Warhammer, {Dice(PB-1)}d10 {sign_str}{STR} Bludgeoning",
+        f"Whip, {Dice(PB-1)}d4 {sign_str}{STR} Slashing, Finesse, reach"
+        f"Whip, {Dice(PB-1)}d4 {sign_dex}{DEX} Slashing, Finesse, reach"
         ]
     
     MartialRangedWeapons = [
         f"Blowgun, 1 Piercing, 25/100 range, Ammunition, Loading",
-        f"Hand Crossbow, {Dice(PB-1)}d6 + {DEX} Piercing, 30/120 range, Ammunition, Light, Loading",
-        f"Heavy Crossbow, {Dice(PB-1)}d10 + {DEX} Piercing, 100/400 range, Ammunition, Heavy, Loading, Two-Handed",
-        f"Longbow, {Dice(PB-1)}d8 + {DEX} Piercing, 150/600 range, Ammunition, Heavy, Two-Handed",
+        f"Hand Crossbow, {Dice(PB-1)}d6 {sign_dex}{DEX} Piercing, 30/120 range, Ammunition, Light, Loading",
+        f"Heavy Crossbow, {Dice(PB-1)}d10 {sign_dex}{DEX} Piercing, 100/400 range, Ammunition, Heavy, Loading, Two-Handed",
+        f"Longbow, {Dice(PB-1)}d8 {sign_dex}{DEX} Piercing, 150/600 range, Ammunition, Heavy, Two-Handed",
         f"Net, Special, 5/15 range, Thrown",
-        f"Throwing Axe, {Dice(PB-1)}d6 + {STR} Slashing, 20/60 range, Thrown",
-        f"Flintlock Pistol, {Dice(PB-1)}d8 + {DEX} Piercing, 30/90 range, Loading, Jamming: On an attack roll of 1, the gun jams and requires an action to clear before it can be fired again.",
-        f"Musket, {Dice(PB)+1}d10 + {DEX} Piercing, 60/180 range, Loading, Jamming: On an attack roll of 1, the gun jams and requires an action to clear before it can be fired again.",
-        f"Blunderbuss, {Dice(PB)+2}d10 + {DEX} fFire, 10/30 range, Loading, Exploding: On an attack roll of 1, the gun explodes and requires a short rest fixing it before it can be fired again. You don't gain the benefits of that short rest."
+        f"Throwing Axe, {Dice(PB-1)}d6 {sign_str}{STR} Slashing, 20/60 range, Thrown",
+        f"Flintlock Pistol, {Dice(PB-1)}d8 {sign_dex}{DEX} Piercing, 30/90 range, Loading, Jamming: On an attack roll of 1, the gun jams and requires an action to clear before it can be fired again.",
+        f"Musket, {Dice(PB-1)+1}d10 {sign_dex}{DEX} Piercing, 60/180 range, Loading, Jamming: On an attack roll of 1, the gun jams and requires an action to clear before it can be fired again.",
+        f"Blunderbuss, {Dice(PB)+2}d10 {sign_dex}{DEX} Fire, 10/30 range, Loading, Exploding: On an attack roll of 1, the gun explodes and requires a short rest fixing it before it can be fired again. You don't gain the benefits of that short rest."
         ]
 
     if Type == "Melee" or Type == 1:
@@ -7964,13 +9276,18 @@ def Recovery(con):
 
 
 
-def SpecialAttack(Lvl, Mod, STR=0, DEX=0):
+def SpecialAttack(npc):
+    Lvl = npc.level
+    Mod = PB(npc.level) + random.choice([npc.ability_scores.str_mod,npc.ability_scores.dex_mod,npc.ability_scores.con_mod,
+                                    npc.ability_scores.int_mod, npc.ability_scores.wis_mod, npc.ability_scores.cha_mod])
+    STR=npc.ability_scores.str_mod
+    DEX=npc.ability_scores.dex_mod
     dmg = Damage()
     con = Condition(dmg)
     r = ""
 
     # Basic attack description    
-    r += Attack(Dice(4), STR = STR, DEX = DEX) + " +"
+    r += Attack(Dice(4), npc) + " +"
 
     # Damage calculation
     damage_die = random.choice(["d4", "d6", "d8", "d10", "d12"])
@@ -8005,7 +9322,9 @@ def add_language(languages, language, chance=6):
 
 
         
-def Language(race=Race(), background=Background()):
+def Language(npc):
+    race = npc.race
+    background = npc.background
     if race == "":
         race = Race()
     if background == "":
@@ -8082,9 +9401,9 @@ def Language(race=Race(), background=Background()):
 
     if race == "Aven":
         langs = {
-            "Dwarvish": 10,
+            "Dwarvish": 15,
             "Elvish": 10,
-            "Giant": 15,
+            "Giant": 16,
             "Gnomish": 20,
             "Goblin": 20,
             "Halfling": 15,
@@ -8305,11 +9624,11 @@ def Language(race=Race(), background=Background()):
             "Halfling": 12,
             "Orc": 4,
             "Abyssal": 2,
-            "Celestial": 20,
-            "Draconic": 18,
+            "Celestial": 25,
+            "Draconic": 20,
             "Deep Speech": 20,
             "Infernal": 2,
-            "Primordial": 20,
+            "Primordial": 22,
             "Sylvan": 20,
             "Undercommon": 8,
             "Telepathy (60 ft.)": 10,
@@ -8373,7 +9692,7 @@ def Language(race=Race(), background=Background()):
             "Halfling": 18,
             "Orc": 4,
             "Abyssal": 10,
-            "Celestial": 18,
+            "Celestial": 19,
             "Draconic": 6,
             "Deep Speech": 10,
             "Infernal": 10,
@@ -8454,20 +9773,20 @@ def Language(race=Race(), background=Background()):
 
     if race == "Monstrosity":
         langs = {
-            "Dwarvish": 8,
-            "Elvish": 20,
-            "Giant": 8,
-            "Gnomish": 20,
-            "Goblin": 10,
-            "Halfling": 20,
-            "Orc": 6,
+            "Dwarvish": 9,
+            "Elvish": 21,
+            "Giant": 9,
+            "Gnomish": 21,
+            "Goblin": 11,
+            "Halfling": 21,
+            "Orc": 7,
             "Abyssal": 4,
-            "Celestial": 20,
-            "Draconic": 4,
+            "Celestial": 21,
+            "Draconic": 5,
             "Deep Speech": 1,
-            "Infernal": 4,
-            "Primordial": 10,
-            "Sylvan": 8,
+            "Infernal": 5,
+            "Primordial": 11,
+            "Sylvan": 9,
             "Undercommon": 1
         }
 
@@ -9294,12 +10613,11 @@ def get_max_spell_level(character_level, difficulty = 1):
         
 
 def add_spell(spell_list, spell_name, spell_level, slots, max_spell_level, spell_definition=""):
-
+    if slots < 1: slots = 1
     # Check if the spell level is within the allowable range
     if spell_level <= 0 or max_spell_level <= 0:
-        if random.random() < 0.2:
-            if spell_name not in spell_list:    spell_list += f"\n- {spell_name}"
-            if spell_definition:                spell_list += f": {spell_definition}"
+        if spell_name not in spell_list:    spell_list += f"\n- {spell_name}"
+        if spell_definition:                spell_list += f": {spell_definition}"
         return spell_list, slots
         
     elif spell_level <= max_spell_level:
@@ -9309,10 +10627,10 @@ def add_spell(spell_list, spell_name, spell_level, slots, max_spell_level, spell
         # (0,p0) & (max+1,0)
         # ch = y1 + (x-x1) * (y2-y1):(x2-x1)
         # ch = p0 + (Lvl) * (-p0):(max+1) = p0 + (1 - Lvl):(max+1) 
-        p0 = 1 - (0.9/max_spell_level)
-        probability = p0 * ( 1 - spell_level / (1 + max_spell_level))
+        #p0 = 1 - (0.95/max_spell_level)
+        #probability = p0 * ( 1 - spell_level / (1 + max_spell_level))
         # Randomly select if the spell is not already in the list
-        if random.random() < probability:
+        #if random.random() < probability:
             if spell_name not in spell_list:
                 spell_list += f"\n- {spell_name}"
                 if spell_definition:
@@ -9325,8 +10643,11 @@ def add_spell(spell_list, spell_name, spell_level, slots, max_spell_level, spell
 
 
 
-def Magic(Lvl, race=Race(), background=Background()):
+def Magic(npc):
 
+    Lvl = npc.level
+    race = npc.race
+    background = npc.background
 
     cantrip = "Cantrips (at will): "
     first   = "1st Level Spells: "
@@ -9354,120 +10675,44 @@ def Magic(Lvl, race=Race(), background=Background()):
     two     = "2/Day each: "
     three   = "3/Day each: "
 
+    recharge = ""
+    
     difficulty = 10
     max_spell_level = 1
+
+    cantrips_list=[]
+    one_day_each_list=[]
+    two_day_each_list=[]
+    three_day_each_list=[]
+    first_list=[]
+    second_list=[]
+    third_list=[]
+    fourth_list=[]
+    fifth_list=[]
+    sixth_list = []
+    seventh_list = []
+    eighth_list = []
+    ninth_list = []
 
 # BACKGROUNDS:
 
     # Bandit
     if background == "Bandit":
-
-        difficulty = 5 # One Fifth Caster. Limited abilities
+        difficulty = 2 + Dice(6) 
         max_spell_level = get_max_spell_level(Lvl,difficulty)
-
-        cantrips_list = [
-            "Mage Hand",
-            "Minor Illusion",
-            "Prestidigitation",
-            "Message",
-            "Thaumaturgy"
-            ]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
-            
-        one_day_each_list = ["Disguise Self", "Expeditious Retreat", "Silent Image"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
-
+        cantrips_list += ["Mage Hand","Minor Illusion","Prestidigitation","Message","Thaumaturgy"            ]
+        one_day_each_list += ["Disguise Self", "Expeditious Retreat", "Silent Image"]
         two_day_each_list = ["Darkness", "Invisibility", "Pass Without Trace"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-
-        three_day_each_list = ["Misty Step", "Blur", "Feather Fall"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day each")
-
-        first_list = [
-            "Charm Person",
-            "Disguise Self",
-            "Expeditious Retreat",
-            "Fog Cloud",
-            "Sleep"
-            ]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)  
-
-        second_list = [
-            "Darkness",
-            "Pass Without Trace",
-            "Silence",
-            "Invisibility",
-            "Alter Self"
-            ]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-        
-        third_list = [
-            "Hypnotic Pattern",
-            "Leomund’s Tiny Hut",
-            "Nondetection",
-            "Dispel Magic",
-            "Blink"
-                      ]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        fourth_list = [
-            "Dimension Door",
-            "Greater Invisibility",
-            "Arcane Eye",
-            "Locate Creature",
-            "Confusion"
-                      ]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        fifth_list = [
-            "Mislead",
-            "Modify Memory",
-            "Passwall",
-            "Seeming",
-            "Teleportation Circle"
-                      ]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-        
-        sixth_list = [
-            "True Seeing",
-            "Contingency",
-            "Mass Suggestion"
-                      ]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        seventh_list = [
-            "Teleport",
-            "Mirage Arcane",
-            "Project Image"
-                      ]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        eighth_list = [
-            "Antimagic Field",
-            "Mind Blank",
-            "Demiplane"
-                      ]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        ninth_list = [
-            "Time Stop",
-            "Foresight",
-            "Imprisonment"
-                      ]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+        three_day_each_list += ["Misty Step", "Blur", "Feather Fall"]
+        first_list += [            "Charm Person",            "Disguise Self",            "Expeditious Retreat",            "Fog Cloud",            "Sleep"]
+        second_list += [            "Darkness",            "Pass Without Trace",            "Silence",            "Invisibility",            "Alter Self"]
+        third_list += [            "Hypnotic Pattern",            "Leomund’s Tiny Hut",            "Nondetection",            "Dispel Magic",            "Blink"]
+        fourth_list += [            "Dimension Door","Greater Invisibility",            "Arcane Eye",            "Locate Creature",            "Confusion"]
+        fifth_list += [            "Mislead",            "Modify Memory",            "Passwall",            "Seeming",            "Teleportation Circle"]        
+        sixth_list += [            "True Seeing",            "Contingency",            "Mass Suggestion"]
+        seventh_list += [            "Teleport",            "Mirage Arcane",            "Project Image"]
+        eighth_list += [            "Antimagic Field",            "Mind Blank",            "Demiplane"]
+        ninth_list += [ "Time Stop", "Foresight","Imprisonment"]
 
     # Bard
     if background == "Bard":
@@ -9475,54 +10720,14 @@ def Magic(Lvl, race=Race(), background=Background()):
         difficulty = 1  # Full Caster
         max_spell_level = get_max_spell_level(Lvl, difficulty)
 
-        # Cantrips
-        cantrips_list = [
-            "Dancing Lights",
-            "Vicious Mockery",
-            "Mage Hand",
-            "Minor Illusion",
-            "Prestidigitation", "Light",
-            "Message",
-            "Mending",
-            "Friends"
-        ]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
+        cantrips_list += [            "Dancing Lights",            "Vicious Mockery",            "Mage Hand",            "Minor Illusion",            "Prestidigitation", "Light",            "Message",            "Mending",            "Friends"        ]
+        one_day_each_list += [            "Charm Person", "Disguise Self", "Feather Fall"]
+        two_day_each_list += [            "Invisibility", "Suggestion", "Enhance Ability"]
+        three_day_each_list += [            "Hypnotic Pattern",            "Major Image",            "Counterspell"]
 
-        one_day_each_list = [
-            "Charm Person", "Disguise Self", "Feather Fall"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
-        two_day_each_list = [
-            "Invisibility", "Suggestion", "Enhance Ability"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-        three_day_each_list = [
-            "Hypnotic Pattern",
-            "Major Image",
-            "Counterspell"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day each")
-
-
-        # 1st Level Spells
-        first_list = [
-            "Disguise Self",
-            "Healing Word",
-            "Identify",
-            "Faerie Fire",
-            "Charm Person",
-            "Silent Image",
-            "Sleep",
-            "Tasha’s Hideous Laughter",
-            "Unseen Servant",
-            "Speak With Animals"
-        ]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)  
-
-        # 2nd Level Spells
-        second_list = [
+        first_list += [            "Disguise Self",            "Healing Word",            "Identify",            "Faerie Fire",            "Charm Person",            "Silent Image",            "Sleep",            "Tasha’s Hideous Laughter",    "Unseen Servant",            "Speak With Animals"]
+        
+        second_list += [
             "Invisibility",
             "Knock",
             "Detect Thoughts",
@@ -9534,11 +10739,9 @@ def Magic(Lvl, race=Race(), background=Background()):
             "Suggestion",
             "Phantasmal Force"
         ]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
         
         # 3rd Level Spells
-        third_list = [
+        third_list += [
             "Dispel Magic",
             "Leomund’s Tiny Hut",
             "Hypnotic Pattern",
@@ -9550,11 +10753,9 @@ def Magic(Lvl, race=Race(), background=Background()):
             "Stinking Cloud",
             "Speak with Dead"
         ]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
 
         # 4th Level Spells
-        fourth_list = [
+        fourth_list += [
             "Dimension Door",
             "Polymorph",
             "Greater Invisibility",
@@ -9566,11 +10767,9 @@ def Magic(Lvl, race=Race(), background=Background()):
             "Geas",
             "Stone Shape"
         ]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
 
         # 5th Level Spells
-        fifth_list = [
+        fifth_list += [
             "Mass Cure Wounds",
             "Raise Dead",
             "Greater Restoration",
@@ -9582,11 +10781,9 @@ def Magic(Lvl, race=Race(), background=Background()):
             "Scrying",
             "Dominate Person"
         ]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
         
         # 6th Level Spells
-        sixth_list = [
+        sixth_list += [
             "True Seeing",
             "Otto’s Irresistible Dance",
             "Programmed Illusion",
@@ -9596,11 +10793,9 @@ def Magic(Lvl, race=Race(), background=Background()):
             "Eyebite",
             "Countercharm"
         ]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
 
         # 7th Level Spells
-        seventh_list = [
+        seventh_list += [
             "Teleport",
             "Resurrection",
             "Regenerate",
@@ -9610,11 +10805,9 @@ def Magic(Lvl, race=Race(), background=Background()):
             "Forcecage",
             "Dream Of The Blue Veil"
         ]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
 
         # 8th Level Spells
-        eighth_list = [
+        eighth_list += [
             "Power Word Stun",
             "Mind Blank",
             "Maze",
@@ -9624,11 +10817,9 @@ def Magic(Lvl, race=Race(), background=Background()):
             "Foresight",
             "Feeblemind"
         ]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
 
         # 9th Level Spells
-        ninth_list = [
+        ninth_list += [
             "Power Word Kill",
             "True Polymorph",
             "Time Stop",
@@ -9638,8 +10829,6 @@ def Magic(Lvl, race=Race(), background=Background()):
             "Foresight",
             "Meteor Swarm"
         ]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
 
 
 
@@ -9647,1149 +10836,359 @@ def Magic(Lvl, race=Race(), background=Background()):
     # Berserker
     if background == "Berserker":
 
-        difficulty = 7  # 1/7 Caster
+        difficulty = 2+ Dice(10)  # 1/7 Caster
         max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         # Cantrips
-        cantrips_list = [
+        cantrips_list += [
             "Blade Ward",
             "Thaumaturgy",
             "True Strike",
             "Guidance"
         ]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
 
-        one_day_each_list = ["Longstrider", "False Life", "Shield"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
-        two_day_each_list = ["Enhance Ability", "Blur", "Protection from Energy"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-        three_day_each_list = ["Haste", "Fear", "Heroism"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day each")
+        one_day_each_list += [
+            "Longstrider",
+            "False Life",
+            "Shield"]
+        two_day_each_list += ["Enhance Ability", "Blur", "Protection from Energy"]
+        three_day_each_list += ["Haste", "Fear", "Heroism"]
 
         # 1st Level Spells
-        first_list = [
+        first_list += [
             "Bane",
             "Compelled Duel",
             "Wrathful Smite",
             "Searing Smite"
         ]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)  
 
         # 2nd Level Spells
-        second_list = [
+        second_list += [
             "Branding Smite",
             "Magic Weapon",
             "Find Steed"
         ]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
 
         second, slots2 = add_spell(second, "Enhance Ability", 2, slots2, max_spell_level, "Bull's Strength")
 
-        # 3rd Level Spells
-        third_list = [
-            "Crusader's Mantle",
-            "Elemental Weapon",
-            "Fear",
-            "Spirit Guardians"
-        ]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
+        third_list += [            "Crusader's Mantle",
+            "Elemental Weapon",            "Fear",
+            "Spirit Guardians"        ]
 
         # 4th Level Spells
-        fourth_list = [
-            "Stoneskin",
-            "Freedom Of Movement",
-            "Compulsion",
-            "Grasping Vine"
-        ]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
+        fourth_list += [            "Stoneskin",
+            "Freedom Of Movement",            "Compulsion",
+            "Grasping Vine"        ]
 
         # 5th Level Spells
-        fifth_list = [
-            "Destructive Wave",
-            "Flame Strike",
-            "Geas",
-            "Commune With Nature"
+        fifth_list += [
+            "Destructive Wave",            "Flame Strike",
+            "Geas",            "Commune With Nature"
         ]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
         
         # 6th Level Spells
-        sixth_list = [
-            "Heroes' Feast",
+        sixth_list += [            "Heroes' Feast",
             "Find the Path",
-            "Wind Walk"
-        ]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
+            "Wind Walk"        ]
 
         # 7th Level Spells
-        seventh_list = [
-            "Regenerate",
-            "Fire Storm",
-            "Resurrection"
+        seventh_list += [            "Regenerate",
+            "Fire Storm",            "Resurrection"
         ]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
 
         # 8th Level Spells
-        eighth_list = [
-            "Earthquake",
-            "Control Weather",
-            "Animal Shapes"
-        ]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
+        eighth_list += [            "Earthquake",
+            "Control Weather",            "Animal Shapes"]
 
         # 9th Level Spells
-        ninth_list = [
-            "Storm of Vengeance",
-            "True Resurrection",
-            "Shapechange"
-        ]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+        ninth_list += ["Storm of Vengeance","True Resurrection","Shapechange"]
 
 
     # Charlatan
     if background == "Charlatan":
 
-        difficulty = 4  # 1/4 Caster
+        difficulty = Dice(8)  # 1/4 Caster
         max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         # Cantrips
-        cantrips_list = [
-            "Minor Illusion",
-            "Prestidigitation",
-            "Mage Hand",
-            "Friends"
-        ]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
+        cantrips_list += ["Minor Illusion", "Prestidigitation","Mage Hand",            "Friends"        ]
             
-        one_day_each_list = [
-            "Disguise Self", "Charm Person", "Illusory Script"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
-        two_day_each_list = ["Minor Illusion", "Message", "Silent Image"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-        three_day_each_list = ["Suggestion", "Mirror Image", "Invisibility"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, max_spell_level-s, 1, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = [
-            "Disguise Self",
-            "Charm Person",
-            "Illusory Script",
-            "Sleep"
-        ]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)  
-
-        # 2nd Level Spells
-        second_list = [
-            "Invisibility",
-            "Suggestion",
-            "Alter Self",
-            "Mirror Image"
-        ]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-        
-        # 3rd Level Spells
-        third_list = [
-            "Hypnotic Pattern",
-            "Major Image",
-            "Nondetection",
-            "Gaseous Form"
-        ]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = [
-            "Greater Invisibility",
-            "Confusion",
-            "Dimension Door",
-            "Polymorph"
-        ]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = [
-            "Mislead",
-            "Seeming",
-            "Modify Memory",
-            "Dominate Person"
-        ]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-        
-        # 6th Level Spells
-        sixth_list = [
-            "Programmed Illusion",
-            "True Seeing",
-            "Mass Suggestion"
-        ]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = [
-            "Mirage Arcane",
-            "Project Image",
-            "Simulacrum"
-        ]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = [
-            "Mind Blank",
-            "Dominate Monster",
-            "Power Word Stun"
-        ]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = [
-            "Time Stop",
-            "True Polymorph",
-            "Foresight"
-        ]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+        one_day_each_list += ["Disguise Self","Charm Person",            "Illusory Script"]
+        two_day_each_list += ["Minor Illusion","Message", "Silent Image"]
+        three_day_each_list += ["Suggestion","Mirror Image",            "Invisibility"]
+        first_list += ["Disguise Self",            "Charm Person",            "Illusory Script",            "Sleep"        ]
+        second_list += ["Invisibility",            "Suggestion",            "Alter Self",            "Mirror Image"        ]
+        third_list += ["Hypnotic Pattern",            "Major Image",            "Nondetection",            "Gaseous Form"        ]
+        fourth_list += ["Greater Invisibility",            "Confusion",            "Dimension Door",            "Polymorph"        ]
+        fifth_list += ["Mislead",            "Seeming",            "Modify Memory",            "Dominate Person"        ]
+        sixth_list += [      "Programmed Illusion",            "True Seeing",            "Mass Suggestion"        ]
+        seventh_list += [   "Mirage Arcane",            "Project Image",            "Simulacrum"        ]
+        eighth_list += ["Mind Blank",            "Dominate Monster",            "Power Word Stun"        ]
+        ninth_list += [ "Time Stop",            "True Polymorph",            "Foresight"        ]
             
     # Commoner
     if background == "Commoner":
 
-        difficulty = 8  # 1/8 Caster, very limited magical ability
+        difficulty = Dice(4) + Dice(4) + Dice(4)  
         max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         # Cantrips
-        cantrips_list = [
-            "Mending",
-            "Prestidigitation",
-            "Message",
-            "Guidance"
-        ]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
-
-        one_day_each_list = ["Prestidigitation", "Mending", "Light"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
-        two_day_each_list = ["Guidance", "Resistance", "Mage Hand"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-        three_day_each_list = ["Cure Wounds", "Shield", "Feather Fall"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = [
-            "Cure Wounds",
-            "Purify Food And Drink",
-            "Alarm",
-            "Goodberry"
-        ]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)  
-
-        # 2nd Level Spells
-        second_list = [
-            "Lesser Restoration",
-            "Animal Messenger",
-            "Find Steed",
-            "Locate Animals Or Plants"
-        ]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-        
-        # 3rd Level Spells
-        third_list = [
-            "Create Food And Water",
-            "Sending",
-            "Tiny Hut",
-            "Speak With Plants"
-        ]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = [
-            "Control Water",
-            "Stone Shape",
-            "Locate Creature",
-            "Fabricate"
-        ]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = [
-            "Awaken",
-            "Commune With Nature",
-            "Greater Restoration",
-            "Teleportation Circle"
-        ]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-        
-        # 6th Level Spells
-        sixth_list = [
-            "Heroes' Feast",
-            "Move Earth",
-            "Heal"
-        ]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = [
-            "Regenerate",
-            "Resurrection",
-            "Miracle"  # Miracle is a 9th level spell, but it's here to represent extraordinary luck or divine intervention
-        ]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = [
-            "Control Weather",
-            "Earthquake",
-            "Holy Aura"  # Holy Aura could represent a divine protection over the community
-        ]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = [
-            "True Resurrection",
-            "Storm of Vengeance",
-        ]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+        cantrips_list += ["Mending",            "Prestidigitation",            "Message",            "Guidance"        ]
+        one_day_each_list += ["Prestidigitation", "Mending", "Light"]
+        two_day_each_list += ["Guidance", "Resistance", "Mage Hand"]
+        three_day_each_list += ["Cure Wounds", "Shield", "Feather Fall"]
+        first_list += [            "Cure Wounds",            "Purify Food And Drink",            "Alarm",            "Goodberry"]
+        second_list += [            "Lesser Restoration",           "Animal Messenger",            "Find Steed",            "Locate Animals Or Plants"]
+        third_list += [            "Create Food And Water",            "Sending",            "Tiny Hut",            "Speak With Plants"]
+        fourth_list += [            "Control Water",            "Stone Shape",            "Locate Creature",            "Fabricate"]
+        fifth_list += [            "Awaken",            "Commune With Nature",            "Greater Restoration",            "Teleportation Circle"]
+        sixth_list += [            "Heroes' Feast",            "Move Earth",            "Heal"]
+        seventh_list += [            "Regenerate",            "Resurrection",            "Miracle"          ]
+        eighth_list += [            "Control Weather",            "Earthquake",            "Holy Aura"  ]
+        ninth_list += [            "True Resurrection","Storm of Vengeance",]
         ninth, slots9 = add_spell(ninth, "Wish" , 9, slots9, max_spell_level, "One per Lifetime")
 
     # Cultist
 
     if background == "Cultist":
 
-        difficulty = 1.5 # Assuming Cultists are full casters
+        difficulty = Dice(3) 
         max_spell_level = get_max_spell_level(Lvl,difficulty)
 
-        cantrips_list = [
-            "Chill Touch",
-            "Eldritch Blast",
-            "Guidance",
-            "Infestation",
-            "Light",
-            "Sacred Flame",
-            "Thaumaturgy",
-            "Toll The Dead",
-            "Vicious Mockery"
-            ]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
-
-        one_day_each_list = ["Command", "Inflict Wounds", "Protection from Good and Evil"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
-        two_day_each_list = ["Suggestion", "Silence", "Hold Person"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-        three_day_each_list = [
-            "Detect Thoughts", "Darkness", "Disguise Self"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day each")
-
-        first_list = [
-            "Bane",
-            "Cause Fear",
-            "Command",
-            "Hex",
-            "Inflict Wounds",
-            "Protection From Good And Evil",
-            "Shield Of Faith",
-            "Unseen Servant"
-            ]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)  
-
-        second_list = [
-            "Blindness/Deafness",
-            "Darkness",
-            "Enthrall",
-            "Hold Person",
-            "Mind Spike",
-            "Ray Of Enfeeblement",
-            "Silence",
+        cantrips_list += [            "Chill Touch",            "Eldritch Blast",            "Guidance",            "Infestation",            "Light",            "Sacred Flame",           "Thaumaturgy",            "Toll The Dead",            "Vicious Mockery"            ]
+        one_day_each_list += [            "Command",            "Inflict Wounds",            "Protection from Good and Evil"]
+        two_day_each_list += [            "Suggestion",
+            "Silence",            "Hold Person"]
+        three_day_each_list += [            "Detect Thoughts", "Darkness", "Disguise Self"]
+        first_list += [            "Bane",
+            "Cause Fear",            "Command",
+            "Hex",            "Inflict Wounds",
+            "Protection From Good And Evil",            "Shield Of Faith",
+            "Unseen Servant"            ]
+        second_list += [            "Blindness/Deafness",
+            "Darkness",            "Enthrall",
+            "Hold Person",            "Mind Spike",
+            "Ray Of Enfeeblement",            "Silence",
             "Spiritual Weapon"]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-        
-        third_list = [
-            "Animate Dead",
-            "Bestow Curse",
-            "Fear",
-            "Hypnotic Pattern",
-            "Speak With Dead",
-            "Vampiric Touch",
-            "Tongues",
-            "Spirit Guardians"
-            ]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        fourth_list = [
-            "Blight",
-            "Death Ward",
-            "Hallucinatory Terrain",
-            "Locate Creature",
-            "Phantasmal Killer",
-            "Shadow Of Moil",
-            "Sickening Radiance",
-            "Summon Greater Demon"
-            ]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        fifth_list = [
-            "Contagion",
-            "Danse Macabre",
-            "Geas",
-            "Hold Monster",
-            "Insect Plague",
-            "Mass Cure Wounds",
-            "Scrying",
-            "Wrath Of Nature"
-            ]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-        
-        sixth_list = [
-            "Circle Of Death",
-            "Create Undead",
-            "Eyebite",
-            "Harm",
-            "Heroes' Feast",
-            "Mass Suggestion",
-            "True Seeing",
-            "Word Of Recall"
-            ]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        seventh_list = [
-            "Finger Of Death",
-            "Plane Shift",
-            "Regenerate",
-            "Resurrection",
-            "Symbol",
-            "Teleport",
+        third_list += [    "Animate Dead",
+            "Bestow Curse",            "Fear",
+            "Hypnotic Pattern",            "Speak With Dead",
+            "Vampiric Touch",            "Tongues",
+            "Spirit Guardians"            ]
+        fourth_list += [            "Blight",
+            "Death Ward",            "Hallucinatory Terrain",
+            "Locate Creature",            "Phantasmal Killer",
+            "Shadow Of Moil",            "Sickening Radiance",
+            "Summon Greater Demon"            ]
+        fifth_list += [            "Contagion",
+            "Danse Macabre",            "Geas",
+            "Hold Monster",            "Insect Plague",
+            "Mass Cure Wounds",            "Scrying",
+            "Wrath Of Nature"            ]
+        sixth_list += [            "Circle Of Death",
+            "Create Undead",            "Eyebite",
+            "Harm",            "Heroes' Feast",
+            "Mass Suggestion",            "True Seeing",
+            "Word Of Recall"            ]
+        seventh_list += [
+            "Finger Of Death",            "Plane Shift",
+            "Regenerate",            "Resurrection",
+            "Symbol",            "Teleport",
             "Etherealness",
             "Fire Storm"
             ]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        eighth_list = [
-            "Antimagic Field",
-            "Dominate Monster",
-            "Feeblemind",
-            "Holy Aura",
+        eighth_list += [
+            "Antimagic Field",          "Dominate Monster",
+            "Feeblemind",            "Holy Aura",
             "Incendiary Cloud",
-            "Maze",
-            "Power Word Stun",
-            "Sunburst"
-                      ]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        ninth_list = [
+            "Maze",            "Power Word Stun",
+            "Sunburst"                      ]
+        ninth_list += [
             "Astral Projection",
-            "Gate",
-            "Implosion",
-            "Mass Heal",
-            "Power Word Kill",
-            "Psychic Scream",
-            "True Resurrection",
-            "Weird"
-            ]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
-
+            "Gate",            "Implosion",
+            "Mass Heal",            "Power Word Kill",
+            "Psychic Scream",            "True Resurrection",
+            "Weird"            ]
 
     # Criminal
     if background == "Criminal":
-
-        difficulty = 3  # 1/3 Caster, moderate magical ability
+        difficulty = 1 + Dice(6)  
         max_spell_level = get_max_spell_level(Lvl, difficulty)
 
-        # Cantrips
-        cantrips_list = [
-            "Mage Hand",
-            "Minor Illusion",
-            "Prestidigitation",
-            "Message"
-        ]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
-
-        one_day_each_list = ["Disguise Self", "Silent Image", "Expeditious Retreat"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
-        two_day_each_list = ["Invisibility", "Pass without Trace", "Knock"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-        three_day_each_list = ["Mage Hand", "Message", "Prestidigitation"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = [
-            "Disguise Self",
+        cantrips_list += [            "Mage Hand",
+            "Minor Illusion",            "Prestidigitation",
+            "Message"        ]
+        one_day_each_list += ["Disguise Self", "Silent Image", "Expeditious Retreat"]
+        two_day_each_list += ["Invisibility", "Pass without Trace", "Knock"]
+        three_day_each_list += ["Mage Hand", "Message", "Prestidigitation"]
+        first_list += [            "Disguise Self",
             "Charm Person",
             "Silent Image",
-            "Sleep",
-            "Expeditious Retreat"
+            "Sleep",            "Expeditious Retreat"        ]
+        second_list += [            "Invisibility",
+            "Suggestion",            "Alter Self",
+            "Darkness",            "Pass Without Trace"
         ]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)  
-
-        # 2nd Level Spells
-        second_list = [
-            "Invisibility",
-            "Suggestion",
-            "Alter Self",
-            "Darkness",
-            "Pass Without Trace"
-        ]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
         
-        # 3rd Level Spells
-        third_list = [
-            "Nondetection",
+        third_list += [            "Nondetection",
             "Dispel Magic",
             "Hypnotic Pattern",
             "Major Image",
             "Leomund’s Tiny Hut"
         ]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = [
-            "Greater Invisibility",
+        fourth_list += [            "Greater Invisibility",
             "Dimension Door",
             "Arcane Eye",
             "Freedom of Movement",
             "Locate Creature"
         ]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = [
-            "Mislead",
+        fifth_list += [            "Mislead",
             "Modify Memory",
             "Teleportation Circle",
-            "Passwall",
-            "Seeming"
+            "Passwall",            "Seeming"
         ]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-        
-        # 6th Level Spells
-        sixth_list = [
+        sixth_list += [
             "True Seeing",
             "Programmed Illusion",
             "Find the Path"
         ]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = [
-            "Mirage Arcane",
+        seventh_list += [            "Mirage Arcane",
             "Project Image",
-            "Teleport"
+            "Teleport"        ]
+        eighth_list += [
+            "Demiplane",            "Mind Blank",
+            "Antimagic Field"        ]
+        ninth_list += [            "Imprisonment",
+            "Time Stop",            "Power Word Kill"
         ]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = [
-            "Demiplane",
-            "Mind Blank",
-            "Antimagic Field"
-        ]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = [
-            "Imprisonment",
-            "Time Stop",
-            "Power Word Kill"
-        ]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
-
 
     # Druid
     if background == "Druid":
 
-        difficulty = 1  # Full caster
+        difficulty = Dice(3)  # Full caster
         max_spell_level = get_max_spell_level(Lvl, difficulty)
 
-        # Cantrips
-        cantrips_list = [
-            "Druidcraft",
-            "Guidance",
-            "Mending",
+        cantrips_list = [            "Druidcraft",
+            "Guidance",            "Mending",
             "Produce Flame",
-            "Shillelagh",
-            "Resistance"
+            "Shillelagh",            "Resistance"
         ]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
 
-        one_day_each_list = [
-            "Cure Wounds",
-            "Entangle",
-            "Speak with Animals"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
-        two_day_each_list = [
-            "Barkskin",
-            "Moonbeam",
-            "Pass without Trace"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-        three_day_each_list = [
-            "Guidance",
-            "Thorn Whip",
-            "Druidcraft"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = [
-            "Cure Wounds",
-            "Entangle",
-            "Faerie Fire",
+        one_day_each_list += [            "Cure Wounds",
+            "Entangle",            "Speak with Animals"]
+        two_day_each_list += [            "Barkskin",
+            "Moonbeam",            "Pass without Trace"]
+        three_day_each_list += [            "Guidance",
+            "Thorn Whip",            "Druidcraft"]
+        first_list += [            "Cure Wounds",
+            "Entangle",            "Faerie Fire",
             "Goodberry",
             "Healing Word",
             "Thunderwave",
             "Create or Destroy Water",
             "Speak With Animals",
-            "Longstrider"
-        ]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)  
-
-        # 2nd Level Spells
-        second_list = [
-            "Barkskin",
-            "Flame Blade",
-            "Flaming Sphere",
+            "Longstrider"        ]
+        second_list += [            "Barkskin",
+            "Flame Blade",            "Flaming Sphere",
             "Lesser Restoration",
-            "Moonbeam",
-            "Pass Without Trace",
+            "Moonbeam",            "Pass Without Trace",
             "Spike Growth",
-            "Animal Messenger"
-        ]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-        
-        # 3rd Level Spells
-        third_list = [
-            "Call Lightning",
+            "Animal Messenger"        ]
+        third_list += [            "Call Lightning",
             "Cure Wounds",
-            "Dispel Magic",
-            "Protection From Energy",
-            "Water Breathing",
-            "Water Walk",
-            "Wind Wall"
+            "Dispel Magic",            "Protection From Energy",
+            "Water Breathing",            "Water Walk",
+            "Wind Wall"        ]
+        fourth_list += [            "Control Water",
+            "Freedom Of Movement",            "Ice Storm",
+            "Stoneskin",            "Wall of Fire",
+            "Giant Insect"        ]
+        fifth_list += [            "Awaken",
+            "Commune With Nature",            "Cure Wounds",
+            "Geas",            "Mass Cure Wounds",
+            "Reincarnate",            "Tree Stride"
         ]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = [
-            "Control Water",
-            "Freedom Of Movement",
-            "Ice Storm",
-            "Stoneskin",
-            "Wall of Fire",
-            "Giant Insect"
+        sixth_list = [            "Heal",
+            "Heroes' Feast",            "Move Earth",
+            "Sunbeam",            "Transport Via Plants",
+            "Wall Of Thorns",            "Wind Walk"
         ]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = [
-            "Awaken",
-            "Commune With Nature",
-            "Cure Wounds",
-            "Geas",
-            "Mass Cure Wounds",
-            "Reincarnate",
-            "Tree Stride"
+        seventh_list = [            "Fire Storm",
+            "Mirage Arcane",            "Plane Shift",
+            "Regenerate",            "Reverse Gravity",
+            "Teleport"        ]
+        eighth_list = [            "Animal Shapes",
+            "Control Weather",            "Earthquake",
+            "Sunburst",            "Tsunami",
+            "Antipathy/Sympathy"        ]
+        ninth_list = [            "Shapechange",
+            "Storm of Vengeance",            "True Resurrection",
+            "Foresight",            "Mass Heal"
         ]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-        
-        # 6th Level Spells
-        sixth_list = [
-            "Heal",
-            "Heroes' Feast",
-            "Move Earth",
-            "Sunbeam",
-            "Transport Via Plants",
-            "Wall Of Thorns",
-            "Wind Walk"
-        ]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = [
-            "Fire Storm",
-            "Mirage Arcane",
-            "Plane Shift",
-            "Regenerate",
-            "Reverse Gravity",
-            "Teleport"
-        ]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = [
-            "Animal Shapes",
-            "Control Weather",
-            "Earthquake",
-            "Sunburst",
-            "Tsunami",
-            "Antipathy/Sympathy"
-        ]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = [
-            "Shapechange",
-            "Storm of Vengeance",
-            "True Resurrection",
-            "Foresight",
-            "Mass Heal"
-        ]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
 
     # Expert
     if background == "Expert":
 
-        difficulty = 3  # Third Caster
+        difficulty = Dice(6)  
         max_spell_level = get_max_spell_level(Lvl, difficulty)
-
-        # Cantrips
-        cantrips_list = [
-            "Guidance",
-            "Mending",
-            "Message",
-            "Prestidigitation",
-            "Thaumaturgy"
-        ]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
-
-        one_day_each_list = [
-            "Identify", "Disguise Self", "Detect Thoughts"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
-        two_day_each_list = ["Enhance Ability", "Invisibility", "Knock"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-        three_day_each_list = ["Mage Hand", "Message", "Prestidigitation"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = [
-            "Comprehend Languages",
-            "Cure Wounds",
-            "Detect Magic",
-            "Disguise Self",
-            "Identify"
-        ]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)  
-
-        # 2nd Level Spells
-        second_list = [
-            "Enhance Ability",
-            "Find Traps",
-            "Lesser Restoration",
-            "Locate Animals Or Plants",
-            "Locate Object"
-        ]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-        
-        # 3rd Level Spells
-        third_list = [
-            "Create Food And Water",
-            "Dispel Magic",
-            "Protection From Energy",
-            "Remove Curse",
-            "Tongues"
-        ]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = [
-            "Freedom Of Movement",
-            "Greater Restoration",
-            "Locate Creature",
-            "Stone Shape",
-            "Fabricate"
-        ]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = [
-            "Contact Other Plane",
-            "Legend Lore",
-            "Mass Cure Wounds",
-            "Planar Binding",
-            "Teleportation Circle"
-        ]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-        
-        # 6th Level Spells
-        sixth_list = [
-            "Find The Path",
-            "Guards And Wards",
-            "Heal",
-            "Heroes' Feast",
-            "True Seeing"
-        ]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = [
-            "Regenerate",
-            "Resurrection",
-            "Sequester",
-            "Symbol",
-            "Teleport"
-        ]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = [
-            "Antimagic Field",
-            "Control Weather",
-            "Earthquake",
-            "Mind Blank",
-            "Power Word Stun"
-        ]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = [
-            "Foresight",
-            "Mass Heal",
-            "Power Word Heal",
-            "True Resurrection",
-            "Wish"
-        ]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+        cantrips_list += ["Guidance",  "Mending",            "Message",            "Prestidigitation",            "Thaumaturgy"]
+        one_day_each_list += ["Identify", "Disguise Self", "Detect Thoughts"]
+        two_day_each_list += ["Enhance Ability", "Invisibility", "Knock"]
+        three_day_each_list += ["Mage Hand", "Message", "Prestidigitation"]
+        first_list += ["Comprehend Languages",            "Cure Wounds",            "Detect Magic",          "Disguise Self",            "Identify"]
+        second_list += ["Enhance Ability",            "Find Traps",            "Lesser Restoration",            "Locate Animals Or Plants",            "Locate Object"]
+        third_list += ["Create Food And Water",            "Dispel Magic",            "Protection From Energy",            "Remove Curse",            "Tongues"]
+        fourth_list += ["Freedom Of Movement",            "Greater Restoration",            "Locate Creature",            "Stone Shape",            "Fabricate"]
+        fifth_list += ["Contact Other Plane",            "Legend Lore",            "Mass Cure Wounds",            "Planar Binding",            "Teleportation Circle"]
+        sixth_list += ["Find The Path",            "Guards And Wards",            "Heal",            "Heroes' Feast",            "True Seeing"]
+        seventh_list += ["Regenerate",            "Resurrection",            "Sequester",            "Symbol",            "Teleport"]
+        eighth_list += ["Antimagic Field",            "Control Weather",            "Earthquake",            "Mind Blank",            "Power Word Stun"]
+        ninth_list += [ "Foresight",            "Mass Heal",            "Power Word Heal",            "True Resurrection",            "Wish"]
 
     # Explorer
     if background == "Explorer":
 
-        difficulty = 3  # One Third Caster
+        difficulty = Dice(8)  # One Third Caster
         max_spell_level = get_max_spell_level(Lvl, difficulty)
 
-        # Cantrips
-        cantrips_list = [
-            "Druidcraft",
-            "Guidance",
-            "Mage Hand",
-            "Mending",
-            "Thaumaturgy"
-        ]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
-
-        one_day_each_list = ["Find the Path", "Pass without Trace", "Water Walk"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
-        two_day_each_list = ["Goodberry", "Protection from Energy", "Speak with Animals"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-        three_day_each_list = ["Longstrider", "Guidance", "Light"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = [
-            "Cure Wounds",
-            "Detect Magic",
-            "Goodberry",
-            "Jump",
-            "Longstrider"
-        ]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)  
-
-        # 2nd Level Spells
-        second_list = [
-            "Find Traps",
-            "Flame Blade",
-            "Locate Animals Or Plants",
-            "Pass Without Trace",
-            "Rope Trick"
-        ]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-        
-        # 3rd Level Spells
-        third_list = [
-            "Create Food And Water",
-            "Daylight",
-            "Feign Death",
-            "Protection From Energy",
-            "Water Breathing"
-        ]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = [
-            "Control Water",
-            "Fabricate",
-            "Freedom Of Movement",
-            "Locate Creature",
-            "Stone Shape"
-        ]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = [
-            "Commune With Nature",
-            "Legend Lore",
-            "Passwall",
-            "Teleportation Circle",
-            "Tree Stride"
-        ]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-        
-        # 6th Level Spells
-        sixth_list = [
-            "Find The Path",
-            "Move Earth",
-            "Transport Via Plants",
-            "Wind Walk",
-            "True Seeing"
-        ]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = [
-            "Mirage Arcane",
-            "Plane Shift",
-            "Regenerate",
-            "Reverse Gravity",
-            "Teleport"
-        ]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = [
-            "Antimagic Field",
-            "Control Weather",
-            "Earthquake",
-            "Telepathy",
-            "Tsunami"
-        ]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = [
-            "Foresight",
-            "Gate",
-            "Imprisonment",
-            "Meteor Swarm",
-            "Time Stop"
-        ]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
-
-
-
-
+        cantrips_list += [            "Druidcraft",            "Guidance",            "Mage Hand",            "Mending",            "Thaumaturgy"]
+        one_day_each_list += ["Find the Path", "Pass without Trace", "Water Walk"]
+        two_day_each_list += ["Goodberry", "Protection from Energy", "Speak with Animals"]
+        three_day_each_list += ["Longstrider", "Guidance", "Light"]
+        first_list += [            "Cure Wounds",            "Detect Magic",            "Goodberry",            "Jump",            "Longstrider"]
+        second_list += [            "Find Traps",            "Flame Blade",            "Locate Animals Or Plants",            "Pass Without Trace",            "Rope Trick"]
+        third_list += ["Create Food And Water","Daylight","Feign Death","Protection From Energy","Water Breathing"]
+        fourth_list += [            "Control Water",            "Fabricate",            "Freedom Of Movement",            "Locate Creature",            "Stone Shape"        ]
+        fifth_list += [            "Commune With Nature", "Legend Lore",            "Passwall","Teleportation Circle",            "Tree Stride"]
+        sixth_list += ["Find The Path","Move Earth",            "Transport Via Plants", "Wind Walk",            "True Seeing"]
+        seventh_list += ["Mirage Arcane",            "Plane Shift",            "Regenerate",            "Reverse Gravity",            "Teleport"        ]
+        eighth_list += [            "Antimagic Field",            "Control Weather",            "Earthquake",            "Telepathy",            "Tsunami"        ]
+        ninth_list += [            "Foresight",           "Gate",            "Imprisonment",            "Meteor Swarm",            "Time Stop"        ]
 
     # Gladiator
     if background == "Gladiator":
 
-        difficulty = 4  # One Fourth Caster
+        difficulty = Dice(8)  # One Fourth Caster
         max_level = get_max_spell_level(Lvl, difficulty)
 
         # Cantrips
-        cantrips_list = [
-            "Blade Ward",
-            "Friends",
-            "Prestidigitation",
-            "True Strike",
-            "Thaumaturgy"
-        ]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
-        one_day_each_list = [
-            "Heroism",
-            "Compelled Duel", "Shield"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
-        two_day_each_list = ["Enhance Ability", "Thunderous Smite", "Blur"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-        three_day_each_list = ["Mage Hand", "True Strike", "Prestidigitation"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = [
-            "Bless",
-            "Command",
-            "Heroism",
-            "Shield",
-            "Thunderwave"
-        ]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)  
-
-        # 2nd Level Spells
-        second_list = [
-            "Branding Smite",
-            "Enhance Ability",
-            "Enlarge/Reduce",
-            "Magic Weapon",
-            "Spiritual Weapon"
-        ]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-        
-        # 3rd Level Spells
-        third_list = [
-            "Crusader's Mantle",
-            "Fear",
-            "Haste",
-            "Protection From Energy",
-            "Slow"
-        ]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = [
-            "Compulsion",
-            "Freedom Of Movement",
-            "Stone Shape",
-            "Stoneskin",
-            "Wall Of Fire"
-        ]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = [
-            "Flame Strike",
-            "Greater Restoration",
-            "Hold Monster",
-            "Legend Lore",
-            "Skill Empowerment"
-        ]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-        
-        # 6th Level Spells
-        sixth_list = [
-            "Blade Barrier",
-            "Find The Path",
-            "Heal",
-            "Heroes' Feast",
-            "Tenser's Transformation"
-        ]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = [
-            "Crown Of Stars",
-            "Forcecage",
-            "Mordenkainen's Sword",
-            "Regenerate",
-            "Resurrection"
-        ]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = [
-            "Antimagic Field",
-            "Dominate Monster",
-            "Earthquake",
-            "Holy Aura",
-            "Incendiary Cloud"
-        ]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = [
-            "Blade Of Disaster",
-            "Foresight",
-            "Mass Heal",
-            "Power Word Kill",
-            "Time Stop"
-        ]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+        cantrips_list += [            "Blade Ward", "Friends",            "Prestidigitation",            "True Strike",            "Thaumaturgy"        ]
+        one_day_each_list += [            "Heroism","Compelled Duel",            "Shield"]
+        two_day_each_list += ["Enhance Ability", "Thunderous Smite", "Blur"]
+        three_day_each_list += ["Mage Hand", "True Strike", "Prestidigitation"]
+        first_list += [            "Bless","Command",            "Heroism",            "Shield",            "Thunderwave"        ]
+        second_list += [            "Branding Smite","Enhance Ability",            "Enlarge/Reduce",            "Magic Weapon",            "Spiritual Weapon"        ]
+        third_list += [            "Crusader's Mantle","Fear",            "Haste",            "Protection From Energy",            "Slow"        ]
+        fourth_list += ["Compulsion",            "Freedom Of Movement",            "Stone Shape",            "Stoneskin",            "Wall Of Fire"        ]
+        fifth_list += ["Flame Strike",            "Greater Restoration",            "Hold Monster",            "Legend Lore",            "Skill Empowerment"        ]
+        sixth_list += ["Blade Barrier",            "Find The Path",            "Heal",            "Heroes' Feast",            "Tenser's Transformation"        ]
+        seventh_list += ["Crown Of Stars",            "Forcecage",            "Mordenkainen's Sword",            "Regenerate",            "Resurrection"]
+        eighth_list += ["Antimagic Field",            "Dominate Monster",            "Earthquake",            "Holy Aura",            "Incendiary Cloud"        ]
+        ninth_list += ["Blade Of Disaster","Foresight","Mass Heal","Power Word Kill","Time Stop"]
 
     # Guard
     if background == "Guard":
-
-        difficulty = 4  # One Fourth Caster
+        difficulty = Dice(12)  
         max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         # Cantrips
@@ -10803,9 +11202,10 @@ def Magic(Lvl, race=Race(), background=Background()):
         for c in cantrips_list:
             cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
 
-        one_day_each_list = ["Shield", "Alarm", "Protection from Evil and Good"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
+        one_day_each_list += [
+            "Shield",
+            "Alarm",
+            "Protection from Evil and Good"]
         two_day_each_list = ["Hold Person", "Calm Emotions", "Zone of Truth"]
         for s in two_day_each_list:
             two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
@@ -10828,11 +11228,9 @@ def Magic(Lvl, race=Race(), background=Background()):
             second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
         
         # 3rd Level Spells
-        third_list = [
+        third_list += [
             "Counterspell", "Crusader's Mantle", "Protection from Energy", "Slow", "Spirit Guardians"
         ]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
 
         # 4th Level Spells
         fourth_list = [
@@ -10881,91 +11279,47 @@ def Magic(Lvl, race=Race(), background=Background()):
     # Healer
     if background == "Healer":
 
-        difficulty = 2  # One Half Caster
+        difficulty = Dice(4)  
         max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         # Cantrips
-        cantrips_list = [
+        cantrips_list += [
             "Guidance",
             "Resistance",
             "Spare the Dying",
             "Thaumaturgy",
-            "Virtue"
+            "Virtue"]
+        first_list += ["Cure Wounds", "Detect Poison and Disease", "Healing Word", "Purify Food and Drink", "Sanctuary"]
+        second_list += ["Aid", "Calm Emotions", "Lesser Restoration", "Prayer of Healing", "Protection from Poison"]
+        third_list += ["Create Food and Water", "Mass Healing Word", "Protection from Energy", "Remove Curse", "Remove Disease"]
+        fourth_list += ["Death Ward", "Freedom of Movement", "Guardian of Faith", "Greater Restoration", "Stone Shape"]
+        fifth_list += ["Greater Restoration", "Hallow", "Mass Cure Wounds", "Raise Dead", "Scrying"]
+        sixth_list += [
+            "Heal",
+            "Heroes' Feast",
+            "Planar Ally",
+            "True Seeing",
+            "Word of Recall"
         ]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
+        seventh_list += [
+            "Etherealness",            "Regenerate",
+            "Resurrection",            "Symbol",
+            "Teleport"        ]
+        eighth_list += [
+            "Antimagic Field",
+            "Control Weather",
+            "Earthquake",
+            "Holy Aura",
+            "Telepathy"
+        ]
 
-        # 1st Level Spells
-        first_list = [
-            "Cure Wounds", "Detect Poison and Disease", "Healing Word", "Purify Food and Drink", "Sanctuary"
-        ]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)  
-
-        # 2nd Level Spells
-        second_list = [
-            "Aid", "Calm Emotions", "Lesser Restoration", "Prayer of Healing", "Protection from Poison"
-        ]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-        
-        # 3rd Level Spells
-        third_list = [
-            "Create Food and Water", "Mass Healing Word", "Protection from Energy", "Remove Curse", "Remove Disease"
-        ]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = [
-            "Death Ward", "Freedom of Movement", "Guardian of Faith", "Greater Restoration", "Stone Shape"
-        ]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = [
-            "Greater Restoration", "Hallow", "Mass Cure Wounds", "Raise Dead", "Scrying"
-        ]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-        
-        # 6th Level Spells
-        sixth_list = [
-            "Heal", "Heroes' Feast", "Planar Ally", "True Seeing", "Word of Recall"
-        ]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = [
-            "Etherealness",
-            "Regenerate",
-            "Resurrection",
-            "Symbol",
-            "Teleport"
-        ]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = [
-            "Antimagic Field", "Control Weather", "Earthquake", "Holy Aura", "Telepathy"
-        ]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = [
+        ninth_list += [
             "Foresight",
             "Mass Heal",
             "Power Word Heal",
             "True Resurrection",
             "Wish"
         ]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
-
 
 
 
@@ -10974,352 +11328,199 @@ def Magic(Lvl, race=Race(), background=Background()):
     # Hermit
     if background == "Hermit":
 
-        difficulty = 1  # Full Caster
+        difficulty = Dice(4)  # Full Caster
         max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         # Cantrips
         cantrips_list = [
-            "Druidcraft", "Guidance", "Mending", "Resistance", "Thaumaturgy"
+            "Druidcraft",
+            "Guidance",
+            "Mending",
+            "Resistance",
+            "Thaumaturgy"
         ]
         for c in cantrips_list:
             cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
-        one_day_each_list = ["Cure Wounds", "Lesser Restoration", "Shield of Faith"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
-        two_day_each_list = [
-            "Prayer of Healing", "Remove Poison", "Protection from Poison"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-        three_day_each_list = ["Purify Food and Drink", "Detect Poison and Disease", "Resistance"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = [
+        one_day_each_list += [
             "Cure Wounds",
-            "Detect Poison and Disease", "Goodberry", "Purify Food and Drink", "Speak with Animals"
+            "Lesser Restoration",
+            "Shield of Faith"]
+        two_day_each_list += [
+            "Prayer of Healing",
+            "Remove Poison",
+            "Protection from Poison"]
+        three_day_each_list += [
+            "Purify Food and Drink",
+            "Detect Poison and Disease",
+            "Resistance"]
+        first_list += [
+            "Cure Wounds",
+            "Detect Poison and Disease",
+            "Goodberry",
+            "Purify Food and Drink",
+            "Speak with Animals"
         ]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)  
-
-        # 2nd Level Spells
-        second_list = [
+        second_list += [
             "Animal Messenger",
             "Find Traps",
             "Lesser Restoration",
             "Protection from Poison",
             "Silence"
         ]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-        
-        # 3rd Level Spells
-        third_list = [
+        third_list += [
             "Create Food and Water",
             "Meld into Stone",
             "Protection from Energy",
             "Remove Curse",
             "Water Walk"
         ]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = [
-            "Divination", "Freedom of Movement", "Locate Creature", "Stone Shape", "Wild Shape (for flavor)"
+        fourth_list += [
+            "Divination",
+            "Freedom of Movement",
+            "Locate Creature",
+            "Stone Shape",
+            "Wild Shape"
         ]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = [
-            "Commune", "Geas", "Greater Restoration", "Legend Lore", "Scrying"
+        fifth_list += [
+            "Commune",
+            "Geas",
+            "Greater Restoration",
+            "Legend Lore",
+            "Scrying"
         ]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-        
-        # 6th Level Spells
-        sixth_list = [
-            "Find the Path", "Heal", "Heroes' Feast", "True Seeing", "Wind Walk"
+        sixth_list += [
+            "Find the Path",
+            "Heal",
+            "Heroes' Feast",
+            "True Seeing",
+            "Wind Walk"
         ]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = [
+        seventh_list += [
             "Etherealness", "Regenerate", "Resurrection", "Symbol", "Teleport"
         ]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = [
+        eighth_list += [
             "Antimagic Field",
             "Control Weather",
             "Earthquake", "Holy Aura", "Telepathy"
         ]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = [
+        ninth_list += [
             "Foresight", "Gate", "Mass Heal", "True Resurrection", "Wish"
         ]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
 
     # Hero
     if background == "Hero":
 
-        difficulty = 1  # Full Caster
+        difficulty = Dice(10)  
         max_spell_level = get_max_spell_level(Lvl, difficulty)
 
-        # Cantrips
-        cantrips_list = [
+        cantrips_list += [
             "Guidance",
             "Light",
             "Resistance",
             "Spare the Dying",
             "Thaumaturgy"
         ]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
 
-        one_day_each_list = [
+        one_day_each_list += [
             "Bless", "Cure Wounds", "Shield of Faith"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
-        two_day_each_list = ["Aid", "Lesser Restoration", "Protection from Energy"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-        three_day_each_list = ["Beacon of Hope", "Crusader's Mantle", "Remove Curse"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = [
+        two_day_each_list += ["Aid", "Lesser Restoration", "Protection from Energy"]
+        three_day_each_list += ["Beacon of Hope", "Crusader's Mantle", "Remove Curse"]
+        first_list += [
             "Bless", "Command", "Cure Wounds", "Heroism", "Shield of Faith"
         ]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)  
-
-        # 2nd Level Spells
-        second_list = [
+        second_list += [
             "Aid", "Branding Smite", "Find Steed", "Lesser Restoration", "Protection from Poison"
         ]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-        
-        # 3rd Level Spells
-        third_list = [
+        third_list += [
             "Beacon of Hope", "Crusader's Mantle", "Daylight", "Remove Curse", "Revivify"
         ]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = [
-            "Aura of Purity", "Aura of Life", "Death Ward", "Freedom of Movement", "Stoneskin"
-        ]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = [
+        fourth_list += [            "Aura of Purity", "Aura of Life", "Death Ward", "Freedom of Movement", "Stoneskin"]
+        fifth_list += [
             "Circle of Power", "Greater Restoration", "Mass Cure Wounds", "Raise Dead", "Flame Strike"
         ]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-        
-        # 6th Level Spells
-        sixth_list = [
-            "Find the Path", "Heal", "Heroes' Feast", "True Seeing", "Word of Recall"
+        sixth_list += [
+            "Find the Path",
+            "Heal",
+            "Heroes' Feast",
+            "True Seeing",
+            "Word of Recall"
         ]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = [
+        seventh_list += [
             "Regenerate", "Resurrection", "Symbol", "Teleport", "Conjure Celestial"
         ]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
 
-        # 8th Level Spells
-        eighth_list = [
-            "Antimagic Field", "Holy Aura", "Control Weather", "Earthquake", "Sunburst"
+        eighth_list += [
+            "Antimagic Field",
+            "Holy Aura", "Control Weather", "Earthquake", "Sunburst"
         ]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
 
-        # 9th Level Spells
-        ninth_list = [
-            "Foresight", "Gate", "Mass Heal", "True Resurrection", "Storm of Vengeance"
+        ninth_list += [
+            "Foresight",
+            "Gate", "Mass Heal", "True Resurrection", "Storm of Vengeance"
         ]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
 
     # Hunter
     if background == "Hunter":
 
-        difficulty = 2  # Half Caster
+        difficulty = Dice(6)  
         max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         # Cantrips
-        cantrips_list = [
-            "Druidcraft", "Guidance", "Resistance", "Thorn Whip", "Produce Flame"
+        cantrips_list += ["Druidcraft", "Guidance", "Resistance", "Thorn Whip", "Produce Flame"]            
+        one_day_each_list += ["Detect Poison and Disease", "Entangle", "Snare"]
+        two_day_each_list += ["Calm Animals", "Darkvision", "Pass without Trace"]
+        three_day_each_list += ["Beast Sense", "Locate Animals or Plants", "Speak with Animals"]
+        first_list += ["Alarm", "Entangle", "Fog Cloud", "Goodberry", "Hunter's Mark"]
+        second_list += ["Barkskin", "Beast Sense", "Darkvision", "Find Traps", "Pass Without Trace"]
+        third_list += ["Conjure Animals","Daylight", "Nondetection", "Speak with Plants", "Water Walk"]
+        fourth_list += ["Freedom of Movement", "Locate Creature", "Stoneskin", "Control Water", "Divination"]
+        fifth_list += ["Commune with Nature", "Conjure Elemental", "Scrying", "Tree Stride", "Awaken"]
+        sixth_list += ["Find the Path", "Move Earth", "Sunbeam", "Transport via Plants", "Wind Walk"]
+        seventh_list += ["Fire Storm", "Mirage Arcane", "Plane Shift", "Regenerate", "Reverse Gravity"]
+        eighth_list += ["Animal Shapes", "Antimagic Field", "Control Weather", "Earthquake", "Sunburst"]
+        ninth_list += [
+            "Foresight",
+            "Shapechange",
+            "Storm of Vengeance",
+            "True Resurrection",
+            "Tsunami"
         ]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
-            
-        one_day_each_list = ["Detect Poison and Disease", "Entangle", "Snare"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
-        two_day_each_list = ["Calm Animals", "Darkvision", "Pass without Trace"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-        three_day_each_list = ["Beast Sense", "Locate Animals or Plants", "Speak with Animals"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = [
-            "Alarm", "Entangle", "Fog Cloud", "Goodberry", "Hunter's Mark"
-        ]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)  
-
-        # 2nd Level Spells
-        second_list = [
-            "Barkskin", "Beast Sense", "Darkvision", "Find Traps", "Pass Without Trace"
-        ]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-        
-        # 3rd Level Spells
-        third_list = [
-            "Conjure Animals",
-            "Daylight", "Nondetection", "Speak with Plants", "Water Walk"
-        ]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = [
-            "Freedom of Movement", "Locate Creature", "Stoneskin", "Control Water", "Divination"
-        ]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = [
-            "Commune with Nature", "Conjure Elemental", "Scrying", "Tree Stride", "Awaken"
-        ]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-        
-        # 6th Level Spells
-        sixth_list = [
-            "Find the Path", "Move Earth", "Sunbeam", "Transport via Plants", "Wind Walk"
-        ]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = [
-            "Fire Storm", "Mirage Arcane", "Plane Shift", "Regenerate", "Reverse Gravity"
-        ]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = [
-            "Animal Shapes", "Antimagic Field", "Control Weather", "Earthquake", "Sunburst"
-        ]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = [
-            "Foresight", "Shapechange", "Storm of Vengeance", "True Resurrection", "Tsunami"
-        ]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
-
-
-
-
-
 
     # Knight
     if background == "Knight":
 
-        difficulty = 3  # Third Caster
+        difficulty = Dice(8)  
         max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         # Cantrips
-        cantrips_list = [
-            "Blade Ward", "Light", "Prestidigitation", "Resistance", "Spare the Dying", "Thaumaturgy"
-        ]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
-        one_day_each_list = ["Command", "Compelled Duel", "Shield of Faith"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
-        two_day_each_list = ["Aid", "Branding Smite", "Protection from Poison"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-        three_day_each_list = ["Crusader’s Mantle", "Magic Weapon", "Warding Bond"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = [
+        cantrips_list += [            "Blade Ward", "Light", "Prestidigitation", "Resistance", "Spare the Dying", "Thaumaturgy"]
+        one_day_each_list += ["Command", "Compelled Duel", "Shield of Faith"]
+        two_day_each_list += ["Aid", "Branding Smite", "Protection from Poison"]
+        three_day_each_list += ["Crusader’s Mantle", "Magic Weapon", "Warding Bond"]
+        first_list += [
             "Bless", "Compelled Duel", "Cure Wounds", "Heroism", "Shield of Faith"
         ]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)  
-
-        # 2nd Level Spells
-        second_list = [
+        second_list += [
             "Aid", "Find Steed", "Lesser Restoration", "Magic Weapon", "Warding Bond"
         ]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-        
-        # 3rd Level Spells
-        third_list = [
+        third_list += [
             "Crusader's Mantle", "Dispel Magic", "Protection from Energy", "Remove Curse", "Revivify"
         ]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = [
+        fourth_list += [
             "Aura of Life",
             "Aura of Purity", "Banishment", "Death Ward", "Stoneskin"
         ]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = [
+        fifth_list += [
             "Circle of Power",
             "Destructive Wave",
             "Dispel Evil and Good",
             "Geas",
             "Raise Dead"
         ]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-        
-        # 6th Level Spells
-        sixth_list = [
+        sixth_list += [
             "Find the Path",
             "Heal", "Heroes' Feast", "True Seeing", "Wind Walk"
         ]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
 
         # 7th Level Spells
         seventh_list = [
@@ -11360,9 +11561,7 @@ def Magic(Lvl, race=Race(), background=Background()):
         ]
         for c in cantrips_list:
             cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
-        one_day_each_list = ["Shield", "Magic Missile", "Identify"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
+        one_day_each_list += ["Shield", "Magic Missile", "Identify"]
         two_day_each_list = ["Misty Step", "Detect Thoughts", "Scorching Ray"]
         for s in two_day_each_list:
             two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
@@ -11372,19 +11571,22 @@ def Magic(Lvl, race=Race(), background=Background()):
 
         # 1st Level Spells
         first_list = [
-            "Detect Magic", "Mage Armor", "Magic Missile", "Shield", "Thunderwave",
+            "Detect Magic",
+            "Mage Armor",
+            "Magic Missile",
+            "Shield",
+            "Thunderwave",
              "Identify"
         ]
         for s in first_list:
             first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)  
 
         # 2nd Level Spells
-        second_list = [
-            "Arcane Lock", "Invisibility", "Levitate", "Mirror Image", "Scorching Ray",
+        second_list += [
+            "Arcane Lock",
+            "Invisibility", "Levitate", "Mirror Image", "Scorching Ray",
             "Misty Step", "Detect Thoughts", "Scorching Ray", "Arcane Lock", "Invisibility"
         ]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
         
         # 3rd Level Spells
         third_list = [
@@ -11438,152 +11640,27 @@ def Magic(Lvl, race=Race(), background=Background()):
 
     # Monk
     if background == "Monk":
-        difficulty = 2  # One-Half Caster
+        difficulty = Dice(8)  # One-Half Caster
         max_spell_level = get_max_spell_level(Lvl, difficulty)
 
-        # Cantrips
-        cantrips_list = [
-            "Control Flames", "Gust", "Mold Earth", "Shape Water", "True Strike",
-            "Mage Hand",
-            "Guidance", "Resistance", "Spare the Dying", "Thaumaturgy"
+        cantrips_list += ["Control Flames", "Gust", "Mold Earth", "Shape Water", "True Strike","Mage Hand","Guidance", "Resistance", "Spare the Dying", "Thaumaturgy"]
+        one_day_each_list += ["Shield", "Expeditious Retreat", "Longstrider","Blur", "Jump"]
+        two_day_each_list += ["Pass Without Trace", "Enhance Ability","Darkvision"]
+        three_day_each_list += ["Haste", "Protection from Energy", "Water Walk", "Feather Fall", "Jump","See Invisibility", "Shield", "Misty Step", "Nondetection"        ]
 
-            ]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
-
-        one_day_each_list = ["Shield", "Expeditious Retreat"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
-        two_day_each_list = ["Pass Without Trace", "Enhance Ability"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-        three_day_each_list = ["Haste", "Protection from Energy"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day each")
-
-        # Spells with frequency "1/Day each"
-        one_list = [
-            "Expeditious Retreat", "Longstrider", "Shield", "Blur", "Jump"
-        ]
-        for s in one_list:
-            one, _ = add_spell(one, s, 3, 0, max_spell_level, spell_definition="1/Day each")
-
-        # Spells with frequency "2/Day each"
-        two_list = [
-            "Darkvision", "Enhance Ability", "Pass Without Trace"
-        ]
-        for s in two_list:
-            two, _ = add_spell(two, s, 2, 0, max_spell_level, spell_definition="2/Day each")
-
-        # Spells with frequency "3/Day each"
-        three_list = [
-            "Haste", "Protection from Energy", "Water Walk", "Feather Fall", "Jump",
-            "See Invisibility", "Shield", "Misty Step", "Nondetection"
-        ]
-        for s in three_list:
-            three, _ = add_spell(three, s, 1, 0, max_spell_level, spell_definition="3/Day each")
-
-
-        # 1st Level Spells
-        first_list = [
-            "Expeditious Retreat",
-            "Feather Fall",
-            "Jump", "Longstrider", "Shield",
-            "Unseen Servant"
-
-        ]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)  
-
-        # 2nd Level Spells
-        second_list = [
-            "Blur", "Darkvision", "Enhance Ability", "Gust of Wind", "Pass Without Trace",
-            "Spider Climb",  "Darkvision"
-
-        ]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-        
-        # 3rd Level Spells
-        third_list = [
-            "Haste",
-            "Protection from Energy",
-            "Slow",
-            "Water Walk",
-            "Wind Walk"
-            ]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = [
-            "Freedom of Movement",
-            "Stoneskin",
-            "Giant Insect",
-            "Control Water",
-            "Control Winds",
-            "Death Ward",
-            "Dimension Door"
-
-        ]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = [
-            "Far Step",
-            "Transmute Rock",
-            "Control Winds",
-            "Steel Wind Strike",
-            "Greater Restoration",
-            "Telekinesis",
-            "Hold Monster",
-            "Wall of Force"
-
-        ]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-        
-                    
-        # 6th Level Spells
-        sixth_list = [
-            "Heal", "Wind Walk", "Word of Recall", "Tenser's Transformation", "Primordial Ward"
-        ]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = [
-            "Etherealness", "Plane Shift", "Regenerate", "Teleport", "Resurrection"
-        ]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = [
-            "Antimagic Field", "Holy Aura", "Mind Blank", "Earthquake", "Incendiary Cloud"
-        ]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = [
-            "Foresight", "Imprisonment", "Mass Heal", "Power Word Heal", "True Resurrection"
-        ]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
-
-
-
-
-
-
-
-
+        first_list += [            "Expeditious Retreat",            "Feather Fall",            "Jump", "Longstrider", "Shield",            "Unseen Servant"        ]
+        second_list += [            "Blur", "Darkvision", "Enhance Ability", "Gust of Wind", "Pass Without Trace",            "Spider Climb",  "Darkvision"]
+        third_list += [            "Haste",            "Protection from Energy",            "Slow",            "Water Walk",            "Wind Walk"            ]
+        fourth_list += [            "Freedom of Movement",            "Stoneskin",            "Giant Insect",            "Control Water",            "Control Winds",            "Death Ward",            "Dimension Door"        ]
+        fifth_list += [            "Far Step",           "Transmute Rock",            "Control Winds",            "Steel Wind Strike",            "Greater Restoration",            "Telekinesis",            "Hold Monster",            "Wall of Force"        ]
+        sixth_list += [            "Heal", "Wind Walk", "Word of Recall", "Tenser's Transformation", "Primordial Ward"]
+        seventh_list += ["Etherealness", "Plane Shift", "Regenerate", "Teleport", "Resurrection"]
+        eighth_list += ["Antimagic Field", "Holy Aura", "Mind Blank", "Earthquake", "Incendiary Cloud"]
+        ninth_list += ["Foresight", "Imprisonment", "Mass Heal", "Power Word Heal", "True Resurrection"]
 
     # Noble
     if background == "Noble":
-        difficulty = Dice(6)  # One-Third Caster
+        difficulty = Dice(12)  
         max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         cantrips_list = [
@@ -11616,36 +11693,25 @@ def Magic(Lvl, race=Race(), background=Background()):
             third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
 
         # 4th Level Spells
-        fourth_list = ["Leomund's Secret Chest", "Mordenkainen's Private Sanctum", "Arcane Eye", "Greater Invisibility", "Charm Monster"]
+        fourth_list = [
+            "Leomund's Secret Chest", "Mordenkainen's Private Sanctum", "Arcane Eye", "Greater Invisibility", "Charm Monster"]
         for s in fourth_list:
             fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
 
         # 5th Level Spells
-        fifth_list = [
-            "Geas",
-            "Legend Lore", "Modify Memory", "Scrying", "Teleportation Circle"]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-
-        # 6th Level Spells
-        sixth_list = [
+        fifth_list += [            "Geas","Legend Lore", "Modify Memory", "Scrying", "Teleportation Circle"]
+        sixth_list += [
             "Mass Suggestion",
             "True Seeing",
             "Guards and Wards",
             "Contingency",
             "Find the Path"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = [
+        seventh_list += [
             "Teleport",
             "Mordenkainen's Magnificent Mansion",
             "Symbol",
             "Mirage Arcane",
             "Regenerate"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
 
         # 8th Level Spells
         eighth_list = [
@@ -11669,18 +11735,21 @@ def Magic(Lvl, race=Race(), background=Background()):
 
     # Priest
     if background == "Priest":
-        difficulty = 2  # Half-Caster
+        difficulty = Dice(6)  # Half-Caster
         max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         # Cantrips
-        cantrips_list = ["Guidance", "Light", "Mending", "Sacred Flame", "Thaumaturgy", "Resistance" ]
+        cantrips_list = [
+            "Guidance",
+            "Light",
+            "Mending",
+            "Sacred Flame",
+            "Thaumaturgy",
+            "Resistance" ]
         for c in cantrips_list:
             cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
         
-        # 1/Day each
-        one_day_each_list = ["Cure Wounds", "Sanctuary"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
+        one_day_each_list += ["Cure Wounds", "Sanctuary"]
         
         # 2/Day each
         two_day_each_list = ["Lesser Restoration", "Prayer of Healing"]
@@ -11712,13 +11781,8 @@ def Magic(Lvl, race=Race(), background=Background()):
         for s in second_list:
             second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
 
-        # 3rd Level Spells
-        third_list = ["Dispel Magic", "Remove Curse", "Mass Healing Word",
-                      "Spirit Guardians", "Protection from Energy", "Tongues"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
+        third_list += ["Dispel Magic", "Remove Curse", "Mass Healing Word","Spirit Guardians", "Protection from Energy", "Tongues"]
 
-        # 4th Level Spells
         fourth_list = ["Death Ward", "Guardian of Faith", "Divination", "Banishment", "Freedom of Movement"]
         for s in fourth_list:
             fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
@@ -11729,9 +11793,7 @@ def Magic(Lvl, race=Race(), background=Background()):
             fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
 
         # 6th Level Spells
-        sixth_list = ["Heal", "Planar Ally", "Harm", "True Seeing", "Create Undead"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
+        sixth_list += [            "Heal", "Planar Ally", "Harm", "True Seeing", "Create Undead"]
 
         # 7th Level Spells
         seventh_list = ["Resurrection", "Regenerate", "Symbol", "Conjure Celestial", "Etherealness"]
@@ -11744,14 +11806,15 @@ def Magic(Lvl, race=Race(), background=Background()):
             eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
 
         # 9th Level Spells
-        ninth_list = ["Mass Heal", "True Resurrection", "Gate", "Astral Projection", "Power Word Heal"]
+        ninth_list = [
+            "Mass Heal", "True Resurrection", "Gate", "Astral Projection", "Power Word Heal"]
         for s in ninth_list:
             ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
 
 
     # Pirate
     if background == "Pirate":
-        difficulty = 4  # One-Fourth Caster
+        difficulty = Dice(4)+Dice(4)
         max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         # Cantrips
@@ -11759,10 +11822,7 @@ def Magic(Lvl, race=Race(), background=Background()):
         for c in cantrips_list:
             cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
 
-        # 1/Day each
-        one_day_each_list = ["Fog Cloud", "Grease"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
+        one_day_each_list += ["Fog Cloud", "Grease"]
 
         # 2/Day each
         two_day_each_list = ["Misty Step", "Suggestion"]
@@ -11785,22 +11845,32 @@ def Magic(Lvl, race=Race(), background=Background()):
             second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
 
         # 3rd Level Spells
-        third_list = ["Gaseous Form", "Water Walk", "Tidal Wave", "Major Image", "Water Breathing"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
+        third_list += ["Gaseous Form",
+                      "Water Walk",
+                      "Tidal Wave",
+                      "Major Image",
+                      "Water Breathing"]
 
         # 4th Level Spells
-        fourth_list = ["Control Water", "Watery Sphere", "Dimension Door", "Storm Sphere", "Greater Invisibility"]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
+        fourth_list += ["Control Water",
+                       "Watery Sphere",
+                       "Dimension Door",
+                       "Storm Sphere",
+                       "Greater Invisibility"]
 
         # 5th Level Spells
-        fifth_list = ["Control Winds", "Mislead", "Maelstrom", "Teleportation Circle", "Rary's Telepathic Bond"]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
+        fifth_list += ["Control Winds",
+                      "Mislead",
+                      "Maelstrom",
+                      "Teleportation Circle",
+                      "Rary's Telepathic Bond"]
 
         # 6th Level Spells
-        sixth_list = ["Investiture of Wind", "Chain Lightning", "True Seeing", "Wind Walk", "Find the Path"]
+        sixth_list = ["Investiture of Wind",
+                      "Chain Lightning",
+                      "True Seeing",
+                      "Wind Walk",
+                      "Find the Path"]
         for s in sixth_list:
             sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
 
@@ -11821,18 +11891,13 @@ def Magic(Lvl, race=Race(), background=Background()):
 
     # Ranger
     if background == "Ranger":
-        difficulty = 2  # One-Half Caster
+        difficulty = Dice(4)  
         max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         # Cantrips
         cantrips_list = ["Druidcraft", "Guidance", "Resistance", "Thorn Whip"]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
 
-        # 1/Day each
-        one_day_each_list = ["Longstrider", "Speak with Animals"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
+        one_day_each_list += ["Longstrider", "Speak with Animals"]
 
         # 2/Day each
         two_day_each_list = ["Pass without Trace", "Spike Growth"]
@@ -11857,64 +11922,28 @@ def Magic(Lvl, race=Race(), background=Background()):
             second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
 
         # 3rd Level Spells
-        third_list = ["Water Walk", "Water Breathing", "Protection from Energy", "Speak with Plants", "Conjure Animals"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
+        third_list += ["Water Walk", "Water Breathing", "Protection from Energy", "Speak with Plants", "Conjure Animals"]
+        fourth_list += ["Freedom of Movement", "Stoneskin", "Locate Creature", "Grasping Vine", "Conjure Woodland Beings"]
+        fifth_list += ["Commune with Nature", "Swift Quiver", "Tree Stride", "Greater Restoration", "Conjure Volley"]
+        sixth_list += ["Heal", "Sunburst", "Heroes' Feast", "Find the Path", "Transport via Plants"]
+        seventh_list += ["Mirage Arcane", "Regenerate", "Fire Storm", "Reverse Gravity", "Plane Shift"]
+        eighth_list += ["Tsunami", "Earthquake", "Sunburst", "Control Weather", "Animal Shapes"]
+        ninth_list += ["Storm of Vengeance","Shapechange",                      "Foresight",                      "True Resurrection",                      "Mass Heal"]
 
-        # 4th Level Spells
-        fourth_list = ["Freedom of Movement", "Stoneskin", "Locate Creature", "Grasping Vine", "Conjure Woodland Beings"]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = ["Commune with Nature", "Swift Quiver", "Tree Stride", "Greater Restoration", "Conjure Volley"]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-
-        # 6th Level Spells
-        sixth_list = ["Heal", "Sunburst", "Heroes' Feast", "Find the Path", "Transport via Plants"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = ["Mirage Arcane", "Regenerate", "Fire Storm", "Reverse Gravity", "Plane Shift"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = ["Tsunami", "Earthquake", "Sunburst", "Control Weather", "Animal Shapes"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = ["Storm of Vengeance", "Shapechange", "Foresight", "True Resurrection", "Mass Heal"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
-
-
-
-
-
-
-
-
-
-    
     # Scholar
     if background == "Scholar":
-        difficulty = 1  # Full Caster
+        difficulty = Dice(3)
         max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         # Cantrips
-        cantrips_list = [
-            "Prestidigitation", "Mage Hand", "Mending", "Message"]
+        cantrips_list = ["Prestidigitation",
+                         "Mage Hand",
+                         "Mending",
+                         "Message"]
         for c in cantrips_list:
             cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
 
-        # 1/Day each
-        one_day_each_list = ["Identify", "Comprehend Languages"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
+        one_day_each_list += ["Identify", "Comprehend Languages"]
 
         # 2/Day each
         two_day_each_list = ["Detect Thoughts", "Locate Object"]
@@ -11947,7 +11976,8 @@ def Magic(Lvl, race=Race(), background=Background()):
             fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
 
         # 5th Level Spells
-        fifth_list = ["Legend Lore", "Contact Other Plane", "Scrying", "Teleportation Circle", "Rary's Telepathic Bond"]
+        fifth_list = [
+            "Legend Lore", "Contact Other Plane", "Scrying", "Teleportation Circle", "Rary's Telepathic Bond"]
         for s in fifth_list:
             fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
 
@@ -11979,7 +12009,7 @@ def Magic(Lvl, race=Race(), background=Background()):
 
     # Shaman
     if background == "Shaman":
-        difficulty = 1  # Full Caster
+        difficulty = Dice(3)  # Full Caster
         max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         # Cantrips
@@ -11988,10 +12018,7 @@ def Magic(Lvl, race=Race(), background=Background()):
         for c in cantrips_list:
             cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
 
-        # 1/Day each
-        one_day_each_list = ["Cure Wounds", "Detect Poison and Disease"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day")
+        one_day_each_list += ["Cure Wounds", "Detect Poison and Disease"]
 
         # 2/Day each
         two_day_each_list = ["Lesser Restoration", "Pass Without Trace"]
@@ -12011,7 +12038,8 @@ def Magic(Lvl, race=Race(), background=Background()):
             first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
 
         # 2nd Level Spells
-        second_list = ["Lesser Restoration", "Pass Without Trace", "Flame Blade",
+        second_list = [
+            "Lesser Restoration", "Pass Without Trace", "Flame Blade",
                        "Animal Messenger", "Heat Metal", "Spike Growth"]
         for s in second_list:
             second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
@@ -12029,7 +12057,11 @@ def Magic(Lvl, race=Race(), background=Background()):
             fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
 
         # 5th Level Spells
-        fifth_list = ["Commune", "Greater Restoration", "Awaken", "Mass Cure Wounds", "Reincarnate"]
+        fifth_list = ["Commune",
+                      "Greater Restoration",
+                      "Awaken",
+                      "Mass Cure Wounds",
+                      "Reincarnate"]
         for s in fifth_list:
             fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
 
@@ -12043,42 +12075,25 @@ def Magic(Lvl, race=Race(), background=Background()):
         for s in seventh_list:
             seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
 
-        # 8th Level Spells
-        eighth_list = ["Earthquake", "Control Weather", "Sunburst", "Antipathy/Sympathy", "Animal Shapes"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = ["True Resurrection", "Storm of Vengeance", "Shapechange", "Foresight", "Astral Projection"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+        eighth_list += ["Earthquake", "Control Weather", "Sunburst", "Antipathy/Sympathy", "Animal Shapes"]
+        ninth_list += ["True Resurrection", "Storm of Vengeance", "Shapechange", "Foresight", "Astral Projection"]
             
     # Soldier
     if background == "Soldier":
-        difficulty = 4  # One-Fourth Caster
+        difficulty = Dice(8)  # One-Fourth Caster
         max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         # Cantrips
-        cantrips_list = ["Blade Ward", "True Strike", "Resistance", "Guidance"]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
+        cantrips_list += ["Blade Ward", "True Strike", "Resistance", "Guidance"]
 
-        # 1/Day each
-        one_day_each_list = ["Shield", "Heroism"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day")
+        one_day_each_list += ["Shield", "Heroism"]
 
         # 2/Day each
-        two_day_each_list = [
-            "Magic Weapon",
-            "Aid"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day")
+        two_day_each_list += ["Magic Weapon",
+                             "Aid"]
 
         # 3/Day each
-        three_day_each_list = ["Protection from Energy", "Haste"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day")
+        three_day_each_list += ["Protection from Energy", "Haste"]
 
         # 1st Level Spells
         first_list = ["Shield", "Heroism", "Cure Wounds", "Expeditious Retreat", "Protection from Evil and Good"]
@@ -12090,10 +12105,7 @@ def Magic(Lvl, race=Race(), background=Background()):
         for s in second_list:
             second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
 
-        # 3rd Level Spells
-        third_list = ["Protection from Energy", "Haste", "Dispel Magic", "Revivify", "Crusader's Mantle"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
+        third_list += ["Protection from Energy", "Haste", "Dispel Magic", "Revivify", "Crusader's Mantle"]
 
         # 4th Level Spells
         fourth_list = ["Death Ward", "Freedom of Movement", "Stoneskin", "Aura of Life", "Aura of Purity"]
@@ -12139,7 +12151,7 @@ def Magic(Lvl, race=Race(), background=Background()):
 
     # Spy
     if background == "Spy":
-        difficulty = Dice(8)  # Quarter-Caster
+        difficulty = Dice(12)  # Quarter-Caster
         max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         # Cantrips
@@ -12148,10 +12160,7 @@ def Magic(Lvl, race=Race(), background=Background()):
         for c in cantrips_list:
             cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
 
-        # 1/Day each
-        one_day_each_list = ["Disguise Self", "Charm Person"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day")
+        one_day_each_list += ["Disguise Self", "Charm Person"]
 
         # 2/Day each
         two_day_each_list = ["Invisibility", "Suggestion"]
@@ -12170,48 +12179,18 @@ def Magic(Lvl, race=Race(), background=Background()):
             first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
 
         # 2nd Level Spells
-        second_list = ["Invisibility", "Suggestion", "Detect Thoughts", "Locate Object", "Alter Self"]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-
-        # 3rd Level Spells
-        third_list = ["Clairvoyance", "Sending", "Nondetection", "Dispel Magic", "Tongues"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = ["Arcane Eye", "Greater Invisibility", "Locate Creature", "Charm Monster", "Divination"]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = ["Scrying", "Modify Memory", "Teleportation Circle", "Legend Lore", "Geas"]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-
-        # 6th Level Spells
-        sixth_list = ["True Seeing", "Find the Path", "Programmed Illusion", "Mass Suggestion", "Contingency"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = ["Mirage Arcane", "Teleport", "Sequester", "Regenerate", "Symbol"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = ["Mind Blank", "Dominate Monster", "Telepathy", "Power Word Stun", "Antipathy/Sympathy"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = ["Foresight", "True Polymorph", "Power Word Kill", "Imprisonment", "Time Stop"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+        second_list += ["Invisibility", "Suggestion", "Detect Thoughts", "Locate Object", "Alter Self"]
+        third_list += ["Clairvoyance", "Sending", "Nondetection", "Dispel Magic", "Tongues"]
+        fourth_list += ["Arcane Eye", "Greater Invisibility", "Locate Creature", "Charm Monster", "Divination"]
+        fifth_list += ["Scrying", "Modify Memory", "Teleportation Circle", "Legend Lore", "Geas"]
+        sixth_list += ["True Seeing", "Find the Path", "Programmed Illusion", "Mass Suggestion", "Contingency"]
+        seventh_list += ["Mirage Arcane", "Teleport", "Sequester", "Regenerate", "Symbol"]
+        eighth_list += ["Mind Blank", "Dominate Monster", "Telepathy", "Power Word Stun", "Antipathy/Sympathy"]
+        ninth_list += ["Foresight", "True Polymorph", "Power Word Kill", "Imprisonment", "Time Stop"]
 
     # Traveler
     if background == "Traveler":
-        difficulty = 4  # Quarter-Caster
+        difficulty = Dice(8)  # Quarter-Caster
         max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         # Cantrips
@@ -12219,20 +12198,14 @@ def Magic(Lvl, race=Race(), background=Background()):
         for c in cantrips_list:
             cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
 
-        # 1/Day each
-        one_day_each_list = ["Longstrider", "Goodberry"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day")
+        one_day_each_list += ["Longstrider", "Goodberry"]
 
         # 2/Day each
         two_day_each_list = ["Pass without Trace", "Lesser Restoration"]
         for s in two_day_each_list:
             two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day")
 
-        # 3/Day each
-        three_day_each_list = ["Create Food and Water", "Protection from Energy"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day")
+        three_day_each_list += ["Create Food and Water", "Protection from Energy"]
 
         # 1st Level Spells
         first_list = ["Longstrider", "Goodberry", "Cure Wounds", "Alarm", "Detect Poison and Disease"]
@@ -12245,11 +12218,8 @@ def Magic(Lvl, race=Race(), background=Background()):
         for s in second_list:
             second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
 
-        # 3rd Level Spells
-        third_list = [
+        third_list += [
             "Create Food and Water", "Protection from Energy", "Speak with Plants", "Water Walk", "Beacon of Hope"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
 
         # 4th Level Spells
         fourth_list = ["Freedom of Movement", "Locate Creature", "Stone Shape", "Control Water", "Death Ward"]
@@ -12267,13 +12237,16 @@ def Magic(Lvl, race=Race(), background=Background()):
             sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
 
         # 7th Level Spells
-        seventh_list = ["Regenerate", "Teleport", "Mirage Arcane", "Resurrection", "Transport via Plants"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
+        seventh_list += ["Regenerate",
+                        "Teleport",
+                        "Mirage Arcane",
+                        "Resurrection",
+                        "Transport via Plants"]
 
         # 8th Level Spells
         eighth_list = [
-            "Control Weather", "Earthquake", "Antipathy/Sympathy", "Telepathy", "Holy Aura"]
+            "Control Weather",
+            "Earthquake", "Antipathy/Sympathy", "Telepathy", "Holy Aura"]
         for s in eighth_list:
             eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
 
@@ -12285,7 +12258,7 @@ def Magic(Lvl, race=Race(), background=Background()):
 
     # Urchin
     if background == "Urchin":
-        difficulty = 5  # One-Fifth Caster
+        difficulty = Dice(10)  
         max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         # Cantrips
@@ -12294,10 +12267,7 @@ def Magic(Lvl, race=Race(), background=Background()):
         for c in cantrips_list:
             cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
 
-        # 1/Day each
-        one_day_each_list = ["Disguise Self", "Unseen Servant"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day")
+        one_day_each_list += ["Disguise Self", "Unseen Servant"]
 
         # 2/Day each
         two_day_each_list = ["Invisibility", "Pass without Trace"]
@@ -12357,28 +12327,20 @@ def Magic(Lvl, race=Race(), background=Background()):
 
     # Warrior
     if background == "Warrior":
-        difficulty = 3  # One-Third Caster
+        difficulty = Dice(8)  
         max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         # Cantrips
-        cantrips_list = ["Blade Ward", "True Strike", "Light", "Resistance"]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
+        cantrips_list += ["Blade Ward", "True Strike", "Light", "Resistance"]
 
-        # 1/Day each
-        one_day_each_list = ["Shield", "Heroism"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day")
+        one_day_each_list += ["Shield", "Heroism"]
 
         # 2/Day each
         two_day_each_list = ["Magic Weapon", "Aid"]
         for s in two_day_each_list:
             two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day")
 
-        # 3/Day each
-        three_day_each_list = ["Protection from Energy", "Haste"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day")
+        three_day_each_list += ["Protection from Energy", "Haste"]
 
         # 1st Level Spells
         first_list = ["Shield", "Heroism", "Magic Missile", "Cure Wounds", "Thunderwave"]
@@ -12390,41 +12352,13 @@ def Magic(Lvl, race=Race(), background=Background()):
         for s in second_list:
             second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
 
-        # 3rd Level Spells
-        third_list = ["Protection from Energy", "Haste", "Crusader's Mantle", "Dispel Magic", "Wind Wall"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = [
-            "Freedom of Movement", "Stoneskin", "Greater Invisibility", "Death Ward", "Banishment"]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = ["Circle of Power", "Destructive Wave", "Flame Strike", "Geas", "Raise Dead"]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-
-        # 6th Level Spells
-        sixth_list = ["Heal", "Heroes' Feast", "True Seeing", "Find the Path", "Move Earth"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = ["Resurrection", "Teleport", "Forcecage", "Regenerate", "Symbol"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = ["Antipathy/Sympathy", "Earthquake", "Holy Aura", "Dominate Monster", "Power Word Stun"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = ["Mass Heal", "Power Word Heal", "True Resurrection", "Time Stop", "Foresight"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+        third_list += ["Protection from Energy", "Haste", "Crusader's Mantle", "Dispel Magic", "Wind Wall"]
+        fourth_list += [            "Freedom of Movement", "Stoneskin", "Greater Invisibility", "Death Ward", "Banishment"]
+        fifth_list += ["Circle of Power", "Destructive Wave", "Flame Strike", "Geas", "Raise Dead"]
+        sixth_list += ["Heal", "Heroes' Feast", "True Seeing", "Find the Path", "Move Earth"]
+        seventh_list += ["Resurrection", "Teleport", "Forcecage", "Regenerate", "Symbol"]
+        eighth_list += ["Antipathy/Sympathy", "Earthquake", "Holy Aura", "Dominate Monster", "Power Word Stun"]
+        ninth_list += ["Mass Heal", "Power Word Heal", "True Resurrection", "Time Stop", "Foresight"]
 
 
 
@@ -12436,180 +12370,54 @@ def Magic(Lvl, race=Race(), background=Background()):
 
     # Warlock
     if background == "Warlock":
-        difficulty = 1  # Full Caster
+        difficulty = Dice(2)  
         max_spell_level = get_max_spell_level(Lvl, difficulty)
-
-        # Cantrips
-        cantrips_list = [
+        cantrips_list += [
             "Eldritch Blast", "Mage Hand", "Minor Illusion", "Prestidigitation",
                          "Thaumaturgy", "Poison Spray"]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
-
-        # 1/Day each
-        one_day_each_list = ["Armor of Agathys", "Hellish Rebuke"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day")
-
-        # 2/Day each
-        two_day_each_list = ["Summon Lesser Demons", "Summon Greater Demon"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day")
-
-        # 3/Day each
-        three_day_each_list = ["Infernal Calling", "Contact Other Plane"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day")
-
-        # 1st Level Spells
-        first_list = ["Armor of Agathys", "Hellish Rebuke", "Hex", "Charm Person",
+        one_day_each_list += ["Armor of Agathys", "Hellish Rebuke"]
+        two_day_each_list += ["Summon Lesser Demons", "Summon Greater Demon"]
+        three_day_each_list += ["Infernal Calling", "Contact Other Plane"]
+        first_list += ["Armor of Agathys", "Hellish Rebuke", "Hex", "Charm Person",
                       "Comprehend Languages", "Sanctuary", "Detect Magic", "Bane",
                       "Shield", "Magic Missile"]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
-
-        # 2nd Level Spells
-        second_list = [
-            "Summon Lesser Demons",
-            "Darkness",
-            "Silence",
-            "Mirror Image",
-            "Misty Step",
-            "Suggestion",
-            "Flaming Sphere",
-            "Hold Person",
-            "Blur"]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-
-        # 3rd Level Spells
-        third_list = ["Summon Greater Demon", "Counterspell", "Fly",
-                      "Hypnotic Pattern", "Magic Circle", "Dispel Magic",
-                      "Clairvoyance", "Fireball"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = [
-            "Infernal Calling", "Banishment", "Dimension Door",
-                       "Hallucinatory Terrain", "Shadow of Moil", "Freedom Of Movement",
-                       "Divination"]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = ["Contact Other Plane", "Dream", "Enervation", "Hold Monster", "Scrying"]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-
-        # 6th Level Spells
-        sixth_list = ["Arcane Gate", "Circle of Death", "Conjure Fey", "Eyebite", "Flesh to Stone"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = ["Crown of Stars", "Etherealness", "Finger of Death", "Forcecage", "Plane Shift"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = ["Demiplane", "Dominate Monster", "Feeblemind", "Glibness", "Power Word Stun"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = ["Astral Projection", "Foresight", "Imprisonment", "Power Word Kill", "True Polymorph"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+        second_list += [            "Summon Lesser Demons",
+            "Darkness",            "Silence",
+            "Mirror Image",            "Misty Step",
+            "Suggestion",            "Flaming Sphere",
+            "Hold Person",            "Blur"]
+        third_list += ["Summon Greater Demon", "Counterspell", "Fly","Hypnotic Pattern", "Magic Circle", "Dispel Magic",                      "Clairvoyance", "Fireball"]
+        fourth_list += ["Infernal Calling",  "Banishment",                       "Dimension Door",                       "Hallucinatory Terrain",                       "Shadow of Moil",                       "Freedom Of Movement",                       "Divination"]
+        fifth_list += ["Contact Other Plane", "Dream", "Enervation", "Hold Monster", "Scrying"]
+        sixth_list += ["Arcane Gate", "Circle of Death", "Conjure Fey", "Eyebite", "Flesh to Stone"]
+        seventh_list += ["Crown of Stars", "Etherealness", "Finger of Death", "Forcecage", "Plane Shift"]
+        eighth_list += ["Demiplane", "Dominate Monster", "Feeblemind", "Glibness", "Power Word Stun"]
+        ninth_list += ["Astral Projection", "Foresight", "Imprisonment", "Power Word Kill", "True Polymorph"]
 
     # Witch
     if background == "Witch":
-        difficulty = 1  # Full Caster
+        difficulty = Dice(3)  
         max_spell_level = get_max_spell_level(Lvl, difficulty)
         
-        # Cantrips
-        cantrips_list = ["Eldritch Blast", "Mage Hand", "Minor Illusion", "Thaumaturgy"]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
-
-        # 1/Day each
-        one_day_each_list = ["Hex", "Cure Wounds"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day")
-
-        # 2/Day each
-        two_day_each_list = ["Bane", "Ray of Enfeeblement"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day")
-
-        # 3/Day each
-        three_day_each_list = ["Bestow Curse", "Speak with Dead"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day")
-
-        # 1st Level Spells
-        first_list = ["Bane", "Cure Wounds", "Identify", "Sleep", "Charm Person", "Ray Of Sickness" ]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
-
-        # 2nd Level Spells
-        second_list = ["Ray of Enfeeblement", "Detect Thoughts", 
-                       "Hold Person", "Suggestion", "Locate Object"]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-            
-        # 3rd Level Spells
-        third_list = ["Bestow Curse", "Speak with Dead", "Tongues", "Dispel Magic", "Remove Curse",
-                      "Counterspell", "Lightning Bolt"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = ["Divination", "Locate Creature", "Banishment", "Hallucinatory Terrain",
-                       "Greater Invisibility", "Phantasmall Killer", "Polymorph"]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-            
-        # 5th Level Spells
-        fifth_list = ["Geas", "Legend Lore", "Scrying", "Contact Other Plane", "Dream"]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-
-        # 6th Level Spells
-        sixth_list = ["Find the Path", "True Seeing", "Eyebite", "Mass Suggestion", "Flesh to Stone"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = [
-            "Divine Word", "Etherealness", "Finger of Death", "Plane Shift", "Regenerate"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = [
-            "Demiplane",
-            "Dominate Monster",
-            "Feeblemind",
-            "Glibness",
-            "Power Word Stun"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = [
-            "Astral Projection",
-            "Foresight", "Imprisonment",
-            "Power Word Kill",
-            "True Polymorph"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
-
+        cantrips_list += ["Eldritch Blast", "Mage Hand", "Minor Illusion", "Thaumaturgy"]
+        one_day_each_list += ["Hex", "Cure Wounds"]
+        two_day_each_list += ["Bane", "Ray of Enfeeblement"]
+        three_day_each_list += ["Bestow Curse", "Speak with Dead"]
+        first_list += ["Bane", "Cure Wounds", "Identify", "Sleep", "Charm Person", "Ray Of Sickness" ]
+        second_list += ["Ray of Enfeeblement", "Detect Thoughts",                        "Hold Person", "Suggestion", "Locate Object"]
+        third_list += ["Bestow Curse", "Speak with Dead", "Tongues", "Dispel Magic", "Remove Curse",                      "Counterspell", "Lightning Bolt"]
+        fourth_list += [            "Divination", "Locate Creature", "Banishment", "Hallucinatory Terrain","Greater Invisibility", "Phantasmall Killer", "Polymorph"]
+        fifth_list += [            "Geas", "Legend Lore", "Scrying", "Contact Other Plane", "Dream"]
+        sixth_list += [            "Find the Path", "True Seeing", "Eyebite", "Mass Suggestion", "Flesh to Stone"]
+        seventh_list += [            "Divine Word", "Etherealness", "Finger of Death", "Plane Shift", "Regenerate"]
+        eighth_list += [            "Demiplane",            "Dominate Monster",            "Feeblemind",            "Glibness",            "Power Word Stun"]
+        ninth_list += [            "Astral Projection",            "Foresight", "Imprisonment",            "Power Word Kill",            "True Polymorph"]
 
 ## RACES
 
     # Aberration
     if race == "Aberration" or "Beholder":
+        difficulty += Dice(4) - Dice(6)
         max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         if race == "Beholder":
@@ -12631,322 +12439,170 @@ def Magic(Lvl, race=Race(), background=Background()):
 
 
         # Cantrips
-        cantrips_list = [
-            "Eldritch Blast", "Mage Hand", "Minor Illusion", "Thaumaturgy",
+        cantrips_list += ["Eldritch Blast",
+                         "Mage Hand",
+                         "Minor Illusion",
+                         "Thaumaturgy",
                          "Message"]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
+        
+        one_day_each_list += ["Detect Thoughts",
+                             "Dissonant Whispers"]
+        
+        two_day_each_list += ["Hold Person",
+                             "Levitate",
+                             "Crown of Madness",
+                             "Hold Person"]
 
-        # 1/Day each
-        one_day_each_list = ["Detect Thoughts", "Dissonant Whispers"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day")
+        three_day_each_list += [ "Telekinesis",
+                                "Mind Spike",
+                                "Fear",
+                                "Hypnotic Pattern"]
 
-        # 2/Day each
-        two_day_each_list = [
-            "Hold Person", "Levitate", "Crown of Madness", "Hold Person"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day")
-
-        # 3/Day each
-        three_day_each_list = ["Telekinesis", "Mind Spike", "Fear", "Hypnotic Pattern"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day")
-
-        # 1st Level Spells
-        first_list = ["Detect Magic", "Dissonant Whispers", "Mage Armor",
-                      "Shield", "Tasha's Hideous Laughter",  "Charm Person",
+        first_list += ["Detect Magic",
+                      "Dissonant Whispers",
+                      "Mage Armor",
+                      "Shield",
+                      "Tasha's Hideous Laughter",
+                      "Charm Person",
                       "Illusory Script"]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
 
-        # 2nd Level Spells
-        second_list = ["Hold Person", "Mirror Image", "Misty Step", "Detect Thoughts", "Blur",
-                       "Crown of Madness", "Phantasmal Force"]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
+        second_list += ["Hold Person",
+                       "Mirror Image",
+                       "Misty Step",
+                       "Detect Thoughts",
+                       "Blur",
+                       "Crown of Madness",
+                       "Phantasmal Force"]
 
-        # 3rd Level Spells
-        third_list = ["Counterspell", "Dispel Magic", "Hypnotic Pattern", "Telekinesis", "Tongues",
-                      "Fear", "Major Image", "Sending", "Clairvoyance"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
+        third_list += [            "Counterspell",            "Dispel Magic",            "Hypnotic Pattern",            "Telekinesis",            "Tongues",            "Fear",            "Major Image",            "Sending",            "Clairvoyance"]
+        fourth_list += [            "Banishment",           "Dimension Door",            "Arcane Eye",            "Confusion",            "Greater Invisibility",            "Phantasmal Killer"]
 
-        # 4th Level Spells
-        fourth_list = ["Banishment", "Dimension Door", "Arcane Eye",
-                       "Confusion", "Greater Invisibility",
-                       "Phantasmal Killer"]
+        fifth_list += [            "Contact Other Plane",            "Scrying",            "Teleportation Circle",
+            "Dream",            "Modify Memory",             "Dominate Person",            "Telekinesis",            "Mislead" ]
 
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = ["Contact Other Plane", "Scrying", "Teleportation Circle",
-                      "Dream", "Modify Memory", 
-                      "Dominate Person", "Telekinesis", "Mislead" ]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-
-        # 6th Level Spells
-        sixth_list = ["True Seeing", "Arcane Gate", "Mass Suggestion", "Plane Shift", "Disintegrate",
-                    "Mental Prison", "Eyebite", "Programmed Illusion"
+        sixth_list += [
+            "True Seeing",
+            "Arcane Gate",
+            "Mass Suggestion",
+            "Plane Shift",
+            "Disintegrate",
+            "Mental Prison",
+            "Eyebite",
+            "Programmed Illusion"
                       ]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
+        seventh_list += ["Teleport",
+                        "Etherealness",
+                        "Project Image",
+                        "Symbol",
+                        "Forcecage",
+                        "Mirage Arcane",
+                        "Etherealness",
+                        "Simulacrum"]
+        
+        eighth_list += ["Feeblemind",
+                       "Mind Blank",
+                       "Antipathy/Sympathy",
+                       "Demiplane",
+                       "Maze",
+                       "Telepathy",
+                       "Antimagic Field",
+                       "Power Word Stun"]
 
-        # 7th Level Spells
-        seventh_list = ["Teleport", "Etherealness", "Project Image", "Symbol", "Forcecage",
-                        "Mirage Arcane", "Etherealness", "Simulacrum"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = ["Feeblemind", "Mind Blank", "Antipathy/Sympathy", "Demiplane", "Maze",
-                       "Telepathy", "Antimagic Field", "Power Word Stun"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = ["Astral Projection", "Foresight", "Gate", "Imprisonment", "Psychic Scream",
-                      "Power Word Kill", "Time Stop", "Gate", "True Polymorph"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
-
-
-
-
-
-
-
+        ninth_list += ["Astral Projection",
+                      "Foresight",
+                      "Gate",
+                      "Imprisonment",
+                      "Psychic Scream",
+                      "Power Word Kill",
+                      "Time Stop",
+                      "Gate",
+                      "True Polymorph"]
 
 
         
     # Aven
     if race == "Aven":
+        difficulty += Dice(6) - Dice(3)
+        max_spell_level = get_max_spell_level(Lvl, difficulty)
 
-        cantrip, _ = add_spell(cantrip, "Summon Air Elemental", 3, 0, max_spell_level,
+        recharge, _ = add_spell(recharge, "Summon Air Elemental", 3, 0, max_spell_level,
                                "Five Aven within 30 feet of each other can magically summon an air elemental. Each of the five must use its action and movement on three consecutive turns to perform an aerial dance and must maintain concentration while doing so (as if concentrating on a spell). When all five have finished their third turn of the dance, the elemental appears in an unoccupied space within 60 feet of them. It is friendly toward them and obeys their spoken commands. It remains for 1 hour, until it or all its summoners die, or until any of its summoners dismisses it as a bonus action. A summoner can't perform the dance again until it finishes a short rest. When the elemental returns to the Elemental Plane of Air, any Aven within 5 feet of it can return with it.")
 
-        # Cantrips
-        cantrips_list = ["Guidance", "Gust", "Mage Hand", "Message"]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
-
-        # 1/Day each
-        one_day_each_list = ["Feather Fall", "Jump"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
-
-        # 2/Day each
-        two_day_each_list = ["Levitate", "Fly"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-
-        # 3/Day each
-        three_day_each_list = ["Wind Wall", "Gaseous Form"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = [
+        cantrips_list += ["Guidance", "Gust", "Mage Hand", "Message"]
+        one_day_each_list += [
+            "Feather Fall", "Jump"]
+        two_day_each_list += ["Levitate", "Fly"]
+        three_day_each_list += ["Wind Wall", "Gaseous Form"]
+        first_list += [
             "Feather Fall", "Jump", "Expeditious Retreat", "Longstrider", "Fog Cloud"]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
-
-        # 2nd Level Spells
-        second_list = ["Levitate", "Fly", "Gust of Wind", "Skywrite", "Spider Climb"]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-
-        # 3rd Level Spells
-        third_list = ["Wind Wall", "Gaseous Form", "Daylight", "Protection from Energy", "Feign Death"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = [
+        second_list += [ "Levitate",
+                        "Fly",
+                        "Gust of Wind",
+                        "Skywrite",
+                        "Spider Climb"]
+        third_list += ["Wind Wall", "Gaseous Form", "Daylight", "Protection from Energy", "Feign Death"]
+        fourth_list += [
             "Freedom of Movement", "Control Winds", "Greater Invisibility", "Stone Shape", "Conjure Minor Elementals"]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
+        fifth_list += [            "Control Winds",            "Telekinesis",            "Commune with Nature",            "Conjure Elemental",            "Passwall"            ]
 
-        # 5th Level Spells
-        fifth_list = [
-            "Control Winds",
-            "Telekinesis",
-            "Commune with Nature",
-            "Conjure Elemental",
-            "Passwall"
-            ]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-
-        # 6th Level Spells
-        sixth_list = ["Wind Walk", "True Seeing", "Chain Lightning", "Move Earth", "Sunbeam"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = ["Teleport", "Control Weather", "Reverse Gravity", "Whirlwind", "Regenerate"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = ["Control Weather", "Telepathy", "Antipathy/Sympathy", "Earthquake", "Tsunami"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = ["Meteor Swarm", "Time Stop", "Gate", "Shapechange", "Mass Polymorph"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+        sixth_list += ["Wind Walk", "True Seeing", "Chain Lightning", "Move Earth", "Sunbeam"]
+        seventh_list += ["Teleport", "Control Weather", "Reverse Gravity", "Whirlwind", "Regenerate"]
+        eighth_list += ["Control Weather",
+                       "Telepathy",
+                       "Antipathy/Sympathy",
+                       "Earthquake",
+                       "Tsunami"]
+        ninth_list += ["Meteor Swarm",
+                      "Time Stop",
+                      "Gate",
+                      "Shapechange",
+                      "Mass Polymorph"]
 
     # BEASTS AND BEASTFOLK
     if race == "Beast":
+        difficulty += Dice(8) - Dice(12)
+        max_spell_level = get_max_spell_level(Lvl, difficulty)
         
-        cantrip, _ = add_spell(cantrip, "Cold Breath", 0, 0, max_spell_level,
+        recharge, _ = add_spell(recharge, "Cold Breath", 0, 0, max_spell_level,
                                f"(Recharge 5–6). \n\t The beast exhales a blast of freezing wind in a 15-foot cone. Each creature in that area must make a DC {10+PB(Lvl)} Dexterity saving throw, taking 18 (4d8) cold damage on a failed save, or half as much damage on a successful one.")
 
-        # Cantrips
-        cantrips_list = ["Druidcraft", "Guidance", "Mending", "Resistance"]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
+        cantrips_list += ["Druidcraft", "Guidance", "Mending", "Resistance"]
+        one_day_each_list += ["Animal Friendship", "Speak with Animals"]
+        two_day_each_list += ["Barkskin", "Beast Sense"]
+        three_day_each_list += ["Conjure Animals",
+                                "Water Walk"]
+        first_list += [            "Cure Wounds",            "Entangle",           "Goodberry",            "Longstrider",             "Speak with Animals"]
+        second_list += [           "Animal Messenger",            "Barkskin",            "Darkvision",            "Locate Animals or Plants",            "Pass without Trace"]
+        third_list += [            "Beacon of Hope",            "Conjure Animals",            "Daylight",            "Protection from Energy",            "Water Walk"]
+        fourth_list += [            "Conjure Minor Elementals",            "Dominate Beast",            "Freedom of Movement",            "Grasping Vine",            "Stoneskin"]
+        fifth_list += [            "Awaken",            "Commune with Nature",            "Conjure Elemental",            "Greater Restoration",            "Reincarnate"]
+        sixth_list += [            "Find the Path",            "Heal",            "Heroes' Feast",            "Move Earth",            "Transport via Plants"]
+        seventh_list += ["Mirage Arcane", "Plane Shift", "Regenerate", "Reverse Gravity", "Whirlwind"]
+        eighth_list += ["Animal Shapes", "Antipathy/Sympathy", "Control Weather", "Earthquake", "Tsunami"]
+        ninth_list += ["Foresight", "Shapechange", "Storm of Vengeance", "True Resurrection", "Mass Heal"]
 
-        # 1/Day each
-        one_day_each_list = ["Animal Friendship", "Speak with Animals"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
-
-        # 2/Day each
-        two_day_each_list = ["Barkskin", "Beast Sense"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-
-        # 3/Day each
-        three_day_each_list = ["Conjure Animals", "Water Walk"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = ["Cure Wounds", "Entangle", "Goodberry", "Longstrider", "Speak with Animals"]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
-
-        # 2nd Level Spells
-        second_list = ["Animal Messenger", "Barkskin", "Darkvision", "Locate Animals or Plants", "Pass without Trace"]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-
-        # 3rd Level Spells
-        third_list = ["Beacon of Hope", "Conjure Animals", "Daylight", "Protection from Energy", "Water Walk"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = [
-            "Conjure Minor Elementals",
-            "Dominate Beast", "Freedom of Movement",
-            "Grasping Vine", "Stoneskin"]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = [
-            "Awaken", "Commune with Nature", "Conjure Elemental", "Greater Restoration", "Reincarnate"]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-
-        # 6th Level Spells
-        sixth_list = ["Find the Path", "Heal", "Heroes' Feast", "Move Earth", "Transport via Plants"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = ["Mirage Arcane", "Plane Shift", "Regenerate", "Reverse Gravity", "Whirlwind"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = ["Animal Shapes", "Antipathy/Sympathy", "Control Weather", "Earthquake", "Tsunami"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = ["Foresight", "Shapechange", "Storm of Vengeance", "True Resurrection", "Mass Heal"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+        if Dice(12)==1:
+            recharge += "\n-Web (Recharge 6)"
 
 
     if race == "Beastfolk":
+        difficulty += Dice(3) - Dice(6)
+        max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         # Cantrips
-        cantrips_list = ["Druidcraft", "Guidance", "Resistance", "Shillelagh",
-                         "Poison Spray", "Dancing Lights", "Feather Fall", "Thaumaturgy",
-                         "Mage Hand", "Sacred Flame", "Sleep Gaze"]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
-
-        # 1/Day each
-        one_day_each_list = ["Animal Friendship", "Speak with Animals", "Longstrider", "Invisibility",
-                             "Darkness", "Mirror Image", "Heat Metal", "Enlarge/Reduce", "Cure Wounds"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
-
-        # 2/Day each
-        two_day_each_list = ["Barkskin", "Enhance Ability", "Find Traps", "Magic Weapon", "Blur"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-
-        # 3/Day each
-        three_day_each_list = ["Beast Sense", "Conjure Animals", "Dispel Magic"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = [
-            "Cure Wounds", "Detect Magic", "Entangle", "Goodberry", "Healing Word", "Faerie Fire"]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
-
-        # 2nd Level Spells
-        second_list = ["Animal Messenger", "Flame Blade", "Moonbeam", "Pass without Trace", "Spike Growth"]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-
-        # 3rd Level Spells
-        third_list = [
-            "Call Lightning", "Create Food and Water", "Cure Wounds (3rd level)", "Protection from Energy", "Water Walk"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = ["Conjure Minor Elementals", "Control Water", "Freedom of Movement", "Locate Creature", "Stoneskin"]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = ["Awaken", "Commune with Nature", "Conjure Elemental", "Greater Restoration", "Mass Cure Wounds"]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-
-        # 6th Level Spells
-        sixth_list = ["Find the Path", "Heal", "Heroes' Feast", "Move Earth", "Transport via Plants"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = ["Mirage Arcane", "Plane Shift", "Regenerate", "Reverse Gravity", "Whirlwind"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = ["Animal Shapes", "Antipathy/Sympathy", "Control Weather", "Earthquake", "Tsunami"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = ["Foresight", "Shapechange", "Storm of Vengeance", "True Resurrection", "Mass Heal"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+        cantrips_list += ["Druidcraft", "Guidance", "Resistance", "Shillelagh","Poison Spray", "Dancing Lights", "Feather Fall", "Thaumaturgy","Mage Hand", "Sacred Flame", "Sleep Gaze"]
+        one_day_each_list += ["Animal Friendship", "Speak with Animals", "Longstrider", "Invisibility","Darkness", "Mirror Image", "Heat Metal", "Enlarge/Reduce", "Cure Wounds"]
+        two_day_each_list += ["Barkskin", "Enhance Ability", "Find Traps", "Magic Weapon", "Blur"]
+        three_day_each_list += ["Beast Sense", "Conjure Animals", "Dispel Magic"]
+        first_list += [         "Cure Wounds", "Detect Magic", "Entangle", "Goodberry", "Healing Word", "Faerie Fire"]
+        second_list += ["Animal Messenger", "Flame Blade", "Moonbeam", "Pass without Trace", "Spike Growth"]
+        third_list += [            "Call Lightning", "Create Food and Water", "Cure Wounds (3rd level)", "Protection from Energy", "Water Walk"]
+        fourth_list += ["Conjure Minor Elementals", "Control Water", "Freedom of Movement", "Locate Creature", "Stoneskin"]
+        fifth_list += ["Awaken",                      "Commune with Nature","Conjure Elemental",                      "Greater Restoration",                      "Mass Cure Wounds"]
+        sixth_list += ["Find the Path", "Heal", "Heroes' Feast", "Move Earth", "Transport via Plants"]
+        seventh_list += ["Mirage Arcane", "Plane Shift", "Regenerate", "Reverse Gravity", "Whirlwind"]
+        eighth_list += ["Animal Shapes", "Antipathy/Sympathy", "Control Weather", "Earthquake", "Tsunami"]
+        ninth_list += ["Foresight", "Shapechange", "Storm of Vengeance", "True Resurrection", "Mass Heal"]
 
 
 
@@ -12960,203 +12616,113 @@ def Magic(Lvl, race=Race(), background=Background()):
     # CELESTIALS.
 
     if race == "Celestial":
+        difficulty += Dice(5) - Dice(10)
+        max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         # Cantrips
         cantrips_list = [
-            "Guidance", "Light", "Mending", "Sacred Flame", "Thaumaturgy", "Druidcraft"]
+            "Guidance",
+            "Light", "Mending", "Sacred Flame", "Thaumaturgy", "Druidcraft"]
         for c in cantrips_list:
             cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
 
-        # 1/Day each
-        one_day_each_list = [
-            "Cure Wounds", "Bless", "Detect Evil and Good", "Teleport", "Entangle",
-                             "Dispel Evil And Good", "Calm Emotions", "Scrying", "Greater Restoration",
+        one_day_each_list += ["Cure Wounds",
+                             "Bless",
+                             "Detect Evil and Good",
+                             "Teleport",
+                             "Entangle",
+                             "Calm Emotions",
+                             "Scrying",
+                             "Greater Restoration",
                              "Dream"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
-
-        # 2/Day each
-        two_day_each_list = ["Lesser Restoration", "Aid", "Zone of Truth"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-
-        # 3/Day each
-        three_day_each_list = ["Remove Curse", "Dispel Magic", "Revivify", "Healing Touch", "Shield",
-                               "Sanctuary", "Protection From Poison", "Lesser Restoration", "Create Food And Water",
-                               "Cure Wounds","Bless", "Detect Magic", "Detect Thoughts"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = ["Detect Magic", "Healing Word", "Protection from Evil and Good", "Purify Food and Drink", "Shield of Faith"]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
-
-        # 2nd Level Spells
-        second_list = ["Enhance Ability", "Find Traps", "Hold Person", "Prayer of Healing", "Warding Bond"]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-
-        # 3rd Level Spells
-        third_list = ["Daylight", "Protection from Energy", "Remove Curse", "Speak with Dead", "Spirit Guardians"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = ["Death Ward", "Freedom of Movement", "Guardian of Faith", "Locate Creature", "Stoneskin"]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = [
-            "Flame Strike", "Geas", "Greater Restoration", "Hallow", "Raise Dead"]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-
-        # 6th Level Spells
-        sixth_list = ["Blade Barrier", "Find the Path", "Heal", "Heroes' Feast", "Planar Ally"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = ["Etherealness", "Regenerate", "Resurrection", "Symbol", "Teleport"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = ["Antimagic Field", "Control Weather", "Holy Aura", "Sunburst", "Telepathy"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = ["Astral Projection", "Gate", "Mass Heal", "Power Word Heal", "True Resurrection"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+        two_day_each_list += ["Lesser Restoration",
+                             "Aid",
+                             "Zone of Truth"]
+        three_day_each_list += ["Remove Curse",
+                               "Dispel Magic",
+                               "Revivify",
+                               "Healing Touch",
+                               "Shield",
+                               "Sanctuary",
+                               "Protection From Poison",
+                               "Lesser Restoration",
+                               "Create Food And Water",
+                               "Cure Wounds",
+                               "Bless",
+                               "Detect Magic",
+                               "Detect Thoughts"]
+        first_list += ["Detect Magic", "Healing Word", "Protection from Evil and Good", "Purify Food and Drink", "Shield of Faith"]
+        second_list += ["Enhance Ability", "Find Traps", "Hold Person", "Prayer of Healing", "Warding Bond"]
+        third_list += ["Daylight", "Protection from Energy", "Remove Curse", "Speak with Dead", "Spirit Guardians"]
+        fourth_list += ["Death Ward",
+                       "Freedom of Movement",
+                       "Guardian of Faith",
+                       "Locate Creature",
+                       "Stoneskin"]
+        fifth_list += ["Flame Strike",
+                       "Geas",
+                       "Greater Restoration", "Hallow", "Raise Dead"]
+        sixth_list += ["Blade Barrier", "Find the Path", "Heal", "Heroes' Feast", "Planar Ally"]
+        seventh_list += ["Etherealness", "Regenerate", "Resurrection", "Symbol", "Teleport"]
+        eighth_list += ["Antimagic Field", "Control Weather", "Holy Aura", "Sunburst", "Telepathy"]
+        ninth_list += ["Astral Projection", "Gate", "Mass Heal", "Power Word Heal", "True Resurrection"]
 
     # CONSTRUCTS.
     if race == "Construct":
+        difficulty += Dice(8) - Dice(4)
+        max_spell_level = get_max_spell_level(Lvl, difficulty)
 
-        cantrip, _ = add_spell(cantrip, "Paralysis Gas", 4, 0, max_spell_level,
+        recharge, _ = add_spell(recharge, "Paralysis Gas", 4, 0, max_spell_level,
                                f"(Recharge 5–6). \n\t The construct exhales a 30-foot cone of gas. Each creature in that area must succeed on a DC {10+PB(Lvl)} Constitution saving throw or be paralyzed for 1 minute. A creature can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success.")
-
-        # Cantrips
-        cantrips_list = ["Guidance", "Mage Hand", "Mending", "Prestidigitation", "Light"]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
-
-        # 1/Day each
-        one_day_each_list = ["Alarm", "Cure Wounds", "Grease"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
-
-        # 2/Day each
-        two_day_each_list = ["Darkvision", "Enhance Ability", "Heat Metal"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-
-        # 3/Day each
-        three_day_each_list = ["Counterspell", "Dispel Magic", "Protection from Energy"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = ["Alarm", "Cure Wounds", "Identify", "Shield", "Unseen Servant"]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
-
-        # 2nd Level Spells
-        second_list = ["Darkvision", "Enhance Ability", "Heat Metal", "Levitate", "Magic Weapon"]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-
-        # 3rd Level Spells
-        third_list = ["Counterspell", "Dispel Magic", "Protection from Energy", "Tiny Servant", "Water Walk"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = ["Death Ward", "Fabricate", "Stone Shape", "Stone Skin", "Control Water"]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = ["Animate Objects", "Creation", "Greater Restoration", "Teleportation Circle", "Wall of Stone"]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-
-        # 6th Level Spells
-        sixth_list = ["Find the Path", "Move Earth", "True Seeing", "Wall of Ice", "Programmed Illusion"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = ["Forcecage", "Mordenkainen's Magnificent Mansion", "Teleport", "Regenerate", "Resurrection"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = [
-            "Antimagic Field",
-            "Control Weather",
-            "Demiplane", "Mind Blank", "Telepathy"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = ["Gate", "Imprisonment", "Mass Heal", "Meteor Swarm", "True Resurrection"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+        cantrips_list += ["Guidance", "Mage Hand", "Mending", "Prestidigitation", "Light"]
+        one_day_each_list += ["Alarm", "Cure Wounds", "Grease"]
+        two_day_each_list += ["Darkvision", "Enhance Ability", "Heat Metal"]
+        three_day_each_list += ["Counterspell", "Dispel Magic", "Protection from Energy"]
+        first_list += ["Alarm", "Cure Wounds", "Identify", "Shield", "Unseen Servant"]
+        second_list += ["Darkvision", "Enhance Ability", "Heat Metal", "Levitate", "Magic Weapon"]
+        third_list += ["Counterspell", "Dispel Magic", "Protection from Energy", "Tiny Servant", "Water Walk"]
+        fourth_list += ["Death Ward", "Fabricate", "Stone Shape", "Stone Skin", "Control Water"]
+        fifth_list += ["Animate Objects", "Creation", "Greater Restoration", "Teleportation Circle", "Wall of Stone"]
+        sixth_list += ["Find the Path", "Move Earth", "True Seeing", "Wall of Ice", "Programmed Illusion"]
+        seventh_list += ["Forcecage", "Mordenkainen's Magnificent Mansion", "Teleport", "Regenerate", "Resurrection"]
+        eighth_list += ["Antimagic Field",
+                        "Control Weather",
+                        "Demiplane", "Mind Blank", "Telepathy"]
+        ninth_list += ["Gate", "Imprisonment", "Mass Heal", "Meteor Swarm", "True Resurrection"]
 
     # DRAGONS.
 
     #Breath weapons
     if race == "Dragon" and Dice(3) == 1:
         d = 20
-        if Dice(d) == 1 and not ("Fire Breath" in cantrip):
-            cantrip += f"\n  - Fire Breath \n\t(Recharge 5-6) The dragon exhales fire in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC {10+PB(Lvl)} Dexterity saving throw, taking 14 (4d6) fire damage on a failed save, or half as much damage on a successful one."
-        elif Dice(d) == 1 and not ("Fire Breath" in cantrip):       cantrip += f"\n  - Fire Breath \n\t(Recharge 5-6) The dragon exhales fire in a 15-foot cone. Each creature in that area must make a DC {10+PB(Lvl)} Dexterity saving throw, taking 22 (4d10) fire damage on a failed save, or half as much damage on a successful one."
-        elif Dice(d) == 1 and not ("Fire Breath" in cantrip):       cantrip += f"\n  - Fire Breath \n\t(Recharge 5-6) The dragon exhales fire in a 15-foot cone. Each creature in that area must make a DC {10+PB(Lvl)} Dexterity saving throw, taking 24 (7d6) fire damage on a failed save, or half as much damage on a successful one."
-        if Dice(d) == 2 and not ("Sleep Breath" in cantrip):        cantrip += f"\n  - Sleep Breath \n\t(Recharge 5-6) The dragon exhales sleep gas in a 15-foot cone. Each creature in that area must succeed on a DC {10+PB(Lvl)} Constitution saving throw or fall unconscious for 1 minute. This effect ends for a creature if the creature takes damage or someone uses an action to wake it."
-        if Dice(d) == 3 and not ("Acid Breath" in cantrip):         cantrip += f"\n  - Acid Breath \n\t(Recharge 5-6) The dragon exhales acid in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC {10+PB(Lvl)} Dexterity saving throw, taking 18 (4d8) acid damage on a failed save, or half as much damage on a successful one"
-        if Dice(d) == 4 and not ("Slowing Breath" in cantrip):      cantrip += f"\n  - Slowing Breath \n\t(Recharge 5-6) The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a DC {10+PB(Lvl)} Constitution saving throw. On a failed save, the creature can't use reactions, its speed is halved, and it can't make more than one attack on its turn. In addition, the creature can use either an action or a bonus action on its turn, but not both. These effects last for 1 minute. The creature can repeat the saving throw at the start of each of its turns, ending the effect on itself with a successful save."
-        if Dice(d) == 5 and not ("Euphoria Breath" in cantrip):     cantrip += f"\n  - Euphoria Breath \n\t(Recharge 5-6) The dragon exhales a puff of euphoria gas at one creature within 5 feet of it. The target must succeed on a DC {10+PB(Lvl)} Wisdom saving throw, or for 1 minute, the target can't take reactions and must roll a d6 at the start of each of its turns to determine its behavior during the turn: \n\t\t 1–4. The target takes no action or bonus action and uses all of its movement to move in a random direction. \n\t\t 5–6. The target doesn't move, and the only thing it can do on its turn is make a DC {10+PB(Lvl)} Wisdom saving throw, ending the effect on itself on a success."
-        if Dice(d) == 6 and not ("Repulsion Breath" in cantrip):    cantrip += f"\n  - Repulsion Breath \n\t(Recharge 5-6) The dragon exhales repulsion energy in a 30-foot cone. Each creature in that area must succeed on a DC {10+PB(Lvl)} Strength saving throw. On a failed save, the creature is pushed 30 feet away from the dragon."
-        if Dice(d) == 7 and not ("Poison Breath" in cantrip):       cantrip += f"\n  - Poison Breath \n\t(Recharge 5-6) The dragon exhales poisonous gas in a 15-foot cone. Each creature in that area must make a DC {10+PB(Lvl)} Constitution saving throw, taking 21 (6d6) poison damage on a failed save, or half as much damage on a successful one."
-        if Dice(d) == 8 and not ("Lightning Breath" in cantrip):    cantrip += f"\n  - Lightning Breath \n\t(Recharge 5-6) The dragon exhales lightning in a 40-foot line that is 5 feet wide. Each creature in that line must make a DC {10+PB(Lvl)} Dexterity saving throw, taking 16 (3d10) lightning damage on a failed save, or half as much damage on a successful one."
-        elif Dice(d) == 8 and not ("Lightning Breath" in cantrip):  cantrip += f"\n  - Lightning Breath \n\t(Recharge 5-6) The dragon exhales lightning in a 30-foot line that is 5 feet wide. Each creature in that line must make a DC {10+PB(Lvl)} Dexterity saving throw, taking 22 (4d10) lightning damage on a failed save, or half as much damage on a successful one."
-        if Dice(d) == 9 and not ("Cold Breath" in cantrip):         cantrip += f"\n  - Cold Breath \n\t(Recharge 5-6) The dragon exhales an icy blast in a 15-foot cone. Each creature in that area must make a DC {10+PB(Lvl)} Constitution saving throw, taking 18 (4d8) cold damage on a failed save, or half as much damage on a successful one."
-        elif Dice(d) == 10 and not ("Cold Breath" in cantrip):      cantrip += f"\n  - Cold Breath \n\t(Recharge 5-6) The dragon exhales an icy blast in a 15-foot cone. Each creature in that area must make a DC {10+PB(Lvl)} Constitution saving throw, taking 22 (5d8) cold damage on a failed save, or half as much damage on a successful one."
-        if Dice(d) == 11 and not ("Paralyzing Breath" in cantrip):  cantrip += f"\n  - Paralyzing Breath \n\t(Recharge 5-6) The dragon exhales paralyzing gas in a 15-foot cone. Each creature in that area must succeed on a {10+PB(Lvl)} Constitution saving throw or be paralyzed for 1 minute. A creature can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
-        if Dice(d) == 12 and not ("WeakeningBreath" in cantrip):    cantrip += f"\n  - Weakening Breath \n\t(Recharge 5-6) The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a DC {10+PB(Lvl)} Strength saving throw or have disadvantage on Strength-based attack rolls, Strength checks, and Strength saving throws for 1 minute. A creature can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
+        if Dice(d) == 1 and not ("Fire Breath" in recharge):
+            recharge += f"\n  - Fire Breath \n\t(Recharge 5-6) The dragon exhales fire in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC {10+PB(Lvl)} Dexterity saving throw, taking 14 (4d6) fire damage on a failed save, or half as much damage on a successful one."
+        elif Dice(d) == 1 and not ("Fire Breath" in recharge):       recharge += f"\n  - Fire Breath \n\t(Recharge 5-6) The dragon exhales fire in a 15-foot cone. Each creature in that area must make a DC {10+PB(Lvl)} Dexterity saving throw, taking 22 (4d10) fire damage on a failed save, or half as much damage on a successful one."
+        elif Dice(d) == 1 and not ("Fire Breath" in recharge):       recharge += f"\n  - Fire Breath \n\t(Recharge 5-6) The dragon exhales fire in a 15-foot cone. Each creature in that area must make a DC {10+PB(Lvl)} Dexterity saving throw, taking 24 (7d6) fire damage on a failed save, or half as much damage on a successful one."
+        if Dice(d) == 2 and not ("Sleep Breath" in recharge):        recharge += f"\n  - Sleep Breath \n\t(Recharge 5-6) The dragon exhales sleep gas in a 15-foot cone. Each creature in that area must succeed on a DC {10+PB(Lvl)} Constitution saving throw or fall unconscious for 1 minute. This effect ends for a creature if the creature takes damage or someone uses an action to wake it."
+        if Dice(d) == 3 and not ("Acid Breath" in recharge):         recharge += f"\n  - Acid Breath \n\t(Recharge 5-6) The dragon exhales acid in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC {10+PB(Lvl)} Dexterity saving throw, taking 18 (4d8) acid damage on a failed save, or half as much damage on a successful one"
+        if Dice(d) == 4 and not ("Slowing Breath" in recharge):      recharge += f"\n  - Slowing Breath \n\t(Recharge 5-6) The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a DC {10+PB(Lvl)} Constitution saving throw. On a failed save, the creature can't use reactions, its speed is halved, and it can't make more than one attack on its turn. In addition, the creature can use either an action or a bonus action on its turn, but not both. These effects last for 1 minute. The creature can repeat the saving throw at the start of each of its turns, ending the effect on itself with a successful save."
+        if Dice(d) == 5 and not ("Euphoria Breath" in recharge):     recharge += f"\n  - Euphoria Breath \n\t(Recharge 5-6) The dragon exhales a puff of euphoria gas at one creature within 5 feet of it. The target must succeed on a DC {10+PB(Lvl)} Wisdom saving throw, or for 1 minute, the target can't take reactions and must roll a d6 at the start of each of its turns to determine its behavior during the turn: \n\t\t 1–4. The target takes no action or bonus action and uses all of its movement to move in a random direction. \n\t\t 5–6. The target doesn't move, and the only thing it can do on its turn is make a DC {10+PB(Lvl)} Wisdom saving throw, ending the effect on itself on a success."
+        if Dice(d) == 6 and not ("Repulsion Breath" in recharge):    recharge += f"\n  - Repulsion Breath \n\t(Recharge 5-6) The dragon exhales repulsion energy in a 30-foot cone. Each creature in that area must succeed on a DC {10+PB(Lvl)} Strength saving throw. On a failed save, the creature is pushed 30 feet away from the dragon."
+        if Dice(d) == 7 and not ("Poison Breath" in recharge):       recharge += f"\n  - Poison Breath \n\t(Recharge 5-6) The dragon exhales poisonous gas in a 15-foot cone. Each creature in that area must make a DC {10+PB(Lvl)} Constitution saving throw, taking 21 (6d6) poison damage on a failed save, or half as much damage on a successful one."
+        if Dice(d) == 8 and not ("Lightning Breath" in recharge):    recharge += f"\n  - Lightning Breath \n\t(Recharge 5-6) The dragon exhales lightning in a 40-foot line that is 5 feet wide. Each creature in that line must make a DC {10+PB(Lvl)} Dexterity saving throw, taking 16 (3d10) lightning damage on a failed save, or half as much damage on a successful one."
+        elif Dice(d) == 8 and not ("Lightning Breath" in recharge):  recharge += f"\n  - Lightning Breath \n\t(Recharge 5-6) The dragon exhales lightning in a 30-foot line that is 5 feet wide. Each creature in that line must make a DC {10+PB(Lvl)} Dexterity saving throw, taking 22 (4d10) lightning damage on a failed save, or half as much damage on a successful one."
+        if Dice(d) == 9 and not ("Cold Breath" in recharge):         recharge += f"\n  - Cold Breath \n\t(Recharge 5-6) The dragon exhales an icy blast in a 15-foot cone. Each creature in that area must make a DC {10+PB(Lvl)} Constitution saving throw, taking 18 (4d8) cold damage on a failed save, or half as much damage on a successful one."
+        elif Dice(d) == 10 and not ("Cold Breath" in recharge):      recharge += f"\n  - Cold Breath \n\t(Recharge 5-6) The dragon exhales an icy blast in a 15-foot cone. Each creature in that area must make a DC {10+PB(Lvl)} Constitution saving throw, taking 22 (5d8) cold damage on a failed save, or half as much damage on a successful one."
+        if Dice(d) == 11 and not ("Paralyzing Breath" in recharge):  recharge += f"\n  - Paralyzing Breath \n\t(Recharge 5-6) The dragon exhales paralyzing gas in a 15-foot cone. Each creature in that area must succeed on a {10+PB(Lvl)} Constitution saving throw or be paralyzed for 1 minute. A creature can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
+        if Dice(d) == 12 and not ("WeakeningBreath" in recharge):    recharge += f"\n  - Weakening Breath \n\t(Recharge 5-6) The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a DC {10+PB(Lvl)} Strength saving throw or have disadvantage on Strength-based attack rolls, Strength checks, and Strength saving throws for 1 minute. A creature can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
 
-    if race == "Dragon" and Dice(12) == 1 and not ("Change Shape" in cantrip):  cantrip += "\n- Change Shape \n\t The dragon magically polymorphs into a humanoid or beast that has a challenge rating no higher than its own, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form (the dragon's choice).In a new form, the dragon retains its alignment, hit points, Hit Dice, ability to speak, proficiencies, Legendary Resistance, lair actions, and Intelligence, Wisdom, and Charisma scores, as well as this action. Its statistics and capabilities are otherwise replaced by those of the new form, except any class features or legendary actions of that form."
+    if race == "Dragon" and Dice(12) == 1 and not ("Change Shape" in recharge):  recharge += "\n- Change Shape \n\t The dragon magically polymorphs into a humanoid or beast that has a challenge rating no higher than its own, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form (the dragon's choice).In a new form, the dragon retains its alignment, hit points, Hit Dice, ability to speak, proficiencies, Legendary Resistance, lair actions, and Intelligence, Wisdom, and Charisma scores, as well as this action. Its statistics and capabilities are otherwise replaced by those of the new form, except any class features or legendary actions of that form."
 
     if race == "Dragon":
-
-        # Cantrips
-        cantrips_list = ["Control Flames", "Gust", "Mage Hand", "Minor Illusion", "Dancing Lights", "Color Spray" ]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
-
-        # 1/Day each
-        one_day_each_list = ["Charm Person", "Fear", "Shield"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
-
-        # 2/Day each
-        two_day_each_list = ["Flame Strike", "Fly", "Invisibility"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, 2, 0, max_spell_level, spell_definition="2/Day each")
-
-        # 3/Day each
-        three_day_each_list = ["Fireball", "Protection from Energy", "Wind Walk"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, 1, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = ["Charm Person", "Detect Magic", "Mage Armor", "Magic Missile", "Shield", "Suggestion", "Polymorph", "Mirror Image", "Major Image"]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
+        
+        difficulty += Dice(6) - Dice(10)
+        max_spell_level = get_max_spell_level(Lvl, difficulty)
+        cantrips_list += ["Control Flames", "Gust", "Mage Hand", "Minor Illusion", "Dancing Lights", "Color Spray" ]
+        one_day_each_list += ["Charm Person", "Fear", "Shield"]
+        two_day_each_list += ["Flame Strike", "Fly", "Invisibility"]
+        three_day_each_list += ["Fireball", "Protection from Energy", "Wind Walk"]
+        first_list += ["Charm Person", "Detect Magic", "Mage Armor", "Magic Missile", "Shield", "Suggestion", "Polymorph", "Mirror Image", "Major Image"]
 
         # 2nd Level Spells
         second_list = [
@@ -13164,15 +12730,10 @@ def Magic(Lvl, race=Race(), background=Background()):
         for s in second_list:
             second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
 
-        # 3rd Level Spells
-        third_list = ["Fear", "Fireball", "Fly", "Haste", "Protection from Energy"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
+        third_list += ["Fear", "Fireball", "Fly", "Haste", "Protection from Energy"]
 
         # 4th Level Spells
-        fourth_list = ["Charm Monster", "Control Flames", "Greater Invisibility", "Wall of Fire", "Stone Shape"]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
+        fourth_list += ["Charm Monster", "Control Flames", "Greater Invisibility", "Wall of Fire", "Stone Shape"]
 
         # 5th Level Spells
         fifth_list = ["Dominate Person", "Flame Strike", "Geas", "Hold Monster", "Teleportation Circle"]
@@ -13180,13 +12741,18 @@ def Magic(Lvl, race=Race(), background=Background()):
             fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
 
         # 6th Level Spells
-        sixth_list = ["Chain Lightning", "Disintegrate", "Move Earth", "True Seeing", "Sunburst"]
+        sixth_list = ["Chain Lightning",
+                      "Disintegrate",
+                      "Move Earth",
+                      "True Seeing",
+                      "Sunburst"]
         for s in sixth_list:
             sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
 
         # 7th Level Spells
         seventh_list = [
-            "Fire Storm", "Plane Shift", "Reverse Gravity", "Teleport", "Prismatic Spray"]
+            "Fire Storm",
+            "Plane Shift", "Reverse Gravity", "Teleport", "Prismatic Spray"]
         for s in seventh_list:
             seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
 
@@ -13197,280 +12763,133 @@ def Magic(Lvl, race=Race(), background=Background()):
             eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
 
         # 9th Level Spells
-        ninth_list = [
-            "Gate", "Imprisonment", "Meteor Swarm", "Power Word Kill", "Time Stop"]
+        ninth_list = ["Gate",
+                      "Imprisonment",
+                      "Meteor Swarm",
+                      "Power Word Kill",
+                      "Time Stop"]
         for s in ninth_list:
             ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
 
     # DWARF.
 
     if race == "Dwarf":
+        difficulty += Dice(6) - Dice(4)
+        max_spell_level = get_max_spell_level(Lvl, difficulty)
 
-        # Cantrips
-        cantrips_list = ["Blade Ward", "Mending", "Resistance", "Stone Fist"]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
-
-        # 1/Day each
-        one_day_each_list = ["Shield of Faith", "Compelled Duel", "Searing Smite", "Invisibility"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-3, 0, max_spell_level, spell_definition="1/Day each")
-
-        # 2/Day each
-        two_day_each_list = ["Enlarge/Reduce", "Magic Weapon", "Shatter"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-
-        # 3/Day each
-        three_day_each_list = ["Meld into Stone", "Protection from Energy", "Stone Shape"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-1, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = [
-            "Bless", "Command", "Cure Wounds", "Shield of Faith", "Thunderous Smite"]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
-
-        # 2nd Level Spells
-        second_list = ["Aid", "Find Traps", "Magic Weapon", "Spike Growth", "Stone Fist"]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-
-        # 3rd Level Spells
-        third_list = ["Crusader's Mantle", "Elemental Weapon", "Meld into Stone", "Protection from Energy", "Remove Curse"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = ["Fabricate", "Guardian of Nature", "Stone Shape", "Stoneskin", "Wall of Fire"]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = ["Destructive Wave", "Geas", "Greater Restoration", "Passwall", "Wall of Stone"]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-
-        # 6th Level Spells
-        sixth_list = ["Find the Path", "Heal", "Heroes' Feast", "Move Earth", "True Seeing"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = ["Etherealness", "Regenerate", "Resurrection", "Symbol", "Teleport"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = ["Antimagic Field", "Earthquake", "Holy Aura", "Telepathy", "Incendiary Cloud"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = ["Foresight", "Imprisonment", "Mass Heal", "Power Word Heal", "True Resurrection"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
-
-
-
-
-
+        cantrips_list += ["Blade Ward",
+                         "Mending",
+                         "Resistance",
+                         "Stone Fist"]
+        one_day_each_list += ["Shield of Faith",
+                             "Compelled Duel",
+                             "Searing Smite",
+                             "Invisibility"]
+        two_day_each_list += ["Enlarge/Reduce",
+                             "Magic Weapon",
+                             "Shatter"]
+        three_day_each_list += ["Meld into Stone", "Protection from Energy", "Stone Shape"]
+        first_list += ["Bless", "Command", "Cure Wounds", "Shield of Faith", "Thunderous Smite"]
+        second_list += ["Aid", "Find Traps", "Magic Weapon", "Spike Growth", "Stone Fist"]
+        third_list += ["Crusader's Mantle", "Elemental Weapon", "Meld into Stone", "Protection from Energy", "Remove Curse"]
+        fourth_list += ["Fabricate", "Guardian of Nature", "Stone Shape", "Stoneskin", "Wall of Fire"]
+        fifth_list += ["Destructive Wave", "Geas", "Greater Restoration", "Passwall", "Wall of Stone"]
+        sixth_list += ["Find the Path", "Heal", "Heroes' Feast", "Move Earth", "True Seeing"]
+        seventh_list += ["Etherealness", "Regenerate", "Resurrection", "Symbol", "Teleport"]
+        eighth_list += ["Antimagic Field", "Earthquake", "Holy Aura", "Telepathy", "Incendiary Cloud"]
+        ninth_list += ["Foresight", "Imprisonment", "Mass Heal", "Power Word Heal", "True Resurrection"]
 
         
     # ELEMENTAL.
     if race == "Elemental":
+        difficulty += Dice(6) - Dice(10)
+        max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         # Cantrips
-        cantrips_list = [
-            "Control Flames", "Gust", "Mold Earth", "Shape Water", "Dancing lights"]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
+        cantrips_list += ["Control Flames", "Gust", "Mold Earth", "Shape Water", "Dancing lights"]
 
-        cantrip, _ = add_spell(cantrip, "Whirlwind", 0, 0, max_spell_level,
+        recharge, _ = add_spell(recharge, "Whirlwind", 0, 0, max_spell_level,
                                 f" (Recharge 4–6)."+
                                 f"\t Each creature in the {race}'s space must make a Strength saving throw. " +
                                 f"On a failure, a target takes 15 (3d8 + 2) bludgeoning damage and is flung up 20 feet away from the {race} in a random direction and knocked prone. " +
                                 f"If a thrown target strikes an object, such as a wall or floor, the target takes 3 (1d6) bludgeoning damage for every 10 feet it was thrown. "  +
                                 f"If the target is thrown at another creature, that creature must succeed on a Dexterity Saving Throw or take the same damage and be knocked prone. " +
                                 f"/n/t If the saving throw is successful, the target takes half the bludgeoning damage and isn't flung away or knocked prone. ")
-        cantrip, _ = add_spell(cantrip, "Cinder breath", 0, 0, max_spell_level,
+
+        recharge, _ = add_spell(recharge, "Cinder breath", 0, 0, max_spell_level,
                                 f"\t (Recharge 6). The Elemental exhales a 15-foot cone of smoldering ash. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw or be blinded until the end of the Elemental's next turn.")
 
-        cantrip, _ = add_spell(cantrip, "Blinding breath", 0, 0, max_spell_level,
+        recharge, _ = add_spell(recharge, "Blinding breath", 0, 0, max_spell_level,
                                f"\t (Recharge 6). The Elemental exhales a 15-foot cone of blinding dust. Each creature in that area must succeed on a Dexterity saving throw or be blinded for one minute.")
 
-        cantrip, _ = add_spell(cantrip, "Steam breath", 0, 0, max_spell_level,
+        recharge, _ = add_spell(recharge, "Steam breath", 0, 0, max_spell_level,
                                 f"\t (Recharge 6). The Elemental exhales a 15-foot cone of scalding steam. Each creature in that area must succeed on a Dexterity saving throw, taking 4 (1d8) fire damage on a failed save, or half as much damage on a successful one.")
 
-        cantrip, _ = add_spell(cantrip, "Frost Breath", 0, 0, max_spell_level,
+        recharge, _ = add_spell(recharge, "Frost Breath", 0, 0, max_spell_level,
                                 f"\t (Recharge 6). The Elemental exhales a 15-foot cone of cold air. Each creature in that area must succeed on a Dexterity saving throw, taking 5 (2d4) cold damage on a failed save, or half as much damage on a successful one.")
 
-        cantrip, _ = add_spell(cantrip, "Fire Breath", 0, 0, max_spell_level,
+        recharge, _ = add_spell(recharge, "Fire Breath", 0, 0, max_spell_level,
                                "\t (Recharge 6). The Elemental exhales a 15-foot cone of cold air. Each creature in that area must succeed on a Dexterity saving throw, taking 7 (2d6) fire damage on a failed save, or half as much damage on a successful one.")
 
-        # 1/Day each
-        one_day_each_list = ["Burning Hands", "Earth Tremor", "Ice Knife"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-1, 0, max_spell_level, spell_definition="1/Day each")
+        one_day_each_list += ["Burning Hands", "Earth Tremor", "Ice Knife"]
+        two_day_each_list += ["Dust Devil", "Flame Blade", "Misty Step"]
+        three_day_each_list += ["Elemental Weapon", "Gaseous Form", "Wind Wall"]
+        first_list += ["Absorb Elements", "Earth Tremor", "Fog Cloud", "Ice Knife", "Thunderwave"]
+        second_list += ["Dust Devil", "Flame Blade", "Gust of Wind", "Melf's Acid Arrow", "Snilloc's Snowball Swarm"]
+        third_list += ["Erupting Earth", "Flame Arrows", "Melf's Minute Meteors", "Tidal Wave", "Wind Wall"]
+        fourth_list += ["Control Water", "Elemental Bane", "Storm Sphere", "Watery Sphere", "Fire Shield"]
+        fifth_list += ["Control Winds", "Flame Strike", "Immolation", "Maelstrom", "Transmute Rock"]
+        sixth_list += ["Chain Lightning", "Investiture of Flame", "Investiture of Ice", "Investiture of Stone", "Investiture of Wind"]
+        seventh_list += ["Fire Storm", "Prismatic Spray", "Whirlwind", "Plane Shift", "Teleport"]
+        eighth_list += ["Earthquake",            "Incendiary Cloud", "Sunburst", "Tsunami", "Control Weather"]
+        ninth_list += [            "Meteor Swarm", "Storm of Vengeance", "Tsunami", "Gate", "Prismatic Wall"]
 
-        # 2/Day each
-        two_day_each_list = ["Dust Devil", "Flame Blade", "Misty Step"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-
-        # 3/Day each
-        three_day_each_list = [
-            "Elemental Weapon", "Gaseous Form", "Wind Wall"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-3, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = ["Absorb Elements", "Earth Tremor", "Fog Cloud", "Ice Knife", "Thunderwave"]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
-
-        # 2nd Level Spells
-        second_list = ["Dust Devil", "Flame Blade", "Gust of Wind", "Melf's Acid Arrow", "Snilloc's Snowball Swarm"]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-
-        # 3rd Level Spells
-        third_list = ["Erupting Earth", "Flame Arrows", "Melf's Minute Meteors", "Tidal Wave", "Wind Wall"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = ["Control Water", "Elemental Bane", "Storm Sphere", "Watery Sphere", "Fire Shield"]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = ["Control Winds", "Flame Strike", "Immolation", "Maelstrom", "Transmute Rock"]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-
-        # 6th Level Spells
-        sixth_list = ["Chain Lightning", "Investiture of Flame", "Investiture of Ice", "Investiture of Stone", "Investiture of Wind"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = ["Fire Storm", "Prismatic Spray", "Whirlwind", "Plane Shift", "Teleport"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = [
-            "Earthquake", "Incendiary Cloud", "Sunburst", "Tsunami", "Control Weather"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = [
-            "Meteor Swarm", "Storm of Vengeance", "Tsunami", "Gate", "Prismatic Wall"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
-
-
-
-        one, _ = add_spell(one, "Summon Mephits", max_spell_level-3,
-                                  "\t The Elemental has a 25 percent chance of summoning 1d4 mephits. A summoned mephit appears in an unoccupied space within 60 feet of its summoner, acts as an ally of its summoner, and can't summon other mephits. It remains for 1 minute, until it or its summoner dies, or until its summoner dismisses it as an action.")
-        one, _ = add_spell(one, "Innate Spellcasting", max_spell_level-3,
+        recharge, _ = add_spell(recharge, "Summon Mephits", max_spell_level-3, 0, max_spell_level,
+                                  "(recharge 6):\t The Elemental has a 25 percent chance of summoning 1d4 mephits. A summoned mephit appears in an unoccupied space within 60 feet of its summoner, acts as an ally of its summoner, and can't summon other mephits. It remains for 1 minute, until it or its summoner dies, or until its summoner dismisses it as an action.")
+        one, _ = add_spell(one, "Innate Spellcasting", max_spell_level-3, 0, max_spell_level,
                            "The Elemental can innately cast fog cloud, requiring no material components")
 
-        one, _ = add_spell(one, "Innate Spellcasting", max_spell_level-3,
-                 "\n-  Innate Spellcasting (1/Day) \n\t The Elemental can innately cast heat metal, requiring no material components.")
+        one, _ = add_spell(one, "Innate Spellcasting", max_spell_level-3, 0, max_spell_level,
+                 "\tThe Elemental can innately cast heat metal, requiring no material components.")
 
-        one, _ = add_spell(one, "Blur", max_spell_level-3)
-        one, _ = add_spell(one, "Sleep", max_spell_level-3)
+        one, _ = add_spell(one, "Blur", max_spell_level-3,0, max_spell_level,)
+        one, _ = add_spell(one, "Sleep", max_spell_level-3, 0, max_spell_level,)
 
     # ELF.
     if race == "Elf":
+        difficulty += Dice(6) - Dice(4)
+        max_spell_level = get_max_spell_level(Lvl, difficulty)
 
-        # Cantrips
-        cantrips_list = ["Dancing Lights", "Druidcraft", "Mage Hand", "Minor Illusion"]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
-
-        # 1/Day each
-        one_day_each_list = ["Charm Person", "Disguise Self", "Sleep", "Darkness", "Faerie Fire", "Levitate"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-1, 0, max_spell_level, spell_definition="1/Day each")
-
-        # 2/Day each
-        two_day_each_list = [
+        cantrips_list += ["Dancing Lights", "Druidcraft", "Mage Hand", "Minor Illusion"]
+        one_day_each_list += ["Charm Person", "Disguise Self", "Sleep", "Darkness", "Faerie Fire", "Levitate"]
+        two_day_each_list += [
             "Detect Thoughts",
             "Invisibility",
             "Mirror Image"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-
-        # 3/Day each
-        three_day_each_list = [
+        three_day_each_list += [
             "Counterspell",
             "Feather Fall",
             "Protection from Energy"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-3, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = ["Charm Person", "Detect Magic", "Fog Cloud", "Goodberry", "Healing Word"]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
-
-        # 2nd Level Spells
-        second_list = ["Barkskin", "Darkvision", "Enhance Ability", "Pass without Trace", "Silence"]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-
-        # 3rd Level Spells
-        third_list = ["Dispel Magic", "Protection from Energy", "Remove Curse", "Speak with Dead", "Water Breathing"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = ["Dimension Door", "Freedom of Movement", "Greater Invisibility", "Hallucinatory Terrain", "Locate Creature"]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = ["Awaken", "Commune with Nature", "Mislead", "Modify Memory", "Teleportation Circle"]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-
-        # 6th Level Spells
-        sixth_list = ["Find the Path", "Heal", "Heroes' Feast", "Transport via Plants", "True Seeing"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = ["Etherealness", "Mirage Arcane", "Plane Shift", "Regenerate", "Teleport"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = ["Antipathy/Sympathy", "Earthquake", "Incendiary Cloud", "Mind Blank", "Power Word Stun"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = [
-            "Foresight", "Mass Heal", "Power Word Heal", "Shapechange", "Time Stop"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+        first_list += ["Charm Person", "Detect Magic", "Fog Cloud", "Goodberry", "Healing Word"]
+        second_list += ["Barkskin", "Darkvision", "Enhance Ability", "Pass without Trace", "Silence"]
+        third_list += ["Dispel Magic", "Protection from Energy", "Remove Curse", "Speak with Dead", "Water Breathing"]
+        fourth_list += ["Dimension Door", "Freedom of Movement", "Greater Invisibility", "Hallucinatory Terrain", "Locate Creature"]
+        fifth_list += ["Awaken", "Commune with Nature", "Mislead", "Modify Memory", "Teleportation Circle"]
+        sixth_list += ["Find the Path", "Heal", "Heroes' Feast", "Transport via Plants", "True Seeing"]
+        seventh_list += ["Etherealness", "Mirage Arcane", "Plane Shift", "Regenerate", "Teleport"]
+        eighth_list += ["Antipathy/Sympathy", "Earthquake", "Incendiary Cloud", "Mind Blank", "Power Word Stun"]
+        ninth_list += ["Foresight", "Mass Heal", "Power Word Heal", "Shapechange", "Time Stop"]
 
     # FAE.
-    if race == "Fey" and Dice(8) == 1 and not ("Ethereal Jaunt" in cantrip):    cantrip += "\n- Ethereal Jaunt \n\t As a bonus action, the fey can magically shift from the Material Plane to the Ethereal Plane, or vice versa."
-    if race == "Fey" and Dice(10) == 1 and not ("Teleport" in cantrip):         cantrip += "\n- Teleport (Recharge 4–6). \n\t The Fey magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the Fey can make one bite attack."
-    if race == "Fey" and Dice(10) == 1 and not ("Heart Sight" in cantrip):      cantrip += "\n- Heart Sight. \n\t The Fey touches a creature and magically knows the creature's current emotional state. If the target fails a DC [10+%Cha] Charisma saving throw, the Fey also knows the creature's alignment. Celestials, fiends, and undead automatically fail the saving throw."
-    if race == "Fey" and Dice(10) == 1 and not ("Invisibility" in cantrip):     cantrip += "\n- Invisibility. \n\t The Fey  magically turns invisible until it attacks or casts a spell, or until its concentration ends (as if concentrating on a spell). Any equipment the Fey wears or carries is invisible with it."
-    if race == "Fey" and Dice(8) == 1 and not ("Change Shape" in cantrip):      cantrip += "\n- Change Shape. \n\t The fey magically polymorphs into a Small or Medium humanoid, or back into their true form. Their statistics are the same in each form. Any equipment they are wearing or carrying isn't transformed. They reverts to their true form if they dies."
-    if race == "Fey" and Dice() == 1 and not ("Etherealness" in cantrip):       cantrip += "\n- Etherealness. \n\t The fey magically enters the Ethereal Plane from the Material Plane, or vice versa. To do so, the fey must have a heartstone in her possession."
+    if race == "Fey" and Dice(8) == 1 and not ("Ethereal Jaunt" in recharge):    recharge += "\n- Ethereal Jaunt (Recharge 6):\n\t As a bonus action, the fey can magically shift from the Material Plane to the Ethereal Plane, or vice versa."
+    if race == "Fey" and Dice(10) == 1 and not ("Teleport" in recharge):         recharge += "\n- Teleport (Recharge 4–6). \n\t The Fey magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the Fey can make one bite attack."
+    if race == "Fey" and Dice(10) == 1 and not ("Heart Sight" in recharge):      recharge += "\n- Heart Sight. (Recharge 6)\n\t The Fey touches a creature and magically knows the creature's current emotional state. If the target fails a DC [10+%Cha] Charisma saving throw, the Fey also knows the creature's alignment. Celestials, fiends, and undead automatically fail the saving throw."
+    if race == "Fey" and Dice(10) == 1 and not ("Invisibility" in recharge):     recharge += "\n- Invisibility. (Recharge 6)\n\t The Fey  magically turns invisible until it attacks or casts a spell, or until its concentration ends (as if concentrating on a spell). Any equipment the Fey wears or carries is invisible with it."
+    if race == "Fey" and Dice(8) == 1 and not ("Change Shape" in recharge):      recharge += "\n- Change Shape. (Recharge 6)\n\t The fey magically polymorphs into a Small or Medium humanoid, or back into their true form. Their statistics are the same in each form. Any equipment they are wearing or carrying isn't transformed. They reverts to their true form if they dies."
+    if race == "Fey" and Dice() == 1 and not ("Etherealness" in recharge):       recharge += "\n- Etherealness. (Recharge 6)\n\t The fey magically enters the Ethereal Plane from the Material Plane, or vice versa. To do so, the fey must have a heartstone in her possession."
 
 
 
-    if race == "Fey" and Dice() == 1 and not ("Fly" in one):                    one += "\n- Fly: 30 ft"
     if race == "Fey" and Dice(8) == 1 and not ("Charming Melody" in one):       one += "\n- Charming Melody [DC 10+%Cha Wisdom saving throw]\n\t The creature is charmed by the Fey for 1 minute. If the Fey or any of its companions harms the creature, the effect on it ends immediately."
     if race == "Fey" and Dice(8) == 1 and not ("Frightening Strain" in one):    one += "\n- Frightening Strain [DC 10+%Cha Wisdom saving throw] \n\t The creature is charmed by the Fey for 1 minute. If the Fey or any of its companions harms the creature, the effect on it ends immediately."
     if race == "Fey" and Dice(8) == 1 and not ("Gentle Lullaby" in one):        one += "\n- Gentle Lullaby [DC 10+%Cha Wisdom saving throw] \n\t The creature falls asleep and is unconscious for 1 minute. The effect ends if the creature takes damage or if someone takes an action to shake the creature awake."
@@ -13478,89 +12897,61 @@ def Magic(Lvl, race=Race(), background=Background()):
 
         
     if race == "Fey":
+        difficulty += Dice(6) - Dice(12)
+        max_spell_level = get_max_spell_level(Lvl, difficulty)
 
-        # Cantrips
-        cantrips_list = [
-            "Dancing Lights",
-            "Druidcraft",
-            "Minor Illusion",
-            "Prestidigitation", "Shillelagh", "Vicious Mockery"]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
+        cantrips_list += ["Dancing Lights",
+                         "Druidcraft",
+                         "Minor Illusion",
+                         "Prestidigitation",
+                         "Shillelagh",
+                         "Vicious Mockery"]
 
-        # 1/Day each
-        one_day_each_list = ["Charm Person", "Entangle", "Sleep", "Polymorph", "Sleep", "Phantasmal Force", "Entangle","Dispel Magic", "Detect Thoughts",
-                             "Detect Evil and Good", "Confusion", "Pass Without Trace"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-1, 0, max_spell_level, spell_definition="1/Day each")
+        one_day_each_list += ["Charm Person",
+                             "Entangle",
+                             "Sleep",
+                             "Polymorph",
+                             "Sleep",
+                             "Phantasmal Force",
+                             "Entangle",
+                             "Dispel Magic",
+                             "Detect Thoughts",
+                             "Detect Evil and Good",
+                             "Confusion",
+                             "Pass Without Trace"]
 
-        # 2/Day each
-        two_day_each_list = ["Invisibility", "Mirror Image", "Suggestion", "Sleep", "Ray Of Enfeeblement", "Plane Shift"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
+        two_day_each_list += ["Invisibility",
+                             "Mirror Image",
+                             "Suggestion",
+                             "Sleep",
+                             "Ray Of Enfeeblement",
+                             "Plane Shift"]
 
-        # 3/Day each
-        three_day_each_list = ["Blink", "Confusion", "Dispel Magic", "Goodberry", "Entangle", "Barkskin", "Detect Magic"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-3, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = ["Charm Person", "Detect Magic", "Entangle", "Faerie Fire", "Healing Word"]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
-
-        # 2nd Level Spells
-        second_list = ["Calm Emotions", "Enthrall", "Hold Person", "Misty Step", "Moonbeam"]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-
-        # 3rd Level Spells
-        third_list = ["Dispel Magic", "Plant Growth", "Protection from Energy", "Sleet Storm", "Speak with Plants"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = ["Confusion", "Dimension Door", "Greater Invisibility", "Hallucinatory Terrain", "Polymorph"]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = ["Awaken", "Dominate Person", "Dream", "Geas", "Mislead"]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-
-        # 6th Level Spells
-        sixth_list = ["Eyebite", "Find the Path", "Mass Suggestion", "Transport via Plants", "True Seeing"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = ["Etherealness", "Mirage Arcane", "Plane Shift", "Regenerate", "Teleport"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = ["Antipathy/Sympathy", "Dominate Monster", "Feeblemind", "Incendiary Cloud", "Power Word Stun"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = ["Foresight", "Mass Heal", "Power Word Heal", "Shapechange", "Time Stop"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+        three_day_each_list += ["Blink", "Confusion", "Dispel Magic", "Goodberry", "Entangle", "Barkskin", "Detect Magic"]
+        first_list += ["Charm Person", "Detect Magic", "Entangle", "Faerie Fire", "Healing Word"]
+        second_list += ["Calm Emotions", "Enthrall", "Hold Person", "Misty Step", "Moonbeam"]
+        third_list += ["Dispel Magic", "Plant Growth", "Protection from Energy", "Sleet Storm", "Speak with Plants"]
+        fourth_list += ["Confusion", "Dimension Door", "Greater Invisibility", "Hallucinatory Terrain", "Polymorph"]
+        fifth_list += ["Awaken", "Dominate Person", "Dream", "Geas", "Mislead"]
+        sixth_list += ["Eyebite", "Find the Path", "Mass Suggestion", "Transport via Plants", "True Seeing"]
+        seventh_list += ["Etherealness", "Mirage Arcane", "Plane Shift", "Regenerate", "Teleport"]
+        eighth_list += ["Antipathy/Sympathy", "Dominate Monster", "Feeblemind", "Incendiary Cloud", "Power Word Stun"]
+        ninth_list += ["Foresight", "Mass Heal", "Power Word Heal", "Shapechange", "Time Stop"]
 
 
     # FIENDS.
     # Cantrips and at-will magic
 
     if race == "Fiend":
+        difficulty += Dice(6) - Dice(8)
+        max_spell_level = get_max_spell_level(Lvl, difficulty)
+
         if Dice()==1 and not ("Charm" in cantrip):
             if Dice(2)==1:  cantrip += "\n- Charm \n\t One humanoid the fiend can see within 30 feet of it must succeed on a DC [10+%CHA] Wisdom saving throw or be magically charmed for 1 day. The charmed target obeys the fiend's verbal or telepathic commands. If the target suffers any harm or receives a suicidal command, it can repeat the saving throw, ending the effect on a success. If the target successfully saves against the effect, or if the effect on it ends, the target is immune to this fiend's Charm for the next 24 hours. \n\t The fiend can have only one target charmed at a time. If it charms another, the effect on the previous target ends. "
             else:           cantrip += "\n- Fiendish Charm. \n\t One humanoid the fiend can see within 30 feet of it must succeed on a DC [11+%CHA] Wisdom saving throw or be magically charmed for 1 day. The charmed target obeys the fiend's spoken commands. If the target suffers any harm from the fiend or another creature or receives a suicidal command from the fiend, the target can repeat the saving throw, ending the effect on itself on a success. If a target's saving throw is successful, or if the effect ends for it, the creature is immune to the fiend's Fiendish Charm for the next 24 hours."
             if Dice()==1 and not ("Draining Kiss" in cantrip):      cantrip += "\n- Draining Kiss \t The fiend kisses a creature charmed by it or a willing creature. The target must make a DC 15 Constitution saving throw against this magic, taking 32 (5d10 + 5) psychic damage on a failed save, or half as much damage on a successful one. The target's hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0. "
             if Dice()==1 and not ("Telepathic Bond" in cantrip):    cantrip += "\n- Telepathic Bond. \t The fiend ignores the range restriction on its telepathy when communicating with a creature it has charmed. The two don't even need to be on the same plane of existence."
 
-        if Dice() == 1 and not ("Ethereal Stride" in cantrip):      cantrip += "\n- Ethereal Stride.\t The fiend and up to three willing creatures within 5 feet of it magically enter the Ethereal Plane from the Material Plane, or vice versa."
         if Dice() == 1 and not ("Etherealness" in cantrip):         cantrip += "\n- Etherealness.\t The fiend magically enters the Ethereal Plane from the Material Plane, or vice versa."
         if Dice() == 1 and not ("Fire Breath" in cantrip):          cantrip += "\n- Fire Breath (Recharge 5-6).\t The fiend exhales fire in a 15-foot cone. Each creature in that area must make a DC [10+%CON] Dexterity saving throw, taking 21 (6d6) fire damage on a failed save, or half as much damage on a successful one."
         if Dice() == 1 and not ("Fire Ray" in cantrip):             cantrip += "\n- Fire Ray \t Ranged Spell Attack. Range 120ft. One target. Hit: 10(3d6) fire damage."
@@ -13574,89 +12965,35 @@ def Magic(Lvl, race=Race(), background=Background()):
         
     if race == "Fiend":
 
-        # Cantrips
-        cantrips_list = [
-            "Eldritch Blast", "Fire Bolt", "Minor Illusion", "Thaumaturgy"]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
-
-        # 1/Day each
-        one_day_each_list = ["Hellish Rebuke", "Inflict Wounds", "Dispel Magic", "Disguise Self", "Cloudkill", "Plane Shift", "Phantasmal Force" ]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-1, 0, max_spell_level, spell_definition="1/Day each")
-
-        # 2/Day each
-        two_day_each_list = ["Darkness", "Scorching Ray", "Suggestion", "Alter Self", "Invisibility"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-
-        # 3/Day each
-        three_day_each_list = ["Fireball", "Vampiric Touch", "Fear", "Detect Magic", "Command", "Entangle"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-3, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = ["Burning Hands", "Charm Person", "Command", "Hellish Rebuke", "Inflict Wounds"]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
-
-        # 2nd Level Spells
-        second_list = ["Blindness/Deafness", "Darkness", "Hold Person", "Ray of Enfeeblement", "Scorching Ray"]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-
-        # 3rd Level Spells
-        third_list = [
-            "Animate Dead", "Bestow Curse", "Fear", "Fireball", "Vampiric Touch"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = ["Blight", "Dimension Door", "Fire Shield", "Wall of Fire", "Phantasmal Killer"]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = ["Flame Strike", "Infernal Calling", "Dominate Person", "Hold Monster", "Geas"]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-
-        # 6th Level Spells
-        sixth_list = ["Chain Lightning", "Circle of Death", "Create Undead", "Eyebite", "True Seeing"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = ["Finger of Death", "Fire Storm", "Plane Shift", "Power Word Pain", "Symbol"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = ["Demiplane", "Dominate Monster", "Incendiary Cloud", "Power Word Stun", "Sunburst"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = ["Gate", "Imprisonment", "Meteor Swarm", "Power Word Kill", "True Polymorph"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+        cantrips_list += [            "Eldritch Blast",            "Fire Bolt",            "Minor Illusion",            "Thaumaturgy"]
+        one_day_each_list += ["Hellish Rebuke", "Inflict Wounds", "Dispel Magic", "Disguise Self", "Cloudkill", "Plane Shift", "Phantasmal Force" ]
+        two_day_each_list += ["Darkness", "Scorching Ray", "Suggestion", "Alter Self", "Invisibility"]
+        three_day_each_list += ["Fireball", "Vampiric Touch", "Fear", "Detect Magic", "Command", "Entangle"]
+        first_list += ["Burning Hands", "Charm Person", "Command", "Hellish Rebuke", "Inflict Wounds"]
+        second_list += ["Blindness/Deafness", "Darkness", "Hold Person", "Ray of Enfeeblement", "Scorching Ray"]
+        third_list += [            "Animate Dead", "Bestow Curse", "Fear", "Fireball", "Vampiric Touch"]
+        fourth_list += ["Blight", "Dimension Door", "Fire Shield", "Wall of Fire", "Phantasmal Killer"]
+        fifth_list += ["Flame Strike", "Infernal Calling", "Dominate Person", "Hold Monster", "Geas"]
+        sixth_list += ["Chain Lightning", "Circle of Death", "Create Undead", "Eyebite", "True Seeing"]
+        seventh_list += ["Finger of Death", "Fire Storm", "Plane Shift", "Power Word Pain", "Symbol"]
+        eighth_list += ["Demiplane", "Dominate Monster", "Incendiary Cloud", "Power Word Stun", "Sunburst"]
+        ninth_list += ["Gate", "Imprisonment", "Meteor Swarm", "Power Word Kill", "True Polymorph"]
 
     # GIANT.
     if race == "Giant":
 
+        difficulty += Dice(12) - Dice(12)
+        max_spell_level = get_max_spell_level(Lvl, difficulty)
+
         # Cantrips
-        cantrips_list = [
+        cantrips_list += [
             "Gust",
             "Mold Earth",
             "Thunderclap",
             "Magic Stone"]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
 
-        # 1/Day each
-        one_day_each_list = ["Enlarge/Reduce", "Earth Tremor", "Thunderwave"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-1, 0, max_spell_level, spell_definition="1/Day each")
+        one_day_each_list += [
+            "Enlarge/Reduce", "Earth Tremor", "Thunderwave"]
 
         # 2/Day each
         two_day_each_list = ["Gust of Wind", "Spike Growth", "Warding Wind"]
@@ -13694,20 +13031,13 @@ def Magic(Lvl, race=Race(), background=Background()):
         for s in fifth_list:
             fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
 
-        # 6th Level Spells
-        sixth_list = ["Bones of the Earth", "Move Earth", "Sunburst", "Wind Walk", "Investiture of Stone"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = ["Whirlwind", "Reverse Gravity", "Fire Storm", "Regenerate", "Sequester"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = ["Control Weather", "Earthquake", "Incendiary Cloud", "Abi-Dalzim’s Horrid Wilting", "Telepathy"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
+        sixth_list += ["Bones of the Earth", "Move Earth", "Sunburst", "Wind Walk", "Investiture of Stone"]
+        seventh_list += ["Whirlwind", "Reverse Gravity", "Fire Storm", "Regenerate", "Sequester"]
+        eighth_list += ["Control Weather",
+                       "Earthquake",
+                       "Incendiary Cloud",
+                       "Abi-Dalzim’s Horrid Wilting",
+                       "Telepathy"]
 
         # 9th Level Spells
         ninth_list = [
@@ -13717,6 +13047,9 @@ def Magic(Lvl, race=Race(), background=Background()):
 
     # GNOME.
     if race == "Gnome":
+        
+        difficulty += Dice(6) - Dice(4)
+        max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         # Cantrips
         cantrips_list = [
@@ -13726,10 +13059,10 @@ def Magic(Lvl, race=Race(), background=Background()):
         for c in cantrips_list:
             cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
 
-        # 1/Day each
-        one_day_each_list = ["Disguise Self", "Expeditious Retreat", "Silent Image", "Nondetection"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-1, 0, max_spell_level, spell_definition="1/Day each")
+        one_day_each_list = ["Disguise Self",
+                             "Expeditious Retreat",
+                             "Silent Image",
+                             "Nondetection"]
 
         # 2/Day each
         two_day_each_list = ["Blur", "Invisibility", "Nystul’s Magic Aura", "Blindness/Deafness"]
@@ -13777,9 +13110,8 @@ def Magic(Lvl, race=Race(), background=Background()):
             seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
 
         # 8th Level Spells
-        eighth_list = ["Incendiary Cloud", "Dominate Monster", "Maze", "Mind Blank", "Power Word Stun"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
+        eighth_list += ["Incendiary Cloud", "Dominate Monster", "Maze", "Mind Blank", "Power Word Stun"]
+    
 
         # 9th Level Spells
         ninth_list = ["Time Stop", "True Polymorph", "Weird", "Power Word Heal", "Power Word Kill"]
@@ -13789,16 +13121,16 @@ def Magic(Lvl, race=Race(), background=Background()):
     # GOBLIN.
     if race == "Goblin" and Dice() == 1 and not ("Leadership" in cantrip):           cantrip += " \n- Leadership (Recharges after a Short or Long Rest). \n\t For 1 minute, the goblin can utter a special command or warning whenever a nonhostile creature that it can see within 30 feet of it makes an attack roll or a saving throw. The creature can add a d4 to its roll provided it can hear and understand the goblin. A creature can benefit from only one Leadership die at a time. This effect ends if the goblin is incapacitated."
     if race == "Goblin":
+        
+        difficulty += Dice(10) - Dice(10)
+        max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         # Cantrips
         cantrips_list = ["Minor Illusion", "Prestidigitation", "Mage Hand", "Vicious Mockery"]
         for c in cantrips_list:
             cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
 
-        # 1/Day each
-        one_day_each_list = ["Disguise Self", "Tasha's Hideous Laughter", "Bane"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-1, 0, max_spell_level, spell_definition="1/Day each")
+        one_day_each_list += ["Disguise Self", "Tasha's Hideous Laughter", "Bane"]
 
         # 2/Day each
         two_day_each_list = ["Darkness", "Misty Step", "Silent Image"]
@@ -13826,12 +13158,14 @@ def Magic(Lvl, race=Race(), background=Background()):
             third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
 
         # 4th Level Spells
-        fourth_list = ["Confusion", "Greater Invisibility", "Polymorph", "Shadow of Moil", "Dimension Door"]
+        fourth_list = [
+            "Confusion", "Greater Invisibility", "Polymorph", "Shadow of Moil", "Dimension Door"]
         for s in fourth_list:
             fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
 
         # 5th Level Spells
-        fifth_list = ["Mislead", "Animate Objects", "Dominate Person", "Geas", "Seeming"]
+        fifth_list = [
+            "Mislead", "Animate Objects", "Dominate Person", "Geas", "Seeming"]
         for s in fifth_list:
             fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
 
@@ -13862,10 +13196,7 @@ def Magic(Lvl, race=Race(), background=Background()):
         for c in cantrips_list:
             cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
 
-        # 1/Day each
-        one_day_each_list = ["Disguise Self", "Expeditious Retreat", "Jump"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-1, 0, max_spell_level, spell_definition="1/Day each")
+        one_day_each_list += ["Disguise Self", "Expeditious Retreat", "Jump"]
 
         # 2/Day each
         two_day_each_list = ["Grease", "Fog Cloud", "Hideous Laughter"]
@@ -13889,10 +13220,8 @@ def Magic(Lvl, race=Race(), background=Background()):
             second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
 
         # 3rd Level Spells
-        third_list = [
+        third_list += [
             "Gaseous Form", "Fear", "Stinking Cloud", "Hypnotic Pattern", "Bestow Curse"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
 
         # 4th Level Spells
         fourth_list = ["Confusion", "Greater Invisibility", "Polymorph", "Dimension Door", "Hallucinatory Terrain"]
@@ -13900,9 +13229,7 @@ def Magic(Lvl, race=Race(), background=Background()):
             fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
 
         # 5th Level Spells
-        fifth_list = ["Mislead", "Animate Objects", "Dominate Person", "Geas", "Cloudkill"]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
+        fifth_list += ["Mislead", "Animate Objects", "Dominate Person", "Geas", "Cloudkill"]
 
         # 6th Level Spells
         sixth_list = ["Programmed Illusion", "Eyebite", "Mass Suggestion", "Circle of Death", "True Seeing"]
@@ -13915,7 +13242,11 @@ def Magic(Lvl, race=Race(), background=Background()):
             seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
 
         # 8th Level Spells
-        eighth_list = ["Dominate Monster", "Power Word Stun", "Incendiary Cloud", "Demiplane", "Maze"]
+        eighth_list = ["Dominate Monster",
+                       "Power Word Stun",
+                       "Incendiary Cloud",
+                       "Demiplane",
+                       "Maze"]
         for s in eighth_list:
             eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
 
@@ -13926,16 +13257,15 @@ def Magic(Lvl, race=Race(), background=Background()):
 
     # HALFLING. 
     if race == "Halfling":
+        difficulty += Dice(4) - Dice(4)
+        max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         # Cantrips
         cantrips_list = ["Minor Illusion", "Prestidigitation", "Mage Hand", "Guidance"]
         for c in cantrips_list:
             cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
 
-        # 1/Day each
-        one_day_each_list = ["Cure Wounds", "Bless", "Jump"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-1, 0, max_spell_level, spell_definition="1/Day each")
+        one_day_each_list += ["Cure Wounds", "Bless", "Jump"]
 
         # 2/Day each
         two_day_each_list = [
@@ -13944,11 +13274,9 @@ def Magic(Lvl, race=Race(), background=Background()):
             two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
 
         # 3/Day each
-        three_day_each_list = [
+        three_day_each_list += [
             "Heroism",
             "Haste", "Protection from Energy"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-3, 0, max_spell_level, spell_definition="3/Day each")
 
         # 1st Level Spells
         first_list = ["Cure Wounds", "Disguise Self", "Feather Fall", "Hideous Laughter", "Charm Person"]
@@ -13961,9 +13289,7 @@ def Magic(Lvl, race=Race(), background=Background()):
             second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
 
         # 3rd Level Spells
-        third_list = ["Blink", "Fly", "Haste", "Protection from Energy", "Water Walk"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
+        third_list += ["Blink", "Fly", "Haste", "Protection from Energy", "Water Walk"]
 
         # 4th Level Spells
         fourth_list = ["Greater Invisibility", "Polymorph", "Dimension Door", "Freedom of Movement", "Stone Shape"]
@@ -13990,26 +13316,24 @@ def Magic(Lvl, race=Race(), background=Background()):
         for s in eighth_list:
             eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
 
-        # 9th Level Spells
-        ninth_list = ["Foresight", "Imprisonment", "Meteor Swarm", "Time Stop", "True Resurrection"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
-
+        ninth_list += ["Foresight", "Imprisonment", "Meteor Swarm", "Time Stop", "True Resurrection"]
 
 
     # HUMAN. 
     if race == "Human":
+        difficulty += Dice(6) - Dice(6)
+        max_spell_level = get_max_spell_level(Lvl, difficulty)
 
         # Cantrips
         cantrips_list = [
-            "Prestidigitation", "Thaumaturgy", "Light", "Mending"]
+            "Prestidigitation",
+            "Thaumaturgy",
+            "Light",
+            "Mending"]
         for c in cantrips_list:
             cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
 
-        # 1/Day each
-        one_day_each_list = ["Longstrider", "Charm Person", "Goodberry"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-1, 0, max_spell_level, spell_definition="1/Day each")
+        one_day_each_list += ["Longstrider", "Charm Person", "Goodberry"]
 
         # 2/Day each
         two_day_each_list = ["Enhance Ability", "Aid", "Calm Emotions"]
@@ -14021,10 +13345,11 @@ def Magic(Lvl, race=Race(), background=Background()):
         for s in three_day_each_list:
             three, _ = add_spell(three, s, max_spell_level-3, 0, max_spell_level, spell_definition="3/Day each")
 
-        # 1st Level Spells
-        first_list = ["Alarm", "Comprehend Languages", "Cure Wounds", "Detect Magic", "Shield"]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
+        first_list += ["Alarm",
+                      "Comprehend Languages",
+                      "Cure Wounds",
+                      "Detect Magic",
+                      "Shield"]
 
         # 2nd Level Spells
         second_list = ["Detect Thoughts", "Locate Object", "Magic Weapon", "See Invisibility", "Zone of Truth"]
@@ -14042,202 +13367,80 @@ def Magic(Lvl, race=Race(), background=Background()):
             fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
 
         # 5th Level Spells
-        fifth_list = [
-            "Animate Objects", "Contact Other Plane", "Legend Lore", "Mass Cure Wounds", "Teleportation Circle"]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-
-        # 6th Level Spells
-        sixth_list = ["Contingency", "Find the Path", "Guards and Wards", "Mass Suggestion", "True Seeing"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = ["Etherealness", "Mirage Arcane", "Plane Shift", "Regenerate", "Teleport"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = ["Antimagic Field", "Control Weather", "Demiplane", "Dominate Monster", "Telepathy"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = ["Foresight", "Gate", "Imprisonment", "Mass Heal", "Time Stop"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
-
+        fifth_list += ["Animate Objects", "Contact Other Plane", "Legend Lore", "Mass Cure Wounds", "Teleportation Circle"]
+        sixth_list += ["Contingency", "Find the Path", "Guards and Wards", "Mass Suggestion", "True Seeing"]
+        seventh_list += ["Etherealness", "Mirage Arcane", "Plane Shift", "Regenerate", "Teleport"]
+        eighth_list += ["Antimagic Field", "Control Weather", "Demiplane", "Dominate Monster", "Telepathy"]
+        ninth_list += [ "Foresight", "Gate", "Imprisonment", "Mass Heal", "Time Stop"]
 
 
 
     # KOBOLDS.
     if race == "Kobold":
+        difficulty += Dice(12) - Dice(12)
+        max_spell_level = get_max_spell_level(Lvl, difficulty)
 
-        # Cantrips
-        cantrips_list = ["Dancing Lights", "Minor Illusion", "Prestidigitation", "Message"]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
-
-        # 1/Day each
-        one_day_each_list = ["Color Spray", "Grease", "Hideous Laughter"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-1, 0, max_spell_level, spell_definition="1/Day each")
-
-        # 2/Day each
-        two_day_each_list = ["Enlarge/Reduce", "Glitterdust", "Pyrotechnics"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-
-        # 3/Day each
-        three_day_each_list = ["Hypnotic Pattern", "Stinking Cloud", "Major Image"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-3, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = ["Alarm", "Expeditious Retreat", "Feather Fall", "Snare", "Tasha’s Hideous Laughter"]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
-
-        # 2nd Level Spells
-        second_list = ["Find Traps", "Misty Step", "Nystul’s Magic Aura", "Silence", "Web"]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-
-        # 3rd Level Spells
-        third_list = ["Blink", "Glyph of Warding", "Hypnotic Pattern", "Leomund’s Tiny Hut", "Sleet Storm"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = ["Dimension Door", "Greater Invisibility", "Polymorph", "Stone Shape", "Watery Sphere"]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = ["Animate Objects", "Creation", "Mislead", "Seeming", "Teleportation Circle"]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-
-        # 6th Level Spells
-        sixth_list = ["Arcane Gate", "Find the Path", "Programmed Illusion", "True Seeing", "Wall of Ice"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = ["Etherealness", "Mirage Arcane", "Mordenkainen’s Magnificent Mansion", "Prismatic Spray", "Teleport"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = ["Antipathy/Sympathy", "Demiplane", "Dominate Monster", "Feeblemind", "Illusory Dragon"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = ["Imprisonment", "Invulnerability", "Mass Polymorph", "Power Word Kill", "Time Stop"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
-
-
-
-
+        cantrips_list += ["Dancing Lights", "Minor Illusion", "Prestidigitation", "Message"]
+        one_day_each_list += ["Color Spray", "Grease", "Hideous Laughter"]
+        two_day_each_list += ["Enlarge/Reduce", "Glitterdust", "Pyrotechnics"]
+        three_day_each_list += ["Hypnotic Pattern", "Stinking Cloud", "Major Image"]
+        first_list += ["Alarm", "Expeditious Retreat", "Feather Fall", "Snare", "Tasha’s Hideous Laughter"]
+        second_list += ["Find Traps", "Misty Step", "Nystul’s Magic Aura", "Silence", "Web"]
+        third_list += ["Blink", "Glyph of Warding", "Hypnotic Pattern", "Leomund’s Tiny Hut", "Sleet Storm"]
+        fourth_list += ["Dimension Door", "Greater Invisibility", "Polymorph", "Stone Shape", "Watery Sphere"]
+        fifth_list += ["Animate Objects", "Creation", "Mislead", "Seeming", "Teleportation Circle"]
+        sixth_list += ["Arcane Gate", "Find the Path", "Programmed Illusion", "True Seeing", "Wall of Ice"]
+        seventh_list += ["Etherealness", "Mirage Arcane", "Mordenkainen’s Magnificent Mansion", "Prismatic Spray", "Teleport"]
+        eighth_list += ["Antipathy/Sympathy", "Demiplane", "Dominate Monster", "Feeblemind", "Illusory Dragon"]
+        ninth_list += ["Imprisonment", "Invulnerability", "Mass Polymorph", "Power Word Kill", "Time Stop"]
 
     # LIZARDFOLK.
-        
     if race == "Lizardfolk":
+        difficulty += Dice(6) - Dice(6)
+        max_spell_level = get_max_spell_level(Lvl, difficulty)
 
-        # Cantrips
-        cantrips_list = ["Guidance", "Mending", "Poison Spray", "Thorn Whip"]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
-
-        # 1/Day each
-        one_day_each_list = ["Cure Wounds", "Entangle", "Fog Cloud"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-1, 0, max_spell_level, spell_definition="1/Day each")
-
-        # 2/Day each
-        two_day_each_list = ["Barkskin", "Lesser Restoration", "Protection from Poison"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-
-        # 3/Day each
-        three_day_each_list = ["Conjure Animals", "Plant Growth", "Water Walk"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-3, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = ["Create or Destroy Water", "Cure Wounds", "Entangle", "Fog Cloud", "Speak with Animals"]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
-
-        # 2nd Level Spells
-        second_list = ["Animal Messenger", "Barkskin", "Find Traps", "Pass without Trace", "Spike Growth"]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-
-        # 3rd Level Spells
-        third_list = ["Call Lightning", "Conjure Animals", "Meld into Stone", "Plant Growth", "Water Walk"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = [
-            "Conjure Woodland Beings", "Control Water", "Freedom of Movement", "Giant Insect", "Stoneskin"]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = [
-            "Awaken", "Commune with Nature", "Conjure Elemental", "Mass Cure Wounds", "Reincarnate"]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-
-        # 6th Level Spells
-        sixth_list = ["Bones of the Earth", "Heal", "Heroes’ Feast", "Move Earth", "Sunbeam"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = ["Mirage Arcane", "Regenerate", "Resurrection", "Reverse Gravity", "Whirlwind"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = [
-            "Antipathy/Sympathy", "Control Weather", "Earthquake", "Tsunami", "Sunburst"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = [
-            "Foresight",
-            "Shapechange", "Storm of Vengeance", "True Resurrection", "Mass Heal"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
-
-
-
-
+        cantrips_list += ["Guidance", "Mending", "Poison Spray", "Thorn Whip"]
+        one_day_each_list += ["Cure Wounds", "Entangle", "Fog Cloud"]
+        two_day_each_list += ["Barkskin", "Lesser Restoration", "Protection from Poison"]
+        three_day_each_list += ["Conjure Animals", "Plant Growth", "Water Walk"]
+        first_list += ["Create or Destroy Water", "Cure Wounds", "Entangle", "Fog Cloud", "Speak with Animals"]
+        second_list += ["Animal Messenger", "Barkskin", "Find Traps", "Pass without Trace", "Spike Growth"]
+        third_list += ["Call Lightning", "Conjure Animals", "Meld into Stone", "Plant Growth", "Water Walk"]
+        fourth_list += ["Conjure Woodland Beings", "Control Water", "Freedom of Movement", "Giant Insect", "Stoneskin"]
+        fifth_list += ["Awaken", "Commune with Nature", "Conjure Elemental", "Mass Cure Wounds", "Reincarnate"]
+        sixth_list += ["Bones of the Earth", "Heal", "Heroes’ Feast", "Move Earth", "Sunbeam"]
+        seventh_list += ["Mirage Arcane", "Regenerate", "Resurrection", "Reverse Gravity", "Whirlwind"]
+        eighth_list += [ "Antipathy/Sympathy", "Control Weather", "Earthquake", "Tsunami", "Sunburst"]
+        ninth_list += ["Foresight","Shapechange","Storm of Vengeance","True Resurrection","Mass Heal"]
 
     #MONSTROSITIES.
-    ## At will:
     if race == "Monstrosity":
-        if Dice(8) == 1 and not ("Acid Spray" in cantrip):
-            cantrip += "\n - Acid Spray (Recharge 6): \n\t The Monstrosity spits acid in a line that is 30 feet long and 5 feet wide, provided that it has no creature grappled. Each creature in that line must make a DC [10+%Str] Dexterity saving throw, taking 10 (3d6) acid damage on a failed save, or half as much damage on a successful one."
-        if Dice(10) == 1 and not ("Confusing Gaze" in cantrip):
-            cantrip += "\n - Confusing Gaze: \n\t When a creature starts its turn within 30 feet of the monstrosity and is able to see the monstrosity's eyes, the monstrosity can magically force it to make a DC [11+%CON] Charisma saving throw, unless the monstrosity is incapacitated. \n\t On a failed saving throw, the creature can't take reactions until the start of its next turn and rolls a d8 to determine what it does during that turn. On a 1 to 4, the creature does nothing. On a 5 or 6, the creature takes no action but uses all its movement to move in a random direction. On a 7 or 8, the creature makes one melee attack against a random creature, or it does nothing if no creature is within reach. \n\t Unless surprised, a creature can avert its eyes to avoid the saving throw at the start of its turn. If the creature does so, it can't see the monstrosity until the start of its next turn, when it can avert its eyes again. If the creature looks at the monstrosity in the meantime, it must immediately make the save." 
-        if Dice() == 1 and not ("Chilling Gaze" in cantrip):
-            cantrip += "\n - Chilling Gaze: \n\t The monstrosity targets one creature it can see within 30 feet of it. If the target can see the monstrosity, the target must succeed on a DC [10+%CON] Constitution saving throw against this magic or take 10 (3d6) cold damage and then be paralyzed for 1 minute, unless it is immune to cold damage. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success. If the target's saving throw is successful, or if the effect ends on it, the target is immune to the Chilling Gaze of all monstrosities for 1 hour."
-        if Dice() == 1 and not ("Disguise Self" in cantrip):
-            cantrip += "\n - Disguise self (humanoid form) Aura: \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
-        if Dice(8) == 1 and not ("Fire Breath" in cantrip):
-            cantrip += "\n -  Fire Breath (Recharge 5–6). \n\t The monstrosity exhales fire in a 15-foot cone. Each creature in that area must make a DC[11+%CON] Dexterity saving throw, taking 31 (7d8) fire damage on a failed save, or half as much damage on a successful one."
-                
-        if Dice(8) == 1 and not ("Luring Song" in cantrip):
-            cantrip += "\n - Luring Song: \n\t The monstrosity sings a magical melody. Every humanoid and giant within 300 feet of the monstrosity that can hear the song must succeed on a DC [10+%Cha] Wisdom saving throw or be charmed until the song ends. The monstrosity must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time. The song ends if the monstrosity is incapacitated. While charmed by the monstrosity, a target is incapacitated and ignores the songs of other monstrosities. If the charmed target is more than 5 feet away from the monstrosity, the target must move on its turn toward the monstrosity by the most direct route. It doesn't avoid opportunity attacks, but before moving into damaging terrain, such as lava or a pit, and whenever it takes damage from a source other than the monstrosity, a target can repeat the saving throw. A creature can also repeat the saving throw at the begguining of each of its turns. If a creature's saving throw is successful, the effect ends on it. A target that successfully saves is immune to this monstrosity's song for the next 24 hours."
+        difficulty += Dice(6) - Dice(12)
+        max_spell_level = get_max_spell_level(Lvl, difficulty)
 
-        if Dice(8) == 1 and not ("Major Image" in cantrip):          cantrip += "\n - Major Image."
+        if Dice(8) == 1 and not ("Acid Spray" in recharge):
+            recharge += f"\n- Acid Spray (Recharge 6): \n\t The {race} spits acid in a line that is 30 feet long and 5 feet wide, provided that it has no creature grappled." +\
+                        f"Each creature in that line must make a Dexterity saving throw, "+\
+                        "taking {3*npc.proficiency_bonus} ({npc.proficiency_bonus}d6) acid damage on a failed save, or half as much damage on a successful one."
+        if Dice(10) == 1 and not ("Confusing Gaze" in recharge):
+            recharge += f"\n- Confusing Gaze (Recharge 6): \n\t When a creature starts its turn within 30 feet of the monstrosity and is able to see the {race}'s eyes, "+\
+                        f"the {race} can magically force it to make a Charisma saving throw, unless the {race} is incapacitated. "+ \
+                        f"\n\t On a failed saving throw, the creature can't take reactions until the start of its next turn and rolls a d8 to determine what it does during"+\
+                        f"that turn. On a 1 to 4, the creature does nothing. On a 5 or 6, the creature takes no action but uses all its movement to move in a random direction."+\
+                        f"On a 7 or 8, the creature makes one melee attack against a random creature, or it does nothing if no creature is within reach. "+\
+                        "\n\t Unless surprised, a creature can avert its eyes to avoid the saving throw at the start of its turn. If the creature does so, "+\
+                        f"it can't see the {race} until the start of its next turn, when it can avert its eyes again. If the creature looks at the {race} in the meantime, "+\
+                        "it must immediately make the save." 
+        if Dice() == 1 and not ("Chilling Gaze" in recharge):
+            recharge += f"\n - Chilling Gaze (Recharge 6): \n\t The monstrosity targets one creature it can see within 30 feet of it. If the target can see the monstrosity, the target must succeed on a DC [10+%CON] Constitution saving throw against this magic or take 10 (3d6) cold damage and then be paralyzed for 1 minute, unless it is immune to cold damage. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success. If the target's saving throw is successful, or if the effect ends on it, the target is immune to the Chilling Gaze of all monstrosities for 1 hour."
+        if Dice() == 1 and not ("Disguise Self" in recharge):
+            recharge += "\n - Disguise self (humanoid form) Aura (Recharge 6): \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
+        if Dice(8) == 1 and not ("Fire Breath" in recharge):
+            recharge += "\n -  Fire Breath (Recharge 5–6). \n\t The monstrosity exhales fire in a 15-foot cone. Each creature in that area must make a DC[11+%CON] Dexterity saving throw, taking 31 (7d8) fire damage on a failed save, or half as much damage on a successful one."
+                
+        if Dice(8) == 1 and not ("Luring Song" in recharge):
+            recharge += "\n - Luring Song: \n\t The {race} sings a magical melody. Every humanoid and giant within 300 feet of the monstrosity that can hear the song must succeed on a DC [10+%Cha] Wisdom saving throw or be charmed until the song ends. The monstrosity must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time. The song ends if the monstrosity is incapacitated. While charmed by the monstrosity, a target is incapacitated and ignores the songs of other monstrosities. If the charmed target is more than 5 feet away from the monstrosity, the target must move on its turn toward the monstrosity by the most direct route. It doesn't avoid opportunity attacks, but before moving into damaging terrain, such as lava or a pit, and whenever it takes damage from a source other than the monstrosity, a target can repeat the saving throw. A creature can also repeat the saving throw at the begguining of each of its turns. If a creature's saving throw is successful, the effect ends on it. A target that successfully saves is immune to this monstrosity's song for the next 24 hours."
+
         if Dice(10) == 1 and not ("Petrifying Breath" in cantrip):    cantrip += "\n - Petrifying Breath (Recharge 5-6): \n\t The monstrosity exhales petrifying gas in a 30-foot cone. Each creature in that area must succeed on a Constitution saving throw (against the creature's Spellsave DC). On a failed save, a target begins to turn to stone and is restrained. The restrained target must repeat the saving throw at the start of its next turn. On a success, the effect ends on the target. On a failure, the target is petrified until freed by the greater restoration spell or other magic."
         if Dice(10) == 1 and not ("Petrifying Gaze" in cantrip):      cantrip += "\n - Petrifying Gaze: \n\t If a creature starts its turn within 30 feet of the monstrosity and the two of them can see each other, the monstrosity can force the creature to make a DC [10+%CON] Constitution saving throw if the monstrosity isn't incapacitated. On a failed save, the creature magically begins to turn to stone and is restrained. It must repeat the saving throw at the start of its next turn. On a success, the effect ends. On a third failure, the creature is petrified until freed by the greater restoration spell or other magic. \n\t A creature that isn't surprised can avert its eyes to avoid the saving throw at the start of its turn. If it does so, it can't see the monstrosity until the start of its next turn, when it can avert its eyes again. If it looks at the monstrosity in the meantime, it must immediately make the save. \n\t If the monstrosity sees its reflection within 30 feet of it in bright light, it mistakes itself for a rival and targets itself with its gaze."
         if Dice(8) == 1 and not ("Read Thoughts" in cantrip):        cantrip += "\n - Read Thoughts: \n\t The monstrosity magically reads the surface thoughts of one creature within 60 feet of it. The effect can penetrate barriers, but 3 feet of wood or dirt, 2 feet of stone, 2 inches of metal, or a thin sheet of lead blocks it. While the target is in range, the monstrosity can continue reading its thoughts, as long as the monstrosity's concentration isn't broken (as if concentrating on a spell). While reading the target's mind, the monstrosity has advantage on Wisdom (Insight) and Charisma (Deception, Intimidation, and Persuasion) checks against the target."
@@ -14251,71 +13454,19 @@ def Magic(Lvl, race=Race(), background=Background()):
 
     if race == "Monstrosity":
 
-        # Cantrips
-        cantrips_list = [
-            "Acid Splash", "Infestation", "Poison Spray", "Thaumaturgy"]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
-
-        # 1/Day each
-        one_day_each_list = ["Disguise Self", "Fear", "Silent Image"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-1, 0, max_spell_level, spell_definition="1/Day each")
-
-        # 2/Day each
-        two_day_each_list = ["Alter Self", "Blur", "Mirror Image"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-
-        # 3/Day each
-        three_day_each_list = ["Major Image", "Protection from Energy", "Tongues"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-3, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = ["Charm Person", "Detect Magic", "Disguise Self", "Illusory Script", "Silent Image"]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
-
-        # 2nd Level Spells
-        second_list = ["Blur", "Darkness", "Invisibility", "Magic Mouth", "Mirror Image"]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-
-        # 3rd Level Spells
-        third_list = ["Fear", "Major Image", "Nondetection", "Protection from Energy", "Speak with Dead"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = ["Confusion", "Dimension Door", "Greater Invisibility", "Hallucinatory Terrain", "Polymorph"]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = ["Dominate Person", "Dream", "Geas", "Mislead", "Modify Memory"]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-
-        # 6th Level Spells
-        sixth_list = ["Eyebite", "Mass Suggestion", "Programmed Illusion", "True Seeing", "Contingency"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = ["Mirage Arcane", "Project Image", "Regenerate", "Resurrection", "Sequester"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = ["Dominate Monster", "Feeblemind", "Power Word Stun", "Telepathy", "Trap the Soul"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = ["Imprisonment", "Power Word Kill", "Psychic Scream", "True Polymorph", "Weird"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+        cantrips_list += ["Acid Splash", "Infestation", "Poison Spray", "Thaumaturgy"]
+        one_day_each_list += ["Disguise Self", "Fear", "Silent Image"]
+        two_day_each_list += ["Alter Self", "Blur", "Mirror Image"]
+        three_day_each_list += ["Major Image", "Protection from Energy", "Tongues"]
+        first_list += ["Charm Person", "Detect Magic", "Disguise Self", "Illusory Script", "Silent Image"]
+        second_list += ["Blur", "Darkness", "Invisibility", "Magic Mouth", "Mirror Image"]
+        third_list += ["Fear", "Major Image", "Nondetection", "Protection from Energy", "Speak with Dead"]
+        fourth_list += ["Confusion", "Dimension Door", "Greater Invisibility", "Hallucinatory Terrain", "Polymorph"]
+        fifth_list += ["Dominate Person", "Dream", "Geas", "Mislead", "Modify Memory"]
+        sixth_list += ["Eyebite", "Mass Suggestion", "Programmed Illusion", "True Seeing", "Contingency"]
+        seventh_list += ["Mirage Arcane", "Project Image", "Regenerate", "Resurrection", "Sequester"]
+        eighth_list += ["Dominate Monster", "Feeblemind", "Power Word Stun", "Telepathy", "Trap the Soul"]
+        ninth_list += ["Imprisonment", "Power Word Kill", "Psychic Scream", "True Polymorph", "Weird"]
 
     ## Once a day
     if race == "Monstrosity" and Dice() == 1 and not ("Darkness Aura" in one):      one += "\n - Darkness Aura: \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
@@ -14334,430 +13485,300 @@ def Magic(Lvl, race=Race(), background=Background()):
     if race == "Ooze" and Dice() == 1 and not ("Psychic Crush" in cantrip):     cantrip += " \n- Psychic Crush (Recharge 5–6). \n\t The ooze targets one creature that it can sense within 60 feet of it. The target must make a DC [10+%INT] Intelligence saving throw, taking 10 (3d6) psychic damage on a failed save, or half as much damage on a successful one."
     if race == "Ooze":
 
-        # Cantrips
-        cantrips_list = ["Acid Splash", "Shape Water", "Mold Earth", "Gust"]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
+        difficulty += Dice(3) - Dice(6)
+        max_spell_level = get_max_spell_level(Lvl, difficulty)
 
-        # 1/Day each
-        one_day_each_list = ["Grease", "Entangle", "Tasha’s Hideous Laughter"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-1, 0, max_spell_level, spell_definition="1/Day each")
-
-        # 2/Day each
-        two_day_each_list = [
-            "Web", "Melf's Acid Arrow", "Slippery Surface"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-
-        # 3/Day each
-        three_day_each_list = ["Stinking Cloud", "Slow", "Sleet Storm"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-3, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = ["Absorb Elements", "Create or Destroy Water", "Ray of Sickness", "Mage Armor", "Grease"]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
-
-        # 2nd Level Spells
-        second_list = ["Acid Arrow", "Web", "Levitate", "Gust of Wind", "Misty Step"]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-
-        # 3rd Level Spells
-        third_list = ["Stinking Cloud", "Water Walk", "Water Breathing", "Protection from Energy", "Gaseous Form"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = ["Vitriolic Sphere", "Watery Sphere", "Stone Shape", "Control Water", "Ooze Form"]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = ["Acidic Rain", "Control Winds", "Transmute Rock", "Maelstrom", "Creation"]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-
-        # 6th Level Spells
-        sixth_list = [
-            "Acid Fog", "Move Earth", "Create Undead", "Tenser's Transformation", "Wall of Ice"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = ["Reverse Gravity", "Regenerate", "Whirlwind", "Plane Shift", "Prismatic Spray"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = ["Incendiary Cloud", "Control Weather", "Earthquake", "Telepathy", "Abi-Dalzim's Horrid Wilting"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = ["Shapechange", "Storm of Vengeance", "Time Stop", "Imprisonment", "Meteor Swarm"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
-
-
-
-
-
+        cantrips_list += ["Acid Splash","Shape Water","Mold Earth","Gust"]
+        one_day_each_list += ["Grease", "Entangle", "Tasha’s Hideous Laughter"]
+        two_day_each_list += ["Web", "Melf's Acid Arrow", "Slippery Surface"]
+        three_day_each_list += ["Stinking Cloud", "Slow", "Sleet Storm"]
+        first_list += ["Absorb Elements", "Create or Destroy Water", "Ray of Sickness", "Mage Armor", "Grease"]
+        second_list += ["Acid Arrow", "Web", "Levitate", "Gust of Wind", "Misty Step"]
+        third_list += ["Stinking Cloud", "Water Walk", "Water Breathing", "Protection from Energy", "Gaseous Form"]
+        fourth_list += ["Vitriolic Sphere", "Watery Sphere", "Stone Shape", "Control Water", "Ooze Form"]
+        fifth_list += [ "Acidic Rain", "Control Winds", "Transmute Rock", "Maelstrom", "Creation"]
+        sixth_list += ["Acid Fog", "Move Earth", "Create Undead", "Tenser's Transformation", "Wall of Ice"]
+        seventh_list += ["Reverse Gravity", "Regenerate", "Whirlwind", "Plane Shift", "Prismatic Spray"]
+        eighth_list += ["Incendiary Cloud", "Control Weather", "Earthquake", "Telepathy", "Abi-Dalzim's Horrid Wilting"]
+        ninth_list += ["Shapechange", "Storm of Vengeance", "Time Stop", "Imprisonment", "Meteor Swarm"]
 
 
     # ORCS
     if race == "Orc":
+        difficulty += Dice(4) - Dice(4)
+        max_spell_level = get_max_spell_level(Lvl, difficulty)
 
-        # Cantrips
-        cantrips_list = ["Blade Ward", "True Strike", "Thaumaturgy", "Shillelagh"]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
-
-        # 1/Day each
-        one_day_each_list = ["Longstrider", "Fog Cloud", "Jump"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-1, 0, max_spell_level, spell_definition="1/Day each")
-
-        # 2/Day each
-        two_day_each_list = ["Enlarge/Reduce", "Darkvision", "Barkskin"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-
-        # 3/Day each
-        three_day_each_list = ["Crusader's Mantle", "Haste", "Conjure Barrage"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-3, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = ["Guiding Bolt", "Thunderous Smite", "Cure Wounds", "Shield of Faith", "Hunter's Mark"]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
-
-        # 2nd Level Spells
-        second_list = ["Hold Person", "Spiritual Weapon", "Aid", "Branding Smite", "Prayer of Healing"]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-
-        # 3rd Level Spells
-        third_list = ["Crusader's Mantle", "Dispel Magic", "Magic Weapon", "Revivify", "Call to Arms"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = ["Stoneskin", "Freedom of Movement", "Divine Power", "Banishment", "Aura of Purity"]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = ["Destructive Wave", "Flame Strike", "Greater Restoration", "Circle of Power", "Raise Dead"]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-
-        # 6th Level Spells
-        sixth_list = ["Heal", "Heroes' Feast", "Planar Ally", "Word of Recall", "Find the Path"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = [
-            "Regenerate", "Resurrection", "Symbol", "Conjure Celestial", "Fire Storm"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = [
-            "Earthquake", "Holy Aura", "Antipathy/Sympathy", "Control Weather", "Giant Form"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = [
-            "Gate",
-            "Mass Heal",
-            "True Resurrection",
-            "Power Word Kill",
-            "Storm of Vengeance"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
-
-
-
+        cantrips_list += ["Blade Ward", "True Strike", "Thaumaturgy", "Shillelagh"]
+        one_day_each_list += ["Longstrider", "Fog Cloud", "Jump"]
+        two_day_each_list += ["Enlarge/Reduce", "Darkvision", "Barkskin"]
+        three_day_each_list += ["Crusader's Mantle", "Haste", "Conjure Barrage"]
+        first_list += ["Guiding Bolt", "Thunderous Smite", "Cure Wounds", "Shield of Faith", "Hunter's Mark"]
+        second_list += ["Hold Person", "Spiritual Weapon", "Aid", "Branding Smite", "Prayer of Healing"]
+        third_list += ["Crusader's Mantle", "Dispel Magic", "Magic Weapon", "Revivify", "Call to Arms"]
+        fourth_list += ["Stoneskin", "Freedom of Movement", "Divine Power", "Banishment", "Aura of Purity"]
+        fifth_list += ["Destructive Wave", "Flame Strike", "Greater Restoration", "Circle of Power", "Raise Dead"]
+        sixth_list += ["Heal", "Heroes' Feast", "Planar Ally", "Word of Recall", "Find the Path"]
+        seventh_list += ["Regenerate", "Resurrection", "Symbol", "Conjure Celestial", "Fire Storm"]
+        eighth_list += ["Earthquake", "Holy Aura", "Antipathy/Sympathy", "Control Weather", "Giant Form"]
+        ninth_list += ["Gate","Mass Heal","True Resurrection","Power Word Kill","Storm of Vengeance"]
             
     # PLANTS
     # Spores
-    if race == "Plant" and Dice(8) == 1 and not ("Hallucination Spores" in cantrip):         cantrip += "\n - Hallucination Spores \n\t The plant ejects spores at one creature it can see within 5 feet of it. The target must succeed on a DC 10+%CON Constitution saving throw or be poisoned for 1 minute. The poisoned target is incapacitated while it hallucinates. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
-    if race == "Plant" and Dice(8) == 1 and not ("Rapport Spores" in cantrip):               cantrip += "\n - Rapport Spores \n\t A 20-foot radius of spores extends from the plant. These spores can go around corners and affect only creatures with an Intelligence of 2 or higher that aren't undead, constructs, or elementals. Affected creatures can communicate telepathically with one another while they are within 30 feet of each other. The effect lasts for 1 hour."
-    if race == "Plant" and Dice(8) == 1 and not ("Caustic Spores" in one):           one += "\n - Caustic Spores \n\t The Plant releases spores in a 30-foot cone. Each creature inside the cone must succeed on a DC [10+%Con] Dexterity saving throw or take 3 (1d6) acid damage at the start of each of the plant's turns. A creature can repeat the saving throw at the start of its turn, ending the effect on itself on a success."
-    if race == "Plant" and Dice(8) == 1 and not ("Infestation Spores" in one):       one += "\n - Infestation Spores \n\t The plant releases spores that burst out in a cloud that fills a 10-foot-radius sphere centered on it, and the cloud lingers for 1 minute. Any flesh-and-blood creature in the cloud when it appears, or that enters it later, must make a DC [10+%CON] Constitution saving throw. On a successful save, the creature can't be infected by these spores for 24 hours. On a failed save, the creature is infected with a disease called the spores of Zuggtmoy and also gains a random form of indefinite madness (determined by rolling on the Madness of Zuggtmoy table) that lasts until the creature is cured of the disease or dies. While infected in this way, the creature can't be reinfected, and it must repeat the saving throw at the end of every 24 hours, ending the infection on a success. On a failure, the infected creature's body is slowly taken over by fungal growth, and after three such failed saves, the creature dies and is reanimated as a spore servant if it's a humanoid or a Large or smaller beast. \n d100 \t	Flaw (lasts until cured) \n 01-20 \t I see visions in the world around me that others do not. \n 21-40 \t I periodically slip into a catatonic state, staring off into the distance for long stretches at a time. \n 41-60 \t I see an altered version of reality, with my mind convincing itself that things are true even in the face of overwhelming evidence to the contrary. \n 61-80 \t My mind is slipping away, and my intelligence seems to wax and wane. \n  81-00 \t I am constantly scratching at unseen fungal infections."
-    if race == "Plant" and Dice(8) == 1 and not ("Euphoria Spores" in one):          one += "\n - Euphoria Spores \n\t The plant releases a cloud of spores in a 20-foot-radius sphere centered on itself. Other creatures in that area must each succeed on a DC [10+%Con] Constitution saving throw or become poisoned for 1 minute. A creature can repeat the saving throw at the start of each of its turns, ending the effect early on itself on a success. When the effect ends on it, the creature gains one level of exhaustion."
-    if race == "Plant" and Dice(8) == 1 and not ("Pacifying Spores" in three):            three += "\n - Pacifying Spores \n\t The Plant ejects spores at one creature it can see within 5 feet of it. The target must succeed on a DC [10+%CON] Constitution saving throw or be stunned for 1 minute. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
-    if race == "Plant" and Dice(8) == 1 and not ("Animating Spores" in three):            three += "\n - Animating Spores \n\t The Plant targets one corpse of a humanoid or a Large or smaller beast within 5 feet of it and releases spores at the corpse. In 24 hours, the corpse rises as a spore servant. The corpse stays animated for 1d4 + 1 weeks or until destroyed, and it can't be animated again in this way."
+    if race == "Plant":
+        recharge, _ = add_spell(recharge, "Hallucination Spores", max_spell_level, 0, max_spell_level,
+                             spell_definition="Recharge(6):" +
+                                "\t-Hallucination Spores \n\t The plant ejects spores at one creature it can see within 5 feet of it. The target must succeed on a DC 10+%CON Constitution saving throw or be poisoned for 1 minute. The poisoned target is incapacitated while it hallucinates. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success.")
+        recharge, _ = add_spell(recharge, "Rapport Spores", max_spell_level, 0, max_spell_level,
+                             spell_definition="Recharge(6):" +
+                                "\t-Rapport Spores \n\t A 20-foot radius of spores extends from the plant. These spores can go around corners and affect only creatures with an Intelligence of 2 or higher that aren't undead, constructs, or elementals. Affected creatures can communicate telepathically with one another while they are within 30 feet of each other. The effect lasts for 1 hour.")
+        recharge, _ = add_spell(recharge, "Caustic Spores", max_spell_level, 0, max_spell_level,
+                             spell_definition="Recharge(6):" +
+                                "\t-Caustic Spores \n\t The Plant releases spores in a 30-foot cone. Each creature inside the cone must succeed on a DC [10+%Con] Dexterity saving throw or take 3 (1d6) acid damage at the start of each of the plant's turns. A creature can repeat the saving throw at the start of its turn, ending the effect on itself on a success.")
+        recharge, _ = add_spell(recharge, "Infestation Spores", max_spell_level, 0, max_spell_level,
+                             spell_definition="Recharge(6):" +
+                                "\t- Infestation Spores \n\t The plant releases spores that burst out in a cloud that fills a 10-foot-radius sphere centered on it, and the cloud lingers for 1 minute. Any flesh-and-blood creature in the cloud when it appears, or that enters it later, must make a DC [10+%CON] Constitution saving throw. On a successful save, the creature can't be infected by these spores for 24 hours. On a failed save, the creature is infected with a disease called the spores of Zuggtmoy and also gains a random form of indefinite madness (determined by rolling on the Madness of Zuggtmoy table) that lasts until the creature is cured of the disease or dies. While infected in this way, the creature can't be reinfected, and it must repeat the saving throw at the end of every 24 hours, ending the infection on a success. On a failure, the infected creature's body is slowly taken over by fungal growth, and after three such failed saves, the creature dies and is reanimated as a spore servant if it's a humanoid or a Large or smaller beast. \n d100 \t	Flaw (lasts until cured) \n 01-20 \t I see visions in the world around me that others do not. \n 21-40 \t I periodically slip into a catatonic state, staring off into the distance for long stretches at a time. \n 41-60 \t I see an altered version of reality, with my mind convincing itself that things are true even in the face of overwhelming evidence to the contrary. \n 61-80 \t My mind is slipping away, and my intelligence seems to wax and wane. \n  81-00 \t I am constantly scratching at unseen fungal infections.")
+        recharge, _ = add_spell(recharge, "Euphoria Spores", max_spell_level, 0, max_spell_level,
+                             spell_definition="Recharge(6):" +
+                                 "\t-Euphoria Spores \n\t The plant releases a cloud of spores in a 20-foot-radius sphere centered on itself. " +
+                                 "Other creatures in that area must each succeed on a Constitution saving throw or become poisoned for 1 minute. " +
+                                 "A creature can repeat the saving throw at the start of each of its turns, ending the effect early on itself on a success. " +
+                                 "When the effect ends on it, the creature gains one level of exhaustion.")
+        recharge, _ = add_spell(recharge, "Pacifying Spores", max_spell_level, 0, max_spell_level,
+                             spell_definition="Recharge(6):" +
+                             "\t- Pacifying Spores \n\t The Plant ejects spores at one creature it can see within 5 feet of it. "+
+                             "The target must succeed on a Constitution saving throw or be stunned for 1 minute. "+
+                             "The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success.")
+        recharge, _ = add_spell(recharge, "Animating Spores", max_spell_level, 0, max_spell_level,
+                             spell_definition="Recharge(6):" +
+                                 "\t- Animating Spores \n\t The Plant targets one corpse of a humanoid or a Large or smaller beast within 5 feet of it and releases spores at the corpse. "+
+                                 "Next turn, the corpse rises as a spore servant. The corpse stays animated for 1d4 + 1 weeks or until destroyed, and it can't be animated again in this way.")
 
 
     if race == "Plant":
+        difficulty += Dice(4) - Dice(6)
+        max_spell_level = get_max_spell_level(Lvl, difficulty)
 
-        # Cantrips
-        cantrips_list = [
-            "Druidcraft",
-            "Shillelagh", "Poison Spray", "Thorn Whip"]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
+        cantrips_list += ["Druidcraft",
+                         "Shillelagh",
+                         "Poison Spray",
+                         "Thorn Whip"]
+        one_day_each_list += ["Entangle", "Goodberry", "Speak with Plants"]
+        two_day_each_list += ["Barkskin", "Spike Growth", "Plant Growth"]
+        three_day_each_list += ["Conjure Woodland Beings", "Grasping Vine", "Freedom of Movement (self only)"]
+        first_list += ["Cure Wounds", "Detect Poison and Disease", "Entangle", "Purify Food and Drink", "Fog Cloud"]
+        second_list += ["Barkskin", "Goodberry", "Lesser Restoration", "Spike Growth", "Moonbeam"]
+        third_list += ["Create Food and Water", "Dispel Magic", "Plant Growth", "Protection from Energy", "Speak with Plants"]
+        fourth_list += ["Blight", "Control Water", "Freedom of Movement", "Giant Insect", "Stone Shape (earthy plants only)"]
+        fifth_list += [
+            "Awaken",
+            "Commune with Nature",
+            "Conjure Elemental",
+            "Geas",
+            "Reincarnate"]
+        sixth_list += ["Heal", "Heroes' Feast", "Move Earth", "Sunbeam", "Transport via Plants"]
+        seventh_list += ["Plane Shift",
+                        "Regenerate",
+                        "Reverse Gravity",
+                        "Whirlwind",
+                        "Mirage Arcane"]
+        eighth_list += ["Antipathy/Sympathy", "Control Weather", "Earthquake", "Sunburst", "Tsunami"]
+        ninth_list += ["Storm of Vengeance", "True Resurrection", "Shapechange (into plant creatures only)", "Foresight", "Mass Heal"]
 
-        # 1/Day each
-        one_day_each_list = ["Entangle", "Goodberry", "Speak with Plants"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-1, 0, max_spell_level, spell_definition="1/Day each")
+    #Snakefolk
+    if race == "Snakefolk":
+        difficulty += Dice(6) - Dice(8)
+        max_spell_level = get_max_spell_level(Lvl, difficulty)
 
-        # 2/Day each
-        two_day_each_list = ["Barkskin", "Spike Growth", "Plant Growth"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-
-        # 3/Day each
-        three_day_each_list = ["Conjure Woodland Beings", "Grasping Vine", "Freedom of Movement (self only)"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-3, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = ["Cure Wounds", "Detect Poison and Disease", "Entangle", "Purify Food and Drink", "Fog Cloud"]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
-
-        # 2nd Level Spells
-        second_list = ["Barkskin", "Goodberry", "Lesser Restoration", "Spike Growth", "Moonbeam"]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-
-        # 3rd Level Spells
-        third_list = ["Create Food and Water", "Dispel Magic", "Plant Growth", "Protection from Energy", "Speak with Plants"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = ["Blight", "Control Water", "Freedom of Movement", "Giant Insect", "Stone Shape (earthy plants only)"]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = ["Awaken", "Commune with Nature", "Conjure Elemental (earth or water only)", "Geas", "Reincarnate"]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-
-        # 6th Level Spells
-        sixth_list = ["Heal", "Heroes' Feast", "Move Earth", "Sunbeam", "Transport via Plants"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = [
-            "Plane Shift (to the Feywild only)", "Regenerate", "Reverse Gravity", "Whirlwind", "Mirage Arcane"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = ["Antipathy/Sympathy", "Control Weather", "Earthquake", "Sunburst", "Tsunami"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = ["Storm of Vengeance", "True Resurrection", "Shapechange (into plant creatures only)", "Foresight", "Mass Heal"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
-
-    if race == "Snakefolk" and Dice() == 1 and not ("Animal Friendship" in cantrip):            cantrip += "\n- Animal Friendship (snakes only)"
-    if race == "Snakefolk" and Dice() == 1 and not ("Poison Spray" in three):           three += "\n- Poison Spray"
-    if race == "Snakefolk" and Dice() == 1 and not ("Suggestion" in three):             three += "\n- Suggestion"
+        cantrips_list += ["Guidance", "Mending", "Poison Spray", "Thorn Whip", "Animal Friendship"]
+        one_day_each_list += ["Cure Wounds", "Entangle", "Fog Cloud"]
+        two_day_each_list += ["Barkskin", "Lesser Restoration", "Protection from Poison"]
+        three_day_each_list += ["Conjure Animals", "Plant Growth", "Water Walk", "Poison Spray", "Suggestion"]
+        first_list += ["Create or Destroy Water", "Cure Wounds", "Entangle", "Fog Cloud", "Speak with Animals"]
+        second_list += ["Animal Messenger", "Barkskin", "Find Traps", "Pass without Trace", "Spike Growth"]
+        third_list += ["Call Lightning", "Conjure Animals", "Meld into Stone", "Plant Growth", "Water Walk"]
+        fourth_list += ["Conjure Woodland Beings", "Control Water", "Freedom of Movement", "Giant Insect", "Stoneskin"]
+        fifth_list += ["Awaken", "Commune with Nature", "Conjure Elemental", "Mass Cure Wounds", "Reincarnate"]
+        sixth_list += ["Bones of the Earth", "Heal", "Heroes’ Feast", "Move Earth", "Sunbeam"]
+        seventh_list += ["Mirage Arcane", "Regenerate", "Resurrection", "Reverse Gravity", "Whirlwind"]
+        eighth_list += ["Antipathy/Sympathy", "Control Weather", "Earthquake", "Tsunami", "Sunburst"]
+        ninth_list += ["Foresight","Shapechange","Storm of Vengeance","True Resurrection","Mass Heal"]
 
     # UNDEAD
     if race == "Undead":
-        if Dice(8) == 1 and not ("Create Specter" in cantrip):             cantrip += "\n - Create Specter \n\t The undead targets a humanoid within 10 feet of it that has been dead for no longer than 1 minute and died violently. The target's spirit rises as a specter in the space of its corpse or in the nearest unoccupied space. The specter is under the undead's control. The undead can have no more than seven specters under its control at one time." 
-        if Dice(8) == 1 and not ("Corrupting Touch" in cantrip):           cantrip += "\n - Corrupting Touch \n\t Melee Spell Attack: reach 5 ft., one target. Hit: 10 (3d6) necrotic damage."
-        if Dice(8) == 1 and not ("Dreadful Glare" in cantrip):             cantrip += "\n - Dreadful Glare. \n\t The undead targets one creature it can see within 60 feet of it. If the target can see the undead, it must succeed on a DC [10+%CHA] Wisdom saving throw against this magic or become frightened until the end of the undead's next turn. If the target fails the saving throw by 5 or more, it is also paralyzed for the same duration. A target that succeeds on the saving throw is immune to the Dreadful Glare of all undead for the next 24 hours."
-        if Dice(8) == 1 and not ("Forceful Slam" in cantrip):              cantrip += "\n - Forceful Slam \n\t Magic melee attack. Hit: 10 (3d6) force damage. "
-        if Dice(8) == 1 and not ("Fire Ray" in cantrip):                   cantrip += "\n - Fire Ray \n\t Magic attack. Range 30 ft. Hit: 10 (3d6) fire damage. "
-        if Dice(8) == 1 and not ("Horrifying Visage" in cantrip):          cantrip += "\n - Horrifying Visage \n\t Each non-undead creature within 60 feet of the Undead that can see them must succeed on a DC [10+%CHA] Wisdom saving throw or be frightened for 1 minute. A frightened target can repeat the saving throw at the start of each of its turns, with disadvantage if the Undead is within line of sight, ending the effect on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to the Undead's Horrifying Visage for the next 24 hours. "
-        if Dice(8) == 1 and not ("Life Drain" in cantrip):                 cantrip += "\n - Life Drain \n\t On an hit, the target's Hit Points Maximum is reduced by the damage dealt. The target dies if this reduces its Hit Points Maximum to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. "
-        elif Dice(8) == 1 and not ("Life Drain" in cantrip):               cantrip += "\n - Life Drain \n\t On an hit, the target makes a Constitution saving throw. On a fail, the target takes 4d6 necrotic damage. The target's Hit Points Maximum is reduced by the necrotic damage dealt. The target dies if this reduces its Hit Points Maximum to 0. Otherwise, the reduction lasts until the target finishes a long rest. "
-        if Dice(8) == 1 and not ("Mage Hand" in cantrip):                  cantrip += "\n - Mage Hand "
-        if Dice(8) == 1 and not ("Rotting Fist" in cantrip):               cantrip += "\n - Rotting Fist. \n\t Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) bludgeoning damage plus 10 (3d6) necrotic damage. If the target is a creature, it must succeed on a DC [10+%CHA] Constitution saving throw or be cursed with undead rot. The cursed target can't regain hit points, and its hit point maximum decreases by 10 (3d6) for every 24 hours that elapse. If the curse reduces the target's hit point maximum to 0, the target dies, and its body turns to dust. The curse lasts until removed by the remove curse spell or other magic."
-        if Dice(8) == 1 and not ("Strength Drain" in cantrip):             cantrip += "\n - Strength Drain \n\t On an attack hit the target's Strength score is reduced by 1d4. The target dies if this reduces its Strength to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. \n\t If a non-evil humanoid dies from this attack, a new shadow rises from the corpse 1d4 hours later."
-        if Dice(8) == 1 and not ("Telekinetic Thrust" in cantrip):         cantrip += "\n - Telekinetic Thrust. \n\t The undead targets a creature or unattended object within 30 feet of it. A creature must be Medium or smaller to be affected by this magic, and an object can weigh up to 150 pounds. \n\t If the target is a creature, the undead makes a Charisma check contested by the target's Strength check. If the undead wins the contest, the undead hurls the target up to 30 feet in any direction, including upward. If the target then comes into contact with a hard surface or heavy object, the target takes 1d6 damage per 10 feet moved. \n\t If the target is an object that isn't being worn or carried, the undead hurls it up to 30 feet in any direction. The undead can use the object as a ranged weapon, attacking one creature along the object's path (+4 to hit) and dealing 5 (2d4) bludgeoning damage on a hit."
-
-    if race == "Undead":
-        if Dice(8) == 1 and not ("Wail" in one):   one += "\n - Wail. \n\t The undead releases a mournful wail, provided that they aren't in sunlight. This wail has no effect on constructs and undead. All other creatures within 30 feet of them that can hear them must make a DC [10+%CHA] Constitution saving throw. On a failure, a creature drops to 0 hit points. On a success, a creature takes 10 (3d6) psychic damage."
+        if Dice(8) == 1 and not ("Create Specter" in recharge):             recharge += "\n - Create Specter (Recharge 6)\n\t The undead targets a humanoid within 10 feet of it that has been dead for no longer than 1 minute and died violently. The target's spirit rises as a specter in the space of its corpse or in the nearest unoccupied space. The specter is under the undead's control. The undead can have no more than seven specters under its control at one time." 
+        if Dice(8) == 1 and not ("Corrupting Touch" in recharge):           recharge += "\n - Corrupting Touch (Recharge 6)\n\t Melee Spell Attack: reach 5 ft., one target. Hit: 10 (3d6) necrotic damage."
+        if Dice(8) == 1 and not ("Dreadful Glare" in recharge):             recharge += "\n - Dreadful Glare.(Recharge 6) \n\t The undead targets one creature it can see within 60 feet of it. If the target can see the undead, it must succeed on a DC [10+%CHA] Wisdom saving throw against this magic or become frightened until the end of the undead's next turn. If the target fails the saving throw by 5 or more, it is also paralyzed for the same duration. A target that succeeds on the saving throw is immune to the Dreadful Glare of all undead for the next 24 hours."
+        if Dice(8) == 1 and not ("Forceful Slam" in recharge):              recharge += "\n - Forceful Slam (Recharge 6)\n\t Magic melee attack. Hit: 10 (3d6) force damage. "
+        if Dice(8) == 1 and not ("Fire Ray" in recharge):                   recharge += "\n - Fire Ray (Recharge 6)\n\t Magic attack. Range 30 ft. Hit: 10 (3d6) fire damage. "
+        if Dice(8) == 1 and not ("Horrifying Visage" in recharge):          recharge += "\n - Horrifying Visage (Recharge 6)\n\t Each non-undead creature within 60 feet of the Undead that can see them must succeed on a DC [10+%CHA] Wisdom saving throw or be frightened for 1 minute. A frightened target can repeat the saving throw at the start of each of its turns, with disadvantage if the Undead is within line of sight, ending the effect on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to the Undead's Horrifying Visage for the next 24 hours. "
+        if Dice(8) == 1 and not ("Life Drain" in recharge):                 recharge += "\n - Life Drain (Recharge 6)\n\t On an hit, the target's Hit Points Maximum is reduced by the damage dealt. The target dies if this reduces its Hit Points Maximum to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. "
+        elif Dice(8) == 1 and not ("Life Drain" in recharge):               recharge += "\n - Life Drain (Recharge 6)\n\t On an hit, the target makes a Constitution saving throw. On a fail, the target takes 4d6 necrotic damage. The target's Hit Points Maximum is reduced by the necrotic damage dealt. The target dies if this reduces its Hit Points Maximum to 0. Otherwise, the reduction lasts until the target finishes a long rest. "
+        if Dice(8) == 1 and not ("Rotting Fist" in recharge):               recharge += "\n - Rotting Fist. (Recharge 6)\n\t Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) bludgeoning damage plus 10 (3d6) necrotic damage. If the target is a creature, it must succeed on a DC [10+%CHA] Constitution saving throw or be cursed with undead rot. The cursed target can't regain hit points, and its hit point maximum decreases by 10 (3d6) for every 24 hours that elapse. If the curse reduces the target's hit point maximum to 0, the target dies, and its body turns to dust. The curse lasts until removed by the remove curse spell or other magic."
+        if Dice(8) == 1 and not ("Strength Drain" in recharge):             recharge += "\n - Strength Drain (Recharge 6)\n\t On an attack hit the target's Strength score is reduced by 1d4. The target dies if this reduces its Strength to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. \n\t If a non-evil humanoid dies from this attack, a new shadow rises from the corpse 1d4 hours later."
+        if Dice(8) == 1 and not ("Telekinetic Thrust" in recharge):         recharge += "\n - Telekinetic Thrust.(Recharge 6) \n\t The undead targets a creature or unattended object within 30 feet of it. A creature must be Medium or smaller to be affected by this magic, and an object can weigh up to 150 pounds. \n\t If the target is a creature, the undead makes a Charisma check contested by the target's Strength check. If the undead wins the contest, the undead hurls the target up to 30 feet in any direction, including upward. If the target then comes into contact with a hard surface or heavy object, the target takes 1d6 damage per 10 feet moved. \n\t If the target is an object that isn't being worn or carried, the undead hurls it up to 30 feet in any direction. The undead can use the object as a ranged weapon, attacking one creature along the object's path (+4 to hit) and dealing 5 (2d4) bludgeoning damage on a hit."
+        if Dice(8) == 1 and not ("Wail" in recharge):                       recharge += "\n - Wail. (Rechrge 6)\n\t The undead releases a mournful wail, provided that they aren't in sunlight. This wail has no effect on constructs and undead. All other creatures within 30 feet of them that can hear them must make a DC [10+%CHA] Constitution saving throw. On a failure, a creature drops to 0 hit points. On a success, a creature takes 10 (3d6) psychic damage."
     if race == "Undead":
 
-        # Cantrips
-        cantrips_list = [
-            "Chill Touch",
-            "Mage Hand", "Spare the Dying", "Thaumaturgy"]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
+        difficulty += Dice(6) - Dice(12)
+        max_spell_level = get_max_spell_level(Lvl, difficulty)
 
-        # 1/Day each
-        one_day_each_list = ["False Life", "Disguise Self", "Speak with Dead"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-1, 0, max_spell_level, spell_definition="1/Day each")
-
-        # 2/Day each
-        two_day_each_list = ["Ray of Enfeeblement", "Blindness/Deafness", "Gentle Repose"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-
-        # 3/Day each
-        three_day_each_list = ["Animate Dead", "Bestow Curse", "Vampiric Touch"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-3, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = ["Inflict Wounds", "Ray of Sickness", "Shield", "Bane", "Cause Fear"]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
-
-        # 2nd Level Spells
-        second_list = ["Blindness/Deafness", "Gentle Repose", "Ray of Enfeeblement", "Darkness", "Silence"]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-
-        # 3rd Level Spells
-        third_list = ["Animate Dead", "Bestow Curse", "Feign Death", "Speak with Dead", "Vampiric Touch"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = ["Blight", "Death Ward", "Shadow of Moil", "Greater Invisibility", "Locate Creature"]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = ["Antilife Shell", "Contagion", "Danse Macabre", "Greater Restoration", "Raise Dead"]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-
-        # 6th Level Spells
-        sixth_list = ["Create Undead", "Eyebite", "Harm", "Magic Jar", "True Seeing"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = ["Etherealness", "Finger of Death", "Regenerate", "Resurrection", "Symbol"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = ["Clone", "Create Undead (upgraded)", "Horrid Wilting", "Power Word Stun", "Telepathy"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = ["Astral Projection", "Power Word Kill", "True Resurrection", "Wish", "Astral Projection (self only)"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+        cantrips_list += ["Chill Touch","Mage Hand","Spare the Dying","Thaumaturgy"]
+        one_day_each_list += ["False Life", "Disguise Self", "Speak with Dead"]
+        two_day_each_list += ["Ray of Enfeeblement", "Blindness/Deafness", "Gentle Repose"]
+        three_day_each_list += ["Animate Dead", "Bestow Curse", "Vampiric Touch"]
+        first_list += ["Inflict Wounds", "Ray of Sickness", "Shield", "Bane", "Cause Fear"]
+        second_list += ["Blindness/Deafness", "Gentle Repose", "Ray of Enfeeblement", "Darkness", "Silence"]
+        third_list += ["Animate Dead", "Bestow Curse", "Feign Death", "Speak with Dead", "Vampiric Touch"]
+        fourth_list += ["Blight", "Death Ward", "Shadow of Moil", "Greater Invisibility", "Locate Creature"]
+        fifth_list += ["Antilife Shell", "Contagion", "Danse Macabre", "Greater Restoration", "Raise Dead"]
+        sixth_list += ["Create Undead", "Eyebite", "Harm", "Magic Jar", "True Seeing"]
+        seventh_list += ["Etherealness", "Finger of Death", "Regenerate", "Resurrection", "Symbol"]
+        eighth_list += ["Clone", "Create Undead (upgraded)", "Horrid Wilting", "Power Word Stun", "Telepathy"]
+        ninth_list += ["Astral Projection", "Power Word Kill", "True Resurrection", "Wish", "Astral Projection (self only)"]
      
 
     if race == "Vampire" or race == "Undead":
 
-        # Cantrips
-        cantrips_list = ["Friends", "Mage Hand", "Minor Illusion", "Thaumaturgy"]
-        for c in cantrips_list:
-            cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
-
-        # 1/Day each
-        one_day_each_list = ["Charm Person", "Disguise Self", "Misty Step"]
-        for s in one_day_each_list:
-            one, _ = add_spell(one, s, max_spell_level-1, 0, max_spell_level, spell_definition="1/Day each")
-
-        # 2/Day each
-        two_day_each_list = ["Detect Thoughts", "Invisibility", "Hold Person"]
-        for s in two_day_each_list:
-            two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day each")
-
-        # 3/Day each
-        three_day_each_list = ["Gaseous Form", "Hypnotic Pattern", "Suggestion"]
-        for s in three_day_each_list:
-            three, _ = add_spell(three, s, max_spell_level-3, 0, max_spell_level, spell_definition="3/Day each")
-
-        # 1st Level Spells
-        first_list = ["Charm Person", "Disguise Self", "Mage Armor", "Shield", "Sleep"]
-        for s in first_list:
-            first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
-
-        # 2nd Level Spells
-        second_list = ["Hold Person", "Invisibility", "Mirror Image", "Misty Step", "Suggestion"]
-        for s in second_list:
-            second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
-
-        # 3rd Level Spells
-        third_list = ["Gaseous Form", "Hypnotic Pattern", "Vampiric Touch", "Feign Death", "Nondetection"]
-        for s in third_list:
-            third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
-
-        # 4th Level Spells
-        fourth_list = ["Charm Monster", "Dimension Door", "Greater Invisibility", "Shadow of Moil", "Blight"]
-        for s in fourth_list:
-            fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
-
-        # 5th Level Spells
-        fifth_list = [
-            "Dominate Person", "Geas", "Hold Monster", "Mislead", "Teleportation Circle"]
-        for s in fifth_list:
-            fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
-
-        # 6th Level Spells
-        sixth_list = [
-            "Create Undead", "Eyebite", "Mass Suggestion", "True Seeing", "Contingency"]
-        for s in sixth_list:
-            sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
-
-        # 7th Level Spells
-        seventh_list = [
-            "Etherealness", "Finger of Death", "Plane Shift", "Teleport", "Resurrection"]
-        for s in seventh_list:
-            seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
-
-        # 8th Level Spells
-        eighth_list = [
-            "Charm Monster (Mass)", "Dominate Monster", "Power Word Stun", "True Polymorph", "Glibness"]
-        for s in eighth_list:
-            eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
-
-        # 9th Level Spells
-        ninth_list = [
-            "Astral Projection",
-            "Gate",
-            "Power Word Kill",
-            "True Resurrection",
-            "Wish"]
-        for s in ninth_list:
-            ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+        cantrips_list += ["Friends", "Mage Hand", "Minor Illusion", "Thaumaturgy"]
+        one_day_each_list += ["Charm Person", "Disguise Self", "Misty Step"]
+        two_day_each_list += ["Detect Thoughts", "Invisibility", "Hold Person"]
+        three_day_each_list += ["Gaseous Form", "Hypnotic Pattern", "Suggestion"]
+        first_list += ["Charm Person", "Disguise Self", "Mage Armor", "Shield", "Sleep"]
+        second_list += ["Hold Person", "Invisibility", "Mirror Image", "Misty Step", "Suggestion"]
+        third_list += ["Gaseous Form", "Hypnotic Pattern", "Vampiric Touch", "Feign Death", "Nondetection"]
+        fourth_list += ["Charm Monster", "Dimension Door", "Greater Invisibility", "Shadow of Moil", "Blight"]
+        fifth_list += [ "Dominate Person","Geas","Hold Monster", "Mislead", "Teleportation Circle"]
+        sixth_list += [ "Create Undead", "Eyebite", "Mass Suggestion", "True Seeing", "Contingency"]
+        seventh_list += ["Etherealness", "Finger of Death", "Plane Shift", "Teleport", "Resurrection"]
+        eighth_list += ["Charm Monster (Mass)", "Dominate Monster", "Power Word Stun", "True Polymorph", "Glibness"]
+        ninth_list += ["Astral Projection",                      "Gate",                      "Power Word Kill",                      "True Resurrection",                      "Wish"]
                 
+    #def add_spell(spell_list, spell_name, spell_level, slots, max_spell_level, spell_definition=""):
+
+    # Ensure there are no duplicates in the lists
+    cantrips_list = list(set(cantrips_list))
+    first_list = list(set(first_list))
+    second_list = list(set(second_list))
+    third_list = list(set(third_list))
+    fourth_list = list(set(fourth_list))
+    fifth_list = list(set(fifth_list))
+    sixth_list = list(set(sixth_list))
+    seventh_list = list(set(seventh_list))
+    eighth_list = list(set(eighth_list))
+    ninth_list = list(set(ninth_list))
+    three_day_each_list = list(set(three_day_each_list))
+    two_day_each_list = list(set(two_day_each_list)) 
+    one_day_each_list = list(set(one_day_each_list))
+
+
+    numc = min(5, len(cantrips_list))
+    num1 = min(10, len(first_list))
+    num2 = min(9, len(second_list))
+    num3 = min(8, len(third_list))
+    num4 = min(7, len(fourth_list))
+    num5 = min(6, len(fifth_list))
+    num6 = min(5, len(sixth_list))
+    num7 = min(4, len(seventh_list))
+    num8 = min(3, len(eighth_list))
+    num9 = min(2, len(ninth_list))
+    num1d = min(5, len(one_day_each_list))
+    num2d = min(5, len(two_day_each_list))
+    num3d = min(5, len(three_day_each_list))
+    
+    cantrips_list = random.sample(cantrips_list, numc)
+    first_list = random.sample(first_list, num1)
+    second_list = random.sample(second_list, num2)
+    third_list = random.sample(third_list, num3)
+    fourth_list = random.sample(fourth_list, num4)
+    fifth_list = random.sample(fifth_list, num5)
+    sixth_list = random.sample(sixth_list, num6)
+    seventh_list = random.sample(seventh_list, num7)
+    eighth_list = random.sample(eighth_list, num8)
+    ninth_list = random.sample(ninth_list, num9)
+    one_day_each_list = random.sample(one_day_each_list, num1d)
+    two_day_each_list = random.sample(two_day_each_list, num2d)
+    three_day_each_list = random.sample(three_day_each_list, num3d)
+    for c in cantrips_list:
+        cantrip, _ = add_spell(cantrip, c, 0, 0, max_spell_level)
+    for s in first_list:
+        first, slots1 = add_spell(first, s, 1, slots1, max_spell_level)
+    for s in second_list:
+        second, slots2 = add_spell(second, s, 2, slots2, max_spell_level)
+    for s in third_list:
+        third, slots3 = add_spell(third, s, 3, slots3, max_spell_level)
+    for s in fourth_list:
+        fourth, slots4 = add_spell(fourth, s, 4, slots4, max_spell_level)
+    for s in fifth_list:
+        fifth, slots5 = add_spell(fifth, s, 5, slots5, max_spell_level)
+    for s in sixth_list:
+        sixth, slots6 = add_spell(sixth, s, 6, slots6, max_spell_level)
+    for s in seventh_list:
+        seventh, slots7 = add_spell(seventh, s, 7, slots7, max_spell_level)
+    for s in eighth_list:
+        eighth, slots8 = add_spell(eighth, s, 8, slots8, max_spell_level)
+    for s in ninth_list:
+        ninth, slots9 = add_spell(ninth, s, 9, slots9, max_spell_level)
+    for s in three_day_each_list:
+        three, _ = add_spell(three, s, max_spell_level-3, 0, max_spell_level, spell_definition="3/Day")
+    for s in two_day_each_list:
+        two, _ = add_spell(two, s, max_spell_level-2, 0, max_spell_level, spell_definition="2/Day")
+    for s in one_day_each_list:
+        one, _ = add_spell(one, s, max_spell_level-1, 0, max_spell_level, spell_definition="1/Day")
+        
 
     r = "\n"
     if not (cantrip == "Cantrips (at will): "):         r += cantrip + "\n"
-    if not (first == "1st Level Spells: "):             r += "[{}]".format(Dice(slots1)) + first  + "\n"
-    if not (second == "2nd Level Spells: "):            r += "[{}]".format(Dice(slots2)) + second + "\n"
+    if not (first == "1st Level Spells: "):             r += "[{}]".format(min(10,Dice(slots1))) + first  + "\n"
+    if Lvl>=3:
+        if not (second == "2nd Level Spells: "):        r += "[{}]".format(min(10,Dice(slots2)))  + second + "\n"
     if Lvl>=5:
-        if not (third == "3rd Level Spells: "):         r += "[{}]".format(Dice(slots3)) + third  + "\n"
-        if not (fourth == "4th Level Spells: "):        r += "[{}]".format(Dice(slots4)) + fourth + "\n"
-    if Lvl>=10:
-        if not (fifth == "5th Level Spells: "):         r += "[{}]".format(Dice(slots5)) + fifth  + "\n"
-        if not (sixth == "6th Level Spells: "):         r += "[{}]".format(Dice(slots6)) + sixth  + "\n"
+        if not (third == "3rd Level Spells: "):         r += "[{}]".format(min(10,Dice(slots3)))+ third  + "\n"
+    if Lvl>=7:
+        if not (fourth == "4th Level Spells: "):        r += "[{}]".format( min(10,Dice(slots4))) + fourth + "\n"
+    if Lvl>=9:
+        if not (fifth == "5th Level Spells: "):         r += "[{}]".format(min(9,Dice(slots5))) + fifth  + "\n"
+    if Lvl>=11:
+        if not (sixth == "6th Level Spells: "):         r += "[{}]".format(min(8,Dice(slots6))) + sixth  + "\n"
     if Lvl>=15:
-        if not (seventh == "7th Level Spells: "):       r += "[{}]".format(Dice(slots7)) + seventh + "\n"
-    if Lvl>=17:
-        if not (eighth == "8th Level Spells: "):         r += "[{}]".format(Dice(slots8)) + eighth  + "\n"
+        if not (seventh == "7th Level Spells: "):       r += "[{}]".format(min(7,Dice(slots7))) + seventh + "\n"
+    if Lvl>=18:
+        if not (eighth == "8th Level Spells: "):         r += "[{}]".format(min(6,Dice(slots8))) + eighth  + "\n"
     if Lvl>=20:
-        if not (ninth == "9th Level Spells: "):         r += "[{}]".format(Dice(slots9)) + ninth  + "\n"
+        if not (ninth == "9th Level Spells: "):         r += "[{}]".format(min(5,Dice(slots9))) + ninth  + "\n"
     if not (one == "1/Day each: "):        r += "\n" + one
     if not (two == "2/Day each: "):        r += "\n" + two
     if not (three == "3/Day each: "):      r += "\n" + three
+    if recharge: r += "\n" + "Recharge:" + recharge
     return r
 
 
 
-def Senses(race = Race(), background = Background()):
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def Senses(npc):
+    race = npc.race
+    background = npc.background
     # Senses
     sense = ""
     normal = 0
@@ -14770,10 +13791,13 @@ def Senses(race = Race(), background = Background()):
     extras = ""
 
     # Enhanced Senses
-    enhanced_smell = f"\n- Enhanced Smell: The {race} can detect specific odors or substances within 60 feet."
-    enhanced_hearing = f"\n- Enhanced Hearing: The {race} can hear frequencies outside the normal range and detect sounds from up to 300 feet away."
-    enhanced_taste = f"\n- Enhanced Taste: The {race} can taste and identify specific ingredients or substances, and has advantage on saving throws against ingested poisons."
-    enhanced_touch = f"\n- Enhanced Touch: The {race} can feel vibrations through surfaces and detect changes in air pressure."
+    enhanced_smell =    f"\n- Enhanced Smell: The {race} can detect specific odors or substances within 60 feet."
+    enhanced_hearing =  f"\n- Enhanced Hearing: The {race} can hear frequencies outside the normal range and detect sounds from up to {Dice(12) * 100} feet away."
+    enhanced_taste =    f"\n- Enhanced Taste: The {race} can taste and identify specific ingredients or substances, and has advantage on saving throws against ingested poisons."
+    enhanced_touch =    f"\n- Enhanced Touch: The {race} can feel vibrations through surfaces and detect changes in air pressure."
+    keen_smell =        f"\n- Keen Smell. \n\t The {race} has advantage on Wisdom (Perception) checks that rely on smell."
+    keen_hearing =      f"\n- Keen Hearing. \n\t The {race} has advantage on Wisdom (Perception) checks that rely on hearing."
+
 
     # Specialized Senses
     echolocation = f"\n- Echolocation: The {race} can perceive its surroundings within 60 feet as if it had blindsight, but only if it isn't deafened."
@@ -14795,6 +13819,25 @@ def Senses(race = Race(), background = Background()):
     sensory_dampening = f"\n- Sensory Dampening: The {race} can voluntarily dampen its own senses to resist sensory overload or certain types of attacks. Until the end of turn, all their Perception (Wisdom) checks are made at disadvantage"
     blind_fighting = f"\n- Blind Fighting: The {race} doesn’t need to see a creature to target it with an attack, provided the creature isn't hidden from the {race}."
 
+    # Hide and Mimic
+    mimicry = (f"\n- Mimicry \n\t The {race} can mimic simple sounds it has heard, such as a person whispering, a baby crying, or an animal chittering. " 
+                "A creature that hears the sounds can tell they are imitations with a successful DC {8+npc.proficiency_bonus} Wisdom (Insight) check.")
+    chameleon_skin = "\n - Chameleon Skin \n\t The {race} has advantage on Dexterity (Stealth) checks made to hide."
+
+    # Enviromental adaptations
+    water_breathing= f"\n- Water Breathing. The {race} can breathe underwater"
+    underwater_camouflage = f"\n- Underwater Camouflage. \n\t The {race} has advantage on Dexterity (Stealth) checks made while underwater."
+    hold_breath = f"\n- Hold Breath. \n\t The {race} can hold its breath for {5*Dice(3)*Dice(4)} minutes"
+
+    # Sensibilities
+    sunlight_sensitivity = f"\n - Sunlight Sensitivity:\t While in sunlight, the {race} has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+
+    # Illumination
+    illumination = f"\n- Illumination:\t The {race} sheds bright light in a {Dice(3)*10}-foot radius and dim light for an additional {Dice(3)*10} ft."
+
+
+
+                
     if race in [ "Human", "Aberration", "Aven", "Beast", "Beastfolk", "Celestial", "Construct", "Dragon","Dwarf","Elf","Elemental","Fey","Fiend",
         "Giant","Gnome","Goblin","Halfling","Kobold","Lizardfolk","Monstrosity","Ooze","Orc","Plant","Snakefolk","Undead"]:
         normal = 60
@@ -14823,7 +13866,13 @@ def Senses(race = Race(), background = Background()):
         if Dice()==1: extras += color_change
         if Dice()==1: extras += sensory_dampening
         if Dice()==1: extras += blind_fighting
-
+        if Dice()==1: extras += keen_smell
+        if Dice()==1: extras += water_breathing
+        if Dice()==1: extras += underwater_camouflage
+        if Dice()==1: extras += hold_breath
+        if Dice()==1: extras += keen_hearing
+        if Dice()==1: extras += chameleon_skin
+        if Dice()==1: extras += sunlight_sensitivity
     if race == "Aven":
         normal      += Dice(2) * Dice(6) * 30
         darkvision  += Dice(0) * Dice(6) * 30
@@ -14838,11 +13887,13 @@ def Senses(race = Race(), background = Background()):
         if Dice(12)==1: extras += aura_sense
         if Dice()==1: extras += sensory_dampening
         if Dice(12)==1: extras += blind_fighting
+        if Dice==1: extras += mimicry
+        if Dice()==1: extras += hold_breath
 
     if race == "Beast":
         normal      += Dice(2) * Dice(8) * 30
         darkvision  += Dice(0) * Dice(5) * 30
-        blindsight  += Dice(0) * Dice(12) * 10
+        blindsight  += Dice(0) * Dice(3) * Dice(4) * 10
         tremorsense += Dice(0) * Dice(6) * 10
         telepathy   += Dice(0) * Dice(3) * 10
         truesight   += Dice(0) * Dice(6) * 10
@@ -14859,18 +13910,28 @@ def Senses(race = Race(), background = Background()):
         if Dice()==1: extras += pheromones
         if Dice()==1: extras += color_change
         if Dice(12)==1: extras += blind_fighting
-
-
+        if Dice()==1: extras += keen_smell
+        if Dice()==1: extras += mimicry
+        if Dice()==1: extras += water_breathing
+        if Dice()==1: extras += underwater_camouflage
+        if Dice()==1: extras += hold_breath
+        if Dice()==1: extras += keen_hearing
+        if Dice()==1: extras += chameleon_skin
+        if Dice()==1: extras += sunlight_sensitivity
+        if Dice()==1: extras += illumination
+        
     if race == "Beastfolk":
         normal      += Dice(2) * Dice(8) * 30
         darkvision  += Dice(0) * Dice(5) * 30
-        blindsight  += Dice(0) * Dice(12) * 10
+        blindsight  += Dice(0) * Dice(3) * Dice(4) * 10
         tremorsense += Dice(0) * Dice(6) * 5
         telepathy   += Dice(0) * Dice(6) * 10
         truesight   += Dice(0) * Dice(3) * 10
 
         extras += f"\n- Keen Senses: Advantage on Wisdom (Perception) checks that rely on one of their senses"
-        
+        extras += "\n- Speak with Animal:\t The Beastfolk can communicate simple concepts to his affinity animal when it speaks in Beast language."
+
+
         if Dice()==1: extras += enhanced_smell
         if Dice()==1: extras += enhanced_hearing
         if Dice()==1: extras += enhanced_taste
@@ -14882,14 +13943,20 @@ def Senses(race = Race(), background = Background()):
         if Dice()==1: extras += pheromones
         if Dice()==1: extras += color_change
         if Dice()==1: extras += blind_fighting
+        if Dice()==1: extras += water_breathing
+        if Dice()==1: extras += underwater_camouflage
+        if Dice()==1: extras += hold_breath
+        if Dice()==1: extras += chameleon_skin
+        if Dice()==1: extras += sunlight_sensitivity
+        if Dice()==1: extras += illumination
         
     if race == "Celestial":
         normal      += Dice(2) * Dice(10) * 20
-        darkvision  += Dice(0) * Dice(10) * 30
+        darkvision  += Dice(6) * Dice(6) * 10
         blindsight  += Dice(0) * Dice(6) * 10
         tremorsense += Dice(0) * Dice(0) * 5
         telepathy   += Dice(0) * Dice(10) * 20
-        truesight   += Dice(0) * Dice(6) * 10
+        truesight   += Dice(3) * Dice(6) * 10
 
         extras += f"\n- Radiant Sight: Can see divine auras and celestial beings within a {normal} range."
         if Dice()==1: extras += aura_sense
@@ -14897,15 +13964,17 @@ def Senses(race = Race(), background = Background()):
         if Dice()==1: extras += precognition
         if Dice(12)==1: extras += psychometry
         if Dice()==1: extras += blind_fighting
-        
+        if Dice()==1: extras += keen_hearing
+        if Dice()==1: extras += illumination
+
 
     if race == "Construct":
-        normal      += Dice(2) * Dice(10) * 20
-        darkvision  += Dice(0) * Dice(6) * 20
-        blindsight  += Dice(0) * Dice(6) * 10
+        normal      += Dice(6) * Dice(6) * 20 - Dice(12)*10
+        darkvision  += Dice(0) * Dice(6) * Dice(6) * 10
+        blindsight  += Dice(0) * Dice(4) * Dice(4) * 10
         tremorsense += Dice(0) * Dice(3) * 5
         telepathy   += Dice(0) * Dice(0) * 20
-        truesight   += Dice(0) * Dice(0) * 10
+        truesight   += Dice(0) * Dice(4) * Dice(4) * 10
 
         extras += f""
         if Dice()==1: extras += enhanced_hearing
@@ -14918,6 +13987,8 @@ def Senses(race = Race(), background = Background()):
         if Dice()==1: extras += color_change
         if Dice()==1: extras += sensory_dampening
         if Dice()==1: extras += blind_fighting
+        if Dice()==1: extras += mimicry
+        if Dice()==1: extras += illumination
 
     if race == "Dragon":
         normal      += Dice(2) * Dice(12) * 20
@@ -14942,6 +14013,12 @@ def Senses(race = Race(), background = Background()):
         if Dice()==1: extras += pheromones
         if Dice()==1: extras += color_change
         if Dice()==1: extras += blind_fighting
+        if Dice()==1: extras += keen_smell
+        if Dice(12)==1: extras += water_breathing
+        if Dice()==1: extras += underwater_camouflage
+        if Dice()==1: extras += hold_breath
+        if Dice()==1: extras += keen_hearing
+        if Dice()==1: extras += chameleon_skin
 
     if race == "Dwarf":
         normal      += Dice(2) * Dice(4) * 20
@@ -14953,6 +14030,7 @@ def Senses(race = Race(), background = Background()):
 
         extras += f""
         if Dice()==1: extras += psychometry
+        if Dice()==1: extras += sunlight_sensitivity
         
     if race == "Elf":
         normal      += Dice(2) * Dice(12) * 20
@@ -14965,12 +14043,13 @@ def Senses(race = Race(), background = Background()):
         extras += f"\n- Keen Senses: Advantage on Wisdom (Perception) checks that rely on sight and hearing."
         if Dice()==1: extras += enhanced_hearing
         if Dice()==1: extras += blind_fighting
+        if Dice()==1: extras += sunlight_sensitivity
 
     if race == "Elemental":
         normal      += Dice(2) * Dice(6) * 20
-        darkvision  += 0 * 20
+        darkvision  += Dice(0) * Dice(6) * Dice(3) * 10
         blindsight  += Dice(0) * Dice(3) * 10
-        tremorsense += Dice(0) * Dice(4) * 5
+        tremorsense += Dice(0) * Dice(4) * Dice(4) * 5
         telepathy   += Dice(0) * Dice(0) * 10
         truesight   += Dice(0) * Dice(2) * 10
 
@@ -14978,6 +14057,12 @@ def Senses(race = Race(), background = Background()):
         if Dice()==1: extras += electroreception
         if Dice()==1: extras += heat_vision
         if Dice()==1: extras += magnetoreception
+        if Dice()==1: extras += water_breathing
+        if Dice()==1: extras += underwater_camouflage
+        if Dice()==1: extras += chameleon_skin
+        if Dice()==1: extras += illumination
+
+
 
     if race == "Fey":
         normal      += Dice(2) * Dice(6) * 20
@@ -14995,7 +14080,9 @@ def Senses(race = Race(), background = Background()):
         if Dice()==1: extras += psychometry
         if Dice()==1: extras += pheromones
         if Dice()==1: extras += blind_fighting
-       
+        if Dice()==1: extras += mimicry
+        if Dice()==1: extras += chameleon_skin
+        
     if race == "Fiend":
         normal      += Dice(4) * Dice(6) * 20
         darkvision  += Dice(2) * Dice(6) * 20
@@ -15014,6 +14101,10 @@ def Senses(race = Race(), background = Background()):
         if Dice()==1: extras += psychometry
         if Dice()==1: extras += sensory_dampening
         if Dice()==1: extras += blind_fighting
+        if Dice()==1: extras += keen_smell
+        if Dice()==1: extras += mimicry
+        if Dice()==1: extras += hold_breath
+        if Dice()==1: extras += sunlight_sensitivity
 
     if race == "Giant":
         normal      += Dice(3) * Dice(6) * 20
@@ -15025,6 +14116,8 @@ def Senses(race = Race(), background = Background()):
 
         extras += f""
         if Dice()==1: extras += psychometry
+        if Dice()==1: extras += keen_smell
+        if Dice()==1: extras += sunlight_sensitivity
         
     if race == "Gnome":
         normal      += Dice(10) * Dice(10) * 20
@@ -15038,6 +14131,7 @@ def Senses(race = Race(), background = Background()):
         if Dice()==1: extras += empathy
         if Dice()==1: extras += precognition
         if Dice()==1: extras += psychometry
+        if Dice()==1: extras += mimicry
         
     if race == "Goblin":
         normal      += Dice(10) * Dice(10) * 20
@@ -15050,6 +14144,7 @@ def Senses(race = Race(), background = Background()):
         extras += f""
         if Dice()==1: extras += enhanced_smell
         if Dice()==1: extras += enhanced_hearing
+        if Dice()==1: extras += keen_smell
 
     if race == "Halfling":
         normal      += Dice(10) * Dice(10) * 20
@@ -15074,10 +14169,13 @@ def Senses(race = Race(), background = Background()):
 
         if Dice()==1: extras += enhanced_smell
         if Dice()==1: extras += enhanced_taste
+        if Dice()==1: extras += keen_smell
+        if Dice()==1: extras += hold_breath
+        if Dice()==1: extras += sunlight_sensitivity
 
     if race == "Lizardfolk":
         normal      += Dice(10) * Dice(10) * 20
-        darkvision  += Dice(2) * Dice(3) * 20
+        darkvision  += Dice(4) * Dice(3) * 10
         blindsight  += Dice(0) * Dice(0) * 10
         tremorsense += Dice(0) * Dice(0) * 5
         telepathy   += Dice(0) * Dice(0) * 10
@@ -15092,6 +14190,11 @@ def Senses(race = Race(), background = Background()):
         if Dice()==1: extras += color_change
         if Dice()==1: extras += sensory_dampening
         if Dice()==1: extras += blind_fighting
+        if Dice()==1: extras += keen_smell
+        if Dice()==1: extras += underwater_camouflage
+        if Dice()==1: extras += hold_breath
+        if Dice()==1: extras += chameleon_skin
+        if Dice(8)==1: extras += sunlight_sensitivity
 
     if race == "Monstrosity":
         normal      += Dice(-1) * Dice(100) * 20
@@ -15099,10 +14202,10 @@ def Senses(race = Race(), background = Background()):
         blindsight  += Dice(0) * Dice(12) * 10
         tremorsense += Dice(0) * Dice(12) * 5
         telepathy   += Dice(0) * Dice(12) * 10
-        truesight   += Dice(0) * Dice(6) * 10
+        truesight   += Dice(0) * Dice(3) * Dice(2) * 10
 
         extras += f""
-        if Dice(12)==1: extras += enhanced_smell
+        if Dice(12)==1: extras += enhanced_smell 
         if Dice(12)==1: extras += enhanced_hearing
         if Dice(12)==1: extras += enhanced_taste
         if Dice(12)==1: extras += enhanced_touch
@@ -15114,6 +14217,14 @@ def Senses(race = Race(), background = Background()):
         if Dice(12)==1: extras += color_change
         if Dice(12)==1: extras += sensory_dampening
         if Dice(12)==1: extras += blind_fighting
+        if Dice(12)==1: extras += keen_smell
+        if Dice(12)==1: extras += mimicry
+        if Dice(12)==1: extras += water_breathing
+        if Dice(12)==1: extras += underwater_camouflage
+        if Dice(12)==1: extras += hold_breath
+        if Dice(12)==1: extras += chameleon_skin
+        if Dice(12)==1: extras += sunlight_sensitivity
+        if Dice(12)==1: extras += illumination
 
     if race == "Ooze":
         normal      += Dice(-1) * Dice(0) * 60
@@ -15129,6 +14240,8 @@ def Senses(race = Race(), background = Background()):
         if Dice()==1: extras += pheromones
         if Dice()==1: extras += color_change
         if Dice(2)==1: extras += blind_fighting
+        if Dice()==1: extras += water_breathing
+        if Dice()==1: extras += underwater_camouflage
 
     if race == "Orc":
         normal      += Dice(10) * Dice(10) * 20
@@ -15144,7 +14257,7 @@ def Senses(race = Race(), background = Background()):
     if race == "Plant":
         normal      += Dice(-10) * Dice(10) * 20
         darkvision  += Dice(-1) * Dice(0) * 20
-        blindsight  += Dice(2) * Dice(3) * 10
+        blindsight  += Dice(4) * Dice(3) * 10
         tremorsense += Dice(2) * Dice(3) * 5
         telepathy   += Dice(0) * Dice(6) * 10
         truesight   += Dice(0) * Dice(3) * 10
@@ -15156,6 +14269,11 @@ def Senses(race = Race(), background = Background()):
         if Dice()==1: extras += pheromones
         if Dice()==1: extras += color_change
         if Dice()==1: extras += blind_fighting
+        if Dice()==1: extras += water_breathing
+        if Dice()==1: extras += underwater_camouflage
+        if Dice()==1: extras += chameleon_skin
+        if Dice(20)==1: extras += sunlight_sensitivity
+        if Dice(20)==1: extras += illumination
 
     if race == "Snakefolk":
         normal      += Dice(10) * Dice(10) * 20
@@ -15175,6 +14293,10 @@ def Senses(race = Race(), background = Background()):
         if Dice()==1: extras += pheromones
         if Dice()==1: extras += color_change
         if Dice()==1: extras += blind_fighting
+        if Dice()==1: extras += keen_smell
+        if Dice()==1: extras += underwater_camouflage
+        if Dice()==1: extras += hold_breath
+        if Dice()==1: extras += chameleon_skin
         
 
     if race == "Undead":
@@ -15191,6 +14313,8 @@ def Senses(race = Race(), background = Background()):
         if Dice()==1: extras += precognition
         if Dice()==1: extras += sensory_dampening
         if Dice()==1: extras += blind_fighting
+        if Dice()==1: extras += sunlight_sensitivity
+        if Dice(100)==1: extras += illumination
 
     if race == "":
         normal      += Dice(10) * Dice(10) * 20
@@ -15211,6 +14335,8 @@ def Senses(race = Race(), background = Background()):
             extras += f"\n- Telepathic Shroud. \n\t The {race} is immune to any effect that would sense its emotions or read its thoughts, as well as all divination spells."
         if Dice() == 1:
             extras += f"\n- Limited Telepathy. \n\t The {race} can magically transmit simple messages and images to any creature within {telepathy} feet of it that can understand a language. This form of telepathy doesn't allow the receiving creature to telepathically respond."
+        if Dice() == 1:
+            extras += f"\n- Detect Sentience: \n\t The {race} can sense the presence and location of any creature within {2*telepathy} feet of it that has an Intelligence of 3 or higher, regardless of interposing barriers, unless the creature is protected by a mind blank spell."
 
     if normal<=0: sense += f"Blind\t"
     if darkvision>0: sense += f"Darkvision: {darkvision}ft. \t"
@@ -15221,7 +14347,45 @@ def Senses(race = Race(), background = Background()):
 
     return sense
 
-def Movement(race = Race(), background = Background()):
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def Movement(npc):
+
+    race = npc.race
+    background = npc.background
+
     # movement
     movement = "Speed: "
     normal = 0
@@ -15232,41 +14396,45 @@ def Movement(race = Race(), background = Background()):
 
     extras = ""
 
-    if race in [ "Human", "Aberration", "Aven", "Beast", "Beastfolk", "Celestial", "Construct", "Dragon","Dwarf","Elf","Elemental","Fey","Fiend",
-        "Giant","Gnome","Goblin","Halfling","Kobold","Lizardfolk","Monstrosity","Ooze","Orc","Plant","Snakefolk","Undead"]:
+    spider_climb = f"\n -Spider Climb: \t The {race} can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+    flyby = f"\n- Flyby \n\t The {race} is an agile flier, quick to fly out of enemies' reach. The {race} doesn't provoke an opportunity attack when it flies out of an enemy's reach."
+    earth_glide = f"\n- Earth Glide:\t The {race} can burrow through nonmagical, unworked earth and stone. While doing so, the {race} doesn't disturb the material it moves through."
+
+    if race in [ "Human", "Aberration", "Aven", "Beast", "Beastfolk", "Celestial", "Construct", "Dragon","Dwarf","Elf","Elemental","Fey","Fiend", "Giant","Gnome","Goblin","Halfling","Kobold","Lizardfolk","Monstrosity","Ooze","Orc","Plant","Snakefolk","Undead"]:
         normal = 30
         
     base_speeds = {
-        "Human": {"Walk": 30},
-        "Dwarf": {"Walk": 25, "Climb": Dizero(2) * 5},
-        "Elf": {"Walk": 30},
-        "Halfling": {"Walk": 25},
-        "Aberration": {"Walk": Dizero(6) * 10, "Fly": Dizero(6) * 10, "Climb": Dizero(3) * 10},
-        "Aven": {"Walk": 30, "Fly": Dizero(6) * 10},
-        "Beast": {"Walk": Dice(12)*10, "Fly": Dizero(6) * 10, "Swim": Dizero(4) * 10, "Burrow": Dizero(4) * 5, "Climb": Dizero(3) * 10},  
-        "Beastfolk": {"Walk": Dice(6)*10, "Fly": Dizero(3) * 10, "Swim": Dizero(3) * 10, "Burrow": Dizero(2) * 5, "Climb": Dizero(3) * 10},  
-        "Celestial": {"Walk": Dice(6) * 10, "Fly": Dice(8) * 10},  
-        "Construct": {"Walk": Dice(6) * 10, "Fly": Dizero(2) * 10, "Swim": Dizero(2) * 10, "Burrow": Dizero(2) * 5},
-        "Dragon": {"Walk": Dice(12) * 10, "Fly": Dice(12) * 10, "Swim": Dice(12) * 10, "Burrow": Dizero(5) * 5, "Climb": Dizero() * 5},  
-        "Dwarf": {"Walk": 25},
-        "Elf": {"Walk": 30},
-        "Elemental": {"Walk": Dizero(6) * 10, "Fly": Dizero(6) * 10, "Swim": Dizero(6) * 10, "Burrow": Dizero(6) * 5}, 
-        "Fey": {"Walk": Dice(6) * 10, "Fly": Dizero(6) * 5},
-        "Fiend": {"Walk": Dice(6) * 10, "Fly": Dizero(8) * 10, "Climb": Dizero(3) * 10},  
-        "Giant": {"Walk": Dice(6) * 20},
-        "Gnome": {"Walk": 25},
-        "Goblin": {"Walk": 30},
-        "Halfling": {"Walk": 25},
-        "Kobold": {"Walk": 30},
-        "Lizardfolk": {"Walk": Dice(6) * 10, "Swim": Dice(6) * 10, "Climb": Dizero(3) * 10},
-        "Monstrosity": {"Walk": Dice(6) * 10, "Swim": Dice(6) * 10, "Climb": Dizero(3) * 10, "Fly": Dizero(6) * 5},
-        "Ooze": {"Walk":  Dice(6) * 10, "Climb":  Dice(6) * 10},  
-        "Orc": {"Walk": 30},
-        "Plant":  {"Walk":  Dice(3) * 10, "Climb":  Dice(3) * 10, "Swim": Dice(3) * 10, "Burrow": Dice(3) * 5},  
-        "Snakefolk": {"Walk": 30, "Swim": Dizero(6) * 10, "Climb":  Dizero(3) * 5},  
-        "Undead": {"Walk": Dizero(12) * 5, "Burrow": Dizero(2) * 5, "Fly": Dizero(6) * 5, "Swim": Dizero(3) * 5},  
+        "Human": {      "Walk": 30},
+        "Dwarf": {      "Walk": 25,                                                                                                 "Climb": Dizero(2) * 5},
+        "Elf": {        "Walk": 30},
+        "Halfling": {   "Walk": 25},
+        "Aberration": { "Walk": Dizero(6) * 10, "Fly": Dizero(6) * 10,                                                              "Climb": Dizero(3) * 10},
+        "Aven": {       "Walk": 30,             "Fly": Dizero(6) * 10},
+        "Beast": {      "Walk": Dice(12)*10,    "Fly": Dizero(6) * 10,          "Swim": Dizero(4) * 10, "Burrow": Dizero(4) * 5,    "Climb": Dizero(3) * 10},  
+        "Beastfolk": {  "Walk": Dice(8)*10,     "Fly": Dizero(3) * 10,          "Swim": Dizero(3) * 10, "Burrow": Dizero(2) * 5,    "Climb": Dizero(3) * 10},  
+        "Celestial": {  "Walk": Dice(6) * 10,   "Fly": Dice(4) * Dice(2) * 10},  
+        "Construct": {  "Walk": Dice(6) * 10,   "Fly": Dizero(2) * 10,          "Swim": Dizero(2) * 10, "Burrow": Dizero(2) * 5},
+        "Dragon": {     "Walk": Dice(12) * 10,  "Fly": Dice(12) * 10,           "Swim": Dice(12) * 10,  "Burrow": Dizero(5) * 5,    "Climb": Dizero() * 5},  
+        "Dwarf": {      "Walk": 25},
+        "Elf": {        "Walk": 30,                                             "Swim": Dizero(3) * Dizero(3) * 5},
+        "Elemental": {  "Walk": Dizero(6) * 10, "Fly": Dizero(6) * 10,          "Swim": Dizero(6) * 10, "Burrow": Dizero(6) * 5}, 
+        "Fey": {        "Walk": Dice(6) * 10,   "Fly": Dizero(6) * 5},
+        "Fiend": {      "Walk": Dice(6) * 10,   "Fly": Dizero(8) * 10,                                                              "Climb": Dizero(3) * 10},  
+        "Giant": {      "Walk": Dice(6) * 20},
+        "Gnome": {      "Walk": 25},
+        "Goblin": {     "Walk": 30},
+        "Halfling": {   "Walk": 25},
+        "Kobold": {     "Walk": 30},
+        "Lizardfolk": { "Walk": Dice(3) * Dice(3) * 10,                         "Swim": Dice(6) * 10,                               "Climb": Dizero(3) * 10},
+        "Monstrosity": {"Walk": Dice(6) * 10,   "Fly": Dizero(6) * 5,           "Swim": Dice(6) * 10,                               "Climb": Dizero(3) * 10},
+        "Ooze": {       "Walk": Dice(6) * 10,                                                                                       "Climb": Dice(6) * 10},  
+        "Orc": {        "Walk": 30},
+        "Plant":  {     "Walk": Dice(3) * 10,                                   "Swim": Dice(3) * 10,   "Burrow": Dice(3) * 5,      "Climb":  Dice(3) * 10},  
+        "Snakefolk": {  "Walk": 30,                                             "Swim": Dizero(6) * 10,                             "Climb":  Dizero(3) * 5},  
+        "Undead": {     "Walk": Dizero(12) * 5, "Fly": Dizero(6) * 5,           "Swim": Dizero(3) * 5,  "Burrow": Dizero(2) * 5},  
     }
-    
+
+
     # Set default speeds to 0
     normal = base_speeds.get(race, {}).get("Walk", 0)
     fly = base_speeds.get(race, {}).get("Fly", 0)
@@ -15274,20 +14442,81 @@ def Movement(race = Race(), background = Background()):
     burrow = base_speeds.get(race, {}).get("Burrow", 0)
     climb = base_speeds.get(race, {}).get("Climb", 0)
     
-    # Additional Movement-related abilities
 
     if normal>=0:   movement += f"Walk: {normal}ft. \t"
     if fly>0:       movement += f"Fly: {fly}ft. \t"
     if swim>0:      movement += f"Swim: {swim}ft. \t"
     if burrow>0:    movement += f"Burrow: {burrow}ft. \t"
     if climb>0:     movement += f"Climb: {climb}ft. \t"
-    
+
+    # Additional Movement-related abilities
+    if race in [ "Aberration", "Beast", "Beastfolk", "Construct", "Dragon","Fey","Fiend", "Lizardfolk","Monstrosity","Ooze","Plant","Snakefolk","Undead"]:
+        if Dice()==1: extras += spider_climb
+
+    if race in [ "Beast", "Beastfolk", "Dragon","Fey"]:
+        if fly>0 and Dice() == 1: extras += flyby
+
+    if race in [ "Aberration", "Beast", "Beastfolk","Gnome","Lizardfolk","Monstrosity"]:
+        if Dice() == 1: extras += f"\n- Standing Leap. \n\t The {race}'s long jump is up to half his speed in feet and its high jump is up to third his speed, with or without a running start."
+
+    if race in [ "Aberration", "Beast", "Beastfolk","Monstrosity","Fiend", "Lizardfolk","Ooze","Snakefolk","Undead"]:
+        if Dice()==1:
+            extras += f"\n- Spider Climb \n\t The {race} can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+            if Dice() == 1:
+                extras += f"\n- Web Sense \n\t While in contact with a web, the {race} knows the exact location of any other creature in contact with the same web."
+            if Dice() == 1:
+                extras += f"\n- Web Walker \n\t The {race} ignores movement restrictions caused by webbing."
+
+    if race in [ "Beast", "Beastfolk", "Dragon","Fey"]:
+        if Dice()==1: extras += f"\n- Hold Breath:\t The {race} can hold its breath for {Dice(3) * Dice(4) * 5} minutes."
+
+    if race in [ "Aberration", "Beast", "Beastfolk", "Construct", "Dragon","Fiend", "Lizardfolk","Monstrosity","Plant","Snakefolk","Undead"]:
+        if burrow > 0 and Dice()==1: extras += "\n - Tunneler: \t The {race} can burrow through solid rock at half its burrowing speed and leaves a 5 foot-wide, 8-foot-high tunnel in its wake."
+
+    if race in ["Elemental"]:
+        if burrow > 0 and Dice()==1: earth_glide
+
+
     movement += extras
 
     return movement
 
-def Resistances(race = Race(), background = Background()):
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def Resistances(npc):
+
+    race = npc.race
+    background = npc.background
 
     damage_types = [
         "acid", "bludgeoning", "cold", "fire", "force", 
@@ -15298,37 +14527,65 @@ def Resistances(race = Race(), background = Background()):
     ]
     race_damage_tendencies = {
         "Dragon": {
-            "acid": {"Immune": 2, "Resistant": 5, "None": 2, "Vulnerable": 1},
-            "bludgeoning": {"Immune": 1, "Resistant": 3, "None": 5, "Vulnerable": 1},
-            "cold": {"Immune": 2, "Resistant": 5, "None": 2, "Vulnerable": 1},
-            "fire": {"Immune": 2, "Resistant": 5, "None": 2, "Vulnerable": 1},
-            "force": {"Immune": 1, "Resistant": 2, "None": 7, "Vulnerable": 0},
-            "lightning": {"Immune": 2, "Resistant": 5, "None": 2, "Vulnerable": 1},
-            "necrotic": {"Immune": 1, "Resistant": 3, "None": 4, "Vulnerable": 1},
-            "piercing": {"Immune": 0, "Resistant": 2, "None": 7, "Vulnerable": 1},
-            "poison": {"Immune": 2, "Resistant": 4, "None": 3, "Vulnerable": 1},
-            "psychic": {"Immune": 1, "Resistant": 3, "None": 5, "Vulnerable": 1},
-            "radiant": {"Immune": 1, "Resistant": 3, "None": 5, "Vulnerable": 1},
-            "slashing": {"Immune": 0, "Resistant": 2, "None": 7, "Vulnerable": 1},
-            "thunder": {"Immune": 1, "Resistant": 4, "None": 4, "Vulnerable": 1},
-            "bludgeoning, piercing, and slashing from nonmagical attacks": {"Immune": 0, "Resistant": 1, "None": 8, "Vulnerable": 1},
+            "acid": {
+                "Immune": 3, "Resistant": 6, "None": 3, "Vulnerable": 2},
+            "bludgeoning": {
+                "Immune": 1, "Resistant": 3, "None": 5, "Vulnerable": 1},
+            "cold": {
+                "Immune": 2, "Resistant": 5, "None": 2, "Vulnerable": 1},
+            "fire": {
+                "Immune": 2, "Resistant": 5, "None": 2, "Vulnerable": 1},
+            "force": {
+                "Immune": 1, "Resistant": 2, "None": 7, "Vulnerable": 0},
+            "lightning": {
+                "Immune": 2, "Resistant": 5, "None": 2, "Vulnerable": 1},
+            "necrotic": {
+                "Immune": 1, "Resistant": 3, "None": 4, "Vulnerable": 1},
+            "piercing": {
+                "Immune": 0, "Resistant": 2, "None": 7, "Vulnerable": 1},
+            "poison": {
+                "Immune": 2, "Resistant": 4, "None": 3, "Vulnerable": 1},
+            "psychic": {
+                "Immune": 1, "Resistant": 3, "None": 5, "Vulnerable": 1},
+            "radiant": {
+                "Immune": 1, "Resistant": 3, "None": 5, "Vulnerable": 1},
+            "slashing": {
+                "Immune": 0, "Resistant": 2, "None": 7, "Vulnerable": 1},
+            "thunder": {
+                "Immune": 1, "Resistant": 4, "None": 4, "Vulnerable": 1},
+            "bludgeoning, piercing, and slashing from nonmagical attacks": {
+                "Immune": 0, "Resistant": 1, "None": 8, "Vulnerable": 1},
             },
 
         "Human": {
-                "acid": {"Immune": 0, "Resistant": 1, "None": 8, "Vulnerable": 1},
-                "bludgeoning": {"Immune": 0, "Resistant": 2, "None": 7, "Vulnerable": 1},
-                "cold": {"Immune": 0, "Resistant": 1, "None": 8, "Vulnerable": 1},
-                "fire": {"Immune": 0, "Resistant": 1, "None": 8, "Vulnerable": 1},
-                "force": {"Immune": 0, "Resistant": 1, "None": 8, "Vulnerable": 1},
-                "lightning": {"Immune": 0, "Resistant": 1, "None": 8, "Vulnerable": 1},
-                "necrotic": {"Immune": 0, "Resistant": 0, "None": 8, "Vulnerable": 2},
-                "piercing": {"Immune": 0, "Resistant": 2, "None": 7, "Vulnerable": 1},
-                "poison": {"Immune": 0, "Resistant": 2, "None": 7, "Vulnerable": 1},
-                "psychic": {"Immune": 0, "Resistant": 0, "None": 9, "Vulnerable": 1},
-                "radiant": {"Immune": 0, "Resistant": 0, "None": 9, "Vulnerable": 1},
-                "slashing": {"Immune": 0, "Resistant": 2, "None": 7, "Vulnerable": 1},
-                "thunder": {"Immune": 0, "Resistant": 2, "None": 7, "Vulnerable": 1},
-                "bludgeoning, piercing, and slashing from nonmagical attacks": {"Immune": 0, "Resistant": 0, "None": 9, "Vulnerable": 1},
+                "acid":{
+                    "Immune": 0, "Resistant": 2, "None": 10, "Vulnerable": 2},
+                "bludgeoning": {
+                    "Immune": 1, "Resistant": 3, "None": 10, "Vulnerable": 2},
+                "cold": {
+                    "Immune": 1, "Resistant": 2, "None": 10, "Vulnerable": 2},
+                "fire": {
+                    "Immune": 1, "Resistant": 2, "None": 10, "Vulnerable": 2},
+                "force": {
+                    "Immune": 0, "Resistant": 2, "None": 10, "Vulnerable": 2},
+                "lightning": {
+                    "Immune": 1, "Resistant": 2, "None": 10, "Vulnerable": 2},
+                "necrotic": {
+                    "Immune": 1, "Resistant": 2, "None": 12, "Vulnerable": 3},
+                "piercing": {
+                    "Immune": 1, "Resistant": 3, "None": 12, "Vulnerable": 2},
+                "poison": {
+                    "Immune": 1, "Resistant": 3, "None": 12, "Vulnerable": 2},
+                "psychic": {
+                    "Immune": 1, "Resistant": 1, "None": 12, "Vulnerable": 2},
+                "radiant": {
+                    "Immune": 1, "Resistant": 1, "None": 12, "Vulnerable": 2},
+                "slashing": {
+                    "Immune": 1, "Resistant": 3, "None": 12, "Vulnerable": 2},
+                "thunder": {
+                    "Immune": 1, "Resistant": 3, "None": 12, "Vulnerable": 2},
+                "bludgeoning, piercing, and slashing from nonmagical attacks": {
+                    "Immune": 1, "Resistant": 2, "None": 12, "Vulnerable": 2},
                 },
         "Aberration": {
                 "acid": {"Immune": 2, "Resistant": 5, "None": 3, "Vulnerable": 0},
@@ -15344,7 +14601,8 @@ def Resistances(race = Race(), background = Background()):
                 "radiant": {"Immune": 1, "Resistant": 2, "None": 4, "Vulnerable": 3},
                 "slashing": {"Immune": 1, "Resistant": 4, "None": 4, "Vulnerable": 1},
                 "thunder": {"Immune": 1, "Resistant": 4, "None": 4, "Vulnerable": 1},
-                "bludgeoning, piercing, and slashing from nonmagical attacks": {"Immune": 2, "Resistant": 6, "None": 2, "Vulnerable": 0},
+                "bludgeoning, piercing, and slashing from nonmagical attacks": {
+                    "Immune": 2, "Resistant": 6, "None": 2, "Vulnerable": 0},
                 },
         "Aven": {
                 "acid": {"Immune": 0, "Resistant": 2, "None": 7, "Vulnerable": 1},
@@ -15376,7 +14634,8 @@ def Resistances(race = Race(), background = Background()):
                 "radiant": {"Immune": 1, "Resistant": 2, "None": 6, "Vulnerable": 3},
                 "slashing": {"Immune": 2, "Resistant": 4, "None": 3, "Vulnerable": 3},
                 "thunder": {"Immune": 2, "Resistant": 3, "None": 5, "Vulnerable": 2},
-                "bludgeoning, piercing, and slashing from nonmagical attacks": {"Immune": 4, "Resistant": 3, "None": 2, "Vulnerable": 3},
+                "bludgeoning, piercing, and slashing from nonmagical attacks": {
+                    "Immune": 4, "Resistant": 3, "None": 2, "Vulnerable": 3},
                 },
         "Beastfolk": {
                 "acid": {"Immune": 1, "Resistant": 4, "None": 6, "Vulnerable": 1},
@@ -15392,23 +14651,43 @@ def Resistances(race = Race(), background = Background()):
                 "radiant": {"Immune": 1, "Resistant": 3, "None": 6, "Vulnerable": 2},
                 "slashing": {"Immune": 2, "Resistant": 5, "None": 4, "Vulnerable": 1},
                 "thunder": {"Immune": 3, "Resistant": 5, "None": 3, "Vulnerable": 1},
-                "bludgeoning, piercing, and slashing from nonmagical attacks": {"Immune": 2, "Resistant": 4, "None": 5, "Vulnerable": 1},
+                "bludgeoning, piercing, and slashing from nonmagical attacks": {
+                    "Immune": 4, "Resistant": 4, "None": 5, "Vulnerable": 1},
+                "bludgeoning, piercing, and slashing from nonmagical attacks that aren't silvered": {
+                    "Immune": 8, "Resistant": 4, "None": 4, "Vulnerable": 0},
                 },
+
         "Celestial": {
-                "acid": {"Immune": 4, "Resistant": 6, "None": 2, "Vulnerable": 0},
-                "bludgeoning": {"Immune": 2, "Resistant": 7, "None": 3, "Vulnerable": 0},
-                "cold": {"Immune": 5, "Resistant": 5, "None": 2, "Vulnerable": 0},
-                "fire": {"Immune": 5, "Resistant": 5, "None": 2, "Vulnerable": 0},
-                "force": {"Immune": 5, "Resistant": 5, "None": 2, "Vulnerable": 0},
-                "lightning": {"Immune": 4, "Resistant": 6, "None": 2, "Vulnerable": 0},
-                "necrotic": {"Immune": 8, "Resistant": 2, "None": 2, "Vulnerable": 0},
-                "piercing": {"Immune": 2, "Resistant": 7, "None": 3, "Vulnerable": 0},
-                "poison": {"Immune": 8, "Resistant": 2, "None": 2, "Vulnerable": 0},
-                "psychic": {"Immune": 5, "Resistant": 5, "None": 2, "Vulnerable": 0},
-                "radiant": {"Immune": 10, "Resistant": 2, "None": 0, "Vulnerable": 0},
-                "slashing": {"Immune": 2, "Resistant": 7, "None": 3, "Vulnerable": 0},
-                "thunder": {"Immune": 4, "Resistant": 6, "None": 2, "Vulnerable": 0},
-                "bludgeoning, piercing, and slashing from nonmagical attacks": {"Immune": 5, "Resistant": 5, "None": 2, "Vulnerable": 0},
+                "acid": {
+                    "Immune": 5, "Resistant": 7, "None": 3, "Vulnerable": 1},
+                "bludgeoning": {
+                    "Immune": 3, "Resistant": 8, "None": 4, "Vulnerable": 1},
+                "cold": {
+                    "Immune": 6, "Resistant": 7, "None": 3, "Vulnerable": 1},
+                "fire": {
+                    "Immune": 6, "Resistant": 6, "None": 3, "Vulnerable": 1},
+                "force": {
+                    "Immune": 6, "Resistant": 8, "None": 4, "Vulnerable": 1},
+                "lightning": {
+                    "Immune": 5, "Resistant": 8, "None": 4, "Vulnerable": 1},
+                "necrotic": {
+                    "Immune": 9, "Resistant": 5, "None": 3, "Vulnerable": 1},
+                "piercing": {
+                    "Immune": 3, "Resistant": 8, "None": 4, "Vulnerable": 1},
+                "poison": {
+                    "Immune": 9, "Resistant": 4, "None": 3, "Vulnerable": 1},
+                "psychic": {
+                    "Immune": 6, "Resistant": 6, "None": 3, "Vulnerable": 1},
+                "radiant": {
+                    "Immune": 11, "Resistant": 3, "None": 1, "Vulnerable": 1},
+                "slashing": {
+                    "Immune": 3, "Resistant": 8, "None": 4, "Vulnerable": 1},
+                "thunder": {
+                    "Immune": 5, "Resistant": 7, "None": 3, "Vulnerable": 1},
+                "bludgeoning, piercing, and slashing from nonmagical attacks": {
+                    "Immune": 6, "Resistant": 6, "None": 3, "Vulnerable": 1},
+                "bludgeoning, piercing, and slashing from nonmagical attacks that aren't silvered": {
+                    "Immune": 9, "Resistant": 5, "None": 5, "Vulnerable": 1},
                 },
         "Construct": {
                 "acid": {"Immune": 2, "Resistant": 5, "None": 4, "Vulnerable": 1},
@@ -15424,7 +14703,8 @@ def Resistances(race = Race(), background = Background()):
                 "radiant": {"Immune": 0, "Resistant": 0, "None": 8, "Vulnerable": 4},
                 "slashing": {"Immune": 0, "Resistant": 2, "None": 5, "Vulnerable": 5},
                 "thunder": {"Immune": 2, "Resistant": 4, "None": 6, "Vulnerable": 0},
-                "bludgeoning, piercing, and slashing from nonmagical attacks": {"Immune": 3, "Resistant": 7, "None": 2, "Vulnerable": 0},
+                "bludgeoning, piercing, and slashing from nonmagical attacks": {
+                    "Immune": 3, "Resistant": 7, "None": 2, "Vulnerable": 0},
                 },
         "Dwarf": {
             "acid": {"Immune": 0, "Resistant": 3, "None": 7, "Vulnerable": 0},
@@ -15435,12 +14715,14 @@ def Resistances(race = Race(), background = Background()):
             "lightning": {"Immune": 0, "Resistant": 3, "None": 7, "Vulnerable": 0},
             "necrotic": {"Immune": 0, "Resistant": 1, "None": 8, "Vulnerable": 1},
             "piercing": {"Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 0},
-            "poison": {"Immune": 3, "Resistant": 6, "None": 1, "Vulnerable": 0},
+            "poison": {
+                "Immune": 3, "Resistant": 7, "None": 0, "Vulnerable": 0},
             "psychic": {"Immune": 0, "Resistant": 2, "None": 8, "Vulnerable": 0},
             "radiant": {"Immune": 0, "Resistant": 2, "None": 8, "Vulnerable": 0},
             "slashing": {"Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 0},
             "thunder": {"Immune": 0, "Resistant": 3, "None": 7, "Vulnerable": 0},
-            "bludgeoning, piercing, and slashing from nonmagical attacks": {"Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 0},
+            "bludgeoning, piercing, and slashing from nonmagical attacks": {
+                "Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 0},
             },
         "Elf": {
             "acid": {"Immune": 1, "Resistant": 4, "None": 4, "Vulnerable": 1},
@@ -15456,23 +14738,38 @@ def Resistances(race = Race(), background = Background()):
             "radiant": {"Immune": 1, "Resistant": 3, "None": 5, "Vulnerable": 1},
             "slashing": {"Immune": 0, "Resistant": 3, "None": 6, "Vulnerable": 1},
             "thunder": {"Immune": 0, "Resistant": 3, "None": 6, "Vulnerable": 1},
-            "bludgeoning, piercing, and slashing from nonmagical attacks": {"Immune": 0, "Resistant": 2, "None": 8, "Vulnerable": 0},
+            "bludgeoning, piercing, and slashing from nonmagical attacks": {
+                "Immune": 0, "Resistant": 2, "None": 8, "Vulnerable": 0},
             },
         "Elemental": {
-            "acid": {"Immune": 5, "Resistant": 5, "None": 0, "Vulnerable": 5},
-            "bludgeoning": {"Immune": 5, "Resistant": 5, "None": 0, "Vulnerable": 5},
-            "cold": {"Immune": 5, "Resistant": 5, "None": 0, "Vulnerable": 5},
-            "fire": {"Immune": 5, "Resistant": 5, "None": 0, "Vulnerable": 5},
-            "force": {"Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 5},
-            "lightning": {"Immune": 5, "Resistant": 5, "None": 0, "Vulnerable": 5},
-            "necrotic": {"Immune": 5, "Resistant": 5, "None": 0, "Vulnerable": 5},
-            "piercing": {"Immune": 5, "Resistant": 5, "None": 0, "Vulnerable": 5},
-            "poison": {"Immune": 10, "Resistant": 0, "None": 0, "Vulnerable": 0},
-            "psychic": {"Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 5},
-            "radiant": {"Immune": 5, "Resistant": 5, "None": 0, "Vulnerable": 5},
-            "slashing": {"Immune": 5, "Resistant": 5, "None": 0, "Vulnerable": 5},
-            "thunder": {"Immune": 5, "Resistant": 5, "None": 0, "Vulnerable": 5},
-            "bludgeoning, piercing, and slashing from nonmagical attacks": {"Immune": 5, "Resistant": 5, "None": 0, "Vulnerable": 5},
+            "acid": {
+                "Immune": 5, "Resistant": 6, "None": 5, "Vulnerable": 5},
+            "bludgeoning": {
+                "Immune": 6, "Resistant": 6, "None": 6, "Vulnerable": 6},
+            "cold": {
+                "Immune": 6, "Resistant": 6, "None": 8, "Vulnerable": 7},
+            "fire":{
+                "Immune": 6, "Resistant": 6, "None": 6, "Vulnerable": 6},
+            "force": {
+                "Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 15},
+            "lightning": {
+                "Immune": 5, "Resistant": 5, "None": 5, "Vulnerable": 5},
+            "necrotic": {
+                "Immune": 5, "Resistant": 5, "None": 10, "Vulnerable": 5},
+            "piercing": {
+                "Immune": 5, "Resistant": 5, "None": 5, "Vulnerable": 5},
+            "poison": {
+                "Immune": 10, "Resistant": 5, "None": 0, "Vulnerable": 0},
+            "psychic": {
+                "Immune": 0, "Resistant": 5, "None": 10, "Vulnerable": 5},
+            "radiant": {
+                "Immune": 5, "Resistant": 5, "None": 5, "Vulnerable": 5},
+            "slashing": {
+                "Immune": 5, "Resistant": 5, "None": 5, "Vulnerable": 5},
+            "thunder": {
+                "Immune": 6, "Resistant": 6, "None": 7, "Vulnerable": 6},
+            "bludgeoning, piercing, and slashing from nonmagical attacks": {
+                "Immune": 6, "Resistant": 7, "None": 10, "Vulnerable": 0},
             },
         "Fey": {
             "acid": {"Immune": 2, "Resistant": 8, "None": 5, "Vulnerable": 0},
@@ -15488,31 +14785,52 @@ def Resistances(race = Race(), background = Background()):
             "radiant": {"Immune": 0, "Resistant": 2, "None": 2, "Vulnerable": 10},
             "slashing": {"Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 5},
             "thunder": {"Immune": 2, "Resistant": 8, "None": 5, "Vulnerable": 0},
-            "bludgeoning, piercing, and slashing from nonmagical attacks": {"Immune": 0, "Resistant": 10, "None": 0, "Vulnerable": 0},
+            "bludgeoning, piercing, and slashing from nonmagical attacks": {
+                "Immune": 0, "Resistant": 10, "None": 0, "Vulnerable": 0},
             },
         "Fiend": {
-            "acid": {"Immune": 5, "Resistant": 10, "None": 0, "Vulnerable": 0},
-            "bludgeoning": {"Immune": 0, "Resistant": 0, "None": 5, "Vulnerable": 0},
-            "cold": {"Immune": 5, "Resistant": 10, "None": 0, "Vulnerable": 0},
-            "fire": {"Immune": 10, "Resistant": 0, "None": 0, "Vulnerable": 0},
-            "force": {"Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 0},
-            "lightning": {"Immune": 5, "Resistant": 10, "None": 0, "Vulnerable": 0},
-            "necrotic": {"Immune": 5, "Resistant": 0, "None": 5, "Vulnerable": 0},
-            "piercing": {"Immune": 0, "Resistant": 0, "None": 5, "Vulnerable": 0},
-            "poison": {"Immune": 15, "Resistant": 0, "None": 0, "Vulnerable": 0},
-            "psychic": {"Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 0},
-            "radiant": {"Immune": 0, "Resistant": 0, "None": 0, "Vulnerable": 15},
-            "slashing": {"Immune": 0, "Resistant": 0, "None": 5, "Vulnerable": 0},
-            "thunder": {"Immune": 5, "Resistant": 10, "None": 0, "Vulnerable": 0},
-            "bludgeoning, piercing, and slashing from nonmagical attacks": {"Immune": 15, "Resistant": 0, "None": 0, "Vulnerable": 0},
+            "acid": {
+                "Immune": 5, "Resistant": 10, "None": 0, "Vulnerable": 0},
+            "bludgeoning": {
+                "Immune": 0, "Resistant": 0, "None": 5, "Vulnerable": 0},
+            "cold": {
+                "Immune": 5, "Resistant": 10, "None": 0, "Vulnerable": 0},
+            "fire": {
+                "Immune": 10, "Resistant": 2, "None": 0, "Vulnerable": 0},
+            "force": {
+                "Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 0},
+            "lightning": {
+                "Immune": 5, "Resistant": 10, "None": 0, "Vulnerable": 0},
+            "necrotic": {
+                "Immune": 5, "Resistant": 0, "None": 5, "Vulnerable": 0},
+            "piercing": {
+                "Immune": 0, "Resistant": 0, "None": 5, "Vulnerable": 0},
+            "poison": {
+                "Immune": 15, "Resistant": 0, "None": 0, "Vulnerable": 0},
+            "psychic": {
+                "Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 0},
+            "radiant": {
+                "Immune": 0, "Resistant": 0, "None": 1, "Vulnerable": 20},
+            "slashing": {
+                "Immune": 0, "Resistant": 0, "None": 5, "Vulnerable": 0},
+            "thunder": {
+                "Immune": 5, "Resistant": 10, "None": 0, "Vulnerable": 0},
+            "bludgeoning, piercing, and slashing from nonmagical attacks that aren't silvered": {
+                "Immune": 8, "Resistant": 4, "None": 4, "Vulnerable": 0},
             },
         "Giant": {
-            "acid": {"Immune": 0, "Resistant": 5, "None": 10, "Vulnerable": 5},
-            "bludgeoning": {"Immune": 0, "Resistant": 10, "None": 5, "Vulnerable": 0},
-            "cold": {"Immune": 0, "Resistant": 5, "None": 10, "Vulnerable": 0},
-            "fire": {"Immune": 0, "Resistant": 5, "None": 10, "Vulnerable": 0},
-            "force": {"Immune": 0, "Resistant": 5, "None": 10, "Vulnerable": 0},
-            "lightning": {"Immune": 0, "Resistant": 5, "None": 10, "Vulnerable": 0},
+            "acid": {
+                "Immune": 0, "Resistant": 5, "None": 10, "Vulnerable": 5},
+            "bludgeoning": {
+                "Immune": 0, "Resistant": 10, "None": 5, "Vulnerable": 0},
+            "cold": {
+                "Immune": 0, "Resistant": 5, "None": 10, "Vulnerable": 0},
+            "fire": {
+                "Immune": 0, "Resistant": 5, "None": 10, "Vulnerable": 0},
+            "force": {
+                "Immune": 0, "Resistant": 5, "None": 10, "Vulnerable": 0},
+            "lightning": {
+                "Immune": 0, "Resistant": 5, "None": 10, "Vulnerable": 0},
             "necrotic": {"Immune": 0, "Resistant": 5, "None": 10, "Vulnerable": 0},
             "piercing": {"Immune": 0, "Resistant": 10, "None": 5, "Vulnerable": 0},
             "poison": {"Immune": 0, "Resistant": 5, "None": 10, "Vulnerable": 0},
@@ -15520,7 +14838,8 @@ def Resistances(race = Race(), background = Background()):
             "radiant": {"Immune": 0, "Resistant": 5, "None": 10, "Vulnerable": 0},
             "slashing": {"Immune": 0, "Resistant": 10, "None": 5, "Vulnerable": 0},
             "thunder": {"Immune": 0, "Resistant": 5, "None": 10, "Vulnerable": 0},
-            "bludgeoning, piercing, and slashing from nonmagical attacks": {"Immune": 0, "Resistant": 10, "None": 5, "Vulnerable": 0},
+            "bludgeoning, piercing, and slashing from nonmagical attacks": {
+                "Immune": 0, "Resistant": 10, "None": 5, "Vulnerable": 0},
             },
         "Gnome": {
             "acid": {"Immune": 0, "Resistant": 5, "None": 10, "Vulnerable": 0},
@@ -15535,24 +14854,40 @@ def Resistances(race = Race(), background = Background()):
             "psychic": {"Immune": 0, "Resistant": 6, "None": 10, "Vulnerable": 0},
             "radiant": {"Immune": 0, "Resistant": 5, "None": 10, "Vulnerable": 0},
             "slashing": {"Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 5},
-            "thunder": {"Immune": 0, "Resistant": 5, "None": 10, "Vulnerable": 0},
-            "bludgeoning, piercing, and slashing from nonmagical attacks": {"Immune": 0, "Resistant": 5, "None": 10, "Vulnerable": 0},
+            "thunder": {
+                "Immune": 0, "Resistant": 5, "None": 10, "Vulnerable": 0},
+            "bludgeoning, piercing, and slashing from nonmagical attacks": {
+                "Immune": 0, "Resistant": 5, "None": 10, "Vulnerable": 0},
             },
         "Goblin": {
-            "acid": {"Immune": 0, "Resistant": 3, "None": 8, "Vulnerable": 4},
-            "bludgeoning": {"Immune": 0, "Resistant": 2, "None": 5, "Vulnerable": 8},
-            "cold": {"Immune": 1, "Resistant": 4, "None": 8, "Vulnerable": 2},
-            "fire": {"Immune": 0, "Resistant": 3, "None": 7, "Vulnerable": 5},
-            "force": {"Immune": 0, "Resistant": 1, "None": 9, "Vulnerable": 5},
-            "lightning": {"Immune": 0, "Resistant": 5, "None": 8, "Vulnerable": 2},
-            "necrotic": {"Immune": 0, "Resistant": 2, "None": 8, "Vulnerable": 5},
-            "piercing": {"Immune": 0, "Resistant": 3, "None": 6, "Vulnerable": 6},
-            "poison": {"Immune": 3, "Resistant": 7, "None": 5, "Vulnerable": 0},
-            "psychic": {"Immune": 1, "Resistant": 2, "None": 8, "Vulnerable": 5},
-            "radiant": {"Immune": 0, "Resistant": 1, "None": 9, "Vulnerable": 5},
-            "slashing": {"Immune": 0, "Resistant": 3, "None": 6, "Vulnerable": 6},
-            "thunder": {"Immune": 0, "Resistant": 5, "None": 8, "Vulnerable": 2},
-            "bludgeoning, piercing, and slashing from nonmagical attacks": {"Immune": 0, "Resistant": 0, "None": 0, "Vulnerable": 15},
+            "acid": {
+                "Immune": 0, "Resistant": 4, "None": 10, "Vulnerable": 5},
+            "bludgeoning": {
+                "Immune": 1, "Resistant": 4, "None": 18, "Vulnerable": 10},
+            "cold": {
+                "Immune": 2, "Resistant": 8, "None": 16, "Vulnerable": 4},
+            "fire": {
+                "Immune": 0, "Resistant": 4, "None": 8, "Vulnerable": 6},
+            "force": {
+                "Immune": 0, "Resistant": 1, "None": 10, "Vulnerable": 8},
+            "lightning": {
+                "Immune": 1, "Resistant": 7, "None": 12, "Vulnerable": 4},
+            "necrotic": {
+                "Immune": 1, "Resistant": 4, "None": 16, "Vulnerable": 8},
+            "piercing": {
+                "Immune": 1, "Resistant": 4, "None": 16, "Vulnerable": 8},
+            "poison": {
+                "Immune": 4, "Resistant": 8, "None": 6, "Vulnerable": 1},
+            "psychic": {
+                "Immune": 2, "Resistant": 4, "None": 16, "Vulnerable": 10},
+            "radiant": {
+                "Immune": 1, "Resistant": 2, "None": 20, "Vulnerable": 10},
+            "slashing": {
+                "Immune": 1, "Resistant": 4, "None": 12, "Vulnerable": 12},
+            "thunder": {
+                "Immune": 1, "Resistant": 10, "None": 16, "Vulnerable": 4},
+            "bludgeoning, piercing, and slashing from nonmagical attacks": {
+                "Immune": 1, "Resistant": 1, "None": 20, "Vulnerable": 0},
             },
         "Halfling": {
             "acid": {"Immune": 1, "Resistant": 4, "None": 10, "Vulnerable": 0},
@@ -15568,7 +14903,8 @@ def Resistances(race = Race(), background = Background()):
             "radiant": {"Immune": 0, "Resistant": 3, "None": 12, "Vulnerable": 0},
             "slashing": {"Immune": 1, "Resistant": 7, "None": 7, "Vulnerable": 0},
             "thunder": {"Immune": 1, "Resistant": 5, "None": 9, "Vulnerable": 0},
-            "bludgeoning, piercing, and slashing from nonmagical attacks": {"Immune": 0, "Resistant": 5, "None": 10, "Vulnerable": 0},
+            "bludgeoning, piercing, and slashing from nonmagical attacks": {
+                "Immune": 0, "Resistant": 5, "None": 10, "Vulnerable": 0},
             },
         "Kobold": {
             "acid": {"Immune": 1, "Resistant": 2, "None": 8, "Vulnerable": 4},
@@ -15584,46 +14920,79 @@ def Resistances(race = Race(), background = Background()):
             "radiant": {"Immune": 0, "Resistant": 1, "None": 9, "Vulnerable": 5},
             "slashing": {"Immune": 0, "Resistant": 1, "None": 7, "Vulnerable": 7},
             "thunder": {"Immune": 1, "Resistant": 2, "None": 7, "Vulnerable": 5},
-            "bludgeoning, piercing, and slashing from nonmagical attacks": {"Immune": 0, "Resistant": 2, "None": 5, "Vulnerable": 8},
+            "bludgeoning, piercing, and slashing from nonmagical attacks": {
+                "Immune": 0, "Resistant": 2, "None": 5, "Vulnerable": 8},
             },
         "Lizardfolk": {
-            "acid": {"Immune": 2, "Resistant": 5, "None": 8, "Vulnerable": 0},
-            "bludgeoning": {"Immune": 1, "Resistant": 6, "None": 8, "Vulnerable": 0},
-            "cold": {"Immune": 2, "Resistant": 5, "None": 8, "Vulnerable": 0},
-            "fire": {"Immune": 1, "Resistant": 4, "None": 8, "Vulnerable": 2},
-            "force": {"Immune": 0, "Resistant": 3, "None": 9, "Vulnerable": 3},
-            "lightning": {"Immune": 1, "Resistant": 5, "None": 7, "Vulnerable": 2},
-            "necrotic": {"Immune": 0, "Resistant": 3, "None": 8, "Vulnerable": 4},
-            "piercing": {"Immune": 1, "Resistant": 7, "None": 6, "Vulnerable": 1},
-            "poison": {"Immune": 5, "Resistant": 5, "None": 5, "Vulnerable": 0},
-            "psychic": {"Immune": 1, "Resistant": 2, "None": 8, "Vulnerable": 4},
-            "radiant": {"Immune": 0, "Resistant": 2, "None": 8, "Vulnerable": 5},
-            "slashing": {"Immune": 1, "Resistant": 6, "None": 6, "Vulnerable": 2},
-            "thunder": {"Immune": 1, "Resistant": 4, "None": 8, "Vulnerable": 2},
-            "bludgeoning, piercing, and slashing from nonmagical attacks": {"Immune": 3, "Resistant": 5, "None": 7, "Vulnerable": 0},
+            "acid": {
+                "Immune": 3, "Resistant": 6, "None": 9, "Vulnerable": 1},
+            "bludgeoning": {
+                "Immune": 2, "Resistant": 7, "None": 9, "Vulnerable": 1},
+            "cold": {
+                "Immune": 3, "Resistant": 6, "None": 10, "Vulnerable": 1},
+            "fire": {
+                "Immune": 2, "Resistant": 5, "None": 10, "Vulnerable": 3},
+            "force": {
+                "Immune": 0, "Resistant": 4, "None": 11, "Vulnerable": 4},
+            "lightning": {
+                "Immune": 2, "Resistant": 6, "None": 8, "Vulnerable": 3},
+            "necrotic": {
+                "Immune": 1, "Resistant": 4, "None": 10, "Vulnerable": 5},
+            "piercing": {
+                "Immune": 2, "Resistant": 10, "None": 7, "Vulnerable": 2},
+            "poison": {
+                "Immune": 6, "Resistant": 6, "None": 6, "Vulnerable": 1},
+            "psychic": {
+                "Immune": 2, "Resistant": 3, "None": 10, "Vulnerable": 6},
+            "radiant": {
+                "Immune": 1, "Resistant": 3, "None": 10, "Vulnerable": 6},
+            "slashing": {
+                "Immune": 2, "Resistant": 8, "None": 8, "Vulnerable": 3},
+            "thunder": {
+                "Immune": 2, "Resistant": 5, "None": 10, "Vulnerable": 3},
+            "bludgeoning, piercing, and slashing from nonmagical attacks": {
+                "Immune": 4, "Resistant": 7, "None": 10, "Vulnerable": 1},
             },
 
         "Monstrosity": {
-            "acid": {"Immune": 5, "Resistant": 5, "None": 5, "Vulnerable": 0},
-            "bludgeoning": {"Immune": 2, "Resistant": 5, "None": 5, "Vulnerable": 3},
-            "cold": {"Immune": 5, "Resistant": 5, "None": 5, "Vulnerable": 0},
-            "fire": {"Immune": 5, "Resistant": 5, "None": 5, "Vulnerable": 0},
-            "force": {"Immune": 2, "Resistant": 3, "None": 5, "Vulnerable": 5},
-            "lightning": {"Immune": 5, "Resistant": 5, "None": 5, "Vulnerable": 0},
-            "necrotic": {"Immune": 3, "Resistant": 3, "None": 5, "Vulnerable": 4},
-            "piercing": {"Immune": 2, "Resistant": 5, "None": 5, "Vulnerable": 3},
-            "poison": {"Immune": 5, "Resistant": 5, "None": 5, "Vulnerable": 0},
-            "psychic": {"Immune": 3, "Resistant": 3, "None": 5, "Vulnerable": 4},
-            "radiant": {"Immune": 2, "Resistant": 3, "None": 5, "Vulnerable": 5},
-            "slashing": {"Immune": 2, "Resistant": 5, "None": 5, "Vulnerable": 3},
-            "thunder": {"Immune": 5, "Resistant": 5, "None": 5, "Vulnerable": 0},
-            "bludgeoning, piercing, and slashing from nonmagical attacks": {"Immune": 5, "Resistant": 5, "None": 5, "Vulnerable": 0},
+            "acid": {
+                "Immune": 6, "Resistant": 6, "None": 6, "Vulnerable": 1},
+            "bludgeoning": {
+                "Immune": 3, "Resistant": 6, "None": 6, "Vulnerable": 4},
+            "cold": {
+                "Immune": 6, "Resistant": 6, "None": 6, "Vulnerable": 1},
+            "fire": {
+                "Immune": 6, "Resistant": 6, "None": 6, "Vulnerable": 1},
+            "force": {
+                "Immune": 3, "Resistant": 3, "None": 6, "Vulnerable": 6},
+            "lightning": {
+                "Immune": 6, "Resistant": 6, "None": 6, "Vulnerable": 1},
+            "necrotic": {
+                "Immune": 4, "Resistant": 4, "None": 6, "Vulnerable": 5},
+            "piercing": {
+                "Immune": 3, "Resistant": 6, "None": 6, "Vulnerable": 4},
+            "poison": {
+                "Immune": 6, "Resistant": 6, "None": 6, "Vulnerable": 1},
+            "psychic": {
+                "Immune": 4, "Resistant": 4, "None": 6, "Vulnerable": 5},
+            "radiant": {
+                "Immune": 3, "Resistant": 4, "None": 6, "Vulnerable": 6},
+            "slashing": {
+                "Immune": 3, "Resistant": 6, "None": 6, "Vulnerable": 4},
+            "thunder": {
+                "Immune": 6, "Resistant": 6, "None": 6, "Vulnerable": 1},
+            "bludgeoning, piercing, and slashing from nonmagical attacks": {
+                "Immune": 6, "Resistant": 6, "None": 6, "Vulnerable": 1},
             },
         "Ooze": {
-            "acid": {"Immune": 10, "Resistant": 0, "None": 5, "Vulnerable": 0},
-            "bludgeoning": {"Immune": 10, "Resistant": 5, "None": 0, "Vulnerable": 0},
-            "cold": {"Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 5},
-            "fire": {"Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 5},
+            "acid": {
+                "Immune": 11, "Resistant": 1, "None": 6, "Vulnerable": 1},
+            "bludgeoning": {
+                "Immune": 11, "Resistant": 6, "None": 1, "Vulnerable": 1},
+            "cold": {
+                "Immune": 1, "Resistant": 6, "None": 6, "Vulnerable": 6},
+            "fire": {
+                "Immune": 1, "Resistant": 6, "None": 6, "Vulnerable": 6},
             "force": {"Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 5},
             "lightning": {"Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 5},
             "necrotic": {"Immune": 5, "Resistant": 5, "None": 5, "Vulnerable": 0},
@@ -15633,28 +15002,14 @@ def Resistances(race = Race(), background = Background()):
             "radiant": {"Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 5},
             "slashing": {"Immune": 10, "Resistant": 5, "None": 0, "Vulnerable": 0},
             "thunder": {"Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 5},
-            "bludgeoning, piercing, and slashing from nonmagical attacks": {"Immune": 10, "Resistant": 0, "None": 0, "Vulnerable": 0},
-            },
-        "Ooze": {
-            "acid": {"Immune": 10, "Resistant": 0, "None": 5, "Vulnerable": 0},
-            "bludgeoning": {"Immune": 10, "Resistant": 5, "None": 0, "Vulnerable": 0},
-            "cold": {"Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 5},
-            "fire": {"Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 5},
-            "force": {"Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 5},
-            "lightning": {"Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 5},
-            "necrotic": {"Immune": 5, "Resistant": 5, "None": 5, "Vulnerable": 0},
-            "piercing": {"Immune": 10, "Resistant": 5, "None": 0, "Vulnerable": 0},
-            "poison": {"Immune": 10, "Resistant": 0, "None": 5, "Vulnerable": 0},
-            "psychic": {"Immune": 10, "Resistant": 0, "None": 5, "Vulnerable": 0},
-            "radiant": {"Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 5},
-            "slashing": {"Immune": 10, "Resistant": 5, "None": 0, "Vulnerable": 0},
-            "thunder": {"Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 5},
-            "bludgeoning, piercing, and slashing from nonmagical attacks": {"Immune": 10, "Resistant": 0, "None": 0, "Vulnerable": 0},
+            "bludgeoning, piercing, and slashing from nonmagical attacks": {
+                "Immune": 10, "Resistant": 0, "None": 0, "Vulnerable": 0},
             },
         "Orc": {
             "acid": {"Immune": 0, "Resistant": 3, "None": 7, "Vulnerable": 0},
             "bludgeoning": {"Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 0},
-            "cold": {"Immune": 0, "Resistant": 3, "None": 7, "Vulnerable": 0},
+            "cold": {
+                "Immune": 0, "Resistant": 3, "None": 7, "Vulnerable": 0},
             "fire": {"Immune": 0, "Resistant": 3, "None": 7, "Vulnerable": 0},
             "force": {"Immune": 0, "Resistant": 2, "None": 8, "Vulnerable": 0},
             "lightning": {"Immune": 0, "Resistant": 3, "None": 7, "Vulnerable": 0},
@@ -15665,24 +15020,33 @@ def Resistances(race = Race(), background = Background()):
             "radiant": {"Immune": 0, "Resistant": 2, "None": 8, "Vulnerable": 0},
             "slashing": {"Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 0},
             "thunder": {"Immune": 0, "Resistant": 3, "None": 7, "Vulnerable": 0},
-            "bludgeoning, piercing, and slashing from nonmagical attacks": {"Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 0},
+            "bludgeoning, piercing, and slashing from nonmagical attacks": {
+                "Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 0},
             },
+        
         "Plant": {
             "acid": {"Immune": 1, "Resistant": 5, "None": 4, "Vulnerable": 5},
-            "bludgeoning": {"Immune": 0, "Resistant": 2, "None": 6, "Vulnerable": 7},
-            "cold": {"Immune": 0, "Resistant": 2, "None": 6, "Vulnerable": 7},
-            "fire": {"Immune": 0, "Resistant": 0, "None": 3, "Vulnerable": 12},
+            "bludgeoning": {
+                "Immune": 0, "Resistant": 3, "None": 6, "Vulnerable": 7},
+            "cold": {
+                "Immune": 0, "Resistant": 3, "None": 6, "Vulnerable": 7},
+            "fire": {
+                "Immune": 1, "Resistant": 2, "None": 4, "Vulnerable": 16},
             "force": {"Immune": 0, "Resistant": 1, "None": 9, "Vulnerable": 5},
-            "lightning": {"Immune": 0, "Resistant": 1, "None": 9, "Vulnerable": 5},
+            "lightning": {"Immune": 1, "Resistant": 1, "None": 9, "Vulnerable": 5},
             "necrotic": {"Immune": 0, "Resistant": 1, "None": 4, "Vulnerable": 10},
-            "piercing": {"Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 5},
-            "poison": {"Immune": 10, "Resistant": 5, "None": 0, "Vulnerable": 0},
+            "piercing": {
+                "Immune": 0, "Resistant": 6, "None": 5, "Vulnerable": 5},
+            "poison": {"Immune": 11, "Resistant": 5, "None": 0, "Vulnerable": 0},
             "psychic": {"Immune": 5, "Resistant": 5, "None": 5, "Vulnerable": 0},
             "radiant": {"Immune": 0, "Resistant": 5, "None": 5, "Vulnerable": 5},
             "slashing": {"Immune": 0, "Resistant": 7, "None": 3, "Vulnerable": 5},
             "thunder": {"Immune": 0, "Resistant": 2, "None": 8, "Vulnerable": 5},
-            "bludgeoning, piercing, and slashing from nonmagical attacks": {"Immune": 0, "Resistant": 10, "None": 0, "Vulnerable": 0},
+            "bludgeoning, piercing, and slashing from nonmagical attacks": {
+                "Immune": 0, "Resistant": 10, "None": 0, "Vulnerable": 0},
             },
+        
+
         "Snakefolk": {
             "acid": {"Immune": 2, "Resistant": 5, "None": 7, "Vulnerable": 1},
             "bludgeoning": {"Immune": 1, "Resistant": 3, "None": 8, "Vulnerable": 3},
@@ -15697,23 +15061,38 @@ def Resistances(race = Race(), background = Background()):
             "radiant": {"Immune": 0, "Resistant": 3, "None": 9, "Vulnerable": 3},
             "slashing": {"Immune": 1, "Resistant": 6, "None": 6, "Vulnerable": 2},
             "thunder": {"Immune": 1, "Resistant": 3, "None": 9, "Vulnerable": 2},
-            "bludgeoning, piercing, and slashing from nonmagical attacks": {"Immune": 1, "Resistant": 7, "None": 5, "Vulnerable": 2},
+            "bludgeoning, piercing, and slashing from nonmagical attacks": {
+                "Immune": 1, "Resistant": 7, "None": 5, "Vulnerable": 2},
             },
         "Undead": {
-            "acid": {"Immune": 2, "Resistant": 5, "None": 5, "Vulnerable": 3},
-            "bludgeoning": {"Immune": 2, "Resistant": 6, "None": 5, "Vulnerable": 2},
-            "cold": {"Immune": 5, "Resistant": 5, "None": 3, "Vulnerable": 2},
-            "fire": {"Immune": 2, "Resistant": 5, "None": 5, "Vulnerable": 3},
-            "force": {"Immune": 1, "Resistant": 3, "None": 9, "Vulnerable": 2},
-            "lightning": {"Immune": 2, "Resistant": 4, "None": 7, "Vulnerable": 2},
-            "necrotic": {"Immune": 10, "Resistant": 5, "None": 0, "Vulnerable": 0},
-            "piercing": {"Immune": 2, "Resistant": 6, "None": 5, "Vulnerable": 2},
-            "poison": {"Immune": 10, "Resistant": 5, "None": 0, "Vulnerable": 0},
-            "psychic": {"Immune": 2, "Resistant": 3, "None": 5, "Vulnerable": 5},
-            "radiant": {"Immune": 1, "Resistant": 2, "None": 2, "Vulnerable": 10},
-            "slashing": {"Immune": 2, "Resistant": 6, "None": 5, "Vulnerable": 2},
-            "thunder": {"Immune": 2, "Resistant": 5, "None": 6, "Vulnerable": 2},
-            "bludgeoning, piercing, and slashing from nonmagical attacks": {"Immune": 5, "Resistant": 5, "None": 3, "Vulnerable": 2},
+            "acid": {
+                "Immune": 2, "Resistant": 5, "None": 5, "Vulnerable": 3},
+            "bludgeoning": {
+                "Immune": 2, "Resistant": 6, "None": 6, "Vulnerable": 5},
+            "cold": {
+                "Immune": 5, "Resistant": 5, "None": 3, "Vulnerable": 2},
+            "fire": {
+                "Immune": 2, "Resistant": 5, "None": 6, "Vulnerable": 5},
+            "force": {
+                "Immune": 0, "Resistant": 3, "None": 9, "Vulnerable": 2},
+            "lightning": {
+                "Immune": 2, "Resistant": 4, "None": 7, "Vulnerable": 2},
+            "necrotic": {
+                "Immune": 10, "Resistant": 5, "None": 0, "Vulnerable": 0},
+            "piercing": {
+                "Immune": 2, "Resistant": 6, "None": 5, "Vulnerable": 2},
+            "poison": {
+                "Immune": 10, "Resistant": 5, "None": 0, "Vulnerable": 0},
+            "psychic": {
+                "Immune": 2, "Resistant": 3, "None": 5, "Vulnerable": 5},
+            "radiant": {
+                "Immune": 1, "Resistant": 2, "None": 3, "Vulnerable": 12},
+            "slashing": {
+                "Immune": 2, "Resistant": 6, "None": 5, "Vulnerable": 2},
+            "thunder": {
+                "Immune": 2, "Resistant": 5, "None": 6, "Vulnerable": 2},
+            "bludgeoning, piercing, and slashing from nonmagical attacks that aren't silvered": {
+                "Immune": 8, "Resistant": 4, "None": 4, "Vulnerable": 0},
             },
 
 
@@ -15737,15 +15116,52 @@ def Resistances(race = Race(), background = Background()):
 
             
     # Convert lists to strings
-    resistances_str = ", ".join(resistances) if resistances else "None"
-    immunities_str = ", ".join(immunities) if immunities else "None"
-    vulnerabilities_str = ", ".join(vulnerabilities) if vulnerabilities else "None"
+    resistances_str = "; ".join(resistances) if resistances else "None"
+    immunities_str = "; ".join(immunities) if immunities else "None"
+    vulnerabilities_str = "; ".join(vulnerabilities) if vulnerabilities else "None"
 
     # Compile the final string
-    result = f"Resistances: {resistances_str}. Immunities: {immunities_str}. Vulnerabilities: {vulnerabilities_str}."
+    result = f" \nImmunities: {immunities_str}. \nResistances: {resistances_str}. \nVulnerabilities: {vulnerabilities_str}."
     return result
 
-def ConditionImmunities(race=Race(), background=Background()):
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def ConditionImmunities(npc):
+    race=npc.race
+    background=npc.background
+    
     # Condition Immunities
     condition_immunities = []
 
@@ -15756,445 +15172,149 @@ def ConditionImmunities(race=Race(), background=Background()):
     ]
 
     race_condition_immunities = {
-        "Human": {
-            "Blinded": 1,
-            "Charmed": 2,
-            "Deafened": 1,
-            "Frightened": 2,
-            "Grappled": 0,
-            "Incapacitated": 0,
-            "Paralyzed": 1,
-            "Petrified": 0,
-            "Poisoned": 3,
-            "Prone": 0,
-            "Restrained": 0,
-            "Stunned": 1,
-            "Unconscious": 0,
-        },
-        
-"Aberration": {
-    "Blinded": 5,
-    "Charmed": 10,
-    "Deafened": 5,
-    "Frightened": 10,
-    "Grappled": 3,
-    "Incapacitated": 2,
-    "Paralyzed": 2,
-    "Petrified": 1,
-    "Poisoned": 4,
-    "Prone": 2,
-    "Restrained": 3,
-    "Stunned": 3,
-    "Unconscious": 1,
-},
-
-"Aven": {
-    "Blinded": 2,
-    "Charmed": 3,
-    "Deafened": 2,
-    "Frightened": 3,
-    "Grappled": 1,
-    "Incapacitated": 1,
-    "Paralyzed": 2,
-    "Petrified": 1,
-    "Poisoned": 2,
-    "Prone": 0,
-    "Restrained": 1,
-    "Stunned": 2,
-    "Unconscious": 1,
-},
-"Beast": {
-    "Blinded": 3,
-    "Charmed": 1,
-    "Deafened": 3,
-    "Frightened": 1,
-    "Grappled": 5,
-    "Incapacitated": 1,
-    "Paralyzed": 2,
-    "Petrified": 2,
-    "Poisoned": 4,
-    "Prone": 3,
-    "Restrained": 4,
-    "Stunned": 2,
-    "Unconscious": 1,
-},
-"Beastfolk": {
-    "Blinded": 3,
-    "Charmed": 2,
-    "Deafened": 3,
-    "Frightened": 2,
-    "Grappled": 3,
-    "Incapacitated": 2,
-    "Paralyzed": 2,
-    "Petrified": 1,
-    "Poisoned": 3,
-    "Prone": 2,
-    "Restrained": 3,
-    "Stunned": 2,
-    "Unconscious": 1,
-},
-
-"Celestial": {
-    "Blinded": 2,
-    "Charmed": 10,
-    "Deafened": 2,
-    "Frightened": 10,
-    "Grappled": 3,
-    "Incapacitated": 3,
-    "Paralyzed": 3,
-    "Petrified": 2,
-    "Poisoned": 8,
-    "Prone": 2,
-    "Restrained": 3,
-    "Stunned": 3,
-    "Unconscious": 1,
-},
-
-"Construct": {
-    "Blinded": 0,
-    "Charmed": 0,
-    "Deafened": 0,
-    "Frightened": 0,
-    "Grappled": 3,
-    "Incapacitated": 0,
-    "Paralyzed": 0,
-    "Petrified": 0,
-    "Poisoned": 0,
-    "Prone": 3,
-    "Restrained": 3,
-    "Stunned": 0,
-    "Unconscious": 0,
-},
-
-"Dragon": {
-    "Blinded": 4,
-    "Charmed": 7,
-    "Deafened": 4,
-    "Frightened": 7,
-    "Grappled": 5,
-    "Incapacitated": 2,
-    "Paralyzed": 2,
-    "Petrified": 2,
-    "Poisoned": 6,
-    "Prone": 3,
-    "Restrained": 4,
-    "Stunned": 3,
-    "Unconscious": 1,
-},
-
-"Dwarf": {
-    "Blinded": 2,
-    "Charmed": 3,
-    "Deafened": 2,
-    "Frightened": 2,
-    "Grappled": 3,
-    "Incapacitated": 2,
-    "Paralyzed": 2,
-    "Petrified": 2,
-    "Poisoned": 8,
-    "Prone": 2,
-    "Restrained": 3,
-    "Stunned": 2,
-    "Unconscious": 1,
-},
-
-"Elf": {
-    "Blinded": 3,
-    "Charmed": 7,
-    "Deafened": 3,
-    "Frightened": 3,
-    "Grappled": 3,
-    "Incapacitated": 3,
-    "Paralyzed": 3,
-    "Petrified": 2,
-    "Poisoned": 4,
-    "Prone": 3,
-    "Restrained": 3,
-    "Stunned": 3,
-    "Unconscious": 1,
-},
-
-"Elemental": {
-    "Blinded": 0,
-    "Charmed": 0,
-    "Deafened": 0,
-    "Frightened": 0,
-    "Grappled": 0,
-    "Incapacitated": 0,
-    "Paralyzed": 0,
-    "Petrified": 0,
-    "Poisoned": 0,
-    "Prone": 0,
-    "Restrained": 0,
-    "Stunned": 0,
-    "Unconscious": 0,
-},
-
-"Elemental": {
-    "Blinded": 0,
-    "Charmed": 0,
-    "Deafened": 0,
-    "Frightened": 0,
-    "Grappled": 0,
-    "Incapacitated": 0,
-    "Paralyzed": 0,
-    "Petrified": 0,
-    "Poisoned": 0,
-    "Prone": 0,
-    "Restrained": 0,
-    "Stunned": 0,
-    "Unconscious": 0,
-},
-"Fey": {
-    "Blinded": 2,
-    "Charmed": 7,
-    "Deafened": 2,
-    "Frightened": 5,
-    "Grappled": 3,
-    "Incapacitated": 4,
-    "Paralyzed": 3,
-    "Petrified": 1,
-    "Poisoned": 4,
-    "Prone": 2,
-    "Restrained": 3,
-    "Stunned": 3,
-    "Unconscious": 2,
-},
-"Fiend": {
-    "Blinded": 3,
-    "Charmed": 7,
-    "Deafened": 3,
-    "Frightened": 7,
-    "Grappled": 4,
-    "Incapacitated": 2,
-    "Paralyzed": 3,
-    "Petrified": 1,
-    "Poisoned": 6,
-    "Prone": 3,
-    "Restrained": 4,
-    "Stunned": 3,
-    "Unconscious": 1,
-}, "Giant": {
-    "Blinded": 3,
-    "Charmed": 2,
-    "Deafened": 3,
-    "Frightened": 3,
-    "Grappled": 7,
-    "Incapacitated": 2,
-    "Paralyzed": 2,
-    "Petrified": 2,
-    "Poisoned": 3,
-    "Prone": 6,
-    "Restrained": 5,
-    "Stunned": 3,
-    "Unconscious": 1,
-},"Gnome": {
-    "Blinded": 3,
-    "Charmed": 4,
-    "Deafened": 3,
-    "Frightened": 3,
-    "Grappled": 2,
-    "Incapacitated": 3,
-    "Paralyzed": 2,
-    "Petrified": 2,
-    "Poisoned": 3,
-    "Prone": 2,
-    "Restrained": 2,
-    "Stunned": 3,
-    "Unconscious": 1,
-},
-"Goblin": {
-    "Blinded": 2,
-    "Charmed": 2,
-    "Deafened": 2,
-    "Frightened": 3,
-    "Grappled": 1,
-    "Incapacitated": 2,
-    "Paralyzed": 1,
-    "Petrified": 1,
-    "Poisoned": 2,
-    "Prone": 1,
-    "Restrained": 1,
-    "Stunned": 2,
-    "Unconscious": 1,
-},
-"Halfling": {
-    "Blinded": 2,
-    "Charmed": 3,
-    "Deafened": 2,
-    "Frightened": 4,
-    "Grappled": 1,
-    "Incapacitated": 2,
-    "Paralyzed": 2,
-    "Petrified": 1,
-    "Poisoned": 3,
-    "Prone": 2,
-    "Restrained": 1,
-    "Stunned": 2,
-    "Unconscious": 1,
-},
-"Kobold": {
-    "Blinded": 2,
-    "Charmed": 2,
-    "Deafened": 2,
-    "Frightened": 3,
-    "Grappled": 1,
-    "Incapacitated": 2,
-    "Paralyzed": 1,
-    "Petrified": 1,
-    "Poisoned": 2,
-    "Prone": 2,
-    "Restrained": 1,
-    "Stunned": 2,
-    "Unconscious": 1,
-},
-
-"Lizardfolk": {
-    "Blinded": 3,
-    "Charmed": 3,
-    "Deafened": 3,
-    "Frightened": 4,
-    "Grappled": 4,
-    "Incapacitated": 3,
-    "Paralyzed": 3,
-    "Petrified": 2,
-    "Poisoned": 5,
-    "Prone": 3,
-    "Restrained": 4,
-    "Stunned": 4,
-    "Unconscious": 2,
-},
-"Monstrosity": {
-    "Blinded": 3,
-    "Charmed": 2,
-    "Deafened": 3,
-    "Frightened": 2,
-    "Grappled": 4,
-    "Incapacitated": 3,
-    "Paralyzed": 3,
-    "Petrified": 3,
-    "Poisoned": 5,
-    "Prone": 4,
-    "Restrained": 4,
-    "Stunned": 3,
-    "Unconscious": 2,
-},
-"Ooze": {
-    "Blinded": 0,
-    "Charmed": 10,
-    "Deafened": 0,
-    "Frightened": 10,
-    "Grappled": 0,
-    "Incapacitated": 5,
-    "Paralyzed": 5,
-    "Petrified": 5,
-    "Poisoned": 0,
-    "Prone": 0,
-    "Restrained": 0,
-    "Stunned": 5,
-    "Unconscious": 0,
-},
-
-"Orc": {
-    "Blinded": 1,
-    "Charmed": 2,
-    "Deafened": 1,
-    "Frightened": 8,
-    "Grappled": 4,
-    "Incapacitated": 1,
-    "Paralyzed": 2,
-    "Petrified": 1,
-    "Poisoned": 3,
-    "Prone": 4,
-    "Restrained": 3,
-    "Stunned": 2,
-    "Unconscious": 1,
-},
-"Plant": {
-    "Blinded": 0,
-    "Charmed": 0,
-    "Deafened": 0,
-    "Frightened": 0,
-    "Grappled": 10,
-    "Incapacitated": 5,
-    "Paralyzed": 1,
-    "Petrified": 2,
-    "Poisoned": 1,
-    "Prone": 0,
-    "Restrained": 10,
-    "Stunned": 1,
-    "Unconscious": 0,
-},
-"Snakefolk": {
-    "Blinded": 2,
-    "Charmed": 5,
-    "Deafened": 2,
-    "Frightened": 3,
-    "Grappled": 3,
-    "Incapacitated": 2,
-    "Paralyzed": 1,
-    "Petrified": 1,
-    "Poisoned": 8,
-    "Prone": 2,
-    "Restrained": 2,
-    "Stunned": 1,
-    "Unconscious": 1,
-},
-"Undead": {
-    "Blinded": 10,
-    "Charmed": 10,
-    "Deafened": 10,
-    "Frightened": 10,
-    "Grappled": 5,
-    "Incapacitated": 1,
-    "Paralyzed": 10,
-    "Petrified": 10,
-    "Poisoned": 10,
-    "Prone": 5,
-    "Restrained": 5,
-    "Stunned": 10,
-    "Unconscious": 10,
-}
+"Human": {      "Blinded": 10,  "Charmed": 5,   "Deafened": 10,     "Frightened": 10/2,     "Grappled": 100,    "Incapacitated": 100,   "Paralyzed": 10/1,  "Petrified": 100,   "Poisoned": 10/3,   "Prone": 100,   "Restrained": 100,  "Stunned": 10,      "Unconscious": 100,},   
+"Aberration": { "Blinded": 2,   "Charmed": 1,   "Deafened": 2,      "Frightened": 10/10,    "Grappled": 10/3,   "Incapacitated": 10/2,  "Paralyzed": 10/2,  "Petrified": 10/1,  "Poisoned": 10/4,   "Prone": 10/2,  "Restrained": 10/3, "Stunned": 10/3,    "Unconscious": 100,},
+"Aven": {       "Blinded": 5,   "Charmed": 3,   "Deafened": 5,      "Frightened": 10/3,     "Grappled": 10,     "Incapacitated": 10,    "Paralyzed": 5,     "Petrified": 10,    "Poisoned": 5,      "Prone": 100,   "Restrained": 10,   "Stunned": 5,       "Unconscious": 100,},
+"Beast": {      "Blinded": 3,   "Charmed": 10,  "Deafened": 3,      "Frightened": 10,       "Grappled": 2,      "Incapacitated": 10/1,  "Paralyzed": 10/2,  "Petrified": 10/2,  "Poisoned": 10/4,   "Prone": 10/3,  "Restrained": 10/4, "Stunned": 10/2,    "Unconscious": 100,},
+"Beastfolk": {  "Blinded": 3,   "Charmed": 5,   "Deafened": 3,      "Frightened": 10/2,     "Grappled": 10/3,   "Incapacitated": 10/2,  "Paralyzed": 10/2,  "Petrified": 10/1,  "Poisoned": 10/3,   "Prone": 10/2,  "Restrained": 10/3, "Stunned": 10/2,    "Unconscious": 100,},
+"Celestial": {  "Blinded": 5,   "Charmed": 1,   "Deafened": 5,      "Frightened": 1,        "Grappled": 10/3,   "Incapacitated": 10/3,  "Paralyzed": 3,     "Petrified": 10/2,  "Poisoned": 2,      "Prone": 5,     "Restrained": 3,    "Stunned": 5,       "Unconscious": 100,},
+"Construct": {  "Blinded": 5,   "Charmed": 100, "Deafened": 100,    "Frightened":100,       "Grappled": 10/3,   "Incapacitated": 100,   "Paralyzed": 5,     "Petrified": 100,   "Poisoned": 100,    "Prone": 10/3,  "Restrained": 10/3, "Stunned": 100,     "Unconscious": 100,},
+"Dragon": {     "Blinded": 3,   "Charmed": 2,   "Deafened": 2,      "Frightened": 10/7,     "Grappled": 10/5,   "Incapacitated": 10/2,  "Paralyzed": 10/2,  "Petrified": 10/2,  "Poisoned": 10/6,   "Prone": 10/3,  "Restrained": 10/4, "Stunned": 10/3,    "Unconscious": 100,},
+"Dwarf": {      "Blinded": 5,   "Charmed": 3,   "Deafened": 5,      "Frightened": 10/2,     "Grappled": 10/3,   "Incapacitated": 10/2,  "Paralyzed": 10/2,  "Petrified": 10/2,  "Poisoned": 10/8,   "Prone": 10/2,  "Restrained": 10/3, "Stunned": 10/2,    "Unconscious": 100,},
+"Elf":{         "Blinded": 3,   "Charmed": 2,   "Deafened": 3,      "Frightened": 10/3,     "Grappled": 10/3,   "Incapacitated": 10/3,  "Paralyzed": 10/3,  "Petrified": 5,     "Poisoned": 5/2,    "Prone": 10/3,  "Restrained": 10/3, "Stunned": 3/10,    "Unconscious": 100,},
+"Elemental": {  "Blinded": 5,   "Charmed": 50,  "Deafened": 50,     "Frightened": 5,        "Grappled": 3,      "Incapacitated": 10,    "Paralyzed": 9,     "Petrified": 3,     "Poisoned": 3,      "Prone": 3,     "Restrained": 3,    "Stunned": 10,      "Unconscious": 9,},
+"Fey":{         "Blinded": 5,   "Charmed": 2,   "Deafened": 5,      "Frightened": 10/5,     "Grappled": 10/3,   "Incapacitated": 10/4,  "Paralyzed": 10/3,  "Petrified": 10/1,  "Poisoned": 10/4,   "Prone": 10/2,  "Restrained": 10/3, "Stunned": 10/3,    "Unconscious": 100,},
+"Fiend": {      "Blinded": 3,   "Charmed": 2,   "Deafened": 3,      "Frightened": 10/7,     "Grappled": 10/4,   "Incapacitated": 10/2,  "Paralyzed": 10/3,  "Petrified": 10/1,  "Poisoned": 10/6,   "Prone": 10/3,  "Restrained": 10/4, "Stunned": 10/3,    "Unconscious": 5,},
+"Giant": {      "Blinded": 3,   "Charmed": 5,   "Deafened": 3,      "Frightened": 10/3,     "Grappled": 10/7,   "Incapacitated": 5,     "Paralyzed": 5,     "Petrified": 5,     "Poisoned": 3,      "Prone": 2,     "Restrained": 2,    "Stunned": 3,       "Unconscious": 100,},
+"Gnome": {      "Blinded": 4,   "Charmed": 3,   "Deafened": 4,      "Frightened": 4,        "Grappled": 6,      "Incapacitated": 4,     "Paralyzed": 6,     "Petrified": 6,     "Poisoned": 4,      "Prone": 6,     "Restrained": 6,    "Stunned": 4,       "Unconscious": 100,},
+"Goblin": {     "Blinded": 6,   "Charmed": 5,   "Deafened": 6,      "Frightened": 3,        "Grappled": 12,     "Incapacitated": 6,     "Paralyzed": 12,    "Petrified": 15,    "Poisoned": 6,      "Prone": 12,    "Restrained": 10,   "Stunned": 6,       "Unconscious": 101,},
+"Halfling": {   "Blinded": 5,   "Charmed": 3,   "Deafened": 5,      "Frightened": 2,        "Grappled": 10,     "Incapacitated": 5,     "Paralyzed": 5,     "Petrified": 10,    "Poisoned": 3,      "Prone": 5,     "Restrained": 10,   "Stunned": 5,       "Unconscious": 100,},
+"Kobold": {     "Blinded": 5,   "Charmed": 5,   "Deafened": 5,      "Frightened": 3,        "Grappled": 10,     "Incapacitated": 5,     "Paralyzed": 10,    "Petrified": 10,    "Poisoned": 5,      "Prone": 5,     "Restrained": 10,   "Stunned": 5,       "Unconscious": 100,},
+"Lizardfolk": { "Blinded": 5,   "Charmed": 5,   "Deafened": 5,      "Frightened": 2,        "Grappled": 4,      "Incapacitated": 5,     "Paralyzed": 5,     "Petrified": 7,     "Poisoned": 2,      "Prone": 5,     "Restrained": 3,    "Stunned": 4,       "Unconscious": 100,},
+"Monstrosity": {"Blinded": 3,   "Charmed": 5,   "Deafened": 3,      "Frightened": 5,        "Grappled": 2,      "Incapacitated": 3,     "Paralyzed": 3,     "Petrified": 3,     "Poisoned": 2,      "Prone": 2,     "Restrained": 2,    "Stunned": 3,       "Unconscious": 100,},
+"Ooze": {       "Blinded": 1,   "Charmed": 1,   "Deafened": 100,    "Frightened": 1,        "Grappled": 100,    "Incapacitated": 2,     "Paralyzed": 2,     "Petrified": 2,     "Poisoned": 100,    "Prone": 100,   "Restrained": 100,  "Stunned": 2,       "Unconscious": 100,},
+"Orc": {        "Blinded": 10,  "Charmed": 5,   "Deafened": 10,     "Frightened": 1.5,      "Grappled": 2,      "Incapacitated": 10,    "Paralyzed": 5,     "Petrified": 10,    "Poisoned": 3,      "Prone": 2,     "Restrained": 3,    "Stunned": 5,       "Unconscious": 100,},
+"Plant": {      "Blinded": 100, "Charmed": 100, "Deafened": 100,    "Frightened": 100,      "Grappled": 1,      "Incapacitated": 2,     "Paralyzed": 10,    "Petrified": 5,     "Poisoned": 10,     "Prone": 100,   "Restrained": 1,    "Stunned": 10,      "Unconscious": 100,},
+"Snakefolk": {  "Blinded": 5,   "Charmed": 2,   "Deafened": 5,      "Frightened": 3,        "Grappled": 3,      "Incapacitated": 5,     "Paralyzed": 10,    "Petrified": 10,    "Poisoned": 1.5,    "Prone": 5,     "Restrained": 5,    "Stunned": 10,      "Unconscious": 100,},
+"Undead": {     "Blinded": 1,   "Charmed": 1,   "Deafened": 1,      "Frightened": 1,        "Grappled": 2,      "Incapacitated": 10,    "Paralyzed": 1,     "Petrified": 1,     "Poisoned": 1,      "Prone": 2,     "Restrained": 2,    "Stunned": 1,       "Unconscious": 5,}
 
     }
 
 
 
+    if race in ["Elemental", "Undead"] and Dice() == 1:
+        exhaustion = "Exhaustion, "
+    else: exhaustion = ""
 
     # Fetch the condition immunities for the selected race, or use an empty dictionary if the race is not defined
     condition_immunity_weights = race_condition_immunities.get(race, {})
 
     # Randomly determine condition immunities based on the weights
     for condition, weight in condition_immunity_weights.items():
-        if random.choices([True, False], [weight, 10 - weight])[0]:
+        if random.choices([True, False], [1/weight, 1 - (1/weight)])[0]:
             condition_immunities.append(condition)
 
     # Format the output
     if condition_immunities:
-        return "Condition Immunities: " + ", ".join(condition_immunities)
+        return "Condition Immunities: " + exhaustion + ", ".join(condition_immunities)
     else:
         return "No condition immunities"
 
 
-def Extra_Defenses(race, background):
-    # Definitions of extra defenses
-    magic_resistance = "\n- Magic Resistance: \n\t The {} has advantage on saving throws against spells and other magical effects."
-    regeneration = "\n- Regeneration: \n\t The {} regains 10 hit points at the start of its turn if it has at least 1 hit point."
-    parry = "\n- Parry: \n\t The {} can add 2 to its AC against one melee attack that would hit it."
-    berserker_resistance = "\n- Berserker Resistance: \n\t The {} has resistance to bludgeoning, piercing, and slashing damage."
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def Extra_Defenses(npc):
+    race= npc.race
+    background= npc.background
+    lvl = npc.level
+    # Definitions of extra defenses
+    acidic_blood = "\n- Acidic Blood: \n\t Any creature that hits the {} with a melee attack while within 5 feet of it takes 2d6 acid damage."
+    alien_mind = "\n- Alien Mind: \n\t The {} has advantage on saving throws against being charmed or dominated."
+    aberrant_ground = "\n- Aberrant Ground. \n\t  The ground in a 10-foot radius around the {} is doughlike difficult terrain. Each creature that starts its turn in that area must succeed on a DC 10 Strength saving throw or have its speed reduced to 0 until the start of its next turn.  "
+    arcane_awareness = "\n- Arcane Awareness: \n\t The {} has advantage on Intelligence (Arcana) checks to recognize or recall information about spells or magical effects."
+    berserker_resistance = "\n- Berserker Resistance: \n\t The {} has resistance to bludgeoning, piercing, and slashing damage."
+    diabolic_resilience = "\n- Diabolic Resilience: \n\t The {} has resistance to bludgeoning, piercing, and slashing damage from non-magical attacks not made with silvered weapons."
+    etherealness = "\n- Etherealness: \n\t The {} can shift partially into the Ethereal Plane, granting it resistance to non-magical attacks and the ability to move through solid objects until the end of their next turn."
+    fey_ancestry = f"\n - Fey Ancestry \n\t The {race} has advantage on saving throws against being charmed, and magic can't put the {race} to sleep."
+    hellish_rebuke = "\n- Hellish Rebuke: \n\t Once per turn, when the {} takes damage from a melee attack, it can cause flames to engulf its attacker, dealing fire 1d6 damage in return."
+    infernal_wisdom = "\n- Infernal Wisdom: \n\t The {} has advantage on saving throws against being charmed or frightened."
+    lore_preservation = "\n- Lore Preservation: \n\t Once per day, the {} can reroll a failed Intelligence check, taking the new roll."
+    magic_resistance = "\n- Magic Resistance: \n\t The {} has advantage on saving throws against spells and other magical effects."
+    mental_fortitude = "\n- Mental Fortitude: \n\t The {} has advantage on saving throws against being charmed or frightened."
+    meticulous = "\n- Meticulous: \n\t The {} has advantage on Investigation checks when analyzing texts or searching for information."
+    otherwordly_perception = "\n- Otherworldly Perception: \n\t The {} can sense the presence of invisible or hidden creatures within 60 feet of it."
+    parry = "\n- Parry: \n\t The {} can add 2 to its AC against one melee attack that would hit it."
+    psychic_feedback = "\n- Psychic Feedback: \n\t Any creature that attempts to read the {}'s thoughts or communicate telepathically with it takes 2d8 psychic damage."
+    regeneration = "\n- Regeneration: \n\t The {} regains 10 hit points at the start of its turn if it has at least 1 hit point."
+    relentless = f"\n - Relentless \n\t (Recharges after a Short or Long Rest). \n\t If the {race} takes {lvl} damage or less that would reduce it to 0 hit points, it is reduced to 1 hit point instead."
+    telepathic_shield = "\n- Telepathic Shield: \n\t The {} has advantage on intelligence, wisdom, and charisma saving throws against spells and other magical effects that target its mind."
+    spell_reflection = "\n- Spell Reflection. \n\t  If the {} makes a successful saving throw against a spell, or a spell attack misses it, the {} can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of the {}. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature"
+    snow_camouflage = "\n- Snow Camouflage. \t The {} has advantage on Dexterity (Stealth) checks made to hide in snowy terrain."
+    sure_footed = f"\n- Sure-Footed:\t The {race} has advantage on Strength and Dexterity saving throws made against effects that would knock it prone."
+    shielded_mind = f"\n- Shielded Mind \t The {race} is immune to any effect that would sense its emotions, read its thoughts, or detect its location."
+    nimble_scape = f"\n- Nimble Scape:\t The {race} can take the Disengage or Hide action as a bonus action on each of its turns."
+    freeze = f"\n- Freeze: If the {race} takes cold damage, it partially freezes; All its speed is reduced by 20 feet until the end of its next turn."
+
+
+
+    
     # Dictionary to store possible extra defenses for each race
     extra_defenses_race = {
-        "Aberration": [magic_resistance, regeneration],
-        # Add other races and their possible extra defenses here
+        "Aberration": [shielded_mind, relentless,spell_reflection, aberrant_ground, magic_resistance, regeneration, telepathic_shield, otherwordly_perception, etherealness, acidic_blood, psychic_feedback, alien_mind],
+        "Beast":[sure_footed],
+        "Beastfolk": [fey_ancestry,sure_footed],
+        "Celestial": [shielded_mind],
+        "Construct": [magic_resistance],
+        "Dragon":[magic_resistance],
+        "Elf": [fey_ancestry],
+        "Elemental":[freeze],
+        "Fey": [nimble_scape],
+        "Fiend": [freeze, relentless,magic_resistance, regeneration, otherwordly_perception, etherealness, infernal_wisdom],
+        "Goblin": [nimble_scape],
+        "Lizardfolk":[freeze,relentless,regeneration],
+        "Orc": [relentless],
+        "Snakefolk":[freeze],
     }
 
     # Dictionary to store possible extra defenses for each background
     extra_defenses_background = {
         "Noble": [parry],
-        "Berserker": [berserker_resistance],
-        # Add other backgrounds and their possible extra defenses here
-    }
+        "Berserker": [relentless,berserker_resistance],
+        "Scholar":[spell_reflection, arcane_awareness, mental_fortitude, lore_preservation, meticulous, shielded_mind],
+
+        }
 
     # Fetch the extra defenses for the selected race and background
     possible_extra_defenses_race = extra_defenses_race.get(race, [])
@@ -16203,156 +15323,273 @@ def Extra_Defenses(race, background):
     # Combine race and background defenses
     possible_extra_defenses = possible_extra_defenses_race + possible_extra_defenses_background
 
+    # Determine the number of defenses to select, this number can be changed as needed
+    number_of_defenses_to_select = PB(lvl)  # for example
+
     # Randomly determine which extra defenses the character has
-    if possible_extra_defenses:
-        selected_defenses = random.choice(possible_extra_defenses)
-        formatted_defenses = selected_defenses.format(race)
+    if possible_extra_defenses and len(possible_extra_defenses) >= number_of_defenses_to_select:
+        selected_defenses = random.sample(possible_extra_defenses, number_of_defenses_to_select)
+        formatted_defenses = [defense.format(race) for defense in selected_defenses]
     else:
-        formatted_defenses = ""
+        formatted_defenses = [""]
 
-    return formatted_defenses
+    # Join the list of formatted defenses into a single string separated by newlines or any other separator
+    formatted_defenses_string = '\n'.join(formatted_defenses)
+
+    return formatted_defenses_string
+
+def Extra_Weaknesses(npc):
+    race= npc.race
+    background= npc.background
+    lvl = npc.level
+    # Definitions of extra weaknesses
+    freeze = f"\n- Freeze: If the {race} takes cold damage, it partially freezes; All its speed is reduced by 20 feet until the end of its next turn."
 
 
-def Abilities(race = Race(), background = Background()):
+
+    
+    # Dictionary to store possible extra weaknesses for each race
+    extra_weaknesses_race = {
+        "Aberration": [],
+        "Beast":[],
+        "Beastfolk": [],
+        "Celestial": [],
+        "Construct": [],
+        "Dragon":[],
+        "Elf": [],
+        "Elemental":[freeze],
+        "Fey": [],
+        "Fiend": [freeze],
+        "Goblin": [],
+        "Lizardfolk":[freeze],
+        "Orc": [],
+        "Snakefolk":[freeze],
+    }
+
+    # Dictionary to store possible extra weaknesses for each background
+    extra_weaknesses_background = {
+        "Noble": [],
+        "Berserker": [],
+        "Scholar":[],
+
+        }
+
+    # Fetch the extra weaknesses for the selected race and background
+    possible_extra_weaknesses_race = extra_weaknesses_race.get(race, [])
+    possible_extra_weaknesses_background = extra_weaknesses_background.get(background, [])
+
+    # Combine race and background weaknesses
+    possible_extra_weaknesses = possible_extra_weaknesses_race + possible_extra_weaknesses_background
+
+    # Determine the number of weaknesses to select, this number can be changed as needed
+    number_of_weaknesses_to_select = PB(lvl)  # for example
+
+    # Randomly determine which extra weaknesses the character has
+    if possible_extra_weaknesses and len(possible_extra_weaknesses) >= number_of_weaknesses_to_select:
+        selected_weaknesses = random.sample(possible_extra_weaknesses, number_of_weaknesses_to_select)
+        formatted_weaknesses = [weaknesses.format(race) for weaknesses in selected_weaknesses]
+    else:
+        formatted_weaknesses = [""]
+
+    # Join the list of formatted weaknesses into a single string separated by newlines or any other separator
+    formatted_weaknesses_string = '\n'.join(formatted_weaknesses)
+
+    return formatted_weaknesses_string
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def Martial_Skills(npc):
+    race = npc.race
+    background = npc.background
+    lvl = npc.level
+    
+    # Definitions of extra martial skills
+    blinding_spittle = f"\n- Blinding Spittle (Recharge 5–6). \n\t The {race} spits a chemical glob at a point it can see within 15 feet of it. The glob explodes in a blinding flash of light on impact. Each creature within 5 feet of the flash must succeed on a DC {10+PB(lvl)} Dexterity saving throw or be blinded until the end of the {race}'s next turn."
+    body_thief = f"\n- Body Thief." + \
+        f"\n\t The {race} initiates an Intelligence contest with an incapacitated humanoid within 5 feet of it that isn't protected by protection from evil and good." + \
+        f"If it wins the contest, the {race}'s magically takes control of the target's body. " +\
+        f"The {race} retains its Intelligence, Wisdom, and Charisma scores, as well as its understanding of any language, its senses, and its traits." +\
+        f"It otherwise adopts the target's statistics. It knows everything the creature knew, including spells and languages." +\
+        f"\n\t If the host body dies, the {race} must leave it. A protection from evil and good spell cast on the body drives the {race} out. " +\
+        f"The {race} is also forced out if the target regains control by means of a wish. " +\
+        f"By spending 5 feet of its movement, the {race} can voluntarily leave the body within 5 feet of it."
+    devour_intellect = ( f"\n- Devour Intellect: \t The {race} targets one creature it can see within 10 feet of it that has a brain. "
+                         f"The target must succeed on a DC {10+PB(lvl)} Intelligence saving throw against this magic or take 11 (2d10) psychic damage. "
+                         "Also on a failure, roll 3d6: If the total equals or exceeds the target's Intelligence score, that score is reduced to 0. "
+                         "The target is stunned until it regains at least one point of Intelligence.")
+
+    amphibious = f"\n- Amphibious. \n\t The {race} can breathe air and water."
+    invisible_passage = f"\n- Invisible Passage \n\t  The {race} magically turns invisible until they attack or cast a spell, or until their concentration ends (as if concentrating on a spell)." +\
+                        "While invisible, they leave no physical evidence of their passage, so they can be tracked only by magic. Any equipment they wear or carry is invisible with them."
+    gibbering = f"\n- Gibbering. \n\t The {race} babbles incoherently while it can see any creature and isn't incapacitated. " +\
+                f"Each creature that starts its turn within 20 feet of the Aberration and can hear the gibbering must succeed on a DC {10+PB(lvl)} Wisdom saving throw. " +\
+                "On a failure, the creature can't take reactions until the start of its next turn and rolls a d8 to determine what it does during its turn. " +\
+                "On a 1 to 4, the creature does nothing. " +\
+                "On a 5 or 6, the creature takes no action or bonus action and uses all its movement to move in a randomly determined direction. " +\
+                "On a 7 or 8, the creature makes a melee attack against a randomly determined creature within its reach or does nothing if it can't make such an attack."
+    tentacles= "\n- Tentacles. \n\t Reach 10 ft., one creature. Hit: 7 (1d10 + 2) piercing damage, and the target must succeed on a " +\
+               f"DC {10+PB(lvl)} Constitution saving throw or be poisoned for 1 minute. The poisoned target is paralyzed, and it can repeat the saving throw at the" +\
+               f" start of each of its turns, ending the effect on a success. \n\t The target is also grappled (escape DC {10+PB(lvl)}). If the target is Medium or " +\
+               f"smaller, it is also restrained until this grapple ends. While grappling the target, the {race} has advantage on attack rolls against it and can 't "+\
+               f"use this attack against other targets. When the {race} moves, any Medium or smaller target it is grappling moves with it."
+    multiattack = random.choice([
+        f"\n-Multiattack: The {race} makes two simple attacks.",
+        f"\n-Multiattack: The {race} makes two simple melee attacks.",
+        f"\n-Multiattack: The {race} makes three simple attacks.",
+        f"\n-Multiattack (Two-Weapon Combat Style): The {race} makes two attacks with its main hand weapon and one with its offhand weapon.",
+        f"\n-Multiattack (Rapid Shot): The {race} makes three ranged attacks, each with a -2 penalty to the attack roll.",
+        f"\n-Multiattack (Sweeping Attack): The {race} makes a single attack against all enemies within reach."
+        ])
+    skewer = f"\n- Skewer:\t Once per turn, when the {race} makes a Melee attack and hits, the target takes an extra 10 (3d6) damage, and the {race} gains temporary hit points equal to the extra damage dealt."
+    stench = f"\n- Stench:\t Any creature other than a {race} that starts its turn within 5 feet of the {race} must succeed on a DC {8+npc.proficiency_bonus + npc.ability_scores.con_mod} Constitution saving throw or be poisoned until the start of the creature's next turn. On a successful saving throw, the creature is immune to the stench of all Lizardfolk for 1 hour."
+    blood_frenzy = f"\n- Blood Frenzy:\t The {race} has advantage on melee attack rolls against any creature that doesn't have all its hit points."
+    reckless = f"\n-Reckless:\t At the start of its turn, the {background} can gain advantage on all melee weapon attack rolls during that turn, but attack rolls against it have advantage until the start of its next turn."
+    martial_advantage = f"\n- Martial Advantage \n\t Once per turn, the {race} can deal an extra {npc.proficiency_bonus*3} ({npc.proficiency_bonus}d6) damage to a creature it hits with a weapon attack if that creature is within 5 feet of an ally of the {race} that isn't incapacitated."
+
+
+
+    # Dictionary to store possible extra martial skills for each race
+    extra_skills_race = {
+        "Aberration": [reckless, blinding_spittle, body_thief, amphibious, gibbering, tentacles, multiattack, devour_intellect, stench],
+        "Beast":[reckless, blood_frenzy, amphibious, multiattack,skewer, stench],
+        "Beastfolk":[reckless, blood_frenzy, amphibious, multiattack],
+        "Fey": [amphibious, invisible_passage, gibbering, multiattack],
+        "Fiend":[skewer, stench, multiattack, blood_frenzy, reckless],
+        "Lizardfolk": [skewer, stench, blood_frenzy, reckless],
+        "Monstrosity":[blood_frenzy, reckless],
+        "Plant": [body_thief, amphibious, tentacles, multiattack, devour_intellect, skewer],
+        "Undead": [body_thief, invisible_passage, multiattack, devour_intellect,skewer, stench, blood_frenzy, reckless],
+    }
+
+    # Dictionary to store possible extra skills for each background
+    extra_skills_background = {
+        "Commoner": [reckless],
+        "Berserker": [multiattack, blood_frenzy, reckless],
+        "Noble": [multiattack],
+        
+    }
+
+    # Fetch the extra skills for the selected race and background
+    possible_extra_skills_race = extra_skills_race.get(race, [])
+    possible_extra_skills_background = extra_skills_background.get(background, [])
+
+    # Combine race and background defenses
+    possible_extra_skills = list(set(possible_extra_skills_race + possible_extra_skills_background))
+
+    # Determine the number of skills to select, this number can be changed as needed
+    number_of_skills_to_select = Dice(npc.proficiency_bonus+1)  # for example, you can change this to what makes sense in your context
+
+    # Randomly determine which extra skills the character has
+    if possible_extra_skills and len(possible_extra_skills) >= number_of_skills_to_select:
+        selected_skills = random.sample(possible_extra_skills, number_of_skills_to_select)
+        formatted_skills = [skill.format(race=race, background=background) for skill in selected_skills]
+    else:
+        formatted_skills = []
+
+    # Join the list of formatted skills into a single string separated by newlines or any other separator
+    formatted_skills_string = '\n'.join(formatted_skills)
+
+    return formatted_skills_string
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def Abilities(npc):
     """
     Generate abilities for a character based on its race and background.
     
-    :param race: The race of the character.
+    :param race: The character.
     :param background: The background of the character.
     :return: A string describing the character's abilities.
     """
     # Initialize variables
+    race = npc.race
+    background = npc.background
+    lvl = npc.level
+    
     Type = race
 
     r = ""
 
-    r += Senses(race, background) + "\n"
-    r += Movement(race, background) + "\n"
-    r += Resistances(race, background) + "\n"
-    r += ConditionImmunities(race, background) + "\n"
-    r += Extra_Defenses(race, background) + "\n"
+    r += Senses(npc) + "\n\n"
+    r += Movement(npc) + "\n\n"
+    r += Resistances(npc) + "\n"
+    r += ConditionImmunities(npc) + "\n\n"
+    r += Extra_Defenses(npc) + "\n\n"
+    r += Martial_Skills(npc) + "\n\n"
 
-    ## Combat Actions
-    if Type == "Aberration" and Dice() == 1:        r += "\n- Blinding Spittle (Recharge 5–6). \n\t The Aberration spits a chemical glob at a point it can see within 15 feet of it. The glob explodes in a blinding flash of light on impact. Each creature within 5 feet of the flash must succeed on a DC 13 Dexterity saving throw or be blinded until the end of the aberration's next turn."
-    if Type == "Aberration" and Dice(7) == 1:       r += "\n- Aberrant Ground. \n\t  The ground in a 10-foot radius around the Aberration is doughlike difficult terrain. Each creature that starts its turn in that area must succeed on a DC 10 Strength saving throw or have its speed reduced to 0 until the start of its next turn.  "
-    if Type == "Aberration" and Dice() == 1:        r += "\n- Spell Reflection. \n\t  If the Aberration makes a successful saving throw against a spell, or a spell attack misses it, the aberration can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of the aberration. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature"
-    if Type == "Aberration" and Dice() == 1:        r += "\n- Body Thief. \n\t The intellect devourer initiates an Intelligence contest with an incapacitated humanoid within 5 feet of it that isn't protected by protection from evil and good. If it wins the contest, the intellect devourer magically consumes the target's brain, teleports into the target's skull, and takes control of the target's body. While inside a creature, the intellect devourer has total cover against attacks and other effects originating outside its host. The intellect devourer retains its Intelligence, Wisdom, and Charisma scores, as well as its understanding of Deep Speech, its telepathy, and its traits. It otherwise adopts the target's statistics. It knows everything the creature knew, including spells and languages. \n\t If the host body dies, the intellect devourer must leave it. A protection from evil and good spell cast on the body drives the intellect devourer out. The intellect devourer is also forced out if the target regains its devoured brain by means of a wish. By spending 5 feet of its movement, the intellect devourer can voluntarily leave the body, teleporting to the nearest unoccupied space within 5 feet of it. The body then dies, unless its brain is restored within 1 round."
-    if Type == "Aberration" and Dice() == 1:        r += "\n- Aberrant Ground: \n\t The ground in a 10-foot radius around the Aberration is doughlike difficult terrain. Each creature that starts its turn in that area must succeed on a DC 10 Strength saving throw or have its speed reduced to 0 until the start of its next turn."
-    if Type == "Aberration" and Dice() == 1:        r += "\n- Gibbering. \n\t The Aberration babbles incoherently while it can see any creature and isn't incapacitated. Each creature that starts its turn within 20 feet of the Aberration and can hear the gibbering must succeed on a DC 10 Wisdom saving throw. On a failure, the creature can't take reactions until the start of its next turn and rolls a d8 to determine what it does during its turn. On a 1 to 4, the creature does nothing. On a 5 or 6, the creature takes no action or bonus action and uses all its movement to move in a randomly determined direction. On a 7 or 8, the creature makes a melee attack against a randomly determined creature within its reach or does nothing if it can't make such an attack."
-    if Type == "Aberration" and Dice() == 1:        r += "\n- Tentacles. \n\t Reach 10 ft., one creature. Hit: 7 (1d10 + 2) piercing damage, and the target must succeed on a DC [10+%CON] Constitution saving throw or be poisoned for 1 minute. The poisoned target is paralyzed, and it can repeat the saving throw at the start of each of its turns, ending the effect on a success. \n\t The target is also grappled (escape DC [10+%STR]). If the target is Medium or smaller, it is also restrained until this grapple ends. While grappling the target, the aberration has advantage on attack rolls against it and can 't use this attack against other targets. When the aberration moves, any Medium or smaller target it is grappling moves with it."
-    if Type == "Aberration" and Dice() == 1:        r += "\n- Amphibious. \n\t The Aberration can breathe air and water."
-    if Type == "Aberration":
-        if Dice() == 1:         r += "\n- Multiattack. \n\t The Aberration makes two simple attacks."
-        elif Dice() == 1:       r += "\n- Multiattack. \n\t The Aberration makes three simple attacks."
-
-    if Type == "Aberration":
-        if Dice() == 1:
-            r = r + "\n- Detect Sentience: \n\t It can sense the presence and location of any creature within 300 feet of it that has an Intelligence of 3 or higher, regardless of interposing barriers, unless the creature is protected by a mind blank spell."
-            if Dice() == 1:        r = r + "\n- Devour Intellect: \n\t It targets one creature it can see within 10 feet of it that has a brain. The target must succeed on a DC [10+%DEX] Intelligence saving throw against this magic or take 11 (2d10) psychic damage. Also on a failure, roll 3d6: If the total equals or exceeds the target's Intelligence score, that score is reduced to 0. The target is stunned until it regains at least one point of Intelligence."
-
-    
-
-    # AVENS
-    if Type == "Aven":        r = r + "\n- Fly \n\t 50ft"
-    if Type == "Aven" and Dice() == 1:        r += "\n- Ambusher"
-    if Type == "Aven" and Dice() == 1:        r += "\n- Mimicry \n\t The Ravenfolk can mimic simple sounds it has heard, such as a person whispering, a baby crying, or an animal chittering. A creature that hears the sounds can tell they are imitations with a successful DC 10 Wisdom (Insight) check."
-
-    # BEASTS and BEASTFOLK
-
-    if Type == "Beastfolk": r += "\n - Speak with Animal \n\t The Beastfolk can communicate simple concepts to his affinity animal when it speaks in Beast language."
-
-
-    ## Senses
-    
-    if (Type == "Beast" or Type == "Beastfolk"):
-        if Dice(2) == 1:
-            r = r + "\n- Darkvision."
-            if Dice() == 1:   r += "\n\t 120 ft."
-            elif Dice(3) == 1:   r += "\n\t 60 ft."
-            else:               r += "\n\t 30 ft."
-        elif Dice() == 1:
-            r += "\n- Blindsight."
-            if Dice(12) == 1:   r += "\n\t 120 ft."
-            elif Dice() == 1:   r += "\n\t 60 ft."
-            else:               r += "\n\t 30 ft."
-            if Dice(4) == 1:
-                r = r + "\n- Echolocation. \n\t The Beast can't use its blindsight while deafened."
-                r = r + "\n- Keen Hearing. \n\t The beast has advantage on Wisdom (Perception) checks that rely on hearing."
-
-    if Type == "Beast" or Type == "Beastfolk":
-        if Dice() == 1:     r += "\n- Keen Senses\n\t The beast has advantage on Wisdom (Perception) checks that rely on sight, hearing, or smell."
-        else:
-            if Dice() == 1: r += "\n- Keen Smell. \n\t The Beast has advantage on Wisdom (Perception) checks that rely on smell."
-            if Dice() == 1: r += "\n- Keen Sight. \n\tThe beast has advantage on Wisdom (Perception) checks that rely on sight."
-            if Dice() == 1: r += "\n- Keen Hearing. \n\tThe beast has advantage on Wisdom (Perception) checks that rely on hearing."
-
-    ## Movement
-    if (Type == "Beast" or Type == "Beastfolk"):
-        if Dice() == 1:         r += "\n- Speed. \t 20 ft."
-        elif Dice() == 1:       r += "\n- Speed. \t 30 ft."
-        elif Dice() == 1:       r += "\n- Speed. \t 40 ft."
-        elif Dice() == 1:       r += "\n- Speed. \t 50 ft."
-
-    if (Type == "Beast" or Type == "Beastfolk"):
-        if Dice() == 1:        r = r + "\n- Climb. \t 30 ft."
-        
-    if (Type == "Beast" or Type == "Beastfolk"):        
-        if Dice() == 1:        r = r + "\n- Burrow. \t 10 ft."
-
-    if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:
-        if Dice(2) == 1:
-            r += "\n- Fly. \n\t 60 ft."
-            if Dice(3) == 1:        r = r + "\n- Flyby. \n\t The beast doesn't provoke opportunity attacks when it flies out of an enemy's reach."
-        elif Dice(2) == 1:
-            r += "\n- Fly. \n\t 80 ft."
-            if Dice() == 1:         r = r + "\n- Flyby. \n\t The beast doesn't provoke opportunity attacks when it flies out of an enemy's reach."
-
-    if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:
-        if Dice(2) == 1:    r += "\n- Water Breathing. The beast can breathe underwater"
-        if Dice() == 1:     r += "\n- Swim. \t 60 ft."
-        elif Dice() == 1:   r += "\n- Swim. \t 50 ft."
-        elif Dice() == 1:   r += "\n- Swim. \t 40 ft."
-        elif Dice() == 1:   r += "\n- Swim. \t 30 ft."
-        else:               r += "\n- Swim. \t 20 ft."
-        
-        if Dice(4) == 1:    r += "\n- Underwater Camouflage. \n\t The beast has advantage on Dexterity (Stealth) checks made while underwater."
-
-        if Dice() == 1:     r += "\n- Hold Breath. \n\t The beast can hold its breath for 15 minutes"
-        elif Dice() == 1:   r += "\n- Hold Breath. \n\t The beast can hold its breath for 30 minutes"
-
-        if Dice() == 1:
-            r = r + "\n- Amphibious"
-            if Dice() == 1:
-                r = r + "\n- Standing Leap. \n\t The Beast's long jump is up to half his speed in feet and its high jump is up to third his speed, with or without a running start."
-
-    if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:
-        r += "\n- Spider Climb \n\t The beast can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
-        if Dice(2) == 1:    r += "\n- Web Sense \n\t While in contact with a web, the beast knows the exact location of any other creature in contact with the same web."
-        if Dice(2) == 1:    r += "\n- Web Walker \n\t The beast ignores movement restrictions caused by webbing."
-        if Dice(2) == 1:    r += "Web (Recharge 5–6). \n\t Ranged Weapon Attack: +4 to hit, range 30/60 ft., one Large or smaller creature. Hit: The creature is restrained by webbing. As an action, the restrained creature can make a DC 11 Strength check, escaping from the webbing on a success. The effect ends if the webbing is destroyed. The webbing has AC 10, 5 hit points, is vulnerable to fire damage and immune to bludgeoning, poison and psychic damage."
-
-
-    ## Weaknesses and strengths
-    if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:
-        r += "\n- Damage Immunities. \t cold."
-        if Dice(4) == 1:   r += "\n- Snow Camouflage. \t The beast has advantage on Dexterity (Stealth) checks made to hide in snowy terrain."
-
-    if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:        r += "\n - Relentless \n\t (Recharges after a Short or Long Rest). \n\t If the beast takes 7 damage or less that would reduce it to 0 hit points, it is reduced to 1 hit point instead."
-
-    if (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:         r += "\n - Damage Immunities \n\t bludgeoning, piercing, and slashing from nonmagical attacks that aren't silvered."
-
-    if (Type == "Beastfolk") and Dice(12) == 1:
-        r += "\n - Sunlight Sensitivity. \n\t While in sunlight, the drider has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
-
-    if (Type == "Beastfolk") and Dice(12) == 1:
-        r += "\n - Fey Ancestry \n\t The beastfolk has advantage on saving throws against being charmed, and magic can't put the beastfolk to sleep."
 
 
     ## Skills
-    if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:         r = r + "\n- Illumination.\n\tThe beast sheds bright light in a 10-foot radius and dim light for an additional 10 ft."
-    if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:         r = r + "\n- Sure-Footed \n\t The beast has advantage on Strength and Dexterity saving throws made against effects that would knock it prone."
-    if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:         r = r + "\n- Hold Breath. \n\t The beast can hold its breath for 30 minutes."
-    if (Type == "Beast" or Type == "Beastfolk") and Dice(10) == 1:        r = r + "\n- Mimicry \n\t The Beast can mimic simple sounds it has heard, such as a person whispering, a baby crying, or an animal chittering. A creature that hears the sounds can tell they are imitations with a successful DC 10 Wisdom (Insight) check."
     if (Type == "Beast" or Type == "Beastfolk") and Dice(10) == 1:        r = r + "\n- Beast of Burden \n\t The Beast is considered to be a Large animal for the purpose of determining its carrying capacity."
     if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:         r = r + "\n- Swamp Camouflage \n\t The Beast has advantage on Dexterity (Stealth) checks made to hide in swampy terrain."
     if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:         r = r + "\n- Labyrinthine Recall \n\t The Beast can perfectly recall any path it has traveled."
@@ -16378,8 +15615,6 @@ def Abilities(race = Race(), background = Background()):
         elif Dice(9) == 1:      r += "\n - Charge \n\t If the Beast moves at least 10 feet straight toward a target and then hits it with an attack on the same turn, the target takes an extra [2d8+%STR] piercing damage. If the target is a creature, it must succeed on a DC=[10+%STR] Strength saving throw or be pushed up to 10 feet away and knocked prone."
         elif Dice(9) == 1:      r += "\n - Trampling Charge \n\t If the Beast moves at least 20 feet straight toward a creature and then hits it with an attack on the same turn, that target must succeed on a DC [10+%STR] Strength saving throw or be knocked prone. If the target is prone, the beast can make one simple attack against it as a bonus action."
 
-    if (Type == "Beast" or Type == "Beastfolk"):
-        if Dice(9) == 1:        r += "\n- Blood Frenzy \n\t The beast has advantage on melee attack rolls against any creature that doesn't have all its hit points."
 
     if (Type == "Beast" or Type == "Beastfolk"):
         if Dice(10) == 1:     r = r + "\n- Pounce \n\t If the beast moves at least 20 feet straight toward a creature and then hits it with an attack on the same turn, that target must succeed on a DC [10+%STR] Strength saving throw or be knocked prone. If the target is prone, the Beast can make one attack against it as a bonus action."
@@ -16400,8 +15635,6 @@ def Abilities(race = Race(), background = Background()):
             r += "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 5 (1d8 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR) and the target must make a DC [10+%CON] Constitution saving throw, taking 18 (4d8) poison damage on a failed save, or half as much damage on a successful one. If the poison damage reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way."
             r += "\n- Lycan Curse \n\t When a Bite attack hits, the target must succeed on a DC[10+%CON] Constitution saving throw or be cursed with the lycanthropy curse of the affinity beast."
 
-    if (Type == "Beast" or Type == "Beastfolk") and Dice(12) == 1:      r += "\n- Hold Breath. \n\t  The beast can hold its breath for 15 minutes.\n- Swimming \n\t  speed of 30 feet."
-    elif (Type == "Beast" or Type == "Beastfolk") and Dice(12) == 1:    r += "\n- Hold Breath. \n\t  The beast can hold its breath for 1 hour."
     if (Type == "Beast" or Type == "Beastfolk") and Dice(12) == 1:      r += "\n- Rampage. \n\t When the Beast reduces a creature to 0 hit points with a melee attack on its turn, the beast can take a bonus action to move up to half its speed and make a bite attack."
     if (Type == "Beast" or Type == "Beastfolk") and Dice(12) == 1:      r += "\n- Slippery. \n\t The beast has advantage on ability checks and saving throws made to escape a grapple."
     if (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:        r += "\n- Sunlight Sensitivity.  \n\t While in sunlight, the beastfolk has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
@@ -16411,26 +15644,14 @@ def Abilities(race = Race(), background = Background()):
     if Type == "Beastfolk" and Dice() == 1:     r += "\n - Shapechanger \n\t The Beastfolk can use its action to polymorph into a specific Medium humanoid or a Beast-humanoid hybrid, or into its beast form. Other than its size, its statistics are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
     if Type == "Beastfolk" and Dice() == 1:     r += "\n - Pack Tactics \n\t The Beastfolk has advantage on an attack roll against a creature if at least one of the Beastfolk's allies is within 5 feet of the creature and the ally isn't incapacitated."
     if Type == "Beastfolk" and Dice() == 1:     r += "\n - Rampage.\n\t When the beastfolk reduces a creature to 0 hit points with a melee attack on its turn, the beastfolk can take a bonus action to move up to half its speed and make a bite attack."
-    if Type == "Beastfolk" and Dice() == 1:     r += "\n - Chameleon Skin \n\t The beastfolk has advantage on Dexterity (Stealth) checks made to hide."
     if Type == "Beastfolk" and Dice(8) == 1:    r += "\n - Wounded Fury \n\t While it has 10 hit points or fewer, the beastfolk has advantage on attack rolls. In addition, it deals an extra 7 (2d6) damage to any target it hits with a melee attack."
     if Type == "Beastfolk" and Dice() == 1:     r += "\n - Multiattack \n\t The Beastfolk can make two different simple attacks."
     if Type == "Beastfolk" and Dice(8) == 1:    r += "\n - Otherworldly Perception \n\t The Beastfolk can sense the presence of any creature within 30 feet of it that is invisible or on the Ethereal Plane. It can pinpoint such a creature that is moving."
     if Type == "Beastfolk" and Dice(8) == 1:    r += "\n - Reckless \n\t At the start of its turn, the berserker can gain advantage on all melee weapon attack rolls during that turn, but attack rolls against it have advantage until the start of its next turn."
 
 
-    # BERSERKER
-    if Type == "Berserker" and Dice(2) == 1:    r += "\n- Multiattack \n\t The berserker makes two simple melee attacks."
-    if Type == "Berserker" and Dice(2) == 1:    r += "\n- Reckless \n\t At the start of its turn, the berserker can gain advantage on all melee weapon attack rolls during that turn, but attack rolls against it have advantage until the start of its next turn."
 
     # CELESTIALS
-
-    ## Senses
-    if Type == "Celestial" and Dice() == 1:     r += "\n- Truesight \t 120ft."
-
-    ## Movement
-    if Type == "Celestial" and Dice() == 1:     r += "\n- Fly \t 90ft."
-    elif Type == "Celestial" and Dice() == 1:   r += "\n- Fly \t 60ft."
-    elif Type == "Celestial" and Dice() == 1:   r += "\n- Fly \t 30ft."
 
     ## Strengths and Weaknesses
     if Type == "Celestial" and Dice() == 1:     r += "\n- Damage Resistances: \t Radiant."
@@ -16439,7 +15660,6 @@ def Abilities(race = Race(), background = Background()):
 
     if Type == "Celestial" and Dice() == 1:     r += "\n- Magic Resistance: \t The Celestial's has advantage on saving throws against magical effects."
     if Type == "Celestial" and Dice() == 1:     r += "\n- Magic Weapons: \t The Celestial's attacks are magical."
-    if Type == "Celestial" and Dice() == 1:     r += "\n- Shielded Mind \t The Celestial is immune to any effect that would sense its emotions, read its thoughts, or detect its location."
 
     ## Actions
     if Type == "Celestial" and Dice() == 1:     r += "\n- Change Shape. \n\t The Celestial magically polymorphs into a humanoid or beast that has a challenge rating equal to or less than 4, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form (the celestial's choice). \n\t In a new form, the celestial retains its game statistics and ability to speak, but its AC, movement modes, Strength, Dexterity, and other actions are replaced by those of the new form, and it gains any statistics and capabilities (except class features, legendary actions, and lair actions) that the new form has but that it lacks. The Celestial can still use its special attacks."
@@ -16454,12 +15674,6 @@ def Abilities(race = Race(), background = Background()):
     # CONSTRUCTS
 
     # Senses
-    if Type == "Construct":
-        if Dice() == 1:     r += "\n- Dark Vision:\n\t 60 ft"
-        elif Dice() == 1:   r += "\n- Blindsight:\n\t 60 ft (blind beyond this radius)"
-        elif Dice() == 1:   r += "\n- Blindsight:\n\t 60 ft"
-        elif Dice() == 1:   r += "\n- Truesight:\n\t 60 ft"
-        elif Dice() == 1:   r += "\n- Truesight:\n\t 120 ft"
 
     # Strengths and Weaknesses
     if Type == "Construct":
@@ -16485,7 +15699,6 @@ def Abilities(race = Race(), background = Background()):
         if Dice() == 1:     r += "\n- Disintegration. \n\t If the Construct dies, its body disintegrates into dust, leaving behind its weapons and anything else it was carrying."
         if Dice() == 1:     r += "\n- Damage Transfer:\n\t While it is grappling a creature, the construct takes only half the damage dealt to it, and the creature grappled by the rug takes the other half."
         if Dice() == 1:     r += "\n- False Apperance \n\t While the Construct remains motionless in rest, it is indistinguishable from a mundane object"
-        if Dice() == 1:     r += "\n- Magic Resistance \n\t The Construct has advantage on saving throws against spells and other magical effects."
         if Dice() == 1:     r += "\n- Smother. \n\t Melee Weapon Attack: +5 to hit, reach 5 ft., one Medium or smaller creature. Hit: The creature is grappled (escape DC 13). Until this grapple ends, the target is restrained, blinded, and at risk of suffocating, and the construct can't smother another target. In addition, at the start of each of the target's turns, the target takes 10 (2d6 + 3) bludgeoning damage."
         if Dice() == 1:     r += "\n- Spell Immunity. \n\t The construct is immune to three spells chosen by its creator. Typical immunities include fireball, heat metal, and lightning bolt."
         if Dice() == 1:     r += "\n- Telepathic Bond:\n\t While the Construct is on the same plane of existence as its master, it can magically convey what it senses to its master, and the two can communicate telepathically."
@@ -16503,9 +15716,6 @@ def Abilities(race = Race(), background = Background()):
 
     #Dragons
     ## Movement
-    if Type == "Dragon" and Dice(4) == 1:
-        r = r + "\n- Fly: 60 ft"
-        if Dice() == 1:     r += "\n- Flyby \n\t The dragon is an agile flier, quick to fly out of enemies' reach. The dragon doesn't provoke an opportunity attack when it flies out of an enemy's reach."
 
     if Type == "Dragon" and Dice() == 1:
         r = r + "\n- Burrow: 15 ft"
@@ -16529,7 +15739,6 @@ def Abilities(race = Race(), background = Background()):
     if Type == "Dragon" and Dice() == 1:    r += "\n- Limited Telepathy \n\t The Dragon can magically communicate simple ideas, emotions, and images telepathically with any creature within 100 feet of it that can understand a language. It can also communicate with any Dragon"
 
     ## Strengths and Weaknesses
-    if Type == "Dragon" and Dice() == 1:    r += "\n- Magic Resistance \n\t The Dragon has advantage on saving throws against spells and other magical effects."
 
     if Type == "Dragon" and Dice() == 1:    r += "\n- Damage Immunities: Fire"
     if Type == "Dragon" and Dice() == 1:    r += "\n- Damage Immunities: Lightning"
@@ -16552,12 +15761,10 @@ def Abilities(race = Race(), background = Background()):
         r += "\n- Horrific Appearance \n\t  Any humanoid that starts its turn within 30 feet of the Fey and can see the Fey's true form must make a DC 11 Wisdom saving throw. On a failed save, the creature is frightened for 1 minute. A creature can repeat the saving throw at the start of each of its turns, with disadvantage if the Fey is within line of sight, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to the Fey's Horrific Appearance for the next 24 hours. \n\t Unless the target is surprised or the revelation of the Fey's true form is sudden, the target can avert its eyes and avoid making the initial saving throw. Until the start of its next turn, a creature that averts its eyes has disadvantage on attack rolls against the Fey."
         if Dice() == 1: r += "\n- Death Glare. \n\t The fey targets one frightened creature she can see within 30 feet of themselves. If the target can see the fey, it must succeed on a DC 11 Wisdom saving throw against this magic or drop to 0 hit points."
     if Type == "Fey" and Dice() == 1:   r += "\n- Illusory Appearance \n\t  The fey covers herself and anything they are wearing or carrying with a magical illusion that makes her look like other creature of their general size and humanoid shape. The effect ends if the fey takes a bonus action to end it or if they dies. \n\t The changes wrought by this effect fail to hold up to physical inspection. For example, a hag could appear to have no claws, but someone touching her hand might feel the claws. Otherwise, a creature must take an action to visually inspect the illusion and succeed on a DC [10+2·%CHA] Intelligence (Investigation) check to discern that the fey is disguised."
-    if Type == "Fey" and Dice() == 1:   r += "\n- Invisible Passage \n\t  The Fey magically turns invisible until they attack or cast a spell, or until their concentration ends (as if concentrating on a spell). While invisible, they leave no physical evidence of their passage, so they can be tracked only by magic. Any equipment they wear or carry is invisible with them."
 
-    if Type == "Fey" and Dice() == 1:   r += "Night Hag Items. \n\t A night hag carries two very rare magic items that she must craft for herself. If either object is lost, the night hag will go to great lengths to retrieve it, as creating a new tool takes time and effort. \n\t - Heartstone: This lustrous black gem allows a night hag to become ethereal while it is in her possession. The touch of a heartstone also cures any disease. Crafting a heartstone takes 30 days. \n\t -Soul Bag: When an evil humanoid dies as a result of a night hag's Nightmare Haunting, the hag catches the soul in this black sack made of stitched flesh. A soul bag can hold only one evil soul at a time, and only the night hag who crafted the bag can catch a soul with it. Crafting a soul bag takes 7 days and a humanoid sacrifice (whose flesh is used to make the bag)."
+    if Type == "Fey" and Dice() == 1:   r += "\n-Night Hag Items. \n\t A night hag carries two very rare magic items that she must craft for herself. If either object is lost, the night hag will go to great lengths to retrieve it, as creating a new tool takes time and effort. \n\t - Heartstone: This lustrous black gem allows a night hag to become ethereal while it is in her possession. The touch of a heartstone also cures any disease. Crafting a heartstone takes 30 days. \n\t -Soul Bag: When an evil humanoid dies as a result of a night hag's Nightmare Haunting, the hag catches the soul in this black sack made of stitched flesh. A soul bag can hold only one evil soul at a time, and only the night hag who crafted the bag can catch a soul with it. Crafting a soul bag takes 7 days and a humanoid sacrifice (whose flesh is used to make the bag)."
 
     # ELFS
-    if Type == "Elf":   r += "\n - Fey Ancestry.\n\t The Elf has advantage on saving throws against being charmed, and magic can't put the Elf to sleep."
 
     if Type == "Elf":
         if Dice(4) <= 3:
@@ -16570,56 +15777,16 @@ def Abilities(race = Race(), background = Background()):
     # ELEMENTALS
     ## Movement
 
-    if Type == "Elemental" and Dice() == 1: r += "\n - Fly : 30ft."
-
-    if Type == "Elemental" and Dice() == 1: r += "\n - Burrow : 30ft."
-
-    if Type == "Elemental" and Dice() == 1:     r += "\n - Swim : 30ft."
-    elif Type == "Elemental" and Dice() == 1:   r += "\n - Swim : 60ft."
 
     if Type == "Elemental" and Dice() == 1: r += " Air Form. \n\t The elemental can enter a hostile creature's space and stop there. It can move through a space as narrow as 1 inch wide without squeezing."
 
     if Type == "Elemental" and Dice() == 1: r += " Water Form. \n\t The elemental can enter a hostile creature's space and stop there. It can move through a space as narrow as 1 inch wide without squeezing."
 
     ## Senses
-    if Type == "Elemental" and Dice() == 1:     r += "\n - Darkvision : 60ft."
-
-    if Type == "Elemental" and Dice() == 1:     r += "\n - Blindsight : 30ft."
-
-    if Type == "Elemental" and Dice() == 1:     r += "\n - Tremorsense : 60ft."
 
     ## Strengths and Weaknesses
 
-    if Type == "Elemental" and Dice() == 1: r += "\n - Damage Resistances: Acid"
 
-    if Type == "Elemental" and Dice() == 1:
-        r += "\n - Damage Resistances: bludgeoning, piercing, and slashing from nonmagical attacks"
-    elif Type == "Elemental" and Dice() == 1:
-        r += "\n - Damage Resistances: bludgeoning, piercing, and slashing from nonmagical attacks that aren't adamantine."
-
-    if Type == "Elemental" and Dice() == 1:     r += "\n - Damage Resistances: fire"
-    elif Type == "Elemental" and Dice() == 1:   r += "\n - Damage Immunities: fire"
-    elif Type == "Elemental" and Dice() == 1:   r += "\n - Damage Vulnerabilities: fire"
-
-    if Type == "Elemental" and Dice() == 1:     r += "\n - Damage Resistances: lightning"
-
-    if Type == "Elemental" and Dice(4) == 1:    r += "\n - Damage Immunities: poison"
-    
-    if Type == "Elemental" and Dice() == 1:     r += "\n - Damage Resistances: thunder"
-    elif Type == "Elemental" and Dice() == 1:   r += "\n - Damage Vulnerabilities: thunder"
-
-    if Type == "Elemental" and Dice() == 1: r += "\n - Damage Vulnerabilities: cold"
-    
-    if Type == "Elemental" and Dice() == 1: r += "\n - Condition Immunities: Exhaustion"
-    if Type == "Elemental" and Dice() == 1: r += "\n - Condition Immunities: Grappled"
-    if Type == "Elemental" and Dice() == 1: r += "\n - Condition Immunities: Paralyzed"
-    if Type == "Elemental" and Dice() == 1: r += "\n - Condition Immunities: Petrified"
-    if Type == "Elemental" and Dice() == 1: r += "\n - Condition Immunities: Poisoned"
-    if Type == "Elemental" and Dice() == 1: r += "\n - Condition Immunities: Prone"
-    if Type == "Elemental" and Dice() == 1: r += "\n - Condition Immunities: Restrained"
-    if Type == "Elemental" and Dice() == 1: r += "\n - Condition Immunities: Unconscious"
-
-    if Type == "Elemental" and Dice() == 1: r += "\n - Freeze: If the elemental takes cold damage, it partially freezes; its speed is reduced by 20 feet until the end of its next turn."
 
     ## Combat Skills
     if Type == "Elemental" and Dice() == 1:     r += "\n - Multiattack \n\t The elemental makes two simple attacks."
@@ -16628,7 +15795,6 @@ def Abilities(race = Race(), background = Background()):
     if Type == "Elemental" and Dice() == 1:
         r += "\n -Charge \n\t If the elemental moves at least 20 feet straight toward a target and then hits it with a simple attack on the same turn, the target takes an extra 7 (2d6) bludgeoning damage. If the target is a creature, it must succeed on a DC 16 Strength saving throw or be knocked prone."
         
-    if Type == "Elemental" and Dice() == 1:     r += "\n - Earth Glide \n\t The elemental can burrow through nonmagical, unworked earth and stone. While doing so, the elemental doesn't disturb the material it moves through."
     if Type == "Elemental" and Dice() == 1:     r += "\n - False Appereance. \n\t While motionless, the elemental is indistinguishable from a natural feature, such as ponds, rocks, statues, campfires, etc"
     if Type == "Elemental" and Dice() == 1:     r += "\n - Fire Form \n\t The elemental can move through a space as narrow as 1 inch wide without squeezing. A creature that touches the elemental or hits it with a melee attack while within 5 feet of it takes 5 (1d10) fire damage. In addition, the elemental can enter a hostile creature's space and stop there. The first time it enters a creature's space on a turn, that creature takes 5 (1d10) fire damage and catches fire; until someone takes an action to douse the fire, the creature takes 5 (1d10) fire damage at the start of each of its turns."
     elif Type == "Elemental" and Dice() == 1:   r += "\n - Fire Form \n\t The elemental can move through a space as narrow as 1 inch wide without squeezing. A creature that touches the elemental or hits it with a melee attack while within 5 feet of it takes 10 (2d10) fire damage. In addition, the elemental can enter a hostile creature's space and stop there. The first time it enters a creature's space on a turn, that creature takes 5 (1d10) fire damage and catches fire; until someone takes an action to douse the fire, the creature takes 5 (1d10) fire damage at the start of each of its turns."
@@ -16701,9 +15867,6 @@ def Abilities(race = Race(), background = Background()):
     if Type == "Gnome": r += "\n - Gnome Cunning \n\t The gnome has advantage on Intelligence, Wisdom, and Charisma saving throws against magic."
     if Type == "Gnome": r += "\n - Stone Camouflage \n\t The gnome has advantage on Dexterity (Stealth) checks made to hide in rocky terrain."
 
-    if Type == "Goblin" and Dice() == 1:    r += "\n- Nimble Scape \n\t The goblin can take the Disengage or Hide action as a bonus action on each of its turns."
-    if Type == "Goblin" and Dice() == 1:    r += "\n- Martial Advantage \n\t Once per turn, the Goblin can deal an extra 7 (2d6) damage to a creature it hits with a weapon attack if that creature is within 5 feet of an ally of the goblin that isn't incapacitated."
-    elif Type == "Goblin" and Dice(10) == 1:r += "\n- Martial Advantage \n\t Once per turn, the Goblin can deal an extra 10 (3d6) damage to a creature it hits with a weapon attack if that creature is within 5 feet of an ally of the goblin that isn't incapacitated."
     if Type == "Goblin" and Dice() == 1:    r += "\n- Brute \n\t A melee weapon deals one extra die of its damage when the Goblin hits with it (included in the attack)."
     if Type == "Goblin" and Dice() == 1:    r += "\n- Surprise Attack \n\t If the Goblin surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 7 (2d6) damage from the attack."
     if Type == "Goblin" and Dice(8) == 1:   r += "\n- Redirect Attack (Reaction) \n\t When a creature the goblin can see targets it with an attack, the goblin chooses another goblin within 5 feet of it. The two goblins swap places, and the chosen goblin becomes the target instead."
@@ -16715,24 +15878,12 @@ def Abilities(race = Race(), background = Background()):
     if Type == "Knight" and Dice() == 1:    r += "\n- Parry \n\t The knight adds 2 to its AC against one melee attack that would hit it. To do so, the knight must see the attacker and be wielding a melee weapon."
 
     # LIZARDFOLK
-    # Movement
-    if Type == "Lizardfolk":    r += "\n - Hold Breath \n\t The lizardfolk can hold its breath for 15 minutes."
-    if Type == "Lizardfolk" and Dice(2) == 1:   r += "\n - Spider Climb. \n\t The lizard can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
-    if Type == "Lizardfolk" and Dice(2) == 1:   r += "\n - Swim. \t 30 ft."
 
-    # Senses
-    if Type == "Lizardfolk" and Dice(2) == 1:   r += "\n - Darkvision. \t 60 ft."
-
-    # Combat Skills
-    if Type == "Lizardfolk" and Dice(2) == 1:   r += "\n - Chameleon Skin \n\t The lizard has advantage on Dexterity (Stealth) checks made to hide."    
-    if Type == "Lizardfolk" and Dice() == 1:    r += "\n - Skewer.  \n\t Once per turn, when the lizardfolk makes a Melee attack and hits, the target takes an extra 10 (3d6) damage, and the lizardfolk gains temporary hit points equal to the extra damage dealt."
-    if Type == "Lizardfolk" and Dice() == 1:    r += "\n - Stench.  \n\t Any creature other than a Lizardfolk that starts its turn within 5 feet of the Lizardfolk must succeed on a DC [10+%CON] Constitution saving throw or be poisoned until the start of the creature's next turn. On a successful saving throw, the creature is immune to the stench of all Lizardfolk for 1 hour."
-    if Type == "Lizardfolk" and Dice() == 1:    r += "\n - Sunlight Sensitivity.  \n\t While in sunlight, the lizardfolk has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
 
     
     # Strengths and weaknesses 
     if Type == "Lizardfolk":
-        if Dice() == 1: r += "\n - Condition Immunities \t Frightened"
+        if Dice() == 1: r += "\n- Condition Immunities \t Frightened"
 
     if Type == "Ooze":
         if Dice(7) == 1:
@@ -16772,8 +15923,6 @@ def Abilities(race = Race(), background = Background()):
     if Type == "Ooze" and Dice() == 1:  r = r + "\n- Condition Immunities: Frightened"
     if Type == "Ooze" and Dice() == 1:  r = r + "\n- Condition Immunities: Prone"
 
-    if Type == "Ooze" and Dice() == 1:  r = r + "\n- Speed: 20 ft"
-    if Type == "Ooze" and Dice() == 1:  r = r + "\n- Climb: 20 ft"
 
     # ORCS
     # Senses
@@ -16791,15 +15940,6 @@ def Abilities(race = Race(), background = Background()):
     # PLANTS
 
     ## Weaknesses and Strengths
-    
-    if Type == "Plant" and Dice() == 1:     r += "\n- Damage Resistance: Bludgeoning"
-    if Type == "Plant" and Dice() == 1:     r += "\n- Damage Resistance: Cold"
-
-    if Type == "Plant": r += "\n- Damage Vulnerabilities: Fire"
-    
-    if Type == "Plant" and Dice(9) == 1:    r += "\n- Damage Immunities: Lightning"
-    if Type == "Plant" and Dice() == 1:     r += "\n- Damage Immunities: Poison"
-    if Type == "Plant" and Dice() == 1:     r += "\n- Damage Resistance: Piercing"
     
     if Type == "Plant" and Dice() == 1: r = r + "\n- Condition Immunities: Blinded"
     if Type == "Plant" and Dice() == 1: r = r + "\n- Condition Immunities: Charmed"
@@ -16853,31 +15993,11 @@ def Abilities(race = Race(), background = Background()):
 
     # Senses
     if Type == "Fiend":
-        if Dice(2) == 1:    r += "\n- Darkvision: \t 60 ft."
-        elif Dice(2) == 1:  r += "\n- Darkvision: \t 120 ft."
-        
-        if Dice() == 1:     r += "\n- Blindsight: \t 10 ft."
-        elif Dice() == 1:   r += "\n- Blindsight: \t 30 ft."
-        elif Dice() == 1:   r += "\n- Blindsight: \t 60 ft."
         
         if Dice() == 1:     r += "\n- Devil's Sight. \n\t Magical darkness doesn't impede the Fiend's darkvision."
 
     if Type == "Fiend" and Dice(12) == 1:   r += "\n- Keen Hearing and Smell. \n\t The fiend has advantage on Wisdom (Perception) checks that rely on hearing or smell."
 
-    # Movement
-    if Type == "Fiend":
-        if Dice() == 1:     r += "\n- Speed: 20 ft."
-        elif Dice() == 1:   r += "\n- Speed: 30 ft."
-        elif Dice() == 1:   r += "\n- Speed: 40 ft."
-
-    if Type == "Fiend":
-        if Dice() == 1:     r += "\n- Fly: 20 ft."
-        elif Dice() == 1:   r += "\n- Fly: 30 ft."
-        elif Dice() == 1:   r += "\n- Fly: 40 ft."
-        elif Dice() == 1:   r += "\n- Fly: 60 ft."
-
-    if Type == "Fiend":
-        if Dice() == 1:     r += "\n- Climb: 40 ft."
 
     if Type == "Fiend" and Dice(10) == 1:
         r += "\n- Incorporeal Movement. \n\t The demon can move through other creatures and objects as if they were difficult terrain. It takes 5 (1d10) force damage if it ends its turn inside an object."
@@ -16885,46 +16005,6 @@ def Abilities(race = Race(), background = Background()):
     if Type == "Fiend" and Dice(10) == 1:
         r += "\n- Teleport. \n\t The fiend magically teleports, along with any equipment it is wearing or carrying, up to 60 feet to an unoccupied space it can see."
 
-    if Type == "Fiend" and Dice(10) == 1:
-        r += "\n- Spider Climb. \n\t The fiend can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
-
-
-    # Strengths and Weaknesses
-    if Type == "Fiend":
-        if Dice() == 1:     r += "\n- Damage Vulnerabilities: Radiant"
-    
-        if Dice() == 1:     r += "\n- Damage Resistances: acid"
-        elif Dice() == 1:     r += "\n- Damage Immunities: acid"
-
-        if Dice() == 1:     r += "\n- Damage Resistances: bludgeoning, piercing, and slashing from nonmagical attacks not made with silvered weapons."
-        elif Dice() == 1:   r += "\n- Damage Resistances: bludgeoning, piercing, and slashing from nonmagical attacks."
-
-        if Dice() == 1:     r += "\n- Damage Resistances: cold"
-        elif Dice() == 1:   r += "\n- Damage Immunities: cold"
-    
-        if Dice() == 1:     r += "\n- Damage Resistances: fire"
-        elif Dice() == 1:   r += "\n- Damage Immunities: fire"
-
-        if Dice() == 1:     r += "\n- Damage Resistances: necrotic"
-
-        if Dice() == 1:     r += "\n- Damage Resistances: lightning"
-        elif Dice() == 1:   r += "\n- Damage Immunities: lightning"
-
-        if Dice() == 1:     r += "\n- Damage Resistances: poison"
-        elif Dice() == 1:   r += "\n- Damage Immunities: poison"
-
-        if Dice() == 1:     r += "\n- Damage Resistances: thunder"
-
-    if Type == "Fiend":
-        if Dice() == 1:    r += "\n- Condition Immunities: charmed"
-        if Dice() == 1:    r += "\n- Condition Immunities: exhaustion"
-        if Dice() == 1:    r += "\n- Condition Immunities: frightened"
-        if Dice() == 1:    r += "\n- Condition Immunities: grappled"
-        if Dice() == 1:    r += "\n- Condition Immunities: paralyzed"
-        if Dice() == 1:    r += "\n- Condition Immunities: petrified"
-        if Dice() == 1:    r += "\n- Condition Immunities: poisoned"
-        if Dice() == 1:    r += "\n- Condition Immunities: prone"
-        if Dice(10) == 1:  r += "\n- Condition Immunities: restrained"
 
     if Type == "Fiend" and Dice() == 1: r = r + "\n- Magic Resistance \n\t The fiend has advantage on saving throws against spells and other magical effects."
 
@@ -16976,25 +16056,12 @@ def Abilities(race = Race(), background = Background()):
 
         if Dice() == 1: r += "\n - Tremorsense: 60 ft.\n"
             
-    if Type == "Monstrosity":
-        if Dice() == 1:
-            r += "\n- Keen Sight.\n\t The monstrosity has advantage on Wisdom (Perception) checks that rely on sight.\n"
 
         if Dice() == 1:
             r += "\n- Keen Smell.\n\t The monstrosity has advantage on Wisdom (Perception) checks that rely on smell.\n"
 
     # Movement
-    if Type == "Monstrosity":
-        if Dice() == 1:            r += "\n - Speed: 50 ft"
-        elif Dice() == 1:          r += "\n - Speed: 40 ft"
-        elif Dice() == 1:          r += "\n - Speed: 30 ft"
-        else:                      r += "\n - Speed: 20 ft"
         
-    if Type == "Monstrosity" and Dice()==1:
-        if Dice() == 1:         r += "\n - Burrow: \t 40 ft"
-        elif Dice() == 1:       r += "\n - Burrow: \t 20 ft"
-        else:                   r += "\n - Burrow: \t 10 ft"
-        if Dice() == 1:         r += "\n - Tunneler: \t The monstrosity can burrow through solid rock at half its burrowing speed and leaves a 5 foot-wide, 8-foot-high tunnel in its wake."
 
     if Type == "Monstrosity":
         if Dice() == 1:         r += "\n- Speed: 0 ft. \n- Fly: 20 ft(Hover)"
@@ -17023,11 +16090,6 @@ def Abilities(race = Race(), background = Background()):
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Grappler. \n\t On a simple melee attack, the target is grappled,  [DC 10+%STR]"
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Heated Body. \n\t A creature that touches the monstrosity or hits it with a melee attack while within 5 feet of it takes 7 (2d6) fire damage."
     if Type == "Monstrosity" and Dice() == 1:        r += "\n- Intoxicating Touch. \n\t On a simple melee attack, The target is magically cursed for 1 hour. Until the curse ends, the target has disadvantage on Wisdom saving throws and all ability checks."
-    if Type == "Monstrosity":
-        if Dice() == 1:
-            r += "\n- Multiattack. \n\t The monstrosity makes two Simple attacks."
-        elif Dice() == 1:
-            r += "\n- Multiattack. \n\t The monstrosity makes three Simple attacks."
     if Type == "Monstrosity":
         if Dice() == 1:        r += "\n- Shapechanger \n\t The monstrosity can use its action to polymorph into an object or back into its true, amorphous form. Its statistics are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
         elif Dice() == 1:      r += "\n- Shapechanger \n\t The monstrosity can use its action to polymorph into a Small or Medium humanoid it has seen, or back into its true form. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
@@ -17086,13 +16148,11 @@ def Abilities(race = Race(), background = Background()):
     if Type == "Undead" and Dice() == 1:        r += "\n- Damage Resistances: Acid."
     
     if Type == "Undead" and Dice() == 1:        r += "\n- Damage Resistances: Bludgeoning, piercing, and slashing from nonmagical attacks. "
-    elif Type == "Undead" and Dice() == 1:      r += "\n- Damage Vulnerabilities: Bludgeoning."
     elif Type == "Undead" and Dice() == 1:      r += "\n- Damage Resistances: Piercing. "
 
     if Type == "Undead" and Dice() == 1:        r += "\n- Damage Resistances: Cold. "
     elif Type == "Undead" and Dice() == 1:      r += "\n- Damage Immunities: Cold "
 
-    if Type == "Undead" and Dice() == 1:        r += "\n- Damage Vulnerabilities: Fire"
     elif Type == "Undead" and Dice() == 1:      r += "\n- Damage Resistances: Fire."
     elif Type == "Undead" and Dice() == 1:      r += "\n- Damage Immunities: Fire "
 
@@ -17175,7 +16235,6 @@ def Abilities(race = Race(), background = Background()):
 
 
     # Combat Skills
-    if Type == "Undead" and Dice(7) == 1:   r += "\n - Blood Frenzy \n\t The undead has advantage on melee attack rolls against any creature that doesn't have all its hit points."
     if Type == "Undead" and Dice() == 1:    r += "\n - Charge. \n\t If the undead moves at least 10 feet straight toward a target and then hits it with a simple melee attack on the same turn, the target takes an extra 9 (2d8) piercing damage. If the target is a creature, it must succeed on a DC 14 Strength saving throw or be pushed up to 10 feet away and knocked prone."
     if Type == "Undead" and Dice() == 1:    r += "\n - Horrifying Visage. \n\t Each non-undead creature within 60 feet of the undead that can see it must succeed on a DC [10+%CHA] Wisdom saving throw or be frightened for 1 minute. If the save fails by 5 or more, the target also ages 1d4 × 10 years. A frightened target can repeat the saving throw at the end of each of its turns, ending the frightened condition on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to this undead's Horrifying Visage for the next 24 hours. The aging effect can be reversed with a greater restoration spell, but only within 24 hours of it occurring."
     if Type == "Undead" and Dice() == 1:    r += "\n - Possession (Recharge 6).  \n\t One humanoid that the undead can see within 5 feet of it must succeed on a DC 13 Charisma saving throw or be possessed by the undead; the undead then disappears, and the target is incapacitated and loses control of its body. The undead now controls the body but doesn't deprive the target of awareness. The undead can't be targeted by any attack, spell, or other effect, except ones that turn undead, and it retains its alignment, Intelligence, Wisdom, Charisma, and immunity to being charmed and frightened. It otherwise uses the possessed target's statistics, but doesn't gain access to the target's knowledge, class features, or proficiencies. \n\t The possession lasts until the body drops to 0 hit points, the undead ends it as a bonus action, or the undead is turned or forced out by an effect like the dispel evil and good spell. When the possession ends, the undead reappears in an unoccupied space within 5 feet of the body. The target is immune to this undead's Possession for 24 hours after succeeding on the saving throw or after the possession ends."
@@ -17202,10 +16261,6 @@ def Abilities(race = Race(), background = Background()):
     if Type == "Plant" and Dice() == 1:        r = r + "\n- Condition Immunities\n\t Blinded"
     if Type == "Plant" and Dice() == 1:        r = r + "\n- Condition Immunities\n\t Deafened"
     if Type == "Plant" and Dice() == 1:        r = r + "\n- Condition Immunities\n\t Frightened"
-    if Type == "Plant":
-        if Dice() == 1:         r = r + "\n- Blindsight\t 30 ft"
-        elif Dice() == 1:       r = r + "\n- Blindsight\t 60 ft (Blind Beyond this radius)."
-    if Type == "Plant" and Dice() == 1:        r = r + "\n- Darkvision\t 120 ft"
     if Type == "Plant" and Dice() == 1:        r = r + "\n- Death Burst\n\t The Plant explodes when it drops to 0 hit points. Each creature within 20 feet of it must succeed on a DC 15 Constitution saving throw or take 10 (3d6) poison damage and become infected with a disease on a failed save. Creatures immune to the poisoned condition are immune to this disease. Spores invade an infected creature's system, killing the creature in a number of hours equal to 1d12 + the creature's Constitution score, unless the disease is removed. In half that time, the creature becomes poisoned for the rest of the duration. After the creature dies, it sprouts 2d4 Tiny gas spores that grow to full size in 7 days."
     if Type == "Plant" and Dice() == 1:        r = r + "\n- Multiattack\n\t The Plant can do one special attack and a simple attack each turn."
 
@@ -17228,21 +16283,26 @@ def Abilities(race = Race(), background = Background()):
     return r
 
 
-def Legendary(Type=""):
-    if Type == "":
-        if Dice(0) == 1:    Type= Race()
-        else:               Type= Background()
+def Legendary(race = Race(), background = Background(), lvl = 10):
+    actions = []
+    
+    attack = f"\n- Attack \n\t The {race} can do one simple attack to any creature"
+    move = f"\n- Move \n\t The {race} can move half their movement"
+    shimmering_shield = f"\n- Shimmering Shield (Costs 2 Actions). The {race} creates a shimmering, magical field around itself or another creature it can see within 60 feet of it. The target gains a +2 bonus to AC until the end of the {race}'s next turn."
+    heal_self = f"\n- Heal Self (Costs 3 Actions). \n\t The {race} magically regains {2*4+PB(lvl)} (2d8 + {PB(lvl)}) hit points."
+    wing_attack = f"\n- Wing Attack (Costs 2 Actions): The {race} beats its wings. Each creature within 10 feet of the {race} must succeed on a DC {10+PB(lvl)}DEX saving throw or take {Dice(6, 2) + PB(lvl)} bludgeoning damage and be knocked prone."
+    command_ally = f"\n- Command Ally: The {background} issues a command to one of its allies, allowing the ally to immediately take an extra action on the {background}'s turn."
 
-    if Type == "Human":
-        if Dice()==1:        return "\n- Attack \n\t It can do one simple attack to any creature"
-        if Dice()==1:        return "\n- Move: \n\t It can move half their movement"
+    if race == "Celestial": actions += [attack, shimmering_shield, heal_self]
 
-    if Type == "Celestial":
-        if Dice()==1:        return "\n- Attack \n\t It can do one simple attack to any creature"
-        if Dice()==1:        return "\n- Shimmering Shield (Costs 2 Actions). The Celestial creates a shimmering, magical field around itself or another creature it can see within 60 feet of it. The target gains a +2 bonus to AC until the end of the celestial's next turn."
-        if Dice()==1:        return "\n- Heal Self (Costs 3 Actions). \n\t The celestial magically regains 8 (2d8 + %CON) hit points."
-       
-    return Legendary()
+    if background == "Noble": actions += command_ally
+
+    actions += [attack, move]
+
+    num_actions = min(PB(lvl) // 2, len(actions))  # Simple example: 1 action per 5 levels
+
+    selected_actions = random.sample(actions, num_actions) if actions else ["No legendary actions available."]
+    return "\n".join(selected_actions)
 
 
 def Lair(Type=""):
@@ -17269,7 +16329,6 @@ def Lair(Type=""):
 
     if Type == "Plant" and Dice() == 1:        r += "\n- Grasping Plants \n\t The plant causes roots and vines to temporarily grow around it; until initiative count 20 on the next round, the ground within 20 feet of the plant is difficult terrain."
 
-    if r == "": return  Lair()
     return r
 
 
@@ -17411,8 +16470,13 @@ def PlotHook():
         "Somewhere out there, I have a child who doesn't know me. I'm making the world better for him or her.",
         "I owe everything to my mentor – a horrible person who's probably rotting in jail somewhere.",
         "I fleeced the wrong person and must work to ensure that this individual never crosses paths with me or those I care about.",
-        "I hope to bring prestige to a library, a museum, or a university.",
-        "I won't sell an art object or other treasure that has historical significance or is one of a kind.",
+        "I hope to bring prestige to a library.",
+        "I hope to bring prestige to a museum.",
+        "I hope to bring prestige to a university.",
+        "I won't sell an art object that has historical significance.",
+        "I won't sell an art object that is one of a kind.",
+        "I won't sell a treasure that has historical significance.",
+        "I won't sell a treasure that is one of a kind.",
         "I have a friendly rival. Only one of us can be the best, and I aim to prove it's me.",
         "I want to find my mentor, who disappeared on an expedition some time ago.",
         "Ever since I was a child, I've heard stories about a lost city. I aim to find it, learn its secrets, and earn my place in the history books.",
@@ -17528,7 +16592,7 @@ def PlotHook():
 def Trait(background=""):
     Traits = [
         # Moral Compass
-        "Virtuous", "Principled", "Honorable", "Unprincipled", "Dishonorable", "Depraved",
+        "Virtuous", "Principled", "Honorable", "Unprincipled", "Dishonorable",
         
         # Personal Goals
         "Power-Seeker", "Knowledge-Seeker", "Peace-Seeker", "Chaos-Seeker", "Revenge-Seeker", "Justice-Seeker",
@@ -18064,8 +17128,10 @@ def Trait(background=""):
     return random.choice(Traits)
 
 
-def Ideal(background, alignment):
+def Ideal(npc):
 
+    background = npc.background
+    alignment= npc.alignment
     if background == "Noble":
         if ("Good" in alignment) and Dice() == 1:
             return random.choice([
@@ -18366,7 +17432,9 @@ def Ideal(background, alignment):
         "Daring. I am most happy when risking everything.",
         "People. For all my many lies, I place a high value on friendship.",
         "Wealth. Heaps of coins in a secure vault is all I dream of.",
-        "Nation. My city, nation, or people are all that matter.",
+        "Nation. My city is all that matter.",
+        "Nation. My nation, is all that matter.",
+        "Nation. My people are all that matter.",
         "Aspiration. I'm going to prove that I'm worthy of a better life.",
         "Comfort. I want to ensure that me and mine enjoy the best things in life.",
         "Discovery. I want to learn all I can, both for my organization and for my own curiosity.",
@@ -18394,7 +17462,10 @@ def Ideal(background, alignment):
         ""
     ])
 
-def AbilityScoresGeneration(rc = ""):
+def AbilityScoresGeneration(npc):
+
+    rc = npc.race
+    
     ### Ability Scores Generation
     STR = AbilityScore()
     DEX = AbilityScore()
@@ -18747,7 +17818,7 @@ def AbilityScoresGeneration(rc = ""):
 
         if gnome_type == "Tinkerer":
             DEX += Dice(3)                      # Enhanced nimbleness for intricate work.
-            if Dice(4) == 1: Int += Dice(6)     # For engineering skills of tinkering.
+            if Dice(4) == 1: INT += Dice(6)     # For engineering skills of tinkering.
         elif gnome_type == "Illusionist":
             CHA += Dice(3)                      # Charisma often governs spellcasting, especially illusions.
             if Dice(4) == 1: WIS += Dice(2)     # For a deeper understanding of magic.
@@ -19019,167 +18090,318 @@ def AbilityScoresGeneration(rc = ""):
             if Dice(4) == 1: INT += Dice(3)  # Some are quite cunning.
     return [STR,DEX,CON,INT,WIS,CHA]
 
-def NPC():
+
+class NPC:
+    class AbilityScores:
+        def __init__(self, STR, DEX, CON, INT, WIS, CHA):
+            self.STR = STR
+            self.DEX = DEX
+            self.CON = CON
+            self.INT = INT
+            self.WIS = WIS
+            self.CHA = CHA
+
+        def mod(self, score):
+            """Calculate the modifier for a given ability score."""
+            return (score - 10) // 2
+        @property
+        def str_mod(self):
+            return self.mod(self.STR)
+
+        @property
+        def dex_mod(self):
+            return self.mod(self.DEX)
+
+        @property
+        def con_mod(self):
+            return self.mod(self.CON)
+
+        @property
+        def int_mod(self):
+            return self.mod(self.INT)
+
+        @property
+        def wis_mod(self):
+            return self.mod(self.WIS)
+
+        @property
+        def cha_mod(self):
+            return self.mod(self.CHA)
+        
+    def __init__(self, title, race, background, lvl=1):
+        self.title = title
+        self.race = race
+        self.subrace = Monster(race)
+        self.background = background
+        self.gender = random.choice(["♀", "♂", "⚥", "⚬", "?", ""])
+        self.name = Racial_Names(self)
+        self.level = lvl
+        self.proficiency_bonus = PB(lvl)
+        self.alignment = self.Alignment()        
+        self.ability_scores = self.generate_ability_scores()
+        self.AC = self.generate_armor_class()
+        self.HP = Dice( Dice()+ Dice(), self.level) + lvl*self.ability_scores.con_mod
+        self.ideal = Ideal(self)
+        self.saving_throws = ""         # Initialization
+        self.generate_saving_throws()
+        self.skills = ""                # Initialization
+        self.generate_skills()  
+        self.passive_perception = self.calculate_passive_perception()  # Initialize and set passive perception
+        self.languages = Language(self)
+        self.simple_attacks = self.generate_simple_attacks()  # Initialize simple attacks
+        self.special_attack = self.generate_special_attack()  # Initialize special attack
+        self.spellcasting_ability = ""
+        self.spell_save_dc = None
+        self.spell_attack_bonus = None
+        self.generate_spellcasting_ability()  # Call the method to set the ability
+        self.generate_spellcasting_info()
+        self.spells = Magic(self)
+        self.abilities = Abilities(self)
+        
+    def Alignment(self):
+        Alignments = [
+            "Lawful Good",          "Neutral Good",        "Chaotic Good",
+            "Lawful Neutral",       "True Neutral",        "Chaotic Neutral",
+            "Lawful Evil",          "Neutral Evil",        "Chaotic Evil",
+            "Unaligned",            ""
+            ]
+        return random.choice(Alignments)
+
+    def generate_ability_scores(self, method="Randomiced"):
+        # Replace this with your actual ability score generation code.
+        # Example ability score generation:
+        if method == "Standard" or method == "Standard Array":
+            scores = [15, 14, 13, 12, 10, 8]
+            random.shuffle(scores)
+            return NPC.AbilityScores(STR=scores[0], DEX=scores[1], CON=scores[2], INT=scores[3], WIS=scores[4], CHA=scores[5])
+        if method == "" or method=="Randomiced":
+            STR,DEX,CON,INT,WIS,CHA = AbilityScoresGeneration(self)
+            return NPC.AbilityScores(STR=STR, DEX=DEX, CON=CON, INT=INT, WIS=WIS, CHA=CHA)
+        else:
+            return NPC.AbilityScores(STR=10, DEX=10, CON=10, INT=10, WIS=10, CHA=10)
+        
+    def generate_armor_class(self):
+        AC = 10 + self.ability_scores.dex_mod+ Dice(self.proficiency_bonus)
+        if Dice(10) == 1 or self.background == "Monk":       AC += self.ability_scores.dex_mod
+        if Dice(10) == 1 or self.background == "Berserker":  AC += self.ability_scores.con_mod
+        if AC > 18 + self.proficiency_bonus: AC  = 18 + self.proficiency_bonus
+        return AC
+
+    def generate_saving_throws(self):
+        # Initialize a dictionary to keep track of saving throw bonuses
+        saving_throws = {
+            'STR': self.ability_scores.str_mod,
+            'DEX': self.ability_scores.dex_mod,
+            'CON': self.ability_scores.con_mod,
+            'INT': self.ability_scores.int_mod,
+            'WIS': self.ability_scores.wis_mod,
+            'CHA': self.ability_scores.cha_mod,
+        }
+        
+        # Initialize the string that will display the saving throws
+        saving_throws_str = "Saving Throws: "
+        
+        # Ensure at least two saving throws are proficient
+        while sum(1 for bonus in saving_throws.values() if bonus >= self.proficiency_bonus) < 2:
+            for ability in saving_throws:
+                if Dice(4) == 1:
+                    saving_throws[ability] += self.proficiency_bonus
+        
+        # Format the saving throw string
+        for ability, bonus in saving_throws.items():
+            sign = '+' if bonus >= 0 else ''
+            saving_throws_str += f"{ability}:{sign}{bonus}\t"
+        
+        # Set the attribute for saving throws
+        self.saving_throws = saving_throws_str.strip()
+    
+    def generate_skills(self):
+        # Dictionary to hold skill names associated with their respective abilities
+        skills = {
+            'Athletics': 'STR',
+            'Acrobatics': 'DEX', 'Sleight of Hand': 'DEX', 'Stealth': 'DEX',
+            'Arcana': 'INT', 'History': 'INT', 'Investigation': 'INT', 'Nature': 'INT', 'Religion': 'INT',
+            'Animal Handling': 'WIS', 'Insight': 'WIS', 'Medicine': 'WIS', 'Perception': 'WIS', 'Survival': 'WIS',
+            'Deception': 'CHA', 'Intimidation': 'CHA', 'Performance': 'CHA', 'Persuasion': 'CHA'
+        }
+        
+        # Begin the skills string
+        skills_str = "Skills:"
+
+        # Iterate over the skills dictionary and add proficient skills based on a dice roll
+        for skill, ability in skills.items():
+            if Dice(8) <= getattr(self.ability_scores, ability.lower() + '_mod'):
+                bonus = getattr(self.ability_scores, ability.lower() + '_mod') + self.proficiency_bonus
+                sign = '+' if bonus >= 0 else ''
+                skills_str += f"\n{skill}:{sign}{bonus}"
+
+        # Set the attribute for skills
+        self.skills = skills_str.strip()
+
+    def calculate_passive_perception(self):
+        # Base value of 10 plus the Perception skill bonus
+        perception_mod = getattr(self.ability_scores, 'wis_mod')
+        passive_perception = 10 + perception_mod
+        
+        # Check if the NPC is proficient in the Perception skill
+        if 'Perception' in self.skills:
+            passive_perception += self.proficiency_bonus
+
+        return passive_perception
+
+    def to_hit_bonus(self):
+        # Assuming to hit is based on the higher of STR or DEX modifier
+        highest_ability_mod = Modifier(max(self.ability_scores.STR,
+                                      self.ability_scores.DEX))
+        return highest_ability_mod + self.proficiency_bonus
+
+    def generate_simple_attacks(self):
+        attacks = "\n- SIMPLE ATTACKS:\n"
+        num_weapons = Dice(3)
+        for i in range(num_weapons):
+            attacks += Attack(Dice(4), self)
+            attacks += "\n"
+        return attacks
+
+    def generate_special_attack(self):
+        # Assuming SpecialAttack is a function that returns a string description of the attack
+        # and takes level, a modifier, STR, and DEX as arguments
+        uses_per_combat = Dice(self.proficiency_bonus)
+        chosen_ability_score = random.choice([
+            self.ability_scores.STR, self.ability_scores.DEX, self.ability_scores.CON,
+            self.ability_scores.INT, self.ability_scores.WIS, self.ability_scores.CHA
+        ])
+        modifier = Modifier(chosen_ability_score)
+        return f"\n- SPECIAL ATTACK: {uses_per_combat} Uses per Combat\n" + \
+               SpecialAttack(self)
+    
+    def generate_spellcasting_ability(self):
+        # Find the highest modifier among INT, WIS, and CHA
+        int_mod = self.ability_scores.int_mod
+        wis_mod = self.ability_scores.wis_mod
+        cha_mod = self.ability_scores.cha_mod
+
+        # Create a dictionary to associate the ability score with its modifier
+        ability_mod_dict = {'INT': int_mod, 'WIS': wis_mod, 'CHA': cha_mod}
+
+        # Find the ability with the highest modifier
+        self.spellcasting_ability = max(ability_mod_dict, key=ability_mod_dict.get)
+        
+    def calculate_spell_save_dc(self):
+        ability_mod = getattr(self.ability_scores, f"{self.spellcasting_ability.lower()}_mod")
+        self.spell_save_dc = 8 + ability_mod + self.proficiency_bonus
+
+    def calculate_spell_attack_bonus(self):
+        ability_mod = getattr(self.ability_scores, f"{self.spellcasting_ability.lower()}_mod")
+        self.spell_attack_bonus = ability_mod + self.proficiency_bonus
+
+    def generate_spellcasting_info(self):
+        self.generate_spellcasting_ability()
+        self.calculate_spell_save_dc()
+        self.calculate_spell_attack_bonus()
+
+
+        
+def NPC_gen():
     """NPC creator"""
 
-    ### Title 
-    Ttl = Title()
+    npc = NPC(
+        title = Title(),
+        race = Race(),
+        background = Background(),
+        lvl = Dice(30)
+        )
 
-    ### Background
-    bg = Background()
-
-    ### Level
-    Lvl = Dice(30)
-
-    #Lvl = 1
-
+    bg = npc.background
+    Lvl = npc.level
     
-    rc = Race()
-    mn = Monster(rc)
-    al = Alignment()
-
-    Name = Racial_Names(rc)
-
-    STR,DEX,CON,INT,WIS,CHA = AbilityScoresGeneration(rc)
+    rc = npc.race
+    mn = npc.subrace
+    
 
 
-    print(f"{Name}, {Ttl}")
+    STR, DEX, CON, INT, WIS, CHA = npc.ability_scores.STR, npc.ability_scores.DEX, npc.ability_scores.CON, npc.ability_scores.INT, npc.ability_scores.WIS, npc.ability_scores.CHA
 
-    AC = 10 + Modifier(DEX) + Dice( PB(Lvl))
-    if Dice(10) == 1 or bg == "Monk":       AC += Modifier(WIS)
-    if Dice(10) == 1 or bg == "Berserker":  AC += Modifier(CON)
-    if AC>18 + PB(Lvl): AC  = 18 + PB(Lvl)
 
-    HP = Dice( Dice()+ Dice(), Lvl) + Lvl*Modifier(CON)
+    print(f"{npc.name}, {npc.title}")
+
+
+    AC = npc.AC
+    HP = npc.HP
 
 
     r = ""
-    r += "- {} - ".format(al) + random.choice(["♀", "♂", "⚥", "⚬", "?", ""])
+    r += "- {} - ".format(npc.alignment) + npc.gender
     r += "\n"
-    r += bg
+    r += npc.background
     r += "\n"
-    r += f"{rc}: {mn}"
+    r += f"{npc.race}: {npc.subrace}"
     r += "\n"
     r += "\n"
 
 
 
-    r += f"Lvl: {Lvl}⚜︎\t    HP: {HP}♡\t    AC: {AC}⛨️"
+    r += f"Lvl: {npc.level}⚜︎\t    HP: {npc.HP}♡\t    AC: {npc.AC}⛨️"
     r += ("\n\t" +
-          f"STR: {STR}  \t |  {Modifier(STR)} \n\t" +
-          f"DEX: {DEX}  \t |  {Modifier(DEX)} \n\t" +
-          f"CON: {CON}  \t |  {Modifier(CON)} \n\t" +
-          f"INT: {INT}  \t |  {Modifier(INT)} \n\t" +
-          f"WIS: {WIS}  \t |  {Modifier(WIS)} \n\t" +
-          f"CHA: {CHA}  \t |  {Modifier(CHA)} \n\t")
+          f"STR: {npc.ability_scores.STR}  \t |  {Modifier(npc.ability_scores.STR)} \n\t" +
+          f"DEX: {npc.ability_scores.DEX}  \t |  {Modifier(npc.ability_scores.DEX)} \n\t" +
+          f"CON: {npc.ability_scores.CON}  \t |  {Modifier(npc.ability_scores.CON)} \n\t" +
+          f"INT: {npc.ability_scores.INT}  \t |  {Modifier(npc.ability_scores.INT)} \n\t" +
+          f"WIS: {npc.ability_scores.WIS}  \t |  {Modifier(npc.ability_scores.WIS)} \n\t" +
+          f"CHA: {npc.ability_scores.CHA}  \t |  {Modifier(npc.ability_scores.CHA)} \n\t")
     r += "\n"
 
-    # Initialize a variable to keep track of the number of proficient saving throws
-    proficient_saving_throws = 0
-
-    # While loop to ensure at least one saving throw is proficient
-    while proficient_saving_throws < 2:
-        # Reset the saving throws
-        saving_throws_str = "Saving Throws:" + "\t"
-        proficient_saving_throws = 0
-
-        if Dice(4) == 1:
-            saving_throws_str += f"Str:+ {Modifier(STR) + PB(Lvl)}" + "\t"
-            proficient_saving_throws += 1
-            
-        if Dice(4) == 1:
-            saving_throws_str += f"Dex:+ {Modifier(DEX) + PB(Lvl)}" + "\t"
-            proficient_saving_throws += 1
-            
-        if Dice(4) == 1:
-            saving_throws_str += f"Con:+ {Modifier(CON) + PB(Lvl)}" + "\t"
-            proficient_saving_throws += 1
-            
-        if Dice(4) == 1:
-            saving_throws_str += f"Int:+ {Modifier(INT) + PB(Lvl)}" + "\t"
-            proficient_saving_throws += 1
-            
-        if Dice(4) == 1:
-            saving_throws_str += f"Wis:+ {Modifier(WIS) + PB(Lvl)}" + "\t"
-            proficient_saving_throws += 1
-            
-        if Dice(4) == 1:
-            saving_throws_str += f"Cha:+ {Modifier(CHA) + PB(Lvl)}" + "\t"
-            proficient_saving_throws += 1
-
-    # Add the saving throws to the r string
-    r += saving_throws_str + "\n"
+    r += (npc.saving_throws) + "\n\n"
+    r += (npc.skills) + "\n"
 
 
-    r += "Skills:"
-    if Dice(8) <= Modifier(STR): r += f"\tAthletics:+{Proficiency(STR) + PB(Lvl)}"
-    if Dice(8) <= Modifier(DEX): r += f"\tAcrobatics:+{Proficiency(DEX) + PB(Lvl)}"
-    if Dice(8) <= Modifier(DEX): r += f"\tSleight of Hand:+{Proficiency(DEX) + PB(Lvl)}"
-    if Dice(8) <= Modifier(DEX): r += f"\tStealth:+{Proficiency(DEX) + PB(Lvl)}"
-    if Dice(8) <= Modifier(INT): r += f"\tArcana:+{Proficiency(INT) + PB(Lvl)}"
-    if Dice(8) <= Modifier(INT): r += f"\tHistory:+{Proficiency(INT) + PB(Lvl)}"
-    if Dice(8) <= Modifier(INT): r += f"\tInvestigation:+{Proficiency(INT) + PB(Lvl)}"
-    if Dice(8) <= Modifier(INT): r += f"\tNature:+{Proficiency(INT) + PB(Lvl)}"
-    if Dice(8) <= Modifier(INT): r += f"\tReligion:+{Proficiency(INT) + PB(Lvl)}"
-    if Dice(8) <= Modifier(WIS): r += f"\tAnimal Handling:+{Proficiency(WIS) + PB(Lvl)}"
-    if Dice(8) <= Modifier(WIS): r += f"\tInsight:+{Proficiency(WIS) + PB(Lvl)}"
-    if Dice(8) <= Modifier(WIS): r += f"\tMedicine:+{Proficiency(WIS) + PB(Lvl)}"
-    if Dice(8) <= Modifier(WIS): r += f"\tPerception:+{Proficiency(WIS) + PB(Lvl)}"
-    if Dice(8) <= Modifier(WIS): r += f"\tSurvival:+{Proficiency(WIS) + PB(Lvl)}"
-    if Dice(8) <= Modifier(CHA): r += f"\tDeception:+{Proficiency(CHA) + PB(Lvl)}"
-    if Dice(8) <= Modifier(CHA): r += f"\tIntimidation:+{Proficiency(CHA) + PB(Lvl)}"
-    if Dice(8) <= Modifier(CHA): r += f"\tPerformance:+{Proficiency(CHA) + PB(Lvl)}"
-    if Dice(8) <= Modifier(CHA): r += f"\tPersuasion:+{Proficiency(CHA) + PB(Lvl)}"
+
+    r += "\n"
+    r += "Passive Perception: {}".format( npc.passive_perception)
+    r += "\n"
+    r += "Proficiency Bonus: +{}".format( npc.proficiency_bonus)
     r += "\n"
 
     r += "\n"
-    r += "Passive Perception: {}".format( 10 + Modifier(WIS) + PB(Lvl))
+    r += "Languages: \n\t{}".format(npc.languages)
     r += "\n"
-    r += "Proficiency Bonus: +{}".format( PB(Lvl))
-    r += "\n"
-
-    r += "\n"
-    r += "Languages: \n\t{}".format(Language(rc, bg))
     r += "\n"
     
     r += "⫷   COMBAT ACTIONS:   ⫸"
     r += "\n"
-    r += "\tTo hit: +{}".format( Modifier(max(STR, DEX)) + PB(Lvl))
+    r += "\tTo hit: +{}".format( npc.to_hit_bonus())
     
-    r += "\n- SIMPLE ATTACKS:"
-    r += "\n"
-    num_weapons = Dice(3)
-    for i in range (num_weapons):
-        r += Attack(Dice(4), STR = STR, DEX = DEX, PB = PB(Lvl))
-        r += "\n"
-    
-    r += "\n- SPECIAL ATTACK: {} Uses per Combat".format(Dice(PB(Lvl)))
-    r += "\n"
-    r += SpecialAttack(Lvl, Modifier(random.choice([STR, DEX, CON, INT, WIS, CHA])), STR, DEX)
+    r += "\n" + npc.simple_attacks + "\n"
+        
+    r += f"\n {npc.special_attack}" 
     r += "\n\n"
-    
-    r += "༼ SPELLCASTING:\t{} ༽".format(random.choice(["INT", "WIS", "CHA"]))
+
+
+
+    r += "༼ SPELLCASTING:\t{} ༽".format(npc.spellcasting_ability)
     r += "\n"
-    r += "\t Spellsave DC {}".format(8 + Modifier(max(INT, WIS, CHA))+ PB(Lvl) )
+    r += "\t Spellsave DC {}".format(npc.spell_save_dc)
     r += "\n"
-    r += "\t To hit: +{}".format( Modifier(max(INT, WIS, CHA) + PB(Lvl)))
+    r += "\t To hit: +{}".format(npc.spell_attack_bonus)
     r += "\n"
-    r += Magic(Lvl, rc, bg)
+    r += npc.spells
+        
+        
 
     r += "\n"
     r += "\n⚔︎    SKILLS & ACCTIONS:   ⚔︎"
     r += "\n"
-    r += Abilities(rc, bg)
+    r += npc.abilities
     r += "\n"
 
     if Dice(Lvl) >= 15:
         r += "\n✯    LEGENDARY ACTIONS:    ✯"
         r += "\n"
-        r += f"The {bg} {rc} can take {Dice(PB(Lvl))} legendary actions, choosing from the options below. \n\t Only one legendary action can be used at a time, and only at the end of another creature's turn. \n\t The {bg} {rc} regains spent legendary actions at the start of its turn."
+        r += f"The {npc.background} {rc} can take {Dice(PB(Lvl))} legendary actions, choosing from the options below. " +\
+             f"\n\t Only one legendary action can be used at a time, and only at the end of another creature's turn. "+\
+             f"\n\t The {npc.background} {rc} regains spent legendary actions at the start of its turn."
         r += "\n"
-        r += Legendary(bg)
-        r += "\n"
-        r += Legendary(rc)
+        r += Legendary(rc,bg,Lvl)
         r += "\n"
 
     if Dice(Lvl) >= 20:
@@ -19195,7 +18417,7 @@ def NPC():
     if Dice(Lvl) >= 10:
         r += "\n♕   REGIONAL EFFECTS:   ♛"
         r += "\n"
-        r += f"The {bg} {rc} has an effect on its domains that may include any of the following magical effects:"
+        r += f"The {npc.background} {rc} has an effect on its domains that may include any of the following magical effects:"
         r += "\n"
         r += Region(bg)
         r += "\n"
@@ -19220,8 +18442,7 @@ def NPC():
     s += tr
     s += " - Ideal -"
     s += "\n"
-    idl = Ideal(bg, al)
-    s += idl
+    s += npc.ideal
     s += "\n"
     s += " - Story Hook -"
     s += "\n"
@@ -19231,13 +18452,13 @@ def NPC():
 
     try: 
         question = "Craft the presentation for a D&D NPC: "
-        question += "\n Their real name is " + Name
-        question += "\n They are known as " + Ttl
-        question += "\n They are a " + mn + ", a kind of " + rc
-        question += "\n Their alignment: " + al
-        question += "\n They are known for being a " + bg
+        question += "\n Their real name is " + npc.name
+        question += "\n They are known as " + npc.title
+        question += "\n They are a " + npc.subrace + ", a kind of " + npc.race
+        question += "\n Their alignment: " + npc.alignment
+        question += "\n They are known for being a " + npc.background
         question += "\n They are" + tr1 + " They also are " + tr2
-        question += "\n They follow the ideal of " + idl
+        question += "\n They follow the ideal of " + npc.ideal
         question += "\n Also, there's a problem related to the following Plot Hook: " + ph 
         question += "\n Suggest a creative problem that leads to a conflict with the group. This conflict must be specific and well defined, having a certain specific goal, but solvable in many different creative ways. The group of players should be able to adopt a possition of antagonists or allies. Expand details as necessary. One of the possible solutions must be martial, and one must be social."
         question += "\n Write it in the style of " + Style()
@@ -19250,4 +18471,4 @@ def NPC():
         print(f"Encountered an error: {e}")
 
     
-NPC()
+NPC_gen()
