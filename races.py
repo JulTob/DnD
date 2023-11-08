@@ -153,7 +153,7 @@ def Constructs():
         "Golem": 9,                  # Beings made from inanimate material, like clay or stone. Classic magic constructs.
         "Homunculus": 7,             # Miniature, artificially created humanoids.
         "Flying Sword": 7,           # Enchanted weapons that move on their own.
-        "Living Rug": 6,             # Animated carpets or rugs, often serving as traps.
+        "Living Furniture": 6,       # Animated carpets, wardroves, and anything at beast's castle, often serving as traps.
         "Scarecrow": 7,              # Animated scarecrows, often created to protect crops but can be sinister.
         "Clockwork Construct": 8,    # Intricate mechanical beings, often steampunk-inspired.
         "Warforged": 9,              # Sentient constructs made for war, often searching for purpose after conflict.
