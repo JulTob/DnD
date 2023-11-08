@@ -2268,7 +2268,9 @@ def Title():
         "Ruler",
         "Rune Knight",
         "Runebearer",
-        "Runebearer of Midgard",
+        "Runemaker",
+        "Runewritter",
+        "of Midgard",
         "Runechanter",
         "Runekeeper",
         "Rabbit",
@@ -5555,18 +5557,28 @@ def Racial_Names(npc):
         "Ashbel",
         "Atesh",
         "Blaze",
-        "Bodaway", "Brand",
+        "Bodaway",
+        "Brand",
         "Brando",
-        "Branton", "Brent",
-        "Conleth", "Cimbeline",
-        "Cyrus", "Cirio",
-        "Egan", "Finlo",
-        "Fintan", "Flint",
-        "Haco", "Hagan",
+        "Branton",
+        "Brent",
+        "Conleth",
+        "Cimbeline",
+        "Cyrus",
+        "Cirio",
+        "Egan",
+        "Finlo",
+        "Fintan",
+        "Flint",
+        "Haco",
+        "Hagan",
         "Hakan",
-        "Helios", "Elio",
-        "Inigo", "Iñigo",
-        "Ishaan", "Keahi",
+        "Helios",
+        "Elio",
+        "Inigo",
+        "Iñigo",
+        "Ishaan",
+        "Keahi",
         "Keegan",
         "Kenneth",
         "Kiran",
@@ -5702,7 +5714,8 @@ def Racial_Names(npc):
         "Aithne",
         "Aizne",
         "Akiho",
-        "Aldebrand", "Alev",
+        "Aldebrand",
+        "Alev",
         "Alinta", "Amarkeeri",
         "Anala", "Angarika",
         "Apoy", "Ardere",
@@ -5972,24 +5985,39 @@ def Racial_Names(npc):
         "Nortero", "Ostria",
         "Pali", "Santana",
         "Shamal", "Sharki",
-        "Siroco", "Sumatra", "Tramontana", "Tifon", "Zefiros", "Zefiro", "Zefir",
-        "Bora", "Etesian", "Levant", "Levante", "Leveche", "Harmatan", "Karaburan",
+        "Siroco", "Sumatra", "Tramontana",
+        "Tifon", "Zefiros", "Zefiro", "Zefir",
+        "Bora", "Etesian", "Levant", "Levante",
+        "Leveche", "Harmatan", "Karaburan",
         "Buran", "Orosi", "Sarma",
-        "Shamal", "Alisio", "Alize", "Bayamo", "Brisote",
-        "Caju", "Nordeste", "Minuano", "Zonda", "Pampero", "Sudestada", "Cordonazo",
-        "Coromuel", "Norte", "Autan", "Bise", "Brise", "Brisa", "Burle", "Cers",
-        "Cierzo", "Etesian", "Euroclydon", "Fohn", "Gregale", "Helm", "Leveche",
-        "Lodos", "Maestro", "Marin", "Mistral", "Nordes", "Ostro", "Poliente",
-        "Solano", "Tramontane", "Vendavel", "Kona", "Abel", "Aeolus", "AkashAmun",
+        "Shamal", "Alisio", "Alize",
+        "Bayamo", "Brisote",
+        "Caju", "Nordeste", "Minuano",
+        "Zonda", "Pampero", "Sudestada",
+        "Cordonazo",
+        "Coromuel", "Norte", "Autan",
+        "Bise", "Brise", "Brisa", "Burle",
+        "Cers",
+        "Cierzo", "Etesian", "Euroclydon",
+        "Fohn", "Gregale", "Helm", "Leveche",
+        "Lodos", "Maestro", "Marin",
+        "Mistral", "Nordes", "Ostro",
+        "Poliente",
+        "Solano", "Tramontane", "Vendavel",
+        "Kona", "Abel", "Aeolus",
+        "Akash",
+        "Amun",
         "Anan", "Cloud", "Anil", "Nube",
         "Anore", "Arkansas", "Avel", "Barak",
         "Baran", "Brontes", "Caelus", "Corentin",
         "EnlilErjon", "Esen", "Guntur",
         "Keanu", "Matuu", "Mellan", "Moe", "Myrsky",
         "Naseem", "Neifion", "Neil",
-        "Neve", "Nigel", "Notus", "Payne", "Perun",
+        "Neve", "Nigel", "Notus",
+        "Payne", "Perun",
         "Firun", "Samir", "Sepher",
-        "Shu", "Sky", "Stromur", "Sturm", "Thor",
+        "Shu", "Sky", "Stromur",
+        "Sturm", "Thor",
         "Thunder", "Storm", "Torm", "Tufani",
         "Van", "Zenith", "Zephyr", "Zeus", "Aella",
         "Aethra", "Ahana", "Alize", "Amihan",
@@ -6064,9 +6092,21 @@ def Racial_Names(npc):
     if Type == "Elemental": 
         Names = Elementals
         Surnames = Elementals
-        FullNames =  random.choice(Names) + ' ' + random.choice(Surnames)
-        return FullNames
+        try: 
+            namer = MarkovNameGenerator(Names)
+            Name = namer.generate_name()
+            surnamer = MarkovNameGenerator(Surnames)
+            Surname = surnamer.generate_name()
 
+            
+            FullName =  Name + ' ' + Surname
+            #FullNames =  random.choice(Names) + ' ' + random.choice(Surnames) 
+            
+        except:
+            FullName =  random.choice(Names) + ' ' + random.choice(Surnames) 
+
+        return FullName
+    
     Avens = [
         "Murder",
         "Corvid",
@@ -6128,8 +6168,11 @@ def Racial_Names(npc):
         "Raven",
         "Rook",
         "Corax", "Burung",
-        "Gagak", "Uwak", "Uko",
-        "Varju", "Tsov", "Kaua",
+        "Gagak",
+        "Uwak", "Uko",
+        "Varju",
+        "Tsov",
+        "Kaua",
         "Koo", "Hankaka",
         "Kagado", "Yryvu",
         "Koraki", "Qvavi",
@@ -6333,13 +6376,20 @@ def Racial_Names(npc):
         "Pipim",
         "Crim",
         "Pint",
-        "Chocolaty", "Love", "Afiry", "Cuki",
-        "Chunk", "Dairy", "Peanut", "Buter",
-        "Cake", "Milk", "Cone", "Canoli",
-        "Caramel", "Canela", "Chis", "Chery", "Chip",
-        "Browny", "Chuby", "Tofy", "Cofy",
-        "Dublin", "Bake", "Joint", "Widy", "Milky",
-        "Minty", "Cuky", "Pistacho", "Pumpin",
+        "Chocolaty",
+        "Love", "Afiry", "Cuki",
+        "Chunk", "Dairy",
+        "Peanut", "Buter",
+        "Cake", "Milk",
+        "Cone", "Canoli",
+        "Caramel", "Canela",
+        "Chis", "Chery", "Chip",
+        "Browny", "Chuby",
+        "Tofy", "Cofy",
+        "Dublin", "Bake",
+        "Joint", "Widy", "Milky",
+        "Minty", "Cuky",
+        "Pistacho", "Pumpin",
         "Almond", "Fresy", "Berry", "Cake", "Vanilla",
         "Sutra", "Tiramisu", "Whisky", "Bacon",
         "Banana", "Beer", "Bluemoon", "Bubble", "Gum",
@@ -6371,21 +6421,33 @@ def Racial_Names(npc):
         "Plum", "Praline",
         "Vino", "Pumpkin",
         "Raisin", "Rose",
-        "Rum", "Tangerine",
-        "Violet", "Walnut", "Oreo",
-        "Avocado", "Amaretto",
+        "Rum",
+        "Tangerine",
+        "Violet",
+        "Walnut",
+        "Oreo",
+        "Avocado",
+        "Amaretto",
         "Almendra",
-        "Aguacate", "Amarula",
-        "Aqua", "Burbon",
+        "Aguacate",
+        "Amarula",
+        "Aqua",
+        "Burbon",
         "Cognac",
-        "Chai", "Creme",
-        "Coconut", "Pie",
-        "Tarta", "Choc",
-        "Custard", "Dorian",
+        "Chai",
+        "Creme",
+        "Coconut",
+        "Pie",
+        "Tarta",
+        "Choc",
+        "Custard",
+        "Dorian",
         "Elderflower",
         "Evermint",
-        "Fresa", "Fraise",
-        "Fejoa", "Fragola",
+        "Fresa",
+        "Fraise",
+        "Fejoa",
+        "Fragola",
         "Fruitella",
         "Granada",
         "Granadilla",
@@ -6397,20 +6459,33 @@ def Racial_Names(npc):
         "Habanero",
         "Puro",
         "Cigarro",
-        "Hunny", "Honey", "Miel",
-        "Crema", "Limon", "Cafe",
-        "Kinder", "Kitkat", "Leche",
-        "Piruleta", "Nougat",
-        "Neapolitana", "Neopolitan",
-        "Nectarina", "Nuggets",
+        "Hunny",
+        "Honey",
+        "Miel",
+        "Crema",
+        "Limon",
+        "Cafe",
+        "Kinder",
+        "Kitkat",
+        "Leche",
+        "Piruleta",
+        "Nougat",
+        "Neapolitana",
+        "Neopolitan",
+        "Nectarina",
+        "Nuggets",
         "Orange",
         "Naranja",
         "Onion",
         "Cebolla",
-        "Oresos", "Orchid",
+        "Oresos",
+        "Orchid",
         "Orangina",
-        "Cacahuete", "Mani",
-        "Peach", "Pomme", "Pera",
+        "Cacahuete",
+        "Mani",
+        "Peach",
+        "Pomme",
+        "Pera",
         "Rubarb",
         "Raisin",
         "Toblerone",
@@ -6626,8 +6701,22 @@ def Racial_Names(npc):
     if Type == "Halfling": 
         Names = Halflings
         Surnames = HalflingSurnames
-        FullNames =  random.choice(Names) + ' ' + random.choice(Names) + ' ' + random.choice(Surnames)
-        return FullNames
+        try: 
+            namer = MarkovNameGenerator(Names)
+            Name = namer.generate_name()
+            Name2 = namer.generate_name()
+            surnamer = MarkovNameGenerator(Surnames)
+            Surname = surnamer.generate_name()
+            #Surname2 = surnamer.generate_name()
+
+            
+            FullName =  Name + ' ' +  Name2 + ' ' + Surname #+ ' ' + Surname2 
+            #FullNames =  random.choice(Names) + ' ' + random.choice(Surnames) 
+            
+        except:
+            FullName =  random.choice(Names) + ' ' + random.choice(Names) + ' ' + random.choice(Surnames) #+ ' ' + random.choice(Surnames)
+
+        return FullName
     
     Gnomes = [
         "Lando",
@@ -6673,25 +6762,39 @@ def Racial_Names(npc):
         "Cecilia",
         "Canasi",
         "Basariona",
-        "Maneli", "Candet",
-        "Wedekind", "Romuald",
-        "Guido", "Reinhold",
-        "Hartwig", "Sunnhild",
+        "Maneli",
+        "Candet",
+        "Wedekind",
+        "Romuald",
+        "Guido",
+        "Reinhold",
+        "Hartwig",
+        "Sunnhild",
         "Linde",
-        "Gerlinde", "Huguette",
-        "Engel", "Ralf", "Norbert",
-        "Alberich", "Waldemar",
+        "Gerlinde",
+        "Huguette",
+        "Engel",
+        "Ralf",
+        "Norbert",
+        "Alberich",
+        "Waldemar",
         "Markolf",
-        "Guerino", "Hugo",
-        "Hugh", "Donella",
-        "Cristofano", "Bernardo",
+        "Guerino",
+        "Hugo",
+        "Hugh",
+        "Donella",
+        "Cristofano",
+        "Bernardo",
         "Martinella",
-        "Caldarini", "Ludovico",
+        "Caldarini",
+        "Ludovico",
         "Lorenzino",
         "Fiorino",
         "Bellando",
-        "Cerzino", "Ortanio",
-        "Dellini", "Vezzoli", 
+        "Cerzino",
+        "Ortanio",
+        "Dellini",
+        "Vezzoli", 
         "Zanetti",
         "Graziano",
         "Orlando",
@@ -6710,15 +6813,20 @@ def Racial_Names(npc):
         "Federica",
         "Malatesta",
         "Barbato",
-        "Fabbretti", "Calisto",
+        "Fabbretti",
+        "Calisto",
         "Venturi", 
-        "Vigorito", "Calandra",
+        "Vigorito",
+        "Calandra",
         "Fiorenza",
         "Catania",
         "Cortese",
-        "Murano", "Lorez", 
-        "Granito", "Fiesoli",
-        "Jovanni", "Basso",
+        "Murano",
+        "Lorez", 
+        "Granito",
+        "Fiesoli",
+        "Jovanni",
+        "Basso",
         "Nerezza",
         "Celestina",
         "Canelli", 
@@ -6850,9 +6958,23 @@ def Racial_Names(npc):
     if Type == "Gnome": 
         Names = Gnomes
         Surnames = GnomesSurnames
-        
-        FullNames =  random.choice(Names) + ' ' + random.choice(Names) + ' ' + random.choice(Surnames) + ' ' + random.choice(Surnames) + ' ' + random.choice(Surnames) + ' ' + random.choice(Surnames)
-        return FullNames
+        try: 
+            namer = MarkovNameGenerator(Names)
+            Name = namer.generate_name()
+            Name2 = namer.generate_name()
+            surnamer = MarkovNameGenerator(Surnames)
+            Surname = surnamer.generate_name()
+            Surname2 = surnamer.generate_name()
+            Surname3 = surnamer.generate_name()
+            Surname4 = surnamer.generate_name()
+
+            
+            FullName =  Name + ' ' +  Name2 + ' ' + Surname + ' ' + Surname2 + ' ' + Surname3 + ' ' + Surname4 
+            
+        except:
+            FullName =  random.choice(Names) + ' ' + random.choice(Names) + ' ' + random.choice(Surnames) + ' ' + random.choice(Surnames) + ' ' + random.choice(Surnames) + ' ' + random.choice(Surnames)
+
+        return FullName
 
 
     Tieflings = [
@@ -7282,10 +7404,14 @@ def Racial_Names(npc):
         "Fury",
         "Furia",
         "Eurynomus",
-        "Forneus", "Fortea",
-        "Flauros", "Hauras",
-        "Haurus", "Foras",
-        "Furcas", "Furfur",
+        "Forneus",
+        "Fortea",
+        "Flauros",
+        "Hauras",
+        "Haurus",
+        "Foras",
+        "Furcas",
+        "Furfur",
         "Gadreel",
         "Gadriel", "Garadriel",
         "Gediel", "Gemori",
@@ -7332,9 +7458,18 @@ def Racial_Names(npc):
         "Lerajie",
         "Oary",
         "Leviatan",
-        "Liliz", "Lucifer", "Luzer", "Lutin",
-        "Macariel", "Malgaras", "Malphas", "Malpas",
-        "Marbas", "Maseriel", "Mazaquin", "Mazzikin",
+        "Liliz",
+        "Lucifer",
+        "Luzer",
+        "Lutin",
+        "Macariel",
+        "Malgaras",
+        "Malphas",
+        "Malpas",
+        "Marbas",
+        "Maseriel",
+        "Mazaquin",
+        "Mazzikin",
         "Mazikin",
         "Mazakin",
         "Menadiel",
@@ -7613,8 +7748,16 @@ def Racial_Names(npc):
         ]
     if Type == "Fiend":
         Names = Tieflings
-        
-        return random.choice(Names)
+        try: 
+            namer = MarkovNameGenerator(Names)
+            Name = namer.generate_name()
+            
+            FullName =  Name 
+            
+        except:
+            FullName =  random.choice(Names)
+            
+        return FullName        
 
 
 
@@ -7678,20 +7821,55 @@ def Racial_Names(npc):
         "Garag", "Axal", "Axagi",
         "Talala", "Azari", "Rajma", "Axar",
         "Ralan", "Azax", "Vala", "Radus", "Azava",
-        "Pilax", "Talxa", "Azar", "Azahar", "Rhana",
-        "Azaja", "Aldan", "Selan", "Azals", "Chandar",
-        "Azav", "Doby", "Susal", "Azag", "Azan",
-        "Azal", "Wari", "Azag",
-        "Azaril", "Nadag", "Azaja",
-        "Gungi", "Buda", "Ralar", "Udala",
-        "Elge", "Azaxar", "Dris",
-        "Gana", "Udar", "Elida",
-        "Azan", "Alad", "Ravanda", "Nals",
-        "Pic", "Aby", "Mada", "Rorna", "Amba",
-        "Ardun", "Azariga", "Duna",
-        "Buada", "Vagi",
-        "Azava", "Guna", "Amal", "Azav", "Ralan",
-        "Ralav", "Rajad", "Talsi",
+        "Pilax", "Talxa", "Azar",
+        "Azahar", "Rhana",
+        "Azaja", "Aldan",
+        "Selan",
+        "Azals",
+        "Chandar",
+        "Azav",
+        "Doby",
+        "Susal",
+        "Azag",
+        "Azan",
+        "Azal",
+        "Wari",
+        "Azag",
+        "Azaril",
+        "Nadag",
+        "Azaja",
+        "Gungi",
+        "Buda",
+        "Ralar",
+        "Udala",
+        "Elge",
+        "Azaxar",
+        "Dris",
+        "Gana",
+        "Udar",
+        "Elida",
+        "Azan",
+        "Alad",
+        "Ravanda",
+        "Nals",
+        "Pic",
+        "Aby",
+        "Mada",
+        "Rorna",
+        "Amba",
+        "Ardun",
+        "Azariga",
+        "Duna",
+        "Buada",
+        "Vagi",
+        "Azava",
+        "Guna",
+        "Amal",
+        "Azav",
+        "Ralan",
+        "Ralav",
+        "Rajad",
+        "Talsi",
         "Amal", "Rarid",
         "Randa", "Amazo",
         "Wava", "Magus",
@@ -7871,10 +8049,17 @@ def Racial_Names(npc):
 
         ]
     if Type == "Goblin":
-        Names += Goblins 
-        namer = MarkovNameGenerator(Names)
-        
-        return namer.generate_name() + " of the " + random.choice(Clans)
+        Names += Goblins
+        try: 
+            namer = MarkovNameGenerator(Names)
+            Name = namer.generate_name()
+            
+            FullName =  Name 
+            
+        except:
+            FullName =  random.choice(Names)
+            
+        return FullName + " of the " + random.choice(Clans)
 
 
 
@@ -7882,6 +8067,7 @@ def Racial_Names(npc):
         Beasts = []
         
         Names += Beasts
+
         
     
     if Type == "Plant":
@@ -7925,7 +8111,7 @@ def Racial_Names(npc):
 
     if Type == "Undead":
         Undeads = []
-        Names += Plants
+        Names += Undeads
 
         
 
@@ -7968,36 +8154,41 @@ def Racial_Names(npc):
 
     if Type == "Kobold":
         Kobold_Names = [
+            "Aki",
+            "Assik",
+            "Bik",
+            "Biki",
+            "Bakaki",
             "Deekin",
-            "Meepo",
-            "Tucker",
-            "Snick",
-            "Kib",
-            "Sniv",
-            "Eek",
-            "Pog",
-            "Urdo",
-            "Kurtulmak",
             "Durnn",
+            "Eek",
+            "Kurtulmak",
+            "Kib",
+            "Meepo",
             "Hox",
-            "Zik",
-            "Slythe",
             "Grit",
-            "Nak-Nak",
+            "Naknak",
             "Fizban",
-            "Zax",
-            "Skizziks",
             "Gnarl",
-            "Torch",
             "Grizzle",
+            "Kratch",
+            "Pog",
+            "Ratch",
+            "Scamp",
+            "Snarl",
+            "Skizziks",
+            "Snick",
+            "Sniv",
             "Squee",
             "Sqwik",
-            "Kratch",
+            "Slythe",
+            "Torch",
+            "Tucker",
+            "Urdo",
             "Whiskar",
-            "Scamp",
-            "Ratch",
             "Yipper",
-            "Snarl"
+            "Zax",
+            "Zik",
         ]
         Names += Kobold_Names
 
@@ -8306,9 +8497,17 @@ def Racial_Names(npc):
         Names += Celestials
 
         
+    try: 
+        namer = MarkovNameGenerator(Names)
+        Name = namer.generate_name()
+            
+        FullName =  Name 
+            
+    except:
+        FullName =  random.choice(Names)
 
-    namer = MarkovNameGenerator(Names)
-    return namer.generate_name()
+    return FullName 
+
 
 
 from collections import defaultdict
