@@ -7,7 +7,7 @@ from npc_namer import Title, Racial_Names
 
 from backgrounds import Background
 
-from races import Race
+from races import Race, Monster
 
 
 def Dice(D=6):
