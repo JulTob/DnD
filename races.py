@@ -27,8 +27,6 @@ def Race():
         "Plant": 17,
         "Snakefolk": 16,
         "Undead": 19,
-        "Beholder": 0,
-        "Vampire":0,
         "": 0
     }
     
@@ -44,7 +42,8 @@ def Aberrations():
         "Dominators": 5,        # Slave traders with a unique hierarchy.
         "Living Spell": 6,      # Former wizards transformed into monstrous forms.
         "Chaotic": 6,           # Representing pure chaos, they're unpredictable.
-        "Star Spawn": 5,        # Cosmic horror element.
+        "Star Titan": 5,        # Cosmic horror element.
+        "Alien Spawn": 5,       # Cosmic horror element.
         "Parasyte": 4,          # Parasitic entities that can control other beings.
         "Destiny Devouers": 4,  # Time-traveling and body-swapping aliens.
         "Githyanki": 7,         # Raiders and conquerors.
@@ -63,7 +62,6 @@ def Avens():
         "Tengu": 6,       # Martial arts and folklore connections.
         "Raptoran": 5,    # Mountain dwellers with a unique flight lifecycle.
         "Owlin": 5,       # Owl-like Nocturnal and wise.
-        "": 0             # Empty choice for variety.
     }
     return random.choices(list(Names.keys()), weights=Names.values(), k=1)[0]
 
@@ -105,7 +103,7 @@ def Beastfolks():
         "Jackalmen": 6,        # Often seen in Egyptian mythologies, associated with the afterlife.
         "Kitsune": 8,          # Japanese fox spirits, both mischievous and wise.
         "Lycan": 7,            # General term for were-creatures, known for their cursed transformations.
-        "Lion": 5,
+        "Leonid": 5,
         "Merfolk": 9,          # Classic creatures of the sea, representing both beauty and danger.
         "Minotaur": 8,         # The embodiment of the labyrinth's mystery and challenge.
         "Ratfolk": 7,          # Clever, opportunistic, and often seen in urban settings.
@@ -141,6 +139,8 @@ def Celestials():
         "Ki-rin": 7,              # Eastern counterpart to unicorns, symbols of wisdom.
         "Deva": 8,                # Divine beings in Hindu mythology, often in conflict with Asuras.
         "Archon": 8,              # Beings of pure law and good, often in opposition to demons and devils.
+        "Archangel": 5,
+        "Avatar": 5,
         "": 1}
 
     return random.choices(list(Names.keys()), weights=Names.values(), k=1)[0]
@@ -151,7 +151,7 @@ def Constructs():
         "Animated Armor": 8,         # Empty suits of armor brought to life, often as guardians.
         "Drone": 7,                  # Modern or futuristic unmanned devices, often for reconnaissance.
         "Golem": 9,                  # Beings made from inanimate material, like clay or stone. Classic magic constructs.
-        "Homunculus": 7,             # Miniature, artificially created humanoids.
+        "Homunculus": 7,             # Full Metal Alchemist's style created humanoids.
         "Flying Sword": 7,           # Enchanted weapons that move on their own.
         "Living Furniture": 6,       # Animated carpets, wardroves, and anything at beast's castle, often serving as traps.
         "Scarecrow": 7,              # Animated scarecrows, often created to protect crops but can be sinister.
@@ -213,7 +213,7 @@ def Elementals():
     "Hyperian": 7,       # Radiant, solar-powered.
     "Oceanians": 9,      # Depths, tides, storms.
     "Primordial": 7,     # Fundamental forces of reality.
-    "Promethean": 8,     # Fire or spirit of innovation.
+    "Promethean": 8,     # Fire, electricity, and energy, with spirit of innovation.
     "Salamandrian": 10,  # Associated with fire.
     "Titan": 8,          # Raw elemental power.
     "Uranians": 8,       # Sky, stars, celestial magic.
@@ -285,7 +285,6 @@ def Feys():
         "Nexus Fey": 6,       # Fey connected to a connection point
         "Duende": 5,          # Fey of the arts, beauty, and nature. Tricksters.
         "Home Lares": 4,      # Guardians of homes and families
-        "Will-o'-the-wisp": 6,  # Ghostly lights that lure travelers away from paths
         "Fata": 5              # Fae that intervine in someone's fate
     }
     return random.choices(list(Names.keys()), weights=Names.values(), k=1)[0]
@@ -302,7 +301,7 @@ def Giants():
         "Oni": 7,                    # Japanese ogre-like giants
         "Ettin (Two headed)": 6,     # English two-headed giants
         "Fomorians (Sea Giants)": 5, # Irish sea giants
-        "Goliath": 5,                # Biblical Philistine giant
+        "Goliath": 5,                # Half Giants
         "Cloud Giant": 7,            # Noble sky dwellers
         "Stone Giant": 7,            # Earthy, rocky giants
         "Storm Giant": 6             # Majestic tempest giants
@@ -393,19 +392,19 @@ def Oozes():
 
 def Orcs():
     Names = {
-        "Mountain Orc": 5,
-        "Desert Orc": 5,
-        "Swamp Orc": 6,
-        "Snow Orc": 4,
+        "Mountain": 5,
+        "Desert": 5,
+        "Swamp": 6,
+        "Snow": 4,
         "Uruk": 6,
         "Half-Orc": 7,
-        "Orog (Underdark Orc)": 5,
-        "Cave Orc": 6,
-        "Forest Orc": 6,
-        "Nomadic Orc": 7,
-        "Island Orc": 6,
-        "Urbanite Orc": 9,
-        "Feral Orc": 7
+        "Orog (Underdark)": 5,
+        "Cave": 6,
+        "Forest": 6,
+        "Nomadic": 7,
+        "Island": 6,
+        "Urbanite": 9,
+        "Feral": 7
         
     }
     return random.choices(list(Names.keys()), weights=Names.values(), k=1)[0]
@@ -436,48 +435,42 @@ def Plants():
 
 def Undeads():
     Names = {
-            "Death Knight": 5,           # Elite undead warriors, remnants of former knights or warlords.
-            "Honor Phantom": 7,          # Ethereal spirits bound by duty or a promise made in life.
-            "Regret Ghost": 8,           # Souls trapped due to unfinished business or profound regrets.
-            "Lich": 4,                   # Undying mages who sought eternal life through dark rituals.
-            "Pride Mummy": 6,            # Preserved dead, animated to guard ancient tombs and relics.
-            "Mischief Poltergeist": 7,   # Playful spirits, causing disturbances to attract attention.
-            "Vengeful Revenant": 5,      # Resurrected by sheer force of will to enact revenge.
-            "Skeleton Protector": 9,     # Animated skeletal guardians, defending locations or treasures.
-            "Thinker Skull": 7,          # Knowledgeable remnants, often used by dark mages for counsel.
-            "Fear Shadow": 7,            # Undead born from intense fear, lurking in darkness.
-            "Despair Specter": 8,        # Souls that suffered tremendous despair, wishing the same for the living.
-            "Vampire": 5,                # Bloodsucking undead, intelligent and driven by hunger and desire.
-            "Prideful Wight": 6,         # Powerful undead often found leading other lesser undead.
-            "Cursed Eternal": 7,         # Mindless undead, driven by a hunger for the living.
-            "Wraith": 6,                 # Souls consumed by anger, seeking to draw others into death.
-            "Lone Lover": 6,             # Animated by profound love or loss, searching for their beloved.
-            "Weeping Howler": 5,         # Spirits that mourn and wail, often announcing death.
-            "Tomb's Hoarder": 5,         # Guardians of burial sites, obsessed with their treasures.
-            "Penance Wraith": 5,         # Souls seeking atonement for sins committed in life.
-            "Protector Spirit": 7        # Benevolent spirits still guarding a place, object, or person.
+            "Death Knight": 8,           # Elite undead warriors, remnants of former knights or warlords.
+            "Honor Phantom": 10,         # Ethereal spirits bound by duty or a promise made in life.
+            "Regret Ghost": 11,          # Souls trapped due to unfinished business or profound regrets.
+            "Lich": 7,                   # Undying mages who sought eternal life through dark rituals.
+            "Pride Mummy": 9,            # Preserved dead, animated to guard ancient tombs and relics.
+            "Mischief Poltergeist": 10,  # Playful spirits, causing disturbances to attract attention.
+            "Vengeful Revenant": 8,      # Resurrected by sheer force of will to enact revenge.
+            "Skeleton Protector": 12,    # Animated skeletal guardians, defending locations or treasures.
+            "Thinker Skull": 10,         # Knowledgeable remnants, often used by dark mages for counsel.
+            "Fear Shadow": 10,           # Undead born from intense fear, lurking in darkness.
+            "Despair Specter": 11,       # Souls that suffered tremendous despair, wishing the same for the living.
+            "Vampire": 18,               # Bloodsucking undead, intelligent and driven by hunger and desire.
+            "Prideful Wight": 9,         # Powerful undead often found leading other lesser undead.
+            "Cursed Eternal": 10,        # Mindless undead, driven by a hunger for the living.
+            "Wraith": 9,                 # Souls consumed by anger, seeking to draw others into death.
+            "Lone Lover": 9,             # Animated by profound love or loss, searching for their beloved.
+            "Weeping Howler": 8,         # Spirits that mourn and wail, often announcing death.
+            "Tomb's Hoarder": 8,         # Guardians of burial sites, obsessed with their treasures.
+            "Penance Wraith": 8,         # Souls seeking atonement for sins committed in life.
+            "Protector Spirit": 10       # Benevolent spirits still guarding a place, object, or person.
         }
     return random.choices(list(Names.keys()), weights=Names.values(), k=1)[0]
 
 def Humans():
     Types = {
         "Local": 30,       
-        "Foreigner": 20,    
-        "Exotic": 10,       
-        "Well dressed":10,
+        "Foreigner": 20,
+        "Highlander": 15,
+        "Nomad": 15,
+        "Islander": 12,
+        "Forester": 11,
+        "Plainsfolk": 10,
         "Humble":10,
-        "Healty": 20,
-        "Strong": 5,
-        "Big": 6,
-        "Thin": 4,
-        "Athletic": 5,
-        "Sickly": 5,
-        "Pretty": 5,
-        "Rough": 5,
-        "Elegant": 5,
-        "Old":5,
-        "Young":5,
-        "Attractive":5
+        "Urbanite":9,
+        "Exotic": 3,       
+        "Wealthy":2,
         }
     
     chosen_type = random.choices(list(Types.keys()), weights=Types.values(), k=1)[0]
@@ -575,23 +568,10 @@ def Kobolds():
 
     return f"{chosen_color} {chosen_type}"
 
-    Types = {
-        "Swamp Crocfolk": 8,
-        "Jungle Guanafolk": 7,
-        "Desertic Horned": 5,
-        "Dune Dino":4,
-        "White Albino": 1,
-        "Feathered Dinofolk":5,
-        "Colored Chamalfolk":3,
-        "Titan Rex": 3,
-        "Tundra Saurius": 3
-        }
-    
-    chosen_type = random.choices(list(Types.keys()), weights=Types.values(), k=1)[0]
-    
-    return f"{chosen_type} "
-
 def Monster(Type):
+    return Creature(Type)
+
+def Creature(Type):
     type_function_map = {
         "Aberration": Aberrations,
         "Aven": Avens,
@@ -619,6 +599,13 @@ def Monster(Type):
     }
 
     if Type in type_function_map:
-        return type_function_map[Type]()
+        subrace = type_function_map[Type]()
     else:
-        return f"Is an unknown type of {Type}!"
+        subrace = f"Is an unknown type of {Type}!"
+
+    if Type == "Undead":
+        Dead = Race()
+        if Dead in type_function_map:
+            subrace += f" - Undead {Dead}: {type_function_map[Dead]()}"
+
+    return subrace
