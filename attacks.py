@@ -3,20 +3,21 @@ import random
 import dnd
 
 def Dice(D=6,N=1):
-    return dnd.Dice(D=6,N=1)
+    return dnd.Dice(D=D,N=N)
 
 def PB(level):
     return dnd.PB(level)
 
-def Attack(Type,npc):
+def Attack(npc):
     PB = npc.proficiency_bonus
     STR = npc.ability_scores.str_mod
     DEX = npc.ability_scores.dex_mod
     
     sign_str = '+' if STR >= 0 else ''
     sign_dex = '+' if DEX >= 0 else ''
-    
 
+    creature_type = npc.background + ' ' + npc.race + ' ' + npc.subrace
+    
     SimpleMeleeWeapons = [
         f"Rock, {Dice(PB-1)}d6 {sign_str}{STR} Bludgeoning, 25/50 thrown",
         f"Fists, {Dice(PB-1)}d4 {sign_str}{STR} Bludgeoning",
@@ -26,7 +27,7 @@ def Attack(Type,npc):
         f"Claws, {Dice(PB-1)}d4 {sign_str}{STR} Slashing",
         f"Claws, {Dice(PB-1)}d6 {sign_str}{STR} Slashing",
         f"Club, {Dice(PB-1)}d4 {sign_str}{STR} Bludgeoning",
-        f"Dagger, {Dice(PB-1)}d4 {sign_str}{STR}Piercing, 20/60 thrown",
+        f"Dagger, {Dice(PB-1)}d4 {sign_str}{STR} Piercing, 20/60 thrown",
         f"Dagger, {Dice(PB-1)}d4 {sign_dex}{DEX} Piercing, 20/60 thrown",
         f"GreatClub, {Dice(PB-1)}d8 {sign_str}{STR} Bludgeoning",
         f"Handaxe, {Dice(PB-1)}d6 {sign_str}{STR} Slashing, 20/60 thrown",
@@ -41,14 +42,21 @@ def Attack(Type,npc):
         f"Spear, {Dice(PB)+1}d8 {sign_str}{STR} Piercing, 20/60 thrown",
         f"Nunchaku, {Dice(PB-1)}d6 {sign_str}{STR} Bludgeoning"
         ]
+
     
+    if "Beast" in creature_type or "Dragon" in creature_type or "Kobold" in creature_type:
+        SimpleMeleeWeapons += [
+            f"\n- Bite, {Dice(PB-1)}d6 {sign_str}{STR} Piercing, and the target is grappled (escape DC {8+npc.ability_scores.str_mod+PB}). Until this grapple ends, the target is restrained, and the {npc.race} can't bite another target.",
+            f"\n- Bite, {Dice(PB-1)}d10 {sign_str}{STR} Piercing.",
+            ]
+        
     SimpleRangedWeapons = [
         f"Rock, {Dice(PB-1)}d6 {sign_str}{STR} Bludgeoning, 25/50 thrown",
         f"Light Crossbow, {Dice(PB-1)}d8 {sign_dex}{DEX} Piercing, 80/320 range",
         f"Dart, {Dice(PB-1)}d4 {sign_dex}{DEX} Piercing, 20/60 range",
         f"Dart, {Dice(PB-1)}d4 {sign_str}{STR} Piercing, 20/60 range",
         f"Shortbow, {Dice(PB-1)}d6 {sign_dex}{DEX} Piercing, 80/320 range",
-        f"Sling, {Dice(PB-1)}d4 {sign_dex}{DEX} Bludgeoning, 30/120 range",
+        f"Sling, {Dice(Dice(PB-1))}d4 {sign_dex}{DEX} Bludgeoning, 30/120 range",
         f"Light Crossbow, {Dice(PB-1)}d8 {sign_dex}{DEX} Piercing, 80/320 range, loading, two handed"
         ]
     
@@ -92,17 +100,62 @@ def Attack(Type,npc):
         f"Musket, {Dice(PB-1)+1}d10 {sign_dex}{DEX} Piercing, 60/180 range, Loading, Jamming: On an attack roll of 1, the gun jams and requires an action to clear before it can be fired again.",
         f"Blunderbuss, {Dice(PB)+2}d10 {sign_dex}{DEX} Fire, 10/30 range, Loading, Exploding: On an attack roll of 1, the gun explodes and requires a short rest fixing it before it can be fired again. You don't gain the benefits of that short rest."
         ]
+    
+    selection = SimpleMeleeWeapons + SimpleRangedWeapons
 
-    if Type == "Melee" or Type == 1:
-        return random.choice(SimpleMeleeWeapons)
-    elif Type == "Ranged" or Type == 2:
-        return random.choice(SimpleRangedWeapons)
-    elif Type == "Martial" or Type == "MartialMelee" or Type == 3:
-        return random.choice(MartialMeleeWeapons)
-    elif Type == "RangedMartial" or Type == 4:
-        return random.choice(MartialRangedWeapons)
-    else:
-        return random.choice(SimpleMeleeWeapons+SimpleRangedWeapons+MartialMeleeWeapons+MartialRangedWeapons)
+    if "Bandit" in creature_type:
+        selection += MartialMeleeWeapons + MartialRangedWeapons
+
+    if "Barbarian" in creature_type:
+        selection += MartialMeleeWeapons + MartialRangedWeapons
+
+    if "Berserker" in creature_type:
+        selection += MartialMeleeWeapons + MartialRangedWeapons
+
+    if "Cleric" in creature_type:
+        selection += MartialMeleeWeapons
+
+    if "Criminal" in creature_type:
+        selection += MartialMeleeWeapons + MartialRangedWeapons
+
+    if "Guard" in creature_type:
+        selection += MartialMeleeWeapons + MartialRangedWeapons
+
+    if "Hero" in creature_type:
+        selection += MartialMeleeWeapons + MartialRangedWeapons
+
+    if "Hunter" in creature_type:
+        selection += MartialRangedWeapons
+
+    if "Knight" in creature_type:
+        selection += MartialMeleeWeapons
+
+    if "Monk" in creature_type:
+        selection += MartialMeleeWeapons + MartialRangedWeapons
+
+    if "Noble" in creature_type:
+        selection += MartialMeleeWeapons + MartialRangedWeapons
+
+    if "Pirate" in creature_type:
+        selection += MartialMeleeWeapons + MartialRangedWeapons
+
+    if "Ranger" in creature_type:
+        selection += MartialRangedWeapons
+
+    if "Soldier" in creature_type:
+        selection += MartialMeleeWeapons + MartialRangedWeapons
+
+    if "Rogue" in creature_type:
+        selection += MartialMeleeWeapons + MartialRangedWeapons
+
+    if "Spy" in creature_type:
+        selection += MartialMeleeWeapons + MartialRangedWeapons
+
+    if "Warrior" in creature_type:
+        selection += MartialMeleeWeapons + MartialRangedWeapons
+
+
+    return random.choice(selection)
 
 
 
@@ -212,7 +265,7 @@ def Recovery(con):
 
 
 
-def SpecialAttack(Type, npc):
+def SpecialAttack(npc):
     Lvl = npc.level
     Mod = PB(npc.level) + random.choice([npc.ability_scores.str_mod,npc.ability_scores.dex_mod,npc.ability_scores.con_mod,
                                     npc.ability_scores.int_mod, npc.ability_scores.wis_mod, npc.ability_scores.cha_mod])
@@ -220,14 +273,14 @@ def SpecialAttack(Type, npc):
     DEX=npc.ability_scores.dex_mod
     dmg = Damage()
     con = Condition(dmg)
-    r = ""
+    r = f"Special Attack: {Dice(npc.PB())} use(s) per combat. \n\t"
 
     # Basic attack description    
-    r += Attack(Type, npc) + " +"
+    r += Attack(npc) + " +"
 
     # Damage calculation
-    damage_die = random.choice(["d4", "d6", "d8", "d10", "d12"])
-    r += "{}".format(Dice(PB(Lvl)//2) + Dice(2))
+    damage_die = random.choice(["d4", "d6", "d8", "d10"])
+    r += "{}".format(Dice(1 + PB(Lvl)//4))
     r += damage_die + " "
     r += dmg
     r += " dmg"
