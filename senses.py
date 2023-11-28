@@ -112,9 +112,9 @@ def Senses(npc):
         if Dice()==1: extras += chameleon_skin
         if Dice()==1: extras += sunlight_sensitivity
     if race == "Aven":
-        normal      += Dice(2) * Dice(6) * 30
-        darkvision  += Dice(0) * Dice(6) * 30
-        blindsight  += Dice(0) * Dice(3) * 10
+        normal      += Dice(3) * Dice(6) * 30
+        darkvision  += Dice(0) * Dice(3) * Dice(3) * Dice(2) * 10
+        blindsight  += Dice(0) * Dice(0) * Dice(3) * 10
         tremorsense -= Dice(0) * Dice(0) * 10
         telepathy   += Dice(0) * Dice(6) * 10
         truesight   += Dice(0) * Dice(0) * 10
@@ -125,7 +125,7 @@ def Senses(npc):
         if Dice(12)==1: extras += aura_sense
         if Dice()==1: extras += sensory_dampening
         if Dice(12)==1: extras += blind_fighting
-        if Dice==1: extras += mimicry
+        if "Kenku" in npc.subrace: extras += mimicry
         if Dice()==1: extras += hold_breath
 
     if race == "Beast":
