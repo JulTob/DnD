@@ -18,7 +18,7 @@ def PlotHook(npc):
         "I'm trapped. Could you please help me?",
         "I'm infiltrating a corrupt organization to take it down from the inside.",
         "I'm looking for a child that was taken from my kind.",
-        "I am a gladiator entertainer. I need to give a good spectacle to provide for my kind.",
+        "I am a gladiator entertainer. I need to give a good spectacle.",
         "I shall prove myself in the Arena.",
         "I shall gain fame and fortune in the Arena.",
         "One from my kind was killed. I seek revenge.",
@@ -59,7 +59,7 @@ def PlotHook(npc):
         "An item with personal value was stolen from me, and I burn with the desire to recover it.",
         "Someone I love was killed by a rival kind, and I will have revenge.",
         "I love someone from another kind, but the relationship is forbidden.",
-        "I was exiled for a crime I didn't commit.",
+        "I was exiled for a crime I didn't commit. I need to go back and clean my name.",
         "I keep my thoughts and discoveries in a journal. My journal is my legacy. I just lost it!",
         "A monster that slaughtered dozens of innocent people spared my life, and I don’t know why. I am certain it follows me since.",
         "I protect those who cannot protect themselves.",
@@ -220,6 +220,164 @@ def PlotHook(npc):
         "I'm searching for a friend captured by an elusive enemy.",
         "My commander betrayed my unit, and I will have revenge.",
         ""]
+    
+    if "Good" in npc.alignment:
+        Hooks += [
+            "I am a healer dedicated to eradicating a plague that is deevastating my homeland.",
+            "As a former soldier, I now seek to protect the innocent under the horrors of war.",
+            "I am a humble farmer trying to defend my village from bandits.",
+            "I am a librarian safeguarding ancient knowledge and wisdom from a group trying to claim it for themselves.",
+            "As a former thief, I now use my skills to help my kind in times of need.",
+            "I am a wandering bard, spreading hope and inspiration through stories and songs. But I lack inspiration anymore.",
+            "I am a guardian of nature, striving to restore balance and protect the wilderness from a powerful enemy trying to destroy it for his gain.",
+            "I am a devout cleric on a pilgrimage. Can you protect me in my way?",
+            "I am a magical researcher using my abilities to investigate old ruins looking for lost wisdom. Can you protect me during my search?",
+            "I am a diplomat working tirelessly to prevent a war about to happen. I must get to my rulers immediatly, or the war will start",
+            "I am a young squire, aspiring to become a knight and uphold the virtues of chivalry and honor. I shall kill a dragon terrorizing the village!",
+            "I am a mystic seer, using my visions to guide and protect my community from unseen dangers. I see horrors happening soon. Can you stay and protect us?",
+            "I am an adventurer who has taken up a quest to find a cure for a curse afflicting my family.",
+            "A treasured family heirloom has been stolen and is believed to be in the hands of a notorious thief in a distant city. The item is not only valuable but holds great sentimental value. Can you retrieve it?",
+            "In a forgotten wing of the ancient library lies a section filled with forbidden knowledge, guarded by enchantments and creatures. We need a specific tome to prevent a looming disaster. Will you brave the dangers to retrieve it?",
+            "Entire villages are vanishing overnight without a trace, with rumors of strange lights in the sky. Investigate these occurrences and uncover the truth behind this mystery.",
+            "A once-proud fortress now stands abandoned, rumored to be haunted by the spirits of fallen warriors. A recent expedition team hasn't returned. Can you venture in and find out what happened to them?",
+            "A royal crown said to be cursed has caused the king to fall into a deep, unnatural sleep. The cure lies in a rare magical ingredient found in a perilous cave. Time is of the essence to save the king and the kingdom.",
+            "A terrifying beast is preying on travelers and locals in the nearby forests. The creature is elusive, and many hunters have failed to track it. Can you hunt down the beast before it strikes again?",
+            "A person claiming to be from the future has appeared, bringing warnings of an impending catastrophe. They need help locating a series of ancient artifacts that are key to preventing the disaster.",
+            "An underground fighting tournament is being held, where the victor is granted a wish by a mystical entity. The competition is fierce and dangerous, but entering might be the only way to obtain something crucial for your quest.",
+            "A ghostly ship appears off the coast every full moon, bringing omens of bad fortune. Uncover the story behind this spectral vessel and put an end to its haunting voyages.",
+            "People in high positions across the kingdom are being replaced by doppelgangers. Unravel this conspiracy and find out who's behind these replacements and their ultimate goal.",
+            "A section of the forest has become enchanted, causing time and space to warp. Several explorers have gone missing. Enter the forest, rescue the lost, and find the source of this enchantment.",
+            "An eccentric alchemist has passed away, leaving behind a riddle that points to a powerful elixir. Solve the riddle and find the elixir before it falls into the wrong hands.",
+            "During the grand festival, a group of masked individuals is planning a nefarious plot. Infiltrate the festival, unmask the conspirators, and thwart their plans before it's too late."
+            "I am an exiled prince seeking to reclaim my rightful throne from a usurper who has plunged the kingdom into darkness. Will you help me gather allies and restore light to the land?",
+            "I am an artisan who has crafted a device that could bring prosperity to our drought-stricken village, but I need rare materials from dangerous lands. Can you assist in acquiring them?",
+            "I am a retired wizard, called upon once more to face an emerging dark force. My powers have waned, and I need brave souls to stand with me against this menace.",
+            "I am a lost explorer who has discovered an uncharted island filled with wonders and perils. I need a team to document these discoveries and ensure they are used for the good of all.",
+            "I am a visionary inventor whose creations could change the world. However, a corrupt guild seeks to steal my work for nefarious purposes. I need protection and aid to complete my greatest invention.",
+            "I am a guardian of a sacred grove, but a malignant corruption is spreading. I seek brave hearts to delve into the heart of the grove and cleanse it before it's too late.",
+            "I am a local chef with a dream to create a feast that will bring joy to our war-torn land. I need rare ingredients and protection to travel through dangerous regions to acquire them.",
+            "I am a young acolyte on a quest to find a series of ancient relics that will prevent a prophesied disaster. I seek knowledge and protection on this perilous journey.",
+            "I am a skilled blacksmith whose tools have been cursed. I need help to break the curse and continue providing for my village.",
+            "I am a member of a secret society dedicated to preserving balance in the world. We've uncovered a plot that threatens this balance, and I need help to stop it.",
+            "I am a local healer, but a band of brigands has stolen my supplies. I need help to retrieve them so I can continue to care for the sick and injured in our village.",
+            "I am a former champion gladiator, seeking to dismantle the corrupt arena system that thrives on slavery and injustice. I need allies to fight both in and out of the arena.",
+            "I am a keeper of a lighthouse on a treacherous coast, warning ships of danger. But something ancient and malevolent is stirring beneath the waves. I need brave souls to investigate the depths."
+            "I am a humble beekeeper whose bees have started producing a magical honey with miraculous properties. I need help protecting my hives from those who seek to exploit them.",
+            "I am a former palace guard turned whistleblower, trying to expose corruption at the highest level. I need assistance to gather irrefutable evidence and bring the truth to light.",
+            "I am a cartographer who has discovered a map leading to a lost city filled with ancient knowledge. I need a group of brave explorers to journey with me and uncover its secrets.",
+            "I am a village elder who has foreseen a natural disaster that could devastate our lands. We must work together to prevent this catastrophe and save our people.",
+            "I am a young mage who has accidentally unleashed a benign spirit into the world. I need help to find and safely return this entity to its realm before it causes unintended harm.",
+            "I am a retired adventurer who has founded an orphanage for children affected by wars and calamities. I need assistance to protect and provide for these children.",
+            "I am a lone druid maintaining a barrier that keeps an ancient evil at bay. My strength is waning, and I need successors to learn the ways of the druid and continue my work.",
+            "I am a skilled detective on the trail of a notorious crime syndicate. I need a team to help me infiltrate their ranks and bring them to justice.",
+            "I am a refugee leader looking to build a safe haven for those displaced by conflict. I seek aid in finding a suitable location and defending it from those who would do us harm.",
+            "I am a renowned bard compiling a grand epic. I seek adventurers to inspire my tale, joining me on quests that will become the stuff of legend.",
+            "I am a scholar researching a rare celestial event. I need help to travel to remote locations to observe and document this phenomenon before it disappears for centuries.",
+            "I am a master of a dying art form, seeking apprentices to pass my knowledge onto. I need help finding worthy candidates and protecting my legacy from those who seek its end.",
+            "I am a local hero who has vowed to rid our forests of a band of marauding goblins. I need assistance to track them down and restore peace to our lands."
+            ]
+
+    if "Evil" in npc.alignment:
+        Hooks += [
+            "The gods allowed tragedy and pain in my life. I'll have my revenge.",
+            "I've discovered a forbidden power, and I'll do anything to unlock its secrets.",
+            "I was betrayed and left for dead. Now, I seek to bring ruin to those who wronged me.",
+            "My ambition knows no bounds. I will rise to power, no matter the cost.",
+            "I am the rightful ruler, denied my throne. I will reclaim what is mine, by any means necessary.",
+            "There is a prophecy that I will bring doom. I embrace this destiny.",
+            "I seek to overthrow the current order and establish my own reign of terror.",
+            "A powerful entity has promised me unimaginable power in exchange for my services.",
+            "I am on a quest for immortality, and I will sacrifice anyone to achieve it.",
+            "I am driven by a deep-seated hatred for a particular group.",
+            "I am driven by a deep-seated hatred for a particular race.",
+            "I was wronged by society. Now, I am its worst nightmare.",
+            "I have been corrupted by a malevolent force and now serve its dark desires.",
+            "My heart is fueled by envy. I will destroy those who have what I cannot.",
+            "I am a cult leader, seeking to bring about the return of a dark deity.",
+            "I have seen the futility of morality and I want to show others to corrupt them.",
+            "I seek to create a perfect world, even if it means obliterating the current one.",
+            "My quest for ultimate power has led me down a dark path, and I can no longer turn back.",
+            "I was a hero once, but betrayal turned my heart to darkness.",
+            "I believe in survival of the fittest, and I intend to prove I am the strongest.",
+            "Haunted by my tragic past, I now seek vengeance against the world that wronged me.",
+            "I am a brilliant mind who has been shunned by the community. I will show them the true potential of my knowledge.",
+            "I was born into darkness and raised by a shadowy organization. Now, I serve their nefarious goals.",
+            "I am a fallen deity, exiled from the heavens, seeking to regain my power and status.",
+            "I possess a unique ability that allows me to manipulate others, and I use it to advance my hidden agenda.",
+            "I am cursed with a power that I cannot control, and it has driven me to madness.",
+            "I am a master strategist in a game of political intrigue, where the stakes are life and death.",
+            "I was once a loyal soldier, but I've seen too much suffering. Now, I lead a rebellion with ruthless tactics.",
+            "Obsessed with a forbidden ancient magic, I risk everything to obtain its power.",
+            "I harbor a deep grudge against a member of your group, stemming from a past conflict.",
+            "I am a once-revered leader who has been corrupted by power and paranoia, now ruling with an iron fist.",
+            "A personal tragedy has driven me to seek revenge against those I blame for my loss.",
+            "I am a charming sociopath, using my charisma to manipulate others for my gain.",
+            "I was wrongfully imprisoned and have emerged with a vendetta against the justice system.",
+            "A supernatural event has changed me, and I am now pursuing my newfound dark desires.",
+            "I am a high-ranking official involved in a deep political conspiracy to control the government.",
+            "I am the head of a criminal empire, using ruthless tactics to maintain my power.",
+            "I have discovered a dangerous secret and am using it to blackmail and control powerful individuals.",
+            "As a master spy, I've turned rogue and am now selling secrets to the highest bidder.",
+            "I am a scientist whose unethical experiments have been exposed, and I'll do anything to protect my life's work.",
+            "I am a survivor of a catastrophic event and have become a nihilist, seeking to bring about the end of the world.",
+            ]
+    if "Lawful" in npc.alignment:
+        Hooks += [
+            "I am a dedicated city guard captain seeking assistance to dismantle a criminal syndicate that threatens public safety.",
+            "I am a high-ranking cleric on a sacred mission to restore an ancient and holy site, seeking devout individuals to aid me in this divine task.",
+            "I am a principled lawyer fighting a high-profile case against corruption. I need help gathering evidence and protecting key witnesses.",
+            "I am a seasoned general assembling a team for a strategic military campaign to defend our borders from an invading force.",
+            "I am a member of a prestigious academic institution, working on a project to preserve historical artifacts. I seek knowledgeable individuals to join this scholarly endeavor.",
+            "I am a royal diplomat embarking on a critical mission to negotiate peace between warring kingdoms. I require a skilled entourage to ensure the success of these delicate talks.",
+            "I am a strict but fair mentor seeking apprentices to pass on my knowledge and uphold the traditions of our order.",
+            "I am an architect leading a monumental construction project. I need skilled artisans and workers to help build a structure that will stand for centuries.",
+            "I am a local magistrate investigating a series of organized crimes. I need discreet and trustworthy individuals to assist in solving these cases.",
+            "I am a guild master planning to expand our influence and operations. I'm looking for competent individuals to take on important roles within the guild.",
+            "I am a steward of an ancient forest, tasked with protecting it from encroaching threats. I seek allies who respect nature's laws and are willing to defend them.",
+            "I am a seasoned explorer charting a safe passage through dangerous territories. I need a team to help establish and secure a vital trade route.",
+            "I am an esteemed judge presiding over a complex and significant legal matter. I require assistance in upholding justice and ensuring a fair trial."
+            ]
+    if "Chaotic" in npc.alignment:
+        Hooks += [
+            "I am an eccentric inventor, creating devices that defy the norms of magic and science. I need daring individuals to test these inventions in the field.",
+            "I am a rebellious artist whose work challenges the status quo. I'm seeking like-minded individuals to help stage a daring performance in the heart of the city.",
+            "I am a lone wolf, a skilled hunter tracking a rare and elusive beast. I need assistance to capture it, not for glory, but to understand its unique nature.",
+            "I am a thrill-seeker, always chasing the next big adventure. I'm organizing an expedition to uncharted lands and looking for companions who aren't afraid of the unknown.",
+            "I am a rogue alchemist experimenting with forbidden potions. I need partners in crime to procure rare ingredients and test the boundaries of alchemy.",
+            "I am a wandering mystic seeking enlightenment through experiences. I invite others to join me on a journey of self-discovery that defies societal expectations.",
+            "I am a charismatic leader of a band of outcasts, creating our own rules and living free from society's constraints. We're looking for new members to expand our community.",
+            "I am a master thief plotting the heist of the century. I need a team of skilled individuals to help pull off this daring robbery against a corrupt noble.",
+            "I am a former circus performer starting my own troupe. I seek talented and unconventional performers who wish to create something truly unique and breathtaking.",
+            "I am a renegade mage researching volatile magic that many consider too dangerous. I need allies who aren't afraid to challenge the magical establishment.",
+            "I am a pirate captain seeking crew for a journey to a legendary island rumored to grant one's deepest desires. Only those who value freedom above all else need apply.",
+            "I am an underground fighter championing the oppressed through strength and defiance. I need allies to help liberate unjustly imprisoned individuals.",
+            "I am a nomadic bard, spreading tales of rebellion and freedom. I seek companions to help uncover and share stories of resistance against tyrants and oppressors."
+            ]
+
+    if ("Cultist" in npc.background or "Warlock" in npc.background) and "Evil" in npc.alignment:
+        Hooks +=[
+            "I am a cult leader, using my influence to manipulate my followers into doing my bidding.",
+
+            ]
+
+    if "Hero" in npc.background and "Evil" in npc.alignment:
+        Hooks +=[
+            "I am a former hero who has become disillusioned and bitter, now opposing those I once fought alongside.",
+
+            ]
+        
+    if "Noble" in npc.background and "Evil" in npc.alignment:
+        Hooks +=[
+            "I am an ambitious noble, engaging in treacherous plots to usurp the throne.",
+
+            ]
+    
+    if "Undead" in npc.race and "Evil" in npc.alignment:
+        Hooks +=[
+            "I am a vengeful spirit or curse-bringer, haunting those who have wronged me or my lineage."
+
+            ]
+
     return random.choice(Hooks)
 
 
