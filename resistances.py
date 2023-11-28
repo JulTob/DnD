@@ -15,6 +15,7 @@ def Resistances(npc):
 
     race = npc.race
     background = npc.background
+    pb = npc.pb
 
     damage_types = [
         "acid", "bludgeoning", "cold", "fire", "force", 
@@ -26,33 +27,33 @@ def Resistances(npc):
     race_damage_tendencies = {
         "Dragon": {
             "acid": {
-                "Immune": 3, "Resistant": 6, "None": 3, "Vulnerable": 2},
+                "Immune": pb//2, "Resistant": pb//2, "None": pb, "Vulnerable": pb//3},
             "bludgeoning": {
-                "Immune": 1, "Resistant": 3, "None": 5, "Vulnerable": 1},
+                "Immune": pb//6, "Resistant": pb//2, "None": pb, "Vulnerable": pb//6},
             "cold": {
-                "Immune": 2, "Resistant": 5, "None": 2, "Vulnerable": 1},
+                "Immune": pb//3, "Resistant": pb//2, "None": pb, "Vulnerable": pb//6},
             "fire": {
-                "Immune": 2, "Resistant": 5, "None": 2, "Vulnerable": 1},
+                "Immune": pb//3, "Resistant": pb//2, "None": pb, "Vulnerable": pb//6},
             "force": {
-                "Immune": 1, "Resistant": 2, "None": 7, "Vulnerable": 0},
+                "Immune": pb//12, "Resistant": pb//6, "None": pb*2, "Vulnerable": pb//2},
             "lightning": {
-                "Immune": 2, "Resistant": 5, "None": 2, "Vulnerable": 1},
+                "Immune": pb//3, "Resistant": pb//2, "None": pb, "Vulnerable": pb//6},
             "necrotic": {
-                "Immune": 1, "Resistant": 3, "None": 4, "Vulnerable": 1},
+                "Immune": pb//6, "Resistant": pb//2, "None": pb, "Vulnerable": pb//6},
             "piercing": {
-                "Immune": 0, "Resistant": 2, "None": 7, "Vulnerable": 1},
+                "Immune": pb//6, "Resistant": pb, "None": 2*pb, "Vulnerable": pb//6},
             "poison": {
-                "Immune": 2, "Resistant": 4, "None": 3, "Vulnerable": 1},
+                "Immune": pb//6, "Resistant": (pb+1)//2, "None": pb, "Vulnerable": pb//6},
             "psychic": {
-                "Immune": 1, "Resistant": 3, "None": 5, "Vulnerable": 1},
+                "Immune": pb//6, "Resistant": pb//3, "None": pb, "Vulnerable": pb//6},
             "radiant": {
-                "Immune": 1, "Resistant": 3, "None": 5, "Vulnerable": 1},
+                "Immune": pb//7, "Resistant": pb//4, "None": pb, "Vulnerable": pb//6},
             "slashing": {
-                "Immune": 0, "Resistant": 2, "None": 7, "Vulnerable": 1},
+                "Immune": pb//6, "Resistant": pb//3, "None": pb, "Vulnerable": pb//6},
             "thunder": {
-                "Immune": 1, "Resistant": 4, "None": 4, "Vulnerable": 1},
+                "Immune": pb//6, "Resistant": pb//2, "None": pb, "Vulnerable": pb//6},
             "bludgeoning, piercing, and slashing from nonmagical attacks": {
-                "Immune": 0, "Resistant": 1, "None": 8, "Vulnerable": 1},
+                "Immune": pb//6, "Resistant": pb//3, "None": pb, "Vulnerable": 0},
             },
 
         "Human": {
@@ -83,7 +84,7 @@ def Resistances(npc):
                 "thunder": {
                     "Immune": 1, "Resistant": 3, "None": 12, "Vulnerable": 2},
                 "bludgeoning, piercing, and slashing from nonmagical attacks": {
-                    "Immune": 1, "Resistant": 2, "None": 12, "Vulnerable": 2},
+                    "Immune": 1*pb, "Resistant": 2*pb, "None": 12*pb, "Vulnerable": 2*pb},
                 },
         "Aberration": {
                 "acid": {"Immune": 2, "Resistant": 5, "None": 3, "Vulnerable": 0},
@@ -103,20 +104,34 @@ def Resistances(npc):
                     "Immune": 2, "Resistant": 6, "None": 2, "Vulnerable": 0},
                 },
         "Aven": {
-                "acid": {"Immune": 0, "Resistant": 2, "None": 7, "Vulnerable": 1},
-                "bludgeoning": {"Immune": 0, "Resistant": 4, "None": 4, "Vulnerable": 2},
-                "cold": {"Immune": 0, "Resistant": 2, "None": 5, "Vulnerable": 3},
-                "fire": {"Immune": 0, "Resistant": 2, "None": 5, "Vulnerable": 3},
-                "force": {"Immune": 0, "Resistant": 2, "None": 7, "Vulnerable": 1},
-                "lightning": {"Immune": 0, "Resistant": 3, "None": 6, "Vulnerable": 1},
-                "necrotic": {"Immune": 0, "Resistant": 2, "None": 6, "Vulnerable": 2},
-                "piercing": {"Immune": 0, "Resistant": 3, "None": 4, "Vulnerable": 3},
-                "poison": {"Immune": 0, "Resistant": 2, "None": 6, "Vulnerable": 2},
-                "psychic": {"Immune": 0, "Resistant": 2, "None": 7, "Vulnerable": 1},
-                "radiant": {"Immune": 0, "Resistant": 2, "None": 7, "Vulnerable": 1},
-                "slashing": {"Immune": 0, "Resistant": 3, "None": 4, "Vulnerable": 3},
-                "thunder": {"Immune": 0, "Resistant": 3, "None": 6, "Vulnerable": 1},
-                "bludgeoning, piercing, and slashing from nonmagical attacks": {"Immune": 0, "Resistant": 2, "None": 8, "Vulnerable": 0},
+                "acid": {
+                    "Immune": 0, "Resistant": 2, "None": 10, "Vulnerable": 1},
+                "bludgeoning": {
+                    "Immune": 0, "Resistant": 4, "None": 10, "Vulnerable": 2},
+                "cold": {
+                    "Immune": 1, "Resistant": 3, "None": 10, "Vulnerable": 3},
+                "fire": {
+                    "Immune": 0, "Resistant": 2, "None": 10, "Vulnerable": 3},
+                "force": {
+                    "Immune": 0, "Resistant": 0, "None": 10, "Vulnerable": 2},
+                "lightning": {
+                    "Immune": 1, "Resistant": 4, "None": 10, "Vulnerable": 1},
+                "necrotic": {
+                    "Immune": 0, "Resistant": 2, "None": 10, "Vulnerable": 2},
+                "piercing": {
+                    "Immune": 0, "Resistant": 3, "None": 10, "Vulnerable": 3},
+                "poison": {
+                    "Immune": 0, "Resistant": 2, "None": 10, "Vulnerable": 2},
+                "psychic": {
+                    "Immune": 0, "Resistant": 2, "None": 10, "Vulnerable": 1},
+                "radiant": {
+                    "Immune": 0, "Resistant": 2, "None": 10, "Vulnerable": 1},
+                "slashing": {
+                    "Immune": 0, "Resistant": 3, "None": 10, "Vulnerable": 3},
+                "thunder": {
+                    "Immune": 0, "Resistant": 3, "None": 10, "Vulnerable": 1},
+                "bludgeoning, piercing, and slashing from nonmagical attacks": {
+                    "Immune": 0, "Resistant": pb//2, "None": pb, "Vulnerable": 0},
                 },
         "Beast": {
                 "acid": {"Immune": 1, "Resistant": 3, "None": 6, "Vulnerable": 2},
@@ -149,10 +164,8 @@ def Resistances(npc):
                 "radiant": {"Immune": 1, "Resistant": 3, "None": 6, "Vulnerable": 2},
                 "slashing": {"Immune": 2, "Resistant": 5, "None": 4, "Vulnerable": 1},
                 "thunder": {"Immune": 3, "Resistant": 5, "None": 3, "Vulnerable": 1},
-                "bludgeoning, piercing, and slashing from nonmagical attacks": {
-                    "Immune": 4, "Resistant": 4, "None": 5, "Vulnerable": 1},
                 "bludgeoning, piercing, and slashing from nonmagical attacks that aren't silvered": {
-                    "Immune": 8, "Resistant": 4, "None": 4, "Vulnerable": 0},
+                    "Immune": 10, "Resistant": 6, "None": 4, "Vulnerable": 0},
                 },
 
         "Celestial": {
@@ -405,21 +418,34 @@ def Resistances(npc):
                 "Immune": 0, "Resistant": 5, "None": 10, "Vulnerable": 0},
             },
         "Kobold": {
-            "acid": {"Immune": 1, "Resistant": 2, "None": 8, "Vulnerable": 4},
-            "bludgeoning": {"Immune": 0, "Resistant": 1, "None": 6, "Vulnerable": 8},
-            "cold": {"Immune": 1, "Resistant": 2, "None": 7, "Vulnerable": 5},
-            "fire": {"Immune": 1, "Resistant": 2, "None": 7, "Vulnerable": 5},
-            "force": {"Immune": 0, "Resistant": 1, "None": 10, "Vulnerable": 4},
-            "lightning": {"Immune": 1, "Resistant": 2, "None": 8, "Vulnerable": 4},
-            "necrotic": {"Immune": 0, "Resistant": 2, "None": 8, "Vulnerable": 5},
-            "piercing": {"Immune": 0, "Resistant": 1, "None": 7, "Vulnerable": 7},
-            "poison": {"Immune": 2, "Resistant": 3, "None": 7, "Vulnerable": 3},
-            "psychic": {"Immune": 0, "Resistant": 1, "None": 9, "Vulnerable": 5},
-            "radiant": {"Immune": 0, "Resistant": 1, "None": 9, "Vulnerable": 5},
-            "slashing": {"Immune": 0, "Resistant": 1, "None": 7, "Vulnerable": 7},
-            "thunder": {"Immune": 1, "Resistant": 2, "None": 7, "Vulnerable": 5},
+            "acid": {
+                "Immune": 1, "Resistant": 2, "None": 12, "Vulnerable": 4},
+            "bludgeoning": {
+                "Immune": 0, "Resistant": 1, "None": 12, "Vulnerable": 8},
+            "cold": {
+                "Immune": 1, "Resistant": 2, "None": 12, "Vulnerable": 5},
+            "fire": {
+                "Immune": 2, "Resistant": 4, "None": 12, "Vulnerable": 3},
+            "force": {
+                "Immune": 0, "Resistant": 1, "None": 10, "Vulnerable": 4},
+            "lightning": {
+                "Immune": 1, "Resistant": 2, "None": 12, "Vulnerable": 4},
+            "necrotic": {
+                "Immune": 0, "Resistant": 2, "None": 12, "Vulnerable": 6},
+            "piercing": {
+                "Immune": 1, "Resistant": 2, "None": 13, "Vulnerable": 0},
+            "poison": {
+                "Immune": 2, "Resistant": 3, "None": 12, "Vulnerable": 3},
+            "psychic": {
+                "Immune": 0, "Resistant": 1, "None": 12, "Vulnerable": 5},
+            "radiant": {
+                "Immune": 0, "Resistant": 1, "None": 12, "Vulnerable": 5},
+            "slashing": {
+                "Immune": 0, "Resistant": 1, "None": 12, "Vulnerable": 7},
+            "thunder": {
+                "Immune": 1, "Resistant": 2, "None": 12, "Vulnerable": 5},
             "bludgeoning, piercing, and slashing from nonmagical attacks": {
-                "Immune": 0, "Resistant": 2, "None": 5, "Vulnerable": 8},
+                "Immune": 0, "Resistant": 2, "None": 12, "Vulnerable": 0},
             },
         "Lizardfolk": {
             "acid": {
@@ -564,33 +590,33 @@ def Resistances(npc):
             },
         "Undead": {
             "acid": {
-                "Immune": 2, "Resistant": 5, "None": 5, "Vulnerable": 3},
+                "Immune": 2, "Resistant": 5, "None": 6, "Vulnerable": 3},
             "bludgeoning": {
-                "Immune": 2, "Resistant": 6, "None": 6, "Vulnerable": 5},
+                "Immune": 2, "Resistant": 6, "None": 7, "Vulnerable": 6},
             "cold": {
-                "Immune": 5, "Resistant": 5, "None": 3, "Vulnerable": 2},
+                "Immune": 5, "Resistant": 6, "None": 3, "Vulnerable": 2},
             "fire": {
-                "Immune": 2, "Resistant": 5, "None": 6, "Vulnerable": 5},
+                "Immune": 2, "Resistant": 5, "None": 7, "Vulnerable": 5},
             "force": {
-                "Immune": 0, "Resistant": 3, "None": 9, "Vulnerable": 2},
+                "Immune": 0, "Resistant": 0, "None": 10, "Vulnerable": 2},
             "lightning": {
-                "Immune": 2, "Resistant": 4, "None": 7, "Vulnerable": 2},
+                "Immune": 2, "Resistant": 5, "None": 7, "Vulnerable": 2},
             "necrotic": {
-                "Immune": 10, "Resistant": 5, "None": 0, "Vulnerable": 0},
+                "Immune": 10, "Resistant": 6, "None": 1, "Vulnerable": 0},
             "piercing": {
-                "Immune": 2, "Resistant": 6, "None": 5, "Vulnerable": 2},
+                "Immune": 2, "Resistant": 6, "None": 6, "Vulnerable": 2},
             "poison": {
-                "Immune": 10, "Resistant": 5, "None": 0, "Vulnerable": 0},
+                "Immune": 11, "Resistant": 5, "None": 0, "Vulnerable": 0},
             "psychic": {
                 "Immune": 2, "Resistant": 3, "None": 5, "Vulnerable": 5},
             "radiant": {
-                "Immune": 1, "Resistant": 2, "None": 3, "Vulnerable": 12},
+                "Immune": 1, "Resistant": 2, "None": 4, "Vulnerable": 12},
             "slashing": {
-                "Immune": 2, "Resistant": 6, "None": 5, "Vulnerable": 2},
+                "Immune": 2, "Resistant": 6, "None": 6, "Vulnerable": 2},
             "thunder": {
-                "Immune": 2, "Resistant": 5, "None": 6, "Vulnerable": 2},
+                "Immune": 2, "Resistant": 5, "None": 7, "Vulnerable": 2},
             "bludgeoning, piercing, and slashing from nonmagical attacks that aren't silvered": {
-                "Immune": 8, "Resistant": 4, "None": 4, "Vulnerable": 0},
+                "Immune": 9, "Resistant": 4, "None": 4, "Vulnerable": 0},
             },
 
 
@@ -639,7 +665,22 @@ def ConditionImmunities(npc):
     race_condition_immunities = {
 "Human": {      "Blinded": 10,  "Charmed": 5,   "Deafened": 10,     "Frightened": 10/2,     "Grappled": 100,    "Incapacitated": 100,   "Paralyzed": 10/1,  "Petrified": 100,   "Poisoned": 10/3,   "Prone": 100,   "Restrained": 100,  "Stunned": 10,      "Unconscious": 100,},   
 "Aberration": { "Blinded": 2,   "Charmed": 1,   "Deafened": 2,      "Frightened": 10/10,    "Grappled": 10/3,   "Incapacitated": 10/2,  "Paralyzed": 10/2,  "Petrified": 10/1,  "Poisoned": 10/4,   "Prone": 10/2,  "Restrained": 10/3, "Stunned": 10/3,    "Unconscious": 100,},
-"Aven": {       "Blinded": 5,   "Charmed": 3,   "Deafened": 5,      "Frightened": 10/3,     "Grappled": 10,     "Incapacitated": 10,    "Paralyzed": 5,     "Petrified": 10,    "Poisoned": 5,      "Prone": 100,   "Restrained": 10,   "Stunned": 5,       "Unconscious": 100,},
+
+"Aven": {
+    "Blinded": 5,
+    "Charmed": 3,
+    "Deafened": 5,
+    "Frightened": 5,
+    "Grappled": 10,
+    "Incapacitated": 10,
+    "Paralyzed": 5,
+    "Petrified": 10,
+    "Poisoned": 5,
+    "Prone": 0,
+    "Restrained": 10,
+    "Stunned": 5,
+    "Unconscious": 0,},
+
 "Beast": {      "Blinded": 3,   "Charmed": 10,  "Deafened": 3,      "Frightened": 10,       "Grappled": 2,      "Incapacitated": 10/1,  "Paralyzed": 10/2,  "Petrified": 10/2,  "Poisoned": 10/4,   "Prone": 10/3,  "Restrained": 10/4, "Stunned": 10/2,    "Unconscious": 100,},
 "Beastfolk": {  "Blinded": 3,   "Charmed": 5,   "Deafened": 3,      "Frightened": 10/2,     "Grappled": 10/3,   "Incapacitated": 10/2,  "Paralyzed": 10/2,  "Petrified": 10/1,  "Poisoned": 10/3,   "Prone": 10/2,  "Restrained": 10/3, "Stunned": 10/2,    "Unconscious": 100,},
 "Celestial": {  "Blinded": 5,   "Charmed": 1,   "Deafened": 5,      "Frightened": 1,        "Grappled": 10/3,   "Incapacitated": 10/3,  "Paralyzed": 3,     "Petrified": 10/2,  "Poisoned": 2,      "Prone": 5,     "Restrained": 3,    "Stunned": 5,       "Unconscious": 100,},
@@ -661,7 +702,23 @@ def ConditionImmunities(npc):
 "Orc": {        "Blinded": 10,  "Charmed": 5,   "Deafened": 10,     "Frightened": 1.5,      "Grappled": 2,      "Incapacitated": 10,    "Paralyzed": 5,     "Petrified": 10,    "Poisoned": 3,      "Prone": 2,     "Restrained": 3,    "Stunned": 5,       "Unconscious": 100,},
 "Plant": {      "Blinded": 100, "Charmed": 100, "Deafened": 100,    "Frightened": 100,      "Grappled": 1,      "Incapacitated": 2,     "Paralyzed": 10,    "Petrified": 5,     "Poisoned": 10,     "Prone": 100,   "Restrained": 1,    "Stunned": 10,      "Unconscious": 100,},
 "Snakefolk": {  "Blinded": 5,   "Charmed": 2,   "Deafened": 5,      "Frightened": 3,        "Grappled": 3,      "Incapacitated": 5,     "Paralyzed": 10,    "Petrified": 10,    "Poisoned": 1.5,    "Prone": 5,     "Restrained": 5,    "Stunned": 10,      "Unconscious": 100,},
-"Undead": {     "Blinded": 1,   "Charmed": 1,   "Deafened": 1,      "Frightened": 1,        "Grappled": 2,      "Incapacitated": 10,    "Paralyzed": 1,     "Petrified": 1,     "Poisoned": 1,      "Prone": 2,     "Restrained": 2,    "Stunned": 1,       "Unconscious": 5,}
+
+    "Undead": {
+        "Blinded": 1,
+        "Charmed": 50,
+        "Deafened": 1,
+        "Exhaustion": 100,
+        "Frightened": 50,
+        "Grappled": 2,
+        "Incapacitated": 10,
+        "Paralyzed": 50,
+        "Petrified": 1,
+        "Poisoned": 100,
+        "Prone": 2,
+        "Restrained": 2,
+        "Stunned": 1,
+        "Unconscious": 5
+        },
 
     }
 
@@ -676,7 +733,7 @@ def ConditionImmunities(npc):
 
     # Randomly determine condition immunities based on the weights
     for condition, weight in condition_immunity_weights.items():
-        if random.choices([True, False], [1/weight, 1 - (1/weight)])[0]:
+        if random.choices([True, False], [weight, 100 - weight, ])[0]:
             condition_immunities.append(condition)
 
     # Format the output
@@ -717,33 +774,55 @@ def Extra_Defenses(npc):
     shielded_mind = f"\n- Shielded Mind \t The {race} is immune to any effect that would sense its emotions, read its thoughts, or detect its location."
     nimble_scape = f"\n- Nimble Scape:\t The {npc.race} can take the Disengage or Hide action as a bonus action on each of its turns."
     freeze = f"\n- Freeze: If the {npc.race} takes cold damage, it partially freezes; All its speed is reduced by 20 feet until the end of its next turn."
+    slippery = f"\n- Slippery. \n\t The {npc.race} has advantage on ability checks and saving throws made to escape a grapple."
+    SwampCamouflage =  f"\n- Swamp Camouflage \n\t The {race} has advantage on Dexterity (Stealth) checks made to hide in swampy terrain."
+    LabyrinthineRecall = f"\n- Labyrinthine Recall \n\t The {race} can perfectly recall any path it has traveled."
+    Burden = f"\n- {race} of Burden \n\t The {race} is considered to be a Large creature for the purpose of determining its carrying capacity."
 
+    UnusualNature = "Unusual Nature. \n\t {npc.name} doesn't require air, food, drink, or sleep."
 
 
     
     # Dictionary to store possible extra defenses for each race
     extra_defenses_race = {
-        "Aberration": [shielded_mind, relentless,spell_reflection, aberrant_ground, magic_resistance, regeneration, telepathic_shield, otherwordly_perception, etherealness, acidic_blood, psychic_feedback, alien_mind],
-        "Beast":[sure_footed],
-        "Beastfolk": [fey_ancestry,sure_footed],
+        "Aberration": [slippery, shielded_mind, relentless,spell_reflection, aberrant_ground, magic_resistance, regeneration, telepathic_shield, otherwordly_perception, etherealness, acidic_blood, psychic_feedback, alien_mind],
+        "Beast":[
+            SwampCamouflage,
+            Burden,
+            slippery, sure_footed],
+        "Beastfolk": [
+            SwampCamouflage,
+            Burden,
+            slippery, fey_ancestry,sure_footed, LabyrinthineRecall],
         "Celestial": [shielded_mind],
         "Construct": [magic_resistance],
         "Dragon":[magic_resistance],
         "Elf": [fey_ancestry],
         "Elemental":[freeze],
         "Fey": [nimble_scape],
-        "Fiend": [ relentless,magic_resistance, regeneration, otherwordly_perception, etherealness, infernal_wisdom],
-        "Goblin": [nimble_scape],
-        "Lizardfolk":[freeze,relentless,regeneration],
-        "Orc": [relentless],
-        "Snakefolk":[],
+        "Fiend": [
+            LabyrinthineRecall,
+            slippery,
+            Burden,
+            relentless,magic_resistance, regeneration, otherwordly_perception, etherealness, infernal_wisdom],
+        "Goblin": [slippery, nimble_scape],
+        "Lizardfolk":[
+            SwampCamouflage, slippery, freeze,relentless,regeneration],
+        "Orc": [
+            Burden,
+            relentless],
+        "Snakefolk":[
+            SwampCamouflage, slippery],
+        "Undead": [
+            UnusualNature],
     }
 
     # Dictionary to store possible extra defenses for each background
     extra_defenses_background = {
         "Noble": [parry],
         "Berserker": [relentless,berserker_resistance],
-        "Scholar":[spell_reflection, arcane_awareness, mental_fortitude, lore_preservation, meticulous, shielded_mind],
+        "Scholar":[LabyrinthineRecall,
+                   spell_reflection, arcane_awareness, mental_fortitude, lore_preservation, meticulous, shielded_mind],
 
         }
 
