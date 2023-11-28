@@ -14,11 +14,16 @@ import random
 # Randomly select if the spell is not already in the list
 #if random.random() < probability:
 
+
 def PB(lvl):
+    # Proficiency Bonus
     return dnd.PB(lvl)
     
 def Dice(D=6,N=1):
     return dnd.Dice(D,N)
+
+
+    
 
 def get_max_spell_level(character_level, difficulty = 1):
     if difficulty < 1: difficulty = 1
@@ -38,8 +43,9 @@ def add_spell(spell_list, spell_name, spell_definition=""):
 
 
 class Spellbook:
-    def __init__(self,npc_level):
-        self.character_level = npc_level
+    def __init__(self,npc):
+        
+        self.character_level = npc.level
         self.cantrip = ""
         self.spells = {level: "" for level in range(1, 10)}
         
@@ -58,12 +64,20 @@ class Spellbook:
         self.num2d = 3
         self.num3d = 3
 
-        self.recharge = ""
+        self.recharge = []
         self.recharge_list = []
         
         self.accessible = {level: [] for level in range(1, 10)}
         self.selected = {level: [] for level in range(1, 10)}
-
+        
+    def slots_at(self,spell_level):
+        difficulty = self.difficulty
+        character_level = self.character_level
+        n = (character_level-difficulty)//(difficulty*spell_level)
+        if n<1: n=0
+        if n>PB(character_level): n=PB(character_level)
+        return n
+        
     def select_spells(self):
         for level in range(1, 10):
             num_spells = self.number_spell(level)
@@ -71,28 +85,16 @@ class Spellbook:
             if accessible_spells:
                 selected_spells = random.sample(accessible_spells, min(num_spells, len(accessible_spells)))
                 self.selected[level] = selected_spells
-                self.slots[level] = Dice(num_spells)  # Example: Dice function usage
+            self.slots[level] = self.UpdateSlots()  
 
         # Updating one/two/three day each lists
+        self.num1d = min(self.num1d, len(self.one_day_each_list))
+        self.num2d = min(self.num2d, len(self.two_day_each_list))
+        self.num3d = min(self.num3d, len(self.three_day_each_list))
         self.one_day_each_list = random.sample(self.one_day_each_list, self.num1d)
         self.two_day_each_list = random.sample(self.two_day_each_list, self.num2d)
         self.three_day_each_list = random.sample(self.three_day_each_list, self.num3d)
 
-    def add_natural(self, spell, definition="", times_day = 1):
-        result = f"{spell}: {times_day} per day. {definition}"
-        if times_day == 1:
-            self.one += result
-        elif times_day == 2:
-            self.two += result
-        elif times_day == 3:
-            self.three += result
-
-
-    def add_rechargeable(self, spell, definition="", recharge_at = 6):
-        roll = "6"
-        if recharge_at < roll: roll = f"6-{recharge_at}"
-        self.recharge += f"{spell}: Recharges at {roll} in a d6. {definition}"
-        
     def number_spell(self,spell_level):
         if spell_level == 0:
             return min(5, max(0, self.max_spell_level))
@@ -154,49 +156,107 @@ class Spellbook:
         character_level = self.character_level
         if difficulty < 1: difficulty = 1
         if difficulty > 10: difficulty = 10
+        self.difficulty = difficulty
         level = (character_level - difficulty) // (2 * difficulty)
         if level < 0: return 0
         if level > 9: return 9
-        return level
-
+        return level    
     
     def UpdateDifficulty(self,D):
+        if D < 1: D = 1
+        if D > 10: D = 10
         self.difficulty = D
         self.UpdateSlots()
-        
+
+    def slots_calculator(self, spell_level):
+        import math
+        max_spell_level = self.max_spell_level
+        k = -math.log(1 / max_spell_level) / max_spell_level
+        slots = max_spell_level * math.exp(-k * spell_level)
+        slots = math.ceil(slots)
+        return max(1, int(slots))
+
     def UpdateSlots(self):
         max_spell_level = self.max_spell_level
-        for level in range(1, max_spell_level + 1):
-            # Example slot allocation: Decrease slots as the level approaches max_spell_level
-            self.slots[level] = max(1, 6 - (max_spell_level - level))
-
-    def SpellbookString(self):
-        result = ""
-        if self.cantrip:
-            result += "Cantrips (at will): " + self.cantrip + "\n"
         for level in range(1, 10):
-            ordinal = "th" if 4 <= level <= 20 else {1: "st", 2: "nd", 3: "rd"}.get(level % 10, "th")
-            result += f"[{self.slots[level]}]" + f"{level}{ordinal} Level Spells:\n" + self.spells[level]+ "\n"
-
-        return result.strip()
+            # Example slot allocation: Decrease slots as the level approaches max_spell_level
+            self.slots[level] = self.slots_at(level) if level <= max_spell_level else 1
+            
 
 
     def add_spell(self, spell_level, spell_name, spell_definition=""):
-        if spell_level== 0:
-            self.cantrip += add_spell(self.cantrip, spell_name, spell_definition="")
+        if spell_level == 0:
+            self.cantrip += f"\n\t- {spell_name}"
+            if spell_definition:
+                self.cantrip += f": {spell_definition}"
         elif spell_level>0 and spell_level<10:
             spell_list = self.spells.get(spell_level, "")
-            spell_list += f"\n- {spell_name}"
+            spell_list += f"\n\t- {spell_name}"
             if spell_definition:
                 spell_list += f": {spell_definition}"
             self.spells[spell_level] = spell_list
+            
+    def add_natural(self, spell, definition="", times_day = 1):
+        result = f"\n\t{spell}: {times_day} per day. {definition}"
+        if times_day == 1:
+            self.one += result
+        elif times_day == 2:
+            self.two += result
+        elif times_day == 3:
+            self.three += result
+
+
+    def add_rechargeable(self, spell, definition="", recharge_at = 6):
+        roll = "6"
+        if recharge_at < 6: roll = f"6-{recharge_at}"
+        self.recharge += [f"\n\t{spell}: Recharges at {roll} in a d6. {definition}"]
         
+
+    def SpellbookString(self,npc):
+        result = "\n"
+        if is_ritual(npc):
+            result += f"{npc.title} is a ritual spellcaster. \n"
+        result += "Cantrips (at will): " + self.cantrip + "\n"
+        for level in range(1, 10):
+            # Check if there are spells in the current level
+            if self.spells[level].strip():
+                ordinal = "th" if 4 <= level <= 20 else {1: "st", 2: "nd", 3: "rd"}.get(level % 10, "th")
+                result += f"\n[{self.slots[level]}]{level}{ordinal} Level Spells:\n" + self.spells[level] + ""
+        # Include natural spells
+        if self.one.strip():
+            result += "\nNatural Spells (1/day): " + self.one + "\n"
+        if self.two.strip():
+            result += "\nNatural Spells (2/day): " + self.two + "\n"
+        if self.three.strip():
+            result += "\nNatural Spells (3/day): " + self.three + "\n"
+
+        # Include rechargeable spells
+        result += "\nRechargeable Spells: " 
+        if self.recharge:
+            recharge_spells = "\n".join(self.recharge)
+            result += "\n\t" + recharge_spells + "\n"
+
+        return result.strip()
+
+def is_ritual(npc):
+    if npc.background == "Priest": return True
+    if npc.background == "Cleric": return True
+    if npc.background == "Cultist": return True
+    if npc.background == "Druid": return True
+    if npc.background == "Mage": return True
+    if npc.background == "Shaman": return True
+    if npc.background == "Warlock": return True
+    if npc.background == "Witch": return True
+    return False
+
 
 def Magic(npc):
 
     Lvl = npc.level
     race = npc.race
     background = npc.background
+
+    spellbook = Spellbook(npc)
 
 
     cantrips_list=[]
@@ -212,6 +272,7 @@ def Magic(npc):
     seventh_list = []
     eighth_list = []
     ninth_list = []
+    recharge =""
 
     difficulty = 2
 # BACKGROUNDS:
@@ -242,94 +303,14 @@ def Magic(npc):
         two_day_each_list += [            "Invisibility", "Suggestion", "Enhance Ability"]
         three_day_each_list += [            "Hypnotic Pattern",            "Major Image",            "Counterspell"]
         first_list += [            "Disguise Self",            "Healing Word",            "Identify",            "Faerie Fire",            "Charm Person",            "Silent Image",            "Sleep",            "Tasha’s Hideous Laughter",    "Unseen Servant",            "Speak With Animals"]
-        second_list += [
-            "Invisibility",
-            "Knock",
-            "Detect Thoughts",
-            "Enhance Ability",
-            "Lesser Restoration",
-            "Zone of Truth",
-            "Calm Emotions",
-            "Heat Metal",
-            "Suggestion",
-            "Phantasmal Force"
-        ]
-        third_list += [
-            "Dispel Magic",
-            "Leomund’s Tiny Hut",
-            "Hypnotic Pattern",
-            "Major Image",
-            "Sending",
-            "Tongues",
-            "Fear",
-            "Charm Monster",
-            "Stinking Cloud",
-            "Speak with Dead"
-        ]
-        fourth_list += [
-            "Dimension Door",
-            "Polymorph",
-            "Greater Invisibility",
-            "Freedom of Movement",
-            "Hallucinatory Terrain",
-            "Locate Creature",
-            "Compulsion",
-            "Confusion",
-            "Geas",
-            "Stone Shape"
-        ]
-        fifth_list += [
-            "Mass Cure Wounds",
-            "Raise Dead",
-            "Greater Restoration",
-            "Teleportation Circle",
-            "Mislead",
-            "Modify Memory",
-            "Animate Objects",
-            "Awaken",
-            "Scrying",
-            "Dominate Person"
-        ]
-        sixth_list += [
-            "True Seeing",
-            "Otto’s Irresistible Dance",
-            "Programmed Illusion",
-            "Mass Suggestion",
-            "Heroes’ Feast",
-            "Find The Path",
-            "Eyebite",
-            "Countercharm"
-        ]
-        seventh_list += [
-            "Teleport",
-            "Resurrection",
-            "Regenerate",
-            "Mirage Arcane",
-            "Etherealness",
-            "Symphony Of The Masked",
-            "Forcecage",
-            "Dream Of The Blue Veil"
-        ]
-        eighth_list += [
-            "Power Word Stun",
-            "Mind Blank",
-            "Maze",
-            "Glibness",
-            "Dominate Monster",
-            "Antimagic Field",
-            "Foresight",
-            "Feeblemind"
-        ]
-        ninth_list += [
-            "Power Word Kill",
-            "True Polymorph",
-            "Time Stop",
-            "Psychic Scream",
-            "Prismatic Wall",
-            "Mass Polymorph",
-            "Foresight",
-            "Meteor Swarm"
-        ]
+        second_list += [      "Invisibility",            "Knock",            "Detect Thoughts",            "Enhance Ability",            "Lesser Restoration",            "Zone of Truth",            "Calm Emotions",            "Heat Metal",            "Suggestion",            "Phantasmal Force"        ]
+        third_list += [            "Dispel Magic",            "Leomund’s Tiny Hut",            "Hypnotic Pattern",            "Major Image",            "Sending",            "Tongues",            "Fear",            "Charm Monster",            "Stinking Cloud",            "Speak with Dead"        ]
+        fourth_list += [            "Dimension Door",            "Polymorph",            "Greater Invisibility",            "Freedom of Movement",            "Hallucinatory Terrain",            "Locate Creature",            "Compulsion",            "Confusion",            "Geas",            "Stone Shape"        ]
+        fifth_list += [            "Mass Cure Wounds",            "Raise Dead",            "Greater Restoration",            "Teleportation Circle",            "Mislead",            "Modify Memory",            "Animate Objects",            "Awaken",            "Scrying",            "Dominate Person"        ]
+        sixth_list += [            "True Seeing",            "Otto’s Irresistible Dance",            "Programmed Illusion",            "Mass Suggestion",            "Heroes’ Feast",            "Find The Path",            "Eyebite",            "Countercharm"        ]
+        seventh_list += [            "Teleport",            "Resurrection",            "Regenerate",            "Mirage Arcane",            "Etherealness",            "Symphony Of The Masked",            "Forcecage",            "Dream Of The Blue Veil"        ]
+        eighth_list += [            "Power Word Stun",            "Mind Blank",            "Maze",            "Glibness",            "Dominate Monster",            "Antimagic Field",            "Foresight",            "Feeblemind"        ]
+        ninth_list += [            "Power Word Kill",           "True Polymorph",            "Time Stop",            "Psychic Scream",            "Prismatic Wall",            "Mass Polymorph",            "Foresight",            "Meteor Swarm"        ]
 
 
 
@@ -387,148 +368,61 @@ def Magic(npc):
         seventh_list += [            "Regenerate",            "Resurrection",            "Miracle"          ]
         eighth_list += [            "Control Weather",            "Earthquake",            "Holy Aura"  ]
         ninth_list += [            "True Resurrection","Storm of Vengeance",]
-        spellbook.add_spell(ninth, "Wish" , 9, max_spell_level, "One per Lifetime")
+        '''
+        spellbook.add_spell(ninth_list, "Wish" , 9, "One per Lifetime")
+        '''
 
     # Cultist
     if background == "Cultist":
         difficulty = Dice(3) 
         cantrips_list += [            "Chill Touch",            "Eldritch Blast",            "Guidance",            "Infestation",            "Light",            "Sacred Flame",           "Thaumaturgy",            "Toll The Dead",            "Vicious Mockery"            ]
         one_day_each_list += [            "Command",            "Inflict Wounds",            "Protection from Good and Evil"]
-        two_day_each_list += [            "Suggestion",
-            "Silence",            "Hold Person"]
+        two_day_each_list += [            "Suggestion",            "Silence",            "Hold Person"]
         three_day_each_list += [            "Detect Thoughts", "Darkness", "Disguise Self"]
-        first_list += [            "Bane",
-            "Cause Fear",            "Command",
-            "Hex",            "Inflict Wounds",
-            "Protection From Good And Evil",            "Shield Of Faith",
-            "Unseen Servant"            ]
-        second_list += [            "Blindness/Deafness",
-            "Darkness",            "Enthrall",
-            "Hold Person",            "Mind Spike",
-            "Ray Of Enfeeblement",            "Silence",
-            "Spiritual Weapon"]
-        third_list += [    "Animate Dead",
-            "Bestow Curse",            "Fear",
-            "Hypnotic Pattern",            "Speak With Dead",
-            "Vampiric Touch",            "Tongues",
-            "Spirit Guardians"            ]
-        fourth_list += [            "Blight",
-            "Death Ward",            "Hallucinatory Terrain",
-            "Locate Creature",            "Phantasmal Killer",
-            "Shadow Of Moil",            "Sickening Radiance",
-            "Summon Greater Demon"            ]
-        fifth_list += [            "Contagion",
-            "Danse Macabre",            "Geas",
-            "Hold Monster",            "Insect Plague",
-            "Mass Cure Wounds",            "Scrying",
-            "Wrath Of Nature"            ]
-        sixth_list += [            "Circle Of Death",
-            "Create Undead",            "Eyebite",
-            "Harm",            "Heroes' Feast",
-            "Mass Suggestion",            "True Seeing",
-            "Word Of Recall"            ]
-        seventh_list += [
-            "Finger Of Death",            "Plane Shift",
-            "Regenerate",            "Resurrection",
-            "Symbol",            "Teleport",
-            "Etherealness",
-            "Fire Storm"
-            ]
-        eighth_list += [
-            "Antimagic Field",          "Dominate Monster",
-            "Feeblemind",            "Holy Aura",
-            "Incendiary Cloud",
-            "Maze",            "Power Word Stun",
-            "Sunburst"                      ]
-        ninth_list += [
-            "Astral Projection",
-            "Gate",            "Implosion",
-            "Mass Heal",            "Power Word Kill",
-            "Psychic Scream",            "True Resurrection",
-            "Weird"            ]
+        first_list += [            "Bane",            "Cause Fear",            "Command",            "Hex",            "Inflict Wounds",            "Protection From Good And Evil",            "Shield Of Faith",            "Unseen Servant"            ]
+        second_list += [            "Blindness/Deafness",            "Darkness",            "Enthrall",            "Hold Person",            "Mind Spike",            "Ray Of Enfeeblement",            "Silence",            "Spiritual Weapon"]
+        third_list += [    "Animate Dead",            "Bestow Curse",            "Fear",            "Hypnotic Pattern",            "Speak With Dead",           "Vampiric Touch",            "Tongues",            "Spirit Guardians"            ]
+        fourth_list += [            "Blight",            "Death Ward",            "Hallucinatory Terrain",            "Locate Creature",            "Phantasmal Killer",            "Shadow Of Moil",            "Sickening Radiance",            "Summon Greater Demon"            ]
+        fifth_list += [            "Contagion",           "Danse Macabre",            "Geas",            "Hold Monster",            "Insect Plague",            "Mass Cure Wounds",            "Scrying",            "Wrath Of Nature"            ]
+        sixth_list += [            "Circle Of Death",            "Create Undead",            "Eyebite",           "Harm",            "Heroes' Feast",    "Mass Suggestion",            "True Seeing",            "Word Of Recall"            ]
+        seventh_list += [            "Finger Of Death",            "Plane Shift",            "Regenerate",            "Resurrection",           "Symbol",            "Teleport","Etherealness","Fire Storm"            ]
+        eighth_list += [           "Antimagic Field",          "Dominate Monster","Feeblemind",            "Holy Aura",            "Incendiary Cloud",            "Maze",            "Power Word Stun",            "Sunburst"                      ]
+        ninth_list += [           "Astral Projection","Gate",            "Implosion",            "Mass Heal",            "Power Word Kill",            "Psychic Scream",            "True Resurrection",            "Weird"            ]
 
     # Criminal
     if background == "Criminal":
         difficulty = 1 + Dice(6)  
-        cantrips_list += [            "Mage Hand",
-            "Minor Illusion",            "Prestidigitation",
-            "Message"        ]
+        cantrips_list += [            "Mage Hand",            "Minor Illusion",            "Prestidigitation",            "Message"        ]
         one_day_each_list += ["Disguise Self", "Silent Image", "Expeditious Retreat"]
         two_day_each_list += ["Invisibility", "Pass without Trace", "Knock"]
         three_day_each_list += ["Mage Hand", "Message", "Prestidigitation"]
-        first_list += [            "Disguise Self",
-            "Charm Person",
-            "Silent Image",
-            "Sleep",            "Expeditious Retreat"        ]
-        second_list += [            "Invisibility",
-            "Suggestion",            "Alter Self",
-            "Darkness",            "Pass Without Trace"
-        ]
-        
-        third_list += [            "Nondetection",
-            "Dispel Magic",
-            "Hypnotic Pattern",
-            "Major Image",
-            "Leomund’s Tiny Hut"
-        ]
-        fourth_list += [            "Greater Invisibility",
-            "Dimension Door",
-            "Arcane Eye",
-            "Freedom of Movement",
-            "Locate Creature"
-        ]
-        fifth_list += [            "Mislead",
-            "Modify Memory",
-            "Teleportation Circle",
-            "Passwall",            "Seeming"
-        ]
-        sixth_list += [
-            "True Seeing",
-            "Programmed Illusion",
-            "Find the Path"
-        ]
-        seventh_list += [            "Mirage Arcane",
-            "Project Image",
-            "Teleport"        ]
-        eighth_list += [ "Demiplane",            "Mind Blank",
-            "Antimagic Field"        ]
-        ninth_list += [            "Imprisonment",
-            "Time Stop",            "Power Word Kill"        ]
+        first_list += [            "Disguise Self",            "Charm Person",            "Silent Image",            "Sleep",            "Expeditious Retreat"        ]
+        second_list += [            "Invisibility",   "Suggestion",            "Alter Self",            "Darkness",            "Pass Without Trace"]
+        third_list += ["Nondetection",            "Dispel Magic",            "Hypnotic Pattern",            "Major Image",            "Leomund’s Tiny Hut"        ]
+        fourth_list += ["Greater Invisibility",            "Dimension Door",            "Arcane Eye",            "Freedom of Movement",            "Locate Creature"]
+        fifth_list += [ "Mislead",            "Modify Memory",            "Teleportation Circle",            "Passwall","Seeming"        ]
+        sixth_list += [            "True Seeing",            "Programmed Illusion",            "Find the Path"        ]
+        seventh_list += ["Mirage Arcane",            "Project Image",           "Teleport"        ]
+        eighth_list += [ "Demiplane",            "Mind Blank",            "Antimagic Field"        ]
+        ninth_list += [            "Imprisonment",            "Time Stop",            "Power Word Kill"        ]
 
     # Druid
     if background == "Druid":
 
         difficulty = 1  # Full caster
-        cantrips_list += [            "Druidcraft",            "Guidance",            "Mending",
-            "Produce Flame",            "Shillelagh",            "Resistance"
-        ]
-        one_day_each_list += [            "Cure Wounds",
-            "Entangle",            "Speak with Animals"]
+        cantrips_list += [            "Druidcraft",            "Guidance",            "Mending",           "Produce Flame",            "Shillelagh",            "Resistance"        ]
+        one_day_each_list += [            "Cure Wounds",            "Entangle",            "Speak with Animals"]
         two_day_each_list += [            "Barkskin",            "Moonbeam",            "Pass without Trace"]
         three_day_each_list += [            "Guidance",            "Thorn Whip",            "Druidcraft"]
-        first_list += [            "Cure Wounds",            "Entangle",            "Faerie Fire",
-            "Goodberry",            "Healing Word",
-            "Thunderwave",            "Create or Destroy Water",
-            "Speak With Animals",            "Longstrider"        ]
-        second_list += [            "Barkskin",
-            "Flame Blade",            "Flaming Sphere",
-            "Lesser Restoration",            "Moonbeam",            "Pass Without Trace",
-            "Spike Growth",            "Animal Messenger"        ]
-        third_list += [            "Call Lightning",
-            "Cure Wounds",            "Dispel Magic",            "Protection From Energy",
-            "Water Breathing",            "Water Walk",            "Wind Wall"        ]
-        fourth_list += [            "Control Water",            "Freedom Of Movement",            "Ice Storm",
-            "Stoneskin",            "Wall of Fire",            "Giant Insect"        ]
-        fifth_list += [            "Awaken",            "Commune With Nature",            "Cure Wounds",
-            "Geas",            "Mass Cure Wounds",            "Reincarnate",            "Tree Stride"        ]
-        sixth_list += [            "Heal",            "Heroes' Feast",            "Move Earth",
-            "Sunbeam",            "Transport Via Plants",            "Wall Of Thorns",            "Wind Walk"        ]
-        seventh_list += [            "Fire Storm",            "Mirage Arcane",            "Plane Shift",
-            "Regenerate",            "Reverse Gravity",            "Teleport"        ]
-        eighth_list += [            "Animal Shapes",            "Control Weather",            "Earthquake",
-            "Sunburst",            "Tsunami",            "Antipathy/Sympathy"        ]
-        ninth_list += [            "Shapechange",            "Storm of Vengeance",            "True Resurrection",
-            "Foresight",            "Mass Heal"        ]
+        first_list += [            "Cure Wounds",            "Entangle",            "Faerie Fire",           "Goodberry",            "Healing Word",          "Thunderwave",            "Create or Destroy Water",            "Speak With Animals",            "Longstrider"        ]
+        second_list += [            "Barkskin",            "Flame Blade",            "Flaming Sphere",            "Lesser Restoration",            "Moonbeam",            "Pass Without Trace",            "Spike Growth",            "Animal Messenger"        ]
+        third_list += ["Call Lightning",            "Cure Wounds",            "Dispel Magic",            "Protection From Energy",            "Water Breathing",            "Water Walk",            "Wind Wall"        ]
+        fourth_list += ["Hallucinatory Terrain","Control Water","Freedom Of Movement","Ice Storm","Stoneskin","Wall of Fire","Giant Insect"]
+        fifth_list += [            "Awaken",            "Commune With Nature",            "Cure Wounds",            "Geas",            "Mass Cure Wounds",            "Reincarnate",            "Tree Stride"        ]
+        sixth_list += [            "Heal",            "Heroes' Feast",            "Move Earth",            "Sunbeam",            "Transport Via Plants",            "Wall Of Thorns",            "Wind Walk"        ]
+        seventh_list += [            "Fire Storm",            "Mirage Arcane",            "Plane Shift",            "Regenerate",            "Reverse Gravity",            "Teleport"        ]
+        eighth_list += [            "Animal Shapes",            "Control Weather",            "Earthquake",            "Sunburst",            "Tsunami",            "Antipathy/Sympathy"        ]
+        ninth_list += [            "Shapechange",            "Storm of Vengeance",            "True Resurrection","Foresight","Mass Heal"        ]
 
     # Expert
     if background == "Expert":
@@ -584,135 +478,67 @@ def Magic(npc):
     # Guard
     if background == "Guard":
         difficulty = Dice(12)  
-        cantrips_list += [            "Blade Ward",
-            "Control Flames",            "Friends",
-            "Light",            "True Strike"
-        ]
-        one_day_each_list += [            "Shield",
-            "Alarm",            "Protection from Evil and Good"]
+        cantrips_list += [            "Blade Ward", "Control Flames","Friends","Light",            "True Strike"]
+        one_day_each_list += [            "Shield", "Alarm",            "Protection from Evil and Good"]
         two_day_each_list += ["Hold Person", "Calm Emotions", "Zone of Truth"]
         three_day_each_list += ["Message", "Prestidigitation", "Light"]
-        first_list += [            "Alarm", "Compelled Duel", "Protection from Evil and Good", "Shield", "Wrathful Smite"        ]
-        second_list += [            "Aid", "Find Traps", "Hold Person", "Magic Weapon", "Zone of Truth"        ]
-        third_list += [            "Counterspell", "Crusader's Mantle", "Protection from Energy", "Slow", "Spirit Guardians"        ]
-        fourth_list += [            "Aura of Life", "Banishment", "Mordenkainen's Private Sanctum", "Stoneskin", "Watery Sphere"        ]
-        fifth_list += [            "Circle of Power", "Geas", "Hold Monster", "Wall of Force", "Teleportation Circle"        ]
-        sixth_list += [            "Find the Path", "Forbiddance", "Harm", "Heroes' Feast", "True Seeing"        ]
-        seventh_list += [            "Etherealness", "Forcecage", "Mordenkainen's Sword", "Resurrection", "Symbol"        ]
-        eighth_list += [            "Antimagic Field", "Control Weather", "Earthquake", "Holy Aura", "Telepathy"        ]
-        ninth_list += [            "Foresight", "Imprisonment", "Mass Heal", "Power Word Kill", "True Resurrection"        ]
+        first_list += ["Alarm", "Compelled Duel", "Protection from Evil and Good", "Shield", "Wrathful Smite"        ]
+        second_list += ["Aid", "Find Traps", "Hold Person", "Magic Weapon", "Zone of Truth"        ]
+        third_list += ["Counterspell", "Crusader's Mantle", "Protection from Energy", "Slow", "Spirit Guardians"        ]
+        fourth_list += ["Aura of Life", "Banishment", "Mordenkainen's Private Sanctum", "Stoneskin", "Watery Sphere"        ]
+        fifth_list += ["Circle of Power", "Geas", "Hold Monster", "Wall of Force", "Teleportation Circle"        ]
+        sixth_list += ["Find the Path", "Forbiddance", "Harm", "Heroes' Feast", "True Seeing"        ]
+        seventh_list += ["Etherealness", "Forcecage", "Mordenkainen's Sword", "Resurrection", "Symbol"        ]
+        eighth_list += ["Antimagic Field", "Control Weather", "Earthquake", "Holy Aura", "Telepathy"        ]
+        ninth_list += ["Foresight", "Imprisonment", "Mass Heal", "Power Word Kill", "True Resurrection"        ]
 
     # Healer
     if background == "Healer":
         difficulty = Dice(4)  
-        cantrips_list += [            "Guidance",
-            "Resistance",            "Spare the Dying",
-            "Thaumaturgy",            "Virtue"]
+        cantrips_list += ["Guidance",           "Resistance",            "Spare the Dying",            "Thaumaturgy",            "Virtue"]
         first_list += ["Cure Wounds", "Detect Poison and Disease", "Healing Word", "Purify Food and Drink", "Sanctuary"]
         second_list += ["Aid", "Calm Emotions", "Lesser Restoration", "Prayer of Healing", "Protection from Poison"]
         third_list += ["Create Food and Water", "Mass Healing Word", "Protection from Energy", "Remove Curse", "Remove Disease"]
         fourth_list += ["Death Ward", "Freedom of Movement", "Guardian of Faith", "Greater Restoration", "Stone Shape"]
         fifth_list += ["Greater Restoration", "Hallow", "Mass Cure Wounds", "Raise Dead", "Scrying"]
-        sixth_list += [
-            "Heal",            "Heroes' Feast",
-            "Planar Ally",            "True Seeing",
-            "Word of Recall"        ]
-        seventh_list += [            "Etherealness",
-            "Regenerate",            "Resurrection",
-            "Symbol",            "Teleport"        ]
-        eighth_list += [            "Antimagic Field",
-            "Control Weather",            "Earthquake",
-            "Holy Aura",            "Telepathy"        ]
-        ninth_list += [            "Foresight",
-            "Mass Heal",            "Power Word Heal",
-            "True Resurrection",            "Wish"        ]
+        sixth_list += [            "Heal",            "Heroes' Feast",            "Planar Ally",            "True Seeing",            "Word of Recall"        ]
+        seventh_list += [            "Etherealness",            "Regenerate",            "Resurrection",            "Symbol",            "Teleport"        ]
+        eighth_list += [            "Antimagic Field",            "Control Weather",            "Earthquake",            "Holy Aura",            "Telepathy"        ]
+        ninth_list += [            "Foresight",            "Mass Heal",            "Power Word Heal",            "True Resurrection",            "Wish"        ]
 
     # Hermit
     if background == "Hermit":
         difficulty = Dice(4)  
-        cantrips_list += [            "Druidcraft",
-            "Guidance",            "Mending",
-            "Resistance",            "Thaumaturgy"        ]
-        one_day_each_list += [            "Cure Wounds",
-            "Lesser Restoration",            "Shield of Faith"]
-        two_day_each_list += [            "Prayer of Healing",
-            "Remove Poison",            "Protection from Poison"]
-        three_day_each_list += [            "Purify Food and Drink",
-            "Detect Poison and Disease",            "Resistance"]
-        first_list += [            "Cure Wounds",
-            "Detect Poison and Disease",            "Goodberry",
-            "Purify Food and Drink",            "Speak with Animals"        ]
-        second_list += [            "Animal Messenger",
-            "Find Traps",            "Lesser Restoration",
-            "Protection from Poison",            "Silence"        ]
-        third_list += [            "Create Food and Water",
-            "Meld into Stone",            "Protection from Energy",
-            "Remove Curse",            "Water Walk"        ]
-        fourth_list += [            "Divination",
-            "Freedom of Movement",            "Locate Creature",
-            "Stone Shape",            "Wild Shape"        ]
-        fifth_list += [            "Commune",
-            "Geas",            "Greater Restoration",
-            "Legend Lore",            "Scrying"        ]
-        sixth_list += [            "Find the Path",
-            "Heal",            "Heroes' Feast",
-            "True Seeing",            "Wind Walk"        ]
+        cantrips_list += [            "Druidcraft",           "Guidance",            "Mending",            "Resistance",            "Thaumaturgy"        ]
+        one_day_each_list += [            "Cure Wounds",          "Lesser Restoration",            "Shield of Faith"]
+        two_day_each_list += [            "Prayer of Healing",            "Remove Poison",            "Protection from Poison"]
+        three_day_each_list += [            "Purify Food and Drink",            "Detect Poison and Disease",            "Resistance"]
+        first_list += [            "Cure Wounds",            "Detect Poison and Disease",            "Goodberry",            "Purify Food and Drink",            "Speak with Animals"        ]
+        second_list += [            "Animal Messenger",            "Find Traps",            "Lesser Restoration",            "Protection from Poison",            "Silence"        ]
+        third_list += [            "Create Food and Water",            "Meld into Stone",            "Protection from Energy",            "Remove Curse",            "Water Walk"        ]
+        fourth_list += [            "Divination",            "Freedom of Movement",            "Locate Creature",            "Stone Shape",            "Wild Shape"        ]
+        fifth_list += [            "Commune",            "Geas",            "Greater Restoration",            "Legend Lore",            "Scrying"     ]
+        sixth_list += [            "Find the Path",            "Heal",            "Heroes' Feast",            "True Seeing",            "Wind Walk"        ]
         seventh_list += [            "Etherealness", "Regenerate", "Resurrection", "Symbol", "Teleport"        ]
-        eighth_list += [            "Antimagic Field",
-            "Control Weather",            "Earthquake",
-            "Holy Aura",            "Telepathy"        ]
-        ninth_list += [            "Foresight",
-            "Gate",            "Mass Heal",
-            "True Resurrection",            "Wish"        ]
+        eighth_list += [            "Antimagic Field",            "Control Weather",            "Earthquake",            "Holy Aura",            "Telepathy"        ]
+        ninth_list += [            "Foresight",            "Gate",            "Mass Heal",            "True Resurrection",           "Wish"        ]
 
     # Hero
     if background == "Hero":
         difficulty = Dice(10)  
-        cantrips_list += [
-            "Guidance",
-            "Light",
-            "Resistance",
-            "Spare the Dying",
-            "Thaumaturgy"
-        ]
-
-        one_day_each_list += [
-            "Bless", "Cure Wounds", "Shield of Faith"]
+        cantrips_list += [            "Guidance",   "Light",            "Resistance",            "Spare the Dying",            "Thaumaturgy"]
+        one_day_each_list += [            "Bless", "Cure Wounds", "Shield of Faith"]
         two_day_each_list += ["Aid", "Lesser Restoration", "Protection from Energy"]
         three_day_each_list += ["Beacon of Hope", "Crusader's Mantle", "Remove Curse"]
-        first_list += [
-            "Bless", "Command", "Cure Wounds", "Heroism", "Shield of Faith"
-        ]
-        second_list += [
-            "Aid", "Branding Smite", "Find Steed", "Lesser Restoration", "Protection from Poison"
-        ]
-        third_list += [
-            "Beacon of Hope", "Crusader's Mantle", "Daylight", "Remove Curse", "Revivify"
-        ]
+        first_list += [            "Bless", "Command", "Cure Wounds", "Heroism", "Shield of Faith"]
+        second_list += [            "Aid", "Branding Smite", "Find Steed", "Lesser Restoration", "Protection from Poison"]
+        third_list += [            "Beacon of Hope", "Crusader's Mantle", "Daylight", "Remove Curse", "Revivify"]
         fourth_list += [            "Aura of Purity", "Aura of Life", "Death Ward", "Freedom of Movement", "Stoneskin"]
-        fifth_list += [
-            "Circle of Power", "Greater Restoration", "Mass Cure Wounds", "Raise Dead", "Flame Strike"
-        ]
-        sixth_list += [
-            "Find the Path",
-            "Heal",
-            "Heroes' Feast",
-            "True Seeing",
-            "Word of Recall"
-        ]
-        seventh_list += [
-            "Regenerate", "Resurrection", "Symbol", "Teleport", "Conjure Celestial"
-        ]
-
-        eighth_list += [
-            "Antimagic Field",
-            "Holy Aura", "Control Weather", "Earthquake", "Sunburst"
-        ]
-
-        ninth_list += [
-            "Foresight",
-            "Gate", "Mass Heal", "True Resurrection", "Storm of Vengeance"
-        ]
+        fifth_list += [            "Circle of Power", "Greater Restoration", "Mass Cure Wounds", "Raise Dead", "Flame Strike"]
+        sixth_list += [            "Find the Path",            "Heal",            "Heroes' Feast",            "True Seeing",            "Word of Recall"]
+        seventh_list += [            "Regenerate", "Resurrection", "Symbol", "Teleport", "Conjure Celestial"]
+        eighth_list += [            "Antimagic Field",            "Holy Aura", "Control Weather", "Earthquake", "Sunburst"]
+        ninth_list += [           "Foresight",            "Gate", "Mass Heal", "True Resurrection", "Storm of Vengeance"        ]
 
     # Hunter
     if background == "Hunter":
@@ -730,13 +556,7 @@ def Magic(npc):
         sixth_list += ["Find the Path", "Move Earth", "Sunbeam", "Transport via Plants", "Wind Walk"]
         seventh_list += ["Fire Storm", "Mirage Arcane", "Plane Shift", "Regenerate", "Reverse Gravity"]
         eighth_list += ["Animal Shapes", "Antimagic Field", "Control Weather", "Earthquake", "Sunburst"]
-        ninth_list += [
-            "Foresight",
-            "Shapechange",
-            "Storm of Vengeance",
-            "True Resurrection",
-            "Tsunami"
-        ]
+        ninth_list += [            "Foresight",            "Shapechange",            "Storm of Vengeance",            "True Resurrection",            "Tsunami"        ]
 
     # Knight
     if background == "Knight":
@@ -745,63 +565,25 @@ def Magic(npc):
         one_day_each_list += ["Command", "Compelled Duel", "Shield of Faith"]
         two_day_each_list += ["Aid", "Branding Smite", "Protection from Poison"]
         three_day_each_list += ["Crusader’s Mantle", "Magic Weapon", "Warding Bond"]
-        first_list += [
-            "Bless", "Compelled Duel", "Cure Wounds", "Heroism", "Shield of Faith"
-        ]
-        second_list += [
-            "Aid", "Find Steed", "Lesser Restoration", "Magic Weapon", "Warding Bond"
-        ]
-        third_list += [
-            "Crusader's Mantle", "Dispel Magic", "Protection from Energy", "Remove Curse", "Revivify"
-        ]
-        fourth_list += [
-            "Aura of Life",
-            "Aura of Purity", "Banishment", "Death Ward", "Stoneskin"
-        ]
-        fifth_list += [
-            "Circle of Power",
-            "Destructive Wave",
-            "Dispel Evil and Good",
-            "Geas",
-            "Raise Dead"
-        ]
-        sixth_list += [
-            "Find the Path",
-            "Heal", "Heroes' Feast", "True Seeing", "Wind Walk"
-        ]
-
-        seventh_list += [
-            "Resurrection",
-            "Symbol",
-            "Teleport"
-        ]
-        eighth_list += [
-            "Antimagic Field",
-            "Earthquake",
-            "Holy Aura"
-        ]
+        first_list += [            "Bless", "Compelled Duel", "Cure Wounds", "Heroism", "Shield of Faith"]
+        second_list += [            "Aid", "Find Steed", "Lesser Restoration", "Magic Weapon", "Warding Bond"]
+        third_list += [            "Crusader's Mantle", "Dispel Magic", "Protection from Energy", "Remove Curse", "Revivify"]
+        fourth_list += [            "Aura of Life",            "Aura of Purity", "Banishment", "Death Ward", "Stoneskin"]
+        fifth_list += [            "Circle of Power",            "Destructive Wave",            "Dispel Evil and Good",            "Geas",            "Raise Dead"]
+        sixth_list += [            "Find the Path",            "Heal", "Heroes' Feast", "True Seeing", "Wind Walk"]
+        seventh_list += [            "Resurrection",            "Symbol",            "Teleport"        ]
+        eighth_list += [            "Antimagic Field",            "Earthquake",            "Holy Aura"        ]
         ninth_list += ["Mass Heal", "True Resurrection"]
 
     # Mage
     if background == "Mage":
         difficulty = 1  # Full Caster
-        cantrips_list += [
-            "Acid Splash", "Fire Bolt", "Mage Hand", "Prestidigitation", "Ray of Frost",
-            "Minor Illusion", "Detect Magic"]
+        cantrips_list += [            "Acid Splash", "Fire Bolt", "Mage Hand", "Prestidigitation", "Ray of Frost", "Minor Illusion", "Detect Magic"]
         one_day_each_list += ["Shield", "Magic Missile", "Identify"]
         two_day_each_list += ["Misty Step", "Detect Thoughts", "Scorching Ray"]
         three_day_each_list += ["Counterspell", "Dispel Magic", "Fireball"]
-        first_list += [
-            "Detect Magic",
-            "Mage Armor",
-            "Magic Missile",
-            "Shield",
-            "Thunderwave",
-             "Identify"]
-        second_list += [
-            "Arcane Lock",
-            "Invisibility", "Levitate", "Mirror Image", "Scorching Ray",
-            "Misty Step", "Detect Thoughts", "Scorching Ray", "Arcane Lock", "Invisibility"]
+        first_list += [            "Detect Magic",            "Mage Armor",            "Magic Missile",            "Shield",            "Thunderwave",             "Identify"]
+        second_list += [            "Arcane Lock",            "Invisibility", "Levitate", "Mirror Image", "Scorching Ray",        "Misty Step", "Detect Thoughts", "Scorching Ray", "Arcane Lock", "Invisibility"]
         third_list += ["Counterspell", "Dispel Magic", "Fireball", "Fly", "Haste"]
         fourth_list += ["Dimension Door", "Greater Invisibility", "Ice Storm", "Polymorph", "Stone Shape"]
         fifth_list += ["Animate Objects", "Cone of Cold", "Teleportation Circle", "Wall of Force", "Telekinesis"]
@@ -830,9 +612,7 @@ def Magic(npc):
     # Noble
     if "Noble" in background:
         difficulty = Dice(12)  
-        cantrips_list += [
-            "Prestidigitation",
-            "Mage Hand", "Friends", "Message"]
+        cantrips_list += [            "Prestidigitation",            "Mage Hand", "Friends", "Message"]
         one_day_each_list += ["Charm Person", "Identify"]
         two_day_each_list += ["Detect Thoughts", "Suggestion"]
         three_day_each_list += ["Tongues", "Sending"]
@@ -841,53 +621,23 @@ def Magic(npc):
         third_list += ["Tongues", "Sending", "Leomund's Tiny Hut", "Clairvoyance", "Counterspell"]
         fourth_list += ["Leomund's Secret Chest", "Mordenkainen's Private Sanctum", "Arcane Eye", "Greater Invisibility", "Charm Monster"]
         fifth_list += ["Geas","Legend Lore", "Modify Memory", "Scrying", "Teleportation Circle"]
-        sixth_list += [
-            "Mass Suggestion",
-            "True Seeing",
-            "Guards and Wards",
-            "Contingency",
-            "Find the Path"]
-        seventh_list += [
-            "Teleport",
-            "Mordenkainen's Magnificent Mansion",
-            "Symbol",
-            "Mirage Arcane",
-            "Regenerate"]
-        eighth_list += [
-            "Mind Blank",
-            "Antipathy/Sympathy",
-            "Demiplane",
-            "Maze",
-            "Dominate Monster"]
-        ninth_list += [
-            "Foresight",
-            "Imprisonment",
-            "Power Word Kill",
-            "True Polymorph",
-            "Wish"]
+        sixth_list += [            "Mass Suggestion",            "True Seeing",           "Guards and Wards",      "Contingency",            "Find the Path"]
+        seventh_list += [            "Teleport",            "Mordenkainen's Magnificent Mansion",            "Symbol",            "Mirage Arcane",            "Regenerate"]
+        eighth_list += [            "Mind Blank",            "Antipathy/Sympathy",            "Demiplane",            "Maze",            "Dominate Monster"]
+        ninth_list += [           "Foresight",            "Imprisonment",            "Power Word Kill",            "True Polymorph",            "Wish"]
 
     # Priest
     if background == "Priest":
-        difficulty = Dice(6)  # Half-Caster
-        cantrips_list += [
-            "Guidance",
-            "Light",
-            "Mending",
-            "Sacred Flame",
-            "Thaumaturgy",
-            "Resistance" ]        
+        difficulty = Dice(3)
+        cantrips_list += ["Guidance",            "Light",            "Mending",            "Sacred Flame",           "Thaumaturgy",            "Resistance" ]        
         one_day_each_list += ["Cure Wounds", "Sanctuary"]
+        if npc.level > 20: one_day_each_list += ["Divine Intervention"]
         two_day_each_list += ["Lesser Restoration", "Prayer of Healing"]
         three_day_each_list += ["Dispel Magic", "Remove Curse"]
-        first_list += ["Cure Wounds", "Bless", "Healing Word", "Protection from Evil and Good","Detect Poison and Disease", "Sanctuary", "Guiding Bolt", "Command", "Detect Magic"]
-        second_list += [
-            "Lesser Restoration",
-            "Spiritual Weapon",
-            "Prayer of Healing",
-            "Aid",
-            "Find Traps",
-            "Augury",
-            "Hold Person" ]
+        first_list += ["Cure Wounds", "Bless", "Healing Word", "Protection from Evil and Good","Detect Poison and Disease", "Sanctuary",
+                       "Guiding Bolt", "Command", "Detect Magic"]
+        second_list += ["Lesser Restoration",            "Spiritual Weapon",            "Prayer of Healing",            "Aid",
+                        "Find Traps",            "Augury",            "Hold Person" ]
         third_list += ["Dispel Magic", "Remove Curse", "Mass Healing Word","Spirit Guardians", "Protection from Energy", "Tongues"]
         fourth_list += ["Death Ward", "Guardian of Faith", "Divination", "Banishment", "Freedom of Movement"]
         fifth_list += ["Greater Restoration", "Mass Cure Wounds", "Scrying", "Flame Strike", "Geas"]
@@ -905,26 +655,10 @@ def Magic(npc):
         three_day_each_list += ["Gaseous Form", "Water Walk"]
         first_list += ["Expeditious Retreat", "Disguise Self", "Create or Destroy Water", "Fog Cloud", "Grease"]
         second_list += ["Misty Step", "Suggestion", "Alter Self", "Gust of Wind", "Locate Object"]
-        third_list += ["Gaseous Form",
-                      "Water Walk",
-                      "Tidal Wave",
-                      "Major Image",
-                      "Water Breathing"]
-        fourth_list += ["Control Water",
-                       "Watery Sphere",
-                       "Dimension Door",
-                       "Storm Sphere",
-                       "Greater Invisibility"]
-        fifth_list += ["Control Winds",
-                      "Mislead",
-                      "Maelstrom",
-                      "Teleportation Circle",
-                      "Rary's Telepathic Bond"]
-        sixth_list += ["Investiture of Wind",
-                      "Chain Lightning",
-                      "True Seeing",
-                      "Wind Walk",
-                      "Find the Path"]
+        third_list += ["Gaseous Form",                      "Water Walk",                      "Tidal Wave",                      "Major Image",                      "Water Breathing"]
+        fourth_list += ["Control Water",                       "Watery Sphere",                       "Dimension Door",                       "Storm Sphere",                       "Greater Invisibility"]
+        fifth_list += ["Control Winds",                      "Mislead",                      "Maelstrom",                      "Teleportation Circle",                      "Rary's Telepathic Bond"]
+        sixth_list += ["Investiture of Wind",                      "Chain Lightning",                      "True Seeing",                     "Wind Walk",                      "Find the Path"]
         seventh_list += ["Teleport", "Regenerate", "Control Weather", "Reverse Gravity", "Whirlwind"]
         eighth_list += ["Control Weather", "Telepathy", "Incendiary Cloud", "Tsunami", "Dominate Monster"]
         ninth_list += ["Meteor Swarm", "Storm of Vengeance", "Time Stop", "Mass Polymorph", "Foresight"]
@@ -936,9 +670,7 @@ def Magic(npc):
         one_day_each_list += ["Longstrider", "Speak with Animals"]
         two_day_each_list += ["Pass without Trace", "Spike Growth"]
         three_day_each_list += ["Water Walk", "Water Breathing"]
-        first_list += [
-            "Cure Wounds",
-            "Goodberry", "Hunter's Mark", "Fog Cloud", "Alarm"]
+        first_list += [            "Cure Wounds",            "Goodberry", "Hunter's Mark", "Fog Cloud", "Alarm"]
         second_list += ["Pass without Trace", "Spike Growth", "Lesser Restoration", "Silence", "Locate Animals or Plants"]
         third_list += ["Water Walk", "Water Breathing", "Protection from Energy", "Speak with Plants", "Conjure Animals"]
         fourth_list += ["Freedom of Movement", "Stoneskin", "Locate Creature", "Grasping Vine", "Conjure Woodland Beings"]
@@ -948,13 +680,27 @@ def Magic(npc):
         eighth_list += ["Tsunami", "Earthquake", "Sunburst", "Control Weather", "Animal Shapes"]
         ninth_list += ["Storm of Vengeance","Shapechange",                      "Foresight", "True Resurrection",                      "Mass Heal"]
 
+    # Rogue
+    if background == "Rogue":
+        difficulty = Dice(8)
+        cantrips_list += ["Mage Hand", "Minor Illusion", "Prestidigitation", "Message"]
+        one_day_each_list += ["Disguise Self", "Silent Image", "Expeditious Retreat"]
+        two_day_each_list += ["Invisibility", "Misty Step", "Pass Without Trace"]
+        three_day_each_list += ["Blink", "Nondetection", "Leomund's Tiny Hut"]
+        first_list += ["Charm Person", "Sleep", "Tasha's Hideous Laughter", "Fog Cloud", "Feather Fall"]
+        second_list += ["Darkness", "Suggestion", "Mirror Image", "Alter Self", "Silence"]
+        third_list += ["Haste", "Major Image", "Dispel Magic", "Hypnotic Pattern", "Counterspell"]
+        fourth_list += ["Dimension Door", "Greater Invisibility", "Arcane Eye", "Freedom of Movement", "Confusion"]
+        fifth_list += ["Mislead", "Teleportation Circle", "Modify Memory", "Dominate Person", "Passwall"]
+        sixth_list += ["True Seeing", "Mass Suggestion", "Programmed Illusion", "Chain Lightning", "Find the Path"]
+        seventh_list += ["Mirage Arcane", "Teleport", "Etherealness", "Regenerate", "Project Image"]
+        eighth_list += ["Mind Blank", "Dominate Monster", "Power Word Stun", "Antimagic Field", "Maze"]
+        ninth_list += ["Time Stop", "Foresight", "Imprisonment", "True Polymorph", "Astral Projection"]
+
     # Scholar
     if background == "Scholar":
         difficulty = Dice(3)
-        cantrips_list += ["Prestidigitation",
-                         "Mage Hand",
-                         "Mending",
-                         "Message"]
+        cantrips_list += ["Prestidigitation",                         "Mage Hand",                         "Mending",                         "Message"]
         one_day_each_list += ["Identify", "Comprehend Languages"]
         two_day_each_list += ["Detect Thoughts", "Locate Object"]
         three_day_each_list += ["Tongues", "Clairvoyance"]
@@ -962,41 +708,24 @@ def Magic(npc):
         second_list += ["Detect Thoughts", "Locate Object", "Arcane Lock", "Gentle Repose", "Nystul's Magic Aura"]
         third_list += ["Tongues", "Clairvoyance", "Leomund's Tiny Hut", "Rary's Telepathic Bond", "Sending"]
         fourth_list += ["Leomund's Secret Chest", "Arcane Eye", "Stone Shape", "Fabricate", "Mordenkainen's Private Sanctum"]
-        fifth_list += [
-            "Legend Lore", "Contact Other Plane", "Scrying", "Teleportation Circle", "Rary's Telepathic Bond"]
-        sixth_list += [
-            "True Seeing",
-            "Find the Path", "Analyze Dweomer", "Guards and Wards", "Create Undead"]
+        fifth_list += [            "Legend Lore", "Contact Other Plane", "Scrying", "Teleportation Circle", "Rary's Telepathic Bond"]
+        sixth_list += [            "True Seeing",            "Find the Path", "Analyze Dweomer", "Guards and Wards", "Create Undead"]
         seventh_list += ["Teleport", "Symbol", "Sequester", "Rary's Telepathic Bond", "Mordenkainen's Sword"]
-        eighth_list += [
-            "Mind Blank", "Antipathy/Sympathy", "Telepathy", "Clone", "Demiplane"]
-        ninth_list += [
-            "Foresight",
-            "Astral Projection", "Time Stop", "Gate", "Wish"]
+        eighth_list += [            "Mind Blank", "Antipathy/Sympathy", "Telepathy", "Clone", "Demiplane"]
+        ninth_list += [            "Foresight",            "Astral Projection", "Time Stop", "Gate", "Wish"]
 
     # Shaman
     if background == "Shaman":
         difficulty = Dice(3)  # Full Caster
-        cantrips_list += ["Guidance", "Druidcraft", "Spare the Dying", "Resistance", "Produce Flame",
-                         "Thorn Whip"]
+        cantrips_list += ["Guidance", "Druidcraft", "Spare the Dying", "Resistance", "Produce Flame",                         "Thorn Whip"]
         one_day_each_list += ["Cure Wounds", "Detect Poison and Disease"]
         two_day_each_list += ["Lesser Restoration", "Pass Without Trace"]
         three_day_each_list += ["Dispel Magic", "Speak with Dead"]
-        first_list += ["Cure Wounds", "Detect Poison and Disease",
-                      "Entangle", "Create or Destroy Water", "Fog Cloud",
-                      "Bane", "Shield Of Faith"]
-        second_list += [
-            "Lesser Restoration", "Pass Without Trace", "Flame Blade",
-                       "Animal Messenger", "Heat Metal", "Spike Growth"]
-        third_list += ["Dispel Magic", "Speak with Dead",
-                      "Call Lightning", "Water Walk", "Meld into Stone",
-                      "Conjure Animals", "Plant Growth"]
+        first_list += ["Cure Wounds", "Detect Poison and Disease",                      "Entangle", "Create or Destroy Water", "Fog Cloud",                      "Bane", "Shield Of Faith"]
+        second_list += [            "Lesser Restoration", "Pass Without Trace", "Flame Blade",                       "Animal Messenger", "Heat Metal", "Spike Growth"]
+        third_list += ["Dispel Magic", "Speak with Dead",                      "Call Lightning", "Water Walk", "Meld into Stone",                      "Conjure Animals", "Plant Growth"]
         fourth_list += ["Divination", "Freedom of Movement", "Stone Shape", "Locate Creature", "Control Water"]
-        fifth_list += ["Commune",
-                      "Greater Restoration",
-                      "Awaken",
-                      "Mass Cure Wounds",
-                      "Reincarnate"]
+        fifth_list += ["Commune",                      "Greater Restoration",                      "Awaken",                      "Mass Cure Wounds",                      "Reincarnate"]
         sixth_list += ["Heal", "Find the Path", "Heroes' Feast", "Move Earth", "Create Undead"]
         seventh_list += ["Regenerate", "Etherealness", "Fire Storm", "Resurrection", "Symbol"]
         eighth_list += ["Earthquake", "Control Weather", "Sunburst", "Antipathy/Sympathy", "Animal Shapes"]
@@ -1007,8 +736,7 @@ def Magic(npc):
         difficulty = Dice(8) 
         cantrips_list += ["Blade Ward", "True Strike", "Resistance", "Guidance"]
         one_day_each_list += ["Shield", "Heroism"]
-        two_day_each_list += ["Magic Weapon",
-                             "Aid"]
+        two_day_each_list += ["Magic Weapon",  "Aid"]
         three_day_each_list += ["Protection from Energy", "Haste"]
         first_list += ["Shield", "Heroism", "Cure Wounds", "Expeditious Retreat", "Protection from Evil and Good"]
         second_list += ["Magic Weapon", "Aid", "Enhance Ability", "Blur", "Protection from Poison"]
@@ -1016,21 +744,9 @@ def Magic(npc):
         fourth_list += ["Death Ward", "Freedom of Movement", "Stoneskin", "Aura of Life", "Aura of Purity"]
         fifth_list += ["Greater Restoration", "Raise Dead", "Destructive Wave", "Flame Strike", "Planar Binding"]
         sixth_list += ["Heal", "Heroes' Feast", "Find the Path", "Contingency", "Create Undead"]
-        seventh_list += [
-            "Resurrection",
-            "Regenerate",
-            "Symbol",
-            "Teleport",
-            "Conjure Celestial"]
-        eighth_list += [
-            "Holy Aura",
-            "Antimagic Field",
-            "Glibness", "Earthquake", "Dominate Monster"]
+        seventh_list += [            "Resurrection",            "Regenerate",            "Symbol",            "Teleport",            "Conjure Celestial"]
+        eighth_list += [            "Holy Aura",            "Antimagic Field",            "Glibness", "Earthquake", "Dominate Monster"]
         ninth_list += ["Mass Heal", "True Resurrection", "Power Word Kill", "Astral Projection", "Gate"]
-
-
-
-
 
     # Spy
     if background == "Spy":
@@ -1062,11 +778,7 @@ def Magic(npc):
         fourth_list += ["Freedom of Movement", "Locate Creature", "Stone Shape", "Control Water", "Death Ward"]
         fifth_list += ["Commune with Nature", "Greater Restoration", "Teleportation Circle", "Scrying", "Mass Cure Wounds"]
         sixth_list += ["Find the Path", "Wind Walk", "Heal", "Heroes' Feast", "Move Earth"]
-        seventh_list += ["Regenerate",
-                        "Teleport",
-                        "Mirage Arcane",
-                        "Resurrection",
-                        "Transport via Plants"]
+        seventh_list += ["Regenerate","Teleport",                        "Mirage Arcane",                        "Resurrection",                "Transport via Plants"]
         eighth_list += ["Control Weather","Earthquake", "Antipathy/Sympathy", "Telepathy", "Holy Aura"]
         ninth_list += ["Storm of Vengeance", "Gate", "Foresight", "True Resurrection", "Mass Heal"]
 
@@ -1107,20 +819,12 @@ def Magic(npc):
     # Warlock
     if background == "Warlock":
         difficulty = Dice(2)  
-        cantrips_list += [
-            "Eldritch Blast", "Mage Hand", "Minor Illusion", "Prestidigitation",
-                         "Thaumaturgy", "Poison Spray"]
+        cantrips_list += [            "Eldritch Blast", "Mage Hand", "Minor Illusion", "Prestidigitation",                         "Thaumaturgy", "Poison Spray"]
         one_day_each_list += ["Armor of Agathys", "Hellish Rebuke"]
         two_day_each_list += ["Summon Lesser Demons", "Summon Greater Demon"]
         three_day_each_list += ["Infernal Calling", "Contact Other Plane"]
-        first_list += ["Armor of Agathys", "Hellish Rebuke", "Hex", "Charm Person",
-                      "Comprehend Languages", "Sanctuary", "Detect Magic", "Bane",
-                      "Shield", "Magic Missile"]
-        second_list += [            "Summon Lesser Demons",
-            "Darkness",            "Silence",
-            "Mirror Image",            "Misty Step",
-            "Suggestion",            "Flaming Sphere",
-            "Hold Person",            "Blur"]
+        first_list += ["Armor of Agathys", "Hellish Rebuke", "Hex", "Charm Person",                      "Comprehend Languages", "Sanctuary", "Detect Magic", "Bane",                      "Shield", "Magic Missile"]
+        second_list += [            "Summon Lesser Demons",           "Darkness",            "Silence",            "Mirror Image",            "Misty Step",            "Suggestion",            "Flaming Sphere",            "Hold Person",            "Blur"]
         third_list += ["Summon Greater Demon", "Counterspell", "Fly","Hypnotic Pattern", "Magic Circle", "Dispel Magic",                      "Clairvoyance", "Fireball"]
         fourth_list += ["Infernal Calling",  "Banishment",                       "Dimension Door",                       "Hallucinatory Terrain",                       "Shadow of Moil",                       "Freedom Of Movement",                       "Divination"]
         fifth_list += ["Contact Other Plane", "Dream", "Enervation", "Hold Monster", "Scrying"]
@@ -1131,7 +835,7 @@ def Magic(npc):
 
     # Witch
     if background == "Witch":
-        difficulty = Dice(3)          
+        difficulty = 1          
         cantrips_list += ["Eldritch Blast", "Mage Hand", "Minor Illusion", "Thaumaturgy"]
         one_day_each_list += ["Hex", "Cure Wounds"]
         two_day_each_list += ["Bane", "Ray of Enfeeblement"]
@@ -1149,8 +853,10 @@ def Magic(npc):
 ## RACES
 
     # Aberration
-    if race == "Aberration" or "Beholder":
-        if race == "Beholder":
+    
+    if race == "Aberration":
+        '''
+        if npc.subrace == "Beholder":
             cantrip, _ = add_spell(cantrip, "Rotting Gaze", 3, 0, max_spell_level,
                                    f"The aberration targets one creature it can see within 30 feet of it. The target must succeed on a DC {10+PB(Lvl)} Constitution saving throw against this magic or take 10 (3d6) necrotic damage.")
             cantrip, _ = add_spell(cantrip, "Weird Insight", 4, 0, max_spell_level,
@@ -1165,97 +871,43 @@ def Magic(npc):
                                    f"The target must make a DC {10+PB(Lvl)} Constitution saving throw, taking 16 (3d10) necrotic damage on a failed save, or half as much damage on a successful one.")
             one, _ = add_spell(one, "Stench Spray", 3, 0, max_spell_level,
                                f"1/Day. The target must make a DC {10+PB(Lvl)} Constitution saving throw, taking 16 (3d10) necrotic damage on a failed save, or half as much damage on a successful one.")
-
+        '''
 
 
         # Cantrips
-        cantrips_list += ["Eldritch Blast",
-                         "Mage Hand",
-                         "Minor Illusion",
-                         "Thaumaturgy",
-                         "Message"]
-        
-        one_day_each_list += ["Detect Thoughts",
-                             "Dissonant Whispers"]
-        
-        two_day_each_list += ["Hold Person",
-                             "Levitate",
-                             "Crown of Madness",
+        cantrips_list += ["Eldritch Blast",                         "Mage Hand",                         "Minor Illusion","Thaumaturgy",                         "Message"]        
+        one_day_each_list += ["Detect Thoughts",                             "Dissonant Whispers"]        
+        two_day_each_list += ["Hold Person",                             "Levitate",                   "Crown of Madness",
                              "Hold Person"]
-
-        three_day_each_list += [ "Telekinesis",
-                                "Mind Spike",
-                                "Fear",
-                                "Hypnotic Pattern"]
-
-        first_list += ["Detect Magic",
-                      "Dissonant Whispers",
-                      "Mage Armor",
-                      "Shield",
-                      "Tasha's Hideous Laughter",
-                      "Charm Person",
-                      "Illusory Script"]
-
-        second_list += ["Hold Person",
-                       "Mirror Image",
-                       "Misty Step",
-                       "Detect Thoughts",
-                       "Blur",
-                       "Crown of Madness",
-                       "Phantasmal Force"]
-
+        three_day_each_list += [ "Telekinesis",                                "Mind Spike",                                "Fear",                                "Hypnotic Pattern"]
+        first_list += ["Detect Magic",                      "Dissonant Whispers",
+                      "Mage Armor",                      "Shield",                      "Tasha's Hideous Laughter",
+                      "Charm Person",                      "Illusory Script"]
+        second_list += ["Hold Person",                       "Mirror Image",                       "Misty Step",                       "Detect Thoughts",                       "Blur",                       "Crown of Madness",                       "Phantasmal Force"]
         third_list += [            "Counterspell",            "Dispel Magic",            "Hypnotic Pattern",            "Telekinesis",            "Tongues",            "Fear",            "Major Image",            "Sending",            "Clairvoyance"]
         fourth_list += [            "Banishment",           "Dimension Door",            "Arcane Eye",            "Confusion",            "Greater Invisibility",            "Phantasmal Killer"]
-
-        fifth_list += [            "Contact Other Plane",            "Scrying",            "Teleportation Circle",
-            "Dream",            "Modify Memory",             "Dominate Person",            "Telekinesis",            "Mislead" ]
-
-        sixth_list += [
-            "True Seeing",
-            "Arcane Gate",
-            "Mass Suggestion",
-            "Plane Shift",
-            "Disintegrate",
-            "Mental Prison",
-            "Eyebite",
-            "Programmed Illusion"
-                      ]
-        seventh_list += ["Teleport",
-                        "Etherealness",
-                        "Project Image",
-                        "Symbol",
-                        "Forcecage",
-                        "Mirage Arcane",
-                        "Etherealness",
-                        "Simulacrum"]
-        
-        eighth_list += ["Feeblemind",
-                       "Mind Blank",                       "Antipathy/Sympathy",
-                       "Demiplane",                       "Maze",
-                       "Telepathy",                       "Antimagic Field",
-                       "Power Word Stun"]
-        ninth_list += ["Astral Projection",
-                     "Foresight",                      "Gate",
-                      "Imprisonment",
-                      "Psychic Scream",
-                      "Power Word Kill",
-                      "Time Stop",                      "Gate",
-                      "True Polymorph"]
+        fifth_list += [            "Contact Other Plane",            "Scrying",            "Teleportation Circle",          "Dream",            "Modify Memory",             "Dominate Person",            "Telekinesis",            "Mislead" ]
+        sixth_list += [            "True Seeing",            "Arcane Gate",            "Mass Suggestion",   "Plane Shift",
+            "Disintegrate",            "Mental Prison",            "Eyebite",            "Programmed Illusion"              ]
+        seventh_list += ["Teleport",                        "Etherealness",                        "Project Image",                        "Symbol",                       "Forcecage",
+                        "Mirage Arcane",                        "Etherealness",                        "Simulacrum"]        
+        eighth_list += ["Feeblemind",                       "Mind Blank",                       "Antipathy/Sympathy",               "Demiplane",                       "Maze",                       "Telepathy",                       "Antimagic Field",                       "Power Word Stun"]
+        ninth_list += ["Astral Projection",                    "Foresight",                      "Gate",                      "Imprisonment",                     "Psychic Scream",                      "Power Word Kill",                      "Time Stop",                      "Gate",                      "True Polymorph"]
 
         
     # Aven
     if race == "Aven":
-        recharge, _ = add_spell(recharge, "Summon Air Elemental", 3, 0, max_spell_level,
+        '''
+        recharge = add_spell(recharge, "Summon Air Elemental", 3, 0,
                                "Five Aven within 30 feet of each other can magically summon an air elemental. Each of the five must use its action and movement on three consecutive turns to perform an aerial dance and must maintain concentration while doing so (as if concentrating on a spell). When all five have finished their third turn of the dance, the elemental appears in an unoccupied space within 60 feet of them. It is friendly toward them and obeys their spoken commands. It remains for 1 hour, until it or all its summoners die, or until any of its summoners dismisses it as a bonus action. A summoner can't perform the dance again until it finishes a short rest. When the elemental returns to the Elemental Plane of Air, any Aven within 5 feet of it can return with it.")
+        '''
 
         cantrips_list += ["Guidance", "Gust", "Mage Hand", "Message"]
         one_day_each_list += [            "Feather Fall", "Jump"]
         two_day_each_list += ["Levitate", "Fly"]
         three_day_each_list += ["Wind Wall", "Gaseous Form"]
         first_list += [            "Feather Fall", "Jump", "Expeditious Retreat", "Longstrider", "Fog Cloud"]
-        second_list += [ "Levitate",
-                    "Fly",
-                    "Gust of Wind",
+        second_list += [ "Levitate",                    "Fly",     "Gust of Wind",
                     "Skywrite",            "Spider Climb"]
         third_list += ["Wind Wall", "Gaseous Form", "Daylight", "Protection from Energy", "Feign Death"]
         fourth_list += [            "Freedom of Movement", "Control Winds", "Greater Invisibility", "Stone Shape", "Conjure Minor Elementals"]
@@ -1270,9 +922,10 @@ def Magic(npc):
         
     # BEASTS AND BEASTFOLK
     if race == "Beast":
-        recharge, _ = add_spell(recharge, "Cold Breath", 0, 0, max_spell_level,
+        '''
+        recharge, _ = add_spell(recharge, "Cold Breath", 0,
                                f"(Recharge 5–6). \n\t The beast exhales a blast of freezing wind in a 15-foot cone. Each creature in that area must make a DC {10+PB(Lvl)} Dexterity saving throw, taking 18 (4d8) cold damage on a failed save, or half as much damage on a successful one.")
-
+        '''
         cantrips_list += ["Druidcraft", "Guidance", "Mending", "Resistance"]
         one_day_each_list += ["Animal Friendship", "Speak with Animals"]
         two_day_each_list += ["Barkskin", "Beast Sense"]
@@ -1335,8 +988,11 @@ def Magic(npc):
 
     # CONSTRUCTS.
     if race == "Construct":
+        '''
         recharge, _ = add_spell(recharge, "Paralysis Gas", 4, 0, max_spell_level,
                                f"(Recharge 5–6). \n\t The construct exhales a 30-foot cone of gas. Each creature in that area must succeed on a DC {10+PB(Lvl)} Constitution saving throw or be paralyzed for 1 minute. A creature can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success.")
+        '''
+
         cantrips_list += ["Guidance", "Mage Hand", "Mending", "Prestidigitation", "Light"]
         one_day_each_list += ["Alarm", "Cure Wounds", "Grease"]
         two_day_each_list += ["Darkvision", "Enhance Ability", "Heat Metal"]
@@ -1425,8 +1081,8 @@ def Magic(npc):
     # ELEMENTAL.
     if race == "Elemental":
         cantrips_list += ["Control Flames", "Gust", "Mold Earth", "Shape Water", "Dancing lights"]
-
-        recharge, _ = add_spell(recharge, "Whirlwind", 0, 0, max_spell_level,
+        """
+        recharge, _ = add_spell(recharge, "Whirlwind", 0, 
                                 f" (Recharge 4–6)."+
                                 f"\t Each creature in the {race}'s space must make a Strength saving throw. " +
                                 f"On a failure, a target takes 15 (3d8 + 2) bludgeoning damage and is flung up 20 feet away from the {race} in a random direction and knocked prone. " +
@@ -1434,21 +1090,21 @@ def Magic(npc):
                                 f"If the target is thrown at another creature, that creature must succeed on a Dexterity Saving Throw or take the same damage and be knocked prone. " +
                                 f"/n/t If the saving throw is successful, the target takes half the bludgeoning damage and isn't flung away or knocked prone. ")
 
-        recharge, _ = add_spell(recharge, "Cinder breath", 0, 0, max_spell_level,
+        recharge, _ = add_spell(recharge, "Cinder breath", 0,
                                 f"\t (Recharge 6). The Elemental exhales a 15-foot cone of smoldering ash. Each creature in that area must succeed on a DC [10+%Cha] Dexterity saving throw or be blinded until the end of the Elemental's next turn.")
 
-        recharge, _ = add_spell(recharge, "Blinding breath", 0, 0, max_spell_level,
+        recharge, _ = add_spell(recharge, "Blinding breath", 0, 
                                f"\t (Recharge 6). The Elemental exhales a 15-foot cone of blinding dust. Each creature in that area must succeed on a Dexterity saving throw or be blinded for one minute.")
 
-        recharge, _ = add_spell(recharge, "Steam breath", 0, 0, max_spell_level,
+        recharge, _ = add_spell(recharge, "Steam breath", 0, 0,
                                 f"\t (Recharge 6). The Elemental exhales a 15-foot cone of scalding steam. Each creature in that area must succeed on a Dexterity saving throw, taking 4 (1d8) fire damage on a failed save, or half as much damage on a successful one.")
 
-        recharge, _ = add_spell(recharge, "Frost Breath", 0, 0, max_spell_level,
+        recharge, _ = add_spell(recharge, "Frost Breath", 0, 0,
                                 f"\t (Recharge 6). The Elemental exhales a 15-foot cone of cold air. Each creature in that area must succeed on a Dexterity saving throw, taking 5 (2d4) cold damage on a failed save, or half as much damage on a successful one.")
 
-        recharge, _ = add_spell(recharge, "Fire Breath", 0, 0, max_spell_level,
+        recharge, _ = add_spell(recharge, "Fire Breath", 0, 0,
                                "\t (Recharge 6). The Elemental exhales a 15-foot cone of cold air. Each creature in that area must succeed on a Dexterity saving throw, taking 7 (2d6) fire damage on a failed save, or half as much damage on a successful one.")
-
+        """
         one_day_each_list += ["Burning Hands", "Earth Tremor", "Ice Knife"]
         two_day_each_list += ["Dust Devil", "Flame Blade", "Misty Step"]
         three_day_each_list += ["Elemental Weapon", "Gaseous Form", "Wind Wall"]
@@ -1461,7 +1117,7 @@ def Magic(npc):
         seventh_list += ["Fire Storm", "Prismatic Spray", "Whirlwind", "Plane Shift", "Teleport"]
         eighth_list += ["Earthquake",            "Incendiary Cloud", "Sunburst", "Tsunami", "Control Weather"]
         ninth_list += [            "Meteor Swarm", "Storm of Vengeance", "Tsunami", "Gate", "Prismatic Wall"]
-
+        '''
         recharge, _ = add_spell(recharge, "Summon Mephits", max_spell_level-3, 0, max_spell_level,
                                   "(recharge 6):\t The Elemental has a 25 percent chance of summoning 1d4 mephits. A summoned mephit appears in an unoccupied space within 60 feet of its summoner, acts as an ally of its summoner, and can't summon other mephits. It remains for 1 minute, until it or its summoner dies, or until its summoner dismisses it as an action.")
         one, _ = add_spell(one, "Innate Spellcasting", max_spell_level-3, 0, max_spell_level,
@@ -1472,19 +1128,13 @@ def Magic(npc):
 
         one, _ = add_spell(one, "Blur", max_spell_level-3,0, max_spell_level,)
         one, _ = add_spell(one, "Sleep", max_spell_level-3, 0, max_spell_level,)
-
+        '''
     # ELF.
-    if race == "Elf":
+    if "Elf" in npc.race:
         cantrips_list += ["Dancing Lights", "Druidcraft", "Mage Hand", "Minor Illusion"]
         one_day_each_list += ["Charm Person", "Disguise Self", "Sleep", "Darkness", "Faerie Fire", "Levitate"]
-        two_day_each_list += [
-            "Detect Thoughts",
-            "Invisibility",
-            "Mirror Image"]
-        three_day_each_list += [
-            "Counterspell",
-            "Feather Fall",
-            "Protection from Energy"]
+        two_day_each_list += [            "Detect Thoughts",            "Invisibility",            "Mirror Image"]
+        three_day_each_list += [            "Counterspell",            "Feather Fall",            "Protection from Energy"]
         first_list += ["Charm Person", "Detect Magic", "Fog Cloud", "Goodberry", "Healing Word"]
         second_list += ["Barkskin", "Darkvision", "Enhance Ability", "Pass without Trace", "Silence"]
         third_list += ["Dispel Magic", "Protection from Energy", "Remove Curse", "Speak with Dead", "Water Breathing"]
@@ -1495,7 +1145,23 @@ def Magic(npc):
         eighth_list += ["Antipathy/Sympathy", "Earthquake", "Incendiary Cloud", "Mind Blank", "Power Word Stun"]
         ninth_list += ["Foresight", "Mass Heal", "Power Word Heal", "Shapechange", "Time Stop"]
 
+        if "Urban" in npc.subrace:
+            cantrips_list += ["Mage Hand", "Prestidigitation", "Minor Illusion", "Message"]
+            one_day_each_list += ["Charm Person", "Disguise Self", "Silent Image", "Sleep"]
+            two_day_each_list += ["Invisibility", "Misty Step", "Nondetection"]
+            three_day_each_list += ["Major Image", "Leomund's Tiny Hut", "Counterspell"]
+            first_list += ["Detect Magic", "Feather Fall", "Sleep", "Tasha's Hideous Laughter", "Unseen Servant"]
+            second_list += ["Arcane Lock", "Darkness", "Knock", "Silence", "Spider Climb"]
+            third_list += ["Clairvoyance", "Nondetection", "Tongues", "Dispel Magic", "Hypnotic Pattern"]
+            fourth_list += ["Dimension Door", "Greater Invisibility", "Arcane Eye", "Leomund's Secret Chest", "Freedom of Movement"]
+            fifth_list += ["Mislead", "Passwall", "Teleportation Circle", "Modify Memory", "Seeming"]
+            sixth_list += ["Programmed Illusion", "True Seeing", "Mass Suggestion", "Find the Path", "Guards and Wards"]
+            seventh_list += ["Mirage Arcane", "Project Image", "Etherealness", "Teleport", "Sequester"]
+            eighth_list += ["Antimagic Field", "Mind Blank", "Demiplane", "Maze", "Dominate Monster"]
+            ninth_list += ["Foresight", "Time Stop", "Astral Projection", "Imprisonment", "True Polymorph"]
+
     # FAE.
+    
     if race == "Fey" and Dice(8) == 1 and not ("Ethereal Jaunt" in recharge):    recharge += "\n- Ethereal Jaunt (Recharge 6):\n\t As a bonus action, the fey can magically shift from the Material Plane to the Ethereal Plane, or vice versa."
     if race == "Fey" and Dice(10) == 1 and not ("Teleport" in recharge):         recharge += "\n- Teleport (Recharge 4–6). \n\t The Fey magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the Fey can make one bite attack."
     if race == "Fey" and Dice(10) == 1 and not ("Heart Sight" in recharge):      recharge += "\n- Heart Sight. (Recharge 6)\n\t The Fey touches a creature and magically knows the creature's current emotional state. If the target fails a DC [10+%Cha] Charisma saving throw, the Fey also knows the creature's alignment. Celestials, fiends, and undead automatically fail the saving throw."
@@ -1505,10 +1171,10 @@ def Magic(npc):
 
 
 
-    if race == "Fey" and Dice(8) == 1 and not ("Charming Melody" in one):       one += "\n- Charming Melody [DC 10+%Cha Wisdom saving throw]\n\t The creature is charmed by the Fey for 1 minute. If the Fey or any of its companions harms the creature, the effect on it ends immediately."
-    if race == "Fey" and Dice(8) == 1 and not ("Frightening Strain" in one):    one += "\n- Frightening Strain [DC 10+%Cha Wisdom saving throw] \n\t The creature is charmed by the Fey for 1 minute. If the Fey or any of its companions harms the creature, the effect on it ends immediately."
-    if race == "Fey" and Dice(8) == 1 and not ("Gentle Lullaby" in one):        one += "\n- Gentle Lullaby [DC 10+%Cha Wisdom saving throw] \n\t The creature falls asleep and is unconscious for 1 minute. The effect ends if the creature takes damage or if someone takes an action to shake the creature awake."
-    if race == "Fey" and Dice(8) == 1 and not ("Nightmare Haunting" in one):    one += "\n- Nightmare Haunting \n\t While on the Ethereal Plane, the fey magically touches a sleeping humanoid on the Material Plane. A protection from evil and good spell cast on the target prevents this contact, as does a magic circle. As long as the contact persists, the target has dreadful visions. If these visions last for at least 1 hour, the target gains no benefit from its rest, and its hit point maximum is reduced by 5 (1d10). If this effect reduces the target's hit point maximum to 0, the target dies, and if the target was evil, its soul is trapped in the fey's soul bag. The reduction to the target's hit point maximum lasts until removed by the greater restoration spell or similar magic."
+    if race == "Fey" and Dice(8) == 1 and not ("Charming Melody" in one_day_each_list):       one_day_each_list += "\n- Charming Melody [DC 10+%Cha Wisdom saving throw]\n\t The creature is charmed by the Fey for 1 minute. If the Fey or any of its companions harms the creature, the effect on it ends immediately."
+    if race == "Fey" and Dice(8) == 1 and not ("Frightening Strain" in one_day_each_list):    one_day_each_list += "\n- Frightening Strain [DC 10+%Cha Wisdom saving throw] \n\t The creature is charmed by the Fey for 1 minute. If the Fey or any of its companions harms the creature, the effect on it ends immediately."
+    if race == "Fey" and Dice(8) == 1 and not ("Gentle Lullaby" in one_day_each_list):        one_day_each_list += "\n- Gentle Lullaby [DC 10+%Cha Wisdom saving throw] \n\t The creature falls asleep and is unconscious for 1 minute. The effect ends if the creature takes damage or if someone takes an action to shake the creature awake."
+    if race == "Fey" and Dice(8) == 1 and not ("Nightmare Haunting" in one_day_each_list):    one_day_each_list += "\n- Nightmare Haunting \n\t While on the Ethereal Plane, the fey magically touches a sleeping humanoid on the Material Plane. A protection from evil and good spell cast on the target prevents this contact, as does a magic circle. As long as the contact persists, the target has dreadful visions. If these visions last for at least 1 hour, the target gains no benefit from its rest, and its hit point maximum is reduced by 5 (1d10). If this effect reduces the target's hit point maximum to 0, the target dies, and if the target was evil, its soul is trapped in the fey's soul bag. The reduction to the target's hit point maximum lasts until removed by the greater restoration spell or similar magic."
 
         
     if race == "Fey":
@@ -1566,11 +1232,12 @@ def Magic(npc):
         if Dice() == 1 and not ("Fire Ray" in cantrip):             cantrip += "\n- Fire Ray \t Ranged Spell Attack. Range 120ft. One target. Hit: 10(3d6) fire damage."
 
     # Once a day
+    '''
     if race == "Fiend":
         if Dice() == 1 and not ("Scare" in one):            one += "\n- Scare \n\t One creature of the Fiend's choice within 20 feet of it must succeed on a DC 10 Wisdom saving throw or be frightened for 1 minute. The target can repeat the saving throw at the begguining of each of its turns, with disadvantage if the Fiend is within line of sight, ending the effect on itself on a success."
         if Dice() == 1 and not ("Fetid Cloud" in one):      one += "\n- Fetid Cloud.\n\t A 10-foot radius of disgusting sulfuric gas extends out from the Fiend. The gas spreads around corners, and its area is lightly obscured. It lasts for 1 minute or until a strong wind disperses it. Any creature that starts its turn in that area must succeed on a DC 11 Constitution saving throw or be poisoned until the start of its next turn. While poisoned in this way, the target can take either an action or a bonus action on its turn, not both, and can't take reactions."
         if Dice() == 1 and not ("Summon Yugoloth" in one):  one += "\n- Summon Yugoloth. \n\t The fiend attempts a magical summoning. \n\t A fiend has a 30 percent chance of summoning one mezzoloth. \n\t A summoned yugoloth appears in an unoccupied space within 60 feet of its summoner, does as it pleases, and can't summon other yugoloths. The summoned yugoloth remains for 1 minute, until it or its summoner dies, or until its summoner takes a bonus action to dismiss it."
-            
+    '''       
         
     if race == "Fiend":
 
@@ -1787,6 +1454,7 @@ def Magic(npc):
         eighth_list += ["Dominate Monster", "Feeblemind", "Power Word Stun", "Telepathy", "Trap the Soul"]
         ninth_list += ["Imprisonment", "Power Word Kill", "Psychic Scream", "True Polymorph", "Weird"]
 
+    '''
     ## Once a day
     if race == "Monstrosity" and Dice() == 1 and not ("Darkness Aura" in one):      one += "\n - Darkness Aura: \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
     if race == "Monstrosity" and Dice() == 1 and not ("Geas" in one):               one += "\n - Geas."
@@ -1795,10 +1463,14 @@ def Magic(npc):
     if race == "Monstrosity" and Dice() == 1 and not ("Mirror Image" in three): three += "\n - Mirror Image."
     if race == "Monstrosity" and Dice() == 1 and not ("Scrying" in three):      three += "\n - Scrying."
     if race == "Monstrosity" and Dice() == 1 and not ("Suggestion" in three):   three += "\n - Suggestion."
-
+    '''
 
     # OOZE
+    '''
     if race == "Ooze" and Dice() == 1 and not ("Psychic Crush" in cantrip):     cantrip += " \n- Psychic Crush (Recharge 5–6). \n\t The ooze targets one creature that it can sense within 60 feet of it. The target must make a DC [10+%INT] Intelligence saving throw, taking 10 (3d6) psychic damage on a failed save, or half as much damage on a successful one."
+    '''
+
+
     if race == "Ooze":
         cantrips_list += ["Acid Splash","Shape Water","Mold Earth","Gust"]
         one_day_each_list += ["Grease", "Entangle", "Tasha’s Hideous Laughter"]
@@ -1834,30 +1506,30 @@ def Magic(npc):
     # PLANTS
     # Spores
     if race == "Plant":
-        recharge = add_spell(recharge, "Hallucination Spores", max_spell_level, max_spell_level,
+        recharge = add_spell(recharge, "Hallucination Spores",
                              spell_definition="Recharge(6):" +
                                 "\t-Hallucination Spores \n\t The plant ejects spores at one creature it can see within 5 feet of it. The target must succeed on a DC 10+%CON Constitution saving throw or be poisoned for 1 minute. The poisoned target is incapacitated while it hallucinates. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success.")
-        recharge = add_spell(recharge, "Rapport Spores", max_spell_level, max_spell_level,
+        recharge = add_spell(recharge, "Rapport Spores",
                              spell_definition="Recharge(6):" +
                                 "\t-Rapport Spores \n\t A 20-foot radius of spores extends from the plant. These spores can go around corners and affect only creatures with an Intelligence of 2 or higher that aren't undead, constructs, or elementals. Affected creatures can communicate telepathically with one another while they are within 30 feet of each other. The effect lasts for 1 hour.")
-        recharge = add_spell(recharge, "Caustic Spores", max_spell_level, max_spell_level,
+        recharge = add_spell(recharge, "Caustic Spores",
                              spell_definition="Recharge(6):" +
                                 "\t-Caustic Spores \n\t The Plant releases spores in a 30-foot cone. Each creature inside the cone must succeed on a DC [10+%Con] Dexterity saving throw or take 3 (1d6) acid damage at the start of each of the plant's turns. A creature can repeat the saving throw at the start of its turn, ending the effect on itself on a success.")
-        recharge = add_spell(recharge, "Infestation Spores", max_spell_level, max_spell_level,
+        recharge = add_spell(recharge, "Infestation Spores",
                              spell_definition="Recharge(6):" +
                                 "\t- Infestation Spores \n\t The plant releases spores that burst out in a cloud that fills a 10-foot-radius sphere centered on it, and the cloud lingers for 1 minute. Any flesh-and-blood creature in the cloud when it appears, or that enters it later, must make a DC [10+%CON] Constitution saving throw. On a successful save, the creature can't be infected by these spores for 24 hours. On a failed save, the creature is infected with a disease called the spores of Zuggtmoy and also gains a random form of indefinite madness (determined by rolling on the Madness of Zuggtmoy table) that lasts until the creature is cured of the disease or dies. While infected in this way, the creature can't be reinfected, and it must repeat the saving throw at the end of every 24 hours, ending the infection on a success. On a failure, the infected creature's body is slowly taken over by fungal growth, and after three such failed saves, the creature dies and is reanimated as a spore servant if it's a humanoid or a Large or smaller beast. \n d100 \t	Flaw (lasts until cured) \n 01-20 \t I see visions in the world around me that others do not. \n 21-40 \t I periodically slip into a catatonic state, staring off into the distance for long stretches at a time. \n 41-60 \t I see an altered version of reality, with my mind convincing itself that things are true even in the face of overwhelming evidence to the contrary. \n 61-80 \t My mind is slipping away, and my intelligence seems to wax and wane. \n  81-00 \t I am constantly scratching at unseen fungal infections.")
-        recharge = add_spell(recharge, "Euphoria Spores", max_spell_level, max_spell_level,
+        recharge = add_spell(recharge, "Euphoria Spores",
                              spell_definition="Recharge(6):" +
                                  "\t-Euphoria Spores \n\t The plant releases a cloud of spores in a 20-foot-radius sphere centered on itself. " +
                                  "Other creatures in that area must each succeed on a Constitution saving throw or become poisoned for 1 minute. " +
                                  "A creature can repeat the saving throw at the start of each of its turns, ending the effect early on itself on a success. " +
                                  "When the effect ends on it, the creature gains one level of exhaustion.")
-        recharge = add_spell(recharge, "Pacifying Spores", max_spell_level, max_spell_level,
+        recharge = add_spell(recharge, "Pacifying Spores",
                              spell_definition="Recharge(6):" +
                              "\t- Pacifying Spores \n\t The Plant ejects spores at one creature it can see within 5 feet of it. "+
                              "The target must succeed on a Constitution saving throw or be stunned for 1 minute. "+
                              "The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success.")
-        recharge = add_spell(recharge, "Animating Spores", max_spell_level, max_spell_level,
+        recharge = add_spell(recharge, "Animating Spores",
                              spell_definition="Recharge(6):" +
                                  "\t- Animating Spores \n\t The Plant targets one corpse of a humanoid or a Large or smaller beast within 5 feet of it and releases spores at the corpse. "+
                                  "Next turn, the corpse rises as a spore servant. The corpse stays animated for 1d4 + 1 weeks or until destroyed, and it can't be animated again in this way.")
@@ -1952,7 +1624,6 @@ def Magic(npc):
         eighth_list += ["Charm Monster (Mass)", "Dominate Monster", "Power Word Stun", "True Polymorph", "Glibness"]
         ninth_list += ["Astral Projection","Gate","Power Word Kill","True Resurrection","Wish"]
 
-    spellbook = Spellbook(npc.level)
       
     spellbook.UpdateDifficulty(difficulty)
 
@@ -1977,6 +1648,9 @@ def Magic(npc):
     spellbook.select_spells()
     
 
+    sample_size = min(len(cantrips_list), npc.pb//2)
+    for spell in random.sample(cantrips_list,sample_size):
+        spellbook.add_spell(0,spell)
 
     # Adding regular spells to the spellbook
     for level, spells in spellbook.selected.items():
@@ -1984,17 +1658,24 @@ def Magic(npc):
             spellbook.add_spell(level, spell)
 
     # Adding natural and rechargeable spells
-    for spell in spellbook.one_day_each_list:
+    sample_size = min(len(one_day_each_list), npc.pb//Dice(3),3)
+    for spell in random.sample(one_day_each_list,sample_size):
         spellbook.add_natural(spell, times_day=1)
-    for spell in spellbook.two_day_each_list:
+
+    sample_size = min(len(two_day_each_list), npc.pb//Dice(4),3)
+    for spell in random.sample(two_day_each_list,sample_size):
         spellbook.add_natural(spell, times_day=2)
-    for spell in spellbook.three_day_each_list:
+        
+    sample_size = min(len(three_day_each_list), 3, npc.pb//Dice(5) )
+    for spell in random.sample(three_day_each_list,sample_size):
         spellbook.add_natural(spell, times_day=3)
 
-            
+    sample_size = min(len(recharge), Dice(npc.pb))
+    for spell in random.sample(recharge,sample_size):
+        spellbook.add_rechargeable(spell)
 
 
-    return spellbook.SpellbookString()
+    return spellbook.SpellbookString(npc)
 
 
 
