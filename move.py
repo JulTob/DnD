@@ -58,7 +58,7 @@ def Movement(npc):
         "Gnome": {      "Walk": 25},
         "Goblin": {     "Walk": 30},
         "Halfling": {   "Walk": 25},
-        "Kobold": {     "Walk": 30},
+        "Kobold": {     "Walk": 30,             "Fly": Dizero(3) * Dizero(2) * 5},
         "Lizardfolk": { "Walk": Dice(3) * Dice(3) * 10,                         "Swim": Dice(6) * 10,                               "Climb": Dizero(3) * 10},
         "Monstrosity": {"Walk": Dice(6) * 10,   "Fly": Dizero(6) * 5,           "Swim": Dice(6) * 10,                               "Climb": Dizero(3) * 10},
         "Ooze": {       "Walk": Dice(6) * 10,                                                                                       "Climb": Dice(6) * 10},  
