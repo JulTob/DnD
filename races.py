@@ -2,31 +2,31 @@ import random
 
 def Race():
     race_weights = {
-        "Human": 26,
-        "Aberration": 16,
-        "Aven": 16,
-        "Beast": 18,
-        "Beastfolk": 17,
-        "Celestial": 16,
-        "Construct": 16,
-        "Dragon": 17,
-        "Dwarf": 20,
-        "Elf": 20,
-        "Elemental": 17,
-        "Fey": 16,
-        "Fiend": 16,
-        "Giant": 16,
-        "Gnome": 17,
-        "Goblin": 20,
-        "Halfling": 19,
-        "Kobold": 20,
-        "Lizardfolk": 16,
-        "Monstrosity": 17,
-        "Ooze": 16,
-        "Orc": 21,
-        "Plant": 17,
-        "Snakefolk": 16,
-        "Undead": 19,
+        "Human": 28,
+        "Aberration": 17,
+        "Aven": 17,
+        "Beast": 19,
+        "Beastfolk": 18,
+        "Celestial": 17,
+        "Construct": 17,
+        "Dragon": 18,
+        "Dwarf": 21,
+        "Elf": 21,
+        "Elemental": 18,
+        "Fey": 17,
+        "Fiend": 17,
+        "Giant": 17,
+        "Gnome": 18,
+        "Goblin": 21,
+        "Halfling": 20,
+        "Kobold": 22,
+        "Lizardfolk": 17,
+        "Monstrosity": 18,
+        "Ooze": 17,
+        "Orc": 22,
+        "Plant": 18,
+        "Snakefolk": 17,
+        "Undead": 18,
         "": 0
     }
     
@@ -80,7 +80,7 @@ def Beasts():
         "Giant Owl of Wisdom": 8,   # A universal symbol of knowledge.
         "Celestial Stag": 7,        # Stags are often seen as messengers or connected to the otherworld in various mythologies.
         "Fenrir Wolf": 7,
-        "Forest-God Boar": 5,       # A guardian of the forests, revered for its bravery.
+        "Forest-God": 5,            # A guardian of the forests, revered for its bravery.
         "Cosmic Whale": 6, 
         "Kaiju Dinosaur": 6, 
         "Kerberus Dog": 7,
@@ -204,26 +204,26 @@ def Dragons():
 
 def Elementals():
     Names = {
-    "Atlantian": 9,      # Connection to water or ancient technology.
-    "Cronusian": 5,      # Representing time and age.
-    "Eosian": 8,         # Tied to the rising sun.
-    "Genasi": 20,        # Representing air, earth, fire, and water.
-    "Genie": 10,         # Powerful primordial entities.
-    "Gaians": 9,         # Essence of the earth.
-    "Hyperian": 7,       # Radiant, solar-powered.
-    "Oceanians": 9,      # Depths, tides, storms.
-    "Primordial": 7,     # Fundamental forces of reality.
-    "Promethean": 8,     # Fire, electricity, and energy, with spirit of innovation.
-    "Salamandrian": 10,  # Associated with fire.
-    "Titan": 8,          # Raw elemental power.
-    "Uranians": 8,       # Sky, stars, celestial magic.
-    "Magmaforged": 9,    # Fusion of earth and fire.
-    "Zephyrian": 9,      # Gentle airs.
-    "Tartarian": 8,      # Dark ocean depths.
-    "Etherian": 8,        # Ether and the heavenly shine.
-    "Galaxian": 8,       # Elemental related to constellations and stars.
-    "Chronian": 6,       # Time elementals
-    "Tundran": 8         # Harsh icy landscapes.
+    "Atlantian": 10,     # Connection to water or ancient technology.
+    "Cronusian": 6,      # Representing time and age.
+    "Eosian": 9,         # Tied to the rising sun.
+    "Genasi": 21,        # Representing air, earth, fire, and water.
+    "Genie": 11,         # Powerful primordial entities.
+    "Gaians": 10,        # Essence of the earth.
+    "Hyperian": 8,       # Radiant, solar-powered.
+    "Oceanians": 10,     # Depths, tides, storms.
+    "Primordial": 8,     # Fundamental forces of reality.
+    "Promethean": 9,     # Fire, electricity, and energy, with spirit of innovation.
+    "Salamandrian": 11,  # Associated with fire.
+    "Titan": 9,          # Raw elemental power.
+    "Uranians": 9,       # Sky, stars, celestial magic.
+    "Magmaforged": 10,   # Fusion of earth and fire.
+    "Zephyrian": 10,     # Gentle airs.
+    "Tartarian": 9,      # Dark ocean depths.
+    "Etherian": 9,       # Ether and the heavenly shine.
+    "Galaxian": 9,       # Elemental related to constellations and stars.
+    "Chronian": 7,       # Time elementals
+    "Tundran": 9         # Harsh icy landscapes.
     }
     return random.choices(list(Names.keys()), weights=Names.values(), k=1)[0]
 
@@ -543,19 +543,19 @@ def Lizardfolks():
 
 def Kobolds():
     DragonColors = {
-        "Black": 8,               # Chromatic, acid breath.
-        "Blue": 8,                # Chromatic, electric breath.
-        "Green": 8,               # Chromatic, poison breath.
-        "Red": 8,                 # Chromatic, fire breath.
-        "White": 8,               # Chromatic, cold breath.
-        "Bronze": 7,              # Metallic, good-aligned, lightning breath.
-        "Silver": 7,              # Metallic, cold/paralyzing breath.
-        "Gold": 7,                # Metallic, fire/weakening breath.
-        "Brass": 7,               # Metallic, fire/sleep breath.
-        "Copper": 7,              # Metallic, acid/slowing breath.
-        "Shadow": 6,              # Tainted by Shadowfell, necrotic breath.
-        "Gem": 6,                 # Rare, associated with gemstones and psionics.
-        "Prismatic": 3            # Rare and extremely powerful, known for multi-colored, rainbow-like powers.
+        "Black": 9,               # Chromatic, acid breath.
+        "Blue": 9,                # Chromatic, electric breath.
+        "Green": 9,               # Chromatic, poison breath.
+        "Red": 9,                 # Chromatic, fire breath.
+        "White": 9,               # Chromatic, cold breath.
+        "Bronze": 8,              # Metallic, good-aligned, lightning breath.
+        "Silver": 8,              # Metallic, cold/paralyzing breath.
+        "Gold": 8,                # Metallic, fire/weakening breath.
+        "Brass": 8,               # Metallic, fire/sleep breath.
+        "Copper": 8,              # Metallic, acid/slowing breath.
+        "Shadow": 7,              # Tainted by Shadowfell, necrotic breath.
+        "Gem": 7,                 # Rare, associated with gemstones and psionics.
+        "Prismatic": 4            # Rare and extremely powerful, known for multi-colored, rainbow-like powers.
         }
     
     Kobold = {
@@ -601,7 +601,7 @@ def Creature(Type):
     if Type in type_function_map:
         subrace = type_function_map[Type]()
     else:
-        subrace = f"Is an unknown type of {Type}!"
+        subrace = f"{Type} of an enigmatic lineage."
 
     if Type == "Undead":
         Dead = Race()
