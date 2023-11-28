@@ -9,24 +9,33 @@ def Extra_Weaknesses(npc):
     lvl = npc.level
     # Definitions of extra weaknesses
     freeze = f"\n- Freeze: If the {race} takes cold damage, it partially freezes; All its speed is reduced by 20 feet until the end of its next turn."
-
+    SunlightSensitivity = f"\n- Sunlight Sensitivity.  \n\t While in sunlight, the {npc.race} has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+    
 
 
     
     # Dictionary to store possible extra weaknesses for each race
     extra_weaknesses_race = {
-        "Aberration": [],
-        "Beast":[],
-        "Beastfolk": [],
+        "Aberration": [
+            SunlightSensitivity],
+        "Beast":[
+            SunlightSensitivity],
+        "Beastfolk": [
+            SunlightSensitivity],
         "Celestial": [],
         "Construct": [],
         "Dragon":[],
         "Elf": [],
         "Elemental":[freeze],
         "Fey": [],
-        "Fiend": [freeze],
+        "Fiend": [
+            freeze,
+            SunlightSensitivity],
         "Goblin": [],
-        "Lizardfolk":[freeze],
+        "Kobold":[
+            SunlightSensitivity],
+        "Lizardfolk":[
+            freeze],
         "Orc": [],
         "Snakefolk":[freeze],
     }
