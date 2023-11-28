@@ -147,11 +147,11 @@ Main class
 """
 class NPC:
     def __init__(self, race, background, lvl=1):
-        self.race = "Kobold" #race
+        self.race = race
         self.subrace =self.set_subrace()
         self.background = background
         self.title = self.SetTitle()
-        self.gender = random.choice(["♀", "♂", "⚥", "⚬", "?", ""])
+        self.gender = random.choice(["he", "she", "they"])
         self.level = lvl
         self.name = self.Naming()
         self.alignment = self.SetAlignment()
@@ -185,6 +185,26 @@ class NPC:
         self.plothook = self.setHook()
         self.trait = self.setTrait()
         
+    @property
+    def armor_class(self):
+        return self.AC
+    
+    @property
+    def saving_throws(self):
+        return self.ST
+
+    @property
+    def pb(self):
+        return self.PB()
+
+    @property
+    def proficiency_bonus(self):
+        return self.PB()
+
+    @property
+    def ability_scores(self):
+        return self.AS
+    
     def setTrait(self):
         import personality
         trait = personality.Trait(self)
@@ -205,7 +225,7 @@ class NPC:
 
         
     def SetTitle(npc):
-        import npc_namer as name
+        import names as name
         return name.Title(npc)
         
     def Movement(npc):
@@ -275,9 +295,7 @@ class NPC:
         if AC >18 + PB: return 18 + PB
         else: return AC
         
-    @property
-    def armor_class(self):
-        return self.AC
+
 
     def set_subrace(self):
         return races.Monster(self.race)
@@ -317,25 +335,22 @@ class NPC:
         # Find the ability with the highest modifier
         self.spellcasting_ability = max(ability_mod_dict, key=ability_mod_dict.get)
 
-    @property
-    def saving_throws(self):
-        return self.ST
 
         
     def SpecialAttack(self):
         import attacks
         special = ""
-        special += attacks.SpecialAttack("",self)
+        special += attacks.SpecialAttack(self)
         special += "\n"
         return special
     
     def SimpleAttack(self):
         import attacks
         simple = ""
-        simple += attacks.Attack("Melee",self)
+        simple += attacks.Attack(self)
         simple += "\n"
-        for n in range(Dice(self.proficiency_bonus)):
-            simple += attacks.Attack("",self)
+        for n in range(Dice(1+self.proficiency_bonus//3)):
+            simple += attacks.Attack(self)
             simple += "\n"
         return simple
         
@@ -357,19 +372,13 @@ class NPC:
         import npc_namer as naming
         self.name = naming.Racial_Names(self)
 
+
     def PB(self):
         """Calculate the proficiency bonus based on level."""
         if self.level < 5: return 2
         else:
             return 2 + (self.level - 1) // 4
         
-    @property
-    def proficiency_bonus(self):
-        return self.PB()
-
-    @property
-    def ability_scores(self):
-        return self.AS
 
     def SetAlignment(self):
         self.alignment = Alignment()
@@ -379,10 +388,19 @@ class NPC:
         self.AC = self.generate_armor_class()
 
     def generate_armor_class(self):
+        crature_type = self.race + ' ' + self.type + ' ' + self.subrace
         AC = 10 + self.ability_scores.mod.dex + Dice(self.proficiency_bonus)
-        if Dice(10) == 1 or self.background == "Monk":       AC += self.ability_scores.dex_mod
-        if Dice(10) == 1 or self.background == "Berserker":  AC += self.ability_scores.con_mod
-        if AC > 18 + self.proficiency_bonus: AC  = 18 + self.proficiency_bonus
+        if "Monk" in creature_type:
+            AC += Dice(self.ability_scores.dex_mod)
+        if "Berserker" in creature_type:
+            AC += Dice(self.ability_scores.con_mod)
+        if "Kobold" in creature_type:
+            AC += Dice(2) # Natural Armor
+        if "Dragon" in creature_type:
+            AC += Dice(2) # Natural Armor
+            
+        if AC > 18 + self.proficiency_bonus:
+            AC  = 18 + self.proficiency_bonus
         return AC
 
     def SetHitPoints(self, level):
