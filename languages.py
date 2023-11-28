@@ -71,22 +71,22 @@ def Language(npc):
 
     if race == "Aberration":
         langs = {
-            "Dwarvish": 20,
-            "Elvish": 20,
-            "Giant": 10,
+            "Dwarvish": 15,
+            "Elvish": 15,
+            "Giant": 9,
             "Gnomish": 20,
-            "Goblin": 10,
+            "Goblin": 9,
             "Halfling": 20,
-            "Orc": 10,
-            "Abyssal": 8,
+            "Orc": 9,
+            "Abyssal": 7,
             "Celestial": 20,
-            "Draconic": 10,
+            "Draconic": 9,
             "Deep Speech": 1,
-            "Infernal": 10,
-            "Primordial": 20,
+            "Infernal": 9,
+            "Primordial": 19,
             "Sylvan": 20,
-            "Undercommon": 6,
-            "Telepathy (60 ft.) ": 6
+            "Undercommon": 5,
+            "Telepathy (60 ft.) ": 5
             }
 
         for lang, chance in langs.items():
@@ -154,7 +154,8 @@ def Language(npc):
             "Infernal": 10,
             "Primordial": 10,
             "Sylvan": 4,
-            "Undercommon": 10
+            "Undercommon": 10,
+            f"Beast Telepathy: The {npc.race} can magically command any animal it shares an affinity to within 120 feet of it, using a limited telepathy.":3,
         }
 
         for lang, chance in langs.items():
@@ -458,7 +459,9 @@ def Language(npc):
             "Infernal": 4,
             "Primordial": 4,
             "Sylvan": 4,
-            "Undercommon": 20
+            "Undercommon": 20,
+            f"Beast Telepathy (Only Reptiles): The {npc.race} can magically command any animal it shares an affinity to within 120 feet of it, using a limited telepathy.":3,
+
         }
 
         for lang, chance in langs.items():
@@ -552,7 +555,9 @@ def Language(npc):
             "Infernal": 10,
             "Primordial": 4,
             "Sylvan": 8,
-            "Undercommon": 20
+            "Undercommon": 20,
+            f"Beast Telepathy (Only Snakes): The {npc.race} can magically command any animal it shares an affinity to within 120 feet of it, using a limited telepathy.":3,
+
         }
 
         for lang, chance in langs.items():
@@ -620,7 +625,9 @@ def Language(npc):
             "Infernal": 20,
             "Primordial": 4,
             "Sylvan": 4,
-            "Undercommon": 20
+            "Undercommon": 20,
+            f"Beast Telepathy: The {npc.race} can magically command any animal it shares an affinity to within 120 feet of it, using a limited telepathy.":3,
+
         }
 
         for lang, chance in langs.items():
@@ -770,21 +777,21 @@ def Language(npc):
 
     if background == "Expert":
         langs = {
-            "Dwarvish": 6,
-            "Elvish": 6,
-            "Giant": 6,
-            "Gnomish": 6,
-            "Goblin": 20,
-            "Halfling": 20,
-            "Orc": 20,
-            "Abyssal": 20,
-            "Celestial": 6,
-            "Draconic": 20,
-            "Deep Speech": 20,
-            "Infernal": 20,
-            "Primordial": 20,
-            "Sylvan": 20,
-            "Undercommon": 20
+            "Dwarvish": 5,
+            "Elvish": 5,
+            "Giant": 5,
+            "Gnomish": 5,
+            "Goblin": 19,
+            "Halfling": 19,
+            "Orc": 19,
+            "Abyssal": 19,
+            "Celestial": 5,
+            "Draconic": 19,
+            "Deep Speech": 19,
+            "Infernal": 19,
+            "Primordial": 19,
+            "Sylvan": 19,
+            "Undercommon": 19
         }
 
         for lang, chance in langs.items():
@@ -812,28 +819,6 @@ def Language(npc):
         for lang, chance in langs.items():
             add_language(languages, lang, chance)
 
-
-    if background == "base":
-        langs = {
-            "Dwarvish": 6,
-            "Elvish": 6,
-            "Giant": 20,
-            "Gnomish": 6,
-            "Goblin": 6,
-            "Halfling": 6,
-            "Orc": 6,
-            "Abyssal": 20,
-            "Celestial": 20,
-            "Draconic": 20,
-            "Deep Speech": 20,
-            "Infernal": 20,
-            "Primordial": 20,
-            "Sylvan": 20,
-            "Undercommon": 20
-        }
-
-        for lang, chance in langs.items():
-            add_language(languages, lang, chance)
 
 
     if background == "Healer":
@@ -953,21 +938,23 @@ def Language(npc):
 
     if background == "Monk":
         langs = {
-            "Dwarvish": 20,
-            "Elvish": 20,
-            "Giant": 20,
-            "Gnomish": 20,
-            "Goblin": 20,
-            "Halfling": 20,
-            "Orc": 20,
-            "Abyssal": 20,
+            "Dwarvish": 10,
+            "Elvish": 10,
+            "Giant": 10,
+            "Gnomish": 10,
+            "Goblin": 10,
+            "Halfling": 10,
+            "Orc": 10,
+            "Abyssal": 10,
             "Celestial": 6,
             "Draconic": 6,
-            "Deep Speech": 20,
-            "Infernal": 20,
+            "Deep Speech": 10,
+            "Infernal": 10,
             "Primordial": 6,
-            "Sylvan": 20,
-            "Undercommon": 20
+            "Sylvan": 10,
+            "Undercommon": 10,
+            f"Beast Telepathy: The {npc.race} can magically command any animal it shares an affinity to within 120 feet of it, using a limited telepathy.":10,
+
         }
 
         for lang, chance in langs.items():
@@ -1111,35 +1098,12 @@ def Language(npc):
             "Infernal": 20,
             "Primordial": 8,
             "Sylvan": 1,
-            "Undercommon": 20
+            "Undercommon": 20,
+            f"Beast Telepathy: The {npc.race} can magically command any animal it shares an affinity to within 120 feet of it, using a limited telepathy.":10,
         }
 
         for lang, chance in langs.items():
             add_language(languages, lang, chance)
-
-
-    if background == "base":
-        langs = {
-            "Dwarvish": 20,
-            "Elvish": 20,
-            "Giant": 20,
-            "Gnomish": 20,
-            "Goblin": 20,
-            "Halfling": 20,
-            "Orc": 20,
-            "Abyssal": 20,
-            "Celestial": 20,
-            "Draconic": 20,
-            "Deep Speech": 20,
-            "Infernal": 20,
-            "Primordial": 20,
-            "Sylvan": 20,
-            "Undercommon": 20
-        }
-
-        for lang, chance in langs.items():
-            add_language(languages, lang, chance)
-
 
 
     if background == "Spy":
@@ -1277,7 +1241,9 @@ def Language(npc):
             "Infernal": 6,
             "Primordial": 6,
             "Sylvan": 12,
-            "Undercommon": 20
+            "Undercommon": 20,
+            f"Beast Telepathy: The {npc.race} can magically command any animal it shares an affinity to within 120 feet of it, using a limited telepathy.":10,
+
         }
 
         for lang, chance in langs.items():
