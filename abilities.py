@@ -24,9 +24,9 @@ def Abilities(npc):
     background = npc.background
     lvl = npc.level
     
-    Type = race
+    Type = race  + ' ' + background + ' ' + npc.subrace
 
-    r = ""
+    r = "\n⚔︎    ABILITIES:   ⚔︎\n"
 
     r += senses.Senses(npc) + "\n\n"
     r += move.Movement(npc) + "\n\n"
@@ -35,68 +35,130 @@ def Abilities(npc):
     r += resistances.Extra_Defenses(npc) + "\n\n"
     r += martial.Skills(npc) + "\n\n"
 
+    
+    
+    return r
+
+    abilities = []
+
+    PackTactics = f"\n- Pack Tactics. \n\t The {npc.race} has advantage on an attack roll against a creature if at least one of the {npc.race}'s allies is within 5 feet of the creature and the ally isn't incapacitated.",
+    Multiattack = f"\n-  Multiattack. \n\t The {race} makes " + random.choice( [
+            "two different simple attacks.",
+            "two simple attacks.",
+            "three simple attacks.",
+            "three simple attacks. It can replace two of those for a special attack.",
+            "one special attack and a simple attacks.",
+            ])
+    Grappler = random.choice([
+            f"\n- Grappler. \n\t On a hit on a melee attack, the {race} can choose to do no damage to grapple a creature up to its size. The target is then grappled, with DC {8 + npc.PB() + npc.AS.str_mod} to scape the grapple.",
+            f"\n- Grappler. \n\t On a hit on a melee attack, the {race} can choose to do no damage to grapple a creature up to its size. The target is then grappled, with DC {8 + npc.PB() + npc.AS.str_mod} to scape the grapple.\n- Constrict. \n\t Until the grapple ends, the creature is restrained. The {race} can't constrict another creature."
+            ])
+    Charge = random.choice( [
+            f"\n - Charge \n\t If the {race} moves at least {Dice(4)*5} feet straight toward a target and then hits it with an attack on the same turn, the target takes an extra {npc.pb}d6+{npc.AS.str_mod} {random.choice(['bludgeoning','slashing','piercing'])} damage. If the target is a creature, it must succeed on a DC {8 + npc.PB() + npc.AS.str_mod} Strength saving throw or {random.choice(['', 'be pushed up to 10 feet away and'])} be knocked prone."
+            f"\n - Trampling Charge \n\t If the Beast moves at least 20 feet straight toward a creature and then hits it with an attack on the same turn, that target must succeed on a DC {8 + npc.pb + npc.AS.str_mod} Strength saving throw or be knocked prone. If the target is prone, the {race} can make one simple attack against it as a bonus action."
+            ])
+    Pounce = f"\n- Pounce \n\t If the {race} moves at least {Dice(4)*5} feet straight toward a creature and then hits it with an attack on the same turn, that target must succeed on a DC {8 + npc.pb + npc.AS.str_mod} Strength saving throw or be knocked prone. If the target is prone, the {race} can make one attack against it as a bonus action."
+    Rampage = f"\n- Rampage. \n\t When the {npc.race} reduces a creature to 0 hit points with a melee attack on its turn, the {npc.race} can take a bonus action to move up to half its speed and make a simple attack."
+    Shapechanger = f"\n - Shapechanger \n\t The {npc.race} can use its action to polymorph into their specific Medium humanoid form, or a Beast-humanoid hybrid, or into a beast. Other than its size, its statistics are the same in each form. Any equipment it is wearing or carrying isn't transformed. They reverts to its true form if it dies.",
+
+ 
+    # Dictionary to store possible extra abilities for each race
+    extra_abilities_race = {
+        "Aberration": [],
+        "Beast":[PackTactics,
+                 Multiattack,
+                 Grappler,
+                 Charge,
+                 Pounce,
+                 Rampage,
+
+                 ],
+        "Beastfolk": [PackTactics,
+                      Multiattack,
+                      Grappler,
+                      Charge,
+                      Pounce,
+                      Rampage,
+                      Shapechanger,
+                      Shapechanger
+
+                      ],
+        "Celestial": [],
+        "Construct": [],
+        "Dragon":[],
+        "Elf": [],
+        "Elemental":[],
+        "Fey": [],
+        "Fiend": [
+            ],
+        "Goblin": [
+            ],
+        "Lizardfolk":[
+            Shapechanger,
+            ],
+        "Orc": [],
+        "Snakefolk":[
+            Shapechanger,
+            ],
+    }
+
+    # Dictionary to store possible extra abilities for each background
+    extra_abilities_background = {
+        "Noble": [],
+        "Berserker": [],
+        "Scholar":[],
+
+        }
+
+    # Fetch the extra abilities for the selected race and background
+    possible_extra_abilities_race = extra_abilities_race.get(race, [])
+    possible_extra_abilities_background = extra_abilities_background.get(background, [])
+
+    if "Beast" in npc.race or "Dragon" in npc.race:
+        if "Bite" in npc.simple_attacks:
+            possible_extra_abilities_race += [
+                "\n- Swallow. \n\t  The beast makes one bite attack against a target creature smaller than themselves it is grappling. If the attack hits, the target is swallowed, and the grapple ends. The swallowed target is blinded and restrained, it has total cover against attacks and other effects outside the beast, and it takes 6 (2d4+%CON) acid damage at the start of each of the beast's turns. The beast can have only one target swallowed at a time. If the beast dies, a swallowed creature is no longer restrained by it and can escape from the corpse using 5 feet of movement, exiting prone.",
+                ]
+            
+    # Combine race and background abilities
+    possible_extra_abilities = possible_extra_abilities_race + possible_extra_abilities_background
+
+    # Determine the number of abilities to select, this number can be changed as needed
+    number_of_abilities_to_select = npc.PB()  # for example
+
+    # Randomly determine which extra abilities the character has
+    if possible_extra_abilities and len(possible_extra_abilities) >= number_of_abilities_to_select:
+        selected_abilities = random.sample(possible_extra_abilities, number_of_abilities_to_select)
+        formatted_abilities = [abilities.format(race) for abilities in selected_abilities]
+    else:
+        formatted_abilities = [""]
+
+    # Join the list of formatted abilities into a single string separated by newlines or any other separator
+    formatted_abilities_string = '\n'.join(formatted_abilities)
+
+    return formatted_abilities_string
 
 
-    ## Skills
-    if (Type == "Beast" or Type == "Beastfolk") and Dice(10) == 1:        r = r + "\n- Beast of Burden \n\t The Beast is considered to be a Large animal for the purpose of determining its carrying capacity."
-    if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:         r = r + "\n- Swamp Camouflage \n\t The Beast has advantage on Dexterity (Stealth) checks made to hide in swampy terrain."
-    if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:         r = r + "\n- Labyrinthine Recall \n\t The Beast can perfectly recall any path it has traveled."
 
+    if "Beastfolk" in npc.race:
+        abilities += [
+            f"\n - Pack Tactics \n\t The {npc.race} has advantage on an attack roll against a creature if at least one of the {npc.race}'s allies is within 5 feet of the creature and the ally isn't incapacitated.",
+            ]
+        
+    if "Beastfolk" in npc.race:
+        abilities += [
+            f"\n - Wounded Fury \n\t While the {npc.race} has {npc.HP//2} hit points or fewer, the {npc.race} has advantage on attack rolls. In addition, it deals an extra {int(npc.pb*3.5)} ({npc.pb}d6) damage to any target it hits with a melee attack."
+            ]
 
-    ## Combat Skills
-    if (Type == "Beast" or Type == "Beastfolk") and Dice(8) == 1:
-        r += "\n-  Pack Tactics. \n\t The Beast has advantage on an attack roll against a creature if at least one of the beast's allies is within 5 feet of the creature and the ally isn't incapacitated."
+    if "Beastfolk" in npc.race:
+        abilities += [
+            f"\n - Otherworldly Perception \n\t The {npc.race} can sense the presence of any creature within 30 feet of it that is invisible or on the Ethereal Plane. It can pinpoint such a creature that is moving."
+            ]
 
-    if (Type == "Beast" or Type == "Beastfolk"):
-        if Dice() == 1:        r += "\n-  Multiattack. \n\t The Beast makes two simple attacks."
-        elif Dice() == 1:      r += "\n-  Multiattack. \n\t The Beast makes three simple attacks."
-        elif Dice() == 1:      r += "\n-  Multiattack. \n\t The Beast makes three simple attacks. It can replace two of those for a special attack."
-        elif Dice(8) == 1:     r += "\n-  Multiattack. \n\t The Beast makes one special attack and a simple attacks."
-
-    if (Type == "Beast" or Type == "Beastfolk") and Dice(9) == 1:
-        r += "\n - Grappler. \n\t On an attack, the target is grappled,  [DC 10+%STR]"
-        if Dice(2) == 1:    r += "\n - Constrict. \n\t Until the grapple ends, the creature is restrained. The creature can't constrict another creature."
-
-    if (Type == "Beast" or Type == "Beastfolk"):
-        if Dice(9) == 1:        r += "\n - Charge \n\t If the Beast moves at least 20 feet straight toward a target and then hits it with an attack on the same turn, the target takes an extra [2d6+%STR] bludgeoning damage. If the target is a creature, it must succeed on a DC=[10+%STR] Strength saving throw or be knocked prone."
-        elif Dice(9) == 1:      r += "\n - Charge \n\t If the Beast moves at least 15 feet straight toward a target and then hits it with an attack on the same turn, the target takes an extra [2d6+%STR] slashing damage. If the target is a creature, it must succeed on a DC=[10+%STR] Strength saving throw or be knocked prone."
-        elif Dice(9) == 1:      r += "\n - Charge \n\t If the Beast moves at least 10 feet straight toward a target and then hits it with an attack on the same turn, the target takes an extra [2d8+%STR] piercing damage. If the target is a creature, it must succeed on a DC=[10+%STR] Strength saving throw or be pushed up to 10 feet away and knocked prone."
-        elif Dice(9) == 1:      r += "\n - Trampling Charge \n\t If the Beast moves at least 20 feet straight toward a creature and then hits it with an attack on the same turn, that target must succeed on a DC [10+%STR] Strength saving throw or be knocked prone. If the target is prone, the beast can make one simple attack against it as a bonus action."
-
-
-    if (Type == "Beast" or Type == "Beastfolk"):
-        if Dice(10) == 1:     r = r + "\n- Pounce \n\t If the beast moves at least 20 feet straight toward a creature and then hits it with an attack on the same turn, that target must succeed on a DC [10+%STR] Strength saving throw or be knocked prone. If the target is prone, the Beast can make one attack against it as a bonus action."
-        elif Dice(10) == 1:   r = r + "\n- Pounce \n\t If the beast moves at least 15 feet straight toward a creature and then hits it with an attack on the same turn, that target must succeed on a DC [10+%STR] Strength saving throw or be knocked prone. If the target is prone, the Beast can make one attack against it as a bonus action."
-
-
-    if (Type == "Beast" or Type == "Beastfolk"):
-        if Dice(4) == 1:
-            r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one  target. Hit: 4 (1d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR). Until this grapple ends, the target is restrained, and the beast can't bite another target."
-            if Dice() == 1: r = r + "\n- Swallow. \n\t  The beast makes one bite attack against a target creature smaller than themselves it is grappling. If the attack hits, the target is swallowed, and the grapple ends. The swallowed target is blinded and restrained, it has total cover against attacks and other effects outside the beast, and it takes 6 (2d4+%CON) acid damage at the start of each of the beast's turns. The beast can have only one target swallowed at a time. If the beast dies, a swallowed creature is no longer restrained by it and can escape from the corpse using 5 feet of movement, exiting prone."
-        elif Dice() == 1:   r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 8 (2d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR). Until this grapple ends, the target is restrained, and the beast can't bite another target."
-        elif Dice() == 1:        r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 10 (3d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR). Until this grapple ends, the target is restrained, and the beast can't bite another target."
-        elif Dice() == 1:        r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 15 (4d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR)."
-        elif Dice() == 1:        r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 20 (5d6 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR)."
-        elif Dice() == 1:        r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 7 (1d10 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR) and the target must make a DC [10+%CON] Constitution saving throw, taking 18 (4d8) poison damage on a failed save, or half as much damage on a successful one. If the poison damage reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way."
-        elif Dice(8) == 1:       r = r + "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 23 (3d10 + %STR) piercing damage."
-        elif Dice(4) == 1:
-            r += "\n- Bite. \n\t  Melee Weapon Attack: reach 5 ft., one target. Hit: 5 (1d8 + %STR) piercing damage, and the target is grappled (escape DC 10 + %STR) and the target must make a DC [10+%CON] Constitution saving throw, taking 18 (4d8) poison damage on a failed save, or half as much damage on a successful one. If the poison damage reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way."
-            r += "\n- Lycan Curse \n\t When a Bite attack hits, the target must succeed on a DC[10+%CON] Constitution saving throw or be cursed with the lycanthropy curse of the affinity beast."
-
-    if (Type == "Beast" or Type == "Beastfolk") and Dice(12) == 1:      r += "\n- Rampage. \n\t When the Beast reduces a creature to 0 hit points with a melee attack on its turn, the beast can take a bonus action to move up to half its speed and make a bite attack."
-    if (Type == "Beast" or Type == "Beastfolk") and Dice(12) == 1:      r += "\n- Slippery. \n\t The beast has advantage on ability checks and saving throws made to escape a grapple."
-    if (Type == "Beast" or Type == "Beastfolk") and Dice() == 1:        r += "\n- Sunlight Sensitivity.  \n\t While in sunlight, the beastfolk has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
-
-    if Type == "Beastfolk" and Dice() == 1:     r += "\n - Damage Immunities \n\t Bludgeoning, piercing, and slashing from nonmagical attacks that aren't silvered."
-    if Type == "Beastfolk" and Dice() == 1:     r += "\n - Beast Telepathy \n\t The Beastfolk can magically command any animal it shares an affinity to within 120 feet of it, using a limited telepathy."
-    if Type == "Beastfolk" and Dice() == 1:     r += "\n - Shapechanger \n\t The Beastfolk can use its action to polymorph into a specific Medium humanoid or a Beast-humanoid hybrid, or into its beast form. Other than its size, its statistics are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
-    if Type == "Beastfolk" and Dice() == 1:     r += "\n - Pack Tactics \n\t The Beastfolk has advantage on an attack roll against a creature if at least one of the Beastfolk's allies is within 5 feet of the creature and the ally isn't incapacitated."
-    if Type == "Beastfolk" and Dice() == 1:     r += "\n - Rampage.\n\t When the beastfolk reduces a creature to 0 hit points with a melee attack on its turn, the beastfolk can take a bonus action to move up to half its speed and make a bite attack."
-    if Type == "Beastfolk" and Dice(8) == 1:    r += "\n - Wounded Fury \n\t While it has 10 hit points or fewer, the beastfolk has advantage on attack rolls. In addition, it deals an extra 7 (2d6) damage to any target it hits with a melee attack."
-    if Type == "Beastfolk" and Dice() == 1:     r += "\n - Multiattack \n\t The Beastfolk can make two different simple attacks."
-    if Type == "Beastfolk" and Dice(8) == 1:    r += "\n - Otherworldly Perception \n\t The Beastfolk can sense the presence of any creature within 30 feet of it that is invisible or on the Ethereal Plane. It can pinpoint such a creature that is moving."
-    if Type == "Beastfolk" and Dice(8) == 1:    r += "\n - Reckless \n\t At the start of its turn, the berserker can gain advantage on all melee weapon attack rolls during that turn, but attack rolls against it have advantage until the start of its next turn."
-
+    if "Beastfolk" in npc.race:
+        abilities += [
+            "\n - Reckless \n\t At the start of its turn, the berserker can gain advantage on all melee weapon attack rolls during that turn, but attack rolls against it have advantage until the start of its next turn."
+            ]
 
 
     # CELESTIALS
@@ -573,9 +635,10 @@ def Abilities(npc):
     if Type == "Spy" and Dice(2) == 1:        r = r + "\n- Sneak Attack (1/Turn). \n\t The spy deals an extra 7 (2d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 feet of an ally of the spy that isn't incapacitated and the spy doesn't have disadvantage on the attack roll."
     if Type == "Spy" and Dice(2) == 1:        r = r + "\n- Multiattack. \n\t The spy makes two simple melee attacks."
 
-    if Type == "Kobold":        r += "\n- Darkvision \t 60ft."
-    if Type == "Kobold":        r += "\n- Pack Tactics \n\t The kobold has advantage on an attack roll against a creature if at least one of the kobold's allies is within 5 feet of the creature and the ally isn't incapacitated."
-    if Type == "Kobold":        r += "\n- Sunlight Sensitivity \n\t While in sunlight, the kobold has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+    if Type == "Kobold":
+        r += "\n- Pack Tactics \n\t The kobold has advantage on an attack roll against a creature if at least one of the kobold's allies is within 5 feet of the creature and the ally isn't incapacitated."
+    if Type == "Kobold":
+        r += "\n- Sunlight Sensitivity \n\t While in sunlight, the kobold has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
     if Type == "Kobold" and Dice() == 1:        r += "\n Fly \t 30ft."
 
     # UNDEADS
