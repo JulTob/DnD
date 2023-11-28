@@ -42,14 +42,20 @@ def Skills(npc):
                f" start of each of its turns, ending the effect on a success. \n\t The target is also grappled (escape DC {10+PB(lvl)}). If the target is Medium or " +\
                f"smaller, it is also restrained until this grapple ends. While grappling the target, the {race} has advantage on attack rolls against it and can 't "+\
                f"use this attack against other targets. When the {race} moves, any Medium or smaller target it is grappling moves with it."
-    multiattack = random.choice([
-        f"\n-Multiattack: The {race} makes two simple attacks.",
-        f"\n-Multiattack: The {race} makes two simple melee attacks.",
-        f"\n-Multiattack: The {race} makes three simple attacks.",
-        f"\n-Multiattack (Two-Weapon Combat Style): The {race} makes two attacks with its main hand weapon and one with its offhand weapon.",
-        f"\n-Multiattack (Rapid Shot): The {race} makes three ranged attacks, each with a -2 penalty to the attack roll.",
-        f"\n-Multiattack (Sweeping Attack): The {race} makes a single attack against all enemies within reach."
-        ])
+    if npc.level < 20:
+        multiattack = random.choice([
+            f"\n-Multiattack: The {race} makes two simple attacks.",
+            f"\n-Multiattack: The {race} makes two simple melee attacks.",
+            f"\n-Multiattack: The {race} makes three simple attacks.",
+            f"\n-Multiattack (Two-Weapon Combat Style): The {race} makes two attacks with its main hand weapon and one with its offhand weapon.",
+            f"\n-Multiattack (Rapid Shot): The {race} makes three ranged attacks, each with a -2 penalty to the attack roll.",
+            f"\n-Multiattack (Sweeping Attack): The {race} makes a single attack against all enemies within reach."
+            ])
+    else:
+        multiattack = random.choice([
+            f"\n-Multiattack: {npc.name} makes one special attack or spellcasting, and then two simple attacks.",
+            f"\n-Multiattack: {npc.name} makes two special attacks or spellcastings.",
+            ])
     skewer = f"\n- Skewer:\t Once per turn, when the {race} makes a Melee attack and hits, the target takes an extra 10 (3d6) damage, and the {race} gains temporary hit points equal to the extra damage dealt."
     stench = f"\n- Stench:\t Any creature other than a {race} that starts its turn within 5 feet of the {race} must succeed on a DC {8+npc.proficiency_bonus + npc.ability_scores.con_mod} Constitution saving throw or be poisoned until the start of the creature's next turn. On a successful saving throw, the creature is immune to the stench of all Lizardfolk for 1 hour."
     blood_frenzy = f"\n- Blood Frenzy:\t The {race} has advantage on melee attack rolls against any creature that doesn't have all its hit points."
