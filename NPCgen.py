@@ -2,7 +2,7 @@
 import random
 import json
  
-from npc_namer import Title, Racial_Names
+from names import Title, Racial_Names
 
 
 from backgrounds import Background
@@ -112,7 +112,6 @@ def Region(npc):
     return legendary.Region(npc)
 
 
-
         
 def NPC_gen():
     """NPC creator"""
@@ -120,7 +119,7 @@ def NPC_gen():
     npc = NPC.NPC(
         race = Race(),
         background = Background(),
-        lvl = Dice(30)
+        lvl = Dice(50)
         )
 
     bg = npc.background
@@ -164,6 +163,9 @@ def NPC_gen():
 
     r += (npc.saving_throws.string) + "\n\n"
     r += (npc.skills.string) + "\n"
+    r += "PB: +"
+    r += str(npc.PB())
+    r += "\n"
 
 
 
@@ -194,44 +196,25 @@ def NPC_gen():
     r += "\t Spellsave DC {}".format(npc.spell_save_dc)
     r += "\n"
     r += "\t To hit: +{}".format(npc.spell_attack_bonus)
-    r += "\n"
+    r += "\n\n"
     r += npc.spells
         
         
 
     r += "\n"
-    r += "\n⚔︎    SKILLS & ACCTIONS:   ⚔︎"
-    r += "\n"
     r += npc.abilities
     r += "\n"
 
     if Dice(Lvl) >= 15:
-        r += "\n✯    LEGENDARY ACTIONS:    ✯"
-        r += "\n"
-        r += f"The {npc.background} {npc.race} can take {npc.proficiency_bonus} legendary actions, choosing from the options below. " +\
-             f"\n\t Only one legendary action can be used at a time, and only at the end of another creature's turn. "+\
-             f"\n\t The {npc.background} {rc} regains spent legendary actions at the start of its turn."
-        r += "\n"
         r += Legendary(npc)
         r += "\n"
 
     if Dice(Lvl) >= 20:
-        r += "\n⛫   LAIR ACTIONS:   ⛫"
-        r += "\n"
-        r += "Unless otherwise noted, any lair action that demands a saving throw uses the spellsave DC above."
-        r += "\n On initiative count 20 (losing initiative ties), the creature can take a lair action to cause one of the following effects, but can't use the same effect two rounds in a row:"
-        r += "\n"
         r += Lair(npc)
         r += "\n"
 
-    if Dice(Lvl) >= 10:
-        r += "\n♕   REGIONAL EFFECTS:   ♛"
-        r += "\n"
-        r += f"The {npc.background} {npc.race} has an effect on its domains that may include any of the following magical effects:"
-        r += "\n"
+    if Dice(Lvl) >= 25:
         r += Region(npc)
-        r += "\n"
-        r += f"If the {npc.background} {npc.race} dies, these effects dissipate during the next {Dice(6,2)} days."
 
 
 
