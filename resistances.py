@@ -58,33 +58,33 @@ def Resistances(npc):
 
         "Human": {
                 "acid":{
-                    "Immune": 0, "Resistant": 2, "None": 10, "Vulnerable": 2},
+                    "Immune": pb//8, "Resistant": pb//3, "None": pb*2, "Vulnerable": pb//3},
                 "bludgeoning": {
-                    "Immune": 1, "Resistant": 3, "None": 10, "Vulnerable": 2},
+                    "Immune": pb//8, "Resistant": pb//3, "None": pb*2, "Vulnerable": pb//3},
                 "cold": {
-                    "Immune": 1, "Resistant": 4, "None": 12, "Vulnerable": 3},
+                    "Immune": pb//8, "Resistant": pb//3, "None": pb*2, "Vulnerable": pb//3},
                 "fire": {
-                    "Immune": 1, "Resistant": 2, "None": 10, "Vulnerable": 2},
+                    "Immune": pb//8, "Resistant": pb//3, "None": pb*2, "Vulnerable": pb//3},
                 "force": {
-                    "Immune": 0, "Resistant": 2, "None": 10, "Vulnerable": 2},
+                    "Immune": pb//8, "Resistant": pb//3, "None": pb*2, "Vulnerable": pb//3},
                 "lightning": {
-                    "Immune": 1, "Resistant": 2, "None": 10, "Vulnerable": 2},
+                    "Immune": pb//8, "Resistant": pb//3, "None": pb*2, "Vulnerable": pb//3},
                 "necrotic": {
-                    "Immune": 1, "Resistant": 2, "None": 12, "Vulnerable": 3},
+                    "Immune": pb//8, "Resistant": pb//3, "None": pb*2, "Vulnerable": pb//3},
                 "piercing": {
-                    "Immune": 1, "Resistant": 3, "None": 12, "Vulnerable": 2},
+                    "Immune": pb//8, "Resistant": pb//3, "None": pb*2, "Vulnerable": pb//3},
                 "poison": {
-                    "Immune": 1, "Resistant": 3, "None": 12, "Vulnerable": 2},
+                    "Immune": pb//8, "Resistant": pb//3, "None": pb*2, "Vulnerable": pb//3},
                 "psychic": {
-                    "Immune": 1, "Resistant": 2, "None": 20, "Vulnerable": 3},
+                    "Immune": pb//8, "Resistant": pb//3, "None": pb*2, "Vulnerable": pb//3},
                 "radiant": {
-                    "Immune": 1, "Resistant": 2, "None": 20, "Vulnerable": 3},
+                    "Immune": pb//8, "Resistant": pb//3, "None": pb*2, "Vulnerable": pb//3},
                 "slashing": {
-                    "Immune": 1, "Resistant": 3, "None": 12, "Vulnerable": 2},
+                    "Immune": pb//8, "Resistant": pb//3, "None": pb*2, "Vulnerable": pb//3},
                 "thunder": {
-                    "Immune": 1, "Resistant": 3, "None": 12, "Vulnerable": 2},
+                    "Immune": pb//8, "Resistant": pb//3, "None": pb*2, "Vulnerable": pb//3},
                 "bludgeoning, piercing, and slashing from nonmagical attacks": {
-                    "Immune": 1*pb, "Resistant": 2*pb, "None": 12*pb, "Vulnerable": 2*pb},
+                    "Immune": pb//8, "Resistant": pb//3, "None": pb*2, "Vulnerable": 0},
                 },
         "Aberration": {
                 "acid": {"Immune": 2, "Resistant": 5, "None": 3, "Vulnerable": 0},
