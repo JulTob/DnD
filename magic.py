@@ -98,8 +98,10 @@ class Spellbook:
     def number_spell(self,spell_level):
         if spell_level == 0:
             return min(5, max(0, self.max_spell_level))
-        
-        num = min(max(2, 6 - spell_level), max(0, self.max_spell_level - spell_level + 1))
+        self.difficulty = d
+        l = spell_level
+        pb = PB(self.character_level)
+        num = (2*pb-d-l)//d
         return num
 
     
@@ -1648,7 +1650,7 @@ def Magic(npc):
     spellbook.select_spells()
     
 
-    sample_size = min(len(cantrips_list), npc.pb//2)
+    sample_size = min(len(cantrips_list), ( 2* npc.pb-difficulty)//difficulty, 5)
     for spell in random.sample(cantrips_list,sample_size):
         spellbook.add_spell(0,spell)
 
