@@ -68,6 +68,8 @@ class AbilityScores:
 def AbilityScoresPlus(npc):
 
     rc = npc.race
+
+    creature_type = npc.race + ' ' + npc.subrace + ' ' + npc.background
         
     ### Ability Scores Generation
     STR = self.AS.STR
@@ -78,10 +80,80 @@ def AbilityScoresPlus(npc):
     CHA = self.AS.CHA
 
       
+    ### Background-based Ability Score Adjustments
 
+    if "Artist" in creature_type:
+        CHA += Dice()
+        WIS += Dice()
+        STR -= Dice(6)
+
+    if "Bandit" in creature_type:
+        STR += Dice()
+
+    if "Bard" in creature_type:
+        CHA += Dice()
+
+    if "Barbarian" in creature_type:
+        STR += Dice(12)
+        INT -= Dice(6)
+
+    if "Berserker" in creature_type:
+        STR += Dice(6)
+        WIS += Dice(6)
+        INT -= Dice(6)
+
+    if "Charlatan" in creature_type:
+        CHA += Dice(12)
+        STR -= Dice(6)
+
+    if "Cleric" in creature_type:
+        WIS += Dice(6)
+
+    if "Crafter" in creature_type:
+        INT += Dice(6)
+
+    if "Criminal" in creature_type:
+        INT += Dice(6)
+        STR += Dice(6)
+        WIS -= Dice(6)
+
+    if "Commoner" in creature_type:
+        STR += Dice(6)
+
+    if "Cultist" in creature_type:
+        CHA += Dice(6)
+
+    if "Druid" in creature_type:
+        WIS += Dice(6)
+
+    if "Expert" in creature_type:
+        INT += Dice(6)    
+
+    if "Explorer" in creature_type:
+        CON += Dice(6)
+
+    if "Guard" in creature_type:
+        STR += Dice(6)
+
+    if "Healer" in creature_type:
+        WIS += Dice(6)
+
+    if "Hero" in creature_type:
+        CHA += Dice(6)
+
+    if "Hunter" in creature_type:
+        WIS += Dice(6)
+        
+    if "Knight" in creature_type:
+        CHA += Dice(3)
+        STR += Dice(3)
+
+
+
+        
 
     ### Race-based Ability Score Adjustments
-    if rc == "Human":
+    if "Human" in creature_type:
         # All humans have a baseline adaptability, hence the small boost to every ability score.
         STR += 1
         DEX += 1
@@ -90,26 +162,35 @@ def AbilityScoresPlus(npc):
         WIS += 1
         CHA += 1
 
-        human_type = random.choice(["Highlander", "Nomad", "Islander", "Scholar", "Forester", "Plainsfolk", "Urbanite"])
+    if "Highlander" in creature_type:
+        STR += Dice(6)
 
-        if "Highlander" in npc.subrace:
-            STR += Dice(6)
-        elif "Nomad" in npc.subrace:
-            CON += Dice(6)
-        elif "Islander" in npc.subrace:
-            DEX += Dice(6)
-        elif "Forester" in npc.subrace:
-            WIS += Dice(6)
-        elif "Plainsfolk" in npc.subrace:
-            CON += Dice(3)
-            STR += Dice(3)
-        elif "Urbanite" in npc.subrace:
-            CHA += Dice(6)
+    if "Local" in creature_type:
+        CHA += Dice(6)
+        
+    if "Foreigner" in creature_type:
+        WIS += Dice(6)
+        
+    if "Nomad" in creature_type:
+        CON += Dice(6)
+
+    if "Islander" in creature_type:
+        DEX += Dice(6)
+        
+    if "Forester" in creature_type:
+        WIS += Dice(6)
+        
+    if "Plainsfolk" in creature_type:
+        CON += Dice(3)
+        STR += Dice(3)
+        
+    if "Urbanite" in creature_type:
+        CHA += Dice(6)
             
-    if rc == "Aberration":
+    if "Aberration" in creature_type:
         CON += Dice(6)  # Aberrations often have hardy constitutions due to their alien nature.
 
-        aberration_type = random.choice(["Eldritch Horror", "Deep Dweller", "Reality Warper", "Psionic Entity"])
+        aberration_type = random.choice([ "Psionic Entity"])
 
         if aberration_type == "Eldritch Horror":
             # Bonus to charisma due to their terrifying presence and wisdom for their ancient knowledge.
