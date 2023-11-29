@@ -39,15 +39,15 @@ def Aberrations():
         "Illithid": 9,          # A highly intelligent race known for their psionic powers.
         "Old One": 7,           # Ancient beings with vast knowledge and a desire to dominate other species. 
         "Mindlinker": 4,        # They are benevolent and seek knowledge.
-        "Dominators": 5,        # Slave traders with a unique hierarchy.
+        "Deep Dominators": 5,   # Slave traders with a unique hierarchy.
         "Living Spell": 6,      # Former wizards transformed into monstrous forms.
-        "Chaotic": 6,           # Representing pure chaos, they're unpredictable.
-        "Star Titan": 5,        # Cosmic horror element.
+        "Chaos Warper": 5,      # Cosmic horror element. Representing pure chaos, they're unpredictable.
         "Alien Spawn": 5,       # Cosmic horror element.
         "Parasyte": 4,          # Parasitic entities that can control other beings.
         "Destiny Devouers": 4,  # Time-traveling and body-swapping aliens.
         "Githyanki": 7,         # Raiders and conquerors.
         "Githzerai": 7,         # More enlightened.
+        "Eldritch Horror": 7,
         }
 
     return random.choices(list(Names.keys()), weights=Names.values(), k=1)[0]
@@ -80,7 +80,7 @@ def Beasts():
         "Giant Owl of Wisdom": 8,   # A universal symbol of knowledge.
         "Celestial Stag": 7,        # Stags are often seen as messengers or connected to the otherworld in various mythologies.
         "Fenrir Wolf": 7,
-        "Forest-God": 5,            # A guardian of the forests, revered for its bravery.
+        "Forest God": 5,            # A guardian of the forests, revered for its bravery.
         "Cosmic Whale": 6, 
         "Kaiju Dinosaur": 6, 
         "Kerberus Dog": 7,
@@ -335,6 +335,22 @@ def Goblins():
     }
     return random.choices(list(Names.keys()), weights=Names.values(), k=1)[0]
 
+def Humans():
+    Types = {
+        "Local": 31,       
+        "Foreigner": 21,
+        "Highlander": 16,
+        "Nomad": 16,
+        "Islander": 13,
+        "Forester": 12,
+        "Plainsfolk": 11,
+        "Urbanite":10,
+        }
+    
+    chosen_type = random.choices(list(Types.keys()), weights=Types.values(), k=1)[0]
+    
+    return f"{chosen_type} "
+
 
 def Monstrosities():
     Names = {
@@ -458,24 +474,6 @@ def Undeads():
         }
     return random.choices(list(Names.keys()), weights=Names.values(), k=1)[0]
 
-def Humans():
-    Types = {
-        "Local": 30,       
-        "Foreigner": 20,
-        "Highlander": 15,
-        "Nomad": 15,
-        "Islander": 12,
-        "Forester": 11,
-        "Plainsfolk": 10,
-        "Humble":10,
-        "Urbanite":9,
-        "Exotic": 3,       
-        "Wealthy":2,
-        }
-    
-    chosen_type = random.choices(list(Types.keys()), weights=Types.values(), k=1)[0]
-    
-    return f"{chosen_type} "
 
 
 def Elves():
