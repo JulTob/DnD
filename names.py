@@ -1716,10 +1716,11 @@ def Title(npc):
             rank += ["Shark Lord", "Deep Hunter", "Toothed Terror", "Sea Predator", "Wave Stalker"]
             of_the += ["of the Abyssal Depths", "of the Shark Waters", "of the Oceanic Hunts", "of the Fierce Currents", "of the Predatory Schools"]
 
-        if npc.subrace == "Skinwalker":
+        if "Skinwalker" in creature_type:
             descriptor += ["Shapeshifting", "Mystical", "Spirit-Walker", "Transforming", "Elusive"]
             rank += [
-                "Ferret","Form Changer", "Mystic Walker", "Spirit Shifter", "Shape Sovereign", "Phantom Stalker"]
+                "Ferret",
+                "Form Changer", "Mystic Walker", "Spirit Shifter", "Shape Sovereign", "Phantom Stalker"]
             of_the += ["of the Shifting Forms", "of the Hidden Spirits", "of the Ancient Mysteries", "of the Elusive Natures", "of the Mystic Paths"]
 
         if npc.subrace == "Werebear":
@@ -2855,6 +2856,7 @@ def Title(npc):
         # General Fey descriptor, rank, and Of_the Phrases
         descriptor += [
             "Green",
+            "Ferret",
             "Enchanted", "Mystical", "Otherworldly", "Charming", "Ethereal"]
         rank += ["Fey Sovereign", "Mystic Wanderer", "Enchanted Guardian", "Otherworldly Emissary", "Ethereal Spirit"]
         of_the += ["of the Enchanted Woods", "of the Mystic Glades", "of the Ethereal Realms", "of the Otherworldly Visions", "of the Charming Streams"]
@@ -2866,8 +2868,9 @@ def Title(npc):
             of_the += ["of the Dark Swamps", "of the Enchanted Forests", "of the Malevolent Curses", "of the Witching Hours", "of the Cunning Spells"]
 
         # Nymph
-        if "Nymph" in npc.subrace:
-            descriptor += ["Nature", "Graceful", "Alluring", "Forest", "Water"]
+        if "Nymph" in creature_type:
+            descriptor += [
+                "Nature", "Graceful", "Alluring", "Forest", "Water"]
             rank += ["Forest Guardian", "Water Nymph", "Nature's Maiden", "Alluring Spirit", "Graceful Protector"]
             of_the += ["of the Whispering Woods", "of the Crystal Lakes", "of the Nature's Embrace", "of the Alluring Brooks", "of the Graceful Meadows"]
 
@@ -3065,12 +3068,16 @@ def Title(npc):
             "Master",
             "Gnomish", 
             "Inventive",
-            "Curious", "Small", "Whimsical", "Clever"]
+            "Curious",
+            "Small",
+            "Whimsical",
+            "Clever"]
         rank += ["Tinker",
                  "Inventor",
                  "Sage",
                  "Explorer",
-                 "Artisan"]
+                 "Artisan",
+                 ]
         of_the += ["of the Hidden Workshops",
                    "of the Whimsical Gardens",
                    "of the Curious Expeditions",
@@ -3087,6 +3094,7 @@ def Title(npc):
         if "Forest" in creature_type:
             descriptor += [
                 "Green",
+                "Ferret",
                 "Woodland", "Nature-Loving", "Green", "Sylvan", "Earthy"]
             rank += ["Forest Wanderer", "Nature Tinker", "Green Artisan", "Sylvan Creator", "Earthy Innovator"]
             of_the += ["of the Woodland Glens", "of the Nature-Crafted Items", "of the Green Canopies", "of the Sylvan Groves", "of the Earthy Dwellings"]
@@ -3129,7 +3137,9 @@ def Title(npc):
         # General Goblin descriptor, rank, and Of_the Phrases
         descriptor += [
             "Green",
-            "Sneaky", "Green Skin", "Goblin's", "Crafty", "Cunning",]
+            "Sneaky",
+            "Ferret",
+            "Green Skin", "Goblin's", "Crafty", "Cunning",]
         rank += ["Goblin Chief", "Sneak Master", "Crafty Thief", "Cunning Strategist", "Mischievous Trickster"]
         of_the += ["of the Shadowy Nooks", "of the Green Woods", "of the Crafty Hideouts", "of the Cunning Plans", "of the Mischievous Antics"]
 
@@ -4108,7 +4118,9 @@ def Title(npc):
                            "Woodland",
                            "Green"]
             rank += ["Guardian",
-                     "Enchanter"]
+                     "Enchanter",
+                     "Ferret",
+                     ]
             of_the += ["of the Sylvan Groves",
                        "of the Forest Shadows",
                        "of the Woodland Paths",
@@ -4125,7 +4137,9 @@ def Title(npc):
             rank += ["Scout",
                      "Hunter",
                      "Protector",
-                     "Herbalist"]
+                     "Herbalist",
+                     "Ferret",
+                     ]
             of_the += ["of the Woodland Glades",
                        "of the Earthy Forests",
                        "of the Rustic Thickets",
@@ -4854,6 +4868,7 @@ def Title(npc):
             "Circle's",
             "Nature's",
             "Green",
+            
             ]
         rank = [
             "Druid",
@@ -4861,7 +4876,9 @@ def Title(npc):
             "Protector",
             "Shaman",
             "Warden",
-            "Guardian"]
+            "Guardian",
+            "Ferret",
+            ]
         of_the = [
             "of the Wild",
             f"of the {random.choice(descriptor)} Circle",
@@ -4933,7 +4950,9 @@ def Title(npc):
         descriptor = [
             "Green",
             "Stealthy", "Rugged", "Sharpshooter", "Trapper", "Wild"]
-        rank = ["Stealthy Tracker", "Rugged Huntsman", "Sharpshooter Archer", "Skilled Trapper", "Wild Stalker"]
+        rank = [
+            "Ferret",
+            "Tracker", "Rugged Huntsman", "Sharpshooter Archer", "Skilled Trapper", "Wild Stalker"]
         of_the = ["of the Stealthy Pursuit", "of the Rugged Wilderness", "of the Sharpshooter's Range", "of the Skilled Snares", "of the Wild Hunt"]
 
     # Background: Knight
@@ -7271,10 +7290,187 @@ def Title(npc):
         f"of the {random.choice(descriptor)} Realms",
         "","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",
         ]
-
+    
     descriptor += [
         "Red",
         ]
+    
+    if "Goblin" in creature_type
+
+        of_the = [
+            "Redhats Klan",
+            "Traphunters Clan",
+            f"{random.choice(descriptor)} Clan"
+            "Rusty Dagger Clan",
+            f"{random.choice(descriptor)} Dagger Clan"
+            "Broken Tooth Clan",
+            f"{random.choice(descriptor)} Tooth Clan"
+            "Sneaky Shadow Clan",
+            f"{random.choice(descriptor)} Shadow Clan"
+            "Raging Fire Clan",
+            f"{random.choice(descriptor)} Fire Clan"
+            "Cunning Fox Clan",
+            "Wild Boar Clan",
+            "Quickfoot Clan",
+            "Sharp Spear Clan",
+            "Sly Raven Clan",
+            "Hidden Cave Clan",
+            "Noisy Brawler Clan",
+            "Muddy Water Clan",
+            "Swift River Clan",
+            "Gleaming Gem Clan",
+            "Fierce Wolf Clan",
+            f"{random.choice(descriptor)} Wolf Clan"
+            "Clever Trickster Clan",
+            "Wily Serpent Clan",
+            "Bouncing Rabbit Clan",
+            "Laughing Skull Clan",
+            f"{random.choice(descriptor)} Skull Clan"
+            "Dancing Leaf Clan",
+            "Twilight Trickster Clan",
+            "Lunar Lantern Clan",
+            f"{random.choice(descriptor)} Moon Clan"
+            "Mystic Mushroom Clan",
+            "Whispering Willow Clan",
+            "Starlight Stalker Clan",
+            "Enchanted Ember Clan",
+            "Dancing Dewdrop Clan",
+            "Shimmering Shade Clan",
+            "Gleaming Glade Clan",
+            "Blinking Blossom Clan",
+            "Sparkling Stream Clan",
+            "Glimmering Grove Clan",
+            "Sylvan Shadow Clan",
+            "Charming Cherry Clan",
+            "Moonlit Marauder Clan",
+            "Dewy Dreamer Clan",
+            "Frosty Fern Clan",
+            f"{random.choice(descriptor)} Tree Clan"
+            "Ethereal Elm Clan",
+            "Vibrant Violet Clan",
+            "Whimsical Wren Clan",
+            "Moonlit Minion Clan",
+            "Dazzling Dancer Clan",
+            "Enchanted Envoy Clan",
+            "Sylvan Servant Clan",
+            "Gleaming Guardian Clan",
+            "Starlit Steward Clan",
+            "Radiant Runner Clan",
+            "Shimmering Squire Clan",
+            "Lustrous Lackey Clan",
+            "Blinking Bearer Clan",
+            "Twinkling Tender Clan",
+            "Illuminated Intendant Clan",
+            "Vivid Valet Clan",
+            "Ethereal Errand Clan",
+            "Bright Bannerman Clan",
+            "Sparkling Seneschal Clan",
+            "Luminous Liaison Clan",
+            "Mystic Messenger Clan",
+            "Whimsical Ward Clan",
+            "Feywild Follower Clan",
+            "Shadow Sneak Clan",
+            "Eclipse Enigma Clan",
+            "Nocturnal Nuisance Clan",
+            "Mystic Mirage Clan",
+            "Gloom Grin Clan",
+            "Twilight Trickster Clan",
+            "Obsidian Outlaw Clan",
+            "Dusk Dweller Clan",
+            "Midnight Marauder Clan",
+            "Veiled Vagabond Clan",
+            "Lunar Lurker Clan",
+            "Abyssal Agent Clan",
+            "Umbral Usher Clan",
+            "Phantom Pilferer Clan",
+            "Sable Scamp Clan",
+            "Nightshade Nihilist Clan",
+            "Wraithlike Wanderer Clan",
+            "Crimson Creeper Clan",
+            "Sinister Sprite Clan",
+            "Vortex Vandal Clan",
+            "Tinker Twist Clan",
+            "Gadget Gleam Clan",
+            "Clever Contraption Clan",
+            "Whiz Whirl Clan",
+            "Sly Spark Clan",
+            "Dazzle Device Clan",
+            "Quirk Quiver Clan",
+            "Brainy Bolt Clan",
+            "Witty Widget Clan",
+            "Zany Zip Clan",
+            "Puzzle Prowess Clan",
+            "Tricky Tinker Clan",
+            "Smart Sprocket Clan",
+            "Crafty Coil Clan",
+            "Inventive Imp Clan",
+            "Gizmo Glisten Clan",
+            "Snazzy Spring Clan",
+            "Brilliant Bolt Clan",
+            "Astute Axle Clan",
+            "Moxie Mechanism Clan",
+            "Not Bright Clan",
+            "Lost Map Clan",
+            "Running Late Clan",
+            "Can’t Pants Clan",
+            "Tripped in Dark Clan",
+            "Wrong Turn Clan",
+            "Oops Clan",
+            "Lost Sock Clan",
+            "Stuck Jar Clan",
+            "Hit Head Clan",
+            "Forgot Name Clan",
+            "Can’t Tie Shoes Clan",
+            "Where’s Hat Clan",
+            "Ate Map Clan",
+            "Slipped Banana Clan",
+            "Walked into Wall Clan",
+            "Sitting Puddle Clan",
+            "Lost Marbles Clan",
+            "Fell Hole Clan",
+            "Dancing Tree Clan",
+            "Rock Eaters Clan",
+            "Sun Stares Clan",
+            "Feet Trips Clan",
+            "Talks Trees Clan",
+            "Head Lost Clan",
+            "Cantcount Clan",
+            "Moonbarks Clan",
+            "Cats Talk Clan",
+            "Drools Clan",
+            "Marblesharp Clan",
+            "Squirrel Dancers Clan",
+            "Nosefinders Clan",
+            "Spicysnow Clan",
+            "Redsnow Clan",
+            "Yellowsnow Clan",
+            "Ownlaughs Clan",
+            "Shadowfriend Clan",
+            "Dull Blade Clan",
+            "Muddy Mind Clan",
+            "Broken Compass Clan",
+            "Topsy Turvy Clan",
+            "Backwards Bunch Clan",
+            "Loopy Legs Clan",
+            "Fuzzy Logic Clan",
+            "Silly Snouts Clan",
+            "Boggled Brains Clan",
+            "Dizzy Dudes Clan",
+            "Wacky Whiskers Clan",
+            "Noodle Noggins Clan",
+            "Giggly Gang Clan",
+            "Jumbled Jaws Clan",
+            "Twisted Tails Clan",
+            "Kooky Knees Clan",
+            "Woozy Whelps Clan",
+            "Zany Zigzags Clan",
+            "Quirky Quills Clan",
+            "Fuddle Heads Clan",
+            ]
+        title = f"The {random.choice(descriptor)} {random.choice(rank)} of the {random.choice(of_the)}"
+        return title
+
+
 
 
     title = f"The {random.choice(descriptor)} {random.choice(rank)} {random.choice(of_the)}"
@@ -14046,197 +14242,18 @@ def Racial_Names(npc):
         "Zasiki",
         "Warishi"
                ]
-    Clans = [
-        "Redhats",
-        "Traphunters",
-        "Rusty Dagger Clan",
-        "Broken Tooth Clan",
-        "Sneaky Shadow Clan",
-        "Raging Fire Clan",
-        "Cunning Fox Clan",
-        "Wild Boar Clan",
-        "Quickfoot Clan",
-        "Sharp Spear Clan",
-        "Sly Raven Clan",
-        "Hidden Cave Clan",
-        "Noisy Brawler Clan",
-        "Muddy Water Clan",
-        "Swift River Clan",
-        "Gleaming Gem Clan",
-        "Fierce Wolf Clan",
-        "Clever Trickster Clan",
-        "Wily Serpent Clan",
-        "Bouncing Rabbit Clan",
-        "Laughing Skull Clan",
-        "Dancing Leaf Clan",
-        "Twilight Trickster Clan",
-        "Lunar Lantern Clan",
-        "Mystic Mushroom Clan",
-        "Whispering Willow Clan",
-        "Starlight Stalker Clan",
-        "Enchanted Ember Clan",
-        "Dancing Dewdrop Clan",
-        "Shimmering Shade Clan",
-        "Gleaming Glade Clan",
-        "Blinking Blossom Clan",
-        "Sparkling Stream Clan",
-        "Glimmering Grove Clan",
-        "Sylvan Shadow Clan",
-        "Charming Cherry Clan",
-        "Moonlit Marauder Clan",
-        "Dewy Dreamer Clan",
-        "Frosty Fern Clan",
-        "Ethereal Elm Clan",
-        "Vibrant Violet Clan",
-        "Whimsical Wren Clan",
-        "Moonlit Minion Clan",
-        "Dazzling Dancer Clan",
-        "Enchanted Envoy Clan",
-        "Sylvan Servant Clan",
-        "Gleaming Guardian Clan",
-        "Starlit Steward Clan",
-        "Radiant Runner Clan",
-        "Shimmering Squire Clan",
-        "Lustrous Lackey Clan",
-        "Blinking Bearer Clan",
-        "Twinkling Tender Clan",
-        "Illuminated Intendant Clan",
-        "Vivid Valet Clan",
-        "Ethereal Errand Clan",
-        "Bright Bannerman Clan",
-        "Sparkling Seneschal Clan",
-        "Luminous Liaison Clan",
-        "Mystic Messenger Clan",
-        "Whimsical Ward Clan",
-        "Feywild Follower Clan",
-        "Shadow Sneak Clan",
-        "Eclipse Enigma Clan",
-        "Nocturnal Nuisance Clan",
-        "Mystic Mirage Clan",
-        "Gloom Grin Clan",
-        "Twilight Trickster Clan",
-        "Obsidian Outlaw Clan",
-        "Dusk Dweller Clan",
-        "Midnight Marauder Clan",
-        "Veiled Vagabond Clan",
-        "Lunar Lurker Clan",
-        "Abyssal Agent Clan",
-        "Umbral Usher Clan",
-        "Phantom Pilferer Clan",
-        "Sable Scamp Clan",
-        "Nightshade Nihilist Clan",
-        "Wraithlike Wanderer Clan",
-        "Crimson Creeper Clan",
-        "Sinister Sprite Clan",
-        "Vortex Vandal Clan",
-        "Tinker Twist Clan",
-        "Gadget Gleam Clan",
-        "Clever Contraption Clan",
-        "Whiz Whirl Clan",
-        "Sly Spark Clan",
-        "Dazzle Device Clan",
-        "Quirk Quiver Clan",
-        "Brainy Bolt Clan",
-        "Witty Widget Clan",
-        "Zany Zip Clan",
-        "Puzzle Prowess Clan",
-        "Tricky Tinker Clan",
-        "Smart Sprocket Clan",
-        "Crafty Coil Clan",
-        "Inventive Imp Clan",
-        "Gizmo Glisten Clan",
-        "Snazzy Spring Clan",
-        "Brilliant Bolt Clan",
-        "Astute Axle Clan",
-        "Moxie Mechanism Clan",
-        "Not Bright Clan",
-        "Lost Map Clan",
-        "Running Late Clan",
-        "Can’t Pants Clan",
-        "Tripped in Dark Clan",
-        "Wrong Turn Clan",
-        "Oops Clan",
-        "Lost Sock Clan",
-        "Stuck Jar Clan",
-        "Hit Head Clan",
-        "Forgot Name Clan",
-        "Can’t Tie Shoes Clan",
-        "Where’s Hat Clan",
-        "Ate Map Clan",
-        "Slipped Banana Clan",
-        "Walked into Wall Clan",
-        "Sitting Puddle Clan",
-        "Lost Marbles Clan",
-        "Fell Hole Clan",
-        "Dancing Tree Clan",
-        "Rock Eaters Clan",
-        "Sun Stares Clan",
-        "Feet Trips Clan",
-        "Talks Trees Clan",
-        "Head Lost Clan",
-        "Cantcount Clan",
-        "Moonbarks Clan",
-        "Cats Talk Clan",
-        "Drools Clan",
-        "Marblesharp Clan",
-        "Squirrel Dancers Clan",
-        "Nosefinders Clan",
-        "Spicysnow Clan",
-        "Redsnow Clan",
-        "Yellowsnow Clan",
-        "Ownlaughs Clan",
-        "Shadowfriend Clan",
-        "Dull Blade Clan",
-        "Muddy Mind Clan",
-        "Broken Compass Clan",
-        "Topsy Turvy Clan",
-        "Backwards Bunch Clan",
-        "Loopy Legs Clan",
-        "Fuzzy Logic Clan",
-        "Silly Snouts Clan",
-        "Boggled Brains Clan",
-        "Dizzy Dudes Clan",
-        "Wacky Whiskers Clan",
-        "Noodle Noggins Clan",
-        "Giggly Gang Clan",
-        "Jumbled Jaws Clan",
-        "Twisted Tails Clan",
-        "Kooky Knees Clan",
-        "Woozy Whelps Clan",
-        "Zany Zigzags Clan",
-        "Quirky Quills Clan",
-        "Fuddle Heads Clan"
 
         ]
     if Type == "Goblin":
         Names += Goblins            
 
-        if Dice(10)<5:
-            FullName = SyllabicGenerator(
-                onset = ['So','Ro','Aza', 'Al', 'Za', 'Ze', 'Az', 'Ba', 'Am'],
+        Name = NewName(Names
+                onset = ['So','Ro','Aza', 'Al', 'Za', 'Ze', 'Az', 'Ba', 'Am', 'Fe'],
                 nuclei = ['', 'ra', 'ja', 'ha', 'co'],
                 codas = ['shan','ja', 'dan', 'hir','','fir','ur', 'dar', 'bar'],
-                count = Dice(2)
                 )
             
-        elif Dice(10) < 5:
-            Name = SyllabicName(
-                syllables = SyllabicExtraction(Names),
-                min_syllables=2,
-                max_syllables=3)
-                
-            FullName =  Name 
-
-        elif Dice(10) < 5:
-            namer = MarkovNameGenerator(Names)
-            Name = namer.generate_name()
-                
-            FullName =  Name 
-                
-        else:
-            FullName =  random.choice(Names)
-
-        return FullName + " of the " + random.choice(Clans)
+        return Name
 
 
 
@@ -14760,9 +14777,41 @@ def Racial_Names(npc):
             "Adeleadle",
             "Britneysplinter",
             "Pinkpuff",
-            "Brunobrizzle"
+            "Brunobrizzle",
+            "Emanemik",
+            
             ]
         Names = Kobold_Names
+
+        onset = [    "Pink",  "Ak", "As", "Bi", "Ba", "Co", "De", "Du", "Ee", "Ku", "Ki", "Me", "Ho", "Gr",    "Na", "Fi", "Gn", "Kr", "Po", "Ra", "Sc", "Sn", "Sq", "Sl", "To", "Tu", "Ur",    "Wh", "Yi", "Za", "Zi", "Sn", "Gi", "Ra", "Zi", "Gl", "Ni", "Sk", "Mi", "Br",    "Kr", "Fi", "Gr", "Tr", "Po", "Bi", "Cr", "Sq", "Da", "Go", "Ji", "Vi", "Pr",    "Sq", "Zi", "Ei", "Cl", "Da", "Sh", "Mo", "Be", "Ga", "Pi", "Ha", "Cu", "Ne",    "Ga", "Ed", "Te", "Da", "Fl", "Fr", "To", "Ro", "Ga", "Jo", "Ho", "Ei", "Ni",    "Ga", "Da", "Fr", "To", "Ro", "Ke", "Ga", "Ma", "Tr", "Re", "Ni", "Di", "Bi",    "Ca", "Ma", "Li", "Ch", "Ro", "Th", "Ke", "Ga", "Ob", "Pu", "Ma", "Tr", "Re",    "Ni", "Ei", "Ma", "Li", "Ch", "Ro", "Th", "Ke", "Ga", "Ob", "Pu", "Ma", "Tr",    "Re", "El", "Ma", "Ri", "Ga", "Dr", "Em", "Sn", "Sh", "Ja", "Bo", "Pr", "Tu",    "Be", "Fi", "Ma", "Dy", "Jo", "Si", "Bi", "Ca", "Ma", "Tr", "Bi", "Ch", "St",    "El", "Ma", "Ni", "Li", "Ma", "Ch", "Ro", "Th", "Ke", "Ga", "Ob", "Pu", "Ma",    "Tr", "Re", "Ni", "Ei", "Ma", "Li", "Ch", "Ro", "Th", "Ke", "Ga", "Ob", "Pu",    "Ma", "Tr", "Re", "El", "Ma", "Ri", "Ga", "Dr", "Em", "Sn", "Sh", "Ja", "Bo",    "Pr", "Tu", "Be", "Fi", "Ma", "Dy", "Jo", "Si", "Bi", "Ca", "Ma", "Tr", "Bi",    "Ch", "St", "El", "Ma", "Ni", "Li", "Ma", "Ch", "Ro", "Th", "Ke", "Ga", "Ob",    "Pu", "Ma", "Tr", "Re", "Ni", "Ei", "Ma", "Li", "Ch", "Ro", "Th", "Ke", "Ga",    "Ob", "Pu", "Ma", "Tr", "Re", "El", "Ma", "Ri", "Ga", "Dr", "Em", "Sn", "Sh",    "Ja", "Bo", "Pr", "Tu", "Be", "Fi", "Ma", "Dy", "Jo", "Si", "Bi", "Ca", "Ma",    "Tr", "Bi", "Ch", "St", "El", "Ma", "Ni", "Li", "Ma", "Ch", "Ro", "Th", "Ke",    "Ga", "Ob", "Pu", "Ma", "Tr", "Re", "Ni", "Ei", "Ma", "Li", "Ch", "Ro", "Th",    "Ke", "Ga", "Ob", "Pu", "Ma", "Tr", "Re",
+
+                     ]
+        codas = [
+            "ki", "ik", "ak", "in", "ic", "nn", "ek", "ak", "ib", "ox", "it", "ak", "ag",
+            "nz", "an", "iz", "ar", "le", "iz", "ks", "ag", "ch", "zz", "ix", "al", "og",
+            "rk", "ik", "mp", "rl", "nz", "ik", "iv", "ik", "ee", "ik", "ix", "az", "ik", 
+            "le", "ag", "ix", "ok", "ik", "az", "ik", "ag", "ik", "ik", "ik", "ik", "ik",
+            "al", "in", "ik", "ok", "ir", "ik", "az", "ik", "ok", "ik", "ee", "ik", "ix",
+            "az", "ik", "le", "ag", "ix", "ok", "ik", "az", "ik", "ag", "ik", "ik", "ik",
+            "ik", "ik", "al", "in", "ik", "ok", "ir", "ik", "az", "ik", "ok", "ik", "ee",
+            "ik", "ix", "az", "ik", "le", "ag", "ix", "ok", "ik", "az", "ik", "ag", "ik",
+            "ik", "ik", "ik", "ik", "al", "in", "ik", "ok", "ir", "ik", "az", "ik", "ok",
+            "ik", "ee", "ik", "ix", "az", "ik", "le", "ag", "ix", "ok", "ik", "az", "ik",
+            "ag", "ik", "ik", "ik", "ik", "ik", "al", "in", "ik", "ok", "ir", "ik", "az",
+            "ik", "ok", "ik", "ee", "ik", "ix", "az", "ik", "le", "ag", "ix", "ok", "ik",
+            "az", "ik", "ag", "ik", "ik", "ik", "ik", "ik", "al", "in", "ik", "ok", "ir",
+            "ik", "az", "ik", "ok", "ik", "ee", "ik", "ix", "az", "ik", "le", "ag", "ix",
+            "ok", "ik", "az", "ik", "ag", "ik", "ik", "ik", "ik", "ik", "al", "in", "ik",
+            "ok", "ir", "ik", "az", "ik", "ok", "ik", "ee", "ik", "ix", "az", "ik", "le",
+            "ag", "ix", "ok", "ik", "az", "ik", "ag", "ik", "ik", "ik", "ik", "ik", "al",
+            "in", "ik", "ok", "ir", "ik", "az", "ik", "ok", "ik", "ee", "ik", "ix", "az",
+            "ik", "le", "ag",
+            ]
+        nuclei = [
+            "ki","kiz","kak","ix"
+            
+
+            ]
 
         Name = NewName(Names,onset,nuclei,codas) 
         return Name
@@ -15153,6 +15202,7 @@ def Racial_Names(npc):
         fae =[
             "Titania", "Oberon", "Puck", "Robin", "Goodfellow",
             "Tinkerbell",
+            "Ferret",
             "Tinker", "Bell",
             "Mab", "Ariel", "Morgana", "Niamh", "Tam", "Lin", "Rhiannon",
             "Melusine", "Gwydion", "Etain", "Bluebell", "Florian", "Lorelei",
