@@ -361,7 +361,7 @@ class NPC:
         
     def SetAbilityScores(self, STR, DEX, CON, INT, WIS, CHA):
         self.AS = ability_scores.AbilityScores(STR, DEX, CON, INT, WIS, CHA)
-        self.AbilityScoresPlus()
+        ability_scores.AbilityScoresPlus(self)
         self.ST = SavingThrows(self.AS, self.proficiency_bonus)
                 
 
