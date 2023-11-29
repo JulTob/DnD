@@ -14783,10 +14783,34 @@ def Racial_Names(npc):
             ]
         Names = Kobold_Names
 
-        onset = [    "Pink",  "Ak", "As", "Bi", "Ba", "Co", "De", "Du", "Ee", "Ku", "Ki", "Me", "Ho", "Gr",    "Na", "Fi", "Gn", "Kr", "Po", "Ra", "Sc", "Sn", "Sq", "Sl", "To", "Tu", "Ur",    "Wh", "Yi", "Za", "Zi", "Sn", "Gi", "Ra", "Zi", "Gl", "Ni", "Sk", "Mi", "Br",    "Kr", "Fi", "Gr", "Tr", "Po", "Bi", "Cr", "Sq", "Da", "Go", "Ji", "Vi", "Pr",    "Sq", "Zi", "Ei", "Cl", "Da", "Sh", "Mo", "Be", "Ga", "Pi", "Ha", "Cu", "Ne",    "Ga", "Ed", "Te", "Da", "Fl", "Fr", "To", "Ro", "Ga", "Jo", "Ho", "Ei", "Ni",    "Ga", "Da", "Fr", "To", "Ro", "Ke", "Ga", "Ma", "Tr", "Re", "Ni", "Di", "Bi",    "Ca", "Ma", "Li", "Ch", "Ro", "Th", "Ke", "Ga", "Ob", "Pu", "Ma", "Tr", "Re",    "Ni", "Ei", "Ma", "Li", "Ch", "Ro", "Th", "Ke", "Ga", "Ob", "Pu", "Ma", "Tr",    "Re", "El", "Ma", "Ri", "Ga", "Dr", "Em", "Sn", "Sh", "Ja", "Bo", "Pr", "Tu",    "Be", "Fi", "Ma", "Dy", "Jo", "Si", "Bi", "Ca", "Ma", "Tr", "Bi", "Ch", "St",    "El", "Ma", "Ni", "Li", "Ma", "Ch", "Ro", "Th", "Ke", "Ga", "Ob", "Pu", "Ma",    "Tr", "Re", "Ni", "Ei", "Ma", "Li", "Ch", "Ro", "Th", "Ke", "Ga", "Ob", "Pu",    "Ma", "Tr", "Re", "El", "Ma", "Ri", "Ga", "Dr", "Em", "Sn", "Sh", "Ja", "Bo",    "Pr", "Tu", "Be", "Fi", "Ma", "Dy", "Jo", "Si", "Bi", "Ca", "Ma", "Tr", "Bi",    "Ch", "St", "El", "Ma", "Ni", "Li", "Ma", "Ch", "Ro", "Th", "Ke", "Ga", "Ob",    "Pu", "Ma", "Tr", "Re", "Ni", "Ei", "Ma", "Li", "Ch", "Ro", "Th", "Ke", "Ga",    "Ob", "Pu", "Ma", "Tr", "Re", "El", "Ma", "Ri", "Ga", "Dr", "Em", "Sn", "Sh",    "Ja", "Bo", "Pr", "Tu", "Be", "Fi", "Ma", "Dy", "Jo", "Si", "Bi", "Ca", "Ma",    "Tr", "Bi", "Ch", "St", "El", "Ma", "Ni", "Li", "Ma", "Ch", "Ro", "Th", "Ke",    "Ga", "Ob", "Pu", "Ma", "Tr", "Re", "Ni", "Ei", "Ma", "Li", "Ch", "Ro", "Th",    "Ke", "Ga", "Ob", "Pu", "Ma", "Tr", "Re",
+        onset = [
+            "Pink",
+            "Ak",
+            "As",
+            "Ax",
+            "Bi",
+            "Ba",
+            "Co",
+            "De",
+            "Du",
+            "Ee",
+            "Ku",
+            "Ki",
+            "Me",
+            "Ho",
+            "Gr",
+            "Na",
+            "Fi",
+            "Gn",
+            "Kr",
+            "Po",
+            "Ra",
+            "Sc",
+            "Sn", "Sq", "Sl", "To", "Tu", "Ur",    "Wh", "Yi", "Za", "Zi", "Sn", "Gi", "Ra", "Zi", "Gl", "Ni", "Sk", "Mi", "Br",    "Kr", "Fi", "Gr", "Tr", "Po", "Bi", "Cr", "Sq", "Da", "Go", "Ji", "Vi", "Pr",    "Sq", "Zi", "Ei", "Cl", "Da", "Sh", "Mo", "Be", "Ga", "Pi", "Ha", "Cu", "Ne",    "Ga", "Ed", "Te", "Da", "Fl", "Fr", "To", "Ro", "Ga", "Jo", "Ho", "Ei", "Ni",    "Ga", "Da", "Fr", "To", "Ro", "Ke", "Ga", "Ma", "Tr", "Re", "Ni", "Di", "Bi",    "Ca", "Ma", "Li", "Ch", "Ro", "Th", "Ke", "Ga", "Ob", "Pu", "Ma", "Tr", "Re",    "Ni", "Ei", "Ma", "Li", "Ch", "Ro", "Th", "Ke", "Ga", "Ob", "Pu", "Ma", "Tr",    "Re", "El", "Ma", "Ri", "Ga", "Dr", "Em", "Sn", "Sh", "Ja", "Bo", "Pr", "Tu",    "Be", "Fi", "Ma", "Dy", "Jo", "Si", "Bi", "Ca", "Ma", "Tr", "Bi", "Ch", "St",    "El", "Ma", "Ni", "Li", "Ma", "Ch", "Ro", "Th", "Ke", "Ga", "Ob", "Pu", "Ma",    "Tr", "Re", "Ni", "Ei", "Ma", "Li", "Ch", "Ro", "Th", "Ke", "Ga", "Ob", "Pu",    "Ma", "Tr", "Re", "El", "Ma", "Ri", "Ga", "Dr", "Em", "Sn", "Sh", "Ja", "Bo",    "Pr", "Tu", "Be", "Fi", "Ma", "Dy", "Jo", "Si", "Bi", "Ca", "Ma", "Tr", "Bi",    "Ch", "St", "El", "Ma", "Ni", "Li", "Ma", "Ch", "Ro", "Th", "Ke", "Ga", "Ob",    "Pu", "Ma", "Tr", "Re", "Ni", "Ei", "Ma", "Li", "Ch", "Ro", "Th", "Ke", "Ga",    "Ob", "Pu", "Ma", "Tr", "Re", "El", "Ma", "Ri", "Ga", "Dr", "Em", "Sn", "Sh",    "Ja", "Bo", "Pr", "Tu", "Be", "Fi", "Ma", "Dy", "Jo", "Si", "Bi", "Ca", "Ma",    "Tr", "Bi", "Ch", "St", "El", "Ma", "Ni", "Li", "Ma", "Ch", "Ro", "Th", "Ke",    "Ga", "Ob", "Pu", "Ma", "Tr", "Re", "Ni", "Ei", "Ma", "Li", "Ch", "Ro", "Th",    "Ke", "Ga", "Ob", "Pu", "Ma", "Tr", "Re",
 
                      ]
-        codas = [
+        nuclei = [
+            
             "ki", "ik", "ak", "in", "ic", "nn", "ek", "ak", "ib", "ox", "it", "ak", "ag",
             "nz", "an", "iz", "ar", "le", "iz", "ks", "ag", "ch", "zz", "ix", "al", "og",
             "rk", "ik", "mp", "rl", "nz", "ik", "iv", "ik", "ee", "ik", "ix", "az", "ik", 
@@ -14807,10 +14831,53 @@ def Racial_Names(npc):
             "in", "ik", "ok", "ir", "ik", "az", "ik", "ok", "ik", "ee", "ik", "ix", "az",
             "ik", "le", "ag",
             ]
-        nuclei = [
-            "ki","kiz","kak","ix"
-            
 
+        codas = [
+            "a",
+            "ack",
+            "ae",
+            "ai",
+            "ank",
+            "ash",
+            "au", 
+
+            "bop",
+
+            "e",
+            "ea",
+            "ee",
+
+            "i",
+            "ie",
+            "io",
+            "ix",
+
+            "kak",
+            "ki",
+            "kiz",
+
+            "o",
+            "oi",
+            "oo",
+            "ou",
+
+            "u",
+            "ua",
+
+              "oe", "ue", "ya",
+            "ki", "sik", "bik", "aki", "cor", "deek", "durn", "eek", "mak", "bik", 
+            "po", "hox", "rit", "nak", "ban", "arl", "kle", "tch", "pog", "ratch", 
+            "amp", "arl", "izz", "iv", "ee", "wik", "ik", "ang", "izz", "le", 
+            "zzle", "azz",
+            "eak",  "ark", "ble", "zob", "teek", 
+            "rick", "zzik", "queak", "erna", "dolf", "zzok", "arl", "narl", 
+            "fizz",
+            "ik",
+            "izle",
+            "uzz", 
+            "ul", 
+            "ish", 
+   
             ]
 
         Name = NewName(Names,onset,nuclei,codas) 
