@@ -1,6 +1,7 @@
 import dnd
 import npc_class as NPC
 import random
+import attacks
 
 def Dice(D=6,N=1):
     return dnd.Dice(D=D,N=N)
@@ -20,10 +21,12 @@ def Abilities(npc):
     import martial
     
     # Initialize variables
+    pb = npc.pb
     race = npc.race
     background = npc.background
     lvl = npc.level
-    
+    name = npc.name
+    title = npc.title
     Type = race  + ' ' + background + ' ' + npc.subrace
 
     r = "\n⚔︎    ABILITIES:   ⚔︎\n"
@@ -41,36 +44,69 @@ def Abilities(npc):
 
     abilities = []
 
-    PackTactics = f"\n- Pack Tactics. \n\t The {npc.race} has advantage on an attack roll against a creature if at least one of the {npc.race}'s allies is within 5 feet of the creature and the ally isn't incapacitated.",
-    Multiattack = f"\n-  Multiattack. \n\t The {race} makes " + random.choice( [
+    Multiattack = f"\n-  Multiattack. \n\t {title} makes " + random.choice( [
+            "two different simple attacks.",
             "two different simple attacks.",
             "two simple attacks.",
+            "two simple melee attacks.",
             "three simple attacks.",
+            "three simple melee attacks.",
+            "three simple melee attacks or two ranged attacks.",
             "three simple attacks. It can replace two of those for a special attack.",
-            "one special attack and a simple attacks.",
+            "one special attack and a simple attacks. Alternatively, it can do two simple attacks",
+            "two special melee attacks or two simple attacks.",
+            "two special melee attacks or three simple attacks.",
             ])
+
     Grappler = random.choice([
             f"\n- Grappler. \n\t On a hit on a melee attack, the {race} can choose to do no damage to grapple a creature up to its size. The target is then grappled, with DC {8 + npc.PB() + npc.AS.str_mod} to scape the grapple.",
             f"\n- Grappler. \n\t On a hit on a melee attack, the {race} can choose to do no damage to grapple a creature up to its size. The target is then grappled, with DC {8 + npc.PB() + npc.AS.str_mod} to scape the grapple.\n- Constrict. \n\t Until the grapple ends, the creature is restrained. The {race} can't constrict another creature."
             ])
     Charge = random.choice( [
             f"\n - Charge \n\t If the {race} moves at least {Dice(4)*5} feet straight toward a target and then hits it with an attack on the same turn, the target takes an extra {npc.pb}d6+{npc.AS.str_mod} {random.choice(['bludgeoning','slashing','piercing'])} damage. If the target is a creature, it must succeed on a DC {8 + npc.PB() + npc.AS.str_mod} Strength saving throw or {random.choice(['', 'be pushed up to 10 feet away and'])} be knocked prone."
-            f"\n - Trampling Charge \n\t If the Beast moves at least 20 feet straight toward a creature and then hits it with an attack on the same turn, that target must succeed on a DC {8 + npc.pb + npc.AS.str_mod} Strength saving throw or be knocked prone. If the target is prone, the {race} can make one simple attack against it as a bonus action."
+            f"\n - Trampling Charge \n\t If {title} moves at least 20 feet straight toward a creature and then hits it with an attack on the same turn, that target must succeed on a DC {8 + npc.pb + npc.AS.str_mod} Strength saving throw or be knocked prone. If the target is prone, the {race} can make one simple attack against it as a bonus action."
             ])
+
+    Regeneration = f"\n Regeneration \n\t {title} regains 10 hit points at the start of its turn." + random.choice( [
+        f"If {title} takes acid or fire damage, this trait doesn't function at the start of its next turn. {title} dies only if it starts its turn with 0 hit points and doesn't regenerate.",
+        f"If {title} takes {attacks.Damage()} damage, this trait doesn't function at the start of its next turn. {title} dies only if it starts its turn with 0 hit points and doesn't regenerate.",
+            ])
+
     Pounce = f"\n- Pounce \n\t If the {race} moves at least {Dice(4)*5} feet straight toward a creature and then hits it with an attack on the same turn, that target must succeed on a DC {8 + npc.pb + npc.AS.str_mod} Strength saving throw or be knocked prone. If the target is prone, the {race} can make one attack against it as a bonus action."
     Rampage = f"\n- Rampage. \n\t When the {npc.race} reduces a creature to 0 hit points with a melee attack on its turn, the {npc.race} can take a bonus action to move up to half its speed and make a simple attack."
     Shapechanger = f"\n - Shapechanger \n\t The {npc.race} can use its action to polymorph into their specific Medium humanoid form, or a Beast-humanoid hybrid, or into a beast. Other than its size, its statistics are the same in each form. Any equipment it is wearing or carrying isn't transformed. They reverts to its true form if it dies.",
+    PackTactics = f"\n- Pack Tactics. \n\t {title} has advantage on an attack roll against a creature if at least one of the {npc.race}'s allies is within 5 feet of the creature and the ally isn't incapacitated.",
+    WoundedFury = f"\n - Wounded Fury \n\t While {title} has {npc.HP//2} hit points or fewer, the {npc.race} has advantage on attack rolls. In addition, it deals an extra {int(npc.pb*3.5)} ({npc.pb}d6) damage to any target it hits with a melee attack."
+    OtherwordlyPerception = f"\n - Otherworldly Perception \n\t {title} can sense the presence of any creature within 30 feet of it that is invisible or on the Ethereal Plane. It can pinpoint such a creature that is moving."
+    Reckless = f"\n - Reckless \n\t At the start of its turn, {title} can gain advantage on all melee weapon attack rolls during that turn, but attack rolls against it have advantage until the start of its next turn."
+    MagicResistance = f"\n- Magic Resistance: \t {title} has advantage on saving throws against magical effects."
+    MagicWeapons = f"\n- Magic Weapons: \t {title}'s attacks are magical."
+    ChangeShape = f"\n- Change Shape. \n\t {title} magically polymorphs into a humanoid or beast that has a challenge rating equal to or less than {pb}, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form ({title}'s choice). \n\t In a new form, {title} retains its game statistics and ability to speak, but its AC, movement modes, Strength, Dexterity, and other actions are replaced by those of the new form, and it gains any statistics and capabilities (except class features, legendary actions, and lair actions) that the new form has but that it lacks. {title} can still use its special attacks."
+    AntimagicSusceptibility = f"\n- Antimagic Susceptibility:\n\t {title} is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the {title} must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute."
+    AxiomaticMind= f"\n- Axiomatic Mind. \n\t {title} can't be compelled to act in a manner contrary to its nature or its instructions."
+    Disintegration = f"\n- Disintegration. \n\t If {title} dies, its body disintegrates, leaving behind its weapons and anything else it was carrying."
+    EntanglingPlants= "\n- Entangling Plants. \n\t Grasping roots and vines sprout in a 15-foot radius centered on {title}, withering away after 1 minute. For the duration, that area is difficult terrain."
+    SuperiorInvisibility = "\n- Superior Invisibility \n\t  {title} magically turns invisible until its concentration ends (as if concentrating on a spell). Any equipment {title} wears or carries is invisible with it."
+
 
  
     # Dictionary to store possible extra abilities for each race
     extra_abilities_race = {
-        "Aberration": [],
+        "Human":[],
+        "Aberration": [
+            Reckless,
+            MagicResistance,
+            Regeneration,
+            ],
         "Beast":[PackTactics,
                  Multiattack,
                  Grappler,
                  Charge,
                  Pounce,
                  Rampage,
+                 Reckless,
+                 EntanglingPlants,
+                 Regeneration,
 
                  ],
         "Beastfolk": [PackTactics,
@@ -80,33 +116,284 @@ def Abilities(npc):
                       Pounce,
                       Rampage,
                       Shapechanger,
-                      Shapechanger
+                      WoundedFury,
+                      OtherwordlyPerception,
+                      Reckless,
+                      MagicResistance,
+                      EntanglingPlants,
 
                       ],
-        "Celestial": [],
-        "Construct": [],
-        "Dragon":[],
-        "Elf": [],
-        "Elemental":[],
-        "Fey": [],
+        "Celestial": [
+            OtherwordlyPerception,
+            MagicResistance,
+            MagicWeapons,
+            ChangeShape,
+            Multiattack,
+            AntimagicSusceptibility,
+            AxiomaticMind,
+            Disintegration,
+            EntanglingPlants,
+            Regeneration,
+            ],
+        "Construct": [
+            MagicResistance,
+            AntimagicSusceptibility,
+            AxiomaticMind,
+            Disintegration,
+            Regeneration,
+            ],
+        "Dragon":[
+            ChangeShape,
+            ],
+        "Dwarf":[
+            Reckless,
+            AxiomaticMind,
+            ],
+        "Elf": [
+            EntanglingPlants,
+            ],
+        "Elemental":[
+            MagicWeapons,
+            AntimagicSusceptibility,
+            Disintegration,
+            ],
+        "Fey": [
+            ChangeShape,
+            AntimagicSusceptibility,
+            MagicResistance,
+            SuperiorInvisibility,
+            ],
         "Fiend": [
+            WoundedFury,
+            OtherwordlyPerception,
+            Reckless,
+            MagicWeapons,
+            ChangeShape,
+            AntimagicSusceptibility,
+            Disintegration,
+            Regeneration,
+            SuperiorInvisibility,
+            ],
+        "Giant":[
+            Reckless,
+            Regeneration,
+            ],
+        "Gnome":[
+            MagicWeapons,
+            SuperiorInvisibility,
             ],
         "Goblin": [
+            Reckless,
             ],
         "Lizardfolk":[
             Shapechanger,
             ],
-        "Orc": [],
+        "Monstrosity":[
+            Reckless,
+            ],
+        "Ooze":[
+            AntimagicSusceptibility,
+            Disintegration,
+            Regeneration,
+            SuperiorInvisibility,
+            ],
+        "Orc": [
+            WoundedFury,
+            Reckless,
+            ],
         "Snakefolk":[
             Shapechanger,
+            MagicResistance,
+            ],
+        "Kobold":[
+            PackTactics,
+            ],
+        "Plant":[
+            MagicWeapons,
+            EntanglingPlants,
+            Regeneration,
+            ],
+        "Undead":[
+            OtherwordlyPerception,
+            AxiomaticMind,
+            Disintegration,
+            Regeneration,
+            SuperiorInvisibility,
+            MagicResistance,
             ],
     }
 
     # Dictionary to store possible extra abilities for each background
     extra_abilities_background = {
+        "Artist":[
+            SuperiorInvisibility,
+            ],
         "Noble": [],
-        "Berserker": [],
+        "Bandit":[
+            Reckless,
+            Multiattack,
+            PackTactics,
+            ],
+        "Bard":[
+            EntanglingPlants,
+            SuperiorInvisibility
+            ],
+        "Barbarian":[
+            Reckless,
+            MagicResistance,
+            Multiattack,
+            ],
+        "Berserker": [
+            WoundedFury,
+            Reckless,
+            MagicResistance,
+            MagicWeapons,
+            ChangeShape,
+            Multiattack,
+            AxiomaticMind,
+            Regeneration,
+            ],
+        "Charlatan":[
+            SuperiorInvisibility,
+            ],
         "Scholar":[],
+        "Cleric":[
+            AxiomaticMind,
+            ],
+        "Criminal":[
+            Reckless,
+            Multiattack,
+            PackTactics,
+            SuperiorInvisibility,
+            ],
+        "Cultist":[
+            OtherwordlyPerception,
+            MagicResistance,
+            ChangeShape,
+            AxiomaticMind,
+            Regeneration,
+            ],
+        "Druid":[
+            OtherwordlyPerception,
+            MagicResistance,
+            MagicWeapons,
+            ChangeShape,
+            EntanglingPlants,
+            Regeneration,
+            ],
+        "Explorer":[
+            MagicWeapons,
+            ChangeShape,
+            EntanglingPlants,
+            SuperiorInvisibility,
+            ],
+        "Healer":[
+            Regeneration,
+            ],
+        "Hero":[
+            MagicResistance,
+            MagicWeapons,
+            Multiattack,
+            ],
+        "Guard":[
+            Multiattack,
+            AxiomaticMind,
+            ],
+        "Hero":[
+            Multiattack,
+            ],
+        "Hunter":[
+            ChangeShape,
+            Multiattack,
+            SuperiorInvisibility,
+            ],
+        "Knight":[
+            MagicResistance,
+            MagicWeapons,
+            Multiattack,
+            AxiomaticMind,
+            ],
+        "Mage":[
+            MagicWeapons,
+            SuperiorInvisibility,
+            ],
+        "Monk":[
+            OtherwordlyPerception,
+            MagicResistance,
+            Multiattack,
+            SuperiorInvisibility,
+            ],
+        "Merchant":[
+            MagicWeapons,
+            ],
+        "Noble":[
+            MagicWeapons,
+            ],
+        "Priest":[
+            OtherwordlyPerception,
+            MagicWeapons,
+            AxiomaticMind,
+            ],
+        "Pirate":[
+            Reckless,
+            Multiattack,
+            ],
+        "Ranger":[
+            Multiattack,
+            EntanglingPlants,
+            SuperiorInvisibility,
+            ],
+        "Rogue":[
+            ChangeShape,
+            SuperiorInvisibility,
+            ],
+        "Soldier":[
+            Multiattack,
+            ],
+        "Shaman":[
+            OtherwordlyPerception,
+            Reckless,
+            MagicResistance,
+            ChangeShape,
+            EntanglingPlants,
+            Regeneration,
+            ],
+        "Spy":[
+            MagicResistance,
+            MagicWeapons,
+            ChangeShape,
+            AxiomaticMind,
+            SuperiorInvisibility,
+            ],
+        "Traveler":[
+            MagicWeapons,
+            ],
+        "Urchin":[
+            SuperiorInvisibility,
+            ],
+        "Warrior":[
+            Reckless,
+            Multiattack,
+            
+            ],
+        "Warlock":[
+            OtherwordlyPerception,
+            MagicResistance,
+            MagicWeapons,
+            AxiomaticMind,
+            Disintegration,
+            Regeneration,
+            SuperiorInvisibility,
+            ],
+        "Witch":[
+            OtherwordlyPerception,
+            MagicResistance,
+            MagicWeapons,
+            ChangeShape,
+            Disintegration,
+            EntanglingPlants,
+            Regeneration,
+            ],
 
         }
 
@@ -140,73 +427,11 @@ def Abilities(npc):
 
 
 
-    if "Beastfolk" in npc.race:
-        abilities += [
-            f"\n - Pack Tactics \n\t The {npc.race} has advantage on an attack roll against a creature if at least one of the {npc.race}'s allies is within 5 feet of the creature and the ally isn't incapacitated.",
-            ]
-        
-    if "Beastfolk" in npc.race:
-        abilities += [
-            f"\n - Wounded Fury \n\t While the {npc.race} has {npc.HP//2} hit points or fewer, the {npc.race} has advantage on attack rolls. In addition, it deals an extra {int(npc.pb*3.5)} ({npc.pb}d6) damage to any target it hits with a melee attack."
-            ]
-
-    if "Beastfolk" in npc.race:
-        abilities += [
-            f"\n - Otherworldly Perception \n\t The {npc.race} can sense the presence of any creature within 30 feet of it that is invisible or on the Ethereal Plane. It can pinpoint such a creature that is moving."
-            ]
-
-    if "Beastfolk" in npc.race:
-        abilities += [
-            "\n - Reckless \n\t At the start of its turn, the berserker can gain advantage on all melee weapon attack rolls during that turn, but attack rolls against it have advantage until the start of its next turn."
-            ]
 
 
-    # CELESTIALS
-
-    ## Strengths and Weaknesses
-    if Type == "Celestial" and Dice() == 1:     r += "\n- Damage Resistances: \t Radiant."
-    if Type == "Celestial" and Dice() == 1:     r += "\n- Damage Immunities: \t Psychic."
-    if Type == "Celestial" and Dice() == 1:     r += "\n- Damage Immunities: \t Bludgeoning, Piercing, and slashing from nonmagical attacks."
-
-    if Type == "Celestial" and Dice() == 1:     r += "\n- Magic Resistance: \t The Celestial's has advantage on saving throws against magical effects."
-    if Type == "Celestial" and Dice() == 1:     r += "\n- Magic Weapons: \t The Celestial's attacks are magical."
-
-    ## Actions
-    if Type == "Celestial" and Dice() == 1:     r += "\n- Change Shape. \n\t The Celestial magically polymorphs into a humanoid or beast that has a challenge rating equal to or less than 4, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form (the celestial's choice). \n\t In a new form, the celestial retains its game statistics and ability to speak, but its AC, movement modes, Strength, Dexterity, and other actions are replaced by those of the new form, and it gains any statistics and capabilities (except class features, legendary actions, and lair actions) that the new form has but that it lacks. The Celestial can still use its special attacks."
-
-    ## Combat skills
-    if Type == "Celestial" and Dice() == 1:     r += "\n- Multiattack: \t The {npc.race}'s can attack once with a Special Attack and once with a Simple Attack."
-
-
-    # CRIMINALS
-    if Type == "Criminal" and Dice() == 1:  r += "\n- Pack Tactics \n\t The Criminal has advantage on an attack roll against a creature if at least one of the Criminal's allies is within 5 feet of the creature and the ally isn't incapacitated."
-
-    # CONSTRUCTS
-
-    # Senses
-
-    # Strengths and Weaknesses
-    if Type == "Construct":
-        if Dice() == 1:     r += "\n- Damage Resistances: Bludgeoning, piercing, and slashing from nonmagical attacks that aren't adamantine."
-        if Dice() == 1:     r += "\n- Damage Immunities: Force"
-        if Dice() == 1:     r += "\n- Damage Immunities: Necrotic"
-        r += "\n- Damage Immunities: Poison"
-        if Dice() == 1:     r += "\n- Damage Immunities: Psychic"
-        if Dice() == 1:     r += "\n- Condition Immunities: Blinded"
-        r += "\n- Condition Immunities: Charmed"
-        if Dice() == 1:     r += "\n- Condition Immunities: Feafened"
-        if Dice() == 1:     r += "\n- Condition Immunities: Exhaustion"
-        if Dice() == 1:     r += "\n- Condition Immunities: Frightened"
-        if Dice() == 1:     r += "\n- Condition Immunities: Paralyzed"
-        if Dice() == 1:     r += "\n- Condition Immunities: Petrified"
-        r += "\n- Condition Immunities: Poisoned"
-        if Dice() == 1:     r += "\n- Condition Immunities: Stunned"
 
     # Skills
     if Type == "Construct":   
-        if Dice() == 1:     r += "\n- Antimagic Susceptibility:\n\t The Construct is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Construct must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute."
-        if Dice() == 1:     r += "\n- Axiomatic Mind. \n\t The Construct can't be compelled to act in a manner contrary to its nature or its instructions."
-        if Dice() == 1:     r += "\n- Disintegration. \n\t If the Construct dies, its body disintegrates into dust, leaving behind its weapons and anything else it was carrying."
         if Dice() == 1:     r += "\n- Damage Transfer:\n\t While it is grappling a creature, the construct takes only half the damage dealt to it, and the creature grappled by the rug takes the other half."
         if Dice() == 1:     r += "\n- False Apperance \n\t While the Construct remains motionless in rest, it is indistinguishable from a mundane object"
         if Dice() == 1:     r += "\n- Smother. \n\t Melee Weapon Attack: +5 to hit, reach 5 ft., one Medium or smaller creature. Hit: The creature is grappled (escape DC 13). Until this grapple ends, the target is restrained, blinded, and at risk of suffocating, and the construct can't smother another target. In addition, at the start of each of the target's turns, the target takes 10 (2d6 + 3) bludgeoning damage."
@@ -217,7 +442,6 @@ def Abilities(npc):
         if Dice() == 1:     r += "\n- Berserk:\n\t Whenever the golem starts its turn with 40 hit points or fewer, roll a d6. On a 6, the golem goes berserk. On each of its turns while berserk, the golem attacks the nearest creature it can see. If no creature is near enough to move to and attack, the golem attacks an object, with preference for an object smaller than itself. Once the golem goes berserk, it continues to do so until it is destroyed or regains all its hit points. \n\t The golem's creator, if within 60 feet of the berserk golem, can try to calm it by speaking firmly and persuasively. The golem must be able to hear its creator, who must take an action to make a DC 15 Charisma (Persuasion) check. If the check succeeds, the golem ceases being berserk. If it takes damage while still at 40 hit points or fewer, the golem might go berserk again."
         if Dice() == 1:     r += "\n- Immutable Form:\n\t The golem is immune to any spell or effect that would alter its form."
         if Dice() == 1:     r += "\n- Lightning Absorption:\n\t Whenever the golem is subjected to lightning damage, it takes no damage and instead regains a number of hit points equal to the lightning damage dealt."
-        if Dice() == 1:     r += "\n- Magic Weapons:\n\t The golem's weapon attacks are magical."
 
 
         
@@ -263,8 +487,6 @@ def Abilities(npc):
     if Type == "Dragon" and Dice(12) == 1:  r += "\n- Rejuvenation \n\t You might decide that dragons in your campaign, being an essential part of the Material Plane, are nearly impossible to destroy. A dragon's life essence might be preserved in the egg from which it first emerged, in its hoard, or in a cavernous hall at the center of the world, just as a lich's essence is hidden in a phylactery. \n\t If it has an essence-preserving object, a destroyed dragon gains a new body in 1d10 days, regaining all its hit points and becoming active again. The new body appears within 5 feet of the object."
 
 
-    if Type == "Fey" and Dice() == 1:   r += "\n- Magic Resistance \n\t The Fey has advantage on saving throws against spells and other magical effects."
-    if Type == "Fey" and Dice() == 1:   r += "\n- Superior Invisibility \n\t  The Fey magically turns invisible until its concentration ends (as if concentrating on a spell). Any equipment the Fey wears or carries is invisible with it."
     if Type == "Fey" and Dice() == 1:   r += "\n- Amphibious \n\t  The Fey can breath air and water."
     if Type == "Fey" and Dice() == 1:   r += "\n- Mimicry \n\t The Fey can mimic animal sounds and humanoid voices. A creature that hears the sounds can tell they are imitations with a successful DC [10+%CHA] Wisdom (Insight) check."
     if Type == "Fey" and Dice() == 1:
@@ -357,8 +579,6 @@ def Abilities(npc):
     ## Skills
     if Type == "Giant" and Dice() == 1:     r += "\n Two Heads \n\t The giant has advantage on Wisdom (Perception) checks and on saving throws against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious."
 
-    if Type == "Giant" and Dice() == 1:     r += "\n Regeneration \n\t The giant regains 10 hit points at the start of its turn. If the giant takes acid or fire damage, this trait doesn't function at the start of the giant's next turn. The giant dies only if it starts its turn with 0 hit points and doesn't regenerate."
-    elif Type == "Giant" and Dice() == 1:   r += "\n Regeneration \n\t The giant regains 10 hit points at the start of its turn. If the giant takes " + Damage() + " damage, this trait doesn't function at the start of the giant's next turn. The giant dies only if it starts its turn with 0 hit points and doesn't regenerate."
 
     ## Combat
     if Type == "Giant" and Dice() == 1:     r += "\n Multiattack \n\t The giant makes two simple attacks."
@@ -390,8 +610,6 @@ def Abilities(npc):
 
     
     # Strengths and weaknesses 
-    if Type == "Lizardfolk":
-        if Dice() == 1: r += "\n- Condition Immunities \t Frightened"
 
     if Type == "Ooze":
         if Dice(7) == 1:
@@ -433,8 +651,6 @@ def Abilities(npc):
 
 
     # ORCS
-    # Senses
-    if Type == "Orc":   r += "\n- Darkvision \t 60ft."
 
     # Combat Skills
     if Type == "Orc":
@@ -447,19 +663,8 @@ def Abilities(npc):
 
     # PLANTS
 
-    ## Weaknesses and Strengths
-    
-    if Type == "Plant" and Dice() == 1: r = r + "\n- Condition Immunities: Blinded"
-    if Type == "Plant" and Dice() == 1: r = r + "\n- Condition Immunities: Charmed"
-    if Type == "Plant" and Dice() == 1: r = r + "\n- Condition Immunities: Deafened"
-    if Type == "Plant" and Dice(9) == 1: r = r + "\n- Condition Immunities: Exhaustion"
-    if Type == "Plant" and Dice() == 1: r = r + "\n- Condition Immunities: Frightened"
-    if Type == "Plant" and Dice() == 1: r = r + "\n- Condition Immunities: Poisoned"
-    if Type == "Plant" and Dice() == 1: r = r + "\n- Condition Immunities: Prone"
-    if Type == "Plant" and Dice() == 1: r = r + "\n- Condition Immunities: Paralyzed"
 
     ## Combat Skill
-    if Type == "Plant" and Dice() == 1:        r += "\n- Entangling Plants. \n\t Grasping roots and vines sprout in a 15-foot radius centered on the blight, withering away after 1 minute. For the duration, that area is difficult terrain."
     if Type == "Plant" and Dice() == 1:        r += "\n- Engulf \n\t The plant engulfs a Medium or smaller creature grappled by it. The engulfed target is blinded, restrained, and unable to breathe, and it must succeed on a DC [10+%STR] Constitution saving throw at the start of each of the plant's turns or take 8 (2d8 + %STR) bludgeoning damage. If the plant moves, the engulfed target moves with it. The plant can have only one creature engulfed at a time."
     if Type == "Plant" and Dice(3) == 1:       r += "\n- False Appereance: \n\t While the plant remains motionless, it is indistinguishable from a normal plant."
     if Type == "Plant" and Dice(9) == 1:       r += "\n- Lightning Absorption: \n\t Whenever the plant is subjected to lightning damage, it takes no damage and regains a number of hit points equal to the lightning damage dealt."
@@ -470,9 +675,6 @@ def Abilities(npc):
 
 
     # SNAKEFOLK
-    if Type == "Snakefolk":                     r += "\n- Darkvision: 60 ft"
-    if Type == "Snakefolk":                     r += "\n- Damage Immunities \t Poison"
-    if Type == "Snakefolk":                     r += "\n- Condition Immunities \t Poisoned"
     if Type == "Snakefolk" and Dice(3) == 1:    r += "\n- Magic Resistance \n\t The Snakefolk has advantage on saving throws against spells and other magical effects."
     if Type == "Snakefolk" and Dice() == 1:     r += "\n- Shapechanger \n\t The Snakefolk can use its action to polymorph into a Medium snake, or back into its true form. Its statistics are the same in each form. Any equipment it is wearing or carrying isn't transformed. It doesn't change form if it dies."
     if Type == "Snakefolk" and Dice() == 1:     r += "\n- Multiattack \n\t The Snakefolk makes two ranged attacks or two melee attacks."
@@ -572,21 +774,12 @@ def Abilities(npc):
         
 
     if Type == "Monstrosity":
-        if Dice() == 1:         r += "\n- Speed: 0 ft. \n- Fly: 20 ft(Hover)"
-        elif Dice() == 1:       r += "\n- Fly: 30 ft"
-        elif Dice() == 1:       r += "\n- Fly: 40 ft"
-        elif Dice() == 1:
-            r += "\n - Fly: 60 ft"
             if Dice(3) == 1:       r += "\n- Dive Attack: \n\t If the monster is flying and dives at least 30 feet straight toward a target and then hits it with a melee weapon attack, the attack deals an extra 9 (2d8) damage to the target."
             if Dice(3) == 1:       r += "\n- Flyby: \n\t If the monster doesn't provoke an opportunity attack when it flies out of an enemy's reach."
 
     if Type == "Monstrosity" and Dice() == 1:   r += "\n- Spider Climb.\n\t The Monstrosity can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.\n"
 
     # Strengths and weaknesses
-    if Type == "Monstrosity":
-        if Dice() == 1:   r += "\n- Damage Immunities: \t cold"
-        if Dice() == 1:   r += "\n- Damage Immunities: \t fire"
-        
     if Type == "Monstrosity" and Dice() == 1:   r += "\n- Fear of Fire. \n\t If the Monstrosity takes fire damage, it has disadvantage on attack rolls and ability checks until the end of its next turn."
 
     # Fight skills
@@ -608,11 +801,7 @@ def Abilities(npc):
 
     # Special Attacks.
     
-    if Type == "Monstrosity" and Dice() == 1:
-        r += "\n- Multiattack. \n\t The monstrosity makes three simple attacks."
 
-    if Type == "Monstrosity" and Dice(9) == 1: r += "\n- Bite. \n\t Reach 5ft. Hit: 30 (4d12 + %STR) piercing damage. "
-    elif Type == "Monstrosity" and Dice() == 1: r += "\n- Bite. \n\t Reach 5ft. Hit: 9 (dd8 + %STR) slashing damage. "
 
     if Type == "Monstrosity" and Dice() == 1:
         r += "\n- Tendril. \n\t Melee Weapon Attack: Reach 50 ft., one creature. Hit: The target is grappled (escape DC [11+%STR]). Until the grapple ends, the target is restrained and has disadvantage on Strength checks and Strength saving throws, and the monstrosity can't use the same tendril on another target."
@@ -639,61 +828,18 @@ def Abilities(npc):
         r += "\n- Pack Tactics \n\t The kobold has advantage on an attack roll against a creature if at least one of the kobold's allies is within 5 feet of the creature and the ally isn't incapacitated."
     if Type == "Kobold":
         r += "\n- Sunlight Sensitivity \n\t While in sunlight, the kobold has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
-    if Type == "Kobold" and Dice() == 1:        r += "\n Fly \t 30ft."
 
     # UNDEADS
 
     # Movement
-    if Type == "Undead" and Dice() == 1:    r = r + "\n- Speed: 0 \n- Fly: 40 ft (hover)"
     if Type == "Undead" and Dice() == 1:    r = r + "\n- Spider Climb. \n\t The undead can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
 
-    # Senses
-    if Type == "Undead":
-        if Dice(2) == 1:        r = r + "\n- Darkvision: 60ft"
-        elif Dice(2) == 1:      r = r + "\n- Darkvision: 120ft"
 
     # Weaknesses and Strengths
 
-    if Type == "Undead" and Dice() == 1:        r += "\n- Damage Resistances: Acid."
-    
-    if Type == "Undead" and Dice() == 1:        r += "\n- Damage Resistances: Bludgeoning, piercing, and slashing from nonmagical attacks. "
-    elif Type == "Undead" and Dice() == 1:      r += "\n- Damage Resistances: Piercing. "
-
-    if Type == "Undead" and Dice() == 1:        r += "\n- Damage Resistances: Cold. "
-    elif Type == "Undead" and Dice() == 1:      r += "\n- Damage Immunities: Cold "
-
-    elif Type == "Undead" and Dice() == 1:      r += "\n- Damage Resistances: Fire."
-    elif Type == "Undead" and Dice() == 1:      r += "\n- Damage Immunities: Fire "
-
-    if Type == "Undead" and Dice() == 1:        r += "\n- Damage Resistances: Lightning. "
-
-    if Type == "Undead" and Dice() == 1:        r += "\n- Damage Resistances: Necrotic."
-    elif Type == "Undead" and Dice(2) == 1:     r += "\n- Damage Immunities: Necrotic "
-
-    if Type == "Undead" and Dice(2) == 1:       r += "\n- Damage Resistances: Psychic "
-    if Type == "Undead" and Dice(2) == 1:       r += "\n- Damage Immunities: Psychic "
-    
-    if Type == "Undead" and Dice() == 1:        r += "\n- Damage Resistances: Poison "
-    elif Type == "Undead" and Dice() == 1:      r += "\n- Damage Immunities: Poison "
-    
-    if Type == "Undead" and Dice(3) == 1:       r += "\n- Damage Vulnerabilities: Radiant"
-
-    if Type == "Undead" and Dice() == 1:        r += "\n- Damage Resistances: Thunder. "
 
 
-    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: Charmed"
-    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: Exhaustion"
-    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: Grappled"
-    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: Frightened"
-    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: Paralyzed"
-    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: Petrified"
-    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: Poisoned"
-    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: Prone"
-    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: Restrained"
-    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: Stunned"
-    if Type == "Undead" and Dice() == 1:    r += "\n- Condition Immunities: Unconscious"
 
-    if Type == "Undead" and Dice() == 1:    r += "\n- Magic Resistance \n\t The undead has advantage on saving throws against spells and other magical effects."
     if Type == "Undead":
         if Dice() == 1:     r += "\n- Regeneration\n\t The undead regains 10 hit points at the start of its turn. If the undead takes fire or radiant damage, this trait doesn't function at the start of the undead's next turn. The undead's body is destroyed only if it starts its turn with 0 hit points and doesn't regenerate."
         elif Dice() == 1:   r += "\n- Regeneration\n\t The undead regains 10 hit points at the start of its turn if it has at least 1 hit point and isn't in sunlight or running water. If the undead takes radiant damage or damage from holy water, this trait doesn't function at the start of the undead's next turn."
@@ -778,10 +924,6 @@ def Abilities(npc):
         if Dice() == 1:       r += "\n- Parry \n\t The warrior adds 2 to its AC against one melee attack that would hit it. To do so, the warrior must see the attacker and be wielding a melee weapon."
         elif Dice() == 1:     r += "\n- Parry \n\t The warrior adds 3 to its AC against one melee attack that would hit it. To do so, the warrior must see the attacker and be wielding a melee weapon."
     if Type == "Warrior" and Dice(2) == 1:      r += "\n- Pack Tactics \n\t The warrior has advantage on an attack roll against a creature if at least one of the warrior's allies is within 5 feet of the creature and the ally isn't incapacitated."
-    if Type == "Warrior":
-        if Dice() == 1:         r += "\n- Multiattack \n\t The Warrior can attack twice with their simple melee attack on his turn."
-        elif Dice() == 1:       r += "\n- Multiattack \n\t The Warrior makes three melee attacks or two ranged attacks."
-        elif Dice() == 1:       r += "\n- Multiattack \n\t The Warrior makes two special melee attacks and one simple melee attack."
     if Type == "Warrior" and Dice() == 1:       r += "\n- Brave \n\t The warrior has advantage on saving throws against being frightened."
     if Type == "Warrior" and Dice() == 1:       r += "\n- Brute \n\t A melee weapon deals one extra die of its damage when the warrior hits with it (included in the attack)."
 
