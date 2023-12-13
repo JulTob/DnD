@@ -2,31 +2,31 @@ import random
 
 def Race():
     race_weights = {
-        "Human": 28,
-        "Aberration": 17,
-        "Aven": 17,
-        "Beast": 19,
-        "Beastfolk": 18,
-        "Celestial": 17,
-        "Construct": 17,
-        "Dragon": 18,
-        "Dwarf": 21,
-        "Elf": 21,
-        "Elemental": 18,
-        "Fey": 17,
-        "Fiend": 17,
-        "Giant": 17,
-        "Gnome": 18,
-        "Goblin": 21,
-        "Halfling": 20,
-        "Kobold": 22,
-        "Lizardfolk": 17,
-        "Monstrosity": 18,
-        "Ooze": 17,
-        "Orc": 22,
-        "Plant": 18,
-        "Snakefolk": 17,
-        "Undead": 18,
+        "Human": 100,
+        "Aberration": 50,
+        "Aven": 50,
+        "Beast": 60,
+        "Beastfolk": 60,
+        "Celestial": 50,
+        "Construct": 50,
+        "Dragon": 50,
+        "Dwarf": 70,
+        "Elf": 70,
+        "Elemental": 50,
+        "Fey": 50,
+        "Fiend": 50,
+        "Giant": 50,
+        "Gnome": 60,
+        "Goblin": 60,
+        "Halfling": 90,
+        "Kobold": 60,
+        "Lizardfolk": 50,
+        "Monstrosity": 50,
+        "Ooze": 50,
+        "Orc": 80,
+        "Plant": 50,
+        "Snakefolk": 50,
+        "Undead": 80,
         "": 0
     }
     
@@ -77,7 +77,7 @@ def Beasts():
         "Vulture Spirit": 5,
         "Kitsune Fox": 10,
         "Deer Spirit": 6,           # Associated with gentleness and intuition in various cultures.
-        "Giant Owl of Wisdom": 8,   # A universal symbol of knowledge.
+        "Giant Owl": 8,             
         "Celestial Stag": 7,        # Stags are often seen as messengers or connected to the otherworld in various mythologies.
         "Fenrir Wolf": 7,
         "Forest God": 5,            # A guardian of the forests, revered for its bravery.
@@ -532,7 +532,8 @@ def Lizardfolks():
         "Titan Rex": 3,
         "Tundra Saurius": 3,
         "Turtlefolk":6,
-        "Frogfolk": 4
+        "Frogfolk": 4,
+        "Silurian": 5,
         }
     
     chosen_type = random.choices(list(Types.keys()), weights=Types.values(), k=1)[0]
@@ -565,6 +566,28 @@ def Kobolds():
     chosen_color = random.choices(list(DragonColors.keys()), weights=DragonColors.values(), k=1)[0]
 
     return f"{chosen_color} {chosen_type}"
+
+def Snakefolks():
+    Types = {
+        "Arboreasps": 4,        # Inhabitants of lush forests, possibly skilled in herbalism and natural resources.
+        "Iciconda": 2,          # Powerful, adapted to cold climates, resilient against extreme cold.
+        "Titanboa": 3,          # Native to island ecosystems, they have a build of extraordinary size.
+        "Nightscale": 3,        # Adapted to night and subterranean life, blending in the dark.
+        "Aspisian": 4,          # Traveling across terrains, known for adaptability and diverse cultural knowledge.
+        "Gorgonian": 2,         # Descended from mythical Gorgons, characterized by strong presence and traits.
+        "Hydrakin": 1,          # Rare, revered, connected to multi-headed serpent deities.
+        "Mounty Python": 3,     # A jovial and humorous society, known for their wit and good-natured humor.
+        "Coatlfolk": 5,         # Mythical resonance, possibly linked to spiritual practices.
+        "Cobraclan": 6,         # Known for their resilience and unique survival traits in desert environments.
+        "Vipertongue": 5,       # Known for their naturally venomous abilities.
+        "Ophidian": 4,          # Adapted to jungle environments, skilled in stealth and survival.
+        "Naga": 4,              # Respected for their swimming abilities and connection to aquatic environments.
+    }
+
+    chosen_type = random.choices(list(Types.keys()), weights=Types.values(), k=1)[0]
+    
+    return f"{chosen_type} "
+
 
 def Monster(Type):
     return Creature(Type)
