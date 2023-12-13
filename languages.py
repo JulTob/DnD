@@ -1,23 +1,22 @@
 import npc_class as NPC
 import random
+import dnd
 
 def Dice(D=6,N=1):
-    """Rolls N dices with D sides each. If D is 0, simulates a coin flip."""
-    roll = 0
-    for m in range(N):
-        if D >= 1: roll += random.randint(1, D)
-        else: roll += random.randint(D, 1)
-    return roll
+    return dnd.Dice(D,N)
 
 def add_language(languages, language, chance=6):
     """Try to add a language based on a dice roll and chance."""
-    if Dice(chance) == 1 and language not in languages:
+    if chance<1 and language not in languages:
+        languages.append(language)
+    elif Dice(chance) == 1 and language not in languages:
         languages.append(language)
 
 
 def Language(npc):
     race = npc.race
     background = npc.background
+    INT = npc.ability_scores.int_mod
     if race == "":
         race = Race()
     if background == "":
@@ -27,21 +26,21 @@ def Language(npc):
 
     if race == "base":
         langs = {
-            "Dwarvish": 20,
-            "Elvish": 20,
-            "Giant": 20,
-            "Gnomish": 20,
-            "Goblin": 20,
-            "Halfling": 20,
-            "Orc": 20,
-            "Abyssal": 20,
-            "Celestial": 20,
-            "Draconic": 20,
-            "Deep Speech": 20,
-            "Infernal": 20,
-            "Primordial": 20,
-            "Sylvan": 20,
-            "Undercommon": 20
+            "Dwarvish": 20-INT,
+            "Elvish": 20-INT,
+            "Giant": 20-INT,
+            "Gnomish": 20-INT,
+            "Goblin": 20-INT,
+            "Halfling": 20-INT,
+            "Orc": 20-INT,
+            "Abyssal": 20-INT,
+            "Celestial": 20-INT,
+            "Draconic": 20-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 20-INT,
+            "Primordial": 20-INT,
+            "Sylvan": 20-INT,
+            "Undercommon": 20-INT,
         }
 
         for lang, chance in langs.items():
@@ -49,21 +48,21 @@ def Language(npc):
             
     if race == "Human":
         langs = {
-            "Dwarvish": 6,
-            "Elvish": 6,
-            "Giant": 6,
-            "Gnomish": 6,
-            "Goblin": 6,
-            "Halfling": 6,
-            "Orc": 6,
-            "Abyssal": 20,
-            "Celestial": 20,
-            "Draconic": 20,
-            "Deep Speech": 20,
-            "Infernal": 20,
-            "Primordial": 20,
-            "Sylvan": 20,
-            "Undercommon": 20
+            "Dwarvish": 6-INT,
+            "Elvish": 6-INT,
+            "Giant": 6-INT,
+            "Gnomish": 6-INT,
+            "Goblin": 6-INT,
+            "Halfling": 6-INT,
+            "Orc": 6-INT,
+            "Abyssal": 20-INT,
+            "Celestial": 20-INT,
+            "Draconic": 20-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 20-INT,
+            "Primordial": 20-INT,
+            "Sylvan": 20-INT,
+            "Undercommon": 20-INT,
         }
 
         for lang, chance in langs.items():
@@ -71,22 +70,22 @@ def Language(npc):
 
     if race == "Aberration":
         langs = {
-            "Dwarvish": 15,
-            "Elvish": 15,
-            "Giant": 9,
-            "Gnomish": 20,
-            "Goblin": 9,
-            "Halfling": 20,
-            "Orc": 9,
-            "Abyssal": 7,
-            "Celestial": 20,
-            "Draconic": 9,
-            "Deep Speech": 1,
-            "Infernal": 9,
-            "Primordial": 19,
-            "Sylvan": 20,
-            "Undercommon": 5,
-            "Telepathy (60 ft.) ": 5
+            "Dwarvish": 15-INT,
+            "Elvish": 15-INT,
+            "Giant": 9-INT,
+            "Gnomish": 20-INT,
+            "Goblin": 9-INT,
+            "Halfling": 20-INT,
+            "Orc": 9-INT,
+            "Abyssal": 7-INT,
+            "Celestial": 20-INT,
+            "Draconic": 9-INT,
+            "Deep Speech": 1-INT,
+            "Infernal": 9-INT,
+            "Primordial": 19-INT,
+            "Sylvan": 20-INT,
+            "Undercommon": 5-INT,
+            "Telepathy (60 ft.) ": 5-INT,
             }
 
         for lang, chance in langs.items():
@@ -94,21 +93,21 @@ def Language(npc):
 
     if race == "Aven":
         langs = {
-            "Dwarvish": 14,
-            "Elvish": 9,
-            "Giant": 15,
-            "Gnomish": 20,
-            "Goblin": 20,
-            "Halfling": 14,
-            "Orc": 20,
-            "Abyssal": 20,
-            "Celestial": 9,
-            "Draconic": 9,
-            "Deep Speech": 100,
-            "Infernal": 100,
-            "Primordial": 3,
-            "Sylvan": 5,
-            "Undercommon": 100
+            "Dwarvish": 14-INT,
+            "Elvish": 9-INT,
+            "Giant": 15-INT,
+            "Gnomish": 20-INT,
+            "Goblin": 20-INT,
+            "Halfling": 14-INT,
+            "Orc": 20-INT,
+            "Abyssal": 20-INT,
+            "Celestial": 9-INT,
+            "Draconic": 9-INT,
+            "Deep Speech": 100-INT,
+            "Infernal": 100-INT,
+            "Primordial": 3-INT,
+            "Sylvan": 5-INT,
+            "Undercommon": 100-INT,
         }
 
         for lang, chance in langs.items():
@@ -116,22 +115,22 @@ def Language(npc):
 
     if race == "Beast":
         langs = {
-            "Beastly Speech":1,
-            "Dwarvish": 20,
-            "Elvish": 10,
-            "Giant": 20,
-            "Gnomish": 10,
-            "Goblin": 10,
-            "Halfling": 20,
-            "Orc": 20,
-            "Abyssal": 20,
-            "Celestial": 10,
-            "Draconic": 20,
-            "Deep Speech": 20,
-            "Infernal": 20,
-            "Primordial": 10,
-            "Sylvan": 2,
-            "Undercommon": 20
+            "Beastly Speech":1-INT,
+            "Dwarvish": 20-INT,
+            "Elvish": 10-INT,
+            "Giant": 20-INT,
+            "Gnomish": 10-INT,
+            "Goblin": 10-INT,
+            "Halfling": 20-INT,
+            "Orc": 20-INT,
+            "Abyssal": 20-INT,
+            "Celestial": 10-INT,
+            "Draconic": 20-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 20-INT,
+            "Primordial": 10-INT,
+            "Sylvan": 2-INT,
+            "Undercommon": 20-INT,
         }
 
         for lang, chance in langs.items():
@@ -139,23 +138,23 @@ def Language(npc):
 
     if race == "Beastfolk":
         langs = {
-            "Beastly Speech":1,
-            "Dwarvish": 20,
-            "Elvish": 8,
-            "Giant": 15,
-            "Gnomish": 6,
-            "Goblin": 6,
-            "Halfling": 20,
-            "Orc": 20,
-            "Abyssal": 10,
-            "Celestial": 10,
-            "Draconic": 10,
-            "Deep Speech": 20,
-            "Infernal": 10,
-            "Primordial": 10,
-            "Sylvan": 4,
-            "Undercommon": 10,
-            f"Beast Telepathy: The {npc.race} can magically command any animal it shares an affinity to within 120 feet of it, using a limited telepathy.":3,
+            "Beastly Speech":1-INT,
+            "Dwarvish": 20-INT,
+            "Elvish": 8-INT,
+            "Giant": 15-INT,
+            "Gnomish": 6-INT,
+            "Goblin": 6-INT,
+            "Halfling": 20-INT,
+            "Orc": 20-INT,
+            "Abyssal": 10-INT,
+            "Celestial": 10-INT,
+            "Draconic": 10-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 10-INT,
+            "Primordial": 10-INT,
+            "Sylvan": 4-INT,
+            "Undercommon": 10-INT,
+            f"Beast Telepathy: The {npc.race} can magically command any animal it shares an affinity to within 120 feet of it, using a limited telepathy.":3-INT,
         }
 
         for lang, chance in langs.items():
@@ -164,51 +163,51 @@ def Language(npc):
 
     if race == "Celestial":
         langs = {
-            "Dwarvish": 10,
-            "Elvish": 8,
-            "Giant": 10,
-            "Gnomish": 10,
-            "Goblin": 10,
-            "Halfling": 10,
-            "Orc": 10,
-            "Abyssal": 8,
+            "Dwarvish": 10-INT,
+            "Elvish": 8-INT,
+            "Giant": 10-INT,
+            "Gnomish": 10-INT,
+            "Goblin": 10-INT,
+            "Halfling": 10-INT,
+            "Orc": 10-INT,
+            "Abyssal": 8-INT,
             "Celestial": 1,
-            "Draconic": 10,
-            "Deep Speech": 20,
-            "Infernal": 8,
-            "Primordial": 20,
-            "Sylvan": 6,
-            "Undercommon": 20,
-            "All languages":8,
+            "Draconic": 10-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 8-INT,
+            "Primordial": 20-INT,
+            "Sylvan": 6-INT,
+            "Undercommon": 20-INT,
+            "All languages":8-INT,
         }
 
         for lang, chance in langs.items():
             add_language(languages, lang, chance)
    
-        if Dice(2): add_language(languages, "Telepathy. (60 feet).", 8) 
-        else: add_language(languages, "Telepathy. (120 feet).", 10) 
+        if Dice(2): add_language(languages, "Telepathy. (60 feet).", 8-INT) 
+        else: add_language(languages, "Telepathy. (120 feet).", 10-INT) 
 
     if race == "Construct":
-        add_language(languages, "Understands the languages of its creator.", 1) 
-        add_language(languages, "All languages.", 5) 
+        add_language(languages, "Understands the languages of its creator.", 1-INT) 
+        add_language(languages, "All languages.", 5-INT) 
 
     if race == "Dragon":
         langs = {
-            "Dwarvish": 8,
-            "Elvish": 8,
-            "Giant": 8,
-            "Gnomish": 8,
-            "Goblin": 8,
-            "Halfling": 8,
-            "Orc": 8,
-            "Abyssal": 8,
-            "Celestial": 8,
-            "Draconic": 1,
-            "Deep Speech": 10,
-            "Infernal": 8,
-            "Primordial": 10,
-            "Sylvan": 4,
-            "Undercommon": 10
+            "Dwarvish": 8-INT,
+            "Elvish": 8-INT,
+            "Giant": 8-INT,
+            "Gnomish": 8-INT,
+            "Goblin": 8-INT,
+            "Halfling": 8-INT,
+            "Orc": 8-INT,
+            "Abyssal": 8-INT,
+            "Celestial": 8-INT,
+            "Draconic": 1-INT,
+            "Deep Speech": 10-INT,
+            "Infernal": 8-INT,
+            "Primordial": 10-INT,
+            "Sylvan": 4-INT,
+            "Undercommon": 10-INT,
         }
 
         for lang, chance in langs.items():
@@ -217,20 +216,20 @@ def Language(npc):
     if race == "Dwarf":
         langs = {
             "Dwarvish": 1,
-            "Elvish": 5,
-            "Giant": 5,
-            "Gnomish": 16,
-            "Goblin": 16,
-            "Halfling": 8,
-            "Orc": 20,
-            "Abyssal": 18,
-            "Celestial": 16,
-            "Draconic": 12,
-            "Deep Speech": 3,
-            "Infernal": 12,
-            "Primordial": 12,
-            "Sylvan": 20,
-            "Undercommon": 4
+            "Elvish": 8-INT,
+            "Giant": 6-INT,
+            "Gnomish": 16-INT,
+            "Goblin": 16-INT,
+            "Halfling": 8-INT,
+            "Orc": 20-INT,
+            "Abyssal": 18-INT,
+            "Celestial": 16-INT,
+            "Draconic": 12-INT,
+            "Deep Speech": 4-INT,
+            "Infernal": 12-INT,
+            "Primordial": 12-INT,
+            "Sylvan": 21-INT,
+            "Undercommon": 4-INT,
         }
 
         for lang, chance in langs.items():
@@ -238,21 +237,21 @@ def Language(npc):
 
     if race == "Elf":
         langs = {
-            "Dwarvish": 6,
-            "Elvish": 1,
-            "Giant": 12,
-            "Gnomish": 6,
-            "Goblin": 18,
-            "Halfling": 12,
-            "Orc": 20,
-            "Abyssal": 8,
-            "Celestial": 8,
-            "Draconic": 8,
-            "Deep Speech": 16,
-            "Infernal": 8,
-            "Primordial": 6,
-            "Sylvan": 4,
-            "Undercommon": 6
+            "Dwarvish": 6-INT,
+            "Elvish": 1-INT,
+            "Giant": 12-INT,
+            "Gnomish": 6-INT,
+            "Goblin": 18-INT,
+            "Halfling": 12-INT,
+            "Orc": 20-INT,
+            "Abyssal": 8-INT,
+            "Celestial": 8-INT,
+            "Draconic": 8-INT,
+            "Deep Speech": 16-INT,
+            "Infernal": 8-INT,
+            "Primordial": 6-INT,
+            "Sylvan": 4-INT,
+            "Undercommon": 6-INT,
         }
 
         for lang, chance in langs.items():
@@ -260,25 +259,25 @@ def Language(npc):
             
     if race == "Elemental":
         langs = {
-            "Dwarvish": 8,
-            "Elvish": 8,
-            "Giant": 8,
-            "Gnomish": 8,
-            "Goblin": 18,
-            "Halfling": 18,
-            "Orc": 12,
-            "Abyssal": 12,
-            "Celestial": 12,
-            "Draconic": 12,
-            "Deep Speech": 20,
-            "Infernal": 12,
-            "Primordial": 1,
-            "Sylvan": 4,
-            "Undercommon": 10,
-            "Ignan": 4,
-            "Terran":4,
-            "Aquan":4,
-            "Auran":4
+            "Dwarvish": 8-INT,
+            "Elvish": 8-INT,
+            "Giant": 8-INT,
+            "Gnomish": 8-INT,
+            "Goblin": 18-INT,
+            "Halfling": 18-INT,
+            "Orc": 12-INT,
+            "Abyssal": 12-INT,
+            "Celestial": 12-INT,
+            "Draconic": 12-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 12-INT,
+            "Primordial": 1-INT,
+            "Sylvan": 4-INT,
+            "Undercommon": 10-INT,
+            "Ignan": 4-INT,
+            "Terran":4-INT,
+            "Aquan":4-INT,
+            "Auran":4-INT,
             
         }
 
@@ -288,21 +287,21 @@ def Language(npc):
 
     if race == "Fey":
         langs = {
-            "Dwarvish": 14,
-            "Elvish": 3,
-            "Giant": 10,
-            "Gnomish": 8,
-            "Goblin": 4,
-            "Halfling": 16,
-            "Orc": 16,
-            "Abyssal": 16,
-            "Celestial": 16,
-            "Draconic": 8,
-            "Deep Speech": 20,
-            "Infernal": 16,
-            "Primordial": 8,
-            "Sylvan": 1,
-            "Undercommon": 20
+            "Dwarvish": 14-INT,
+            "Elvish": 3-INT,
+            "Giant": 10-INT,
+            "Gnomish": 8-INT,
+            "Goblin": 4-INT,
+            "Halfling": 16-INT,
+            "Orc": 16-INT,
+            "Abyssal": 16-INT,
+            "Celestial": 16-INT,
+            "Draconic": 8-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 16-INT,
+            "Primordial": 8-INT,
+            "Sylvan": 1-INT,
+            "Undercommon": 20-INT,
         }
 
         for lang, chance in langs.items():
@@ -310,23 +309,23 @@ def Language(npc):
 
     if race == "Fiend":
         langs = {
-            "Dwarvish": 4,
-            "Elvish": 4,
-            "Giant": 8,
-            "Gnomish": 4,
-            "Goblin": 2,
-            "Halfling": 12,
-            "Orc": 4,
-            "Abyssal": 2,
-            "Celestial": 25,
-            "Draconic": 20,
-            "Deep Speech": 20,
-            "Infernal": 2,
-            "Primordial": 22,
-            "Sylvan": 20,
-            "Undercommon": 8,
-            "Telepathy (60 ft.)": 10,
-            "Telepathy (120 ft.)": 12            
+            "Dwarvish": 4-INT,
+            "Elvish": 4-INT,
+            "Giant": 8-INT,
+            "Gnomish": 4-INT,
+            "Goblin": 2-INT,
+            "Halfling": 12-INT,
+            "Orc": 4-INT,
+            "Abyssal": 2-INT,
+            "Celestial": 25-INT,
+            "Draconic": 20-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 2-INT,
+            "Primordial": 22-INT,
+            "Sylvan": 20-INT,
+            "Undercommon": 8-INT,
+            "Telepathy (60 ft.)": 10-INT,
+            "Telepathy (120 ft.)": 12-INT,            
         }
 
         for lang, chance in langs.items():
@@ -334,21 +333,21 @@ def Language(npc):
 
     if race == "Giant":
         langs = {
-            "Dwarvish": 4,
-            "Elvish": 20,
-            "Giant": 1,
-            "Gnomish": 8,
-            "Goblin": 8,
-            "Halfling": 20,
-            "Orc": 8,
-            "Abyssal": 12,
-            "Celestial": 12,
-            "Draconic": 20,
-            "Deep Speech": 20,
-            "Infernal": 12,
-            "Primordial": 16,
-            "Sylvan": 8,
-            "Undercommon": 20
+            "Dwarvish": 4-INT,
+            "Elvish": 20-INT,
+            "Giant": 1-INT,
+            "Gnomish": 8-INT,
+            "Goblin": 8-INT,
+            "Halfling": 20-INT,
+            "Orc": 8-INT,
+            "Abyssal": 12-INT,
+            "Celestial": 12-INT,
+            "Draconic": 20-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 12-INT,
+            "Primordial": 16-INT,
+            "Sylvan": 8-INT,
+            "Undercommon": 20-INT,
         }
 
         for lang, chance in langs.items():
@@ -356,21 +355,21 @@ def Language(npc):
 
     if race == "Gnome":
         langs = {
-            "Dwarvish": 3,
-            "Elvish": 3,
-            "Giant": 3,
-            "Gnomish": 1,
-            "Goblin": 6,
-            "Halfling": 6,
-            "Orc": 10,
-            "Abyssal": 12,
-            "Celestial": 12,
-            "Draconic": 12,
-            "Deep Speech": 12,
-            "Infernal": 12,
-            "Primordial": 12,
-            "Sylvan": 4,
-            "Undercommon": 12
+            "Dwarvish": 3-INT,
+            "Elvish": 3-INT,
+            "Giant": 3-INT,
+            "Gnomish": 1-INT,
+            "Goblin": 6-INT,
+            "Halfling": 6-INT,
+            "Orc": 10-INT,
+            "Abyssal": 12-INT,
+            "Celestial": 12-INT,
+            "Draconic": 12-INT,
+            "Deep Speech": 12-INT,
+            "Infernal": 12-INT,
+            "Primordial": 12-INT,
+            "Sylvan": 4-INT,
+            "Undercommon": 12-INT,
         }
 
         for lang, chance in langs.items():
@@ -378,21 +377,21 @@ def Language(npc):
 
     if race == "Goblin":
         langs = {
-            "Dwarvish": 18,
-            "Elvish": 16,
-            "Giant": 10,
-            "Gnomish": 18,
-            "Goblin": 1,
-            "Halfling": 18,
-            "Orc": 4,
-            "Abyssal": 10,
-            "Celestial": 19,
-            "Draconic": 6,
-            "Deep Speech": 10,
-            "Infernal": 10,
-            "Primordial": 20,
-            "Sylvan": 2,
-            "Undercommon": 2
+            "Dwarvish": 18-INT,
+            "Elvish": 16-INT,
+            "Giant": 10-INT,
+            "Gnomish": 18-INT,
+            "Goblin": 1-INT,
+            "Halfling": 18-INT,
+            "Orc": 4-INT,
+            "Abyssal": 10-INT,
+            "Celestial": 19-INT,
+            "Draconic": 6-INT,
+            "Deep Speech": 10-INT,
+            "Infernal": 10-INT,
+            "Primordial": 20-INT,
+            "Sylvan": 2-INT,
+            "Undercommon": 2-INT,
         }
 
         for lang, chance in langs.items():
@@ -400,21 +399,21 @@ def Language(npc):
 
     if race == "Halfling":
         langs = {
-            "Dwarvish": 4,
-            "Elvish": 4,
-            "Giant": 20,
-            "Gnomish": 4,
-            "Goblin": 20,
-            "Halfling": 1,
-            "Orc": 20,
-            "Abyssal": 20,
-            "Celestial": 4,
-            "Draconic": 6,
-            "Deep Speech": 20,
-            "Infernal": 20,
-            "Primordial": 18,
-            "Sylvan": 18,
-            "Undercommon": 20
+            "Dwarvish": 4-INT,
+            "Elvish": 4-INT,
+            "Giant": 20-INT,
+            "Gnomish": 4-INT,
+            "Goblin": 20-INT,
+            "Halfling": 1-INT,
+            "Orc": 20-INT,
+            "Abyssal": 20-INT,
+            "Celestial": 4-INT,
+            "Draconic": 6-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 20-INT,
+            "Primordial": 18-INT,
+            "Sylvan": 18-INT,
+            "Undercommon": 20-INT
             }
         for lang, chance in langs.items():
             add_language(languages, lang, chance)
@@ -422,21 +421,21 @@ def Language(npc):
 
     if race == "Kobold":
         langs = {
-            "Dwarvish": 6,
-            "Elvish": 18,
-            "Giant": 20,
-            "Gnomish": 20,
-            "Goblin": 8,
-            "Halfling": 20,
-            "Orc": 12,
-            "Abyssal": 8,
-            "Celestial": 10,
+            "Dwarvish": 6-INT,
+            "Elvish": 18-INT,
+            "Giant": 20-INT,
+            "Gnomish": 20-INT,
+            "Goblin": 8-INT,
+            "Halfling": 20-INT,
+            "Orc": 12-INT,
+            "Abyssal": 8-INT,
+            "Celestial": 10-INT,
             "Draconic": 1,
-            "Deep Speech": 8,
-            "Infernal": 8,
-            "Primordial": 20,
-            "Sylvan": 16,
-            "Undercommon": 6
+            "Deep Speech": 8-INT,
+            "Infernal": 8-INT,
+            "Primordial": 20-INT,
+            "Sylvan": 16-INT,
+            "Undercommon": 6-INT,
         }
 
         for lang, chance in langs.items():
@@ -445,22 +444,22 @@ def Language(npc):
         
     if race == "Lizardfolk":
         langs = {
-            "Dwarvish": 20,
-            "Elvish": 20,
-            "Giant": 10,
-            "Gnomish": 20,
-            "Goblin": 10,
-            "Halfling": 20,
-            "Orc": 4,
-            "Abyssal": 4,
-            "Celestial": 20,
+            "Dwarvish": 20-INT,
+            "Elvish": 20-INT,
+            "Giant": 10-INT,
+            "Gnomish": 20-INT,
+            "Goblin": 10-INT,
+            "Halfling": 20-INT,
+            "Orc": 4-INT,
+            "Abyssal": 4-INT,
+            "Celestial": 20-INT,
             "Draconic": 1,
-            "Deep Speech": 4,
-            "Infernal": 4,
-            "Primordial": 4,
-            "Sylvan": 4,
-            "Undercommon": 20,
-            f"Beast Telepathy (Only Reptiles): The {npc.race} can magically command any animal it shares an affinity to within 120 feet of it, using a limited telepathy.":3,
+            "Deep Speech": 4-INT,
+            "Infernal": 4-INT,
+            "Primordial": 4-INT,
+            "Sylvan": 4-INT,
+            "Undercommon": 20-INT,
+            f"Beast Telepathy (Only Reptiles): The {npc.race} can magically command any animal it shares an affinity to within 120 feet of it, using a limited telepathy.":3-INT,
 
         }
 
@@ -469,20 +468,20 @@ def Language(npc):
 
     if race == "Monstrosity":
         langs = {
-            "Dwarvish": 10,
-            "Elvish": 22,
-            "Giant": 9,
-            "Gnomish": 25,
-            "Goblin": 11,
-            "Halfling": 22,
-            "Orc": 7,
-            "Abyssal": 4,
-            "Celestial": 22,
-            "Draconic": 6,
-            "Deep Speech": 1,
-            "Infernal": 5,
-            "Primordial": 12,
-            "Sylvan": 9,
+            "Dwarvish": 10-INT,
+            "Elvish": 22-INT,
+            "Giant": 9-INT,
+            "Gnomish": 25-INT,
+            "Goblin": 11-INT,
+            "Halfling": 22-INT,
+            "Orc": 7-INT,
+            "Abyssal": 4-INT,
+            "Celestial": 22-INT,
+            "Draconic": 6-INT,
+            "Deep Speech": 1-INT,
+            "Infernal": 5-INT,
+            "Primordial": 12-INT,
+            "Sylvan": 9-INT,
             "Undercommon": 1
         }
 
@@ -496,21 +495,21 @@ def Language(npc):
 
     if race == "Orc":
         langs = {
-            "Dwarvish": 12,
-            "Elvish": 12,
-            "Giant": 4,
-            "Gnomish": 22,
-            "Goblin": 2,
-            "Halfling": 22,
-            "Orc": 1,
-            "Abyssal": 8,
-            "Celestial": 8,
-            "Draconic": 8,
-            "Deep Speech": 22,
-            "Infernal": 8,
-            "Primordial": 8,
-            "Sylvan": 8,
-            "Undercommon": 8
+            "Dwarvish": 12-INT,
+            "Elvish": 12-INT,
+            "Giant": 4-INT,
+            "Gnomish": 22-INT,
+            "Goblin": 2-INT,
+            "Halfling": 22-INT,
+            "Orc": 1-INT,
+            "Abyssal": 8-INT,
+            "Celestial": 8-INT,
+            "Draconic": 8-INT,
+            "Deep Speech": 22-INT,
+            "Infernal": 8-INT,
+            "Primordial": 8-INT,
+            "Sylvan": 8-INT,
+            "Undercommon": 8-INT,
         }
 
         for lang, chance in langs.items():
@@ -518,22 +517,22 @@ def Language(npc):
 
     if race == "Plant":
         langs = {
-            "Dwarvish": 20,
-            "Elvish": 5,
-            "Giant": 20,
-            "Gnomish": 20,
-            "Goblin": 20,
-            "Halfling": 20,
-            "Orc": 20,
-            "Abyssal": 20,
-            "Celestial": 10,
-            "Draconic": 20,
-            "Deep Speech": 20,
-            "Infernal": 20,
-            "Primordial": 2,
-            "Sylvan": 1,
-            "Undercommon": 8,
-            "Telepathy":4
+            "Dwarvish": 20-INT,
+            "Elvish": 5-INT,
+            "Giant": 20-INT,
+            "Gnomish": 20-INT,
+            "Goblin": 20-INT,
+            "Halfling": 20-INT,
+            "Orc": 20-INT,
+            "Abyssal": 20-INT,
+            "Celestial": 10-INT,
+            "Draconic": 20-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 20-INT,
+            "Primordial": 2-INT,
+            "Sylvan": 1-INT,
+            "Undercommon": 8-INT,
+            "Telepathy":4-INT,
         }
 
         for lang, chance in langs.items():
@@ -541,22 +540,22 @@ def Language(npc):
 
     if race == "Snakefolk":
         langs = {
-            "Dwarvish": 20,
-            "Elvish": 20,
-            "Giant": 20,
-            "Gnomish": 20,
-            "Goblin": 20,
-            "Halfling": 20,
-            "Orc": 20,
-            "Abyssal": 2,
-            "Celestial": 20,
-            "Draconic": 1,
-            "Deep Speech": 2,
-            "Infernal": 10,
-            "Primordial": 4,
-            "Sylvan": 8,
-            "Undercommon": 20,
-            f"Beast Telepathy (Only Snakes): The {npc.race} can magically command any animal it shares an affinity to within 120 feet of it, using a limited telepathy.":3,
+            "Dwarvish": 20-INT,
+            "Elvish": 20-INT,
+            "Giant": 20-INT,
+            "Gnomish": 20-INT,
+            "Goblin": 20-INT,
+            "Halfling": 20-INT,
+            "Orc": 20-INT,
+            "Abyssal": 2-INT,
+            "Celestial": 20-INT,
+            "Draconic": 1-INT,
+            "Deep Speech": 2-INT,
+            "Infernal": 10-INT,
+            "Primordial": 4-INT,
+            "Sylvan": 8-INT,
+            "Undercommon": 20-INT,
+            f"Beast Telepathy (Only Snakes): The {npc.race} can magically command any animal it shares an affinity to within 120 feet of it, using a limited telepathy.":3-INT,
 
         }
 
@@ -565,21 +564,21 @@ def Language(npc):
         
     if race == "Undead":
         langs = {
-            "Dwarvish": 6,
-            "Elvish": 6,
-            "Giant": 6,
-            "Gnomish": 6,
-            "Goblin": 6,
-            "Halfling": 6,
-            "Orc": 6,
-            "Abyssal": 2,
-            "Celestial": 2,
-            "Draconic": 6,
-            "Deep Speech": 2,
-            "Infernal": 2,
-            "Primordial": 20,
-            "Sylvan": 20,
-            "Undercommon": 4
+            "Dwarvish": 6-INT,
+            "Elvish": 6-INT,
+            "Giant": 6-INT,
+            "Gnomish": 6-INT,
+            "Goblin": 6-INT,
+            "Halfling": 6-INT,
+            "Orc": 6-INT,
+            "Abyssal": 2-INT,
+            "Celestial": 2-INT,
+            "Draconic": 6-INT,
+            "Deep Speech": 2-INT,
+            "Infernal": 2-INT,
+            "Primordial": 20-INT,
+            "Sylvan": 20-INT,
+            "Undercommon": 4-INT,
         }
 
         for lang, chance in langs.items():
@@ -588,21 +587,21 @@ def Language(npc):
     # BACKGROUNDS
     if background == "base":
         langs = {
-            "Dwarvish": 20,
-            "Elvish": 20,
-            "Giant": 20,
-            "Gnomish": 20,
-            "Goblin": 20,
-            "Halfling": 20,
-            "Orc": 20,
-            "Abyssal": 20,
-            "Celestial": 20,
-            "Draconic": 20,
-            "Deep Speech": 20,
-            "Infernal": 20,
-            "Primordial": 20,
-            "Sylvan": 20,
-            "Undercommon": 20
+            "Dwarvish": 20-INT,
+            "Elvish": 20-INT,
+            "Giant": 20-INT,
+            "Gnomish": 20-INT,
+            "Goblin": 20-INT,
+            "Halfling": 20-INT,
+            "Orc": 20-INT,
+            "Abyssal": 20-INT,
+            "Celestial": 20-INT,
+            "Draconic": 20-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 20-INT,
+            "Primordial": 20-INT,
+            "Sylvan": 20-INT,
+            "Undercommon": 20-INT,
         }
 
         for lang, chance in langs.items():
@@ -611,22 +610,22 @@ def Language(npc):
     if background == "Druid":
         langs = {
             "Druidic":1,
-            "Dwarvish": 20,
-            "Elvish": 4,
-            "Giant": 20,
-            "Gnomish": 10,
-            "Goblin": 10,
-            "Halfling": 20,
-            "Orc": 20,
-            "Abyssal": 20,
-            "Celestial": 16,
-            "Draconic": 4,
-            "Deep Speech": 20,
-            "Infernal": 20,
-            "Primordial": 4,
-            "Sylvan": 4,
-            "Undercommon": 20,
-            f"Beast Telepathy: The {npc.race} can magically command any animal it shares an affinity to within 120 feet of it, using a limited telepathy.":3,
+            "Dwarvish": 20-INT,
+            "Elvish": 5-INT,
+            "Giant": 20-INT,
+            "Gnomish": 10-INT,
+            "Goblin": 10-INT,
+            "Halfling": 20-INT,
+            "Orc": 20-INT,
+            "Abyssal": 20-INT,
+            "Celestial": 16-INT,
+            "Draconic": 4-INT,
+            "Deep Speech": 21-INT,
+            "Infernal": 20-INT,
+            "Primordial": 4-INT,
+            "Sylvan": 3-INT,
+            "Undercommon": 20-INT,
+            f"Beast Telepathy: {npc.title} can magically command any animal it shares an affinity to within 120 feet of it, using a limited telepathy.":3-INT,
 
         }
 
@@ -636,21 +635,21 @@ def Language(npc):
     
     if background == "Bandit":
         langs = {
-            "Dwarvish": 20,
-            "Elvish": 20,
-            "Giant": 20,
-            "Gnomish": 20,
-            "Goblin": 20,
-            "Halfling": 20,
-            "Orc": 20,
-            "Abyssal": 20,
-            "Celestial": 20,
-            "Draconic": 20,
-            "Deep Speech": 20,
-            "Infernal": 20,
-            "Primordial": 20,
-            "Sylvan": 20,
-            "Undercommon": 20
+            "Dwarvish": 20-INT,
+            "Elvish": 20-INT,
+            "Giant": 20-INT,
+            "Gnomish": 20-INT,
+            "Goblin": 20-INT,
+            "Halfling": 20-INT,
+            "Orc": 20-INT,
+            "Abyssal": 20-INT,
+            "Celestial": 20-INT,
+            "Draconic": 20-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 20-INT,
+            "Primordial": 20-INT,
+            "Sylvan": 20-INT,
+            "Undercommon": 20-INT,
         }
 
         for lang, chance in langs.items():
@@ -659,21 +658,21 @@ def Language(npc):
 
     if background == "Bard":
         langs = {
-            "Dwarvish": 6,
-            "Elvish": 6,
-            "Giant": 20,
-            "Gnomish": 6,
-            "Goblin": 6,
-            "Halfling": 6,
-            "Orc": 6,
-            "Abyssal": 20,
-            "Celestial": 20,
-            "Draconic": 20,
-            "Deep Speech": 20,
-            "Infernal": 20,
-            "Primordial": 20,
-            "Sylvan": 6,
-            "Undercommon": 20
+            "Dwarvish": 6-INT,
+            "Elvish": 6-INT,
+            "Giant": 20-INT,
+            "Gnomish": 6-INT,
+            "Goblin": 6-INT,
+            "Halfling": 6-INT,
+            "Orc": 6-INT,
+            "Abyssal": 20-INT,
+            "Celestial": 20-INT,
+            "Draconic": 20-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 20-INT,
+            "Primordial": 20-INT,
+            "Sylvan": 6-INT,
+            "Undercommon": 20-INT
         }
 
         for lang, chance in langs.items():
@@ -682,21 +681,21 @@ def Language(npc):
 
     if background == "Berserker":
         langs = {
-            "Dwarvish": 6,
-            "Elvish": 20,
-            "Giant": 6,
-            "Gnomish": 20,
-            "Goblin": 20,
-            "Halfling": 20,
-            "Orc": 6,
-            "Abyssal": 12,
-            "Celestial": 20,
-            "Draconic": 16,
-            "Deep Speech": 16,
-            "Infernal": 12,
-            "Primordial": 16,
-            "Sylvan": 20,
-            "Undercommon": 6
+            "Dwarvish": 6-INT,
+            "Elvish": 20-INT,
+            "Giant": 6-INT,
+            "Gnomish": 20-INT,
+            "Goblin": 20-INT,
+            "Halfling": 20-INT,
+            "Orc": 6-INT,
+            "Abyssal": 12-INT,
+            "Celestial": 20-INT,
+            "Draconic": 16-INT,
+            "Deep Speech": 16-INT,
+            "Infernal": 12-INT,
+            "Primordial": 16-INT,
+            "Sylvan": 20-INT,
+            "Undercommon": 6-INT,
         }
 
         for lang, chance in langs.items():
@@ -706,21 +705,21 @@ def Language(npc):
 
     if background == "Charlatan":
         langs = {
-            "Dwarvish": 6,
-            "Elvish": 6,
-            "Giant": 20,
-            "Gnomish": 6,
-            "Goblin": 6,
-            "Halfling": 6,
-            "Orc": 20,
-            "Abyssal": 20,
-            "Celestial": 20,
-            "Draconic": 20,
-            "Deep Speech": 20,
-            "Infernal": 20,
-            "Primordial": 20,
-            "Sylvan": 20,
-            "Undercommon": 20
+            "Dwarvish": 6-INT,
+            "Elvish": 6-INT,
+            "Giant": 20-INT,
+            "Gnomish": 6-INT,
+            "Goblin": 6-INT,
+            "Halfling": 6-INT,
+            "Orc": 20-INT,
+            "Abyssal": 20-INT,
+            "Celestial": 20-INT,
+            "Draconic": 20-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 20-INT,
+            "Primordial": 20-INT,
+            "Sylvan": 20-INT,
+            "Undercommon": 20-INT
         }
 
         for lang, chance in langs.items():
@@ -729,21 +728,21 @@ def Language(npc):
 
     if background == "Cultist":
         langs = {
-            "Dwarvish": 20,
-            "Elvish": 20,
-            "Giant": 20,
-            "Gnomish": 20,
-            "Goblin": 20,
-            "Halfling": 20,
-            "Orc": 20,
-            "Abyssal": 8,
-            "Celestial": 8,
-            "Draconic": 8,
-            "Deep Speech": 8,
-            "Infernal": 8,
-            "Primordial": 8,
-            "Sylvan": 20,
-            "Undercommon": 8
+            "Dwarvish": 20-INT,
+            "Elvish": 20-INT,
+            "Giant": 20-INT,
+            "Gnomish": 20-INT,
+            "Goblin": 20-INT,
+            "Halfling": 20-INT,
+            "Orc": 20-INT,
+            "Abyssal": 8-INT,
+            "Celestial": 8-INT,
+            "Draconic": 8-INT,
+            "Deep Speech": 8-INT,
+            "Infernal": 8-INT,
+            "Primordial": 8-INT,
+            "Sylvan": 20-INT,
+            "Undercommon": 8-INT,
         }
 
         for lang, chance in langs.items():
@@ -753,22 +752,22 @@ def Language(npc):
 
     if background == "Criminal":
         langs = {
-            "Thieve's Cant":1,
-            "Dwarvish": 12,
-            "Elvish": 12,
-            "Giant": 20,
-            "Gnomish": 12,
-            "Goblin": 12,
-            "Halfling": 12,
-            "Orc": 12,
-            "Abyssal": 20,
-            "Celestial": 20,
-            "Draconic": 20,
-            "Deep Speech": 20,
-            "Infernal": 20,
-            "Primordial": 20,
-            "Sylvan": 20,
-            "Undercommon": 4
+            "Thieve's Cant":1-INT,
+            "Dwarvish": 12-INT,
+            "Elvish": 12-INT,
+            "Giant": 20-INT,
+            "Gnomish": 12-INT,
+            "Goblin": 12-INT,
+            "Halfling": 12-INT,
+            "Orc": 12-INT,
+            "Abyssal": 20-INT,
+            "Celestial": 20-INT,
+            "Draconic": 20-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 20-INT,
+            "Primordial": 20-INT,
+            "Sylvan": 20-INT,
+            "Undercommon": 4-INT,
         }
 
         for lang, chance in langs.items():
@@ -777,21 +776,21 @@ def Language(npc):
 
     if background == "Expert":
         langs = {
-            "Dwarvish": 5,
-            "Elvish": 5,
-            "Giant": 5,
-            "Gnomish": 5,
-            "Goblin": 19,
-            "Halfling": 19,
-            "Orc": 19,
-            "Abyssal": 19,
-            "Celestial": 5,
-            "Draconic": 19,
-            "Deep Speech": 19,
-            "Infernal": 19,
-            "Primordial": 19,
-            "Sylvan": 19,
-            "Undercommon": 19
+            "Dwarvish": 5-INT,
+            "Elvish": 5-INT,
+            "Giant": 5-INT,
+            "Gnomish": 5-INT,
+            "Goblin": 19-INT,
+            "Halfling": 19-INT,
+            "Orc": 19-INT,
+            "Abyssal": 19-INT,
+            "Celestial": 5-INT,
+            "Draconic": 19-INT,
+            "Deep Speech": 19-INT,
+            "Infernal": 19-INT,
+            "Primordial": 19-INT,
+            "Sylvan": 19-INT,
+            "Undercommon": 19-INT,
         }
 
         for lang, chance in langs.items():
@@ -799,21 +798,21 @@ def Language(npc):
 
     if background == "Explorer":
         langs = {
-            "Dwarvish": 4,
-            "Elvish": 4,
-            "Giant": 4,
-            "Gnomish": 4,
-            "Goblin": 4,
-            "Halfling": 4,
-            "Orc": 4,
-            "Abyssal": 20,
-            "Celestial": 20,
-            "Draconic": 4,
-            "Deep Speech": 20,
-            "Infernal": 20,
-            "Primordial": 20,
-            "Sylvan": 20,
-            "Undercommon": 20
+            "Dwarvish": 4-INT,
+            "Elvish": 4-INT,
+            "Giant": 4-INT,
+            "Gnomish": 4-INT,
+            "Goblin": 4-INT,
+            "Halfling": 4-INT,
+            "Orc": 4-INT,
+            "Abyssal": 20-INT,
+            "Celestial": 20-INT,
+            "Draconic": 4-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 20-INT,
+            "Primordial": 20-INT,
+            "Sylvan": 20-INT,
+            "Undercommon": 20-INT
         }
 
         for lang, chance in langs.items():
@@ -823,21 +822,21 @@ def Language(npc):
 
     if background == "Healer":
         langs = {
-            "Dwarvish": 20,
-            "Elvish": 20,
-            "Giant": 10,
-            "Gnomish": 20,
-            "Goblin": 20,
-            "Halfling": 20,
-            "Orc": 20,
-            "Abyssal": 20,
-            "Celestial": 4,
-            "Draconic": 20,
-            "Deep Speech": 20,
-            "Infernal": 20,
-            "Primordial": 4,
-            "Sylvan": 4,
-            "Undercommon": 20
+            "Dwarvish": 20-INT,
+            "Elvish": 20-INT,
+            "Giant": 10-INT,
+            "Gnomish": 20-INT,
+            "Goblin": 20-INT,
+            "Halfling": 20-INT,
+            "Orc": 20-INT,
+            "Abyssal": 20-INT,
+            "Celestial": 4-INT,
+            "Draconic": 20-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 20-INT,
+            "Primordial": 4-INT,
+            "Sylvan": 4-INT,
+            "Undercommon": 20-INT
         }
 
         for lang, chance in langs.items():
@@ -846,21 +845,21 @@ def Language(npc):
 
     if background == "Hero":
         langs = {
-            "Dwarvish": 20,
-            "Elvish": 20,
-            "Giant": 20,
-            "Gnomish": 20,
-            "Goblin": 20,
-            "Halfling": 20,
-            "Orc": 20,
-            "Abyssal": 20,
-            "Celestial": 6,
-            "Draconic": 6,
-            "Deep Speech": 20,
-            "Infernal": 20,
-            "Primordial": 20,
-            "Sylvan": 6,
-            "Undercommon": 20
+            "Dwarvish": 20-INT,
+            "Elvish": 20-INT,
+            "Giant": 20-INT,
+            "Gnomish": 20-INT,
+            "Goblin": 20-INT,
+            "Halfling": 20-INT,
+            "Orc": 20-INT,
+            "Abyssal": 20-INT,
+            "Celestial": 6-INT,
+            "Draconic": 6-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 20-INT,
+            "Primordial": 20-INT,
+            "Sylvan": 6-INT,
+            "Undercommon": 20-INT
         }
 
         for lang, chance in langs.items():
@@ -869,21 +868,21 @@ def Language(npc):
 
     if background == "Hunter":
         langs = {
-            "Dwarvish": 20,
-            "Elvish": 20,
-            "Giant": 20,
-            "Gnomish": 20,
-            "Goblin": 20,
-            "Halfling": 20,
-            "Orc": 20,
-            "Abyssal": 20,
-            "Celestial": 20,
-            "Draconic": 6,
-            "Deep Speech": 20,
-            "Infernal": 20,
-            "Primordial": 6,
-            "Sylvan": 1,
-            "Undercommon": 20
+            "Dwarvish": 20-INT,
+            "Elvish": 20-INT,
+            "Giant": 20-INT,
+            "Gnomish": 20-INT,
+            "Goblin": 20-INT,
+            "Halfling": 20-INT,
+            "Orc": 20-INT,
+            "Abyssal": 20-INT,
+            "Celestial": 20-INT,
+            "Draconic": 6-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 20-INT,
+            "Primordial": 6-INT,
+            "Sylvan": 1-INT,
+            "Undercommon": 20-INT
         }
 
         for lang, chance in langs.items():
@@ -892,21 +891,21 @@ def Language(npc):
 
     if background == "Knight":
         langs = {
-            "Dwarvish": 20,
-            "Elvish": 20,
-            "Giant": 20,
-            "Gnomish": 20,
-            "Goblin": 20,
-            "Halfling": 20,
-            "Orc": 20,
-            "Abyssal": 20,
-            "Celestial": 6,
-            "Draconic": 6,
-            "Deep Speech": 20,
-            "Infernal": 20,
-            "Primordial": 20,
-            "Sylvan": 6,
-            "Undercommon": 20
+            "Dwarvish": 20-INT,
+            "Elvish": 20-INT,
+            "Giant": 20-INT,
+            "Gnomish": 20-INT,
+            "Goblin": 20-INT,
+            "Halfling": 20-INT,
+            "Orc": 20-INT,
+            "Abyssal": 20-INT,
+            "Celestial": 6-INT,
+            "Draconic": 6-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 20-INT,
+            "Primordial": 20-INT,
+            "Sylvan": 6-INT,
+            "Undercommon": 20-INT
         }
 
         for lang, chance in langs.items():
@@ -915,21 +914,21 @@ def Language(npc):
 
     if background == "Mage":
         langs = {
-            "Dwarvish": 6,
-            "Elvish": 6,
-            "Giant": 6,
-            "Gnomish": 6,
-            "Goblin": 20,
-            "Halfling": 20,
-            "Orc": 20,
-            "Abyssal": 6,
-            "Celestial": 6,
-            "Draconic": 6,
-            "Deep Speech": 6,
-            "Infernal": 6,
-            "Primordial": 6,
-            "Sylvan": 6,
-            "Undercommon": 20
+            "Dwarvish": 6-INT,
+            "Elvish": 6-INT,
+            "Giant": 6-INT,
+            "Gnomish": 6-INT,
+            "Goblin": 20-INT,
+            "Halfling": 20-INT,
+            "Orc": 20-INT,
+            "Abyssal": 6-INT,
+            "Celestial": 6-INT,
+            "Draconic": 6-INT,
+            "Deep Speech": 6-INT,
+            "Infernal": 6-INT,
+            "Primordial": 6-INT,
+            "Sylvan": 6-INT,
+            "Undercommon": 20-INT
         }
 
         for lang, chance in langs.items():
@@ -938,22 +937,22 @@ def Language(npc):
 
     if background == "Monk":
         langs = {
-            "Dwarvish": 10,
-            "Elvish": 10,
-            "Giant": 10,
-            "Gnomish": 10,
-            "Goblin": 10,
-            "Halfling": 10,
-            "Orc": 10,
-            "Abyssal": 10,
-            "Celestial": 6,
-            "Draconic": 6,
-            "Deep Speech": 10,
-            "Infernal": 10,
-            "Primordial": 6,
-            "Sylvan": 10,
-            "Undercommon": 10,
-            f"Beast Telepathy: The {npc.race} can magically command any animal it shares an affinity to within 120 feet of it, using a limited telepathy.":10,
+            "Dwarvish": 10-INT,
+            "Elvish": 10-INT,
+            "Giant": 10-INT,
+            "Gnomish": 10-INT,
+            "Goblin": 10-INT,
+            "Halfling": 10-INT,
+            "Orc": 10-INT,
+            "Abyssal": 10-INT,
+            "Celestial": 6-INT,
+            "Draconic": 6-INT,
+            "Deep Speech": 10-INT,
+            "Infernal": 10-INT,
+            "Primordial": 6-INT,
+            "Sylvan": 10-INT,
+            "Undercommon": 10-INT,
+            f"Beast Telepathy: The {npc.race} can magically command any animal it shares an affinity to within 120 feet of it, using a limited telepathy.":10-INT,
 
         }
 
@@ -965,21 +964,21 @@ def Language(npc):
 
     if background == "Noble":
         langs = {
-            "Dwarvish": 6,
-            "Elvish": 6,
-            "Giant": 20,
-            "Gnomish": 20,
-            "Goblin": 20,
-            "Halfling": 20,
-            "Orc": 20,
-            "Abyssal": 20,
-            "Celestial": 12,
-            "Draconic": 12,
-            "Deep Speech": 20,
-            "Infernal": 20,
-            "Primordial": 20,
-            "Sylvan": 20,
-            "Undercommon": 20
+            "Dwarvish": 6-INT,
+            "Elvish": 6-INT,
+            "Giant": 20-INT,
+            "Gnomish": 20-INT,
+            "Goblin": 20-INT,
+            "Halfling": 20-INT,
+            "Orc": 20-INT,
+            "Abyssal": 20-INT,
+            "Celestial": 12-INT,
+            "Draconic": 12-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 20-INT,
+            "Primordial": 20-INT,
+            "Sylvan": 20-INT,
+            "Undercommon": 20-INT
         }
 
         for lang, chance in langs.items():
@@ -989,21 +988,21 @@ def Language(npc):
 
     if background == "Priest":
         langs = {
-            "Dwarvish": 20,
-            "Elvish": 20,
-            "Giant": 20,
-            "Gnomish": 20,
-            "Goblin": 20,
-            "Halfling": 20,
-            "Orc": 20,
-            "Abyssal": 6,
-            "Celestial": 6,
-            "Draconic": 20,
-            "Deep Speech": 20,
-            "Infernal": 6,
-            "Primordial": 20,
-            "Sylvan": 20,
-            "Undercommon": 20
+            "Dwarvish": 20-INT,
+            "Elvish": 20-INT,
+            "Giant": 20-INT,
+            "Gnomish": 20-INT,
+            "Goblin": 20-INT,
+            "Halfling": 20-INT,
+            "Orc": 20-INT,
+            "Abyssal": 6-INT,
+            "Celestial": 6-INT,
+            "Draconic": 20-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 6-INT,
+            "Primordial": 20-INT,
+            "Sylvan": 20-INT,
+            "Undercommon": 20-INT
         }
 
         for lang, chance in langs.items():
@@ -1013,22 +1012,22 @@ def Language(npc):
 
     if background == "Pirate":
         langs = {
-            "Thieve's Cant":1,
-            "Dwarvish": 20,
-            "Elvish": 20,
-            "Giant": 20,
-            "Gnomish": 20,
-            "Goblin": 20,
-            "Halfling": 20,
-            "Orc": 20,
-            "Abyssal": 20,
-            "Celestial": 20,
-            "Draconic": 20,
-            "Deep Speech": 12,
-            "Infernal": 20,
-            "Primordial": 12,
-            "Sylvan": 20,
-            "Undercommon": 20
+            "Thieve's Cant":1-INT,
+            "Dwarvish": 20-INT,
+            "Elvish": 20-INT,
+            "Giant": 20-INT,
+            "Gnomish": 20-INT,
+            "Goblin": 20-INT,
+            "Halfling": 20-INT,
+            "Orc": 20-INT,
+            "Abyssal": 20-INT,
+            "Celestial": 20-INT,
+            "Draconic": 20-INT,
+            "Deep Speech": 12-INT,
+            "Infernal": 20-INT,
+            "Primordial": 12-INT,
+            "Sylvan": 20-INT,
+            "Undercommon": 20-INT
         }
 
         for lang, chance in langs.items():
@@ -1037,21 +1036,21 @@ def Language(npc):
 
     if background == "Ranger":
         langs = {
-            "Dwarvish": 20,
-            "Elvish": 4,
-            "Giant": 4,
-            "Gnomish": 20,
-            "Goblin": 4,
-            "Halfling": 20,
-            "Orc": 4,
-            "Abyssal": 20,
-            "Celestial": 20,
-            "Draconic": 6,
-            "Deep Speech": 20,
-            "Infernal": 20,
-            "Primordial": 6,
-            "Sylvan": 6,
-            "Undercommon": 20
+            "Dwarvish": 20-INT,
+            "Elvish": 4-INT,
+            "Giant": 4-INT,
+            "Gnomish": 20-INT,
+            "Goblin": 4-INT,
+            "Halfling": 20-INT,
+            "Orc": 4-INT,
+            "Abyssal": 20-INT,
+            "Celestial": 20-INT,
+            "Draconic": 6-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 20-INT,
+            "Primordial": 6-INT,
+            "Sylvan": 6-INT,
+            "Undercommon": 20-INT
         }
 
         for lang, chance in langs.items():
@@ -1060,21 +1059,21 @@ def Language(npc):
 
     if background == "Scholar":
         langs = {
-            "Dwarvish": 20,
-            "Elvish": 20,
-            "Giant": 20,
-            "Gnomish": 20,
-            "Goblin": 20,
-            "Halfling": 20,
-            "Orc": 20,
-            "Abyssal": 6,
-            "Celestial": 6,
-            "Draconic": 6,
-            "Deep Speech": 6,
-            "Infernal": 6,
-            "Primordial": 6,
-            "Sylvan": 6,
-            "Undercommon": 20
+            "Dwarvish": 20-INT,
+            "Elvish": 20-INT,
+            "Giant": 20-INT,
+            "Gnomish": 20-INT,
+            "Goblin": 20-INT,
+            "Halfling": 20-INT,
+            "Orc": 20-INT,
+            "Abyssal": 6-INT,
+            "Celestial": 6-INT,
+            "Draconic": 6-INT,
+            "Deep Speech": 6-INT,
+            "Infernal": 6-INT,
+            "Primordial": 6-INT,
+            "Sylvan": 6-INT,
+            "Undercommon": 20-INT
         }
 
         for lang, chance in langs.items():
@@ -1084,22 +1083,22 @@ def Language(npc):
     if background == "Shaman":
         langs = {
             "Druidic":1,
-            "Dwarvish": 20,
-            "Elvish": 6,
-            "Giant": 6,
-            "Gnomish": 20,
-            "Goblin": 6,
-            "Halfling": 20,
-            "Orc": 6,
-            "Abyssal": 20,
-            "Celestial": 20,
-            "Draconic": 20,
-            "Deep Speech": 20,
-            "Infernal": 20,
-            "Primordial": 8,
-            "Sylvan": 1,
-            "Undercommon": 20,
-            f"Beast Telepathy: The {npc.race} can magically command any animal it shares an affinity to within 120 feet of it, using a limited telepathy.":10,
+            "Dwarvish": 20-INT,
+            "Elvish": 6-INT,
+            "Giant": 6-INT,
+            "Gnomish": 20-INT,
+            "Goblin": 6-INT,
+            "Halfling": 20-INT,
+            "Orc": 6-INT,
+            "Abyssal": 20-INT,
+            "Celestial": 20-INT,
+            "Draconic": 20-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 20-INT,
+            "Primordial": 8-INT,
+            "Sylvan": 1-INT,
+            "Undercommon": 20-INT,
+            f"Beast Telepathy: The {npc.race} can magically command any animal it shares an affinity to within 120 feet of it, using a limited telepathy.":10-INT,
         }
 
         for lang, chance in langs.items():
@@ -1109,21 +1108,21 @@ def Language(npc):
     if background == "Spy":
         langs = {
             "Thieve's Cant":1,
-            "Dwarvish": 20,
-            "Elvish": 20,
-            "Giant": 20,
-            "Gnomish": 20,
-            "Goblin": 20,
-            "Halfling": 20,
-            "Orc": 20,
-            "Abyssal": 20,
-            "Celestial": 20,
-            "Draconic": 20,
-            "Deep Speech": 20,
-            "Infernal": 20,
-            "Primordial": 20,
-            "Sylvan": 20,
-            "Undercommon": 20
+            "Dwarvish": 20-INT,
+            "Elvish": 20-INT,
+            "Giant": 20-INT,
+            "Gnomish": 20-INT,
+            "Goblin": 20-INT,
+            "Halfling": 20-INT,
+            "Orc": 20-INT,
+            "Abyssal": 20-INT,
+            "Celestial": 20-INT,
+            "Draconic": 20-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 20-INT,
+            "Primordial": 20-INT,
+            "Sylvan": 20-INT,
+            "Undercommon": 20-INT
         }
 
         for lang, chance in langs.items():
@@ -1132,21 +1131,21 @@ def Language(npc):
 
     if background == "Traveler":
         langs = {
-            "Dwarvish": 5,
-            "Elvish": 5,
-            "Giant": 5,
-            "Gnomish": 5,
-            "Goblin": 5,
-            "Halfling": 5,
-            "Orc": 5,
-            "Abyssal": 20,
-            "Celestial": 20,
-            "Draconic": 12,
-            "Deep Speech": 20,
-            "Infernal": 20,
-            "Primordial": 20,
-            "Sylvan": 20,
-            "Undercommon": 20
+            "Dwarvish": 5-INT,
+            "Elvish": 5-INT,
+            "Giant": 5-INT,
+            "Gnomish": 5-INT,
+            "Goblin": 5-INT,
+            "Halfling": 5-INT,
+            "Orc": 5-INT,
+            "Abyssal": 20-INT,
+            "Celestial": 20-INT,
+            "Draconic": 12-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 20-INT,
+            "Primordial": 20-INT,
+            "Sylvan": 20-INT,
+            "Undercommon": 20-INT,
         }
 
         for lang, chance in langs.items():
@@ -1155,21 +1154,21 @@ def Language(npc):
 
     if background == "Urchin":
         langs = {
-            "Dwarvish": 20,
-            "Elvish": 20,
-            "Giant": 20,
-            "Gnomish": 20,
-            "Goblin": 20,
-            "Halfling": 20,
-            "Orc": 20,
-            "Abyssal": 20,
-            "Celestial": 20,
-            "Draconic": 20,
-            "Deep Speech": 20,
-            "Infernal": 20,
-            "Primordial": 20,
-            "Sylvan": 20,
-            "Undercommon": 20
+            "Dwarvish": 20-INT,
+            "Elvish": 20-INT,
+            "Giant": 20-INT,
+            "Gnomish": 20-INT,
+            "Goblin": 20-INT,
+            "Halfling": 20-INT,
+            "Orc": 20-INT,
+            "Abyssal": 20-INT,
+            "Celestial": 20-INT,
+            "Draconic": 20-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 20-INT,
+            "Primordial": 20-INT,
+            "Sylvan": 20-INT,
+            "Undercommon": 20-INT
         }
 
         for lang, chance in langs.items():
@@ -1178,21 +1177,21 @@ def Language(npc):
 
     if background == "Warrior":
         langs = {
-            "Dwarvish": 6,
-            "Elvish": 6,
-            "Giant": 6,
-            "Gnomish": 6,
-            "Goblin": 6,
-            "Halfling": 6,
-            "Orc": 6,
-            "Abyssal": 20,
-            "Celestial": 20,
-            "Draconic": 20,
-            "Deep Speech": 20,
-            "Infernal": 20,
-            "Primordial": 20,
-            "Sylvan": 20,
-            "Undercommon": 20
+            "Dwarvish": 6-INT,
+            "Elvish": 6-INT,
+            "Giant": 6-INT,
+            "Gnomish": 6-INT,
+            "Goblin": 6-INT,
+            "Halfling": 6-INT,
+            "Orc": 6-INT,
+            "Abyssal": 20-INT,
+            "Celestial": 20-INT,
+            "Draconic": 20-INT,
+            "Deep Speech": 20-INT,
+            "Infernal": 20-INT,
+            "Primordial": 20-INT,
+            "Sylvan": 20-INT,
+            "Undercommon": 20-INT
         }
 
         for lang, chance in langs.items():
@@ -1203,21 +1202,21 @@ def Language(npc):
 
     if background == "Warlock":
         langs = {
-            "Dwarvish": 20,
-            "Elvish": 20,
-            "Giant": 20,
-            "Gnomish": 20,
-            "Goblin": 20,
-            "Halfling": 20,
-            "Orc": 20,
-            "Abyssal": 6,
-            "Celestial": 6,
-            "Draconic": 6,
-            "Deep Speech": 6,
-            "Infernal": 6,
-            "Primordial": 6,
-            "Sylvan": 6,
-            "Undercommon": 20
+            "Dwarvish": 20-INT,
+            "Elvish": 20-INT,
+            "Giant": 20-INT,
+            "Gnomish": 20-INT,
+            "Goblin": 20-INT,
+            "Halfling": 20-INT,
+            "Orc": 20-INT,
+            "Abyssal": 6-INT,
+            "Celestial": 6-INT,
+            "Draconic": 6-INT,
+            "Deep Speech": 6-INT,
+            "Infernal": 6-INT,
+            "Primordial": 6-INT,
+            "Sylvan": 6-INT,
+            "Undercommon": 20-INT
         }
 
         for lang, chance in langs.items():
@@ -1227,22 +1226,22 @@ def Language(npc):
 
     if background == "Witch":
         langs = {
-            "Dwarvish": 20,
-            "Elvish": 20,
-            "Giant": 12,
-            "Gnomish": 20,
-            "Goblin": 6,
-            "Halfling": 20,
-            "Orc": 20,
-            "Abyssal": 6,
-            "Celestial": 6,
-            "Draconic": 6,
-            "Deep Speech": 6,
-            "Infernal": 6,
-            "Primordial": 6,
-            "Sylvan": 12,
-            "Undercommon": 20,
-            f"Beast Telepathy: The {npc.race} can magically command any animal it shares an affinity to within 120 feet of it, using a limited telepathy.":10,
+            "Dwarvish": 20-INT,
+            "Elvish": 20-INT,
+            "Giant": 12-INT,
+            "Gnomish": 20-INT,
+            "Goblin": 6-INT,
+            "Halfling": 20-INT,
+            "Orc": 20-INT,
+            "Abyssal": 6-INT,
+            "Celestial": 6-INT,
+            "Draconic": 6-INT,
+            "Deep Speech": 6-INT,
+            "Infernal": 6-INT,
+            "Primordial": 6-INT,
+            "Sylvan": 12-INT,
+            "Undercommon": 20-INT,
+            f"Beast Telepathy: The {npc.race} can magically command any animal it shares an affinity to within 120 feet of it, using a limited telepathy.":10-INT,
 
         }
 
