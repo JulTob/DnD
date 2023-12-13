@@ -3,24 +3,46 @@ import npc_class as NPC
 import dnd
 
 def Dice(D=6,N=1):
-    return dnd.Dice(D,N)
+  return dnd.Dice(D,N)
 
 def is_valid_name(name):
-    if len(name) < 3 or len(name) > 12:
+    """
+    Checks if a name is valid based on specific criteria.
+    Parameters:
+    name (str): The name to check.
+    
+    Returns:
+    bool: True if the name is valid, False otherwise.
+    """
+    if len(name) < 4:
+        #print("Too Short")
         return False
-    # Every substring of four letters should have at least one vocal
+    if len(name) > 13:
+        #print("Too Long")
+        return False
+
     vowels = "aeiou"
-    for i in range(len(name) - 3):
+    
+    # Check if at least one of the first two letters is a vowel
+    if not any(char in vowels for char in name[:2].lower()):
+        #print("Bad start")
+        return False
+    
+    # Check each substring of 3 letters for at least one vowel
+    for i in range(len(name) - 2):  # Corrected to cover all three-letter chunks
         chunk = name[i:i+3].lower()
         if not any(vowel in chunk for vowel in vowels):
+            #print("Bad lettering")
             return False
 
+        
     return True
 
 def NewName(Names,onset=[""],nuclei=[""],codas=[""]):     
         namer = MarkovNameGenerator(Names)
         Name = namer.generate_name()
-            
+
+        #print("\nMarkov")
         if is_valid_name(Name):
             return Name
         
@@ -30,18 +52,19 @@ def NewName(Names,onset=[""],nuclei=[""],codas=[""]):
                 nuclei=nuclei,
                 codas=codas
                 ).name
-
+        #print("\nSyllabic")
         if is_valid_name(Name):
             return Name
 
         Name = SyllabicName(
                 syllables = SyllabicExtraction(Names),
                 min_syllables=1,
-                max_syllables=size)
-
+                max_syllables=10)
+        #print("\nExtraction")
         if is_valid_name(Name):
             return Name
 
+        #print("\nChosen")
         Name =  random.choice(Names)
         return Name
     
@@ -51,7 +74,6 @@ class SyllabicGenerator:
         self.nuclei = nuclei
         self.codas = codas
         self.name = self.generate_name()
-        return self.name
 
     def generate_syllable(self):
         return random.choice(self.onset) + random.choice(self.nuclei) + random.choice(self.codas)
@@ -61,7 +83,7 @@ class SyllabicGenerator:
             name = self.generate_syllable()
             if is_valid_name(name):
                 return name.capitalize()
-        return "Lorem Ipsum"
+        return ""
 
 
 ''' Legacy
@@ -108,274 +130,21 @@ class MarkovNameGenerator:
                 next_state = padded_name[i + self.order]
                 self.markov_chain[state].append(next_state)
 
-    def generate_name(self, min_length=5, max_length=10):
+    def generate_name(self, min_length=6, max_length=10, max_attempts=10):
         name = ''
         state = random.choice(list(self.markov_chain.keys()))
         while len(name) < max_length:
             name += state[0]
             next_states = self.markov_chain.get(state, [' '])
+            
+            # Break if the next state contains the padding character and name is of sufficient length
             if ' ' in next_states and len(name) >= min_length:
                 break
+
+            # Select the next state
             state = state[1:] + random.choice(next_states)
-        return name.title().strip()
-
-
-
-descriptor =[]
-rank = []
-of_the = []
-
-#Color
-color_descriptor = [
-                    "Amber","Golden", "Goldenrod","Ochre",
-                    "Lime",
-                    "Jade","Olive",
-                    "Azure", "Blue", "Cerulian","Indigo",
-                    "Lavender",
-                    "Beige","Ivory","Graphite",
-                    "Iridescent",]
-
-
-
-descriptor += color_descriptor
-
-
-# Material
-material_descriptor =   ["Gold","Golden",]
-material_descriptor +=  ["Graphite","Onyx"]
-material_descriptor +=  ["Ivory",]
-material_descriptor +=  ["Gemmed","Jewel","Jewelcraft","Jeweled","Opal","Jade","Crystal","Amethyst", "Quartz", "Topaz","Xenolith","Elfstone"]
-descriptor += material_descriptor
-
-of_the_material = ["of the Jewels","of the Ruby",]
-of_the_material+= ["of Gold","of Silver","of Iron","of Steel",]
-of_the += of_the_material
-
-
-# Plants
-plant_descriptor = ["Lavender"]
-descriptor += plant_descriptor
-
-
-# Faith
-faith_descriptor = ["Holy", "Celestial""Angelic",]
-faith_descriptor+= ["Omniscient"]
-faith_descriptor+= ["Horus's"]
-descriptor += faith_descriptor
-
-faith_rank  = ["Oracle","Saint",]
-faith_rank += ["God", "Deity"]
-rank += faith_rank
-
-
-
-# Hellish
-hell_descriptor = ["Orphean","Abyssal", "Daemonian", "Infernal", "Hellish"]
-descriptor += hell_descriptor
-
-of_the_hell = ["of the Dark Abyss","of The Seventh Hell","of Hell","of the Hells",]
-of_the += of_the_hell
-
-
-
-
-
-# Power
-power_descriptor = ["Grand"]
-descriptor +=  power_descriptor
-
-# Feelings
-feelings_descriptor =[ "Affectionate", "Loving"]
-feelings_descriptor+= ["Hopeful", "Joyful", "Jubilant", "Jovial",]
-feelings_descriptor+= ["Aggressive","Angry","Annoyed","Apathetic","Irate", "Jealous", "Hostile"]
-feelings_descriptor+= ["Anxious", "Horrified", "Nervous", "Terrified"]
-descriptor += feelings_descriptor
-
-# Martials
-martial_descriptor = ["Guardian's","Guardian of",]
-martial_descriptor+= ["Battle","Battle's","Battleground","War","Warlord's","Warrior's",]
-descriptor += martial_descriptor
-
-martial_rank = ["Guard","Guardian","Keeper","Sentinel","Vigilant","Knightly",]
-martial_rank += ["Commander","Warlord",]
-martial_rank += ["Gladiator","Warrior","War",]
-rank += martial_rank
-
-
-#Flaw & Virtue
-flaw_descriptor = ["Alcoholic","Blind","Mad",]
-virtue_descriptor = ["Gallant","Generous","Kind","Unbreakable","Valiant",]
-descriptor +=  flaw_descriptor + virtue_descriptor
-
-
-# Locations, lands, empires, countries
-location_descriptor = [
-        "Aegean","Amazon's","Amazonian","Archipelago's","Asgardian","Atlantean","Aztec",
-        "Badland","Babylonian","Bay","Beach","Beachy","Glacial", "Glade's", "Gorgonian",
-        "Grassland's", "Gulf's", "Garden's", "Geyser's", "Harbor's", "Hill's",  
-        "Island", "Islet", "Marsh", "Marshy", "Meadow", "Mine", "Moor", "Morass", "Moss", "Mountain",
-        "Mountainous", "Muddy", "Museum", "Oasis", "Ocean", "Oceanic", "Orchard", "Outpost", "Outlandish", "Overgrown"
-        "Glade", "Gorge", "Grassland", "Graveyard", "Grove"]
-
-descriptor += location_descriptor
-
-
-empty = ["Hollow","Empty"]
-descriptor += empty
-
-# Magic, wizzardry, and Arcane
-arcane_descriptor = [
-        "Arcane","Alchemical","Apothecary","Arcanic",
-        "Mage","Mage's",
-        "Wand","Wizard's",
-        "Arcane", "Alchemical", "Apothecary", "Arcanic", "Mage", "Mage's", "Magic",
-        "Wand", "Wizard's", "Myrmidonic", "Mystic", "Mystical", "Mythical"
-        ]
-
-descriptor += arcane_descriptor
-# Creatures 
-creature_descriptor = [
-    "Kraken's", "Krakenesque"]
-descriptor += creature_descriptor
-
-creature_rank = ["Kraken", "Leviathan", ]
-rank += creature_rank
-
-of_the_creature = [
-        "of Baba Yaga",
-        "of the Kraken",
-        "of the Hydra",
-        ]
-of_the += of_the_creature
-
-# Nature, animals
-air_descriptor = ["Atmospheric", "Tempest", "Wind", "Windy"]
-seasonal_descriptor = ["Autumn", "Climatic", "Winter"]
-cold_descriptor = ["Glacial", "Polar", "Icy", "Ice", "Icicle", "Frostbite", "Frostfire","Glacier",]
-
-wolf_descriptor = ["Alpha", "Wolf's"]
-insect_descriptor = ["Hive",]
-fish_descriptor = ["Gilled"]
-bird_descriptor = ["Condor's"]
-
-nature_descriptor = ["Grassy"]
-
-animal_descriptor = insect_descriptor + fish_descriptor + wolf_descriptor + bird_descriptor
-
-descriptor += animal_descriptor
-
-of_the_nature = ["of the Waterfall"]
-
-# Objects
-object_descriptor = [
-"Amulet", "Dagger", "Sword", "Talisman", "Goblet", "Grail"]
-of_the_object = ["of The Amulet", "of The Sword", "of The Talisman", "of The Goblet"]
-
-# Old, Ancient, Epochal, Timely
-elder_descriptor = [
-"Ageless", "Anachronistic", "Ancestral", "Ancient", "Atemporal", "Elder", "Old", "Sempiternal"
-"Age-old", "Ancestral", "Ancient", "Antediluvian", "Antique", "Archaic", "Elder", "Eldritch",
-"Eternal", "Everlasting", "Historic", "Hoary", "Immemorial", "Long-lived", "Old", "Perennial",
-"Perpetual", "Primordial", "Time-honored", "Timeless", "Traditional", "Venerable", "Vintage"]
-
-epochal_descriptor = ["Baroque", "Gothic"]
-
-
-# Political, noble, and power figures
-noble_rank = [
-"Baron", "Baron of", "Governor", "Lord", "Monarch", "Overlord", "Sovereign",
-"Emperor", "Master", "Ruler", "King", "King's", "King of", "Kingly", "Kingdom's",
-"Queen", "Queen of", "Queen's"]
-
-
-# Secrecy, Mischief and Mistery
-secret_descriptor =["Hidden"]
-mischief_descriptor = [ "Gambler","Mischievous", "Silver-tongued",]
-
-# Space and Scifi
-space_descriptor = [
-"Alien", "Astral", "Black Hole", "Cometary", "Cosmic", "Cosmos", "Dimensional",
-"Eclipse", "Ethereal", "Existence", "Galactic", "Galactian", "Infinity", "Moon", "Moonlit", "Ozone",
-"Reality", "Star", "Starry", "Sun", "Sunny", "Sunset", "Supernova", "Time", "Timebender",
-"Void", "Voided", "Warp", "Wormhole", "Zodiac", "Zodiacal"
-]
-of_the_space = ["of the Galaxy"]
-
-cosmic_descriptor = ["Gravitational"]
-
-# Horror
-horror_descriptor = ["Werevolve's"]
-
-# Guilds and Organizations
-guild_organizational_descriptor = ["Guild's"]
-# Flora and Natural Beauty
-flora_natural_beauty = ["Garden"]
-# Gases and Gaseous States
-gaseous_descriptor = ["Gas", "Gaseous"]
-# Legal and Judicial Objects
-legal_judicial_objects = ["Gavel"]
-# Artistic and Cultural
-artistic_cultural_descriptor = ["Harlequin", "Harpist", "Haunting"]
-# Cosmic and Stellar Phenomena
-cosmic_stellar_descriptor = ["Helian"]
-# Geographical Elevations
-geographical_elevations = ["High"]
-# Mythical and Legendary
-mythical_legendary_descriptor = ["Horned", "Homeric", "Icarian", "Immortal", "Impenetrable", "Invincible", "Jotunn", "Kraken's", "Krakenesque"]
-# Hunting and Wilderness
-hunting_wilderness_descriptor = ["Hunting", "Hunter's"]
-# Ghosts and Spirits
-ghost_spirit_descriptor = ["Ghost"]
-# Giants and Large Entities
-giant_large_entity_descriptor = ["Giant"]
-# Art and Creativity
-art_creativity_descriptor = ["Ink", "Inkwell", "Inkwork"]
-# Intellectual and Thoughtful
-intellectual_thoughtful_descriptor = ["Intellect", "Inquisitive", "Intrepid"]
-# Labs and Research Facilities
-lab_research_facilities = ["Lab", "Laboratory"]
-# Labyrinths and Complex Structures
-labyrinth_complex_structures = ["Labyrinth", "Labyrinth's", "Labyrinthine"]
-# Objects of Significance
-significant_objects = ["Amulet", "Grail", "Keep", "Last"]
-# Luminous and Radiant
-luminous_radiant_descriptor = ["Luminous", "Radiant", "Shining", "Sparkling", "Glowing"]
-# Liquid and Fluid
-liquid_fluid_descriptor = ["Liquid", "Fluid", "Flowing", "Rippling", "Wet"]
-# Time-related
-time_related_descriptor = ["Hourly", "Instantaneous", "Interim", "Momentary", "Temporal", "Timeless"]
-# Emotional States
-emotional_states_descriptor = ["Heartbroken", "Lonely", "Melancholic", "Mirthful", "Mischievous", "Nervous", "Pensive", "Perplexed", "Petrified", "Phlegmatic", "Piqued", "Pleased", "Plucky", "Poignant", "Proud", "Puzzled", "Quiet"]
-# Performers and Artists
-performers_artists_descriptor = ["Actor", "Artist", "Bard", "Composer", "Dancer", "Harpist", "Jester", "Juggler", "Lyrist", "Minstrel", "Musician", "Painter", "Performer", "Poet", "Sculptor", "Singer", "Storyteller", "Troubadour"]
-# Luminous and Radiant
-luminous_radiant_descriptor = ["Luminous", "Radiant", "Shining", "Sparkling", "Glowing"]
-# Liquid and Fluid
-liquid_fluid_descriptor = ["Liquid", "Fluid", "Flowing", "Rippling", "Wet"]
-# Time-related
-time_related_descriptor = ["Hourly", "Instantaneous", "Interim", "Momentary", "Temporal", "Timeless"]
-# Emotional States
-emotional_states_descriptor = ["Heartbroken", "Lonely", "Melancholic", "Mirthful", "Mischievous", "Nervous", "Pensive", "Perplexed", "Petrified", "Phlegmatic", "Piqued", "Pleased", "Plucky", "Poignant", "Proud", "Puzzled", "Quiet"]
-# Performers and Artists
-performers_artists_descriptor = ["Actor", "Artist", "Bard", "Composer", "Dancer", "Harpist", "Jester", "Juggler", "Lyrist", "Minstrel", "Musician", "Painter", "Performer", "Poet", "Sculptor", "Singer", "Storyteller", "Troubadour"]
-weather_atmospheric_descriptor = ["Blizzard", "Bloodmoon", "Boreal", "Dawnbringer"]
-# Mystical and Occult
-mystical_occult_descriptor = ["Cipher", "Clairvoyant", "Cloak", "Cobweb", "Cthulhu", "Deity", "Dimension", "Dissonance", "Dragonfire"]
-# Celestial and Astronomical
-celestial_astronomical_descriptor = ["Celestia", "Chrono", "Constellation", "Cosmos", "Crimson", "Darkstar"]
-# Marine and Aquatic
-marine_aquatic_descriptor = ["Coral", "Oceanic"]
-# Crystals and Minerals
-crystals_minerals_descriptor = ["Crystal", "Amethyst", "Quartz", "Topaz", "Xenolith"]
-# Weather and Atmospheric Phenomena
-weather_atmospheric_descriptor = ["Blizzard", "Bloodmoon", "Boreal", "Dusk", "Eclipse", "Horizon", "Hyperion", "Iceborn"]
-# Mystical and Occult
-mystical_occult_descriptor = ["Cipher", "Clairvoyant", "Cloak", "Cobweb", "Cthulhu", "Deity", "Dimension", "Dissonance", "Dragonfire", "Dreamweaver", "Elemental", "Elfstone", "Ember", "Ethereal", "Fable", "Fae", "Falcon", "Fenrir", "Feral", "Firebrand", "Flametongue", "Fulcrum", "Galaxy", "Gargoyle", "Gauntlet", "Ghoul", "Glitch", "Glyph", "Golem", "Grimoire", "Gryphon", "Guardianship", "Harbinger", "Hex", "Horizon", "Hydra", "Hyperion", "Iceborn", "Illusion", "Immortal", "Impulse", "Incantation", "Inferno", "Invoker", "Ion", "Iridescent", "Jester", "Juggernaut", "Kaleidoscope", "Kraken", "Leviathan", "Libra", "Lightbringer"]
-# Celestial and Astronomical
-celestial_astronomical_descriptor = ["Celestia", "Chrono", "Constellation", "Cosmos", "Crimson", "Darkstar", "Dimension", "Eclipse", "Galaxy", "Horizon", "Hyperion", "Star", "Stellar", "Zodiac"]
-# Marine and Aquatic
-marine_aquatic_descriptor = ["Coral", "Oceanic"]
-
+        name = name.title().strip()
+        return name
 
 
 
@@ -383,643 +152,1570 @@ def Title(npc):
     creature_type = npc.race + ' ' + npc.subrace + ' ' + npc.background
 
     #return f"The {random.choice(descriptor)} {random.choice(rank)} {random.choice(of_the)}"
-
-    descriptor = []
     rank = []
     of_the = []
-
-
-    # Adding to existing lists
-    color_descriptor = ["Golden", "Goldenrod", "Green"]
-    jewel_descriptor = ["Grail"]
-    metal_descriptor = ["Granite", "Graphite"]
-    loving_descriptor = ["Grateful"]
-    hate_descriptor = ["Gloomy", "Grieving"]
-    feelings_descriptor = ["Gleaming", "Glowing", "Great"]
-    of_the_monster = ["of the Griffon"]
-    location_descriptor = ["Gulf", "Garden", "Geyser", "Hamlet", "Harbor", "Heath", "Hedgerow", "Hill", "Hive"]
-    loving_descriptor = ["Happy"]
-    hate_descriptor = ["Heartbroken"]
-    feelings_descriptor = ["Gentle", "Harmonious", "Heart"]
-    secret_descriptor = ["Hermetic"]
-    hell_descriptor = ["Hell"]
-    guardian_rank = ["Heroic"]
-    elder_descriptor = ["Historic"]
-    space_descriptor = ["Heliospheric"]
-    of_the_hell = ["Hesperidean"]
-    location_descriptor = ["Hollow", "Island", "Islet", "Jungle", "Lake", "Lagoon"]
-    loving_descriptor = ["Hopeful", "Jovial", "Joyful", "Jubilant"]
-    hate_descriptor = ["Hostile", "Horrified", "Hungry", "Jealous", "Irate", "Irritated", "Jittery"]
-    feelings_descriptor = ["Indifferent", "Inspired", "Interested", "Intrigued"]
-    hell_descriptor = ["Infernal"]
-    guardian_rank = ["Hunter", "Hunter's"]
-    elder_descriptor = ["Homeric", "Jacobean"]
-    space_descriptor = ["Ionized"]
-    of_the_jewel = ["Jade"]
-    metal_descriptor = ["Iron"]
-    object_descriptor = ["Hourglass", "Key", "Lantern"]
-    noble_rank = ["Imperial", "Knightly", "Lady"]
-    secret_descriptor = ["Inscrutable", "Insidious"]
-    arcane_descriptor = ["Illusionist"]
-    hell_descriptor = ["Infernal"]
-    cosmic_stellar_descriptor = ["Interim"]
-    faith_church_heaven_religious = ["Holy"]
-    color_descriptor = ["Ivory", "Iridescent", "Lavender"]
-    # Adding to existing lists
-    location_descriptor = ["Loom", "Marketplace", "Mausoleum", "Maze", "Meadow",
-                            "Metropolis", "Mine", "Moor", "Morass", "Mountain", "Mountainous",
-                            "Museum", "Oasis", "Observatory", "Ocean", "Oceanic", "Orchard", "Outpost",
-                            "Palace", "Palm", "Park", "Pond", "Port", "Prairie", "Prison", "Pyramid", "River"]
-    nature_descriptor = ["Leafy", "Lush", "Mangrove", "Moss", "Muddy", "Pebble", "Petal", "Plum", "Pumpkin", "Purple"]
-    feelings_descriptor = ["Loyal", "Melancholic", "Merry", "Mindful", "Motivated", "Mournful", "Nervous",
-                            "Optimistic", "Outraged", "Panicked", "Passionate", "Pensive", "Perceptive", "Pleased",
-                            "Poetic", "Proud", "Quiet"]
-    space_descriptor = ["Lunar", "Magnetic", "Magnetospheric",
-                         "Meteor", "Meteoric", "Meteoritic", "Moon", "Moonlit", "Nebulous",
-                         "Nautical", "Nemesis", "Neon", "Nether", "Night", "Nocturnal", "Nova",
-                         "Orbital", "Pulsar"]
-    metal_descriptor = ["Mahogany", "Magma", "Marble", "Mustard", "Myrmidonic", "Obsidian",
-                         "Orb", "Platinum", "Pyro", "Quartz", "Quicksilver"]
-    arcane_descriptor = ["Magic", "Mystic", "Mystical", "Mythical", "Oracle", "Oracular", "Orphean",
-                          "Pegasus", "Phantasmal", "Phantom", "Pharaoh's", "Phoenix", "Phoenixian", "Phylactery",
-                          "Pirate's", "Plasma", "Promethean", "Prophetic", "Protector", "Pyramid"]
-    hell_descriptor = ["Malignant", "Malevolent"]
-    of_the_monster = ["Lich", "Minotaur", "Minotaurine", "Manticorian"]
-    object_descriptor = ["Lyre", "Medallion", "Mirror", "Phylactery"]
-    cosmic_stellar_descriptor = ["Luminous", "Magnetic", "Magnetospheric", "Meteor", "Meteoric", "Meteoritic",
-                                  "Mighty", "Miraculous", "Mistral"]
-    color_descriptor = ["Maroon", "Mauve", "Mulberry", "Mustard", "Olive", "Peach", "Pearl", "Plum", "Purple",
-                         "Radiant", "Rainbow", "Rosaline", "Rosy", "Ruby", "Sapphire"]
-    faith_church_heaven_religious = ["Holy", "Oracle", "Omniscient", "Oracular", "Promethean", "Prophetic", "Protector",
-                                      "Sage", "Sacred"]
-    elder_descriptor = ["Historic", "Homeric", "Jacobean", "Mesopotamian", "Millennial", "Myrmidonic", "Nordic", "Odin's",
-                         "Olympian", "Orphean", "Romanesque"]
-    loving_descriptor = ["Hopeful", "Loving", "Merry", "Optimistic", "Passionate", "Proud"]
-    hate_descriptor = ["Hostile", "Horrified", "Hungry", "Irate", "Irritated", "Jealous", "Jittery",
-                        "Outraged", "Panicked", "Ruthless"]
-    secret_descriptor = ["Hermetic", "Inscrutable", "Insidious", "Intriguing", "Intrigued", "Mysterious"]
-    guardian_rank = ["Guardian", "Paladin", "Protector", "Ranger"]
-    noble_rank = ["Emperor", "Governor", "King", "King's", "King of", "Kingly", "Kingdom's", "Lord", "Lordly",
-                   "Lord Of the", "Lord Of", "Master", "Monarch", "Noble", "Overlord", "Queen", "Queen of", "Queen's",
-                   "Regal", "Ruler", "Sovereign"]
-    legal_judicial_objects = ["Gavel"]
-    art_creativity_descriptor = ["Harlequin", "Harpist", "Haunting", "Poetic"]
-    intellectual_thoughtful_descriptor = ["Intellect", "Inquisitive", "Intrepid", "Mindful", "Perceptive"]
-    gaseous_descriptor = ["Gas", "Gaseous"]
-    flora_natural_beauty = ["Garden", "Leafy", "Lush", "Mangrove", "Moss", "Muddy", "Orchid", "Palm",
-                             "Pearl", "Petal", "Plum", "Pumpkin", "Purple", "Redwood", "Ribbon", "Rose",
-                             "Rosy", "Ruby", "Sapphire", "Tulip"]
-    wilderness_descriptor = ["Jungle", "Mangrove", "Marsh", "Marshy", "Meadow", "Moor", "Morass", "Mountain", "Mountainous", "Muddy", "Palm", "Prairie", "Savannah", "Tundra", "Wilderness"]
-    mythical_legendary_descriptor = ["Legendary", "Lich", "Lion-hearted", "Lupine", "Majestic", "Manticorian", "Mighty", "Minotaur", "Minotaurine", "Miraculous", "Monstrous", "Mythical", "Nemean", "Nordic", "Odin's", "Olympian", "Orphean", "Pegasus", "Phantom", "Phoenix", "Phoenixian", "Pirate's", "Promethean", "Protector"]
-    hunting_wilderness_descriptor = ["Hunter", "Hunter's", "Hunting", "Ranger"]
-    ghost_spirit_descriptor = ["Ghost", "Phantasmal", "Phantom", "Spirit", "Wraith"]
-    giant_large_entity_descriptor = ["Giant", "Goliath", "Mammoth", "Titan"]
-
-    color_descriptor = ["Scarlet", "Silver", "Tangerine", "Topaz", "Turquoise", "Violet", "Viridian", "White"]
-    nature_descriptor = ["Scenic", "Secluded", "Snowy", "Sultry", "Summer", "Swamp", "Sylvan", "Tropical", "Tundra", "Verdant", "Vibrant", "Wild"]
-    feelings_descriptor = ["Serene", "Sleepy", "Sly", "Soulful", "Splendid", "Stunning", "Sublime", "Tranquil", "Uplifting", "Vibrant", "Whimsical", "Wondrous", "Youthful"]
-    space_descriptor = ["Stellar", "Universal", "Galactic", "Celestial", "Cosmic"]
-    metal_descriptor = ["Sulfuric", "Silver"]
-    arcane_descriptor = ["Sorcerer's", "Spectral", "Spellbound", "Spirit", "Shamanic", "Shadowy", "Spellbound"]
-    hell_descriptor = ["Sinister", "Tartarean", "Sulfuric", "Ardent"]
-    object_descriptor = ["Spire", "Statue", "Stone", "Sword", "Thorn"]
-    cosmic_stellar_descriptor = ["Sky", "Star", "Stellar", "Sublime", "Supernatural", "Supreme",
-                                  "Temporal", "Timeless", "Titan", "Transcendent", "Twilight", "Ubiquitous", "Ultimate", "Uncharted", "Unearthly", "Unfathomable", "Unforgiving", "Universal", "Unseen", "Untamed"]
-    faith_church_heaven_religious = ["Celestial", "Cherubic", "Divine", "Elysian", "Ethereal", "Heavenly", "Holy", "Mythical", "Sacred", "Seraphic", "Spectral", "Spiritual", "Sublime", "Supernatural", "Supreme", "Temple", "Unseen", "Valkyrie's", "Venerable"]
-    elder_descriptor = ["Ancient", "Antique", "Archaic", "Elder", "Historic", "Legendary", "Mythic", "Old", "Timeless", "Venerable", "Vintage"]
-    loving_descriptor = ["Affectionate", "Alluring", "Ardent", "Charming", "Delightful", "Dreamy", "Enchanting", "Loving", "Romantic", "Sensual", "Sentimental", "Sultry"]
-    hate_descriptor = ["Baleful", "Belligerent", "Bitter", "Brutal", "Cruel", "Ferocious", "Fierce", "Fiery", "Furious", "Grim", "Harsh", "Hostile", "Malevolent", "Malign", "Menacing", "Merciless", "Ruthless", "Savage", "Sinister", "Stern", "Stormy", "Tartarean", "Terrifying", "Threatening", "Treacherous", "Turbulent", "Violent", "Villainous", "Vindictive", "Wicked", "Wrathful"]
-    secret_descriptor = ["Arcane", "Cryptic", "Enigmatic", "Esoteric", "Hidden", "Inscrutable", "Mysterious", "Mystical", "Occult", "Secret", "Shadowy", "Subtle", "Surreptitious", "Unseen", "Veiled"]
-    guardian_rank = ["Defender", "Guardian", "Keeper", "Protector", "Sentinel", "Vigilant", "Watchman", "Warden"]
-    noble_rank = ["Aristocratic", "Baronial", "Dignified", "Eminent", "Exalted", "Grand", "Honorable", "Imperial", "Kingly", "Lordly", "Majestic", "Noble", "Regal", "Royal", "Sovereign"]
-    legal_judicial_objects = ["Charter", "Code", "Decree", "Edict", "Law", "Legislation", "Mandate", "Ordinance", "Precept", "Regulation", "Rule", "Statute"]
-    art_creativity_descriptor = ["Artistic", "Creative", "Cultural", "Elegant", "Expressive",
-                                  "Imaginative", "Innovative", "Inspiring", "Intellectual", "Literary", "Poetic",]
-
-    color_descriptor = ["Gilded", "Golden-hearted", "Jade-eyed", "Opalescent", "Platinum"]
-    nature_descriptor = ["Frost-bound", "Lone", "Moonlit", "Mystical", "Nebula-born", "Oceanic", "Polar", "Solar", "Star-born", "Star-crossed", "Stellar", "Tempest", "Thunderous", "Twilight"]
-    feelings_descriptor = ["Fervent", "Fiery-eyed", "Flame-hearted", "Furious", "Harmonious", "Icy-hearted", "Imperious", "Impish", "Intense", "Jovial", "Mirthful", "Passionate", "Sanguine", "Sinister", "Sly", "Soulbound", "Sovereign", "Spellbinder", "Sphinx-like", "Spiritual", "Stealthy", "Sublime", "Supreme", "Swashbuckler", "Swift", "Swordmaster", "Timeless", "Unassailable", "Unbound", "Unconquerable", "Undaunted", "Unearthly", "Unfathomable", "Unflinching"]
-    space_descriptor = ["Interstellar", "Quasar", "Stargazer", "Stellar", "Time-bender", "Titanic"]
-    arcane_descriptor = ["Enchanting", "Mystical", "Oracle", "Orbiting", "Otherworldly", "Outlandish", "Pathfinder", "Phantasmal", "Profound", "Prophetic", "Prowler", "Purist", "Pyrotechnic", "Rune-carved", "Runewielder", "Sage", "Savage", "Scintillating", "Scorcher", "Seafarer", "Seer", "Sempiternal", "Shaman", "Shapeshifter", "Silent", "Sinister", "Sky-born", "Sly", "Solar", "Sorcerer", "Sovereign", "Spectral", "Spellbinder", "Sphinx-like", "Spiritual", "Star-born", "Star-crossed", "Stargazer", "Stealthy", "Stellar", "Stormbringer", "Strategist", "Sublime", "Sun-born", "Superb", "Supreme", "Swashbuckler", "Swift", "Swordmaster", "Tempest", "Thaumaturge", "Thunderous", "Time-bender", "Timeless", "Titanic", "Torchbearer", "Trailblazer", "Transcendent", "Tribal", "Trickster", "Twilight", "Tyrant", "Ubiquitous", "Unassailable", "Unbound", "Unconquerable", "Undaunted", "Unearthly", "Unfathomable", "Unflinching"]
-    hell_descriptor += ["Ferocious", "Fiery", "Fierce", "Flaming", "Forceful", "Foreboding", "Furious", "Gargantuan", "Ghostly", "Grim", "Inferno", "Maleficent", "Martial", "Meteoric", "Mighty", "Monolithic", "Monstrous", "Mysterious", "Nefarious", "Nimble", "Nocturnal", "Nomadic", "Notorious", "Ominous", "Outrageous", "Pandemonium", "Paradoxical", "Passionate", "Perilous", "Phantasmal", "Pillar", "Pioneering", "Pirate", "Polar", "Powerhouse", "Praetorian", "Precocious", "Predatory", "Preternatural",
-                         "Prime", "Prismatic", "Profound", "Prophetic", "Prowler", "Pulsating", "Purist", "Pyrotechnic", "Quasar", "Questing", "Quick-witted", "Quiet", "Radiant", "Raging", "Rainmaker", "Rampant", "Ranger", "Ravaging", "Rebel", "Reckoning", "Redoubtable", "Refined", "Regal", "Relentless", "Renegade", "Resolute", "Resounding", "Revered", "Rhapsodic", "Rogue", "Rune-carved", "Runewielder", "Sage", "Sanguine", "Savage", "Scintillating", "Scorcher", "Seafarer", "Seer", "Sempiternal", "Shadow", "Shaman", "Shapeshifter", "Silent",  "Sinister", "Sky-born", "Sly", "Solar", "Sorcerer", "Soulbound", "Sovereign", "Spectral", "Spellbinder", "Sphinx-like", "Spiritual", "Star-born", "Star-crossed", "Stargazer", "Stealthy", "Stellar", "Stormbringer", "Strategist", "Sublime", "Sun-born", "Superb", "Supreme", "Swashbuckler", "Swift", "Swordmaster", "Tempest", "Thaumaturge", "Thunderous", "Time-bender", "Timeless", "Titanic", "Torchbearer", "Trailblazer", "Transcendent", "Tribal", "Trickster", "Twilight", "Tyrant", "Ubiquitous", "Unassailable", "Unbound", "Unconquerable", "Undaunted", "Unearthly", "Unfathomable", "Unflinching"]
-    object_descriptor += ["Amulet", "Artifact", "Banner", "Chalice", "Crest", "Crown", "Emblem", "Ensign", "Flag", "Goblet", "Grail", "Icon", "Idol", "Jewel", "Key", "Lantern", "Medallion", "Orb", "Pendant", "Relic", "Rod", "Scepter", "Seal", "Sigil", "Standard", "Statue", "Stone", "Sword", "Talisman", "Token", "Totem", "Vase"]
-    cosmic_stellar_descriptor += ["Astral", "Celestial", "Cosmic", "Ethereal", "Galactic", "Interstellar", "Lunar", "Martian", "Mercurial", "Meteor", "Nebular", "Orbital", "Planetary", "Solar", "Space", "Starry", "Sublime", "Supernatural", "Universal"]
-    faith_church_heaven_religious += ["Angel", "Apostle", "Archangel", "Bishop", "Cardinal", "Chaplain", "Cleric", "Deacon", "Devout", "Disciple", "Divine", "Evangelist", "Faithful", "Friar", "Holy", "Imam", "Minister", "Missionary", "Monk", "Nun", "Pastor", "Patriarch", "Pilgrim", "Preacher", "Priest", "Prophet", "Rabbi", "Reverend", "Saint", "Savior", "Seer", "Shaman", "Shepherd", "Spiritual", "Theologian", "Vicar", "Zealot"]
-    elder_descriptor += ["Ageless", "Ancestral", "Ancient", "Antediluvian", "Antique", "Aristocratic", "Baronial", "Bygone", "Classical", "Elder", "Eternal", "Everlasting", "Historic", "Hoary", "Immortal", "Imperishable", "Infinite", "Long-standing", "Old", "Perennial", "Perpetual", "Primeval", "Primordial", "Time-honored", "Timeless", "Traditional", "Venerable", "Veteran", "Vintage"]
-    loving_descriptor += ["Adoring", "Affectionate", "Amorous", "Ardent", "Caring", "Cherishing", "Compassionate", "Devoted", "Enamored", "Fond", "Gentle", "Heartfelt", "Loving", "Passionate", "Romantic", "Sentimental", "Sweet", "Tender", "Warm", "Yearning"]
-    hate_descriptor += ["Abhorrent", "Acrimonious", "Angry", "Annoyed", "Antagonistic", "Apathetic", "Belligerent", "Bitter", "Contemptuous", "Cruel", "Cynical", "Detestable", "Disdainful", "Disgusted", "Enraged", "Fierce", "Furious", "Hateful", "Hostile", "Indignant", "Inimical", "Irate", "Irritable", "Jealous", "Loathsome", "Malevolent", "Malicious", "Nasty", "Odious", "Offensive", "Opposed", "Outraged", "Peeved", "Pernicious", "Piqued", "Rancorous", "Resentful", "Spiteful", "Sullen", "Vengeful", "Vindictive", "Virulent"]
-    color_descriptor += ["Gilded", "Golden-hearted", "Jade-eyed", "Opalescent", "Platinum"]
-    nature_descriptor += ["Flourishing", "Frost-bound", "Meadowborn", "Moonlit", "Nebula-born", "Oceanic", "Polar", "Solar", "Sun-born"]
-    feelings_descriptor += ["Fervent", "Fiery-eyed", "Flame-hearted", "Furious", "Gallant", "Glorious", "Graceful", "Greathearted", "Harmonious", "Heartfelt", "Heroic", "Hypnotic", "Illustrious", "Imaginative", "Impassioned", "Intense", "Jovial", "Joyous", "Judicious", "Keen", "Lauded", "Majestic", "Maleficent", "Martial", "Masterful", "Maverick", "Melodic", "Meteoric", "Mighty", "Miraculous", "Mirthful", "Monolithic", "Mysterious", "Mystical", "Mythical", "Nefarious", "Nimble", "Noble", "Nocturnal", "Nomadic", "Notorious", "Ominous", "Ornate", "Otherworldly", "Outlandish", "Outrageous", "Passionate", "Pathfinder", "Peerless", "Perilous", "Phantasmal", "Pillar", "Pioneering", "Predatory", "Preternatural", "Prime",
-                            "Prismatic", "Profound", "Prophetic", "Prowler", "Purist", "Quick-witted", "Radiant", "Raging", "Rebel", "Redoubtable", "Refined", "Regal", "Relentless", "Renegade", "Resilient", "Resolute", "Resounding", "Revered", "Rogue", "Rune-carved", "Runewielder", "Sage", "Sanguine", "Savage", "Scintillating", "Seafarer", "Seer", "Sempiternal", "Shaman", "Silent", "Sinister", "Sky-born", "Sly", "Sorcerer", "Sovereign", "Spectral", "Spellbinder", "Spiritual", "Star-born", "Star-crossed", "Stargazer", "Stealthy", "Stellar", "Stormbringer", "Strategist", "Sublime", "Superb", "Supreme", "Swashbuckler", "Swift", "Swordmaster", "Tempest", "Thaumaturge", "Thunderous", "Time-bender", "Timeless", "Titanic", "Torchbearer", "Trailblazer", "Transcendent", "Trickster", "Twilight", "Tyrant", "Ubiquitous", "Unassailable", "Unbound", "Unconquerable", "Undaunted", "Unearthly", "Unfathomable", "Unflinching", "Uplifting", "Valiant", "Venerable", "Vigilant", "Visionary", "Voracious", "Warrior", "Wise", "Wraith", "Wondrous"]
-    space_descriptor += ["Far-reaching", "Interstellar", "Quasar"]
-    metal_descriptor += ["Ironwill", "Platinum", "Steel-hearted"]
-    arcane_descriptor += ["Sorcerer's", "Spectral", "Spellbound", "Spirit", "Shamanic", "Shadowy", "Spellbound"]
-    hell_descriptor += ["Inferno", "Sinister", "Tartarean", "Fiery-eyed"]
-    object_descriptor += ["Amulet", "Blade", "Chalice", "Crown", "Orb", "Pendant", "Relic", "Scepter", "Shield", "Staff", "Talisman", "Totem", "Vessel", "Wand", "Weapon"]
-    cosmic_stellar_descriptor += ["Astral", "Celestial", "Cosmic", "Galactic", "Interstellar", "Lunar", "Planetary", "Solar", "Stellar", "Supernova", "Universal"]
-    faith_church_heaven_religious += ["Angelic", "Apostolic", "Ascetic", "Biblical", "Cherubic", "Clerical", "Devotional", "Divine", "Ecclesiastical", "Elysian", "Evangelical", "Heavenly", "Hierophant", "Hieratic", "Holy", "Messianic", "Ministerial", "Monastic", "Monk", "Mystic", "Nun", "Papal", "Parish", "Pastoral", "Patriarchal", "Pietistic", "Pontifical", "Preacher", "Priest", "Priestess", "Prophet", "Rabbinical", "Reverend", "Sacred", "Sage", "Saint", "Savior", "Sectarian", "Seraphic", "Shaman", "Shepherd", "Spiritual", "Theocratic", "Theological", "Vicar", "Virtuous"]
-    loving_descriptor += ["Affectionate", "Amorous", "Ardent", "Charming", "Compassionate", "Devoted", "Enamored", "Fond", "Gentle", "Heartfelt", "Intimate", "Kind", "Loving", "Passionate", "Romantic", "Sentimental", "Sweet", "Tender", "Warm", "Yearning"]
-    hate_descriptor += ["Abominable", "Acrimonious", "Aggressive", "Antagonistic", "Belligerent", "Bitter", "Brutal", "Cruel", "Detestable", "Envious", "Fierce", "Fiery", "Furious", "Hateful", "Hostile", "Indignant", "Inimical", "Irate", "Irritable", "Jealous", "Loathsome", "Malicious", "Malignant", "Menacing", "Nasty", "Odious", "Offensive", "Oppressive", "Outrageous", "Pernicious", "Pugnacious", "Rancorous", "Repugnant", "Resentful", "Ruthless", "Savage", "Spiteful", "Vengeful", "Vicious", "Vindictive", "Violent", "Virulent", "Vitriolic", "Wicked"]
-    secret_descriptor += ["Arcane", "Concealed", "Covert", "Cryptic", "Clandestine", "Discreet", "Elusive", "Enigmatic", "Esoteric", "Hidden", "Inscrutable", "Mysterious", "Mystic", "Occult", "Private", "Secretive", "Stealthy", "Subtle", "Surreptitious", "Undisclosed", "Unrevealed", "Veiled"]
-    guardian_rank += ["Custodian", "Defender", "Guardian", "Keeper", "Protector", "Sentinel", "Vigilant", "Warden", "Watchman"]
-    noble_rank += ["Aristocrat", "Baron", "Count", "Duke", "Earl", "Emperor", "King", "Knight", "Lady", "Lord", "Monarch", "Noble", "Prince", "Princess", "Queen", "Regent", "Royal", "Sovereign"]
-    legal_judicial_objects += ["Charter", "Code", "Decree", "Edict", "Law", "Legislation", "Mandate", "Ordinance", "Precept", "Regulation", "Rule", "Statute"]
-    art_creativity_descriptor += ["Artistic", "Creative", "Cultural", "Elegant", "Expressive", "Imaginative", "Innovative", "Inspiring", "Intellectual", "Literary", "Poetic", "Refined", "Sophisticated", "Stylish"]
-    intellectual_thoughtful_descriptor += ["Analytical", "Astute", "Brainy", "Cerebral", "Clever", "Educated", "Erudite", "Genius", "Intellectual", "Learned", "Logical", "Philosophical", "Rational", "Reasoned", "Sagacious", "Savvy", "Scholarly", "Shrewd", "Smart", "Sophisticated", "Thoughtful", "Wise"]
-    gaseous_descriptor += ["Aerial", "Airy", "Atmospheric", "Breezy", "Ethereal", "Gaseous", "Misty", "Vaporous", "Windy"]
-    flora_natural_beauty += ["Arboreal"]
-    color_descriptor += ["Gilded", "Golden-hearted", "Jade-eyed", "Opalescent", "Platinum"]
-    nature_descriptor += ["Frost-bound", "Meadowborn", "Moonlit", "Nebula-born", "Oceanic", "Polar", "Rainmaker", "Sky-born", "Star-born", "Sun-born", "Tempest"]
-    feelings_descriptor += ["Fervent", "Fiery-eyed", "Flame-hearted", "Furious", "Gallant", "Glorious", "Greathearted", "Harmonious", "Heavenly", "Hero", "Jovial", "Judicious", "Keen", "Lauded", "Leviathan", "Lionhearted", "Majestic", "Maleficent", "Martial", "Masterful", "Maverick", "Meteoric", "Mighty", "Miraculous", "Mirthful", "Misty", "Monstrous", "Mysterious", "Nefarious", "Nimble", "Noble", "Nocturnal", "Nomadic", "Notorious", "Ominous", "Outlandish", "Outrageous", "Passionate", "Pathfinder", "Peacekeeper", "Peerless", "Peregrine", "Perilous", "Pillar", "Pioneering", "Pirate", "Powerhouse", "Praetorian", "Precocious", "Predatory", "Preternatural", "Prime", "Profound", "Prophetic", "Prowler", "Pulsating", "Purist", "Pyrotechnic", "Questing", "Quick-witted", "Radiant", "Raging", "Rampant", "Ranger", "Ravaging", "Rebel", "Reckoning", "Redoubtable", "Refined", "Regal", "Relentless", "Renegade", "Resolute", "Resounding", "Revered", "Rogue", "Runewielder", "Sage", "Sanguine", "Savage", "Scintillating", "Scorcher", "Seafarer", "Seer", "Sempiternal", "Shadow", "Shaman", "Shapeshifter", "Sinister", "Sky-born", "Sly", "Solar", "Sorcerer", "Soulbound", "Sovereign", "Spectral", "Spellbinder", "Sphinx-like", "Spiritual", "Star-crossed", "Stargazer", "Stealthy", "Stellar", "Stormbringer", "Strategist", "Sublime", "Superb", "Supreme", "Swashbuckler", "Swift", "Swordmaster", "Thaumaturge", "Thunderous", "Time-bender", "Timeless", "Titanic", "Torchbearer", "Trailblazer", "Transcendent", "Tribal", "Trickster", "Twilight", "Tyrant", "Ubiquitous", "Unassailable", "Unbound", "Unconquerable", "Undaunted", "Unearthly", "Unfathomable", "Unflinching"]
-    space_descriptor += ["Interstellar", "Nebula-born", "Quasar", "Solar", "Stargazer", "Star-crossed", "Stellar"]
-    metal_descriptor += ["Platinum"]
-    arcane_descriptor += ["Oracle", "Orbiting", "Sorcerer", "Spectral", "Spellbinder", "Sphinx-like", "Spiritual", "Thaumaturge", "Time-bender", "Witch"]
-    hell_descriptor += ["Ferocious", "Fiery-eyed", "Flame-hearted", "Flaming", "Inferno", "Maleficent", "Sinister"]
-    object_descriptor += ["Amulet", "Goblet", "Grail", "Orb", "Pillar", "Scepter", "Statue", "Stone", "Sword", "Thorn", "Torch"]
-    cosmic_stellar_descriptor += ["Celestial", "Galactic", "Interstellar", "Lunar", "Nebula-born", "Quasar", "Solar", "Star-crossed", "Stargazer", "Stellar", "Sublime", "Supernatural", "Supreme", "Temporal", "Timeless", "Titanic", "Transcendent", "Twilight", "Ubiquitous", "Ultimate", "Uncharted", "Unearthly", "Unfathomable", "Unforgiving", "Universal", "Unseen"]
-    color_descriptor += ["Azure", "Verdant"]
-    nature_descriptor += ["Verdant", "Winterborn"]
-    feelings_descriptor += ["Valorous", "Venerable", "Vengeful", "Vigilant", "Vindictive", "Visionary", "Volatile", "Wicked", "Wild", "Wise", "Wrathful", "Yearning", "Zealot", "Zestful"]
-    space_descriptor += ["Alien", "All-Seeing", "Interstellar", "Stellar", "Zodiac"]
-    metal_descriptor += ["Alabaster", "Amethyst", "Xenolith"]
-    arcane_descriptor += ["Alchemist", "Archmage", "Aurora", "Bewitched", "Witch", "Wizard", "Wraithlike"]
-    hell_descriptor += ["Fiery", "Infernal", "Sulfuric", "Vengeful", "Wicked", "Wrathful"]
-    object_descriptor += ["Amulet", "Arcane", "Grimoire", "Orb", "Pillar", "Scepter", "Statue", "Stone", "Sword", "Talisman", "Thorn", "Torch", "Wand"]
-    cosmic_stellar_descriptor += ["Celestial", "Galactic", "Interstellar", "Lunar", "Nebula-born", "Quasar", "Solar", "Star-crossed", "Stargazer", "Stellar", "Sublime", "Supernatural", "Supreme", "Temporal", "Timeless", "Titanic", "Transcendent", "Twilight", "Ubiquitous", "Ultimate", "Uncharted", "Unearthly", "Unfathomable", "Unforgiving", "Universal", "Unseen", "Untamed"]
-    faith_church_heaven_religious += ["Celestial", "Cherubic", "Divine", "Elysian", "Ethereal", "Heavenly", "Holy", "Mythical", "Sacred", "Seraphic", "Spectral", "Spiritual", "Sublime", "Supernatural", "Supreme", "Temple", "Unseen", "Valkyrie's", "Venerable", "Zenith"]
-    elder_descriptor += ["Ancient", "Antique", "Archaic", "Elder", "Historic", "Legendary", "Mythic", "Old", "Timeless", "Venerable", "Vintage"]
-    loving_descriptor += ["Affectionate", "Alluring", "Ardent", "Charming", "Delightful", "Dreamy", "Enchanting", "Loving", "Romantic", "Sensual", "Sentimental", "Sultry"]
-    hate_descriptor += ["Baleful", "Belligerent", "Bitter", "Brutal", "Cruel", "Ferocious", "Fierce", "Fiery", "Furious", "Grim", "Harsh", "Hostile", "Malevolent", "Malign", "Menacing", "Merciless", "Ruthless", "Savage", "Sinister", "Stern", "Stormy", "Tartarean", "Terrifying", "Threatening", "Treacherous", "Turbulent", "Violent", "Villainous", "Vindictive", "Wicked", "Wrathful"]
-    secret_descriptor += ["Arcane", "Cryptic", "Enigmatic", "Esoteric", "Hidden", "Inscrutable", "Mysterious", "Mystical", "Occult", "Secret", "Shadowy", "Subtle", "Surreptitious", "Unseen", "Veiled"]
-    guardian_rank += ["Defender", "Guardian", "Keeper", "Protector", "Sentinel", "Vigilant", "Watchman", "Warden"]
-    noble_rank += ["Aristocratic", "Baronial", "Dignified", "Eminent", "Exalted", "Grand", "Honorable", "Imperial", "Kingly", "Lordly", "Majestic", "Noble", "Regal", "Royal", "Sovereign"]
-    legal_judicial_objects += ["Charter", "Code", "Decree", "Edict", "Law", "Legislation", "Mandate", "Ordinance", "Precept", "Regulation", "Rule", "Statute"]
-    art_creativity_descriptor += ["Artistic", "Creative", "Cultural", "Elegant", "Expressive", "Imaginative", "Innovative", "Inspiring", "Intellectual", "Literary", "Poetic", "Refined", "Sophisticated", "Stylish"]
-    intellectual_thoughtful_descriptor += ["Analytical", "Astute", "Brainy", "Cerebral", "Clever", "Educated", "Erudite", "Genius", "Intellectual", "Learned", "Philosophical", "Sage", "Scholarly", "Scientific", "Thoughtful", "Wise"]
-    gaseous_descriptor += ["Zephyrian"]
-    flora_natural_beauty += ["Flourishing", "Lush", "Luxuriant", "Verdant", "Zenith"]
-    wilderness_descriptor += ["Feral", "Forested", "Jungle", "Marshy", "Meadow", "Moorish", "Mountainous", "Savannah", "Tropical", "Tundra", "Wilderness", "Woodland"]
-    mythical_legendary_descriptor += ["Arcane", "Chimerical", "Dragon", "Ethereal", "Fabled", "Fairy", "Folkloric", "Legendary", "Mythic", "Mythological", "Nautical", "Nymph", "Olympian", "Otherworldly", "Phantasmagorical", "Spectral", "Supernatural", "Unearthly"]
-    hunting_wilderness_descriptor += ["Falcon-eyed", "Hunter", "Huntsman", "Ranger", "Stalker", "Tracker", "Trapper"]
-    ghost_spirit_descriptor += ["Ectoplasmic", "Ghostly", "Phantasmal", "Spectral", "Spirit", "Wraith"]
-    giant_large_entity_descriptor += ["Behemoth", "Colossal", "Gargantuan", "Giant", "Juggernaut", "Leviathan", "Mammoth", "Titan", "Tremendous"]
-    color_descriptor += ["Bloodmoon", "Boreal", "Celestia", "Crimson"]
-    nature_descriptor += ["Blizzard", "Boreal", "Coral"]
-    feelings_descriptor += ["Chaotic", "Dire"]
-    space_descriptor += ["Celestia", "Chrono", "Constellation", "Cosmos", "Darkstar"]
-    arcane_descriptor += ["Cipher", "Clairvoyant", "Cloak", "Cobweb", "Crystal", "Cthulhu", "Deity", "Dimension", "Dragonfire", "Dawnbringer"]
-    object_descriptor += ["Cloak", "Cobweb", "Crypt", "Crystal"]
-    cosmic_stellar_descriptor += ["Celestia", "Chrono", "Constellation", "Cosmos", "Crimson", "Darkstar", "Dimension"]
-    faith_church_heaven_religious += ["Celestia", "Deity"]
-    hell_descriptor += ["Crimson", "Dire", "Dissonance"]
-    secret_descriptor += ["Cipher", "Cloak", "Crypt"]
-    gaseous_descriptor += ["Cosmos"]
-    flora_natural_beauty += ["Coral"]
-    wilderness_descriptor += ["Boreal"]
-    mythical_legendary_descriptor += ["Celestia", "Cthulhu", "Darkstar", "Deity", "Dragonfire"]
-    hunting_wilderness_descriptor += ["Dragonfire"]
-    ghost_spirit_descriptor += ["Cloak", "Crypt", "Cthulhu"]
-    giant_large_entity_descriptor += ["Cthulhu"]
-    color_descriptor += ["Dusk", "Eclipse", "Ethereal", "Iridescent"]
-    nature_descriptor += ["Dusk", "Eclipse", "Elysium", "Fathom", "Fenrir", "Feral"]
-    feelings_descriptor += ["Ethereal", "Feral", "Immortal"]
-    space_descriptor += ["Eclipse", "Galaxy", "Horizon", "Hyperion"]
-    arcane_descriptor += ["Dreamweaver", "Elemental", "Elfstone", "Ember", "Fable", "Fae", "Falcon", "Fenrir", "Firebrand", "Flametongue", "Fulcrum", "Gauntlet", "Ghoul", "Glitch", "Glyph", "Golem", "Grimoire", "Gryphon", "Guardianship", "Harbinger", "Hex", "Hydra", "Iceborn", "Illusion", "Impulse", "Incantation", "Inferno", "Invoker", "Ion", "Jester", "Juggernaut", "Kaleidoscope", "Kraken", "Leviathan", "Libra", "Lightbringer"]
-    object_descriptor += ["Elfstone", "Ember", "Falcon", "Gauntlet", "Ghoul", "Glitch", "Glyph", "Golem", "Grimoire", "Gryphon", "Hex", "Horizon", "Hydra", "Iceborn", "Illusion", "Incantation", "Inferno", "Invoker", "Ion", "Jester", "Juggernaut", "Kaleidoscope", "Kraken", "Leviathan", "Libra", "Lightbringer"]
-    cosmic_stellar_descriptor += ["Eclipse", "Galaxy", "Horizon", "Hyperion"]
-    faith_church_heaven_religious += ["Elysium", "Immortal"]
-    hell_descriptor += ["Fenrir", "Feral", "Firebrand", "Ghoul", "Hydra", "Inferno"]
-    secret_descriptor += ["Dreamweaver", "Elemental", "Elfstone", "Fable", "Fae", "Fenrir", "Ghoul", "Glitch", "Glyph", "Golem", "Grimoire", "Gryphon", "Harbinger", "Hex", "Hydra", "Illusion", "Incantation", "Inferno", "Invoker"]
-    gaseous_descriptor += ["Ion"]
-    flora_natural_beauty += ["Elysium"]
-    wilderness_descriptor += ["Fathom", "Fenrir", "Feral"]
-    mythical_legendary_descriptor += ["Elemental", "Elfstone", "Fae", "Fenrir", "Firebrand", "Flametongue", "Fulcrum", "Gargoyle", "Ghoul", "Golem", "Grimoire", "Gryphon", "Harbinger", "Hex", "Hydra", "Hyperion", "Iceborn", "Immortal", "Impulse", "Incantation", "Inferno", "Invoker", "Ion", "Jester", "Juggernaut", "Kaleidoscope", "Kraken", "Leviathan", "Lightbringer"]
-    hunting_wilderness_descriptor += ["Falcon", "Fenrir", "Feral", "Firebrand", "Flametongue", "Gargoyle", "Ghoul", "Golem", "Gryphon", "Hydra", "Juggernaut", "Kraken", "Leviathan"]
-    ghost_spirit_descriptor += ["Fable", "Fae", "Ghoul", "Grimoire", "Gryphon", "Harbinger", "Hex", "Hydra", "Illusion", "Incantation", "Inferno"]
-    giant_large_entity_descriptor += [ "Ghoul", "Golem", "Gryphon", "Juggernaut", "Kraken", "Leviathan"]
-
-
-    descriptor += [
-    # Generic Descriptors
-        "Enigmatic",
-        "Thousand",
-        "Hundred",
-        "Only",
-        "Second",
-        "First",
-        "Seventh",
-        "Last",
-
-        "Curse"
-        
-        "Lorekeeper",
-        "Lunar",
-        "Lycan",
-        
-
-        "Maelstrom",
-        "Magma", "Mandrake", "Manticore", "Marauder", "Matrix",    "Mecha", "Meld",
-        "Merlin", "Mimic", "Mirage", "Mistwalker", "Monolith", "Moonshade", 
-        "Mystique", "Nebula", "Nemesis", "Nether", "Nexus", "Nightshade", "Nimbus",
-        "Nirvana", "Nova", "Oblivion", "Omen", "Onyx", "Oracle", "Orbit", "Ouroboros", 
-        "Pandemonium", "Paradox", "Phantasm", "Phoenix", "Pirate", "Plasma", "Portal",
-        "Potion", "Prowler", "Psion", "Quantum", "Quasar", "Quest", "Quicksilver", 
-        "Radiance", "Ragnarok", "Reaper", "Reckoner", "Redwood", "Revenant", "Rift", "Rime",
-        "Rune", "Saga", "Sage", "Sanguine", "Savant", "Scarab", "Scion", "Serpent", "Shadow", 
-        "Shaman", "Siren", "Solstice", "Sorcery", "Soulfire", "Specter", "Sphinx", "Spire",
-        "Spirit", "Starfall", "Stormcaller", "Sunder", "Sunflare", "Supernova", "Synthesis", 
-        "Terra", "Thorn", "Thunder", "Timekeeper", "Titan", "Totem", "Trance", "Transcend",
-        "Tribunal", "Twilight", "Undertow", "Universe", "Utopia","Valkyrie","Vapor","Vendetta",
-        "Aegean", "Amazon's", "Amazonian", "Archipelago", "Asgardian", "Atlantean", "Aztec",
-        "Bay", "Beach", "Beachy",
-        "Garden", "Gas", "Gaseous", "Gulf",
-        "Gorge", "Gorgonian", "Grassland",
-        "Graveyard", "Green", "Grove",
-        "Guild's", "Hamlet",
-        "Harbor", "Heart", "Heath",
-        "Hedgerow", "Helian",
-        "Heliospheric",
-        "Hill", "Hive", "Hollow",
-        "Homeric", "Horned", "Hourly",
-        "Hourglass", "Hunting", "Ice",
-        "Icicle", "Icy",    "Ink",
-        "Inkwell", "Inkwork", "Inn's",
-        "Island", "Islet", "Isolated", "Jungle",
-        "Keep", "Key", "Lab", "Laboratory",
-        "Labyrinth", "Labyrinth's",
-        "Labyrinthine", "Lagoon",
-        "Lake", "Lantern", "Last", "Leafy",
-        "Legendary",
-        "Lethal",
-        "Library",
-        "Lich",
-        "Life",
-        "Lightning",
-        "Lion-hearted",
-        "Liquid",
-        "Lively",
-        "Living",
-        "Lizard",
-        "Lonely",
-        "Long",
-        "Loom",
-        "Looming",
-        "Lordly",
-        "Lord Of the",
-        "Lord Of",
-        "Lost",
-        "Love Of",
-        "Loyal",
-        "Luminous",
-        "Lunar",
-        "Lupine",
-        "Lush",
-        "Lustrous",
-        "Luxurious",
-        "Lyre", "Magic", "Magma",
-        "Magnetic", "Magnetospheric", "Mahogany", "Majestic", "Malignant", "Malevolent", "Mammoth",
-        "Mangrove", "Mantle", "Manticorian", "Marble", "Marine", "Marketplace", "Marsh", "Marshy",
-        "Marvelous", "Master", "Matinal", "Mausoleum", "Maze", "Meadow", "Medallion", "Meditative",
-        "Medusian", "Melancholic", "Menagerie", "Menacing", "Mental", "Mercurial", "Merry",
-        "Mesopotamian", "Meteor", "Meteoric", "Meteoritic", "Metropolis", "Midnight", "Mighty",
-        "Militant", "Millennial", "Mindful", "Mine", "Minotaur", "Minotaurine", "Miraculous",
-        "Mirror", "Mirthful", "Mischievous", "Mist", "Mistral", "Misty", "Molten", "Monastic",
-        "Monastery", "Monolithic", "Monstrous", "Momentary",  "Moor", "Morass",    "Moss",
-        "Motivated", "Mountain", "Mountainous", "Mournful", "Muddy", "Mulberry", "Mummy",
-        "Museum", "Mustard", "Mutant", "Myrmidonic", "Mysterious", "Mystic", "Mystical",
-        "Mythical",    "Nautical", "Nebulous", "Nemean", "Nemesis", "Neon", "Nether", "Night",
-        "Noble", "Nocturnal",
-        "Nomadic", "Nordic", "Notorious", "Nova", "Oasis", "Observatory", "Obsidian", "Obsolete",
-        "Ocean", "Oceanic", "Odin's", "Olympian", "Optimistic", "Opulent", "Oracular", "Orb", 
-        "Orbital", "Orchard", "Orchid", "Ornate", "Orphean", "Outlandish", "Outpost", "Outraged",
-        "Overgrown", "Owl's", "Palace", "Palm", "Palatial", "Parched", "Parliament", "Pastoral",
-        "Peaceful", "Pearlescent", "Peat", "Pebble", "Pegasus", "Penitentiary", "Perfumed",
-        "Perilous", "Perpetual", "Petrified", "Phantom", "Phoenix", "Pine", "Pinnacle", "Pirate's",
-        "Placid", "Planetary", "Plant", "Plateau", "Platinum", "Pleasant", "Plum", "Polar",
-        "Ponderous", "Poppy", "Porcelain", "Portal", "Port", "Potent", "Prairie", "Precious",
-        "Predator", "Primeval", "Primordial", "Prince's", "Princely", "Princess", "Prismatic",
-        "Prison", "Private", "Profound", "Prosperous", "Protected", "Proud", "Pumpkin", "Pungent",
-        "Pure", "Purple", "Pyramid", "Quartz", "Queen's", "Quicksand", "Quiet", "Quill",
-        "Radiant", "Raging", "Rainbow", "Rainforest", "Rampart", "Ranger's", "Ravaged", "Raven",
-        "Rebel", "Reclusive", "Red", "Regal", "Relic", "Remnant", "Remote", "Renegade", "Resplendent",
-        "Restless", "Revered", "Rhombus", "Rich", "Riddle", "Rift", "Righteous", "River", "Roaming",
-        "Robotic", "Rock", "Rocky", "Rogue", "Rose", "Royal", "Ruby", "Rugged", "Ruined", "Runic",
-        "Rural", "Rustic", "Rusty", "Sacred", "Sad", "Sage", "Sapphire", "Savage", "Scarlet",
-        "Scenic", "Scented", "Scholar's", "School", "Scorching", "Secluded", "Secret", "Seductive",
-        "Selenian", "Semi-Precious", "Serpent's", "Serpentine", "Settler's", "Shadowy", "Shady",
-        "Shallow", "Shaman's", "Shattered", "Shepherd's", "Shielded", "Shimmering", "Shining",
-        "Shivering", "Shrine", "Sickly","Vengeance","Vertex","Vesper","Vex","Vindicator",
-        "Virtuoso","Visage","Void","Vortex","Warden",
-
-        "Warp","Watcher", "Whirlwind","Wildfire","Willow","Wisp","Witcher","Wizardry","Wraith",
-        "Wyvern", "Xenon",        "Ubiquitous"        "Ultramarine",        "Unemotional","Unhappy",        "Universal",
-        "Unstoppable",        "Unyielding",        "Uranian",        "Urn",           "Ursine",
-        "Mantle",        "Radiant",
-        "Vessel",                       "Epochal",        "Twilight",        "Primeval",
-        "Compass",        "Millennial",        "Meridian",        "Hammer",
-        "Eternal",        "Fleeting",             "Black Hole",           "Meteoritic",
-        "Edwardian",            "Samurai",            "Cosmic",           "Nebulous",   
-        "Norman",           "Orbital",           "Han",           "Orbital",
-        "Gregorian",           "Renaissance",        "Spartan",           "Prohibition",    
-        "Crusader",         "Hellenistic",           "Sanskrit",            "Dynastic",
-        "Flapper",           "Napoleonic",           "Pharaonic",   
-        "Interstellar",            "Elizabethan",          "Feudal",           "Age",
-        "Cyclic",          "Timeless",         "Neutron",                "Punctual",
-        "Quill",                        "Bygone",        "Banner",        "Blade",
-        "Brooch",        "Buccaneer",
-        "Byzantine",        "Bat",        "Bipedal",        "Black",        "Blending",
-        "Blood",        "Brass",        "Brave",        "Bursting",
-        "Butterfly",        "Byzantine",                "Chiropteran",        "Crested",
-        "Curse",        "Cursed",        "Celestial",
-        "Celtic",         "Cat",        "Celestial",        "Collector",        "Conjurer",
-        "Coral",        "Cosmic",        "Crimson",        "Desert",
-        "Daemonian",        "Dawn",        "Draconic",        "Dimensional",        "Eldritch",
-        "Eclipse",        "Eagle",        "Eagle's",        "Edo",
-        "Eternal",        "Extraterrestrial",          "Fountain",        "Fanged",
-        "Feathered",        "Feline",        "Finned",        "Fire-breathing",
-        "Fuchsia",        "Feather",           "Fiery",        "Hermitage",        "Horned",
-        "Incan",         "Icy",        "Indigo",        "Infinite",        "Lion-hearted",
-        "Lion's",        "Leechy",        "Luminous",
-        "Lunar",                "Medieval",         "Mammalian",        "Maned",
-        "Masked",        "Melancholy",        "Mermaid-tailed",
-        "Mist",        "Misty",        "Minotaur's",        "Momentary",        "Moonlit",
-        "Mountain",        "Mysterious",        
-        "Nebulous",        "Necromancer",        "New",        "Nightmare",        "Noble",
-        "Nemean",        "Nomadic",        
-        "Old",        "Ophidian",        "Orange",        "Orb",        "Owl",
-        "Ottoman",        "Oceanic",        "Olympian",
-        "Pain",        "Paladin",        "Passionate",        "Pawed",
-        "Pegasus-winged",        "Piscine",
-        "Pirate's",        "Plague",        "Poisonous",        "Powder",
-        "Power",        "Punk",        "Purifying",
-        "Pyramid's",        "Phalanx",        "Quasar",                "Radiant",
-        "Rainstorm",
-        "Raptor",        "Raven",        "Red",        "River",        "River's"
-        "Rogue",        "Ruby",        "Rune",
-        "Runer",         "Renaissance",        "River",        "Radiant",
-        "Rainforest",        "Ranch",        "Raspberry",        "Rat",
-        "Ravine",        "Ravishing",        "Reckless",        "Reef",
-        "Relaxed",        "Relentless",        "Relic",           "Reptilian",
-        "Resentful",        "Resilient",        "Restless",        "Reverent",
-        "Ridge",        "River",        "Riverine",
-        "Rocky",        "Romantic",        "Rooted",        "Rose",        "Ruby",
-        "Ruins",        "Rust",        "Ruthless",
-        "Romanesque",        "Sand",        "Scaled",        "Science",
-        "Second",        "Serpentine",        "Serpent's",
-        "Seventh",        "Shadow",        "Shaman's",        "Shark-toothed",
-        "Shell-backed",        "Silver",        "Simian",
-        "Skeleton",        "Smiling",        "Smoke",        "Snail-shelled",
-        "Solar",        "Sorcerous",        "Spark",        "Speaker",
-        "Spell",        "Sphinx",        "Spined",        "Spring",
-        "Stars",        "Starting",        "Steam",        "Stone",
-        "Storm",        "Strong",        "Summer",        "Sun Stone's",
-        "Sunstone",        "Silent",        "Sirenic",        "Solar",
-        "Stellar",        "Stoic",        "Swift",        "Sword",
-        "Sphinx's ",        "Scarlet",        "Stinger",     
-        "Sacred",        "Sad",        "Salmon",        "Sanctuary",
-        "Sandy",        "Sapphire",        "Satisfied",        "Satyric",
-        "Savage",        "Savanna",        "Savannah",        "Scarlet",
-        "School",        "Scrub",        "Sea",        "Seashore",
-        "Secular",        "Seismic",        "Serene",        "Sewer",
-        "Seychelle",        "Shaded",        "Shadowy",        "Shore",
-        "Shrine",        "Sienna",        "Sigil",        "Silent",
-        "Silver",        "Sirenian",        "Slate",        "Slimey",
-        "Solar",        "Sorrowful",        "Sparkling",        "Spectral",
-        "Sprouting",        "Square",        "Stadium",        "Stalwart",
-        "Starlit",        "Steadfast",        "Steamy",        "Stellar",
-        "Steppe",        "Stern",        "Stoic",        "Stone",
-        "Strait",        "Stratospheric",        "Stream",        "Stressed",
-        "Studio",        "Stygian",        "Subterranean",
-        "Sunlit",        "Supernova",        "Suspicious",        "Swamp",
-        "Swampy",        "Sword",        "Sylvan",        "Sympathetic",
-        "Swift",        "Scepter",                 "Staff",        "Shield",
-        "Spire",        "Scroll",
-        "Satellite",        "Seasonal",        "Stellar",
-        "Temporal",         "Tailed",        "Tamer of",        "Tentacled",
-        "Third",        "Thunder",        "Tiger",        "Tigerstrip",
-        "Titan",        "Tomb",        "Trival",        "True",
-        "Turquoise",        "Tartarean",        "Thundering",
-        "Timeless",       "Titanic",        "Trojan",
-        "Totem's",        "Troll's",        "Tailed",
-        "Talon",
-        "Tangerine",
-        "Tapestry",
-        "Taupe",
-        "Tavern",
-        "Tawny",        "Teal",        "Tectonic",        "Tempestuous",
-        "Temple",        "Tenacious",        "Tender",        "Terrified",
-        "Theater",        "Thicket",        "Thorny",        "Thundering",
-        "Tidal",        "Tide",        "Timely",        "Tomb",
-        "Topaz",        "Totem",        "Tower",        "Town",
-        "Transient",        "Tusked",        "Tudor",        "Tundra",
-        "Tunnel",        "Turquoise",        "Twilight",        "Twisted",
-        "Typhoon",        "Traveling",        "Undying",
-        "Underworld",        "Ultraviolet",        "Valiant",
-        "Valley",        "Vanirian",
-        "Vapor",        "Vampiric",
-        "Vampire's",        "Valkyrian",
-        "Valkyrie's",        "Vengeful",
-        "Venomous",        "Veteran",
-        "Victorian",        "Victorious",
-        "Viking",           "Violet",
-        "Voice",        "Void",
-        "Voidborne",        "Vulpine",
-        "Vellum",        "Venusian",
-        "Verdant",        "Vermilion",
-        "Vernal",        "Vexing",
-        "Vibrant",        "Vigilant",
-        "Village",        "Vine",
-        "Volcanic",        "Volcano",
-        "Voracious",        "Vulcanian",
-        "Vecna's",        "Vesperal", 
-        "Vintage",         "Victorian",  
-        "Voidless",              "Windy",
-        "Winged",        "Witchy",
-        "Withering"        "Woodland",
-        "Woods",        "Woody",
-        "Workshop",        "Worried",
-        "Winged",        "Wandering",
-        "Warm",        "Wary",
-        "Watery",        "Wavy",
-        "Web",        "Wheelbraker",
-        "Whispering",        "Whistle"
-        "Warping",        "Water",
-        "Whale",        "White",
-        "Wild",        "Wise",
-        "Wolf",        "Wolf's"
-        "Wrathful",        "Wight",
-        "Western",         "X-ray",  
-        "Yesteryear",          "Young",
-        "Zen",        "Zeusian"
-        "Joyful","Zealous",        
-"Zenith","Zephyr",
-"Zombie","Zombie's",
-"Zone","Zoo", 
-"Zypher",        "Antediluvian",
-        "Anvil",        "Antlered",
-        "Apprehensive",        "Aprendice",
-        "Aquatic",        "Archaic",
-        "Arctic",        "Ardent",
-        "Arena",        "Arch",
-        "Archfey",        "Ardent",
-        "Arena's",        "Arrogant",
-        "Arachnid",        "Austere",
-        "Avatar",        "Awakened",
-        "Badger",        "Baobab's",
-        "Barracks",        "Barren",
-        "Bearded",        "Behemoth",
-        "Benevolent",        "Beryl",
-        "Bitter",        "Blazing",
-        "Blooming",        "Blossoming",
-        "Blue",
-        "Boar's",
-        "Boastful",        "Bog",
-        "Boggy",        "Bone",
-        "Book",        "Booming",
-        "Bountiful",        "Boastful",
-        "Bramble",        "Brain",
-        "Brave",        "Brimstone",
-        "Bronce",        "Bronze",
-        "Brook",        "Brown",
-        "Bridge",        "Brush",
-        "Buccaneer",        "Budding",
-        "Burgundy",        "Burned",
-        "Bygone"
-    ]
-
-    rank += [
-        "Apparition",    "Aprentice",
-        "Archer",        "Archfey",
-        "Archmage",        "Argonaut",
-        "Armour",        "Arrow",
-        "Artisan",        "Ash",
-        "Assassin",        "Abyss",
-        "Abyssal",        "Abbot",
-        "Abbess",        "Acolyte",
-        "Admiral",        "Adventure",
-        "Adventurer",        "Afterlifer",
-        "Aero",        "Agent",
-        "Alchemist",        "Alpha",
-        "Ambassador",        "Anarchist",
-        "Angel",        "Anthropologist",
-        "Antler",        "Apostle",
-        "Apparition",        "Apprentice",
-        "Archer",        "Archfey",
-        "Archbishop",        "Archmage",
-        "Argonaut",        "Armour",
-        "Arrow",        "Artisan",
-        "Ash",        "Assassin",
-        "Atlas",        "Augur",
-        "Avatar",
-        ]
-    descriptor += [
-
-
-        # C
-        "Calm",        "Camp",
-        "Canary",        "Candle",
-        "Canopy",        "Canyon",
-        "Capricious",        "Castle",
-        "Catacomb",        "Cathedral",
-        "Cautious",        "Cave",
-        "Cavern",        "Cavernous",
-        "Celestial",        "Cemetery",
-        "Cerulean",        "Celtic",
-        "Chained",        "Chalice",
-        "Champagne",        "Champion of",
-        "Chaotic",        "Chapel",
-        "Charcoal",        "Chasm",
-        "Chest",        "Cherished",
-        "Chimeric",        "Chivalrous",
-        "Chocolate",        "Chronal",
-        "Chain",        "Cheerful",
-        "Chief",        "Circus",
-        "Citadel",        "City",
-        "Cliff",        "Clockwork",
-        "Coast",        "Cobalt",
-        "Cold",        "Colonial",
-        "Colossal",        "Compassionate",
-        "Confident",        "Confused",
-        "Copper",        "Coppice",
-        "Coral",        "Cobalt",
-        "Crab",        "Crater",
-        "Crescent",        "Crimson",
-        "Crown",        "Cryptic",
-        "Crystalline",        "Crown's",
-        "Cunning",        "Curious",
-        "Cursed",        "Cyan",
-        "Cyclonic",        "Cyclopean",
-        "Cyclops",        "Dark",
-        "Darkness",        "Dashing",
-        "Dated",        "Dauntless",
-        "Dawn",        "Dawning", 
-        "Deadly",        "Death",
-        "Deep",        "Delta",
-        "Depressed",        "Desert",
-        "Desolate",        "Despondent",
-        "Desperate",        "Detached",
-        "Detective",        "Dewy",
-        "Diabolical",        "Diadem",
-        "Dimensional",        "Disappointed",
-        "Discouraged",        "Distrustful",
-        "Diurnal",        "Divine",
-        "Diviner",        "Doctor",
-        "Dormant",        "Dock",
-        "Draconian",        "Dragon's",
-        "Drained",        "Dream",
-        "Driftwood",        "Dune",
-        "Dungeon",        "Dusk",
-        "Dusky",        "Dust",
-        "Dynamic",                "Eager",
-        "Eagle",        "Earth",
-        "Earthen",        "Ebony",
-        "Eclipsed",        "Eclipsing",
-        "Ecliptic",        "Ecstatic",
-        "Edgy",        "Egotistic",
-        "Electric",        "Elegant",
-        "Eloquent",        "Elusive",
-        "Eldritch",        "Elven",
-        "Elixir",        "Emerald",
-        "Empathetic",        "Enchanted",
-        "Energetic",        "Energy",
-        "Engine",        "Enigmatic",
-        "Enthusiastic",        "Envious",
-        "Ephemeral",        "Errant",
-        "Erratic",        "Equinox",
-        "Ethereal",
-        "Euphoric",        "Evanescent",
-        "Excited",        "Exotic",
-        "Extravagant",
-        "Exuberant",        "Exhausted",
     
-        "Fabled",
-      "Faerie",
-       "Fairground",
-        "Faithful",
-        "Falcon",
-        "Fallen",
-        "Fanciful",
-        "Fanged",        "Farm",
-        "Fearful",        "Feathered",
-        "Fen",        "Fenririan",
-        "Ferocious",
-        "Fervent",        "Field's",
-        "Fierce",        "Fiery",
-        "Fire",        "First",
-        "Fjord",        "Flame",
-        "Flaming",        "Floral",
-        "Flying",        "Fleshwork",
-        "Fool",        "Forest",
-        "Forge",        "Formidable",
-        "Fortress",        "Fountain",
-        "Frosty",        "Frozen",
-        "Frustrated",        "Fuchsia",
-        "Fullmetal",
-        "Fullmoon",        "Furious",
-        "Furred",        "Fury",
-        "Futuristic", ]
+    descriptor = []
+
+    descriptor += [      
+"Amulet",
+"Alpha",
+"Alcoholic",
+"Aegean",
+"Amazon's",
+"Amazonian",
+"Archipelago's",
+"Asgardian",
+"Atlantean",
+"Aztec",
+"Arcane",
+"Alchemical",
+"Apothecary",
+"Arcanic",
+"Arcane",
+"Alchemical",
+"Apothecary",
+"Arcanic",
+"Atmospheric",
+"Ageless",
+"Anachronistic",
+"Ancestral",
+"Ancient",
+"Atemporal",
+"Age-old",
+"Ancestral",
+"Ancient",
+"Antediluvian",
+"Antique",
+"Archaic",
+"Amulet",
+"Alien",
+"Astral",
+"Autumn",
+
+"Blind",
+"Battle",
+"Battle's",
+"Battleground",
+"Badland",
+"Babylonian",
+"Bay",
+"Beach",
+"Beachy",
+"Baroque",
+
+"Commander",
+"Climatic",
+"Condor's",
+'Celestial',
+
+"Empty",
+
+"Frostbite",
+"Frostfire",
+
+"Guardian's",
+"Guardian of",
+"Guard",
+"Guardian",
+"Gladiator",
+"Gallant",
+"Generous",
+"Glacial",
+"Glade's",
+"Gorgonian",
+"Grassland's",
+"Gulf's",
+"Garden's",
+"Geyser's",
+"Glade",
+"Gorge",
+"Grassland",
+"Graveyard",
+"Grove",
+"Glacial",
+"Glacier",
+"Guild's",
+"Garden",
+"Gas",
+"Gaseous",
+"Gavel",
+
+"Harbor's",
+"Hill's",
+"Hollow",
+"Harlequin",
+"Harpist",
+"Haunting",
+"Helian",
+"High",
+"Horned",
+"Homeric",
+
+"Island",
+"Islet",
+"Icy",
+"Ice",
+"Icicle",
+
+"Kind",
+"Keeper",
+"Knightly",
+"Kraken's",
+"Krakenesque",
+"Kraken",
+"King",
+"King's",
+"King of",
+"Kingly",
+"Kingdom's",
+
+"Leviathan",
+
+"Marsh",
+"Marshy",
+"Meadow",
+"Mine",
+"Moor",
+"Morass",
+"Moss",
+"Mountain",
+"Mountainous",
+"Muddy",
+"Museum",
+"Mad",
+"Mage",
+"Mage's",
+"Mage",
+"Mage's",
+"Magic",
+"Myrmidonic",
+"Mystic",
+"Mystical",
+"Mythical",
+
+"Oasis",
+"Ocean",
+"Oceanic",
+"Orchard",
+"Outpost",
+"Outlandish",
+"Overgrown"
+
+"Polar",
+
+"Sentinel",
+
+"Tempest",
+
+"Unbreakable",
+
+"Gilled",
+"Grassy",
+"Goblet",
+"Grail",
+
+"Dagger",
+
+"Elder",
+"Elder",
+"Eldritch",
+"Eternal",
+"Everlasting",
+"Historic",
+"Hoary",
+"Immemorial",
+"Long-lived",
+"Old",
+
+"Perennial",
+"Perpetual",
+"Primordial",
+
+"Sword",
+
+"Time-honored",
+"Timeless",
+"Traditional",
+"Talisman",
+
+"Gothic",
+
+
+
+"Baron",
+"Baron of",
+
+"Governor",
+
+"Lord",
+
+"Monarch",
+
+"Overlord",
+
+"Sovereign",
+
+"Emperor",
+
+"Master",
+
+"Ruler",
+
+"Queen",
+"Queen of",
+"Queen's",
+
+
+
+"Hidden",
+"Gambler",
+"Mischievous",
+"Silver-tongued",
+
+"Old",
+"Sempiternal"
+
+
+"Black Hole",
+
+"Cometary",
+"Cosmic",
+"Cosmos",
+
+"Dimensional",
+
+"Eclipse",
+"Ethereal",
+"Existence",
+
+"Galactic",
+"Galactian",
+
+"Infinity",
+
+"Moon",
+"Moonlit",
+
+"Ozone",
+
+"Reality",
+
+"Star",
+"Starry",
+"Sun",
+"Sunny",
+"Sunset",
+"Supernova",
+
+"Time",
+"Timebender",
+
+
+
+
+
+"Gravitational",
+
+
+
+
+
+
+"Icarian",
+"Immortal",
+"Impenetrable",
+"Invincible",
+
+"Jotunn",
+
+"Kraken's",
+"Krakenesque",
+
+"Hunting",
+"Hunter's",
+"Hive",
+
+
+"Ghost",
+
+"Giant",
+
+"Ink",
+"Inkwell",
+"Inkwork",
+"Intellect",
+"Inquisitive",
+"Intrepid",
+
+"Lab", "Laboratory",
+
+
+"Labyrinth", "Labyrinth's", "Labyrinthine",
+
+"Amulet", "Grail", "Keep", "Last",
+
+"Luminous", "Radiant", "Shining", "Sparkling", "Glowing",
+
+"Liquid", "Fluid", "Flowing", "Rippling", "Wet",
+
+"Instantaneous", "Interim", "Momentary", "Temporal", "Timeless",
+
+"Heartbroken", "Lonely", "Melancholic", "Mirthful", "Mischievous", "Nervous", "Pensive",
+"Perplexed", "Petrified", "Phlegmatic", "Piqued", "Pleased", "Plucky", "Poignant", "Proud", "Puzzled", "Quiet",
+
+"Actor", "Artist", "Bard", "Composer", "Dancer", "Harpist", "Jester", "Juggler",
+"Lyrist", "Minstrel", "Musician", "Painter", "Performer", "Poet", "Sculptor", "Singer", "Storyteller", "Troubadour",
+
+"Luminous", "Radiant", "Shining", "Sparkling", "Glowing",
+
+"Liquid", "Fluid", "Flowing", "Rippling", "Wet",
+
+"Hourly", "Instantaneous", "Interim", "Momentary", "Temporal", "Timeless",
+
+"Heartbroken", "Lonely", "Melancholic", "Mirthful", "Mischievous", "Nervous",
+"Pensive", "Perplexed", "Petrified", "Phlegmatic", "Piqued", "Pleased", "Plucky",
+"Poignant", "Proud", "Puzzled", "Quiet",
+
+"Actor", "Artist", "Bard", "Composer", "Dancer", "Harpist", "Jester",
+"Juggler", "Lyrist", "Minstrel", "Musician", "Painter", "Performer",
+"Poet", "Sculptor", "Singer", "Storyteller", "Troubadour",
+"Blizzard", "Bloodmoon", "Boreal", "Dawnbringer",
+
+"Cipher", "Clairvoyant", "Cloak", "Cobweb", "Cthulhu", "Deity", "Dimension", "Dissonance", "Dragonfire",
+
+"Celestia", "Chrono", "Constellation", "Cosmos", "Crimson", "Darkstar",
+"Coral", "Oceanic",
+
+"Crystal", "Amethyst", "Quartz", "Topaz", "Xenolith",
+
+"Blizzard", "Bloodmoon", "Boreal", "Dusk", "Eclipse", "Horizon", "Hyperion", "Iceborn",
+
+"Cipher", "Clairvoyant", "Cloak", "Cobweb", "Cthulhu", "Deity", "Dimension", "Dissonance", "Dragonfire", "Dreamweaver",
+"Elemental", "Elfstone", "Ember", "Ethereal", "Fable", "Fae", "Falcon", "Fenrir", "Feral", "Firebrand", "Flametongue",
+"Fulcrum", "Galaxy", "Gargoyle", "Gauntlet", "Ghoul", "Glitch", "Glyph", "Golem", "Grimoire", "Gryphon",
+"Guardianship", "Harbinger", "Hex", "Horizon", "Hydra", "Hyperion", "Iceborn", "Illusion", "Immortal",
+"Impulse", "Incantation", "Inferno", "Invoker", "Ion", "Iridescent", "Jester", "Juggernaut",
+"Kaleidoscope", "Kraken", "Leviathan", "Libra", "Lightbringer",
+"Celestia", "Chrono", "Constellation", "Cosmos", "Crimson", "Darkstar", "Dimension", "Eclipse", "Galaxy", "Horizon",
+"Hyperion", "Star", "Stellar", "Zodiac",
+
+"Coral", "Oceanic",
+
+"Red","Golden",
+
+"Lyre",
+"Phylactery",
+"Luminous",
+"Magnetic",
+"Magnetospheric",
+"Meteor",
+"Meteoric",
+"Meteoritic",
+"Mighty",
+"Miraculous",
+"Mistral",
+"Maroon",
+"Mauve",
+"Mulberry",
+"Mustard",
+"Medallion",
+"Mirror",
+
+"Olive",
+"Peach",
+"Pearl",
+"Plum",
+"Purple",
+"Radiant",
+"Rainbow",
+"Rosaline",
+"Rosy",
+"Ruby",
+"Sapphire",
+"Holy",
+"Oracle",
+"Omniscient",
+"Oracular",
+"Promethean",
+"Prophetic",
+"Protector",
+"Sage", "Sacred",
+"Historic", "Homeric", "Jacobean", "Mesopotamian", "Millennial", "Myrmidonic", "Nordic", "Odin's",
+"Olympian", "Orphean", "Romanesque",
+"Hopeful", "Loving", "Merry", "Optimistic", "Passionate", "Proud",
+"Hostile", "Horrified", "Hungry", "Irate", "Irritated", "Jealous", "Jittery",
+"Outraged", "Panicked", "Ruthless",
+"Hermetic", "Inscrutable", "Insidious", "Intriguing", "Intrigued", "Mysterious",
+"Guardian", "Paladin", "Protector", "Ranger",
+"Emperor", "Governor", "King", "King's", "King of", "Kingly", "Kingdom's", "Lord", "Lordly",
+"Lord Of the", "Lord Of", "Master", "Monarch", "Noble", "Overlord", "Queen", "Queen of", "Queen's",
+"Regal", "Ruler", "Sovereign","Gavel",
+"Harlequin", "Harpist", "Haunting", "Poetic",
+"Intellect", "Inquisitive", "Intrepid", "Mindful", "Perceptive",
+"Gas", "Gaseous",
+"Garden", "Leafy", "Lush", "Mangrove", "Moss", "Muddy", "Orchid", "Palm",
+"Pearl", "Petal", "Plum", "Pumpkin", "Purple", "Redwood", "Ribbon", "Rose",
+"Rosy", "Ruby", "Sapphire", "Tulip",
+"Jungle", "Mangrove", "Marsh", "Marshy", "Meadow", "Moor", "Morass", "Mountain", "Mountainous",
+"Muddy", "Palm", "Prairie", "Savannah", "Tundra", "Wilderness",
+"Legendary", "Lich", "Lion-hearted", "Lupine", "Majestic", "Manticorian", "Mighty", "Minotaur",
+"Minotaurine", "Miraculous", "Monstrous", "Mythical", "Nemean", "Nordic", "Odin's", "Olympian",
+"Orphean", "Pegasus", "Phantom", "Phoenix", "Phoenixian", "Pirate's", "Promethean", "Protector",
+"Hunter", "Hunter's", "Hunting", "Ranger",
+"Ghost", "Phantasmal", "Phantom", "Spirit", "Wraith",
+"Giant", "Goliath", "Mammoth", "Titan",
+
+"Scarlet", "Silver", "Tangerine", "Topaz", "Turquoise", "Violet", "Viridian", "White",
+"Scenic", "Secluded", "Snowy", "Sultry", "Summer", "Swamp", "Sylvan", "Tropical", "Tundra", "Verdant", "Vibrant", "Wild",
+"Serene", "Sleepy", "Sly", "Soulful", "Splendid", "Stunning", "Sublime", "Tranquil", "Uplifting", "Vibrant", "Whimsical",
+"Wondrous", "Youthful",
+"Stellar", "Universal", "Galactic", "Celestial", "Cosmic",
+"Sulfuric", "Silver",
+"Sorcerer's", "Spectral", "Spellbound", "Spirit", "Shamanic", "Shadowy", "Spellbound",
+"Sinister", "Tartarean", "Sulfuric", "Ardent",
+"Spire", "Statue", "Stone", "Sword", "Thorn",
+"Sky", "Star", "Stellar", "Sublime", "Supernatural", "Supreme",
+"Temporal", "Timeless", "Titan", "Transcendent", "Twilight",
+"Ubiquitous", "Ultimate", "Uncharted", "Unearthly", "Unfathomable", "Unforgiving", "Universal", "Unseen", "Untamed",
+"Celestial", "Cherubic", "Divine", "Elysian", "Ethereal", "Heavenly", "Holy", "Mythical", "Sacred", "Seraphic", "Spectral",
+"Spiritual", "Sublime", "Supernatural", "Supreme", "Temple", "Unseen", "Valkyrie's", "Venerable",
+"Ancient", "Antique", "Archaic", "Elder", "Historic", "Legendary", "Mythic", "Old", "Timeless", "Venerable", "Vintage",
+"Affectionate", "Alluring", "Ardent", "Charming", "Delightful", "Dreamy", "Enchanting", "Loving", "Romantic", "Sensual",
+"Sentimental", "Sultry",
+"Baleful", "Belligerent", "Bitter", "Brutal", "Cruel", "Ferocious", "Fierce", "Fiery", "Furious", "Grim", "Harsh",
+"Hostile", "Malevolent", "Malign", "Menacing", "Merciless", "Ruthless", "Savage", "Sinister", "Stern", "Stormy", "Tartarean",
+"Terrifying", "Threatening", "Treacherous", "Turbulent", "Violent", "Villainous", "Vindictive", "Wicked", "Wrathful",
+"Arcane", "Cryptic", "Enigmatic", "Esoteric", "Hidden", "Inscrutable", "Mysterious", "Mystical",
+"Occult", "Secret", "Shadowy", "Subtle", "Surreptitious", "Unseen", "Veiled",
+"Defender", "Guardian", "Keeper", "Protector", "Sentinel", "Vigilant", "Watchman", "Warden",
+"Aristocratic", "Baronial", "Dignified", "Eminent", "Exalted", "Grand", "Honorable", "Imperial",
+"Kingly", "Lordly", "Majestic", "Noble", "Regal", "Royal", "Sovereign",
+"Charter", "Code", "Decree", "Edict", "Law", "Legislation", "Mandate", "Ordinance", "Precept", "Regulation", "Rule", "Statute",
+"Artistic", "Creative", "Cultural", "Elegant", "Expressive",
+"Imaginative", "Innovative", "Inspiring", "Intellectual", "Literary", "Poetic",
+
+"Gilded", "Golden-hearted", "Jade-eyed", "Opalescent", "Platinum",
+"Frost-bound", "Lone", "Moonlit", "Mystical", "Nebula-born", "Oceanic", "Polar", "Solar", "Star-born",
+"Star-crossed", "Stellar", "Tempest", "Thunderous", "Twilight",
+"Fervent", "Fiery-eyed", "Flame-hearted", "Furious", "Harmonious", "Icy-hearted", "Imperious",
+"Impish", "Intense", "Jovial", "Mirthful", "Passionate", "Sanguine", "Sinister", "Sly", "Soulbound",
+"Sovereign", "Spellbinder", "Sphinx-like", "Spiritual", "Stealthy", "Sublime", "Supreme", "Swashbuckler",
+"Swift", "Swordmaster", "Timeless", "Unassailable", "Unbound", "Unconquerable", "Undaunted", "Unearthly",
+"Unfathomable", "Unflinching",
+"Interstellar", "Quasar", "Stargazer", "Stellar", "Time-bender", "Titanic",
+"Enchanting", "Mystical", "Oracle", "Orbiting", "Otherworldly", "Outlandish", "Pathfinder",
+"Phantasmal", "Profound", "Prophetic", "Prowler", "Purist", "Pyrotechnic", "Rune-carved",
+"Runewielder", "Sage", "Savage", "Scintillating", "Scorcher", "Seafarer", "Seer", "Sempiternal",
+"Shaman", "Shapeshifter", "Silent", "Sinister", "Sky-born", "Sly", "Solar", "Sorcerer", "Sovereign",
+"Spectral", "Spellbinder", "Sphinx-like", "Spiritual", "Star-born", "Star-crossed", "Stargazer",
+"Stealthy", "Stellar", "Stormbringer", "Strategist", "Sublime", "Sun-born", "Superb", "Supreme",
+"Swashbuckler", "Swift", "Swordmaster", "Tempest", "Thaumaturge", "Thunderous", "Time-bender",
+"Timeless", "Titanic", "Torchbearer", "Trailblazer", "Transcendent",
+"Trickster", "Twilight", "Tyrant", "Ubiquitous", "Unassailable", "Unbound",
+"Unconquerable", "Undaunted", "Unearthly", "Unfathomable", "Unflinching",
+"Ferocious", "Fiery", "Fierce", "Flaming", "Forceful", "Foreboding", "Furious",
+"Gargantuan", "Ghostly", "Grim", "Inferno", "Maleficent", "Martial", "Meteoric",
+"Mighty", "Monolithic", "Monstrous", "Mysterious", "Nefarious", "Nimble", "Nocturnal",
+"Nomadic", "Notorious", "Ominous", "Outrageous", "Pandemonium", "Paradoxical", "Passionate",
+"Perilous", "Phantasmal", "Pillar", "Pioneering", "Pirate", "Polar", "Powerhouse", "Praetorian",
+"Precocious", "Predatory", "Preternatural",
+"Prime", "Prismatic", "Profound", "Prophetic", "Prowler", "Pulsating",
+"Purist", "Pyrotechnic", "Quasar", "Questing", "Quick-witted", "Quiet", "Radiant", "Raging",
+"Rainmaker", "Rampant", "Ranger", "Ravaging", "Rebel", "Reckoning", "Redoubtable", "Refined",
+"Regal", "Relentless", "Renegade", "Resolute", "Resounding", "Revered", "Rhapsodic", "Rogue",
+"Rune-carved", "Runewielder", "Sage", "Sanguine", "Savage", "Scintillating", "Scorcher", "Seafarer",
+"Seer", "Sempiternal", "Shadow", "Shaman", "Shapeshifter", "Silent",  "Sinister", "Sky-born", "Sly",
+"Solar", "Sorcerer", "Soulbound", "Sovereign", "Spectral", "Spellbinder", "Sphinx-like", "Spiritual",
+"Star-born", "Star-crossed", "Stargazer", "Stealthy", "Stellar", "Stormbringer", "Strategist", "Sublime",
+"Sun-born", "Superb", "Supreme", "Swashbuckler", "Swift", "Swordmaster", "Tempest", "Thaumaturge", "Thunderous",
+"Time-bender", "Timeless", "Titanic", "Torchbearer", "Trailblazer", "Transcendent", "Tribal", "Trickster", "Twilight",
+"Tyrant", "Ubiquitous", "Unassailable", "Unbound", "Unconquerable", "Undaunted", "Unearthly", "Unfathomable", "Unflinching",
+"Amulet", "Artifact", "Banner", "Chalice", "Crest", "Crown", "Emblem", "Ensign", "Flag", "Goblet", "Grail", "Icon",
+"Idol", "Jewel", "Key", "Lantern", "Medallion", "Orb", "Pendant", "Relic", "Rod", "Scepter", "Seal", "Sigil", "Standard",
+"Statue", "Stone", "Sword", "Talisman", "Token", "Totem", "Vase",
+"Astral", "Celestial", "Cosmic", "Ethereal", "Galactic", "Interstellar", "Lunar",
+"Martian", "Mercurial", "Meteor", "Nebular", "Orbital", "Planetary", "Solar", "Space",
+"Starry", "Sublime", "Supernatural", "Universal",
+"Angel", "Apostle", "Archangel", "Bishop", "Cardinal", "Chaplain", "Cleric", "Deacon",
+"Devout", "Disciple", "Divine", "Evangelist", "Faithful", "Friar", "Holy", "Imam", "Minister",
+"Missionary", "Monk", "Nun", "Pastor", "Patriarch", "Pilgrim", "Preacher", "Priest", "Prophet",
+"Rabbi", "Reverend", "Saint", "Savior", "Seer", "Shaman", "Shepherd", "Spiritual", "Theologian", "Vicar", "Zealot",
+"Ageless", "Ancestral", "Ancient", "Antediluvian", "Antique", "Aristocratic", "Baronial", "Bygone",
+"Classical", "Elder", "Eternal", "Everlasting", "Historic", "Hoary", "Immortal", "Imperishable",
+"Infinite", "Long-standing", "Old", "Perennial", "Perpetual", "Primeval", "Primordial",
+"Time-honored", "Timeless", "Traditional", "Venerable", "Veteran", "Vintage",
+"Adoring", "Affectionate", "Amorous", "Ardent", "Caring", "Cherishing", "Compassionate",
+"Devoted", "Enamored", "Fond", "Gentle", "Heartfelt", "Loving", "Passionate", "Romantic",
+"Sentimental", "Sweet", "Tender", "Warm", "Yearning",
+"Abhorrent", "Acrimonious", "Angry", "Annoyed", "Antagonistic",
+"Apathetic", "Belligerent", "Bitter", "Contemptuous", "Cruel", "Cynical",
+"Detestable", "Disdainful", "Disgusted", "Enraged", "Fierce", "Furious",
+"Hateful", "Hostile", "Indignant", "Inimical", "Irate", "Irritable", "Jealous",
+"Loathsome", "Malevolent", "Malicious", "Nasty", "Odious", "Offensive", "Opposed",
+"Outraged", "Peeved", "Pernicious", "Piqued", "Rancorous", "Resentful", "Spiteful",
+"Sullen", "Vengeful", "Vindictive", "Virulent",
+"Gilded", "Golden-hearted", "Jade-eyed", "Opalescent", "Platinum",
+"Flourishing", "Frost-bound", "Meadowborn", "Moonlit", "Nebula-born", "Oceanic", "Polar", "Solar", "Sun-born",
+"Fervent", "Fiery-eyed", "Flame-hearted", "Furious", "Gallant", "Glorious", "Graceful",
+"Greathearted", "Harmonious", "Heartfelt", "Heroic", "Hypnotic", "Illustrious", "Imaginative",
+"Impassioned", "Intense", "Jovial", "Joyous", "Judicious", "Keen", "Lauded", "Majestic", "Maleficent",
+"Martial", "Masterful", "Maverick", "Melodic", "Meteoric", "Mighty", "Miraculous", "Mirthful", "Monolithic",
+"Mysterious", "Mystical", "Mythical", "Nefarious", "Nimble", "Noble", "Nocturnal", "Nomadic", "Notorious",
+"Ominous", "Ornate", "Otherworldly", "Outlandish", "Outrageous", "Passionate", "Pathfinder", "Peerless",
+"Perilous", "Phantasmal", "Pillar", "Pioneering", "Predatory", "Preternatural", "Prime",
+"Prismatic", "Profound", "Prophetic", "Prowler", "Purist", "Quick-witted", "Radiant",
+"Raging", "Rebel", "Redoubtable", "Refined", "Regal", "Relentless", "Renegade", "Resilient", "Resolute",
+"Resounding", "Revered", "Rogue", "Rune-carved", "Runewielder", "Sage", "Sanguine", "Savage", "Scintillating",
+"Seafarer", "Seer", "Sempiternal",
+"Shaman", "Silent", "Sinister", "Sky-born", "Sly", "Sorcerer", "Sovereign",
+"Spectral", "Spellbinder", "Spiritual", "Star-born", "Star-crossed", "Stargazer", "Stealthy", "Stellar",
+"Stormbringer", "Strategist", "Sublime", "Superb", "Supreme", "Swashbuckler", "Swift", "Swordmaster",
+"Tempest", "Thaumaturge", "Thunderous", "Time-bender", "Timeless", "Titanic", "Torchbearer", "Trailblazer",
+"Transcendent", "Trickster", "Twilight", "Tyrant", "Ubiquitous", "Unassailable", "Unbound", "Unconquerable",
+"Undaunted", "Unearthly", "Unfathomable", "Unflinching", "Uplifting", "Valiant", "Venerable", "Vigilant",
+"Visionary", "Voracious", "Warrior", "Wise", "Wraith", "Wondrous",
+"Far-reaching", "Interstellar", "Quasar",
+"Ironwill", "Platinum", "Steel-hearted",
+"Sorcerer's", "Spectral", "Spellbound", "Spirit", "Shamanic", "Shadowy", "Spellbound",
+"Inferno", "Sinister", "Tartarean", "Fiery-eyed",
+"Amulet", "Blade", "Chalice", "Crown", "Orb", "Pendant",
+"Relic", "Scepter", "Shield", "Staff", "Talisman", "Totem", "Vessel", "Wand", "Weapon",
+"Astral", "Celestial", "Cosmic", "Galactic", "Interstellar", "Lunar", "Planetary", "Solar",
+"Stellar", "Supernova", "Universal",
+"Angelic", "Apostolic", "Ascetic", "Biblical", "Cherubic", "Clerical", "Devotional", "Divine",
+"Ecclesiastical", "Elysian", "Evangelical", "Heavenly", "Hierophant", "Hieratic", "Holy",
+"Messianic", "Ministerial", "Monastic", "Monk", "Mystic", "Nun", "Papal", "Parish",
+"Pastoral", "Patriarchal", "Pietistic", "Pontifical", "Preacher", "Priest", "Priestess",
+"Prophet", "Rabbinical", "Reverend", "Sacred", "Sage", "Saint", "Savior", "Sectarian", "Seraphic",
+"Shaman", "Shepherd", "Spiritual", "Theocratic", "Theological", "Vicar", "Virtuous",
+"Affectionate", "Amorous", "Ardent", "Charming", "Compassionate", "Devoted", "Enamored",
+"Fond", "Gentle", "Heartfelt", "Intimate", "Kind", "Loving", "Passionate", "Romantic",
+"Sentimental", "Sweet", "Tender", "Warm", "Yearning",
+"Abominable", "Acrimonious", "Aggressive", "Antagonistic", "Belligerent", "Bitter", "Brutal",
+"Cruel", "Detestable", "Envious", "Fierce", "Fiery", "Furious", "Hateful", "Hostile", "Indignant",
+"Inimical", "Irate", "Irritable", "Jealous", "Loathsome", "Malicious", "Malignant", "Menacing",
+"Nasty", "Odious", "Offensive", "Oppressive", "Outrageous", "Pernicious", "Pugnacious", "Rancorous",
+"Repugnant", "Resentful", "Ruthless", "Savage", "Spiteful", "Vengeful", "Vicious", "Vindictive",
+"Violent", "Virulent", "Vitriolic", "Wicked",
+"Arcane", "Concealed", "Covert", "Cryptic", "Clandestine", "Discreet", "Elusive",
+"Enigmatic", "Esoteric", "Hidden", "Inscrutable", "Mysterious", "Mystic", "Occult",
+"Private", "Secretive", "Stealthy", "Subtle", "Surreptitious", "Undisclosed", "Unrevealed", "Veiled",
+"Custodian", "Defender", "Guardian", "Keeper", "Protector", "Sentinel", "Vigilant", "Warden", "Watchman",
+"Aristocrat", "Baron", "Count", "Duke", "Earl", "Emperor", "King", "Knight", "Lady", "Lord", "Monarch",
+"Noble", "Prince", "Princess", "Queen", "Regent", "Royal", "Sovereign",
+"Charter", "Code", "Decree", "Edict", "Law", "Legislation", "Mandate", "Ordinance",
+"Precept", "Regulation", "Rule", "Statute",
+"Artistic", "Creative", "Cultural", "Elegant", "Expressive", "Imaginative",
+"Innovative", "Inspiring", "Intellectual", "Literary", "Poetic", "Refined", "Sophisticated", "Stylish",
+"Analytical", "Astute", "Brainy", "Cerebral", "Clever", "Educated", "Erudite", "Genius", "Intellectual",
+"Learned", "Logical", "Philosophical", "Rational", "Reasoned", "Sagacious", "Savvy", "Scholarly",
+"Shrewd", "Smart", "Sophisticated", "Thoughtful", "Wise",
+"Aerial", "Airy", "Atmospheric", "Breezy", "Ethereal", "Gaseous", "Misty", "Vaporous", "Windy",
+"Arboreal",
+"Gilded", "Golden-hearted", "Jade-eyed", "Opalescent", "Platinum",
+"Frost-bound", "Meadowborn", "Moonlit", "Nebula-born", "Oceanic",
+"Polar", "Rainmaker", "Sky-born", "Star-born", "Sun-born", "Tempest",
+"Fervent", "Fiery-eyed", "Flame-hearted", "Furious", "Gallant", "Glorious",
+"Greathearted", "Harmonious", "Heavenly", "Hero", "Jovial", "Judicious",
+"Keen", "Lauded", "Leviathan", "Lionhearted", "Majestic", "Maleficent",
+"Martial", "Masterful", "Maverick", "Meteoric", "Mighty", "Miraculous",
+"Mirthful", "Misty", "Monstrous", "Mysterious", "Nefarious", "Nimble",
+"Noble", "Nocturnal", "Nomadic", "Notorious", "Ominous", "Outlandish",
+"Outrageous", "Passionate", "Pathfinder", "Peacekeeper", "Peerless",
+"Peregrine", "Perilous", "Pillar", "Pioneering", "Pirate", "Powerhouse",
+"Praetorian", "Precocious", "Predatory", "Preternatural", "Prime", "Profound",
+"Prophetic", "Prowler", "Pulsating", "Purist", "Pyrotechnic", "Questing", "Quick-witted",
+"Radiant", "Raging", "Rampant", "Ranger", "Ravaging", "Rebel", "Reckoning", "Redoubtable",
+"Refined", "Regal", "Relentless", "Renegade", "Resolute", "Resounding", "Revered", "Rogue",
+"Runewielder", "Sage", "Sanguine", "Savage", "Scintillating", "Scorcher", "Seafarer", "Seer",
+"Sempiternal", "Shadow", "Shaman", "Shapeshifter", "Sinister", "Sky-born", "Sly", "Solar",
+"Sorcerer", "Soulbound", "Sovereign", "Spectral", "Spellbinder", "Sphinx-like", "Spiritual",
+"Star-crossed", "Stargazer", "Stealthy", "Stellar", "Stormbringer", "Strategist", "Sublime",
+"Superb", "Supreme", "Swashbuckler", "Swift", "Swordmaster", "Thaumaturge", "Thunderous",
+"Time-bender", "Timeless", "Titanic", "Torchbearer", "Trailblazer", "Transcendent", "Tribal",
+"Trickster", "Twilight", "Tyrant", "Ubiquitous", "Unassailable", "Unbound", "Unconquerable",
+"Undaunted", "Unearthly", "Unfathomable", "Unflinching",
+"Interstellar", "Nebula-born", "Quasar", "Solar", "Stargazer", "Star-crossed", "Stellar",
+"Platinum",
+"Oracle", "Orbiting", "Sorcerer", "Spectral",
+"Spellbinder", "Sphinx-like", "Spiritual", "Thaumaturge", "Time-bender", "Witch",
+"Ferocious", "Fiery-eyed", "Flame-hearted", "Flaming", "Inferno", "Maleficent", "Sinister",
+"Goblet", "Grail", "Orb", "Pillar", "Scepter", "Statue", "Stone", "Sword", "Thorn", "Torch",
+"Celestial", "Galactic", "Interstellar", "Lunar", "Nebula-born", "Quasar", "Solar",
+"Star-crossed", "Stargazer", "Stellar", "Sublime", "Supernatural", "Supreme", "Temporal",
+"Timeless", "Titanic", "Transcendent", "Twilight", "Ubiquitous", "Ultimate", "Uncharted",
+"Unearthly", "Unfathomable", "Unforgiving", "Universal", "Unseen",
+"Azure", "Verdant",
+"Verdant", "Winterborn",
+"Valorous", "Venerable", "Vengeful", "Vigilant",
+"Vindictive", "Visionary", "Volatile", "Wicked",
+"Wild", "Wise", "Wrathful", "Yearning", "Zealot", "Zestful",
+"Alien", "All-Seeing", "Interstellar", "Stellar", "Zodiac",
+"Alabaster", "Amethyst", "Xenolith",
+"Alchemist", "Archmage", "Aurora", "Bewitched", "Witch", "Wizard", "Wraithlike",
+"Fiery", "Infernal", "Sulfuric", "Vengeful", "Wicked", "Wrathful",
+"Amulet's",
+"Arcane", "Grimoire", "Orb", "Pillar", "Scepter", "Statue", "Stone",
+"Sword", "Talisman", "Thorn", "Torch", "Wand",
+"Celestial", "Galactic", "Interstellar", "Lunar", "Nebula-born", "Quasar", "Solar", "Star-crossed",
+"Stargazer", "Stellar", "Sublime", "Supernatural", "Supreme", "Temporal", "Timeless", "Titanic",
+"Transcendent", "Twilight", "Ubiquitous", "Ultimate", "Uncharted", "Unearthly", "Unfathomable",
+"Unforgiving", "Universal", "Unseen", "Untamed",
+"Celestial", "Cherubic", "Divine", "Elysian", "Ethereal", "Heavenly", "Holy", "Mythical", "Sacred",
+"Seraphic", "Spectral", "Spiritual", "Sublime", "Supernatural", "Supreme", "Temple", "Unseen",
+"Valkyrie's", "Venerable", "Zenith",
+"Ancient", "Antique", "Archaic", "Elder", "Historic", "Legendary", "Mythic", "Old", "Timeless", "Venerable", "Vintage",
+"Affectionate", "Alluring", "Ardent", "Charming", "Delightful", "Dreamy", "Enchanting", "Loving", "Romantic",
+"Sensual", "Sentimental", "Sultry",
+"Baleful", "Belligerent", "Bitter", "Brutal", "Cruel", "Ferocious", "Fierce", "Fiery", "Furious", "Grim",
+"Harsh", "Hostile", "Malevolent", "Malign", "Menacing", "Merciless", "Ruthless", "Savage", "Sinister",
+"Stern", "Stormy", "Tartarean", "Terrifying", "Threatening", "Treacherous", "Turbulent", "Violent",
+"Villainous", "Vindictive", "Wicked", "Wrathful",
+"Arcane", "Cryptic", "Enigmatic", "Esoteric", "Hidden", "Inscrutable", "Mysterious", "Mystical",
+"Occult", "Secret", "Shadowy", "Subtle", "Surreptitious", "Unseen", "Veiled",
+"Defender", "Guardian", "Keeper", "Protector", "Sentinel", "Vigilant", "Watchman", "Warden",
+"Aristocratic", "Baronial", "Dignified", "Eminent", "Exalted", "Grand", "Honorable",
+"Imperial", "Kingly", "Lordly", "Majestic", "Noble", "Regal", "Royal", "Sovereign",
+"Charter", "Code", "Decree", "Edict", "Law", "Legislation", "Mandate", "Ordinance",
+"Precept", "Regulation", "Rule", "Statute",
+"Artistic", "Creative", "Cultural", "Elegant", "Expressive", "Imaginative", "Innovative", "Inspiring",
+"Intellectual", "Literary", "Poetic", "Refined", "Sophisticated", "Stylish",
+"Analytical", "Astute", "Brainy", "Cerebral", "Clever", "Educated", "Erudite", "Genius", "Intellectual",
+"Learned", "Philosophical", "Sage", "Scholarly", "Scientific", "Thoughtful", "Wise",
+"Zephyrian",
+"Flourishing", "Lush", "Luxuriant", "Verdant", "Zenith",
+"Feral", "Forested", "Jungle", "Marshy", "Meadow", "Moorish", "Mountainous", "Savannah", "Tropical", "Tundra",
+"Wilderness", "Woodland",
+"Arcane", "Chimerical", "Dragon", "Ethereal", "Fabled", "Fairy", "Folkloric", "Legendary", "Mythic",
+"Mythological", "Nautical", "Nymph", "Olympian", "Otherworldly", "Phantasmagorical", "Spectral",
+"Supernatural", "Unearthly",
+"Falcon-eyed", "Hunter", "Huntsman", "Ranger", "Stalker", "Tracker", "Trapper",
+"Ectoplasmic", "Ghostly", "Phantasmal", "Spectral", "Spirit", "Wraith",
+"Behemoth", "Colossal", "Gargantuan", "Giant", "Juggernaut", "Leviathan", "Mammoth", "Titan", "Tremendous",
+"Bloodmoon", "Boreal", "Celestia", "Crimson",
+"Blizzard", "Boreal", "Coral",
+"Chaotic", "Dire",
+"Celestia", "Chrono", "Constellation", "Cosmos", "Darkstar",
+"Cipher", "Clairvoyant", "Cloak", "Cobweb", "Crystal", "Cthulhu", "Deity", "Dimension", "Dragonfire", "Dawnbringer",
+"Cloak", "Cobweb", "Crypt", "Crystal",
+"Celestia", "Chrono", "Constellation", "Cosmos", "Crimson", "Darkstar", "Dimension",
+"Celestia", "Deity",
+"Crimson", "Dire", "Dissonance",
+"Cipher", "Cloak", "Crypt",
+"Cosmos",
+"Coral",
+"Boreal",
+"Dragonfire",
+"Cloak", "Crypt", "Cthulhu",
+"Cthulhu",
+"Dusk", "Eclipse", "Ethereal", "Iridescent",
+"Dusk", "Eclipse", "Elysium", "Fathom", "Fenrir", "Feral",
+"Ethereal", "Feral", "Immortal",
+"Eclipse", "Galaxy", "Horizon", "Hyperion",
+"Dreamweaver", "Elemental", "Elfstone", "Ember", "Fable", "Fae", "Falcon", "Fenrir",
+"Firebrand", "Flametongue", "Fulcrum", "Gauntlet", "Ghoul", "Glitch", "Glyph",
+"Golem", "Grimoire", "Gryphon", "Guardianship", "Harbinger", "Hex", "Hydra",
+"Iceborn", "Illusion", "Impulse", "Incantation", "Inferno", "Invoker",
+"Ion", "Jester", "Juggernaut", "Kaleidoscope", "Kraken", "Leviathan", "Libra", "Lightbringer",
+"Elfstone", "Ember", "Falcon", "Gauntlet", "Ghoul", "Glitch", "Glyph", "Golem", "Grimoire",
+"Gryphon", "Hex", "Horizon", "Hydra", "Iceborn", "Illusion", "Incantation", "Inferno",
+"Invoker", "Ion", "Jester", "Juggernaut", "Kaleidoscope", "Kraken", "Leviathan", "Libra", "Lightbringer",
+"Eclipse", "Galaxy", "Horizon", "Hyperion",
+"Elysium", 
+
+
+"Dreamweaver",
+
+"Elemental",
+"Elfstone",
+
+"Fable",
+"Fae",
+"Fenrir",
+"Fenrir",
+"Feral",
+"Firebrand",
+
+"Ghoul",
+"Glitch",
+"Glyph",
+"Golem",
+"Grimoire",
+"Gryphon",
+"Ghoul",
+
+"Harbinger",
+"Hex",
+"Hydra",
+"Hydra",
+
+"Illusion",
+"Incantation",
+"Inferno",
+"Invoker",
+"Inferno",
+"Immortal",
+
+
+
+"Goldenrod",
+"Ochre",
+"Grand"
+"Lime",
+"Jade","Olive",
+"Azure", "Blue", "Cerulian","Indigo",
+"Lavender",
+"Beige","Ivory","Graphite",
+"Iridescent", "Golden", "Graphite","Onyx","Ivory","Gemmed","Jewel",
+"Jewelcraft","Jeweled","Opal","Jade","Crystal","Amethyst", "Quartz", "Topaz","Xenolith","Elfstone",
+"Lavender","Holy", "Celestial","Angelic","Omniscient","Horus's",
+"Orphean","Abyssal", "Daemonian", "Infernal", "Hellish","Affectionate", "Loving",
+"Hopeful", "Joyful", "Jubilant", "Jovial",
+"Aggressive","Angry","Annoyed","Apathetic","Irate", "Jealous", "Hostile",
+"Anxious", "Horrified", "Nervous", "Terrified","Golden", "Goldenrod", "Green","Grail","Granite", "Graphite","Grateful",
+"Loom", "Marketplace", "Mausoleum", "Maze", "Meadow",
+"Metropolis", "Mine", "Moor", "Morass", "Mountain", "Mountainous",
+"Museum", "Oasis", "Observatory", "Ocean", "Oceanic", "Orchard", "Outpost",
+"Palace", "Palm", "Park", "Pond", "Port", "Prairie", "Prison", "Pyramid", "River",
+"Gloomy", "Grieving", "Loyal", "Melancholic", "Merry", "Mindful", "Motivated", "Mournful", "Nervous",
+"Optimistic", "Outraged", "Panicked", "Passionate", "Pensive", "Perceptive", "Pleased",
+"Poetic", "Proud", "Quiet",
+"Gleaming", "Glowing", "Great","Mahogany", "Magma", "Marble", "Mustard", "Myrmidonic", "Obsidian","Malignant", "Malevolent",
+"Orb", "Platinum", "Pyro", "Quartz", "Quicksilver",
+"of the Griffon", "Elysium",
+"Gulf", "Garden", "Geyser", "Hamlet", "Harbor", "Heath", "Hedgerow", "Hill", "Hive",
+"Happy",
+"Heartbroken",
+"Fathom", "Fenrir", "Feral", "Celestia", "Cthulhu", "Darkstar", "Deity", "Dragonfire",
+
+
+"Gentle", "Harmonious", "Heart",
+"Hermetic","Leafy", "Lush", "Mangrove", "Moss", "Muddy", "Pebble", "Petal", "Plum", "Pumpkin", "Purple"
+"Hell",
+"Heroic",
+"Historic",
+"Heliospheric",
+"Hesperidean",
+"Hollow", "Island", "Islet", "Lake", "Lagoon",
+"Hopeful", "Jovial", "Joyful", "Jubilant",
+"Hostile", "Horrified", "Hungry", "Jealous", "Irate", "Irritated", "Jittery",
+"Indifferent", "Inspired", "Interested", "Intrigued",
+"Infernal",
+"Hunter", "Hunter's",
+"Elemental", "Elfstone", "Fae", "Fenrir", "Firebrand", "Flametongue", "Fulcrum", "Gargoyle", "Ghoul",
+"Golem", "Grimoire", "Gryphon", "Harbinger", "Hex", "Hydra", "Hyperion", "Iceborn", "Immortal", "Impulse",
+"Incantation", "Inferno", "Invoker", "Ion", "Jester", "Juggernaut", "Kaleidoscope", "Kraken", "Leviathan", "Lightbringer",
+
+"Homeric", "Jacobean",
+"Ionized",
+"Jade","Lunar", "Magnetic", "Magnetospheric",
+"Meteor", "Meteoric", "Meteoritic", "Moon", "Moonlit", "Nebulous",
+"Nautical", "Nemesis", "Neon", "Nether", "Night", "Nocturnal", "Nova",
+"Orbital", "Pulsar",
+"Iron",
+"Hourglass", "Key", "Lantern",
+"Imperial", "Knightly", "Lady",
+"Inscrutable", "Insidious",
+"Illusionist",
+"Infernal",
+"Interim",
+"Holy","Falcon", "Fenrir", "Feral", "Firebrand", "Flametongue", "Gargoyle", "Ghoul", "Golem", "Gryphon", "Hydra",
+"Juggernaut", "Kraken", "Leviathan",
+
+"Ivory", "Iridescent", "Lavender","Magic", "Mystic", "Mystical", "Mythical", "Oracle", "Oracular", "Orphean",
+"Pegasus", "Phantasmal", "Phantom", "Pharaoh's", "Phoenix", "Phoenixian", "Phylactery",
+"Pirate's", "Plasma", "Promethean", "Prophetic", "Protector", "Pyramid",
+"Ghoul", "Ion", 
+"Golem", "Gryphon", "Juggernaut", "Kraken", "Leviathan",
+"Fable", "Fae", "Ghoul", "Grimoire", "Gryphon", "Harbinger", "Hex", "Hydra", "Illusion", "Incantation", "Inferno",
+"Lich", "Minotaur", "Minotaurine", "Manticorian",
+"Enigmatic",
+"Thousand",
+"Hundred",
+"Only",
+"Second",
+"First",
+"Seventh",
+"Last",
+"Curse"
+"Lorekeeper",
+"Lunar",
+"Lycan",
+"Gold",
+"Hourly",
+"Maelstrom",
+"Magma",
+"Mandrake",
+"Manticore",
+"Marauder",
+"Matrix",
+"Mecha",
+"Meld",
+"Merlin",
+"Mimic",
+"Mirage",
+"Mistwalker",
+"Monolith",
+"Moonshade",
+"Mystique",
+"Nebula",
+"Nemesis",
+"Nether",
+"Nexus",
+"Nightshade",
+"Nimbus",
+"Nirvana",
+"Nova",
+"Oblivion",
+"Omen",
+"Onyx",
+"Oracle",
+"Orbit",
+"Ouroboros",
+"Pandemonium", "Paradox", "Phantasm",
+"Phoenix", "Pirate", "Plasma", "Portal",
+"Potion", "Prowler", "Psion", "Quantum",
+"Quasar", "Quest",
+"Quicksilver",
+"Radiance", "Ragnarok", "Reaper", "Reckoner",
+"Redwood", "Revenant", "Rift", "Rime",
+"Rune", "Saga", "Sage", "Sanguine", "Savant",
+"Scarab", "Scion", "Serpent", "Shadow",
+"Shaman", "Siren", "Solstice", "Sorcery",
+"Soulfire", "Specter",
+"Sphinx", "Spire",
+"Spirit",
+"Starfall", "Stormcaller",
+"Sunder", "Sunflare", "Supernova",
+"Synthesis",
+"Terra", "Thorn", "Thunder", "Timekeeper",
+"Titan", "Totem", "Trance", "Transcend",
+"Tribunal", "Twilight", "Undertow",
+"Universe", "Utopia","Valkyrie",
+"Vapor","Vendetta",
+"Aegean", "Amazon's", "Amazonian",
+"Archipelago", "Asgardian",
+"Atlantean", "Aztec",
+"Bay", "Beach", "Beachy",
+"Garden", "Gas", "Gaseous", "Gulf",
+"Gorge", "Gorgonian", "Grassland",
+"Graveyard", "Green", "Grove",
+"Guild's", "Hamlet",
+"Harbor", "Heart", "Heath",
+"Hedgerow", "Helian",
+"Heliospheric",
+"Hill", "Hive", "Hollow",
+"Homeric", "Horned", "Hourly",
+"Hourglass", "Hunting", "Ice",
+"Icicle",
+"Icy",
+"Ink",
+"Inkwell",
+"Inkwork",
+"Inn's",
+"Island",
+"Islet",
+"Isolated",
+"Jungle",
+"Keep",
+"Key",
+"Lab",
+"Laboratory",
+"Labyrinth",
+"Labyrinth's",
+"Labyrinthine",
+"Lagoon",
+"Lake",
+"Lantern",
+"Last",
+"Leafy",
+"Legendary",
+"Lethal",
+"Library",
+"Lich",
+"Life",
+"Lightning",
+"Lion-hearted",
+"Liquid",
+"Lively",
+"Living",
+"Lizard",
+"Lonely",
+"Long",
+"Loom",
+"Looming",
+"Lordly",
+"Lord Of the",
+"Lord Of",
+"Lost",
+"Love Of",
+"Loyal",
+"Luminous",
+"Lunar",
+"Lupine",
+"Lush",
+"Lustrous",
+"Luxurious",
+"Lyre",
+"Magic", "Magma",
+"Magnetic", "Magnetospheric",
+"Mahogany", "Majestic", "Malignant",
+"Malevolent", "Mammoth",
+"Mangrove", "Mantle", "Manticorian",
+"Marble", "Marine", "Marketplace", "Marsh", "Marshy",
+"Marvelous", "Master", "Matinal", "Mausoleum", "Maze",
+"Meadow", "Medallion", "Meditative",
+"Medusian", "Melancholic", "Menagerie",
+"Menacing", "Mental", "Mercurial", "Merry",
+"Mesopotamian", "Meteor", "Meteoric",
+"Meteoritic", "Metropolis", "Midnight",
+"Mighty",
+"Militant", "Millennial", "Mindful",
+"Mine", "Minotaur", "Minotaurine",
+"Miraculous",
+"Mirror", "Mirthful", "Mischievous",
+"Mist", "Mistral", "Misty", "Molten",
+"Monastic",
+"Monastery", "Monolithic", "Monstrous",
+"Momentary",  "Moor", "Morass",    "Moss",
+"Motivated", "Mountain", "Mountainous",
+"Mournful", "Muddy", "Mulberry", "Mummy",
+"Museum", "Mustard", "Mutant", "Myrmidonic",
+"Mysterious", "Mystic", "Mystical",
+"Mythical",    "Nautical", "Nebulous",
+"Nemean", "Nemesis", "Neon", "Nether",
+"Night",
+"Noble", "Nocturnal",
+"Nomadic", "Nordic", "Notorious", "Nova",
+"Oasis", "Observatory", "Obsidian", "Obsolete",
+"Ocean", "Oceanic", "Odin's", "Olympian",
+"Optimistic", "Opulent", "Oracular", "Orb",
+"Orbital", "Orchard", "Orchid", "Ornate",
+"Orphean", "Outlandish", "Outpost", "Outraged",
+"Overgrown", "Owl's", "Palace", "Palm",
+"Palatial", "Parched", "Parliament", "Pastoral",
+"Peaceful", "Pearlescent", "Peat", "Pebble",
+"Pegasus", "Penitentiary", "Perfumed",
+"Perilous", "Perpetual", "Petrified",
+"Phantom", "Phoenix", "Pine",
+"Pinnacle", "Pirate's",
+"Placid", "Planetary", "Plant",
+"Plateau", "Platinum",
+"Pleasant", "Plum", "Polar",
+"Ponderous", "Poppy", "Porcelain",
+"Portal", "Port", "Potent", "Prairie",
+"Precious",
+"Predator",
+"Primeval", "Primordial", "Prince's",
+"Princely", "Princess", "Prismatic",
+"Prison", "Private", "Profound",
+"Prosperous", "Protected",
+"Proud", "Pumpkin",
+"Pungent",
+"Pure", "Purple",
+"Pyramid", "Quartz",
+"Queen's", "Quicksand",
+"Quiet", "Quill",
+"Radiant", "Raging",
+"Rainbow", "Rainforest",
+"Rampart", "Ranger's",
+"Ravaged", "Raven",
+"Red",
+"Rebel",
+"Reclusive",
+"Regal",
+"Relic",
+"Remnant",
+"Remote",
+"Renegade",
+"Resplendent",
+"Restless",
+"Revered",
+"Rhombus",
+"Rich",
+"Riddle",
+"Rift",
+"Righteous",
+"River",
+"Roaming",
+"Robotic",
+"Rock",
+"Rocky",
+"Rogue", "Rose",
+"Royal", "Ruby", "Rugged", "Ruined", "Runic",
+"Rural", "Rustic", "Rusty", "Sacred", "Sad",
+"Sage", "Sapphire", "Savage", "Scarlet",
+"Scenic", "Scented", "Scholar's", "School",
+"Scorching", "Secluded", "Secret", "Seductive",
+"Selenian", "Semi-Precious", "Serpent's",
+"Serpentine", "Settler's", "Shadowy", "Shady",
+"Shallow", "Shaman's", "Shattered", "Shepherd's",
+"Shielded", "Shimmering", "Shining",
+"Shivering", "Shrine", "Sickly","Vengeance",
+"Vertex","Vesper","Vex","Vindicator",
+"Virtuoso","Visage","Void","Vortex","Warden",
+"Xenon",
+"Ubiquitous"
+"Ultramarine",
+"Unemotional",
+"Unhappy",
+"Universal",
+"Unstoppable",
+"Unyielding",
+"Uranian",
+"Urn",
+"Ursine",
+"Mantle",
+"Radiant",
+"Vessel",
+"Epochal",
+"Twilight",
+"Primeval",
+"Compass",
+"Millennial",
+"Meridian",
+"Hammer",
+"Eternal",
+"Fleeting",
+"Black Hole",
+"Meteoritic",
+"Edwardian",
+"Samurai",
+"Cosmic",
+"Nebulous",
+"Norman",
+"Orbital",
+"Han",
+"Orbital",
+"Gregorian",
+"Renaissance",
+"Spartan",
+"Prohibition",
+"Crusader",
+"Hellenistic",
+"Sanskrit",
+"Dynastic",
+"Flapper",
+"Napoleonic",
+"Pharaonic",
+"Interstellar",
+"Elizabethan",
+"Feudal",
+"Age",
+"Cyclic",
+"Timeless",
+"Neutron",
+"Punctual",
+"Quill",
+"Bygone",
+"Banner",
+"Blade",
+"Brooch",
+"Buccaneer",
+"Byzantine",
+"Bat",
+"Bipedal",
+"Black",
+"Blending",
+"Blood",
+"Brass",
+"Brave",
+"Bursting",
+"Butterfly",
+"Byzantine",
+"Chiropteran", "Crested", "Curse", "Cursed", "Celestial", "Celtic",
+"Cat", "Celestial", "Collector", "Conjurer", "Coral", "Cosmic",
+"Crimson", "Desert", "Daemonian", "Dawn", "Draconic",
+"Dimensional", "Eldritch", "Eclipse", "Eagle", "Eagle's", "Edo",
+"Eternal", "Extraterrestrial", "Fountain", "Fanged",
+"Feathered", "Feline", "Finned", "Fire-breathing", "Fuchsia",
+"Feather", "Fiery", "Hermitage", "Horned", "Incan", "Icy",
+"Indigo", "Infinite", "Lion-hearted", "Lion's", "Leechy",
+"Luminous", "Lunar", "Medieval", "Maned", "Masked",
+"Melancholy", "Mermaid-tailed", "Mist", "Misty", "Minotaur's",
+"Momentary", "Moonlit", "Mountain", "Mysterious",  "Nebulous",
+"Necromancer", "New", "Nightmare", "Noble", "Nemean", "Nomadic",
+"Old", "Ophidian", "Orange", "Orb", "Owl", "Ottoman", "Oceanic",
+"Olympian", "Pain", "Paladin", "Passionate", "Pawed", "Pegasus",
+"Winged", "Piscine", "Pirate's", "Plague", "Poisonous",
+"Powder", "Power", "Punk", "Purifying", "Pyramid's", "Phalanx",
+"Quasar", "Radiant", "Rainstorm", "Raptor", "Raven", "Red",
+"River", "River's" "Rogue", "Ruby", "Rune", "Runer",
+"Renaissance",  "River",  "Radiant", "Rainforest",  "Ranch",
+"Raspberry",  "Rat", "Ravine",  "Ravishing",  "Reckless",
+"Reef", "Relaxed",  "Relentless",  "Relic",  "Reptilian",
+"Resentful",  "Resilient",  "Restless",  "Reverent", "Ridge",
+"River",  "Riverine", "Rocky",  "Romantic",  "Rooted",  "Rose",
+"Ruby", "Ruins",  "Rust",  "Ruthless", "Romanesque",  "Sand",
+"Scaled",  "Science", "Second",  "Serpentine",  "Serpent's",
+"Seventh",  "Shadow",  "Shaman's",  "Shark-toothed",
+"Shell-backed",  "Silver",  "Simian", "Skeleton",  "Smiling",
+"Smoke",  "Snail-shelled", "Solar",  "Sorcerous",  "Spark",
+"Speaker", "Spell",  "Sphinx",  "Spined",  "Spring", "Stars",
+"Starting",  "Steam",  "Stone", "Storm",  "Strong",  "Summer",
+"Sun Stone's", "Sunstone",  "Silent",  "Sirenic",  "Solar",
+"Stellar",  "Stoic",  "Swift",  "Sword", "Sphinx's ",
+"Scarlet",  "Stinger",  "Sacred",  "Sad",  "Salmon",
+"Sanctuary", "Sandy",  "Sapphire",  "Satisfied",  "Satyric",
+"Savage",  "Savanna",  "Savannah",  "Scarlet", "School",
+"Scrub",  "Sea",  "Seashore", "Secular",  "Seismic",  "Serene",
+"Sewer", "Seychelle",  "Shaded",  "Shadowy",  "Shore", "Shrine",
+"Sienna",  "Sigil",  "Silent", "Silver",  "Sirenian",  "Slate",
+"Slimey", "Solar",  "Sorrowful",  "Sparkling",  "Spectral",
+"Sprouting",  "Square",  "Stadium",  "Stalwart", "Starlit",
+"Steadfast",  "Steamy",  "Stellar", "Steppe",  "Stern",
+"Stoic",  "Stone", "Strait",  "Stratospheric",  "Stream",
+"Stressed", "Studio",  "Stygian",  "Subterranean", "Sunlit",
+"Supernova",  "Suspicious",  "Swamp", "Swampy",  "Sword",
+"Sylvan",  "Sympathetic", "Swift",  "Scepter", "Staff",
+"Shield", "Spire",  "Scroll", "Satellite",  "Seasonal",
+"Stellar", "Temporal",  "Tailed",  "Tamer of",  "Tentacled",
+"Third",  "Thunder",  "Tiger",  "Tigerstrip", "Titan",  "Tomb",
+"Trival",  "True", "Turquoise", "Tartarean", "Thundering",
+"Timeless", "Titanic", "Trojan", "Totem's", "Troll's", "Tailed",
+"Talon", "Tangerine", "Tapestry", "Taupe", "Tavern", "Tawny",
+"Teal", "Tectonic", "Tempestuous", "Temple", "Tenacious",
+"Tender", "Terrified", "Theater", "Thicket", "Thorny",
+"Thundering", "Tidal", "Tribal", "Tide", "Timely", "Tomb",
+"Topaz", "Totem", "Tower", "Town", "Transient", "Tusked",
+"Tudor", "Tundra", "Tunnel", "Turquoise", "Twilight", "Twisted",
+"Typhoon", "Traveling", "Undying", "Underworld", "Ultraviolet",
+"Valiant", "Valley", "Vanirian", "Vapor", "Vampiric",
+"Vampire's", "Valkyrian", "Valkyrie's",  "Vengeful", "Venomous",
+"Veteran", "Victorian",  "Victorious", "Viking",  "Violet",
+"Voice",  "Void", "Voidborne",  "Vulpine", "Vellum",
+"Venusian", "Verdant",  "Vermilion", "Vernal",  "Vexing",
+"Vibrant",  "Vigilant", "Village",  "Vine", "Volcanic",
+"Volcano", "Voracious",  "Vulcanian", "Vecna's",  "Vesperal",
+"Vintage",  "Victorian",  "Voidless",
+
+"X-ray",  
+"Yesteryear",          "Young",
+"Joyful",
+
+"Antediluvian",
+"Anvil",
+"Antlered",
+"Apprehensive",        "Aprendice",
+"Aquatic",        "Archaic",
+"Arctic",        "Ardent",
+"Arena",        "Arch",
+"Archfey",        "Ardent",
+"Arena's",        "Arrogant",
+"Arachnid",        "Austere",
+"Avatar",        "Awakened",
+
+"Badger",
+"Baobab's",
+"Barracks",
+"Barren",
+"Bearded",
+"Behemoth",
+"Benevolent",
+"Beryl",
+"Bitter",
+"Blazing",
+"Blooming",
+"Blossoming",
+"Blue",
+"Boar's",
+"Boastful",
+"Bog",
+"Boggy",
+"Bone",
+"Book",
+"Booming",
+"Bountiful",
+"Boastful",
+"Bramble",
+"Brain",
+"Brave",
+"Brimstone",
+"Bronce",
+"Bronze",
+"Brook",
+"Brown",
+"Bridge",
+"Brush",
+"Buccaneer",
+"Budding",
+"Burgundy",
+"Burned",
+"Bygone",
+
+"Primal",
+"Lost",
+"Tribal",
+"Mammalian",
+
+
+
+# C
+"Calm",
+"Camp",
+"Canary",
+"Candle",
+"Canopy",
+"Canyon",
+"Capricious",
+"Castle",
+"Catacomb",
+"Cathedral",
+"Cautious",
+"Cave",
+"Cavern",
+"Cavernous",
+"Celestial",
+"Cemetery",
+"Cerulean",
+"Celtic",
+"Chained",
+"Chalice",
+"Champagne",
+"Champion of",
+"Chaotic",
+"Chapel",
+"Charcoal",
+"Chasm",
+"Chest",
+"Cherished",
+"Chimeric",
+"Chivalrous",
+"Chocolate",
+"Chronal",
+"Chain",
+"Cheerful",
+"Chief",
+"Circus",
+"Citadel",
+"City",
+"Cliff",
+"Clockwork",
+"Coast",
+"Cobalt",
+"Cold",
+"Colonial",
+"Colossal",
+"Compassionate",
+"Confident",
+"Confused",
+"Copper",
+"Coppice",
+"Coral",
+"Cobalt",
+"Crab",
+"Crater",
+"Crescent",
+"Crimson",
+"Crown",
+"Cryptic",
+"Crystalline",
+"Crown's",
+"Cunning",
+"Curious",
+"Cursed",
+"Cyan",
+"Cyclonic",
+"Cyclopean",
+"Cyclops",
+
+"Dark",
+"Darkness",
+"Dashing",
+"Dated",
+"Dauntless",
+"Dawn",
+"Dawning", 
+"Deadly",
+"Death",
+"Deep",
+"Delta",
+"Depressed",
+"Desert",
+"Desolate",
+"Despondent",
+"Desperate",
+"Detached",
+"Detective",
+"Dewy",
+"Diabolical",
+"Diadem",
+"Dimensional",
+"Disappointed",
+"Discouraged",
+"Distrustful",
+"Diurnal",
+"Divine",
+"Diviner",
+"Doctor",
+"Dormant",
+"Dock",
+"Draconian",
+"Dragon's",
+"Drained",
+"Dream",
+"Driftwood",
+"Dune",
+"Dungeon",
+"Dusk",
+"Dusky",
+"Dust",
+"Dynamic",
+
+"Eager",
+"Eagle",
+"Earth",
+"Earthen",
+"Ebony",
+"Eclipsed",
+"Eclipsing",
+"Ecliptic",
+"Ecstatic",
+"Edgy",
+"Egotistic",
+"Electric",
+"Elegant",
+"Eloquent",
+"Elusive",
+"Eldritch",
+"Elven",
+"Elixir",
+"Emerald",
+"Empathetic",
+"Enchanted",
+"Energetic",
+"Energy",
+"Engine",
+"Enigmatic",
+"Enthusiastic",
+"Envious",
+"Ephemeral",
+"Errant",
+"Erratic",
+"Equinox",
+"Ethereal",
+"Euphoric",
+"Evanescent",
+"Excited",
+"Exotic",
+"Extravagant",
+"Exuberant",
+"Exhausted",
+
+"Fabled",
+"Faerie",
+"Fairground",
+"Faithful",
+"Falcon",
+"Fallen",
+"Fanciful",
+"Fanged",
+"Farm",
+"Fearful",
+"Feathered",
+"Fen",
+"Fenririan",
+"Ferocious",
+"Fervent",
+"Field's",
+"Fierce",
+"Fiery",
+"Fire",
+"First",
+"Fjord",
+"Flame",
+"Flaming",
+"Floral",
+"Flying",
+"Fleshwork",
+"Fool",
+"Forest",
+"Forge",
+"Formidable",
+"Fortress",
+"Fountain",
+"Frosty",
+"Frozen",
+"Frustrated",
+"Fuchsia",
+"Fullmetal",
+"Fullmoon",
+"Furious",
+"Furred",
+"Fury",
+"Futuristic",
+
+"Void",
+"Voided",
+"Valiant",
+"Vigilant",
+"Venerable",
+"Vintage",
+
+"Warlord",
+"Wand",
+"Wizard's",
+"Wand",
+"Wizard's",
+"Wolf's",
+"Windy",
+"Winter",
+"Werevolve's",
+"Warrior",
+"War",
+"War",
+"Warlord's",
+"Warrior's",
+"Windy",
+"Winged",
+"Witchy",
+"Withering"
+"Woodland",
+"Woods",
+"Woody",
+"Workshop",
+"Worried",
+"Winged",
+"Wandering",
+"Warm",
+"Wary",
+"Watery",
+"Wavy",
+"Web",
+"Wheelbraker",
+"Whispering",
+"Whistle",
+"Warping",
+"Water",
+"Whale",
+"White",
+"Wild",
+"Wise",
+"Wolf",
+"Wolf's"
+"Wrathful",
+"Wight",
+"Western",
+"Warp",
+"Wormhole",
+"Warp",
+"Watcher",
+"Whirlwind",
+"Wildfire",
+"Willow",
+"Wisp",
+"Witcher",
+"Wizardry",
+"Wraith",
+"Wyvern",
+
+"Zealous",
+"Zenith",
+"Zephyr",
+"Zombie",
+"Zombie's",
+"Zone",
+"Zoo",
+"Zypher",
+"Zodiac",
+"Zodiacal",
+"Zen",
+"Zeusian"
+
+]
+
+    if "Aberration" in creature_type:
+        # descriptor for Aberration Names names
+        descriptor += [
+            "Alien",
+            "Alienated",
+            "Aberrant",
+            "Eldritch",
+            "Horror",
+            "Jungle",
+            "Soulless",
+            "Underworld",
+            "Unworldly",
+            "Formless",
+            "Mind",
+            "Identity",
+            "Forsaken",
+            "Lost",
+            "Eldritch",
+            "Nether",
+            "Astral",
+            "Yellow",
+            "Green",
+            "Existential",
+            ]
+
+    if "Illithid" in creature_type:
+        descriptor += [
+                "Illithid"
+                "Mindflayer",
+                "Mindbending",
+                "Brainfeaster",
+                "Thoughtstealer",
+                "Eldritch",
+                "Voidgazer",
+                "Psionic",
+                "Deepdweller",
+                "Insidious",
+                "Unarcaned",
+                "Otherworldly",
+                "Tentacled",
+                "Soulflayer",
+                "Dimensional",
+                "Trascendent",
+                "Cerebral",
+                "Astral",
+                "Telepathic",
+                "Shadowspeaker",
+                "Dreamweaver",
+                "Mindreaper",
+                "Voidborn",
+                "Inscrutable",
+                "Starcaller",
+                "Warpwalker",
+                ]
+
+    if "Beholder" in creature_type:
+            descriptor += [
+                "Beholder",
+                "All-Seeing",
+                "Omniscient",
+                "Paranoid",
+                "Tyrannical",
+                "Visionary",
+                "Unblinking",
+                ]
+
+    if "Shapeshifters" in creature_type:
+            descriptor += [
+                "Formless",
+                "Mutable",
+                "Changeling",
+                "Amorphous",
+                "Protean",
+                "Mimic",
+                ]
+            
+    if "Old One" in creature_type:
+            descriptor += [
+                "Ancient",
+                "Eldritch",
+                "Timeless",
+                "Mysterious",
+                "All-Knowing",
+                "Old",
+                ]
+
+    if "Mindlinker" in creature_type:
+            descriptor += ["Knowledge-Seeker", "Benevolent", "Wise", "Thought-Linker", "Mind Weaver"]
+            
+
+
 
 
 
@@ -1043,30 +1739,8 @@ def Title(npc):
 
      
     if "Aberration" in creature_type:
-        # descriptor for Aberration Names names
-        descriptor += space_descriptor
-        descriptor += [
-            "Alienated",
-            "Aberrant",
-            "Eldritch",
-            "Horror",
-            "Soulless",
-            "Underworld",
-            "Unworldly",
-            "Formless",
-            "Mind",
-            "Identity",
-            "Forsaken",
-            "Lost",
-            "Eldritch",
-            "Nether",
-            "Astral",
-            "Yellow",
-            "Green",
-            ]
         
         # rank for Illithid names
-        rank += noble_rank + guardian_rank + guardian_rank
         rank += [
             "Abomination",
             "Manipulator",
@@ -1091,27 +1765,19 @@ def Title(npc):
             "Abyssmal",
             "Warden",
             "Voidshaper",
-            "Controller", "Breaker",
+            "Controller",
+            "Breaker",
             "Distorter",
-            "Existence Ravager", "Enforcer", "Void"
+            "Ravager", "Enforcer", "Void"
             ]
 
-        of_the += of_the_space
-
-        #return f"The {random.choice(descriptor)} {random.choice(rank)}"
+        of_the += [
+            "of the Jungle",
+            f"of the {random.choice(descriptor)} Jungle",
+            ]
 
         if "Illithid" in creature_type:
-            # descriptor for Illithid names
-            descriptor += [
-                "Mindflayer",
-                "Mindbending", "Brainfeaster", "Thoughtstealer", "Eldritch", "Voidgazer",
-                "Psionic", "Deepdweller",  "Insidious", "Arcane",
-                "Otherworldly", "Tentacled", "Soulflayer", "Dimensional", "Mystic",
-                "Cerebral", "Astral", "Telepathic", "Shadowspeaker", "Dreamweaver",
-                "Mindreaper", "Voidborn", "Inscrutable", "Starcaller", "Warpwalker",
-                ]
-
-            # rank for Illithid names
+            # rank for Illithid namesLorem Ipsum
             rank += [
                 "Oracle",
                 "Mindlord", "Brainmaster", "Psychic Sovereign", "Elder Brain", "Void Seer",
@@ -1132,14 +1798,6 @@ def Title(npc):
 
 
         if "Beholder" in creature_type:
-            descriptor += [
-                "Beholder",
-                "All-Seeing",
-                "Omniscient",
-                "Paranoid",
-                "Tyrannical",
-                "Visionary",
-                "Unblinking",]
             
             rank += ["Oracle",
                     "Eye",
@@ -1166,29 +1824,20 @@ def Title(npc):
 
 
         if "Shapeshifters" in creature_type:
-            descriptor += [
-                "Formless",
-                "Mutable",
-                "Changeling",
-                "Amorphous",
-                "Protean",
-                ]
             rank += [
-                "Mimic Sovereign",
+                
                 "Shapechanger",
                 "Form Warden",
                 "Shift Master",
-                "Mutable Lord"]
+                "Lord"]
             of_the += ["of the Shifting Forms", "of the Many Faces", "of the Illusory Guises", "of the Changing Aspects", "of the Protean Nature"]
 
 
-        elif "Old One" in creature_type:
-            descriptor += ["Ancient", "Eldritch", "Timeless", "Mysterious", "All-Knowing"]
+        if "Old One" in creature_type:
             rank += ["Elder Entity", "Cosmic Sage", "Star Spawn", "Void Seer", "Ancient Horror"]
             of_the += ["of the Ageless Eons", "of the Cosmic Depths", "of the Eldritch Secrets", "of the Starry Voids", "of the Ancient Mysteries"]
 
-        elif "Mindlinker" in creature_type:
-            descriptor += ["Knowledge-Seeker", "Benevolent", "Wise", "Thought-Linker", "Mind Weaver"]
+        if "Mindlinker" in creature_type:
             rank += ["Thought Sage", "Mental Harmonizer", "Brain Conductor", "Psychic Connector", "Mind Ambassador"]
             of_the += ["of the Collective Consciousness", "of the Wisdom Network", "of the Harmonious Minds", "of the Thought Weave", "of the Knowledge Nexus"]
 
@@ -1208,8 +1857,18 @@ def Title(npc):
                 "Enchanted",
                 "Wizardly",
                 "Green",
+                "Golden",
+                "Magic",
+                "Enchantment",
+                "Wizard's"
                 ]
-            rank += ["Spell Entity", "Arcane Aberration", "Magic Devourer", "Enchantment Lord", "Wizard's Curse"]
+            rank += [
+                "Spell",
+                "Entity",
+                "Aberration",
+                "Devourer",
+                "Lord",
+                "Curse"]
             of_the += ["of the Spell Storms", "of the Arcane Nexus", "of the Magical Anomalies", "of the Enchanted Vortex", "of the Wizard's Binding"]
 
         elif "Chaotic" in creature_type:
@@ -1218,7 +1877,9 @@ def Title(npc):
             of_the += ["of the Chaotic Maelstrom", "of the Unpredictable Whirl", "of the Mad Realms", "of the Erratic Visions", "of the Anarchic Depths"]
 
         elif "Star Titan" in creature_type:
-            descriptor += ["Cosmic", "Starborn", "Astral", "Nebulous", "Galactic"]
+            descriptor += [
+                "Golden",
+                "Cosmic", "Starborn", "Astral", "Nebulous", "Galactic"]
             rank += ["Cosmic Giant", "Nebula Lord", "Star Sovereign", "Astral Colossus", "Galaxy Dominator"]
             of_the += ["of the Star Fields", "of the Galactic Cores", "of the Astral Planes", "of the Cosmic Voids", "of the Nebula Realms"]
 
@@ -1264,7 +1925,7 @@ def Title(npc):
                 "of the Vortex",
                 ]
 
-        elif npc.subrace == "Githyanki":
+        elif "Githyanki" in creature_type:
             descriptor += [
                 "Marauding",
                 "Conquering",
@@ -1281,10 +1942,16 @@ def Title(npc):
     if npc.race == "Avens":
         descriptor += [
             "Avian",
+            "Golden",
             "Red", 
             "Feathered",
             "Yellow",
-            "Skybound", "Winged", "Aerial", "Soaring"]
+            "Skybound",
+            "Winged",
+            "Wind",
+            "Aerial",
+            "Soaring",
+            ]
         rank += ["Sky Watcher", "Wing Leader", "Feathered Sage", "Flight Master", "Aerie Guardian"]
         of_the += ["of the High Skies", "of the Soaring Winds", "of the Cloud Realms", "of the Endless Horizon", "of the Winged Tribes"]
 
@@ -1344,25 +2011,58 @@ def Title(npc):
             "Red",
             "Magenta",
             "Yellow",
+            "Amber",
+            "Golden",
+            "Jungle",
             ]
         rank += [
             "Shadow",
+            "Bull",
+
             ]
-        if npc.subrace == "Armored Bear":
+        of_the += [
+            "of the Jungle",
+            f"of the {random.choice(descriptor)} Jungle",
+            ]
+        if "Armored Bear" in creature_type:
             descriptor += [
                 "Mighty",
+                "Mammalian",
                 "Ironclad", "Noble", "Warrior", "Stalwart"]
             rank += ["Bear King", "Armor Lord", "Battle Bruin", "Iron Guardian", "Noble Ursine"]
             of_the += ["of the Northern Realms", "of the Icy Fortresses", "of the Warrior Clans", "of the Iron Woods", "of the Stalwart Defenders"]
 
-        if npc.subrace == "Monkey King":
-            descriptor += ["Cunning", "Whimsical", "Mighty", "Trickster", "Adventurous"]
-            rank += ["Monkey Monarch", "Wily Sovereign", "Jester King", "Trickster Lord", "Journey Master"]
+        if "Monkey King" in creature_type:
+            descriptor += [
+                "Mammalian",
+                "Cunning", "Whimsical", "Mighty", "Trickster", "Adventurous"]
+            rank += [
+                "Mammal",
+                "Monkey",
+                "Monarch",
+                "Sovereign",
+                "Jester",
+                "King",
+                "Lord",
+                "Journey",
+                "Master",
+                ]
             of_the += ["of the Infinite Mischief", "of the Winding Paths", "of the Mystic Mountains", "of the Cloud Realms", "of the Endless Adventure"]
 
         if npc.subrace == "Guardian Kong":
-            descriptor += ["Colossal", "Protector", "Mighty", "Fierce", "Vigilant"]
-            rank += ["Kong Guardian", "Jungle Protector", "Island Lord", "Colossus Keeper", "Titan Defender"]
+            descriptor += [
+                "Mammalian",
+                "Colossal", "Jungle", "Mighty", "Fierce", "Vigilant","Island"]
+            rank += [
+                "Mammal",
+                "Kong",
+                "Guardian",
+                "Protector",
+                "Lord",
+                "Colossus",
+                "Keeper",
+                "Titan",
+                "Defender"]
             of_the += ["of the Primal Isles", "of the Ancient Jungles", "of the Titan Groves", "of the Colossal Peaks", "of the Untamed Wilds"]
 
         if npc.subrace == "Giant Eagle":
@@ -1373,6 +2073,7 @@ def Title(npc):
 
         if "Tiger" in creature_type:
             descriptor += [
+                "Mammalian",
                 "White",
                 "Graceful",
                 "Silent",
@@ -1384,6 +2085,7 @@ def Title(npc):
                 "Silent",
                 "Snowy",
                 "Fros",
+                "Amber",
                 ]
             rank += [
                 "Sabertooth",
@@ -1407,12 +2109,15 @@ def Title(npc):
             of_the += ["of the Death Realms", "of the Spirit Skies", "of the Carrion Fields", "of the Sightful Heights", "of the Scavenger Lands"]
 
 
-        if npc.subrace == "Deer Spirit":
-            descriptor += ["Gentle", "Graceful", "Spiritual", "Intuitive", "Forestbound"]
+        if "Deer Spirit" in creature_type:
+            descriptor += [
+                "Amber",
+                "Mammalian",
+                "Gentle", "Graceful", "Spiritual", "Intuitive", "Forestbound"]
             rank += ["Forest Stag", "Gentle Guardian", "Spirit Deer", "Nature's Seer", "Woodland Sovereign"]
             of_the += ["of the Whispering Woods", "of the Gentle Glades", "of the Spiritual Trails", "of the Intuitive Paths", "of the Forest Kingdom"]
 
-        if npc.subrace == "Giant Owl of Wisdom":
+        if npc.subrace == "Giant Owl":
             descriptor += ["Wise", "Nocturnal", "Silentwing", "Omniscient", "Mystical"]
             rank += ["Owl Sage", "Night Seer", "Wisdom Keeper", "Silent Hunter", "Mystic Watcher"]
             of_the += ["of the Ancient Knowledge", "of the Night Skies", "of the Silent Hunt", "of the Mystic Visions", "of the Wise Woods"]
@@ -1426,6 +2131,8 @@ def Title(npc):
                 "Graceful",
                 "Star",
                 "Cosmic",
+                "Amber",
+                "Mammalian",
                 ]
             rank += [
                 "Antler",
@@ -1440,17 +2147,29 @@ def Title(npc):
                 f"of the {random.choice(descriptor)} Forest",
                 f"of the {random.choice(descriptor)} Realms"]
 
-        if npc.subrace == "Fenrir Wolf":
-            descriptor += ["Ferocious", "Mythic", "Boundless", "Mighty",
+        if "Fenrir Wolf" in creature_type:
+            descriptor += [
+                "Mammalian",
+                "Ferocious", "Mythic", "Boundless", "Mighty",
                            ]
             rank += ["Wolf Titan", "Mythic Predator", "Howler", "Fenrir's Kin", "Raging Lycan"]
             of_the += ["of the Ancient Legends", "of the Primal Wilds", "of the Boundless Tundra", "of the Mythic Packs", "of the Mighty Roars"]
 
         if "Forest God" in creature_type:
-            descriptor += ["Untamed", "Guardian", "Brave", "Sovereign", "Wild"]
-            rank += [
+            descriptor += [
+                "Boar",
+                "Untamed",
                 "Ferret",
-                "Boar King", "Forest Protector", "Tusked Guardian", "Wild Sovereign", "Braveheart"]
+                "Guardian",
+                "Brave",
+                "Sovereign",
+                "Wild",
+                "Forest",
+                "Tusked",
+                "Mammalian",
+                ]
+            rank += [
+                "King", "Protector", "Guardian", "Sovereign", "Braveheart"]
             of_the += ["of the Untamed Groves", "of the Wild Thickets", "of the Ancient Forests", "of the Brave Trails", "of the Guardian Oaks"]
 
         if "Cosmic Whale" in creature_type:
@@ -1468,6 +2187,8 @@ def Title(npc):
                 "Galactic",
                 "Boreal",
                 "Ferret",
+                "Amber",
+                "Mammalian",
                 ]
             rank += [
                 "Leviathan",
@@ -1495,8 +2216,11 @@ def Title(npc):
             of_the += ["of the Lost Worlds", "of the Ancient Ruins", "of the Primal Jungles", "of the Monstrous Lands", "of the Colossal Footprints"]
 
         if npc.subrace == "Kerberus Dog":
-            descriptor += ["Three-Headed", "Guardian", "Infernal", "Fierce", "Loyal"]
-            rank += ["Hound of Hades", "Infernal Watchdog", "Cerberus Keeper", "Three-Faced Guardian", "Hellhound Sovereign"]
+            descriptor += [
+                "Mammalian",
+                "Three-Headed", "Guardian", "Infernal", "Fierce", "Loyal"]
+            rank += [
+                "Hound of Hades", "Infernal Watchdog", "Cerberus Keeper", "Three-Faced Guardian", "Hellhound Sovereign"]
             of_the += ["of the Underworld Gates", "of the Infernal Depths", "of the Guarded Realms", "of the Threefold Paths", "of the Fierce Loyalty"]
 
         if "Sun Scarab" in creature_type:
@@ -1530,6 +2254,7 @@ def Title(npc):
 
         if "Moon Jackal" in creature_type:
             descriptor += [
+                "Mammalian",
                 "Astral",
                 "Nocturnal",
                 "Mystical",
@@ -1557,16 +2282,19 @@ def Title(npc):
             rank += ["Web Mistress", "Silk Sovereign", "Venom Lord", "Arachnid Matron", "Spinner of Fates"]
             of_the += ["of the Webbed Realms", "of the Silken Threads", "of the Deadly Traps", "of the Arachnid Dominions", "of the Hidden Lairs"]
 
-        if "World Serpent's Spawn" in creature_type:
+        if "World Serpent" in creature_type:
             descriptor += [
                 "Green",
                 "Ancient", "Mythic", "Cosmic", "Endless", "Primordial"]
             rank += ["Serpent Progeny", "Cosmic Coiler", "Mythic Python", "Galactic Viper", "Eternal Slitherer"]
             of_the += ["of the World's Roots", "of the Cosmic Scales", "of the Mythic Depths", "of the Endless Coils", "of the Primordial Seas"]
 
-        if npc.subrace == "Elder Elephant":
-            descriptor += ["Sage", "Majestic", "Ancient", "Wise", "Gentle Giant"]
-            rank += ["Elder Matriarch", "Tusker Sage", "Memory Keeper", "Gentle Titan", "Ancient One"]
+        if "Elder Elephant" in creature_type:
+            descriptor += [
+                "Mammalian",
+                "Sage", "Majestic", "Ancient", "Wise", "Gentle Giant"]
+            rank += ["Elder",
+                     "Matriarch", "Tusker Sage", "Memory Keeper", "Gentle Titan", "Ancient One"]
             of_the += ["of the Ageless Herds", "of the Sacred Plains", "of the Ancient Wisdom", "of the Gentle Lands", "of the Majestic Paths"]
 
     if "Lion" in creature_type or "Leon" in creature_type:
@@ -1584,6 +2312,8 @@ def Title(npc):
                 "Sunlit",
                 "Gold",
                 "Roaring",
+                "Mammalian",
+                "Golden",
                 ]
         rank += [
                 "Mane",
@@ -1624,17 +2354,26 @@ def Title(npc):
                    f"of the {random.choice(descriptor)} Clans",
                    f"of the {random.choice(descriptor)} Roars"
                    ]
-    if npc.race == "Beastfolk":
-        descriptor += ["Feral", "Wild", "Naturebound", "Primal", "Beastly"]
+    if "Beastfolk" in creature_type:
+        descriptor += [
+            "Amber",
+            "Feral",
+            "Golden",
+            "Jungle",            
+            "Wild", "Naturebound", "Primal", "Beastly"]
         rank += ["Tribe Leader", "Nature Guardian", "Primal Warrior", "Wild Seeker", "Beast Master"]
-        of_the += ["of the Untamed Wilds", "of the Primal Forests", "of the Ancient Tribes", "of the Nature's Heart", "of the Beast Realms"]
+        of_the += [
+            "of the Jungle",
+            "of the {random.choice(descriptor)} Jungle",
+            "of the Untamed Wilds",
+            "of the Primal Forests", "of the Ancient Tribes", "of the Nature's Heart", "of the Beast Realms"]
 
         if npc.subrace == "Arachnidfolk":
             descriptor += ["Weaver", "Silken", "Eight-Legged", "Trickster", "Fate Spinner"]
             rank += ["Web Master", "Silk Weaver", "Venom Lord", "Spinner of Lies", "Arachnid Sage"]
             of_the += ["of the Webbed Dominions", "of the Silken Threads", "of the Poisoned Fangs", "of the Trickster's Web", "of the Fateful Strands"]
 
-        if npc.subrace == "Catfolk":
+        if "Catfolk" in creature_type:
             descriptor += [
                 "Prowler",
                 "Agile",
@@ -1645,6 +2384,8 @@ def Title(npc):
                 "Mystical",
                 "Claw",
                 "Shadow",
+                "Amber",
+                "Mammalian",
                 ]
             rank += [
                 "Sabertooth",
@@ -1660,9 +2401,19 @@ def Title(npc):
                 "of Moonlit Paths",
                 ]
 
-        if npc.subrace == "Centaur":
-            descriptor += ["Hooved", "Wildheart", "Nature's Rider", "Forest Runner", "Half-Horse"]
-            rank += ["Herd Leader", "Forest Guardian", "Wild Archer", "Hoofed Sage", "Pathfinder"]
+        if "Centaur" in creature_type:
+            descriptor += [
+                "Hooved",
+                "Wildheart",
+                "Nature's",
+                "Forest",
+                "Half-Horse",
+                "Herd"]
+            rank += [
+                "Rider",
+                "Leader",
+                "Runner",
+                "Wild Archer", "Hoofed Sage", "Pathfinder"]
             of_the += ["of the Open Plains", "of the Ancient Forests", "of the Running Rivers", "of the Wild Trails", "of the Hooved Tribes"]
 
         if npc.subrace == "Gnoll":
@@ -1677,8 +2428,10 @@ def Title(npc):
             rank += ["Hive King", "Colony Master", "Swarm Leader", "Bug Sage", "Nest Protector"]
             of_the += ["of the Great Hives", "of the Buzzing Swarms", "of the Chitinous Carapaces", "of the Insect Colonies", "of the Versatile Kin"]
 
-        if npc.subrace == "Jackalmen":
-            descriptor += ["Canine", "Desert-Born", "Cunning", "Ancestral", "Afterlife Guardian"]
+        if "Jackalmen" in creature_type:
+            descriptor += [
+                "Mammalian",
+                "Canine", "Desert-Born", "Cunning", "Ancestral", "Afterlife Guardian"]
             rank += ["Jackal Lord", "Desert Prowler", "Canine Seer", "Anubis Kin", "Sandspeaker"]
             of_the += ["of the Ancient Tombs", "of the Desert Winds", "of the Canine Packs", "of the Ancestral Spirits", "of the Sand Dunes"]
 
@@ -1689,17 +2442,48 @@ def Title(npc):
 
 
 
-        if npc.subrace == "Merfolk":
+        if "Merfolk" in creature_type:
             descriptor += [
                 "Green",
-                "Aquatic", "Siren", "Ocean", "Mystical", "Deep Sea"]
-            rank += ["Ocean Sovereign", "Songster", "Coral Keeper", "Tide Master", "Deep Dweller"]
+                "Aquatic",
+                "Siren",
+                "Ocean",
+                "Mystical",
+                "Deep Sea",
+                "Coral",
+                "Tide",
+                "Deep",
+                ]
+            rank += ["Sovereign", "Songster", "Keeper", "Master", "Dweller"]
             of_the += ["of the Coral Reefs", "of the Siren's Call", "of the Ocean Depths", "of the Mystical Tides", "of the Sea's Embrace"]
 
-        if npc.subrace == "Minotaur":
-            descriptor += ["Labyrinthine", "Horned", "Mighty", "Maze Guardian", "Bullheaded"]
-            rank += ["Maze Master", "Horned Lord", "Labyrinth Keeper", "Bull Warrior", "Pathfinder"]
-            of_the += ["of the Twisting Mazes", "of the Horned Tribes", "of the Stone Labyrinths", "of the Hidden Paths", "of the Ancient Riddles"]
+        if "Minotaur" in creature_type:
+            descriptor += [
+                "Mammalian",
+                "Maze",
+                "Labyrinthine",
+                "Horned",
+                "Mighty",
+                "Labyrinth",
+                "Maze",
+                ]
+            rank += [
+                "Bull",
+                "Bullhead"
+                "Master",
+                "Horn",
+                "Keeper",
+                "Ox",
+                "Pathfinder",
+                ]
+            of_the += [
+                f"of the {random.choice(descriptor)} Mazes",
+                f"of the {random.choice(descriptor)} Horn",
+                "of the {random.choice(descriptor)} Labyrinths",
+                "of the {random.choice(descriptor)} Paths",
+                "of the {random.choice(descriptor)} Riddles",
+                "of the {random.choice(descriptor)} Ancients",
+                ]
 
         if npc.subrace == "Ratfolk":
             descriptor += ["Clever", "Scavenger", "Nimble", "Resourceful", "Urban"]
@@ -1745,11 +2529,14 @@ def Title(npc):
 
     if "Kitsune" in creature_type:
         descriptor += [
+            "Amber",
             "Astral",
+            "Blue",
             "Red",
             "Fox",
             "Foxy",
             "Enchanting",
+            "Golden",
             "Nine-Tailed",
             "Trickster",
             "Mystical",
@@ -1794,6 +2581,7 @@ def Title(npc):
             "Amber",
             "Astral",
             "Ethereal",
+            "Golden",
             "Radiant",
             "Divine",
             "Heavenly",
@@ -1806,6 +2594,11 @@ def Title(npc):
             "Sacred",
             "Yellow",
             "Green",
+            "Fire",
+            "Flame",
+            "Dark",
+            "Darkness",
+            "Shadow",
             ]
         rank += [
             "Oracle",
@@ -1860,12 +2653,16 @@ def Title(npc):
         if "Couatl" in creature_type:
             descriptor += [
                 "Green",
+                "Jungle",
                 "Rainbow",
                 "Colored",
                 "Beautiful",
                 "Feathered", "Guardian", "Serpentine", "Mystic", "Vibrant"]
             rank += ["Feathered Protector", "Serpent Guardian", "Mystic Coil", "Vibrant Spirit", "Sky Serpent"]
-            of_the += ["of the Feathered Wings", "of the Mystic Visions", "of the Serpentine Grace", "of the Vibrant Scales", "of the Guardian Skies"]
+            of_the += [
+                "of the Jungle",
+                f"of the {random.choice(descriptor)} Jungle",
+                "of the Feathered Wings", "of the Mystic Visions", "of the Serpentine Grace", "of the Vibrant Scales", "of the Guardian Skies"]
 
         if "Forgotten God" in creature_type:
             descriptor += [
@@ -1970,6 +2767,7 @@ def Title(npc):
             "Animated",
             "Crafted",
             "Design",
+            "Golden",
             "Mechanical",
             "Mechanized",
             "Sentient",
@@ -1985,7 +2783,7 @@ def Title(npc):
             ]
         rank += [
             "Gargoyle",
-            "Being", "Guardian", "Sentinel", "Machine", "Entity"]
+            "Being", "Sentinel", "Machine", "Entity"]
         of_the += ["of the Crafted Realms", "of the Mechanized Worlds", "of the Constructs", "of the Automated Legions"]
 
         if npc.subrace == "Animated Armor":
@@ -2087,6 +2885,7 @@ def Title(npc):
     if "Dragon" in creature_type:
         descriptor += [
             "Draconic",
+            "Jungle",
             "Majestic",
             "Ancient",
             "Scales",
@@ -2110,6 +2909,7 @@ def Title(npc):
             f"of the {random.choice(descriptor)} Realms",
             f"of the {random.choice(descriptor)} Sky",
             f"of the {random.choice(descriptor)} Peaks",
+            f"of the {random.choice(descriptor)} Jungle",
             ]
 
         if "Dragonborn" in npc.subrace:
@@ -2153,9 +2953,32 @@ def Title(npc):
             of_the += ["of the Hybrid Clans", "of the Draconic Blood", "of the Fire-Touched Lineage", "of the Mystical Scales", "of the Half-Blood Realms"]
 
         if "Dragon Turtle" in npc.subrace:
-            descriptor += ["Ancient", "Sea-Bound", "Colossal", "Revered", "Armored"]
-            rank += ["Ocean Guardian", "Colossal Leviathan", "Revered Elder", "Armored Behemoth", "Sea Dragon"]
-            of_the += ["of the Deep Oceans", "of the Colossal Depths", "of the Revered Seas", "of the Armored Shores", "of the Ancient Waves"]
+            descriptor += [
+                "Ancient",
+                "Sea",
+                "Colossal",
+                "Revered",
+                "Armored",
+                "Ocean",
+                ]
+            rank += [
+                "Guardian",
+                "Leviathan",
+                "Elder",
+                "Behemoth",
+                "Dragon",
+                ]
+            of_the += [
+                "of the Deep Oceans",
+                f"of the {random.choice(descriptor)} Oceans",
+                "of the Colossal Depths",
+                f"of the {random.choice(descriptor)} Seas",
+                "of the Revered Seas",
+                f"of the {random.choice(descriptor)} Shores",
+                "of the Shores",
+                "of the Waves",
+                f"of the {random.choice(descriptor)}  Waves",
+                ]
         if "Black" in npc.subrace:
             descriptor += ["Acidic", "Dark-Scaled", "Malevolent", "Swamp Dweller", "Corrosive"]
             rank += ["Acid Lord", "Swamp Sovereign", "Dark Drake", "Corrosive Wyrm", "Malevolent Serpent"]
@@ -2174,6 +2997,7 @@ def Title(npc):
             of_the += ["of the Poisoned Woods", "of the Verdant Jungles", "of the Deceptive Groves", "of the Toxic Thickets", "of the Forest Dominions"]
         if "Red" in creature_type:
             descriptor += [
+                "Amber",
                 "Red",
                 "Magenta",
                 "Fiery",
@@ -2255,7 +3079,7 @@ def Title(npc):
                 "Otherworldly"
                 ]
             rank += [
-                "",
+                "Ethereal",
                 ]
             of_the += [
                 "of the Ethereal Planes",
@@ -2276,6 +3100,7 @@ def Title(npc):
     if "Elemental" in npc.race:
         # General Elemental descriptor, rank, and Of_the Phrases
         descriptor += [
+            "Golden",
             "Primal",
             "Elemental",
             "Natural",
@@ -2341,8 +3166,10 @@ def Title(npc):
             of_the += ["of the Deep Earth", "of the Stoneheart Mountains", "of the Terran Realms", "of the Nature's Core", "of the Grounded Lands"]
 
         # Hyperian
-        if "Hyperian" in npc.subrace:
-            descriptor += ["Solar", "Radiant", "Sunfire", "Illuminated", "Lightbringer"]
+        if "Hyperian" in creature_type:
+            descriptor += [
+                "Amber",
+                "Solar", "Radiant", "Sunfire", "Illuminated", "Lightbringer"]
             rank += ["Solar Guardian", "Radiant Sovereign", "Sunfire Master", "Illuminated Emissary", "Lightbringer"]
             of_the += ["of the Solar Flames", "of the Radiant Skies", "of the Sunfire Realms", "of the Illuminated Heavens", "of the Lightbringer's Domain"]
 
@@ -2445,7 +3272,7 @@ def Title(npc):
         if "Magmaforged" in npc.subrace:
             descriptor += [
                 "Red",
-                "Lava", "Volcanic", "Igneous", "Molten", "Fiery Earth"]
+                "Lava", "Volcanic", "Igneous", "Molten", "Fiery"]
             rank += ["Lava Creator", "Volcanic Force", "Igneous Guardian", "Molten Shaper", "Fiery Earth Ruler"]
             of_the += ["of the Lava Flows", "of the Volcanic Mountains", "of the Igneous Formations", "of the Molten Depths", "of the Fiery Earth"]
 
@@ -2518,6 +3345,7 @@ def Title(npc):
             "Demon",
             "Fiendish",
             "Dark",
+            "Amber",
             ]
         rank += [
             "Sabertooth",
@@ -2529,6 +3357,8 @@ def Title(npc):
         of_the += [
             f"of the {random.choice(descriptor)} Realms",
             "of the Abyssal Depths",
+            "of the Abyss",
+            "of Hell",
             f"of the {random.choice(descriptor)} Schemes",
             f"of the {random.choice(descriptor)} Plans",
             f"of the {random.choice(descriptor)} Hordes",
@@ -2629,8 +3459,10 @@ def Title(npc):
 
         # Demongnoll
         if "Demongnoll" in npc.subrace:
-            descriptor += ["Savage", "Demonic", "Ravenous", "Chaotic", "Fierce"]
-            rank += ["Savage Overlord", "Demonic Pack Leader", "Ravenous Fiend", "Chaotic Marauder", "Fierce Hunter"]
+            descriptor += [
+                "Jungle",
+                "Savage", "Demonic", "Ravenous", "Chaotic", "Fierce"]
+            rank += ["Overlord", "Demonic Pack Leader", "Ravenous Fiend", "Chaotic Marauder", "Fierce Hunter"]
             of_the += ["of the Savage Wastes", "of the Demonic Packs", "of the Ravenous Deserts", "of the Chaotic Wilderness", "of the Fierce Battles"]
 
         # Orkishdemon
@@ -2659,7 +3491,8 @@ def Title(npc):
                 "Cunning",
                 "Malevolent",
                 "Illusionist",
-                "Manipulative"
+                "Manipulative",
+                "Amber",
                 ]
             rank += [
                 "Sabertooth",
@@ -2701,7 +3534,13 @@ def Title(npc):
 
         # Behemoth
         if "Behemoth" in npc.subrace:
-            descriptor += ["Massive", "Powerful", "Terrifying", "Untamed", "Monstrous"]
+            descriptor += [
+                "Massive",
+                "Powerful",
+                "Terrifying",
+                "Untamed",
+                "Monstrous",
+                ]
             rank += ["Mighty Behemoth", "Terrifying Colossus", "Untamed Giant", "Powerful Titan", "Monstrous Behemoth"]
             of_the += ["of the Wild Lands", "of the Terrifying Strength", "of the Untamed Realms", "of the Powerful Roars", "of the Monstrous Dominions"]
 
@@ -2806,11 +3645,18 @@ def Title(npc):
             "Red",
             "Diabolical",
             "Magenta",
-            "Hellish", "Sinister", "Maleficent",
-            "Dreadful", "Fiery", "Baleful", "Malevolent", "Nefarious",
-            "Sulfurous", "Darkflame", "Abyssal", "Brutal", "Tormenting",
-            "Fearsome", "Terrifying", "Cruel", "Wicked", "Vicious",
-            "Ghastly", "Demonic", "Satanic", "Chthonic", "Malignant"
+            "Hellish",
+            "Sinister", "Maleficent",
+            "Dreadful", "Fiery",
+            "Baleful", "Malevolent", "Nefarious",
+            "Sulfurous", "Darkflame", "Abyssal",
+            "Brutal", "Tormenting",
+            "Fearsome", "Terrifying",
+            "Cruel", "Wicked", "Vicious",
+            "Ghastly", "Demonic", "Satanic",
+            "Chthonic", "Malignant",
+            "Amber",
+
         ]
 
         # rank for Fiend names
@@ -2855,6 +3701,7 @@ def Title(npc):
     if "Fey" in creature_type:
         # General Fey descriptor, rank, and Of_the Phrases
         descriptor += [
+            "Golden",
             "Green",
             "Ferret",
             "Enchanted", "Mystical", "Otherworldly", "Charming", "Ethereal"]
@@ -3003,7 +3850,9 @@ def Title(npc):
 
         # Fire Giant
         if "Fire Giant" in npc.subrace:
-            descriptor += ["Infernal", "Fiery", "Muspelheim", "Blazing", "Volcanic"]
+            descriptor += [
+                "Amber",
+                "Infernal", "Fiery", "Muspelheim", "Blazing", "Volcanic"]
             rank += ["Infernal Overlord", "Fiery Titan", "Muspelheim Ruler", "Blazing Colossus", "Volcanic Giant"]
             of_the += ["of the Infernal Forges", "of the Fiery Pits", "of the Muspelheim Flames", "of the Blazing Mountains", "of the Volcanic Lands"]
 
@@ -3026,13 +3875,13 @@ def Title(npc):
             of_the += ["of the Eastern Mountains", "of the Demonlike Legends", "of the Terrifying Myths", "of the Ogre Realms", "of the Menacing Tales"]
 
         # Ettin (Two headed)
-        if "Ettin (Two headed)" in npc.subrace:
+        if "Ettin" in npc.subrace:
             descriptor += ["Two-Headed", "Brawny", "Conflicted", "Dual-Natured", "Rugged"]
             rank += ["Brawny Ettin", "Two-Headed Giant", "Dual-Natured Colossus", "Conflicted Behemoth", "Rugged Titan"]
             of_the += ["of the Two Minds", "of the Brawny Mountains", "of the Conflicted Lands", "of the Dual-Natured Realms", "of the Rugged Territories"]
 
         # Fomorians (Sea Giants)
-        if "Fomorians (Sea Giants)" in npc.subrace:
+        if "Fomorians" in npc.subrace:
             descriptor += ["Sea-Bound", "Fearsome", "Ancient", "Icy", "Dark"]
             rank += ["Sea Giant King", "Fearsome Fomorian", "Ancient Mariner", "Icy Leviathan", "Dark Ocean Lord"]
             of_the += ["of the Icy Depths", "of the Sea-Bound Realms", "of the Fearsome Tides", "of the Ancient Oceans", "of the Dark Seas"]
@@ -3050,8 +3899,10 @@ def Title(npc):
             of_the += ["of the Sky Castles", "of the Cloud Kingdoms", "of the Lofty Realms", "of the Ethereal Heights", "of the Majestic Skies"]
 
         # Stone Giant
-        if "Stone Giant" in npc.subrace:
-            descriptor += ["Rocky", "Stoic", "Earthen", "Immovable", "Rugged"]
+        if "Stone Giant" in creature_type:
+            descriptor += [
+                "Golden",
+                "Rocky", "Stoic", "Earthen", "Immovable", "Rugged"]
             rank += ["Rocky Titan", "Stoic Colossus", "Earthen Guardian", "Immovable Lord", "Rugged Protector"]
             of_the += ["of the Stony Mountains", "of the Earthen Realms", "of the Immovable Fortresses", "of the Stoic Lands", "of the Rugged Peaks"]
 
@@ -3065,6 +3916,7 @@ def Title(npc):
     if "Gnome" in creature_type:
         # General Gnome descriptor, rank, and Of_the Phrases
         descriptor += [
+            "Golden",
             "Master",
             "Gnomish", 
             "Inventive",
@@ -3072,7 +3924,8 @@ def Title(npc):
             "Small",
             "Whimsical",
             "Clever"]
-        rank += ["Tinker",
+        rank += ["Gnome",
+                 "Tinker",
                  "Inventor",
                  "Sage",
                  "Explorer",
@@ -3273,11 +4126,13 @@ def Title(npc):
             descriptor += [
                 "Astral",
                 "Enigmatic",
+                "Golden",
                 "Mystical",
                 "Wise",
                 "Riddler",
                 "Speaking",
                 "Mystical",
+                "Amber",
                 ]
             rank += [
                 "Riddle",
@@ -3426,8 +4281,11 @@ def Title(npc):
         # Ochre
         if "Ochre" in creature_type:
             descriptor += [
+                "Golden",
                 "Yellow",
-                "Earthen", "Muddy", "Rustic", "Clay-Like"]
+                "Earthen",
+                "Amber",
+                "Muddy", "Rustic", "Clay-Like"]
             rank += ["Earthen Slime", "Muddy Blob", "Rustic Puddle", "Clay-Like Mass"]
             of_the += ["of the Muddy Banks", "of the Earthen Pits", "of the Rustic Marshes", "of the Clay Fields"]
 
@@ -3502,6 +4360,7 @@ def Title(npc):
         descriptor += [
             "Red",
             "Yellow",
+            "Amber",
             "Green",
             "Black",
             "Brown",
@@ -3519,6 +4378,7 @@ def Title(npc):
         if "Desert" in npc.subrace:
             descriptor += [
                 "Yellow",
+                "Amber",
                 "Desert", "Sun-Scorched", "Nomadic", "Sand"]
             rank += ["Desert Raider", "Sun-Scorched Chief", "Nomadic Warrior", "Sand Marauder"]
             of_the += ["of the Desert Wastes", "of the Sun-Scorched Sands", "of the Nomadic Tribes", "of the Sand Dunes"]
@@ -3571,10 +4431,14 @@ def Title(npc):
         # Forest
         if "Forest" in npc.subrace:
             descriptor += [
+                "Jungle",
                 "Green",
                 "Woodland", "Leafy", "Verdant", "Sylvan"]
             rank += ["Woodland Chieftain", "Leafy Scout", "Verdant Warrior", "Sylvan Hunter"]
-            of_the += ["of the Woodland Groves", "of the Leafy Canopies", "of the Verdant Jungles", "of the Sylvan Glades"]
+            of_the += [
+                "of the Jungle",
+                f"of the {random.choice(descriptor)}",
+                "of the Woodland Groves", "of the Leafy Canopies", "of the Verdant Jungles", "of the Sylvan Glades"]
 
         # Nomadic
         if "Nomadic" in npc.subrace:
@@ -3596,14 +4460,20 @@ def Title(npc):
 
         # Feral
         if "Feral" in npc.subrace:
-            descriptor += ["Wild", "Untamed", "Savage", "Primal"]
+            descriptor += [
+                "Jungle",
+                "Wild", "Untamed", "Savage", "Primal"]
             rank += ["Wild Chief", "Untamed Leader", "Savage Warrior", "Primal Hunter"]
-            of_the += ["of the Wild Lands", "of the Untamed Territories", "of the Savage Packs", "of the Primal Jungles"]
+            of_the += [
+                "of the Jungle",
+                f"of the {random.choice(descriptor)} Jungle",
+                "of the Wild Lands", "of the Untamed Territories", "of the Savage Packs", "of the Primal Jungles"]
 
     # Plant Race and Subraces
-    if "Plant" in npc.race:
+    if "Plant" in creature_type:
         # General Plant descriptor, rank, and Of_the Phrases
         descriptor += [
+            "Jungle",
             "Red",
             "Green",
             "Verdant", "Leafy", "Woody", "Floral", "Nature-Bound"]
@@ -3613,7 +4483,7 @@ def Title(npc):
         # Willow Guardian
         if "Willow Guardian" in npc.subrace:
             descriptor += ["Weeping", "Graceful", "Watery", "Swaying"]
-            rank += ["Weeping Protector", "Graceful Willow", "Watery Sentinel", "Swaying Guardian"]
+            rank += ["Protector", "Willow", "Sentinel", "Guardian"]
             of_the += ["of the Weeping Rivers", "of the Graceful Bends", "of the Watery Banks", "of the Swaying Meadows"]
 
         # Treant
@@ -3762,8 +4632,12 @@ def Title(npc):
             of_the += ["of the Forbidden Spells", "of the Undying Will", "of the Arcane Secrets", "of the Malevolent Plans"]
 
         # Pride Mummy
-        if "Pride Mummy" in npc.subrace:
-            descriptor += ["Ancient", "Preserved", "Guardian", "Proud"]
+        if "Pride Mummy" in creature_type:
+            descriptor += [
+                "Ancient",
+                "Eternal",
+                "Golden",
+                "Preserved", "Guardian", "Proud"]
             rank += ["Ancient Guardian", "Preserved Warrior", "Proud Protector", "Mummified Sentinel"]
             of_the += ["of the Ancient Tombs", "of the Preserved Crypts", "of the Proud Dynasties", "of the Guardian Mummies"]
 
@@ -3871,10 +4745,13 @@ def Title(npc):
         # Tomb's Hoarder
         if "Tomb's Hoarder" in creature_type:
             descriptor += [
+                "Golden",
                 "Greedy",
                 "Obsessive",
                 "Ancient",
-                "Tomb"]
+                "Tomb",
+                "Amber",
+                ]
             rank += [
                 "Gargoyle",
                 "Guardian",
@@ -4127,8 +5004,9 @@ def Title(npc):
                        "of the Green Canopies"]
 
         # Wood Elf
-        if "Wood" in npc.subrace:
+        if "Wood" in creature_type:
             descriptor += ["Green",
+                           "Jungle",
                            "Woodland",
                            "Earthy",
                            "Rustic",
@@ -4143,7 +5021,9 @@ def Title(npc):
             of_the += ["of the Woodland Glades",
                        "of the Earthy Forests",
                        "of the Rustic Thickets",
-                       "of the Natural Springs"]
+                       "of the Natural Springs",
+                       "of the Jungle",
+                       "of the {random.choice(descriptor)} Jungle",]
 
         # Dark Elf
         if "Dark" in npc.subrace:
@@ -4229,7 +5109,9 @@ def Title(npc):
         if "Sun" in creature_type:
             descriptor += [
                 "Ethereal",
+                "Golden",
                 "Yellow",
+                "Amber",
                 "Sunlit", "Radiant", "Bright", "Solar"]
             rank += ["Sunlit Warrior", "Radiant Enchanter", "Bright Archer", "Solar Guardian"]
             of_the += ["of the Sunlit Glades", "of the Radiant Valleys", "of the Bright Skies", "of the Solar Realms"]
@@ -4242,9 +5124,10 @@ def Title(npc):
                 "Twilight",
                 "Eclipsed",
                 "Shadowed",
-                "Celestial"]
+                "Celestial",
+                ]
             rank += [
-                "",
+                "Eclipse",
                 ]
             of_the += ["of the Twilight Forests", "of the Eclipsed Moons", "of the Shadowed Paths", "of the Celestial Alignments"]
 
@@ -4284,9 +5167,14 @@ def Title(npc):
             of_the += ["of the City Lights", "of the Metropolitan Melting Pots", "of the Sophisticated Societies", "of the Civic Hubs"]
 
         # Sands Elf
-        if "Sands" in npc.subrace:
-            descriptor += ["Desert", "Sand-Worn", "Dune", "Arid"]
-            rank += ["Desert Nomad", "Sand-Worn Scout", "Dune Wanderer", "Arid Survivor"]
+        if "Sands" in creature_type:
+            descriptor += [
+                "Amber",
+                "Desert",
+                "Sand",
+                "Dune",
+                "Arid"]
+            rank += ["Nomad", "Scout", "Wanderer", "Survivor"]
             of_the += ["of the Desert Expanse", "of the Sand-Worn Trails", "of the Dune Seas", "of the Arid Wastelands"]
     # Dwarf Race and Subraces
     if "Dwarf" in npc.race:
@@ -4307,10 +5195,14 @@ def Title(npc):
             of_the += ["of the Rocky Peaks", "of the Highland Caverns", "of the Sturdy Mines", "of the Traditional Keeps"]
 
         # Conquistador Dwarf
-        if "Conquistador" in npc.subrace:
+        if "Conquistador" in creature_type:
             descriptor += [
                 "Golden Sun's",
-                "Adventurous", "Explorer", "Conqueror", "Bold"]
+                "Amber",
+                "Adventurous",
+                "Explorer",
+                "Golden",
+                "Conqueror", "Bold"]
             rank += ["Adventurous Pioneer", "Explorer Captain", "Conqueror Hero", "Bold Leader"]
             of_the += ["of the New Frontiers", "of the Adventurous Expeditions", "of the Conquered Lands", "of the Bold Ventures"]
 
@@ -4363,24 +5255,22 @@ def Title(npc):
             of_the += ["of the Rugged Cliffs", "of the Cliffside Forges", "of the Canyon Depths", "of the Open-Air Quarries"]
 
         # Bank Templar Dwarf
-        if "Bank Templar" in npc.subrace:
-            descriptor += ["Wealthy", "Secure", "Guardian", "Honorable"]
-            rank += ["Wealthy Guardian", "Secure Banker", "Honorable Protector", "Vault Keeper"]
+        if "Bank Templar" in creature_type:
+            descriptor += [
+                "Amber",
+                "Golden",
+                "Wealthy", "Secure", "Guardian", "Honorable"]
+            rank += ["Guardian", "Secure Banker", "Honorable Protector", "Vault Keeper"]
             of_the += ["of the Wealthy Vaults", "of the Secure Banks", "of the Honorable Safeguards", "of the Protected Treasures"]
-
-        # Forgeclan Dwarf
-        if "Forgeclan" in npc.subrace:
-            descriptor += ["Smithing", "Fiery", "Industrious", "Metallic"]
-            rank += ["Smithing Master", "Fiery Artisan", "Industrious Worker", "Metallic Forger"]
-            of_the += ["of the Smithing Halls", "of the Fiery Forges", "of the Industrious Workshops", "of the Metallic Creations"]
-        # Bank Templar
-        if "Bank Templar" in npc.subrace:
             descriptor += ["Vigilant", "Guardian", "Honorable", "Wealthy"]
             rank += ["Vigilant Keeper", "Guardian of Wealth", "Honorable Defender", "Wealthy Protector"]
             of_the += ["of the Sacred Vaults", "of the Guardian Banks", "of the Honorable Temples", "of the Wealthy Treasuries"]
 
-        # Forgeclan
-        if "Forgeclan" in npc.subrace:
+        # Forgeclan Dwarf
+        if "Forgeclan" in creature_type:
+            descriptor += ["Smithing", "Fiery", "Industrious", "Metallic"]
+            rank += ["Smithing Master", "Fiery Artisan", "Industrious Worker", "Metallic Forger"]
+            of_the += ["of the Smithing Halls", "of the Fiery Forges", "of the Industrious Workshops", "of the Metallic Creations"]
             descriptor += ["Fiery", "Crafty", "Industrious", "Metal-Bound"]
             rank += ["Fiery Smith", "Crafty Artisan", "Industrious Worker", "Metal-Bound Warrior"]
             of_the += ["of the Fiery Forges", "of the Crafty Workshops", "of the Industrious Clans", "of the Metal-Bound Guilds"]
@@ -4389,14 +5279,22 @@ def Title(npc):
     if "Lizardfolk" in creature_type:
         # General Lizardfolk descriptor, rank, and Of_the Phrases
         descriptor += [
+            "Jungle",
             "Red",
             "Scaly",
             "Yellow",
             "Green",
-            
-            "Cold-Blooded", "Reptilian", "Stealthy", "Primitive"]
-        rank += ["Scaly Hunter", "Reptilian Shaman", "Cold-Blooded Warrior", "Stealthy Tracker", "Primitive Chieftain"]
-        of_the += ["of the Reptilian Marshes", "of the Scaly Jungles", "of the Cold-Blooded Tribes", "of the Stealthy Bogs", "of the Primitive Lands"]
+            "Amber",
+            "Cold",
+            "Reptilian",
+            "Stealthy",
+            "Primitive",
+            ]
+        rank += ["Hunter", "Shaman", "Cold-Blooded Warrior", "Stealthy Tracker", "Primitive Chieftain"]
+        of_the += [
+            "of the Jungle",
+            f"of the {random.choice(descriptor)} Jungle",
+            "of the Reptilian Marshes", "of the Scaly Jungles", "of the Cold-Blooded Tribes", "of the Stealthy Bogs", "of the Primitive Lands"]
 
         # Swamp Crocfolk
         if "Swamp Crocfolk" in npc.subrace:
@@ -4656,8 +5554,10 @@ def Title(npc):
         of_the += ["of the Four Elements", "of the Primal Forces", "of the Elemental Essence", "of the Natural Order", "of the Elemental Harmony"]
 
     # Genie
-    elif npc.subrace == "Genie":
-        descriptor += ["Mystical", "Wondrous", "Ancient", "Boundless", "Enigmatic"]
+    if "Genie" in creature_type:
+        descriptor += [
+            "Amber",
+            "Mystical", "Wondrous", "Ancient", "Boundless", "Enigmatic"]
         rank += ["Genie Lord", "Wishmaster", "Arcane Sovereign", "Eternal Spirit", "Mystic Ruler"]
         of_the += ["of the Ancient Wishes", "of the Mystic Sands", "of the Boundless Realms", "of the Eternal Flames", "of the Arcane Mysteries"]
 
@@ -4710,14 +5610,8 @@ def Title(npc):
 
 
     if npc.background == "Cleric":
-        of_the += [
-            "of the Abbey", "of the Sacred Light", "of the Divine Order", "of the Holy Quest",
-            "of the Eternal Flame", "of the Celestial Choir", "of the Hallowed Shrine", "of the Sacred Scrolls",
-            "of the Divine Will", "of the Chosen Path", "of the Pilgrimage", "of the Faithful",
-            "of the Covenant", "of the Ancient Rites", "of the Divine Mystery", "of the Prophetic Vision",
-            "of the Blessed Waters", "of the Heavenly Host", "of the Sacred Oath", "of the Divine Harmony"
-        ]
         descriptor += [
+            "Amber",
             "Blessed", "Holy", "Devout", "Pious", "Virtuous", 
             "Anointed", "Sanctified", "Righteous", "Divine", "Spiritual",
             "Celestial", "Sacred", "Zealous", "Faithful", "Chosen",
@@ -4732,12 +5626,19 @@ def Title(npc):
             "Theurgist", "Vicar", "Parson", "Elder", "Preacher"
             ]
 
+        of_the += [
+            "of the Abbey", "of the Sacred Light", "of the Divine Order", "of the Holy Quest",
+            "of the Eternal Flame", "of the Celestial Choir", "of the Hallowed Shrine", "of the Sacred Scrolls",
+            "of the Divine Will", "of the Chosen Path", "of the Pilgrimage", "of the Faithful",
+            "of the Covenant", "of the Ancient Rites", "of the Divine Mystery", "of the Prophetic Vision",
+            "of the Blessed Waters", "of the Heavenly Host", "of the Sacred Oath", "of the Divine Harmony"
+        ]
 
-        #return f"The {random.choice(descriptor)} {random.choice(rank)} {random.choice(of_the)}"
 
-    if npc.background == "Artist":
+    if "Artist" in creature_type:
         descriptor = [
             "Red",
+            "Amber",
             "Creative", "Expressive", "Imaginative", "Artistic", "Innovative"]
         rank = ["Master Painter", "Skilled Sculptor", "Renowned Musician", "Gifted Poet", "Eccentric Performer"]
         of_the = ["of the Colorful Canvases", "of the Sculpted Masterpieces", "of the Melodic Harmonies", "of the Poetic Verses", "of the Theatrical Arts"]
@@ -4797,7 +5698,11 @@ def Title(npc):
             "Holy",
             "Spiritual",
             "Righteous",
-            "Blessed"]
+            "Blessed",
+            "Golden",
+            "Dark",
+
+            ]
         rank = [
             "Oracle",
             "Priest",
@@ -4860,6 +5765,7 @@ def Title(npc):
     # Background: Druid
     if npc.background == "Druid":
         descriptor = [
+            "Jungle",
             "Natural",
             "Earthy",
             "Mystical",
@@ -4893,6 +5799,11 @@ def Title(npc):
             f"of the {random.choice(descriptor)} Woods",
             f"of the {random.choice(descriptor)} Woods",
             f"of the {random.choice(descriptor)} Woods",
+            f"of the {random.choice(descriptor)} Jungle",
+            f"of the {random.choice(descriptor)} Jungle",
+            f"of the {random.choice(descriptor)} Jungle",
+            f"of the {random.choice(descriptor)} Jungle",
+            f"of the Jungle",
             "of the Woods",
             "of the Groves"]
 
@@ -4911,6 +5822,7 @@ def Title(npc):
             "Daring",
             "Pioneering",
             "Legendary",
+            "Jungle",
             ]
         rank = [
             "Explorer",
@@ -4921,6 +5833,8 @@ def Title(npc):
             ]
         of_the = [
             "of the Uncharted Lands",
+            f"of the Jungle",
+            f"of the {random.choice(descriptor)} Jungle",
             f"of the {random.choice(descriptor)} Expedition",
             f"of the {random.choice(descriptor)} Journey",
             f"of the {random.choice(descriptor)} Quests",
@@ -4928,10 +5842,33 @@ def Title(npc):
             ]
 
     # Background: Guard
-    if npc.background == "Guard":
-        descriptor = ["Vigilant", "Stalwart", "Protective", "Disciplined", "Alert"]
-        rank = ["Seasoned Guard", "Stalwart Defender", "Protective Watchman", "Disciplined Sentinel", "Alert Keeper"]
-        of_the = ["of the Guarded Fortresses", "of the Stalwart Walls", "of the Protective Gates", "of the Disciplined Patrols", "of the Alert Towers"]
+    if "Guard" in creature_type:
+        descriptor = [
+            "Seasoned ",
+            "Vigilant",
+            "Stalwart",
+            "Protective",
+            "Disciplined",
+            "Alert",
+            "Protector",
+            "Disciplined",
+            ]
+        rank = [
+            "Guardian",
+            "Guardian",
+            "Guard",
+            "Defender",
+            "Watchman",
+            "Protector",
+            "Sentinel",
+            "Keeper"]
+        of_the = [
+            f"of the {random.choice(descriptor)} Watch",
+            "of the {random.choice(descriptor)} Fortresses",
+            "of the {random.choice(descriptor)} Walls",
+            "of the {random.choice(descriptor)} Gates",
+            "of the {random.choice(descriptor)} Patrols",
+            "of the {random.choice(descriptor)} Towers"]
 
     # Background: Healer
     if npc.background == "Healer":
@@ -4946,18 +5883,26 @@ def Title(npc):
         of_the = ["of the Valiant Deeds", "of the Brave Battles", "of the Heroic Ventures", "of the Gallant Quests", "of the Noble Causes"]
 
     # Background: Hunter
-    if npc.background == "Hunter":
+    if "Hunter" in creature_type:
         descriptor = [
+            "Jungle",
             "Green",
             "Stealthy", "Rugged", "Sharpshooter", "Trapper", "Wild"]
         rank = [
             "Ferret",
             "Tracker", "Rugged Huntsman", "Sharpshooter Archer", "Skilled Trapper", "Wild Stalker"]
-        of_the = ["of the Stealthy Pursuit", "of the Rugged Wilderness", "of the Sharpshooter's Range", "of the Skilled Snares", "of the Wild Hunt"]
+        of_the = [
+            f"of the {random.choice(descriptor)} Jungle",
+            f"of the {random.choice(descriptor)} Hunt",
+            "of the Stealthy Pursuit", "of the Rugged Wilderness", "of the Sharpshooter's Range", "of the Skilled Snares", "of the Wild Hunt"]
 
     # Background: Knight
-    if npc.background == "Knight":
-        descriptor = ["Chivalrous", "Gallant", "Honorable", "Bold", "Noble"]
+    if "Knight" in creature_type:
+        descriptor = [
+            "Chivalrous",
+            "Gallant",
+            "Golden",
+            "Honorable", "Bold", "Noble"]
         rank = ["Knight", "Champion", "Defender", "Warrior", "Cavalier"]
         of_the = ["of the Noble Order", "of the Chivalrous Quests", "of the Gallant Deeds", "of the Honorable Battles", "of the Bold Ventures"]
 
@@ -4965,6 +5910,7 @@ def Title(npc):
     if "Mage" in creature_type:
         descriptor = [
             "Arcane",
+            "Golden",
             "Mystical",
             "Learned",
             "Enigmatic",
@@ -5003,8 +5949,8 @@ def Title(npc):
 
     # Background: Merchant
     if npc.background == "Merchant":
-        descriptor = ["Shrewd", "Wealthy", "Trading", "Negotiating", "Resourceful"]
-        rank = ["Wealthy Trader", "Shrewd Businessperson", "Skilled Negotiator", "Resourceful Dealer", "Prosperous Merchant"]
+        descriptor = ["Shrewd",  "Trading", "Negotiating", "Skilled", "Resourceful", "Prosperous"]
+        rank = ["Trader", "Businessperson", "Negotiator", "Dealer", "Merchant"]
         of_the = ["of the Trading Empires", "of the Wealthy Markets", "of the Negotiating Tables", "of the Resourceful Ventures", "of the Prosperous Exchanges"]
         
     # Background: Noble
@@ -5015,10 +5961,12 @@ def Title(npc):
             "Refined",
             "Graceful",
             "Influential",
-            "Dignified"]
+            "Dignified",
+            "Sovereign",
+            ]
         if npc.gender == "he":
             rank += ["Lord"]
-        if npc.gender == "he":
+        if npc.gender == "she":
             rank += ["Lady"]
         rank += [
             "Marquis",
@@ -5049,9 +5997,12 @@ def Title(npc):
     if "Ranger" in creature_type:
         descriptor += [
             "Green",
+            "Jungle",
             "Wilderness", "Tracking", "Survivalist", "Rugged", "Nature's"]
         rank += ["Wilderness Scout", "Master Tracker", "Survivalist Expert", "Rugged Outlander", "Nature's Warden"]
-        of_the += ["of the Wilderness Paths", "of the Tracking Hunts", "of the Survivalist Camps", "of the Rugged Mountains", "of the Nature's Secrets"]
+        of_the += [
+            f"of the {random.choice(descriptor)} Jungle",
+            "of the Wilderness Paths", "of the Tracking Hunts", "of the Survivalist Camps", "of the Rugged Mountains", "of the Nature's Secrets"]
 
     # Background: Scholar
     if npc.background == "Scholar":
@@ -5097,6 +6048,7 @@ def Title(npc):
     if "Shaman" in creature_type:
         descriptor += [
             "Green",
+            "Jungle",
             "Spiritual",
             "Mystic",
             "Elemental",
@@ -5110,6 +6062,7 @@ def Title(npc):
             "Sage",
             "Keeper"]
         of_the += [
+            f"of the {random.choice(descriptor)} Jungle",
             f"of the {random.choice(descriptor)} Rites",
             f"of the {random.choice(descriptor)} Visions",
             f"of the {random.choice(descriptor)} Forces",
@@ -5123,10 +6076,14 @@ def Title(npc):
         of_the += ["of the Covert Missions", "of the Undercover Operations", "of the Secretive Networks", "of the Stealthy Reconnaissance", "of the Infiltrating Tactics"]
 
     # Background: Traveler
-    if npc.background == "Traveler":
-        descriptor += ["Wandering", "Adventurous", "Nomadic", "Curious", "Worldly"]
+    if "Traveler" in creature_type:
+        descriptor += [
+            "Jungle",
+            "Wandering", "Adventurous", "Nomadic", "Curious", "Worldly"]
         rank += ["Wandering Nomad", "Adventurous Explorer", "Nomadic Wanderer", "Curious Journeyer", "Worldly Traveler"]
-        of_the += ["of the Wandering Paths", "of the Adventurous Expeditions", "of the Nomadic Tribes", "of the Curious Voyages", "of the Worldly Discoveries"]
+        of_the += [
+            f"of the {random.choice(descriptor)} Jungle",
+            "of the Wandering Paths", "of the Adventurous Expeditions", "of the Nomadic Tribes", "of the Curious Voyages", "of the Worldly Discoveries"]
 
     # Background: Urchin
     if npc.background == "Urchin":
@@ -5172,10 +6129,32 @@ def Title(npc):
                    ]
 
     # Background: Witch
-    if npc.background == "Witch":
-        descriptor += ["Enchanting", "Occult", "Mystical", "Hexing", "Wise"]
-        rank += ["Enchanting Sorceress", "Occult Witch", "Mystical Herbalist", "Hexing Caster", "Wise Crone"]
-        of_the += ["of the Enchanting Spells", "of the Occult Rituals", "of the Mystical Arts", "of the Hexing Curses", "of the Wise Traditions"]
+    if "Witch" in creature_type:
+        descriptor += [
+            "Enchanting",
+            "Occult",
+            "Mystical",
+            "Hexing",
+            "Wise",
+            "Dark",
+            ]
+        rank += [
+            "Sorceress",
+            "Witch",
+            "Herbalist",
+            "Caster",
+            "Crone",
+            ]
+        of_the += [
+            "of the Enchanting Spells",
+            f"of the {random.choice(descriptor)} Spells",
+            f"of the {random.choice(descriptor)} Curse",
+            f"of the {random.choice(descriptor)} Rituals",
+            f"of the {random.choice(descriptor)} Arts",
+            f"of the {random.choice(descriptor)} Curses",
+            f"of the {random.choice(descriptor)} Traditions",
+            f"of the {random.choice(descriptor)} Jungle",
+            ]
 
 
 
@@ -5196,10 +6175,7 @@ def Title(npc):
 
 
 
-    descriptor += [
-    "Primal",
-    "Lost",
-        ]
+
 
 
 
@@ -5227,6 +6203,33 @@ def Title(npc):
 
     
     rank += [
+        "Amulet",
+        "Oracle","Saint","God", "Deity",
+        "of the Dark Abyss","of The Seventh Hell","of Hell","of the Hells",
+        "Apparition",    "Aprentice",
+        "Archer",        "Archfey",
+        "Archmage",        "Argonaut",
+        "Armour",        "Arrow",
+        "Artisan",        "Ash",
+        "Assassin",        "Abyss",
+        "Abyssal",        "Abbot",
+        "Abbess",        "Acolyte",
+        "Admiral",        "Adventure",
+        "Adventurer",        "Afterlifer",
+        "Aero",        "Agent",
+        "Alchemist",        "Alpha",
+        "Ambassador",        "Anarchist",
+        "Angel",        "Anthropologist",
+        "Antler",        "Apostle",
+        "Apparition",        "Apprentice",
+        "Archer",        "Archfey",
+        "Archbishop",        "Archmage",
+        "Argonaut",        "Armour",
+        "Arrow",        "Artisan",
+        "Ash",        "Assassin",
+        "Atlas",        "Augur",
+        "Avatar",
+        
         "Howl"
         "Artisan",
         "Abbess",
@@ -5301,7 +6304,6 @@ def Title(npc):
 "Breaker",        
 
 "Buccaneer",
-"Bull",
 "Burglar",
 "Butcher",
 "Butterfly",
@@ -6028,7 +7030,7 @@ def Title(npc):
         "Baron",
         "Cauldron",
         "Cavalier",
-        "Celestial Priest",
+        "Priest",
         "Celestialist",
         "Celestian",
         "Celestwarden",
@@ -6083,8 +7085,7 @@ def Title(npc):
         "Czar",
 
         "Dance",
-        "Dangun's Heir",
-        "Dawnbringer of Amaterasu",
+        "Heir",
         "Dawnbringer",
         "Dawncaller"
         "Deacon",
@@ -6290,7 +7291,8 @@ def Title(npc):
         "Lampbearer",
         "of the Forbidden Cave",
         "Lancer",
-        "Lasso's Master",
+        "Lasso",
+        "Master",
         "Leafdancer",
         "Leap",
         "Legate",
@@ -6311,13 +7313,15 @@ def Title(npc):
         "Lorekeeper",
         "Lorekeeper",
         "Lorekeeper",
-        "Lover of La Llorona",
+        "Lover",
+        "of La Llorona",
         "Loyal",
         "Loyalty",
-        "Lugh's Spearwielder",
+        "Spearwielder",
         "Lunarblade",
         "Lycan Alpha",
-        "Lynch Mob's Fear",
+        "Lynch",
+        "Fear",
         
         "Maasai's Spear",
         "Maestro",
@@ -6734,8 +7738,6 @@ def Title(npc):
         "Sirensong",
         "Six-Shooter",
         "Sage",
-        "of the Eternal Sagas",
-        "of the Eternals",
         "Skymaiden",
         "Skyrider",
         "Skyrider",
@@ -6763,9 +7765,10 @@ def Title(npc):
         "Spider's Web",  
         "Spiritguide",
         "Spiritualist",
-        "Sprite Sparkweaver",
+        "Sparkweaver",
         "Guardian",
-        "Stampede's Roar",
+        "Stampede",
+        "Roar",
         "Star Quilter",
         "Star Whisperer",
         "Starblade",
@@ -6776,7 +7779,8 @@ def Title(npc):
         "Starshaper",
         "Steward",
         "Steward",
-        "Stonehenge Arcanist",
+        "Stonehenge",
+        "Arcanist",
         "Stonetunnel",
         "Stormbinder",
         "Stormbringer",
@@ -6860,7 +7864,6 @@ def Title(npc):
         "Treasure Fleet's Scourge",
         "Treasure",
         "Treebinder",
-        "Tribal",
         "Trick",
         "Trickster",
         "Tribune",
@@ -7178,124 +8181,24 @@ def Title(npc):
         "Zoologist",
         "Zulu",
         
-        ""
+    
     ]
 
-    of_the += [
-        "Of Athena",
-        "of Delphos",
-        "of the Underworld Gate",
-        "of the Underworld",
-        "Odyssey",
-        "Of Death",
-        "of El Dorado",
-        "of Eldorado"
-        "Of Fate",
-        "Of Heaven",
-        "Of Justice",
-        "Of Odin",
-        "Of The Abyss",
-        "Of the Autumn",
-        "Of the Coliseum",
-        "Of The Crown",
-        "Of The Dead",
-        "Of The Desert",
-        "Of the Divine",
-        "Of The East",
-        "Of The Fiends",
-        "Of The Forest",
-        "Of The Forge",
-        "Of The Hells",
-        "Of The Hills",
-        "Of the Hidden",
-        "Of the Kingdom",
-        "Of the Last Fire",        
-        "Of The Mountain",
-        "Of The North",
-        "Of the Oceans",
-        "Of the Old One",
-        "Of The Oracle",
-        "Of the Pack",
-        "Of The People",
-        "Of The Pharaoh",
-        "Of The Plains",
-        "Of The Sands",
-        "Of The Sea",
-        "Of The South",
-        "Of The Spring",
-        "Of The Storm",
-        "Of The Summer",
-        "Of The West",
-        "Of The Winter",
-        "Of Thor",
-        "Of Youth",
-        "Of Zeus",
-        "of the Faith",
-        "of the Forty Thieves",
-        "of the Morningstar",
-        "of the Thousand Tears",
-        "of the Jungle",
-        "of the City",
-        "of the Land",
-        "of the North",
-        "of the South",
-        "of the East",
-        "of the West",
-        "of the Forest",
-        "of the Plains",
-        "of the Sea",
-        "of the Sky",
-        "of Fire",
-        f"of the {random.choice(descriptor)} Woods",
-        f"of the {random.choice(descriptor)} Woods",
-        f"of the {random.choice(descriptor)} Woods",
-        f"of the {random.choice(descriptor)} Woods",
-        f"of the {random.choice(descriptor)} Woods",
-        f"of the {random.choice(descriptor)} Woods",
-        f"of the {random.choice(descriptor)} Woods",
-        f"of the {random.choice(descriptor)} Woods",
-        f"of the {random.choice(descriptor)} Woods",
-        f"of the {random.choice(descriptor)} Woods",
-        f"of the {random.choice(descriptor)} Woods",
-        f"of the {random.choice(descriptor)} Woods",
-        f"of the {random.choice(descriptor)} Woods",
-        f"of the {random.choice(descriptor)} Woods",
-        f"of the {random.choice(descriptor)} Woods",
-        f"of the {random.choice(descriptor)} Woods",
-        f"of the {random.choice(descriptor)} Woods",
-        f"of the {random.choice(descriptor)} Woods",
-        f"of the {random.choice(descriptor)} Realms",
-        f"of the {random.choice(descriptor)} Realms",
-        f"of the {random.choice(descriptor)} Realms",
-        f"of the {random.choice(descriptor)} Realms",
-        f"of the {random.choice(descriptor)} Realms",
-        f"of the {random.choice(descriptor)} Realms",
-        f"of the {random.choice(descriptor)} Realms",
-        f"of the {random.choice(descriptor)} Realms",
-        f"of the {random.choice(descriptor)} Realms",
-        f"of the {random.choice(descriptor)} Realms",
-        f"of the {random.choice(descriptor)} Realms",
-        f"of the {random.choice(descriptor)} Realms",
-        f"of the {random.choice(descriptor)} Realms",
-        f"of the {random.choice(descriptor)} Realms",
-        f"of the {random.choice(descriptor)} Realms",
-        f"of the {random.choice(descriptor)} Realms",
-        f"of the {random.choice(descriptor)} Realms",
-        f"of the {random.choice(descriptor)} Realms",
-        f"of the {random.choice(descriptor)} Realms",
-        f"of the {random.choice(descriptor)} Realms",
-        f"of the {random.choice(descriptor)} Realms",
-        f"of the {random.choice(descriptor)} Realms",
-        f"of the {random.choice(descriptor)} Realms",
-        f"of the {random.choice(descriptor)} Realms",
-        "","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",
-        ]
-    
+
     descriptor += [
-        "Red",
-        ]
+        "","","","","","","","","","","","","","","","",
+        "","","","","","","","","","","","","","","","",
+        "","","","","","","","","","","","","","","","",
+        "","","","","","","","","","","","","","","","",
+        "","","","","","","","","","","","","","","","",
+        "","","","","","","","","","","","","","","","",
+        "","","","","","","","","","","","","","","","",
+        "","","","","","","","","","","","","","","","",
+        "","","","","","","","","","","","","","","","",
+        "","","","","","","","","","","","","","","","",
+        "","","","","","","","","","","","","","","","",        ]
     
-    if "Goblin" in creature_type
+    if "Goblin" in creature_type:
 
         of_the = [
             "Redhats Klan",
@@ -7467,15 +8370,151 @@ def Title(npc):
             "Quirky Quills Clan",
             "Fuddle Heads Clan",
             ]
-        title = f"The {random.choice(descriptor)} {random.choice(rank)} of the {random.choice(of_the)}"
-        return title
 
 
+    of_the += [
+        "of The Amulet",
+        "of The Sword",
+        "of The Talisman",
+        "of The Goblet",
+        "of the Galaxy",
 
+        "of Baba Yaga",
+        "of the Kraken",
+        "of the Hydra",
+        "of the Waterfall"
+        f"of the {random.choice(descriptor)} Waterfall"
+        f"of the {random.choice(descriptor)} Sagas",
+        f"of the {random.choice(descriptor)} Eternals",
+        "of the Eternal Sagas",
+        "of the Eternals",
+        "Of Athena",
+        "of Delphos",
+        "of the Underworld Gate",
+        "of the Underworld",
+        "Odyssey",
+        "Of Death",
+        "of El Dorado",
+        "of Eldorado",
+        "Of Fate",
+        "Of Heaven",
+        "Of Justice",
+        "Of Odin",
+        "Of The Abyss",
+        "Of the Autumn",
+        "Of the Coliseum",
+        "Of The Crown",
+        "Of The Dead",
+        "Of The Desert",
+        "Of the Divine",
+        "Of The East",
+        "Of The Fiends",
+        "Of The Forest",
+        "Of The Forge",
+        "Of The Hells",
+        "Of The Hills",
+        "Of the Hidden",
+        "Of the Kingdom",
+        "Of the Last Fire",        
+        "Of The Mountain",
+        "Of The North",
+        "Of the Oceans",
+        "Of the Old One",
+        "Of The Oracle",
+        "Of the Pack",
+        "Of The People",
+        "Of The Pharaoh",
+        "Of The Plains",
+        "Of The Sands",
+        "Of The Sea",
+        "Of The South",
+        "Of The Spring",
+        "Of The Storm",
+        "Of The Summer",
+        "Of The West",
+        "Of The Winter",
+        "Of Thor",
+        "Of Youth",
+        "Of Zeus",
+        "of the Faith",
+        "of the Forty Thieves",
+        "of the Morningstar",
+        "of the Thousand Tears",
+        "of the Jungle",
+        "of the City",
+        "of the Land",
+        "of the North",
+        "of the South",
+        "of the East",
+        "of the West",
+        "of the Forest",
+        "of the Plains",
+        "of the Sea",
+        "of the Sky",
+        "of Fire",
+        f"of the {random.choice(descriptor)} Woods",
+        f"of the {random.choice(descriptor)} Woods",
+        f"of the {random.choice(descriptor)} Woods",
+        f"of the {random.choice(descriptor)} Woods",
+        f"of the {random.choice(descriptor)} Woods",
+        f"of the {random.choice(descriptor)} Woods",
+        f"of the {random.choice(descriptor)} Woods",
+        f"of the {random.choice(descriptor)} Woods",
+        f"of the {random.choice(descriptor)} Woods",
+        f"of the {random.choice(descriptor)} Woods",
+        f"of the {random.choice(descriptor)} Woods",
+        f"of the {random.choice(descriptor)} Woods",
+        f"of the {random.choice(descriptor)} Woods",
+        f"of the {random.choice(descriptor)} Woods",
+        f"of the {random.choice(descriptor)} Woods",
+        f"of the {random.choice(descriptor)} Woods",
+        f"of the {random.choice(descriptor)} Woods",
+        f"of the {random.choice(descriptor)} Woods",
+        f"of the {random.choice(descriptor)} Realms",
+        f"of the {random.choice(descriptor)} Realms",
+        f"of the {random.choice(descriptor)} Realms",
+        f"of the {random.choice(descriptor)} Realms",
+        f"of the {random.choice(descriptor)} Realms",
+        f"of the {random.choice(descriptor)} Realms",
+        f"of the {random.choice(descriptor)} Realms",
+        f"of the {random.choice(descriptor)} Realms",
+        f"of the {random.choice(descriptor)} Realms",
+        f"of the {random.choice(descriptor)} Realms",
+        f"of the {random.choice(descriptor)} Realms",
+        f"of the {random.choice(descriptor)} Realms",
+        f"of the {random.choice(descriptor)} Realms",
+        f"of the {random.choice(descriptor)} Realms",
+        f"of the {random.choice(descriptor)} Realms",
+        f"of the {random.choice(descriptor)} Realms",
+        f"of the {random.choice(descriptor)} Realms",
+        f"of the {random.choice(descriptor)} Realms",
+        f"of the {random.choice(descriptor)} Realms",
+        f"of the {random.choice(descriptor)} Realms",
+        f"of the {random.choice(descriptor)} Realms",
+        f"of the {random.choice(descriptor)} Realms",
+        f"of the {random.choice(descriptor)} Realms",
+        f"of the {random.choice(descriptor)} Realms",
+        "","","","","","","","","","","","","","","","",
+        "","","","","","","","","","","","","","","","",
+        "","","","","","","","","","","","","","","","",
+        "","","","","","","","","","","","","","","","",
+        "","","","","","","","","","","","","","","","",
+        "","","","","","","","","","","","","","","","",
+        "","","","","","","","","","","","","","","","",
+        "","","","","","","","","","","","","","","","",
+        "","","","","","","","","","","","","","","","",
+        "","","","","","","","","","","","","","","","",
+        "","","","","","","","","","","","","","","","",
 
-    title = f"The {random.choice(descriptor)} {random.choice(rank)} {random.choice(of_the)}"
+        "of the Jewels","of the Ruby",
+        "of Gold",
+        "of Silver",
+        "of Iron",
+        "of Steel",
+        ]
+
+    title = " ".join(f"The {random.choice(descriptor)} {random.choice(rank)} {random.choice(of_the)}".split()).title()
     return title
-
 
 
 
@@ -7547,7 +8586,6 @@ def Racial_Names(npc):
         "Byron",
         "Brienne",
         "Basilisk",
-        "Behemoth",
         "Balrog",
         "Bellatrix",
         "Blaze",
@@ -7565,6 +8603,10 @@ def Racial_Names(npc):
         "Gandalf",
 
         "Halcyon",
+
+        "Irey",
+
+        "Korben",
 
         "Magneto",
         "Mystique",
@@ -7611,7 +8653,7 @@ def Racial_Names(npc):
         "Inara",
         "Malcom",
         "Lee",
-        "Korben",
+        
         "Maximus",
         "Leonidas",
         "Katniss",
@@ -7623,37 +8665,77 @@ def Racial_Names(npc):
         "Jules",
         "Vic",
 
-    # Inspired by Books
-     "Vaelin", "Kvothe", "Fitz", "Chivalry", "Rincewind", "Matrim", "Perrin",
-    "Rand", "Ged",  "Yennefer", "Geralt", "Darrow", "Ender",  
-    "Locke", "Jean",  "Falconer", "Sabriel", "Lirael", "Rhapsody",
-     "Hector",  "Daenerys", "Jon", "Snow",  "Bran", "Samwell",
+        # Inspired by Books
+         "Vaelin", "Kvothe", "Fitz", "Chivalry", "Rincewind", "Matrim", "Perrin",
+        "Rand", "Ged",  "Yennefer", "Geralt", "Darrow", "Ender",  
+        "Locke", "Jean",  "Falconer", "Sabriel", "Lirael", "Rhapsody",
+         "Hector",  "Daenerys", "Jon", "Snow",  "Bran", "Samwell",
 
-    # Inspired by Mythology
-    "Odysseus", "Hermes",  "Perseus", "Theseus",
-     "Hercules", "Orion", "Freya", "Loki", "Thor", "Anubis", "Osiris",
-    "Isis", "Ra", "Horus", "Quetzalcoatl", "Tlaloc", "Ixchel", "Amaterasu", "Susanoo",
-    "Tsukuyomi",  "Tyr", "Bragi", "Idunn",
+        # Inspired by Mythology
+        "Odysseus", "Hermes",  "Perseus", "Theseus",
+         "Hercules", "Orion", "Freya", "Loki", "Thor", "Anubis", "Osiris",
+        "Isis", "Ra", "Horus", "Quetzalcoatl", "Tlaloc", "Ixchel", "Amaterasu", "Susanoo",
+        "Tsukuyomi",  "Tyr", "Bragi", "Idunn",
 
-    # Inspired by Video Games
-    "Squall", "Zidane", "Tidus", "Link", "Zelda", "Shepard", "Geralt",
-    "Yuna", "Rinoa", "Kain", "Raziel", "Dante", "Kratos", "Lara", "Samus", "Master", "Chief",
-      "Ezio", "Bayek", "Aloy", "Sora", "Roxas", "Axel", "Sephiroth",
-    "Riku", "Nathan", "Drake", "Ellie", "Joel", "Jill", "Valentine", "Leon", "Ada", "Wong",
+        # Inspired by Video Games
+        "Squall", "Zidane", "Tidus", "Link", "Zelda", "Shepard", "Geralt",
+        "Yuna", "Rinoa", "Kain", "Raziel", "Dante", "Kratos", "Lara", "Samus", "Master", "Chief",
+          "Ezio", "Bayek", "Aloy", "Sora", "Roxas", "Axel", "Sephiroth",
+        "Riku", "Nathan", "Drake", "Ellie", "Joel", "Jill", "Valentine", "Leon", "Ada", "Wong",
 
-    # Inspired by Anime and Manga
-    "Spike", "Vash", "Alucard", "Asuka", "Rei", "Shinji", "Luffy", "Zoro", "Nami",
-    "Usopp", "Sanji", "Chopper", "Robin", "Franky", "Brook", "Jotaro", "Dio",
-    "Goku", "Vegeta", "Gohan", "Piccolo", "Trunks", "Bulma", "Light", "Naruto",
-    "Sasuke", "Sakura", "Kakashi", "Itachi", "Gaara", "Hinata", "Ichigo", "Rukia",
-    "Orihime", "Uryu", "Kenpachi", "Toushiro", "Byakuya", "Renji",
+        # Inspired by Anime and Manga
+        "Spike", "Vash", "Alucard", "Asuka", "Rei", "Shinji", "Luffy", "Zoro", "Nami",
+        "Usopp", "Sanji", "Chopper", "Robin", "Franky", "Brook", "Jotaro", "Dio",
+        "Goku", "Vegeta", "Gohan", "Piccolo", "Trunks", "Bulma", "Light", "Naruto",
+        "Sasuke", "Sakura", "Kakashi", "Itachi", "Gaara", "Hinata", "Ichigo", "Rukia",
+        "Orihime", "Uryu", "Kenpachi", "Toushiro", "Byakuya", "Renji",
 
-    # Inspired by Pop Culture
-    "Sherlock", "Watson", "Dexter", "Heisenberg", "Jesse", "Tony", "Stark", "Bruce","Wayne",
-    "Peter", "Parker", "Clark", "Kent", "Diana", "Prince", "Steve", "Rogers", "Logan", "Bruce", "Banner",
-    "Natasha", "Romanoff", "Wanda", "Pietro", "Scott", "Lang", "Hope", "Shuri", "Thanos", "Loki",
-    "Thor", "Hela", "Odin", "Frigga", "Vision",
-    "Sam", "Bucky", "Barnes", "Nick", "Fury",  "Hill", "Phil", "Coulson", "Pepper", "Potts"
+        # Inspired by Pop Culture
+        "Sherlock",
+        "Watson",
+        "Dexter",
+        "Heisenberg",
+        "Jesse",
+        "Tony",
+        "Stark",
+        "Bruce",
+        "Wayne",
+        "Peter",
+        "Parker",
+        "Clark",
+        "Kent",
+        "Diana",
+        "Prince",
+        "Steve",
+        "Rogers",
+        "Logan",
+        "Bruce",
+        "Banner",
+        "Natasha",
+        "Romanoff",
+        "Wanda",
+        "Pietro",
+        "Scott",
+        "Lang",
+        "Hope",
+        "Shuri",
+        "Thanos",
+        "Loki",
+        "Thor",
+        "Hela",
+        "Odin",
+        "Frigga",
+        "Vision",
+        "Sam",
+        "Bucky",
+        "Barnes",
+        "Nick",
+        "Fury",
+        "Hill",
+        "Phil",
+        "Coulson",
+        "Pepper",
+        "Potts"
 
 
         
@@ -8075,7 +9157,7 @@ def Racial_Names(npc):
         "Vladimir",
         "Virgil",
         
-        ""]
+        ]
     
     Human_Surnames = [
         "Aragon", 
@@ -8292,8 +9374,8 @@ def Racial_Names(npc):
         
         "York",
 
-        ""]
-    if Type == "Human":
+        ]
+    if "Human" in creature_type:
         Names += Humans
         Surnames += Human_Surnames
         Name = NewName(
@@ -8322,7 +9404,7 @@ def Racial_Names(npc):
                     'fing', 'rick', 'mond', 'son', 'lan',
                     ]
             ) 
-        Surame = NewName(
+        Surname = NewName(
             Names = Surnames,
             onset = [
                     'Ash', 'Black', 'Green', 'Fair', 'Storm', 
@@ -9218,7 +10300,7 @@ def Racial_Names(npc):
 
         ]
 
-    if Type == "Elf":
+    if "Elf" in creature_type:
         Names = Elves
         Surnames = ElvenSurnames
         
@@ -9230,7 +10312,7 @@ def Racial_Names(npc):
                 codas = ['el','rond']
                 )
 
-        Surname = NewNames(Surnames,
+        Surname = NewName(Surnames,
                 onset = ['Wood', 'Whisper', 'Sun', 'Silver', 'Ocean'],
                 nuclei = [''],
                 codas = ['shade', 'song',
@@ -9250,6 +10332,7 @@ def Racial_Names(npc):
         "Atlumun",
         "Atlaria",
         
+        "Behemoth",
         "Bunce",
         "Bridget",
         
@@ -9312,9 +10395,13 @@ def Racial_Names(npc):
         "Guendolena",
         "Guenevere", "Guinivere",
         "Guiomar", "GynezGyneth",
-        "Hector", "Hoel", "Igerna",
-        "Igraine", "Iseult", "Iseut",
-        "Isolda", "Isolde", "Kay",
+        "Hector", "Hoel",
+        "Igerna",
+        "Igraine", "Iseult",
+        "Iseut",
+        "Isolda",
+        "Isolde",
+        "Kay",
         "Lancelot", "Loncelote",
         "Lancelote", "Laudine", "Linet",
         "Lionel", "Lionesse", "Lionors",
@@ -9673,7 +10760,7 @@ def Racial_Names(npc):
         "Zilchais",
 
         ]
-    if Type == "Giant":
+    if "Giant" in creature_type:
         Names = Giant
         Surnames = Giant
 
@@ -9950,7 +11037,7 @@ def Racial_Names(npc):
         f"{random.choice(Orcs)}sson",
         f"{random.choice(Orcs)}sson",
         ]
-    if Type == "Orc":
+    if "Orc" in creature_type:
         Names = Orcs
         Surnames = OrcSurnames
 
@@ -9958,12 +11045,17 @@ def Racial_Names(npc):
                 onset = [
                     "Orc",
                     "Ork",
-                    "Grom", "Thun", "Varg", "Skol", "Bjorn", "Ragn", "Ulfr", "Hald", "Gunn", "Fjol", "Knut", "Brak", "Froth", "Halv", "Jot", "Mjol", "Njor", "Skag", "Thrud", "Valk", "Yngv", "Asgr", "Bar", "Dagr", "Eir", "Gorm", "Herj", "Ing", "Jarl", "Kael", "Loth", "Njal", "Ormr", "Rolf", "Snor", "Tor", "Ulf", "Vig", "Wulf", "Ymir"],
-                nuclei = ["ar", "ur", "ir", "or", "an", "en", "in", "on", "un", "al", "el", "il", "ol", "ul", "ak", "ek", "ik", "ok", "uk", "as", "es", "is", "os", "us", "ra", "ro", "ri", "ru", "re"],
-                codas = ["var", "vik", "lok", "gar", "gor", "mar", "mir", "nar", "ner", "nir", "nor", "nur", "rik", "rak", "rok", "ruk", "thak", "thok", "thuk", "val", "vol", "vul", "berg", "dott", "hild", "jorn", "mund", "rond", "stein", "stor", "ulf", "und", "vind", "vold", "laf", "lif", "lof", "lyf", "sig"]
+                    "Grom", "Thun", "Varg", "Skol", "Bjorn", "Ragn", "Ulfr", "Hald", "Gunn", "Fjol", "Knut", "Brak",
+                    "Froth", "Halv", "Jot", "Mjol", "Njor", "Skag", "Thrud", "Valk", "Yngv", "Asgr", "Bar", "Dagr", "Eir", "Gorm",
+                    "Herj", "Ing", "Jarl", "Kael", "Loth", "Njal", "Ormr", "Rolf", "Snor", "Tor", "Ulf", "Vig", "Wulf", "Ymir"
+                    ],
+                nuclei = ["ar", "ur", "ir", "or", "an", "en", "in", "on", "un", "al", "el", "il", "ol", "ul", "ak", "ek", "ik",
+                          "ok", "uk", "as", "es", "is", "os", "us", "ra", "ro", "ri", "ru", "re"],
+                codas = ["var", "vik", "lok", "gar", "gor", "mar", "mir", "nar", "ner", "nir", "nor", "nur", "rik", "rak",
+                         "rok", "ruk", "thak", "thok", "thuk", "val", "vol", "vul", "berg", "dott", "hild", "jorn", "mund", "rond", "stein", "stor", "ulf", "und", "vind", "vold", "laf", "lif", "lof", "lyf", "sig"]
                 )
 
-        Surname = NewNames(Surnames,
+        Surname = NewName(Surnames,
                 onset = ["Blood", "Iron", "Wolf", "Rage", "Storm", "Frost", "Bear", "Fire", "Dark", "Grim", "Skull", "Bone", "Night", "War", "Shadow", "Thorn", "Eagle", "Raven", "Rock", "Spear", "Thunder", "Wind", "Blade", "Fang", "Forge", "Steel", "Troll", "Dragon", "Flame", "Might", "Fjord", "Horn", "Ice", "Stone", "Giant", "River", "Sea", "Snow", "Ash", "Elk", "Hawk", "Light", "Meadow", "Oak", "Pine", "Rain", "Savage", "Star", "Whale", "Wild"],
                 nuclei = ["an", "en", "in", "on", "un", "al", "el", "il", "ol", "ul", "ak", "ek", "ik", "ok", "uk", "as", "es", "is", "os", "us", "ard", "erd", "ird", "ord", "urd", "arn", "ern", "irn", "orn", "urn", "all", "ell", "ill", "oll", "ull", "aft", "eft", "ift", "oft", "uft", "ang", "eng", "ing", "ong", "ung"],
                 codas = ["sson","son", "gar", "var", "vik", "lok", "gard", "vold", "berg", "dott", "hild", "jorn", "mund", "rond", "stein", "stor", "ulf", "und", "vind", "laf", "lif", "lof", "lyf", "sig", "thor", "thul", "mark", "nir", "nur", "rik", "rok", "rul", "skar", "skul", "tar", "tor", "tur", "vik", "vol", "vul", "gorn", "grin", "gund", "hak", "hal", "han", "har", "horn", "hurt", "jok", "kel", "kell", "ker", "kin", "kon", "kor", "kun", "lok", "lom", "lon", "lor", "lun",
@@ -9977,6 +11069,8 @@ def Racial_Names(npc):
         FullName = Name + ' ' + Surname
 
         return FullName
+
+    
     Dwarves = []
     if npc.gender == "he":
         Dwarves_he = [
@@ -10008,6 +11102,7 @@ def Racial_Names(npc):
             "Igon",
             "Igón",
             "Igonus",
+            "Jácio",
             "Juanus",
             "Juan",
             "Juano",
@@ -10046,6 +11141,7 @@ def Racial_Names(npc):
             "Igona",
             "Rafaela",
             "Roberta",
+            "Udina",
             ]
         Dwarves += Dwarves_she
         
@@ -10190,22 +11286,38 @@ def Racial_Names(npc):
         "Beatriz",
         "Begoña",
         "Benita",
-        "Bermudo", "Bernarda",
-        "Borja", "Brigida",
-        "Calisto", "Camila",
-        "Candelaria", "Candida",
-        "Carlos", "Carlota",
-        "Carmela", "Carmelo",
-        "Casilda", "Casimiro",
-        "Catalina", "Cecili",
-        "Celeste", "Celestino",
-        "Celino", "Chema",
-        "Clara", "Clarisa",
-        "Claudia", "Claudio",
-        "Clemente", "Cleto",
-        "Constantino", "Consuela",
-        "Corina", "Cornelio",
-        "Cosmo", "Cristian",
+        "Bermudo",
+        "Bernarda",
+        "Borja",
+        "Brigida",
+        "Calisto",
+        "Camila",
+        "Candelaria",
+        "Candida",
+        "Carlos",
+        "Carlota",
+        "Carmela",
+        "Carmelo",
+        "Casilda",
+        "Casimiro",
+        "Catalina",
+        "Cecili",
+        "Celeste",
+        "Celestino",
+        "Celino",
+        "Chema",
+        "Clara",
+        "Clarisa",
+        "Claudia",
+        "Claudio",
+        "Clemente",
+        "Cleto",
+        "Constantino",
+        "Consuela",
+        "Corina",
+        "Cornelio",
+        "Cosmo",
+        "Cristian",
         "Cristina", "Cristobal",
         "Curro", "Custodia",
         "Custodio",
@@ -10237,11 +11349,16 @@ def Racial_Names(npc):
         "Erasmo",
         "Esmeralda",
         "Esperanza",
-        "Opalo", "Esteban",
-        "Estefanía", "Eulogia",
-        "Eulogio", "Eustaquio",
-        "Eva", "Evangelina",
-        "Evaristo", "Ezequiel",
+        "Opalo",
+        "Esteban",
+        "Estefanía",
+        "Eulogia",
+        "Eulogio",
+        "Eustaquio",
+        "Eva",
+        "Evangelina",
+        "Evaristo",
+        "Ezequiel",
         "Fabián", "Fabiola",
         "Facundo", "Fátima",
         "Faustina", "Federico",
@@ -10695,7 +11812,7 @@ def Racial_Names(npc):
         "Zeferino",
         "Zacarias",
 
-        ""]
+        ]
     
     DwarvenSurnames = [
         "Aguaclara",  
@@ -10954,24 +12071,29 @@ def Racial_Names(npc):
         "Crisclaro",  
         "Montañaminera",   
         "Montinera",   
+
+        "Cascoduro",   
+
         "Escudojoya",  
         "Escujoya",  
-        "Ardorfuego",   
-        "Aceroantiguo",  
-        "Cascoduro",   
-        "Piedrafuerte",  
         "Esmeraldaeterna",  
-        "Esmeralterna",  
+        "Esmeralterna",
+        
         "Piedradeluz",  
         "Piedraluz",  
+        "Piedrafuerte",
+
         "Oroescondido",   
-        "Orondido",   
+        "Orondido",
+        
         "Luzdemina",  
-        "Luzmina",  
+        "Luzmina",
+        
         "Relucienteplata",   
-        "Hierrosagrado",  
-        "Agujerojoya",  
-        "Agujoya",  
+        "Hierrosagrado",
+        
+
+        
         "Piedradevalor",   
         "Riolatente",  
         "Corazóndeacero",  
@@ -11017,7 +12139,6 @@ def Racial_Names(npc):
         "Orígenmetal",   
         "Riachuelooro",  
         "Gemaalma",   
-        "Acerodelsur",   
         "Piedrarosada",   
         "Pozodeplata",  
         "Vínculodehierro",   
@@ -11063,6 +12184,12 @@ def Racial_Names(npc):
         "Orígenpiedra",  
         "Gotaesmeralda",
         
+        "Acerodelsur",   
+        "Agujerojoya",  
+        "Agujoya",
+        "Ardorfuego",   
+        "Aceroantiguo",  
+        
         "Lingotazo",
         "Luzdeambar",   
         "Luzambar",   
@@ -11079,53 +12206,26 @@ def Racial_Names(npc):
         "Torremina",   
         "Torrejoya",  
         "Torreaurea",  
-        ""]
-    if Type == "Dwarf": 
+        ]
+    if "Dwarf" in creature_type: 
         Names = Dwarves
         Surnames = DwarvenSurnames
 
-        if Dice(10)<5:
-            on_name = ['Gio','Lo',"Gi", "Lu", "Mar", "An", "Fe", "Cal", "Bi", "Ros", "Ser", "Val", "Al", "Ber", "Fried", "Ger", "Hans", "Karl", "Lud", "Rein", "Wal", "Hel"]
-            nu_names = ['van','ren', "a", "e", "i", "o", "u"]
-            co_names = ['ni', 'zo', "no", "lo", "ni", "ri", "ti", "si", "na", "ra", "ta", "la", "rich", "helm", "bert", "hard", "mar", "mut", "olf", "wig", "win", "wald"]
-
-            on_sname = ['Roble', 'Oro']
-            nu_snames = ['', "a", "e", "i", "o", "u", 'de']
-            co_snames = ['']
-            Name = SyllabicGenerator(
-                onset = on_name,
-                nuclei = nu_names,
-                codas = co_names,
-                count = 1
-                )            
-            Surname = SyllabicGenerator(
-                onset = on_sname,
-                nuclei = nu_snames,
-                codas = co_snames,
-                count = 1
-                )
-
+        Name = NewName(Names,
+            onset = ['Gio','Lo',"Gi", "Lu", "Mar", "An", "Fe", "Cal", "Bi", "Ros", "Ser", "Val", "Al", "Ber",
+                     "Fried", "Ger", "Hans", "Karl", "Lud", "Rein", "Wal", "Hel"],
+            nuclei = ['van','ren', "a", "e", "i", "o", "u"],
+            codas = ['ni', 'zo', "no", "lo", "ni", "ri", "ti", "si", "na", "ra", "ta",
+                     "la", "rich", "helm", "bert", "hard", "mar", "mut", "olf", "wig", "win", "wald"]
+            )
+        Name = NewName(Surnames,
+            onset = ['Roble', 'Oro', 'Torre'],
+            nuclei = ['', "a", "e", "i", "o", "u", 'de'],
+            codas = ['','ez','dorado','azul','rubí']
+                )     
             
-        elif Dice(10) < 5:
-            Name = SyllabicName(
-                syllables = SyllabicExtraction(Names),
-                min_syllables=1,
-                max_syllables=8)
-            Surname = SyllabicName(
-                syllables = SyllabicExtraction(Surnames),
-                min_syllables=1,
-                max_syllables=8)
+        FullName =  Name +  ' ' + Surname 
             
-        elif Dice(10)<5: 
-            namer = MarkovNameGenerator(Names)
-            Name = namer.generate_name()
-            surnamer = MarkovNameGenerator(Surnames)
-            Surname = surnamer.generate_name()
-            
-            FullName =  Name +  ' ' + Surname 
-            
-        else:
-            FullName =  random.choice(Names) + ' ' + random.choice(Surnames) 
 
         return FullName
 
@@ -11179,7 +12279,6 @@ def Racial_Names(npc):
         "Talia",
         "Tallulah",
         
-        "Well",
         
         "Suyasha",
         "Severn",
@@ -11260,13 +12359,18 @@ def Racial_Names(npc):
         "Niara",
         "Niagara",
         "Nebula",
-        "Delta", "Aalto",
-        "Po", "Araluen", "Jora",
-        "Naim", "Narelle",
-        "Nahla", "Nerida",
-        "Nereida", "Neri",
+        "Delta",
+        "Aalto",
+        "Po",
+        "Araluen",
+        "Jora",
+        "Naim",
+        "Narelle",
+        "Nahla",
+        "Nerida",
+        "Nereida",
+        "Neri",
         "Cherith",
-        "Adair",
         "Lir",
         "Reva",
         "Sereia",
@@ -11366,12 +12470,16 @@ def Racial_Names(npc):
         "Laco",
         "Lake",
         "Laik",
-        "Maris", "Morgan",
-        "Morgana", "Nira",
-        "Rayan", "Shandy",
-        "Shannon", "Shore",
-        "Adair", "Amaya",
-        "Cary", "Kisima",
+        "Maris",
+        "Morgan",
+        "Morgana",
+        "Nira",
+        "Rayan",
+        "Shandy",
+        "Shannon",
+        "Shore",
+        "Cary",
+        "Kisima",
         "Laguna",
         "Narelle",
         "Nile",
@@ -11380,30 +12488,39 @@ def Racial_Names(npc):
         "Serena",
         "Sereno",
         "Yara",
-        "Alon",
         "Kano",
         "Wade",
         "Naia",
         "Tide",
+        "Eldoris",
+        "Marin",
+        "Kona",
+        "Blue",
+        "Lima",
+        "Niar",
+        "Mora",
+        
+        "Adair",
+        "Amaya",
+        "Amal",
+        "Adair",
         "Adriatic",
         "Ariel",
         "Athena",
         "Atena",
         "Azena",
-        "Eldoris",
-        "Marin",
-        "Kona",
         "Argo",
         "Arcadia",
-        "Blue",
-        "Lima",
         "Andaya",
-        "Niar",
-        "Mora",
-        "Amal",
-        "Kaya",
+        "Alon",
+
         "Dorian",
+
+        "Kaya",
+
         "Vatnavi",
+
+        "Well",
         ]
     
     Fire_Elementals = [
@@ -11483,7 +12600,8 @@ def Racial_Names(npc):
         "Keegan",
         "Kenneth",
         "Kiran",
-        "Maccoy", "Nuri",
+        "Maccoy",
+        "Nuri",
         "Prometheus",
         "Prometeo",
         "Promezeus",
@@ -11831,19 +12949,35 @@ def Racial_Names(npc):
         "Nickel",
         "Copper",
         "Zinc",
-        "Gallium", "Rubidium",
-        "Strontium", "Zirconium", "Niobium",
-        "Rodium", "Silver", "Cadmium", "Indium",
-        "Tin", "Cesium", "Cerium",
-        "Promethium", "Iridium",
-        "Platinum", "Mercury", "Mercurium",
-        "Lead", "Bismutium",
-        "Polonium", "Uranium",
+        "Gallium",
+        "Rubidium",
+        "Strontium",
+        "Zirconium",
+        "Niobium",
+        "Rodium",
+        "Silver",
+        "Cadmium",
+        "Indium",
+        "Tin",
+        "Cesium",
+        "Cerium",
+        "Promethium",
+        "Iridium",
+        "Platinum",
+        "Mercury",
+        "Mercurium",
+        "Lead",
+        "Bismutium",
+        "Polonium",
+        "Uranium",
         "Alabaster",
-        "Argento", "Berilio",
-        "Clay", "Coal",
+        "Argento",
+        "Berilio",
+        "Clay",
+        "Coal",
         "Cobalt",
-        "Dustin", "Elessar",
+        "Dustin",
+        "Elessar",
         "Emerald",
         "Ferro", "Granite",
         "Mercury", "Mica",
@@ -11882,30 +13016,56 @@ def Racial_Names(npc):
         "Aerlyn",
         "Vaataan",
         "Tuulikas",
-        "Ilmara", "Caelistis",
-        "Aero", "Aelio",
-        "Aeolian", "Gale", "Zefir",
-        "Zefyr", "Zephyr", "Zefirus",
-        "Wuzer", "Wuther",
+        "Ilmara",
+        "Caelistis",
+        "Aero",
+        "Aelio",
+        "Aeolian",
+        "Gale",
+        "Zefir",
+        "Zefyr",
+        "Zephyr",
+        "Zefirus",
+        "Wuzer",
+        "Wuther",
         "Haboob", "Abroholos",
-        "Auster", "Austru", "Barat",
+        "Auster",
+        "Austru",
+        "Barat",
         "Berber",
-        "Bayamo", "Bora",
-        "Borasco", "Boreas", "Boreal",
-        "Aurora", "Brisa", "Briza",
-        "Brisot", "Brubu", "Cave",
-        "Kaver", "Chubasco",
-        "Cierzo", "Contrastes",
+        "Bayamo",
+        "Bora",
+        "Borasco",
+        "Boreas",
+        "Boreal",
+        "Aurora",
+        "Brisa",
+        "Briza",
+        "Brisot",
+        "Brubu",
+        "Cave",
+        "Kaver",
+        "Chubasco",
+        "Cierzo",
+        "Contrastes",
         "Cordonazo",
         "Cyclone", "Etesian",
-        "Euros", "Hurricane",
-        "Huracan", "Wind",
-        "Viento", "Leste",
-        "Levanter", "Levante",
-        "Levantera", "Levanto",
-        "Leveche", "Mistral",
-        "Norte", "Noreaster",
-        "Norestero", "Norwester",
+        "Euros",
+        "Hurricane",
+        "Huracan",
+        "Wind",
+        "Viento",
+        "Leste",
+        "Levanter",
+        "Levante",
+        "Levantera",
+        "Levanto",
+        "Leveche",
+        "Mistral",
+        "Norte",
+        "Noreaster",
+        "Norestero",
+        "Norwester",
         "Noroestero",
         "Nortero", "Ostria",
         "Pali", "Santana",
@@ -11917,48 +13077,101 @@ def Racial_Names(npc):
         "Buran", "Orosi", "Sarma",
         "Shamal", "Alisio", "Alize",
         "Bayamo", "Brisote",
-        "Caju", "Nordeste", "Minuano",
-        "Zonda", "Pampero", "Sudestada",
+        "Caju",
+        "Nordeste",
+        "Minuano",
+        "Zonda",
+        "Pampero",
+        "Sudestada",
         "Cordonazo",
-        "Coromuel", "Norte", "Autan",
-        "Bise", "Brise", "Brisa", "Burle",
+        "Coromuel",
+        "Norte",
+        "Autan",
+        "Bise",
+        "Brise",
+        "Brisa",
+        "Burle",
         "Cers",
-        "Cierzo", "Etesian", "Euroclydon",
-        "Fohn", "Gregale", "Helm", "Leveche",
-        "Lodos", "Maestro", "Marin",
-        "Mistral", "Nordes", "Ostro",
+        "Cierzo",
+        "Etesian",
+        "Euroclydon",
+        "Fohn",
+        "Gregale",
+        "Helm",
+        "Leveche",
+        "Lodos",
+        "Maestro",
+        "Marin",
+        "Mistral",
+        "Nordes",
+        "Ostro",
         "Poliente",
         "Solano", "Tramontane", "Vendavel",
         "Kona", "Abel", "Aeolus",
         "Akash",
         "Amun",
-        "Anan", "Cloud", "Anil", "Nube",
+        "Anan", "Cloud",
+        "Anil", "Nube",
         "Anore", "Arkansas",
         "Avel", "Barak",
-        "Baran", "Brontes", "Caelus", "Corentin",
+        "Baran", "Brontes",
+        "Caelus", "Corentin",
         "EnlilErjon", "Esen", "Guntur",
-        "Keanu", "Matuu", "Mellan", "Moe", "Myrsky",
-        "Naseem", "Neifion", "Neil",
-        "Neve", "Nigel", "Notus",
+        "Keanu", "Matuu",
+        "Mellan", "Moe", "Myrsky",
+        "Naseem",
+        "Neifion", "Neil",
+        "Neve", "Nigel",
+        "Notus",
         "Payne", "Perun",
-        "Firun", "Samir", "Sepher",
-        "Shu", "Sky", "Stromur",
+        "Firun",
+        "Samir", "Sepher",
+        "Shu", "Sky",
+        "Stromur",
         "Sturm", "Thor",
-        "Thunder", "Storm", "Torm", "Tufani",
-        "Van", "Zenith", "Zephyr",
+        "Thunder", "Storm",
+        "Torm", "Tufani",
+        "Van", "Zenith",
+        "Zephyr",
         "Zeus", "Aella",
         "Aethra", "Ahana", "Alize", "Amihan",
-        "Anemos", "Anila", "Araceli", "Audra",
-        "Aura", "Auretta", "Awen", "Azure", "Bonaria",
-        "Ciela", "Cielo", "Dangira", "Dima",
-        "Ekaitza", "Era", "Glaw", "Haizea", "Haneul",
-        "Inanna", "Iris", "Kafeira", "Cafeira",
-        "Minnesota", "Misty", "Mist",
-        "Nephele", "Ninlil", "Nuit", "Pilvi",
-        "Puleng", "Rain", "Rakia", "Samira", "Sema",
-        "Skye", "Stormy", "Tempest", "Tondra",
-        "Varsha", "Vetra", "Zerua", "Zilan", "Mistral",
-        "Gibli", "Zonda", "Etesian", "Shamal",
+        "Anemos", "Anila",
+        "Araceli", "Audra",
+        "Aura", "Auretta",
+        "Awen", "Azure",
+        "Bonaria",
+        "Ciela", "Cielo",
+        "Dangira",
+        "Dima",
+        "Ekaitza",
+        "Era",
+        "Glaw",
+        "Haizea",
+        "Haneul",
+        "Inanna",
+        "Iris",
+        "Kafeira",
+        "Cafeira",
+        "Minnesota",
+        "Misty",
+        "Mist",
+        "Nephele",
+        "Ninlil",
+        "Nuit",
+        "Pilvi",
+        "Puleng",
+        "Rain",
+        "Rakia",
+        "Samira",
+        "Sema",
+        "Skye",
+        "Stormy",
+        "Tempest",
+        "Tondra",
+        "Varsha", "Vetra",
+        "Zerua", "Zilan", "Mistral",
+        "Gibli", "Zonda",
+        "Etesian", "Shamal",
         "Aither", "Akash", "Alizeh",
         "Amphorn", "Amun", "Anan",
         "AnilAnore", "Anvindr",
@@ -11973,9 +13186,16 @@ def Racial_Names(npc):
         "Keyne",
         "Naseem", "Neven",
         "Notus", "Ouranos", "Payne",
-        "Rabi", "Samir", "Sepher", "Soma", "Sota",
-        "Tifon", "Vayu", "Zeferino", "Zenit", "Zefir",
-        "Zeru", "Zeus", "Aella", "Aethra", "Ahana",
+        "Rabi", "Samir", "Sepher",
+        "Soma", "Sota",
+        "Tifon", "Vayu",
+        "Zeferino", "Zenit",
+        "Zefir",
+        "Zeru",
+        "Zeus",
+        "Aella",
+        "Aethra",
+        "Ahana",
         "Alizee",
         "Alizeh",
         "Alya",
@@ -12060,7 +13280,7 @@ def Racial_Names(npc):
         "Element"
     ]
     
-    if Type == "Elemental": 
+    if "Elemental" in creature_type: 
         Names = Elementals + Water_Elementals + Air_Elementals + Fire_Elementals + Earth_Elementals
         Surnames = Names
         
@@ -12184,7 +13404,7 @@ def Racial_Names(npc):
             
             # Extend base lists with subrace-specific syllables
             if npc.subrace in subrace_syllables:
-                sr_syllables = subrace_syllables[subrace]
+                sr_syllables = subrace_syllables[npc.subrace]
                 on_name.extend(sr_syllables["onset"])
                 nu_names.extend(sr_syllables["nuclei"])
                 co_names.extend(sr_syllables["codas"])
@@ -12271,14 +13491,19 @@ def Racial_Names(npc):
         "Flit",
         "Glide",
         "Mimic", "Echo",
-        "Shimmer", "Talon", "Plume", 
-        "Soar", "Shade",
-        "Dusk", "Dawn",
+        "Shimmer",
+        "Talon",
+        "Plume", 
+        "Soar",
+        "Shade",
+        "Dusk",
+        "Dawn",
         "Twilight",
         "Nightcall",
         "Wingbeat", 
         "Rustle",
-        "Murmur", "Feather",
+        "Murmur",
+        "Feather",
         "Perch",
         "Roost", "Glitter", "Beaksharp", 
         "Swoop", "Windrider",
@@ -12441,14 +13666,19 @@ def Racial_Names(npc):
         "Kaga", "Krake",
         "Qurruu",
         "Kam", "Wrona",
-        "Corvo", "Cuervo",
-        "Cioara", "Vorona",
-        "Matuu", "Legokobu",
+        "Corvo",
+        "Cuervo",
+        "Cioara",
+        "Vorona",
+        "Matuu",
+        "Legokobu",
         "Vrana",
-        "Lekgwaba", "Gunguwo",
+        "Lekgwaba",
+        "Gunguwo",
         "Tuke",
         "Kunguru", "Gala",
-        "Gagak", "Uwak", "Xika",
+        "Gagak", "Uwak",
+        "Xika",
         "Kakam", "Kapra", "Zoq", "Kaki",
         "Vukuvuku", "Karga",
         "Garga", "Kwaakwaadabi",
@@ -12510,6 +13740,7 @@ def Racial_Names(npc):
         "Crim",
         "Pint",
         "Chocolaty",
+        "Tequila",
         "Love", "Afiry", "Cuki",
         "Chunk", "Dairy",
         "Peanut", "Buter",
@@ -12523,11 +13754,15 @@ def Racial_Names(npc):
         "Joint", "Widy", "Milky",
         "Minty", "Cuky",
         "Pistacho", "Pumpin",
-        "Almond", "Fresy", "Berry", "Cake", "Vanilla",
-        "Sutra", "Tiramisu", "Whisky", "Bacon",
+        "Almond", "Fresy",
+        "Berry", "Cake", "Vanilla",
+        "Sutra", "Tiramisu",
+        "Whisky", "Bacon",
         "Banana", "Beer",
-        "Bluemoon", "Bubble", "Gum",
-        "Coffee", "Apple", "Cream",
+        "Bluemoon",
+        "Bubble", "Gum",
+        "Coffee", "Apple",
+        "Cream",
         "Candy", "Cotton",
         "Dulce", "Garlic", "Grape", "Punch",
         "Ponche", "Uva", "Grape", "Tea",
@@ -12840,23 +14075,17 @@ def Racial_Names(npc):
         "Noix",
         "Citron"
         ]
-    if Type == "Halfling": 
+    if "Halfling" in creature_type: 
         Names = Halflings
         Surnames = HalflingSurnames
-        if Dice(10)<10: 
-            namer = MarkovNameGenerator(Names)
-            Name = namer.generate_name()
-            Name2 = namer.generate_name()
-            surnamer = MarkovNameGenerator(Surnames)
-            Surname = surnamer.generate_name()
-            #Surname2 = surnamer.generate_name()
+
+        Name = NewName(Names)
+        Name2 = NewName(Names)
+        Surname = NewName(Surnames)
+        Surname2 = NewName(Surnames)
 
             
-            FullName =  Name + ' ' +  Name2 + ' ' + Surname #+ ' ' + Surname2 
-            #FullNames =  random.choice(Names) + ' ' + random.choice(Surnames) 
-            
-        else:
-            FullName =  random.choice(Names) + ' ' + random.choice(Names) + ' ' + random.choice(Surnames) #+ ' ' + random.choice(Surnames)
+        FullName =  Name + ' ' +  Name2 + ' ' + Surname + ' ' + Surname2 
 
         return FullName
     
@@ -13115,142 +14344,113 @@ def Racial_Names(npc):
         "Zaffiro",
         ]
     
-    if Type == "Gnome": 
+    if "Gnome" in creature_type: 
         Names = Gnomes
         Surnames = GnomesSurnames
 
-        if Dice(10)<5:
-            on_name = ['Gio','Lo',"Gi", "Lu", "Mar", "An", "Fe", "Cal", "Bi", "Ros", "Ser", "Val", "Al", "Ber", "Fried", "Ger", "Hans", "Karl", "Lud", "Rein", "Wal", "Hel"]
-            nu_names = ['van','ren', "a", "e", "i", "o", "u"]
-            co_names = ['ni', 'zo', "no", "lo", "ni", "ri", "ti", "si", "na", "ra", "ta", "la", "rich", "helm", "bert", "hard", "mar", "mut", "olf", "wig", "win", "wald"]
 
-            on_sname = ['Gio',
-                        "Bel", "Fer", "Mar", "Ros", "Cap", "Gal", "Ric", "Cas", "Bor", "Ven",
-                        "Schm", "Wein", "Stein", "Baum", "Fisch", "Hoff", "Klein", "Lang", "Schwarz", "Wolff"]
-            nu_snames = ['', "a", "e", "i", "o", "u"]
-            co_snames = ['',
-                         "ini", "elli", "etti", "oni", "aldo", "ato", "azzo", "ucci", "uzzi", "ente",
-                         "mann", "berg", "wald", "stein", "hardt", "lein", "bauer", "schmidt", "meier", "brück"]
-            Name = SyllabicGenerator(
+        on_name = ['Gio','Lo',"Gi", "Lu", "Mar", "An", "Fe", "Cal", "Bi", "Ros", "Ser", "Val", "Al", "Ber", "Fried", "Ger", "Hans", "Karl", "Lud", "Rein", "Wal", "Hel"]
+        nu_names = ['van','ren', "a", "e", "i", "o", "u"]
+        co_names = ['ni', 'zo', "no", "lo", "ni", "ri", "ti", "si", "na", "ra", "ta", "la", "rich", "helm", "bert", "hard", "mar", "mut", "olf", "wig", "win", "wald"]
+
+        on_sname = ['Gio',
+                    "Bel", "Fer", "Mar", "Ros", "Cap", "Gal", "Ric", "Cas", "Bor", "Ven",
+                    "Schm", "Wein", "Stein", "Baum", "Fisch", "Hoff", "Klein", "Lang", "Schwarz", "Wolff"]
+        nu_snames = ['', "a", "e", "i", "o", "u"]
+        co_snames = ['',
+                     "ini", "elli", "etti", "oni", "aldo", "ato", "azzo", "ucci", "uzzi", "ente",
+                     "mann", "berg", "wald", "stein", "hardt", "lein", "bauer", "schmidt", "meier", "brück"]
+        Name = NewName(Names,
                 onset = on_name,
                 nuclei = nu_names,
                 codas = co_names,
-                count = Dice()-1
                 )
-            Name2 = SyllabicGenerator(
+        Name2 = NewName(Names,
                 onset = on_name,
                 nuclei = nu_names,
                 codas = co_names,
-                count = Dice()-1
                 )
-            
-            Surname = SyllabicGenerator(
-                onset = on_sname,
-                nuclei = nu_snames,
-                codas = co_snames,
-                count = Dice()-1
-                )
-            Surname2 = SyllabicGenerator(
-                onset = on_sname,
-                nuclei = nu_snames,
-                codas = co_snames,
-                count = Dice()-1
-                )
-            Surname3 = SyllabicGenerator(
-                onset = on_sname,
-                nuclei = nu_snames,
-                codas = co_snames,
-                count = Dice()-1
-                )
-            
-            Surname4 = SyllabicGenerator(
-                onset = on_sname,
-                nuclei = nu_snames,
-                codas = co_snames,
-                count = Dice()-1
-                )
+        Surname = NewName(Surnames,
+                    onset = on_sname,
+                    nuclei = nu_snames,
+                    codas = co_snames,
+                    )
+        Surname2 = NewName(Surnames,
+                    onset = on_sname,
+                    nuclei = nu_snames,
+                    codas = co_snames,
+                    )
+        Surname3 = NewName(Surnames,
+                    onset = on_sname,
+                    nuclei = nu_snames,
+                    codas = co_snames,
+                    )
+        Surname4 = NewName(Surnames,
+                    onset = on_sname,
+                    nuclei = nu_snames,
+                    codas = co_snames,
+                    )
 
-            
-        elif Dice(10) < 5:
-            Name = SyllabicName(
-                syllables = SyllabicExtraction(Names),
-                min_syllables=1,
-                max_syllables=8)
-            Name2 = SyllabicName(
-                syllables = SyllabicExtraction(Names),
-                min_syllables=1,
-                max_syllables=8)
-            Surname = SyllabicName(
-                syllables = SyllabicExtraction(Surnames),
-                min_syllables=1,
-                max_syllables=8)
-            Surname2 = SyllabicName(
-                syllables = SyllabicExtraction(Surnames),
-                min_syllables=1,
-                max_syllables=8)
-            Surname3 = SyllabicName(
-                syllables = SyllabicExtraction(Surnames),
-                min_syllables=1,
-                max_syllables=8)
-            Surname4 = SyllabicName(
-                syllables = SyllabicExtraction(Surnames),
-                min_syllables=1,
-                max_syllables=8)
-            
-        elif Dice(10)<5: 
-            namer = MarkovNameGenerator(Names)
-            Name = namer.generate_name()
-            Name2 = namer.generate_name()
-            surnamer = MarkovNameGenerator(Surnames)
-            Surname = surnamer.generate_name()
-            Surname2 = surnamer.generate_name()
-            Surname3 = surnamer.generate_name()
-            Surname4 = surnamer.generate_name()
 
-            
-            FullName =  Name + ' ' +  Name2 + ' ' + Surname + ' ' + Surname2 + ' ' + Surname3 + ' ' + Surname4 
-            
-        else:
-            FullName =  random.choice(Names) + ' ' + random.choice(Names) + ' ' + random.choice(Surnames) + ' ' + random.choice(Surnames) + ' ' + random.choice(Surnames) + ' ' + random.choice(Surnames)
+        FullName =  Name + ' ' + Name2 + ' ' + Surname + ' ' + Surname2 + ' ' + Surname3 + ' ' + Surname4
 
         return FullName
         
 
     Tieflings = [
-        "Hope",
-        "Valor",
-        "Mystery",
-        "Quiet",
-        "Song",
+        "Assurance",
+
+        "Bliss",
+
         "Charm",
+        "Chance",
+
+        "Deceit",
+        "Dream",
+        "Dancer",
+
+        "Eager",
+        "Endure",
+
+        "Glee",
         "Glimmer",
         "Glory",
-        "Noble",
+
+        "Hope",
+        "Hallow",
+
+        "Juramento",
+        "Juramenta",
+        
         "Lumin",
-        "Whisper",
-        "Dancer",
+        "Luster",
+        
+        "Mystery",
         "Mirth",
-        "Revel",
-        "Wry",
+        "Mend",
+
+        "Nightshade",
+        "Noble",
+
+        "Oath",
+        
         "Prayer",
         "Pursuit",
         "Promise",
-        "Sorrow",
-        "Chance",
-        "Eager",
-        "Endure",
-        "Hallow",
-        "Luster",
-        "Mend",
-        "Riddle",
-        "Shade",
-        "Wander",
+
+
+
+
+
+        
         "Penance",
-        "Dream",
+        
         "Serenity",
-        "Bliss",
+        "Song",
+        "Sorrow",
+        "Shade",
+
         "Fury",
-        "Glee",
         "Insight",
         "Seeker",
         "Solemn",
@@ -13258,8 +14458,10 @@ def Racial_Names(npc):
         "Grace",
         "Truth",
         "Honor",
-        "Vigor",
         "Rapture",
+        "Revel",
+        "Riddle",
+
         "Zeal",
         "Oath",
         "Radiant",
@@ -13275,8 +14477,9 @@ def Racial_Names(npc):
         "Trust",
         "Victory",
         "Vow",
-        "Watch",
-        "Will",
+        "Valor",
+        "Vigor",
+
         "Silent",
         "Solace",
         "Subtle",
@@ -13296,7 +14499,6 @@ def Racial_Names(npc):
         "Grace",
         "Ravage",
         "Mend",
-        "Deceit",
         "Truth",
         "Vile",
         "Pure",
@@ -13389,7 +14591,6 @@ def Racial_Names(npc):
         "Hexmorn",
         "Darkgleam",
         "Hellkin",
-        "Nightshade",
         "Doombringer",
         "Ashcaller",
         "Soulbinder",
@@ -13411,7 +14612,6 @@ def Racial_Names(npc):
         "Killsin",
         "Purific",
         "Nye",
-        "Assurance",
         "Watson",
         "Faith",
         "Harris",
@@ -13427,7 +14627,7 @@ def Racial_Names(npc):
         "French",
         "Fear",
         "Reynolds",
-        "Wheelwright",
+
         "Called",
         "Burroughs",
         "Confidence",
@@ -13454,7 +14654,6 @@ def Racial_Names(npc):
         "Hateill",
         "Burton",
         "Forsaken",
-        "Williams",
         "Virtue",
         "Shepard",
         "Amynus",
@@ -13509,7 +14708,8 @@ def Racial_Names(npc):
         "Charogne",
         "Chagrin",
         "Hasard",
-        "Astaro", "Kali",
+
+        "Kali",
         "Brave",
         "Crash",
         "Delver",
@@ -13517,17 +14717,29 @@ def Racial_Names(npc):
         "Hungry",
         "Violence",
         "Providence",
-        "Surprise", "Conqueror",
-        "Defender", "Invader",
-        "Juvileo", "Nephelin",
-        "Nefelin", "Serafina",
-        "Luz", "Carolin",
-        "Dilan", "Kurt",
-        "Freddie", "Pride", "Bulur",
-        "Abyx", "Apolion",
-        "Abezetibou", "Abigor",
-        "Abraxas", "Abraxis",
-        "Solomon", "Aexma",
+        "Surprise",
+        "Conqueror",
+        "Defender",
+        "Invader",
+        "Juvileo",
+        "Nephelin",
+        "Nefelin",
+        "Serafina",
+        "Luz",
+        "Carolin",
+        "Dilan",
+        "Kurt",
+        "Freddie",
+        "Pride",
+        "Bulur",
+        "Abyx",
+        "Apolion",
+        "Abezetibou",
+        "Abigor",
+        "Abraxas",
+        "Abraxis",
+        "Solomon",
+        "Aexma",
         "Acaos",
         "Adramalek",
         "Agares",
@@ -13546,6 +14758,7 @@ def Racial_Names(npc):
         "Andras",
         "Andrealfus",
         "Mastemoth",
+        
         "Andromalius",
         "Angra",
         "Antaura",
@@ -13554,6 +14767,8 @@ def Racial_Names(npc):
         "Armadiel",
         "Aseliel",
         "Asmodeus",
+        "Astaro",
+        "Astaroz",
         "Aeshma",
         "Ashmedai",
         "Asmodius",
@@ -13561,6 +14776,7 @@ def Racial_Names(npc):
         "Astaroth",
         "Azael",
         "Azazel",
+        
         "Baal",
         "Bael",
         "Balam",
@@ -13654,10 +14870,14 @@ def Racial_Names(npc):
         "Furcas",
         "Furfur",
         "Gadreel",
-        "Gadriel", "Garadriel",
-        "Gediel", "Gemori",
-        "Gamaliel", "Gamigin",
-        "Solomon", "Gusion",
+        "Gadriel",
+        "Garadriel",
+        "Gediel",
+        "Gemori",
+        "Gamaliel",
+        "Gamigin",
+        "Solomon",
+        "Gusion",
         "Hades",
         "Hagenti",
         "Harlequin",
@@ -13844,7 +15064,8 @@ def Racial_Names(npc):
         "Ahset",
         "Amunet",
         "Aneksi",
-        "Atet", "Baketamon",
+        "Atet",
+        "Baketamon",
         "Bunefer",
         "Hentie",
         "Herit",
@@ -13885,62 +15106,89 @@ def Racial_Names(npc):
         "Ineni",
         "Ipuki",
         "Irsu",
-        "Kawad",
-        "Kawab",
-        "Kenamon", "Kewap", "Khafra", "Khuesebek",
-        "Masaharta", "Meketre", "Merenre", "Metjen",
-        "Nebamun", "Nehi",
-        "Nekure", "Nessumontu",
-        "Pawah", "Ramose", "Rudjek", "Sabaf", "Sebni",
-        "Senusret", "Shabaka", "Somintu",
-        "Thaneni", "Theti", "Aktas", "Anakis",
-        "Armara", "Astaro",
-        "Astaroz", "Azza", "Belez",
-        "Bune", "Criella",
-        "Damaia", "Ishte",
+        "Masaharta",
+        "Meketre",
+        "Merenre",
+        "Metjen",
+        "Nebamun",
+        "Nehi",
+        "Nekure",
+        "Nessumontu",
+        "Ramose",
+        "Rudjek",
+        "Thaneni",
+        "Theti",
+        "Damaia",
+        "Ishte",
         "Jezebez",
-        "Kali", "Kallista",
-        "Kasdeya", "Lilith",
-        "Makaria", "Markosian", "Nemeian", "Nija",
-        "Oriana", "Osah", "Felaia", "Pura", "Pyra",
-        "Rieta", "Sekhmet", "Semyaza",
-        "Shava", "Zendaya",
-        "Shax", "Vapula", "Vepar", "Verin",
-        "Akmen", "Amon",
-        "Astar", "Balam",
-        "Bazin", "Cain",
-        "Caim",
-        "Cimer",
+        "Kali",
+        "Kallista",
+        "Kasdeya",
+        "Lilith",
+        "Makaria",
+        "Markosian",
+        "Nemeian",
+        "Nija",
+        "Felaia",
+        "Rieta",
+        "Sekhmet",
+        "Semyaza",
+        "Shava",
+        "Zendaya",
+        "Shax",
         "Damakos",
         "Euron",
-        "Kairon",
         "Nicor",
-        "Oriax",
-        "Paymon",
-        "Atraxas",
         "Samal",
-        "Zamuz",
-        "Valafar",
-        "Zezan",
+        
         "Ambition",
-        "Art",
+        "Art",        
+        "Abrasax",
+        "Ariatari",
+        "Atraxas",
+        "Azizi",
+        "Amor",
+        "Akmen",
+        "Amon",
+        "Astar",
+        "Aktas",
+        "Anakis",
+        "Armara",
+        "Astaro",
+        "Astaroz",
+        "Azza",
+
+        "Balam",
+        "Bazin",
+        "Belez",
+        "Bune",
+
+        "Crimson",
+        "Criella",
+        "Caos",
         "Carrion",
         "Chant",
         "Canto",
         "Creed",
+        "Cain",
+        "Caim",
+        "Cimer",
+
+        "Dawala",
         "Death",
         "Despair",
         "Doom",
         "Doubt",
         "Dread",
+        
         "Ecstasy",
         "Ennui",
         "Entropy",
         "Excellence",
+
         "Fear",
-        
-        "Miedo",
-        
+
+        "Grace",
         "Glory",
         "Gloria",
         "Gluttony",
@@ -13952,19 +15200,15 @@ def Racial_Names(npc):
         
         "Ideal",
         "Ignominy",
-                
-        "Abrasax",
-        "Ariatari",
-        "Azizi",
-        "Amor",
 
-        "Crimson",
-        "Caos",
+        "Kawad",
+        "Kawab",
+        "Kenamon",
+        "Kewap",
+        "Khafra",
+        "Khuesebek",
+        "Kairon",
 
-        "Dawala",
-
-        "Grace",
-        
         "Liberty",
         "Luz",
         "Luzimer",
@@ -13978,18 +15222,27 @@ def Racial_Names(npc):
         "Musa",
         "Music",
         "Mystery",
+        "Miedo",
 
         "Nushim",
         "Nowhere",
 
         "Open",
+        "Oriana",
+        "Osah",
+        "Oriax",
 
         "Piety",
         "Pain",
         "Passion",
         "Poetry",
+        "Paymon",
+        "Pura",
+        "Pyra",
+        "Pawah",
         
         "Quest",
+        "Quiet",
         
         "Random",
         "Reverence",
@@ -14000,6 +15253,11 @@ def Racial_Names(npc):
         "Solas",
         "Soleviel",
         "Soraz",
+        "Sabaf",
+        "Sebni",
+        "Senusret",
+        "Shabaka",
+        "Somintu",
         
         "Temerity",
         "Torment",
@@ -14009,21 +15267,35 @@ def Racial_Names(npc):
         
         "Vice",
         "Virtue",
+        "Valafar",
+        "Vapula",
+        "Vepar",
+        "Verin",
         
         "Weary",
         "Wit",
+        "Wheelwright",
+        "Watch",
+        "Will",
+        "Wander",
+        "Whisper",
+        "Wry",
+        "Williams",
+        
+        "Zamuz",
+        "Zezan",
+
 
         ]
-    if Type == "Fiend":
+    
+    if "Fiend" in creature_type:
         Names += Tieflings
-        if Dice(10)<5: 
-            namer = MarkovNameGenerator(Names)
-            Name = namer.generate_name()
-            
-            FullName =  Name 
-            
-        else:
-            FullName =  random.choice(Names)
+
+        FullName = NewName(Names,
+                onset = ['Night','Sha','Beh','Az'],
+                nuclei = ['','a','e','ly','ley','he','az'],
+                codas = ['fire','dow','mut','zel'],
+                )
             
         return FullName        
 
@@ -14240,14 +15512,14 @@ def Racial_Names(npc):
         "Burk",
         "Azava",
         "Zasiki",
-        "Warishi"
-               ]
+        "Warishi",
+               
 
         ]
-    if Type == "Goblin":
+    if "Goblin" in creature_type:
         Names += Goblins            
 
-        Name = NewName(Names
+        Name = NewName(Names,
                 onset = ['So','Ro','Aza', 'Al', 'Za', 'Ze', 'Az', 'Ba', 'Am', 'Fe'],
                 nuclei = ['', 'ra', 'ja', 'ha', 'co'],
                 codas = ['shan','ja', 'dan', 'hir','','fir','ur', 'dar', 'bar'],
@@ -14257,15 +15529,28 @@ def Racial_Names(npc):
 
 
 
-    if "Beast" in npc.race:
-        Beasts = []
+    if "Beast" in creature_type:
+        Beasts = [
+            "Tod",
+            "Toby"
+                  ]
         
         Names += Beasts
+        Name = NewName(Names)
+        FullName = Name
+        return FullName
 
-    if "Beastfolk" in npc.race:
-        Beasts = []
-        
-        Names += Beasts
+        if "Beastfolk" in creature_type:
+            Beastfolk = [
+                "Aurig",
+                "Auriga",
+                "Aurigia",
+                ]
+            
+            Names += Beastfolk
+            Name = NewName(Names)
+            FullName = Name
+        return FullName
 
         
     
@@ -14376,8 +15661,58 @@ def Racial_Names(npc):
             'Mosiah',
             'Uratum',
             'Darwish',
-            'Acetaminophen', 'Adderall', 'Amitriptyline', 'Amlodipine', 'Amoxicillin', 'Ativan', 'Atorvastatin', 'Azithromycin', 'Benzonatate', 'Brilinta', 'Bunavail', 'Buprenorphine', 'Cephalexin', 'Ciprofloxacin', 'Citalopram', 'Clindamycin', 'Clonazepam', 'Cyclobenzaprine', 'Cymbalta', 'Doxycycline', 'Dupixent', 'Entresto', 'Entyvio', 'Farxiga', 'Fentanyl Patch', 'Gabapentin', 'Gilenya', 'Humira', 'Hydrochlorothiazide', 'Hydroxychloroquine', 'Ibuprofen', 'Imbruvica', 'Invokana', 'Januvia', 'Jardiance', 'Kevzara', 'Leqvio', 'Lexapro', 'Lisinopril', 'Lofexidine', 'Loratadine', 'Lyrica', 'Melatonin', 'Meloxicam', 'Metformin', 'Methadone', 'Methotrexate', 'Metoprolol', 'Mounjaro', 'Naloxone', 'Naltrexone', 'Naproxen', 'Narcan', 'Nurtec', 'Omeprazole', 'Onpattro', 'Otezla', 'Ozempic', 'Pantoprazole', 'Plan B', 'Prednisone', 'Probuphine', 'Rybelsus', 'secukinumab', 'Sublocade', 'Tramadol', 'Trazodone', 'Viagra', 'Wegovy', 'Wellbutrin', 'Xanax', 'Zubsolv'
-            'Aciclovir', 'Zovirax', 'Acrivastine', 'Adalimumab', 'Alendronic', 'Allopurinol', 'Alogliptin', 'Amitriptyline', 'Amlodipine', 'Amoxicillin', 'Anastrozole', 'Apixaban', 'Aripiprazole', 'Aspirin', 'Atenolol', 'Atorvastatin', 'Azathioprine', 'Azithromycin', 'Baclofen', 'Beclometasone', 'Bendroflumethiazide', 'Benzoyl', 'Peroxide', 'Benzydamine', 'Betahistine', 'Betamethasone', 'Bimatoprost', 'Bisacodyl', 'Bisoprolol', 'Brinzolamide', 'Budesonide', 'Bumetanide', 'Buprenorphine', 'Buscopan', 'Hyoscine ', 'Butylbromide', 'Calcipotriol', 'Candesartan', 'Carbamazepine', 'Carbimazole', 'Carbocisteine', 'Carmellose', 'Carvedilol', 'Cefalexin', 'Cetirizine', 'Champix', 'Varenicline', 'Chloramphenicol', 'Chlorhexidine', 'Chlorphenamine', 'Piriton', 'Cinnarizine', 'Ciprofloxacin', 'Citalopram', 'Clarithromycin', 'Clobetasol', 'Clobetasone', 'Clonazepam', 'Clonidine', 'Clopidogrel', 'Clotrimazole', 'Canesten', 'Coamoxiclav', 'Cobeneldopa', 'Cocareldopa', 'Cocodamol', 'Cocodaprin', 'Codydramol', 'Coaltar', 'Codeine', 'Colchicine', 'Colecalciferol', 'Medroxyprogesterone', 'Cyanocobalamin', 'Cyclizine', 'Dabigatran', 'Dapagliflozin', 'Dexamethasone', 'Diazepam', 'Diclofenac', 'Digoxin', 'Dihydrocodeine', 'Diltiazem', 'Diphenhydramine', 'Dipyridamole', 'Docusate', 'Domperidone', 'Donepezil', 'Dosulepin', 'Doxazosin', 'Doxycycline', 'Duloxetine', 'Edoxaban', 'Empagliflozin', 'Enalapril', 'Eplerenone', 'Erythromycin', 'Escitalopram', 'Esomeprazole', 'Ezetimibe', 'Felodipine', 'Fentanyl', 'Ferrousfum', 'Ferroussulf', 'Fexofenadine', 'Finasteride', 'Flucloxacillin', 'Fluconazole', 'Prozac', 'Fluticasone', 'Folic', 'Furosemide', 'Fusidic', 'Fybogel', 'Ispaghula ', 'Husk', 'Gabapentin', 'Gaviscon ', 'Alginic', 'Gliclazide', 'Glimepiride', 'Glyceryl', 'Trinitrate', 'Haloperidol', 'Heparinoid', 'Hydrocortisone', 'Hydroxocobalamin', 'Hydroxychloroquine', 'Hyoscine', 'Hydrobromide', 'Ibuprofen ', 'Codeine', 'Ibuprofen', 'Nurofen', 'Ibuprofen', 'Indapamide', 'Insulin', 'Irbesartan', 'Isosorbide ', 'Mononitrate', 'Isosorbide', 'Dinitrate', 'Roaccutane', 'Isotretinoin ', 'Isotrex', 'Ketoconazole', 'Labetalol', 'Lactulose', 'Lamotrigine', 'Lansoprazole', 'Latanoprost', 'Lercanidipine', 'Letrozole', 'Levetiracetam', 'Levothyroxine', 'Lidocaine', 'Linagliptin', 'Lisinopril', 'Lithium', 'Loperamide', 'Loratadine ', 'Clarityn', 'Lorazepam', 'Losartan', 'Lymecycline', 'Macrogol', 'Mebendazole', 'Mebeverine', 'Medroxyprogesterone', 'Melatonin', 'Memantine', 'Mesalazine', 'Metformin', 'Methadone', 'Methotrexate', 'Methylphenidate', 'Metoclopramide', 'Metoprolol', 'Metronidazole', 'Mirabegron', 'Mirtazapine', 'Molnupiravir ', 'Lagevrio', 'Mometasone', 'Montelukast', 'Morphine', 'Naproxen', 'Nefopam', 'Nicorandil', 'Nifedipine', 'Nitrofurantoin', 'Nortriptyline', 'Nystatin', 'Olanzapine', 'Olmesartan', 'Omeprazole', 'Oxybutynin', 'Oxycodone', 'Pantoprazole', 'Paracetamol', 'Calpol', 'Paroxetine', 'Paxlovid', 'Peppermintoil', 'Peptobismol ', 'Bismuth ', 'Subsalicylate', 'Perindopril', 'Phenoxymethylpenicillin', 'Phenytoin', 'Pioglitazone', 'Pravastatin', 'Prophylaxis', 'Prednisolone', 'Pregabalin', 'Prochlorperazine', 'Progesterone', 'Utrogestan', 'Promethazine ', 'Phenergan', 'Propranolol', 'Pseudoephedrine ', 'Sudafed', 'Quetiapine', 'Rabeprazole', 'Ramipril', 'Ranitidine', 'Remdesivir ', 'Veklury', 'Risedronate', 'Risperidone', 'Rivaroxaban', 'Ropinirole', 'Rosuvastatin', 'Salbutamol', 'Saxagliptin', 'Senna', 'Sertraline', 'Sildenafil', 'Simeticone', 'Simvastatin', 'Sitagliptin', 'Cromoglicate', 'Valproate', 'Solifenacin', 'Sotalol', 'Sotrovimab ', 'Xevudy', 'Spironolactone', 'Sulfasalazine', 'Sumatriptan', 'Tadalafil', 'Tamsulosin', 'Temazepam', 'Terbinafine', 'Thiamine', 'Tibolone', 'Ticagrelor', 'Timolol eye', 'Tiotropium', 'Tolterodine', 'Topiramate', 'Tramadol', 'Tranexamic', 'Trastuzumab ', 'Herceptin', 'Trazodone', 'Trimethoprim', 'Utrogestan', 'progesterone', 'Valproicacid', 'Valsartan', 'Varenicline', 'Champix ', 'Varenicline', 'Venlafaxine', 'Verapamil', 'Warfarin', 'Zolpidem', 'Zopiclone',
+            'Acetaminophen', 'Adderallix', 'Amitriptylin', 'Amlodipin', 'Amox', 'Aicillin', 'Ativan', 'Atorvas',
+            'Atatin',
+            'Azithromycin', 'Benzonatate', 'Brilinta', 'Bunavail', 'Buprenorphine', 'Cephalexin', 'Ciprofloxacin',
+            'Citalopram', 'Clindamycin', 'Clonazepam', 'Cyclobenzaprine', 'Cymbalta', 'Doxycycline', 'Dupixent',
+            'Entresto', 'Entyvio', 'Farxiga', 'Fentanyl Patch', 'Gabapentin', 'Gilenya', 'Humira',
+            'Hydrochlorothiazide', 'Hydroxychloroquine', 'Ibuprofen', 'Imbruvica', 'Invokana', 'Januvia',
+            'Jardiance', 'Kevzara', 'Leqvio', 'Lexapro', 'Lisinopril', 'Lofexidine', 'Loratadine', 'Lyrica',
+            'Melatonin', 'Meloxicam', 'Metformin', 'Methadone', 'Methotrexate', 'Metoprolol', 'Mounjaro', 'Naloxone',
+            'Naltrexone', 'Naproxen', 'Narcan', 'Nurtec', 'Omeprazole', 'Onpattro', 'Otezla', 'Ozempic',
+            'Pantoprazole', 'Plan B', 'Prednisone', 'Probuphine', 'Rybelsus', 'secukinumab', 'Sublocade', 'Tramadol',
+            'Trazodone', 'Viagra', 'Wegovy', 'Wellbutrin', 'Xanax', 'Zubsolv'
+            'Aciclovir', 'Zovirax', 'Acrivastine', 'Adalimumab', 'Alendronic', 'Allopurinol', 'Alogliptin',
+            'Amitriptyline', 'Amlodipine', 'Amoxicillin', 'Anastrozole', 'Apixaban', 'Aripiprazole', 'Aspirin',
+            'Atenolol', 'Atorvastatin', 'Azathioprine', 'Azithromycin', 'Baclofen', 'Beclometasone',
+            'Bendroflumethiazide', 'Benzoyl', 'Peroxide', 'Benzydamine', 'Betahistine', 'Betamethasone',
+            'Bimatoprost', 'Bisacodyl', 'Bisoprolol', 'Brinzolamide', 'Budesonide', 'Bumetanide', 'Buprenorphine',
+            'Buscopan', 'Hyoscine ', 'Butylbromide', 'Calcipotriol', 'Candesartan', 'Carbamazepine', 'Carbimazole',
+            'Carbocisteine', 'Carmellose', 'Carvedilol', 'Cefalexin', 'Cetirizine', 'Champix', 'Varenicline',
+            'Chloramphenicol', 'Chlorhexidine', 'Chlorphenamine', 'Piriton', 'Cinnarizine', 'Ciprofloxacin',
+            'Citalopram', 'Clarithromycin', 'Clobetasol', 'Clobetasone', 'Clonazepam', 'Clonidine', 'Clopidogrel',
+            'Clotrimazole', 'Canesten', 'Coamoxiclav', 'Cobeneldopa', 'Cocareldopa', 'Cocodamol', 'Cocodaprin',
+            'Codydramol', 'Coaltar', 'Codeine', 'Colchicine', 'Colecalciferol', 'Medroxyprogesterone',
+            'Cyanocobalamin', 'Cyclizine', 'Dabigatran', 'Dapagliflozin', 'Dexamethasone', 'Diazepam', 'Diclofenac',
+            'Digoxin', 'Dihydrocodeine', 'Diltiazem', 'Diphenhydramine', 'Dipyridamole', 'Docusate', 'Domperidone',
+            'Donepezil', 'Dosulepin', 'Doxazosin', 'Doxycycline', 'Duloxetine', 'Edoxaban', 'Empagliflozin',
+            'Enalapril', 'Eplerenone', 'Erythromycin', 'Escitalopram', 'Esomeprazole', 'Ezetimibe', 'Felodipine',
+            'Fentanyl', 'Ferrousfum', 'Ferroussulf', 'Fexofenadine', 'Finasteride', 'Flucloxacillin', 'Fluconazole',
+            'Prozac', 'Fluticasone', 'Folic', 'Furosemide', 'Fusidic', 'Fybogel', 'Ispaghula ', 'Husk', 'Gabapentin',
+            'Gaviscon ', 'Alginic', 'Gliclazide', 'Glimepiride', 'Glyceryl', 'Trinitrate', 'Haloperidol',
+            'Heparinoid', 'Hydrocortisone', 'Hydroxocobalamin', 'Hydroxychloroquine', 'Hyoscine', 'Hydrobromide',
+            'Ibuprofen ', 'Codeine', 'Ibuprofen', 'Nurofen', 'Ibuprofen', 'Indapamide', 'Insulin', 'Irbesartan',
+            'Isosorbide ', 'Mononitrate', 'Isosorbide', 'Dinitrate', 'Roaccutane', 'Isotretinoin ', 'Isotrex',
+            'Ketoconazole', 'Labetalol', 'Lactulose', 'Lamotrigine', 'Lansoprazole', 'Latanoprost', 'Lercanidipine',
+            'Letrozole', 'Levetiracetam', 'Levothyroxine', 'Lidocaine', 'Linagliptin', 'Lisinopril', 'Lithium',
+            'Loperamide', 'Loratadine ', 'Clarityn', 'Lorazepam', 'Losartan', 'Lymecycline', 'Macrogol',
+            'Mebendazole', 'Mebeverine', 'Medroxyprogesterone', 'Melatonin', 'Memantine', 'Mesalazine', 'Metformin',
+            'Methadone', 'Methotrexate', 'Methylphenidate', 'Metoclopramide', 'Metoprolol', 'Metronidazole',
+            'Mirabegron', 'Mirtazapine', 'Molnupiravir ', 'Lagevrio', 'Mometasone', 'Montelukast', 'Morphine',
+            'Naproxen', 'Nefopam', 'Nicorandil', 'Nifedipine', 'Nitrofurantoin', 'Nortriptyline', 'Nystatin',
+            'Olanzapine', 'Olmesartan', 'Omeprazole', 'Oxybutynin', 'Oxycodone', 'Pantoprazole', 'Paracetamol',
+            'Calpol', 'Paroxetine', 'Paxlovid', 'Peppermintoil', 'Peptobismol ', 'Bismuth ', 'Subsalicylate',
+            'Perindopril', 'Phenoxymethylpenicillin', 'Phenytoin', 'Pioglitazone', 'Pravastatin', 'Prophylaxis',
+            'Prednisolone', 'Pregabalin', 'Prochlorperazine', 'Progesterone', 'Utrogestan', 'Promethazine ',
+            'Phenergan', 'Propranolol', 'Pseudoephedrine ', 'Sudafed', 'Quetiapine', 'Rabeprazole', 'Ramipril',
+            'Ranitidine', 'Remdesivir ', 'Veklury', 'Risedronate', 'Risperidone', 'Rivaroxaban', 'Ropinirole',
+            'Rosuvastatin', 'Salbutamol', 'Saxagliptin', 'Senna', 'Sertraline', 'Sildenafil', 'Simeticone',
+            'Simvastatin', 'Sitagliptin', 'Cromoglicate', 'Valproate', 'Solifenacin', 'Sotalol', 'Sotrovimab ',
+            'Xevudy', 'Spironolactone', 'Sulfasalazine', 'Sumatriptan', 'Tadalafil', 'Tamsulosin', 'Temazepam',
+            'Terbinafine', 'Thiamine', 'Tibolone', 'Ticagrelor', 'Timolol eye', 'Tiotropium', 'Tolterodin',
+            'Topiramate', 'Tramadol', 'Tranexamic', 'Trastuzumab ', 'Herceptin', 'Trazodone', 'Trimethoprim',
+            'Utrogestan', 'progesterone', 'Valproicacid', 'Valsartan', 'Varenicline', 'Champix ', 'Varenicline',
+            'Venlafaxine', 'Verapamil', 'Warfarin', 'Zolpidex', 'Zopiclon',
             ]
 
         Names += Undeads
@@ -14528,13 +15863,18 @@ def Racial_Names(npc):
                            ) 
             return Name        
 
-    if Type == "Lizardfolk":
+    if "Lizardfolk" in creature_type:
         Lizardfolk = [
+            "Argonian",
+            
             "Gojira",
             "Gozilla",
+            
             "Kermit",
+            "Kowalouba",
+            
             "Lizzy",
-            "Argonian",
+            "Turoc",
             "Kroxigor",
             "Throgg",
             "Sobek",
@@ -14559,6 +15899,7 @@ def Racial_Names(npc):
             "Killcroak",
             "Thornback",
             "Yenpa",
+            
             ]
         Names += Lizardfolk
 
@@ -14621,47 +15962,73 @@ def Racial_Names(npc):
 
 
     Name = NewName(Names,
-                onset=["Ss", "Kr", "Zr", "Ts", "Xy", "Gr", "Vr", "Sk", "Sl", "Dr", "Hs", "Ks", "Zs", "Ch", "Gh", "Kl", "Tl", "Vl", "Zl", "Rz", "Sz", "Th", "Xz", "Yz", "Bl", "Br", "Dz",
-                       "Fr", "Gl", "Gz", "Go", "Kro", "Thro", "So", "Ka", "Slip", "Jab", "Gor", "Rep", "Ran", "Char", "Lick", "Sala", "Bow", "Koo", "Rath", "Gex", "Tur", "Croco", "Lea",
-                       "Kill", "Thorn", "Yen", "Liz", "Kerm", "Argo", "Frog", "Godz", "Rango", "Turo",
-                       "Kowal", "Nowak", "Wiśn", "Wójc", "Kamiń", "Lewand", "Dąb", "Sobie", "Kacz", "Zaj", "Baran", "Król", "Maj", "Jawor", "Malin", "Sta", "Pol", "Szczep", "Czar", "Kubi",
+                onset=["Ss", "Kr", "Zr", "Ts", "Xy", "Gr", "Vr",
+                       "Sk", "Sl", "Dr", "Hs", "Ks", "Zs", "Ch", "Gh",
+                       "Kl", "Tl", "Vl", "Zl", "Rz", "Sz", "Th", "Xz", "Yz", "Bl", "Br", "Dz",
+                       "Fr", "Gl", "Gz", "Go", "Kro", "Thro", "So",
+                       "Ka", "Slip", "Jab", "Gor", "Rep", "Ran", "Char",
+                       "Lick", "Sala", "Bow", "Koo", "Rath", "Gex", "Tur", "Croco", "Lea",
+                       "Kill", "Thorn", "Yen", "Liz", "Kerm", "Argo",
+                       "Frog", "Godz", "Rango", "Turo",
+                       "Kowal", "Nowak", "Wiśn", "Wójc", "Kamiń",
+                       "Lewand", "Dąb", "Sobie", "Kacz", "Zaj", "Baran",
+                       "Król", "Maj", "Jawor", "Malin", "Sta", "Pol", "Szczep", "Czar", "Kubi",
                        ],
-                nuclei=["a", "e", "i", "o", "u", "aa", "ee", "ii", "oo", "uu", "ae", "ai", "ao", "au", "ea", "ei", "eo", "eu", "ia", "ie", "io", "iu", "oa", "oe", "oi", "ou",
-                        "ua", "ue", "ui", "uo", "a", "o", "i", "e", "u", "ira", "illa", "oro", "oga", "ango", "aro", "izo", "ix", "ung", "or", "urt", "ack", "oop", "yth",
+                nuclei=["a", "e", "i", "o", "u", "aa", "ee", "ii", "oo", "uu", "ae", "ai", "ao",
+                        "au", "ea", "ei", "eo", "eu", "ia", "ie", "io", "iu", "oa", "oe", "oi", "ou",
+                        "ua", "ue", "ui", "uo", "a", "o", "i", "e", "u", "ira", "illa", "oro", "oga",
+                        "ango", "aro", "izo", "ix", "ung", "or", "urt", "ack", "oop", "yth",
                         "yth", "rog", "er", "on", "zar", "ong", "ile", "urt", "zar", "ith", "ert",
-                        "i", "e", "a", "o", "ow", "ak", "ew", "ie", "ko", "czy", "ski", "ska", "czak", "ek", "ik", "yk", "uk", "asz", "ysz", "isz"
+                        "i", "e", "a", "o", "ow", "ak", "ew", "ie", "ko", "czy", "ski", "ska", "czak",
+                        "ek", "ik", "yk", "uk", "asz", "ysz", "isz"
                         ],
-                codas=["sk", "ss", "zz", "rk", "rt", "lk", "lt", "nt", "pt", "kt", "xt", "ch", "sh", "th", "nd", "ng", "nk", "mp", "kt", "lp", "rp", "sp", "st", "tch", "xk", "zk",
-                       "rs", "ls", "ts", "ns", "ra", "gor", "mit", "zy", "nian", "igor", "ogg", "bek", "aa", "py", "ger", "ba", "zilla", "rn", "tar", "go", "zard", "tung", "zzle",
+                codas=["sk", "ss", "zz", "rk", "rt", "lk", "lt", "nt", "pt", "kt", "xt", "ch", "sh",
+                       "th", "nd", "ng", "nk", "mp", "kt", "lp", "rp", "sp", "st", "tch", "xk", "zk",
+                       "rs", "ls", "ts", "ns", "ra", "gor", "mit", "zy", "nian", "igor", "ogg", "bek",
+                       "aa", "py", "ger", "ba", "zilla", "rn", "tar", "go", "zard", "tung", "zzle",
                        "ser", "pa", "th", "ex", "rok", "mire", "head", "croak", "back", "npa",
-                       "ski", "cka", "dzki", "ak", "ek", "ik", "owski", "ewicz", "inski", "kiewicz", "czyk", "czak", "szek", "zak", "ko", "owski", "ewski", "owski", "yński", "akowski",
+                       "ski", "cka", "dzki", "ak", "ek", "ik", "owski", "ewicz", "inski", "kiewicz",
+                       "czyk", "czak", "szek", "zak", "ko", "owski", "ewski", "owski", "yński", "akowski",
                        
                        ]) 
     return Name
     
-    if Type == "Kobold":
+    if "Kobold" in creature_type:
         Kobold_Names = [
             "Aki",
             "Assik",
+            
             "Bik",
             "Biki",
             "Bakaki",
+            
             "Coromanic",
+            
             "Deekin",
             "Durnn",
+            
             "Eek",
+            
+            "Grit",
+            
             "Kurtulmak",
             "Kib",
+            
             "Meepo",
+            
             "Hox",
-            "Grit",
+                        
             "Naknak",
+
             "Fizban",
             "Gnarl",
             "Grizzle",
             "Kratch",
             "Pog",
+            
             "Ratch",
+            
+            "Skakrix",
             "Scamp",
             "Snarl",
             "Skizziks",
@@ -14806,7 +16173,33 @@ def Racial_Names(npc):
             "Po",
             "Ra",
             "Sc",
-            "Sn", "Sq", "Sl", "To", "Tu", "Ur",    "Wh", "Yi", "Za", "Zi", "Sn", "Gi", "Ra", "Zi", "Gl", "Ni", "Sk", "Mi", "Br",    "Kr", "Fi", "Gr", "Tr", "Po", "Bi", "Cr", "Sq", "Da", "Go", "Ji", "Vi", "Pr",    "Sq", "Zi", "Ei", "Cl", "Da", "Sh", "Mo", "Be", "Ga", "Pi", "Ha", "Cu", "Ne",    "Ga", "Ed", "Te", "Da", "Fl", "Fr", "To", "Ro", "Ga", "Jo", "Ho", "Ei", "Ni",    "Ga", "Da", "Fr", "To", "Ro", "Ke", "Ga", "Ma", "Tr", "Re", "Ni", "Di", "Bi",    "Ca", "Ma", "Li", "Ch", "Ro", "Th", "Ke", "Ga", "Ob", "Pu", "Ma", "Tr", "Re",    "Ni", "Ei", "Ma", "Li", "Ch", "Ro", "Th", "Ke", "Ga", "Ob", "Pu", "Ma", "Tr",    "Re", "El", "Ma", "Ri", "Ga", "Dr", "Em", "Sn", "Sh", "Ja", "Bo", "Pr", "Tu",    "Be", "Fi", "Ma", "Dy", "Jo", "Si", "Bi", "Ca", "Ma", "Tr", "Bi", "Ch", "St",    "El", "Ma", "Ni", "Li", "Ma", "Ch", "Ro", "Th", "Ke", "Ga", "Ob", "Pu", "Ma",    "Tr", "Re", "Ni", "Ei", "Ma", "Li", "Ch", "Ro", "Th", "Ke", "Ga", "Ob", "Pu",    "Ma", "Tr", "Re", "El", "Ma", "Ri", "Ga", "Dr", "Em", "Sn", "Sh", "Ja", "Bo",    "Pr", "Tu", "Be", "Fi", "Ma", "Dy", "Jo", "Si", "Bi", "Ca", "Ma", "Tr", "Bi",    "Ch", "St", "El", "Ma", "Ni", "Li", "Ma", "Ch", "Ro", "Th", "Ke", "Ga", "Ob",    "Pu", "Ma", "Tr", "Re", "Ni", "Ei", "Ma", "Li", "Ch", "Ro", "Th", "Ke", "Ga",    "Ob", "Pu", "Ma", "Tr", "Re", "El", "Ma", "Ri", "Ga", "Dr", "Em", "Sn", "Sh",    "Ja", "Bo", "Pr", "Tu", "Be", "Fi", "Ma", "Dy", "Jo", "Si", "Bi", "Ca", "Ma",    "Tr", "Bi", "Ch", "St", "El", "Ma", "Ni", "Li", "Ma", "Ch", "Ro", "Th", "Ke",    "Ga", "Ob", "Pu", "Ma", "Tr", "Re", "Ni", "Ei", "Ma", "Li", "Ch", "Ro", "Th",    "Ke", "Ga", "Ob", "Pu", "Ma", "Tr", "Re",
+            "Sn", "Sq", "Sl", "To", "Tu", "Ur",
+            "Wh", "Yi", "Za", "Zi", "Sn", "Gi",
+            "Ra", "Zi", "Gl", "Ni", "Sk", "Mi", "Br",
+            "Kr", "Fi", "Gr", "Tr", "Po", "Bi", "Cr",
+            "Sq", "Da", "Go", "Ji", "Vi", "Pr",
+            "Sq", "Zi", "Ei", "Cl", "Da", "Sh",
+            "Mo", "Be", "Ga", "Pi", "Ha", "Cu", "Ne",
+            "Ga", "Ed", "Te", "Da", "Fl", "Fr",
+            "To", "Ro", "Ga", "Jo", "Ho", "Ei",
+            "Ni", "Ga", "Da", "Fr", "To", "Ro",
+            "Ke", "Ga", "Ma", "Tr", "Re", "Ni",
+            "Di", "Bi", "Ca", "Ma", "Li", "Ch",
+            "Ro", "Th", "Ke", "Ga", "Ob", "Pu",
+            "Ma", "Tr", "Re", "Ni", "Ei", "Ma",
+            "Li", "Ch", "Ro", "Th", "Ke", "Ga", "Ob",
+            "Pu", "Ma", "Tr", "Re", "El", "Ma",
+            "Ri", "Ga", "Dr", "Em", "Sn", "Sh",
+            "Ja", "Bo", "Pr", "Tu", "Be", "Fi", "Ma",
+            "Dy", "Jo", "Si", "Bi", "Ca", "Ma",
+            "Tr", "Bi", "Ch", "St", "El", "Ma", "Ni", "Li", "Ma", "Ch", "Ro", "Th", "Ke",
+            "Ga", "Ob", "Pu", "Ma", "Tr", "Re", "Ni", "Ei", "Ma", "Li", "Ch", "Ro", "Th", "Ke", "Ga", "Ob", "Pu",    "Ma", "Tr",
+            "Re", "El", "Ma", "Ri", "Ga", "Dr", "Em", "Sn", "Sh", "Ja", "Bo",    "Pr", "Tu", "Be", "Fi", "Ma", "Dy", "Jo", "Si",
+            "Bi", "Ca", "Ma", "Tr", "Bi",    "Ch", "St", "El", "Ma", "Ni", "Li", "Ma", "Ch", "Ro", "Th", "Ke", "Ga", "Ob",
+            "Pu", "Ma", "Tr", "Re", "Ni", "Ei", "Ma", "Li", "Ch", "Ro", "Th", "Ke", "Ga",    "Ob", "Pu", "Ma", "Tr", "Re", "El",
+            "Ma", "Ri", "Ga", "Dr", "Em", "Sn", "Sh",    "Ja", "Bo", "Pr", "Tu", "Be", "Fi", "Ma", "Dy", "Jo", "Si", "Bi", "Ca",
+            "Ma",    "Tr", "Bi", "Ch", "St", "El", "Ma", "Ni", "Li", "Ma", "Ch", "Ro", "Th", "Ke",    "Ga", "Ob", "Pu", "Ma",
+            "Tr", "Re", "Ni", "Ei", "Ma", "Li", "Ch", "Ro", "Th",    "Ke", "Ga", "Ob", "Pu", "Ma", "Tr", "Re",
 
                      ]
         nuclei = [
@@ -14864,13 +16257,17 @@ def Racial_Names(npc):
             "u",
             "ua",
 
-              "oe", "ue", "ya",
-            "ki", "sik", "bik", "aki", "cor", "deek", "durn", "eek", "mak", "bik", 
-            "po", "hox", "rit", "nak", "ban", "arl", "kle", "tch", "pog", "ratch", 
-            "amp", "arl", "izz", "iv", "ee", "wik", "ik", "ang", "izz", "le", 
+            "oe", "ue", "ya",
+            "ki", "sik", "bik", "aki", "cor",
+            "deek", "durn", "eek", "mak", "bik", 
+            "po", "hox", "rit", "nak", "ban",
+            "arl", "kle", "tch", "pog", "ratch", 
+            "amp", "arl", "izz", "iv", "ee",
+            "wik", "ik", "ang", "izz", "le", 
             "zzle", "azz",
             "eak",  "ark", "ble", "zob", "teek", 
-            "rick", "zzik", "queak", "erna", "dolf", "zzok", "arl", "narl", 
+            "rick", "zzik", "queak", "erna",
+            "dolf", "zzok", "arl", "narl", 
             "fizz",
             "ik",
             "izle",
@@ -14889,14 +16286,13 @@ def Racial_Names(npc):
 
 
 
-    if Type == "Monstrosity":
+    if "Monstrosity" in creature_type:
 
         Monstrosity_Names = [
             "Bulektri",
             "Thyrm",
             "Kragma",
             "Slytherr",
-            "Vorlash",
             "Grindle",
             "Morgax",
             "Draknos",
@@ -15017,7 +16413,6 @@ def Racial_Names(npc):
             "Orthros",
             "Typhon",
             "Echidna",
-            "Balor",
             "Jersey",
             "Mothman",
             "Wendigo",
@@ -15030,7 +16425,6 @@ def Racial_Names(npc):
             "Skoll",
             "Hati",
             "Umberhulk",
-            "Doppelganger",
             "Rustmonster",
             "Owlbear",
                         
@@ -15039,20 +16433,27 @@ def Racial_Names(npc):
             
             "Bulette",
             "Behir",
+            "Balor",
 
             "Cloaker",
 
             "Displacerbeast",
+            "Doppelganger",
 
             "Gibberingmouther",
                         
-            "Jabberwock",  # From "Through the Looking-Glass" by Lewis Carroll
+            "Jabberwock",
+
+            "Vorlash",
 
             "Zarvox",
 
         ]
 
         Names += Monstrosity_Names
+        onset=["Ker","Tu","An"]
+        nuclei=["be","ro","ke"]
+        codas=["rus","ak"]
 
         Name = NewName(Names,onset,nuclei,codas) 
         return Name
@@ -15062,17 +16463,17 @@ def Racial_Names(npc):
 
 
 
-    if npc.race == "Celestial":
+    if "Celestial" in creature_type:
         Celestials = [
             "Auriel",
             "Azarael",
-            "Anael",       # In some Christian traditions, Anael is one of the seven archangels
-            "Azrael",      # Often identified with the Angel of Death in Islam and some Jewish traditions
+            "Anael",       
+            "Azrael",      
             "Alpheratz",
             "Altair",
             "Antares",
             "Arcturus",
-            "Aether",   # Greek personification of the upper air, breathed by the gods
+            "Aether",   
             "Astral",
 
             "Betelgeuse",
@@ -15094,8 +16495,10 @@ def Racial_Names(npc):
             "Israfil",
             
             "Jophiel",
-            
+
+            "Litania",
             "Lumiel",
+            'Lewandon',
             
             "Metatron",
             "Maia",
@@ -15224,7 +16627,7 @@ def Racial_Names(npc):
         return Name
 
 
-    if npc.race == "Ooze":
+    if "Ooze" in creature_type:
         oozes = [
             "Blob",
             "Flubber",
@@ -15253,32 +16656,61 @@ def Racial_Names(npc):
             "Muddle",
             ]
         Names += oozes
-        if Dice(10)<10: 
-            namer = MarkovNameGenerator(Names)
-            Name = namer.generate_name()
+        Name = newName(Names)       
+        FullName =  Name 
                 
-            FullName =  Name 
-                
-        else:
-            FullName =  random.choice(Names)
-
         return FullName
 
 
     if "Fey" in creature_type:
         fae =[
-            "Titania", "Oberon", "Puck", "Robin", "Goodfellow",
+            "Iduri",
+            "Titania",
+            "Oberon",
+            "Puck",
+            "Robin",
+            "Goodfellow",
             "Tinkerbell",
             "Ferret",
-            "Tinker", "Bell",
-            "Mab", "Ariel", "Morgana", "Niamh", "Tam", "Lin", "Rhiannon",
-            "Melusine", "Gwydion", "Etain", "Bluebell", "Florian", "Lorelei",
-            "Rusalka", "Alberich", "Ellette", "Fay", "Faye", "Silvanus",
-            "Glaurung", "Nyx", "Pari", "Seelian", "Unseelian", "Sylph",
-            "Diwata", "Maria", "Makiling", "Tala", "Mayari", "Amihan", 
-            "Hanan", "Apolaki", "Anitun", "Ikapati", "Lakapati", 
-            "Mapulon", "Malakas", "Maganda", "Bathala", "Kabunian", 
-            "Idiyanale", "Balangaw", "Bulan", "Lidagat", "Liadlaw",
+            "Tinker",
+            "Bell",
+            "Mab",
+            "Ariel",
+            "Morgana",
+            "Niamh",
+            "Tam",
+            "Lin",
+            "Rhiannon",
+            "Melusine",
+            "Gwydion",
+            "Etain",
+            "Bluebell",
+            "Florian",
+            "Lorelei",
+            "Rusalka",
+            "Alberich",
+            "Ellette",
+            "Fay",
+            "Faye",
+            "Silvanus",
+            "Glaurung",
+            "Nyx",
+            "Pari",
+            "Seelian",
+            "Unseelian",
+            "Sylph",
+            "Diwata",
+            "Maria",
+            "Makiling",
+            "Tala",
+            "Mayari",
+            "Amihan", 
+            "Hanan", "Apolaki", "Anitun",
+            "Ikapati", "Lakapati", 
+            "Mapulon", "Malakas", "Maganda",
+            "Bathala", "Kabunian", 
+            "Idiyanale", "Balangaw", "Bulan",
+            "Lidagat", "Liadlaw",
             "Baranugon", "Aman", "Sinaya", "Magwayen", "Manaul", "Aswang",
             "Tikbalang", "Kapre", "Duwende", "Sarimanok", "Manananggal",
             "Panday", "Pira", "Dalikamata", "Sidapa", "Alunsina", "Bungisngis",
@@ -15287,8 +16719,10 @@ def Racial_Names(npc):
             "Nuberu", "Cuelebre", "Saco", "Busgosu", "Tarasca",
             "Culebre", "Dama", "Arintero", "Compana", "Moron",
             "Animas", "Zurragamurdi", "Silbon", "Zahori",
-            "Cojuelo", "Lazarillo",     "Trasgu", "Xana", "Nuberu", "Cuélebre", "Basilisco",
-            "Anjana", "Ojáncano", "Mora", "Lavandera", "Barragán",
+            "Cojuelo", "Lazarillo",     "Trasgu", "Xana",
+            "Nuberu", "Cuélebre", "Basilisco",
+            "Anjana", "Ojáncano", "Mora",
+            "Lavandera", "Barragán",
             "Mari", "Sorgiña", "Irati", "Lamiak", "Basajaun",
             "Tartalo", "Guajona", "Culebre", "Ventolín", "Busgosu",
             "Diañu", "Burlón", "Zana", "Cegua", "Encantaria",
@@ -15300,10 +16734,13 @@ def Racial_Names(npc):
 
         Names += Fae
         Name = NewName(Names,
-             onset=["Fawn", "Pan", "Sylv", "Thorn", "Elm", "Bram", "Nim", "Vern", "Glen", "Fern", "Riv", "Lark", "Row", "Taur", "Wood", "Dell", "Alder", "Briar", "Cedar", "Dusk",
-                    "Aur", "Flor", "Lun", "Stell", "Vit", "Fol", "Silv", "Nym", "Cael", "Luc", "Sol", "Vent", "Ign", "Viv", "Ser", "Verd", "Faun", "Aquil", "Riv", "Temp",
+             onset=["Fawn", "Pan", "Sylv", "Thorn", "Elm", "Bram", "Nim", "Vern", "Glen", "Fern",
+                    "Riv", "Lark", "Row", "Taur", "Wood", "Dell", "Alder", "Briar", "Cedar", "Dusk",
+                    "Aur", "Flor", "Lun", "Stell", "Vit", "Fol", "Silv", "Nym", "Cael", "Luc", "Sol",
+                    "Vent", "Ign", "Viv", "Ser", "Verd", "Faun", "Aquil", "Riv", "Temp",
                     "Cron", "Hecat", "Pyth", "Sibyl", "Druid", "Ruid",
-                    "Druik","Orac", "Myst", "Nostr", "Divin", "Aeg", "Circe", "Delph", "Gorg", "Medus", "Necr", "Phant", "Sorc", "Thaum", "Trism", "Vatic",
+                    "Druik","Orac", "Myst", "Nostr", "Divin", "Aeg", "Circe", "Delph", "Gorg", "Medus",
+                    "Necr", "Phant", "Sorc", "Thaum", "Trism", "Vatic",
                     "Ocul", "Ocu"
                     ],
             nuclei=[
@@ -15313,89 +16750,59 @@ def Racial_Names(npc):
                 "lu",
                     ],
             codas=[
-                "horn", "leaf", "wood", "song", "shade", "brook", "vale", "whisp", "stream", "grove", "thorn", "wind", "foot", "dance", "fern", "glade", "hart", "bark", "reed", "spring",
-                "alis", "aris", "ella", "enna", "iana", "itus", "orix", "us", "era", "ora", "ina", "anthe", "entia", "idus", "olus", "andis", "urna", "elix", "amor", "ignis",
-                "astra", "onia", "asia", "amis", "andra", "onia", "ipha", "ecia", "algia", "ella", "essa", "imna", "osia", "une", "yxis", "ompha", "anthe", "eia", "ithra", "oria",
+                "horn", "leaf", "wood", "song", "shade", "brook", "vale", "whisp", "stream", "grove", "thorn",
+                "wind", "foot", "dance", "fern", "glade", "hart", "bark", "reed", "spring",
+                "alis", "aris", "ella", "enna", "iana", "itus", "orix", "us", "era", "ora", "ina", "anthe",
+                "entia", "idus", "olus", "andis", "urna", "elix", "amor", "ignis",
+                "astra", "onia", "asia", "amis", "andra", "onia", "ipha", "ecia", "algia", "ella", "essa",
+                "imna", "osia", "une", "yxis", "ompha", "anthe", "eia", "ithra", "oria",
                 "lus",
                     ]) 
 
 
-    if npc.race == "Dragon":
+    if "Dragon" in creature_type:
         dragons = [
             "Jakelong",
             "Braveheart"
             ]
         Names += dragons
 
-        if Dice(10)<5:
-            Name = SyllabicGenerator(
+        Name = NewName(Names,
                 onset = ['Ja','Brave'],
                 nuclei = ['ke','heart'],
                 codas = ['','long'],
-                count = Dice(8)
                 )
-            
-        elif Dice(10) < 5:
-            Name = SyllabicName(
-                syllables = SyllabicExtraction(Names),
-                min_syllables=1,
-                max_syllables=8)
-                
-
-        elif Dice(10) < 5:
-            namer = MarkovNameGenerator(Names)
-            Name = namer.generate_name()
-                
-            Name =  Name 
-                
-        else:
-            Name =  random.choice(Names)
-
                                 
         FullName =  Name 
         return FullName
 
 
-    if npc.race == "Snakefolk":
+    if "Snakefolk" in creature_type:
         snakefolk = [
             "Medusa",
             "Rennesse",
+            "Xasha",
             ]
         Names += snakefolk
+        Name = NewName(Names)
 
+        FullName = Name
 
-
-    
-    if Dice(10)<5: 
-        namer = MarkovNameGenerator(Names)
-        Name = namer.generate_name()
-            
-        FullName =  Name 
-            
-    else:
-        FullName =  random.choice(Names)
-
-    return FullName 
+        return FullName 
 
 
     if "Aberration" in creature_type:
         Aberrations = [
             "Uthigol",
+            "Echen",
+            "Exen",
             ]
-        if Type == "Aberration":
-            Names += Aberrations        
-            
-            if Dice(10)<4: 
-                namer = MarkovNameGenerator(Names)
-                Name = namer.generate_name()
-
-                
-            elif Dice(10)<4:
-                Name = SyllabicGenerator(
+        Name = NewName(Aberrations,
                     onset = [
-                        "Xyr", "Thar", "Ghoul", "Zor", "Krak",
-                        "Nyx", "Vor", "Mord", "Quel", "Rax",
-                        "Syl", "Drak", "Obl", "Vex", "Cth"
+                        "Xir",  "Zar",  "Gul",  "Zor",  "Kark",
+                        "Nix",  "Vor",  "Mord", "Quel", "Rax",
+                        "Sil",  "Dark", "Obl",  "Vex",  "Cuth",
+                        'Uz',   "Yal",
                         ],
                     nuclei = [ '','','','','','','',
                         "ae", "i", "o", "u", "a",
@@ -15407,20 +16814,32 @@ def Racial_Names(npc):
                         "nash", "zoth", "quil", "tar", "gon",
                         "kesh", "rith", "lon", "mur", "zar"
                         ],
-                    count = Dice(5)
                     )
-
-            elif Dice(10) < 4:
-                Name = SyllabicName(
-                    syllables = SyllabicExtraction(Names),
-                    min_syllables=1,
-                    max_syllables=8)
-            else:
-                Name =  random.choice(Names)
-
-                
-
-
-        FullName = NewName(Names) 
+        FullName = Name
         return FullName
+
+    if "Construct" in creature_type:
+        Constructs = [
+            "Walle",
+            "Wally",
+            "Eva",
+            "Chappie",
+            ]
+        Name = NewName(Constructs,
+                    onset = [
+                        "Rob",'Mo','Al',
+                        ],
+                    nuclei = [ '','','','','','','',
+                        "o",'dr','i',
+                        ],
+                    codas = ['','','','','','','',
+                        'cop','dron','ta',
+                        ],
+                    )
+        FullName = Name
+        return FullName
+
+
+    FullName = NewName(Names) 
+    return FullName
 
