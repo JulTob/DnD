@@ -98,8 +98,6 @@ class Skills:
 
     def proficient(self):
         if Dice()==1: return Dice(self.PB)
-        elif Dice(10)==1: return Dice(D=self.PB,N=2)
-        elif Dice(20)==1: return Dice(D=self.PB,N=3)
         else: return 0
 
     @property
@@ -148,10 +146,10 @@ Main class
 class NPC:
     def __init__(self, race, background, lvl=1):
         self.race = race
-        self.subrace =self.set_subrace()
+        self.gender = random.choice(["he", "she", "they"])
+        self.subrace = self.set_subrace()
         self.background = background
         self.title = self.SetTitle()
-        self.gender = random.choice(["he", "she", "they"])
         self.level = lvl
         self.name = self.Naming()
         self.alignment = self.SetAlignment()
@@ -167,12 +165,7 @@ class NPC:
 
         self.simple_attacks = self.SimpleAttack()   # Initialize simple attacks
         self.special_attack = self.SpecialAttack()  # Initialize special attack
-
-        self.spellcasting_ability = ""
-        self.spell_save_dc = None
-        self.spell_attack_bonus = None
-        self.set_spellcasting_info()
-
+        
         self.spells = self.Magic()
 
         self.AC = self.setAC()
@@ -184,7 +177,44 @@ class NPC:
         self.ideal = self.setIdeal()
         self.plothook = self.setHook()
         self.trait = self.setTrait()
-        
+
+    @property
+    def spellcasting_ability(self):
+        # Find the highest modifier among INT, WIS, and CHA
+        int_mod = self.ability_scores.int_mod
+        wis_mod = self.ability_scores.wis_mod
+        cha_mod = self.ability_scores.cha_mod
+
+        # Create a dictionary to associate the ability score with its modifier
+        ability_mod_dict = {'INT': int_mod, 'WIS': wis_mod, 'CHA': cha_mod}
+
+        # Find the ability with the highest modifier
+        return max(ability_mod_dict, key=ability_mod_dict.get)
+    
+    @property
+    def spellcasting_ability_mod(self):
+        # Find the highest modifier among INT, WIS, and CHA
+        int_mod = self.ability_scores.int_mod
+        wis_mod = self.ability_scores.wis_mod
+        cha_mod = self.ability_scores.cha_mod
+        return max(int_mod,wis_mod,cha_mod)
+    
+    @property
+    def spell_attack_bonus(self):
+        return self.spellcasting_ability_mod + self.proficiency_bonus
+
+    @property
+    def set_spell_save_dc(self):
+        return 8 + self.spell_attack_bonus
+
+    @property
+    def ability_mod(self):
+        return getattr(self.ability_scores, f"{self.spellcasting_ability.lower()}_mod")
+    
+    @property
+    def spell_save_dc(self):
+        return 8 + self.ability_mod + self.proficiency_bonus
+
     @property
     def armor_class(self):
         return self.AC
@@ -302,38 +332,17 @@ class NPC:
         
     
     def Naming(self):
-        import npc_namer as namer
+        import names as namer
         return namer.Racial_Names(self)
         
     def Magic(self):
         import magic
         return magic.Magic(self)
 
-    def set_spellcasting_info(self):
-        self.set_spellcasting_ability()
-        self.set_spell_save_dc()
-        self.set_spell_attack_bonus()
-
-    def set_spell_attack_bonus(self):
-        ability_mod = getattr(self.ability_scores, f"{self.spellcasting_ability.lower()}_mod")
-        self.spell_attack_bonus = ability_mod + self.proficiency_bonus
 
 
-    def set_spell_save_dc(self):
-        ability_mod = getattr(self.ability_scores, f"{self.spellcasting_ability.lower()}_mod")
-        self.spell_save_dc = 8 + ability_mod + self.proficiency_bonus
 
-    def set_spellcasting_ability(self):
-        # Find the highest modifier among INT, WIS, and CHA
-        int_mod = self.ability_scores.int_mod
-        wis_mod = self.ability_scores.wis_mod
-        cha_mod = self.ability_scores.cha_mod
 
-        # Create a dictionary to associate the ability score with its modifier
-        ability_mod_dict = {'INT': int_mod, 'WIS': wis_mod, 'CHA': cha_mod}
-
-        # Find the ability with the highest modifier
-        self.spellcasting_ability = max(ability_mod_dict, key=ability_mod_dict.get)
 
 
         
@@ -389,7 +398,7 @@ class NPC:
 
     def generate_armor_class(self):
         crature_type = self.race + ' ' + self.type + ' ' + self.subrace
-        AC = 10 + self.ability_scores.mod.dex + Dice(self.proficiency_bonus)
+        AC = 10 + self.ability_scores.mod.dex + self.proficiency_bonus
         if "Monk" in creature_type:
             AC += Dice(self.ability_scores.dex_mod)
         if "Berserker" in creature_type:
@@ -398,6 +407,10 @@ class NPC:
             AC += Dice(2) # Natural Armor
         if "Dragon" in creature_type:
             AC += Dice(2) # Natural Armor
+        if "Construct" in creature_type:
+            AC += Dice(2)
+        if "Guardian" in creature_type:
+            AC += Dice(2)
             
         if AC > 18 + self.proficiency_bonus:
             AC  = 18 + self.proficiency_bonus
