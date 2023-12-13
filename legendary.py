@@ -272,6 +272,8 @@ def Lair(npc):
     background=npc.background
     name = npc.title
     lvl = npc.level
+
+    actions =[]
     
     if Type == "":
         if Dice(0) == 1:    Type= Race()
@@ -363,7 +365,7 @@ def Region(npc):
     
     r += "\n" + "\n".join(selected_effects)
     r += "\n" + s
-    return 
+    return r
         
     if race == "Celestial": actions += [attack, shimmering_shield, heal_self]
 
