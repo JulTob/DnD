@@ -163,9 +163,7 @@ def NPC_gen():
 
     r += (npc.saving_throws.string) + "\n\n"
     r += (npc.skills.string) + "\n"
-    r += "PB: +"
-    r += str(npc.PB())
-    r += "\n"
+
 
 
 
