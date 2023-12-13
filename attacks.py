@@ -9,7 +9,8 @@ def PB(level):
     return dnd.PB(level)
 
 def Attack(npc):
-    PB = npc.proficiency_bonus
+    PB = dnd.PB(npc.proficiency_bonus)
+        # For bounded accuracy
     STR = npc.ability_scores.str_mod
     DEX = npc.ability_scores.dex_mod
     
@@ -19,13 +20,10 @@ def Attack(npc):
     creature_type = npc.background + ' ' + npc.race + ' ' + npc.subrace
     
     SimpleMeleeWeapons = [
-        f"Rock, {Dice(PB-1)}d6 {sign_str}{STR} Bludgeoning, 25/50 thrown",
         f"Fists, {Dice(PB-1)}d4 {sign_str}{STR} Bludgeoning",
         f"Brass Knuckles, {Dice(PB-1)}d4 {sign_str}{STR} Bludgeoning",
         f"Bite, {Dice(PB-1)}d4 {sign_str}{STR} Piercing",
         f"Bite, {Dice(PB-1)}d6 {sign_str}{STR} Piercing",
-        f"Claws, {Dice(PB-1)}d4 {sign_str}{STR} Slashing",
-        f"Claws, {Dice(PB-1)}d6 {sign_str}{STR} Slashing",
         f"Club, {Dice(PB-1)}d4 {sign_str}{STR} Bludgeoning",
         f"Dagger, {Dice(PB-1)}d4 {sign_str}{STR} Piercing, 20/60 thrown",
         f"Dagger, {Dice(PB-1)}d4 {sign_dex}{DEX} Piercing, 20/60 thrown",
@@ -44,10 +42,12 @@ def Attack(npc):
         ]
 
     
-    if "Beast" in creature_type or "Dragon" in creature_type or "Kobold" in creature_type:
+    if "Beast" in creature_type or "Dragon" in creature_type or "Kobold" in creature_type or "Monstrosity" in creature_type:
         SimpleMeleeWeapons += [
             f"\n- Bite, {Dice(PB-1)}d6 {sign_str}{STR} Piercing, and the target is grappled (escape DC {8+npc.ability_scores.str_mod+PB}). Until this grapple ends, the target is restrained, and the {npc.race} can't bite another target.",
             f"\n- Bite, {Dice(PB-1)}d10 {sign_str}{STR} Piercing.",
+            f"Claws, {Dice(PB-1)}d4 {sign_str}{STR} Slashing",
+            f"Claws, {Dice(PB-1)}d6 {sign_str}{STR} Slashing",
             ]
         
     SimpleRangedWeapons = [
@@ -175,7 +175,6 @@ def Damage():
         "Force",
         "Psychic",
         "Thunder",
-        ""
     ]
     return random.choice(DamageTypes)
 
@@ -267,8 +266,14 @@ def Recovery(con):
 
 def SpecialAttack(npc):
     Lvl = npc.level
-    Mod = PB(npc.level) + random.choice([npc.ability_scores.str_mod,npc.ability_scores.dex_mod,npc.ability_scores.con_mod,
-                                    npc.ability_scores.int_mod, npc.ability_scores.wis_mod, npc.ability_scores.cha_mod])
+    Mod = Dice(PB(npc.level) + random.choice([
+                                    npc.ability_scores.str_mod,
+                                    npc.ability_scores.dex_mod,
+                                    npc.ability_scores.con_mod,
+                                    npc.ability_scores.int_mod,
+                                    npc.ability_scores.wis_mod,
+                                    npc.ability_scores.cha_mod])
+               )
     STR=npc.ability_scores.str_mod
     DEX=npc.ability_scores.dex_mod
     dmg = Damage()
@@ -279,8 +284,9 @@ def SpecialAttack(npc):
     r += Attack(npc) + " +"
 
     # Damage calculation
+    n = Dice(PB(PB(Lvl))-1)
     damage_die = random.choice(["d4", "d6", "d8", "d10"])
-    r += "{}".format(Dice(1 + PB(Lvl)//4))
+    r += "{}".format(n)
     r += damage_die + " "
     r += dmg
     r += " dmg"
@@ -292,7 +298,7 @@ def SpecialAttack(npc):
 
     # Potential condition application 
     if Dice(10)+Dice(10) <= Dice(Lvl):
-        r += " The target is then affected by the " + con + " condition. "
+        r += " The target is then affected by the " + con + " condition."
         r += " The Condition may be countered with a succesful " + \
             str((10 + Mod)) + " " + Recovery(con) + \
             " Saving Throw at the beggining of the target's turn."
