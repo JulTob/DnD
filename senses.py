@@ -29,19 +29,16 @@ def Senses(npc):
     extras = ""
 
     # Enhanced Senses
-    enhanced_smell =    f"\n- Enhanced Smell: The {race} can detect specific odors or substances within 60 feet."
-    enhanced_hearing =  f"\n- Enhanced Hearing: The {race} can hear frequencies outside the normal range and detect sounds from up to {Dice(12) * 100} feet away."
-    enhanced_taste =    f"\n- Enhanced Taste: The {race} can taste and identify specific ingredients or substances, and has advantage on saving throws against ingested poisons."
-    enhanced_touch =    f"\n- Enhanced Touch: The {race} can feel vibrations through surfaces and detect changes in air pressure."
+    enhanced_smell =    f"\n- Enhanced Smell: The {race} has advantage on on Wisdom (Perception) checks that rely on smell within {Dice(3) * Dice(4) * 10} feet."
+    enhanced_hearing =  f"\n- Enhanced Hearing: The {race} The {race} has advantage on on Wisdom (Perception) checks that rely on sounds from up to {Dice(3) * Dice(4) * 10} feet away."
+    enhanced_taste =    f"\n- Enhanced Taste: The {race} has advantage on on Wisdom (Perception) checks that rely on taste, and has advantage on saving throws against ingested poisons."
     keen_smell =        f"\n- Keen Smell. \n\t The {race} has advantage on Wisdom (Perception) checks that rely on smell."
     keen_hearing =      f"\n- Keen Hearing. \n\t The {race} has advantage on Wisdom (Perception) checks that rely on hearing."
 
 
     # Specialized Senses
     echolocation = f"\n- Echolocation: The {race} can perceive its surroundings within 60 feet as if it had blindsight, but only if it isn't deafened."
-    electroreception = f"\n- Electroreception: The {race} can detect electric fields within 30 feet, useful for tracking creatures and navigating underwater."
     heat_vision = f"\n- Heat Vision: The {race} can see infrared radiation, allowing it to see heat signatures within 60 feet."
-    magnetoreception = f"\n- Magnetoreception: The {race} can sense magnetic fields, and therefor presence of metals, aiding in navigation."
 
     # Psychic Senses
     aura_sense = f"\n- Aura Sense: The {race} can see the auras of living beings within 30 feet, possibly determining their emotional state or alignment."
@@ -54,7 +51,6 @@ def Senses(npc):
     color_change = f"\n- Color Change: The {race} can change the color of its skin to communicate or as a response to its environment."
 
     # Sensory Deprivation & Resistance
-    sensory_dampening = f"\n- Sensory Dampening: The {race} can voluntarily dampen its own senses to resist sensory overload or certain types of attacks. Until the end of turn, all their Perception (Wisdom) checks are made at disadvantage"
     blind_fighting = f"\n- Blind Fighting: The {race} doesn’t need to see a creature to target it with an attack, provided the creature isn't hidden from the {race}."
 
     # Hide and Mimic
@@ -91,18 +87,14 @@ def Senses(npc):
         if Dice()==1: extras += enhanced_smell
         if Dice()==1: extras += enhanced_hearing
         if Dice()==1: extras += enhanced_taste
-        if Dice()==1: extras += enhanced_touch
         if Dice()==1: extras += echolocation
-        if Dice()==1: extras += electroreception
         if Dice()==1: extras += heat_vision
-        if Dice()==1: extras += magnetoreception
         if Dice()==1: extras += aura_sense
         if Dice()==1: extras += empathy
         if Dice()==1: extras += precognition
         if Dice()==1: extras += psychometry
         if Dice()==1: extras += pheromones
         if Dice()==1: extras += color_change
-        if Dice()==1: extras += sensory_dampening
         if Dice()==1: extras += blind_fighting
         if Dice()==1: extras += keen_smell
         if Dice()==1: extras += water_breathing
@@ -121,9 +113,7 @@ def Senses(npc):
 
         extras += f"\n- Keen Sight: \t Advantage on Wisdom (Perception) checks that rely on sight."
         if Dice()==1: extras += enhanced_hearing
-        if Dice()==1: extras += magnetoreception
         if Dice(12)==1: extras += aura_sense
-        if Dice()==1: extras += sensory_dampening
         if Dice(12)==1: extras += blind_fighting
         if "Kenku" in npc.subrace: extras += mimicry
         if Dice()==1: extras += hold_breath
@@ -141,9 +131,7 @@ def Senses(npc):
         if Dice()==1: extras += enhanced_hearing
         if Dice()==1: extras += enhanced_taste
         if Dice()==1: extras += echolocation
-        if Dice()==1: extras += electroreception
         if Dice()==1: extras += heat_vision
-        if Dice()==1: extras += magnetoreception
         if Dice()==1: extras += empathy
         if Dice()==1: extras += pheromones
         if Dice()==1: extras += color_change
@@ -174,9 +162,7 @@ def Senses(npc):
         if Dice()==1: extras += enhanced_hearing
         if Dice()==1: extras += enhanced_taste
         if Dice()==1: extras += echolocation
-        if Dice()==1: extras += electroreception
         if Dice()==1: extras += heat_vision
-        if Dice()==1: extras += magnetoreception
         if Dice()==1: extras += precognition
         if Dice()==1: extras += pheromones
         if Dice()==1: extras += color_change
@@ -216,14 +202,10 @@ def Senses(npc):
 
         extras += f""
         if Dice()==1: extras += enhanced_hearing
-        if Dice()==1: extras += enhanced_touch
-        if Dice()==1: extras += electroreception
         if Dice()==1: extras += heat_vision
-        if Dice()==1: extras += magnetoreception
         if Dice()==1: extras += precognition
         if Dice(12)==1: extras += psychometry
         if Dice()==1: extras += color_change
-        if Dice()==1: extras += sensory_dampening
         if Dice()==1: extras += blind_fighting
         if Dice()==1: extras += mimicry
         if Dice()==1: extras += illumination
@@ -241,9 +223,7 @@ def Senses(npc):
         if Dice()==1: extras += enhanced_smell
         if Dice()==1: extras += enhanced_hearing
         if Dice()==1: extras += enhanced_taste
-        if Dice()==1: extras += enhanced_touch
         if Dice()==1: extras += heat_vision
-        if Dice(12)==1: extras += magnetoreception
         if Dice(12)==1: extras += aura_sense
         if Dice(12)==1: extras += empathy
         if Dice(12)==1: extras += precognition
@@ -292,9 +272,7 @@ def Senses(npc):
         truesight   += Dice(0) * Dice(2) * 10
 
         extras += f""
-        if Dice()==1: extras += electroreception
         if Dice()==1: extras += heat_vision
-        if Dice()==1: extras += magnetoreception
         if Dice()==1: extras += water_breathing
         if Dice()==1: extras += underwater_camouflage
         if Dice()==1: extras += chameleon_skin
@@ -337,7 +315,6 @@ def Senses(npc):
         if Dice()==1: extras += aura_sense
         if Dice()==1: extras += precognition
         if Dice()==1: extras += psychometry
-        if Dice()==1: extras += sensory_dampening
         if Dice()==1: extras += blind_fighting
         if Dice()==1: extras += keen_smell
         if Dice()==1: extras += mimicry
@@ -399,7 +376,7 @@ def Senses(npc):
         normal      += Dice(0) * Dice(0) * 20
         darkvision  += Dice(2) * Dice(6) * 20
         blindsight  += Dice(0) * Dice(0) * 10
-        tremorsense += Dice(0) * Dice(0) * 5
+        tremorsense += Dice(0) * Dice(0) * Dice(0) * 5
         telepathy   += Dice(0) * Dice(0) * 10
         truesight   += Dice(0) * Dice(0) * 10
 
@@ -422,11 +399,9 @@ def Senses(npc):
         extras += f""
         if Dice(2)==1: extras += enhanced_smell
         if Dice()==1: extras += enhanced_taste
-        if Dice()==1: extras += enhanced_touch
         if Dice()==1: extras += heat_vision
         if Dice()==1: extras += pheromones
         if Dice()==1: extras += color_change
-        if Dice()==1: extras += sensory_dampening
         if Dice()==1: extras += blind_fighting
         if Dice()==1: extras += keen_smell
         if Dice()==1: extras += underwater_camouflage
@@ -446,14 +421,10 @@ def Senses(npc):
         if Dice(12)==1: extras += enhanced_smell 
         if Dice(12)==1: extras += enhanced_hearing
         if Dice(12)==1: extras += enhanced_taste
-        if Dice(12)==1: extras += enhanced_touch
         if Dice(12)==1: extras += echolocation
-        if Dice(12)==1: extras += electroreception
         if Dice(12)==1: extras += heat_vision
-        if Dice(12)==1: extras += magnetoreception
         if Dice(12)==1: extras += pheromones
         if Dice(12)==1: extras += color_change
-        if Dice(12)==1: extras += sensory_dampening
         if Dice(12)==1: extras += blind_fighting
         if Dice(12)==1: extras += keen_smell
         if Dice(12)==1: extras += mimicry
@@ -473,8 +444,6 @@ def Senses(npc):
         truesight   += Dice(-1) * Dice(0) * 10
 
         extras += f""
-        if Dice()==1: extras += electroreception
-        if Dice()==1: extras += magnetoreception
         if Dice()==1: extras += pheromones
         if Dice()==1: extras += color_change
         if Dice(2)==1: extras += blind_fighting
@@ -490,7 +459,6 @@ def Senses(npc):
         truesight   += Dice(0) * Dice(0) * 10
 
         extras += f""
-        if Dice()==1: extras += enhanced_touch
 
     if race == "Plant":
         normal      += Dice(-10) * Dice(10) * 20
@@ -501,7 +469,6 @@ def Senses(npc):
         truesight   += Dice(0) * Dice(3) * 10
 
         extras += f""
-        if Dice()==1: extras += enhanced_touch
         if Dice()==1: extras += aura_sense
         if Dice()==1: extras += empathy
         if Dice()==1: extras += pheromones
@@ -524,10 +491,7 @@ def Senses(npc):
         extras += f""
         if Dice()==1: extras += enhanced_smell
         if Dice()==1: extras += enhanced_taste
-        if Dice()==1: extras += enhanced_touch
-        if Dice()==1: extras += electroreception
         if Dice()==1: extras += heat_vision
-        if Dice()==1: extras += magnetoreception
         if Dice()==1: extras += pheromones
         if Dice()==1: extras += color_change
         if Dice()==1: extras += blind_fighting
@@ -549,7 +513,6 @@ def Senses(npc):
         if Dice()==1: extras += enhanced_taste
         if Dice()==1: extras += aura_sense
         if Dice()==1: extras += precognition
-        if Dice()==1: extras += sensory_dampening
         if Dice()==1: extras += blind_fighting
         if Dice()==1: extras += sunlight_sensitivity
         if Dice(100)==1: extras += illumination
