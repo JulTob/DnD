@@ -22,8 +22,11 @@ def PB(lvl):
 def Dice(D=6,N=1):
     return dnd.Dice(D,N)
 
-
-    
+def safe_sample(source_list, sample_size):
+    """Safely sample from a list, ensuring we don't exceed its length."""
+    if not source_list or sample_size <= 0:
+        return []  # Return an empty list if the source list is empty or sample size is invalid
+    return random.sample(source_list, min(len(source_list), sample_size))    
 
 def get_max_spell_level(character_level, difficulty = 1):
     if difficulty < 1: difficulty = 1
@@ -48,7 +51,9 @@ class Spellbook:
         self.character_level = npc.level
         self.cantrip = ""
         self.spells = {level: "" for level in range(1, 10)}
-        
+
+        self.cantrip_set = set()
+                
         self.difficulty = 10
         
         self.slots = {level: 0 for level in range(1, 10)}
@@ -69,36 +74,86 @@ class Spellbook:
         
         self.accessible = {level: [] for level in range(1, 10)}
         self.selected = {level: [] for level in range(1, 10)}
-        
-    def slots_at(self,spell_level):
-        difficulty = self.difficulty
-        character_level = self.character_level
-        n = (character_level-difficulty)//(difficulty*spell_level)
-        if n<1: n=0
-        if n>PB(character_level): n=PB(character_level)
-        return n
-        
-    def select_spells(self):
-        for level in range(1, 10):
-            num_spells = self.number_spell(level)
-            accessible_spells = list(set(self.accessible[level]))
-            if accessible_spells:
-                selected_spells = random.sample(accessible_spells, min(num_spells, len(accessible_spells)))
-                self.selected[level] = selected_spells
-            self.slots[level] = self.UpdateSlots()  
 
-        # Updating one/two/three day each lists
-        self.num1d = min(self.num1d, len(self.one_day_each_list))
-        self.num2d = min(self.num2d, len(self.two_day_each_list))
-        self.num3d = min(self.num3d, len(self.three_day_each_list))
-        self.one_day_each_list = random.sample(self.one_day_each_list, self.num1d)
-        self.two_day_each_list = random.sample(self.two_day_each_list, self.num2d)
-        self.three_day_each_list = random.sample(self.three_day_each_list, self.num3d)
+    def slots_at(self, spell_level):
+        character_level = self.character_level
+        difficulty = self.difficulty
+        pb = PB(character_level)
+
+        # Calculate the maximum spell level
+        max_level = get_max_spell_level(character_level, difficulty)
+
+        # If max_level is 0, then no slots should be available
+        if max_level == 0:
+            return None
+
+        # For levels beyond the maximum level, there should be no slots
+        if spell_level > max_level:
+            return None
+        
+        # For the maximum level, there should be exactly 1 slot
+        if spell_level == max_level:
+            return 1
+
+        # Calculate slots for levels below the maximum
+        # The function should start at pb / difficulty at level 0 and approach 1 at max_level
+        max_slots_at_zero = 5
+        slope = (1-max_slots_at_zero) / (max_level-0.5)  # Calculate the slope of the line
+        slots = max_slots_at_zero + slope * spell_level
+
+        # Round and adjust the number of slots
+        slots = max(1, round(slots+0.5))  # Ensure at least 1 slot and round to nearest whole number
+
+        return slots if slots >= 1 else None  # Return None if slots fall below 1
+    
+
+    def select_spells(self,spellcaster = False):
+        selected_spells_set = set()  # Keep track of all selected spells
+        self.UpdateSlots()
+        power_level = self.max_spell_level
+        
+        if spellcaster:
+            for level in range(1, 10):
+
+                num_slots = self.slots[level] if self.slots[level] is not None else 0
+                num_spells =  min( num_slots, max(self.number_spell(level), 0) ) # Ensure non-negative
+
+                # Update accessible spells for each level
+                accessible_spells = set(self.accessible[level]) - selected_spells_set  # Remove already selected spells
+                accessible_spells = list(accessible_spells)
+
+                if accessible_spells and num_spells > 0:  # Check for non-empty list and positive num_spells
+                    num_to_select = min(num_spells, len(accessible_spells))
+                    selected_spells = random.sample(accessible_spells, num_to_select)
+                    self.selected[level] = selected_spells
+                    selected_spells_set.update(selected_spells)  # Add new selections to the set of selected spells
+                else:
+                    self.selected[level] = []  # Handle empty or non-applicable cases
+
+        else:
+
+            # Update for one, two, three times per day lists            
+            for spell_list, num in [(self.one_day_each_list, self.num1d), 
+                                    (self.two_day_each_list, self.num2d), 
+                                    (self.three_day_each_list, self.num3d)]:
+                available_spells = list(set(spell_list) - selected_spells_set)
+                # Remove already selected spells
+                num = min(num, len(available_spells))
+                # Ensure we don't exceed the number of available spells
+                if num > 0:
+                    selected_spells = random.sample(available_spells, num)
+                    spell_list[:] = selected_spells
+                    # Update the list in place
+                    selected_spells_set.update(selected_spells)
+                    # Add to the set of selected spells
+                else:
+                    spell_list[:] = []  # Clear the list if no spells are to be selected
+
 
     def number_spell(self,spell_level):
         if spell_level == 0:
             return min(5, max(0, self.max_spell_level))
-        self.difficulty = d
+        d = self.difficulty
         l = spell_level
         pb = PB(self.character_level)
         num = (2*pb-d-l)//d
@@ -162,8 +217,9 @@ class Spellbook:
         level = (character_level - difficulty) // (2 * difficulty)
         if level < 0: return 0
         if level > 9: return 9
-        return level    
-    
+        return level
+
+
     def UpdateDifficulty(self,D):
         if D < 1: D = 1
         if D > 10: D = 10
@@ -187,17 +243,22 @@ class Spellbook:
 
 
     def add_spell(self, spell_level, spell_name, spell_definition=""):
+        # Using a set to track added spells
         if spell_level == 0:
-            self.cantrip += f"\n\t- {spell_name}"
-            if spell_definition:
-                self.cantrip += f": {spell_definition}"
-        elif spell_level>0 and spell_level<10:
+            if spell_name not in self.cantrip_set:
+                self.cantrip += f"\n\t- {spell_name}"
+                if spell_definition:
+                    self.cantrip += f": {spell_definition}"
+                self.cantrip_set.add(spell_name)
+        elif 1 <= spell_level <= 9:
             spell_list = self.spells.get(spell_level, "")
-            spell_list += f"\n\t- {spell_name}"
-            if spell_definition:
-                spell_list += f": {spell_definition}"
-            self.spells[spell_level] = spell_list
-            
+            if spell_name not in spell_list:
+                spell_list += f"\n\t- {spell_name}"
+                if spell_definition:
+                    spell_list += f": {spell_definition}"
+                self.spells[spell_level] = spell_list
+
+                
     def add_natural(self, spell, definition="", times_day = 1):
         result = f"\n\t{spell}: {times_day} per day. {definition}"
         if times_day == 1:
@@ -208,35 +269,42 @@ class Spellbook:
             self.three += result
 
 
-    def add_rechargeable(self, spell, definition="", recharge_at = 6):
-        roll = "6"
-        if recharge_at < 6: roll = f"6-{recharge_at}"
-        self.recharge += [f"\n\t{spell}: Recharges at {roll} in a d6. {definition}"]
-        
+    def add_rechargeable(self, spell, definition="", recharge_at=6):
+        if spell:  # Ensure the spell name is not empty
+            #roll = f"{recharge_at}-6" if recharge_at < 6 else "6"
+            recharge_entry = f"\n\t{spell}\n" # + \t- Recharges at {roll} in a d6. {definition}"
+            self.recharge.append(recharge_entry)        
 
     def SpellbookString(self,npc):
         result = "\n"
         if is_ritual(npc):
             result += f"{npc.title} is a ritual spellcaster. \n"
-        result += "Cantrips (at will): " + self.cantrip + "\n"
-        for level in range(1, 10):
-            # Check if there are spells in the current level
-            if self.spells[level].strip():
-                ordinal = "th" if 4 <= level <= 20 else {1: "st", 2: "nd", 3: "rd"}.get(level % 10, "th")
-                result += f"\n[{self.slots[level]}]{level}{ordinal} Level Spells:\n" + self.spells[level] + ""
-        # Include natural spells
-        if self.one.strip():
-            result += "\nNatural Spells (1/day): " + self.one + "\n"
-        if self.two.strip():
-            result += "\nNatural Spells (2/day): " + self.two + "\n"
-        if self.three.strip():
-            result += "\nNatural Spells (3/day): " + self.three + "\n"
+        if self.cantrip:
+            result += "Cantrips (at will): " + self.cantrip + "\n"
+        if is_spellcaster(npc):    
+            for level in range(1, 10):
+                slots = self.slots[level]
+                if slots is not None:  # Check if slots is not None
+                    if self.spells[level]:
+                        ordinal = "th" if 4 <= level <= 20 else {1: "st", 2: "nd", 3: "rd"}.get(level % 10, "th")
+                        result += f"\n[{slots}]{level}{ordinal} Level Spells:" + self.spells[level]
+                        result += "\n"
+        else:
+            # Include natural spells
+            
+            if self.one.strip():
+                result += "\nNatural Spells (1/day): " + self.one + "\n"
+            if self.two.strip():
+                result += "\nNatural Spells (2/day): " + self.two + "\n"
+            if self.three.strip():
+                result += "\nNatural Spells (3/day): " + self.three + "\n"
 
-        # Include rechargeable spells
-        result += "\nRechargeable Spells: " 
-        if self.recharge:
-            recharge_spells = "\n".join(self.recharge)
-            result += "\n\t" + recharge_spells + "\n"
+            # Include rechargeable spells
+            if self.recharge:
+                result += "\nRechargeable Spells:"
+                for spell_entry in self.recharge:
+                    if spell_entry.strip():  # Ensure the entry is not empty
+                        result += spell_entry
 
         return result.strip()
 
@@ -251,6 +319,16 @@ def is_ritual(npc):
     if npc.background == "Witch": return True
     return False
 
+def is_spellcaster(npc):
+    if npc.background == "Priest": return True
+    if npc.background == "Cleric": return True
+    if npc.background == "Cultist": return True
+    if npc.background == "Druid": return True
+    if npc.background == "Mage": return True
+    if npc.background == "Shaman": return True
+    if npc.background == "Warlock": return True
+    if npc.background == "Witch": return True
+    return False
 
 def Magic(npc):
 
@@ -274,7 +352,7 @@ def Magic(npc):
     seventh_list = []
     eighth_list = []
     ninth_list = []
-    recharge =""
+    recharge = []
 
     difficulty = 2
 # BACKGROUNDS:
@@ -724,10 +802,21 @@ def Magic(npc):
         two_day_each_list += ["Lesser Restoration", "Pass Without Trace"]
         three_day_each_list += ["Dispel Magic", "Speak with Dead"]
         first_list += ["Cure Wounds", "Detect Poison and Disease",                      "Entangle", "Create or Destroy Water", "Fog Cloud",                      "Bane", "Shield Of Faith"]
-        second_list += [            "Lesser Restoration", "Pass Without Trace", "Flame Blade",                       "Animal Messenger", "Heat Metal", "Spike Growth"]
+        second_list += [
+            "Lesser Restoration",
+            "Pass Without Trace",
+            "Flame Blade",
+            "Animal Messenger",
+            "Heat Metal",
+            "Spike Growth",
+            ]
         third_list += ["Dispel Magic", "Speak with Dead",                      "Call Lightning", "Water Walk", "Meld into Stone",                      "Conjure Animals", "Plant Growth"]
         fourth_list += ["Divination", "Freedom of Movement", "Stone Shape", "Locate Creature", "Control Water"]
-        fifth_list += ["Commune",                      "Greater Restoration",                      "Awaken",                      "Mass Cure Wounds",                      "Reincarnate"]
+        fifth_list += ["Commune",
+                       "Greater Restoration",
+                       "Awaken",
+                       "Mass Cure Wounds",
+                       "Reincarnate"]
         sixth_list += ["Heal", "Find the Path", "Heroes' Feast", "Move Earth", "Create Undead"]
         seventh_list += ["Regenerate", "Etherealness", "Fire Storm", "Resurrection", "Symbol"]
         eighth_list += ["Earthquake", "Control Weather", "Sunburst", "Antipathy/Sympathy", "Animal Shapes"]
@@ -877,18 +966,68 @@ def Magic(npc):
 
 
         # Cantrips
-        cantrips_list += ["Eldritch Blast",                         "Mage Hand",                         "Minor Illusion","Thaumaturgy",                         "Message"]        
-        one_day_each_list += ["Detect Thoughts",                             "Dissonant Whispers"]        
-        two_day_each_list += ["Hold Person",                             "Levitate",                   "Crown of Madness",
-                             "Hold Person"]
-        three_day_each_list += [ "Telekinesis",                                "Mind Spike",                                "Fear",                                "Hypnotic Pattern"]
-        first_list += ["Detect Magic",                      "Dissonant Whispers",
-                      "Mage Armor",                      "Shield",                      "Tasha's Hideous Laughter",
-                      "Charm Person",                      "Illusory Script"]
-        second_list += ["Hold Person",                       "Mirror Image",                       "Misty Step",                       "Detect Thoughts",                       "Blur",                       "Crown of Madness",                       "Phantasmal Force"]
-        third_list += [            "Counterspell",            "Dispel Magic",            "Hypnotic Pattern",            "Telekinesis",            "Tongues",            "Fear",            "Major Image",            "Sending",            "Clairvoyance"]
-        fourth_list += [            "Banishment",           "Dimension Door",            "Arcane Eye",            "Confusion",            "Greater Invisibility",            "Phantasmal Killer"]
-        fifth_list += [            "Contact Other Plane",            "Scrying",            "Teleportation Circle",          "Dream",            "Modify Memory",             "Dominate Person",            "Telekinesis",            "Mislead" ]
+        cantrips_list += ["Eldritch Blast",
+                          "Mage Hand",
+                          "Minor Illusion",
+                          "Thaumaturgy",
+                          "Message",
+                          ]        
+        one_day_each_list += ["Detect Thoughts",
+                              "Dissonant Whispers",]        
+        two_day_each_list += ["Hold Person",
+                              "Levitate",
+                              "Crown of Madness",
+                             ]
+        three_day_each_list += [ "Telekinesis",
+                                 "Mind Spike",
+                                 "Fear",
+                                 "Hypnotic Pattern",
+                                 ]
+        first_list += ["Detect Magic",
+                       "Dissonant Whispers",
+                       "Mage Armor",
+                       "Shield",
+                       "Tasha's Hideous Laughter",
+                       "Charm Person",
+                       "Illusory Script",
+                       ]
+        second_list += ["Hold Person",
+                        "Mirror Image",
+                        "Misty Step",
+                        "Detect Thoughts",
+                        "Blur",
+                        "Crown of Madness",
+                        "Phantasmal Force",
+                        ]
+        third_list += [
+            "Counterspell",
+            "Dispel Magic",
+            "Hypnotic Pattern",
+            "Telekinesis",
+            "Tongues",
+            "Fear",
+            "Major Image",
+            "Sending",
+            "Clairvoyance",
+            ]
+        fourth_list += [
+            "Banishment",
+            "Dimension Door",
+            "Arcane Eye",
+            "Confusion",
+            "Greater Invisibility",
+            "Phantasmal Killer",
+            ]
+        fifth_list += [
+            "Contact Other Plane",
+            "Scrying",
+            "Teleportation Circle",
+            "Dream",
+            "Modify Memory",
+            "Dominate Person",
+            "Telekinesis",
+            "Mislead",
+            ]
         sixth_list += [            "True Seeing",            "Arcane Gate",            "Mass Suggestion",   "Plane Shift",
             "Disintegrate",            "Mental Prison",            "Eyebite",            "Programmed Illusion"              ]
         seventh_list += ["Teleport",                        "Etherealness",                        "Project Image",                        "Symbol",                       "Forcecage",
@@ -1015,23 +1154,24 @@ def Magic(npc):
     if race == "Dragon" and Dice(3) == 1:
         d = 20
         if Dice(d) == 1 and not ("Fire Breath" in recharge):
-            recharge += f"\n  - Fire Breath \n\t(Recharge 5-6) The dragon exhales fire in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC {10+PB(Lvl)} Dexterity saving throw, taking 14 (4d6) fire damage on a failed save, or half as much damage on a successful one."
-        elif Dice(d) == 1 and not ("Fire Breath" in recharge):       recharge += f"\n  - Fire Breath \n\t(Recharge 5-6) The dragon exhales fire in a 15-foot cone. Each creature in that area must make a DC {10+PB(Lvl)} Dexterity saving throw, taking 22 (4d10) fire damage on a failed save, or half as much damage on a successful one."
-        elif Dice(d) == 1 and not ("Fire Breath" in recharge):       recharge += f"\n  - Fire Breath \n\t(Recharge 5-6) The dragon exhales fire in a 15-foot cone. Each creature in that area must make a DC {10+PB(Lvl)} Dexterity saving throw, taking 24 (7d6) fire damage on a failed save, or half as much damage on a successful one."
-        if Dice(d) == 2 and not ("Sleep Breath" in recharge):        recharge += f"\n  - Sleep Breath \n\t(Recharge 5-6) The dragon exhales sleep gas in a 15-foot cone. Each creature in that area must succeed on a DC {10+PB(Lvl)} Constitution saving throw or fall unconscious for 1 minute. This effect ends for a creature if the creature takes damage or someone uses an action to wake it."
-        if Dice(d) == 3 and not ("Acid Breath" in recharge):         recharge += f"\n  - Acid Breath \n\t(Recharge 5-6) The dragon exhales acid in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC {10+PB(Lvl)} Dexterity saving throw, taking 18 (4d8) acid damage on a failed save, or half as much damage on a successful one"
-        if Dice(d) == 4 and not ("Slowing Breath" in recharge):      recharge += f"\n  - Slowing Breath \n\t(Recharge 5-6) The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a DC {10+PB(Lvl)} Constitution saving throw. On a failed save, the creature can't use reactions, its speed is halved, and it can't make more than one attack on its turn. In addition, the creature can use either an action or a bonus action on its turn, but not both. These effects last for 1 minute. The creature can repeat the saving throw at the start of each of its turns, ending the effect on itself with a successful save."
-        if Dice(d) == 5 and not ("Euphoria Breath" in recharge):     recharge += f"\n  - Euphoria Breath \n\t(Recharge 5-6) The dragon exhales a puff of euphoria gas at one creature within 5 feet of it. The target must succeed on a DC {10+PB(Lvl)} Wisdom saving throw, or for 1 minute, the target can't take reactions and must roll a d6 at the start of each of its turns to determine its behavior during the turn: \n\t\t 1–4. The target takes no action or bonus action and uses all of its movement to move in a random direction. \n\t\t 5–6. The target doesn't move, and the only thing it can do on its turn is make a DC {10+PB(Lvl)} Wisdom saving throw, ending the effect on itself on a success."
-        if Dice(d) == 6 and not ("Repulsion Breath" in recharge):    recharge += f"\n  - Repulsion Breath \n\t(Recharge 5-6) The dragon exhales repulsion energy in a 30-foot cone. Each creature in that area must succeed on a DC {10+PB(Lvl)} Strength saving throw. On a failed save, the creature is pushed 30 feet away from the dragon."
-        if Dice(d) == 7 and not ("Poison Breath" in recharge):       recharge += f"\n  - Poison Breath \n\t(Recharge 5-6) The dragon exhales poisonous gas in a 15-foot cone. Each creature in that area must make a DC {10+PB(Lvl)} Constitution saving throw, taking 21 (6d6) poison damage on a failed save, or half as much damage on a successful one."
-        if Dice(d) == 8 and not ("Lightning Breath" in recharge):    recharge += f"\n  - Lightning Breath \n\t(Recharge 5-6) The dragon exhales lightning in a 40-foot line that is 5 feet wide. Each creature in that line must make a DC {10+PB(Lvl)} Dexterity saving throw, taking 16 (3d10) lightning damage on a failed save, or half as much damage on a successful one."
-        elif Dice(d) == 8 and not ("Lightning Breath" in recharge):  recharge += f"\n  - Lightning Breath \n\t(Recharge 5-6) The dragon exhales lightning in a 30-foot line that is 5 feet wide. Each creature in that line must make a DC {10+PB(Lvl)} Dexterity saving throw, taking 22 (4d10) lightning damage on a failed save, or half as much damage on a successful one."
-        if Dice(d) == 9 and not ("Cold Breath" in recharge):         recharge += f"\n  - Cold Breath \n\t(Recharge 5-6) The dragon exhales an icy blast in a 15-foot cone. Each creature in that area must make a DC {10+PB(Lvl)} Constitution saving throw, taking 18 (4d8) cold damage on a failed save, or half as much damage on a successful one."
-        elif Dice(d) == 10 and not ("Cold Breath" in recharge):      recharge += f"\n  - Cold Breath \n\t(Recharge 5-6) The dragon exhales an icy blast in a 15-foot cone. Each creature in that area must make a DC {10+PB(Lvl)} Constitution saving throw, taking 22 (5d8) cold damage on a failed save, or half as much damage on a successful one."
-        if Dice(d) == 11 and not ("Paralyzing Breath" in recharge):  recharge += f"\n  - Paralyzing Breath \n\t(Recharge 5-6) The dragon exhales paralyzing gas in a 15-foot cone. Each creature in that area must succeed on a {10+PB(Lvl)} Constitution saving throw or be paralyzed for 1 minute. A creature can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
-        if Dice(d) == 12 and not ("WeakeningBreath" in recharge):    recharge += f"\n  - Weakening Breath \n\t(Recharge 5-6) The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a DC {10+PB(Lvl)} Strength saving throw or have disadvantage on Strength-based attack rolls, Strength checks, and Strength saving throws for 1 minute. A creature can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."
+            recharge += [f"\n  - Fire Breath \n\t(Recharge 5-6) The dragon exhales fire in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC {10+PB(Lvl)} Dexterity saving throw, taking 14 (4d6) fire damage on a failed save, or half as much damage on a successful one."]
+        elif Dice(d) == 1 and not ("Fire Breath" in recharge):
+            recharge += [f"\n  - Fire Breath \n\t(Recharge 5-6) The dragon exhales fire in a 15-foot cone. Each creature in that area must make a DC {10+PB(Lvl)} Dexterity saving throw, taking 22 (4d10) fire damage on a failed save, or half as much damage on a successful one."]
+        elif Dice(d) == 1 and not ("Fire Breath" in recharge):       recharge += [f"\n  - Fire Breath \n\t(Recharge 5-6) The dragon exhales fire in a 15-foot cone. Each creature in that area must make a DC {10+PB(Lvl)} Dexterity saving throw, taking 24 (7d6) fire damage on a failed save, or half as much damage on a successful one."]
+        if Dice(d) == 2 and not ("Sleep Breath" in recharge):        recharge += [f"\n  - Sleep Breath \n\t(Recharge 5-6) The dragon exhales sleep gas in a 15-foot cone. Each creature in that area must succeed on a DC {10+PB(Lvl)} Constitution saving throw or fall unconscious for 1 minute. This effect ends for a creature if the creature takes damage or someone uses an action to wake it."]
+        if Dice(d) == 3 and not ("Acid Breath" in recharge):         recharge += [f"\n  - Acid Breath \n\t(Recharge 5-6) The dragon exhales acid in a 20-foot line that is 5 feet wide. Each creature in that line must make a DC {10+PB(Lvl)} Dexterity saving throw, taking 18 (4d8) acid damage on a failed save, or half as much damage on a successful one"]
+        if Dice(d) == 4 and not ("Slowing Breath" in recharge):      recharge += [f"\n  - Slowing Breath \n\t(Recharge 5-6) The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a DC {10+PB(Lvl)} Constitution saving throw. On a failed save, the creature can't use reactions, its speed is halved, and it can't make more than one attack on its turn. In addition, the creature can use either an action or a bonus action on its turn, but not both. These effects last for 1 minute. The creature can repeat the saving throw at the start of each of its turns, ending the effect on itself with a successful save."]
+        if Dice(d) == 5 and not ("Euphoria Breath" in recharge):     recharge += [f"\n  - Euphoria Breath \n\t(Recharge 5-6) The dragon exhales a puff of euphoria gas at one creature within 5 feet of it. The target must succeed on a DC {10+PB(Lvl)} Wisdom saving throw, or for 1 minute, the target can't take reactions and must roll a d6 at the start of each of its turns to determine its behavior during the turn: \n\t\t 1–4. The target takes no action or bonus action and uses all of its movement to move in a random direction. \n\t\t 5–6. The target doesn't move, and the only thing it can do on its turn is make a DC {10+PB(Lvl)} Wisdom saving throw, ending the effect on itself on a success."]
+        if Dice(d) == 6 and not ("Repulsion Breath" in recharge):    recharge += [f"\n  - Repulsion Breath \n\t(Recharge 5-6) The dragon exhales repulsion energy in a 30-foot cone. Each creature in that area must succeed on a DC {10+PB(Lvl)} Strength saving throw. On a failed save, the creature is pushed 30 feet away from the dragon."]
+        if Dice(d) == 7 and not ("Poison Breath" in recharge):       recharge += [f"\n  - Poison Breath \n\t(Recharge 5-6) The dragon exhales poisonous gas in a 15-foot cone. Each creature in that area must make a DC {10+PB(Lvl)} Constitution saving throw, taking 21 (6d6) poison damage on a failed save, or half as much damage on a successful one."]
+        if Dice(d) == 8 and not ("Lightning Breath" in recharge):    recharge += [f"\n  - Lightning Breath \n\t(Recharge 5-6) The dragon exhales lightning in a 40-foot line that is 5 feet wide. Each creature in that line must make a DC {10+PB(Lvl)} Dexterity saving throw, taking 16 (3d10) lightning damage on a failed save, or half as much damage on a successful one."]
+        elif Dice(d) == 8 and not ("Lightning Breath" in recharge):  recharge += [f"\n  - Lightning Breath \n\t(Recharge 5-6) The dragon exhales lightning in a 30-foot line that is 5 feet wide. Each creature in that line must make a DC {10+PB(Lvl)} Dexterity saving throw, taking 22 (4d10) lightning damage on a failed save, or half as much damage on a successful one."]
+        if Dice(d) == 9 and not ("Cold Breath" in recharge):         recharge += [f"\n  - Cold Breath \n\t(Recharge 5-6) The dragon exhales an icy blast in a 15-foot cone. Each creature in that area must make a DC {10+PB(Lvl)} Constitution saving throw, taking 18 (4d8) cold damage on a failed save, or half as much damage on a successful one."]
+        elif Dice(d) == 10 and not ("Cold Breath" in recharge):      recharge += [f"\n  - Cold Breath \n\t(Recharge 5-6) The dragon exhales an icy blast in a 15-foot cone. Each creature in that area must make a DC {10+PB(Lvl)} Constitution saving throw, taking 22 (5d8) cold damage on a failed save, or half as much damage on a successful one."]
+        if Dice(d) == 11 and not ("Paralyzing Breath" in recharge):  recharge += [f"\n  - Paralyzing Breath \n\t(Recharge 5-6) The dragon exhales paralyzing gas in a 15-foot cone. Each creature in that area must succeed on a {10+PB(Lvl)} Constitution saving throw or be paralyzed for 1 minute. A creature can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."]
+        if Dice(d) == 12 and not ("WeakeningBreath" in recharge):    recharge += [f"\n  - Weakening Breath \n\t(Recharge 5-6) The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a DC {10+PB(Lvl)} Strength saving throw or have disadvantage on Strength-based attack rolls, Strength checks, and Strength saving throws for 1 minute. A creature can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success."]
 
-    if race == "Dragon" and Dice(12) == 1 and not ("Change Shape" in recharge):  recharge += "\n- Change Shape \n\t The dragon magically polymorphs into a humanoid or beast that has a challenge rating no higher than its own, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form (the dragon's choice).In a new form, the dragon retains its alignment, hit points, Hit Dice, ability to speak, proficiencies, Legendary Resistance, lair actions, and Intelligence, Wisdom, and Charisma scores, as well as this action. Its statistics and capabilities are otherwise replaced by those of the new form, except any class features or legendary actions of that form."
+    if race == "Dragon" and Dice(12) == 1 and not ("Change Shape" in recharge):  recharge += ["\n- Change Shape \n\t The dragon magically polymorphs into a humanoid or beast that has a challenge rating no higher than its own, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form (the dragon's choice).In a new form, the dragon retains its alignment, hit points, Hit Dice, ability to speak, proficiencies, Legendary Resistance, lair actions, and Intelligence, Wisdom, and Charisma scores, as well as this action. Its statistics and capabilities are otherwise replaced by those of the new form, except any class features or legendary actions of that form."]
 
     if race == "Dragon":
         cantrips_list += ["Control Flames", "Gust", "Mage Hand", "Minor Illusion", "Dancing Lights", "Color Spray" ]
@@ -1164,12 +1304,18 @@ def Magic(npc):
 
     # FAE.
     
-    if race == "Fey" and Dice(8) == 1 and not ("Ethereal Jaunt" in recharge):    recharge += "\n- Ethereal Jaunt (Recharge 6):\n\t As a bonus action, the fey can magically shift from the Material Plane to the Ethereal Plane, or vice versa."
-    if race == "Fey" and Dice(10) == 1 and not ("Teleport" in recharge):         recharge += "\n- Teleport (Recharge 4–6). \n\t The Fey magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the Fey can make one bite attack."
-    if race == "Fey" and Dice(10) == 1 and not ("Heart Sight" in recharge):      recharge += "\n- Heart Sight. (Recharge 6)\n\t The Fey touches a creature and magically knows the creature's current emotional state. If the target fails a DC [10+%Cha] Charisma saving throw, the Fey also knows the creature's alignment. Celestials, fiends, and undead automatically fail the saving throw."
-    if race == "Fey" and Dice(10) == 1 and not ("Invisibility" in recharge):     recharge += "\n- Invisibility. (Recharge 6)\n\t The Fey  magically turns invisible until it attacks or casts a spell, or until its concentration ends (as if concentrating on a spell). Any equipment the Fey wears or carries is invisible with it."
-    if race == "Fey" and Dice(8) == 1 and not ("Change Shape" in recharge):      recharge += "\n- Change Shape. (Recharge 6)\n\t The fey magically polymorphs into a Small or Medium humanoid, or back into their true form. Their statistics are the same in each form. Any equipment they are wearing or carrying isn't transformed. They reverts to their true form if they dies."
-    if race == "Fey" and Dice() == 1 and not ("Etherealness" in recharge):       recharge += "\n- Etherealness. (Recharge 6)\n\t The fey magically enters the Ethereal Plane from the Material Plane, or vice versa. To do so, the fey must have a heartstone in her possession."
+    if race == "Fey" and Dice(8) == 1 and not ("Ethereal Jaunt" in recharge):
+        recharge += ["\n- Ethereal Jaunt (Recharge 6):\n\t As a bonus action, the fey can magically shift from the Material Plane to the Ethereal Plane, or vice versa."]
+    if race == "Fey" and Dice(10) == 1 and not ("Teleport" in recharge):
+        recharge += ["\n- Teleport (Recharge 4–6). \n\t The Fey magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the Fey can make one bite attack."]
+    if race == "Fey" and Dice(10) == 1 and not ("Heart Sight" in recharge):
+        recharge += ["\n- Heart Sight. (Recharge 6)\n\t The Fey touches a creature and magically knows the creature's current emotional state. If the target fails a DC [10+%Cha] Charisma saving throw, the Fey also knows the creature's alignment. Celestials, fiends, and undead automatically fail the saving throw."]
+    if race == "Fey" and Dice(10) == 1 and not ("Invisibility" in recharge):
+        recharge += ["\n- Invisibility. (Recharge 6)\n\t The Fey  magically turns invisible until it attacks or casts a spell, or until its concentration ends (as if concentrating on a spell). Any equipment the Fey wears or carries is invisible with it."]
+    if race == "Fey" and Dice(8) == 1 and not ("Change Shape" in recharge):
+        recharge += ["\n- Change Shape. (Recharge 6)\n\t The fey magically polymorphs into a Small or Medium humanoid, or back into their true form. Their statistics are the same in each form. Any equipment they are wearing or carrying isn't transformed. They reverts to their true form if they dies."]
+    if race == "Fey" and Dice() == 1 and not ("Etherealness" in recharge):
+        recharge += ["\n- Etherealness. (Recharge 6)\n\t The fey magically enters the Ethereal Plane from the Material Plane, or vice versa. To do so, the fey must have a heartstone in her possession."]
 
 
 
@@ -1221,7 +1367,7 @@ def Magic(npc):
 
     # FIENDS.
     # Cantrips and at-will magic
-
+    '''
     if race == "Fiend":
         if Dice()==1 and not ("Charm" in cantrip):
             if Dice(2)==1:  cantrip += "\n- Charm \n\t One humanoid the fiend can see within 30 feet of it must succeed on a DC [10+%CHA] Wisdom saving throw or be magically charmed for 1 day. The charmed target obeys the fiend's verbal or telepathic commands. If the target suffers any harm or receives a suicidal command, it can repeat the saving throw, ending the effect on a success. If the target successfully saves against the effect, or if the effect on it ends, the target is immune to this fiend's Charm for the next 24 hours. \n\t The fiend can have only one target charmed at a time. If it charms another, the effect on the previous target ends. "
@@ -1232,7 +1378,7 @@ def Magic(npc):
         if Dice() == 1 and not ("Etherealness" in cantrip):         cantrip += "\n- Etherealness.\t The fiend magically enters the Ethereal Plane from the Material Plane, or vice versa."
         if Dice() == 1 and not ("Fire Breath" in cantrip):          cantrip += "\n- Fire Breath (Recharge 5-6).\t The fiend exhales fire in a 15-foot cone. Each creature in that area must make a DC [10+%CON] Dexterity saving throw, taking 21 (6d6) fire damage on a failed save, or half as much damage on a successful one."
         if Dice() == 1 and not ("Fire Ray" in cantrip):             cantrip += "\n- Fire Ray \t Ranged Spell Attack. Range 120ft. One target. Hit: 10(3d6) fire damage."
-
+    '''
     # Once a day
     '''
     if race == "Fiend":
@@ -1335,7 +1481,7 @@ def Magic(npc):
         ninth_list += ["Power Word Kill", "Weird", "Time Stop", "Foresight", "Meteor Swarm"]
 
         if Dice() == 1 and not ("Leadership" in recharge):
-            recharge += " \n- Leadership (Recharges after a Short or Long Rest). \n\t For 1 minute, the goblin can utter a special command or warning whenever a nonhostile creature that it can see within 30 feet of it makes an attack roll or a saving throw. The creature can add a d4 to its roll provided it can hear and understand the goblin. A creature can benefit from only one Leadership die at a time. This effect ends if the goblin is incapacitated."
+            recharge += [" \n- Leadership (Recharges after a Short or Long Rest). \n\t For 1 minute, the goblin can utter a special command or warning whenever a nonhostile creature that it can see within 30 feet of it makes an attack roll or a saving throw. The creature can add a d4 to its roll provided it can hear and understand the goblin. A creature can benefit from only one Leadership die at a time. This effect ends if the goblin is incapacitated."]
 
     # HALFLING. 
     if "Halfling" in race:
@@ -1407,31 +1553,34 @@ def Magic(npc):
     #MONSTROSITIES.
     if race == "Monstrosity":
         if Dice(8) == 1 and not ("Acid Spray" in recharge):
-            recharge += f"\n- Acid Spray (Recharge 6): \n\t The {race} spits acid in a line that is 30 feet long and 5 feet wide, provided that it has no creature grappled." +\
-                        f"Each creature in that line must make a Dexterity saving throw, "+\
-                        "taking {3*npc.proficiency_bonus} ({npc.proficiency_bonus}d6) acid damage on a failed save, or half as much damage on a successful one."
+            recharge += [f"\n- Acid Spray (Recharge 6): \n\t The {race} spits acid in a line that is 30 feet long and 5 feet wide, provided that it has no creature grappled."] +\
+                        [f"Each creature in that line must make a Dexterity saving throw, "+\
+                        "taking {3*npc.proficiency_bonus} ({npc.proficiency_bonus}d6) acid damage on a failed save, or half as much damage on a successful one."]
         if Dice(10) == 1 and not ("Confusing Gaze" in recharge):
-            recharge += f"\n- Confusing Gaze (Recharge 6): \n\t When a creature starts its turn within 30 feet of the monstrosity and is able to see the {race}'s eyes, "+\
+            recharge += [f"\n- Confusing Gaze (Recharge 6): \n\t When a creature starts its turn within 30 feet of the monstrosity and is able to see the {race}'s eyes, "+\
                         f"the {race} can magically force it to make a Charisma saving throw, unless the {race} is incapacitated. "+ \
                         f"\n\t On a failed saving throw, the creature can't take reactions until the start of its next turn and rolls a d8 to determine what it does during"+\
                         f"that turn. On a 1 to 4, the creature does nothing. On a 5 or 6, the creature takes no action but uses all its movement to move in a random direction."+\
                         f"On a 7 or 8, the creature makes one melee attack against a random creature, or it does nothing if no creature is within reach. "+\
                         "\n\t Unless surprised, a creature can avert its eyes to avoid the saving throw at the start of its turn. If the creature does so, "+\
                         f"it can't see the {race} until the start of its next turn, when it can avert its eyes again. If the creature looks at the {race} in the meantime, "+\
-                        "it must immediately make the save." 
+                        "it must immediately make the save." ]
         if Dice() == 1 and not ("Chilling Gaze" in recharge):
-            recharge += f"\n - Chilling Gaze (Recharge 6): \n\t The monstrosity targets one creature it can see within 30 feet of it. If the target can see the monstrosity, the target must succeed on a DC [10+%CON] Constitution saving throw against this magic or take 10 (3d6) cold damage and then be paralyzed for 1 minute, unless it is immune to cold damage. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success. If the target's saving throw is successful, or if the effect ends on it, the target is immune to the Chilling Gaze of all monstrosities for 1 hour."
+            recharge += [f"\n - Chilling Gaze (Recharge 6): \n\t The monstrosity targets one creature it can see within 30 feet of it. If the target can see the monstrosity, the target must succeed on a DC [10+%CON] Constitution saving throw against this magic or take 10 (3d6) cold damage and then be paralyzed for 1 minute, unless it is immune to cold damage. The target can repeat the saving throw at the start of each of its turns, ending the effect on itself on a success. If the target's saving throw is successful, or if the effect ends on it, the target is immune to the Chilling Gaze of all monstrosities for 1 hour."]
         if Dice() == 1 and not ("Disguise Self" in recharge):
-            recharge += "\n - Disguise self (humanoid form) Aura (Recharge 6): \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
+            recharge += ["\n - Disguise self (humanoid form) Aura (Recharge 6): \n\t A 15-foot radius of magical darkness extends out from the Monstrosity, moves with it, and spreads around corners. The darkness lasts as long as the Monstrosity maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."]
         if Dice(8) == 1 and not ("Fire Breath" in recharge):
-            recharge += "\n -  Fire Breath (Recharge 5–6). \n\t The monstrosity exhales fire in a 15-foot cone. Each creature in that area must make a DC[11+%CON] Dexterity saving throw, taking 31 (7d8) fire damage on a failed save, or half as much damage on a successful one."
+            recharge += ["\n -  Fire Breath (Recharge 5–6). \n\t The monstrosity exhales fire in a 15-foot cone. Each creature in that area must make a DC[11+%CON] Dexterity saving throw, taking 31 (7d8) fire damage on a failed save, or half as much damage on a successful one."]
                 
         if Dice(8) == 1 and not ("Luring Song" in recharge):
-            recharge += "\n - Luring Song: \n\t The {race} sings a magical melody. Every humanoid and giant within 300 feet of the monstrosity that can hear the song must succeed on a DC [10+%Cha] Wisdom saving throw or be charmed until the song ends. The monstrosity must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time. The song ends if the monstrosity is incapacitated. While charmed by the monstrosity, a target is incapacitated and ignores the songs of other monstrosities. If the charmed target is more than 5 feet away from the monstrosity, the target must move on its turn toward the monstrosity by the most direct route. It doesn't avoid opportunity attacks, but before moving into damaging terrain, such as lava or a pit, and whenever it takes damage from a source other than the monstrosity, a target can repeat the saving throw. A creature can also repeat the saving throw at the begguining of each of its turns. If a creature's saving throw is successful, the effect ends on it. A target that successfully saves is immune to this monstrosity's song for the next 24 hours."
+            recharge += ["\n - Luring Song: \n\t The {race} sings a magical melody. Every humanoid and giant within 300 feet of the monstrosity that can hear the song must succeed on a DC [10+%Cha] Wisdom saving throw or be charmed until the song ends. The monstrosity must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time. The song ends if the monstrosity is incapacitated. While charmed by the monstrosity, a target is incapacitated and ignores the songs of other monstrosities. If the charmed target is more than 5 feet away from the monstrosity, the target must move on its turn toward the monstrosity by the most direct route. It doesn't avoid opportunity attacks, but before moving into damaging terrain, such as lava or a pit, and whenever it takes damage from a source other than the monstrosity, a target can repeat the saving throw. A creature can also repeat the saving throw at the begguining of each of its turns. If a creature's saving throw is successful, the effect ends on it. A target that successfully saves is immune to this monstrosity's song for the next 24 hours."]
 
-        if Dice(10) == 1 and not ("Petrifying Breath" in cantrip):    cantrip += "\n - Petrifying Breath (Recharge 5-6): \n\t The monstrosity exhales petrifying gas in a 30-foot cone. Each creature in that area must succeed on a Constitution saving throw (against the creature's Spellsave DC). On a failed save, a target begins to turn to stone and is restrained. The restrained target must repeat the saving throw at the start of its next turn. On a success, the effect ends on the target. On a failure, the target is petrified until freed by the greater restoration spell or other magic."
-        if Dice(10) == 1 and not ("Petrifying Gaze" in cantrip):      cantrip += "\n - Petrifying Gaze: \n\t If a creature starts its turn within 30 feet of the monstrosity and the two of them can see each other, the monstrosity can force the creature to make a DC [10+%CON] Constitution saving throw if the monstrosity isn't incapacitated. On a failed save, the creature magically begins to turn to stone and is restrained. It must repeat the saving throw at the start of its next turn. On a success, the effect ends. On a third failure, the creature is petrified until freed by the greater restoration spell or other magic. \n\t A creature that isn't surprised can avert its eyes to avoid the saving throw at the start of its turn. If it does so, it can't see the monstrosity until the start of its next turn, when it can avert its eyes again. If it looks at the monstrosity in the meantime, it must immediately make the save. \n\t If the monstrosity sees its reflection within 30 feet of it in bright light, it mistakes itself for a rival and targets itself with its gaze."
-        if Dice(8) == 1 and not ("Read Thoughts" in cantrip):        cantrip += "\n - Read Thoughts: \n\t The monstrosity magically reads the surface thoughts of one creature within 60 feet of it. The effect can penetrate barriers, but 3 feet of wood or dirt, 2 feet of stone, 2 inches of metal, or a thin sheet of lead blocks it. While the target is in range, the monstrosity can continue reading its thoughts, as long as the monstrosity's concentration isn't broken (as if concentrating on a spell). While reading the target's mind, the monstrosity has advantage on Wisdom (Insight) and Charisma (Deception, Intimidation, and Persuasion) checks against the target."
+        if Dice(10) == 1 and not ("Petrifying Breath" in cantrip):
+            cantrip += ["\n - Petrifying Breath (Recharge 5-6): \n\t The monstrosity exhales petrifying gas in a 30-foot cone. Each creature in that area must succeed on a Constitution saving throw (against the creature's Spellsave DC). On a failed save, a target begins to turn to stone and is restrained. The restrained target must repeat the saving throw at the start of its next turn. On a success, the effect ends on the target. On a failure, the target is petrified until freed by the greater restoration spell or other magic."]
+        if Dice(10) == 1 and not ("Petrifying Gaze" in cantrip):
+            cantrip += ["\n - Petrifying Gaze: \n\t If a creature starts its turn within 30 feet of the monstrosity and the two of them can see each other, the monstrosity can force the creature to make a DC [10+%CON] Constitution saving throw if the monstrosity isn't incapacitated. On a failed save, the creature magically begins to turn to stone and is restrained. It must repeat the saving throw at the start of its next turn. On a success, the effect ends. On a third failure, the creature is petrified until freed by the greater restoration spell or other magic. \n\t A creature that isn't surprised can avert its eyes to avoid the saving throw at the start of its turn. If it does so, it can't see the monstrosity until the start of its next turn, when it can avert its eyes again. If it looks at the monstrosity in the meantime, it must immediately make the save. \n\t If the monstrosity sees its reflection within 30 feet of it in bright light, it mistakes itself for a rival and targets itself with its gaze."]
+        if Dice(8) == 1 and not ("Read Thoughts" in cantrip):
+            cantrip += ["\n - Read Thoughts: \n\t The monstrosity magically reads the surface thoughts of one creature within 60 feet of it. The effect can penetrate barriers, but 3 feet of wood or dirt, 2 feet of stone, 2 inches of metal, or a thin sheet of lead blocks it. While the target is in range, the monstrosity can continue reading its thoughts, as long as the monstrosity's concentration isn't broken (as if concentrating on a spell). While reading the target's mind, the monstrosity has advantage on Wisdom (Insight) and Charisma (Deception, Intimidation, and Persuasion) checks against the target."]
 
 
     if race == "Monstrosity":
@@ -1543,7 +1692,10 @@ def Magic(npc):
                          "Shillelagh",
                          "Poison Spray",
                          "Thorn Whip"]
-        one_day_each_list += ["Entangle", "Goodberry", "Speak with Plants"]
+        one_day_each_list += ["Entangle",
+                              "Goodberry",
+                              "Speak with Plants"
+                              ]
         two_day_each_list += ["Barkskin", "Spike Growth", "Plant Growth"]
         three_day_each_list += ["Conjure Woodland Beings", "Grasping Vine", "Freedom of Movement (self only)"]
         first_list += ["Cure Wounds", "Detect Poison and Disease", "Entangle", "Purify Food and Drink", "Fog Cloud"]
@@ -1583,18 +1735,18 @@ def Magic(npc):
 
     # UNDEAD
     if race == "Undead":
-        if Dice(8) == 1 and not ("Create Specter" in recharge):             recharge += "\n - Create Specter (Recharge 6)\n\t The undead targets a humanoid within 10 feet of it that has been dead for no longer than 1 minute and died violently. The target's spirit rises as a specter in the space of its corpse or in the nearest unoccupied space. The specter is under the undead's control. The undead can have no more than seven specters under its control at one time." 
-        if Dice(8) == 1 and not ("Corrupting Touch" in recharge):           recharge += "\n - Corrupting Touch (Recharge 6)\n\t Melee Spell Attack: reach 5 ft., one target. Hit: 10 (3d6) necrotic damage."
-        if Dice(8) == 1 and not ("Dreadful Glare" in recharge):             recharge += "\n - Dreadful Glare.(Recharge 6) \n\t The undead targets one creature it can see within 60 feet of it. If the target can see the undead, it must succeed on a DC [10+%CHA] Wisdom saving throw against this magic or become frightened until the end of the undead's next turn. If the target fails the saving throw by 5 or more, it is also paralyzed for the same duration. A target that succeeds on the saving throw is immune to the Dreadful Glare of all undead for the next 24 hours."
-        if Dice(8) == 1 and not ("Forceful Slam" in recharge):              recharge += "\n - Forceful Slam (Recharge 6)\n\t Magic melee attack. Hit: 10 (3d6) force damage. "
-        if Dice(8) == 1 and not ("Fire Ray" in recharge):                   recharge += "\n - Fire Ray (Recharge 6)\n\t Magic attack. Range 30 ft. Hit: 10 (3d6) fire damage. "
-        if Dice(8) == 1 and not ("Horrifying Visage" in recharge):          recharge += "\n - Horrifying Visage (Recharge 6)\n\t Each non-undead creature within 60 feet of the Undead that can see them must succeed on a DC [10+%CHA] Wisdom saving throw or be frightened for 1 minute. A frightened target can repeat the saving throw at the start of each of its turns, with disadvantage if the Undead is within line of sight, ending the effect on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to the Undead's Horrifying Visage for the next 24 hours. "
-        if Dice(8) == 1 and not ("Life Drain" in recharge):                 recharge += "\n - Life Drain (Recharge 6)\n\t On an hit, the target's Hit Points Maximum is reduced by the damage dealt. The target dies if this reduces its Hit Points Maximum to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. "
-        elif Dice(8) == 1 and not ("Life Drain" in recharge):               recharge += "\n - Life Drain (Recharge 6)\n\t On an hit, the target makes a Constitution saving throw. On a fail, the target takes 4d6 necrotic damage. The target's Hit Points Maximum is reduced by the necrotic damage dealt. The target dies if this reduces its Hit Points Maximum to 0. Otherwise, the reduction lasts until the target finishes a long rest. "
-        if Dice(8) == 1 and not ("Rotting Fist" in recharge):               recharge += "\n - Rotting Fist. (Recharge 6)\n\t Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) bludgeoning damage plus 10 (3d6) necrotic damage. If the target is a creature, it must succeed on a DC [10+%CHA] Constitution saving throw or be cursed with undead rot. The cursed target can't regain hit points, and its hit point maximum decreases by 10 (3d6) for every 24 hours that elapse. If the curse reduces the target's hit point maximum to 0, the target dies, and its body turns to dust. The curse lasts until removed by the remove curse spell or other magic."
-        if Dice(8) == 1 and not ("Strength Drain" in recharge):             recharge += "\n - Strength Drain (Recharge 6)\n\t On an attack hit the target's Strength score is reduced by 1d4. The target dies if this reduces its Strength to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. \n\t If a non-evil humanoid dies from this attack, a new shadow rises from the corpse 1d4 hours later."
-        if Dice(8) == 1 and not ("Telekinetic Thrust" in recharge):         recharge += "\n - Telekinetic Thrust.(Recharge 6) \n\t The undead targets a creature or unattended object within 30 feet of it. A creature must be Medium or smaller to be affected by this magic, and an object can weigh up to 150 pounds. \n\t If the target is a creature, the undead makes a Charisma check contested by the target's Strength check. If the undead wins the contest, the undead hurls the target up to 30 feet in any direction, including upward. If the target then comes into contact with a hard surface or heavy object, the target takes 1d6 damage per 10 feet moved. \n\t If the target is an object that isn't being worn or carried, the undead hurls it up to 30 feet in any direction. The undead can use the object as a ranged weapon, attacking one creature along the object's path (+4 to hit) and dealing 5 (2d4) bludgeoning damage on a hit."
-        if Dice(8) == 1 and not ("Wail" in recharge):                       recharge += "\n - Wail. (Rechrge 6)\n\t The undead releases a mournful wail, provided that they aren't in sunlight. This wail has no effect on constructs and undead. All other creatures within 30 feet of them that can hear them must make a DC [10+%CHA] Constitution saving throw. On a failure, a creature drops to 0 hit points. On a success, a creature takes 10 (3d6) psychic damage."
+        if Dice(8) == 1 and not ("Create Specter" in recharge):             recharge += ["\n - Create Specter (Recharge 6)\n\t The undead targets a humanoid within 10 feet of it that has been dead for no longer than 1 minute and died violently. The target's spirit rises as a specter in the space of its corpse or in the nearest unoccupied space. The specter is under the undead's control. The undead can have no more than seven specters under its control at one time." ]
+        if Dice(8) == 1 and not ("Corrupting Touch" in recharge):           recharge += ["\n - Corrupting Touch (Recharge 6)\n\t Melee Spell Attack: reach 5 ft., one target. Hit: 10 (3d6) necrotic damage."]
+        if Dice(8) == 1 and not ("Dreadful Glare" in recharge):             recharge += ["\n - Dreadful Glare.(Recharge 6) \n\t The undead targets one creature it can see within 60 feet of it. If the target can see the undead, it must succeed on a DC [10+%CHA] Wisdom saving throw against this magic or become frightened until the end of the undead's next turn. If the target fails the saving throw by 5 or more, it is also paralyzed for the same duration. A target that succeeds on the saving throw is immune to the Dreadful Glare of all undead for the next 24 hours."]
+        if Dice(8) == 1 and not ("Forceful Slam" in recharge):              recharge += ["\n - Forceful Slam (Recharge 6)\n\t Magic melee attack. Hit: 10 (3d6) force damage. "]
+        if Dice(8) == 1 and not ("Fire Ray" in recharge):                   recharge += ["\n - Fire Ray (Recharge 6)\n\t Magic attack. Range 30 ft. Hit: 10 (3d6) fire damage. "]
+        if Dice(8) == 1 and not ("Horrifying Visage" in recharge):          recharge += ["\n - Horrifying Visage (Recharge 6)\n\t Each non-undead creature within 60 feet of the Undead that can see them must succeed on a DC [10+%CHA] Wisdom saving throw or be frightened for 1 minute. A frightened target can repeat the saving throw at the start of each of its turns, with disadvantage if the Undead is within line of sight, ending the effect on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to the Undead's Horrifying Visage for the next 24 hours. "]
+        if Dice(8) == 1 and not ("Life Drain" in recharge):                 recharge += ["\n - Life Drain (Recharge 6)\n\t On an hit, the target's Hit Points Maximum is reduced by the damage dealt. The target dies if this reduces its Hit Points Maximum to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. "]
+        elif Dice(8) == 1 and not ("Life Drain" in recharge):               recharge += ["\n - Life Drain (Recharge 6)\n\t On an hit, the target makes a Constitution saving throw. On a fail, the target takes 4d6 necrotic damage. The target's Hit Points Maximum is reduced by the necrotic damage dealt. The target dies if this reduces its Hit Points Maximum to 0. Otherwise, the reduction lasts until the target finishes a long rest. "]
+        if Dice(8) == 1 and not ("Rotting Fist" in recharge):               recharge += ["\n - Rotting Fist. (Recharge 6)\n\t Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) bludgeoning damage plus 10 (3d6) necrotic damage. If the target is a creature, it must succeed on a DC [10+%CHA] Constitution saving throw or be cursed with undead rot. The cursed target can't regain hit points, and its hit point maximum decreases by 10 (3d6) for every 24 hours that elapse. If the curse reduces the target's hit point maximum to 0, the target dies, and its body turns to dust. The curse lasts until removed by the remove curse spell or other magic."]
+        if Dice(8) == 1 and not ("Strength Drain" in recharge):             recharge += ["\n - Strength Drain (Recharge 6)\n\t On an attack hit the target's Strength score is reduced by 1d4. The target dies if this reduces its Strength to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. \n\t If a non-evil humanoid dies from this attack, a new shadow rises from the corpse 1d4 hours later."]
+        if Dice(8) == 1 and not ("Telekinetic Thrust" in recharge):         recharge += ["\n - Telekinetic Thrust.(Recharge 6) \n\t The undead targets a creature or unattended object within 30 feet of it. A creature must be Medium or smaller to be affected by this magic, and an object can weigh up to 150 pounds. \n\t If the target is a creature, the undead makes a Charisma check contested by the target's Strength check. If the undead wins the contest, the undead hurls the target up to 30 feet in any direction, including upward. If the target then comes into contact with a hard surface or heavy object, the target takes 1d6 damage per 10 feet moved. \n\t If the target is an object that isn't being worn or carried, the undead hurls it up to 30 feet in any direction. The undead can use the object as a ranged weapon, attacking one creature along the object's path (+4 to hit) and dealing 5 (2d4) bludgeoning damage on a hit."]
+        if Dice(8) == 1 and not ("Wail" in recharge):                       recharge += ["\n - Wail. (Rechrge 6)\n\t The undead releases a mournful wail, provided that they aren't in sunlight. This wail has no effect on constructs and undead. All other creatures within 30 feet of them that can hear them must make a DC [10+%CHA] Constitution saving throw. On a failure, a creature drops to 0 hit points. On a success, a creature takes 10 (3d6) psychic damage."]
     if race == "Undead":
         cantrips_list += ["Chill Touch","Mage Hand","Spare the Dying","Thaumaturgy"]
         one_day_each_list += ["False Life", "Disguise Self", "Speak with Dead"]
@@ -1629,9 +1781,10 @@ def Magic(npc):
       
     spellbook.UpdateDifficulty(difficulty)
 
-
     # Ensure there are no duplicates in the lists
+
     spellbook.accessible[0] = list(set(cantrips_list))
+
     spellbook.accessible[1] = list(set(first_list))
     spellbook.accessible[2] = list(set(second_list))
     spellbook.accessible[3] = list(set(third_list))
@@ -1642,16 +1795,19 @@ def Magic(npc):
     spellbook.accessible[8] = list(set(eighth_list))
     spellbook.accessible[9] = list(set(ninth_list))
 
-    spellbook.one_day_each_list = list(set(three_day_each_list))
-    spellbook.two_day_each_list = list(set(two_day_each_list)) 
-    spellbook.three_day_each_list = list(set(one_day_each_list))
-
-
-    spellbook.select_spells()
+    power_level = spellbook.max_spell_level
     
+    spellbook.one_day_each_list = list(set(spellbook.accessible[power_level]))
+    spellbook.two_day_each_list = list(set(spellbook.accessible[1 + power_level//2 ] ))
+    spellbook.three_day_each_list = list(set(spellbook.accessible[1 + Dice(power_level)//3 ] ))
+
+
+    spellbook.select_spells(is_spellcaster(npc))
+    selected_spells_set = set()
+    # Keep track of selected spells
 
     sample_size = min(len(cantrips_list), ( 2* npc.pb-difficulty)//difficulty, 5)
-    for spell in random.sample(cantrips_list,sample_size):
+    for spell in safe_sample(cantrips_list, sample_size):
         spellbook.add_spell(0,spell)
 
     # Adding regular spells to the spellbook
@@ -1660,23 +1816,31 @@ def Magic(npc):
             spellbook.add_spell(level, spell)
 
     # Adding natural and rechargeable spells
-    sample_size = min(len(one_day_each_list), npc.pb//Dice(3),3)
-    for spell in random.sample(one_day_each_list,sample_size):
-        spellbook.add_natural(spell, times_day=1)
+    sample_size = min(len(one_day_each_list),1+ power_level//difficulty,6)
+    for spell in safe_sample(one_day_each_list,sample_size):
+        if spell not in selected_spells_set:
+            spellbook.add_natural(spell, times_day=1)
+            selected_spells_set.add(spell)
 
-    sample_size = min(len(two_day_each_list), npc.pb//Dice(4),3)
-    for spell in random.sample(two_day_each_list,sample_size):
-        spellbook.add_natural(spell, times_day=2)
+    sample_size = min(len(two_day_each_list), 2+ power_level//difficulty,6)
+    for spell in safe_sample(two_day_each_list,sample_size):
+        if spell not in selected_spells_set:
+            spellbook.add_natural(spell, times_day=2)
+            selected_spells_set.add(spell)
+
         
-    sample_size = min(len(three_day_each_list), 3, npc.pb//Dice(5) )
-    for spell in random.sample(three_day_each_list,sample_size):
-        spellbook.add_natural(spell, times_day=3)
+    sample_size = min(len(three_day_each_list),3+ power_level//difficulty,6)
+    for spell in safe_sample(three_day_each_list,sample_size):
+        if spell not in selected_spells_set:
+            spellbook.add_natural(spell, times_day=3)
+            selected_spells_set.add(spell)
 
-    sample_size = min(len(recharge), Dice(npc.pb))
-    for spell in random.sample(recharge,sample_size):
-        spellbook.add_rechargeable(spell)
-
-
+    sample_size = min(len(recharge), Dice(npc.pb),6)
+    for spell in safe_sample(recharge, sample_size):
+        if spell:
+        # Check if the spell name is valid and not empty
+            spellbook.add_rechargeable(spell)
+        
     return spellbook.SpellbookString(npc)
 
 
