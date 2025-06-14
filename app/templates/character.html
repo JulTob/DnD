@@ -1,0 +1,235 @@
+{% extends 'base.html' %}
+
+{% block title %}Character Sheet{% endblock %}
+
+{% block content %}
+<div class="character-button-selectors">
+	<button class="fantasy-button" onclick="window.location.href='/character';">🎲 Generate New Character</button>
+    <button class="fantasy-button" onclick="printForma()">📜 Print Character</button>
+    <div style="display: inline-flex; fill: black; border-radius: 6px; overflow: hidden;">
+        <button type="button" class="minus fantasy-button fantasy-input">-</button>
+        <button type="button" class="plus fantasy-button fantasy-input">+</button>
+    	</div>
+    <input type="hidden" id="seed-preserved" value="{{ character._seed }}">
+	</div>
+
+<hr>
+<div class="npc-grid" id="Forma">
+
+  <!-- Character Header -->
+    <div class="npc-header" style="grid-column:  1 / -1;">
+        <h2 style="font-size: 2.2em;">{{ character.name | safe }}</h2>
+        <h2 style="font-size: 1.2em;">{{ character.title | safe }}</h2>
+		<h1>Level {{ character.Level }} {{ character.Class }} </h1>
+	    <h1><b>{{ character.Species }} {{ character.Background }}</b></h1>
+	  	</div>
+
+	<!-- Basic Info -->
+    <div class="npc-box">
+        <h6>{{ character.Alignment }}</h6>
+    	</div>
+	<div class="npc-box">
+        <h6>{{ character.size }} size</h6>
+    	</div>
+	<div class="npc-box"><h4> {{ character.Gender }} </h4></div>
+	<div class="npc-box">
+		<h4>Passive Perception: {{ character.passive_perception }}</h4>
+		</div>
+  <!-- Combat Essentials -->
+  <div class="npc-box" style="font-size: 1.33em;">🛡️ AC: <b>{{ character.AC }}</b></div>
+  <div class="npc-box" style="font-size: 1.33em;">💚 HP: <b>{{ character.Health }}</b></div>
+  <div class="npc-box" style="font-size: 1.33em;">⚜️ PB: <b>+ {{ character.PB }}</b></div>
+
+
+
+  <div class="npc-box">
+	  <!-- Stats -->
+	  {% for stat, value in character.Stats.items() %}
+	  {% set mod = ((value - 10) // 2) %}
+	  <div class="npc-box" style="text-align: right;">
+	    <div class="symbol">🌀</div>
+	    <h4>{{ stat }}
+		<h4>{{ value }}
+			({{ '+' if mod >= 0 else '' }}{{ mod }})</h4>
+	  	</div>
+	  {% endfor %}
+	  </div>
+
+
+
+
+	  <div class="npc-box">
+			  <!-- Skills Table -->
+			  <div class="npc-textbox">
+			    <h3>Skills</h3>
+			    <table class="skills-table">
+			      <tbody>
+			        {% for skill, display in character.Skills.list %}
+			        <tr>
+			          <td>
+			            {% if skill.proficiency_level == 2 %}🔴
+			            {% elif skill.proficiency_level == 1 %}⚫
+			            {% else %}⚪{% endif %}
+			          </td>
+			          <td><h3>{{ display }}</h3></td>
+			          <td>{{ skill.calculate_modifier(character.Level) }}</td>
+			        </tr>
+			        {% endfor %}
+			      </tbody>
+			    </table>
+			  </div>
+
+		</div>
+		<div class="npc-textbox">
+			  <h3>Proficiencies</h3>
+			  <ul style="list-style: none; padding-left: 0; text-align: left;">
+				    {% for prof in character.other_proficiencies %}
+				      	<li>✅ {{ prof }}</li>
+
+				    	{% endfor %}
+					</ul>
+			</div>
+		  <!-- Equipment -->
+		  <div class="npc-textbox">{{ character.equipment }}</div>
+
+		  <div class="npc-textbox">
+		    <h3>Equipment</h3>
+		    <table class="objects-table">
+		      <tbody>
+		        {% for item in character.equipment.equipped %}
+		        <tr>
+		          <td>✅</td>
+		          <td><b>{{ item.name }}</b></td>
+		          <td>{{ item.description }}</td>
+		          <td>{{ item.value }} gp</td>
+		        </tr>
+		        {% endfor %}
+		      </tbody>
+		    </table>
+		  </div>
+
+		  <!-- Inventory -->
+		  <div class="npc-textbox">
+		    <h3>Bag</h3>
+		    <table class="objects-table">
+		      <tbody>
+		        {% for item in character.equipment.bag %}
+		        <tr>
+		          <td>{{ item.name | safe }}</td>
+		          <td>x{{ item.quantity }}</td>
+		          <td>{{ item.weight }} lbs</td>
+		          <td>{{ item.value }} gp</td>
+		        </tr>
+		        {% endfor %}
+		      </tbody>
+		    </table>
+		  </div>
+
+		  <!-- Purse -->
+		  <div class="npc-box">
+		    <h4>Purse:</h4>
+		    <p>💰 {{ character.equipment.purse }} gp</p>
+		  </div>
+
+		  <!-- Traits -->
+		  {% if character.traits %}
+		  <div class="npc-textbox">
+		    <h3>Personality Traits</h3>
+		    <p><i>{{ character.traits }}</i></p>
+		  </div>
+		  {% endif %}
+
+		  <!-- Ideals -->
+		  {% if character.ideal %}
+		  <div class="npc-textbox">
+		    <h3>Ideals</h3>
+		    <p><i>{{ character.ideal }}</i></p>
+		  </div>
+		  {% endif %}
+
+		  <!-- Backstory -->
+		  {% if character.Story %}
+		  <div class="npc-textbox">
+		    <h3>Backstory</h3>
+		    <p><i>{{ character.Story | replace('\n', '<br>') | safe }}</i></p>
+		  </div>
+		  {% endif %}
+
+	<div class="npc-textbox">
+		<h1>Features</h1>
+		{% for feat in character.features %}
+			<div class="class-feature">{{ feat.to_html() | safe }}</div>
+			{% endfor %}
+		</div>
+
+	</div>
+
+<!-- Optional: JS-Accessible Character Data -->
+<script>
+  const characterData = {
+    class: "{{ character.Class }}",
+    species: "{{ character.Species }}",
+    level: "{{ character.Level }}"
+  };
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const minus = document.querySelector('.minus');
+    const plus = document.querySelector('.plus');
+
+    const level = {{ character.level }};
+    const seed = document.getElementById('seed-preserved').value;
+
+    function redirectWithLevel(newLevel) {
+        window.location.href = `/character/${newLevel}/${seed}`;
+    }
+
+    minus.addEventListener('click', () => {
+        if (level > 1) redirectWithLevel(level - 1);
+    });
+
+    plus.addEventListener('click', () => {
+        if (level < 20) redirectWithLevel(level + 1);
+    });
+});
+</script>
+
+<script>
+function printForma() {
+  const printElement = document.getElementById("Forma");
+
+  const stylesheets = Array.from(document.styleSheets).map((styleSheet) => {
+      try {
+          if (styleSheet.href) {
+              return `<link rel="stylesheet" href="${styleSheet.href}">`;
+          }
+      } catch (e) {
+          console.error("Error accessing stylesheet:", e);
+          return "";
+      }
+  }).join("");
+
+  const printWindow = window.open("", "_blank", "width=800,height=600");
+
+  printWindow.document.write(`
+    <html>
+      <head>
+        <title>Print Character</title>
+        ${stylesheets}
+      </head>
+      <body>
+        ${printElement.outerHTML}
+      </body>
+    </html>
+  `);
+
+  printWindow.document.close();
+
+  printWindow.onload = function () {
+    printWindow.print();
+    printWindow.close();
+  };
+}
+</script>
+
+{% endblock %}

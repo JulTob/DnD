@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Legendary Generations{% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+  	<h2>Welcome to Legendary Generations</h2>
+
+  	<p>Generate Legendary new Characters and Non-Player Characters. Ideal for your next adventure.</p>
+
+  	<!-- Button for Quick Random Generation -->
+  	<div class="button-group">
+	  	<button onclick="window.location.href='/npc';" class="fantasy-button">New NPC</button>
+	  	<button onclick="window.location.href='/character';" class="fantasy-button">New Character</button>
+	  	</div>
+
+
+  	<p>Select parameters to guide the generator.</p>
+
+  	<form id="npc-form" action="/generate_npc" method="post">
+
+	      <label for="level-input"><h6>Level:</h6></label>
+		  <div class="number-input fantasy-input">
+			  <button type="button" class="minus fantasy-button fantasy-input">-</button>
+		      <input type="number" id="level-input" name="level" min="1" max="100"
+		             placeholder="Enter Level" class="fantasy-select level fantasy-input"
+					 aria-label="Enter NPC Level">
+					 <button type="button" class="plus fantasy-button fantasy-input">+</button>
+	<br>
+	<h3>Generate Non Player Characters</h3>
+
+  	<!-- NPC Selection Form -->
+	  	<label for="race-select"><h6>Race:</h6></label>
+      	<select name="race" id="race-select" class="fantasy-select" aria-label="Select NPC Race">
+          	{% for race in races %}
+          		<option value="{{ race }}" class="fantasy-option">{{ race }}</option>
+          		{% endfor %}
+      		</select>
+
+      <label for="archetype-select"><h6>Archetype:</h6></label>
+      <select name="archetype" id="archetype-select" class="fantasy-select" aria-label="Select NPC Archetype">
+          	{% for archetype in npc_archetypes %}
+          		<option value="{{ archetype }}" class="fantasy-option">{{ archetype }}</option>
+          		{% endfor %}
+      		</select>
+
+      <!-- Hidden input for seed, if you still want to generate it on the client-side -->
+      <input type="hidden" id="seed-input" name="seed">
+
+      <br/>
+
+      <!-- Button to submit form data for one NPC-->
+      <button type="submit" class="fantasy-button">Generate NPC</button>
+
+	  <!-- Button to submit form data for a list of NPCs based on selected race and background -->
+      <button type="button" onclick="generateList()" class="fantasy-button">Generate 5 NPCs</button>
+  		</form>
+
+  	<!-- Character Form -->
+	<form id="character-form" action="/generate_character" method="post">
+		<h3>Generate Character</h3>
+
+		<label for="species-select"><h6>Species:</h6></label>
+		<select name="species" id="species-select" class="fantasy-select"
+			aria-label="Select Character Species">
+			{% for species in species_list %}
+				<option value="{{ species }}" class="fantasy-option">{{ species }}</option>
+				{% endfor %}
+			</select>
+
+		<label for="class-select"><h6>Class:</h6></label>
+		<select name="class" id="class-select" class="fantasy-select"
+			aria-label="Select Character Class">
+		    {% for class in class_list %}
+		    	<option value="{{ class }}" class="fantasy-option">{{ class }}</option>
+		    	{% endfor %}
+			</select>
+
+		<!-- Background selection -->
+		<label for="background-select-character"><h6>Background:</h6></label>
+		<select name="background" id="background-select-character" class="fantasy-select">
+			{% for background in char_backgrounds %}
+				<option value="{{ background }}" class="fantasy-option">{{ background }}</option>
+				{% endfor %}
+			</select>
+
+		<br/>
+
+		<!-- Buttons for character generation -->
+		<button type="submit" class="fantasy-button">Generate Character</button>
+		</form>
+
+	</div>
+
+<script>
+	document.getElementById('npc-form').onsubmit = function() {
+	    // Generate a random seed
+	    var seed = Math.floor(Math.random() * 10000);
+			// Example: Generates a number between 0 and 9999
+	    document.getElementById('seed-input').value = seed;
+		};
+
+	// Function to generate a list of NPCs based on selected race and background
+	function generateList() {
+	    var race = document.getElementById('race-select').value || 'Random';
+	    const archetype = document.getElementById('archetype-select').value || 'Random';
+	    window.location.href = `/list/${race}/${archetype}`;
+		}
+
+	// Function to add and sub level
+	document.addEventListener('DOMContentLoaded', () => {
+	    document.querySelectorAll('.number-input').forEach((element) => {
+	        const input = element.querySelector('input[type="number"]');
+	        const minus = element.querySelector('.minus');
+	        const plus = element.querySelector('.plus');
+
+	        minus.addEventListener('click', () => {
+	            const currentValue = parseInt(input.value) || 0;
+	            if (currentValue > parseInt(input.min)) {
+	                input.value = currentValue - 1;
+	            }
+	        });
+
+	        plus.addEventListener('click', () => {
+	            const currentValue = parseInt(input.value) || 0;
+	            if (!input.max || currentValue < parseInt(input.max)) {
+	                input.value = currentValue + 1;
+	            }
+	        });
+	    });
+	});
+	</script>
+
+{% endblock %}

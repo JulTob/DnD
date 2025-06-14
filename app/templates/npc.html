@@ -1,0 +1,496 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<div class="npc-button-selectors">
+
+<button class="fantasy-button" onclick="printForma()">📜 Print NPC</button>
+<button id="try-again-button" class="fantasy-button">Try Again</button>
+
+	<select id="quick-race" class="fantasy-button" onchange="quickRedirect()">
+		{% for race in races %}
+			<option value="{{ race }}" {% if race == npc.race %}selected{% endif %}>{{ race }}</option>
+		{% endfor %}
+	</select>
+	<select id="quick-archetype" class="fantasy-button" onchange="quickRedirect()">
+		{% for archetype in npc_archetypes %}
+			<option value="{{ archetype }}" {% if archetype == npc.archetype %}selected{% endif %}>{{ archetype }}</option>
+		{% endfor %}
+	</select>
+	<div style="display: inline-flex; fill: black; border: 1px; border-radius: 6px; overflow: hidden;" >
+		<button type="button" class="minus fantasy-button fantasy-input">-</button>
+		<button type="button" class="plus fantasy-button fantasy-input">+</button>
+		</div>
+	<!-- Hidden seed -->
+	<input type="hidden" id="seed-preserved" value="{{ npc._seed }}">
+</div>
+
+<hr>
+<div class="npc-grid" id="Forma">
+
+	<div class="npc-header" style="grid-column:  1 / -1;">
+		<h2 style="font-size: 2.2em;">{{ npc.name | safe}}</h2>
+		<h1>{{ npc.title }}</h1>
+		</div>
+	<div class="npc-box" style="grid-column: span 2; font-size: 1.2em;">
+	    <h2>{{ npc.race }}: <b>{{ npc.subrace }}</b></h2>
+		</div>
+	<div class="npc-box" style="grid-column: span 2; font-size: 1.2em">
+		<h2>{{ npc.background }}</h2>
+		</div>
+	<div class="npc-box" style="grid-column: span 1;">
+		<h6>{{ npc.alignment }}</h6>
+		</div>
+	<div class="npc-box">
+		<h6>{{npc.size}} size</h6>
+		</div>
+	<div class="npc-box">
+		<h6>{{ npc.gender }}</h6>
+		</div>
+
+	<div class="npc-box npc-scores" style="grid-column: span 1;">
+		<div class="npc-box" style = "text-align: right;">
+			<div class="symbol">🦾</div>
+	    	<h2>STR: {{ npc.ability_scores.STR }}
+				{{ '+' if Modifier(npc.ability_scores.STR) >= 0 else '' }}<b>{{ Modifier(npc.ability_scores.STR) }}</b>
+				</h2>
+			</div>
+		<div class="npc-box" style = "text-align: right;">
+			<div class="symbol">🥢</div>
+	    	<h2>DEX: {{ npc.ability_scores.DEX }}
+				{{ '+' if Modifier(npc.ability_scores.DEX) >= 0 else '' }}<b>{{ Modifier(npc.ability_scores.DEX) }}</b>
+			</h2>
+			</div>
+		<div class="npc-box" style = "text-align: right;">
+			<div class="symbol">🫀</div>
+	    	<h2>CON: {{ npc.ability_scores.CON }}
+				{{ '+' if Modifier(npc.ability_scores.CON) >= 0 else '' }}<b>{{ Modifier(npc.ability_scores.CON) }}</b>
+			</h2>
+			</div>
+		<div class="npc-box" style = "text-align: right;">
+		<div class="symbol">🧩</div>
+	    	<h2>INT: {{ npc.ability_scores.INT }}
+				{{ '+' if Modifier(npc.ability_scores.INT) >= 0 else '' }}<b>{{ Modifier(npc.ability_scores.INT) }}</b>
+			</h2>
+			</div>
+		<div class="npc-box" style = "text-align: right;">
+		<div class="symbol">🦉</div>
+	    	<h2>WIS: {{ npc.ability_scores.WIS }}
+				{{ '+' if Modifier(npc.ability_scores.WIS) >= 0 else '' }}<b>{{ Modifier(npc.ability_scores.WIS) }}</b>
+			</h2>
+			</div>
+		<div class="npc-box" style = "text-align: right;">
+		<div class="symbol">🎭</div>
+	    	<h2>CHA: {{ npc.ability_scores.CHA }}
+				{{ '+' if Modifier(npc.ability_scores.CHA) >= 0 else '' }}<b>{{ Modifier(npc.ability_scores.CHA) }}</b>
+			</h2>
+			</div>
+		</div>
+	<div class="npc-box">
+		<div class="symbol">⚜️</div>
+    	<h1 style="font-size: 1.35em;">Lvl: {{ npc.level }} </h1>
+		</div>
+	<div class="npc-box">
+		<div class="symbol">💚</div>
+    	<h1 style="font-size: 1.35em;">HP: {{ npc.HP }}</h1>
+		</div>
+	<div class="npc-box">
+		<div class="symbol">🛡️</div>
+    	<h1 style="font-size: 1.35em;">AC: {{ npc.AC }}</h1>
+		</div>
+
+	<div class="npc-box" style = "text-align: right;">
+		<div class="symbol">⭐️</div>
+		<h5>Skills:</h5>
+		<p>{{ npc.skills.string(npc.ability_scores) | replace('\n', '<br>') | safe   }}</p>
+		</div>
+	<div class="npc-box">
+			<h4>Passive Perception:</h4> {{ npc.passive_perception | safe  }}
+		</div>
+	<div class="npc-box">
+		<div class="symbol">🎯</div>
+		<h4>Proficiency Bonus:</h4> +{{ npc.proficiency_bonus | safe  }}
+		</div>
+	<div class="npc-box">
+		<div class="symbol">🎲</div>
+		<h5 style="font-size: 0.7em;">Saving Throws:</h5>
+		<h3>{{ npc.saving_throws.string | replace('\n', '<br>') | safe   }}</h3>
+		</div>
+	<div class="npc-box">
+		<div class="symbol">📜</div>
+		<h4>Languages:</h4>
+		<p>{{ npc.languages | safe }}</p>
+		</div>
+	<div class="npc-box">
+		<div class="symbol">🦿</div>
+        <h2> Movement </h2>
+        <p>{{ npc.movement | replace('\n', '<br>') | safe   }}</p>
+		</div>
+	<div class="npc-textbox">
+		<div class="symbol">⚔️</div>
+	    <h3>Combat Actions</h3>
+	    <h4>To hit: +{{ npc.to_hit_bonus }}</h4>
+	    <p>{{ npc.simple_attacks | replace('\n', '<br>') | safe   }}</p>
+	    <p>{{ npc.special_attack | replace('\n', '<br>') | safe   }}</p>
+		</div>
+
+    <div class="npc-textbox">
+		<div class="symbol">🔮</div>
+	    <h3> SPELLCASTING: {{ npc.spellcasting_ability }}</h3>
+	    <h4>Spell Save DC: {{ npc.spell_save_dc }}</h4>
+	    <h4>To hit: +{{ npc.spell_attack_bonus }}</h4>
+	    <p>{{ npc.spells | replace('\n', '<br>') | safe   }}</p>
+		</div>
+	<div class="npc-textbox">
+		<div class="symbol">👁️</div>
+	    <h2> Senses </h2>
+	    <p>{{ npc.senses | replace('\n', '<br>') | safe }}</p>
+		</div>
+	<div class="npc-textbox">
+		<div class="symbol">🛟</div>
+	    <h2> Resistances </h2>
+	    <p>{{ npc.resistances | replace('\n', '<br>') | safe }}</p>
+		</div>
+	<div class="npc-textbox">
+		<div class="symbol">🥊</div>
+	    <h3>Martial Habilities</h3>
+	    <p>{{ npc.martial | replace('\n', '<br>') | safe   }}</p>
+		</div>
+
+	<div class="npc-textbox" style="font-size: 0.9em;">
+		<div class="symbol">👑</div>
+        <h2> Legendary </h2>
+        <p>{{ Legendary(npc) | replace('\n', '<br>') | safe   }}</p>
+		</div>
+	<div class="npc-textbox">
+		<div class="symbol">🏰</div>
+        <h2> Lair </h2>
+        <p style="font-size: 0.9em;">{{ Lair(npc) | replace('\n', '<br>') | safe   }}</p>
+		</div>
+	<div class="npc-textbox" style="font-size: 0.9em;">
+		<div class="symbol">🌋</div>
+        <h2> Region </h2>
+        <p>{{ Region(npc) | replace('\n', '<br>') | safe   }}</p>
+		</div>
+	<div class="npc-textbox">
+		<div class="symbol">🏵️</div>
+        <h2> Traits </h2>
+        <p style="font-size: 1.2em;"><i>{{ npc.trait | replace('\n', '<br>') | safe   }}</i></p>
+		</div>
+	<div class="npc-textbox">
+		<div class="symbol">🏛️</div>
+        <h2> Ideal </h2>
+        <p style="font-size: 1.2em;"><i>{{ npc.ideal | replace('\n', '<br>') | safe   }}</i></p>
+		</div>
+
+	<div class="npc-textbox" >
+		<div class="symbol">🪝</div>
+        <h2> Plot Hook </h2>
+        <p style="font-size: 1.2em;"><i>{{ npc.plothook | replace('\n', '<br>') | safe   }}</i></p>
+		</div>
+
+	<div class="npc-textbox" >
+		<div class="symbol">📖</div>
+        <h2> My Story </h2>
+        <p style="font-size: 1.2em;"><i>{{ npc.Story | replace('\n', '<br>') | safe   }}</i></p>
+		</div>
+
+	</div>
+
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const grid = document.querySelector('.npc-grid');
+
+    // Adjust grid rows to create masonry effect
+    const observer = new ResizeObserver(() => {
+        const gridItems = grid.querySelectorAll('.npc-box, .npc-textbox');
+        grid.style.gridAutoRows = 'auto'; // Base row height
+        gridItems.forEach(item => {
+            const rowSpan = Math.ceil(item.offsetHeight / 10); // Calculate row span
+            item.style.gridRowEnd = `span ${rowSpan}`;
+        });
+    });
+
+    observer.observe(grid); // Observe changes to grid content
+});
+
+
+
+function generateNPC() {
+	// Prevent the default form submission
+	event.preventDefault();
+
+	// Collect the form data
+	const formData = new FormData(document.getElementById('npc-form'));
+
+	fetch('/generate_npc', {
+		method: 'POST',
+		body: formData
+		})
+	.then(response => response.text())
+	.then(data => {
+		document.getElementById('npc-container').innerHTML = data;
+		})
+	.catch(error => console.error('Error:', error));
+}
+</script>
+
+<script>
+var typingTimeout;
+
+function generatePortrait(event) {
+event.preventDefault();
+
+// Show the loading indicator
+document.getElementById('portrait-loading-indicator').style.display = 'inline';
+
+// Clear the existing portrait
+clearPortrait();
+
+// Fetch the portrait
+fetchPortrait(true); // Added a parameter to indicate direct portrait generation
+}
+
+function clearPortrait() {
+const portraitContainer = document.getElementById('portrait-container');
+portraitContainer.innerHTML = ''; // Clear any existing portrait
+}
+
+fetch('/generate_story', {
+    method: 'POST',
+    body: data
+})
+.then(response => response.text())
+.then(storyText => {
+    // Insert just that text
+    document.getElementById('story-container').innerHTML = storyText;
+});
+
+
+function fetchStory() {
+const apiKey = document.getElementById('api-key-input').value;
+//if (!apiKey) {
+//    alert('Please enter your OpenAI API key.');
+//    hideLoadingIndicators();
+//    return;
+//}
+
+const data = new FormData();
+data.append('api_key', apiKey);
+
+fetch('/generate_story', {
+method: 'POST',
+body: data
+})
+.then(response => response.text())
+.then(story => {
+const storyChunks = prepareStory(story);
+typeWriter(storyChunks, 0, 0, function() {
+	console.log("Done writing!");
+});
+})
+.catch(error => {
+console.error('Error:', error);
+})
+.finally(() => {
+document.getElementById('loading-indicator').style.display = 'none';
+});
+}
+
+function fetchPortrait(isDirect) {
+const apiKey = document.getElementById('api-key-input').value;
+//if (!apiKey) {
+//    alert('Please enter your OpenAI API key.');
+//    hideLoadingIndicators();
+//    return;
+//}
+
+const data = new FormData();
+data.append('api_key', apiKey);
+
+fetch('/generate_portrait', {
+method: 'POST',
+body: data
+})
+.then(response => response.json())
+.then(data => {
+if (data.portrait_url) {
+	const portraitContainer = document.getElementById('portrait-container');
+	// Insert the image HTML
+	const imgHtml = `<img src='${data.portrait_url}' alt='NPC Portrait' class='float-right' style='max-width: 300px; height: auto; margin: 0 0 10px 10px;'>`;
+	if (isDirect) {
+		// If generating a portrait directly, insert the image at the top of the story container
+		document.getElementById('story-container').insertAdjacentHTML('afterbegin', imgHtml);
+	} else {
+		// If generating a portrait as part of story generation, append the image to the portrait container
+		portraitContainer.innerHTML = imgHtml;
+	}
+} else {
+	console.error('Error generating portrait');
+}
+})
+.catch(error => console.error('Error:', error))
+.finally(() => {
+// Make sure to hide both indicators if there are two
+document.getElementById('loading-indicator').style.display = 'none';
+document.getElementById('portrait-loading-indicator').style.display = 'none';
+});
+}
+
+
+
+
+
+function hideLoadingIndicators() {
+document.getElementById('loading-indicator').style.display = 'none';
+document.getElementById('portrait-loading-indicator').style.display = 'none';
+}
+
+
+function typeWriter(chunks, chunkIndex, charIndex, fnCallback) {
+const container = document.getElementById("story-container");
+
+if (chunkIndex < chunks.length) {
+if (chunks[chunkIndex] === "<br>") {
+	container.appendChild(document.createElement('br'));
+	setTimeout(function() {
+		typeWriter(chunks, chunkIndex + 1, 0, fnCallback);
+	}, 100);
+} else if (charIndex < chunks[chunkIndex].length) {
+	var span = document.createElement('span');
+	span.innerHTML = chunks[chunkIndex].charAt(charIndex);
+	span.className = 'typewriter-fade';
+	container.appendChild(span);
+
+typingTimeout = setTimeout(function() {
+		typeWriter(chunks, chunkIndex, charIndex + 1, fnCallback);
+	}, 20);
+} else {
+typingTimeout = setTimeout(function() {
+		typeWriter(chunks, chunkIndex + 1, 0, fnCallback);
+	}, 100);
+}
+} else if (typeof fnCallback == 'function') {
+fnCallback();
+}
+
+}
+
+function prepareStory(story) {
+const regex = /<br>|[^<>]+/g;
+return story.match(regex);
+}
+
+
+
+</script>
+<script>
+function printForma() {
+  // Select the element to print
+  const printElement = document.getElementById("Forma");
+
+  // Get the stylesheets from the current page
+  const stylesheets = Array.from(document.styleSheets)
+    .map((styleSheet) => {
+      try {
+        if (styleSheet.href) {
+          return `<link rel="stylesheet" href="${styleSheet.href}">`;
+        } else if (styleSheet.cssRules) {
+          let rules = Array.from(styleSheet.cssRules)
+            .map((rule) => rule.cssText)
+            .join("");
+          return `<style>${rules}</style>`;
+        }
+      } catch (e) {
+        console.error("Error accessing stylesheet:", e);
+        return ""; // Skip inaccessible stylesheets
+      }
+    })
+    .join("");
+
+  // Create a new window for printing
+  const printWindow = window.open("", "_blank", "width=800,height=600");
+
+  // Write the content of the element into the new window
+  printWindow.document.write(`
+    <html>
+      <head>
+        <title>Print NPC</title>
+        ${stylesheets} <!-- Add the styles -->
+      </head>
+      <body>
+        ${printElement.outerHTML} <!-- Add the grid element -->
+      </body>
+    </html>
+  `);
+
+  // Close the document to finish loading
+  printWindow.document.close();
+
+  // Wait for the new window to load, then print
+  printWindow.onload = function () {
+    printWindow.print();
+    printWindow.close();
+  };
+}
+
+</script>
+
+<script>
+    document.getElementById('try-again-button').addEventListener('click', function () {
+        // Extract existing parameters from the NPC
+        const race = "{{ npc.race | safe }}";
+        const archetype = "{{ npc.archetype | safe }}";
+        const level = "{{ npc.level | safe }}";
+
+        // Generate a new random seed
+        const newSeed = Math.floor(Math.random() * 2 ** 12);
+
+        // Redirect to the NPC display route with the new seed
+        window.location.href = `/npc/${encodeURIComponent(race)}/${encodeURIComponent(archetype)}/${encodeURIComponent(level)}/${newSeed}`;
+    });
+</script>
+
+<script>
+	function quickRedirect() {
+		const race = document.getElementById("quick-race").value;
+		const archetype = document.getElementById("quick-archetype").value;
+		const level = {{ npc.level if npc else 1 }};
+		const seed = Math.floor(Math.random() * 16384);
+
+		if (race && archetype) {
+			const url = `/npc/${race}/${archetype}/${level}/${seed}`;
+			window.location.href = url;
+		}
+	}
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+	const minus = document.querySelector('.minus');
+	const plus = document.querySelector('.plus');
+
+	const race = "{{ npc.race }}";
+	const archetype = "{{ npc.archetype }}";
+	const level = {{ npc.level }};
+	const seed = document.getElementById('seed-preserved').value;
+
+	function redirectWithLevel(newLevel) {
+		window.location.href = `/npc/${encodeURIComponent(race)}/${encodeURIComponent(archetype)}/${newLevel}/${seed}`;
+	}
+
+	minus.addEventListener('click', () => {
+		if (level > 1) redirectWithLevel(level - 1);
+	});
+
+	plus.addEventListener('click', () => {
+		if (level < 100) redirectWithLevel(level + 1);
+	});
+});
+</script>
+
+
+{% endblock %}

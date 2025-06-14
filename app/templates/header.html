@@ -1,0 +1,27 @@
+
+<header>
+    <h1><a href="/">Legendary Generations</a></h1>
+        <nav>
+			<button class="fantasy-button">⚜️</button>
+            <ul class="dropdown-menu">
+                <li><a href="/"><button class="fantasy-button">♜ Home</button></a></li>
+                <li><a href="/npc"><button class="fantasy-button">⛧ NPC</button></a></li>
+				<li><a href="/list"><button class="fantasy-button">⚔ 10 Names</button></a></li>
+				<li><a href="/character"><button class="fantasy-button">⚝ Character</button></a></li>
+            	</ul>
+        	</nav>
+	</header>
+
+
+
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		const menuButton = document.querySelector(".fantasy-button");
+		const nav = document.querySelector("nav");
+
+		menuButton.addEventListener("click", () => {
+			nav.classList.toggle("active");
+			// Toggle the visibility of the dropdown menu
+			});
+		});
+	</script>

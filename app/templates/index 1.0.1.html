@@ -1,0 +1,110 @@
+
+{% extends "base.html" %}
+
+
+<head>
+
+    <title>NPC Generator</title>
+
+
+<style>
+    @keyframes fadeToBlack {
+        from {
+            color: white;
+        }
+        to {
+            color: black;
+        }
+    }
+    .typewriter-fade {
+        animation: fadeToBlack 0.5s forwards;
+    }
+</style>
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">NPC Generator</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <!-- Add more nav items here if needed -->
+    </ul>
+  </div>
+</nav>
+
+
+    <div class="content">
+	<div class="centered-content">
+        	<h1>Welcome to the NPC Generator!</h1>
+        	<p>Choose options and click the button to generate a new NPC.</p>
+
+        <!-- Race Selection Form -->
+	<form action="/generate_npc" method="post" id="npc-form">
+    		<label for="race-select">Race:</label>
+    		<select name="race" id="race-select">
+        		{% for race in races %}
+        		<option value="{{ race }}">{{ race }}</option>
+        		{% endfor %}
+    		</select>
+
+    		<label for="background-select">Background:</label>
+    		<select name="background" id="background-select">
+        		{% for background in backgrounds %}
+        		<option value="{{ background }}">{{ background }}</option>
+        		{% endfor %}
+    		</select>
+    		<label for="level-input">Level:</label>
+   		<input type="number" id="level-input" name="level" min="0" max="40"
+           		placeholder="0=Random[1..30]" style="color: #aaa;"
+          	 	onfocus="this.style.color = 'black';"
+           		onblur="if(this.value === '') {this.style.color = '#aaa';}">
+	</br>
+
+	</form>
+        <button onclick="generateNPC(event)" class="btn btn-primary btn-lg">Generate NPC</button>
+
+
+        <div id="npc-container"style="max-width: 100%; overflow-x: auto;"></div>
+    </div></div>
+
+   <!-- Story Generation Section -->
+    <div id="story-section" class="book-style">
+        <h2>Character Backstory</h2>
+        <p>Enter your OpenAI API key to generate a unique backstory for your character.</p>
+
+        <form id="story-form">
+            <div class="form-group">
+                <label for="api-key-input">OpenAI API Key:</label>
+                <input type="text" id="api-key-input" name="api_key" class="form-control" placeholder="Enter API Key">
+                <small id="api-key-help" class="form-text text-muted">
+                    We don't record any data from our users. You can perfectly use the key and then delete it. Don't have an API key? Get one <a href="https://platform.openai.com/api-keys" target="_blank">here</a>.
+                </small>
+            </div>
+            <button type="button" onclick="generateStory(event)" class="btn btn-secondary">Generate Story</button>
+<span id="loading-indicator" style="display: none; font-size: 24px;"> 💭</span>
+<span id="portrait-loading-indicator" style="display: none; font-size: 24px;"> 🎨</span>
+<!-- <button type="button" onclick="generatePortrait(event)" class="btn btn-secondary" style="float: right;">Generate Portrait</button>-->
+
+        </form>
+
+        <div id="story-container" class="story-output">
+    	<div class="portrait-container" id="portrait-container"></div>
+   		 <!-- The written story goes here -->
+	</div>
+
+    </div>
+
+<script src="/js/scripts.js"></script>
+
+
+
+</body>
+</html>

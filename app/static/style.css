@@ -1,0 +1,689 @@
+
+/* ============================================
+    Variables for Theme
+   ============================================ */
+
+:root {
+  --back-color:      #fff9f0; 	/* Light background color */
+  --text-color:      #333333; 	/* Dark gray for text */
+  --primary-color:   #aa0a12;  	/* Blood red */
+  --secondary-color: #cd1017;	/* Lighter Blood red */
+  --third-color:     #cd9710;	/* Orangy */
+  --fourth-color:    #cda410;	/* Goldy */
+  --gold-color:		 #d4af37;
+  --black-color:	 #000;
+
+  --font-header:  'Cinzel',   	'Nordic Chance',	'Lodeh',	sans-serif;
+  --font-text:    'Pirate One', 			'Merriweather', serif, 'Lodeh';
+  --font-fancy:   'kings and pirates', 'Pirate One', 	'Cinzel';
+  --font-impact:  'JSL Ancient', 'MiddleSaxonyText', 'Kanzlei';
+}
+
+/* ============================================
+   Global Styles
+   ============================================ */
+body, html {
+  	color: 				var(--text-color);
+  	font-family: 		var(--font-text);
+  	background-color: 	var(--back-color);
+	margin: 0;
+    padding: 0;
+  	text-align: center; /* Centers text horizontally */
+ 	height: 	100%;
+	}
+
+/* ============================================
+   Layout and Containers
+   ============================================ */
+.container {
+   width: 80%; /* Adjust width as needed */
+   margin: auto; /* This centers the .container div horizontally */
+   min-width: 300px; /* Prevent compression */
+   }
+
+.centered-content {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   text-align: center; /* Center align text and inline elements like buttons */
+   }
+
+#npc-container {
+   width: 100%; /* Full width of the container */
+   max-width: 100%; /* Ensures that the container does not exceed the width of its parent */
+   overflow-x: auto; /* Horizontal scrollbar if content is too wide */
+   }
+
+/* ============================================
+  Header and Navigation
+  ============================================ */
+header {
+	background-color: var(--black-color);
+	color: var(--primary-color);
+	padding: 10px 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+	font-family: var(--font-header);
+	font-size:	1.1em;
+	}
+
+header h1 {
+	font-family: var(--font-header);
+    color: var(--secondary-fancy);
+    text-decoration: none;
+	margin-left: 30px; /* Adjust as necessary */
+	text-decoration: none;
+	}
+
+header h1 a {
+    text-decoration: none;
+	color: inherit;
+	}
+
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+	}
+
+nav ul li {
+    margin-right: 20px; /* Space between links */
+	}
+
+nav ul li a {
+    color: var(--primary-color); /* Link color */
+    text-decoration: none;
+	}
+
+header .fantasy-button{
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.0em;
+    font-family: var(--font-header);
+    cursor: pointer;
+	}
+
+header .fantasy-button:hover{
+    font-size: 1.1em;
+	}
+/* Dropdown menu styling */
+.dropdown-menu {
+	display: none; /* Hidden by default */
+	position: absolute;
+	top: 100%; /* Position right below the button */
+	right: 0; /* Align to the right of the header */
+	background-color: var(--black-color);
+	list-style: none;
+	margin: 0;
+	padding: 10px 0;
+	z-index: 1000;
+	color: var(--gold-color); /* gold text */
+	border: 2px solid var(--gold-color); /* gold border */
+	font-family: var(--font-fancy);
+	text-shadow: 0px 0px 8px var(--fourth-color);
+	box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+	border-radius: 8px;
+	transition: all 0.5s ease;
+	}
+
+.dropdown-menu li {
+	margin: 0;
+	padding: 0;
+	}
+
+.dropdown-menu li a {
+	display: block;
+	color: var(--gold-color);
+	padding: 10px 20px;
+	text-decoration: none;
+	font-family: var(--font-fancy);
+	font-size: 16px;
+	transition: background-color 0.5s ease;
+	}
+
+.dropdown-menu li a:hover {
+	background-color: var(--secondary-color);
+	color: var(--back-color);
+	}
+
+/* Show dropdown menu when button is active */
+nav.active .dropdown-menu {
+	display: block; /* Reveal the menu */
+	}
+
+
+/* ============================================
+   Typography
+   ============================================ */
+
+h1 {
+	font-family: var(--font-fancy);
+	color: var(--primary-color);
+	font-size: 1.5em;
+   }
+
+h2 {
+	font-family: var(--font-header);
+	color: var(--primary-color);
+	margin-bottom: -10px;
+	font-size: 1.3em;
+	}
+
+h3, h4, h5  {
+	font-family: var(--font-header);
+	line-height:	1em;
+	}
+h3, h4{
+	font-size: 1em; /* Making paragraphs smaller */
+	line-height: 1em; /* Improving readability */
+	}
+h5  {
+	color: var(--secondary-color);
+	font-size: 1em;
+	}
+
+
+h1, h2, h3, h4, h5 {
+	margin-top: 0px; /* Increase space above the text */
+	margin-bottom: 0px; /* Increase space below the text */
+	}
+
+
+p, h1, h2, .btn {
+	word-wrap: break-word; /* Ensures text doesn't overflow */
+	}
+
+h5 {
+	font-family: var(--font-fancy);
+	color: var(--secondary-color);
+	}
+h6 {
+  	color: 				var(--text-color);
+	font-family: 		var(--font-header);
+  	margin: 	10;
+  	padding: 	10;
+  	text-align: center; /* Centers text horizontally */
+ 	height: 	100%;
+    margin: 0;
+	font-weight: bold;
+	font-size:1.1em;
+	}
+
+b {
+	color: var(--primary-color);
+	font-family: var(--font-impact);
+	font-size: 1.2em;
+	}
+
+i {
+	color: var(--text-color);
+	font-family: var(--font-impact);
+	font-size: 1.1em;
+	}
+
+u {
+	color: var(--primary-color);
+	font-family: var(--font-fancy);
+	text-decoration: underline dotted var(--text-color);
+	font-size:0.8em;
+	}
+
+/* ============================================
+   Form Styles
+   ============================================ */
+
+#story-form .form-group {
+   text-align: center;
+   }
+
+#story-form input[type=text] {
+   border: 1px solid var(--secondary-color);
+   border-radius: 4px;
+   padding: 10px;
+   width: 100%;
+   max-width: 500px; /* To prevent the input from becoming too wide */
+   margin-bottom: 10px;
+   }
+
+/* ============================================
+  Interactive Elements
+  ============================================ */
+.fantasy-button {
+	background-color: var(--black-color); /* black background */
+	color: var(--gold-color); /* gold text */
+	border: 2px solid var(--gold-color); /* gold border */
+	padding: 10px 20px;
+	font-family: var(--font-fancy);
+	text-shadow: 0px 0px 8px var(--fourth-color);
+	box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+	border-radius: 8px;
+	transition: all 0.5s ease;
+	}
+
+.fantasy-button:hover {
+	background-color: var(--primary-color);
+	color: var(--black-color);
+	cursor: pointer;
+	border-color: var(--black-color);
+	font-size:	0.9em;
+	}
+
+
+/* ============================================
+   Media Queries & Backstory Elements
+   ============================================ */
+/* Ensure the form and story container are not too narrow on smaller screens */
+@media (max-width: 750px) {
+   .book-style, #story-form input[type=text] {
+       width: 90%;
+       margin-left: auto;
+       margin-right: auto;
+	   }
+	}
+.scroll-section {
+   background: rgba(255,255,255,0.8); /* Semi-transparent white for a parchment look */
+   border-radius: 10px; /* Rounded corners */
+   padding: 20px; /* Space inside the borders */
+   margin: 20px auto; /* Vertical spacing and horizontal centering */
+   box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+	}
+.portrait-container {
+    max-width: 	100%; 		/* Ensures the portrait fits within the story container */
+    margin: 	10px auto; 	/* Centers the portrait and adds some spacing */
+    text-align: center; 	/* Centers the image */
+	}
+
+.portrait-container img {
+    float: 	right; /* This will align the image to the right */
+    margin: 0 0 10px 10px; /* This adds some space around the image */
+    width: 	auto; /* It will maintain the original image width */
+    max-width: 250px; /* It ensures the image is no wider than 150px */
+    height: auto; /* It will maintain the aspect ratio of the image */
+	}
+
+/* ============================================
+   Custom Classes
+   ============================================ */
+
+
+
+/* Link styling for the API key help text */
+#api-key-help a {
+    color: var(--primary-color); /* Match the button color for consistency */
+    text-decoration: underline;
+	}
+
+
+#api-key-help a:hover {
+    color: var(--secondary-color);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Styling for the story section to look like a page from a magical tome */
+.book-style {
+    color: #301b09; /* Dark brown text color for better readability on parchment */
+    font-family: var(--font-impact), 'Dancing Script', cursive; /* A cursive font that feels whimsical */
+    padding: 20px;
+    margin-top: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Soft shadow for depth */
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.story-output {
+
+    white-space: pre-wrap;
+    text-align: left;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.8); /* Translucent white to show some parchment texture */
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1); /* Inner shadow for an inset effect */
+    overflow: auto;
+    font-size: 18px; /* Larger font size for easy reading */
+    position: relative; /* For positioning the image within the story */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.ability-scores {
+    margin: auto; /* Center the table on the page */
+    border-collapse: collapse; /* Optional: collapse the border */
+    background-color: var(--back-color); /* Background color for the table */
+    color: var(--text-color); /* Color of the text */
+    border-radius: 2px; /* Rounded corners for the table */
+    overflow: hidden; /* Ensures the border-radius clips the content */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for depth */
+}
+
+.ability-scores th, .ability-scores td {
+    border: 2px solid var(--primary-color); /* Border color for the cells */
+    padding: 3px; /* Padding inside the cells */
+    text-align: center; /* Center the text in the cells */
+}
+
+.ability-scores th {
+    background-color: var(--primary-color); /* Darker background for the header */
+    color: var(--back-color); /* Light text color for the header */
+  	font-family: var(--font-fancy);
+}
+
+
+
+
+
+.bc4 {
+    font-weight: italic;
+    color: var(--third-color);
+	font-size:0.7em;
+
+}
+
+
+.fantasy-select {
+    background-color: var(--black-color); /* black background */
+    color: var(--gold-color); /* gold text */
+    border: 2px solid var(--gold-color); /* gold border */
+    padding: 10px;
+    font-family: var(--font-fancy);
+    border-radius: 8px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+    appearance: none; /* Remove default style of select */
+    width: 100%; /* You might adjust this based on your layout */
+    cursor: pointer;
+	text-shadow: 0px 0px 8px var(--gold-color);
+	transition: all 3s ease;
+}
+
+.fantasy-select:hover {
+    /*/background-color: var(--fourth-color);/*/
+	text-shadow: 0px 0px 10px var(--black-color);
+	transition: all 1s ease;
+	color: var(--primary-color);
+	cursor: pointer;
+	border-color: var(--primary-color);
+	/*/font-size: 1.1em/*/
+	}
+
+.fantasy-select:focus {
+    outline: none; /* Removes the default focus outline */
+    border-color: var(--gold-color); /* Brighter gold for focus */
+}
+
+.fantasy-option {
+    background-color: var(--black-color); /* black background for options */
+    color: var(--gold-color); /* gold text for options */
+}
+
+/* Styling for the dropdown arrow - using a custom arrow image */
+.fantasy-select {
+    background-position: right 10px center; /* Positioning the arrow image */
+    background-repeat: no-repeat;
+	text-align: center; /* Centers text horizontally */
+}
+
+.level {
+	width: 50%;
+	}
+
+.btn-main {
+		  background-color: #007bff;
+		  color: #fff;
+		  padding: 12px 24px;
+		  font-size: 18px;
+		  border: none;
+		  border-radius: 4px;
+		  cursor: pointer;
+		}
+
+.btn-main:hover {
+		  background-color: #0056b3;
+		}
+
+		/* Style for the number input field */
+input[type="number"].fantasy-input {
+		    background-color: var(--black-color); /* Black background */
+		    color: var(--gold-color); /* Gold text */
+		    border: 2px solid var(--gold-color); /* Gold border */
+		    padding: 10px;
+		    font-family: var(--font-header); /* Matching font */
+		    border-radius: 8px;
+		    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+		    appearance: textfield; /* Removes the default styling */
+		    width: 50%; /* Adjust width to fit layout */
+			text-align: center; /* Centers text horizontally */
+		}
+
+		/* Hover effect for the number input */
+		input[type="number"].fantasy-input:hover {
+			color: var(--primary-color); /* Gold text */
+			text-shadow: 0px 0px 10px var(--black-color);
+			transition: all 1s ease;
+			color: var(--primary-color);
+			cursor: pointer;
+			border-color: var(--primary-color);
+		}
+
+		/* Focus effect for the number input */
+		input[type="number"].fantasy-input:focus {
+		    outline: none; /* Removes default focus outline */
+		    border-color: #ffd700; /* Brighter gold for focus */
+		}
+
+		/* Customizing the arrows for number input */
+		input[type="number"].fantasy-input::-webkit-inner-spin-button,
+		input[type="number"].fantasy-input::-webkit-outer-spin-button {
+		    -webkit-appearance: none; /* Removes default arrow styling */
+		    appearance: none; /* Ensures cross-browser consistency */
+		    margin: 0; /* Removes extra margin added by browsers */
+		}
+
+		input[type="number"].fantasy-input::after {
+		    content: '+'; /* You can add a custom arrow here using an image or character */
+		}
+
+.container {
+    min-width: 200px; /* Prevent it from compressing too short */
+	}
+
+.npc-container {
+    max-width: 794px;  /* A4 width at 96 DPI */
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fdfdfd;
+    border: 1px solid #ccc;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+    font-family: 'Garamond', serif;
+}
+
+.npc-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.npc-header h2, h1 {
+    margin: 5px 0;
+}
+
+@media (max-width: 600px) {
+    .npc-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 3px;
+    }
+    .npc-textbox {
+        grid-column: span 1;
+    }
+}
+
+@media (min-width: 1200px) {
+    .npc-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 3px;
+    }
+    .npc-textbox {
+        grid-column: span 3;
+    }
+}
+
+
+.npc-grid {
+    display: grid; /* Enable grid layout */
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* Flexible */
+    width: 100%; /* Ensures grid spans the full container */
+    max-width: 800px; /* A4 paper width for printing */
+    margin: auto; /* Centers the grid */
+    background-color: var(--back-color); /* Background for the grid */
+	gap: 1px;
+    transition: all 0.3s ease; /* Smooth animations when repositioning */
+	    align-items: start; /* Align items to the top */
+}
+
+.npc-box, .npc-textbox, .npc-scores{
+    border: 2px solid #333; /* Styling for each box */
+    border-radius: 4px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1); /* Adds depth to boxes */
+    background-color: #fff; /* White background for readability */
+    transition: all 0.3s ease;
+    word-wrap: break-word; /* Breaks long words to fit within the box */
+	align-self: start;
+	gap: 0px;
+	flex-grow: 1;
+	z-index: 1; /* Place it behind text */
+
+}
+.npc-box {
+    padding: 5px;
+	position: relative; /* Enable positioning for the pseudo-element */
+    transition: all 0.3s ease;
+	z-index: 2;
+
+}
+
+.npc-textbox {
+    padding: 5px;
+    grid-column: span 1; /* Textboxes span wider columns */
+    border: 2px solid #AAA; /* Styling for each box */
+    transition: all 0.3s ease;
+	position: relative; /* Enable positioning for the pseudo-element */
+
+	}
+
+.npc-scores {
+    flex-direction: column; /* Stack children vertically */
+    gap: 2px; /* Add spacing between boxes */
+    align-items: stretch; /* Ensure all boxes align to the container width */
+}
+
+
+.symbol{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 30px; /* Circle size */
+    height: 30px; /* Circle size */
+    border-radius: 50%; /* Make it circular */
+    background-color: rgba(0, 0, 0, 0.2); /* Semi-transparent background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px; /* Adjust symbol size */
+    color: rgba(0, 0, 0, 0.5); /* Symbol color */
+    pointer-events: none; /* Prevent interaction blocking */
+	z-index: -1; /* Place it behind text */
+}
+
+/* Print-specific styles */
+@media print {
+    .symbol {
+        z-index: -1; /* Ensure it remains below the text */
+    }
+
+    .npc-box {
+        position: relative;
+        z-index: 1; /* Ensure text stays above `.symbol` */
+    }
+}
+
+.class-feature {
+  margin-bottom: 1em;
+  padding: 0.5em;
+  border-left: 4px solid #888;
+  background-color: #f8f8f8;
+  font-size: 0.95em;
+}
+.class-feature h4 {
+  margin: 0;
+  font-size: 1.1em;
+  color: #333;
+}
+.class-feature .level {
+  font-size: 0.9em;
+  color: #666;
+  margin-left: 0.5em;
+}
