@@ -1,0 +1,18 @@
+backgrounds = [
+	"Acolyte",
+	"Artisan",
+	"Charlatan",
+	"Criminal",
+	"Entertainer",
+	"Farmer",
+	"Guard",
+	"Guide",
+	"Hermit",
+	"Merchant",
+	"Noble",
+	"Sage",
+	"Sailor",
+	"Scribe",
+	"Soldier",
+	"Wayfarer",
+	]
