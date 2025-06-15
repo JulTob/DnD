@@ -90,13 +90,33 @@
 					</ul>
 			</div>
 		  <!-- Equipment -->
-		  <div class="npc-textbox">{{ character.equipment }}</div>
 
 		  <div class="npc-textbox">
 		    <h3>Equipment</h3>
 		    <table class="objects-table">
+				<tr>
+		          <td>✅</td>
+		          <td><b>{{ character.equipment.defense | safe  }}</b></td>
+		        </tr>
+				<tr>
+		          <td>✅</td>
+		          <td><b>{{ character.equipment.melee | safe   }}</b></td>
+		        </tr>
+				<tr>
+		          <td>✅</td>
+		          <td><b>{{ character.equipment.ranged | safe   }}</b></td>
+		        	</tr>
+				<tr>
+		          <td>✅</td>
+		          <td><b>{{ character.equipment.right | safe   }}</b></td>
+		        	</tr>
+				<tr>
+		          <td>✅</td>
+		          <td><b>{{ character.equipment.left | safe   }}</b></td>
+		        	</tr>
+
 		      <tbody>
-		        {% for item in character.equipment.equipped %}
+		        {% for item in character.equipment.equipped    %}
 		        <tr>
 		          <td>✅</td>
 		          <td><b>{{ item.name }}</b></td>
