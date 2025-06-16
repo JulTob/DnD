@@ -989,31 +989,41 @@ class Char_Skills:
 		]
 
 def get_other_proficiencies(skills):
-	return [
-	    tool.name for tool in [
-	        skills.Musical_Instrument,
-	        skills.Thieves_Tools,
-	        skills.Disguise_Kit,
-	        skills.Forgery_Kit,
-	        skills.Gaming_Set,
-	        skills.Navigator_Tools,
-	        skills.Herbalism_Kit,
-	        skills.Alchemist_Supplies,
-	        skills.Brewer_Supplies,
-	        skills.Calligrapher_Supplies,
-	        skills.Carpenter_Tools,
-	        skills.Cartographer_Tools,
-	        skills.Cobbler_Tools,
-	        skills.Cook_Utensils,
-	        skills.Glassblower_Tools,
-	        skills.Jeweler_Tools,
-	        skills.Leatherworker_Tools,
-	        skills.Mason_Tools,
-	        skills.Painter_Supplies,
-	        skills.Potter_Tools,
-	        skills.Smith_Tools,
-	        skills.Tinker_Tools,
-	        skills.Weaver_Tools,
-	        skills.Woodcarver_Tools,
-	    ] if tool.is_proficient()
+	result = [
+		tool.name for tool in [
+			skills.Musical_Instrument,
+			skills.Thieves_Tools,
+			skills.Disguise_Kit,
+			skills.Forgery_Kit,
+			skills.Gaming_Set,
+			skills.Navigator_Tools,
+			skills.Herbalism_Kit,
+			skills.Alchemist_Supplies,
+			skills.Brewer_Supplies,
+			skills.Calligrapher_Supplies,
+			skills.Carpenter_Tools,
+			skills.Cartographer_Tools,
+			skills.Cobbler_Tools,
+			skills.Cook_Utensils,
+			skills.Glassblower_Tools,
+			skills.Jeweler_Tools,
+			skills.Leatherworker_Tools,
+			skills.Mason_Tools,
+			skills.Painter_Supplies,
+			skills.Potter_Tools,
+			skills.Smith_Tools,
+			skills.Tinker_Tools,
+			skills.Weaver_Tools,
+			skills.Woodcarver_Tools,
+		] if tool.is_proficient()
 	]
+	# 2. add weapon proficiencies (avoid duplicates)
+	for wpn in skills.get_proficient_weapons():
+		if wpn.name not in result:
+			result.append(wpn.name)
+	# 3. add armour proficiencies
+	for arm in skills.get_proficient_armors():
+		if arm.name not in result:
+			result.append(arm.name)
+
+	return result
