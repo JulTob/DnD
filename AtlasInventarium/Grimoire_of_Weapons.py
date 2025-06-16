@@ -12,24 +12,29 @@ except ImportError as e:
 
 
 class Weapon:
-	def __init__(self,name,damage_intensity=1,damage_dice='d4',attack_modifier= 0,damage_type= "Bludgeoning",range_distance="",properties=""):
-		self.name = name
-		self.damage_intensity = damage_intensity
-		self.damage_dice = 		damage_dice
-		self.attack_modifier = 	attack_modifier
-		self.damage_type = 		damage_type
-		self.range_distance = 	range_distance
-		self.properties = 		properties
+	def __init__(wpn,name,damage_intensity=1,damage_dice='d4',attack_modifier= 0,damage_type= "Bludgeoning",range_distance="",properties=""):
+		wpn.name = name
+		wpn.damage_intensity = damage_intensity
+		wpn.damage_dice = 		damage_dice
+		wpn.attack_modifier = 	attack_modifier
+		wpn.damage_type = 		damage_type
+		wpn.range_distance = 	range_distance
+		wpn.properties = 		properties
 
-	def __str__(self):
-		result = f"{self.damage_intensity}{self.damage_dice}"
-		if self.attack_modifier:
-			result += f"{self.attack_modifier:+}"
-		result += f" {self.damage_type}"
-		if self.range_distance:
-				result += f", {self.range_distance}"
-		if self.properties:
-				result += f", {self.properties}."
+	@property
+	def weapon_type(wpn):
+		return str(wpn)
+
+
+	def __str__(wpn):
+		result = f"{wpn.damage_intensity}{wpn.damage_dice}"
+		if wpn.attack_modifier:
+			result += f"{wpn.attack_modifier:+}"
+		result += f" {wpn.damage_type}"
+		if wpn.range_distance:
+				result += f", {wpn.range_distance}"
+		if wpn.properties:
+				result += f", {wpn.properties}."
 		else:
 				result += "."
-		return Entry(self.name, result)
+		return Entry(wpn.name, result)
