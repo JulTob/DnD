@@ -334,7 +334,6 @@ def Melee_Martial(self, DEX_mod, STR_mod):
 	self.purse -= ranged.value
 	return melee
 
-
 def Ranged_Martial(self, DEX_mod, STR_mod):
 	Dart = Weapon(
 		name = "Darts", weight=5, value=1, quantity=20,
