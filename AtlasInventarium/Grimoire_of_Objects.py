@@ -1,7 +1,7 @@
 import random
 from AtlasLudus.Map_of_Dice import Dice
 from AtlasActorLudi.Map_of_Scores import PB, Modifier
-
+#from AtlasInventarium.Map_of_Weapons import Weapons
 
 def setObjects(char):
 	""" Equip character with items based on skills and proficiencies. """
@@ -234,80 +234,66 @@ def GenerateEquipment(char):
 	Equips a character with armor, weapons, and gear based on class, background, and proficiencies.
 	Spends available budget wisely.
 	"""
-	equip = char.equipment
-	skills = char.skills
+	#equip = char.equipment
+	#skills = char.skills
 	abilities = char.abilities
 
 	# Step 1: Calculate budget based on class, background, and level
-	equip.calculate_budget(char.char_class, char.background, char.level)
+	char.equipment.calculate_budget(char.char_class, char.background, char.level)
 
 	# Step 2: Equip armor intelligently
-	set_Armor(char)  # Already prefers Unarmored Defense if Monk/Barb
+	set_Armor(char)
 
-	# Step 3: Primary weapon based on STR or DEX
-	if skills.Martial_Weapons.is_proficient():
-		weapons = [
-			Weapon(
-				name="Longsword",
-				value=15,
-				weight=3,
-				N=1, D=8,
-				Mod=Modifier(abilities.STR),
-				dmg="slashing",
-				description="Standard martial blade",
-				weapon_type="Martial",
-				mastery="Swords"
-				),
-			]
-		weapon = random.choice(weapons)
-		equip.buy_item(weapon)
-		equip.equip_right(weapon)
+
+	if char.skills.Martial_Weapons.is_proficient():
+		weapon =  char.equipment.Melee_Martial(Modifier(abilities.DEX), Modifier(abilities.STR))
+	else:
+		weapon =  char.equipment.Melee(Modifier(abilities.DEX), Modifier(abilities.STR))
+
+	char.equipment.buy_item(weapon)
+	char.equipment.equip_right(weapon)
 
 	# Distance weapon
-	if skills.Simple_Weapons.is_proficient():
-		weapons = [
-			Weapon(
-				name="Shortbow",
-				value=25,
-				weight=2,
-				N=1, D=6,
-				Mod=Modifier(abilities.DEX),
-				dmg="piercing",
-				description="Light ranged weapon",
-				weapon_type="Ranged",
-				mastery="Bows"
-				),
-			]
-		weapon = random.choice(weapons)
-		equip.buy_item(weapon)
-		equip.equip_ranged(weapon)
-
+	if char.skills.Martial_Weapons.is_proficient():
+		weapon = char.equipment.Ranged_Martial(Modifier(abilities.DEX), Modifier(abilities.STR))
 	else:
-		# Fallback: give basic club if no proficiencies
-		weapons = [
-			Weapon(
-				name="Club",
-				value=1,
-				weight=2,
-				N=1, D=4,
-				Mod=Modifier(abilities.STR),
-				dmg="bludgeoning",
-				description="Simple melee weapon"
-				) ,
-			]
-		equip.buy_item(weapon)
-		equip.equip_right(weapon)
+		weapon = char.equipment.Ranged(Modifier(abilities.DEX), Modifier(abilities.STR))
+	char.equipment.buy_item(weapon)
+	char.equipment.equip_left(weapon)
+	# Equip Ranged Weapon
+	if char.skills.Martial_Weapons.is_proficient():
+		ranged_weapon = char.equipment.Ranged_Martial(
+			Modifier(char.abilities.DEX), Modifier(char.abilities.STR))
+	else:
+		ranged_weapon = char.equipment.Ranged(
+			Modifier(char.abilities.DEX), Modifier(char.abilities.STR))
+
+	char.equipment.buy_item(ranged_weapon)
+	char.equipment.equip_item(ranged_weapon)
+
+	# Step 5: Shield (if proficient and left hand free)
+	if char.skills.Shields.is_proficient() and char.equipment.left is None:
+		shield = Object(name="Shield", value=10, weight=6, description="+2 AC shield")
+		char.equipment.buy_item(shield)
+		char.equipment.equip_item(shield, slot="left")
+
 
 	# Step 4: Shield if proficient
-	if skills.Shields.is_proficient():
-		shield = Object(
-			name="Shield",
-			value=10,
-			weight=6,
-			description="+2 AC shield"
-		)
-		equip.buy_item(shield)
-		equip.equip_left(shield)
+	if char.skills.Shields.is_proficient() and char.equipment.left is None:
+		shield = Object(name="Shield", value=10, weight=6, description="+2 AC shield")
+		char.equipment.buy_item(shield)
+		char.equipment.equip_item(shield, slot="left")
+
+	# Step 7: Optional - Add a few magic items if high-level character (level >=5)
+	if char.level >= 5 and char.equipment.purse >= 100:
+		magic_items = [
+			Object("Potion of Healing", 50, 0.5, description="Restores 2d4+2 HP"),
+			Object("Scroll of Fireball", 100, 0.2, description="Cast Fireball once"),
+			Object("Cloak of Protection", 200, 1, description="+1 AC and saving throws"),
+			]
+		for item in magic_items:
+			if char.equipment.purse >= item.value:
+				char.equipment.buy_item(item)
 
 	# Step 5: Starter tools and survival items
 	tools = [
@@ -316,29 +302,7 @@ def GenerateEquipment(char):
 		Object("Rope", 1, 1, description="50ft hempen rope"),
 		Object("Torch", 0.1, 1, quantity=3, description="Standard torch"),
 		Object("Waterskin", 2, 2, description="Filled with water"),
-	]
-
-	random.shuffle(tools)
-	for item in tools:
-		if equip.purse >= item.value:
-			equip.buy_item(item)
-
-	# Calculate money
-	char.equipment.calculate_budget(char.char_class, char.background, char.level)
-
-	# Add armor based on proficiencies
-	set_Armor(char)
-
-	# Add one weapon based on proficiencies
-	if char.skills.Swords.is_proficient():
-		sword = Weapon(name="Longsword", value=15, weight=3, N=1, D=8, Mod=Modifier(char.abilities.STR), dmg="slashing")
-		char.equipment.buy_item(sword)
-		char.equipment.equip_right(sword)
-	elif char.skills.Bows.is_proficient():
-		bow = Weapon(name="Shortbow", value=25, weight=2, N=1, D=6, Mod=Modifier(char.abilities.DEX), dmg="piercing")
-		char.equipment.buy_item(bow)
-		char.equipment.equip_ranged(bow)
-
+		]
 	# Add basic tools or items if money left
 	if char.equipment.purse > 10:
 		rope = Object(name="Rope", value=1, weight=10, description="50 feet hempen rope")
@@ -348,6 +312,11 @@ def GenerateEquipment(char):
 		torch = Object(name="Torch", value=1, weight=1, quantity=5, description="Standard torches")
 		char.equipment.buy_item(torch)
 
+	random.shuffle(tools)
+	for item in tools:
+		if char.equipment.purse >= item.value:
+			char.equipment.buy_item(item)
+	return
 
 def set_Armor(char):
 	""" Equip the best available armor based on AC and proficiencies. """
@@ -380,8 +349,6 @@ def set_Armor(char):
 				value = 10,
 				weight = 6,
 				description = "+2 AC"))
-
-
 
 class Object:
 	def __init__(object, name="", value=0, weight=0,  quantity=1, rarity="Common", description=""):
@@ -453,19 +420,21 @@ class Armor(Object):
 		return base + extra
 
 class Weapon(Object):
-		def __init__(weapon,
+	def __init__(weapon,
 			name,
 			weight=0,
 			value=0,
 			quantity=1,
 			rarity="Common",
 			armor_class=None,
+			range_distance="",
 			N = 1, D=6,
 			Mod=0,
-			dmg = "bludgeoning",
-			description="",
+			dmg = "Bludgeoning",
 			weapon_type = "Light",
-			mastery = ""):
+			mastery = "",
+			properties="",
+			description=""):
 			"""
 			Initialize an weapon object
 
@@ -474,11 +443,31 @@ class Weapon(Object):
 			"""
 			super().__init__(name, weight, value, quantity, rarity, description)
 			weapon.damage = f"{N}D{D} + {Mod}  ({dmg})"
+			weapon.damage_intensity = N
+			weapon.damage_dice =  D
 			weapon.attack = f"1D20 + {Mod}"
 			weapon.mastery = mastery
-			weapon.weapon_type = weapon.weapon_type
+			#weapon.weapon_type = weapon_type
+			weapon.attack_modifier = 	Mod
+			weapon.damage_type = dmg
+			weapon.range_distance = 	range_distance
+			weapon.properties = weapon_type + mastery + properties + description
 
-		def __repr__(weapon):
+	def __str__(wpn):
+			from AtlasScriptum.Map_of_Formats import Entry
+			result = f"{wpn.damage_intensity}D{wpn.damage_dice}"
+			if wpn.attack_modifier:
+				result += f"{wpn.attack_modifier:+}"
+			result += f" {wpn.damage_type}"
+			if wpn.range_distance:
+					result += f", {wpn.range_distance}"
+			if wpn.properties:
+					result += f", {wpn.properties}."
+			else:
+					result += "."
+			return Entry(wpn.name, result)
+
+	def __repr__(weapon):
 			"""String representation of Equipment."""
 			base = super().__repr__()
 			extra = ""
@@ -486,15 +475,19 @@ class Weapon(Object):
 				extra += f"To Hit: {weapon.attack} , Damage: {weapon.damage}"
 			return base + extra
 
+	@property
+	def weapon_type(wpn):
+			return str(wpn)
+
 class Inventory:
 	def __init__(inventory):
 		"""Inventory to manage equipped items, bag, and coins."""
-		inventory.equipped =	[]  # List of equipped items (weapons, armor, etc.)
+		inventory.equipped = []	# List of equipped items (weapons, armor, etc.)
 		inventory.bag = 	[]	# List of unequipped items
-		inventory.purse = 	0 	# Purse with gold coins
+		inventory.purse = 	0	 # Purse with gold coins
 
 		# Equipped item slots
-		inventory.defense = 	None
+		inventory.defense = None
 		inventory.melee = 	None
 		inventory.ranged = 	None
 		inventory.right = 	None
@@ -510,11 +503,32 @@ class Inventory:
 			self.add_item_to_bag(item)
 			self.purse -= item.value
 
-	def equip_item(self, item):
-		"""Equips an item and moves it from the bag to equipped items."""
+
+	def equip_item(self, item, slot=None):
+		"""Equips an item and moves it from the bag to an equipped slot."""
 		if item in self.bag:
 			self.bag.remove(item)
-		self.add_item_to_bag(item)
+		try:
+			if slot == "right":
+				self.right = item
+			elif slot == "left":
+				self.left = item
+			elif slot == "defense":
+				self.defense = item
+			elif slot == "melee":
+				self.melee = item
+			elif slot == "ranged":
+				self.ranged = item
+		except:
+			if item in self.bag:
+				self.bag.remove(item)
+		self.equipped.append(item)
+
+	def equip_ranged(self, item):
+		if item in self.bag:
+			self.bag.remove(item)
+		self.ranged = item
+		self.equipped.append(item)  # Optional, if you want it tracked in equipped as well.
 
 	def equip_left(self, item):
 		"""Equips an item and moves it from the bag to left hand."""
@@ -553,7 +567,6 @@ class Inventory:
 				self.defense = item
 				self.purse -= item.value
 
-
 	def unequip_item(self, item):
 		"""Unequips an item and moves it to the bag."""
 		if item in self.equipped:
@@ -562,14 +575,9 @@ class Inventory:
 		else:
 			print(f"{item} is not equipped.")
 
-
-
-
 	def __repr__(self):
 		"""Display the equipped items, bag contents, and purse."""
 		return (f"Equipped Items: {[str(item) for item in self.equipped]}\n"
-				f"Bag: {[str(item) for item in self.bag]}\n"
-				f"Purse: {self.purse} gp\n"
 				f"Total Weight: {self.calculate_total_weight()} lbs")
 
 	def calculate_budget(self, char_class, backg, lvl):
@@ -679,7 +687,601 @@ class Inventory:
 			weight=55,
 			value=75,
 			description="Chain mail")
-	# ───────────────────────────────────────────
+
+	def Ranged(self, DEX_mod, STR_mod):
+		Dart = Weapon(
+			name = "Darts", weight=5, value=1, quantity=20,
+			rarity="Common",
+			Mod= max(DEX_mod,STR_mod),
+			N = 1, D=4,
+			description="",
+			mastery = "Vex",
+			weapon_type = "Piercing. 20/60 thrown range. Light. Finesse.")
+
+		Dagger = Weapon(
+			name = "Daggers",
+			weight=5, value=10, quantity=5,
+			rarity="Common",
+			Mod= max(DEX_mod,STR_mod),
+			N = 1, D=4,
+			description="",
+			mastery = "Nick",
+			weapon_type = "Piercing. 20/60 thrown range. Light. Finesse.")
+
+		Javelin = Weapon(
+			name = "Javelins", weight=8, value=2, quantity=4,
+			rarity="Common",
+			Mod= STR_mod,
+			N = 1, D=6,
+			description="",
+			mastery = "Slow",
+			weapon_type = "Piercing. 30/120 thrown range.")
+
+		Light_hammer = Weapon(
+			name = "Light Hammers",
+			weight = 8,
+			value = 8,
+			quantity = 4,
+			rarity = "Common",
+			Mod= STR_mod,
+			N = 1, D=4,
+			description="",
+			mastery = "Nick",
+			weapon_type = "Bludgeoning. 20/60 thrown range. Light.")
+		Handaxe = Weapon(
+			name = "Handaxes",
+			weight = 8,
+			value = 20,
+			quantity = 4,
+			rarity="Common",
+			Mod= STR_mod,
+			N = 1, D=6,
+			description="",
+			mastery = "Vex",
+			weapon_type = "Slashing. 20/60 thrown range. Light.")
+		Spear = Weapon(
+			name = "Spear",
+			value = 1,
+			weight = 3,
+			quantity = 1,
+			rarity="Common",
+			Mod= STR_mod,
+			N = 1, D=6,
+			description="",
+			mastery = "Sap",
+			weapon_type = "Piercing. 20/60 thrown range. Versatile(1d8).")
+
+		Crossbow_light = Weapon(
+			name = "Light Crossbow",
+			N = 1, D=8,
+			weight = 5,
+			quantity = 1,
+			value = 25,
+			rarity="Common",
+			Mod= STR_mod,
+			description="",
+			mastery = "Slow",
+			weapon_type = "Piercing. 80/320 range. Ammunition. Loading. Two-Handed. ")
+
+		Shortbow = Weapon(
+			name = "Shortbow",
+			N = 1, D=6,
+			weight = 2,
+			quantity = 1,
+			value = 25,
+			rarity="Common",
+			Mod= STR_mod,
+			description="",
+			mastery = "Vex",
+			weapon_type = "Piercing. 80/320 range. Ammunition. Two-Handed. ")
+
+		Sling = Weapon(
+			name = "Sling",
+			N = 1, D = 4,
+			weight = 0,
+			quantity = 1,
+			value = 0.1,
+			rarity="Common",
+			Mod= STR_mod,
+			description="",
+			mastery = "Slow",
+			weapon_type = "Bludgeoning. 30/120 range. Bullet. Two-Handed. ")
+
+		rangeds = []
+		for item in [Dart, Dagger, Javelin, Light_hammer, Handaxe, Spear, Crossbow_light, Shortbow, Sling]:
+			if item.value < self.purse:
+				rangeds.append(item)
+		ranged = random.choice(rangeds)
+		self.purse -= ranged.value
+		return ranged
+
+	def Melee(self, DEX_mod, STR_mod):
+		Dagger = Weapon(
+			name = "Dagger",
+			weight=1, value=2, quantity=1,
+			rarity="Common",
+			Mod= max(DEX_mod,STR_mod),
+			N = 1, D=4,
+			description="",
+			mastery = "Nick",
+			weapon_type = "Piercing. 20/60 thrown range. Light. Finesse.")
+		Greatclub = Weapon(
+			name = "Greatclub",
+			weight=10, value=0.2, quantity=1,
+			rarity="Common",
+			Mod= STR_mod,
+			N= 1, D= 8,
+			description="",
+			mastery = "Push",
+			weapon_type = "Bludgeoning. Two-Handed.")
+		Handaxe = Weapon(
+			name = "Handaxe",
+			weight = 2,
+			value = 5,
+			quantity = 1,
+			rarity= "Common",
+			Mod= STR_mod,
+			N= 1, D= 6,
+			description="",
+			mastery = "Vex",
+			weapon_type = "Slashing. 20/60 thrown range. Light.")
+		Javelin = Weapon(
+			name = "Javelins", weight=8, value=2, quantity=4,
+			rarity="Common",
+			Mod= STR_mod,
+			N= 1, D= 6,
+			description="",
+			mastery = "Slow",
+			weapon_type = "Piercing. 30/120 thrown range.")
+		Light_hammer = Weapon(
+			name = "Light Hammers",
+			weight = 2,
+			value = 2,
+			quantity = 1,
+			rarity = "Common",
+			Mod= STR_mod,
+			N = 1, D=4,
+			description="",
+			mastery = "Nick",
+			weapon_type = "Bludgeoning. 20/60 thrown range. Light.")
+		Mace = Weapon(
+			name= "Light Hammers",
+			weight= 4,
+			value= 0.2,
+			quantity= 1,
+			rarity= "Common",
+			Mod= STR_mod,
+			N= 1, D= 6,
+			description= "",
+			mastery= "Sap",
+			weapon_type= "Bludgeoning.")
+
+		Quarterstaff = Weapon(
+			name= "Quarterstaff",
+			weight= 4,
+			value= 0.2,
+			quantity= 1,
+			rarity= "Common",
+			Mod= STR_mod,
+			N= 1, D= 6,
+			description= "Versatile (1d8)",
+			mastery= "Topple",
+			weapon_type= "Bludgeoning.")
+
+		Sickle = Weapon(
+			name= "Sickle",
+			N= 1, D= 4,
+			weight= 2,
+			value= 1,
+			quantity= 1,
+			rarity= "Common",
+			Mod= STR_mod,
+			description= "Versatile (1d8)",
+			mastery= "Nick",
+			weapon_type= "Slashing. Light")
+
+		Spear = Weapon(
+			name = "Spear",
+			value = 1,
+			weight = 3,
+			quantity = 1,
+			rarity="Common",
+			Mod= STR_mod,
+			N = 1, D=6,
+			description="",
+			mastery = "Sap",
+			weapon_type = "Piercing. 20/60 thrown range. Versatile(1d8).")
+
+		melees = []
+		for item in [Dagger, Greatclub, Handaxe, Javelin, Light_hammer, Mace, Quarterstaff,
+			Sickle, Spear]:
+			if item.value < self.purse:
+				melees.append(item)
+		melee = random.choice(melees)
+		self.purse -= melee.value
+		return melee
+
+	def Melee_Martial(self, DEX_mod, STR_mod):
+
+		Dagger = Weapon(
+			name = "Dagger",
+			weight=1, value=2, quantity=1,
+			rarity="Common",
+			Mod= max(DEX_mod,STR_mod),
+			N = 1, D=4,
+			description="",
+			mastery = "Nick",
+			weapon_type = "Piercing. 20/60 thrown range. Light. Finesse.")
+
+		Greatclub = Weapon(
+			name = "Greatclub",
+			weight=10, value=0.2, quantity=1,
+			rarity="Common",
+			Mod= STR_mod,
+			N= 1, D= 8,
+			description="",
+			mastery = "Push",
+			weapon_type = "Bludgeoning. Two-Handed.")
+
+		Handaxe = Weapon(
+			name = "Handaxe",
+			weight = 2,
+			value = 5,
+			quantity = 1,
+			rarity= "Common",
+			Mod= STR_mod,
+			N= 1, D= 6,
+			description="",
+			mastery = "Vex",
+			weapon_type = "Slashing. 20/60 thrown range. Light.")
+
+		Javelin = Weapon(
+			name = "Javelins", weight=8, value=2, quantity=4,
+			rarity="Common",
+			Mod= STR_mod,
+			N= 1, D= 6,
+			description="",
+			mastery = "Slow",
+			weapon_type = "Piercing. 30/120 thrown range.")
+
+		Light_hammer = Weapon(
+			name = "Light Hammers",
+			weight = 2,
+			value = 2,
+			quantity = 1,
+			rarity = "Common",
+			Mod= STR_mod,
+			N = 1, D=4,
+			description="",
+			mastery = "Nick",
+			weapon_type = "Bludgeoning. 20/60 thrown range. Light.")
+
+		Mace = Weapon(
+			name= "Light Hammers",
+			weight= 4,
+			value= 0.2,
+			quantity= 1,
+			rarity= "Common",
+			Mod= STR_mod,
+			N= 1, D= 6,
+			description= "",
+			mastery= "Sap",
+			weapon_type= "Bludgeoning.")
+
+		Quarterstaff = Weapon(
+			name= "Quarterstaff",
+			weight= 4,
+			value= 0.2,
+			quantity= 1,
+			rarity= "Common",
+			Mod= STR_mod,
+			N= 1, D= 6,
+			description= "Versatile (1d8)",
+			mastery= "Topple",
+			weapon_type= "Bludgeoning.")
+
+		Sickle = Weapon(
+			name= "Sickle",
+			N= 1, D= 4,
+			weight= 2,
+			value= 1,
+			quantity= 1,
+			rarity= "Common",
+			Mod= STR_mod,
+			description= "Versatile (1d8)",
+			mastery= "Nick",
+			weapon_type= "Slashing. Light")
+
+		Spear = Weapon(
+			name = "Spear",
+			value = 1,
+			weight = 3,
+			quantity = 1,
+			rarity="Common",
+			Mod= STR_mod,
+			N = 1, D=6,
+			description="",
+			mastery = "Sap",
+			weapon_type = "Piercing. 20/60 thrown range. Versatile(1d8).")
+
+		melees = []
+		for item in [Dagger, Greatclub, Handaxe, Javelin, Light_hammer, Mace, Quarterstaff,
+			Sickle, Spear]:
+			if item.value < self.purse:
+				melees.append(item)
+		melee = random.choice(melees)
+		self.purse -= melee.value
+		return melee
+
+	def Ranged_Martial(self, DEX_mod, STR_mod):
+		Dart = Weapon(
+			name = "Darts", weight=5, value=1, quantity=20,
+			rarity="Common",
+			Mod= max(DEX_mod,STR_mod),
+			N = 1, D=4,
+			description="",
+			mastery = "Vex",
+			weapon_type = "Piercing. 20/60 thrown range. Light. Finesse.")
+
+		Dagger = Weapon(
+			name = "Daggers",
+			weight=5, value=10, quantity=5,
+			rarity="Common",
+			Mod= max(DEX_mod,STR_mod),
+			N = 1, D=4,
+			description="",
+			mastery = "Nick",
+			weapon_type = "Piercing. 20/60 thrown range. Light. Finesse.")
+
+		Javelin = Weapon(
+			name = "Javelins", weight=8, value=2, quantity=4,
+			rarity="Common",
+			Mod= STR_mod,
+			N = 1, D=6,
+			description="",
+			mastery = "Slow",
+			weapon_type = "Piercing. 30/120 thrown range.")
+
+		Light_hammer = Weapon(
+			name = "Light Hammers",
+			weight = 8,
+			value = 8,
+			quantity = 4,
+			rarity = "Common",
+			Mod= STR_mod,
+			N = 1, D=4,
+			description="",
+			mastery = "Nick",
+			weapon_type = "Bludgeoning. 20/60 thrown range. Light.")
+		Handaxe = Weapon(
+			name = "Handaxes",
+			weight = 8,
+			value = 20,
+			quantity = 4,
+			rarity="Common",
+			Mod= STR_mod,
+			N = 1, D=6,
+			description="",
+			mastery = "Vex",
+			weapon_type = "Slashing. 20/60 thrown range. Light.")
+		Spear = Weapon(
+			name = "Spear",
+			value = 1,
+			weight = 3,
+			quantity = 1,
+			rarity="Common",
+			Mod= STR_mod,
+			N = 1, D=6,
+			description="",
+			mastery = "Sap",
+			weapon_type = "Piercing. 20/60 thrown range. Versatile(1d8).")
+
+		Crossbow_light = Weapon(
+			name = "Light Crossbow",
+			N = 1, D=8,
+			weight = 5,
+			quantity = 1,
+			value = 25,
+			rarity="Common",
+			Mod= STR_mod,
+			description="",
+			mastery = "Slow",
+			weapon_type = "Piercing. 80/320 range. Ammunition. Loading. Two-Handed. ")
+
+		Shortbow = Weapon(
+			name = "Shortbow",
+			N = 1, D=6,
+			weight = 2,
+			quantity = 1,
+			value = 25,
+			rarity="Common",
+			Mod= STR_mod,
+			description="",
+			mastery = "Vex",
+			weapon_type = "Piercing. 80/320 range. Ammunition. Two-Handed. ")
+
+		Sling = Weapon(
+			name = "Sling",
+			N = 1, D = 4,
+			weight = 0,
+			quantity = 1,
+			value = 0.1,
+			rarity="Common",
+			Mod= STR_mod,
+			description="",
+			mastery = "Slow",
+			weapon_type = "Bludgeoning. 30/120 range. Bullet. Two-Handed. ")
+
+		rangeds = []
+		for item in [Dart, Dagger, Javelin, Light_hammer, Handaxe, Spear, Crossbow_light, Shortbow, Sling]:
+			if item.value < self.purse:
+				rangeds.append(item)
+		ranged = random.choice(rangeds)
+		self.purse -= ranged.value
+		return ranged
 
 	def Left_Hand_Equipment(self, is_shields = False, is_light = False):
 		return
+
+	def calculate_total_weight(self):
+		"""Calculate the total weight of all equipped and bagged items."""
+		total_weight = 0
+
+		# Sum weight from equipped items
+		for item in [self.defense, self.melee, self.ranged, self.right, self.left]:
+			if item:
+				total_weight += item.weight * item.quantity
+
+		# Sum weight from items in bag
+		for item in self.bag:
+			total_weight += item.weight * item.quantity
+
+		return total_weight
+
+
+def choose_melee_weapon(skills, abilities):
+	"""Return a random melee weapon based on proficiencies."""
+
+	options = []
+	simple = [
+			Weapon(
+				name="Club",
+				value=1,
+				weight=2,
+				N=1,
+				D=4,
+				Mod=Modifier(abilities.STR),
+				dmg="bludgeoning",
+				weapon_type="Simple",
+			)
+		Weapon(
+			name="Mace",
+			value=5,
+			weight=4,
+			N=1,
+			D=6,
+			Mod=Modifier(abilities.STR),
+			dmg="bludgeoning",
+			weapon_type="Simple",
+		),
+		Weapon(
+			name="Quarterstaff",
+			value=0,
+			weight=4,
+			N=1,
+			D=6,
+			Mod=Modifier(abilities.STR),
+			dmg="bludgeoning",
+			weapon_type="Simple",
+		),
+		Weapon(
+			name="Dagger",
+			value=2,
+			weight=1,
+			N=1,
+			D=4,
+			Mod=Modifier(abilities.DEX),
+			dmg="piercing",
+			weapon_type="Light",
+		),
+		Weapon(
+			name="Club",
+			value=1,
+			weight=2,
+			N=1,
+			D=4,
+			Mod=Modifier(abilities.STR),
+			dmg="bludgeoning",
+			weapon_type="Simple",
+		),
+		Weapon(
+			name="Dagger",
+			value=2,
+			weight=1,
+			N=1,
+			D=4,
+			Mod=Modifier(abilities.DEX),
+			dmg="piercing",
+			weapon_type="Light",
+		),
+		Weapon(
+			name="Spear",
+			value=1,
+			weight=3,
+			N=1,
+			D=6,
+			Mod=Modifier(abilities.STR),
+			dmg="piercing",
+			weapon_type="Simple",
+		),
+		Weapon(
+			name="Mace",
+			value=5,
+			weight=4,
+			N=1,
+			D=6,
+			Mod=Modifier(abilities.STR),
+			dmg="bludgeoning",
+			weapon_type="Simple",
+		),
+	]
+
+	martial = [
+		Weapon(
+			name="Longsword",
+			value=15,
+			weight=3,
+			N=1,
+			D=8,
+			Mod=Modifier(abilities.STR),
+			dmg="slashing",
+			weapon_type="Martial",
+		),
+		Weapon(
+			name="Longsword",
+			value=15,
+			weight=3,
+			N=2,
+			D=6,
+			Mod=Modifier(abilities.STR),
+			dmg="slashing",
+			weapon_type="Martial",
+			mastery="Swords",
+		),
+		Weapon(
+			name="Warhammer",
+			value=15,
+			weight=2,
+			N=1,
+			D=8,
+			Mod=Modifier(abilities.STR),
+			dmg="bludgeoning",
+			weapon_type="Martial",
+		),
+		Weapon(
+			name="Rapier",
+			value=25,
+			weight=2,
+			N=1,
+			D=8,
+			Mod=Modifier(abilities.DEX),
+			dmg="piercing",
+			weapon_type="Martial",
+		),
+			Weapon(
+				name="Battleaxe",
+				value=10,
+				weight=4,
+				N=1,
+				D=8,
+				Mod=Modifier(abilities.STR),
+				dmg="slashing",
+				weapon_type="Martial",
+				mastery="Axes",
+			),
+	]
+
+	if skills.Martial_Weapons.is_proficient():
+		options += martial
+	options += simple
+	return random.choice(options)
