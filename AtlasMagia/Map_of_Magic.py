@@ -8,29 +8,29 @@ try:
 except ImportError as e:
 	Fail("Atlas Magia imports failed",e)
 
-def is_ritualcaster(npc):
+def is_ritualcaster(ludus):
 	# return True
-	if npc.background == "Berserker":   return True
-	if npc.background == "Priest":      return True
-	if npc.background == "Cleric":      return True
-	if npc.background == "Cultist":     return True
-	if npc.background == "Druid":       return True
-	if npc.background == "Mage":        return True
-	if npc.background == "Shaman":      return True
-	if npc.background == "Warlock":     return True
-	if npc.background == "Witch":       return True
+	if "Berserker" in ludus:   return True
+	if "Priest" in ludus:      return True
+	if "Cleric" in ludus:      return True
+	if "Cultist"  in ludus:     return True
+	if "Druid"  in ludus:       return True
+	if "Mage" in ludus:        return True
+	if "Shaman" in ludus:      return True
+	if "Warlock"  in ludus:     return True
+	if "Witch"  in ludus:       return True
 	return False
 
-def is_spellcaster(npc):
+def is_spellcaster(ludus):
 	# return True
-	if npc.background == "Priest":  return True
-	if npc.background == "Cleric":  return True
-	if npc.background == "Cultist": return True
-	if npc.background == "Druid":   return True
-	if npc.background == "Mage":    return True
-	if npc.background == "Shaman":  return True
-	if npc.background == "Warlock": return True
-	if npc.background == "Witch":   return True
+	if "Priest"  in ludus:  return True
+	if "Cleric"  in ludus:  return True
+	if "Cultist" in ludus: return True
+	if "Druid"  in ludus:   return True
+	if "Mage"  in ludus:    return True
+	if "Shaman"  in ludus:  return True
+	if "Warlock"  in ludus: return True
+	if "Witch"  in ludus:   return True
 	return False
 
 
@@ -73,9 +73,9 @@ class Spell:
 
 
 class Spellcaster:
-	def __init__(self, npc):
+	def __init__(self, ludus):
 		#print("Spellcaster Initiated")
-		self.npc = npc
+		self.ludus = ludus
 		self.spell_slots = self.SlotCalculator()
 
 	@property
@@ -83,7 +83,7 @@ class Spellcaster:
 		#print("Maximum Spell Level Called")
 		delay = self.difficulty - 1
 		rate = 2 * self.difficulty
-		f = (self.npc.level - delay) // rate
+		f = (self.ludus.level - delay) // rate
 		f = min(f,12)
 		f = max(0,f)
 		return f
@@ -126,8 +126,8 @@ class Spellcaster:
 	@property
 	def difficulty(self):
 		#print("Difficulty called")
-		background = self.npc.background
-		race = self.npc.race
+		background = self.ludus.background
+		race = self.ludus.race
 
 		difficulty = 6
 		if  "Artist"    in background:  difficulty = Dice(2)
@@ -191,10 +191,10 @@ class Spellcaster:
 
 
 
-def Magic(npc):
+def Magic(ludus):
 	#print(f"Magic Function called")
 
-	caster = Spellcaster(npc)
+	caster = Spellcaster(ludus)
 
 
 	dif = caster.difficulty
@@ -217,7 +217,7 @@ def Magic(npc):
 	count = 0
 	c = ""
 	while count < (6-dif) and count < 4:
-		c = cantrip(npc).string
+		c = cantrip(ludus).string
 		if not c in Cantrip:
 			Cantrip += f"{c}\n"
 			count += 1
@@ -228,7 +228,7 @@ def Magic(npc):
 	count = 0
 	s = "dummy"
 	while count < (6-dif) and count <= s1:
-		s = first(npc).string
+		s = first(ludus).string
 		if not s in First:
 			First += f"{s}\n"
 		count += 1
@@ -239,7 +239,7 @@ def Magic(npc):
 	count = 0
 	s = "dummy"
 	while count < (6-dif) and count <= s2:
-		s = second(npc).string
+		s = second(ludus).string
 		if not s in Second:
 			Second += f"{s}\n"
 		count += 1
@@ -250,7 +250,7 @@ def Magic(npc):
 	count = 0
 	s = "dummy"
 	while count < (5-dif) and count < s3:
-		s = third(npc).string
+		s = third(ludus).string
 		if not s in Third:
 			Third += f"{s}\n"
 		count += 1
@@ -261,7 +261,7 @@ def Magic(npc):
 	count = 0
 	s = "dummy"
 	while count < (5-dif) and count < s4:
-		s = fourth(npc).string
+		s = fourth(ludus).string
 		if not s in Fourth:
 			Fourth += f"{s}\n"
 		count += 1
@@ -272,7 +272,7 @@ def Magic(npc):
 	count = 0
 	s = "dummy"
 	while count < (4-dif) and count < s5:
-		s = fifth(npc).string
+		s = fifth(ludus).string
 		if not s in Fifth:
 			Fifth += f"{s}\n"
 		count += 1
@@ -284,7 +284,7 @@ def Magic(npc):
 	count = 0
 	s = "dummy"
 	while count < (4-dif) and count < s6:
-		s = sixth(npc).string
+		s = sixth(ludus).string
 		if not s in Sixth:
 			Sixth += f"{s}\n"
 		count += 1
@@ -295,7 +295,7 @@ def Magic(npc):
 	count = 0
 	s = "dummy"
 	while count < (3-dif) and count < s7:
-		s = seventh(npc).string
+		s = seventh(ludus).string
 		if not s in Seventh:
 			Seventh += f"{s}\n"
 		count += 1
@@ -306,7 +306,7 @@ def Magic(npc):
 	count = 0
 	s = "dummy"
 	while count < (3-dif) and count < s8:
-		s = eighth(npc).string
+		s = eighth(ludus).string
 		if not s in Eigth:
 			Eigth += f"{s}\n"
 		count += 1
@@ -317,26 +317,26 @@ def Magic(npc):
 	count = 0
 	s = "dummy"
 	while count < (2-dif) and count < s9:
-		s = ninth(npc).string
+		s = ninth(ludus).string
 		if not s in Ninth:
 			Ninth += f"{s}\n"
 		count += 1
 
 	#print("Ninth set")
 
-	Natural = natural(caster,npc)
+	Natural = natural(caster,ludus)
 
 
-	Recharge = rechargable(npc)
+	Recharge = rechargable(ludus)
 
 	result = ""
 
 	if Cantrip: result += f"<h5>Cantrips:</h5>{Cantrip} \n"
 
-	if is_ritualcaster(npc): result += f"{npc.title} can use spells as rituals.\n"
+	if is_ritualcaster(ludus): result += f"{ludus.title} can use spells as rituals.\n"
 
 
-	if is_spellcaster(npc):
+	if is_spellcaster(ludus):
 		if First     and s1: result += f"<h5>[{s1}] 1st Level Spells:</h5>{First} \n"
 		if Second    and s2: result += f"<h5>[{s2}] 2nd Level Spells:</h5>{Second} \n"
 		if Third     and s3: result += f"<h5>[{s3}] 3rd Level Spells:</h5>{Third} \n"
@@ -356,20 +356,20 @@ def Magic(npc):
 
 	return result
 
-def spell_of_level(npc,n):
-	if n == 1: return first(npc).string
-	if n == 2: return second(npc).string
-	if n == 3: return third(npc).string
-	if n == 4: return fourth(npc).string
-	if n == 5: return fifth(npc).string
-	if n == 6: return sixth(npc).string
-	if n == 7: return seventh(npc).string
-	if n == 8: return eighth(npc).string
-	if n == 9: return ninth(npc).string
-	return first(npc).string
+def spell_of_level(ludus,n):
+	if n == 1: return first(ludus).string
+	if n == 2: return second(ludus).string
+	if n == 3: return third(ludus).string
+	if n == 4: return fourth(ludus).string
+	if n == 5: return fifth(ludus).string
+	if n == 6: return sixth(ludus).string
+	if n == 7: return seventh(ludus).string
+	if n == 8: return eighth(ludus).string
+	if n == 9: return ninth(ludus).string
+	return first(ludus).string
 
 
-def natural(caster,npc):
+def natural(caster,ludus):
 	"""
 	Generate a list of daily spells for a caster based on their maximum spell level and difficulty.
 
@@ -389,19 +389,19 @@ def natural(caster,npc):
 
 	# Populate daily1 with spells of the highest level
 	while len(daily1) < 3:
-		spell = spell_of_level(npc,maximum)
+		spell = spell_of_level(ludus,maximum)
 		daily1.add(spell)
 
 	# If maximum spell level is 2 or higher, populate daily2 with spells up to a random level from 1 to (maximum - 1)
 	if maximum >= 2:
 		while len(daily2) < 3:
-			spell = spell_of_level(npc,Dice(maximum - 1))
+			spell = spell_of_level(ludus,Dice(maximum - 1))
 			daily2.add(spell)
 
 	# If maximum spell level is 3 or higher, populate daily3 with spells up to half the maximum level (rounded down)
 	if maximum >= 3:
 		while len(daily3) < 3:
-			spell = spell_of_level(npc,Dice(maximum - 2))
+			spell = spell_of_level(ludus,Dice(maximum - 2))
 			daily3.add(spell)
 
 
@@ -418,8 +418,8 @@ def natural(caster,npc):
 
 
 
-def slots(npc, level = 1, difficulty=1 ):
-	character_level = npc.level
+def slots(ludus, level = 1, difficulty=1 ):
+	character_level = ludus.level
 	if difficulty < 1: difficulty = 1
 	if difficulty > 6: difficulty = 6
 	max_level = (1+character_level - difficulty) // (difficulty)
@@ -436,12 +436,12 @@ def slots(npc, level = 1, difficulty=1 ):
 	return int(slots)
 
 
-def cantrip(npc,dif=6):
+def cantrip(ludus,dif=6):
 
 
-	race = npc.race
-	background = npc.background
-	creature_type = npc.race + ' ' + npc.subrace + ' ' + npc.background
+	race = ludus.race
+	background = ludus.background
+	creature_type = ludus.race + ' ' + ludus.subrace + ' ' + ludus.background
 
 	spells_background = {
 		"Artist": [		Guidance,		Guidance, Friends, WordofRadiance, ViciousMockery, Thaumaturgy, ShapeWater, ProduceFlame, Prestidigitation, MoldEarth, MinorIllusion, Message, Mending, MageHand, Light, EncodeThoughts, DancingLights, AcidSplash],
@@ -586,21 +586,21 @@ def cantrip(npc,dif=6):
 	spells = [ Light]
 
 	# Fetch from the possible spells for the selected race and background
-	spells += list(set( spells_race.get(npc.race, []) +
-						spells_subrace.get(npc.subrace, []) +
-						spells_background.get(npc.background, [])))
+	spells += list(set( spells_race.get(ludus.race, []) +
+						spells_subrace.get(ludus.subrace, []) +
+						spells_background.get(ludus.background, [])))
 
-	if  "Dragon" in npc.race    and     "Black" in npc.subrace:
+	if  "Dragon" in ludus.race    and     "Black" in ludus.subrace:
 		spells += [AcidSplash]
-	if  "Dragon" in npc.race    and     "Green" in npc.subrace:
+	if  "Dragon" in ludus.race    and     "Green" in ludus.subrace:
 		spells += [AcidSplash]
-	if  "Dragon" in npc.race    and     "Copper" in npc.subrace:
+	if  "Dragon" in ludus.race    and     "Copper" in ludus.subrace:
 		spells += [AcidSplash]
-	if  "Dragon" in npc.race    and     "Prismatic" in npc.subrace:
+	if  "Dragon" in ludus.race    and     "Prismatic" in ludus.subrace:
 		spells += [AcidSplash]
-	if  "Dragon" in npc.race    and     "Dragonborn" in npc.subrace:
+	if  "Dragon" in ludus.race    and     "Dragonborn" in ludus.subrace:
 		spells += [BladeWard]
-	if  "Shadow" in npc.subrace:
+	if  "Shadow" in ludus.subrace:
 		spells += [ChillTouch]
 
 	spell = random.choice(spells)
@@ -623,15 +623,15 @@ def cantrip(npc,dif=6):
 	return '<i>' + '\n'.join(spell.describe() for spell in selected_spells) + '</i>' if selected_spells else ""
 	'''
 
-def first(npc,dif=6):
+def first(ludus,dif=6):
 
 	#print('First Level Spelled called')
 
 	# = Spell("")
 
-	race = npc.race
-	background = npc.background
-	creature_type = npc.race + ' ' + npc.subrace + ' ' + npc.background
+	race = ludus.race
+	background = ludus.background
+	creature_type = ludus.race + ' ' + ludus.subrace + ' ' + ludus.background
 
 	spells = []
 
@@ -720,14 +720,14 @@ def first(npc,dif=6):
 	}
 
 	# Fetch from the possible spells for the selected race and background
-	spells = list(set( spells_race.get(npc.race, []) +
-						spells_subrace.get(npc.subrace, []) +
-						spells_background.get(npc.background, [])))
+	spells = list(set( spells_race.get(ludus.race, []) +
+						spells_subrace.get(ludus.subrace, []) +
+						spells_background.get(ludus.background, [])))
 
 	if len(spells) < 3:
-		spells = list(set(spells_race.get(npc.race, []) +
-						  spells_subrace.get(npc.subrace, []) +
-						  spells_background.get(npc.background, []) +
+		spells = list(set(spells_race.get(ludus.race, []) +
+						  spells_subrace.get(ludus.subrace, []) +
+						  spells_background.get(ludus.background, []) +
 						  [Bless, CureWounds, AbsorbElements]))
 
 
@@ -737,14 +737,14 @@ def first(npc,dif=6):
 
 	return spell
 
-def second(npc, dif=6):
+def second(ludus, dif=6):
 	print(f"Second Level Spell:")
 
 
-	race = npc.race
-	background = npc.background
-	lvl = npc.level
-	creature_type = npc.race + ' ' + npc.subrace + ' ' + npc.background
+	race = ludus.race
+	background = ludus.background
+	lvl = ludus.level
+	creature_type = ludus.race + ' ' + ludus.subrace + ' ' + ludus.background
 
 	spells = []
 
@@ -815,9 +815,9 @@ def second(npc, dif=6):
 	}
 
 	# Fetch from the possible spells for the selected race and background
-	spells += list(set(spells_race.get(npc.race, []) +
-					   spells_subrace.get(npc.subrace, []) +
-					   spells_background.get(npc.background, [])))
+	spells += list(set(spells_race.get(ludus.race, []) +
+					   spells_subrace.get(ludus.subrace, []) +
+					   spells_background.get(ludus.background, [])))
 
 	if not spells:
 		spells = [MagicMouth, SpiderClimb, AlterSelf]
@@ -828,13 +828,13 @@ def second(npc, dif=6):
 
 	return spell
 
-def third(npc, dif=6):
+def third(ludus, dif=6):
 
 	print("Third Level Spell:")
 
-	race = npc.race
-	background = npc.background
-	creature_type = npc.race + ' ' + npc.subrace + ' ' + npc.background
+	race = ludus.race
+	background = ludus.background
+	creature_type = ludus.race + ' ' + ludus.subrace + ' ' + ludus.background
 
 	spells = []
 
@@ -918,9 +918,9 @@ def third(npc, dif=6):
 	}
 
 	# Fetch from the possible spells for the selected race and background
-	spells += list(set(spells_race.get(npc.race, []) +
-					   spells_subrace.get(npc.subrace, []) +
-					   spells_background.get(npc.background, [])))
+	spells += list(set(spells_race.get(ludus.race, []) +
+					   spells_subrace.get(ludus.subrace, []) +
+					   spells_background.get(ludus.background, [])))
 
 	# Ensure there are spells to choose from
 	if not spells:
@@ -932,13 +932,13 @@ def third(npc, dif=6):
 
 	return spell
 
-def fourth(npc, dif=6):
+def fourth(ludus, dif=6):
 	#print('Fourth Level Spell:')
 
 
-	race = npc.race
-	background = npc.background
-	creature_type = npc.race + ' ' + npc.subrace + ' ' + npc.background
+	race = ludus.race
+	background = ludus.background
+	creature_type = ludus.race + ' ' + ludus.subrace + ' ' + ludus.background
 
 	spells = []
 
@@ -1015,9 +1015,9 @@ def fourth(npc, dif=6):
 	}
 
 	# Fetch from the possible spells for the selected race and background
-	spells += list(set(spells_race.get(npc.race, []) +
-					   spells_subrace.get(npc.subrace, []) +
-					   spells_background.get(npc.background, [])))
+	spells += list(set(spells_race.get(ludus.race, []) +
+					   spells_subrace.get(ludus.subrace, []) +
+					   spells_background.get(ludus.background, [])))
 
 	# Ensure there are spells to choose from
 	if not spells:
@@ -1029,13 +1029,13 @@ def fourth(npc, dif=6):
 
 	return spell
 
-def fifth(npc, dif=6):
+def fifth(ludus, dif=6):
 	#print("Fifth Level Spell:")
 
-	race = npc.race
-	background = npc.background
-	lvl = npc.level
-	creature_type = npc.race + ' ' + npc.subrace + ' ' + npc.background
+	race = ludus.race
+	background = ludus.background
+	lvl = ludus.level
+	creature_type = ludus.race + ' ' + ludus.subrace + ' ' + ludus.background
 
 	spells = []
 
@@ -1096,9 +1096,9 @@ def fifth(npc, dif=6):
 	}
 
 	# Fetch from the possible spells for the selected race and background
-	spells += list(set(spells_race.get(npc.race, []) +
-					   spells_subrace.get(npc.subrace, []) +
-					   spells_background.get(npc.background, [])))
+	spells += list(set(spells_race.get(ludus.race, []) +
+					   spells_subrace.get(ludus.subrace, []) +
+					   spells_background.get(ludus.background, [])))
 
 	# Ensure there are spells to choose from
 	if not spells:
@@ -1109,14 +1109,14 @@ def fifth(npc, dif=6):
 	print(f"%th level spell {spell.name}")
 	return spell
 
-def sixth(npc, dif=6):
+def sixth(ludus, dif=6):
 	#print("Sixth Level Spell:")
 
 
-	race = npc.race
-	background = npc.background
-	lvl = npc.level
-	creature_type = npc.race + ' ' + npc.subrace + ' ' + npc.background
+	race = ludus.race
+	background = ludus.background
+	lvl = ludus.level
+	creature_type = ludus.race + ' ' + ludus.subrace + ' ' + ludus.background
 
 	spells_background = {
 		"Artist": [TrueSeeing, ProgrammedIllusion, MassSuggestion, IrresistibleDance, MentalPrison],
@@ -1173,9 +1173,9 @@ def sixth(npc, dif=6):
 	spells = []
 
 	# Fetch from the possible spells for the selected race and background
-	spells += list(set(spells_race.get(npc.race, []) +
-					   spells_subrace.get(npc.subrace, []) +
-					   spells_background.get(npc.background, [])))
+	spells += list(set(spells_race.get(ludus.race, []) +
+					   spells_subrace.get(ludus.subrace, []) +
+					   spells_background.get(ludus.background, [])))
 
 	# Ensure there are spells to choose from
 	if not spells:
@@ -1187,13 +1187,13 @@ def sixth(npc, dif=6):
 
 	return spell
 
-def seventh(npc, dif=6):
+def seventh(ludus, dif=6):
 	#print("Seventh Level Spell")
 
-	race = npc.race
-	background = npc.background
-	lvl = npc.level
-	creature_type = npc.race + ' ' + npc.subrace + ' ' + npc.background
+	race = ludus.race
+	background = ludus.background
+	lvl = ludus.level
+	creature_type = ludus.race + ' ' + ludus.subrace + ' ' + ludus.background
 
 	spells = []
 
@@ -1246,9 +1246,9 @@ def seventh(npc, dif=6):
 	}
 
 	# Fetch from the possible spells for the selected race and background
-	spells += list(set(spells_race.get(npc.race, []) +
-					   spells_subrace.get(npc.subrace, []) +
-					   spells_background.get(npc.background, [])))
+	spells += list(set(spells_race.get(ludus.race, []) +
+					   spells_subrace.get(ludus.subrace, []) +
+					   spells_background.get(ludus.background, [])))
 
 	# Ensure there are spells to choose from
 	if not spells:
@@ -1260,14 +1260,14 @@ def seventh(npc, dif=6):
 
 	return spell
 
-def eighth(npc, dif=6):
+def eighth(ludus, dif=6):
 	#print("Eighth Level Spell")
 
 
-	race = npc.race
-	background = npc.background
-	lvl = npc.level
-	creature_type = npc.race + ' ' + npc.subrace + ' ' + npc.background
+	race = ludus.race
+	background = ludus.background
+	lvl = ludus.level
+	creature_type = ludus.race + ' ' + ludus.subrace + ' ' + ludus.background
 
 	spells = []
 
@@ -1321,9 +1321,9 @@ def eighth(npc, dif=6):
 	}
 
 	# Fetch from the possible spells for the selected race and background
-	spells += list(set(spells_race.get(npc.race, []) +
-					   spells_subrace.get(npc.subrace, []) +
-					   spells_background.get(npc.background, [])))
+	spells += list(set(spells_race.get(ludus.race, []) +
+					   spells_subrace.get(ludus.subrace, []) +
+					   spells_background.get(ludus.background, [])))
 
 	# Ensure there are spells to choose from
 	if not spells:
@@ -1335,13 +1335,13 @@ def eighth(npc, dif=6):
 
 	return spell
 
-def ninth(npc, dif=6):
+def ninth(ludus, dif=6):
 	#print("Ninth Level Spell:")
 
-	race = npc.race
-	background = npc.background
-	lvl = npc.level
-	creature_type = npc.race + ' ' + npc.subrace + ' ' + npc.background
+	race = ludus.race
+	background = ludus.background
+	lvl = ludus.level
+	creature_type = ludus.race + ' ' + ludus.subrace + ' ' + ludus.background
 
 	spells = []
 
@@ -1395,9 +1395,9 @@ def ninth(npc, dif=6):
 	}
 
 	# Fetch from the possible spells for the selected race and background
-	spells += list(set(spells_race.get(npc.race, []) +
-					   spells_subrace.get(npc.subrace, []) +
-					   spells_background.get(npc.background, [])))
+	spells += list(set(spells_race.get(ludus.race, []) +
+					   spells_subrace.get(ludus.subrace, []) +
+					   spells_background.get(ludus.background, [])))
 
 	# Ensure there are spells to choose from
 	if not spells:
@@ -1444,9 +1444,9 @@ def add_spell(spell_list, spell_name, spell_definition=""):
 	return spell_list
 
 class Spellbook:
-	def __init__(self,npc):
+	def __init__(self,ludus):
 
-		self.character_level = npc.level
+		self.character_level = ludus.level
 		self.cantrip = ""
 		self.spells = {level: "" for level in range(1, 10)}
 
@@ -1672,13 +1672,13 @@ class Spellbook:
 			recharge_entry = f"\n\t{spell}\n" # + \t- Recharges at {roll} in a d6. {definition}"
 			self.recharge.append(recharge_entry)
 
-	def SpellbookString(self,npc):
+	def SpellbookString(self,ludus):
 		result = "\n"
-		if is_ritualcaster(npc):
-			result += f"{npc.title} is a ritual spellcaster. \n"
+		if is_ritualcaster(ludus):
+			result += f"{ludus.title} is a ritual spellcaster. \n"
 		if self.cantrip:
 			result += f"<h4>Cantrips (at will):</h4> {self.cantrip}"
-		if is_spellcaster(npc):
+		if is_spellcaster(ludus):
 			for level in range(1, 10):
 				slots = self.slots[level]
 				if slots is not None:  # Check if slots is not None
@@ -1737,22 +1737,22 @@ class Spellbook:
 
 
 
-def rechargable(npc,dif=6):
-	race = npc.race
-	background = npc.background
-	lvl = npc.level
-	creature_type = npc.race + ' ' + npc.subrace + ' ' + npc.background
+def rechargable(ludus,dif=6):
+	race = ludus.race
+	background = ludus.background
+	lvl = ludus.level
+	creature_type = ludus.race + ' ' + ludus.subrace + ' ' + ludus.background
 
 	spells = []
 
 	Leadership = Entry(
 		"Leadership",
-		f"{npc.title} can utter a special command or warning whenever another creature that it can see within 30 feet of it makes an attack roll or a saving throw. The creature can add a d4 to its roll provided it can hear and understand {npc.title}. A creature can benefit from only one Leadership die at a time. This effect ends if {npc.title} is incapacitated.",
+		f"{ludus.title} can utter a special command or warning whenever another creature that it can see within 30 feet of it makes an attack roll or a saving throw. The creature can add a d4 to its roll provided it can hear and understand {ludus.title}. A creature can benefit from only one Leadership die at a time. This effect ends if {ludus.title} is incapacitated.",
 		"Reaction.\n (Recharges after a Short or Long Rest) \n- V.")
 
 	ColdBreath = Entry(
 		"Cold Breath",
-		f"{npc.title}  exhales a blast of freezing wind in a 15-foot cone. Each creature in that area must make a DC{npc.dc} Dexterity saving throw, taking {4*npc.pb//2} ({npc.pb//2}d8) cold damage on a failed save, or half as much damage on a successful one.",
+		f"{ludus.title}  exhales a blast of freezing wind in a 15-foot cone. Each creature in that area must make a DC{ludus.dc} Dexterity saving throw, taking {4*ludus.pb//2} ({ludus.pb//2}d8) cold damage on a failed save, or half as much damage on a successful one.",
 		f"Recharge 5–6")
 
 
@@ -1818,9 +1818,9 @@ The webs are flammable. Any 5-foot cube of webs exposed to fire burns away in 1 
 
 	}
 	# Fetch from the possible spells for the selected race and background
-	spells += list(set( spells_race.get(npc.race, []) +
-						spells_subrace.get(npc.subrace, []) +
-						spells_background.get(npc.background, [])))
+	spells += list(set( spells_race.get(ludus.race, []) +
+						spells_subrace.get(ludus.subrace, []) +
+						spells_background.get(ludus.background, [])))
 
 	number_of_spells = min(len(spells),
 						   max(1,
@@ -1835,17 +1835,17 @@ The webs are flammable. Any 5-foot cube of webs exposed to fire burns away in 1 
 	return '<i>' + '\n'.join(spell for spell in selected_spells) + '</i>' if selected_spells else ""
 
 
-def legacynatural(npc,dif=6):
-	npc_type = f"{npc.race} {npc.subrace} {npc.background}"
+def legacynatural(ludus,dif=6):
+	ludus_type = f"{ludus.race} {ludus.subrace} {ludus.background}"
 	Affinity = 10 - dif
 
 
 
 
 	# Fetch from the possible spells for the selected race and background
-	spells = list(set( spells_race.get(npc.race, []) +
-						spells_subrace.get(npc.subrace, []) +
-						spells_background.get(npc.background, [])))
+	spells = list(set( spells_race.get(ludus.race, []) +
+						spells_subrace.get(ludus.subrace, []) +
+						spells_background.get(ludus.background, [])))
 
 	number_of_spells = min(len(spells),
 						   max(1,
