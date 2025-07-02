@@ -7,7 +7,7 @@
 	Each score has a saving throw proficiency that can increase one's
 	resilience.
 """
-import random
+import app.random as random
 from Minion import Initialized, Alert, Inform, Warning, News
 try: # Cartography:
 	from AtlasActorLudi.Map_of_Scores 	import Modifier
@@ -17,7 +17,7 @@ except ImportError as e:
 	Alert(f"The Atlases to Saving Throws have not been found:\n {e}", e)
 
 class SavingThrows:
-	def __init__(ST, AS, PB):
+	def __init__(ST, AS, PB, proficiencies=None, is_character=False):
 		"""	Initialize saving throws
 			for each ability score
 			with proficiency adjustments.	"""
@@ -31,17 +31,17 @@ class SavingThrows:
 		ST.CHA = Modifier(AS.CHA)
 
 		# Determine proficiency bonuses for each saving throw
-		ST.proficiency = ST.assign_proficiencies()
+		ST.proficiency = ST.assign_proficiencies(proficiencies)
 
 		# Apply proficiency bonus if proficient
-		ST.apply_proficiency_bonus(PB)
+		ST.apply_proficiency_bonus(PB, is_character)
 
-	def assign_proficiencies(ST):
+	def assign_proficiencies(ST, given_proficiencies=None, is_character=False):
 		"""
         Randomly assign proficiency to at least two saving throws.
         Ensures that the character has strengths across varied saving throws.
         """
-		Initialized("[Saving Throws]assign proficiencies<>")
+		Initialized(f"[Saving Throws]assign proficiencies<{given_proficiencies}>")
 		ST.proficiency = {
 			'STR': False,
 			'DEX': False,
@@ -51,25 +51,36 @@ class SavingThrows:
 			'CHA': False
 			}
 
-		# Ensure a minimum of two proficiencies
-		how_many_proficiencies = 0
-		while how_many_proficiencies < 2:
-			ability = random.choice(list(ST.proficiency.keys()))
-			ST.proficiency[ability] = True
-			how_many_proficiencies = list(ST.proficiency.values()).count(True)
-
+		if given_proficiencies:
+			for prof in given_proficiencies:
+				ST.proficiency[prof.upper()] = True
+		else:
+			# Ensure a minimum of two proficiencies
+			how_many_proficiencies = 0
+			while how_many_proficiencies < 2:
+				ability = random.choice(list(ST.proficiency.keys()))
+				ST.proficiency[ability] = True
+				how_many_proficiencies = list(ST.proficiency.values()).count(True)
 		return ST.proficiency
 
-	def apply_proficiency_bonus(ST,PB):
+	def apply_proficiency_bonus(ST,PB, is_character=False):
 		"""
 		Apply proficiency bonus to proficient saving throws.
 		"""
-		if ST.proficiency['STR']: ST.STR += Dice(PB)
-		if ST.proficiency['DEX']: ST.DEX += Dice(PB)
-		if ST.proficiency['CON']: ST.CON += Dice(PB)
-		if ST.proficiency['INT']: ST.INT += Dice(PB)
-		if ST.proficiency['WIS']: ST.WIS += Dice(PB)
-		if ST.proficiency['CHA']: ST.CHA += Dice(PB)
+		if is_character:
+			if ST.proficiency['STR']: ST.STR += PB
+			if ST.proficiency['DEX']: ST.DEX += PB
+			if ST.proficiency['CON']: ST.CON += PB
+			if ST.proficiency['INT']: ST.INT += PB
+			if ST.proficiency['WIS']: ST.WIS += PB
+			if ST.proficiency['CHA']: ST.CHA += PB
+		else:
+			if ST.proficiency['STR']: ST.STR += Dice(PB)
+			if ST.proficiency['DEX']: ST.DEX += Dice(PB)
+			if ST.proficiency['CON']: ST.CON += Dice(PB)
+			if ST.proficiency['INT']: ST.INT += Dice(PB)
+			if ST.proficiency['WIS']: ST.WIS += Dice(PB)
+			if ST.proficiency['CHA']: ST.CHA += Dice(PB)
 
 	@property
 	def string(ST):
@@ -78,7 +89,7 @@ class SavingThrows:
 		showing all ability modifiers.
 		"""
 
-		str =( 
+		str =(
 		  f"STR: {ST.STR:+}  <br>" +
 		  f"DEX: {ST.DEX:+}  <br>" +
 		  f"CON: {ST.CON:+}  <br>" +
