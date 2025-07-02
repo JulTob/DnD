@@ -148,32 +148,28 @@ def Recovery(con):
 def SpellName():
 
     author = [
-    "Chainer's",
-    "Brain",
-    "Flamer",
-
-    "","","","","","","","","","","",
+    "", "Chainer",
+    "", "Brain",
+    "", "Flamer",
+    "",	"of Angels",
         ]
 
     verb =[
-    "","","","","","","","","","","",
-    "Ostracize",
-    "Fade",
-    "Riot",
-    "Bond",
-    "Storm",
-    "Duress",
-    "Nourishing",
-    "Break",
-    "Mercy",
+    "",	"Ostracize",
+    "",	"Fade",
+    "",	"Riot",
+    "",	"Bond",
+    "",	"Storm",
+    "",	"Duress",
+    "",	"Nourishing",
+    "",	"Break",
+    "",	"Mercy",
         ]
 
     subject =[
-    "","","","","","","","","","","",
-    "Fiend",
-    "Beast",
-    "Flame",
-    "of Angels",
+    "",	"Fiend",
+    "",	"Beast",
+    "",	"Flame",
         ]
 
     name = f"{random.choice(author)} {random.choice(verb)} {random.choice(subject)}"
