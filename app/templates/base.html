@@ -1,25 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.min.js"></script>
+
 	{% include 'head.html' %}
 	<title>{% block title %}D&D Generators{% endblock %}</title>
 	{% block head %}{% endblock %}
 	</head>
 
 <body>
-    {% include 'header.html' %}
+	<div id="loader">
+		<div id="p5-holder"></div>
+		</div>
+
+	<div id="FullPage">
+			{% include 'header.html' %}
+			<div class="container">
+					{% block content %}
+					{% endblock %}
+					</div>
+			</div>
+
+	{% include 'footer.html' %}
+
+	{% block scripts %}
+	{% endblock %}
+
+<script src="{{ url_for('static', filename='js/loaderMagic.js') }}"></script>
 
 
-    <div class="container">
-        {% block content %}
-        <!-- Default or shared content goes here if any -->
-        {% endblock %}
-    </div>
-
-    {% include 'footer.html' %}
-
-    {% block scripts %}
-    <!-- Default scripts can be included here -->
-    {% endblock %}
 </body>
 </html>
