@@ -20,7 +20,7 @@
     <div class="npc-header" style="grid-column:  1 / -1;">
         <h2 style="font-size: 2.2em;">{{ character.name | safe }}</h2>
         <h2 style="font-size: 1.2em;">{{ character.title | safe }}</h2>
-		<h1>Level {{ character.Level }} {{ character.Class }} </h1>
+		<h1>Level {{ character.Level }} {{ character.Class }} <i>,{{character.Subclass}}</i> </h1>
 	    <h1><b>{{ character.Species }} {{ character.Background }}</b></h1>
 	  	</div>
 
@@ -31,94 +31,117 @@
 	<div class="npc-box">
         <h6>{{ character.size }} size</h6>
     	</div>
-	<div class="npc-box"><h4> {{ character.Gender }} </h4></div>
-	<div class="npc-box">
-		<h4>Passive Perception: {{ character.passive_perception }}</h4>
-		</div>
+	<div class="npc-box"><h6> {{ character.Gender }} </h6></div>
+
   <!-- Combat Essentials -->
-  <div class="npc-box" style="font-size: 1.33em;">🛡️ AC: <b>{{ character.AC }}</b></div>
-  <div class="npc-box" style="font-size: 1.33em;">💚 HP: <b>{{ character.Health }}</b></div>
   <div class="npc-box" style="font-size: 1.33em;">⚜️ PB: <b>+ {{ character.PB }}</b></div>
+  <div class="npc-box" style="font-size: 1.33em;">💚 HP: <b>{{ character.Health }}</b></div>
+  <div class="npc-box" style="font-size: 1.33em;">💟 HP Dice: <b>{{ character.HPD }}</b></div>
+  <div class="npc-box" style="font-size: 1.33em;">🛡️ AC: <b>{{ character.AC }}</b></div>
+  <div class="npc-box" style="font-size: 1.33em;">👢 Speed: <b>{{ character.Speed }}</b></div>
 
 
 
-  <div class="npc-box">
-	  <!-- Stats -->
-	  {% for stat, value in character.Stats.items() %}
-	  {% set mod = ((value - 10) // 2) %}
-	  <div class="npc-box" style="text-align: right;">
-	    <div class="symbol">🌀</div>
-	    <h4>{{ stat }}
-		<h4>{{ value }}
-			({{ '+' if mod >= 0 else '' }}{{ mod }})</h4>
-	  	</div>
-	  {% endfor %}
-	  </div>
+		<div class="npc-box">
+		  <!-- Stats -->
+		  {% set ability_emoji = {
+				'Strength':'🦾',
+				'Dexterity':'🥢',
+				'Constitution':'🫀',
+				'Intelligence':'🧩',
+				'Wisdom':'🦉',
+				'Charisma':'🎭'
+				} %}
+		  {% for stat, value in character.Stats.items() %}
+		  {% set mod = ((value - 10) // 2) %}
+		  <div class="npc-box" style="text-align: right;">
+		    <div class="symbol">{{ ability_emoji[stat] }}</div>
+		    <h4>{{ stat }} <BR>
+			{{ value }}
+				({{ '+' if mod >= 0 else '' }}{{ mod }})</h4>
+		  	</div>
+		  {% endfor %}
+		  </div>
 
 
 
 
-	  <div class="npc-box">
-			  <!-- Skills Table -->
-			  <div class="npc-textbox">
-			    <h3>Skills</h3>
-			    <table class="skills-table">
-			      <tbody>
-			        {% for skill, display in character.Skills.list %}
-			        <tr>
-			          <td>
-			            {% if skill.proficiency_level == 2 %}🔴
-			            {% elif skill.proficiency_level == 1 %}⚫
-			            {% else %}⚪{% endif %}
-			          </td>
-			          <td><h3>{{ display }}</h3></td>
-			          <td>{{ skill.calculate_modifier(character.Level) }}</td>
-			        </tr>
-			        {% endfor %}
-			      </tbody>
-			    </table>
-			  </div>
 
-		</div>
+		<div class="npc-box">
+				  <!-- Skills Table -->
+				  <div class="npc-textbox">
+				    <h2>Skills</h2>
+				    <table class="skills-table">
+				      <tbody>
+				        {% for skill, display in character.Skills.list %}
+				        <tr>
+				          <td>
+				            {% if skill.proficiency_level == 2 %}🔴
+				            {% elif skill.proficiency_level == 1 %}⚫
+				            {% else %}⚪{% endif %}
+				          </td>
+				          <td><h3>{{ display }}</h3></td>
+				          <td>{{ skill.calculate_modifier(character.Level) }}</td>
+				        </tr>
+				        {% endfor %}
+				      </tbody>
+				    </table>
+				<div class="npc-box">
+					<h4>Passive Perception: {{ character.passive_perception }}</h4>
+					</div>
+				  </div>
+				</div>
+
+		<div class="npc-box">
+		  <div class="npc-textbox">
+		    <h2>Saving Throws</h2>
+				<div class="saving-throws">
+			   		{{character.SavingThrow.string | safe}}
+					</div>
+					</div>
+					</div>
+
 		<div class="npc-textbox">
-			  <h3>Proficiencies</h3>
+			  <h2>Proficiencies</h2>
 			  <ul style="list-style: none; padding-left: 0; text-align: left;">
 				    {% for prof in character.other_proficiencies %}
-				      	<li>✅ {{ prof }}</li>
-
+				      	<li>✔️ {{ prof }}</li>
 				    	{% endfor %}
 					</ul>
 			</div>
-		  <!-- Equipment -->
 
-		  <div class="npc-textbox">
-		    <h3>Equipment</h3>
-		    <table class="objects-table">
+	{{ character.Languages | safe }}
+
+
+		  <!-- Equipment -->
+		  <div class="npc-textbox" style="grid-column: span 1;">
+		    <h2>Equipment</h2>
+		    <table class="objects-table" style="font-size: 0.66em;">
 				<tr>
-		          <td>✅</td>
+		          <td>🛡️</td>
 		          <td><b>{{ character.equipment.defense | safe  }}</b></td>
 		        </tr>
 				<tr>
-		          <td>✅</td>
+		          <td>⚔️</td>
 		          <td><b>{{ character.equipment.melee | safe   }}</b></td>
 		        </tr>
 				<tr>
-		          <td>✅</td>
+		          <td>🏹</td>
 		          <td><b>{{ character.equipment.ranged | safe   }}</b></td>
 		        	</tr>
 				<tr>
-		          <td>✅</td>
+		          <td>✋</td>
 		          <td><b>{{ character.equipment.right | safe   }}</b></td>
 		        	</tr>
 				<tr>
-		          <td>✅</td>
+		          <td>🤚</td>
 		          <td><b>{{ character.equipment.left | safe   }}</b></td>
 		        	</tr>
 
 		      <tbody>
 		        {% for item in character.equipment.equipped    %}
 		        <tr>
-		          <td>✅</td>
+		          <td>☑️</td>
 		          <td><b>{{ item.name }}</b></td>
 		          <td>{{ item.description }}</td>
 		          <td>{{ item.value }} gp</td>
@@ -130,8 +153,8 @@
 
 		  <!-- Inventory -->
 		  <div class="npc-textbox">
-		    <h3>Bag</h3>
-		    <table class="objects-table">
+		    <h2>Bag</h2>
+		    <table class="objects-table" style="font-size: 0.90em;">
 		      <tbody>
 		        {% for item in character.equipment.bag %}
 		        <tr>
@@ -143,13 +166,14 @@
 		        {% endfor %}
 		      </tbody>
 		    </table>
+			  <!-- Purse -->
+			  <div class="npc-box">
+			    <h2>Purse</h2>
+			    💰 {{ character.equipment.purse }} gp
+			  </div>
 		  </div>
 
-		  <!-- Purse -->
-		  <div class="npc-box">
-		    <h4>Purse:</h4>
-		    <p>💰 {{ character.equipment.purse }} gp</p>
-		  </div>
+
 
 		  <!-- Traits -->
 		  {% if character.traits %}
@@ -175,14 +199,26 @@
 		  </div>
 		  {% endif %}
 
-	<div class="npc-textbox">
-		<h1>Features</h1>
-		{% for feat in character.features %}
-			<div class="class-feature">{{ feat.to_html() | safe }}</div>
-			{% endfor %}
-		</div>
 
+		{% for feat in character.features %}
+		  	<div class="npc-textbox" style="grid-column: span 1;">
+				<h2 style="font-family: 'Manufacturing Consent'; font-size:	2.1em;"">{{ feat.name }}</h2>
+			    {% if feat.level == 0 %}
+				      	⭐️ <i> {{ feat.description | safe  }} </i>
+				    {% else %}
+				      	🌟 {{ feat.description | safe  }}
+				    	{% endif %}
+		  		</div>
+			{% endfor %}
+
+
+
+			  <!-- Spellcasting -->
+			  {% if character.Spellcaster %}
+				    {{ character.Spellcaster.html() | safe }}
+					{% endif %}
 	</div>
+
 
 <!-- Optional: JS-Accessible Character Data -->
 <script>
@@ -251,5 +287,23 @@ function printForma() {
   };
 }
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const grid = document.querySelector('.npc-grid');
+
+    // Adjust grid rows to create masonry effect
+    const observer = new ResizeObserver(() => {
+        const gridItems = grid.querySelectorAll('.npc-box, .npc-textbox');
+        grid.style.gridAutoRows = 'auto'; // Optional: fine-tune this
+        gridItems.forEach(item => {
+            const rowSpan = Math.ceil(item.offsetHeight / 10);
+            item.style.gridRowEnd = `span ${rowSpan}`;
+        });
+    });
+
+    observer.observe(grid);
+});
+</script>
+
 
 {% endblock %}
