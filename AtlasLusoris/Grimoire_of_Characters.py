@@ -5,33 +5,26 @@ Rules from D&D 5e.
 """
 
 ''' Cartography '''
-import random
+import app.random as random
 from Minion import Initialized, Alert, Inform, Warning, News, Ends, Fail, Catched, FailureError
 
 from AtlasActorLudi.Map_of_Size import Size
 from AtlasActorLudi.Map_of_Gender import NewGender
 # Import statements grouped for clarity and error checking
 try: # Cartography
+	from AtlasLudus.Map_of_Languages import Character_Languages
 	from AtlasLudus.Map_of_Dice import Dice
 	from AtlasActorLudi.Map_of_Scores import PB, Modifier
 	from AtlasActorLudi.Grimoire_of_AbilityScores import AbilityScores
 	from AtlasActorLudi.Grimoire_of_SavingThrows import SavingThrows
 	from AtlasActorLudi.Grimoire_of_Skills import Char_Skills, get_other_proficiencies
-	News("Atlas Mechanica succesfully procured")
-	from AtlasLusoris.Map_of_Classes import classes, subclasses
-	from AtlasLusoris.Map_of_Species import species, species_to_race_and_subrace
+	from AtlasLusoris.Map_of_Species import species
 	from AtlasLusoris.Map_of_Backgrounds import backgrounds
-	News("Atlas Lusoris succesfully procured")
 	from AtlasAlusoris.Map_of_Races import race_weights as races
 	from AtlasAlusoris.Map_of_Races import Race
-	News("Atlas Alusoris succesfully procured")
 	from AtlasInventarium import Grimoire_of_Objects
-	from AtlasInventarium.Grimoire_of_Objects import Object, GenerateEquipment
-	from AtlasLusoris.Map_of_Classes import (
-		apply_class_proficiencies,
-		GetFeatures,                 # main entry-point to get features list
-		health_dice
-		)
+	from AtlasInventarium.Grimoire_of_Objects import Object, GenerateEquipment, Inventory
+	from AtlasLusoris.Grimoire_of_Spellcasters import spellcaster
 
 except ImportError as e:
 	Fail(f"Import error!", e)
@@ -57,9 +50,16 @@ class Character:
 		char.seed = seed if seed is not None else random.randint(0, 2**16)
 		char.seed = int(char.seed )
 		random.seed(char.seed)
+		char.level = level
+		char.proficiency_bonus = PB(char.level)
+
+		char.alignment = alignment or char.generate_alignment()
 
 		char.species = species or char.generate_species()
-		char.race, char.subrace = species_to_race_and_subrace(char.species)
+		char.speed = 30
+
+
+
 		char.gender = gender or char.generate_gender()
 
 		char.char_class = char_class or char.generate_class()
@@ -67,28 +67,88 @@ class Character:
 
 		char.background = background or char.generate_background()
 
-		char.alignment = alignment or char.generate_alignment()
+		char.languages = Character_Languages(char)
+
+		char.set()
+		char.AS = AbilityScores()
+		char.generate_stats()
+
+		char.AC = 10 + Modifier(char.AS.DEX)
+		char.senses = {}
 
 		char.lineage = None
+		char.base_health = 0
+		char.set_Health()
+		char.HitPointDie = char.CalculateHPD()
 
 		char.name = name or char.generate_name()
 		char.title = title          # may be None
 		if char.title is None:      # only generate if not supplied
 			char.title = char.generate_title()
 
-		char.features = []
-		char.equipment = Grimoire_of_Objects.Inventory()
-		char.level = level
-		char.proficiency_bonus = PB(char.level)
+
+		char.equipment = Inventory()
 		char.set_characteristics()
 		char.set_Skills()
-		apply_class_proficiencies(char)
 		char.set_Objects()
-		char.passive_perception = 10 + char.skills.Perception.calculate_modifier(char.proficiency_bonus)
-		char.other_proficiencies = get_other_proficiencies(char.skills)
+		char.passive_perception
+		char.spellcaster = char.set_spellcaster()
+		char.features: list[Feature] = []
+		char.apply_species_features()
+		char.apply_background_features()
 		char.apply_class_features()
-		char.features = GetFeatures(char)
+		char.other_proficiencies = get_other_proficiencies(char.skills)
+		print(char.other_proficiencies)
 		GenerateEquipment(char)
+		char.saving_throws = char.Saving_Throws()
+
+
+	def apply_background_features(char):
+		from AtlasLusoris.Map_of_Backgrounds import ApplyBackground
+		ApplyBackground(char)
+
+	def apply_species_features(char):
+		from AtlasLusoris.Map_of_Species import species_features
+		for feature in species_features(char.species):
+			feature(char)  # Apply effect
+			char.features.append(feature)  # Track feature
+		Inform(f"{char.name} is a {char.species} with features: {[f.name for f in char.features if 'Species' in f.source]}")
+
+	@property
+	def health(char):
+		result = char.base_health + Modifier(char.AS.CON) * char.level
+		return result
+	def CalculateHPD(char):
+		from AtlasLusoris.Map_of_Classes import health_dice
+		dice = health_dice(char.char_class)
+		return f"{char.level}D{dice}"
+
+	def set_Health(char):
+		""" Calculate character health
+			based on level and constitution modifier.
+		"""
+		from AtlasLusoris.Map_of_Classes import health_dice
+		dice_value = health_dice(char.char_class)
+		char.base_health = dice_value
+
+	def set_spellcaster(char):
+		from AtlasLusoris.Grimoire_of_Spellcasters import spellcaster
+		char.spellcaster = spellcaster(char)
+		return char.spellcaster
+
+	@property
+	def passive_perception(char):
+		Mod = char.skills.Perception.calculate_modifier()
+		return 10 + Mod
+
+	def SetFeatures(char):
+		from AtlasLusoris.Map_of_Classes import (
+				apply_class_proficiencies,
+				GetFeatures,                 # main entry-point to get features list
+				health_dice
+				)
+		GetFeatures(char)
+		apply_class_proficiencies(char)
 
 	def __contains__(pc, text):
 		if text in pc.genus: return True
@@ -99,18 +159,43 @@ class Character:
 
 	def apply_class_features(character):
 		from AtlasLusoris.Map_of_Classes import get_class_progression
-		class_prog = get_class_progression(character.Class)
+		from AtlasLusoris.Map_of_Classes import (
+				apply_class_proficiencies,
+				GetFeatures,                 # main entry-point to get features list
+				health_dice
+				)
+		class_prog = get_class_progression(character)
 		if class_prog:
-			character.features = class_prog.features(character.level, character.subclass)
+			character.features += class_prog.features(character)
+
 
 	def set_characteristics(char):
 		"""Set core stats and attributes based on species, class, and background."""
-		char.set()
-		char.abilities = AbilityScores()
-		char.stats = char.generate_stats()
-		char.saving_throws = SavingThrows(char.abilities, char.level)
-		char.health = char.set_Health()
-		char.AC = 10 + Modifier(char.abilities.DEX)
+		pass
+
+	@property
+	def abilities(char):
+		return char.AS
+
+	def Saving_Throws(char):
+		"""Assign saving throw proficiencies based on character class."""
+		class_profs = {
+			"Barbarian":  ["STR", "CON"],
+			"Bard":       ["DEX", "CHA"],
+			"Cleric":     ["WIS", "CHA"],
+			"Druid":      ["INT", "WIS"],
+			"Fighter":    ["STR", "CON"],
+			"Monk":       ["STR", "DEX"],
+			"Paladin":    ["WIS", "CHA"],
+			"Ranger":     ["STR", "DEX"],
+			"Rogue":      ["DEX", "INT"],
+			"Sorcerer":   ["CON", "CHA"],
+			"Warlock":    ["WIS", "CHA"],
+			"Wizard":     ["INT", "WIS"]
+			}
+
+		profs = class_profs.get(char.character_class, [])  # Fallback to empty
+		return SavingThrows(char.AS, char.proficiency_bonus, profs, is_character=True)
 
 	def generate_alignment(char):
 		""" Randomly select an Alignment. """
@@ -122,16 +207,30 @@ class Character:
 		species_names = list(species.keys())
 		species_weights = list(species.values())
 		chosen_species = random.choices(species_names, weights=species_weights, k=1)[0]
+
 		return chosen_species
 
 	def generate_class(char):
 		""" Randomly select a character class. """
+		from AtlasLusoris.Map_of_Classes import classes, subclasses
 		char.set()
 		return random.choice(classes)
 
 	@property
 	def character_class(char):
 		return char.char_class
+
+	@property
+	def race(char):
+		from AtlasLusoris.Map_of_Species import species_to_race_and_subrace
+		race, subrace = species_to_race_and_subrace(char.species)
+		return race
+
+	@property
+	def subrace(char):
+		from AtlasLusoris.Map_of_Species import species_to_race_and_subrace
+		race, subrace = species_to_race_and_subrace(char.species)
+		return subrace
 
 	@property
 	def Class(char):
@@ -147,6 +246,7 @@ class Character:
 
 	def generate_subclass(char):
 		""" Randomly select a subclass if applicable. """
+		from AtlasLusoris.Map_of_Classes import classes, subclasses
 		char.set()
 		return random.choice(subclasses.get(char.char_class, []))
 
@@ -178,20 +278,6 @@ class Character:
 			character.title = None
 		return Title(character)
 
-	def set_Health(char):
-		""" Calculate character health
-			based on level and constitution modifier.
-		"""
-		from AtlasLusoris.Map_of_Classes import health_dice
-		from AtlasActorLudi.Map_of_Scores import Modifier, NewAbilityScore
-		from AtlasLudus.Map_of_Dice import Dice
-
-		dice_value = health_dice(char.char_class)
-		health = char.level * Modifier(char.abilities.CON)
-		health += Dice(D=dice_value-1, N = char.level)
-		health += dice_value
-		return health
-
 	def to_dict(char):
 		""" Convert character details to dictionary format. """
 		return {
@@ -206,14 +292,20 @@ class Character:
 			'Stats': 		char.stats,
 			'Alignment': 	char.alignment,
 			'Skills': 		char.skills,
-			'equipment': 	char.equipment,
 			'AC': 			char.AC,
 			'Health': 		char.health,
 			'PB':			char.proficiency_bonus,
 			'size':			Size(char),
 			'passive_perception':		char.passive_perception,
 			'other_proficiencies':		char.other_proficiencies,
-			'features':		[feat.to_dict() for feat in char.features]
+			'features':		char.features,
+			'equipment': 	char.equipment,
+			'SavingThrow':  char.saving_throws,
+			'Spellcaster':	char.spellcaster,
+			'Speed':		char.speed,
+			'HPD':			char.HitPointDie,
+			'Languages':	char.languages(),
+
 			}
 
 	def NPCfy(char):
@@ -240,12 +332,13 @@ class Character:
 			str(char.race or ""),
 			str(char.subrace or ""),
 			str(archetype or ""),
+			str(char.char_class or ""),
+			str(char.subclass or ""),
 			str(char.gender or ""),
 			str(char.alignment or ""),
-		]
+			]
 		delimiter = " , "
 		return delimiter.join(filter(None, attributes))
-
 
 	@property
 	def Type(char):
@@ -262,6 +355,17 @@ class Character:
 		rolls = [random.randint(1, 6) for _ in range(4)]
 		return sum(sorted(rolls)[1:])
 
+	@property
+	def stats(self) -> dict[str,int]:
+		return {
+			"Strength":     self.abilities.STR,
+			"Dexterity":    self.abilities.DEX,
+			"Constitution": self.abilities.CON,
+			"Intelligence": self.abilities.INT,
+			"Wisdom":       self.abilities.WIS,
+			"Charisma":     self.abilities.CHA,
+			}
+
 	def generate_stats(char):
 		char.set()
 		class_stat_preferences = {
@@ -275,8 +379,8 @@ class Character:
 			'Ranger':      {'primary': 'Dexterity', 	'secondary': 'Wisdom'},
 			'Rogue':       {'primary': 'Dexterity', 	'secondary': 'Intelligence'},
 			'Sorcerer':    {'primary': 'Charisma', 		'secondary': 'Constitution'},
-			'Warlock':     {'primary': 'Charisma', 		'secondary': random.choice(['Dexterity', 'Wisdom', 'Strength', 'Intelligence', 'Constitution', 'Dexterity', 'Constitution', 'Dexterity', 'Constitution', 'Dexterity'])},
-			'Wizard':      {'primary': 'Intelligence', 	'secondary': 'Wisdom'},
+			'Warlock':     {'primary': 'Charisma', 		'secondary': 'Constitution'},
+			'Wizard':      {'primary': 'Intelligence', 	'secondary': 'Constitution'},
 			}
 		background_stat_boosts = {
 			'Acolyte':    ['Intelligence', 	'Wisdom',  		'Charisma'],
@@ -301,6 +405,7 @@ class Character:
 
 
 		# Roll six ability scores
+		char.set()
 		rolled_stats = [char.roll_stat() for _ in range(6)]
 		rolled_stats.sort(reverse=True)
 			# Sort from highest to lowest
@@ -308,8 +413,10 @@ class Character:
 		# Get class primary and secondary stats
 		class_prefs = class_stat_preferences.get(char.char_class, {})
 		primary_stat = class_prefs.get('primary')
-		secondary_stat = class_prefs.get('secondary')
-
+		if "Eldritch Knight" in char:
+			secondary_stat = 'Intelligence'
+		else:
+			secondary_stat = class_prefs.get('secondary')
 		# Get background stat boosts
 		background_prefs = background_stat_boosts.get(char.background, [])
 
@@ -351,13 +458,13 @@ class Character:
 				stats[stat] = stats[stat] + 1
 
 		# Update the character's ability scores
-		if char.abilities:
-			char.abilities.STR = stats['Strength']
-			char.abilities.DEX = stats['Dexterity']
-			char.abilities.CON = stats['Constitution']
-			char.abilities.INT = stats['Intelligence']
-			char.abilities.WIS = stats['Wisdom']
-			char.abilities.CHA = stats['Charisma']
+		if char.AS:
+			char.AS.STR = stats['Strength']
+			char.AS.DEX = stats['Dexterity']
+			char.AS.CON = stats['Constitution']
+			char.AS.INT = stats['Intelligence']
+			char.AS.WIS = stats['Wisdom']
+			char.AS.CHA = stats['Charisma']
 		return stats
 
 	def set_Skills(char):
@@ -365,7 +472,7 @@ class Character:
 			based on character background and class.
 		"""
 
-		char.skills = Char_Skills(AS = char.abilities, ProficiencyBonus=char.proficiency_bonus)
+		char.skills = Char_Skills(AS = char.AS, ProficiencyBonus=char.proficiency_bonus)
 		char.seed += 1
 		char.set()
 		# Step 1: Adjust skills based on background
@@ -509,7 +616,11 @@ class Character:
 					2,
 					char.skills.get_proficient_skills()
 					)
-
+				if char.level >= 6:
+					char.skills.activate_expertise(
+						2,
+						char.skills.get_proficient_skills()
+						)
 				char.skills.Simple_Weapons.set_proficiency()
 				char.skills.Finesse.set_proficiency()
 				char.skills.Light_Weapons.set_proficiency()
@@ -666,7 +777,9 @@ class Character:
 					"Religion",
 					])
 			elif char.character_class == "Barbarian":
-				char.skills.activate_proficiencies(2, [
+				n = 2
+				if char.level >= 3: n = 3
+				char.skills.activate_proficiencies(n, [
 					"Animal Handling",
 					"Athletics",
 					"Intimidation",
@@ -688,11 +801,10 @@ class Character:
 		return setObjects(char)
 
 
-
 #        if char.skills.Heavy.is_proficient():
 #            best_armor_class = max(best_armor_class, char.equipment.HeavyArmor().armor_class)
 #        elif char.skills.Medium.is_proficient():
-#            best_armor_class = max(best_armor_class, char.equipment.MediumArmor(Modifier(char.abilities.DEX)).armor_class)
+#            best_armor_class = max(best_armor_class, char.equipment.MediumArmor(Modifier(char.AS.DEX)).armor_class)
 #        elif char.skills.Light.is_proficient():
-#            best_armor_class = max(best_armor_class, char.equipment.LightArmor(Modifier(char.abilities.DEX)).armor_class)
+#            best_armor_class = max(best_armor_class, char.equipment.LightArmor(Modifier(char.AS.DEX)).armor_class)
 #        char.AC = best_armor_class
