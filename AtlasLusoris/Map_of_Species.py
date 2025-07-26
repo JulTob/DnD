@@ -7,6 +7,8 @@ from AtlasAlusoris.Map_of_Races import (
 	)
 import random
 
+from AtlasLusoris.Grimoire_of_Features import  *
+
 species = {
 	"Human":           	120, #
 	"Dwarf":        	100, #
@@ -99,3 +101,52 @@ def species_to_race_and_subrace(species_name):
 		Alert(f"The species '{species_name}' wasn't found, returning default.")
 		return ("Unknown", None)
 	return mapping[species_name]
+
+
+def species_features(species_name):
+
+	species = {
+		"Human": [
+			Feat(
+				name="Versatile Heritage",
+				apply=lambda c: None,
+				description="You gain the Versatile Heritage trait, allowing you to take a Feat of your choice at level 1.",
+				source="Species Feature"
+				)
+			],
+		"Elf": [
+			Darkvision(),
+			Feature(name="Keen Senses", description="You have proficiency in the Perception skill.", source="Species Feature"),
+			Feature(name="Fey Ancestry", description="You have advantage on saving throws against being charmed.", source="Species Feature")
+			],
+		"Aasimar": [
+			Darkvision(),
+			CelestialResistance(),
+			HealingHands(),
+			LightBearer()
+			],
+		"Dwarf": [
+			Darkvision(),
+			DwarvenResilience(),
+			DwarvenWeaponTraining(),
+			DwarvenToughness()
+			]
+			}
+	if species_name == "Gnome":
+			lineage_choice = random.choice(["Forest", "Rock"])
+			features = [
+				Darkvision(),
+				GnomishCunning(),
+				]
+			if lineage_choice == "Forest":
+				features.append(ForestGnomeLineage())
+			if lineage_choice == "Rock":
+				features.append(RockGnomeLineage())
+			return features
+	return species.get(species_name, [])
+
+
+def apply_species_features(char, species_name):
+	for feature in species_features(species_name):
+		feature(char)  # Will only run if `apply` exists
+		char.features.append(feature)
