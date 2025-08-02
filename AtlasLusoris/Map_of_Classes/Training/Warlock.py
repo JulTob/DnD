@@ -1,7 +1,12 @@
 from ..Grimoire_of_Health  import roll_health, HIT_DIE_TABLE
 from ..Codex_of_Progression import Progression
 
-from AtlasLusoris.Grimoire_of_Features import Feature
+from AtlasLusoris.Grimoire_of_Features import (
+	Feature,
+	BuildAvailableInvocations,
+	ApplyRandomFeats,
+	ApplyEpicBoon
+	)
 import random
 
 
@@ -52,18 +57,18 @@ class Warlock(Progression):
 
 		# Level 1:
 		if level >= 1:
-			features.append(Feature("Eldritch Invocations", 1,
+			features.append(Feature("Eldritch Invocations",
 				f"You have unearthed Eldritch Invocations, pieces of forbidden knowledge that imbue you with an abiding magical ability or other lessons.",
 				f"Class: Warlock – {subclass}"))
 
-			features.append(Feature("Pact Magic", 1,
+			features.append(Feature("Pact Magic",
 				"""Through occult ceremony, you have formed a pact with a mysterious entity to gain magical powers. The entity is a voice in the shadows-its identity unclear—but its boon to you is concrete: the ability to cast spells.""",
 				"Class: Warlock"))
 
 		# Level 2:
 		if level >= 2:
 			roll_health(character)
-			features.append(Feature("Magical Cunning", 2,
+			features.append(Feature("Magical Cunning",
 				f"You can perform an esoteric rite for 1 minute. At the end of it, you regain expended Pact Magic spell slots but no more than a number equal to half your maximum (round up). Once you use this feature, you can't do so again until you finish a Long Rest.",
 				"Class: Warlock"))
 
@@ -131,7 +136,7 @@ class Warlock(Progression):
 					#"Oracle", "Avatar", "Guardian",
 					#"Avatar", "Gate Guardian", "Ki-rin"
 					])
-				features.append(Feature("Celestial Patron", 3,
+				features.append(Feature("Celestial Patron",
 					f"""Your pact draws on the Upper Planes, the realms of
 					everlasting bliss. You entered, willingly or not,
 					in a pact with a Celestial: {patron}.
@@ -139,7 +144,7 @@ class Warlock(Progression):
 					a hint of the holy light that illuminates
 					the multiverse.""",
 					"Class: Warlock"))
-				features.append(Feature("Healing Light", 3,
+				features.append(Feature("Healing Light",
 					f"""You gain the ability to channel celestial energy to heal wounds. You have a pool of d6s to fuel this healing. The number of dice in the pool equals 1 plus your Warlock level.
 					<br>
 					As a Bonus Action, you can heal yourself or one creature you can see within 60 feet of yourself, expending dice from the pool. The maximum number of dice you can expend at once equals your Charisma modifier (minimum of one die). Roll the dice you expend, and restore a number of Hit Points equal to the roll's total. Your pool regains all expended dice when you finish a Long Rest.
@@ -158,14 +163,14 @@ class Warlock(Progression):
 					"Yeenoghu, Lord of Gnolls",
 					])
 
-				features.append(Feature("Fiend Patron", 3,
+				features.append(Feature("Fiend Patron",
 					f"""Your pact draws on the Lower Planes, the realms of
 					perdition. You forged a bargain with {patron}.
 					{patron}'s aims are certainly evil, but ultimately unknown
 					to you.
 					""",
 					"Class: Warlock"))
-				features.append(Feature("Dark One's Blessing", 3,
+				features.append(Feature("Dark One's Blessing",
 					f"""
 					When you reduce an enemy to 0 Hit Points, you gain
 					<i>Temporary Hit Points equal to your Charisma modifier plus your Warlock level</i>
@@ -192,21 +197,21 @@ class Warlock(Progression):
 					"Atropus, the World Born", "The Infinite Library"
 					])
 
-				features.append(Feature("Great Old One Patron", 3,
+				features.append(Feature("Great Old One Patron",
 					f"""You found your bind is to an unspeakable being
 					from the Far Realm: {patron}. <br>
 					Your Patron's aims are beyond comprehension. But you always
 					feel the gaze of {patron} watching you.
 					""",
 					"Class: Warlock"))
-				features.append(Feature("Awakened Mind", 3,
+				features.append(Feature("Awakened Mind",
 					f"""
 					You can form a telepathic connection between your mind and the mind of another. As a Bonus Action, choose one creature you can see within 30 feet of yourself. You and the chosen creature can communicate telepathically with each other while the two of you are within a number of miles of each other equal to your Charisma modifier (minimum of 1 mile). To understand each other, you each must mentally use a language the other knows.
 					<br>
 					The telepathic connection lasts for a number of minutes equal to your Warlock level. It ends early if you use this feature to connect with a different creature.
 					""",
 					"Class: Warlock"))
-				features.append(Feature("Psychic Spells", 3,
+				features.append(Feature("Psychic Spells",
 					f"""
 					When you cast a Warlock spell that deals damage, you can change its damage type to Psychic. In addition, when you cast a Warlock spell that is an Enchantment or Illusion, you can do so without Verbal or Somatic components.
 					""",
@@ -217,7 +222,7 @@ class Warlock(Progression):
 					"Dao", "Djinni", "Efreeti", "Marid"
 					])
 
-				features.append(Feature("Genie Patron", 3,
+				features.append(Feature("Genie Patron",
 					f"""You have made a pact with one of the rarest kinds of genie, a noble {patron} genie. Such entities rule vast fiefs on the Elemental Planes and have great influence over lesser genies and elemental creatures. Noble genies are varied in their motivations, but most are arrogant and wield power that rivals that of lesser deities. They delight in turning the table on mortals, who often bind genies into servitude, and readily enter into pacts that expand their reach.
 					""",
 					"Class: Warlock"))
@@ -258,7 +263,7 @@ class Warlock(Progression):
 						'tiara', 'crown', 'book',  'amulet', 'coin', 'salt shaker',
 						'dice', 'skeleton key', 'figurine'
 						])
-				features.append(Feature(f"Genie's Vessel", 3,
+				features.append(Feature(f"Genie's Vessel",
 					f"""
 					Your {patron} patron gifts you an ornate {vessel}.
 					A magical vessel that grants you a measure of the genie's power.
@@ -267,7 +272,7 @@ class Warlock(Progression):
 					<br> While you are touching the vessel, you can use any one of its magic features.
 					""",
 					"Class: Warlock"))
-				features.append(Feature("Bottled Respite", 3,
+				features.append(Feature("Bottled Respite",
 					f"""
 					As an action, you can magically vanish and enter your {vessel},
 					which remains in the space you left. The interior of the
@@ -278,14 +283,14 @@ class Warlock(Progression):
 					While inside, you can hear the area around your {vessel} as if you were in its space. You can remain inside the vessel up to a number of hours equal to twice your proficiency bonus. You exit the vessel early if you use a bonus action to leave, if you die, or if the vessel is destroyed. When you exit the vessel, you appear in the unoccupied space closest to it. Any objects left in the vessel remain there until carried out, and if the vessel is destroyed, every object stored there harmlessly appears in the unoccupied spaces closest to the vessel's former space. Once you enter the vessel, you can't enter again until you finish a long rest.
 					""",
 					"Class: Warlock"))
-				features.append(Feature("Genie's Wrath.", 3,
+				features.append(Feature("Genie's Wrath.",
 					f"""
 					Once during each of your turns when you hit with an
 					attack roll, you can deal extra {extra_damage} damage to
 					the target equal to your proficiency bonus.
 					""",
 					"Class: Warlock"))
-				features.append(Feature("The Vessel", 3,
+				features.append(Feature("The Vessel",
 					f"""
 					The {vessel}'s AC equals your spell save DC.
 					Its hit points equal your warlock level plus your
@@ -427,26 +432,26 @@ class Warlock(Progression):
 	"The Green Lord",
 
 						])
-				features.append(Feature("Archfey Patron", 3,
+				features.append(Feature("Archfey Patron",
 					f"""Your pact draws on the power of the Feywild.
 					 You forged a bargain with {patron}.
 					{patron} is often inscrutable and whimsical.
 					""",
 					"Class: Warlock"))
-				features.append(Feature("Steps of the Fey", 3,
+				features.append(Feature("Steps of the Fey",
 					f"""
 {patron} grants you the ability to move between the boundaries of the planes.
 You can cast <i>Misty Step</i> without expending a spell slot a number of times equal to your Charisma modifier (minimum of once), and you regain all expended uses when you finish a Long Rest.
 					""",
 					"Class: Warlock"))
-				features.append(Feature("Steps of the Fey Option", 3,
+				features.append(Feature("Steps of the Fey Option",
 					f"""
 					Whenever you cast <i>Misty Step</i> you can choose one additional effect:
 1>
 <li><b> Refreshing Step.</b> Immediately after you teleport, you or one creature you can see within 10 feet of yourself gains 1d10 Temporary Hit Points.
 </ul>					""",
 					"Class: Warlock"))
-				features.append(Feature("Steps of the Fey Option", 3,
+				features.append(Feature("Steps of the Fey Option",
 					f"""
 					Whenever you cast <i>Misty Step</i> you can choose one additional effect.
 <ul>
@@ -457,19 +462,19 @@ You can cast <i>Misty Step</i> without expending a spell slot a number of times 
 
 		if level >= 6:
 			if subclass == "Archfey":
-				features.append(Feature("Misty Escape", 6,
+				features.append(Feature("Misty Escape",
 					f"""
 You can cast <i>Misty Step</i> as a <b>Reaction</b> in response to taking damage.
 					""",
 					"Class: Warlock"))
-				features.append(Feature("Steps of the Fey Option", 6,
+				features.append(Feature("Steps of the Fey Option",
 					f"""
 					Whenever you cast <i>Misty Step</i> you can choose one of the following additional effects.
 <ul>
 <li><b>Disappearing Step.</b> You have the <i>Invisible</i> condition until the start of your next turn or until immediately after you make an attack roll, deal damage, or cast a spell.
 </ul>					""",
 					"Class: Warlock"))
-				features.append(Feature("Steps of the Fey Option", 6,
+				features.append(Feature("Steps of the Fey Option",
 					f"""
 					Whenever you cast <i>Misty Step</i> you can choose one additional effects.
 <ul style="list-style-type: '🪬'">
@@ -477,7 +482,7 @@ You can cast <i>Misty Step</i> as a <b>Reaction</b> in response to taking damage
 </ul>					""",
 					"Class: Warlock"))
 			if subclass == "Fiend":
-				features.append(Feature("Dark One's Own Luck", 6,
+				features.append(Feature("Dark One's Own Luck",
 					f"""
 You can call on your fiendish patron to alter fate in your favor.
 When you make an ability check or a saving throw, you can use this
@@ -490,7 +495,7 @@ no more than once per roll. You regain all expended uses
 when you finish a Long Rest.					""",
 					"Class: Warlock"))
 			if subclass == "Great Old One":
-				features.append(Feature("Clairvoyant Combatant", 6,
+				features.append(Feature("Clairvoyant Combatant",
 					f"""
 When you form a telepathic bond with a creature using your
 Awakened Mind, you can force that creature to make a Wisdom
@@ -504,19 +509,19 @@ finish a Short or Long Rest unless you expend a Pact Magic
 spell slot (no action required) to restore your use of it.					""",
 					"Class: Warlock"))
 			if subclass == "Genie":
-					features.append(Feature("Elemental Resistance", 6,
+					features.append(Feature("Elemental Resistance",
 						f"""
 						You have resistance to {extra_damage} damage.
 						""",
 						"Class: Warlock"))
-					features.append(Feature("Elemental Gift", 6,
+					features.append(Feature("Elemental Gift",
 						f"""
 As a bonus action, you can give yourself a flying speed of 30 feet that lasts for 10 minutes, during which you can hover.
 <br> You can use this bonus action a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.
 						""",
 						"Class: Warlock"))
 			if subclass == "Celestial":
-				features.append(Feature("Radiant Soul", 6,
+				features.append(Feature("Radiant Soul",
 					f"""
 					Your link to your patron allows you to serve as a conduit for radiant energy. You have Resistance to Radiant damage. Once per turn, when a spell you cast deals Radiant or Fire damage, you can add your Charisma modifier to that spell's damage against one of the spell's targets.
 
@@ -525,7 +530,7 @@ As a bonus action, you can give yourself a flying speed of 30 feet that lasts fo
 
 		if level >= 9:
 			from AtlasMagia.Lodge_of_Spells import ContactOtherPlane
-			features.append(Feature("Contact Patron", 9,
+			features.append(Feature("Contact Patron",
 				f"""
 In the past, you usually contacted your patron through intermediaries. Now you can communicate directly; you always have the Contact Other Plane spell prepared. With this feature, you can cast the spell without expending a spell slot to contact your patron, and you automatically succeed on the spell's saving throw.
 <br>
@@ -535,7 +540,7 @@ Once you cast the spell with this feature, you can't do so in this way again unt
 				"Class: Warlock"))
 		if level >= 10:
 			if subclass == "Archfey":
-				features.append(Feature("Beguiling Defenses", 10,
+				features.append(Feature("Beguiling Defenses",
 					f"""
 Your patron teaches you how to guard your mind and body. You are immune to the Charmed condition.
 
@@ -543,7 +548,7 @@ In addition, immediately after a creature you can see hits you with an attack ro
 					""",
 					"Class: Warlock"))
 			if subclass == "Celestial":
-				features.append(Feature("Celestial Resilience", 10,
+				features.append(Feature("Celestial Resilience",
 f"""
 You gain Temporary Hit Points whenever you use your Magical Cunning feature or finish a Short or Long Rest.
 These Temporary Hit Points equal your Warlock level plus your Charisma modifier.
@@ -554,7 +559,7 @@ plus your Charisma modifier.
 					"Class: Warlock"))
 			if subclass == "Great Old One":
 				from AtlasMagia.Lodge_of_Spells import Hex
-				features.append(Feature("Eldritch Hex", 10,
+				features.append(Feature("Eldritch Hex",
 					f"""
 Your alien patron {patron} grants you a powerful curse.
 You always have the Hex spell prepared. When you cast Hex
@@ -564,7 +569,7 @@ saving throws of the chosen ability for the duration of the spell.
 
 """,
 					"Class: Warlock"))
-				features.append(Feature("Thought Shield", 6,
+				features.append(Feature("Thought Shield",
 					f"""
 Your thoughts can't be read by telepathy or other means unless you allow it.
 You also have Resistance to Psychic damage, and whenever a creature deals
@@ -572,14 +577,14 @@ Psychic damage to you, that creature takes the same amount of damage that you ta
 					""",
 					"Class: Warlock"))
 			if subclass == "Fiend":
-				features.append(Feature("Fiendish Resilience", 10,
+				features.append(Feature("Fiendish Resilience",
 					f"""
 					Choose one damage type, other than Force, whenever you finish a Short or Long Rest. You have Resistance to that damage type until you choose a different one with this feature.
 					"""
 					"Class: Warlock"))
 
 			if subclass == "Genie":
-				features.append(Feature("Sanctuary Vessel", 6,
+				features.append(Feature("Sanctuary Vessel",
 					f"""
 When you enter your Genie's Vessel, the {vessel} via the Bottled Respite
 feature, you can now choose up to five willing creatures that you
@@ -600,13 +605,13 @@ a short rest, and anyone can add your proficiency bonus
 
 		if level >= 14:
 			if subclass == "Archfey":
-				features.append(Feature("Bewitching Magic", 14,
+				features.append(Feature("Bewitching Magic",
 					f"""
 Your patron grants you the ability to weave your magic with teleportation. Immediately after you cast an Enchantment or Illusion spell using an action and a spell slot, you can cast Misty Step as part of the same action and without expending a spell slot.
 """,
 					"Class: Warlock"))
 			if subclass == "Celestial":
-				features.append(Feature("Searing Vengeance", 10,
+				features.append(Feature("Searing Vengeance",
 f"""
 When you or an ally within 60 feet of you is about to make a Death Saving Throw, you can unleash radiant energy to save the creature.
 The creature regains Hit Points equal to half its Hit Point maximum and can end the Prone condition on itself.
@@ -616,14 +621,14 @@ Once you use this feature, you can't use it again until you finish a Long Rest.
 """,
 					"Class: Warlock"))
 			if subclass == "Great Old One":
-				features.append(Feature("Create Thrall", 10,
+				features.append(Feature("Create Thrall",
 					f"""
 When you cast Summon Aberration, you can modify it so that it doesn't require Concentration. If you do so, the spell's duration becomes 1 minute for that casting, and when summoned, the Aberration has a number of Temporary Hit Points equal to your Warlock level plus your Charisma modifier.
 <br>
 In addition, the first time each turn the Aberration hits a creature under the effect of your Hex, the Aberration deals extra Psychic damage to the target equal to the bonus damage of that spell.""",
 					"Class: Warlock"))
 			if subclass == "Fiend":
-				features.append(Feature("Hurl Through Hell", 14,
+				features.append(Feature("Hurl Through Hell",
 					f"""
 Once per turn when you hit a creature with an attack roll, you can
 try to instantly transport the target through the Lower Planes.
@@ -638,7 +643,7 @@ Once you use this feature, you can't use it again until you finish a Long Rest u
 					"""
 					"Class: Warlock"))
 			if subclass == "Genie":
-				features.append(Feature("Limited Wish", 14,
+				features.append(Feature("Limited Wish",
 					f"""
 You entreat your patron to grant you a small wish. As an action,
  you can speak your desire to your Genie's Vessel, requesting
@@ -658,7 +663,7 @@ finish 1d4 long rests.
 			features.extend(feats)
 
 		if level >= 20:
-			features.append(Feature("Eldritch Master", 20,
+			features.append(Feature("Eldritch Master", 
 				"""When you use your Magical Cunning feature, you regain all your expended Pact Magic spell slots.""",
 				"Class: Warlock"))
 
