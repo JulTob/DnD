@@ -11,6 +11,23 @@
         <button type="button" class="plus fantasy-button fantasy-input">+</button>
     	</div>
     <input type="hidden" id="seed-preserved" value="{{ character._seed }}">
+<select id="quick-species" class="fantasy-button" onchange="quickRedirect()">
+  {% for s in SPECIES_LIST %}
+    <option value="{{ s }}" {% if s == character.Species %}selected{% endif %}>{{ s }}</option>
+  {% endfor %}
+</select>
+
+<select id="quick-class" class="fantasy-button" onchange="quickRedirect()">
+  {% for c in CLASS_LIST %}
+    <option value="{{ c }}" {% if c == character.Class %}selected{% endif %}>{{ c }}</option>
+  {% endfor %}
+</select>
+
+<select id="quick-background" class="fantasy-button" onchange="quickRedirect()">
+  {% for b in BACKGROUND_LIST %}
+    <option value="{{ b }}" {% if b == character.Background %}selected{% endif %}>{{ b }}</option>
+  {% endfor %}
+</select>
 	</div>
 
 <hr>
@@ -76,12 +93,12 @@
 				        {% for skill, display in character.Skills.list %}
 				        <tr>
 				          <td>
-				            {% if skill.proficiency_level == 2 %}🔴
+				            {% if skill.proficiency_level == 2 %}⭐️
 				            {% elif skill.proficiency_level == 1 %}⚫
 				            {% else %}⚪{% endif %}
 				          </td>
 				          <td><h3>{{ display }}</h3></td>
-				          <td>{{ skill.calculate_modifier(character.Level) }}</td>
+				          <td>{{ skill.calculate_modifier() }}</td>
 				        </tr>
 				        {% endfor %}
 				      </tbody>
@@ -228,27 +245,6 @@
     level: "{{ character.Level }}"
   };
 </script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const minus = document.querySelector('.minus');
-    const plus = document.querySelector('.plus');
-
-    const level = {{ character.level }};
-    const seed = document.getElementById('seed-preserved').value;
-
-    function redirectWithLevel(newLevel) {
-        window.location.href = `/character/${newLevel}/${seed}`;
-    }
-
-    minus.addEventListener('click', () => {
-        if (level > 1) redirectWithLevel(level - 1);
-    });
-
-    plus.addEventListener('click', () => {
-        if (level < 20) redirectWithLevel(level + 1);
-    });
-});
-</script>
 
 <script>
 function printForma() {
@@ -287,6 +283,7 @@ function printForma() {
   };
 }
 </script>
+
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const grid = document.querySelector('.npc-grid');
@@ -302,6 +299,52 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     observer.observe(grid);
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // 1) Grab the current path and split into parts
+  const parts = window.location.pathname.split('/').filter(Boolean);
+  // Expect: ["character", species, class, background, level, gender, seed]
+  if (parts[0] !== 'character' || parts.length < 7) return;
+
+  // 2) Destructure the six key values
+  const [ , spec, cls, bg, levelRaw, gender, seed ] = parts;
+  let level = parseInt(levelRaw, 10) || 1;
+
+  // 3) DOM handles
+  const spEl  = document.getElementById('quick-species');
+  const clEl  = document.getElementById('quick-class');
+  const bgEl  = document.getElementById('quick-background');
+  const minus = document.querySelector('.minus');
+  const plus  = document.querySelector('.plus');
+
+  // 4) Build the canonical URL from new values
+  function buildURL(newLevel, newSeed = seed) {
+    return `/character/` +
+           `${encodeURIComponent(spEl ? spEl.value : spec)}/` +
+           `${encodeURIComponent(clEl ? clEl.value : cls)}/` +
+           `${encodeURIComponent(bgEl ? bgEl.value : bg)}/` +
+           `${newLevel}/` +
+           `${encodeURIComponent(gender)}/` +
+           `${encodeURIComponent(newSeed)}`;
+  }
+
+  // 5) Selector change ⇒ fresh seed, same level
+  window.quickRedirect = () => {
+    const fresh = Math.floor(Math.random() * 16384);
+    window.location.href = buildURL(level, fresh);
+  };
+
+  // 6) ± buttons ⇒ clamp level, reuse seed
+  function changeLevel(delta) {
+    const next = Math.max(1, Math.min(20, level + delta));
+    if (next === level) return;
+    window.location.href = buildURL(next, seed);
+  }
+
+  minus?.addEventListener('click', () => changeLevel(-1));
+  plus ?.addEventListener('click', () => changeLevel(+1));
 });
 </script>
 
