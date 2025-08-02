@@ -3,6 +3,8 @@ from ..Codex_of_Progression import Progression
 
 from AtlasLusoris.Grimoire_of_Features import Feature
 
+import random
+
 class Barbarian(Progression):
 	# --- Per‑level number helpers -----------------------------------------
 	def RageUses(self, lvl: int) -> int:
