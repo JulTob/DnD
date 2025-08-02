@@ -27,9 +27,9 @@ class Feature:
 	def html(self) -> str:
 		return f"""
 		<div class="npc-textbox" style="grid-column: span 1;">
-			<h4 style="font-family: 'Manufacturing Consent' ; font-size:	2.1em;">
+			<h4 style="font-family: 'Manufacturing Consent' ; font-size:	1.2em;">
 			{self.name}</h4>
-		<i>{self.description}</i>
+		 {self.description}
 		</div>
 		"""
 
@@ -63,9 +63,9 @@ class Feat(Feature):
 	def html(self) -> str:
 		return f"""
 		<div class="npc-textbox" style="grid-column: span 1;">
-			<h4 style="font-family: 'Manufacturing Consent' ; font-size:	2.1em;">
+			<h4 style="font-family: 'Manufacturing Consent' ; font-size:	1.1em;">
 			{self.name}</h4>
-		<i>{self.description}</i>
+		{self.description}
 		</div>
 		"""
 
@@ -188,11 +188,6 @@ def grant_expertise_in_one_skill(char):
 
 # -------- Spell Granting ----------------#
 
-def grant_spell(spell_name, at_will=False, times_per_day=None):
-	def _apply(c):
-		if hasattr(c, "spells_known"):
-			c.spells_known.append(find_spell_by_name(spell_name, c))
-	return _apply
 
 # -------- Species' Features ----------------#
 def Darkvision( n=60):
@@ -209,8 +204,9 @@ def Darkvision( n=60):
 			)
 
 def CelestialResistance():
-		return Feature(
+		return Feat(
 			name="Celestial Resistance",
+			apply=lambda char: None,
 			description="You have resistance to radiant and necrotic damage.",
 			source="Species Feature"
 			)
@@ -228,7 +224,7 @@ def LightBearer():
 			name="Light Bearer",
 			description="You know the Light cantrip. Charisma is your spellcasting ability for it.",
 			source="Species Feature"
-		)
+			)
 
 #--------- More Feats and Boons ----------#
 
@@ -275,7 +271,7 @@ def BoonSpellRecall(char):
 			fullname = {
 				"STR":"Strength", "DEX":"Dexterity", "CON":"Constitution",
 				"INT":"Intelligence", "WIS":"Wisdom", "CHA":"Charisma"
-			}[key]
+				}[key]
 			if hasattr(char, "stats"):
 				char.stats[fullname] += 1
 
@@ -299,10 +295,10 @@ def BoonIrresistibleOffense():
 			"damage ignores Resistance.<br>"
 			"<b>Overwhelming Strike.</b> When you roll a 20 on an attack roll, "
 			"deal extra damage equal to the ability score increased by this boon."
-		),
+			),
 		source="Epic Boon",
 		level=19,   # prerequisite
-	)
+		)
 
 def BuildAvailableFeats(char):
 	#if "Elf" in char:
@@ -340,10 +336,10 @@ def BoonCombatProwess():
 			"<b>Ability Score Increase.</b> +1 to any ability (max 30).<br>"
 			"<b>Peerless Aim.</b> When you miss with an attack roll, you can "
 			"choose to hit instead (usable again at the start of your next turn)."
-		),
+			),
 		source="Epic Boon",
 		level=19,
-	)
+		)
 
 def BoonDimensionalTravel():
 	def _apply(c):
@@ -356,17 +352,17 @@ def BoonDimensionalTravel():
 			"<b>Ability Score Increase.</b> +1 to any ability (max 30).<br>"
 			"<b>Blink Steps.</b> Immediately after you take the Attack or "
 			"Magic action, you can teleport 30 ft to a space you can see."
-		),
+			),
 		source="Epic Boon",
 		level=19,
-	)
+		)
 
 def BoonEnergyResistance():
 	def Damages():
 		dmg_types = [
-		"Acid", "Cold", "Fire", "Lightning", "Necrotic",
-		"Poison", "Psychic", "Radiant", "Thunder",
-		]
+			"Acid", "Cold", "Fire", "Lightning", "Necrotic",
+			"Poison", "Psychic", "Radiant", "Thunder",
+			]
 		chosen = random.sample(dmg_types, 2)
 		return chosen[1], chosen[0]
 
@@ -389,10 +385,10 @@ def BoonEnergyResistance():
 			"<b>Energy Redirection.</b> When you take one of those damage "
 			"types, you can use a Reaction to force a Dex save (DC 8 + CON mod + PB) "
 			"on a creature within 60 ft; it takes 2d12 + CON mod damage on a fail."
-		),
+			),
 		source="Epic Boon",
 		level=19,
-	)
+		)
 
 def BoonFate():
 	def _apply(c):
@@ -641,7 +637,6 @@ def ApplyEpicBoon(char, n=1):
 	return chosen
 
 def Fighting_Styles(char=None):
-
 	styles = {
 	"Archery":
 		"You gain a +2 bonus to attack rolls you make with Ranged weapons.",
@@ -680,10 +675,7 @@ def Fighting_Styles(char=None):
 			+ cantrip_html
 			)
 		if char.level >= 18: styles.pop("Blind Fighting", None)
-
 	return styles
-
-
 	if char and "Ranger" in char:
 		print("ENTER RANGER DRUIDIC WARRIOR")
 
@@ -703,7 +695,6 @@ def Fighting_Styles(char=None):
 			"spells for you, and Wisdom is your spell-casting ability for them."
 			f"{html_blocks}"
 		)
-
 	return result
 
 def character_fighting_styles(char):
@@ -861,18 +852,6 @@ def HealingHands():
 		source="Species Feature"
 	)
 
-def CelestialResistance():
-	def apply(char):
-		if not hasattr(char, "resistances"):
-			char.resistances = set()
-		char.resistances.update(["radiant", "necrotic"])
-
-	return Feat(
-		name="Celestial Resistance",
-		apply=apply,
-		description="You have resistance to radiant and necrotic damage.",
-		source="Species Feature"
-	)
 
 def LightBearer():
 	def apply(char):
@@ -911,7 +890,13 @@ class Invocation(Feature):
 		pact_required: Optional[str] = None,
 		apply: Optional[Callable[[Any], None]] = None,
 	):
-		super().__init__(name, level, description, source)
+		super().__init__(
+			name=name,
+			description=description,
+			apply=apply,
+			source=source,
+			level=level,
+			)
 		self.condition = condition
 		self.pact_required = pact_required
 		# Always a callable; avoids bugs!
@@ -961,7 +946,7 @@ def InvArmorOfShadows():
 			<div class="npc-textbox">{MageArmor}</div>
 			""",
 		condition=lambda c: "Warlock" in c.char_class,
-		apply=grant_spell("Mage Armor", at_will=True)
+		apply=None
 	)
 
 def InvAscendantStep():
@@ -1080,57 +1065,27 @@ def generic_stat_boost_boon(name, desc):
 
 def Lucky():
 	def apply(char):
-		char.luck_points = char.proficiency_bonus
-
-		def regain_luck():
-			char.luck_points = char.proficiency_bonus
-			Inform(f"{char.name} regains Luck Points ({char.luck_points}) after a Long Rest.")
-
-		char.regain_luck = regain_luck
-
-		def use_luck_for_advantage():
-			if char.luck_points > 0:
-				char.luck_points -= 1
-				Inform(f"{char.name} uses a Luck Point for Advantage. ({char.luck_points} left)")
-				return True
-			Warning(f"{char.name} has no Luck Points left!")
-			return False
-
-		def use_luck_for_disadvantage():
-			if char.luck_points > 0:
-				char.luck_points -= 1
-				Inform(f"{char.name} uses a Luck Point to impose Disadvantage. ({char.luck_points} left)")
-				return True
-			Warning(f"{char.name} has no Luck Points left!")
-			return False
-
-		# Attach methods to the character object
-		char.use_luck_for_advantage = use_luck_for_advantage
-		char.use_luck_for_disadvantage = use_luck_for_disadvantage
-
+		char.proficiency_bonus
 	return Feat(
 		name="Lucky",
 		apply=apply,
 		description=(
-			"You have inexplicable luck that seems to kick in at just the right moment.<br>"
-			"<b>Luck Points.</b> You have Luck Points equal to your Proficiency Bonus. "
-			"You regain expended Luck Points after a Long Rest.<br>"
-			"<b>Advantage.</b> When you roll a d20 Test, spend 1 Luck Point to roll with Advantage.<br>"
-			"<b>Disadvantage.</b> When a creature rolls an attack against you, spend 1 Luck Point to impose Disadvantage."
-		),
+			f"""You have inexplicable luck that seems to kick in at just the right moment.<br>
+			<b>Luck Points.</b> You have Luck Points equal to your Proficiency Bonus. <br>
+			You regain expended Luck Points after a Long Rest.<br>
+			<b>Advantage.</b> When you roll a d20 Test, spend 1 Luck Point to roll with Advantage.<br>
+			<b>Disadvantage.</b> When a creature rolls an attack against you, spend 1 Luck Point to impose Disadvantage."""
+			),
 		source="Background",
 		level=1,
-	)
+		)
 
 
 def DwarvenResilience():
 	return Feat(
 		name="Dwarven Resilience",
 		description="You have resistance to poison damage and advantage on saving throws against poison.",
-		apply=lambda c: (
-			c.resistances.add("poison"),
-			c.saving_throws.add_advantage_against("poison") if hasattr(c.saving_throws, "add_advantage_against") else None
-		),
+		apply= None,
 		source="Species Feature"
 	)
 
@@ -1207,3 +1162,241 @@ def RockGnomeLineage():
 		description="You know the *Mending* and *Prestidigitation* cantrips. You can create magical clockwork devices. Intelligence is your spellcasting ability.",
 		source="Species Lineage"
 	)
+
+def Crafter():
+	"""
+	Origin feat: Crafter:contentReference[oaicite:3]{index=3}.  Grants proficiency with three
+	Artisan's Tools, provides a 20% discount on non‑magical items, and allows
+	fast crafting of simple gear during a long rest:contentReference[oaicite:4]{index=4}.
+	"""
+	def apply(char):
+		char.crafter_feat = True
+		char.crafting_discount = 0.20
+		char.can_fast_craft = True
+
+	return Feat(
+		name="Crafter",
+		apply=apply,
+		description=(
+			"""
+			<b>Tool Proficiency.</b> You gain proficiency with three different Artisan's Tools of your choice.
+			<b>Discount.</b> Whenever you buy a nonmagical item, you receive a 20 percent discount on it.
+			<b>Fast Crafting.</b> When you finish a Long Rest, you can craft one piece of gear from the Fast Crafting table.
+			"""
+			),
+		source="Background Feat",
+		level=1,
+	)
+
+def SkilledFeat():
+	"""
+	Origin feat: Skilled:contentReference[oaicite:6]{index=6}.  You gain proficiency in any
+	combination of three skills or tools of your choice:contentReference[oaicite:7]{index=7}.
+	"""
+	def apply(char):
+		char.skilled_feat = True
+
+	return Feat(
+		name="Skilled",
+		apply=apply,
+		description=(
+			"You gain proficiency in any combination of three skills or tools of your choice."
+		),
+		source="Background Feat",
+		level=1,
+	)
+
+def AlertFeat():
+	"""
+	Origin feat: Alert:contentReference[oaicite:9]{index=9}.  Grants an initiative bonus equal to
+	your proficiency bonus and allows you to swap initiative with a willing ally:contentReference[oaicite:10]{index=10}.
+	"""
+	def apply(char):
+		char.alert_feat = True
+		char.initiative_bonus_from_alert = getattr(char, "proficiency_bonus", 0)
+		char.can_swap_initiative = True
+
+	return Feat(
+		name="Alert",
+		apply=apply,
+		description=(
+			"<b>Initiative Proficiency.</b> When you roll Initiative, you can add your Proficiency Bonus to the roll. "
+			"<b>Initiative Swap.</b> Immediately after you roll Initiative, you can swap your Initiative with a willing ally in the same combat"
+		),
+		source="Background Feat",
+		level=1,
+	)
+
+def Musician():
+	"""
+	Origin feat: Musician:contentReference[oaicite:12]{index=12}.  Grants proficiency with three
+	musical instruments and lets you inspire allies during a rest:contentReference[oaicite:13]{index=13}.
+	"""
+	def apply(char):
+		char.musician_feat = True
+		char.instrument_proficiency_slots = 3
+		char.can_grant_inspiration_song = True
+
+	return Feat(
+		name="Musician",
+		apply=apply,
+		description=(
+			"<b>Instrument Training.</b> You gain proficiency with three Musical Instruments of your choice. "
+			"<b>Encouraging Song.</b> As you finish a Short or Long Rest, you can play a song to grant Heroic Inspiration to a number of allies equal to your Proficiency Bonus."
+		),
+		source="Background Feat",
+		level=1,
+	)
+
+def ToughFeat():
+	"""
+	Origin feat: Tough:contentReference[oaicite:15]{index=15}.  Increases your hit point maximum
+	by twice your character level and provides a continuous +2 HP per level thereafter:contentReference[oaicite:16]{index=16}.
+	"""
+	def apply(char):
+		if hasattr(char, "base_health"):
+			char.base_health += 2 * getattr(char, "level", 1)
+		char.tough_feat = True
+		char.tough_extra_per_level = 2
+
+	return Feat(
+		name="Tough",
+		apply=apply,
+		description=(
+			"Your Hit Point maximum increases by an amount equal to twice your character level when you gain this feat. "
+			"Whenever you gain a level thereafter, your Hit Point maximum increases by an additional 2 Hit Points."
+		),
+		source="Background Feat",
+		level=1,
+	)
+
+def HealerFeat():
+	"""
+	Origin feat: Healer:contentReference[oaicite:18]{index=18}.  Lets you use a Healer's Kit to heal an ally and reroll 1s on healing dice:contentReference[oaicite:19]{index=19}.
+	"""
+	def apply(char):
+		char.healer_feat = True
+		char.can_use_battle_medic = True
+		char.can_reroll_healing_ones = True
+
+	return Feat(
+		name="Healer",
+		apply=apply,
+		description=(
+			"<b>Battle Medic.</b> If you have a Healer's Kit, you can expend one use of it and tend to a creature. "
+			"That creature can expend one of its Hit Dice, and you roll that die, adding your Proficiency Bonus. "
+			"<b>Healing Rerolls.</b> When you roll to restore HP, you can reroll any 1s."
+		),
+		source="Background Feat",
+		level=1,
+	)
+
+def MagicInitiateCleric():
+	"""
+	Origin feat: Magic Initiate (Cleric):contentReference[oaicite:21]{index=21}.  You learn two Cleric cantrips and one 1st‑level Cleric spell:contentReference[oaicite:22]{index=22}.
+	"""
+	def apply(char):
+		char.magic_initiate_cleric = True
+
+	return Feat(
+		name="Magic Initiate (Cleric)",
+		apply=apply,
+		description=(
+			"You learn two cantrips of your choice from the Cleric spell list. "
+			"Choose one 1st‑level Cleric spell; you can cast it once without a spell slot (recharge on Long Rest). "
+			"Whenever you level up, you can replace one of the spells you gained from this feat with another."
+		),
+		source="Background Feat",
+		level=1,
+	)
+
+def MagicInitiateDruid():
+	"""
+	Origin feat: Magic Initiate (Druid):contentReference[oaicite:24]{index=24}.  Similar to the Cleric version but draws spells from the Druid list:contentReference[oaicite:25]{index=25}.
+	"""
+	def apply(char):
+		char.magic_initiate_druid = True
+
+	return Feat(
+		name="Magic Initiate (Druid)",
+		apply=apply,
+		description=(
+			"You learn two cantrips of your choice from the Druid spell list and one 1st‑level Druid spell. "
+			"You can cast the 1st‑level spell once without a spell slot (recharge on Long Rest), and you can replace spells when you level up."
+		),
+		source="Background Feat",
+		level=1,
+	)
+
+def MagicInitiateWizard():
+	"""
+	Origin feat: Magic Initiate (Wizard):contentReference[oaicite:27]{index=27}.  Similar to the generic Magic Initiate but pulls from the Wizard list:contentReference[oaicite:28]{index=28}.
+	"""
+	def apply(char):
+		char.magic_initiate_wizard = True
+
+	return Feat(
+		name="Magic Initiate (Wizard)",
+		apply=apply,
+		description=(
+			"You learn two cantrips of your choice from the Wizard spell list and one 1st‑level Wizard spell. "
+			"You can cast the 1st‑level spell once without a spell slot (recharge on Long Rest), and you can replace spells when you level up."
+		),
+		source="Background Feat",
+		level=1,
+	)
+
+def TavernBrawler():
+	"""
+	Origin feat: Tavern Brawler:contentReference[oaicite:30]{index=30}.  Enhances unarmed strikes, grants improvised weapon proficiency, rerolls 1s on damage, and lets you push on a hit:contentReference[oaicite:31]{index=31}.
+	"""
+	def apply(char):
+		char.tavern_brawler_feat = True
+		char.enhanced_unarmed_damage = True
+		char.unarmed_reroll_ones = True
+		char.improvised_weapon_proficiency = True
+		char.unarmed_push = True
+
+	return Feat(
+		name="Tavern Brawler",
+		apply=apply,
+		description=(
+			"<b>Enhanced Unarmed Strike.</b> Your Unarmed Strike deals 1d4 + Strength modifier Bludgeoning damage. "
+			"<b>Damage Rerolls.</b> You can reroll any 1 on an Unarmed Strike damage die. "
+			"<b>Improvised Weaponry.</b> You have proficiency with improvised weapons. "
+			"<b>Push.</b> When you hit with an Unarmed Strike, you can also push the target 5 ft."
+		),
+		source="Background Feat",
+		level=1,
+	)
+
+def SavageAttacker():
+	"""
+	Once per turn, you can roll weapon damage twice and use either result.
+	"""
+	def apply(char):
+		pass
+	return Feat(
+		name="Savage Attacker",
+		apply=apply,
+		description=(
+			"Once per turn when you hit a target with a weapon, you can roll the weapon's damage dice twice and use either result."
+			),
+		source="Background Feat",
+		level=1,
+		)
+
+def Resourceful():
+	"""
+	PHB 2024 p. 35.  You always wake up with Heroic Inspiration and can use
+	it normally; it refreshes every time you finish a Long Rest.
+	"""
+	def apply(char):
+		pass
+
+	return Feature(
+		name="Resourceful",
+		apply=apply,
+		description="You have Heroic Inspiration after every Long Rest.",
+		source="Species Feature",
+		)
