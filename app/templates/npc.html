@@ -32,10 +32,10 @@
 		<h2 style="font-size: 2.2em;">{{ npc.name | safe}}</h2>
 		<h1>{{ npc.title }}</h1>
 		</div>
-	<div class="npc-box" style="grid-column: span 2; font-size: 1.2em;">
+	<div class="npc-box" style="grid-column: span 1; font-size: 1.2em;">
 	    <h2>{{ npc.race }}: <b>{{ npc.subrace }}</b></h2>
 		</div>
-	<div class="npc-box" style="grid-column: span 2; font-size: 1.2em">
+	<div class="npc-box" style="grid-column: span 1; font-size: 1.2em">
 		<h2>{{ npc.background }}</h2>
 		</div>
 	<div class="npc-box" style="grid-column: span 1;">
@@ -47,7 +47,22 @@
 	<div class="npc-box">
 		<h6>{{ npc.gender }}</h6>
 		</div>
-
+	<div class="npc-box">
+		<div class="symbol">⚜️</div>
+    	<h1 style="font-size: 1.35em;">Lvl: {{ npc.level }} </h1>
+		</div>
+	<div class="npc-box">
+		<div class="symbol">💚</div>
+    	<h1 style="font-size: 1.35em;">HP: {{ npc.HP }}</h1>
+		</div>
+	<div class="npc-box">
+		<div class="symbol">🛡️</div>
+    	<h1 style="font-size: 1.35em;">AC: {{ npc.AC }}</h1>
+		</div>
+	<div class="npc-box">
+		<div class="symbol">🔆</div>
+		<h2>Proficiency Bonus: <br> +{{ npc.proficiency_bonus | safe  }} </h2> 
+		</div>
 	<div class="npc-box npc-scores" style="grid-column: span 1;">
 		<div class="npc-box" style = "text-align: right;">
 			<div class="symbol">🦾</div>
@@ -86,18 +101,6 @@
 			</h2>
 			</div>
 		</div>
-	<div class="npc-box">
-		<div class="symbol">⚜️</div>
-    	<h1 style="font-size: 1.35em;">Lvl: {{ npc.level }} </h1>
-		</div>
-	<div class="npc-box">
-		<div class="symbol">💚</div>
-    	<h1 style="font-size: 1.35em;">HP: {{ npc.HP }}</h1>
-		</div>
-	<div class="npc-box">
-		<div class="symbol">🛡️</div>
-    	<h1 style="font-size: 1.35em;">AC: {{ npc.AC }}</h1>
-		</div>
 
 	<div class="npc-box" style = "text-align: right;">
 		<div class="symbol">⭐️</div>
@@ -107,10 +110,7 @@
 	<div class="npc-box">
 			<h4>Passive Perception:</h4> {{ npc.passive_perception | safe  }}
 		</div>
-	<div class="npc-box">
-		<div class="symbol">🎯</div>
-		<h4>Proficiency Bonus:</h4> +{{ npc.proficiency_bonus | safe  }}
-		</div>
+
 	<div class="npc-box">
 		<div class="symbol">🎲</div>
 		<h5 style="font-size: 0.7em;">Saving Throws:</h5>
