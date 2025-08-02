@@ -14,8 +14,8 @@
   --black-color:	 #000;
 
   --font-header:  'Cinzel',   	'Nordic Chance',	'Lodeh',	sans-serif;
-  --font-text:    'Pirate One', 			'Merriweather', serif, 'Lodeh';
-  --font-fancy:   'kings and pirates', 'Pirate One', 	'Cinzel';
+  --font-text:    'IM Fell DW Pica', 'IM Fell English', 'Pirata One',  serif, 'Lodeh';
+  --font-fancy:   'kings and pirates', 'Pirata One', 	'Cinzel';
   --font-impact:  'JSL Ancient', 'MiddleSaxonyText', 'Kanzlei';
 }
 
@@ -31,6 +31,9 @@ body, html {
   	text-align: center; /* Centers text horizontally */
  	height: 	100%;
 	}
+
+
+
 
 /* ============================================
    Layout and Containers
@@ -67,11 +70,11 @@ header {
 	align-items: center;
 	position: relative;
 	font-family: var(--font-header);
-	font-size:	1.1em;
+	font-size:	1.6em;
 	}
 
 header h1 {
-	font-family: var(--font-header);
+	font-family: "Cinzel Decorative", var(--font-header);
     color: var(--secondary-fancy);
     text-decoration: none;
 	margin-left: 30px; /* Adjust as necessary */
@@ -104,7 +107,7 @@ header .fantasy-button{
     border: none;
     padding: 10px 20px;
     font-size: 1.0em;
-    font-family: var(--font-header);
+    font-family: "Cinzel Decorative", var(--font-header);
     cursor: pointer;
 	}
 
@@ -174,14 +177,14 @@ h2 {
 	font-size: 1.3em;
 	}
 
-h3, h4, h5  {
-	font-family: var(--font-header);
-	line-height:	1em;
+h3, h4 {
+	font-family: "Cinzel Decorative", var(--font-header);
+	font-size: 0.8em;
+	font-weight: bold;
+	/*font-style: italic;*/
+	line-height: 1.2em; /* Improving readability */
 	}
-h3, h4{
-	font-size: 1em; /* Making paragraphs smaller */
-	line-height: 1em; /* Improving readability */
-	}
+
 h5  {
 	color: var(--secondary-color);
 	font-size: 1em;
@@ -201,6 +204,7 @@ p, h1, h2, .btn {
 h5 {
 	font-family: var(--font-fancy);
 	color: var(--secondary-color);
+	line-height:	1em;
 	}
 h6 {
   	color: 				var(--text-color);
@@ -322,9 +326,6 @@ u {
 #api-key-help a:hover {
     color: var(--secondary-color);
 	}
-
-
-
 
 
 
@@ -591,17 +592,32 @@ input[type="number"].fantasy-input {
     }
 }
 
+/* Each page is the size of A4 for print */
+.npc-page {
+    width: 794px;  /* A4 width at 96dpi */
+    height: 1122px; /* A4 height at 96dpi */
+    margin: 20px auto;
+    padding: 10px;
+    box-sizing: border-box;
+    page-break-after: always;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+	}
 
 .npc-grid {
     display: grid; /* Enable grid layout */
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* Flexible */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Flexible */
+    /*grid-template-rows: repeat(auto-fit, minmax(100px, 1fr)); /* Flexible */
     width: 100%; /* Ensures grid spans the full container */
     max-width: 800px; /* A4 paper width for printing */
     margin: auto; /* Centers the grid */
     background-color: var(--back-color); /* Background for the grid */
 	gap: 1px;
     transition: all 0.3s ease; /* Smooth animations when repositioning */
-	    align-items: start; /* Align items to the top */
+	align-items: start; /* Align items to the top */
+    overflow: hidden;
 }
 
 .npc-box, .npc-textbox, .npc-scores{
@@ -633,12 +649,15 @@ input[type="number"].fantasy-input {
 	position: relative; /* Enable positioning for the pseudo-element */
 
 	}
-
+.npc-textbox h2 {
+	font-size: 1.5em;
+	}
 .npc-scores {
     flex-direction: column; /* Stack children vertically */
     gap: 2px; /* Add spacing between boxes */
     align-items: stretch; /* Ensure all boxes align to the container width */
 }
+
 
 
 .symbol{
@@ -682,8 +701,111 @@ input[type="number"].fantasy-input {
   font-size: 1.1em;
   color: #333;
 }
+
 .class-feature .level {
   font-size: 0.9em;
   color: #666;
   margin-left: 0.5em;
 }
+
+strong {
+  	font-family: 'Pirata One', 'IM Fell English',;
+	}
+
+
+
+
+#p5-holder {
+  /* Center the canvas and prevent accidental scrolling */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#spinner {
+  font-size: 4.2rem;
+  color: #ffd700cc; /* golden and slightly transparent */
+  margin-bottom: 12px;
+  filter: drop-shadow(0 0 12px #ffd70099);
+  text-shadow: 0 0 7px #fff8, 0 0 22px #ffd700cc;
+  user-select: none;
+}
+
+canvas {
+	display: block;
+	margin: 0 auto; }
+
+
+/*-----------------------------------------------------
+Loader
+_____________________________________________*/
+
+
+   #loader {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+	display: none;        /* ➊ HIDDEN until JS says otherwise */
+	opacity: 0;           /* smooth fade-in/out */
+	transition: opacity 0.25s ease;
+	pointer-events: none;
+    }
+#loader.show {          /* ➋ visible state */
+  display: flex;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+    .sol-layer {
+      position: absolute;
+      font-size: 8rem;
+      color: gold;
+      text-shadow: 0 0 6px #fff, 0 0 22px #ffd700;
+      animation: rotate 14s linear infinite;
+      pointer-events: none;
+    }
+
+    .orbit-layer {
+      position: absolute;
+      border: 1px dashed rgba(212, 175, 55, 0.3);
+      border-radius: 50%;
+      animation: rotate linear infinite;
+      pointer-events: none;
+    }
+
+    .orbit1 {
+      width: 160px; height: 140px;
+      animation-duration: 10s;
+    }
+
+    .orbit2 {
+      width: 230px; height: 200px;
+	  animation: rotateReverse linear infinite;
+      animation-duration: 15s;
+    }
+
+    .orbit3 {
+      width: 300px; height: 260px;
+      animation-duration: 20s;
+    }
+
+    .planet {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-size: 2.0rem;
+      color: gold;
+      transform-origin: 0 0;
+      pointer-events: none;
+    }
+
+    @keyframes rotate {
+      to { transform: rotate(360deg); }
+    }
+	@keyframes rotateReverse {
+		to { transform: rotate(-360deg); }
+		}
