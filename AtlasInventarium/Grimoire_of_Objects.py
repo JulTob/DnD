@@ -1,4 +1,4 @@
-import random
+import app.random as random
 from AtlasLudus.Map_of_Dice import Dice
 from AtlasActorLudi.Map_of_Scores import PB, Modifier
 #from AtlasInventarium.Map_of_Weapons import Weapons
@@ -494,6 +494,10 @@ class Inventory:
 		inventory.left = 	None
 
 	def add_item_to_bag(self, item):
+		"""Adds an item to the bag."""
+		self.bag.append(item)
+
+	def add(self, item):
 		"""Adds an item to the bag."""
 		self.bag.append(item)
 
@@ -1144,7 +1148,7 @@ def choose_melee_weapon(skills, abilities):
 
 	options = []
 	simple = [
-			Weapon(
+		Weapon(
 				name="Club",
 				value=1,
 				weight=2,
@@ -1153,7 +1157,7 @@ def choose_melee_weapon(skills, abilities):
 				Mod=Modifier(abilities.STR),
 				dmg="bludgeoning",
 				weapon_type="Simple",
-			)
+			),
 		Weapon(
 			name="Mace",
 			value=5,
@@ -1183,7 +1187,7 @@ def choose_melee_weapon(skills, abilities):
 			Mod=Modifier(abilities.DEX),
 			dmg="piercing",
 			weapon_type="Light",
-		),
+			),
 		Weapon(
 			name="Club",
 			value=1,
@@ -1193,7 +1197,7 @@ def choose_melee_weapon(skills, abilities):
 			Mod=Modifier(abilities.STR),
 			dmg="bludgeoning",
 			weapon_type="Simple",
-		),
+			),
 		Weapon(
 			name="Dagger",
 			value=2,
@@ -1203,7 +1207,7 @@ def choose_melee_weapon(skills, abilities):
 			Mod=Modifier(abilities.DEX),
 			dmg="piercing",
 			weapon_type="Light",
-		),
+			),
 		Weapon(
 			name="Spear",
 			value=1,
@@ -1213,7 +1217,7 @@ def choose_melee_weapon(skills, abilities):
 			Mod=Modifier(abilities.STR),
 			dmg="piercing",
 			weapon_type="Simple",
-		),
+			),
 		Weapon(
 			name="Mace",
 			value=5,
@@ -1223,8 +1227,8 @@ def choose_melee_weapon(skills, abilities):
 			Mod=Modifier(abilities.STR),
 			dmg="bludgeoning",
 			weapon_type="Simple",
-		),
-	]
+			),
+		]
 
 	martial = [
 		Weapon(
@@ -1236,7 +1240,7 @@ def choose_melee_weapon(skills, abilities):
 			Mod=Modifier(abilities.STR),
 			dmg="slashing",
 			weapon_type="Martial",
-		),
+			),
 		Weapon(
 			name="Longsword",
 			value=15,
@@ -1247,7 +1251,7 @@ def choose_melee_weapon(skills, abilities):
 			dmg="slashing",
 			weapon_type="Martial",
 			mastery="Swords",
-		),
+			),
 		Weapon(
 			name="Warhammer",
 			value=15,
@@ -1257,7 +1261,7 @@ def choose_melee_weapon(skills, abilities):
 			Mod=Modifier(abilities.STR),
 			dmg="bludgeoning",
 			weapon_type="Martial",
-		),
+			),
 		Weapon(
 			name="Rapier",
 			value=25,
@@ -1267,8 +1271,8 @@ def choose_melee_weapon(skills, abilities):
 			Mod=Modifier(abilities.DEX),
 			dmg="piercing",
 			weapon_type="Martial",
-		),
-			Weapon(
+			),
+		Weapon(
 				name="Battleaxe",
 				value=10,
 				weight=4,
@@ -1278,7 +1282,7 @@ def choose_melee_weapon(skills, abilities):
 				dmg="slashing",
 				weapon_type="Martial",
 				mastery="Axes",
-			),
+				),
 	]
 
 	if skills.Martial_Weapons.is_proficient():
