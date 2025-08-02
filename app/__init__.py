@@ -23,23 +23,23 @@ gennie.update("All Initial atlases procured.", ['🔅', '🔆'])
 setup_logging()
 
 def create_app():
-	Initialized("Application summoned!")
+	# Initialized("Application summoned!")
 	gennie.update("Creating App", ["💀","☠️"])
 
 	# Create Flask app
 	app = Flask(__name__)
-	Initialized("Flask app object created.")
+	# Initialized("Flask app object created.")
 
 	# Configure security and sessions
 	app.secret_key = secrets.token_urlsafe(16)
-	Inform(f"Secret key set: {app.secret_key[:4]}... (hidden for security)")
+	# Inform(f"Secret key set: {app.secret_key[:4]}... (hidden for security)")
 	app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=8)
-	Inform("Session lifetime configured: 8 days.")
+	# Inform("Session lifetime configured: 8 days.")
 
 	# Initialize routes
 	try:
 		init_routes(app)
-		Inform(f"Routes aboard: {len(app.url_map._rules)} total!")
+		# Inform(f"Routes aboard: {len(app.url_map._rules)} total!")
 	except Exception as e:
 		Alert("Failed to initialize routes.", error=e)
 
@@ -64,5 +64,5 @@ def create_app():
 				title="500 - 📜 Summoning Scroll Not Found"
 				), 500
 
-	Inform("Flask app successfully created and configured.")
+	# Inform("Flask app successfully created and configured.")
 	return app
