@@ -4,6 +4,8 @@
  */
 
 // ----  GLOBALS  -------------------------------------------------
+const TAU = Math.PI * 2;
+
 let solBaseScale = 0.18;
 let solBeatAmp   = 0.10;   // 8 % size pulsation
 let solSpinSpeed = 0.0;    // degrees per frame   (tweak to taste)
@@ -14,6 +16,16 @@ const maxAlpha = 255;
 let polygons = [];          // will hold every planet/poly
 const MIN_SIDES = 3;
 const MAX_SIDES = 12;
+
+const angleCache = {};
+
+function getAngles(sides) {
+		if (!angleCache[sides]) {
+				angleCache[sides] = Array.from({length: sides},
+				(_, i) => (TAU * i) / sides);
+				}
+		return angleCache[sides];
+		}
 
 /* --------------------  1. POOLS DE SÍMBOLOS  -------------------- */
 const spinnerChars = [
@@ -43,7 +55,6 @@ const spinnerChars = [
 	'ᛣ','ᛤ','ᛥ','ᛦ','ᛧ','ᛨ','ᛩ','ᛪ','᛫','᛬',
 	'᛭','ᛮ','ᛯ','ᛰ',
 ];
-
 const centerPool = [
 	'☯', '🜁','⌭','⧲','♔','♕','♖','♗', '𖣓','֎','֍','𖣐','⌘',
 	'♙','⚚','☤','※','⚕','☥', '♔','♕','♖','♗','♙','⚚','☤',
@@ -58,59 +69,75 @@ let centerSymbol, orbitSymbols = [];
 
 /* Refresca símbolos cada vez que volvemos a mostrar el loader */
 function initSymbols () {
-		centerSymbol = random(centerPool);
-		orbitSymbols = Array.from(
-				{ length: int(random(4, 12)) },
-				() => ({
+	centerSymbol = random(centerPool);
+	orbitSymbols = Array.from({ length: int(random(4, 9)) }, () => {
+		const count = int(random(1, 4)); // 1–3 children
+		const baseSpeed = random([-1, 1]) * random(0.5, 2.0); // mirrored direction base
+
+		const speeds = Array.from({ length: count }, (_, i) => {
+				if (count === 1) return baseSpeed;
+				if (count === 2) return baseSpeed * (-1);
+				if (count === 3) return baseSpeed * 0; // [-1, 0, +1]
+				});
+
+		return {
 					symbol: random(orbitPool),
-					sides : int(random(3, 10)),         // ← 3 to 12 sides
+					sides : int(random(3, 10)),
 					angle : random(360),
-					radius: random(width * 0.1, width*0.8 ),
-					speed : random(-2.0, 2.0),
+					radius: random(width * 0.1, width * 0.4),
+					baseSpeed,
+					speeds, // list of speeds for sublayers
+					count,
 					phase : random(360),
-					}),
-				);
-		}
-function planet(sym, sides, max_radius, speed, phase) {
-  push();
-	// center & rotate the whole ring
-	translate(width/2, height/2);
-	rotate( frameCount * speed + 2*phase);
-	radius = frameCount * speed % max_radius
-	// 1️⃣ draw the semi-transparent polygon (the “rail”)
-	stroke(255, 215, 0, 255* (1-abs(cos(frameCount / sides +phase))));  // gold with 60/255 alpha
-	noFill();
-	beginShape();
-	  for (let i = 0; i < sides; i++) {
-		let ang = i * 360 / sides;
-		let x   = cos(ang) * radius;
-		let y   = sin(ang) * radius;
-		vertex(x, y);
-	  }
-	endShape(CLOSE);
-
-	// 2️⃣ draw the translucent runes at each vertex
-	const txtSz = max_radius * 0.025 * (2-sin(frameCount / sides +phase)) ;          // tweak size if you like
-	textSize(txtSz);
-	noStroke();
-	for (let i = 0; i < sides; i++) {
-	  let ang = i * 360 / sides;
-	  let x   = cos(ang) * radius;
-	  let y   = sin(ang) * radius;
-
-	push();
-        // center on this vertex
-        translate(x, y);
-        // rotate around its own center:
-        // we add i*offset so runes don't all line up in lock-step
-        rotate(frameCount * speed * i + radians(i * (360 / sides)));
-        fill(255, 215, 0, int(map(radius, 0, max_radius, 10, 255)));
-        text(sym, 0, 0);
-      pop();
-
+				};
+		});
 	}
-  pop();
-}
+
+
+function planet(sym, sides, max_radius, speed, phase) {
+	let r = (frameCount * speed) % max_radius;
+	const angles = getAngles(sides);
+	ctx.save();
+	// center & rotate the whole ring
+	ctx.translate(width/2, height/2);
+	ctx.rotate( frameCount * speed + phase);
+	// draw ring once
+	// 1️⃣ draw the semi-transparent polygon (the “rail”)
+	ctx.strokeStyle = `rgba(255,215,0,${0.2})`;
+	ctx.beginPath();
+	angles.forEach((a,i) => {
+			const x = Math.cos(a) * r;
+			const y = Math.sin(a) * r;
+			if (i === 0) ctx.moveTo(x,y);
+			else ctx.lineTo(x,y);
+			});
+	ctx.closePath();
+	ctx.stroke();
+
+	// draw runes
+	ctx.fillStyle = `rgba(255,215,0,${r / maxR})`;
+	angles.forEach(a => {
+			const x = Math.cos(a) * r;
+			const y = Math.sin(a) * r;
+			ctx.save();
+			ctx.translate(x, y);
+			ctx.rotate(frameCount * speed);
+			ctx.fillText(sym, 0, 0);
+			ctx.restore();
+			});
+	ctx.restore();
+	}
+
+
+function planet_group(sym, sides, base_radius, base_speed, phase, count = 3) {
+	for (let i = 0; i < count; i++) {
+		const radius = base_radius * (0.6 + 0.2);  // spread out
+		const speed  = base_speed * (1 + 0.3 * i );  // vary speed/direction a bit
+		planet(sym, sides, radius, speed, phase); // slight phase offset per ring
+		planet(sym, sides, radius, -speed, phase); // slight phase offset per ring
+		planet(sym, sides, radius, 0, phase); // slight phase offset per ring
+		}
+	}
 
 function sol(sym, spin = solSpinSpeed, base = solBaseScale, beat = solBeatAmp) {
 		push();
@@ -183,8 +210,9 @@ function draw () {
 		// Orbits: glowing gold
 		//fill(255, 215, 0, 90);
 		orbitSymbols.forEach(o => {
-				planet(o.symbol, o.sides, o.radius * (width/420), o.speed, o.phase);
-				});
+			const scaled_radius = o.radius * (width / 420);
+			planet_group(o.symbol, o.sides, scaled_radius, o.speeds, o.phase);
+			});
 		}
 
 
