@@ -1,0 +1,31 @@
+<style>
+.loader {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+.loader::before, .loader::after, .loader div {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  border: 2px solid rgba(255,215,0,0.6);
+  animation: spin 2s linear infinite;
+}
+.loader::after {
+  border-width: 4px;
+  animation-duration: 3s;
+}
+.loader div {
+  border-width: 6px;
+  animation-duration: 4s;
+  border-color: rgba(255,215,0,0.3);
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+</style>
+
+<div class="loader"><div></div></div>
