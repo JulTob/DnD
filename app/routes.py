@@ -6,15 +6,15 @@ from urllib.parse import quote_plus, unquote_plus
 
 from Minion import Initialized, Alert, Inform, Warning, News, Ends, Fail, Catched, FailureError
 from random import randint
-import random
+import app.random as random
 
 
-Initialized("Routes: Atlas ready.")
+# Initialized("Routes: Atlas ready.")
 
 # Initialize routes
 def init_routes(app):
 	"""Initialize all routes for the D&D character generator application."""
-	Initialized("<Init Routes()<")
+	# Initialized("<Init Routes()<")
 
 	@app.route('/')
 	def home():
@@ -26,8 +26,8 @@ def init_routes(app):
 		from AtlasAlusoris.Map_of_Archetypes 	import Archetypes, Archetype
 		from AtlasLusoris.Map_of_Backgrounds	import backgrounds
 		from AtlasLusoris.Map_of_Species 	import species
-		from AtlasLusoris.Map_of_Classes 	import classes
-		Initialized("<Init Routes<home>")
+		from AtlasLusoris.Map_of_Classes	import classes
+		# Initialized("<Init Routes<home>")
 		# Races
 		races = [race for race in race_weights.keys() if race]
 		races.sort()
@@ -78,7 +78,7 @@ def init_routes(app):
 		"""
 		Redirect to a randomly generated character display page.
 		"""
-		Initialized("<Init Routes<character>")
+		# Initialized("<Init Routes<character>")
 		seed = random.randint(1, 2**8)
 		level = random.randint(1, 20)
 		character = summon_character(level=level, seed=seed)
@@ -102,6 +102,10 @@ def init_routes(app):
 	def character_display(species, char_class, background, level, gender, seed):
 		"""	Display a generated character
 			based on the specified parameters.	"""
+		from AtlasLusoris.Map_of_Backgrounds import backgrounds
+		from AtlasLusoris.Map_of_Species     import species as species_dict
+		from AtlasLusoris.Map_of_Classes     import classes as class_list
+
 		species = unquote_plus(species)
 		char_class = unquote_plus(char_class)
 		background = unquote_plus(background)
@@ -117,15 +121,23 @@ def init_routes(app):
 			gender=gender,
 			seed=seed)
 		char_dict = character.to_dict()
+		species_list     = list(species_dict.keys())
+		background_list  = backgrounds
+		class_list       = class_list
 
-		return render_template('character.html', character=char_dict)
+		return render_template('character.html',
+			character=char_dict,
+			SPECIES_LIST=species_list,
+			CLASS_LIST=class_list,
+			BACKGROUND_LIST=background_list
+			)
 
 	@app.route('/generate_character', methods=['POST'])
 	def generate_character_route():
 		"""	Handle character generation requests
 			with selected form data.
 			"""
-		Initialized("<Init Routes<character>")
+		# Initialized("<Init Routes<character>")
 		selected_species = request.form.get('species', 'Random')
 		selected_class = request.form.get('class', 'Random')
 		selected_background = request.form.get('background', 'Random')
@@ -178,7 +190,7 @@ def init_routes(app):
 		from AtlasAlusoris.Map_of_Archetypes 	import Archetypes, Archetype
 		from urllib.parse import quote_plus
 		"""Redirect to a randomly generated NPC display page."""
-		Initialized("<Init Routes<Random npc>")
+		# Initialized("<Init Routes<Random npc>")
 		seed = randint(1,2**8)
 		race = Race()
 		archetype = Archetype()
@@ -199,7 +211,7 @@ def init_routes(app):
 		from AtlasAlusoris.Map_of_NPC 	import NPC
 		from AtlasAlusoris.Map_of_Races import race_weights
 		from AtlasAlusoris.Map_of_Archetypes import Archetypes
-		Initialized("<Init Routes<NPC>")
+		# Initialized("<Init Routes<NPC>")
 		if seed is None:
 			seed = randint(1,2**8)
 		else:
@@ -227,7 +239,7 @@ def init_routes(app):
 		from AtlasLudus.Map_of_Dice 	import Dice
 		from AtlasAlusoris.Map_of_Races 	import Race
 		from AtlasAlusoris.Map_of_Archetypes 	import Archetypes, Archetype
-		Initialized("<Init Routes<New NPC>")
+		# Initialized("<Init Routes<New NPC>")
 		seed = random.randint(1,2**8)
 
 
