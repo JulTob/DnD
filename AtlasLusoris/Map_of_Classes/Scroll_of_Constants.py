@@ -28,7 +28,7 @@ def subclasses():
 	'Paladin': [
 		"Devotion", "Oathbreaker", "Ancients",	 "Vengeance", ],
 	'Bard': [
-		"Lore",	 "Valor", "Glamour", "Swords", ],
+		"Dance",	"Glamour",		"Lore",	 "Valor",  ],
 	'Monk': [
 		"Elements", "Open Hand", "Shadow", "Mercy", ],
 	'Druid': [
