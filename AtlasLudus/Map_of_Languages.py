@@ -6,11 +6,11 @@ try:
 	from AtlasLudus.Map_of_Dice 	import Dice
 except ImportError as e:
 	Alert(f"Couldn't locate imports in the Map of Languages:", e)
+	raise e
 
 def add_language(languages, language, chance=100, INT=0):
 	"""Try to add a language based on a dice roll and chance."""
-	if chance<=1 and language not in languages:
-		languages.append(language)
+	if chance <= 1 and language not in languages:		languages.append(language)
 	elif Dice(chance-INT) <= 1 and language not in languages:
 		languages.append(language)
 
@@ -1283,3 +1283,93 @@ def Language(npc):
 		# Remove any empty strings and strip whitespace
 	if not languages: return "<i>Common</i>"
 	return f"<i> {'<br> '.join(languages)} </i>"
+
+
+all_languages = {
+		"Dwarvish", "Elvish", "Giant", "Gnomish", "Goblin", "Halfling", "Orc",
+		"Abyssal", "Celestial", "Draconic", "Deep Speech", "Infernal",
+		"Primordial", "Sylvan", "Undercommon", "Common Sign Language",
+		}
+standard_languages = {
+		"Dwarvish", "Elvish", "Giant", "Gnomish", "Goblin", "Halfling", "Orc",
+		"Common Sign Language",
+		}
+exotic_languages = all_languages.difference(standard_languages)
+
+class Linguistics:
+	def __init__(lingua):
+		lingua.langs = set()
+
+	def Add(lingua, language):
+		lingua.langs.add(language)
+
+	def AddAnyLanguage(lingua, langs, n = 1):
+		lang_set = langs - lingua.langs
+		if not lang_set or n <= 0:	return
+		k = min(n, len(lang_set))
+		l = lang_set.pop()
+		if l in lingua.langs: lingua.AddAnyLanguage(lang_set)
+		if l:
+			lingua.langs |= {l}
+			lingua.AddAnyLanguage(lang_set, n-1)
+
+
+	def AsHTML(linguistics):
+		final = linguistics.langs
+		if not final:
+			result = "<i>Common</i>"
+		else:
+			langs_html = "<br> ".join(sorted(final))
+			result = f"""<i>{langs_html}</i>"""
+
+		return f"""
+		<div class="npc-textbox">
+		<h2>Languages</h2>
+		{result}
+		</div>
+		"""
+
+	def __str__(linguistics):
+		return linguistics.AsHTML()
+
+
+def choose_new_languages(known: set, options: set, n: int) -> set:
+	"""
+	Choose up to n new languages from options, ignoring already known ones.
+	"""
+	available = options.difference(known)
+		# set difference
+	num_choices = min(n, len(available))
+	return set(random.sample(available, num_choices)) if available and n > 0 else set()
+
+def Character_Languages(char):
+	"""
+	Build and return a Linguistics object representing all language choices.
+	Other features can call .AddAlways or .AddChoice on the object later.
+	"""
+	ling = Linguistics()
+
+	# 1. Always knows Common
+	ling.Add("Common")
+
+	# 2. Racial languages
+	if char == "Elf":	ling.Add("Elvish")
+	if char == "Dwarf":	ling.Add("Dwarvish")
+	if char == "Halfling":	ling.Add("Halfling")
+	if char == "Human":	ling.Add("Common Sign Language")
+	if char == "Dragonborn": ling.Add("Draconic")
+	if char == "Gnome":	ling.Add("Gnomish")
+	if char == "Orc":	ling.Add("Orc")
+	if char == "Tiefling":	ling.Add("Infernal")
+	if char == "Goliath":	ling.Add("Giant")
+	if char == "Aasimar":	ling.Add("Celestial")
+
+	# 3. Class languages
+	if char == "Rogue":
+		ling.Add("Thieves' Cant")
+		ling.AddAnyLanguage(all_languages)
+	if char == "Druid":		ling.Add("Druidic")
+	if char == "Ranger" and char >= 2:  ling.AddAnyLanguage(all_languages,2)
+
+	ling.AddAnyLanguage(standard_languages)
+	return ling  # Return the Linguistics object itself
