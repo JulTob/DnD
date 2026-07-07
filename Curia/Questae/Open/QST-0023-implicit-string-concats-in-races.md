@@ -1,8 +1,8 @@
-# QST-0021 — Silent name fusions: implicit string concatenation across the Races
+# QST-0023 — Silent name fusions: implicit string concatenation across the Races
 
 - **Type:** bug
 - **Priority:** 🟡 normal
-- **Status:** Open
+- **Status:** Open  *(renumbered 2026-07-07: first minted as 0021, which belongs to AtlasVenustas)*
 - **Owner:** unclaimed
 - **Route to:** Safety Consul (Paladin), Readability Consul (Barbarian), Lorekeeper
 - **Parent:** —

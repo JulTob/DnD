@@ -42,7 +42,7 @@ Entry point unchanged: `shiny run shiny_app.py` (or `make run`, `app.py`).
 - **Venv & deploy unification** — QST-0004 (ruled, awaiting go/no-go);
   deploy config still spans app.yaml / Dockerfile / Run_And_Deploy.sh —
   pick one target.
-- **New:** QST-0021 — ~60 silent name fusions (missing commas) across the
+- **New:** QST-0023 — ~60 silent name fusions (missing commas) across the
   wider Races corpus, found by tokenizer sweep during the repair. Mechanical
   fix, per-file review.
 

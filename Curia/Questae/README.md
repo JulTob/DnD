@@ -68,7 +68,6 @@ See `QUESTA-template.md` to mint a new one.
 | QST-0021 | **AtlasVenustas** — presentation layer; slim `shiny_app.py` (6 sidequests) | refactor/design | 🟠 | Druid, Artificer, Barbarian, Monk → **Julio-approved** |
 | QST-0003 | Decide & execute Flask removal; retire `app/routes.py` + templates | refactor | 🟠 | Architecture, Ecosystem, Workshop → Q-0004 |
 | QST-0004 | Review, clean & unify the venvs — surface conflicts to Julio | chore/cleanup | 🟠 | Workshop, Ecosystem → Decree 0001 |
-| QST-0009 | Fallback import shim swallows errors & bloats the entrypoint | refactor | 🟠 | Safety, Repair, Architecture, Simplicity |
 | QST-0011 | NPC-list entries are dead links (`href="#"`) | bug | 🟠 | Implementation, Understanding |
 | QST-0012 | Inconsistent HTML escaping — NPC sheet injects raw model strings | bug | 🟠 | Safety, Contracts |
 
@@ -80,6 +79,7 @@ See `QUESTA-template.md` to mint a new one.
 | QST-0010 | Extract inline CSS/JS from shiny_app.py *(superseded by QST-0021)* | refactor | 🟡 | Workshop, Readability, Simplicity |
 | QST-0013 | Ability modifier recomputed inline instead of canonical `Modifier` | refactor | 🟡 | Contracts, Lorekeeper, Methods |
 | QST-0017 | 🔁 Detect orphan files (recurrent) — clean dead, implement ghosts | chore/cleanup | 🟡 | Ecosystem, Workshop, Simplicity, Druid |
+| QST-0023 | Silent name fusions (implicit string concat) across the Races | bug | 🟡 | Safety, Readability, Lorekeeper |
 
 ### 🟡 / 🟢 Priority — Open (QST-0021 sidequests)
 | ID | Title | Type | Priority | Parent |
@@ -93,6 +93,7 @@ See `QUESTA-template.md` to mint a new one.
 ### ✅ Solved (recent)
 | ID | Title |
 |----|-------|
+| QST-0009 | Silent import shim removed — Minions report, summoners recover (2026-07-07) |
 | QST-0021.1 | Scaffold AtlasVenustas + Lodge_of_Symbols |
 | QST-0021.2 | Kit_of_Loader + wire shiny_app.py |
 
