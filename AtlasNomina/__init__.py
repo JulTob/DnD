@@ -1,0 +1,1 @@
+"""AtlasNomina — names and linguistics."""
