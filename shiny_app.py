@@ -5,7 +5,7 @@ import inspect
 from html import escape
 from pathlib import Path
 from random import choice, randint
-from typing import Any, TYPE_CHECKING
+from typing import Any
 from app.character_url import (
     character_params_to_hash,
     parse_character_params_from_path,
@@ -14,147 +14,23 @@ from app.character_url import (
 
 import app.random as random
 from AtlasVenustas.Kit_of_Loader import loader_head_tags, loader_panel
-from Minion import chronicler
+from Minion import chronicler, minion
 from shiny import App, reactive, render, ui  
 # pyright: ignore[reportMissingImports]
 
-# Atlas imports
-if TYPE_CHECKING:
-    from AtlasActorLudi.Map_of_Scores import Modifier
-    from AtlasAlusoris.Grimoire_of_NPC import NPC
-    from AtlasAlusoris.Map_of_Archetypes import Archetype, Archetypes
-    from AtlasAlusoris.Map_of_Races import Race, race_weights
-    from AtlasLusoris.Grimoire_of_Characters import Character
-    from AtlasLusoris.Map_of_Backgrounds import backgrounds
-    from AtlasLusoris.Map_of_Classes import classes
-    from AtlasLusoris.Map_of_Species import species as species_dict
-    from AtlasPugna.Map_of_Legendary_Actions import Lair, Legendary, Region
-
-try:
-    from AtlasActorLudi.Map_of_Scores import Modifier  # type: ignore
-    from AtlasAlusoris.Grimoire_of_NPC import NPC  # type: ignore
-    from AtlasAlusoris.Map_of_Archetypes import Archetype, Archetypes  # type: ignore
-    from AtlasAlusoris.Map_of_Races import Race, race_weights  # type: ignore
-    from AtlasLusoris.Grimoire_of_Characters import Character  # type: ignore
-    from AtlasLusoris.Map_of_Backgrounds import backgrounds  # type: ignore
-    from AtlasLusoris.Map_of_Classes import classes  # type: ignore
-    from AtlasLusoris.Map_of_Species import species as species_dict  # type: ignore
-    from AtlasPugna.Map_of_Legendary_Actions import Lair, Legendary, Region  # type: ignore
-except Exception as exc:  # pragma: no cover - fallback for partial envs
-    print(f"Error importing Atlas modules: {exc}")
-
-    def Modifier(score: int) -> int:
-        return (int(score) - 10) // 2
-
-    race_weights = {"Human": 1}
-    Archetypes = ["Warrior"]
-
-    def Race() -> str:
-        return "Human"
-
-    def Archetype() -> str:
-        return "Warrior"
-
-    def Legendary(npc: Any) -> str:
-        return "Legendary actions unavailable."
-
-    def Lair(npc: Any) -> str:
-        return "Lair actions unavailable."
-
-    def Region(npc: Any) -> str | None:
-        return "Regional effects unavailable."
-
-    backgrounds = ["Soldier"]
-    classes = ["Fighter"]
-    species_dict = {"Human": 1}
-
-    class FallbackCharacter:
-        def __init__(self, **kwargs: Any):
-            self.data = kwargs
-            self.data.setdefault("name", "Test Character")
-            self.data.setdefault("title", "the Placeholder")
-            self.data.setdefault("Species", "Human")
-            self.data.setdefault("Class", "Fighter")
-            self.data.setdefault("Background", "Soldier")
-            self.data.setdefault("Level", kwargs.get("level", 1))
-            self.data.setdefault("Seed", kwargs.get("seed", 1))
-            self.data.setdefault("Gender", "They")
-            self.data.setdefault("Stats", {
-                "Strength": 10,
-                "Dexterity": 10,
-                "Constitution": 10,
-                "Intelligence": 10,
-                "Wisdom": 10,
-                "Charisma": 10,
-            })
-            self.data.setdefault("Alignment", "Neutral")
-            self.data.setdefault("AC", 10)
-            self.data.setdefault("Health", 10)
-            self.data.setdefault("Speed", 30)
-            self.data.setdefault("PB", 2)
-            self.data.setdefault("size", "Medium")
-            self.data.setdefault("Story", "No story generated.")
-            self.data.setdefault("features", [])
-            self.data.setdefault("other_proficiencies", [])
-
-        def to_dict(self) -> dict[str, Any]:
-            return self.data
-
-    Character = FallbackCharacter
-
-    class FallbackNPC:
-        def __init__(self, **kwargs: Any):
-            self.race = kwargs.get("race", "Human")
-            self.archetype = kwargs.get("archetype", "Warrior")
-            self.level = kwargs.get("lvl", 1)
-            self._seed = kwargs.get("seed", 1)
-            self.name = "Placeholder"
-            self.title = "the NPC"
-            self.background = "Wanderer"
-            self.alignment = "Neutral"
-            self.size = "Medium"
-            self.gender = "They"
-            self.HP = 8 + self.level
-            self.AC = 10
-            self.proficiency_bonus = 2
-            self.passive_perception = 10
-            self.languages = "Common"
-            self.movement = "30 ft"
-            self.simple_attacks = "Club +2 to hit"
-            self.special_attack = "None"
-            self.spellcasting_ability = "INT"
-            self.spell_save_dc = 10
-            self.spell_attack_bonus = 2
-            self.spells = "None"
-            self.senses = "Passive Perception 10"
-            self.resistances = "None"
-            self.martial = "None"
-            self.trait = "Calm"
-            self.ideal = "Balance"
-            self.plothook = "Needs help." 
-            self.Story = "A placeholder NPC."
-
-            class AS:
-                STR = 10
-                DEX = 10
-                CON = 10
-                INT = 10
-                WIS = 10
-                CHA = 10
-
-            self.ability_scores = AS()
-
-            class Skills:
-                def string(self, _):
-                    return "Perception +0"
-
-            class ST:
-                string = "STR +0"
-
-            self.skills = Skills()
-            self.saving_throws = ST()
-
-    NPC = FallbackNPC
+# Atlas imports — plain and loud on purpose (QST-0009, Decree 0003).
+# If an Atlas is broken the app must refuse to start with the real traceback,
+# never run on placeholder shadows. Resilience lives at the summoning layer,
+# where the Minions report every failure and recovery rerolls the seed.
+from AtlasActorLudi.Map_of_Scores import Modifier
+from AtlasAlusoris.Grimoire_of_NPC import NPC
+from AtlasAlusoris.Map_of_Archetypes import Archetype, Archetypes
+from AtlasAlusoris.Map_of_Races import Race, race_weights
+from AtlasLusoris.Grimoire_of_Characters import Character
+from AtlasLusoris.Map_of_Backgrounds import backgrounds
+from AtlasLusoris.Map_of_Classes import classes
+from AtlasLusoris.Map_of_Species import species as species_dict
+from AtlasPugna.Map_of_Legendary_Actions import Lair, Legendary, Region
 
 
 STYLE_PATH = Path(__file__).parent / "app" / "static" / "style.css"
@@ -967,6 +843,18 @@ def _selection_or_none(value: str | None) -> str | None:
     return value
 
 
+@minion  # every failed attempt reports its full bug tree; the caller recovers
+def _attempt_character(**kwargs: Any) -> Character:
+    """One summoning attempt. Reporting is the Minion's job; recovery is the caller's."""
+    return Character(**kwargs)
+
+
+@minion  # every failed attempt reports its full bug tree; the caller recovers
+def _attempt_npc(**kwargs: Any) -> NPC:
+    """One summoning attempt. Reporting is the Minion's job; recovery is the caller's."""
+    return NPC(**kwargs)
+
+
 @chronicler  # one creation = one account: repeats collapse to ×N, errors gather at the end
 def summon_character(
     species: str | None = None,
@@ -976,6 +864,7 @@ def summon_character(
     gender: str | None = None,
     seed: int | None = None,
 ) -> Character:
+    """Always hand the user a character: retry fresh seeds on failure, report every error (QST-0009)."""
     max_attempts = 5
     try:
         base_seed = int(seed) if seed is not None else None
@@ -990,7 +879,7 @@ def summon_character(
 
     for _ in range(max_attempts):
         try:
-            return Character(
+            return _attempt_character(
                 species=species,
                 char_class=char_class,
                 background=background,
@@ -998,7 +887,7 @@ def summon_character(
                 gender=gender,
                 seed=current_seed,
             )
-        except Exception as exc:
+        except Exception as exc:  # reported by the @minion above; recover with a fresh seed
             last_error = exc
             current_seed += 1
 
@@ -1012,15 +901,25 @@ def summon_npc(
     level: int = 1,
     seed: int | None = None,
 ) -> NPC:
+    """Always hand the user an NPC: retry fresh seeds on failure, report every error (QST-0009)."""
+    max_attempts = 5
     if race == "Random" or not race:
         race = Race()
     if archetype == "Random" or not archetype:
         archetype = Archetype()
 
     npc_seed = int(seed) if seed is not None else randint(1, 2**16)
-    random.seed(npc_seed)
+    last_error: Exception | None = None
 
-    return NPC(race=race, archetype=archetype, lvl=max(int(level), 1), seed=npc_seed)
+    for _ in range(max_attempts):
+        random.seed(npc_seed)
+        try:
+            return _attempt_npc(race=race, archetype=archetype, lvl=max(int(level), 1), seed=npc_seed)
+        except Exception as exc:  # reported by the @minion above; recover with a fresh seed
+            last_error = exc
+            npc_seed += 1
+
+    raise RuntimeError("Unable to summon NPC after retries.") from last_error
 
 
 def _prose(text: Any, placeholder: str = "—") -> ui.Tag:
