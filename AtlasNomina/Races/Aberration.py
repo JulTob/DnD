@@ -57,4 +57,23 @@ def Phonotactic(Type):
 						'ili',
 						'i',
 				]
-	codas  = [		"ax",   'e',    "icon", "ox",   "un",   "l",		"as",   'ew',   "iz",   "on",   'um',		"ar",   "es",           "on",   "ur",		"ar",   'eh',           "ot",   'um',		"a",    "en",           "on",   'us',				]	if  GITH:			onset += ['Lar','Gi','Xi']			nuclei += ['eth','','az','uz',]			codas += ['','','ar',]	return onset, nuclei, codasdef Surphonotactic(Type):	onset  = [""]	nuclei = [""]	codas  =[""]returnonset,nuclei,coda
+	codas  = [
+		"ax",   'e',    "icon", "ox",   "un",   "l",
+		"as",   'ew',   "iz",   "on",   'um',
+		"ar",   "es",           "on",   "ur",
+		"ar",   'eh',           "ot",   'um',
+		"a",    "en",           "on",   'us',
+				]
+
+	if  GITH:
+		onset += ['Lar','Gi','Xi']
+		nuclei += ['eth','','az','uz',]
+		codas += ['','','ar',]
+
+	return onset, nuclei, codas
+
+def Surphonotactic(Type):
+	onset  = [""]
+	nuclei = [""]
+	codas  = [""]
+	return onset, nuclei, codas

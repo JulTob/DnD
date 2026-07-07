@@ -527,11 +527,11 @@ header, footer {
 
 .character-reforge {
     display: grid;
-    grid-template-columns: minmax(320px, 520px) minmax(220px, 260px) minmax(120px, 170px);
+    grid-template-columns: minmax(320px, 520px) minmax(220px, 280px);
     grid-template-areas:
-        "species level_block ."
-        "class level_block ."
-        "background generate share";
+        "species level_block"
+        "class generate"
+        "background share";
     gap: 0.6rem 0.8rem;
     align-items: stretch;
     width: min(980px, 100%);
@@ -540,6 +540,10 @@ header, footer {
 
 .character-reforge-field {
     min-width: 0;
+}
+
+.character-reforge .shiny-input-container {
+    margin: 0;
 }
 
 .character-reforge-field--species {
@@ -556,19 +560,22 @@ header, footer {
 
 .character-level-box {
     grid-area: level_block;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 2.8rem minmax(4.5rem, 1fr) 2.8rem;
     align-items: center;
-    gap: 0.55rem;
-    padding: 0.65rem 0.65rem 0.7rem;
+    gap: 0.35rem;
+    min-height: 3.05rem;
+    padding: 0;
     border: 2px solid var(--gold-color);
-    border-radius: 10px;
+    border-radius: 8px;
     background: rgba(0, 0, 0, 0.92);
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
 }
 
 .character-level-label {
+    grid-column: 2;
+    grid-row: 1;
     margin: 0;
     padding: 0;
     font-family: var(--font-header);
@@ -586,32 +593,45 @@ header, footer {
 
 .character-reforge .action-button {
     width: 100%;
+    font-size: 1rem;
+}
+
+.character-reforge .action-button:hover {
+    font-size: 1rem;
 }
 
 .character-reforge .character-level-controls .action-button {
     width: 2.8rem;
     min-width: 2.8rem;
-    min-height: 2.8rem;
-    height: 2.8rem;
+    min-height: 3.05rem;
+    height: 3.05rem;
     flex: 0 0 2.8rem;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
 }
 
 .character-level-controls {
-    justify-content: center;
+    display: contents;
+}
+
+.character-level-controls .minus {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.character-level-controls .plus {
+    grid-column: 3;
+    grid-row: 1;
 }
 
 .character-generate-wrap {
     grid-area: generate;
     align-self: stretch;
-    display: flex;
-    align-items: stretch;
-    gap: 0.5rem;
 }
 
 .character-generate-wrap .action-button {
     margin: 0;
-    width: auto;
-    flex: 1 1 auto;
     min-height: 3.05rem;
 }
 
