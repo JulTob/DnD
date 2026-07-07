@@ -1110,7 +1110,7 @@ def Lucky():
 		description = (
 			f"You have inexplicable luck that seems to kick in at just the right moment.<br>" 
 			f"<b>Luck Points.</b> You have Luck Points equal to {char.proficiency_bonus}. <br>"
-			f"<p>{"☘︎"*char.proficiency_bonus} </p>"
+			f"<p>{'☘︎' * char.proficiency_bonus} </p>"
 			f"You regain expended Luck Points after a Long Rest.<br>"
 			f"<b>Advantage.</b> When you roll a d20 Test, spend 1 Luck Point to roll with Advantage.<br>"
 			f"<b>Disadvantage.</b> When a creature rolls an attack against you, spend 1 Luck Point to impose Disadvantage."""
