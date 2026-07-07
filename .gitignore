@@ -57,3 +57,36 @@ docs/site_libs/font-awesome-6.4.0/webfonts/fa-v4compatibility.woff2
 .DS_Store
 key.txt
 token.txt
+
+# --- Python environments & caches (QST-0004 / Decree 0001) ---
+# Unified environment is a single .venv/ at repo root; never commit it.
+.venv/
+venv/
+env/
+ENV/
+DnD/
+adventurer/
+Avatar/venv/
+AtlasWorldBuild/venv/
+**/venv/
+**/.venv/
+pyvenv.cfg
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
+*.egg-info/
+.env
+*.log
+minion_app.log
+.review_queue_state.json
+# Editor / IDE
+.idea/
+*.swp
+
+# Local runtime data (SQLite scratch db)
+instance/

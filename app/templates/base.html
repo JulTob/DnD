@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% include 'head.html' %}
+	<title>{% block title %}Gen Legend{% endblock %}</title>
+	{% block head %}{% endblock %}
+	</head>
+
+  {% include 'ads-banner.html' %}
+
+<body>
+
+<!-- Loader overlay -->
+<div id="loader">
+  <div class="sol-layer"></div> <!-- The sun -->
+  <div class="orbit-layer orbit1">
+    <div class="planet"></div>
+    <div class="planet"></div>
+    <div class="planet"></div>
+  </div>
+  <div class="orbit-layer orbit2">
+    <div class="planet"></div>
+    <div class="planet"></div>
+    <div class="planet"></div>
+    <div class="planet"></div>
+  </div>
+  <div class="orbit-layer orbit3">
+    <div class="planet"></div>
+    <div class="planet"></div>
+    <div class="planet"></div>
+	<div class="planet"></div>
+    <div class="planet"></div>
+
+  </div>
+</div>
+
+	<div id="FullPage">
+			{% include 'header.html' %}
+			<div class="container">
+					{% block content %}
+					{% endblock %}
+					</div>
+			</div>
+
+	{% include 'footer.html' %}
+
+	{% block scripts %}
+	{% endblock %}
+
+<script>
+const loader   = document.getElementById('loader');
+const fullPage = document.getElementById('FullPage');   // your main wrapper
+
+function populatePlanets () {
+  document.querySelector('.sol-layer').textContent = randomFrom(solSymbols);
+
+  document.querySelectorAll('.orbit-layer').forEach((orbit, i) => {
+    orbit.innerHTML = '';                 // purge old planets
+    const count = i + 4;
+    const r = orbit.offsetWidth / 2;      // now non-zero
+    for (let j = 0; j < count; j++) {
+      const ang =  360 * j / count;
+      const p   = document.createElement('div');
+      p.className = 'planet';
+      p.textContent = randomFrom(planetSymbols);
+      p.style.transform = `rotate(${ang}deg) translate(${r}px)`;
+      orbit.appendChild(p);
+    }
+  });
+}
+
+function showLoader() {
+  loader.classList.add('show');
+  // Optionally dim the page behind:
+  fullPage.style.filter = 'blur(2px)';
+	requestAnimationFrame(populatePlanets);  // then build planets
+
+}
+
+function hideLoader() {
+  loader.classList.remove('show');
+  fullPage.style.filter = 'none';
+}
+
+/* 1. Hide it once the initial HTML is fully painted */
+window.addEventListener('load', hideLoader);
+
+/* 2. Show it whenever a <form> is submitted */
+document.querySelectorAll('form')
+  .forEach(f => f.addEventListener('submit', showLoader));
+
+/* 3. Show it for JS-driven navigation buttons or links */
+document.querySelectorAll('[data-show-loader]')
+  .forEach(el => el.addEventListener('click', showLoader));
+
+/* 4. Wrap fetch / AJAX calls */
+async function fetchWithLoader(url, opts) {
+  try {
+    showLoader();
+    return await fetch(url, opts);
+  } finally {
+    hideLoader();
+  }
+}
+
+/* EXAMPLE use inside your NPC generator:
+   const res = await fetchWithLoader('/api/new-npc');  */
+</script>
+<script>
+
+
+const solSymbols = [
+	'⚛','⎈','𖧵','𓇬','🜹','𖣊','𖥠',
+	 '𖣓','֎','֍','𖣐','⌘',
+	'֎','֍', '☉','✝︎','✠','☩','♰','♱','☓','⚜︎',
+	'◇','◈','☿','♀','♂','⚳','⚷','⚵','⛦','⚝','⭑','☆','✧','❉','❄','❅','❆',
+	'✡','⍟','⭒','✩','✯','⛤','⛧','⛥','۞','🜁',
+    '⌭','⧲','※','☯','࿊','࿋','࿌','☮',"◯",'⎊','⏁','⏄','⏀','⏃','⏂','⏅',
+	 '𓌖', '🜏','☠','☣','⚖','⚛','⎈','☸','𑁍','⚙︎',
+	'✦','○','☉', '⛧','✶','⭒','✩','✯','⛤','⛧','⛥',
+'⛦','⚝','♁','★','☠','🜏','☯','⚝','☉','☣','⚖','⚛','⎈','☸','𑁍','⚙︎','☯','࿊','࿋','࿌',
+	'⊙','✹','⊙','✹','★','☆','⛤','⛧','⚘','☥','♆','✡','⚕','☯','⚛',
+'⏣','⬠','⬡','༓', '☸','𑁍','⚙︎','☯','࿊','࿋','࿌',];
+const orbitSymbols = [''];
+const planetSymbols = [
+   'ᚠ','ᚡ','ᚢ','ᚣ','ᚤ','ᚥ',
+  'ᚦ','ᚧ','ᚨ','ᚩ','ᚪ','ᚵ','ᚴ','ᚳ','ᚲ','ᚱ',
+  'ᚰ','ᚯ','ᚮ','ᚭ','ᚬ','ᚫ','ᚶ','ᚷ','ᚸ','ᚹ','ᚺ',
+  'ᚻ','ᚼ','ᚽ','ᚾ','ᚿ','ᛀ','ᛋ','ᛊ','ᛉ','ᛈ',
+  'ᛇ','ᛆ','ᛅ','ᛄ','ᛃ','ᛂ','ᛁ','ᛌ','ᛍ','ᛎ',
+  'ᛏ','ᛐ','ᛑ','ᛒ','ᛓ','ᛔ','ᛕ','ᛖ','ᛡ','ᛠ','ᛟ',
+  'ᛞ','ᛝ','ᛜ','ᛛ','ᛚ','ᛙ','ᛘ','ᛗ','ᛢ',
+  'ᛣ','ᛤ','ᛥ','ᛦ','ᛧ','ᛨ','ᛩ','ᛪ','᛫','᛬',
+  '᛭','ᛮ','ᛯ','ᛰ',
+ 	'☿','♀','♂','⚳','⚷','⚵','⛦','⚝','⭑','☆','✧','❉','❄','❅','❆',
+	'✡','⍟','⭒','✩','✯','⛤','⛧','⛥','۞','🜁',
+	 '𓌖', '🜏','☠','☣','⚖','⚛','⎈','☸','𑁍','⚙︎',
+	'✦', '⛧','✶','⭒','✩','✯','⛤','⛧','⛥',
+'⛦','⚝','♁','★','☠','🜏','☯','⚝','☣','⚖',
+	'🜚','★','☆','⛤','⛧','⚘','☥','♆','✡','⚕','☯','⚛',
+	'ᚠ','ᛞ','ᛉ','☿','♀','♂','⚳','⚷','⚵',
+'🜁','⌭','⧲','♔','♕','♖','♗','𖣓',	'☯', '🜁','⌭','⧲','♔','♕','♖','♗',
+  '♙','⚚','☤','※','⚕','☥', '♔','♕','♖','♗','♙','⚚','☤',
+  '⚕','☥',
+  '☢','☘','𓂀','᯼','࿄',
+  '☬','☫','۝','۩','؎','⧝','🝞','🝟',
+  'Ψ','ℜ','⳩','Ω','Ω','℧','𐃢','𐃯','♧','♡','♢','♤',
+  '𓄀','𓆗','𓆙','𓆚','𐦐','࿓','࿔','༄','༅','༆','༻','༺',
+  '⛩','♨','𐂡','𐁊','𐀼','⚕︎','⛻','🝤','🝪','🜾','🝁','🜱','𝛀','Ʊ',
+  '⏲','⚳','⚴','⚵','⚶','⚸','♆','♅','♄','♃','♁','☿','🜯','🜩','🜦',
+  '🜥','🜣','⛢','𓍢','𝖋','✝︎','✠','☩','♰','♱','☓','⚜︎',
+  '❀','✿','❦','⏚','Θ','ϟ',
+  'ᚠ','ᚡ','ᚣ','ᛃ','ᛄ','ᛆ','ᛈ','ᛉ','ᛕ','ᛖ','ᛗ','ᛘ','ᛙ','ᛪ',
+  'ᛩ','ᛨ','ᛦ','ᛥ','ᛤ','ᛣ','ᛢ','ᛡ','ᛟ','ᛞ','ᛝ','ᛜ','ᛰ',
+  'ᛯ','ᛮ','᛭','᛬','᛫','⚊','⚋','⚌','⚍','⚎','⚏','𝌀','𝌁','𝌂',
+  '𝌃','𝌄','𝌅','☰','☱','☲','☳','☴','☵','☶','☷',
+  'ༀ','༁','༂','༃','༄','༅','༆','༇','༊','༒','༔','༗',
+
+
+];
+
+  function randomFrom(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  // Set Sol symbol
+  document.querySelector('.sol-layer').textContent = randomFrom(solSymbols);
+
+  // For each orbit ring
+  document.querySelectorAll('.orbit-layer').forEach((orbit, i) => {
+    const count = i + 1;  // 1, 2, 3
+    for (let j = 0; j < count; j++) {
+      const angle = (360 / count) * j;
+      const r = orbit.offsetWidth / 2;
+      const planet = document.createElement('div');
+      planet.classList.add('planet');
+      planet.textContent = randomFrom(planetSymbols);
+      planet.style.transform = `rotate(${angle}deg) translate(${r}px)`;
+      orbit.appendChild(planet);
+    }
+  });
+</script>
+</body>
+</html>

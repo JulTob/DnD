@@ -1,0 +1,13 @@
+{
+  "emeraldwalk.runonsave": {
+    "commands": [
+      {
+        "match": "\\.py$",
+        "notMatch": "Minion\\.py$|check_minion\\.py$",
+        "cmd": "python \"${workspaceFolder}/scripts/check_minion.py\" \"${file}\"",
+        "message": "Minion check for ${fileBasename}...",
+        "autoShowOutputPanel": "always"
+      }
+    ]
+  }
+}

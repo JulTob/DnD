@@ -1,0 +1,219 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Gen Legend{% endblock %}
+
+{% block content %}
+<div class="main-content">
+	<h2>Welcome to Gen Legend</h2>
+	<p>Generate Legendary new Characters and Non-Player Characters. Ideal for your
+		next adventure.</p>
+
+	<div id="generator-tablet" class="tablet-wrapper">
+		<div class="tablet-controls">
+			<button class="tablet-nav prev fantasy-button" type="button" aria-label="Previous generator" style="min-width:2.2em; min-height:2.2em; width:2.2em; height:2.2em; font-size:1.3em; line-height:1em; padding:0; display:inline-flex; align-items:center; justify-content:center;">
+				<span aria-hidden="true" style="display:block;">&#x2039;</span>
+			</button>
+			<h3 id="tablet-title" class="tablet-title">NPC Generator</h3>
+			<button class="tablet-nav next fantasy-button" type="button" aria-label="Next generator" style="min-width:2.2em; min-height:2.2em; width:2.2em; height:2.2em; font-size:1.3em; line-height:1em; padding:0; display:inline-flex; align-items:center; justify-content:center;">
+				<span aria-hidden="true" style="display:block;">&#x203A;</span>
+			</button>
+		</div>
+
+		<div class="tablet-viewport">
+			<div class="tablet-rotator">
+				<section class="generator-panel" data-title="Character Generator">
+					<h3>Generate Character</h3>
+
+					<form id="character-form" action="/generate_character" method="post">
+						<label for="species-select">
+							<h6>Species:</h6>
+						</label>
+						<select name="species" id="species-select" class="fantasy-select" aria-label="Select Character Species">
+							{% for species in species_list %}
+							<option value="{{ species }}" class="fantasy-option">{{ species }}
+							</option>
+							{% endfor %}
+						</select>
+
+						<label for="class-select">
+							<h6>Class:</h6>
+						</label>
+						<select name="class" id="class-select" class="fantasy-select" aria-label="Select Character Class">
+							{% for class in class_list %}
+							<option value="{{ class }}" class="fantasy-option">{{ class }}
+							</option>
+							{% endfor %}
+						</select>
+
+						<label for="background-select-character">
+							<h6>Background:</h6>
+						</label>
+						<select name="background" id="background-select-character" class="fantasy-select">
+							{% for background in char_backgrounds %}
+							<option value="{{ background }}" class="fantasy-option">{{ background }}</option>
+							{% endfor %}
+						</select>
+
+						<div class="tablet-actions">
+							<button type="submit" class="fantasy-button" data-show-loader>Generate Character</button>
+						</div>
+					</form>
+				</section>
+				<section class="generator-panel is-active" data-title="NPC Generator">
+
+					<form id="npc-form" action="/generate_npc" method="post">
+						<label for="level-input">
+							<h6>Level:</h6>
+						</label>
+						<div class="number-input fantasy-input">
+							<button type="button" class="minus fantasy-button fantasy-input">-</button>
+							<input type="number" id="level-input" name="level" min="1" max="100"
+								placeholder="Enter Level" class="fantasy-select level fantasy-input"
+								aria-label="Enter NPC Level">
+							<button type="button" class="plus fantasy-button fantasy-input">+</button>
+						</div>
+
+						<h3>Generate Non Player Characters</h3>
+
+						<label for="race-select">
+							<h6>Race:</h6>
+						</label>
+						<select name="race" id="race-select" class="fantasy-select" aria-label="Select NPC Race">
+							{% for race in races %}
+							<option value="{{ race }}" class="fantasy-option">{{ race }}
+							</option>
+							{% endfor %}
+						</select>
+
+						<label for="archetype-select">
+							<h6>Archetype:</h6>
+						</label>
+						<select name="archetype" id="archetype-select" class="fantasy-select"
+							aria-label="Select NPC Archetype">
+							{% for archetype in npc_archetypes %}
+							<option value="{{ archetype }}" class="fantasy-option">{{ archetype }}</option>
+							{% endfor %}
+						</select>
+
+						<input type="hidden" id="seed-input" name="seed">
+
+						<div class="tablet-actions">
+							<button type="submit" class="fantasy-button" data-show-loader>Generate NPC</button>
+							<button type="button" class="fantasy-button" onclick="generateList()"
+								data-show-loader>Generate 5 NPCs</button>
+						</div>
+					</form>
+				</section>
+
+			</div>
+		</div>
+
+		<div class="tablet-dots" aria-label="Generator navigation"></div>
+	</div>
+	
+	<p>Select parameters to guide the generator.</p>
+
+</div>
+{% endblock content %}
+{% block scripts %}
+{{ super() }}
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			const npcForm = document.getElementById('npc-form');
+			const levelStepper = npcForm?.querySelector('.number-input');
+			const seedInput = document.getElementById('seed-input');
+
+			if (npcForm && seedInput) {
+				npcForm.addEventListener('submit', () => {
+					seedInput.value = Math.floor(Math.random() * 10000);
+				});
+			}
+
+			if (levelStepper) {
+				const levelField = levelStepper.querySelector('input[type="number"]');
+				const minus = levelStepper.querySelector('.minus');
+				const plus = levelStepper.querySelector('.plus');
+
+				const clamp = (value) => {
+					const min = parseInt(levelField.min, 10) || 1;
+					const max = parseInt(levelField.max, 10) || 20;
+					return Math.min(max, Math.max(min, value));
+				};
+
+				minus?.addEventListener('click', () => {
+					const current = parseInt(levelField.value, 10) || parseInt(levelField.placeholder, 10) || 1;
+					levelField.value = clamp(current - 1);
+				});
+
+				plus?.addEventListener('click', () => {
+					const current = parseInt(levelField.value, 10) || parseInt(levelField.placeholder, 10) || 1;
+					levelField.value = clamp(current + 1);
+				});
+			}
+
+			window.generateList = function generateList() {
+				const race = document.getElementById('race-select')?.value || 'Random';
+				const archetype = document.getElementById('archetype-select')?.value || 'Random';
+				window.location.href = `/list/${race}/${archetype}`;
+			};
+
+			const tablet = document.getElementById('generator-tablet');
+			if (!tablet) return;
+
+			const rotator = tablet.querySelector('.tablet-rotator');
+			const panels = Array.from(tablet.querySelectorAll('.generator-panel'));
+			const titleEl = tablet.querySelector('#tablet-title');
+			const dotsRoot = tablet.querySelector('.tablet-dots');
+			const prevBtn = tablet.querySelector('.tablet-nav.prev');
+			const nextBtn = tablet.querySelector('.tablet-nav.next');
+
+			if (!rotator || panels.length === 0) return;
+
+			let currentIndex = 0;
+			let autoTimer;
+
+			const goTo = (index) => {
+				currentIndex = (index + panels.length) % panels.length;
+				rotator.style.transform = `translateX(${-100 * currentIndex}%)`;
+				panels.forEach((panel, idx) => panel.classList.toggle('is-active', idx ===
+					currentIndex));
+				if (dotsRoot) {
+					dotsRoot.querySelectorAll('.tablet-dot').forEach((dot, idx) =>
+						dot.classList.toggle('is-active', idx === currentIndex)
+					);
+				}
+				if (titleEl) {
+					titleEl.textContent = panels[currentIndex]?.dataset.title || 'Generator';
+				}
+				restartAutoRotate();
+			};
+
+			const goNext = () => goTo(currentIndex + 1);
+			const goPrev = () => goTo(currentIndex - 1);
+
+			const restartAutoRotate = () => {
+				if (autoTimer) clearInterval(autoTimer);
+				autoTimer = setInterval(goNext, 12000);
+			};
+
+			if (dotsRoot) {
+				dotsRoot.innerHTML = '';
+				panels.forEach((panel, index) => {
+					const dot = document.createElement('button');
+					dot.type = 'button';
+					dot.className = 'tablet-dot';
+					dot.setAttribute('aria-label', `Show ${panel.dataset.title || 'generator'}`);
+					dot.addEventListener('click', () => goTo(index));
+					dotsRoot.appendChild(dot);
+				});
+			}
+
+			prevBtn?.addEventListener('click', goPrev);
+			nextBtn?.addEventListener('click', goNext);
+			tablet.addEventListener('mouseenter', () => autoTimer && clearInterval(autoTimer));
+			tablet.addEventListener('mouseleave', restartAutoRotate);
+
+			goTo(0);
+		});
+	</script>
+{% endblock %}
