@@ -11,7 +11,7 @@ import app.random as random
 try:
 	from AtlasLudus.Map_of_Dice import Dice, Dizero
 	from AtlasActorLudi.Map_of_Scores import Modifier, PB
-	from AtlasActorLudi.Grimoire_of_AbilityScores import AbilityScores
+	from AtlasActorLudi.Grimoire_of_AbilityScores import AbilityScores, apply_creature_ability_modifiers
 	from AtlasActorLudi.Grimoire_of_SavingThrows import SavingThrows
 	from AtlasActorLudi.Grimoire_of_Skills import Skills
 	from AtlasAlusoris.Map_of_Races import race_weights, Race
@@ -522,8 +522,8 @@ class NPC:
 
 	def SetAbilityScores(npc, STR, DEX, CON, INT, WIS, CHA):
 		random.seed(npc.seed)
-		npc.AS = ability_scores.AbilityScores(STR, DEX, CON, INT, WIS, CHA)
-		ability_scores.AbilityScoresPlus(npc)
+		npc.AS = AbilityScores(STR, DEX, CON, INT, WIS, CHA)
+		apply_creature_ability_modifiers(npc)
 		npc.ST = SavingThrows(npc.AS, npc.proficiency_bonus)
 
 	def SetMyStory(npc):

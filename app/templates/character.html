@@ -49,8 +49,8 @@
 
   <!-- Character Header -->
     <div class="npc-header" style="grid-column:  1 / -1;">
-        <h2 style="font-size: 2.2em;">{{ character.name | safe }}</h2>
-        <h2 style="font-size: 1.2em;">{{ character.title | safe }}</h2>
+        <h2 class="character-name">{{ character.name | safe }}</h2>
+        <h2 class="character-title">{{ character.title | safe }}</h2>
 		<h1>Level {{ character.Level }} {{ character.Class }} <i>,{{character.Subclass}}</i> </h1>
 	    <h1><b>{{ character.Species }} {{ character.Background }}</b></h1>
 	  	</div>

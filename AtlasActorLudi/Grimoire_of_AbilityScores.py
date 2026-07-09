@@ -111,12 +111,49 @@ class AbilityScores:
 	def cha_mod(AS):
 		return AS.mod(AS.CHA)
 
-def AbilityScoresPlus(npc):
-	from AtlasOfLore.Map_of_Backgrounds import AS_background_modifier
-	from AtlasOfLore.Map_of_Races import AS_racial_modifier
-	rc = npc.race
 
-	creature_type = npc.race + ' ' + npc.subrace + ' ' + npc.background
+class AttackRolls:
+	"""To-hit per ability: proficient (mod+PB) and base (mod only).
 
-	AS_background_modifier(npc)
-	AS_racial_modifier(npc)
+	Display convention (string, for plain-text fallbacks):
+		STR	+5⚜️	+2🔰
+	⚜️ — proficient attack (matches Proficiency Bonus chip)
+	🔰 — without proficiency (off-hand, improvised, etc.)
+	"""
+
+	ABILITIES = ("STR", "DEX", "CON", "INT", "WIS", "CHA")
+
+	def __init__(rolls, AS, proficiency_bonus):
+		pb = int(proficiency_bonus)
+		mods = {
+			"STR": Modifier(AS.STR),
+			"DEX": Modifier(AS.DEX),
+			"CON": Modifier(AS.CON),
+			"INT": Modifier(AS.INT),
+			"WIS": Modifier(AS.WIS),
+			"CHA": Modifier(AS.CHA),
+		}
+		for abbr in rolls.ABILITIES:
+			setattr(rolls, f"{abbr}_base", mods[abbr])
+			setattr(rolls, f"{abbr}_prof", mods[abbr] + pb)
+
+	def _line(rolls, abbr: str) -> str:
+		base = getattr(rolls, f"{abbr}_base")
+		prof = getattr(rolls, f"{abbr}_prof")
+		return f"{abbr}\t{prof:+}⚜️\t{base:+}🔰"
+
+	@property
+	def string(rolls):
+		return "\n".join(rolls._line(abbr) for abbr in rolls.ABILITIES)
+
+
+def AbilityScoresPlus(AS, proficiency_bonus) -> AttackRolls:
+	"""Ability modifier + proficiency for each score — the attack-roll reference."""
+	return AttackRolls(AS, proficiency_bonus)
+
+
+def apply_creature_ability_modifiers(creature) -> None:
+	"""Apply racial and background tweaks to creature.AS (NPC path)."""
+	from AtlasAlusoris.Map_of_Races import AS_racial_modifier
+
+	AS_racial_modifier(creature)

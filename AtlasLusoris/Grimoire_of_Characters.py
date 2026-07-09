@@ -14,7 +14,7 @@ try: # Cartography
 	from AtlasLudus.Map_of_Languages import Character_Languages
 	from AtlasLudus.Map_of_Dice import Dice
 	from AtlasActorLudi.Map_of_Scores import PB, Modifier
-	from AtlasActorLudi.Grimoire_of_AbilityScores import AbilityScores
+	from AtlasActorLudi.Grimoire_of_AbilityScores import AbilityScores, AbilityScoresPlus
 	from AtlasActorLudi.Grimoire_of_SavingThrows import SavingThrows
 	from AtlasActorLudi.Grimoire_of_Skills import Char_Skills, get_other_proficiencies
 	from AtlasLusoris.Map_of_Species import species
@@ -156,6 +156,7 @@ class Character:
 		char.other_proficiencies = get_other_proficiencies(char.skills)
 		GenerateEquipment(char)
 		char.saving_throws = char.Saving_Throws()
+		char.attack_rolls = AbilityScoresPlus(char.AS, char.proficiency_bonus)
 		char.spellcaster = char.get_spellcaster()
 		return char
 
@@ -387,6 +388,7 @@ class Character:
 			'features':		char.features,
 			'equipment': 	char.equipment,
 			'SavingThrow':  char.saving_throws,
+			'AttackRolls':	char.attack_rolls,
 			'Spellcaster':	char.spellcaster,
 			'Speed':		char.speed,
 			'HPD':			char.HitPointDie,

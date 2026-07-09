@@ -159,6 +159,36 @@ def _text_html(value: Any, placeholder: str = "-") -> ui.Tag:
     return ui.HTML(escape(text).replace("\n", "<br>"))
 
 
+def _attack_rolls_html(obj: Any) -> ui.Tag:
+    """Attack rolls table: ability | proficient ⚜️ | base 🔰 (borderless)."""
+    abilities = getattr(obj, "ABILITIES", ("STR", "DEX", "CON", "INT", "WIS", "CHA"))
+    rows: list[Any] = []
+    if obj is not None:
+        for abbr in abilities:
+            base = getattr(obj, f"{abbr}_base", None)
+            prof = getattr(obj, f"{abbr}_prof", None)
+            if base is not None and prof is not None:
+                rows.append(
+                    ui.tags.tr(
+                        ui.tags.td(abbr),
+                        ui.tags.td({"class": "attack-roll-prof"}, f"{prof:+}⚜️"),
+                        ui.tags.td({"class": "attack-roll-base"}, f"{base:+}🔰"),
+                    )
+                )
+    if rows:
+        return ui.tags.table(
+            {"class": "attack-rolls-table"},
+            ui.tags.tbody(*rows),
+        )
+    value = getattr(obj, "string", obj) if obj is not None else ""
+    if callable(value):
+        try:
+            value = value()
+        except Exception:
+            value = ""
+    return _text_html(value, "-")
+
+
 def _feature_item(name: str, description: str) -> ui.Tag:
     """Feature blurbs often embed spell HTML — render as HTML, not markdown."""
     body = _safe_str(description, "").strip()
@@ -316,6 +346,8 @@ def build_character_sheet(data: dict[str, Any]) -> ui.Tag:
             saving_throw_value = saving_throw_obj
     saving_throw_html = _text_html(saving_throw_value, "-")
 
+    attack_roll_html = _attack_rolls_html(data.get("AttackRolls"))
+
     story_html = _text_html(data.get("Story", ""))
 
     scores_box = ui.div({"class": "npc-box npc-scores"}, *stat_boxes)
@@ -326,6 +358,7 @@ def build_character_sheet(data: dict[str, Any]) -> ui.Tag:
         ui.h4(f"Passive Perception: {_safe_str(data.get('passive_perception', '-'))}"),
     )
     saves_box = ui.div({"class": "npc-textbox"}, ui.h2("Saving Throws"), saving_throw_html)
+    attacks_box = ui.div({"class": "npc-textbox"}, ui.h2("Attack Rolls"), attack_roll_html)
 
     stat_chips = [
         stat_chip("⚖️", "Alignment", _safe_str(data.get("Alignment", "-"))),
@@ -339,7 +372,7 @@ def build_character_sheet(data: dict[str, Any]) -> ui.Tag:
         stat_chip("🛡️", "Armor Class", _safe_str(data.get("AC", "-"))),
     ]
 
-    rail_items: list[Any] = [scores_box, skills_box, saves_box]
+    rail_items: list[Any] = [scores_box, skills_box, saves_box, attacks_box]
     if prof_list:
         rail_items.append(
             ui.div(
@@ -368,8 +401,8 @@ def build_character_sheet(data: dict[str, Any]) -> ui.Tag:
         {"class": "sheet note-lines"},
         ui.div(
             {"class": "npc-header"},
-            ui.h2(_safe_str(data.get("name", "Unknown"), "Unknown")),
-            ui.h2(_safe_str(data.get("title", ""), "")),
+            ui.h2({"class": "character-name"}, _safe_str(data.get("name", "Unknown"), "Unknown")),
+            ui.h2({"class": "character-title"}, _safe_str(data.get("title", ""), "")),
             ui.h1(
                 f"{_safe_str(data.get('Class', '-'))}, "
                 f"{_safe_str(data.get('Subclass', '-'))}"
@@ -518,8 +551,8 @@ def build_npc_sheet(npc: NPC) -> ui.Tag:
         {"class": "sheet note-lines"},
         ui.div(
             {"class": "npc-header"},
-            ui.h2(_safe_str(getattr(npc, "name", "Unknown"))),
-            ui.h2(_safe_str(getattr(npc, "title", ""))),
+            ui.h2({"class": "character-name"}, _safe_str(getattr(npc, "name", "Unknown"))),
+            ui.h2({"class": "character-title"}, _safe_str(getattr(npc, "title", ""))),
             ui.h1(f"{race}: {subrace}"),
             ui.h1(background),
         ),

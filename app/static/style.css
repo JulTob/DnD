@@ -27,7 +27,7 @@
   --font-fancy:   'Kings and Pirates', 'Eagle Lake', 'Cinzel Decorative', serif; /* display / wanted-poster */
   --font-impact:  'JSL Ancient', 'MiddleSaxonyText', serif;
   --font-ui:      'Spectral SC', 'Cinzel', sans-serif;                    /* buttons, controls, UI chrome */
-  --font-name:    'IM Fell English SC', 'IM Fell DW Pica SC', serif;      /* character name & title */
+  --font-name:    'IM Fell English SC', 'IM Fell DW Pica SC', serif;      /* character title */
   --font-record:  'IM Fell Double Pica SC', 'IM Fell DW Pica SC', serif;  /* stat record labels */
   --font-value:   'IM Fell Double Pica', 'IM Fell DW Pica', serif;        /* stat values */
   --font-fantasy: 'Eagle Lake', 'Cinzel Decorative', serif;              /* fantasy titles (spells) */
@@ -1284,16 +1284,57 @@ header, footer {
     box-sizing: border-box;
 }
 
-/* Character name & title in IM Fell English SC. */
+/* Attack Rolls: borderless table; proficient ⚜️ primary, base 🔰 softer. */
+.npc-textbox .attack-rolls-table {
+    width: 100%;
+    border: none;
+    border-collapse: collapse;
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+.npc-textbox .attack-rolls-table td {
+    border: none;
+    padding: 0.1rem 0.4rem 0.1rem 0;
+    vertical-align: baseline;
+    line-height: 1.4;
+}
+
+.npc-textbox .attack-rolls-table td:first-child {
+    padding-left: 0;
+    width: 2.4rem;
+}
+
+.npc-textbox .attack-rolls-table td:nth-child(2),
+.npc-textbox .attack-rolls-table td:nth-child(3) {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.npc-textbox .attack-roll-prof {
+    font-weight: 600;
+}
+
+.npc-textbox .attack-roll-base {
+    opacity: 0.52;
+    font-weight: 400;
+}
+
+/* Character name (mixed case) vs title (small caps). */
 .npc-header h2 {
-    font-family: var(--font-name);
+    margin: 0.15rem 0;
+}
+
+.npc-header .character-name {
+    font-family: 'IM Fell English', 'IM Fell DW Pica', serif;
     font-weight: 700;
     font-size: clamp(3.1rem, 2.6vw, 1.45rem);
     line-height: 1.5;
 }
 
-/* Name is h2:first-of-type; the next h2 is the "Title" line. */
-.npc-header h2:nth-of-type(2) {
+.npc-header .character-title {
+    font-family: var(--font-name);
+    font-weight: 700;
     font-size: calc(clamp(3.1rem, 2.6vw, 1.45rem) * 0.80);
     line-height: 1.05;
 }

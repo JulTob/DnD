@@ -88,10 +88,10 @@ class SavingThrows:
 		"""
 
 		str =(
-		  f"STR: {ST.STR:+}  <br>" +
-		  f"DEX: {ST.DEX:+}  <br>" +
-		  f"CON: {ST.CON:+}  <br>" +
-		  f"INT: {ST.INT:+}  <br>" +
-		  f"WIS: {ST.WIS:+}  <br>" +
-		  f"CHA: {ST.CHA:+}  <br>")
+		  f"STR: {ST.STR:+}\n" +
+		  f"DEX: {ST.DEX:+}\n" +
+		  f"CON: {ST.CON:+}\n" +
+		  f"INT: {ST.INT:+}\n" +
+		  f"WIS: {ST.WIS:+}\n" +
+		  f"CHA: {ST.CHA:+}\n")
 		return str
