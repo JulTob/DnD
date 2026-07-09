@@ -7,7 +7,7 @@
 - **Route to:** Architecture Consul (Druid), Workshop Consul (Artificer), Readability Consul (Barbarian), Simplicity Consul (Monk)
 - **Parent:** QST-0007 (Track A / shiny_app.py)
 - **Sidequests:** QST-0021.1 ✓, QST-0021.2 ✓, QST-0021.3, QST-0021.4, QST-0021.5, QST-0021.6
-- **Related:** QST-0010 (superseded by this track) · QST-0001 · QST-0008 · Decree 0001
+- **Related:** QST-0010 (superseded by this track) · QST-0001 · QST-0008 · QST-0024 (character toolbar — Agora Q-0008) · Decree 0001
 
 ---
 
@@ -55,6 +55,7 @@ Individual components (kits, maps...) should be individual quests, with individu
 | 4 | QST-0021.4 | `Kit_of_Masonry` + `app/static/js/masonry.js` |
 | 5 | QST-0021.5 | `Kit_of_Tablet` + `app/static/js/tablet.js` |
 | 6 | QST-0021.6 | `Kit_of_ShareableLinks` + final `shiny_app.py` slim-down |
+| — | QST-0024 | `Kit_of_Reforge` (or Agora-chosen shape) — character toolbar; **after Dialog 0005**; may slot after 0021.3 or parallel if hot |
 
 ### Constraints
 - **Sequence QST-0021.3 after QST-0008** if NPC-sheet CSS is still in flux (same rule as old QST-0010).

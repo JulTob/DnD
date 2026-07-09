@@ -97,7 +97,7 @@ class Rogue(Progression):
 					 You can control the hand as a Bonus Action,
 					 and through it, you can make
 					 <i>Dexterity (Sleight of Hand)</i> checks.
-					 <div class="npc-textbox">{MageHand}</div>
+					 <div class="spell">{MageHand}</div>
 					"""
 					))
 

@@ -22,6 +22,8 @@ Append a row. Keep it to one line; detail goes in the Dialog file.
 | Q-0005 | How should we run the QST-0007 file-by-file diagnostic sweep — order, method, and how findings branch into questae/sidequests? | Julio | Full council (Bard, Druid, Artificer, Ranger, Monk, Rogue, Sorcerer, Wizard, Lorekeeper) | `Dialogs/0002-how-to-run-the-diagnostic-sweep.md` | 🔵 settled → Decree 0001 |
 | Q-0006 | What is the minimal Character the generator builds, and how are the RNG & core mechanisms instantiated so PC/NPC diverge by tags? | Julio | Bard, Lorekeeper, Druid, Wizard, Sorcerer, Paladin, Warlock, Monk, Rogue | `Dialogs/0003-minimal-character-and-rng.md` | 🔵 settled → Decree 0002 |
 | Q-0007 | The Minions: are they sound, and where should they go — kept, evolved into a Log System, and/or deployment error reporting? | Julio | Full council | `Dialogs/0004-evaluate-the-minions.md` | 🔵 settled → Decree 0003 |
+| Q-0008 | Character sheet toolbar (`.character-reforge`): how should layout be owned — inline CSS tweaks, Scroll_of_Styles only, or a Venustas Kit with a single contract? | Julio (via Agent) | Architecture (Druid), Workshop (Artificer), Simplicity (Monk), Flow (Sorcerer), Readability (Barbarian) | `Dialogs/0005-character-reforge-toolbar-layout.md` | 🟡 open |
+| Q-0009 | Characteristics grid (`stat-flow`): uniform chips, thematic order, Level box — flex vs grid, label contract? | Julio (via Agent) | Readability (Barbarian), Architecture (Druid), Simplicity (Monk), Lorekeeper | `Dialogs/0006-characteristics-grid-layout.md` | 🟢 converged — awaiting Julio |
 
 ---
 

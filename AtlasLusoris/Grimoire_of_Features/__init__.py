@@ -682,7 +682,7 @@ def Fighting_Styles(char=None):
 		chosen = random.sample(druid_cantrips, k=2)
 
 		# render them as HTML blocks:
-		cantrip_html = "".join(f"<div class='npc-textbox'>{c}</div>" for c in chosen)
+		cantrip_html = "".join(f"<div class='spell'>{c}</div>" for c in chosen)
 
 		styles["Druidic Warrior"] = (
 			"You learn two cantrips of your choice from the druid spell list. "
@@ -700,7 +700,7 @@ def Fighting_Styles(char=None):
 		chosen = random.sample(cleric_cantrips, k=2)
 
 		# render them as HTML blocks:
-		cantrip_html = "".join(f"<div class='npc-textbox'>{c}</div>" for c in chosen)
+		cantrip_html = "".join(f"<div class='spell'>{c}</div>" for c in chosen)
 
 		styles["Blessed Warrior"] = (
 			"You learn two cantrips of your choice from the cleric spell list. "
@@ -905,7 +905,7 @@ def LightBearer():
 		apply=apply,
         description=(
 			f"""You know the <b>Light</b> cantrip. Charisma is your spellcasting ability.
-			<div class=\"npc-textbox\">{Light}</div>"""
+			<div class=\"spell\">{Light}</div>"""
 			) ,
 		source="Species Feature"
 	)
@@ -981,7 +981,7 @@ def InvArmorOfShadows():
 		level=2,
 		description= f"""
 			You can cast Mage Armor on yourself at will, without expending a spell slot.
-			<div class="npc-textbox">{MageArmor}</div>
+			<div class="spell">{MageArmor}</div>
 			""",
 		condition=lambda c: "Warlock" in c.char_class,
 		apply=None
@@ -992,7 +992,7 @@ def InvAscendantStep():
 	return Invocation(
 		name="Ascendant Step",
 		level=5,
-		description=f"""You can cast Levitate on yourself at will, no slot. <div class="npc-textbox">{Levitate}</div>""",
+		description=f"""You can cast Levitate on yourself at will, no slot. <div class="spell">{Levitate}</div>""",
 		condition=lambda c: getattr(c, "level", 0) >= 5 and "Warlock" in c.char_class,
 		apply=lambda c: None
 	)
@@ -1018,7 +1018,7 @@ def InvFiendishVigor():
 		name="Fiendish Vigor",
 		level=2,
 		description= f"""
-			You can cast False Life on yourself at will. Always max HP on False Life.<br> <div class="npc-textbox">{FalseLife}</div>
+			You can cast False Life on yourself at will. Always max HP on False Life.<br> <div class="spell">{FalseLife}</div>
 			""",
 		condition=lambda c: getattr(c, "level", 0) >= 2 and "Warlock" in c.char_class,
 		apply=lambda c: None
@@ -1447,11 +1447,11 @@ def MagicInitiate(class_name: str):
 			sc.spells_known.append(chosen_first)
 
 		# Update feat text so it prints the actual spells
-		bullets  = "".join(f"<div class='npc-textbox'>{s}</div>" for s in chosen_cantrips)
+		bullets  = "".join(f"<div class='spell'>{s}</div>" for s in chosen_cantrips)
 		mod = "Wisdom"
 		if class_name == "Wizard": mod = "Intelligence"
 		if chosen_first:
-			bullets += f"<div class='npc-textbox'>{chosen_first}</div>"
+			bullets += f"<div class='spell'>{chosen_first}</div>"
 		_feat.description = (
 			f"You learn two cantrips and one 1st-level spell from the "
 			f"{class_name} list (shown once you take the feat). "

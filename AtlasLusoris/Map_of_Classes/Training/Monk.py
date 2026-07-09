@@ -287,7 +287,7 @@ class Shadow(Way):
 				persists, you can move its area of Darkness to a space
 				within 60 feet of yourself at the start of each of your
 				turns.
-				<div class="npc-textbox">{Darkness}</div>
+				<div class="spell">{Darkness}</div>
 				"""))
 			feats.append(Feature("Shadow Arts: Darkvision. ",
 				"""
@@ -298,7 +298,7 @@ class Shadow(Way):
 				f"""
 				You know the Minor Illusion spell.
 				Wisdom is your spellcasting ability for it.
-				<div class="npc-textbox">{MinorIllusion}</div>
+				<div class="spell">{MinorIllusion}</div>
 				"""))
 
 		# Level 6 features
@@ -389,7 +389,7 @@ class Elements(Way):
 			feats.append(Feature("Manipulate Elements",
 				f"""
 				You know the Elementalism spell. Wisdom is your spellcasting ability for it.
-				<div class="npc-textbox">{Elementalism}</div>
+				<div class="spell">{Elementalism}</div>
 				"""))
 		# Level 6 features
 		if level >= 6:

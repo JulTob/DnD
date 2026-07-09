@@ -142,8 +142,8 @@ its turns, ending the effect on itself on a success.
 Once you use this benefit, you can't use it again until you finish a
 Long Rest. You can also restore your use of it by expending one use
 of your Bardic Inspiration (no action required).
-<div class="npc-textbox">{CharmPerson}</div>
-<div class="npc-textbox">{MirrorImage}</div>
+<div class="spell">{CharmPerson}</div>
+<div class="spell">{MirrorImage}</div>
 					"""
 					))
 				feats.append(Feature("Mantle of Inspiration",
@@ -163,7 +163,7 @@ Reaction to move up to its Speed without provoking Opportunity Attacks.
 				feats.append(Feature("Mantle of Majesty",
 					f"""
 You always have the Command spell prepared.
-<div class="npc-textbox">{Command}</div>
+<div class="spell">{Command}</div>
 As a Bonus Action, you cast Command without expending a spell slot, and
 you take on an unearthly appearance for 1 minute or until your
 Concentration ends. During this time, you can cast Command as a

@@ -144,14 +144,15 @@ header, footer {
 }
 
 .sheet-rail {
-    flex: 0 0 200px;
+    flex: 0 0 252px;
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
 .sheet-rail > .npc-box,
-.sheet-rail > .npc-textbox {
+.sheet-rail > .npc-textbox,
+.sheet-rail > .stat-flow {
     width: 100%;
     margin: 0;
 }
@@ -165,52 +166,96 @@ header, footer {
 }
 
 .stat-flow {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
 }
 
 .stat-flow > .npc-box {
-    flex: 1 1 132px;
-    max-width: 210px;
-    min-width: 120px;
+    width: 100%;
+    max-width: none;
+    min-width: 0;
     margin: 0;
+    flex: unset;
 }
 
-/* Record chip: icon with room, label in small-caps, value in Double Pica. */
+/* Record chip: one per line; icon sits behind-left like score boxes. */
 .stat-chip {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    text-align: right;
     gap: 2px;
-    padding: 12px 14px;
+    padding: 8px 10px;
+    position: relative;
 }
 
 .stat-chip .symbol {
-    font-size: 1.7em;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    transform: none;
+    width: 30px;
+    height: 30px;
+    font-size: 17px;
     line-height: 1;
-    margin-bottom: 6px;
+    margin: 0;
+    z-index: -1;
 }
 
 .stat-chip .record {
     font-family: var(--font-record);
-    font-size: 0.82em;
-    letter-spacing: 0.02em;
+    font-size: 0.8em;
+    letter-spacing: 0.01em;
     color: var(--secondary-color);
-    line-height: 1.05;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
 }
 
 .stat-chip .value {
     font-family: var(--font-value);
-    font-size: 1.35em;
+    font-size: 1.2em;
     font-weight: 700;
-    line-height: 1.05;
+    line-height: 1.1;
+    overflow-wrap: anywhere;
+}
+
+.sheet-rail .npc-scores > .npc-box {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    box-sizing: border-box;
+}
+
+.sheet-rail .npc-scores > .score-row {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    box-sizing: border-box;
+}
+
+/* Ability scores live inside a wrapper: `class="npc-box npc-scores"`.
+   `.npc-box` has `max-width: 180px` in base CSS, which caps the whole rail.
+   Override in the rail so the wrapper can fill the column. */
+.sheet-rail .npc-box.npc-scores {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    box-sizing: border-box;
 }
 
 /* Character name & title in IM Fell English SC. */
 .npc-header h2 {
     font-family: var(--font-name);
     font-weight: 700;
+    font-size: clamp(3.1rem, 2.6vw, 1.45rem);
+    line-height: 1.5;
+}
+
+/* Name is h2:first-of-type; the next h2 is the "Title" line. */
+.npc-header h2:nth-of-type(2) {
+    font-size: calc(clamp(3.1rem, 2.6vw, 1.45rem) * 0.80);
+    line-height: 1.05;
 }
 
 /* Fantasy section titles (e.g. Spells) in Eagle Lake. */
@@ -247,6 +292,45 @@ header, footer {
 
 .sheet-section .prose-body p { margin: 0 0 0.7em; }
 .sheet-section .prose-body table { width: 100%; }
+
+/* Generator HTML (spells in features) must read as body prose, not markdown code blocks. */
+.sheet-section .prose-body pre,
+.sheet-section .prose-body code {
+    font-family: var(--font-text);
+    font-size: inherit;
+    line-height: inherit;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    white-space: normal;
+    overflow: visible;
+}
+
+.sheet-section .prose-body .feature-entry {
+    margin: 0 0 1.1em;
+}
+
+.sheet-section .prose-body .feature-lead {
+    margin: 0 0 0.35em;
+}
+
+.sheet-section .prose-body .spell {
+    font-family: var(--font-text);
+    font-size: 1.04rem;
+    line-height: 1.7;
+    margin: 0.5em 0 0.9em;
+}
+
+.sheet-section .prose-body .spell h4 {
+    font-family: var(--font-fantasy);
+    font-size: 1.25em;
+    margin: 0.4em 0 0.15em;
+}
+
+.sheet-section .prose-body .spell p {
+    margin: 0 0 0.55em;
+}
 
 /* Long-form sections — rules, backstory, spells — read as a page, not a box. */
 .npc-prose {
@@ -403,15 +487,32 @@ header, footer {
 
 .character-reforge {
     display: grid;
-    grid-template-columns: minmax(320px, 520px) minmax(220px, 280px);
+    grid-template-columns: minmax(360px, 580px) minmax(300px, 500px);
     grid-template-areas:
         "species level_block"
         "class generate"
         "background share";
-    gap: 0.6rem 0.8rem;
+    gap: 1.4rem 3.5rem;
     align-items: stretch;
-    width: min(980px, 100%);
+
+    width: min(100%, 1080px);
     margin: 0.4rem auto 0.6rem;
+}
+
+
+.character-reforge-field,
+.character-level-box,
+.character-generate-wrap,
+.character-share-wrap {
+    min-width: 0;
+}
+
+.character-reforge .shiny-input-select,
+.character-reforge .action-button,
+.character-reforge .fantasy-button,
+.character-level-box {
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .character-reforge-field {
@@ -467,16 +568,16 @@ header, footer {
     display: none;
 }
 
-.character-reforge .action-button {
+.character-reforge .fantasy-button {
     width: 100%;
     font-size: 1rem;
 }
 
-.character-reforge .action-button:hover {
+.character-reforge .fantasy-button:hover {
     font-size: 1rem;
 }
 
-.character-reforge .character-level-controls .action-button {
+.character-reforge .character-level-controls .fantasy-button {
     width: 2.8rem;
     min-width: 2.8rem;
     min-height: 3.05rem;
@@ -542,6 +643,7 @@ header, footer {
             "generate"
             "share";
         align-items: stretch;
+        width: 100%;
     }
 
     .character-level-box {
@@ -627,40 +729,40 @@ header, footer {
 
 HOME_SCRIPT = """
 (() => {
-  function initGeneratorTablet() {
-    const tablet = document.getElementById('generator-tablet');
-    if (!tablet || tablet.dataset.ready === 'true') return false;
+    function initGeneratorTablet() {
+        const tablet = document.getElementById('generator-tablet');
+        if (!tablet || tablet.dataset.ready === 'true') return false;
 
-    const rotator = tablet.querySelector('.tablet-rotator');
-    const panels = Array.from(tablet.querySelectorAll('.generator-panel'));
-    const titleEl = tablet.querySelector('#tablet-title');
-    const dotsRoot = tablet.querySelector('.tablet-dots');
-    const prevBtn = tablet.querySelector('.tablet-nav.prev');
-    const nextBtn = tablet.querySelector('.tablet-nav.next');
+        const rotator = tablet.querySelector('.tablet-rotator');
+        const panels = Array.from(tablet.querySelectorAll('.generator-panel'));
+        const titleEl = tablet.querySelector('#tablet-title');
+        const dotsRoot = tablet.querySelector('.tablet-dots');
+        const prevBtn = tablet.querySelector('.tablet-nav.prev');
+        const nextBtn = tablet.querySelector('.tablet-nav.next');
 
-    if (!rotator || panels.length === 0) return false;
+        if (!rotator || panels.length === 0) return false;
 
-    tablet.dataset.ready = 'true';
+        tablet.dataset.ready = 'true';
 
-    let currentIndex = panels.findIndex((panel) => panel.classList.contains('is-active'));
-    let autoTimer = null;
+        let currentIndex = panels.findIndex((panel) => panel.classList.contains('is-active'));
+        let autoTimer = null;
 
-    if (currentIndex < 0) {
-      currentIndex = 0;
-    }
+        if (currentIndex < 0) {
+            currentIndex = 0;
+            }
 
     const restartAutoRotate = () => {
-      if (autoTimer) clearInterval(autoTimer);
-      autoTimer = setInterval(goNext, 12000);
-    };
+        if (autoTimer) clearInterval(autoTimer);
+        autoTimer = setInterval(goNext, 12000);
+        };
 
     const goTo = (index) => {
-      currentIndex = (index + panels.length) % panels.length;
-      rotator.style.transform = `translateX(${-100 * currentIndex}%)`;
+        currentIndex = (index + panels.length) % panels.length;
+        rotator.style.transform = `translateX(${-100 * currentIndex}%)`;
 
-      panels.forEach((panel, idx) => {
-        panel.classList.toggle('is-active', idx === currentIndex);
-      });
+        panels.forEach((panel, idx) => {
+            panel.classList.toggle('is-active', idx === currentIndex);
+            });
 
       if (dotsRoot) {
         dotsRoot.querySelectorAll('.tablet-dot').forEach((dot, idx) => {
@@ -668,9 +770,9 @@ HOME_SCRIPT = """
         });
       }
 
-      if (titleEl) {
+    if (titleEl) {
         titleEl.textContent = panels[currentIndex]?.dataset.title || 'Generator';
-      }
+        }
 
       restartAutoRotate();
     };
@@ -679,72 +781,72 @@ HOME_SCRIPT = """
     const goPrev = () => goTo(currentIndex - 1);
 
     if (dotsRoot) {
-      dotsRoot.innerHTML = '';
+        dotsRoot.innerHTML = '';
 
-      panels.forEach((panel, index) => {
-        const dot = document.createElement('button');
-        dot.type = 'button';
-        dot.className = 'tablet-dot';
-        dot.setAttribute('aria-label', `Show ${panel.dataset.title || 'generator'}`);
-        dot.addEventListener('click', () => goTo(index));
-        dotsRoot.appendChild(dot);
-      });
+        panels.forEach((panel, index) => {
+            const dot = document.createElement('button');
+            dot.type = 'button';
+            dot.className = 'tablet-dot';
+            dot.setAttribute('aria-label', `Show ${panel.dataset.title || 'generator'}`);
+            dot.addEventListener('click', () => goTo(index));
+            dotsRoot.appendChild(dot);
+        });
     }
 
     prevBtn?.addEventListener('click', goPrev);
     nextBtn?.addEventListener('click', goNext);
 
     tablet.addEventListener('mouseenter', () => {
-      if (autoTimer) clearInterval(autoTimer);
-    });
+        if (autoTimer) clearInterval(autoTimer);
+        });
 
     tablet.addEventListener('mouseleave', restartAutoRotate);
 
     tablet.querySelectorAll('.number-input').forEach((element) => {
-      const input = element.querySelector('input[type="number"]');
-      const minus = element.querySelector('.minus');
-      const plus = element.querySelector('.plus');
-      if (!input || !minus || !plus) return;
+        const input = element.querySelector('input[type="number"]');
+        const minus = element.querySelector('.minus');
+        const plus = element.querySelector('.plus');
+        if (!input || !minus || !plus) return;
 
-      minus.addEventListener('click', () => {
-        const min = Number(input.min || 1);
-        const current = Number(input.value || min);
-        input.value = String(Math.max(min, current - 1));
-        input.dispatchEvent(new Event('input', { bubbles: true }));
-        input.dispatchEvent(new Event('change', { bubbles: true }));
-      });
+        minus.addEventListener('click', () => {
+            const min = Number(input.min || 1);
+            const current = Number(input.value || min);
+            input.value = String(Math.max(min, current - 1));
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+            input.dispatchEvent(new Event('change', { bubbles: true }));
+        });
 
-      plus.addEventListener('click', () => {
-        const max = Number(input.max || 100);
-        const min = Number(input.min || 1);
-        const current = Number(input.value || min);
-        input.value = String(Math.min(max, current + 1));
-        input.dispatchEvent(new Event('input', { bubbles: true }));
-        input.dispatchEvent(new Event('change', { bubbles: true }));
-      });
-    });
+        plus.addEventListener('click', () => {
+            const max = Number(input.max || 100);
+            const min = Number(input.min || 1);
+            const current = Number(input.value || min);
+            input.value = String(Math.min(max, current + 1));
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+            input.dispatchEvent(new Event('change', { bubbles: true }));
+            });
+        });
 
     goTo(currentIndex);
 
     if (window.Shiny && typeof window.Shiny.bindAll === 'function') {
-      window.Shiny.bindAll(tablet);
-    }
+        window.Shiny.bindAll(tablet);
+        }
 
     return true;
-  }
+    }
 
-  const scheduleInit = () => {
-    window.requestAnimationFrame(initGeneratorTablet);
-    window.setTimeout(initGeneratorTablet, 50);
-    window.setTimeout(initGeneratorTablet, 250);
-  };
+    const scheduleInit = () => {
+        window.requestAnimationFrame(initGeneratorTablet);
+        window.setTimeout(initGeneratorTablet, 50);
+        window.setTimeout(initGeneratorTablet, 250);
+        };
 
-  document.addEventListener('DOMContentLoaded', scheduleInit);
-  document.addEventListener('shiny:connected', scheduleInit);
-  document.addEventListener('shiny:value', scheduleInit);
+    document.addEventListener('DOMContentLoaded', scheduleInit);
+    document.addEventListener('shiny:connected', scheduleInit);
+    document.addEventListener('shiny:value', scheduleInit);
 
-  scheduleInit();
-  window.setInterval(initGeneratorTablet, 500);
+    scheduleInit();
+    window.setInterval(initGeneratorTablet, 500);
 })();
 """
 
@@ -928,6 +1030,21 @@ def _prose(text: Any, placeholder: str = "—") -> ui.Tag:
     return ui.markdown(body) if body else ui.p(placeholder)
 
 
+def _html_prose(html: str, placeholder: str = "—") -> ui.Tag:
+    """Render pre-built HTML as flowing prose (spells, features with embedded markup)."""
+    body = _safe_str(html, "").strip()
+    return ui.HTML(body) if body else ui.p(placeholder)
+
+
+def _feature_item(name: str, description: str) -> ui.Tag:
+    """Feature blurbs often embed spell HTML — render as HTML, not markdown."""
+    body = _safe_str(description, "").strip()
+    return ui.div(
+        {"class": "feature-entry"},
+        ui.HTML(f"<p class='feature-lead'><strong>{escape(_safe_str(name))}.</strong></p>{body}"),
+    )
+
+
 def prose_block(title: str, *content: Any, level: int = 2) -> ui.Tag:
     """A full-width tome section: a heading and long-form prose (rules, backstory, spells)."""
     heading = {1: ui.h1, 2: ui.h2, 3: ui.h3}.get(level, ui.h2)
@@ -989,7 +1106,7 @@ def build_character_sheet(data: dict[str, Any]) -> ui.Tag:
         fname = getattr(feat, "name", None)
         if fname:
             fdesc = _safe_str(getattr(feat, "description", ""), "")
-            feature_items.append(ui.markdown(f"**{_safe_str(fname)}.** {fdesc}"))
+            feature_items.append(_feature_item(_safe_str(fname), fdesc))
         else:
             feature_items.append(_prose(str(feat)))
 
@@ -1016,7 +1133,7 @@ def build_character_sheet(data: dict[str, Any]) -> ui.Tag:
         emoji = ability_emoji.get(_safe_str(stat), "")
         stat_boxes.append(
             ui.div(
-                {"class": "npc-box", "style": "text-align: right;"},
+                {"class": "npc-box score-row", "style": "text-align: right;"},
                 *( [ui.div({"class": "symbol"}, emoji)] if emoji else [] ),
                 ui.h4(ui.HTML(f"{escape(_safe_str(stat))}<br>{ivalue} ({mod:+d})")),
             )
@@ -1083,20 +1200,27 @@ def build_character_sheet(data: dict[str, Any]) -> ui.Tag:
 
     stat_chips = [
         stat_chip("⚖️", "Alignment", _safe_str(data.get("Alignment", "-"))),
-        stat_chip("📏", "Size", _safe_str(data.get("size", "-"))),
         stat_chip("⚧", "Gender", _safe_str(data.get("Gender", "-"))),
+        stat_chip("📏", "Size", _safe_str(data.get("size", "-"))),
+        stat_chip("👟", "Speed", _safe_str(data.get("Speed", "-"))),
+        stat_chip("⬆️", "Level", _safe_str(data.get("Level", "-"))),
         stat_chip("⚜️", "Proficiency Bonus", f"+{_safe_str(data.get('PB', '-'))}"),
-        stat_chip("💚", "Health Points", _safe_str(data.get("Health", "-"))),
+        stat_chip("💚", "Hit Points", _safe_str(data.get("Health", "-"))),
         stat_chip("🎲", "Hit Dice", _safe_str(data.get("HPD", "-"))),
         stat_chip("🛡️", "Armor Class", _safe_str(data.get("AC", "-"))),
-        stat_chip("👟", "Speed", _safe_str(data.get("Speed", "-"))),
     ]
 
-    prose_sections: list[Any] = []
+    rail_items: list[Any] = [scores_box, skills_box, saves_box]
     if prof_list:
-        prose_sections.append(
-            prose_section("Proficiencies", ui.tags.ul(*[ui.tags.li(_safe_str(p)) for p in prof_list]))
+        rail_items.append(
+            ui.div(
+                {"class": "npc-textbox"},
+                ui.h2("Proficiencies"),
+                ui.tags.ul(*[ui.tags.li(_safe_str(p)) for p in prof_list]),
+            )
         )
+
+    prose_sections: list[Any] = []
     if equipment is not None:
         equip_content: list[Any] = [ui.tags.table({"class": "objects-table"}, ui.tags.tbody(*equipment_lines))]
         if bag_rows:
@@ -1118,17 +1242,20 @@ def build_character_sheet(data: dict[str, Any]) -> ui.Tag:
             ui.h2(_safe_str(data.get("name", "Unknown"), "Unknown")),
             ui.h2(_safe_str(data.get("title", ""), "")),
             ui.h1(
-                f"Level {_safe_str(data.get('Level', 1))} {_safe_str(data.get('Class', '-'))}, "
+                f"{_safe_str(data.get('Class', '-'))}, "
                 f"{_safe_str(data.get('Subclass', '-'))}"
             ),
             ui.h1(f"{_safe_str(data.get('Species', '-'))} {_safe_str(data.get('Background', '-'))}"),
         ),
         ui.div(
             {"class": "sheet-body"},
-            ui.div({"class": "sheet-rail"}, scores_box, skills_box, saves_box),
+            ui.div(
+                {"class": "sheet-rail"},
+                ui.div({"class": "stat-flow"}, *stat_chips),
+                *rail_items,
+            ),
             ui.div(
                 {"class": "sheet-main"},
-                ui.div({"class": "stat-flow"}, *stat_chips),
                 *prose_sections,
             ),
         ),

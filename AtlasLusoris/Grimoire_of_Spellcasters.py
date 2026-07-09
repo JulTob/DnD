@@ -31,18 +31,45 @@ SPELL_LISTS = {
 			},
 	"Warlock":  {
 			0: [
-				BladeWard,    BoomingBlade, ChillTouch, CreateBonfire,
-				EldritchBlast,    Friends, Frostbite,    GreenFlameBlade,
-				Infestation,    LightningLure,    MageHand,    MagicStone,
-				MindSliver,    MinorIllusion,    PoisonSpray,    Prestidigitation,
-				SwordBurst, Thunderclap,    TolltheDead,    TrueStrike,
+				BladeWard,    
+				BoomingBlade, 
+				ChillTouch, 
+				CreateBonfire,
+				EldritchBlast,    
+				Friends, 
+				Frostbite,    
+				GreenFlameBlade,
+				Infestation,    
+				LightningLure,    
+				MageHand,    
+				MagicStone,
+				MindSliver,    
+				MinorIllusion,    
+				PoisonSpray,    
+				Prestidigitation,
+				SwordBurst, 
+				Thunderclap,    
+				TolltheDead,    
+				TrueStrike,
 				],
 			1: [
-				ArmorofAgathys,    ArmsOfHadar,    Bane,    CauseFear, CharmPerson,
-				ComprehendLanguages,    DetectMagic,    DistortValue,
-				ExpeditiousRetreat,    HellishRebuke,    Hex,    IllusoryScript,
-				ProtectionfromEvilandGood,    SpeakwithAnimals,    HideousLaughter,
-				UnseenServant,    WitchBolt,
+				ArmorofAgathys,    
+				ArmsOfHadar,    
+				Bane,    
+				CauseFear, 
+				CharmPerson,
+				ComprehendLanguages,    
+				DetectMagic,    
+				DistortValue,
+				ExpeditiousRetreat,    
+				HellishRebuke,    
+				Hex,    
+				IllusoryScript,
+				ProtectionfromEvilandGood,    
+				SpeakwithAnimals,    
+				HideousLaughter,
+				UnseenServant,    
+				WitchBolt,
 				],
 			2: [
 				BorrowedKnowledge,    CloudofDaggers,    CrownofMadness, Darkness,
@@ -178,19 +205,32 @@ SPELL_LISTS = {
 				SummonFiend, Sunbeam, TashasBubblingCauldron, TrueSeeing, WallIce,
 				],
 			7: [
-				DelayedBlastFireball, Etherealness, FingerDeath, Forcecage,
-				MirageArcane, MagnificentMansion, MordenkainenSword, PlaneShift,
-				PrismaticSpray, ProjectImage, ReverseGravity, Sequester, Simulacrum,
-				Symbol, Teleport,
-				 ],
+				DelayedBlastFireball, 
+				Etherealness, FingerDeath, Forcecage,
+				MirageArcane, 
+				MagnificentMansion, MordenkainenSword, PlaneShift,
+				PrismaticSpray, 
+				ProjectImage, ReverseGravity, Sequester, Simulacrum,
+				Symbol, 
+				Teleport,
+				],
 			8: [
-				AntimagicField, AntipathySympathy, Befuddlement, Clone, ControlWeather,
-				Demiplane, DominateMonster, IncendiaryCloud, Maze, MindBlank,
-				PowerWordStun, Sunburst, Telepathy,
+				AntimagicField, AntipathySympathy, 
+				Befuddlement, Clone, ControlWeather,
+				Demiplane, DominateMonster, 
+				IncendiaryCloud, Maze, MindBlank,
+				PowerWordStun, 
+				Sunburst, Telepathy,
 				],
 			9: [
-				AstralProjection, Foresight, Gate, Imprisonment, MeteorSwarm,
-				PowerWordKill, PrismaticWall, Shapechange, TimeStop, TruePolymorph,
+				AstralProjection, 
+				Foresight, 
+				Gate, Imprisonment, 
+				MeteorSwarm,
+				PowerWordKill, 
+				PrismaticWall, 
+				Shapechange, 
+				TimeStop, TruePolymorph,
 				Weird, Wish,
 				],
 			},
@@ -326,7 +366,7 @@ SPELL_LISTS = {
 					ShockingGrasp,        Thunderclap,
 					TolltheDead,          TrueStrike,
 					BoomingBlade,        ControlFlames
-					 ],
+					],
 			1: [     Shield,         MagicMissile,     AbsorbElements,
 					BurningHands,     Alarm,             CharmPerson,
 					ChromaticOrb,     ColorSpray,      DetectMagic,
@@ -357,36 +397,61 @@ SPELL_LISTS = {
 			9: [ ],
 			},
 	"Arcane Trickster": {
-		0: [    AcidSplash,           BladeWard,
+		0: [    AcidSplash,           
+				BladeWard,
 				BoomingBlade,
-				ChillTouch,        ControlFlames,
+				ChillTouch,        
+				ControlFlames,
 				DancingLights,
-				Elementalism,         FireBolt,
-				Friends,              GreenFlameBlade,
+				Elementalism,         
+				FireBolt,
+				Friends,              
+				GreenFlameBlade,
 				Light,
-				MageHand,             Mending,
-				Message,              MindSliver,
-				MinorIllusion,        PoisonSpray,
-				Prestidigitation,     RayofFrost,
-				ShockingGrasp,        Thunderclap,
-				TolltheDead,          TrueStrike,
+				MageHand,             
+				Mending,
+				Message,              
+				MindSliver,
+				MinorIllusion,        
+				PoisonSpray,
+				Prestidigitation,     
+				RayofFrost,
+				ShockingGrasp,        
+				Thunderclap,
+				TolltheDead,          
+				TrueStrike,
 
 				],
 		1: [
-					Alarm,             AbsorbElements,
+					Alarm,             
+					AbsorbElements,
 					BurningHands,
-					ChromaticOrb,     ColorSpray,      CharmPerson, Catapult,
-						CauseFear,    ComprehendLanguages,
-					DetectMagic,    DisguiseSelf,
+					ChromaticOrb,     
+					ColorSpray,      
+					CharmPerson, 
+					Catapult,
+					CauseFear,    
+					ComprehendLanguages,
+					DetectMagic,    
+					DisguiseSelf,
 					ExpeditiousRetreat,
-					FogCloud,    FalseLife, FeatherFall,    FindFamiliar,
+					FogCloud,    
+					FalseLife, FeatherFall,    
+					FindFamiliar,
 					Grease,
-					IceKnife,    Identify,    IllusoryScript,
+					IceKnife,    
+					Identify,    
+					IllusoryScript,
 					Jump,
 					Longstrider,
-					MagicMissile, MageArmor,
+					MagicMissile, 
+					MageArmor,
 					ProtectionfromEvilandGood,
-					Shield, SilentImage,    SilveryBarbs,    Sleep,    Snare,
+					Shield, 
+					SilentImage,    
+					SilveryBarbs,    
+					Sleep,    
+					Snare,
 					HideousLaughter,
 					Thunderwave,
 					UnseenServant,
@@ -621,14 +686,14 @@ class Spellcaster:
 	def __str__(caster):
 		spells_names = "".join(f"<li>〖{spell.level}〗{spell.name}</li>" for spell in caster.spells_known)
 		slots_html = ", ".join(f"Level {lvl}: {num}" for lvl, num in caster.spell_slots.items())
-		spells_html = "".join(f"""<div class="npc-textbox">{spell}</div>""" for spell in caster.spells_known)
+		spells_html = "".join(f"""<div class="spell">{spell}</div>""" for spell in caster.spells_known)
 
 		return f"""
 			<h1 style="font-family: 'Iglesia'; font-size:    3.1em; ">{caster.character.char_class} Spellcasting</h1>
 			<p><b>Spell Slots:</b> {slots_html}</p>
 			<ul style="list-style-type: '🪄'; text-align: left; font-family: 'Iglesia'">{spells_names}</ul>
 			</div>
-			<div class="npc-textbox" style="margin-bottom: 1em;">
+			<div class="spell" style="margin-bottom: 1em;">
 				<b>Spell Save DC:</b> {caster.spell_save_dc()}<br>
 				<b>Spell Attack Bonus:</b> +{caster.spell_attack_bonus()}
 				</div>
@@ -639,7 +704,7 @@ class Spellcaster:
 		if not caster.spells_known:
 			return "<i>No spells known</i>"
 		list_items = "".join(f"<li>{s.name}</li>" for s in caster.spells_known)
-		return f"""<div class="npc-textbox"><b>Spellcasting</b><ul>{list_items}</ul></div>"""
+		return f"""<div class="spell"><b>Spellcasting</b><ul>{list_items}</ul></div>"""
 
 class Wizard(Spellcaster):
 	def __init__(caster, character, known=None):
@@ -726,32 +791,32 @@ class Wizard(Spellcaster):
 			if num  # This skips levels with 0 slots
 			)
 		spells_html = "".join(
-			f"""<div class="npc-textbox">{spell}</div>"""
+			f"""<div class="spell">{spell}</div>"""
 			for spell in cantrips
 			)
 		spells_html += "".join(
-			f"""<div class="npc-textbox">{spell}</div>"""
+			f"""<div class="spell">{spell}</div>"""
 			for spell in all_spells
 			)
 		return f"""
-			<div class="npc-textbox--full">
+			<div class="spell--full">
 				<h1 style="font-family: 'Iglesia'; font-size:    3.1em; ">
 					Wizard Spellcasting</h1>
 				<p> As a student of arcane magic, you have learned to cast spells. </p>
 				</div>
-			<div class="npc-textbox" style="grid-column: span 1;">
+			<div class="spell" style="grid-column: span 1;">
 				<h2>Spell Slots:</h2>
 				{slots_html} <br>
 				You regain all expended slots when you finish a Long Rest.</p>
 				<br><br>
 				</div>
-			<div class="npc-textbox" style="font-family: 'Iglesia'">
+			<div class="spell" style="font-family: 'Iglesia'">
 				<h2 style="font-family: 'Iglesia'">
 					Spell Save DC:</h2> {caster.spell_save_dc()}<br>
 				<h2 style="font-family: 'Iglesia'">
 					Spell Attack Bonus:</h2> +{caster.spell_attack_bonus()}
 				</div>
-			<div class="npc-textbox" style="grid-column: span 1;">
+			<div class="spell" style="grid-column: span 1;">
 			<h3 style="font-family: 'Iglesia'; font-size:    3.1em; "> SpellBook </h3>
 			You may prepare {n} spells whenever you finish a Long Rest, that you can use at any moment, from your book of spells:
 			<ul style="list-style-type: '🪄'; text-align: left; font-family: 'Iglesia' ">
@@ -851,32 +916,32 @@ class Druid(Spellcaster):
 			if num  # This skips levels with 0 slots
 			)
 		spells_html = "".join(
-			f"""<div class="npc-textbox">{spell}</div>"""
+			f"""<div class="spell">{spell}</div>"""
 			for spell in cantrips
 			)
 		spells_html += "".join(
-			f"""<div class="npc-textbox">{spell}</div>"""
+			f"""<div class="spell">{spell}</div>"""
 			for spell in all_spells
 			)
 		return f"""
-			<div class="npc-textbox--full">
+			<div class="spell--full">
 				<h1 style="font-family: 'Iglesia'; font-size:    3.1em; ">
 					Druid Spellcasting</h1>
 				<p> As a student of natural magic, you have learned to cast spells. </p>
 				</div>
-			<div class="npc-textbox" style="grid-column: span 1;">
+			<div class="spell" style="grid-column: span 1;">
 				<h2>Spell Slots:</h2>
 				{slots_html} <br>
 				You regain all expended slots when you finish a Long Rest.</p>
 				<br><br>
 				</div>
-			<div class="npc-textbox" style="font-family: 'Iglesia'">
+			<div class="spell" style="font-family: 'Iglesia'">
 				<h2 style="font-family: 'Iglesia'">
 					Spell Save DC:</h2> {caster.spell_save_dc()}<br>
 				<h2 style="font-family: 'Iglesia'">
 					Spell Attack Bonus:</h2> +{caster.spell_attack_bonus()}
 				</div>
-			<div class="npc-textbox" style="grid-column: span 1;">
+			<div class="spell" style="grid-column: span 1;">
 			<h3 style="font-family: 'Iglesia'; font-size:    3.1em; "> SpellBook </h3>
 			You may prepare {n} spells whenever you finish a Long Rest, that you can use at any moment, from your book of spells:
 			<ul style="list-style-type: '🍀'; text-align: left; font-family: 'Iglesia' ">
@@ -977,23 +1042,23 @@ class Cleric(Spellcaster):
 			)
 
 		spell_boxes = "".join(
-			f'<div class="npc-textbox">{spell}</div>' for spell in cantrips + prepared_sorted
+			f'<div class="spell">{spell}</div>' for spell in cantrips + prepared_sorted
 			)
 
 		prep_cap = max(1, caster.level + caster.modifier())
 
 		return f"""
-		<div class=\"npc-textbox--full\" >
+		<div class=\"spell--full\" >
 			<h1 style=\"font-family: 'Iglesia'; font-size: 3.1em;\">Cleric Spellcasting</h1>
 			<p>Drawing on divine power, you prepare <b>{prep_cap}</b> Cleric spells at the end of each long rest.<br>
 			Your spellcasting ability is <b>Wisdom</b>.</p>
 		</div>
-		<div class=\"npc-textbox\">
+		<div class=\"spell\">
 			<h2>Spell Slots</h2>
 			{slots_html}<br>
 			<small>All slots refresh when you finish a long rest.</small>
 		</div>
-		<div class=\"npc-textbox\">
+		<div class=\"spell\">
 			<h2>Spell Save DC</h2> {caster.spell_save_dc()}<br>
 			<h2>Spell Attack Bonus</h2> +{caster.spell_attack_bonus()}
 		</div>
@@ -1087,7 +1152,7 @@ class Ranger(Spellcaster):
 			for lvl, num in caster.spell_slots.items()
 			if num
 		)
-		spells_descriptions = "".join(f'<div class="npc-textbox">{spell}</div>' for spell in all_spells)
+		spells_descriptions = "".join(f'<div class="spell">{spell}</div>' for spell in all_spells)
 
 		return f"""
 		<div class="npc-textbox--full">
@@ -1212,7 +1277,7 @@ class Sorcerer(Spellcaster):
 		)
 
 		# individual spell blurbs
-		blurbs = "".join(f'<div class="npc-textbox">{s}</div>' for s in cantrips + spells)
+		blurbs = "".join(f'<div class="spell">{s}</div>' for s in cantrips + spells)
 
 		return f"""
 		<div class="npc-textbox--full" >
@@ -1441,7 +1506,7 @@ class EldritchKnight(Spellcaster):
 	def __str__(caster):
 		ordered_spells = sorted(caster.spells_known, key=lambda s: int(s.level))
 		spells_names = "".join(f"<li>〖{spell.level}〗{spell.name}</li>" for spell in ordered_spells)
-		spells_html = "".join(f"""<div class="npc-textbox">{spell}</div>""" for spell in ordered_spells)
+		spells_html = "".join(f"""<div class="spell">{spell}</div>""" for spell in ordered_spells)
 		slots_html = "<br>".join(f"<b>Level {lvl}</b>: <i>{num}</i> " for lvl, num in caster.spell_slots.items())
 		return f"""
 			<div class="npc-textbox" style="grid-column: span 1;">
@@ -1577,7 +1642,7 @@ class ArcaneTrickster(Spellcaster):
 	def __str__(trickster):
 		ordered_spells = sorted(trickster.spells_known, key=lambda s: int(s.level))
 		spells_names = "".join(f"<li>〖{spell.level}〗{spell.name}</li>" for spell in ordered_spells)
-		spells_html = "".join(f"""<div class="npc-textbox">{spell}</div>""" for spell in ordered_spells)
+		spells_html = "".join(f"""<div class="spell">{spell}</div>""" for spell in ordered_spells)
 		slots = trickster.get_stats("slots")
 		slots_html = "<br>".join(f"<b>Level {lvl}</b>: <i>{num}</i> " for lvl, num in slots.items() if num > 0)
 		return f"""
@@ -1763,7 +1828,7 @@ class Warlock(Spellcaster):
 		arcanums   = getattr(caster, "mystic_arcanum", [])
 
 		spell_list = "".join(f"<li>【{s.level}】{s.name}</li>" for s in cantrips + leveled)
-		spells_html = "".join(f"""<div class="npc-textbox">{s}</div>""" for s in cantrips + leveled)
+		spells_html = "".join(f"""<div class="spell">{s}</div>""" for s in cantrips + leveled)
 
 		slots = caster.get_stats("slots")
 		slot_level = caster.get_stats("slot_level")
@@ -1929,7 +1994,7 @@ class Bard(Spellcaster):
 		# Output formatting
 		can_li = "".join(f"<li>【0】{s.name}</li>" for s in self.cantrips_known)
 		list_items = "".join(f"<li>【{s.level}】{s.name}</li>" for s in spells)
-		blurbs = "".join(f"<div class='npc-textbox'>{s}</div>" for s in cantrips + spells)
+		blurbs = "".join(f"<div class='spell'>{s}</div>" for s in cantrips + spells)
 
 		slots_html = "<br>".join(
 			f"<b>Level {lvl}</b>: <i>{n}</i>"
@@ -1970,7 +2035,7 @@ class Bard(Spellcaster):
 		spell_li = "".join(
 			f"<li>【{s.level}】{s.name}</li>" for s in sorted(self.spells_known, key=lambda sp:(sp.level, sp.name))
 		)
-		blurbs = "".join(f"<div class='npc-textbox'>{s}</div>" for s in self.cantrips_known + self.spells_known)
+		blurbs = "".join(f"<div class='spell'>{s}</div>" for s in self.cantrips_known + self.spells_known)
 		return f"""
 		<div class='npc-textbox--full'>
 			<h1 style='font-family:"Iglesia"; font-size:3.1em;'>Bard Spellcasting</h1>
@@ -2117,8 +2182,8 @@ class Paladin(Spellcaster):
 			f"<b>Level {lvl}</b>: <i>{num}</i>"
 			for lvl, num in self.spell_slots.items() if num
 			)
-		cantrip_cards = "".join(f'<div class="npc-textbox">{spell}</div>' for spell in cantrips)
-		spell_cards = "".join(f'<div class="npc-textbox">{spell}</div>' for spell in spells)
+		cantrip_cards = "".join(f'<div class="spell">{spell}</div>' for spell in cantrips)
+		spell_cards = "".join(f'<div class="spell">{spell}</div>' for spell in spells)
 
 		return f"""
           <div class="npc-textbox--full" >

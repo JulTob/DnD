@@ -535,7 +535,7 @@ As a bonus action, you can give yourself a flying speed of 30 feet that lasts fo
 In the past, you usually contacted your patron through intermediaries. Now you can communicate directly; you always have the Contact Other Plane spell prepared. With this feature, you can cast the spell without expending a spell slot to contact your patron, and you automatically succeed on the spell's saving throw.
 <br>
 Once you cast the spell with this feature, you can't do so in this way again until you finish a Long Rest.
-<div class="npc-textbox">{ContactOtherPlane}</div>
+<div class="spell">{ContactOtherPlane}</div>
 				""",
 				"Class: Warlock"))
 		if level >= 10:
@@ -565,7 +565,7 @@ Your alien patron {patron} grants you a powerful curse.
 You always have the Hex spell prepared. When you cast Hex
 and choose an ability, the target also has Disadvantage on
 saving throws of the chosen ability for the duration of the spell.
-<div class="npc-textbox">{Hex}</div>
+<div class="spell">{Hex}</div>
 
 """,
 					"Class: Warlock"))
