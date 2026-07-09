@@ -67,6 +67,7 @@ See `QUESTA-template.md` to mint a new one.
 | QST-0021 | **AtlasVenustas** — presentation layer; slim `shiny_app.py` (6 sidequests) | refactor/design | 🟠 | Druid, Artificer, Barbarian, Monk → **Julio-approved** |
 | QST-0003 | Decide & execute Flask removal; retire `app/routes.py` + templates | refactor | 🟠 | Architecture, Ecosystem, Workshop → Q-0004 |
 | QST-0004 | Review, clean & unify the venvs — surface conflicts to Julio | chore/cleanup | 🟠 | Workshop, Ecosystem → Decree 0001 |
+| QST-0027 | Title map as narrative identity | design/refactor | 🟠 | Bard, Druid, Warlock, Wizard, Monk, Rogue, Lorekeeper → Q-0010 |
 
 ### 🟡 / 🟢 Priority — Open
 | ID | Title | Type | Priority | Route |
@@ -82,6 +83,10 @@ See `QUESTA-template.md` to mint a new one.
 | ID | Title | Type | Priority | Parent |
 |----|-------|------|----------|--------|
 | QST-0022 | Lodge symbol rationale review (species · class · element) | design | 🟡 | QST-0021 |
+| QST-0027.1 | Title selectors need a lusor membership protocol | refactor | 🟠 | QST-0027 |
+| QST-0027.2 | Title generation needs an explicit RNG source | refactor | 🟠 | QST-0027 |
+| QST-0027.3 | Title vocabulary needs thematic structure | design/refactor | 🟡 | QST-0027 |
+| QST-0027.4 | Decide title return, yield, and cache strategy | design | 🟡 | QST-0027 |
 
 ### ✅ Solved (recent)
 | ID | Title |

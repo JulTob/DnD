@@ -24,6 +24,8 @@ Append a row. Keep it to one line; detail goes in the Dialog file.
 | Q-0007 | The Minions: are they sound, and where should they go — kept, evolved into a Log System, and/or deployment error reporting? | Julio | Full council | `Dialogs/0004-evaluate-the-minions.md` | 🔵 settled → Decree 0003 |
 | Q-0008 | Character sheet toolbar (`.character-reforge`): how should layout be owned — inline CSS tweaks, Scroll_of_Styles only, or a Venustas Kit with a single contract? | Julio (via Agent) | Architecture (Druid), Workshop (Artificer), Simplicity (Monk), Flow (Sorcerer), Readability (Barbarian) | `Dialogs/0005-character-reforge-toolbar-layout.md` | 🟡 open |
 | Q-0009 | Characteristics grid (`stat-flow`): uniform chips, thematic order, Level box — flex vs grid, label contract? | Julio (via Agent) | Readability (Barbarian), Architecture (Druid), Simplicity (Monk), Lorekeeper | `Dialogs/0006-characteristics-grid-layout.md` | 🟢 converged — awaiting Julio |
+| Q-0010 | Title map: how should generated titles become thematic, deterministic narrative identity without leaking lusor internals? | Julio (via Agent) | Understanding (Bard), Architecture (Druid), Contracts (Warlock), Methods (Wizard), Simplicity (Monk), Testing (Rogue), Lorekeeper | `Dialogs/0007-title-map-as-narrative-identity.md` | 🟡 open |
+| Q-0010 | Migration order & safety rail for the Character-root refactor (QST-0016.1–.6, QST-0027): what sequence, and what proves each step unbroken? | Julio | Safety (Paladin), Architecture (Druid), Simplicity (Monk), Contracts (Cleric), Methods (Wizard) | `Dialogs/0007-migration-order-and-safety.md` | 🟡 open |
 
 ---
 
