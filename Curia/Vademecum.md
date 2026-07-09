@@ -42,6 +42,7 @@ Any decision that affects rules, architecture, naming, or design goes to the Ago
 
 ## ⚔️ The etiquette (short version)
 
+- **Dialog first, always.** One topic at a time, shown before landed, decided by Julio. This is Canon: read `Canon/Modus-Operandi.md` before touching anything.
 - **Propose, don't push.** Especially external rules (new D&D content) and IP-adjacent design — those *always* open a discussion first.
 - **Ask for confirmation** before non-trivial code changes and before any decision. Confirmation is a feature, not a delay.
 - **Keep it light.** Avoid overengineering. Repeat proven patterns — especially TagKit patterns — instead of inventing new machinery.
