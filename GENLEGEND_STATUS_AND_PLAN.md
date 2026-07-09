@@ -31,10 +31,18 @@ Entry point unchanged: `shiny run shiny_app.py` (or `make run`, `app.py`).
 
 ## 2. What remains before "usable v1" (QST-0001 spine)
 
-- **Front polish & flows** — QST-0001 (finish the Shiny front), QST-0002
-  (character-sheet view), QST-0008 (NPC sheet still boxes), QST-0010
-  (extract inline CSS/JS), QST-0011 (npc list dead links), QST-0012 (HTML
-  escaping). The Shiny app itself boots; these are quality gaps, not blockers.
+*Updated 2026-07-09: the refactor train landed.* QST-0012 (escaping),
+QST-0008 (NPC sheet to prose), QST-0011 (list links live), and the whole
+Venustas track .3–.6 (Scroll_of_Styles, Kit_of_Masonry, Kit_of_Tablet,
+Kit_of_ShareableLinks) are **Solved** — `shiny_app.py` went from ~2100 to
+~1230 lines; styles and scripts are static assets served by Kits.
+
+- **Visual regression (Julio, on a live run)** — the acceptance step for the
+  train: home, character gen, NPC page (new prose layout), NPC list + click-
+  through, share links. `make run`.
+- **Front decisions in flight** — Dialog 0005 (reforge toolbar → QST-0024),
+  Dialog 0006 (characteristics grid → QST-0025, Working), QST-0026 spell
+  prose (Working). QST-0010 closes when parent QST-0021 does.
 - **Flask removal** — QST-0003, *deferred by Julio 2026-07-07 (code fixes only
   that session)*. `app/routes.py`, templates, static and the R-era files still
   await the sweep; `app/character_url.py` and `app/random.py` stay (Shiny
