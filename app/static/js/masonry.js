@@ -7,7 +7,7 @@
   function getColumnCount(grid) {
     const template = getComputedStyle(grid).gridTemplateColumns || '';
     if (!template) return 1;
-    const cols = template.split(/\\s+(?![^(]*\\))/).filter(Boolean);
+    const cols = template.split(/\s+(?![^(]*\))/).filter(Boolean);
     return Math.max(1, cols.length);
   }
 

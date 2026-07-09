@@ -1125,27 +1125,18 @@ def server(input, output, session):
         return build_npc_sheet(npc)
 
     def _open_npc_from_list(index: int) -> None:
-        """A list entry was clicked: rebuild that exact NPC (same seed) in full and show it."""
+        """A list entry was clicked: show that exact NPC on the NPC page.
+
+        The stored object is shown directly - regenerating from its seed is
+        NOT reproducible today (mixed RNG sources; evidence for Dialog 0003),
+        and the user clicked a name, so the name must match.
+        """
         npcs = npc_list_state()
         if not npcs or index >= len(npcs):
             return
-        chosen = npcs[index]
-        _set_loader("show")
-        try:
-            npc = summon_npc(
-                race=_safe_str(getattr(chosen, "race", None)),
-                archetype=_safe_str(getattr(chosen, "archetype", None)),
-                level=_safe_int(getattr(chosen, "level", 1), 1),
-                seed=_safe_int(getattr(chosen, "seed", 0), 0) or None,
-            )
-            npc_state.set(npc)
-            npc_error.set(None)
-            show_page("npc")
-        except Exception as exc:
-            npc_error.set(str(exc))
-            show_page("npc")
-        finally:
-            _set_loader("hide")
+        npc_state.set(npcs[index])
+        npc_error.set(None)
+        show_page("npc")
 
     for _list_index in range(NPC_LIST_SIZE):
 

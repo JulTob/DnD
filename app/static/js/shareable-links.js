@@ -60,7 +60,7 @@
                         if (rawValue == null) return '';
                         var value = String(rawValue).trim();
                         if (!value) return '';
-                        if (/^[a-z]+:\\/\\//i.test(value)) {
+                        if (/^[a-z]+:\/\//i.test(value)) {
                             try {
                                 value = new URL(value).hash || '';
                             } catch (_) {
@@ -77,7 +77,7 @@
                                 // keep original
                             }
                         }
-                        value = value.replace(/^\\/+/, '');
+                        value = value.replace(/^\/+/, '');
                         if (value.toLowerCase().startsWith('character/')) {
                             value = value.slice('character/'.length);
                         }
@@ -91,7 +91,7 @@
                         var marker = '/character/';
                         var idx = path.indexOf(marker);
                         if (idx < 0) return '';
-                        return '#/' + path.slice(idx + marker.length).replace(/^\\/+/, '');
+                        return '#/' + path.slice(idx + marker.length).replace(/^\/+/, '');
                     }
 
                     function hashFromQuery(search) {
@@ -152,7 +152,7 @@
                             window.__characterShareHash = nextHash;
                             nextUrl = base + nextHash;
                         } else if (typeof msg.path === 'string' && msg.path.length > 0) {
-                            var pathSuffix = msg.path.replace(/^\\/+/, '');
+                            var pathSuffix = msg.path.replace(/^\/+/, '');
                             nextUrl = base + pathSuffix + currentHash;
                         } else if (typeof msg.query === 'string') {
                             nextUrl = base + msg.query + currentHash;
