@@ -2,7 +2,7 @@
 
 - **Type:** bug
 - **Priority:** 🟠 high
-- **Status:** Open
+- **Status:** Solved (2026-07-09)
 - **Owner:** unclaimed
 - **Route to:** Implementation Consul (Fighter), Understanding Consul (Bard)
 - **Parent:** QST-0007 (Track A / shiny_app.py)
@@ -25,7 +25,9 @@ Clicking a listed NPC opens that exact NPC's sheet (via the NPC panel and/or a s
 The character side already has hash routing + `CharacterPathRedirectASGI`; consider the symmetric path for NPCs rather than inventing a new mechanism. May spawn a sidequest for "NPC shareable URLs" if we want parity.
 
 ## ✅ Resolution
-*(pending — filled when Solved)*
+- **Decided by:** Julio (refactor go, 2026-07-09)
+- **What changed:** commits `81c66cf` + `19d1643`. Each list row is an action link; clicking shows that exact stored NPC on the NPC page. `NPC_LIST_SIZE` shared by generator, renderer, and observers.
+- **Practice/preference to remember:** the stored object is shown directly because same-seed regeneration is not reproducible today (mixed RNG sources) - recorded as evidence for Dialog 0003 / QST-0016. A user who clicks a name must get that name.
 
 ---
 

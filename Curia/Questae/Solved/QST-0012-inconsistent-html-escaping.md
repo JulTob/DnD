@@ -2,7 +2,7 @@
 
 - **Type:** bug
 - **Priority:** 🟠 high
-- **Status:** Open
+- **Status:** Solved (2026-07-09)
 - **Owner:** unclaimed
 - **Route to:** Safety Consul (Paladin), Contracts Consul (Warlock)
 - **Parent:** QST-0007 (Track A / shiny_app.py)
@@ -26,7 +26,9 @@ One consistent, safe rendering helper: escape text, *then* apply intended format
 A small `safe_html(text)` helper (escape → controlled replacements) used everywhere would fix it in one place — a Warlock-style single source of truth for "text to HTML."
 
 ## ✅ Resolution
-*(pending — filled when Solved)*
+- **Decided by:** Julio (refactor go, 2026-07-09)
+- **What changed:** commit `b3ba483`. New `_text_html()` - escape first, then newline to `<br>` - is the one door for plain generator strings; seven escape-less `ui.HTML(...replace(...))` sites converted (saves, story, NPC skills/saves/movement/senses/resistances). Doctrine of three doors documented in the helpers: `_prose` (markdown), `_html_prose` (code-authored HTML), `_text_html` (plain text, escaped).
+- **Practice/preference to remember:** classify a string before rendering it: who authored it? Code-authored HTML may pass raw; anything a generator or model wrote gets escaped. The `_prose`/`_html_prose` spell paths stay under QST-0026.1's audit.
 
 ---
 

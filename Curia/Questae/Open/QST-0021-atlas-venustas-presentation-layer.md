@@ -6,7 +6,8 @@
 - **Owner:** unclaimed
 - **Route to:** Architecture Consul (Druid), Workshop Consul (Artificer), Readability Consul (Barbarian), Simplicity Consul (Monk)
 - **Parent:** QST-0007 (Track A / shiny_app.py)
-- **Sidequests:** QST-0021.1 ✓, QST-0021.2 ✓, QST-0021.3, QST-0021.4, QST-0021.5, QST-0021.6
+- **Sidequests:** QST-0021.1 ✓, QST-0021.2 ✓, QST-0021.3 ✓, QST-0021.4 ✓, QST-0021.5 ✓, QST-0021.6 ✓ *(all landed 2026-07-09; parent stays Open for Julio’s visual regression + QST-0022/0024)*
+- **Proposed for Canon (Julio to add):** Conventions table row — `AtlasVenustas` | UI presentation: styles, client chrome, loader/tablet/masonry/share Kits
 - **Related:** QST-0010 (superseded by this track) · QST-0001 · QST-0008 · QST-0024 (character toolbar — Agora Q-0008) · Decree 0001
 
 ---

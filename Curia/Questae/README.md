@@ -64,12 +64,9 @@ See `QUESTA-template.md` to mint a new one.
 | QST-0016 | **Flagship:** unify PC & NPC on one Character root (TOP tags) | tagkit | 🔴 | Druid, Warlock, Wizard, Monk, Bard, Lorekeeper → **Decree 0002** |
 | QST-0018 | Remove AtlasTOP; fold composition into the Grimoires (first slice of 0016) | refactor | 🔴 | Monk, Druid, Warlock → Decree 0002 |
 | QST-0002 | Character-sheet view (Markdown + CSS) instead of dynamic boxes for long text | design | 🔴 | Architecture, Understanding, Design-Team → Q-0001 |
-| QST-0008 | NPC sheet still uses the box/masonry grid for long text | design | 🔴 | Architecture, Understanding, Readability, Flow → Q-0001 |
 | QST-0021 | **AtlasVenustas** — presentation layer; slim `shiny_app.py` (6 sidequests) | refactor/design | 🟠 | Druid, Artificer, Barbarian, Monk → **Julio-approved** |
 | QST-0003 | Decide & execute Flask removal; retire `app/routes.py` + templates | refactor | 🟠 | Architecture, Ecosystem, Workshop → Q-0004 |
 | QST-0004 | Review, clean & unify the venvs — surface conflicts to Julio | chore/cleanup | 🟠 | Workshop, Ecosystem → Decree 0001 |
-| QST-0011 | NPC-list entries are dead links (`href="#"`) | bug | 🟠 | Implementation, Understanding |
-| QST-0012 | Inconsistent HTML escaping — NPC sheet injects raw model strings | bug | 🟠 | Safety, Contracts |
 
 ### 🟡 / 🟢 Priority — Open
 | ID | Title | Type | Priority | Route |
@@ -84,15 +81,15 @@ See `QUESTA-template.md` to mint a new one.
 ### 🟡 / 🟢 Priority — Open (QST-0021 sidequests)
 | ID | Title | Type | Priority | Parent |
 |----|-------|------|----------|--------|
-| QST-0021.3 | Charts_of_Styles + fold EXTRA_STYLE → style.css | refactor | 🟡 | QST-0021 |
-| QST-0021.4 | Kit_of_Masonry + `app/static/js/masonry.js` | refactor | 🟡 | QST-0021 |
-| QST-0021.5 | Kit_of_Tablet + `app/static/js/tablet.js` | refactor | 🟡 | QST-0021 |
-| QST-0021.6 | Kit_of_ShareableLinks + shiny_app.py close-out | refactor | 🟡 | QST-0021 |
 | QST-0022 | Lodge symbol rationale review (species · class · element) | design | 🟡 | QST-0021 |
 
 ### ✅ Solved (recent)
 | ID | Title |
 |----|-------|
+| QST-0012 | One safe door for plain model text (`_text_html`) (2026-07-09) |
+| QST-0008 | NPC sheet speaks the character sheet's vocabulary (2026-07-09) |
+| QST-0011 | NPC-list entries open their NPC (2026-07-09) |
+| QST-0021.3–.6 | Venustas train: Scroll_of_Styles, Kit_of_Masonry, Kit_of_Tablet, Kit_of_ShareableLinks (2026-07-09) |
 | QST-0009 | Silent import shim removed — Minions report, summoners recover (2026-07-07) |
 | QST-0021.1 | Scaffold AtlasVenustas + Lodge_of_Symbols |
 | QST-0021.2 | Kit_of_Loader + wire shiny_app.py |

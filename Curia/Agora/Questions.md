@@ -27,6 +27,10 @@ Append a row. Keep it to one line; detail goes in the Dialog file.
 
 ---
 
+## Field notes for open threads
+
+- **For Dialog 0003 / QST-0016 (RNG):** verified 2026-07-09 — `NPC(seed=7)` twice in one process yields *different* names. Mixed RNG sources (`app.random` in the Grimoires, stdlib `random` in `Map_of_Names`) defeat seed reproducibility today. Share-links and list-reopening now avoid regeneration because of this; the minimal-Character design should make the seed the single spine. *(Agent, session 2026-07-09)*
+
 ## Settled → see `Decrees/`
 
 *(none yet)*
