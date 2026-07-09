@@ -14,6 +14,8 @@ from app.character_url import (
 
 import app.random as random
 from AtlasVenustas.Kit_of_Loader import loader_head_tags, loader_panel
+from AtlasVenustas.Kit_of_Masonry import masonry_head_tags
+from AtlasVenustas.Kit_of_Tablet import tablet_head_tags
 from AtlasVenustas.Scroll_of_Styles import style_tag
 from Minion import chronicler, minion
 from shiny import App, reactive, render, ui  
@@ -34,205 +36,6 @@ from AtlasLusoris.Map_of_Species import species as species_dict
 from AtlasPugna.Map_of_Legendary_Actions import Lair, Legendary, Region
 
 
-
-
-HOME_SCRIPT = """
-(() => {
-    function initGeneratorTablet() {
-        const tablet = document.getElementById('generator-tablet');
-        if (!tablet || tablet.dataset.ready === 'true') return false;
-
-        const rotator = tablet.querySelector('.tablet-rotator');
-        const panels = Array.from(tablet.querySelectorAll('.generator-panel'));
-        const titleEl = tablet.querySelector('#tablet-title');
-        const dotsRoot = tablet.querySelector('.tablet-dots');
-        const prevBtn = tablet.querySelector('.tablet-nav.prev');
-        const nextBtn = tablet.querySelector('.tablet-nav.next');
-
-        if (!rotator || panels.length === 0) return false;
-
-        tablet.dataset.ready = 'true';
-
-        let currentIndex = panels.findIndex((panel) => panel.classList.contains('is-active'));
-        let autoTimer = null;
-
-        if (currentIndex < 0) {
-            currentIndex = 0;
-            }
-
-    const restartAutoRotate = () => {
-        if (autoTimer) clearInterval(autoTimer);
-        autoTimer = setInterval(goNext, 12000);
-        };
-
-    const goTo = (index) => {
-        currentIndex = (index + panels.length) % panels.length;
-        rotator.style.transform = `translateX(${-100 * currentIndex}%)`;
-
-        panels.forEach((panel, idx) => {
-            panel.classList.toggle('is-active', idx === currentIndex);
-            });
-
-      if (dotsRoot) {
-        dotsRoot.querySelectorAll('.tablet-dot').forEach((dot, idx) => {
-          dot.classList.toggle('is-active', idx === currentIndex);
-        });
-      }
-
-    if (titleEl) {
-        titleEl.textContent = panels[currentIndex]?.dataset.title || 'Generator';
-        }
-
-      restartAutoRotate();
-    };
-
-    const goNext = () => goTo(currentIndex + 1);
-    const goPrev = () => goTo(currentIndex - 1);
-
-    if (dotsRoot) {
-        dotsRoot.innerHTML = '';
-
-        panels.forEach((panel, index) => {
-            const dot = document.createElement('button');
-            dot.type = 'button';
-            dot.className = 'tablet-dot';
-            dot.setAttribute('aria-label', `Show ${panel.dataset.title || 'generator'}`);
-            dot.addEventListener('click', () => goTo(index));
-            dotsRoot.appendChild(dot);
-        });
-    }
-
-    prevBtn?.addEventListener('click', goPrev);
-    nextBtn?.addEventListener('click', goNext);
-
-    tablet.addEventListener('mouseenter', () => {
-        if (autoTimer) clearInterval(autoTimer);
-        });
-
-    tablet.addEventListener('mouseleave', restartAutoRotate);
-
-    tablet.querySelectorAll('.number-input').forEach((element) => {
-        const input = element.querySelector('input[type="number"]');
-        const minus = element.querySelector('.minus');
-        const plus = element.querySelector('.plus');
-        if (!input || !minus || !plus) return;
-
-        minus.addEventListener('click', () => {
-            const min = Number(input.min || 1);
-            const current = Number(input.value || min);
-            input.value = String(Math.max(min, current - 1));
-            input.dispatchEvent(new Event('input', { bubbles: true }));
-            input.dispatchEvent(new Event('change', { bubbles: true }));
-        });
-
-        plus.addEventListener('click', () => {
-            const max = Number(input.max || 100);
-            const min = Number(input.min || 1);
-            const current = Number(input.value || min);
-            input.value = String(Math.min(max, current + 1));
-            input.dispatchEvent(new Event('input', { bubbles: true }));
-            input.dispatchEvent(new Event('change', { bubbles: true }));
-            });
-        });
-
-    goTo(currentIndex);
-
-    if (window.Shiny && typeof window.Shiny.bindAll === 'function') {
-        window.Shiny.bindAll(tablet);
-        }
-
-    return true;
-    }
-
-    const scheduleInit = () => {
-        window.requestAnimationFrame(initGeneratorTablet);
-        window.setTimeout(initGeneratorTablet, 50);
-        window.setTimeout(initGeneratorTablet, 250);
-        };
-
-    document.addEventListener('DOMContentLoaded', scheduleInit);
-    document.addEventListener('shiny:connected', scheduleInit);
-    document.addEventListener('shiny:value', scheduleInit);
-
-    scheduleInit();
-    window.setInterval(initGeneratorTablet, 500);
-})();
-"""
-
-MASONRY_SCRIPT = """
-(() => {
-  const GRID_SELECTOR = '.npc-grid, .spellcaster-box';
-  const ITEM_SELECTOR = ':scope > .npc-box, :scope > .npc-textbox, :scope > .npc-textbox--full, :scope > .npc-scores, :scope > .npc-header';
-  const ROW_PX = 10;
-  let raf = null;
-
-  function getColumnCount(grid) {
-    const template = getComputedStyle(grid).gridTemplateColumns || '';
-    if (!template) return 1;
-    const cols = template.split(/\\s+(?![^(]*\\))/).filter(Boolean);
-    return Math.max(1, cols.length);
-  }
-
-  function getGridItems(grid) {
-    try {
-      return grid.querySelectorAll(ITEM_SELECTOR);
-    } catch (_e) {
-      return grid.children;
-    }
-  }
-
-  function applyMasonry(grid) {
-    if (!grid) return;
-    const items = getGridItems(grid);
-    const columnCount = getColumnCount(grid);
-    const disableMasonry = columnCount <= 1;
-
-    if (disableMasonry) {
-      grid.removeAttribute('data-masonry');
-      grid.style.gridAutoRows = '';
-      grid.style.gridAutoFlow = 'row';
-      items.forEach((item) => {
-        item.style.gridRowEnd = '';
-      });
-      return;
-    }
-
-    grid.setAttribute('data-masonry', 'on');
-    grid.style.gridAutoRows = `${ROW_PX}px`;
-    grid.style.gridAutoFlow = 'dense';
-
-    const gap = parseFloat(getComputedStyle(grid).rowGap || '0') || 0;
-    items.forEach((item) => {
-      if (!(item instanceof HTMLElement)) return;
-      item.style.gridRowEnd = 'auto';
-      const h = item.getBoundingClientRect().height;
-      const span = Math.max(1, Math.ceil((h + gap) / (ROW_PX + gap)));
-      item.style.gridRowEnd = `span ${span}`;
-    });
-  }
-
-  function runMasonry() {
-    document.querySelectorAll(GRID_SELECTOR).forEach(applyMasonry);
-  }
-
-  function scheduleMasonry() {
-    if (raf !== null) cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(() => {
-      raf = null;
-      runMasonry();
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded', scheduleMasonry);
-  window.addEventListener('load', scheduleMasonry);
-  window.addEventListener('resize', scheduleMasonry);
-  // Web fonts change box heights after first paint — recompute spans once they settle.
-  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(scheduleMasonry); }
-
-  const observer = new MutationObserver(scheduleMasonry);
-  observer.observe(document.documentElement, { childList: true, subtree: true });
-})();
-"""
 
 
 def _safe_str(value: Any, fallback: str = "-") -> str:
@@ -917,9 +720,9 @@ app_ui = ui.page_fluid(
         ui.tags.link(href="https://fonts.googleapis.com/css2?family=Spectral+SC:wght@400;600;700", rel="stylesheet"),
         ui.tags.link(href="https://fonts.googleapis.com/css2?family=Eagle+Lake", rel="stylesheet"),
         style_tag(),
-        ui.tags.script(ui.HTML(HOME_SCRIPT)),
+        *tablet_head_tags(),
         *loader_head_tags(),
-        ui.tags.script(ui.HTML(MASONRY_SCRIPT)),
+        *masonry_head_tags(),
         ui.tags.script(ui.HTML("""
             (function() {
                 function canonicalPath(pathname) {
