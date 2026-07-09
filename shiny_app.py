@@ -1056,7 +1056,11 @@ def _feature_item(name: str, description: str) -> ui.Tag:
 
 
 def prose_block(title: str, *content: Any, level: int = 2) -> ui.Tag:
-    """A full-width tome section: a heading and long-form prose (rules, backstory, spells)."""
+    """A full-width tome section: a heading and long-form prose (rules, backstory, spells).
+
+    No callers since QST-0008 moved the NPC sheet onto prose_section.
+    Kept only while QST-0026's spell-render audit is Working - retire with it.
+    """
     heading = {1: ui.h1, 2: ui.h2, 3: ui.h3}.get(level, ui.h2)
     return ui.div(
         {"class": "npc-textbox npc-textbox--full npc-prose"},
@@ -1074,6 +1078,16 @@ def prose_section(title: str, *content: Any, level: int = 3, accent: bool = Fals
         {"class": cls},
         heading(title),
         ui.div({"class": "prose-body"}, *content),
+    )
+
+
+def stat_chip(emoji: str, label: str, value: str) -> ui.Tag:
+    """One short stat as a chip: symbol, record label, value. Shared by both sheets."""
+    return ui.div(
+        {"class": "npc-box stat-chip"},
+        ui.div({"class": "symbol"}, emoji),
+        ui.div({"class": "record"}, label),
+        ui.div({"class": "value"}, value),
     )
 
 
@@ -1200,14 +1214,6 @@ def build_character_sheet(data: dict[str, Any]) -> ui.Tag:
     )
     saves_box = ui.div({"class": "npc-textbox"}, ui.h2("Saving Throws"), saving_throw_html)
 
-    def stat_chip(emoji: str, label: str, value: str) -> ui.Tag:
-        return ui.div(
-            {"class": "npc-box stat-chip"},
-            ui.div({"class": "symbol"}, emoji),
-            ui.div({"class": "record"}, label),
-            ui.div({"class": "value"}, value),
-        )
-
     stat_chips = [
         stat_chip("⚖️", "Alignment", _safe_str(data.get("Alignment", "-"))),
         stat_chip("⚧", "Gender", _safe_str(data.get("Gender", "-"))),
@@ -1273,15 +1279,17 @@ def build_character_sheet(data: dict[str, Any]) -> ui.Tag:
 
 
 def build_npc_sheet(npc: NPC) -> ui.Tag:
+    """The NPC page in the character sheet's vocabulary: rail + chips + prose (QST-0008)."""
     race = _safe_str(getattr(npc, "race", "-"))
-    archetype = _safe_str(getattr(npc, "archetype", "-"))
+    subrace = _safe_str(getattr(npc, "subrace", "-"))
+    background = _safe_str(getattr(npc, "background", "-"))
     score_emojis = {
-        "STR": "🦾",
-        "DEX": "🥢",
-        "CON": "🫀",
-        "INT": "🧩",
-        "WIS": "🦉",
-        "CHA": "🎭",
+        "STR": "\U0001f9be",
+        "DEX": "\U0001f962",
+        "CON": "\U0001fac0",
+        "INT": "\U0001f9e9",
+        "WIS": "\U0001f989",
+        "CHA": "\U0001f3ad",
     }
 
     try:
@@ -1321,70 +1329,105 @@ def build_npc_sheet(npc: NPC) -> ui.Tag:
             ui.h2(f"{name}: {value} {mod:+d}"),
         )
 
-    return ui.div(
-        {"class": "npc-grid"},
-        ui.div(
-            {"class": "npc-header", "style": "grid-column: 1 / -1;"},
-            ui.h2(_safe_str(getattr(npc, "name", "Unknown"))),
-            ui.h1(_safe_str(getattr(npc, "title", ""))),
+    # --- The rail: scores, skills, saves, and the short list boxes ---
+    scores_box = ui.div(
+        {"class": "npc-box npc-scores"},
+        row("STR", score_emojis["STR"]),
+        row("DEX", score_emojis["DEX"]),
+        row("CON", score_emojis["CON"]),
+        row("INT", score_emojis["INT"]),
+        row("WIS", score_emojis["WIS"]),
+        row("CHA", score_emojis["CHA"]),
+    )
+    skills_box = ui.div(
+        {"class": "npc-textbox"},
+        ui.h2("Skills"),
+        _text_html(getattr(getattr(npc, "skills", None), "string", lambda *_: "-")(ability)),
+        ui.h4(f"Passive Perception: {_safe_str(getattr(npc, 'passive_perception', '-'))}"),
+    )
+    saves_box = ui.div(
+        {"class": "npc-textbox"},
+        ui.h2("Saving Throws"),
+        _text_html(getattr(getattr(npc, "saving_throws", None), "string", "-")),
+    )
+    languages_box = ui.div(
+        {"class": "npc-textbox"},
+        ui.h2("Languages"),
+        ui.p(_safe_str(getattr(npc, "languages", "-"))),
+    )
+    movement_box = ui.div({"class": "npc-textbox"}, ui.h2("Movement"), _text_html(getattr(npc, "movement", "-")))
+    senses_box = ui.div({"class": "npc-textbox"}, ui.h2("Senses"), _text_html(getattr(npc, "senses", "-")))
+    resistances_box = ui.div({"class": "npc-textbox"}, ui.h2("Resistances"), _text_html(getattr(npc, "resistances", "-")))
+
+    # --- Short stats as chips, same vocabulary as the character sheet ---
+    stat_chips = [
+        stat_chip("\u2696\ufe0f", "Alignment", _safe_str(getattr(npc, "alignment", "-"))),
+        stat_chip("\u26a7", "Gender", _safe_str(getattr(npc, "gender", "-"))),
+        stat_chip("\U0001f4cf", "Size", _safe_str(getattr(npc, "size", "-"))),
+        stat_chip("\u2b06\ufe0f", "Level", _safe_str(getattr(npc, "level", "-"))),
+        stat_chip("\u269c\ufe0f", "Proficiency Bonus", f"+{_safe_str(getattr(npc, 'proficiency_bonus', '-'))}"),
+        stat_chip("\U0001f49a", "Hit Points", _safe_str(getattr(npc, "HP", "-"))),
+        stat_chip("\U0001f6e1\ufe0f", "Armor Class", _safe_str(getattr(npc, "AC", "-"))),
+    ]
+
+    # --- Long text flows as prose sections, never boxes (Dialog 0001) ---
+    prose_sections = [
+        prose_section(
+            "Personality",
+            ui.h4("Trait"),
+            ui.p(ui.tags.i(_safe_str(getattr(npc, "trait", "-")))),
+            ui.h4("Ideal"),
+            ui.p(ui.tags.i(_safe_str(getattr(npc, "ideal", "-")))),
+            ui.h4("Plot Hook"),
+            ui.p(ui.tags.i(_safe_str(getattr(npc, "plothook", "-")))),
         ),
-        ui.div({"class": "npc-box"}, ui.h2(f"{race}: {_safe_str(getattr(npc, 'subrace', '-'))}")),
-        ui.div({"class": "npc-box"}, ui.h2(_safe_str(getattr(npc, "background", "-")))),
-        ui.div({"class": "npc-box"}, ui.h6(_safe_str(getattr(npc, "alignment", "-")))),
-        ui.div({"class": "npc-box"}, ui.h6(f"{_safe_str(getattr(npc, 'size', '-'))} size")),
-        ui.div({"class": "npc-box"}, ui.h6(_safe_str(getattr(npc, "gender", "-")))),
-        ui.div({"class": "npc-box"}, ui.h2(f"Lvl: {_safe_str(getattr(npc, 'level', '-'))}")),
-        ui.div({"class": "npc-box"}, ui.h2(f"HP: {_safe_str(getattr(npc, 'HP', '-'))}")),
-        ui.div({"class": "npc-box"}, ui.h2(f"AC: {_safe_str(getattr(npc, 'AC', '-'))}")),
-        ui.div({"class": "npc-box"}, ui.h2(f"PB: +{_safe_str(getattr(npc, 'proficiency_bonus', '-'))}")),
-        ui.div(
-            {"class": "npc-box npc-scores"},
-            row("STR", score_emojis["STR"]),
-            row("DEX", score_emojis["DEX"]),
-            row("CON", score_emojis["CON"]),
-            row("INT", score_emojis["INT"]),
-            row("WIS", score_emojis["WIS"]),
-            row("CHA", score_emojis["CHA"]),
-        ),
-        ui.div(
-            {"class": "npc-box"},
-            ui.h5("Skills"),
-            _text_html(getattr(getattr(npc, "skills", None), "string", lambda *_: "-")(ability)),
-        ),
-        ui.div({"class": "npc-box"}, ui.h4(f"Passive Perception: {_safe_str(getattr(npc, 'passive_perception', '-'))}")),
-        ui.div(
-            {"class": "npc-box"},
-            ui.h5("Saving Throws"),
-            _text_html(getattr(getattr(npc, "saving_throws", None), "string", "-")),
-        ),
-        ui.div({"class": "npc-box"}, ui.h4("Languages"), ui.p(_safe_str(getattr(npc, "languages", "-")))),
-        # --- Packable stat / list boxes: these self-organize and fill the grid ---
-        ui.div({"class": "npc-textbox"}, ui.h2("Movement"), _text_html(getattr(npc, "movement", "-"))),
-        ui.div({"class": "npc-textbox"}, ui.h2("Senses"), _text_html(getattr(npc, "senses", "-"))),
-        ui.div({"class": "npc-textbox"}, ui.h2("Resistances"), _text_html(getattr(npc, "resistances", "-"))),
-        ui.div({"class": "npc-textbox"}, ui.h2("Trait"), ui.p(ui.tags.i(_safe_str(getattr(npc, "trait", "-"))))),
-        ui.div({"class": "npc-textbox"}, ui.h2("Ideal"), ui.p(ui.tags.i(_safe_str(getattr(npc, "ideal", "-"))))),
-        ui.div({"class": "npc-textbox"}, ui.h2("Plot Hook"), ui.p(ui.tags.i(_safe_str(getattr(npc, "plothook", "-"))))),
-        # --- Long-form prose: full-width pages, stacked below the boxes ---
-        prose_block(
+        prose_section(
             "Combat Actions",
             ui.h4(f"To hit: +{_safe_str(getattr(npc, 'to_hit_bonus', '-'))}"),
             _prose(getattr(npc, "simple_attacks", "-")),
             _prose(getattr(npc, "special_attack", "-")),
-            level=3,
         ),
-        prose_block(
+        prose_section(
             f"Spellcasting: {_safe_str(getattr(npc, 'spellcasting_ability', '-'))}",
             ui.h4(f"Spell Save DC: {_safe_str(getattr(npc, 'spell_save_dc', '-'))}"),
             ui.h4(f"To hit: +{_safe_str(getattr(npc, 'spell_attack_bonus', '-'))}"),
             _prose(getattr(npc, "spells", "-")),
-            level=3,
+            accent=True,
         ),
-        prose_block("Martial Abilities", _prose(getattr(npc, "martial", "-")), level=3),
-        prose_block("Legendary", _prose(legendary)),
-        prose_block("Lair", _prose(lair)),
-        prose_block("Region", _prose(region)),
-        prose_block("My Story", _prose(story_text)),
+        prose_section("Martial Abilities", _prose(getattr(npc, "martial", "-"))),
+        prose_section("Legendary", _prose(legendary)),
+        prose_section("Lair", _prose(lair)),
+        prose_section("Region", _prose(region)),
+        prose_section("My Story", _prose(story_text)),
+    ]
+
+    return ui.div(
+        {"class": "sheet note-lines"},
+        ui.div(
+            {"class": "npc-header"},
+            ui.h2(_safe_str(getattr(npc, "name", "Unknown"))),
+            ui.h2(_safe_str(getattr(npc, "title", ""))),
+            ui.h1(f"{race}: {subrace}"),
+            ui.h1(background),
+        ),
+        ui.div(
+            {"class": "sheet-body"},
+            ui.div(
+                {"class": "sheet-rail"},
+                ui.div({"class": "stat-flow"}, *stat_chips),
+                scores_box,
+                skills_box,
+                saves_box,
+                languages_box,
+                movement_box,
+                senses_box,
+                resistances_box,
+            ),
+            ui.div(
+                {"class": "sheet-main"},
+                *prose_sections,
+            ),
+        ),
     )
 
 
