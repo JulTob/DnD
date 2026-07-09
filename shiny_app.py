@@ -1036,6 +1036,16 @@ def _html_prose(html: str, placeholder: str = "—") -> ui.Tag:
     return ui.HTML(body) if body else ui.p(placeholder)
 
 
+def _text_html(value: Any, placeholder: str = "-") -> ui.Tag:
+    """Plain model text as HTML: escape first, then honor newlines as <br> (QST-0012).
+
+    The one safe door for generator strings (skills, saves, senses, story...).
+    Code-authored HTML goes through _html_prose instead — never through here.
+    """
+    text = _safe_str(value, placeholder)
+    return ui.HTML(escape(text).replace("\n", "<br>"))
+
+
 def _feature_item(name: str, description: str) -> ui.Tag:
     """Feature blurbs often embed spell HTML — render as HTML, not markdown."""
     body = _safe_str(description, "").strip()
@@ -1177,9 +1187,9 @@ def build_character_sheet(data: dict[str, Any]) -> ui.Tag:
             saving_throw_value = saving_throw_value()
         except Exception:
             saving_throw_value = saving_throw_obj
-    saving_throw_html = ui.HTML(_safe_str(saving_throw_value, "-").replace("\n", "<br>"))
+    saving_throw_html = _text_html(saving_throw_value, "-")
 
-    story_html = ui.HTML(_safe_str(data.get("Story", "")).replace("\n", "<br>"))
+    story_html = _text_html(data.get("Story", ""))
 
     scores_box = ui.div({"class": "npc-box npc-scores"}, *stat_boxes)
     skills_box = ui.div(
@@ -1339,19 +1349,19 @@ def build_npc_sheet(npc: NPC) -> ui.Tag:
         ui.div(
             {"class": "npc-box"},
             ui.h5("Skills"),
-            ui.HTML(_safe_str(getattr(getattr(npc, "skills", None), "string", lambda *_: "-")(ability)).replace("\n", "<br>")),
+            _text_html(getattr(getattr(npc, "skills", None), "string", lambda *_: "-")(ability)),
         ),
         ui.div({"class": "npc-box"}, ui.h4(f"Passive Perception: {_safe_str(getattr(npc, 'passive_perception', '-'))}")),
         ui.div(
             {"class": "npc-box"},
             ui.h5("Saving Throws"),
-            ui.HTML(_safe_str(getattr(getattr(npc, "saving_throws", None), "string", "-")).replace("\n", "<br>")),
+            _text_html(getattr(getattr(npc, "saving_throws", None), "string", "-")),
         ),
         ui.div({"class": "npc-box"}, ui.h4("Languages"), ui.p(_safe_str(getattr(npc, "languages", "-")))),
         # --- Packable stat / list boxes: these self-organize and fill the grid ---
-        ui.div({"class": "npc-textbox"}, ui.h2("Movement"), ui.HTML(_safe_str(getattr(npc, "movement", "-")).replace("\n", "<br>"))),
-        ui.div({"class": "npc-textbox"}, ui.h2("Senses"), ui.HTML(_safe_str(getattr(npc, "senses", "-")).replace("\n", "<br>"))),
-        ui.div({"class": "npc-textbox"}, ui.h2("Resistances"), ui.HTML(_safe_str(getattr(npc, "resistances", "-")).replace("\n", "<br>"))),
+        ui.div({"class": "npc-textbox"}, ui.h2("Movement"), _text_html(getattr(npc, "movement", "-"))),
+        ui.div({"class": "npc-textbox"}, ui.h2("Senses"), _text_html(getattr(npc, "senses", "-"))),
+        ui.div({"class": "npc-textbox"}, ui.h2("Resistances"), _text_html(getattr(npc, "resistances", "-"))),
         ui.div({"class": "npc-textbox"}, ui.h2("Trait"), ui.p(ui.tags.i(_safe_str(getattr(npc, "trait", "-"))))),
         ui.div({"class": "npc-textbox"}, ui.h2("Ideal"), ui.p(ui.tags.i(_safe_str(getattr(npc, "ideal", "-"))))),
         ui.div({"class": "npc-textbox"}, ui.h2("Plot Hook"), ui.p(ui.tags.i(_safe_str(getattr(npc, "plothook", "-"))))),
