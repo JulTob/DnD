@@ -1107,7 +1107,6 @@ def server(input, output, session):
                         archetype=current_archetype,
                         lvl=randint(1, 20),
                         seed=seed + idx,
-                        light=True,
                     )
                 )
 
