@@ -5721,92 +5721,6 @@ def Rank(lusor):
 			"Triton",
 			]
 
-	try:
-		rank += [
-			f"{lusor.archetype}",	
-			f"{lusor.archetype}",	
-			f"{lusor.archetype}",	
-			f"{lusor.archetype}",	
-			f"{lusor.archetype}",	
-			f"{lusor.archetype}",	
-			f"{lusor.archetype}",	
-			f"{lusor.archetype}",	
-			f"{lusor.archetype}",	
-			f"{lusor.archetype}",
-			f"{lusor.race}",		
-			f"{lusor.race}",		
-			f"{lusor.race}",		
-			f"{lusor.race}",		
-			f"{lusor.race}",		
-			f"{lusor.race}",		
-			f"{lusor.race}",		
-			f"{lusor.race}",		
-			f"{lusor.race}",		
-			f"{lusor.race}",
-			f"{lusor.subrace}",		
-			f"{lusor.subrace}",		
-			f"{lusor.subrace}",		
-			f"{lusor.subrace}",		
-			f"{lusor.subrace}",		
-			f"{lusor.subrace}",		
-			f"{lusor.subrace}",		
-			f"{lusor.subrace}",		
-			f"{lusor.subrace}",		
-			f"{lusor.subrace}",	
-			f"{lusor.subrace}",	
-			f"{lusor.subrace}",
-			]
-	except:
-		try:
-			rank += [
-				f"{lusor.species}",	
-				f"{lusor.species}",	
-				f"{lusor.species}",	
-				f"{lusor.species}",	
-				f"{lusor.species}",	
-				f"{lusor.species}",	
-				f"{lusor.species}",	
-				f"{lusor.species}",	
-				f"{lusor.species}",	
-				f"{lusor.species}",
-				f"{lusor.char_class}",		
-				f"{lusor.char_class}",		
-				f"{lusor.char_class}",		
-				f"{lusor.char_class}",		
-				f"{lusor.char_class}",		
-				f"{lusor.char_class}",		
-				f"{lusor.char_class}",		
-				f"{lusor.char_class}",		
-				f"{lusor.char_class}",		
-				f"{lusor.char_class}",
-				f"{lusor.subclass}",		
-				f"{lusor.subclass}",		
-				f"{lusor.subclass}",		
-				f"{lusor.subclass}",		
-				f"{lusor.subclass}",		
-				f"{lusor.subclass}",		
-				f"{lusor.subclass}",		
-				f"{lusor.subclass}",		
-				f"{lusor.subclass}",		
-				f"{lusor.subclass}",	
-				f"{lusor.subclass}",	
-				f"{lusor.subclass}",
-				f"{lusor.background}",		
-				f"{lusor.background}",		
-				f"{lusor.background}",		
-				f"{lusor.background}",		
-				f"{lusor.background}",		
-				f"{lusor.background}",		
-				f"{lusor.background}",		
-				f"{lusor.background}",		
-				f"{lusor.background}",		
-				f"{lusor.background}",	
-				f"{lusor.background}",	
-				f"{lusor.background}",
-				]
-		except:
-			pass
-
 
 	return random.choice(rank)
 
@@ -5927,7 +5841,6 @@ def Element(lusor):
 	while True:
 		yield element[0]
 		random.shuffle(element)
-
 
 def Artifact(lusor):
 	artifact = []

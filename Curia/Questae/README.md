@@ -46,10 +46,13 @@ A questa must stay **minimal and one-purpose**. When acting on one reveals more 
 🔴 urgent · 🟠 high · 🟡 normal · 🟢 low   *(a `tagkit` blocker is always 🔴)*
 
 ## 🏛️ The Council section
-Every questa ends with a **Council** section: a short, signed, Socratic weighing by the seats it was routed to, plus a light **reach × severity** weight. It records *why* the quest is worth doing and what the counselors advise — so the train of thought travels with the quest and survives into the `Solved/` archive. See `QUESTA-template.md`.
+Every questa ends with a **Council** section: a socratic conversation, signed, with the core points briefly exposed, plus a light **reach × severity** weight. It also records *why* the quest is worth doing and what the counselors advise — so the train of thought travels with the quest and survives into the `Solved/` archive. See `QUESTA-template.md`.
 
 ## How to work one
-1. Pick from `Open/`. 2. Move it to `Working/`, set yourself as owner, update status. 3. If it needs a decision, open a Dialog in `Agora/`. 4. When done (and confirmed), move to `Solved/` with an outcome note and links to any Decree/commit.
+1. Pick from `Open/`. 
+2. Move it to `Working/`, set yourself as main owner, update status. 
+3. If it needs a decision, open a Dialog in `Agora/`. 
+4. When done (and confirmed), move to `Solved/` with an outcome note and links to any Decree/commit.
 
 See `QUESTA-template.md` to mint a new one.
 
@@ -68,6 +71,13 @@ See `QUESTA-template.md` to mint a new one.
 | QST-0003 | Decide & execute Flask removal; retire `app/routes.py` + templates | refactor | 🟠 | Architecture, Ecosystem, Workshop → Q-0004 |
 | QST-0004 | Review, clean & unify the venvs — surface conflicts to Julio | chore/cleanup | 🟠 | Workshop, Ecosystem → Decree 0001 |
 | QST-0027 | Title map as narrative identity | design/refactor | 🟠 | Bard, Druid, Warlock, Wizard, Monk, Rogue, Lorekeeper → Q-0010 |
+| QST-0030 | Minion.py's bug reports lose the signal they exist to carry (3 sidequests) | bug | 🟠 | Sorcerer, Cleric, Barbarian, Lorekeeper |
+| QST-0030.1 | One exception, N bug reports: nested Minion decorators don't dedupe | bug | 🟠 | Sorcerer, Monk, Cleric → QST-0030 |
+| QST-0031 | Redesign the spell system with TOP (5 sidequests) | tagkit/design | 🟠 | Druid, Warlock, Monk, Rogue, Lorekeeper |
+| QST-0031.1 | Build SpellsKit: Tags for school, class list, tradition | tagkit | 🟠 | Warlock, Druid, Lorekeeper → QST-0031 |
+| QST-0031.2 | Delete SPELL_DATA_2024; migrate every entry to Spell(), tagged | tagkit/refactor | 🟠 | Druid, Monk → QST-0031 |
+| QST-0031.3 | Apply Compass_of_Spells Tags; collapse the Lodge to one entry per spell | tagkit/refactor | 🟠 | Druid, Monk, Rogue → QST-0031 |
+| QST-0035 | TagKit rollout sequence (after Phase 0) | tagkit/design | 🟠 | Druid, Wizard, Warlock, Lorekeeper → QST-0016 |
 
 ### 🟡 / 🟢 Priority — Open
 | ID | Title | Type | Priority | Route |
@@ -78,6 +88,14 @@ See `QUESTA-template.md` to mint a new one.
 | QST-0013 | Ability modifier recomputed inline instead of canonical `Modifier` | refactor | 🟡 | Contracts, Lorekeeper, Methods |
 | QST-0017 | 🔁 Detect orphan files (recurrent) — clean dead, implement ghosts | chore/cleanup | 🟡 | Ecosystem, Workshop, Simplicity, Druid |
 | QST-0023 | Silent name fusions (implicit string concat) across the Races | bug | 🟡 | Safety, Readability, Lorekeeper |
+| QST-0030.2 | Bug reports double-wrap their own ANSI colors | bug | 🟡 | Barbarian, Fighter → QST-0030 |
+| QST-0030.3 | `get_call_tree()` blind outside `app.py`/`shiny_app.py` | bug | 🟡 | Paladin, Rogue, Druid → QST-0030 |
+| QST-0032.1 | Sweep the rest of the codebase for the respecified Conventions | docs/chore | 🟢 | Barbarian, Ranger, Bard → QST-0032 |
+| QST-0031.4 | First test suite: Compass_of_Spells and the Lodge registry | tagkit/chore | 🟡 | Rogue, Artificer → QST-0031 |
+| QST-0031.5 | `Spell.__format__`: one canonical renderer, dispatched by format spec | refactor | 🟡 | Wizard, Monk, Barbarian → QST-0031 |
+| QST-0031.6 | Verify and complete every spell's definition | bug/chore | 🟡 | Rogue, Cleric, Lorekeeper → QST-0031 |
+| QST-0033 | Typographic system (fonts per element, class, race) | design | 🟡 | Barbarian, Bard, Artificer → QST-0021 |
+| QST-0034 | Surface Minion dev log in browser (dev-only) | design | 🟢 | Artificer, Cleric, Sorcerer, Paladin → QST-0030 |
 
 ### 🟡 / 🟢 Priority — Open (QST-0021 sidequests)
 | ID | Title | Type | Priority | Parent |
@@ -91,6 +109,7 @@ See `QUESTA-template.md` to mint a new one.
 ### ✅ Solved (recent)
 | ID | Title |
 |----|-------|
+| QST-0032 | Canon/Conventions.md respecified; renamed AtlasVenustas Kit_of_X → Tools_of_X (2026-07-15) |
 | QST-0012 | One safe door for plain model text (`_text_html`) (2026-07-09) |
 | QST-0008 | NPC sheet speaks the character sheet's vocabulary (2026-07-09) |
 | QST-0011 | NPC-list entries open their NPC (2026-07-09) |
@@ -108,5 +127,6 @@ See `QUESTA-template.md` to mint a new one.
 - **QST-0014** — `docs/FLASK_TO_SHINY_MIGRATION.md` is stale (says "no shareable URL yet"; hash-URLs + `CharacterPathRedirectASGI` already exist). *(docs · Understanding, Workshop)*
 - **QST-0015** — NPC level bounds: UI allows level → 100 while characters clamp 1–20; is uncapped legendary intended? *(rule-update · Lorekeeper, Contracts)*
 
-### ✅ Solved
-*(none yet — see `Solved/`)*
+### 📜 Retired planning docs (integrated into Questae, 2026-07-15)
+- `GENLEGEND_STATUS_AND_PLAN.md` → QST-0001 (v1 spine), QST-0016 + QST-0035 (TOP rollout), QST-0009 (import/generation practices)
+- `GENLEGEND_TICKETS.md` → QST-0033 (typography), QST-0034 (Minion dev log)

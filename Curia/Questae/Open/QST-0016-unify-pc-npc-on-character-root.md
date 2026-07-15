@@ -6,8 +6,8 @@
 - **Owner:** unclaimed
 - **Route to:** Architecture (Druid), Contracts (Warlock), Methods (Wizard), Flow (Sorcerer), Simplicity (Monk), Understanding (Bard), Lorekeeper → **Decree 0002**
 - **Parent:** —
-- **Sidequests:** QST-0018 (remove AtlasTOP) · then: `.1` Character root (name/title/scores/size/tier/seed) · `.2` Dice + `Roll(D=)` · `.3` Player/Non role tags · `.4` fold AtlasAlusoris→AtlasLusoris · `.5` one sheet renderer · `.6` reproducibility tests
-- **Related:** TagKit (upstream, pinned in `requirements.txt`), QST-0002 & QST-0008 (one sheet), QST-0005 (Atlas split), QST-0013 (Modifier one-source)
+- **Sidequests:** QST-0018 (remove AtlasTOP) · then: `.1` Character root (name/title/scores/size/tier/seed) · `.2` Dice + `Roll(D=)` · `.3` Player/Non role tags · `.4` fold AtlasAlusoris→AtlasLusoris · `.5` one sheet renderer · `.6` reproducibility tests · QST-0035 (rollout sequence)
+- **Related:** TagKit (upstream, pinned in `requirements.txt`), QST-0002 & QST-0008 (one sheet), QST-0005 (Atlas split), QST-0013 (Modifier one-source), QST-0035 (TOP rollout sequence)
 
 ---
 
@@ -30,6 +30,8 @@ One **Character** root — the umbrella for every generated being — carrying t
 ## 🧭 Notes
 - Built on the pinned TagKit API (`Tag`, `Imprint`) directly — **not** on a local composition layer (AtlasTOP is being removed).
 - Sequence: QST-0018 first (it *is* the first slice — the `kind` flag becomes the role tag), then the `.1`–`.6` sidequests above.
+- **Rollout order** for cross-Atlas TOP axes → see **QST-0035** (Conditions → Species/Class/Background → Pugna → Spells/Enchantments).
+- **Engineering practices (Phase 0):** nothing deleted until git can bring it back (baseline commit cited in message); one concern per commit.
 
 ## ✅ Resolution
 *(pending — execute the sidequests, refactoring existing files)*

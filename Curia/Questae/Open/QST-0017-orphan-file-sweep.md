@@ -23,6 +23,7 @@ Neither should linger silently: dead files mislead readers; ghosts hide broken p
 - Many top-level dirs and loose files (e.g. `Enchantments/`, `SpellsEffects/*.p5js`, `docs/` R-site, `instance/`, `Users/`, scattered `*.svg`) whose live use is unverified.
 - The Flask/Shiny split (QST-0003) leaves `app/routes.py` + `app/templates/*` possibly orphaned once Shiny is sole.
 - Confirmed clean already: the six committed venvs (QST-0004).
+- **Retired 2026-07-15:** `GENLEGEND_STATUS_AND_PLAN.md` and `GENLEGEND_TICKETS.md` (content → Questae; see register footer).
 
 ## 🎯 Desired outcome
 A repeatable pass that lists every project file as **live**, **dead orphan → clean**, or **ghost orphan → implement**, and mints a sidequest per cluster. Run it each sweep and on a cadence, so orphans never accumulate again.
