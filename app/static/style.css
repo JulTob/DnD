@@ -25,12 +25,13 @@
   --font-header:  'Cinzel', 'Nordic Chance', sans-serif;                  /* section headers */
   --font-text:    'IM Fell DW Pica', 'IM Fell English', serif;            /* body / lore prose */
   --font-fancy:   'Kings and Pirates', 'Eagle Lake', 'Cinzel Decorative', serif; /* display / wanted-poster */
-  --font-impact:  'JSL Ancient', 'MiddleSaxonyText', serif;
+  --font-impact:  'IM Fell DW Pica SC', 'IM Fell English SC', serif;    /* emphasis (bold/italic inline) */
   --font-ui:      'Spectral SC', 'Cinzel', sans-serif;                    /* buttons, controls, UI chrome */
   --font-name:    'IM Fell English SC', 'IM Fell DW Pica SC', serif;      /* character title */
   --font-record:  'IM Fell Double Pica SC', 'IM Fell DW Pica SC', serif;  /* stat record labels */
   --font-value:   'IM Fell Double Pica', 'IM Fell DW Pica', serif;        /* stat values */
   --font-fantasy: 'Eagle Lake', 'Cinzel Decorative', serif;              /* fantasy titles (spells) */
+  --font-script:  'Italianno', 'Beau Rivage', 'Fleur De Leah', cursive;                 /* handwritten spell names */
 }
 
 /* ============================================
@@ -1366,6 +1367,7 @@ header, footer {
 
 .sheet-section .prose-body {
     max-width: 70ch;
+    text-align: left;
     font-family: var(--font-text);
     font-size: 1.04rem;
     line-height: 1.7;
@@ -1373,6 +1375,17 @@ header, footer {
 
 .sheet-section .prose-body p { margin: 0 0 0.7em; }
 .sheet-section .prose-body table { width: 100%; }
+
+/* Emphasis inside prose — bold/italic markdown words read as accents, not plain text. */
+.sheet-section .prose-body strong {
+    color: var(--primary-color);
+    font-family: var(--font-impact);
+}
+
+.sheet-section .prose-body em {
+    color: var(--primary-color);
+    font-style: italic;
+}
 
 /* Generator HTML (spells in features) must read as body prose, not markdown code blocks. */
 .sheet-section .prose-body pre,
@@ -1390,10 +1403,23 @@ header, footer {
 
 .sheet-section .prose-body .feature-entry {
     margin: 0 0 1.1em;
+    padding-bottom: 1.1em;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.35); /* faint gold rule, echoes the section divider */
+}
+
+.sheet-section .prose-body .feature-entry:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
 }
 
 .sheet-section .prose-body .feature-lead {
     margin: 0 0 0.35em;
+    font-family: var(--font-name);
+    font-size: 1.2em;
+    letter-spacing: 0.02em;
+    font-weight: bold;
+    color: var(--primary-color);
 }
 
 .sheet-section .prose-body .spell {
@@ -1404,13 +1430,19 @@ header, footer {
 }
 
 .sheet-section .prose-body .spell h4 {
-    font-family: var(--font-fantasy);
-    font-size: 1.25em;
+    font-family: var(--font-script);
+    font-size: 1.6em;
+    font-weight: normal;
     margin: 0.4em 0 0.15em;
 }
 
 .sheet-section .prose-body .spell p {
     margin: 0 0 0.55em;
+}
+
+.sheet-section .prose-body .spell .spell-meta {
+    font-size: 0.5em;
+    line-height: 1.4;
 }
 
 /* Long-form sections — rules, backstory, spells — read as a page, not a box. */

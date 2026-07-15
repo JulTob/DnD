@@ -57,12 +57,15 @@
 
 	<!-- Basic Info -->
     <div class="npc-box">
-        <h6>{{ character.Alignment }}</h6>
+        <h6>⚖️ {{ character.Alignment }}</h6>
     	</div>
+	<div class="npc-box">
+        <h6>👤 {{ character.CreatureType }}</h6>
+    	</div>
+	<div class="npc-box"><h6> {{ character.Gender }} </h6></div>
 	<div class="npc-box">
         <h6>{{ character.size }} size</h6>
     	</div>
-	<div class="npc-box"><h6> {{ character.Gender }} </h6></div>
 
   <!-- Combat Essentials -->
   <div class="npc-box" style="font-size: 1.33em;">⚜️ PB: <b>+ {{ character.PB }}</b></div>
@@ -232,7 +235,9 @@
 
 
 		{% for feat in character.features %}
+			{% if feat.name != 'Creature Type' %}
     		{{ feat.html() | safe }}
+			{% endif %}
 			{% endfor %}
 
 

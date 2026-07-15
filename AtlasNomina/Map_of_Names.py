@@ -380,14 +380,14 @@ def NewName(lusor):
 		surname = NewWord(surnames, os, ns, cs).capitalize()
 		surname2 = NewWord(surnames, os, ns, cs).capitalize()
 		FullName = select1([
-			f"{name} {name2} <br> {surname} {surname2}",
+			f"{name} {name2}  {surname} {surname2}",
 			])
 	elif "Gnome"         in genus:
 		name = NewWord(names, o, n, c).capitalize()
 		name2 = NewWord(names, o, n, c).capitalize()
 		name3 = NewWord(names, o, n, c).capitalize()
 		surname = NewWord(surnames, os, ns, cs).capitalize()
-		FullName =  f"{name} {name2} {name3}<br> {surname}"
+		FullName =  f"{name} {name2} {name3} {surname}"
 	elif "Vampire"         in genus:
 		name = NewWord(names, o, n, c).capitalize()
 		surname = NewWord(surnames, os, ns, cs).capitalize()

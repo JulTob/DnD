@@ -30,11 +30,13 @@ def entropify(name, names = sample, steps=STEPS, syze = 3):
 	"""
 	Adjusts the entropy of a name to be closer to the average entropy of the list of names.
 	"""
+	if not name:
+		return name  # nothing to balance — and average/current both read as 0, which never converges below
 	symbol_entropies = calculate_symbol_entropies(names, syze=syze)
 	average_entropy = calculate_average_entropy(names, symbol_entropies, syze=syze)
 	name = error_correct(name, symbol_entropies, syze=syze)
 	current_entropy = calculate_name_entropy(name, symbol_entropies, syze=syze)
-	while True:
+	for _ in range(20):  # bounded: replace_symbol can plateau on a name it can't improve further
 		if current_entropy <= average_entropy*0.75:
 			name = up_entropy(name, names, 1, syze=syze)
 			current_entropy = calculate_name_entropy(name, symbol_entropies, syze=syze)

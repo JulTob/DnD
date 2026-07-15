@@ -255,4 +255,4 @@ if __name__ == "__main__":
     assert panel is not None
     tags = loader_head_tags()
     assert len(tags) == 1
-    print("Kit_of_Loader self-test passed.")
+    print("Tools_of_Loader self-test passed.")

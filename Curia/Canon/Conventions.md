@@ -34,11 +34,14 @@ New domains earn a new Atlas name that fits the theme. **No generic or non-thema
 
 | Prefix | Use for | Examples |
 |--------|---------|----------|
-| **`Map_of_X`** | lookups, data tables, mappings — "where to find things", key→value data, algorithms | `Map_of_Races`, `Map_of_Dice`, `Map_of_Backgrounds` |
-| **`Grimoire_of_X`** | substantial definitions, classes, "books" that invoke entities | `Grimoire_of_Characters`, `Grimoire_of_NPC` |
-| **`Compass_of_X`** | canonical types, enums, categories — "direction" | `Compass_of_Conditions`, `Compass_of_Damages`, `Compass_of_Armors` |
-| **`Lodge_of_X`** | curated, closed sets | `Lodge_of_Spells`, `Lodge_of_Basic_Weapons` |
+| **`Map_of_X`** | data and actions to complete a task and retrieve data (the treasure) | `Map_of_Races`, `Map_of_Dice`, `Map_of_Backgrounds` |
+| **`Charts_of_X`** | algorithms, functions, processes, actuators | `Charts_of_Sorting`, `Charts_of_Geometry` |
+| **`Grimoire_of_X`** | classes, "books" that invoke entities | `Grimoire_of_Characters`, `Grimoire_of_NPC` |
+| **`Compass_of_X`** | Abstract Types, tags, and classes to organize Maps or Charts — "direction" | `Compass_of_Conditions`, `Compass_of_Damages`, `Compass_of_Armors` |
+| **`Lodge_of_X`** | curated, closed sets or dictionaries | `Lodge_of_Spells`, `Lodge_of_Basic_Weapons` |
 | **`Ledger_of_X`** | lists, records, enumerations | `Ledger_of_Weapons`, `Ledger_of_Legendary_Actions` |
+| **`Tools_of_X`** | Context interfaces | `Tools_of_HTML`, `Tools_of_Markdown`, `Tools_of_iOS`, `Tools_of_Loader` 
+| **`XKit`** | TOP implementation of a specific class and related Tags | `SpellsKit`, `ClassKit`, `InvocationKit`, 
 
 Other established patterns (`Kit_of_`, `Scroll_of_`, `Shop_of_`, `Helm_of_`, …) stay consistent: adventurous theme, clear purpose. **Flag any new file that does not follow one of these prefixes** or invents an ad-hoc pattern.
 

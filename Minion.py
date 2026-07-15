@@ -89,9 +89,9 @@ def _identity(text):
 def print_record(text, color=None):
 	"""
 	Report one line to the log.
-	  • No Chronicler open  → print it now (unchanged behaviour).
-	  • Chronicler open     → first sighting prints live; repeats are only tallied;
-	                          errors are held back for the closing section.
+	  	• No Chronicler open  → print it now (unchanged behaviour).
+	  	• Chronicler open     → first sighting prints live; repeats are only tallied;
+	                          	errors are held back for the closing section.
 	"""
 	if _account is None:
 		_emit(text, color)

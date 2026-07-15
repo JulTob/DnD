@@ -214,3 +214,11 @@ def ElvenFeats():
 
 def Humanoid():
 	return Feature(name="Creature Type", description="Humanoid", source="Species Feature")
+
+
+def creature_type_label(features=None, default="Humanoid"):
+	"""Return the Creature Type string from species features, if present."""
+	for feature in features or []:
+		if getattr(feature, "name", "") == "Creature Type":
+			return getattr(feature, "description", default) or default
+	return default

@@ -656,19 +656,6 @@ SPELL_DATA_2024 = {
             "effects cannot reduce its speed, and it can escape nonmagical restraints automatically."
         ),
     },
-    "Freedom of the Waves (HB)": {
-        "level": 3,
-        "school": "Evocation",
-        "casting_time": "Action",
-        "range": "Self (15-foot cube)",
-        "duration": "Instantaneous",
-        "components": "V, S, M (a drop of water)",
-        "concentration": "",
-        "definition": (
-            "A surge of seawater bursts forth. Creatures of your choice take 4d8 cold damage and are "
-            "pushed 10 feet, or willing allies gain temporary hit points instead."
-        ),
-    },
     "Frostbite": {
         "level": 0,
         "school": "Evocation",
@@ -1694,30 +1681,6 @@ SPELL_DATA_2024 = {
             "Nightmarish visions assail creatures you choose in a 30-foot radius. They take 4d10 psychic damage and gain frightened, repeating saves each round."
         ),
     },
-    "Widogast's Vault of Amber (HB)": {
-        "level": 4,
-        "school": "Conjuration",
-        "casting_time": "1 minute",
-        "range": "30 feet",
-        "duration": "24 hours",
-        "components": "V, S, M (a pinch of amber dust)",
-        "concentration": "",
-        "definition": (
-            "You conjure a translucent amber vault with shelves for storing objects and creatures, locking them in stasis until released."
-        ),
-    },
-    "Widogast's Web of Fire (HB)": {
-        "level": 4,
-        "school": "Evocation",
-        "casting_time": "Action",
-        "range": "60 feet",
-        "duration": "Instantaneous",
-        "components": "V, S",
-        "concentration": "",
-        "definition": (
-            "You hurl up to ten fire threads at creatures of your choice, each dealing 1d6 fire damage with overlapping strands burning the same target multiple times."
-        ),
-    },
     "Wind Walk": {
         "level": 6,
         "school": "Transmutation",
@@ -1812,9 +1775,9 @@ class Spell:
 		else:
 			level_text = f"<b><p> Level {spell.level} Spell </b></p>"
 		return f"""
-		<h4 style="font-family: 'Iglesia' ; font-size:	2.1em;"> {spell.name}</h4>
+		<h4 class="spell-title"> {spell.name}</h4>
 		{level_text}
-		<p>{desc}</p>
+		<p class="spell-meta">{desc}</p>
 		<p>
 		{spell.definition }
 		</p>
@@ -2387,14 +2350,54 @@ Cantrip Upgrade. The damage increases by 1d6 when you reach levels 5 (2d6), 11 (
 # First Level Spells
 LEVEL1 = True
 if LEVEL1:
-	BurningHands =          Spell("Burning Hands ",1,"Evocation ","1 Action ","Self (15-foot cone) ","Instantaneous ","Verbal, Somatic")
-	ChaosBolt =             Spell("Chaos Bolt ",1,"Evocation ","1 Action ","120 feet ","Instantaneous ","Verbal, Somatic")
-	ComprehendLanguages = 	Spell("Comprehend Languages",	1,	"Divination",	"1 Action R ",	"Self ",	"1 hour ",	"Verbal, Somatic, Material")
-	CreateorDestroyWater = 	Spell("Create or Destroy Water ",1,"Transmutation ","1 Action ","30 feet ","Instantaneous ","Verbal, Somatic, Material")
-	DissonantWhispers = 	Spell("Dissonant Whispers ",1,"Enchantment ","1 Action ","60 feet ","Instantaneous ","Verbal")
-	DivineFavor =         	Spell("Divine Favor ",1,"Evocation ","1 Bonus Action ","Self ","Concentration, up to 1 minute ","Verbal, Somatic")
-	EnsnaringStrike =   	Spell("Ensnaring Strike ",1,"Conjuration ","1 Bonus Action ","Self ","Concentration, up to 1 minute ","Verbal")
-	Entangle =          	Spell("Entangle ",1,"Conjuration ","1 Action ","90 feet ","Concentration, up to 1 minute ","Verbal, Somatic")
+	BurningHands =          Spell("Burning Hands ",1,"Evocation ","1 Action ","Self (15-foot cone) ","Instantaneous ","Verbal, Somatic", definition="""A thin sheet of flames shoots forth from you. Each creature in a 15-foot Cone makes a Dexterity saving throw, taking 3d6 Fire damage on a failed save or half as much damage on a successful one.
+<br>
+Flammable objects in the Cone that aren't being worn or carried start burning.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d6 for each spell slot level above 1.""")
+	ChaosBolt =             Spell("Chaos Bolt ",1,"Evocation ","1 Action ","120 feet ","Instantaneous ","Verbal, Somatic", definition="""You hurl an undulating, warbling mass of chaotic energy at one creature in range. Make a ranged spell attack against the target. On a hit, the target takes 2d8 + 1d6 damage. Choose one of the d8s. The number rolled on that die determines the attack's damage type, as shown below.
+<br>
+1: Acid
+<br>
+2: Cold
+<br>
+3: Fire
+<br>
+4: Force
+<br>
+5: Lightning
+<br>
+6: Poison
+<br>
+7: Psychic
+<br>
+8: Thunder
+<br>
+If you roll the same number on both d8s, the chaotic energy leaps from the target to a different creature of your choice within 30 feet of it. Make a new attack roll against the new target, and make a new damage roll, which could cause the chaotic energy to leap again.
+<br>
+A creature can be targeted only once by each casting of this spell.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 2nd level or higher, each target takes 1d6 extra damage of the type rolled for each slot level above 1st.""")
+	ComprehendLanguages = 	Spell("Comprehend Languages",	1,	"Divination",	"1 Action R ",	"Self ",	"1 hour ",	"Verbal, Somatic, Material", definition="""For the duration, you understand the literal meaning of any language that you hear or see signed. You also understand any written language that you see, but you must be touching the surface on which the words are written. It takes about 1 minute to read one page of text. This spell doesn't decode symbols or secret messages.""")
+	CreateorDestroyWater = 	Spell("Create or Destroy Water ",1,"Transmutation ","1 Action ","30 feet ","Instantaneous ","Verbal, Somatic, Material", definition="""You do one of the following:
+<br>
+<b>Create Water.</b> You create up to 10 gallons of clean water within range in an open container. Alternatively, the water falls as rain in a 30-foot Cube within range, extinguishing exposed flames there.
+<br>
+<b>Destroy Water.</b> You destroy up to 10 gallons of water in an open container within range. Alternatively, you destroy fog in a 30-foot Cube within range.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> You create or destroy 10 additional gallons of water, or the size of the Cube increases by 5 feet, for each spell slot level above 1.""")
+	DissonantWhispers = 	Spell("Dissonant Whispers ",1,"Enchantment ","1 Action ","60 feet ","Instantaneous ","Verbal", definition="""One creature of your choice that you can see within range hears a discordant melody in its mind. The target makes a Wisdom saving throw. On a failed save, it takes 3d6 Psychic damage and must immediately use its Reaction, if available, to move as far away from you as it can, using the safest route. On a successful save, the target takes half as much damage only.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d6 for each spell slot level above 1.""")
+	DivineFavor =         	Spell("Divine Favor ",1,"Evocation ","1 Bonus Action ","Self ","Concentration, up to 1 minute ","Verbal, Somatic", definition="""Until the spell ends, your attacks with weapons deal an extra 1d4 Radiant damage on a hit.""")
+	EnsnaringStrike =   	Spell("Ensnaring Strike ",1,"Conjuration ","1 Bonus Action ","Self ","Concentration, up to 1 minute ","Verbal", definition="""As you hit the target, grasping vines appear on it, and it makes a Strength saving throw. A Large or larger creature has Advantage on this save. On a failed save, the target has the Restrained condition until the spell ends. On a successful save, the vines shrivel away, and the spell ends.
+<br>
+While Restrained, the target takes 1d6 Piercing damage at the start of each of its turns. The target or a creature within reach of it can take an action to make a Strength (Athletics) check against your spell save DC. On a success, the spell ends.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d6 for each spell slot level above 1.""")
+	Entangle =          	Spell("Entangle ",1,"Conjuration ","1 Action ","90 feet ","Concentration, up to 1 minute ","Verbal, Somatic", definition="""Grasping plants sprout from the ground in a 20-foot square within range. For the duration, these plants turn the ground in the area into Difficult Terrain. They disappear when the spell ends.
+<br>
+Each creature (other than you) in the area when you cast the spell must succeed on a Strength saving throw or have the Restrained condition until the spell ends. A Restrained creature can take an action to make a Strength (Athletics) check against your spell save DC. On a success, it frees itself from the grasping plants and is no longer Restrained by them.""")
 	ExpeditiousRetreat =  	Spell("Expeditious Retreat ",
 			level=1,
 			school="Transmutation",
@@ -2406,55 +2409,161 @@ if LEVEL1:
 			definition = """
 			You take the <b>Dash action</b>, and until the spell ends, you can take that action again as a <i>Bonus Action</i>.
 			<br>""")
-	FaerieFire =        	Spell("Faerie Fire ",1,"Evocation ","1 Action ","60 feet ","Concentration, up to 1 minute ","Verbal")
-	FindFamiliar =      	Spell("Find Familiar ",1,"Conjuration ","1 Hour R ","10 feet ","Instantaneous ","Verbal, Somatic, Material")
-	FrostFingers =  		Spell("Frost Fingers ",1,"Evocation ","1 Action ","Self (15-foot cone) ","Instantaneous ","Verbal, Somatic")
-	GiftofAlacrity = 		Spell("Gift of Alacrity ",1,"Divination","1 Minute ","Touch ","8 hours ","Verbal, Somatic")
-	Goodberry =         Spell("Goodberry ",1,"Transmutation ","1 Action ","Touch ","Instantaneous ","Verbal, Somatic, Material")
-	Grease =            Spell("Grease ",1,"Conjuration ","1 Action ","60 feet ","1 minute ","Verbal, Somatic, Material")
-	GuidingBolt = 		Spell("Guiding Bolt ",1,"Evocation ","1 Action ","120 feet ","1 round ","Verbal, Somatic")
-	HailofThorns = 		Spell("Hail of Thorns ",1,"Conjuration ","1 Bonus Action ","Self ","Concentration, up to 1 minute ","Verbal")
-	HellishRebuke =     Spell("Hellish Rebuke ",1,"Evocation ","1 Reaction ","60 feet ","Instantaneous ","Verbal, Somatic")
-	HuntersMark =       Spell("Hunter's Mark ",1,"Divination ","1 Bonus Action ","90 feet ","Concentration, up to 1 hour ","Verbal")
-	Identify =          Spell("Identify",   1,"Divination ","1 Minute R ","Touch ","Instantaneous ","Verbal, Somatic, Material")
-	InflictWounds =     Spell("Inflict Wounds ",1,"Necromancy ","1 Action ","Touch ","Instantaneous ","Verbal, Somatic")
-	JimsMagicMissile = 	Spell("Jim's Magic Missile ",1,"Evocation ","1 Action ","120 feet ","Instantaneous ","Verbal, Somatic, Material")
-	Jump =              Spell("Jump ",1,"Transmutation ","1 Action ","Touch ","1 minute ","Verbal, Somatic, Material")
-	Longstrider = 		Spell("Longstrider ",1,"Transmutation ","1 Action ","Touch ","1 hour ","Verbal, Somatic, Material")
+	FaerieFire =        	Spell("Faerie Fire ",1,"Evocation ","1 Action ","60 feet ","Concentration, up to 1 minute ","Verbal", definition="""Objects in a 20-foot Cube within range are outlined in blue, green, or violet light (your choice). Each creature in the Cube is also outlined if it fails a Dexterity saving throw. For the duration, objects and affected creatures shed Dim Light in a 10-foot radius and can't benefit from the Invisible condition.
+<br>
+Attack rolls against an affected creature or object have Advantage if the attacker can see it.""")
+	FindFamiliar =      	Spell("Find Familiar ",1,"Conjuration ","1 Hour R ","10 feet ","Instantaneous ","Verbal, Somatic, Material", definition="""You gain the service of a familiar, a spirit that takes an animal form you choose: Bat, Cat, Frog, Hawk, Lizard, Octopus, Owl, Rat, Raven, Spider, Weasel, or another Beast that has a challenge rating=[&0]. Appearing in an unoccupied space within range, the familiar has the statistics of the chosen form, though it is a Celestial, Fey, or Fiend (your choice) instead of a Beast. Your familiar acts independently of you, but it obeys your commands.
+<br>
+<b>Telepathic Connection.</b> While your familiar is within 100 feet of you, you can communicate with it telepathically. Additionally, as a Bonus Action, you can see through the familiar's eyes and hear what it hears until the start of your next turn, gaining the benefits of any special senses it has. Finally, when you cast a spell with a range of touch, your familiar can deliver the touch. Your familiar must be within 100 feet of you, and it must take a Reaction to deliver the touch when you cast the spell.
+<br>
+<b>Combat.</b> The familiar is an ally to you and your allies. It rolls its own Initiative and acts on its own turn. A familiar can't attack, but it can take other actions as normal.
+<br>
+<b>Disappearance of the Familiar.</b> When the familiar drops to 0 Hit Points, it disappears. It reappears after you cast this spell again. As a Magic action, you can temporarily dismiss the familiar to a pocket dimension. Alternatively, you can dismiss it forever. As a Magic action while it is temporarily dismissed, you can cause it to reappear in an unoccupied space within 30 feet of you. Whenever the familiar drops to 0 Hit Points or disappears into the pocket dimension, it leaves behind in its space anything it was wearing or carrying.
+<br>
+<b>One Familiar Only.</b> You can't have more than one familiar at a time. If you cast this spell while you have a familiar, you instead cause it to adopt a new eligible form.""")
+	FrostFingers =  		Spell("Frost Fingers ",1,"Evocation ","1 Action ","Self (15-foot cone) ","Instantaneous ","Verbal, Somatic", definition="""Freezing cold blasts from your fingertips in a 15-foot cone. Each creature in that area must make a Constitution saving throw, taking 2d8 cold damage on a failed save, or half as much damage on a successful one.
+<br>
+The cold freezes nonmagical liquids in the area that aren't being worn or carried.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d8 for each slot level above 1st.""")
+	GiftofAlacrity = 		Spell("Gift of Alacrity ",1,"Divination","1 Minute ","Touch ","8 hours ","Verbal, Somatic", definition="""You touch a willing creature. For the duration, the target can add 1d8 to its initiative rolls.""")
+	Goodberry =         Spell("Goodberry ",1,"Transmutation ","1 Action ","Touch ","Instantaneous ","Verbal, Somatic, Material", definition="""Ten berries appear in your hand and are infused with magic for the duration. A creature can take a Bonus Action to eat one berry. Eating a berry restores 1 Hit Point, and the berry provides enough nourishment to sustain a creature for one day.
+<br>
+Uneaten berries disappear when the spell ends.""")
+	Grease =            Spell("Grease ",1,"Conjuration ","1 Action ","60 feet ","1 minute ","Verbal, Somatic, Material", definition="""Nonflammable grease covers the ground in a 10-foot square centered on a point within range and turns it into Difficult Terrain for the duration.
+<br>
+When the grease appears, each creature standing in its area must succeed on a Dexterity saving throw or have the Prone condition. A creature that enters the area or ends its turn there must also succeed on that save or fall Prone.""")
+	GuidingBolt = 		Spell("Guiding Bolt ",1,"Evocation ","1 Action ","120 feet ","1 round ","Verbal, Somatic", definition="""You hurl a bolt of light toward a creature within range. Make a ranged spell attack against the target. On a hit, it takes 4d6 Radiant damage, and the next attack roll made against it before the end of your next turn has Advantage.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d6 for each spell slot level above 1.""")
+	HailofThorns = 		Spell("Hail of Thorns ",1,"Conjuration ","1 Bonus Action ","Self ","Concentration, up to 1 minute ","Verbal", definition="""As you hit the creature, this spell creates a rain of thorns that sprouts from your Ranged weapon or ammunition. The target of the attack and each creature within 5 feet of it make a Dexterity saving throw, taking 1d10 Piercing damage on a failed save or half as much damage on a successful one.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d10 for each spell slot level above 1.""")
+	HellishRebuke =     Spell("Hellish Rebuke ",1,"Evocation ","1 Reaction ","60 feet ","Instantaneous ","Verbal, Somatic", definition="""The creature that damaged you is momentarily surrounded by green flames. It makes a Dexterity saving throw, taking 2d10 Fire damage on a failed save or half as much damage on a successful one.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d10 for each spell slot level above 1.""")
+	HuntersMark =       Spell("Hunter's Mark ",1,"Divination ","1 Bonus Action ","90 feet ","Concentration, up to 1 hour ","Verbal", definition="""You magically mark one creature you can see within range as your quarry. Until the spell ends, you deal an extra 1d6 Force damage to the target whenever you hit it with an attack roll. You also have Advantage on any Wisdom (Perception or Survival) check you make to find it.
+<br>
+If the target drops to 0 Hit Points before this spell ends, you can take a Bonus Action to move the mark to a new creature you can see within range.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> Your Concentration can last longer with a spell slot of level 3-4 (up to 8 hours) or 5+ (up to 24 hours).""")
+	Identify =          Spell("Identify",   1,"Divination ","1 Minute R ","Touch ","Instantaneous ","Verbal, Somatic, Material", definition="""You touch an object throughout the spell's casting. If the object is a magic item or some other magical object, you learn its properties and how to use them, whether it requires Attunement, and how many charges it has, if any. You learn whether any ongoing spells are affecting the item and what they are. If the item was created by a spell, you learn that spell's name.
+<br>
+If you instead touch a creature throughout the casting, you learn which ongoing spells, if any, are currently affecting it.""")
+	InflictWounds =     Spell("Inflict Wounds ",1,"Necromancy ","1 Action ","Touch ","Instantaneous ","Verbal, Somatic", definition="""A creature you touch makes a Constitution saving throw, taking 2d10 Necrotic damage on a failed save or half as much damage on a successful one.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d10 for each spell slot level above 1.""")
+	JimsMagicMissile = 	Spell("Jim's Magic Missile ",1,"Evocation ","1 Action ","120 feet ","Instantaneous ","Verbal, Somatic, Material", definition="""<i>“Jim's magic missile is an ancient and powerful spell, as well as being the name of my band in Wizard Academy.”</i> --Jim Darkmagic
+<br>
+Any apprentice wizard can cast a boring old magic missile. Sure, it always strikes its target. Yawn. Do away with the drudgery of your grandfather's magic with this improved version of the spell, as used by Jim Darkmagic!
+<br>
+You create three twisting, whistling, hypoallergenic, gluten-free darts of magical force. Each dart targets a creature of your choice that you can see within range. Make a ranged spell attack for each missile. On a hit, a missile deals 2d4 force damage to its target.
+<br>
+If the attack roll scores a critical hit, the target of that missile takes 5d4 force damage instead of you rolling damage twice for a critical hit. If the attack roll for any missile is a 1, all missiles miss their targets and blow up in your face, dealing 1 force damage per missile to you.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart, and the royalty component increases by 1 gp, for each slot level above 1st.""")
+	Jump =              Spell("Jump ",1,"Transmutation ","1 Action ","Touch ","1 minute ","Verbal, Somatic, Material", definition="""You touch a willing creature. Once on each of its turns until the spell ends, that creature can jump up to 30 feet by spending 10 feet of movement.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> You can target one additional creature for each spell slot level above 1.""")
+	Longstrider = 		Spell("Longstrider ",1,"Transmutation ","1 Action ","Touch ","1 hour ","Verbal, Somatic, Material", definition="""You touch a creature. The target's Speed increases by 10 feet until the spell ends.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> You can target one additional creature for each spell slot level above 1.""")
 	MagicMissile = 		Spell("Magic Missile ",	1,	"Evocation ",
 		"1 Action",	"120 feet",	"Instantaneous",	"Verbal, Somatic",
 		definition = """You create three glowing darts of magical force. Each dart strikes a creature of your choice that you can see within range. A dart deals <i>1d4 + 1 Force damage</i> to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.
 		<br>
 		<b>Using a Higher-Level Spell Slot.</b> The spell creates one more dart for each spell slot level above 1.""")
-	MagnifyGravity = 	Spell("Magnify Gravity ",1,"Transmutation DG ","1 Action ","60 feet ","1 round ","Verbal, Somatic")
-	RayofSickness = 	Spell("Ray of Sickness ",1,"Necromancy ","1 Action ","60 feet ","Instantaneous ","Verbal, Somatic")
-	SearingSmite =     	Spell("Searing Smite ",1,"Evocation ","1 Bonus Action ","Self ","Concentration, up to 1 minute ","Verbal")
-	Shield =        	Spell("Shield ",1,"Abjuration ","1 Reaction ","Self ","1 round ","Verbal, Somatic")
-	ShieldofFaith = 	Spell("Shield of Faith ",1,"Abjuration ","1 Bonus Action ","60 feet ","Concentration, up to 1 minute ","Verbal, Somatic, Material")
-	Sleep =         	Spell("Sleep ",1,"Enchantment ","1 Action ","90 feet ","1 minute ","Verbal, Somatic, Material")
-	Snare =         	Spell("Snare ",1,"Abjuration ","1 Minute ","Touch ","Until dispelled or triggered ","Verbal, Somatic, Material")
-	CausticBrew =     	Spell("Tasha's Caustic Brew ",1,"Evocation ","1 Action ","Self (30-foot line) ","Concentration, up to 1 minute ","Verbal, Somatic, Material")
-	FloatingDisk =     	Spell("Tenser's Floating Disk ",1,"Conjuration ","1 Action R ","30 feet ","1 hour ","Verbal, Somatic, Material")
-	ThunderousSmite = 	Spell("Thunderous Smite ",1,"Evocation ","1 Bonus Action ","Self ","Concentration, up to 1 minute ","Verbal")
-	Thunderwave =     	Spell("Thunderwave ",1,"Evocation ","1 Action ","Self (15-foot cube) ","Instantaneous ","Verbal, Somatic")
-	ZephyrStrike =     	Spell("Zephyr Strike ",1,"Transmutation ","1 Bonus Action ","Self ","Concentration, up to 1 minute ","Verbal")
-	Alarm =                 Spell("Alarm",  1,"Abjuration","1 Minute (R)" ,"30 feet", "8 Hours","Verbal, Somatic, Material")
-	ArmorofAgathys =        Spell("Armor of Agathys",   1,"Abjuration", "1 Action" ,"Self", "1 hour ", "Verbal, Somatic, Material")
-	Ceremony =              Spell("Ceremony ",        1,"Evocation ","1 Action R ","Touch ","Instantaneous ","Verbal, Somatic, Material")
+	MagnifyGravity = 	Spell("Magnify Gravity ",1,"Transmutation DG ","1 Action ","60 feet ","1 round ","Verbal, Somatic", definition="""The gravity in a 10-foot-radius sphere centered on a point you can see within range increases for a moment. Each creature in the sphere on the turn when you cast the spell must make a Constitution saving throw. On a failed save, a creature takes 2d8 force damage, and its speed is halved until the end of its next turn. On a successful save, a creature takes half as much damage and suffers no reduction to its speed.
+<br>
+Until the start of your next turn, any object that isn't being worn or carried in the sphere requires a successful Strength check against your spell save DC to pick up or move.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d8 for each slot level above 1st.""")
+	RayofSickness = 	Spell("Ray of Sickness ",1,"Necromancy ","1 Action ","60 feet ","Instantaneous ","Verbal, Somatic", definition="""You shoot a greenish ray at a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 2d8 Poison damage and has the Poisoned condition until the end of your next turn.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d8 for each spell slot level above 1.""")
+	SearingSmite =     	Spell("Searing Smite ",1,"Evocation ","1 Bonus Action ","Self ","Concentration, up to 1 minute ","Verbal", definition="""As you hit the target, it takes an extra 1d6 Fire damage from the attack. At the start of each of its turns until the spell ends, the target takes 1d6 Fire damage and then makes a Constitution saving throw. On a failed save, the spell continues. On a successful save, the spell ends.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> All the damage increases by 1d6 for each spell slot level above 1.""")
+	Shield =        	Spell("Shield ",1,"Abjuration ","1 Reaction ","Self ","1 round ","Verbal, Somatic", definition="""An imperceptible barrier of magical force protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from Magic Missile.""")
+	ShieldofFaith = 	Spell("Shield of Faith ",1,"Abjuration ","1 Bonus Action ","60 feet ","Concentration, up to 1 minute ","Verbal, Somatic, Material", definition="""A shimmering field surrounds a creature of your choice within range, granting it a +2 bonus to AC for the duration.""")
+	Sleep =         	Spell("Sleep ",1,"Enchantment ","1 Action ","90 feet ","1 minute ","Verbal, Somatic, Material", definition="""Each creature of your choice in a 5-foot-radius Sphere centered on a point within range must succeed on a Wisdom saving throw or have the Incapacitated condition until the end of its next turn, at which point it must repeat the save. If the target fails the second save, the target has the Unconscious condition for the duration. The spell ends on a target if it takes damage or someone within 5 feet of it takes an action to shake it out of the spell's effect.
+<br>
+Creatures that don't sleep, such as elves, or that have Immunity to the Exhaustion condition automatically succeed on saves against this spell.""")
+	Snare =         	Spell("Snare ",1,"Abjuration ","1 Minute ","Touch ","Until dispelled or triggered ","Verbal, Somatic, Material", definition="""As you cast this spell, you use the rope to create a circle with a 5-foot radius on the ground or the floor. When you finish casting, the rope disappears and the circle becomes a magic trap.
+<br>
+This trap is nearly invisible, requiring a successful Intelligence (Investigation) check against your spell save DC to be discerned.
+<br>
+The trap triggers when a Small, Medium, or Large creature moves onto the ground or the floor in the spell's radius. That creature must succeed on a Dexterity saving throw or be magically hoisted into the air, leaving it hanging upside down 3 feet above the ground or the floor. The creature is restrained there until the spell ends.
+<br>
+A restrained creature can make a Dexterity saving throw at the end of each of its turns, ending the effect on itself on a success. Alternatively, the creature or someone else who can reach it can use an action to make an Intelligence (Arcana) check against your spell save DC. On a success, the restrained effect ends.
+<br>
+After the trap is triggered, the spell ends when no creature is restrained by it.""")
+	CausticBrew =     	Spell("Tasha's Caustic Brew ",1,"Evocation ","1 Action ","Self (30-foot line) ","Concentration, up to 1 minute ","Verbal, Somatic, Material", definition="""A stream of acid emanates from you in a line 30 feet long and 5 feet wide in a direction you choose. Each creature in the line must succeed on a Dexterity saving throw or be covered in acid for the spell's duration or until a creature uses its action to scrape or wash the acid off itself or another creature. A creature covered in the acid takes 2d4 acid damage at start of each of its turns.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 2d4 for each slot level above 1st.""")
+	FloatingDisk =     	Spell("Tenser's Floating Disk ",1,"Conjuration ","1 Action R ","30 feet ","1 hour ","Verbal, Somatic, Material", definition="""This spell creates a circular, horizontal plane of force, 3 feet in diameter and 1 inch thick, that floats 3 feet above the ground in an unoccupied space of your choice that you can see within range. The disk remains for the duration and can hold up to 500 pounds. If more weight is placed on it, the spell ends, and everything on the disk falls to the ground.
+<br>
+The disk is immobile while you are within 20 feet of it. If you move more than 20 feet away from it, the disk follows you so that it remains within 20 feet of you. It can move across uneven terrain, up or down stairs, slopes and the like, but it can't cross an elevation change of 10 feet or more. For example, the disk can't move across a 10-foot-deep pit, nor could it leave such a pit if it was created at the bottom.
+<br>
+If you move more than 100 feet from the disk (typically because it can't move around an obstacle to follow you), the spell ends.""")
+	ThunderousSmite = 	Spell("Thunderous Smite ",1,"Evocation ","1 Bonus Action ","Self ","Concentration, up to 1 minute ","Verbal", definition="""Your strike rings with thunder that is audible within 300 feet of you, and the target takes an extra 2d6 Thunder damage from the attack. Additionally, if the target is a creature, it must succeed on a Strength saving throw or be pushed 10 feet away from you and have the Prone condition.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d6 for each spell slot level above 1.""")
+	Thunderwave =     	Spell("Thunderwave ",1,"Evocation ","1 Action ","Self (15-foot cube) ","Instantaneous ","Verbal, Somatic", definition="""You unleash a wave of thunderous energy. Each creature in a 15-foot Cube originating from you makes a Constitution saving throw. On a failed save, a creature takes 2d8 Thunder damage and is pushed 10 feet away from you. On a successful save, a creature takes half as much damage only.
+<br>
+In addition, unsecured objects that are entirely within the Cube are pushed 10 feet away from you, and a thunderous boom is audible within 300 feet.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d8 for each spell slot level above 1.""")
+	ZephyrStrike =     	Spell("Zephyr Strike ",1,"Transmutation ","1 Bonus Action ","Self ","Concentration, up to 1 minute ","Verbal", definition="""You move like the wind. Until the spell ends, your movement doesn't provoke opportunity attacks.
+<br>
+Once before the spell ends, you can give yourself advantage on one weapon attack roll on your turn. That attack deals an extra 1d8 force damage on a hit. Whether you hit or miss, your walking speed increases by 30 feet until the end of that turn.""")
+	Alarm =                 Spell("Alarm",  1,"Abjuration","1 Minute (R)" ,"30 feet", "8 Hours","Verbal, Somatic, Material", definition="""You set an alarm against intrusion. Choose a door, a window, or an area within range that is no larger than a 20-foot Cube. Until the spell ends, an alarm alerts you whenever a creature touches or enters the warded area. When you cast the spell, you can designate creatures that won't set off the alarm. You also choose whether the alarm is audible or mental:
+<br>
+<b>Audible Alarm.</b> The alarm produces the sound of a handbell for 10 seconds within 60 feet of the warded area.
+<br>
+<b>Mental Alarm.</b> You are alerted by a mental ping if you are within 1 mile of the warded area. This ping awakens you if you're asleep.""")
+	ArmorofAgathys =        Spell("Armor of Agathys",   1,"Abjuration", "1 Action" ,"Self", "1 hour ", "Verbal, Somatic, Material", definition="""Protective magical frost surrounds you. You gain 5 Temporary Hit Points. If a creature hits you with a melee attack roll before the spell ends, the creature takes 5 Cold damage. The spell ends early if you have no Temporary Hit Points.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The Temporary Hit Points and the Cold damage both increase by 5 for each spell slot level above 1.""")
+	Ceremony =              Spell("Ceremony ",        1,"Evocation ","1 Action R ","Touch ","Instantaneous ","Verbal, Somatic, Material", definition="""You perform a special religious ceremony that is infused with magic. When you cast the spell, choose one of the following rites, the target of which must be within 10 feet of you throughout the casting.
+<br>
+<b>Atonement.</b> You touch one willing creature whose alignment has changed, and you make a DC 20 Wisdom (Insight) check. On a successful check, you restore the target to its original alignment.
+<br>
+<b>Bless Water.</b> You touch one vial of water and cause it to become holy water.
+<br>
+<b>Coming of Age.</b> You touch one humanoid who is a young adult. For the next 24 hours, whenever the target makes an ability check, it can roll a d4 and add the number rolled to the ability check. A creature can benefit from this rite only once.
+<br>
+<b>Dedication.</b> You touch one humanoid who wishes to be dedicated to your god's service. For the next 24 hours, whenever the target makes a saving throw, it can roll a d4 and add the number rolled to the save. A creature can benefit from this rite only once.
+<br>
+<b>Funeral Rite.</b> You touch one corpse, and for the next 7 days, the target can't become undead by any means short of a wish spell.
+<br>
+<b>Wedding.</b> You touch adult humanoids willing to be bonded together in marriage. For the next 7 days, each target gains a +2 bonus to AC while they are within 30 feet of each other. A creature can benefit from this rite again only if widowed.""")
 
-	AbsorbElements =        	Spell("Absorb Element",	1,"Abjuration","1 Reaction","Self","1 round", "Somatic")
-	BeastBond =             	Spell("Beast Bond",   	1,"Divination ","1 Action ","Touch ","Concentration, up to 1 minute ","Verbal, Somatic, Material")
-	Catapult =              	Spell("Catapult ",   	1,"Transmutation ","1 Action ","60 feet ","Instantaneous ","Somatic")
+	AbsorbElements =        	Spell("Absorb Element",	1,"Abjuration","1 Reaction","Self","1 round", "Somatic", definition="""The spell captures some of the incoming energy, lessening its effect on you and storing it for your next melee attack. You have resistance to the triggering damage type until the start of your next turn. Also, the first time you hit with a melee attack on your next turn, the target takes an extra 1d6 damage of the triggering type, and the spell ends.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 2nd level or higher, the extra damage increases by 1d6 for each slot level above 1st.""")
+	BeastBond =             	Spell("Beast Bond",   	1,"Divination ","1 Action ","Touch ","Concentration, up to 1 minute ","Verbal, Somatic, Material", definition="""You establish a telepathic link with one beast you touch that is friendly to you or charmed by you. The spell fails if the beast's Intelligence score is 4 or higher. Until the spell ends, the link is active while you and the beast are within line of sight of each other. Through the link, the beast can understand your telepathic messages to it, and it can telepathically communicate simple emotions and concepts back to you. While the link is active, the beast gains advantage on attack rolls against any creature within 5 feet of you that you can see.""")
+	Catapult =              	Spell("Catapult ",   	1,"Transmutation ","1 Action ","60 feet ","Instantaneous ","Somatic", definition="""Choose one object weighing 1 to 5 pounds within range that isn't being worn or carried. The object flies in a straight line up to 90 feet in a direction you choose before falling to the ground, stopping early if it impacts against a solid surface. If the object would strike a creature, that creature must make a Dexterity saving throw. On a failed save, the object strikes the target and stops moving. When the object strikes something, the object and what it strikes each take 3d8 bludgeoning damage.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 2nd level or higher, the maximum weight of objects that you can target with this spell increases by 5 pounds, and the damage increases by 1d8, for each slot level above 1st.""")
 	CharmPerson =               Spell("Charm Person",	1,	"Enchantment",
 		"1 Action",	"30 feet",	"1 hour",	"Verbal, Somatic",	"",
 		definition = """One Humanoid you can see within range makes a <i>Wisdom saving throw</i>. It does so with <i>Advantage</i> if you or your allies are fighting it. On a failed save, the target has the <i>Charmed condition</i> until the spell ends or until you or your allies damage it. The Charmed creature is <i>Friendly</i> to you. When the spell ends, the target knows it was Charmed by you.
 <br>
 <b>Using a Higher-Level Spell Slot.</b> You can target one additional creature for each spell slot level above 1."""
 		)
-	CauseFear =             	Spell("Cause Fear ",	1,"Necromancy ","1 Action ","60 feet ","Concentration, up to 1 minute ","Verbal, Somatic")
-	EarthTremor =       		Spell("Earth Tremor",	1,"Evocation ","1 Action ","Self (10-foot radius) ","Instantaneous ","Verbal, Somatic")
-	Bless =                 	Spell("Bless",         	1,"Enchantment ","1 Action ","30 feet ","Concentration, up to 1 minute ","Verbal, Somatic, Material")
-	Sanctuary =     			Spell("Sanctuary",		1,"Abjuration ","1 Bonus Action ","30 feet ","1 minute ","Verbal, Somatic, Material")
+	CauseFear =             	Spell("Cause Fear ",	1,"Necromancy ","1 Action ","60 feet ","Concentration, up to 1 minute ","Verbal, Somatic", definition="""You awaken the sense of mortality in one creature you can see within range. A construct or an undead is immune to this effect. The target must succeed on a Wisdom saving throw or become frightened of you until the spell ends. The frightened target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.""")
+	EarthTremor =       		Spell("Earth Tremor",	1,"Evocation ","1 Action ","Self (10-foot radius) ","Instantaneous ","Verbal, Somatic", definition="""You cause a tremor in the ground within range. Each creature other than you in that area must make a Dexterity saving throw. On a failed save, a creature takes 1d6 bludgeoning damage and is knocked prone. If the ground in that area is loose earth or stone, it becomes 3 until cleared, with each 5-foot-diameter portion requiring at least 1 minute to clear by hand.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.""")
+	Bless =                 	Spell("Bless",         	1,"Enchantment ","1 Action ","30 feet ","Concentration, up to 1 minute ","Verbal, Somatic, Material", definition="""You bless up to three creatures within range. Whenever a target makes an attack roll or a saving throw before the spell ends, the target adds 1d4 to the attack roll or save.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> You can target one additional creature for each spell slot level above 1.""")
+	Sanctuary =     			Spell("Sanctuary",		1,"Abjuration ","1 Bonus Action ","30 feet ","1 minute ","Verbal, Somatic, Material", definition="""You ward a creature within range. Until the spell ends, any creature who targets the warded creature with an attack roll or a damaging spell must succeed on a Wisdom saving throw or either choose a new target or lose the attack or spell. This spell doesn't protect the warded creature from areas of effect.
+<br>
+The spell ends if the warded creature makes an attack roll, casts a spell, or deals damage.""")
 	BurningHands =          	Spell("Burning Hands",
 		1,	"Evocation",	"1 Action",	"Self (15-foot cone)",	"Instantaneous",
 		"Verbal, Somatic", definition = """A thin sheet of flames shoots forth from you. Each creature in a <i>15-foot Cone</i> makes a <i>Dexterity saving throw</i>, taking <i>3d6 Fire damage</i> on a failed save or half as much damage on a successful one.
@@ -2462,8 +2571,32 @@ if LEVEL1:
 Flammable objects in the Cone that aren't being worn or carried start burning.
 <br>
 <b>Using a Higher-Level Spell Slot.</b> The damage increases by <i>1d6</i> for each spell slot level above 1. """)
-	CauseFear =             	Spell("Cause Fear ",1,"Necromancy ","1 Action ","60 feet ","Concentration, up to 1 minute ","Verbal, Somatic")
-	ChaosBolt =             	Spell("Chaos Bolt ",	1,"Evocation ","1 Action ","120 feet ","Instantaneous ","Verbal, Somatic")
+	CauseFear =             	Spell("Cause Fear ",1,"Necromancy ","1 Action ","60 feet ","Concentration, up to 1 minute ","Verbal, Somatic", definition="""You awaken the sense of mortality in one creature you can see within range. A construct or an undead is immune to this effect. The target must succeed on a Wisdom saving throw or become frightened of you until the spell ends. The frightened target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.""")
+	ChaosBolt =             	Spell("Chaos Bolt ",	1,"Evocation ","1 Action ","120 feet ","Instantaneous ","Verbal, Somatic", definition="""You hurl an undulating, warbling mass of chaotic energy at one creature in range. Make a ranged spell attack against the target. On a hit, the target takes 2d8 + 1d6 damage. Choose one of the d8s. The number rolled on that die determines the attack's damage type, as shown below.
+<br>
+1: Acid
+<br>
+2: Cold
+<br>
+3: Fire
+<br>
+4: Force
+<br>
+5: Lightning
+<br>
+6: Poison
+<br>
+7: Psychic
+<br>
+8: Thunder
+<br>
+If you roll the same number on both d8s, the chaotic energy leaps from the target to a different creature of your choice within 30 feet of it. Make a new attack roll against the new target, and make a new damage roll, which could cause the chaotic energy to leap again.
+<br>
+A creature can be targeted only once by each casting of this spell.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 2nd level or higher, each target takes 1d6 extra damage of the type rolled for each slot level above 1st.""")
 	ChromaticOrb =          	Spell("Chromatic Orb ",
 		level=1,
 		school="Evocation",
@@ -2476,8 +2609,14 @@ Flammable objects in the Cone that aren't being worn or carried start burning.
 		If you roll the same number on two or more of the <b>d8</b>s, the orb leaps to a different target of your choice within <i>30 feet</i> of the target. Make an <b>attack roll</b> against the new target, and make a new <b>damage roll</b>. The orb can't leap again unless you cast the spell with a level 2+ spell slot. <br>
 		<b>Using a Higher-Level Spell Slot.</b> The damage increases by <i>1d8</i> for each spell slot level above 1. The orb can leap a maximum number of times equal to the level of the slot expended, and a creature can be targeted only once by each casting of this spell."""
 		)
-	ComprehendLanguages =       Spell("Comprehend Languages ",1,"Divination ","1 Action R ","Self ","1 hour ","Verbal, Somatic, Material")
-	CreateorDestroyWater =      Spell("Create or Destroy Water ",1,"Transmutation ","1 Action ","30 feet ","Instantaneous ","Verbal, Somatic, Material")
+	ComprehendLanguages =       Spell("Comprehend Languages ",1,"Divination ","1 Action R ","Self ","1 hour ","Verbal, Somatic, Material", definition="""For the duration, you understand the literal meaning of any language that you hear or see signed. You also understand any written language that you see, but you must be touching the surface on which the words are written. It takes about 1 minute to read one page of text. This spell doesn't decode symbols or secret messages.""")
+	CreateorDestroyWater =      Spell("Create or Destroy Water ",1,"Transmutation ","1 Action ","30 feet ","Instantaneous ","Verbal, Somatic, Material", definition="""You do one of the following:
+<br>
+<b>Create Water.</b> You create up to 10 gallons of clean water within range in an open container. Alternatively, the water falls as rain in a 30-foot Cube within range, extinguishing exposed flames there.
+<br>
+<b>Destroy Water.</b> You destroy up to 10 gallons of water in an open container within range. Alternatively, you destroy fog in a 30-foot Cube within range.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> You create or destroy 10 additional gallons of water, or the size of the Cube increases by 5 feet, for each spell slot level above 1.""")
 	DetectMagic =               Spell("Detect Magic",	1, 	"Divination",
 		"1 Action or Ritual",	"Self",	"up to 10 minutes",	"Verbal, Somatic",
 		"Concentration",
@@ -2485,53 +2624,169 @@ Flammable objects in the Cone that aren't being worn or carried start burning.
 The spell is blocked by 1 foot of stone, dirt, or wood; 1 inch of metal; or a thin sheet of lead.
 """
 		)
-	DissonantWhispers =     	Spell("Dissonant Whispers ",1,"Enchantment ","1 Action ","60 feet ","Instantaneous ","Verbal")
-	DivineFavor =         	Spell("Divine Favor ",1,"Evocation ","1 Bonus Action ","Self ","Concentration, up to 1 minute ","Verbal, Somatic")
-	EarthTremor =       Spell("Earth Tremor ",1,"Evocation ","1 Action ","Self (10-foot radius) ","Instantaneous ","Verbal, Somatic")
-	EnsnaringStrike =   Spell("Ensnaring Strike ",1,"Conjuration ","1 Bonus Action ","Self ","Concentration, up to 1 minute ","Verbal")
-	Entangle =          Spell("Entangle ",1,"Conjuration ","1 Action ","90 feet ","Concentration, up to 1 minute ","Verbal, Somatic")
-	FaerieFire =        Spell("Faerie Fire ",1,"Evocation ","1 Action ","60 feet ","Concentration, up to 1 minute ","Verbal")
-	FindFamiliar =      Spell("Find Familiar ",1,"Conjuration ","1 Hour R ","10 feet ","Instantaneous ","Verbal, Somatic, Material")
-	FrostFingers =         Spell("Frost Fingers ",1,"Evocation ","1 Action ","Self (15-foot cone) ","Instantaneous ","Verbal, Somatic")
+	DissonantWhispers =     	Spell("Dissonant Whispers ",1,"Enchantment ","1 Action ","60 feet ","Instantaneous ","Verbal", definition="""One creature of your choice that you can see within range hears a discordant melody in its mind. The target makes a Wisdom saving throw. On a failed save, it takes 3d6 Psychic damage and must immediately use its Reaction, if available, to move as far away from you as it can, using the safest route. On a successful save, the target takes half as much damage only.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d6 for each spell slot level above 1.""")
+	DivineFavor =         	Spell("Divine Favor ",1,"Evocation ","1 Bonus Action ","Self ","Concentration, up to 1 minute ","Verbal, Somatic", definition="""Until the spell ends, your attacks with weapons deal an extra 1d4 Radiant damage on a hit.""")
+	EarthTremor =       Spell("Earth Tremor ",1,"Evocation ","1 Action ","Self (10-foot radius) ","Instantaneous ","Verbal, Somatic", definition="""You cause a tremor in the ground within range. Each creature other than you in that area must make a Dexterity saving throw. On a failed save, a creature takes 1d6 bludgeoning damage and is knocked prone. If the ground in that area is loose earth or stone, it becomes 3 until cleared, with each 5-foot-diameter portion requiring at least 1 minute to clear by hand.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.""")
+	EnsnaringStrike =   Spell("Ensnaring Strike ",1,"Conjuration ","1 Bonus Action ","Self ","Concentration, up to 1 minute ","Verbal", definition="""As you hit the target, grasping vines appear on it, and it makes a Strength saving throw. A Large or larger creature has Advantage on this save. On a failed save, the target has the Restrained condition until the spell ends. On a successful save, the vines shrivel away, and the spell ends.
+<br>
+While Restrained, the target takes 1d6 Piercing damage at the start of each of its turns. The target or a creature within reach of it can take an action to make a Strength (Athletics) check against your spell save DC. On a success, the spell ends.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d6 for each spell slot level above 1.""")
+	Entangle =          Spell("Entangle ",1,"Conjuration ","1 Action ","90 feet ","Concentration, up to 1 minute ","Verbal, Somatic", definition="""Grasping plants sprout from the ground in a 20-foot square within range. For the duration, these plants turn the ground in the area into Difficult Terrain. They disappear when the spell ends.
+<br>
+Each creature (other than you) in the area when you cast the spell must succeed on a Strength saving throw or have the Restrained condition until the spell ends. A Restrained creature can take an action to make a Strength (Athletics) check against your spell save DC. On a success, it frees itself from the grasping plants and is no longer Restrained by them.""")
+	FaerieFire =        Spell("Faerie Fire ",1,"Evocation ","1 Action ","60 feet ","Concentration, up to 1 minute ","Verbal", definition="""Objects in a 20-foot Cube within range are outlined in blue, green, or violet light (your choice). Each creature in the Cube is also outlined if it fails a Dexterity saving throw. For the duration, objects and affected creatures shed Dim Light in a 10-foot radius and can't benefit from the Invisible condition.
+<br>
+Attack rolls against an affected creature or object have Advantage if the attacker can see it.""")
+	FindFamiliar =      Spell("Find Familiar ",1,"Conjuration ","1 Hour R ","10 feet ","Instantaneous ","Verbal, Somatic, Material", definition="""You gain the service of a familiar, a spirit that takes an animal form you choose: Bat, Cat, Frog, Hawk, Lizard, Octopus, Owl, Rat, Raven, Spider, Weasel, or another Beast that has a challenge rating=[&0]. Appearing in an unoccupied space within range, the familiar has the statistics of the chosen form, though it is a Celestial, Fey, or Fiend (your choice) instead of a Beast. Your familiar acts independently of you, but it obeys your commands.
+<br>
+<b>Telepathic Connection.</b> While your familiar is within 100 feet of you, you can communicate with it telepathically. Additionally, as a Bonus Action, you can see through the familiar's eyes and hear what it hears until the start of your next turn, gaining the benefits of any special senses it has. Finally, when you cast a spell with a range of touch, your familiar can deliver the touch. Your familiar must be within 100 feet of you, and it must take a Reaction to deliver the touch when you cast the spell.
+<br>
+<b>Combat.</b> The familiar is an ally to you and your allies. It rolls its own Initiative and acts on its own turn. A familiar can't attack, but it can take other actions as normal.
+<br>
+<b>Disappearance of the Familiar.</b> When the familiar drops to 0 Hit Points, it disappears. It reappears after you cast this spell again. As a Magic action, you can temporarily dismiss the familiar to a pocket dimension. Alternatively, you can dismiss it forever. As a Magic action while it is temporarily dismissed, you can cause it to reappear in an unoccupied space within 30 feet of you. Whenever the familiar drops to 0 Hit Points or disappears into the pocket dimension, it leaves behind in its space anything it was wearing or carrying.
+<br>
+<b>One Familiar Only.</b> You can't have more than one familiar at a time. If you cast this spell while you have a familiar, you instead cause it to adopt a new eligible form.""")
+	FrostFingers =         Spell("Frost Fingers ",1,"Evocation ","1 Action ","Self (15-foot cone) ","Instantaneous ","Verbal, Somatic", definition="""Freezing cold blasts from your fingertips in a 15-foot cone. Each creature in that area must make a Constitution saving throw, taking 2d8 cold damage on a failed save, or half as much damage on a successful one.
+<br>
+The cold freezes nonmagical liquids in the area that aren't being worn or carried.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d8 for each slot level above 1st.""")
 	GiftofAlacrity = 	Spell("Gift of Alacrity ",
 		1,	"Divination",	"1 Minute ",	"Touch ",
-		"8 hours ",	"Verbal, Somatic")
-	Goodberry =         Spell("Goodberry ",1,"Transmutation ","1 Action ","Touch ","Instantaneous ","Verbal, Somatic, Material")
-	Grease =            Spell("Grease ",1,"Conjuration ","1 Action ","60 feet ","1 minute ","Verbal, Somatic, Material")
-	GuidingBolt = 		Spell("Guiding Bolt ",1,"Evocation ","1 Action ","120 feet ","1 round ","Verbal, Somatic")
-	HailofThorns = 		Spell("Hail of Thorns ",1,"Conjuration ","1 Bonus Action ","Self ","Concentration, up to 1 minute ","Verbal")
-	HellishRebuke =     Spell("Hellish Rebuke ",1,"Evocation ","1 Reaction ","60 feet ","Instantaneous ","Verbal, Somatic")
-	HuntersMark =       Spell("Hunter's Mark ",	1,	"Divination ","1 Bonus Action ","90 feet ","Concentration, up to 1 hour ","Verbal")
-	Identify =          Spell("Identify",   1,	"Divination ","1 Minute R ","Touch ","Instantaneous ","Verbal, Somatic, Material")
-	InflictWounds =     Spell("Inflict Wounds ",1,"Necromancy ","1 Action ","Touch ","Instantaneous ","Verbal, Somatic")
-	JimsMagicMissile = 	Spell("Jim's Magic Missile ",1,"Evocation ","1 Action ","120 feet ","Instantaneous ","Verbal, Somatic, Material")
-	Jump =              Spell("Jump ",1,"Transmutation ","1 Action ","Touch ","1 minute ","Verbal, Somatic, Material")
-	Longstrider = 		Spell("Longstrider ",1,"Transmutation ","1 Action ","Touch ","1 hour ","Verbal, Somatic, Material")
-	MageArmor =         Spell("Mage Armor ",1,"Abjuration ","1 Action ","Touch ","8 hours ","Verbal, Somatic, Material")
-	MagnifyGravity = 	Spell("Magnify Gravity ",1,"Transmutation DG ","1 Action ","60 feet ","1 round ","Verbal, Somatic")
-	RayofSickness = 	Spell("Ray of Sickness ",1,"Necromancy ","1 Action ","60 feet ","Instantaneous ","Verbal, Somatic")
-	Sanctuary =     	Spell("Sanctuary ",1,"Abjuration ","1 Bonus Action ","30 feet ","1 minute ","Verbal, Somatic, Material")
-	SearingSmite =     	Spell("Searing Smite ",1,"Evocation ","1 Bonus Action ","Self ","Concentration, up to 1 minute ","Verbal")
+		"8 hours ",	"Verbal, Somatic", definition="""You touch a willing creature. For the duration, the target can add 1d8 to its initiative rolls.""")
+	Goodberry =         Spell("Goodberry ",1,"Transmutation ","1 Action ","Touch ","Instantaneous ","Verbal, Somatic, Material", definition="""Ten berries appear in your hand and are infused with magic for the duration. A creature can take a Bonus Action to eat one berry. Eating a berry restores 1 Hit Point, and the berry provides enough nourishment to sustain a creature for one day.
+<br>
+Uneaten berries disappear when the spell ends.""")
+	Grease =            Spell("Grease ",1,"Conjuration ","1 Action ","60 feet ","1 minute ","Verbal, Somatic, Material", definition="""Nonflammable grease covers the ground in a 10-foot square centered on a point within range and turns it into Difficult Terrain for the duration.
+<br>
+When the grease appears, each creature standing in its area must succeed on a Dexterity saving throw or have the Prone condition. A creature that enters the area or ends its turn there must also succeed on that save or fall Prone.""")
+	GuidingBolt = 		Spell("Guiding Bolt ",1,"Evocation ","1 Action ","120 feet ","1 round ","Verbal, Somatic", definition="""You hurl a bolt of light toward a creature within range. Make a ranged spell attack against the target. On a hit, it takes 4d6 Radiant damage, and the next attack roll made against it before the end of your next turn has Advantage.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d6 for each spell slot level above 1.""")
+	HailofThorns = 		Spell("Hail of Thorns ",1,"Conjuration ","1 Bonus Action ","Self ","Concentration, up to 1 minute ","Verbal", definition="""As you hit the creature, this spell creates a rain of thorns that sprouts from your Ranged weapon or ammunition. The target of the attack and each creature within 5 feet of it make a Dexterity saving throw, taking 1d10 Piercing damage on a failed save or half as much damage on a successful one.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d10 for each spell slot level above 1.""")
+	HellishRebuke =     Spell("Hellish Rebuke ",1,"Evocation ","1 Reaction ","60 feet ","Instantaneous ","Verbal, Somatic", definition="""The creature that damaged you is momentarily surrounded by green flames. It makes a Dexterity saving throw, taking 2d10 Fire damage on a failed save or half as much damage on a successful one.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d10 for each spell slot level above 1.""")
+	HuntersMark =       Spell("Hunter's Mark ",	1,	"Divination ","1 Bonus Action ","90 feet ","Concentration, up to 1 hour ","Verbal", definition="""You magically mark one creature you can see within range as your quarry. Until the spell ends, you deal an extra 1d6 Force damage to the target whenever you hit it with an attack roll. You also have Advantage on any Wisdom (Perception or Survival) check you make to find it.
+<br>
+If the target drops to 0 Hit Points before this spell ends, you can take a Bonus Action to move the mark to a new creature you can see within range.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> Your Concentration can last longer with a spell slot of level 3-4 (up to 8 hours) or 5+ (up to 24 hours).""")
+	Identify =          Spell("Identify",   1,	"Divination ","1 Minute R ","Touch ","Instantaneous ","Verbal, Somatic, Material", definition="""You touch an object throughout the spell's casting. If the object is a magic item or some other magical object, you learn its properties and how to use them, whether it requires Attunement, and how many charges it has, if any. You learn whether any ongoing spells are affecting the item and what they are. If the item was created by a spell, you learn that spell's name.
+<br>
+If you instead touch a creature throughout the casting, you learn which ongoing spells, if any, are currently affecting it.""")
+	InflictWounds =     Spell("Inflict Wounds ",1,"Necromancy ","1 Action ","Touch ","Instantaneous ","Verbal, Somatic", definition="""A creature you touch makes a Constitution saving throw, taking 2d10 Necrotic damage on a failed save or half as much damage on a successful one.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d10 for each spell slot level above 1.""")
+	JimsMagicMissile = 	Spell("Jim's Magic Missile ",1,"Evocation ","1 Action ","120 feet ","Instantaneous ","Verbal, Somatic, Material", definition="""<i>“Jim's magic missile is an ancient and powerful spell, as well as being the name of my band in Wizard Academy.”</i> --Jim Darkmagic
+<br>
+Any apprentice wizard can cast a boring old magic missile. Sure, it always strikes its target. Yawn. Do away with the drudgery of your grandfather's magic with this improved version of the spell, as used by Jim Darkmagic!
+<br>
+You create three twisting, whistling, hypoallergenic, gluten-free darts of magical force. Each dart targets a creature of your choice that you can see within range. Make a ranged spell attack for each missile. On a hit, a missile deals 2d4 force damage to its target.
+<br>
+If the attack roll scores a critical hit, the target of that missile takes 5d4 force damage instead of you rolling damage twice for a critical hit. If the attack roll for any missile is a 1, all missiles miss their targets and blow up in your face, dealing 1 force damage per missile to you.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart, and the royalty component increases by 1 gp, for each slot level above 1st.""")
+	Jump =              Spell("Jump ",1,"Transmutation ","1 Action ","Touch ","1 minute ","Verbal, Somatic, Material", definition="""You touch a willing creature. Once on each of its turns until the spell ends, that creature can jump up to 30 feet by spending 10 feet of movement.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> You can target one additional creature for each spell slot level above 1.""")
+	Longstrider = 		Spell("Longstrider ",1,"Transmutation ","1 Action ","Touch ","1 hour ","Verbal, Somatic, Material", definition="""You touch a creature. The target's Speed increases by 10 feet until the spell ends.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> You can target one additional creature for each spell slot level above 1.""")
+	MageArmor =         Spell("Mage Armor ",1,"Abjuration ","1 Action ","Touch ","8 hours ","Verbal, Somatic, Material", definition="""You touch a willing creature who isn't wearing armor. Until the spell ends, the target's base AC becomes 13 plus its Dexterity modifier. The spell ends early if the target dons armor.""")
+	MagnifyGravity = 	Spell("Magnify Gravity ",1,"Transmutation DG ","1 Action ","60 feet ","1 round ","Verbal, Somatic", definition="""The gravity in a 10-foot-radius sphere centered on a point you can see within range increases for a moment. Each creature in the sphere on the turn when you cast the spell must make a Constitution saving throw. On a failed save, a creature takes 2d8 force damage, and its speed is halved until the end of its next turn. On a successful save, a creature takes half as much damage and suffers no reduction to its speed.
+<br>
+Until the start of your next turn, any object that isn't being worn or carried in the sphere requires a successful Strength check against your spell save DC to pick up or move.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d8 for each slot level above 1st.""")
+	RayofSickness = 	Spell("Ray of Sickness ",1,"Necromancy ","1 Action ","60 feet ","Instantaneous ","Verbal, Somatic", definition="""You shoot a greenish ray at a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 2d8 Poison damage and has the Poisoned condition until the end of your next turn.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d8 for each spell slot level above 1.""")
+	Sanctuary =     	Spell("Sanctuary ",1,"Abjuration ","1 Bonus Action ","30 feet ","1 minute ","Verbal, Somatic, Material", definition="""You ward a creature within range. Until the spell ends, any creature who targets the warded creature with an attack roll or a damaging spell must succeed on a Wisdom saving throw or either choose a new target or lose the attack or spell. This spell doesn't protect the warded creature from areas of effect.
+<br>
+The spell ends if the warded creature makes an attack roll, casts a spell, or deals damage.""")
+	SearingSmite =     	Spell("Searing Smite ",1,"Evocation ","1 Bonus Action ","Self ","Concentration, up to 1 minute ","Verbal", definition="""As you hit the target, it takes an extra 1d6 Fire damage from the attack. At the start of each of its turns until the spell ends, the target takes 1d6 Fire damage and then makes a Constitution saving throw. On a failed save, the spell continues. On a successful save, the spell ends.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> All the damage increases by 1d6 for each spell slot level above 1.""")
 	Shield =        	Spell("Shield ",
-		1,"Abjuration ","1 Reaction ","Self ","1 round ","Verbal, Somatic")
-	ShieldofFaith = 	Spell("Shield of Faith ",1,"Abjuration ","1 Bonus Action ","60 feet ","Concentration, up to 1 minute ","Verbal, Somatic, Material")
-	Sleep =         	Spell("Sleep ",1,"Enchantment ","1 Action ","90 feet ","1 minute ","Verbal, Somatic, Material")
-	Snare =         	Spell("Snare ",1,"Abjuration ","1 Minute ","Touch ","Until dispelled or triggered ","Verbal, Somatic, Material")
-	CausticBrew =     	Spell("Tasha's Caustic Brew ",1,"Evocation ","1 Action ","Self (30-foot line) ","Concentration, up to 1 minute ","Verbal, Somatic, Material")
-	FloatingDisk =     	Spell("Tenser's Floating Disk ",1,"Conjuration ","1 Action R ","30 feet ","1 hour ","Verbal, Somatic, Material")
-	ThunderousSmite = 	Spell("Thunderous Smite ",1,"Evocation ","1 Bonus Action ","Self ","Concentration, up to 1 minute ","Verbal")
-	Thunderwave =     	Spell("Thunderwave ",1,"Evocation ","1 Action ","Self (15-foot cube) ","Instantaneous ","Verbal, Somatic")
-	ZephyrStrike =     	Spell("Zephyr Strike ",1,"Transmutation ","1 Bonus Action ","Self ","Concentration, up to 1 minute ","Verbal")
-	Alarm = 			Spell("Alarm",  1,"Abjuration","1 Minute (R)" ,"30 feet", "8 Hours","Verbal, Somatic, Material")
-	ArmorofAgathys = 	Spell("Armor of Agathys",   1,"Abjuration", "1 Action" ,"Self", "1 hour ", "Verbal, Somatic, Material")
+		1,"Abjuration ","1 Reaction ","Self ","1 round ","Verbal, Somatic", definition="""An imperceptible barrier of magical force protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from Magic Missile.""")
+	ShieldofFaith = 	Spell("Shield of Faith ",1,"Abjuration ","1 Bonus Action ","60 feet ","Concentration, up to 1 minute ","Verbal, Somatic, Material", definition="""A shimmering field surrounds a creature of your choice within range, granting it a +2 bonus to AC for the duration.""")
+	Sleep =         	Spell("Sleep ",1,"Enchantment ","1 Action ","90 feet ","1 minute ","Verbal, Somatic, Material", definition="""Each creature of your choice in a 5-foot-radius Sphere centered on a point within range must succeed on a Wisdom saving throw or have the Incapacitated condition until the end of its next turn, at which point it must repeat the save. If the target fails the second save, the target has the Unconscious condition for the duration. The spell ends on a target if it takes damage or someone within 5 feet of it takes an action to shake it out of the spell's effect.
+<br>
+Creatures that don't sleep, such as elves, or that have Immunity to the Exhaustion condition automatically succeed on saves against this spell.""")
+	Snare =         	Spell("Snare ",1,"Abjuration ","1 Minute ","Touch ","Until dispelled or triggered ","Verbal, Somatic, Material", definition="""As you cast this spell, you use the rope to create a circle with a 5-foot radius on the ground or the floor. When you finish casting, the rope disappears and the circle becomes a magic trap.
+<br>
+This trap is nearly invisible, requiring a successful Intelligence (Investigation) check against your spell save DC to be discerned.
+<br>
+The trap triggers when a Small, Medium, or Large creature moves onto the ground or the floor in the spell's radius. That creature must succeed on a Dexterity saving throw or be magically hoisted into the air, leaving it hanging upside down 3 feet above the ground or the floor. The creature is restrained there until the spell ends.
+<br>
+A restrained creature can make a Dexterity saving throw at the end of each of its turns, ending the effect on itself on a success. Alternatively, the creature or someone else who can reach it can use an action to make an Intelligence (Arcana) check against your spell save DC. On a success, the restrained effect ends.
+<br>
+After the trap is triggered, the spell ends when no creature is restrained by it.""")
+	CausticBrew =     	Spell("Tasha's Caustic Brew ",1,"Evocation ","1 Action ","Self (30-foot line) ","Concentration, up to 1 minute ","Verbal, Somatic, Material", definition="""A stream of acid emanates from you in a line 30 feet long and 5 feet wide in a direction you choose. Each creature in the line must succeed on a Dexterity saving throw or be covered in acid for the spell's duration or until a creature uses its action to scrape or wash the acid off itself or another creature. A creature covered in the acid takes 2d4 acid damage at start of each of its turns.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 2d4 for each slot level above 1st.""")
+	FloatingDisk =     	Spell("Tenser's Floating Disk ",1,"Conjuration ","1 Action R ","30 feet ","1 hour ","Verbal, Somatic, Material", definition="""This spell creates a circular, horizontal plane of force, 3 feet in diameter and 1 inch thick, that floats 3 feet above the ground in an unoccupied space of your choice that you can see within range. The disk remains for the duration and can hold up to 500 pounds. If more weight is placed on it, the spell ends, and everything on the disk falls to the ground.
+<br>
+The disk is immobile while you are within 20 feet of it. If you move more than 20 feet away from it, the disk follows you so that it remains within 20 feet of you. It can move across uneven terrain, up or down stairs, slopes and the like, but it can't cross an elevation change of 10 feet or more. For example, the disk can't move across a 10-foot-deep pit, nor could it leave such a pit if it was created at the bottom.
+<br>
+If you move more than 100 feet from the disk (typically because it can't move around an obstacle to follow you), the spell ends.""")
+	ThunderousSmite = 	Spell("Thunderous Smite ",1,"Evocation ","1 Bonus Action ","Self ","Concentration, up to 1 minute ","Verbal", definition="""Your strike rings with thunder that is audible within 300 feet of you, and the target takes an extra 2d6 Thunder damage from the attack. Additionally, if the target is a creature, it must succeed on a Strength saving throw or be pushed 10 feet away from you and have the Prone condition.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d6 for each spell slot level above 1.""")
+	Thunderwave =     	Spell("Thunderwave ",1,"Evocation ","1 Action ","Self (15-foot cube) ","Instantaneous ","Verbal, Somatic", definition="""You unleash a wave of thunderous energy. Each creature in a 15-foot Cube originating from you makes a Constitution saving throw. On a failed save, a creature takes 2d8 Thunder damage and is pushed 10 feet away from you. On a successful save, a creature takes half as much damage only.
+<br>
+In addition, unsecured objects that are entirely within the Cube are pushed 10 feet away from you, and a thunderous boom is audible within 300 feet.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d8 for each spell slot level above 1.""")
+	ZephyrStrike =     	Spell("Zephyr Strike ",1,"Transmutation ","1 Bonus Action ","Self ","Concentration, up to 1 minute ","Verbal", definition="""You move like the wind. Until the spell ends, your movement doesn't provoke opportunity attacks.
+<br>
+Once before the spell ends, you can give yourself advantage on one weapon attack roll on your turn. That attack deals an extra 1d8 force damage on a hit. Whether you hit or miss, your walking speed increases by 30 feet until the end of that turn.""")
+	Alarm = 			Spell("Alarm",  1,"Abjuration","1 Minute (R)" ,"30 feet", "8 Hours","Verbal, Somatic, Material", definition="""You set an alarm against intrusion. Choose a door, a window, or an area within range that is no larger than a 20-foot Cube. Until the spell ends, an alarm alerts you whenever a creature touches or enters the warded area. When you cast the spell, you can designate creatures that won't set off the alarm. You also choose whether the alarm is audible or mental:
+<br>
+<b>Audible Alarm.</b> The alarm produces the sound of a handbell for 10 seconds within 60 feet of the warded area.
+<br>
+<b>Mental Alarm.</b> You are alerted by a mental ping if you are within 1 mile of the warded area. This ping awakens you if you're asleep.""")
+	ArmorofAgathys = 	Spell("Armor of Agathys",   1,"Abjuration", "1 Action" ,"Self", "1 hour ", "Verbal, Somatic, Material", definition="""Protective magical frost surrounds you. You gain 5 Temporary Hit Points. If a creature hits you with a melee attack roll before the spell ends, the creature takes 5 Cold damage. The spell ends early if you have no Temporary Hit Points.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The Temporary Hit Points and the Cold damage both increase by 5 for each spell slot level above 1.""")
 	Ceremony = 			Spell(	"Ceremony ",        1,		"Evocation",
 								"1 Action R",	"Touch",	"Instantaneous",
-								"Verbal, Somatic, Material")
-	AbsorbElements =        Spell("Absorb Element",    1,  "Abjuration","1 Reaction","Self","1 round", "Somatic")
-	BeastBond =             Spell("Beast Bond",        1,	"Divination ","1 Action ","Touch ","Concentration, up to 1 minute ","Verbal, Somatic, Material")
-	Bless =                 Spell("Bless ",            1,"Enchantment ","1 Action ","30 feet ","Concentration, up to 1 minute ","Verbal, Somatic, Material")
-	Catapult =              Spell("Catapult ",        1,"Transmutation ","1 Action ","60 feet ","Instantaneous ","Somatic")
-	DisguiseSelf =              Spell("Disguise Self ",1,"Illusion ","1 Action ","Self ","1 hour ","Verbal, Somatic")
+								"Verbal, Somatic, Material", definition="""You perform a special religious ceremony that is infused with magic. When you cast the spell, choose one of the following rites, the target of which must be within 10 feet of you throughout the casting.
+<br>
+<b>Atonement.</b> You touch one willing creature whose alignment has changed, and you make a DC 20 Wisdom (Insight) check. On a successful check, you restore the target to its original alignment.
+<br>
+<b>Bless Water.</b> You touch one vial of water and cause it to become holy water.
+<br>
+<b>Coming of Age.</b> You touch one humanoid who is a young adult. For the next 24 hours, whenever the target makes an ability check, it can roll a d4 and add the number rolled to the ability check. A creature can benefit from this rite only once.
+<br>
+<b>Dedication.</b> You touch one humanoid who wishes to be dedicated to your god's service. For the next 24 hours, whenever the target makes a saving throw, it can roll a d4 and add the number rolled to the save. A creature can benefit from this rite only once.
+<br>
+<b>Funeral Rite.</b> You touch one corpse, and for the next 7 days, the target can't become undead by any means short of a wish spell.
+<br>
+<b>Wedding.</b> You touch adult humanoids willing to be bonded together in marriage. For the next 7 days, each target gains a +2 bonus to AC while they are within 30 feet of each other. A creature can benefit from this rite again only if widowed.""")
+	AbsorbElements =        Spell("Absorb Element",    1,  "Abjuration","1 Reaction","Self","1 round", "Somatic", definition="""The spell captures some of the incoming energy, lessening its effect on you and storing it for your next melee attack. You have resistance to the triggering damage type until the start of your next turn. Also, the first time you hit with a melee attack on your next turn, the target takes an extra 1d6 damage of the triggering type, and the spell ends.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 2nd level or higher, the extra damage increases by 1d6 for each slot level above 1st.""")
+	BeastBond =             Spell("Beast Bond",        1,	"Divination ","1 Action ","Touch ","Concentration, up to 1 minute ","Verbal, Somatic, Material", definition="""You establish a telepathic link with one beast you touch that is friendly to you or charmed by you. The spell fails if the beast's Intelligence score is 4 or higher. Until the spell ends, the link is active while you and the beast are within line of sight of each other. Through the link, the beast can understand your telepathic messages to it, and it can telepathically communicate simple emotions and concepts back to you. While the link is active, the beast gains advantage on attack rolls against any creature within 5 feet of you that you can see.""")
+	Bless =                 Spell("Bless ",            1,"Enchantment ","1 Action ","30 feet ","Concentration, up to 1 minute ","Verbal, Somatic, Material", definition="""You bless up to three creatures within range. Whenever a target makes an attack roll or a saving throw before the spell ends, the target adds 1d4 to the attack roll or save.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> You can target one additional creature for each spell slot level above 1.""")
+	Catapult =              Spell("Catapult ",        1,"Transmutation ","1 Action ","60 feet ","Instantaneous ","Somatic", definition="""Choose one object weighing 1 to 5 pounds within range that isn't being worn or carried. The object flies in a straight line up to 90 feet in a direction you choose before falling to the ground, stopping early if it impacts against a solid surface. If the object would strike a creature, that creature must make a Dexterity saving throw. On a failed save, the object strikes the target and stops moving. When the object strikes something, the object and what it strikes each take 3d8 bludgeoning damage.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 2nd level or higher, the maximum weight of objects that you can target with this spell increases by 5 pounds, and the damage increases by 1d8, for each slot level above 1st.""")
+	DisguiseSelf =              Spell("Disguise Self ",1,"Illusion ","1 Action ","Self ","1 hour ","Verbal, Somatic", definition="""You make yourself--including your clothing, armor, weapons, and other belongings on your person--look different until the spell ends. You can seem 1 foot shorter or taller and can appear heavier or lighter. You must adopt a form that has the same basic arrangement of limbs as you have. Otherwise, the extent of the illusion is up to you.
+<br>
+The changes wrought by this spell fail to hold up to physical inspection. For example, if you use this spell to add a hat to your outfit, objects pass through the hat, and anyone who touches it would feel nothing.
+<br>
+To discern that you are disguised, a creature must take the Study action to inspect your appearance and succeed on an Intelligence (Investigation) check against your spell save DC.""")
 	FalseLife = 	Spell("False Life ",1,"Necromancy ","1 Action ","Self ","Instantaneous","Verbal, Somatic, Material [a drop of alcohol]",
 					definition = """You gain <b>2d4 + 4 Temporary Hit Points</b>.
 						<br><b>Using a Higher-Level Spell Slot.</b> You gain <i>5 additional Temporary Hit Points</i> for each spell slot level above 1.""")
@@ -2881,139 +3136,515 @@ Using a Higher-Level Spell Slot. The healing increases by 2d4 for each spell slo
 # Initialize second level spells
 LEVEL2 = True
 if LEVEL2:
-	AirBubble = 		Spell("Air Bubble", 2, "Conjuration", "1 Action", "60 Feet", "24 hours", "Somatic")
-	ArcaneLock = 		Spell("Arcane Lock", 2, "Abjuration", "1 Action", "Touch", "Until dispelled", "Verbal, Somatic, Material")
+	AirBubble = 		Spell("Air Bubble", 2, "Conjuration", "1 Action", "60 Feet", "24 hours", "Somatic", definition="""You create a spectral globe around the head of a willing creature you can see within range. The globe is filled with fresh air that lasts until the spell ends. If the creature has more than one head, the globe of air appears around only one of its heads (which is all the creature needs to avoid suffocation, assuming that all its heads share the same respiratory system).
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 3rd level or higher, you can create two additional globes of fresh air for each slot level above 2nd.""")
+	ArcaneLock = 		Spell("Arcane Lock", 2, "Abjuration", "1 Action", "Touch", "Until dispelled", "Verbal, Somatic, Material", definition="""You touch a closed door, window, gate, container, or hatch and magically lock it for the duration. This lock can't be unlocked by any nonmagical means. You and any creatures you designate when you cast the spell can open and close the object despite the lock. You can also set a password that, when spoken within 5 feet of the object, unlocks it for 1 minute.""")
 	BlindnessDeafness = Spell("Blindness/Deafness",
 		2, "Necromancy", "1 Action", "30 Feet", "1 minute", "Verbal",
 		concentration = "",
 		definition = """One creature that you can see within range must succeed on a <i>Constitution saving throw</i>, or it has the <i>Blinded</i> or <i>Deafened</i> condition (your choice) for the duration. At the end of each of its turns, the target repeats the save, ending the spell on itself on a success. <br>
 		<b>Using a Higher-Level Spell Slot.</b> You can target one additional creature for each spell slot level above 2.
 		""")
-	Blur = 				Spell("Blur", 2, "Illusion", "1 Action", "Self", "Concentration, up to 1 minute", "Verbal")
-	CordonofArrows = 	Spell("Cordon of Arrows",2, "Transmutation", "1 Action", "5 feet", "8 hours", "Verbal, Somatic, Material")
-	Darkvision = 		Spell("Darkvision",2, "Transmutation", "1 Action", "Touch", "8 hours", "Verbal, Somatic, Material")
-	DragonsBreath = 	Spell("Dragon's Breath",2, "Transmutation", "1 Bonus Action", "Touch", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	DustDevil = 		Spell("Dust Devil", 2, "Conjuration", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	FindSteed = 		Spell("Find Steed", 2, "Conjuration", "10 Minutes", "30 feet", "Instantaneous", "Verbal, Somatic")
+	Blur = 				Spell("Blur", 2, "Illusion", "1 Action", "Self", "Concentration, up to 1 minute", "Verbal", definition="""Your body becomes blurred. For the duration, any creature has Disadvantage on attack rolls against you. An attacker is immune to this effect if it perceives you with Blindsight or Truesight.""")
+	CordonofArrows = 	Spell("Cordon of Arrows",2, "Transmutation", "1 Action", "5 feet", "8 hours", "Verbal, Somatic, Material", definition="""You touch up to four nonmagical Arrows or Bolts and plant them in the ground in your space. Until the spell ends, the ammunition can't be physically uprooted, and whenever a creature other than you enters a space within 30 feet of the ammunition for the first time on a turn or ends its turn there, one piece of ammunition flies up to strike it. The creature must succeed on a Dexterity saving throw or take 2d4 Piercing damage. The piece of ammunition is then destroyed. The spell ends when none of the ammunition remains planted in the ground.
+<br>
+When you cast this spell, you can designate any creatures you choose, and the spell ignores them.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The amount of ammunition that can be affected increases by two for each spell slot level above 2.""")
+	Darkvision = 		Spell("Darkvision",2, "Transmutation", "1 Action", "Touch", "8 hours", "Verbal, Somatic, Material", definition="""For the duration, a willing creature you touch has Darkvision with a range of 150 feet.""")
+	DragonsBreath = 	Spell("Dragon's Breath",2, "Transmutation", "1 Bonus Action", "Touch", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""You touch one willing creature, and choose Acid, Cold, Fire, Lightning, or Poison. Until the spell ends, the target can take a Magic action to exhale a 15-foot Cone. Each creature in that area makes a Dexterity saving throw, taking 3d6 damage of the chosen type on a failed save or half as much damage on a successful one.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d6 for each spell slot level above 2.""")
+	DustDevil = 		Spell("Dust Devil", 2, "Conjuration", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""Choose an unoccupied 5-foot cube of air that you can see within range. An elemental force that resembles a dust devil appears in the cube and lasts for the spell's duration.
+<br>
+Any creature that ends its turn within 5 feet of the dust devil must make a Strength saving throw. On a failed save, the creature takes 1d8 bludgeoning damage and is pushed 10 feet away from the dust devil. On a successful save, the creature takes half as much damage and isn't pushed.
+<br>
+As a bonus action, you can move the dust devil up to 30 feet in any direction. If the dust devil moves over sand, dust, loose dirt, or light gravel, it sucks up the material and forms a 10-foot-radius cloud of debris around itself that lasts until the start of your next turn. The cloud heavily obscures its area.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for each slot level above 2nd.""")
+	FindSteed = 		Spell("Find Steed", 2, "Conjuration", "10 Minutes", "30 feet", "Instantaneous", "Verbal, Somatic", definition="""You summon an otherworldly being that appears as a loyal steed in an unoccupied space of your choice within range. This creature uses the Otherworldly Steed stat block. If you already have a steed from this spell, the steed is replaced by the new one.
+<br>
+The steed resembles a Large, rideable animal of your choice, such as a horse, a camel, a dire wolf, or an elk. Whenever you cast the spell, choose the steed's creature type--Celestial, Fey, or Fiend--which determines certain traits in the stat block.
+<br>
+<b>Combat.</b> The steed is an ally to you and your allies. In combat, it shares your Initiative count, and it functions as a controlled mount while you ride it (as defined in the rules on 1). If you have the Incapacitated condition, the steed takes its turn immediately after yours and acts independently, focusing on protecting you.
+<br>
+<b>Disappearance of the Steed.</b> The steed disappears if it drops to 0 Hit Points or if you die. When it disappears, it leaves behind anything it was wearing or carrying. If you cast this spell again, you decide whether you summon the steed that disappeared or a different one.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> Use the spell slot's level for the spell's level in the stat block.""")
 	FindTraps = 		Spell("Find Traps",
 		2, 	"Divination", 	"1 Action", 	"120 feet", 	"Instantaneous",
-		"Verbal, Somatic")
-	FlamingSphere = 	Spell("Flaming Sphere",2, "Conjuration", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	FlockofFamiliars = 	Spell("Flock of Familiars",2, "Conjuration", "1 Minute", "Touch", "Concentration, up to 1 hour", "Verbal, Somatic")
-	FortunesFavor = 	Spell("Fortune's Favor",2, "Divination", "1 Minute", "60 feet", "1 hour", "Verbal, Somatic, Material")
-	GentleRepose = 		Spell("Gentle Repose",2, "Necromancy", "1 Action", "Touch", "10 days", "Verbal, Somatic, Material")
-	GiftOfGab = 		Spell("Gift of Gab",2, "Enchantment", "Reaction", "Self", "Instantaneous", "Verbal, Somatic, Material")
-	HealingSpirit = 	Spell("Healing Spirit",2, "Conjuration", "1 Bonus Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic")
-	ImmovableObject = 	Spell("Immovable Object",2, "Transmutation", "1 Action", "Touch", "1 hour", "Verbal, Somatic, Material")
-	GlowingCoin = 			Spell("Jim's Glowing Coin",2, "Enchantment", "1 Action", "60 feet", "1 minute", "Somatic, Material")
-	KineticJaunt = 			Spell("Kinetic Jaunt",2, "Transmutation", "1 Bonus Action", "Self", "Concentration, up to 1 minute", "Somatic")
-	LocateAnimalsPlants = 	Spell("Locate Animals or Plants",2, "Divination", "1 Action", "Self", "Instantaneous", "Verbal, Somatic, Material")
-	LocateObject = 		Spell("Locate Object",2, "Divination", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic, Material")
-	MagicMouth = 		Spell("Magic Mouth",2, "Illusion", "1 Minute", "30 feet", "Until dispelled", "Verbal, Somatic, Material")
-	EarthenGrasp = 		Spell("Maximillian's Earthen Grasp",2, "Transmutation", "1 Action", "30 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	AcidArrow = 		Spell("Melf's Acid Arrow",2, "Evocation", "1 Action", "90 feet", "Instantaneous", "Verbal, Somatic, Material")
-	MindSpike = 		Spell("Mind Spike",2, "Divination", "1 Action", "60 feet", "Concentration, up to 1 hour", "Somatic")
-	MistyStep = 		Spell("Misty Step", 2,  "Conjuration", "1 Bonus Action", "Self", "Instantaneous", "Verbal")
-	Moonbeam =		 	Spell("Moonbeam", 2,  "Evocation", "1 Action", "120 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	Mischief = 			Spell("Nathair's Mischief",  2, "Illusion", "1 Action", "60 feet", "Concentration, up to 1 minute", "Somatic, Material")
-	MagicAura = 		Spell("Nystul's Magic Aura", 2,  "Illusion", "1 Action", "Touch", "24 hours", "Verbal, Somatic, Material")
-	PrayerOfHealing = 	Spell("Prayer of Healing",  2, "Evocation", "10 Minutes", "30 feet", "Instantaneous", "Verbal")
-	ProtectionFromPoison = 	Spell("Protection from Poison", 2,  "Abjuration", "1 Action", "Touch", "1 hour", "Verbal, Somatic")
-	Pyrotechnics = 		Spell("Pyrotechnics", 2,  "Transmutation", "1 Action", "60 feet", "Instantaneous", "Verbal, Somatic")
-	RayOfEnfeeblement = Spell("Ray of Enfeeblement", 2,  "Necromancy", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic")
-	BindingIce = 		Spell("Rime's Binding Ice", 2,  "Evocation", "1 Action", "Self (30-foot cone)", "Instantaneous", "Somatic, Material")
-	RopeTrick = 		Spell("Rope Trick", 2,  "Transmutation", "1 Action", "Touch", "1 hour", "Verbal, Somatic, Material")
-	ShadowBlade = 		Spell("Shadow Blade", 2,  "Illusion", "1 Bonus Action", "Self", "Concentration, up to 1 minute", "Verbal, Somatic")
-	Skywrite = 			Spell("Skywrite", 2,  "Transmutation", "1 Action", "Sight", "Concentration, up to 1 day", "Verbal, Somatic")
-	SnowballStorm = 	Spell("Snilloc's Snowball Storm", 2,  "Evocation", "1 Action", "90 feet", "Instantaneous", "Verbal, Somatic, Material")
-	SpiderClimb = 		Spell("Spider Climb", 2,  "Transmutation", "1 Action", "Touch", "Concentration, up to 1 hour", "Verbal, Somatic, Material")
-	SpikeGrowth = 		Spell("Spike Growth", 2,  "Transmutation", "1 Action", "150 feet", "Concentration, up to 10 minutes", "Verbal, Somatic, Material")
-	SpiritualWeapon = 	Spell("Spiritual Weapon", 2,  "Evocation", "1 Bonus Action", "60 feet", "1 minute", "Verbal, Somatic")
-	SummonBeast = 		Spell("Summon Beast", 2,  "Conjuration", "1 Action", "90 feet", "Concentration, up to 1 hour", "Verbal, Somatic, Material")
-	MindWhip = 			Spell("Tasha's Mind Whip", 2,  "Enchantment", "1 Action", "90 feet", "1 round", "Verbal")
-	VortexWarp = 		Spell("Vortex Warp", 2,  "Conjuration", "1 Action", "90 feet", "Instantaneous", "Verbal, Somatic")
-	WardingBond = 		Spell("Warding Bond", 2,  "Abjuration", "1 Action", "Touch", "1 hour", "Verbal, Somatic, Material")
-	WardingWind = 		Spell("Warding Wind", 2,  "Evocation", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal")
-	WarpSense = 		Spell("Warp Sense", 2,  "Divination", "1 Action", "Self", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	Web = 				Spell("Web", 2,  "Conjuration", "1 Action", "60 feet", "Concentration, up to 1 hour", "Verbal, Somatic, Material")
-	WitherBloom = 	Spell("Wither and Bloom", 2,  "Necromancy", "1 Action", "60 feet", "Instantaneous", "Verbal, Somatic, Material")
-	Wristpocket = 	Spell("Wristpocket", 2,  "Conjuration", "1 Action", "Self", "Concentration, up to 1 hour", "Somatic")
-	AlterSelf = 	Spell("Alter Self", 2, "Transmutation", "1 Action", "Self", "Concentration, up to 1 hour", "Verbal, Somatic")
-	Barkskin = 		Spell("Barkskin", 2, "Transmutation", "1 Action", "Touch", "Concentration, up to 1 hour", "Verbal, Somatic, Material")
-	BeastSense = 	Spell("Beast Sense", 2, "Divination", "1 Action", "Touch", "Concentration, up to 1 hour", "Somatic")
-	HeatMetal = 		Spell("Heat Metal", 2, "Transmutation", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	Earthbind = 			Spell("Earthbind", 2, "Transmutation", "1 Action", "300 feet", "Concentration, up to 1 minute", "Verbal")
-	ContinualFlame = 		Spell("Continual Flame", 2, "Evocation", "1 Action", "Touch", "Until dispelled", "Verbal, Somatic, Material")
-	FlameBlade = 			Spell("Flame Blade", 2, "Evocation", "1 Bonus Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic, Material")
-	Augury = 				Spell("Augury",2,  "Divination", "1 Minute", "Self", "Instantaneous", "Verbal, Somatic, Material")
-	DetectThoughts = 		Spell("Detect Thoughts",2,  "Divination", "1 Action", "Self", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	PassWithoutTrace = 		Spell("Pass Without Trace", 2, "Abjuration", "1 Action", "Self", "Concentration, up to 1 hour", "Verbal, Somatic, Material")
-	LesserRestoration = 	Spell("Lesser Restoration",	2, "Abjuration", "1 Action", "Touch", "Instantaneous", "Verbal, Somatic")
-	AirBubble = 			Spell("Air Bubble", 2, "Conjuration", "1 Action", "60 Feet", "24 hours", "Somatic")
-	ArcaneLock = 			Spell("Arcane Lock", 2, "Abjuration", "1 Action", "Touch", "Until dispelled", "Verbal, Somatic, Material")
-	Blur = 					Spell("Blur", 2, "Illusion", "1 Action", "Self", "Concentration, up to 1 minute", "Verbal")
-	BorrowedKnowledge = 	Spell("Borrowed Knowledge", 2, "Divination", "1 Action", "Self", "1 hour", "Verbal, Somatic, Material")
-	CordonofArrows = 		Spell("Cordon of Arrows",2,  "Transmutation", "1 Action", "5 feet", "8 hours", "Verbal, Somatic, Material")
-	Darkvision = 			Spell("Darkvision", 2, "Transmutation", "1 Action", "Touch", "8 hours", "Verbal, Somatic, Material")
-	DragonsBreath = 		Spell("Dragon's Breath", 2, "Transmutation", "1 Bonus Action", "Touch", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	DustDevil = 			Spell("Dust Devil", 2, "Conjuration", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	FindSteed = 			Spell("Find Steed", 2, "Conjuration", "10 Minutes", "30 feet", "Instantaneous", "Verbal, Somatic")
-	FindTraps = 			Spell("Find Traps", 2, "Divination", "1 Action", "120 feet", "Instantaneous", "Verbal, Somatic")
-	FlamingSphere = 		Spell("Flaming Sphere", 2, "Conjuration", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	FlockofFamiliars = 		Spell("Flock of Familiars", 2, "Conjuration", "1 Minute", "Touch", "Concentration, up to 1 hour", "Verbal, Somatic")
-	FortunesFavor = 		Spell("Fortune's Favor", 2, "Divination", "1 Minute", "60 feet", "1 hour", "Verbal, Somatic, Material")
-	GentleRepose = 			Spell("Gentle Repose", 2, "Necromancy", "1 Action", "Touch", "10 days", "Verbal, Somatic, Material")
-	GiftOfGab = 			Spell("Gift of Gab", 2, "Enchantment", "Reaction", "Self", "Instantaneous", "Verbal, Somatic, Material")
-	HealingSpirit = 		Spell("Healing Spirit", 2, "Conjuration", "1 Bonus Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic")
-	ImmovableObject = 		Spell("Immovable Object", 2, "Transmutation", "1 Action", "Touch", "1 hour", "Verbal, Somatic, Material")
-	GlowingCoin = 			Spell("Jim's Glowing Coin", 2, "Enchantment", "1 Action", "60 feet", "1 minute", "Somatic, Material")
-	KineticJaunt = 			Spell("Kinetic Jaunt", 2, "Transmutation", "1 Bonus Action", "Self", "Concentration, up to 1 minute", "Somatic")
-	Levitate = 				Spell("Levitate", 2, "Transmutation", "1 Action", "60 feet", "Concentration, up to 10 minutes", "Verbal, Somatic, Material")
-	LocateAnimalsPlants = 	Spell("Locate Animals or Plants", 2, "Divination", "1 Action", "Self", "Instantaneous", "Verbal, Somatic, Material")
-	LocateObject = 			Spell("Locate Object", 2, "Divination", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic, Material")
-	MagicMouth = 			Spell("Magic Mouth", 2, "Illusion", "1 Minute", "30 feet", "Until dispelled", "Verbal, Somatic, Material")
-	EarthenGrasp = 			Spell("Maximillian's Earthen Grasp", 2, "Transmutation", "1 Action", "30 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	AcidArrow = 			Spell("Melf's Acid Arrow",2,  "Evocation", "1 Action", "90 feet", "Instantaneous", "Verbal, Somatic, Material")
-	MindSpike = 			Spell("Mind Spike",2,  "Divination", "1 Action", "60 feet", "Concentration, up to 1 hour", "Somatic")
-	MistyStep = 			Spell("Misty Step", 2, "Conjuration", "1 Bonus Action", "Self", "Instantaneous", "Verbal")
-	Moonbeam = 				Spell("Moonbeam", 2, "Evocation", "1 Action", "120 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	Mischief = 				Spell("Nathair's Mischief", 2, "Illusion", "1 Action", "60 feet", "Concentration, up to 1 minute", "Somatic, Material")
-	MagicAura = 			Spell("Nystul's Magic Aura",2,  "Illusion", "1 Action", "Touch", "24 hours", "Verbal, Somatic, Material")
-	PrayerOfHealing = 		Spell("Prayer of Healing", 2, "Evocation", "10 Minutes", "30 feet", "Instantaneous", "Verbal")
-	ProtectionFromPoison = 	Spell("Protection from Poison", 2, "Abjuration", "1 Action", "Touch", "1 hour", "Verbal, Somatic")
-	Pyrotechnics = 			Spell("Pyrotechnics",2,  "Transmutation", "1 Action", "60 feet", "Instantaneous", "Verbal, Somatic")
-	RayOfEnfeeblement = 	Spell("Ray of Enfeeblement", 2, "Necromancy", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic")
-	BindingIce = 			Spell("Rime's Binding Ice", 2, "Evocation", "1 Action", "Self (30-foot cone)", "Instantaneous", "Somatic, Material")
-	RopeTrick = 			Spell("Rope Trick", 2, "Transmutation", "1 Action", "Touch", "1 hour", "Verbal, Somatic, Material")
-	ShadowBlade = 			Spell("Shadow Blade", 2, "Illusion", "1 Bonus Action", "Self", "Concentration, up to 1 minute", "Verbal, Somatic")
-	Skywrite = 				Spell("Skywrite", 2,  "Transmutation", "1 Action", "Sight", "Concentration, up to 1 day", "Verbal, Somatic")
-	SnowballStorm = 		Spell("Snilloc's Snowball Storm", 2,  "Evocation", "1 Action", "90 feet", "Instantaneous", "Verbal, Somatic, Material")
-	SpiderClimb = 			Spell("Spider Climb", 2,  "Transmutation", "1 Action", "Touch", "Concentration, up to 1 hour", "Verbal, Somatic, Material")
-	SpikeGrowth = 			Spell("Spike Growth",  2, "Transmutation", "1 Action", "150 feet", "Concentration, up to 10 minutes", "Verbal, Somatic, Material")
-	SpiritualWeapon = 		Spell("Spiritual Weapon",  2, "Evocation", "1 Bonus Action", "60 feet", "1 minute", "Verbal, Somatic")
-	SummonBeast = 			Spell("Summon Beast", 2,  "Conjuration", "1 Action", "90 feet", "Concentration, up to 1 hour", "Verbal, Somatic, Material")
-	MindWhip = 				Spell("Tasha's Mind Whip",  2, "Enchantment", "1 Action", "90 feet", "1 round", "Verbal")
-	VortexWarp = 			Spell("Vortex Warp",  2, "Conjuration", "1 Action", "90 feet", "Instantaneous", "Verbal, Somatic")
-	WardingBond = 			Spell("Warding Bond",  2, "Abjuration", "1 Action", "Touch", "1 hour", "Verbal, Somatic, Material")
-	WardingWind = 			Spell("Warding Wind",  2, "Evocation", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal")
-	WarpSense = 			Spell("Warp Sense",  2, "Divination", "1 Action", "Self", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	Web = 					Spell("Web",  2, "Conjuration", "1 Action", "60 feet", "Concentration, up to 1 hour", "Verbal, Somatic, Material")
-	Wristpocket = 			Spell("Wristpocket",  2, "Conjuration", "1 Action", "Self", "Concentration, up to 1 hour", "Somatic")
-	LesserRestoration = 	Spell("Lesser Restoration", 2,  "Abjuration", "1 Action", "Touch", "Instantaneous", "Verbal, Somatic")
-	AlterSelf = 			Spell("Alter Self",  2, "Transmutation", "1 Action", "Self", "Concentration, up to 1 hour", "Verbal, Somatic")
-	Barkskin = 				Spell("Barkskin", 2,  "Transmutation", "1 Action", "Touch", "Concentration, up to 1 hour", "Verbal, Somatic, Material")
-	BeastSense = 			Spell("Beast Sense", 2,  "Divination", "1 Action", "Touch", "Concentration, up to 1 hour", "Somatic")
-	HeatMetal = 			Spell("Heat Metal",  2, "Transmutation", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	Earthbind = 			Spell("Earthbind", 2,  "Transmutation", "1 Action", "300 feet", "Concentration, up to 1 minute", "Verbal")
-	ContinualFlame = 		Spell("Continual Flame", 2,  "Evocation", "1 Action", "Touch", "Until dispelled", "Verbal, Somatic, Material")
-	AganazzarScorcher = 	Spell("Aganazzar's Scorcher", 2, "Evocation", "1 Action", "30 Feet", "Instantaneous", "Verbal, Somatic, Material")
-	FlameBlade = 			Spell("Flame Blade", 2,  "Evocation", "1 Bonus Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic, Material")
-	Augury = 				Spell("Augury", 2,  "Divination", "1 Minute", "Self", "Instantaneous", "Verbal, Somatic, Material")
-	DetectThoughts = 		Spell("Detect Thoughts", 2,  "Divination", "1 Action", "Self", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	PassWithoutTrace = 		Spell("Pass Without Trace", 2,  "Abjuration", "1 Action", "Self", "Concentration, up to 1 hour", "Verbal, Somatic, Material")
-	BorrowedKnowledge = 	Spell("Borrowed Knowledge",	2, "Divination", "1 Action", "Self", "1 hour", "Verbal, Somatic, Material")
+		"Verbal, Somatic", definition="""You sense any trap within range that is within line of sight. A trap, for the purpose of this spell, includes any object or mechanism that was created to cause damage or other danger. Thus, the spell would sense the Alarm or Glyph of Warding spell or a mechanical pit trap, but it wouldn't reveal a natural weakness in the floor, an unstable ceiling, or a hidden sinkhole.
+<br>
+This spell reveals that a trap is present but not its location. You do learn the general nature of the danger posed by a trap you sense.""")
+	FlamingSphere = 	Spell("Flaming Sphere",2, "Conjuration", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""You create a 5-foot-diameter sphere of fire in an unoccupied space on the ground within range. It lasts for the duration. Any creature that ends its turn within 5 feet of the sphere makes a Dexterity saving throw, taking 2d6 Fire damage on a failed save or half as much damage on a successful one.
+<br>
+As a Bonus Action, you can move the sphere up to 30 feet, rolling it along the ground. If you move the sphere into a creature's space, that creature makes the save against the sphere, and the sphere stops moving for the turn.
+<br>
+When you move the sphere, you can direct it over barriers up to 5 feet tall and jump it across pits up to 10 feet wide. Flammable objects that aren't being worn or carried start burning if touched by the sphere, and it sheds Bright Light in a 20-foot radius and Dim Light for an additional 20 feet.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d6 for each spell slot level above 2.""")
+	FlockofFamiliars = 	Spell("Flock of Familiars",2, "Conjuration", "1 Minute", "Touch", "Concentration, up to 1 hour", "Verbal, Somatic", definition="""You temporarily summon three familiars--spirits that take animal forms of your choice. Each familiar uses the same rules and options for a familiar conjured by the find familiar spell. All the familiars conjured by this spell must be the same type of creature (celestials, fey, or fiends; your choice). If you already have a familiar conjured by the find familiar spell or similar means, then one fewer familiars are conjured by this spell.
+<br>
+Familiars summoned by this spell can telepathically communicate with you and share their visual or auditory senses while they are within 1 mile of you.
+<br>
+When you cast a spell with a range of touch, one of the familiars conjured by this spell can deliver the spell, as normal. However, you can cast a touch spell through only one familiar per turn.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 3rd level or higher, you conjure an additional familiar for each slot level above 2nd.""")
+	FortunesFavor = 	Spell("Fortune's Favor",2, "Divination", "1 Minute", "60 feet", "1 hour", "Verbal, Somatic, Material", definition="""You impart latent luck to yourself or one willing creature you can see within range. When the chosen creature makes an attack roll, an ability check, or a saving throw before the spell ends, it can dismiss this spell on itself to roll an additional d20 and choose which of the d20s to use. Alternatively, when an attack roll is made against the chosen creature, it can dismiss this spell on itself to roll a d20 and choose which of the d20s to use, the one it rolled or the one the attacker rolled.
+<br>
+If the original d20 roll has advantage or disadvantage, the creature rolls the additional d20 after advantage or disadvantage has been applied to the original roll.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.""")
+	GentleRepose = 		Spell("Gentle Repose",2, "Necromancy", "1 Action", "Touch", "10 days", "Verbal, Somatic, Material", definition="""You touch a corpse or other remains. For the duration, the target is protected from decay and can't become Undead.
+<br>
+The spell also effectively extends the time limit on raising the target from the dead, since days spent under the influence of this spell don't count against the time limit of spells such as Raise Dead.""")
+	GiftOfGab = 		Spell("Gift of Gab",2, "Enchantment", "Reaction", "Self", "Instantaneous", "Verbal, Somatic, Material", definition="""<i>“When I met Jim Darkmagic, I wondered how he got anything done in that outfit. I have since learned that most of his talents involve standing and talking. His outfit is perfect for that.”</i> --Môrgæn
+<br>
+Jim Darkmagic is said to have invented this spell, originally calling it <i>I said what?!</i> Have you ever been talking to the local monarch and accidentally mentioned how their son looks like your favorite hog from when you were growing up on the family farm? We've all been there! But rather than being beheaded for an honest slip of the tongue, you can pretend it never happened--by ensuring that no one knows it happened.
+<br>
+When you cast this spell, you skillfully reshape the memories of listeners in your immediate area, so that each creature of your choice within 5 feet of you forgets everything you said within the last 6 seconds. Those creatures then remember that you actually said the words you speak as the verbal component of the spell.""")
+	HealingSpirit = 	Spell("Healing Spirit",2, "Conjuration", "1 Bonus Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic", definition="""You call forth a nature spirit to soothe the wounded. The intangible spirit appears in a space that is a 5-foot cube you can see within range. The spirit looks like a transparent beast or fey (your choice).
+<br>
+Until the spell ends, whenever you or a creature you can see moves into the spirit's space for the first time on a turn or starts its turn there, you can cause the spirit to restore 1d6 hit points to that creature (no action required). The spirit can't heal constructs or undead. The spirit can heal a number of times equal to 1 + your spellcasting ability modifier (minimum of twice). After healing that number of times, the spirit disappears.
+<br>
+As a bonus action on your turn, you can move the spirit up to 30 feet to a space you can see.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 3rd level or higher, the healing increases by 1d6 for each slot level above 2nd.""")
+	ImmovableObject = 	Spell("Immovable Object",2, "Transmutation", "1 Action", "Touch", "1 hour", "Verbal, Somatic, Material", definition="""You touch an object that weighs no more than 10 pounds and cause it to become magically fixed in place. You and the creatures you designate when you cast this spell can move the object normally. You can also set a password that, when spoken within 5 feet of the object, suppresses this spell for 1 minute.
+<br>
+If the object is fixed in the air, it can hold up to 4,000 pounds of weight. More weight causes the object to fall. Otherwise, a creature can use an action to make a Strength check against your spell save DC. On a success, the creature can move the object up to 10 feet.
+<br>
+<b>At Higher Levels.</b> If you cast this spell using a spell slot of 4th or 5th level, the DC to move the object increases by 5, it can carry up to 8,000 pounds of weight, and the duration increases to 24 hours. If you cast this spell using a spell slot of 6th level or higher, the DC to move the object increases by 10, it can carry up to 20,000 pounds of weight, and the effect is permanent until dispelled.""")
+	GlowingCoin = 			Spell("Jim's Glowing Coin",2, "Enchantment", "1 Action", "60 feet", "1 minute", "Somatic, Material", definition="""Of the many tactics employed by master magician and renowned adventurer Jim Darkmagic, the old glowing coin trick is a time-honored classic. When you cast the spell, you hurl the coin that is the spell's material component to any spot within range. The coin lights up as if under the effect of a light spell. Each creature of your choice that you can see within 30 feet of the coin must succeed on a Wisdom saving throw or be distracted for the duration. While distracted, a creature has disadvantage on Wisdom (Perception) checks and initiative rolls.""")
+	KineticJaunt = 			Spell("Kinetic Jaunt",2, "Transmutation", "1 Bonus Action", "Self", "Concentration, up to 1 minute", "Somatic", definition="""You magically empower your movement with dance-like steps, giving yourself the following benefits for the duration.
+<br>
+Your walking speed increases by 10 feet.
+<br>
+You don't provoke opportunity attacks.
+<br>
+You can move through the space of another creature, and it doesn't count as 3. If you end your turn in another creature's space, you are shunted to the last unoccupied space you occupied, and you take 1d8 force damage.""")
+	LocateAnimalsPlants = 	Spell("Locate Animals or Plants",2, "Divination", "1 Action", "Self", "Instantaneous", "Verbal, Somatic, Material", definition="""Describe or name a specific kind of Beast, Plant creature, or nonmagical plant. You learn the direction and distance to the closest creature or plant of that kind within 5 miles, if any are present.""")
+	LocateObject = 		Spell("Locate Object",2, "Divination", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic, Material", definition="""Describe or name an object that is familiar to you. You sense the direction to the object's location if that object is within 1,000 feet of you. If the object is in motion, you know the direction of its movement.
+<br>
+The spell can locate a specific object known to you if you have seen it up close--within 30 feet--at least once. Alternatively, the spell can locate the nearest object of a particular kind, such as a certain kind of apparel, jewelry, furniture, tool, or weapon.
+<br>
+This spell can't locate an object if any thickness of lead blocks a direct path between you and the object.""")
+	MagicMouth = 		Spell("Magic Mouth",2, "Illusion", "1 Minute", "30 feet", "Until dispelled", "Verbal, Somatic, Material", definition="""You implant a message within an object in range--a message that is uttered when a trigger condition is met. Choose an object that you can see and that isn't being worn or carried by another creature. Then speak the message, which must be 25 words or fewer, though it can be delivered over as long as 10 minutes. Finally, determine the circumstance that will trigger the spell to deliver your message.
+<br>
+When that trigger occurs, a magical mouth appears on the object and recites the message in your voice and at the same volume you spoke. If the object you chose has a mouth or something that looks like a mouth (for example, the mouth of a statue), the magical mouth appears there, so the words appear to come from the object's mouth. When you cast this spell, you can have the spell end after it delivers its message, or it can remain and repeat its message whenever the trigger occurs.
+<br>
+The trigger can be as general or as detailed as you like, though it must be based on visual or audible conditions that occur within 30 feet of the object. For example, you could instruct the mouth to speak when any creature moves within 30 feet of the object or when a silver bell rings within 30 feet of it.""")
+	EarthenGrasp = 		Spell("Maximillian's Earthen Grasp",2, "Transmutation", "1 Action", "30 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""You choose a 5-foot-square unoccupied space on the ground that you can see within range. A Medium hand made from compacted soil rises there and reaches for one creature you can see within 5 feet of it. The target must make a Strength saving throw. On a failed save, the target takes 2d6 bludgeoning damage and is restrained for the spell's duration.
+<br>
+As an action, you can cause the hand to crush the restrained target, which must make a Strength saving throw. The target takes 2d6 bludgeoning damage on a failed save, or half as much damage on a successful one.
+<br>
+To break out, the restrained target can use its action to make a Strength check against your spell save DC. On a success, the target escapes and is no longer restrained by the hand.
+<br>
+As an action, you can cause the hand to reach for a different creature or to move to a different unoccupied space within range. The hand releases a restrained target if you do either.""")
+	AcidArrow = 		Spell("Melf's Acid Arrow",2, "Evocation", "1 Action", "90 feet", "Instantaneous", "Verbal, Somatic, Material", definition="""A shimmering green arrow streaks toward a target within range and bursts in a spray of acid. Make a ranged spell attack against the target. On a hit, the target takes 4d4 Acid damage and 2d4 Acid damage at the end of its next turn. On a miss, the arrow splashes the target with acid for half as much of the initial damage only.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage (both initial and later) increases by 1d4 for each spell slot level above 2.""")
+	MindSpike = 		Spell("Mind Spike",2, "Divination", "1 Action", "60 feet", "Concentration, up to 1 hour", "Somatic", definition="""You drive a spike of psionic energy into the mind of one creature you can see within range. The target makes a Wisdom saving throw, taking 3d8 Psychic damage on a failed save or half as much damage on a successful one. On a failed save, you also always know the target's location until the spell ends, but only while the two of you are on the same plane of existence. While you have this knowledge, the target can't become hidden from you, and if it has the Invisible condition, it gains no benefit from that condition against you.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d8 for each spell slot level above 2.""")
+	MistyStep = 		Spell("Misty Step", 2,  "Conjuration", "1 Bonus Action", "Self", "Instantaneous", "Verbal", definition="""Briefly surrounded by silvery mist, you teleport up to 30 feet to an unoccupied space you can see.""")
+	Moonbeam =		 	Spell("Moonbeam", 2,  "Evocation", "1 Action", "120 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""A silvery beam of pale light shines down in a 5-foot-radius, 40-foot-high Cylinder centered on a point within range. Until the spell ends, Dim Light fills the Cylinder, and you can take a Magic action on later turns to move the Cylinder up to 60 feet.
+<br>
+When the Cylinder appears, each creature in it makes a Constitution saving throw. On a failed save, a creature takes 2d10 Radiant damage, and if the creature is shape-shifted (as a result of the Polymorph spell, for example), it reverts to its true form and can't shape-shift until it leaves the Cylinder. On a successful save, a creature takes half as much damage only. A creature also makes this save when the spell's area moves into its space and when it enters the spell's area or ends its turn there. A creature makes this save only once per turn.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d10 for each spell slot level above 2.""")
+	Mischief = 			Spell("Nathair's Mischief",  2, "Illusion", "1 Action", "60 feet", "Concentration, up to 1 minute", "Somatic, Material", definition="""You fill a 20-foot cube you can see within range with fey and draconic magic. Roll on the Mischievous Surge table to determine the magical effect produced, and roll again at the start of each of your turns until the spell ends. You can move the cube up to 10 feet before you roll.
+<br>
+1: The smell of apple pie fills the air, and each creature in the cube must succeed on a Wisdom saving throw or become charmed by you until the start of your next turn.
+<br>
+2: Bouquets of flowers appear all around, and each creature in the cube must succeed on a Dexterity saving throw or be blinded until the start of your next turn as the flowers spray water in their faces.
+<br>
+3: Each creature in the cube must succeed on a Wisdom saving throw or begin giggling until the start of your next turn. A giggling creature is incapacitated and uses all its movement to move in a random direction.
+<br>
+4: Drops of molasses hover in the cube, making it 3 until the start of your next turn.""")
+	MagicAura = 		Spell("Nystul's Magic Aura", 2,  "Illusion", "1 Action", "Touch", "24 hours", "Verbal, Somatic, Material", definition="""With a touch, you place an illusion on a willing creature or an object that isn't being worn or carried. A creature gains the Mask effect below, and an object gains the False Aura effect below. The effect lasts for the duration. If you cast the spell on the same target every day for 30 days, the illusion lasts until dispelled.
+<br>
+<b>Mask (Creature).</b> Choose a creature type other than the target's actual type. Spells and other magical effects treat the target as if it were a creature of the chosen type.
+<br>
+<b>False Aura (Object).</b> You change the way the target appears to spells and magical effects that detect magical auras, such as Detect Magic. You can make a nonmagical object appear magical, make a magic item appear nonmagical, or change the object's aura so that it appears to belong to a school of magic you choose.""")
+	PrayerOfHealing = 	Spell("Prayer of Healing",  2, "Evocation", "10 Minutes", "30 feet", "Instantaneous", "Verbal", definition="""Up to five creatures of your choice who remain within range for the spell's entire casting gain the benefits of a Short Rest and also regain 2d8 Hit Points. A creature can't be affected by this spell again until that creature finishes a Long Rest.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The healing increases by 1d8 for each spell slot level above 2.""")
+	ProtectionFromPoison = 	Spell("Protection from Poison", 2,  "Abjuration", "1 Action", "Touch", "1 hour", "Verbal, Somatic", definition="""You touch a creature and end the Poisoned condition on it. For the duration, the target has Advantage on saving throws to avoid or end the Poisoned condition, and it has Resistance to Poison damage.""")
+	Pyrotechnics = 		Spell("Pyrotechnics", 2,  "Transmutation", "1 Action", "60 feet", "Instantaneous", "Verbal, Somatic", definition="""Choose an area of nonmagical flame that you can see and that fits within a 5-foot cube within range. You can extinguish the fire in that area, and you create either fireworks or smoke when you do so.
+<br>
+<b>Fireworks.</b> The target explodes with a dazzling display of colors. Each creature within 10 feet of the target must succeed on a Constitution saving throw or become blinded until the end of your next turn.
+<br>
+<b>Smoke.</b> Thick black smoke spreads out from the target in a 20-foot radius, moving around corners. The area of the smoke is heavily obscured. The smoke persists for 1 minute or until a strong wind disperses it.""")
+	RayOfEnfeeblement = Spell("Ray of Enfeeblement", 2,  "Necromancy", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic", definition="""A beam of enervating energy shoots from you toward a creature within range. The target must make a Constitution saving throw. On a successful save, the target has Disadvantage on the next attack roll it makes until the start of your next turn.
+<br>
+On a failed save, the target has Disadvantage on Strength-based D20 Tests for the duration. During that time, it also subtracts 1d8 from all its damage rolls. The target repeats the save at the end of each of its turns, ending the spell on a success.""")
+	BindingIce = 		Spell("Rime's Binding Ice", 2,  "Evocation", "1 Action", "Self (30-foot cone)", "Instantaneous", "Somatic, Material", definition="""A burst of cold energy emanates from you in a 30-foot cone. Each creature in that area must make a Constitution saving throw. On a failed save, a creature takes 3d8 cold damage and is hindered by ice formations for 1 minute, or until it or another creature within reach of it uses an action to break away the ice. A creature hindered by ice has its speed reduced to 0. On a successful save, a creature takes half as much damage and isn't hindered by ice.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 3rd level or higher, increase the cold damage by 1d8 for each slot level above 2nd.""")
+	RopeTrick = 		Spell("Rope Trick", 2,  "Transmutation", "1 Action", "Touch", "1 hour", "Verbal, Somatic, Material", definition="""You touch a rope. One end of it hovers upward until the rope hangs perpendicular to the ground or the rope reaches a ceiling. At the rope's upper end, an Invisible 3-foot-by-5-foot portal opens to an extradimensional space that lasts until the spell ends. That space can be reached by climbing the rope, which can be pulled into or dropped out of it.
+<br>
+The space can hold up to eight Medium or smaller creatures. Attacks, spells, and other effects can't pass into or out of the space, but creatures inside it can see through the portal. Anything inside the space drops out when the spell ends.""")
+	ShadowBlade = 		Spell("Shadow Blade", 2,  "Illusion", "1 Bonus Action", "Self", "Concentration, up to 1 minute", "Verbal, Somatic", definition="""You weave together threads of shadow to create a sword of solidified gloom in your hand. This magic sword lasts until the spell ends. It counts as a simple melee weapon with which you are proficient. It deals 2d8 psychic damage on a hit and has the finesse, light, and thrown properties (range 20/60). In addition, when you use the sword to attack a target that is in dim light or darkness, you make the attack roll with advantage.
+<br>
+If you drop the weapon or throw it, it dissipates at the end of the turn. Thereafter, while the spell persists, you can use a bonus action to cause the sword to reappear in your hand.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a 3rd- or 4th-level spell slot, the damage increases to 3d8. When you cast it using a 5th- or 6th-level spell slot, the damage increases to 4d8. When you cast it using a spell slot of 7th level or higher, the damage increases to 5d8.""")
+	Skywrite = 			Spell("Skywrite", 2,  "Transmutation", "1 Action", "Sight", "Concentration, up to 1 day", "Verbal, Somatic", definition="""You cause up to ten words to form in a part of the sky you can see. The words appear to be made of cloud and remain in place for the spell's duration. The words dissipate when the spell ends. A strong wind can disperse the clouds and end the spell early.""")
+	SnowballStorm = 	Spell("Snilloc's Snowball Storm", 2,  "Evocation", "1 Action", "90 feet", "Instantaneous", "Verbal, Somatic, Material", definition="""A flurry of magic snowballs erupts from a point you choose within range. Each creature in a 5-foot-radius sphere centered on that point must make a Dexterity saving throw. A creature takes 3d6 cold damage on a failed save, or half as much damage on a successful one.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d6 for each slot level above 2nd.""")
+	SpiderClimb = 		Spell("Spider Climb", 2,  "Transmutation", "1 Action", "Touch", "Concentration, up to 1 hour", "Verbal, Somatic, Material", definition="""Until the spell ends, one willing creature you touch gains the ability to move up, down, and across vertical surfaces and along ceilings, while leaving its hands free. The target also gains a Climb Speed equal to its Speed.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> You can target one additional creature for each spell slot level above 2.""")
+	SpikeGrowth = 		Spell("Spike Growth", 2,  "Transmutation", "1 Action", "150 feet", "Concentration, up to 10 minutes", "Verbal, Somatic, Material", definition="""The ground in a 20-foot-radius Sphere centered on a point within range sprouts hard spikes and thorns. The area becomes Difficult Terrain for the duration. When a creature moves into or within the area, it takes 2d4 Piercing damage for every 5 feet it travels.
+<br>
+The transformation of the ground is camouflaged to look natural. Any creature that can't see the area when the spell is cast must take a Search action and succeed on a Wisdom (Perception or Survival) check against your spell save DC to recognize the terrain as hazardous before entering it.""")
+	SpiritualWeapon = 	Spell("Spiritual Weapon", 2,  "Evocation", "1 Bonus Action", "60 feet", "1 minute", "Verbal, Somatic", definition="""You create a floating, spectral force that resembles a weapon of your choice and lasts for the duration. The force appears within range in a space of your choice, and you can immediately make one melee spell attack against one creature within 5 feet of the force. On a hit, the target takes Force damage equal to 1d8 plus your spellcasting ability modifier.
+<br>
+As a Bonus Action on your later turns, you can move the force up to 20 feet and repeat the attack against a creature within 5 feet of it.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d8 for every slot level above 2.""")
+	SummonBeast = 		Spell("Summon Beast", 2,  "Conjuration", "1 Action", "90 feet", "Concentration, up to 1 hour", "Verbal, Somatic, Material", definition="""You call forth a bestial spirit. It manifests in an unoccupied space that you can see within range and uses the Bestial Spirit stat block. When you cast the spell, choose an environment: Air, Land, or Water. The creature resembles an animal of your choice that is native to the chosen environment, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.
+<br>
+The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don't issue any, it takes the Dodge action and uses its movement to avoid danger.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> Use the spell slot's level for the spell's level in the stat block.""")
+	MindWhip = 			Spell("Tasha's Mind Whip", 2,  "Enchantment", "1 Action", "90 feet", "1 round", "Verbal", definition="""You psychically lash out at one creature you can see within range. The target must make an Intelligence saving throw. On a failed save, the target takes 3d6 psychic damage, and it can't take a reaction until the end of its next turn. Moreover, on its next turn, it must choose whether it gets a move, an action, or a bonus action; it gets only one of the three. On a successful save, the target takes half as much damage and suffers none of the spell's other effects.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd. The creatures must be within 30 feet of each other when you target them.""")
+	VortexWarp = 		Spell("Vortex Warp", 2,  "Conjuration", "1 Action", "90 feet", "Instantaneous", "Verbal, Somatic", definition="""You magically twist space around another creature you can see within range. The target must succeed on a Constitution saving throw (the target can choose to fail), or the target is teleported to an unoccupied space of your choice that you can see within range. The chosen space must be on a surface or in a liquid that can support the target without the target having to squeeze.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 3rd level or higher, the range of the spell increases by 30 feet for each slot level above 2nd.""")
+	WardingBond = 		Spell("Warding Bond", 2,  "Abjuration", "1 Action", "Touch", "1 hour", "Verbal, Somatic, Material", definition="""You touch another creature that is willing and create a mystic connection between you and the target until the spell ends. While the target is within 60 feet of you, it gains a +1 bonus to AC and saving throws, and it has Resistance to all damage. Also, each time it takes damage, you take the same amount of damage.
+<br>
+The spell ends if you drop to 0 Hit Points or if you and the target become separated by more than 60 feet. It also ends if the spell is cast again on either of the connected creatures.""")
+	WardingWind = 		Spell("Warding Wind", 2,  "Evocation", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal", definition="""A strong wind (20 miles per hour) blows around you in a 10-foot radius and moves with you, remaining centered on you. The wind lasts for the spell's duration.
+<br>
+The wind has the following effects:
+<br>
+It deafens you and other creatures in its area.
+<br>
+It extinguishes unprotected flames in its area that are torch-sized or smaller.
+<br>
+It hedges out vapor, gas, and fog that can be dispersed by strong wind.
+<br>
+The area is 3 for creatures other than you.
+<br>
+The attack rolls of ranged weapon attacks have disadvantage if the attacks pass in or out of the wind.""")
+	WarpSense = 		Spell("Warp Sense", 2,  "Divination", "1 Action", "Self", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""For the duration, you sense the presence of portals, even inactive ones, within 30 feet of yourself.
+<br>
+If you detect a portal in this way, you can use your action to study it. Make a DC 15 ability check using your spellcasting ability. On a successful check, you learn the destination plane of the portal and what portal key it requires, then the spell ends. On a failed check, you learn nothing and can't study that portal again using this spell until you cast it again.
+<br>
+The spell can penetrate most barriers but is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.""")
+	Web = 				Spell("Web", 2,  "Conjuration", "1 Action", "60 feet", "Concentration, up to 1 hour", "Verbal, Somatic, Material", definition="""You conjure a mass of sticky webbing at a point within range. The webs fill a 20-foot Cube there for the duration. The webs are Difficult Terrain, and the area within them is Lightly Obscured.
+<br>
+If the webs aren't anchored between two solid masses (such as walls or trees) or layered across a floor, wall, or ceiling, the web collapses on itself, and the spell ends at the start of your next turn. Webs layered over a flat surface have a depth of 5 feet.
+<br>
+The first time a creature enters the webs on a turn or starts its turn there, it must succeed on a Dexterity saving throw or have the Restrained condition while in the webs or until it breaks free.
+<br>
+A creature Restrained by the webs can take an action to make a Strength (Athletics) check against your spell save DC. If it succeeds, it is no longer Restrained.
+<br>
+The webs are flammable. Any 5-foot Cube of webs exposed to fire burns away in 1 round, dealing 2d4 Fire damage to any creature that starts its turn in the fire.""")
+	WitherBloom = 	Spell("Wither and Bloom", 2,  "Necromancy", "1 Action", "60 feet", "Instantaneous", "Verbal, Somatic, Material", definition="""You invoke both death and life upon a 10-foot-radius sphere centered on a point within range. Each creature of your choice in that area must make a Constitution saving throw, taking 2d6 necrotic damage on a failed save, or half as much damage on a successful one. Nonmagical vegetation in that area withers.
+<br>
+In addition, one creature of your choice in that area can spend and roll one of its unspent Hit Dice and regain a number of hit points equal to the roll plus your spellcasting ability modifier.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d6 for each slot above the 2nd, and the number of Hit Dice that can be spent and added to the healing roll increases by one for each slot above 2nd.""")
+	Wristpocket = 	Spell("Wristpocket", 2,  "Conjuration", "1 Action", "Self", "Concentration, up to 1 hour", "Somatic", definition="""You flick your wrist, causing one object in your hand to vanish. The object, which only you can be holding and can weigh no more than 5 pounds, is transported to an extradimensional space, where it remains for the duration.
+<br>
+Until the spell ends, you can use your action to summon the object to your free hand, and you can use your action to return the object to the extradimensional space. An object still in the pocket plane when the spell ends appears in your space, at your feet.""")
+	AlterSelf = 	Spell("Alter Self", 2, "Transmutation", "1 Action", "Self", "Concentration, up to 1 hour", "Verbal, Somatic", definition="""You alter your physical form. Choose one of the following options. Its effects last for the duration, during which you can take a Magic action to replace the option you chose with a different one.
+<br>
+<b>Aquatic Adaptation.</b> You sprout gills and grow webs between your fingers. You can breathe underwater and gain a Swim Speed equal to your Speed.
+<br>
+<b>Change Appearance.</b> You alter your appearance. You decide what you look like, including your height, weight, facial features, sound of your voice, hair length, coloration, and other distinguishing characteristics. You can make yourself appear as a member of another species, though none of your statistics change. You can't appear as a creature of a different size, and your basic shape stays the same; if you're bipedal, you can't use this spell to become quadrupedal, for instance. For the duration, you can take a Magic action to change your appearance in this way again.
+<br>
+<b>Natural Weapons.</b> You grow claws (Slashing), fangs (Piercing), horns (Piercing), or hooves (Bludgeoning). When you use your Unarmed Strike to deal damage with that new growth, it deals 1d6 damage of the type in parentheses instead of dealing the normal damage for your Unarmed Strike, and you use your spellcasting ability modifier for the attack and damage rolls rather than using Strength.""")
+	Barkskin = 		Spell("Barkskin", 2, "Transmutation", "1 Action", "Touch", "Concentration, up to 1 hour", "Verbal, Somatic, Material", definition="""You touch a willing creature. Until the spell ends, the target's skin assumes a bark-like appearance, and the target has an Armor Class of 17 if its AC is lower than that.""")
+	BeastSense = 	Spell("Beast Sense", 2, "Divination", "1 Action", "Touch", "Concentration, up to 1 hour", "Somatic", definition="""You touch a willing Beast. For the duration, you can perceive through the Beast's senses as well as your own. When perceiving through the Beast's senses, you benefit from any special senses it has.""")
+	HeatMetal = 		Spell("Heat Metal", 2, "Transmutation", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""Choose a manufactured metal object, such as a metal weapon or a suit of Heavy or Medium metal armor, that you can see within range. You cause the object to glow red-hot. Any creature in physical contact with the object takes 2d8 Fire damage when you cast the spell. Until the spell ends, you can take a Bonus Action on each of your later turns to deal this damage again if the object is within range.
+<br>
+If a creature is holding or wearing the object and takes the damage from it, the creature must succeed on a Constitution saving throw or drop the object if it can. If it doesn't drop the object, it has Disadvantage on attack rolls and ability checks until the start of your next turn.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d8 for each spell slot level above 2.""")
+	Earthbind = 			Spell("Earthbind", 2, "Transmutation", "1 Action", "300 feet", "Concentration, up to 1 minute", "Verbal", definition="""Choose one creature you can see within range. Yellow strips of magical energy loop around the creature. The target must succeed on a Strength saving throw, or its flying speed (if any) is reduced to 0 feet for the spell's duration. An airborne creature affected by this spell safely descends at 60 feet per round until it reaches the ground or the spell ends.""")
+	ContinualFlame = 		Spell("Continual Flame", 2, "Evocation", "1 Action", "Touch", "Until dispelled", "Verbal, Somatic, Material", definition="""A flame springs from an object that you touch. The effect casts Bright Light in a 20-foot radius and Dim Light for an additional 20 feet. It looks like a regular flame, but it creates no heat and consumes no fuel. The flame can be covered or hidden but not smothered or quenched.""")
+	FlameBlade = 			Spell("Flame Blade", 2, "Evocation", "1 Bonus Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic, Material", definition="""You evoke a fiery blade in your free hand. The blade is similar in size and shape to a scimitar, and it lasts for the duration. If you let go of the blade, it disappears, but you can evoke it again as a Bonus Action.
+<br>
+As a Magic action, you can make a melee spell attack with the fiery blade. On a hit, the target takes Fire damage equal to 3d6 plus your spellcasting ability modifier.
+<br>
+The flaming blade sheds Bright Light in a 10-foot radius and Dim Light for an additional 10 feet.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d6 for each spell slot level above 2.""")
+	Augury = 				Spell("Augury",2,  "Divination", "1 Minute", "Self", "Instantaneous", "Verbal, Somatic, Material", definition="""You receive an omen from an otherworldly entity about the results of a course of action that you plan to take within the next 30 minutes. The DM chooses the omen from the Omens table.
+<br>
+The spell doesn't account for circumstances, such as other spells, that might change the results.
+<br>
+If you cast the spell more than once before finishing a Long Rest, there is a cumulative 25% chance for each casting after the first that you get no answer.""")
+	DetectThoughts = 		Spell("Detect Thoughts",2,  "Divination", "1 Action", "Self", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""You activate one of the effects below. Until the spell ends, you can activate either effect as a Magic action on your later turns.
+<br>
+<b>Sense Thoughts.</b> You sense the presence of thoughts within 30 feet of yourself that belong to creatures that know languages or are telepathic. You don't read the thoughts, but you know that a thinking creature is present. The spell is blocked by 1 foot of stone, dirt, or wood; 1 inch of metal; or a thin sheet of lead.
+<br>
+<b>Read Thoughts.</b> Target one creature you can see within 30 feet of yourself or one creature within 30 feet of yourself that you detected with the Sense Thoughts option. You learn what is most on the target's mind right now. If the target doesn't know any languages and isn't telepathic, you learn nothing. As a Magic action on your next turn, you can try to probe deeper into the target's mind. If you probe deeper, the target makes a Wisdom saving throw. On a failed save, you discern the target's reasoning, emotions, and something that looms large in its mind (such as a worry, love, or hate). On a successful save, the spell ends. Either way, the target knows that you are probing into its mind, and until you shift your attention away from the target's mind, the target can take an action on its turn to make an Intelligence (Arcana) check against your spell save DC, ending the spell on a success.""")
+	PassWithoutTrace = 		Spell("Pass Without Trace", 2, "Abjuration", "1 Action", "Self", "Concentration, up to 1 hour", "Verbal, Somatic, Material", definition="""You radiate a concealing aura in a 30-foot Emanation for the duration. While in the aura, you and each creature you choose have a +10 bonus to Dexterity (Stealth) checks and leave no tracks.""")
+	LesserRestoration = 	Spell("Lesser Restoration",	2, "Abjuration", "1 Action", "Touch", "Instantaneous", "Verbal, Somatic", definition="""You touch a creature and end one condition on it: Blinded, Deafened, Paralyzed, or Poisoned.""")
+	AirBubble = 			Spell("Air Bubble", 2, "Conjuration", "1 Action", "60 Feet", "24 hours", "Somatic", definition="""You create a spectral globe around the head of a willing creature you can see within range. The globe is filled with fresh air that lasts until the spell ends. If the creature has more than one head, the globe of air appears around only one of its heads (which is all the creature needs to avoid suffocation, assuming that all its heads share the same respiratory system).
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 3rd level or higher, you can create two additional globes of fresh air for each slot level above 2nd.""")
+	ArcaneLock = 			Spell("Arcane Lock", 2, "Abjuration", "1 Action", "Touch", "Until dispelled", "Verbal, Somatic, Material", definition="""You touch a closed door, window, gate, container, or hatch and magically lock it for the duration. This lock can't be unlocked by any nonmagical means. You and any creatures you designate when you cast the spell can open and close the object despite the lock. You can also set a password that, when spoken within 5 feet of the object, unlocks it for 1 minute.""")
+	Blur = 					Spell("Blur", 2, "Illusion", "1 Action", "Self", "Concentration, up to 1 minute", "Verbal", definition="""Your body becomes blurred. For the duration, any creature has Disadvantage on attack rolls against you. An attacker is immune to this effect if it perceives you with Blindsight or Truesight.""")
+	BorrowedKnowledge = 	Spell("Borrowed Knowledge", 2, "Divination", "1 Action", "Self", "1 hour", "Verbal, Somatic, Material", definition="""You draw on knowledge from spirits of the past. Choose one skill in which you lack proficiency. For the spell's duration, you have proficiency in the chosen skill. The spell ends early if you cast it again.""")
+	CordonofArrows = 		Spell("Cordon of Arrows",2,  "Transmutation", "1 Action", "5 feet", "8 hours", "Verbal, Somatic, Material", definition="""You touch up to four nonmagical Arrows or Bolts and plant them in the ground in your space. Until the spell ends, the ammunition can't be physically uprooted, and whenever a creature other than you enters a space within 30 feet of the ammunition for the first time on a turn or ends its turn there, one piece of ammunition flies up to strike it. The creature must succeed on a Dexterity saving throw or take 2d4 Piercing damage. The piece of ammunition is then destroyed. The spell ends when none of the ammunition remains planted in the ground.
+<br>
+When you cast this spell, you can designate any creatures you choose, and the spell ignores them.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The amount of ammunition that can be affected increases by two for each spell slot level above 2.""")
+	Darkvision = 			Spell("Darkvision", 2, "Transmutation", "1 Action", "Touch", "8 hours", "Verbal, Somatic, Material", definition="""For the duration, a willing creature you touch has Darkvision with a range of 150 feet.""")
+	DragonsBreath = 		Spell("Dragon's Breath", 2, "Transmutation", "1 Bonus Action", "Touch", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""You touch one willing creature, and choose Acid, Cold, Fire, Lightning, or Poison. Until the spell ends, the target can take a Magic action to exhale a 15-foot Cone. Each creature in that area makes a Dexterity saving throw, taking 3d6 damage of the chosen type on a failed save or half as much damage on a successful one.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d6 for each spell slot level above 2.""")
+	DustDevil = 			Spell("Dust Devil", 2, "Conjuration", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""Choose an unoccupied 5-foot cube of air that you can see within range. An elemental force that resembles a dust devil appears in the cube and lasts for the spell's duration.
+<br>
+Any creature that ends its turn within 5 feet of the dust devil must make a Strength saving throw. On a failed save, the creature takes 1d8 bludgeoning damage and is pushed 10 feet away from the dust devil. On a successful save, the creature takes half as much damage and isn't pushed.
+<br>
+As a bonus action, you can move the dust devil up to 30 feet in any direction. If the dust devil moves over sand, dust, loose dirt, or light gravel, it sucks up the material and forms a 10-foot-radius cloud of debris around itself that lasts until the start of your next turn. The cloud heavily obscures its area.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for each slot level above 2nd.""")
+	FindSteed = 			Spell("Find Steed", 2, "Conjuration", "10 Minutes", "30 feet", "Instantaneous", "Verbal, Somatic", definition="""You summon an otherworldly being that appears as a loyal steed in an unoccupied space of your choice within range. This creature uses the Otherworldly Steed stat block. If you already have a steed from this spell, the steed is replaced by the new one.
+<br>
+The steed resembles a Large, rideable animal of your choice, such as a horse, a camel, a dire wolf, or an elk. Whenever you cast the spell, choose the steed's creature type--Celestial, Fey, or Fiend--which determines certain traits in the stat block.
+<br>
+<b>Combat.</b> The steed is an ally to you and your allies. In combat, it shares your Initiative count, and it functions as a controlled mount while you ride it (as defined in the rules on 1). If you have the Incapacitated condition, the steed takes its turn immediately after yours and acts independently, focusing on protecting you.
+<br>
+<b>Disappearance of the Steed.</b> The steed disappears if it drops to 0 Hit Points or if you die. When it disappears, it leaves behind anything it was wearing or carrying. If you cast this spell again, you decide whether you summon the steed that disappeared or a different one.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> Use the spell slot's level for the spell's level in the stat block.""")
+	FindTraps = 			Spell("Find Traps", 2, "Divination", "1 Action", "120 feet", "Instantaneous", "Verbal, Somatic", definition="""You sense any trap within range that is within line of sight. A trap, for the purpose of this spell, includes any object or mechanism that was created to cause damage or other danger. Thus, the spell would sense the Alarm or Glyph of Warding spell or a mechanical pit trap, but it wouldn't reveal a natural weakness in the floor, an unstable ceiling, or a hidden sinkhole.
+<br>
+This spell reveals that a trap is present but not its location. You do learn the general nature of the danger posed by a trap you sense.""")
+	FlamingSphere = 		Spell("Flaming Sphere", 2, "Conjuration", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""You create a 5-foot-diameter sphere of fire in an unoccupied space on the ground within range. It lasts for the duration. Any creature that ends its turn within 5 feet of the sphere makes a Dexterity saving throw, taking 2d6 Fire damage on a failed save or half as much damage on a successful one.
+<br>
+As a Bonus Action, you can move the sphere up to 30 feet, rolling it along the ground. If you move the sphere into a creature's space, that creature makes the save against the sphere, and the sphere stops moving for the turn.
+<br>
+When you move the sphere, you can direct it over barriers up to 5 feet tall and jump it across pits up to 10 feet wide. Flammable objects that aren't being worn or carried start burning if touched by the sphere, and it sheds Bright Light in a 20-foot radius and Dim Light for an additional 20 feet.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d6 for each spell slot level above 2.""")
+	FlockofFamiliars = 		Spell("Flock of Familiars", 2, "Conjuration", "1 Minute", "Touch", "Concentration, up to 1 hour", "Verbal, Somatic", definition="""You temporarily summon three familiars--spirits that take animal forms of your choice. Each familiar uses the same rules and options for a familiar conjured by the find familiar spell. All the familiars conjured by this spell must be the same type of creature (celestials, fey, or fiends; your choice). If you already have a familiar conjured by the find familiar spell or similar means, then one fewer familiars are conjured by this spell.
+<br>
+Familiars summoned by this spell can telepathically communicate with you and share their visual or auditory senses while they are within 1 mile of you.
+<br>
+When you cast a spell with a range of touch, one of the familiars conjured by this spell can deliver the spell, as normal. However, you can cast a touch spell through only one familiar per turn.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 3rd level or higher, you conjure an additional familiar for each slot level above 2nd.""")
+	FortunesFavor = 		Spell("Fortune's Favor", 2, "Divination", "1 Minute", "60 feet", "1 hour", "Verbal, Somatic, Material", definition="""You impart latent luck to yourself or one willing creature you can see within range. When the chosen creature makes an attack roll, an ability check, or a saving throw before the spell ends, it can dismiss this spell on itself to roll an additional d20 and choose which of the d20s to use. Alternatively, when an attack roll is made against the chosen creature, it can dismiss this spell on itself to roll a d20 and choose which of the d20s to use, the one it rolled or the one the attacker rolled.
+<br>
+If the original d20 roll has advantage or disadvantage, the creature rolls the additional d20 after advantage or disadvantage has been applied to the original roll.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.""")
+	GentleRepose = 			Spell("Gentle Repose", 2, "Necromancy", "1 Action", "Touch", "10 days", "Verbal, Somatic, Material", definition="""You touch a corpse or other remains. For the duration, the target is protected from decay and can't become Undead.
+<br>
+The spell also effectively extends the time limit on raising the target from the dead, since days spent under the influence of this spell don't count against the time limit of spells such as Raise Dead.""")
+	GiftOfGab = 			Spell("Gift of Gab", 2, "Enchantment", "Reaction", "Self", "Instantaneous", "Verbal, Somatic, Material", definition="""<i>“When I met Jim Darkmagic, I wondered how he got anything done in that outfit. I have since learned that most of his talents involve standing and talking. His outfit is perfect for that.”</i> --Môrgæn
+<br>
+Jim Darkmagic is said to have invented this spell, originally calling it <i>I said what?!</i> Have you ever been talking to the local monarch and accidentally mentioned how their son looks like your favorite hog from when you were growing up on the family farm? We've all been there! But rather than being beheaded for an honest slip of the tongue, you can pretend it never happened--by ensuring that no one knows it happened.
+<br>
+When you cast this spell, you skillfully reshape the memories of listeners in your immediate area, so that each creature of your choice within 5 feet of you forgets everything you said within the last 6 seconds. Those creatures then remember that you actually said the words you speak as the verbal component of the spell.""")
+	HealingSpirit = 		Spell("Healing Spirit", 2, "Conjuration", "1 Bonus Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic", definition="""You call forth a nature spirit to soothe the wounded. The intangible spirit appears in a space that is a 5-foot cube you can see within range. The spirit looks like a transparent beast or fey (your choice).
+<br>
+Until the spell ends, whenever you or a creature you can see moves into the spirit's space for the first time on a turn or starts its turn there, you can cause the spirit to restore 1d6 hit points to that creature (no action required). The spirit can't heal constructs or undead. The spirit can heal a number of times equal to 1 + your spellcasting ability modifier (minimum of twice). After healing that number of times, the spirit disappears.
+<br>
+As a bonus action on your turn, you can move the spirit up to 30 feet to a space you can see.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 3rd level or higher, the healing increases by 1d6 for each slot level above 2nd.""")
+	ImmovableObject = 		Spell("Immovable Object", 2, "Transmutation", "1 Action", "Touch", "1 hour", "Verbal, Somatic, Material", definition="""You touch an object that weighs no more than 10 pounds and cause it to become magically fixed in place. You and the creatures you designate when you cast this spell can move the object normally. You can also set a password that, when spoken within 5 feet of the object, suppresses this spell for 1 minute.
+<br>
+If the object is fixed in the air, it can hold up to 4,000 pounds of weight. More weight causes the object to fall. Otherwise, a creature can use an action to make a Strength check against your spell save DC. On a success, the creature can move the object up to 10 feet.
+<br>
+<b>At Higher Levels.</b> If you cast this spell using a spell slot of 4th or 5th level, the DC to move the object increases by 5, it can carry up to 8,000 pounds of weight, and the duration increases to 24 hours. If you cast this spell using a spell slot of 6th level or higher, the DC to move the object increases by 10, it can carry up to 20,000 pounds of weight, and the effect is permanent until dispelled.""")
+	GlowingCoin = 			Spell("Jim's Glowing Coin", 2, "Enchantment", "1 Action", "60 feet", "1 minute", "Somatic, Material", definition="""Of the many tactics employed by master magician and renowned adventurer Jim Darkmagic, the old glowing coin trick is a time-honored classic. When you cast the spell, you hurl the coin that is the spell's material component to any spot within range. The coin lights up as if under the effect of a light spell. Each creature of your choice that you can see within 30 feet of the coin must succeed on a Wisdom saving throw or be distracted for the duration. While distracted, a creature has disadvantage on Wisdom (Perception) checks and initiative rolls.""")
+	KineticJaunt = 			Spell("Kinetic Jaunt", 2, "Transmutation", "1 Bonus Action", "Self", "Concentration, up to 1 minute", "Somatic", definition="""You magically empower your movement with dance-like steps, giving yourself the following benefits for the duration.
+<br>
+Your walking speed increases by 10 feet.
+<br>
+You don't provoke opportunity attacks.
+<br>
+You can move through the space of another creature, and it doesn't count as 3. If you end your turn in another creature's space, you are shunted to the last unoccupied space you occupied, and you take 1d8 force damage.""")
+	Levitate = 				Spell("Levitate", 2, "Transmutation", "1 Action", "60 feet", "Concentration, up to 10 minutes", "Verbal, Somatic, Material", definition="""One creature or loose object of your choice that you can see within range rises vertically up to 20 feet and remains suspended there for the duration. The spell can levitate an object that weighs up to 500 pounds. An unwilling creature that succeeds on a Constitution saving throw is unaffected.
+<br>
+The target can move only by pushing or pulling against a fixed object or surface within reach (such as a wall or a ceiling), which allows it to move as if it were climbing. You can change the target's altitude by up to 20 feet in either direction on your turn. If you are the target, you can move up or down as part of your move. Otherwise, you can take a Magic action to move the target, which must remain within the spell's range.
+<br>
+When the spell ends, the target floats gently to the ground if it is still aloft.""")
+	LocateAnimalsPlants = 	Spell("Locate Animals or Plants", 2, "Divination", "1 Action", "Self", "Instantaneous", "Verbal, Somatic, Material", definition="""Describe or name a specific kind of Beast, Plant creature, or nonmagical plant. You learn the direction and distance to the closest creature or plant of that kind within 5 miles, if any are present.""")
+	LocateObject = 			Spell("Locate Object", 2, "Divination", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic, Material", definition="""Describe or name an object that is familiar to you. You sense the direction to the object's location if that object is within 1,000 feet of you. If the object is in motion, you know the direction of its movement.
+<br>
+The spell can locate a specific object known to you if you have seen it up close--within 30 feet--at least once. Alternatively, the spell can locate the nearest object of a particular kind, such as a certain kind of apparel, jewelry, furniture, tool, or weapon.
+<br>
+This spell can't locate an object if any thickness of lead blocks a direct path between you and the object.""")
+	MagicMouth = 			Spell("Magic Mouth", 2, "Illusion", "1 Minute", "30 feet", "Until dispelled", "Verbal, Somatic, Material", definition="""You implant a message within an object in range--a message that is uttered when a trigger condition is met. Choose an object that you can see and that isn't being worn or carried by another creature. Then speak the message, which must be 25 words or fewer, though it can be delivered over as long as 10 minutes. Finally, determine the circumstance that will trigger the spell to deliver your message.
+<br>
+When that trigger occurs, a magical mouth appears on the object and recites the message in your voice and at the same volume you spoke. If the object you chose has a mouth or something that looks like a mouth (for example, the mouth of a statue), the magical mouth appears there, so the words appear to come from the object's mouth. When you cast this spell, you can have the spell end after it delivers its message, or it can remain and repeat its message whenever the trigger occurs.
+<br>
+The trigger can be as general or as detailed as you like, though it must be based on visual or audible conditions that occur within 30 feet of the object. For example, you could instruct the mouth to speak when any creature moves within 30 feet of the object or when a silver bell rings within 30 feet of it.""")
+	EarthenGrasp = 			Spell("Maximillian's Earthen Grasp", 2, "Transmutation", "1 Action", "30 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""You choose a 5-foot-square unoccupied space on the ground that you can see within range. A Medium hand made from compacted soil rises there and reaches for one creature you can see within 5 feet of it. The target must make a Strength saving throw. On a failed save, the target takes 2d6 bludgeoning damage and is restrained for the spell's duration.
+<br>
+As an action, you can cause the hand to crush the restrained target, which must make a Strength saving throw. The target takes 2d6 bludgeoning damage on a failed save, or half as much damage on a successful one.
+<br>
+To break out, the restrained target can use its action to make a Strength check against your spell save DC. On a success, the target escapes and is no longer restrained by the hand.
+<br>
+As an action, you can cause the hand to reach for a different creature or to move to a different unoccupied space within range. The hand releases a restrained target if you do either.""")
+	AcidArrow = 			Spell("Melf's Acid Arrow",2,  "Evocation", "1 Action", "90 feet", "Instantaneous", "Verbal, Somatic, Material", definition="""A shimmering green arrow streaks toward a target within range and bursts in a spray of acid. Make a ranged spell attack against the target. On a hit, the target takes 4d4 Acid damage and 2d4 Acid damage at the end of its next turn. On a miss, the arrow splashes the target with acid for half as much of the initial damage only.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage (both initial and later) increases by 1d4 for each spell slot level above 2.""")
+	MindSpike = 			Spell("Mind Spike",2,  "Divination", "1 Action", "60 feet", "Concentration, up to 1 hour", "Somatic", definition="""You drive a spike of psionic energy into the mind of one creature you can see within range. The target makes a Wisdom saving throw, taking 3d8 Psychic damage on a failed save or half as much damage on a successful one. On a failed save, you also always know the target's location until the spell ends, but only while the two of you are on the same plane of existence. While you have this knowledge, the target can't become hidden from you, and if it has the Invisible condition, it gains no benefit from that condition against you.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d8 for each spell slot level above 2.""")
+	MistyStep = 			Spell("Misty Step", 2, "Conjuration", "1 Bonus Action", "Self", "Instantaneous", "Verbal", definition="""Briefly surrounded by silvery mist, you teleport up to 30 feet to an unoccupied space you can see.""")
+	Moonbeam = 				Spell("Moonbeam", 2, "Evocation", "1 Action", "120 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""A silvery beam of pale light shines down in a 5-foot-radius, 40-foot-high Cylinder centered on a point within range. Until the spell ends, Dim Light fills the Cylinder, and you can take a Magic action on later turns to move the Cylinder up to 60 feet.
+<br>
+When the Cylinder appears, each creature in it makes a Constitution saving throw. On a failed save, a creature takes 2d10 Radiant damage, and if the creature is shape-shifted (as a result of the Polymorph spell, for example), it reverts to its true form and can't shape-shift until it leaves the Cylinder. On a successful save, a creature takes half as much damage only. A creature also makes this save when the spell's area moves into its space and when it enters the spell's area or ends its turn there. A creature makes this save only once per turn.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d10 for each spell slot level above 2.""")
+	Mischief = 				Spell("Nathair's Mischief", 2, "Illusion", "1 Action", "60 feet", "Concentration, up to 1 minute", "Somatic, Material", definition="""You fill a 20-foot cube you can see within range with fey and draconic magic. Roll on the Mischievous Surge table to determine the magical effect produced, and roll again at the start of each of your turns until the spell ends. You can move the cube up to 10 feet before you roll.
+<br>
+1: The smell of apple pie fills the air, and each creature in the cube must succeed on a Wisdom saving throw or become charmed by you until the start of your next turn.
+<br>
+2: Bouquets of flowers appear all around, and each creature in the cube must succeed on a Dexterity saving throw or be blinded until the start of your next turn as the flowers spray water in their faces.
+<br>
+3: Each creature in the cube must succeed on a Wisdom saving throw or begin giggling until the start of your next turn. A giggling creature is incapacitated and uses all its movement to move in a random direction.
+<br>
+4: Drops of molasses hover in the cube, making it 3 until the start of your next turn.""")
+	MagicAura = 			Spell("Nystul's Magic Aura",2,  "Illusion", "1 Action", "Touch", "24 hours", "Verbal, Somatic, Material", definition="""With a touch, you place an illusion on a willing creature or an object that isn't being worn or carried. A creature gains the Mask effect below, and an object gains the False Aura effect below. The effect lasts for the duration. If you cast the spell on the same target every day for 30 days, the illusion lasts until dispelled.
+<br>
+<b>Mask (Creature).</b> Choose a creature type other than the target's actual type. Spells and other magical effects treat the target as if it were a creature of the chosen type.
+<br>
+<b>False Aura (Object).</b> You change the way the target appears to spells and magical effects that detect magical auras, such as Detect Magic. You can make a nonmagical object appear magical, make a magic item appear nonmagical, or change the object's aura so that it appears to belong to a school of magic you choose.""")
+	PrayerOfHealing = 		Spell("Prayer of Healing", 2, "Evocation", "10 Minutes", "30 feet", "Instantaneous", "Verbal", definition="""Up to five creatures of your choice who remain within range for the spell's entire casting gain the benefits of a Short Rest and also regain 2d8 Hit Points. A creature can't be affected by this spell again until that creature finishes a Long Rest.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The healing increases by 1d8 for each spell slot level above 2.""")
+	ProtectionFromPoison = 	Spell("Protection from Poison", 2, "Abjuration", "1 Action", "Touch", "1 hour", "Verbal, Somatic", definition="""You touch a creature and end the Poisoned condition on it. For the duration, the target has Advantage on saving throws to avoid or end the Poisoned condition, and it has Resistance to Poison damage.""")
+	Pyrotechnics = 			Spell("Pyrotechnics",2,  "Transmutation", "1 Action", "60 feet", "Instantaneous", "Verbal, Somatic", definition="""Choose an area of nonmagical flame that you can see and that fits within a 5-foot cube within range. You can extinguish the fire in that area, and you create either fireworks or smoke when you do so.
+<br>
+<b>Fireworks.</b> The target explodes with a dazzling display of colors. Each creature within 10 feet of the target must succeed on a Constitution saving throw or become blinded until the end of your next turn.
+<br>
+<b>Smoke.</b> Thick black smoke spreads out from the target in a 20-foot radius, moving around corners. The area of the smoke is heavily obscured. The smoke persists for 1 minute or until a strong wind disperses it.""")
+	RayOfEnfeeblement = 	Spell("Ray of Enfeeblement", 2, "Necromancy", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic", definition="""A beam of enervating energy shoots from you toward a creature within range. The target must make a Constitution saving throw. On a successful save, the target has Disadvantage on the next attack roll it makes until the start of your next turn.
+<br>
+On a failed save, the target has Disadvantage on Strength-based D20 Tests for the duration. During that time, it also subtracts 1d8 from all its damage rolls. The target repeats the save at the end of each of its turns, ending the spell on a success.""")
+	BindingIce = 			Spell("Rime's Binding Ice", 2, "Evocation", "1 Action", "Self (30-foot cone)", "Instantaneous", "Somatic, Material", definition="""A burst of cold energy emanates from you in a 30-foot cone. Each creature in that area must make a Constitution saving throw. On a failed save, a creature takes 3d8 cold damage and is hindered by ice formations for 1 minute, or until it or another creature within reach of it uses an action to break away the ice. A creature hindered by ice has its speed reduced to 0. On a successful save, a creature takes half as much damage and isn't hindered by ice.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 3rd level or higher, increase the cold damage by 1d8 for each slot level above 2nd.""")
+	RopeTrick = 			Spell("Rope Trick", 2, "Transmutation", "1 Action", "Touch", "1 hour", "Verbal, Somatic, Material", definition="""You touch a rope. One end of it hovers upward until the rope hangs perpendicular to the ground or the rope reaches a ceiling. At the rope's upper end, an Invisible 3-foot-by-5-foot portal opens to an extradimensional space that lasts until the spell ends. That space can be reached by climbing the rope, which can be pulled into or dropped out of it.
+<br>
+The space can hold up to eight Medium or smaller creatures. Attacks, spells, and other effects can't pass into or out of the space, but creatures inside it can see through the portal. Anything inside the space drops out when the spell ends.""")
+	ShadowBlade = 			Spell("Shadow Blade", 2, "Illusion", "1 Bonus Action", "Self", "Concentration, up to 1 minute", "Verbal, Somatic", definition="""You weave together threads of shadow to create a sword of solidified gloom in your hand. This magic sword lasts until the spell ends. It counts as a simple melee weapon with which you are proficient. It deals 2d8 psychic damage on a hit and has the finesse, light, and thrown properties (range 20/60). In addition, when you use the sword to attack a target that is in dim light or darkness, you make the attack roll with advantage.
+<br>
+If you drop the weapon or throw it, it dissipates at the end of the turn. Thereafter, while the spell persists, you can use a bonus action to cause the sword to reappear in your hand.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a 3rd- or 4th-level spell slot, the damage increases to 3d8. When you cast it using a 5th- or 6th-level spell slot, the damage increases to 4d8. When you cast it using a spell slot of 7th level or higher, the damage increases to 5d8.""")
+	Skywrite = 				Spell("Skywrite", 2,  "Transmutation", "1 Action", "Sight", "Concentration, up to 1 day", "Verbal, Somatic", definition="""You cause up to ten words to form in a part of the sky you can see. The words appear to be made of cloud and remain in place for the spell's duration. The words dissipate when the spell ends. A strong wind can disperse the clouds and end the spell early.""")
+	SnowballStorm = 		Spell("Snilloc's Snowball Storm", 2,  "Evocation", "1 Action", "90 feet", "Instantaneous", "Verbal, Somatic, Material", definition="""A flurry of magic snowballs erupts from a point you choose within range. Each creature in a 5-foot-radius sphere centered on that point must make a Dexterity saving throw. A creature takes 3d6 cold damage on a failed save, or half as much damage on a successful one.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d6 for each slot level above 2nd.""")
+	SpiderClimb = 			Spell("Spider Climb", 2,  "Transmutation", "1 Action", "Touch", "Concentration, up to 1 hour", "Verbal, Somatic, Material", definition="""Until the spell ends, one willing creature you touch gains the ability to move up, down, and across vertical surfaces and along ceilings, while leaving its hands free. The target also gains a Climb Speed equal to its Speed.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> You can target one additional creature for each spell slot level above 2.""")
+	SpikeGrowth = 			Spell("Spike Growth",  2, "Transmutation", "1 Action", "150 feet", "Concentration, up to 10 minutes", "Verbal, Somatic, Material", definition="""The ground in a 20-foot-radius Sphere centered on a point within range sprouts hard spikes and thorns. The area becomes Difficult Terrain for the duration. When a creature moves into or within the area, it takes 2d4 Piercing damage for every 5 feet it travels.
+<br>
+The transformation of the ground is camouflaged to look natural. Any creature that can't see the area when the spell is cast must take a Search action and succeed on a Wisdom (Perception or Survival) check against your spell save DC to recognize the terrain as hazardous before entering it.""")
+	SpiritualWeapon = 		Spell("Spiritual Weapon",  2, "Evocation", "1 Bonus Action", "60 feet", "1 minute", "Verbal, Somatic", definition="""You create a floating, spectral force that resembles a weapon of your choice and lasts for the duration. The force appears within range in a space of your choice, and you can immediately make one melee spell attack against one creature within 5 feet of the force. On a hit, the target takes Force damage equal to 1d8 plus your spellcasting ability modifier.
+<br>
+As a Bonus Action on your later turns, you can move the force up to 20 feet and repeat the attack against a creature within 5 feet of it.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d8 for every slot level above 2.""")
+	SummonBeast = 			Spell("Summon Beast", 2,  "Conjuration", "1 Action", "90 feet", "Concentration, up to 1 hour", "Verbal, Somatic, Material", definition="""You call forth a bestial spirit. It manifests in an unoccupied space that you can see within range and uses the Bestial Spirit stat block. When you cast the spell, choose an environment: Air, Land, or Water. The creature resembles an animal of your choice that is native to the chosen environment, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.
+<br>
+The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don't issue any, it takes the Dodge action and uses its movement to avoid danger.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> Use the spell slot's level for the spell's level in the stat block.""")
+	MindWhip = 				Spell("Tasha's Mind Whip",  2, "Enchantment", "1 Action", "90 feet", "1 round", "Verbal", definition="""You psychically lash out at one creature you can see within range. The target must make an Intelligence saving throw. On a failed save, the target takes 3d6 psychic damage, and it can't take a reaction until the end of its next turn. Moreover, on its next turn, it must choose whether it gets a move, an action, or a bonus action; it gets only one of the three. On a successful save, the target takes half as much damage and suffers none of the spell's other effects.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd. The creatures must be within 30 feet of each other when you target them.""")
+	VortexWarp = 			Spell("Vortex Warp",  2, "Conjuration", "1 Action", "90 feet", "Instantaneous", "Verbal, Somatic", definition="""You magically twist space around another creature you can see within range. The target must succeed on a Constitution saving throw (the target can choose to fail), or the target is teleported to an unoccupied space of your choice that you can see within range. The chosen space must be on a surface or in a liquid that can support the target without the target having to squeeze.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 3rd level or higher, the range of the spell increases by 30 feet for each slot level above 2nd.""")
+	WardingBond = 			Spell("Warding Bond",  2, "Abjuration", "1 Action", "Touch", "1 hour", "Verbal, Somatic, Material", definition="""You touch another creature that is willing and create a mystic connection between you and the target until the spell ends. While the target is within 60 feet of you, it gains a +1 bonus to AC and saving throws, and it has Resistance to all damage. Also, each time it takes damage, you take the same amount of damage.
+<br>
+The spell ends if you drop to 0 Hit Points or if you and the target become separated by more than 60 feet. It also ends if the spell is cast again on either of the connected creatures.""")
+	WardingWind = 			Spell("Warding Wind",  2, "Evocation", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal", definition="""A strong wind (20 miles per hour) blows around you in a 10-foot radius and moves with you, remaining centered on you. The wind lasts for the spell's duration.
+<br>
+The wind has the following effects:
+<br>
+It deafens you and other creatures in its area.
+<br>
+It extinguishes unprotected flames in its area that are torch-sized or smaller.
+<br>
+It hedges out vapor, gas, and fog that can be dispersed by strong wind.
+<br>
+The area is 3 for creatures other than you.
+<br>
+The attack rolls of ranged weapon attacks have disadvantage if the attacks pass in or out of the wind.""")
+	WarpSense = 			Spell("Warp Sense",  2, "Divination", "1 Action", "Self", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""For the duration, you sense the presence of portals, even inactive ones, within 30 feet of yourself.
+<br>
+If you detect a portal in this way, you can use your action to study it. Make a DC 15 ability check using your spellcasting ability. On a successful check, you learn the destination plane of the portal and what portal key it requires, then the spell ends. On a failed check, you learn nothing and can't study that portal again using this spell until you cast it again.
+<br>
+The spell can penetrate most barriers but is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.""")
+	Web = 					Spell("Web",  2, "Conjuration", "1 Action", "60 feet", "Concentration, up to 1 hour", "Verbal, Somatic, Material", definition="""You conjure a mass of sticky webbing at a point within range. The webs fill a 20-foot Cube there for the duration. The webs are Difficult Terrain, and the area within them is Lightly Obscured.
+<br>
+If the webs aren't anchored between two solid masses (such as walls or trees) or layered across a floor, wall, or ceiling, the web collapses on itself, and the spell ends at the start of your next turn. Webs layered over a flat surface have a depth of 5 feet.
+<br>
+The first time a creature enters the webs on a turn or starts its turn there, it must succeed on a Dexterity saving throw or have the Restrained condition while in the webs or until it breaks free.
+<br>
+A creature Restrained by the webs can take an action to make a Strength (Athletics) check against your spell save DC. If it succeeds, it is no longer Restrained.
+<br>
+The webs are flammable. Any 5-foot Cube of webs exposed to fire burns away in 1 round, dealing 2d4 Fire damage to any creature that starts its turn in the fire.""")
+	Wristpocket = 			Spell("Wristpocket",  2, "Conjuration", "1 Action", "Self", "Concentration, up to 1 hour", "Somatic", definition="""You flick your wrist, causing one object in your hand to vanish. The object, which only you can be holding and can weigh no more than 5 pounds, is transported to an extradimensional space, where it remains for the duration.
+<br>
+Until the spell ends, you can use your action to summon the object to your free hand, and you can use your action to return the object to the extradimensional space. An object still in the pocket plane when the spell ends appears in your space, at your feet.""")
+	LesserRestoration = 	Spell("Lesser Restoration", 2,  "Abjuration", "1 Action", "Touch", "Instantaneous", "Verbal, Somatic", definition="""You touch a creature and end one condition on it: Blinded, Deafened, Paralyzed, or Poisoned.""")
+	AlterSelf = 			Spell("Alter Self",  2, "Transmutation", "1 Action", "Self", "Concentration, up to 1 hour", "Verbal, Somatic", definition="""You alter your physical form. Choose one of the following options. Its effects last for the duration, during which you can take a Magic action to replace the option you chose with a different one.
+<br>
+<b>Aquatic Adaptation.</b> You sprout gills and grow webs between your fingers. You can breathe underwater and gain a Swim Speed equal to your Speed.
+<br>
+<b>Change Appearance.</b> You alter your appearance. You decide what you look like, including your height, weight, facial features, sound of your voice, hair length, coloration, and other distinguishing characteristics. You can make yourself appear as a member of another species, though none of your statistics change. You can't appear as a creature of a different size, and your basic shape stays the same; if you're bipedal, you can't use this spell to become quadrupedal, for instance. For the duration, you can take a Magic action to change your appearance in this way again.
+<br>
+<b>Natural Weapons.</b> You grow claws (Slashing), fangs (Piercing), horns (Piercing), or hooves (Bludgeoning). When you use your Unarmed Strike to deal damage with that new growth, it deals 1d6 damage of the type in parentheses instead of dealing the normal damage for your Unarmed Strike, and you use your spellcasting ability modifier for the attack and damage rolls rather than using Strength.""")
+	Barkskin = 				Spell("Barkskin", 2,  "Transmutation", "1 Action", "Touch", "Concentration, up to 1 hour", "Verbal, Somatic, Material", definition="""You touch a willing creature. Until the spell ends, the target's skin assumes a bark-like appearance, and the target has an Armor Class of 17 if its AC is lower than that.""")
+	BeastSense = 			Spell("Beast Sense", 2,  "Divination", "1 Action", "Touch", "Concentration, up to 1 hour", "Somatic", definition="""You touch a willing Beast. For the duration, you can perceive through the Beast's senses as well as your own. When perceiving through the Beast's senses, you benefit from any special senses it has.""")
+	HeatMetal = 			Spell("Heat Metal",  2, "Transmutation", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""Choose a manufactured metal object, such as a metal weapon or a suit of Heavy or Medium metal armor, that you can see within range. You cause the object to glow red-hot. Any creature in physical contact with the object takes 2d8 Fire damage when you cast the spell. Until the spell ends, you can take a Bonus Action on each of your later turns to deal this damage again if the object is within range.
+<br>
+If a creature is holding or wearing the object and takes the damage from it, the creature must succeed on a Constitution saving throw or drop the object if it can. If it doesn't drop the object, it has Disadvantage on attack rolls and ability checks until the start of your next turn.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d8 for each spell slot level above 2.""")
+	Earthbind = 			Spell("Earthbind", 2,  "Transmutation", "1 Action", "300 feet", "Concentration, up to 1 minute", "Verbal", definition="""Choose one creature you can see within range. Yellow strips of magical energy loop around the creature. The target must succeed on a Strength saving throw, or its flying speed (if any) is reduced to 0 feet for the spell's duration. An airborne creature affected by this spell safely descends at 60 feet per round until it reaches the ground or the spell ends.""")
+	ContinualFlame = 		Spell("Continual Flame", 2,  "Evocation", "1 Action", "Touch", "Until dispelled", "Verbal, Somatic, Material", definition="""A flame springs from an object that you touch. The effect casts Bright Light in a 20-foot radius and Dim Light for an additional 20 feet. It looks like a regular flame, but it creates no heat and consumes no fuel. The flame can be covered or hidden but not smothered or quenched.""")
+	AganazzarScorcher = 	Spell("Aganazzar's Scorcher", 2, "Evocation", "1 Action", "30 Feet", "Instantaneous", "Verbal, Somatic, Material", definition="""A line of roaring flame 30 feet long and 5 feet wide emanates from you in a direction you choose. Each creature in the line must make a Dexterity saving throw. A creature takes 3d8 fire damage on a failed save, or half as much damage on a successful one.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for each slot level above 2nd.""")
+	FlameBlade = 			Spell("Flame Blade", 2,  "Evocation", "1 Bonus Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic, Material", definition="""You evoke a fiery blade in your free hand. The blade is similar in size and shape to a scimitar, and it lasts for the duration. If you let go of the blade, it disappears, but you can evoke it again as a Bonus Action.
+<br>
+As a Magic action, you can make a melee spell attack with the fiery blade. On a hit, the target takes Fire damage equal to 3d6 plus your spellcasting ability modifier.
+<br>
+The flaming blade sheds Bright Light in a 10-foot radius and Dim Light for an additional 10 feet.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d6 for each spell slot level above 2.""")
+	Augury = 				Spell("Augury", 2,  "Divination", "1 Minute", "Self", "Instantaneous", "Verbal, Somatic, Material", definition="""You receive an omen from an otherworldly entity about the results of a course of action that you plan to take within the next 30 minutes. The DM chooses the omen from the Omens table.
+<br>
+The spell doesn't account for circumstances, such as other spells, that might change the results.
+<br>
+If you cast the spell more than once before finishing a Long Rest, there is a cumulative 25% chance for each casting after the first that you get no answer.""")
+	DetectThoughts = 		Spell("Detect Thoughts", 2,  "Divination", "1 Action", "Self", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""You activate one of the effects below. Until the spell ends, you can activate either effect as a Magic action on your later turns.
+<br>
+<b>Sense Thoughts.</b> You sense the presence of thoughts within 30 feet of yourself that belong to creatures that know languages or are telepathic. You don't read the thoughts, but you know that a thinking creature is present. The spell is blocked by 1 foot of stone, dirt, or wood; 1 inch of metal; or a thin sheet of lead.
+<br>
+<b>Read Thoughts.</b> Target one creature you can see within 30 feet of yourself or one creature within 30 feet of yourself that you detected with the Sense Thoughts option. You learn what is most on the target's mind right now. If the target doesn't know any languages and isn't telepathic, you learn nothing. As a Magic action on your next turn, you can try to probe deeper into the target's mind. If you probe deeper, the target makes a Wisdom saving throw. On a failed save, you discern the target's reasoning, emotions, and something that looms large in its mind (such as a worry, love, or hate). On a successful save, the spell ends. Either way, the target knows that you are probing into its mind, and until you shift your attention away from the target's mind, the target can take an action on its turn to make an Intelligence (Arcana) check against your spell save DC, ending the spell on a success.""")
+	PassWithoutTrace = 		Spell("Pass Without Trace", 2,  "Abjuration", "1 Action", "Self", "Concentration, up to 1 hour", "Verbal, Somatic, Material", definition="""You radiate a concealing aura in a 30-foot Emanation for the duration. While in the aura, you and each creature you choose have a +10 bonus to Dexterity (Stealth) checks and leave no tracks.""")
+	BorrowedKnowledge = 	Spell("Borrowed Knowledge",	2, "Divination", "1 Action", "Self", "1 hour", "Verbal, Somatic, Material", definition="""You draw on knowledge from spirits of the past. Choose one skill in which you lack proficiency. For the spell's duration, you have proficiency in the chosen skill. The spell ends early if you cast it again.""")
 	ArcaneVigor           = Spell("Arcane Vigor",            2, "Abjuration",  "Bonus Action", "Self",
-								"Concentration, up to 1 hour", "Verbal, Somatic")
+								"Concentration, up to 1 hour", "Verbal, Somatic", definition="""You tap into your life force to heal yourself. Roll one or two of your unexpended Hit Point Dice, and regain a number of Hit Points equal to the roll's total plus your spellcasting ability modifier. Those dice are then expended.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The number of unexpended Hit Dice you can roll increases by one for each spell slot level above 2.""")
 	MagicWeapon = 			Spell("Magic Weapon",  2, "Transmutation", "1 Bonus Action", "Touch", "Up to 1 hour", "Verbal, Somatic", "Concentration",
 					"""You touch a nonmagical weapon. Until the spell ends, that weapon becomes a magic weapon with a <i>+1 bonus to attack rolls and damage rolls</i>.
 					<br>The spell ends early if you cast it again.
@@ -3346,7 +3977,6 @@ if LEVEL3:
 	FastFriends = spell_from_data("Fast Friends")
 	FeignDeath = spell_from_data("Feign Death")
 	FlameArrows = spell_from_data("Flame Arrows")
-	FreedomWaves = spell_from_data("Freedom of the Waves (HB)")
 	GaldersTower = spell_from_data("Galder's Tower")
 	GlyphWarding = spell_from_data("Glyph of Warding")
 	HungerHadar = spell_from_data("Hunger Of Hadar")
@@ -3425,7 +4055,6 @@ if LEVEL3:
 	FastFriends = spell_from_data("Fast Friends")
 	FeignDeath = spell_from_data("Feign Death")
 	FlameArrows = spell_from_data("Flame Arrows")
-	FreedomWaves = spell_from_data("Freedom of the Waves (HB)")
 	GaldersTower = spell_from_data("Galder's Tower")
 	GlyphWarding = spell_from_data("Glyph of Warding")
 	HungerHadar = spell_from_data("Hunger Of Hadar")
@@ -3859,8 +4488,6 @@ At the end of each of its turns, an affected target repeats the save, ending the
 	SummonAberration = spell_from_data("Summon Aberration")
 	SummonConstruct = spell_from_data("Summon Construct")
 	VitriolicSphere = spell_from_data("Vitriolic Sphere")
-	WidogastVaultAmber = spell_from_data("Widogast's Vault of Amber (HB)")
-	WidogastWebofFire = spell_from_data("Widogast's Web of Fire (HB)")
 	AuraLife = spell_from_data("Aura of Life")
 	LocateCreature = spell_from_data("Locate Creature")
 	WaterySphere = spell_from_data("Watery Sphere")
@@ -3901,8 +4528,6 @@ At the end of each of its turns, an affected target repeats the save, ending the
 	SummonAberration = spell_from_data("Summon Aberration")
 	SummonConstruct = spell_from_data("Summon Construct")
 	VitriolicSphere = spell_from_data("Vitriolic Sphere")
-	WidogastVaultAmber = spell_from_data("Widogast's Vault of Amber (HB)")
-	WidogastWebofFire = spell_from_data("Widogast's Web of Fire (HB)")
 	AuraLife = spell_from_data("Aura of Life")
 	LocateCreature = spell_from_data("Locate Creature")
 	WaterySphere = spell_from_data("Watery Sphere")
@@ -4080,88 +4705,418 @@ if LEVEL5:
 	LegendLore = spell_from_data("Legend Lore")
 	Seeming = spell_from_data("Seeming")
 	Cloudkill = spell_from_data("Cloudkill")
-	AntilifeShell = Spell("Antilife Shell", 5, "Abjuration ", "1 Action ", "Self (10-foot radius) ", "Concentration, up to 1 hour ", "Verbal, Somatic")
-	Awaken = Spell("Awaken", 5, "Transmutation ", "8 Hours ", "Touch ", "Instantaneous ", "Verbal, Somatic, Material")
-	BigbysHand = Spell("Bigby's Hand", 5, "Evocation ", "1 Action ", "120 feet ", "Concentration, up to 1 minute ", "Verbal, Somatic, Material")
-	CircleofPower = Spell("Circle of Power", 5, "Abjuration ", "1 Action ", "Self (30-foot radius) ", "Concentration, up to 10 minutes ", "Verbal")
-	Commune = Spell("Commune", 5, "Divination ", "1 Minute R ", "Self ", "1 minute ", "Verbal, Somatic, Material")
-	ConjureElemental = Spell("Conjure Elemental", 5, "Conjuration ", "1 Action ", "90 feet ", "Concentration, up to 1 hour ", "Verbal, Somatic, Material")
-	ConjureVolley = Spell("Conjure Volley", 5, "Conjuration ", "1 Action ", "150 feet ", "Instantaneous ", "Verbal, Somatic, Material")
-	Contagion = Spell("Contagion", 5, "Necromancy ", "1 Action ", "Touch ", "7 days ", "Verbal, Somatic")
-	CreateSpelljammingHelm = Spell("Create Spelljamming Helm", 5, "Transmutation ", "1 Action ", "Touch ", "Instantaneous ", "Verbal, Somatic,M")
-	Dawn = Spell("Dawn", 5, "Evocation ", "1 Action ", "60 Feet ", "Concentration, up to 1 minute ", "Verbal, Somatic, Material")
-	DestructiveWave = Spell("Destructive Wave", 5, "Evocation ", "1 Action ", "Self (30-foot radius) ", "Instantaneous ", "Verbal")
-	Dream = Spell("Dream", 5, "Illusion ", "1 Minute ", "Special ", "8 hours ", "Verbal, Somatic, Material")
-	Enervation = Spell("Enervation", 5, "Necromancy ", "1 Action ", "60 feet ", "Concentration, up to 1 minute ", "Verbal, Somatic")
-	FreedomofWinds = Spell("Freedom of the Winds (HB)", 5, "Abjuration HB ", "1 action ", "Self ", "Concentration up to 10 minutes ", "Verbal, Somatic, Material")
-	Hallow = Spell("Hallow", 5, "Evocation ", "24 Hours ", "Touch ", "Until dispelled ", "Verbal, Somatic, Material")
-	HoldMonster = Spell("Hold Monster", 5, "Enchantment ", "1 Action ", "90 feet ", "Concentration, up to 1 minute ", "Verbal, Somatic, Material")
-	HolyWeapon = Spell("Holy Weapon", 5, "Evocation ", "1 Bonus Action ", "Touch ", "Concentration, up to 1 hour ", "Verbal, Somatic")
-	Immolation = Spell("Immolation", 5, "Evocation ", "1 Action ", "90 feet ", "Concentration, up to 1 minute ", "Verbal")
-	InfernalCalling = Spell("Infernal Calling", 5, "Conjuration ", "1 Minute ", "90 feet ", "Concentration, up to 1 hour ", "Verbal, Somatic, Material")
-	Maelstrom = Spell("Maelstrom", 5, "Evocation ", "1 Action ", "120 feet ", "Concentration, up to 1 minute ", "Verbal, Somatic, Material")
-	NegativeEnergyFlood = Spell("Negative Energy Flood", 5, "Necromancy ", "1 Action ", "60 feet ", "Instantaneous ", "Verbal, Material")
-	Reincarnate = Spell("Reincarnate", 5, "Transmutation ", "1 Action ", "Touch ", "Instantaneous ", "Verbal, Somatic, Material")
-	SkillEmpowerment = Spell("Skill Empowerment", 5, "Transmutation ", "1 Action ", "Touch ", "Concentration, up to 1 hour ", "Verbal, Somatic")
-	SteelWindStrike = Spell("Steel Wind Strike", 5, "Conjuration ", "1 Action ", "30 feet ", "Instantaneous ", "Somatic, Material")
-	SummonCelestial = Spell("Summon Celestial", 5, "Conjuration ", "1 Action ", "90 feet ", "Concentration, up to 1 hour ", "Verbal, Somatic, Material")
-	SummonDraconicSpirit = Spell("Summon Draconic Spirit", 5, "Conjuration ", "1 Action ", "60 feet ", "Concentration, up to 1 hour ", "Verbal, Somatic, Material")
-	SwiftQuiver = Spell("Swift Quiver", 5, "Transmutation ", "1 Bonus Action ", "Touch ", "Concentration, up to 1 minute ", "Verbal, Somatic, Material")
-	TemporalShunt = Spell("Temporal Shunt", 5, "Transmutation DC ", "1 Reaction ", "120 feet ", "1 round ", "Verbal, Somatic")
-	WallForce = Spell("Wall of Force", 5, "Evocation ", "1 Action ", "120 feet ", "Concentration, up to 10 minutes ", "Verbal, Somatic, Material")
-	BanishingSmite = Spell("Banishing Smite", 5, "Abjuration ", "1 Bonus Action ", "Self ", "Concentration, up to 1 minute ", "Verbal")
-	CommuneNature = Spell("Commune with Nature", 5, "Divination ", "1 Minute R ", "Self ", "Instantaneous ", "Verbal, Somatic")
-	WrathNature = Spell("Wrath Of Nature", 5, "Evocation", "1 Action ", "120 feet ", "Concentration, up to 1 minute ", "Verbal, Somatic")
-	TreeStride = Spell("Tree Stride", 5, "Conjuration ", "1 Action ", "Self ", "Concentration, up to 1 minute ", "Verbal, Somatic")
-	TransmuteRock = Spell("Transmute Rock", 5, "Transmutation ", "1 Action ", "120 feet ", "Instantaneous ", "Verbal, Somatic, Material")
-	ControlWinds = Spell("Control Winds", 5, "Transmutation ", "1 Action ", "300 feet ", "Concentration, up to 1 hour ", "Verbal, Somatic")
-	DispelEvilandGood = Spell("Dispel Evil and Good", 5, "Abjuration ", "1 Action ", "Self ", "Concentration, up to 1 minute ", "Verbal, Somatic, Material")
+	AntilifeShell = Spell("Antilife Shell", 5, "Abjuration ", "1 Action ", "Self (10-foot radius) ", "Concentration, up to 1 hour ", "Verbal, Somatic", definition="""An aura extends from you in a 10-foot Emanation for the duration. The aura prevents creatures other than Constructs and Undead from passing or reaching through it. An affected creature can cast spells or make attacks with Ranged or Reach weapons through the barrier.
+<br>
+If you move so that an affected creature is forced to pass through the barrier, the spell ends.""")
+	Awaken = Spell("Awaken", 5, "Transmutation ", "8 Hours ", "Touch ", "Instantaneous ", "Verbal, Somatic, Material", definition="""You spend the casting time tracing magical pathways within a precious gemstone, and then touch the target. The target must be either a type=beast or type=plant creature with an Intelligence of 3 or less or a natural plant that isn't a creature. The target gains an Intelligence of 10 and the ability to speak one language you know. If the target is a natural plant, it becomes a Plant creature and gains the ability to move its limbs, roots, vines, creepers, and so forth, and it gains senses similar to a human's. The DM chooses statistics appropriate for the awakened Plant, such as the statistics for the Awakened Shrub or Awakened Tree in the Monster Manual.
+<br>
+The awakened target has the Charmed condition for 30 days or until you or your allies deal damage to it. When that condition ends, the awakened creature chooses its attitude toward you.""")
+	BigbysHand = Spell("Bigby's Hand", 5, "Evocation ", "1 Action ", "120 feet ", "Concentration, up to 1 minute ", "Verbal, Somatic, Material", definition="""You create a Large hand of shimmering magical energy in an unoccupied space that you can see within range. The hand lasts for the duration, and it moves at your command, mimicking the movements of your own hand.
+<br>
+The hand is an object that has AC 20 and Hit Points equal to your Hit Point maximum. If it drops to 0 Hit Points, the spell ends. The hand doesn't occupy its space.
+<br>
+When you cast the spell and as a Bonus Action on your later turns, you can move the hand up to 60 feet and then cause one of the following effects:
+<br>
+<b>Clenched Fist.</b> The hand strikes a target within 5 feet of it. Make a melee spell attack. On a hit, the target takes 5d8 Force damage.
+<br>
+<b>Forceful Hand.</b> The hand attempts to push a Huge or smaller creature within 5 feet of it. The target must succeed on a Strength saving throw, or the hand pushes the target up to 5 feet plus a number of feet equal to five times your spellcasting ability modifier. The hand moves with the target, remaining within 5 feet of it.
+<br>
+<b>Grasping Hand.</b> The hand attempts to grapple a Huge or smaller creature within 5 feet of it. The target must succeed on a Dexterity saving throw, or the target has the Grappled condition, with an escape DC equal to your spell save DC. While the hand grapples the target, you can take a Bonus Action to cause the hand to crush it, dealing Bludgeoning damage to the target equal to 4d6 plus your spellcasting ability modifier.
+<br>
+<b>Interposing Hand.</b> The hand grants you Half Cover against attacks and other effects that originate from its space or that pass through it. In addition, its space counts as Difficult Terrain for your enemies.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage of the Clenched Fist increases by 2d8 and the damage of the Grasping Hand increases by 2d6 for each spell slot level above 5.""")
+	CircleofPower = Spell("Circle of Power", 5, "Abjuration ", "1 Action ", "Self (30-foot radius) ", "Concentration, up to 10 minutes ", "Verbal", definition="""An aura radiates from you in a 30-foot Emanation for the duration. While in the aura, you and your allies have Advantage on saving throws against spells and other magical effects. When an affected creature makes a saving throw against a spell or magical effect that allows a save to take only half damage, it takes no damage if it succeeds on the save.""")
+	Commune = Spell("Commune", 5, "Divination ", "1 Minute R ", "Self ", "1 minute ", "Verbal, Somatic, Material", definition="""You contact a deity or a divine proxy and ask up to three questions that can be answered with yes or no. You must ask your questions before the spell ends. You receive a correct answer for each question.
+<br>
+Divine beings aren't necessarily omniscient, so you might receive "unclear" as an answer if a question pertains to information that lies beyond the deity's knowledge. In a case where a one-word answer could be misleading or contrary to the deity's interests, the DM might offer a short phrase as an answer instead.
+<br>
+If you cast the spell more than once before finishing a Long Rest, there is a cumulative 25% chance for each casting after the first that you get no answer.""")
+	ConjureElemental = Spell("Conjure Elemental", 5, "Conjuration ", "1 Action ", "90 feet ", "Concentration, up to 1 hour ", "Verbal, Somatic, Material", definition="""You conjure a Large, intangible spirit from the Elemental Planes that appears in an unoccupied space within range. Choose the spirit's element, which determines its damage type: air (Lightning), earth (Thunder), fire (Fire), or water (Cold). The spirit lasts for the duration.
+<br>
+Whenever a creature you can see enters the spirit's space or starts its turn within 5 feet of the spirit, you can force that creature to make a Dexterity saving throw if the spirit has no creature Restrained. On a failed save, the target takes 8d8 damage of the spirit's type, and the target has the Restrained condition until the spell ends. At the start of each of its turns, the Restrained target repeats the save. On a failed save, the target takes 4d8 damage of the spirit's type. On a successful save, the target isn't Restrained by the spirit.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d8 for each spell slot level above 5.""")
+	ConjureVolley = Spell("Conjure Volley", 5, "Conjuration ", "1 Action ", "150 feet ", "Instantaneous ", "Verbal, Somatic, Material", definition="""You brandish the weapon used to cast the spell and choose a point within range. Hundreds of similar spectral weapons (or ammunition appropriate to the weapon) fall in a volley and then disappear. Each creature of your choice that you can see in a 40-foot-radius, 20-foot-high Cylinder centered on that point makes a Dexterity saving throw. A creature takes 8d8 Force damage on a failed save or half as much damage on a successful one.""")
+	Contagion = Spell("Contagion", 5, "Necromancy ", "1 Action ", "Touch ", "7 days ", "Verbal, Somatic", definition="""Your touch inflicts a magical contagion. The target must succeed on a Constitution saving throw or take 11d8 Necrotic damage and have the Poisoned condition. Also, choose one ability when you cast the spell. While Poisoned, the target has Disadvantage on saving throws made with the chosen ability.
+<br>
+The target must repeat the saving throw at the end of each of its turns until it gets three successes or failures. If the target succeeds on three of these saves, the spell ends on the target. If the target fails three of the saves, the spell lasts for 7 days on it.
+<br>
+Whenever the Poisoned target receives an effect that would end the Poisoned condition, the target must succeed on a Constitution saving throw, or the Poisoned condition doesn't end on it.""")
+	CreateSpelljammingHelm = Spell("Create Spelljamming Helm", 5, "Transmutation ", "1 Action ", "Touch ", "Instantaneous ", "Verbal, Somatic,M", definition="""Holding the rod used in the casting of the spell, you touch a Large or smaller chair that is unoccupied. The rod disappears, and the chair is transformed into a spelljamming helm.""")
+	Dawn = Spell("Dawn", 5, "Evocation ", "1 Action ", "60 Feet ", "Concentration, up to 1 minute ", "Verbal, Somatic, Material", definition="""The light of dawn shines down on a location you specify within range. Until the spell ends, a 30-foot-radius, 40-foot-high cylinder of bright light glimmers there. This light is sunlight.
+<br>
+When the cylinder appears, each creature in it must make a Constitution saving throw, taking 4d10 radiant damage on a failed save, or half as much damage on a successful one. A creature must also make this saving throw whenever it ends its turn in the cylinder.
+<br>
+If you're within 60 feet of the cylinder, you can move it up to 60 feet as a bonus action on your turn.""")
+	DestructiveWave = Spell("Destructive Wave", 5, "Evocation ", "1 Action ", "Self (30-foot radius) ", "Instantaneous ", "Verbal", definition="""Destructive energy ripples outward from you in a 30-foot Emanation. Each creature you choose in the Emanation makes a Constitution saving throw. On a failed save, a target takes 5d6 Thunder damage and 5d6 Radiant or Necrotic damage (your choice) and has the Prone condition. On a successful save, a target takes half as much damage only.""")
+	Dream = Spell("Dream", 5, "Illusion ", "1 Minute ", "Special ", "8 hours ", "Verbal, Somatic, Material", definition="""You target a creature you know on the same plane of existence. You or a willing creature you touch enters a trance state to act as a dream messenger. While in the trance, the messenger is Incapacitated and has a Speed of 0.
+<br>
+If the target is asleep, the messenger appears in the target's dreams and can converse with the target as long as it remains asleep, through the spell's duration. The messenger can also shape the dream's environment, creating landscapes, objects, and other images. The messenger can emerge from the trance at any time, ending the spell. The target recalls the dream perfectly upon waking.
+<br>
+If the target is awake when you cast the spell, the messenger knows it and can either end the trance (and the spell) or wait for the target to sleep, at which point the messenger enters its dreams.
+<br>
+You can make the messenger terrifying to the target. If you do so, the messenger can deliver a message of no more than ten words, and then the target makes a Wisdom saving throw. On a failed save, the target gains no benefit from its rest, and it takes 3d6 Psychic damage when it wakes up.""")
+	Enervation = Spell("Enervation", 5, "Necromancy ", "1 Action ", "60 feet ", "Concentration, up to 1 minute ", "Verbal, Somatic", definition="""A tendril of inky darkness reaches out from you, touching a creature you can see within range to drain life from it. The target must make a Dexterity saving throw. On a successful save, the target takes 2d8 necrotic damage, and the spell ends. On a failed save, the target takes 4d8 necrotic damage, and until the spell ends, you can use your action on each of your turns to automatically deal 4d8 necrotic damage to the target. The spell ends if you use your action to do anything else, if the target is ever outside the spell's range, or if the target has 3 from you.
+<br>
+Whenever the spell deals damage to a target, you regain hit points equal to half the amount of necrotic damage the target takes.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d8 for each slot level above 5th.""")
+	Hallow = Spell("Hallow", 5, "Evocation ", "24 Hours ", "Touch ", "Until dispelled ", "Verbal, Somatic, Material", definition="""You touch a point and infuse an area around it with holy or unholy power. The area can have a radius up to 60 feet, and the spell fails if the radius includes an area already under the effect of Hallow. The affected area has the following effects.
+<br>
+<b>Hallowed Ward.</b> Choose any of these creature types: Aberration, Celestial, Elemental, Fey, Fiend, or Undead. Creatures of the chosen types can't willingly enter the area, and any creature that is possessed by or that has the Charmed or Frightened condition from such creatures isn't possessed, Charmed, or Frightened by them while in the area.
+<br>
+<b>Extra Effect.</b> You bind an extra effect to the area from the list below: <b>Courage.</b> Creatures of any types you choose can't gain the Frightened condition while in the area.
+<br>
+<b>Darkness.</b> Darkness fills the area. Normal light, as well as magical light created by spells of a level lower than this spell, can't illuminate the area.
+<br>
+<b>Daylight.</b> Bright light fills the area. Magical Darkness created by spells of a level lower than this spell can't extinguish the light.
+<br>
+<b>Peaceful Rest.</b> Dead bodies interred in the area can't be turned into Undead.
+<br>
+<b>Extradimensional Interference.</b> Creatures of any types you choose can't enter or exit the area using teleportation or interplanar travel.
+<br>
+<b>Fear.</b> Creatures of any types you choose have the Frightened condition while in the area.
+<br>
+<b>Resistance.</b> Creatures of any types you choose have Resistance to one damage type of your choice while in the area.
+<br>
+<b>Silence.</b> No sound can emanate from within the area, and no sound can reach into it.
+<br>
+<b>Tongues.</b> Creatures of any types you choose can communicate with any other creature in the area even if they don't share a common language.
+<br>
+<b>Vulnerability.</b> Creatures of any types you choose have Vulnerability to one damage type of your choice while in the area.""")
+	HoldMonster = Spell("Hold Monster", 5, "Enchantment ", "1 Action ", "90 feet ", "Concentration, up to 1 minute ", "Verbal, Somatic, Material", definition="""Choose a creature that you can see within range. The target must succeed on a Wisdom saving throw or have the Paralyzed condition for the duration. At the end of each of its turns, the target repeats the save, ending the spell on itself on a success.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> You can target one additional creature for each spell slot level above 5.""")
+	HolyWeapon = Spell("Holy Weapon", 5, "Evocation ", "1 Bonus Action ", "Touch ", "Concentration, up to 1 hour ", "Verbal, Somatic", definition="""You imbue a weapon you touch with holy power. Until the spell ends, the weapon emits bright light in a 30-foot radius and dim light for an additional 30 feet. In addition, weapon attacks made with it deal an extra 2d8 radiant damage on a hit. If the weapon isn't already a magic weapon, it becomes one for the duration.
+<br>
+As a bonus action on your turn, you can dismiss this spell and cause the weapon to emit a burst of radiance. Each creature of your choice that you can see within 30 feet of the weapon must make a Constitution saving throw. On a failed save, a creature takes 4d8 radiant damage, and it is blinded for 1 minute. On a successful save, a creature takes half as much damage and isn't blinded. At the end of each of its turns, a blinded creature can make a Constitution saving throw, ending the effect on itself on a success.""")
+	Immolation = Spell("Immolation", 5, "Evocation ", "1 Action ", "90 feet ", "Concentration, up to 1 minute ", "Verbal", definition="""Flames wreathe one creature you can see within range. The target must make a Dexterity saving throw. It takes 8d6 fire damage on a failed save, or half as much damage on a successful one. On a failed save, the target also burns for the spell's duration. The burning target sheds bright light in a 30-foot radius and dim light for an additional 30 feet. At the end of each of its turns, the target repeats the saving throw. It takes 4d6 fire damage on a failed save, and the spell ends on a successful one. These magical flames can't be extinguished by nonmagical means.
+<br>
+If damage from this spell kills a target, the target is turned to ash.""")
+	InfernalCalling = Spell("Infernal Calling", 5, "Conjuration ", "1 Minute ", "90 feet ", "Concentration, up to 1 hour ", "Verbal, Somatic, Material", definition="""Uttering a dark incantation, you summon a devil from the Nine Hells. You choose the devil's type, which must be one of challenge rating=[&0;&6], such as a barbed devil or a bearded devil. The devil appears in an unoccupied space that you can see within range. The devil disappears when it drops to 0 hit points or when the spell ends.
+<br>
+The devil is unfriendly toward you and your companions. Roll initiative for the devil, which has its own turns. It is under the Dungeon Master's control and acts according to its nature on each of its turns, which might result in its attacking you if it thinks it can prevail, or trying to tempt you to undertake an evil act in exchange for limited service. The DM has the creature's statistics.
+<br>
+On each of your turns, you can try to issue a verbal command to the devil (no action required by you). It obeys the command if the likely outcome is in accordance with its desires, especially if the result would draw you toward evil. Otherwise, you must make a Charisma (Deception, Intimidation, or Persuasion) check contested by its Wisdom (Insight) check. You make the check with advantage if you say the devil's true name. If your check fails, the devil becomes immune to your verbal commands for the duration of the spell, though it can still carry out your commands if it chooses. If your check succeeds, the devil carries out your command--such as "attack my enemies," "explore the room ahead," or "bear this message to the queen"--until it completes the activity, at which point it returns to you to report having done so.
+<br>
+If your concentration ends before the spell reaches its full duration, the devil doesn't disappear if it has become immune to your verbal commands. Instead, it acts in whatever manner it chooses for 3d6 minutes, and then it disappears.
+<br>
+If you possess an individual devil's talisman, you can summon that devil if it is of the appropriate challenge rating plus 1, and it obeys all your commands, with no Charisma checks required.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 6th level or higher, the challenge rating increases by 1 for each slot level above 5th.""")
+	Maelstrom = Spell("Maelstrom", 5, "Evocation ", "1 Action ", "120 feet ", "Concentration, up to 1 minute ", "Verbal, Somatic, Material", definition="""A swirling mass of 5-foot-deep water appears in a 30-foot radius centered on a point you can see within range. The point must be on the ground or in a body of water. Until the spell ends, that area is 3, and any creature that starts its turn there must succeed on a Strength saving throw or take 6d6 bludgeoning damage and be pulled 10 feet toward the center.""")
+	NegativeEnergyFlood = Spell("Negative Energy Flood", 5, "Necromancy ", "1 Action ", "60 feet ", "Instantaneous ", "Verbal, Material", definition="""You send ribbons of negative energy at one creature you can see within range. Unless the target is undead, it must make a Constitution saving throw, taking 5d12 necrotic damage on a failed save, or half as much damage on a successful one. A target killed by this damage rises up as a zombie at the start of your next turn. The zombie pursues whatever creature it can see that is closest to it. Statistics for the zombie are in the Monster Manual.
+<br>
+If you target an undead with this spell, the target doesn't make a saving throw. Instead, roll 5d12. The target gains half the total as temporary hit points.""")
+	Reincarnate = Spell("Reincarnate", 5, "Transmutation ", "1 Action ", "Touch ", "Instantaneous ", "Verbal, Somatic, Material", definition="""You touch a dead Humanoid or a piece of one. If the creature has been dead no longer than 10 days, the spell forms a new body for it and calls the soul to enter that body. Roll 1d10 and consult the table below to determine the body's species, or the DM chooses another playable species.
+<br>
+1: Aasimar
+<br>
+2: Dragonborn
+<br>
+3: Dwarf
+<br>
+4: Elf
+<br>
+5: Gnome
+<br>
+6: Goliath
+<br>
+7: Halfling
+<br>
+8: Human
+<br>
+9: Orc
+<br>
+10: Tiefling
+<br>
+The reincarnated creature makes any choices that a species' description offers, and the creature recalls its former life. It retains the capabilities it had in its original form, except it loses the traits of its previous species and gains the traits of its new one.""")
+	SkillEmpowerment = Spell("Skill Empowerment", 5, "Transmutation ", "1 Action ", "Touch ", "Concentration, up to 1 hour ", "Verbal, Somatic", definition="""Your magic deepens a creature's understanding of its own talent. You touch one willing creature and give it expertise in one skill of your choice; until the spell ends, the creature doubles its proficiency bonus for ability checks it makes that use the chosen skill.
+<br>
+You must choose a skill in which the target is proficient and that isn't already benefiting from an effect, such as Expertise, that doubles its proficiency bonus.""")
+	SteelWindStrike = Spell("Steel Wind Strike", 5, "Conjuration ", "1 Action ", "30 feet ", "Instantaneous ", "Somatic, Material", definition="""You flourish the weapon used in the casting and then vanish to strike like the wind. Choose up to five creatures you can see within range. Make a melee spell attack against each target. On a hit, a target takes 6d10 Force damage.
+<br>
+You then teleport to an unoccupied space you can see within 5 feet of one of the targets.""")
+	SummonCelestial = Spell("Summon Celestial", 5, "Conjuration ", "1 Action ", "90 feet ", "Concentration, up to 1 hour ", "Verbal, Somatic, Material", definition="""You call forth a Celestial spirit. It manifests in an angelic form in an unoccupied space that you can see within range and uses the Celestial Spirit stat block. When you cast the spell, choose Avenger or Defender. Your choice determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.
+<br>
+The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don't issue any, it takes the Dodge action and uses its movement to avoid danger.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> Use the spell slot's level for the spell's level in the stat block.""")
+	SummonDraconicSpirit = Spell("Summon Draconic Spirit", 5, "Conjuration ", "1 Action ", "60 feet ", "Concentration, up to 1 hour ", "Verbal, Somatic, Material", definition="""You call forth a draconic spirit. It manifests in an unoccupied space that you can see within range. This corporeal form uses the Draconic Spirit stat block. When you cast this spell, choose a family of dragon: chromatic, gem, or metallic. The creature resembles a dragon of the chosen family, which determines certain traits in its stat block. The creature disappears when it drops to 0 hit points or when the spell ends.
+<br>
+The creature is an ally to you and your companions. In combat, the creature shares your initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don't issue any, it takes the Dodge action and uses its move to avoid danger.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 6th level or higher, use the higher level wherever the spell's level appears in the stat block.""")
+	SwiftQuiver = Spell("Swift Quiver", 5, "Transmutation ", "1 Bonus Action ", "Touch ", "Concentration, up to 1 minute ", "Verbal, Somatic, Material", definition="""When you cast the spell and as a Bonus Action until it ends, you can make two attacks with a weapon that fires Arrows or Bolts, such as a Longbow or a Light Crossbow. The spell magically creates the ammunition needed for each attack. Each Arrow or Bolt created by the spell deals damage like a nonmagical piece of ammunition of its kind and disintegrates immediately after it hits or misses.""")
+	TemporalShunt = Spell("Temporal Shunt", 5, "Transmutation DC ", "1 Reaction ", "120 feet ", "1 round ", "Verbal, Somatic", definition="""You target the triggering creature, which must succeed on a Wisdom saving throw or vanish, being thrown to another point in time and causing the attack to miss or the spell to be wasted. At the start of its next turn, the target reappears where it was or in the closest unoccupied space. The target doesn't remember you casting the spell or being affected by it.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 6th level or higher, you can target one additional creature for each slot level above 5th. All targets must be within 30 feet of each other.""")
+	WallForce = Spell("Wall of Force", 5, "Evocation ", "1 Action ", "120 feet ", "Concentration, up to 10 minutes ", "Verbal, Somatic, Material", definition="""An Invisible wall of force springs into existence at a point you choose within range. The wall appears in any orientation you choose, as a horizontal or vertical barrier or at an angle. It can be free floating or resting on a solid surface. You can form it into a hemispherical dome or a globe with a radius of up to 10 feet, or you can shape a flat surface made up of ten 10-foot-by-10-foot panels. Each panel must be contiguous with another panel. In any form, the wall is 1/4 inch thick and lasts for the duration. If the wall cuts through a creature's space when it appears, the creature is pushed to one side of the wall (you choose which side).
+<br>
+Nothing can physically pass through the wall. It is immune to all damage and can't be dispelled by Dispel Magic. A Disintegrate spell destroys the wall instantly, however. The wall also extends into the Ethereal Plane and blocks ethereal travel through the wall.""")
+	BanishingSmite = Spell("Banishing Smite", 5, "Abjuration ", "1 Bonus Action ", "Self ", "Concentration, up to 1 minute ", "Verbal", definition="""The target hit by the attack roll takes an extra 5d10 Force damage from the attack. If the attack reduces the target to 50 Hit Points or fewer, the target must succeed on a Charisma saving throw or be transported to a harmless demiplane for the duration. While there, the target has the Incapacitated condition. When the spell ends, the target reappears in the space it left or in the nearest unoccupied space if that space is occupied.""")
+	CommuneNature = Spell("Commune with Nature", 5, "Divination ", "1 Minute R ", "Self ", "Instantaneous ", "Verbal, Somatic", definition="""You commune with nature spirits and gain knowledge of the surrounding area. In the outdoors, the spell gives you knowledge of the area within 3 miles of you. In caves and other natural underground settings, the radius is limited to 300 feet. The spell doesn't function where nature has been replaced by construction, such as in castles and settlements.
+<br>
+Choose three of the following facts; you learn those facts as they pertain to the spell's area:
+<br>
+Locations of settlements
+<br>
+Locations of portals to other planes of existence
+<br>
+Location of one Challenge Rating 10+ creature (DM's choice) that is a Celestial, an Elemental, a Fey, a Fiend, or an Undead
+<br>
+The most prevalent kind of plant, mineral, or Beast (you choose which to learn)
+<br>
+Locations of bodies of water
+<br>
+For example, you could determine the location of a powerful monster in the area, the locations of bodies of water, and the locations of any towns.""")
+	WrathNature = Spell("Wrath Of Nature", 5, "Evocation", "1 Action ", "120 feet ", "Concentration, up to 1 minute ", "Verbal, Somatic", definition="""You call out to the spirits of nature to rouse them against your enemies. Choose a point you can see within range. The spirits cause trees, rocks, and grasses in a 60-foot cube centered on that point to become animated until the spell ends.
+<br>
+<b>Grasses and Undergrowth.</b> Any area of ground in the cube that is covered by grass or undergrowth is 3 for your enemies.
+<br>
+<b>Trees.</b> At the start of each of your turns, each of your enemies within 10 feet of any tree in the cube must succeed on a Dexterity saving throw or take 4d6 slashing damage from whipping branches.
+<br>
+<b>Roots and Vines.</b> At the end of each of your turns, one creature of your choice that is on the ground in the cube must succeed on a Strength saving throw or become restrained until the spell ends. A restrained creature can use an action to make a Strength (Athletics) check against your spell save DC, ending the effect on itself on a success.
+<br>
+<b>Rocks.</b> As a bonus action on your turn, you can cause a loose rock in the cube to launch at a creature you can see in the cube. Make a ranged spell attack against the target. On a hit, the target takes 3d8 nonmagical bludgeoning damage, and it must succeed on a Strength saving throw or fall prone.""")
+	TreeStride = Spell("Tree Stride", 5, "Conjuration ", "1 Action ", "Self ", "Concentration, up to 1 minute ", "Verbal, Somatic", definition="""You gain the ability to enter a tree and move from inside it to inside another tree of the same kind within 500 feet. Both trees must be living and at least the same size as you. You must use 5 feet of movement to enter a tree. You instantly know the location of all other trees of the same kind within 500 feet and, as part of the move used to enter the tree, can either pass into one of those trees or step out of the tree you're in. You appear in a spot of your choice within 5 feet of the destination tree, using another 5 feet of movement. If you have no movement left, you appear within 5 feet of the tree you entered.
+<br>
+You can use this transportation ability only once on each of your turns. You must end each turn outside a tree.""")
+	TransmuteRock = Spell("Transmute Rock", 5, "Transmutation ", "1 Action ", "120 feet ", "Instantaneous ", "Verbal, Somatic, Material", definition="""You choose an area of stone or mud that you can see that fits within a 40-foot cube and is within range, and choose one of the following effects.
+<br>
+<b>Transmute Rock to Mud.</b> Nonmagical rock of any sort in the area becomes an equal volume of thick, flowing mud that remains for the spell's duration.
+<br>
+The ground in the spell's area becomes muddy enough that creatures can sink into it. Each foot that a creature moves through the mud costs 4 feet of movement, and any creature on the ground when you cast the spell must make a Strength saving throw. A creature must also make the saving throw when it moves into the area for the first time on a turn or ends its turn there. On a failed save, a creature sinks into the mud and is restrained, though it can use an action to end the restrained condition on itself by pulling itself free of the mud.
+<br>
+If you cast the spell on a ceiling, the mud falls. Any creature under the mud when it falls must make a Dexterity saving throw. A creature takes 4d8 bludgeoning damage on a failed save, or half as much damage on a successful one.
+<br>
+<b>Transmute Mud to Rock.</b> Nonmagical mud or quicksand in the area no more than 10 feet deep transforms into soft stone for the spell's duration. Any creature in the mud when it transforms must make a Dexterity saving throw. On a successful save, a creature is shunted safely to the surface in an unoccupied space. On a failed save, a creature becomes restrained by the rock. A restrained creature, or another creature within reach, can use an action to try to break the rock by succeeding on a DC 20 Strength check or by dealing damage to it. The rock has AC 15 and 25 hit points, and it is immune to poison and psychic damage.""")
+	ControlWinds = Spell("Control Winds", 5, "Transmutation ", "1 Action ", "300 feet ", "Concentration, up to 1 hour ", "Verbal, Somatic", definition="""You take control of the air in a 100-foot cube that you can see within range. Choose one of the following effects when you cast the spell. The effect lasts for the spell's duration, unless you use your action on a later turn to switch to a different effect. You can also use your action to temporarily halt the effect or to restart one you've halted.
+<br>
+<b>Gusts.</b> A wind picks up within the cube, continually blowing in a horizontal direction you designate. You choose the intensity of the wind: calm, moderate, or strong. If the wind is moderate or strong, ranged weapon attacks that pass through it or that are made against targets within the cube have disadvantage on their attack rolls. If the wind is strong, any creature moving against the wind must spend 1 extra foot of movement for each foot moved.
+<br>
+<b>Downdraft.</b> You cause a sustained blast of strong wind to blow downward from the top of the cube. Ranged weapon attacks that pass through the cube or that are made against targets within it have disadvantage on their attack rolls. A creature must make a Strength saving throw if it flies into the cube for the first time on a turn or starts its turn there flying. On a failed save, the creature is knocked prone.
+<br>
+<b>Updraft.</b> You cause a sustained updraft within the cube, rising upward from the cube's bottom side. Creatures that end a fall within the cube take only half damage from the fall. When a creature in the cube makes a vertical jump, the creature can jump up to 10 feet higher than normal.""")
+	DispelEvilandGood = Spell("Dispel Evil and Good", 5, "Abjuration ", "1 Action ", "Self ", "Concentration, up to 1 minute ", "Verbal, Somatic, Material", definition="""For the duration, Celestials, Elementals, Fey, Fiends, and Undead have Disadvantage on attack rolls against you. You can end the spell early by using either of the following special functions.
+<br>
+<b>Break Enchantment.</b> As a Magic action, you touch a creature that is possessed by or has the Charmed or Frightened condition from one or more creatures of the types above. The target is no longer possessed, Charmed, or Frightened by such creatures.
+<br>
+<b>Dismissal.</b> As a Magic action, you target one creature you can see within 5 feet of you that has one of the creature types above. The target must succeed on a Charisma saving throw or be sent back to its home plane if it isn't there already. If they aren't on their home plane, Undead are sent to the Shadowfell, and Fey are sent to the Feywild.""")
 	Passwall = spell_from_data("Passwall")
 	RaiseDead = spell_from_data("Raise Dead")
 	LegendLore = spell_from_data("Legend Lore")
 	Seeming = spell_from_data("Seeming")
 	Cloudkill = spell_from_data("Cloudkill")
-	AntilifeShell = Spell("Antilife Shell", 5, "Abjuration ", "1 Action ", "Self (10-foot radius) ", "Concentration, up to 1 hour ", "Verbal, Somatic")
-	Awaken = 		Spell("Awaken", 5, "Transmutation ", "8 Hours ", "Touch ", "Instantaneous ", "Verbal, Somatic, Material")
-	BigbysHand = 	Spell("Bigby's Hand", 5, "Evocation ", "1 Action ", "120 feet ", "Concentration, up to 1 minute ", "Verbal, Somatic, Material")
-	CircleofPower = Spell("Circle of Power", 5, "Abjuration ", "1 Action ", "Self (30-foot radius) ", "Concentration, up to 10 minutes ", "Verbal")
-	Commune = 	Spell("Commune", 5, "Divination ", "1 Minute R ", "Self ", "1 minute ", "Verbal, Somatic, Material")
+	AntilifeShell = Spell("Antilife Shell", 5, "Abjuration ", "1 Action ", "Self (10-foot radius) ", "Concentration, up to 1 hour ", "Verbal, Somatic", definition="""An aura extends from you in a 10-foot Emanation for the duration. The aura prevents creatures other than Constructs and Undead from passing or reaching through it. An affected creature can cast spells or make attacks with Ranged or Reach weapons through the barrier.
+<br>
+If you move so that an affected creature is forced to pass through the barrier, the spell ends.""")
+	Awaken = 		Spell("Awaken", 5, "Transmutation ", "8 Hours ", "Touch ", "Instantaneous ", "Verbal, Somatic, Material", definition="""You spend the casting time tracing magical pathways within a precious gemstone, and then touch the target. The target must be either a type=beast or type=plant creature with an Intelligence of 3 or less or a natural plant that isn't a creature. The target gains an Intelligence of 10 and the ability to speak one language you know. If the target is a natural plant, it becomes a Plant creature and gains the ability to move its limbs, roots, vines, creepers, and so forth, and it gains senses similar to a human's. The DM chooses statistics appropriate for the awakened Plant, such as the statistics for the Awakened Shrub or Awakened Tree in the Monster Manual.
+<br>
+The awakened target has the Charmed condition for 30 days or until you or your allies deal damage to it. When that condition ends, the awakened creature chooses its attitude toward you.""")
+	BigbysHand = 	Spell("Bigby's Hand", 5, "Evocation ", "1 Action ", "120 feet ", "Concentration, up to 1 minute ", "Verbal, Somatic, Material", definition="""You create a Large hand of shimmering magical energy in an unoccupied space that you can see within range. The hand lasts for the duration, and it moves at your command, mimicking the movements of your own hand.
+<br>
+The hand is an object that has AC 20 and Hit Points equal to your Hit Point maximum. If it drops to 0 Hit Points, the spell ends. The hand doesn't occupy its space.
+<br>
+When you cast the spell and as a Bonus Action on your later turns, you can move the hand up to 60 feet and then cause one of the following effects:
+<br>
+<b>Clenched Fist.</b> The hand strikes a target within 5 feet of it. Make a melee spell attack. On a hit, the target takes 5d8 Force damage.
+<br>
+<b>Forceful Hand.</b> The hand attempts to push a Huge or smaller creature within 5 feet of it. The target must succeed on a Strength saving throw, or the hand pushes the target up to 5 feet plus a number of feet equal to five times your spellcasting ability modifier. The hand moves with the target, remaining within 5 feet of it.
+<br>
+<b>Grasping Hand.</b> The hand attempts to grapple a Huge or smaller creature within 5 feet of it. The target must succeed on a Dexterity saving throw, or the target has the Grappled condition, with an escape DC equal to your spell save DC. While the hand grapples the target, you can take a Bonus Action to cause the hand to crush it, dealing Bludgeoning damage to the target equal to 4d6 plus your spellcasting ability modifier.
+<br>
+<b>Interposing Hand.</b> The hand grants you Half Cover against attacks and other effects that originate from its space or that pass through it. In addition, its space counts as Difficult Terrain for your enemies.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage of the Clenched Fist increases by 2d8 and the damage of the Grasping Hand increases by 2d6 for each spell slot level above 5.""")
+	CircleofPower = Spell("Circle of Power", 5, "Abjuration ", "1 Action ", "Self (30-foot radius) ", "Concentration, up to 10 minutes ", "Verbal", definition="""An aura radiates from you in a 30-foot Emanation for the duration. While in the aura, you and your allies have Advantage on saving throws against spells and other magical effects. When an affected creature makes a saving throw against a spell or magical effect that allows a save to take only half damage, it takes no damage if it succeeds on the save.""")
+	Commune = 	Spell("Commune", 5, "Divination ", "1 Minute R ", "Self ", "1 minute ", "Verbal, Somatic, Material", definition="""You contact a deity or a divine proxy and ask up to three questions that can be answered with yes or no. You must ask your questions before the spell ends. You receive a correct answer for each question.
+<br>
+Divine beings aren't necessarily omniscient, so you might receive "unclear" as an answer if a question pertains to information that lies beyond the deity's knowledge. In a case where a one-word answer could be misleading or contrary to the deity's interests, the DM might offer a short phrase as an answer instead.
+<br>
+If you cast the spell more than once before finishing a Long Rest, there is a cumulative 25% chance for each casting after the first that you get no answer.""")
 
-	ConjureElemental = Spell("Conjure Elemental", 5, "Conjuration ", "1 Action ", "90 feet ", "Concentration, up to 1 hour ", "Verbal, Somatic, Material")
-	ConjureVolley = 	Spell("Conjure Volley", 5, "Conjuration ", "1 Action ", "150 feet ", "Instantaneous ", "Verbal, Somatic, Material")
-	Contagion = Spell("Contagion", 5, "Necromancy ", "1 Action ", "Touch ", "7 days ", "Verbal, Somatic")
-	CreateSpelljammingHelm = Spell("Create Spelljamming Helm", 5, "Transmutation ", "1 Action ", "Touch ", "Instantaneous ", "Verbal, Somatic,M")
-	Dawn = Spell("Dawn", 5, "Evocation ", "1 Action ", "60 Feet ", "Concentration, up to 1 minute ", "Verbal, Somatic, Material")
-	DestructiveWave = Spell("Destructive Wave", 5, "Evocation ", "1 Action ", "Self (30-foot radius) ", "Instantaneous ", "Verbal")
-	Dream = Spell("Dream", 5, "Illusion ", "1 Minute ", "Special ", "8 hours ", "Verbal, Somatic, Material")
-	Enervation = Spell("Enervation", 5, "Necromancy ", "1 Action ", "60 feet ", "Concentration, up to 1 minute ", "Verbal, Somatic")
-	FreedomofWinds = Spell("Freedom of the Winds (HB)", 5, "Abjuration HB ", "1 action ", "Self ", "Concentration up to 10 minutes ", "Verbal, Somatic, Material")
-	Hallow = Spell("Hallow", 5, "Evocation ", "24 Hours ", "Touch ", "Until dispelled ", "Verbal, Somatic, Material")
-	HoldMonster = Spell("Hold Monster", 5, "Enchantment ", "1 Action ", "90 feet ", "Concentration, up to 1 minute ", "Verbal, Somatic, Material")
-	HolyWeapon = Spell("Holy Weapon", 5, "Evocation ", "1 Bonus Action ", "Touch ", "Concentration, up to 1 hour ", "Verbal, Somatic")
-	Immolation = Spell("Immolation", 5, "Evocation ", "1 Action ", "90 feet ", "Concentration, up to 1 minute ", "Verbal")
-	InfernalCalling = Spell("Infernal Calling", 5, "Conjuration ", "1 Minute ", "90 feet ", "Concentration, up to 1 hour ", "Verbal, Somatic, Material")
-	Maelstrom = 		Spell("Maelstrom", 5, "Evocation ", "1 Action ", "120 feet ", "Concentration, up to 1 minute ", "Verbal, Somatic, Material")
-	NegativeEnergyFlood = Spell("Negative Energy Flood", 5, "Necromancy ", "1 Action ", "60 feet ", "Instantaneous ", "Verbal, Material")
-	Reincarnate = 		Spell("Reincarnate", 5, "Transmutation ", "1 Action ", "Touch ", "Instantaneous ", "Verbal, Somatic, Material")
-	SkillEmpowerment = 	Spell("Skill Empowerment", 5, "Transmutation ", "1 Action ", "Touch ", "Concentration, up to 1 hour ", "Verbal, Somatic")
-	SteelWindStrike = 	Spell("Steel Wind Strike", 5, "Conjuration ", "1 Action ", "30 feet ", "Instantaneous ", "Somatic, Material")
-	SummonCelestial = 		Spell("Summon Celestial", 5, "Conjuration ", "1 Action ", "90 feet ", "Concentration, up to 1 hour ", "Verbal, Somatic, Material")
-	SummonDraconicSpirit = 	Spell("Summon Draconic Spirit", 5, "Conjuration ", "1 Action ", "60 feet ", "Concentration, up to 1 hour ", "Verbal, Somatic, Material")
-	SwiftQuiver = 			Spell("Swift Quiver", 5, "Transmutation ", "1 Bonus Action ", "Touch ", "Concentration, up to 1 minute ", "Verbal, Somatic, Material")
-	TemporalShunt = 	Spell("Temporal Shunt", 5, "Transmutation DC ", "1 Reaction ", "120 feet ", "1 round ", "Verbal, Somatic")
-	WallForce = 		Spell("Wall of Force", 5, "Evocation ", "1 Action ", "120 feet ", "Concentration, up to 10 minutes ", "Verbal, Somatic, Material")
+	ConjureElemental = Spell("Conjure Elemental", 5, "Conjuration ", "1 Action ", "90 feet ", "Concentration, up to 1 hour ", "Verbal, Somatic, Material", definition="""You conjure a Large, intangible spirit from the Elemental Planes that appears in an unoccupied space within range. Choose the spirit's element, which determines its damage type: air (Lightning), earth (Thunder), fire (Fire), or water (Cold). The spirit lasts for the duration.
+<br>
+Whenever a creature you can see enters the spirit's space or starts its turn within 5 feet of the spirit, you can force that creature to make a Dexterity saving throw if the spirit has no creature Restrained. On a failed save, the target takes 8d8 damage of the spirit's type, and the target has the Restrained condition until the spell ends. At the start of each of its turns, the Restrained target repeats the save. On a failed save, the target takes 4d8 damage of the spirit's type. On a successful save, the target isn't Restrained by the spirit.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d8 for each spell slot level above 5.""")
+	ConjureVolley = 	Spell("Conjure Volley", 5, "Conjuration ", "1 Action ", "150 feet ", "Instantaneous ", "Verbal, Somatic, Material", definition="""You brandish the weapon used to cast the spell and choose a point within range. Hundreds of similar spectral weapons (or ammunition appropriate to the weapon) fall in a volley and then disappear. Each creature of your choice that you can see in a 40-foot-radius, 20-foot-high Cylinder centered on that point makes a Dexterity saving throw. A creature takes 8d8 Force damage on a failed save or half as much damage on a successful one.""")
+	Contagion = Spell("Contagion", 5, "Necromancy ", "1 Action ", "Touch ", "7 days ", "Verbal, Somatic", definition="""Your touch inflicts a magical contagion. The target must succeed on a Constitution saving throw or take 11d8 Necrotic damage and have the Poisoned condition. Also, choose one ability when you cast the spell. While Poisoned, the target has Disadvantage on saving throws made with the chosen ability.
+<br>
+The target must repeat the saving throw at the end of each of its turns until it gets three successes or failures. If the target succeeds on three of these saves, the spell ends on the target. If the target fails three of the saves, the spell lasts for 7 days on it.
+<br>
+Whenever the Poisoned target receives an effect that would end the Poisoned condition, the target must succeed on a Constitution saving throw, or the Poisoned condition doesn't end on it.""")
+	CreateSpelljammingHelm = Spell("Create Spelljamming Helm", 5, "Transmutation ", "1 Action ", "Touch ", "Instantaneous ", "Verbal, Somatic,M", definition="""Holding the rod used in the casting of the spell, you touch a Large or smaller chair that is unoccupied. The rod disappears, and the chair is transformed into a spelljamming helm.""")
+	Dawn = Spell("Dawn", 5, "Evocation ", "1 Action ", "60 Feet ", "Concentration, up to 1 minute ", "Verbal, Somatic, Material", definition="""The light of dawn shines down on a location you specify within range. Until the spell ends, a 30-foot-radius, 40-foot-high cylinder of bright light glimmers there. This light is sunlight.
+<br>
+When the cylinder appears, each creature in it must make a Constitution saving throw, taking 4d10 radiant damage on a failed save, or half as much damage on a successful one. A creature must also make this saving throw whenever it ends its turn in the cylinder.
+<br>
+If you're within 60 feet of the cylinder, you can move it up to 60 feet as a bonus action on your turn.""")
+	DestructiveWave = Spell("Destructive Wave", 5, "Evocation ", "1 Action ", "Self (30-foot radius) ", "Instantaneous ", "Verbal", definition="""Destructive energy ripples outward from you in a 30-foot Emanation. Each creature you choose in the Emanation makes a Constitution saving throw. On a failed save, a target takes 5d6 Thunder damage and 5d6 Radiant or Necrotic damage (your choice) and has the Prone condition. On a successful save, a target takes half as much damage only.""")
+	Dream = Spell("Dream", 5, "Illusion ", "1 Minute ", "Special ", "8 hours ", "Verbal, Somatic, Material", definition="""You target a creature you know on the same plane of existence. You or a willing creature you touch enters a trance state to act as a dream messenger. While in the trance, the messenger is Incapacitated and has a Speed of 0.
+<br>
+If the target is asleep, the messenger appears in the target's dreams and can converse with the target as long as it remains asleep, through the spell's duration. The messenger can also shape the dream's environment, creating landscapes, objects, and other images. The messenger can emerge from the trance at any time, ending the spell. The target recalls the dream perfectly upon waking.
+<br>
+If the target is awake when you cast the spell, the messenger knows it and can either end the trance (and the spell) or wait for the target to sleep, at which point the messenger enters its dreams.
+<br>
+You can make the messenger terrifying to the target. If you do so, the messenger can deliver a message of no more than ten words, and then the target makes a Wisdom saving throw. On a failed save, the target gains no benefit from its rest, and it takes 3d6 Psychic damage when it wakes up.""")
+	Enervation = Spell("Enervation", 5, "Necromancy ", "1 Action ", "60 feet ", "Concentration, up to 1 minute ", "Verbal, Somatic", definition="""A tendril of inky darkness reaches out from you, touching a creature you can see within range to drain life from it. The target must make a Dexterity saving throw. On a successful save, the target takes 2d8 necrotic damage, and the spell ends. On a failed save, the target takes 4d8 necrotic damage, and until the spell ends, you can use your action on each of your turns to automatically deal 4d8 necrotic damage to the target. The spell ends if you use your action to do anything else, if the target is ever outside the spell's range, or if the target has 3 from you.
+<br>
+Whenever the spell deals damage to a target, you regain hit points equal to half the amount of necrotic damage the target takes.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d8 for each slot level above 5th.""")
+	Hallow = Spell("Hallow", 5, "Evocation ", "24 Hours ", "Touch ", "Until dispelled ", "Verbal, Somatic, Material", definition="""You touch a point and infuse an area around it with holy or unholy power. The area can have a radius up to 60 feet, and the spell fails if the radius includes an area already under the effect of Hallow. The affected area has the following effects.
+<br>
+<b>Hallowed Ward.</b> Choose any of these creature types: Aberration, Celestial, Elemental, Fey, Fiend, or Undead. Creatures of the chosen types can't willingly enter the area, and any creature that is possessed by or that has the Charmed or Frightened condition from such creatures isn't possessed, Charmed, or Frightened by them while in the area.
+<br>
+<b>Extra Effect.</b> You bind an extra effect to the area from the list below: <b>Courage.</b> Creatures of any types you choose can't gain the Frightened condition while in the area.
+<br>
+<b>Darkness.</b> Darkness fills the area. Normal light, as well as magical light created by spells of a level lower than this spell, can't illuminate the area.
+<br>
+<b>Daylight.</b> Bright light fills the area. Magical Darkness created by spells of a level lower than this spell can't extinguish the light.
+<br>
+<b>Peaceful Rest.</b> Dead bodies interred in the area can't be turned into Undead.
+<br>
+<b>Extradimensional Interference.</b> Creatures of any types you choose can't enter or exit the area using teleportation or interplanar travel.
+<br>
+<b>Fear.</b> Creatures of any types you choose have the Frightened condition while in the area.
+<br>
+<b>Resistance.</b> Creatures of any types you choose have Resistance to one damage type of your choice while in the area.
+<br>
+<b>Silence.</b> No sound can emanate from within the area, and no sound can reach into it.
+<br>
+<b>Tongues.</b> Creatures of any types you choose can communicate with any other creature in the area even if they don't share a common language.
+<br>
+<b>Vulnerability.</b> Creatures of any types you choose have Vulnerability to one damage type of your choice while in the area.""")
+	HoldMonster = Spell("Hold Monster", 5, "Enchantment ", "1 Action ", "90 feet ", "Concentration, up to 1 minute ", "Verbal, Somatic, Material", definition="""Choose a creature that you can see within range. The target must succeed on a Wisdom saving throw or have the Paralyzed condition for the duration. At the end of each of its turns, the target repeats the save, ending the spell on itself on a success.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> You can target one additional creature for each spell slot level above 5.""")
+	HolyWeapon = Spell("Holy Weapon", 5, "Evocation ", "1 Bonus Action ", "Touch ", "Concentration, up to 1 hour ", "Verbal, Somatic", definition="""You imbue a weapon you touch with holy power. Until the spell ends, the weapon emits bright light in a 30-foot radius and dim light for an additional 30 feet. In addition, weapon attacks made with it deal an extra 2d8 radiant damage on a hit. If the weapon isn't already a magic weapon, it becomes one for the duration.
+<br>
+As a bonus action on your turn, you can dismiss this spell and cause the weapon to emit a burst of radiance. Each creature of your choice that you can see within 30 feet of the weapon must make a Constitution saving throw. On a failed save, a creature takes 4d8 radiant damage, and it is blinded for 1 minute. On a successful save, a creature takes half as much damage and isn't blinded. At the end of each of its turns, a blinded creature can make a Constitution saving throw, ending the effect on itself on a success.""")
+	Immolation = Spell("Immolation", 5, "Evocation ", "1 Action ", "90 feet ", "Concentration, up to 1 minute ", "Verbal", definition="""Flames wreathe one creature you can see within range. The target must make a Dexterity saving throw. It takes 8d6 fire damage on a failed save, or half as much damage on a successful one. On a failed save, the target also burns for the spell's duration. The burning target sheds bright light in a 30-foot radius and dim light for an additional 30 feet. At the end of each of its turns, the target repeats the saving throw. It takes 4d6 fire damage on a failed save, and the spell ends on a successful one. These magical flames can't be extinguished by nonmagical means.
+<br>
+If damage from this spell kills a target, the target is turned to ash.""")
+	InfernalCalling = Spell("Infernal Calling", 5, "Conjuration ", "1 Minute ", "90 feet ", "Concentration, up to 1 hour ", "Verbal, Somatic, Material", definition="""Uttering a dark incantation, you summon a devil from the Nine Hells. You choose the devil's type, which must be one of challenge rating=[&0;&6], such as a barbed devil or a bearded devil. The devil appears in an unoccupied space that you can see within range. The devil disappears when it drops to 0 hit points or when the spell ends.
+<br>
+The devil is unfriendly toward you and your companions. Roll initiative for the devil, which has its own turns. It is under the Dungeon Master's control and acts according to its nature on each of its turns, which might result in its attacking you if it thinks it can prevail, or trying to tempt you to undertake an evil act in exchange for limited service. The DM has the creature's statistics.
+<br>
+On each of your turns, you can try to issue a verbal command to the devil (no action required by you). It obeys the command if the likely outcome is in accordance with its desires, especially if the result would draw you toward evil. Otherwise, you must make a Charisma (Deception, Intimidation, or Persuasion) check contested by its Wisdom (Insight) check. You make the check with advantage if you say the devil's true name. If your check fails, the devil becomes immune to your verbal commands for the duration of the spell, though it can still carry out your commands if it chooses. If your check succeeds, the devil carries out your command--such as "attack my enemies," "explore the room ahead," or "bear this message to the queen"--until it completes the activity, at which point it returns to you to report having done so.
+<br>
+If your concentration ends before the spell reaches its full duration, the devil doesn't disappear if it has become immune to your verbal commands. Instead, it acts in whatever manner it chooses for 3d6 minutes, and then it disappears.
+<br>
+If you possess an individual devil's talisman, you can summon that devil if it is of the appropriate challenge rating plus 1, and it obeys all your commands, with no Charisma checks required.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 6th level or higher, the challenge rating increases by 1 for each slot level above 5th.""")
+	Maelstrom = 		Spell("Maelstrom", 5, "Evocation ", "1 Action ", "120 feet ", "Concentration, up to 1 minute ", "Verbal, Somatic, Material", definition="""A swirling mass of 5-foot-deep water appears in a 30-foot radius centered on a point you can see within range. The point must be on the ground or in a body of water. Until the spell ends, that area is 3, and any creature that starts its turn there must succeed on a Strength saving throw or take 6d6 bludgeoning damage and be pulled 10 feet toward the center.""")
+	NegativeEnergyFlood = Spell("Negative Energy Flood", 5, "Necromancy ", "1 Action ", "60 feet ", "Instantaneous ", "Verbal, Material", definition="""You send ribbons of negative energy at one creature you can see within range. Unless the target is undead, it must make a Constitution saving throw, taking 5d12 necrotic damage on a failed save, or half as much damage on a successful one. A target killed by this damage rises up as a zombie at the start of your next turn. The zombie pursues whatever creature it can see that is closest to it. Statistics for the zombie are in the Monster Manual.
+<br>
+If you target an undead with this spell, the target doesn't make a saving throw. Instead, roll 5d12. The target gains half the total as temporary hit points.""")
+	Reincarnate = 		Spell("Reincarnate", 5, "Transmutation ", "1 Action ", "Touch ", "Instantaneous ", "Verbal, Somatic, Material", definition="""You touch a dead Humanoid or a piece of one. If the creature has been dead no longer than 10 days, the spell forms a new body for it and calls the soul to enter that body. Roll 1d10 and consult the table below to determine the body's species, or the DM chooses another playable species.
+<br>
+1: Aasimar
+<br>
+2: Dragonborn
+<br>
+3: Dwarf
+<br>
+4: Elf
+<br>
+5: Gnome
+<br>
+6: Goliath
+<br>
+7: Halfling
+<br>
+8: Human
+<br>
+9: Orc
+<br>
+10: Tiefling
+<br>
+The reincarnated creature makes any choices that a species' description offers, and the creature recalls its former life. It retains the capabilities it had in its original form, except it loses the traits of its previous species and gains the traits of its new one.""")
+	SkillEmpowerment = 	Spell("Skill Empowerment", 5, "Transmutation ", "1 Action ", "Touch ", "Concentration, up to 1 hour ", "Verbal, Somatic", definition="""Your magic deepens a creature's understanding of its own talent. You touch one willing creature and give it expertise in one skill of your choice; until the spell ends, the creature doubles its proficiency bonus for ability checks it makes that use the chosen skill.
+<br>
+You must choose a skill in which the target is proficient and that isn't already benefiting from an effect, such as Expertise, that doubles its proficiency bonus.""")
+	SteelWindStrike = 	Spell("Steel Wind Strike", 5, "Conjuration ", "1 Action ", "30 feet ", "Instantaneous ", "Somatic, Material", definition="""You flourish the weapon used in the casting and then vanish to strike like the wind. Choose up to five creatures you can see within range. Make a melee spell attack against each target. On a hit, a target takes 6d10 Force damage.
+<br>
+You then teleport to an unoccupied space you can see within 5 feet of one of the targets.""")
+	SummonCelestial = 		Spell("Summon Celestial", 5, "Conjuration ", "1 Action ", "90 feet ", "Concentration, up to 1 hour ", "Verbal, Somatic, Material", definition="""You call forth a Celestial spirit. It manifests in an angelic form in an unoccupied space that you can see within range and uses the Celestial Spirit stat block. When you cast the spell, choose Avenger or Defender. Your choice determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.
+<br>
+The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don't issue any, it takes the Dodge action and uses its movement to avoid danger.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> Use the spell slot's level for the spell's level in the stat block.""")
+	SummonDraconicSpirit = 	Spell("Summon Draconic Spirit", 5, "Conjuration ", "1 Action ", "60 feet ", "Concentration, up to 1 hour ", "Verbal, Somatic, Material", definition="""You call forth a draconic spirit. It manifests in an unoccupied space that you can see within range. This corporeal form uses the Draconic Spirit stat block. When you cast this spell, choose a family of dragon: chromatic, gem, or metallic. The creature resembles a dragon of the chosen family, which determines certain traits in its stat block. The creature disappears when it drops to 0 hit points or when the spell ends.
+<br>
+The creature is an ally to you and your companions. In combat, the creature shares your initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don't issue any, it takes the Dodge action and uses its move to avoid danger.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 6th level or higher, use the higher level wherever the spell's level appears in the stat block.""")
+	SwiftQuiver = 			Spell("Swift Quiver", 5, "Transmutation ", "1 Bonus Action ", "Touch ", "Concentration, up to 1 minute ", "Verbal, Somatic, Material", definition="""When you cast the spell and as a Bonus Action until it ends, you can make two attacks with a weapon that fires Arrows or Bolts, such as a Longbow or a Light Crossbow. The spell magically creates the ammunition needed for each attack. Each Arrow or Bolt created by the spell deals damage like a nonmagical piece of ammunition of its kind and disintegrates immediately after it hits or misses.""")
+	TemporalShunt = 	Spell("Temporal Shunt", 5, "Transmutation DC ", "1 Reaction ", "120 feet ", "1 round ", "Verbal, Somatic", definition="""You target the triggering creature, which must succeed on a Wisdom saving throw or vanish, being thrown to another point in time and causing the attack to miss or the spell to be wasted. At the start of its next turn, the target reappears where it was or in the closest unoccupied space. The target doesn't remember you casting the spell or being affected by it.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 6th level or higher, you can target one additional creature for each slot level above 5th. All targets must be within 30 feet of each other.""")
+	WallForce = 		Spell("Wall of Force", 5, "Evocation ", "1 Action ", "120 feet ", "Concentration, up to 10 minutes ", "Verbal, Somatic, Material", definition="""An Invisible wall of force springs into existence at a point you choose within range. The wall appears in any orientation you choose, as a horizontal or vertical barrier or at an angle. It can be free floating or resting on a solid surface. You can form it into a hemispherical dome or a globe with a radius of up to 10 feet, or you can shape a flat surface made up of ten 10-foot-by-10-foot panels. Each panel must be contiguous with another panel. In any form, the wall is 1/4 inch thick and lasts for the duration. If the wall cuts through a creature's space when it appears, the creature is pushed to one side of the wall (you choose which side).
+<br>
+Nothing can physically pass through the wall. It is immune to all damage and can't be dispelled by Dispel Magic. A Disintegrate spell destroys the wall instantly, however. The wall also extends into the Ethereal Plane and blocks ethereal travel through the wall.""")
 	WallofForce = 		WallForce
-	BanishingSmite = 	Spell("Banishing Smite", 5, "Abjuration ", "1 Bonus Action ", "Self ", "Concentration, up to 1 minute ", "Verbal")
-	CommuneNature = Spell("Commune with Nature", 5, "Divination ", "1 Minute R ", "Self ", "Instantaneous ", "Verbal, Somatic")
-	WrathNature = Spell("Wrath Of Nature", 5, "Evocation", "1 Action ", "120 feet ", "Concentration, up to 1 minute ", "Verbal, Somatic")
-	TreeStride = 	Spell("Tree Stride", 5, "Conjuration ", "1 Action ", "Self ", "Concentration, up to 1 minute ", "Verbal, Somatic")
-	TransmuteRock = Spell("Transmute Rock", 5, "Transmutation ", "1 Action ", "120 feet ", "Instantaneous ", "Verbal, Somatic, Material")
-	ControlWinds = 		Spell("Control Winds", 5, "Transmutation ", "1 Action ", "300 feet ", "Concentration, up to 1 hour ", "Verbal, Somatic")
-	DispelEvilandGood = Spell("Dispel Evil and Good", 5, "Abjuration ", "1 Action ", "Self ", "Concentration, up to 1 minute ", "Verbal, Somatic, Material")
+	BanishingSmite = 	Spell("Banishing Smite", 5, "Abjuration ", "1 Bonus Action ", "Self ", "Concentration, up to 1 minute ", "Verbal", definition="""The target hit by the attack roll takes an extra 5d10 Force damage from the attack. If the attack reduces the target to 50 Hit Points or fewer, the target must succeed on a Charisma saving throw or be transported to a harmless demiplane for the duration. While there, the target has the Incapacitated condition. When the spell ends, the target reappears in the space it left or in the nearest unoccupied space if that space is occupied.""")
+	CommuneNature = Spell("Commune with Nature", 5, "Divination ", "1 Minute R ", "Self ", "Instantaneous ", "Verbal, Somatic", definition="""You commune with nature spirits and gain knowledge of the surrounding area. In the outdoors, the spell gives you knowledge of the area within 3 miles of you. In caves and other natural underground settings, the radius is limited to 300 feet. The spell doesn't function where nature has been replaced by construction, such as in castles and settlements.
+<br>
+Choose three of the following facts; you learn those facts as they pertain to the spell's area:
+<br>
+Locations of settlements
+<br>
+Locations of portals to other planes of existence
+<br>
+Location of one Challenge Rating 10+ creature (DM's choice) that is a Celestial, an Elemental, a Fey, a Fiend, or an Undead
+<br>
+The most prevalent kind of plant, mineral, or Beast (you choose which to learn)
+<br>
+Locations of bodies of water
+<br>
+For example, you could determine the location of a powerful monster in the area, the locations of bodies of water, and the locations of any towns.""")
+	WrathNature = Spell("Wrath Of Nature", 5, "Evocation", "1 Action ", "120 feet ", "Concentration, up to 1 minute ", "Verbal, Somatic", definition="""You call out to the spirits of nature to rouse them against your enemies. Choose a point you can see within range. The spirits cause trees, rocks, and grasses in a 60-foot cube centered on that point to become animated until the spell ends.
+<br>
+<b>Grasses and Undergrowth.</b> Any area of ground in the cube that is covered by grass or undergrowth is 3 for your enemies.
+<br>
+<b>Trees.</b> At the start of each of your turns, each of your enemies within 10 feet of any tree in the cube must succeed on a Dexterity saving throw or take 4d6 slashing damage from whipping branches.
+<br>
+<b>Roots and Vines.</b> At the end of each of your turns, one creature of your choice that is on the ground in the cube must succeed on a Strength saving throw or become restrained until the spell ends. A restrained creature can use an action to make a Strength (Athletics) check against your spell save DC, ending the effect on itself on a success.
+<br>
+<b>Rocks.</b> As a bonus action on your turn, you can cause a loose rock in the cube to launch at a creature you can see in the cube. Make a ranged spell attack against the target. On a hit, the target takes 3d8 nonmagical bludgeoning damage, and it must succeed on a Strength saving throw or fall prone.""")
+	TreeStride = 	Spell("Tree Stride", 5, "Conjuration ", "1 Action ", "Self ", "Concentration, up to 1 minute ", "Verbal, Somatic", definition="""You gain the ability to enter a tree and move from inside it to inside another tree of the same kind within 500 feet. Both trees must be living and at least the same size as you. You must use 5 feet of movement to enter a tree. You instantly know the location of all other trees of the same kind within 500 feet and, as part of the move used to enter the tree, can either pass into one of those trees or step out of the tree you're in. You appear in a spot of your choice within 5 feet of the destination tree, using another 5 feet of movement. If you have no movement left, you appear within 5 feet of the tree you entered.
+<br>
+You can use this transportation ability only once on each of your turns. You must end each turn outside a tree.""")
+	TransmuteRock = Spell("Transmute Rock", 5, "Transmutation ", "1 Action ", "120 feet ", "Instantaneous ", "Verbal, Somatic, Material", definition="""You choose an area of stone or mud that you can see that fits within a 40-foot cube and is within range, and choose one of the following effects.
+<br>
+<b>Transmute Rock to Mud.</b> Nonmagical rock of any sort in the area becomes an equal volume of thick, flowing mud that remains for the spell's duration.
+<br>
+The ground in the spell's area becomes muddy enough that creatures can sink into it. Each foot that a creature moves through the mud costs 4 feet of movement, and any creature on the ground when you cast the spell must make a Strength saving throw. A creature must also make the saving throw when it moves into the area for the first time on a turn or ends its turn there. On a failed save, a creature sinks into the mud and is restrained, though it can use an action to end the restrained condition on itself by pulling itself free of the mud.
+<br>
+If you cast the spell on a ceiling, the mud falls. Any creature under the mud when it falls must make a Dexterity saving throw. A creature takes 4d8 bludgeoning damage on a failed save, or half as much damage on a successful one.
+<br>
+<b>Transmute Mud to Rock.</b> Nonmagical mud or quicksand in the area no more than 10 feet deep transforms into soft stone for the spell's duration. Any creature in the mud when it transforms must make a Dexterity saving throw. On a successful save, a creature is shunted safely to the surface in an unoccupied space. On a failed save, a creature becomes restrained by the rock. A restrained creature, or another creature within reach, can use an action to try to break the rock by succeeding on a DC 20 Strength check or by dealing damage to it. The rock has AC 15 and 25 hit points, and it is immune to poison and psychic damage.""")
+	ControlWinds = 		Spell("Control Winds", 5, "Transmutation ", "1 Action ", "300 feet ", "Concentration, up to 1 hour ", "Verbal, Somatic", definition="""You take control of the air in a 100-foot cube that you can see within range. Choose one of the following effects when you cast the spell. The effect lasts for the spell's duration, unless you use your action on a later turn to switch to a different effect. You can also use your action to temporarily halt the effect or to restart one you've halted.
+<br>
+<b>Gusts.</b> A wind picks up within the cube, continually blowing in a horizontal direction you designate. You choose the intensity of the wind: calm, moderate, or strong. If the wind is moderate or strong, ranged weapon attacks that pass through it or that are made against targets within the cube have disadvantage on their attack rolls. If the wind is strong, any creature moving against the wind must spend 1 extra foot of movement for each foot moved.
+<br>
+<b>Downdraft.</b> You cause a sustained blast of strong wind to blow downward from the top of the cube. Ranged weapon attacks that pass through the cube or that are made against targets within it have disadvantage on their attack rolls. A creature must make a Strength saving throw if it flies into the cube for the first time on a turn or starts its turn there flying. On a failed save, the creature is knocked prone.
+<br>
+<b>Updraft.</b> You cause a sustained updraft within the cube, rising upward from the cube's bottom side. Creatures that end a fall within the cube take only half damage from the fall. When a creature in the cube makes a vertical jump, the creature can jump up to 10 feet higher than normal.""")
+	DispelEvilandGood = Spell("Dispel Evil and Good", 5, "Abjuration ", "1 Action ", "Self ", "Concentration, up to 1 minute ", "Verbal, Somatic, Material", definition="""For the duration, Celestials, Elementals, Fey, Fiends, and Undead have Disadvantage on attack rolls against you. You can end the spell early by using either of the following special functions.
+<br>
+<b>Break Enchantment.</b> As a Magic action, you touch a creature that is possessed by or has the Charmed or Frightened condition from one or more creatures of the types above. The target is no longer possessed, Charmed, or Frightened by such creatures.
+<br>
+<b>Dismissal.</b> As a Magic action, you target one creature you can see within 5 feet of you that has one of the creature types above. The target must succeed on a Charisma saving throw or be sent back to its home plane if it isn't there already. If they aren't on their home plane, Undead are sent to the Shadowfell, and Fey are sent to the Feywild.""")
 	CommuneWithNature = CommuneNature
 	JallarziStormofRadiance = Spell("Jallarzi's Storm of Radiance", 5, "Evocation",
-									"Action", "120 feet", "Instantaneous", "Verbal, Somatic, Material")
+									"Action", "120 feet", "Instantaneous", "Verbal, Somatic, Material", definition="""You unleash a storm of flashing light and raging thunder in a 10-foot-radius, 40-foot-high Cylinder centered on a point you can see within range. While in this area, creatures have the Blinded and Deafened conditions, and they can't cast spells with a Verbal component.
+<br>
+When the storm appears, each creature in it makes a Constitution saving throw, taking 2d10 Radiant damage and 2d10 Thunder damage on a failed save or half as much damage on a successful one. A creature also makes this save when it enters the spell's area for the first time on a turn or ends its turn there. A creature makes this save only once per turn.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The Radiant and Thunder damage increase by 1d10 for each spell slot level above 5.""")
 	DanseMacabre = Spell("Danse Macabre", 5,
 		school="Necromancy",
 		casting_time="Action",
@@ -4600,46 +5555,243 @@ if LEVEL6:
 	ProgrammedIllusion = spell_from_data("Programmed Illusion")
 	TrueSeeing = spell_from_data("True Seeing")
 	WindWalk = spell_from_data("Wind Walk")
-	BladeBarrier = Spell("Blade Barrier", 6, "Evocation", "1 Action", "90 feet", "Concentration, up to 10 minutes", "Verbal, Somatic")
-	BonesEarth = Spell("Bones of the Earth", 6, "Transmutation", "1 Action", "120 feet", "Instantaneous", "Verbal, Somatic")
+	BladeBarrier = Spell("Blade Barrier", 6, "Evocation", "1 Action", "90 feet", "Concentration, up to 10 minutes", "Verbal, Somatic", definition="""You create a wall of whirling blades made of magical energy. The wall appears within range and lasts for the duration. You make a straight wall up to 100 feet long, 20 feet high, and 5 feet thick, or a ringed wall up to 60 feet in diameter, 20 feet high, and 5 feet thick. The wall provides Three-Quarters Cover, and its space is Difficult Terrain.
+<br>
+Any creature in the wall's space makes a Dexterity saving throw, taking 6d10 Force damage on a failed save or half as much damage on a successful one. A creature also makes that save if it enters the wall's space or ends its turn there. A creature makes that save only once per turn.""")
+	BonesEarth = Spell("Bones of the Earth", 6, "Transmutation", "1 Action", "120 feet", "Instantaneous", "Verbal, Somatic", definition="""You cause up to six pillars of stone to burst from places on the ground that you can see within range. Each pillar is a cylinder that has a diameter of 5 feet and a height of up to 30 feet. The ground where a pillar appears must be wide enough for its diameter, and you can target the ground under a creature if that creature is Medium or smaller. Each pillar has AC 5 and 30 hit points. When reduced to 0 hit points, a pillar crumbles into rubble, which creates an area of 3 with a 10-foot radius that lasts until the rubble is cleared. Each 5-foot-diameter portion of the area requires at least 1 minute to clear by hand.
+<br>
+If a pillar is created under a creature, that creature must succeed on a Dexterity saving throw or be lifted by the pillar. A creature can choose to fail the save.
+<br>
+If a pillar is prevented from reaching its full height because of a ceiling or other obstacle, a creature on the pillar takes 6d6 bludgeoning damage and is restrained, pinched between the pillar and the obstacle. The restrained creature can use an action to make a Strength or Dexterity check (the creature's choice) against the spell's save DC. On a success, the creature is no longer restrained and must either move off the pillar or fall off it.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 7th level or higher, you can create two additional pillars for each slot level above 6th.""")
 	BonesofEarth = BonesEarth
-	CircleofDeath = Spell("Circle of Death", 6, "Necromancy", "1 Action", "150 feet", "Instantaneous", "Verbal, Somatic, Material")
+	CircleofDeath = Spell("Circle of Death", 6, "Necromancy", "1 Action", "150 feet", "Instantaneous", "Verbal, Somatic, Material", definition="""Negative energy ripples out in a 60-foot-radius Sphere from a point you choose within range. Each creature in that area makes a Constitution saving throw, taking 8d8 Necrotic damage on a failed save or half as much damage on a successful one.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 2d8 for each spell slot level above 6.""")
 
-	ConjureFey = Spell("Conjure Fey", 6, "Conjuration", "1 Action", "90 feet", "Concentration, up to 1 hour", "Verbal, Somatic")
-	Contingency = Spell("Contingency", 6, "Evocation", "10 Minutes", "Self", "10 days", "Verbal, Somatic, Material")
-	CreateHomunculus = Spell("Create Homunculus", 6, "Transmutation", "1 Hour", "120 feet", "Instantaneous", "Verbal, Somatic, Material")
-	CreateUndead = Spell("Create Undead", 6, "Necromancy", "1 Minute", "10 feet", "Instantaneous", "Verbal, Somatic, Material")
-	Disintegrate = Spell("Disintegrate", 6, "Transmutation", "1 Action", "60 feet", "Instantaneous", "Verbal, Somatic, Material")
-	DrawmijInstantSummons = Spell("Drawmij's Instant Summons", 6, "Conjuration", "1 Minute R", "Touch", "Until dispelled", "Verbal, Somatic, Material")
-	FizbanPlatinumShield = Spell("Fizban's Platinum Shield", 6, "Abjuration", "1 Bonus Action", "60ft", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	Forbiddance = Spell("Forbiddance", 6, "Abjuration", "10 Minutes R", "Touch", "1 day", "Verbal, Somatic, Material")
-	GlobeInvulnerability = Spell("Globe of Invulnerability", 6, "Abjuration", "1 Action", "Self (10-foot radius)", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
+	ConjureFey = Spell("Conjure Fey", 6, "Conjuration", "1 Action", "90 feet", "Concentration, up to 1 hour", "Verbal, Somatic", definition="""You conjure a Medium spirit from the Feywild in an unoccupied space you can see within range. The spirit lasts for the duration, and it looks like a Fey creature of your choice. When the spirit appears, you can make one melee spell attack against a creature within 5 feet of it. On a hit, the target takes Psychic damage equal to 3d12 plus your spellcasting ability modifier, and the target has the Frightened condition until the start of your next turn, with both you and the spirit as the source of the fear.
+<br>
+As a Bonus Action on your later turns, you can teleport the spirit to an unoccupied space you can see within 30 feet of the space it left and make the attack against a creature within 5 feet of it.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d12 for each spell slot level above 6.""")
+	Contingency = Spell("Contingency", 6, "Evocation", "10 Minutes", "Self", "10 days", "Verbal, Somatic, Material", definition="""Choose a spell of level 5 or lower that you can cast, that has a casting time of an action, and that can target you. You cast that spell--called the contingent spell--as part of casting Contingency, expending spell slots for both, but the contingent spell doesn't come into effect. Instead, it takes effect when a certain trigger occurs. You describe that trigger when you cast the two spells. For example, a Contingency cast with Water Breathing might stipulate that Water Breathing comes into effect when you are engulfed in water or a similar liquid.
+<br>
+The contingent spell takes effect immediately after the trigger occurs for the first time, whether or not you want it to, and then Contingency ends.
+<br>
+The contingent spell takes effect only on you, even if it can normally target others. You can use only one Contingency spell at a time. If you cast this spell again, the effect of another Contingency spell on you ends. Also, Contingency ends on you if its material component is ever not on your person.""")
+	CreateHomunculus = Spell("Create Homunculus", 6, "Transmutation", "1 Hour", "120 feet", "Instantaneous", "Verbal, Somatic, Material", definition="""While speaking an intricate incantation, you cut yourself with a jewel-encrusted dagger, taking 2d4 piercing damage that can't be reduced in any way. You then drip your blood on the spell's other components and touch them, transforming them into a special construct called a homunculus.
+<br>
+The statistics of the homunculus are in the Monster Manual. It is your faithful companion, and it dies if you die. Whenever you finish a long rest, you can spend up to half your Hit Dice if the homunculus is on the same plane of existence as you. When you do so, roll each die and add your Constitution modifier to it. Your hit point maximum is reduced by the total, and the homunculus's hit point maximum and current hit points are both increased by it. This process can reduce you to no lower than 1 hit point, and the change to your and the homunculus's hit points ends when you finish your next long rest. The reduction to your hit point maximum can't be removed by any means before then, except by the homunculus's death.
+<br>
+You can have only one homunculus at a time. If you cast this spell while your homunculus lives, the spell fails.""")
+	CreateUndead = Spell("Create Undead", 6, "Necromancy", "1 Minute", "10 feet", "Instantaneous", "Verbal, Somatic, Material", definition="""You can cast this spell only at night. Choose up to three corpses of Medium or Small Humanoids within range. Each one becomes a Ghoul under your control (see the Monster Manual for its stat block).
+<br>
+As a Bonus Action on each of your turns, you can mentally command any creature you animated with this spell if the creature is within 120 feet of you (if you control multiple creatures, you can command any of them at the same time, issuing the same command to them). You decide what action the creature will take and where it will move on its next turn, or you can issue a general command, such as to guard a particular place. If you issue no commands, the creature takes the Dodge action and moves only to avoid harm. Once given an order, the creature continues to follow the order until its task is complete.
+<br>
+The creature is under your control for 24 hours, after which it stops obeying any command you've given it. To maintain control of the creature for another 24 hours, you must cast this spell on the creature before the current 24-hour period ends. This use of the spell reasserts your control over up to three creatures you have animated with this spell rather than animating new ones.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> If you use a level 7 spell slot, you can animate or reassert control over four Ghouls. If you use a level 8 spell slot, you can animate or reassert control over five Ghouls or two Ghasts or Wights. If you use a level 9 spell slot, you can animate or reassert control over six Ghouls, three Ghasts or Wights, or two Mummies. See the Monster Manual for these stat blocks.""")
+	Disintegrate = Spell("Disintegrate", 6, "Transmutation", "1 Action", "60 feet", "Instantaneous", "Verbal, Somatic, Material", definition="""You launch a green ray at a target you can see within range. The target can be a creature, a nonmagical object, or a creation of magical force, such as the wall created by Wall of Force.
+<br>
+A creature targeted by this spell makes a Dexterity saving throw. On a failed save, the target takes 10d6 + 40 Force damage. If this damage reduces it to 0 Hit Points, it and everything nonmagical it is wearing and carrying are disintegrated into gray dust. The target can be revived only by a True Resurrection or a Wish spell.
+<br>
+This spell automatically disintegrates a Large or smaller nonmagical object or a creation of magical force. If such a target is Huge or larger, this spell disintegrates a 10-foot-Cube portion of it.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 3d6 for each spell slot level above 6.""")
+	DrawmijInstantSummons = Spell("Drawmij's Instant Summons", 6, "Conjuration", "1 Minute R", "Touch", "Until dispelled", "Verbal, Somatic, Material", definition="""You touch the sapphire used in the casting and an object weighing 10 pounds or less whose longest dimension is 6 feet or less. The spell leaves an Invisible mark on that object and invisibly inscribes the object's name on the sapphire. Each time you cast this spell, you must use a different sapphire.
+<br>
+Thereafter, you can take a Magic action to speak the object's name and crush the sapphire. The object instantly appears in your hand regardless of physical or planar distances, and the spell ends.
+<br>
+If another creature is holding or carrying the object, crushing the sapphire doesn't transport it, but instead you learn who that creature is and where that creature is currently located.""")
+	FizbanPlatinumShield = Spell("Fizban's Platinum Shield", 6, "Abjuration", "1 Bonus Action", "60ft", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""You create a field of silvery light that surrounds a creature of your choice within range (you can choose yourself). The field sheds dim light out to 5 feet. While surrounded by the field, a creature gains the following benefits:
+<br>
+<b>Cover.</b> The creature has 3.
+<br>
+<b>Damage Resistance.</b> The creature has resistance to acid, cold, fire, lightning, and poison damage.
+<br>
+<b>Evasion.</b> If the creature is subjected to an effect that allows it to make a Dexterity saving throw to take only half damage, the creature instead takes no damage if it succeeds on the saving throw, and only half damage if it fails.
+<br>
+As a bonus action on subsequent turns, you can move the field to another creature within 60 feet of the field.""")
+	Forbiddance = Spell("Forbiddance", 6, "Abjuration", "10 Minutes R", "Touch", "1 day", "Verbal, Somatic, Material", definition="""You create a ward against magical travel that protects up to 40,000 square feet of floor space to a height of 30 feet above the floor. For the duration, creatures can't teleport into the area or use portals, such as those created by the Gate spell, to enter the area. The spell proofs the area against planar travel, and therefore prevents creatures from accessing the area by way of the Astral Plane, the Ethereal Plane, the Feywild, the Shadowfell, or the Plane Shift spell.
+<br>
+In addition, the spell damages types of creatures that you choose when you cast it. Choose one or more of the following: Aberrations, Celestials, Elementals, Fey, Fiends, and Undead. When a creature of a chosen type enters the spell's area for the first time on a turn or ends its turn there, the creature takes 5d10 Radiant or Necrotic damage (your choice when you cast this spell).
+<br>
+You can designate a password when you cast the spell. A creature that speaks the password as it enters the area takes no damage from the spell.
+<br>
+The spell's area can't overlap with the area of another Forbiddance spell. If you cast Forbiddance every day for 30 days in the same location, the spell lasts until it is dispelled, and the Material components are consumed on the last casting.""")
+	GlobeInvulnerability = Spell("Globe of Invulnerability", 6, "Abjuration", "1 Action", "Self (10-foot radius)", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""An immobile, shimmering barrier appears in a 10-foot Emanation around you and remains for the duration.
+<br>
+Any spell of level 5 or lower cast from outside the barrier can't affect anything within it. Such a spell can target creatures and objects within the barrier, but the spell has no effect on them. Similarly, the area within the barrier is excluded from areas of effect created by such spells.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The barrier blocks spells of 1 level higher for each spell slot level above 6.""")
 	GlobeofInvulnerability = GlobeInvulnerability
-	GravityFissure = Spell("Gravity Fissure", 6, "Evocation DG", "1 Action", "Self (100-foot line)", "Instantaneous", "Verbal, Somatic, Material")
-	Harm = Spell("Harm", 6, "Necromancy", "1 Action", "60 feet", "Instantaneous", "Verbal, Somatic")
-	InvestitureFlame = Spell("Investiture of Flame", 6, "Transmutation", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic")
-	InvestitureIce = Spell("Investiture of Ice", 6, "Transmutation", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic")
-	InvestitureStone = Spell("Investiture of Stone", 6, "Transmutation", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic")
-	MagicJar = Spell("Magic Jar", 6, "Necromancy", "1 Minute", "Self", "Until dispelled", "Verbal, Somatic, Material")
-	MentalPrison = Spell("Mental Prison", 6, "Illusion", "1 Action", "60 feet", "Concentration, up to 1 minute", "Somatic")
-	MoveEarth = Spell("Move Earth", 6, "Transmutation", "1 Action", "120 feet", "Concentration, up to 2 hours", "Verbal, Somatic, Material")
-	OtilukeFreezingSphere = Spell("Otiluke's Freezing Sphere", 6, "Evocation", "1 Action", "300 feet", "Instantaneous", "Verbal, Somatic, Material")
-	PlanarAlly = Spell("Planar Ally", 6, "Conjuration", "1 Action", "60 feet", "Instantaneous", "Verbal, Somatic")
-	PrimordialWard = Spell("Primordial Ward", 6, "Abjuration", "1 Action", "Self", "Concentration, up to 1 minute", "Verbal, Somatic")
-	Scatter = Spell("Scatter", 6, "Conjuration", "1 Action", "30 feet", "Instantaneous", "Verbal")
-	SoulCage = Spell("Soul Cage", 6, "Necromancy", "Special", "60 feet", "8 hours", "Verbal, Somatic, Material")
-	SummonFiend = Spell("Summon Fiend", 6, "Conjuration", "1 Action", "90 feet", "Concentration, up to 1 hour", "Verbal, Somatic, Material")
-	TashaOtherworldlyGuise = Spell("Tasha's Otherworldly Guise", 6, "Transmutation", "1 Bonus Action", "Self", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	TenserTransformation = Spell("Tenser's Transformation", 6, "Transmutation", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic, Material")
-	WallIce = Spell("Wall of Ice", 6, "Evocation", "1 Action", "120 feet", "Concentration, up to 10 minutes", "Verbal, Somatic, Material")
-	WidogastTransmogrification = Spell("Widogast's Transmogrification (HB)", 6, "Transmutation", "1 hour", "Touch", "Instantaneous", "Verbal, Somatic, Material")
-	WordRecall = Spell("Word of Recall", 6, "Conjuration", "1 Action", "5 feet", "Instantaneous", "Verbal")
+	GravityFissure = Spell("Gravity Fissure", 6, "Evocation DG", "1 Action", "Self (100-foot line)", "Instantaneous", "Verbal, Somatic, Material", definition="""You manifest a ravine of gravitational energy in a line originating from you that is 100 feet long and 5 feet wide. Each creature in that line must make a Constitution saving throw, taking 8d8 force damage on a failed save, or half as much damage on a successful one.
+<br>
+Each creature within 10 feet of the line but not in it must succeed on a Constitution saving throw or take 8d8 force damage and be pulled toward the line until the creature is in its area.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 7th level or higher, the damage increases by 1d8 for each slot level above 6th.""")
+	Harm = Spell("Harm", 6, "Necromancy", "1 Action", "60 feet", "Instantaneous", "Verbal, Somatic", definition="""You unleash virulent magic on a creature you can see within range. The target makes a Constitution saving throw. On a failed save, it takes 14d6 Necrotic damage, and its Hit Point maximum is reduced by an amount equal to the Necrotic damage it took. On a successful save, it takes half as much damage only. This spell can't reduce a target's Hit Point maximum below 1.""")
+	InvestitureFlame = Spell("Investiture of Flame", 6, "Transmutation", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic", definition="""Flames race across your body, shedding bright light in a 30-foot radius and dim light for an additional 30 feet for the spell's duration. The flames don't harm you. Until the spell ends, you gain the following benefits:
+<br>
+You are immune to fire damage and have resistance to cold damage.
+<br>
+Any creature that moves within 5 feet of you for the first time on a turn or ends its turn there takes 1d10 fire damage.
+<br>
+You can use your action to create a line of fire 15 feet long and 5 feet wide extending from you in a direction you choose. Each creature in the line must make a Dexterity saving throw. A creature takes 4d8 fire damage on a failed save, or half as much damage on a successful one.""")
+	InvestitureIce = Spell("Investiture of Ice", 6, "Transmutation", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic", definition="""Until the spell ends, ice rimes your body, and you gain the following benefits:
+<br>
+You are immune to cold damage and have resistance to fire damage.
+<br>
+You can move across 3 created by ice or snow without spending extra movement.
+<br>
+The ground in a 10-foot radius around you is icy and is 3 for creatures other than you. The radius moves with you.
+<br>
+You can use your action to create a 15-foot cone of freezing wind extending from your outstretched hand in a direction you choose. Each creature in the cone must make a Constitution saving throw. A creature takes 4d6 cold damage on a failed save, or half as much damage on a successful one. A creature that fails its save against this effect has its speed halved until the start of your next turn.""")
+	InvestitureStone = Spell("Investiture of Stone", 6, "Transmutation", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic", definition="""Until the spell ends, bits of rock spread across your body, and you gain the following benefits:
+<br>
+You have resistance to bludgeoning, piercing, and slashing damage from nonmagical attacks.
+<br>
+You can use your action to create a small earthquake on the ground in a 15-foot radius centered on you. Other creatures on that ground must succeed on a Dexterity saving throw or be knocked prone.
+<br>
+You can move across 3 made of earth or stone without spending extra movement. You can move through solid earth or stone as if it was air and without destabilizing it, but you can't end your movement there. If you do so, you are ejected to the nearest unoccupied space, this spell ends, and you are stunned until the end of your next turn.""")
+	MagicJar = Spell("Magic Jar", 6, "Necromancy", "1 Minute", "Self", "Until dispelled", "Verbal, Somatic, Material", definition="""Your body falls into a catatonic state as your soul leaves it and enters the container you used for the spell's Material component. While your soul inhabits the container, you are aware of your surroundings as if you were in the container's space. You can't move or take Reactions. The only action you can take is to project your soul up to 100 feet out of the container, either returning to your living body (and ending the spell) or attempting to possess a Humanoid's body.
+<br>
+You can attempt to possess any Humanoid within 100 feet of you that you can see (creatures warded by a Protection from Evil and Good or Magic Circle spell can't be possessed). The target makes a Charisma saving throw. On a failed save, your soul enters the target's body, and the target's soul becomes trapped in the container. On a successful save, the target resists your efforts to possess it, and you can't attempt to possess it again for 24 hours.
+<br>
+Once you possess a creature's body, you control it. Your Hit Points, Hit Point Dice, Strength, Dexterity, Constitution, Speed, and senses are replaced by the creature's. You otherwise keep your game statistics.
+<br>
+Meanwhile, the possessed creature's soul can perceive from the container using its own senses, but it can't move and it is Incapacitated.
+<br>
+While possessing a body, you can take a Magic action to return from the host body to the container if it is within 100 feet of you, returning the host creature's soul to its body. If the host body dies while you're in it, the creature dies, and you make a Charisma saving throw against your own spellcasting DC. On a success, you return to the container if it is within 100 feet of you. Otherwise, you die.
+<br>
+If the container is destroyed or the spell ends, your soul returns to your body. If your body is more than 100 feet away from you or if your body is dead, you die. If another creature's soul is in the container when it is destroyed, the creature's soul returns to its body if the body is alive and within 100 feet. Otherwise, that creature dies.
+<br>
+When the spell ends, the container is destroyed.""")
+	MentalPrison = Spell("Mental Prison", 6, "Illusion", "1 Action", "60 feet", "Concentration, up to 1 minute", "Somatic", definition="""You attempt to bind a creature within an illusory cell that only it perceives. One creature you can see within range must make an Intelligence saving throw. The target succeeds automatically if it is immune to being charmed. On a successful save, the target takes 5d10 psychic damage, and the spell ends. On a failed save, the target takes 5d10 psychic damage, and you make the area immediately around the target's space appear dangerous to it in some way. You might cause the target to perceive itself as being surrounded by fire, floating razors, or hideous maws filled with dripping teeth. Whatever form the illusion takes, the target can't see or hear anything beyond it and is restrained for the spell's duration. If the target is moved out of the illusion, makes a melee attack through it, or reaches any part of its body through it, the target takes 10d10 psychic damage, and the spell ends.""")
+	MoveEarth = Spell("Move Earth", 6, "Transmutation", "1 Action", "120 feet", "Concentration, up to 2 hours", "Verbal, Somatic, Material", definition="""Choose an area of terrain no larger than 40 feet on a side within range. You can reshape dirt, sand, or clay in the area in any manner you choose for the duration. You can raise or lower the area's elevation, create or fill in a trench, erect or flatten a wall, or form a pillar. The extent of any such changes can't exceed half the area's largest dimension. For example, if you affect a 40-foot square, you can create a pillar up to 20 feet high, raise or lower the square's elevation by up to 20 feet, dig a trench up to 20 feet deep, and so on. It takes 10 minutes for these changes to complete. Because the terrain's transformation occurs slowly, creatures in the area can't usually be trapped or injured by the ground's movement.
+<br>
+At the end of every 10 minutes you spend Concentrating on the spell, you can choose a new area of terrain to affect within range.
+<br>
+This spell can't manipulate natural stone or stone construction. Rocks and structures shift to accommodate the new terrain. If the way you shape the terrain would make a structure unstable, it might collapse.
+<br>
+Similarly, this spell doesn't directly affect plant growth. The moved earth carries any plants along with it.""")
+	OtilukeFreezingSphere = Spell("Otiluke's Freezing Sphere", 6, "Evocation", "1 Action", "300 feet", "Instantaneous", "Verbal, Somatic, Material", definition="""A frigid globe streaks from you to a point of your choice within range, where it explodes in a 60-foot-radius Sphere. Each creature in that area makes a Constitution saving throw, taking 10d6 Cold damage on a failed save or half as much damage on a successful one.
+<br>
+If the globe strikes a body of water, it freezes the water to a depth of 6 inches over an area 30 feet square. This ice lasts for 1 minute. Creatures that were swimming on the surface of frozen water are trapped in the ice and have the Restrained condition. A trapped creature can take an action to make a Strength (Athletics) check against your spell save DC to break free.
+<br>
+You can refrain from firing the globe after completing the spell's casting. If you do so, a globe about the size of a sling bullet, cool to the touch, appears in your hand. At any time, you or a creature you give the globe to can throw the globe (to a range of 40 feet) or hurl it with a sling (to the sling's normal range). It shatters on impact, with the same effect as a normal casting of the spell. You can also set the globe down without shattering it. After 1 minute, if the globe hasn't already shattered, it explodes.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d6 for each spell slot level above 6.""")
+	PlanarAlly = Spell("Planar Ally", 6, "Conjuration", "1 Action", "60 feet", "Instantaneous", "Verbal, Somatic", definition="""You beseech an otherworldly entity for aid. The being must be known to you: a god, a demon prince, or some other being of cosmic power. That entity sends a type=celestial, an type=elemental, or a type=fiend loyal to it to aid you, making the creature appear in an unoccupied space within range. If you know a specific creature's name, you can speak that name when you cast this spell to request that creature, though you might get a different creature anyway (DM's choice).
+<br>
+When the creature appears, it is under no compulsion to behave a particular way. You can ask it to perform a service in exchange for payment, but it isn't obliged to do so. The requested task could range from simple (fly us across the chasm, or help us fight a battle) to complex (spy on our enemies, or protect us during our foray into the dungeon). You must be able to communicate with the creature to bargain for its services.
+<br>
+Payment can take a variety of forms. A Celestial might require a sizable donation of gold or magic items to an allied temple, while a Fiend might demand a living sacrifice or a gift of treasure. Some creatures might exchange their service for a quest undertaken by you.
+<br>
+A task that can be measured in minutes requires a payment worth 100 GP per minute. A task measured in hours requires 1,000 GP per hour. And a task measured in days (up to 10 days) requires 10,000 GP per day. The DM can adjust these payments based on the circumstances under which you cast the spell. If the task is aligned with the creature's ethos, the payment might be halved or even waived. Nonhazardous tasks typically require only half the suggested payment, while especially dangerous tasks might require a greater gift. Creatures rarely accept tasks that seem suicidal.
+<br>
+After the creature completes the task, or when the agreed-upon duration of service expires, the creature returns to its home plane after reporting back to you if possible. If you are unable to agree on a price for the creature's service, the creature immediately returns to its home plane.""")
+	PrimordialWard = Spell("Primordial Ward", 6, "Abjuration", "1 Action", "Self", "Concentration, up to 1 minute", "Verbal, Somatic", definition="""You have resistance to acid, cold, fire, lightning, and thunder damage for the spell's duration.
+<br>
+When you take damage of one of those types, you can use your reaction to gain immunity to that type of damage, including against the triggering damage. If you do so, the resistances end, and you have the immunity until the end of your next turn, at which time the spell ends.""")
+	Scatter = Spell("Scatter", 6, "Conjuration", "1 Action", "30 feet", "Instantaneous", "Verbal", definition="""The air quivers around up to five creatures of your choice that you can see within range. An unwilling creature must succeed on a Wisdom saving throw to resist this spell. You teleport each affected target to an unoccupied space that you can see within 120 feet of you. That space must be on the ground or on a floor.""")
+	SoulCage = Spell("Soul Cage", 6, "Necromancy", "Special", "60 feet", "8 hours", "Verbal, Somatic, Material", definition="""This spell snatches the soul of a humanoid as it dies and traps it inside the tiny cage you use for the material component. A stolen soul remains inside the cage until the spell ends or until you destroy the cage, which ends the spell. While you have a soul inside the cage, you can exploit it in any of the ways described below. You can use a trapped soul up to six times. Once you exploit a soul for the sixth time, it is released, and the spell ends. While a soul is trapped, the dead humanoid it came from can't be revived.
+<br>
+<b>Steal Life.</b> You can use a bonus action to drain vigor from the soul and regain 2d8 hit points.
+<br>
+<b>Query Soul.</b> You ask the soul a question (no action required) and receive a brief telepathic answer, which you can understand regardless of the language used. The soul knows only what it knew in life, but it must answer you truthfully and to the best of its ability. The answer is no more than a sentence or two and might be cryptic.
+<br>
+<b>Borrow Experience.</b> You can use a bonus action to bolster yourself with the soul's life experience, making your next attack roll, ability check, or saving throw with advantage. If you don't use this benefit before the start of your next turn, it is lost.
+<br>
+<b>Eyes of the Dead.</b> You can use an action to name a place the humanoid saw in life, which creates an invisible sensor somewhere in that place if it is on the plane of existence you're currently on. The sensor remains for as long as you concentrate, up to 10 minutes (as if you were concentrating on a spell). You receive visual and auditory information from the sensor as if you were in its space using your senses.
+<br>
+A creature that can see the sensor (such as one using see invisibility or truesight) sees a translucent image of the tormented humanoid whose soul you caged.""")
+	SummonFiend = Spell("Summon Fiend", 6, "Conjuration", "1 Action", "90 feet", "Concentration, up to 1 hour", "Verbal, Somatic, Material", definition="""You call forth a fiendish spirit. It manifests in an unoccupied space that you can see within range and uses the Fiendish Spirit stat block. When you cast the spell, choose Demon, Devil, or Yugoloth. The creature resembles a Fiend of the chosen type, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.
+<br>
+The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don't issue any, it takes the Dodge action and uses its movement to avoid danger.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> Use the spell slot's level for the spell's level in the stat block.""")
+	TashaOtherworldlyGuise = Spell("Tasha's Otherworldly Guise", 6, "Transmutation", "1 Bonus Action", "Self", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""Uttering an incantation, you draw on the magic of the Lower Planes or Upper Planes (your choice) to transform yourself. You gain the following benefits until the spell ends:
+<br>
+You are immune to fire and poison damage (Lower Planes) or radiant and necrotic damage (Upper Planes).
+<br>
+You are immune to the poisoned condition (Lower Planes) or the charmed condition (Upper Planes).
+<br>
+Spectral wings appear on your back, giving you a flying speed of 40 feet.
+<br>
+You have a +2 bonus to AC.
+<br>
+All your weapon attacks are magical, and when you make a weapon attack, you can use your spellcasting ability modifier, instead of Strength or Dexterity, for the attack and damage rolls.
+<br>
+You can attack twice, instead of once, when you take the Attack action on your turn. You ignore this benefit if you already have a feature, like Extra Attack, that lets you attack more than once when you take the Attack action on your turn.""")
+	TenserTransformation = Spell("Tenser's Transformation", 6, "Transmutation", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic, Material", definition="""You endow yourself with endurance and martial prowess fueled by magic. Until the spell ends, you can't cast spells, and you gain the following benefits:
+<br>
+You gain 50 temporary hit points. If any of these remain when the spell ends, they are lost.
+<br>
+You have advantage on attack rolls that you make with simple and martial weapons.
+<br>
+When you hit a target with a weapon attack, that target takes an extra 2d12 force damage.
+<br>
+You have proficiency with all armor, shields, simple weapons, and martial weapons.
+<br>
+You have proficiency in Strength and Constitution saving throws.
+<br>
+You can attack twice, instead of once, when you take the Attack action on your turn. You ignore this benefit if you already have a feature, like Extra Attack, that gives you extra attacks.
+<br>
+Immediately after the spell ends, you must succeed on a DC 15 Constitution saving throw or suffer one level of exhaustion.""")
+	WallIce = Spell("Wall of Ice", 6, "Evocation", "1 Action", "120 feet", "Concentration, up to 10 minutes", "Verbal, Somatic, Material", definition="""You create a wall of ice on a solid surface within range. You can form it into a hemispherical dome or a globe with a radius of up to 10 feet, or you can shape a flat surface made up of ten 10-foot-square panels. Each panel must be contiguous with another panel. In any form, the wall is 1 foot thick and lasts for the duration.
+<br>
+If the wall cuts through a creature's space when it appears, the creature is pushed to one side of the wall (you choose which side) and makes a Dexterity saving throw, taking 10d6 Cold damage on a failed save or half as much damage on a successful one.
+<br>
+The wall is an object that can be damaged and thus breached. It has AC 12 and 30 Hit Points per 10-foot section, and it has Immunity to Cold, Poison, and Psychic damage and Vulnerability to Fire damage. Reducing a 10-foot section of wall to 0 Hit Points destroys it and leaves behind a sheet of frigid air in the space the wall occupied.
+<br>
+A creature moving through the sheet of frigid air for the first time on a turn makes a Constitution saving throw, taking 5d6 Cold damage on a failed save or half as much damage on a successful one.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage the wall deals when it appears increases by 2d6 and the damage from passing through the sheet of frigid air increases by 1d6 for each spell slot level above 6.""")
+	WordRecall = Spell("Word of Recall", 6, "Conjuration", "1 Action", "5 feet", "Instantaneous", "Verbal", definition="""You and up to five willing creatures within 5 feet of you instantly teleport to a previously designated sanctuary. You and any creatures that teleport with you appear in the nearest unoccupied space to the spot you designated when you prepared your sanctuary (see below). If you cast this spell without first preparing a sanctuary, the spell has no effect.
+<br>
+You must designate a location, such as a temple, as a sanctuary by casting this spell there.""")
 	WordofRecall = WordRecall
-	ChainLightning = Spell("Chain Lightning", 6, "Evocation", "1 Action", "150 feet", "Instantaneous", "Verbal, Somatic, Material")
-	WallThorns = Spell("Wall of Thorns", 6, "Conjuration", "1 Action", "120 feet", "Concentration, up to 10 minutes", "Verbal, Somatic, Material")
-	DruidGrove = Spell("Druid Grove", 6, "Abjuration", "10 Minutes", "Touch", "24 hours", "Verbal, Somatic, Material")
-	TransportviaPlants = Spell("Transport via Plants", 6, "Conjuration", "1 Action", "10 feet", "1 round", "Verbal, Somatic")
-	Sunbeam = Spell("Sunbeam", 6, "Evocation", "1 Action", "Self (60-foot line)", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
+	ChainLightning = Spell("Chain Lightning", 6, "Evocation", "1 Action", "150 feet", "Instantaneous", "Verbal, Somatic, Material", definition="""You launch a lightning bolt toward a target you can see within range. Three bolts then leap from that target to as many as three other targets of your choice, each of which must be within 30 feet of the first target. A target can be a creature or an object and can be targeted by only one of the bolts.
+<br>
+Each target makes a Dexterity saving throw, taking 10d8 Lightning damage on a failed save or half as much damage on a successful one.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> One additional bolt leaps from the first target to another target for each spell slot level above 6.""")
+	WallThorns = Spell("Wall of Thorns", 6, "Conjuration", "1 Action", "120 feet", "Concentration, up to 10 minutes", "Verbal, Somatic, Material", definition="""You create a wall of tangled brush bristling with needle-sharp thorns. The wall appears within range on a solid surface and lasts for the duration. You choose to make the wall up to 60 feet long, 10 feet high, and 5 feet thick or a circle that has a 20-foot diameter and is up to 20 feet high and 5 feet thick. The wall blocks line of sight.
+<br>
+When the wall appears, each creature in its area makes a Dexterity saving throw, taking 7d8 Piercing damage on a failed save or half as much damage on a successful one.
+<br>
+A creature can move through the wall, albeit slowly and painfully. For every 1 foot a creature moves through the wall, it must spend 4 feet of movement. Furthermore, the first time a creature enters a space in the wall on a turn or ends its turn there, the creature makes a Dexterity saving throw, taking 7d8 Slashing damage on a failed save or half as much damage on a successful one. A creature makes this save only once per turn.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> Both types of damage increase by 1d8 for each spell slot level above 6.""")
+	DruidGrove = Spell("Druid Grove", 6, "Abjuration", "10 Minutes", "Touch", "24 hours", "Verbal, Somatic, Material", definition="""You invoke the spirits of nature to protect an area outdoors or underground. The area can be as small as a 30-foot cube or as large as a 90-foot cube. Buildings and other structures are excluded from the affected area. If you cast this spell in the same area every day for a year, the spell lasts until dispelled.
+<br>
+The spell creates the following effects within the area. When you cast this spell, you can specify creatures as friends who are immune to the effects. You can also specify a password that, when spoken aloud, makes the speaker immune to these effects.
+<br>
+The entire warded area radiates magic. A dispel magic cast on the area, if successful, removes only one of the following effects, not the entire area. That spell's caster chooses which effect to end. Only when all its effects are gone is this spell dispelled.
+<br>
+<b>Solid Fog.</b> You can fill any number of 5-foot squares on the ground with thick fog, making them heavily obscured. The fog reaches 10 feet high. In addition, every foot of movement through the fog costs 2 extra feet. To a creature immune to this effect, the fog obscures nothing and looks like soft mist, with motes of green light floating in the air.
+<br>
+<b>Grasping Undergrowth.</b> You can fill any number of 5-foot squares on the ground that aren't filled with fog with grasping weeds and vines, as if they were affected by an entangle spell. To a creature immune to this effect, the weeds and vines feel soft and reshape themselves to serve as temporary seats or beds.
+<br>
+<b>Grove Guardians.</b> You can animate up to four trees in the area, causing them to uproot themselves from the ground. These trees have the same statistics as an awakened tree, which appears in the Monster Manual, except they can't speak, and their bark is covered with druidic symbols. If any creature not immune to this effect enters the warded area, the grove guardians fight until they have driven off or slain the intruders. The grove guardians also obey your spoken commands (no action required by you) that you issue while in the area. If you don't give them commands and no intruders are present, the grove guardians do nothing. The grove guardians can't leave the warded area. When the spell ends, the magic animating them disappears, and the trees take root again if possible.
+<br>
+<b>Additional Spell Effect.</b> You can place your choice of one of the following magical effects within the warded area:
+<br>
+A constant gust of wind in two locations of your choice
+<br>
+Spike growth in one location of your choice
+<br>
+Wind wall in two locations of your choice
+<br>
+To a creature immune to this effect, the winds are a fragrant, gentle breeze, and the area of spike growth is harmless.""")
+	TransportviaPlants = Spell("Transport via Plants", 6, "Conjuration", "1 Action", "10 feet", "1 round", "Verbal, Somatic", definition="""This spell creates a magical link between a Large or larger inanimate plant within range and another plant, at any distance, on the same plane of existence. You must have seen or touched the destination plant at least once before. For the duration, any creature can step into the target plant and exit from the destination plant by using 5 feet of movement.""")
+	Sunbeam = Spell("Sunbeam", 6, "Evocation", "1 Action", "Self (60-foot line)", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""You launch a sunbeam in a 5-foot-wide, 60-foot-long Line. Each creature in the Line makes a Constitution saving throw. On a failed save, a creature takes 6d8 Radiant damage and has the Blinded condition until the start of your next turn. On a successful save, it takes half as much damage only.
+<br>
+Until the spell ends, you can take a Magic action to create a new Line of radiance.
+<br>
+For the duration, a mote of brilliant radiance shines above you. It sheds Bright Light in a 30-foot radius and Dim Light for an additional 30 feet. This light is sunlight.""")
 	Countercharm = spell_from_data("Countercharm")
 	HeroesFeast = spell_from_data("Heroes’ Feast")
 	Heal = spell_from_data("Heal")
@@ -4648,45 +5800,246 @@ if LEVEL6:
 	ProgrammedIllusion = spell_from_data("Programmed Illusion")
 	TrueSeeing = spell_from_data("True Seeing")
 	WindWalk = spell_from_data("Wind Walk")
-	BladeBarrier = Spell("Blade Barrier", 6, "Evocation", "1 Action", "90 feet", "Concentration, up to 10 minutes", "Verbal, Somatic")
-	BonesEarth = Spell("Bones of the Earth", 6, "Transmutation", "1 Action", "120 feet", "Instantaneous", "Verbal, Somatic")
-	CircleofDeath = Spell("Circle of Death", 6, "Necromancy", "1 Action", "150 feet", "Instantaneous", "Verbal, Somatic, Material")
-	ConjureFey = Spell("Conjure Fey", 6, "Conjuration", "1 Action", "90 feet", "Concentration, up to 1 hour", "Verbal, Somatic")
-	Contingency = Spell("Contingency", 6, "Evocation", "10 Minutes", "Self", "10 days", "Verbal, Somatic, Material")
-	CreateHomunculus = Spell("Create Homunculus", 6, "Transmutation", "1 Hour", "120 feet", "Instantaneous", "Verbal, Somatic, Material")
-	CreateUndead = Spell("Create Undead", 6, "Necromancy", "1 Minute", "10 feet", "Instantaneous", "Verbal, Somatic, Material")
-	Disintegrate = Spell("Disintegrate", 6, "Transmutation", "1 Action", "60 feet", "Instantaneous", "Verbal, Somatic, Material")
-	DrawmijInstantSummons = Spell("Drawmij's Instant Summons", 6, "Conjuration", "1 Minute R", "Touch", "Until dispelled", "Verbal, Somatic, Material")
-	FizbanPlatinumShield = Spell("Fizban's Platinum Shield", 6, "Abjuration", "1 Bonus Action", "60ft", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	Forbiddance = Spell("Forbiddance", 6, "Abjuration", "10 Minutes R", "Touch", "1 day", "Verbal, Somatic, Material")
-	GlobeInvulnerability = Spell("Globe of Invulnerability", 6, "Abjuration", "1 Action", "Self (10-foot radius)", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	GravityFissure = Spell("Gravity Fissure", 6, "Evocation DG", "1 Action", "Self (100-foot line)", "Instantaneous", "Verbal, Somatic, Material")
-	Harm = Spell("Harm", 6, "Necromancy", "1 Action", "60 feet", "Instantaneous", "Verbal, Somatic")
-	InvestitureFlame = Spell("Investiture of Flame", 6, "Transmutation", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic")
+	BladeBarrier = Spell("Blade Barrier", 6, "Evocation", "1 Action", "90 feet", "Concentration, up to 10 minutes", "Verbal, Somatic", definition="""You create a wall of whirling blades made of magical energy. The wall appears within range and lasts for the duration. You make a straight wall up to 100 feet long, 20 feet high, and 5 feet thick, or a ringed wall up to 60 feet in diameter, 20 feet high, and 5 feet thick. The wall provides Three-Quarters Cover, and its space is Difficult Terrain.
+<br>
+Any creature in the wall's space makes a Dexterity saving throw, taking 6d10 Force damage on a failed save or half as much damage on a successful one. A creature also makes that save if it enters the wall's space or ends its turn there. A creature makes that save only once per turn.""")
+	BonesEarth = Spell("Bones of the Earth", 6, "Transmutation", "1 Action", "120 feet", "Instantaneous", "Verbal, Somatic", definition="""You cause up to six pillars of stone to burst from places on the ground that you can see within range. Each pillar is a cylinder that has a diameter of 5 feet and a height of up to 30 feet. The ground where a pillar appears must be wide enough for its diameter, and you can target the ground under a creature if that creature is Medium or smaller. Each pillar has AC 5 and 30 hit points. When reduced to 0 hit points, a pillar crumbles into rubble, which creates an area of 3 with a 10-foot radius that lasts until the rubble is cleared. Each 5-foot-diameter portion of the area requires at least 1 minute to clear by hand.
+<br>
+If a pillar is created under a creature, that creature must succeed on a Dexterity saving throw or be lifted by the pillar. A creature can choose to fail the save.
+<br>
+If a pillar is prevented from reaching its full height because of a ceiling or other obstacle, a creature on the pillar takes 6d6 bludgeoning damage and is restrained, pinched between the pillar and the obstacle. The restrained creature can use an action to make a Strength or Dexterity check (the creature's choice) against the spell's save DC. On a success, the creature is no longer restrained and must either move off the pillar or fall off it.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 7th level or higher, you can create two additional pillars for each slot level above 6th.""")
+	CircleofDeath = Spell("Circle of Death", 6, "Necromancy", "1 Action", "150 feet", "Instantaneous", "Verbal, Somatic, Material", definition="""Negative energy ripples out in a 60-foot-radius Sphere from a point you choose within range. Each creature in that area makes a Constitution saving throw, taking 8d8 Necrotic damage on a failed save or half as much damage on a successful one.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 2d8 for each spell slot level above 6.""")
+	ConjureFey = Spell("Conjure Fey", 6, "Conjuration", "1 Action", "90 feet", "Concentration, up to 1 hour", "Verbal, Somatic", definition="""You conjure a Medium spirit from the Feywild in an unoccupied space you can see within range. The spirit lasts for the duration, and it looks like a Fey creature of your choice. When the spirit appears, you can make one melee spell attack against a creature within 5 feet of it. On a hit, the target takes Psychic damage equal to 3d12 plus your spellcasting ability modifier, and the target has the Frightened condition until the start of your next turn, with both you and the spirit as the source of the fear.
+<br>
+As a Bonus Action on your later turns, you can teleport the spirit to an unoccupied space you can see within 30 feet of the space it left and make the attack against a creature within 5 feet of it.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d12 for each spell slot level above 6.""")
+	Contingency = Spell("Contingency", 6, "Evocation", "10 Minutes", "Self", "10 days", "Verbal, Somatic, Material", definition="""Choose a spell of level 5 or lower that you can cast, that has a casting time of an action, and that can target you. You cast that spell--called the contingent spell--as part of casting Contingency, expending spell slots for both, but the contingent spell doesn't come into effect. Instead, it takes effect when a certain trigger occurs. You describe that trigger when you cast the two spells. For example, a Contingency cast with Water Breathing might stipulate that Water Breathing comes into effect when you are engulfed in water or a similar liquid.
+<br>
+The contingent spell takes effect immediately after the trigger occurs for the first time, whether or not you want it to, and then Contingency ends.
+<br>
+The contingent spell takes effect only on you, even if it can normally target others. You can use only one Contingency spell at a time. If you cast this spell again, the effect of another Contingency spell on you ends. Also, Contingency ends on you if its material component is ever not on your person.""")
+	CreateHomunculus = Spell("Create Homunculus", 6, "Transmutation", "1 Hour", "120 feet", "Instantaneous", "Verbal, Somatic, Material", definition="""While speaking an intricate incantation, you cut yourself with a jewel-encrusted dagger, taking 2d4 piercing damage that can't be reduced in any way. You then drip your blood on the spell's other components and touch them, transforming them into a special construct called a homunculus.
+<br>
+The statistics of the homunculus are in the Monster Manual. It is your faithful companion, and it dies if you die. Whenever you finish a long rest, you can spend up to half your Hit Dice if the homunculus is on the same plane of existence as you. When you do so, roll each die and add your Constitution modifier to it. Your hit point maximum is reduced by the total, and the homunculus's hit point maximum and current hit points are both increased by it. This process can reduce you to no lower than 1 hit point, and the change to your and the homunculus's hit points ends when you finish your next long rest. The reduction to your hit point maximum can't be removed by any means before then, except by the homunculus's death.
+<br>
+You can have only one homunculus at a time. If you cast this spell while your homunculus lives, the spell fails.""")
+	CreateUndead = Spell("Create Undead", 6, "Necromancy", "1 Minute", "10 feet", "Instantaneous", "Verbal, Somatic, Material", definition="""You can cast this spell only at night. Choose up to three corpses of Medium or Small Humanoids within range. Each one becomes a Ghoul under your control (see the Monster Manual for its stat block).
+<br>
+As a Bonus Action on each of your turns, you can mentally command any creature you animated with this spell if the creature is within 120 feet of you (if you control multiple creatures, you can command any of them at the same time, issuing the same command to them). You decide what action the creature will take and where it will move on its next turn, or you can issue a general command, such as to guard a particular place. If you issue no commands, the creature takes the Dodge action and moves only to avoid harm. Once given an order, the creature continues to follow the order until its task is complete.
+<br>
+The creature is under your control for 24 hours, after which it stops obeying any command you've given it. To maintain control of the creature for another 24 hours, you must cast this spell on the creature before the current 24-hour period ends. This use of the spell reasserts your control over up to three creatures you have animated with this spell rather than animating new ones.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> If you use a level 7 spell slot, you can animate or reassert control over four Ghouls. If you use a level 8 spell slot, you can animate or reassert control over five Ghouls or two Ghasts or Wights. If you use a level 9 spell slot, you can animate or reassert control over six Ghouls, three Ghasts or Wights, or two Mummies. See the Monster Manual for these stat blocks.""")
+	Disintegrate = Spell("Disintegrate", 6, "Transmutation", "1 Action", "60 feet", "Instantaneous", "Verbal, Somatic, Material", definition="""You launch a green ray at a target you can see within range. The target can be a creature, a nonmagical object, or a creation of magical force, such as the wall created by Wall of Force.
+<br>
+A creature targeted by this spell makes a Dexterity saving throw. On a failed save, the target takes 10d6 + 40 Force damage. If this damage reduces it to 0 Hit Points, it and everything nonmagical it is wearing and carrying are disintegrated into gray dust. The target can be revived only by a True Resurrection or a Wish spell.
+<br>
+This spell automatically disintegrates a Large or smaller nonmagical object or a creation of magical force. If such a target is Huge or larger, this spell disintegrates a 10-foot-Cube portion of it.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 3d6 for each spell slot level above 6.""")
+	DrawmijInstantSummons = Spell("Drawmij's Instant Summons", 6, "Conjuration", "1 Minute R", "Touch", "Until dispelled", "Verbal, Somatic, Material", definition="""You touch the sapphire used in the casting and an object weighing 10 pounds or less whose longest dimension is 6 feet or less. The spell leaves an Invisible mark on that object and invisibly inscribes the object's name on the sapphire. Each time you cast this spell, you must use a different sapphire.
+<br>
+Thereafter, you can take a Magic action to speak the object's name and crush the sapphire. The object instantly appears in your hand regardless of physical or planar distances, and the spell ends.
+<br>
+If another creature is holding or carrying the object, crushing the sapphire doesn't transport it, but instead you learn who that creature is and where that creature is currently located.""")
+	FizbanPlatinumShield = Spell("Fizban's Platinum Shield", 6, "Abjuration", "1 Bonus Action", "60ft", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""You create a field of silvery light that surrounds a creature of your choice within range (you can choose yourself). The field sheds dim light out to 5 feet. While surrounded by the field, a creature gains the following benefits:
+<br>
+<b>Cover.</b> The creature has 3.
+<br>
+<b>Damage Resistance.</b> The creature has resistance to acid, cold, fire, lightning, and poison damage.
+<br>
+<b>Evasion.</b> If the creature is subjected to an effect that allows it to make a Dexterity saving throw to take only half damage, the creature instead takes no damage if it succeeds on the saving throw, and only half damage if it fails.
+<br>
+As a bonus action on subsequent turns, you can move the field to another creature within 60 feet of the field.""")
+	Forbiddance = Spell("Forbiddance", 6, "Abjuration", "10 Minutes R", "Touch", "1 day", "Verbal, Somatic, Material", definition="""You create a ward against magical travel that protects up to 40,000 square feet of floor space to a height of 30 feet above the floor. For the duration, creatures can't teleport into the area or use portals, such as those created by the Gate spell, to enter the area. The spell proofs the area against planar travel, and therefore prevents creatures from accessing the area by way of the Astral Plane, the Ethereal Plane, the Feywild, the Shadowfell, or the Plane Shift spell.
+<br>
+In addition, the spell damages types of creatures that you choose when you cast it. Choose one or more of the following: Aberrations, Celestials, Elementals, Fey, Fiends, and Undead. When a creature of a chosen type enters the spell's area for the first time on a turn or ends its turn there, the creature takes 5d10 Radiant or Necrotic damage (your choice when you cast this spell).
+<br>
+You can designate a password when you cast the spell. A creature that speaks the password as it enters the area takes no damage from the spell.
+<br>
+The spell's area can't overlap with the area of another Forbiddance spell. If you cast Forbiddance every day for 30 days in the same location, the spell lasts until it is dispelled, and the Material components are consumed on the last casting.""")
+	GlobeInvulnerability = Spell("Globe of Invulnerability", 6, "Abjuration", "1 Action", "Self (10-foot radius)", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""An immobile, shimmering barrier appears in a 10-foot Emanation around you and remains for the duration.
+<br>
+Any spell of level 5 or lower cast from outside the barrier can't affect anything within it. Such a spell can target creatures and objects within the barrier, but the spell has no effect on them. Similarly, the area within the barrier is excluded from areas of effect created by such spells.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The barrier blocks spells of 1 level higher for each spell slot level above 6.""")
+	GravityFissure = Spell("Gravity Fissure", 6, "Evocation DG", "1 Action", "Self (100-foot line)", "Instantaneous", "Verbal, Somatic, Material", definition="""You manifest a ravine of gravitational energy in a line originating from you that is 100 feet long and 5 feet wide. Each creature in that line must make a Constitution saving throw, taking 8d8 force damage on a failed save, or half as much damage on a successful one.
+<br>
+Each creature within 10 feet of the line but not in it must succeed on a Constitution saving throw or take 8d8 force damage and be pulled toward the line until the creature is in its area.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 7th level or higher, the damage increases by 1d8 for each slot level above 6th.""")
+	Harm = Spell("Harm", 6, "Necromancy", "1 Action", "60 feet", "Instantaneous", "Verbal, Somatic", definition="""You unleash virulent magic on a creature you can see within range. The target makes a Constitution saving throw. On a failed save, it takes 14d6 Necrotic damage, and its Hit Point maximum is reduced by an amount equal to the Necrotic damage it took. On a successful save, it takes half as much damage only. This spell can't reduce a target's Hit Point maximum below 1.""")
+	InvestitureFlame = Spell("Investiture of Flame", 6, "Transmutation", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic", definition="""Flames race across your body, shedding bright light in a 30-foot radius and dim light for an additional 30 feet for the spell's duration. The flames don't harm you. Until the spell ends, you gain the following benefits:
+<br>
+You are immune to fire damage and have resistance to cold damage.
+<br>
+Any creature that moves within 5 feet of you for the first time on a turn or ends its turn there takes 1d10 fire damage.
+<br>
+You can use your action to create a line of fire 15 feet long and 5 feet wide extending from you in a direction you choose. Each creature in the line must make a Dexterity saving throw. A creature takes 4d8 fire damage on a failed save, or half as much damage on a successful one.""")
 	InvestitureofFlame = InvestitureFlame
-	InvestitureIce = Spell("Investiture of Ice", 6, "Transmutation", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic")
-	InvestitureStone = Spell("Investiture of Stone", 6, "Transmutation", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic")
-	MagicJar = Spell("Magic Jar", 6, "Necromancy", "1 Minute", "Self", "Until dispelled", "Verbal, Somatic, Material")
-	MentalPrison = Spell("Mental Prison", 6, "Illusion", "1 Action", "60 feet", "Concentration, up to 1 minute", "Somatic")
-	MoveEarth = Spell("Move Earth", 6, "Transmutation", "1 Action", "120 feet", "Concentration, up to 2 hours", "Verbal, Somatic, Material")
-	OtilukeFreezingSphere = Spell("Otiluke's Freezing Sphere", 6, "Evocation", "1 Action", "300 feet", "Instantaneous", "Verbal, Somatic, Material")
-	PlanarAlly = Spell("Planar Ally", 6, "Conjuration", "1 Action", "60 feet", "Instantaneous", "Verbal, Somatic")
-	PrimordialWard = Spell("Primordial Ward", 6, "Abjuration", "1 Action", "Self", "Concentration, up to 1 minute", "Verbal, Somatic")
-	Scatter = Spell("Scatter", 6, "Conjuration", "1 Action", "30 feet", "Instantaneous", "Verbal")
-	SoulCage = Spell("Soul Cage", 6, "Necromancy", "Special", "60 feet", "8 hours", "Verbal, Somatic, Material")
-	SummonFiend = Spell("Summon Fiend", 6, "Conjuration", "1 Action", "90 feet", "Concentration, up to 1 hour", "Verbal, Somatic, Material")
-	TashaOtherworldlyGuise = Spell("Tasha's Otherworldly Guise", 6, "Transmutation", "1 Bonus Action", "Self", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	TenserTransformation = Spell("Tenser's Transformation", 6, "Transmutation", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic, Material")
-	WallIce = Spell("Wall of Ice", 6, "Evocation", "1 Action", "120 feet", "Concentration, up to 10 minutes", "Verbal, Somatic, Material")
-	WidogastTransmogrification = Spell("Widogast's Transmogrification (HB)", 6, "Transmutation", "1 hour", "Touch", "Instantaneous", "Verbal, Somatic, Material")
-	WordRecall = Spell("Word of Recall", 6, "Conjuration", "1 Action", "5 feet", "Instantaneous", "Verbal")
-	ChainLightning = Spell("Chain Lightning", 6, "Evocation", "1 Action", "150 feet", "Instantaneous", "Verbal, Somatic, Material")
-	WallThorns = Spell("Wall of Thorns", 6, "Conjuration", "1 Action", "120 feet", "Concentration, up to 10 minutes", "Verbal, Somatic, Material")
-	DruidGrove = Spell("Druid Grove", 6, "Abjuration", "10 Minutes", "Touch", "24 hours", "Verbal, Somatic, Material")
-	TransportviaPlants = Spell("Transport via Plants", 6, "Conjuration", "1 Action", "10 feet", "1 round", "Verbal, Somatic")
-	Sunbeam = Spell("Sunbeam", 6, "Evocation", "1 Action", "Self (60-foot line)", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
+	InvestitureIce = Spell("Investiture of Ice", 6, "Transmutation", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic", definition="""Until the spell ends, ice rimes your body, and you gain the following benefits:
+<br>
+You are immune to cold damage and have resistance to fire damage.
+<br>
+You can move across 3 created by ice or snow without spending extra movement.
+<br>
+The ground in a 10-foot radius around you is icy and is 3 for creatures other than you. The radius moves with you.
+<br>
+You can use your action to create a 15-foot cone of freezing wind extending from your outstretched hand in a direction you choose. Each creature in the cone must make a Constitution saving throw. A creature takes 4d6 cold damage on a failed save, or half as much damage on a successful one. A creature that fails its save against this effect has its speed halved until the start of your next turn.""")
+	InvestitureStone = Spell("Investiture of Stone", 6, "Transmutation", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic", definition="""Until the spell ends, bits of rock spread across your body, and you gain the following benefits:
+<br>
+You have resistance to bludgeoning, piercing, and slashing damage from nonmagical attacks.
+<br>
+You can use your action to create a small earthquake on the ground in a 15-foot radius centered on you. Other creatures on that ground must succeed on a Dexterity saving throw or be knocked prone.
+<br>
+You can move across 3 made of earth or stone without spending extra movement. You can move through solid earth or stone as if it was air and without destabilizing it, but you can't end your movement there. If you do so, you are ejected to the nearest unoccupied space, this spell ends, and you are stunned until the end of your next turn.""")
+	MagicJar = Spell("Magic Jar", 6, "Necromancy", "1 Minute", "Self", "Until dispelled", "Verbal, Somatic, Material", definition="""Your body falls into a catatonic state as your soul leaves it and enters the container you used for the spell's Material component. While your soul inhabits the container, you are aware of your surroundings as if you were in the container's space. You can't move or take Reactions. The only action you can take is to project your soul up to 100 feet out of the container, either returning to your living body (and ending the spell) or attempting to possess a Humanoid's body.
+<br>
+You can attempt to possess any Humanoid within 100 feet of you that you can see (creatures warded by a Protection from Evil and Good or Magic Circle spell can't be possessed). The target makes a Charisma saving throw. On a failed save, your soul enters the target's body, and the target's soul becomes trapped in the container. On a successful save, the target resists your efforts to possess it, and you can't attempt to possess it again for 24 hours.
+<br>
+Once you possess a creature's body, you control it. Your Hit Points, Hit Point Dice, Strength, Dexterity, Constitution, Speed, and senses are replaced by the creature's. You otherwise keep your game statistics.
+<br>
+Meanwhile, the possessed creature's soul can perceive from the container using its own senses, but it can't move and it is Incapacitated.
+<br>
+While possessing a body, you can take a Magic action to return from the host body to the container if it is within 100 feet of you, returning the host creature's soul to its body. If the host body dies while you're in it, the creature dies, and you make a Charisma saving throw against your own spellcasting DC. On a success, you return to the container if it is within 100 feet of you. Otherwise, you die.
+<br>
+If the container is destroyed or the spell ends, your soul returns to your body. If your body is more than 100 feet away from you or if your body is dead, you die. If another creature's soul is in the container when it is destroyed, the creature's soul returns to its body if the body is alive and within 100 feet. Otherwise, that creature dies.
+<br>
+When the spell ends, the container is destroyed.""")
+	MentalPrison = Spell("Mental Prison", 6, "Illusion", "1 Action", "60 feet", "Concentration, up to 1 minute", "Somatic", definition="""You attempt to bind a creature within an illusory cell that only it perceives. One creature you can see within range must make an Intelligence saving throw. The target succeeds automatically if it is immune to being charmed. On a successful save, the target takes 5d10 psychic damage, and the spell ends. On a failed save, the target takes 5d10 psychic damage, and you make the area immediately around the target's space appear dangerous to it in some way. You might cause the target to perceive itself as being surrounded by fire, floating razors, or hideous maws filled with dripping teeth. Whatever form the illusion takes, the target can't see or hear anything beyond it and is restrained for the spell's duration. If the target is moved out of the illusion, makes a melee attack through it, or reaches any part of its body through it, the target takes 10d10 psychic damage, and the spell ends.""")
+	MoveEarth = Spell("Move Earth", 6, "Transmutation", "1 Action", "120 feet", "Concentration, up to 2 hours", "Verbal, Somatic, Material", definition="""Choose an area of terrain no larger than 40 feet on a side within range. You can reshape dirt, sand, or clay in the area in any manner you choose for the duration. You can raise or lower the area's elevation, create or fill in a trench, erect or flatten a wall, or form a pillar. The extent of any such changes can't exceed half the area's largest dimension. For example, if you affect a 40-foot square, you can create a pillar up to 20 feet high, raise or lower the square's elevation by up to 20 feet, dig a trench up to 20 feet deep, and so on. It takes 10 minutes for these changes to complete. Because the terrain's transformation occurs slowly, creatures in the area can't usually be trapped or injured by the ground's movement.
+<br>
+At the end of every 10 minutes you spend Concentrating on the spell, you can choose a new area of terrain to affect within range.
+<br>
+This spell can't manipulate natural stone or stone construction. Rocks and structures shift to accommodate the new terrain. If the way you shape the terrain would make a structure unstable, it might collapse.
+<br>
+Similarly, this spell doesn't directly affect plant growth. The moved earth carries any plants along with it.""")
+	OtilukeFreezingSphere = Spell("Otiluke's Freezing Sphere", 6, "Evocation", "1 Action", "300 feet", "Instantaneous", "Verbal, Somatic, Material", definition="""A frigid globe streaks from you to a point of your choice within range, where it explodes in a 60-foot-radius Sphere. Each creature in that area makes a Constitution saving throw, taking 10d6 Cold damage on a failed save or half as much damage on a successful one.
+<br>
+If the globe strikes a body of water, it freezes the water to a depth of 6 inches over an area 30 feet square. This ice lasts for 1 minute. Creatures that were swimming on the surface of frozen water are trapped in the ice and have the Restrained condition. A trapped creature can take an action to make a Strength (Athletics) check against your spell save DC to break free.
+<br>
+You can refrain from firing the globe after completing the spell's casting. If you do so, a globe about the size of a sling bullet, cool to the touch, appears in your hand. At any time, you or a creature you give the globe to can throw the globe (to a range of 40 feet) or hurl it with a sling (to the sling's normal range). It shatters on impact, with the same effect as a normal casting of the spell. You can also set the globe down without shattering it. After 1 minute, if the globe hasn't already shattered, it explodes.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage increases by 1d6 for each spell slot level above 6.""")
+	PlanarAlly = Spell("Planar Ally", 6, "Conjuration", "1 Action", "60 feet", "Instantaneous", "Verbal, Somatic", definition="""You beseech an otherworldly entity for aid. The being must be known to you: a god, a demon prince, or some other being of cosmic power. That entity sends a type=celestial, an type=elemental, or a type=fiend loyal to it to aid you, making the creature appear in an unoccupied space within range. If you know a specific creature's name, you can speak that name when you cast this spell to request that creature, though you might get a different creature anyway (DM's choice).
+<br>
+When the creature appears, it is under no compulsion to behave a particular way. You can ask it to perform a service in exchange for payment, but it isn't obliged to do so. The requested task could range from simple (fly us across the chasm, or help us fight a battle) to complex (spy on our enemies, or protect us during our foray into the dungeon). You must be able to communicate with the creature to bargain for its services.
+<br>
+Payment can take a variety of forms. A Celestial might require a sizable donation of gold or magic items to an allied temple, while a Fiend might demand a living sacrifice or a gift of treasure. Some creatures might exchange their service for a quest undertaken by you.
+<br>
+A task that can be measured in minutes requires a payment worth 100 GP per minute. A task measured in hours requires 1,000 GP per hour. And a task measured in days (up to 10 days) requires 10,000 GP per day. The DM can adjust these payments based on the circumstances under which you cast the spell. If the task is aligned with the creature's ethos, the payment might be halved or even waived. Nonhazardous tasks typically require only half the suggested payment, while especially dangerous tasks might require a greater gift. Creatures rarely accept tasks that seem suicidal.
+<br>
+After the creature completes the task, or when the agreed-upon duration of service expires, the creature returns to its home plane after reporting back to you if possible. If you are unable to agree on a price for the creature's service, the creature immediately returns to its home plane.""")
+	PrimordialWard = Spell("Primordial Ward", 6, "Abjuration", "1 Action", "Self", "Concentration, up to 1 minute", "Verbal, Somatic", definition="""You have resistance to acid, cold, fire, lightning, and thunder damage for the spell's duration.
+<br>
+When you take damage of one of those types, you can use your reaction to gain immunity to that type of damage, including against the triggering damage. If you do so, the resistances end, and you have the immunity until the end of your next turn, at which time the spell ends.""")
+	Scatter = Spell("Scatter", 6, "Conjuration", "1 Action", "30 feet", "Instantaneous", "Verbal", definition="""The air quivers around up to five creatures of your choice that you can see within range. An unwilling creature must succeed on a Wisdom saving throw to resist this spell. You teleport each affected target to an unoccupied space that you can see within 120 feet of you. That space must be on the ground or on a floor.""")
+	SoulCage = Spell("Soul Cage", 6, "Necromancy", "Special", "60 feet", "8 hours", "Verbal, Somatic, Material", definition="""This spell snatches the soul of a humanoid as it dies and traps it inside the tiny cage you use for the material component. A stolen soul remains inside the cage until the spell ends or until you destroy the cage, which ends the spell. While you have a soul inside the cage, you can exploit it in any of the ways described below. You can use a trapped soul up to six times. Once you exploit a soul for the sixth time, it is released, and the spell ends. While a soul is trapped, the dead humanoid it came from can't be revived.
+<br>
+<b>Steal Life.</b> You can use a bonus action to drain vigor from the soul and regain 2d8 hit points.
+<br>
+<b>Query Soul.</b> You ask the soul a question (no action required) and receive a brief telepathic answer, which you can understand regardless of the language used. The soul knows only what it knew in life, but it must answer you truthfully and to the best of its ability. The answer is no more than a sentence or two and might be cryptic.
+<br>
+<b>Borrow Experience.</b> You can use a bonus action to bolster yourself with the soul's life experience, making your next attack roll, ability check, or saving throw with advantage. If you don't use this benefit before the start of your next turn, it is lost.
+<br>
+<b>Eyes of the Dead.</b> You can use an action to name a place the humanoid saw in life, which creates an invisible sensor somewhere in that place if it is on the plane of existence you're currently on. The sensor remains for as long as you concentrate, up to 10 minutes (as if you were concentrating on a spell). You receive visual and auditory information from the sensor as if you were in its space using your senses.
+<br>
+A creature that can see the sensor (such as one using see invisibility or truesight) sees a translucent image of the tormented humanoid whose soul you caged.""")
+	SummonFiend = Spell("Summon Fiend", 6, "Conjuration", "1 Action", "90 feet", "Concentration, up to 1 hour", "Verbal, Somatic, Material", definition="""You call forth a fiendish spirit. It manifests in an unoccupied space that you can see within range and uses the Fiendish Spirit stat block. When you cast the spell, choose Demon, Devil, or Yugoloth. The creature resembles a Fiend of the chosen type, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.
+<br>
+The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don't issue any, it takes the Dodge action and uses its movement to avoid danger.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> Use the spell slot's level for the spell's level in the stat block.""")
+	TashaOtherworldlyGuise = Spell("Tasha's Otherworldly Guise", 6, "Transmutation", "1 Bonus Action", "Self", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""Uttering an incantation, you draw on the magic of the Lower Planes or Upper Planes (your choice) to transform yourself. You gain the following benefits until the spell ends:
+<br>
+You are immune to fire and poison damage (Lower Planes) or radiant and necrotic damage (Upper Planes).
+<br>
+You are immune to the poisoned condition (Lower Planes) or the charmed condition (Upper Planes).
+<br>
+Spectral wings appear on your back, giving you a flying speed of 40 feet.
+<br>
+You have a +2 bonus to AC.
+<br>
+All your weapon attacks are magical, and when you make a weapon attack, you can use your spellcasting ability modifier, instead of Strength or Dexterity, for the attack and damage rolls.
+<br>
+You can attack twice, instead of once, when you take the Attack action on your turn. You ignore this benefit if you already have a feature, like Extra Attack, that lets you attack more than once when you take the Attack action on your turn.""")
+	TenserTransformation = Spell("Tenser's Transformation", 6, "Transmutation", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic, Material", definition="""You endow yourself with endurance and martial prowess fueled by magic. Until the spell ends, you can't cast spells, and you gain the following benefits:
+<br>
+You gain 50 temporary hit points. If any of these remain when the spell ends, they are lost.
+<br>
+You have advantage on attack rolls that you make with simple and martial weapons.
+<br>
+When you hit a target with a weapon attack, that target takes an extra 2d12 force damage.
+<br>
+You have proficiency with all armor, shields, simple weapons, and martial weapons.
+<br>
+You have proficiency in Strength and Constitution saving throws.
+<br>
+You can attack twice, instead of once, when you take the Attack action on your turn. You ignore this benefit if you already have a feature, like Extra Attack, that gives you extra attacks.
+<br>
+Immediately after the spell ends, you must succeed on a DC 15 Constitution saving throw or suffer one level of exhaustion.""")
+	WallIce = Spell("Wall of Ice", 6, "Evocation", "1 Action", "120 feet", "Concentration, up to 10 minutes", "Verbal, Somatic, Material", definition="""You create a wall of ice on a solid surface within range. You can form it into a hemispherical dome or a globe with a radius of up to 10 feet, or you can shape a flat surface made up of ten 10-foot-square panels. Each panel must be contiguous with another panel. In any form, the wall is 1 foot thick and lasts for the duration.
+<br>
+If the wall cuts through a creature's space when it appears, the creature is pushed to one side of the wall (you choose which side) and makes a Dexterity saving throw, taking 10d6 Cold damage on a failed save or half as much damage on a successful one.
+<br>
+The wall is an object that can be damaged and thus breached. It has AC 12 and 30 Hit Points per 10-foot section, and it has Immunity to Cold, Poison, and Psychic damage and Vulnerability to Fire damage. Reducing a 10-foot section of wall to 0 Hit Points destroys it and leaves behind a sheet of frigid air in the space the wall occupied.
+<br>
+A creature moving through the sheet of frigid air for the first time on a turn makes a Constitution saving throw, taking 5d6 Cold damage on a failed save or half as much damage on a successful one.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The damage the wall deals when it appears increases by 2d6 and the damage from passing through the sheet of frigid air increases by 1d6 for each spell slot level above 6.""")
+	WordRecall = Spell("Word of Recall", 6, "Conjuration", "1 Action", "5 feet", "Instantaneous", "Verbal", definition="""You and up to five willing creatures within 5 feet of you instantly teleport to a previously designated sanctuary. You and any creatures that teleport with you appear in the nearest unoccupied space to the spot you designated when you prepared your sanctuary (see below). If you cast this spell without first preparing a sanctuary, the spell has no effect.
+<br>
+You must designate a location, such as a temple, as a sanctuary by casting this spell there.""")
+	ChainLightning = Spell("Chain Lightning", 6, "Evocation", "1 Action", "150 feet", "Instantaneous", "Verbal, Somatic, Material", definition="""You launch a lightning bolt toward a target you can see within range. Three bolts then leap from that target to as many as three other targets of your choice, each of which must be within 30 feet of the first target. A target can be a creature or an object and can be targeted by only one of the bolts.
+<br>
+Each target makes a Dexterity saving throw, taking 10d8 Lightning damage on a failed save or half as much damage on a successful one.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> One additional bolt leaps from the first target to another target for each spell slot level above 6.""")
+	WallThorns = Spell("Wall of Thorns", 6, "Conjuration", "1 Action", "120 feet", "Concentration, up to 10 minutes", "Verbal, Somatic, Material", definition="""You create a wall of tangled brush bristling with needle-sharp thorns. The wall appears within range on a solid surface and lasts for the duration. You choose to make the wall up to 60 feet long, 10 feet high, and 5 feet thick or a circle that has a 20-foot diameter and is up to 20 feet high and 5 feet thick. The wall blocks line of sight.
+<br>
+When the wall appears, each creature in its area makes a Dexterity saving throw, taking 7d8 Piercing damage on a failed save or half as much damage on a successful one.
+<br>
+A creature can move through the wall, albeit slowly and painfully. For every 1 foot a creature moves through the wall, it must spend 4 feet of movement. Furthermore, the first time a creature enters a space in the wall on a turn or ends its turn there, the creature makes a Dexterity saving throw, taking 7d8 Slashing damage on a failed save or half as much damage on a successful one. A creature makes this save only once per turn.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> Both types of damage increase by 1d8 for each spell slot level above 6.""")
+	DruidGrove = Spell("Druid Grove", 6, "Abjuration", "10 Minutes", "Touch", "24 hours", "Verbal, Somatic, Material", definition="""You invoke the spirits of nature to protect an area outdoors or underground. The area can be as small as a 30-foot cube or as large as a 90-foot cube. Buildings and other structures are excluded from the affected area. If you cast this spell in the same area every day for a year, the spell lasts until dispelled.
+<br>
+The spell creates the following effects within the area. When you cast this spell, you can specify creatures as friends who are immune to the effects. You can also specify a password that, when spoken aloud, makes the speaker immune to these effects.
+<br>
+The entire warded area radiates magic. A dispel magic cast on the area, if successful, removes only one of the following effects, not the entire area. That spell's caster chooses which effect to end. Only when all its effects are gone is this spell dispelled.
+<br>
+<b>Solid Fog.</b> You can fill any number of 5-foot squares on the ground with thick fog, making them heavily obscured. The fog reaches 10 feet high. In addition, every foot of movement through the fog costs 2 extra feet. To a creature immune to this effect, the fog obscures nothing and looks like soft mist, with motes of green light floating in the air.
+<br>
+<b>Grasping Undergrowth.</b> You can fill any number of 5-foot squares on the ground that aren't filled with fog with grasping weeds and vines, as if they were affected by an entangle spell. To a creature immune to this effect, the weeds and vines feel soft and reshape themselves to serve as temporary seats or beds.
+<br>
+<b>Grove Guardians.</b> You can animate up to four trees in the area, causing them to uproot themselves from the ground. These trees have the same statistics as an awakened tree, which appears in the Monster Manual, except they can't speak, and their bark is covered with druidic symbols. If any creature not immune to this effect enters the warded area, the grove guardians fight until they have driven off or slain the intruders. The grove guardians also obey your spoken commands (no action required by you) that you issue while in the area. If you don't give them commands and no intruders are present, the grove guardians do nothing. The grove guardians can't leave the warded area. When the spell ends, the magic animating them disappears, and the trees take root again if possible.
+<br>
+<b>Additional Spell Effect.</b> You can place your choice of one of the following magical effects within the warded area:
+<br>
+A constant gust of wind in two locations of your choice
+<br>
+Spike growth in one location of your choice
+<br>
+Wind wall in two locations of your choice
+<br>
+To a creature immune to this effect, the winds are a fragrant, gentle breeze, and the area of spike growth is harmless.""")
+	TransportviaPlants = Spell("Transport via Plants", 6, "Conjuration", "1 Action", "10 feet", "1 round", "Verbal, Somatic", definition="""This spell creates a magical link between a Large or larger inanimate plant within range and another plant, at any distance, on the same plane of existence. You must have seen or touched the destination plant at least once before. For the duration, any creature can step into the target plant and exit from the destination plant by using 5 feet of movement.""")
+	Sunbeam = Spell("Sunbeam", 6, "Evocation", "1 Action", "Self (60-foot line)", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""You launch a sunbeam in a 5-foot-wide, 60-foot-long Line. Each creature in the Line makes a Constitution saving throw. On a failed save, a creature takes 6d8 Radiant damage and has the Blinded condition until the start of your next turn. On a successful save, it takes half as much damage only.
+<br>
+Until the spell ends, you can take a Magic action to create a new Line of radiance.
+<br>
+For the duration, a mote of brilliant radiance shines above you. It sheds Bright Light in a 30-foot radius and Dim Light for an additional 30 feet. This light is sunlight.""")
 	TashasBubblingCauldron = Spell("Tasha's Bubbling Cauldron", 6, "Conjuration",
-								"Action", "5 feet", "Instantaneous", "Verbal, Somatic, Material")
+								"Action", "5 feet", "Instantaneous", "Verbal, Somatic, Material", definition="""You conjure a claw-footed cauldron filled with bubbling liquid. The cauldron appears in an unoccupied space on the ground within 5 feet of you and lasts for the duration. The cauldron can't be moved and disappears when the spell ends, along with the bubbling liquid inside it.
+<br>
+The liquid in the cauldron duplicates the properties of a Common or an Uncommon potion of your choice (such as a Potion of Healing). As a Bonus Action, you or an ally can reach into the cauldron and withdraw one potion of that kind. The potion is contained in a vial that disappears when the potion is consumed. The cauldron can produce a number of these potions equal to your spellcasting ability modifier (minimum 1). When the last of these potions is withdrawn from the cauldron, the cauldron disappears, and the spell ends.
+<br>
+Potions obtained from the cauldron that aren't consumed disappear when you cast this spell again.""")
 
 
 	Enslave = Spell(
@@ -4834,54 +6187,246 @@ if LEVEL7:
 	FireStorm = spell_from_data("Fire Storm")
 	Teleport = spell_from_data("Teleport")
 	MagnificentMansion = spell_from_data("Mordenkainen's Magnificent Mansion")
-	CreateMagen = Spell("Create Magen", 7, "Transmutation", "1 Hour", "Touch", "Instantaneous", "Verbal, Somatic, Material")
-	DelayedBlastFireball = Spell("Delayed Blast Fireball", 7, "Evocation", "1 Action", "150 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	DreamOfTheBlueVeil = Spell("Dream of the Blue Veil", 7, "Conjuration", "10 minutes", "20 feet", "6 hours", "Verbal, Somatic, Material")
-	FingerDeath = Spell("Finger of Death", 7, "Necromancy", "1 Action", "60 feet", "Instantaneous", "Verbal, Somatic")
+	CreateMagen = Spell("Create Magen", 7, "Transmutation", "1 Hour", "Touch", "Instantaneous", "Verbal, Somatic, Material", definition="""While casting the spell, you place a vial of quicksilver in the chest of a life-sized human doll stuffed with ash or dust. You then stitch up the doll and drip your blood on it. At the end of the casting, you tap the doll with a crystal rod, transforming it into a search=magen clothed in whatever the doll was wearing. The type of magen is chosen by you during the casting of the spell. See 21 for different kinds of magen and their statistics.
+<br>
+When the magen appears, your hit point maximum decreases by an amount equal to the magen's challenge rating (minimum reduction of 1). Only a wish spell can undo this reduction to your hit point maximum.
+<br>
+Any magen you create with this spell obeys your commands without question.""")
+	DelayedBlastFireball = Spell("Delayed Blast Fireball", 7, "Evocation", "1 Action", "150 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""A beam of yellow light flashes from you, then condenses at a chosen point within range as a glowing bead for the duration. When the spell ends, the bead explodes, and each creature in a 20-foot-radius Sphere centered on that point makes a Dexterity saving throw. A creature takes Fire damage equal to the total accumulated damage on a failed save or half as much damage on a successful one.
+<br>
+The spell's base damage is 12d6, and the damage increases by 1d6 whenever your turn ends and the spell hasn't ended.
+<br>
+If a creature touches the glowing bead before the spell ends, that creature makes a Dexterity saving throw. On a failed save, the spell ends, causing the bead to explode. On a successful save, the creature can throw the bead up to 40 feet. If the thrown bead enters a creature's space or collides with a solid object, the spell ends, and the bead explodes.
+<br>
+When the bead explodes, flammable objects in the explosion that aren't being worn or carried start burning.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The base damage increases by 1d6 for each spell slot level above 7.""")
+	DreamOfTheBlueVeil = Spell("Dream of the Blue Veil", 7, "Conjuration", "10 minutes", "20 feet", "6 hours", "Verbal, Somatic, Material", definition="""You and up to eight willing creatures within range fall unconscious for the spell's duration and experience visions of another world on the Material Plane, such as Oerth, Toril, Krynn, or Eberron. If the spell reaches its full duration, the visions conclude with each of you encountering and pulling back a mysterious blue curtain. The spell then ends with you mentally and physically transported to the world that was in the visions.
+<br>
+To cast this spell, you must have a magic item that originated on the world you wish to reach, and you must be aware of the world's existence, even if you don't know the world's name. Your destination in the other world is a safe location within 1 mile of where the magic item was created. Alternatively, you can cast the spell if one of the affected creatures was born on the other world, which causes your destination to be a safe location within 1 mile of where that creature was born.
+<br>
+The spell ends early on a creature if that creature takes any damage, and the creature isn't transported. If you take any damage, the spell ends for you and all the other creatures, with none of you being transported.""")
+	FingerDeath = Spell("Finger of Death", 7, "Necromancy", "1 Action", "60 feet", "Instantaneous", "Verbal, Somatic", definition="""You unleash negative energy toward a creature you can see within range. The target makes a Constitution saving throw, taking 7d8 + 30 Necrotic damage on a failed save or half as much damage on a successful one.
+<br>
+A Humanoid killed by this spell rises at the start of your next turn as a Zombie that follows your verbal orders.""")
 	FingerofDeath = FingerDeath
-	Forcecage = Spell("Forcecage", 7, "Evocation", "1 Action", "100 feet", "1 hour", "Verbal, Somatic, Material")
+	Forcecage = Spell("Forcecage", 7, "Evocation", "1 Action", "100 feet", "1 hour", "Verbal, Somatic, Material", definition="""An immobile, Invisible, Cube-shaped prison composed of magical force springs into existence around an area you choose within range. The prison can be a cage or a solid box, as you choose.
+<br>
+A prison in the shape of a cage can be up to 20 feet on a side and is made from 1/2-inch diameter bars spaced 1/2 inch apart. A prison in the shape of a box can be up to 10 feet on a side, creating a solid barrier that prevents any matter from passing through it and blocking any spells cast into or out from the area.
+<br>
+When you cast the spell, any creature that is completely inside the cage's area is trapped. Creatures only partially within the area, or those too large to fit inside it, are pushed away from the center of the area until they are completely outside it.
+<br>
+A creature inside the cage can't leave it by nonmagical means. If the creature tries to use teleportation or interplanar travel to leave, it must first make a Charisma saving throw. On a successful save, the creature can use that magic to exit the cage. On a failed save, the creature doesn't exit the cage and wastes the spell or effect. The cage also extends into the Ethereal Plane, blocking ethereal travel.
+<br>
+This spell can't be dispelled by Dispel Magic.""")
 	MagnificentMansion = Spell("Mordenkainen's Magnificent Mansion", 7, "Conjuration", "1 Minute", "300 feet", "24 hours", "Verbal, Somatic, Material")
-	MordenkainenSword = Spell("Mordenkainen's Sword", 7, "Evocation", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	PlaneShift = Spell("Plane Shift", 7, "Conjuration", "1 Action", "Touch", "Instantaneous", "Verbal, Somatic, Material")
-	PowerWordPain = Spell("Power Word: Pain", 7, "Enchantment", "1 Action", "60 feet", "Instantaneous", "Verbal")
-	ReverseGravity = Spell("Reverse Gravity", 7, "Transmutation", "1 Action", "100 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	Sequester = Spell("Sequester", 7, "Transmutation", "1 Action", "Touch", "Until dispelled", "Verbal, Somatic, Material")
-	Simulacrum = Spell("Simulacrum", 7, "Illusion", "12 hours", "Touch", "Until dispelled", "Verbal, Somatic, Material")
+	MordenkainenSword = Spell("Mordenkainen's Sword", 7, "Evocation", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""You create a spectral sword that hovers within range. It lasts for the duration.
+<br>
+When the sword appears, you make a melee spell attack against a target within 5 feet of the sword. On a hit, the target takes Force damage equal to 4d12 plus your spellcasting ability modifier.
+<br>
+On your later turns, you can take a Bonus Action to move the sword up to 30 feet to a spot you can see and repeat the attack against the same target or a different one.""")
+	PlaneShift = Spell("Plane Shift", 7, "Conjuration", "1 Action", "Touch", "Instantaneous", "Verbal, Somatic, Material", definition="""You and up to eight willing creatures who link hands in a circle are transported to a different plane of existence. You can specify a target destination in general terms, such as the City of Brass on the Elemental Plane of Fire or the palace of Dispater on the second level of the Nine Hells, and you appear in or near that destination, as determined by the DM.
+<br>
+Alternatively, if you know the sigil sequence of a teleportation circle on another plane of existence, this spell can take you to that circle. If the teleportation circle is too small to hold all the creatures you transported, they appear in the closest unoccupied spaces next to the circle.""")
+	PowerWordPain = Spell("Power Word: Pain", 7, "Enchantment", "1 Action", "60 feet", "Instantaneous", "Verbal", definition="""You speak a word of power that causes waves of intense pain to assail one creature you can see within range. If the target has 100 hit points or fewer, it is subject to crippling pain. Otherwise, the spell has no effect on it. A target is also unaffected if it is immune to being charmed.
+<br>
+While the target is affected by crippling pain, any speed it has can be no higher than 10 feet. The target also has disadvantage on attack rolls, ability checks, and saving throws, other than Constitution saving throws. Finally, if the target tries to cast a spell, it must first succeed on a Constitution saving throw, or the casting fails and the spell is wasted.
+<br>
+A target suffering this pain can make a Constitution saving throw at the end of each of its turns. On a successful save, the pain ends.""")
+	ReverseGravity = Spell("Reverse Gravity", 7, "Transmutation", "1 Action", "100 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""This spell reverses gravity in a 50-foot-radius, 100-foot high Cylinder centered on a point within range. All creatures and objects in that area that aren't anchored to the ground fall upward and reach the top of the Cylinder. A creature can make a Dexterity saving throw to grab a fixed object it can reach, thus avoiding the fall upward.
+<br>
+If a ceiling or an anchored object is encountered in this upward fall, creatures and objects strike it just as they would during a downward fall. If an affected creature or object reaches the Cylinder's top without striking anything, it hovers there for the duration. When the spell ends, affected objects and creatures fall downward.""")
+	Sequester = Spell("Sequester", 7, "Transmutation", "1 Action", "Touch", "Until dispelled", "Verbal, Somatic, Material", definition="""With a touch, you magically sequester an object or a willing creature. For the duration, the target has the Invisible condition and can't be targeted by Divination spells, detected by magic, or viewed remotely with magic.
+<br>
+If the target is a creature, it enters a state of suspended animation; it has the Unconscious condition, doesn't age, and doesn't need food, water, or air.
+<br>
+You can set a condition for the spell to end early. The condition can be anything you choose, but it must occur or be visible within 1 mile of the target. Examples include "after 1,000 years" or "when the tarrasque awakens." This spell also ends if the target takes any damage.""")
+	Simulacrum = Spell("Simulacrum", 7, "Illusion", "12 hours", "Touch", "Until dispelled", "Verbal, Somatic, Material", definition="""You create a simulacrum of one Beast or Humanoid that is within 10 feet of you for the entire casting of the spell. You finish the casting by touching both the creature and a pile of ice or snow that is the same size as that creature, and the pile turns into the simulacrum, which is a creature. It uses the game statistics of the original creature at the time of casting, except it is a Construct, its Hit Point maximum is half as much, and it can't cast this spell.
+<br>
+The simulacrum is Friendly to you and creatures you designate. It obeys your commands and acts on your turn in combat. The simulacrum can't gain levels, and it can't take Short or Long Rests.
+<br>
+If the simulacrum takes damage, the only way to restore its Hit Points is to repair it as you take a Long Rest, during which you expend components worth 100 GP per Hit Point restored. The simulacrum must stay within 5 feet of you for the repair.
+<br>
+The simulacrum lasts until it drops to 0 Hit Points, at which point it reverts to snow and melts away. If you cast this spell again, any simulacrum you created with this spell is instantly destroyed.""")
 	Teleport = Spell("Teleport", 7, "Conjuration", "1 Action", "10 feet", "Instantaneous", "Verbal")
-	TempleOfTheGods = Spell("Temple of the Gods", 7, "Conjuration", "1 hour", "120 feet", "24 hours", "Verbal, Somatic, Material")
-	TetherEssence = Spell("Tether Essence", 7, "Necromancy D", "1 Action", "60 feet", "Concentration, up to 1 hour", "Verbal, Somatic, Material")
-	DraconicTransformation = Spell("Draconic Transformation", 7, "Transmutation", "1 Bonus Action", "Self", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	ConjureCelestial = Spell("Conjure Celestial", 7, "Conjuration", "1 Minute", "90 feet", "Concentration, up to 1 hour", "Verbal, Somatic")
-	Whirlwind = 	Spell("Whirlwind", 7, "Evocation", "1 Action", "300 feet", "Concentration, up to 1 minute", "Verbal, Material")
-	Regenerate = Spell("Regenerate", 7, "Transmutation", "1 Minute", "Touch", "1 hour", "Verbal, Somatic, Material")
-	CrownofStars = Spell("Crown of Stars", 7, "Evocation", "1 Action", "Self", "1 hour", "Verbal, Somatic")
-	DivineWord = Spell("Divine Word", 7, "Evocation", "1 Bonus Action", "30 feet", "Instantaneous", "Verbal")
+	TempleOfTheGods = Spell("Temple of the Gods", 7, "Conjuration", "1 hour", "120 feet", "24 hours", "Verbal, Somatic, Material", definition="""You cause a temple to shimmer into existence on ground you can see within range. The temple must fit within an unoccupied cube of space, up to 120 feet on each side. The temple remains until the spell ends. It is dedicated to whatever god, pantheon, or philosophy is represented by the holy symbol used in the casting.
+<br>
+You make all decisions about the temple's appearance. The interior is enclosed by a floor, walls, and a roof, with one door granting access to the interior and as many windows as you wish. Only you and any creatures you designate when you cast the spell can open or close the door.
+<br>
+The temple's interior is an open space with an idol or altar at one end. You decide whether the temple is illuminated and whether that illumination is bright light or dim light. The smell of burning incense fills the air within, and the temperature is mild.
+<br>
+The temple opposes types of creatures you choose when you cast this spell. Choose one or more of the following: celestials, elementals, fey, fiends, or undead. If a creature of the chosen type attempts to enter the temple, that creature must make a Charisma saving throw. On a failed save, it can't enter the temple for 24 hours. Even if the creature can enter the temple, the magic there hinders it; whenever it makes an attack roll, an ability check, or a saving throw inside the temple, it must roll a d4 and subtract the number rolled from the d20 roll.
+<br>
+In addition, the sensors created by divination spells can't appear inside the temple, and creatures within can't be targeted by divination spells.
+<br>
+Finally, whenever any creature in the temple regains hit points from a spell of 1st level or higher, the creature regains additional hit points equal to your Wisdom modifier (minimum 1 hit point).
+<br>
+The temple is made from opaque magical force that extends into the Ethereal Plane, thus blocking ethereal travel into the temple's interior. Nothing can physically pass through the temple's exterior. It can't be dispelled by dispel magic, and antimagic field has no effect on it. A disintegrate spell destroys the temple instantly.
+<br>
+Casting this spell on the same spot every day for a year makes this effect permanent.""")
+	TetherEssence = Spell("Tether Essence", 7, "Necromancy D", "1 Action", "60 feet", "Concentration, up to 1 hour", "Verbal, Somatic, Material", definition="""Two creatures you can see within range must make a Constitution saving throw, with disadvantage if they are within 30 feet of each other. Either creature can willingly fail the save. If either save succeeds, the spell has no effect. If both saves fail, the creatures are magically linked for the duration, regardless of the distance between them. When damage is dealt to one of them, the same damage is dealt to the other one. If hit points are restored to one of them, the same number of hit points are restored to the other one. If either of the tethered creatures is reduced to 0 hit points, the spell ends on both. If the spell ends on one creature, it ends on both.""")
+	DraconicTransformation = Spell("Draconic Transformation", 7, "Transmutation", "1 Bonus Action", "Self", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""With a roar, you draw on the magic of dragons to transform yourself, taking on draconic features. You gain the following benefits until the spell ends:
+<br>
+<b>Blindsight.</b> You have blindsight with a range of 30 feet. Within that range, you can effectively see anything that isn't behind 3, even if you're blinded or in darkness. Moreover, you can see an invisible creature, unless the creature successfully hides from you.
+<br>
+<b>Breath Weapon.</b> When you cast this spell, and as a bonus action on subsequent turns for the duration, you can exhale shimmering energy in a 60-foot cone. Each creature in that area must make a Dexterity saving throw, taking 6d8 force damage on a failed save, or half as much damage on a successful one.
+<br>
+<b>Wings.</b> Incorporeal wings sprout from your back, giving you a flying speed of 60 feet.""")
+	ConjureCelestial = Spell("Conjure Celestial", 7, "Conjuration", "1 Minute", "90 feet", "Concentration, up to 1 hour", "Verbal, Somatic", definition="""You conjure a spirit from the Upper Planes, which manifests as a pillar of light in a 10-foot-radius, 40-foot-high Cylinder centered on a point within range. For each creature you can see in the Cylinder, choose which of these lights shines on it:
+<br>
+<b>Healing Light.</b> The target regains Hit Points equal to 4d12 plus your spellcasting ability modifier.
+<br>
+<b>Searing Light.</b> The target makes a Dexterity saving throw, taking 6d12 Radiant damage on a failed save or half as much damage on a successful one.
+<br>
+Until the spell ends, Bright Light fills the Cylinder, and when you move on your turn, you can also move the Cylinder up to 30 feet.
+<br>
+Whenever the Cylinder moves into the space of a creature you can see and whenever a creature you can see enters the Cylinder or ends its turn there, you can bathe it in one of the lights. A creature can be affected by this spell only once per turn.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The healing and damage increase by 1d12 for each spell slot level above 7.""")
+	Whirlwind = 	Spell("Whirlwind", 7, "Evocation", "1 Action", "300 feet", "Concentration, up to 1 minute", "Verbal, Material", definition="""A whirlwind howls down to a point that you can see on the ground within range. The whirlwind is a 10-foot-radius, 30-foot-high cylinder centered on that point. Until the spell ends, you can use your action to move the whirlwind up to 30 feet in any direction along the ground. The whirlwind sucks up any Medium or smaller objects that aren't secured to anything and that aren't worn or carried by anyone.
+<br>
+A creature must make a Dexterity saving throw the first time on a turn that it enters the whirlwind or that the whirlwind enters its space, including when the whirlwind first appears. A creature takes 10d6 bludgeoning damage on a failed save, or half as much damage on a successful one. In addition, a Large or smaller creature that fails the save must succeed on a Strength saving throw or become restrained in the whirlwind until the spell ends. When a creature starts its turn restrained by the whirlwind, the creature is pulled 5 feet higher inside it, unless the creature is at the top. A restrained creature moves with the whirlwind and falls when the spell ends, unless the creature has some means to stay aloft.
+<br>
+A restrained creature can use an action to make a Strength or Dexterity check against your spell save DC. If successful, the creature is no longer restrained by the whirlwind and is hurled 3d6 × 10 feet away from it in a random direction.""")
+	Regenerate = Spell("Regenerate", 7, "Transmutation", "1 Minute", "Touch", "1 hour", "Verbal, Somatic, Material", definition="""A creature you touch regains 4d8 + 15 Hit Points. For the duration, the target regains 1 Hit Point at the start of each of its turns, and any severed body parts regrow after 2 minutes.""")
+	CrownofStars = Spell("Crown of Stars", 7, "Evocation", "1 Action", "Self", "1 hour", "Verbal, Somatic", definition="""Seven star-like motes of light appear and orbit your head until the spell ends. You can use a bonus action to send one of the motes streaking toward one creature or object within 120 feet of you. When you do so, make a ranged spell attack. On a hit, the target takes 4d12 radiant damage. Whether you hit or miss, the mote is expended. The spell ends early if you expend the last mote.
+<br>
+If you have four or more motes remaining, they shed bright light in a 30-foot radius and dim light for an additional 30 feet. If you have one to three motes remaining, they shed dim light in a 30-foot radius.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 8th level or higher, the number of motes created increases by two for each slot level above 7th.""")
+	DivineWord = Spell("Divine Word", 7, "Evocation", "1 Bonus Action", "30 feet", "Instantaneous", "Verbal", definition="""You utter a word imbued with power from the Upper Planes. Each creature of your choice in range makes a Charisma saving throw. On a failed save, a target that has 50 Hit Points or fewer suffers an effect based on its current Hit Points, as shown in the Divine Word Effects table. Regardless of its Hit Points, a Celestial, an Elemental, a Fey, or a Fiend target that fails its save is forced back to its plane of origin (if it isn't there already) and can't return to the current plane for 24 hours by any means short of a Wish spell.
+<br>
+0-20: The target dies.
+<br>
+21-30: The target has the Blinded, Deafened, and Stunned conditions for 1 hour.
+<br>
+31-40: The target has the Blinded and Deafened conditions for 10 minutes.
+<br>
+41-50: The target has the Deafened condition for 1 minute.""")
 	Symphony = spell_from_data("Symphony Of The Masked")
 	FireStorm = spell_from_data("Fire Storm")
 	Teleport = spell_from_data("Teleport")
 	MagnificentMansion = spell_from_data("Mordenkainen's Magnificent Mansion")
-	CreateMagen = Spell("Create Magen", 7, "Transmutation", "1 Hour", "Touch", "Instantaneous", "Verbal, Somatic, Material")
-	DelayedBlastFireball = Spell("Delayed Blast Fireball", 7, "Evocation", "1 Action", "150 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	DreamOfTheBlueVeil = Spell("Dream of the Blue Veil", 7, "Conjuration", "10 minutes", "20 feet", "6 hours", "Verbal, Somatic, Material")
-	FingerDeath = Spell("Finger of Death", 7, "Necromancy", "1 Action", "60 feet", "Instantaneous", "Verbal, Somatic")
-	Forcecage = Spell("Forcecage", 7, "Evocation", "1 Action", "100 feet", "1 hour", "Verbal, Somatic, Material")
+	CreateMagen = Spell("Create Magen", 7, "Transmutation", "1 Hour", "Touch", "Instantaneous", "Verbal, Somatic, Material", definition="""While casting the spell, you place a vial of quicksilver in the chest of a life-sized human doll stuffed with ash or dust. You then stitch up the doll and drip your blood on it. At the end of the casting, you tap the doll with a crystal rod, transforming it into a search=magen clothed in whatever the doll was wearing. The type of magen is chosen by you during the casting of the spell. See 21 for different kinds of magen and their statistics.
+<br>
+When the magen appears, your hit point maximum decreases by an amount equal to the magen's challenge rating (minimum reduction of 1). Only a wish spell can undo this reduction to your hit point maximum.
+<br>
+Any magen you create with this spell obeys your commands without question.""")
+	DelayedBlastFireball = Spell("Delayed Blast Fireball", 7, "Evocation", "1 Action", "150 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""A beam of yellow light flashes from you, then condenses at a chosen point within range as a glowing bead for the duration. When the spell ends, the bead explodes, and each creature in a 20-foot-radius Sphere centered on that point makes a Dexterity saving throw. A creature takes Fire damage equal to the total accumulated damage on a failed save or half as much damage on a successful one.
+<br>
+The spell's base damage is 12d6, and the damage increases by 1d6 whenever your turn ends and the spell hasn't ended.
+<br>
+If a creature touches the glowing bead before the spell ends, that creature makes a Dexterity saving throw. On a failed save, the spell ends, causing the bead to explode. On a successful save, the creature can throw the bead up to 40 feet. If the thrown bead enters a creature's space or collides with a solid object, the spell ends, and the bead explodes.
+<br>
+When the bead explodes, flammable objects in the explosion that aren't being worn or carried start burning.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The base damage increases by 1d6 for each spell slot level above 7.""")
+	DreamOfTheBlueVeil = Spell("Dream of the Blue Veil", 7, "Conjuration", "10 minutes", "20 feet", "6 hours", "Verbal, Somatic, Material", definition="""You and up to eight willing creatures within range fall unconscious for the spell's duration and experience visions of another world on the Material Plane, such as Oerth, Toril, Krynn, or Eberron. If the spell reaches its full duration, the visions conclude with each of you encountering and pulling back a mysterious blue curtain. The spell then ends with you mentally and physically transported to the world that was in the visions.
+<br>
+To cast this spell, you must have a magic item that originated on the world you wish to reach, and you must be aware of the world's existence, even if you don't know the world's name. Your destination in the other world is a safe location within 1 mile of where the magic item was created. Alternatively, you can cast the spell if one of the affected creatures was born on the other world, which causes your destination to be a safe location within 1 mile of where that creature was born.
+<br>
+The spell ends early on a creature if that creature takes any damage, and the creature isn't transported. If you take any damage, the spell ends for you and all the other creatures, with none of you being transported.""")
+	FingerDeath = Spell("Finger of Death", 7, "Necromancy", "1 Action", "60 feet", "Instantaneous", "Verbal, Somatic", definition="""You unleash negative energy toward a creature you can see within range. The target makes a Constitution saving throw, taking 7d8 + 30 Necrotic damage on a failed save or half as much damage on a successful one.
+<br>
+A Humanoid killed by this spell rises at the start of your next turn as a Zombie that follows your verbal orders.""")
+	Forcecage = Spell("Forcecage", 7, "Evocation", "1 Action", "100 feet", "1 hour", "Verbal, Somatic, Material", definition="""An immobile, Invisible, Cube-shaped prison composed of magical force springs into existence around an area you choose within range. The prison can be a cage or a solid box, as you choose.
+<br>
+A prison in the shape of a cage can be up to 20 feet on a side and is made from 1/2-inch diameter bars spaced 1/2 inch apart. A prison in the shape of a box can be up to 10 feet on a side, creating a solid barrier that prevents any matter from passing through it and blocking any spells cast into or out from the area.
+<br>
+When you cast the spell, any creature that is completely inside the cage's area is trapped. Creatures only partially within the area, or those too large to fit inside it, are pushed away from the center of the area until they are completely outside it.
+<br>
+A creature inside the cage can't leave it by nonmagical means. If the creature tries to use teleportation or interplanar travel to leave, it must first make a Charisma saving throw. On a successful save, the creature can use that magic to exit the cage. On a failed save, the creature doesn't exit the cage and wastes the spell or effect. The cage also extends into the Ethereal Plane, blocking ethereal travel.
+<br>
+This spell can't be dispelled by Dispel Magic.""")
 	MagnificentMansion = Spell("Mordenkainen's Magnificent Mansion", 7, "Conjuration", "1 Minute", "300 feet", "24 hours", "Verbal, Somatic, Material")
-	MordenkainenSword = Spell("Mordenkainen's Sword", 7, "Evocation", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	PlaneShift = Spell("Plane Shift", 7, "Conjuration", "1 Action", "Touch", "Instantaneous", "Verbal, Somatic, Material")
-	PowerWordPain = Spell("Power Word: Pain", 7, "Enchantment", "1 Action", "60 feet", "Instantaneous", "Verbal")
-	ProjectImage = Spell("Project Image", 7, "Illusion", "1 Action", "500 Miles", "Concentration, up to 1 day", "Verbal, Somatic, Material")
-	ReverseGravity = Spell("Reverse Gravity", 7, "Transmutation", "1 Action", "100 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	Sequester = Spell("Sequester", 7, "Transmutation", "1 Action", "Touch", "Until dispelled", "Verbal, Somatic, Material")
-	Simulacrum = Spell("Simulacrum", 7, "Illusion", "12 hours", "Touch", "Until dispelled", "Verbal, Somatic, Material")
+	MordenkainenSword = Spell("Mordenkainen's Sword", 7, "Evocation", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""You create a spectral sword that hovers within range. It lasts for the duration.
+<br>
+When the sword appears, you make a melee spell attack against a target within 5 feet of the sword. On a hit, the target takes Force damage equal to 4d12 plus your spellcasting ability modifier.
+<br>
+On your later turns, you can take a Bonus Action to move the sword up to 30 feet to a spot you can see and repeat the attack against the same target or a different one.""")
+	PlaneShift = Spell("Plane Shift", 7, "Conjuration", "1 Action", "Touch", "Instantaneous", "Verbal, Somatic, Material", definition="""You and up to eight willing creatures who link hands in a circle are transported to a different plane of existence. You can specify a target destination in general terms, such as the City of Brass on the Elemental Plane of Fire or the palace of Dispater on the second level of the Nine Hells, and you appear in or near that destination, as determined by the DM.
+<br>
+Alternatively, if you know the sigil sequence of a teleportation circle on another plane of existence, this spell can take you to that circle. If the teleportation circle is too small to hold all the creatures you transported, they appear in the closest unoccupied spaces next to the circle.""")
+	PowerWordPain = Spell("Power Word: Pain", 7, "Enchantment", "1 Action", "60 feet", "Instantaneous", "Verbal", definition="""You speak a word of power that causes waves of intense pain to assail one creature you can see within range. If the target has 100 hit points or fewer, it is subject to crippling pain. Otherwise, the spell has no effect on it. A target is also unaffected if it is immune to being charmed.
+<br>
+While the target is affected by crippling pain, any speed it has can be no higher than 10 feet. The target also has disadvantage on attack rolls, ability checks, and saving throws, other than Constitution saving throws. Finally, if the target tries to cast a spell, it must first succeed on a Constitution saving throw, or the casting fails and the spell is wasted.
+<br>
+A target suffering this pain can make a Constitution saving throw at the end of each of its turns. On a successful save, the pain ends.""")
+	ProjectImage = Spell("Project Image", 7, "Illusion", "1 Action", "500 Miles", "Concentration, up to 1 day", "Verbal, Somatic, Material", definition="""You create an illusory copy of yourself that lasts for the duration. The copy can appear at any location within range that you have seen before, regardless of intervening obstacles. The illusion looks and sounds like you, but it is intangible. If the illusion takes any damage, it disappears, and the spell ends.
+<br>
+You can see through the illusion's eyes and hear through its ears as if you were in its space. As a Magic action, you can move it up to 60 feet and make it gesture, speak, and behave in whatever way you choose. It mimics your mannerisms perfectly.
+<br>
+Physical interaction with the image reveals it to be illusory, since things can pass through it. A creature that takes the Study action to examine the image can determine that it is an illusion with a successful Intelligence (Investigation) check against your spell save DC. If a creature discerns the illusion for what it is, the creature can see through the image, and any noise it makes sounds hollow to the creature.""")
+	ReverseGravity = Spell("Reverse Gravity", 7, "Transmutation", "1 Action", "100 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""This spell reverses gravity in a 50-foot-radius, 100-foot high Cylinder centered on a point within range. All creatures and objects in that area that aren't anchored to the ground fall upward and reach the top of the Cylinder. A creature can make a Dexterity saving throw to grab a fixed object it can reach, thus avoiding the fall upward.
+<br>
+If a ceiling or an anchored object is encountered in this upward fall, creatures and objects strike it just as they would during a downward fall. If an affected creature or object reaches the Cylinder's top without striking anything, it hovers there for the duration. When the spell ends, affected objects and creatures fall downward.""")
+	Sequester = Spell("Sequester", 7, "Transmutation", "1 Action", "Touch", "Until dispelled", "Verbal, Somatic, Material", definition="""With a touch, you magically sequester an object or a willing creature. For the duration, the target has the Invisible condition and can't be targeted by Divination spells, detected by magic, or viewed remotely with magic.
+<br>
+If the target is a creature, it enters a state of suspended animation; it has the Unconscious condition, doesn't age, and doesn't need food, water, or air.
+<br>
+You can set a condition for the spell to end early. The condition can be anything you choose, but it must occur or be visible within 1 mile of the target. Examples include "after 1,000 years" or "when the tarrasque awakens." This spell also ends if the target takes any damage.""")
+	Simulacrum = Spell("Simulacrum", 7, "Illusion", "12 hours", "Touch", "Until dispelled", "Verbal, Somatic, Material", definition="""You create a simulacrum of one Beast or Humanoid that is within 10 feet of you for the entire casting of the spell. You finish the casting by touching both the creature and a pile of ice or snow that is the same size as that creature, and the pile turns into the simulacrum, which is a creature. It uses the game statistics of the original creature at the time of casting, except it is a Construct, its Hit Point maximum is half as much, and it can't cast this spell.
+<br>
+The simulacrum is Friendly to you and creatures you designate. It obeys your commands and acts on your turn in combat. The simulacrum can't gain levels, and it can't take Short or Long Rests.
+<br>
+If the simulacrum takes damage, the only way to restore its Hit Points is to repair it as you take a Long Rest, during which you expend components worth 100 GP per Hit Point restored. The simulacrum must stay within 5 feet of you for the repair.
+<br>
+The simulacrum lasts until it drops to 0 Hit Points, at which point it reverts to snow and melts away. If you cast this spell again, any simulacrum you created with this spell is instantly destroyed.""")
 	Teleport = Spell("Teleport", 7, "Conjuration", "1 Action", "10 feet", "Instantaneous", "Verbal")
-	TempleOfTheGods = Spell("Temple of the Gods", 7, "Conjuration", "1 hour", "120 feet", "24 hours", "Verbal, Somatic, Material")
-	TetherEssence = Spell("Tether Essence", 7, "Necromancy D", "1 Action", "60 feet", "Concentration, up to 1 hour", "Verbal, Somatic, Material")
-	DraconicTransformation = Spell("Draconic Transformation", 7, "Transmutation", "1 Bonus Action", "Self", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	ConjureCelestial = Spell("Conjure Celestial", 7, "Conjuration", "1 Minute", "90 feet", "Concentration, up to 1 hour", "Verbal, Somatic")
-	Whirlwind = Spell("Whirlwind", 7, "Evocation", "1 Action", "300 feet", "Concentration, up to 1 minute", "Verbal, Material")
-	Regenerate = Spell("Regenerate", 7, "Transmutation", "1 Minute", "Touch", "1 hour", "Verbal, Somatic, Material")
-	CrownofStars = Spell("Crown of Stars", 7, "Evocation", "1 Action", "Self", "1 hour", "Verbal, Somatic")
-	DivineWord = Spell("Divine Word", 7, "Evocation", "1 Bonus Action", "30 feet", "Instantaneous", "Verbal")
+	TempleOfTheGods = Spell("Temple of the Gods", 7, "Conjuration", "1 hour", "120 feet", "24 hours", "Verbal, Somatic, Material", definition="""You cause a temple to shimmer into existence on ground you can see within range. The temple must fit within an unoccupied cube of space, up to 120 feet on each side. The temple remains until the spell ends. It is dedicated to whatever god, pantheon, or philosophy is represented by the holy symbol used in the casting.
+<br>
+You make all decisions about the temple's appearance. The interior is enclosed by a floor, walls, and a roof, with one door granting access to the interior and as many windows as you wish. Only you and any creatures you designate when you cast the spell can open or close the door.
+<br>
+The temple's interior is an open space with an idol or altar at one end. You decide whether the temple is illuminated and whether that illumination is bright light or dim light. The smell of burning incense fills the air within, and the temperature is mild.
+<br>
+The temple opposes types of creatures you choose when you cast this spell. Choose one or more of the following: celestials, elementals, fey, fiends, or undead. If a creature of the chosen type attempts to enter the temple, that creature must make a Charisma saving throw. On a failed save, it can't enter the temple for 24 hours. Even if the creature can enter the temple, the magic there hinders it; whenever it makes an attack roll, an ability check, or a saving throw inside the temple, it must roll a d4 and subtract the number rolled from the d20 roll.
+<br>
+In addition, the sensors created by divination spells can't appear inside the temple, and creatures within can't be targeted by divination spells.
+<br>
+Finally, whenever any creature in the temple regains hit points from a spell of 1st level or higher, the creature regains additional hit points equal to your Wisdom modifier (minimum 1 hit point).
+<br>
+The temple is made from opaque magical force that extends into the Ethereal Plane, thus blocking ethereal travel into the temple's interior. Nothing can physically pass through the temple's exterior. It can't be dispelled by dispel magic, and antimagic field has no effect on it. A disintegrate spell destroys the temple instantly.
+<br>
+Casting this spell on the same spot every day for a year makes this effect permanent.""")
+	TetherEssence = Spell("Tether Essence", 7, "Necromancy D", "1 Action", "60 feet", "Concentration, up to 1 hour", "Verbal, Somatic, Material", definition="""Two creatures you can see within range must make a Constitution saving throw, with disadvantage if they are within 30 feet of each other. Either creature can willingly fail the save. If either save succeeds, the spell has no effect. If both saves fail, the creatures are magically linked for the duration, regardless of the distance between them. When damage is dealt to one of them, the same damage is dealt to the other one. If hit points are restored to one of them, the same number of hit points are restored to the other one. If either of the tethered creatures is reduced to 0 hit points, the spell ends on both. If the spell ends on one creature, it ends on both.""")
+	DraconicTransformation = Spell("Draconic Transformation", 7, "Transmutation", "1 Bonus Action", "Self", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""With a roar, you draw on the magic of dragons to transform yourself, taking on draconic features. You gain the following benefits until the spell ends:
+<br>
+<b>Blindsight.</b> You have blindsight with a range of 30 feet. Within that range, you can effectively see anything that isn't behind 3, even if you're blinded or in darkness. Moreover, you can see an invisible creature, unless the creature successfully hides from you.
+<br>
+<b>Breath Weapon.</b> When you cast this spell, and as a bonus action on subsequent turns for the duration, you can exhale shimmering energy in a 60-foot cone. Each creature in that area must make a Dexterity saving throw, taking 6d8 force damage on a failed save, or half as much damage on a successful one.
+<br>
+<b>Wings.</b> Incorporeal wings sprout from your back, giving you a flying speed of 60 feet.""")
+	ConjureCelestial = Spell("Conjure Celestial", 7, "Conjuration", "1 Minute", "90 feet", "Concentration, up to 1 hour", "Verbal, Somatic", definition="""You conjure a spirit from the Upper Planes, which manifests as a pillar of light in a 10-foot-radius, 40-foot-high Cylinder centered on a point within range. For each creature you can see in the Cylinder, choose which of these lights shines on it:
+<br>
+<b>Healing Light.</b> The target regains Hit Points equal to 4d12 plus your spellcasting ability modifier.
+<br>
+<b>Searing Light.</b> The target makes a Dexterity saving throw, taking 6d12 Radiant damage on a failed save or half as much damage on a successful one.
+<br>
+Until the spell ends, Bright Light fills the Cylinder, and when you move on your turn, you can also move the Cylinder up to 30 feet.
+<br>
+Whenever the Cylinder moves into the space of a creature you can see and whenever a creature you can see enters the Cylinder or ends its turn there, you can bathe it in one of the lights. A creature can be affected by this spell only once per turn.
+<br>
+<b>Using a Higher-Level Spell Slot.</b> The healing and damage increase by 1d12 for each spell slot level above 7.""")
+	Whirlwind = Spell("Whirlwind", 7, "Evocation", "1 Action", "300 feet", "Concentration, up to 1 minute", "Verbal, Material", definition="""A whirlwind howls down to a point that you can see on the ground within range. The whirlwind is a 10-foot-radius, 30-foot-high cylinder centered on that point. Until the spell ends, you can use your action to move the whirlwind up to 30 feet in any direction along the ground. The whirlwind sucks up any Medium or smaller objects that aren't secured to anything and that aren't worn or carried by anyone.
+<br>
+A creature must make a Dexterity saving throw the first time on a turn that it enters the whirlwind or that the whirlwind enters its space, including when the whirlwind first appears. A creature takes 10d6 bludgeoning damage on a failed save, or half as much damage on a successful one. In addition, a Large or smaller creature that fails the save must succeed on a Strength saving throw or become restrained in the whirlwind until the spell ends. When a creature starts its turn restrained by the whirlwind, the creature is pulled 5 feet higher inside it, unless the creature is at the top. A restrained creature moves with the whirlwind and falls when the spell ends, unless the creature has some means to stay aloft.
+<br>
+A restrained creature can use an action to make a Strength or Dexterity check against your spell save DC. If successful, the creature is no longer restrained by the whirlwind and is hurled 3d6 × 10 feet away from it in a random direction.""")
+	Regenerate = Spell("Regenerate", 7, "Transmutation", "1 Minute", "Touch", "1 hour", "Verbal, Somatic, Material", definition="""A creature you touch regains 4d8 + 15 Hit Points. For the duration, the target regains 1 Hit Point at the start of each of its turns, and any severed body parts regrow after 2 minutes.""")
+	CrownofStars = Spell("Crown of Stars", 7, "Evocation", "1 Action", "Self", "1 hour", "Verbal, Somatic", definition="""Seven star-like motes of light appear and orbit your head until the spell ends. You can use a bonus action to send one of the motes streaking toward one creature or object within 120 feet of you. When you do so, make a ranged spell attack. On a hit, the target takes 4d12 radiant damage. Whether you hit or miss, the mote is expended. The spell ends early if you expend the last mote.
+<br>
+If you have four or more motes remaining, they shed bright light in a 30-foot radius and dim light for an additional 30 feet. If you have one to three motes remaining, they shed dim light in a 30-foot radius.
+<br>
+<b>At Higher Levels.</b> When you cast this spell using a spell slot of 8th level or higher, the number of motes created increases by two for each slot level above 7th.""")
+	DivineWord = Spell("Divine Word", 7, "Evocation", "1 Bonus Action", "30 feet", "Instantaneous", "Verbal", definition="""You utter a word imbued with power from the Upper Planes. Each creature of your choice in range makes a Charisma saving throw. On a failed save, a target that has 50 Hit Points or fewer suffers an effect based on its current Hit Points, as shown in the Divine Word Effects table. Regardless of its Hit Points, a Celestial, an Elemental, a Fey, or a Fiend target that fails its save is forced back to its plane of origin (if it isn't there already) and can't return to the current plane for 24 hours by any means short of a Wish spell.
+<br>
+0-20: The target dies.
+<br>
+21-30: The target has the Blinded, Deafened, and Stunned conditions for 1 hour.
+<br>
+31-40: The target has the Blinded and Deafened conditions for 10 minutes.
+<br>
+41-50: The target has the Deafened condition for 1 minute.""")
 	Resurrection = Spell("Resurrection",
 		level=7,
 		school="Necromancy",
@@ -5018,20 +6563,122 @@ if LEVEL8:
 	Demiplane = spell_from_data("Demiplane")
 	Feeblemind = spell_from_data("Feeblemind")
 	Maze = spell_from_data("Maze")
-	HorridWilting = Spell("Abi-Dalzim's Horrid Wilting", 8, "Necromancy", "1 Action", "150 feet", "Instantaneous", "Verbal, Somatic, Material")
-	AnimalShapes = Spell("Animal Shapes", 8, "Transmutation", "1 Action", "30 feet", "Concentration, up to 24 hours", "Verbal, Somatic")
-	AntipathySympathy = Spell("Antipathy/Sympathy", 8, "Enchantment", "1 Hour", "60 feet", "10 Days", "Verbal, Somatic, Material")
-	Clone = Spell("Clone", 8, "Necromancy", "1 Hour", "Touch", "Instantaneous", "Verbal, Somatic, Material")
-	DarkStar = Spell("Dark Star", 8, "Evocation DG", "1 Action", "150 Feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	IllusoryDragon = Spell("Illusory Dragon", 8, "Illusion", "1 Action", "120 feet", "Concentration, up to 1 minute", "Somatic")
-	MaddeningDarkness = Spell("Maddening Darkness", 8, "Evocation", "1 Action", "150 feet", "Concentration, up to 10 minutes", "Verbal, Material")
-	MightyFortress = Spell("Mighty Fortress", 8, "Conjuration", "1 Minute", "1 mile", "Instantaneous", "Verbal, Somatic, Material")
-	RealityBreak = Spell("Reality Break", 8, "Conjuration DC", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	Telepathy = Spell("Telepathy", 8, "Evocation", "1 Action", "Unlimited", "24 hours", "Verbal, Somatic, Material")
-	ControlWeather = Spell("Control Weather", 8, "Transmutation", "10 Minutes", "Self (5 mile radius)", "Concentration, Up to 8 hours", "Verbal, Somatic, Material")
-	Tsunami = Spell("Tsunami", 8, "Conjuration", "1 Action", "Sight", "Concentration, up to 6 rounds", "Verbal, Somatic")
-	Sunburst = Spell("Sunburst", 8, "Evocation", "1 Action", "150 feet", "Instantaneous", "Verbal, Somatic, Material")
-	AntimagicField = Spell("Antimagic Field", 8, "Abjuration", "1 Action", "Self (10-foot radius sphere)", "Concentration, up to 1 hour", "Verbal, Somatic, Material")
+	HorridWilting = Spell("Abi-Dalzim's Horrid Wilting", 8, "Necromancy", "1 Action", "150 feet", "Instantaneous", "Verbal, Somatic, Material", definition="""You draw the moisture from every creature in a 30-foot cube centered on a point you choose within range. Each creature in that area must make a Constitution saving throw. Constructs and undead aren't affected, and plants and water elementals make this saving throw with disadvantage. A creature takes 12d8 necrotic damage on a failed save, or half as much damage on a successful one.
+<br>
+Nonmagical plants in the area that aren't creatures, such as trees and shrubs, wither and die instantly.""")
+	AnimalShapes = Spell("Animal Shapes", 8, "Transmutation", "1 Action", "30 feet", "Concentration, up to 24 hours", "Verbal, Somatic", definition="""Choose any number of willing creatures that you can see within range. Each target shape-shifts into a Large or smaller Beast of your choice that has a Challenge Rating of 4 or lower. You can choose a different form for each target. On later turns, you can take a Magic action to transform the targets again.
+<br>
+A target's game statistics are replaced by the chosen Beast's statistics, but the target retains its creature type; Hit Points; Hit Point Dice; alignment; ability to communicate; and Intelligence, Wisdom, and Charisma scores. The target's actions are limited by the Beast form's anatomy, and it can't cast spells. The target's equipment melds into the new form, and the target can't use any of that equipment while in that form.
+<br>
+The target gains a number of Temporary Hit Points equal to the Hit Points of the first form into which it shape-shifts. These Temporary Hit Points vanish if any remain when the spell ends. The transformation lasts for the duration or until the target ends it as a Bonus Action.""")
+	AntipathySympathy = Spell("Antipathy/Sympathy", 8, "Enchantment", "1 Hour", "60 feet", "10 Days", "Verbal, Somatic, Material", definition="""As you cast the spell, choose whether it creates antipathy or sympathy, and target one creature or object that is Huge or smaller. Then specify a kind of creature, such as red dragons, goblins, or vampires. A creature of the chosen kind makes a Wisdom saving throw when it comes within 120 feet of the target. Your choice of antipathy or sympathy determines what happens to a creature when it fails that save:
+<br>
+<b>Antipathy.</b> The creature has the Frightened condition. The Frightened creature must use its movement on its turns to get as far away as possible from the target, moving by the safest route.
+<br>
+<b>Sympathy.</b> The creature has the Charmed condition. The Charmed creature must use its movement on its turns to get as close as possible to the target, moving by the safest route. If the creature is within 5 feet of the target, the creature can't willingly move away. If the target damages the Charmed creature, that creature can make a Wisdom saving throw to end the effect, as described below.
+<br>
+<b>Ending the Effect.</b> If the Frightened or Charmed creature ends its turn more than 120 feet away from the target, the creature makes a Wisdom saving throw. On a successful save, the creature is no longer affected by the target. A creature that successfully saves against this effect is immune to it for 1 minute, after which it can be affected again.""")
+	Clone = Spell("Clone", 8, "Necromancy", "1 Hour", "Touch", "Instantaneous", "Verbal, Somatic, Material", definition="""You touch a creature or at least 1 cubic inch of its flesh. An inert duplicate of that creature forms inside the vessel used in the spell's casting and finishes growing after 120 days; you choose whether the finished clone is the same age as the creature or younger. The clone remains inert and endures indefinitely while its vessel remains undisturbed.
+<br>
+If the original creature dies after the clone finishes forming, the creature's soul transfers to the clone if the soul is free and willing to return. The clone is physically identical to the original and has the same personality, memories, and abilities, but none of the original's equipment. The creature's original remains, if any, become inert and can't be revived, since the creature's soul is elsewhere.""")
+	DarkStar = Spell("Dark Star", 8, "Evocation DG", "1 Action", "150 Feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""This spell creates a sphere centered on a point you choose within range. The sphere can have a radius of up to 40 feet. The area within this sphere is filled with magical darkness and crushing gravitational force.
+<br>
+For the duration, the spell's area is 3. A creature with darkvision can't see through the magical darkness, and nonmagical light can't illuminate it. No sound can be created within or pass through the area. Any creature or object entirely inside the sphere is immune to thunder damage, and creatures are deafened while entirely inside it. Casting a spell that includes a verbal component is impossible there.
+<br>
+Any creature that enters the spell's area for the first time on a turn or starts its turn there must make a Constitution saving throw. The creature takes 8d10 force damage on a failed save, or half as much damage on a successful one. A creature reduced to 0 hit points by this damage is disintegrated. A disintegrated creature and everything it is wearing and carrying, except magic items, are reduced to a pile of fine gray dust.""")
+	IllusoryDragon = Spell("Illusory Dragon", 8, "Illusion", "1 Action", "120 feet", "Concentration, up to 1 minute", "Somatic", definition="""By gathering threads of shadow material from the Shadowfell, you create a Huge shadowy dragon in an unoccupied space that you can see within range. The illusion lasts for the spell's duration and occupies its space, as if it were a creature.
+<br>
+When the illusion appears, any of your enemies that can see it must succeed on a Wisdom saving throw or become frightened of it for 1 minute. If a frightened creature ends its turn in a location where it doesn't have line of sight to the illusion, it can repeat the saving throw, ending the effect on itself on a success.
+<br>
+As a bonus action on your turn, you can move the illusion up to 60 feet. At any point during its movement, you can cause it to exhale a blast of energy in a 60-foot cone originating from its space. When you create the dragon, choose a damage type: acid, cold, fire, lightning, necrotic, or poison. Each creature in the cone must make an Intelligence saving throw, taking 7d6 damage of the chosen damage type on a failed save, or half as much damage on a successful one.
+<br>
+The illusion is tangible because of the shadow stuff used to create it, but attacks miss it automatically, it succeeds on all saving throws, and it is immune to all damage and conditions. A creature that uses an action to examine the dragon can determine that it is an illusion by succeeding on an Intelligence (Investigation) check against your spell save DC. If a creature discerns the illusion for what it is, the creature can see through it and has advantage on saving throws against its breath.""")
+	MaddeningDarkness = Spell("Maddening Darkness", 8, "Evocation", "1 Action", "150 feet", "Concentration, up to 10 minutes", "Verbal, Material", definition="""Magical darkness spreads from a point you choose within range to fill a 60-foot-radius sphere until the spell ends. The darkness spreads around corners. A creature with darkvision can't see through this darkness. Non-magical light, as well as light created by spells of 8th level or lower, can't illuminate the area.
+<br>
+Shrieks, gibbering, and mad laughter can be heard within the sphere. Whenever a creature starts its turn in the sphere, it must make a Wisdom saving throw, taking 8d8 psychic damage on a failed save, or half as much damage on a successful one.""")
+	MightyFortress = Spell("Mighty Fortress", 8, "Conjuration", "1 Minute", "1 mile", "Instantaneous", "Verbal, Somatic, Material", definition="""A fortress of stone erupts from a square area of ground of your choice that you can see within range. The area is 120 feet on each side, and it must not have any buildings or other structures on it. Any creatures in the area are harmlessly lifted up as the fortress rises.
+<br>
+The fortress has four turrets with square bases, each one 20 feet on a side and 30 feet tall, with one turret on each corner. The turrets are connected to each other by stone walls that are each 80 feet long, creating an enclosed area. Each wall is 1 foot thick and is composed of panels that are 10 feet wide and 20 feet tall. Each panel is contiguous with two other panels or one other panel and a turret. You can place up to four stone doors in the fortress's outer wall.
+<br>
+A small keep stands inside the enclosed area. The keep has a square base that is 50 feet on each side, and it has three floors with 10-foot-high ceilings. Each of the floors can be divided into as many rooms as you like, provided each room is at least 5 feet on each side. The floors of the keep are connected by stone staircases, its walls are 6 inches thick, and interior rooms can have stone doors or open archways as you choose. The keep is furnished and decorated however you like, and it contains sufficient food to serve a nine-course banquet for up to 100 people each day. Furnishings, food, and other objects created by this spell crumble to dust if removed from the fortress.
+<br>
+A staff of one hundred invisible servants obeys any command given to them by creatures you designate when you cast the spell. Each servant functions as if created by the unseen servant spell.
+<br>
+The walls, turrets, and keep are all made of stone that can be damaged. Each 10-foot-by-10-foot section of stone has AC 15 and 30 hit points per inch of thickness. It is immune to poison and psychic damage. Reducing a section of stone to 0 hit points destroys it and might cause connected sections to buckle and collapse at the DM's discretion.
+<br>
+After 7 days or when you cast this spell somewhere else, the fortress harmlessly crumbles and sinks back into the ground, leaving any creatures that were inside it safely on the ground.
+<br>
+Casting this spell on the same spot once every 7 days for a year makes the fortress permanent.""")
+	RealityBreak = Spell("Reality Break", 8, "Conjuration DC", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""You shatter the barriers between realities and timelines, thrusting a creature into turmoil and madness. The target must succeed on a Wisdom saving throw, or it can't take reactions until the spell ends. The affected target must also roll a d10 at the start of each of its turns; the number rolled determines what happens to the target, as shown on the Reality Break Effects table.
+<br>
+At the end of each of its turns, the affected target can repeat the Wisdom saving throw, ending the spell on itself on a success.
+<br>
+1-2: <b>Vision of the Far Realm.</b> The target takes 6d12 psychic damage, and it is stunned until the end of the turn.
+<br>
+3-5: <b>Rending Rift.</b> The target must make a Dexterity saving throw, taking 8d12 force damage on a failed save, or half as much damage on a successful one.
+<br>
+6-8: <b>Wormhole.</b> The target is teleported, along with everything it is wearing and carrying, up to 30 feet to an unoccupied space of your choice that you can see. The target also takes 10d12 force damage and is knocked prone.
+<br>
+9-10: <b>Chill of the Dark Void.</b> The target takes 10d12 cold damage, and it is blinded until the end of the turn.""")
+	Telepathy = Spell("Telepathy", 8, "Evocation", "1 Action", "Unlimited", "24 hours", "Verbal, Somatic, Material", definition="""You create a telepathic link between yourself and a willing creature with which you are familiar. The creature can be anywhere on the same plane of existence as you. The spell ends if you or the target are no longer on the same plane.
+<br>
+Until the spell ends, you and the target can instantly share words, images, sounds, and other sensory messages with each other through the link, and the target recognizes you as the creature it is communicating with. The spell enables a creature to understand the meaning of your words and any sensory messages you send to it.""")
+	ControlWeather = Spell("Control Weather", 8, "Transmutation", "10 Minutes", "Self (5 mile radius)", "Concentration, Up to 8 hours", "Verbal, Somatic, Material", definition="""You take control of the weather within 5 miles of you for the duration. You must be outdoors to cast this spell, and it ends early if you go indoors.
+<br>
+When you cast the spell, you change the current weather conditions, which are determined by the DM. You can change precipitation, temperature, and wind. It takes 1d4 × 10 minutes for the new conditions to take effect. Once they do so, you can change the conditions again. When the spell ends, the weather gradually returns to normal.
+<br>
+When you change the weather conditions, find a current condition on the following tables and change its stage by one, up or down. When changing the wind, you can change its direction.
+<br>
+1: Clear
+<br>
+2: Light clouds
+<br>
+3: Overcast or ground fog
+<br>
+4: Rain, hail, or snow
+<br>
+5: Torrential rain, driving hail, or blizzard
+<br>
+1: Heat wave
+<br>
+2: Hot
+<br>
+3: Warm
+<br>
+4: Cool
+<br>
+5: Cold
+<br>
+6: Freezing
+<br>
+1: Calm
+<br>
+2: Moderate wind
+<br>
+3: Strong wind
+<br>
+4: Gale
+<br>
+5: Storm""")
+	Tsunami = Spell("Tsunami", 8, "Conjuration", "1 Action", "Sight", "Concentration, up to 6 rounds", "Verbal, Somatic", definition="""A wall of water springs into existence at a point you choose within range. You can make the wall up to 300 feet long, 300 feet high, and 50 feet thick. The wall lasts for the duration.
+<br>
+When the wall appears, each creature in its area makes a Strength saving throw, taking 6d10 Bludgeoning damage on a failed save or half as much damage on a successful one.
+<br>
+At the start of each of your turns after the wall appears, the wall, along with any creatures in it, moves 50 feet away from you. Any Huge or smaller creature inside the wall or whose space the wall enters when it moves must succeed on a Strength saving throw or take 5d10 Bludgeoning damage. A creature can take this damage only once per round. At the end of the turn, the wall's height is reduced by 50 feet, and the damage the wall deals on later rounds is reduced by 1d10. When the wall reaches 0 feet in height, the spell ends.
+<br>
+A creature caught in the wall can move by swimming. Because of the wave's force, though, the creature must succeed on a Strength (Athletics) check against your spell save DC to move at all. If it fails the check, it can't move. A creature that moves out of the wall falls to the ground.""")
+	Sunburst = Spell("Sunburst", 8, "Evocation", "1 Action", "150 feet", "Instantaneous", "Verbal, Somatic, Material", definition="""Brilliant sunlight flashes in a 60-foot-radius Sphere centered on a point you choose within range. Each creature in the Sphere makes a Constitution saving throw. On a failed save, a creature takes 12d6 Radiant damage and has the Blinded condition for 1 minute. On a successful save, it takes half as much damage only.
+<br>
+A creature Blinded by this spell makes another Constitution saving throw at the end of each of its turns, ending the effect on itself on a success.
+<br>
+This spell dispels Darkness in its area that was created by any spell.""")
+	AntimagicField = Spell("Antimagic Field", 8, "Abjuration", "1 Action", "Self (10-foot radius sphere)", "Concentration, up to 1 hour", "Verbal, Somatic, Material", definition="""An aura of antimagic surrounds you in a 10-foot Emanation. No one can cast spells, take Magic actions, or create other magical effects inside the aura, and those things can't target or otherwise affect anything inside it. Magical properties of magic items don't work inside the aura or on anything inside it.
+<br>
+Areas of effect created by spells or other magic can't extend into the aura, and no one can teleport into or out of it or use planar travel there. Portals close temporarily while in the aura.
+<br>
+Ongoing spells, except those cast by an Artifact or a deity, are suppressed in the area. While an effect is suppressed, it doesn't function, but the time it spends suppressed counts against its duration.
+<br>
+Dispel Magic has no effect on the aura, and the auras created by different Antimagic Field spells don't nullify each other.""")
 	Foresight = spell_from_data("Foresight")
 	Earthquake = spell_from_data("Earthquake")
 	DominateMonster = spell_from_data("Dominate Monster")
@@ -5039,21 +6686,125 @@ if LEVEL8:
 	Demiplane = spell_from_data("Demiplane")
 	Feeblemind = spell_from_data("Feeblemind")
 	Maze = spell_from_data("Maze")
-	HorridWilting = Spell("Abi-Dalzim's Horrid Wilting", 8, "Necromancy", "1 Action", "150 feet", "Instantaneous", "Verbal, Somatic, Material")
-	AnimalShapes = Spell("Animal Shapes", 8, "Transmutation", "1 Action", "30 feet", "Concentration, up to 24 hours", "Verbal, Somatic")
-	AntipathySympathy = Spell("Antipathy/Sympathy", 8, "Enchantment", "1 Hour", "60 feet", "10 Days", "Verbal, Somatic, Material")
-	Clone = Spell("Clone", 8, "Necromancy", "1 Hour", "Touch", "Instantaneous", "Verbal, Somatic, Material")
-	DarkStar = Spell("Dark Star", 8, "Evocation DG", "1 Action", "150 Feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	IllusoryDragon = Spell("Illusory Dragon", 8, "Illusion", "1 Action", "120 feet", "Concentration, up to 1 minute", "Somatic")
-	MightyFortress = Spell("Mighty Fortress", 8, "Conjuration", "1 Minute", "1 mile", "Instantaneous", "Verbal, Somatic, Material")
-	RealityBreak = Spell("Reality Break", 8, "Conjuration DC", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	Telepathy = Spell("Telepathy", 8, "Evocation", "1 Action", "Unlimited", "24 hours", "Verbal, Somatic, Material")
-	ControlWeather = Spell("Control Weather", 8, "Transmutation", "10 Minutes", "Self (5 mile radius)", "Concentration, Up to 8 hours", "Verbal, Somatic, Material")
-	Tsunami = Spell("Tsunami", 8, "Conjuration", "1 Action", "Sight", "Concentration, up to 6 rounds", "Verbal, Somatic")
-	Sunburst = Spell("Sunburst", 8, "Evocation", "1 Action", "150 feet", "Instantaneous", "Verbal, Somatic, Material")
-	AntimagicField = Spell("Antimagic Field", 8, "Abjuration", "1 Action", "Self (10-foot radius sphere)", "Concentration, up to 1 hour", "Verbal, Somatic, Material")
+	HorridWilting = Spell("Abi-Dalzim's Horrid Wilting", 8, "Necromancy", "1 Action", "150 feet", "Instantaneous", "Verbal, Somatic, Material", definition="""You draw the moisture from every creature in a 30-foot cube centered on a point you choose within range. Each creature in that area must make a Constitution saving throw. Constructs and undead aren't affected, and plants and water elementals make this saving throw with disadvantage. A creature takes 12d8 necrotic damage on a failed save, or half as much damage on a successful one.
+<br>
+Nonmagical plants in the area that aren't creatures, such as trees and shrubs, wither and die instantly.""")
+	AnimalShapes = Spell("Animal Shapes", 8, "Transmutation", "1 Action", "30 feet", "Concentration, up to 24 hours", "Verbal, Somatic", definition="""Choose any number of willing creatures that you can see within range. Each target shape-shifts into a Large or smaller Beast of your choice that has a Challenge Rating of 4 or lower. You can choose a different form for each target. On later turns, you can take a Magic action to transform the targets again.
+<br>
+A target's game statistics are replaced by the chosen Beast's statistics, but the target retains its creature type; Hit Points; Hit Point Dice; alignment; ability to communicate; and Intelligence, Wisdom, and Charisma scores. The target's actions are limited by the Beast form's anatomy, and it can't cast spells. The target's equipment melds into the new form, and the target can't use any of that equipment while in that form.
+<br>
+The target gains a number of Temporary Hit Points equal to the Hit Points of the first form into which it shape-shifts. These Temporary Hit Points vanish if any remain when the spell ends. The transformation lasts for the duration or until the target ends it as a Bonus Action.""")
+	AntipathySympathy = Spell("Antipathy/Sympathy", 8, "Enchantment", "1 Hour", "60 feet", "10 Days", "Verbal, Somatic, Material", definition="""As you cast the spell, choose whether it creates antipathy or sympathy, and target one creature or object that is Huge or smaller. Then specify a kind of creature, such as red dragons, goblins, or vampires. A creature of the chosen kind makes a Wisdom saving throw when it comes within 120 feet of the target. Your choice of antipathy or sympathy determines what happens to a creature when it fails that save:
+<br>
+<b>Antipathy.</b> The creature has the Frightened condition. The Frightened creature must use its movement on its turns to get as far away as possible from the target, moving by the safest route.
+<br>
+<b>Sympathy.</b> The creature has the Charmed condition. The Charmed creature must use its movement on its turns to get as close as possible to the target, moving by the safest route. If the creature is within 5 feet of the target, the creature can't willingly move away. If the target damages the Charmed creature, that creature can make a Wisdom saving throw to end the effect, as described below.
+<br>
+<b>Ending the Effect.</b> If the Frightened or Charmed creature ends its turn more than 120 feet away from the target, the creature makes a Wisdom saving throw. On a successful save, the creature is no longer affected by the target. A creature that successfully saves against this effect is immune to it for 1 minute, after which it can be affected again.""")
+	Clone = Spell("Clone", 8, "Necromancy", "1 Hour", "Touch", "Instantaneous", "Verbal, Somatic, Material", definition="""You touch a creature or at least 1 cubic inch of its flesh. An inert duplicate of that creature forms inside the vessel used in the spell's casting and finishes growing after 120 days; you choose whether the finished clone is the same age as the creature or younger. The clone remains inert and endures indefinitely while its vessel remains undisturbed.
+<br>
+If the original creature dies after the clone finishes forming, the creature's soul transfers to the clone if the soul is free and willing to return. The clone is physically identical to the original and has the same personality, memories, and abilities, but none of the original's equipment. The creature's original remains, if any, become inert and can't be revived, since the creature's soul is elsewhere.""")
+	DarkStar = Spell("Dark Star", 8, "Evocation DG", "1 Action", "150 Feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""This spell creates a sphere centered on a point you choose within range. The sphere can have a radius of up to 40 feet. The area within this sphere is filled with magical darkness and crushing gravitational force.
+<br>
+For the duration, the spell's area is 3. A creature with darkvision can't see through the magical darkness, and nonmagical light can't illuminate it. No sound can be created within or pass through the area. Any creature or object entirely inside the sphere is immune to thunder damage, and creatures are deafened while entirely inside it. Casting a spell that includes a verbal component is impossible there.
+<br>
+Any creature that enters the spell's area for the first time on a turn or starts its turn there must make a Constitution saving throw. The creature takes 8d10 force damage on a failed save, or half as much damage on a successful one. A creature reduced to 0 hit points by this damage is disintegrated. A disintegrated creature and everything it is wearing and carrying, except magic items, are reduced to a pile of fine gray dust.""")
+	IllusoryDragon = Spell("Illusory Dragon", 8, "Illusion", "1 Action", "120 feet", "Concentration, up to 1 minute", "Somatic", definition="""By gathering threads of shadow material from the Shadowfell, you create a Huge shadowy dragon in an unoccupied space that you can see within range. The illusion lasts for the spell's duration and occupies its space, as if it were a creature.
+<br>
+When the illusion appears, any of your enemies that can see it must succeed on a Wisdom saving throw or become frightened of it for 1 minute. If a frightened creature ends its turn in a location where it doesn't have line of sight to the illusion, it can repeat the saving throw, ending the effect on itself on a success.
+<br>
+As a bonus action on your turn, you can move the illusion up to 60 feet. At any point during its movement, you can cause it to exhale a blast of energy in a 60-foot cone originating from its space. When you create the dragon, choose a damage type: acid, cold, fire, lightning, necrotic, or poison. Each creature in the cone must make an Intelligence saving throw, taking 7d6 damage of the chosen damage type on a failed save, or half as much damage on a successful one.
+<br>
+The illusion is tangible because of the shadow stuff used to create it, but attacks miss it automatically, it succeeds on all saving throws, and it is immune to all damage and conditions. A creature that uses an action to examine the dragon can determine that it is an illusion by succeeding on an Intelligence (Investigation) check against your spell save DC. If a creature discerns the illusion for what it is, the creature can see through it and has advantage on saving throws against its breath.""")
+	MightyFortress = Spell("Mighty Fortress", 8, "Conjuration", "1 Minute", "1 mile", "Instantaneous", "Verbal, Somatic, Material", definition="""A fortress of stone erupts from a square area of ground of your choice that you can see within range. The area is 120 feet on each side, and it must not have any buildings or other structures on it. Any creatures in the area are harmlessly lifted up as the fortress rises.
+<br>
+The fortress has four turrets with square bases, each one 20 feet on a side and 30 feet tall, with one turret on each corner. The turrets are connected to each other by stone walls that are each 80 feet long, creating an enclosed area. Each wall is 1 foot thick and is composed of panels that are 10 feet wide and 20 feet tall. Each panel is contiguous with two other panels or one other panel and a turret. You can place up to four stone doors in the fortress's outer wall.
+<br>
+A small keep stands inside the enclosed area. The keep has a square base that is 50 feet on each side, and it has three floors with 10-foot-high ceilings. Each of the floors can be divided into as many rooms as you like, provided each room is at least 5 feet on each side. The floors of the keep are connected by stone staircases, its walls are 6 inches thick, and interior rooms can have stone doors or open archways as you choose. The keep is furnished and decorated however you like, and it contains sufficient food to serve a nine-course banquet for up to 100 people each day. Furnishings, food, and other objects created by this spell crumble to dust if removed from the fortress.
+<br>
+A staff of one hundred invisible servants obeys any command given to them by creatures you designate when you cast the spell. Each servant functions as if created by the unseen servant spell.
+<br>
+The walls, turrets, and keep are all made of stone that can be damaged. Each 10-foot-by-10-foot section of stone has AC 15 and 30 hit points per inch of thickness. It is immune to poison and psychic damage. Reducing a section of stone to 0 hit points destroys it and might cause connected sections to buckle and collapse at the DM's discretion.
+<br>
+After 7 days or when you cast this spell somewhere else, the fortress harmlessly crumbles and sinks back into the ground, leaving any creatures that were inside it safely on the ground.
+<br>
+Casting this spell on the same spot once every 7 days for a year makes the fortress permanent.""")
+	RealityBreak = Spell("Reality Break", 8, "Conjuration DC", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""You shatter the barriers between realities and timelines, thrusting a creature into turmoil and madness. The target must succeed on a Wisdom saving throw, or it can't take reactions until the spell ends. The affected target must also roll a d10 at the start of each of its turns; the number rolled determines what happens to the target, as shown on the Reality Break Effects table.
+<br>
+At the end of each of its turns, the affected target can repeat the Wisdom saving throw, ending the spell on itself on a success.
+<br>
+1-2: <b>Vision of the Far Realm.</b> The target takes 6d12 psychic damage, and it is stunned until the end of the turn.
+<br>
+3-5: <b>Rending Rift.</b> The target must make a Dexterity saving throw, taking 8d12 force damage on a failed save, or half as much damage on a successful one.
+<br>
+6-8: <b>Wormhole.</b> The target is teleported, along with everything it is wearing and carrying, up to 30 feet to an unoccupied space of your choice that you can see. The target also takes 10d12 force damage and is knocked prone.
+<br>
+9-10: <b>Chill of the Dark Void.</b> The target takes 10d12 cold damage, and it is blinded until the end of the turn.""")
+	Telepathy = Spell("Telepathy", 8, "Evocation", "1 Action", "Unlimited", "24 hours", "Verbal, Somatic, Material", definition="""You create a telepathic link between yourself and a willing creature with which you are familiar. The creature can be anywhere on the same plane of existence as you. The spell ends if you or the target are no longer on the same plane.
+<br>
+Until the spell ends, you and the target can instantly share words, images, sounds, and other sensory messages with each other through the link, and the target recognizes you as the creature it is communicating with. The spell enables a creature to understand the meaning of your words and any sensory messages you send to it.""")
+	ControlWeather = Spell("Control Weather", 8, "Transmutation", "10 Minutes", "Self (5 mile radius)", "Concentration, Up to 8 hours", "Verbal, Somatic, Material", definition="""You take control of the weather within 5 miles of you for the duration. You must be outdoors to cast this spell, and it ends early if you go indoors.
+<br>
+When you cast the spell, you change the current weather conditions, which are determined by the DM. You can change precipitation, temperature, and wind. It takes 1d4 × 10 minutes for the new conditions to take effect. Once they do so, you can change the conditions again. When the spell ends, the weather gradually returns to normal.
+<br>
+When you change the weather conditions, find a current condition on the following tables and change its stage by one, up or down. When changing the wind, you can change its direction.
+<br>
+1: Clear
+<br>
+2: Light clouds
+<br>
+3: Overcast or ground fog
+<br>
+4: Rain, hail, or snow
+<br>
+5: Torrential rain, driving hail, or blizzard
+<br>
+1: Heat wave
+<br>
+2: Hot
+<br>
+3: Warm
+<br>
+4: Cool
+<br>
+5: Cold
+<br>
+6: Freezing
+<br>
+1: Calm
+<br>
+2: Moderate wind
+<br>
+3: Strong wind
+<br>
+4: Gale
+<br>
+5: Storm""")
+	Tsunami = Spell("Tsunami", 8, "Conjuration", "1 Action", "Sight", "Concentration, up to 6 rounds", "Verbal, Somatic", definition="""A wall of water springs into existence at a point you choose within range. You can make the wall up to 300 feet long, 300 feet high, and 50 feet thick. The wall lasts for the duration.
+<br>
+When the wall appears, each creature in its area makes a Strength saving throw, taking 6d10 Bludgeoning damage on a failed save or half as much damage on a successful one.
+<br>
+At the start of each of your turns after the wall appears, the wall, along with any creatures in it, moves 50 feet away from you. Any Huge or smaller creature inside the wall or whose space the wall enters when it moves must succeed on a Strength saving throw or take 5d10 Bludgeoning damage. A creature can take this damage only once per round. At the end of the turn, the wall's height is reduced by 50 feet, and the damage the wall deals on later rounds is reduced by 1d10. When the wall reaches 0 feet in height, the spell ends.
+<br>
+A creature caught in the wall can move by swimming. Because of the wave's force, though, the creature must succeed on a Strength (Athletics) check against your spell save DC to move at all. If it fails the check, it can't move. A creature that moves out of the wall falls to the ground.""")
+	Sunburst = Spell("Sunburst", 8, "Evocation", "1 Action", "150 feet", "Instantaneous", "Verbal, Somatic, Material", definition="""Brilliant sunlight flashes in a 60-foot-radius Sphere centered on a point you choose within range. Each creature in the Sphere makes a Constitution saving throw. On a failed save, a creature takes 12d6 Radiant damage and has the Blinded condition for 1 minute. On a successful save, it takes half as much damage only.
+<br>
+A creature Blinded by this spell makes another Constitution saving throw at the end of each of its turns, ending the effect on itself on a success.
+<br>
+This spell dispels Darkness in its area that was created by any spell.""")
+	AntimagicField = Spell("Antimagic Field", 8, "Abjuration", "1 Action", "Self (10-foot radius sphere)", "Concentration, up to 1 hour", "Verbal, Somatic, Material", definition="""An aura of antimagic surrounds you in a 10-foot Emanation. No one can cast spells, take Magic actions, or create other magical effects inside the aura, and those things can't target or otherwise affect anything inside it. Magical properties of magic items don't work inside the aura or on anything inside it.
+<br>
+Areas of effect created by spells or other magic can't extend into the aura, and no one can teleport into or out of it or use planar travel there. Portals close temporarily while in the aura.
+<br>
+Ongoing spells, except those cast by an Artifact or a deity, are suppressed in the area. While an effect is suppressed, it doesn't function, but the time it spends suppressed counts against its duration.
+<br>
+Dispel Magic has no effect on the aura, and the auras created by different Antimagic Field spells don't nullify each other.""")
 	Befuddlement 	= Spell("Befuddlement",            8, "Enchantment",
-								"Action", "150 feet", "Instantaneous", "Verbal, Somatic")
+								"Action", "150 feet", "Instantaneous", "Verbal, Somatic", definition="""You blast the mind of a creature that you can see within range. The target makes an Intelligence saving throw.
+<br>
+On a failed save, the target takes 10d12 Psychic damage and can't cast spells or take the Magic action. At the end of every 30 days, the target repeats the save, ending the effect on a success. The effect can also be ended by the Greater Restoration, Heal, or Wish spell.
+<br>
+On a successful save, the target takes half as much damage only.""")
 
 	IncendiaryCloud = Spell("Incendiary Cloud",
 			level=8,
@@ -5118,38 +6869,186 @@ if LEVEL9:
 	Weird = spell_from_data("Weird")
 	TimeStop = spell_from_data("Time Stop")
 	Foresight = spell_from_data("Foresight")
-	AstralProjection = Spell("Astral Projection", 9, "Evocation", "1 Hour", "10 feet", "Special", "Verbal, Somatic, Material")
-	BladeofDisaster = Spell("Blade of Disaster", 9, "Conjuration", "1 Bonus Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic")
-	Gate = Spell("Gate", 9, "Conjuration", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	Imprisonment = Spell("Imprisonment", 9, "Abjuration", "1 Minute", "30 feet", "Until dispelled", "Verbal, Somatic, Material")
-	PowerWordHeal = Spell("Power Word: Heal", 9, "Evocation", "1 Action", "Touch", "Instantaneous", "Verbal, Somatic")
-	PowerWordKill = Spell("Power Word: Kill", 9, "Enchantment", "1 Action", "60 feet", "Instantaneous", "Verbal")
-	PrismaticWall = Spell("Prismatic Wall", 9, "Abjuration", "1 Action", "60 feet", "10 minutes", "Verbal, Somatic")
-	PsychicScream = Spell("Psychic Scream", 9, "Enchantment", "1 Action", "90 feet", "Instantaneous", "Somatic")
-	RavenousVoid = Spell("Ravenous Void", 9, "Evocation DG", "1 Action", "1,000 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	TimeRavage = Spell("Time Ravage", 9, "Necromancy DC", "1 Action", "90 feet", "Instantaneous", "Verbal, Somatic, Material")
-	TrueResurrection = Spell("True Resurrection", 9, "Necromancy", "1 Hour", "Touch", "Instantaneous", "Verbal, Somatic, Material")
-	StormofVengeance = Spell("Storm of Vengeance", 9, "Conjuration", "1 Action", "Sight", "Concentration up to 1 minute", "Verbal, Somatic")
-	Invulnerability = Spell("Invulnerability", 9, "Abjuration", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic, Material")
+	AstralProjection = Spell("Astral Projection", 9, "Evocation", "1 Hour", "10 feet", "Special", "Verbal, Somatic, Material", definition="""You and up to eight willing creatures within range project your astral bodies into the Astral Plane (the spell ends instantly if you are already on that plane). Each target's body is left behind in a state of suspended animation; it has the Unconscious condition, doesn't need food or air, and doesn't age.
+<br>
+A target's astral form resembles its body in almost every way, replicating its game statistics and possessions. The principal difference is the addition of a silvery cord that trails from between the shoulder blades of the astral form. The cord fades from view after 1 foot. If the cord is cut--which happens only when an effect states that it does so--the target's body and astral form both die.
+<br>
+A target's astral form can travel through the Astral Plane. The moment an astral form leaves that plane, the target's body and possessions travel along the silver cord, causing the target to re-enter its body on the new plane.
+<br>
+Any damage or other effects that apply to an astral form have no effect on the target's body and vice versa. If a target's body or astral form drops to 0 Hit Points, the spell ends for that target. The spell ends for all the targets if you take a Magic action to dismiss it.
+<br>
+When the spell ends for a target who isn't dead, the target reappears in its body and exits the state of suspended animation.""")
+	BladeofDisaster = Spell("Blade of Disaster", 9, "Conjuration", "1 Bonus Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic", definition="""You create a blade-shaped planar rift about 3 feet long in an unoccupied space you can see within range. The blade lasts for the duration. When you cast this spell, you can make up to two melee spell attacks with the blade, each one against a creature, loose object, or structure within 5 feet of the blade. On a hit, the target takes 4d12 force damage. This attack scores a critical hit if the number on the d20 is 18 or higher. On a critical hit, the blade deals an extra 8d12 force damage (for a total of 12d12 force damage).
+<br>
+As a bonus action on your turn, you can move the blade up to 30 feet to an unoccupied space you can see and then make up to two melee spell attacks with it again.
+<br>
+The blade can harmlessly pass through any barrier, including a wall of force.""")
+	Gate = Spell("Gate", 9, "Conjuration", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""You conjure a portal linking an unoccupied space you can see within range to a precise location on a different plane of existence. The portal is a circular opening, which you can make 5 to 20 feet in diameter. You can orient the portal in any direction you choose. The portal lasts for the duration, and the portal's destination is visible through it.
+<br>
+The portal has a front and a back on each plane where it appears. Travel through the portal is possible only by moving through its front. Anything that does so is instantly transported to the other plane, appearing in the unoccupied space nearest to the portal.
+<br>
+Deities and other planar rulers can prevent portals created by this spell from opening in their presence or anywhere within their domains.
+<br>
+When you cast this spell, you can speak the name of a specific creature (a pseudonym, title, or nickname doesn't work). If that creature is on a plane other than the one you are on, the portal opens next to the named creature and transports it to the nearest unoccupied space on your side of the portal. You gain no special power over the creature, and it is free to act as the DM deems appropriate. It might leave, attack you, or help you.""")
+	Imprisonment = Spell("Imprisonment", 9, "Abjuration", "1 Minute", "30 feet", "Until dispelled", "Verbal, Somatic, Material", definition="""You create a magical restraint to hold a creature that you can see within range. The target must make a Wisdom saving throw. On a successful save, the target is unaffected, and it is immune to this spell for the next 24 hours. On a failed save, the target is imprisoned. While imprisoned, the target doesn't need to breathe, eat, or drink, and it doesn't age. Divination spells can't locate or perceive the imprisoned target, and the target can't teleport.
+<br>
+Until the spell ends, the target is also affected by one of the following effects of your choice:
+<br>
+<b>Burial.</b> The target is entombed beneath the earth in a hollow globe of magical force that is just large enough to contain the target. Nothing can pass into or out of the globe.
+<br>
+<b>Chaining.</b> Chains firmly rooted in the ground hold the target in place. The target has the Restrained condition and can't be moved by any means.
+<br>
+<b>Hedged Prison.</b> The target is trapped in a demiplane that is warded against teleportation and planar travel. The demiplane is your choice of a labyrinth, a cage, a tower, or the like.
+<br>
+<b>Minimus Containment.</b> The target becomes 1 inch tall and is trapped inside an indestructible gemstone or a similar object. Light can pass through the gemstone (allowing the target to see out and other creatures to see in), but nothing else can pass through by any means.
+<br>
+<b>Slumber.</b> The target has the Unconscious condition and can't be awoken.
+<br>
+<b>Ending the Spell.</b> When you cast the spell, specify a trigger that will end it. The trigger can be as simple or as elaborate as you choose, but the DM must agree that it has a high likelihood of happening within the next decade. The trigger must be an observable action, such as someone making a particular offering at the temple of your god, saving your true love, or defeating a specific monster. A Dispel Magic spell can end the spell only if it is cast with a level 9 spell slot, targeting either the prison or the component used to create it.""")
+	PowerWordHeal = Spell("Power Word: Heal", 9, "Evocation", "1 Action", "Touch", "Instantaneous", "Verbal, Somatic", definition="""A wave of healing energy washes over one creature you can see within range. The target regains all its Hit Points. If the creature has the Charmed, Frightened, Paralyzed, Poisoned, or Stunned condition, the condition ends. If the creature has the Prone condition, it can use its Reaction to stand up.""")
+	PowerWordKill = Spell("Power Word: Kill", 9, "Enchantment", "1 Action", "60 feet", "Instantaneous", "Verbal", definition="""You compel one creature you can see within range to die. If the target has 100 Hit Points or fewer, it dies. Otherwise, it takes 12d12 Psychic damage.""")
+	PrismaticWall = Spell("Prismatic Wall", 9, "Abjuration", "1 Action", "60 feet", "10 minutes", "Verbal, Somatic", definition="""A shimmering, multicolored plane of light forms a vertical opaque wall--up to 90 feet long, 30 feet high, and 1 inch thick--centered on a point within range. Alternatively, you shape the wall into a globe up to 30 feet in diameter centered on a point within range. The wall lasts for the duration. If you position the wall in a space occupied by a creature, the spell ends instantly without effect.
+<br>
+The wall sheds Bright Light within 100 feet and Dim Light for an additional 100 feet. You and creatures you designate when you cast the spell can pass through and be near the wall without harm. If another creature that can see the wall moves within 20 feet of it or starts its turn there, the creature must succeed on a Constitution saving throw or have the Blinded condition for 1 minute.
+<br>
+The wall consists of seven layers, each with a different color. When a creature reaches into or passes through the wall, it does so one layer at a time through all the layers. Each layer forces the creature to make a Dexterity saving throw or be affected by that layer's properties as described in the Prismatic Layers table.
+<br>
+The wall, which has AC 10, can be destroyed one layer at a time, in order from red to violet, by means specific to each layer. If a layer is destroyed, it is gone for the duration. Antimagic Field has no effect on the wall, and Dispel Magic can affect only the violet layer.
+<br>
+1: <b>Red.</b> <i>Failed Save:</i> 12d6 Fire damage. <i>Successful Save:</i> Half as much damage. <i>Additional Effects</i>: Nonmagical ranged attacks can't pass through this layer, which is destroyed if it takes at least 25 Cold damage.
+<br>
+2: <b>Orange.</b> <i>Failed Save:</i> 12d6 Acid damage. <i>Successful Save:</i> Half as much damage. <i>Additional Effects:</i> Magical ranged attacks can't pass through this layer, which is destroyed by a strong wind (such as the one created by Gust of Wind).
+<br>
+3: <b>Yellow.</b> <i>Failed Save:</i> 12d6 Lightning damage. <i>Successful Save:</i> Half as much damage. <i>Additional Effects:</i> The layer is destroyed if it takes at least 60 Force damage.
+<br>
+4: <b>Green.</b> <i>Failed Save:</i> 12d6 Poison damage. <i>Successful Save:</i> Half as much damage. <i>Additional Effects:</i> A Passwall spell, or another spell of equal or greater level that can open a portal on a solid surface, destroys this layer.
+<br>
+5: <b>Blue.</b> <i>Failed Save:</i> 12d6 Cold damage. <i>Successful Save:</i> Half as much damage. <i>Additional Effects:</i> The layer is destroyed if it takes at least 25 Fire damage.
+<br>
+6: <b>Indigo.</b> <i>Failed Save:</i> The target has the Restrained condition and makes a Constitution saving throw at the end of each of its turns. If it successfully saves three times, the condition ends. If it fails three times, it has the Petrified condition until it is freed by an effect like the Greater Restoration spell. The successes and failures needn't be consecutive; keep track of both until the target collects three of a kind. <i>Additional Effects:</i> Spells can't be cast through this layer, which is destroyed by Bright Light shed by the Daylight spell.
+<br>
+7: <b>Violet.</b> <i>Failed Save:</i> The target has the Blinded condition and makes a Wisdom saving throw at the start of your next turn. On a successful save, the condition ends. On a failed save, the condition ends, and the creature teleports to another plane of existence (DM's choice). <i>Additional Effects:</i> This layer is destroyed by Dispel Magic.""")
+	PsychicScream = Spell("Psychic Scream", 9, "Enchantment", "1 Action", "90 feet", "Instantaneous", "Somatic", definition="""You unleash the power of your mind to blast the intellect of up to ten creatures of your choice that you can see within range. Creatures that have an Intelligence score of 2 or lower are unaffected.
+<br>
+Each target must make an Intelligence saving throw. On a failed save, a target takes 14d6 psychic damage and is stunned. On a successful save, a target takes half as much damage and isn't stunned. If a target is killed by this damage, its head explodes, assuming it has one.
+<br>
+A stunned target can make an Intelligence saving throw at the end of each of its turns. On a successful save, the stunning effect ends.""")
+	RavenousVoid = Spell("Ravenous Void", 9, "Evocation DG", "1 Action", "1,000 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""You create a 20-foot-radius sphere of destructive gravitational force centered on a point you can see within range. For the spell's duration, the sphere and any space within 100 feet of it are 3, and nonmagical objects fully inside the sphere are destroyed if they aren't being worn or carried.
+<br>
+When the sphere appears and at the start of each of your turns until the spell ends, unsecured objects within 100 feet of the sphere are pulled toward the sphere's center, ending in an unoccupied space as close to the center as possible.
+<br>
+A creature that starts its turn within 100 feet of the sphere must succeed on a Strength saving throw or be pulled straight toward the sphere's center, ending in an unoccupied space as close to the center as possible. A creature that enters the sphere for the first time on a turn or starts its turn there takes 5d10 force damage and is restrained until it is no longer in the sphere. If the sphere is in the air, the restrained creature hovers inside the sphere. A creature can use its action to make a Strength check against your spell save DC, ending this restrained condition on itself or another creature in the sphere that it can reach. A creature reduced to 0 hit points by this spell is annihilated, along with any nonmagical items it is wearing or carrying.""")
+	TimeRavage = Spell("Time Ravage", 9, "Necromancy DC", "1 Action", "90 feet", "Instantaneous", "Verbal, Somatic, Material", definition="""You target a creature you can see within range, putting its physical form through the devastation of rapid aging. The target must make a Constitution saving throw, taking 10d12 necrotic damage on a failed save, or half as much damage on a successful one. If the save fails, the target also ages to the point where it has only 30 days left before it dies of old age. In this aged state, the target has disadvantage on attack rolls, ability checks, and saving throws, and its walking speed is halved. Only the wish spell or the greater restoration cast with a 9th-level spell slot can end these effects and restore the target to its previous age.""")
+	TrueResurrection = Spell("True Resurrection", 9, "Necromancy", "1 Hour", "Touch", "Instantaneous", "Verbal, Somatic, Material", definition="""You touch a creature that has been dead for no longer than 200 years and that died for any reason except old age. The creature is revived with all its Hit Points.
+<br>
+This spell closes all wounds, neutralizes any poison, cures all magical contagions, and lifts any curses affecting the creature when it died. The spell replaces damaged or missing organs and limbs. If the creature was Undead, it is restored to its non-Undead form.
+<br>
+The spell can provide a new body if the original no longer exists, in which case you must speak the creature's name. The creature then appears in an unoccupied space you choose within 10 feet of you.""")
+	StormofVengeance = Spell("Storm of Vengeance", 9, "Conjuration", "1 Action", "Sight", "Concentration up to 1 minute", "Verbal, Somatic", definition="""A churning storm cloud forms for the duration, centered on a point within range and spreading to a radius of 300 feet. Each creature under the cloud when it appears must succeed on a Constitution saving throw or take 2d6 Thunder damage and have the Deafened condition for the duration.
+<br>
+At the start of each of your later turns, the storm produces different effects, as detailed below.
+<br>
+<b>Turn 2.</b> Acidic rain falls. Each creature and object under the cloud takes 4d6 Acid damage.
+<br>
+<b>Turn 3.</b> You call six bolts of lightning from the cloud to strike six different creatures or objects beneath it. Each target makes a Dexterity saving throw, taking 10d6 Lightning damage on a failed save or half as much damage on a successful one.
+<br>
+<b>Turn 4.</b> Hailstones rain down. Each creature under the cloud takes 2d6 Bludgeoning damage.
+<br>
+<b>Turns 5-10.</b> Gusts and freezing rain assail the area under the cloud. Each creature there takes 1d6 Cold damage. Until the spell ends, the area is Difficult Terrain and Heavily Obscured, ranged attacks with weapons are impossible there, and strong wind blows through the area.""")
+	Invulnerability = Spell("Invulnerability", 9, "Abjuration", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic, Material", definition="""You are immune to all damage until the spell ends.""")
 	MassPolymorph = spell_from_data("Mass Polymorph")
 	Shapechange = spell_from_data("Shapechange")
 	MassHeal = spell_from_data("Mass Heal")
 	Weird = spell_from_data("Weird")
 	TimeStop = spell_from_data("Time Stop")
 	Foresight = spell_from_data("Foresight")
-	AstralProjection = Spell("Astral Projection", 9, "Evocation", "1 Hour", "10 feet", "Special", "Verbal, Somatic, Material")
-	BladeofDisaster = Spell("Blade of Disaster", 9, "Conjuration", "1 Bonus Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic")
-	Gate = Spell("Gate", 9, "Conjuration", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	Imprisonment = Spell("Imprisonment", 9, "Abjuration", "1 Minute", "30 feet", "Until dispelled", "Verbal, Somatic, Material")
-	PowerWordHeal = Spell("Power Word: Heal", 9, "Evocation", "1 Action", "Touch", "Instantaneous", "Verbal, Somatic")
-	PowerWordKill = Spell("Power Word: Kill", 9, "Enchantment", "1 Action", "60 feet", "Instantaneous", "Verbal")
-	PrismaticWall = Spell("Prismatic Wall", 9, "Abjuration", "1 Action", "60 feet", "10 minutes", "Verbal, Somatic")
-	PsychicScream = Spell("Psychic Scream", 9, "Enchantment", "1 Action", "90 feet", "Instantaneous", "Somatic")
-	RavenousVoid = Spell("Ravenous Void", 9, "Evocation DG", "1 Action", "1,000 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material")
-	TimeRavage = Spell("Time Ravage", 9, "Necromancy DC", "1 Action", "90 feet", "Instantaneous", "Verbal, Somatic, Material")
-	TrueResurrection = Spell("True Resurrection", 9, "Necromancy", "1 Hour", "Touch", "Instantaneous", "Verbal, Somatic, Material")
-	StormofVengeance = Spell("Storm of Vengeance", 9, "Conjuration", "1 Action", "Sight", "Concentration up to 1 minute", "Verbal, Somatic")
-	Invulnerability = Spell("Invulnerability", 9, "Abjuration", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic, Material")
+	AstralProjection = Spell("Astral Projection", 9, "Evocation", "1 Hour", "10 feet", "Special", "Verbal, Somatic, Material", definition="""You and up to eight willing creatures within range project your astral bodies into the Astral Plane (the spell ends instantly if you are already on that plane). Each target's body is left behind in a state of suspended animation; it has the Unconscious condition, doesn't need food or air, and doesn't age.
+<br>
+A target's astral form resembles its body in almost every way, replicating its game statistics and possessions. The principal difference is the addition of a silvery cord that trails from between the shoulder blades of the astral form. The cord fades from view after 1 foot. If the cord is cut--which happens only when an effect states that it does so--the target's body and astral form both die.
+<br>
+A target's astral form can travel through the Astral Plane. The moment an astral form leaves that plane, the target's body and possessions travel along the silver cord, causing the target to re-enter its body on the new plane.
+<br>
+Any damage or other effects that apply to an astral form have no effect on the target's body and vice versa. If a target's body or astral form drops to 0 Hit Points, the spell ends for that target. The spell ends for all the targets if you take a Magic action to dismiss it.
+<br>
+When the spell ends for a target who isn't dead, the target reappears in its body and exits the state of suspended animation.""")
+	BladeofDisaster = Spell("Blade of Disaster", 9, "Conjuration", "1 Bonus Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic", definition="""You create a blade-shaped planar rift about 3 feet long in an unoccupied space you can see within range. The blade lasts for the duration. When you cast this spell, you can make up to two melee spell attacks with the blade, each one against a creature, loose object, or structure within 5 feet of the blade. On a hit, the target takes 4d12 force damage. This attack scores a critical hit if the number on the d20 is 18 or higher. On a critical hit, the blade deals an extra 8d12 force damage (for a total of 12d12 force damage).
+<br>
+As a bonus action on your turn, you can move the blade up to 30 feet to an unoccupied space you can see and then make up to two melee spell attacks with it again.
+<br>
+The blade can harmlessly pass through any barrier, including a wall of force.""")
+	Gate = Spell("Gate", 9, "Conjuration", "1 Action", "60 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""You conjure a portal linking an unoccupied space you can see within range to a precise location on a different plane of existence. The portal is a circular opening, which you can make 5 to 20 feet in diameter. You can orient the portal in any direction you choose. The portal lasts for the duration, and the portal's destination is visible through it.
+<br>
+The portal has a front and a back on each plane where it appears. Travel through the portal is possible only by moving through its front. Anything that does so is instantly transported to the other plane, appearing in the unoccupied space nearest to the portal.
+<br>
+Deities and other planar rulers can prevent portals created by this spell from opening in their presence or anywhere within their domains.
+<br>
+When you cast this spell, you can speak the name of a specific creature (a pseudonym, title, or nickname doesn't work). If that creature is on a plane other than the one you are on, the portal opens next to the named creature and transports it to the nearest unoccupied space on your side of the portal. You gain no special power over the creature, and it is free to act as the DM deems appropriate. It might leave, attack you, or help you.""")
+	Imprisonment = Spell("Imprisonment", 9, "Abjuration", "1 Minute", "30 feet", "Until dispelled", "Verbal, Somatic, Material", definition="""You create a magical restraint to hold a creature that you can see within range. The target must make a Wisdom saving throw. On a successful save, the target is unaffected, and it is immune to this spell for the next 24 hours. On a failed save, the target is imprisoned. While imprisoned, the target doesn't need to breathe, eat, or drink, and it doesn't age. Divination spells can't locate or perceive the imprisoned target, and the target can't teleport.
+<br>
+Until the spell ends, the target is also affected by one of the following effects of your choice:
+<br>
+<b>Burial.</b> The target is entombed beneath the earth in a hollow globe of magical force that is just large enough to contain the target. Nothing can pass into or out of the globe.
+<br>
+<b>Chaining.</b> Chains firmly rooted in the ground hold the target in place. The target has the Restrained condition and can't be moved by any means.
+<br>
+<b>Hedged Prison.</b> The target is trapped in a demiplane that is warded against teleportation and planar travel. The demiplane is your choice of a labyrinth, a cage, a tower, or the like.
+<br>
+<b>Minimus Containment.</b> The target becomes 1 inch tall and is trapped inside an indestructible gemstone or a similar object. Light can pass through the gemstone (allowing the target to see out and other creatures to see in), but nothing else can pass through by any means.
+<br>
+<b>Slumber.</b> The target has the Unconscious condition and can't be awoken.
+<br>
+<b>Ending the Spell.</b> When you cast the spell, specify a trigger that will end it. The trigger can be as simple or as elaborate as you choose, but the DM must agree that it has a high likelihood of happening within the next decade. The trigger must be an observable action, such as someone making a particular offering at the temple of your god, saving your true love, or defeating a specific monster. A Dispel Magic spell can end the spell only if it is cast with a level 9 spell slot, targeting either the prison or the component used to create it.""")
+	PowerWordHeal = Spell("Power Word: Heal", 9, "Evocation", "1 Action", "Touch", "Instantaneous", "Verbal, Somatic", definition="""A wave of healing energy washes over one creature you can see within range. The target regains all its Hit Points. If the creature has the Charmed, Frightened, Paralyzed, Poisoned, or Stunned condition, the condition ends. If the creature has the Prone condition, it can use its Reaction to stand up.""")
+	PowerWordKill = Spell("Power Word: Kill", 9, "Enchantment", "1 Action", "60 feet", "Instantaneous", "Verbal", definition="""You compel one creature you can see within range to die. If the target has 100 Hit Points or fewer, it dies. Otherwise, it takes 12d12 Psychic damage.""")
+	PrismaticWall = Spell("Prismatic Wall", 9, "Abjuration", "1 Action", "60 feet", "10 minutes", "Verbal, Somatic", definition="""A shimmering, multicolored plane of light forms a vertical opaque wall--up to 90 feet long, 30 feet high, and 1 inch thick--centered on a point within range. Alternatively, you shape the wall into a globe up to 30 feet in diameter centered on a point within range. The wall lasts for the duration. If you position the wall in a space occupied by a creature, the spell ends instantly without effect.
+<br>
+The wall sheds Bright Light within 100 feet and Dim Light for an additional 100 feet. You and creatures you designate when you cast the spell can pass through and be near the wall without harm. If another creature that can see the wall moves within 20 feet of it or starts its turn there, the creature must succeed on a Constitution saving throw or have the Blinded condition for 1 minute.
+<br>
+The wall consists of seven layers, each with a different color. When a creature reaches into or passes through the wall, it does so one layer at a time through all the layers. Each layer forces the creature to make a Dexterity saving throw or be affected by that layer's properties as described in the Prismatic Layers table.
+<br>
+The wall, which has AC 10, can be destroyed one layer at a time, in order from red to violet, by means specific to each layer. If a layer is destroyed, it is gone for the duration. Antimagic Field has no effect on the wall, and Dispel Magic can affect only the violet layer.
+<br>
+1: <b>Red.</b> <i>Failed Save:</i> 12d6 Fire damage. <i>Successful Save:</i> Half as much damage. <i>Additional Effects</i>: Nonmagical ranged attacks can't pass through this layer, which is destroyed if it takes at least 25 Cold damage.
+<br>
+2: <b>Orange.</b> <i>Failed Save:</i> 12d6 Acid damage. <i>Successful Save:</i> Half as much damage. <i>Additional Effects:</i> Magical ranged attacks can't pass through this layer, which is destroyed by a strong wind (such as the one created by Gust of Wind).
+<br>
+3: <b>Yellow.</b> <i>Failed Save:</i> 12d6 Lightning damage. <i>Successful Save:</i> Half as much damage. <i>Additional Effects:</i> The layer is destroyed if it takes at least 60 Force damage.
+<br>
+4: <b>Green.</b> <i>Failed Save:</i> 12d6 Poison damage. <i>Successful Save:</i> Half as much damage. <i>Additional Effects:</i> A Passwall spell, or another spell of equal or greater level that can open a portal on a solid surface, destroys this layer.
+<br>
+5: <b>Blue.</b> <i>Failed Save:</i> 12d6 Cold damage. <i>Successful Save:</i> Half as much damage. <i>Additional Effects:</i> The layer is destroyed if it takes at least 25 Fire damage.
+<br>
+6: <b>Indigo.</b> <i>Failed Save:</i> The target has the Restrained condition and makes a Constitution saving throw at the end of each of its turns. If it successfully saves three times, the condition ends. If it fails three times, it has the Petrified condition until it is freed by an effect like the Greater Restoration spell. The successes and failures needn't be consecutive; keep track of both until the target collects three of a kind. <i>Additional Effects:</i> Spells can't be cast through this layer, which is destroyed by Bright Light shed by the Daylight spell.
+<br>
+7: <b>Violet.</b> <i>Failed Save:</i> The target has the Blinded condition and makes a Wisdom saving throw at the start of your next turn. On a successful save, the condition ends. On a failed save, the condition ends, and the creature teleports to another plane of existence (DM's choice). <i>Additional Effects:</i> This layer is destroyed by Dispel Magic.""")
+	PsychicScream = Spell("Psychic Scream", 9, "Enchantment", "1 Action", "90 feet", "Instantaneous", "Somatic", definition="""You unleash the power of your mind to blast the intellect of up to ten creatures of your choice that you can see within range. Creatures that have an Intelligence score of 2 or lower are unaffected.
+<br>
+Each target must make an Intelligence saving throw. On a failed save, a target takes 14d6 psychic damage and is stunned. On a successful save, a target takes half as much damage and isn't stunned. If a target is killed by this damage, its head explodes, assuming it has one.
+<br>
+A stunned target can make an Intelligence saving throw at the end of each of its turns. On a successful save, the stunning effect ends.""")
+	RavenousVoid = Spell("Ravenous Void", 9, "Evocation DG", "1 Action", "1,000 feet", "Concentration, up to 1 minute", "Verbal, Somatic, Material", definition="""You create a 20-foot-radius sphere of destructive gravitational force centered on a point you can see within range. For the spell's duration, the sphere and any space within 100 feet of it are 3, and nonmagical objects fully inside the sphere are destroyed if they aren't being worn or carried.
+<br>
+When the sphere appears and at the start of each of your turns until the spell ends, unsecured objects within 100 feet of the sphere are pulled toward the sphere's center, ending in an unoccupied space as close to the center as possible.
+<br>
+A creature that starts its turn within 100 feet of the sphere must succeed on a Strength saving throw or be pulled straight toward the sphere's center, ending in an unoccupied space as close to the center as possible. A creature that enters the sphere for the first time on a turn or starts its turn there takes 5d10 force damage and is restrained until it is no longer in the sphere. If the sphere is in the air, the restrained creature hovers inside the sphere. A creature can use its action to make a Strength check against your spell save DC, ending this restrained condition on itself or another creature in the sphere that it can reach. A creature reduced to 0 hit points by this spell is annihilated, along with any nonmagical items it is wearing or carrying.""")
+	TimeRavage = Spell("Time Ravage", 9, "Necromancy DC", "1 Action", "90 feet", "Instantaneous", "Verbal, Somatic, Material", definition="""You target a creature you can see within range, putting its physical form through the devastation of rapid aging. The target must make a Constitution saving throw, taking 10d12 necrotic damage on a failed save, or half as much damage on a successful one. If the save fails, the target also ages to the point where it has only 30 days left before it dies of old age. In this aged state, the target has disadvantage on attack rolls, ability checks, and saving throws, and its walking speed is halved. Only the wish spell or the greater restoration cast with a 9th-level spell slot can end these effects and restore the target to its previous age.""")
+	TrueResurrection = Spell("True Resurrection", 9, "Necromancy", "1 Hour", "Touch", "Instantaneous", "Verbal, Somatic, Material", definition="""You touch a creature that has been dead for no longer than 200 years and that died for any reason except old age. The creature is revived with all its Hit Points.
+<br>
+This spell closes all wounds, neutralizes any poison, cures all magical contagions, and lifts any curses affecting the creature when it died. The spell replaces damaged or missing organs and limbs. If the creature was Undead, it is restored to its non-Undead form.
+<br>
+The spell can provide a new body if the original no longer exists, in which case you must speak the creature's name. The creature then appears in an unoccupied space you choose within 10 feet of you.""")
+	StormofVengeance = Spell("Storm of Vengeance", 9, "Conjuration", "1 Action", "Sight", "Concentration up to 1 minute", "Verbal, Somatic", definition="""A churning storm cloud forms for the duration, centered on a point within range and spreading to a radius of 300 feet. Each creature under the cloud when it appears must succeed on a Constitution saving throw or take 2d6 Thunder damage and have the Deafened condition for the duration.
+<br>
+At the start of each of your later turns, the storm produces different effects, as detailed below.
+<br>
+<b>Turn 2.</b> Acidic rain falls. Each creature and object under the cloud takes 4d6 Acid damage.
+<br>
+<b>Turn 3.</b> You call six bolts of lightning from the cloud to strike six different creatures or objects beneath it. Each target makes a Dexterity saving throw, taking 10d6 Lightning damage on a failed save or half as much damage on a successful one.
+<br>
+<b>Turn 4.</b> Hailstones rain down. Each creature under the cloud takes 2d6 Bludgeoning damage.
+<br>
+<b>Turns 5-10.</b> Gusts and freezing rain assail the area under the cloud. Each creature there takes 1d6 Cold damage. Until the spell ends, the area is Difficult Terrain and Heavily Obscured, ranged attacks with weapons are impossible there, and strong wind blows through the area.""")
+	Invulnerability = Spell("Invulnerability", 9, "Abjuration", "1 Action", "Self", "Concentration, up to 10 minutes", "Verbal, Somatic, Material", definition="""You are immune to all damage until the spell ends.""")
 	MeteorSwarm = Spell("Meteor Swarm",
 			level= 9,
 			school="Evocation",

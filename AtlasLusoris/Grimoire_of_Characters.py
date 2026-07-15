@@ -366,10 +366,12 @@ class Character:
 	def to_dict(char):
 		""" Convert character details to dictionary format. """
 		from AtlasLusoris.Map_of_Classes.Scroll_of_Constants import Archetype
+		from AtlasLusoris.Map_of_Species import creature_type_label
 		return {
 			'name': 		char.name,
 			'title':		char.title,
 			'Gender': 		char.gender,
+			'CreatureType': creature_type_label(char.features),
 			'Species': 		char.species,
 			'Class': 		char.char_class,
 			'Subclass': 	Archetype(char),

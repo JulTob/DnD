@@ -106,7 +106,7 @@ _CLASS_SOL: dict[str, tuple[str, ...]] = {
     "Barbarian": _tuple_safe("ᛦᛧᛨᛩᛪ᛫᛬᛭ᛮᛯᛰ⚔"),
     "Rogue": _tuple_safe("◈◇◆◊○●◐◑◒◓"),
     "Bard": _tuple_safe("♩♪♫♬♭♮♯𝄞𝄢"),
-    "Monk": _tuple_safe("☸⚛☯卍卐"),
+    "Monk": _tuple_safe("☸⚛☯"),
     "Ranger": _tuple_safe("⛤⛥⛦⛧✦✧✶☄"),
     "Sorcerer": _tuple_safe("✶✷✸✹✺✻✼✽✾✿"),
     "Warlock": _tuple_safe("☿♆♃♄♅⚸⚶⚵⚴⚳"),

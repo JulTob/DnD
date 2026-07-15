@@ -25,11 +25,11 @@ def shareable_links_head_tags() -> list[ui.Tag]:
 
 
 if __name__ == "__main__":
-    # Self-test / usage demo. Run:  python AtlasVenustas/Kit_of_ShareableLinks.py
+    # Self-test / usage demo. Run:  python AtlasVenustas/Tools_of_ShareableLinks.py
     assert SCRIPT_PATH.exists(), f"missing {SCRIPT_PATH}"
     script = SCRIPT_PATH.read_text(encoding="utf-8")
     assert "canonicalPath" in script, "expected the canonical path helper"
     assert "clipboard" in script.lower(), "expected the clipboard logic"
     tags = shareable_links_head_tags()
     assert len(tags) == 1
-    print(f"Kit_of_ShareableLinks: serves {SCRIPT_URL} ({len(script)} chars) — ok")
+    print(f"Tools_of_ShareableLinks: serves {SCRIPT_URL} ({len(script)} chars) — ok")

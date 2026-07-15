@@ -1,78 +1,22 @@
 import random
 
-def Genus(lusor):
+def custom_cases(s):
 	"""
-	Returns a descriptive  Colosseum string for a lusor (NPC or PC).
-
-	- If lusor is already a string, return it.
-	- If it has a `. Colosseum` property, use that.
-	- Else, build it manually from attributes.
+	Converts a string to title case.
+	Normalizes separator symbols to spaces, then title-cases with possessive 's left lowercase.
 	"""
-	# Case 1: already a string
-	if isinstance(lusor, str):
-		return lusor
-
-	# Case 2: has a genus property
-	if hasattr(lusor, "genus"):
-		try:
-			return lusor.genus
-		except Exception as e:
-			pass  # fallback to manual if it fails
-
-	# Case 3: build manually (best-effort fallback)
-	archetype = getattr(lusor, "archetype", None) or getattr(lusor, "char_class", "")
-	attributes = [
-		str(getattr(lusor, "race", "") or ""),
-		str(getattr(lusor, "subrace", "") or ""),
-		str(archetype),
-		str(getattr(lusor, "gender", "") or ""),
-		str(getattr(lusor, "alignment", "") or ""),
-	]
-	return " , ".join(filter(None, attributes))
-
-def custom_title(s):
-	"""
-	Converts a string to title case while handling apostrophes correctly.
-	"""
-	return " ".join([word[0].upper() + word[1:] if word else "" for word in s.split()])
-
-def generate_title(lusor):
-	"""
-	Generates a title from the given lists,
-	avoiding double spaces and handling title casing.
-	"""
-	descriptor = Descriptor(lusor)
-	rank = Rank(lusor)
-	for _ in range(10):
-		if descriptor.lower() not in rank.lower() and rank.lower() not in descriptor.lower():
-			break
-		rank = Rank(lusor)
-
-	origin = Origin(lusor)
-	for _ in range(10):
-		if descriptor.lower() not in origin.lower() and rank.lower() not in origin.lower():
-			break
-		origin = Origin(lusor)
-
-	parts = [descriptor, rank, origin]
-	title = " ".join(filter(None, parts))  
-	#-- Removes empty strings
-	return "The " + custom_title(title)
+	accepted_symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 1234567890 '"
+	for symbol in s:
+		if symbol not in accepted_symbols:
+			s = s.replace(symbol, " ")
+	s = " ".join(s.split())
+	return s.title().replace("'S", "'s")
 
 def Title(lusor):
 	random.seed(lusor.seed)
 	descriptor = Descriptor(lusor)
 	rank = Rank(lusor)
-	for _ in range(10):
-		if descriptor.lower() not in rank.lower() and rank.lower() not in descriptor.lower():
-			break
-		rank = Rank(lusor)
-
 	origin = Origin(lusor)
-	for _ in range(10):
-		if descriptor.lower() not in origin.lower() and rank.lower() not in origin.lower():
-			break
-		origin = Origin(lusor)
 
 	patterns = [
 		f"The {descriptor} {rank}",
@@ -89,7 +33,7 @@ def Title(lusor):
 		]
 
 	title = random.choices(patterns, weights=weights, k=1)[0]
-	return title.title()
+	return custom_cases(title)
 
 def Descriptor(lusor):
 	'''
@@ -100,7 +44,10 @@ def Descriptor(lusor):
 	X goes here
 	'''
 
-	genus = Genus(lusor)
+	try:
+		genus = lusor.genus
+	except:
+		genus = lusor
 
 	descriptor = []
 
@@ -199,7 +146,8 @@ def Descriptor(lusor):
 			"Antediluvian",		
 			"Ancient",			
 			"Ancestral",		
-			"Atemporal",		"Ancient",			
+			"Atemporal",		
+			"Ancient",			
 			"Ancestral",		
 			"Anachronistic",	
 			"Ageless",			
@@ -641,19 +589,206 @@ def Descriptor(lusor):
 			"Furred",			"Fury",			"Future",			"Ferocious",			
 			"Feral",			"Fire",			"Firebrand",			"Firebreathing",			
 			"First",			"Fjord",						"Flame",			
-			"Flameheart",		"Flamehearted",		"Flametongue",			"Flaming",			"Fleshwork",		"Floral",				"Flourish",				"Flowing",			"Fluid",			"Flying",			"Fugitive",			"Fire",			"Fleshwork",			"Force",			"Flameborn",			"Flesh",			"Flying",			"Forest",			"Flame","Flame",			"Fullmetal",			"Fleshwork",			"First",			"Forest",			"Forest",			"Fury",					"Freedom",			"Ferocious",			"Fierce",			"Free",				"Freedom",				"Fairy", "Fate",				"Fateful",			"Feathered",		"Fiery",			"Fire",			"Fey",			"Feywild",			"Firbolg",			"Fire",			"Flame",			"Frost",			"False",			"Forge",
+			"Flameheart",		"Flamehearted",		"Flametongue",			"Flaming",			"Fleshwork",		"Floral",				"Flourish",				"Flowing",			"Fluid",			"Flying",			"Fugitive",			"Fire",			"Fleshwork",			"Force",			"Flameborn",			"Flesh",			"Flying",			"Forest",			"Flame","Flame",			"Fullmetal",			"Fleshwork",			"First",			"Forest",			"Forest",			"Fury",					"Freedom",			"Ferocious",			"Fierce",			"Free",				"Freedom",				"Fairy", "Fate",				"Fateful",			"Feathered",		"Fiery",			"Fire",			"Fey",			
+			"Feywild",			"Firbolg",			"Fire",			"Flame",			"Frost",			"False",			"Forge",
 			]
 		descriptor += [ # G
-			"Green",			"Godless",			"Grim",				"Giant",			"Green",			"Gold",				"Gentle",			"Great",			"Glowing",			"Gleaming",			"Gloomy",			"Grieving",			"Grateful",			"Graphite",			"Granite",			"Grail",				"Green",				"Golden",			"Glowing",			"Grail",			"Gavel",			"Gaseous",							"Gases",			"Gaseous",			"Garden",			"Gravitational",		"Galactian",		"Galactic",			"Glacier",			"Gothic",			"Glacial",			"Grail",			"Goblet",			"Glowing",			"Great",			"Grand",			"Golden",			"Gregorian",		"Galactian",		"Galactic",			"Galaxy",			"Gallant",			"Garden",			"Gargantuan",		"Gargoyle",							"Gaseous",			"Gauntlet",			"Gavel",			"Gemmed",			"Gentle",			"Geyser",			"Ghost",			"Ghostly",			"Gleaming",			"Gloom",			"Glorious",			"Glowing",			"Glyph",			"Goblet",			"Gold",				"Golden",			"Goldenhearted",	"Goldenrod",		"Golem",			"Gorge",			"Gorgonian",		"Gothic",			"Graceful",			"Grail",			"Grand",			"Granite",			"Graphite",			"Grassland",		"Grassy",			"Grateful",			"Grave",			"Graveyard",		"Gravitational",	"Great",			"Greathearted",		"Green",			"Gulf",				"Grieving",			"Grim",				"Grimoire",			"Grove",			"Gryphon",			"Grim",				"Glorious",			"Giant",			"Gilded",			"Glacial",			"Glacier",			"Glade",			"Great",			"Green",			"Green",			"Graceful",			"Giant",							"Golden",			"Golden",			"Golden",			"Green",			"Great",			"Gentle",			"Galactic",			"Guarded",			"Grizzly",			"Godless",
+			"Green",			
+			"Godless",			
+			"Grim",				
+			"Giant",			
+			"Green",			
+			"Gold",				
+			"Gentle",			
+			"Great",			"Glowing",			
+			"Gleaming",			"Gloomy",			
+			"Grieving",			"Grateful",			
+			"Graphite",			"Granite",			
+			"Grail",				"Green",				
+			"Golden",			"Glowing",			
+			"Grail",			"Gavel",			
+			"Gaseous",							
+			"Gases",			"Gaseous",			
+			"Garden",			"Gravitational",		
+			"Galactian",		"Galactic",			
+			"Glacier",			"Gothic",			
+			"Glacial",			"Grail",			
+			"Goblet",			"Glowing",			
+			"Great",			"Grand",			
+			"Golden",			"Gregorian",		
+			"Galactian",		"Galactic",			
+			"Galaxy",			
+			"Gallant",			"Garden",			
+			"Gargantuan",		"Gargoyle",							"Gaseous",			
+			"Gauntlet",			"Gavel",			
+			"Gemmed",			"Gentle",			
+			"Geyser",			"Ghost",			
+			"Ghostly",			"Gleaming",			
+			"Gloom",			"Glorious",			
+			"Glowing",			
+			"Glyph",			"Goblet",			
+			"Gold",				"Golden",			
+			"Goldenhearted",	"Goldenrod",		
+			"Golem",			"Gorge",			
+			"Gorgonian",		"Gothic",			
+			"Graceful",			"Grail",			
+			"Grand",			"Granite",			
+			"Graphite",			"Grassland",					
+			"Grateful",			
+			"Grave",			
+			"Graveyard",		"Gravitational",	
+			"Great",			"Greathearted",		
+			"Green",			"Gulf",				
+			"Grieving",			"Grim",				
+			"Grimoire",			"Grove",			
+			"Gryphon",			"Grim",				
+			"Glorious",			"Giant",			
+			"Gilded",			"Glacial",			
+			"Glacier",			"Glade",			
+			"Great",			"Green",			
+			"Green",			"Graceful",			
+			"Giant",							
+			"Golden",			"Golden",			
+			"Golden",			
+			"Green",			"Great",			
+			"Gentle",			"Galactic",			
+			"Guarded",			"Grizzly",			
+			"Godless",
 			]
 		descriptor += [ # H
-			"Hollow",		"Hesperidean",		"Heliospheric",		"Historic",			"Heroic",			"Hell",				"Hermetic",				"Heart",		"Harmonious",		"Heartbroken",					"Hourly",			"Heartbroken",		"Hourly",			"Heartbroken",		"Hunting",			"Homeric",			"Horned",			"High",				"Helian",			"Haunting",			"Harpist",			"Harlequin",		"Hidden",			"Hoary", 	"High",			"Holy",				"Hamlet",			"Hammer",			"Han",							"Harbinger",			"Harbor",		"Harlequin",		"Harmony",			"Harpist",			"Harsh",			"Hateful",			"Haunting",			"Heart",			"Heartbroken",		"Heartfelt",		"Heath",			"Heavenly",			"Hedgerow",			"Helian",			"Heliospheric",		"Hell",		"Hellenistic",	"Hellish",		"Hermetic",		"Hermitage",		"Heroic",			"Hex",				"Hidden",			"Hieratic",			"High",					"Hill",			"Historic",			"Hive",				"Hoary",			"Hollow",			"Homeric",			"Honorable",		"Honored",			"Hopeful",			"Horizon",			"Horned",			"Horrific",			"Horus",			"Hostile",			"Hourglass",		"Hourly",			"Hunter",		"Hunting",		"Hydra",			"Hyperion",			"Hypnotic",			"Heretic",			"Howling",			"Hourglass",					"Hunger",			"Hell",				"Hill",				"High",				"Hive",				"Hound",			"Hourglass",		"Harmonic",
+			"Hollow",		
+			"Hesperidean",		
+			"Heliospheric",		
+			"Historic",			
+			"Heroic",			
+			"Hell",				
+			"Hermetic",				
+			"Heart",		
+			"Harmonious",		
+			"Heartbroken",					
+			"Hourly",			
+			"Heartbroken",		
+			"Hourly",			
+			"Heartbroken",		
+			"Hunting",			
+			"Homeric",			
+			"Horned",			
+			"High",				
+			"Helian",			
+			"Haunting",			
+			"Harpist",			
+			"Harlequin",		
+			"Hidden",			
+			"Hoary", 	
+			"High",			
+			"Holy",				
+			"Hamlet",			
+			"Hammer",			
+			"Han",							
+			"Harbinger",			
+			"Harbor",		
+			"Harlequin",		
+			"Harmony",			
+			"Harpist",			
+			"Harsh",			
+			"Hateful",			
+			"Haunting",			
+			"Heart",			
+			"Heartbroken",		
+			"Heath",			
+			"Heavenly",			
+			"Hedgerow",			
+			"Helian",			
+			"Heliospheric",		
+			"Hell",		
+			"Hellenistic",	
+			"Hellish",		
+			"Hermetic",		
+			"Hermitage",		
+			"Heroic",			
+			"Hex",				
+			"Hidden",			
+			"Hieratic",			
+			"High",					
+			"Hill",			
+			"Historic",			
+			"Hive",				
+			"Hoary",			
+			"Hollow",			
+			"Homeric",			
+			"Honorable",		
+			"Honored",			
+			"Hopeful",			
+			"Horizon",			
+			"Horned",			
+			"Horrific",			
+			"Horus",			
+			"Hostile",			
+			"Hourglass",		
+			"Hourly",			
+			"Hunter",		
+			"Hunting",		
+			"Hydra",			
+			"Hyperion",			
+			"Hypnotic",			
+			"Heretic",			
+			"Howling",			
+			"Hourglass",					
+			"Hunger",			
+			"Hell",				
+			"Hill",				
+			"High",				
+			"Hive",				
+			"Hound",			
+			"Hourglass",		
+			"Harmonic",
 			]
 		descriptor += [ # I
 			"Immortal",			"Icy",				"Inferno",				"Instantaneous",		"Intrepid",				"Inquisitive",			"Intellect",		"Intellectual",			"Inkwork",				"Inkwell",				"Ink",				"Invincible",		"Impenetrable",		"Immortal",			"Icarian",			"Icicle",		"Ice",			"Icy",			"Immemorial",	"Infinite",			"Immortal",		"Indomitable",		"Ink",			"Ice",			"Ion",				"Ionic",			"Ionized",				"Irate",				"Iridescent",			"Iron",										"Island",				"Islet",				"Isolated",				"Ivory",			"Icarian",			"Ice",				"Iceborn",			"Icicle",			"Icon",				"Icy",			"Idol",			"Illusion",		"Illusionist",	"Imagination",		"Imam",			"Immemorial",		"Immortal",			"Impassioned",			"Impenetrable",			"Imperial",			"Imperious",			"Imperishable",			"Impish",				"Impulse",			"Incan",				"Incantation",								"Indigo",						"Inferno",			"Infinite",			"Infinity",			"Inimical",		"Ink",			"Inkwell",		"Inkwork",					"Innovative",		"Inquisitive",		"Inscrutable",			"Insidious",			"Inspired",			"Inspiring",			"Instantaneous",		"Intellect",			"Intellectual",			"Intense",						"Interim",				"Interstellar",			"Intimate",			"Intrepid",					"Intriguing",		"Invincible",		"Iron",				"Iron",			"Ice",			"Icicle",		"Ink",			"Ignoble",			"Infernal",			"Insatiable",
 			]
 		descriptor += [ # J
-			"Journey",		"Jasmine",		"Jaguar",		"Jackal",		"Jackal", 		"Jaguar", 		"Jasmine", 	"Jay", 		"Jester", "Journey", "Judge", "Juggernaut", "Jungle",			"Juniper",		"Jungle",		"Just",		"Just",		"Judgmental",	"Judgmental",	"Judicial", 	"Just",	"Justice",	"Judicial",	"Just",	"Jurassic",	"Jungle",	"Jester",		"Jade",	"Jotunn",	"Judicial",			"Journey",			"Jewel",			"Jungle",			"Jungle",			"Jade",			"Jealous",			"Jewel",			"Jewelcraft",			"Jeweled",			"Jotunn",									"Joyous",		"Jubilant",		"Jungle",		"Just",
+			"Journey",		
+			"Jasmine",
+			"Jackal",		
+			"Jackal", 		
+			"Jasmine", 	
+			"Jay", 		
+			"Jester", 
+			"Journey", 
+			"Judge", 
+			"Juggernaut", 
+			"Jungle",			
+			"Juniper",		
+			"Jungle",		
+			"Just",		
+			"Just",		
+			"Judgmental",	
+			"Judgmental",	
+			"Judicial", 	
+			"Just",	
+			"Justice",	
+			"Judicial",	
+			"Just",	
+			"Jurassic",	
+			"Jungle",	
+			"Jester",		
+			"Jade",	
+			"Jotunn",	
+			"Judicial",			
+			"Journey",			
+			"Jewel",			
+			"Jungle",			
+			"Jungle",			
+			"Jade",			
+			"Jealous",			
+			"Jewel",			
+			"Jewelcraft",			
+			"Jeweled",			
+			"Jotunn",									
+			"Joyous",		
+			"Jubilant",		
+			"Jungle",		
+			"Just",
 			]
 		descriptor += [ # K
 			"Knowledge",	"Keep",		"Krakenesque",				"Knife",				"Kaleidoscopic",				"Keen",				"Key",				"Kind",												"Kingly",							"Knightly",							"Kerberus",				"Key",
@@ -689,8 +824,6 @@ def Descriptor(lusor):
 				"Moonlit",		
 				"Moonshade",	
 				"Moonshadow",	
-				"Moor",			
-				"Moorish",		
 				"Moss",			
 				"Motivated",	
 				"Mountain",		
@@ -970,25 +1103,105 @@ def Descriptor(lusor):
 			"Pharaonic",		
 			"Pharaonic",		
 			"Philosophical",	
-			"Phlegmatic",		"Phoenix",			"Phoenixian",		
+			"Phlegmatic",		
+			"Phoenix",			
+			"Phoenixian",		
 			"Phylactery",		
-			"Pietistic",		"Pillar",			"Pine",				
+			"Pietistic",		
+			"Pillar",			
+			"Pine",				
 			"Pinnacle",			
-			"Pioneering",		"Piqued",						
+			"Pioneering",		
+			"Piqued",						
 			"Placid",			
-			"Plague",			"Planar",			
+			"Plague",			
+			"Planar",			
 			"Planetary",			
-			"Plasma",			"Plateau",			"Platinum",		"Pleasant",				"Plucky",			"Plum",				
-			"Poet",				"Poetic",			"Poignant",			
-			"Poisonous",		"Polar",			"Pond",				"Ponderous",		
-			"Pontifical",		"Poppy",			"Porcelain",		"Port",							"Potent",			"Potion",			"Powder",			
-			"Power",			"Poker",			"Powerhouse",			"Prairie",			"Plague",		"Precious",		"Precocious",	"Predatory",	
-			"Preternatural",	"Primal",			"Prime",			"Primeval",			"Primordial",		"Princely",			"Prismatic",		"Prison",			"Private",			"Profound",			"Prohibition",		
-			"Promethean",		"Prophetic",		"Prosperous",		"Protected",		
-			"Proud",		"Psion",		"Pugnacious",		"Pulsar",		
-			"Pulsating",		"Pumpkin",		"Pungent",		"Punk",			
-			"Pure",			"Purifying",	"Purist",		"Purple",			
-			"Puzzled",			"Pyramid",			"Pyro",				"Palm",				"Pandemonium",		"Panicked",			"Papal",			"Paradox",			"Paradoxical",		"Parched",			"Parish",			"Park",				"Parliament",		"Passionate",		"Pack",				"Phantom",			"Primal",			"Pillager",			"Power",			"Powerful",			"Pain",			"Pack",			"Pain",			"Pure",						"Plague",			"Primal",			"Prehistoric",		"Primigenial",		"Primordial",		"Proud",			"Planar",
+			"Plasma",			
+			"Plateau",			
+			"Platinum",		
+			"Pleasant",				
+			"Plucky",			
+			"Plum",				
+			"Poet",				
+			"Poignant",			
+			"Poisonous",		
+			"Polar",			
+			"Pond",				
+			"Ponderous",		
+			"Pontifical",		
+			"Poppy",			
+			"Porcelain",		
+			"Port",							
+			"Potent",			
+			"Potion",			
+			"Powder",			
+			"Power",			
+			"Poker",			
+			"Powerhouse",			
+			"Prairie",			
+			"Plague",		
+			"Precious",		
+			"Precocious",	
+			"Predatory",	
+			"Preternatural",	
+			"Primal",			
+			"Prime",			
+			"Primeval",			
+			"Primordial",		
+			"Princely",			
+			"Prismatic",		
+			"Prison",			
+			"Private",			
+			"Profound",			
+			"Prohibition",		
+			"Promethean",		
+			"Prophetic",		
+			"Prosperous",		
+			"Protected",		
+			"Proud",		
+			"Psion",		
+			"Pugnacious",		
+			"Pulsar",		
+			"Pulsating",		
+			"Pumpkin",		
+			"Pungent",		
+			"Punk",			
+			"Pure",			
+			"Purifying",	
+			"Purist",		
+			"Purple",			
+			"Puzzled",			
+			"Pyramid",			
+			"Pyro",				
+			"Palm",				
+			"Pandemonium",		
+			"Panicked",			
+			"Papal",			
+			"Paradox",			
+			"Paradoxical",		
+			"Parched",			
+			"Parish",			
+			"Park",				
+			"Parliament",		
+			"Passionate",		
+			"Pack",				
+			"Phantom",			
+			"Primal",			
+			"Pillager",			
+			"Power",			
+			"Powerful",			
+			"Pain",			
+			"Pack",			
+			"Pain",			
+			"Pure",						
+			"Plague",			
+			"Primal",			
+			"Prehistoric",		
+			"Primigenial",		
+			"Primordial",		
+			"Proud",			
+			"Planar",
 			]
 		descriptor += [ # Q
 			"Quest",	"Quicksand",			"Quantum",			"Quartz",			"Quasar",			"Queen",						"Quest",			"Questing",			"Quick",			"Quicksand",			"Quicksilver",			"Quiet",			"Quill",	"Quicksilver",
@@ -1066,7 +1279,8 @@ def Descriptor(lusor):
 			"Reverent",		
 			"Rhapsodic",	"Radiant",		"Rhombus",		
 			"Ribbon",		
-			"Rich",			"Riddle",		"Ridge",		  "Rift",		
+			"Rich",			
+			"Riddle",		"Ridge",		  "Rift",		
 			"Righteous",	"Rime",		"Rippling",		"River",	"Riverine",		
 			"Roaming",		"Robotic",		"Rock",		"Rocky",		"Rod",		
 			"Rogue",		"Roman",		"Rooted",		"Rosaline",		"Rose",			
@@ -1076,10 +1290,313 @@ def Descriptor(lusor):
 			"Rusty",		"Ruthless",	"Rune",			"Rune",				"Red",				"Rainstorm",	"Red",				"River",				"Rogue",		"Rune",				"Riding",		"Roaring",
 			]
 		descriptor += [ # S
-			"Starship",	"Shadow",			"Silver",			"Star",				"Sparkling",		"Shining",			"Structures",		"Stellar",			"States",			"Supernova",			"Sunset",				"Sunny",			"Sun",				"Starry",			"Star",				"Space",			"Silvertongued",	"Sempiternal",		"Sorrel",			"Swan",				"Stormchaser",		"Stingray",			"Starship",				"Strength",				"Sunblessed",		"Sun",				"Shadow",			"Secret",			"Supreme",			"Strong",			"Supreme",			"Star",				"Sylvan",			"Shadow",				"Sacred",				"Subterranean",		"Solemn",			"Sorrow",				"Mourning",				"Grief",				"Solar",			"Spirit",			"Shade",			"Stalker",			"Stargazer",		"Stellar",			"Sublime",			"Slaying",			"Saga",					"Sagacious",		"Saint",						"Sanctuary",		"Sand",				"Sandy",			"Sanguine",			"Sanskrit",			"Sapphire",			"Satellite",						"Satyric",			"Savanna",			"Savannah",			"Savant",			"Savvy",			"Scaled",			"Scarab",			"Scarlet",			"Scenic",			"Scented",			"Scepter",						"Scholarly",			"School",			"Science",			"Scientific",		"Scintillating",	"Scion",			"Scorching",		"Scroll",			"Sea",				"Seal",					"Seashore",				"Seasonal",			"Secluded",			"Second",			"Secret",			"Secretive",			"Skeletal",			"Mercenary",		"Seductive",		"Seismic",			"Selenian",			"Sempiternal",		"Sensual",				"Sentimental",			"Seraphic",			"Serene",			"Serpentine",		"Seventh",			"Sewer",			"Seychelle",		"Shade",				"Shaded",				"Shadow",			"Shadowy",			"Shallow",			"Shamanic",			"Shark",			"Shattered",		"Shattering",		"Shield",			"Shielded",			"Shimmering",			"Shining",				"Shivering",		"Shore",			"Shrewd",			"Shrine",			"Sickly",			"Sienna",			"Sigil",			"Silent",			"Silver",			"Silvertongued",		"Simian",				"Singing",			"Sinister",			"Siren",			"Sirenian",			"Sirenic",			"Skeleton",			"Sky",				"Skyborn",			"Skyborn",			"Slate",			"Sleeping",			"Slimey",				"Sly",				"Smart",			"Soul",				"Soulbound",		"Soulfire",			"Soulful",			"Space",			"Spark",			"Sparkling",		"Spartan",				"Spectral",				"Spell",			"Spellbound",		"Spined",			"Spiral",			"Spire",			"Spiritual",		"Spiteful",			"Splendid",			"Spring",			"Sprouting",		"Stadium",				"Staff",			"Stalwart",			"Standard",			"Star",				"Star-born",				"Star-crossed",			"Star-crosser",		"Starborn",			"Starcrossed",		"Starcrosser",		"Starfall",			"Starlit",				"Starry",				"Stars",		"Starting",			"Statute",			"Steadfast",		"Stealthy",			"Steam",			"Steamy",			"Steelhearted",		"Stellar",			"Stern",			"Stinger",			"Stoic",			"Stone",			"Storm",			"Stormbringer",		"Stormcaller",		"Stormy",			"Strait",			"Strategist",		"Stratospheric",	"Stream",		"Strong",				"Sea",							"Stunning",		"Stygian",			"Sublime",			"Subterranean",		"Subtle",			"Sulfuric",			"Sullen",			"Summer",			"Sun",				"Sunborn",			"Sunder",			"Sunflare",			"Sunlit",			"Sunny",			"Sunset",			"Sunstone",			"Superb",			"Supernatural",		"Supernova",		"Supreme",			"Suspicious",		"Swamp",			"Swampy",				"Sweet",			"Swift",			"Sympathetic",		"Synthesis",		"Star", 			"Star",				"Silent",			"Stealth",			"Sea",				"Shadow",			"Smoke",			"Shelled",			"Snowy",			"Solar",			"Solstice",			"Sophisticated",	"Sorcery",				"Sorrowful",		"Stone",			"Sky",				"Slinking",			"Scorched",			"Supreme",				"Spell",			"Spark",			"Star",				"Storm",			"Skull",			"Spark",			"Sylvan",			"Sylvan",			"Solstice", 		"Sand",				"Sand",				"Seventh",			"Second",			"Stone",			"Silver",			"Silk",								"Science",				"Shadow",			"Scale",			"Smoke",			"Sneaky",			"Spring",				"Steam",			"Storm",			"Starting",			"Star",				"Strong",			"Spark",			"Spell",			"Solar", 			"Summer",			"Spirit",			"Starry",			"Stellar",			"Sacred",			"Soul",				"Solar",			"Steel",			"Spirit",
+			"Starship",	
+			"Shadow",			
+			"Silver",			
+			"Star",				
+			"Shining",			
+			"Structures",		
+			"Stellar",			
+			"States",			
+			"Supernova",			
+			"Sunset",				
+			"Sunny",			
+			"Sun",				
+			"Starry",			
+			"Star",				
+			"Space",			
+			"Silvertongued",	
+			"Sempiternal",		
+			"Sorrel",			
+			"Swan",				
+			"Stormchaser",		
+			"Stingray",			
+			"Starship",				
+			"Strength",				
+			"Sunblessed",		
+			"Sun",				
+			"Shadow",			
+			"Secret",			
+			"Supreme",			
+			"Strong",			
+			"Supreme",			
+			"Star",				
+			"Sylvan",			
+			"Shadow",				
+			"Sacred",				
+			"Subterranean",		
+			"Solemn",			
+			"Sorrow",				
+			"Mourning",				
+			"Grief",				
+			"Solar",			
+			"Spirit",			
+			"Shade",			
+			"Stalker",			
+			"Stargazer",		
+			"Stellar",			
+			"Sublime",			
+			"Slaying",			
+			"Saga",					
+			"Sagacious",		
+			"Saint",						
+			"Sanctuary",		
+			"Sand",				
+			"Sandy",			
+			"Sanguine",			
+			"Sanskrit",			
+			"Sapphire",			
+			"Satellite",						
+			"Satyric",			
+			"Savanna",			
+			"Savannah",			
+			"Savant",			
+			"Savvy",			
+			"Scaled",			
+			"Scarab",			
+			"Scarlet",			
+			"Scenic",			
+			"Scent",									
+			"Scholar",			
+			"School",			
+			"Science",			
+			"Scientific",		
+			"Scintillating",	
+			"Scion",			
+			"Scorching",		
+			"Scroll",			
+			"Sea",				
+			"Seal",					
+			"Seashore",				
+			"Seasonal",			
+			"Secluded",			
+			"Second",			
+			"Secret",			
+			"Secretive",			
+			"Skeletal",			
+			"Mercenary",		
+			"Seductive",		
+			"Seismic",			
+			"Selenian",			
+			"Sempiternal",		
+			"Sensual",				
+			"Sentimental",			
+			"Seraphic",			
+			"Serene",			
+			"Serpentine",		
+			"Seventh",			
+			"Sewer",			
+			"Seychelle",		
+			"Shade",				
+			"Shaded",				
+			"Shadow",			
+			"Shadowy",			
+			"Shallow",			
+			"Shamanic",			
+			"Shark",			
+			"Shattered",		
+			"Shattering",		
+			"Shield",			
+			"Shielded",			
+			"Shimmering",			
+			"Shining",				
+			"Shivering",		
+			"Shore",			
+			"Shrewd",			
+			"Shrine",			
+			"Sickly",			
+			"Sienna",			
+			"Sigil",			
+			"Silent",			
+			"Silver",			
+			"Silvertongued",		
+			"Simian",				
+			"Singing",			
+			"Sinister",			
+			"Siren",			
+			"Sirenian",			
+			"Sirenic",			
+			"Skeleton",			
+			"Sky",				
+			"Skyborn",			
+			"Skyborn",			
+			"Slate",			
+			"Sleeping",			
+			"Slimey",				
+			"Sly",				
+			"Smart",			
+			"Soul",				
+			"Soulbound",		
+			"Soulfire",			
+			"Soulful",			
+			"Space",			
+			"Spark",			
+			"Spartan",				
+			"Spectral",				
+			"Spell",			
+			"Spellbound",		
+			"Spined",			
+			"Spiral",			
+			"Spire",			
+			"Spiritual",		
+			"Spiteful",			
+			"Splendid",			
+			"Spring",			
+			"Sprouting",		
+			"Stadium",				
+			"Staff",			
+			"Stalwart",			
+			"Standard",			
+			"Star",				
+			"Star-born",				
+			"Star-crossed",			
+			"Star-crosser",		
+			"Starborn",			
+			"Starcrossed",		
+			"Starcrosser",		
+			"Starfall",			
+			"Starlit",				
+			"Starry",				
+			"Stars",		
+			"Starting",			
+			"Statute",			
+			"Steadfast",		
+			"Stealthy",			
+			"Steam",			
+			"Steamy",			
+			"Steelhearted",		
+			"Stellar",			
+			"Stern",			
+			"Stinger",			
+			"Stoic",			
+			"Stone",			
+			"Storm",			
+			"Stormbringer",		
+			"Stormcaller",		
+			"Stormy",			
+			"Strait",			
+			"Strategist",		
+			"Stratospheric",	
+			"Stream",		
+			"Strong",				
+			"Sea",							
+			"Stunning",		
+			"Stygian",			
+			"Sublime",			
+			"Subterranean",		
+			"Subtle",			
+			"Sulfuric",			
+			"Sullen",			
+			"Summer",			
+			"Sun",				
+			"Sunborn",			
+			"Sunder",			
+			"Sunflare",			
+			"Sunlit",			
+			"Sunny",			
+			"Sunset",			
+			"Sunstone",			
+			"Superb",			
+			"Supernatural",		
+			"Supernova",		
+			"Supreme",			
+			"Suspicious",		
+			"Swamp",			
+			"Swampy",				
+			"Sweet",			
+			"Swift",			
+			"Sympathetic",		
+			"Synthesis",		
+			"Star", 			
+			"Star",				
+			"Silent",			
+			"Stealth",			
+			"Sea",				
+			"Shadow",			
+			"Smoke",			
+			"Shelled",			
+			"Snowy",			
+			"Solar",			
+			"Solstice",			
+			"Sophisticated",	
+			"Sorcery",				
+			"Sorrowful",		
+			"Stone",			
+			"Sky",				
+			"Slinking",			
+			"Scorched",			
+			"Supreme",				
+			"Spell",			
+			"Spark",			
+			"Star",				
+			"Storm",			
+			"Skull",			
+			"Spark",			
+			"Sylvan",			
+			"Sylvan",			
+			"Solstice", 		
+			"Sand",				
+			"Sand",				
+			"Seventh",			
+			"Second",			
+			"Stone",			
+			"Silver",			
+			"Silk",								
+			"Science",				
+			"Shadow",			
+			"Scale",			
+			"Smoke",			
+			"Sneaky",			
+			"Spring",				
+			"Steam",			
+			"Storm",			
+			"Starting",			
+			"Star",				
+			"Strong",			
+			"Spark",			
+			"Spell",			
+			"Solar", 			
+			"Summer",			
+			"Spirit",			
+			"Starry",			
+			"Stellar",			
+			"Sacred",			
+			"Soul",				
+			"Solar",			
+			"Steel",			
+			"Spirit",
 				]
 		descriptor += [ # T
-			"Tireless",			"Treasure",			"Treasure",			"Thorn",			"Twisted",			"Talisman",			"Thorn",			"Timeless",			"Temporal",			"Timebender",		"Time",				"Traditional",		"Timeless",			"Timely",			"True",				"Tenacity",			"Treasure",			"Tomb",				"Time",			"Tomb",				"Tormented",		"Tempest",		"Troll",		"Talisman",	"Tigerstrip",			"Time",				"Timeless",			"Time",				"Titanic",			"Token",			"Tomb",				"Trick",			"Topaz",			"Torch",			"Totem",			"Town",				"Traditional",		"Trail",			"Trance",		"Tranquil",			"Transcend",		"Transcendent",		"Transient",		"Traveling",	"Treacherous",	"Tremendous",		"Tribal",			"Tribe",			"Tribunal",			"Trickster",		"Trojan",			"Tropical",			"True",				"Tudor",			"Tulip",			"Tundra",			"Turbulent",		"Turquoise",		"Turtle",			"Twilight",			"Twisted",			"Typhoon",			"Talon",		"Tangerine",		"Tartarean",		"Taupe",			"Tavern",			"Teal",			"Tectonic",		"Tempest",			"Tempestuous",		"Temple",		"Temporal",		"Tenacious",		"Tender",		"Tentacled",		"Terra",			"Terrifying",		"Thaumaturge",		"Theater",			"Theocratic",		"Thicket",			"Third",			"Thorn",			"Thorny",			"Thousand",			"Threatening",		"Thunder",		"Thundering",		"Thunderous",		"Tidal",			"Tide",				"Timeless",		"Thorn",		"Talisman",		"Threatening",		"Time",		"Time-bender",		"Timebender",		"Timeless",		"Titanic",		"Twilight",			"Terrifying",		"Terrorific",		"True",				"Tower",			"Thunder",			"Thunder",			"Tomb",				"Third",			"Trival",			"Thunder",			"Terrifying",		"Treasure",			"Throne",			"Tide",				"Time",			"Timeless",
+			"Tireless",			
+			"Treasure",			"Treasure",			
+			"Thorn",			"Twisted",			
+			"Talisman",			"Thorn",			
+			"Timeless",			"Temporal",			
+			"Timebender",		"Time",				
+			"Traditional",		"Timeless",			
+			"Timely",			"True",				
+			"Tenacity",			"Treasure",			
+			"Tomb",				"Time",			
+			"Tomb",				
+			"Tormented",		
+			"Tempest",		"Troll",		"Talisman",	
+			"Tigerstrip",			"Time",				
+			"Timeless",			"Time",				
+			"Titanic",			"Token",			
+			"Tomb",				"Trick",			"Topaz",			"Torch",			
+			"Totem",			
+			"Town",				"Traditional",		
+			"Trail",			"Trance",		
+			"Tranquil",			"Transcend",		
+			"Transcendent",		"Transient",		"Traveling",	"Treacherous",	
+			"Tremendous",		"Tribal",			"Tribe",			"Tribunal",			
+			"Trickster",		"Trojan",			"Tropical",			"True",				
+			"Tudor",			"Tulip",			"Tundra",			
+			"Turbulent",		"Turquoise",		"Turtle",			"Twilight",			
+			"Twisted",			"Typhoon",			"Talon",		"Tangerine",		
+			"Tartarean",		"Taupe",			"Tavern",			"Teal",			
+			"Tectonic",		"Tempest",			"Tempestuous",		"Temple",		
+			"Temporal",		"Tenacious",		"Tender",		"Tentacled",		"Terra",			"Terrifying",		"Thaumaturge",		"Theater",			"Theocratic",		"Thicket",			"Third",			"Thorn",			"Thorny",			"Thousand",			"Threatening",		"Thunder",		"Thundering",		"Thunderous",		"Tidal",			"Tide",				"Timeless",		"Thorn",		"Talisman",		"Threatening",		"Time",		"Time-bender",		"Timebender",		"Timeless",		"Titanic",		"Twilight",			"Terrifying",		"Terrorific",		"True",				"Tower",			"Thunder",			"Thunder",			"Tomb",				"Third",			"Trival",			"Thunder",			"Terrifying",		"Treasure",			"Throne",			"Tide",				"Time",			"Timeless",
 			]
 		descriptor += [ # U
 			"Unholy",		
@@ -1122,6 +1639,7 @@ def Descriptor(lusor):
 			"Underground",
 			]
 		descriptor += [ # V
+			"Vengeful",		
 			"Voltaic",		
 			"Venerable",	
 			"Venom",		
@@ -1170,7 +1688,6 @@ def Descriptor(lusor):
 			"Visionary",				
 			"Vitriolic",	
 			"Void",			
-			"Vengeful",		
 			"Voidborne",	
 			"Voided",		
 			"Voidless",		
@@ -1204,16 +1721,77 @@ def Descriptor(lusor):
 			"Venom",				"Vicious",				"Volcanic",				"Venom",
 			]
 		descriptor += [ # W
-			"Whitescale",	"Whisper",     "Waterwind",		"Walking",			"Wandering",		"Wealth",			"War",				"Waterborn",		"Water",			"Water",			"Wave",				"Whim",				"Whisper",		"Wholesome",		"Wild",			"Windborn",		"Wind",			"Windborn",		"Winged",		"Winter",		"Wooden",		"Wisdom",		"Witch",			"Wise",				"Winterborn",		"Wolf",			"Wrathful",		"Witty",			"Wandering",		"White",			"War",				"Wormhole",			"Warp",				    "Winter",			"Windy",			"Wind",				"Wailing",			"Wind",				"Wild",				"Wind",			"Wood",				"Wand",			"Wave",			"Wandering",	"War",						"Warp",			"Warping",		"Wary",				"Water",			"Watery",		"Wave",			"Wavy",				"Weapon",			"Weatherlight",		"Web",				"Western",							"Whale",			"Whimsy",			"Whirlwind",		"Whispering",		"Whistle",			"White",			"Wicked",		"Wight",			"Wild",				"Wilderness",	"Wildfire",		"Willow",		"Windy",		"Winged",		"Winter",		"Winterborn",		"Wise",			"Wisp",			     "Witchy",		"Withering",		"Witted",			"Wondrous",			"Woodland",			"Woods",			"Woody",			"Workshop",			"World",			"Wormhole",						"Wrathful",			"Woodland",			"Wind",			"White",			"Water",			"War",			"Warp",			"War",			"Warping",		"Water",		"White",		"Wise",				"Wind",			"Winter",		"Wild",				"Wolf",				"Wind",			"Wild",			"Wicked",
+			"Whitescale",	
+			"Whisper",     
+			"Waterwind",		
+			"Walking",			
+			"Wandering",		
+			"Wealth",			
+			"War",				
+			"Waterborn",		
+			"Water",			
+			"Water",			
+			"Wave",				
+			"Whim",				
+			"Whisper",		
+			"Wholesome",		
+			"Wild",			
+			"Windborn",		
+			"Wind",			
+			"Windborn",		
+			"Winged",		
+			"Winter",		
+			"Wooden",		
+			"Wisdom",		
+			"Witch",			
+			"Wise",				
+			"Winterborn",		
+			"Wolf",			
+			"Wrathful",		
+			"Witty",			"Wandering",		
+			"White",			"War",				
+			"Wormhole",			"Warp",				    
+			"Winter",			"Windy",			"Wind",				
+			"Wailing",			"Wind",				
+			"Wild",				"Wind",			
+			"Wood",				"Wand",			"Wave",			"Wandering",	"War",						"Warp",			"Warping",		"Wary",				"Water",			"Watery",		"Wave",			"Wavy",				"Weapon",			"Weatherlight",		"Web",				"Western",							"Whale",			"Whimsy",			"Whirlwind",		"Whispering",		"Whistle",			"White",			"Wicked",		"Wight",			
+			"Wild",				
+			"Wilderness",	
+			"Wildfire",		"Willow",		"Windy",		"Winged",		"Winter",		"Winterborn",		"Wise",			"Wisp",			     "Witchy",		"Withering",		"Witted",			"Wondrous",			"Woodland",			"Woods",			"Woody",			
+			"World",			"Wormhole",						"Wrathful",			"Woodland",			"Wind",			"White",			"Water",			"War",			"Warp",			"War",			"Warping",		"Water",		"White",		"Wise",				"Wind",			"Winter",		
+			"Wild",				"Wolf",				"Wind",			
+			"Wild",			"Wicked",
 			]
 		descriptor += [ # X
-			"X-Ray",			"Xenolith",			"Xenon",
+			"X-Ray",			
+			"Xenolith",			
+			"Xenon",
 			]
 		descriptor += [ # Y
-									"Yearning",				"Yesteryear",								"Youthful",				"Yellow",
+			"Yearning",				
+			"Yesteryear",								
+			"Youthful",				
+			"Yellow",
 				]
 		descriptor += [ # Z
-			"Zephyr",	"Zodiacal",		"Zodiac",			"Zombie",			"Zealot",			"Zealous",			"Zen",			"Zenith",			"Zephyr",			"Zephyrian",			"Zestful",			"Zeusian",			"Zodiac",			"Zodiacal",			"Zone",			"Zoo",			"Zypher",			"Zombie",
+			"Zephyr",	
+			"Zodiacal",		
+			"Zodiac",			
+			"Zombie",			
+			"Zealot",			
+			"Zealous",			
+			"Zen",			
+			"Zenith",			
+			"Zephyr",			
+			"Zephyrian",			
+			"Zestful",			
+			"Zeusian",			
+			"Zodiac",			
+			"Zodiacal",			
+			"Zone",			
+			"Zoo",			
+			"Zypher",			
+			"Zombie",
 			]
 	except:
 		descriptor += ["Dark"]
@@ -1221,32 +1799,69 @@ def Descriptor(lusor):
 	# Backgrounds
 	if "Barbarian"	in genus:
 		descriptor += [
-			"Frantic",	"Raging",		"Wild",		"Fierce",		 "Savage",		 "Untamed",		 "Mighty",
+			"Frantic",	
+			"Raging",		
+			"Wild",		
+			"Fierce",		 
+			"Savage",		 
+			"Untamed",		 
+			"Mighty",
 			]
 	if "Berserker"	in genus:
 		descriptor += [
-			"Frantic",	"Raging",		"Wild",		"Frenzy",		"Unstoppable",		"Fury",		"Fierce",		 "Savage",		 "Untamed",		 "Mighty",		 "War",		 "Warrior",
+			"Frantic",	"Raging",		
+			"Wild",		"Frenzy",		
+			"Unstoppable",		"Fury",		
+			"Fierce",		 "Savage",		 
+			"Untamed",		 "Mighty",		 
+			"War",		 "Warrior",
 			]
 	if "Cultist" 	in genus:
 		descriptor += [
-			"Celestial",	"Cult",		"Fanatical",	"Friar",			"Mystical",		"Secret",			"Zealous",		"Obscure",
+			"Celestial",	"Cult",		
+			"Fanatical",	"Friar",			
+			"Mystical",		"Secret",			
+			"Zealous",		"Obscure",
 			]
 	if "Charlatan"	in genus:
 		descriptor += [
-		"Deception",		"Charm",		"Charmming",		"Sly",		"Smooth",		"Stylish",		"Wealthy",		"Word",
+		"Deception",		
+		"Charm",		
+		"Charmming",		
+		"Sly",		
+		"Smooth",		
+		"Stylish",		
+		"Wealthy",		
+		"Word",
 		]
 	if "Commoner" 	in genus:
 		descriptor += [
-		"Honest",		"Modest",
-				"Village",
-		]
+			"Honest",		
+			"Modest",
+			"Village",
+			]
 	if "Crafter" 	in genus:
 		descriptor = [
-		"Voltaic",		"Mender",		"Master",		"Skillful",		"Artisanal",		"Dexterous",		"Inventive",
-		]
+			"Voltaic",		
+			"Mender",		
+			"Master",		
+			"Skillful",		
+			"Artisanal",		
+			"Dexterous",		
+			"Inventive",
+			]
 	if "Criminal" 	in genus:
 		descriptor += [
-			"Barber",		"Mercenary",				"Crime",		"Underworld",		 "Sneaking",		 "Sneaky",		 "Ruthless",		 "Shade",		 "Shady",		 "Clever",
+			"Barber",		
+			"Mercenary",				
+			"Crime",		
+			"Underworld",		 
+			"Sneaking",		 
+			"Sneaky",		 
+			"Ruthless",		 
+			"Shade",		
+			"Shady",		 
+			"Clever",
 			]
 	if "Cleric"		in genus:
 		descriptor += [
@@ -1277,43 +1892,97 @@ def Descriptor(lusor):
 			]
 	if "Expert" 	in genus:
 		descriptor += [
-			"Historic",		"Knowledge",		"Skill",
+			"Historic",		
+			"Knowledge",		
+			"Skill",
 			]
 	if "Explorer" 	in genus:
 		descriptor += [
-			"Adventure",			"Brave",			"Daring",			"Jungle",			"Migratory",			"Nomadic",			"Nomad",			"Roaming",			"Traveling",			"Wandering",
-			 ]
+			"Adventure",			
+			"Brave",			
+			"Daring",			
+			"Jungle",			
+			"Migratory",			
+			"Nomadic",			
+			"Nomad",			
+			"Roaming",			
+			"Traveling",			
+			"Wandering",
+			]
 	if "Fighter" 	in genus:
 		descriptor += [
-		"Mercenary",		"Battle","Battle","Battleground","War",
-		]
+			"Mercenary",		
+			"Battle",
+			"Battle",
+			"Battleground",
+			"War",
+			]
 	if "Guardian" 	in genus:
 		descriptor += [
-			"Guardan",	"Guarding",	"Protector",	"Alert",		"Discipline",		"Protector",
-			 ]
+			"Guardan",	
+			"Guarding",	
+			"Protector",	
+			"Alert",		
+			"Discipline",		
+			"Protector",
+			]
 	if "Healer" 	in genus:
 		descriptor += [
-		"Celestial",	"Compassion","Heal","Wise","Care",
-		]
+			"Celestial",	
+			"Compassion",
+			"Heal",
+			"Wise",
+			"Care",
+			]
 	if "Hero" 		in genus:
 		descriptor += [
-			"Celestial",	"Valiant", "Brave", "Heroic", "Gallant",
+			"Celestial",	
+			"Valiant", 
+			"Brave", 
+			"Heroic", 
+			"Gallant",
 			]
 	if "Hunter" 	in genus:
 		descriptor += [
-			"Jungle",   "Green","Stealth", "Rugged",			 "Trapper", "Wild", "Gloom",
+			"Jungle",   
+			"Green",
+			"Stealth", 
+			"Rugged",			 
+			"Trapper", 
+			"Wild", 
+			"Gloom",
 			]
 	if "Knight" 	in genus:
 		descriptor += [
-			"Chivalrous",			"Gallant",			"Golden",			"Honorable",			"Bold",			"Cavalier",
+			"Chivalrous",			
+			"Gallant",			
+			"Golden",			
+			"Honorable",			
+			"Bold",			
+			"Cavalier",
 			]
 	if "Monk" 		in genus:
 		descriptor += [
-			"Monastery",	"Monastic",	"Artisan",	"Grace",	"Celestial",	"Urn",				"Discipline",				"Spiritual",				"Meditative",				"Ascetic",				"Harmony",
-				]
+			"Monastery",	
+			"Monastic",	
+			"Artisan",	
+			"Grace",	
+			"Celestial",	
+			"Urn",				
+			"Discipline",				
+			"Spiritual",				
+			"Meditative",				
+			"Ascetic",				
+			"Harmony",
+			]
 	if "Merchant" 	in genus:
 		descriptor += [
-			"Shrewd",			"Wealthy",			"Trading",			"Skilled",			"Resourceful",			"Prosperous",
+			"Shrewd",			
+			"Wealthy",			
+			"Trading",			
+			"Skilled",			
+			"Resourceful",			
+			"Prosperous",
 			]
 	if "Noble"		in genus:
 		descriptor += [
@@ -1321,15 +1990,36 @@ def Descriptor(lusor):
 			]
 	if "Pirate" 	in genus:
 		descriptor += [
-				"Ruthless",			"Swashbuckling",				"Seafaring",							"Rebel",			"Infamous",				"Treasure",			"Booty",			"Dock",
+				"Ruthless",			
+				"Swashbuckling",				
+				"Seafaring",							
+				"Rebel",			
+				"Infamous",				
+				"Treasure",			
+				"Booty",			
+				"Dock",
 				]
 	if "Traveler"	in genus:
 		descriptor += [
-			"Migratory",			"Nomadic",			"Nomad",			"Roaming",			"Traveling",			"Wandering",			"Circus",
+			"Migratory",			
+			"Nomadic",			
+			"Nomad",			
+			"Roaming",			
+			"Traveling",			
+			"Wandering",			
+			"Circus",
 			]
 	if "Trickster" 	in genus:
 		descriptor += [
-			"Surviving",			"Quick",			"Lonely",			"Resourceful",			"Scrappy",			"Streetwise",			"Surviving",			"Scrappy",			"Quick",
+			"Surviving",			
+			"Quick",			
+			"Lonely",			
+			"Resourceful",			
+			"Scrappy",			
+			"Streetwise",			
+			"Surviving",			
+			"Scrappy",			
+			"Quick",
 			]
 	if "Priest"		in genus:
 		descriptor = [
@@ -1368,14 +2058,19 @@ def Descriptor(lusor):
 			"Sneaky",  
 			"Masterful",		  
 			"Cunning",		  
-			"Agile",		  "Mysterious",	  
+			"Agile",		  
+			"Mysterious",	  
 			"Resourceful",		  
 			"Shady",		  
 			"Shadow",
-		  ]
+			]
 	if "Scholar" 	in genus:
 		descriptor += [
-			"Learned",	"Learned",	"Learned",			"Intellectual",	"Intellectual",	"Intellectual",			"Studious",	"Studious",	"Studious",			"Erudite",	"Erudite",	"Erudite",			"Inquisitive",	"Inquisitive",	"Inquisitive",
+			"Learned",		
+			"Intellectual",		
+			"Studious",		
+			"Erudite",		
+			"Inquisitive",
 			]
 	if "Soldier" 	in genus:
 		descriptor += [
@@ -1607,7 +2302,9 @@ def Descriptor(lusor):
 			]
 	if "Beast" 		in genus:
 		descriptor += [
-			"Tailed",		"Tusked",			"Wild",
+			"Tailed",		
+			"Tusked",			
+			"Wild",
 			]
 		if "Kong" 			in genus:
 			descriptor += [
@@ -1640,7 +2337,14 @@ def Descriptor(lusor):
 				]
 		if "Giant Eagle" 	in genus:
 			descriptor += [
-				"Celestial",	  "Majestic",				  "Sky",				  "Soaring",				  "Keen",				  "Eagle",				  "Sky",				  "Wing",				  "Aerial",				  "Feather",
+				"Celestial",	  
+				"Majestic",				  
+				"Sky",				  
+				"Soaring",				  
+				"Keen",				  
+				"Eagle",				  "Sky",				  
+				"Wing",				  "Aerial",				  
+				"Feather",
 				  ]
 		if "Tiger" 			in genus:
 			descriptor += [
@@ -1685,7 +2389,36 @@ def Descriptor(lusor):
 				"Feline",
 				]
 	if "Celestial" 	in genus:
-		descriptor += [ 	"Amber",	"Astral",	"Blessed",	"Celestial",	"Divine",	"Ethereal",	"Fire",	"Flame",		"Golden",	"Green",	"Heavenly",	"Radiant",	"Sacred",		"Shadow",	"Sky",	"Sublime",	"Yellow",	"Luminous", 	"Celestial", 	"Darkness",	"Divine",		"Ethereal", 	"Flame",	"Golden",	"Green",		"Heavenly",	"Radiant", 		"Shadow",	"Sky", 
+		descriptor += [ 	
+			"Amber",	
+			"Astral",	
+			"Blessed",	
+			"Celestial",	
+			"Divine",	
+			"Ethereal",	
+			"Fire",	
+			"Flame",		
+			"Golden",	
+			"Green",	
+			"Heavenly",	
+			"Radiant",	
+			"Sacred",		
+			"Shadow",	
+			"Sky",	
+			"Sublime",	
+			"Yellow",	
+			"Luminous", 	
+			"Celestial", 	
+			"Darkness",	
+			"Divine",		
+			"Ethereal", 	
+			"Flame",	
+			"Golden",	
+			"Green",		
+			"Heavenly",	
+			"Radiant", 		
+			"Shadow",	
+			"Sky", 
 			]
 		if "Planetar" in genus:
 			descriptor += [
@@ -1759,6 +2492,7 @@ def Descriptor(lusor):
 			"Mountain",
 			"Boulder",
 			"Gigantic",
+			"Roaring",
 			]
 	if "Gnome"		in genus:
 		descriptor +=[
@@ -1766,7 +2500,8 @@ def Descriptor(lusor):
 		]
 	if "Goblin"		in genus:
 		descriptor += [
-			"Knot",			"Knot",			"Knot",
+			"Knot",			
+			"Knot",			
 			"Cave",			
 			"Grease",		
 			"Trick",
@@ -1781,18 +2516,21 @@ def Descriptor(lusor):
 
 	if "Halfling"	in genus:
 		descriptor += [
-		"Plucky",
-		]
+			"Plucky",
+			]
 	if "Orc"		in genus:
 		descriptor += [
-		"Tusked",
-		"Green",
-		"Green Skin",
-		]
+			"Tusked",
+			"Green",
+			"Green Skin",
+			"Greenblood",
+			"Emerald",
+			]
 	if "Ooze"		in genus:
 		descriptor += [
-		"Bituminous",	"Amber",
-		]
+			"Bituminous",	
+			"Amber",
+			]
 	if "Plant"		in genus:
 		descriptor += [
 			"Spore",
@@ -1805,10 +2543,22 @@ def Descriptor(lusor):
 				]
 	if "Undead" 	in genus:
 		descriptor += [
-			"Undying",		"Deathless",	"Grave",		"Sepulchral",
-			"Necrotic",		"Withered",		"Hollow",		"Cadaverous",
-			"Pallid",		"Restless",		"Mournful",		"Shrouded",
-			"Grim",			"Eternal",		"Cursed",		"Spectral",
+			"Undying",		
+			"Deathless",	
+			"Grave",		
+			"Sepulchral",
+			"Necrotic",		
+			"Withered",		
+			"Hollow",		
+			"Cadaverous",
+			"Pallid",		
+			"Restless",		
+			"Mournful",		
+			"Shrouded",
+			"Grim",			
+			"Eternal",		
+			"Cursed",		
+			"Spectral",
 			]
 		if "Skeleton" in genus:
 			descriptor += [
@@ -1832,20 +2582,34 @@ def Descriptor(lusor):
 				]
 		elif "Mummy" in genus:
 			descriptor += [
-				"Bandaged",		"Embalmed",		"Ancient",		"Desiccated",
+				"Bandaged",		
+				"Embalmed",		
+				"Ancient",		
+				"Desiccated",
+				"Mummified",
+				
 				]
 		elif "Revenant" in genus:
 			descriptor += [
-				"Vengeful",		"Returned",		"Oathbound",
+				"Vengeful",		
+				"Returned",		
+				"Oathbound",
+
 				]
 		elif "Ghoul" in genus:
 			descriptor += [
-				"Ravenous",		"Carrion",		"Gravehungry",
+				"Ravenous",		
+				"Carrion",		
+				"Gravehungry",
+				"Graveborn",
 				]
 	if "Vampire" 	in genus:
 		descriptor += [
-			"Blood",		"Blood",		"Blood",
-			"Night",		"Night",		
+			"Blood",		
+			"Blood",		
+			"Blood",
+			"Night",		
+			"Night",		
 			"Nocturnal",
 			"Crimson",		
 			"Pale",			
@@ -1854,7 +2618,8 @@ def Descriptor(lusor):
 			"Bloodsoaked",	
 			"Vampiric",
 			"Dark Sun",		
-			"Sun",			"Sun",			
+			"Sun",			
+			"Sun",			
 			"Bloodtithe",
 			]
 	if "Sun Scarab" in genus:
@@ -1873,7 +2638,16 @@ def Descriptor(lusor):
 			]
 	if "Eosian" 	in genus:
 		descriptor += [
-			"Dawnbringer",			"Daybreak",			"Daylight",			"Ethereal",			"Luminous",			"Morning",			"Radiant",			"Solar",			"Sunlit",			"Sunrise",
+			"Dawnbringer",			
+			"Daybreak",			
+			"Daylight",			
+			"Ethereal",			
+			"Luminous",			
+			"Morning",			
+			"Radiant",			
+			"Solar",			
+			"Sunlit",			
+			"Sunrise",
 			]
 	if "Nymph" 		in genus:
 		descriptor += [
@@ -2014,7 +2788,21 @@ def Descriptor(lusor):
 				]
 		if "Red" in genus:
 			descriptor += [	
-				"Red",			"Fireborn",				"Fireblood",				"Firewing",				"Fireclaw",				"Firetail",				"Firescale",				"Firewing",				"Fireclaw",				"Firetail",				"Firescale",				"Crimson", "Flameborn", "Volcanic", "Furious"
+				"Red",			
+				"Fireborn",				
+				"Fireblood",				
+				"Firewing",				
+				"Fireclaw",				
+				"Firetail",				
+				"Firescale",				
+				"Firewing",				
+				"Fireclaw",				
+				"Firetail",				
+				"Firescale",				
+				"Crimson", 
+				"Flameborn", 
+				"Volcanic", 
+				"Furious"
 				]
 		if "Green" in genus:
 			descriptor += [
@@ -2030,15 +2818,50 @@ def Descriptor(lusor):
 				]
 		if "White" in genus:
 			descriptor += [
-				"White", "Ice", "Frost", "Cold", "Winter", "Snow", "Frozen", "Frostborn", "Iceborn", "Iceblood", "Icewing", "Iceclaw", "Icetail", "Icecale", "Icewing", "Iceclaw", "Icetail", "Icecale", "Frostborn", "Iceborn", "Iceblood", "Icewing", "Iceclaw", "Icetail", "Icecale",
+				"White", 
+				"Ice", 
+				"Frost", 
+				"Cold", 
+				"Winter", 
+				"Snow", 
+				"Frozen", 
+				"Frostborn", 
+				"Iceborn", 
+				"Iceblood", 
+				"Icewing", 
+				"Iceclaw", 
+				"Icetail", 
+				"Icecale", 
+				"Icewing", 
+				"Iceclaw", 
+				"Icetail", 
+				"Icecale", 
+				"Frostborn", 
+				"Iceborn", 
+				"Iceblood", 
+				"Icewing", 
+				"Iceclaw", 
+				"Icetail", 
+				"Icecale",
 				]
 		if "Gold" in genus:
 			descriptor += [	
-				"Gold", "Golden", "Sun", "Sunlight", "Sunlit",   "Sunrise", "Sunset", "Sunstone", "Sunflare",  
+				"Gold", 
+				"Golden", 
+				"Sun", 
+				"Sunlight", 
+				"Sunlit",   
+				"Sunrise", 
+				"Sunset", 
+				"Sunstone", 
+				"Sunflare",  
 				]
 		if "Silver" in genus:
 			descriptor += [
-				"Silver", "Silver", "Moon", "Moonlight", 
+				"Silver", 
+				"Silver", 
+				"Moon", 
+				"Moonlight", 
 				]
 		if "Bronze" in genus:
 			descriptor += [
@@ -2216,7 +3039,13 @@ def Descriptor(lusor):
 			]
 	if "Centaur" in genus:
 		descriptor += [
-			"Centaur",			"Equs",			"Forest",			"Horse",			"Herd",			"Hooved",					"Wildheart",
+			"Centaur",			
+			"Equs",			
+			"Forest",			
+			"Horse",			
+			"Herd",			
+			"Hooved",					
+			"Wildheart",
 			]
 	if "Fiend" in genus:
 		descriptor += [
@@ -2241,7 +3070,35 @@ def Descriptor(lusor):
 			]
 	if "Ooze" in genus:
 		descriptor += [
-			"Absorbing",		  "Absorbing",		  "Acidic",		  "Amorphous",		  "Amorphous",		  "Ashen",		  "Crystalline",		  "Cubic",	"Earthen",		  "Fiery",		  "Fluidic",		  "Fungal",		  "Gelatinous",		  "Gelatinous",		  "Glowing",		  "Icy",		  "Mystical",		  "Poisonous",		  "Shapeless",		  "Shapeless",		  "Slime",		  "Slithering",		  "Slithering",		  "Sticky",		  "Thick",		  "Translucent",		  "Viscous",		  "Viscous",		  "Viscous",
+			"Absorbing",		  
+			"Absorbing",		  
+			"Acidic",		  
+			"Amorphous",		  
+			"Amorphous",		  
+			"Ashen",		  
+			"Crystalline",		  
+			"Cubic",	
+			"Earthen",		  
+			"Fiery",		  
+			"Fluidic",		  
+			"Fungal",		  
+			"Gelatinous",		  
+			"Gelatinous",		  
+			"Glowing",		  
+			"Icy",		  
+			"Mystical",		  
+			"Poisonous",		  
+			"Shapeless",		  
+			"Shapeless",		  
+			"Slime",		  
+			"Slithering",		  
+			"Slithering",		  
+			"Sticky",		  
+			"Thick",		  
+			"Translucent",		  
+			"Viscous",		  
+			"Viscous",		  
+			"Viscous",
 			]
 	if "High" in genus:
 		descriptor += [
@@ -2290,7 +3147,17 @@ def Descriptor(lusor):
 		]
 	if "Chaotic" in genus:
 		descriptor += [
-			"Untamed",			"Chaos",			"Chaos",		"Anarchy",			"Mad",			"Free",			"Chaotic",			"Unpredictable",			"Mad",			"Erratic",			"Anarchic",			"Anarchist",
+			"Untamed",			
+			"Chaos",			
+			"Chaos",		
+			"Anarchy",			
+			"Free",			
+			"Chaotic",			
+			"Unpredictable",	
+			"Erratic",			
+			"Anarchic",			
+			"Anarchist",
+			"Freedom",
 			]
 
 	if "Evil"		in genus:
@@ -2363,7 +3230,6 @@ def Descriptor(lusor):
 		"Golden", 
 		"Goldenrod",
 		"Ochre",					
-		"Lime",					
 		"Green", 
 		"Jade",
 		"Olive",					
@@ -2462,7 +3328,6 @@ def Descriptor(lusor):
 		"Interstellar",	
 		"Lagoon",	
 		"Leviathan",	
-		"Lime",	
 		"Liquid",	
 		"Lord",	
 		"Lunar",	
@@ -2501,91 +3366,6 @@ def Descriptor(lusor):
 		"Protector",	
 		"Psychic",
 		]
-	try:
-		descriptor += [
-			f"{lusor.archetype}",	
-			f"{lusor.archetype}",	
-			f"{lusor.archetype}",	
-			f"{lusor.archetype}",	
-			f"{lusor.archetype}",	
-			f"{lusor.archetype}",	
-			f"{lusor.archetype}",	
-			f"{lusor.archetype}",	
-			f"{lusor.archetype}",	
-			f"{lusor.archetype}",
-			f"{lusor.race}",		
-			f"{lusor.race}",		
-			f"{lusor.race}",		
-			f"{lusor.race}",		
-			f"{lusor.race}",		
-			f"{lusor.race}",		
-			f"{lusor.race}",		
-			f"{lusor.race}",		
-			f"{lusor.race}",		
-			f"{lusor.race}",
-			f"{lusor.subrace}",		
-			f"{lusor.subrace}",		
-			f"{lusor.subrace}",		
-			f"{lusor.subrace}",		
-			f"{lusor.subrace}",		
-			f"{lusor.subrace}",		
-			f"{lusor.subrace}",		
-			f"{lusor.subrace}",		
-			f"{lusor.subrace}",		
-			f"{lusor.subrace}",	
-			f"{lusor.subrace}",	
-			f"{lusor.subrace}",
-			]
-	except:
-		try:
-			descriptor += [
-				f"{lusor.species}",	
-				f"{lusor.species}",	
-				f"{lusor.species}",	
-				f"{lusor.species}",	
-				f"{lusor.species}",	
-				f"{lusor.species}",	
-				f"{lusor.species}",	
-				f"{lusor.species}",	
-				f"{lusor.species}",	
-				f"{lusor.species}",
-				f"{lusor.char_class}",		
-				f"{lusor.char_class}",		
-				f"{lusor.char_class}",		
-				f"{lusor.char_class}",		
-				f"{lusor.char_class}",		
-				f"{lusor.char_class}",		
-				f"{lusor.char_class}",		
-				f"{lusor.char_class}",		
-				f"{lusor.char_class}",		
-				f"{lusor.char_class}",
-				f"{lusor.subclass}",		
-				f"{lusor.subclass}",		
-				f"{lusor.subclass}",		
-				f"{lusor.subclass}",		
-				f"{lusor.subclass}",		
-				f"{lusor.subclass}",		
-				f"{lusor.subclass}",		
-				f"{lusor.subclass}",		
-				f"{lusor.subclass}",		
-				f"{lusor.subclass}",	
-				f"{lusor.subclass}",	
-				f"{lusor.subclass}",
-				f"{lusor.background}",		
-				f"{lusor.background}",		
-				f"{lusor.background}",		
-				f"{lusor.background}",		
-				f"{lusor.background}",		
-				f"{lusor.background}",		
-				f"{lusor.background}",		
-				f"{lusor.background}",		
-				f"{lusor.background}",		
-				f"{lusor.background}",	
-				f"{lusor.background}",	
-				f"{lusor.background}",
-				]
-		except:
-			pass
 
 	return random.choice(descriptor)
 
@@ -2596,7 +3376,11 @@ def Rank(lusor):
 	and sounds cool!!!
 	X goes here
 	'''
-	genus = Genus(lusor)
+	try:
+		genus = lusor.genus
+	except:
+		genus = lusor
+		
 	MALE    = "He"    in genus
 	FEMALE  = "She"   in genus
 	AGENDER = "They"  in genus
@@ -2608,7 +3392,6 @@ def Rank(lusor):
 		# A
 		rank += [
 			"Adventurer",		
-			"Arcanist",			
 			"Ash",				
 			"Alpha",			
 			"Abysswalker",		
@@ -2669,7 +3452,6 @@ def Rank(lusor):
 			"Apprentice",			
 			"Apprentice",			
 			"Apprentice",		
-			"Arcanist",			
 			"Archbishop",		
 			"Archduke",			
 			"Archer",			
@@ -2704,7 +3486,7 @@ def Rank(lusor):
 			"Bane",			
 			"Born",			
 			"Bringer",		
-			"Brutal",		
+			"Brute",		
 			"Bard",			
 			"Buccaneer",		
 			"Bound",			
@@ -2881,34 +3663,156 @@ def Rank(lusor):
 		rank += [
 			"Disciple",			
 			"Drake",			
-			"Duelist",			"Dreamer",		
+			"Duelist",			
+			"Dreamer",		
 			"Detective",		
 			"Dreamweaver",		
-			"Dancer",							"Devil",			
-			"Death",			"Diviner",			
+			"Dancer",							
+			"Devil",			
+			"Death",			
+			"Diviner",			
 			"Dancer",			
-			"Devastator",		"Defender",			
-			"Dust",			"Dweller",	
+			"Devastator",		
+			"Defender",			
+			"Dust",			
+			"Dweller",	
 			"Demon",									
 			"Dragon",						
-			"Diamond",			"Dagger",			
+			"Diamond",			
+			"Dagger",			
 			"Dancer",			
-			"Dragon",			"Devourer",			
+			"Dragon",			
+			"Devourer",			
 			"Diviner",			
-			"Dancer",			"Darkness",			
+			"Dancer",			
+			"Darkness",			
 			"Diamond",						
-			"Death",	"Devil",					
+			"Death",	
+			"Devil",					
 			"Drake",			
-			"Druid",	"Dream",			"Devourer",			
-			"Defiler",			"Dame",	"Dancer",			"Dancer",	
-			"Daredevil",			 "Dawn",	"Deacon",			"Dean",			
-			"Death",			"Decay",	"Deceiver",			"Deepseer",						
-			"Defender",			"Deity",			"Delegate",			
-			"Delver",		"Demigod",			"Demon",		"Demonhunter",			"Demon",			"Demonologist",			"Depth",			"Depths",			"Derringer",			"Descendant",			"Desolation",			"Desperado",			"Despot",			"Detective",			"Devil",			"Devotion",			"Devourer",			"Diamond",			"Dictator",					"Diplomat",			"Disciple",		"Discoverer",							"Dominator",		"Doom",			"Dove",			"Dragon",			"Drake",			"Dread",			"Dream",			"Dryad",			"Demonologist",			"Dancer",			"Devourer",			"Drifter",			"Druid",						"Dryad",			"Duelist",			"Duke",				"Delver",			"Dungeoneer",
+			"Druid",	
+			"Dream",			
+			"Devourer",			
+			"Defiler",			
+			"Dame",	
+			"Dancer",			
+			"Dancer",	
+			"Daredevil",			 
+			"Dawn",	
+			"Deacon",			
+			"Dean",			
+			"Death",			
+			"Decay",	
+			"Deceiver",			
+			"Deepseer",						
+			"Defender",			
+			"Deity",			
+			"Delegate",			
+			"Delver",		
+			"Demigod",			
+			"Demon",		
+			"Demonhunter",			
+			"Demon",			
+			"Demonologist",			
+			"Depth",			
+			"Depths",			
+			"Derringer",			
+			"Descendant",			
+			"Desolation",			
+			"Desperado",			
+			"Despot",			
+			"Detective",			
+			"Devil",			
+			"Devotion",			
+			"Devourer",			
+			"Diamond",			
+			"Dictator",					
+			"Diplomat",			
+			"Disciple",		
+			"Discoverer",							
+			"Dominator",		
+			"Doom",			
+			"Dove",			
+			"Dragon",			
+			"Drake",			
+			"Dread",			
+			"Dream",			
+			"Dryad",			
+			"Demonologist",			
+			"Dancer",			
+			"Devourer",			
+			"Drifter",			
+			"Druid",						
+			"Dryad",			
+			"Duelist",			
+			"Duke",				
+			"Delver",			
+			"Dungeoneer",
 			]
 		# E
 		rank += [
-			"Envoy",		"Emissary",				"Enigma",			"Entity",			"Envoy",		"Ethereal",		"Exile",	"Envoy",		"Ethereal",		"Executioner",					"Emperor",			"Evangelist",			"Eye",			"Eyes",			"Enforcer",			"Eyes",			"Executioner",			"Element",			"Eagle",			"Eater",			"Eclipse",			"Enforcer",			"Elite",			"Element",			"Enchanter",	"Executioner",				"Elder",			"Executioner",			"Entity",			"Eagle",			"Earthshaper",			"Eater",			"Echo",			"Echomancer",			"Eclipse",			"Elder",			"Eldest",			"Elector",			"Elegance",			"Element",			"Elementalist",			"Element",						"Elite",			"Envoy",			"Embrace",			"Emissary",			"Enchanter",	"Enchantment",	"Enchantress",						"Enforcer",			"Enigma",			"Envoy",			"Envy",			"Etherbound",			"Ethereal",						"Executioner",			"Exemplar",			"Exile",			"Exorcist",			"Expeditioner",			"Explorer",			"Eye",			"Eyes",
+			"Envoy",	
+			"Emissary",				
+			"Enigma",	
+			"Entity",			
+			"Envoy",	
+			"Ethereal",	
+			"Exile",	
+			"Envoy",	
+			"Ethereal",	
+			"Executioner",		
+			"Emperor",			
+			"Evangelist",		
+			"Eye",			
+			"Eyes",		
+			"Enforcer",	
+			"Eyes",		
+			"Executioner",			
+			"Element",		
+			"Eagle",			
+			"Eater",		
+			"Eclipse",
+			"Enforcer",		
+			"Elite",		
+			"Element",			
+			"Enchanter",	
+			"Executioner",			
+			"Elder",			
+			"Executioner",			
+			"Entity",			
+			"Eagle",
+			"Earthshaper",		
+			"Echo",			
+			"Echomancer",		
+			"Eclipse",			
+			"Elder",	
+			"Eldest",		
+			"Elector",		
+			"Elegance",			
+			"Element",		
+			"Elementalist",		
+			"Element",				
+			"Elite",		
+			"Envoy",		
+			"Embrace",		
+			"Emissary",		
+			"Enchanter",	
+			"Enchantment",	
+			"Enchantress",			
+			"Enforcer",		
+			"Enigma",			
+			"Envoy",			
+			"Envy",			
+			"Etherbound",		
+			"Ethereal",						
+			"Executioner",		
+			"Exemplar",			
+			"Exile",	
+			"Exorcist",			
+			"Expeditioner",	
+			"Explorer",			
+			"Eye",			
+			"Eyes",
 			]
 		# F
 		rank += [
@@ -2961,12 +3865,15 @@ def Rank(lusor):
 			"Fang",						
 			"Farwalker",		
 			"Fatesealer",			
-			"Faun",				"Fawn",			
+			"Faun",				
+			"Fawn",			
 			"Fear",			
 			"Feather",			
-			"Feathered",			"Fel",						
+			"Feathered",			
+			"Fel",						
 			"Fern",			
-			"Fiend",			"Finder",			
+			"Fiend",			
+			"Finder",			
 			"Fire",			
 			"Fisher",			
 			"Flame",			
@@ -3009,7 +3916,6 @@ def Rank(lusor):
 			"Giant",			
 			"Grandmaster",			
 			"Ghost",			
-			"Goat",			
 			"Guard",			
 			"Guide",			
 			"Gorgon",			
@@ -3020,34 +3926,76 @@ def Rank(lusor):
 			"Gazelle",			
 			"Gazer",		
 			"Gem",			
-			"General",			"Genius",			
+			"General",			
+			"Genius",			
 			"Geomancer",			
 			"Ghast",			
 			"Ghost",			
 			"Giant",			
 			"Gladiator",			
 			"Glow",			
-			"Goat",			"Gold",			"Governor",			"Grace",			
-			"Grandmaster",			"Grave",			"Gravewalker",			
-			"Guard",			"Guide",			"Gull",			
-			"Gunslinger",	"Genius",		"Giant",
-			 ]
+			"Goat",			
+			"Gold",			
+			"Governor",			
+			"Grace",			
+			"Grandmaster",			
+			"Grave",			
+			"Gravewalker",			
+			"Guard",			
+			"Guide",			
+			"Gull",			
+			"Gunslinger",	
+			"Genius",		
+			"Giant",
+			]
 		# H
 		rank += [
 				"Hyena",	
-				"Hunter",		"Horror",		"Heart",		"Hero",			
-				"Harvester",		"Hydra",		"Hand",			"Hag",			
-				"Hawk",			"Heir",			"Hermit",		"Hive",			
-				"Hound",			"Hunger",	"Hood",			"Heart",	
-				"Hangman",	"Harbinger",	"Harpy",			"Hauler",	"Haunt",		
-				"Hawk",			"Head",			"Hole",	"Heart",		"Heir",	
-				"Herald",		"Herder",			"Heretic",					
-				"Heron",	"Hex",			"Highlander",	"Highness",		
-				"Historian",	"Hollow",		"Honor",	"Hoof",			
+				"Hunter",		
+				"Horror",		
+				"Heart",		
+				"Hero",			
+				"Harvester",		
+				"Hydra",		
+				"Hand",			
+				"Hag",			
+				"Hawk",			
+				"Heir",			
+				"Hermit",		
+				"Hive",			
+				"Hound",		
+				"Hunger",	
+				"Hood",			
+				"Heart",	
+				"Hangman",	
+				"Harbinger",	
+				"Harpy",			
+				"Hauler",	
+				"Haunt",		
+				"Hawk",			
+				"Head",			
+				"Hole",	
+				"Heart",	
+				"Heir",	
+				"Herald",		
+				"Herder",	
+				"Heretic",					
+				"Heron",	
+				"Hex",			
+				"Highlander",	
+				"Highness",		
+				"Historian",	
+				"Hollow",		
+				"Honor",	
+				"Hoof",			
 				"Hope",	
-				"Horizon",		"Horn",		"Howl",	"Howler",		
-				"Hussar",			"Hydra",	
-			]
+				"Horizon",	
+				"Horn",		
+				"Howl",	
+				"Howler",		
+				"Hussar",	
+				"Hydra",	
+				]
 		# I
 		rank += [
 			"Inventor",				
@@ -3079,14 +4027,26 @@ def Rank(lusor):
 			]
 		# J
 		rank += [
-			"Justiciar",	"Judge",	
+			"Justiciar",	
+			"Judge",	
 			"Jackal",	
-			"Jackal",			"Jaguar",						
-			"Jaguar",			"Janissary",						
-			"Juggernaut",			"Jarl",			"Jasmine",			"Jay",			
-			"Jinx",			"Journey",			"Judge",			
-			"Juggernaut",			"Jumper",			"Jungle",			
-			"Juniper",			"Jewel",			"Jackal",			
+			"Jackal",			
+			"Jaguar",						
+			"Jaguar",			
+			"Janissary",						
+			"Juggernaut",		
+			"Jarl",		
+			"Jasmine",			
+			"Jay",			
+			"Jinx",		
+			"Journey",	
+			"Judge",			
+			"Juggernaut",		
+			"Jumper",	
+			"Jungle",			
+			"Juniper",		
+			"Jewel",		
+			"Jackal",			
 			"Jackal",
 			]
 		# K
@@ -3100,7 +4060,6 @@ def Rank(lusor):
 			"Kin",			
 			"King",			
 			"Kinsman",			
-			"Kiss",			
 			"Knife",			
 			"Knight",			
 			"Killer",			
@@ -3111,18 +4070,180 @@ def Rank(lusor):
 			"Keeper",			
 			"Killer",			
 			"King",			
-			"Kiss",			
 			"Knight",			
 			"Knife",	
 			"Keeper",
 			]
 		# L
 		rank += [
-			"Leader",	"Leviathan",		"Leader",			"Lion",				"Lorekeeper",			"Light",			"Leader",			"Leviathan",			"Leader",			"Lady",			"Lama",			"Lament",	"Lancer",			"Lark",			"Lasso",			"Laurel",			"Leader",			"Leap",			"Lecturer",			"Legacy",			"Legate",			"Legend",			"Legionnaire",			"Librarian",			"Lieutenant",			"Light",			"Lightbringer",		"Lightheart",		"Lily",			"Linguist",			"Lion",			"Lizard",			"Lord",			"Lost",			"Lotus",			"Lover",			"Loyal",			"Loyalty",			"Luminary",			"Lurk",			"Lycan",			"Lyncher",			"Lynx",			"Lord",			"Lotus",			"Leader",			"Lightning",			"Legend",			"Lover",			"Leader",			"Lion",				"Light",			"Lizard",			"Lover",			"Lasher",			"Leviathan",			"Lion",
+			"Leader",	
+			"Leviathan",		
+			"Leader",			
+			"Lion",				
+			"Lorekeeper",			
+			"Light",			
+			"Leader",			
+			"Leviathan",			
+			"Leader",			
+			"Lady",			
+			"Lama",			
+			"Lament",	
+			"Lancer",			
+			"Lark",			
+			"Lasso",			
+			"Laurel",			
+			"Leader",			
+			"Leap",			
+			"Lecturer",			
+			"Legacy",			
+			"Legate",			
+			"Legend",			
+			"Legionnaire",			
+			"Librarian",			
+			"Lieutenant",			
+			"Light",			
+			"Lightbringer",		
+			"Lightheart",		
+			"Lily",			
+			"Linguist",			
+			"Lion",			
+			"Lizard",			
+			"Lord",			
+			"Lost",			
+			"Lotus",			
+			"Lover",			
+			"Loyal",			
+			"Loyalty",			
+			"Luminary",			
+			"Lurk",			
+			"Lycan",			
+			"Lyncher",			
+			"Lynx",			
+			"Lord",			
+			"Lotus",			
+			"Leader",			
+			"Lightning",			
+			"Legend",			
+			"Lover",			
+			"Leader",			
+			"Lion",				
+			"Light",			
+			"Lizard",			
+			"Lover",			
+			"Lasher",			
+			"Leviathan",			
+			"Lion",
 			]
 		# M
 		rank += [
-			"Mythmaker",    "Menace",	   "Merchant",      "Master",			"Moon",								"Moth",		"Mandril",			"Mistwalker",			"Monarch",			"Mask",			"Master",			"Manipulator",			"Machine",			"Master",			"Mystic",			"Manipulator",			"Mask",			"Master",			"Maestro",			"Mage",			"Magister",			"Magistrate",			"Magus",			"Maiden",			"Major",			"Malefic",		"Mage",				"Mantis",			"Mapper",			"Mare",         "Marigold",		    "Mariner",			"Marshal",			"Martyr",			"Mask",			"Mason",			"Master",			"Mastermind",			"Mastiff",			"Matador",			"Matriarch",			"Mausoleum",			"Mayor",			"Melody",			"Mender",			"Mercenary",			"Merchant",							"Messenger",			"Mestizo",		"Miner",		"Might",			"Mastermind",		"Mindwarden",		"Minotaur",			"Minstrel",			"Mirage",			"Mist",			"Mogul",			"Monarch",			"Mongol",			"Monster",			"Moon",			"Moonmage",			"Morgue",			"Moth",			"Mountainlord",			"Mountaineer",              "Mourner",       			    "Muse",			"Musketeer",			"Mustang",			"Myst",			"Mystagogue",	"Mystic",			"Master",			"Master",			"Master",			"Master",			"Master",			"Marauder",			"Mandate",			"Monster",			"Mind",			"Martyr",			"Mage",			"Machine",			"Mutant",			"Moon",			"Mist",			"Mirror",			"Master",			"Man",			"Machine",			"Mage",			"Magister",			"Master",			"Mastermind",			"Mastiff",			"Martyr",			"Mind",				"Mist",				"Monster",			"Moon",								"Minotaur",			"Mystic",              "Manipulator",
+			"Mythmaker",    
+			"Menace",	   
+			"Merchant",      
+			"Master",			
+			"Master",			
+			"Master",			
+			"Moon",								
+			"Moth",		
+			"Mandril",			
+			"Mistwalker",			
+			"Monarch",			
+			"Mask",			
+			"Master",			
+			"Manipulator",			
+			"Machine",			
+			"Master",			
+			"Mystic",			
+			"Manipulator",			
+			"Mask",			
+			"Master",			
+			"Maestro",			
+			"Mage",			
+			"Magister",			
+			"Magistrate",			
+			"Magus",			
+			"Maiden",			
+			"Major",			
+			"Malefic",		
+			"Mage",				
+			"Mantis",			
+			"Mapper",			
+			"Mare",         
+			"Marigold",		    
+			"Mariner",			
+			"Marshal",			
+			"Martyr",			
+			"Mask",			
+			"Mason",			
+			"Master",			
+			"Mastermind",			
+			"Mastiff",			
+			"Matador",			
+			"Matriarch",			
+			"Mausoleum",			
+			"Mayor",			
+			"Melody",			
+			"Mender",			
+			"Mercenary",			
+			"Merchant",							
+			"Messenger",			
+			"Mestizo",		
+			"Miner",		
+			"Might",			
+			"Mastermind",		
+			"Mindwarden",		
+			"Minotaur",			
+			"Minstrel",			
+			"Mirage",			
+			"Mist",			
+			"Mogul",			
+			"Monarch",			
+			"Mongol",			
+			"Monster",			
+			"Moon",			
+			"Moonmage",			
+			"Morgue",			
+			"Moth",			
+			"Mountainlord",			
+			"Mountaineer",              
+			"Mourner",       			    
+			"Muse",			
+			"Musketeer",			
+			"Mustang",			
+			"Myst",			
+			"Mystagogue",	
+			"Mystic",			
+			"Master",			
+			"Master",			
+			"Master",			
+			"Master",			
+			"Master",			
+			"Marauder",			
+			"Mandate",			
+			"Monster",			
+			"Mind",			
+			"Martyr",			
+			"Mage",			
+			"Machine",			
+			"Mutant",			
+			"Moon",			
+			"Mist",			
+			"Mirror",			
+			"Master",			
+			"Man",			
+			"Machine",			
+			"Mage",			
+			"Magister",			
+			"Master",			
+			"Mastermind",			
+			"Mastiff",			
+			"Martyr",			
+			"Mind",				
+			"Mist",				
+			"Monster",			
+			"Moon",								
+			"Minotaur",			
+			"Mystic",              
+			"Manipulator",
 			]
 		# N
 		rank += [
@@ -3132,9 +4253,11 @@ def Rank(lusor):
 			"Nightshade",		
 			"Nexus",			
 			"Nemesis",		
-			"Nymph",	"Noble",	
+			"Nymph",	
+			"Noble",	
 			"Noble",					
-			"Navigator",					"Necro",			
+			"Navigator",					
+			"Necrophagus",			
 			"Necrologist",			
 			"Nemesis",			
 			"Nightingale",			
@@ -3160,16 +4283,15 @@ def Rank(lusor):
 			"Paradox",		
 			"Peacekeeper",		
 			"Pirate",		
-			"Prophet",			
 			"Painter",			
 			"Pyrotechnic",			
 			"Prowler",			
-			"Prophet",			
 			"Prince",			
 			"Predator",			
 			"Preceptor",		
 			"Preacher",			
-			"Praetorian",		
+			"Praetorian",	
+			"Primal",	
 			"Pirate",			
 			"Pilgrim",			
 			"Pastor",			
@@ -3201,7 +4323,6 @@ def Rank(lusor):
 			"Pioneer",			
 			"Piper",			
 			"Pyromaniac",						
-			"Pixie",			
 			"Poem",			
 			"Poet",			
 			"Poltergeist",		
@@ -3229,7 +4350,6 @@ def Rank(lusor):
 			"Plague",		
 			"Power",			
 			"Protector",			
-			"Prophet",			
 			"Paw",			
 			"Power",			
 			"Pathologist",		
@@ -3254,6 +4374,7 @@ def Rank(lusor):
 			]
 		# R
 		rank += [
+			"Riddler",
 			"Reaper",		
 			"Rider",		
 			"Rider",			
@@ -3281,87 +4402,294 @@ def Rank(lusor):
 			"Ruby",			
 			"Ranger",		
 			"Rat",				
-			"Raven",			"Reptile",		
+			"Raven",			
+			"Reptile",		
 			"Rider",			
 			"Rose",			
-			"Ruby",			"Rune",			
+			"Ruby",			
+			"Rune",			
 			"Rabbit",			
-			"Radiance",		"Raider",			
+			"Radiance",		
+			"Raider",			
 			"Railroad",							
-			"Ranger",			"Raptor",			
+			"Ranger",			
+			"Raptor",			
 			"Rat",			
-			"Rattlesnake",			"Raven",			
-			"Reader",		"Reed",			
-			"Regent",			"Relicarian",	
-			"Renegade",			"Representative",	
-			"Reptile",		"Requiem",			
+			"Rattlesnake",			
+			"Raven",			
+			"Reader",		
+			"Reed",			
+			"Regent",			
+			"Relicarian",	
+			"Renegade",			
+			"Representative",	
+			"Reptile",		
+			"Requiem",			
 			"Researcher",			
-			"Riddle",		"Rider",			
+			"Rider",			
 			"Risen",			
-			"Ritualist",	"Rival",			
+			"Ritualist",	
+			"Rival",			
 			"Riverlord",	
-			"Rivermancer",	"Roar",			
-			"Robber",			"Rogue",		
-			"Ronin",			"Rose",			
-			"Ruby",			"Runebound",			
-			"Rue",			"Ruler",		
-			"Rune",			"Runebearer",		
-			"Runekeeper",	"Runemaker",		
-			"Runes",			"Runewriter",	
-			"Runner",			"Reaper",			
+			"Rivermancer",	
+			"Roar",			
+			"Robber",			
+			"Rogue",		
+			"Ronin",			
+			"Rose",			
+			"Ruby",			
+			"Runebound",			
+			"Rue",			
+			"Ruler",		
+			"Rune",			
+			"Runebearer",		
+			"Runekeeper",	
+			"Runemaker",		
+			"Runes",			
+			"Runewriter",	
+			"Runner",			
+			"Reaper",			
 			"Rex",
 			]
 		# S
 		rank += [
-			"Scout", 	"Sage", "Saint", 
-			"Satyr", "Savant", 
-			"Savior", "Scribe",		
-			"Seer", "Sentinel",	
-			"Serpent", "Shade", 
-			"Shadow", "Shaman", 	
-			"Sheriff", "Shield", 
-			"Sire", "Skyward", 
-			"Smith",		"Smuggler", 
+			"Scout", 	
+			"Sage", 
+			"Saint", 
+			"Satyr", 
+			"Savant", 
+			"Savior", 
+			"Scribe",		
+			"Seer", 
+			"Sentinel",	
+			"Serpent", 
+			"Shade", 
+			"Shadow", 
+			"Sheriff", 
+			"Shield", 
+			"Sire", 
+			"Skyward", 
+			"Smith",		
+			"Smuggler", 
 			"Sorcerer", 
-			"Specter", "Spellbinder",	"Spirit", "Spy", 
-			"Squire", "Stag",	
+			"Specter", 
+			"Spellbinder",	
+			"Spirit", 
+			"Spy", 
+			"Squire", 
+			"Stag",	
 			"Skyward",
 			"Skywarden", 			
 			"Stingray", 
-			"Chaser", "Swallow", 
-			"Swan",			"Shadow",			
-			"Stalker",			"Scholar",			
-			"Spirit",			"Spirit",			
-			"Seeker",			"Spirit",			
-			"Seeker",			"Sentinel",			
-			"Seeker",			"Sheriff",								"Shadow",			"Seer",				
-			"Spirit",			"Strategist",		
-			"Stone",			"Sandwalker",		
-			"Sandkeeper",		"Siren",			
-			"Storyteller",		"Spark",			
-			"Spirits", 			"Specter",				
-			"Sparrow",			"Skywarden",		
-			"Stag",				"Spirit",			
-			"Strength",			"Sunstrider",		
-			"Swordmaster",		"Saber",			
-			"Sword",				"Spiritualist",			"Sparkweaver",		"Stoker",			"Seer",				
-			"Seer",				"Sword",			
-			"Sword",			"Sword",			
-			"Swashbuckler",		"Storyteller",		
-			"Statue",			"Stargazer",		
-			"Spirit",			"Sphinx",				"Spellbinder",		"Speaker",			
-			"Shepherd",			"Shapeshifter",		
-			"Shaman",			"Serpent",			
-			"Sentinel",				"Seer",					"Sectarian",			"Seafarer",			"Sculptor",			"Scorcher",			"Savage",							
-			"Specter",			"Servant",			
-			"Slayer",			"Saga",				"Saint",			"Salamander",		"Sandkeeper",			"Savant",			"Sparrow",			"Speaker",			"Spear",			"Shadow",			"Specialist",		"Specter",				"Spectre",				"Spellblade",			
-			"Spellbreaker",		"Spellshield",		
-			"Spellsword",		"Spellweaver",				"Spider",			"Web",				"Spirit",			"Spiritualist",		"Spook",			"Spy",				"Squire",				"Stag",					
-			"Stampede",			"Star",				
-			"Starblade",		"Starborn",			
-			"Stardancer",		"Starforge",		
-			"Shadow",				"Starshaper",			"Spy",			"Steward",			"Stingray",			"Stonetunnel",		"Storm",			"Stormcaller",		"Storyteller",		"Strategist",		"Strength",			"Strider",			"Successor",		"Sultan",			"Sun",					"Sunblessed",		"Sunlord",			"Sunscale",			"Sunstrider",					"Swan",				"Swarm",			"Swashbuckler",		"Sword",			"Swordmaster",			"Scale",			"Scar",			"Scholar",					"Scion",			"Scorpion",			"Scout",			"Scribe",			"Secret",					"Seeker",			"Seer",				"Sellsword",		"Senator",				"Sentinel",			"Sepulcher",		"Sergeant",			"Serpent",			"Serpentlord",		"Settler",			"Shade",			"Shadow",			"Shadowcrafter",	"Shadowmancer",			"Shadowseer",		"Shaman",						"Shaper",			"Shark",			"Shepherd",			"Sheriff",			"Shield",			"Shogun",			"Shooter",			"Shroud",			"Siege",			"Silence",			"Silver",			"Silverspeaker",	"Sire",				"Siren",			"Song",				"Skeleton",			"Skull",			"Skymaiden",		"Skyrider",			"Skyweaver",		"Slayer",				"Slinger",			"Smith",			"Smuggler",			"Snake",			"Soldier",			"Song",				"Songblade",		"Soul",				"Soulkeeper",		"Soulless",			"Sovereign",		"Seeker",			"Stalker",			
-			"Sentinel",			"Seer",				"Shadow",			"Spirit",			"Shadow",			"Speaker",			"Spirit",			"Skull",			"Shadow",			"Sabertooth",			"Saurius",			"Salamander",				"Scarecrow",		"Scorpion",			"Shadow",			"Shark",			"Shaman",			"Snake",			"Skeleton",			"Skull",						"Spirit",			"Spider",			"Specter",			"Spy",				"Swashbuckler",		"Sword",			"Sword",			"Sword",			"Shaman",			"Summoner",			"Stasis",			"Sharpshooter",			"Sentry",			"Serpent",			"Sun",				"Slayer",			"Spirit",
+			"Chaser", 
+			"Swallow", 
+			"Swan",			
+			"Shadow",			
+			"Stalker",			
+			"Scholar",			
+			"Spirit",			
+			"Spirit",			
+			"Seeker",			
+			"Spirit",			
+			"Seeker",			
+			"Sentinel",			
+			"Seeker",			
+			"Sheriff",								
+			"Shadow",			
+			"Seer",				
+			"Spirit",			
+			"Strategist",		
+			"Stone",			
+			"Sandwalker",		
+			"Sandkeeper",		
+			"Siren",			
+			"Storyteller",		
+			"Spark",			
+			"Spirits", 			
+			"Specter",				
+			"Sparrow",			
+			"Skywarden",		
+			"Stag",				
+			"Spirit",			
+			"Strength",			
+			"Sunstrider",		
+			"Swordmaster",		
+			"Saber",			
+			"Sword",				
+			"Spiritualist",			
+			"Sparkweaver",		
+			"Stoker",			
+			"Seer",				
+			"Seer",				
+			"Sword",			
+			"Sword",			
+			"Sword",			
+			"Swashbuckler",		
+			"Storyteller",		
+			"Statue",			
+			"Stargazer",		
+			"Spirit",			
+			"Sphinx",				
+			"Spellbinder",		
+			"Speaker",			
+			"Shepherd",			
+			"Shapeshifter",		
+			"Serpent",			
+			"Sentinel",				
+			"Seer",					
+			"Sectarian",			
+			"Seafarer",			
+			"Sculptor",			
+			"Scorcher",			
+			"Savage",							
+			"Specter",			
+			"Servant",			
+			"Slayer",			
+			"Saga",				
+			"Saint",			
+			"Salamander",		
+			"Sandkeeper",			
+			"Savant",			
+			"Sparrow",			
+			"Speaker",			
+			"Spear",			
+			"Shadow",			
+			"Specialist",		
+			"Specter",				
+			"Spectre",				
+			"Spellblade",			
+			"Spellbreaker",		
+			"Spellshield",		
+			"Spellsword",		
+			"Spellweaver",				
+			"Spider",			
+			"Web",				
+			"Spirit",			
+			"Spiritualist",		
+			"Spook",			
+			"Spy",				
+			"Squire",				
+			"Stag",					
+			"Stampede",			
+			"Star",				
+			"Starblade",		
+			"Starborn",			
+			"Stardancer",		
+			"Starforge",		
+			"Shadow",				
+			"Starshaper",			
+			"Spy",			
+			"Steward",			
+			"Stingray",			
+			"Stonetunnel",		
+			"Storm",			
+			"Stormcaller",		
+			"Storyteller",		
+			"Strategist",		
+			"Strength",			
+			"Strider",			
+			"Successor",		
+			"Sultan",			
+			"Sun",					
+			"Sunblessed",		
+			"Sunlord",			
+			"Sunscale",			
+			"Sunstrider",					
+			"Swan",				
+			"Swarm",			
+			"Swashbuckler",		
+			"Sword",			
+			"Swordmaster",			
+			"Scale",			
+			"Scar",			
+			"Scholar",					
+			"Scion",			
+			"Scorpion",			
+			"Scout",			
+			"Scribe",			
+			"Secret",					
+			"Seeker",			
+			"Seer",				
+			"Sellsword",		
+			"Senator",				
+			"Sentinel",			
+			"Sepulcher",		
+			"Sergeant",			
+			"Serpent",			
+			"Serpentlord",		
+			"Settler",			
+			"Shade",			
+			"Shadow",			
+			"Shadowcrafter",	
+			"Shadowmancer",			
+			"Shadowseer",		
+			"Shaper",			
+			"Shark",			
+			"Shepherd",			
+			"Sheriff",			
+			"Shield",			
+			"Shogun",			
+			"Shooter",			
+			"Shroud",			
+			"Siege",			
+			"Silence",			
+			"Silver",			
+			"Silverspeaker",	
+			"Sire",				
+			"Siren",			
+			"Song",				
+			"Skeleton",			
+			"Skull",			
+			"Skyrider",			
+			"Slayer",				
+			"Slinger",			
+			"Smith",			
+			"Smuggler",			
+			"Snake",			
+			"Soldier",			
+			"Song",				
+			"Songblade",		
+			"Soul",				
+			"Soulkeeper",		
+			"Soulless",			
+			"Sovereign",		
+			"Seeker",			
+			"Stalker",			
+			"Sentinel",			
+			"Seer",				
+			"Shadow",			
+			"Spirit",			
+			"Shadow",			
+			"Speaker",			
+			"Spirit",			
+			"Skull",			
+			"Shadow",			
+			"Sabertooth",			
+			"Saurius",			
+			"Salamander",				
+			"Scarecrow",		
+			"Scorpion",			
+			"Shadow",			
+			"Shark",
+			"Snake",			
+			"Skeleton",			
+			"Skull",						
+			"Spirit",			
+			"Spider",			
+			"Specter",			
+			"Spy",				
+			"Swashbuckler",		
+			"Sword",			
+			"Sword",			
+			"Sword",			
+			"Summoner",			
+			"Stasis",			
+			"Sharpshooter",			
+			"Sentry",			
+			"Serpent",			
+			"Sun",				
+			"Slayer",			
+			"Spirit",
 			]
 		# T
 		rank += [
@@ -3373,17 +4701,85 @@ def Rank(lusor):
 			"Tidecaller",		
 			"Thunder",			
 			"Timer",			
-			"Thunderlord",			"Tempest",			
+			"Thunderlord",			
+			"Tempest",			
 			"Templar",			
 			"Templar",			
-			"Tyrant",			"Traveler",			
+			"Tyrant",			
+			"Traveler",			
 			"Trailblazer",			
-			"Tiger","Tiger",			"Terror",			
-			"Trapper",			"Titan",			
-			"Thief",			"Tormentor",			"Talon",			"Templar",		
-			"Templar",			"Torturer",			"Trapper",			"Trailblazer",		
-			"Torchbearer",			"Titan",			"Tiger",			"Traveler",			"Trickster",			"Timekeeper",			"Tyrant",			"Tactician",			"Terror",			"Tailor",			"Tale",			"Talon",			"Tamer",			"Technomancer",			"Telepath",			"Tempest",			"Templar",			"Tenacity",			"Terror",		"Taskmaster",	"Thane",			"Thaumaturge",		"Theorist",			"Thief",			"Thunder",			"Thunderbird",			"Tideturner",			"Tiger",			"Timeshifter",			"Titan",			"Tomb",			
-			"Torchbearer",			"Torment",			"Tormented",			"Tormentor",			"Touched",			"Trader",			"Trapezist",			"Trapper",			"Traveler",			"Treasure",			"Treasures",			"Treebinder",			"Tribune",			"Tribute",			"Trick",			"Trickster",			"Troll",			 "Twilight",			"Tyrant",			"Terror",			"Tiger",			"Terror",			"Trapper",			"Trapezist",			"Troll",			"Thief",			"Trapper",			"Thunderer",			"Thrower",			"Titan",
+			"Tiger","Tiger",			
+			"Terror",			
+			"Trapper",			
+			"Titan",			
+			"Thief",			
+			"Tormentor",			
+			"Talon",			
+			"Templar",		
+			"Templar",			
+			"Torturer",			
+			"Trapper",			
+			"Trailblazer",		
+			"Torchbearer",			
+			"Titan",			
+			"Tiger",			
+			"Traveler",			
+			"Trickster",			
+			"Timekeeper",			
+			"Tyrant",			
+			"Tactician",			
+			"Terror",			
+			"Tailor",			
+			"Tale",			
+			"Talon",			
+			"Tamer",			
+			"Technomancer",			
+			"Telepath",			
+			"Tempest",			
+			"Templar",			
+			"Tenacity",			
+			"Terror",		
+			"Taskmaster",	
+			"Thane",			
+			"Thaumaturge",		
+			"Theorist",			
+			"Thief",			
+			"Thunder",			
+			"Thunderbird",			
+			"Tideturner",			
+			"Tiger",			
+			"Timeshifter",			
+			"Titan",			
+			"Tomb",			
+			"Torchbearer",			
+			"Torment",			
+			"Tormentor",			
+			"Touched",			
+			"Trader",			
+			"Trapezist",			
+			"Trapper",			
+			"Traveler",			
+			"Treasure",			
+			"Treasures",			
+			"Treebinder",			
+			"Tribune",			
+			"Tribute",			
+			"Trick",			
+			"Trickster",			
+			"Troll",			 
+			"Twilight",			
+			"Tyrant",			
+			"Terror",			
+			"Tiger",			
+			"Terror",			
+			"Trapper",			
+			"Trapezist",			
+			"Troll",			
+			"Thief",			
+			"Trapper",			
+			"Thunderer",			
+			"Thrower",			
+			"Titan",
 			]
 		# U
 		rank += [
@@ -3412,18 +4808,32 @@ def Rank(lusor):
 			"Vagrant",			
 			"Valkyrie",		
 			"Valor",						
-			"Vanguard",	"Vendetta",		
+			"Vanguard",	
+			"Vendetta",		
 			"Vengeance",			
-			"Venom",			"Vicar",		"Viceroy",	
+			"Venom",			
+			"Vicar",		
+			"Viceroy",	
 			"Vigilante",	
 			"Voice",		
-			"Viking",		"Violet",	"Viper",		    
+			"Viking",		
+			"Violet",	
+			"Viper",		    
 			"Virtuoso",	
 			"Visionary",	
 			"Vizier",	
-			"Voice",			"Void",			"Voidseer",					
-			"Voidwalker",	"Voyage",		"Voyager",			"Vulture",			
-			"Vortex",		"Vigilante",			"Void",			"Voice",		"Void",						"Vulture",
+			"Voice",			
+			"Void",			
+			"Voidseer",					
+			"Voidwalker",	
+			"Voyager",			
+			"Vulture",			
+			"Vortex",		
+			"Vigilante",			
+			"Void",			
+			"Voice",		
+			"Void",						
+			"Vulture",
 			]
 		# W
 		rank += [
@@ -3434,7 +4844,6 @@ def Rank(lusor):
 			"Wishgranter",	
 			"Wing",			
 			"Wolf",				
-			"Wishmaster",		
 			"Wondrous",				
 			"Wanderer",			
 			"Wanderer",		
@@ -3461,8 +4870,7 @@ def Rank(lusor):
 			"Warden",			        
 			"Warlord",				    
 			"Warrior",			
-			"Watchman",		
-			"Wild",				
+			"Watcher",		
 			"Wand",				
 			"Weaver",			
 			"Weaver",			
@@ -3495,7 +4903,6 @@ def Rank(lusor):
 			"Whisper",						
 			"Wielder",			
 			"Wight",		          
-			"Wild",			
 			"Will",			
 			"Willow",			
 			"Wind",			
@@ -3580,34 +4987,52 @@ def Rank(lusor):
 	# By Backgrounds
 	if "Acolyte" 	in genus:
 		rank += [
-			"Disciple",		"Acolyte",		"Chaplain",		"Penitent",
+			"Disciple",		
+			"Acolyte",		
+			"Chaplain",		
+			"Penitent",
+			"Prophet",			
 			]
 	if "Artisan" 	in genus:
 		rank += [
-			"Craftsman",	"Artificer",	"Mender",		"Maker",
+			"Craftsman",	
+			"Artificer",	
+			"Mender",		
+			"Maker",
+			"Artisan",
 			]
 	if "Entertainer" in genus:
 		rank += [
-			"Performer",	"Dancer",		"Player",
+			"Performer",	
+			"Dancer",		
+			"Player",
 			]
 	if "Farmer" 	in genus:
 		rank += [
-			"Harvester",	"Ploughman",	"Hayward",
+			"Harvester",	
+			"Hayward",
+			"Farmer",
 			]
 	if "Guard" 		in genus:
 		rank += [
-			"Watchman",		"Warder",		"Gatekeeper",
+			"Watchman",		
+			"Warder",		
+			"Gatekeeper",
 			]
 	if "Guide" 		in genus:
 		rank += [
-			"Wayfinder",	"Trailblazer",	"Scout",
+			"Wayfinder",	
+			"Trailblazer",
+			"Scout",
 			]
 	if "Hermit" 	in genus:
 		rank += [
+			"Prophet",			
 			"Recluse",		
 			"Anchorite",	
 			"Solitary",
 			"Hermit",
+			"Arcanist",			
 			]
 	if "Sailor" 	in genus:
 		rank += [
@@ -3726,6 +5151,7 @@ def Rank(lusor):
 			]
 	if "Charlatan"	in genus:
 		rank += [
+			"Prophet",			
 			"Sage",	
 			"Enchanter",	
 			"Healer",	
@@ -3744,6 +5170,8 @@ def Rank(lusor):
 			]
 	if "Cleric" 	in genus:
 		rank += [
+			"Witness",
+			"Prophet",			
 			"Watcher",		
 			"Watcher",		
 			"Watcher", 
@@ -3863,6 +5291,8 @@ def Rank(lusor):
 			]
 	if "Cultist" 	in genus:
 		rank += [
+			"Prophet",			
+			"Arcanist",			
 			"Sage",	
 			"Leader",	
 			"Reveler",	
@@ -3991,6 +5421,7 @@ def Rank(lusor):
 			]
 	if "Expert" 	in genus:
 		rank += [
+			"Arcanist",			
 			"Zoologist",	
 			"Scientist",		
 			"Healer",		
@@ -4270,6 +5701,8 @@ def Rank(lusor):
 			]
 	if "Mage"		in genus:
 		rank += [
+			"Prophet",			
+			"Arcanist",			
 			"Herbalist",		
 			"Sage",	
 			"Warcaster",	
@@ -4621,6 +6054,7 @@ def Rank(lusor):
 			]
 	if "Scholar"	in genus:
 		rank += [
+			"Arcanist",			
 			"Herbalist",	
 			"Sage",	
 			"Zoologist",	
@@ -4654,6 +6088,8 @@ def Rank(lusor):
 			]
 	if "Shaman"		in genus:
 		rank += [
+			"Prophet",			
+			"Shaman", 	
 			"Herbalist",	
 			"Necromancer",	
 			"Sage",		
@@ -4701,6 +6137,7 @@ def Rank(lusor):
 			]
 	if "Sorcerer" 	in genus:
 		rank += [
+			"Arcanist",			
 			"Lavamancer",	
 			"Enchanter",		
 			"Sorcerer",	
@@ -4796,6 +6233,7 @@ def Rank(lusor):
 			]
 	if "Warlock"	in genus:
 		rank += [
+			"Arcanist",			
 			"Necromancer",		
 			"Warcaster",	
 			"Occultist",	
@@ -4831,7 +6269,9 @@ def Rank(lusor):
 				"Enchantress",
 				]
 		rank += [
-			"Teller",		"Teller",		"Teller",	"Teller",		"Teller",		
+			"Arcanist",			
+			"Teller",			
+			"Teller",			
 			"Magister",
 			"Loremaster",	
 			"Necromancer",		
@@ -4923,22 +6363,23 @@ def Rank(lusor):
 			]
 	if "Witch"		in genus:
 		rank += [
-				"Herbalist",	
-				"Necromancer",	
-				"Sage",	
-				"Elementalist",
-				"Brewmaster",	
-				"Healer",		
-				"Mesmer",		
-				"Stormcaller",	
-				"Raincaller",	
-				"Firecaller",	
-				"Weaver",	
-				"Alchemist",	
-				"Windcaller",	
-				"Shaman",	
-				"Witch",
-				]
+			"Prophet",			
+			"Herbalist",	
+			"Necromancer",	
+			"Sage",	
+			"Elementalist",
+			"Brewmaster",	
+			"Healer",		
+			"Mesmer",		
+			"Stormcaller",	
+			"Raincaller",	
+			"Firecaller",	
+			"Weaver",	
+			"Alchemist",	
+			"Windcaller",	
+			"Shaman",	
+			"Witch",
+			]
 		if FEMALE: rank += [
 			"Harridan",
 			]
@@ -5044,10 +6485,11 @@ def Rank(lusor):
 			]
 		if "Chaos Warper" in genus:
 			rank += [
-				  "Giant",				  "Sovereign",
-				  "Colossus",
-				  "Dominator",				  "Titan",
-				  ]
+				"Giant",				  
+				"Sovereign",
+				"Colossus",
+				"Dominator",				  "Titan",
+				]
 		if "Dominators" in genus:
 			rank += [
 			"Slaver",		 "Master",
@@ -5091,8 +6533,9 @@ def Rank(lusor):
 				]
 		if "Giant Eagle" 	in genus:
 			rank += [
-			  "Eagle",			  "Giant",
-			  ]
+				"Eagle",			  
+				"Giant",
+				]
 		if "Tiger" 			in genus:
 			rank += [
 				"Sabertooth",				"Tiger",
@@ -5218,6 +6661,8 @@ def Rank(lusor):
 			"Duende", 
 			"Duende", 
 			"Duende",
+			"Pixie",			
+
 			]
 	if "Giant"		in genus:
 		rank += [
@@ -5289,42 +6734,42 @@ def Rank(lusor):
 			]
 	if "Undead"		in genus:
 		rank += [
-		"Zombie",			
-		"Zombie",		
-		"Awakener",	
-		"Skeleton",	
-		"Requiem", 
-		"Ghost",	
-		"Apparition",	
-		"Wraith",			
-		"Wraith",	
-		"Phantom",	
-		"Wraith",	
-		"Mourner",		
-		"Ghost",
-		"Ghost",
-		"Ghast",
-		"Ghost",		
-		"Revenant",
-		"Revenant",
-		"Revenant",			
-		"Cadaver", 
-		"Cadaver",			
-		"Hellhound",			
-		"Skeleton",			
-		"Visit",			
-		"Visitor",			
-		"Soul",			
-		"Phantom",			
-		"Ghoul",			
-		"Ghoulcaller",			
-		"Carnophage",			
-		"Cannibal",			
-		"Hemophage",	
-		"Mummy",	
-		"Mummy",		
-		"Mummy",	
-		"Mummy",
+			"Zombie",			
+			"Zombie",		
+			"Awakener",	
+			"Skeleton",	
+			"Requiem", 
+			"Ghost",	
+			"Apparition",	
+			"Wraith",			
+			"Wraith",	
+			"Phantom",	
+			"Wraith",	
+			"Mourner",		
+			"Ghost",
+			"Ghost",
+			"Ghast",
+			"Ghost",		
+			"Revenant",
+			"Revenant",
+			"Revenant",			
+			"Cadaver", 
+			"Cadaver",			
+			"Hellhound",			
+			"Skeleton",			
+			"Visit",			
+			"Visitor",			
+			"Soul",			
+			"Phantom",			
+			"Ghoul",			
+			"Ghoulcaller",			
+			"Carnophage",			
+			"Cannibal",			
+			"Hemophage",	
+			"Mummy",	
+			"Mummy",		
+			"Mummy",	
+			"Mummy",
 			]
 	if "Vampire" 	in genus:
 		rank += [
@@ -5520,7 +6965,7 @@ def Rank(lusor):
 			"Plant",	
 			"Blossom",
 			]
-	if "Dragon" in genus:
+	if "Dragon" 	in genus:
 		rank += [
 			"Wrath",	
 			"Breath",	
@@ -5554,7 +6999,7 @@ def Rank(lusor):
 			"Terror",	
 			"Wing",
 			]
-	if "Illithid" in genus:
+	if "Illithid" 	in genus:
 		rank += [
 			"Astral",		
 			"Brainkeeper",		
@@ -5686,7 +7131,7 @@ def Rank(lusor):
 			"Mage",			
 			"Hierophant",
 			]
-	if "Bard" 	in genus:
+	if "Bard" 		in genus:
 		rank += [
 			"Bard",		
 			"Jester",			
@@ -5725,7 +7170,11 @@ def Rank(lusor):
 	return random.choice(rank)
 
 def Place(lusor):
-	genus = Genus(lusor)
+	try:
+		genus = lusor.genus
+	except:
+		genus = lusor
+
 	place = []
 	place += [
 		"Dungeon",		
@@ -5769,6 +7218,8 @@ def Place(lusor):
 			"Realm",
 			"Kingdom",
 			"Empire",
+			"Nation",
+			"State",
 			]
 	if "Cleric" in lusor:
 		place += [
@@ -5806,15 +7257,17 @@ def Element(lusor):
 	"""
 	element = []
 	element += [
-		"Fire",
-		"Water",
-		"Earth",
 		"Air",
+		"Gem",
+		"Fire",
+		"Stone",
+		"Earth",
 		"Ice",
 		"Light",
 		"Darkness",
 		"Lightning",
 		"Storms",
+		"Storm",
 		"Thunder",
 		"Flames",
 		"Oceans",
@@ -5827,8 +7280,9 @@ def Element(lusor):
 		"Shadows",
 		"Secrets",
 		"Rain",
+		"Water",
 		]
-	if "Dragon" in lusor.species:
+	if "Dragon" in lusor:
 		element += [
 			"Might",
 			"Will",
@@ -5837,6 +7291,14 @@ def Element(lusor):
 			"Power",
 		]
 	
+	if "Undead" in lusor:
+		element += [
+			"Tomb",
+			"Bone",
+			"Skull",
+			"Blood",
+			"Spirits",
+			]
 	random.shuffle(element)
 	while True:
 		yield element[0]
@@ -5846,16 +7308,19 @@ def Artifact(lusor):
 	artifact = []
 	artifact += [
 		"Amulet",
-		"Sword",
-		"Talisman",
+		"Book",
 		"Goblet",
 		"Ring",
+		"Talisman",
+		"Scales",
+		]
+	artifact += [
 		"Sceptre",
 		"Staff",
 		"Scroll",
-		"Book",
+		"Sword",
 		]
-	if "Human" in lusor:
+	if "Human" 	in lusor:
 		artifact += [
 			"Crown",
 			]
@@ -5876,30 +7341,97 @@ def Artifact(lusor):
 		]
 	return random.choice(artifact)
 
+def Master(lusor):
+	master = []
+	master += [
+		"Master",
+		"Lord",
+		"Lady",
+		"King",
+		"Queen",
+		]
+	
+	if "Human" in lusor:
+		master += [
+			"Prince",
+			"Princess",
+			"Crown",
+			"Emperor",
+			"Empress",
+			"Throne",
+			]
+	if "Elf" in lusor:
+		master += [
+			"Khan",
+			"Leader",
+			"Chieftain",
+			"Ruler"
+			]
+	if "Dwarf" in lusor:
+		master += [
+			"Conqueror",
+			"Conquistador",
+			"Colonizer",
+			"Prince",
+			"Princess",
+			]
+	if "Goblin" in lusor:
+		master += [
+			"Captain",
+			"Voicer",
+			"Grandfather",
+			"Grandmother",
+			"Greatfather",
+			"Greatmother",
+			"Senator",
+			]
+	if "Orc" in lusor:
+		master += [
+			"Tribune", # from Tribe
+			"Hordelord", # from Horde
+			]
+	if "Dragon" in lusor:
+		master += [
+			"Headmaster", # from the Heads of Tiamat
+			]
+	if "Elemental" in lusor:
+		master += [
+			"Djinn",
+			"Genie",
+			]
+	if "Undead" in lusor:
+		master += [
+			"Lich",
+			"Pharaoh",
+			]
+	if "Vampire" in lusor:
+		master += [
+			"Count",
+			"Countess",
+			"Baron",
+			"Baroness",
+			]
+	return random.choice(master)
+	
 def Origin(lusor):
 	'''
 	If you can say: The Dark Lord of X
 	X goes here
 	'''
 
-	genus = Genus(lusor)
+	try:
+		genus = lusor.genus
+	except:
+		genus = lusor
+		
 	descriptor = Descriptor(lusor)
 	rank = Rank(lusor)
-	for _ in range(10):
-		if descriptor.lower() not in rank.lower() and rank.lower() not in descriptor.lower():
-			break
-		rank = Rank(lusor)
 
 	place = Place(lusor)
-	for _ in range(10):
-		if place.lower() not in descriptor.lower() and descriptor.lower() not in place.lower() and \
-			place.lower() not in rank.lower() and rank.lower() not in place.lower() and \
-		place.lower() not in artifact.lower() and artifact.lower() not in place.lower():
-			break
-		place = Place(lusor)
 
 	artifact = Artifact(lusor)
 	element = Element(lusor)
+	master = Master(lusor)
 
 	origin = []
 
@@ -5909,13 +7441,17 @@ def Origin(lusor):
 	# {rank}
 	# {descriptor}
 	origin += [
-		f"of the {element} {place}",
+		f"of the {artifact}", 
 		f"of {element}",
-		f"of the {place} King", 
+		f"of the {element}",
+		f"of the {element} {place}",
+		f"of the {element} {master}",
+		f"of the Mark of {element}",
+		f"of the Mark of the {master}",
+		f"of the {place} {master}", 
 		f"of the {place} {artifact}", 
 		f"of the {descriptor} {artifact}", 
-		f"of the {descriptor} Kingdom", 
-		f"of the {descriptor} Empire", 
+		f"of the {descriptor} {place}", 
 		f"of the {descriptor} Sanctuary", 
 		f"of the {descriptor} Dungeon", 
 		f"of the {descriptor} Woods", 
@@ -6187,7 +7723,7 @@ def Origin(lusor):
 		"from the Hill",
 		"of the Nymph",
 		"from Nature",
-		"of the Wizard",
+		"of the Wizards",
 		"of Nature",
 		"of Light",
 		"of Nature",
@@ -6213,8 +7749,6 @@ def Origin(lusor):
 		f"of the {descriptor} Serpent",
 		"of Serpents",
 		"of Terrible Secrets",
-		"of the Scholar",
-		"of Scholars",
 		f"of the {descriptor} Scholar",
 		f"of the {descriptor} River",
 		"of the River",
@@ -6297,7 +7831,7 @@ def Origin(lusor):
 		"of the Amazon",
 		"of the Arena",
 		"of War",
-		"of the Wizard",
+		"of Wizards",
 		"of the Wolf",
 		f"of the {descriptor} Wolf",
 		f"of the {descriptor} Wizard",
@@ -6622,6 +8156,7 @@ def Origin(lusor):
 		"of the Talisman",
 		"of Memory",
 		"of the Tiger",
+		"of Tigers",
 		"of Extinction",
 		f"of the {descriptor} Sandbar",
 		f"of the {descriptor} Sun's Zenith",
@@ -6865,6 +8400,10 @@ def Origin(lusor):
 			]
 	if "Expert" 	in genus:
 		origin += [
+			"of the Scholar",
+			"of Scholars",
+			"of the Scholar",
+			"of the Scholars",
 			f"of {descriptor} Field",
 			f"of {descriptor} Trade",
 			f"of {descriptor} Study",
@@ -7029,6 +8568,14 @@ def Origin(lusor):
 			]
 	if "Scholar" 	in genus:
 		origin += [
+			"of the Scholar",
+			"of Scholars",
+			"of the Scholar",
+			"of the Scholars",
+			f"of {descriptor} Scholar",
+			f"of {descriptor} Scholars",
+			f"of the {descriptor} Scholar",
+			f"of the {descriptor} Scholars",
 			f"of the {descriptor} Academy",
 			f"of the {descriptor} Society",
 			f"of the {descriptor} Library",
@@ -7051,8 +8598,16 @@ def Origin(lusor):
 			]
 	if "Wizard"		in genus:
 		origin += [
-		"of Merlin",
-		]
+			"of the Scholar",
+			"of Scholars",
+			"of the Scholar",
+			"of the Scholars",
+			f"of {descriptor} Scholar",
+			f"of {descriptor} Scholars",
+			f"of the {descriptor} Scholar",
+			f"of the {descriptor} Scholars",
+			"of Merlin",
+			]
 	if "Sorcerer" 	in genus:
 		origin += [
 		f"of {descriptor} Ancestry",
@@ -7177,10 +8732,10 @@ def Origin(lusor):
 		if "Living Spell" in genus:
 				origin += [
 					"of the Spell Storms",
-					"of the Arcane Nexus",
+					"of the Nexus",
 					"of the Magical Anomalies",
-					"of the Enchanted Vortex",
-					"of the Wizard's Binding"]
+					"of the Vortex",
+					]
 		if "Dominators" in genus:
 			origin += [
 				"of the Iron Will",
@@ -7262,7 +8817,9 @@ def Origin(lusor):
 			]
 	if "Kitsune"	in genus:
 		origin += [
-			"of Nine Tails",			"of Nine Tails",			"of the Trickster",
+			"of Nine Tails",			
+			"of Nine Tails",			
+			"of the Trickster",
 			]
 	if "Catfolk"	in genus:
 		origin += [
@@ -7283,6 +8840,53 @@ def Origin(lusor):
 		"of the Underworld Gates",
 		"of the Pit",
 		]
+	if "Undead" 	in genus:
+		origin += [
+			"of the Undead",
+			"of the Living Dead",
+			"of the Tomb",
+			f"of the {descriptor} Tomb",
+			"of the Bone",
+			f"of the {descriptor} Bone",
+			"of the Necropolis",
+			f"of the {descriptor} Necropolis",
+			"of the Tumulus",
+			f"of the {descriptor} Tumulus",
+			"of the Crypt",
+			f"of the {descriptor} Crypt",
+			"of the Catacombs",
+			f"of the {descriptor} Catacombs",
+			"of the Mausoleum",
+			f"of the {descriptor} Mausoleum",
+			"of the Crypt",
+			f"of the {descriptor} Crypt",
+			]
+		if "Mummy" in genus:
+			origin += [
+				"of the Mummy",
+				f"of the {descriptor} Mummy",
+				"of the Sarchophagus",
+				f"of the {descriptor} Sarchophagus",
+				"of the Mummy's Curse",
+				"of the Mummy's Wrath",
+				"of the Mummy's Tomb",
+				"of the Pyramid",
+				f"of the {descriptor} Pyramid",
+				"of the Zygurat",
+				f"of the {descriptor} Zygurat",
+				"of the Sphnx",
+				f"of the {descriptor} Sphinx",
+				"of the Tomb's King",
+				"of the Tomb's Queen",
+				f"of the Tomb's {rank}",
+				"of the Damned",
+
+				]
+		if "Vampire" in genus:
+			origin += [
+				"of the Vampire",
+				f"of the {descriptor} Vampire",
+				]
 
 	origin += [
 		f"of the {descriptor} War",
@@ -7346,78 +8950,77 @@ def Origin(lusor):
 		"for Hire",
 		"for Hire",
 		"of Akroma",
-		"Of Athena",
+		"of Athena",
 		"of Baba Yaga",
-		"Of Death",
+		"of Death",
 		"of Delphos",
 		"of El Dorado",
 		"of Eldorado",
 		"of Elysium",
-		"Of Fate",
+		"of Fate",
 		"of Fire",
 		"of Gold",
-		"Of Heaven",
+		"of Heaven",
 		"of Hell",
 		"of Hispaniola",
 		"of Iron",
-		"Of Justice",
+		"of Justice",
 		"of La Noche Triste",
 		"of Niflheim",
-		"Of Odin",
+		"of Odin",
 		"of Port Royal",
 		"of Silver",
 		"of Steel",
-		"Of The Abyss",
-		"of The Seventh Hell",
-		"of The Amulet",
-		"Of the Autumn",
+		"of the Abyss",
+		"of the Seventh Hell",
+		"of the Amulet",
+		"of the Autumn",
 		"of the Bamboo Grove",
 		"of the City",
-
-		"Of The Crown",
-		"Of The Dead",
-		"Of The Desert",
-		"Of the Divine",
-		"Of The East",
+		"of the Crown",
+		"of the Dead",
+		"of the Desert",
+		"of the Divine",
+		"of the East",
 		"of the East",
 		"of the Endless Sands",
 		"of the Eternal Saga",
 		"of the Eternal",
 		"of the Faith",
-		"Of The Fiend",
-		"Of The Forest",
+		"of the Fiend",
 		"of the Forest",
-		"Of The Forge",
+		"of the Forest",
+		"of the Forge",
 		"of the Forty Thieves",
 		"of the Galaxy",
-		"of The Goblet",
+		"of the Goblet",
 		"of the Gods",
 		"of the Golden City",
-		"of The Griffon",
-		"Of The Hells",
-		"Of the Hidden",
-		"Of The Hill",
+		"of the Griffon",
+		"of the Hells",
+		"of the Hidden",
+		"of the Hill",
 		"of the Hydra",
 		"of the Jewel",
 		"of the Jungle",
-		"Of the Kingdom",
+		"of the Kingdom",
 		"of the Kraken",
 		"of the Labyrinth",
 		"of the Land",
 		f"of the {descriptor} Land",
-		"Of the Last Fire",
+		"of the Last Fire",
 		"of the Moon Wood",
 		"of the Morningstar",
 		"of the Mountain",
-		"Of The Mountain",
-		"Of The North",
+		"of the Mountain",
 		"of the North",
-		"Of the Oceans",
+		"of the North",
+		"of the Oceans",
 		"of the Odyssey",
-		"Of the Old One",
-		"Of The Oracle",
-		"Of the Pack",
-		"Of The People",
+		"of the Old One",
+		"of the Oracle",
+		"of the Pack",
+		"of the People",
 		"Of The Pharaoh",
 		"Of The Plain",
 		"of the Plains",
@@ -7455,7 +9058,7 @@ def Origin(lusor):
 		f"of the {descriptor} Hoard",
 		]
 
-	if "Rogue" in genus:
+	if "Rogue" 	in genus:
 		origin += [
 			"of the Shadows",
 			f"of the {descriptor} Shadow",
@@ -7473,7 +9076,7 @@ def Origin(lusor):
 			f"of the {descriptor} Traditions",
 			f"of the {descriptor} Spirits",
 			f"of the Ancestral Spirits",]
-	if "Spy" in genus:
+	if "Spy"    in genus:
 		origin += [
 			"of the Mission",
 			"of the Undercover Operation",
@@ -7601,9 +9204,69 @@ def Origin(lusor):
 			]
 	if "Goblin" in genus:
 		origin += [
-    "of the Clan Zanzigzags", "of the Clan Fuddleheads", "of the Caravan of Nowherelse", "of the Pirate Paraders",  f"of the {descriptor} Klan", "of the Rusty Dagga Klan",		f"of the {descriptor} Dagga Klan", "of the Broke Toof Klan",		f"of the {descriptor} Toof Klan", "of the Sneeky Shaddaz Klan",	f"of the {descriptor} Shaddaz Klan", "of the Raginfaya Klan",		f"of the {descriptor} Fiya Klan", "of the Laffinskullz Klan", f"of the {descriptor} Skull Klan", f"of the {descriptor} Moon Klan", "of the Mystik Mushrumz Klan", "of the Spareem Klan", "of the Gligrove Klan", "of the Frosternz Klan", "of the Vybroilet Klan", "of the Whimzikren Klan", "of the Moonlinyun Klan", "of the Dazzliancaz Klan", "of the Enchantenvoyz Klan", "of the Silvant Klan", "of the Gleamguard Klan", "of the Raydirunnaz Klan", "of the Mystinger Klan", "of the Faefollowaz Klan", "of the Shaddasneek Klan", "of the Lunalurka Klan", "of the Sinistez Klan", "of the Vortekandalz Klan", "of the Zanizip Klan", "of the Puzzleress Klan", "of the Trickytinka Klan", "of the Unbrites Klan", "of the Snareroot Clan", "of the Gravetooth Gigglers", "of the Marblesharp Klan", "of the Shaddafriend Klan", "of the Tanglestride Clan", "of the Wackiskaz Klan", "of the Riddleskull Clan", "of the Gigglang Klan", "of the Twistailz Klan", "of the Crookknee Clan", "of the Zanzigzagz Klan", "of the Quirkilz Klan", f"of the {descriptor} Pirates", f"of the {descriptor} Horde", f"of the {descriptor} Nomadz", f"of the {descriptor} Swampz Klan", f"of the {descriptor} Leafz Klan", f"of the {descriptor} Shade Klan", "of the Sinistart Klan", "of the Ravvinlot Klan", "of the Riddleburr Clan", "of the Springsprong Klan", "of the Sneekyshadda Klan", "of the Lonesok Klan", "of the Sparkypark Klan", "of the Spisnow Conez Klan", "of the Skwiril Klan", "of the Stalkawalkaz Klan", "of the Threshold Shades", "of the Suntare Lot", "of the Swifity Klan", "of the Silvarviz Klan", "of the Silvandaz Klan", "of the Talktrees Lot", "of the Whizirlaz Klan", "of the Wilboarz Lot", "of the Witbitz Klan", "of the Woozlez Klan", "of the Wandrerz Klan", "of the Wrongwayz Klan", "of the Zany Zip-Zip Klan", f"of the {descriptor} Dagga", f"of the {descriptor} Fiya", f"of the {descriptor} Moon", f"of the {descriptor} Serpent", f"of the {descriptor} Shadda", f"of the {descriptor} Skull", f"of the {descriptor} Toof", f"of the {descriptor} Tree", f"of the {descriptor} Wolf", "of the Redhats Klan","of the Traphunters Clan", f"of the {descriptor} Clan","of the Rustydagger Clan", f"of the {descriptor} Dagger Clan","of the Brokentooth Clan", f"of the {descriptor} Tooth Clan","of the Sneaky Shadows Clan",	f"of the {descriptor} Shadow Clan", "of the Ragingfire Clan", f"of the {descriptor} Fire Clan", "of the Cunninfox Clan", "of the Wildboar Clan", "of the Quickfoot Clan", "of the Slyraven Clan", "of the Mudwater Clan", "of the Gleamgem Clan", "of the Fierce Wolf Clan", f"of the {descriptor} Wolf Clan", "of the Bounrabbit Clan", "of the Laughskull Clan", f"of the {descriptor} Skull Clan", "of the Dancileaf Clan", "of the Twilickster Clan", "of the Lunantern Clan", f"of the {descriptor} Moon Clan", "of the Mystimushroom Clan", "of the Whisperwillow Clan", "of the Starstalker Clan", "of the Enchantember Clan", "of the Dancedrop Clan", "of the Shimmershade Clan", "of the Gleaminglade Clan", "of the Blinkblossom Clan", "of the Sparkleam Clan", "of the Glimmerove Clan", "of the Sylvadow Clan", "of the Charmerry Clan", "of the Moonmarauder Clan", "of the Deweamer Clan", "of the Frostern Clan", f"of the {descriptor} Tree Clan", "of the Etherelm Clan", "of the Vibriolet Clan", "of the Whimsicren Clan", "of the Moonlinion Clan", "of the Dazzlancer Clan","of the Enchantenvoy Clan", "of the Sylvant Clan", "of the Gleamguardian Clan","of the Radiant Runner Clan", "of the Mystic Messenger Clan", "of the Whimward Clan", "of the Fey Messenger Clan", "of the Nocturnal Nuisance Clan", "of the Mystic Mirage Clan", "of the Twilight Trickster Clan", "of the Dusk Dweller Clan", "of the Midnight Marauder Clan", "of the Veiled Vagabond Clan", "of the Lunar Lurker Clan", "of the Nightshade Clan", "of the Crimson Clan", "of the Vortex Vandals", "of the Moxier Clan", "of the Unbrights Clan", "of the Laterunner Clan", "of the Shadowtrippers Clan", "of the Moonlit Misrule Clan", "of the Jarstuckers Clan", "of the Dancing Tree Clan", "of the Rockmunch Clan", "of the Sunstarer Clan", "of the Tallyrot Clan", "of the Moonbark Clan", "of the Marblesharp Clan",  "of the Redsnow Clan", "of the Shadowfriend Clan", "of the Broken Compass Nomads", "of the Tail Twisters Clan", f"of the {descriptor} Pirates", f"of the {descriptor} Horde", f"of the {descriptor} Nomads", f"of the {descriptor} Travelers", f"of the {descriptor} Swamp", f"of the {descriptor} Leaf", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", "of the Boggle Clan", "of Brilliantbolt Clan", "of the Broken Compass Nomads", "of Brokentooth Clan", "of the Trickster Clan", "of the Dull Blade Clan", "of the Dusk Dwellers", "of the Enchanember Clan",  "of the Pumpkin Smasher Clan", "Of the Dreamwalker Clan", "of the Enchanted Elm Clan", "of the Treethrower Clan", "of the Tripfeet Clan", "of the Holefeller Clan","of the Feywild Fellows", "of the Fierce Wolf Klan", "of the Forgotten Name Clan", "of the Fuzzy Clan", "of the Gleamgem Clan", "of the Gleamglade Clan", "of the Gringuardian Clan", "of the Gloomgrin", "Of the Bulcander Clan", "of the Lost Clan", "of the Hidden Clan", "of the Laughing Skull Clan", "of the Lost Clan", "of the Lost Marble Clan", "of the Lunar Lurker Clan", "of the Lustrous Clan", "of the Marblesharp Klan", "of the Tatiana Messengers Clan", "of the Oberon Messengers Clan", "of the Midnight Marauder Klan", "of the Moonbark Klan", f"of the {descriptor} Mystic Clan", f"of the {descriptor} Mushroom Clan", "of the Nightshade Clan", f"of the Nocturnal {rank}", f"of the {descriptor} Brawler", "of the Keenscent Clan", "of the Unbright Clan", "of the Obsidian Clan", "of the Quickfoot Clan", "of the Radiant Runner Clan", "of the Redhats", "of the Redsnow Klan", "of the Rock Eater Clan", "of the Rusty Clan", "of the Shadow Clans", f"of the {descriptor} Shade", f"of the {descriptor} Raven", "of the Spring Court", "of the Sunstarer Clan", "of the Titan's Servant Clan", "of the Sylvan Shadows", "of the Traphunter Clan", "of the Veiled Vagabonds", "of the Vortex Vandals", "of the Whispering Willow Clan", "of the Wild Boar Clan", "of the Wrong Nomads", f"of the {descriptor} Clan", f"of the {descriptor} Dagger Clan", f"of the {descriptor} Fire Clan", f"of the {descriptor} Moon Clan", f"of the {descriptor} Serpent Clan", f"of the {rank} Shadow Clan", f"of the {descriptor} Shadow Clan", f"of the {descriptor} Skull Klan", f"of the {descriptor} Tooth Clan", f"of the {descriptor} Tree Clan", f"of the {descriptor} Wolf Clan", "of the Redhat Clan","of the Trapsnack Hunters Clan", "of the Bright Shadow Clan", "of the Harmless Marauders", "of the Foxfire Clan","of the Tealeaf Tricksters", "of the Dewdrop Dancer Clan", "of the Peacebrawlers", "of the Startrail Stalkers", "of the Briarhop Clan", "of the Hollowstep Marchers", "of the Wallwalkers", "of the Sock Seekers", "of the Witchlight Wastrels", "of the Beerspearer Clan", "of the Dagger Swagger Clan", "of the Moon Goons", "of the Shade Parade", "of the Fireflyers", "of the Veilvanish", "of the Midmuckers", "of the Gloomgrin Gang", 
-	"of the Mystic Messengers", "of the Mud Nomads", "of the Leaf Loafers",	"of the Swamp Marchers", f"of the {descriptor} Horde", f"of the {rank} Horde", "of the Pirate Parade", f"of the {rank} Parade",	f"of the {descriptor} Firedancers", f"of the {descriptor} Wolfriders", f"of the {descriptor} Pirates", f"of the {descriptor} Horde", f"of the {descriptor} Nomads", f"of the {descriptor} Travelers", f"of the {descriptor} Leaflurkers", "of the Bramblebunch Clan", "of the Clan Rubaruse", "of the Clan Sarisandal", "of the Clan Rumrazor", "of the Klan Makrobaz", "of the Clan Bargabeh", "of the Klan Willowhisper", "of the Star Stalker Clan", "of the Shadeshimmer Clan", "of the Gladegleamer Clan", "of the Clan Baglimmer", "of the Clan Zilsylvan", "of the Klan Anarkarmers", "of the Clan Derakrifters", "of the Clan Barqaruners", "of the Lamalacky Klan", "of the Veiled Vagabonds", "of the Gloomgrin Gang", "of the Toolate Caravan", "of the Briar Mask Tricksters", "of the Wrong Dune Caravan", "of the Clan Jarstuckjam", "of the Clan Headbonkers",  "of the Pathless Caravan", "of the Slipshadow Caravan", "of the Wallwalkers Clan", "of the Sunstare Society", "of the Clan Treetalkers", "of the Clan Moonbarkers", f"of the {descriptor} Nomads", f"of the {descriptor} Clan", "of the Dullblade Nomads", "of the Kabila Mudmind Mystics", f"of the {descriptor} Caravan", "of the Broken Compass Caravan", f"of the {descriptor} Troupe", "of the Turvy Troupe", "of the Fluzzy Clan", "of the Clan Wacky Whiskers", "of the Clan Tailtwisters", "of the Zigzagers", "of the Clan Quirkyquills", "of the Fuddleheads", "of the Green Horde", "of the Caravan of Nowherelse", "of the Dustway Nomads", "of the Leaflurker Travelers", "of the Swamp Stompers", "of the Parade Pirates", f"of the {descriptor} Wolf Whistlers", f"of the {descriptor} Skull Clan", f"of the {descriptor} Moon {rank} Clan", f"of the {descriptor} Fire Dancers Clan", "of the Redjatz Klan", "of the Trapunters Klan", f"of the {descriptor} Firedancers Clan", "of the Clan Rubahruse", "of the Clan Dandanxekan", "of the Kabila Zillers", "of the Clan Gurazgallop", "of the Forgoten Name Clan",
- ]
+			"of the Clan Zanzigzags", "of the Clan Fuddleheads", "of the Caravan of Nowherelse", 
+			"of the Pirate Paraders",  f"of the {descriptor} Klan", "of the Rusty Dagga Klan",		f"of the {descriptor} Dagga Klan", "of the Broke Toof Klan",		
+			f"of the {descriptor} Toof Klan", "of the Sneeky Shaddaz Klan",	f"of the {descriptor} Shaddaz Klan", "of the Raginfaya Klan",		f"of the {descriptor} Fiya Klan", 
+			"of the Laffinskullz Klan", 
+			f"of the {descriptor} Skull Klan", f"of the {descriptor} Moon Klan", "of the Mystik Mushrumz Klan", 
+			"of the Spareem Klan", "of the Gligrove Klan", "of the Frosternz Klan", "of the Vybroilet Klan", "of the Whimzikren Klan", "of the Moonlinyun Klan", "of the Dazzliancaz Klan", "of the Enchantenvoyz Klan", "of the Silvant Klan", "of the Gleamguard Klan", "of the Raydirunnaz Klan", "of the Mystinger Klan", "of the Faefollowaz Klan", "of the Shaddasneek Klan", "of the Lunalurka Klan", "of the Sinistez Klan", "of the Vortekandalz Klan", "of the Zanizip Klan", "of the Puzzleress Klan", "of the Trickytinka Klan", "of the Unbrites Klan", "of the Snareroot Clan", "of the Gravetooth Gigglers", "of the Marblesharp Klan", "of the Shaddafriend Klan", "of the Tanglestride Clan", "of the Wackiskaz Klan", 
+			"of the Riddleskull Clan", "of the Gigglang Klan", "of the Twistailz Klan", "of the Crookknee Clan", "of the Zanzigzagz Klan", "of the Quirkilz Klan", f"of the {descriptor} Pirates", f"of the {descriptor} Horde", f"of the {descriptor} Nomadz", f"of the {descriptor} Swampz Klan", f"of the {descriptor} Leafz Klan", f"of the {descriptor} Shade Klan", "of the Sinistart Klan", "of the Ravvinlot Klan", 
+			"of the Riddleburr Clan", "of the Springsprong Klan", "of the Sneekyshadda Klan", "of the Lonesok Klan", "of the Sparkypark Klan", "of the Spisnow Conez Klan", "of the Skwiril Klan", "of the Stalkawalkaz Klan", "of the Threshold Shades", "of the Suntare Lot", "of the Swifity Klan", "of the Silvarviz Klan", "of the Silvandaz Klan", "of the Talktrees Lot", "of the Whizirlaz Klan", "of the Wilboarz Lot", "of the Witbitz Klan", "of the Woozlez Klan", "of the Wandrerz Klan", "of the Wrongwayz Klan", "of the Zany Zip-Zip Klan", f"of the {descriptor} Dagga", f"of the {descriptor} Fiya", f"of the {descriptor} Moon", f"of the {descriptor} Serpent", f"of the {descriptor} Shadda", f"of the {descriptor} Skull", f"of the {descriptor} Toof", f"of the {descriptor} Tree", 
+			f"of the {descriptor} Wolf", "of the Redhats Klan","of the Traphunters Clan", f"of the {descriptor} Clan","of the Rustydagger Clan", f"of the {descriptor} Dagger Clan",
+			"of the Brokentooth Clan", f"of the {descriptor} Tooth Clan","of the Sneaky Shadows Clan",	
+			f"of the {descriptor} Shadow Clan", "of the Ragingfire Clan", f"of the {descriptor} Fire Clan", "of the Cunninfox Clan", "of the Wildboar Clan", "of the Quickfoot Clan", "of the Slyraven Clan", "of the Mudwater Clan", "of the Gleamgem Clan", "of the Fierce Wolf Clan", f"of the {descriptor} Wolf Clan", "of the Bounrabbit Clan", 
+			"of the Laughskull Clan", f"of the {descriptor} Skull Clan", "of the Dancileaf Clan", "of the Twilickster Clan", "of the Lunantern Clan", f"of the {descriptor} Moon Clan", "of the Mystimushroom Clan", "of the Whisperwillow Clan", "of the Starstalker Clan", "of the Enchantember Clan", "of the Dancedrop Clan", "of the Shimmershade Clan", "of the Gleaminglade Clan", "of the Blinkblossom Clan", "of the Sparkleam Clan", "of the Glimmerove Clan", 
+			"of the Sylvadow Clan", "of the Charmerry Clan", "of the Moonmarauder Clan", "of the Deweamer Clan", "of the Frostern Clan", f"of the {descriptor} Tree Clan", "of the Etherelm Clan", "of the Vibriolet Clan", "of the Whimsicren Clan", "of the Moonlinion Clan", "of the Dazzlancer Clan","of the Enchantenvoy Clan", "of the Sylvant Clan", "of the Gleamguardian Clan","of the Radiant Runner Clan", "of the Mystic Messenger Clan", "of the Whimward Clan", "of the Fey Messenger Clan", "of the Nocturnal Nuisance Clan", "of the Mystic Mirage Clan", "of the Twilight Trickster Clan", "of the Dusk Dweller Clan", "of the Midnight Marauder Clan", "of the Veiled Vagabond Clan", "of the Lunar Lurker Clan", "of the Nightshade Clan", "of the Crimson Clan", "of the Vortex Vandals", "of the Moxier Clan", "of the Unbrights Clan", "of the Laterunner Clan", "of the Shadowtrippers Clan", "of the Moonlit Misrule Clan", "of the Jarstuckers Clan", "of the Dancing Tree Clan", "of the Rockmunch Clan", "of the Sunstarer Clan", "of the Tallyrot Clan", "of the Moonbark Clan", "of the Marblesharp Clan",  "of the Redsnow Clan", "of the Shadowfriend Clan", "of the Broken Compass Nomads", "of the Tail Twisters Clan", f"of the {descriptor} Pirates", f"of the {descriptor} Horde", f"of the {descriptor} Nomads", f"of the {descriptor} Travelers", f"of the {descriptor} Swamp", f"of the {descriptor} Leaf", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", 
+			f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", 
+			f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", 
+			f"of the {descriptor} Clan", f"of the {descriptor} Clan", f"of the {descriptor} Clan", 
+			f"of the {descriptor} Clan", 
+			f"of the {descriptor} Clan", 
+			f"of the {descriptor} Clan", 
+			f"of the {descriptor} Clan", 
+			"of the Boggle Clan", 
+			"of Brilliantbolt Clan", 
+			"of the Broken Compass Nomads", 
+			"of Brokentooth Clan", 
+			"of the Trickster Clan", 
+			"of the Dull Blade Clan", 
+			"of the Dusk Dwellers", 
+			"of the Enchanember Clan",  
+			"of the Pumpkin Smasher Clan", 
+			"Of the Dreamwalker Clan", 
+			"of the Enchanted Elm Clan", 
+			"of the Treethrower Clan", 
+			"of the Tripfeet Clan", 
+			"of the Holefeller Clan",
+			"of the Feywild Fellows", 
+			"of the Fierce Wolf Klan", 
+			"of the Forgotten Name Clan", "of the Fuzzy Clan", "of the Gleamgem Clan", 
+			"of the Gleamglade Clan", "of the Gringuardian Clan", "of the Gloomgrin", 
+			"Of the Bulcander Clan", "of the Lost Clan", "of the Hidden Clan", 
+			"of the Laughing Skull Clan", "of the Lost Clan", "of the Lost Marble Clan", 
+			"of the Lunar Lurker Clan", "of the Lustrous Clan", "of the Marblesharp Klan", "of the Tatiana Messengers Clan", "of the Oberon Messengers Clan", "of the Midnight Marauder Klan", "of the Moonbark Klan", f"of the {descriptor} Mystic Clan", f"of the {descriptor} Mushroom Clan", "of the Nightshade Clan", f"of the Nocturnal {rank}", f"of the {descriptor} Brawler", "of the Keenscent Clan", "of the Unbright Clan", "of the Obsidian Clan", "of the Quickfoot Clan", "of the Radiant Runner Clan", "of the Redhats", "of the Redsnow Klan", "of the Rock Eater Clan", "of the Rusty Clan", "of the Shadow Clans", f"of the {descriptor} Shade", f"of the {descriptor} Raven", "of the Spring Court", "of the Sunstarer Clan", "of the Titan's Servant Clan", "of the Sylvan Shadows", "of the Traphunter Clan", "of the Veiled Vagabonds", "of the Vortex Vandals", "of the Whispering Willow Clan", "of the Wild Boar Clan", "of the Wrong Nomads", f"of the {descriptor} Clan", f"of the {descriptor} Dagger Clan", f"of the {descriptor} Fire Clan", f"of the {descriptor} Moon Clan", f"of the {descriptor} Serpent Clan", f"of the {rank} Shadow Clan", f"of the {descriptor} Shadow Clan", f"of the {descriptor} Skull Klan", f"of the {descriptor} Tooth Clan", f"of the {descriptor} Tree Clan", f"of the {descriptor} Wolf Clan", "of the Redhat Clan",
+			"of the Trapsnack Hunters Clan", 
+			"of the Bright Shadow Clan", 
+			"of the Harmless Marauders", 
+			"of the Foxfire Clan",
+			"of the Tealeaf Tricksters", 
+			"of the Dewdrop Dancer Clan", "of the Peacebrawlers", "of the Startrail Stalkers", "of the Briarhop Clan", "of the Hollowstep Marchers", "of the Wallwalkers", "of the Sock Seekers", "of the Witchlight Wastrels", "of the Beerspearer Clan", "of the Dagger Swagger Clan", "of the Moon Goons", "of the Shade Parade", 
+			"of the Fireflyers", "of the Veilvanish", "of the Midmuckers", "of the Gloomgrin Gang", 
+		"of the Mystic Messengers", "of the Mud Nomads", "of the Leaf Loafers",	"of the Swamp Marchers", f"of the {descriptor} Horde", f"of the {rank} Horde", "of the Pirate Parade", f"of the {rank} Parade",	f"of the {descriptor} Firedancers", f"of the {descriptor} Wolfriders", f"of the {descriptor} Pirates", 
+		f"of the {descriptor} Horde", f"of the {descriptor} Nomads", f"of the {descriptor} Travelers", f"of the {descriptor} Leaflurkers", "of the Bramblebunch Clan", "of the Clan Rubaruse", "of the Clan Sarisandal", "of the Clan Rumrazor", "of the Klan Makrobaz", "of the Clan Bargabeh", "of the Klan Willowhisper", "of the Star Stalker Clan", "of the Shadeshimmer Clan", 
+		"of the Gladegleamer Clan", "of the Clan Baglimmer", "of the Clan Zilsylvan", "of the Klan Anarkarmers", "of the Clan Derakrifters", "of the Clan Barqaruners", 
+		"of the Lamalacky Klan", "of the Veiled Vagabonds", "of the Gloomgrin Gang", "of the Toolate Caravan", "of the Briar Mask Tricksters", "of the Wrong Dune Caravan", "of the Clan Jarstuckjam", "of the Clan Headbonkers",  "of the Pathless Caravan", "of the Slipshadow Caravan", "of the Wallwalkers Clan", "of the Sunstare Society", "of the Clan Treetalkers", "of the Clan Moonbarkers", f"of the {descriptor} Nomads", 
+		f"of the {descriptor} Clan", 
+		"of the Dullblade Nomads", "of the Kabila Mudmind Mystics", f"of the {descriptor} Caravan", "of the Broken Compass Caravan", f"of the {descriptor} Troupe", "of the Turvy Troupe", "of the Fluzzy Clan", "of the Clan Wacky Whiskers", "of the Clan Tailtwisters", "of the Zigzagers", "of the Clan Quirkyquills", "of the Fuddleheads", "of the Green Horde", "of the Caravan of Nowherelse", "of the Dustway Nomads", 
+		"of the Leaflurker Travelers", "of the Swamp Stompers", "of the Parade Pirates", 
+		f"of the {descriptor} Wolf Whistlers", f"of the {descriptor} Skull Clan", 
+		f"of the {descriptor} Moon {rank} Clan", f"of the {descriptor} Fire Dancers Clan", 
+		"of the Redjatz Klan", 
+		"of the Trapunters Klan", 
+		f"of the {descriptor} Firedancers Clan", "of the Clan Rubahruse", 
+		"of the Clan Dandanxekan", "of the Kabila Zillers", "of the Clan Gurazgallop", 
+		"of the Forgoten Name Clan",
+		]
 	if "Undead" in genus:
 		origin += [
 		"of the Ossuary",
@@ -7628,7 +9291,7 @@ def Origin(lusor):
 		"of the Moon",
 		"of the Moonlit Glades",
 		"of the Mystical Moons",
-		"of the Mythic Battles",
+		"of Mythic Battles",
 		"of the Natural Springs",
 		"of the Night",
 		"of the Obscured Mysteries",
@@ -7770,13 +9433,38 @@ def Origin(lusor):
 
 		"of the Edge", 
 		"of the Blade",
-		"of the Scale", 
 
 	]
 	result = random.choice(origin)
-	for _ in range(10):
-		words = [w.lower() for w in result.split() if w.lower() not in ('the', 'of', 'and', 'a', 'in', 'to', 'is', 'on')]
-		if len(words) == len(set(words)):
-			break
-		result = random.choice(origin)
 	return result
+
+
+def test():
+	class Lusor:
+		def __init__(self, genus: str, seed: int | None = None):
+			self.genus = genus
+			self.seed = seed if seed is not None else random.randint(1, 1_000_000)
+
+		def __contains__(self, key: str) -> bool:
+			return key in self.genus
+
+	lusors = [
+		Lusor("Kitsune Cleric Sage"),
+		Lusor("Vampire Undead Paladin"),
+		Lusor("Dwarf Barbarian Fighter"),
+		Lusor("Elf Rogue Wizard"),
+		Lusor("Halfling Cleric Paladin"),
+		Lusor("Gnome Rogue Fighter"),
+		Lusor("Half-Elf-Human Rogue Paladin"),
+		Lusor("Half-Orc+Celestial Barbarian Fighter"),
+		Lusor("Fairy Rogue Wizard"),
+		Lusor("Demon Fiend Berserker Barbarian"),
+		Lusor("Orc Barbarian Wizard"),
+	]
+
+	for lusor in lusors:
+		print(f"{lusor.genus}: \n\t{Title(lusor)}")
+
+
+if __name__ == "__main__":
+	test()

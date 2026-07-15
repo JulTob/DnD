@@ -13,10 +13,10 @@ from app.character_url import (
 )
 
 import app.random as random
-from AtlasVenustas.Kit_of_Loader import loader_head_tags, loader_panel
-from AtlasVenustas.Kit_of_Masonry import masonry_head_tags
-from AtlasVenustas.Kit_of_ShareableLinks import shareable_links_head_tags
-from AtlasVenustas.Kit_of_Tablet import tablet_head_tags
+from AtlasVenustas.Tools_of_Loader import loader_head_tags, loader_panel
+from AtlasVenustas.Tools_of_Masonry import masonry_head_tags
+from AtlasVenustas.Tools_of_ShareableLinks import shareable_links_head_tags
+from AtlasVenustas.Tools_of_Tablet import tablet_head_tags
 from AtlasVenustas.Scroll_of_Styles import style_tag
 from Minion import chronicler, minion
 from shiny import App, reactive, render, ui  
@@ -33,7 +33,7 @@ from AtlasAlusoris.Map_of_Races import Race, race_weights
 from AtlasLusoris.Grimoire_of_Characters import Character
 from AtlasLusoris.Map_of_Backgrounds import backgrounds
 from AtlasLusoris.Map_of_Classes import classes
-from AtlasLusoris.Map_of_Species import species as species_dict
+from AtlasLusoris.Map_of_Species import species as species_dict, creature_type_label
 from AtlasPugna.Map_of_Legendary_Actions import Lair, Legendary, Region
 
 
@@ -190,12 +190,13 @@ def _attack_rolls_html(obj: Any) -> ui.Tag:
 
 
 def _feature_item(name: str, description: str) -> ui.Tag:
-    """Feature blurbs often embed spell HTML — render as HTML, not markdown."""
+    """Feature name as a title line; description renders as markdown (embedded HTML, e.g.
+    spell blurbs, passes through CommonMark untouched — only the markdown syntax is parsed)."""
     body = _safe_str(description, "").strip()
-    return ui.div(
-        {"class": "feature-entry"},
-        ui.HTML(f"<p class='feature-lead'><strong>{escape(_safe_str(name))}.</strong></p>{body}"),
-    )
+    children: list[Any] = [ui.p({"class": "feature-lead"}, f"{_safe_str(name)}.")]
+    if body:
+        children.append(ui.markdown(body))
+    return ui.div({"class": "feature-entry"}, *children)
 
 
 def prose_block(title: str, *content: Any, level: int = 2) -> ui.Tag:
@@ -235,11 +236,12 @@ def stat_chip(emoji: str, label: str, value: str) -> ui.Tag:
 
 
 def spellbook_prose(caster: Any) -> str:
-    """Render a spellcaster's book as flowing markdown — no boxes, grouped by level."""
-    spells = list(getattr(caster, "spells_known", []) or [])
+    """Quick-reference line above the full spellbook: DC, attack bonus, casting ability."""
     lines: list[str] = []
     try:
-        lines.append(f"**Spell Save DC** {caster.spell_save_dc()} · **Attack** +{caster.spell_attack_bonus()}")
+        ability = _safe_str(getattr(caster, "casting_stat", ""), "").strip()
+        tag = f" · **[{ability.capitalize()}]**" if ability else ""
+        lines.append(f"**Spell Save DC** {caster.spell_save_dc()} · **Attack** +{caster.spell_attack_bonus()}{tag}")
     except Exception:
         pass
     slots = getattr(caster, "spell_slots", None)
@@ -248,14 +250,36 @@ def spellbook_prose(caster: Any) -> str:
             lines.append("**Slots** — " + ", ".join(f"L{lvl}: {n}" for lvl, n in slots.items()))
         except Exception:
             pass
-    by_level: dict[int, list[str]] = {}
-    for s in spells:
-        lvl = _safe_int(getattr(s, "level", 0), 0)
-        by_level.setdefault(lvl, []).append(_safe_str(getattr(s, "name", s)))
-    for lvl in sorted(by_level):
-        label = "Cantrips" if lvl == 0 else f"Level {lvl}"
-        lines.append(f"**{label}:** " + ", ".join(sorted(by_level[lvl])))
     return "\n\n".join(lines) if lines else "No spells known."
+
+
+def spellbook_html(caster: Any) -> str:
+    """Full spellbook as the caster's own rich HTML (spell slots, DC, one detailed
+    card per known spell — rules text and all). Each spell's components line gets
+    the casting ability appended, e.g. '[Cha]', so the reader knows what to roll."""
+    try:
+        html = str(caster)
+    except Exception:
+        return ""
+    ability = _safe_str(getattr(caster, "casting_stat", ""), "").strip()
+    if ability:
+        html = html.replace("⦔", f" [{ability.capitalize()}]⦔")
+    return html
+
+
+_NPC_CREATURE_TYPE_RACES = frozenset({
+    "Aberration", "Beast", "Celestial", "Construct", "Dragon",
+    "Elemental", "Fey", "Fiend", "Giant", "Monstrosity", "Ooze", "Plant", "Undead",
+})
+
+
+def _npc_creature_type_label(npc: Any) -> str:
+    race = _safe_str(getattr(npc, "race", ""), "")
+    if race in _NPC_CREATURE_TYPE_RACES:
+        return race
+    if race == "Vampire":
+        return "Undead"
+    return "Humanoid"
 
 
 def build_character_sheet(data: dict[str, Any]) -> ui.Tag:
@@ -271,6 +295,8 @@ def build_character_sheet(data: dict[str, Any]) -> ui.Tag:
     feature_items: list[Any] = []
     for feat in data.get("features", []) or []:
         fname = getattr(feat, "name", None)
+        if fname == "Creature Type":
+            continue
         if fname:
             fdesc = _safe_str(getattr(feat, "description", ""), "")
             feature_items.append(_feature_item(_safe_str(fname), fdesc))
@@ -360,8 +386,11 @@ def build_character_sheet(data: dict[str, Any]) -> ui.Tag:
     saves_box = ui.div({"class": "npc-textbox"}, ui.h2("Saving Throws"), saving_throw_html)
     attacks_box = ui.div({"class": "npc-textbox"}, ui.h2("Attack Rolls"), attack_roll_html)
 
+    creature_type = creature_type_label(data.get("features"))
+
     stat_chips = [
         stat_chip("⚖️", "Alignment", _safe_str(data.get("Alignment", "-"))),
+        stat_chip("👤", "Creature Type", creature_type),
         stat_chip("⚧", "Gender", _safe_str(data.get("Gender", "-"))),
         stat_chip("📏", "Size", _safe_str(data.get("size", "-"))),
         stat_chip("👟", "Speed", _safe_str(data.get("Speed", "-"))),
@@ -383,6 +412,9 @@ def build_character_sheet(data: dict[str, Any]) -> ui.Tag:
         )
 
     prose_sections: list[Any] = []
+    prose_sections.append(
+        prose_section("Features", *feature_items) if feature_items else prose_section("Features", ui.p("None"))
+    )
     if equipment is not None:
         equip_content: list[Any] = [ui.tags.table({"class": "objects-table"}, ui.tags.tbody(*equipment_lines))]
         if bag_rows:
@@ -391,11 +423,15 @@ def build_character_sheet(data: dict[str, Any]) -> ui.Tag:
         equip_content.append(ui.h4(f"Purse: {_safe_str(getattr(equipment, 'purse', '-'))} gp"))
         prose_sections.append(prose_section("Equipment", *equip_content))
     prose_sections.append(prose_section("Backstory", _prose(data.get("Story", ""))))
-    prose_sections.append(
-        prose_section("Features", *feature_items) if feature_items else prose_section("Features", ui.p("None"))
-    )
     if spellcaster is not None:
-        prose_sections.append(prose_section("Spells", _prose(spellbook_prose(spellcaster)), accent=True))
+        prose_sections.append(
+            prose_section(
+                "Spells",
+                _prose(spellbook_prose(spellcaster)),
+                _html_prose(spellbook_html(spellcaster)),
+                accent=True,
+            )
+        )
 
     return ui.div(
         {"class": "sheet note-lines"},
@@ -499,15 +535,16 @@ def build_npc_sheet(npc: NPC) -> ui.Tag:
     languages_box = ui.div(
         {"class": "npc-textbox"},
         ui.h2("Languages"),
-        ui.p(_safe_str(getattr(npc, "languages", "-"))),
+        _html_prose(getattr(npc, "languages", "-")),
     )
-    movement_box = ui.div({"class": "npc-textbox"}, ui.h2("Movement"), _text_html(getattr(npc, "movement", "-")))
-    senses_box = ui.div({"class": "npc-textbox"}, ui.h2("Senses"), _text_html(getattr(npc, "senses", "-")))
-    resistances_box = ui.div({"class": "npc-textbox"}, ui.h2("Resistances"), _text_html(getattr(npc, "resistances", "-")))
+    movement_box = ui.div({"class": "npc-textbox"}, ui.h2("Movement"), _html_prose(getattr(npc, "movement", "-")))
+    senses_box = ui.div({"class": "npc-textbox"}, ui.h2("Senses"), _html_prose(getattr(npc, "senses", "-")))
+    resistances_box = ui.div({"class": "npc-textbox"}, ui.h2("Resistances"), _html_prose(getattr(npc, "resistances", "-")))
 
     # --- Short stats as chips, same vocabulary as the character sheet ---
     stat_chips = [
         stat_chip("\u2696\ufe0f", "Alignment", _safe_str(getattr(npc, "alignment", "-"))),
+        stat_chip("\U0001f464", "Creature Type", _npc_creature_type_label(npc)),
         stat_chip("\u26a7", "Gender", _safe_str(getattr(npc, "gender", "-"))),
         stat_chip("\U0001f4cf", "Size", _safe_str(getattr(npc, "size", "-"))),
         stat_chip("\u2b06\ufe0f", "Level", _safe_str(getattr(npc, "level", "-"))),
@@ -755,6 +792,11 @@ app_ui = ui.page_fluid(
         ui.tags.link(href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC", rel="stylesheet"),
         ui.tags.link(href="https://fonts.googleapis.com/css2?family=Spectral+SC:wght@400;600;700", rel="stylesheet"),
         ui.tags.link(href="https://fonts.googleapis.com/css2?family=Eagle+Lake", rel="stylesheet"),
+        ui.tags.link(href="https://fonts.googleapis.com/css2?family=Italianno", rel="stylesheet"),
+        ui.tags.link(href="https://fonts.googleapis.com/css2?family=Beau+Rivage", rel="stylesheet"),
+        ui.tags.link(href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah", rel="stylesheet"),
+        ui.tags.link(href="https://fonts.googleapis.com/css2?family=Manufacturing+Consent", rel="stylesheet"),
+        ui.tags.link(href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia", rel="stylesheet"),
         style_tag(),
         *tablet_head_tags(),
         *loader_head_tags(),

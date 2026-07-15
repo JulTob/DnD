@@ -1,0 +1,25 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "shiny-app",
+      "runtimeExecutable": "/Users/tbs/Desktop/DnD/.venv/bin/python3",
+      "runtimeArgs": [
+        "-S",
+        "-m",
+        "shiny",
+        "run",
+        "/Users/tbs/Desktop/DnD/shiny_app.py",
+        "--port",
+        "8000",
+        "--reload"
+      ],
+      "cwd": "/Users/tbs/Desktop/DnD",
+      "env": {
+        "PYTHONPATH": "/Users/tbs/Desktop/DnD/.venv/lib/python3.14/site-packages"
+      },
+      "port": 8000,
+      "autoPort": true
+    }
+  ]
+}

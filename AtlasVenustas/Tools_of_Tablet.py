@@ -20,10 +20,10 @@ def tablet_head_tags() -> list[ui.Tag]:
 
 
 if __name__ == "__main__":
-    # Self-test / usage demo. Run:  python AtlasVenustas/Kit_of_Tablet.py
+    # Self-test / usage demo. Run:  python AtlasVenustas/Tools_of_Tablet.py
     assert SCRIPT_PATH.exists(), f"missing {SCRIPT_PATH}"
     script = SCRIPT_PATH.read_text(encoding="utf-8")
     assert "generator-tablet" in script, "expected the tablet wrapper id"
     tags = tablet_head_tags()
     assert len(tags) == 1
-    print(f"Kit_of_Tablet: serves {SCRIPT_URL} ({len(script)} chars) — ok")
+    print(f"Tools_of_Tablet: serves {SCRIPT_URL} ({len(script)} chars) — ok")

@@ -56,7 +56,7 @@ A reviewed, **documented symbol taxonomy** that Julio ratifies:
 | `⛤⛥⛦⛧` | warlok2 unholy | warlock/pact | already in Lodge |
 | `◯` | Warlock sol | circle/pact | safe |
 | `𐦝` | Warlock sol | obscure script | verify font coverage |
-| `🜏` | Warlock orbit | alchemy | **reject** — U+1F70F emoji block |
+| `🜏` | Warlock orbit | alchemy | Julio pushes alchemical symbols without emojis for **accept** |
 
 ### Deliverables
 - [ ] Review notes in `Agora/Dialogs/` (new Dialog) or inline in this questa's Resolution
@@ -76,7 +76,8 @@ A reviewed, **documented symbol taxonomy** that Julio ratifies:
 ## 🏛️ Council
 > Design-Team: SpellsEffects is a mood board — mine it for intent, not code. The sol/planet split is the real find.
 > Lorekeeper Consul: Species and class mappings need a table Julio can read like a bestiary index, not a Python dict only.
-> Readability Consul (Barbarian): Document the *why* next to each symbol — future agents will otherwise re-litigate every glyph.
+> Readability Consul (Barbarian): Document the *why* next to each symbol — future agents will otherwise re-litigate every glyph. 
 > Julio: Aesthetic is user-facing; conscious decisions required.
+> Julio: Let's buuld a "culture" around species as a proxy, and associate meaning and magic to symbols. All unicode is available. Specially egyptian, runic, ancient... anything magical or alchemical, and everything scientific or mathematical.  
 
 **Weighting:** reach 2 × severity 2 = **4** · council leaning: `needs a Dialog`

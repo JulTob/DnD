@@ -28,11 +28,18 @@ Out of scope: extracting CSS to `Charts_of_Styles` (QST-0021.3); NPC sheet migra
 
 ## 🗣️ Deliberation
 
-Readability Consul (Barbarian): The reader's eye wants a **stat block**, not a tag cloud. Flex-wrap sorts by leftover space, not meaning. I count nine chips — a **3×3 CSS grid** reads naturally: three rows of three equal columns. Order top-to-bottom, left-to-right:
+Readability Consul (Barbarian): The reader's eye wants a **stat block**, not a tag cloud. Flex-wrap sorts by leftover space, not meaning. 
 
-| Level | PB | HP |
-| HD | AC | Speed |
-| Alignment | Size | Gender |
+Julio: The natural grouping should keep the order and coupling by adyacent concepts (Speed and size ar fisical, HD and HP are about health, Level and PB are about proficiency...)
+| Alignment  | Gender |
+| Size | Speed |
+| Level | PB 
+| HP | HD 
+| AC | 
+
+Also, I was thinking We could actually move them to the side column to the left, like a quick consultation reference. 
+
+For smaller screens the tags must be self organizing (number of columns fitting the width available in screen). 
 
 Row 1 is *who strong* (progression + current health). Row 2 is *how you endure and move in combat*. Row 3 is *identity*. HP and HD are adjacent in reading order (positions 3→4). Labels should be **short on the page, long on hover**: `PB` with `title="Proficiency Bonus"`, `HP` / `HD` / `AC` likewise. "Proficiency Bonus" and "Armor Class" spelled out are why PB feels cramped and AC feels wide — the label is doing layout work it shouldn't.
 

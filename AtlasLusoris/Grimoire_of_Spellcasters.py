@@ -2,6 +2,7 @@
 
 import random
 from AtlasMagia.Lodge_of_Spells import *
+from AtlasVenustas.Map_of_Fonts import title_font
 
 
 SPELL_LISTS = {
@@ -689,10 +690,9 @@ class Spellcaster:
 		spells_html = "".join(f"""<div class="spell">{spell}</div>""" for spell in caster.spells_known)
 
 		return f"""
-			<h1 style="font-family: 'Iglesia'; font-size:    3.1em; ">{caster.character.char_class} Spellcasting</h1>
+			<h1 style="font-family: {title_font(caster.character.char_class)}; font-size:    3.1em; ">{caster.character.char_class} Spellcasting</h1>
 			<p><b>Spell Slots:</b> {slots_html}</p>
-			<ul style="list-style-type: '🪄'; text-align: left; font-family: 'Iglesia'">{spells_names}</ul>
-			</div>
+			<ul style="list-style-type: '🪄'; text-align: left; font-family: var(--font-script)">{spells_names}</ul>
 			<div class="spell" style="margin-bottom: 1em;">
 				<b>Spell Save DC:</b> {caster.spell_save_dc()}<br>
 				<b>Spell Attack Bonus:</b> +{caster.spell_attack_bonus()}
@@ -800,7 +800,7 @@ class Wizard(Spellcaster):
 			)
 		return f"""
 			<div class="spell--full">
-				<h1 style="font-family: 'Iglesia'; font-size:    3.1em; ">
+				<h1 style="font-family: {title_font('Wizard')}; font-size:    3.1em; ">
 					Wizard Spellcasting</h1>
 				<p> As a student of arcane magic, you have learned to cast spells. </p>
 				</div>
@@ -810,16 +810,16 @@ class Wizard(Spellcaster):
 				You regain all expended slots when you finish a Long Rest.</p>
 				<br><br>
 				</div>
-			<div class="spell" style="font-family: 'Iglesia'">
-				<h2 style="font-family: 'Iglesia'">
+			<div class="spell" style="font-family: var(--font-script)">
+				<h2 style="font-family: var(--font-script)">
 					Spell Save DC:</h2> {caster.spell_save_dc()}<br>
-				<h2 style="font-family: 'Iglesia'">
+				<h2 style="font-family: var(--font-script)">
 					Spell Attack Bonus:</h2> +{caster.spell_attack_bonus()}
 				</div>
 			<div class="spell" style="grid-column: span 1;">
-			<h3 style="font-family: 'Iglesia'; font-size:    3.1em; "> SpellBook </h3>
+			<h3 style="font-family: var(--font-script); font-size:    3.1em; "> SpellBook </h3>
 			You may prepare {n} spells whenever you finish a Long Rest, that you can use at any moment, from your book of spells:
-			<ul style="list-style-type: '🪄'; text-align: left; font-family: 'Iglesia' ">
+			<ul style="list-style-type: '🪄'; text-align: left; font-family: var(--font-script) ">
 				{spells}</ul>
 			<h2>Arcane Focus</h2>
 			You can use an Arcane Focus (such as a wand or scepter),  as a Spellcasting Focus for your Wizard spells.
@@ -925,7 +925,7 @@ class Druid(Spellcaster):
 			)
 		return f"""
 			<div class="spell--full">
-				<h1 style="font-family: 'Iglesia'; font-size:    3.1em; ">
+				<h1 style="font-family: {title_font('Druid')}; font-size:    3.1em; ">
 					Druid Spellcasting</h1>
 				<p> As a student of natural magic, you have learned to cast spells. </p>
 				</div>
@@ -935,16 +935,16 @@ class Druid(Spellcaster):
 				You regain all expended slots when you finish a Long Rest.</p>
 				<br><br>
 				</div>
-			<div class="spell" style="font-family: 'Iglesia'">
-				<h2 style="font-family: 'Iglesia'">
+			<div class="spell" style="font-family: var(--font-script)">
+				<h2 style="font-family: var(--font-script)">
 					Spell Save DC:</h2> {caster.spell_save_dc()}<br>
-				<h2 style="font-family: 'Iglesia'">
+				<h2 style="font-family: var(--font-script)">
 					Spell Attack Bonus:</h2> +{caster.spell_attack_bonus()}
 				</div>
 			<div class="spell" style="grid-column: span 1;">
-			<h3 style="font-family: 'Iglesia'; font-size:    3.1em; "> SpellBook </h3>
+			<h3 style="font-family: var(--font-script); font-size:    3.1em; "> SpellBook </h3>
 			You may prepare {n} spells whenever you finish a Long Rest, that you can use at any moment, from your book of spells:
-			<ul style="list-style-type: '🍀'; text-align: left; font-family: 'Iglesia' ">
+			<ul style="list-style-type: '🍀'; text-align: left; font-family: var(--font-script) ">
 				{spells}</ul>
 			<h2>Arcane Focus</h2>
 			You can use an Arcane Focus (such as a wand or scepter),  as a Spellcasting Focus for your Druid spells.
@@ -1049,7 +1049,7 @@ class Cleric(Spellcaster):
 
 		return f"""
 		<div class=\"spell--full\" >
-			<h1 style=\"font-family: 'Iglesia'; font-size: 3.1em;\">Cleric Spellcasting</h1>
+			<h1 style=\"font-family: {title_font('Cleric')}; font-size: 3.1em;\">Cleric Spellcasting</h1>
 			<p>Drawing on divine power, you prepare <b>{prep_cap}</b> Cleric spells at the end of each long rest.<br>
 			Your spellcasting ability is <b>Wisdom</b>.</p>
 		</div>
@@ -1063,8 +1063,8 @@ class Cleric(Spellcaster):
 			<h2>Spell Attack Bonus</h2> +{caster.spell_attack_bonus()}
 		</div>
 		<div class=\"npc-textbox\" style=\"grid-column: span 1;\">
-			<h3 style=\"font-family:'Iglesia'; font-size:2.5em;\">Prepared Spells</h3>
-			<ul style=\"list-style-type:'📿'; font-family:'Iglesia'; text-align:left;\">
+			<h3 style=\"font-family:var(--font-script); font-size:2.5em;\">Prepared Spells</h3>
+			<ul style=\"list-style-type:'📿'; font-family:var(--font-script); text-align:left;\">
 				{list_items}
 			</ul>
 		</div>
@@ -1156,7 +1156,7 @@ class Ranger(Spellcaster):
 
 		return f"""
 		<div class="npc-textbox--full">
-			<h1 style="font-family: 'Iglesia'; font-size: 3.1em;">Ranger Spellcasting</h1>
+			<h1 style="font-family: {title_font('Ranger')}; font-size: 3.1em;">Ranger Spellcasting</h1>
 			<p>You prepare {n} spells each day, using your Wisdom as your spellcasting ability.</p>
 		</div>
 		<div class="npc-textbox">
@@ -1169,8 +1169,8 @@ class Ranger(Spellcaster):
 			<h2>Spell Attack Bonus:</h2> +{caster.spell_attack_bonus()}
 		</div>
 		<div class="npc-textbox" style="grid-column: span 1;">
-			<h3 style="font-family: 'Iglesia'; font-size: 3.1em;">Spell List</h3>
-			<ul style="list-style-type: '🍀'; font-family: 'Iglesia'; text-align: left;">
+			<h3 style="font-family: var(--font-script); font-size: 3.1em;">Spell List</h3>
+			<ul style="list-style-type: '🍀'; font-family: var(--font-script); text-align: left;">
 				{spells}
 			</ul>
 		</div>
@@ -1281,7 +1281,7 @@ class Sorcerer(Spellcaster):
 
 		return f"""
 		<div class="npc-textbox--full" >
-			<h1 style="font-family:'Iglesia'; font-size:3.1em;">Sorcerer Spellcasting</h1>
+			<h1 style="font-family:{title_font('Sorcerer')}; font-size:3.1em;">Sorcerer Spellcasting</h1>
 			<p>Your innate magic flows from within, allowing you to impose your Will through the Arcane. You cast spells using <b>Charisma</b>.
 			   You know {self.get_stats('cantrips')} cantrips and {self.get_stats('spells')} spells.</p>
 		</div>
@@ -1299,8 +1299,8 @@ class Sorcerer(Spellcaster):
 		</div>
 
 		<div class="npc-textbox" style="grid-column: span 1;">
-			<h3 style="font-family:'Iglesia'; font-size:3.1em;">Known Spells</h3>
-			<ul style="list-style-type:'🔅'; font-family:'Iglesia'; text-align:left;">
+			<h3 style="font-family:var(--font-script); font-size:3.1em;">Known Spells</h3>
+			<ul style="list-style-type:'🔅'; font-family:var(--font-script); text-align:left;">
 				{spell_li}
 			</ul>
 		</div>
@@ -1510,10 +1510,10 @@ class EldritchKnight(Spellcaster):
 		slots_html = "<br>".join(f"<b>Level {lvl}</b>: <i>{num}</i> " for lvl, num in caster.spell_slots.items())
 		return f"""
 			<div class="npc-textbox" style="grid-column: span 1;">
-			<h1 style="font-family: 'Iglesia'; font-size:    3.1em; ">{caster.character.subclass} Spellcasting</h1>
+			<h1 style="font-family: {title_font(caster.character.subclass)}; font-size:    3.1em; ">{caster.character.subclass} Spellcasting</h1>
 			<p> Eldritch Knights combine the martial mastery common to all Fighters with a careful study of magic. Their spells both complement and extend their combat skills.<br> You have learned to cast spells. </p>
 			<h2>Spell Slots:</h2> {slots_html} <br>  You regain all expended slots when you finish a Long Rest.</p>
-			<ul style="list-style-type: '♟️'; text-align: left; font-family: 'Iglesia' ">{spells_names}</ul>
+			<ul style="list-style-type: '♟️'; text-align: left; font-family: var(--font-script) ">{spells_names}</ul>
 			<h2>Arcane Focus</h2>
 			You can use an Arcane Focus (such as a wand or scepter),  as a Spellcasting Focus for your Wizard spells.
 			</div>
@@ -1647,12 +1647,12 @@ class ArcaneTrickster(Spellcaster):
 		slots_html = "<br>".join(f"<b>Level {lvl}</b>: <i>{num}</i> " for lvl, num in slots.items() if num > 0)
 		return f"""
 			<div class="npc-textbox--full">
-				<h1 style="font-family: 'Iglesia'; font-size:    3.1em;">Arcane Trickster Spellcasting</h1>
+				<h1 style="font-family: {title_font('Arcane Trickster')}; font-size:    3.1em;">Arcane Trickster Spellcasting</h1>
 				<p> As an Arcane Trickster, you've learned to weave subtle magic with your rogue's cunning. Your spells come from the Wizard list, cast using Intelligence. <br> You always know <b>Mage Hand</b>, and can select other cantrips and spells from the Wizard list. </p>
 				</div>
 			<div class="npc-textbox" style="grid-column: span 1;">
 				<h2>Spell Slots:</h2> {slots_html} <br>  You regain all expended slots when you finish a Long Rest.
-				<ul style="list-style-type: '🎩'; text-align: left; font-family: 'Iglesia';">{spells_names}</ul>
+				<ul style="list-style-type: '🎩'; text-align: left; font-family: var(--font-script);">{spells_names}</ul>
 				<h2>Arcane Focus</h2>
 				You can use an Arcane Focus (such as a wand or scepter), as a Spellcasting Focus for your Wizard spells.
 				</div>
@@ -1839,7 +1839,7 @@ class Warlock(Spellcaster):
 		if slot_level == 5: symb = "⛥"
 		slot_str = f"""
 			<h3>{slots[slot_level]} × Level {slot_level} Spell Slot(s)</h3>
-			<br><h2 style="font-family: 'Iglesia'; font-size: 2.1em;">"""
+			<br><h2 style="font-family: var(--font-script); font-size: 2.1em;">"""
 		for j in range(slots[slot_level]):
 			slot_str += f" {symb} "
 		slot_str += "</h2>"
@@ -1848,15 +1848,15 @@ class Warlock(Spellcaster):
 			lis = "".join(f"<li>【{s.level}】{s.name}</li>" for s in arcanums)
 			arcanum = f"""
 				<div class="npc-textbox" style="grid-column: span 1;">
-					<h2 style="font-family: 'Iglesia'; font-size: 2.1em;">Mystic Arcanum</h2>
+					<h2 style="font-family: var(--font-script); font-size: 2.1em;">Mystic Arcanum</h2>
 					<p>You know these special once‐per‐rest spells:</p>
-					<ul style="list-style-type: '🪬'; text-align: left; font-family: 'Iglesia'">
+					<ul style="list-style-type: '🪬'; text-align: left; font-family: var(--font-script)">
 						{lis}
 						</ul>
 					<p><i>Each arcanum can be cast once per <i>Long Rest</i> without spending a slot.</i></p>
 					</div>
 				<div class="npc-textbox" style="grid-column: span 1;">
-					<h1 style="font-family: 'Iglesia';"">Spellcasting Focus.</h1>
+					<h1 style="font-family: var(--font-script);"">Spellcasting Focus.</h1>
 					You can use an Arcane Focus (a wand, a cristal ball, or
 					scepter are exmples or Foci) as a <i>Spellcasting Focus</i>
 					for your Warlock spells.
@@ -1867,22 +1867,22 @@ class Warlock(Spellcaster):
 
 		return f"""
 		<div class="npc-textbox--full">
-			<h1 style="font-family: 'Iglesia'; font-size: 3.1em;">Warlock Pact Magic</h1>
+			<h1 style="font-family: {title_font('Warlock')}; font-size: 3.1em;">Warlock Pact Magic</h1>
 			<p>As a warlock, your pact grants you spellcasting drawn from a supernatural patron. Pact Magic uses <b>Charisma</b> and works differently from other spellcasters.</p>
 		</div>
 		<div class="npc-textbox" style="grid-column: span 1;">
-			<h2 style="font-family: 'Iglesia'; font-size: 2.1em;">Pact Magic Slots:</h2>
+			<h2 style="font-family: var(--font-script); font-size: 2.1em;">Pact Magic Slots:</h2>
 			{slot_str}
 			<br><b>All slots are cast at highest slot level.<br>
 			You regain all slots on a Short or Long Rest.</b>
 		</div>
 		<div class="npc-textbox" style="grid-column: span 1;">
-			<h3 style="font-family: 'Iglesia'; font-size: 2.1em;">Prepared Spells</h3>
+			<h3 style="font-family: var(--font-script); font-size: 2.1em;">Prepared Spells</h3>
 			You know {n_prep} warlock spells.<br>
-			<ul style="list-style-type: '🔮'; text-align: left; font-family: 'Iglesia'">
+			<ul style="list-style-type: '🔮'; text-align: left; font-family: var(--font-script)">
 				{spell_list}
 			</ul>
-			<h3 style="font-family: 'Iglesia'; font-size: 2.1em;">Cantrips</h3>
+			<h3 style="font-family: var(--font-script); font-size: 2.1em;">Cantrips</h3>
 			You always know {caster.get_stats("cantrips")} cantrips from the warlock list.<br>
 		</div>
 
@@ -2003,7 +2003,7 @@ class Bard(Spellcaster):
 
 		return f"""
 		<div class="npc-textbox--full">
-			<h1 style="font-family:'Iglesia'; font-size:3.1em;">Bard Spellcasting</h1>
+			<h1 style="font-family:{title_font('Bard')}; font-size:3.1em;">Bard Spellcasting</h1>
 			<p>You draw on the magic of your bardic arts, casting spells using <b>Charisma</b> as your spellcasting ability.</p>
 			<p>You can use a Musical Instrument as a Spellcasting Focus for your Bard spells.</p>
 		</div>
@@ -2018,12 +2018,12 @@ class Bard(Spellcaster):
 			<h2>Spell Attack Bonus:</h2> +{self.spell_attack_bonus()}
 		</div>
 		<div class="npc-textbox" style="grid-column: span 1;">
-			<h3 style="font-family:'Iglesia'; font-size:2.5em;">Cantrips</h3>
-			<ul style="list-style-type:'📜'; font-family:'Iglesia'; text-align:left;">{can_li}</ul>
+			<h3 style="font-family:var(--font-script); font-size:2.5em;">Cantrips</h3>
+			<ul style="list-style-type:'📜'; font-family:var(--font-script); text-align:left;">{can_li}</ul>
 		</div>
 		<div class="npc-textbox" style="grid-column: span 1;">
-			<h3 style="font-family:'Iglesia'; font-size:2.5em;">Known Spells</h3>
-			<ul style="list-style-type:'🎼'; font-family:'Iglesia'; text-align:left;">{list_items}</ul>
+			<h3 style="font-family:var(--font-script); font-size:2.5em;">Known Spells</h3>
+			<ul style="list-style-type:'🎼'; font-family:var(--font-script); text-align:left;">{list_items}</ul>
 		</div>
 		{blurbs}
 		"""
@@ -2038,15 +2038,15 @@ class Bard(Spellcaster):
 		blurbs = "".join(f"<div class='spell'>{s}</div>" for s in self.cantrips_known + self.spells_known)
 		return f"""
 		<div class='npc-textbox--full'>
-			<h1 style='font-family:"Iglesia"; font-size:3.1em;'>Bard Spellcasting</h1>
+			<h1 style='font-family:{title_font("Bard")}; font-size:3.1em;'>Bard Spellcasting</h1>
 			<p>From 11th level onward, every new spell you learn can come from <i>any</i> class list thanks to Magical Secrets.</p>
 			</div>
 		<div class='npc-textbox'><h2>Spell Slots</h2>{slots_html}<br>All slots refresh after a long rest.</div>
 		<div class='npc-textbox'><h2>Spell Save DC</h2> {self.spell_save_dc()}<br><h2>Spell Attack Bonus</h2> +{self.spell_attack_bonus()}</div>
 		<div class='npc-textbox' style='grid-column: span 1;'>
-			<h3 style='font-family:"Iglesia"; font-size:2.3em;'>Cantrips Known</h3>
+			<h3 style='font-family:var(--font-script); font-size:2.3em;'>Cantrips Known</h3>
 			<ul style='list-style-type:"♪";'>{can_li}</ul>
-			<h3 style='font-family:"Iglesia"; font-size:2.3em;'>Spells Known</h3>
+			<h3 style='font-family:var(--font-script); font-size:2.3em;'>Spells Known</h3>
 			<ul style='list-style-type:"🎼";'>{spell_li}</ul>
 			</div>
 		{blurbs}"""
@@ -2187,11 +2187,11 @@ class Paladin(Spellcaster):
 
 		return f"""
           <div class="npc-textbox--full" >
-              <h1 style="font-family:'Iglesia'; font-size:3.1em;">Paladin Spellcasting</h1>
+              <h1 style="font-family:{title_font('Paladin')}; font-size:3.1em;">Paladin Spellcasting</h1>
               <p>You prepare {prepared} Paladin spells each day. Charisma is your spellcasting
   ability, and you can use a holy symbol as your focus.</p>
           </div>
-          {f'<div class="npc-textbox"><h2>Cantrips</h2><ul style="list-style-type:"✠"; text-align:left; font-family:"Iglesia";">{cantrip_items}</ul></div>' if cantrips else ''}
+          {f'<div class="npc-textbox"><h2>Cantrips</h2><ul style="list-style-type:"✠"; text-align:left; font-family:var(--font-script);">{cantrip_items}</ul></div>' if cantrips else ''}
           <div class="npc-textbox">
               <h2>Spell Slots</h2>
               {slots_html}
@@ -2199,7 +2199,7 @@ class Paladin(Spellcaster):
           </div>
           <div class="npc-textbox">
               <h2>Prepared Spells</h2>
-              <ul style="list-style-type:'✠'; text-align:left; font-family:'Iglesia';">
+              <ul style="list-style-type:'✠'; text-align:left; font-family:var(--font-script);">
                   {list_items or "<li>No prepared Paladin spells</li>"}
               </ul>
           </div>

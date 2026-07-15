@@ -114,6 +114,17 @@ sets the module-level random source to the provided Dice, falling back to
 Python's `random` when unset or `None`. The value of that function is isolating
 and specifying the contracted behavior while the abstraction layer migrates.
 
+Julio: For vocabulary extensions, the ideal is to use the official, already
+working TOP implementation from `JulTob/Tag_Oriented_Programming`. It was made
+for exactly this kind of layered contribution. Do not build a fake local TOP
+registry inside `Map_of_Titles`; if title words become Tag contributions, they
+should use the pinned TagKit project.
+
+Julio: The vocabulary should probably have a functional classification, because
+some pools may later serve story generation or similar systems. Think in
+reusable narrative material: Artifacts, Places, Essences or Elements, and
+Themes. Use theme to classify, not only the immediate title slot.
+
 ---
 
 ## ✅ Convergence check
@@ -121,7 +132,8 @@ and specifying the contracted behavior while the abstraction layer migrates.
 - [x] Every called Consul has spoken.
 - [x] First point settled: `"Characteristic" in lusor` is the selector contract.
 - [x] Second point settled: transitional random source is `set_random(Dice)`.
-- [ ] Vocabulary structure and curation criteria still open.
+- [x] Third guardrail settled: real TOP behavior uses official TagKit, not a local imitation.
+- [ ] Vocabulary structure and curation criteria still open within that guardrail.
 - [ ] Return/yield/cache strategy still open.
 
 ---
@@ -157,6 +169,26 @@ Vox: Interim report on **Q-0010 — title map as narrative identity**.
 - This is a bridge while the title map migrates toward the Character Dice /
   `Roll(D=...)` source.
 
+**TOP guardrail settled:**
+
+- If title vocabulary becomes Tag-driven, it must use the official pinned
+  TagKit/TOP project: `github.com/JulTob/Tag_Oriented_Programming`.
+- Transitional subfunctions may organize the current title map, but they must
+  be shaped as a migration path toward TagKit contributions, not as a new local
+  TOP-like framework.
+- `Map_of_Titles` may remain a plain map while the Character root migration is
+  pending; it must not grow a parallel composition engine.
+
+**Vocabulary structure under discussion:**
+
+- Prefer reusable functional categories where they carry meaning beyond titles:
+  Artifacts, Places, Essences/Elements, and Themes.
+- Title-specific roles still exist (`Descriptor`, `Rank`, `Origin`), but they
+  should draw from functional pools rather than trap useful words inside one
+  title-only bucket.
+- This keeps title vocabulary available for later story generation without
+  forcing a new abstraction now.
+
 **Vox synthesis:**
 
 - Leading recommendation for QST-0027.1: implement direct membership
@@ -165,5 +197,5 @@ Vox: Interim report on **Q-0010 — title map as narrative identity**.
 - Strongest alternative: add a small `has_characteristic(lusor, characteristic)`
   helper if raw membership proves too uneven across strings and mappings.
 
-→ First and second points settled by Julio. Next open point: vocabulary
-structure and curation criteria.
+→ Selector contract, RNG transition, and official-TagKit guardrail settled by
+Julio. Next open point: exact vocabulary structure and curation criteria.

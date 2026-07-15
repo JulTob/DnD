@@ -1456,7 +1456,7 @@ def MagicInitiate(class_name: str):
 			f"You learn two cantrips and one 1st-level spell from the "
 			f"{class_name} list (shown once you take the feat). "
 			"You can cast the 1st-level spell once without a spell slot "
-			"and regain that use after a Long Rest."
+			"and regain that use after a Long Rest. <br> "
 			f"""<b>Gained Spells:</b>
 			{bullets}"""
 			"You can cast the 1st-level spell in this list once per Long Rest.<br> "
