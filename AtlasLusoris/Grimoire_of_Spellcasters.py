@@ -621,16 +621,15 @@ class Wizard(Spellcaster):
 			<div class="npc-textbox" style="grid-column: span 3;">
 				<h1 style="font-family: 'Iglesia'; font-size:    3.1em; ">
 					The Book of Names</h1>
-				<p>You do not invent magic. You hunt True Names, write them,
-				and speak them when the world will answer. To know the name
-				is to understand the thing — and to understand it is to
-				connect with it. Intelligence is the voice you use.</p>
+				<p>Wonder happens on the road. The book is how you carry it.
+				You hunt names, write them, and speak them when the world
+				will answer. Intelligence is the voice you use.</p>
 				</div>
 			<div class="npc-textbox" style="grid-column: span 1;">
 				<h2>Spell Slots:</h2>
 				{slots_html} <br>
 				You regain all expended slots when you finish a Long Rest.
-				A slot is a name spoken with enough breath to wake it.</p>
+				</p>
 				<br><br>
 				</div>
 			<div class="npc-textbox" style="font-family: 'Iglesia'">
@@ -641,14 +640,13 @@ class Wizard(Spellcaster):
 				</div>
 			<div class="npc-textbox" style="grid-column: span 1;">
 			<h3 style="font-family: 'Iglesia'; font-size:    3.1em; "> Spellbook </h3>
-			When you finish a Long Rest, you may prepare {n} names from the
+			When you finish a Long Rest, you may prepare {n} spells from the
 			book — the ones you can speak at any moment. 【prepared】
 			〖written, not prepared〗
 			{index}
 			<h2>Arcane Focus</h2>
-			You can use an Arcane Focus (wand, scepter, orb, staff) as a
-			Spellcasting Focus for your Wizard spells — a tool for aiming
-			a name without shouting it into bare air.
+			You can use an Arcane Focus as a Spellcasting Focus for your
+			Wizard spells.
 			</div>
 			"""
 

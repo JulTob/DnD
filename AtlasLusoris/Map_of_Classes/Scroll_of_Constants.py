@@ -15,6 +15,7 @@ def subclasses():
 		"Champion", "Battle Master", "Eldritch Knight", "Samurai"],
 	'Wizard': [
 		"Evoker", "Illusionist", "Necromancer", "Diviner", "Abjurer",
+		"Bladesinger",
 		],
 	'Rogue': [
 		"Assassin",	 "Arcane Trickster", "Thief", "Swashbuckler",	],

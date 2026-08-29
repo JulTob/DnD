@@ -26,6 +26,8 @@ TRADITION_ALIASES = {
 	"Divination": "Diviner",
 	"Abjurer": "Abjurer",
 	"Abjuration": "Abjurer",
+	"Bladesinger": "Bladesinger",
+	"Bladesinging": "Bladesinger",
 	}
 
 TRADITIONS = {
@@ -72,10 +74,19 @@ TRADITIONS = {
 		"title": "Namer of Binding",
 		"school": "Abjuration",
 		"sought_names": [
-			"Threshold", "the Closed Door", "the Uncarved Block",
+			"Threshold", "the Closed Door",
 			"the Circle", "Iron", "the Ward", "the Name that Holds",
 			"the Center", "the Unbroken Line", "the Gate",
 			"the Name of No",
+			],
+		},
+	"Bladesinger": {
+		"title": "Namer of the Road",
+		"school": None,
+		"sought_names": [
+			"the Road", "the Step", "the Blade", "the Song",
+			"the Turning", "the Open Mile", "Wind-in-Grass",
+			"the Name You Learn by Walking",
 			],
 		},
 	}
@@ -144,11 +155,50 @@ SCHOLAR_SKILLS = [
 	"Arcana", "History", "Investigation", "Medicine", "Nature", "Religion",
 	]
 
+BOOK_BINDINGS = [
+	"a gilt-edged tome",
+	"vellum bound with twine",
+	"covers of pale bone",
+	"boards of river-stone",
+	]
+
+BOOK_MARKS = [
+	"A pressed leaf marks a page you have not copied yet.",
+	"The spine is worn from a pack, not a lectern.",
+	"A stranger's notes fill the margin, then stop mid-sentence.",
+	"Rain wrinkled the first gathering of pages.",
+	"A ribbon the color of old rust keeps your place.",
+	"You mended the clasp with wire from a camp kettle.",
+	]
+
+BLADESINGER_SKILLS = [
+	"Acrobatics", "Performance", "Athletics", "Stealth",
+	]
+
 
 def resolve_tradition(subclass):
 	if not subclass:
 		return "Evoker"
 	return TRADITION_ALIASES.get(str(subclass).strip(), "Evoker")
+
+
+def describe_wizard_book(character):
+	"""Pick one lived-in book. A seed, not a sentence the player must keep."""
+	existing = getattr(character, "wizard_book", None)
+	if existing:
+		return existing
+	from AtlasLusoris.Compass_of_Learned_Spells import caster_rng
+	rng = caster_rng(character, 0xB00) if character is not None else random
+	binding = rng.choice(BOOK_BINDINGS)
+	mark = rng.choice(BOOK_MARKS)
+	book = {
+		"binding": binding,
+		"mark": mark,
+		"line": f"{binding}. {mark}",
+		}
+	if character is not None:
+		character.wizard_book = book
+	return book
 
 
 def wizard_feature(name, text, level=1):
@@ -275,10 +325,8 @@ class Wizard(Progression):
 		if level >= 5:
 			features.append(wizard_feature("Memorize Spell", f"""
 				After a Short Rest you may open the book and trade one prepared
-				Wizard spell of level 1 or higher for another name already written there.
-				The new spell must be of a level you can prepare.
-				<br><i>A name held in the mouth can be set down. Another can be taken up.
-				The book remembers what you do not.</i>
+				Wizard spell of level 1 or higher for another spell already
+				written there. The new spell must be of a level you can prepare.
 				""", 5))
 		if level >= 6:
 			features.extend(self._tradition_level_six(
@@ -298,70 +346,72 @@ class Wizard(Progression):
 		if level >= 18:
 			features.append(wizard_feature("Spell Mastery", """
 				Choose one level 1 spell and one level 2 spell in your book
-				that have a casting time of an action. Those names live on your
-				tongue: you always have them prepared, and you can speak each
-				at its lowest level without a spell slot. A higher level still
-				costs a slot.
+				that have a casting time of an action. You always have them
+				prepared, and you can cast each at its lowest level without
+				a spell slot. A higher level still costs a slot.
 				<br>When you finish a Long Rest, you may trade one of those
-				mastered names for another eligible spell of the same level
+				mastered spells for another eligible spell of the same level
 				from the book.
-				<br><i>Some names, spoken often enough, stop being study
-				and become breath.</i>
 				""", 18))
 		if level >= 19:
 			features.extend(ApplyEpicBoon(character, n=1))
 		if level >= 20:
 			features.append(wizard_feature("Signature Spells", """
-				Choose two level 3 spells in your book as signature names.
+				Choose two level 3 spells in your book as signature spells.
 				You always have them prepared. You can cast each once at
 				level 3 without a spell slot, and you regain that use when
 				you finish a Short or Long Rest. A higher level still costs
 				a slot.
-				<br><i>These are the names that have learned you back.</i>
 				""", 20))
 		return features
 
 	def _level_one(self, level, tradition, lore, sought_name):
 		recovery = (level + 1) // 2
+		book = describe_wizard_book(self.char)
 		return [
 			wizard_feature("The Way of Names", f"""
-				To know a thing's True Name is to understand it, and to
-				understand it is to be able to connect with it. Wizards are
-				not born with power; they hunt names. They write them, taste
-				them, and speak them only when the world will answer.
-				<br>The named is never the whole of the Way — the name that
-				can be written is not the eternal name. Still, a true name
-				is a door.
-				<br>You are a <b>{tradition}</b>, a <i>{lore['title']}</i>.
+				Wizards are not born with power. They hunt names: they write
+				them, they walk toward them, they speak them only when the
+				world will answer.
+				<br>
+				But a map is irrelevant to someone who has never walked the
+				road. A map is not a country. So you went out there, a long
+				way from any library, walking towards the names you wanted
+				to learn. Wonder is what happens to you in the world. The
+				book is only how you carry the memory of it along.
+				<br>
+				You are a <b>{tradition}</b>, a <i>{lore['title']}</i>.
 				The name you hunt is <b>{sought_name}</b>.
+				If another name is calling, take that one instead — this is
+				only a first step.
 				""", 1),
 			wizard_feature("Ritual Adept", """
-				If a spell in your book has the Ritual tag, you can speak it
+				If a spell in your book has the Ritual tag, you can cast it
 				as a Ritual even when it is not prepared. You must read from
-				the book. Some names will not be rushed; they want the long
-				voice, the unhurried breath.
+				the book. Some names will not be rushed.
 				""", 1),
-			wizard_feature("Spellbook", """
+			wizard_feature("Spellbook", f"""
 				Your apprenticeship ended when you bound a book that only you
 				can read — unless someone casts <b>Identify</b> upon it.
-				It is a Tiny object, three pounds, a hundred pages. You choose
-				its skin: gilt-edge, twine and vellum, bone, or river-stone.
-				<br>It begins with six level 1 Wizard spells. Each Wizard level
+				It is a Tiny object, three pounds, a hundred pages.
+				<br>
+				This one is {book['line']}
+				You can change how it looks; this is only how it found you.
+				<br>
+				It begins with six level 1 Wizard spells. Each Wizard level
 				after 1, you add two Wizard spells of a level you can slot.
-				These are names you research, dream, or wrestle into ink.
 				""", 1),
 			wizard_feature("Expanding the Book", """
-				Adventure yields names other wizards have already caught.
-				<b>Copying a new name.</b> When you find a level 1+ Wizard
+				The rest of the book is still out there.
+				<br><b>Copying a new name.</b> When you find a level 1+ Wizard
 				spell you can prepare, you may transcribe it. Each level of
-				the spell takes 2 hours and 50 GP — ink, rare salts, the
-				quiet of copying a name without waking it wrong. Afterward
-				you can prepare it like any other name in the book.
+				the spell takes 2 hours and 50 GP. Afterward you can prepare
+				it like any other spell in the book.
 				<br><b>Copying your own book.</b> A name you already know
 				copies faster: 1 hour and 10 GP per spell level.
 				If the book is lost, you may write your currently prepared
-				spells into a new one this way. The rest of the book must
-				be found again. Wise namers keep a spare.
+				spells into a new one this way. The rest must be found again.
+				Wise wizards keep a spare.
 				""", 1),
 			wizard_feature("Arcane Recovery", f"""
 				When you finish a Short Rest, you may study the book and
@@ -369,8 +419,6 @@ class Wizard(Progression):
 				than <b>{recovery}</b> (half your Wizard level, rounded up).
 				None of those slots can be level 6 or higher. Once you do
 				this, you cannot do so again until you finish a Long Rest.
-				<br><i>The names recede when they are spent. Reading them
-				again is how you call them home.</i>
 				""", 1),
 			]
 
@@ -383,18 +431,66 @@ class Wizard(Progression):
 		return wizard_feature("Scholar", f"""
 			While hunting names you also specialized in another field of
 			study. You have Expertise in <b>{skill}</b>.
-			<br><i>A true name sits in a web of lesser names. Scholarship
-			is learning which threads to pull.</i>
+			You can change which field, if this one is not yours.
 			""", 2)
 
+	def _bladesinger_three(self, character, lore, sought_name, int_bonus):
+		song_uses = max(1, int_bonus)
+		skill = random.choice(BLADESINGER_SKILLS)
+		try:
+			character.skills.Martial_Weapons.set_proficiency()
+		except Exception:
+			pass
+		try:
+			character.skills.activate_proficiencies(1, [skill])
+		except Exception:
+			try:
+				getattr(character.skills, skill).set_proficiency()
+			except Exception:
+				pass
+		return [
+			wizard_feature("Bladesinger", f"""
+				You left the library. The names you wanted were not only on
+				the shelf; they were in the way a blade turns, in the length
+				of a step, in the song that keeps a body honest while it
+				thinks. You learn names with your feet as much as with the
+				page.
+				<br>
+				You are a <b>Bladesinger</b>, a <i>{lore['title']}</i>.
+				The name you hunt is <b>{sought_name}</b>.
+				""", 3),
+			wizard_feature("Training in War and Song", f"""
+				You have proficiency with Martial melee weapons that are
+				not two-handed or Heavy. You can use a melee weapon as a
+				Spellcasting Focus for your Wizard spells.
+				You also have proficiency in <b>{skill}</b>
+				(change it if another skill is more yours).
+				""", 3),
+			wizard_feature("Bladesong", f"""
+				If you are not wearing armor or a Shield, you can start
+				the Bladesong as a Bonus Action. It lasts 1 minute, and
+				ends early if you wear armor, use a two-handed weapon,
+				become Incapacitated, or choose to end it (no action).
+				<br>While it lasts: add your Intelligence modifier to AC;
+				gain +10 feet of speed; use Intelligence for melee weapon
+				attack and damage rolls; add your Intelligence modifier
+				to Constitution saving throws to maintain Concentration.
+				<br>You can use this <b>{song_uses}</b> times (Intelligence
+				modifier, minimum once). You regain one use when you use
+				Arcane Recovery, and all uses when you finish a Long Rest.
+				""", 3),
+			]
+
 	def _tradition_features(self, character, tradition, lore, sought_name, level, int_bonus):
+		if tradition == "Bladesinger":
+			return self._bladesinger_three(character, lore, sought_name, int_bonus)
 		school = lore["school"]
 		added_spells, pick_names = pick_savant_spells(tradition, level, character)
 		written = add_spells_to_book(character, added_spells)
 		written_line = ", ".join(written or pick_names[:2]) or f"two {school} spells"
 		savant = wizard_feature(f"{school} Savant", f"""
-			The True Names of {school.lower()} come cheaper to your hand.
-			You add the following names to your book without the usual
+			Spells of the {school} school come cheaper to your hand.
+			You add the following spells to your book without the usual
 			time or gold: <b>{written_line}</b>.
 			<br>Whenever you gain a new level of spell slots in this class,
 			you may add one Wizard spell of the {school} school to the book
@@ -403,17 +499,16 @@ class Wizard(Progression):
 		if tradition == "Evoker":
 			return [
 				wizard_feature("Namer of Storms", f"""
-					You hunt the True Names of what moves: flame, thunder,
-					the bright edge of force. Yang. To name the storm is
-					not to own it — it is to stand inside it and remain
-					yourself. The name you hunt is <b>{sought_name}</b>.
+					You hunt names of what moves: flame, thunder, the bright
+					edge of force. To name the storm is not to own it — it is
+					to stand inside it and remain yourself.
+					The name you hunt is <b>{sought_name}</b>.
 					""", 3),
 				savant,
 				wizard_feature("Potent Cantrip", """
-					Even a glancing name leaves a mark. When you cast a
-					damaging cantrip and miss, or the target succeeds on
-					its save, the target still takes half the cantrip's
-					damage (if any) and suffers no other effect.
+					When you cast a damaging cantrip and miss, or the target
+					succeeds on its save, the target still takes half the
+					cantrip's damage (if any) and suffers no other effect.
 					""", 3),
 				]
 		if tradition == "Illusionist":
@@ -423,10 +518,8 @@ class Wizard(Progression):
 				grant_spell(character, spell)
 			return [
 				wizard_feature("Namer of Seeming", f"""
-					The named is not the thing. You hunt names of shadow,
-					mirror, and mask — not to lie, but to show how thin
-					the veil is between is and seems. Do not force the eye;
-					name what it is already willing to believe.
+					You hunt names of shadow, mirror, and mask — not to lie,
+					but to show how thin the veil is between is and seems.
 					The name you hunt is <b>{sought_name}</b>.
 					""", 3),
 				savant,
@@ -435,19 +528,16 @@ class Wizard(Progression):
 					it as a Bonus Action. When you do, the illusion may
 					include both a sound and an image. You can see through
 					your own illusions, and Illusion spells you cast no
-					longer require Verbal components.
-					<br><i>A name of seeming should not need to be shouted.</i>
+					longer require Verbal components. See Spells.
 					""", 3),
 				]
 		if tradition == "Necromancer":
 			return [
 				wizard_feature("Namer of Silence", f"""
-					Yin. Return. The valley spirit that does not die.
 					You hunt last names: dust, the breath leaving, the
-					hollow that remains. To name death is not to worship
-					it. It is to know where the river goes, and to speak
-					with what the river keeps. The name you hunt is
-					<b>{sought_name}</b>.
+					hollow that remains. To name death is not to worship it.
+					It is to know where the river goes.
+					The name you hunt is <b>{sought_name}</b>.
 					""", 3),
 				savant,
 				wizard_feature("Grim Harvest", """
@@ -455,7 +545,6 @@ class Wizard(Progression):
 					Construct or Undead with a spell of level 1 or higher,
 					you regain Hit Points equal to twice the spell's level,
 					or three times the level if the spell is Necromancy.
-					<br><i>A little of the last name returns to you as breath.</i>
 					""", 3),
 				]
 		if tradition == "Diviner":
@@ -465,10 +554,8 @@ class Wizard(Progression):
 			return [
 				wizard_feature("Namer of the Unseen", f"""
 					You hunt names that have not yet been spoken: fate,
-					the hidden thread, tomorrow. The ten thousand things
-					announce themselves before they arrive, if you know
-					how to listen. You do not command the future. You
-					recognize its name when it leans toward you.
+					the hidden thread, tomorrow. You do not command the
+					future. You recognize its name when it leans toward you.
 					The name you hunt is <b>{sought_name}</b>.
 					""", 3),
 				savant,
@@ -486,40 +573,41 @@ class Wizard(Progression):
 		ward_hp = 2 * level + int_bonus
 		return [
 			wizard_feature("Namer of Binding", f"""
-				The uncarved block. The closed door. You hunt names that
-				hold: threshold, circle, iron, the center that does not
-				move. Power is not only what you send out. It is what you
-				refuse, what you keep, what you name as not-yet-broken.
+				You hunt names that hold: threshold, circle, iron, the
+				center that does not move. Power is not only what you send
+				out. It is what you refuse, what you keep.
 				The name you hunt is <b>{sought_name}</b>.
 				""", 3),
 			savant,
 			wizard_feature("Arcane Ward", f"""
 				When you cast an Abjuration spell with a spell slot, you
-				may write the Name of Binding around yourself. The ward
-				lasts until you finish a Long Rest. It has a Hit Point
-				maximum of <b>{ward_hp}</b> (twice your Wizard level plus
-				your Intelligence modifier).
+				may create a ward around yourself. The ward lasts until
+				you finish a Long Rest. It has a Hit Point maximum of
+				<b>{ward_hp}</b> (twice your Wizard level plus your
+				Intelligence modifier).
 				<br>Whenever you take damage, the ward takes it first.
 				If the ward drops to 0 Hit Points, you take the rest.
-				While it has 0 Hit Points it cannot absorb, but the
-				writing remains. Each time you cast an Abjuration spell
-				with a slot, the ward regains Hit Points equal to twice
-				that slot's level. You can create the ward only once
-				per Long Rest.
+				While it has 0 Hit Points it cannot absorb, but it remains.
+				Each time you cast an Abjuration spell with a slot, the
+				ward regains Hit Points equal to twice that slot's level.
+				You can create the ward only once per Long Rest.
 				""", 3),
 			]
 
 	def _tradition_level_six(self, character, tradition, lore, sought_name, level, int_bonus):
+		if tradition == "Bladesinger":
+			return [wizard_feature("Extra Attack", """
+				You can attack twice, instead of once, whenever you take
+				the Attack action. You may replace one of those attacks
+				with a Wizard cantrip that has a casting time of an action.
+				""", 6)]
 		if tradition == "Evoker":
 			return [wizard_feature("Sculpt Spells", f"""
 				When you cast an Evocation spell that other creatures you
-				can see would suffer, you may name a number of them equal
-				to 1 plus the spell's level as <i>not-this-fire</i>. Those
-				creatures automatically succeed on their saving throws
-				against the spell, and they take no damage if they would
-				normally take half on a success.
-				<br><i>The Name of {sought_name} does not strike what you
-				have named as kin.</i>
+				can see would suffer, you may choose a number of them equal
+				to 1 plus the spell's level. Those creatures automatically
+				succeed on their saving throws against the spell, and they
+				take no damage if they would normally take half on a success.
 				""", 6)]
 		if tradition == "Illusionist":
 			add_spells_to_book(character, find_spells(["Summon Beast", "Summon Fey"]))
@@ -530,11 +618,8 @@ class Wizard(Progression):
 				You always have <i>Summon Beast</i> and <i>Summon Fey</i>
 				prepared. Once per Long Rest you can cast one of them
 				without a spell slot; the summoned creature is slightly
-				translucent — a true-seeming, not a true body. When you
-				cast either spell with a spell slot, it does not require
-				Concentration.
-				<br><i>A name of seeming, spoken carefully, will wear a shape
-				until the shape remembers it is fog.</i>
+				translucent. When you cast either spell with a spell slot,
+				it does not require Concentration. See Spells.
 				""", 6)]
 		if tradition == "Necromancer":
 			add_spells_to_book(character, find_spells(["Animate Dead"]))
@@ -548,9 +633,7 @@ class Wizard(Progression):
 				Undead you create with a Necromancy spell add your Wizard
 				level (<b>+{thrall_hp}</b> Hit Points) to their Hit Point
 				maximum, and they add your Proficiency Bonus to the damage
-				of their weapon attacks.
-				<br><i>A last name, spoken kindly or not, will stand up
-				if you know how to hold it.</i>
+				of their weapon attacks. See Spells.
 				""", 6)]
 		if tradition == "Diviner":
 			return [wizard_feature("Expert Divination", """
@@ -558,27 +641,27 @@ class Wizard(Progression):
 				level 2 or higher, you regain one expended spell slot.
 				The regained slot must be of a lower level than the one
 				you spent, and it cannot be level 6 or higher.
-				<br><i>To see a name before it arrives is to spend less
-				breath when it does.</i>
 				""", 6)]
 		return [wizard_feature("Projected Ward", """
 			When a creature you can see within 30 feet takes damage, you
-			can take a Reaction to let your Arcane Ward drink that damage
+			can take a Reaction to let your Arcane Ward take that damage
 			instead. If the ward drops to 0 Hit Points, the creature takes
 			the rest.
-			<br><i>The Name of Binding can be spoken over someone else.
-			The center holds, even at a step's distance.</i>
 			""", 6)]
 
 	def _tradition_level_ten(self, character, tradition, lore, sought_name, level, int_bonus):
+		if tradition == "Bladesinger":
+			return [wizard_feature("Song of Defense", """
+				While your Bladesong is active and you take damage, you can
+				take a Reaction to expend a spell slot and reduce that
+				damage by an amount equal to five times the slot's level.
+				""", 10)]
 		if tradition == "Evoker":
 			bonus = max(1, int_bonus)
 			return [wizard_feature("Empowered Evocation", f"""
 				Whenever you cast a Wizard spell from the Evocation school,
 				you can add your Intelligence modifier (<b>+{bonus}</b>)
 				to one damage roll of that spell.
-				<br><i>You no longer borrow {sought_name}. It answers in
-				your own voice.</i>
 				""", 10)]
 		if tradition == "Illusionist":
 			return [wizard_feature("Illusory Self", """
@@ -587,15 +670,11 @@ class Wizard(Progression):
 				misses. Once you do this, you cannot do so again until you
 				finish a Short or Long Rest, unless you expend a spell slot
 				of level 2 or higher (no action) to restore the use.
-				<br><i>The name of you, and the you that is named, are not
-				always in the same place.</i>
 				""", 10)]
 		if tradition == "Necromancer":
 			return [wizard_feature("Inured to Undeath", """
 				You have Resistance to Necrotic damage, and your Hit Point
 				maximum cannot be reduced.
-				<br><i>You have heard the Name of Silence so often it no
-				longer startles your body.</i>
 				""", 10)]
 		if tradition == "Diviner":
 			uses = max(1, int_bonus)
@@ -622,12 +701,15 @@ class Wizard(Progression):
 			prepared. You can cast Dispel Magic as a Bonus Action, and you
 			add your Proficiency Bonus to its ability check.
 			When you cast either spell this way, your Arcane Ward regains
-			Hit Points equal to the spell's level.
-			<br><i>To unname a working is also a name. The ward drinks
-			what you take apart.</i>
+			Hit Points equal to the spell's level. See Spells.
 			""", 10)]
 
 	def _tradition_level_fourteen(self, character, tradition, lore, sought_name, level, int_bonus):
+		if tradition == "Bladesinger":
+			return [wizard_feature("Song of Victory", """
+				When you cast a spell with a casting time of an action,
+				you can make a melee weapon attack as a Bonus Action.
+				""", 14)]
 		if tradition == "Evoker":
 			return [wizard_feature("Overchannel", f"""
 				When you cast a Wizard spell with a spell slot of levels
@@ -639,9 +721,6 @@ class Wizard(Progression):
 				slot immediately after you cast it. This damage ignores
 				Resistance and Immunity. Each further use before a Long Rest
 				increases that Necrotic damage by <b>1d12</b> per spell level.
-				<br><i>Speak a name too completely and the unnamed Way takes
-				its due. {sought_name} is not a tool. It is a relationship,
-				and relationships burn.</i>
 				""", 14)]
 		if tradition == "Illusionist":
 			return [wizard_feature("Illusory Reality", """
@@ -649,8 +728,6 @@ class Wizard(Progression):
 				choose one inanimate, nonmagical object that is part of the
 				illusion and make that object real for 1 minute. The object
 				cannot deal damage or otherwise directly harm anyone.
-				<br><i>Seeming, held long enough in a true name, forgets
-				that it was only seeming. For a minute, the world agrees.</i>
 				""", 14)]
 		if tradition == "Necromancer":
 			return [wizard_feature("Command Undead", """
@@ -662,19 +739,13 @@ class Wizard(Progression):
 				your Command Undead for 24 hours. If it is already under
 				another creature's control, you steal that control on a
 				failure.
-				<br><i>A last name, once learned, can be spoken by more
-				than one throat. You make sure it is yours.</i>
 				""", 14)]
 		if tradition == "Diviner":
 			return [wizard_feature("Greater Portent", """
 				The unseen now offers three numbers instead of two when
 				you finish a Long Rest.
-				<br><i>The Pattern is not a chain. It is a braid, and you
-				have learned to hold a third strand.</i>
 				""", 14)]
 		return [wizard_feature("Spell Resistance", """
 			You have Advantage on saving throws against spells, and you
 			have Resistance to the damage of spells.
-			<br><i>Other people's names slide off the uncarved block.
-			You are harder to rewrite.</i>
 			""", 14)]

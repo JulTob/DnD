@@ -94,11 +94,14 @@ def apply_class_proficiencies(character):
 						equip.buy_item(staff)
 						equip.equip_right(staff)
 
+						book_line = "A spellbook, readable only by you"
+						if getattr(character, "wizard_book", None):
+							book_line = character.wizard_book.get("line", book_line)
 						book = Object(
 								name="Spellbook",
 								value=50,
 								weight=3,
-								description="A book of True Names, readable only by you",
+								description=book_line,
 								)
 						equip.buy_item(book)
 	elif cls == "Rogue":
