@@ -1,17 +1,12 @@
 #!/usr/bin/env bash
+# Status: 🟢 verified by an independent review agent (2026-08-29) — awaiting Julio's ⚪️ confirmation.
 # Idempotent bootstrap for the DnD Shiny toolkit development environment.
-# Creates the unified repo-root virtual environment and installs dependencies.
+# Builds the unified repo-root .venv from the image's Python and installs deps.
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
-# The base image ships python3.12 but omits the venv/ensurepip module.
-if ! python3 -c "import ensurepip" >/dev/null 2>&1; then
-  sudo apt-get update -qq
-  sudo apt-get install -y python3.12-venv
-fi
-
-# Unified repo-root virtual environment (QST-0004 / Decree 0001).
+# One environment, rebuilt from requirements.txt (the project's single .venv).
 if [ ! -d .venv ]; then
   python3 -m venv .venv
 fi
