@@ -84,8 +84,28 @@ def test_forest_gnome_lineage_knows_without_embedding():
 	assert str(character.spellcaster.html_catalog()).count("Speak with Animals") >= 1
 
 
+def test_wildwarden_knows_speak_with_animals_without_embedding():
+	from AtlasLusoris.Grimoire_of_Features import Wildwarden
+
+	class Character:
+		spellcaster = None
+		char_class = "Wizard"
+		features = []
+
+	character = Character()
+	feat = Wildwarden()
+	feat(character)
+	names = {spell_key(spell) for spell in catalog_spells(character.spellcaster)}
+	assert "Speak with Animals" in names
+	assert "<div class='npc-textbox'>" not in feat.description
+	assert "See Spells" in feat.description
+	assert "Tag Team" in feat.description
+	assert str(character.spellcaster.html_catalog()).count("Speak with Animals") >= 1
+
+
 if __name__ == "__main__":
 	test_grows_without_reshuffle()
 	test_know_spell_is_separate_from_display()
 	test_forest_gnome_lineage_knows_without_embedding()
+	test_wildwarden_knows_speak_with_animals_without_embedding()
 	print("progressive_learn: ok")

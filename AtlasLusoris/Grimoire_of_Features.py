@@ -1407,6 +1407,48 @@ def SavageAttacker():
 		level=1,
 		)
 
+def origin_spell_stat(char):
+	"""A starting voice for origin-feat spells. The player can pick INT, WIS, or CHA."""
+	cls = str(getattr(char, "char_class", "") or "")
+	if any(name in cls for name in ("Wizard", "Eldritch Knight")):
+		return "INT"
+	if any(name in cls for name in ("Bard", "Sorcerer", "Warlock", "Paladin")):
+		return "CHA"
+	return "WIS"
+
+def Wildwarden():
+	"""
+	Origin feat for the Wildkeeper background.
+	Speak with Animals is gained as known; the writeup lives in Spells.
+	"""
+	feat = Feat(
+		name="Wildwarden",
+		apply=lambda char: None,
+		description=(
+			"You always have Speak with Animals prepared, and you can cast it with any spell slots you have. "
+			"When you cast it as a Ritual, the duration is 8 hours. "
+			"When you take the Help action, you can switch places with a willing ally within 5 feet."
+		),
+		source="Background Feat",
+		level=1,
+	)
+	def apply(char):
+		from AtlasMagia.Lodge_of_Spells import SpeakwithAnimals
+		from AtlasLusoris.Compass_of_Learned_Spells import know_spell, spell_mark
+		stat = origin_spell_stat(char)
+		know_spell(char, SpeakwithAnimals)
+		feat.description = (
+			f"You always have {spell_mark(SpeakwithAnimals)} prepared. "
+			f"You can cast it with any spell slots you have. {stat} is your spellcasting ability for it "
+			"(you may choose Intelligence, Wisdom, or Charisma instead). "
+			"When you cast it as a Ritual, the duration is 8 hours. See Spells."
+			"<br><b>Tag Team.</b> When you take the Help action, you can switch places with a willing ally "
+			"within 5 feet as part of that action. This movement doesn't provoke Opportunity Attacks. "
+			"You can't use this if the ally is Incapacitated."
+			)
+	feat.apply = apply
+	return feat
+
 def Resourceful():
 	"""
 	PHB 2024 p. 35.  You always wake up with Heroic Inspiration and can use

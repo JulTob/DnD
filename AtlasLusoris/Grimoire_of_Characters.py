@@ -399,6 +399,7 @@ class Character:
 			'Scribe':     ['Dexterity', 	'Wisdom', 		'Intelligence'],
 			'Soldier':    ['Strength', 		'Dexterity', 	'Constitution'],
 			'Wayfarer':   ['Dexterity', 	'Charisma', 	'Wisdom'],
+			'Wildkeeper': ['Constitution', 	'Intelligence', 'Wisdom'],
 			}
 
 		# Initialize stats dictionary
@@ -559,6 +560,10 @@ class Character:
 				char.skills.Insight.set_proficiency()
 				char.skills.Stealth.set_proficiency()
 				char.skills.Thieves_Tools.set_proficiency()
+			elif char.background == "Wildkeeper":
+				char.skills.Nature.set_proficiency()
+				char.skills.Survival.set_proficiency()
+				char.skills.Herbalism_Kit.set_proficiency()
 
 		# Step 3: Adjust skills based on subclass (if any)
 		if char.subclass:

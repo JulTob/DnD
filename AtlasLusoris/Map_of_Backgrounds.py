@@ -15,6 +15,7 @@ from AtlasLusoris.Grimoire_of_Features import (
 		MagicInitiateWizard,
 		TavernBrawler,
 		SavageAttacker,
+		Wildwarden,
 		)
 # Weighted table
 backgrounds = [
@@ -34,6 +35,7 @@ backgrounds = [
 				"Scribe",
 				"Soldier",
 				"Wayfarer",
+				"Wildkeeper",
 				]
 
 BACKGROUND_FEATURES = {
@@ -133,6 +135,12 @@ BACKGROUND_FEATURES = {
 		source="Background",
 		level=1,
 		),
+	"Wildkeeper": Feature(
+		name="Edge of the Wild",
+		description="You know the paths animals use around settlements, and they know you. Folk come to you when something in the woods will not leave them alone — or when they have gone too far in.",
+		source="Background",
+		level=1,
+		),
 	}
 
 def background_features(name: str):
@@ -159,6 +167,7 @@ def ApplyBackground(char):
 		TavernBrawler,
 		SavageAttacker,
 		Lucky,
+		Wildwarden,
 		)
 	base_feats = []
 	background_name: str = getattr(char, "background", None)
@@ -184,6 +193,7 @@ def ApplyBackground(char):
 		"Scribe": SkilledFeat,
 		"Soldier": SavageAttacker,
 		"Wayfarer": Lucky,
+		"Wildkeeper": Wildwarden,
 		}
 
 	# Apply each narrative feature.
