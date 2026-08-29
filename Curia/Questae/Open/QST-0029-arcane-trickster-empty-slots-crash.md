@@ -2,12 +2,12 @@
 
 - **Type:** bug
 - **Priority:** 🟡 normal
-- **Status:** Open
+- **Status:** Open — Agora converged, awaiting Julio (Dialog 0008)
 - **Owner:** unclaimed
-- **Route to:** —
+- **Route to:** Repair Consul (Cleric), Methods Consul (Wizard), Safety Consul (Paladin), Testing Consul (Rogue)
 - **Parent:** —
-- **Sidequests:** —
-- **Related:** AtlasLusoris/Grimoire_of_Spellcasters.py (`ArcaneTrickster.available_spells`)
+- **Sidequests:** *(thrown if NameError still traces after the slot guard)* QST-0029.1
+- **Related:** Dialog `0008-arcane-trickster-empty-slots.md` · Q-0011 · AtlasLusoris/Grimoire_of_Spellcasters.py (`ArcaneTrickster.available_spells`)
 
 ---
 
@@ -32,7 +32,9 @@ A second, likely related bug tree in the same failing seed: `NameError: name 'ch
 An Arcane Trickster with zero unlocked spell slots gets an empty spell list (or is simply not offered spells yet), not a crash. `available_spells` returns `[]` when no slot is > 0, same contract as the early `if not source: return []` two lines above it.
 
 ## 🧭 Notes for the Agora / implementer
-- Trivial, mechanical fix (`max(..., default=0)` or an explicit empty check before the `max()` call) — shouldn't need a Dialog, but the second `NameError: 'char'` needs its own trace before closing this one out; don't assume it's fixed by the same one-line change.
+- Dialog 0008 is open and converged. Do **not** implement until Julio decrees.
+- The questa's original sketch listed `max(..., default=0)` as a candidate. The council's objection: SPELL_LISTS key `0` is the cantrip list, so that one-liner would leak cantrips at levels 1–2. Leading recommendation is an explicit empty-slot guard that returns `[]`.
+- The second `NameError: 'char'` stays isolated; throw QST-0029.1 only if it still traces after the slot guard.
 
 ---
 
@@ -44,4 +46,6 @@ An Arcane Trickster with zero unlocked spell slots gets an empty spell list (or 
 ---
 
 ## 🏛️ Council
-*(not yet convened)*
+See Dialog 0008. Seats called: Cleric, Wizard, Paladin, Rogue. Converged on an empty-slot guard (`return []`); rejected `max(..., default=0)` because SPELL_LISTS key `0` would leak cantrips at levels 1–2. Awaiting Julio.
+
+**Weighting:** reach 2 × severity 3 = **6** · council leaning: `needs a Dialog` → Dialog opened, `build` after Decree
