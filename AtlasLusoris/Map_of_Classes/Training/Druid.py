@@ -21,7 +21,7 @@ class Druid(Progression):
 
 			if random.choice([True,False]):
 				from AtlasLusoris.Compass_of_Learned_Spells import (
-					caster_rng, grant_spell, pick_new, spell_key, spell_mark,
+					caster_rng, know_spell, pick_new, spell_key, spell_mark,
 					)
 				from AtlasLusoris.Grimoire_of_Spellcasters import SPELL_LISTS
 				already = set()
@@ -36,9 +36,7 @@ class Druid(Progression):
 					)
 				extra_line = ""
 				for spell in extra:
-					grant_spell(character, spell)
-					if caster is not None and getattr(caster, "spells_known", None) is not None:
-						caster.spells_known.append(spell)
+					know_spell(character, spell)
 					extra_line = f" Extra cantrip: {spell_mark(spell)}. See Spells."
 				feats.append(Feature("Primal Order: Magician",
 					f"""You learnt one extra cantrip.{extra_line}
@@ -60,13 +58,14 @@ class Druid(Progression):
 				character.Primal_Order = "Warden"
 
 		if level >= 2:
+			from AtlasMagia.Lodge_of_Spells import FindFamiliar
+			from AtlasLusoris.Compass_of_Learned_Spells import know_spell, spell_mark
+			know_spell(character, FindFamiliar)
 			feats.append(Feature("Wild Companion",
 				f"""You can summon a nature spirit that assumes an animal form to aid you.
 				As a Magic action, you can expend a spell slot or a use of Wild Shape
-				to cast the <i>Find Familiar</i> spell without Material components. <br>
-				<br>
-				When you cast the spell in this way, the familiar is Fey and
-				disappears when you finish a Long Rest. """,
+				to cast {spell_mark(FindFamiliar)} without Material components.
+				When you cast it this way, the familiar is Fey and disappears when you finish a Long Rest. See Spells.""",
 				"Class: Druid"))
 
 			uses = 2 + (1 if level >= 6 else 0) + (1 if level >= 17 else 0)

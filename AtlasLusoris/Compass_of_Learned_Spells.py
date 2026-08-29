@@ -4,6 +4,15 @@ Learned spells stay put as a character levels up.
 The sheet ± buttons reuse the same seed. Spell picks must not reshuffle:
 each new level only adds spells. A dedicated RNG (not the main character
 RNG) is used so other random rolls cannot steal the sequence.
+
+Two separate actions:
+- know_spell: the character gains a spell as known. No HTML.
+- html_spell_index / html_spell_catalog: display the spells currently known.
+
+progressive_learn is the lifetime sequence computed on the fly: same seed,
+walk levels 1..N, only add. The sheet shows what this level has unlocked.
+A stored 1–20 shadow list is not needed unless we want to preview future
+spells on the sheet.
 """
 import random as stdlib_random
 
@@ -156,25 +165,67 @@ def finish_learning(caster, cantrips, known, prepared_count=None):
 	return caster.spells_known
 
 
-def grant_spell(character, spell, always_prepared=True):
-	"""Attach a feature-granted spell to the sheet catalog. Does not replace learned spells."""
+class KnownSpellBook:
+	"""Holds spells a character knows when the class is not a caster."""
+
+	def __init__(self, character):
+		self.character = character
+		self.level = getattr(character, "level", 1)
+		self.spells_known = []
+		self.granted_spells = []
+		self.always_prepared = set()
+		self.prepared_spells = []
+		self.catalog_known = True
+
+	def html(self):
+		index = html_spell_index(self)
+		if not index:
+			return ""
+		return f"""<div class="npc-textbox" style="grid-column: span 1;">
+			<h3 style="font-family: 'Iglesia'; font-size: 3.1em;">Spell List</h3>
+			{index}
+			</div>"""
+
+	def html_catalog(self):
+		return html_spell_catalog(self)
+
+
+def spell_book(character):
+	"""The book that holds spells this character currently knows."""
+	if character is None:
+		return None
+	book = getattr(character, "spellcaster", None)
+	if book is not None:
+		return book
+	book = KnownSpellBook(character)
+	character.spellcaster = book
+	return book
+
+
+def know_spell(character, spell, always_prepared=True):
+	"""Gain a spell as known. Display is a separate action (html_spell_catalog)."""
 	if spell is None or character is None:
 		return
-	caster = getattr(character, "spellcaster", None)
-	if caster is None:
+	book = spell_book(character)
+	if book is None:
 		return
-	if getattr(caster, "granted_spells", None) is None:
-		caster.granted_spells = []
-	if getattr(caster, "always_prepared", None) is None:
-		caster.always_prepared = set()
+	if getattr(book, "granted_spells", None) is None:
+		book.granted_spells = []
+	if getattr(book, "always_prepared", None) is None:
+		book.always_prepared = set()
 	key = spell_key(spell)
 	if not key:
 		return
-	have = {spell_key(item) for item in catalog_spells(caster)}
+	have = {spell_key(item) for item in catalog_spells(book)}
 	if key not in have:
-		caster.granted_spells.append(spell)
+		book.granted_spells.append(spell)
 	if always_prepared:
-		caster.always_prepared.add(key)
+		book.always_prepared.add(key)
+
+
+def grant_spell(character, spell, always_prepared=True):
+	"""Older name for know_spell. Still does not display."""
+	return know_spell(character, spell, always_prepared=always_prepared)
 
 
 def catalog_spells(caster):

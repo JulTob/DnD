@@ -668,26 +668,6 @@ def Fighting_Styles(char=None):
 			)
 		if char.level >= 18: styles.pop("Blind Fighting", None)
 	return styles
-	if char and "Ranger" in char:
-		print("ENTER RANGER DRUIDIC WARRIOR")
-
-		druid_cantrips: list[Spell] = SPELL_LISTS["Druid"][0][:]
-		chosen: list[Spell] = random.sample(druid_cantrips, 2)
-
-		if hasattr(char, "spells_known"):
-			for sp in chosen:
-				if sp not in char.spells_known:
-					char.spells_known.append(sp)
-
-		# Build pretty HTML blocks for the sheet
-		html_blocks = "".join(f"<div class='npc-textbox'>{sp}</div>" for sp in chosen)
-
-		result["Druidic Warrior"] = (
-			"You learn two druid cantrips (shown below). They count as Ranger "
-			"spells for you, and Wisdom is your spell-casting ability for them."
-			f"{html_blocks}"
-		)
-	return result
 
 def character_fighting_styles(char):
 	"""Return a set of fighting style names the character already has."""
@@ -1130,46 +1110,31 @@ def GnomishCunning():
 		)
 
 def ForestGnomeLineage():
+	from AtlasMagia.Lodge_of_Spells import MinorIllusion, SpeakwithAnimals
+	from AtlasLusoris.Compass_of_Learned_Spells import know_spell, spell_mark
+
 	def apply(char):
-		from AtlasMagia.Lodge_of_Spells import MinorIllusion, SpeakwithAnimals
-		from AtlasLusoris.Compass_of_Learned_Spells import grant_spell
-		if not hasattr(char, "cantrips"):
-			char.cantrips = []
-		if not hasattr(char, "spells_known"):
-			char.spells_known = []
-		char.cantrips.append({
-			"name": "Minor Illusion",
-			"casting_stat": "INT",
-			"source": "Species Feature"
-		})
-		char.spells_known.append({
-			"name": "Speak with Animals",
-			"casting_stat": "INT",
-			"uses_per_day": char.proficiency_bonus,
-			"source": "Species Feature"
-		})
-		grant_spell(char, MinorIllusion)
-		grant_spell(char, SpeakwithAnimals)
+		know_spell(char, MinorIllusion)
+		know_spell(char, SpeakwithAnimals)
 
 	return Feature(
 		name="Forest Gnome Lineage",
 		apply=apply,
-		description="You know 【0】Minor Illusion. You can cast 【1】Speak with Animals a number of times per long rest equal to your proficiency bonus. You can cast it without a spell slot a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest. You can also use any spell slots you have to cast the spell. See Spells.",
+		description=(
+			f"You know {spell_mark(MinorIllusion)}. "
+			f"You can cast {spell_mark(SpeakwithAnimals)} a number of times equal to your Proficiency Bonus without a spell slot (Long Rest), "
+			"and you can also spend spell slots to cast it. Intelligence is your spellcasting ability. See Spells."
+			),
 		source="Species Lineage"
 	)
 
 def RockGnomeLineage():
+	from AtlasMagia.Lodge_of_Spells import Mending, Prestidigitation
+	from AtlasLusoris.Compass_of_Learned_Spells import know_spell, spell_mark
+
 	def apply(char):
-		from AtlasMagia.Lodge_of_Spells import Mending, Prestidigitation
-		from AtlasLusoris.Compass_of_Learned_Spells import grant_spell
-		if not hasattr(char, "cantrips"):
-			char.cantrips = []
-		char.cantrips.extend([
-			{"name": "Mending", "casting_stat": "INT", "source": "Species Feature"},
-			{"name": "Prestidigitation", "casting_stat": "INT", "source": "Species Feature"}
-		])
-		grant_spell(char, Mending)
-		grant_spell(char, Prestidigitation)
+		know_spell(char, Mending)
+		know_spell(char, Prestidigitation)
 		char.features.append(Feature(
 			name="Tinker",
 			description="You can craft tiny clockwork devices with magical effects (e.g., music box, lighter, toy).",
@@ -1179,7 +1144,10 @@ def RockGnomeLineage():
 	return Feature(
 		name="Rock Gnome Lineage",
 		apply=apply,
-		description="You know 【0】Mending and 【0】Prestidigitation. You can create magical clockwork devices. Intelligence is your spellcasting ability. See Spells.",
+		description=(
+			f"You know {spell_mark(Mending)} and {spell_mark(Prestidigitation)}. "
+			"You can create magical clockwork devices. Intelligence is your spellcasting ability. See Spells."
+			),
 		source="Species Lineage"
 	)
 
