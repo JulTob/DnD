@@ -109,6 +109,7 @@ See `QUESTA-template.md` to mint a new one.
 ### ✅ Solved (recent)
 | ID | Title |
 |----|-------|
+| QST-0038 | SpeakWithAnimals Lodge alias — Forest Gnome lineage imports again (2026-08-29) |
 | QST-0032 | Canon/Conventions.md respecified; renamed AtlasVenustas Kit_of_X → Tools_of_X (2026-07-15) |
 | QST-0012 | One safe door for plain model text (`_text_html`) (2026-07-09) |
 | QST-0008 | NPC sheet speaks the character sheet's vocabulary (2026-07-09) |

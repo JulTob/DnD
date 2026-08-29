@@ -7129,6 +7129,7 @@ TelepathicBond = RarysTelepathicBond
 RegalPresence = YolandeRegalPresence
 SpeakPlants = SpeakWithPlants
 SpeakwithPlants = SpeakPlants
+SpeakWithAnimals = SpeakwithAnimals
 WallofStone = WallStone
 ConeofCold = ConeCold
 
@@ -7181,3 +7182,8 @@ StunningStrike = FocusTechnique(
 TashaHideousLaughter = HideousLaughter
 
 sanctuary = Sanctuary
+
+
+if __name__ == "__main__":
+	assert SpeakWithAnimals is SpeakwithAnimals
+	assert SpeakWithAnimals.name == "Speak with Animals"
