@@ -729,7 +729,10 @@ class Character(Character_Skeleton):
 	@minion
 	def set_Skills(char):
 		""" Assign skill proficiencies
-			based on character background and class.
+			based on character class.
+
+			Background skills and tools are granted by
+			``Apply_Background_Training`` after this builds the sheet.
 		"""
 
 		char.skills = Char_Skills(
@@ -737,89 +740,6 @@ class Character(Character_Skeleton):
 			ProficiencyBonus=char.proficiency_bonus,
 			)
 		~char
-		# Step 1: Adjust skills based on background
-		if char.background:
-			if char.background == "Acolyte":
-				char.skills.Insight.set_proficiency()
-				char.skills.Religion.set_proficiency()
-				char.skills.Calligrapher_Supplies.set_proficiency()
-			elif char.background == "Artisan":
-				char.skills.Investigation.set_proficiency()
-				char.skills.Persuasion.set_proficiency()
-				char.skills.activate_proficiencies(1, [
-					"Alchemist's Supplies",
-					"Brewer's Supplies",
-					"Calligrapher's Supplies",
-					"Woodworker's Tools",
-					"Cartographer's Tools",
-					"Cobbler's Tools",
-					"Cook's Utensils",
-					"Glassblower's Tools",
-					"Jeweler's Tools",
-					"Leatherworker's Tools",
-					"Mason's Tools",
-					"Painter's Supplies",
-					"Potter's Tools",
-					"Smith's Tools",
-					"Tinker's Tools",
-					"Weaver's Tools",
-					])
-			elif char.background == "Charlatan":
-				char.skills.Deception.set_proficiency()
-				char.skills.Sleight_of_Hand.set_proficiency()
-				char.skills.Forgery_Kit.set_proficiency()
-			elif char.background == "Criminal":
-				char.skills.Sleight_of_Hand.set_proficiency()
-				char.skills.Stealth.set_proficiency()
-				char.skills.Thieves_Tools.set_proficiency()
-			elif char.background == "Entertainer":
-				char.skills.Acrobatics.set_proficiency()
-				char.skills.Performance.set_proficiency()
-				char.skills.Musical_Instrument.set_proficiency()
-			elif char.background == "Farmer":
-				char.skills.Animal_Handling.set_proficiency()
-				char.skills.Nature.set_proficiency()
-				char.skills.Woodworker_Tools.set_proficiency()
-			elif char.background == "Guard":
-				char.skills.Athletics.set_proficiency()
-				char.skills.Perception.set_proficiency()
-				char.skills.Gaming_Set.set_proficiency()
-			elif char.background == "Guide":
-				char.skills.Stealth.set_proficiency()
-				char.skills.Survival.set_proficiency()
-				char.skills.Cartographer_Tools.set_proficiency()
-			elif char.background == "Hermit":
-				char.skills.Medicine.set_proficiency()
-				char.skills.Religion.set_proficiency()
-				char.skills.Herbalism_Kit.set_proficiency()
-			elif char.background == "Merchant":
-				char.skills.Animal_Handling.set_proficiency()
-				char.skills.Persuasion.set_proficiency()
-				char.skills.Cartographer_Tools.set_proficiency()
-			elif char.background == "Noble":
-				char.skills.History.set_proficiency()
-				char.skills.Persuasion.set_proficiency()
-				char.skills.Gaming_Set.set_proficiency()
-			elif char.background == "Sage":
-				char.skills.History.set_proficiency()
-				char.skills.Arcana.set_proficiency()
-				char.skills.Calligrapher_Supplies.set_proficiency()
-			elif char.background == "Sailor":
-				char.skills.Acrobatics.set_proficiency()
-				char.skills.Perception.set_proficiency()
-				char.skills.Cartographer_Tools.set_proficiency()
-			elif char.background == "Scribe":
-				char.skills.Investigation.set_proficiency()
-				char.skills.Perception.set_proficiency()
-				char.skills.Calligrapher_Supplies.set_proficiency()
-			elif char.background == "Soldier":
-				char.skills.Athletics.set_proficiency()
-				char.skills.Intimidation.set_proficiency()
-				char.skills.Gaming_Set.set_proficiency()
-			elif char.background == "Wayfarer":
-				char.skills.Insight.set_proficiency()
-				char.skills.Stealth.set_proficiency()
-				char.skills.Thieves_Tools.set_proficiency()
 
 		# Step 2: Set default skills based on class
 		if char.character_class:

@@ -805,6 +805,40 @@ def Forge_Order(
 	return order
 
 
+def Resolve_Order_Features(
+		char,
+		):
+	"""
+	Apply Order sigil mechanics once sheet lists exist.
+
+	``Forge_Order`` writes the prose entries during Background imprint;
+	cantrips need ``known_spells`` first. Idempotent across the two
+	calls in ``set_char_features``.
+	"""
+	order = getattr(
+		char,
+		"order",
+		None,
+		)
+	if order is None:
+		return char
+
+	from AtlasLusoris.AtlasOfFeatures.Map_of_Official_Origin_Feats import (
+		_grant_known_cantrip,
+		)
+
+	_grant_known_cantrip(
+		char,
+		order.cantrip,
+		)
+	_grant_known_cantrip(
+		char,
+		order.prepared,
+		)
+
+	return char
+
+
 def Swear(
 		char,
 		order: Order | None = None,
@@ -924,6 +958,9 @@ __all__ = (
 	"Order",
 	"Sworn",
 	"Swear",
+	"Forge_Order",
+	"Resolve_Order_Features",
 	"order_feat",
 	"order_tag",
+	"Sign_of_the_Order",
 	)
