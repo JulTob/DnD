@@ -1,4 +1,4 @@
-# QST-0039 — Decrees are rules, not resolutions: correct the misprint
+# QST-0039 — Decrees are rules, not resolutions: reconstitute the principle canon
 
 - **Type:** rule-update / docs
 - **Priority:** 🟠 high
@@ -6,61 +6,61 @@
 - **Owner:** unclaimed
 - **Route to:** Architecture Consul (Druid), Methods Consul, Readability Consul, Simplicity Consul
 - **Parent:** —
-- **Sidequests:** (to throw on Julio's go) .1 README/template · .2 Decree 0001 · .3 Decree 0002 · .4 Decree 0003
-- **Related:** Decree 0001 · Decree 0002 · Decree 0003 · Decrees/README.md · QST-0004 · QST-0038 · Modus-Operandi.md (principles list)
+- **Sidequests:** (thrown only on Julio's go) .1 README/template · .2 extract Modus-Operandi principles into individual principle-Decrees (with examples & patterns) · .3 distil old resolution-Decrees 0001–0003 into that set, resolutions → their Questae · .4 Modus-Operandi → process-law + pointers · .5 numbering/provenance of the reordered Decree series
+- **Related:** Decree 0001 · Decree 0002 · Decree 0003 · Decrees/README.md · Modus-Operandi.md (principles list) · Code-Style.md · Single-Source-of-Truth.md · QST-0004 · QST-0016 · QST-0038
 
 ---
 
 ## 🔍 Diagnosis (what & where)
 A **Decree is an abstract design principle — reusable wisdom, a rule** (Julio,
-2026-08-29). The record of a *solved issue* belongs in `Questae/Solved/`. Once a
-one-off decision is made we do not keep the decision as law; we keep the
-**principle** so we never have to ask again.
+2026-08-29). Records of *solved issues* live in `Questae/Solved/`; a Decree keeps
+the **principle** so we never re-ask a settled question. Two entangled problems:
 
-The current Decrees are written as **resolutions** (specific choices + their
-execution for this codebase), not as rules. The **root cause is the
-`Decrees/README.md` template itself**, which instructs a resolution-shaped record:
-"records the decision … including the alternatives not chosen" and "**Consequences**:
-new Questae opened, Canon edits, agents affected." The writer followed the
-template faithfully — so this is a **misprint to correct across the board**, not
-history to erase (the resolution memory already lives in the Questae).
+1. **Decrees are written as resolutions, not rules.** Root cause: the
+   `Decrees/README.md` template prescribes a decision-record ("records the
+   decision … alternatives not chosen … **Consequences**: new Questae opened").
+   The writer followed it faithfully — a **misprint to correct**, not history to
+   erase (the resolution memory already lives in the Questae).
+2. **The principles are scattered and duplicated.** `Modus-Operandi.md` lists the
+   principles as terse bullets, *and* the same wisdom is re-derived inside the
+   resolution-Decrees (0002/0003). A principle should be stated **once**, as a
+   Decree, and referenced — the Unification rule applied to the Canon itself.
 
 ## 🧾 Evidence
-- `Decrees/README.md` template fields: `## Decision`, `## Alternatives not chosen`,
-  `## Consequences` (Questae opened) — a decision-record, not a principle.
-- `Decree 0001` §3: "**Begin Track A now.**"; §2 "unify the virtualenvs into one" —
-  execution/choice, not rule.
-- `Decree 0002`: stores `name/title/scores/size/tier/seed`, `Roll(D=6)`, the
-  `AtlasAlusoris→AtlasLusoris` merge — codebase-specific resolution.
-- `Decree 0003`: "console handler local / file sink deployed", "keep
-  `@minion/@watcher/…`" — implementation resolution.
+- `Decrees/README.md` template: `## Decision` / `## Alternatives not chosen` /
+  `## Consequences (Questae opened)` — a decision-record, not a principle.
+- `Modus-Operandi.md` → "principles the Council speaks from": Contract
+  orientation, Clear models, Top-down/one-step, Modularity & separation,
+  Readability & dumbness, Safety & error discipline, Anti-bloat — a bullet list.
+- `Decree 0002`/`0003` re-derive several of those inline (derive-don't-store;
+  one-pipeline-not-two; observe-vs-retry; never-fail-silently).
 
 ## 🎯 Desired outcome
-Decrees read as **timeless rules**. The README/template is principle-shaped. Each
-existing Decree is **distilled to the principle(s) it embodies**, linking (not
-copying) the Questa that first taught it. The durable principles land where
-principles live (`Modus-Operandi.md`). The **unification principle — "no
-duplicated efforts"** — is named there explicitly.
+- Every Decree reads as a **timeless rule**: `Principle / Why it holds / How it
+  applies (examples & established patterns) / First taught by`.
+- The **principle canon** = one Decree per principle, sourced from the
+  Modus-Operandi list and the durable wisdom distilled out of Decrees 0001–0003;
+  each carries concrete examples and established patterns.
+- `Modus-Operandi.md` keeps only the **process law** (prime rule, working loop,
+  forbids, free) and **points to** the principle-Decrees.
+- Old resolution content (venv unify, Character/Dice refactor, Minion/logging
+  rework) is **linked, not copied**, to its Questa (`QST-0004`, `QST-0016`, etc.).
 
 ## 🧭 Notes for the Agora / implementer — needs Julio's word per edit
-Correction plan (sidequests, thrown only on go):
-- **.1 — `Decrees/README.md` + template (root fix).** Reframe a Decree as an
-  abstract rule: `## Principle` / `## Why it holds` / `## How it applies` /
-  `## First taught by` (link to the Questa/Dialog; memory lives there).
-- **.2 — Decree 0001.** Holds *two* principles: **no-duplicated-efforts** and
-  *diagnosis discipline*. The latter already lives in `Questae/README.md` +
-  `QUESTA-template.md` — so 0001 becomes the **Unification** principle; the sweep
-  execution stays in QST-0004/QST-0007 (Solved as they close).
-- **.3 — Decree 0002.** Distill to: model-over-script; **derive-don't-store**
-  (SSOT); variants-as-tags; instance-over-global + seed-reproducibility; refactor
-  in place / no parallel skeleton. Specific Character/Dice work stays in QST-0016.
-- **.4 — Decree 0003.** Distill to: one backbone, swappable coats (not parallel
-  systems); observation vs behavior-change; never-fail-silently / idempotent
-  retries; configure-once / concurrency-safe. Minion/logging work stays in its QST.
+Open decisions to settle before drafting the set:
+- **MO/Decree boundary.** Confirm process stays in `Modus-Operandi.md`; principles
+  move to Decrees; MO references them.
+- **The principle list.** Candidate set above. Consolidation calls for Julio:
+  is **Anti-bloat** one coin with **No Duplicated Efforts**, or two Decrees?
+  Does **Derive-Don't-Store** get its own Decree (and a name that avoids clashing
+  with the governance file `Single-Source-of-Truth.md`)?
+- **Numbering/provenance.** Fresh principle series vs. renumber in place. Existing
+  refs point at "Decree 0001/0002/0003" (`.gitignore` comment, several QSTs), so
+  renumbering has a citation cost; alternative is to mark old resolution-Decrees
+  "distilled → principle-Decree NNNN + Questa" and keep the numbers as redirects.
 
-Do **not** erase the Questae the resolutions belong to; **link** them. Land no
-Canon/Decree edit without Julio's ratifying word. `Single-Source-of-Truth.md`
-and `Modus-Operandi.md` govern.
+Land no Canon/Decree edit without Julio's ratifying word. Draft each for review
+first (`Modus-Operandi.md`; `Single-Source-of-Truth.md` govern).
 
 ---
 
@@ -72,17 +72,16 @@ and `Modus-Operandi.md` govern.
 ---
 
 ## 🏛️ Council
-> Architecture Consul (Druid): A Decree should survive the problem that birthed
-> it. If deleting the venv mess would make the Decree meaningless, it was a
-> resolution — lift the rule out, let the record rest in the quest.
-> Methods Consul: The template *taught* the error; fix the template first or the
-> next scribe repeats it. Root cause over symptom.
-> Readability Consul (Barbarian): One shape for all law — principle, why, how,
-> and a pointer to where it was learned. A stranger should read a Decree and
-> know how to act, without needing the old battle it came from.
-> Simplicity Consul: This mostly *removes* text — the one-off consequences go
-> back to their quests. Less law, more weight per line. Anti-bloat approves.
+> Architecture Consul (Druid): State each principle once, as law, and let Consuls
+> and Decrees cite it. A principle re-typed in three places is three places to
+> drift — the very fault the Unification rule names.
+> Methods Consul: Fix the template first (root cause), then the principles have a
+> correct mould to be cast in. Order matters.
+> Readability Consul (Barbarian): "Examples & established patterns" is the gift to
+> the next reader — a rule with a worked example teaches; a bare rule preaches.
+> Simplicity Consul: Net text *drops*: resolutions return to their quests, the
+> bullet list becomes real Decrees. More weight per line, less to maintain.
 
 **Weighting:** reach 3 × severity 2 = **6** · council leaning: `needs a Dialog`
-*(Reach: the form of every Decree, present and future. Severity: Canon clarity
-and how the project remembers its own wisdom — not cosmetic.)*
+*(Reach: the form of every Decree and the home of every principle. Severity:
+Canon clarity and how the project remembers its wisdom — not cosmetic.)*
