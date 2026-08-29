@@ -1,11 +1,9 @@
-
 # D&D
 
-Set of D&D Tools For DM
+Tools for Dungeon Masters: generate Player Characters and NPCs, and in time a companion for building worlds.
 
-Check the [Wiki](https://github.com/JulTob/DnD/wiki) for information about DnD and the rules of the game.
+The living handbook is [Curia/Vademecum.md](Curia/Vademecum.md). Tickets live in `Curia/Questae/`. Decisions live in the Agora.
 
-[Generate a Non Player Character](https://jultob.github.io/DnD/call)
+This local `main` is the 2026 generator (Shiny, Atlases, backgrounds, species, practices). GitHub's `origin/main` is an older public copy; this line of work currently lives on `origin/remove-npc-gen`.
 
-updates: at DnD run:
-gcloud run deploy
+Run the app with `./run_shiny.sh`.
