@@ -28,9 +28,11 @@ environment is reconstructed by hand or by scripts that assume a developer's Mac
 - `run_shiny.sh` probes newest→oldest Python and assumes macOS/Homebrew
   (`/opt/homebrew/...`); `Run_And_Deploy.sh` still `source adventurer/bin/activate`
   and exports `FLASK_ENV` — the retired Flask path (QST-0003), not `shiny run`.
-- **Decree 0001 mandates the newest stable Python (currently 3.14)**, but a bare
-  Linux base provides only 3.12. There is no ruling on how a Linux environment
-  should obtain 3.14 (or whether a documented notch-back is acceptable there).
+- The project **targets the newest stable Python (3.14)** — `.python-version`,
+  `app.yaml`, and the `QST-0004` standing preference (Decree 0001 defers the
+  actual version to Julio; it is not yet ratified law) — but a bare Linux base
+  provides only 3.12, and there is no ruling on how Linux should obtain 3.14 (or
+  whether a documented notch-back is acceptable there). See QST-0039.
 
 ## 🧾 Evidence
 - Fresh `python3 -m venv .venv` on Ubuntu 24.04 base:
