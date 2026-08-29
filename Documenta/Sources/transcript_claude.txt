@@ -1,0 +1,588 @@
+
+answered your people* 
+answered your people first sounds like a mystic attunement that hits close to nativism.
+
+Did we finish with the descriptions for the warlock? Can we take a look at the main one and then to the subclasses?
+
+
+Session limit reached
+
+Background workflow failed
+Sweep the ruleset for "of your choice" language and unresolved Proficiency Bonus mentions that should show a generator-resolved value
+· took 2m 15s
+
+Session limit reached
+Action Surge Uses, Superiority Dice, Indomitable Uses
+
+they should have an emoji or unicode symbol. suggested: ⚔️, ❇, ✵, ❂, ❈, 🜹, 🖤,  ༄, 🦅, 🐍, 🐅, 🍃, 🛘, 🌻, 🌸, 🌼, 🌞, 🌺, 🌾, 🌩️, 🪊, 🎺,
+
+
+Session limit reached
+Try again
+
+
+Ran 4 commands (1 failed), read and edited resolution.py
++2
+-2
+Ran
+a command
+cd /Users/tbs/Desktop/DnD
+grep -n "answered your people" AtlasActorLudi/SpeciesKit/Elves/resolution.py
+89:		"The woods have always answered your people first, and "
+Read
+resolution.py
+/Users/tbs/Desktop/DnD/AtlasActorLudi/SpeciesKit/Elves/
+resolution.py
+		"Your people traded with more than merchants, and not "
+		"everything you brought home was cargo."
+		),
+	"Wood_Elf": (
+		"The woods have always answered your people first, and "
+		"some of that answer stayed with you."
+		),
+	"Dark_Elf": (
+		"The dark taught your people how to survive it, and some "
+		"of that lesson still answers when you call."
+Edited
+resolution.py
++2
+-2
+/Users/tbs/Desktop/DnD/AtlasActorLudi/SpeciesKit/Elves/
+resolution.py
+    "everything you brought home was cargo."
+    ),
+  "Wood_Elf": (
+    "The woods have always answered your people first, and "
+    "some of that answer stayed with you."
+    "The woods have always answered your people, and some of "
+    "that answer stayed with you."
+    ),
+  "Dark_Elf": (
+    "The dark taught your people how to survive it, and some "
+Failed to run
+a command
+cd /Users/tbs/Desktop/DnD
+ls AtlasActorLudi/SpeciesKit/Elves/
+echo "---"
+grep -n "^class " AtlasActorLudi/SpeciesKit/Elves/Drow.py 2>/dev/null AtlasActorLudi/SpeciesKit/Elves/Dark_Elf.py 2>/dev/null
+Exit code 2
+Dark_Elf.py
+Fae_Elf.py
+High_Elf.py
+Shadow_Elf.py
+Wood_Elf.py
+__init__.py
+__pycache__
+base.py
+resolution.py
+traits.py
+---
+12:class Dark_Elf(
+Ran
+a command
+cd /Users/tbs/Desktop/DnD
+grep -rln "Drow" AtlasActorLudi/SpeciesKit/ --include="*.py" 2>/dev/null | grep -v __pycache__
+echo "---compile check---"
+.venv/bin/python3 -m py_compile AtlasActorLudi/SpeciesKit/Elves/resolution.py AtlasActorLudi/SpeciesKit/Elves/Dark_Elf.py AtlasActorLudi/SpeciesKit/Elves/__init__.py AtlasActorLudi/SpeciesKit/__main__.py 2>&1 | tail -20
+---compile check---
+Ran
+a command
+cd /Users/tbs/Desktop/DnD
+PYTHONPATH=/Users/tbs/Desktop/DnD .venv/bin/python3 -m AtlasActorLudi.SpeciesKit 2>&1 | grep -aE "AssertionError|line [0-9]+, in _test|OK —|Error:" | tail -5
+OK — SpeciesKit self-test
+Good — self-test still green, and the fix is in. Let me verify the corrected line renders right, then check on the background PB audit:
+
+
+Ran 5 commands, read and edited resolution.py
++3
+-3
+Ran
+a command
+cd /Users/tbs/Desktop/DnD
+cat > /tmp/wood_check.py <<'EOF'
+import io, contextlib
+from AtlasLusoris.Grimoire_of_Characters import Character, New_Player
+buf = io.StringIO()
+with contextlib.redirect_stdout(buf):
+    c = Character(seed=42, level=6)
+    New_Player(c, char_class="Fighter", species="Elf", heritage="Wood_Elf", level=6)
+for f in c.features:
+    if "Wood" in f.name:
+        print(f.description[:120])
+EOF
+PYTHONPATH=/Users/tbs/Desktop/DnD .venv/bin/python3 /tmp/wood_check.py 2>&1 | grep -av "🐺\|🧌\|🧞\|🕷️\|╞\|→\|Call Stack\|┷\|╯\|│\|─\|├"
+rm -f /tmp/wood_check.py
+echo "=== pb_audit status ==="
+ps aux | grep pb_audit | grep -v grep
+cat /tmp/pb_audit.out 2>/dev/null | grep -v "🐺\|🧌\|🧞\|🕷️\|╞\|→\|Call Stack\|┷\|╯\|│\|─\|├" | tail -30
+Our forebears stayed where the trees were. We adapted and became like the woods: pensive, observant, direct. Our kind lo
+The woods have always answered your people, and some of that answer stayed with you. <b>Spellcasting Ability.</b> Wisdom
+=== pb_audit status ===
+  [Origin Feat] Arcane Conduit: ...can cast it as a Bonus Action <b>5</b> times (equal to your Proficiency Bonus), and you regain all e...
+  [Feat] Heavy Armor Master: ... damage you take from nonmagical attacks is reduced by your Proficiency Bonus....
+  [Origin Feat] Dragon Cult Initiate: ...n a Wisdom saving throw (DC 8 plus your Wisdom modifier and Proficiency Bonus) or have the Frightene...
+  [Origin Feat] Lucky: ...<b>Luck Points.</b> Equal to your Proficiency Bonus; regain on a Long Rest...
+  [Origin Feat] Field Lieutenant: ...ndition, you can choose a number of creatures equal to your Proficiency Bonus that you can see withi...
+  [Origin Feat — Dark Gift] Gathered Whispers: ...o a protective, otherworldly scream, adding <b>+6</b> (your Proficiency Bonus) to your AC against th...
+  [Species Feature] Forest Gnome Lineage: ...ast it without a spell slot a number of times equal to your Proficiency Bonus, regaining all uses on...
+  [Origin Feat] Jinx: ...with an attack roll, it takes <b>2</b> Psychic damage (your Proficiency Bonus). Only once per turn p...
+  [Feat] Ritual Caster: .... You learn a number of level-1 Ritual spells equal to your Proficiency Bonus from any class lists. ...
+  [Origin Feat] Alert: ...<b>Initiative Proficiency.</b> Add your Proficiency Bonus to Initiative. <b>Init...
+  [Origin Feat] Cupbearer: ... to take the Dash or Disengage action, <b>6</b> times (your Proficiency Bonus), recovered on a Long ...
+  [Origin Feat] Sharp Eye: ... that action. You can use this benefit <b>6</b> times (your Proficiency Bonus), and you regain all e...
+  [Origin Feat] Spared: ...> condition, you can take a Reaction to add <b>+6</b> (your Proficiency Bonus) to that save, potenti...
+  [Feat] Defensive Duelist: ...lding a Finesse weapon, you can take a Reaction to add your Proficiency Bonus to your Armor Class ag...
+  [Training: Path of the World Tree] Branches of the Tree: ...Strength saving throw (DC 8 plus your Strength modifier and Proficiency Bonus) or be teleported to a...
+  [Training: Path of the Berserker] Intimidating Presence: ...a Wisdom saving throw (DC 8 plus your Strength modifier and Proficiency Bonus). On a failed save, a ...
+  [Feat] Field Marshal: ... can take this Bonus Action a number of times equal to your Proficiency Bonus, and you regain all ex...
+  [Training: Barbarian] Weapon Mastery: ...orce a Constitution saving throw (DC 8 + ability modifier + Proficiency Bonus); on a failure the tar...
+  [Feat] Great Weapon Master: ... the Attack action, you can deal extra damage equal to your Proficiency Bonus. When you score a Crit...
+  [Feat] Actor: ...ht) check against a DC of 8 + your Charisma modifier + your Proficiency Bonus....
+  [] Wild Shape Game Statistics: ... your skill and saving throw proficiencies
+				and use your Proficiency Bonus for them, in addition ...
+  [Training: Fighter] Weapon Mastery: ...orce a Constitution saving throw (DC 8 + ability modifier + Proficiency Bonus); on a failure the tar...
+  [Training: Fighter (Battle Master)] Combat Superiority: ...red after a Short or Long Rest. A maneuver save uses <b>8 + Proficiency Bonus + Strength or Dexterit...
+  [Fighting Style] Interception: ... can take a Reaction to reduce the damage by 1d10 plus your Proficiency Bonus. You must be holding a...
+  [Training: Paladin] Weapon Mastery: ...orce a Constitution saving throw (DC 8 + ability modifier + Proficiency Bonus); on a failure the tar...
+  [Training: Ranger] Weapon Mastery: ...orce a Constitution saving throw (DC 8 + ability modifier + Proficiency Bonus); on a failure the tar...
+  [Training: Beast Master Order] Primal Companion: ...Sea, or Beast of the Sky; it obeys your commands, uses your Proficiency Bonus for its modifiers, and...
+  [Training: Rogue] Weapon Mastery: ...orce a Constitution saving throw (DC 8 + ability modifier + Proficiency Bonus); on a failure the tar...
+  [Eldritch Invocation] Pact of the Talisman: ... to a failed ability check, a number of times equal to your Proficiency Bonus, regaining all uses wh...
+Ran
+a command
+cat /tmp/pb_audit.out 2>/dev/null | grep -av "🐺\|🧌\|🧞\|🕷️\|╞\|→\|Call Stack\|┷\|╯\|│\|─\|├" | head -6
+echo "..."
+rm -f /tmp/pb_audit.py /tmp/pb_audit.out
+built 780
+distinct unresolved-PB feature names: 35
+  [Origin Feat] Musician: ...rant Heroic Inspiration to a number of allies equal to your Proficiency Bonus....
+  [Training: Armorer Specialty] Perfected Armor: ...u become Invisible until the start of your next turn. Uses: Proficiency Bonus per Long Rest....
+  [Origin Feat] On a Roll: ...ain Heroic Inspiration if you lack it. <b>6</b> times (your Proficiency Bonus), and you regain all e...
+  [Training: Battle Smith Specialty] Steel Defender: ...ing Smith's Tools over a Long Rest. Its statistics use your Proficiency Bonus and scale with your Ar...
+...
+Ran
+a command
+cd /Users/tbs/Desktop/DnD
+grep -n "equal to your Proficiency Bonus" AtlasActorLudi/SpeciesKit/Gnomes/resolution.py
+(Bash completed with no output)
+Ran
+a command
+cd /Users/tbs/Desktop/DnD
+grep -n "Proficiency Bonus" AtlasActorLudi/SpeciesKit/Gnomes/resolution.py
+51:			"to your Proficiency Bonus, regaining all uses on a Long Rest, "
+Read
+resolution.py
+/Users/tbs/Desktop/DnD/AtlasActorLudi/SpeciesKit/Gnomes/
+resolution.py
+		target,
+		"Forest Gnome Lineage",
+		(
+			"You were not supposed to go into the woods, but the Fey "
+			"felt closer there, and you learnt to listen: to them "
+			"when you found one, and to the birds and bees when you "
+			"didn't, until both talked back. "
+			f"<b>Spellcasting Ability.</b> {ability_label}. "
+			"<b>Minor Illusion.</b> You know the Minor Illusion cantrip. "
+			f"<b>{free_spell}.</b> You always have the spell prepared. "
+			"You can cast it without a spell slot a number of times equal "
+			"to your Proficiency Bonus, regaining all uses on a Long Rest, "
+			"and can also cast it with spell slots."
+			),
+		chips=(
+			*Species_Spellcasting_Chips(
+				target
+				),
+Edited
+resolution.py
++3
+-3
+/Users/tbs/Desktop/DnD/AtlasActorLudi/SpeciesKit/Gnomes/
+resolution.py
+      f"<b>Spellcasting Ability.</b> {ability_label}. "
+      "<b>Minor Illusion.</b> You know the Minor Illusion cantrip. "
+      f"<b>{free_spell}.</b> You always have the spell prepared. "
+      "You can cast it without a spell slot a number of times equal "
+      "to your Proficiency Bonus, regaining all uses on a Long Rest, "
+      "and can also cast it with spell slots."
+      f"You can cast it without a spell slot {free_casts} times "
+      "(equal to your Proficiency Bonus), regaining all uses on "
+      "a Long Rest, and can also cast it with spell slots."
+      ),
+    chips=(
+      *Species_Spellcasting_Chips(
+Ran
+a command
+cd /Users/tbs/Desktop/DnD
+.venv/bin/python3 -m py_compile AtlasActorLudi/SpeciesKit/Gnomes/resolution.py && echo compiles
+PYTHONPATH=/Users/tbs/Desktop/DnD .venv/bin/python3 -m AtlasActorLudi.SpeciesKit 2>&1 | grep -aE "AssertionError|OK —" | tail -3
+compiles
+OK — SpeciesKit self-test
+Now let me pull up the Warlock descriptions to review together.
+
+
+Ran 2 commands
+Ran
+a command
+cd /Users/tbs/Desktop/DnD
+grep -n "WARLOCK_DESCRIPTION" -A 12 AtlasLusoris/GuildKit.py | head -20
+1174:WARLOCK_DESCRIPTION = """One single moment changed your life forever. Now that moment marks every action you have made since. You gave a promise, a pact, or a contract. Power was the payment you received. That moment you heard the voice, like a dream, and felt the presence. Doubtful and curious, you accepted. By word, by blood, or by a simple honest smile. The pact is now a bond that cannot be unmade without breaking the laws of magic themselves.
+1175-
+1176-Every time you reach, something reaches back. At first you were cautious, but every time you were in danger, every time you needed it, it protected you. Some would call that love. You know better: you are an investment worth protecting. You are still useful.
+1177-
+1178-It has not asked for anything yet. Some nights you understand it does not need to ask. A game is being played, and you are just one of the pieces. Your patron is the player. You can only hope to be standing after the gambit resolves."""
+1179-
+1180-
+1181-Warlock = _PHB_Guild(
+1182-		name="Warlock",
+1183:		description=WARLOCK_DESCRIPTION,
+1184-		primary="CHA",
+1185-		secondary="CON",
+1186-		hit_die=8,
+1187-		saves=(
+1188-				"WIS",
+1189-				"CHA",
+1190-				),
+1191-		armor=LightlyArmored,
+1192-		weapons=SimpleArms,
+1193-		vocation=Mage,
+Ran
+a command
+cd /Users/tbs/Desktop/DnD
+cat AtlasLusoris/AtlasOfGuilds/WarlockKit.py
+"""
+Warlock Specializations, and the kinds of Warlock.
+
+Two axes, and a Character carries one of each.  The Specialization is who the
+pact is *with*.  The Casting Variant is what the pact answers *to*, and it is
+deliberately rare: a table that has never met one can play the published
+Warlock forever and never notice it exists.
+"""
+
+from AtlasLusoris.GuildKit import Build_Casting_Variant
+from AtlasLusoris.GuildKit import Build_Specialization
+from AtlasLusoris.GuildKit import Warlock
+
+
+Archfey = Build_Specialization(
+	guild=Warlock,
+	name="Archfey",
+	module=__name__,
+	)
+Celestial = Build_Specialization(
+	guild=Warlock,
+	name="Celestial",
+	module=__name__,
+	)
+Fiend = Build_Specialization(
+	guild=Warlock,
+	name="Fiend",
+	module=__name__,
+	)
+GreatOldOne = Build_Specialization(
+	guild=Warlock,
+	name="Great Old One",
+	module=__name__,
+	)
+
+
+# The pact answering to something other than Charisma: five in a hundred each,
+# leaving the plain Warlock the remaining ninety.  An easter egg, not a rules
+# change, so a rules lawyer meets one Occultist in twenty rather than a new
+# subsystem.  Charisma needs no Variant of its own: the Guild already answers
+# it, and a Warlock of Charisma is simply a Warlock.
+Occultist = Build_Casting_Variant(
+	guild=Warlock,
+	name="Occultist",
+	ability="INT",
+	module=__name__,
+	weight=5,
+	)
+Covenantor = Build_Casting_Variant(
+	guild=Warlock,
+	name="Covenantor",
+	ability="WIS",
+	module=__name__,
+	weight=5,
+	)
+
+SPECIALIZATIONS = Warlock.SPECIALIZATIONS
+CASTING_VARIANTS = (
+	Covenantor,
+	Occultist,
+	)
+Quick fixes landed
+"answered your people first" — fixed. You're right that "first" reads as a priority claim over other peoples, which is exactly the nativist undertone that shouldn't be there. It now reads:
+
+"The woods have always answered your people, and some of that answer stayed with you."
+
+Self-test still green. While I had the file open I also confirmed the earlier Drow → Dark_Elf rename you made propagated cleanly through my lineage dict — nothing broken there.
+
+The audit workflow failed — not a real bug, it hit the session's usage limit (resets 9pm Madrid) partway through spawning its finder agents. Before it died I'd already run the character generator directly to get real ground truth on the Proficiency-Bonus phrasing: 35 distinct features across the live path (Origin Feats, General Feats, Artificer specialties, Eldritch Invocations, and my own Forest Gnome text) say "a number of times equal to your Proficiency Bonus" without showing the resolved number. I fixed the one that was mine (Forest Gnome Lineage now reads "you can cast it without a spell slot 3 times (equal to your Proficiency Bonus)"). The other 34 are a real, scoped cleanup — I'll work through them once we're done here, or now if you'd rather.
+
+The Warlock — main description
+Here's what's live today, unedited:
+
+One single moment changed your life forever. Now that moment marks every action you have made since. You gave a promise, a pact, or a contract. Power was the payment you received. That moment you heard the voice, like a dream, and felt the presence. Doubtful and curious, you accepted. By word, by blood, or by a simple honest smile. The pact is now a bond that cannot be unmade without breaking the laws of magic themselves.
+
+Every time you reach, something reaches back. At first you were cautious, but every time you were in danger, every time you needed it, it protected you. Some would call that love. You know better: you are an investment worth protecting. You are still useful.
+
+It has not asked for anything yet. Some nights you understand it does not need to ask. A game is being played, and you are just one of the pieces. Your patron is the player. You can only hope to be standing after the gambit resolves.
+
+The four patrons — nothing written yet
+Archfey, Celestial, Fiend, GreatOldOne are all declared with no extends=/crunches=, so right now every patron shows these exact same three paragraphs, unedited. Nothing patron-specific exists on the page yet.
+
+Two things worth deciding before we write:
+
+Extend or crunch, per patron? My standing read: all four extend (the shared paragraphs — the moment, the voice, the game you're a piece in — earn their place for any patron). The one candidate for crunch is the Great Old One, since it may never have made a bargain you'd recognize as one at all.
+Which order? Archfey → Celestial → Fiend → Great Old One, or another?
+Want to start writing the first one now?
+
+why is the app running in localhost not showing some of the changes I made?
+
+
+Ran 3 commands, used 6 tools (3 failed)
+Used Claude Browser: preview list
+[
+  {
+    "serverId": "619cd8e6-0a07-472b-aed0-2ec258cb9404",
+    "name": "shiny-app",
+    "port": 8000,
+    "status": "running",
+    "startedAt": "2026-08-18T15:39:21.019Z",
+    "cwd": "/Users/tbs/Desktop/DnD",
+    "sessionId": "local_cdbd5b29-98a7-4306-9cf4-ec72d6b132e0"
+  }
+]
+
+Session preview: {
+  "previewId": "preview-local_cdbd5b29-98a7-4306-9cf4-ec72d6b132e0",
+  "tabs": [
+    {
+      "tabId": "seed",
+      "origin": "http://localhost:8000",
+      "isActive": true
+    }
+  ]
+}
+Process entries above are for preview_stop / preview_logs only; address pages via tabId on the session preview.
+Ran
+a command
+cat /Users/tbs/Desktop/DnD/.claude/launch.json 2>/dev/null
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "shiny-app",
+      "runtimeExecutable": "/Users/tbs/Desktop/DnD/.venv/bin/python3",
+      "runtimeArgs": [
+        "-S",
+        "-m",
+        "shiny",
+        "run",
+        "/Users/tbs/Desktop/DnD/shiny_app.py",
+        "--port",
+        "8000",
+        "--reload"
+      ],
+      "cwd": "/Users/tbs/Desktop/DnD",
+      "env": {
+        "PYTHONPATH": "/Users/tbs/Desktop/DnD/.venv/lib/python3.14/site-packages"
+      },
+      "port": 8000,
+      "autoPort": true
+    }
+  ]
+}
+Used Claude Browser: preview logs
+serverId: 619cd8e6-0a07-472b-aed0-2ec258cb9404
+lines: 80
+Error: result (947,654 characters across 20,535 lines) exceeds maximum allowed tokens. Output has been saved to /Users/tbs/.claude/projects/-Users-tbs-Desktop-DnD/f8071d5d-95c6-493d-bd1f-17c5c720e5a2/tool-results/mcp-Claude_Browser-preview_logs-1787093067314.txt.
+Format: Plain text
+- For targeted searches (find a line, locate a string): use grep on the file directly.
+- For analysis or summarization that requires reading the full content: read /Users/tbs/.claude/projects/-Users-tbs-Desktop-DnD/f8071d5d-95c6-493d-bd1f-17c5c720e5a2/tool-results/mcp-Claude_Browser-preview_logs-1787093067314.txt in chunks of ~21 lines using offset/limit until you have read 100% of it.
+- If the Agent tool is available, do this inside a subagent so the full output stays out of your main context. Give it the instruction above verbatim, and be explicit about what it must return — e.g. "Read /Users/tbs/.claude/projects/-Users-tbs-Desktop-DnD/f8071d5d-95c6-493d-bd1f-17c5c720e5a2/tool-results/mcp-Claude_Browser-preview_logs-1787093067314.txt in chunks of ~21 lines using offset/limit until you have read all 20,535 lines, then summarize and quote any key findings verbatim." A vague "summarize this" may lose detail.
+Ran
+a command
+F="/Users/tbs/.claude/projects/-Users-tbs-Desktop-DnD/f8071d5d-95c6-493d-bd1f-17c5c720e5a2/tool-results/mcp-Claude_Browser-preview_logs-1787093067314.txt"
+wc -l "$F"
+echo "=== reload/watch events ==="
+grep -n -i "reload\|watchfiles\|watching for" "$F" | tail -40
+   20534 /Users/tbs/.claude/projects/-Users-tbs-Desktop-DnD/f8071d5d-95c6-493d-bd1f-17c5c720e5a2/tool-results/mcp-Claude_Browser-preview_logs-1787093067314.txt
+=== reload/watch events ===
+1:WARNING:  WatchFiles detected changes in 'AtlasActorLudi/SpeciesKit/__init__.py', 'AtlasLusoris/BackgroundKit.py', 'AtlasActorLudi/SpeciesKit/bases.py', 'AtlasLusoris/GuildKit.py', 'AtlasActorLudi/SpeciesKit/__main__.py'. Reloading...
+2349:WARNING:  WatchFiles detected changes in 'AtlasActorLudi/SpeciesKit/Elves/Dark_Elf.py'. Reloading...
+2354:WARNING:  WatchFiles detected changes in 'AtlasActorLudi/SpeciesKit/__init__.py', 'AtlasActorLudi/SpeciesKit/Elves/Drow.py', 'AtlasNomina/Races/Elf.py', 'AtlasActorLudi/SpeciesKit/Elves/__init__.py', 'AtlasActorLudi/SpeciesKit/Elves/resolution.py', 'AtlasActorLudi/SpeciesKit/__main__.py', 'app/components/character_sheet.py', 'AtlasActorLudi/SpeciesKit/Elves/Dark_Elf.py'. Reloading...
+2408:WARNING:  WatchFiles detected changes in 'app/components/character_sheet.py'. Reloading...
+4752:WARNING:  WatchFiles detected changes in 'AtlasActorLudi/SpeciesKit/Elves/Dark_Elf.py'. Reloading...
+4769:WARNING:  WatchFiles detected changes in 'app/components/character_sheet.py'. Reloading...
+Ran
+a command
+F="/Users/tbs/.claude/projects/-Users-tbs-Desktop-DnD/f8071d5d-95c6-493d-bd1f-17c5c720e5a2/tool-results/mcp-Claude_Browser-preview_logs-1787093067314.txt"
+echo "=== lines around the last two reload triggers ==="
+sed -n '4745,4534p' "$F" 2>/dev/null
+echo "--- last reload at 4769, show context to end of file ---"
+sed -n '4760,4820p' "$F"
+echo "=== total line count vs last reload line ==="
+wc -l "$F"
+=== lines around the last two reload triggers ===
+Deception: Ability Score = 14, Proficiency Level = 0
+--- last reload at 4769, show context to end of file ---
+INFO:     127.0.0.1:64725 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64727 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64727 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64731 - "WebSocket /websocket/" [accepted]
+INFO:     connection open
+/Users/tbs/Desktop/DnD/app/pages/actor_ludi/alusoris_list.py:200: UserWarning: @reactive.event decorated function open_listed_nonplayer() has parameter(s) with default values: index. These parameters will never be supplied by Shiny and will always use their defaults. Consider removing them or wrapping the function call in a lambda, e.g., @reactive.event\ndef fn(): return open_listed_nonplayer(index=index)
+  @reactive.event(
+/Users/tbs/Desktop/DnD/app/pages/magistratum.py:661: UserWarning: @reactive.event decorated function open_occupant() has parameter(s) with default values: index. These parameters will never be supplied by Shiny and will always use their defaults. Consider removing them or wrapping the function call in a lambda, e.g., @reactive.event\ndef fn(): return open_occupant(index=index)
+  @reactive.event(
+WARNING:  WatchFiles detected changes in 'app/components/character_sheet.py'. Reloading...
+INFO:     Shutting down
+INFO:     127.0.0.1:64733 - "WebSocket /websocket/" [accepted]
+INFO:     connection open
+🧞: 2026-08-18 20:42:52 [minion] set_Health: <TagKit.runtime_types.Character__Player__Evil__Dark_Elf__Male__BattleMaster__CommandingPresence__PushingAttack__DistractingStrike__CommandersStrike__TripAttack__SweepingAttack__EvasiveFootwork__LungingAttack__DisarmingAttack__Noble object at 0x10cc596a0>
+🧞: 2026-08-18 20:42:52 [minion] CalculateHPD: 20D10
+🧞: 2026-08-18 20:42:52 [minion] set_combat_attributes: <TagKit.runtime_types.Character__Player__Evil__Dark_Elf__Male__BattleMaster__CommandingPresence__PushingAttack__DistractingStrike__CommandersStrike__TripAttack__SweepingAttack__EvasiveFootwork__LungingAttack__DisarmingAttack__Noble object at 0x10cc596a0>
+🧞: 2026-08-18 20:42:52 [minion] roll_stat: 17
+🧞: 2026-08-18 20:42:52 [minion] roll_stat: 12
+🧞: 2026-08-18 20:42:52 [minion] roll_stat: 13
+🧞: 2026-08-18 20:42:52 [minion] roll_stat: 14
+🧞: 2026-08-18 20:42:52 [minion] New_stats: {'Strength': 17, 'Dexterity': 14, 'Constitution': 14, 'Intelligence': 12, 'Wisdom': 12, 'Charisma': 13}
+🧞: 2026-08-18 20:42:52 [minion] character_class: Fighter
+🧞: 2026-08-18 20:42:52 [minion] set_Skills: None
+🧞: 2026-08-18 20:42:52 [minion] set_stats: <TagKit.runtime_types.Character__Player__Evil__Dark_Elf__Male__BattleMaster__CommandingPresence__PushingAttack__DistractingStrike__CommandersStrike__TripAttack__SweepingAttack__EvasiveFootwork__LungingAttack__DisarmingAttack__Noble object at 0x10cc596a0>
+🧞: 2026-08-18 20:42:52 [minion] apply_species_features: <TagKit.runtime_types.Character__Player__Evil__Dark_Elf__Male__BattleMaster__CommandingPresence__PushingAttack__DistractingStrike__CommandersStrike__TripAttack__SweepingAttack__EvasiveFootwork__LungingAttack__DisarmingAttack__Noble object at 0x10cc596a0>
+🧞: 2026-08-18 20:42:52 [minion] apply_background_features: <TagKit.runtime_types.Character__Player__Evil__Dark_Elf__Male__BattleMaster__CommandingPresence__PushingAttack__DistractingStrike__CommandersStrike__TripAttack__SweepingAttack__EvasiveFootwork__LungingAttack__DisarmingAttack__Noble object at 0x10cc596a0>
+🐺: 2026-08-18 20:42:52 [guardian] species_to_race_and_subrace: ('Elf', 'Dark Elf')
+🧞: 2026-08-18 20:42:52 [minion] race: Elf
+🧞: 2026-08-18 20:42:52 [minion] subrace: Dark Elf
+🧞: 2026-08-18 20:42:53 [minion] apply_class_features: <TagKit.runtime_types.Character__Player__Evil__Dark_Elf__Male__BattleMaster__CommandingPresence__PushingAttack__DistractingStrike__CommandersStrike__TripAttack__SweepingAttack__EvasiveFootwork__LungingAttack__DisarmingAttack__Noble__Mastery_Of_Handaxe__Mastery_Of_Blowgun__Mastery_Of_Spear__Mastery_Of_Whip__Mastery_Of_Shortsword__Mastery_Of_Battleaxe__FightingStyle__SecondWind__WeaponMastery__ActionSurge__TacticalMind__CombatSuperiority__StudentOfWar__ExtraAttack__TacticalShift__KnowYourEnemy__Indomitable__TacticalMaster__ImprovedCombatSuperiority__StudiedAttacks__Relentless__UltimateCombatSuperiority__ThrownWeaponFighting__Sharpshooter__Grappler__HeavyArmorMaster__MartialWeaponTraining__Skulker__GreatWeaponMaster__BoonOfIrresistibleOffense object at 0x10cc596a0>
+🧞: 2026-08-18 20:42:53 [minion] Saving_Throws: <AtlasActorLudi.Grimoire_of_SavingThrows.SavingThrows object at 0x10cbdaf90>
+🧞: 2026-08-18 20:42:53 [minion] get_spellcaster: <AtlasLusoris.Grimoire_of_Spellcasters.SpeciesSpellcaster object at 0x112051fd0>
+🧞: 2026-08-18 20:42:53 [minion] set_char_features: <TagKit.runtime_types.Character__Player__Evil__Dark_Elf__Male__BattleMaster__CommandingPresence__PushingAttack__DistractingStrike__CommandersStrike__TripAttack__SweepingAttack__EvasiveFootwork__LungingAttack__DisarmingAttack__Noble__Mastery_Of_Handaxe__Mastery_Of_Blowgun__Mastery_Of_Spear__Mastery_Of_Whip__Mastery_Of_Shortsword__Mastery_Of_Battleaxe__FightingStyle__SecondWind__WeaponMastery__ActionSurge__TacticalMind__CombatSuperiority__StudentOfWar__ExtraAttack__TacticalShift__KnowYourEnemy__Indomitable__TacticalMaster__ImprovedCombatSuperiority__StudiedAttacks__Relentless__UltimateCombatSuperiority__ThrownWeaponFighting__Sharpshooter__Grappler__HeavyArmorMaster__MartialWeaponTraining__Skulker__GreatWeaponMaster__BoonOfIrresistibleOffense object at 0x10cc596a0>
+🐺: 2026-08-18 20:42:53 [guardian] NewWord: Naivara
+Starwatcherg → hade  (0.2129 → 0.2280) : Shadewatcherg
+🕷️ [spy] is_valid_name (('Shadewatcherg', 'increase_entropy'), {}) called at 2026-08-18 20:42:53
+
+╞🔮 Call Stack:
+│  ╭📜 「spawn.py」
+│  ╭🪄(122) ⟨spawn_main⟩
+│  ╭🪄(135) ⟨_main⟩
+│  │  ╭📜 「process.py」
+│  │  ╭🪄(320) ⟨_bootstrap⟩
+│  │  ╭🪄(108) ⟨run⟩
+│  │  │  ╭📜 「runners.py」
+│  │  │  ╭🪄(204) ⟨run⟩
+│  │  │  ╭🪄(127) ⟨run⟩
+│  │  │  │  ╭📜 「base_events.py」
+│  │  │  │  ╭🪄(706) ⟨run_until_complete⟩
+│  │  │  │  ╭🪄(677) ⟨run_forever⟩
+│  │  │  │  ╭🪄(2046) ⟨_run_once⟩
+│  │  │  │  │  ╭📜 「events.py」
+│  │  │  │  │  ╭🪄(94) ⟨_run⟩
+│  │  │  │  │  │  ╭📜 「routing.py」
+│  │  │  │  │  │  ╭🪄(217) ⟨__call__⟩
+│  │  │  │  │  │  │  ╭📜 「player.py」
+│  │  │  │  │  │  │  ╭🪄(606) ⟨initialize_from_url⟩
+│  │  │  │  │  │  │  ╭🪄(453) ⟨generate⟩
+│  │  │  │  │  │  │  │  ╭📜 「Map_of_Character_Generation.py」
+│  │  │  │  │  │  │  │  ╭🪄(213) ⟨summon_player⟩
+│  │  │  │  │  │  │  │  ╭🪄(107) ⟨_attempt_player⟩
+=== total line count vs last reload line ===
+   20534 /Users/tbs/.claude/projects/-Users-tbs-Desktop-DnD/f8071d5d-95c6-493d-bd1f-17c5c720e5a2/tool-results/mcp-Claude_Browser-preview_logs-1787093067314.txt
+Checked tabs
+{
+  "tabs": [
+    {
+      "tabId": "seed",
+      "origin": "http://localhost:8000",
+      "isActive": true
+    }
+  ]
+}
+Read page text
+get_page_text timed out after 30s. The Browser pane is currently displayed. The pane may be stuck (modal dialog, navigation hang, or unresponsive renderer). Check preview_console_logs for errors.
+tabId: seed
+max_chars: 1500
+Interacted with page
+computer timed out after 30s. The Browser pane is currently displayed. The pane may be stuck (modal dialog, navigation hang, or unresponsive renderer). Check preview_console_logs for errors.
+action: screenshot
+tabId: seed
+Opened a page
+navigate timed out after 300s. The underlying operation (browser extension, CDP, Apple Events) may be stuck or unresponsive.
+tabId: seed
+url: http://localhost:8000
+force: true
+/
+
+"""
+The eight published forms in ``Map_of_Familiars`` are fixed creatures out of
+the Monster Manual.  This is the other route: the spirit is *built*, from a
+creature type and a pool of traits, so what answers the summons is a slime, or
+a living toy, or a drake the size of a dog, and it belongs to that character.
+
+The shape is deliberately the one everybody already knows from monster-collecting
+games.  A **type** decides the damage, the look, and which traits are even
+possible; the traits are the moveset.  Nothing in the pool escalates damage,
+because that is where familiars break: every trait buys a *sense*, a *movement
+mode*, or a *trick*.  A familiar that flies, sees the invisible and carries
+messages is a delight at any level and a threat at none.
+
+Budget is the caster's Proficiency Bonus, and tiers gate what is reachable, so
+a level 1 familiar gets two small talents and a level 17 one gets six, some of
+them strange.  The numbers come from the 2023 playtest Pact Familiar, which is
+the only version of these rules that scales with its caster:
+
+	AC      10 + spellcasting modifier
+	HP      5 + Warlock level, in d4 Hit Dice
+	strike  2 + half Warlock level, damage by type
+
+Naming follows the type and the look, so the sheet says what it is and what it
+resembles: *Undead Familiar (ghost-like)*, *Ooze Familiar (slime-like)*.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+
+
+@dataclass(
+	frozen=True,
+	)
+class Trait:
+	"""One talent a summoned familiar might have."""
+
+	name: str
+	text: str
+	# Types that may have it.  Empty means any type may.
+	types: tuple[str, ...] = field(
+		default_factory=tuple,
+		)
+	tier: int = 1
+
+	def allowed(
+			self,
+			kind: str,
+			) -> bool:
+		return not self.types or kind in self.types
+
+
+@dataclass(
+	frozen=True,
+	)
+class Familiar_Type:
+	"""A type: what it is made of, what it looks like, what it does on a hit."""
+
+	name: str
+	damage: str
+	looks: tuple[str, ...]
+	affinity: tuple[str, ...] = field(
+		default_factory=tuple,
+		)
+
+
+TYPES = {
+	record.name: record
+	for record in (
+
+

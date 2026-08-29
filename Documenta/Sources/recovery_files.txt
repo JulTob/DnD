@@ -1,0 +1,2729 @@
+"""
+Map of Exotic Familiars — a familiar nobody else at the table has.
+
+The eight published forms in ``Map_of_Familiars`` are fixed creatures out of
+the Monster Manual.  This is the other route: the spirit is *built*, from a
+creature type and a pool of traits, so what answers the summons is a slime, or
+a living toy, or a drake the size of a dog, and it belongs to that character.
+
+The shape is deliberately the one everybody already knows from monster-collecting
+games.  A **type** decides the damage, the look, and which traits are even
+possible; the traits are the moveset.  Nothing in the pool escalates damage,
+because that is where familiars break: every trait buys a *sense*, a *movement
+mode*, or a *trick*.  A familiar that flies, sees the invisible and carries
+messages is a delight at any level and a threat at none.
+
+Budget is the caster's Proficiency Bonus, and tiers gate what is reachable, so
+a level 1 familiar gets two small talents and a level 17 one gets six, some of
+them strange.  The numbers come from the 2023 playtest Pact Familiar, which is
+the only version of these rules that scales with its caster:
+
+	AC      10 + spellcasting modifier
+	HP      5 + Warlock level, in d4 Hit Dice
+	strike  2 + half Warlock level, damage by type
+
+Naming follows the type and the look, so the sheet says what it is and what it
+resembles: *Undead Familiar (ghost-like)*, *Ooze Familiar (slime-like)*.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+
+
+@dataclass(
+	frozen=True,
+	)
+class Trait:
+	"""One talent a summoned familiar might have."""
+
+	name: str
+	text: str
+	# Types that may have it.  Empty means any type may.
+	types: tuple[str, ...] = field(
+		default_factory=tuple,
+		)
+	tier: int = 1
+
+	def allowed(
+			self,
+			kind: str,
+			) -> bool:
+		return not self.types or kind in self.types
+
+
+@dataclass(
+	frozen=True,
+	)
+class Familiar_Type:
+	"""A type: what it is made of, what it looks like, what it does on a hit."""
+
+	name: str
+	damage: str
+	looks: tuple[str, ...]
+	affinity: tuple[str, ...] = field(
+		default_factory=tuple,
+		)
+
+
+TYPES = {
+	record.name: record
+	for record in (
+		Familiar_Type(
+			name="Aberration",
+			damage="Acid",
+			looks=(
+				"a flumph",
+				"a knot of tentacles",
+				"a single floating eye",
+				"a mouth that hums",
+				),
+			affinity=(
+				"Great Old One",
+				"Aberrant",
+				"Aberration",
+				"Hermeticist",
+				),
+			),
+		Familiar_Type(
+			name="Celestial",
+			damage="Radiant",
+			looks=(
+				"an owl too clean for the weather",
+				"a raven with no shadow",
+				"a small winged thing that hums plainchant",
+				"a hare that will not be looked at directly",
+				),
+			affinity=(
+				"Celestial",
+				"Aasimar",
+				"Acolyte",
+				"Inquisitor",
+				),
+			),
+		Familiar_Type(
+			name="Construct",
+			damage="Force",
+			looks=(
+				"a living toy",
+				"a clockwork bird missing one wing",
+				"a doll somebody loved to pieces",
+				"a hand, walking",
+				),
+			affinity=(
+				"Construct",
+				"Artificer",
+				"Crafter",
+				"Hermeticist",
+				),
+			),
+		Familiar_Type(
+			name="Dragon",
+			damage="Fire",
+			looks=(
+				"a drake the size of a dog",
+				"a winged serpent",
+				"a dragonet with an inflated opinion",
+				"a lizard that reads over your shoulder",
+				),
+			affinity=(
+				"Dragon",
+				"Draconic",
+				"Kobold",
+				"Sorcerer",
+				),
+			),
+		Familiar_Type(
+			name="Elemental",
+			damage="Thunder",
+			looks=(
+				"an ember that will not go out",
+				"a dust devil the size of a cat",
+				"a puddle that follows",
+				"a draught with opinions",
+				),
+			affinity=(
+				"Elemental",
+				"Genasi",
+				"Storm",
+				),
+			),
+		Familiar_Type(
+			name="Fey",
+			damage="Psychic",
+			looks=(
+				"a pixie",
+				"a fox with one tail too many",
+				"a moth the colour of a rumour",
+				"a child's drawing of a bird",
+				),
+			affinity=(
+				"Fey",
+				"Elf",
+				"Destined",
+				"Naturalist",
+				"Wildkeeper",
+				),
+			),
+		Familiar_Type(
+			name="Fiend",
+			damage="Poison",
+			looks=(
+				"an imp",
+				"a goat-eyed cat",
+				"a toad wearing a very small ring",
+				"a rat that keeps accounts",
+				),
+			affinity=(
+				"Fiend",
+				"Tiefling",
+				"Infernal",
+				"Servant",
+				),
+			),
+		Familiar_Type(
+			name="Monstrosity",
+			damage="Piercing",
+			looks=(
+				"an owlbear cub",
+				"a chimera the size of a loaf",
+				"something with the wrong number of joints",
+				"a crab wearing a bird's skull",
+				),
+			affinity=(
+				"Monstrosity",
+				"Beast",
+				"Hunter",
+				"Survivalist",
+				),
+			),
+		Familiar_Type(
+			name="Ooze",
+			damage="Acid",
+			looks=(
+				"a slime",
+				"a bucket of something that likes you",
+				"a stain that arrives before you do",
+				"a jar you did not pack",
+				),
+			affinity=(
+				"Ooze",
+				"Alchemist",
+				"Hermeticist",
+				),
+			),
+		Familiar_Type(
+			name="Undead",
+			damage="Necrotic",
+			looks=(
+				"a ghost",
+				"a skull with a candle in it",
+				"a shadow that is not yours",
+				"a doll that was buried with somebody",
+				),
+			affinity=(
+				"Undead",
+				"Necromancy",
+				"Spirit Medium",
+				"Exorcist",
+				"Survivor",
+				),
+			),
+		)
+	}
+
+
+# The moveset.  Senses, movement and tricks only: nothing here raises damage,
+# which is the one axis that turns a familiar into a second character.
+TRAITS = (
+	Trait(
+		name="Keen Senses",
+		text="Darkvision 60 feet and Advantage on Perception checks relying on sight.",
+		),
+	Trait(
+		name="Nose for It",
+		text="Advantage on Perception and Survival checks that rely on smell.",
+		),
+	Trait(
+		name="Small Places",
+		text="It can move through a space as narrow as one inch without squeezing.",
+		),
+	Trait(
+		name="Courier",
+		text="It can carry and deliver a written message, and will not be talked out of it.",
+		),
+	Trait(
+		name="Mimic",
+		text="It can reproduce any sound or voice it has heard, badly enough to be funny and well enough to work once.",
+		),
+	Trait(
+		name="Deliver Spell",
+		text="When you cast a spell with a range of touch, the familiar can deliver it with its own touch while within 120 feet of you.",
+		tier=2,
+		),
+	Trait(
+		name="Climber",
+		text="Climb Speed equal to its Speed, including across ceilings.",
+		types=(
+			"Aberration",
+			"Construct",
+			"Fiend",
+			"Monstrosity",
+			"Ooze",
+			),
+		),
+	Trait(
+		name="Flight",
+		text="Fly Speed 40 feet.",
+		types=(
+			"Celestial",
+			"Dragon",
+			"Elemental",
+			"Fey",
+			"Fiend",
+			"Undead",
+			),
+		),
+	Trait(
+		name="Swimmer",
+		text="Swim Speed equal to its Speed, and it can breathe underwater.",
+		types=(
+			"Aberration",
+			"Elemental",
+			"Monstrosity",
+			"Ooze",
+			),
+		),
+	Trait(
+		name="Burrower",
+		text="Burrow Speed 15 feet through earth and loose stone.",
+		types=(
+			"Aberration",
+			"Construct",
+			"Monstrosity",
+			"Ooze",
+			),
+		),
+	Trait(
+		name="Incorporeal Step",
+		text="Once per Short Rest it can pass through a solid object no thicker than five feet, taking 1d10 Force damage if it ends its move inside one.",
+		types=(
+			"Fey",
+			"Undead",
+			),
+		tier=2,
+		),
+	Trait(
+		name="Seep",
+		text="It can pass through any opening that would admit water, carrying nothing.",
+		types=(
+			"Elemental",
+			"Ooze",
+			),
+		tier=2,
+		),
+	Trait(
+		name="Sees the Unseen",
+		text="It perceives Invisible creatures and objects within 30 feet.",
+		types=(
+			"Aberration",
+			"Celestial",
+			"Fey",
+			"Undead",
+			),
+		tier=2,
+		),
+	Trait(
+		name="Tremorsense",
+		text="Tremorsense 30 feet.",
+		types=(
+			"Aberration",
+			"Construct",
+			"Monstrosity",
+			"Ooze",
+			),
+		tier=2,
+		),
+	Trait(
+		name="Reads the Room",
+		text="It knows whether a creature it can see is lying, though not what the truth is.",
+		types=(
+			"Aberration",
+			"Celestial",
+			"Fey",
+			"Fiend",
+			),
+		tier=2,
+		),
+	Trait(
+		name="Stubborn Little Thing",
+		text="Advantage on saving throws against being Charmed or Frightened, and it cannot be turned against you.",
+		tier=2,
+		),
+	Trait(
+		name="Extradimensional Escape",
+		text="When it would drop to 0 Hit Points it instead drops to 1 and vanishes for 1 hour, or until you call it back as a Magic action. Recharges on a Long Rest.",
+		tier=2,
+		),
+	Trait(
+		name="Bearer",
+		text="It is Small rather than Tiny and can carry a rider of its own size or smaller at its Speed.",
+		types=(
+			"Construct",
+			"Dragon",
+			"Elemental",
+			"Monstrosity",
+			),
+		tier=3,
+		),
+	Trait(
+		name="Borrowed Eyes",
+		text="You can see and hear through it at any distance while you are on the same plane.",
+		tier=3,
+		),
+	Trait(
+		name="Second Shape",
+		text="As a Bonus Action it takes another look from its type's list, keeping its statistics.",
+		tier=3,
+		),
+	Trait(
+		name="Ward",
+		text="Once per Long Rest, when you would take damage while it is within 5 feet, it takes the damage instead.",
+		tier=3,
+		),
+	Trait(
+		name="Knows the Way",
+		text="It always knows the direction and rough distance to a place it has been.",
+		tier=3,
+		),
+	Trait(
+		name="Unsleeping",
+		text="It does not sleep, eat or breathe, and keeps watch without complaint.",
+		types=(
+			"Construct",
+			"Elemental",
+			"Undead",
+			),
+		),
+	)
+
+
+@dataclass(
+	frozen=True,
+	)
+class Summoned_Familiar:
+	"""One built familiar, ready for the sheet."""
+
+	kind: Familiar_Type
+	look: str
+	traits: tuple[Trait, ...]
+	armour_class: int
+	hit_points: int
+	hit_dice: str
+	strike: str
+
+	def title(
+			self,
+			) -> str:
+		return f"{self.kind.name} Familiar ({self.look})"
+
+	def block(
+			self,
+			) -> str:
+		rows = [
+			self.title(),
+			f"AC {self.armour_class} · HP {self.hit_points} ({self.hit_dice}) · Speed 30 ft.",
+			f"Strike. Melee spell attack, reach 5 ft., {self.strike} {self.kind.damage} damage.",
+			]
+		rows.extend(
+			f"{trait.name}. {trait.text}"
+			for trait in self.traits
+			)
+
+		return "\n".join(
+			rows
+			)
+
+
+def _tier_for(
+		level: int,
+		) -> int:
+	"""How strange a familiar may get at this level."""
+	if level >= 11:
+		return 3
+
+	return 2 if level >= 5 else 1
+
+
+def summon_familiar(
+		char,
+		level: int | None = None,
+		kind: str | None = None,
+		) -> Summoned_Familiar:
+	"""
+	Build one exotic familiar for this caster.
+
+	Type is drawn by Familial Preference, so what answers follows from what the
+	caster is.  Traits are drawn from the pool its type allows, as many as the
+	caster's Proficiency Bonus, and only up to the tier their level has earned.
+	"""
+	from AtlasLusoris.AtlasOfInvocations.Map_of_Familiars import (
+		AFFINITY_WEIGHT,
+		_caster_marks,
+		)
+
+	level = int(
+		level
+		or getattr(
+			char,
+			"level",
+			1,
+			)
+		or 1
+		)
+	bonus = (
+		level - 1
+		) // 4 + 2
+
+	if kind is None:
+		marks = _caster_marks(
+			char
+			)
+		names = list(
+			TYPES
+			)
+		weights = [
+			AFFINITY_WEIGHT
+			if any(
+				word.lower() in marks
+				for word in TYPES[name].affinity
+				)
+			else 1
+			for name in names
+			]
+		kind = char.Pick(
+			names,
+			weights,
+			)
+
+	record = TYPES[
+		kind
+		]
+	ceiling = _tier_for(
+		level
+		)
+	pool = [
+		trait
+		for trait in TRAITS
+		if trait.allowed(
+			record.name
+			)
+		and trait.tier <= ceiling
+		]
+	chosen: list[Trait] = []
+
+	while pool and len(
+		chosen
+		) < bonus:
+		trait = char.Pick(
+			pool
+			)
+		chosen.append(
+			trait
+			)
+		pool.remove(
+			trait
+			)
+
+	casting = int(
+		getattr(
+			char,
+			"spell_attack_modifier",
+			0,
+			) or 3
+		)
+
+	return Summoned_Familiar(
+		kind=record,
+		look=char.Pick(
+			list(
+				record.looks
+				)
+			),
+		traits=tuple(
+			sorted(
+				chosen,
+				key=lambda trait: (
+					trait.tier,
+					trait.name,
+					),
+				)
+			),
+		armour_class=10 + casting,
+		hit_points=5 + level,
+		hit_dice=f"{level}d4",
+		strike=f"{2 + level // 2}",
+		)
+
+
+__all__ = (
+	"Familiar_Type",
+	"Summoned_Familiar",
+	"TRAITS",
+	"TYPES",
+	"Trait",
+	"summon_familiar",
+	)
+----------
+"""
+CharactersKit
+
+Contains:
+	Character: shared skeleton (seed, dices, Roll/Dice, dummies)
+	Role / Player / NonPlayer: Core role Tags
+
+Seeds: repeatability between calls.
+Dice: the Character's owned RNG.
+	``dices`` holds the main bag.
+	``Roll`` / ``Dice`` draw from it.
+	``Dice_Bag`` opens a deterministic bag for one stable purpose.
+
+Expected behaviour
+
+For any character, with Role Tags, say charlie:
+```
+charlie = Character( name= "Charlie" )
+
+Player( charlie )
+Wizard( charlie )
+Farmer( charlie )
+
+these should return true:
+assert charlie in Player
+assert Has( charlie, Wizard )
+
+```
+
+"""
+
+from TagKit import Has, Pre, Tag, TagPreconditionError
+
+
+def _tag_holds(
+		char,
+		candidate,
+		) -> bool:
+	"""Whether this Character already carries the candidate Tag."""
+	try:
+		return char in candidate
+	except TypeError:
+		return False
+
+
+# ---------------------------------------------------------------------------
+# Skeleton
+# ---------------------------------------------------------------------------
+
+class Character:
+	"""Minimal shared substrate for every Player or NonPlayer Character."""
+
+	def __init__(
+			char,
+			seed: int = -1,
+			level: int = 1,
+			):
+		"""Construct the Character skeleton."""
+		from random import Random
+
+		from AtlasActorLudi.ProficiencyKit import Training_Record
+
+		rng = Random()
+		char.seed = int(
+			seed
+			if seed >= 0
+			else rng.randint(
+				0,
+				2**64,
+				)
+			)
+		char.dices = Random(
+			char.seed
+			)
+		char.level = max(
+			1,
+			int(
+				level
+				),
+			)
+		char.training = Training_Record()
+
+	# --- Dice Methods ----------------------------------------------
+
+	def Roll(
+			char,
+			D: int = 6,
+			N: int = 1,
+			modifier: int = 0,
+			*,
+			dice=None,
+			) -> int:
+		"""
+		Roll N dice with D sides and add a modifier
+		from the Character's Dice Bag.
+
+		``dice`` rolls from a named Bag instead of the Character's
+		single stream, for a roll whose result must not depend on
+		how many other rolls happened first.
+		"""
+		if N < 1:
+			N = 1
+
+		source = (
+			dice
+			if dice is not None
+			else char.dices
+			)
+
+		total = 0
+
+		for _ in range(
+				N
+				):
+			if D >= 1:
+				total += source.randint(
+					1,
+					D,
+					)
+			else:
+				total += source.randint(
+					D,
+					1,
+					)
+
+		return total + modifier
+
+	# Alias used in Decree / Dialog prose
+	Dice = Roll
+
+	def Roll_Zero(
+			char,
+			D: int = 6,
+			N: int = 1,
+			) -> int:
+		"""Roll N zero-based dice from this Character's Dice Bag."""
+		if N < 1:
+			N = 1
+
+		lower = min(
+			0,
+			D,
+			)
+		upper = max(
+			0,
+			D,
+			)
+
+		return sum(
+			char.dices.randint(
+				lower,
+				upper,
+				)
+			for _ in range(
+				N
+				)
+			)
+
+	def __invert__(char):
+		"""Reseed this Character's Dice from its fixed seed."""
+		char.dices.seed(
+			char.seed
+			)
+
+		return char.seed
+
+	def New_Score(char):
+		"""Roll 4d6 and drop the lowest result."""
+		rolls = [
+			char.Dice(
+				6
+				)
+			for _ in range(
+				4
+				)
+			]
+
+		return sum(
+			sorted(
+				rolls
+				)[
+					1:
+					]
+			)
+
+	def Pick_Bag(
+			char,
+			purpose=None,
+			*,
+			version: str = "1",
+			namespace: str = "GenLegend",
+			):
+		"""
+		The Dice Bag one draw should come from, advanced per purpose.
+
+		Successive draws for the same purpose open ``purpose#0``,
+		``purpose#1`` and so on. Different purposes stay independent.
+		A bare call derives purpose from the caller's module.function.
+		"""
+		if purpose is None:
+			from sys import _getframe
+
+			frame = _getframe(
+				2
+				)
+			purpose = (
+				f"{frame.f_globals.get('__name__', '?')}"
+				f".{frame.f_code.co_qualname}"
+				)
+
+		counts = getattr(
+			char,
+			"_pick_draws",
+			None,
+			)
+
+		if counts is None:
+			counts = {}
+			char._pick_draws = counts
+
+		drawn = counts.get(
+			purpose,
+			0,
+			)
+		counts[
+			purpose
+			] = drawn + 1
+
+		return char.Dice_Bag(
+			f"{purpose}#{drawn}",
+			version=version,
+			namespace=namespace,
+			)
+
+	def Pick(
+			char,
+			ledger,
+			weights=None,
+			*,
+			purpose=None,
+			dice=None,
+			):
+		"""
+		Pick one item from a named Dice Bag.
+
+		``dice`` takes an already-opened Bag; ``purpose`` names one to open.
+		Neither is required: a bare ``Pick`` still draws deterministically
+		via ``Pick_Bag``.
+		"""
+		if not ledger:
+			raise ValueError(
+				"Pick: empty ledger"
+				)
+
+		source = (
+			dice
+			if dice is not None
+			else char.Pick_Bag(
+				purpose
+				)
+			)
+
+		if weights is None:
+			return source.choice(
+				list(
+					ledger
+					)
+				)
+
+		return source.choices(
+			list(
+				ledger
+				),
+			weights=weights,
+			k=1,
+			)[
+				0
+				]
+
+	def Accept(
+			char,
+			ledger,
+			weights=None,
+			*,
+			purpose=None,
+			dice=None,
+			imprint=None,
+			in_order=False,
+			attempts=100,
+			):
+		"""
+		Draw from a pool until a candidate's Preconditions accept
+		this Character.
+
+		Each refusal is reported as a Minion bug tree and dropped from
+		the remaining ledger. An exhausted pool raises — that is a real
+		bug. ``in_order`` walks the ledger as given; otherwise each
+		attempt uses ``Pick``. ``imprint`` defaults to ``candidate(char)``.
+		"""
+		from Minion import report_bug
+
+		remaining = list(
+			ledger
+			)
+		if not remaining:
+			raise ValueError(
+				"Accept: empty ledger"
+				)
+
+		remaining_weights = (
+			list(
+				weights
+				)
+			if weights is not None
+			else None
+			)
+		if (
+			remaining_weights is not None
+			and len(
+				remaining_weights
+				) != len(
+					remaining
+					)
+			):
+			raise ValueError(
+				"Accept: weights must match the ledger."
+				)
+
+		ceiling = min(
+			max(
+				1,
+				int(
+					attempts
+					)
+				),
+			100,
+			)
+		last_refusal = None
+
+		for _ in range(
+				ceiling
+				):
+			if not remaining:
+				break
+
+			candidate = (
+				remaining[
+					0
+					]
+				if in_order
+				else char.Pick(
+					remaining,
+					weights=remaining_weights,
+					purpose=purpose,
+					dice=dice,
+					)
+				)
+
+			if (
+				imprint is None
+				and _tag_holds(
+					char,
+					candidate,
+					)
+				):
+				return candidate
+
+			try:
+				if imprint is None:
+					candidate(
+						char
+						)
+				else:
+					imprint(
+						candidate
+						)
+			except TagPreconditionError as err:
+				report_bug(
+					err
+					)
+				last_refusal = err
+				index = remaining.index(
+					candidate
+					)
+				remaining.pop(
+					index
+					)
+				if remaining_weights is not None:
+					remaining_weights.pop(
+						index
+						)
+				continue
+
+			return candidate
+
+		raise ValueError(
+			"No candidate in this pool accepted the Character."
+			) from last_refusal
+
+	def Dice_Bag(
+			char,
+			purpose: str,
+			*,
+			version: str = "1",
+			namespace: str = "GenLegend",
+			):
+		"""Open a fresh deterministic Dice Bag for one stable purpose."""
+		from hashlib import blake2b
+		from random import Random
+
+		bag_purpose = str(
+			purpose
+			).strip()
+		bag_version = str(
+			version
+			).strip()
+		bag_namespace = str(
+			namespace
+			).strip()
+
+		if not bag_purpose:
+			raise ValueError(
+				"A Character Dice Bag requires a stable purpose."
+				)
+
+		if not bag_namespace:
+			raise ValueError(
+				"A Character Dice Bag requires a namespace."
+				)
+
+		material = (
+			f"{char.seed}|{bag_purpose}|{bag_version}"
+			).encode(
+				"utf-8"
+				)
+		digest = blake2b(
+			material,
+			digest_size=16,
+			person=bag_namespace.encode(
+				"utf-8"
+				)[
+					:16
+					],
+			).digest()
+
+		return Random(
+			int.from_bytes(
+				digest,
+				"big",
+				)
+			)
+
+
+# ---------------------------------------------------------------------------
+# Character Tags
+# ---------------------------------------------------------------------------
+
+class Role(Tag):
+	"""Root Tag for a Character's play role."""
+
+	@Pre
+	def is_Character(
+			target,
+			):
+		"""Limit Role Tags to Characters."""
+		return isinstance(
+			target,
+			Character,
+			)
+
+
+class Player(Role):
+	"""Player-character role."""
+
+	@Pre
+	def no_npc(
+			target,
+			):
+		"""Exclude Characters carrying the NonPlayer Shape."""
+		assert target not in NonPlayer
+
+
+class NonPlayer(Role):
+	"""Non-player Character role."""
+
+	@Pre
+	def no_player(
+			target,
+			):
+		"""Exclude Characters carrying the Player Shape."""
+		assert target not in Player
+
+
+# ---------------------------------------------------------------------------
+# Focused core suite
+# ---------------------------------------------------------------------------
+
+def _test_rng_determinism():
+	"""Seed fully determines the Dice Bag; inversion reseeds it."""
+	a = Character(
+		seed=42
+		)
+	b = Character(
+		seed=42
+		)
+	sequence = [
+		a.Roll(
+			20
+			)
+		for _ in range(
+			5
+			)
+		]
+
+	assert sequence == [
+		b.Roll(
+			20
+			)
+		for _ in range(
+			5
+			)
+		]
+	assert all(
+		1 <= result <= 20
+		for result in sequence
+		)
+	assert isinstance(
+		a.seed,
+		int,
+		)
+	assert (~a) == 42
+	assert [
+		a.Roll(
+			20
+			)
+		for _ in range(
+			5
+			)
+		] == sequence
+
+
+def _test_roll_shape():
+	"""Roll honors D, N, and modifier; Dice is the alias."""
+	assert Character.Dice is Character.Roll
+	assert Character(
+		seed=1
+		).Roll(
+			D=1,
+			N=3,
+			) == 3
+	assert Character(
+		seed=1
+		).Roll(
+			D=1,
+			N=0,
+			) == 1
+	assert Character(
+		seed=1
+		).Roll(
+			D=6,
+			N=1,
+			modifier=100,
+			) >= 101
+	assert 0 <= Character(
+		seed=1
+		).Roll_Zero(
+			D=6,
+			N=4,
+			) <= 24
+	assert -12 <= Character(
+		seed=1
+		).Roll_Zero(
+			D=-3,
+			N=4,
+			) <= 0
+
+
+def _test_dice_bags():
+	"""Purpose Dice Bags are stable, isolated, and level-independent."""
+	first = Character(
+		seed=91,
+		level=1,
+		)
+	progressed = Character(
+		seed=91,
+		level=20,
+		)
+	dice_state = first.dices.getstate()
+	first_bag = first.Dice_Bag(
+		"identity.story"
+		)
+	progressed_bag = progressed.Dice_Bag(
+		"identity.story"
+		)
+
+	first_values = tuple(
+		first_bag.randint(
+			1,
+			20,
+			)
+		for _ in range(
+			4
+			)
+		)
+	progressed_values = tuple(
+		progressed_bag.randint(
+			1,
+			20,
+			)
+		for _ in range(
+			4
+			)
+		)
+
+	assert first_values == progressed_values
+	assert first.dices.getstate() == dice_state
+
+	first_choice = first.Pick(
+		(
+			"North",
+			"South",
+			),
+		dice=first.Dice_Bag(
+			"identity.direction"
+			),
+		)
+	progressed_choice = progressed.Pick(
+		(
+			"North",
+			"South",
+			),
+		dice=progressed.Dice_Bag(
+			"identity.direction"
+			),
+		)
+
+	assert first_choice == progressed_choice
+	assert first.dices.getstate() == dice_state
+
+
+def _test_level():
+	"""Level clamps to at least one and remains explicit state."""
+	assert Character(
+		level=0
+		).level == 1
+	assert Character(
+		level=3
+		).level == 3
+
+	character = Character(
+		seed=1,
+		level=2,
+		)
+
+	assert character.level == 2
+	assert character.level <= 3
+	assert character.level >= 1
+
+
+def _test_tag_queries():
+	"""Semantic membership is queried through Tags."""
+	character = Character(
+		seed=7,
+		level=1,
+		)
+
+	assert character not in Player
+	assert not Has(
+		character,
+		Player,
+		)
+
+
+def _test_player_role():
+	"""Role membership includes the Shape and its Base."""
+	hero = Character(
+		seed=5,
+		level=2,
+		)
+	Player(
+		hero
+		)
+
+	assert hero in Player and hero in Role
+	assert Player in hero and Role in hero
+	assert Has(
+		hero,
+		Player,
+		Role,
+		)
+	assert Has(
+		hero,
+		"Player",
+		"Role",
+		)
+	assert "Player" in hero
+	assert "player" in hero
+	assert "Wizard" not in hero
+	assert not Has(
+		hero,
+		"Wizard",
+		)
+
+
+def _test_is_character_contract():
+	"""The Role precondition rolls back tagging a non-Character."""
+	class NotACharacter:
+		pass
+
+	try:
+		Player(
+			NotACharacter()
+			)
+	except Exception as error:
+		assert type(error).__name__ == "TagPreconditionError"
+	else:
+		raise AssertionError(
+			"Player must reject a non-Character"
+			)
+
+
+def _test_spaced_name():
+	"""Python Tag identity stays separate from a display-name Report."""
+	class Eldritch_Knight(Role):
+		NAME = "Eldritch Knight"
+
+	knight = Character(
+		seed=7
+		)
+	Eldritch_Knight(
+		knight
+		)
+
+	assert knight in Eldritch_Knight and knight in Role
+	assert Has(
+		knight,
+		"Eldritch_Knight",
+		)
+	assert Eldritch_Knight.NAME == "Eldritch Knight"
+	assert not Has(
+		knight,
+		"Eldritch Knight",
+		)
+
+
+def _test_nonplayer_role():
+	"""NonPlayer uses canonical Tag identity; aliases belong in Maps."""
+	npc = Character(
+		seed=3
+		)
+	NonPlayer(
+		npc
+		)
+
+	assert npc in NonPlayer
+	assert NonPlayer in npc and Player not in npc
+	assert Has(
+		npc,
+		NonPlayer,
+		"NonPlayer",
+		)
+	assert not Has(
+		npc,
+		"NPC",
+		)
+
+
+def _self_test():
+	"""Run the focused core suite."""
+	_test_rng_determinism()
+	_test_roll_shape()
+	_test_dice_bags()
+	_test_level()
+	_test_tag_queries()
+	_test_player_role()
+	_test_is_character_contract()
+	_test_spaced_name()
+	_test_nonplayer_role()
+
+	print(
+		"OK — CharactersKit self-test"
+		)
+
+
+if __name__ == "__main__":
+	_self_test()
+----
+"""
+Map of Exotic Familiars — a familiar nobody else at the table has.
+
+The eight published forms in ``Map_of_Familiars`` are fixed creatures out of
+the Monster Manual.  This is the other route: the spirit is *built*, from a
+creature type and a pool of traits, so what answers the summons is a slime, or
+a living toy, or a drake the size of a dog, and it belongs to that character.
+
+The shape is deliberately the one everybody already knows from monster-collecting
+games.  A **type** decides the damage, the look, and which traits are even
+possible; the traits are the moveset.  Nothing in the pool escalates damage,
+because that is where familiars break: every trait buys a *sense*, a *movement
+mode*, or a *trick*.  A familiar that flies, sees the invisible and carries
+messages is a delight at any level and a threat at none.
+
+Budget is the caster's Proficiency Bonus, and tiers gate what is reachable, so
+a level 1 familiar gets two small talents and a level 17 one gets six, some of
+them strange.  The numbers come from the 2023 playtest Pact Familiar, which is
+the only version of these rules that scales with its caster:
+
+	AC      10 + spellcasting modifier
+	HP      5 + Warlock level, in d4 Hit Dice
+	strike  2 + half Warlock level, damage by type
+
+Naming follows the type and the look, so the sheet says what it is and what it
+resembles: *Undead Familiar (ghost-like)*, *Ooze Familiar (slime-like)*.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+
+
+@dataclass(
+	frozen=True,
+	)
+class Trait:
+	"""One talent a summoned familiar might have."""
+
+	name: str
+	text: str
+	# Types that may have it.  Empty means any type may.
+	types: tuple[str, ...] = field(
+		default_factory=tuple,
+		)
+	tier: int = 1
+
+	def allowed(
+			self,
+			kind: str,
+			) -> bool:
+		return not self.types or kind in self.types
+
+
+@dataclass(
+	frozen=True,
+	)
+class Familiar_Type:
+	"""A type: what it is made of, what it looks like, what it does on a hit."""
+
+	name: str
+	damage: str
+	looks: tuple[str, ...]
+	affinity: tuple[str, ...] = field(
+		default_factory=tuple,
+		)
+
+
+TYPES = {
+	record.name: record
+	for record in (
+		Familiar_Type(
+			name="Aberration",
+			damage="Acid",
+			looks=(
+				"a flumph",
+				"a knot of tentacles",
+				"a single floating eye",
+				"a mouth that hums",
+				),
+			affinity=(
+				"Great Old One",
+				"Aberrant",
+				"Aberration",
+				"Hermeticist",
+				),
+			),
+		Familiar_Type(
+			name="Celestial",
+			damage="Radiant",
+			looks=(
+				"an owl too clean for the weather",
+				"a raven with no shadow",
+				"a small winged thing that hums plainchant",
+				"a hare that will not be looked at directly",
+				),
+			affinity=(
+				"Celestial",
+				"Aasimar",
+				"Acolyte",
+				"Inquisitor",
+				),
+			),
+		Familiar_Type(
+			name="Construct",
+			damage="Force",
+			looks=(
+				"a living toy",
+				"a clockwork bird missing one wing",
+				"a doll somebody loved to pieces",
+				"a hand, walking",
+				),
+			affinity=(
+				"Construct",
+				"Artificer",
+				"Crafter",
+				"Hermeticist",
+				),
+			),
+		Familiar_Type(
+			name="Dragon",
+			damage="Fire",
+			looks=(
+				"a drake the size of a dog",
+				"a winged serpent",
+				"a dragonet with an inflated opinion",
+				"a lizard that reads over your shoulder",
+				),
+			affinity=(
+				"Dragon",
+				"Draconic",
+				"Kobold",
+				"Sorcerer",
+				),
+			),
+		Familiar_Type(
+			name="Elemental",
+			damage="Thunder",
+			looks=(
+				"an ember that will not go out",
+				"a dust devil the size of a cat",
+				"a puddle that follows",
+				"a draught with opinions",
+				),
+			affinity=(
+				"Elemental",
+				"Genasi",
+				"Storm",
+				),
+			),
+		Familiar_Type(
+			name="Fey",
+			damage="Psychic",
+			looks=(
+				"a pixie",
+				"a fox with one tail too many",
+				"a moth the colour of a rumour",
+				"a child's drawing of a bird",
+				),
+			affinity=(
+				"Fey",
+				"Elf",
+				"Destined",
+				"Naturalist",
+				"Wildkeeper",
+				),
+			),
+		Familiar_Type(
+			name="Fiend",
+			damage="Poison",
+			looks=(
+				"an imp",
+				"a goat-eyed cat",
+				"a toad wearing a very small ring",
+				"a rat that keeps accounts",
+				),
+			affinity=(
+				"Fiend",
+				"Tiefling",
+				"Infernal",
+				"Servant",
+				),
+			),
+		Familiar_Type(
+			name="Monstrosity",
+			damage="Piercing",
+			looks=(
+				"an owlbear cub",
+				"a chimera the size of a loaf",
+				"something with the wrong number of joints",
+				"a crab wearing a bird's skull",
+				),
+			affinity=(
+				"Monstrosity",
+				"Beast",
+				"Hunter",
+				"Survivalist",
+				),
+			),
+		Familiar_Type(
+			name="Ooze",
+			damage="Acid",
+			looks=(
+				"a slime",
+				"a bucket of something that likes you",
+				"a stain that arrives before you do",
+				"a jar you did not pack",
+				),
+			affinity=(
+				"Ooze",
+				"Alchemist",
+				"Hermeticist",
+				),
+			),
+		Familiar_Type(
+			name="Undead",
+			damage="Necrotic",
+			looks=(
+				"a ghost",
+				"a skull with a candle in it",
+				"a shadow that is not yours",
+				"a doll that was buried with somebody",
+				),
+			affinity=(
+				"Undead",
+				"Necromancy",
+				"Spirit Medium",
+				"Exorcist",
+				"Survivor",
+				),
+			),
+		)
+	}
+
+
+# The moveset.  Senses, movement and tricks only: nothing here raises damage,
+# which is the one axis that turns a familiar into a second character.
+TRAITS = (
+	Trait(
+		name="Keen Senses",
+		text="Darkvision 60 feet and Advantage on Perception checks relying on sight.",
+		),
+	Trait(
+		name="Nose for It",
+		text="Advantage on Perception and Survival checks that rely on smell.",
+		),
+	Trait(
+		name="Small Places",
+		text="It can move through a space as narrow as one inch without squeezing.",
+		),
+	Trait(
+		name="Courier",
+		text="It can carry and deliver a written message, and will not be talked out of it.",
+		),
+	Trait(
+		name="Mimic",
+		text="It can reproduce any sound or voice it has heard, badly enough to be funny and well enough to work once.",
+		),
+	Trait(
+		name="Deliver Spell",
+		text="When you cast a spell with a range of touch, the familiar can deliver it with its own touch while within 120 feet of you.",
+		tier=2,
+		),
+	Trait(
+		name="Climber",
+		text="Climb Speed equal to its Speed, including across ceilings.",
+		types=(
+			"Aberration",
+			"Construct",
+			"Fiend",
+			"Monstrosity",
+			"Ooze",
+			),
+		),
+	Trait(
+		name="Flight",
+		text="Fly Speed 40 feet.",
+		types=(
+			"Celestial",
+			"Dragon",
+			"Elemental",
+			"Fey",
+			"Fiend",
+			"Undead",
+			),
+		),
+	Trait(
+		name="Swimmer",
+		text="Swim Speed equal to its Speed, and it can breathe underwater.",
+		types=(
+			"Aberration",
+			"Elemental",
+			"Monstrosity",
+			"Ooze",
+			),
+		),
+	Trait(
+		name="Burrower",
+		text="Burrow Speed 15 feet through earth and loose stone.",
+		types=(
+			"Aberration",
+			"Construct",
+			"Monstrosity",
+			"Ooze",
+			),
+		),
+	Trait(
+		name="Incorporeal Step",
+		text="Once per Short Rest it can pass through a solid object no thicker than five feet, taking 1d10 Force damage if it ends its move inside one.",
+		types=(
+			"Fey",
+			"Undead",
+			),
+		tier=2,
+		),
+	Trait(
+		name="Seep",
+		text="It can pass through any opening that would admit water, carrying nothing.",
+		types=(
+			"Elemental",
+			"Ooze",
+			),
+		tier=2,
+		),
+	Trait(
+		name="Sees the Unseen",
+		text="It perceives Invisible creatures and objects within 30 feet.",
+		types=(
+			"Aberration",
+			"Celestial",
+			"Fey",
+			"Undead",
+			),
+		tier=2,
+		),
+	Trait(
+		name="Tremorsense",
+		text="Tremorsense 30 feet.",
+		types=(
+			"Aberration",
+			"Construct",
+			"Monstrosity",
+			"Ooze",
+			),
+		tier=2,
+		),
+	Trait(
+		name="Reads the Room",
+		text="It knows whether a creature it can see is lying, though not what the truth is.",
+		types=(
+			"Aberration",
+			"Celestial",
+			"Fey",
+			"Fiend",
+			),
+		tier=2,
+		),
+	Trait(
+		name="Stubborn Little Thing",
+		text="Advantage on saving throws against being Charmed or Frightened, and it cannot be turned against you.",
+		tier=2,
+		),
+	Trait(
+		name="Extradimensional Escape",
+		text="When it would drop to 0 Hit Points it instead drops to 1 and vanishes for 1 hour, or until you call it back as a Magic action. Recharges on a Long Rest.",
+		tier=2,
+		),
+	Trait(
+		name="Bearer",
+		text="It is Small rather than Tiny and can carry a rider of its own size or smaller at its Speed.",
+		types=(
+			"Construct",
+			"Dragon",
+			"Elemental",
+			"Monstrosity",
+			),
+		tier=3,
+		),
+	Trait(
+		name="Borrowed Eyes",
+		text="You can see and hear through it at any distance while you are on the same plane.",
+		tier=3,
+		),
+	Trait(
+		name="Second Shape",
+		text="As a Bonus Action it takes another look from its type's list, keeping its statistics.",
+		tier=3,
+		),
+	Trait(
+		name="Ward",
+		text="Once per Long Rest, when you would take damage while it is within 5 feet, it takes the damage instead.",
+		tier=3,
+		),
+	Trait(
+		name="Knows the Way",
+		text="It always knows the direction and rough distance to a place it has been.",
+		tier=3,
+		),
+	Trait(
+		name="Unsleeping",
+		text="It does not sleep, eat or breathe, and keeps watch without complaint.",
+		types=(
+			"Construct",
+			"Elemental",
+			"Undead",
+			),
+		),
+	)
+
+
+@dataclass(
+	frozen=True,
+	)
+class Summoned_Familiar:
+	"""One built familiar, ready for the sheet."""
+
+	kind: Familiar_Type
+	look: str
+	traits: tuple[Trait, ...]
+	armour_class: int
+	hit_points: int
+	hit_dice: str
+	strike: str
+
+	def title(
+			self,
+			) -> str:
+		return f"{self.kind.name} Familiar ({self.look})"
+
+	def block(
+			self,
+			) -> str:
+		rows = [
+			self.title(),
+			f"AC {self.armour_class} · HP {self.hit_points} ({self.hit_dice}) · Speed 30 ft.",
+			f"Strike. Melee spell attack, reach 5 ft., {self.strike} {self.kind.damage} damage.",
+			]
+		rows.extend(
+			f"{trait.name}. {trait.text}"
+			for trait in self.traits
+			)
+
+		return "\n".join(
+			rows
+			)
+
+
+def _tier_for(
+		level: int,
+		) -> int:
+	"""How strange a familiar may get at this level."""
+	if level >= 11:
+		return 3
+
+	return 2 if level >= 5 else 1
+
+
+def summon_familiar(
+		char,
+		level: int | None = None,
+		kind: str | None = None,
+		) -> Summoned_Familiar:
+	"""
+	Build one exotic familiar for this caster.
+
+	Type is drawn by Familial Preference, so what answers follows from what the
+	caster is.  Traits are drawn from the pool its type allows, as many as the
+	caster's Proficiency Bonus, and only up to the tier their level has earned.
+	"""
+	from AtlasLusoris.AtlasOfInvocations.Map_of_Familiars import (
+		AFFINITY_WEIGHT,
+		_caster_marks,
+		)
+
+	level = int(
+		level
+		or getattr(
+			char,
+			"level",
+			1,
+			)
+		or 1
+		)
+	bonus = (
+		level - 1
+		) // 4 + 2
+
+	if kind is None:
+		marks = _caster_marks(
+			char
+			)
+		names = list(
+			TYPES
+			)
+		weights = [
+			AFFINITY_WEIGHT
+			if any(
+				word.lower() in marks
+				for word in TYPES[name].affinity
+				)
+			else 1
+			for name in names
+			]
+		kind = char.Pick(
+			names,
+			weights,
+			)
+
+	record = TYPES[
+		kind
+		]
+	ceiling = _tier_for(
+		level
+		)
+	pool = [
+		trait
+		for trait in TRAITS
+		if trait.allowed(
+			record.name
+			)
+		and trait.tier <= ceiling
+		]
+	chosen: list[Trait] = []
+
+	while pool and len(
+		chosen
+		) < bonus:
+		trait = char.Pick(
+			pool
+			)
+		chosen.append(
+			trait
+			)
+		pool.remove(
+			trait
+			)
+
+	casting = int(
+		getattr(
+			char,
+			"spell_attack_modifier",
+			0,
+			) or 3
+		)
+
+	return Summoned_Familiar(
+		kind=record,
+		look=char.Pick(
+			list(
+				record.looks
+				)
+			),
+		traits=tuple(
+			sorted(
+				chosen,
+				key=lambda trait: (
+					trait.tier,
+					trait.name,
+					),
+				)
+			),
+		armour_class=10 + casting,
+		hit_points=5 + level,
+		hit_dice=f"{level}d4",
+		strike=f"{2 + level // 2}",
+		)
+
+
+__all__ = (
+	"Familiar_Type",
+	"Summoned_Familiar",
+	"TRAITS",
+	"TYPES",
+	"Trait",
+	"summon_familiar",
+	)
+----
+"""
+CharactersKit
+
+Contains:
+	Character: shared skeleton (seed, dices, Roll/Dice, dummies)
+	Role / Player / NonPlayer: Core role Tags
+
+Seeds: repeatability between calls.
+Dice: the Character's owned RNG.
+	``dices`` holds the main bag.
+	``Roll`` / ``Dice`` draw from it.
+	``Dice_Bag`` opens a deterministic bag for one stable purpose.
+
+Expected behaviour
+
+For any character, with Role Tags, say charlie:
+```
+charlie = Character( name= "Charlie" )
+
+Player( charlie )
+Wizard( charlie )
+Farmer( charlie )
+
+these should return true:
+assert charlie in Player
+assert Has( charlie, Wizard )
+
+```
+
+"""
+
+from TagKit import Has, Pre, Tag, TagPreconditionError
+
+
+def _tag_holds(
+		char,
+		candidate,
+		) -> bool:
+	"""Whether this Character already carries the candidate Tag."""
+	try:
+		return char in candidate
+	except TypeError:
+		return False
+
+
+# ---------------------------------------------------------------------------
+# Skeleton
+# ---------------------------------------------------------------------------
+
+class Character:
+	"""Minimal shared substrate for every Player or NonPlayer Character."""
+
+	def __init__(
+			char,
+			seed: int = -1,
+			level: int = 1,
+			):
+		"""Construct the Character skeleton."""
+		from random import Random
+
+		from AtlasActorLudi.ProficiencyKit import Training_Record
+
+		rng = Random()
+		char.seed = int(
+			seed
+			if seed >= 0
+			else rng.randint(
+				0,
+				2**64,
+				)
+			)
+		char.dices = Random(
+			char.seed
+			)
+		char.level = max(
+			1,
+			int(
+				level
+				),
+			)
+		char.training = Training_Record()
+
+	# --- Dice Methods ----------------------------------------------
+
+	def Roll(
+			char,
+			D: int = 6,
+			N: int = 1,
+			modifier: int = 0,
+			*,
+			dice=None,
+			) -> int:
+		"""
+		Roll N dice with D sides and add a modifier
+		from the Character's Dice Bag.
+
+		``dice`` rolls from a named Bag instead of the Character's
+		single stream, for a roll whose result must not depend on
+		how many other rolls happened first.
+		"""
+		if N < 1:
+			N = 1
+
+		source = (
+			dice
+			if dice is not None
+			else char.dices
+			)
+
+		total = 0
+
+		for _ in range(
+				N
+				):
+			if D >= 1:
+				total += source.randint(
+					1,
+					D,
+					)
+			else:
+				total += source.randint(
+					D,
+					1,
+					)
+
+		return total + modifier
+
+	# Alias used in Decree / Dialog prose
+	Dice = Roll
+
+	def Roll_Zero(
+			char,
+			D: int = 6,
+			N: int = 1,
+			) -> int:
+		"""Roll N zero-based dice from this Character's Dice Bag."""
+		if N < 1:
+			N = 1
+
+		lower = min(
+			0,
+			D,
+			)
+		upper = max(
+			0,
+			D,
+			)
+
+		return sum(
+			char.dices.randint(
+				lower,
+				upper,
+				)
+			for _ in range(
+				N
+				)
+			)
+
+	def __invert__(char):
+		"""Reseed this Character's Dice from its fixed seed."""
+		char.dices.seed(
+			char.seed
+			)
+
+		return char.seed
+
+	def New_Score(char):
+		"""Roll 4d6 and drop the lowest result."""
+		rolls = [
+			char.Dice(
+				6
+				)
+			for _ in range(
+				4
+				)
+			]
+
+		return sum(
+			sorted(
+				rolls
+				)[
+					1:
+					]
+			)
+
+	def Pick_Bag(
+			char,
+			purpose=None,
+			*,
+			version: str = "1",
+			namespace: str = "GenLegend",
+			):
+		"""
+		The Dice Bag one draw should come from, advanced per purpose.
+
+		Successive draws for the same purpose open ``purpose#0``,
+		``purpose#1`` and so on. Different purposes stay independent.
+		A bare call derives purpose from the caller's module.function.
+		"""
+		if purpose is None:
+			from sys import _getframe
+
+			frame = _getframe(
+				2
+				)
+			purpose = (
+				f"{frame.f_globals.get('__name__', '?')}"
+				f".{frame.f_code.co_qualname}"
+				)
+
+		counts = getattr(
+			char,
+			"_pick_draws",
+			None,
+			)
+
+		if counts is None:
+			counts = {}
+			char._pick_draws = counts
+
+		drawn = counts.get(
+			purpose,
+			0,
+			)
+		counts[
+			purpose
+			] = drawn + 1
+
+		return char.Dice_Bag(
+			f"{purpose}#{drawn}",
+			version=version,
+			namespace=namespace,
+			)
+
+	def Pick(
+			char,
+			ledger,
+			weights=None,
+			*,
+			purpose=None,
+			dice=None,
+			):
+		"""
+		Pick one item from a named Dice Bag.
+
+		``dice`` takes an already-opened Bag; ``purpose`` names one to open.
+		Neither is required: a bare ``Pick`` still draws deterministically
+		via ``Pick_Bag``.
+		"""
+		if not ledger:
+			raise ValueError(
+				"Pick: empty ledger"
+				)
+
+		source = (
+			dice
+			if dice is not None
+			else char.Pick_Bag(
+				purpose
+				)
+			)
+
+		if weights is None:
+			return source.choice(
+				list(
+					ledger
+					)
+				)
+
+		return source.choices(
+			list(
+				ledger
+				),
+			weights=weights,
+			k=1,
+			)[
+				0
+				]
+
+	def Accept(
+			char,
+			ledger,
+			weights=None,
+			*,
+			purpose=None,
+			dice=None,
+			imprint=None,
+			in_order=False,
+			attempts=100,
+			):
+		"""
+		Draw from a pool until a candidate's Preconditions accept
+		this Character.
+
+		Each refusal is reported as a Minion bug tree and dropped from
+		the remaining ledger. An exhausted pool raises — that is a real
+		bug. ``in_order`` walks the ledger as given; otherwise each
+		attempt uses ``Pick``. ``imprint`` defaults to ``candidate(char)``.
+		"""
+		from Minion import report_bug
+
+		remaining = list(
+			ledger
+			)
+		if not remaining:
+			raise ValueError(
+				"Accept: empty ledger"
+				)
+
+		remaining_weights = (
+			list(
+				weights
+				)
+			if weights is not None
+			else None
+			)
+		if (
+			remaining_weights is not None
+			and len(
+				remaining_weights
+				) != len(
+					remaining
+					)
+			):
+			raise ValueError(
+				"Accept: weights must match the ledger."
+				)
+
+		ceiling = min(
+			max(
+				1,
+				int(
+					attempts
+					)
+				),
+			100,
+			)
+		last_refusal = None
+
+		for _ in range(
+				ceiling
+				):
+			if not remaining:
+				break
+
+			candidate = (
+				remaining[
+					0
+					]
+				if in_order
+				else char.Pick(
+					remaining,
+					weights=remaining_weights,
+					purpose=purpose,
+					dice=dice,
+					)
+				)
+
+			if (
+				imprint is None
+				and _tag_holds(
+					char,
+					candidate,
+					)
+				):
+				return candidate
+
+			try:
+				if imprint is None:
+					candidate(
+						char
+						)
+				else:
+					imprint(
+						candidate
+						)
+			except TagPreconditionError as err:
+				report_bug(
+					err
+					)
+				last_refusal = err
+				index = remaining.index(
+					candidate
+					)
+				remaining.pop(
+					index
+					)
+				if remaining_weights is not None:
+					remaining_weights.pop(
+						index
+						)
+				continue
+
+			return candidate
+
+		raise ValueError(
+			"No candidate in this pool accepted the Character."
+			) from last_refusal
+
+	def Dice_Bag(
+			char,
+			purpose: str,
+			*,
+			version: str = "1",
+			namespace: str = "GenLegend",
+			):
+		"""Open a fresh deterministic Dice Bag for one stable purpose."""
+		from hashlib import blake2b
+		from random import Random
+
+		bag_purpose = str(
+			purpose
+			).strip()
+		bag_version = str(
+			version
+			).strip()
+		bag_namespace = str(
+			namespace
+			).strip()
+
+		if not bag_purpose:
+			raise ValueError(
+				"A Character Dice Bag requires a stable purpose."
+				)
+
+		if not bag_namespace:
+			raise ValueError(
+				"A Character Dice Bag requires a namespace."
+				)
+
+		material = (
+			f"{char.seed}|{bag_purpose}|{bag_version}"
+			).encode(
+				"utf-8"
+				)
+		digest = blake2b(
+			material,
+			digest_size=16,
+			person=bag_namespace.encode(
+				"utf-8"
+				)[
+					:16
+					],
+			).digest()
+
+		return Random(
+			int.from_bytes(
+				digest,
+				"big",
+				)
+			)
+
+
+# ---------------------------------------------------------------------------
+# Character Tags
+# ---------------------------------------------------------------------------
+
+class Role(Tag):
+	"""Root Tag for a Character's play role."""
+
+	@Pre
+	def is_Character(
+			target,
+			):
+		"""Limit Role Tags to Characters."""
+		return isinstance(
+			target,
+			Character,
+			)
+
+
+class Player(Role):
+	"""Player-character role."""
+
+	@Pre
+	def no_npc(
+			target,
+			):
+		"""Exclude Characters carrying the NonPlayer Shape."""
+		assert target not in NonPlayer
+
+
+class NonPlayer(Role):
+	"""Non-player Character role."""
+
+	@Pre
+	def no_player(
+			target,
+			):
+		"""Exclude Characters carrying the Player Shape."""
+		assert target not in Player
+
+
+# ---------------------------------------------------------------------------
+# Focused core suite
+# ---------------------------------------------------------------------------
+
+def _test_rng_determinism():
+	"""Seed fully determines the Dice Bag; inversion reseeds it."""
+	a = Character(
+		seed=42
+		)
+	b = Character(
+		seed=42
+		)
+	sequence = [
+		a.Roll(
+			20
+			)
+		for _ in range(
+			5
+			)
+		]
+
+	assert sequence == [
+		b.Roll(
+			20
+			)
+		for _ in range(
+			5
+			)
+		]
+	assert all(
+		1 <= result <= 20
+		for result in sequence
+		)
+	assert isinstance(
+		a.seed,
+		int,
+		)
+	assert (~a) == 42
+	assert [
+		a.Roll(
+			20
+			)
+		for _ in range(
+			5
+			)
+		] == sequence
+
+
+def _test_roll_shape():
+	"""Roll honors D, N, and modifier; Dice is the alias."""
+	assert Character.Dice is Character.Roll
+	assert Character(
+		seed=1
+		).Roll(
+			D=1,
+			N=3,
+			) == 3
+	assert Character(
+		seed=1
+		).Roll(
+			D=1,
+			N=0,
+			) == 1
+	assert Character(
+		seed=1
+		).Roll(
+			D=6,
+			N=1,
+			modifier=100,
+			) >= 101
+	assert 0 <= Character(
+		seed=1
+		).Roll_Zero(
+			D=6,
+			N=4,
+			) <= 24
+	assert -12 <= Character(
+		seed=1
+		).Roll_Zero(
+			D=-3,
+			N=4,
+			) <= 0
+
+
+def _test_dice_bags():
+	"""Purpose Dice Bags are stable, isolated, and level-independent."""
+	first = Character(
+		seed=91,
+		level=1,
+		)
+	progressed = Character(
+		seed=91,
+		level=20,
+		)
+	dice_state = first.dices.getstate()
+	first_bag = first.Dice_Bag(
+		"identity.story"
+		)
+	progressed_bag = progressed.Dice_Bag(
+		"identity.story"
+		)
+
+	first_values = tuple(
+		first_bag.randint(
+			1,
+			20,
+			)
+		for _ in range(
+			4
+			)
+		)
+	progressed_values = tuple(
+		progressed_bag.randint(
+			1,
+			20,
+			)
+		for _ in range(
+			4
+			)
+		)
+
+	assert first_values == progressed_values
+	assert first.dices.getstate() == dice_state
+
+	first_choice = first.Pick(
+		(
+			"North",
+			"South",
+			),
+		dice=first.Dice_Bag(
+			"identity.direction"
+			),
+		)
+	progressed_choice = progressed.Pick(
+		(
+			"North",
+			"South",
+			),
+		dice=progressed.Dice_Bag(
+			"identity.direction"
+			),
+		)
+
+	assert first_choice == progressed_choice
+	assert first.dices.getstate() == dice_state
+
+
+def _test_level():
+	"""Level clamps to at least one and remains explicit state."""
+	assert Character(
+		level=0
+		).level == 1
+	assert Character(
+		level=3
+		).level == 3
+
+	character = Character(
+		seed=1,
+		level=2,
+		)
+
+	assert character.level == 2
+	assert character.level <= 3
+	assert character.level >= 1
+
+
+def _test_tag_queries():
+	"""Semantic membership is queried through Tags."""
+	character = Character(
+		seed=7,
+		level=1,
+		)
+
+	assert character not in Player
+	assert not Has(
+		character,
+		Player,
+		)
+
+
+def _test_player_role():
+	"""Role membership includes the Shape and its Base."""
+	hero = Character(
+		seed=5,
+		level=2,
+		)
+	Player(
+		hero
+		)
+
+	assert hero in Player and hero in Role
+	assert Player in hero and Role in hero
+	assert Has(
+		hero,
+		Player,
+		Role,
+		)
+	assert Has(
+		hero,
+		"Player",
+		"Role",
+		)
+	assert "Player" in hero
+	assert "player" in hero
+	assert "Wizard" not in hero
+	assert not Has(
+		hero,
+		"Wizard",
+		)
+
+
+def _test_is_character_contract():
+	"""The Role precondition rolls back tagging a non-Character."""
+	class NotACharacter:
+		pass
+
+	try:
+		Player(
+			NotACharacter()
+			)
+	except Exception as error:
+		assert type(error).__name__ == "TagPreconditionError"
+	else:
+		raise AssertionError(
+			"Player must reject a non-Character"
+			)
+
+
+def _test_spaced_name():
+	"""Python Tag identity stays separate from a display-name Report."""
+	class Eldritch_Knight(Role):
+		NAME = "Eldritch Knight"
+
+	knight = Character(
+		seed=7
+		)
+	Eldritch_Knight(
+		knight
+		)
+
+	assert knight in Eldritch_Knight and knight in Role
+	assert Has(
+		knight,
+		"Eldritch_Knight",
+		)
+	assert Eldritch_Knight.NAME == "Eldritch Knight"
+	assert not Has(
+		knight,
+		"Eldritch Knight",
+		)
+
+
+def _test_nonplayer_role():
+	"""NonPlayer uses canonical Tag identity; aliases belong in Maps."""
+	npc = Character(
+		seed=3
+		)
+	NonPlayer(
+		npc
+		)
+
+	assert npc in NonPlayer
+	assert NonPlayer in npc and Player not in npc
+	assert Has(
+		npc,
+		NonPlayer,
+		"NonPlayer",
+		)
+	assert not Has(
+		npc,
+		"NPC",
+		)
+
+
+def _self_test():
+	"""Run the focused core suite."""
+	_test_rng_determinism()
+	_test_roll_shape()
+	_test_dice_bags()
+	_test_level()
+	_test_tag_queries()
+	_test_player_role()
+	_test_is_character_contract()
+	_test_spaced_name()
+	_test_nonplayer_role()
+
+	print(
+		"OK — CharactersKit self-test"
+		)
+
+
+if __name__ == "__main__":
+	_self_test()
+----
+
