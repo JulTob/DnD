@@ -10,6 +10,7 @@ def Project_Species_Feature(
 		*,
 		chips=None,
 		level=0,
+		narrative=False,
 		):
 	"""Create or refresh one idempotent Species Feature Entry."""
 	for feature in getattr(
@@ -35,6 +36,9 @@ def Project_Species_Feature(
 				or ()
 				)
 			feature.level = level
+			feature.narrative = bool(
+				narrative
+				)
 			return feature
 
 	return grant(
@@ -44,4 +48,5 @@ def Project_Species_Feature(
 		source="Species Feature",
 		chips=chips,
 		level=level,
+		narrative=narrative,
 		)

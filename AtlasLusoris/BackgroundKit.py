@@ -1,126 +1,65 @@
 """
 BackgroundKit
 
-TOP backgrounds (2024 PHB — all 16).
+One declarative construction point for every TOP Background.
 
-Depends on:
-- CharactersKit.Character
-- FeaturesKit (Origin Feats)
+Background Tags own their abilities, training, Origin Feature, narrative
+Entry, and role eligibility. Pins classify each Background Tag directly:
 
-How to use this Kit:
-	1. ``Background`` — root Tag (Character only).
-	2. One concrete Tag per background (copy ``Wayfarer`` as the template).
-	3. Fixed prose and tables live as **class attributes**, not ``@Record``.
-	4. ``@Imprint`` *writes* plain attributes on the Character and applies Tags.
+    background_tag in Available
+    background_tag in NPC_Background
 
-Why not ``@Record`` for title / description?
-	``@Record`` is for *visible state on the Agent that TOP manages* — often
-	derived or overlaid (e.g. Spell.school from the School Tag). Fixed flavor
-	text and skill lists do not need that. Set them with ordinary assignment
-	in Imprint (``char.background = "Wayfarer"``), or keep them as class
-	attributes on the Tag and copy them across in Imprint. That is easier to
-	read, debug, and match the CharactersKit / SpeciesKit style.
-
-Usage
-	char = Character(seed=1)
-	Wayfarer(char)
-	assert char in Wayfarer and char in Background
-	assert char.background == "Wayfarer"
+The Pin Fields derive every public registry.  Adding a homebrew
+Background therefore requires one ``Build_Background`` call and no parallel
+choice lists.
 """
 
-from TagKit import Pre, Underlay, Imprint
+from __future__ import annotations
 
-from AtlasLusoris.CharactersKit import Character, Role
+from collections.abc import Iterator, Mapping
+from typing import Iterable
+
+from TagKit import Action, Imprint, Pre, Report, Tag, Underlay
+
+from AtlasActorLudi.CharactersKit import (
+	Character,
+	NonPlayer,
+	Player,
+	)
+from AtlasActorLudi.Grimoire_of_AbilityScores import AbilityScores
+from AtlasActorLudi.Grimoire_of_Skills import Char_Skills
+from AtlasLusoris.AtlasOfBackgrounds import (
+	Register_Official_2024_Backgrounds,
+	)
+from AtlasLusoris.AtlasOfFeatures import BACKGROUND_ORIGIN_FEATS
 from AtlasLusoris.FeaturesKit import (
-	BACKGROUND_ORIGIN_FEATS,
 	Alert,
-	Crafter,
-	Healer,
+	CORE_SKILLS,
+	Crafter as Crafter_Feature,
+	Healer as Healer_Feature,
 	Lucky,
 	Magic_Initiate_Cleric,
 	Magic_Initiate_Druid,
 	Magic_Initiate_Wizard,
 	Musician,
+	Origin_Feat,
 	Savage_Attacker,
 	Skilled,
 	Tavern_Brawler,
 	Tough,
-	Feature,
 	grant,
 	)
+from AtlasLusoris.GuildKit import guild_ability_prefs
 
 
-# ---------------------------------------------------------------------------
-# Root
-# ---------------------------------------------------------------------------
-
-class Background(Role):
-	"""Root Tag for character backgrounds."""
-
-	NAME = "Background"
-	FEATURES = []
-	@Pre
-	def Character_Only(target):
-		return isinstance(target, Character)
-
-	@Imprint
-	def ensure_bag(target):
-		if getattr(target, "features", None) is None:
-			target.features = []
-
-	@Underlay
-	def __contains__(agent, underlay, key):
-		if isinstance(key, str):
-			key = key.casefold()
-			name = getattr(agent, "background", None)
-			if isinstance(name, str) and key == name.casefold():
-				return True
-		return underlay()
-
-
-# ---------------------------------------------------------------------------
-# Soft ASI optimizer (class prefs + round odds → even)
-# ---------------------------------------------------------------------------
-# Recalled from Grimoire_of_Characters.New_stats (class primary/secondary)
-# and Grimoire_of_Features._ability_to_increase (prefer odd scores so a +1
-# bumps the modifier). Users notice when boosts land where they help.
-
-_ALL_ABILITIES = ("STR", "DEX", "CON", "INT", "WIS", "CHA")
-
-CLASS_STAT_PREFERENCES = {
-	"Barbarian": ("STR", "CON"),
-	"Bard": ("CHA", "DEX"),
-	"Cleric": ("WIS", "STR"),
-	"Druid": ("WIS", "CON"),
-	"Fighter": ("STR", "CON"),
-	"Monk": ("DEX", "WIS"),
-	"Paladin": ("STR", "CHA"),
-	"Ranger": ("DEX", "WIS"),
-	"Rogue": ("DEX", "INT"),
-	"Sorcerer": ("CHA", "CON"),
-	"Warlock": ("CHA", "CON"),
-	"Wizard": ("INT", "CON"),
-	}
-
-# 2024 background recommended abilities (assign +2/+1 or +1/+1/+1 among these)
-BACKGROUND_ABILITY_CHOICES = {
-	"Acolyte": ("INT", "WIS", "CHA"),
-	"Artisan": ("STR", "DEX", "INT"),
-	"Charlatan": ("DEX", "CON", "CHA"),
-	"Criminal": ("DEX", "CON", "INT"),
-	"Entertainer": ("STR", "DEX", "CHA"),
-	"Farmer": ("STR", "CON", "WIS"),
-	"Guard": ("STR", "INT", "WIS"),
-	"Guide": ("DEX", "CON", "WIS"),
-	"Hermit": ("CON", "WIS", "CHA"),
-	"Merchant": ("CON", "INT", "CHA"),
-	"Noble": ("STR", "INT", "CHA"),
-	"Sage": ("CON", "INT", "WIS"),
-	"Sailor": ("STR", "DEX", "WIS"),
-	"Scribe": ("DEX", "INT", "WIS"),
-	"Soldier": ("STR", "DEX", "CON"),
-	"Wayfarer": ("DEX", "WIS", "CHA"),
-	}
+_ALL_ABILITIES = (
+	"STR",
+	"DEX",
+	"CON",
+	"INT",
+	"WIS",
+	"CHA",
+	)
 
 ARTISAN_TOOLS = (
 	"Alchemist_Supplies",
@@ -143,109 +82,579 @@ ARTISAN_TOOLS = (
 	)
 
 
-def _class_ranked(char):
-	"""Primary then secondary for char.char_class (Eldritch Knight → INT 2nd)."""
-	klass = getattr(char, "char_class", None)
-	primary, secondary = CLASS_STAT_PREFERENCES.get(klass, (None, None))
-	subclass = getattr(char, "subclass", None) or ""
-	if "Eldritch Knight" in str(subclass) or (
-			hasattr(char, "__contains__") and "Eldritch Knight" in char
+# ---------------------------------------------------------------------------
+# Character Background Tags
+# ---------------------------------------------------------------------------
+
+
+class Background(Tag):
+	"""Root Tag for exactly one Character Background."""
+
+	NAME = "Background"
+
+	@Pre
+	def Character_Only(
+		target,
+		):
+		return isinstance(
+			target,
+			Character,
+			)
+
+	@Pre
+	def Single_Background(
+		target,
+		):
+		return sum(
+			target in tag
+			for tag in globals().get(
+				"BACKGROUNDS",
+				{},
+				).values()
+			) <= 1
+
+	@Imprint
+	def Ensure_Feature_Bag(
+		target,
+		):
+		if getattr(
+			target,
+			"features",
+			None,
+			) is None:
+			target.features = []
+
+	@Action
+	@Underlay
+	def __format__(
+			target,
+			prior,
+			specification,
 			):
-		secondary = "INT"
-	return primary, secondary
+		"""Render Background from current Tag membership."""
+		if specification.strip().casefold() == "background":
+			return Find_Background( target )
+
+		return prior( specification )
+
+# ---------------------------------------------------------------------------
+# Pins for Background Tags
+# ---------------------------------------------------------------------------
 
 
-def _pick_boost_ability(char, pool, scores):
-	"""
-	Soft-pick one ability from pool:
-	1. prefer odd scores (so +1 rounds to even and raises the modifier)
-	2. prefer class primary, then secondary
-	3. prefer higher current score
-	Ties broken with char.Pick.
-	"""
-	primary, secondary = _class_ranked(char)
+class Background_Audience(Tag):
+	"""Root Pin classifying Background Tags by Character Role."""
 
-	def priority(key):
+	NAME = "Background Audience"
+
+	@Pre
+	def Background_Tag_Only(
+		target,
+		):
+		return (
+			isinstance(
+				target,
+				type,
+				)
+			and issubclass(
+				target,
+				Background,
+				)
+			)
+
+
+class Available(Background_Audience):
+	"""Pin for Backgrounds available to Player Characters."""
+
+	NAME = "Available"
+
+
+class NPC_Background(Background_Audience):
+	"""Pin for Backgrounds available to NonPlayer Characters."""
+
+	NAME = "NPC Background"
+
+
+def _class_name(
+	name: str,
+	) -> str:
+	safe_name = "".join(
+		character
+		if character.isalnum()
+		else "_"
+		for character in name
+		)
+
+	if not safe_name:
+		raise ValueError(
+			"A Background requires a non-empty semantic name."
+			)
+
+	if safe_name[0].isdigit():
+		safe_name = f"Background_{safe_name}"
+
+	return safe_name
+
+
+def _validate_background_construction(
+	*,
+	name: str,
+	audiences: tuple[type[Background_Audience], ...],
+	abilities: tuple[str, str, str],
+	skills: tuple[str, str],
+	tools: str | tuple[str, ...],
+	origin_feat: type[Origin_Feat],
+	title: str,
+	description: str,
+	origin_feat_options: tuple[str, ...],
+	source_title: str,
+	source_url: str,
+	source_locator: str,
+	source_kind: str,
+	) -> None:
+	if (
+		not isinstance(
+			name,
+			str,
+			)
+		or not name.strip()
+		):
+		raise ValueError(
+			"A Background requires a non-empty name."
+			)
+
+	if any(
+		tag.NAME.casefold() == name.casefold()
+		for tag in Background_Audience[:]
+		):
+		raise ValueError(
+			f"Background {name!r} is already declared."
+			)
+
+	if (
+		not audiences
+		or any(
+			audience not in (
+				Available,
+				NPC_Background,
+				)
+			for audience in audiences
+			)
+		):
+		raise ValueError(
+			f"Background {name!r} requires a PC and/or NPC audience."
+			)
+
+	if (
+		len(
+			set(
+				abilities
+				)
+			) != 3
+		or any(
+			ability not in _ALL_ABILITIES
+			for ability in abilities
+			)
+		):
+		raise ValueError(
+			f"Background {name!r} requires three distinct valid abilities."
+			)
+
+	if (
+		len(
+			skills
+			) != 2
+		or len(
+			set(
+				skills
+				)
+			) != 2
+		or any(
+			skill not in CORE_SKILLS
+			for skill in skills
+			)
+		):
+		raise ValueError(
+			f"Background {name!r} requires two distinct canonical skills."
+			)
+
+	if (
+		not tools
+		or (
+			isinstance(
+				tools,
+				str,
+				)
+			and not tools.strip()
+			)
+		or (
+			isinstance(
+				tools,
+				tuple,
+				)
+			and not all(
+				isinstance(
+					tool,
+					str,
+					)
+				and tool.strip()
+				for tool in tools
+				)
+			)
+		or not isinstance(
+			tools,
+			(
+				str,
+				tuple,
+				),
+			)
+		):
+		raise ValueError(
+			f"Background {name!r} requires at least one valid tool."
+			)
+
+	if (
+		not isinstance(
+			origin_feat,
+			type,
+			)
+		or not issubclass(
+			origin_feat,
+			Origin_Feat,
+			)
+		):
+		raise TypeError(
+			f"Background {name!r} requires an Origin Feature Tag."
+			)
+
+	if (
+		origin_feat_options
+		and (
+			origin_feat.NAME not in origin_feat_options
+			or any(
+				not isinstance(
+					option,
+					str,
+					)
+				or not option.strip()
+				for option in origin_feat_options
+				)
+			)
+		):
+		raise ValueError(
+			f"Background {name!r} has invalid Origin Feature options."
+			)
+
+	if (
+		not isinstance(
+			title,
+			str,
+			)
+		or not title.strip()
+		or not isinstance(
+			description,
+			str,
+			)
+		or not description.strip()
+		):
+		raise ValueError(
+			f"Background {name!r} requires a title and description."
+			)
+
+	if (
+		not isinstance(
+			source_title,
+			str,
+			)
+		or not source_title.strip()
+		or not isinstance(
+			source_kind,
+			str,
+			)
+		or not source_kind.strip()
+		or not isinstance(
+			source_url,
+			str,
+			)
+		or not isinstance(
+			source_locator,
+			str,
+			)
+		):
+		raise ValueError(
+			f"Background {name!r} requires valid source metadata."
+			)
+
+
+def _eligible_for(
+	target,
+	tag: type[Background],
+	) -> bool:
+	return (
+		target in Player
+		and tag in Available
+		) or (
+			target in NonPlayer
+			and tag in NPC_Background
+			)
+
+
+# ---------------------------------------------------------------------------
+# Shared application modules
+# ---------------------------------------------------------------------------
+
+
+def _pick_boost_ability(
+	char,
+	pool,
+	scores,
+	):
+	"""Prefer odd scores and the Character's Guild abilities."""
+	primary, secondary = guild_ability_prefs(
+		char
+		)
+
+	def priority(
+		key,
+		):
 		if key == primary:
 			return 0
+
 		if key == secondary:
 			return 1
+
 		return 2
 
-	def rank(key):
-		value = getattr(scores, key) if scores is not None else 10
-		# odds first (False < True), then class priority, then high→low
-		return (value % 2 == 0, priority(key), -value)
+	def rank(
+		key,
+		):
+		value = (
+			getattr(
+				scores,
+				key,
+				)
+			if scores is not None
+			else 10
+			)
 
-	best = min(rank(key) for key in pool)
-	tied = [key for key in pool if rank(key) == best]
-	return char.Pick(tied) if len(tied) > 1 else tied[0]
+		return (
+			value % 2 == 0,
+			priority(
+				key
+				),
+			-value,
+			)
+
+	best = min(
+		rank(
+			key
+			)
+		for key in pool
+		)
+	tied = [
+		key
+		for key in pool
+		if rank(
+			key
+			) == best
+		]
+
+	return (
+		char.Pick(
+			tied
+			)
+		if len(
+			tied
+			) > 1
+		else tied[0]
+		)
 
 
-def _grant_ability_boosts(char, abilities=None):
-	"""
-	2024 background ASI: +2/+1 or +1/+1/+1 among recommended abilities,
-	soft-optimized for class prefs and odd→even rounding.
-	"""
-	pattern = char.Pick([(2, 1), (1, 1, 1)])
+def _grant_ability_boosts(
+	char,
+	abilities=None,
+	):
+	"""Apply one Background's +2/+1 or +1/+1/+1 ability pattern."""
 	if abilities is None:
-		name = getattr(char, "background", None)
-		abilities = BACKGROUND_ABILITY_CHOICES.get(name, _ALL_ABILITIES)
-	pool = list(abilities)
-	if len(pool) < len(pattern):
-		for key in _ALL_ABILITIES:
-			if key not in pool:
-				pool.append(key)
-			if len(pool) >= len(pattern):
-				break
+		name = getattr(
+			char,
+			"background",
+			None,
+			)
+		tag = BACKGROUNDS.get(
+			name
+			)
 
-	scores = getattr(char, "AS", None)
+		if tag is None:
+			raise ValueError(
+				"Ability boosts require a declared Background Tag."
+				)
+
+		abilities = tag.ABILITIES
+
+	pattern = char.Pick(
+		[
+			(
+				2,
+				1,
+				),
+			(
+				1,
+				1,
+				1,
+				),
+			]
+		)
+	pool = list(
+		abilities
+		)
+	scores = getattr(
+		char,
+		"AS",
+		None,
+		)
+
+	if (
+		scores is not None
+		and not isinstance(
+			scores,
+			AbilityScores,
+			)
+		):
+		scores = None
+
 	chosen = []
-	remaining = list(pool)
-	ordered = sorted(pattern, reverse=True)
-	for bonus in ordered:
-		stat = _pick_boost_ability(char, remaining, scores)
-		remaining.remove(stat)
-		chosen.append((stat, bonus))
+	remaining = list(
+		pool
+		)
+
+	for bonus in sorted(
+		pattern,
+		reverse=True,
+		):
+		stat = _pick_boost_ability(
+			char,
+			remaining,
+			scores,
+			)
+		remaining.remove(
+			stat
+			)
+		chosen.append(
+			(
+				stat,
+				bonus,
+				)
+			)
 
 	if scores is None:
 		char.background_asi = chosen
 		return
+
 	for stat, bonus in chosen:
-		setattr(scores, stat, getattr(scores, stat) + bonus)
+		setattr(
+			scores,
+			stat,
+			getattr(
+				scores,
+				stat,
+				)
+			+ bonus,
+			)
 
 
-# ---------------------------------------------------------------------------
-# Shared imprint helpers (keep concrete Tags thin)
-# ---------------------------------------------------------------------------
+def _grant_skills(
+	char,
+	skill_names,
+	):
+	skills = getattr(
+		char,
+		"skills",
+		None,
+		)
 
-def _grant_skills(char, skill_names):
-	skills = getattr(char, "skills", None)
-	if skills is None:
-		char.background_skills = list(skill_names)
+	if not isinstance(
+		skills,
+		Char_Skills,
+		):
+		char.background_skills = list(
+			skill_names
+			)
 		return
+
 	for name in skill_names:
-		skill = getattr(skills, name, None)
-		if skill is not None and hasattr(skill, "set_proficiency"):
+		skill = getattr(
+			skills,
+			name,
+			None,
+			)
+
+		if (
+			skill is not None
+			and hasattr(
+				skill,
+				"set_proficiency",
+				)
+			):
 			skill.set_proficiency()
 
 
-def _grant_tool(char, tools):
-	"""Grant one tool. ``tools`` may be a single attr name or a Pick pool."""
+def _grant_tool(
+	char,
+	tools,
+	):
 	if not tools:
 		return
-	pick = char.Pick(list(tools)) if isinstance(tools, (tuple, list)) else tools
-	skills = getattr(char, "skills", None)
-	if skills is None:
+
+	pick = (
+		char.Pick(
+			list(
+				tools
+				)
+			)
+		if isinstance(
+			tools,
+			(
+				tuple,
+				list,
+				),
+			)
+		else tools
+		)
+	skills = getattr(
+		char,
+		"skills",
+		None,
+		)
+
+	if not isinstance(
+		skills,
+		Char_Skills,
+		):
 		char.background_tool = pick
 		return
-	skill = getattr(skills, pick, None)
-	if skill is not None and hasattr(skill, "set_proficiency"):
+
+	skill = getattr(
+		skills,
+		pick,
+		None,
+		)
+
+	if (
+		skill is not None
+		and hasattr(
+			skill,
+			"set_proficiency",
+			)
+		):
 		skill.set_proficiency()
 
 
-def _grant_narrative(char, title: str, description: str):
-	"""Background feature line — FeaturesKit Feature object on char.features."""
+def _grant_narrative(
+	char,
+	title: str,
+	description: str,
+	):
 	grant(
 		char,
 		name=title,
@@ -254,412 +663,1681 @@ def _grant_narrative(char, title: str, description: str):
 		)
 
 
-def _awaken(char, tag):
-	"""Shared Imprint body — every concrete Background Tag calls this."""
+def _awaken(
+	char,
+	tag,
+	):
+	"""Apply the common modules owned by one Background Tag."""
 	char.background = tag.NAME
-	_grant_ability_boosts(char, tag.ABILITIES)
-	_grant_skills(char, tag.SKILLS)
-	_grant_tool(char, getattr(tag, "TOOLS", ()))
-	_grant_narrative(char, tag.TITLE, tag.DESCRIPTION)
-	tag.ORIGIN_FEAT(char)
+	_grant_ability_boosts(
+		char,
+		tag.ABILITIES,
+		)
+	_grant_skills(
+		char,
+		tag.SKILLS,
+		)
+	_grant_tool(
+		char,
+		tag.TOOLS,
+		)
+	_grant_narrative(
+		char,
+		tag.TITLE,
+		tag.DESCRIPTION,
+		)
+
+
+def Build_Background(
+	*,
+	name: str,
+	audiences: Iterable[type[Background_Audience]],
+	abilities: tuple[str, str, str],
+	skills: tuple[str, str],
+	tools: str | tuple[str, ...],
+	origin_feat: type[Origin_Feat],
+	title: str,
+	description: str,
+	origin_feat_options: tuple[str, ...] = (),
+	source_title: str = "Project Original",
+	source_url: str = "",
+	source_locator: str = "",
+	source_kind: str = "project-original",
+	) -> type[Background]:
+	"""Construct one complete Background Shape and apply its Pins."""
+	resolved_audiences = tuple(
+		dict.fromkeys(
+			audiences
+			)
+		)
+	resolved_abilities = tuple(
+		abilities
+		)
+	resolved_skills = tuple(
+		skills
+		)
+	resolved_tools = (
+		tuple(
+			tools
+			)
+		if isinstance(
+			tools,
+			list,
+			)
+		else tools
+		)
+	resolved_origin_feat_options = (
+		tuple(
+			origin_feat_options
+			)
+		or (
+			origin_feat.NAME,
+			)
+		)
+
+	_validate_background_construction(
+		name=name,
+		audiences=resolved_audiences,
+		abilities=resolved_abilities,
+		skills=resolved_skills,
+		tools=resolved_tools,
+		origin_feat=origin_feat,
+		title=title,
+		description=description,
+		origin_feat_options=resolved_origin_feat_options,
+		source_title=source_title,
+		source_url=source_url,
+		source_locator=source_locator,
+		source_kind=source_kind,
+		)
+
+	background_tag = None
+
+	@Pre
+	def Eligible_Role(
+		target,
+		):
+		return _eligible_for(
+			target,
+			background_tag,
+			)
+
+	@Imprint
+	def Awaken(
+		target,
+		):
+		_awaken(
+			target,
+			background_tag,
+			)
+
+	background_tag = type(
+		_class_name(
+			name
+			),
+		(
+			Background,
+			origin_feat,
+			),
+		{
+			"NAME": name,
+			"TITLE": Report(
+				title
+				),
+			"DESCRIPTION": Report(
+				description
+				),
+			"ABILITIES": Report(
+				resolved_abilities
+				),
+			"SKILLS": Report(
+				resolved_skills
+				),
+			"TOOLS": Report(
+				resolved_tools
+				),
+			"ORIGIN_FEAT": Report(
+				origin_feat
+				),
+			"ORIGIN_FEAT_OPTIONS": Report(
+				resolved_origin_feat_options
+				),
+			"SOURCE_TITLE": Report(
+				source_title
+				),
+			"SOURCE_URL": Report(
+				source_url
+				),
+			"SOURCE_LOCATOR": Report(
+				source_locator
+				),
+			"SOURCE_KIND": Report(
+				source_kind
+				),
+			"Eligible_Role": Eligible_Role,
+			"Awaken": Awaken,
+			"__module__": __name__,
+			},
+		)
+
+	for audience in resolved_audiences:
+		audience(
+			background_tag
+			)
+
+	return background_tag
 
 
 # ---------------------------------------------------------------------------
-# 2024 PHB backgrounds (copy Wayfarer shape)
+# Shared 2024 Player's Handbook Backgrounds
 # ---------------------------------------------------------------------------
 
-class Acolyte(Background):
-	NAME = "Acolyte"
-	TITLE = "Shelter of the Faithful"
-	DESCRIPTION = (
-		"You and your companions can expect free healing and care at temples "
-		"of your faith."
+
+def _Build_Player_Handbook_Background(
+		**record,
+		) -> type[Background]:
+	return Build_Background(
+		source_title="Player's Handbook (2024)",
+		source_url="https://www.dndbeyond.com/sources/dnd/phb-2024",
+		source_locator="Chapter 4: Character Origins — Background Descriptions",
+		source_kind="official-reference",
+		**record,
 		)
-	SKILLS = ("Insight", "Religion")
-	TOOLS = "Calligrapher_Supplies"
-	ABILITIES = BACKGROUND_ABILITY_CHOICES["Acolyte"]
-	ORIGIN_FEAT = Magic_Initiate_Cleric
-
-	@Imprint
-	def awaken(char):
-		_awaken(char, Acolyte)
 
 
-class Artisan(Background):
-	NAME = "Artisan"
-	TITLE = "Craftsperson"
-	DESCRIPTION = (
-		"You have connections within craft guilds, allowing you access to "
-		"workshops and specialized tools."
-		)
-	SKILLS = ("Investigation", "Persuasion")
-	TOOLS = ARTISAN_TOOLS  # Pick one Artisan's Tools
-	ABILITIES = BACKGROUND_ABILITY_CHOICES["Artisan"]
-	ORIGIN_FEAT = Crafter
+Acolyte = _Build_Player_Handbook_Background(
+	name="Acolyte",
+	audiences=(
+		Available,
+		NPC_Background,
+		),
+	abilities=(
+		"INT",
+		"WIS",
+		"CHA",
+		),
+	skills=(
+		"Insight",
+		"Religion",
+		),
+	tools="Calligrapher_Supplies",
+	origin_feat=Magic_Initiate_Cleric,
+	title="Shelter of the Faithful",
+	description=(
+		"You and your companions can expect healing and care from communities "
+		"that share your faith."
+		),
+	)
 
-	@Imprint
-	def awaken(char):
-		_awaken(char, Artisan)
+Artisan = _Build_Player_Handbook_Background(
+	name="Artisan",
+	audiences=(
+		Available,
+		NPC_Background,
+		),
+	abilities=(
+		"STR",
+		"DEX",
+		"INT",
+		),
+	skills=(
+		"Investigation",
+		"Persuasion",
+		),
+	tools=ARTISAN_TOOLS,
+	origin_feat=Crafter_Feature,
+	title="Craftsperson",
+	description=(
+		"You have craft-guild connections and practical access to workshops, "
+		"materials, and specialist knowledge."
+		),
+	)
 
+Charlatan = _Build_Player_Handbook_Background(
+	name="Charlatan",
+	audiences=(
+		Available,
+		NPC_Background,
+		),
+	abilities=(
+		"DEX",
+		"CON",
+		"CHA",
+		),
+	skills=(
+		"Deception",
+		"Sleight_of_Hand",
+		),
+	tools="Forgery_Kit",
+	origin_feat=Skilled,
+	title="False Identity",
+	description=(
+		"You maintain a convincing second identity supported by practiced "
+		"mannerisms, documents, and useful acquaintances."
+		),
+	)
 
-class Charlatan(Background):
-	NAME = "Charlatan"
-	TITLE = "False Identity"
-	DESCRIPTION = (
-		"You maintain a convincing second identity, complete with documents, "
-		"friends, and disguises."
-		)
-	SKILLS = ("Deception", "Sleight_of_Hand")
-	TOOLS = "Forgery_Kit"
-	ABILITIES = BACKGROUND_ABILITY_CHOICES["Charlatan"]
-	ORIGIN_FEAT = Skilled
+Criminal = _Build_Player_Handbook_Background(
+	name="Criminal",
+	audiences=(
+		Available,
+		NPC_Background,
+		),
+	abilities=(
+		"DEX",
+		"CON",
+		"INT",
+		),
+	skills=(
+		"Sleight_of_Hand",
+		"Stealth",
+		),
+	tools="Thieves_Tools",
+	origin_feat=Alert,
+	title="Criminal Contact",
+	description=(
+		"You know how to reach people who trade in secrets, contraband, and "
+		"quietly solved problems."
+		),
+	)
 
-	@Imprint
-	def awaken(char):
-		_awaken(char, Charlatan)
+Entertainer = _Build_Player_Handbook_Background(
+	name="Entertainer",
+	audiences=(
+		Available,
+		NPC_Background,
+		),
+	abilities=(
+		"STR",
+		"DEX",
+		"CHA",
+		),
+	skills=(
+		"Acrobatics",
+		"Performance",
+		),
+	tools="Musical_Instrument",
+	origin_feat=Musician,
+	title="By Popular Demand",
+	description=(
+		"You can usually earn food, lodging, and local attention through a "
+		"well-judged performance."
+		),
+	)
 
+Farmer = _Build_Player_Handbook_Background(
+	name="Farmer",
+	audiences=(
+		Available,
+		NPC_Background,
+		),
+	abilities=(
+		"STR",
+		"CON",
+		"WIS",
+		),
+	skills=(
+		"Animal_Handling",
+		"Nature",
+		),
+	tools="Carpenter_Tools",
+	origin_feat=Tough,
+	title="Rustic Hospitality",
+	description=(
+		"Working communities recognize your practical experience and often "
+		"offer simple aid in exchange for honest labour."
+		),
+	)
 
-class Criminal(Background):
-	NAME = "Criminal"
-	TITLE = "Criminal Contact"
-	DESCRIPTION = (
-		"You have a reliable contact who acts as a liaison to the criminal "
-		"underworld."
-		)
-	SKILLS = ("Sleight_of_Hand", "Stealth")
-	TOOLS = "Thieves_Tools"
-	ABILITIES = BACKGROUND_ABILITY_CHOICES["Criminal"]
-	ORIGIN_FEAT = Alert
+Guard = _Build_Player_Handbook_Background(
+	name="Guard",
+	audiences=(
+		Available,
+		NPC_Background,
+		),
+	abilities=(
+		"STR",
+		"INT",
+		"WIS",
+		),
+	skills=(
+		"Athletics",
+		"Perception",
+		),
+	tools="Gaming_Set",
+	origin_feat=Alert,
+	title="Watcher's Eye",
+	description=(
+		"You recognize the habits of lawkeepers and lawbreakers, and they "
+		"often recognize your bearing in return."
+		),
+	)
 
-	@Imprint
-	def awaken(char):
-		_awaken(char, Criminal)
+Guide = _Build_Player_Handbook_Background(
+	name="Guide",
+	audiences=(
+		Available,
+		NPC_Background,
+		),
+	abilities=(
+		"DEX",
+		"CON",
+		"WIS",
+		),
+	skills=(
+		"Stealth",
+		"Survival",
+		),
+	tools="Cartographer_Tools",
+	origin_feat=Magic_Initiate_Druid,
+	title="Pathfinder",
+	description=(
+		"You read terrain, weather, and tracks well enough to find safer "
+		"routes and the necessities of travel."
+		),
+	)
 
+Hermit = _Build_Player_Handbook_Background(
+	name="Hermit",
+	audiences=(
+		Available,
+		NPC_Background,
+		),
+	abilities=(
+		"CON",
+		"WIS",
+		"CHA",
+		),
+	skills=(
+		"Medicine",
+		"Religion",
+		),
+	tools="Herbalism_Kit",
+	origin_feat=Healer_Feature,
+	title="Discovery",
+	description=(
+		"Solitude gave you time to uncover a truth, method, or mystery that "
+		"still shapes your decisions."
+		),
+	)
 
-class Entertainer(Background):
-	NAME = "Entertainer"
-	TITLE = "By Popular Demand"
-	DESCRIPTION = (
-		"You can always find a place to perform, earning food and lodging "
-		"in exchange."
-		)
-	SKILLS = ("Acrobatics", "Performance")
-	TOOLS = "Musical_Instrument"
-	ABILITIES = BACKGROUND_ABILITY_CHOICES["Entertainer"]
-	ORIGIN_FEAT = Musician
+Merchant = _Build_Player_Handbook_Background(
+	name="Merchant",
+	audiences=(
+		Available,
+		NPC_Background,
+		),
+	abilities=(
+		"CON",
+		"INT",
+		"CHA",
+		),
+	skills=(
+		"Animal_Handling",
+		"Persuasion",
+		),
+	tools="Navigator_Tools",
+	origin_feat=Lucky,
+	title="Business Acumen",
+	description=(
+		"You can find trade contacts and negotiate transport, information, "
+		"supplies, or a more favorable bargain."
+		),
+	)
 
-	@Imprint
-	def awaken(char):
-		_awaken(char, Entertainer)
+Noble = _Build_Player_Handbook_Background(
+	name="Noble",
+	audiences=(
+		Available,
+		NPC_Background,
+		),
+	abilities=(
+		"STR",
+		"INT",
+		"CHA",
+		),
+	skills=(
+		"History",
+		"Persuasion",
+		),
+	tools="Gaming_Set",
+	origin_feat=Skilled,
+	title="Position of Privilege",
+	description=(
+		"Your name, education, or bearing grants access to circles where rank "
+		"and reputation carry practical weight."
+		),
+	)
 
+Sage = _Build_Player_Handbook_Background(
+	name="Sage",
+	audiences=(
+		Available,
+		NPC_Background,
+		),
+	abilities=(
+		"CON",
+		"INT",
+		"WIS",
+		),
+	skills=(
+		"Arcana",
+		"History",
+		),
+	tools="Calligrapher_Supplies",
+	origin_feat=Magic_Initiate_Wizard,
+	title="Researcher",
+	description=(
+		"When you do not know a piece of lore, you usually know which archive, "
+		"expert, or tradition might hold it."
+		),
+	)
 
-class Farmer(Background):
-	NAME = "Farmer"
-	TITLE = "Rustic Hospitality"
-	DESCRIPTION = (
-		"Common folk gladly offer you food and shelter in exchange for "
-		"simple labour."
-		)
-	SKILLS = ("Animal_Handling", "Nature")
-	TOOLS = "Carpenter_Tools"
-	ABILITIES = BACKGROUND_ABILITY_CHOICES["Farmer"]
-	ORIGIN_FEAT = Tough
+Sailor = _Build_Player_Handbook_Background(
+	name="Sailor",
+	audiences=(
+		Available,
+		NPC_Background,
+		),
+	abilities=(
+		"STR",
+		"DEX",
+		"WIS",
+		),
+	skills=(
+		"Acrobatics",
+		"Perception",
+		),
+	tools="Navigator_Tools",
+	origin_feat=Tavern_Brawler,
+	title="Ship's Passage",
+	description=(
+		"Your knowledge of vessels and crews can secure passage or work when "
+		"a suitable ship and captain are available."
+		),
+	)
 
-	@Imprint
-	def awaken(char):
-		_awaken(char, Farmer)
+Scribe = _Build_Player_Handbook_Background(
+	name="Scribe",
+	audiences=(
+		Available,
+		NPC_Background,
+		),
+	abilities=(
+		"DEX",
+		"INT",
+		"WIS",
+		),
+	skills=(
+		"Investigation",
+		"Perception",
+		),
+	tools="Calligrapher_Supplies",
+	origin_feat=Skilled,
+	title="Scholarly Insight",
+	description=(
+		"You understand records, libraries, and institutions well enough to "
+		"locate documents and recognize suspicious omissions."
+		),
+	)
 
+Soldier = _Build_Player_Handbook_Background(
+	name="Soldier",
+	audiences=(
+		Available,
+		NPC_Background,
+		),
+	abilities=(
+		"STR",
+		"DEX",
+		"CON",
+		),
+	skills=(
+		"Athletics",
+		"Intimidation",
+		),
+	tools="Gaming_Set",
+	origin_feat=Savage_Attacker,
+	title="Military Rank",
+	description=(
+		"Your service and bearing can earn recognition, shelter, or limited "
+		"cooperation from military organizations."
+		),
+	)
 
-class Guard(Background):
-	NAME = "Guard"
-	TITLE = "Watcher's Eye"
-	DESCRIPTION = (
-		"You recognise criminals and law-enforcement factions—and they "
-		"recognise you."
-		)
-	SKILLS = ("Athletics", "Perception")
-	TOOLS = "Gaming_Set"
-	ABILITIES = BACKGROUND_ABILITY_CHOICES["Guard"]
-	ORIGIN_FEAT = Alert
-
-	@Imprint
-	def awaken(char):
-		_awaken(char, Guard)
-
-
-class Guide(Background):
-	NAME = "Guide"
-	TITLE = "Pathfinder"
-	DESCRIPTION = (
-		"You can always find safe routes through the wilderness and locate "
-		"food, water, or shelter."
-		)
-	SKILLS = ("Stealth", "Survival")
-	TOOLS = "Cartographer_Tools"
-	ABILITIES = BACKGROUND_ABILITY_CHOICES["Guide"]
-	ORIGIN_FEAT = Magic_Initiate_Druid
-
-	@Imprint
-	def awaken(char):
-		_awaken(char, Guide)
-
-
-class Hermit(Background):
-	NAME = "Hermit"
-	TITLE = "Discovery"
-	DESCRIPTION = (
-		"During your isolation you uncovered a unique and powerful secret."
-		)
-	SKILLS = ("Medicine", "Religion")
-	TOOLS = "Herbalism_Kit"
-	ABILITIES = BACKGROUND_ABILITY_CHOICES["Hermit"]
-	ORIGIN_FEAT = Healer
-
-	@Imprint
-	def awaken(char):
-		_awaken(char, Hermit)
-
-
-class Merchant(Background):
-	NAME = "Merchant"
-	TITLE = "Business Acumen"
-	DESCRIPTION = (
-		"You can find trade contacts and secure favourable deals, transport, "
-		"or information."
-		)
-	SKILLS = ("Animal_Handling", "Persuasion")
-	TOOLS = "Navigator_Tools"
-	ABILITIES = BACKGROUND_ABILITY_CHOICES["Merchant"]
-	ORIGIN_FEAT = Lucky
-
-	@Imprint
-	def awaken(char):
-		_awaken(char, Merchant)
-
-
-class Noble(Background):
-	NAME = "Noble"
-	TITLE = "Position of Privilege"
-	DESCRIPTION = (
-		"People of high birth treat you with deference. You have access to "
-		"high society."
-		)
-	SKILLS = ("History", "Persuasion")
-	TOOLS = "Gaming_Set"
-	ABILITIES = BACKGROUND_ABILITY_CHOICES["Noble"]
-	ORIGIN_FEAT = Skilled
-
-	@Imprint
-	def awaken(char):
-		_awaken(char, Noble)
-
-
-class Sage(Background):
-	NAME = "Sage"
-	TITLE = "Researcher"
-	DESCRIPTION = (
-		"If you don't know a piece of lore, you usually know where to find it."
-		)
-	SKILLS = ("Arcana", "History")
-	TOOLS = "Calligrapher_Supplies"
-	ABILITIES = BACKGROUND_ABILITY_CHOICES["Sage"]
-	ORIGIN_FEAT = Magic_Initiate_Wizard
-
-	@Imprint
-	def awaken(char):
-		_awaken(char, Sage)
-
-
-class Sailor(Background):
-	NAME = "Sailor"
-	TITLE = "Ship's Passage"
-	DESCRIPTION = (
-		"You can secure free passage on a vessel for yourself and companions "
-		"in exchange for work."
-		)
-	SKILLS = ("Acrobatics", "Perception")
-	TOOLS = "Navigator_Tools"
-	ABILITIES = BACKGROUND_ABILITY_CHOICES["Sailor"]
-	ORIGIN_FEAT = Tavern_Brawler
-
-	@Imprint
-	def awaken(char):
-		_awaken(char, Sailor)
-
-
-class Scribe(Background):
-	NAME = "Scribe"
-	TITLE = "Scholarly Insight"
-	DESCRIPTION = (
-		"You have easy access to libraries, archives, and institutions of "
-		"knowledge."
-		)
-	SKILLS = ("Investigation", "Perception")
-	TOOLS = "Calligrapher_Supplies"
-	ABILITIES = BACKGROUND_ABILITY_CHOICES["Scribe"]
-	ORIGIN_FEAT = Skilled
-
-	@Imprint
-	def awaken(char):
-		_awaken(char, Scribe)
-
-
-class Soldier(Background):
-	NAME = "Soldier"
-	TITLE = "Military Rank"
-	DESCRIPTION = (
-		"Your rank lets you invoke authority in military organisations and "
-		"secure aid or shelter."
-		)
-	SKILLS = ("Athletics", "Intimidation")
-	TOOLS = "Gaming_Set"
-	ABILITIES = BACKGROUND_ABILITY_CHOICES["Soldier"]
-	ORIGIN_FEAT = Savage_Attacker
-
-	@Imprint
-	def awaken(char):
-		_awaken(char, Soldier)
-
-
-class Wayfarer(Background):
-	"""
-	Gold-standard background Tag.
-
-	Class attributes = fixed data (easy to scan).
-	Imprint = write attributes + apply Origin Feat Tag.
-	"""
-
-	NAME = "Wayfarer"
-	TITLE = "Wayfarer"
-	DESCRIPTION = (
-		"You grew up on the streets among castoffs — some friends, some rivals. "
-		"You slept where you could and worked for food; hunger sometimes meant theft. "
-		"You kept your pride and your hope."
-		)
-	SKILLS = ("Insight", "Stealth")
-	TOOLS = "Thieves_Tools"
-	ABILITIES = BACKGROUND_ABILITY_CHOICES["Wayfarer"]
-	ORIGIN_FEAT = Lucky
-
-	@Imprint
-	def awaken(char):
-		_awaken(char, Wayfarer)
+Wayfarer = _Build_Player_Handbook_Background(
+	name="Wayfarer",
+	audiences=(
+		Available,
+		NPC_Background,
+		),
+	abilities=(
+		"DEX",
+		"WIS",
+		"CHA",
+		),
+	skills=(
+		"Insight",
+		"Stealth",
+		),
+	tools="Thieves_Tools",
+	origin_feat=Lucky,
+	title="Wayfarer",
+	description=(
+		"You survived through observation, odd jobs, quick decisions, and the "
+		"refusal to surrender your hope to difficult circumstances."
+		),
+	)
 
 
 # ---------------------------------------------------------------------------
-# Registry — all 16 PHB 2024 backgrounds
+# Actualized former Archetypes: full NonPlayer Backgrounds
 # ---------------------------------------------------------------------------
 
-BACKGROUNDS = {
-	"Acolyte": Acolyte,
-	"Artisan": Artisan,
-	"Charlatan": Charlatan,
-	"Criminal": Criminal,
-	"Entertainer": Entertainer,
-	"Farmer": Farmer,
-	"Guard": Guard,
-	"Guide": Guide,
-	"Hermit": Hermit,
-	"Merchant": Merchant,
-	"Noble": Noble,
-	"Sage": Sage,
-	"Sailor": Sailor,
-	"Scribe": Scribe,
-	"Soldier": Soldier,
-	"Wayfarer": Wayfarer,
-	}
+
+Artist = Build_Background(
+	name="Artist",
+	audiences=(
+		NPC_Background,
+		),
+	abilities=(
+		"DEX",
+		"WIS",
+		"CHA",
+		),
+	skills=(
+		"Insight",
+		"Performance",
+		),
+	tools="Painter_Supplies",
+	origin_feat=Musician,
+	title="Expressive Eye",
+	description=(
+		"You notice telling details and turn them into performances or works "
+		"that move an audience."
+		),
+	)
+
+Bandit = Build_Background(
+	name="Bandit",
+	audiences=(
+		NPC_Background,
+		),
+	abilities=(
+		"STR",
+		"DEX",
+		"CHA",
+		),
+	skills=(
+		"Intimidation",
+		"Stealth",
+		),
+	tools="Thieves_Tools",
+	origin_feat=Alert,
+	title="Roadside Instinct",
+	description=(
+		"You understand ambush sites, frightened travelers, hidden camps, and "
+		"the shifting loyalties of an outlaw company."
+		),
+	)
+
+Berserker = Build_Background(
+	name="Berserker",
+	audiences=(
+		NPC_Background,
+		),
+	abilities=(
+		"STR",
+		"CON",
+		"WIS",
+		),
+	skills=(
+		"Athletics",
+		"Intimidation",
+		),
+	tools="Gaming_Set",
+	origin_feat=Tavern_Brawler,
+	title="Fury Tempered",
+	description=(
+		"You learned to survive violent confrontations by committing fully "
+		"when hesitation would be fatal."
+		),
+	)
+
+Commoner = Build_Background(
+	name="Commoner",
+	audiences=(
+		NPC_Background,
+		),
+	abilities=(
+		"STR",
+		"CON",
+		"WIS",
+		),
+	skills=(
+		"Animal_Handling",
+		"Insight",
+		),
+	tools="Carpenter_Tools",
+	origin_feat=Tough,
+	title="Local Roots",
+	description=(
+		"You know the rhythms, favors, worries, and practical work that hold "
+		"an ordinary community together."
+		),
+	)
+
+Crafter = Build_Background(
+	name="Crafter",
+	audiences=(
+		NPC_Background,
+		),
+	abilities=(
+		"DEX",
+		"INT",
+		"WIS",
+		),
+	skills=(
+		"Investigation",
+		"Sleight_of_Hand",
+		),
+	tools=ARTISAN_TOOLS,
+	origin_feat=Crafter_Feature,
+	title="Practiced Hands",
+	description=(
+		"You diagnose material problems quickly and know how to repair, alter, "
+		"or reproduce useful objects."
+		),
+	)
+
+Cultist = Build_Background(
+	name="Cultist",
+	audiences=(
+		NPC_Background,
+		),
+	abilities=(
+		"INT",
+		"WIS",
+		"CHA",
+		),
+	skills=(
+		"Deception",
+		"Religion",
+		),
+	tools="Disguise_Kit",
+	origin_feat=Magic_Initiate_Cleric,
+	title="Secret Doctrine",
+	description=(
+		"You know the signs, passwords, rituals, and hidden hierarchies of a "
+		"secretive faith or forbidden cause."
+		),
+	)
+
+Doctor = Build_Background(
+	name="Doctor",
+	audiences=(
+		NPC_Background,
+		),
+	abilities=(
+		"INT",
+		"WIS",
+		"CHA",
+		),
+	skills=(
+		"Investigation",
+		"Medicine",
+		),
+	tools="Herbalism_Kit",
+	origin_feat=Healer_Feature,
+	title="Clinical Practice",
+	description=(
+		"You assess symptoms methodically, stabilize patients, and recognize "
+		"when an injury or illness has an unusual cause."
+		),
+	)
+
+Expert = Build_Background(
+	name="Expert",
+	audiences=(
+		NPC_Background,
+		),
+	abilities=(
+		"DEX",
+		"INT",
+		"WIS",
+		),
+	skills=(
+		"Insight",
+		"Investigation",
+		),
+	tools=ARTISAN_TOOLS,
+	origin_feat=Skilled,
+	title="Specialist",
+	description=(
+		"Long practice in a narrow discipline lets you recognize fine details "
+		"and solve problems others overlook."
+		),
+	)
+
+Explorer = Build_Background(
+	name="Explorer",
+	audiences=(
+		NPC_Background,
+		),
+	abilities=(
+		"DEX",
+		"CON",
+		"WIS",
+		),
+	skills=(
+		"Perception",
+		"Survival",
+		),
+	tools="Cartographer_Tools",
+	origin_feat=Alert,
+	title="Beyond the Map",
+	description=(
+		"You are accustomed to uncertain routes, incomplete maps, changing "
+		"weather, and discoveries that reward careful preparation."
+		),
+	)
+
+Guardian = Build_Background(
+	name="Guardian",
+	audiences=(
+		NPC_Background,
+		),
+	abilities=(
+		"STR",
+		"CON",
+		"WIS",
+		),
+	skills=(
+		"Athletics",
+		"Perception",
+		),
+	tools="Gaming_Set",
+	origin_feat=Tough,
+	title="Watchful Charge",
+	description=(
+		"You have accepted responsibility for a person, place, threshold, or "
+		"tradition and remain alert to dangers around it."
+		),
+	)
+
+Healer = Build_Background(
+	name="Healer",
+	audiences=(
+		NPC_Background,
+		),
+	abilities=(
+		"INT",
+		"WIS",
+		"CHA",
+		),
+	skills=(
+		"Insight",
+		"Medicine",
+		),
+	tools="Herbalism_Kit",
+	origin_feat=Healer_Feature,
+	title="Restorative Care",
+	description=(
+		"You combine practical treatment with an understanding of fear, pain, "
+		"and the patience recovery often demands."
+		),
+	)
+
+Hero = Build_Background(
+	name="Hero",
+	audiences=(
+		NPC_Background,
+		),
+	abilities=(
+		"STR",
+		"CON",
+		"CHA",
+		),
+	skills=(
+		"Athletics",
+		"Persuasion",
+		),
+	tools="Gaming_Set",
+	origin_feat=Lucky,
+	title="Local Legend",
+	description=(
+		"A remembered deed made you a symbol to a community, whether or not "
+		"you feel worthy of the story now told about you."
+		),
+	)
+
+Hunter = Build_Background(
+	name="Hunter",
+	audiences=(
+		NPC_Background,
+		),
+	abilities=(
+		"DEX",
+		"CON",
+		"WIS",
+		),
+	skills=(
+		"Perception",
+		"Survival",
+		),
+	tools="Leatherworker_Tools",
+	origin_feat=Alert,
+	title="Patient Pursuit",
+	description=(
+		"You read spoor, habits, terrain, and silence to follow quarry without "
+		"wasting movement or revealing your approach."
+		),
+	)
+
+Knight = Build_Background(
+	name="Knight",
+	audiences=(
+		NPC_Background,
+		),
+	abilities=(
+		"STR",
+		"CON",
+		"CHA",
+		),
+	skills=(
+		"Athletics",
+		"Persuasion",
+		),
+	tools="Gaming_Set",
+	origin_feat=Savage_Attacker,
+	title="Sworn Service",
+	description=(
+		"An oath, patron, or martial order grants you recognizable duties and "
+		"a place within a wider chain of obligation."
+		),
+	)
+
+Mage = Build_Background(
+	name="Mage",
+	audiences=(
+		NPC_Background,
+		),
+	abilities=(
+		"INT",
+		"WIS",
+		"CHA",
+		),
+	skills=(
+		"Arcana",
+		"Investigation",
+		),
+	tools="Calligrapher_Supplies",
+	origin_feat=Magic_Initiate_Wizard,
+	title="Arcane Practice",
+	description=(
+		"You learned magic through fragmented study, service, inheritance, or "
+		"another path outside a formal adventuring Guild."
+		),
+	)
+
+Mentor = Build_Background(
+	name="Mentor",
+	audiences=(
+		NPC_Background,
+		),
+	abilities=(
+		"INT",
+		"WIS",
+		"CHA",
+		),
+	skills=(
+		"Insight",
+		"Persuasion",
+		),
+	tools="Calligrapher_Supplies",
+	origin_feat=Skilled,
+	title="Guiding Hand",
+	description=(
+		"You recognize developing talent and know how to turn experience into "
+		"questions, exercises, warnings, and useful encouragement."
+		),
+	)
+
+Ninja = Build_Background(
+	name="Ninja",
+	audiences=(
+		NPC_Background,
+		),
+	abilities=(
+		"DEX",
+		"INT",
+		"WIS",
+		),
+	skills=(
+		"Acrobatics",
+		"Stealth",
+		),
+	tools="Poisoners_Kit",
+	origin_feat=Alert,
+	title="Hidden Discipline",
+	description=(
+		"You trained to enter guarded places, observe without notice, and act "
+		"with precision before an alarm can spread."
+		),
+	)
+
+Pirate = Build_Background(
+	name="Pirate",
+	audiences=(
+		NPC_Background,
+		),
+	abilities=(
+		"STR",
+		"DEX",
+		"CHA",
+		),
+	skills=(
+		"Acrobatics",
+		"Intimidation",
+		),
+	tools="Navigator_Tools",
+	origin_feat=Tavern_Brawler,
+	title="Freebooter's Reputation",
+	description=(
+		"You understand unruly crews, dangerous ports, divided prizes, and "
+		"the value of a reputation that arrives before the ship."
+		),
+	)
+
+Priest = Build_Background(
+	name="Priest",
+	audiences=(
+		NPC_Background,
+		),
+	abilities=(
+		"INT",
+		"WIS",
+		"CHA",
+		),
+	skills=(
+		"Insight",
+		"Religion",
+		),
+	tools="Calligrapher_Supplies",
+	origin_feat=Magic_Initiate_Cleric,
+	title="Pastoral Office",
+	description=(
+		"You conduct rites, preserve doctrine, and help a community interpret "
+		"its obligations, griefs, celebrations, and hopes."
+		),
+	)
+
+Scholar = Build_Background(
+	name="Scholar",
+	audiences=(
+		NPC_Background,
+		),
+	abilities=(
+		"INT",
+		"WIS",
+		"CHA",
+		),
+	skills=(
+		"Arcana",
+		"History",
+		),
+	tools="Calligrapher_Supplies",
+	origin_feat=Skilled,
+	title="Learned Correspondence",
+	description=(
+		"You exchange findings with other specialists and know how to compare "
+		"sources, claims, translations, and competing schools of thought."
+		),
+	)
+
+Shaman = Build_Background(
+	name="Shaman",
+	audiences=(
+		NPC_Background,
+		),
+	abilities=(
+		"CON",
+		"WIS",
+		"CHA",
+		),
+	skills=(
+		"Animal_Handling",
+		"Nature",
+		),
+	tools="Herbalism_Kit",
+	origin_feat=Magic_Initiate_Druid,
+	title="Spirit Mediator",
+	description=(
+		"You interpret signs and maintain practical relationships between a "
+		"community, its land, its ancestors, and unseen presences."
+		),
+	)
+
+Spy = Build_Background(
+	name="Spy",
+	audiences=(
+		NPC_Background,
+		),
+	abilities=(
+		"DEX",
+		"INT",
+		"CHA",
+		),
+	skills=(
+		"Deception",
+		"Stealth",
+		),
+	tools="Disguise_Kit",
+	origin_feat=Skilled,
+	title="Network of Whispers",
+	description=(
+		"You cultivate sources, conceal your purpose, and understand how a "
+		"small observation becomes useful intelligence."
+		),
+	)
+
+Trickster = Build_Background(
+	name="Trickster",
+	audiences=(
+		NPC_Background,
+		),
+	abilities=(
+		"DEX",
+		"INT",
+		"CHA",
+		),
+	skills=(
+		"Deception",
+		"Sleight_of_Hand",
+		),
+	tools="Disguise_Kit",
+	origin_feat=Lucky,
+	title="Misdirection",
+	description=(
+		"You redirect attention with timing, confidence, and a practiced sense "
+		"of what an observer expects to see."
+		),
+	)
+
+Traveler = Build_Background(
+	name="Traveler",
+	audiences=(
+		NPC_Background,
+		),
+	abilities=(
+		"DEX",
+		"CON",
+		"WIS",
+		),
+	skills=(
+		"Insight",
+		"Survival",
+		),
+	tools="Navigator_Tools",
+	origin_feat=Lucky,
+	title="Roadwise",
+	description=(
+		"You adapt quickly to unfamiliar customs, temporary shelter, uncertain "
+		"roads, and the small negotiations every journey requires."
+		),
+	)
+
+Warrior = Build_Background(
+	name="Warrior",
+	audiences=(
+		NPC_Background,
+		),
+	abilities=(
+		"STR",
+		"DEX",
+		"CON",
+		),
+	skills=(
+		"Athletics",
+		"Intimidation",
+		),
+	tools="Gaming_Set",
+	origin_feat=Savage_Attacker,
+	title="Battle Proven",
+	description=(
+		"You learned violence through service, necessity, or tradition and can "
+		"read the mood and readiness of other fighting people."
+		),
+	)
+
+Witch = Build_Background(
+	name="Witch",
+	audiences=(
+		NPC_Background,
+		),
+	abilities=(
+		"INT",
+		"WIS",
+		"CHA",
+		),
+	skills=(
+		"Arcana",
+		"Nature",
+		),
+	tools="Herbalism_Kit",
+	origin_feat=Magic_Initiate_Wizard,
+	title="Hedge Mysteries",
+	description=(
+		"You preserve a personal body of charms, remedies, warnings, and "
+		"unsettling lore learned beyond formal institutions."
+		),
+	)
 
 
-def Apply_Background(char, name=None):
-	"""Apply a Background Tag by name (default: char.background)."""
-	name = name or getattr(char, "background", None)
-	if not name:
-		raise ValueError("Apply_Background: no background name")
-	tag = BACKGROUNDS.get(name)
+# ---------------------------------------------------------------------------
+# Later official 2024-format source Maps
+# ---------------------------------------------------------------------------
+
+
+OFFICIAL_2024_BACKGROUNDS = Register_Official_2024_Backgrounds(
+	build_background=Build_Background,
+	pc_background=Available,
+	npc_background=NPC_Background,
+	artisan_tools=ARTISAN_TOOLS,
+	origin_feats=BACKGROUND_ORIGIN_FEATS,
+	)
+
+globals().update(
+	{
+		tag.__name__: tag
+		for tag in OFFICIAL_2024_BACKGROUNDS
+		}
+	)
+
+
+# ---------------------------------------------------------------------------
+# Field-derived registries
+# ---------------------------------------------------------------------------
+
+
+class Background_Registry(
+	Mapping[
+		str,
+		type[Background],
+	],
+	):
+	"""Live read-only view over Background Pin Fields."""
+
+	def __init__(
+			registry,
+			*,
+			source: type[Background_Audience] | None = None,
+			required: tuple[type[Background_Audience], ...] = (),
+			excluded: tuple[type[Background_Audience], ...] = (),
+			):
+		registry.source = source
+		registry.required = required
+		registry.excluded = excluded
+
+	def _tags(
+			registry,
+			) -> tuple[type[Background], ...]:
+		candidates = (
+			tuple(
+				registry.source[:]
+				)
+			if registry.source is not None
+			else tuple(
+				Background_Audience[:]
+				)
+			)
+
+		return tuple(
+			tag
+			for tag in candidates
+			if all(
+				tag in audience
+				for audience in registry.required
+				)
+			and all(
+				tag not in audience
+				for audience in registry.excluded
+				)
+			)
+
+	def __getitem__(
+			registry,
+			name: str,
+			) -> type[Background]:
+		for tag in registry._tags():
+			if tag.NAME == name:
+				return tag
+
+		raise KeyError(
+			name
+			)
+
+	def __iter__(
+			registry,
+			) -> Iterator[str]:
+		return (
+			tag.NAME
+			for tag in registry._tags()
+			)
+
+	def __len__(
+			registry,
+			) -> int:
+		return len(
+			registry._tags()
+			)
+
+
+def Backgrounds_For(
+	audience: type[Background_Audience],
+	):
+	"""Return a live read-only registry derived from one audience Field."""
+	if audience not in (
+		Available,
+		NPC_Background,
+		):
+		raise ValueError(
+			"Backgrounds_For requires Available or NPC_Background."
+			)
+
+	return Background_Registry(
+		source=audience
+		)
+
+
+PLAYER_BACKGROUNDS = Backgrounds_For(
+	Available
+	)
+NONPLAYER_BACKGROUNDS = Backgrounds_For(
+	NPC_Background
+	)
+SHARED_BACKGROUNDS = Background_Registry(
+	source=Available,
+	required=(
+		NPC_Background,
+		),
+	)
+NONPLAYER_ONLY_BACKGROUNDS = Background_Registry(
+	source=NPC_Background,
+	excluded=(
+		Available,
+		),
+	)
+NONPLAYER_ONLY_BACKGROUND_NAMES = tuple(
+	NONPLAYER_ONLY_BACKGROUNDS
+	)
+BACKGROUNDS = Background_Registry(
+	source=Background_Audience
+	)
+
+
+def Find_Background(
+		target,
+		) -> str:
+	"""Find the narrative Background label from current Tag membership."""
+	carried = tuple(
+		tag
+		for tag in BACKGROUNDS.values()
+		if target in tag
+		)
+
+	if len( carried ) > 1:
+		raise ValueError(
+			"A Character carries conflicting Backgrounds: "
+			+ ", ".join(
+				tag.NAME
+				for tag in carried
+				)
+			+ "."
+			)
+
+	return (
+		carried[ 0 ].NAME
+		if carried
+		else ""
+		)
+
+
+def Background_Is_Available(
+	char,
+	tag,
+	) -> bool:
+	"""Return whether the Character Role matches a Pin on the Background Tag."""
+	if (
+		not isinstance(
+			tag,
+			type,
+			)
+		or not issubclass(
+			tag,
+			Background,
+			)
+		):
+		return False
+
+	return _eligible_for(
+		char,
+		tag,
+		)
+
+
+def Apply_Background(
+	char,
+	name=None,
+	):
+	"""Apply one declared Background allowed by the Character's Role."""
+	resolved_name = (
+		name
+		or getattr(
+			char,
+			"background",
+			None,
+			)
+		)
+
+	if not resolved_name:
+		available_names = tuple(
+			sorted(
+				tag.NAME
+				for tag in BACKGROUNDS.values()
+				if Background_Is_Available(
+					char,
+					tag,
+					)
+				)
+			)
+
+		if not available_names:
+			raise ValueError(
+				"No Background is available to this Character Role."
+				)
+
+		dice_bag = char.Dice_Bag(
+			"identity.background",
+			version="1",
+			namespace="GenLegendActor",
+			)
+		resolved_name = char.Pick(
+			available_names,
+			dice=dice_bag,
+			)
+
+	current = getattr(
+		char,
+		"background",
+		None,
+		)
+
+	if (
+		current
+		and current != resolved_name
+		):
+		raise ValueError(
+			"A Character cannot carry two Backgrounds: "
+			f"{current!r} and {resolved_name!r}."
+			)
+
+	tag = BACKGROUNDS.get(
+		resolved_name
+		)
+
 	if tag is None:
-		raise KeyError(f"BackgroundKit has no Tag for {name!r}")
+		raise KeyError(
+			f"BackgroundKit has no Tag for {resolved_name!r}."
+			)
+
+	if not Background_Is_Available(
+		char,
+		tag,
+		):
+		raise ValueError(
+			f"Background {resolved_name!r} is not available to this "
+			"Character Role."
+			)
+
 	if char not in tag:
-		tag(char)
+		tag(
+			char
+			)
+
 	return tag
 
 
+def Apply_Background_Training(
+	char,
+	):
+	"""Replay the applied Background's Tag-owned training onto its skill bag."""
+	name = getattr(
+		char,
+		"background",
+		None,
+		)
+	tag = BACKGROUNDS.get(
+		name
+		)
+
+	if tag is None:
+		raise ValueError(
+			f"Cannot apply training for unknown Background {name!r}."
+			)
+
+	skill_names = getattr(
+		char,
+		"background_skills",
+		tag.SKILLS,
+		)
+	tool = getattr(
+		char,
+		"background_tool",
+		None,
+		)
+
+	_grant_skills(
+		char,
+		skill_names,
+		)
+
+	if tool:
+		_grant_tool(
+			char,
+			tool,
+			)
+
+	return char.skills
+
+
+def Apply_Background_Abilities(
+	char,
+	):
+	"""Materialize the Background ability Record after scores exist."""
+	if getattr(
+		char,
+		"background_abilities_applied",
+		False,
+		):
+		return char.AS
+
+	chosen = getattr(
+		char,
+		"background_asi",
+		None,
+		)
+
+	if not chosen:
+		return char.AS
+
+	for stat, bonus in chosen:
+		setattr(
+			char.AS,
+			stat,
+			getattr(
+				char.AS,
+				stat,
+				)
+			+ bonus,
+			)
+
+	char.background_abilities_applied = True
+
+	return char.AS
+
+
 # ---------------------------------------------------------------------------
-# Self-test — also serves as the usage example
+# Focused contracts
 # ---------------------------------------------------------------------------
 
-def _test_wayfarer():
-	char = Character(seed=21)
-	Wayfarer(char)
-	assert char in Wayfarer and char in Background
-	assert "wayfarer" in char
-	assert char.background == "Wayfarer"
-	assert char in Lucky
-	names = {getattr(f, "name", None) for f in char.features}
-	assert "Wayfarer" in names
-	assert "Lucky" in names
-	assert all(isinstance(f, Feature) for f in char.features if f.name in names)
 
-
-def _test_acolyte():
-	char = Character(seed=22)
-	Acolyte(char)
-	assert char in Acolyte
-	assert char.background == "Acolyte"
-	assert char in Magic_Initiate_Cleric
+def _test_meta_fields():
+	assert len(
+		tuple(
+			Background_Audience[:]
+			)
+		) == 87
+	assert len(
+		tuple(
+			Available[:]
+			)
+		) == 61
+	assert len(
+		tuple(
+			NPC_Background[:]
+			)
+		) == 87
+	assert Merchant in Available
+	assert Merchant in NPC_Background
+	assert Doctor not in Available
+	assert Doctor in NPC_Background
 
 
 def _test_all_backgrounds():
-	"""Every PHB 2024 background Tag awakens with its Origin Feat."""
-	assert set(BACKGROUNDS) == set(BACKGROUND_ORIGIN_FEATS)
-	assert set(BACKGROUNDS) == set(BACKGROUND_ABILITY_CHOICES)
-	for i, (name, tag) in enumerate(BACKGROUNDS.items()):
-		char = Character(seed=100 + i)
-		tag(char)
-		assert char in tag and char in Background
-		assert char.background == name
-		assert char in tag.ORIGIN_FEAT
-		assert tag.ORIGIN_FEAT is BACKGROUND_ORIGIN_FEATS[name]
-		assert tag.ABILITIES == BACKGROUND_ABILITY_CHOICES[name]
-		assert len(tag.SKILLS) == 2
-		assert getattr(tag, "TOOLS", None)
+	for index, (
+		name,
+		tag,
+		) in enumerate(
+			BACKGROUNDS.items()
+			):
+		character = Character(
+			seed=100 + index
+			)
+
+		if tag in Available:
+			Player(
+				character
+				)
+		else:
+			NonPlayer(
+				character
+				)
+
+		tag(
+			character
+			)
+
+		assert character in tag
+		assert character in Background
+		assert character.background == name
+		assert character in tag.ORIGIN_FEAT
+		assert len(
+			tag.ABILITIES
+			) == 3
+		assert len(
+			tag.SKILLS
+			) == 2
+		assert tag.TOOLS
 
 
 def _test_ability_boost_soft_opt():
-	"""Odd scores + class prefs steer picks (recalled soft optimizer)."""
-	char = Character(seed=24)
-	char.char_class = "Rogue"
+	from AtlasLusoris.GuildKit import Rogue
 
-	class FakeAS:
-		STR, DEX, CON, INT, WIS, CHA = 10, 15, 12, 11, 13, 14
+	character = Character(
+		seed=24
+		)
+	Player(
+		character
+		)
+	Rogue(
+		character
+		)
+	character.AS = AbilityScores(
+		STR=10,
+		DEX=15,
+		CON=12,
+		INT=11,
+		WIS=13,
+		CHA=14,
+		character=character,
+		)
 
-	char.AS = FakeAS()
-	assert _pick_boost_ability(char, ["DEX", "CHA", "WIS"], char.AS) == "DEX"
-	assert _pick_boost_ability(char, ["CHA", "WIS"], char.AS) == "WIS"
-	char.char_class = "Wizard"
-	assert _pick_boost_ability(char, ["INT", "CON"], char.AS) == "INT"
-	before = (char.AS.STR, char.AS.DEX, char.AS.CON, char.AS.INT, char.AS.WIS, char.AS.CHA)
-	_grant_ability_boosts(char, ("DEX", "CHA", "WIS"))
-	after = (char.AS.STR, char.AS.DEX, char.AS.CON, char.AS.INT, char.AS.WIS, char.AS.CHA)
-	assert after[0] == before[0] and after[2] == before[2] and after[3] == before[3]
-	assert sum(a - b for a, b in zip(after, before)) == 3
+	assert _pick_boost_ability(
+		character,
+		[
+			"DEX",
+			"CHA",
+			"WIS",
+			],
+		character.AS,
+		) == "DEX"
 
 
 def _test_apply_by_name():
-	char = Character(seed=23)
-	char.background = "Soldier"
-	Apply_Background(char)
-	assert char in Soldier and char in Savage_Attacker
+	character = Character(
+		seed=23
+		)
+	Player(
+		character
+		)
+	Apply_Background(
+		character,
+		"Soldier",
+		)
+
+	assert character in Soldier
+	assert character in Savage_Attacker
+	assert Find_Background( character ) == "Soldier"
+	assert f"{character:Background}" == "Soldier"
 
 
 def _self_test():
-	_test_wayfarer()
-	_test_acolyte()
+	_test_meta_fields()
 	_test_all_backgrounds()
 	_test_ability_boost_soft_opt()
 	_test_apply_by_name()
-	for name, tag in BACKGROUNDS.items():
-		assert tag.ORIGIN_FEAT is BACKGROUND_ORIGIN_FEATS[name]
-	print("OK — BackgroundKit self-test (16 backgrounds)")
+
+	print(
+		"OK — BackgroundKit MetaTOP self-test "
+		f"({len(BACKGROUNDS)} backgrounds)"
+		)
+
+
+__all__ = (
+	"ARTISAN_TOOLS",
+	"Available",
+	"BACKGROUNDS",
+	"Background",
+	"Background_Audience",
+	"Background_Is_Available",
+	"Backgrounds_For",
+	"Build_Background",
+	"Find_Background",
+	"NPC_Background",
+	"NONPLAYER_BACKGROUNDS",
+	"NONPLAYER_ONLY_BACKGROUNDS",
+	"NONPLAYER_ONLY_BACKGROUND_NAMES",
+	"OFFICIAL_2024_BACKGROUNDS",
+	"PLAYER_BACKGROUNDS",
+	"SHARED_BACKGROUNDS",
+	"Apply_Background",
+	"Apply_Background_Training",
+	*tuple(
+		tag.__name__
+		for tag in BACKGROUNDS.values()
+		),
+	)
 
 
 if __name__ == "__main__":

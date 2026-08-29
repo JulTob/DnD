@@ -1,15 +1,17 @@
-# Minion.py — fail-system decorators: @minion, @warden, @watcher, @spy, @guardian
+# Minion.py — fail-system decorators: @minion, @warden, @watcher, @spy, @guardian, @changeling
 # None of them change the function's return value. They only inform the log system.
+import functools
 import inspect
 import os
 import re
 from datetime import datetime
 
 _STOP_FILES = frozenset({"Minion.py", "app.py"})
-_START_FILES = frozenset({"app.py", "shiny_app.py"})
+_START_FILES = frozenset({"app.py", "main.py", "shiny_app.py"})
 
-# Log system: when set, decorators append plain-text records here. Default None = no recording.
-_log_path = None
+# Log system: when set, decorators append plain-text records here.
+# ``MINION_LOG=minion_app.log python3 ...`` enables it for a whole run.
+_log_path = os.environ.get("MINION_LOG") or None
 
 # Minion emoji for code
 
@@ -24,6 +26,7 @@ MESSAGE_MINION = "🕊️"
 RECALL_MINION = "🐦‍🔥"
 END_MINION = "🦉"
 GUARDIAN_MINION = "🐺"
+CHANGELING_MINION = "🧚"
 
 # Per-minion colors (for console output). Names: black, red, green, yellow, blue, magenta, cyan, white, dim, bold
 MINION_COLOR = "cyan"
@@ -34,6 +37,7 @@ SPY_COLOR = "blue"
 LOG_COLOR = "dim"
 ALERT_COLOR = "bold"
 GUARDIAN_COLOR = "magenta"
+CHANGELING_COLOR = "yellow"
 
 
 def set_log_file(path="minion_app.log"):
@@ -44,6 +48,15 @@ def set_log_file(path="minion_app.log"):
 def get_log_file():
 	"""Current log file path, or None."""
 	return _log_path
+
+def set_start_files(files):
+	"""Set custom start files for get_call_tree."""
+	global _START_FILES
+	_START_FILES = frozenset(files)
+
+def get_start_files():
+	"""Current start files set for get_call_tree."""
+	return _START_FILES
 
 def _emit(plain_text, color=None):
 	"""Low-level sink: file when _log_path is set (plain text), else console (optionally colored)."""
@@ -228,6 +241,15 @@ def _bug_report(exc):
 	bugs = Color(bugged_tree(exc), "green")
 	return "\n".join([header, time_line, stack, bugs, "┷"])
 
+def report_bug(exc):
+	"""Send one exception's bug tree to the log without re-raising."""
+	print_record(
+		_bug_report(
+			exc
+			),
+		FAIL_COLOR,
+		)
+
 def _to_text_repr(value):
 	if value is None:
 		return "None"
@@ -246,7 +268,7 @@ def minion(f):
 			print_record(f"{MINION}: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} [minion] {f.__name__}: {_to_text_repr(result)}", MINION_COLOR)
 			return result
 		except Exception as exc:
-			print_record(_bug_report(exc), FAIL_COLOR)
+			report_bug(exc)
 			raise
 	return wrapped
 
@@ -261,28 +283,152 @@ def warden(f):
 			print_record(f"{WARDEN_MINION}: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} [warden] {f.__name__}: {_to_text_repr(result)}", WARDEN_COLOR)
 			return result
 		except Exception as exc:
-			print_record(_bug_report(exc), FAIL_COLOR)
+			report_bug(exc)
 			return f(*args, **kwargs)
 	return wrapped
 
+GUARDIAN_IDENTICAL_LIMIT = 10
+GUARDIAN_MAX_ATTEMPTS = 100
+
+
+def _failure_signature(exc):
+	"""Identify an exception by its type and innermost source location."""
+	tb = exc.__traceback__
+
+	while tb and tb.tb_next:
+		tb = tb.tb_next
+
+	where = (
+		f"{tb.tb_frame.f_code.co_filename}:{tb.tb_lineno}"
+		if tb
+		else "?"
+		)
+
+	return f"{type(exc).__name__}@{where}"
+
+
 def guardian(f):
-	"""
-	On failure: reports bug tree to log, retries with same args until success or max attempts (100).
-	On success: reports result to log system, then returns it.
-	"""
+	"""Retry random failures, stopping when one proves deterministic."""
+	@functools.wraps(f)
 	def wrapped(*args, **kwargs):
-		max_attempts = 100
 		attempts = 0
-		while attempts < max_attempts:
+		identical = 0
+		last_exc = None
+		last_signature = None
+
+		while attempts < GUARDIAN_MAX_ATTEMPTS:
 			try:
-				result = f(*args, **kwargs)
-				print_record(f"{GUARDIAN_MINION}: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} [guardian] {f.__name__}: {_to_text_repr(result)}", GUARDIAN_COLOR)
+				result = f(
+					*args,
+					**kwargs,
+					)
+				print_record(
+					f"{GUARDIAN_MINION}: "
+					f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} "
+					f"[guardian] {f.__name__}: {_to_text_repr(result)}",
+					GUARDIAN_COLOR,
+					)
+
 				return result
 			except Exception as exc:
-				print_record(_bug_report(exc), FAIL_COLOR)
+				signature = _failure_signature(
+					exc
+					)
+
+				if signature != last_signature:
+					report_bug(exc)
+					identical = 1
+				else:
+					identical += 1
+
+				last_signature = signature
+				last_exc = exc
 				attempts += 1
-		raise Exception(f"{GUARDIAN_MINION} Max attempts ({max_attempts}) reached")
+
+				if identical >= GUARDIAN_IDENTICAL_LIMIT:
+					raise RuntimeError(
+						f"{GUARDIAN_MINION} {f.__name__}: the same failure "
+						f"{identical} times running, so it is not the dice. "
+						f"{_enriched_error(exc)}"
+						) from exc
+
+		raise RuntimeError(
+			f"{GUARDIAN_MINION} {f.__name__}: max attempts "
+			f"({GUARDIAN_MAX_ATTEMPTS}) reached. "
+			f"{_enriched_error(last_exc)}"
+			) from last_exc
+
 	return wrapped
+
+
+def changeling(*successors):
+	"""Try distinct stand-ins in order without replaying failed work."""
+	def decorate(f):
+		ladder = (
+			f,
+			*successors,
+			)
+
+		@functools.wraps(f)
+		def wrapped(*args, **kwargs):
+			last_exc = None
+
+			for rung, stand_in in enumerate(
+					ladder
+					):
+				try:
+					result = stand_in(
+						*args,
+						**kwargs,
+						)
+				except Exception as exc:
+					report_bug(exc)
+					last_exc = exc
+					heir = (
+						ladder[
+							rung + 1
+							]
+						if rung + 1 < len(ladder)
+						else None
+						)
+					answer = (
+						f"{heir.__name__} takes over. "
+						f"{_enriched_error(exc)}"
+						if heir
+						else (
+							"no stand-in left. "
+							f"{_enriched_error(exc)}"
+							)
+						)
+					print_record(
+						f"{CHANGELING_MINION}: "
+						f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} "
+						f"[changeling] {stand_in.__name__} failed; "
+						f"{answer}",
+						CHANGELING_COLOR,
+						)
+
+					continue
+
+				if rung:
+					print_record(
+						f"{CHANGELING_MINION}: "
+						f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} "
+						f"[changeling] {f.__name__} answered by "
+						f"{stand_in.__name__}: {_to_text_repr(result)}",
+						CHANGELING_COLOR,
+						)
+
+				return result
+
+			raise RuntimeError(
+				f"{CHANGELING_MINION} {f.__name__}: every stand-in failed "
+				f"({len(ladder)} of them). {_enriched_error(last_exc)}"
+				) from last_exc
+
+		return wrapped
+
+	return decorate
 
 
 def _enriched_error(exc):
@@ -307,7 +453,12 @@ def watcher(f):
 			print_record(f"{WATCHER_MINION}: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} [watcher] {f.__name__}: {_to_text_repr(out)}", WATCHER_COLOR)
 			return out
 		except Exception as exc:
-			print_record(_enriched_error(exc), FAIL_COLOR)
+			print_record(
+				_enriched_error(
+					exc
+					),
+				FAIL_COLOR,
+				)
 			raise
 	return wrapped
 
@@ -323,7 +474,7 @@ def spy(f):
 			print_record(f"{SPY_MINION} [spy] {f.__name__} ({args}, {kwargs}) called at {ts}\n{tree}\n┷", SPY_COLOR)
 			return f(*args, **kwargs)
 		except Exception as exc:
-			print_record(_bug_report(exc), FAIL_COLOR)
+			report_bug(exc)
 			raise
 	return wrapped
 
