@@ -2,6 +2,23 @@
 
 import random
 from AtlasMagia.Lodge_of_Spells import *
+from AtlasLusoris.Compass_of_Learned_Spells import (
+	CLASS_SALT,
+	catalog_spells,
+	caster_rng,
+	finish_learning,
+	grant_spell,
+	html_spell_catalog,
+	html_spell_index,
+	max_slot_from,
+	pick_new,
+	progressive_learn,
+	spell_key,
+	spell_level,
+	spell_mark,
+	stats_at_level,
+	unique_spells,
+	)
 
 
 SPELL_LISTS = {
@@ -438,6 +455,10 @@ class Spellcaster:
 		caster.character     = character
 		caster.level         = character.level
 		caster.casting_stat = caster.get_casting_stat()
+		caster.granted_spells = []
+		caster.always_prepared = set()
+		caster.prepared_spells = []
+		caster.catalog_known = True
 		caster.spell_slots     =  caster.get_spell_slots()
 		caster.spells_available = caster.available_spells()
 		caster.spells_known = known
@@ -450,13 +471,18 @@ class Spellcaster:
 		slots_table = {}
 		return slots_table
 
+	def list_name(caster):
+		subclass = getattr(caster.character, "subclass", None)
+		if subclass in SPELL_LISTS:
+			return subclass
+		return getattr(caster, "class_name", None) or caster.character.char_class
+
 	def available_spells(caster):
-		"""Return all spells this character can *learn* at their current level."""
-		table = SPELL_LISTS.get(caster.character.char_class, {})
-		# Collapse all spell levels the character has unlocked
-		unlocked = [lvl for lvl in table if lvl <= caster.level]
-		spells = [s for lvl in unlocked for s in table[lvl]]
-		return spells
+		"""Spells this character can learn, capped by slot level — not character level."""
+		table = SPELL_LISTS.get(caster.list_name(), {}) or SPELL_LISTS.get(caster.character.char_class, {})
+		max_slot = max_slot_from(caster.spell_slots)
+		unlocked = [lvl for lvl in table if lvl == 0 or lvl <= max_slot]
+		return unique_spells([spell for lvl in unlocked for spell in table[lvl]])
 
 	def prepare_spells(caster):
 		pass
@@ -472,28 +498,46 @@ class Spellcaster:
 		stat_mod = caster.modifier()
 		return prof + stat_mod
 
-	def __str__(caster):
-		spells_names = "".join(f"<li>〖{spell.level}〗{spell.name}</li>" for spell in caster.spells_known)
-		slots_html = ", ".join(f"Level {lvl}: {num}" for lvl, num in caster.spell_slots.items())
-		spells_html = "".join(f"""<div class="npc-textbox">{spell}</div>""" for spell in caster.spells_known)
+	def modifier(caster):
+		return (getattr(caster.character.AS, caster.casting_stat) - 10) // 2
 
+	def html_slots(caster):
+		slots = caster.spell_slots or {}
+		return "<br>".join(
+			f"<b>Level {lvl}</b>: <i>{num}</i>"
+			for lvl, num in slots.items()
+			if num
+			)
+
+	def html_rules(caster):
+		index = html_spell_index(caster)
+		slots_html = caster.html_slots()
 		return f"""
-			<h1 style="font-family: 'Iglesia'; font-size:    3.1em; ">{caster.character.char_class} Spellcasting</h1>
-			<p><b>Spell Slots:</b> {slots_html}</p>
-			<ul style="list-style-type: '🪄'; text-align: left; font-family: 'Iglesia'">{spells_names}</ul>
-			</div>
-			<div class="npc-textbox" style="margin-bottom: 1em;">
+			<div class="npc-textbox" style="grid-column: span 3;">
+				<h1 style="font-family: 'Iglesia'; font-size: 3.1em;">{caster.character.char_class} Spellcasting</h1>
+				</div>
+			<div class="npc-textbox">
+				<h2>Spell Slots:</h2>
+				{slots_html}
+				<p>You regain all expended slots when you finish a Long Rest.</p>
+				</div>
+			<div class="npc-textbox">
 				<b>Spell Save DC:</b> {caster.spell_save_dc()}<br>
 				<b>Spell Attack Bonus:</b> +{caster.spell_attack_bonus()}
 				</div>
-			{spells_html}
-		"""
+			<div class="npc-textbox">
+				{index}
+				</div>
+			"""
+
+	def html_catalog(caster):
+		return html_spell_catalog(caster)
+
+	def __str__(caster):
+		return caster.html_rules()
 
 	def html(caster):
-		if not caster.spells_known:
-			return "<i>No spells known</i>"
-		list_items = "".join(f"<li>{s.name}</li>" for s in caster.spells_known)
-		return f"""<div class="npc-textbox"><b>Spellcasting</b><ul>{list_items}</ul></div>"""
+		return caster.html_rules()
 
 class Wizard(Spellcaster):
 	def __init__(caster, character, known=None):
@@ -501,6 +545,10 @@ class Wizard(Spellcaster):
 		caster.class_name     = "Wizard"
 		caster.character     = character
 		caster.level         = character.level
+		caster.granted_spells = []
+		caster.always_prepared = set()
+		caster.prepared_spells = []
+		caster.catalog_known = True
 		caster.spell_slots     =  caster.get_spell_slots()
 		caster.spells_available = caster.available_spells()
 		caster.spells_known = known
@@ -547,51 +595,28 @@ class Wizard(Spellcaster):
 		return caster.get_stats("slots")
 
 	def prepare_spells(caster):
-		num_spells = caster.level*2 + 4
-		available = caster.available_spells()
-		caster.spells_known = random.sample(available, min(len(available), num_spells))
+		table = SPELL_LISTS.get("Wizard", {})
+		cantrips, book = progressive_learn(
+			caster.character,
+			table,
+			caster.level,
+			cantrips_at=lambda lvl: stats_at_level(caster, lvl, "cantrips"),
+			known_at=lambda lvl: 2 * lvl + 4,
+			slots_at=lambda lvl: stats_at_level(caster, lvl, "slots"),
+			salt=CLASS_SALT["Wizard"],
+			)
+		finish_learning(caster, cantrips, book, prepared_count=caster.get_stats("spells"))
 
 	def modifier(caster):
 		return (getattr(caster.character.AS, caster.casting_stat) - 10) // 2
 
 	def html(caster):
-		return str(caster)
+		return caster.html_rules()
 
-	def __str__(caster):
+	def html_rules(caster):
 		n = caster.get_stats("spells")
-		def spell_level(spell):
-			try:
-				return int(spell.level)
-			except (TypeError, ValueError):
-				return 0
-		cantrips = [s for s in caster.spells_known if spell_level(s) == 0]
-		other_spells = [s for s in caster.spells_known if spell_level(s) > 0]
-
-		random.shuffle(other_spells)
-		prepared = other_spells[:n]
-		unprepared = other_spells[n:]
-		all_spells = sorted(prepared + unprepared, key=lambda s: (spell_level(s), s.name))
-		spells = ""
-		for spell in cantrips:
-			spells += f"<li>【{spell.level}】{spell.name}</li>"
-		for spell in all_spells:
-			if spell in prepared or spell_level(spell)==0:
-				spells += f"<li>【{spell.level}】{spell.name}</li>"
-			else:
-				spells += f"<li>〖{spell.level}〗{spell.name}</li>"
-		slots_html = "<br>".join(
-			f"<b>Level {lvl}</b>: <i>{num}</i>"
-			for lvl, num in caster.spell_slots.items()
-			if num  # This skips levels with 0 slots
-			)
-		spells_html = "".join(
-			f"""<div class="npc-textbox">{spell}</div>"""
-			for spell in cantrips
-			)
-		spells_html += "".join(
-			f"""<div class="npc-textbox">{spell}</div>"""
-			for spell in all_spells
-			)
+		index = html_spell_index(caster)
+		slots_html = caster.html_slots()
 		return f"""
 			<div class="npc-textbox" style="grid-column: span 3;">
 				<h1 style="font-family: 'Iglesia'; font-size:    3.1em; ">
@@ -619,15 +644,16 @@ class Wizard(Spellcaster):
 			When you finish a Long Rest, you may prepare {n} names from the
 			book — the ones you can speak at any moment. 【prepared】
 			〖written, not prepared〗
-			<ul style="list-style-type: '🪄'; text-align: left; font-family: 'Iglesia' ">
-				{spells}</ul>
+			{index}
 			<h2>Arcane Focus</h2>
 			You can use an Arcane Focus (wand, scepter, orb, staff) as a
 			Spellcasting Focus for your Wizard spells — a tool for aiming
 			a name without shouting it into bare air.
 			</div>
-			{spells_html}
 			"""
+
+	def __str__(caster):
+		return caster.html_rules()
 
 class Druid(Spellcaster):
 	def __init__(caster, character, known=None):
@@ -635,6 +661,10 @@ class Druid(Spellcaster):
 		caster.class_name     = "Druid"
 		caster.character     = character
 		caster.level         = character.level
+		caster.granted_spells = []
+		caster.always_prepared = set()
+		caster.prepared_spells = []
+		caster.catalog_known = True
 		caster.spell_slots     =  caster.get_spell_slots()
 		caster.spells_available = caster.available_spells()
 		caster.spells_known = known
@@ -672,7 +702,7 @@ class Druid(Spellcaster):
 		value = table.get(lvl, {"cantrips": 0, "spells": 0, "slots": (0,0,0,0)})
 		if key == "cantrips":
 			result = value["cantrips"]
-			if character.Primal_Order and character.Primal_Order == "Magician":
+			if getattr(caster.character, "Primal_Order", None) == "Magician":
 				result += 1
 			return result
 		if key == "spells":
@@ -684,46 +714,28 @@ class Druid(Spellcaster):
 		return caster.get_stats("slots")
 
 	def prepare_spells(caster):
-		num_spells = caster.level*2 + 4
-		available = caster.available_spells()
-		caster.spells_known = random.sample(available, min(len(available), num_spells))
+		table = SPELL_LISTS.get("Druid", {})
+		cantrips, book = progressive_learn(
+			caster.character,
+			table,
+			caster.level,
+			cantrips_at=lambda lvl: stats_at_level(caster, lvl, "cantrips"),
+			known_at=lambda lvl: 2 * lvl + 4,
+			slots_at=lambda lvl: stats_at_level(caster, lvl, "slots"),
+			salt=CLASS_SALT["Druid"],
+			)
+		finish_learning(caster, cantrips, book, prepared_count=caster.get_stats("spells"))
 
 	def modifier(caster):
 		return (getattr(caster.character.AS, caster.casting_stat) - 10) // 2
 
 	def html(caster):
-		return str(caster)
+		return caster.html_rules()
 
-	def __str__(caster):
+	def html_rules(caster):
 		n = caster.get_stats("spells")
-		cantrips = [s for s in caster.spells_known if s.level == 0]
-		other_spells = [s for s in caster.spells_known if s.level > 0]
-
-		random.shuffle(other_spells)
-		prepared = other_spells[:n]
-		unprepared = other_spells[n:]
-		all_spells = sorted(prepared + unprepared, key=lambda s: (s.level, s.name))
-		spells = ""
-		for spell in cantrips:
-			spells += f"<li>【{spell.level}】{spell.name}</li>"
-		for spell in all_spells:
-			if spell in prepared or spell.level==0:
-				spells += f"<li>【{spell.level}】{spell.name}</li>"
-			else:
-				spells += f"<li>〖{spell.level}〗{spell.name}</li>"
-		slots_html = "<br>".join(
-			f"<b>Level {lvl}</b>: <i>{num}</i>"
-			for lvl, num in caster.spell_slots.items()
-			if num  # This skips levels with 0 slots
-			)
-		spells_html = "".join(
-			f"""<div class="npc-textbox">{spell}</div>"""
-			for spell in cantrips
-			)
-		spells_html += "".join(
-			f"""<div class="npc-textbox">{spell}</div>"""
-			for spell in all_spells
-			)
+		index = html_spell_index(caster)
+		slots_html = caster.html_slots()
 		return f"""
 			<div class="npc-textbox" style="grid-column: span 3;">
 				<h1 style="font-family: 'Iglesia'; font-size:    3.1em; ">
@@ -745,13 +757,14 @@ class Druid(Spellcaster):
 			<div class="npc-textbox" style="grid-column: span 1;">
 			<h3 style="font-family: 'Iglesia'; font-size:    3.1em; "> SpellBook </h3>
 			You may prepare {n} spells whenever you finish a Long Rest, that you can use at any moment, from your book of spells:
-			<ul style="list-style-type: '🪄'; text-align: left; font-family: 'Iglesia' ">
-				{spells}</ul>
+			{index}
 			<h2>Arcane Focus</h2>
 			You can use an Arcane Focus (such as a wand or scepter),  as a Spellcasting Focus for your Druid spells.
 			</div>
-			{spells_html}
 			"""
+
+	def __str__(caster):
+		return caster.html_rules()
 
 class Ranger(Spellcaster):
 	def __init__(self, character, known: list[Spell] | None = None):
@@ -808,34 +821,28 @@ class Ranger(Spellcaster):
 		return caster.get_stats("slots")
 
 	def prepare_spells(caster):
-		n = caster.get_stats("prepared")
-		available = [s for s in caster.available_spells() if s.level > 0]
-		random.shuffle(available)
-		caster.spells_known = available[:n]
+		table = SPELL_LISTS.get("Ranger", {})
+		cantrips, known = progressive_learn(
+			caster.character,
+			table,
+			caster.level,
+			cantrips_at=lambda lvl: 0,
+			known_at=lambda lvl: stats_at_level(caster, lvl, "prepared"),
+			slots_at=lambda lvl: stats_at_level(caster, lvl, "slots"),
+			salt=CLASS_SALT["Ranger"],
+			)
+		finish_learning(caster, cantrips, known)
 
 	def modifier(caster):
 		return (getattr(caster.character.AS, caster.casting_stat) - 10) // 2
 
 	def html(caster):
-		return str(caster)
+		return caster.html_rules()
 
-	def __str__(caster):
+	def html_rules(caster):
 		n = caster.get_stats("prepared")
-
-		prepared = caster.spells_known[:n]
-		unprepared = caster.spells_known[n:]
-		all_spells = sorted(prepared + unprepared, key=lambda s: (s.level, s.name))
-		spells = "".join(
-			f"<li>【{s.level}】{s.name}</li>" if s in prepared else f"<li>〖{s.level}〗{s.name}</li>"
-			for s in all_spells
-		)
-		slots_html = "<br>".join(
-			f"<b>Level {lvl}</b>: <i>{num}</i>"
-			for lvl, num in caster.spell_slots.items()
-			if num
-		)
-		spells_descriptions = "".join(f'<div class="npc-textbox">{spell}</div>' for spell in all_spells)
-
+		index = html_spell_index(caster, bullet="🍀")
+		slots_html = caster.html_slots()
 		return f"""
 		<div class="npc-textbox" style="grid-column: span 3;">
 			<h1 style="font-family: 'Iglesia'; font-size: 3.1em;">Ranger Spellcasting</h1>
@@ -852,12 +859,12 @@ class Ranger(Spellcaster):
 		</div>
 		<div class="npc-textbox" style="grid-column: span 1;">
 			<h3 style="font-family: 'Iglesia'; font-size: 3.1em;">Spell List</h3>
-			<ul style="list-style-type: '🍀'; font-family: 'Iglesia'; text-align: left;">
-				{spells}
-			</ul>
+			{index}
 		</div>
-		{spells_descriptions}
 		"""
+
+	def __str__(caster):
+		return caster.html_rules()
 
 class Sorcerer(Spellcaster):
 	def __init__(caster, character):
@@ -875,13 +882,28 @@ class Sorcerer(Spellcaster):
 		return slots_table.get(caster.level, {})
 
 	def prepare_spells(caster):
-		num_spells = caster.level + 1
-		available = caster.available_spells()
-		caster.spells_known = random.sample(available, min(len(available), num_spells))
+		table = SPELL_LISTS.get("Sorcerer", {})
+		slots_by_level = {
+			1: {1: 2}, 2: {1: 3}, 3: {1: 4, 2: 2}, 4: {1: 4, 2: 3},
+			}
+		cantrips, known = progressive_learn(
+			caster.character,
+			table,
+			caster.level,
+			cantrips_at=lambda lvl: 4 if lvl < 4 else 5 if lvl < 10 else 6,
+			known_at=lambda lvl: max(0, lvl + 1),
+			slots_at=lambda lvl: slots_by_level.get(min(lvl, 4), {1: 2}),
+			salt=CLASS_SALT["Sorcerer"],
+			)
+		finish_learning(caster, cantrips, known)
+
+	def html_rules(caster):
+		base = super().html_rules()
+		points = getattr(caster, "metamagic_points", caster.level)
+		return base + f"<div class='npc-textbox'><p><strong>Metamagic Points:</strong> {points}</p></div>"
 
 	def __str__(caster):
-		base_str = super().__str__()
-		return base_str + f"<p><strong>Metamagic Points:</strong> {caster.metamagic_points}</p>"
+		return caster.html_rules()
 
 
 MONK_TECHNIQUE_LEVELS = [
@@ -898,6 +920,11 @@ class Monk(Spellcaster):
 		caster.level = character.Level
 		caster.casting_stat = caster.get_casting_stat()
 		caster.focus_points = caster.get_focus_points()
+		caster.granted_spells = []
+		caster.always_prepared = set()
+		caster.prepared_spells = []
+		caster.catalog_known = False
+		caster.spell_slots = {}
 
 	def get_casting_stat(caster):
 		return "WIS"
@@ -928,9 +955,9 @@ class Monk(Spellcaster):
 		return (getattr(self.character.AS, "WIS", 10) - 10) // 2
 
 	def html(caster):
-		return str(caster)
+		return caster.html_rules()
 
-	def __str__(caster):
+	def html_rules(caster):
 		features = caster.spells_known
 		symb = random.choice(["☯","☯︎","࿊","࿋","࿌","࿅", "☮",
 			"☥", "☣", "𓂀", "𖥂", "𖨢", "⧊", "⧋","⚳", "⚴", "⚸",
@@ -990,6 +1017,10 @@ class Monk(Spellcaster):
 
 		"""
 
+	def __str__(caster):
+		return caster.html_rules()
+
+
 def get_monk_focus_features(level, subclass=None):
 	features = []
 	for lvl, feats in MONK_TECHNIQUE_LEVELS:
@@ -1040,56 +1071,45 @@ class EldritchKnight(Spellcaster):
 		return caster.get_stats("slots")
 
 	def available_spells(caster):
-		"""Return all spells this character can *learn* at their current level."""
+		"""Spells this Eldritch Knight can learn, capped by slot level."""
 		table = (SPELL_LISTS.get(caster.character.subclass)
+				or SPELL_LISTS.get("Eldritch Knight")
 				or SPELL_LISTS.get("Wizard", {}))
-		# Collapse all spell levels the character has unlocked
-		unlocked = [lvl for lvl in table if lvl <= caster.level]
-		spells = [s for lvl in unlocked for s in table[lvl]]
-		for lvl in unlocked:
-			spells.extend(table[lvl])
-		return spells
+		max_slot = max_slot_from(caster.spell_slots)
+		unlocked = [lvl for lvl in table if lvl == 0 or lvl <= max_slot]
+		return unique_spells([spell for lvl in unlocked for spell in table[lvl]])
 
 	def prepare_spells(caster):
-		cantrip_pool = [s for s in caster.spells_available if int(s.level) == 0]
-		leveled_pool = [s for s in caster.spells_available if int(s.level) > 0]
-
-		caster.spells_known = random.sample(cantrip_pool, min(len(cantrip_pool), caster.get_stats("cantrips")))
-
-		slots = caster.get_stats("slots")
-		weights = {lvl: slots.get(lvl, 0) for lvl in range(1, 10)}
-		leveled_pool = list({s.name: s for s in leveled_pool}.values())
-		leveled_weighted = [(s, weights.get(int(s.level), 0)) for s in leveled_pool if weights.get(int(s.level), 0) > 0]
-
-		spells, spell_weights = zip(*leveled_weighted) if leveled_weighted else ([], [])
-
-		chosen = random.choices(spells, weights=spell_weights, k=min(len(spells), caster.get_stats("spells")))
-		unique_chosen = []
-		seen = set()
-		for s in chosen:
-			if s.name not in seen:
-				unique_chosen.append(s)
-				seen.add(s.name)
-		caster.spells_known += unique_chosen[:caster.get_stats("spells")]
+		table = (SPELL_LISTS.get(caster.character.subclass)
+				or SPELL_LISTS.get("Eldritch Knight")
+				or SPELL_LISTS.get("Wizard", {}))
+		cantrips, known = progressive_learn(
+			caster.character,
+			table,
+			caster.level,
+			cantrips_at=lambda lvl: stats_at_level(caster, lvl, "cantrips"),
+			known_at=lambda lvl: stats_at_level(caster, lvl, "spells"),
+			slots_at=lambda lvl: stats_at_level(caster, lvl, "slots"),
+			salt=CLASS_SALT["Eldritch Knight"],
+			)
+		finish_learning(caster, cantrips, known)
 
 
 	def modifier(caster):
 		return (getattr(caster.character.AS, caster.casting_stat) - 10) // 2
 
 	def html(caster):
-		return str(caster)
+		return caster.html_rules()
 
-	def __str__(caster):
-		ordered_spells = sorted(caster.spells_known, key=lambda s: int(s.level))
-		spells_names = "".join(f"<li>〖{spell.level}〗{spell.name}</li>" for spell in ordered_spells)
-		spells_html = "".join(f"""<div class="npc-textbox">{spell}</div>""" for spell in ordered_spells)
-		slots_html = "<br>".join(f"<b>Level {lvl}</b>: <i>{num}</i> " for lvl, num in caster.spell_slots.items())
+	def html_rules(caster):
+		index = html_spell_index(caster, bullet="♟️")
+		slots_html = caster.html_slots()
 		return f"""
 			<div class="npc-textbox" style="grid-column: span 1;">
 			<h1 style="font-family: 'Iglesia'; font-size:    3.1em; ">{caster.character.subclass} Spellcasting</h1>
 			<p> Eldritch Knights combine the martial mastery common to all Fighters with a careful study of magic. Their spells both complement and extend their combat skills.<br> You have learned to cast spells. </p>
 			<h2>Spell Slots:</h2> {slots_html} <br>  You regain all expended slots when you finish a Long Rest.</p>
-			<ul style="list-style-type: '♟️'; text-align: left; font-family: 'Iglesia' ">{spells_names}</ul>
+			{index}
 			<h2>Arcane Focus</h2>
 			You can use an Arcane Focus (such as a wand or scepter),  as a Spellcasting Focus for your Wizard spells.
 			</div>
@@ -1097,8 +1117,10 @@ class EldritchKnight(Spellcaster):
 				<b>Spell Save DC:</b> {caster.spell_save_dc()}<br>
 				<b>Spell Attack Bonus:</b> +{caster.spell_attack_bonus()}
 				</div>
-			{spells_html}
 			"""
+
+	def __str__(caster):
+		return caster.html_rules()
 
 class ArcaneTrickster(Spellcaster):
 	"""
@@ -1147,65 +1169,40 @@ class ArcaneTrickster(Spellcaster):
 		return trickster.get_stats("slots")
 
 	def available_spells(trickster):
-		"""Return all spells this Arcane Trickster can learn/cast at their current level."""
-		# Prefer the tailored Arcane Trickster list
+		"""Spells this Arcane Trickster can learn, capped by slot level."""
 		source = (
 			SPELL_LISTS.get("Arcane Trickster")
-			or
-			SPELL_LISTS.get("Wizard")
+			or SPELL_LISTS.get("Wizard")
+			or {}
 			)
-		if not source:
-			return []
-		# Unlock spells up to allowed level
-		lvl = getattr(trickster.character, "level", getattr(trickster.character, "Level", 1))
-		# Find max spell slot level available
-		max_slot = max(i+1 for i, n in enumerate(trickster.get_stats("slots").values()) if n > 0)
-		unlocked_levels = [k for k in source if k <= max_slot]
-		# Collate spells
-		spells = [spell for lvl in unlocked_levels for spell in source[lvl]]
-		return spells
+		max_slot = max_slot_from(trickster.get_stats("slots"))
+		unlocked = [key for key in source if key == 0 or key <= max_slot]
+		return unique_spells([spell for lvl in unlocked for spell in source[lvl]])
 
 	def prepare_spells(trickster):
 		"""
 		Select cantrips and prepared spells for Arcane Trickster.
 		Mage Hand is always known and cannot be replaced.
 		"""
-		# Cantrips - always include Mage Hand if present
-		available_cantrips = [s for s in trickster.spells_available if int(s.level) == 0]
-		mage_hand = next((c for c in available_cantrips if c.name == "Mage Hand"), None)
-		other_cantrips = [c for c in available_cantrips if c.name != "Mage Hand"]
-
-		n_cantrips = trickster.get_stats("cantrips")
-		trickster.spells_known = [mage_hand] if mage_hand else []
-		needed = n_cantrips - len(trickster.spells_known)
-
-		if needed > 0:
-			suggested = [MindSliver, MinorIllusion]
-			chosen = []
-			for rec in suggested:
-				found = next((c for c in other_cantrips if c.name == rec), None)
-				if found and found not in chosen:
-					chosen.append(found)
-			remaining = [c for c in other_cantrips if c not in chosen]
-			random.shuffle(remaining)
-			chosen += remaining
-			trickster.spells_known += chosen[:needed]
-		# Now select leveled spells (prepared)
-		n_prepared = trickster.get_stats("prepared")
-		leveled_pool = [s for s in trickster.spells_available if int(s.level) > 0]
-
-		# Optionally: Recommended spells for level 3
-		recommended = ["Charm Person", "Disguise Self", "Fog Cloud"]
-		chosen_prepared = []
-		for rec in recommended:
-			found = next((s for s in leveled_pool if s.name == rec), None)
-			if found and found not in chosen_prepared:
-				chosen_prepared.append(found)
-		# Fill remaining randomly
-		remaining = [s for s in leveled_pool if s not in chosen_prepared]
-		random.shuffle(remaining)
-		chosen_prepared += remaining[:max(0, n_prepared - len(chosen_prepared))]
-		trickster.spells_known += chosen_prepared[:n_prepared]
+		source = (
+			SPELL_LISTS.get("Arcane Trickster")
+			or SPELL_LISTS.get("Wizard")
+			or {}
+			)
+		always = [MageHand] if getattr(trickster.character, "level", 1) >= 3 else []
+		cantrips, known = progressive_learn(
+			trickster.character,
+			source,
+			trickster.character.level,
+			cantrips_at=lambda lvl: stats_at_level(trickster, lvl, "cantrips"),
+			known_at=lambda lvl: stats_at_level(trickster, lvl, "prepared"),
+			slots_at=lambda lvl: stats_at_level(trickster, lvl, "slots"),
+			salt=CLASS_SALT["Arcane Trickster"],
+			always=always,
+			)
+		finish_learning(trickster, cantrips, known)
+		if getattr(trickster.character, "level", 1) >= 3:
+			grant_spell(trickster.character, MageHand)
 
 
 	def modifier(trickster):
@@ -1213,12 +1210,10 @@ class ArcaneTrickster(Spellcaster):
 		return (int_val - 10) // 2
 
 	def html(trickster):
-		return str(trickster)
+		return trickster.html_rules()
 
-	def __str__(trickster):
-		ordered_spells = sorted(trickster.spells_known, key=lambda s: int(s.level))
-		spells_names = "".join(f"<li>〖{spell.level}〗{spell.name}</li>" for spell in ordered_spells)
-		spells_html = "".join(f"""<div class="npc-textbox">{spell}</div>""" for spell in ordered_spells)
+	def html_rules(trickster):
+		index = html_spell_index(trickster, bullet="🎩")
 		slots = trickster.get_stats("slots")
 		slots_html = "<br>".join(f"<b>Level {lvl}</b>: <i>{num}</i> " for lvl, num in slots.items() if num > 0)
 		return f"""
@@ -1228,7 +1223,7 @@ class ArcaneTrickster(Spellcaster):
 				</div>
 			<div class="npc-textbox" style="grid-column: span 1;">
 				<h2>Spell Slots:</h2> {slots_html} <br>  You regain all expended slots when you finish a Long Rest.
-				<ul style="list-style-type: '🎩'; text-align: left; font-family: 'Iglesia';">{spells_names}</ul>
+				{index}
 				<h2>Arcane Focus</h2>
 				You can use an Arcane Focus (such as a wand or scepter), as a Spellcasting Focus for your Wizard spells.
 				</div>
@@ -1238,8 +1233,10 @@ class ArcaneTrickster(Spellcaster):
 			<div class="npc-textbox" style="margin-bottom: 1em;">
 				<h2 style="font-size:    1.35em;">Spell Attack Bonus:</h2> +{trickster.spell_attack_bonus()}
 				</div>
-			{spells_html}
 			"""
+
+	def __str__(trickster):
+		return trickster.html_rules()
 
 
 # Warlock spellcasting progression for 2024 PHB
@@ -1266,12 +1263,90 @@ WARLOCK_SPELLCASTING_TABLE = {
 		20: {"cantrips": 4, "prepared": 15, "slots": (4,),   "slot_level": 5},
 		}
 
+def genie_kind(character):
+	kind = getattr(character, "genie_kind", None)
+	if kind:
+		return kind
+	rng = caster_rng(character, 0x6E1)
+	kind = rng.choice(["Dao", "Djinni", "Efreeti", "Marid"])
+	character.genie_kind = kind
+	return kind
+
+
+def warlock_patron_spells(caster):
+	"""Always-prepared patron spells. Grows with level; never reshuffles."""
+	subclass = caster.character.subclass
+	level = caster.level
+	spells = []
+	if subclass == "Celestial":
+		if level >= 3: spells += [Aid, CureWounds, GuidingBolt, LesserRestoration, Light, SacredFlame]
+		if level >= 5: spells += [Daylight, Revivify]
+		if level >= 7: spells += [GuardianFaith, WallofFire]
+		if level >= 9: spells += [GreaterRestoration, SummonCelestial]
+	elif subclass == "Fiend":
+		if level >= 3: spells += [BurningHands, Command, ScorchingRay, Suggestion]
+		if level >= 5: spells += [Fireball, StinkingCloud]
+		if level >= 7: spells += [FireShield, WallofFire]
+		if level >= 9: spells += [Geas, InsectPlague]
+	elif subclass == "Great Old One":
+		if level >= 3: spells += [DetectThoughts, DissonantWhispers, PhantasmalForce, HideousLaughter]
+		if level >= 5: spells += [Clairvoyance, HungerHadar]
+		if level >= 7: spells += [Confusion, SummonAberration]
+		if level >= 9: spells += [ModifyMemory, Telekinesis]
+		if level >= 10: spells += [Hex]
+	elif subclass == "Genie":
+		if level >= 1: spells += [DetectEvilandGood]
+		if level >= 3: spells += [PhantasmalForce]
+		if level >= 5: spells += [CreateFoodWater]
+		if level >= 7: spells += [PhantasmalKiller]
+		if level >= 9: spells += [Creation]
+		if level >= 17: spells += [Wish]
+		patron = genie_kind(caster.character)
+		if patron == "Dao":
+			if level >= 1: spells += [Sanctuary]
+			if level >= 3: spells += [SpikeGrowth]
+			if level >= 5: spells += [MeldIntoStone]
+			if level >= 7: spells += [StoneShape]
+			if level >= 9: spells += [WallStone]
+		elif patron == "Djinni":
+			if level >= 1: spells += [Thunderwave]
+			if level >= 3: spells += [GustOfWind]
+			if level >= 5: spells += [WindWall]
+			if level >= 7: spells += [GreaterInvisibility]
+			if level >= 9: spells += [Seeming]
+		elif patron == "Efreeti":
+			if level >= 1: spells += [BurningHands]
+			if level >= 3: spells += [ScorchingRay]
+			if level >= 5: spells += [Fireball]
+			if level >= 7: spells += [FireShield]
+			if level >= 9: spells += [FlameStrike]
+		elif patron == "Marid":
+			if level >= 1: spells += [FogCloud]
+			if level >= 3: spells += [Blur]
+			if level >= 5: spells += [SleetStorm]
+			if level >= 7: spells += [ControlWater]
+			if level >= 9: spells += [ConeofCold]
+	elif subclass == "Archfey":
+		if level >= 3: spells += [CalmEmotions, FaerieFire, MistyStep, PhantasmalForce, Sleep]
+		if level >= 5: spells += [Blink, PlantGrowth]
+		if level >= 7: spells += [DominateBeast, GreaterInvisibility]
+		if level >= 9: spells += [DominatePerson, Seeming]
+	if level >= 9:
+		spells += [ContactOtherPlane]
+	return unique_spells(spells)
+
+
 class Warlock(Spellcaster):
 	def __init__(caster, character,known=None):
 		if known is None:     known = []
 		caster.class_name     = "Warlock"
 		caster.character     = character
 		caster.level         = character.level
+		caster.granted_spells = []
+		caster.always_prepared = set()
+		caster.prepared_spells = []
+		caster.catalog_known = True
+		caster.mystic_arcanum = []
 		caster.spell_slots     = caster.get_spell_slots()
 		caster.spells_available = caster.available_spells()
 		caster.spells_known = known
@@ -1308,103 +1383,44 @@ class Warlock(Spellcaster):
 		return spells
 
 	def prepare_spells(caster):
-		# 1) Pact‐spells
-		n = caster.get_stats("prepared")
-		# Warlocks can change prepared spells on level-up/long rest
-		available = caster.available_spells()
-		# Random for demo; in-app, let user select!
-		chosen = random.sample(available, min(n, len(available)))
-
-		# 2) Cantrips
-		cantrip_pool = [s for s in available if int(s.level) == 0]
-		cantrips = random.sample(cantrip_pool, min(len(cantrip_pool), caster.get_stats("cantrips")))
-
-		caster.spells_known = cantrips + [s for s in chosen if int(s.level) > 0]
-		if caster.character.subclass == "Celestial":
-			if caster.level >= 3: caster.spells_known += [Aid, CureWounds,    GuidingBolt, LesserRestoration, Light, SacredFlame]
-			if caster.level >= 5: caster.spells_known += [Daylight, Revivify]
-			if caster.level >= 7: caster.spells_known += [GuardianFaith, WallofFire]
-			if caster.level >= 9: caster.spells_known += [GreaterRestoration, SummonCelestial]
-		if caster.character.subclass == "Fiend":
-			if caster.level >= 3: caster.spells_known += [BurningHands,    Command,    ScorchingRay,    Suggestion]
-			if caster.level >= 5: caster.spells_known += [Fireball, StinkingCloud]
-			if caster.level >= 7: caster.spells_known += [FireShield, WallofFire]
-			if caster.level >= 9: caster.spells_known += [Geas,    InsectPlague]
-		if caster.character.subclass == "Great Old One":
-			if caster.level >= 3: caster.spells_known += [DetectThoughts,    DissonantWhispers,    PhantasmalForce,    HideousLaughter]
-			if caster.level >= 5: caster.spells_known += [Clairvoyance, HungerHadar]
-			if caster.level >= 7: caster.spells_known += [Confusion,    SummonAberration]
-			if caster.level >= 10: caster.spells_known += [Hex]
-			if caster.level >= 9: caster.spells_known += [ModifyMemory,    Telekinesis]
-		if caster.character.subclass == "Genie":
-			if caster.level >= 1: caster.spells_known += [DetectEvilandGood]
-			if caster.level >= 3: caster.spells_known += [PhantasmalForce]
-			if caster.level >= 5: caster.spells_known += [CreateFoodWater]
-			if caster.level >= 7: caster.spells_known += [PhantasmalKiller]
-			if caster.level >= 9: caster.spells_known += [Creation]
-			if caster.level >= 17: caster.spells_known += [Wish]
-			random.seed(caster.character.seed)
-			patron = random.choice([
-				"Dao", "Djinni", "Efreeti", "Marid"
-				])
-			if patron == "Dao":
-				if caster.level >= 1: caster.spells_known += [sanctuary]
-				if caster.level >= 3: caster.spells_known += [SpikeGrowth]
-				if caster.level >= 5: caster.spells_known += [MeldIntoStone]
-				if caster.level >= 7: caster.spells_known += [StoneShape]
-				if caster.level >= 9: caster.spells_known += [WallStone]
-			if patron == "Djinni":
-				if caster.level >= 1: caster.spells_known += [Thunderwave]
-				if caster.level >= 3: caster.spells_known += [GustOfWind]
-				if caster.level >= 5: caster.spells_known += [WindWall]
-				if caster.level >= 7: caster.spells_known += [GreaterInvisibility]
-				if caster.level >= 9: caster.spells_known += [Seeming]
-			if patron == "Efreeti":
-				if caster.level >= 1: caster.spells_known += [BurningHands]
-				if caster.level >= 3: caster.spells_known += [ScorchingRay]
-				if caster.level >= 5: caster.spells_known += [Fireball]
-				if caster.level >= 7: caster.spells_known += [FireShield]
-				if caster.level >= 9: caster.spells_known += [FlameStrike]
-			if patron == "Marid":
-				if caster.level >= 1: caster.spells_known += [FogCloud]
-				if caster.level >= 3: caster.spells_known += [Blur]
-				if caster.level >= 5: caster.spells_known += [SleetStorm]
-				if caster.level >= 7: caster.spells_known += [ControlWater]
-				if caster.level >= 9: caster.spells_known += [ConeofCold]
-		if caster.character.subclass == "Archfey":
-			if caster.level >= 3: caster.spells_known += [CalmEmotions, FaerieFire, MistyStep, PhantasmalForce, Sleep]
-			if caster.level >= 5: caster.spells_known += [Blink, PlantGrowth]
-			if caster.level >= 7: caster.spells_known += [DominateBeast, GreaterInvisibility]
-			if caster.level >= 9: caster.spells_known += [DominatePerson,    Seeming]
-		if caster.level >= 9: caster.spells_known += [ContactOtherPlane]
-
-
-		# 3) Mystic Arcanum — one per slot-level at these thresholds:
+		table = SPELL_LISTS.get("Warlock", {})
+		cantrips, known = progressive_learn(
+			caster.character,
+			table,
+			caster.level,
+			cantrips_at=lambda lvl: stats_at_level(caster, lvl, "cantrips"),
+			known_at=lambda lvl: stats_at_level(caster, lvl, "prepared"),
+			slots_at=lambda lvl: stats_at_level(caster, lvl, "slots"),
+			salt=CLASS_SALT["Warlock"],
+			)
+		finish_learning(caster, cantrips, known)
+		for spell in warlock_patron_spells(caster):
+			grant_spell(caster.character, spell)
+		# Mystic Arcanum — one per slot-level, stable as the warlock levels
 		caster.mystic_arcanum = []
 		arcanum_requirements = {6: 11, 7: 13, 8: 15, 9: 17}
-		warlock_table = SPELL_LISTS.get(caster.character.char_class, {})
-		for lvl, req_level in arcanum_requirements.items():
+		rng = caster_rng(caster.character, 0xA0C ^ CLASS_SALT["Warlock"])
+		already = {spell_key(spell) for spell in catalog_spells(caster)}
+		for spell_lvl, req_level in arcanum_requirements.items():
 			if caster.level >= req_level:
-				pool = warlock_table.get(lvl, [])
-				if pool:
-					caster.mystic_arcanum.append(random.choice(pool))
+				pool = table.get(spell_lvl, [])
+				added = pick_new(pool, 1, rng, already)
+				for spell in added:
+					caster.mystic_arcanum.append(spell)
+					grant_spell(caster.character, spell)
+					already.add(spell_key(spell))
 
 	def modifier(caster):
 		# CHA-based, so use character abilities
 		return (getattr(caster.character.AS, caster.casting_stat) - 10) // 2
 
 	def html(caster):
-		# simply delegate to __str__, which you’ve already written
-		return str(caster)
+		return caster.html_rules()
 
-	def __str__(caster):
-		cantrips = [s for s in caster.spells_known if int(s.level) == 0]
-		leveled = [s for s in caster.spells_known if int(s.level) > 0]
+	def html_rules(caster):
 		n_prep = caster.get_stats("prepared")
 		arcanums   = getattr(caster, "mystic_arcanum", [])
-
-		spell_list = "".join(f"<li>【{s.level}】{s.name}</li>" for s in cantrips + leveled)
-		spells_html = "".join(f"""<div class="npc-textbox">{s}</div>""" for s in cantrips + leveled)
+		index = html_spell_index(caster, bullet="🔮")
 
 		slots = caster.get_stats("slots")
 		slot_level = caster.get_stats("slot_level")
@@ -1421,7 +1437,7 @@ class Warlock(Spellcaster):
 		slot_str += "</h2>"
 
 		if arcanums:
-			lis = "".join(f"<li>【{s.level}】{s.name}</li>" for s in arcanums)
+			lis = "".join(f"<li>{spell_mark(s)}</li>" for s in arcanums)
 			arcanum = f"""
 				<div class="npc-textbox" style="grid-column: span 1;">
 					<h2 style="font-family: 'Iglesia'; font-size: 2.1em;">Mystic Arcanum</h2>
@@ -1455,16 +1471,16 @@ class Warlock(Spellcaster):
 		<div class="npc-textbox" style="grid-column: span 1;">
 			<h3 style="font-family: 'Iglesia'; font-size: 2.1em;">Prepared Spells</h3>
 			You prepare {n_prep} warlock spells at the end of each long rest. Each must be of a level you can cast.<br>
-			<ul style="list-style-type: '🔮'; text-align: left; font-family: 'Iglesia'">
-				{spell_list}
-			</ul>
+			{index}
 			<h3 style="font-family: 'Iglesia'; font-size: 2.1em;">Cantrips</h3>
 			You always know {caster.get_stats("cantrips")} cantrips from the warlock list.<br>
 		</div>
 
 		{arcanum}
-		{spells_html}
 		"""
+
+	def __str__(caster):
+		return caster.html_rules()
 
 # Factory to get the appropriate class
 def spellcaster(character):

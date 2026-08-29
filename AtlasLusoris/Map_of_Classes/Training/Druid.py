@@ -20,8 +20,28 @@ class Druid(Progression):
 		if level >= 1:
 
 			if random.choice([True,False]):
+				from AtlasLusoris.Compass_of_Learned_Spells import (
+					caster_rng, grant_spell, pick_new, spell_key, spell_mark,
+					)
+				from AtlasLusoris.Grimoire_of_Spellcasters import SPELL_LISTS
+				already = set()
+				caster = getattr(character, "spellcaster", None)
+				if caster is not None:
+					already = {spell_key(spell) for spell in getattr(caster, "spells_known", []) or []}
+				extra = pick_new(
+					SPELL_LISTS.get("Druid", {}).get(0, []),
+					1,
+					caster_rng(character, 0xD01),
+					already,
+					)
+				extra_line = ""
+				for spell in extra:
+					grant_spell(character, spell)
+					if caster is not None and getattr(caster, "spells_known", None) is not None:
+						caster.spells_known.append(spell)
+					extra_line = f" Extra cantrip: {spell_mark(spell)}. See Spells."
 				feats.append(Feature("Primal Order: Magician",
-					"""You learnt one extra cantrip.
+					f"""You learnt one extra cantrip.{extra_line}
 					Your Wisdom modifier (min +1) is added to Arcana or Nature checks.""",
 					"Class: Druid"))
 				character.Primal_Order = "Magician"

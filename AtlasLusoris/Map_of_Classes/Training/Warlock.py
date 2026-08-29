@@ -217,10 +217,8 @@ class Warlock(Progression):
 					""",
 					"Class: Warlock"))
 			if subclass == "Genie":
-				random.seed(character.seed)
-				patron = random.choice([
-					"Dao", "Djinni", "Efreeti", "Marid"
-					])
+				from AtlasLusoris.Grimoire_of_Spellcasters import genie_kind
+				patron = genie_kind(character)
 
 				features.append(Feature("Genie Patron",
 					f"""You have made a pact with one of the rarest kinds of genie, a noble {patron} genie. Such entities rule vast fiefs on the Elemental Planes and have great influence over lesser genies and elemental creatures. Noble genies are varied in their motivations, but most are arrogant and wield power that rivals that of lesser deities. They delight in turning the table on mortals, who often bind genies into servitude, and readily enter into pacts that expand their reach.
@@ -530,12 +528,13 @@ As a bonus action, you can give yourself a flying speed of 30 feet that lasts fo
 
 		if level >= 9:
 			from AtlasMagia.Lodge_of_Spells import ContactOtherPlane
+			from AtlasLusoris.Compass_of_Learned_Spells import grant_spell, spell_mark
+			grant_spell(character, ContactOtherPlane)
 			features.append(Feature("Contact Patron",
 				f"""
-In the past, you usually contacted your patron through intermediaries. Now you can communicate directly; you always have the Contact Other Plane spell prepared. With this feature, you can cast the spell without expending a spell slot to contact your patron, and you automatically succeed on the spell's saving throw.
+In the past, you usually contacted your patron through intermediaries. Now you can communicate directly; you always have {spell_mark(ContactOtherPlane)} prepared. With this feature, you can cast the spell without expending a spell slot to contact your patron, and you automatically succeed on the spell's saving throw.
 <br>
-Once you cast the spell with this feature, you can't do so in this way again until you finish a Long Rest.
-<div class="npc-textbox">{ContactOtherPlane}</div>
+Once you cast the spell with this feature, you can't do so in this way again until you finish a Long Rest. See Spells.
 				""",
 				"Class: Warlock"))
 		if level >= 10:
@@ -559,13 +558,14 @@ plus your Charisma modifier.
 					"Class: Warlock"))
 			if subclass == "Great Old One":
 				from AtlasMagia.Lodge_of_Spells import Hex
+				from AtlasLusoris.Compass_of_Learned_Spells import grant_spell, spell_mark
+				grant_spell(character, Hex)
 				features.append(Feature("Eldritch Hex",
 					f"""
 Your alien patron {patron} grants you a powerful curse.
-You always have the Hex spell prepared. When you cast Hex
+You always have {spell_mark(Hex)} prepared. When you cast Hex
 and choose an ability, the target also has Disadvantage on
-saving throws of the chosen ability for the duration of the spell.
-<div class="npc-textbox">{Hex}</div>
+saving throws of the chosen ability for the duration of the spell. See Spells.
 
 """,
 					"Class: Warlock"))

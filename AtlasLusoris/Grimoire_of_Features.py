@@ -661,18 +661,10 @@ def Fighting_Styles(char=None):
 		}
 	# Only Rangers get access to Druidic Warrior:
 	if char and "Ranger" in char:
-		from AtlasLusoris.Grimoire_of_Spellcasters import SPELL_LISTS
-		# pick two distinct druid cantrips:
-		druid_cantrips = SPELL_LISTS["Druid"][0]
-		chosen = random.sample(druid_cantrips, k=2)
-
-		# render them as HTML blocks:
-		cantrip_html = "".join(f"<div class='npc-textbox'>{c}</div>" for c in chosen)
-
 		styles["Druidic Warrior"] = (
 			"You learn two cantrips of your choice from the druid spell list. "
-			"They count as Ranger spells for you, and Wisdom is your spellcasting ability for them."
-			+ cantrip_html
+			"They count as Ranger spells for you, and Wisdom is your spellcasting ability for them. "
+			"See Spells at the end of the sheet."
 			)
 		if char.level >= 18: styles.pop("Blind Fighting", None)
 	return styles
@@ -713,10 +705,25 @@ def add_new_fighting_style(char):
 		print("No new fighting styles to grant!")
 		return None
 	chosen = random.choice(available)
+	description = Fighting_Styles(char)[chosen]
+	if chosen == "Druidic Warrior":
+		from AtlasLusoris.Compass_of_Learned_Spells import (
+			caster_rng, grant_spell, names_line, pick_new, spell_key,
+			)
+		from AtlasLusoris.Grimoire_of_Spellcasters import SPELL_LISTS
+		already = set()
+		caster = getattr(char, "spellcaster", None)
+		if caster is not None:
+			already = {spell_key(spell) for spell in getattr(caster, "spells_known", []) or []}
+		picked = pick_new(SPELL_LISTS.get("Druid", {}).get(0, []), 2, caster_rng(char, 0xD11), already)
+		for spell in picked:
+			grant_spell(char, spell)
+		if picked:
+			description = description + f" Learned: {names_line(picked)}."
 	feat = Feat(
 		name=chosen,
 		apply=lambda c: None,  # No mutation needed, pure feature
-		description=Fighting_Styles(char)[chosen],
+		description=description,
 		source="Fighting Style"
 	)
 	# Add to features list
@@ -938,25 +945,27 @@ def InvAgonizingBlast():
 
 def InvArmorOfShadows():
 	from AtlasMagia.Lodge_of_Spells import MageArmor
+	from AtlasLusoris.Compass_of_Learned_Spells import grant_spell, spell_mark
 	return Invocation(
 		name="Armor of Shadows",
 		level=2,
-		description= f"""
-			You can cast Mage Armor on yourself at will, without expending a spell slot.
-			<div class="npc-textbox">{MageArmor}</div>
-			""",
+		description=(
+			f"You can cast {spell_mark(MageArmor)} on yourself at will, without expending a spell slot. "
+			"See Spells."
+		),
 		condition=lambda c: "Warlock" in c.char_class,
-		apply=None
+		apply=lambda c: grant_spell(c, MageArmor),
 	)
 
 def InvAscendantStep():
 	from AtlasMagia.Lodge_of_Spells import Levitate
+	from AtlasLusoris.Compass_of_Learned_Spells import grant_spell, spell_mark
 	return Invocation(
 		name="Ascendant Step",
 		level=5,
-		description=f"""You can cast Levitate on yourself at will, no slot. <div class="npc-textbox">{Levitate}</div>""",
+		description=f"You can cast {spell_mark(Levitate)} on yourself at will, no slot. See Spells.",
 		condition=lambda c: getattr(c, "level", 0) >= 5 and "Warlock" in c.char_class,
-		apply=lambda c: None
+		apply=lambda c: grant_spell(c, Levitate),
 	)
 
 def InvDevilsSight():
@@ -976,14 +985,15 @@ def InvDevilsSight():
 
 def InvFiendishVigor():
 	from AtlasMagia.Lodge_of_Spells import FalseLife
+	from AtlasLusoris.Compass_of_Learned_Spells import grant_spell, spell_mark
 	return Invocation(
 		name="Fiendish Vigor",
 		level=2,
-		description= f"""
-			You can cast False Life on yourself at will. Always max HP on False Life.<br> <div class="npc-textbox">{FalseLife}</div>
-			""",
+		description=(
+			f"You can cast {spell_mark(FalseLife)} on yourself at will. Always max HP on False Life. See Spells."
+		),
 		condition=lambda c: getattr(c, "level", 0) >= 2 and "Warlock" in c.char_class,
-		apply=lambda c: None
+		apply=lambda c: grant_spell(c, FalseLife),
 	)
 
 def InvEldritchMind():
@@ -1006,13 +1016,15 @@ def InvPactOfTheBlade():
 	)
 
 def InvPactOfTheChain():
+	from AtlasMagia.Lodge_of_Spells import FindFamiliar
+	from AtlasLusoris.Compass_of_Learned_Spells import grant_spell, spell_mark
 	return Invocation(
 		name="Pact of the Chain",
 		level=2,
-		description="Learn Find Familiar; cast at will; access special forms.",
+		description=f"Learn {spell_mark(FindFamiliar)}; cast at will; access special forms. See Spells.",
 		condition=lambda c: "Warlock" in c.char_class,
 		pact_required="Chain",
-		apply=lambda c: None
+		apply=lambda c: grant_spell(c, FindFamiliar),
 	)
 
 def InvPactOfTheTome():
@@ -1119,6 +1131,8 @@ def GnomishCunning():
 
 def ForestGnomeLineage():
 	def apply(char):
+		from AtlasMagia.Lodge_of_Spells import MinorIllusion, SpeakwithAnimals
+		from AtlasLusoris.Compass_of_Learned_Spells import grant_spell
 		if not hasattr(char, "cantrips"):
 			char.cantrips = []
 		if not hasattr(char, "spells_known"):
@@ -1134,22 +1148,28 @@ def ForestGnomeLineage():
 			"uses_per_day": char.proficiency_bonus,
 			"source": "Species Feature"
 		})
+		grant_spell(char, MinorIllusion)
+		grant_spell(char, SpeakwithAnimals)
 
 	return Feature(
 		name="Forest Gnome Lineage",
 		apply=apply,
-		description="You know the <b>Minor Illusion</b> cantrip. You can cast <b>Speak with Animals</b> a number of times per long rest equal to your proficiency bonus. You can cast it without a spell slot a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest. You can also use any spell slots you have to cast the spell.",
+		description="You know 【0】Minor Illusion. You can cast 【1】Speak with Animals a number of times per long rest equal to your proficiency bonus. You can cast it without a spell slot a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest. You can also use any spell slots you have to cast the spell. See Spells.",
 		source="Species Lineage"
 	)
 
 def RockGnomeLineage():
 	def apply(char):
+		from AtlasMagia.Lodge_of_Spells import Mending, Prestidigitation
+		from AtlasLusoris.Compass_of_Learned_Spells import grant_spell
 		if not hasattr(char, "cantrips"):
 			char.cantrips = []
 		char.cantrips.extend([
 			{"name": "Mending", "casting_stat": "INT", "source": "Species Feature"},
 			{"name": "Prestidigitation", "casting_stat": "INT", "source": "Species Feature"}
 		])
+		grant_spell(char, Mending)
+		grant_spell(char, Prestidigitation)
 		char.features.append(Feature(
 			name="Tinker",
 			description="You can craft tiny clockwork devices with magical effects (e.g., music box, lighter, toy).",
@@ -1159,7 +1179,7 @@ def RockGnomeLineage():
 	return Feature(
 		name="Rock Gnome Lineage",
 		apply=apply,
-		description="You know the *Mending* and *Prestidigitation* cantrips. You can create magical clockwork devices. Intelligence is your spellcasting ability.",
+		description="You know 【0】Mending and 【0】Prestidigitation. You can create magical clockwork devices. Intelligence is your spellcasting ability. See Spells.",
 		source="Species Lineage"
 	)
 
@@ -1293,14 +1313,11 @@ def HealerFeat():
 
 def MagicInitiateCleric():
 	"""
-	Origin feat: Magic Initiate (Cleric):contentReference[oaicite:21]{index=21}.  You learn two Cleric cantrips and one 1st‑level Cleric spell:contentReference[oaicite:22]{index=22}.
+	Origin feat: Magic Initiate (Cleric). Two Cleric cantrips and one 1st-level Cleric spell.
 	"""
-	def apply(char):
-		char.magic_initiate_cleric = True
-
-	return Feat(
+	feat = Feat(
 		name="Magic Initiate (Cleric)",
-		apply=apply,
+		apply=lambda char: None,
 		description=(
 			"You learn two cantrips of your choice from the Cleric spell list. "
 			"Choose one 1st‑level Cleric spell; you can cast it once without a spell slot (recharge on Long Rest). "
@@ -1309,17 +1326,28 @@ def MagicInitiateCleric():
 		source="Background Feat",
 		level=1,
 	)
+	def apply(char):
+		from AtlasLusoris.Compass_of_Learned_Spells import grant_spell, names_line, pick_magic_initiate
+		char.magic_initiate_cleric = True
+		spells = pick_magic_initiate(char, "Cleric")
+		for spell in spells:
+			grant_spell(char, spell)
+		if spells:
+			feat.description = (
+				"You learn two cantrips of your choice from the Cleric spell list "
+				"and one 1st-level Cleric spell, which you can cast once without a slot (Long Rest). "
+				f"Learned: {names_line(spells)}. See Spells."
+			)
+	feat.apply = apply
+	return feat
 
 def MagicInitiateDruid():
 	"""
-	Origin feat: Magic Initiate (Druid):contentReference[oaicite:24]{index=24}.  Similar to the Cleric version but draws spells from the Druid list:contentReference[oaicite:25]{index=25}.
+	Origin feat: Magic Initiate (Druid). Two Druid cantrips and one 1st-level Druid spell.
 	"""
-	def apply(char):
-		char.magic_initiate_druid = True
-
-	return Feat(
+	feat = Feat(
 		name="Magic Initiate (Druid)",
-		apply=apply,
+		apply=lambda char: None,
 		description=(
 			"You learn two cantrips of your choice from the Druid spell list and one 1st‑level Druid spell. "
 			"You can cast the 1st‑level spell once without a spell slot (recharge on Long Rest), and you can replace spells when you level up."
@@ -1327,17 +1355,28 @@ def MagicInitiateDruid():
 		source="Background Feat",
 		level=1,
 	)
+	def apply(char):
+		from AtlasLusoris.Compass_of_Learned_Spells import grant_spell, names_line, pick_magic_initiate
+		char.magic_initiate_druid = True
+		spells = pick_magic_initiate(char, "Druid")
+		for spell in spells:
+			grant_spell(char, spell)
+		if spells:
+			feat.description = (
+				"You learn two Druid cantrips and one 1st-level Druid spell, "
+				"which you can cast once without a slot (Long Rest). "
+				f"Learned: {names_line(spells)}. See Spells."
+			)
+	feat.apply = apply
+	return feat
 
 def MagicInitiateWizard():
 	"""
-	Origin feat: Magic Initiate (Wizard):contentReference[oaicite:27]{index=27}.  Similar to the generic Magic Initiate but pulls from the Wizard list:contentReference[oaicite:28]{index=28}.
+	Origin feat: Magic Initiate (Wizard). Two Wizard cantrips and one 1st-level Wizard spell.
 	"""
-	def apply(char):
-		char.magic_initiate_wizard = True
-
-	return Feat(
+	feat = Feat(
 		name="Magic Initiate (Wizard)",
-		apply=apply,
+		apply=lambda char: None,
 		description=(
 			"You learn two cantrips of your choice from the Wizard spell list and one 1st‑level Wizard spell. "
 			"You can cast the 1st‑level spell once without a spell slot (recharge on Long Rest), and you can replace spells when you level up."
@@ -1345,6 +1384,20 @@ def MagicInitiateWizard():
 		source="Background Feat",
 		level=1,
 	)
+	def apply(char):
+		from AtlasLusoris.Compass_of_Learned_Spells import grant_spell, names_line, pick_magic_initiate
+		char.magic_initiate_wizard = True
+		spells = pick_magic_initiate(char, "Wizard")
+		for spell in spells:
+			grant_spell(char, spell)
+		if spells:
+			feat.description = (
+				"You learn two Wizard cantrips and one 1st-level Wizard spell, "
+				"which you can cast once without a slot (Long Rest). "
+				f"Learned: {names_line(spells)}. See Spells."
+			)
+	feat.apply = apply
+	return feat
 
 def TavernBrawler():
 	"""

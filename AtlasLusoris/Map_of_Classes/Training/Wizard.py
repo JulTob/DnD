@@ -204,32 +204,28 @@ def add_spells_to_book(character, spells):
 	return added
 
 
-def pick_savant_spells(tradition, wizard_level):
-	"""Savant: two school names of level 1–2, plus one per later slot level."""
+def pick_savant_spells(tradition, wizard_level, character=None):
+	"""Savant: two school names of level 1–2, plus one per later slot level. Grows; does not reshuffle."""
+	from AtlasLusoris.Compass_of_Learned_Spells import caster_rng
 	catalog = SAVANT_NAMES.get(tradition, {})
+	traditions = list(TRADITIONS.keys())
+	salt = 0x5A1 ^ (traditions.index(tradition) if tradition in traditions else 0)
+	rng = caster_rng(character, salt) if character is not None else random
 	picks = []
-	starter = list(catalog.get(1, [])) + list(catalog.get(2, []))
-	random.shuffle(starter)
-	picks.extend(starter[:2])
-	slot_levels = []
-	if wizard_level >= 5:
-		slot_levels.append(3)
-	if wizard_level >= 7:
-		slot_levels.append(4)
-	if wizard_level >= 9:
-		slot_levels.append(5)
-	if wizard_level >= 11:
-		slot_levels.append(6)
-	if wizard_level >= 13:
-		slot_levels.append(7)
-	if wizard_level >= 15:
-		slot_levels.append(8)
-	if wizard_level >= 17:
-		slot_levels.append(9)
-	for slot_level in slot_levels:
+	if wizard_level >= 3:
+		starter = list(catalog.get(1, [])) + list(catalog.get(2, []))
+		rng.shuffle(starter)
+		picks.extend(starter[:2])
+	slot_unlocks = [
+		(5, 3), (7, 4), (9, 5), (11, 6), (13, 7), (15, 8), (17, 9),
+		]
+	for req_level, slot_level in slot_unlocks:
+		if wizard_level < req_level:
+			continue
 		options = [name for name in catalog.get(slot_level, []) if name not in picks]
+		rng.shuffle(options)
 		if options:
-			picks.append(random.choice(options))
+			picks.append(options[0])
 	index = wizard_spell_index()
 	return [index[name] for name in picks if name in index], picks
 
@@ -393,7 +389,7 @@ class Wizard(Progression):
 
 	def _tradition_features(self, character, tradition, lore, sought_name, level, int_bonus):
 		school = lore["school"]
-		added_spells, pick_names = pick_savant_spells(tradition, level)
+		added_spells, pick_names = pick_savant_spells(tradition, level, character)
 		written = add_spells_to_book(character, added_spells)
 		written_line = ", ".join(written or pick_names[:2]) or f"two {school} spells"
 		savant = wizard_feature(f"{school} Savant", f"""
@@ -422,6 +418,9 @@ class Wizard(Progression):
 				]
 		if tradition == "Illusionist":
 			add_spells_to_book(character, find_spells(["Minor Illusion"]))
+			from AtlasLusoris.Compass_of_Learned_Spells import grant_spell
+			for spell in find_spells(["Minor Illusion"]):
+				grant_spell(character, spell)
 			return [
 				wizard_feature("Namer of Seeming", f"""
 					The named is not the thing. You hunt names of shadow,
@@ -524,6 +523,9 @@ class Wizard(Progression):
 				""", 6)]
 		if tradition == "Illusionist":
 			add_spells_to_book(character, find_spells(["Summon Beast", "Summon Fey"]))
+			from AtlasLusoris.Compass_of_Learned_Spells import grant_spell
+			for spell in find_spells(["Summon Beast", "Summon Fey"]):
+				grant_spell(character, spell)
 			return [wizard_feature("Phantasmal Creatures", """
 				You always have <i>Summon Beast</i> and <i>Summon Fey</i>
 				prepared. Once per Long Rest you can cast one of them
@@ -536,6 +538,9 @@ class Wizard(Progression):
 				""", 6)]
 		if tradition == "Necromancer":
 			add_spells_to_book(character, find_spells(["Animate Dead"]))
+			from AtlasLusoris.Compass_of_Learned_Spells import grant_spell
+			for spell in find_spells(["Animate Dead"]):
+				grant_spell(character, spell)
 			thrall_hp = level
 			return [wizard_feature("Undead Thralls", f"""
 				You always have <i>Animate Dead</i> prepared. When you cast
@@ -609,6 +614,9 @@ class Wizard(Progression):
 				finish a Long Rest.
 				""", 10)]
 		add_spells_to_book(character, find_spells(["Counterspell", "Dispel Magic"]))
+		from AtlasLusoris.Compass_of_Learned_Spells import grant_spell
+		for spell in find_spells(["Counterspell", "Dispel Magic"]):
+			grant_spell(character, spell)
 		return [wizard_feature("Spell Breaker", """
 			You always have <i>Counterspell</i> and <i>Dispel Magic</i>
 			prepared. You can cast Dispel Magic as a Bonus Action, and you

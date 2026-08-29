@@ -74,6 +74,8 @@ class Rogue(Progression):
 					]
 			if character.subclass == "Arcane Trickster":
 				from AtlasMagia.Lodge_of_Spells import MageHand
+				from AtlasLusoris.Compass_of_Learned_Spells import grant_spell, spell_mark
+				grant_spell(character, MageHand)
 				feats.append(Feature(
 					"Arcane Trickster", 3,
 					f"""
@@ -84,17 +86,17 @@ class Rogue(Progression):
 					"""
 					))
 				feats.append(Feature(
-					"Mage Hand Legerdemain", 3,
+					"Mage Hand Legerdemain",
 					f"""
-					You know the <i>Mage Hand</i> cantrip. <br>
+					You know {spell_mark(MageHand)}. <br>
 					When you cast Mage Hand, you can cast it as a
 					<i>Bonus Action</i>,
 					 and you can make the spectral hand Invisible.
 					 You can control the hand as a Bonus Action,
 					 and through it, you can make
-					 <i>Dexterity (Sleight of Hand)</i> checks.
-					 <div class="npc-textbox">{MageHand}</div>
-					"""
+					 <i>Dexterity (Sleight of Hand)</i> checks. See Spells.
+					""",
+					level=3,
 					))
 
 			if character.subclass == "Assassin":

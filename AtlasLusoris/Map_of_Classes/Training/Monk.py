@@ -274,6 +274,9 @@ class Shadow(Way):
 		# Level 3 features
 		if level >= 3:
 			from AtlasMagia.Lodge_of_Spells import Darkness, MinorIllusion
+			from AtlasLusoris.Compass_of_Learned_Spells import grant_spell, spell_mark
+			grant_spell(character, Darkness)
+			grant_spell(character, MinorIllusion)
 			feats.append(Feature("Warrior of Shadow",
 				"""
 				Warriors of Shadow practice stealth and subterfuge, harnessing the power of the Shadowfell. They are at home in darkness, able to draw gloom around themselves to hide, leap from shadow to shadow, and take on a wraithlike form.
@@ -281,13 +284,12 @@ class Shadow(Way):
 
 			feats.append(Feature("Shadow Arts: Darkness. ",
 				f"""
-				You can expend 1 Focus Point to cast the Darkness spell
+				You can expend 1 Focus Point to cast {spell_mark(Darkness)}
 				without spell components. You can see within the spell's
 				area when you cast it with this feature. While the spell
 				persists, you can move its area of Darkness to a space
 				within 60 feet of yourself at the start of each of your
-				turns.
-				<div class="npc-textbox">{Darkness}</div>
+				turns. See Spells.
 				"""))
 			feats.append(Feature("Shadow Arts: Darkvision. ",
 				"""
@@ -296,9 +298,8 @@ class Shadow(Way):
 				"""))
 			feats.append(Feature("Shadow Arts: Shadowy Figments. ",
 				f"""
-				You know the Minor Illusion spell.
-				Wisdom is your spellcasting ability for it.
-				<div class="npc-textbox">{MinorIllusion}</div>
+				You know {spell_mark(MinorIllusion)}.
+				Wisdom is your spellcasting ability for it. See Spells.
 				"""))
 
 		# Level 6 features
@@ -370,6 +371,8 @@ class Elements(Way):
 		# Level 3 features
 		if level >= 3:
 			from AtlasMagia.Lodge_of_Spells import Elementalism
+			from AtlasLusoris.Compass_of_Learned_Spells import grant_spell, spell_mark
+			grant_spell(character, Elementalism)
 			feats.append(Feature("Warrior of the Elements",
 				"""
 				Warriors of the Elements tap into the power of the
@@ -388,8 +391,7 @@ class Elements(Way):
 				"""))
 			feats.append(Feature("Manipulate Elements",
 				f"""
-				You know the Elementalism spell. Wisdom is your spellcasting ability for it.
-				<div class="npc-textbox">{Elementalism}</div>
+				You know {spell_mark(Elementalism)}. Wisdom is your spellcasting ability for it. See Spells.
 				"""))
 		# Level 6 features
 		if level >= 6:
