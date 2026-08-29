@@ -4,7 +4,15 @@ from __future__ import annotations
 from urllib.parse import parse_qs, quote, quote_plus, unquote, unquote_plus
 from typing import Any
 
-CHARACTER_URL_KEYS = ("species", "char_class", "background", "level", "gender", "seed")
+CHARACTER_URL_KEYS = (
+    "species",
+    "char_class",
+    "specialization",
+    "background",
+    "level",
+    "gender",
+    "seed",
+)
 PATH_NULL_MARKERS = {"", "_", "random", "none", "null"}
 
 
@@ -50,7 +58,7 @@ def _path_segment(value: Any, *, fallback: str = "random") -> str:
 def parse_character_params_from_query(search: str | None) -> dict[str, Any] | None:
     """
     Parse URL query string into character init args. Returns None if no seed.
-    Keys: species, char_class, background, level, gender, seed.
+    Keys: species, char_class, specialization, background, level, gender, seed.
     """
     if not search or not search.strip().lstrip("?").strip():
         return None
@@ -66,7 +74,7 @@ def parse_character_params_from_query(search: str | None) -> dict[str, Any] | No
     if seed is None:
         return None
     out: dict[str, Any] = {"seed": seed}
-    for key in ("species", "char_class", "background", "gender"):
+    for key in ("species", "char_class", "specialization", "background", "gender"):
         if key in parsed and parsed[key]:
             val = parsed[key][0] if isinstance(parsed[key], list) else parsed[key]
             out[key] = _normalize_dimension(val)
@@ -80,7 +88,9 @@ def parse_character_params_from_query(search: str | None) -> dict[str, Any] | No
 def parse_character_params_from_path(pathname: str | None) -> dict[str, Any] | None:
     """
     Parse path formats:
-      New canonical format:
+      Canonical (with specialization):
+        /character/<level>/<species>/<background>/<char_class>/<specialization>/<gender>/<seed>
+      Legacy (no specialization):
         /character/<level>/<species>/<background>/<char_class>/<gender>/<seed>
       Legacy Flask format:
         /character/<species>/<char_class>/<background>/<level>/<gender>/<seed>
@@ -92,11 +102,30 @@ def parse_character_params_from_path(pathname: str | None) -> dict[str, Any] | N
         char_idx = parts.index("character")
     except ValueError:
         return None
-    if len(parts) < char_idx + 7:
+    tail = parts[char_idx + 1 :]
+    if len(tail) < 6:
         return None
-    seg1, seg2, seg3, seg4, seg5, seg6 = parts[char_idx + 1:char_idx + 7]
 
-    # New canonical format: level/species/background/class/gender/seed
+    # Canonical with specialization (7 segments after character/)
+    if len(tail) >= 7:
+        first_as_level = _normalize_seed(unquote(tail[0]))
+        if first_as_level is not None:
+            seed = _normalize_seed(unquote(tail[6]))
+            if seed is None:
+                return None
+            return {
+                "level": _normalize_level(first_as_level, default=1),
+                "species": _normalize_path_dimension(tail[1]),
+                "background": _normalize_path_dimension(tail[2]),
+                "char_class": _normalize_path_dimension(tail[3]),
+                "specialization": _normalize_path_dimension(tail[4]),
+                "gender": _normalize_path_dimension(tail[5]),
+                "seed": seed,
+            }
+
+    seg1, seg2, seg3, seg4, seg5, seg6 = tail[:6]
+
+    # Legacy no-specialization: level/species/background/class/gender/seed
     first_as_level = _normalize_seed(unquote(seg1))
     if first_as_level is not None:
         seed = _normalize_seed(unquote(seg6))
@@ -111,7 +140,7 @@ def parse_character_params_from_path(pathname: str | None) -> dict[str, Any] | N
             "seed": seed,
         }
 
-    # Legacy format: species/class/background/level/gender/seed
+    # Legacy Flask: species/class/background/level/gender/seed
     seed = _normalize_seed(unquote(seg6))
     if seed is None:
         return None
@@ -128,9 +157,9 @@ def parse_character_params_from_path(pathname: str | None) -> dict[str, Any] | N
 def parse_character_params_from_hash(hash_value: str | None) -> dict[str, Any] | None:
     """
     Parse compact hash format:
-      #/<level>/<species>/<background>/<char_class>/<gender>/<seed>
-    Also accepts optional "character" prefix in hash:
-      #/character/<level>/<species>/<background>/<char_class>/<gender>/<seed>
+      #/<level>/<species>/<background>/<char_class>/<specialization>/<gender>/<seed>
+      #/<level>/<species>/<background>/<char_class>/<gender>/<seed>   (legacy)
+    Also accepts optional "character" prefix in hash.
     """
     if not hash_value:
         return None
@@ -147,6 +176,30 @@ def parse_character_params_from_hash(hash_value: str | None) -> dict[str, Any] |
         parts = parts[1:]
     if len(parts) < 6:
         return None
+
+    if len(parts) >= 7:
+        (
+            level_raw,
+            species_raw,
+            background_raw,
+            class_raw,
+            specialization_raw,
+            gender_raw,
+            seed_raw,
+        ) = parts[:7]
+        seed = _normalize_seed(unquote(seed_raw))
+        if seed is None:
+            return None
+        return {
+            "level": _normalize_level(unquote(level_raw), default=1),
+            "species": _normalize_path_dimension(species_raw),
+            "background": _normalize_path_dimension(background_raw),
+            "char_class": _normalize_path_dimension(class_raw),
+            "specialization": _normalize_path_dimension(specialization_raw),
+            "gender": _normalize_path_dimension(gender_raw),
+            "seed": seed,
+        }
+
     level_raw, species_raw, background_raw, class_raw, gender_raw, seed_raw = parts[:6]
     seed = _normalize_seed(unquote(seed_raw))
     if seed is None:
@@ -184,7 +237,7 @@ def parse_character_params_from_url(
 def character_params_to_compact(data: dict[str, Any]) -> str:
     """
     Build canonical compact format:
-      <level>/<species>/<background>/<char_class>/<gender>/<seed>
+      <level>/<species>/<background>/<char_class>/<specialization>/<gender>/<seed>
     Missing dimensions are encoded as 'random' so the format is always parseable.
     """
     seed = _normalize_seed(data.get("seed"))
@@ -194,8 +247,12 @@ def character_params_to_compact(data: dict[str, Any]) -> str:
     species = _path_segment(data.get("species"))
     background = _path_segment(data.get("background"))
     char_class = _path_segment(data.get("char_class"))
+    specialization = _path_segment(data.get("specialization"))
     gender = _path_segment(data.get("gender"))
-    return f"{level}/{species}/{background}/{char_class}/{gender}/{seed}"
+    return (
+        f"{level}/{species}/{background}/{char_class}/"
+        f"{specialization}/{gender}/{seed}"
+    )
 
 
 def character_params_to_path(data: dict[str, Any]) -> str:
@@ -209,7 +266,7 @@ def character_params_to_hash(data: dict[str, Any]) -> str:
 
 
 def character_params_to_query(data: dict[str, Any]) -> str:
-    """Build query string from params dict (species, char_class, background, level, gender, seed)."""
+    """Build query string from params dict."""
     parts = []
     for key in CHARACTER_URL_KEYS:
         val = data.get(key)

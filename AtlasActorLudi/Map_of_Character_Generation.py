@@ -34,10 +34,15 @@ class Character_Choices:
     species: tuple[str, ...]
     guilds: tuple[str, ...]
     backgrounds: tuple[str, ...]
+    specializations: dict[str, tuple[str, ...]]
 
 
 def choices() -> Character_Choices:
     """Return sorted immutable choices without presentation placeholders."""
+    from AtlasLusoris.GuildKit import (
+            Specialization_Choices,
+            )
+
     return Character_Choices(
             species=tuple(
                 sorted(
@@ -54,6 +59,16 @@ def choices() -> Character_Choices:
                     PLAYER_BACKGROUNDS
                     )
                 ),
+            specializations={
+                guild: tuple(
+                    Specialization_Choices(
+                        guild
+                        )
+                    )
+                for guild in sorted(
+                    GUILDS
+                    )
+                },
             )
 
 
@@ -118,11 +133,16 @@ def summon_player(
         species: str | None = None,
         guild: str | None = None,
         background: str | None = None,
+        specialization: str | None = None,
         level: int = 1,
         gender: str | None = None,
         seed: int | None = None,
         ) -> Character:
     """Generate one Player Character, retrying with fresh deterministic seeds."""
+    from AtlasLusoris.GuildKit import (
+            Specialization_Choices,
+            )
+
     selected_species = _validate_choice(
             "Species",
             species,
@@ -137,6 +157,18 @@ def summon_player(
             "Background",
             background,
             PLAYER_BACKGROUNDS,
+            )
+    specialization_pool = (
+        Specialization_Choices(
+            selected_guild
+            )
+        if selected_guild is not None
+        else Specialization_Choices()
+        )
+    selected_specialization = _validate_choice(
+            "Specialization",
+            specialization,
+            specialization_pool,
             )
     requested_level = max(
             1,
@@ -182,6 +214,7 @@ def summon_player(
                     species=selected_species,
                     char_class=selected_guild,
                     background=selected_background,
+                    specialization=selected_specialization,
                     level=requested_level,
                     gender=gender,
                     seed=current_seed,

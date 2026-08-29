@@ -16,7 +16,7 @@ from pathlib import Path
 from shiny import ui
 
 SCRIPT_PATH = Path(__file__).resolve().parents[1] / "app" / "static" / "js" / "shareable-links.js"
-SCRIPT_URL = "/static/js/shareable-links.js"
+SCRIPT_URL = "/static/js/shareable-links.js?v=4"
 
 
 def shareable_links_head_tags() -> list[ui.Tag]:

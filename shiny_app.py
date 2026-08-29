@@ -27,7 +27,7 @@ from shiny import App, reactive, render, ui
 # never run on placeholder shadows. Resilience lives at the summoning layer,
 # where the Minions report every failure and recovery rerolls the seed.
 from AtlasActorLudi.Map_of_Scores import Modifier
-from AtlasActorLudi.Map_of_Character_Generation import summon_player
+from AtlasActorLudi.Map_of_Character_Generation import choices, summon_player
 from AtlasAlusoris.Grimoire_of_NPC import NPC
 from AtlasAlusoris.Map_of_Archetypes import Archetype, Archetypes
 from AtlasAlusoris.Map_of_Races import Race, race_weights
@@ -70,6 +70,7 @@ def summon_character(
     species: str | None = None,
     char_class: str | None = None,
     background: str | None = None,
+    specialization: str | None = None,
     level: int = 1,
     gender: str | None = None,
     seed: int | None = None,
@@ -79,6 +80,7 @@ def summon_character(
         species=_selection_or_none(species),
         guild=_selection_or_none(char_class),
         background=_selection_or_none(background),
+        specialization=_selection_or_none(specialization),
         level=level,
         gender=_selection_or_none(gender),
         seed=seed,
@@ -214,6 +216,10 @@ def magic_chip(emoji: str, label: str, value: str, extra_class: str = "") -> ui.
         ui.div({"class": "record"}, label),
         ui.div({"class": "value"}, value),
     )
+
+
+# Decree / sheet builders still say ``stat_chip``; same helper.
+stat_chip = magic_chip
 
 
 def spellbook_prose(caster: Any) -> str:
@@ -604,8 +610,35 @@ SPECIES = sorted(species_dict.keys())
 SPECIES.insert(0, "Random")
 
 CLASSES = ["Random", *sorted(classes)]
+# Home tablet stays lean; the sheet offers the full Player catalogue.
 BACKGROUNDS = ["Random", *sorted(backgrounds)]
+_SHEET_CHOICES = choices()
+SHEET_BACKGROUNDS = ["Random", *list(_SHEET_CHOICES.backgrounds)]
+SPECIALIZATIONS_BY_GUILD = {
+    guild: ["Random", *list(specs)]
+    for guild, specs in _SHEET_CHOICES.specializations.items()
+}
 ARCHETYPES = ["Random", *sorted(Archetypes)]
+
+
+def _specialization_options(guild: str | None) -> tuple[str, ...]:
+    if not guild or guild == "Random":
+        return ("Random",)
+    return tuple(SPECIALIZATIONS_BY_GUILD.get(guild, ["Random"]))
+
+
+def _specialization_selection(
+    current: dict[str, Any] | None,
+    selected_guild: str | None,
+    available: tuple[str, ...],
+) -> str:
+    current = current or {}
+    if selected_guild != current.get("char_class"):
+        return "Random"
+    specialization = current.get("specialization")
+    if specialization in available:
+        return specialization
+    return "Random"
 
 
 home_panel = ui.div(
@@ -688,8 +721,18 @@ character_panel = ui.div(
             ui.input_select("char_sheet_species", "", SPECIES, selected="Random"),
         ),
         ui.div(
+            {"class": "character-reforge-field character-reforge-field--background"},
+            ui.input_select("char_sheet_background", "", SHEET_BACKGROUNDS, selected="Random"),
+        ),
+        ui.div(
             {"class": "character-reforge-field character-reforge-field--class"},
             ui.input_select("char_sheet_class", "", CLASSES, selected="Random"),
+            ui.input_select(
+                "char_sheet_specialization",
+                "",
+                _specialization_options(None),
+                selected="Random",
+            ),
         ),
         ui.div(
             {"class": "character-level-box"},
@@ -711,10 +754,6 @@ character_panel = ui.div(
                     aria_label="Level Up",
                 ),
             ),
-        ),
-        ui.div(
-            {"class": "character-reforge-field character-reforge-field--background"},
-            ui.input_select("char_sheet_background", "", BACKGROUNDS, selected="Random"),
         ),
         ui.div(
             {"class": "character-generate-wrap"},
@@ -892,6 +931,9 @@ def server(input, output, session):
         return {
             "species": _clean_character_param(payload.get("Species", base.get("species"))),
             "char_class": _clean_character_param(payload.get("Class", base.get("char_class"))),
+            "specialization": _clean_character_param(
+                payload.get("Specialization", base.get("specialization"))
+            ),
             "background": _clean_character_param(payload.get("Background", base.get("background"))),
             "level": level,
             "gender": _clean_character_param(payload.get("Gender", base.get("gender"))),
@@ -910,9 +952,20 @@ def server(input, output, session):
     def _apply_character_sheet_defaults(params: dict[str, Any]) -> None:
         species = params.get("species") if params.get("species") in SPECIES else "Random"
         char_class = params.get("char_class") if params.get("char_class") in CLASSES else "Random"
-        background = params.get("background") if params.get("background") in BACKGROUNDS else "Random"
+        available = _specialization_options(_selection_or_none(char_class))
+        specialization = _specialization_selection(params, _selection_or_none(char_class), available)
+        background = (
+            params.get("background")
+            if params.get("background") in SHEET_BACKGROUNDS
+            else "Random"
+        )
         ui.update_select("char_sheet_species", selected=species)
         ui.update_select("char_sheet_class", selected=char_class)
+        ui.update_select(
+            "char_sheet_specialization",
+            choices=list(available),
+            selected=specialization,
+        )
         ui.update_select("char_sheet_background", selected=background)
 
     def _push_character_url(params: dict[str, Any]) -> None:
@@ -933,6 +986,7 @@ def server(input, output, session):
             character = summon_character(
                 species=params.get("species"),
                 char_class=params.get("char_class"),
+                specialization=params.get("specialization"),
                 background=params.get("background"),
                 level=max(1, min(20, _safe_int(params.get("level"), 1))),
                 gender=params.get("gender"),
@@ -1057,6 +1111,7 @@ def server(input, output, session):
         params = {
             "species": _selection_or_none(input.char_sheet_species()),
             "char_class": _selection_or_none(input.char_sheet_class()),
+            "specialization": _selection_or_none(input.char_sheet_specialization()),
             "background": _selection_or_none(input.char_sheet_background()),
             "gender": current.get("gender"),
             "level": level,
@@ -1064,6 +1119,18 @@ def server(input, output, session):
         }
         _set_loader("show")
         _generate_character_from_params(params, show_character_page=True)
+
+    @reactive.effect
+    def _update_specialization_selector() -> None:
+        selected_guild = _selection_or_none(input.char_sheet_class())
+        available = _specialization_options(selected_guild)
+        current = character_params_state() or _character_params_from_data(character_state())
+        selected = _specialization_selection(current, selected_guild, available)
+        ui.update_select(
+            "char_sheet_specialization",
+            choices=list(available),
+            selected=selected,
+        )
 
     @reactive.effect
     @reactive.event(input.btn_gen_npc)

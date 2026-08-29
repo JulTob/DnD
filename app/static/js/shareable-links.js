@@ -13,7 +13,8 @@
 
                 function installHandler() {
                     if (typeof Shiny === 'undefined' || !Shiny.addCustomMessageHandler) return false;
-                    if (window.__characterUrlHandlerInstalled) return true;
+                    if (window.__characterUrlHandlerVersion === 4) return true;
+                    window.__characterUrlHandlerVersion = 4;
                     window.__characterUrlHandlerInstalled = true;
 
                     function setShareStatus(text, isError) {
@@ -82,8 +83,14 @@
                             value = value.slice('character/'.length);
                         }
                         var parts = value.split('/').filter(Boolean);
+                        // Canonical share form keeps seed last:
+                        //   7 parts: level/species/background/class/specialization/gender/seed
+                        //   6 parts: level/species/background/class/gender/seed
                         if (parts.length < 6) return '';
-                        return '#/' + parts.slice(0, 6).join('/');
+                        var kept = parts.length >= 7
+                            ? parts.slice(0, 7)
+                            : parts.slice(0, 6);
+                        return '#/' + kept.join('/');
                     }
 
                     function extractHashFromPath(pathname) {
@@ -103,12 +110,14 @@
                             var species = params.get('species') || 'random';
                             var background = params.get('background') || 'random';
                             var charClass = params.get('char_class') || 'random';
+                            var specialization = params.get('specialization') || 'random';
                             var gender = params.get('gender') || 'random';
                             return '#/' + [
                                 encodeURIComponent(level),
                                 encodeURIComponent(species),
                                 encodeURIComponent(background),
                                 encodeURIComponent(charClass),
+                                encodeURIComponent(specialization),
                                 encodeURIComponent(gender),
                                 encodeURIComponent(seed)
                             ].join('/');
