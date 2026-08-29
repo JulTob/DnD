@@ -67,6 +67,21 @@ boundary.
 - `AtlasLusoris/AtlasOfTraining/Map_of_Wizard_Training.py`;
 - `AlignmentKit.py` only after recording a separate claim.
 
+### Claude — bootstrap exit and beta review (joined 2026-08-29 21:10)
+
+- Replace every bytecode bootstrap with real source, prioritized by what the
+  character generator imports: `GuildKit`, the vaulted `AtlasOfGuilds` kits,
+  `AtlasOfTraining` maps, `SpeciesKit` gaps, `AlignmentKit`,
+  `AtlasAlusoris/Map_of_Races`, `AtlasEpica` Titles and Stories,
+  `AtlasInventarium/Map_of_Gear_Titles`, and the `Race_Ingredient` naming;
+- evidence order per the recovery law: session-export transcript payloads
+  first, vault `.pyc` reconstruction (disassembly-verified) second,
+  Canon-constrained rewrite last;
+- full review of the beta path (Decree 0006): generation, sheet, styles,
+  shareable links;
+- works only in worktree `sweet-mclean-44e50b`
+  (branch `Julio_Cl/dnd-genlegend-recovery-ea160e`); merges via the board.
+
 Neither lane edits the other lane's claimed files without a written handoff.
 
 ## Checkpoints
@@ -77,9 +92,13 @@ Neither lane edits the other lane's claimed files without a written handoff.
 - [x] Reconstruct Proficiency, Skills, Tools, Ability Scores, and Minion.
 - [ ] Restore Backgrounds and their registered catalogues.
 - [ ] Restore Guilds, Wizard training, Alignment, and exposed dependencies.
-- [ ] Import and compile the supported Shiny application.
-- [ ] Verify Player and NonPlayer generation.
-- [ ] Start and visually smoke-test Shiny.
+- [x] Import and compile the supported Shiny application (`shiny_app`; the
+      modular `app.main` root stays down, deferred to QST-0074 by Decree 0006).
+- [x] Verify Player generation (`summon_player(seed=42, level=1)`, Cursor,
+      2026-08-29 19:37). NonPlayer verification deferred to QST-0075.
+- [ ] Exit bytecode-bootstrap mode: real `.py` for every vaulted module on the
+      beta path (Claude lane).
+- [ ] Start and visually smoke-test Shiny (beta scope: character generator).
 - [ ] Record a coherent recovery commit.
 
 ---

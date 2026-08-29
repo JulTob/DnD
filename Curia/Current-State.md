@@ -1,10 +1,24 @@
 # Current State of the TOP Migration
 
-> Reviewed: 2026-07-23
+> Reviewed: 2026-07-23 · Recovery addendum: 2026-08-29
 
 This ledger separates the approved model from the transitional code. The
 destination is binding in `Canon/Project-Model.md`; this file records evidence,
 remaining bridges, and the next safe cuts.
+
+## ⚠️ Recovery addendum (2026-08-29)
+
+An external tool overwrote the working tree with toy versions; much of the
+later work existed only uncommitted. Recovery is coordinated in QST-0072 and
+`$S/RECOVERY-COORD.md`. Until QST-0072 closes, this ledger describes the
+**destination as it was approved**, not necessarily what is on disk: several
+modules currently run as bytecode bootstraps loading vaulted `.pyc` evidence,
+and the modular root `app.main` cannot boot (QST-0074).
+
+Decree 0006 (same day) narrows the launch: **the beta ships the character
+generator only**, served from `shiny_app.py` (QST-0073). Everything in this
+ledger about NonPlayer production remains the approved destination, deferred
+behind QST-0075.
 
 ## Landed
 
