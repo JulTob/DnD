@@ -31,8 +31,8 @@ documented in Documenta and cross-referenced from the process Canon.
 
 ## 🧭 Notes for the Agora / implementer — needs Julio's word
 - **Docstring placement.** Python: module docstring (before `from __future__`);
-  Markdown: `Status:` line under the H1. Function/class-level rubrics only when a
-  unit is under independent review.
+  Markdown: `Status:` line under the H1. (Open question for Julio: should rubrics
+  ever apply *below* file level — per function/class — or is file-level the rule?)
 - **"Second agent" mechanism.** A review/compliance subagent, or another working
   agent — never the author. Tie into `Agentia/` (a verifier envoy?) — open a
   Dialog if it needs its own charter.

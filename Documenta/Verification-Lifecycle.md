@@ -1,6 +1,6 @@
 # 🎨 The Rubrics — the verification lifecycle of every file
 
-Status: 🟡 unverified — drafted by the working agent (2026-08-29), awaiting a second agent.
+Status: 🟢 verified by an independent review agent (2026-08-29) — awaiting Julio's ⚪️ confirmation.
 
 > A *rubric* is a colored mark a scribe adds to a page to say what state it is in.
 > Here, every file carries one in its docstring. It is the project's promise that
@@ -15,7 +15,7 @@ revision (which opens a Questa). Only after a file is 🟢 may **Julio** review 
 and confirm it **⚪️**. This is the single source of truth for "is this file
 trusted?" — one agent proposes, a second agent checks, Julio confirms.
 
-## The six rubrics
+## The five rubrics
 
 | Rubric | State | Meaning | Set by |
 |--------|-------|---------|--------|
@@ -62,8 +62,7 @@ Two invariants:
 In the file's **docstring** (its own words about itself):
 
 - **Python** — the module docstring, first statement in the file (before
-  `from __future__ import …`). A public function or class under active,
-  independent review may carry its own `Status:` line in *its* docstring.
+  `from __future__ import …`).
   ```python
   """Map_of_Races — race weights and lookups.
 
@@ -94,4 +93,5 @@ the Canon (`Curia/Canon/`) and the file's own contract, then sets 🟢 or 🔴. 
 ---
 
 *Recorded in `Documenta` per Julio's instruction (2026-08-29). This lifecycle is
-itself subject to the rubrics — it is 🟡 until a second agent verifies it.*
+itself subject to the rubrics: authored 🟡, verified 🟢 by an independent agent,
+now awaiting Julio's ⚪️ confirmation.*
