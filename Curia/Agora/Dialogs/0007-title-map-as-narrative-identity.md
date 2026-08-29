@@ -24,13 +24,13 @@ hope, power, grief, discovery, and similar axes.
 
 Technical constraints from the current code:
 
-- `AtlasNomina/Map_of_Titles.py` keeps vocabulary, selector logic, title
-  grammar, duplicate checks, and random selection in the same module. The line
-  count is not itself a defect; the concern is whether each responsibility is
-  readable, maintainable, and useful.
+- `AtlasNomina/Map_of_Titles.py` is a flat, ~7,400-line function-heavy module.
+  - Pros: It works like a charm, is simple, and easy to expand and work with. 
 - `Title(lusor)` resets global random state with `random.seed(lusor.seed)`.
+  - Con: This is a breach of abstraction.
 - `Descriptor`, `Rank`, `Place`, `Artifact`, and `Origin` choose through module
   global `random`.
+  - The randomness engine should be selected when imported, to select one for each character's rng/dice
 - `Genus(lusor)` probes concrete attributes (`race`, `subrace`, `archetype`,
   `char_class`, `gender`, `alignment`) and therefore crosses abstraction
   boundaries.
@@ -94,108 +94,21 @@ themes, but it should avoid relying on protected setting names as the source of
 flavor. "Oath", "Ash", "Crown", "Void", "Mercy", "Rebellion", "Last Light"
 are usable thematic language; named lore should be deliberate and reviewed.
 
-Julio: `"Characteristic" in lusor` should be the boring expected behavior. The
-final product will use TOP tags, so "Characteristic" will eventually be a tag
-on the composed object. During testing it can be a string, list, set, dict, or
-any container-like object with meaningful `in` behavior. That is good software
-engineering because the title map consumes a stable contract instead of object
-anatomy.
-
-Julio: A long word list is not a problem by itself. Do not use line count as a
-proxy for code quality. English has many useful words, and the generator should
-use as many as it needs when the words are clean, readable, and useful. Clean
-the list by strong criteria about the value of the words and the maintainability
-of their organization, not because the list is long.
-
-Julio: For RNG, the transitional contract is sensible, but name it
-`set_random(Dice)`. The parameter name should keep the project's thinking model
-and artistry: the Character carries Dice, not an abstract RNG wire. The function
-sets the module-level random source to the provided Dice, falling back to
-Python's `random` when unset or `None`. The value of that function is isolating
-and specifying the contracted behavior while the abstraction layer migrates.
-
-Julio: For vocabulary extensions, the ideal is to use the official, already
-working TOP implementation from `JulTob/Tag_Oriented_Programming`. It was made
-for exactly this kind of layered contribution. Do not build a fake local TOP
-registry inside `Map_of_Titles`; if title words become Tag contributions, they
-should use the pinned TagKit project.
-
-Julio: The vocabulary should probably have a functional classification, because
-some pools may later serve story generation or similar systems. Think in
-reusable narrative material: Artifacts, Places, Essences or Elements, and
-Themes. Use theme to classify, not only the immediate title slot.
-
 ---
 
 ## ✅ Convergence check
 
 - [x] Every called Consul has spoken.
-- [x] First point settled: `"Characteristic" in lusor` is the selector contract.
-- [x] Second point settled: transitional random source is `set_random(Dice)`.
-- [x] Third guardrail settled: real TOP behavior uses official TagKit, not a local imitation.
-- [ ] Vocabulary structure and curation criteria still open within that guardrail.
-- [ ] Return/yield/cache strategy still open.
+- [ ] Every objection has been answered or conceded.
+- [ ] At least one concrete proposal (with code sketch) is on the table.
 
 ---
 
 ## 🕊️ Vox report
 
-Vox: Interim report on **Q-0010 — title map as narrative identity**.
+Vox: Pending. The first open point for Julio is the selector boundary:
+should `Map_of_Titles` standardize on `"Characteristic" in lusor`, with simple
+support for built-in strings and collections, before any deeper vocabulary
+refactor?
 
-**Common ground now settled:**
-
-- `Map_of_Titles` should consume the boring Python contract:
-  `"Characteristic" in lusor`.
-- In the final TOP shape, a characteristic is a tag on the composed object.
-- In tests, `lusor` may be a string, list, set, dict, or any object that
-  implements meaningful membership.
-- The title map should not inspect `race`, `subrace`, `char_class`,
-  `background`, or other concrete internals to decide whether a selector
-  applies.
-
-**Correction from Julio:**
-
-- Long vocabulary lists are not a defect by themselves. They are justified when
-  the words are useful, readable, and app-manageable. Any cleanup must use real
-  criteria: word quality, thematic value, duplication, typo risk, organization,
-  and maintainability.
-
-**RNG transition settled:**
-
-- Add a transitional `set_random(Dice)` module interface.
-- `Dice` names the character-owned randomness source and preserves the
-  project's model language.
-- Passing `None` or leaving it unset falls back to Python's `random`.
-- This is a bridge while the title map migrates toward the Character Dice /
-  `Roll(D=...)` source.
-
-**TOP guardrail settled:**
-
-- If title vocabulary becomes Tag-driven, it must use the official pinned
-  TagKit/TOP project: `github.com/JulTob/Tag_Oriented_Programming`.
-- Transitional subfunctions may organize the current title map, but they must
-  be shaped as a migration path toward TagKit contributions, not as a new local
-  TOP-like framework.
-- `Map_of_Titles` may remain a plain map while the Character root migration is
-  pending; it must not grow a parallel composition engine.
-
-**Vocabulary structure under discussion:**
-
-- Prefer reusable functional categories where they carry meaning beyond titles:
-  Artifacts, Places, Essences/Elements, and Themes.
-- Title-specific roles still exist (`Descriptor`, `Rank`, `Origin`), but they
-  should draw from functional pools rather than trap useful words inside one
-  title-only bucket.
-- This keeps title vocabulary available for later story generation without
-  forcing a new abstraction now.
-
-**Vox synthesis:**
-
-- Leading recommendation for QST-0027.1: implement direct membership
-  consumption first, with tests for strings, lists, sets, dicts, and a tiny
-  object with `__contains__`.
-- Strongest alternative: add a small `has_characteristic(lusor, characteristic)`
-  helper if raw membership proves too uneven across strings and mappings.
-
-→ Selector contract, RNG transition, and official-TagKit guardrail settled by
-Julio. Next open point: exact vocabulary structure and curation criteria.
+→ Awaiting Julio's direction before drafting a Decree or touching code.

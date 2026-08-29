@@ -1,10 +1,10 @@
-"""Map_of_Stories — temporarily loaded from vaulted bytecode (recovery 2026-08-29)."""
+"""Map_of_Titles — temporarily loaded from vaulted bytecode (recovery 2026-08-29)."""
 from __future__ import annotations
 import marshal, sys, types
 from pathlib import Path
 _VAULT = Path(__file__).resolve().parents[1] / "$S" / "vault" / "epica"
-_PYC = _VAULT / "Map_of_Stories.cpython-314.pyc"
-_body_name = "AtlasEpica._bc_Map_of_Stories"
+_PYC = _VAULT / "Map_of_Titles.cpython-314.pyc"
+_body_name = "AtlasEpica._bc_Map_of_Titles"
 if _body_name not in sys.modules:
 	body = types.ModuleType(_body_name)
 	body.__file__ = str(_PYC)

@@ -1,40 +1,4 @@
-		name: str,
-		min_level: int,
-		description,
-		chips=(),
-		):
-	return _path(
-			OPEN_HAND,
-			name=name,
-			min_level=min_level,
-			description=description,
-			chips=chips,
-			)
-
-
-def _shadow(
-		*,
-		name: str,
-		min_level: int,
-		description,
-		chips=(),
-		):
-	return _path(
-			SHADOW,
-			name=name,
-			min_level=min_level,
-			description=description,
-			chips=chips,
-			)
-
-
-def _elements(
-		*,
-		name: str,
-		min_level: int,
-		description,
-		chips=(),
-		):
-	return _path(
-			ELEMENTS,
-			name=name,
+"""Map_of_Monk_Training — temporarily loaded from vaulted bytecode (recovery 2026-08-29)."""
+from __future__ import annotations
+from AtlasLusoris.AtlasOfTraining._bytecode_mod import load_vaulted
+load_vaulted('Map_of_Monk_Training.cpython-314.pyc', globals())
