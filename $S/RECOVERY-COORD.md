@@ -81,19 +81,21 @@ When you claim or finish, append a dated line:
 - 2026-08-29 19:05 | Cursor | PROGRESS | boot path | `import shiny_app` succeeds; GuildKit + Guild kits + SpeciesKit + Background maps loaded from vaulted `.pyc` bootstraps under `$S/vault/`
 - 2026-08-29 19:05 | Cursor | NOTE | bytecode bootstraps | `AtlasLusoris/GuildKit.py`, `AtlasOfGuilds/*Kit.py` (missing ones), `SpeciesKit` gaps, `AtlasActorLudi/AtlasAlusoris/Map_of_Races.py` — **not** final source; restore real `.py` later
 - 2026-08-29 19:05 | Cursor | DONE-ish | `AtlasOfBackgrounds/__init__.py` + Maps rewritten to `tools`/`roleplay` contract from pyc; `AtlasOfFeatures/__init__.py`; `awaken_player` alias; ActorLudi circular import softened
+- 2026-08-29 19:37 | Cursor | DONE | character generation | `summon_player(seed=42, level=1)` → Gale Greystone, Orc Paladin Farmer L1; `shiny_app.summon_character` same. UI "Unable to summon" should clear after reload.
+- 2026-08-29 19:37 | Cursor | NOTE | generation restorations | `CharactersKit` Accept/Pick_Bag/Roll(dice=); gear three-tier carry; ItemKit re-export; Training maps + Titles/Stories bytecode bootstraps; Map_of_Names LastResort*; OrderKit.Resolve_Order_Features; Grimoire Char_Skills/SavingThrows call fixes
 
 ## CODEX-HANDOFF (read this first when you come back)
 
-Codex ran out of tokens ~18:50. **Cursor continued recovery** and got **`import shiny_app` green**.
+Codex ran out of tokens ~18:50. **Cursor continued recovery** and got **`import shiny_app` green** and **player summon green**.
 
 ### What Cursor did (do not blindly overwrite)
 1. Background Maps + package `__init__` + OfficialBackgroundsKit aligned to TOP `tools`/`roleplay`.
-2. **Bytecode vault** at `$S/vault/` (GuildKit, guild kits, SpeciesKit, alusoris races) — loaders read from vault so `__pycache__` compile cannot clobber evidence.
-3. SpeciesKit / GuildKit / missing Guild kits are **bootstrap `.py` → vault `.pyc`**, not reconstructed source.
-4. App may run at http://127.0.0.1:8080 — verify generation still fails in places.
+2. **Bytecode vault** at `$S/vault/` (GuildKit, guild kits, SpeciesKit, alusoris races, training, inventarium titles, epica) — loaders read from vault so `__pycache__` compile cannot clobber evidence.
+3. SpeciesKit / GuildKit / missing Guild kits / some Training+Epica maps are **bootstrap `.py` → vault `.pyc`**, not reconstructed source.
+4. App at http://127.0.0.1:8080 — **player Generate should work**; still soft-fails Race_Ingredient naming (falls back to LastResort) and may need reload for reloader to pick up modules.
 
 ### When you return
 1. Diff before editing anything under `AtlasLusoris/GuildKit.py`, `AtlasOfGuilds/`, `SpeciesKit/`.
 2. Prefer replacing bootstraps with real source (disasm / transcript), keep `$S/vault/` as evidence.
 3. Re-claim lanes in the log. Cursor will stop on request.
-4. Next risks: AlignmentKit still missing; Wizard training map; generation smoke tests; commit when Julio says.
+4. Next risks: restore `Race_Ingredient` in Map_of_Names; replace training/Titles/Stories bootstraps with source; NPC path smoke; commit when Julio says.

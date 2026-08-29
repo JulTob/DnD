@@ -94,6 +94,52 @@ def gear_stream(
 			)
 
 
+def purchase(
+		char,
+		prototype,
+		quantity=None,
+		):
+	"""Buy a fresh copy, then tell it whose it is."""
+	item = _plain_purchase(
+			char,
+			prototype,
+			quantity,
+			)
+	if item is not None:
+		personalise(
+				item,
+				char,
+				gear_stream(
+						char,
+						"material",
+						),
+				)
+	return item
+
+
+def issue(
+		char,
+		prototype,
+		quantity=None,
+		):
+	"""Grant a fresh copy, then tell it whose it is."""
+	item = _plain_issue(
+			char,
+			prototype,
+			quantity,
+			)
+	if item is not None:
+		personalise(
+				item,
+				char,
+				gear_stream(
+						char,
+						"material",
+						),
+				)
+	return item
+
+
 # ---------------------------------------------------------------------------
 # Reading training off the Character's Guild Tags
 # ---------------------------------------------------------------------------

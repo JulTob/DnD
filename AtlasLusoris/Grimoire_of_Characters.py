@@ -432,7 +432,6 @@ class Character(Character_Skeleton):
 						) or ()
 				)
 		return SavingThrows(
-			char,
 			char.AS,
 			char.proficiency_bonus,
 			profs,

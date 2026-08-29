@@ -2,7 +2,7 @@ import random
 import time
 from contextlib import contextmanager
 from collections import defaultdict, Counter
-from Minion import guardian, watcher, warden, spy, minion
+from Minion import guardian, watcher, warden, spy, minion, changeling, report_bug
 
 try:
 	import AtlasAlusoris.Map_of_NPC as NPC
@@ -23,12 +23,113 @@ MAX_DEPTH = 1
 # exactly, dice for dice, for anyone who needs old seeds to name old characters.
 METHOD_ATTEMPTS = 3
 
-# How many goes each naming method gets before NewWord moves to the next one.
-# Its own constant on purpose: how many times to *repeat a method* is a
-# different decision from how many attempts a method makes internally, and they
-# should be tunable apart. Setting this to 1 restores the pre-ladder behaviour
-# exactly, dice for dice, for anyone who needs old seeds to name old characters.
-METHOD_ATTEMPTS = 3
+LAST_RESORT_NAMES = (
+	"Ada", "Bran", "Cora", "Dain", "Edda", "Fenn", "Gale", "Hale",
+	"Ida", "Jarl", "Kesh", "Lorn", "Mira", "Nell", "Orin", "Pell",
+	"Quill", "Rook", "Sela", "Tarn", "Vale", "Wren", "Yara", "Zeph",
+	)
+
+LAST_RESORT_SURNAMES = (
+	"Ashdown", "Blackwater", "Coldiron", "Dunmore", "Eastmarch",
+	"Fairholm", "Greystone", "Hallow", "Ironvale", "Keelson",
+	"Longbarrow", "Marchwood", "Northgate", "Oakhand", "Pinefall",
+	"Redhill", "Stormcrow", "Thornbury", "Underhill", "Westwind",
+	)
+
+
+def _steady_pick(
+		lusor,
+		roster,
+		offset=0,
+		):
+	"""Pick from a roster without needing the Character's full naming path."""
+	try:
+		return lusor.Pick(
+			roster,
+			dice=lusor.Dice_Bag(
+				"Nomina.LastResort",
+				version="1",
+				),
+			)
+	except Exception as exc:
+		report_bug(
+			exc
+			)
+		from zlib import crc32
+
+		identity = str(
+			getattr(
+				lusor,
+				"seed",
+				"",
+				)
+			or getattr(
+				lusor,
+				"race",
+				"",
+				)
+			or id(
+				lusor
+				)
+			).encode(
+				"utf-8"
+				)
+		return roster[
+			(crc32(
+				identity
+				) + offset) % len(
+					roster
+					)
+			]
+
+
+def LastResortGivenName(
+		lusor,
+		i=0,
+		):
+	"""Rung three for a given name: roster only."""
+	return _steady_pick(
+		lusor,
+		LAST_RESORT_NAMES,
+		)
+
+
+def LastResortFamilyName(
+		lusor,
+		i=0,
+		):
+	"""Rung three for a family name."""
+	return _steady_pick(
+		lusor,
+		LAST_RESORT_SURNAMES,
+		offset=7,
+		)
+
+
+def LastResortName(
+		lusor,
+		):
+	"""Rung three for a whole name. Nothing here can raise."""
+	return (
+		f"{LastResortGivenName(lusor)} {LastResortFamilyName(lusor)}"
+		)
+
+
+def LastResortWord(
+		character,
+		names=None,
+		prefix=None,
+		fix=None,
+		suffix=None,
+		depth=0,
+		*,
+		dice=None,
+		):
+	"""NewWord's stand-in, carrying NewWord's signature."""
+	return _steady_pick(
+		character,
+		LAST_RESORT_NAMES,
+		)
 
 
 @changeling(LastResortWord)

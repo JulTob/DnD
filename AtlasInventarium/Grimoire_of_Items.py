@@ -511,12 +511,16 @@ def Build_Weapon(
 		weight: float = 0,
 		description: str = "",
 		grants: dict[str, int] | None = None,
+		attack_with: str = "",
 		) -> Item:
 	"""Craft a weapon. ``category`` gates proficiency, ``mastery`` its property.
 
 	``category="Firearm"`` tags ``Firearm`` instead of the plain ``Weapon`` —
 	Firearm IS-A Weapon (Tag inheritance), so ``item in Weapon`` still holds,
 	but a Martial-proficient character does not get firearms for free.
+
+	``attack_with`` names the ability this weapon attacks with when it is
+	NOT the usual Strength/Dexterity rule.
 	"""
 	tags: list[type[Tag]] = [
 			Firearm
@@ -549,6 +553,7 @@ def Build_Weapon(
 	item.category = category
 	item.reach = reach
 	item.mastery = mastery
+	item.attack_with = attack_with
 	item.properties = tuple(
 			properties
 			)
@@ -616,6 +621,7 @@ def instantiate(
 
 	for field, value in prototype.__dict__.items():
 		if field in (
+				"_TAGKIT_STATE",
 				"name",
 				"value",
 				"weight",
