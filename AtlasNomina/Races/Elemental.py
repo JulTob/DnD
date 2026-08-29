@@ -47,7 +47,14 @@ def Names(genus):
 	ZEPHYRIAN = "Zephyrian" in genus
 	CRONUSIAN = "Cronusian" in genus
 
-	Names = Elementals
+	# ``Names = Elementals`` bound the module global itself, so every ``Names +=``
+	# below grew it in place and it never shrank: +1,121 entries per call,
+	# without bound. Worse than the memory, it broke the seed. Pick draws from
+	# whatever this list holds, so the pool depended on how many Elementals had
+	# been asked for earlier in the session, and one seed named one character
+	# two different things depending on what came before it. A copy is what was
+	# meant: this function reads the vocabulary, it does not edit it.
+	Names = list( Elementals )
 
 
 	if ATLANTIAN:
@@ -264,7 +271,24 @@ def Phonotactic(genus):
 	return prefx, fix, sufx
 
 def Surnames(genus):
-	return [Surname(genus) for _ in range(100)]
+	"""
+	The lexicon of Elemental family names.
+
+	An ingredient returns *data*: a list, built from the genus alone. Surname()
+	is the other thing, a generator, and it needs a Character to roll with. This
+	used to call it with the genus in the Character's place, so it raised
+	TypeError on every Elemental ever generated and each of them silently wore
+	a template surname off plantilla.
+
+	The patronymic is what Surname() reaches for first, so it is what the
+	lexicon offers here: an ancestor's name with the Latin ending on it. The
+	other half of Surname(), building from syllables, is what Surphonotactic is
+	already for, and NewWord will do that on its own.
+	"""
+	return [
+		f"{ancestor}us"
+		for ancestor in Names( genus )
+		]
 
 def Surphonotactic(genus):
 	prefx = ["Atl", "Eos", "Cron", "Gen" , 'Gaian',

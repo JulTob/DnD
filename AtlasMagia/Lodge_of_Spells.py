@@ -1,10 +1,13 @@
-# Lodge of Spells
+# Lodge of Spells — the curated registry of Spell instances.
+# The Spell class and its Tags live in SpellsKit (QST-0031.1); this file
+# holds the data, as its name promises.
 import random
 
 try:
     from AtlasLudus.Map_of_Dice import Dice
     from AtlasActorLudi.Map_of_Scores import PB, Modifier
     from AtlasScriptum.Map_of_Formats import Entry
+    from AtlasMagia.SpellsKit import Spell
 
 except ImportError:
     raise
@@ -1738,64 +1741,7 @@ def spell_from_data(spell_name: str) -> "Spell":
         definition=data["definition"],
     )
 
-class Spell:
-	def __init__(spell,
-				 name="",
-				 level=0,
-				 school="",
-				 casting_time="",
-				 ranges = "",
-				 duration = "",
-				 components = "",
-				 concentration = "",
-				 definition = ""):
-		spell.name =  name
-		spell.level = level
-		spell.school = school
-		spell.casting_time = casting_time
-		spell.ranges = ranges
-		spell.duration = duration
-		spell.components = components
-		spell.concentration = concentration
-		spell.definition = definition
-
-	def describe(spell):
-		desc = spell.string
-		return desc
-
-	def __str__(spell):
-		desc = ""
-		if spell.casting_time:   desc += f"<i>⟨{spell.casting_time}⟩</i><br>"
-		if spell.concentration:  desc += f"<i>({spell.concentration}: </i>"
-		if spell.duration:       desc += f"<i>({spell.duration})</i>"
-		if spell.ranges:         desc += f"<br><i>>{spell.ranges}></i>"
-		if spell.components:	 desc += f"<br><i>⦓{spell.components}⦔</i>"
-		if spell.level == 0:
-			level_text = "<b><p>Cantrip</b></p>"
-		else:
-			level_text = f"<b><p> Level {spell.level} Spell </b></p>"
-		return f"""
-		<h4 class="spell-title"> {spell.name}</h4>
-		{level_text}
-		<p class="spell-meta">{desc}</p>
-		<p>
-		{spell.definition }
-		</p>
-		"""
-
-	@property
-	def string(spell):
-
-		name  = f"{spell.name}"
-		desc  = f"{spell.school}"
-		definition = ""
-		if spell.casting_time:   desc += f"({spell.casting_time})"
-		if spell.concentration:  desc += f"⟨{spell.concentration}"
-		if spell.duration:       desc += f"⟨{spell.duration}⟩"
-		if spell.ranges:         desc += f"-{spell.ranges}"
-		if spell.definition:     definition += f"\n\t{spell.definition}"
-		string = Entry(title=name, definition=definition, description=desc)
-		return string
+# class Spell moved to AtlasMagia/SpellsKit.py (QST-0031.1) — imported above.
 
 
 
@@ -2175,12 +2121,12 @@ If you cast this spell multiple times, you can have up to three non-instantaneou
 		definition = """
 		You create a magical effect within range. Choose the effect from the options below. If you cast this spell multiple times, you can have up to three of its non-instantaneous effects active at a time.
 		<ul style="list-style-type: '🪄'; text-align: left; ">
-<li> <b> Sensory Effect.</b> You create an instantaneous, harmless sensory effect, such as a shower of sparks, a puff of wind, faint musical notes, or an odd odor.
-<li><b> Fire Play.</b> You instantaneously light or snuff out a candle, a torch, or a small campfire.
-<li><b> Clean or Soil.</b> You instantaneously clean or soil an object no larger than 1 cubic foot.
-<li><b> Minor Sensation.</b> You chill, warm, or flavor up to 1 cubic foot of nonliving material for 1 hour.
-<li><b> Magic Mark.</b> You make a color, a small mark, or a symbol appear on an object or a surface for 1 hour.
-<li><b> Minor Creation.</b> You create a nonmagical trinket or an illusory image that can fit in your hand. It lasts until the end of your next turn. A trinket can deal no damage and has no monetary worth.
+<li> <b> Sensory Effect.</b> You create an instantaneous, harmless sensory effect, such as a shower of sparks, a puff of wind, faint musical notes, or an odd odor.</li>
+<li><b> Fire Play.</b> You instantaneously light or snuff out a candle, a torch, or a small campfire.</li>
+<li><b> Clean or Soil.</b> You instantaneously clean or soil an object no larger than 1 cubic foot.</li>
+<li><b> Minor Sensation.</b> You chill, warm, or flavor up to 1 cubic foot of nonliving material for 1 hour.</li>
+<li><b> Magic Mark.</b> You make a color, a small mark, or a symbol appear on an object or a surface for 1 hour.</li>
+<li><b> Minor Creation.</b> You create a nonmagical trinket or an illusory image that can fit in your hand. It lasts until the end of your next turn. A trinket can deal no damage and has no monetary worth.</li>
 		</ul>
 		"""
 		)
@@ -2802,7 +2748,7 @@ To discern that you are disguised, a creature must take the Study action to insp
 		<b>Using a Higher-Level Spell Slot.</b> The healing increases by <b>2d8 for each spell slot</b> level above 1."""
 		)
 	UnseenServant = 	Spell("Unseen Servant ",1,"Conjuration","Action or Ritual","60 feet","1 hour ","Verbal, Somatic, Material (a bit of string and of wood)",
-		definition = """This spell creates an Invisible, mindless, shapelesSomatic, Materialedium force that performs simple tasks at your command until the spell ends. The servant springs into existence in an unoccupied space on the ground within range. It has AC 10, 1 Hit Point, and a Strength of 2, and it can't attack. If it drops to 0 Hit Points, the spell ends.
+		definition = """This spell creates an Invisible, mindless, shapeless medium force that performs simple tasks at your command until the spell ends. The servant springs into existence in an unoccupied space on the ground within range. It has AC 10, 1 Hit Point, and a Strength of 2, and it can't attack. If it drops to 0 Hit Points, the spell ends.
 			<br>
 			Once on each of your turns as a Bonus Action, you can mentally command the servant to move up to 15 feet and interact with an object. The servant can perform simple tasks that a human could do, such as fetching things, cleaning, mending, folding clothes, lighting fires, serving food, and pouring drinks. Once you give the command, the servant performs the task to the best of its ability until it completes the task, then waits for your next command.
 			<br>
@@ -3922,8 +3868,8 @@ Using a Higher-Level Spell Slot. You create one additional ray for each spell sl
 		definition = """
 Each Humanoid in a 20-foot-radius Sphere centered on a point you choose within range must succeed on a Charisma saving throw or be affected by one of the following effects (choose for each creature):
 <ul style="list-style-type: '🩶'; text-align: left; ">
-<li>	The creature has Immunity to the Charmed and Frightened conditions until the spell ends. If the creature was already Charmed or Frightened, those conditions are suppressed for the duration.
-<li>	The creature becomes Indifferent about creatures of your choice that it's Hostile toward. This indifference ends if the target takes damage or witnesses its allies taking damage. When the spell ends, the creature's attitude returns to normal.
+<li>	The creature has Immunity to the Charmed and Frightened conditions until the spell ends. If the creature was already Charmed or Frightened, those conditions are suppressed for the duration.</li>
+<li>	The creature becomes Indifferent about creatures of your choice that it's Hostile toward. This indifference ends if the target takes damage or witnesses its allies taking damage. When the spell ends, the creature's attitude returns to normal.</li>
 </ul>
 """)
 	EnhanceAbility = Spell("Enhance Ability",
@@ -4154,10 +4100,10 @@ if LEVEL3:
 			definition = """
 				You utter foul words, summoning demons from the chaos of the Abyss. Roll on the following table to determine what appears.
 				 <ul style="list-style-type: '🜏'; text-align: left; ">
-				 <li>d6	    Demons Summoned
-				<li> 1-2	Two demons of challenge rating 1 or lower
-				<li> 3-4	Four demons of challenge rating 1/2 or lower
-				<li> 5-6	Eight demons of challenge rating 1/4 or lower
+				 <li>d6	    Demons Summoned</li>
+				<li> 1-2	Two demons of challenge rating 1 or lower</li>
+				<li> 3-4	Four demons of challenge rating 1/2 or lower</li>
+				<li> 5-6	Eight demons of challenge rating 1/4 or lower</li>
 				 </ul>
 
 				The DM chooses the demons, such as manes or dretches, and you choose the unoccupied spaces you can see within range where they appear. A summoned demon disappears when it drops to 0 hit points or when the spell ends.

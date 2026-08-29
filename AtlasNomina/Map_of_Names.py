@@ -16,8 +16,22 @@ except ImportError:
 MAX_ATTEMPTS = 3
 MAX_DEPTH = 1
 
+# How many goes each naming method gets before NewWord moves to the next one.
+# Its own constant on purpose: how many times to *repeat a method* is a
+# different decision from how many attempts a method makes internally, and they
+# should be tunable apart. Setting this to 1 restores the pre-ladder behaviour
+# exactly, dice for dice, for anyone who needs old seeds to name old characters.
+METHOD_ATTEMPTS = 3
 
-@guardian
+# How many goes each naming method gets before NewWord moves to the next one.
+# Its own constant on purpose: how many times to *repeat a method* is a
+# different decision from how many attempts a method makes internally, and they
+# should be tunable apart. Setting this to 1 restores the pre-ladder behaviour
+# exactly, dice for dice, for anyone who needs old seeds to name old characters.
+METHOD_ATTEMPTS = 3
+
+
+@changeling(LastResortWord)
 def NewWord(    names ,    prefix,    fix,    suffix,    depth = 0):
 	'''
 	Generates a new word based on the lists in a Lexicon object
@@ -243,8 +257,11 @@ def first_valid(strategy_fns, validator, fallback_names, retries=2, timeout=2.0)
 				if result and validator(result):
 					stop.set()
 					return result
-			except Exception as e:
-				raise e
+			except Exception as exc:
+				# Was ``raise e``, which crossed the thread boundary and came
+				# back out of fut.result(), so one broken strategy failed the
+				# whole heat instead of losing it.
+				report_bug(exc)
 			return None
 
 		with ThreadPoolExecutor() as ex:
@@ -299,25 +316,35 @@ def LoadRace(trait):
 		"Vampire": 		"AtlasNomina.Races.Vampire",
 		}
 	import importlib
+	module_path = race_module_map.get(trait)
+	if module_path is None:
+		# Not an error: plenty of genera have no module of their own and the
+		# template is the right answer for them. Nothing to report.
+		return _plantilla()
 	try:
-		module_path = race_module_map.get(trait)
-		if module_path:
-			race = importlib.import_module(module_path)
-			return race
-		return importlib.import_module("AtlasNomina.Races.plantilla")
-	except ImportError:
-		return importlib.import_module("AtlasNomina.Races.plantilla")
-	except ModuleNotFoundError:
-		return importlib.import_module("AtlasNomina.Races.plantilla")
-	except SyntaxError:
-		return importlib.import_module("AtlasNomina.Races.plantilla")
-	except Exception:
-		return importlib.import_module("AtlasNomina.Races.plantilla")
+		return importlib.import_module(module_path)
+	except Exception as exc:
+		# A race module that will not even import is a real defect, and used to
+		# be indistinguishable from the line above: the sheet quietly filled
+		# with template names and nobody was told which module was down.
+		report_bug(exc)
+		_report_demotion(
+			module_path,
+			"the module",
+			f"would not import ({type(exc).__name__})",
+			"plantilla",
+			)
+		return _plantilla()
 
-@guardian
+@changeling(LastResortName)
 def NewName(lusor):
 	"""
 	Generate a full name for the given lusor (character).
+
+	Was @guardian. The dice here come from a Bag opened on the seed, so every
+	retry drew the same numbers and met the same wall: a hundred attempts at a
+	failure that never had a second outcome. A Changeling steps aside to
+	LastResortName instead, and the sheet gets a name either way.
 	"""
 	from random import seed
 	import AtlasNomina.Races.plantilla as fallback
@@ -328,25 +355,15 @@ def NewName(lusor):
 
 	race = LoadRace(lusor.race)
 
-	try:
-		names = race.Names(genus)
-	except AttributeError:
-		names = fallback.Names(genus)
-
-	try:
-		surnames = race.Surnames(genus)
-	except AttributeError:
-		surnames = fallback.Surnames(genus)
-
-	try:
-		o, n, c = race.Phonotactic(genus)
-	except AttributeError:
-		o, n, c = fallback.Phonotactic(genus)
-
-	try:
-		os, ns, cs = race.Surphonotactic(genus)
-	except AttributeError:
-		os, ns, cs = fallback.Surphonotactic(genus)
+	# Four ingredients, one ladder each. These used to catch AttributeError
+	# only, which covered a race module that never defined the function and let
+	# every bug *inside* a defined one straight through: that is how a stray
+	# ``Names +=`` in Elf.Phonotactic became a hundred retries and a ceiling
+	# message instead of one reported UnboundLocalError and a generic elf.
+	names = Race_Ingredient(race, "Names", genus)
+	surnames = Race_Ingredient(race, "Surnames", genus)
+	o, n, c = Race_Ingredient(race, "Phonotactic", genus)
+	os, ns, cs = Race_Ingredient(race, "Surphonotactic", genus)
 
 
 	# Define genus-based flags
@@ -380,7 +397,7 @@ def NewName(lusor):
 		surname = NewWord(surnames, os, ns, cs).capitalize()
 		surname2 = NewWord(surnames, os, ns, cs).capitalize()
 		FullName = select1([
-			f"{name} {name2}  {surname} {surname2}",
+			f"{name} {name2} {surname} {surname2}",
 			])
 	elif "Gnome"         in genus:
 		name = NewWord(names, o, n, c).capitalize()
@@ -408,7 +425,11 @@ def NewName(lusor):
 	lusor._name = name
 	return FullName.title()
 
-@guardian
+# The four ingredient readers below are @guardian no longer. Every one of them
+# reads a seeded generator, so a retry replays the same dice into the same wall;
+# and every one of them now goes through Race_Ingredient, which has no failing
+# path of its own. The safeguard moved from repeating the work to replacing it.
+
 def Phonotactic(lusor, sur = False):
 	"""
 	Retrieve phonotactic elements (prefix, fix, suffix) for a lusor's genus.
@@ -422,56 +443,44 @@ def Phonotactic(lusor, sur = False):
 	"""
 	if sur:
 		return Surphonotactic(lusor)
-	genus = lusor.genus
-	race = LoadRace(lusor.race)  # Dynamically load the race module
-	# Check if the race module has a `Phonotactic` method
-	try:
-		prefix, fix, suffix = race.Phonotactic(genus)
-		return prefix, fix, suffix
-	except AttributeError:
-		import AtlasNomina.Races.plantilla as fallback
-		return fallback.Phonotactic(genus)
-	except Exception:
-		import AtlasNomina.Races.plantilla as fallback
-		return fallback.Phonotactic(genus)
+	return Race_Ingredient(
+		LoadRace(lusor.race),
+		"Phonotactic",
+		lusor.genus,
+		)
 
-	return prefix, fix, suffix
-
-@guardian
 def Surphonotactic(lusor):
-	genus = lusor.genus
-	race = LoadRace(lusor.race)  # Dynamically load the race module
-	try:
-		prefix, fix, suffix = race.Surphonotactic(genus)
-	except AttributeError:
-		import AtlasNomina.Races.plantilla as fallback
-		prefix, fix, suffix = fallback.Surphonotactic(genus)
-	return prefix, fix, suffix
+	"""Retrieve the surname's phonotactic elements for a lusor's genus."""
+	return Race_Ingredient(
+		LoadRace(lusor.race),
+		"Surphonotactic",
+		lusor.genus,
+		)
 
-@guardian
 def NamesList(lusor):
-	Names = []
-	race = LoadRace(lusor.race)
-	try:
-		Names = race.Names(lusor.genus)
-	except AttributeError:
-		from AtlasNomina.Races import plantilla
-		Names = plantilla.Names(lusor.genus)
-	if not Names:
-		Names = Races.plantilla.Names(genus)
-	return Names
+	"""The lexicon of given names this lusor's kind draws on."""
+	# Was: a plain `if not Names` guard falling through to
+	# ``Races.plantilla.Names(genus)`` — a module never imported under that name
+	# and a variable never defined in this scope. It could only ever raise
+	# NameError, so an empty lexicon was the one case it did not handle.
+	# Race_Ingredient treats empty as a refusal and demotes on it.
+	return Race_Ingredient(
+		LoadRace(lusor.race),
+		"Names",
+		lusor.genus,
+		)
 
-@guardian
 def SurnamesList(lusor):
-	race = LoadRace(lusor.race)
-	try:
-		Surnames = race.Surnames(lusor.genus)
-	except AttributeError:
-		from AtlasNomina.Races import plantilla
-		Surnames = plantilla.Surnames(lusor.genus)
-	return Surnames
+	"""The lexicon of family names this lusor's kind draws on."""
+	return Race_Ingredient(
+		LoadRace(lusor.race),
+		"Surnames",
+		lusor.genus,
+		)
 
-@guardian
+# No @guardian. NewWord's ladder already gives every method METHOD_ATTEMPTS
+# goes with fresh dice, and nesting a second retry inside the first turns three
+# tries into thirty, each one reported. One mechanism, owned by the caller.
 def Syllabic(prefix,fix,suffix):
 	'''
 	-- Syllabic Union. --
@@ -484,7 +493,10 @@ def Syllabic(prefix,fix,suffix):
 	result = f"{pre}{fix}{suf}"
 	return result
 
-@spy
+# No @spy. It was a development probe, and it had outlived that: this is a pure
+# predicate called several times per strategy per name, and the Spy prints a
+# full call tree on every one of those calls, success or failure. Nothing was
+# learnt from the thousandth identical tree that the first had not already said.
 def is_valid_name(name, strategy=""):
 	"""
 	Checks if a name is valid based on various specific criteria.

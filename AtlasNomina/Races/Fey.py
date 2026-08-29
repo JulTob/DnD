@@ -14,9 +14,9 @@ def Name(Character):
 def Surname(Character):
 	return select1(Surnames(Character))
 
-def Names(Character):
-	FEMALE = "Female" in Character
-	MALE = "Male" in Character
+def Names(genus):
+	FEMALE = "Female" in genus
+	MALE = "Male" in genus
 
 	Names = []
 
@@ -24,7 +24,7 @@ def Names(Character):
 		'Crow',			'Tsubasu',			'Orionis',			"Oxariox",		"Ofrat",		"Duskheart",		"Glowheart",		"Senka",		"Shixian",		"Senna",		"Fay",		"Pari",		"Tien",		"Keijo",		"Afrinus",		"Alberich",		"Alunsina",		"Aman",		"Amihan",		"Animas",		"Anitun",		"Anjana",		"Anjana",		"Apolaki",		"Ariel",		"Arintero",		"Aswang",		"Arkam",		"Ayalga",		"Balangaw",		"Baranugon",	"Barragán",			"Basajaun",			"Basilisco",		"Basilisco",		"Bathala",		"Bell",		"Bel",		"Bluebell",		"Brujorga",		"Bulan",		"Bungisngis",		"Burlón",		"Busgosu",		"Busgosu",		"Cegua",		"Cid",		"Caspian",		"Cojuelo",		"Compana",		"Coruxa",		"Covadonga",		"Cuelebre",		"Cuevanre",		"Culebre",		"Culebre",		"Cuelebre",		"Dalikamata",		"Dama",		"Diañu",		"Diwata",		"Dorado",			"Duende",			"Duenderde",		"Duwende",		"Ellette",		"Encantaria",		"Etain",		"Fada",		"Fatua",		"Fatue",		"Fatuo",		"Fay",		"Faye",		"Ferret",		"Florian",		"Galipote",		"Glaurung",		"Goodfellow",		"Guajona",		"Gwydion",		"Hadarina",		"Hanan",		"Irati",		"Idiyanale",		"Ikapati",		"Iduri",		"Idulre",		"Kapre",		"Kabunian",		"Lamiak",		"Lavandera",		"Lazarillo",		"Lavandera",		"Llorona",		"Liadlaw",		"Lidagat",		"Lakapati",		"Leazarmire",		"Lin",		"Lorelei",		'Lulu',		"Moura",		"Mari",		"Mora",		"Moron",		"Mananangal",		"Manaul",		"Magwayen",		"Maganda",		"Malakas",		"Mapulon",		"Mab",		"Morgana",		"Melusine",		"Maria",		"Makiling",		"Mayari",		"Nuberu",		"Nuberu",		"Niamh",		"Nyx",				"Tartalo",			"Tikbalang",		"Titania",			"Tinkerbell",		"Tinker",		"Tam",		"Ojancano",		"Oberon",		"Pataricu",		"Patasola",		"Pira",		"Panday",		"Puck",		"Pari",		"Reinoba",		"Ramweldu",		"Rumpelstinski",		"Robin",		"Rhiannon",		"Rusalka",		"Serenagua",		"Sarimanok",		"Silfo",		"Serena",		"Sorgiña",	"Silbon",		"Saco",		"Sidapa",		"Sinaya",		"Silvanus",			"Seelian",			"Sylph",			"Trasgu",			"Tarasca",			"Trasgu",		"Tala",		"Unseelian",		"Ventolín",		"Xana",		"Xana",		"Zana",		"Zahori",		"Zurragamurdi",		'Siofra',
 		]
 
-	NYMPH = "Nymph" in Character
+	NYMPH = "Nymph" in genus
 	if  NYMPH:
 		Names += [
 		"Rhapsodia",
@@ -148,17 +148,31 @@ def Names(Character):
 
 	return Names
 
-def Surnames(Character):
-	Surnames = [
-		f"The {Character.subrace}",
-		f"The {Character.race}",
-		f"Le {Character.subrace}",
-		f"El {Character.race}",
+def Surnames(genus):
+	"""
+	Fey family names are epithets: what the court calls you, not who bore you.
+
+	Takes the genus line, like every other lexicon in every other race module.
+	It used to take the whole Character and read ``.subrace`` and ``.race`` off
+	it, which no caller has ever passed, so it raised AttributeError on a str
+	every single time and every Fey quietly wore a template surname instead.
+	The genus line carries both of those anyway, in its first two fields.
+	"""
+	fields = [
+		field.strip()
+		for field in str( genus ).split( "," )
+		if field.strip()
+		]
+	kind = fields[0] if fields else "Fey"
+	court = fields[1] if len( fields ) > 1 else kind
+	return [
+		f"The {court}",
+		f"The {kind}",
+		f"Le {court}",
+		f"El {kind}",
 		]
 
-	return Surnames
-
-def Phonotactic(Character):
+def Phonotactic(genus):
 	onset  = [
 		"Aur", 		"Alder", 	"Aeg", 		"Aquil",
 		"Bram", 	"Briar", 	"Cron", 	"Cael",
@@ -211,9 +225,9 @@ def Phonotactic(Character):
 		"ong", "ade", "eam",        "orn",      "urna","une","us",
 		"ale", "o",
 		"ood","isp",        "ixis",         ]
-	NYMPH = "Nymph" in Character
+	NYMPH = "Nymph" in genus
 	if  NYMPH:
-		Character = 'she'
+		genus = 'she'
 		codas = [
 		'ia', 'idia', 'ilia', 'isia', 'inia', 'isilia', 'ania',
 		'acia', 'alia',
@@ -221,7 +235,7 @@ def Phonotactic(Character):
 
 	return onset, nuclei, codas
 
-def Surphonotactic(Character):
+def Surphonotactic(genus):
 	onset  = ["Ob", "Tit", "Exc", "Camp"]
 	nuclei = ["er", "an", "elenc", "an"]
 	codas  = ["on", "ia", "ina", "illa"]

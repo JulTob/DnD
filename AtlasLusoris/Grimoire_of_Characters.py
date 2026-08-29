@@ -1,119 +1,180 @@
 """
 Great Grimoire of Characters.
-Describes the creation of Characters and their operations.
+Player rites for the Character skeleton (CharactersKit).
 Rules from D&D 5e.
+
+Public construction: New_Player (summons TBD in AtlasActorLudi).
+Character here extends the skeleton with interim player rites — peel these
+into Player Actions / nested Species·Guild·Background Tags over time.
 """
-from Minion import guardian, watcher, warden, spy, minion
+from Minion import guardian, watcher, warden, spy, minion, changeling
 ''' Cartography '''
 
-import app.random as random
+
+# The two stand-ins below import late for the same reason every rite in this
+# file does: AtlasNomina and AtlasEpica both reach back here, and a top-level
+# import would close the circle. Wrapping them keeps @changeling's argument
+# resolvable at class-definition time without paying that price.
+
+def _last_resort_name(char):
+	"""Rung three for a Character's name."""
+	from AtlasNomina.Map_of_Names import LastResortName
+	return LastResortName(char)
+
+
+def _last_resort_title(character):
+	"""Rung three for a Character's title."""
+	from AtlasEpica.Map_of_Titles import LastResortTitle
+	return LastResortTitle(character)
+
+
 from AtlasActorLudi.Map_of_Size import Size
-from AtlasActorLudi.Map_of_Gender import NewGender
 # Import statements grouped for clarity and error checking
 try: # Cartography
 	from AtlasLudus.Map_of_Languages import Character_Languages
-	from AtlasLudus.Map_of_Dice import Dice
 	from AtlasActorLudi.Map_of_Scores import PB, Modifier
-	from AtlasActorLudi.Grimoire_of_AbilityScores import AbilityScores, AbilityScoresPlus
+	from AtlasLusoris.AbilityScoresKit import AbilityScores
+	from AtlasActorLudi.Grimoire_of_AbilityScores import AbilityScoresPlus
 	from AtlasActorLudi.Grimoire_of_SavingThrows import SavingThrows
 	from AtlasActorLudi.Grimoire_of_Skills import Char_Skills, get_other_proficiencies
-	from AtlasLusoris.Map_of_Species import species
-	from AtlasLusoris.Map_of_Backgrounds import backgrounds
-	from AtlasAlusoris.Map_of_Races import race_weights as races
-	from AtlasAlusoris.Map_of_Races import Race
+	from AtlasLusoris.BackgroundKit import (
+			Apply_Background,
+			)
 	from AtlasInventarium import Grimoire_of_Objects
 	from AtlasInventarium.Grimoire_of_Objects import Object, GenerateEquipment, Inventory
 	from AtlasLusoris.Grimoire_of_Spellcasters import spellcaster
+	from AtlasActorLudi.CharactersKit import (
+			Character as Character_Skeleton,
+			Player,
+			)
+	from AtlasActorLudi.GendersKit import Gender_Reveal
 
 except ImportError:
 	raise
 
-class Character:
-	@minion
-	def __init__(char,
+
+def New_Player(
+		char,
 		name=None,
 		species=None,
 		char_class=None,
 		subclass=None,
+		specialization=None,
 		background=None,
 		level=1,
 		gender=None,
 		alignment=None,
-		seed=None,
-		title = None):
-		"""
-		Invoke a new Character.
-		"""
-		# Set random seed if provided
-		char.data = {}
-		char.seed = int(seed if seed is not None else random.randint(0, 2**16))
-		char.level = level
-		char.alignment = alignment or char.New_Alignment()
-		char.species = species or char.New_species()
-		char.gender = gender or char.New_gender()
-		char.char_class = char_class or char.New_class()
-		char.subclass = subclass or char.New_subclass()
-		char.background = background or char.New_background()
-		char.name = name or char.New_name()
-		char.title = title or char.New_title()
+		heritage=None,
+		title=None,
+		**_,
+		):
+	"""Build one Player from an already seeded Character shell."""
+	Player(
+		char
+		)
 
-		~char
-		char.set_combat_attributes()
-		char.set_stats()
-		char.set_char_features()
-		char.set_Objects()
+	char.level = max(1, int(level))
 
+	from AtlasActorLudi.AlignmentKit import New_Alignment
+	New_Alignment(
+		char,
+		alignment,
+		)
+
+	from AtlasActorLudi.SpeciesKit import Apply_Species
+	Apply_Species(
+		char,
+		species,
+		heritage=heritage,
+		)
+
+	Gender_Reveal(
+		char,
+		gender,
+		)
+
+	from AtlasLusoris.GuildKit import (
+			Apply_Guild,
+			Apply_Specialization,
+			)
+	Apply_Guild(
+			char,
+			char_class,
+			)
+	Apply_Specialization(
+			char,
+			specialization
+			if specialization is not None
+			else subclass,
+			)
+	Apply_Background(
+			char,
+			background,
+			)
+
+	~char
+	char.set_combat_attributes()
+	char.set_stats()
+	char.set_char_features()
+
+	char.name = name or char.New_name()
+	char.title = title or char.New_title()
+	# The Species description addresses the Character by name, and the name is
+	# only settled here.  Refresh that one Entry now it exists.
+	from AtlasActorLudi.SpeciesKit.resolution import Project_Species_Description
+	Project_Species_Description( char )
+	# The Guild description composes across layers and may name the Character
+	# too, so it is projected from here for the same reason.
+	from AtlasLusoris.GuildKit import Project_Guild_Description
+	Project_Guild_Description( char )
+	# The Guild description composes across layers and may name the Character
+	# too, so it is projected from here for the same reason.
+	from AtlasLusoris.GuildKit import Project_Guild_Description
+	Project_Guild_Description( char )
+	# set_Objects was a SECOND equipment pass that re-rolled the budget and
+	# clobbered the first one's spending. GearKit outfits exactly once inside
+	# set_char_features, so this pass is gone.
+	# Story can fail on sparse myth pools; must not roll back Player Imprint.
+	try:
 		char.setStory()
+	except Exception:
+		char.story = ""
+	return char
 
-	# Shortcut Operators for data
 
-	# Reseed Random for stability: ~char
-	def __invert__(char):
-		random.seed(char.seed)
-		return char.seed
+def _creature_type_line(
+	char,
+	creature_type,
+	) -> str:
+	"""The rules type, with kinship in parentheses where there is one."""
+	from AtlasActorLudi.SpeciesKit.kinship import Kinships_Of
 
-	# Get Tag: char[key]
-	def __getitem__(char, key):
-		if key in char.data: 	return char.data[key]
-		else: 					return False
+	if creature_type is None:
+		return ""
 
-	# Delete tag: del char[key]
-	def __delitem__(char, key):
-		del char.data[key]
+	kin = Kinships_Of( char )
 
-	# "Chaotic" in char ?
-	def __contains__(char, key):
-		if key in char.data:	return True
-		if key in char.genus:	return True
-		return False
+	if not kin:
+		return creature_type.__name__
 
-	# char == "Halfling" ?
-	def __eq__(char, key):
-		if key in char.data:	return True
-		if key in char.genus:	return True
-		return False
+	return f"{creature_type.__name__} ({', '.join(kin)})"
 
-	# char += "Monk"
-	def __iadd__(char, key):
-		char.data[key] = True
-		return char
 
-	# char -= "Ranger"
-	def __isub__(char, key):
-		if key in char.data: del char.data[key]
-		return char
-
-	# char >= 2
-	def __ge__(char, key):
-		if isinstance(key, int): return char.level >= key
-	def __gt__(char, key):
-		if isinstance(key, int): return char.level > key
+class Character(Character_Skeleton):
+	"""Character skeleton + interim player rites (migrate → Player Tag Actions)."""
 
 	@minion
 	def set_combat_attributes(char):
 		~char
-		char.speed = 30
-		char.AS = AbilityScores()
+		if getattr(
+			char,
+			"speed",
+			None,
+			) is None:
+			char.speed = 30
+		char.AS = AbilityScores(
+			character=char
+			)
 		char.AC = 10 + Modifier(char.AS.DEX)
 		char.base_health = 0
 		char.set_Health()
@@ -122,24 +183,75 @@ class Character:
 
 	@minion
 	def set_stats(char):
+		from AtlasLusoris.BackgroundKit import (
+				Apply_Background_Abilities,
+				Apply_Background_Training,
+				)
+
 		~char
 		char.New_stats()
+		Apply_Background_Abilities(
+				char
+				)
+		# set_combat_attributes ran before the real roll, so its AC came from
+		# placeholder 10s. Rebase the unarmored AC on the Dexterity we rolled.
+		char.AC = 10 + Modifier(char.AS.DEX)
 		char.set_Skills()
+		Apply_Background_Training(
+				char
+				)
 		return char
 
 	@minion
 	def set_char_features(char):
 		from AtlasLusoris.Grimoire_of_Features import Feature
+		from AtlasLusoris.OrderKit import Resolve_Order_Features
+
 		~char
 		char.known_spells = []
+		Resolve_Order_Features(
+				char
+				)
 		char.languages = Character_Languages(char)
-		char.lineage = None
-		char.equipment = Inventory()
+		char.lineage = getattr(
+				char,
+				"lineage",
+				None,
+				)
+		# Gear lives on `char.belongings` as Tagged Items; `char.equipment`
+		# is a derived view of it (see GearKit.Loadout).
+		char.belongings = []
+		char.purse = 0
 
-		char.features: list[Feature] = []
+		char.features: list[Feature] = list(
+				getattr(
+					char,
+					"features",
+					[],
+					) or []
+				)
+		from AtlasActorLudi.SpeciesKit import Resolve_Species_Features
+		Resolve_Species_Features(
+				char
+				)
 		char.apply_species_features()
 		char.apply_background_features()
+
+		# Gear BEFORE Guild training, so a lesson can look at what this
+		# Character actually carries — Weapon Mastery names the weapons in
+		# their hands instead of picking from the catalogue at random.
+		from AtlasInventarium.GearKit import (
+				Loadout,
+				Outfit_Player,
+				current_armour_class,
+				)
+		Outfit_Player(char)
+		char.equipment = Loadout(char)
+
 		char.apply_class_features()
+		Resolve_Species_Features(
+				char
+				)
 		seen = set()
 		unique = []
 		for feat in char.features:
@@ -154,38 +266,80 @@ class Character:
 
 		char.skills.sync_with_abilities(char.AS)
 		char.other_proficiencies = get_other_proficiencies(char.skills)
-		GenerateEquipment(char)
+		# AC stays DERIVED from what is equipped, so an artifact's bonus is
+		# summed rather than written over the natural formula.
+		char.AC = current_armour_class(char)
+
 		char.saving_throws = char.Saving_Throws()
 		char.attack_rolls = AbilityScoresPlus(char.AS, char.proficiency_bonus)
 		char.spellcaster = char.get_spellcaster()
+		Resolve_Order_Features(
+				char
+				)
 		return char
 
 
 	@minion
 	def setStory(char):
-		from AtlasActorLudi.Map_of_Stories import Story
+		from AtlasEpica.Map_of_Stories import Story
 		char.story = Story(char)
 
 
 	@minion
 	def apply_background_features(char):
-		from AtlasLusoris.Map_of_Backgrounds import ApplyBackground
-		ApplyBackground(char)
+		"""Background contributions are applied during Character awakening."""
 		return char
 
 
 	@minion
 	def apply_species_features(char):
+		if getattr(
+			char,
+			"species",
+			None,
+			) in (
+				"Aasimar",
+				"Dragonborn",
+				"Dwarf",
+				"Goliath",
+				"Halfling",
+				"Human",
+				"Elf",
+				"Gnome",
+				"Orc",
+				"Tiefling",
+				):
+			return char
+
 		from AtlasLusoris.Map_of_Species import species_features
-		for feature in species_features(char.species):
-			feature(char)  # Apply effect
-			char.features.append(feature)  # Track feature
+
+		for feature in species_features(
+			char.species,
+			char,
+			):
+			feature(
+				char
+				)
+			char.features.append(
+				feature
+				)
+
 		return char
 
 	@property
 	@minion
 	def health(char):
 		result = char.base_health + Modifier(char.AS.CON) * char.level
+		# Anything that grants Hit Points per level (Dwarven Toughness today,
+		# the Tough feat tomorrow) adds itself to bonus_health_sources, and is
+		# summed onto bonus_health_per_level.  Nothing here needs to know which.
+		result += int(
+			getattr(
+				char,
+				"bonus_health_per_level",
+				0,
+				) or 0
+			) * char.level
 		return result
 
 	@minion
@@ -240,9 +394,23 @@ class Character:
 				GetFeatures,                 # main entry-point to get features list
 				health_dice
 				)
+		# TOP Training Tags first (Guild lessons); legacy Progression fills gaps.
+		from AtlasLusoris.TrainingKit import (
+				Apply_Guild_Trainings,
+				filter_legacy_features,
+				)
+		Apply_Guild_Trainings(
+				character
+				)
 		class_prog = get_class_progression(character)
 		if class_prog:
-			character.features += class_prog.features(character)
+			legacy = class_prog.features(
+					character
+					)
+			character.features += filter_legacy_features(
+					character,
+					legacy,
+					)
 		return character
 
 
@@ -252,42 +420,21 @@ class Character:
 
 	@minion
 	def Saving_Throws(char):
-		"""Assign saving throw proficiencies based on character class."""
-		class_profs = {
-			"Barbarian":  ["STR", "CON"],
-			"Bard":       ["DEX", "CHA"],
-			"Cleric":     ["WIS", "CHA"],
-			"Druid":      ["INT", "WIS"],
-			"Fighter":    ["STR", "CON"],
-			"Monk":       ["STR", "DEX"],
-			"Paladin":    ["WIS", "CHA"],
-			"Ranger":     ["STR", "DEX"],
-			"Rogue":      ["DEX", "INT"],
-			"Sorcerer":   ["CON", "CHA"],
-			"Warlock":    ["WIS", "CHA"],
-			"Wizard":     ["INT", "WIS"]
-			}
+		"""Assign saving throw proficiencies from the Guild chassis."""
+		from AtlasLusoris.GuildKit import guild_saves
+		profs = list(
+				guild_saves(
+						char
+						) or ()
+				)
+		return SavingThrows(
+			char,
+			char.AS,
+			char.proficiency_bonus,
+			profs,
+			is_character=True,
+			)
 
-		profs = class_profs.get(char.character_class, [])  # Fallback to empty
-		return SavingThrows(char.AS, char.proficiency_bonus, profs, is_character=True)
-
-
-	@minion
-	def New_species(char):
-		""" Randomly select a species based on weights. """
-		~char
-		species_names = list(species.keys())
-		species_weights = list(species.values())
-		chosen_species = random.choices(species_names, weights=species_weights, k=1)[0]
-
-		return chosen_species
-
-	@minion
-	def New_class(char):
-		""" Randomly select a character class. """
-		from AtlasLusoris.Map_of_Classes import classes, subclasses
-		~char
-		return random.choice(classes)
 
 	@property
 	@minion
@@ -298,19 +445,25 @@ class Character:
 	@minion
 	def race(char):
 		from AtlasLusoris.Map_of_Species import species_to_race_and_subrace
-		race, subrace = species_to_race_and_subrace(char.species)
+		race, subrace = species_to_race_and_subrace(
+			char.species,
+			char,
+			)
 		return race
 
 	@property
 	@minion
 	def subrace(char):
 		from AtlasLusoris.Map_of_Species import species_to_race_and_subrace
-		race, subrace = species_to_race_and_subrace(char.species)
+		race, subrace = species_to_race_and_subrace(
+			char.species,
+			char,
+			)
 		return subrace
 
 	@property
 	@minion
-	def Class(char):
+	def guild(char):
 		return char.char_class
 
 	@property
@@ -321,41 +474,46 @@ class Character:
 	def Subclass(char):
 		return char.subclass
 
+	@property
+	def Specialization(char):
+		return char.specialization
+
 	@minion
 	def New_subclass(char):
-		""" Randomly select a subclass if applicable. """
-		from AtlasLusoris.Map_of_Classes import classes, subclasses
-		~char
-		return random.choice(subclasses.get(char.char_class, []))
+		"""Compatibility route to the primary Guild's specific Shapes."""
+		from AtlasLusoris.GuildKit import (
+				Apply_Specialization,
+				)
+		tag = Apply_Specialization(
+				char
+				)
 
-	@minion
-	def New_background(char):
-		""" Randomly select a background. """
-		~char
-		return random.choice(backgrounds)
+		return (
+			tag.NAME
+			if tag is not None
+			else None
+			)
 
-	@minion
-	def New_gender(char):
-		""" Randomly select a gender. """
-		#from AtlasLore.Map_of_Gender import NewGender
-		result = NewGender(char.race)
-		return result
-
-	@warden
-	@guardian
+	@changeling(_last_resort_name)
 	def New_name(char):
-		""" Generate or assign a name. """
+		"""
+		Generate or assign a name.
+
+		Was @warden @guardian: two hundred attempts at the same thing. ``~char``
+		reseeds from the *fixed* seed, so every one of those attempts replayed
+		the identical dice into the identical failure. The Changeling steps
+		sideways instead.
+		"""
 		from AtlasNomina.Map_of_Names import NewName
 		~char
 		# Use the existing name generation functions
 		name = NewName(char)
 		return name
 
-	@warden
-	@guardian
+	@changeling(_last_resort_title)
 	def New_title(character):
-		""" Generate or assign a name. """
-		from AtlasNomina.Map_of_Titles import Title
+		""" Generate or assign a title. """
+		from AtlasEpica.Map_of_Titles import Title
 		~character
 		# Defensive: ensure the attribute exists
 		if not hasattr(character, "title"):
@@ -365,16 +523,56 @@ class Character:
 	@minion
 	def to_dict(char):
 		""" Convert character details to dictionary format. """
+		from AtlasActorLudi.SpeciesKit import (
+				Current_Creature_Type,
+				Current_Heritage,
+				)
+		from AtlasLusoris.GuildKit import casting_title
 		from AtlasLusoris.Map_of_Classes.Scroll_of_Constants import Archetype
-		from AtlasLusoris.Map_of_Species import creature_type_label
+		from AtlasInventarium.ToolsKit import Find_Practice_Entries
+		creature_type = Current_Creature_Type( char )
+		heritage = Current_Heritage( char )
+		practices = tuple(
+			practice.to_dict()
+			for practice in Find_Practice_Entries(
+				char
+				)
+			)
 		return {
 			'name': 		char.name,
 			'title':		char.title,
 			'Gender': 		char.gender,
-			'CreatureType': creature_type_label(char.features),
-			'Species': 		char.species,
+			# "Humanoid (Celestial)": the rules answer, then what they resemble.
+			# The kinship is parenthetical because it is never the rules answer;
+			# a spell seeking Celestials still does not find an Aasimar.
+			'CreatureType': _creature_type_line(
+				char,
+				creature_type,
+				),
+			'Species': 		f"{char:Species}",
+			'Heritage': (
+				heritage.__name__.replace(
+					"_",
+					" ",
+					)
+				if heritage is not None
+				else ""
+				),
 			'Class': 		char.char_class,
+			# What to print for the class.  Separate from 'Class' on purpose:
+			# that one is the identity string, read back on regeneration and
+			# looked up in GUILDS, so it must stay the plain Guild name.
+			'Class_Title':	casting_title(
+				char
+				),
+			# What to print for the class.  Separate from 'Class' on purpose:
+			# that one is the identity string, read back on regeneration and
+			# looked up in GUILDS, so it must stay the plain Guild name.
+			'Class_Title':	casting_title(
+				char
+				),
 			'Subclass': 	Archetype(char),
+			'Specialization': char.specialization,
 			'Background': 	char.background,
 			'Level': 		char.level,
 			'Seed': 		char.seed,
@@ -384,9 +582,10 @@ class Character:
 			'AC': 			char.AC,
 			'Health': 		char.health,
 			'PB':			char.proficiency_bonus,
-			'size':			Size(char),
+			'size':			char.size,
 			'passive_perception':		char.passive_perception,
 			'other_proficiencies':		char.other_proficiencies,
+			'Practices':	practices,
 			'features':		char.features,
 			'equipment': 	char.equipment,
 			'SavingThrow':  char.saving_throws,
@@ -401,12 +600,14 @@ class Character:
 
 	@minion
 	def NPCfy(char):
-		from AtlasHero.Grimoire_of_NPC import NPC
-		pc_to_npc = NPC(
-			race = char.race,
-			archetype = char.char_class,
-			lvl=char.level,
-			seed= char.seed
+		from AtlasActorLudi.AtlasAlusoris import summon_nonplayer
+
+		pc_to_npc = summon_nonplayer(
+			race=char.race,
+			guild=char.char_class,
+			background=char.background,
+			level=char.level,
+			seed=char.seed,
 			)
 		return pc_to_npc
 
@@ -418,14 +619,12 @@ class Character:
 		Mimics the NPC genus structure to maintain compatibility
 		with functions like Title(), Descriptor(), etc.
 		"""
-		# For compatibility with NPCs
-		archetype = getattr(char, "archetype", None) or getattr(char, "char_class", "")
 		attributes = [
 			str(char.race or ""),
 			str(char.subrace or ""),
-			str(archetype or ""),
 			str(char.char_class or ""),
-			str(char.subclass or ""),
+			str(char.background or ""),
+			str(char.specialization or ""),
 			str(char.gender or ""),
 			str(char.alignment or ""),
 			]
@@ -444,8 +643,14 @@ class Character:
 		return ' '.join(descriptors)
 
 	@minion
-	def roll_stat(char):
-		rolls = [random.randint(1, 6) for _ in range(4)]
+	def roll_stat(char, dice=None):
+		rolls = [
+			char.Roll(
+				6,
+				dice=dice,
+				)
+			for _ in range(4)
+			]
 		return sum(sorted(rolls)[1:])
 
 	@property
@@ -462,103 +667,59 @@ class Character:
 	@minion
 	def New_stats(char):
 		~char
-		class_stat_preferences = {
-			'Barbarian':   {'primary': 'Strength', 		'secondary': 'Constitution'},
-			'Bard':        {'primary': 'Charisma', 		'secondary': 'Dexterity'},
-			'Cleric':      {'primary': 'Wisdom', 		'secondary': 'Strength'},
-			'Druid':       {'primary': 'Wisdom', 		'secondary': 'Constitution'},
-			'Fighter':     {'primary': 'Strength', 		'secondary': 'Constitution'},
-			'Monk':        {'primary': 'Dexterity', 	'secondary': 'Wisdom'},
-			'Paladin':     {'primary': 'Strength', 		'secondary': 'Charisma'},
-			'Ranger':      {'primary': 'Dexterity', 	'secondary': 'Wisdom'},
-			'Rogue':       {'primary': 'Dexterity', 	'secondary': 'Intelligence'},
-			'Sorcerer':    {'primary': 'Charisma', 		'secondary': 'Constitution'},
-			'Warlock':     {'primary': 'Charisma', 		'secondary': 'Constitution'},
-			'Wizard':      {'primary': 'Intelligence', 	'secondary': 'Constitution'},
-			}
-		background_stat_boosts = {
-			'Acolyte':    ['Intelligence', 	'Wisdom',  		'Charisma'],
-			'Artisan':    ['Strength', 		'Dexterity', 	'Intelligence'],
-			'Charlatan':  ['Dexterity', 	'Constitution', 'Charisma'],
-			'Criminal':   ['Dexterity', 	'Constitution', 'Intelligence'],
-			'Entertainer':['Strength', 		'Dexterity', 	'Charisma'],
-			'Farmer':     ['Constitution', 	'Strength', 	'Wisdom'],
-			'Guard':      ['Strength', 		'Intelligence', 'Wisdom'],
-			'Guide':      ['Wisdom', 		'Dexterity', 	'Constitution'],
-			'Hermit':     ['Wisdom', 		'Charisma', 	'Constitution'],
-			'Merchant':   ['Constitution', 	'Intelligence', 'Charisma'],
-			'Noble':      ['Strength', 		'Intelligence', 'Charisma'],
-			'Sage':       ['Constitution', 	'Wisdom', 		'Intelligence'],
-			'Sailor':     ['Strength', 		'Dexterity', 	'Wisdom'],
-			'Scribe':     ['Dexterity', 	'Wisdom', 		'Intelligence'],
-			'Soldier':    ['Strength', 		'Dexterity', 	'Constitution'],
-			'Wayfarer':   ['Dexterity', 	'Charisma', 	'Wisdom'],
-			}
-
-		# Initialize stats dictionary
-
+		from AtlasLusoris.GuildKit import ability_weights, ABILITY_KEYS
+		weights = ability_weights(char, amount=0)
+		sorted_keys = sorted(
+			ABILITY_KEYS,
+			key=lambda name: (
+				-weights.get(name, 0),
+				ABILITY_KEYS.index(name)
+			)
+		)
 
 		# Roll six ability scores
 		~char
-		rolled_stats = [char.roll_stat() for _ in range(6)]
+		# One Bag for the whole array, so the scores a Character rolls no
+		# longer depend on how many other draws happened before this line.
+		scores_bag = char.Dice_Bag(
+				"identity.scores",
+				version="1",
+				namespace="GenLegendActor",
+				)
+		rolled_stats = [
+			char.roll_stat(
+				dice=scores_bag,
+				)
+			for _ in range(6)
+			]
 		rolled_stats.sort(reverse=True)
 			# Sort from highest to lowest
 
-		# Get class primary and secondary stats
-		class_prefs = class_stat_preferences.get(char.char_class, {})
-		primary_stat = class_prefs.get('primary')
-		if "Eldritch Knight" in char:
-			secondary_stat = 'Intelligence'
-		else:
-			secondary_stat = class_prefs.get('secondary')
-		# Get background stat boosts
-		background_prefs = background_stat_boosts.get(char.background, [])
-
-		stats = {
-			'Strength': None,
-			'Dexterity': None,
-			'Constitution': None,
-			'Intelligence': None,
-			'Wisdom': None,
-			'Charisma': None,
-			}
-
-		assigned_stats = set()
-			# Keep track of which abilities have been assigned
-
-		# Assign highest stat to primary ability
-		if primary_stat:
-			stats[primary_stat] = rolled_stats.pop(0)
-			assigned_stats.add(primary_stat)
-
-		# Assign next highest stat to secondary ability
-		if secondary_stat and secondary_stat not in assigned_stats:
-			stats[secondary_stat] = rolled_stats.pop(0)
-			assigned_stats.add(secondary_stat)
-
-		# Assign remaining stats randomly
-		remaining_stats = [stat for stat in stats if stats[stat] is None]
-		random.shuffle(remaining_stats)
-		for stat in remaining_stats:
-			if rolled_stats:
-				stats[stat] = rolled_stats.pop(0)
-			else:
-				# In case there are more abilities than rolled stats (should not happen)
-				stats[stat] = char.roll_stat()
-
-		# Apply background stat boosts (+1 to each)
-		for stat in background_prefs:
-			if stat in stats and stats[stat] is not None:
-				stats[stat] = stats[stat] + 1
+		stats_by_key = {}
+		for key, val in zip(sorted_keys, rolled_stats):
+			stats_by_key[key] = val
 
 		# Update the character's ability scores
 		if char.AS:
-			char.AS.STR = stats['Strength']
-			char.AS.DEX = stats['Dexterity']
-			char.AS.CON = stats['Constitution']
-			char.AS.INT = stats['Intelligence']
-			char.AS.WIS = stats['Wisdom']
-			char.AS.CHA = stats['Charisma']
+			char.AS.STR = stats_by_key['STR']
+			char.AS.DEX = stats_by_key['DEX']
+			char.AS.CON = stats_by_key['CON']
+			char.AS.INT = stats_by_key['INT']
+			char.AS.WIS = stats_by_key['WIS']
+			char.AS.CHA = stats_by_key['CHA']
+
+		_key_to_fullname = {
+			"STR": "Strength",
+			"DEX": "Dexterity",
+			"CON": "Constitution",
+			"INT": "Intelligence",
+			"WIS": "Wisdom",
+			"CHA": "Charisma",
+		}
+		stats = {
+			fullname: stats_by_key[key]
+			for key, fullname in _key_to_fullname.items()
+		}
 		return stats
 
 	@minion
@@ -568,8 +729,10 @@ class Character:
 		"""
 
 		char.skills = Char_Skills(
-			AS = char.AS, 
-			ProficiencyBonus = char.proficiency_bonus)
+			char,
+			AS=char.AS,
+			ProficiencyBonus=char.proficiency_bonus,
+			)
 		~char
 		# Step 1: Adjust skills based on background
 		if char.background:
@@ -584,7 +747,7 @@ class Character:
 					"Alchemist's Supplies",
 					"Brewer's Supplies",
 					"Calligrapher's Supplies",
-					"Carpenter's Tools",
+					"Woodworker's Tools",
 					"Cartographer's Tools",
 					"Cobbler's Tools",
 					"Cook's Utensils",
@@ -597,7 +760,6 @@ class Character:
 					"Smith's Tools",
 					"Tinker's Tools",
 					"Weaver's Tools",
-					"Woodcarver's Tools",
 					])
 			elif char.background == "Charlatan":
 				char.skills.Deception.set_proficiency()
@@ -614,7 +776,7 @@ class Character:
 			elif char.background == "Farmer":
 				char.skills.Animal_Handling.set_proficiency()
 				char.skills.Nature.set_proficiency()
-				char.skills.Carpenter_Tools.set_proficiency()
+				char.skills.Woodworker_Tools.set_proficiency()
 			elif char.background == "Guard":
 				char.skills.Athletics.set_proficiency()
 				char.skills.Perception.set_proficiency()
@@ -630,7 +792,7 @@ class Character:
 			elif char.background == "Merchant":
 				char.skills.Animal_Handling.set_proficiency()
 				char.skills.Persuasion.set_proficiency()
-				char.skills.Navigator_Tools.set_proficiency()
+				char.skills.Cartographer_Tools.set_proficiency()
 			elif char.background == "Noble":
 				char.skills.History.set_proficiency()
 				char.skills.Persuasion.set_proficiency()
@@ -642,7 +804,7 @@ class Character:
 			elif char.background == "Sailor":
 				char.skills.Acrobatics.set_proficiency()
 				char.skills.Perception.set_proficiency()
-				char.skills.Navigator_Tools.set_proficiency()
+				char.skills.Cartographer_Tools.set_proficiency()
 			elif char.background == "Scribe":
 				char.skills.Investigation.set_proficiency()
 				char.skills.Perception.set_proficiency()
@@ -656,14 +818,6 @@ class Character:
 				char.skills.Stealth.set_proficiency()
 				char.skills.Thieves_Tools.set_proficiency()
 
-		# Step 3: Adjust skills based on subclass (if any)
-		if char.subclass:
-			if char.subclass == "Eldritch Knight":
-				char.skills.Arcana.set_proficiency()
-			elif char.subclass == "Battlemaster":
-				char.skills.Intimidation.set_proficiency()
-			# Add more subclasses
-
 		# Step 2: Set default skills based on class
 		if char.character_class:
 			if char.character_class == "Fighter":
@@ -674,6 +828,8 @@ class Character:
 					"History",
 					"Insight",
 					"Intimidation",
+					"Perception",
+					"Persuasion",
 					"Survival",
 					])
 				char.skills.Simple_Weapons.set_proficiency()
@@ -818,7 +974,7 @@ class Character:
 					"Alchemist's Supplies",
 					"Brewer's Supplies",
 					"Calligrapher's Supplies",
-					"Carpenter's Tools",
+					"Woodworker's Tools",
 					"Cartographer's Tools",
 					"Cobbler's Tools",
 					"Cook's Utensils",
@@ -831,7 +987,6 @@ class Character:
 					"Smith's Tools",
 					"Tinker's Tools",
 					"Weaver's Tools",
-					"Woodcarver's Tools",
 					])
 			elif char.character_class == "Druid":
 				char.skills.Light.set_proficiency()
@@ -871,9 +1026,12 @@ class Character:
 					"Religion",
 					])
 			elif char.character_class == "Barbarian":
-				n = 2
-				if char.level >= 3: n = 3
-				char.skills.activate_proficiencies(n, [
+				# Always two.  The third that a level-3 Barbarian gets comes
+				# from Primal Knowledge, which grants it itself so that the
+				# feature entry can name the skill instead of saying "of your
+				# choice" for a choice already made.  See
+				# AtlasLusoris/AtlasOfTraining/Map_of_Barbarian_Training.py.
+				char.skills.activate_proficiencies(2, [
 					"Animal Handling",
 					"Athletics",
 					"Intimidation",
@@ -881,26 +1039,23 @@ class Character:
 					"Perception",
 					"Survival",
 					])
+				if char.level >= 3:
+					from AtlasLusoris.AtlasOfTraining.Map_of_Barbarian_Training import (
+						Grant_Primal_Knowledge_Skill,
+						)
+					Grant_Primal_Knowledge_Skill(char)
 				char.skills.Simple_Weapons.set_proficiency()
 				char.skills.Martial_Weapons.set_proficiency()
 				char.skills.Light.set_proficiency()
 				char.skills.Medium.set_proficiency()
 				char.skills.Shields.set_proficiency()
 				char.skills.Unarmed_Barb.set_proficiency()
-		if getattr(char, 'skilled_feat', False): char.skills.activate_proficiencies(3, char.skills.get_all_skills())
-
 		return
 
 	@minion
 	def set_Objects(char):
 		from AtlasInventarium.Grimoire_of_Objects import setObjects
 		return setObjects(char)
-
-	@minion
-	def New_Alignment(char):
-		from AtlasActorLudi.Map_of_Alignments import Alignment
-		~char
-		return Alignment()
 
 	@property
 	def proficiency_bonus(char):

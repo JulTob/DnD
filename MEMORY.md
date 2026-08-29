@@ -1,0 +1,6 @@
+- [Upgrade features actualize the parent](upgrade-features-actualize-the-parent.md) — a feature that resizes another's pool states only what it changed; the live number stays in the one entry that owns it. No flavour line of its own.
+- [Martial inspiration: Iberian and Eastern, not Germanic](martial-inspiration-iberian-and-eastern.md) — for fencing/technique fantasy reach for La Verdadera Destreza, Sun Tzu, Machiavelli, kendo. Fechtbücher were rejected.
+- [Generated sheets omit player choices](generated-sheets-omit-player-choices.md) — "whenever you gain a level you can replace X" is never printed: the generator already chose. Not a missing rule, don't "fix" it.
+- [Upgrade features actualize the parent](upgrade-features-actualize-the-parent.md) — a feature that resizes another's pool states only what it changed; the live number stays in the one entry that owns it. No flavour line of its own.
+- [Martial inspiration: Iberian and Eastern, not Germanic](martial-inspiration-iberian-and-eastern.md) — for fencing/technique fantasy reach for La Verdadera Destreza, Sun Tzu, Machiavelli, kendo. Fechtbücher were rejected.
+- [Generated sheets omit player choices](generated-sheets-omit-player-choices.md) — "whenever you gain a level you can replace X" is never printed: the generator already chose. Not a missing rule, don't "fix" it.

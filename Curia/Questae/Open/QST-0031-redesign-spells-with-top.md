@@ -6,7 +6,7 @@
 - **Owner:** unclaimed
 - **Route to:** Architecture Consul (Druid), Contracts Consul (Warlock), Simplicity Consul (Monk), Testing Consul (Rogue), Lorekeeper
 - **Parent:** —
-- **Sidequests:** QST-0031.1 (SpellsKit), QST-0031.2 (retire SPELL_DATA_2024 → Spell()), QST-0031.3 (apply Tags, dedupe the Lodge), QST-0031.4 (spell test suite), QST-0031.5 (`Spell.__format__`)
+- **Sidequests:** QST-0031.1 (SpellsKit — **Working**), QST-0031.2 (retire SPELL_DATA_2024 → Spell()), QST-0031.3 (apply Tags, dedupe the Lodge), QST-0031.4 (spell test suite), QST-0031.5 (`Spell.__format__`), QST-0031.6 (verify every definition)
 - **Related:** QST-0016 (Character root, TOP flagship), QST-0020 (Features → TOP, sibling redesign), `Canon/TagKit-Doctrine.md`, `Canon/Conventions.md`
 
 ---

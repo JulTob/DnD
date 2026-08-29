@@ -7,7 +7,7 @@
 - **Route to:** Flow Consul (Sorcerer), Repair Consul (Cleric), Barbarian, Lorekeeper
 - **Parent:** —
 - **Sidequests:** QST-0030.1 (duplicate/nested bug reports), QST-0030.2 (ANSI double-wrap), QST-0030.3 (call-tree blind outside app.py/shiny_app.py)
-- **Related:** QST-0009 (Minions report, summoners recover), QST-0029 (a real crash this system was supposed to make legible), QST-0034 (dev log visibility in browser)
+- **Related:** QST-0009 (Minions report, summoners recover), QST-0029 (a real crash this system was supposed to make legible)
 
 ---
 

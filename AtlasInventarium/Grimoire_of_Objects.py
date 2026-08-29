@@ -8,8 +8,7 @@ def setObjects(char):
 	from AtlasInventarium.Grimoire_of_Objects import Object
 	import AtlasInventarium.Grimoire_of_Objects as objects
 
-	char.equipment.calculate_budget(
-		char.char_class, char.background, char.level )
+	# Budget is rolled ONCE, by GenerateEquipment. This pass spends what is left.
 
 	tool_proficiencies = {
 		'Musical Instrument': 'Charisma',
@@ -155,7 +154,7 @@ def setObjects(char):
 			name = "Weaver's Tools",
 			value=1, weight=5,
 			description = "Ability: Dexterity")
-		char.equipment.buy_item(tinker_Tools)
+		char.equipment.buy_item(weaver_Tools)
 
 	if char.skills.Woodcarver_Tools.is_proficient():
 		woodcarver_Tools = objects.Object(
@@ -206,26 +205,27 @@ def setObjects(char):
 				description = "Ability: Dexterity")
 		char.equipment.buy_item(thieves_Tools)
 
+	# A worn shield keeps contributing when body armor is upgraded — comparing
+	# bare armor against a shield-inclusive AC used to silently drop the +2.
+	shield_bonus = 2 if char.equipment.is_wearing_shield() else 0
+
 	if char.skills.Heavy.is_proficient():
 		armor = char.equipment.HeavyArmor()
-		AC_candidate = armor.armor_class
-		if AC_candidate > char.AC:
+		AC_candidate = armor.armor_class + shield_bonus
+		if AC_candidate > char.AC and char.equipment.equip_defense(armor):
 			char.AC = AC_candidate
-			char.equipment.equip_defense(armor)
 
 	if char.skills.Medium.is_proficient():
 		armor = char.equipment.MediumArmor(Modifier(char.abilities.DEX))
-		AC_candidate = armor.armor_class
-		if AC_candidate > char.AC:
+		AC_candidate = armor.armor_class + shield_bonus
+		if AC_candidate > char.AC and char.equipment.equip_defense(armor):
 			char.AC = AC_candidate
-			char.equipment.equip_defense(armor)
 
 	if char.skills.Light.is_proficient():
 		armor = char.equipment.LightArmor(Modifier(char.abilities.DEX))
-		AC_candidate = armor.armor_class
-		if AC_candidate > char.AC:
+		AC_candidate = armor.armor_class + shield_bonus
+		if AC_candidate > char.AC and char.equipment.equip_defense(armor):
 			char.AC = AC_candidate
-			char.equipment.equip_defense(armor)
 
 	set_Armor(char)
 
@@ -250,39 +250,31 @@ def GenerateEquipment(char):
 	else:
 		weapon =  char.equipment.Melee(Modifier(abilities.DEX), Modifier(abilities.STR))
 
-	char.equipment.buy_item(weapon)
-	char.equipment.equip_right(weapon)
+	# The weapon factories already charged the purse; equip straight into the
+	# slots the sheet renders (right hand doubles as the melee slot).
+	char.equipment.equip_item(weapon, slot="right")
+	char.equipment.melee = weapon
 
-	# Distance weapon
-	if char.skills.Martial_Weapons.is_proficient():
-		weapon = char.equipment.Ranged_Martial(Modifier(abilities.DEX), Modifier(abilities.STR))
-	else:
-		weapon = char.equipment.Ranged(Modifier(abilities.DEX), Modifier(abilities.STR))
-	char.equipment.buy_item(weapon)
-	char.equipment.equip_left(weapon)
-	# Equip Ranged Weapon
+	# Step 3: Distance weapon — its own slot, so it never displaces a shield.
 	if char.skills.Martial_Weapons.is_proficient():
 		ranged_weapon = char.equipment.Ranged_Martial(
-			Modifier(char.abilities.DEX), Modifier(char.abilities.STR))
+			Modifier(abilities.DEX), Modifier(abilities.STR))
 	else:
 		ranged_weapon = char.equipment.Ranged(
-			Modifier(char.abilities.DEX), Modifier(char.abilities.STR))
+			Modifier(abilities.DEX), Modifier(abilities.STR))
 
-	char.equipment.buy_item(ranged_weapon)
-	char.equipment.equip_item(ranged_weapon)
+	char.equipment.equip_item(ranged_weapon, slot="ranged")
 
-	# Step 5: Shield (if proficient and left hand free)
-	if char.skills.Shields.is_proficient() and char.equipment.left is None:
+	# Step 4: Shield (if proficient and a hand is free) — set_Armor owns the AC.
+	if (
+			char.skills.Shields.is_proficient()
+			and not char.equipment.is_wearing_shield()
+			and char.equipment.left is None
+			):
 		shield = Object(name="Shield", value=10, weight=6, description="+2 AC shield")
-		char.equipment.buy_item(shield)
-		char.equipment.equip_item(shield, slot="left")
-
-
-	# Step 4: Shield if proficient
-	if char.skills.Shields.is_proficient() and char.equipment.left is None:
-		shield = Object(name="Shield", value=10, weight=6, description="+2 AC shield")
-		char.equipment.buy_item(shield)
-		char.equipment.equip_item(shield, slot="left")
+		if char.equipment.buy_item(shield):
+			char.equipment.equip_item(shield, slot="left")
+			char.AC += 2
 
 	# Step 7: Optional - Add a few magic items if high-level character (level >=5)
 	if char.level >= 5 and char.equipment.purse >= 100:
@@ -303,18 +295,11 @@ def GenerateEquipment(char):
 		Object("Torch", 0.1, 1, quantity=3, description="Standard torch"),
 		Object("Waterskin", 2, 2, description="Filled with water"),
 		]
-	# Add basic tools or items if money left
-	if char.equipment.purse > 10:
-		rope = Object(name="Rope", value=1, weight=10, description="50 feet hempen rope")
-		char.equipment.buy_item(rope)
-
-	if char.equipment.purse > 20:
-		torch = Object(name="Torch", value=1, weight=1, quantity=5, description="Standard torches")
-		char.equipment.buy_item(torch)
-
+	# Buy each survival item at most once (Rope and Torch used to be bought
+	# twice, from two independent blocks, with different weights).
 	random.shuffle(tools)
 	for item in tools:
-		if char.equipment.purse >= item.value:
+		if not char.equipment.has_item(item.name):
 			char.equipment.buy_item(item)
 	return
 
@@ -339,16 +324,23 @@ def set_Armor(char):
 	if not char.equipment.defense:
 		armor = char.equipment.Clothes(Modifier(char.abilities.DEX))
 		char.equipment.equip_defense(armor)
+		# The sheet must agree with the item actually worn.
+		if armor.armor_class > char.AC:
+			char.AC = armor.armor_class
 
-	if char.skills.Shields.is_proficient():
-		AC_candidate = char.AC + 2
-		if AC_candidate > char.AC:
-			char.AC = AC_candidate
-			char.equipment.equip_left(Object(
-				name = "Shield",
-				value = 10,
-				weight = 6,
-				description = "+2 AC"))
+	# A shield is worn once: +2 only when one is newly strapped on, and only
+	# when a hand is free (set_Armor runs in both equipping passes).
+	if (
+			char.skills.Shields.is_proficient()
+			and not char.equipment.is_wearing_shield()
+			and char.equipment.left is None
+			):
+		char.equipment.equip_left(Object(
+			name = "Shield",
+			value = 10,
+			weight = 6,
+			description = "+2 AC"))
+		char.AC += 2
 
 class Object:
 	def __init__(object, name="", value=0, weight=0,  quantity=1, rarity="Common", description=""):
@@ -379,6 +371,14 @@ class Object:
 		"""Calculate the unitary value based on quantity."""
 		return object.value if object.quantity == 0 else object.value / object.quantity
 
+	def __str__(object):
+		"""Sheet entry. Without this a Shield rendered as its debug repr."""
+		from AtlasScriptum.Map_of_Formats import Entry
+		return Entry(
+				object.name,
+				object.description or "",
+				)
+
 	def __repr__(object):
 		"""String representation of the Object."""
 		return (f"{object.name} (Weight: {object.weight} lbs, "
@@ -401,14 +401,35 @@ class Armor(Object):
 		Parameters:
 		- armor_class: The armor class (AC) for armor.
 		"""
-		super().__init__(name, weight, value, quantity, rarity, description)
+		super().__init__(name, value, weight, quantity, rarity, description)
+		# Keep the parts, not just the sum. "Clothes, AC 15" reads as though
+		# the garment were armour; "10 + 5 Dex" says where the number came
+		# from — the same courtesy a weapon does with "1d8 + 3".
+		armor.base_class = armor_class
 		if armor_type == "Light":
-			armor.armor_class = armor_class + dex_bonus
+			armor.dex_applied = dex_bonus
 		elif armor_type == "Medium":
-			armor.armor_class = armor_class + min(dex_bonus,2)
+			armor.dex_applied = min(dex_bonus, 2)
 		else:
-			armor.armor_class = armor_class
+			armor.dex_applied = 0
+		armor.armor_class = armor.base_class + armor.dex_applied
 		armor.armor_type = armor_type
+
+	def __str__(armor):
+		"""Sheet entry — armour speaks its class and kind, not its debug repr."""
+		from AtlasScriptum.Map_of_Formats import Entry
+		if armor.dex_applied:
+			result = (
+				f"AC {armor.armor_class} "
+				f"({armor.base_class} + {armor.dex_applied} Dex)"
+				)
+		else:
+			result = f"AC {armor.armor_class}"
+		if armor.armor_type:
+			result += f", {armor.armor_type} armor"
+		if armor.description and armor.description != armor.name:
+			result += f". {armor.description}"
+		return Entry(armor.name, result + ".")
 
 	def __repr__(armor):
 		"""String representation of Equipment."""
@@ -441,17 +462,43 @@ class Weapon(Object):
 			Parameters:
 			- damage: The nDd Damage of the weapon.
 			"""
-			super().__init__(name, weight, value, quantity, rarity, description)
-			weapon.damage = f"{N}D{D} + {Mod}  ({dmg})"
+			super().__init__(name, value, weight, quantity, rarity, description)
 			weapon.damage_intensity = N
 			weapon.damage_dice =  D
 			weapon.attack = f"1D20 + {Mod}"
 			weapon.mastery = mastery
-			#weapon.weapon_type = weapon_type
 			weapon.attack_modifier = 	Mod
-			weapon.damage_type = dmg
 			weapon.range_distance = 	range_distance
-			weapon.properties = weapon_type + mastery + properties + description
+
+			# The catalogue carries the real damage type as the first
+			# sentence of `weapon_type` and never passes `dmg`, so the
+			# default silently made every weapon Bludgeoning — a Spear read
+			# "1D6+4 Bludgeoning, Piercing.". Take the type from there when
+			# it is one, and drop it from the properties so it prints once.
+			DAMAGE_WORDS = (
+					"Bludgeoning",
+					"Piercing",
+					"Slashing",
+					)
+			parts = [
+					piece.strip().rstrip(".")
+					for piece in str(weapon_type).split(".")
+					if piece and piece.strip()
+					]
+			if parts and parts[0] in DAMAGE_WORDS:
+				weapon.damage_type = parts[0]
+				parts = parts[1:]
+			else:
+				weapon.damage_type = dmg
+
+			weapon.damage = f"{N}D{D} + {Mod}  ({weapon.damage_type})"
+			# Join with sentence breaks. Raw concatenation ran the parts
+			# together on the sheet ("Bludgeoning.ToppleVersatile (1d8)").
+			weapon.properties = ". ".join(
+					str(part).strip().rstrip(".")
+					for part in (*parts, mastery, properties, description)
+					if part and str(part).strip()
+					)
 
 	def __str__(wpn):
 			from AtlasScriptum.Map_of_Formats import Entry
@@ -484,7 +531,7 @@ class Inventory:
 		"""Inventory to manage equipped items, bag, and coins."""
 		inventory.equipped = []	# List of equipped items (weapons, armor, etc.)
 		inventory.bag = 	[]	# List of unequipped items
-		inventory.purse = 	0	 # Purse with gold coins
+		inventory.purse = 	0	 # Purse with gold coins (floored to copper)
 
 		# Equipped item slots
 		inventory.defense = None
@@ -492,6 +539,21 @@ class Inventory:
 		inventory.ranged = 	None
 		inventory.right = 	None
 		inventory.left = 	None
+
+	@property
+	def purse(self):
+		"""Coins on hand, always a clean copper-piece figure."""
+		return self._purse
+
+	@purse.setter
+	def purse(self, value):
+		# Floor to the copper piece (1/100 gold) at every mutation site, so
+		# float crumbs can never surface as "38.70000000000002 gp". Always
+		# down: a merchant does not round in the customer's favour. The
+		# epsilon stops a bare floor() destroying a copper on values like
+		# 0.29, whose binary form is 28.999999999999996 hundredths.
+		import math
+		self._purse = math.floor(float(value) * 100 + 1e-6) / 100
 
 	def add_item_to_bag(self, item):
 		"""Adds an item to the bag."""
@@ -502,10 +564,33 @@ class Inventory:
 		self.bag.append(item)
 
 	def buy_item(self, item):
-		"""Adds an item to the bag."""
-		if self.purse > item.value:
+		"""Adds an item to the bag. Returns True when the purchase happened."""
+		if self.purse >= item.value:
 			self.add_item_to_bag(item)
 			self.purse -= item.value
+			return True
+		return False
+
+	def get_worn_armor(self):
+		"""The Armor currently in the defense slot, if any."""
+		return self.defense
+
+	def is_wearing_shield(self):
+		"""True when a Shield occupies a hand slot."""
+		for slot in (self.left, self.right):
+			if slot is not None and getattr(slot, "name", "") == "Shield":
+				return True
+		return False
+
+	def has_item(self, name):
+		"""True when an item of this name is already carried or equipped."""
+		for item in self.bag:
+			if getattr(item, "name", "") == name:
+				return True
+		for slot in (self.defense, self.melee, self.ranged, self.right, self.left):
+			if slot is not None and getattr(slot, "name", "") == name:
+				return True
+		return False
 
 
 	def equip_item(self, item, slot=None):
@@ -541,7 +626,7 @@ class Inventory:
 			self.left = item
 		else:
 			if item.value < self.purse:
-				if self.right:
+				if self.left:
 					self.purse += self.left.value
 				self.left = item
 				self.purse -= item.value
@@ -560,16 +645,24 @@ class Inventory:
 				self.purse -= item.value
 
 	def equip_defense(self, item):
-		"""Equips an item and moves it from the bag to equipped items."""
+		"""Equip armor, buying it when it is not already carried.
+
+		Returns True when the armor ends up worn — callers must not raise AC
+		for armor the character could not afford.
+		"""
 		if item in self.bag:
 			self.bag.remove(item)
 			self.defense = item
-		else:
-			if item.value < self.purse:
-				if self.defense:
-					self.purse += self.defense.value
-				self.defense = item
-				self.purse -= item.value
+			return True
+
+		if item.value <= self.purse:
+			if self.defense:
+				self.purse += self.defense.value
+			self.defense = item
+			self.purse -= item.value
+			return True
+
+		return False
 
 	def unequip_item(self, item):
 		"""Unequips an item and moves it to the bag."""
@@ -611,9 +704,8 @@ class Inventory:
 			base += Dice(N = 30, D=4)
 		elif char_class =='Barbarian':
 			base += Dice(N = 20, D=4)
-		print(f"Base budget from class: {base} gold")
-		base += Dice(N = lvl - 1, D=40)
-		print(f"Base budget from class and level: {base} gold")
+		if lvl > 1:
+			base += Dice(N = lvl - 1, D=40)
 		if backg == 'Acolyte':
 			base += Dice(10,5)
 		elif backg =='Artisan':
@@ -656,7 +748,8 @@ class Inventory:
 		from AtlasInventarium.Grimoire_of_Objects import Armor
 		return Armor(
 			name="Clothes",
-			armor_class=10 + dex_mod,
+			armor_class=10,
+			dex_bonus=dex_mod,
 			armor_type="Light",
 			weight=0,
 			value=0,
@@ -666,7 +759,8 @@ class Inventory:
 		from AtlasInventarium.Grimoire_of_Objects import Armor
 		return Armor(
 			name="Leather Armor",
-			armor_class=11 + dex_mod,
+			armor_class=11,
+			dex_bonus=dex_mod,
 			armor_type="Light",
 			weight=10,
 			value=10,
@@ -676,7 +770,8 @@ class Inventory:
 		from AtlasInventarium.Grimoire_of_Objects import Armor
 		return Armor(
 			name="Scale Mail",
-			armor_class=14 + min(dex_mod, 2),
+			armor_class=14,
+			dex_bonus=dex_mod,
 			armor_type="Medium",
 			weight=45,
 			value=50,

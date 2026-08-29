@@ -10,13 +10,29 @@ The three Tag families, each rooted on Spell_Tag (whose Precondition
 restricts every spell Tag to Spell targets — TagPreconditionError and a
 full rollback on anything else):
 
-	School     — the eight canonical schools of magic. Exclusive: a spell
-	             bears exactly one (enforced by School.Single_School).
-	Tradition  — Arcane / Divine / Primal (the One D&D playtest grouping,
-	             adopted deliberately as a project choice, not core rules).
-	             NOT exclusive: Cure Wounds is Divine and Primal at once.
-	Spell_List — "this spell appears on X's list", one Tag per caster
-	             class/subclass the codebase deals spells to. Not exclusive.
+	School        — the eight canonical schools of magic. Exclusive: a spell
+	                bears exactly one (enforced by School.Single_School).
+	                Applied by __init__ from the school text; its Record
+	                writes the canonical spell.school string.
+	Tradition     — Arcane / Divine / Primal (the One D&D playtest grouping,
+	                adopted deliberately as a project choice, not core rules).
+	                NOT exclusive: Cure Wounds is Divine and Primal at once.
+	Spell_List    — "this spell appears on X's list", one Tag per caster
+	                class the codebase deals spells to. Not exclusive.
+	                Subclass lists (Eldritch Knight, Arcane Trickster…) do
+	                NOT live here: each subclass mints its own Tag in its own
+	                file, inheriting the class list it draws from
+	                (e.g. class Eldritch_Knight_List(Wizard_List)).
+	Spell_Level   — Cantrip / Level 1–9. Exclusive (Single_Level); applied
+	                by __init__; its Record writes spell.level.
+	Concentration — the spell demands concentration. Applied by __init__
+	                from the flag or a "Concentration…" duration.
+	Ritual        — castable as a ritual. New explicit input (ritual=True);
+	                also sniffed from legacy casting_time marks
+	                ("1 Action R", "(R)", "or Ritual").
+	Legacy        — a pre-2024 5e spell with no 2024 printing (legacy=True).
+	                Kept playable; the Tag marks the vintage, and legacy
+	                variable names carry an _L suffix in the Lodge.
 
 Membership reads as TagKit intends:
 	Evocation(fireball)              # tag it (atomic; no-op if already)
@@ -26,7 +42,9 @@ Membership reads as TagKit intends:
 	"evocation" in fireball          # string probe, case-insensitive
 '''
 
-from TagKit import Tag, Pre
+import re
+
+from TagKit import Tag, Pre, Record
 
 try:
 	from AtlasScriptum.Map_of_Formats import Entry
@@ -48,16 +66,23 @@ class Spell:
 				 duration = "",
 				 components = "",
 				 concentration = "",
-				 definition = ""):
+				 definition = "",
+				 ritual = False,
+				 legacy = False):
 		spell.name =  name
-		spell.level = level
-		spell.school = school
 		spell.casting_time = casting_time
 		spell.ranges = ranges
 		spell.duration = duration
 		spell.components = components
-		spell.concentration = concentration
 		spell.definition = definition
+		#-- level, school, concentration and ritual are Tagged, not merely
+		#-- stored: each helper applies the Tag whose Record writes the
+		#-- attribute (falling back to a plain attribute when nothing maps)
+		Assign_Level(spell, level)
+		Assign_School(spell, school)
+		Assign_Concentration(spell, concentration, duration)
+		Assign_Ritual(spell, ritual, casting_time)
+		Assign_Legacy(spell, legacy)
 
 	def describe(spell):
 		desc = spell.string
@@ -102,7 +127,6 @@ class Spell:
 class Spell_Tag(Tag):
 	NAME = "Spell Tag"
 	DESCRIPTION = "Root of every Tag a Spell may bear. Only Spell targets."
-	ABSTRACT = True
 
 	@Pre
 	def Spell_Only(agent):
@@ -129,37 +153,69 @@ class Abjuration(School):
 	NAME = "Abjuration"
 	DESCRIPTION = "Wards and protection: shields, banishments, dispels."
 
+	@Record
+	def school(spell):
+		return "Abjuration"
+
 class Conjuration(School):
 	NAME = "Conjuration"
 	DESCRIPTION = "Summoning and transportation: creatures, objects, teleports."
+
+	@Record
+	def school(spell):
+		return "Conjuration"
 
 class Divination(School):
 	NAME = "Divination"
 	DESCRIPTION = "Revelation: scrying, foresight, detection."
 
+	@Record
+	def school(spell):
+		return "Divination"
+
 class Enchantment(School):
 	NAME = "Enchantment"
 	DESCRIPTION = "Minds bent: charms, compulsions, sleep."
+
+	@Record
+	def school(spell):
+		return "Enchantment"
 
 class Evocation(School):
 	NAME = "Evocation"
 	DESCRIPTION = "Raw energy shaped: fire, lightning, radiant bolts."
 
+	@Record
+	def school(spell):
+		return "Evocation"
+
 class Illusion(School):
 	NAME = "Illusion"
 	DESCRIPTION = "Deceived senses: images, sounds, phantasms."
+
+	@Record
+	def school(spell):
+		return "Illusion"
 
 class Necromancy(School):
 	NAME = "Necromancy"
 	DESCRIPTION = "Life and death bartered: drains, undeath, false life."
 
+	@Record
+	def school(spell):
+		return "Necromancy"
+
 class Transmutation(School):
 	NAME = "Transmutation"
 	DESCRIPTION = "Matter reshaped: polymorphs, hastes, stone to mud."
 
+	@Record
+	def school(spell):
+		return "Transmutation"
+
 
 # Canonical name -> School Tag. The one lookup table for normalizing the
-# Lodge's raw school strings (QST-0031.3 strips whitespace and the
+# Lodge's raw school strings (Assign_School strips whitespace and the
 # Wildemount dunamancy suffixes D/DC/DG before consulting this).
 SCHOOLS = {
 	"Abjuration":    Abjuration,
@@ -171,6 +227,135 @@ SCHOOLS = {
 	"Necromancy":    Necromancy,
 	"Transmutation": Transmutation,
 	}
+
+
+"""		Spell levels — Cantrip and Levels 1 to 9, exactly one per spell    """
+class Spell_Level(Spell_Tag):
+	NAME = "Spell Level"
+	DESCRIPTION = "The spell's level. A spell bears exactly one."
+	ABSTRACT = True
+
+	@Pre
+	def Single_Level(agent):
+		#-- same contract shape as Single_School: the candidate level is
+		#-- already active when this runs, so a second level counts 2
+		count = sum(1 for lvl in SPELL_LEVELS.values() if agent in lvl)
+		return count <= 1
+
+
+class Cantrip(Spell_Level):
+	NAME = "Cantrip"
+	DESCRIPTION = "Level 0 — at-will magic, no slot spent."
+
+	@Record
+	def level(spell):
+		return 0
+
+class Spell_Level_1(Spell_Level):
+	NAME = "Level 1"
+
+	@Record
+	def level(spell):
+		return 1
+
+class Spell_Level_2(Spell_Level):
+	NAME = "Level 2"
+
+	@Record
+	def level(spell):
+		return 2
+
+class Spell_Level_3(Spell_Level):
+	NAME = "Level 3"
+
+	@Record
+	def level(spell):
+		return 3
+
+class Spell_Level_4(Spell_Level):
+	NAME = "Level 4"
+
+	@Record
+	def level(spell):
+		return 4
+
+class Spell_Level_5(Spell_Level):
+	NAME = "Level 5"
+
+	@Record
+	def level(spell):
+		return 5
+
+class Spell_Level_6(Spell_Level):
+	NAME = "Level 6"
+
+	@Record
+	def level(spell):
+		return 6
+
+class Spell_Level_7(Spell_Level):
+	NAME = "Level 7"
+
+	@Record
+	def level(spell):
+		return 7
+
+class Spell_Level_8(Spell_Level):
+	NAME = "Level 8"
+
+	@Record
+	def level(spell):
+		return 8
+
+class Spell_Level_9(Spell_Level):
+	NAME = "Level 9"
+
+	@Record
+	def level(spell):
+		return 9
+
+
+SPELL_LEVELS = {
+	0: Cantrip,
+	1: Spell_Level_1,
+	2: Spell_Level_2,
+	3: Spell_Level_3,
+	4: Spell_Level_4,
+	5: Spell_Level_5,
+	6: Spell_Level_6,
+	7: Spell_Level_7,
+	8: Spell_Level_8,
+	9: Spell_Level_9,
+	}
+
+
+"""		Casting demands — concentration and rituals    """
+class Concentration(Spell_Tag):
+	NAME = "Concentration"
+	DESCRIPTION = "The spell demands concentration to sustain."
+
+	@Record
+	def concentration(spell):
+		return "Concentration"
+
+class Ritual(Spell_Tag):
+	NAME = "Ritual"
+	DESCRIPTION = "Castable as a ritual: +10 minutes, no slot spent."
+
+	@Record
+	def ritual(spell):
+		return True
+
+class Legacy(Spell_Tag):
+	NAME = "Legacy"
+	DESCRIPTION = (
+		"A 5e spell from before the 2024 revision, with no 2024 printing. "
+		"Kept playable; the Tag marks the vintage."
+		)
+
+	@Record
+	def legacy(spell):
+		return True
 
 
 """		Casting traditions — Arcane / Divine / Primal (One D&D playtest)    """
@@ -243,17 +428,18 @@ class Wizard_List(Spell_List):
 	NAME = "Wizard"
 	DESCRIPTION = "On the Wizard spell list."
 
-class Eldritch_Knight_List(Spell_List):
-	NAME = "Eldritch Knight"
-	DESCRIPTION = "On the Eldritch Knight (Fighter) subclass list."
 
-class Arcane_Trickster_List(Spell_List):
-	NAME = "Arcane Trickster"
-	DESCRIPTION = "On the Arcane Trickster (Rogue) subclass list."
+# Subclass lists (Eldritch Knight, Arcane Trickster, …) are NOT declared
+# here: each subclass mints its own Tag in its own file, inheriting the
+# class list it draws from — e.g. `class Eldritch_Knight_List(Wizard_List)`,
+# so tagging a spell for the subclass also enrolls it on the parent list
+# (TagKit auto-applies Bases). SpellsKit only owns the class-level lists.
 
 
 # Class-list name -> Tag, keyed exactly as Grimoire_of_Spellcasters'
 # SPELL_LISTS speaks today, so QST-0031.3's migration is a dict walk.
+# Subclass keys ("Eldritch Knight", "Arcane Trickster") are registered by
+# their own files when those Tags are minted.
 SPELL_LISTS_TAGS = {
 	"Bard":             Bard_List,
 	"Cleric":           Cleric_List,
@@ -263,24 +449,90 @@ SPELL_LISTS_TAGS = {
 	"Sorcerer":         Sorcerer_List,
 	"Warlock":          Warlock_List,
 	"Wizard":           Wizard_List,
-	"Eldritch Knight":  Eldritch_Knight_List,
-	"Arcane Trickster": Arcane_Trickster_List,
 	}
 
 # Which lists each tradition covers (the UA mapping, for QST-0031.3 to
-# derive a spell's Tradition from its class lists).
+# derive a spell's Tradition from its class lists). Subclass lists inherit
+# their parent list's tradition through the Tag hierarchy — no row needed.
 TRADITION_OF_LIST = {
 	"Bard":             Arcane,
 	"Sorcerer":         Arcane,
 	"Warlock":          Arcane,
 	"Wizard":           Arcane,
-	"Eldritch Knight":  Arcane,
-	"Arcane Trickster": Arcane,
 	"Cleric":           Divine,
 	"Paladin":          Divine,
 	"Druid":            Primal,
 	"Ranger":           Primal,
 	}
+
+
+"""		The Assign helpers — __init__'s door from raw data to Tags    """
+_DUNAMANCY_SUFFIX = re.compile(r"\s+(D|DC|DG)$")
+_RITUAL_MARK = re.compile(r"\(R\)|\bor Ritual\b|\bR\s*$", re.IGNORECASE)
+
+
+def Assign_Level(spell, level):
+	"""Tag the spell's level; the Tag's Record writes spell.level."""
+	try:
+		tag = SPELL_LEVELS.get(int(level))
+	except (TypeError, ValueError):
+		tag = None
+	if tag is not None:
+		tag(spell)
+	else:
+		spell.level = level  #-- unknown levels keep the raw value, untagged
+
+
+def Assign_School(spell, school):
+	"""Tag the spell's school; the Tag's Record writes the canonical name.
+
+	Raw Lodge strings arrive with trailing whitespace and Wildemount
+	dunamancy suffixes ("Evocation DG", "Necromancy DC"). The base school
+	is tagged; when a suffix was stripped the original survives on
+	spell.school_raw so QST-0031.3 can still decide dunamancy's fate.
+	"""
+	text = str(school).strip() if school else ""
+	base = _DUNAMANCY_SUFFIX.sub("", text)
+	tag = SCHOOLS.get(base)
+	if tag is not None:
+		if base != text:
+			spell.school_raw = text
+		tag(spell)
+	else:
+		spell.school = school  #-- unknown schools keep the raw value, untagged
+
+
+def Assign_Concentration(spell, concentration, duration=""):
+	"""Tag concentration from the explicit flag or a 'Concentration…' duration."""
+	demands = bool(str(concentration).strip()) or (
+			"concentration" in str(duration).lower()
+			)
+	if demands:
+		Concentration(spell)
+	else:
+		spell.concentration = concentration
+
+
+def Assign_Ritual(spell, ritual, casting_time=""):
+	"""Tag rituals from the explicit flag or legacy casting_time marks.
+
+	The Lodge's older entries encode rituals inside casting_time —
+	"1 Action R", "1 Minute (R)", "1 Action or Ritual" — so those marks
+	are honored until the data itself is normalized ("1 Reaction" does
+	not match: the R must stand alone at the end).
+	"""
+	if ritual is True or _RITUAL_MARK.search(str(casting_time or "")):
+		Ritual(spell)
+	else:
+		spell.ritual = False
+
+
+def Assign_Legacy(spell, legacy):
+	"""Tag pre-2024 spells; the Tag's Record writes spell.legacy."""
+	if legacy is True:
+		Legacy(spell)
+	else:
+		spell.legacy = False
 
 
 Spell.TAG_ROOTS = (Spell_Tag,)
@@ -334,6 +586,49 @@ if __name__ == "__main__":
 
 	# 7) Labels speak D&D, not Python
 	assert Wizard_List.Label() == "Wizard"
-	assert Eldritch_Knight_List.Label() == "Eldritch Knight"
+
+	# 8) Records materialize as DATA on the instance, not methods:
+	#    the @Record builder runs once at tagging; its return value is
+	#    written into the instance __dict__ (TagKit _apply_record_values).
+	assert bolt.level == 1 and type(bolt.level) is int
+	assert object.__getattribute__(bolt, "__dict__")["level"] == 1
+	assert bolt.school == "Evocation" and type(bolt.school) is str
+
+	# 9) __init__ auto-tags every intrinsic axis
+	brew = Spell(
+		name="Test Brew", level=3, school="Transmutation DG ",
+		casting_time="1 Minute R", duration="Concentration, up to 1 hour",
+		definition="bubbles",
+		)
+	assert brew in Spell_Level_3 and brew.level == 3
+	assert brew in Transmutation, "dunamancy suffix strips to the base school"
+	assert brew.school_raw == "Transmutation DG", "…but the raw string survives"
+	assert brew in Concentration, "sniffed from the duration text"
+	assert brew in Ritual and brew.ritual is True, "sniffed from the legacy R mark"
+	reaction = Spell(name="Test Retort", level=1, school="Evocation",
+					 casting_time="1 Reaction", definition="riposte")
+	assert reaction not in Ritual, "'1 Reaction' must not read as a ritual"
+
+	# 10) One level per spell, same contract shape as schools
+	try:
+		Spell_Level_5(brew)
+	except TagPreconditionError:
+		pass
+	else:
+		raise AssertionError("a second level must be rejected")
+
+	# 11) Subclass lists live in their subclass's file, inheriting the class
+	#     list they draw from — Bases auto-apply, so the parent list follows.
+	class Test_Knight_List(Wizard_List):
+		NAME = "Test Knight"
+	Test_Knight_List(brew)
+	assert brew in Wizard_List, "subclass list enrolls the parent list too"
+
+	# 12) The format spec picks the shape; plain stays plain
+	assert format(bolt, "html") == bolt.html() == bolt.as_html()
+	assert format(bolt, "md") == bolt.md() == bolt.markdown()
+	assert f"{bolt}" == str(bolt)
+	assert "### Test Brew" in brew.md() and "Ritual" in brew.md()
+	assert "(Ritual)" in brew.html()
 
 	print("SpellsKit self-test passed.")

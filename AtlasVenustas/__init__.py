@@ -1,18 +1,14 @@
-"""AtlasVenustas — presentation chrome (firmitas · utilitas · venustas).
+"""Venustas — the aesthetic/presentation layer.
 
-Loader, styles, tablet, and shareable-link kits live here; domain logic stays in other Atlases.
+``Scriba`` packages the self-formatting display primitives (``Entry``, ``Chip``)
+and the decorative ``glyph`` picker.
 """
 
-from AtlasVenustas.Lodge_of_Symbols import (
-    PLANET_SYMBOLS,
-    SOL_SYMBOLS,
-    symbols_for_planets,
-    symbols_for_sol,
-)
+from AtlasVenustas.Scriba import Chip, Entry, glyph
 
-__all__ = [
-    "PLANET_SYMBOLS",
-    "SOL_SYMBOLS",
-    "symbols_for_planets",
-    "symbols_for_sol",
-]
+
+__all__ = (
+	"Chip",
+	"Entry",
+	"glyph",
+	)

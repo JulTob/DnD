@@ -1,209 +1,227 @@
-# Shelf_of_Armors.py
+"""
+Ledger_of_Armors — the PHB 2024 armor table, built with ``Build_Armour``.
 
-from Compass_of_ArmorType import ArmorType, check_if_ArmorType
-from Compass_of_Rarity import Rarity, check_if_Rarity
-from Grimoire_of_Objects import Inventory
-from Objects import Armor
-import app.random as random
+One record per armor and the Shield. ``str_requirement``/``stealth_disadvantage``
+are recorded but not yet enforced — a later quest applies the Speed penalty and
+Stealth check disadvantage; Quest 1 only needs the data to exist and be queryable.
+"""
 
-chain_mail = Armor(name = "Chain Mail",
-	weight=55,
-	value=75,
-	quantity=1,
-	rarity=Rarity.COMMON,
-	armor_type =ArmorType.HEAVY,
-	armor_class=16,
-	Dex=0,
-	description="The wearer has Disadvantage on Dexterity (Stealth) checks.")
-plate_armor = Armor(name = "Plate Armor",
-	weight=65,
-	value=1500,
-	quantity=1,
-	armor_type =ArmorType.HEAVY,
-	rarity=Rarity.COMMON,
-	armor_class=18,
-	Dex=0,
-	description="The wearer has Disadvantage on Dexterity (Stealth) checks.")
-ring_mail = Armor(name = "Ring Mail",
-	weight=40,
-	value=30,
-	quantity=1,
-	armor_type =ArmorType.HEAVY,
-	rarity=Rarity.COMMON,
-	armor_class=14,
-	Dex=0,
-	description="The wearer has Disadvantage on Dexterity (Stealth) checks.")
-splint_armor = Armor(name = "Splint Armor",
-	weight=60,
-	value=200,
-	quantity=1,
-	rarity=Rarity.COMMON,
-	armor_type = ArmorType.HEAVY,
-	armor_class=17,
-	Dex=0,
-	description="The wearer has Disadvantage on Dexterity (Stealth) checks.")
+from __future__ import annotations
 
-Heavy_Armors = [
-	chain_mail,
-	plate_armor,
-	ring_mail,
-	splint_armor,
-	]
+from AtlasInventarium.Grimoire_of_Items import Build_Armour, Build_Shield, Item
 
-scale_mail = Armor(name = "Scale Mail",
-	weight=45,
-	value=50,
-	quantity=1,
-	rarity=Rarity.COMMON,
-	armor_type =ArmorType.MEDIUM,
-	armor_class=14,
-	Dex=min(2,Dex),
-	description="The wearer has Disadvantage on Dexterity (Stealth) checks.")
-hide_armor = Armor(name = "Hide Armor",
-	weight=12,
-	value=10,
-	quantity=1,
-	rarity=Rarity.COMMON,
-	armor_type =ArmorType.MEDIUM,
-	armor_class=12,
-	Dex=min(2,Dex),
-	description="")
-half_plate_armor = Armor(name = "Half Plate Armor",
-	weight=40,
-	value=750,
-	quantity=1,
-	rarity=Rarity.COMMON,
-	armor_type =ArmorType.MEDIUM,
-	armor_class=15,
-	Dex=min(2,Dex),
-	description="The wearer has Disadvantage on Dexterity (Stealth) checks.")
-chain_shirt = Armor(name = "Chain Shirt",
-	weight=20,
-	value=50,
-	quantity=1,
-	rarity=Rarity.COMMON,
-	armor_type =ArmorType.MEDIUM,
-	armor_class=13,
-	Dex=min(2,Dex),
-	description="")
-breastplate = Armor(name = "Breastplate",
-	weight=20,
-	value=400,
-	quantity=1,
-	rarity=Rarity.COMMON,
-	armor_type =ArmorType.MEDIUM,
-	armor_class=14,
-	Dex=min(2,Dex),
-	description="")
 
-Medium_Armors = [
-	scale_mail,
-	hide_armor,
-	half_plate_armor,
-	chain_shirt,
-	breastplate,
-	]
+# ---------------------------------------------------------------------------
+# Light Armor — full Dexterity applies
+# ---------------------------------------------------------------------------
 
-studded_leather_armor = Armor(name = "Studded Leather Armor",
-	weight=13,
-	value=45,
-	quantity=1,
-	rarity=Rarity.COMMON,
-	armor_type =ArmorType.LIGHT,
-	armor_class=12,
-	Dex=Dex,
-	description="")
-padded_armor = Armor(name = "Padded Armor",
-	weight=8,
-	value=5,
-	quantity=1,
-	rarity=Rarity.COMMON,
-	armor_type =ArmorType.LIGHT,
-	armor_class=11,
-	Dex=Dex,
-	description="The wearer has Disadvantage on Dexterity (Stealth) checks.")
-leather_armor = Armor(name = "Leather Armor",
-	weight=8,
-	value=5,
-	quantity=1,
-	rarity=Rarity.COMMON,
-	armor_type =ArmorType.LIGHT,
-	armor_class=11,
-	Dex=Dex,
-	description="")
+Padded = Build_Armour(
+		name="Padded",
+		base_ac=11,
+		kind="Light",
+		value=5,
+		weight=8,
+		stealth_disadvantage=True,
+		description="Quilted layers of cloth and batting.",
+		)
 
-Light_Armors = [
-	studded_leather_armor,
-	padded_armor,
-	leather_armor,
-	]
+Leather = Build_Armour(
+		name="Leather",
+		base_ac=11,
+		kind="Light",
+		value=10,
+		weight=10,
+		description="The breastplate and shoulder protectors are made of "
+			"leather that has been stiffened by being boiled in oil.",
+		)
 
-simple_clothes = Armor(name = "Simple Clothes",
-			weight=5,
-			value=10,
-			quantity=1,
-			rarity=Rarity.COMMON,
-			armor_type =ArmorType.UNARMORED,
-			armor_class=10,
-			Dex=Dex,
-			description="")
+Studded_Leather = Build_Armour(
+		name="Studded Leather",
+		base_ac=12,
+		kind="Light",
+		value=45,
+		weight=13,
+		description="Leather reinforced with close-set rivets or spikes.",
+		)
 
-fancy_clothes = Armor(name = "Fancy Clothes",
-			weight=5,
-			value=15,
-			quantity=1,
-			rarity=Rarity.COMMON,
-			armor_type =ArmorType.UNARMORED,
-			armor_class=10,
-			Dex=Dex,
-			description="")
-Clothes = [
-	simple_clothes,
-	fancy_clothes,
-	]
-def GetHeavyArmor(Inventory, Dex = 0):
-	"""Selects a Heavy Armor item within budget and updates purse."""
-	possible_armors = []
-	for item in Heavy_Common_Armors:
-		if item.value < Inventory.purse:
-			possible_armors.append(item)
-	if not possible_armors:
-		print("\nDark Lord! No Heavy Armor is available in the shelf!\n")
-		return None
-	armor = random.choice(possible_armors)
-	Inventory.purse -= armor.value
-	return armor
 
-def MediumArmor(Inventory, Dex = 0):
-	armors = []
-	for item in Medium_Armors:
-		if item.value < Inventory.purse:
-			armors.append(item)
-	if not armors:
-		print("\nDark Lord! No Medium Armor is available in the shelf!\n")
-		return None
-	armor = random.choice(armors)
-	Inventory.purse -= armor.value
-	return armor
+# ---------------------------------------------------------------------------
+# Medium Armor — Dexterity capped at +2
+# ---------------------------------------------------------------------------
 
-def LightArmor(Inventory, Dex = 0):
-	armors = []
-	for item in Light_Armors:
-		if item.value < Inventory.purse:
-			armors.append(item)
-	if not armors:
-		print("\nDark Lord! No Light Armor is available in the shelf!\n")
-		return None
-	armor = random.choice(armors)
-	Inventory.purse -= armor.value
-	return armor
+Hide = Build_Armour(
+		name="Hide",
+		base_ac=12,
+		kind="Medium",
+		value=10,
+		weight=12,
+		description="A crude armor made from thick furs and pelts.",
+		)
 
-def Clothes(Inventory, Dex = 0):
+Chain_Shirt = Build_Armour(
+		name="Chain Shirt",
+		base_ac=13,
+		kind="Medium",
+		value=50,
+		weight=20,
+		description="A shirt of interlocking metal rings worn under clothing.",
+		)
 
-	armors = []
-	for item in Clothes:
-		if item.value < Inventory.purse:
-			armors.append(item)
-	armor = random.choice(armors)
-	Inventory.purse -= armor.value
-	return armor
+Scale_Mail = Build_Armour(
+		name="Scale Mail",
+		base_ac=14,
+		kind="Medium",
+		value=50,
+		weight=45,
+		stealth_disadvantage=True,
+		description="A coat of leather covered with overlapping pieces of metal.",
+		)
+
+Breastplate = Build_Armour(
+		name="Breastplate",
+		base_ac=14,
+		kind="Medium",
+		value=400,
+		weight=20,
+		description="A fitted metal chest piece worn with supple leather.",
+		)
+
+Half_Plate = Build_Armour(
+		name="Half Plate",
+		base_ac=15,
+		kind="Medium",
+		value=750,
+		weight=40,
+		stealth_disadvantage=True,
+		description="Shaped metal plates cover most of the wearer's body.",
+		)
+
+
+# ---------------------------------------------------------------------------
+# Heavy Armor — Dexterity does not apply
+# ---------------------------------------------------------------------------
+
+Ring_Mail = Build_Armour(
+		name="Ring Mail",
+		base_ac=14,
+		kind="Heavy",
+		value=30,
+		weight=40,
+		stealth_disadvantage=True,
+		description="Leather armor with heavy rings sewn into it.",
+		)
+
+Chain_Mail = Build_Armour(
+		name="Chain Mail",
+		base_ac=16,
+		kind="Heavy",
+		value=75,
+		weight=55,
+		str_requirement=13,
+		stealth_disadvantage=True,
+		description="Interlocking metal rings, worn over a padded coat.",
+		)
+
+Splint = Build_Armour(
+		name="Splint",
+		base_ac=17,
+		kind="Heavy",
+		value=200,
+		weight=60,
+		str_requirement=15,
+		stealth_disadvantage=True,
+		description="Narrow vertical strips of metal riveted to a backing of leather.",
+		)
+
+Plate = Build_Armour(
+		name="Plate",
+		base_ac=18,
+		kind="Heavy",
+		value=1500,
+		weight=65,
+		str_requirement=15,
+		stealth_disadvantage=True,
+		description="Shaped, interlocking metal plates covering the entire body.",
+		)
+
+
+Shield = Build_Shield(
+		name="Shield",
+		bonus=2,
+		value=10,
+		weight=6,
+		# {material} is filled per hero by Map_of_Materials.personalise, so the
+		# catalogue entry stays generic while the one a Character carries says
+		# what it is actually made of.
+		description="A {material} shield strapped to one arm.",
+		)
+
+
+LIGHT_ARMOR: tuple[Item, ...] = (
+		Padded, Leather, Studded_Leather,
+		)
+MEDIUM_ARMOR: tuple[Item, ...] = (
+		Hide, Chain_Shirt, Scale_Mail, Breastplate, Half_Plate,
+		)
+HEAVY_ARMOR: tuple[Item, ...] = (
+		Ring_Mail, Chain_Mail, Splint, Plate,
+		)
+
+ARMORS: tuple[Item, ...] = LIGHT_ARMOR + MEDIUM_ARMOR + HEAVY_ARMOR
+
+ARMORS_BY_NAME: dict[str, Item] = {
+		armor.name: armor
+		for armor in ARMORS
+		}
+
+
+__all__ = (
+		"ARMORS",
+		"ARMORS_BY_NAME",
+		"HEAVY_ARMOR",
+		"LIGHT_ARMOR",
+		"MEDIUM_ARMOR",
+		"Shield",
+		)
+
+
+def _self_test():
+	from AtlasInventarium.Grimoire_of_Items import Armour, Shield as ShieldTag
+
+	names = [armor.name for armor in ARMORS]
+	assert len(names) == len(set(names)), (
+			"duplicate armor names in the ledger"
+			)
+	assert len(ARMORS) == 3 + 5 + 4, len(ARMORS)
+
+	for armor in ARMORS:
+		assert armor in Armour, armor.name
+
+	for armor in LIGHT_ARMOR:
+		assert armor.dex_cap is None, armor.name
+	for armor in MEDIUM_ARMOR:
+		assert armor.dex_cap == 2, armor.name
+	for armor in HEAVY_ARMOR:
+		assert armor.dex_cap == 0, armor.name
+
+	# AC climbs within each tier
+	assert [armor.base_ac for armor in LIGHT_ARMOR] == sorted(
+			armor.base_ac for armor in LIGHT_ARMOR
+			)
+	assert [armor.base_ac for armor in HEAVY_ARMOR] == sorted(
+			armor.base_ac for armor in HEAVY_ARMOR
+			)
+
+	assert Shield in ShieldTag
+	assert Shield.shield_bonus == 2
+
+	assert Chain_Mail.str_requirement == 13
+	assert Leather.str_requirement == 0
+
+	print(
+			f"OK — Ledger_of_Armors self-test ({len(ARMORS)} armors + Shield)"
+			)
+
+
+if __name__ == "__main__":
+	_self_test()

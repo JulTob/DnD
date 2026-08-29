@@ -16,14 +16,25 @@
 
         let currentIndex = panels.findIndex((panel) => panel.classList.contains('is-active'));
         let autoTimer = null;
+        let stopped = false;
 
         if (currentIndex < 0) {
             currentIndex = 0;
             }
 
     const restartAutoRotate = () => {
+        if (stopped) return;
         if (autoTimer) clearInterval(autoTimer);
         autoTimer = setInterval(goNext, 12000);
+        };
+
+    // Any interaction with the tablet permanently stops the auto-rotation.
+    const stopAutoRotate = () => {
+        stopped = true;
+        if (autoTimer) {
+            clearInterval(autoTimer);
+            autoTimer = null;
+            }
         };
 
     const goTo = (index) => {
@@ -71,6 +82,10 @@
         });
 
     tablet.addEventListener('mouseleave', restartAutoRotate);
+
+    // Stop auto-rotation for good on the first real interaction (click, tap, key).
+    tablet.addEventListener('pointerdown', stopAutoRotate, true);
+    tablet.addEventListener('keydown', stopAutoRotate, true);
 
     tablet.querySelectorAll('.number-input').forEach((element) => {
         const input = element.querySelector('input[type="number"]');

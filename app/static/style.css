@@ -28,10 +28,14 @@
   --font-impact:  'IM Fell DW Pica SC', 'IM Fell English SC', serif;    /* emphasis (bold/italic inline) */
   --font-ui:      'Spectral SC', 'Cinzel', sans-serif;                    /* buttons, controls, UI chrome */
   --font-name:    'IM Fell English SC', 'IM Fell DW Pica SC', serif;      /* character title */
-  --font-record:  'IM Fell Double Pica SC', 'IM Fell DW Pica SC', serif;  /* stat record labels */
-  --font-value:   'IM Fell Double Pica', 'IM Fell DW Pica', serif;        /* stat values */
+  --font-entry:   'IM Fell Double Pica SC', 'IM Fell English SC', serif;  /* feature entry titles */
+  --font-record:  'IM Fell Great Primer SC', 'IM Fell Double Pica SC', serif; /* chip / record titles */
+  --font-value:   'IM Fell Great Primer', 'IM Fell DW Pica', serif;       /* chip / stat values */
   --font-fantasy: 'Eagle Lake', 'Cinzel Decorative', serif;              /* fantasy titles (spells) */
+  --font-script:  'Italianno', 'Dancing Script', cursive;                 /* handwritten spell names */
   --font-script:  'Italianno', 'Beau Rivage', 'Fleur De Leah', cursive;                 /* handwritten spell names */
+  --font-spell-title: 'IM Fell French Canon SC', 'IM Fell English SC', 'IM Fell Double Pica SC', serif; /* spell card titles */
+  --font-magic-script: 'Italianno', 'Tangerine', cursive;                /* magic chips + Known Spells list */
 }
 
 /* ============================================
@@ -150,9 +154,6 @@ header .fantasy-button{
     cursor: pointer;
 	}
 
-header .fantasy-button:hover{
-    font-size: 1.1em;
-	}
 /* Dropdown menu styling */
 .dropdown-menu {
 	display: none; /* Hidden by default */
@@ -170,7 +171,10 @@ header .fantasy-button:hover{
 	text-shadow: 0px 0px 8px var(--fourth-color);
 	box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
 	border-radius: 8px;
-	transition: all 0.5s ease;
+	/* Named rather than `all`: this menu shows and hides with `display`, which
+	   is not animatable, so only the colours were ever transitioning here. */
+	transition: background-color 0.5s ease, color 0.5s ease,
+	            border-color 0.5s ease, box-shadow 0.5s ease;
 	}
 
 .dropdown-menu li {
@@ -257,6 +261,10 @@ h6 {
     font-size:1.1em;
     }
 
+/* Small caps earn their keep on TITLES and on genuine emphasis — a term
+   being named, a rule word. Setting whole paragraphs in them (an Entry wraps
+   its entire definition in <i>) makes the page shout and costs readability,
+   so italic body prose stays in the reading face. */
 b {
 	color: var(--primary-color);
 	font-family: var(--font-impact);
@@ -265,8 +273,8 @@ b {
 
 i {
 	color: var(--text-color);
-	font-family: var(--font-impact);
-	font-size: 1.1em;
+	font-family: var(--font-text);
+	font-size: 1.05em;
 	}
 
 u {
@@ -305,15 +313,22 @@ u {
 	text-shadow: 0px 0px 8px var(--fourth-color);
 	box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
 	border-radius: 8px;
-	transition: all 0.5s ease;
+	/* Named rather than `all`, so no geometric property can ever be animated
+	   here by accident.  See the note on .fantasy-button:hover. */
+	transition: background-color 0.5s ease, color 0.5s ease,
+	            border-color 0.5s ease, box-shadow 0.5s ease;
 	}
 
+/* Colour only.  A hover that changes SIZE reflows the row it sits in, which
+   slides the button out from under the pointer, which drops the hover, which
+   restores the size, which slides it back: the button flickers and cannot be
+   clicked.  Nothing here may change font-size, padding, border-width,
+   letter-spacing or transform. */
 .fantasy-button:hover {
 	background-color: var(--primary-color);
 	color: var(--black-color);
 	cursor: pointer;
 	border-color: var(--black-color);
-	font-size:	0.9em;
 	}
 
 
@@ -741,25 +756,46 @@ _____________________________________________*/
       position: absolute;
       border: 1px dashed rgba(212, 175, 55, 0.3);
       border-radius: 50%;
-      animation: rotate linear infinite;
       pointer-events: none;
+      /* 3D coin-flip: each orbit flips independently on its own Y axis.
+         The spin is driven by --spin-dir on the inner .orbit-ring child;
+         the flip-y class rotates the outer shell on Y without disrupting it. */
+      perspective: 900px;
+      transform-style: preserve-3d;
+      transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Coin-flip state — toggled by JS every 1-5 discrete seconds */
+    .orbit-layer.flip-y {
+      transform: rotateY(180deg);
+    }
+
+    /* Inner ring carries the 2D spin so it doesn’t clash with the Y-flip */
+    .orbit-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      animation: rotate linear infinite;
+      transform-style: preserve-3d;
+    }
+    .orbit2 .orbit-ring {
+      animation: rotateReverse linear infinite;
     }
 
     .orbit1 {
       width: 160px; height: 140px;
-      animation-duration: 10s;
     }
+    .orbit1 .orbit-ring { animation-duration: 10s; }
 
     .orbit2 {
       width: 230px; height: 200px;
-	  animation: rotateReverse linear infinite;
-      animation-duration: 15s;
     }
+    .orbit2 .orbit-ring { animation-duration: 15s; }
 
     .orbit3 {
       width: 300px; height: 260px;
-      animation-duration: 20s;
     }
+    .orbit3 .orbit-ring { animation-duration: 20s; }
 
     .planet {
       position: absolute;
@@ -1255,10 +1291,63 @@ header, footer {
 
 .stat-chip .value {
     font-family: var(--font-value);
-    font-size: 1.2em;
+    font-size: 1.15em;
     font-weight: 700;
-    line-height: 1.1;
+    line-height: 1.25;
     overflow-wrap: anywhere;
+    white-space: pre-line;
+}
+
+/* Spellcasting chips keep Great Primer for readable slot tables / numbers. */
+.magic-chip .value {
+    font-family: var(--font-value);
+    font-size: 1.15em;
+    font-weight: normal;
+    line-height: 1.2;
+}
+
+/* Spell Slots chip: level × count, same spirit as Attack Rolls. */
+.stat-chip .spell-slots-table {
+    width: 100%;
+    border: none;
+    border-collapse: collapse;
+    margin: 0.15em 0 0;
+    font-variant-numeric: tabular-nums;
+}
+
+.stat-chip .spell-slots-table td {
+    border: none;
+    padding: 0.08rem 0.2rem;
+    vertical-align: baseline;
+    line-height: 1.35;
+}
+
+.stat-chip .spell-slots-table td:first-child {
+    padding-left: 0;
+    text-align: left;
+    opacity: 0.72;
+    white-space: nowrap;
+}
+
+.stat-chip .spell-slots-table td.spell-slot-count {
+    text-align: right;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.stat-chip .spell-slots-note {
+    margin-top: 0.25em;
+    font-size: 0.85em;
+    font-weight: 400;
+    opacity: 0.7;
+    line-height: 1.2;
+}
+
+/* The Known Spells rail list, handwritten. */
+.known-spells li {
+    font-family: var(--font-magic-script);
+    font-size: 1.45em;
+    line-height: 1.1;
 }
 
 .sheet-rail .npc-scores > .npc-box {
@@ -1340,29 +1429,32 @@ header, footer {
     line-height: 1.05;
 }
 
-/* Fantasy section titles (e.g. Spells) in Eagle Lake. */
+/* Section titles (Features, Equipment, Backstory, Spells…) — Cinzel, clear break. */
 .sheet-section.is-fantasy > h1,
 .sheet-section.is-fantasy > h2,
-.sheet-section.is-fantasy > h3 {
-    font-family: var(--font-fantasy);
+.sheet-section.is-fantasy > h3,
+.sheet-section > h1,
+.sheet-section > h2,
+.sheet-section > h3 {
+    font-family: 'Cinzel', var(--font-header);
+    font-size: clamp(1.65rem, 2.4vw, 2.15rem);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    line-height: 1.15;
+    color: var(--primary-color);
+    margin: 0 0 0.7rem;
 }
 
 /* Everything else: clean prose, each section parted by a gold horizontal rule. */
 .sheet-section {
     border-top: 1px solid var(--gold-color);
-    padding-top: 0.7rem;
-    margin-top: 1rem;
+    padding-top: 1.1rem;
+    margin-top: 1.6rem;
 }
 
 .sheet-section:first-of-type {
     border-top: 0;
     margin-top: 0.4rem;
-}
-
-.sheet-section > h1,
-.sheet-section > h2,
-.sheet-section > h3 {
-    margin: 0 0 0.45rem;
 }
 
 .sheet-section .prose-body {
@@ -1376,14 +1468,14 @@ header, footer {
 .sheet-section .prose-body p { margin: 0 0 0.7em; }
 .sheet-section .prose-body table { width: 100%; }
 
-/* Emphasis inside prose — bold/italic markdown words read as accents, not plain text. */
+/* Bold text marks rules labels; italics distinguish tonal prose without recoloring it. */
 .sheet-section .prose-body strong {
     color: var(--primary-color);
     font-family: var(--font-impact);
 }
 
 .sheet-section .prose-body em {
-    color: var(--primary-color);
+    color: inherit;
     font-style: italic;
 }
 
@@ -1415,24 +1507,66 @@ header, footer {
 
 .sheet-section .prose-body .feature-lead {
     margin: 0 0 0.35em;
-    font-family: var(--font-name);
-    font-size: 1.2em;
+    /* Its own cut, not --font-name.  The entry title sat in IM Fell English SC
+       while the inline rules labels below it sit in IM Fell DW Pica SC: two
+       small-caps faces close enough that the heading did not read as a
+       heading.  Double Pica is the large display cut, so it separates by
+       proportion as well as by size. */
+    font-family: var(--font-entry);
+    font-size: 1.55em;
     letter-spacing: 0.02em;
     font-weight: bold;
     color: var(--primary-color);
+}
+
+/* Legacy narrative entries are wholly tonal. Explicit emphasis takes control
+   when one entry intentionally mixes flavour with upright rules text. */
+.sheet-section .prose-body .feature-entry.is-narrative:not(:has(em))
+    > :not(.feature-lead):not(.feature-chips),
+.sheet-section .prose-body .narrative-prose {
+    font-style: italic;
+}
+
+.sheet-section .prose-body .feature-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45em;
+    margin: 0 0 0.55em;
+}
+
+.sheet-section .prose-body .feature-chip {
+    display: inline-block;
+    padding: 0.15em 0.55em;
+    border: 1px solid rgba(212, 175, 55, 0.45);
+    border-radius: 999px;
+    font-size: 0.92em;
+    line-height: 1.35;
+    color: var(--primary-color);
+    background: rgba(212, 175, 55, 0.08);
 }
 
 .sheet-section .prose-body .spell {
     font-family: var(--font-text);
     font-size: 1.04rem;
     line-height: 1.7;
-    margin: 0.5em 0 0.9em;
+    margin: 0.35em 0 0.35em;
+}
+
+.sheet-section .prose-body .spell-separator {
+    text-align: center;
+    font-size: 1.35rem;
+    line-height: 1;
+    color: var(--gold-color);
+    opacity: 0.82;
+    margin: 0.85rem 0 1rem;
+    user-select: none;
 }
 
 .sheet-section .prose-body .spell h4 {
-    font-family: var(--font-script);
-    font-size: 1.6em;
+    font-family: var(--font-spell-title);
+    font-size: 1.15em;
     font-weight: normal;
+    letter-spacing: 0.02em;
     margin: 0.4em 0 0.15em;
 }
 
@@ -1494,7 +1628,7 @@ header, footer {
 }
 
 .npc-prose .prose-body li { margin: 0.15em 0; }
-.npc-prose .prose-body em { color: var(--primary-color); }
+.npc-prose .prose-body em { color: inherit; }
 
 .npc-prose .prose-body blockquote {
     margin: 0 0 0.85em;
@@ -1555,9 +1689,13 @@ header, footer {
 
 .header-actions {
     display: flex;
+    flex-wrap: wrap;
     gap: 0.5rem;
     align-items: center;
+    justify-content: flex-end;
     margin-right: 1rem;
+    min-width: 0;
+    max-width: 100%;
 }
 
 .header-actions .action-button {
@@ -1598,13 +1736,83 @@ header, footer {
     margin-top: 1rem;
 }
 
+.npc-sheet-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: flex-end;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.npc-sheet-controls .shiny-input-container {
+    width: auto;
+    margin-bottom: 0;
+}
+
+.npc-sheet-controls .character-level-box {
+    grid-area: auto;
+    width: auto;
+    min-width: 12rem;
+    align-self: flex-end;
+}
+
+.npc-sheet-controls .character-level-controls .fantasy-button {
+    width: 2.8rem;
+    min-width: 2.8rem;
+    min-height: 3.05rem;
+    height: 100%;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.npc-sheet-controls .btn {
+    align-self: stretch;
+}
+
+.npc-sheet-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: flex-end;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.npc-sheet-controls .shiny-input-container {
+    width: auto;
+    margin-bottom: 0;
+}
+
+.npc-sheet-controls .character-level-box {
+    grid-area: auto;
+    width: auto;
+    min-width: 12rem;
+    align-self: flex-end;
+}
+
+.npc-sheet-controls .character-level-controls .fantasy-button {
+    width: 2.8rem;
+    min-width: 2.8rem;
+    min-height: 3.05rem;
+    height: 100%;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.npc-sheet-controls .btn {
+    align-self: stretch;
+}
+
 .character-reforge {
     display: grid;
     grid-template-columns: minmax(360px, 580px) minmax(300px, 500px);
     grid-template-areas:
         "species level_block"
-        "class generate"
-        "background share";
+        "background generate"
+        "class share";
     gap: 1.4rem 3.5rem;
     align-items: stretch;
 
@@ -1632,7 +1840,10 @@ header, footer {
     min-width: 0;
 }
 
-.character-reforge .shiny-input-container {
+.character-reforge .shiny-input-container,
+.character-reforge .shiny-input-container:not(.shiny-input-container-inline) {
+    width: 100%;
+    max-width: none;
     margin: 0;
 }
 
@@ -1640,12 +1851,47 @@ header, footer {
     grid-area: species;
 }
 
-.character-reforge-field--class {
-    grid-area: class;
-}
-
 .character-reforge-field--background {
     grid-area: background;
+}
+
+.character-reforge-field--species .shiny-input-select,
+.character-reforge-field--background .shiny-input-select {
+    width: 100%;
+    min-height: 3.05rem;
+    box-sizing: border-box;
+}
+
+.character-reforge-field--class {
+    grid-area: class;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    min-height: 3.05rem;
+    border: 2px solid var(--gold-color);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.92);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+}
+
+.character-reforge-field--class .shiny-input-container {
+    flex: 1 1 50%;
+    width: 50%;
+    min-width: 0;
+}
+
+.character-reforge-field--class .shiny-input-select {
+    width: 100%;
+    height: 100%;
+    min-height: 3.05rem;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.character-reforge-field--class .shiny-input-container + .shiny-input-container .shiny-input-select {
+    border-left: 1px solid rgba(212, 175, 55, 0.45);
 }
 
 .character-level-box {
@@ -1653,7 +1899,8 @@ header, footer {
     display: grid;
     grid-template-columns: 2.8rem minmax(4.5rem, 1fr) 2.8rem;
     align-items: center;
-    gap: 0.35rem;
+    justify-items: center;
+    gap: 0;
     min-height: 3.05rem;
     padding: 0;
     border: 2px solid var(--gold-color);
@@ -1663,15 +1910,22 @@ header, footer {
     overflow: hidden;
 }
 
-.character-level-label {
+.character-level-value {
     grid-column: 2;
     grid-row: 1;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
     margin: 0;
     padding: 0;
     font-family: var(--font-header);
-    font-size: 0.9rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+    font-size: 1.3rem;
+    letter-spacing: 0.03em;
+    line-height: 1;
+    white-space: nowrap;
+    text-align: center;
     color: var(--gold-color);
 }
 
@@ -1686,15 +1940,11 @@ header, footer {
     font-size: 1rem;
 }
 
-.character-reforge .fantasy-button:hover {
-    font-size: 1rem;
-}
-
 .character-reforge .character-level-controls .fantasy-button {
     width: 2.8rem;
     min-width: 2.8rem;
     min-height: 3.05rem;
-    height: 3.05rem;
+    height: 100%;
     flex: 0 0 2.8rem;
     border: 0;
     border-radius: 0;
@@ -1750,8 +2000,8 @@ header, footer {
         grid-template-columns: minmax(0, 1fr);
         grid-template-areas:
             "species"
-            "class"
             "background"
+            "class"
             "level_block"
             "generate"
             "share";
@@ -1838,3 +2088,132 @@ header, footer {
 .npc-list a:hover {
     transform: scale(1.02);
 }
+
+/* ---------------------------------------------------------------------------
+   Great Old One patron text.
+
+   The letter never leaves the document: it stays in place holding its own
+   width, readable to copy-paste, find-in-page and screen readers, and the
+   glyph is painted over it and marked aria-hidden.  Nothing reflows, so the
+   line never moves while a character is wearing something else.
+
+   Two traps, both of which look like a broken feature rather than a bug:
+
+   1. `display:inline` and NOT inline-block.  inline-block makes every wrapped
+      character its own line-break opportunity and the browser starts splitting
+      words in half.
+
+   2. The wrapper must keep the surrounding text colour.  Only the inner span
+      holding the real letter goes transparent.  Colouring the WRAPPER
+      transparent makes the glyph inherit transparent as well, and the letter
+      blinks out with nothing in its place.
+
+   See app/static/js/eldritch.js.
+   --------------------------------------------------------------------------- */
+/* The Great Old One's two words are the entire description, so they carry it
+   at twice the body size.  At prose size the substitutions are genuinely hard
+   to catch: the effect needs the reader to be looking at the text when one
+   happens, and there are only ten characters for it to happen in. */
+.eldritch {
+	font-size: 		2em;
+	line-height: 	1.3;
+	}
+
+.eldritch-glyph {
+	position: 	relative;
+	display: 	inline;
+	}
+
+/* the real letter: present, sized, selectable, just not painted */
+.eldritch-glyph > span {
+	color: 		transparent;
+	}
+
+/* The glyph, drawn as generated content and never as a node.  This is what
+   keeps the sheet honest: ::after content cannot be selected, copied, matched
+   by find-in-page, or reached by a screen reader, so anything anyone extracts
+   from this page is the text the generator wrote.  Colour inherits through the
+   wrapper, which was deliberately never made transparent. */
+.eldritch-glyph::after {
+	content: 		var(--eldritch-glyph, "");
+	position: 		absolute;
+	left: 			50%;
+	top: 			50%;
+	transform: 		translate(-50%, -50%);
+	line-height: 	1;
+	pointer-events: none;
+	white-space: 	nowrap;
+	}
+
+@media (prefers-reduced-motion: reduce) {
+	.eldritch-glyph > span { color: inherit; }
+	.eldritch-glyph::after { content: none; }
+	}
+
+/* ---------------------------------------------------------------------------
+   Great Old One patron text.
+
+   The letter never leaves: it stays in the DOM holding its own width, readable
+   to copy-paste, find-in-page and screen readers, and the glyph is painted
+   over it and marked aria-hidden.  Nothing reflows, so the line never moves
+   while a character is wearing something else.
+
+   `display:inline` and NOT inline-block: inline-block makes every wrapped
+   character its own line-break opportunity and the browser starts splitting
+   words in half.  See app/static/js/eldritch.js.
+   --------------------------------------------------------------------------- */
+.eldritch-glyph {
+	position: 	relative;
+	display: 	inline;
+	color: 		transparent;
+	}
+
+.eldritch-glyph > i {
+	position: 		absolute;
+	left: 			50%;
+	top: 			50%;
+	transform: 		translate(-50%, -50%);
+	font-style: 	normal;
+	line-height: 	1;
+	color: 			var(--ink, currentColor);
+	pointer-events: none;
+	}
+
+@media (prefers-reduced-motion: reduce) {
+	.eldritch-glyph { color: inherit; }
+	.eldritch-glyph > i { display: none; }
+	}
+
+/* ---------------------------------------------------------------------------
+   Great Old One patron text.
+
+   The letter never leaves: it stays in the DOM holding its own width, readable
+   to copy-paste, find-in-page and screen readers, and the glyph is painted
+   over it and marked aria-hidden.  Nothing reflows, so the line never moves
+   while a character is wearing something else.
+
+   `display:inline` and NOT inline-block: inline-block makes every wrapped
+   character its own line-break opportunity and the browser starts splitting
+   words in half.  See app/static/js/eldritch.js.
+   --------------------------------------------------------------------------- */
+.eldritch-glyph {
+	position: 	relative;
+	display: 	inline;
+	color: 		transparent;
+	}
+
+.eldritch-glyph > i {
+	position: 		absolute;
+	left: 			50%;
+	top: 			50%;
+	transform: 		translate(-50%, -50%);
+	font-style: 	normal;
+	line-height: 	1;
+	color: 			var(--ink, currentColor);
+	pointer-events: none;
+	}
+
+@media (prefers-reduced-motion: reduce) {
+	.eldritch-glyph { color: inherit; }
+	.eldritch-glyph > i { display: none; }
+	}

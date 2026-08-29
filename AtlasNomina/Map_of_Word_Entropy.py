@@ -1,5 +1,9 @@
 from collections import Counter
 import math
+
+from Minion import print_record
+
+from Minion import print_record
 import random
 
 sample = [
@@ -137,7 +141,14 @@ def replace_symbol(name, symbol_entropies, target='lower', syze=3):
 			new_entropy = calculate_name_entropy(new_name, symbol_entropies, syze=syze)
 			# Check for improvement
 			if (target == 'lower' and new_entropy < best_entropy) or (target == 'higher' and new_entropy > best_entropy):
-				print(f"{name} → {candidate}  ({best_entropy:.4f} → {new_entropy:.4f}) : {new_name}")
+				# Was a bare print(), which put one line on the console for every
+				# substitution of every name and never reached the log file at
+				# all. Same information, sent where the rest of the reports go.
+				print_record(
+					f"🔤 [entropy] {name} → {candidate} "
+					f"({best_entropy:.4f} → {new_entropy:.4f}) : {new_name}",
+					"dim",
+					)
 				return new_name  # <--- Immediately return after one successful substitution
 
 	# If no improvement found, return original name

@@ -2,26 +2,20 @@
 
 from Minion import guardian
 
-from AtlasAlusoris.Map_of_Races import race_weights as races
-# from AtlasAlusoris.Map_of_Races import *
-from AtlasAlusoris.Map_of_Races import (
+from AtlasActorLudi.AtlasAlusoris.Map_of_Races import race_weights as races
+# from AtlasActorLudi.AtlasAlusoris.Map_of_Races import *
+from AtlasActorLudi.AtlasAlusoris.Map_of_Races import (
 	Humans
 	)
-import random
+from AtlasActorLudi.SpeciesKit import SPECIES_WEIGHTS
 
 from AtlasLusoris.Grimoire_of_Features import  *
 
-species = {
-	"Human":           	120, #
-	"Dwarf":        	100, #
-	"Elf":            	100,
-	"Dragonborn":   	100,
-	"Gnome":        	80,
-	"Orc":            	80,
-	"Halfling":        	80,
-	"Tiefling":        	75,
-	"Goliath":        	75,
-	"Aasimar":        	75,
+species = dict(
+	SPECIES_WEIGHTS
+	)
+
+# Retired catalogue notes:
 #	"Githyanki":    	40,
 #	"Githerai":        	40,
 #	"Goblin":        	30,
@@ -80,15 +74,23 @@ species = {
 #	"Plasmoid":        	10,
 #	"Thri Kreen":    	10,
 #	"Leonin":        	10,
-						}
-
-def random_species():
-	return random.choices(list(species_weights.keys()), weights=species_weights.values(), k=1)[0]
+def random_species(
+		character,
+		):
+	return character.Pick(
+		list(
+			species
+			),
+		weights=species.values(),
+		)
 
 @guardian
-def species_to_race_and_subrace(species_name):
+def species_to_race_and_subrace(
+	species_name,
+	character=None,
+	):
 	mapping = {
-		"Human"     : ("Human",      Humans()),
+		"Human": ("Human", None),
 		"Dwarf": ("Dwarf", None),
 		"Elf": ("Elf", None),
 		"Dragonborn": ("Dragon", "Dragonborn"),
@@ -102,64 +104,84 @@ def species_to_race_and_subrace(species_name):
 		}
 	if species_name not in mapping:
 		return ("Unknown", None)
-	return mapping[species_name]
+
+	race, subrace = mapping[
+		species_name
+		]
+
+	if character is not None:
+		from AtlasActorLudi.SpeciesKit import Current_Heritage
+
+		heritage = Current_Heritage( character )
+
+		if heritage is not None:
+			subrace = heritage.__name__.replace(
+				"_",
+				" ",
+				)
+
+	if (
+		species_name == "Human"
+		and character is not None
+		):
+		subrace = Humans(
+			character,
+			dice=
+			character.Dice_Bag(
+				"identity.species.Human.nomina_culture",
+				version="1",
+				namespace="GenLegendNomina",
+				)
+			)
+
+	return (
+		race,
+		subrace,
+		)
 
 
-def species_features(species_name):
+def species_features(
+	species_name,
+	character=None,
+	):
 
 	species = {
-		"Human": [
-			Resourceful(),                       # always-on Inspiration
-			Feat(                                # Origin feat choice at 1st level
-				name="Origin Feat",
-				apply=lambda c: None,            # the feat-picking logic lives elsewhere
-				description=(
-					"You gain one feat of your choice at 1st level. "
-					"You must still meet its prerequisites."
-					),
-				source="Species Feature",
-				),
-			],
+		# Human species Traits are applied via SpeciesKit (see
+		# Grimoire_of_Characters.apply_species_features).  Kept here only
+		# as a catalogue note for callers that inspect species_features().
+		"Aasimar": [],
+		"Goliath": [],
+		"Halfling": [],
+		"Human": [],
+		"Gnome": [],
+		"Orc": [],
+		"Tiefling": [],
 
 
-		"Aasimar": [
-			Darkvision(),
-			CelestialResistance(),
-			HealingHands(),
-			LightBearer()
-			],
-		"Dwarf": [
-			Darkvision(),
-			DwarvenResilience(),
-			DwarvenWeaponTraining(),
-			DwarvenToughness()
-			],
+		# Dwarf Traits are applied via SpeciesKit.Dwarves, which carries the
+		# 2024 rules the entries below predate: Darkvision 120 rather than 60,
+		# the Poisoned *condition* on the save, and Stonecunning.
+		"Dwarf": [],
 			}
 	if species_name == "Elf":
 		return ElvenFeats()
 	if species_name == "Dragonborn":
-		return DragonbornFeats()
+		return DragonbornFeats( character )
 
-	if species_name == "Gnome":
-			lineage_choice = random.choice(["Forest", "Rock"])
-			features = [
-				Darkvision(),
-				GnomishCunning(),
-				]
-			if lineage_choice == "Forest":
-				features.append(ForestGnomeLineage())
-			if lineage_choice == "Rock":
-				features.append(RockGnomeLineage())
-			return features
 	return species.get(species_name, [])
 
 
 def apply_species_features(char, species_name):
-	for feature in species_features(species_name):
+	for feature in species_features(
+		species_name,
+		char,
+		):
 		feature(char)  # Will only run if `apply` exists
 		char.features.append(feature)
 
-def DragonbornFeats():
+def DragonbornFeats(
+	character,
+	):
 	colors = ["Black",	"Blue",	"Brass" ,	"Bronze", "Copper", 	"Gold", "Green", 	"Red", "Silver", "White"]
 	damage = {
 		"Black":	"Acid",
@@ -172,9 +194,20 @@ def DragonbornFeats():
 		"Red":		"Fire",
 		"Silver":	"Cold",
 		"White":	"Cold"}
-	color = random.choice(colors)
+	dice_bag = character.Dice_Bag(
+		"identity.species.Dragonborn.ancestry",
+		version="2024",
+		namespace="GenLegendActor",
+		)
+	color = character.Pick(
+		colors,
+		dice=dice_bag,
+		)
 	dragonborn = Feature(name="Dragonborn",
-		description="""The ancestors of dragonborn hatched from the eggs of chromatic and metallic dragons. One story holds that these eggs were blessed by the dragon gods Bahamut and Tiamat, who wanted to populate the multiverse with people created in their image. Another story claims that dragons created the first dragonborn without the gods' blessings. Whatever their origin, dragonborn have made homes for themselves on the Material Plane.
+		description="""Legends and myth shrouds the origins of the Dragonborn, but one thing is certain: They are the children of dragons.
+		Their colors and features are reminiscent of their draconic ancestors, nontheless, their origins do not determine their destiny.
+		The Dragonborn are a proud and noble people, inclined to follow their own paths, with honor and respect for their heritage..
+
 		<br>
 		Dragonborn look like wingless, bipedal dragons: Scaly, bright eyed, and thick boned with horns on their heads, and their coloration and other features are reminiscent of their draconic ancestors.""",
 		source="Species Feature")

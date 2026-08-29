@@ -129,7 +129,7 @@ def summon_npc(
     for _ in range(max_attempts):
         random.seed(npc_seed)
         try:
-            return _attempt_npc(race=race, archetype=archetype, lvl=max(int(level), 1), seed=npc_seed)
+            return _attempt_npc(race=race, archetype=archetype, level=max(int(level), 1), seed=npc_seed)
         except Exception as exc:  # reported by the @minion above; recover with a fresh seed
             last_error = exc
             npc_seed += 1
@@ -225,10 +225,15 @@ def prose_section(title: str, *content: Any, level: int = 3, accent: bool = Fals
     )
 
 
-def stat_chip(emoji: str, label: str, value: str) -> ui.Tag:
-    """One short stat as a chip: symbol, record label, value. Shared by both sheets."""
+def magic_chip(emoji: str, label: str, value: str, extra_class: str = "") -> ui.Tag:
+    """One short stat as a chip: symbol, record label, value. Shared by both sheets.
+
+    extra_class scopes themed variants (e.g. "magic-chip" gives the
+    spellcasting chips their script value face) without touching the rest.
+    """
+    cls = f"npc-box stat-chip {extra_class}".strip()
     return ui.div(
-        {"class": "npc-box stat-chip"},
+        {"class": cls},
         ui.div({"class": "symbol"}, emoji),
         ui.div({"class": "record"}, label),
         ui.div({"class": "value"}, value),
@@ -792,6 +797,13 @@ app_ui = ui.page_fluid(
         ui.tags.link(href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC", rel="stylesheet"),
         ui.tags.link(href="https://fonts.googleapis.com/css2?family=Spectral+SC:wght@400;600;700", rel="stylesheet"),
         ui.tags.link(href="https://fonts.googleapis.com/css2?family=Eagle+Lake", rel="stylesheet"),
+        ui.tags.link(href="https://fonts.googleapis.com/css2?family=Italianno", rel="stylesheet"),
+        ui.tags.link(href="https://fonts.googleapis.com/css2?family=Beau+Rivage", rel="stylesheet"),
+        ui.tags.link(href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah", rel="stylesheet"),
+        ui.tags.link(href="https://fonts.googleapis.com/css2?family=IM+Fell+French+Canon+SC", rel="stylesheet"),
+        ui.tags.link(href="https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700", rel="stylesheet"),
+        ui.tags.link(href="https://fonts.googleapis.com/css2?family=Manufacturing+Consent", rel="stylesheet"),
+        ui.tags.link(href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia", rel="stylesheet"),
         ui.tags.link(href="https://fonts.googleapis.com/css2?family=Italianno", rel="stylesheet"),
         ui.tags.link(href="https://fonts.googleapis.com/css2?family=Beau+Rivage", rel="stylesheet"),
         ui.tags.link(href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah", rel="stylesheet"),

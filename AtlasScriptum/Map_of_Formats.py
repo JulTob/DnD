@@ -1,28 +1,7 @@
-def Entry(
-	title: str = "",
-	definition: str = "",
-	description: str = "",
-	speech: str = ""
-	) -> str:
-	"""
-	Creates an HTML-formatted entry
-		with a title, definition, and description.
-	"""
-	if not title:
-		result = ""
-	else:
-		result = f"<b>{title}</b>"
-	if definition:
-		if not description:
-			result = f"<b>{result}:</b> <i>{definition}</i>"
-		else:
-			result = (f"<b>{result}:</b>\n" +
-			f'<div class="bc4">{description}</div>' +
-			f"<i>{definition}</i>")
+"""Formatting helpers. ``Entry`` is the self-formatting primitive in Venustas."""
 
-	#News(f"Creating an entry for '{title}' with definition and description: \n\t{result}")
+from AtlasVenustas import Entry
 
-	return result
 
 def Type(npc) -> str:
 	#Initialized("<< Map of Formats: <Type<>")

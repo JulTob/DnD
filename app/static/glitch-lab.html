@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Glitch Lab — Great Old One</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital@0;1&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#e8e2d4; --dim:#8d8574; --bg:#12100e; --panel:#1a1714;
+  --rule:#2e2823; --accent:#9b8654; --bad:#a4483c; --ok:#5e7d52;
+  --font-text:'IM Fell DW Pica','IM Fell English',serif;
+  --font-header:'Cinzel',serif;
+}
+*{box-sizing:border-box}
+body{margin:0;padding:2rem 1.5rem 5rem;background:var(--bg);color:var(--ink);
+     font-family:var(--font-text);font-size:18px;line-height:1.7}
+.wrap{max-width:900px;margin:0 auto}
+h1,h2{font-family:var(--font-header);font-weight:600;letter-spacing:.04em}
+h1{font-size:1.5rem;margin:0 0 .25rem}
+h2{font-size:1rem;text-transform:uppercase;color:var(--accent);
+   margin:2.5rem 0 .75rem;padding-bottom:.4rem;border-bottom:1px solid var(--rule)}
+.sub{color:var(--dim);font-style:italic;margin:0 0 1rem}
+.panel{background:var(--panel);border:1px solid var(--rule);padding:1.25rem 1.5rem;margin:1rem 0}
+
+/* ---- the hero line ---- */
+#hero{font-size:3.2rem;line-height:1.3;text-align:center;margin:1.5rem 0;letter-spacing:.02em}
+
+/* ---- the overlay technique: real letter stays, glyph paints on top ---- */
+/* inline, NOT inline-block: inline-block makes every character its own break
+   opportunity and the browser starts splitting words in half. position:relative
+   on an inline box is enough to anchor the absolutely positioned glyph. */
+.gl{position:relative;display:inline}
+.gl > b{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  font-weight:normal;font-family:inherit;color:var(--ink);
+  pointer-events:none;line-height:1;
+}
+.gl.on{color:transparent}
+
+/* controls */
+.ctl{display:flex;flex-wrap:wrap;gap:1.25rem;align-items:center;
+     font-family:var(--font-header);font-size:.75rem;text-transform:uppercase;color:var(--dim)}
+.ctl label{display:flex;gap:.5rem;align-items:center}
+input[type=range]{width:150px}
+button{font-family:var(--font-header);font-size:.7rem;text-transform:uppercase;
+  background:transparent;color:var(--accent);border:1px solid var(--rule);
+  padding:.4rem .8rem;cursor:pointer}
+button:hover{border-color:var(--accent)}
+button.sel{background:var(--accent);color:var(--bg)}
+
+/* pool tables */
+.pool{margin:.6rem 0 1.2rem}
+.pool h3{font-family:var(--font-header);font-size:.8rem;margin:0 0 .35rem;
+         text-transform:uppercase;letter-spacing:.05em}
+.glyphs{font-size:1.6rem;line-height:2;word-spacing:.35rem}
+.glyphs span{padding:0 .12rem}
+.glyphs span.tofu{outline:1px solid var(--bad);background:rgba(164,72,60,.14)}
+.verdict{font-size:.8rem;font-family:var(--font-header);text-transform:uppercase}
+.verdict.good{color:var(--ok)} .verdict.warn{color:var(--bad)}
+.note{color:var(--dim);font-size:.85rem;font-style:italic}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Glitch Lab</h1>
+<p class="sub">Great Old One patron text. Everything below runs with no webfont for the
+glyphs, exactly as a player's machine would render it.</p>
+
+<h2>The line</h2>
+<div class="panel">
+  <div id="hero">You, mine.</div>
+  <div class="ctl">
+    <label>rate <input type="range" id="rate" min="1" max="40" value="8"><span id="rateV">8</span>/10s</label>
+    <label>hold <input type="range" id="hold" min="40" max="600" value="120" step="20"><span id="holdV">120</span>ms</label>
+    <label>pool
+      <span id="poolBtns"></span>
+    </label>
+  </div>
+</div>
+
+<h2>In a paragraph</h2>
+<div class="panel">
+  <p id="para">It does not want anything from you. It has not made you an offer, and it will
+  not, because an offer implies there is something you could decline. You learned that the
+  inside of your own head was never a room with a door. You have been thinking in front of
+  it for some time now. The words you are reading are the ones it left where you would
+  find them.</p>
+</div>
+
+<h2>What your machine can actually render</h2>
+<p class="note">Measured live: a glyph outlined in red came out the same width as a
+codepoint that certainly has no glyph, so it is rendering as tofu here.</p>
+<div id="pools"></div>
+
+</div>
+
+<script>
+const POOLS = {
+  math:    "∀∃∄∅∈∉∋∏∑√∞∫∮≡≠≢⊂⊃⊕⊗⊥¬∧∨∴∵⋰⋱⨀⨂⫯≬⊹⋕",
+  greek:   "ΦΨΩΞΘΛΣΔΓΠϘϞϺϠ",
+  runic:   "ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉᛊᛏᛒᛗᛚᛜᛞᛟ",
+  astro:   "☉☽☿♀♂♃♄♅♆⚸⚹⚴⚵⚶⚷⚚⯑",
+  braille: "⠿⡿⢿⣿⠶⡇⣤⠛⢛⡻",
+  yijing:  "䷀䷁䷂䷃䷄䷅䷆䷇䷈䷉䷊䷋",
+  alchemy: "🜁🜂🜃🜄🜇🜍🜏🜔🜚🜛🜠🜨",
+  exotic:  "𐇐𐇑𐇒𐊀𐊁𐤀𐤁𐎠𐀀𓀀𝌆𝌇"
+};
+const LABEL = {
+  math:"Math", greek:"Greek", runic:"Runic", astro:"Planetary",
+  braille:"Braille", yijing:"Yijing", alchemy:"Alchemical (Plane 1)",
+  exotic:"Undeciphered (Plane 1)"
+};
+
+/* ---------- tofu detection ----------
+   Width comparison does NOT work: plenty of real glyphs share the tofu box's
+   advance width and come back as false positives.  Compare rendered PIXELS
+   against a noncharacter, which can never have a glyph anywhere. */
+const cn = document.createElement("canvas");
+cn.width = 64; cn.height = 64;
+const cx = cn.getContext("2d", {willReadFrequently:true});
+cx.font = '40px "IM Fell DW Pica", serif';
+cx.textBaseline = "middle";
+
+function shot(ch){
+  cx.clearRect(0,0,64,64);
+  cx.fillText(ch, 4, 32);
+  const d = cx.getImageData(0,0,64,64).data;
+  let h = 0;
+  for (let i = 3; i < d.length; i += 4) h = (h*31 + d[i]) | 0;   // alpha only
+  return h;
+}
+const ABSENT = shot("﷐");        // permanent noncharacter
+const BLANK  = shot("​");        // zero-width space: renders nothing
+function isTofu(ch){
+  const h = shot(ch);
+  return h === ABSENT || h === BLANK;
+}
+
+/* ---------- render the pool audit ---------- */
+const host = document.getElementById("pools");
+for (const [key, chars] of Object.entries(POOLS)){
+  const arr = [...chars];
+  const bad = arr.filter(isTofu).length;
+  const div = document.createElement("div");
+  div.className = "pool";
+  div.innerHTML =
+    `<h3>${LABEL[key]} <span class="verdict ${bad?'warn':'good'}">`+
+    `${bad ? bad+" of "+arr.length+" missing" : "all "+arr.length+" render"}</span></h3>`+
+    `<div class="glyphs">`+
+    arr.map(c=>`<span class="${isTofu(c)?'tofu':''}">${c}</span>`).join("")+
+    `</div>`;
+  host.appendChild(div);
+}
+
+/* ---------- the glitch ---------- */
+let pool = "math", rate = 8, hold = 120;
+
+/* Nothing is wrapped at rest.  Each glitch splits one text node, wraps a single
+   character for `hold` ms, then merges it back with normalize().  At rest the
+   DOM is exactly the original text, so nothing can reflow or re-break. */
+function textNodes(root){
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const out = []; let n;
+  while ((n = w.nextNode())) if (/\S/.test(n.nodeValue)) out.push(n);
+  return out;
+}
+
+function fire(root){
+  if (root.querySelector(".gl")) return;            // one at a time per block
+  const nodes = textNodes(root);
+  if (!nodes.length) return;
+  const node = nodes[(Math.random()*nodes.length)|0];
+  const txt = node.nodeValue;
+
+  const spots = [];
+  for (let i = 0; i < txt.length; i++) if (/\S/.test(txt[i])) spots.push(i);
+  if (!spots.length) return;
+  const i = spots[(Math.random()*spots.length)|0];
+
+  const chars = [...POOLS[pool]];
+  const span = document.createElement("span");
+  span.className = "gl on";
+  span.textContent = txt[i];
+  const g = document.createElement("b");
+  g.setAttribute("aria-hidden", "true");
+  g.textContent = chars[(Math.random()*chars.length)|0];
+  span.appendChild(g);
+
+  const tail = node.splitText(i);
+  tail.nodeValue = tail.nodeValue.slice(1);
+  node.parentNode.insertBefore(span, tail);
+
+  setTimeout(() => {
+    if (!span.parentNode) return;
+    span.parentNode.replaceChild(document.createTextNode(span.firstChild.nodeValue), span);
+    root.normalize();
+  }, hold);
+}
+
+const hero = document.getElementById("hero");
+const para = document.getElementById("para");
+let timer = null;
+function retime(){
+  clearInterval(timer);
+  timer = setInterval(() => { fire(hero); fire(para); }, 10000 / rate);
+}
+retime();
+
+/* ---------- controls ---------- */
+const rateEl = document.getElementById("rate"), holdEl = document.getElementById("hold");
+rateEl.oninput = e => { rate = +e.target.value; document.getElementById("rateV").textContent = rate; retime(); };
+holdEl.oninput = e => { hold = +e.target.value; document.getElementById("holdV").textContent = hold; };
+
+const btns = document.getElementById("poolBtns");
+for (const key of Object.keys(POOLS)){
+  const b = document.createElement("button");
+  b.textContent = LABEL[key]; b.className = key===pool ? "sel" : "";
+  b.onclick = () => { pool = key; [...btns.children].forEach(c=>c.className=""); b.className="sel"; };
+  btns.appendChild(b);
+}
+</script>
+</body>
+</html>
