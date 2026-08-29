@@ -138,7 +138,7 @@ class Character:
 
 	@property
 	def passive_perception(char):
-		Mod = char.skills.Perception.calculate_modifier()
+		Mod = char.skills.Perception.calculate_modifier(char.proficiency_bonus)
 		return 10 + Mod
 
 	def SetFeatures(char):
@@ -566,7 +566,14 @@ class Character:
 				char.skills.Arcana.set_proficiency()
 			elif char.subclass == "Battlemaster":
 				char.skills.Intimidation.set_proficiency()
-			# Add more subclasses
+			elif char.subclass in ("Diviner", "Divination"):
+				char.skills.Insight.set_proficiency()
+			elif char.subclass in ("Necromancer", "Necromancy"):
+				char.skills.Religion.set_proficiency()
+			elif char.subclass in ("Illusionist", "Illusion"):
+				char.skills.Deception.set_proficiency()
+			elif char.subclass in ("Abjurer", "Abjuration", "Evoker", "Evocation"):
+				char.skills.Arcana.set_proficiency()
 
 		# Step 2: Set default skills based on class
 		if char.character_class:

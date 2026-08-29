@@ -21,25 +21,20 @@ def get_class_progression(character):
 	Return a Progression instance bound to this character.
 	"""
 	class_name = character.character_class
-	from .  import (  # local import avoids circulars during top-level load
-			Barbarian, Bard, Cleric, Druid, Fighter, Monk,
-			Paladin, Ranger, Rogue, Sorcerer, Warlock, Wizard
-			)
-	mapping = {
-		"Fighter": 	Fighter,
-		"Wizard":  	Wizard,
-		"Barbarian": Barbarian,
-		"Rogue": 	Rogue,
-		"Paladin": 	Paladin,
-		"Bard": 	Bard,
-		"Druid": 	Druid,
-		'Warlock': 	Warlock,
-		'Monk': 	Monk,
-		'Ranger': 	Ranger,
-		'Sorcerer': 	Sorcerer,
-		# Artificer?
-		}
+	import importlib
+	mapping = {}
+	for name in (
+			"Fighter", "Wizard", "Barbarian", "Rogue", "Paladin",
+			"Bard", "Druid", "Warlock", "Monk", "Ranger", "Sorcerer",
+			):
+		try:
+			module = importlib.import_module(f".Training.{name}", __package__)
+			mapping[name] = getattr(module, name)
+		except Exception:
+			continue
 	prog_cls = mapping.get(class_name)
+	if prog_cls is None:
+		return None
 	return prog_cls(character)
 
 def GetFeatures(character) -> List[Feature]:
@@ -103,7 +98,7 @@ def apply_class_proficiencies(character):
 								name="Spellbook",
 								value=50,
 								weight=3,
-								description="Arcane writings",
+								description="A book of True Names, readable only by you",
 								)
 						equip.buy_item(book)
 	elif cls == "Rogue":

@@ -146,6 +146,23 @@ if CANTRIPS:
 	Guidance =          Spell("Guidance",           0)
 	ThornWhip = 		Spell("Thorn Whip",			0)
 	PrimalSavagery =    Spell("Primal Savagery",    0)
+	Thunderclap =       Spell("Thunderclap",        0)
+	FireBolt =          Firebolt
+	Elementalism =      Spell("Elementalism",       0)
+	StarryWisp =        Spell("Starry Wisp",        0)
+	ArcaneVigor =       Spell("Arcane Vigor",       2)
+	AuraofVitality =    Spell("Aura of Vitality",   3)
+	SpeakWithPlants =   Spell("Speak with Plants",  3)
+	FountofMoonlight =  Spell("Fount of Moonlight", 4)
+	JallarziStormofRadiance = Spell("Jallarzi's Storm of Radiance", 5)
+	YolandeRegalPresence = Spell("Yolande's Regal Presence", 5)
+	TashasBubblingCauldron = Spell("Tasha's Bubbling Cauldron", 6)
+	Befuddlement =      Spell("Befuddlement",       8)
+	FlurryofBlows =     Spell("Flurry of Blows",    0)
+	PatientDefense =    Spell("Patient Defense",    0)
+	StepOfTheWind =     Spell("Step of the Wind",   0)
+	DeflectAttacks =    Spell("Deflect Attacks",    0)
+	StunningStrike =    Spell("Stunning Strike",    0)
 	# Rewrites
 
 

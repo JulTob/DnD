@@ -14,24 +14,29 @@ from .Codex_of_Progression  import (
 		apply_class_proficiencies
 		)
 
-# Import concrete classes
-try:
-	from .Training.Barbarian import Barbarian
-	from .Training.Bard      import Bard
-	from .Training.Cleric    import Cleric
-	from .Training.Druid     import Druid
-	from .Training.Fighter   import Fighter
-	from .Training.Monk      import Monk
-	from .Training.Paladin   import Paladin
-	from .Training.Ranger    import Ranger
-	from .Training.Rogue     import Rogue
-	from .Training.Sorcerer  import Sorcerer
-	from .Training.Warlock   import Warlock
-	from .Training.Wizard    import Wizard
-	from .Training.Multiclass import Multiclass
-except Exception as err:
-	# keep going, but make noise in logs
-	Warning(f"[Map_of_Classes]] could not load: {err}")
+# Import concrete classes independently so a missing file cannot hide the rest.
+def _load_training(name):
+	import importlib
+	try:
+		module = importlib.import_module(f".Training.{name}", __name__)
+		return getattr(module, name)
+	except Exception as err:
+		Warning(f"[Map_of_Classes] could not load {name}: {err}")
+		return None
+
+Barbarian = _load_training("Barbarian")
+Bard      = _load_training("Bard")
+Cleric    = _load_training("Cleric")
+Druid     = _load_training("Druid")
+Fighter   = _load_training("Fighter")
+Monk      = _load_training("Monk")
+Paladin   = _load_training("Paladin")
+Ranger    = _load_training("Ranger")
+Rogue     = _load_training("Rogue")
+Sorcerer  = _load_training("Sorcerer")
+Warlock   = _load_training("Warlock")
+Wizard    = _load_training("Wizard")
+Multiclass = _load_training("Multiclass")
 
 # ── backward-compat shim for Flask route ─────────────
 classes = list(CLASSES)        # same data, old variable name

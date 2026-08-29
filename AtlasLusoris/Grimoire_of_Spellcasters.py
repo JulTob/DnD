@@ -559,18 +559,23 @@ class Wizard(Spellcaster):
 
 	def __str__(caster):
 		n = caster.get_stats("spells")
-		cantrips = [s for s in caster.spells_known if s.level == 0]
-		other_spells = [s for s in caster.spells_known if s.level > 0]
+		def spell_level(spell):
+			try:
+				return int(spell.level)
+			except (TypeError, ValueError):
+				return 0
+		cantrips = [s for s in caster.spells_known if spell_level(s) == 0]
+		other_spells = [s for s in caster.spells_known if spell_level(s) > 0]
 
 		random.shuffle(other_spells)
 		prepared = other_spells[:n]
 		unprepared = other_spells[n:]
-		all_spells = sorted(prepared + unprepared, key=lambda s: (s.level, s.name))
+		all_spells = sorted(prepared + unprepared, key=lambda s: (spell_level(s), s.name))
 		spells = ""
 		for spell in cantrips:
 			spells += f"<li>【{spell.level}】{spell.name}</li>"
 		for spell in all_spells:
-			if spell in prepared or spell.level==0:
+			if spell in prepared or spell_level(spell)==0:
 				spells += f"<li>【{spell.level}】{spell.name}</li>"
 			else:
 				spells += f"<li>〖{spell.level}〗{spell.name}</li>"
@@ -590,13 +595,17 @@ class Wizard(Spellcaster):
 		return f"""
 			<div class="npc-textbox" style="grid-column: span 3;">
 				<h1 style="font-family: 'Iglesia'; font-size:    3.1em; ">
-					Wizard Spellcasting</h1>
-				<p> As a student of arcane magic, you have learned to cast spells. </p>
+					The Book of Names</h1>
+				<p>You do not invent magic. You hunt True Names, write them,
+				and speak them when the world will answer. To know the name
+				is to understand the thing — and to understand it is to
+				connect with it. Intelligence is the voice you use.</p>
 				</div>
 			<div class="npc-textbox" style="grid-column: span 1;">
 				<h2>Spell Slots:</h2>
 				{slots_html} <br>
-				You regain all expended slots when you finish a Long Rest.</p>
+				You regain all expended slots when you finish a Long Rest.
+				A slot is a name spoken with enough breath to wake it.</p>
 				<br><br>
 				</div>
 			<div class="npc-textbox" style="font-family: 'Iglesia'">
@@ -606,12 +615,16 @@ class Wizard(Spellcaster):
 					Spell Attack Bonus:</h2> +{caster.spell_attack_bonus()}
 				</div>
 			<div class="npc-textbox" style="grid-column: span 1;">
-			<h3 style="font-family: 'Iglesia'; font-size:    3.1em; "> SpellBook </h3>
-			You may prepare {n} spells whenever you finish a Long Rest, that you can use at any moment, from your book of spells:
+			<h3 style="font-family: 'Iglesia'; font-size:    3.1em; "> Spellbook </h3>
+			When you finish a Long Rest, you may prepare {n} names from the
+			book — the ones you can speak at any moment. 【prepared】
+			〖written, not prepared〗
 			<ul style="list-style-type: '🪄'; text-align: left; font-family: 'Iglesia' ">
 				{spells}</ul>
 			<h2>Arcane Focus</h2>
-			You can use an Arcane Focus (such as a wand or scepter),  as a Spellcasting Focus for your Wizard spells.
+			You can use an Arcane Focus (wand, scepter, orb, staff) as a
+			Spellcasting Focus for your Wizard spells — a tool for aiming
+			a name without shouting it into bare air.
 			</div>
 			{spells_html}
 			"""
