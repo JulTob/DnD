@@ -2,8 +2,8 @@
 
 - **Type:** chore/cleanup
 - **Priority:** 🟠 high
-- **Status:** Open — diagnosis only; execution awaiting Julio's go/no-go
-- **Owner:** unclaimed
+- **Status:** Working — Docker approved by Julio (2026-08-29); implemented on `python:3.14-slim`, second-agent verified 🟢, awaiting Julio's ⚪️
+- **Owner:** cursor agent
 - **Route to:** Workshop Consul (Artificer), Ecosystem Consul (Ranger), Safety Consul (Paladin)
 - **Parent:** —
 - **Sidequests:** —
@@ -68,6 +68,16 @@ Python older than the Canon preference without a recorded decision here.
 > serving HTTP 200, NPC generation working) on a 3.12 VM, opened as a **draft PR
 > for review only**. It is a proposal to show, not a landed decision — it awaits
 > the rulings above before it may merge, and must move to 3.14 if Julio so rules.
+>
+> **Decision & implementation (2026-08-29):** Julio ruled **Docker**. Resolved
+> **Q1 → `python:3.14-slim` base** (the canonical interpreter on Linux, no
+> notch-back) and **Q2 → committed `.cursor/environment.json`** (versioned,
+> follows branches). Added `.cursor/Dockerfile`; simplified `.cursor/install.sh`
+> (the base ships `venv`, so no apt step); `user: ubuntu` (uid 1000) matches the
+> checkout owner. No Docker daemon on the build VM, so the image was not built
+> here — instead the **full stack was validated on a real Python 3.14.7**
+> interpreter (via `uv`): all deps installed and the app served **HTTP 200**.
+> Config second-agent verified 🟢. Awaiting Julio's ⚪️ and a real platform build.
 
 ---
 
