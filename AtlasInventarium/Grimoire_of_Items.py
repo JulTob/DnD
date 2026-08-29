@@ -1025,6 +1025,39 @@ SLOTS: tuple[tuple[type[Tag], int], ...] = (
 		)
 
 
+# How many items a hero can keep within reach before mastery widens it.
+CARRY_BASE = 2
+
+
+def carry_capacity(
+		char,
+		) -> int:
+	"""
+	How many items this hero can keep within reach.
+
+	Weapon Mastery is the one thing that widens it: the drills are
+	meaningless if five of the six weapons are at the bottom of a pack.
+	"""
+	extra = 0
+	try:
+		from AtlasLusoris.Map_of_Weapon_Masteries import (
+				mastery_count,
+				)
+
+		extra = int(
+				mastery_count(
+						char
+						) or 0
+				)
+	except Exception:
+		extra = 0
+
+	return CARRY_BASE + max(
+			0,
+			extra,
+			)
+
+
 def _worth(
 		item: Item,
 		) -> tuple:
@@ -1120,6 +1153,8 @@ __all__ = (
 		"Build_Worn",
 		"Cloak",
 		"Consumable",
+		"Carried",
+		"CARRY_BASE",
 		"Equipped",
 		"Firearm",
 		"Footwear",
@@ -1139,11 +1174,15 @@ __all__ = (
 		"Weapon",
 		"Wieldable",
 		"acquire",
+		"bagged",
+		"buy",
+		"carry",
+		"carry_capacity",
+		"carried",
+		"carrying",
 		"copper",
 		"slot_of",
 		"armour_class",
-		"buy",
-		"carried",
 		"equip",
 		"equipped",
 		"gear_tags",
@@ -1155,6 +1194,7 @@ __all__ = (
 		"purchase",
 		"reconcile",
 		"sell",
+		"stow",
 		"unequip",
 		"worn_armour",
 		)
