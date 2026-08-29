@@ -127,10 +127,6 @@ def New_Player(
 	# too, so it is projected from here for the same reason.
 	from AtlasLusoris.GuildKit import Project_Guild_Description
 	Project_Guild_Description( char )
-	# The Guild description composes across layers and may name the Character
-	# too, so it is projected from here for the same reason.
-	from AtlasLusoris.GuildKit import Project_Guild_Description
-	Project_Guild_Description( char )
 	# set_Objects was a SECOND equipment pass that re-rolled the budget and
 	# clobbered the first one's spending. GearKit outfits exactly once inside
 	# set_char_features, so this pass is gone.

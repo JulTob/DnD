@@ -13,6 +13,7 @@ from app.character_url import (
 )
 
 import app.random as random
+from app.components.eldritch import eldritch_head_tags
 from AtlasVenustas.Tools_of_Loader import loader_head_tags, loader_panel
 from AtlasVenustas.Tools_of_Masonry import masonry_head_tags
 from AtlasVenustas.Tools_of_ShareableLinks import shareable_links_head_tags
@@ -829,6 +830,7 @@ app_ui = ui.page_fluid(
         *loader_head_tags(),
         *masonry_head_tags(),
         *shareable_links_head_tags(),
+        *eldritch_head_tags(),
     ),
     loader_panel(),
     ui.tags.header(

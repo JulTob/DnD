@@ -52,6 +52,7 @@ from AtlasInventarium.Grimoire_of_Items import (
 		)
 from AtlasInventarium.ItemKit import issue as _plain_issue
 from AtlasInventarium.ItemKit import purchase as _plain_purchase
+from AtlasInventarium.Map_of_Gear_Titles import gear_title
 from AtlasInventarium.Map_of_Materials import personalise
 from AtlasInventarium.Ledger_of_Wonders import wonders_up_to
 from AtlasInventarium.Ledger_of_Armors import ARMORS, Shield

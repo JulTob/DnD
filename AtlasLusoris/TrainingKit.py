@@ -593,14 +593,24 @@ def filter_legacy_features(
 		char,
 		features: Iterable,
 		) -> list:
-	"""Drop legacy Features whose names are already Training lessons."""
+	"""Drop legacy Features already covered by Training or Guild description."""
 	covered = covered_training_names(
 			char
 			)
-	if not covered:
-		return list(
-				features
-				)
+	specialization = getattr(
+			char,
+			"specialization",
+			None,
+			)
+	# GuildKit Specializations publish the patron voice via ``extends=`` /
+	# ``heading=`` into the composed Guild Entry. Legacy Map_of_Classes
+	# Training still emits a second "{Patron} Patron" blurbs with the old
+	# "Your pact draws on…" text — drop those so Julio's transcription wins.
+	patron_heading = (
+		f"{specialization} Patron"
+		if specialization
+		else None
+		)
 	kept = []
 	for feat in features:
 		name = getattr(
@@ -609,6 +619,8 @@ def filter_legacy_features(
 				None,
 				)
 		if name in covered:
+			continue
+		if patron_heading and name == patron_heading:
 			continue
 		kept.append(
 				feat

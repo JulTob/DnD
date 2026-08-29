@@ -13,7 +13,7 @@ SCRIPT_PATH = (
     / "js"
     / "eldritch.js"
     )
-SCRIPT_URL = "/static/js/eldritch.js"
+SCRIPT_URL = "/static/js/eldritch.js?v=1"
 
 
 def eldritch_head_tags() -> list[ui.Tag]:
