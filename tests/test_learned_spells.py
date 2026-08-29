@@ -189,6 +189,40 @@ def test_2024_casting_tables():
 	assert casting_row("Druid", 18)["slots"][4] == 2
 
 
+def test_chthonic_fiendish_legacy_copy():
+	from AtlasLusoris.Grimoire_of_Features import CHTHONIC_FLAVOR, FiendishLegacy
+
+	class Character:
+		spellcaster = None
+		char_class = "Wizard"
+		level = 1
+		features = []
+
+	character = Character()
+	feat = FiendishLegacy("Chthonic")
+	feat(character)
+	assert feat.name == "Fiendish Legacy: Chthonic"
+	assert f"<i>{CHTHONIC_FLAVOR}</i>" in feat.description
+	assert "Hades' gates are said to be guarded by grim dogs with several heads" in feat.description
+	assert "<b>Intelligence</b> is your spellcasting ability." in feat.description
+	assert "for them" not in feat.description
+	assert "Chill Touch" in {
+		spell_key(spell) for spell in catalog_spells(character.spellcaster)
+		}
+	assert "False Life" not in {
+		spell_key(spell) for spell in catalog_spells(character.spellcaster)
+		}
+
+
+def test_tiefling_species_grants_presence_and_legacy():
+	from AtlasLusoris.Map_of_Species import species_features
+
+	names = {feat.name for feat in species_features("Tiefling")}
+	assert any(name.startswith("Darkvision") for name in names)
+	assert "Otherworldly Presence" in names
+	assert any(name.startswith("Fiendish Legacy:") for name in names)
+
+
 if __name__ == "__main__":
 	test_grows_without_reshuffle()
 	test_know_spell_is_separate_from_display()
@@ -198,5 +232,7 @@ if __name__ == "__main__":
 	test_progressive_learn_skips_owned_names_without_shrinking_the_budget()
 	test_spell_index_uses_level_chips()
 	test_2024_casting_tables()
+	test_chthonic_fiendish_legacy_copy()
+	test_tiefling_species_grants_presence_and_legacy()
 	print("progressive_learn: ok", flush=True)
 	os._exit(0)

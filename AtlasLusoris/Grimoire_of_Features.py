@@ -1169,6 +1169,107 @@ def RockGnomeLineage():
 		source="Species Lineage"
 	)
 
+
+CHTHONIC_FLAVOR = (
+	"Hades' gates are said to be guarded by grim dogs with several heads, "
+	"strange faceless minotaurs, and foxes with a multitude of tails. "
+	"You find it hard to imagine how you may be related to them."
+	)
+
+FIENDISH_LEGACIES = {
+	"Abyssal": {
+		"resistance": "Poison",
+		"cantrip": "PoisonSpray",
+		"third": "RayofSickness",
+		"fifth": "HoldPerson",
+		},
+	"Chthonic": {
+		"resistance": "Necrotic",
+		"cantrip": "ChillTouch",
+		"third": "FalseLife",
+		"fifth": "RayofEnfeeblement",
+		"flavor": CHTHONIC_FLAVOR,
+		},
+	"Infernal": {
+		"resistance": "Fire",
+		"cantrip": "FireBolt",
+		"third": "HellishRebuke",
+		"fifth": "Darkness",
+		},
+	}
+
+
+def spellcasting_ability_sentence(char):
+	name = ABILITY_NAMES[origin_spell_stat(char)]
+	return f"<b>{name}</b> is your spellcasting ability."
+
+
+def OtherworldlyPresence():
+	from AtlasMagia.Lodge_of_Spells import Thaumaturgy
+	from AtlasLusoris.Compass_of_Learned_Spells import know_spell, spell_mark
+
+	feat = Feature(
+		name="Otherworldly Presence",
+		description=f"You know {spell_mark(Thaumaturgy)}. See Spells.",
+		source="Species Feature",
+		level=1,
+		)
+
+	def apply(char):
+		know_spell(char, Thaumaturgy)
+		feat.description = (
+			f"You know {spell_mark(Thaumaturgy)}. "
+			"It uses the same spellcasting ability as your Fiendish Legacy. See Spells."
+			)
+
+	feat.apply = apply
+	return feat
+
+
+def FiendishLegacy(legacy=None):
+	from AtlasMagia import Lodge_of_Spells as Lodge
+	from AtlasLusoris.Compass_of_Learned_Spells import know_spell, spell_mark
+
+	kind = legacy if legacy in FIENDISH_LEGACIES else random.choice(list(FIENDISH_LEGACIES))
+	spec = FIENDISH_LEGACIES[kind]
+	feat = Feature(
+		name=f"Fiendish Legacy: {kind}",
+		description="",
+		source="Species Feature",
+		level=1,
+		)
+
+	def apply(char):
+		level = int(getattr(char, "level", 1) or 1)
+		cantrip = getattr(Lodge, spec["cantrip"])
+		extra = []
+		if level >= 3:
+			extra.append(getattr(Lodge, spec["third"]))
+		if level >= 5:
+			extra.append(getattr(Lodge, spec["fifth"]))
+		know_spell(char, cantrip)
+		for spell in extra:
+			know_spell(char, spell)
+
+		lines = []
+		flavor = spec.get("flavor")
+		if flavor:
+			lines.append(f"<i>{flavor}</i>")
+		lines.append(f"You have Resistance to {spec['resistance']} damage.")
+		known = [f"You know {spell_mark(cantrip)}."]
+		for spell in extra:
+			known.append(
+				f"You always have {spell_mark(spell)} prepared. "
+				"You can cast it once without a spell slot (Long Rest), "
+				"and you can also spend spell slots to cast it."
+				)
+		known.append(spellcasting_ability_sentence(char))
+		lines.append(" ".join(known) + " See Spells.")
+		feat.description = "<br>".join(lines)
+
+	feat.apply = apply
+	return feat
+
 def Crafter():
 	"""
 	Origin feat: Crafter:contentReference[oaicite:3]{index=3}.  Grants proficiency with three

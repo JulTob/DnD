@@ -143,6 +143,12 @@ def species_features(species_name):
 			if lineage_choice == "Rock":
 				features.append(RockGnomeLineage())
 			return features
+	if species_name == "Tiefling":
+		return [
+			Darkvision(),
+			OtherworldlyPresence(),
+			FiendishLegacy(),
+			]
 	return species.get(species_name, [])
 
 
