@@ -20,21 +20,23 @@
 4. Do **not** commit until Julio says so (or both agents agree the tree boots).
 5. Scratch/salvage scripts stay in `$S/` — not production.
 
-## Status snapshot (Cursor, ~18:25 local)
+## Status snapshot (Cursor, ~21:05 local — Claude returning)
 
-| File | Disk state | Owner |
-|------|------------|-------|
-| `AtlasInventarium/ToolsKit.py` | ~1519 lines, mtime **18:24** — looks restored | **Codex** (active) |
-| `AtlasLusoris/AbilityScoresKit.py` | ~476 lines, mtime **18:21** — new/untracked | **Codex** (active) |
-| `AtlasActorLudi/CharactersKit.py` | modified, mtime **18:14** | **Codex** (active) |
-| `Minion.py` | modified, mtime **18:18** | **Codex** (active) |
-| `AtlasActorLudi/{Genders,Proficiency,Skills}Kit.py` | untracked, present | **Codex** unless released |
-| `AtlasLusoris/BackgroundKit.py` | old pre-TOP body; transcript replay in progress | **Codex** (active) |
-| `AtlasLusoris/GuildKit.py` | **BROKEN** — 22 lines, starts mid-`ability_weights`; good content is in `.pyc` | **Cursor** (active) |
-| `AtlasLusoris/AtlasOfGuilds/FighterKit.py` | ~1031 lines (Claude rebuilt) | verify only — do not rewrite lightly |
-| `AtlasLusoris/AtlasOfTraining/Map_of_Wizard_Training.py` | **MISSING** (`.pyc` in accident tar) | **Cursor** (active) |
-| `AtlasActorLudi/AlignmentKit.py` | **MISSING** (`.pyc` in accident tar) | **UNCLAIMED** |
-| App boot / `run_shiny_preview.sh` EPERM | quarantine/xattr suspected | after flagships restore |
+| Area | Disk state | Owner / note |
+|------|------------|--------------|
+| Player path (`shiny_app`) | **boots + summons** at :8080 | Cursor keeps boot/UX stable |
+| `AtlasInventarium/ToolsKit.py` | ~1519 lines restored | leave unless Claude claims |
+| `AtlasLusoris/BackgroundKit.py` | ~2344 lines; maps on TOP `tools`/`roleplay` | leave unless Claude claims |
+| `AtlasLusoris/GuildKit.py` | **bytecode bootstrap** → `$S/vault/GuildKit…pyc` | **Claude preferred** (restore real `.py`) |
+| `AtlasOfGuilds/*Kit.py` (most) | bytecode bootstraps; **FighterKit** is real Claude rebuild | Claude: restore others; **do not rewrite FighterKit lightly** |
+| `AtlasOfTraining/Map_of_*_Training.py` | several vault bootstraps (Wizard included) | **Claude preferred** |
+| `AtlasActorLudi/SpeciesKit/**` | ~majority vault bootstraps | **Claude preferred** |
+| `AlignmentKit.py` | vault bootstrap | **Claude preferred** |
+| `AtlasEpica/{Titles,Stories}` + gear titles | vault bootstraps | Claude or Cursor after flagships |
+| `Map_of_Names` `Race_Ingredient` | soft-fails → LastResortName | **Claude preferred** (naming restore) |
+| NPC / `app.main` | **broken** (`nonplayer_choices`, `summon_nonplayer`) | **UNCLAIMED** — claim before edit |
+| `app/components/__init__.py` | deliberately empty (broken siblings) | Cursor owns boot guard; Claude leave alone |
+| `AtlasVenustas` `ornament_for` export | required for spellbook import | Cursor owns; do not drop |
 
 ## Proposed split
 
@@ -99,3 +101,40 @@ Codex ran out of tokens ~18:50. **Cursor continued recovery** and got **`import 
 2. Prefer replacing bootstraps with real source (disasm / transcript), keep `$S/vault/` as evidence.
 3. Re-claim lanes in the log. Cursor will stop on request.
 4. Next risks: restore `Race_Ingredient` in Map_of_Names; replace training/Titles/Stories bootstraps with source; NPC path smoke; commit when Julio says.
+
+## CLAUDE-RETURN (2026-08-29 ~21:05)
+
+Claude is back. **Do not rewrite from scratch** while vault/transcripts exist.
+
+### Preference order (unchanged)
+1. Verbatim transcript / session Write payloads (`~/Downloads/session-export-…`, `Documenta/Sources/transcript_claude*.txt`)
+2. Decompile / reconstruct from `$S/vault/*.pyc` (and accident tar)
+3. Hand rewrite only when callers + Canon constrain the contract
+
+### Lane split now
+
+| Agent | Owns | Stay off |
+|-------|------|----------|
+| **Claude** | Replace **bytecode bootstraps** with real source: `GuildKit`, non-Fighter guild kits, training maps, `SpeciesKit`, `AlignmentKit`, `Race_Ingredient` / naming | `shiny_app.py` URL/subclass UX; empty `app/components/__init__.py`; Venustas `ornament_for` |
+| **Cursor (Grok)** | Keep player Generate green; boot guards; shareable links / class\|subclass; board updates; smoke tests | Do not rewrite Claude’s kits while claimed |
+| **Either (claim first)** | NPC path + `app.main` (`nonplayer_choices`, summon API) | — |
+
+### ~80 modules still bootstraps
+Runtime works because stubs `exec` vault `.pyc`. That is **recovery mode already** — next phase is **source restore**, not inventing new designs.
+
+### Acceptance still open (QST-0072)
+- [x] Player summon via `shiny_app` / `summon_player`
+- [ ] Real `.py` for GuildKit + SpeciesKit + training (exit bootstrap)
+- [ ] NPC + `app.main` import
+- [ ] Visual smoke both paths
+- [ ] Recovery commit (Julio says when)
+
+### Log
+- 2026-08-29 21:05 | Cursor | NOTE | Claude return | board refreshed; ~80 vault bootstraps remain; player path green; NPC/`app.main` red; propose Claude takes source-restore of bootstraps, Cursor holds boot/UX
+- 2026-08-29 21:05 | Cursor | HOLD | `AtlasVenustas/__init__.py`, `app/components/__init__.py` | boot fixes — do not revert
+- 2026-08-29 21:05 | Cursor | RELEASE | `GuildKit`, training maps, SpeciesKit, AlignmentKit | available for Claude CLAIM lines below
+- 2026-08-29 21:10 | Claude | NOTE | workspace | working ONLY in worktree `.claude/worktrees/sweet-mclean-44e50b`, branch `Julio_Cl/dnd-genlegend-recovery-ea160e` (based on codex tip `4fa25dc`); zero writes to the main checkout; merges coordinated here
+- 2026-08-29 21:10 | Claude | CLAIM | bytecode-bootstrap source restore | `AtlasLusoris/GuildKit.py`, `AtlasLusoris/AtlasOfGuilds/*` (verify FighterKit only), `AtlasLusoris/AtlasOfTraining/*`, `AtlasActorLudi/SpeciesKit` gaps, `AtlasActorLudi/AlignmentKit.py`, `AtlasActorLudi/AtlasAlusoris/Map_of_Races.py`, `AtlasEpica/Map_of_{Stories,Titles}.py`, `AtlasInventarium/Map_of_Gear_Titles.py`, `Race_Ingredient` naming — preference order: transcript payload > vault pyc reconstruction (disasm-verified) > constrained rewrite
+- 2026-08-29 21:10 | Claude | CLAIM | `app/main.py` beta scope | Julio (this session): beta launches as CHARACTER GENERATOR ONLY. app.main must boot and serve the player path without the lost NonPlayer API; NonPlayer pages mount only when their Atlas surface is importable. Restoring `nonplayer_choices`/`summon_nonplayer` stays a later questa, not a beta blocker
+- 2026-08-29 21:10 | Claude | MIRROR | `AtlasVenustas/__init__.py` | reproducing Cursor's `ornament_for` export verbatim in the worktree copy so both lines merge clean; Cursor keeps ownership of the file
+- 2026-08-29 21:10 | Claude | NOTE | `app/components/__init__.py` | in the worktree I will keep a stable public API per Canon (modular API doctrine) but with lazy resolution so a broken sibling cannot block boot — proposal, not a revert of Cursor's live copy; to be argued at merge time on this board

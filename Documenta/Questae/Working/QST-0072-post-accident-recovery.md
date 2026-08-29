@@ -75,11 +75,11 @@ Neither lane edits the other lane's claimed files without a written handoff.
 - [x] Locate the Claude export, Codex session patches, archive, and bytecode.
 - [x] Reconstruct and isolate-test the Character and Gender foundation.
 - [x] Reconstruct Proficiency, Skills, Tools, Ability Scores, and Minion.
-- [ ] Restore Backgrounds and their registered catalogues.
-- [ ] Restore Guilds, Wizard training, Alignment, and exposed dependencies.
-- [ ] Import and compile the supported Shiny application.
-- [ ] Verify Player and NonPlayer generation.
-- [ ] Start and visually smoke-test Shiny.
+- [x] Restore Backgrounds and their registered catalogues (TOP `tools`/`roleplay`; verify fidelity).
+- [~] Restore Guilds, Wizard training, Alignment — **runtime via vault bootstraps**; real `.py` still open.
+- [x] Import and compile player path (`shiny_app`); `app.main` still fails NonPlayer imports.
+- [~] Verify Player generation (green, with `Race_Ingredient` soft-fail). NonPlayer still open.
+- [~] Start and visually smoke-test Shiny (player path).
 - [ ] Record a coherent recovery commit.
 
 ---
