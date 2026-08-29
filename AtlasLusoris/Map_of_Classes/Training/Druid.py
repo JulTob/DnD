@@ -45,8 +45,11 @@ class Druid(Progression):
 					Your Wisdom modifier (min +1) is added to Arcana or Nature checks.""",
 					"Class: Druid"))
 				character.Primal_Order = "Magician"
-				character.abilities.Nature += max(1,character.AS.WIS)
-				character.abilities.Arcana += max(1,character.AS.WIS)
+				try:
+					character.abilities.Nature += max(1,character.AS.WIS)
+					character.abilities.Arcana += max(1,character.AS.WIS)
+				except Exception:
+					pass
 
 			else:
 				feats.append(Feature("Primal Order: Warden",

@@ -1,7 +1,7 @@
 from ..Grimoire_of_Health  import roll_health, HIT_DIE_TABLE
 from ..Codex_of_Progression import Progression
 
-from AtlasLusoris.Grimoire_of_Features import Feature, add_new_fighting_style
+from AtlasLusoris.Grimoire_of_Features import Feature, add_new_fighting_style, ApplyRandomFeats, ApplyEpicBoon
 
 
 class Fighter(Progression):

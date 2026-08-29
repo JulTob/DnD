@@ -1,7 +1,7 @@
 from ..Grimoire_of_Health  import roll_health, HIT_DIE_TABLE
 from ..Codex_of_Progression import Progression
 
-from AtlasLusoris.Grimoire_of_Features import Feature
+from AtlasLusoris.Grimoire_of_Features import Feature, ApplyRandomFeats, ApplyEpicBoon
 
 class Rogue(Progression):
 	HIT_DIE = 8
@@ -42,9 +42,13 @@ class Rogue(Progression):
 				"""
 			))
 			# Thieves’ Cant
-			character.languages.Add({"Thieves' Cant"})
-			character.languages.AddAnyLanguage()
-			character.languages.AddAnyLanguage()
+			try:
+				from AtlasLudus.Map_of_Languages import all_languages
+				character.languages.Add("Thieves' Cant")
+				character.languages.AddAnyLanguage(all_languages)
+				character.languages.AddAnyLanguage(all_languages)
+			except Exception:
+				pass
 			feats.append(Feature(
 				"Weapon Mastery", 1,
 				"""

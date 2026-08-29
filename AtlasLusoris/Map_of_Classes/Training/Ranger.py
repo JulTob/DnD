@@ -1,6 +1,15 @@
 from ..Grimoire_of_Health  import roll_health, HIT_DIE_TABLE
 from ..Codex_of_Progression import Progression
 
+from AtlasLusoris.Grimoire_of_Features import (
+	Feature,
+	add_new_fighting_style,
+	ApplyRandomFeats,
+	ApplyEpicBoon,
+	)
+import app.random as random
+from AtlasLusoris.Map_of_Classes.Scroll_of_Constants import SUBCLASSES as subclasses
+
 
 class Ranger(Progression):
 	def __init__(self, character):
@@ -24,9 +33,12 @@ class Ranger(Progression):
 		# --- Core Ranger Features ---
 		if level >= 1:
 			roll_health(character)
+			from AtlasMagia.Lodge_of_Spells import HuntersMark
+			from AtlasLusoris.Compass_of_Learned_Spells import grant_spell, spell_mark
+			grant_spell(character, HuntersMark)
 
 			features.append(Feature("Favored Enemy", 1,
-				f"""You always have the <i>Hunter’s Mark</i> spell prepared. You can cast it {favored_enemy} times without a spell slot, regaining all uses on a Long Rest."""))
+				f"""You always have {spell_mark(HuntersMark)} prepared. You can cast it {favored_enemy} times without a spell slot, regaining all uses on a Long Rest. See Spells."""))
 
 			features.append(Feature("Weapon Mastery", 1,
 				"""You can use the mastery properties of 2 weapons of your choice. You may change them after a Long Rest."""))
