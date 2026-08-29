@@ -301,6 +301,16 @@ class Equipped(Gear):
 			)
 
 
+class Carried(Gear):
+	"""
+	At hand — on the belt, the back, the bandolier. Not in use, but
+	reachable. The three tiers (in use / at hand / in the bag) partition
+	what a hero owns; ``equip`` and ``carry`` each strip the other.
+	"""
+
+	NAME = "Carried"
+
+
 _ARMOUR_KINDS = (
 		"Light",
 		"Medium",
@@ -685,13 +695,46 @@ def equipped(
 def carried(
 		char,
 		) -> list[Item]:
-	"""The bag — owned but not in use."""
+	"""Everything not currently in use — at hand and in the bag alike."""
 	return [
 			item
 			for item in _belongings(
 					char
 					)
 			if item not in Equipped
+			]
+
+
+def carrying(
+		char,
+		tag: type[Tag] | None = None,
+		) -> list[Item]:
+	"""At hand: on the belt or the back, one swap from being in use."""
+	return [
+			item
+			for item in _belongings(
+					char
+					)
+			if item in Carried
+			and item not in Equipped
+			and (
+				tag is None
+				or item in tag
+				)
+			]
+
+
+def bagged(
+		char,
+		) -> list[Item]:
+	"""The pack proper — owned, not in use, and not at hand either."""
+	return [
+			item
+			for item in _belongings(
+					char
+					)
+			if item not in Equipped
+			and item not in Carried
 			]
 
 
@@ -799,6 +842,10 @@ def equip(
 			char,
 			item,
 			)
+	if item in Carried:
+		Carried.Rip(
+				item
+				)
 	if item not in Equipped:
 		Equipped(
 				item
@@ -812,6 +859,37 @@ def unequip(
 	"""Stop using an item. It stays owned, in the bag."""
 	if item in Equipped:
 		Equipped.Rip(
+				item
+				)
+	return item
+
+
+def carry(
+		char,
+		item: Item,
+		) -> Item:
+	"""Sling an owned item within reach. Acquires it first when not owned."""
+	acquire(
+			char,
+			item,
+			)
+	if item in Equipped:
+		Equipped.Rip(
+				item
+				)
+	if item not in Carried:
+		Carried(
+				item
+				)
+	return item
+
+
+def stow(
+		item: Item,
+		) -> Item:
+	"""Put an at-hand item away into the pack. It stays owned."""
+	if item in Carried:
+		Carried.Rip(
 				item
 				)
 	return item
