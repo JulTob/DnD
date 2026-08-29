@@ -1,74 +1,66 @@
-# QST-0039 — Decree 0001 conflates principle with choice: name the unification principle
+# QST-0039 — Decrees are rules, not resolutions: correct the misprint
 
 - **Type:** rule-update / docs
 - **Priority:** 🟠 high
-- **Status:** Open — diagnosis only; the restatement is Julio's to ratify
+- **Status:** Open — diagnosis + correction plan; every Canon/Decree edit is Julio's to ratify
 - **Owner:** unclaimed
 - **Route to:** Architecture Consul (Druid), Methods Consul, Readability Consul, Simplicity Consul
 - **Parent:** —
-- **Sidequests:** —
-- **Related:** Decree 0001 (venv arbitration) · Decree 0002 (no parallel skeleton) · Decree 0003 (one logging pipeline) · QST-0004 · QST-0038 · Code-Style.md (anti-bloat)
+- **Sidequests:** (to throw on Julio's go) .1 README/template · .2 Decree 0001 · .3 Decree 0002 · .4 Decree 0003
+- **Related:** Decree 0001 · Decree 0002 · Decree 0003 · Decrees/README.md · QST-0004 · QST-0038 · Modus-Operandi.md (principles list)
 
 ---
 
 ## 🔍 Diagnosis (what & where)
-`Decree 0001` states its venv ruling as a **choice** — "unify the virtualenvs into
-**one**." Julio's correction: that is not the principle. The principle is **"no
-duplicated efforts"**; a single `.venv` is only *one application* of it. A Decree
-should record the **design principle**, from which the concrete choice follows —
-not the choice dressed as law.
+A **Decree is an abstract design principle — reusable wisdom, a rule** (Julio,
+2026-08-29). The record of a *solved issue* belongs in `Questae/Solved/`. Once a
+one-off decision is made we do not keep the decision as law; we keep the
+**principle** so we never have to ask again.
 
-The principle is already load-bearing across the Canon, but it is never named as
-a principle — only re-derived locally each time:
-- `Decree 0002`: one `Character` root; "refactor existing, never a parallel
-  skeleton"; RNG unified into the Dice; `AtlasTOP` removed as a parallel layer.
-- `Decree 0003`: "one logging pipeline … not two parallel systems (that would
-  recreate the duplication we just cleared)."
-- `Code-Style.md` (anti-bloat): "Delete before adding"; "never build a parallel
-  codebase beside the one with the problem."
-
-It has **no seat in the principles list** (`Modus-Operandi.md` → "principles the
-Council speaks from"), even though that list is explicitly expandable and
-Julio-ratified.
+The current Decrees are written as **resolutions** (specific choices + their
+execution for this codebase), not as rules. The **root cause is the
+`Decrees/README.md` template itself**, which instructs a resolution-shaped record:
+"records the decision … including the alternatives not chosen" and "**Consequences**:
+new Questae opened, Canon edits, agents affected." The writer followed the
+template faithfully — so this is a **misprint to correct across the board**, not
+history to erase (the resolution memory already lives in the Questae).
 
 ## 🧾 Evidence
-- `Decree 0001` §2: "review, clean, and unify the virtualenvs into **one** —
-  surfacing every conflict for Julio's decision." (choice-shaped; defers version)
-- `Modus-Operandi.md`: "This list is expandable. When a new principle earns its
-  place, Julio ratifies it here."
-- The three Decrees + Code-Style quotes above all *apply* the same unnamed rule.
+- `Decrees/README.md` template fields: `## Decision`, `## Alternatives not chosen`,
+  `## Consequences` (Questae opened) — a decision-record, not a principle.
+- `Decree 0001` §3: "**Begin Track A now.**"; §2 "unify the virtualenvs into one" —
+  execution/choice, not rule.
+- `Decree 0002`: stores `name/title/scores/size/tier/seed`, `Roll(D=6)`, the
+  `AtlasAlusoris→AtlasLusoris` merge — codebase-specific resolution.
+- `Decree 0003`: "console handler local / file sink deployed", "keep
+  `@minion/@watcher/…`" — implementation resolution.
 
 ## 🎯 Desired outcome
-"No duplicated efforts" (unification) sits **where principles live** (Canon), and
-Decree 0001's venv section is **restated as an application** of it — without
-losing Decree 0001's still-valid diagnostic-sweep method (part 1) and without
-erasing settled memory (Decrees are kept forever).
+Decrees read as **timeless rules**. The README/template is principle-shaped. Each
+existing Decree is **distilled to the principle(s) it embodies**, linking (not
+copying) the Questa that first taught it. The durable principles land where
+principles live (`Modus-Operandi.md`). The **unification principle — "no
+duplicated efforts"** — is named there explicitly.
 
-## 🧭 Notes for the Agora / implementer — needs a Dialog
-Two candidate shapes for the restatement (Julio picks; I draft the exact text):
+## 🧭 Notes for the Agora / implementer — needs Julio's word per edit
+Correction plan (sidequests, thrown only on go):
+- **.1 — `Decrees/README.md` + template (root fix).** Reframe a Decree as an
+  abstract rule: `## Principle` / `## Why it holds` / `## How it applies` /
+  `## First taught by` (link to the Questa/Dialog; memory lives there).
+- **.2 — Decree 0001.** Holds *two* principles: **no-duplicated-efforts** and
+  *diagnosis discipline*. The latter already lives in `Questae/README.md` +
+  `QUESTA-template.md` — so 0001 becomes the **Unification** principle; the sweep
+  execution stays in QST-0004/QST-0007 (Solved as they close).
+- **.3 — Decree 0002.** Distill to: model-over-script; **derive-don't-store**
+  (SSOT); variants-as-tags; instance-over-global + seed-reproducibility; refactor
+  in place / no parallel skeleton. Specific Character/Dice work stays in QST-0016.
+- **.4 — Decree 0003.** Distill to: one backbone, swappable coats (not parallel
+  systems); observation vs behavior-change; never-fail-silently / idempotent
+  retries; configure-once / concurrency-safe. Minion/logging work stays in its QST.
 
-- **Shape A — Canon principle + amend Decree 0001.** Add a "Unification / no
-  duplicated efforts" seat to `Modus-Operandi.md`'s principles list; add a
-  **Restated (2026-08-29)** note to Decree 0001 §2 reframing "one venv" as an
-  *application* of the principle. Smallest footprint; keeps history in place.
-- **Shape B — Canon principle + new Decree 0004.** Same Canon edit, plus a new
-  Decree that *generalizes* the principle and explicitly notes it already governs
-  Decrees 0001/0002/0003; Decree 0001 §2 gains a pointer. More ceremony, but the
-  principle gets a first-class home and a clean provenance.
-
-**Unification patterns Julio named to include** (as guidance, not mandates):
-diamond modules (one shared dependency at the base of a diamond, depended on by
-many, converging again), functional design, layering by abstraction. A git-like
-mental model fits: store one canonical thing, reference it from many, **merge
-diamonds instead of copying**.
-
-**Also correct the record:** earlier agent notes (and `QST-0038`) implied
-Decree 0001 *mandates* Python 3.14 + one venv. The Decree defers the version to
-Julio; "3.14" is a standing preference from `QST-0004` / `.python-version`, not
-ratified law. `QST-0038` wording corrected accordingly.
-
-Do **not** overwrite Decree 0001 wholesale (its part-1 sweep method stands), and
-do **not** land any Canon edit without Julio's ratifying word.
+Do **not** erase the Questae the resolutions belong to; **link** them. Land no
+Canon/Decree edit without Julio's ratifying word. `Single-Source-of-Truth.md`
+and `Modus-Operandi.md` govern.
 
 ---
 
@@ -80,20 +72,17 @@ do **not** land any Canon edit without Julio's ratifying word.
 ---
 
 ## 🏛️ Council
-> Architecture Consul (Druid): A principle names the *why*; a choice is a *what*.
-> Decree 0001 froze a what. Lift the why into the principles list and every future
-> Decree inherits it — the venv, the one root, the one log pipeline all become the
-> same sentence spoken thrice.
-> Methods Consul: Diamond over fork. Two modules that need the same thing should
-> depend *down* onto one shared base, not each grow a copy — that is "no
-> duplicated efforts" in code, and it is testable: count the definitions, there
-> should be one.
-> Readability Consul (Barbarian): Say it plainly so the next reader needs no
-> archaeology — "we do a thing once, in one place, and point at it." Keep the
-> flavor, but the meaning must survive a tired maintainer at midnight.
-> Simplicity Consul: Anti-bloat and no-duplication are the same coin. Naming the
-> principle lets us reject a parallel layer by *citing law*, not taste.
+> Architecture Consul (Druid): A Decree should survive the problem that birthed
+> it. If deleting the venv mess would make the Decree meaningless, it was a
+> resolution — lift the rule out, let the record rest in the quest.
+> Methods Consul: The template *taught* the error; fix the template first or the
+> next scribe repeats it. Root cause over symptom.
+> Readability Consul (Barbarian): One shape for all law — principle, why, how,
+> and a pointer to where it was learned. A stranger should read a Decree and
+> know how to act, without needing the old battle it came from.
+> Simplicity Consul: This mostly *removes* text — the one-off consequences go
+> back to their quests. Less law, more weight per line. Anti-bloat approves.
 
 **Weighting:** reach 3 × severity 2 = **6** · council leaning: `needs a Dialog`
-*(Reach: a founding principle touching every Atlas and every future Decree.
-Severity: Canon clarity and how decisions are framed — not cosmetic.)*
+*(Reach: the form of every Decree, present and future. Severity: Canon clarity
+and how the project remembers its own wisdom — not cosmetic.)*
