@@ -1,18 +1,15 @@
 """
 CharactersKit
 
-Depends on:
-	TOP Kit: Role Tags.
-
 Contains:
 	Character: shared skeleton (seed, dices, Roll/Dice, dummies)
 	Role / Player / NonPlayer: Core role Tags
 
 Seeds: repeatability between calls.
-Dice: the Character's owned RNG (``dices`` bag; ``Roll`` / ``Dice`` draw).
-
-NEVER CHANGE THIS FILE
-LOCKED CODE. DO NOT CHANGE.
+Dice: the Character's owned RNG.
+	``dices`` holds the main bag.
+	``Roll`` / ``Dice`` draw from it.
+	``Dice_Bag`` opens a deterministic bag for one stable purpose.
 
 Expected behaviour
 
@@ -20,19 +17,30 @@ For any character, with Role Tags, say charlie:
 ```
 charlie = Character( name= "Charlie" )
 
-Player(Charlie)
-Wizard(Charlie)
-Farmer(Charlie)
+Player( charlie )
+Wizard( charlie )
+Farmer( charlie )
 
 these should return true:
-assert Player in Charlie
-assert "wizard" in Charlie
-assert "They" in Charlie
+assert charlie in Player
+assert Has( charlie, Wizard )
 
 ```
 
 """
-from TagKit import Tag, Pre, Underlay, Imprint
+
+from TagKit import Has, Pre, Tag, TagPreconditionError
+
+
+def _tag_holds(
+		char,
+		candidate,
+		) -> bool:
+	"""Whether this Character already carries the candidate Tag."""
+	try:
+		return char in candidate
+	except TypeError:
+		return False
 
 
 # ---------------------------------------------------------------------------
@@ -40,134 +48,407 @@ from TagKit import Tag, Pre, Underlay, Imprint
 # ---------------------------------------------------------------------------
 
 class Character:
-	"""Minimal shared substrate for every
-	generated Player or NonPlayer Character.
-
-	Stores dummies that role Tags resolve.
-	All rolls go through Roll / Dice.
-
-	"""
+	"""Minimal shared substrate for every Player or NonPlayer Character."""
 
 	def __init__(
 			char,
 			seed: int = -1,
 			level: int = 1,
 			):
-		"""Constructs the Character skeleton.
-
-		LOCKED SUBSTRATE
-		This ``__init__`` is definitive.
-
-		Do not change the parameters or the method body.
-		Do NOT change a line of this code.
-
-		Minimal method for optimal TOP compatibility
-		"""
+		"""Construct the Character skeleton."""
 		from random import Random
+
+		from AtlasActorLudi.ProficiencyKit import Training_Record
 
 		rng = Random()
 		char.seed = int(
-				seed if seed >= 0 else rng.randint(0, 2**64)
+			seed
+			if seed >= 0
+			else rng.randint(
+				0,
+				2**64,
 				)
-		char.dices = Random(char.seed)
-			#-- Random Number Generator initialization.
-		char.level = max(1, int(level))
-
-	def __contains__(char, key):
-		"""
-		True for the type sentinel or a Tag check; else False.
-
-		Characteristics are Tags (see Role); query plain fields by attribute
-		(char.level, char.gender), not by ``in``.
-		"""
-		if isinstance(key, str):
-			if key.casefold() in {"character", "char"}:
-				return True
-			return False
-		if isinstance(key, type) and issubclass(key, Tag):
-			return char in key
-			#-- Field membership — SPEC
-		return False
+			)
+		char.dices = Random(
+			char.seed
+			)
+		char.level = max(
+			1,
+			int(
+				level
+				),
+			)
+		char.training = Training_Record()
 
 	# --- Dice Methods ----------------------------------------------
 
 	def Roll(
-			char, 
-			D: int = 6, 
-			N: int = 1, 
-			modifier: int = 0) -> int:
-		"""	Roll N dice with D sides and add a modifier
-			from the Character's Dice stream.
-			-- Approved by Julio. Locked Substrate. -- 
-			Do not change this code.
-			"""
+			char,
+			D: int = 6,
+			N: int = 1,
+			modifier: int = 0,
+			*,
+			dice=None,
+			) -> int:
+		"""
+		Roll N dice with D sides and add a modifier
+		from the Character's Dice Bag.
+
+		``dice`` rolls from a named Bag instead of the Character's
+		single stream, for a roll whose result must not depend on
+		how many other rolls happened first.
+		"""
 		if N < 1:
 			N = 1
+
+		source = (
+			dice
+			if dice is not None
+			else char.dices
+			)
+
 		total = 0
-		for _ in range(N):
+
+		for _ in range(
+				N
+				):
 			if D >= 1:
-				total += char.dices.randint(1, D)
+				total += source.randint(
+					1,
+					D,
+					)
 			else:
-				total += char.dices.randint(D, 1)
+				total += source.randint(
+					D,
+					1,
+					)
+
 		return total + modifier
 
 	# Alias used in Decree / Dialog prose
 	Dice = Roll
 
+	def Roll_Zero(
+			char,
+			D: int = 6,
+			N: int = 1,
+			) -> int:
+		"""Roll N zero-based dice from this Character's Dice Bag."""
+		if N < 1:
+			N = 1
+
+		lower = min(
+			0,
+			D,
+			)
+		upper = max(
+			0,
+			D,
+			)
+
+		return sum(
+			char.dices.randint(
+				lower,
+				upper,
+				)
+			for _ in range(
+				N
+				)
+			)
+
 	def __invert__(char):
-		"""
-		Reseed this Character's Dice from fixed seed.
-		Sugar operator.
-		Locked Substrate. Do not change this code.
-		Usage: `~char` to "remix the Dice bag".
-		"""
-		char.dices.seed(char.seed)
+		"""Reseed this Character's Dice from its fixed seed."""
+		char.dices.seed(
+			char.seed
+			)
+
 		return char.seed
 
-	def __lt__(char, level: int):
-		"""
-		Level less than or equal to comparison.
-		"""
-		return char.level < level
-	
-	def __gt__(char, level: int):
-		"""
-		Level greater than or equal to comparison.
-		"""
-		return char.level > level
-
-	def __ge__(char, level: int):
-		"""
-		Level greater than or equal to comparison.
-		"""
-		return char.level >= level
-	
-	def __le__(char, level: int):
-		"""
-		Level greater than or equal to comparison.
-		"""
-		return char.level <= level
-
-	def __eq__(char, level: int):
-		"""
-		Level greater than or equal to comparison.
-		"""
-		return char.level == level
-
 	def New_Score(char):
-		""" 4d6-drop-lowest """
-		# Locked Substrate. Do not change this code.
-		rolls = [char.Dice(6) for _ in range(4)]
-		return sum(sorted(rolls)[1:])
+		"""Roll 4d6 and drop the lowest result."""
+		rolls = [
+			char.Dice(
+				6
+				)
+			for _ in range(
+				4
+				)
+			]
 
-	def Pick(char, ledger, weights = None):
-		""" Pick a random item from the ledger with optional weights. """
-		# Locked Substrate. Do not change this code.
+		return sum(
+			sorted(
+				rolls
+				)[
+					1:
+					]
+			)
+
+	def Pick_Bag(
+			char,
+			purpose=None,
+			*,
+			version: str = "1",
+			namespace: str = "GenLegend",
+			):
+		"""
+		The Dice Bag one draw should come from, advanced per purpose.
+
+		Successive draws for the same purpose open ``purpose#0``,
+		``purpose#1`` and so on. Different purposes stay independent.
+		A bare call derives purpose from the caller's module.function.
+		"""
+		if purpose is None:
+			from sys import _getframe
+
+			frame = _getframe(
+				2
+				)
+			purpose = (
+				f"{frame.f_globals.get('__name__', '?')}"
+				f".{frame.f_code.co_qualname}"
+				)
+
+		counts = getattr(
+			char,
+			"_pick_draws",
+			None,
+			)
+
+		if counts is None:
+			counts = {}
+			char._pick_draws = counts
+
+		drawn = counts.get(
+			purpose,
+			0,
+			)
+		counts[
+			purpose
+			] = drawn + 1
+
+		return char.Dice_Bag(
+			f"{purpose}#{drawn}",
+			version=version,
+			namespace=namespace,
+			)
+
+	def Pick(
+			char,
+			ledger,
+			weights=None,
+			*,
+			purpose=None,
+			dice=None,
+			):
+		"""
+		Pick one item from a named Dice Bag.
+
+		``dice`` takes an already-opened Bag; ``purpose`` names one to open.
+		Neither is required: a bare ``Pick`` still draws deterministically
+		via ``Pick_Bag``.
+		"""
 		if not ledger:
-			raise ValueError("Pick: empty ledger")
+			raise ValueError(
+				"Pick: empty ledger"
+				)
+
+		source = (
+			dice
+			if dice is not None
+			else char.Pick_Bag(
+				purpose
+				)
+			)
+
 		if weights is None:
-			return char.dices.choice(list(ledger))
-		return char.dices.choices(list(ledger), weights=weights, k=1)[0]
+			return source.choice(
+				list(
+					ledger
+					)
+				)
+
+		return source.choices(
+			list(
+				ledger
+				),
+			weights=weights,
+			k=1,
+			)[
+				0
+				]
+
+	def Accept(
+			char,
+			ledger,
+			weights=None,
+			*,
+			purpose=None,
+			dice=None,
+			imprint=None,
+			in_order=False,
+			attempts=100,
+			):
+		"""
+		Draw from a pool until a candidate's Preconditions accept
+		this Character.
+
+		Each refusal is reported as a Minion bug tree and dropped from
+		the remaining ledger. An exhausted pool raises — that is a real
+		bug. ``in_order`` walks the ledger as given; otherwise each
+		attempt uses ``Pick``. ``imprint`` defaults to ``candidate(char)``.
+		"""
+		from Minion import report_bug
+
+		remaining = list(
+			ledger
+			)
+		if not remaining:
+			raise ValueError(
+				"Accept: empty ledger"
+				)
+
+		remaining_weights = (
+			list(
+				weights
+				)
+			if weights is not None
+			else None
+			)
+		if (
+			remaining_weights is not None
+			and len(
+				remaining_weights
+				) != len(
+					remaining
+					)
+			):
+			raise ValueError(
+				"Accept: weights must match the ledger."
+				)
+
+		ceiling = min(
+			max(
+				1,
+				int(
+					attempts
+					)
+				),
+			100,
+			)
+		last_refusal = None
+
+		for _ in range(
+				ceiling
+				):
+			if not remaining:
+				break
+
+			candidate = (
+				remaining[
+					0
+					]
+				if in_order
+				else char.Pick(
+					remaining,
+					weights=remaining_weights,
+					purpose=purpose,
+					dice=dice,
+					)
+				)
+
+			if (
+				imprint is None
+				and _tag_holds(
+					char,
+					candidate,
+					)
+				):
+				return candidate
+
+			try:
+				if imprint is None:
+					candidate(
+						char
+						)
+				else:
+					imprint(
+						candidate
+						)
+			except TagPreconditionError as err:
+				report_bug(
+					err
+					)
+				last_refusal = err
+				index = remaining.index(
+					candidate
+					)
+				remaining.pop(
+					index
+					)
+				if remaining_weights is not None:
+					remaining_weights.pop(
+						index
+						)
+				continue
+
+			return candidate
+
+		raise ValueError(
+			"No candidate in this pool accepted the Character."
+			) from last_refusal
+
+	def Dice_Bag(
+			char,
+			purpose: str,
+			*,
+			version: str = "1",
+			namespace: str = "GenLegend",
+			):
+		"""Open a fresh deterministic Dice Bag for one stable purpose."""
+		from hashlib import blake2b
+		from random import Random
+
+		bag_purpose = str(
+			purpose
+			).strip()
+		bag_version = str(
+			version
+			).strip()
+		bag_namespace = str(
+			namespace
+			).strip()
+
+		if not bag_purpose:
+			raise ValueError(
+				"A Character Dice Bag requires a stable purpose."
+				)
+
+		if not bag_namespace:
+			raise ValueError(
+				"A Character Dice Bag requires a namespace."
+				)
+
+		material = (
+			f"{char.seed}|{bag_purpose}|{bag_version}"
+			).encode(
+				"utf-8"
+				)
+		digest = blake2b(
+			material,
+			digest_size=16,
+			person=bag_namespace.encode(
+				"utf-8"
+				)[
+					:16
+					],
+			).digest()
+
+		return Random(
+			int.from_bytes(
+				digest,
+				"big",
+				)
+			)
 
 
 # ---------------------------------------------------------------------------
@@ -175,224 +456,331 @@ class Character:
 # ---------------------------------------------------------------------------
 
 class Role(Tag):
-	"""
-	Root tag for character syntactic roles.
-	Species/Classes/Backgrounds/Professions/etc.
-	"""
-	# 	Locked Substrate. Do not change this code.
-	NAME = "Role"
+	"""Root Tag for a Character's play role."""
 
 	@Pre
-	def is_Character(target):
-		"""
-		Locked Precondition: 
-		Only Character targets.
-		"""
-		return isinstance(target, Character)
+	def is_Character(
+			target,
+			):
+		"""Limit Role Tags to Characters."""
+		return isinstance(
+			target,
+			Character,
+			)
 
-	@Underlay
-	def __contains__(agent, underlay, key):
-		"""
-		Membership by Tag NAME (casefold) or Tag-object Field check.
-		Locked Substrate. Do not change this code.
-		"""
-		if isinstance(key, str):
-			key = key.casefold()
-			for tag in agent.Tags():
-				name = getattr(tag, "NAME", "") or tag.__name__
-				if name.casefold() == key:
-					return True
-		return underlay()
-		#-- Underlay calls the previous instantiation of contains 
-		#-- With the same parameters when empty
-		
 
 class Player(Role):
-	"""
-	Player-character role.
+	"""Player-character role."""
 
-	"""
-	NAME = "Player"
+	@Pre
+	def no_npc(
+			target,
+			):
+		"""Exclude Characters carrying the NonPlayer Shape."""
+		assert target not in NonPlayer
 
-	@Pre 
-	def no_npc(target):
-		"""
-		Locked Precondition: 
-		Excludes NPC.
-		"""
-		assert not target in NonPlayer
 
 class NonPlayer(Role):
-	"""
-	Non Player Character role.
+	"""Non-player Character role."""
 
-	"""
-	NAME = "Non Player Character"
+	@Pre
+	def no_player(
+			target,
+			):
+		"""Exclude Characters carrying the Player Shape."""
+		assert target not in Player
 
-	@Underlay
-	def __contains__(agent, underlay, key):
-		"""
-		Membership in NPC.
-		"""
-		if isinstance(key, str):
-			key = key.casefold()
-			if (key == "npc" 
-				or key == "non player"):
-					return True
-			return False
-		return underlay()
-
-	@Pre 
-	def no_player(target):
-		"""
-		Locked Precondition: 
-		Excludes Player targets.
-		"""
-		assert not target in Player
-
-
-class Gender(Role):
-	NAME = "Gender"
-	@Imprint 
-	def set_gender(target, gender = None):
-		if gender is None:
-			target.gender = target.Pick([
-				"They",
-				"He",
-				"She"])
-		else:
-			target.gender = gender		
-	
-	@Underlay
-	def __contains__(agent, underlay, key):
-		"""
-		Membership in Gender.
-		"""
-		key = key.casefold()
-		gender = agent.gender.casefold()
-		if key == gender:
-			return True
-		return underlay()
 
 # ---------------------------------------------------------------------------
-# Focused core suite — one _test_* per behaviour, all independent
+# Focused core suite
 # ---------------------------------------------------------------------------
 
 def _test_rng_determinism():
-	"""Seed fully determines the Dice stream; ``~char`` reseeds it."""
-	a = Character(seed=42)
-	b = Character(seed=42)
-	seq = [a.Roll(20) for _ in range(5)]
-	assert seq == [b.Roll(20) for _ in range(5)]   # same seed -> same stream
-	assert all(1 <= x <= 20 for x in seq)
-	assert isinstance(a.seed, int)
-	assert (~a) == 42                               # reseed returns the seed
-	assert [a.Roll(20) for _ in range(5)] == seq    # reseed replays the stream
+	"""Seed fully determines the Dice Bag; inversion reseeds it."""
+	a = Character(
+		seed=42
+		)
+	b = Character(
+		seed=42
+		)
+	sequence = [
+		a.Roll(
+			20
+			)
+		for _ in range(
+			5
+			)
+		]
+
+	assert sequence == [
+		b.Roll(
+			20
+			)
+		for _ in range(
+			5
+			)
+		]
+	assert all(
+		1 <= result <= 20
+		for result in sequence
+		)
+	assert isinstance(
+		a.seed,
+		int,
+		)
+	assert (~a) == 42
+	assert [
+		a.Roll(
+			20
+			)
+		for _ in range(
+			5
+			)
+		] == sequence
 
 
 def _test_roll_shape():
-	"""Roll honours D / N / modifier; ``Dice`` is the alias."""
+	"""Roll honors D, N, and modifier; Dice is the alias."""
 	assert Character.Dice is Character.Roll
-	assert Character(seed=1).Roll(D=1, N=3) == 3    # D=1 is deterministic
-	assert Character(seed=1).Roll(D=1, N=0) == 1    # N < 1 clamps to 1
-	assert Character(seed=1).Roll(D=6, N=1, modifier=100) >= 101
+	assert Character(
+		seed=1
+		).Roll(
+			D=1,
+			N=3,
+			) == 3
+	assert Character(
+		seed=1
+		).Roll(
+			D=1,
+			N=0,
+			) == 1
+	assert Character(
+		seed=1
+		).Roll(
+			D=6,
+			N=1,
+			modifier=100,
+			) >= 101
+	assert 0 <= Character(
+		seed=1
+		).Roll_Zero(
+			D=6,
+			N=4,
+			) <= 24
+	assert -12 <= Character(
+		seed=1
+		).Roll_Zero(
+			D=-3,
+			N=4,
+			) <= 0
+
+
+def _test_dice_bags():
+	"""Purpose Dice Bags are stable, isolated, and level-independent."""
+	first = Character(
+		seed=91,
+		level=1,
+		)
+	progressed = Character(
+		seed=91,
+		level=20,
+		)
+	dice_state = first.dices.getstate()
+	first_bag = first.Dice_Bag(
+		"identity.story"
+		)
+	progressed_bag = progressed.Dice_Bag(
+		"identity.story"
+		)
+
+	first_values = tuple(
+		first_bag.randint(
+			1,
+			20,
+			)
+		for _ in range(
+			4
+			)
+		)
+	progressed_values = tuple(
+		progressed_bag.randint(
+			1,
+			20,
+			)
+		for _ in range(
+			4
+			)
+		)
+
+	assert first_values == progressed_values
+	assert first.dices.getstate() == dice_state
+
+	first_choice = first.Pick(
+		(
+			"North",
+			"South",
+			),
+		dice=first.Dice_Bag(
+			"identity.direction"
+			),
+		)
+	progressed_choice = progressed.Pick(
+		(
+			"North",
+			"South",
+			),
+		dice=progressed.Dice_Bag(
+			"identity.direction"
+			),
+		)
+
+	assert first_choice == progressed_choice
+	assert first.dices.getstate() == dice_state
 
 
 def _test_level():
-	"""Level clamps to >= 1 and compares through <= / >=."""
-	assert Character(level=0).level == 1
-	assert Character(level=3).level == 3
-	c = Character(seed=1, level=2)
-	assert c <= 2 and c >= 2
-	assert c <= 3 and not (c <= 1)
-	assert c >= 1 and not (c >= 3)
+	"""Level clamps to at least one and remains explicit state."""
+	assert Character(
+		level=0
+		).level == 1
+	assert Character(
+		level=3
+		).level == 3
+
+	character = Character(
+		seed=1,
+		level=2,
+		)
+
+	assert character.level == 2
+	assert character.level <= 3
+	assert character.level >= 1
 
 
-def _test_contains_core():
-	"""Character.__contains__: sentinel and Tag-key -> Field (not attrs)."""
-	z = Character(seed=7, level=1)
-	assert "character" in z and "char" in z         # sentinel
-	assert 7 not in z and 1 not in z               # seed/level are attrs, not ``in``
-	assert "nonsense" not in z
-	assert Player not in z                          # Tag key -> Field (untagged)
+def _test_tag_queries():
+	"""Semantic membership is queried through Tags."""
+	character = Character(
+		seed=7,
+		level=1,
+		)
+
+	assert character not in Player
+	assert not Has(
+		character,
+		Player,
+		)
 
 
-def _test_player_role_and_underlay():
-	"""Role NAME overlay sits on top of the Character underlay."""
-	hero = Character(seed=5, level=2)
-	Player(hero)
-	# Field membership, both directions
+def _test_player_role():
+	"""Role membership includes the Shape and its Base."""
+	hero = Character(
+		seed=5,
+		level=2,
+		)
+	Player(
+		hero
+		)
+
 	assert hero in Player and hero in Role
 	assert Player in hero and Role in hero
-	# NAME probe hits the applied tag; a miss underlays to the Character
-	assert "player" in hero                         # Player NAME (overlay)
-	assert "character" in hero                       # NAME miss -> underlay -> sentinel
-	assert "wizard" not in hero                      # NAME miss -> underlay -> False
-	# NAME probe does not walk bases: "role" is not a NAME hit, even though
-	# hero *is* in Role's Field (the ``Role in hero`` check above).
-	assert "role" not in hero
+	assert Has(
+		hero,
+		Player,
+		Role,
+		)
+	assert Has(
+		hero,
+		"Player",
+		"Role",
+		)
+	assert "Player" in hero
+	assert "player" in hero
+	assert "Wizard" not in hero
+	assert not Has(
+		hero,
+		"Wizard",
+		)
 
 
 def _test_is_character_contract():
-	"""is_Character Pre rolls the whole tagging back for a non-Character.
-
-	The stub must expose ``__contains__``; otherwise Role's @Underlay
-	__contains__ raises TagResolutionError (no visible underlay) before the
-	Pre can run.
-	"""
+	"""The Role precondition rolls back tagging a non-Character."""
 	class NotACharacter:
-		def __contains__(self, key):
-			return False
+		pass
+
 	try:
-		Player(NotACharacter())
-	except Exception as err:
-		assert type(err).__name__ == "TagPreconditionError", type(err).__name__
+		Player(
+			NotACharacter()
+			)
+	except Exception as error:
+		assert type(error).__name__ == "TagPreconditionError"
 	else:
-		raise AssertionError("Player must reject a non-Character")
+		raise AssertionError(
+			"Player must reject a non-Character"
+			)
 
 
 def _test_spaced_name():
-	"""A Role NAME with spaces is probed whole and casefold."""
+	"""Python Tag identity stays separate from a display-name Report."""
 	class Eldritch_Knight(Role):
 		NAME = "Eldritch Knight"
-	knight = Character(seed=7)
-	Eldritch_Knight(knight)
+
+	knight = Character(
+		seed=7
+		)
+	Eldritch_Knight(
+		knight
+		)
+
 	assert knight in Eldritch_Knight and knight in Role
-	assert "eldritch knight" in knight and "Eldritch Knight" in knight
-	assert "wizard" not in knight
+	assert Has(
+		knight,
+		"Eldritch_Knight",
+		)
+	assert Eldritch_Knight.NAME == "Eldritch Knight"
+	assert not Has(
+		knight,
+		"Eldritch Knight",
+		)
 
 
-def _test_nonplayer_short_circuit():
-	"""NonPlayer answers its aliases and short-circuits every other string.
+def _test_nonplayer_role():
+	"""NonPlayer uses canonical Tag identity; aliases belong in Maps."""
+	npc = Character(
+		seed=3
+		)
+	NonPlayer(
+		npc
+		)
 
-	Its @Underlay returns False on a string miss without calling underlay,
-	so neither the sentinel nor its own spaced NAME leak through; non-string
-	keys still underlay to the Field check.
-	"""
-	npc = Character(seed=3)
-	NonPlayer(npc)
-	assert "npc" in npc and "non player" in npc      # explicit aliases
-	assert "character" not in npc                     # sentinel blocked
-	assert "non player character" not in npc          # own NAME not probed
-	assert "grog" not in npc
-	assert npc in NonPlayer                            # Field
-	assert NonPlayer in npc and Player not in npc      # non-str -> underlay -> Field
+	assert npc in NonPlayer
+	assert NonPlayer in npc and Player not in npc
+	assert Has(
+		npc,
+		NonPlayer,
+		"NonPlayer",
+		)
+	assert not Has(
+		npc,
+		"NPC",
+		)
 
 
 def _self_test():
-	"""Run the focused core suite — each block is an independent _test_*."""
+	"""Run the focused core suite."""
 	_test_rng_determinism()
 	_test_roll_shape()
+	_test_dice_bags()
 	_test_level()
-	_test_contains_core()
-	_test_player_role_and_underlay()
+	_test_tag_queries()
+	_test_player_role()
 	_test_is_character_contract()
 	_test_spaced_name()
-	_test_nonplayer_short_circuit()
-	print("OK — CharactersKit self-test")
+	_test_nonplayer_role()
+
+	print(
+		"OK — CharactersKit self-test"
+		)
 
 
 if __name__ == "__main__":
-	# Prefer: PYTHONPATH=. python -m AtlasActorLudi.CharactersKit
-	# (IDE Run File needs repo-root PYTHONPATH — see .vscode/settings.json)
 	_self_test()

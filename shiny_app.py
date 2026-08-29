@@ -27,6 +27,7 @@ from shiny import App, reactive, render, ui
 # never run on placeholder shadows. Resilience lives at the summoning layer,
 # where the Minions report every failure and recovery rerolls the seed.
 from AtlasActorLudi.Map_of_Scores import Modifier
+from AtlasActorLudi.Map_of_Character_Generation import summon_player
 from AtlasAlusoris.Grimoire_of_NPC import NPC
 from AtlasAlusoris.Map_of_Archetypes import Archetype, Archetypes
 from AtlasAlusoris.Map_of_Races import Race, race_weights
@@ -59,12 +60,6 @@ def _selection_or_none(value: str | None) -> str | None:
 
 
 @minion  # every failed attempt reports its full bug tree; the caller recovers
-def _attempt_character(**kwargs: Any) -> Character:
-    """One summoning attempt. Reporting is the Minion's job; recovery is the caller's."""
-    return Character(**kwargs)
-
-
-@minion  # every failed attempt reports its full bug tree; the caller recovers
 def _attempt_npc(**kwargs: Any) -> NPC:
     """One summoning attempt. Reporting is the Minion's job; recovery is the caller's."""
     return NPC(**kwargs)
@@ -79,34 +74,15 @@ def summon_character(
     gender: str | None = None,
     seed: int | None = None,
 ) -> Character:
-    """Always hand the user a character: retry fresh seeds on failure, report every error (QST-0009)."""
-    max_attempts = 5
-    try:
-        base_seed = int(seed) if seed is not None else None
-    except (TypeError, ValueError):
-        base_seed = None
-
-    if base_seed is None:
-        base_seed = random.randint(0, 2**16)
-
-    current_seed = base_seed
-    last_error: Exception | None = None
-
-    for _ in range(max_attempts):
-        try:
-            return _attempt_character(
-                species=species,
-                char_class=char_class,
-                background=background,
-                level=level,
-                gender=gender,
-                seed=current_seed,
-            )
-        except Exception as exc:  # reported by the @minion above; recover with a fresh seed
-            last_error = exc
-            current_seed += 1
-
-    raise RuntimeError("Unable to summon character after retries.") from last_error
+    """Hand the user a character via the ActorLudi production line."""
+    return summon_player(
+        species=_selection_or_none(species),
+        guild=_selection_or_none(char_class),
+        background=_selection_or_none(background),
+        level=level,
+        gender=_selection_or_none(gender),
+        seed=seed,
+    )
 
 
 @chronicler  # one creation = one account

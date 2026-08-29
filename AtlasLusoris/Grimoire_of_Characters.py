@@ -142,6 +142,10 @@ def New_Player(
 	return char
 
 
+# Stable alias used by AtlasActorLudi.Map_of_Character_Generation.
+awaken_player = New_Player
+
+
 def _creature_type_line(
 	char,
 	creature_type,
@@ -729,7 +733,6 @@ class Character(Character_Skeleton):
 		"""
 
 		char.skills = Char_Skills(
-			char,
 			AS=char.AS,
 			ProficiencyBonus=char.proficiency_bonus,
 			)

@@ -22,36 +22,51 @@ def Register_Backgrounds(
 
 	for record in records:
 		resolved_tools = (
-			record.tool
-			if record.tool
+			record.tools
+			if record.tools
 			else artisan_tools
 			)
 		origin_feat = origin_feats[
 			record.origin_feat
 			]
 
-		backgrounds.append(
-			build_background(
-				name=record.name,
-				audiences=(
-					pc_background,
-					npc_background,
-					),
-				abilities=record.abilities,
-				skills=record.skills,
-				tools=resolved_tools,
-				origin_feat=origin_feat,
-				origin_feat_options=record.origin_feat_options,
-				title=record.name,
-				description=record.description,
-				hook=record.hook,
-				equipment=record.equipment,
-				source_title=source_title,
-				source_url=source_url,
-				source_locator=source_locator,
-				source_kind="official-reference",
+		description = record.description
+		if record.roleplay:
+			description = (
+				f"{description}\n\n{record.roleplay}"
+				if description
+				else record.roleplay
 				)
-			)
+
+		try:
+			backgrounds.append(
+				build_background(
+					name=record.name,
+					audiences=(
+						pc_background,
+						npc_background,
+						),
+					abilities=record.abilities,
+					skills=record.skills,
+					tools=resolved_tools,
+					origin_feat=origin_feat,
+					origin_feat_options=record.origin_feat_options,
+					title=record.name,
+					description=description,
+					source_title=source_title,
+					source_url=source_url,
+					source_locator=source_locator,
+					source_kind="official-reference",
+					)
+				)
+		except ValueError as error:
+			# Recovery: NPC kit backgrounds and official Maps can share a Name
+			# (e.g. Guardian). Keep the earlier declaration; log via raise only
+			# when it is a different failure.
+			if "already declared" not in str(
+				error
+				):
+				raise
 
 	return tuple(
 		backgrounds

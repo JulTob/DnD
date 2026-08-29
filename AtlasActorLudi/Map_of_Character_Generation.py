@@ -198,8 +198,12 @@ def summon_player(
             ) from last_error
 
 
+character_choices = choices
+
+
 __all__ = (
     "Character_Choices",
     "choices",
+    "character_choices",
     "summon_player",
     )

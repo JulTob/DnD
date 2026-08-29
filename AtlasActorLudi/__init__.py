@@ -12,11 +12,33 @@ from AtlasActorLudi.GendersKit import (
 	Gender_Reveal,
 	Male,
 	)
-from AtlasActorLudi.Map_of_Character_Generation import (
-	Character_Choices,
-	character_choices,
-	summon_player,
-	)
+
+# Lazy: Map_of_Character_Generation imports Lusoris, which imports CharactersKit.
+# Eager import here closes a cycle through BackgroundKit during package load.
+def __getattr__(
+		name: str,
+		):
+	if name in {
+		"Character_Choices",
+		"character_choices",
+		"summon_player",
+		}:
+		from AtlasActorLudi.Map_of_Character_Generation import (
+			Character_Choices,
+			character_choices,
+			summon_player,
+			)
+		globals().update(
+			{
+				"Character_Choices": Character_Choices,
+				"character_choices": character_choices,
+				"summon_player": summon_player,
+				}
+			)
+		return globals()[name]
+	raise AttributeError(
+		name
+		)
 
 
 def Summon_Player_Character(
