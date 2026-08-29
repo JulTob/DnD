@@ -677,6 +677,46 @@ input[type="number"].fantasy-input {
 	z-index: -1; /* Place it behind text */
 }
 
+.spell-chip-rail {
+	text-align: left;
+	}
+.spell-chip-level {
+	font-family: 'Manufacturing Consent', 'Cinzel', serif;
+	font-size: 1.35em;
+	display: block;
+	margin: 0.45em 0 0.15em;
+	}
+.spell-chip-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.25em 0.35em;
+	}
+.spell-chip,
+.spell-name {
+	font-family: 'Iglesia', 'IM Fell English', serif;
+	}
+.spell-chip {
+	display: inline-block;
+	font-size: 1.45em;
+	line-height: 1.2;
+	border: 1px solid #333;
+	border-radius: 999px;
+	padding: 0.05em 0.65em 0.12em;
+	background: var(--back-color);
+	}
+.spell-chip.spell-prepared,
+.spell-name.spell-prepared {
+	border-color: var(--primary-color);
+	}
+.spell-chip.spell-written,
+.spell-name.spell-written {
+	border-style: dashed;
+	color: #555;
+	}
+.spell-name {
+	font-size: 1.8em;
+	}
+
 /* Print-specific styles */
 @media print {
     .symbol {

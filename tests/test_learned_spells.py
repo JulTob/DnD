@@ -4,6 +4,7 @@ from AtlasLusoris.Compass_of_Learned_Spells import (
 	catalog_keys,
 	catalog_spells,
 	html_spell_catalog,
+	html_spell_index,
 	know_spell,
 	progressive_learn,
 	spell_key,
@@ -160,6 +161,34 @@ def test_progressive_learn_skips_owned_names_without_shrinking_the_budget():
 	assert len(known) == 4
 
 
+def test_spell_index_uses_level_chips():
+	class Book:
+		spells_known = [FakeSpell("Fire Bolt", 0), FakeSpell("Shield", 1)]
+		granted_spells = []
+		always_prepared = set()
+		prepared_spells = [FakeSpell("Fire Bolt", 0)]
+		catalog_known = True
+
+	page = html_spell_index(Book())
+	assert "spell-chip-rail" in page
+	assert "Cantrips" in page
+	assert "Level 1" in page
+	assert "Fire Bolt" in page
+	assert "【" not in page
+
+
+def test_2024_casting_tables():
+	from AtlasLusoris.Map_of_Casting_Tables import casting_row
+	assert casting_row("Sorcerer", 1)["prepared"] == 2
+	assert casting_row("Sorcerer", 1)["cantrips"] == 4
+	assert casting_row("Sorcerer", 20)["prepared"] == 22
+	assert casting_row("Sorcerer", 20)["slots"][5] == 2
+	assert casting_row("Wizard", 1)["prepared"] == 4
+	assert casting_row("Warlock", 1)["prepared"] == 2
+	assert casting_row("Ranger", 9)["prepared"] == 8
+	assert casting_row("Druid", 18)["slots"][4] == 2
+
+
 if __name__ == "__main__":
 	test_grows_without_reshuffle()
 	test_know_spell_is_separate_from_display()
@@ -167,5 +196,7 @@ if __name__ == "__main__":
 	test_wildwarden_knows_speak_with_animals_without_embedding()
 	test_grant_does_not_consume_a_class_known_slot()
 	test_progressive_learn_skips_owned_names_without_shrinking_the_budget()
+	test_spell_index_uses_level_chips()
+	test_2024_casting_tables()
 	print("progressive_learn: ok", flush=True)
 	os._exit(0)

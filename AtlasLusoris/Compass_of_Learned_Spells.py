@@ -72,11 +72,24 @@ def unique_spells(spells):
 
 
 def spell_mark(spell, prepared=True):
-	level = spell_level(spell)
+	"""Spell name in the sheet hand. Prepared state lives on the chip, not in brackets."""
 	name = spell_key(spell)
-	if prepared:
-		return f"【{level}】{name}"
-	return f"〖{level}〗{name}"
+	kind = "prepared" if prepared else "written"
+	return f"<span class='spell-name spell-{kind}'>{name}</span>"
+
+
+LEVEL_LABELS = {
+	0: "Cantrips",
+	1: "Level 1",
+	2: "Level 2",
+	3: "Level 3",
+	4: "Level 4",
+	5: "Level 5",
+	6: "Level 6",
+	7: "Level 7",
+	8: "Level 8",
+	9: "Level 9",
+	}
 
 
 def caster_rng(character, salt=0):
@@ -352,14 +365,28 @@ def prepared_keys(caster):
 def html_spell_index(caster, bullet="🪄"):
 	spells = catalog_spells(caster)
 	spells.sort(key=lambda spell: (spell_level(spell), spell_key(spell)))
-	prepared = prepared_keys(caster)
-	items = []
-	for spell in spells:
-		is_prepared = spell_key(spell) in prepared or spell_level(spell) == 0
-		items.append(f"<li>{spell_mark(spell, prepared=is_prepared)}</li>")
-	if not items:
+	if not spells:
 		return ""
-	return f"""<ul style="list-style-type: '{bullet}'; text-align: left; font-family: 'Iglesia'">{"".join(items)}</ul>"""
+	prepared = prepared_keys(caster)
+	groups = {}
+	for spell in spells:
+		groups.setdefault(spell_level(spell), []).append(spell)
+	blocks = ['<div class="spell-chip-rail">']
+	for level in sorted(groups):
+		label = LEVEL_LABELS.get(level, f"Level {level}")
+		chips = []
+		for spell in groups[level]:
+			is_prepared = spell_key(spell) in prepared or level == 0
+			kind = "prepared" if is_prepared else "written"
+			chips.append(
+				f"<span class='spell-chip spell-{kind}'>{spell_key(spell)}</span>"
+				)
+		blocks.append(
+			f"<div class='spell-chip-group'><span class='spell-chip-level'>{label}</span>"
+			f"<div class='spell-chip-row'>{''.join(chips)}</div></div>"
+			)
+	blocks.append("</div>")
+	return "".join(blocks)
 
 
 def html_spell_catalog(caster):
@@ -372,7 +399,6 @@ def html_spell_catalog(caster):
 	blocks = [
 		"""<div class="npc-textbox" style="grid-column: 1 / -1;">
 			<h1 style="font-family: 'Iglesia'; font-size: 2.4em;">Spells</h1>
-			<p>【prepared / always available】 &nbsp; 〖written or granted, not prepared】</p>
 			</div>"""
 		]
 	for spell in spells:
@@ -384,10 +410,8 @@ def html_spell_catalog(caster):
 
 
 def pick_magic_initiate(character, list_name):
-	from AtlasLusoris.Grimoire_of_Spellcasters import SPELL_LISTS
-	table = SPELL_LISTS.get(list_name) or {}
-	if not any(table.values()):
-		table = SPELL_LISTS.get("Wizard", {})
+	from AtlasLusoris.Grimoire_of_Spellcasters import class_spell_table
+	table = class_spell_table(list_name)
 	already = catalog_keys(getattr(character, "spellcaster", None))
 	cantrips, leveled = progressive_learn(
 		character,

@@ -230,11 +230,10 @@
 
 
 
-			  <!-- Magic: rules first, full spell writeups last — same sheet order as genlegend.eu -->
+			  <!-- Magic: rules first, full spell writeups last -->
 			  {% if character.Spellcaster %}
 				    <div class="npc-textbox" style="grid-column: 1 / -1;">
 						<h1 style="font-family: 'Iglesia'; font-size: 2.8em;">Magic</h1>
-						<p>【prepared / always available】 &nbsp; 〖written or granted, not prepared】</p>
 						</div>
 				    {{ character.Spellcaster.html() | safe }}
 				    {{ character.Spellcaster.html_catalog() | safe }}

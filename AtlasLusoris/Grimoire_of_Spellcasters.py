@@ -21,6 +21,13 @@ from AtlasLusoris.Compass_of_Learned_Spells import (
 	)
 
 
+from AtlasLusoris.Map_of_Casting_Tables import (
+	LIST_FALLBACK,
+	casting_row,
+	slots_as_map,
+	)
+
+
 SPELL_LISTS = {
 	"test":  {
 			0: [ ],
@@ -449,6 +456,17 @@ SPELL_LISTS = {
 
 
 
+def class_spell_table(name):
+	"""Class list, or a fallback list when this class's table is still empty."""
+	table = SPELL_LISTS.get(name) or {}
+	if any(table.values()):
+		return table
+	fallback = LIST_FALLBACK.get(name)
+	if fallback:
+		return SPELL_LISTS.get(fallback) or {}
+	return table
+
+
 class Spellcaster:
 	def __init__(caster, character, known=None):
 		if known is None:      known = []
@@ -479,7 +497,7 @@ class Spellcaster:
 
 	def available_spells(caster):
 		"""Spells this character can learn, capped by slot level — not character level."""
-		table = SPELL_LISTS.get(caster.list_name(), {}) or SPELL_LISTS.get(caster.character.char_class, {})
+		table = class_spell_table(caster.list_name()) or class_spell_table(caster.character.char_class)
 		max_slot = max_slot_from(caster.spell_slots)
 		unlocked = [lvl for lvl in table if lvl == 0 or lvl <= max_slot]
 		return unique_spells([spell for lvl in unlocked for spell in table[lvl]])
@@ -559,43 +577,19 @@ class Wizard(Spellcaster):
 		return "INT"
 
 	def get_stats(caster, key):
-		table = {
-			1:  {"cantrips": 3, "spells": 4,     "slots": (2,0,0,0,0,0,0,0,0)},
-			2:  {"cantrips": 3, "spells": 5,      "slots": (3,0,0,0,0,0,0,0,0)},
-			3:  {"cantrips": 3, "spells": 6,      "slots": (4,2,0,0,0,0,0,0,0)},
-			4:  {"cantrips": 4, "spells": 7,      "slots": (4,3,0,0,0,0,0,0,0)},
-			5:  {"cantrips": 4, "spells": 9,      "slots": (4,3,2,0,0,0,0,0,0)},
-			6:  {"cantrips": 4, "spells": 10,      "slots": (4,3,3,0,0,0,0,0,0)},
-			7:  {"cantrips": 4, "spells": 11,      "slots": (4,3,3,1,0,0,0,0,0)},
-			8:  {"cantrips": 4, "spells": 12,      "slots": (4,3,3,2,0,0,0,0,0)},
-			9:  {"cantrips": 4, "spells": 14,      "slots": (4,3,3,3,1,0,0,0,0)},
-			10: {"cantrips": 5, "spells": 15,      "slots": (4,3,3,3,2,0,0,0,0)},
-			11: {"cantrips": 5, "spells": 16,      "slots": (4,3,3,3,2,1,0,0,0)},
-			12: {"cantrips": 5, "spells": 16,      "slots": (4,3,3,3,2,1,0,0,0)},
-			13: {"cantrips": 5, "spells": 17,      "slots": (4,3,3,3,2,1,1,0,0)},
-			14: {"cantrips": 5, "spells": 18,      "slots": (4,3,3,3,2,1,1,0,0)},
-			15: {"cantrips": 5, "spells": 19,      "slots": (4,3,3,3,2,1,1,1,0)},
-			16: {"cantrips": 5, "spells": 21,      "slots": (4,3,3,3,2,1,1,1,0)},
-			17: {"cantrips": 5, "spells": 22,      "slots": (4,3,3,3,2,1,1,1,1)},
-			18: {"cantrips": 5, "spells": 23,      "slots": (4,3,3,3,3,1,1,1,1)},
-			19: {"cantrips": 5, "spells": 24,      "slots": (4,3,3,3,3,2,1,1,1)},
-			20: {"cantrips": 5, "spells": 25,      "slots": (4,3,3,3,3,2,2,1,1)},
-			}
-		lvl = caster.level
-		if lvl > 20: lvl = 20
-		value = table.get(lvl, {"cantrips": 0, "spells": 0, "slots": (0,0,0,0)})
+		row = casting_row("Wizard", caster.level)
 		if key == "cantrips":
-			return value["cantrips"]
+			return row.get("cantrips", 0)
 		if key == "spells":
-			return value["spells"]
+			return row.get("prepared", 0)
 		if key == "slots":
-			return {i + 1: val for i, val in enumerate(value["slots"])}
+			return slots_as_map(row.get("slots"))
 
 	def get_spell_slots(caster):
 		return caster.get_stats("slots")
 
 	def prepare_spells(caster):
-		table = SPELL_LISTS.get("Wizard", {})
+		table = class_spell_table("Wizard")
 		cantrips, book = progressive_learn(
 			caster.character,
 			table,
@@ -641,8 +635,7 @@ class Wizard(Spellcaster):
 			<div class="npc-textbox" style="grid-column: span 1;">
 			<h3 style="font-family: 'Iglesia'; font-size:    3.1em; "> Spellbook </h3>
 			When you finish a Long Rest, you may prepare {n} spells from the
-			book — the ones you can speak at any moment. 【prepared】
-			〖written, not prepared〗
+			book — the ones you can speak at any moment.
 			{index}
 			<h2>Arcane Focus</h2>
 			You can use an Arcane Focus as a Spellcasting Focus for your
@@ -673,56 +666,32 @@ class Druid(Spellcaster):
 		return "WIS"
 
 	def get_stats(caster, key):
-		table = {
-			1:  {"cantrips": 2, "spells": 4,	"slots": (2,0,0,0,0,0,0,0,0)},
-			2:  {"cantrips": 2, "spells": 5, 	"slots": (3,0,0,0,0,0,0,0,0)},
-			3:  {"cantrips": 2, "spells": 6,	"slots": (4,2,0,0,0,0,0,0,0)},
-			4:  {"cantrips": 3, "spells": 7, 	"slots": (4,3,0,0,0,0,0,0,0)},
-			5:  {"cantrips": 3, "spells": 9, 	"slots": (4,3,2,0,0,0,0,0,0)},
-			6:  {"cantrips": 3, "spells": 10, 	"slots": (4,3,3,0,0,0,0,0,0)},
-			7:  {"cantrips": 3, "spells": 11, 	"slots": (4,3,3,1,0,0,0,0,0)},
-			8:  {"cantrips": 3, "spells": 12, 	"slots": (4,3,3,2,0,0,0,0,0)},
-			9:  {"cantrips": 3, "spells": 14, 	"slots": (4,3,3,3,1,0,0,0,0)},
-			10: {"cantrips": 4, "spells": 15, 	"slots": (4,3,3,3,2,0,0,0,0)},
-			11: {"cantrips": 4, "spells": 16, 	"slots": (4,3,3,3,2,1,0,0,0)},
-			12: {"cantrips": 4, "spells": 16, 	"slots": (4,3,3,3,2,1,0,0,0)},
-			13: {"cantrips": 4, "spells": 17, 	"slots": (4,3,3,3,2,1,1,0,0)},
-			14: {"cantrips": 4, "spells": 17, 	"slots": (4,3,3,3,2,1,1,0,0)},
-			15: {"cantrips": 4, "spells": 18, 	"slots": (4,3,3,3,2,1,1,1,0)},
-			16: {"cantrips": 4, "spells": 18, 	"slots": (4,3,3,3,2,1,1,1,0)},
-			17: {"cantrips": 4, "spells": 19, 	"slots": (4,3,3,3,2,1,1,1,1)},
-			18: {"cantrips": 4, "spells": 20, 	"slots": (4,3,3,3,3,1,1,1,1)},
-			19: {"cantrips": 4, "spells": 21, 	"slots": (4,3,3,3,3,2,1,1,1)},
-			20: {"cantrips": 4, "spells": 22, 	"slots": (4,3,3,3,3,2,2,1,1)},
-			}
-		lvl = caster.level
-		if lvl > 20: lvl = 20
-		value = table.get(lvl, {"cantrips": 0, "spells": 0, "slots": (0,0,0,0)})
+		row = casting_row("Druid", caster.level)
 		if key == "cantrips":
-			result = value["cantrips"]
+			result = row.get("cantrips", 0)
 			if getattr(caster.character, "Primal_Order", None) == "Magician":
 				result += 1
 			return result
 		if key == "spells":
-			return value["spells"]
+			return row.get("prepared", 0)
 		if key == "slots":
-			return {i + 1: val for i, val in enumerate(value["slots"])}
+			return slots_as_map(row.get("slots"))
 
 	def get_spell_slots(caster):
 		return caster.get_stats("slots")
 
 	def prepare_spells(caster):
-		table = SPELL_LISTS.get("Druid", {})
+		table = class_spell_table("Druid")
 		cantrips, book = progressive_learn(
 			caster.character,
 			table,
 			caster.level,
 			cantrips_at=lambda lvl: stats_at_level(caster, lvl, "cantrips"),
-			known_at=lambda lvl: 2 * lvl + 4,
+			known_at=lambda lvl: stats_at_level(caster, lvl, "spells"),
 			slots_at=lambda lvl: stats_at_level(caster, lvl, "slots"),
 			salt=CLASS_SALT["Druid"],
 			)
-		finish_learning(caster, cantrips, book, prepared_count=caster.get_stats("spells"))
+		finish_learning(caster, cantrips, book)
 
 	def modifier(caster):
 		return (getattr(caster.character.AS, caster.casting_stat) - 10) // 2
@@ -775,51 +744,21 @@ class Ranger(Spellcaster):
 		wis_mod = self.modifier()
 		return max(1, (self.level // 2) + wis_mod)
 
-	# map the slot tuple for this level into {level: slots}
-	def get_spell_slots(self):
-		row = Ranger.HALF_CASTER_SLOTS[self.level]
-		return {i + 1: n for i, n in enumerate(row) if n}
-
-	# same helper used by base class
 	def modifier(self) -> int:
 		return (getattr(self.character.AS, self.get_casting_stat()) - 10) // 2
 
 	def get_stats(caster, key):
-		"""Spellcasting stats: spell slots and number of prepared spells."""
-		table = {
-			1:  {"prepared": 2,  "slots": (2,0,0,0,0)},
-			2:  {"prepared": 3,  "slots": (2,0,0,0,0)},
-			3:  {"prepared": 4,  "slots": (3,0,0,0,0)},
-			4:  {"prepared": 5,  "slots": (3,0,0,0,0)},
-			5:  {"prepared": 6,  "slots": (4,2,0,0,0)},
-			6:  {"prepared": 6,  "slots": (4,2,0,0,0)},
-			7:  {"prepared": 7,  "slots": (4,3,0,0,0)},
-			8:  {"prepared": 7,  "slots": (4,3,0,0,0)},
-			9:  {"prepared": 9,  "slots": (4,3,2,0,0)},
-			10: {"prepared": 9,  "slots": (4,3,2,0,0)},
-			11: {"prepared": 10, "slots": (4,3,3,0,0)},
-			12: {"prepared": 10, "slots": (4,3,3,0,0)},
-			13: {"prepared": 11, "slots": (4,3,3,1,0)},
-			14: {"prepared": 11, "slots": (4,3,3,1,0)},
-			15: {"prepared": 12, "slots": (4,3,3,2,0)},
-			16: {"prepared": 12, "slots": (4,3,3,2,0)},
-			17: {"prepared": 14, "slots": (4,3,3,3,1)},
-			18: {"prepared": 14, "slots": (4,3,3,3,1)},
-			19: {"prepared": 15, "slots": (4,3,3,3,2)},
-			20: {"prepared": 15, "slots": (4,3,3,3,2)},
-		}
-		lvl = min(caster.level, 20)
-		entry = table.get(lvl, {"prepared": 0, "slots": (0,0,0,0,0)})
+		row = casting_row("Ranger", caster.level)
 		if key == "prepared":
-			return entry["prepared"]
+			return row.get("prepared", 0)
 		if key == "slots":
-			return {i + 1: val for i, val in enumerate(entry["slots"])}
+			return slots_as_map(row.get("slots"))
 
 	def get_spell_slots(caster):
 		return caster.get_stats("slots")
 
 	def prepare_spells(caster):
-		table = SPELL_LISTS.get("Ranger", {})
+		table = class_spell_table("Ranger")
 		cantrips, known = progressive_learn(
 			caster.character,
 			table,
@@ -867,38 +806,64 @@ class Ranger(Spellcaster):
 class Sorcerer(Spellcaster):
 	def __init__(caster, character):
 		super().__init__(character)
-		caster.metamagic_points = caster.level  # Basic rule, extend as needed
+		lvl = getattr(character, "level", 1)
+		caster.metamagic_points = 0 if lvl < 2 else lvl
 
 	def get_casting_stat(caster):
 		return "CHA"
 
+	def get_stats(caster, key):
+		row = casting_row("Sorcerer", caster.level)
+		if key == "cantrips":
+			return row.get("cantrips", 0)
+		if key in ("spells", "prepared"):
+			return row.get("prepared", 0)
+		if key == "slots":
+			return slots_as_map(row.get("slots"))
+
 	def get_spell_slots(caster):
-		slots_table = {
-			1: {1: 2}, 2: {1: 3}, 3: {1: 4, 2: 2},
-			4: {1: 4, 2: 3}, # Extend as needed
-		}
-		return slots_table.get(caster.level, {})
+		return caster.get_stats("slots")
 
 	def prepare_spells(caster):
-		table = SPELL_LISTS.get("Sorcerer", {})
-		slots_by_level = {
-			1: {1: 2}, 2: {1: 3}, 3: {1: 4, 2: 2}, 4: {1: 4, 2: 3},
-			}
+		table = class_spell_table("Sorcerer")
 		cantrips, known = progressive_learn(
 			caster.character,
 			table,
 			caster.level,
-			cantrips_at=lambda lvl: 4 if lvl < 4 else 5 if lvl < 10 else 6,
-			known_at=lambda lvl: max(0, lvl + 1),
-			slots_at=lambda lvl: slots_by_level.get(min(lvl, 4), {1: 2}),
+			cantrips_at=lambda lvl: stats_at_level(caster, lvl, "cantrips"),
+			known_at=lambda lvl: stats_at_level(caster, lvl, "spells"),
+			slots_at=lambda lvl: stats_at_level(caster, lvl, "slots"),
 			salt=CLASS_SALT["Sorcerer"],
 			)
 		finish_learning(caster, cantrips, known)
 
 	def html_rules(caster):
-		base = super().html_rules()
-		points = getattr(caster, "metamagic_points", caster.level)
-		return base + f"<div class='npc-textbox'><p><strong>Metamagic Points:</strong> {points}</p></div>"
+		n = caster.get_stats("prepared")
+		index = html_spell_index(caster)
+		slots_html = caster.html_slots()
+		points = getattr(caster, "metamagic_points", 0)
+		points_line = ""
+		if points:
+			points_line = f"<p><strong>Sorcery Points:</strong> {points}</p>"
+		return f"""
+			<div class="npc-textbox" style="grid-column: span 3;">
+				<h1 style="font-family: 'Iglesia'; font-size: 3.1em;">Sorcerer Spellcasting</h1>
+				<p>You prepare {n} Sorcerer spells. Charisma is your spellcasting ability.</p>
+				{points_line}
+				</div>
+			<div class="npc-textbox">
+				<h2>Spell Slots:</h2>
+				{slots_html}
+				<p>You regain all expended slots when you finish a Long Rest.</p>
+				</div>
+			<div class="npc-textbox">
+				<b>Spell Save DC:</b> {caster.spell_save_dc()}<br>
+				<b>Spell Attack Bonus:</b> +{caster.spell_attack_bonus()}
+				</div>
+			<div class="npc-textbox">
+				{index}
+				</div>
+			"""
 
 	def __str__(caster):
 		return caster.html_rules()
@@ -1237,30 +1202,6 @@ class ArcaneTrickster(Spellcaster):
 		return trickster.html_rules()
 
 
-# Warlock spellcasting progression for 2024 PHB
-WARLOCK_SPELLCASTING_TABLE = {
-		1:  {"cantrips": 2, "prepared": 3,  "slots": (1,),   "slot_level": 1},
-		2:  {"cantrips": 2, "prepared": 3,  "slots": (2,),   "slot_level": 1},
-		3:  {"cantrips": 2, "prepared": 4,  "slots": (2,),   "slot_level": 2},
-		4:  {"cantrips": 3, "prepared": 5,  "slots": (2,),   "slot_level": 2},
-		5:  {"cantrips": 3, "prepared": 6,  "slots": (2,),   "slot_level": 3},
-		6:  {"cantrips": 3, "prepared": 7,  "slots": (2,),   "slot_level": 3},
-		7:  {"cantrips": 3, "prepared": 8,  "slots": (2,),   "slot_level": 4},
-		8:  {"cantrips": 3, "prepared": 9,  "slots": (2,),   "slot_level": 4},
-		9:  {"cantrips": 3, "prepared": 10, "slots": (2,),   "slot_level": 5},
-		10: {"cantrips": 4, "prepared": 10, "slots": (2,),   "slot_level": 5},
-		11: {"cantrips": 4, "prepared": 11, "slots": (3,),   "slot_level": 5},
-		12: {"cantrips": 4, "prepared": 11, "slots": (3,),   "slot_level": 5},
-		13: {"cantrips": 4, "prepared": 12, "slots": (3,),   "slot_level": 5},
-		14: {"cantrips": 4, "prepared": 12, "slots": (3,),   "slot_level": 5},
-		15: {"cantrips": 4, "prepared": 13, "slots": (3,),   "slot_level": 5},
-		16: {"cantrips": 4, "prepared": 13, "slots": (3,),   "slot_level": 5},
-		17: {"cantrips": 4, "prepared": 14, "slots": (4,),   "slot_level": 5},
-		18: {"cantrips": 4, "prepared": 14, "slots": (4,),   "slot_level": 5},
-		19: {"cantrips": 4, "prepared": 15, "slots": (4,),   "slot_level": 5},
-		20: {"cantrips": 4, "prepared": 15, "slots": (4,),   "slot_level": 5},
-		}
-
 def genie_kind(character):
 	kind = getattr(character, "genie_kind", None)
 	if kind:
@@ -1356,24 +1297,22 @@ class Warlock(Spellcaster):
 		return "CHA"
 
 	def get_stats(caster, key):
-		lvl = min(caster.level, 20)
-		value = WARLOCK_SPELLCASTING_TABLE.get(lvl, WARLOCK_SPELLCASTING_TABLE[20])
+		row = casting_row("Warlock", caster.level)
 		if key == "cantrips":
-			return value["cantrips"]
+			return row.get("cantrips", 0)
 		if key == "prepared":
-			return value["prepared"]
+			return row.get("prepared", 0)
 		if key == "slots":
-			# Unlike wizards, Warlocks only ever have one slot level at a time
-			return {value["slot_level"]: value["slots"][0]}
+			return {row["slot_level"]: row["slots"]}
 		if key == "slot_level":
-			return value["slot_level"]
+			return row["slot_level"]
 
 	def get_spell_slots(caster):
 		return caster.get_stats("slots")
 
 	def available_spells(caster):
 		"""Returns all spells this character can *prepare* at their current level."""
-		table = SPELL_LISTS.get(caster.character.char_class, {})
+		table = class_spell_table(caster.character.char_class)
 		max_slot = caster.get_stats("slot_level")
 		# Only show spells up to max_slot (warlock can never prepare 6+)
 		unlocked = [lvl for lvl in table if lvl <= max_slot]
@@ -1381,7 +1320,7 @@ class Warlock(Spellcaster):
 		return spells
 
 	def prepare_spells(caster):
-		table = SPELL_LISTS.get("Warlock", {})
+		table = class_spell_table("Warlock")
 		cantrips, known = progressive_learn(
 			caster.character,
 			table,
