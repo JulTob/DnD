@@ -21,13 +21,10 @@ class Druid(Progression):
 
 			if random.choice([True,False]):
 				from AtlasLusoris.Compass_of_Learned_Spells import (
-					caster_rng, know_spell, pick_new, spell_key, spell_mark,
+					catalog_keys, caster_rng, know_spell, pick_new, spell_mark,
 					)
 				from AtlasLusoris.Grimoire_of_Spellcasters import SPELL_LISTS
-				already = set()
-				caster = getattr(character, "spellcaster", None)
-				if caster is not None:
-					already = {spell_key(spell) for spell in getattr(caster, "spells_known", []) or []}
+				already = catalog_keys(getattr(character, "spellcaster", None))
 				extra = pick_new(
 					SPELL_LISTS.get("Druid", {}).get(0, []),
 					1,

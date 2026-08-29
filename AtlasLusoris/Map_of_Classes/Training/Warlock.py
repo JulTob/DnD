@@ -5,7 +5,8 @@ from AtlasLusoris.Grimoire_of_Features import (
 	Feature,
 	BuildAvailableInvocations,
 	ApplyRandomFeats,
-	ApplyEpicBoon
+	ApplyEpicBoon,
+	owned_feature_names,
 	)
 import random
 
@@ -32,8 +33,12 @@ class Warlock(Progression):
 
 	def prepare_invocations(self):
 		n = Warlock.warlock_invocations_known(self.character.level)
-		available = list(BuildAvailableInvocations(self.character))
-		chosen = random.sample(available, min(n, len(available)))
+		owned = owned_feature_names(self.character)
+		available = [
+			inv for inv in BuildAvailableInvocations(self.character)
+			if getattr(inv, "name", "") not in owned
+			]
+		chosen = random.sample(available, min(n, len(available))) if available else []
 
 		self.character.invocations = []
 
@@ -41,6 +46,7 @@ class Warlock(Progression):
 		for inv in chosen:
 			inv(self.character)  # applies effect if needed
 			self.character.invocations.append(inv)
+			owned.add(getattr(inv, "name", ""))
 
 	def features(self, character):
 		features = []

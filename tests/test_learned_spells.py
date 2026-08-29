@@ -1,5 +1,7 @@
 """Learned spells grow with level and do not reshuffle."""
+import os
 from AtlasLusoris.Compass_of_Learned_Spells import (
+	catalog_keys,
 	catalog_spells,
 	html_spell_catalog,
 	know_spell,
@@ -101,6 +103,61 @@ def test_wildwarden_knows_speak_with_animals_without_embedding():
 	assert "See Spells" in feat.description
 	assert "Tag Team" in feat.description
 	assert str(character.spellcaster.html_catalog()).count("Speak with Animals") >= 1
+	assert "Speak with Animals" not in {
+		spell_key(spell) for spell in character.spellcaster.spells_known
+		}
+
+
+def test_grant_does_not_consume_a_class_known_slot():
+	speak = FakeSpell("Speak with Animals", 1)
+	fire = FakeSpell("Fire Bolt", 0)
+	shield = FakeSpell("Shield", 1)
+	armor = FakeSpell("Mage Armor", 1)
+
+	class Book:
+		def __init__(self):
+			self.spells_known = [speak, fire]
+			self.granted_spells = []
+			self.always_prepared = set()
+			self.prepared_spells = [speak, fire]
+			self.catalog_known = True
+			self.spells_available = [speak, fire, shield, armor]
+
+	class Character:
+		def __init__(self):
+			self.seed = 7
+			self.spellcaster = Book()
+
+	character = Character()
+	known_before = len(character.spellcaster.spells_known)
+	know_spell(character, speak)
+	book = character.spellcaster
+	granted_names = {spell_key(spell) for spell in book.granted_spells}
+	known_names = {spell_key(spell) for spell in book.spells_known}
+	assert granted_names == {"Speak with Animals"}
+	assert "Speak with Animals" not in known_names
+	assert len(book.spells_known) == known_before
+	assert {"Speak with Animals", "Fire Bolt"} <= catalog_keys(book)
+	know_spell(character, speak)
+	assert len([spell for spell in book.granted_spells if spell_key(spell) == "Speak with Animals"]) == 1
+
+
+def test_progressive_learn_skips_owned_names_without_shrinking_the_budget():
+	cantrips, known = progressive_learn(
+		FakeCharacter(42),
+		fake_table(),
+		1,
+		cantrips_at=lambda lvl: 3,
+		known_at=lambda lvl: 4,
+		slots_at=lambda lvl: (2,),
+		salt=1,
+		skip={"Cantrip 1", "First 1"},
+		)
+	keys = {spell_key(spell) for spell in cantrips + known}
+	assert "Cantrip 1" not in keys
+	assert "First 1" not in keys
+	assert len(cantrips) == 3
+	assert len(known) == 4
 
 
 if __name__ == "__main__":
@@ -108,4 +165,7 @@ if __name__ == "__main__":
 	test_know_spell_is_separate_from_display()
 	test_forest_gnome_lineage_knows_without_embedding()
 	test_wildwarden_knows_speak_with_animals_without_embedding()
-	print("progressive_learn: ok")
+	test_grant_does_not_consume_a_class_known_slot()
+	test_progressive_learn_skips_owned_names_without_shrinking_the_budget()
+	print("progressive_learn: ok", flush=True)
+	os._exit(0)

@@ -5,9 +5,24 @@ The sheet ± buttons reuse the same seed. Spell picks must not reshuffle:
 each new level only adds spells. A dedicated RNG (not the main character
 RNG) is used so other random rolls cannot steal the sequence.
 
-Two separate actions:
-- know_spell: the character gains a spell as known. No HTML.
-- html_spell_index / html_spell_catalog: display the spells currently known.
+Three lists, not two:
+- Accessible (`spells_available`): the class list you may learn from,
+  capped by slot level. This is the pool, not a known-spell budget.
+- Class-known (`spells_known`): class-progression picks. These consume
+  the class known / prepared budget.
+- Granted (`granted_spells`): feats, species, invocations, Magician extra
+  cantrips, subclass always-prepared names, and similar. A grant never
+  consumes a class-known slot. If the class already spent a slot on that
+  name, the grant takes ownership and the slot is refilled from accessible.
+
+Public catalog = unique(class-known + granted). Display is a separate action:
+- know_spell / grant_spell: change what the character has. No HTML.
+- html_spell_index / html_spell_catalog: show the current catalog.
+
+When a feature grants a spell, skip it if it is already granted; if it is
+only class-known, move it to granted and pick a new accessible name so the
+class budget is not wasted. Pickers (Magician, Magic Initiate, Savant,
+Druidic Warrior) should skip names already in the catalog.
 
 progressive_learn is the lifetime sequence computed on the fly: same seed,
 walk levels 1..N, only add. The sheet shows what this level has unlocked.
@@ -110,15 +125,19 @@ def progressive_learn(
 		slots_at,
 		salt=1,
 		always=None,
+		skip=None,
 		):
 	"""
 	Walk levels 1..level. At each step, only add the newly granted
 	cantrips and leveled spells. Prefer the newly unlocked slot level.
+
+	`skip` is names already owned (granted or otherwise). They are not
+	added to the returned lists and do not consume a pick.
 	"""
 	rng = caster_rng(character, salt)
 	cantrips = []
 	known = []
-	already = set()
+	already = {str(name).strip() for name in (skip or []) if str(name).strip()}
 	for spell in unique_spells(always):
 		if spell_level(spell) == 0:
 			cantrips.append(spell)
@@ -202,8 +221,76 @@ def spell_book(character):
 	return book
 
 
+def catalog_keys(caster):
+	if caster is None:
+		return set()
+	return {spell_key(spell) for spell in catalog_spells(caster)}
+
+
+def accessible_spells(caster):
+	"""Class list the character may learn from. Not the known budget."""
+	if caster is None:
+		return []
+	pool = getattr(caster, "spells_available", None)
+	if pool:
+		return unique_spells(pool)
+	available = getattr(caster, "available_spells", None)
+	if callable(available):
+		return unique_spells(available())
+	return []
+
+
+def fill_class_known_slot(character, book, vacated_level, was_prepared=False):
+	"""Spend a freed class-known slot on a new accessible spell."""
+	if book is None:
+		return None
+	already = catalog_keys(book)
+	pool = accessible_spells(book)
+	if vacated_level == 0:
+		pool = [spell for spell in pool if spell_level(spell) == 0]
+	else:
+		same = [spell for spell in pool if spell_level(spell) == vacated_level]
+		leveled = [spell for spell in pool if spell_level(spell) >= 1]
+		pool = same or leveled
+	if not pool:
+		return None
+	n = getattr(book, "_known_reclaims", 0)
+	book._known_reclaims = n + 1
+	added = pick_new(pool, 1, caster_rng(character, 0xF11 ^ n), already)
+	if not added:
+		return None
+	replacement = added[0]
+	book.spells_known = unique_spells(list(book.spells_known) + [replacement])
+	if was_prepared:
+		prepared = list(getattr(book, "prepared_spells", []) or [])
+		prepared.append(replacement)
+		book.prepared_spells = unique_spells(prepared)
+	return replacement
+
+
+def _take_from_class_known(book, key):
+	"""Remove a class-known pick so a grant can own that name instead."""
+	vacated_level = 0
+	found = False
+	remaining = []
+	for spell in list(getattr(book, "spells_known", []) or []):
+		if not found and spell_key(spell) == key:
+			found = True
+			vacated_level = spell_level(spell)
+			continue
+		remaining.append(spell)
+	if not found:
+		return None, False
+	book.spells_known = remaining
+	prepared = list(getattr(book, "prepared_spells", []) or [])
+	was_prepared = any(spell_key(spell) == key for spell in prepared)
+	if was_prepared:
+		book.prepared_spells = [spell for spell in prepared if spell_key(spell) != key]
+	return vacated_level, was_prepared
+
+
 def know_spell(character, spell, always_prepared=True):
-	"""Gain a spell as known. Display is a separate action (html_spell_catalog)."""
+	"""Grant a spell without consuming a class-known slot. Display is separate."""
 	if spell is None or character is None:
 		return
 	book = spell_book(character)
@@ -213,12 +300,28 @@ def know_spell(character, spell, always_prepared=True):
 		book.granted_spells = []
 	if getattr(book, "always_prepared", None) is None:
 		book.always_prepared = set()
+	if getattr(book, "spells_known", None) is None:
+		book.spells_known = []
 	key = spell_key(spell)
 	if not key:
 		return
-	have = {spell_key(item) for item in catalog_spells(book)}
-	if key not in have:
+	granted = {spell_key(item) for item in book.granted_spells}
+	if key in granted:
+		if always_prepared:
+			book.always_prepared.add(key)
+		return
+	known = {spell_key(item) for item in book.spells_known}
+	if key in known:
+		vacated_level, was_prepared = _take_from_class_known(book, key)
 		book.granted_spells.append(spell)
+		if always_prepared:
+			book.always_prepared.add(key)
+		if vacated_level is not None:
+			fill_class_known_slot(
+				character, book, vacated_level, was_prepared=was_prepared,
+				)
+		return
+	book.granted_spells.append(spell)
 	if always_prepared:
 		book.always_prepared.add(key)
 
@@ -285,6 +388,7 @@ def pick_magic_initiate(character, list_name):
 	table = SPELL_LISTS.get(list_name) or {}
 	if not any(table.values()):
 		table = SPELL_LISTS.get("Wizard", {})
+	already = catalog_keys(getattr(character, "spellcaster", None))
 	cantrips, leveled = progressive_learn(
 		character,
 		table,
@@ -293,6 +397,7 @@ def pick_magic_initiate(character, list_name):
 		known_at=lambda lvl: 1,
 		slots_at=lambda lvl: (1,),
 		salt=0x1A1 ^ CLASS_SALT.get(list_name, 0),
+		skip=already,
 		)
 	return unique_spells(cantrips + leveled)
 

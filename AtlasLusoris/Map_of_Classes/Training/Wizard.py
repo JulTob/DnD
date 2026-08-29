@@ -176,6 +176,28 @@ BLADESINGER_SKILLS = [
 	]
 
 
+def skill_training_level(character, name):
+	skills = getattr(character, "skills", None)
+	if skills is None:
+		return 0
+	attr = str(name).replace(" ", "_")
+	skill = getattr(skills, attr, None)
+	try:
+		return int(getattr(skill, "proficiency_level", 0) or 0)
+	except (TypeError, ValueError):
+		return 0
+
+
+def pick_unlearned_skill(character, options, need_level=1):
+	"""Pick a skill the character does not already have at this training level."""
+	fresh = [
+		name for name in options
+		if skill_training_level(character, name) < need_level
+		]
+	pool = fresh or list(options)
+	return random.choice(pool) if pool else None
+
+
 def resolve_tradition(subclass):
 	if not subclass:
 		return "Evoker"
@@ -234,10 +256,12 @@ def wizard_spell_index():
 
 
 def add_spells_to_book(character, spells):
+	"""Write extra names into the granted catalog. Does not spend class-known slots."""
+	from AtlasLusoris.Compass_of_Learned_Spells import catalog_keys, know_spell, spell_key
 	caster = getattr(character, "spellcaster", None)
-	if caster is None or getattr(caster, "spells_known", None) is None:
+	if caster is None:
 		return []
-	known = {spell.name.strip() for spell in caster.spells_known}
+	have = catalog_keys(caster)
 	added = []
 	for spell in spells:
 		if spell is None:
@@ -246,24 +270,29 @@ def add_spells_to_book(character, spells):
 			int(getattr(spell, "level", 0))
 		except (TypeError, ValueError):
 			continue
-		key = spell.name.strip()
-		if key not in known:
-			caster.spells_known.append(spell)
-			known.add(key)
-			added.append(key)
+		key = spell_key(spell)
+		if not key or key in have:
+			continue
+		know_spell(character, spell, always_prepared=False)
+		have.add(key)
+		added.append(key)
 	return added
 
 
 def pick_savant_spells(tradition, wizard_level, character=None):
 	"""Savant: two school names of level 1–2, plus one per later slot level. Grows; does not reshuffle."""
-	from AtlasLusoris.Compass_of_Learned_Spells import caster_rng
+	from AtlasLusoris.Compass_of_Learned_Spells import catalog_keys, caster_rng
 	catalog = SAVANT_NAMES.get(tradition, {})
 	traditions = list(TRADITIONS.keys())
 	salt = 0x5A1 ^ (traditions.index(tradition) if tradition in traditions else 0)
 	rng = caster_rng(character, salt) if character is not None else random
+	owned = catalog_keys(getattr(character, "spellcaster", None)) if character is not None else set()
 	picks = []
 	if wizard_level >= 3:
-		starter = list(catalog.get(1, [])) + list(catalog.get(2, []))
+		starter = [
+			name for name in list(catalog.get(1, [])) + list(catalog.get(2, []))
+			if name not in owned
+			]
 		rng.shuffle(starter)
 		picks.extend(starter[:2])
 	slot_unlocks = [
@@ -272,7 +301,10 @@ def pick_savant_spells(tradition, wizard_level, character=None):
 	for req_level, slot_level in slot_unlocks:
 		if wizard_level < req_level:
 			continue
-		options = [name for name in catalog.get(slot_level, []) if name not in picks]
+		options = [
+			name for name in catalog.get(slot_level, [])
+			if name not in picks and name not in owned
+			]
 		rng.shuffle(options)
 		if options:
 			picks.append(options[0])
@@ -423,9 +455,10 @@ class Wizard(Progression):
 			]
 
 	def _scholar(self, character):
-		skill = random.choice(SCHOLAR_SKILLS)
+		skill = pick_unlearned_skill(character, SCHOLAR_SKILLS, need_level=2)
 		try:
-			character.skills.activate_expertise(1, [skill])
+			if skill:
+				character.skills.activate_expertise(1, [skill])
 		except Exception:
 			pass
 		return wizard_feature("Scholar", f"""
@@ -436,13 +469,14 @@ class Wizard(Progression):
 
 	def _bladesinger_three(self, character, lore, sought_name, int_bonus):
 		song_uses = max(1, int_bonus)
-		skill = random.choice(BLADESINGER_SKILLS)
+		skill = pick_unlearned_skill(character, BLADESINGER_SKILLS, need_level=1)
 		try:
 			character.skills.Martial_Weapons.set_proficiency()
 		except Exception:
 			pass
 		try:
-			character.skills.activate_proficiencies(1, [skill])
+			if skill:
+				character.skills.activate_proficiencies(1, [skill])
 		except Exception:
 			try:
 				getattr(character.skills, skill).set_proficiency()

@@ -534,13 +534,30 @@ def BoonTruesight():
 		level=19,
 	)
 
+def owned_feature_names(char):
+	names = set()
+	for feat in getattr(char, "features", []) or []:
+		name = str(getattr(feat, "name", "") or "").strip()
+		if name:
+			names.add(name)
+	for inv in getattr(char, "invocations", []) or []:
+		name = str(getattr(inv, "name", "") or "").strip()
+		if name:
+			names.add(name)
+	return names
+
+
 # ------------- Selector ------------
 def ApplyRandomFeats(char, n=1):
 	print("Random Feat!")
-	available = list(BuildAvailableFeats(char))
-	chosen = random.sample(available, n)
+	owned = owned_feature_names(char)
+	available = [feat for feat in BuildAvailableFeats(char) if feat.name not in owned]
+	if not available:
+		return []
+	chosen = random.sample(available, min(n, len(available)))
 	for feat in chosen:
 		feat(char)   # apply .apply() mutation
+		owned.add(feat.name)
 	return chosen
 
 def BuildAvailableBoon(char):
@@ -629,11 +646,15 @@ def BuildAvailableBoon(char):
 
 def ApplyEpicBoon(char, n=1):
 	print("Epic Boom!")
-	available = list(BuildAvailableBoon(char))
-	chosen = random.sample(available, n)
+	owned = owned_feature_names(char)
+	available = [boon for boon in BuildAvailableBoon(char) if boon.name not in owned]
+	if not available:
+		return []
+	chosen = random.sample(available, min(n, len(available)))
 	for boon in chosen:
 		boon(char)
 		char.features.append(boon)
+		owned.add(boon.name)
 	return chosen
 
 def Fighting_Styles(char=None):
@@ -688,13 +709,10 @@ def add_new_fighting_style(char):
 	description = Fighting_Styles(char)[chosen]
 	if chosen == "Druidic Warrior":
 		from AtlasLusoris.Compass_of_Learned_Spells import (
-			caster_rng, grant_spell, names_line, pick_new, spell_key,
+			catalog_keys, caster_rng, grant_spell, names_line, pick_new,
 			)
 		from AtlasLusoris.Grimoire_of_Spellcasters import SPELL_LISTS
-		already = set()
-		caster = getattr(char, "spellcaster", None)
-		if caster is not None:
-			already = {spell_key(spell) for spell in getattr(caster, "spells_known", []) or []}
+		already = catalog_keys(getattr(char, "spellcaster", None))
 		picked = pick_new(SPELL_LISTS.get("Druid", {}).get(0, []), 2, caster_rng(char, 0xD11), already)
 		for spell in picked:
 			grant_spell(char, spell)
