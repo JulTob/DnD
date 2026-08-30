@@ -7,8 +7,9 @@ import sys
 import types
 from pathlib import Path
 
-_VAULT = Path(
-	"/Users/tbs/Desktop/DnD/$S/vault/guilds"
+_VAULT = (
+	Path(__file__).resolve().parents[2]
+	/ "$S/vault/guilds"
 	)
 
 

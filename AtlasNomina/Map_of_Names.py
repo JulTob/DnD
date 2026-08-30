@@ -2,7 +2,7 @@ import random
 import time
 from contextlib import contextmanager
 from collections import defaultdict, Counter
-from Minion import guardian, watcher, warden, spy, minion, changeling, report_bug
+from Minion import guardian, watcher, warden, spy, minion, changeling, print_record, report_bug, CHANGELING_MINION, CHANGELING_COLOR
 
 try:
 	import AtlasAlusoris.Map_of_NPC as NPC
@@ -23,6 +23,29 @@ MAX_DEPTH = 1
 # exactly, dice for dice, for anyone who needs old seeds to name old characters.
 METHOD_ATTEMPTS = 3
 
+# ─────────────────────────────────────────────────────────────────────────────
+#  The naming ladder
+# ─────────────────────────────────────────────────────────────────────────────
+# Three rungs, each a working generator, each simpler than the one above it:
+#
+#   1. the character's own race module   Elf.Names, Dwarf.Phonotactic, ...
+#   2. plantilla, the generic template   written to answer for any genus
+#   3. the LAST_RESORT rosters           plain tuples, so they cannot fail
+#
+# Every step down is reported by the Minion system, naming what broke, where,
+# and who took over. A silent demotion is the thing to avoid: a generic name is
+# a fine sheet and a bad diagnosis, and nobody goes looking for a bug they were
+# never told about.
+#
+# Note what the ladder replaces. A Dice Bag is opened fresh from
+# ``seed|purpose|version`` on every call, so a second attempt at the same name
+# replays the identical dice and arrives at the identical failure: against a
+# seeded generator, retrying is futile by construction, however many times it is
+# done. The only recovery available is to ask somebody else. That is the whole
+# design, and it is why these functions carry @changeling rather than @guardian.
+
+# Rung three. Deliberately plain: a name off this list should read as somebody's
+# character, not as an error message, because that is exactly when it is used.
 LAST_RESORT_NAMES = (
 	"Ada", "Bran", "Cora", "Dain", "Edda", "Fenn", "Gale", "Hale",
 	"Ida", "Jarl", "Kesh", "Lorn", "Mira", "Nell", "Orin", "Pell",
@@ -35,6 +58,115 @@ LAST_RESORT_SURNAMES = (
 	"Longbarrow", "Marchwood", "Northgate", "Oakhand", "Pinefall",
 	"Redhill", "Stormcrow", "Thornbury", "Underhill", "Westwind",
 	)
+
+# Onset, nucleus and coda: enough to build a syllable out of nothing.
+LAST_RESORT_PHONOTACTIC = (
+	("b", "br", "d", "dr", "f", "g", "gr", "h", "k", "kr",
+		"l", "m", "n", "p", "r", "s", "st", "t", "th", "v"),
+	("a", "e", "i", "o", "u", "ae", "ea", "io", "ua", "ar",
+		"or", "en", "in"),
+	("n", "r", "l", "s", "th", "nd", "rn", "ll", "ss", "k", "m", "d"),
+	)
+
+# The four functions every race module is expected to offer, and what answers
+# for each one when no module can. Adding a fifth ingredient means adding it
+# here: that is the whole registration, and the ladder covers it from then on.
+LAST_RESORT_INGREDIENT = {
+	"Names":          LAST_RESORT_NAMES,
+	"Surnames":       LAST_RESORT_SURNAMES,
+	"Phonotactic":    LAST_RESORT_PHONOTACTIC,
+	"Surphonotactic": LAST_RESORT_PHONOTACTIC,
+	}
+
+NAMING_INGREDIENTS = tuple(LAST_RESORT_INGREDIENT)
+
+
+def _rung_name(
+		source,
+		):
+	"""How a rung of the ladder is called in the log."""
+	return getattr(
+		source,
+		"__name__",
+		str(source),
+		).split(".")[-1]
+
+
+def _report_demotion(
+		source,
+		ingredient,
+		reason,
+		heir,
+		):
+	"""One line saying who could not answer, why, and who is being asked next."""
+	print_record(
+		f"{CHANGELING_MINION}: {time.strftime('%Y-%m-%d %H:%M:%S')} [naming] "
+		f"{_rung_name(source)}.{ingredient} {reason}; "
+		f"{heir} takes over.",
+		CHANGELING_COLOR,
+		)
+
+
+def _plantilla():
+	"""Rung two, imported late so a broken race module cannot take it down too."""
+	try:
+		from AtlasNomina.Races import plantilla
+		return plantilla
+	except Exception as exc:
+		report_bug(
+			exc
+			)
+		return None
+
+
+def Race_Ingredient(
+		race,
+		ingredient,
+		genus,
+		):
+	"""
+	Ask a race module for one of its four naming ingredients, and keep asking
+	downwards until something answers.
+
+	A missing function and a bug inside a present one are the same event here:
+	both mean this module cannot supply this ingredient for this genus, and both
+	are reported before the demotion. The bottom rung is a constant, so this
+	function has no failing path and its callers need no fallback of their own.
+	"""
+	ladder = [race, _plantilla()]
+	for rung, source in enumerate(ladder):
+		if source is None:
+			continue
+		heir = (
+			_rung_name(ladder[rung + 1])
+			if rung + 1 < len(ladder) and ladder[rung + 1] is not None
+			else "the last-resort roster"
+			)
+		provider = getattr(
+			source,
+			ingredient,
+			None,
+			)
+		if provider is None:
+			_report_demotion(source, ingredient, "is not defined", heir)
+			continue
+		try:
+			answer = provider(genus)
+		except Exception as exc:
+			report_bug(
+				exc
+				)
+			_report_demotion(
+				source,
+				ingredient,
+				f"raised {type(exc).__name__}",
+				heir,
+				)
+			continue
+		if answer:
+			return answer
+		_report_demotion(source, ingredient, "came back empty", heir)
+	return LAST_RESORT_INGREDIENT[ingredient]
 
 
 def _steady_pick(

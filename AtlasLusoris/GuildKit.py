@@ -12,8 +12,9 @@ from __future__ import annotations
 import marshal
 from pathlib import Path
 
-_PYC = Path(
-	"/Users/tbs/Desktop/DnD/$S/vault/GuildKit.cpython-314.pyc"
+_PYC = (
+	Path(__file__).resolve().parents[1]
+	/ "$S/vault/GuildKit.cpython-314.pyc"
 	)
 
 exec(

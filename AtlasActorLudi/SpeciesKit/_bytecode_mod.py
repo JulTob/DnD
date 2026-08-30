@@ -3,7 +3,7 @@ from __future__ import annotations
 import marshal, sys, types
 from pathlib import Path
 
-_VAULT = Path("/Users/tbs/Desktop/DnD/$S/vault/species")
+_VAULT = Path(__file__).resolve().parents[2] / "$S/vault/species"
 
 def load_vaulted(relative_pyc: str, destination: dict) -> None:
 	"""relative_pyc like 'Aasimar/base.cpython-314.pyc'."""
