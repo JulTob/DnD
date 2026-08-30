@@ -2,7 +2,7 @@ import random
 import time
 from contextlib import contextmanager
 from collections import defaultdict, Counter
-from Minion import guardian, watcher, warden, spy, minion, changeling, report_bug
+from Minion import guardian, watcher, warden, spy, minion, changeling, report_bug, print_record, CHANGELING_MINION, CHANGELING_COLOR
 
 try:
 	import AtlasAlusoris.Map_of_NPC as NPC
@@ -35,6 +35,120 @@ LAST_RESORT_SURNAMES = (
 	"Longbarrow", "Marchwood", "Northgate", "Oakhand", "Pinefall",
 	"Redhill", "Stormcrow", "Thornbury", "Underhill", "Westwind",
 	)
+
+
+# Restored 2026-08-30: Race_Ingredient and its ladder were called from
+# NewName but defined nowhere, so every Character raised NameError and fell
+# through to the last-resort roster. Recovered as real source from the
+# parallel recovery branch, which had kept it rather than shimming it.
+# Onset, nucleus and coda: enough to build a syllable out of nothing.
+LAST_RESORT_PHONOTACTIC = (
+	("b", "br", "d", "dr", "f", "g", "gr", "h", "k", "kr",
+		"l", "m", "n", "p", "r", "s", "st", "t", "th", "v"),
+	("a", "e", "i", "o", "u", "ae", "ea", "io", "ua", "ar",
+		"or", "en", "in"),
+	("n", "r", "l", "s", "th", "nd", "rn", "ll", "ss", "k", "m", "d"),
+	)
+
+# The four functions every race module is expected to offer, and what answers
+# for each one when no module can. Adding a fifth ingredient means adding it
+# here: that is the whole registration, and the ladder covers it from then on.
+LAST_RESORT_INGREDIENT = {
+	"Names":          LAST_RESORT_NAMES,
+	"Surnames":       LAST_RESORT_SURNAMES,
+	"Phonotactic":    LAST_RESORT_PHONOTACTIC,
+	"Surphonotactic": LAST_RESORT_PHONOTACTIC,
+	}
+
+NAMING_INGREDIENTS = tuple(LAST_RESORT_INGREDIENT)
+
+
+def _rung_name(
+		source,
+		):
+	"""How a rung of the ladder is called in the log."""
+	return getattr(
+		source,
+		"__name__",
+		str(source),
+		).split(".")[-1]
+
+
+def _report_demotion(
+		source,
+		ingredient,
+		reason,
+		heir,
+		):
+	"""One line saying who could not answer, why, and who is being asked next."""
+	print_record(
+		f"{CHANGELING_MINION}: {time.strftime('%Y-%m-%d %H:%M:%S')} [naming] "
+		f"{_rung_name(source)}.{ingredient} {reason}; "
+		f"{heir} takes over.",
+		CHANGELING_COLOR,
+		)
+
+
+def _plantilla():
+	"""Rung two, imported late so a broken race module cannot take it down too."""
+	try:
+		from AtlasNomina.Races import plantilla
+		return plantilla
+	except Exception as exc:
+		report_bug(
+			exc
+			)
+		return None
+
+
+def Race_Ingredient(
+		race,
+		ingredient,
+		genus,
+		):
+	"""
+	Ask a race module for one of its four naming ingredients, and keep asking
+	downwards until something answers.
+
+	A missing function and a bug inside a present one are the same event here:
+	both mean this module cannot supply this ingredient for this genus, and both
+	are reported before the demotion. The bottom rung is a constant, so this
+	function has no failing path and its callers need no fallback of their own.
+	"""
+	ladder = [race, _plantilla()]
+	for rung, source in enumerate(ladder):
+		if source is None:
+			continue
+		heir = (
+			_rung_name(ladder[rung + 1])
+			if rung + 1 < len(ladder) and ladder[rung + 1] is not None
+			else "the last-resort roster"
+			)
+		provider = getattr(
+			source,
+			ingredient,
+			None,
+			)
+		if provider is None:
+			_report_demotion(source, ingredient, "is not defined", heir)
+			continue
+		try:
+			answer = provider(genus)
+		except Exception as exc:
+			report_bug(
+				exc
+				)
+			_report_demotion(
+				source,
+				ingredient,
+				f"raised {type(exc).__name__}",
+				heir,
+				)
+			continue
+		if answer:
+			return answer
+		_report_demotion(source, ingredient, "came back empty", heir)
+	return LAST_RESORT_INGREDIENT[ingredient]
 
 
 def _steady_pick(
