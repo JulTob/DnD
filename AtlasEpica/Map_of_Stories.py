@@ -18,3 +18,19 @@ for _name, _value in list(body.__dict__.items()):
 	globals()[_name] = _value
 if hasattr(body, "__all__"):
 	__all__ = list(body.__all__)
+
+def Name(hero):
+	"""Short display name for story text.
+
+	Verified against the vaulted bytecode by disassembly (not guessed): the
+	bootstrap's `Name` tried `hero._name` — a private attribute the
+	pre-accident Character carried — caught the failure, printed it, and
+	*always* fell through to `FullName(hero)` anyway. The current Character
+	never has `._name`, so every single call paid for the noise. Skip
+	straight to the fallback branch it always took."""
+	return FullName(hero)
+
+# Story/Script and friends are compiled bytecode closing over `body`'s own
+# globals, not this wrapper's — patch the correction in there too, or every
+# internal call still reaches the original broken Name().
+body.__dict__["Name"] = Name
