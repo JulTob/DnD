@@ -6,7 +6,7 @@ import marshal
 from pathlib import Path
 
 _PYC = Path(
-	"/Users/tbs/Desktop/DnD/$S/vault/alusoris/Map_of_Races.cpython-314.pyc"
+	"/Users/tbs/Desktop/DnD/.recovery-vault/alusoris/Map_of_Races.cpython-314.pyc"
 	)
 
 exec(

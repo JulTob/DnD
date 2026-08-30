@@ -13,7 +13,7 @@ import marshal
 from pathlib import Path
 
 _PYC = Path(
-	"/Users/tbs/Desktop/DnD/$S/vault/GuildKit.cpython-314.pyc"
+	"/Users/tbs/Desktop/DnD/.recovery-vault/GuildKit.cpython-314.pyc"
 	)
 
 exec(

@@ -6,7 +6,7 @@ import sys
 import types
 from pathlib import Path
 
-_VAULT = Path(__file__).resolve().parents[2] / "$S" / "vault" / "training"
+_VAULT = Path(__file__).resolve().parents[2] / ".recovery-vault" / "training"
 
 
 def load_vaulted(

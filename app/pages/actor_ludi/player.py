@@ -1,53 +1,17 @@
-                    },
-                )
+"""player — vaulted bytecode (recovery 2026-08-29)."""
+from __future__ import annotations
 
-    @output
-    @render.text
-    def char_level_display() -> str:
-        current = (
-            state.player_parameters()
-            or _parameters_from_data(
-                state.player()
-                )
-            )
-        lvl = max(
-                1,
-                min(
-                    20,
-                    safe_int(
-                        current.get(
-                            "level"
-                            ),
-                        1,
-                        ),
-                    ),
-                )
-        return f"Level {lvl}"
+import marshal, sys, types
+from pathlib import Path
 
-    @output
-    @render.ui
-    def character_result() -> ui.Tag:
-        error = state.player_error()
-
-        if error:
-            return ui.div(
-                    {"class": "fallback-card"},
-                    ui.h3(
-                            "Character generation failed"
-                            ),
-                    ui.p(
-                            error
-                            ),
-                    )
-
-        data = state.player()
-
-        if not data:
-            return ui.div(
-                    {"class": "fallback-card"},
-                    ui.p(
-                            "Generate a character from Home."
-                            ),
-                    )
-
-        return build_character_sheet(
+_PYC = Path(__file__).resolve().parents[3] / ".recovery-vault" / "app_pages_actor_ludi" / "player.cpython-314.pyc"
+_bn = "app.pages.actor_ludi._bc_player"
+if _bn not in sys.modules:
+	body = types.ModuleType(_bn); body.__file__ = str(_PYC)
+	sys.modules[_bn] = body
+	exec(marshal.loads(_PYC.read_bytes()[16:]), body.__dict__)
+else:
+	body = sys.modules[_bn]
+for _n, _v in list(body.__dict__.items()):
+	if not _n.startswith("__"): globals()[_n] = _v
+if hasattr(body, "__all__"): __all__ = list(body.__all__)

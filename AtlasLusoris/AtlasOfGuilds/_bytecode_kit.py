@@ -8,7 +8,7 @@ import types
 from pathlib import Path
 
 _VAULT = Path(
-	"/Users/tbs/Desktop/DnD/$S/vault/guilds"
+	"/Users/tbs/Desktop/DnD/.recovery-vault/guilds"
 	)
 
 

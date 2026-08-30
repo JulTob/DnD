@@ -607,23 +607,23 @@ SPELL_LISTS = {
 		0: [Guidance, Light, Resistance, SacredFlame, SparetheDying, Thaumaturgy],
 
 	1: [
-		Bane, Bless, Command, CompelledDuel, CureWounds,
+		Bane, Bless, Command, CureWounds,
 		DetectEvilandGood, DetectMagic, DetectPoisonandDisease,
-		DivineFavor, GuidingBolt, HealingWord, Heroism, InflictWounds,
+		GuidingBolt, HealingWord, InflictWounds,
 		ProtectionfromEvilandGood, PurifyFoodandDrink, Sanctuary,
-		SearingSmite, ShieldofFaith, ThunderousSmite, WrathfulSmite
+		ShieldofFaith,
 	],
 
 	2: [
 		Aid, Augury, BlindnessDeafness, CalmEmotions,
-		FindSteed, FindTraps, GentleRepose, HoldPerson, LesserRestoration,
+		FindTraps, GentleRepose, HoldPerson, LesserRestoration,
 		LocateObject, MagicWeapon, PrayerOfHealing, ProtectionFromPoison,
 		Silence, SpiritualWeapon, WardingBond, ZoneOfTruth
 	],
 
 	3: [
-		AuraVitality, BeaconHope, BlindingSmite, Clairvoyance,
-		CreateFoodWater,  # ← you called it “CreateFoodWater” in your file
+		AuraVitality, BeaconHope, Clairvoyance,
+		CreateFoodWater,
 		CrusadersMantle, Daylight, DispelMagic, FeignDeath, GlyphWarding,
 		MagicCircle, MassHealingWord, RemoveCurse, Revivify,
 		SpeakwithDead, SpiritGuardians, Tongues
@@ -631,11 +631,11 @@ SPELL_LISTS = {
 
 	4: [
 		AuraLife, AuraofPurity, Banishment, DeathWard, Divination,
-		FreedomOfMovement, GuardianFaith, LocateCreature, StaggeringSmite
+		FreedomOfMovement, GuardianFaith, LocateCreature,
 	],
 
 	5: [
-		BanishingSmite, CircleofPower, Commune, Contagion, DestructiveWave,
+		CircleofPower, Commune, Contagion, DestructiveWave,
 		DispelEvilandGood, FlameStrike, Geas, GreaterRestoration, Hallow,
 		LegendLore, MassCureWounds, PlanarBinding, RaiseDead, Scrying
 	],
@@ -1305,27 +1305,45 @@ class Cleric(Spellcaster):
 		return caster.get_stats("slots")
 
 	def prepare_spells(caster):
-		num_spells = caster.level*2 + 4
+		"""
+		Draw cantrips and prepared spells as two quotas from the 2024 table.
+
+		``get_stats`` already includes the Thaumaturge extra cantrip.
+		"""
 		available = caster.available_spells()
+		cantrips = [
+			spell
+			for spell in available
+			if spell.level == 0
+			]
+		higher = [
+			spell
+			for spell in available
+			if spell.level > 0
+			]
 		caster.spells_known = _pick_distinct(
 			caster.character,
-			available,
+			cantrips,
 			min(
 				len(
-					available
+					cantrips
 					),
-				num_spells,
+				caster.get_stats(
+					"cantrips"
+					),
+				),
+			) + _pick_distinct(
+			caster.character,
+			higher,
+			min(
+				len(
+					higher
+					),
+				caster.get_stats(
+					"spells"
+					),
 				),
 			)
-		# Thaumaturge Divine Order: one extra Cleric cantrip beyond the norm.
-		if getattr(caster.character, "divine_order", None) == "Thaumaturge":
-			pool = [s for s in available if s.level == 0 and s not in caster.spells_known]
-			if pool:
-				caster.spells_known.append(
-					caster.character.Pick(
-						pool
-						)
-					)
 
 	def modifier(caster):
 		return (getattr(caster.character.AS, caster.casting_stat) - 10) // 2
@@ -1352,12 +1370,12 @@ class Cleric(Spellcaster):
 			f'<div class="spell">{spell:html}</div>' for spell in cantrips + prepared_sorted
 			)
 
-		prep_cap = max(1, caster.level + caster.modifier())
+		prep_cap = n
 
 		return f"""
 		<div class=\"spell--full\" >
 			<h1 style=\"font-family: {title_font('Cleric')}; font-size: 3.1em;\">Cleric Spellcasting</h1>
-			<p>Drawing on divine power, you prepare <b>{prep_cap}</b> Cleric spells at the end of each long rest.<br>
+			<p>Drawing on divine power, you prepare <b>{prep_cap}</b> Cleric spells of level 1+ (2024 table).<br>
 			Your spellcasting ability is <b>Wisdom</b>.</p>
 		</div>
 		<div class=\"spell\">

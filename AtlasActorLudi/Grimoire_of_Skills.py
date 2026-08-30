@@ -173,6 +173,7 @@ class Skill:
 		self.proficiency_level = proficiency_level
 		self.ProficiencyBonus = ProficiencyBonus
 		self.jack = jack_of_all_trades
+		self.flat_bonus = 0
 
 	def set_proficiency(self):
 		"""Set the skill as proficient."""
@@ -205,7 +206,16 @@ class Skill:
 		else:
 			if self.jack:
 				# If Jack of All Trades is active and the skill is not proficient, add half PB
-				return base + (self.ProficiencyBonus//2)
+				base = base + (self.ProficiencyBonus//2)
+		flat = int(
+			getattr(
+				self,
+				"flat_bonus",
+				0,
+				) or 0
+			)
+		if flat:
+			base = base + flat
 		return base
 
 	def update_ability_score(self, new_score: int):

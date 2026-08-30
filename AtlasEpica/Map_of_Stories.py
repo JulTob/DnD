@@ -2,7 +2,7 @@
 from __future__ import annotations
 import marshal, sys, types
 from pathlib import Path
-_VAULT = Path(__file__).resolve().parents[1] / "$S" / "vault" / "epica"
+_VAULT = Path(__file__).resolve().parents[1] / ".recovery-vault" / "epica"
 _PYC = _VAULT / "Map_of_Stories.cpython-314.pyc"
 _body_name = "AtlasEpica._bc_Map_of_Stories"
 if _body_name not in sys.modules:

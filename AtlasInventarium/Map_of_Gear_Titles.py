@@ -6,7 +6,7 @@ import sys
 import types
 from pathlib import Path
 
-_VAULT = Path(__file__).resolve().parents[1] / "$S" / "vault" / "inventarium"
+_VAULT = Path(__file__).resolve().parents[1] / ".recovery-vault" / "inventarium"
 _PYC = _VAULT / "Map_of_Gear_Titles.cpython-314.pyc"
 
 _body_name = "AtlasInventarium._bc_Map_of_Gear_Titles"

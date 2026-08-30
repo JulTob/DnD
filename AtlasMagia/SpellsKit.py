@@ -89,8 +89,22 @@ class Spell:
 		return desc
 
 	def __str__(spell):
+		"""Plain Entry form. f"{spell:html}" / f"{spell:md}" pick richer shapes."""
+		return spell.string
+
+	def __format__(spell, spec):
+		"""Dispatch f"{spell:html}" / f"{spell:md}" / f"{spell}" (plain)."""
+		spec = (spec or "").strip().lower()
+		if spec in ("html", "card"):    return spell.html()
+		if spec in ("md", "markdown"):  return spell.md()
+		if spec in ("", "s", "str", "plain"): return str(spell)
+		raise ValueError(f"Unknown Spell format spec {spec!r} — use html, md, or plain")
+
+	def html(spell):
+		"""HTML spell card. Aliases: as_html; f"{spell:html}"."""
 		desc = ""
 		if spell.casting_time:   desc += f"<i>⟨{spell.casting_time}⟩</i><br>"
+		if spell.ritual:         desc += "<i>(Ritual)</i><br>"
 		if spell.concentration:  desc += f"<i>({spell.concentration}: </i>"
 		if spell.duration:       desc += f"<i>({spell.duration})</i>"
 		if spell.ranges:         desc += f"<br><i>>{spell.ranges}></i>"
@@ -108,6 +122,27 @@ class Spell:
 		</p>
 		"""
 
+	def md(spell):
+		"""Markdown spell sheet. Aliases: markdown, as_md; f"{spell:md}"."""
+		level_text = "Cantrip" if spell.level == 0 else f"Level {spell.level}"
+		meta = [level_text]
+		if spell.school:         meta.append(str(spell.school))
+		if spell.ritual:         meta.append("Ritual")
+		if spell.concentration:  meta.append(str(spell.concentration))
+		lines = [f"### {spell.name}", f"*{' · '.join(meta)}*", ""]
+		if spell.casting_time:   lines.append(f"- **Casting Time:** {spell.casting_time}")
+		if spell.ranges:         lines.append(f"- **Range:** {spell.ranges}")
+		if spell.components:     lines.append(f"- **Components:** {spell.components}")
+		if spell.duration:       lines.append(f"- **Duration:** {spell.duration}")
+		lines.append("")
+		lines.append(_html_to_md_lite(spell.definition))
+		return "\n".join(lines)
+
+	# Aliases are good and free — each name reads best in its own context.
+	as_html = html
+	as_md = md
+	markdown = md
+
 	@property
 	def string(spell):
 
@@ -121,6 +156,25 @@ class Spell:
 		if spell.definition:     definition += f"\n\t{spell.definition}"
 		string = Entry(title=name, definition=definition, description=desc)
 		return string
+
+
+def _html_to_md_lite(text):
+	"""Definitions carry light HTML (<br>, <b>, <i>); fold it into markdown."""
+	text = re.sub(r"<br\s*/?>", "\n", str(text))
+	text = re.sub(r"</?b>", "**", text)
+	text = re.sub(r"</?i>", "*", text)
+	text = re.sub(r"</?(p|ul|li|div|h[1-6])[^>]*>", "\n", text)
+	return re.sub(r"\n{3,}", "\n\n", text).strip()
+
+
+def as_html(spell):
+	"""Module-level alias of Spell.html, for callers that read better as functions."""
+	return spell.html()
+
+
+def as_md(spell):
+	"""Module-level alias of Spell.md."""
+	return spell.md()
 
 
 """		The root: every spell Tag is exclusive to Spell targets    """

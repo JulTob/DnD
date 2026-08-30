@@ -491,6 +491,47 @@ def _Tool_Proficiency_Clause(
 	return f"<b>{label}.</b> You have proficiency with {names}. <br>"
 
 
+# ---------------------------------------------------------------------------
+# RECOVERY NOTE 2026-08-30 -- Crafter / Musician training pool.  Read before
+# editing, reverting, or restoring this file from vault bytecode.
+#
+# WHAT THIS IS.  Crafter and Musician each draw three capabilities from a pool
+# (the seventeen Artisan's Tools, the ten Musical Instruments) while excluding
+# whatever the Character's Background is about to grant.  The exclusion used to
+# be computed from the Background's TOOLS field as though every entry in it were
+# a certain grant.  It is not: a Background grants exactly ONE Tool, and most
+# write that Tool as a seventeen-item menu or as a category name.  Excluding the
+# whole menu emptied the pool, _Plan_Training raised, and the Imprint failed.
+#
+# WHAT IT COST.  The Artisan, Crafter and Entertainer Backgrounds were 100%
+# unbuildable -- not intermittently, always.  It read as a ~7% random crash only
+# because that is how often those Backgrounds came up in a draw.
+#
+# THE PAIR.  This is HALF of a two-file fix and neither half works alone:
+#
+#   1. HERE            Reserved_Background_Training reserves only what the
+#                      Background is CERTAIN to grant (its two Skills, and its
+#                      Tool only when there is exactly one option).  A choice
+#                      reserves nothing.
+#   2. BackgroundKit   _still_open() has the Background pick its Tool from what
+#                      the Character has not learnt yet.  It runs AFTER the Feat
+#                      and so knows what the Feat took, which is knowledge no
+#                      reservation written in advance could have had.
+#
+# Restore or rewrite one without the other and you get back either the crash
+# (drop 1) or duplicate Tool grants (drop 2).  Cross-reference:
+# ``BackgroundKit._still_open``.
+#
+# WHY NOT A @Pre.  Making the Feat decline when its pool is short was considered
+# and rejected.  _take_first_that_applies (FeatKit) only guards General feats;
+# an Origin feat reaches a Character through Tag inheritance in Build_Background
+# and through Grant_Origin_Feat, neither of which catches TagPreconditionError.
+# A refusing @Pre would therefore trade one crash for another, and because a
+# Background's Origin feat is not optional (Artisan *is* Crafter) it would have
+# deleted three Backgrounds from the game.  Short grants are the answer instead;
+# see _Plan_Training's allow_short.
+# ---------------------------------------------------------------------------
+
 def Background_Tool_Menu(
 		background_tag,
 		):
@@ -638,6 +679,11 @@ def _Plan_Training(
 			)
 		)
 
+	# RECOVERY NOTE 2026-08-30: allow_short is what lets a Feature exist when
+	# its pool cannot fill the whole count.  Do not "simplify" it back into an
+	# unconditional raise: the raise is what made three Backgrounds unbuildable.
+	# Callers that pass it (Crafter, Musician, Skilled) also handle the None
+	# below and validate with at_most rather than count.
 	if len( pool ) < count:
 		if not allow_short:
 			raise ValueError(
@@ -900,6 +946,13 @@ class Skillful(Trait):
 			char,
 			first_gain,
 			):
+		# RECOVERY NOTE 2026-08-30: allow_short was added here for the same
+		# reason it exists on Crafter, Musician and Skilled -- a pooled
+		# Feature must not raise when its pool runs dry.  Skillful draws one
+		# Skill out of SKILLS, so it only empties for a Character who already
+		# knows every Skill; rare, but "rare" is exactly what the Crafter crash
+		# was mistaken for before it turned out to be certain.  A Human keeps
+		# the Trait either way; only its one Skill is missing.
 		gain = (
 			first_gain
 			or _Plan_Training(
@@ -909,22 +962,28 @@ class Skillful(Trait):
 				1,
 				source="Species Feature",
 				purpose="identity.species.Human.skillful",
+				allow_short=True,
 				)
 			)
 		gain = _Validate_Feature_Gain(
 			gain,
 			Skillful,
-			count=1,
+			at_most=1,
 			)
-		Commit_Training_Gain(
-			char,
-			gain,
-			)
+		batches = ()
+
+		if gain is not None:
+			Commit_Training_Gain(
+				char,
+				gain,
+				)
+			batches = (
+				gain,
+				)
+
 		description = _Training_Description(
 			Skillful.INSPIRATION,
-			(
-				gain,
-				),
+			batches,
 			)
 		grant(
 			char,
@@ -947,7 +1006,16 @@ class Skillful(Trait):
 	def Has_Skillful_Training(
 			char,
 			):
-		return bool( char.skillful.gains )
+		# RECOVERY NOTE 2026-08-30: the second arm matches Crafter's and
+		# Skilled's Postconditions.  Without it, a Character who knows every
+		# Skill turns an empty pool into a TagPostconditionError instead of a
+		# Trait that simply had nothing left to teach.
+		return bool(
+			char.skillful.gains
+			) or not Untrained_In(
+				char,
+				SKILLS,
+				)
 
 
 class Versatile(Trait):
@@ -1047,6 +1115,11 @@ class Crafter(Origin_Feat):
 	def Has_Crafter_Training(
 			char,
 			):
+		# RECOVERY NOTE 2026-08-30: the "or not Untrained_In(...)" arm is load
+		# bearing.  This Postcondition used to read bool(char.crafter.gains)
+		# alone, which refused any Crafter that granted nothing and turned an
+		# empty pool into a TagPostconditionError instead of a short grant.
+		#
 		# Training, unless there was none left to give.  A Character who
 		# already knows the whole pool still earns Crafter: only the
 		# training part of it is empty, and _Plan_Training says so by
@@ -1207,6 +1280,11 @@ class Musician(Origin_Feat):
 	def Has_Musician_Training(
 			char,
 			):
+		# RECOVERY NOTE 2026-08-30: the "or not Untrained_In(...)" arm is load
+		# bearing.  This Postcondition used to read bool(char.musician.gains)
+		# alone, which refused any Musician that granted nothing and turned an
+		# empty pool into a TagPostconditionError instead of a short grant.
+		#
 		# Training, unless there was none left to give.  A Character who
 		# already knows the whole pool still earns Musician: only the
 		# training part of it is empty, and _Plan_Training says so by
@@ -1345,6 +1423,10 @@ class Skilled(Origin_Feat):
 	def Has_A_Gain(
 			char,
 			):
+		# RECOVERY NOTE 2026-08-30: same shape as Crafter's Postcondition, and
+		# load bearing for the same reason.  Skilled is REPEATABLE, so it is the
+		# Feature most likely to meet a genuinely exhausted pool.
+		#
 		# See Crafter.Has_Crafter_Training: an exhausted pool is a legal,
 		# if joyless, outcome.
 		return bool(
@@ -2010,6 +2092,52 @@ def _test_a_short_pool_grants_what_is_left() -> None:
 	assert "Fast Crafting" in entry.description
 
 
+def _test_skillful_survives_a_full_skill_list() -> None:
+	"""
+	Skillful is pooled too, so it gets the same guarantee as the Origin Feats.
+
+	Found by sweeping every _Plan_Training call site after the Crafter fix:
+	Skillful was the one draw still missing allow_short, and would have raised
+	for a Character who already knew every Skill.
+	"""
+	char = Character( seed=29 )
+	# Credit every Skill to Skilled, so Skillful's own Record stays empty and
+	# its Postcondition is tested rather than satisfied by the fixture.
+	Commit_Training_Gain(
+		char,
+		New_Training_Batch(
+			char,
+			Skilled,
+			tuple(
+				Training_Grant(
+					capability=capability,
+					rank=Training_Rank.PROFICIENT,
+					)
+				for capability in SKILLS
+				),
+			source="Test Fixture",
+			grant_id="Test:AllSkills",
+			),
+		)
+
+	assert not Untrained_In(
+		char,
+		SKILLS,
+		)
+
+	Skillful( char )
+	entry = next(
+		feature
+		for feature in char.features
+		if feature.name == Skillful.NAME
+		)
+
+	# The Trait lands, with its inspiration line and no dangling promise.
+	assert not char.skillful.gains
+	assert Skillful.INSPIRATION.strip() in entry.description
+	assert "You have proficiency in" not in entry.description
+
+
 def _feature_tag_names() -> frozenset:
 	"""Every Feature Tag this module declares, by class name and by NAME."""
 	names = set()
@@ -2129,6 +2257,14 @@ def _test_feat_awakening_survives_bulk_generation() -> None:
 	a few percent of draws, so only volume showed them.  Volume is therefore
 	the test.
 
+	RECOVERY NOTE 2026-08-30: this test has TWO assertions and they mean
+	different things.  ``feature_failures`` must be zero -- that is this
+	module's own contract, and a regression there is ours.  ``generated >= 300``
+	is a coarse health check on the rest of the generator; while the 2026-08-29
+	recovery is unfinished it fails at ~238/312 for reasons in other Atlases
+	(Artificer, Ranger, Rogue, Bard).  Do not "fix" that second number by
+	loosening the first.
+
 	Only failures raised from this module fail it.  A generator this size has
 	other faults -- an Elf name can still raise -- and folding those in here
 	would make the Feature contract unreadable from its own test.
@@ -2198,6 +2334,7 @@ def _self_test():
 	_test_reapply_is_noop()
 	_test_a_background_reserves_only_what_it_certainly_grants()
 	_test_a_short_pool_grants_what_is_left()
+	_test_skillful_survives_a_full_skill_list()
 	_test_feat_awakening_survives_bulk_generation()
 	print("OK — FeaturesKit self-test")
 
