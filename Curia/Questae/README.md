@@ -150,7 +150,7 @@ See `QUESTA-template.md` to mint a new one.
 ### ✅ Solved (recent)
 | ID | Title |
 |----|-------|
-| QST-0080 | Cleric voice — distilled to [REW-0001](Rewards/REW-0001-uncommitted-prose-is-already-lost.md); questa deleted (2026-08-31) |
+| QST-0080 | Cleric voice on `main` as `59c792d` — distilled to [REW-0001](Rewards/REW-0001-uncommitted-prose-is-already-lost.md); questa deleted (2026-08-31) |
 | QST-0037.8 | Canonize **AtlasEpica** (renamed from Specus; Conventions row) (2026-07-15) |
 | QST-0036 | TagKit-Doctrine resynced to GitHub Guide (`@Pre`/`@Post`, contributions, no fake orthogonality) (2026-07-17) |
 | QST-0018 | Rogue parallel TOP package removed — role-tag half rides with QST-0016.3 (2026-07-15) |
