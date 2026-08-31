@@ -30,6 +30,20 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 
+# RECOVERY NOTE 2026-08-30: restored verbatim from
+# `.recovery-vault/species/Aasimar/Map_of_Ideals.cpython-314.pyc`, whose code
+# object fixes this exactly: `phrase[:1].upper() + phrase[1:]`, with the
+# docstring below carried over unchanged.  It is NOT an indefinite-article
+# helper -- reading only the three call sites suggests one, and guessing that
+# would have quietly rewritten authored prose.  No decompiler supports 3.14,
+# but a function this small is fully determined by its disassembly.
+def _opening(
+		phrase,
+		):
+	"""A phrase promoted to the start of a sentence, capital and all."""
+	return phrase[ :1 ].upper() + phrase[ 1: ]
+
+
 @dataclass(
 	frozen=True,
 	)

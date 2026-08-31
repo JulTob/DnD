@@ -1,4 +1,7 @@
-"""Drow — temporarily loaded from vaulted bytecode (recovery 2026-08-29)."""
-from __future__ import annotations
-from AtlasActorLudi.SpeciesKit._bytecode_mod import load_vaulted
-load_vaulted('Elves/Drow.cpython-314.pyc', globals())
+"""PHB name for the Dark Elf Heritage, kept as an alias.
+
+The live Species surface exports Dark_Elf. This name remains for
+comparison with the vaulted Drow module, which was the same Shape.
+"""
+
+from AtlasActorLudi.SpeciesKit.Elves.Dark_Elf import Dark_Elf as Drow
