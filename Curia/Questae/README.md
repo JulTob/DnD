@@ -117,6 +117,7 @@ See `QUESTA-template.md` to mint a new one.
 | QST-0039 | Arcane/Divine/Primal as a character axis (power origin) | tagkit/design | 🟡 | Druid, Lorekeeper, Bard, Warlock → QST-0016 |
 | QST-0040.1 | 🔁 Recurrent modularity review (entrypoint & Atlas surfaces) | chore/docs | 🟡 | Druid, Monk, Ranger, Artificer → QST-0040 |
 | QST-0040.2 | Canon: Ada ads/adb & TOP API as the modularity test | rule-update/docs | 🟡 | Lorekeeper, Druid, Wizard, Warlock, Bard → QST-0040 |
+| QST-0080.1 | Cleric Domain openings still in the older, plainer register | design | 🟡 | Lorekeeper, Bard, Julio → QST-0080 / REW-0001 |
 
 ### 🟡 Priority — Open (QST-0037 AtlasEpica sidequests)
 | ID | Title | Type | Priority | Parent |
@@ -149,6 +150,7 @@ See `QUESTA-template.md` to mint a new one.
 ### ✅ Solved (recent)
 | ID | Title |
 |----|-------|
+| QST-0080 | Cleric voice — distilled to [REW-0001](Rewards/REW-0001-uncommitted-prose-is-already-lost.md); questa deleted (2026-08-31) |
 | QST-0037.8 | Canonize **AtlasEpica** (renamed from Specus; Conventions row) (2026-07-15) |
 | QST-0036 | TagKit-Doctrine resynced to GitHub Guide (`@Pre`/`@Post`, contributions, no fake orthogonality) (2026-07-17) |
 | QST-0018 | Rogue parallel TOP package removed — role-tag half rides with QST-0016.3 (2026-07-15) |

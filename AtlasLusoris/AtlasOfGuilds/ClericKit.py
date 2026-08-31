@@ -1,7 +1,13 @@
-"""Cleric Specializations."""
+"""Cleric Specializations.
+
+Voice (Guild paragraph and Domain extends) is seated after the
+Shapes exist. Mechanics stay on the Tags; prose lives in
+Map_of_Cleric_Prayers.
+"""
 
 from AtlasLusoris.GuildKit import Build_Specialization
 from AtlasLusoris.GuildKit import Cleric
+from AtlasLusoris.Map_of_Cleric_Prayers import bind_cleric_voice
 
 
 Life = Build_Specialization(
@@ -26,3 +32,8 @@ War = Build_Specialization(
 	)
 
 SPECIALIZATIONS = Cleric.SPECIALIZATIONS
+
+bind_cleric_voice(
+	guild=Cleric,
+	domains=SPECIALIZATIONS,
+	)
