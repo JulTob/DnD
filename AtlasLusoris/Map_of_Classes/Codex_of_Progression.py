@@ -29,6 +29,7 @@ def get_class_progression(character):
 			)
 	from AtlasLusoris.Map_of_Classes.Training.Warlock import Warlock
 	from AtlasLusoris.Map_of_Classes.Training.Wizard import Wizard
+	from AtlasLusoris.Map_of_Classes.Training.Artificer import Artificer
 	mapping = {
 		"Fighter": 	Fighter,
 		"Wizard":  	Wizard,
@@ -42,7 +43,7 @@ def get_class_progression(character):
 		'Ranger': 	Ranger,
 		'Sorcerer': 	Sorcerer,
 		'Cleric': 	Cleric,
-		# Artificer?
+		'Artificer': 	Artificer,
 		}
 	prog_cls = mapping.get(class_name)
 	return prog_cls(character)
