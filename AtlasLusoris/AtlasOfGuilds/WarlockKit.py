@@ -152,39 +152,38 @@ def CELESTIAL_DESCRIPTION(
 	The Celestial patron paragraph, naming the one who hired you.
 
 	Drawn from the Aasimar's own pool of Celestials, so the two Atlases agree
-	about who is up there.  The kind and the Ideal come out of one named Dice
+	about who is up there.  The kind and the name come out of one named Dice
 	Bag, which is seeded from the Character rather than from call order, so
 	the paragraph names the same patron every time it renders.
 
-	The Ideal is deliberately not printed as a doctrine, the same way the
-	Aasimar's mark never prints it: you know who hired you, you do not know
-	what they are for.  Which is also the joke the ending turns on, since
-	nobody ever sends you a statement.
+	The Ideal is deliberately not printed, the same way the Aasimar's mark
+	never prints it: you know who hired you, you do not know what they are
+	for.  Which is also the joke the ending turns on, since nobody ever sends
+	you a statement.
 	"""
-	from AtlasActorLudi.SpeciesKit.Aasimar.Map_of_Ideals import (
-			DESCENTS,
-			IDEALS,
-			)
+	from AtlasActorLudi.SpeciesKit.Aasimar.Map_of_Ideals import DESCENTS
 
 	dice = character.Dice_Bag(
 		"warlock.patron.celestial",
 		version="1",
 		namespace="GenLegendClass",
 		)
-	descent = character.Pick(
+	kind = character.Pick(
 		list(
 			DESCENTS
 			),
 		dice=dice,
 		)
-	ideal = character.Pick(
-		list(
-			IDEALS.values()
-			),
-		dice=dice,
-		)
 	return CELESTIAL_DESCRIPTION_TEMPLATE.format(
-		patron=f"{descent} of {ideal.name}",
+		patron=(
+			f"the {kind.kind} "
+			+ character.Pick(
+				list(
+					kind.names
+					),
+				dice=dice,
+				)
+			),
 		)
 
 

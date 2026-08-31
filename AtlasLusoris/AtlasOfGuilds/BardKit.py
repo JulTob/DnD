@@ -1,10 +1,28 @@
-"""BardKit — temporarily loaded from vaulted bytecode (recovery 2026-08-29)."""
+"""Bard Specializations."""
 
-from __future__ import annotations
+from AtlasLusoris.GuildKit import Bard
+from AtlasLusoris.GuildKit import Build_Specialization
 
-from AtlasLusoris.AtlasOfGuilds._bytecode_kit import load_vaulted_kit
 
-load_vaulted_kit(
-	"BardKit",
-	globals(),
+Dance = Build_Specialization(
+	guild=Bard,
+	name="Dance",
+	module=__name__,
 	)
+Glamour = Build_Specialization(
+	guild=Bard,
+	name="Glamour",
+	module=__name__,
+	)
+Lore = Build_Specialization(
+	guild=Bard,
+	name="Lore",
+	module=__name__,
+	)
+Valor = Build_Specialization(
+	guild=Bard,
+	name="Valor",
+	module=__name__,
+	)
+
+SPECIALIZATIONS = Bard.SPECIALIZATIONS

@@ -1,10 +1,28 @@
-"""RogueKit — temporarily loaded from vaulted bytecode (recovery 2026-08-29)."""
+"""Rogue Specializations."""
 
-from __future__ import annotations
+from AtlasLusoris.GuildKit import Build_Specialization
+from AtlasLusoris.GuildKit import Rogue
 
-from AtlasLusoris.AtlasOfGuilds._bytecode_kit import load_vaulted_kit
 
-load_vaulted_kit(
-	"RogueKit",
-	globals(),
+ArcaneTrickster = Build_Specialization(
+	guild=Rogue,
+	name="Arcane Trickster",
+	module=__name__,
 	)
+Assassin = Build_Specialization(
+	guild=Rogue,
+	name="Assassin",
+	module=__name__,
+	)
+Soulknife = Build_Specialization(
+	guild=Rogue,
+	name="Soulknife",
+	module=__name__,
+	)
+Thief = Build_Specialization(
+	guild=Rogue,
+	name="Thief",
+	module=__name__,
+	)
+
+SPECIALIZATIONS = Rogue.SPECIALIZATIONS

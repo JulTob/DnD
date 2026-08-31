@@ -1,10 +1,105 @@
-"""BarbarianKit — temporarily loaded from vaulted bytecode (recovery 2026-08-29)."""
+"""Barbarian Specializations."""
 
-from __future__ import annotations
+from AtlasLusoris.GuildKit import Barbarian
+from AtlasLusoris.GuildKit import Build_Specialization
 
-from AtlasLusoris.AtlasOfGuilds._bytecode_kit import load_vaulted_kit
 
-load_vaulted_kit(
-	"BarbarianKit",
-	globals(),
+# ---------------------------------------------------------------------------
+# Path of the Berserker
+# ---------------------------------------------------------------------------
+# Each Path speaks in second person and names the drive, not the rules: the
+# feature entries already carry the mechanics.
+
+
+BERSERKER_DESCRIPTION = (
+	"Most people hold something back. You don't. You are a wild horse. Untamed.\n\n"
+	"When you go, you go all the way. Furious in a fight. Delighted by a meal. "
+	"Crying at a poem. Dancing through a song. Whatever the moment is, you are "
+	"the whole of it. Pain quiets. Fear vanishes. You belong in that moment. "
+	"Nothing else exists. One purpose.\n\n"
+	"Some find that unsettling. But you could not be any other way. You are "
+	"the eye of the storm."
 	)
+
+Berserker = Build_Specialization(
+	guild=Barbarian,
+	name="Berserker",
+	module=__name__,
+	extends=BERSERKER_DESCRIPTION,
+	heading="Path of the Berserker",
+	)
+
+
+# ---------------------------------------------------------------------------
+# Path of the Wild Heart
+# ---------------------------------------------------------------------------
+
+
+WILD_HEART_DESCRIPTION = (
+	"Your heart beats to the rhythms of nature. Your rage is harmony, "
+	"balance, and attention.\n\n"
+	"There is a bestial instinct that maybe all carry and few listen to. "
+	"You listen. You listen to the wolves and to the bears. Both the ones "
+	"you hunt with and the ones you carry in your spirit. You listen to "
+	"your place in the wilds, and you know you belong.\n\n"
+	"Now the world of civilization calls, and you carry the wild things "
+	"in your heart."
+	)
+
+WildHeart = Build_Specialization(
+	guild=Barbarian,
+	name="Wild Heart",
+	module=__name__,
+	extends=WILD_HEART_DESCRIPTION,
+	heading="Path of the Wild Heart",
+	)
+
+
+# ---------------------------------------------------------------------------
+# Path of the World Tree
+# ---------------------------------------------------------------------------
+
+
+WORLD_TREE_DESCRIPTION = (
+	"Rage comes to you as awe. A cosmic connection. A veil being lifted "
+	"from your eyes.\n\n"
+	"All boundaries are illusions. Now you see the whole: energy flowing "
+	"under the sea, streams of light through the night skies, every living "
+	"thing hanging from the same enormous tree. All connected through time "
+	"and space. It is beautiful. You are very small. You are part of it. "
+	"You are not alone. If you can see through the veil, you can cross them."
+	)
+
+WorldTree = Build_Specialization(
+	guild=Barbarian,
+	name="World Tree",
+	module=__name__,
+	extends=WORLD_TREE_DESCRIPTION,
+	heading="Path of the World Tree",
+	)
+
+
+# ---------------------------------------------------------------------------
+# Path of the Zealot
+# ---------------------------------------------------------------------------
+# {name} is a projection slot: the Character sheet fills it in at render.
+
+
+ZEALOT_DESCRIPTION = (
+	"Ecstasy. Fervor. Revelation.\n\n"
+	"You are taken by one of the Gods themselves. {name} is nothing more "
+	"than a vessel for the divine, and a conduit for their wrath and their "
+	"glory. Guided in your rage by a holy commandment. You can sense exactly "
+	"what the God wants of you, and you feel honored and moved. You are no "
+	"longer there, a God is. And facing you is blasphemous."
+	)
+
+Zealot = Build_Specialization(
+	guild=Barbarian,
+	name="Zealot",
+	module=__name__,
+	extends=ZEALOT_DESCRIPTION,
+	heading="Path of the Zealot",
+	)
+
+SPECIALIZATIONS = Barbarian.SPECIALIZATIONS
