@@ -765,9 +765,17 @@ _____________________________________________*/
       transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Coin-flip state — toggled by JS every 1-5 discrete seconds */
+    /* Coin-flip state — one random orbit, one random axis, toggled by JS
+       every discrete second. The mirrored shell visually reverses the inner
+       ring's spin, which is the whole point of the flip (QST-0081). */
     .orbit-layer.flip-y {
       transform: rotateY(180deg);
+    }
+    .orbit-layer.flip-x {
+      transform: rotateX(180deg);
+    }
+    .orbit-layer.flip-x.flip-y {
+      transform: rotateX(180deg) rotateY(180deg);
     }
 
     /* Inner ring carries the 2D spin so it doesn’t clash with the Y-flip */
@@ -1639,10 +1647,13 @@ header, footer {
 
 .character-level-controls {
     display: grid;
-    grid-template-columns: repeat(2, 2.8rem);
+    /* minus | current level | plus — the value cell is .character-level-value */
+    grid-template-columns: 2.8rem minmax(2.8rem, auto) 2.8rem;
     gap: 0.35rem;
     margin: 0;
 }
+.character-level-controls .minus { grid-column: 1; }
+.character-level-controls .plus { grid-column: 3; }
 
 .character-level-controls .action-button {
     min-width: 2.8rem;

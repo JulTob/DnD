@@ -570,6 +570,10 @@ character_panel = ui.div(
                     title="Level Down",
                     aria_label="Level Down",
                 ),
+                ui.tags.div(
+                    {"class": "character-level-value", "aria-live": "polite"},
+                    ui.output_text("char_level_display", inline=True),
+                ),
                 ui.input_action_button(
                     "btn_char_level_up",
                     "+",
@@ -1051,6 +1055,13 @@ def server(input, output, session):
             "npclist": npclist_panel,
         }
         return pages.get(page_state(), home_panel)
+
+    @output
+    @render.text
+    def char_level_display() -> str:
+        """The number between the level buttons; tracks the reforge state."""
+        current = character_params_state() or _character_params_from_data(character_state())
+        return str(max(1, min(20, _safe_int((current or {}).get("level"), 1))))
 
     @output
     @render.ui
