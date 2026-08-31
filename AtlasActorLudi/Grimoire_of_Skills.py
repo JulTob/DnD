@@ -718,6 +718,10 @@ class Char_Skills:
 			self.activate_proficiencies(n, skill_names)
 
 	def activate_expertise(self, n, skill_names):
+		# ----- nothing to do? bail out early (mirrors activate_proficiencies;
+		# the recursion ends on an empty list, which must not reach choice) -----
+		if n <= 0 or not skill_names:
+			return
 		# Randomly pick a skill from the list
 		s = random.choice(skill_names)
 

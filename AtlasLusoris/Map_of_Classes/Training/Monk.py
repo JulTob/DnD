@@ -4,6 +4,8 @@ from ..Codex_of_Progression import Progression
 from AtlasLusoris.Grimoire_of_Features import Feature
 from AtlasLusoris.Grimoire_of_Features import ApplyRandomFeats, ApplyEpicBoon
 
+import random
+
 class Monk(Progression):
 	HIT_DIE = 8
 	def __init__(Monk, character):
