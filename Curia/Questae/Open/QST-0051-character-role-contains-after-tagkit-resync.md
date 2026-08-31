@@ -1,9 +1,18 @@
-# QST-0051 — 🔴 Character/Role foundation fails 4/8 self-tests after the TagKit resync
+# QST-0051 — 🟡 Delete the orphaned `AtlasLusoris/CharactersKit.py` (was: "foundation fails 4/8")
 
-- **Type:** bug (recovery regression / tagkit-migration)
-- **Priority:** 🔴 urgent — the Character + Role foundation is the root every generated Character composes on; it currently does not compose.
-- **Status:** Open — **diagnosed and verified here; fix needs Julio's design call (Option A vs B) before applying**
-- **Owner:** unclaimed — *`AtlasLusoris/CharactersKit.py` is Codex's lane on `$S/RECOVERY-COORD.md`; coordinate before editing*
+> **⚠️ CORRECTION (2026-08-31).** The original alarm below is **wrong about the live tree.** The
+> canonical Character root is **`AtlasActorLudi/CharactersKit.py`** (every live importer resolves there),
+> and it is **9/9 self-tests green** and already TagKit-`0.2.0a1`-clean. The 4/8 failure and the forbidden
+> `__contains__` overrides exist only in **`AtlasLusoris/CharactersKit.py`, which has no live importer** —
+> it is an orphaned stale duplicate. So the foundation is healthy; there is nothing to migrate on the live
+> path. **Real action: delete the orphan** (and note the general TagKit-`__contains__` lesson for QST-0042).
+> The Option A/B design question below is moot for recovery (it only concerned the dead copy). Downgraded
+> to 🟡. The analysis is kept for the record and for the QST-0042 sweep.
+
+- **Type:** chore (delete orphaned duplicate) — *was: bug (recovery regression)*
+- **Priority:** 🟡 normal — *the live foundation is fine; this is cleanup + a QST-0042 note*
+- **Status:** Open — **corrected; action is a deletion, not a fix**
+- **Owner:** unclaimed — *the orphan has no importer; deleting it is safe once someone confirms no tooling reads it*
 - **Route to:** Codex (owns CharactersKit), Wizard (Methods), Warlock (Contracts), Lorekeeper, Julio (design call)
 - **Parent:** —
 - **Sidequests:** —
