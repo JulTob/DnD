@@ -9,13 +9,13 @@ Assembly
 	1. start from ``DEFAULT_PRAYERS`` (every Cleric);
 	2. add ``DOMAIN_PRAYERS`` for the Domain they carry;
 	3. add ``SPECIES_PRAYERS`` / ``SPECIES_DOMAIN_PRAYERS`` for their people;
-	4. add ``CULTURE_PRAYERS`` reached through ``cultures_of`` (same network as
-	   gear titles);
+	4. add ``CULTURE_PRAYERS`` and, if the Domain is known,
+	   ``CULTURE_DOMAIN_PRAYERS`` (same network as gear titles);
 	5. ``Pick`` one line from the assembled ledger.
 
-Rendering (caller's job, usually a Domain ``extends``):
-
-	"{prayer}, that's the wisdom of the {Domain} Domain."
+Rendering: the Guild paragraph is shared; each Domain ``extends`` it with
+its own mouth, and seats the drawn prayer in a sentence that is not the
+same twice.
 """
 
 from __future__ import annotations
@@ -41,7 +41,6 @@ DEFAULT_PRAYERS = (
 DOMAIN_PRAYERS = {
 	"Life": (
 		"Life finds a way.",
-		""
 		"While I breathe, I hope.",
 		"Sufficient unto the day.",
 		"What is bent may still drink the rain.",
@@ -91,7 +90,7 @@ DOMAIN_PRAYERS = {
 		"The wise man knows he knows nothing.",
 		"When senses fail us, reason must step in.",
 		"The believer is happy; the doubter is wise.",
-		"Men and books share their enemies: Fire, water, time, and their own contents.",
+		"Mortals and books share their enemies: Fire, water, time, and their own contents.",
 
 		),
 	}
@@ -109,7 +108,7 @@ SPECIES_PRAYERS = {
 		"Each snowflake is small, but it is part of the avalanche.",
 		),
 	"Dwarf": (
-		"Metal shapes in the forge. People in the challenges.",
+		"Metal shapes in the forge. People in the challenge.",
 		"A saint is a sinner trying to be better.",
 		"Forgetting is hard, but harder is forgiving.",
 		),
@@ -125,15 +124,24 @@ SPECIES_PRAYERS = {
 		"Greatness is a gift. Greatness is a burden.",
 		),
 	"Halfling": (
-		"Rush not. Small feet, steady pace.",
-		"One can simply walk into the world.",
-		""
+		"Rush not. Small feet. Small steps. Long journeys.",
+		"One can simply walk anywhere.",
+		"The world is a big place. It is also a great place.",
+		"Every day is a new story.",
+		"The world is not inside your books."
 		),
 	"Gnome": (
-		"Wonder is a practice.",
+		"Wonder and Wander.",
+		"Care not for what you cannot change.",
+		"Care not for what you cannot change. Change what you can.",
+		"Care not for what you cannot carry."
+
 		),
 	"Orc": (
-		"If it cannot bleed, it cannot bind.",
+		"The storm is coming.",
+		"The storm guides the winds.",
+		"The wind rider must master the storm.",
+		"The wind rider must follow the storm.",
 		),
 	}
 
@@ -144,168 +152,221 @@ SPECIES_DOMAIN_PRAYERS = {
 		"Tiefling",
 		"Grave",
 		): (
-		"I show the door. I do not push.",
-		"For the last two coins, I will wait.",
+		"I show the door. I do not pass.",
+		"For the last two coins, I will guide.",
 		),
 	(
 		"Tiefling",
 		"Life",
 		): (
-		"Even from the pit, a pulse.",
+		"You can rise from the ashes.",
 		),
 	(
 		"Tiefling",
 		"War",
 		): (
-		"If wrath is mine, let it stand guard.",
+		"War is never a choice, but a necessity.",
+		"War is doesn't ask. You still have to answer.",
+		"Defend. Protect. Forgive.",
 		),
 	(
 		"Goliath",
 		"War",
 		): (
-		"Stand tall enough that others can find you.",
+		"Stand your ground. Understand your enemy.",
 		),
 	(
 		"Goliath",
 		"Light",
 		): (
-		"First light on the peak. Then the valley.",
+		"The darkest night holds the brightest stars.",
 		),
 	(
 		"Dwarf",
 		"Life",
 		): (
-		"Gold is cold until it buys breath.",
+		"The real gold is in your soul.",
+		"The real gold is in your faith.",
+		"Gold held is not living. Gold earned is gold spent.",
+		"Gold, like life, must be shared and passed on.",
+		"The metals you carry in your soul are your real fortune.",
 		),
 	(
 		"Dwarf",
 		"Knowledge",
 		): (
-		"Stamp it in. Soft words wash away.",
+		"The stones remember.",
+		"He who reads much and walks much, sees much and knows much.",  # Cervantes
 		),
 	(
 		"Dragonborn",
 		"War",
 		): (
-		"The name is the banner. Keep the meter.",
+		"Life is a long battle..",  
 		),
 	(
 		"Dragonborn",
 		"Light",
 		): (
-		"Fire gathers as well as it spends.",
+		"Fire spreads. We gather around it.",  
 		),
 	(
 		"Aasimar",
 		"Light",
 		): (
-		"I did not invent it. I only refuse to hide it.",
+		"Let there be light.",
 		),
-	(	"Elf", "Light",
+	(
+		"Elf",
+		"Light",
 		): (
-		"Of a small spark a great fire.", # Celtic proverb 
+		"Light, love, and music will endure.", 
 		),
-
+	(
+		"Elf",
+		"Knowledge",
+		): (
+		"We live in one another's shadow.",  # Irish: Ar scáth a chéile
+		),
 	(
 		"Halfling",
 		"Life",
 		): (
-		"Life is precious.",
-		"Life is a journey..",
+		"Haste has no blessing.",  # Swahili
 		),
-
+	(
+		"Gnome",
+		"Knowledge",
+		): (
+		"You were not made to live as brutes, but to follow virtue and knowledge.",  # Dante
+		),
+	(
+		"Gnome",
+		"Life",
+		): (
+		"One sees clearly only with the heart.",  # Saint-Exupéry
+		),
+	(
+		"Dwarf",
+		"War",
+		): (
+		"There is no shortcut without work.",  # No hay atajo sin trabajo
+		),
+	(
+		"Dwarf",
+		"Grave",
+		): (
+		"Let nothing disturb you. Let nothing frighten you.",  # Teresa of Ávila
+		"They shall be dust, but dust with love.",  # Quevedo
+		),
 	}
 
 
-# Culture keys from ``cultures_of`` — one key, one culture. Never fuse.
-# Sayings that could be overheard; the culture is felt, not announced.
+# Only lines that still sound like faith whichever Domain is showing.
 CULTURE_PRAYERS = {
-	"greece": (
-		"Know the measure.",
-		"Fate cuts. Answer anyway.",
-		),
-	"rome": (
-		"Many mouths, one law.",
-		),
-	"japan": (
-		"Purity is practice.",
-		),
-	"aztec": (
-		"The sun is hungry. So are we.",
-		),
 	"china": (
-		"Right relation, not loud harmony.",
-		),
-	"korea": (
-		"Keep your own rite intact.",
-		),
-	"iberia": (
-		"Gold calls. Answer slower.",
-		),
-	"andalus": (
-		"Garden and blade, one courtyard.",
-		),
-	"norse": (
-		"Hold one root. Climb.",
-		),
-	"rus": (
-		"Winter keeps the honest lessons.",
-		),
-	"mongol": (
-		"The horizon is a road.",
-		),
-	"celt": (
-		"Mist hides. It does not lie.",
+		"Do not do to others what you would not have done to you.",
 		),
 	"persia": (
-		"Light and shadow were twins first.",
-		),
-	"levante": (
-		"Old roads still take new feet.",
-		),
-	"africa": (
-		"The first hearth still warms.",
-		),
-	"egypt": (
-		"What is weighed endures.",
-		),
-	"maghreb": (
-		"Desert and sea teach the same.",
-		),
-	"carthage": (
-		"Break the treaty, meet the war.",
-		),
-	"italy": (
-		"Beauty is a discipline.",
+		"This too shall pass.",
 		),
 	"germany": (
-		"The hands keep the vow.",
-		),
-	"switzerland": (
-		"Hold the pass. Hold both.",
+		"Mortals propose, Gods dispose.",
 		),
 	"india": (
-		"Many names is not confusion.",
+		"Truth alone triumphs.",
 		),
-	"oceania": (
-		"Speak carefully on deep water.",
+	"maghreb": (
+		"Help yourself, and Heavens will help you.",
 		),
-	"ninja": (
-		"Unseen is not unsworn.",
+	"switzerland": (
+		"Help yourself, and Heavens will help you.",
 		),
-	# Fiction registers — separate keys, not merges of the above.
-	"wyrm_myth": (
-		"Walk the ridge. Do not name the coil.",
+	}
+
+
+# (culture, Domain). Empty pairs are omitted on purpose.
+CULTURE_DOMAIN_PRAYERS = {
+	("greece", "Knowledge"): (
+		"Nothing in excess.",
 		),
-	"grimdark": (
-		"Hope costs. Pay it.",
-		"Answer to another name.",
+	("greece", "War"): (
+		"We learn by suffering.",
 		),
-	"arthuriana": (
-		"No one sits alone in power.",
+	("rome", "Life"): (
+		"While I breathe, I hope.",
 		),
-	"fairytale_fae": (
-		"Keep your name close.",
+	("rome", "Knowledge"): (
+		"Make haste slowly.",
+		),
+	("japan", "Life"): (
+		"Fall seven times, stand up eight.",
+		),
+	("japan", "Knowledge"): (
+		"Sit and listen. Listen and learn.",
+		),
+	("aztec", "Grave"): (
+		"Not forever on earth: only a little while here.",
+		),
+	("aztec", "Light"): (
+		"Flower and song: that is our offering.",
+		),
+	("korea", "Life"): (
+		"At the end of hardship, joy comes.",
+		),
+	("iberia", "Life"): (
+		"Traveller, there is no road; you make the road by walking.",
+		),
+	("andalus", "Grave"): (
+		"This world is a bridge. We all must cross.",
+		),
+	("norse", "Grave"): (
+		"Cattle die, kinsmen die, you yourself will die; one thing never dies: the judgment on each life.",
+		),
+	("rus", "Knowledge"): (
+		"Gods are not in strength, but in truth.",
+		),
+	("mongol", "Light"): (
+		"The Eternal Light is watching.",
+		),
+	("celt", "Life"): (
+		"There is no strength without coming together.",
+		),
+	("levante", "Life"): (
+		"Patience is the key to relief.",
+		),
+	("africa", "Life"): (
+		"Haste has no blessing.",
+		),
+	("egypt", "Grave"): (
+		"What endures the grave weights on the living.",
+		),
+	("carthage", "Life"): (
+		"Perhaps someday even this will be a joy to remember.",
+		),
+	("italy", "Light"): (
+		"Love is what moves the sun and the other stars.",
+		),
+	("india", "Knowledge"): (
+		"You have a right to the work, never to its fruits.",
+		),
+	("oceania", "Life"): (
+		"We are all in the same canoe.",
+		),
+	("ninja", "Life"): (
+		"Spring comes and the grass grows by itself.",
+		),
+	("grimdark", "Grave"): (
+		"Though Heavens slay me, Heavens I trust.",
+		),
+	("arthuriana", "War"): (
+		"Do what you must, come what may.",
+		),
+	("fairytale_fae", "Trickery"): (
+		"Nature has no name.",
+		),
+	("china", "Life"): (
+		"The highest good is like water. It flows where it is needed.",
 		),
 	}
 
@@ -435,6 +496,8 @@ def prayer_ledger(
 			lines,
 			):
 		for line in lines:
+			if not line:
+				continue
 			if line in seen:
 				continue
 			seen.add(
@@ -482,6 +545,16 @@ def prayer_ledger(
 				(),
 				)
 			)
+		if resolved_domain:
+			_extend(
+				CULTURE_DOMAIN_PRAYERS.get(
+					(
+						culture,
+						resolved_domain,
+						),
+					(),
+					)
+				)
 
 	return tuple(
 		pool
@@ -520,9 +593,9 @@ def domain_wisdom(
 		domain: str | None = None,
 		) -> str:
 	"""
-	The closing line for a Domain description.
+	A compact closer, if a caller wants the old one-line form.
 
-	"{prayer}, that's the wisdom of the {Domain} Domain."
+	Domain voice on the sheet uses ``voice_of_domain`` instead.
 	"""
 	resolved = _domain_of(
 		character,
@@ -540,13 +613,169 @@ def domain_wisdom(
 		)
 
 
+# ---------------------------------------------------------------------------
+# Guild and Domain voice
+# ---------------------------------------------------------------------------
+# Core fantasy: Being Watched (over) — keeping, not surveillance.
+# Sell the class through that fantasy (what a Cleric *is*), not mood alone.
+# Biblical / Jedi cadence: parallel clauses, open molds, invitation.
+# The register comes from parallelism, parataxis and concrete images,
+# never from archaic vocabulary (no thee, no shall) — that reads costume.
+# The identity of the watcher stays a guess, so the mold stays open.
+# Domain trickles doctrine into behavior; prayer seats at the end.
+
+
+CLERIC_DESCRIPTION = (
+	"There is something watching over you, and it has been with you "
+	"always. Maybe a god. Maybe your ancestors. Maybe the universe "
+	"itself, turning its face toward you. Whatever it is, you have "
+	"been carried farther than you know.\n\n"
+	"You can feel it. Maybe you don't see it, and you may not be able "
+	"to explain why, but still you do believe. You believe you are "
+	"meant for something. What it is, you are not sure you want to "
+	"know — and you will not be asked for more than you can carry. "
+	"You only hope you will be enough. In the hour you falter, a hand "
+	"is held out. It was held out before you reached for it.\n\n"
+	"You have defied the odds, and contemplated miracles long enough "
+	"you started doing your own."
+	)
+
+
+DOMAIN_OPENINGS = {
+	"Life": (
+		"Falling is not the end, while there is still breath to return "
+		"to. Until you can stand again.\n\n"
+		"You do not count whether you earned the rising. You learn to "
+		"stay. To restore. To heal — the way you were shown."
+		),
+	"Light": (
+		"The next step appears when you need it. Light always shows the way."
+		),
+	"Trickery": (
+		"On the wrong nights, the count still comes out right. You learn the narrow way, the timely word, the door that should have been locked."
+		),
+	"War": (
+		"You learn to stand when lying down would be easier. The bar does not move."
+		),
+	"Grave": (
+		"What should rest, you let rest. What broke the order, you "
+		"return.\n\n"
+		"You keep the line — and sometimes, quietly, you bend it back."
+		),
+	"Knowledge": (
+		"Answers are not given to stay in your hand. You work the "
+		"lesson until it is yours.\n\n"
+		"You teach yourself on behalf of what taught you first."
+		),
+	}
+
+
+DOMAIN_FRAMES = {
+	"Life": (
+		'In a low hour, a line came back to you: '
+		'"{prayer}"'
+		),
+	"Light": (
+		'A sentence stayed with you at the crossing: '
+		'"{prayer}"'
+		),
+	"Trickery": (
+		'It sounded like a joke. The world has treated it as true ever '
+		'since: "{prayer}"'
+		),
+	"War": (
+		'Before the first stand, a line became the bar: '
+		'"{prayer}"'
+		),
+	"Grave": (
+		'You heard it where endings are kept in order: '
+		'"{prayer}"'
+		),
+	"Knowledge": (
+		'You were taught one sentence, and it stayed: '
+		'"{prayer}"'
+		),
+	}
+
+
+def voice_of_domain(
+		domain: str,
+		):
+	"""
+	One Domain layer: its own mouth, then the drawn prayer in its frame.
+	"""
+	opening = DOMAIN_OPENINGS.get(
+		domain,
+		"",
+		)
+	frame = DOMAIN_FRAMES.get(
+		domain,
+		'You once heard "{prayer}" You feel that it is true.',
+		)
+
+	def voice(
+			character,
+			) -> str:
+		prayer = pick_prayer(
+			character,
+			domain=domain,
+			)
+		seated = frame.format(
+			prayer=prayer,
+			)
+		if not opening:
+			return seated
+		return (
+			f"{opening}\n\n"
+			f"{seated}"
+			)
+
+	return voice
+
+
+def bind_cleric_voice(
+		guild,
+		domains,
+		) -> None:
+	"""
+	Seat Guild and Domain prose on Tags that were built without it.
+
+	Does not re-declare Specializations. It replaces the empty ``Describe``
+	layers the vaulted kit left behind.
+	"""
+	from AtlasLusoris.GuildKit import Describe_Layer
+
+	guild.DESCRIPTION = CLERIC_DESCRIPTION
+	guild.Describe = Describe_Layer(
+		CLERIC_DESCRIPTION,
+		extend=True,
+		heading=None,
+		)
+
+	for domain_tag in domains:
+		name = domain_tag.NAME
+		voice = voice_of_domain(
+			name
+			)
+		domain_tag.DESCRIPTION = voice
+		domain_tag.Describe = Describe_Layer(
+			voice,
+			extend=True,
+			heading=f"{name} Domain",
+			)
+
+
 __all__ = (
 	"DEFAULT_PRAYERS",
 	"DOMAIN_PRAYERS",
 	"SPECIES_PRAYERS",
 	"SPECIES_DOMAIN_PRAYERS",
 	"CULTURE_PRAYERS",
+	"CULTURE_DOMAIN_PRAYERS",
+	"CLERIC_DESCRIPTION",
 	"prayer_ledger",
 	"pick_prayer",
 	"domain_wisdom",
+	"voice_of_domain",
+	"bind_cleric_voice",
 	)
