@@ -2,8 +2,8 @@
 
 - **Type:** tagkit / docs
 - **Priority:** 🟠 high
-- **Status:** Open
-- **Owner:** unclaimed
+- **Status:** Working
+- **Owner:** Claude (claimed 2026-08-31; audit runs once QST-0072's bootstrap exit lands the last lanes, so it reads settled source)
 - **Route to:** Methods Consul (Wizard), Contracts Consul (Warlock), Architecture Consul (Druid), Lorekeeper
 - **Parent:** —
 - **Sidequests:** —
