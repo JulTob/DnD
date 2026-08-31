@@ -119,6 +119,25 @@ def _plantilla():
 		return None
 
 
+def _groomed(
+		answer,
+		):
+	"""
+	Strip stray whitespace from a roster of name parts, QST-0052.
+
+	Length and order are preserved on purpose: seeded draws pick by index, so
+	grooming an entry may never move its neighbours. Anything that is not a
+	flat collection of strings (the phonotactic triples) passes untouched.
+	"""
+	if isinstance(answer, (list, tuple)) and all(
+			isinstance(entry, str) for entry in answer
+			):
+		return type(answer)(
+			entry.strip() for entry in answer
+			)
+	return answer
+
+
 def Race_Ingredient(
 		race,
 		ingredient,
@@ -164,7 +183,9 @@ def Race_Ingredient(
 				)
 			continue
 		if answer:
-			return answer
+			return _groomed(
+				answer
+				)
 		_report_demotion(source, ingredient, "came back empty", heir)
 	return LAST_RESORT_INGREDIENT[ingredient]
 
@@ -655,8 +676,15 @@ def NewName(lusor):
 		if lusor.gender.title() == "They":
 			FullName = f"Noble {FullName}"
 
-	lusor._name = name
-	return FullName.title()
+	# One exit, one guarantee (QST-0052): no name reaches a sheet or a
+	# sentence with leading, trailing, or doubled spaces, whichever branch
+	# above assembled it and whichever part came back empty.
+	lusor._name = " ".join(
+		name.split()
+		)
+	return " ".join(
+		FullName.split()
+		).title()
 
 # The four ingredient readers below are @guardian no longer. Every one of them
 # reads a seeded generator, so a retry replays the same dice into the same wall;
