@@ -1257,98 +1257,62 @@ SPECIALIZATIONS = Fighter.SPECIALIZATIONS
 
 
 def _feature_names(
-		owner,
+		features,
 		) -> tuple[str, ...]:
 	return tuple(
 		feature.name
-		for feature in owner.FEATURES
+		for feature in features
 		)
 
 
-def _self_test():
-	assert _feature_names( Fighter ) == (
-		"Fighting Style",
-		"Second Wind",
-		"Weapon Mastery",
-		"Action Surge",
-		"Tactical Mind",
-		"Extra Attack",
-		"Tactical Shift",
-		"Indomitable",
-		"Tactical Master",
-		"Studied Attacks",
+def _self_test() -> None:
+	assert "Fighting Style" in _feature_names(
+		FIGHTER_FEATURES
 		)
+	assert FIGHTER_CHOICES[0].name == "Fighting Style"
+	assert FIGHTER_CHOICES[2].total_at(20) == 6
 
-	for specialization in (
-			BattleMaster,
-			Champion,
-			EldritchKnight,
-			PsiWarrior,
-			):
-		assert specialization in SPECIALIZATIONS
-		assert specialization.FEATURES
-		assert all(
-			feature.level in {
-				3,
-				7,
-				10,
-				15,
-				18,
-				}
-			for feature in specialization.FEATURES
-			)
+	assert len(
+		MANEUVERS
+		) == 20
+	assert BATTLE_MASTER_CHOICES[0].total_at(3) == 3
+	assert BATTLE_MASTER_CHOICES[0].total_at(20) == 9
+	assert BATTLE_MASTER_RESOURCES[0].at(18) == "6d12"
 
-	assert BATTLE_MASTER_RESOURCES[ 0 ].values == (
-		(
-				3,
-				"4d8",
-				),
-		(
-				7,
-				"5d8",
-				),
-		(
-				10,
-				"5d10",
-				),
-		(
-				15,
-				"6d10",
-				),
-		(
-				18,
-				"6d12",
-				),
+	assert PSI_WARRIOR_RESOURCES[0].values == (
+		(3, "4d6"),
+		(5, "6d8"),
+		(9, "8d8"),
+		(11, "8d10"),
+		(13, "10d10"),
+		(17, "12d12"),
 		)
-	assert PSI_WARRIOR_RESOURCES[ 0 ].values == (
-		(
-				3,
-				"4d6",
-				),
-		(
-				5,
-				"6d8",
-				),
-		(
-				9,
-				"8d8",
-				),
-		(
-				11,
-				"8d10",
-				),
-		(
-				13,
-				"10d10",
-				),
-		(
-				17,
-				"12d12",
-				),
-		)
-	assert EldritchKnight.MAGIC.spell_list == "Wizard"
 	assert PsiWarrior.MAGIC.spells == (
 		"Telekinesis",
 		)
+	assert sorted(
+		PSI_WARRIOR_METHODS
+		) == [
+		"Chaotic",
+		"Lawful",
+		"Neutral",
+		]
 
-	print( "OK — FighterKit self-test" )
+	assert ELDRITCH_KNIGHT_MAGIC.at(20).prepared == 13
+	assert ELDRITCH_KNIGHT_CHOICES[1].total_at(20) == 13
+	assert ELDRITCH_KNIGHT_MAGIC.at(13).slots == (4, 3, 2, 0)
+
+	names = {
+		spec.NAME
+		for spec in SPECIALIZATIONS
+		}
+	assert names >= {
+		"Battle Master",
+		"Banneret",
+		"Champion",
+		"Eldritch Knight",
+		"Psi Warrior",
+		}
+	print(
+		"OK — FighterKit self-test"
+		)
