@@ -560,7 +560,6 @@ character_panel = ui.div(
         ),
         ui.div(
             {"class": "character-level-box"},
-            ui.div({"class": "character-level-label"}, "Level"),
             ui.tags.div(
                 {"class": "character-level-controls"},
                 ui.input_action_button(
@@ -572,6 +571,7 @@ character_panel = ui.div(
                 ),
                 ui.tags.div(
                     {"class": "character-level-value", "aria-live": "polite"},
+                    ui.div({"class": "character-level-label"}, "Level"),
                     ui.output_text("char_level_display", inline=True),
                 ),
                 ui.input_action_button(

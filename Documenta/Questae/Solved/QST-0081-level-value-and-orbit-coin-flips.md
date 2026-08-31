@@ -57,6 +57,14 @@ axis, which then changes its direction. The level control shows its number.
 - **Practice/preference to remember:** the stylesheet is a witness. When CSS
   names an element or state no markup produces, that is the shape of what
   was lost: rebuild to the contract before inventing a new one.
+- **Correction (same day):** the first rebuild put the value in the wrong
+  grid: the reforge-era `.character-level-box` IS the three-column grid (the
+  controls wrapper is `display: contents`), so the label div auto-placed over
+  the minus button. Julio's spec settled the design: the label rides on top
+  of the number inside the middle cell, as a small caption. The stray
+  three-column edit to the older `.character-level-controls` block was
+  reverted. Verified: the pill reads "- / LEVEL over 2 / +" and a press of +
+  reforges to level 3 with the sheet chip in sync.
 
 ## 🧭 Notes for the Agora / implementer
 
