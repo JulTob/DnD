@@ -46,44 +46,6 @@ def Align_Lineage_Ability(
 		)
 
 
-def Align_Lineage_Ability(
-		target,
-		options,
-		) -> str | None:
-	"""
-	Cast the Heritage's spells with whatever the Character already casts with.
-
-	The rules make this a free choice: an Elven Lineage is cast with
-	"Intelligence, Wisdom, or Charisma", chosen by the player.  No player picks
-	their second-best score, so neither does this.  A Covenantor who answers to
-	Wisdom casts the lineage with Wisdom too, instead of carrying two
-	spellcasting abilities and the confusion that comes with them.
-
-	The Heritage is chosen before the Guild exists, so the draw made back then
-	stands as the fallback: it is what a Character with no spellcasting class
-	keeps, and it is still seed-stable.  This only overrides it when the
-	Character turns out to cast with one of the offered abilities.
-	"""
-	from AtlasLusoris.GuildKit import casting_ability
-
-	legal = tuple(
-		options
-		or ()
-		)
-	answers = casting_ability(
-		target
-		)
-
-	if answers and answers in legal:
-		target.species_spellcasting_ability = answers
-
-	return getattr(
-		target,
-		"species_spellcasting_ability",
-		None,
-		)
-
-
 def Resolve_Species_Spells(
 		target,
 		spell_progression,

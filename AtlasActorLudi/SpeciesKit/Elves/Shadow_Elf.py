@@ -23,6 +23,8 @@ class Shadow_Elf(
 	):
 	"""An Elf Heritage with deeper Darkvision and the magic of the Shadow."""
 
+	DARKVISION_RANGE = 120
+
 	HERITAGE_DESCRIPTION = (
 		"""Our kind took what was left: the Shadow realm. We are a bridge to that world, and it feels scary at times, but it's home. Nightmares come true in the Shadow realm, so we learnt to be stoic, reflective and analytic, to discern dream from thought. Our skin is some shade of grey, including perfect white and pitch black, and our eyes are all white. When hardship comes, we consult the oracles and mystics, and the wise Monks who follow the way of Shadows."""
 		)
@@ -49,4 +51,4 @@ class Shadow_Elf(
 			target,
 			Shadow_Elf,
 			)
-		target.darkvision = 120
+		target.darkvision = Shadow_Elf.DARKVISION_RANGE

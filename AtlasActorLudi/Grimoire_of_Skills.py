@@ -275,7 +275,7 @@ class Armor(Tool):
 
 
 class Char_Skills:
-	def __init__(self, AS, ProficiencyBonus, proficient_skills=None):
+	def __init__(self, character=None, AS=None, ProficiencyBonus=None, proficient_skills=None):
 		"""
 		Initialize Char_Skills with Ability Scores (AS), Proficiency Bonus (ProficiencyBonus),
 		and optional lists of proficient and expertise skills.
@@ -286,6 +286,9 @@ class Char_Skills:
 		- proficient_skills: List of skill names the character is proficient in.
 		- expertise_skills: List of skill names the character has expertise in.
 		"""
+		# QST-0016.2 threading, completed to the suite's contract: the
+		# character leads the signature; keyword callers are unaffected.
+		self.character = character
 		self.ProficiencyBonus = ProficiencyBonus
 
 		# STR
