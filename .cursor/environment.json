@@ -1,0 +1,18 @@
+{
+  "name": "DnD Shiny Toolkit",
+  "user": "ubuntu",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "install": "bash .cursor/install.sh",
+  "terminals": [
+    {
+      "name": "shiny-app",
+      "command": "./.venv/bin/shiny run --host 0.0.0.0 --port 8080 shiny_app.py",
+      "description": "Serves the D&D Shiny web app on http://localhost:8080"
+    }
+  ],
+  "ports": [
+    { "name": "shiny", "port": 8080 }
+  ]
+}
