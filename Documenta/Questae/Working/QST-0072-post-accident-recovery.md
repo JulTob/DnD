@@ -97,7 +97,13 @@ Neither lane edits the other lane's claimed files without a written handoff.
 - [x] Verify Player generation (`summon_player(seed=42, level=1)`, Cursor,
       2026-08-29 19:37). NonPlayer verification deferred to QST-0075.
 - [ ] Exit bytecode-bootstrap mode: real `.py` for every vaulted module on the
-      beta path (Claude lane).
+      beta path (Claude lane). Landed so far: `Map_of_Gear_Titles` (gate
+      PASS), `AlignmentKit` (gate PASS, self-test green), four SpeciesKit
+      modules (gate PASS), and `GuildKit` itself: recovered as its authentic
+      pre-wipe source from dangling git blob `62ece79e` plus two transcript
+      edits, marshalling byte-identical to the vault bytecode. Five valuable
+      dangling blobs are pinned against gc under `recovery-blob-*` tags,
+      including the lost NonPlayer rites grimoire (QST-0075 evidence).
 - [ ] Start and visually smoke-test Shiny (beta scope: character generator).
 - [ ] Record a coherent recovery commit.
 
