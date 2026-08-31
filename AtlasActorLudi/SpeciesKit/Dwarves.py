@@ -1,4 +1,36 @@
-"""Dwarves — temporarily loaded from vaulted bytecode (recovery 2026-08-29)."""
-from __future__ import annotations
-from AtlasActorLudi.SpeciesKit._bytecode_mod import load_vaulted
-load_vaulted('Dwarves.cpython-314.pyc', globals())
+"""The 2024 Dwarf Species Shape."""
+
+from TagKit import Imprint
+
+from AtlasActorLudi.SpeciesKit.bases import Humanoid
+from AtlasActorLudi.SpeciesKit.bases import Species
+from AtlasActorLudi.SpeciesKit.declarations import Player_Handbook_2024
+from AtlasActorLudi.SpeciesKit.physiology import Imprint_Species
+
+
+class Dwarf(
+	Species,
+	Humanoid,
+	):
+	"""A resilient Humanoid with an affinity for stone."""
+
+	@Imprint
+	def Set_Physiology(
+		target,
+		size=None,
+		):
+		Imprint_Species(
+			target,
+			Dwarf,
+			size,
+			)
+
+
+Player_Handbook_2024(
+	Dwarf,
+	weight=100,
+	size_options=(
+		"Medium",
+		),
+	speed=30,
+	)
