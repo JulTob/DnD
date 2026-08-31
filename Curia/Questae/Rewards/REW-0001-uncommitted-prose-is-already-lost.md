@@ -96,9 +96,9 @@ and to every other guild voice.
 > Workshop Consul (Artificer): The commit is the only copy that survives a
 > machine. Vault copies and backup refs are insurance, not history.
 
-**Provenance:** first landed as `a0c7da9` on `codex/recovery-2026-08-29`
-(still there, with `4e2ad9a` / `24ee174`). Cherry-picked onto `main` after
-that branch was force-moved to a parallel guild-kit restore. Transcript
-`55d5d61d`. Sketches at
+**Provenance:** on `main` as `59c792d` (2026-08-31). First authored as
+`a0c7da9` on `codex/recovery-2026-08-29` (still there, with `4e2ad9a` /
+`24ee174`). Cherry-picked onto the gate-verified kit restore after that
+`main` was force-moved. Transcript `55d5d61d`. Sketches at
 `.recovery-vault/grok-session-20260831/cleric-watcher-fantasy.md` on the
 recovery branch.
