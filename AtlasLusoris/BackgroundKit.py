@@ -28,6 +28,11 @@ from AtlasActorLudi.CharactersKit import (
 	)
 from AtlasActorLudi.Grimoire_of_AbilityScores import AbilityScores
 from AtlasActorLudi.Grimoire_of_Skills import Char_Skills
+# RECOVERY NOTE 2026-08-30: both imports below exist only for _still_open().
+# They look unused from a glance at the Background Tags; they are not.  See the
+# banner on _still_open before removing either.
+from AtlasActorLudi.ProficiencyKit import Is_Trained
+from AtlasInventarium.ToolsKit import TOOLS_BY_KEY
 from AtlasLusoris.AtlasOfBackgrounds import (
 	Register_Official_2024_Backgrounds,
 	)
@@ -599,6 +604,62 @@ def _grant_skills(
 			skill.set_proficiency()
 
 
+# ---------------------------------------------------------------------------
+# RECOVERY NOTE 2026-08-30 -- restored by hand; lost once already.
+#
+# This function was written on 2026-08-29 as one half of the Crafter / Musician
+# pool fix, and was then destroyed when this file was restored from a copy that
+# predated it.  It was re-applied on 2026-08-30.  Vault bytecode for
+# BackgroundKit is OLDER than this fix: restoring this file from
+# ``.recovery-vault`` will silently delete _still_open again.
+#
+# THE PAIR.  Two files, one behaviour, neither half works alone:
+#
+#   1. FeaturesKit     Reserved_Background_Training reserves only what a
+#                      Background CERTAINLY grants, so an Origin Feat is no
+#                      longer excluded from a whole Tool menu it should be able
+#                      to draw from.  (Reserving the menu made the Artisan,
+#                      Crafter and Entertainer Backgrounds 100% unbuildable.)
+#   2. HERE            The Background, which grants its Tool AFTER the Feat and
+#                      therefore knows what the Feat took, picks from what is
+#                      left.  That is what keeps Artisan's one Artisan's Tool
+#                      distinct from Crafter's three, giving four Tools rather
+#                      than a collision.
+#
+# See the matching banner in ``FeaturesKit.Background_Tool_Menu`` for the full
+# reasoning, including why a Precondition was rejected.
+# ---------------------------------------------------------------------------
+
+def _still_open(
+	char,
+	tools,
+	):
+	"""
+	Narrow a Background's Tool menu to what the Character has yet to learn.
+
+	A Background grants its Tool *after* its Origin Feat, and the two often
+	draw on the same menu: Artisan grants one Artisan's Tool and Crafter grants
+	three.  Reading the sheet at this point is what keeps those four distinct,
+	and it is why the Feat itself no longer has to reserve anything -- see
+	``FeaturesKit.Reserved_Background_Training``.
+
+	Falls back to the full menu when the Character somehow knows all of it, so
+	a Background that has nothing new to teach still grants a Tool rather than
+	failing to pick one.
+	"""
+	open_keys = [
+		key
+		for key in tools
+		if key not in TOOLS_BY_KEY
+		or not Is_Trained(
+			char,
+			TOOLS_BY_KEY[ key ],
+			)
+		]
+
+	return open_keys or list( tools )
+
+
 def _grant_tool(
 	char,
 	tools,
@@ -608,8 +669,9 @@ def _grant_tool(
 
 	pick = (
 		char.Pick(
-			list(
-				tools
+			_still_open(
+				char,
+				tools,
 				)
 			)
 		if isinstance(

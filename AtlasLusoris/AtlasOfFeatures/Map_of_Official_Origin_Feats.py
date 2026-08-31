@@ -233,6 +233,23 @@ def _grant_language(
 			)
 
 
+# ---------------------------------------------------------------------------
+# RECOVERY NOTE 2026-08-30 -- there must be exactly ONE _grant_training here.
+#
+# The 2026-08-29 restore left two definitions of this name in this file.  The
+# second was the pre-ledger version (took ``(char, options)``, returned a str,
+# wrote straight to the mutable sheet via set_proficiency).  Being later in the
+# file it shadowed this one, so every caller below -- all four pass
+# ``background_tag=`` and read a Training_Batch back -- died with
+# "TypeError: _grant_training() got an unexpected keyword argument
+# 'background_tag'".  The stale copy was deleted.
+#
+# If a future restore reintroduces a second definition, THIS is the one to keep:
+# it commits through the typed ledger (Plan_Feature_Training / Training_Batch)
+# and honours Reserved_Background_Training.  Check with:
+#     grep -c 'def _grant_training(' <this file>      # must print 1
+# ---------------------------------------------------------------------------
+
 def _grant_training(
 		char,
 		feature,
@@ -377,57 +394,6 @@ def _grant_language(
 		languages.append(
 			language
 			)
-
-
-def _grant_training(
-		char,
-		options,
-		) -> str:
-	"""Train one offered Skill or Tool, returning the trained name."""
-	choices = list(
-		options
-		)
-	pick = (
-		char.Pick(
-			choices
-			)
-		if len(choices) > 1
-		else choices[0]
-		)
-	skills = getattr(
-		char,
-		"skills",
-		None,
-		)
-	trained = getattr(
-		skills,
-		pick,
-		None,
-		) if skills is not None else None
-
-	if trained is not None and hasattr(
-			trained,
-			"set_proficiency",
-			):
-		trained.set_proficiency()
-		return pick
-
-	bag = getattr(
-		char,
-		"feat_training",
-		None,
-		)
-
-	if bag is None:
-		char.feat_training = [
-			pick,
-			]
-	elif pick not in bag:
-		bag.append(
-			pick
-			)
-
-	return pick
 
 
 def _proficiency_bonus(

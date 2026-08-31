@@ -90,3 +90,11 @@ minion_app.log
 
 # Local runtime data (SQLite scratch db)
 instance/
+
+# --- The recovery vault is NOT scratch. Do not ignore it. -------------------
+# .recovery-vault/ holds the .pyc files that survived the 2026-08-29 wipe.
+# They are the only surviving copy of a lot of authored text, and ~100 modules
+# import from them at runtime. The *.py[cod] rule above would silently leave
+# them untracked, which is how this work would be lost a second time.
+!.recovery-vault/
+!.recovery-vault/**

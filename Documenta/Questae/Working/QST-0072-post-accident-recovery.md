@@ -90,7 +90,7 @@ Neither lane edits the other lane's claimed files without a written handoff.
 - [x] Locate the Claude export, Codex session patches, archive, and bytecode.
 - [x] Reconstruct and isolate-test the Character and Gender foundation.
 - [x] Reconstruct Proficiency, Skills, Tools, Ability Scores, and Minion.
-- [ ] Restore Backgrounds and their registered catalogues.
+- [x] Restore Backgrounds and their registered catalogues (TOP tools/roleplay, Codex lane).
 - [ ] Restore Guilds, Wizard training, Alignment, and exposed dependencies.
 - [x] Import and compile the supported Shiny application (`shiny_app`; the
       modular `app.main` root stays down, deferred to QST-0074 by Decree 0006).
