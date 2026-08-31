@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+from AtlasLusoris.AtlasOfBackgrounds.Map_of_Arcana_Unleashed_Backgrounds import (
+	Register_Arcana_Unleashed_Backgrounds,
+	)
 from AtlasLusoris.AtlasOfBackgrounds.Map_of_Astarion_Backgrounds import (
 	Register_Astarion_Backgrounds,
 	)
@@ -22,7 +25,12 @@ from AtlasLusoris.AtlasOfBackgrounds.Map_of_Ravenloft_Backgrounds import (
 def Register_Official_2024_Backgrounds(
 		**routes,
 		) -> tuple[type, ...]:
-	"""Register all later official 2024-format Background source Maps."""
+	"""Register all later official 2024-format Background source Maps.
+
+	Arcana Unleashed is recovered as a Map but not enrolled here: its
+	preview Origin Feat (Arcane Infiltrator) is not on
+	BACKGROUND_ORIGIN_FEATS yet.
+	"""
 	return (
 		*Register_Eberron_Backgrounds(**routes),
 		*Register_Forgotten_Realms_Backgrounds(**routes),
@@ -33,5 +41,6 @@ def Register_Official_2024_Backgrounds(
 
 
 __all__ = (
+	"Register_Arcana_Unleashed_Backgrounds",
 	"Register_Official_2024_Backgrounds",
 	)

@@ -1,10 +1,33 @@
-"""SorcererKit — temporarily loaded from vaulted bytecode (recovery 2026-08-29)."""
+"""Sorcerer Specializations."""
 
-from __future__ import annotations
+from AtlasLusoris.GuildKit import Build_Specialization
+from AtlasLusoris.GuildKit import Sorcerer
 
-from AtlasLusoris.AtlasOfGuilds._bytecode_kit import load_vaulted_kit
 
-load_vaulted_kit(
-	"SorcererKit",
-	globals(),
+AberrantSorcery = Build_Specialization(
+	guild=Sorcerer,
+	name="Aberrant Sorcery",
+	module=__name__,
+	)
+ClockworkSorcery = Build_Specialization(
+	guild=Sorcerer,
+	name="Clockwork Sorcery",
+	module=__name__,
+	)
+DraconicSorcery = Build_Specialization(
+	guild=Sorcerer,
+	name="Draconic Sorcery",
+	module=__name__,
+	)
+WildMagicSorcery = Build_Specialization(
+	guild=Sorcerer,
+	name="Wild Magic Sorcery",
+	module=__name__,
+	)
+
+SPECIALIZATIONS = (
+	AberrantSorcery,
+	ClockworkSorcery,
+	DraconicSorcery,
+	WildMagicSorcery,
 	)

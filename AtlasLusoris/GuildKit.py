@@ -1,24 +1,20 @@
 """
-GuildKit — temporarily resurrected from surviving bytecode (recovery 2026-08-29).
+GuildKit — public TOP API for Guild Tags.
 
-Loads the vaulted Aug 28 ``GuildKit.cpython-314.pyc`` directly into this
-module's namespace (so Guild kit libraries can ``from AtlasLusoris.GuildKit
-import …`` while ``Load_Guild_Libraries`` runs). Vault path avoids
-``__pycache__`` clobber on import.
+The Character is the Target. Guild Shapes (Barbarian, Cleric, Wizard, …)
+are Tags. Apply with Apply_Guild / Join_Guild. Query with Find_Guild,
+Has, and Field membership (`agent in Cleric`).
+
+Mage, Martial, and Adept Pin Guild cards. That Field is the catalog;
+do not keep a parallel list of classes. Specialization Tags are
+more-specific Guild Shapes declared in AtlasOfGuilds.
+
+This module is the Ada spec. Construction still lives in
+Grimoire_of_Guilds until Build_Guild is rewritten as source.
 """
 
-from __future__ import annotations
+from AtlasLusoris.Grimoire_of_Guilds import *
+from AtlasLusoris.Grimoire_of_Guilds import __all__ as __all__
+from AtlasLusoris.AtlasOfGuilds import Load_Guild_Libraries
 
-import marshal
-from pathlib import Path
-
-_PYC = Path(
-	"/Users/tbs/Desktop/DnD/.recovery-vault/GuildKit.cpython-314.pyc"
-	)
-
-exec(
-	marshal.loads(
-		_PYC.read_bytes()[16:]
-		),
-	globals(),
-	)
+Load_Guild_Libraries()

@@ -1,10 +1,33 @@
-"""PaladinKit — temporarily loaded from vaulted bytecode (recovery 2026-08-29)."""
+"""Paladin Specializations."""
 
-from __future__ import annotations
+from AtlasLusoris.GuildKit import Build_Specialization
+from AtlasLusoris.GuildKit import Paladin
 
-from AtlasLusoris.AtlasOfGuilds._bytecode_kit import load_vaulted_kit
 
-load_vaulted_kit(
-	"PaladinKit",
-	globals(),
+Ancients = Build_Specialization(
+	guild=Paladin,
+	name="Ancients",
+	module=__name__,
+	)
+Devotion = Build_Specialization(
+	guild=Paladin,
+	name="Devotion",
+	module=__name__,
+	)
+Glory = Build_Specialization(
+	guild=Paladin,
+	name="Glory",
+	module=__name__,
+	)
+Vengeance = Build_Specialization(
+	guild=Paladin,
+	name="Vengeance",
+	module=__name__,
+	)
+
+SPECIALIZATIONS = (
+	Ancients,
+	Devotion,
+	Glory,
+	Vengeance,
 	)
