@@ -29,7 +29,7 @@ So you learned to hide the signs, and when you couldn't, to leave with nobody da
 			'''**Personal Weapon.** They promised a cure. Then they decided you were useful.
 Training had rules. You are dangerous. You are property. You do not get to want things. You do not deserve to walk free. A weapon is not allowed friends, because everything a weapon does is hurt, kill, destroy. They were not entirely wrong. That is the worst of it.
 
-You had to leave. They are still looking: patient, well funded, and getting closer. The next hunter is always tracking you down. They will come at you through the people around you. They will come through whoever stands beside you. Your companions are safer not knowing your name, and safest not knowing you at all. 
+You had to leave. They are still looking: patient, well funded, and getting closer. The next hunter is always tracking you down. They will come through whoever stands beside you. Your companions are safer not knowing your name, and safest not knowing you at all. 
 
 But... you breathe deeper, and you go where you like, and you stop to smell the roses, and you put your hands in cold streams. You are the one deciding your life. You would always rather be hunted than kept.'''
 			),
