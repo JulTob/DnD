@@ -63,6 +63,28 @@ def armour_allowance(
 	return ()
 
 
+def _unarmed_proficient(
+		skills,
+		name: str,
+		) -> bool:
+	skill = getattr(
+			skills,
+			name,
+			None,
+			)
+	if skill is None:
+		return False
+	check = getattr(
+			skill,
+			"is_proficient",
+			None,
+			)
+	return bool(
+			check
+			and check()
+			)
+
+
 def has_unarmoured_defence(
 		char,
 		) -> bool:
@@ -74,9 +96,48 @@ def has_unarmoured_defence(
 			)
 	if skills is None:
 		return False
-	return bool(
-			skills.Unarmed_Monk.is_proficient()
-			or skills.Unarmed_Barb.is_proficient()
+	return (
+			_unarmed_proficient(
+					skills,
+					"Unarmed_Monk",
+					)
+			or _unarmed_proficient(
+					skills,
+					"Unarmed_Barb",
+					)
+			or _unarmed_proficient(
+					skills,
+					"Unarmed_Dance",
+					)
+			)
+
+
+def armour_voids_unarmoured(
+		char,
+		) -> bool:
+	"""
+	True when worn armour or a shield turns the formula off.
+
+	Monk and College of Dance Unarmored Defense only apply while wearing
+	no armour and wielding no Shield. Barbarian Unarmored Defense does not
+	mind a shield, and Medium armour is still a legal (worse) option.
+	"""
+	skills = getattr(
+			char,
+			"skills",
+			None,
+			)
+	if skills is None:
+		return False
+	return (
+			_unarmed_proficient(
+					skills,
+					"Unarmed_Monk",
+					)
+			or _unarmed_proficient(
+					skills,
+					"Unarmed_Dance",
+					)
 			)
 
 
@@ -86,9 +147,10 @@ def unarmoured_formula(
 	"""
 	The Character's own no-armour AC.
 
-	Monk adds Wisdom, Barbarian adds Constitution; everyone else is the plain
-	10 + Dexterity. Returned as a number so ``armour_class`` can simply take
-	the better of it and any worn armour — no special-casing downstream.
+	Monk adds Wisdom, Barbarian adds Constitution, College of Dance adds
+	Charisma; everyone else is the plain 10 + Dexterity. Returned as a
+	number so ``armour_class`` can simply take the better of it and any
+	worn armour — no special-casing downstream.
 	"""
 	scores = getattr(
 			char,
@@ -112,24 +174,32 @@ def unarmoured_formula(
 	if skills is None:
 		return base
 
-	if skills.Unarmed_Monk.is_proficient():
+	bonuses = (
+			(
+					"Unarmed_Monk",
+					"WIS",
+					),
+			(
+					"Unarmed_Barb",
+					"CON",
+					),
+			(
+					"Unarmed_Dance",
+					"CHA",
+					),
+			)
+	for skill_name, ability in bonuses:
+		if not _unarmed_proficient(
+				skills,
+				skill_name,
+				):
+			continue
 		base = max(
 				base,
 				10 + dexterity + _modifier(
 						getattr(
 								scores,
-								"WIS",
-								10,
-								)
-						),
-				)
-	if skills.Unarmed_Barb.is_proficient():
-		base = max(
-				base,
-				10 + dexterity + _modifier(
-						getattr(
-								scores,
-								"CON",
+								ability,
 								10,
 								)
 						),
@@ -143,17 +213,14 @@ def may_use_shield(
 	"""
 	Shield training, tempered by whether a shield suits the build.
 
-	A Monk's Unarmored Defence is void while holding a shield, so the
-	generator does not hand one over; a Barbarian's is not, so it does.
+	Monk and Dance Unarmored Defense are void while holding a shield, so
+	the generator does not hand one over; a Barbarian's is not, so it does.
 	"""
 	from AtlasLusoris.GuildKit import HeavilyArmored, ModeratelyArmored
 
-	skills = getattr(
+	if armour_voids_unarmoured(
 			char,
-			"skills",
-			None,
-			)
-	if skills is not None and skills.Unarmed_Monk.is_proficient():
+			):
 		return False
 
 	return (
@@ -235,6 +302,7 @@ def trained_for(
 
 __all__ = (
 		"armour_allowance",
+		"armour_voids_unarmoured",
 		"has_unarmoured_defence",
 		"may_use_shield",
 		"trained_for",
@@ -248,6 +316,7 @@ def _self_test():
 		DEX = 14
 		CON = 16
 		WIS = 12
+		CHA = 16
 
 	class Skill:
 		def __init__(
@@ -267,12 +336,16 @@ def _self_test():
 				*,
 				unarmed_monk=False,
 				unarmed_barb=False,
+				unarmed_dance=False,
 				):
 			self.Unarmed_Monk = Skill(
 					unarmed_monk
 					)
 			self.Unarmed_Barb = Skill(
 					unarmed_barb
+					)
+			self.Unarmed_Dance = Skill(
+					unarmed_dance
 					)
 
 	class Dummy:
@@ -320,6 +393,25 @@ def _self_test():
 	assert has_unarmoured_defence(
 			barb
 			)
+
+	# --- College of Dance adds Charisma; armour and shields void it --------
+	dance = Dummy(
+			unarmed_dance=True,
+			)
+	assert unarmoured_formula(
+			dance
+			) == 15, unarmoured_formula(
+			dance
+			)
+	assert has_unarmoured_defence(
+			dance
+			)
+	assert armour_voids_unarmoured(
+			dance
+			)
+	assert may_use_shield(
+			dance
+			) is False, "a shield voids Dance Unarmored Defense"
 
 	# --- untrained Character: no armour allowance, no weapons beyond none --
 	naked = Dummy()

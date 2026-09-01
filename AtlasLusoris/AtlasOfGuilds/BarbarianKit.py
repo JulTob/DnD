@@ -4,13 +4,6 @@ from AtlasLusoris.GuildKit import Barbarian
 from AtlasLusoris.GuildKit import Build_Specialization
 
 
-# ---------------------------------------------------------------------------
-# Path of the Berserker
-# ---------------------------------------------------------------------------
-# Each Path speaks in second person and names the drive, not the rules: the
-# feature entries already carry the mechanics.
-
-
 BERSERKER_DESCRIPTION = (
 	"Most people hold something back. You don't. You are a wild horse. Untamed.\n\n"
 	"When you go, you go all the way. Furious in a fight. Delighted by a meal. "
@@ -20,7 +13,6 @@ BERSERKER_DESCRIPTION = (
 	"Some find that unsettling. But you could not be any other way. You are "
 	"the eye of the storm."
 	)
-
 Berserker = Build_Specialization(
 	guild=Barbarian,
 	name="Berserker",
@@ -29,23 +21,16 @@ Berserker = Build_Specialization(
 	heading="Path of the Berserker",
 	)
 
-
-# ---------------------------------------------------------------------------
-# Path of the Wild Heart
-# ---------------------------------------------------------------------------
-
-
 WILD_HEART_DESCRIPTION = (
-	"Your heart beats to the rhythms of nature. Your rage is harmony, "
-	"balance, and attention.\n\n"
-	"There is a bestial instinct that maybe all carry and few listen to. "
-	"You listen. You listen to the wolves and to the bears. Both the ones "
-	"you hunt with and the ones you carry in your spirit. You listen to "
-	"your place in the wilds, and you know you belong.\n\n"
+	"Your rage comes from a primal instinct. A connection to your "
+	"animalistic nature. A harmony with the bestial spirit. Your heart "
+	"beats to the rhythms of nature. Rage is how you listen to it.\n\n"
+	"You listen to the wolves and to the bears. Both the ones you hunt "
+	"with and the ones you carry in your spirit. You listen to your "
+	"place in the wilds, and you know you belong.\n\n"
 	"Now the world of civilization calls, and you carry the wild things "
 	"in your heart."
 	)
-
 WildHeart = Build_Specialization(
 	guild=Barbarian,
 	name="Wild Heart",
@@ -53,12 +38,6 @@ WildHeart = Build_Specialization(
 	extends=WILD_HEART_DESCRIPTION,
 	heading="Path of the Wild Heart",
 	)
-
-
-# ---------------------------------------------------------------------------
-# Path of the World Tree
-# ---------------------------------------------------------------------------
-
 
 WORLD_TREE_DESCRIPTION = (
 	"Rage comes to you as awe. A cosmic connection. A veil being lifted "
@@ -69,7 +48,6 @@ WORLD_TREE_DESCRIPTION = (
 	"and space. It is beautiful. You are very small. You are part of it. "
 	"You are not alone. If you can see through the veil, you can cross them."
 	)
-
 WorldTree = Build_Specialization(
 	guild=Barbarian,
 	name="World Tree",
@@ -77,13 +55,6 @@ WorldTree = Build_Specialization(
 	extends=WORLD_TREE_DESCRIPTION,
 	heading="Path of the World Tree",
 	)
-
-
-# ---------------------------------------------------------------------------
-# Path of the Zealot
-# ---------------------------------------------------------------------------
-# {name} is a projection slot: the Character sheet fills it in at render.
-
 
 ZEALOT_DESCRIPTION = (
 	"Ecstasy. Fervor. Revelation.\n\n"
@@ -93,7 +64,6 @@ ZEALOT_DESCRIPTION = (
 	"what the God wants of you, and you feel honored and moved. You are no "
 	"longer there, a God is. And facing you is blasphemous."
 	)
-
 Zealot = Build_Specialization(
 	guild=Barbarian,
 	name="Zealot",
@@ -102,4 +72,9 @@ Zealot = Build_Specialization(
 	heading="Path of the Zealot",
 	)
 
-SPECIALIZATIONS = Barbarian.SPECIALIZATIONS
+SPECIALIZATIONS = (
+	Berserker,
+	WildHeart,
+	WorldTree,
+	Zealot,
+	)

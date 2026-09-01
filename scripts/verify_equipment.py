@@ -17,7 +17,7 @@ Invariants checked
 	6. A Character only wields weapons their Guild trained them for, and
 	   never a firearm.
 	7. Armour worn is within the Guild's armour training.
-	8. A Monk keeps Unarmored Defence — no armour, no shield.
+	8. Unarmored Defence that armour would void (Monk, Dance) stays unarmoured.
 	9. Every equipped item is actually owned.
 	10. Weapon Mastery: the right COUNT, every mastered weapon is CARRIED,
 	    melee-only Guilds never master a non-Thrown ranged weapon, and the
@@ -89,6 +89,7 @@ def check_records(failures):
 def check_character(char, guild, level, seed, failures):
 	from AtlasInventarium.GearKit import (
 			armour_allowance,
+			armour_voids_unarmoured,
 			current_armour_class,
 			unarmoured_formula,
 			weapon_pool,
@@ -213,15 +214,15 @@ def check_character(char, guild, level, seed, failures):
 					f"wears {worn.armour_kind} armour but is trained for {allowance}"
 					)
 
-	# --- Unarmored Defence classes stay unarmoured -------------------------
-	if char.skills.Unarmed_Monk.is_proficient():
+	# --- Unarmored Defence that armour would void stays unarmoured ---------
+	if armour_voids_unarmoured(char):
 		if worn is not None:
 			fail(
-					f"Monk wears {worn.called}, voiding Unarmored Defence"
+					f"{worn.called} worn, voiding Unarmored Defence"
 					)
 		if loadout.offhand is not None:
 			fail(
-					"Monk carries a shield, voiding Unarmored Defence"
+					"shield carried, voiding Unarmored Defence"
 					)
 
 	# --- everything equipped is owned --------------------------------------

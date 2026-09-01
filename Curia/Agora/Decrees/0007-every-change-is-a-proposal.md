@@ -2,6 +2,7 @@
 
 - **Issued by:** Julio, in chat, 2026-09-01
 - **Recorded by:** Claude, same day
+- **Status:** active
 - **Worked example:** the Aberrant Mutant review (commit `6de5d83`), evaluated
   before landing and committed with its findings and one open question
 - **Related:** Canon/Modus-Operandi.md · Canon/TagKit-Doctrine.md ·

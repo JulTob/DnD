@@ -98,3 +98,9 @@ instance/
 # them untracked, which is how this work would be lost a second time.
 !.recovery-vault/
 !.recovery-vault/**
+
+# --- Session scratch & Finder duplicates (Decree 0008 / QST-0052) ---
+$S/
+.safepoint/
+* 2.py
+* 2.md

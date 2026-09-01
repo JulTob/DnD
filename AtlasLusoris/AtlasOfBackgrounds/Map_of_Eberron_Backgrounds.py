@@ -15,20 +15,29 @@ RECORDS = (
 	Background(
 		name='Aberrant Mutant',
 		description=(
-			"There is a word for what you are. Aberration.\n\nYou did not ask for whatever happened to you. It came like a crack that broke your life. Everyone looks at you, scared, and they are not entirely wrong. \n\nSo you learned to be a face nobody recalls. To leave a room with nobody daring to move first. You know how to keep it shut. To keep it inside. To never let it out. To never look inside, and never look away either. To not hurt anyone else again. \n\nThat is the life of an aberration like you. The rest is to be hunted."
+			"""There is a word for what you are: Aberration. 
+			
+You did not ask for what happened. It came like a crack that broke the life you had. People look at you scared. They are not entirely wrong.
+
+So you learned to hide the signs, and when you couldn't, to leave with nobody daring to move first. You know how to keep it shut. To keep it inside. To never let it out. To never look inside, and never look away either. To not hurt anyone else again. But it always finds a way out. The life of an aberration is to be hunted."""
 			),
 		abilities=('STR', 'CON', 'CHA',),
 		origin_feat='Mutant Aberration',
 		skills=('History', 'Intimidation',),
 		tools='Disguise_Kit',
 		roleplay=(
-			'**Personal Weapon.** You were not always running. You were promised a cure. Then somebody decided your curse was a weapon they wanted to wield. What came after had rules. You are dangerous. You are property. You do not get to want things. You do not deserve to walk free. You are a weapon that happens to have a face, and a weapon is not allowed friends, because everything a weapon does is hurt, kill, destroy. They were not wrong. That is the worst of it. But you had to leave. So you left. Nobody has stopped looking. They are patient and well funded, and they do not need to be right about where you are, only close. They will come at you through the people around you. Anyone who walks beside you is a lever. Your companions are safer not knowing your name, and safest not knowing you at all. There is nothing in this for you. Only the next hunter tracking you down. But... breathe deep, and you go where you like, and you stop to smell the roses and put your hands in cold streams. You are the one deciding your life. You would rather be hunted as a free person than kept as a caged animal.'
+			'''**Personal Weapon.** They promised a cure. Then they decided you were useful.
+Training had rules. You are dangerous. You are property. You do not get to want things. You do not deserve to walk free. A weapon is not allowed friends, because everything a weapon does is hurt, kill, destroy. They were not entirely wrong. That is the worst of it.
+
+You had to leave. They are still looking: patient, well funded, and getting closer. The next hunter is always tracking you down. They will come through whoever stands beside you. Your companions are safer not knowing your name, and safest not knowing you at all. 
+
+But... you breathe deeper, and you go where you like, and you stop to smell the roses, and you put your hands in cold streams. You are the one deciding your life. You would always rather be hunted than kept.'''
 			),
 		),
 	Background(
 		name='Archaeologist',
 		description=(
-			"The gold is the least interesting thing in this job.\n\nThat is not modesty, and it is not virtue, whatever anyone decides about you afterwards. It is arithmetic. A gold cup buys you one good year. An accurate account of where that cup stood, what lay around it, which way the body was facing and what was cut above the door, buys you the rest of your life: the next expedition, the letter of introduction, the archive that opens for you and stays shut for everybody else. Loot gets spent. A record will make you the reference.\n\nSo you made yourself into the instrument that carries the record home. You can reach places nobody sensible wants to go, and, far more importantly, get out of them again, which is the part the stories always skip. You have crossed country that kills people who packed badly. You have gone through a window at speed with a lamp in your teeth. You have talked past a border guard in a language you started learning two weeks earlier on the road. You know how a site should be entered so that it can still be read afterwards, and you know when to turn around and leave one, which is a skill nobody has ever thanked you for and the reason you are still alive.\n\nAnd you draw. All of it, every hour: the route in, the elevation, the chamber, the marks on the lintel copied exactly, including the ones you cannot read yet. Half your work happens afterwards by lamplight, with a pen, and it is the half that lasts.\n\nYou are not a scholar who travels. You are a traveller who reads. That difference has kept both sorts of people at arm's length from you your whole life, and you stopped minding a long time ago."
+			"The gold is the least interesting thing in this job.\n\nIt is arithmetic. A gold cup buys you one good year. An accurate account of where that cup stood, what lay around it, which way the body was facing and what was cut above the door, buys you the rest of your life: the next expedition, the letter of introduction, the archive that opens for you and stays shut for everybody else. Loot gets spent. A record will make you the reference.\n\nSo you made yourself into the instrument that carries the record home. You can reach places nobody sensible wants to go, and, far more importantly, get out of them again, which is the part the stories always skip. You have crossed country that kills people who packed badly. You have gone through a window at speed with a lamp in your teeth. You have talked past a border guard in a language you started learning two weeks earlier on the road. You know how a site should be entered so that it can still be read afterwards, and you know when to turn around and leave one, which is a skill nobody has ever thanked you for and the reason you are still alive.\n\nAnd you draw. All of it, every hour: the route in, the elevation, the chamber, the marks on the lintel copied exactly, including the ones you cannot read yet. Half your work happens afterwards by lamplight, with a pen, and it is the half that lasts.\n\nYou are not a scholar who travels. You are a traveller who reads. That difference has kept both sorts of people at arm's length from you your whole life, and you stopped minding a long time ago."
 			),
 		abilities=('DEX', 'INT', 'WIS',),
 		origin_feat='Skilled',

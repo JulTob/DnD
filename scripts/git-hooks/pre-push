@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Decree 0008 — smoke gate before sharing commits.
+set -euo pipefail
+
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT"
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+	[[ -z "${remote_ref:-}" ]] && continue
+	if [[ "${remote_ref}" == *"/main" ]] || [[ "${remote_ref}" == *"/product" ]]; then
+		if [[ "${ALLOW_FORCE_MAIN:-}" != "1" ]] && [[ "${remote_sha}" != "0000000000000000000000000000000000000000" ]]; then
+			merge_base="$(git merge-base "${local_sha}" "${remote_sha}" 2>/dev/null || true)"
+			if [[ -n "${merge_base}" ]] && [[ "${merge_base}" != "${remote_sha}" ]] && ! git merge-base --is-ancestor "${remote_sha}" "${local_sha}" 2>/dev/null; then
+				echo "pre-push: non-fast-forward push to ${remote_ref} blocked." >&2
+				echo "Archive the old tip, then ALLOW_FORCE_MAIN=1 git push … if intentional." >&2
+				exit 1
+			fi
+		fi
+	fi
+done
+
+if [[ -x "${ROOT}/.venv/bin/python" ]]; then
+	make -C "${ROOT}" smoke-player >/dev/null
+fi

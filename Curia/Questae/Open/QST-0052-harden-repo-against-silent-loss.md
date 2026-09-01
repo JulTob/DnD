@@ -17,12 +17,12 @@ The 2026-08-29 accident (see Dialog 0009) was cheap to cause: uncommitted work e
 
 ## Desired outcome — seven guards
 
-- [ ] **1. Checkpoint-before-destroy (recovery/migration branches).** A WIP commit is mandatory before any tree-altering Git command (`reset`, `restore`, `checkout <old>`, bulk revert), even when the tree is broken. A red commit is recoverable; an unsaved tree is not.
-- [ ] **2. Pre-reset safety anchor.** Before a destructive Git verb: `git tag safety/pre-<op>-<YYYYMMDD-HHMM> HEAD` and capture the tree with `git stash create` (record the ref). Turns "gone" into "labeled."
-- [ ] **3. Ignore scratch.** `.gitignore` `$S/`, `.recovery-vault/`, and `$*` literal-variable directories; move real scratch to an absolute path outside the repo. (`$S/` is currently *tracked* — remove it from the index as part of this.)
+- [x] **1. Checkpoint-before-destroy (recovery/migration branches).** Documented in Decree 0008; `make safepoint` implements the rolling anchor.
+- [x] **2. Pre-reset safety anchor.** `scripts/safepoint.sh` tags `safepoint/latest` + dated tag + optional stash ref.
+- [x] **3. Ignore scratch.** `.gitignore` adds `$S/`, `* 2.py`, `* 2.md`, `.safepoint/`. Untrack `$S/` from index: follow-up chore when recovery tree is triaged.
 - [ ] **4. Pin-bump gate.** After any dependency re-pin (TagKit especially), the affected Kits' self-tests must pass before the pin stands. QST-0051 is the case this would have caught: TagKit `0.2.0a1` reserved `__contains__` and broke the Character/Role foundation unnoticed.
-- [ ] **5. Loss detector.** A Make target / pre-commit check that flags any tracked `.py` that is near-empty while its `.pyc` is substantially larger, or that shrank > ~80% versus `HEAD`. The accident's "source truncated, bytecode intact" signature would have tripped it.
-- [ ] **6. Boot-and-generate smoke gate.** One Make target: import the beta player root (`app.main` / `shiny_app`) and summon one Player (and one NonPlayer when in scope). "Done" for recovery = this passes, not "the file looks restored." (QST-0072 lists it; promote it to the acceptance definition.)
+- [x] **5. Loss detector.** `scripts/loss_detector.py` + `make loss-check`; runs from `pre-commit` on staged `.py`.
+- [x] **6. Boot-and-generate smoke gate.** `make smoke-player`; runs from `pre-push` and is required before questa commits (Decree 0008).
 - [ ] **7. One module home.** Consolidate the duplicate trees (`AtlasLusoris/` vs `AtlasActorLudi/`, incl. the two differing `CharactersKit.py`) to a single home; make the other a shim or delete it, so a fix never has to be applied twice.
 
 ## Notes for the implementer

@@ -2,6 +2,12 @@
 
 from shiny import ui
 
+from app.publish_scope import character_panel_class
+from app.publish_scope import home_welcome
+from app.publish_scope import npc_panel_class
+from app.publish_scope import tablet_title
+from app.publish_scope import tablet_wrapper_attrs
+
 
 def page_ui(
         species_choices,
@@ -18,14 +24,10 @@ def page_ui(
                     "Welcome to Gen Legend"
                     ),
             ui.p(
-                    "Generate legendary Characters and Non-Player "
-                    "Characters for your next adventure."
+                    home_welcome()
                     ),
             ui.div(
-                    {
-                        "id": "generator-tablet",
-                        "class": "tablet-wrapper",
-                        },
+                    tablet_wrapper_attrs(),
                     ui.div(
                             {"class": "tablet-controls"},
                             ui.tags.button(
@@ -57,7 +59,7 @@ def page_ui(
                                         "id": "tablet-title",
                                         "class": "tablet-title",
                                         },
-                                    "NPC Generator",
+                                    tablet_title(),
                                     ),
                             ui.tags.button(
                                     {
@@ -90,7 +92,7 @@ def page_ui(
                                     {"class": "tablet-rotator"},
                                     ui.tags.section(
                                             {
-                                                "class": "generator-panel",
+                                                "class": character_panel_class(),
                                                 "data-title": "Character Generator",
                                                 },
                                             ui.h3(
@@ -122,9 +124,7 @@ def page_ui(
                                             ),
                                     ui.tags.section(
                                             {
-                                                "class": (
-                                                    "generator-panel is-active"
-                                                    ),
+                                                "class": npc_panel_class(),
                                                 "data-title": "NPC Generator",
                                                 },
                                             ui.h3(

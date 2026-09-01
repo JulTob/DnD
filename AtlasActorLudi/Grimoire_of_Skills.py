@@ -377,6 +377,7 @@ class Char_Skills:
 		self.Heavy = Armor('Heavy Armor')
 		self.Unarmed_Monk = Armor('Unarmed Defense')
 		self.Unarmed_Barb = Armor('Unarmed Defense')
+		self.Unarmed_Dance = Armor('Unarmed Defense')
 
 	@property
 	def list(self):
@@ -456,6 +457,7 @@ class Char_Skills:
 			self.Heavy,
 			self.Unarmed_Monk,
 			self.Unarmed_Barb,
+			self.Unarmed_Dance,
 			]
 
 	def get_proficient_armors(self):

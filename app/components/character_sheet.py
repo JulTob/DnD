@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from html import escape
 from typing import Any
 
@@ -13,9 +14,9 @@ from app.components.shared import attack_rolls_html
 from app.components.shared import feature_item
 from app.components.shared import html_prose
 from app.components.shared import prose
-from app.components.shared import prose_section
 from app.components.shared import safe_int
 from app.components.shared import safe_str
+from app.components.shared import sheet_branch
 from app.components.shared import skill_rows
 from app.components.shared import text_html
 from app.components.spellbook import known_spells_rail_box
@@ -117,7 +118,32 @@ def _normalize_chip_pairs(
     triples: list[tuple[str, str, str]] = []
     for item in chips:
         symbol = ""
-        if isinstance(
+        if hasattr(
+                item,
+                "label",
+                ) and hasattr(
+                item,
+                "value",
+                ) and not isinstance(
+                item,
+                (
+                        tuple,
+                        list,
+                        dict,
+                        ),
+                ):
+            label = item.label
+            value = item.value
+            symbol = getattr(
+                    item,
+                    "symbol",
+                    "",
+                    ) or getattr(
+                    item,
+                    "icon",
+                    "",
+                    ) or ""
+        elif isinstance(
                 item,
                 dict,
                 ):
@@ -465,18 +491,518 @@ def _practice_entries(
     return entries
 
 
+def _feature_source(
+        current_feature: Any,
+        ) -> str:
+    return safe_str(
+            getattr(
+                    current_feature,
+                    "source",
+                    "",
+                    ),
+            "",
+            )
+
+
+def _feature_name(
+        current_feature: Any,
+        ) -> str:
+    return safe_str(
+            getattr(
+                    current_feature,
+                    "name",
+                    "",
+                    ),
+            "",
+            )
+
+
+def _feature_description(
+        current_feature: Any,
+        ) -> str:
+    return safe_str(
+            getattr(
+                    current_feature,
+                    "description",
+                    "",
+                    ),
+            "",
+            )
+
+
+def _is_species_description(
+        current_feature: Any,
+        data: dict[str, Any],
+        ) -> bool:
+    name = _feature_name(
+            current_feature
+            ).casefold()
+    species = safe_str(
+            data.get(
+                    "Species",
+                    "",
+                    ),
+            "",
+            ).casefold()
+    heritage = safe_str(
+            data.get(
+                    "Heritage",
+                    "",
+                    ),
+            "",
+            ).casefold()
+    identity = _species_identity(
+            data
+            ).casefold()
+
+    return name in {
+            species,
+            heritage,
+            identity,
+            }
+
+
+def _is_versatile_origin(
+        current_feature: Any,
+        ) -> bool:
+    source = _feature_source(
+            current_feature
+            )
+    return (
+            source.startswith(
+                    "Species Feature"
+                    )
+            and "Versatile" in source
+            )
+
+
+def _versatile_origin_entries(
+        current_feature: Any,
+        ) -> list[Any]:
+    """Human Versatile: the extra Origin Feat, named as a species rule."""
+    name = _feature_name(
+            current_feature
+            )
+    entries = [
+            prose(
+                    "Humans have complex lives, and they adapt quickly.\n\n"
+                    f"You have this extra Origin Feat: **{name}**."
+                    ),
+            ]
+    rendered = _render_feature(
+            current_feature
+            )
+
+    if rendered is not None:
+        entries.append(
+                rendered
+                )
+
+    return entries
+
+
+def _render_description(
+        current_feature: Any,
+        ) -> Any | None:
+    """Identity prose without repeating the section title as a lead line."""
+    if _feature_name(
+            current_feature
+            ) == "Creature Type":
+        return None
+
+    description = _feature_description(
+            current_feature
+            ).strip()
+
+    if not description:
+        return None
+
+    return prose(
+            description
+            )
+
+
+def _maybe_branch(
+        title: str,
+        entries: list[Any],
+        *,
+        level: int = 3,
+        ) -> Any | None:
+    if not entries:
+        return None
+
+    return sheet_branch(
+            title,
+            *entries,
+            level=level,
+            )
+
+
+def _present(
+        *nodes: Any | None,
+        ) -> list[Any]:
+    return [
+            node
+            for node in nodes
+            if node is not None
+            ]
+
+
+_TOOL_MARKERS = (
+    "Tools",
+    "Kit",
+    "Supplies",
+    "Utensils",
+    "Set",
+    "Instrument",
+    )
+
+
+def _is_tool_proficiency(
+        name: str,
+        ) -> bool:
+    return any(
+            marker in name
+            for marker in _TOOL_MARKERS
+            )
+
+
+def _tool_proficiency_names(
+        data: dict[str, Any],
+        ) -> list[str]:
+    names = []
+    seen: set[str] = set()
+
+    for raw in data.get(
+            "other_proficiencies"
+            ) or []:
+        name = safe_str(
+                raw
+                ).strip()
+
+        if (
+                not name
+                or name in seen
+                or not _is_tool_proficiency(
+                        name
+                        )
+                ):
+            continue
+
+        seen.add(
+                name
+                )
+        names.append(
+                name
+                )
+
+    return names
+
+
+def _combat_proficiency_names(
+        data: dict[str, Any],
+        ) -> list[str]:
+    names = []
+
+    for raw in data.get(
+            "other_proficiencies"
+            ) or []:
+        name = safe_str(
+                raw
+                ).strip()
+
+        if (
+                name
+                and not _is_tool_proficiency(
+                        name
+                        )
+                ):
+            names.append(
+                    name
+                    )
+
+    return names
+
+
+def _spell_branch_title(
+        data: dict[str, Any],
+        ) -> str:
+    guild = safe_str(
+            data.get(
+                    "Class",
+                    "",
+                    ),
+            "",
+            )
+
+    if guild.casefold() == "warlock":
+        return "Pact Spells"
+
+    return "Spells"
+
+
+def _class_identity(
+        data: dict[str, Any],
+        ) -> str:
+    """The Class branch names the guild, then the subclass if there is one."""
+    guild = safe_str(
+            data.get(
+                    "Class",
+                    "-",
+                    ),
+            "-",
+            )
+    subclass = safe_str(
+            data.get(
+                    "Subclass",
+                    "",
+                    ),
+            "",
+            )
+
+    if not subclass or subclass == "-":
+        return guild
+
+    return f"{guild}, {subclass}"
+
+
+def _tool_proficiencies_branch(
+        data: dict[str, Any],
+        *,
+        level: int = 3,
+        ) -> Any | None:
+    names = _tool_proficiency_names(
+            data
+            )
+    practices = _practice_entries(
+            data.get(
+                    "Practices",
+                    (),
+                    )
+            )
+    children: list[Any] = []
+
+    if names:
+        children.append(
+                ui.tags.ul(
+                        {
+                            "class": "sheet-tool-list"
+                            },
+                        *[
+                            ui.tags.li(
+                                    name
+                                    )
+                            for name in names
+                            ],
+                        )
+                )
+
+    if practices:
+        children.append(
+                sheet_branch(
+                        "Practices",
+                        *practices,
+                        level=level + 1,
+                        )
+                )
+
+    if not children:
+        return None
+
+    return sheet_branch(
+            "Tool Proficiencies",
+            *children,
+            level=level,
+            )
+
+
+def _split_described_layers(
+        text: str,
+        ) -> tuple[str, list[tuple[str, str]]]:
+    """
+    Split a composed Guild Describe() into the Guild's own prose and each
+    named layer beneath it (``### Path of the Wild Heart``, ``### Archfey
+    Patron``, …).
+    """
+    chunks = re.split(
+            r"^### ",
+            text.strip(),
+            flags=re.MULTILINE,
+            )
+    if not chunks:
+        return "", []
+
+    lead = chunks[ 0 ].strip()
+    layers: list[tuple[str, str]] = []
+
+    for chunk in chunks[ 1: ]:
+        heading, _, rest = chunk.partition(
+                "\n"
+                )
+        title = heading.strip()
+        body = rest.strip()
+
+        if title and body:
+            layers.append(
+                    (
+                            title,
+                            body,
+                            )
+                    )
+
+    return lead, layers
+
+
+def _append_guild_layers(
+        tree: dict[str, list[Any]],
+        current_feature: Any,
+        ) -> None:
+    lead, layers = _split_described_layers(
+            _feature_description(
+                    current_feature
+                    )
+            )
+
+    if lead:
+        tree[ "class_description" ].append(
+                prose(
+                        lead
+                        )
+                )
+
+    for title, body in layers:
+        tree[ "class_layers" ].append(
+                sheet_branch(
+                        title,
+                        prose(
+                                body
+                                ),
+                        level=3,
+                        )
+                )
+
+
+def _feature_tree(
+        features: Any,
+        data: dict[str, Any],
+        ) -> dict[str, list[Any]]:
+    """Split Features into the nested sheet tree Julio asked for."""
+    tree: dict[str, list[Any]] = {
+            "species_description": [],
+            "species_features": [],
+            "species_versatile": [],
+            "background_description": [],
+            "background_hook": [],
+            "background_origin": [],
+            "class_description": [],
+            "class_layers": [],
+            "class_levels": [],
+            "class_invocations": [],
+            }
+
+    for current_feature in _ordered_features(
+            features
+            ):
+        source = _feature_source(
+                current_feature
+                )
+        section = _feature_place(
+                current_feature
+                )[ 0 ]
+
+        if section == _SECTION_SPECIES:
+            if _is_versatile_origin(
+                    current_feature
+                    ):
+                tree[ "species_versatile" ].extend(
+                        _versatile_origin_entries(
+                                current_feature
+                                )
+                        )
+                continue
+            if _is_species_description(
+                    current_feature,
+                    data,
+                    ):
+                rendered = _render_description(
+                        current_feature
+                        )
+                bucket = "species_description"
+            else:
+                rendered = _render_feature(
+                        current_feature
+                        )
+                bucket = "species_features"
+        elif section == _SECTION_BACKGROUND:
+            if source.startswith(
+                    "Background Hook"
+                    ):
+                rendered = _render_feature(
+                        current_feature
+                        )
+                bucket = "background_hook"
+            elif source.startswith(
+                    (
+                        "Origin Feat",
+                        "Background Feat",
+                        )
+                    ):
+                rendered = _render_feature(
+                        current_feature
+                        )
+                bucket = "background_origin"
+            else:
+                rendered = _render_description(
+                        current_feature
+                        ) or _render_feature(
+                        current_feature
+                        )
+                bucket = "background_description"
+        else:
+            if source.startswith(
+                    "Guild"
+                    ):
+                _append_guild_layers(
+                        tree,
+                        current_feature,
+                        )
+                continue
+            elif (
+                    source.startswith(
+                            "Eldritch Invocation"
+                            )
+                    or source.startswith(
+                            "Invocation"
+                            )
+                    ):
+                rendered = _render_feature(
+                        current_feature
+                        )
+                bucket = "class_invocations"
+            else:
+                rendered = _render_feature(
+                        current_feature
+                        )
+                bucket = "class_levels"
+
+        if rendered is None:
+            continue
+
+        tree[ bucket ].append(
+                rendered
+                )
+
+    return tree
+
+
 def _grouped_feature_entries(
         features: Any,
         ) -> dict[int, list[Any]]:
     """
     Rendered entries bucketed by section — Species, Background, Class.
 
-    A caller wants three titled blocks, not one generic "Features" dump: the
-    section header should name the actual Species, Background, or Class,
-    the way every other reader already expects from title/description/hook.
-    Unclassified sources fold into Class, the safest default and, per the
-    260-character regression sweep this was verified against, one that never
-    actually receives anything.
+    Kept for callers that still want three flat blocks. The sheet itself
+    reads `_feature_tree`.
     """
     grouped: dict[int, list[Any]] = {
         _SECTION_SPECIES: [],
@@ -889,6 +1415,59 @@ def _class_heading(
     return f"{class_title}, {subclass}"
 
 
+def _rail_named_list(
+        title: str,
+        names: list[str],
+        ) -> ui.Tag:
+    return ui.div(
+            {"class": "npc-textbox"},
+            ui.h2(
+                    title
+                    ),
+            ui.tags.ul(
+                    *[
+                        ui.tags.li(
+                                safe_str(
+                                        name
+                                        )
+                                )
+                        for name in names
+                        ],
+                    ),
+            )
+
+
+def _language_body(
+        languages: Any,
+        ) -> str:
+    if hasattr(
+            languages,
+            "AsListHTML",
+            ):
+        return languages.AsListHTML()
+
+    langs = getattr(
+            languages,
+            "langs",
+            None,
+            )
+    if langs:
+        return (
+            "<i>"
+            + "<br>".join(
+                    sorted(
+                            langs
+                            )
+                    )
+            + "</i>"
+            )
+
+    return safe_str(
+            languages,
+            "<i>Common</i>",
+            )
+
+
 def _rail_items(
         data: dict[str, Any],
         stats: Any,
@@ -933,23 +1512,27 @@ def _rail_items(
                         ),
                 ),
         ]
-    proficiencies = data.get(
-            "other_proficiencies"
-            ) or []
+    proficiencies = _combat_proficiency_names(
+            data
+            )
 
     if proficiencies:
         items.append(
-                ui.div(
-                        {"class": "npc-textbox"},
-                        ui.h2("Proficiencies"),
-                        ui.tags.ul(
-                                *[
-                                    ui.tags.li(
-                                            safe_str(proficiency)
-                                            )
-                                    for proficiency in proficiencies
-                                    ],
-                                ),
+                _rail_named_list(
+                        "Proficiencies",
+                        proficiencies,
+                        )
+                )
+
+    tool_names = _tool_proficiency_names(
+            data
+            )
+
+    if tool_names:
+        items.append(
+                _rail_named_list(
+                        "Tools",
+                        tool_names,
                         )
                 )
 
@@ -957,22 +1540,14 @@ def _rail_items(
             "Languages"
             )
     if languages is not None:
-        if hasattr(
-                languages,
-                "AsListHTML",
-                ):
-            language_body = languages.AsListHTML()
-        else:
-            language_body = safe_str(
-                    languages,
-                    "<i>Common</i>",
-                    )
         items.append(
                 ui.div(
                         {"class": "npc-textbox"},
                         ui.h2("Languages"),
                         html_prose(
-                                language_body
+                                _language_body(
+                                        languages
+                                        )
                                 ),
                         )
                 )
@@ -1035,9 +1610,10 @@ def _equipment_section(
                     )
             )
 
-    return prose_section(
+    return sheet_branch(
             "Equipment",
             *content,
+            level=2,
             )
 
 
@@ -1046,77 +1622,121 @@ def _prose_sections(
         raw_features: Any,
         spellcaster: Any,
         ) -> list[Any]:
-    # Three titled blocks, not one generic "Features" dump — a reader could
-    # not tell Species from Background from Class under one flat heading,
-    # and every entry already knows which of the three it belongs to.
-    grouped = _grouped_feature_entries(
-            raw_features
+    """Identity as a tree: Species, Background (with tools), Class, then Backstory."""
+    tree = _feature_tree(
+            raw_features,
+            data,
+            )
+    species_name = _species_identity(
+            data
+            )
+    background_name = safe_str(
+            data.get(
+                    "Background",
+                    "-",
+                    ),
+            "-",
+            )
+    class_name = safe_str(
+            data.get(
+                    "Class",
+                    "-",
+                    ),
+            "-",
+            )
+    class_children = _present(
+            _maybe_branch(
+                    f"{class_name} Description",
+                    tree[ "class_description" ],
+                    ),
+            *tree[ "class_layers" ],
+            _maybe_branch(
+                    "Level features",
+                    tree[ "class_levels" ],
+                    ),
+            _maybe_branch(
+                    "Invocations",
+                    tree[ "class_invocations" ],
+                    ),
             )
 
-    def _block(
-            title: str,
-            entries: list[Any],
-            ) -> Any:
-        return prose_section(
-                title,
-                *(
-                    entries
-                    or (
-                        ui.p(
-                                "None"
+    if spellcaster is not None:
+        class_children.append(
+                sheet_branch(
+                        _spell_branch_title(
+                                data
                                 ),
+                        html_prose(
+                                spellbook_html(
+                                        spellcaster
+                                        )
+                                ),
+                        level=3,
                         )
-                    ),
                 )
 
     sections: list[Any] = [
-        _block(
-                _species_identity(
-                        data
-                        ),
-                grouped[ _SECTION_SPECIES ],
-                ),
-        _block(
-                safe_str(
-                        data.get(
-                                "Background",
-                                "-",
-                                ),
-                        "-",
-                        ),
-                grouped[ _SECTION_BACKGROUND ],
-                ),
-        _block(
-                _class_heading(
-                        data
-                        ),
-                grouped[ _SECTION_CLASS ],
-                ),
-        ]
-    practices = _practice_entries(
-            data.get(
-                    "Practices",
-                    (),
-                    )
+            sheet_branch(
+                    species_name,
+                    *_present(
+                            _maybe_branch(
+                                    f"{species_name} Description",
+                                    tree[ "species_description" ],
+                                    ),
+                            _maybe_branch(
+                                    "Extra Origin Feat",
+                                    tree[ "species_versatile" ],
+                                    ),
+                            _maybe_branch(
+                                    f"{species_name} Features",
+                                    tree[ "species_features" ],
+                                    ),
+                            ),
+                    level=2,
+                    ),
+            sheet_branch(
+                    background_name,
+                    *_present(
+                            _maybe_branch(
+                                    "Description",
+                                    tree[ "background_description" ],
+                                    ),
+                            _maybe_branch(
+                                    "Hook",
+                                    tree[ "background_hook" ],
+                                    ),
+                            _maybe_branch(
+                                    "Origin Feat",
+                                    tree[ "background_origin" ],
+                                    ),
+                            _tool_proficiencies_branch(
+                                    data
+                                    ),
+                            ),
+                    level=2,
+                    ),
+            sheet_branch(
+                    _class_identity(
+                            data
+                            ),
+                    *class_children,
+                    level=2,
+                    ),
+            ]
+
+    equipment = data.get(
+            "equipment"
             )
-
-    if practices:
-        sections.append(
-                prose_section(
-                        "Practices",
-                        *practices,
-                        )
-                )
-
-    equipment = data.get("equipment")
 
     if equipment is not None:
         sections.append(
-                _equipment_section(equipment)
+                _equipment_section(
+                        equipment
+                        )
                 )
 
     sections.append(
-            prose_section(
+            sheet_branch(
                     "Backstory",
                     ui.div(
                             {"class": "narrative-prose"},
@@ -1127,21 +1747,9 @@ def _prose_sections(
                                             )
                                     ),
                             ),
+                    level=2,
                     )
             )
-
-    if spellcaster is not None:
-        sections.append(
-                prose_section(
-                        "Spells",
-                        html_prose(
-                                spellbook_html(
-                                        spellcaster
-                                        )
-                                ),
-                        accent=True,
-                        )
-                )
 
     return sections
 
@@ -1149,12 +1757,9 @@ def _prose_sections(
 def build_character_sheet(
         data: dict[str, Any],
         ) -> ui.Tag:
-    """Build the complete, behavior-compatible character-sheet UI."""
+    """Build the complete character-sheet UI as a readable identity tree."""
     stats = data.get("Stats") or {}
     spellcaster = data.get("Spellcaster")
-    # Grouped into Species/Background/Class inside _prose_sections, not
-    # flattened here — the raw Features still carry the source and level
-    # that decide which of the three titled blocks each one belongs to.
     raw_features = data.get(
             "features",
             [],
@@ -1183,17 +1788,6 @@ def build_character_sheet(
                                             ),
                                     "",
                                     ),
-                            ),
-                    ui.h1(
-                            _class_heading(
-                                    data
-                                    )
-                            ),
-                    ui.h1(
-                            (
-                                f"{_species_identity(data)} "
-                                f"{safe_str(data.get('Background', '-'))}"
-                                )
                             ),
                     ),
             ui.div(
@@ -1330,6 +1924,16 @@ def _self_test() -> None:
     assert not _is_spellcasting_parameter_chip(
             "Attack Rolls"
             )
+    lead, layers = _split_described_layers(
+            "Guild prose.\n\n### Path of the Wild Heart\n\nPath prose."
+            )
+    assert lead == "Guild prose."
+    assert layers == [
+            (
+                    "Path of the Wild Heart",
+                    "Path prose.",
+                    ),
+            ]
 
     narrative = ExampleFeature()
     narrative.narrative = True
@@ -1370,8 +1974,228 @@ def _self_test() -> None:
     assert "<strong>Play the Part.</strong>" in practice_html
 
     _test_generated_practices()
+    _test_sheet_tree()
 
     print( "OK — character sheet presentation self-test" )
+
+
+def _test_sheet_tree() -> None:
+    """The main column is a tree: Species, Background, Class, tools, Backstory."""
+    from contextlib import redirect_stdout
+    from io import StringIO
+
+    from AtlasActorLudi.Map_of_Character_Generation import summon_player
+
+    with redirect_stdout(
+            StringIO()
+            ):
+        character = summon_player(
+                seed=42,
+                level=1,
+                )
+        data = character.to_dict()
+
+    sheet = str(
+            build_character_sheet(
+                    data
+                    )
+            )
+    species = _species_identity(
+            data
+            )
+    background = safe_str(
+            data.get(
+                    "Background",
+                    "",
+                    ),
+            "",
+            )
+    guild = safe_str(
+            data.get(
+                    "Class",
+                    "",
+                    ),
+            "",
+            )
+    tools = _tool_proficiency_names(
+            data
+            )
+
+    assert f"{species} Description" in sheet
+    assert f"{species} Features" in sheet
+    assert background in sheet
+    assert "Description" in sheet
+    assert "Level features" in sheet
+    assert guild in sheet
+    assert "Tool Proficiencies" in sheet
+    assert tools, "seed 42 should grant a tool"
+    assert tools[ 0 ] in sheet
+    assert sheet.count(
+            "<h2>Languages</h2>"
+            ) == 1
+    assert sheet.count(
+            "npc-textbox"
+            ) >= 1
+    assert 'class="npc-textbox"' not in _language_body(
+            data.get(
+                    "Languages"
+                    )
+            )
+    assert sheet.index(
+            background
+            ) < sheet.index(
+            "Tool Proficiencies"
+            )
+    assert sheet.index(
+            "Tool Proficiencies"
+            ) < sheet.index(
+            "Level features"
+            )
+    assert sheet.index(
+            ">Tools<"
+            ) < sheet.index(
+            ">Languages<"
+            )
+
+    rail_tools = _combat_proficiency_names(
+            data
+            )
+    assert tools[ 0 ] not in rail_tools
+    assert tools[ 0 ] in _tool_proficiency_names(
+            data
+            )
+    assert "Extra Origin Feat" not in sheet
+
+    with redirect_stdout(
+            StringIO()
+            ):
+        warlock = summon_player(
+                species="Human",
+                guild="Warlock",
+                background="Acolyte",
+                level=1,
+                seed=11,
+                )
+        warlock_data = warlock.to_dict()
+
+    warlock_sheet = str(
+            build_character_sheet(
+                    warlock_data
+                    )
+            )
+    assert "Invocations" in warlock_sheet or "Pact Spells" in warlock_sheet
+    assert "Pact Spells" in warlock_sheet
+    assert warlock_sheet.index(
+            "Pact Spells"
+            ) < warlock_sheet.index(
+            "Backstory"
+            )
+
+    with redirect_stdout(
+            StringIO()
+            ):
+        barbarian = summon_player(
+                species="Human",
+                guild="Barbarian",
+                background="Hermit",
+                specialization="Wild Heart",
+                level=3,
+                seed=21,
+                )
+        wild_data = barbarian.to_dict()
+
+    wild_sheet = str(
+            build_character_sheet(
+                    wild_data
+                    )
+            )
+    assert "Path of the Wild Heart" in wild_sheet
+    assert "harmony, and harmony" not in wild_sheet
+    assert wild_sheet.index(
+            "Barbarian Description"
+            ) < wild_sheet.index(
+            "Path of the Wild Heart"
+            )
+    assert wild_sheet.index(
+            "Path of the Wild Heart"
+            ) < wild_sheet.index(
+            "Level features"
+            )
+
+    with redirect_stdout(
+            StringIO()
+            ):
+        human = summon_player(
+                species="Human",
+                guild="Fighter",
+                background="Farmer",
+                level=1,
+                seed=42,
+                )
+        human_data = human.to_dict()
+
+    human_sheet = str(
+            build_character_sheet(
+                    human_data
+                    )
+            )
+    extra = next(
+            getattr(
+                    feature,
+                    "name",
+                    "",
+                    )
+            for feature in human_data.get(
+                    "features",
+                    (),
+                    )
+            if "Versatile" in safe_str(
+                    getattr(
+                            feature,
+                            "source",
+                            "",
+                            ),
+                    "",
+                    )
+            )
+    background_feat = next(
+            getattr(
+                    feature,
+                    "name",
+                    "",
+                    )
+            for feature in human_data.get(
+                    "features",
+                    (),
+                    )
+            if safe_str(
+                    getattr(
+                            feature,
+                            "source",
+                            "",
+                            ),
+                    "",
+                    ) == "Origin Feat"
+            )
+    assert "Humans have complex lives, and they adapt quickly." in human_sheet
+    assert "You have this extra Origin Feat:" in human_sheet
+    assert extra in human_sheet
+    assert human_sheet.index(
+            "Extra Origin Feat"
+            ) < human_sheet.index(
+            ">Farmer<"
+            )
+    assert extra in human_sheet
+    assert human_sheet.index(
+            extra
+            ) < human_sheet.index(
+            ">Farmer<"
+            )
+    assert human_sheet.index(
+            ">Farmer<"
+            ) < human_sheet.index(
+            background_feat
+            )
 
 
 if __name__ == "__main__":

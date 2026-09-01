@@ -52,15 +52,38 @@ Every questa ends with a **Council** section: a socratic conversation, signed, w
 ## How to work one
 1. Pick from `Open/`.
 2. Move it to `Working/`, set yourself as main owner, update status.
-3. If it needs a decision, open a Dialog in `Agora/`.
-4. When done (and confirmed by Julio), move to `Solved/` with an outcome note and links to any Decree/commit.
-5. **Separately, in a later step with Julio:** confirm the lesson — does the implementation fit the vision? is the TOP usage correct? is the pattern well-formulated? Then write `Rewards/REW-####.md` and delete the questa from `Solved/`.
+3. **Branch** (Decree 0008): from current `main`, `git checkout -b questa/QST-####-short-slug`.
+4. Implement the single purpose; run **`make smoke-player`** before any commit.
+5. If it needs a decision, open a Dialog in `Agora/` (Decree 0007 evaluation in writing).
+6. Commit on the questa branch; fast-forward merge to `main`; delete the branch.
+7. When done (and confirmed by Julio), move to `Solved/` with an outcome note and links to any Decree/commit.
+8. **Separately, in a later step with Julio:** confirm the lesson — does the implementation fit the vision? is the TOP usage correct? is the pattern well-formulated? Then write `Rewards/REW-####.md` and delete the questa from `Solved/`.
+
+### Sessions and subprojects (Decree 0008)
+- **Close before you open:** merge or abandon the current questa/session branch before starting the next subproject.
+- **One checkout per agent session:** `git worktree add ~/Desktop/DnD-session-<short> origin/main` — never share `/Users/tbs/Desktop/DnD` between concurrent sessions.
+- **`make safepoint`** before any destructive Git verb; one rolling `safepoint/latest` tag is the safebox.
+- **`make install-hooks`** once per clone; hooks refuse mass staging and run the loss detector.
 
 See `QUESTA-template.md` to mint a new one.
 
 ---
 
 ## Register
+
+### 🎯 First publish (Decree 0004) — do these; park the rest
+
+Player Character generator only. NPC / DM / Epica Questae wait unless they also break Player generate. Chrome park: QST-0082.
+
+| ID | Title | Type | Priority | Why this cut |
+|----|-------|------|----------|--------------|
+| [QST-0082](Working/QST-0082-first-publish-player-only.md) | Park NPC/DM chrome behind one flag | design | 🔴 | this cut |
+| [QST-0001](Open/QST-0001-finish-shiny-front.md) | Finish the Shiny front for first users | design | 🔴 | Home → Generate → sheet (Player only) |
+| [QST-0002](Open/QST-0002-character-sheet-view.md) | Character-sheet view | design | 🔴 | the sheet is the product |
+| [QST-0050.2](Open/QST-0050.2-artificer-has-no-progression.md) | Artificer cannot build | bug | 🔴 | hide from picker **or** implement; do not ship a crashing Guild |
+| [QST-0050.1](Open/QST-0050.1-expertise-draws-before-it-guards.md) | Expertise draws before it guards | bug | 🟠 | a slice of Player Characters fail |
+
+**Parked until after first publish:** QST-0037 (Epica/DM), QST-0041 (Magistratum), QST-0081.5–.9 (NPC/DM forks), QST-0050.4 (NPC/tests), QST-0016 NPC-fold, QST-0081.3 Finder copies.
 
 ### 🔴 / 🟠 Priority — Open
 | ID | Title | Type | Priority | Route |
@@ -117,7 +140,7 @@ See `QUESTA-template.md` to mint a new one.
 | QST-0039 | Arcane/Divine/Primal as a character axis (power origin) | tagkit/design | 🟡 | Druid, Lorekeeper, Bard, Warlock → QST-0016 |
 | QST-0040.1 | 🔁 Recurrent modularity review (entrypoint & Atlas surfaces) | chore/docs | 🟡 | Druid, Monk, Ranger, Artificer → QST-0040 |
 | QST-0040.2 | Canon: Ada ads/adb & TOP API as the modularity test | rule-update/docs | 🟡 | Lorekeeper, Druid, Wizard, Warlock, Bard → QST-0040 |
-| QST-0080.1 | Cleric Domain openings still in the older, plainer register | design | 🟡 | Lorekeeper, Bard, Julio → QST-0080 |
+| QST-0080.1 | Cleric Domain openings still in the older, plainer register | design | 🟡 | Lorekeeper, Bard, Julio → QST-0080 / REW-0001 |
 
 ### 🟡 Priority — Open (QST-0037 AtlasEpica sidequests)
 | ID | Title | Type | Priority | Parent |
@@ -150,8 +173,7 @@ See `QUESTA-template.md` to mint a new one.
 ### ✅ Solved (recent)
 | ID | Title |
 |----|-------|
-| QST-0080 | Cleric voice committed — authored prose had lived on disk only, across two sessions (2026-08-31) |
-| QST-0050.3 | Aasimar `_opening` recovered verbatim from vault bytecode, not rewritten (2026-08-31) |
+| QST-0080 | Cleric voice — distilled to [REW-0001](Rewards/REW-0001-uncommitted-prose-is-already-lost.md); questa deleted (2026-08-31) |
 | QST-0037.8 | Canonize **AtlasEpica** (renamed from Specus; Conventions row) (2026-07-15) |
 | QST-0036 | TagKit-Doctrine resynced to GitHub Guide (`@Pre`/`@Post`, contributions, no fake orthogonality) (2026-07-17) |
 | QST-0018 | Rogue parallel TOP package removed — role-tag half rides with QST-0016.3 (2026-07-15) |
@@ -171,7 +193,7 @@ See `QUESTA-template.md` to mint a new one.
 | QST-0031.1 | Build SpellsKit: Tags for school, class list, tradition (steps under Julio's review) | tagkit | 🟠 | Warlock, Druid, Lorekeeper → QST-0031 |
 | QST-0031.1 | Build SpellsKit: Tags for school, class list, tradition (steps under Julio's review) | tagkit | 🟠 | Warlock, Druid, Lorekeeper → QST-0031 |
 | QST-0041 | AtlasMagistratum — DM Companion extracted; closing dialog pending | design/refactor | 🟠 | Druid, Bard → QST-0040 · QST-0037 |
-| QST-0081 | Restore guilds, species & backgrounds from vault bytecode to source | chore/cleanup | 🟠 | Julio, recovery board → QST-0072 |
+| QST-0083 | One product tip on `main` (Solved — Decree 0008) | rule-update | ✅ | Paladin, Artificer → see Solved/ |
 
 ### 🕵️ Pending to mint (Track A remainder)
 - **QST-0014** — `docs/FLASK_TO_SHINY_MIGRATION.md` is stale (says "no shareable URL yet"; hash-URLs + `CharacterPathRedirectASGI` already exist). *(docs · Understanding, Workshop)*

@@ -15,6 +15,9 @@ A **Decree** is a decision **ratified by Julio**. Once recorded here, it is bind
 | [0001](0001-diagnostic-sweep-method.md) | The diagnostic sweep: method & venv arbitration | 2026-06-23 | Dialog 0002 |
 | [0002](0002-character-root-and-dice.md) | The Character root, the Dice, and the discipline | 2026-06-23 | Dialog 0003 |
 | [0003](0003-minions-on-logging.md) | The Minions, re-backed on one logging pipeline | 2026-07-02 | Dialog 0004 |
+| [0004](0004-first-publish-player-only.md) | First publish is the Player Character generator | 2026-08-31 | Julio, this session |
+| [0007](0007-every-change-is-a-proposal.md) | Every change is a proposal | 2026-09-01 | Julio, in chat |
+| [0008](0008-safety-safepoints-and-branch-discipline.md) | Safety first, safepoints, branch discipline | 2026-09-01 | Dialog 0010, Julio in chat |
 
 ---
 

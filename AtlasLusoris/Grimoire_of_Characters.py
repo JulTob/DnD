@@ -874,6 +874,15 @@ class Character(Character_Skeleton):
 							2,
 							char.skills.get_proficient_skills()
 							)
+				if (
+						getattr(
+							char,
+							"specialization",
+							None,
+							) == "Dance"
+						and char.level >= 3
+						):
+					char.skills.Unarmed_Dance.set_proficiency()
 			elif char.character_class == "Monk":
 				char.skills.Unarmed_Monk.set_proficiency()
 				char.skills.Simple_Weapons.set_proficiency()

@@ -1,0 +1,16 @@
+---
+description: Safety, safepoints, and branch discipline (Decree 0008)
+alwaysApply: true
+---
+
+# Safety and branches
+
+Read `Curia/Agora/Decrees/0008-safety-safepoints-and-branch-discipline.md`.
+
+- **`main` is the product tip** — branch per questa (`questa/QST-####-slug`), never force-move `main`.
+- **Never** `git add -A`, `git add .`, or `git branch -f main` in this repo.
+- **`make safepoint`** before `reset --hard`, bulk `restore`, or checkout of an old ref.
+- **`make smoke-player`** must pass before committing questa work.
+- **One worktree per session** — do not share the primary checkout with another agent.
+- Stage paths **explicitly**; recovery debris and Finder ` 2.py` copies stay out of commits.
+- Close the current branch (merge FF to `main`, delete branch) before opening the next subproject.

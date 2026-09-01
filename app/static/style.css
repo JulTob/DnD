@@ -765,17 +765,9 @@ _____________________________________________*/
       transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Coin-flip state — one random orbit, one random axis, toggled by JS
-       every discrete second. The mirrored shell visually reverses the inner
-       ring's spin, which is the whole point of the flip (QST-0081). */
+    /* Coin-flip state — toggled by JS every 1-5 discrete seconds */
     .orbit-layer.flip-y {
       transform: rotateY(180deg);
-    }
-    .orbit-layer.flip-x {
-      transform: rotateX(180deg);
-    }
-    .orbit-layer.flip-x.flip-y {
-      transform: rotateX(180deg) rotateY(180deg);
     }
 
     /* Inner ring carries the 2D spin so it doesn’t clash with the Y-flip */
@@ -1437,13 +1429,16 @@ header, footer {
     line-height: 1.05;
 }
 
-/* Section titles (Features, Equipment, Backstory, Spells…) — Cinzel, clear break. */
+/* Section titles (Species, Background, Class, tools, Equipment, Backstory). */
 .sheet-section.is-fantasy > h1,
 .sheet-section.is-fantasy > h2,
 .sheet-section.is-fantasy > h3,
 .sheet-section > h1,
 .sheet-section > h2,
-.sheet-section > h3 {
+.sheet-section > h3,
+.sheet-branch > h2,
+.sheet-branch > h3,
+.sheet-branch > h4 {
     font-family: 'Cinzel', var(--font-header);
     font-size: clamp(1.65rem, 2.4vw, 2.15rem);
     font-weight: 700;
@@ -1454,18 +1449,52 @@ header, footer {
 }
 
 /* Everything else: clean prose, each section parted by a gold horizontal rule. */
-.sheet-section {
+.sheet-section,
+.sheet-main > .sheet-branch {
     border-top: 1px solid var(--gold-color);
     padding-top: 1.1rem;
     margin-top: 1.6rem;
 }
 
-.sheet-section:first-of-type {
+.sheet-section:first-of-type,
+.sheet-main > .sheet-branch:first-of-type {
     border-top: 0;
     margin-top: 0.4rem;
 }
 
-.sheet-section .prose-body {
+.sheet-branch--h3 {
+    margin-top: 1.05rem;
+    padding-left: 0.95rem;
+    border-left: 2px solid var(--gold-color);
+}
+
+.sheet-branch--h3 > h3 {
+    font-size: clamp(1.12rem, 1.8vw, 1.4rem);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.45rem;
+}
+
+.sheet-branch--h4 {
+    margin-top: 0.85rem;
+    padding-left: 0.75rem;
+}
+
+.sheet-branch--h4 > h4 {
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    letter-spacing: 0.03em;
+    margin-bottom: 0.35rem;
+}
+
+.sheet-tool-list {
+    margin: 0 0 0.7em;
+    padding-left: 1.15em;
+}
+
+.sheet-tool-list li {
+    margin: 0 0 0.25em;
+}
+
+.sheet-main .prose-body {
     max-width: 70ch;
     text-align: left;
     font-family: var(--font-text);
@@ -1473,23 +1502,23 @@ header, footer {
     line-height: 1.7;
 }
 
-.sheet-section .prose-body p { margin: 0 0 0.7em; }
-.sheet-section .prose-body table { width: 100%; }
+.sheet-main .prose-body p { margin: 0 0 0.7em; }
+.sheet-main .prose-body table { width: 100%; }
 
 /* Bold text marks rules labels; italics distinguish tonal prose without recoloring it. */
-.sheet-section .prose-body strong {
+.sheet-main .prose-body strong {
     color: var(--primary-color);
     font-family: var(--font-impact);
 }
 
-.sheet-section .prose-body em {
+.sheet-main .prose-body em {
     color: inherit;
     font-style: italic;
 }
 
 /* Generator HTML (spells in features) must read as body prose, not markdown code blocks. */
-.sheet-section .prose-body pre,
-.sheet-section .prose-body code {
+.sheet-main .prose-body pre,
+.sheet-main .prose-body code {
     font-family: var(--font-text);
     font-size: inherit;
     line-height: inherit;
@@ -1501,19 +1530,19 @@ header, footer {
     overflow: visible;
 }
 
-.sheet-section .prose-body .feature-entry {
+.sheet-main .prose-body .feature-entry {
     margin: 0 0 1.1em;
     padding-bottom: 1.1em;
     border-bottom: 1px solid rgba(212, 175, 55, 0.35); /* faint gold rule, echoes the section divider */
 }
 
-.sheet-section .prose-body .feature-entry:last-child {
+.sheet-main .prose-body .feature-entry:last-child {
     margin-bottom: 0;
     padding-bottom: 0;
     border-bottom: none;
 }
 
-.sheet-section .prose-body .feature-lead {
+.sheet-main .prose-body .feature-lead {
     margin: 0 0 0.35em;
     /* Its own cut, not --font-name.  The entry title sat in IM Fell English SC
        while the inline rules labels below it sit in IM Fell DW Pica SC: two
@@ -1529,20 +1558,20 @@ header, footer {
 
 /* Legacy narrative entries are wholly tonal. Explicit emphasis takes control
    when one entry intentionally mixes flavour with upright rules text. */
-.sheet-section .prose-body .feature-entry.is-narrative:not(:has(em))
+.sheet-main .prose-body .feature-entry.is-narrative:not(:has(em))
     > :not(.feature-lead):not(.feature-chips),
-.sheet-section .prose-body .narrative-prose {
+.sheet-main .prose-body .narrative-prose {
     font-style: italic;
 }
 
-.sheet-section .prose-body .feature-chips {
+.sheet-main .prose-body .feature-chips {
     display: flex;
     flex-wrap: wrap;
     gap: 0.45em;
     margin: 0 0 0.55em;
 }
 
-.sheet-section .prose-body .feature-chip {
+.sheet-main .prose-body .feature-chip {
     display: inline-block;
     padding: 0.15em 0.55em;
     border: 1px solid rgba(212, 175, 55, 0.45);
@@ -1553,14 +1582,14 @@ header, footer {
     background: rgba(212, 175, 55, 0.08);
 }
 
-.sheet-section .prose-body .spell {
+.sheet-main .prose-body .spell {
     font-family: var(--font-text);
     font-size: 1.04rem;
     line-height: 1.7;
     margin: 0.35em 0 0.35em;
 }
 
-.sheet-section .prose-body .spell-separator {
+.sheet-main .prose-body .spell-separator {
     text-align: center;
     font-size: 1.35rem;
     line-height: 1;
@@ -1570,7 +1599,7 @@ header, footer {
     user-select: none;
 }
 
-.sheet-section .prose-body .spell h4 {
+.sheet-main .prose-body .spell h4 {
     font-family: var(--font-spell-title);
     font-size: 1.15em;
     font-weight: normal;
@@ -1578,11 +1607,11 @@ header, footer {
     margin: 0.4em 0 0.15em;
 }
 
-.sheet-section .prose-body .spell p {
+.sheet-main .prose-body .spell p {
     margin: 0 0 0.55em;
 }
 
-.sheet-section .prose-body .spell .spell-meta {
+.sheet-main .prose-body .spell .spell-meta {
     font-size: 0.5em;
     line-height: 1.4;
 }
@@ -1923,10 +1952,8 @@ header, footer {
     grid-row: 1;
     align-self: stretch;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    row-gap: 0.1rem;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -1937,15 +1964,6 @@ header, footer {
     white-space: nowrap;
     text-align: center;
     color: var(--gold-color);
-}
-
-/* The caption sits on top of the number, inside the middle cell */
-.character-level-value .character-level-label {
-    font-size: 0.68rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    opacity: 0.85;
-    margin: 0;
 }
 
 .character-reforge .control-label,
@@ -2236,3 +2254,26 @@ header, footer {
 	.eldritch-glyph { color: inherit; }
 	.eldritch-glyph > i { display: none; }
 	}
+
+/* Decree 0004 — first publish parks NPC / DM chrome.
+   Restore by setting PLAYER_ONLY_PUBLISH = False in app/publish_scope.py. */
+.header-actions .is-parked {
+    display: none !important;
+}
+
+.tablet-wrapper.player-only-publish .tablet-nav,
+.tablet-wrapper.player-only-publish .tablet-dots {
+    display: none !important;
+}
+
+.tablet-wrapper.player-only-publish .tablet-controls {
+    justify-content: center;
+}
+
+.generator-panel.is-parked {
+    display: none !important;
+    flex: 0 0 0;
+    width: 0;
+    padding: 0;
+    overflow: hidden;
+}

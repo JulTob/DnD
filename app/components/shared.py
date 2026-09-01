@@ -169,7 +169,32 @@ def _feature_chips(
     triples: list[tuple[str, str, str]] = []
     for item in chips:
         symbol = ""
-        if isinstance(
+        if hasattr(
+                item,
+                "label",
+                ) and hasattr(
+                item,
+                "value",
+                ) and not isinstance(
+                item,
+                (
+                        tuple,
+                        list,
+                        dict,
+                        ),
+                ):
+            label = item.label
+            value = item.value
+            symbol = getattr(
+                    item,
+                    "symbol",
+                    "",
+                    ) or getattr(
+                    item,
+                    "icon",
+                    "",
+                    ) or ""
+        elif isinstance(
                 item,
                 dict,
                 ):
@@ -312,6 +337,41 @@ def feature_item(
             )
 
 
+def sheet_branch(
+        title: str,
+        *content: Any,
+        level: int = 2,
+        ) -> ui.Tag:
+    """One titled node in the character-sheet tree."""
+    heading = {
+        2: ui.h2,
+        3: ui.h3,
+        4: ui.h4,
+        }.get(
+                level,
+                ui.h3,
+                )
+
+    return ui.div(
+            {
+                "class": (
+                    f"sheet-branch sheet-branch--h{level}"
+                    ),
+                },
+            heading(
+                    title
+                    ),
+            ui.div(
+                    {
+                        "class": (
+                            "sheet-branch-body prose-body"
+                            )
+                        },
+                    *content,
+                    ),
+            )
+
+
 def prose_section(
         title: str,
         *content: Any,
@@ -424,6 +484,8 @@ __all__ = [
     "prose_section",
     "safe_int",
     "safe_str",
+    "sheet_branch",
     "skill_rows",
+    "space_feature_labels",
     "text_html",
     ]

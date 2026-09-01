@@ -231,6 +231,7 @@ class Training:
 		training.Heavy = Armor('Heavy Armor')
 		training.Unarmed_Monk = Armor('Unarmed Defense')
 		training.Unarmed_Barb = Armor('Unarmed Defense')
+		training.Unarmed_Dance = Armor('Unarmed Defense')
 
 	def get_all_weapons(training):
 		return [
@@ -260,6 +261,7 @@ class Training:
 			training.Heavy,
 			training.Unarmed_Monk,
 			training.Unarmed_Barb,
+			training.Unarmed_Dance,
 			]
 
 	def get_proficient_armors(training):
