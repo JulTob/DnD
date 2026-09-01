@@ -193,7 +193,7 @@ Player Character generator only. NPC / DM / Epica Questae wait unless they also 
 | QST-0031.1 | Build SpellsKit: Tags for school, class list, tradition (steps under Julio's review) | tagkit | 🟠 | Warlock, Druid, Lorekeeper → QST-0031 |
 | QST-0031.1 | Build SpellsKit: Tags for school, class list, tradition (steps under Julio's review) | tagkit | 🟠 | Warlock, Druid, Lorekeeper → QST-0031 |
 | QST-0041 | AtlasMagistratum — DM Companion extracted; closing dialog pending | design/refactor | 🟠 | Druid, Bard → QST-0040 · QST-0037 |
-| QST-0083 | One product tip; sessions use worktrees, not a shared checkout | rule-update | 🟠 | Paladin, Artificer, Julio → QST-0052 |
+| QST-0083 | One product tip on `main` (Solved — Decree 0008) | rule-update | ✅ | Paladin, Artificer → see Solved/ |
 
 ### 🕵️ Pending to mint (Track A remainder)
 - **QST-0014** — `docs/FLASK_TO_SHINY_MIGRATION.md` is stale (says "no shareable URL yet"; hash-URLs + `CharacterPathRedirectASGI` already exist). *(docs · Understanding, Workshop)*

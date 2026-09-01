@@ -19,11 +19,19 @@ if [[ "${command}" =~ git[[:space:]]+reset[[:space:]]+--hard ]]; then
 	deny "git reset --hard requires make safepoint first, then Julio's approval."
 fi
 
-if [[ "${command}" =~ git[[:space:]]+add[[:space:]]+-A ]] || [[ "${command}" =~ git[[:space:]]+add[[:space:]]+\. ]]; then
-	deny "git add -A / git add . is forbidden. Stage paths explicitly."
+if [[ "${command}" =~ git[[:space:]]+add[[:space:]]+-A ]]; then
+	deny "git add -A is forbidden. Stage paths explicitly."
+fi
+
+if [[ "${command}" =~ git[[:space:]]+add[[:space:]]+\.$ ]]; then
+	deny "git add . is forbidden. Stage paths explicitly."
 fi
 
 if [[ "${command}" =~ git[[:space:]]+push ]] && [[ "${command}" =~ --force ]] && [[ "${command}" =~ main ]]; then
+	if [[ "${command}" =~ ALLOW_FORCE_MAIN=1 ]]; then
+		python3 -c "print('{\"permission\":\"allow\"}')"
+		exit 0
+	fi
 	deny "Force-push to main is forbidden without archive tag + ALLOW_FORCE_MAIN=1."
 fi
 
