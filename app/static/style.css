@@ -769,6 +769,12 @@ _____________________________________________*/
     .orbit-layer.flip-y {
       transform: rotateY(180deg);
     }
+    .orbit-layer.flip-x {
+      transform: rotateX(180deg);
+    }
+    .orbit-layer.flip-x.flip-y {
+      transform: rotateX(180deg) rotateY(180deg);
+    }
 
     /* Inner ring carries the 2D spin so it doesn’t clash with the Y-flip */
     .orbit-ring {
@@ -1952,8 +1958,10 @@ header, footer {
     grid-row: 1;
     align-self: stretch;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    row-gap: 0.1rem;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -1964,6 +1972,14 @@ header, footer {
     white-space: nowrap;
     text-align: center;
     color: var(--gold-color);
+}
+
+.character-level-value .character-level-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin: 0;
 }
 
 .character-reforge .control-label,

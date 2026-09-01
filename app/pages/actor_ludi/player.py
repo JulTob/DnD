@@ -85,13 +85,6 @@ def page_ui(
                             ),
                     ui.div(
                             {"class": "character-level-box"},
-                            ui.div(
-                                    {"class": "character-level-value"},
-                                    ui.output_text(
-                                            "char_level_display",
-                                            inline=True,
-                                            ),
-                                    ),
                             ui.tags.div(
                                     {"class": "character-level-controls"},
                                     ui.input_action_button(
@@ -100,6 +93,20 @@ def page_ui(
                                             class_="minus fantasy-button fantasy-input",
                                             title="Level Down",
                                             aria_label="Level Down",
+                                            ),
+                                    ui.tags.div(
+                                            {
+                                                    "class": "character-level-value",
+                                                    "aria-live": "polite",
+                                                    },
+                                            ui.div(
+                                                    {"class": "character-level-label"},
+                                                    "Level",
+                                                    ),
+                                            ui.output_text(
+                                                    "char_level_display",
+                                                    inline=True,
+                                                    ),
                                             ),
                                     ui.input_action_button(
                                             "btn_char_level_up",

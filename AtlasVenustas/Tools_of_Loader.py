@@ -84,6 +84,7 @@ def loader_script(
   let statusTicker = null;
   let typingTicker = null;
   let autoHideTimer = null;
+  let flipTicker = null;
   let statusIndex = 0;
 
   function randomFrom(list) {{
@@ -107,6 +108,10 @@ def loader_script(
 
     loader.querySelectorAll('.orbit-layer').forEach((orbit, orbitIndex) => {{
       orbit.innerHTML = '';
+      orbit.classList.remove('flip-x', 'flip-y');
+      // The 2D spin lives on this inner ring; the outer shell only coin-flips.
+      const ring = document.createElement('div');
+      ring.className = 'orbit-ring';
       const count = orbitIndex + 3;
       const radius = Math.max(20, orbit.offsetWidth / 2);
       for (let i = 0; i < count; i += 1) {{
@@ -115,9 +120,32 @@ def loader_script(
         planet.className = 'planet';
         planet.textContent = randomFrom(PLANET_SYMBOLS);
         planet.style.transform = `rotate(${{angle}}deg) translate(${{radius}}px)`;
-        orbit.appendChild(planet);
+        ring.appendChild(planet);
       }}
+      orbit.appendChild(ring);
     }});
+  }}
+
+  function startFlips() {{
+    if (flipTicker) clearInterval(flipTicker);
+    // Every discrete second one random orbit coin-flips 180 degrees on a
+    // random axis (X or Y); the mirrored shell reverses its ring's apparent
+    // spin direction until a later flip turns it back.
+    flipTicker = setInterval(() => {{
+      const loader = getLoader();
+      if (!loader) return;
+      const orbits = loader.querySelectorAll('.orbit-layer');
+      if (!orbits.length) return;
+      const orbit = orbits[Math.floor(Math.random() * orbits.length)];
+      orbit.classList.toggle(Math.random() < 0.5 ? 'flip-x' : 'flip-y');
+    }}, 1000);
+  }}
+
+  function stopFlips() {{
+    if (flipTicker) {{
+      clearInterval(flipTicker);
+      flipTicker = null;
+    }}
   }}
 
   function typeLine(text) {{
@@ -163,6 +191,7 @@ def loader_script(
     loader.style.pointerEvents = 'none';
     populatePlanets();
     startStatus();
+    startFlips();
     if (autoHideTimer) clearTimeout(autoHideTimer);
     autoHideTimer = setTimeout(() => {{
       hideLoader();
@@ -174,6 +203,7 @@ def loader_script(
     if (!loader) return;
     loader.classList.remove('show');
     stopStatus();
+    stopFlips();
     if (autoHideTimer) {{
       clearTimeout(autoHideTimer);
       autoHideTimer = null;
