@@ -1,26 +1,67 @@
-"""client — temporarily loaded from vaulted bytecode (recovery 2026-08-29)."""
+"""Messages from the Shiny server to one connected browser."""
+
 from __future__ import annotations
 
-import marshal
-import sys
-import types
-from pathlib import Path
+import asyncio
+import inspect
+from dataclasses import dataclass
+from typing import Any
 
-_PYC = Path(__file__).resolve().parents[1] / ".recovery-vault" / "app" / "client.cpython-314.pyc"
 
-_body_name = "app._bc_client"
-if _body_name not in sys.modules:
-	body = types.ModuleType(_body_name)
-	body.__file__ = str(_PYC)
-	sys.modules[_body_name] = body
-	exec(marshal.loads(_PYC.read_bytes()[16:]), body.__dict__)
-else:
-	body = sys.modules[_body_name]
+@dataclass(
+        frozen=True,
+        slots=True,
+        )
+class Client_Messages:
+    """Send frontend effects without exposing transport details to pages."""
 
-for _name, _value in list(body.__dict__.items()):
-	if _name.startswith("__"):
-		continue
-	globals()[_name] = _value
+    session: Any
 
-if hasattr(body, "__all__"):
-	__all__ = list(body.__all__)
+    def send(
+            self,
+            message_type: str,
+            message_data: dict[str, Any],
+            ) -> None:
+        pending = self.session.send_custom_message(
+                message_type,
+                message_data,
+                )
+        if inspect.isawaitable(
+                pending
+                ):
+            asyncio.create_task(
+                    pending
+                    )
+
+    def set_loader(
+            self,
+            action: str,
+            ) -> None:
+        self.send(
+                "set_loader",
+                {
+                    "action": action,
+                    },
+                )
+
+    def set_character_hash(
+            self,
+            url_hash: str,
+            ) -> None:
+        self.send(
+                "update_character_url",
+                {
+                    "hash": url_hash,
+                    },
+                )
+        self.send(
+                "set_share_hash",
+                {
+                    "hash": url_hash,
+                    },
+                )
+
+
+__all__ = (
+        "Client_Messages",
+        )

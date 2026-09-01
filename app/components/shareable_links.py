@@ -1,26 +1,37 @@
-"""shareable_links — temporarily loaded from vaulted bytecode (recovery 2026-08-29)."""
+"""Serve character share-link behavior from the static assets."""
+
 from __future__ import annotations
 
-import marshal
-import sys
-import types
 from pathlib import Path
 
-_PYC = Path(__file__).resolve().parents[2] / ".recovery-vault" / "app/components" / "shareable_links.cpython-314.pyc"
+from shiny import ui
 
-_body_name = "app.components._bc_shareable_links"
-if _body_name not in sys.modules:
-	body = types.ModuleType(_body_name)
-	body.__file__ = str(_PYC)
-	sys.modules[_body_name] = body
-	exec(marshal.loads(_PYC.read_bytes()[16:]), body.__dict__)
-else:
-	body = sys.modules[_body_name]
 
-for _name, _value in list(body.__dict__.items()):
-	if _name.startswith("__"):
-		continue
-	globals()[_name] = _value
+SCRIPT_PATH = (
+        Path(
+                __file__
+                ).resolve().parents[1]
+        / "static"
+        / "js"
+        / "shareable-links.js"
+        )
+SCRIPT_URL = "/static/js/shareable-links.js"
 
-if hasattr(body, "__all__"):
-	__all__ = list(body.__all__)
+
+def shareable_links_head_tags(
+        ) -> list[ui.Tag]:
+    version = int(
+            SCRIPT_PATH.stat().st_mtime
+            ) if SCRIPT_PATH.exists() else 0
+    return [
+            ui.tags.script(
+                    src=f"{SCRIPT_URL}?v={version}"
+                    ),
+            ]
+
+
+__all__ = [
+        "SCRIPT_PATH",
+        "SCRIPT_URL",
+        "shareable_links_head_tags",
+        ]

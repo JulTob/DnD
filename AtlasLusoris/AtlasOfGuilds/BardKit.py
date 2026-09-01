@@ -25,4 +25,9 @@ Valor = Build_Specialization(
 	module=__name__,
 	)
 
-SPECIALIZATIONS = Bard.SPECIALIZATIONS
+SPECIALIZATIONS = (
+	Dance,
+	Glamour,
+	Lore,
+	Valor,
+	)

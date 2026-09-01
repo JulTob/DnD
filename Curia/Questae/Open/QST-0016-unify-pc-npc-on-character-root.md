@@ -7,7 +7,7 @@
 - **Route to:** Architecture (Druid), Contracts (Warlock), Methods (Wizard), Flow (Sorcerer), Simplicity (Monk), Understanding (Bard), Lorekeeper → **Decree 0002**
 - **Parent:** —
 - **Sidequests:** QST-0018 (remove AtlasTOP) · then: `.1` Character root (name/title/scores/size/tier/seed) · `.2` Dice + `Roll(D=)` · `.3` Player/Non role tags · `.4` fold AtlasAlusoris→AtlasLusoris · `.5` one sheet renderer · `.6` reproducibility tests · QST-0035 (rollout sequence)
-- **Related:** TagKit (upstream, pinned in `requirements.txt`), QST-0002 & QST-0008 (one sheet), QST-0005 (Atlas split), QST-0013 (Modifier one-source), QST-0035 (TOP rollout sequence)
+- **Related:** TagKit (upstream, pinned in `requirements.txt`), QST-0002 & QST-0008 (one sheet), QST-0005 (Atlas split), QST-0013 (Modifier one-source), QST-0035 (TOP rollout sequence), Decree 0004
 
 ---
 
@@ -16,6 +16,8 @@ Today PC and NPC are two parallel classes — `Character` (AtlasLusoris.Grimoire
 
 ## 🎯 Desired outcome (direction set by Julio)
 One **Character** root — the umbrella for every generated being — carrying the minimal shared substrate. **PC** and **NPC** diverge as **TOP role-Tags** on that root, never as parallel classes. Shared axes (Species, Class/Archetype, Background, Scores, Skills, Equipment) are Tags; role-only concerns (PC: leveling, subclass, shareable build; NPC: legendary/lair/region, plot hook, light-list mode) are role-Tags. One sheet renderer reads the composed Character.
+
+**First publish (Decree 0004):** ship the Player face. QST-0016.4 (fold Alusoris) and NPC-only sidequests wait. Player root / Dice / sheet work may still proceed when it makes generate better.
 
 ## 🧭 The design question (in the Agora now)
 **What is the minimal expression of what the generator builds, and how are the RNG + core mechanisms instantiated into the root?** See `Agora/Dialogs/0003-minimal-character-and-rng.md`. Litmus test for the whole quest: adding a PC-only feature must never touch NPC code, and vice-versa (no `if is_npc:`).

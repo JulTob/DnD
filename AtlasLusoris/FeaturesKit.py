@@ -101,6 +101,157 @@ def _project(
 	return source( subject ) if callable( source ) else source
 
 
+def _is_rail_chip(
+		chip,
+		) -> bool:
+	"""True for a Venustas Chip (named rail), not a leftover tuple."""
+	return (
+		hasattr(
+				chip,
+				"label",
+				)
+		and hasattr(
+				chip,
+				"value",
+				)
+		and not isinstance(
+				chip,
+				(
+						tuple,
+						list,
+						dict,
+						),
+				)
+		)
+
+
+def _store_rail_chip(
+		chip,
+		live,
+		):
+	if _is_rail_chip(
+			chip
+			):
+		from AtlasVenustas import Chip
+		return Chip(
+				getattr(
+						chip,
+						"symbol",
+						"",
+						) or "",
+				chip.label,
+				live(
+						chip.value,
+						f"chip {chip.label!r}",
+						),
+				extra_class=getattr(
+						chip,
+						"extra_class",
+						"",
+						) or "",
+				kind=getattr(
+						chip,
+						"kind",
+						"Attribute",
+						) or "Attribute",
+				)
+	label = chip[
+			0
+			]
+	return (
+			label,
+			live(
+					chip[
+							1
+							],
+					f"chip {label!r}",
+					),
+			) + tuple(
+			chip[
+					2:
+					]
+			)
+
+
+def _project_rail_chip(
+		chip,
+		subject,
+		):
+	projected = str(
+			_project(
+					chip.value if _is_rail_chip(
+							chip
+							) else chip[
+							1
+							],
+					subject,
+					)
+			)
+	if _is_rail_chip(
+			chip
+			):
+		from AtlasVenustas import Chip
+		return Chip(
+				getattr(
+						chip,
+						"symbol",
+						"",
+						) or "",
+				chip.label,
+				projected,
+				extra_class=getattr(
+						chip,
+						"extra_class",
+						"",
+						) or "",
+				kind=getattr(
+						chip,
+						"kind",
+						"Attribute",
+						) or "Attribute",
+				)
+	return (
+			chip[
+					0
+					],
+			projected,
+			) + tuple(
+			chip[
+					2:
+					]
+			)
+
+
+def _chip_as_dict(
+		chip,
+		) -> dict:
+	if _is_rail_chip(
+			chip
+			):
+		return {
+				"label": chip.label,
+				"value": chip.value,
+				"symbol": getattr(
+						chip,
+						"symbol",
+						"",
+						) or "",
+				}
+	return {
+			"label": chip[
+					0
+					],
+			"value": chip[
+					1
+					],
+			"symbol": chip[
+					2
+					] if len(
+					chip
+					) > 2 else "",
+			}
+
+
 class Feature:
 	"""
 	One grant carried by a Character (trait, feat, or invocation line).
@@ -181,17 +332,12 @@ class Feature:
 		# Chip values are always rendered as text, so they are coerced here.
 		# The renderer and ``to_dict`` have always received strings; projecting
 		# lazily must not quietly start handing them ints.
+		# Venustas Chip is the named rail model; tuples remain until QST-0081.4.
 		return tuple(
-				(
-						chip[0],
-						str(
-								_project(
-										chip[1],
-										self.subject,
-										)
-								),
+				_project_rail_chip(
+						chip,
+						self.subject,
 						)
-				+ tuple( chip[2:] )
 				for chip in self._chips
 				)
 
@@ -201,14 +347,10 @@ class Feature:
 			value,
 			):
 		self._chips = tuple(
-				(
-						chip[0],
-						self._live(
-								chip[1],
-								f"chip {chip[0]!r}",
-								),
+				_store_rail_chip(
+						chip,
+						self._live,
 						)
-				+ tuple( chip[2:] )
 				for chip in ( value or () )
 				)
 
@@ -239,11 +381,9 @@ class Feature:
 			"level": self.level,
 			"description": self.description,
 			"chips": [
-					{
-						"label": chip[0],
-						"value": chip[1],
-						"symbol": chip[2] if len(chip) > 2 else "",
-						}
+					_chip_as_dict(
+							chip
+							)
 					for chip in self.chips
 					],
 			"narrative": self.narrative,

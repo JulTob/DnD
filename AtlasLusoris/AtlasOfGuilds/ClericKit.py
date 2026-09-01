@@ -31,7 +31,12 @@ War = Build_Specialization(
 	module=__name__,
 	)
 
-SPECIALIZATIONS = Cleric.SPECIALIZATIONS
+SPECIALIZATIONS = (
+	Life,
+	Light,
+	Trickery,
+	War,
+	)
 
 bind_cleric_voice(
 	guild=Cleric,

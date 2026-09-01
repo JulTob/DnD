@@ -25,4 +25,9 @@ Thief = Build_Specialization(
 	module=__name__,
 	)
 
-SPECIALIZATIONS = Rogue.SPECIALIZATIONS
+SPECIALIZATIONS = (
+	ArcaneTrickster,
+	Assassin,
+	Soulknife,
+	Thief,
+	)

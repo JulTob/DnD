@@ -13,17 +13,13 @@
 
 ## 🔍 Diagnosis (what & where)
 
-`AtlasNomina/Map_of_Names.py:464-467` (in `NewName`) calls `Race_Ingredient(race,
-"Names"/"Surnames"/"Phonotactic"/"Surphonotactic", genus)` four times.
-`Race_Ingredient` is never defined or imported anywhere in this checkout —
-confirmed by `grep -rn "def Race_Ingredient"` across the whole tree outside
-worktrees, zero hits. Every call raises `NameError`, caught by the
-`@changeling` decorator on the caller, which falls back to
-`LastResortName()`. The fallback works — nothing crashes — but it means
-**every character generated on this branch right now gets a generic
-last-resort name instead of a real race-flavored one.** Silent: the only
-visible trace is a `🧚 [changeling] NewName failed; LastResortName takes
-over` line buried in Minion's console output.
+`AtlasNomina/Map_of_Names.py` calls `Race_Ingredient` four times from `NewName`.
+
+**Update 2026-08-31 18:15 (Grok):** `def Race_Ingredient` is now on disk at
+line 104 of the live file (uncommitted). The questa's original "never
+defined" evidence is stale. Leave Open until Julio confirms the ladder
+and a seeded summon no longer falls through to LastResort for a named
+species. Do not restore this file from vault bytecode over the live body.
 
 Introduced in commit `b4f7ce4` ("Enhance character generation and item
 management", 2026-08-29 19:38) — the call sites landed; the function body

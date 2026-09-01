@@ -25,4 +25,9 @@ Stars = Build_Specialization(
 	module=__name__,
 	)
 
-SPECIALIZATIONS = Druid.SPECIALIZATIONS
+SPECIALIZATIONS = (
+	Land,
+	Moon,
+	Sea,
+	Stars,
+	)

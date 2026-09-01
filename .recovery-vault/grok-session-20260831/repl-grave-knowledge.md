@@ -1,6 +1,7 @@
-# REPL drafts — terminal 17, ~2026-08-31 02:32
+# REPL drafts — terminal 17
 
-Julio was composing Domain prayers in a live Python session. Unique Grave
+First snapshotted ~2026-08-31 02:32. Still open at 18:15 the same day with
+the same dict — session-end loss is in progress, not historical. Unique Grave
 lines that were **not** yet in `Map_of_Cleric_Prayers.py` at snapshot:
 
 ```python

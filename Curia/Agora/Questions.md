@@ -27,6 +27,7 @@ Append a row. Keep it to one line; detail goes in the Dialog file.
 | Q-0010 | Title map: how should generated titles become thematic, deterministic narrative identity without leaking lusor internals? | Julio (via Agent) | Understanding (Bard), Architecture (Druid), Contracts (Warlock), Methods (Wizard), Simplicity (Monk), Testing (Rogue), Lorekeeper | `Dialogs/0007-title-map-as-narrative-identity.md` | 🟡 open |
 | Q-0010 | Migration order & safety rail for the Character-root refactor (QST-0016.1–.6, QST-0027): what sequence, and what proves each step unbroken? | Julio | Safety (Paladin), Architecture (Druid), Simplicity (Monk), Contracts (Cleric), Methods (Wizard) | `Dialogs/0007-migration-order-and-safety.md` | 🟡 open |
 | Q-0011 | When a caster subclass has no spell slots unlocked yet, what should `available_spells` return — and is the companion `NameError: char` the same wound? | Julio (via Agent) | Repair (Cleric), Methods (Wizard), Safety (Paladin), Testing (Rogue) | `Dialogs/0008-arcane-trickster-empty-slots.md` | 🟢 converged — awaiting Julio |
+| Q-0012 | After two days of recovery, which failures can Agora + Questae not catch, and what Git/hook/ignore tools must sit beside the Curia? | Julio (via Grok) | Paladin, Druid, Artificer, Wizard, Monk, Lorekeeper, Rogue | `Dialogs/0010-beyond-agora-questae.md` | 🟡 open |
 
 ---
 

@@ -5,18 +5,18 @@
 - **Status:** Open
 - **Owner:** unclaimed
 - **Route to:** Architecture Consul (Druid), Readability Consul (Barbarian), Flow Consul (Sorcerer)
-- **Related:** QST-0002 (character-sheet view), QST-0003 (Flask removal), QST-0024, QST-0025, QST-0026, Q-0001, QST-0014 (stale migration doc)
+- **Related:** QST-0002 (character-sheet view), QST-0003 (Flask removal), QST-0024, QST-0025, QST-0026, Q-0001, QST-0014 (stale migration doc), QST-0082, Decree 0004
 
 ---
 
 ## 🔍 Diagnosis (what & where)
-The Shiny front implements core flows (home, character, NPC, NPC list) but is not yet **"done enough" for first users."** Phase 0 (make it run for real) is complete; the remaining gap is acceptance, in-flight UI decisions, and cleanup — not greenfield migration.
+The Shiny front implements core flows (home, character, NPC, NPC list) but is not yet **"done enough" for first users."** First publish is **Player only** (Decree 0004). Phase 0 is complete; the remaining gap is Player acceptance, sheet quality, and cleanup — not NPC.
 
 ## 🧾 Evidence
 - **Phase 0 done (2026-07-07):** real generation end-to-end, no import shim (QST-0009 Solved), Atlases are regular packages, `shiny_app.py` entry point stable (`shiny run shiny_app.py`, `make run`, `app.py`).
 - **Refactor train landed (2026-07-09):** QST-0012, QST-0008, QST-0011, QST-0021.3–.6 Solved — `shiny_app.py` ~2100 → ~1230 lines; styles/scripts are Venustas static assets; share links live (QST-0021.6).
 - **Still open on the spine:**
-  - **Visual regression (Julio, live run)** — acceptance: home, character gen, NPC prose layout, NPC list click-through, share links (`make run`).
+  - **Visual regression (Julio, live run)** — acceptance: home, Player generate, Character sheet, share links (`make run`). NPC / NPC list are parked (Decree 0004).
   - **Front decisions in flight** — Dialog 0005 → QST-0024 (reforge toolbar); Dialog 0006 → QST-0025 (characteristics grid, Working); QST-0026 spell prose (Working).
   - **Flask removal** — QST-0003 (deferred 2026-07-07); `app/routes.py`, templates, static still present; `app/character_url.py` and `app/random.py` stay (Shiny imports them).
   - **Venv & deploy** — QST-0004; deploy spans `app.yaml` / Dockerfile / `Run_And_Deploy.sh` — pick one target.
@@ -24,7 +24,7 @@ The Shiny front implements core flows (home, character, NPC, NPC list) but is no
 - `app/routes.py` (Flask) still present and duplicates logic.
 
 ## 🎯 Desired outcome
-A Shiny front a user can open and use end-to-end: generate a character and an NPC, view them well (see QST-0002), and navigate without dead ends. **"Good enough to ship to first users"** — with Julio's live-run sign-off as the acceptance gate.
+A Shiny front a user can open and use end-to-end: **generate a Player Character**, view the sheet well (see QST-0002), and share the URL. NPC and DM are parked (Decree 0004 / QST-0082). **"Good enough to ship to first users"** — Julio's live-run sign-off on the Player path is the acceptance gate.
 
 ## 🧭 Notes for the Agora / implementer
 - This is the spine; QST-0002 (display), QST-0003 (Flask removal), QST-0024–0026 hang off it.

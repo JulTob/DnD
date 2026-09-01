@@ -1,26 +1,86 @@
-"""navigation — temporarily loaded from vaulted bytecode (recovery 2026-08-29)."""
+"""Per-session navigation for the Shiny frontline."""
+
 from __future__ import annotations
 
-import marshal
-import sys
-import types
-from pathlib import Path
+from dataclasses import dataclass
+from enum import Enum
+from typing import Any
 
-_PYC = Path(__file__).resolve().parents[1] / ".recovery-vault" / "app" / "navigation.cpython-314.pyc"
+from shiny import reactive
 
-_body_name = "app._bc_navigation"
-if _body_name not in sys.modules:
-	body = types.ModuleType(_body_name)
-	body.__file__ = str(_PYC)
-	sys.modules[_body_name] = body
-	exec(marshal.loads(_PYC.read_bytes()[16:]), body.__dict__)
-else:
-	body = sys.modules[_body_name]
+from app.publish_scope import published_page
 
-for _name, _value in list(body.__dict__.items()):
-	if _name.startswith("__"):
-		continue
-	globals()[_name] = _value
 
-if hasattr(body, "__all__"):
-	__all__ = list(body.__all__)
+class Page(
+        str,
+        Enum,
+        ):
+    """Frontline destinations, named for the Atlas surface they expose."""
+
+    HOME = "home"
+    ACTOR_LUDI_PLAYER = "character"
+    ACTOR_LUDI_ALUSORIS = "npc"
+    ACTOR_LUDI_ALUSORIS_LIST = "npclist"
+    MAGISTRATUM = "dm"
+
+
+def resolve_page(
+        value: Page | str | None,
+        ) -> Page:
+    try:
+        return Page(
+                value
+                )
+    except (
+            TypeError,
+            ValueError,
+            ):
+        return Page.HOME
+
+
+@dataclass(
+        slots=True,
+        )
+class Navigator:
+    """Own one session's current frontline destination."""
+
+    _current: Any
+
+    @classmethod
+    def create(
+            cls,
+            ) -> "Navigator":
+        return cls(
+                _current=reactive.value(
+                        Page.HOME.value
+                        ),
+                )
+
+    def show(
+            self,
+            page: Page | str,
+            ) -> None:
+        destination = resolve_page(
+                published_page(
+                        resolve_page(
+                                page
+                                ).value
+                        )
+                )
+        self._current.set(
+                destination.value
+                )
+
+    def current(
+            self,
+            ) -> Page:
+        return resolve_page(
+                self._current()
+                )
+
+
+__all__ = (
+        "Navigator",
+        "Page",
+        "resolve_page",
+        )

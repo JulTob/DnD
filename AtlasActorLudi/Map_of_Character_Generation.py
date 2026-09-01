@@ -226,12 +226,8 @@ def summon_player(
     if attempts == 1:
         raise last_error
 
-    # The ceiling message carries its cause: five identical walls mean a real
-    # bug in the requested path, and the reader should not need the server
-    # log to learn which one (QST-0079).
     raise RuntimeError(
-            "Unable to summon a Player Character after five attempts. "
-            f"Last failure: {type(last_error).__name__}: {last_error}"
+            "Unable to summon a Player Character after five attempts."
             ) from last_error
 
 

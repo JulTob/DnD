@@ -17,9 +17,7 @@ class Powerful_Build(Trait):
 		target,
 		):
 		target.grapple_escape_advantage = True
-		target.carrying_size_bonus = (
-			Powerful_Build.CARRYING_SIZE_BONUS
-			)
+		target.carrying_size_bonus = Powerful_Build.CARRYING_SIZE_BONUS
 
 
 class Large_Form(Trait):
@@ -61,9 +59,7 @@ class Large_Form(Trait):
 		):
 		target.large_form_action = Large_Form.ACTION
 		target.large_form_size = Large_Form.SIZE
-		target.large_form_duration_minutes = (
-			Large_Form.DURATION_MINUTES
-			)
+		target.large_form_duration_minutes = Large_Form.DURATION_MINUTES
 		target.large_form_end_action = Large_Form.END_ACTION
 		target.large_form_strength_check_advantage = (
 			Large_Form.STRENGTH_CHECK_ADVANTAGE

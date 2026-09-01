@@ -25,4 +25,9 @@ Vengeance = Build_Specialization(
 	module=__name__,
 	)
 
-SPECIALIZATIONS = Paladin.SPECIALIZATIONS
+SPECIALIZATIONS = (
+	Ancients,
+	Devotion,
+	Glory,
+	Vengeance,
+	)

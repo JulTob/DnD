@@ -1,26 +1,72 @@
-"""session — temporarily loaded from vaulted bytecode (recovery 2026-08-29)."""
+"""Reactive state owned by one connected Shiny session."""
+
 from __future__ import annotations
 
-import marshal
-import sys
-import types
-from pathlib import Path
+from dataclasses import dataclass
+from typing import Any
 
-_PYC = Path(__file__).resolve().parents[1] / ".recovery-vault" / "app" / "session.cpython-314.pyc"
+from shiny import reactive
 
-_body_name = "app._bc_session"
-if _body_name not in sys.modules:
-	body = types.ModuleType(_body_name)
-	body.__file__ = str(_PYC)
-	sys.modules[_body_name] = body
-	exec(marshal.loads(_PYC.read_bytes()[16:]), body.__dict__)
-else:
-	body = sys.modules[_body_name]
 
-for _name, _value in list(body.__dict__.items()):
-	if _name.startswith("__"):
-		continue
-	globals()[_name] = _value
+@dataclass(
+        slots=True,
+        )
+class Session_State:
+    """Frontend state only; generated objects remain Actor Ludi products."""
 
-if hasattr(body, "__all__"):
-	__all__ = list(body.__all__)
+    player: Any
+    player_parameters: Any
+    player_error: Any
+    player_url_processed: Any
+    nonplayer: Any
+    nonplayer_error: Any
+    nonplayer_list: Any
+    nonplayer_list_error: Any
+    nonplayer_race: Any
+    nonplayer_guild: Any
+    nonplayer_background: Any
+
+    @classmethod
+    def create(
+            cls,
+            ) -> "Session_State":
+        return cls(
+                player=reactive.value(
+                        None
+                        ),
+                player_parameters=reactive.value(
+                        None
+                        ),
+                player_error=reactive.value(
+                        None
+                        ),
+                player_url_processed=reactive.value(
+                        False
+                        ),
+                nonplayer=reactive.value(
+                        None
+                        ),
+                nonplayer_error=reactive.value(
+                        None
+                        ),
+                nonplayer_list=reactive.value(
+                        []
+                        ),
+                nonplayer_list_error=reactive.value(
+                        None
+                        ),
+                nonplayer_race=reactive.value(
+                        None
+                        ),
+                nonplayer_guild=reactive.value(
+                        None
+                        ),
+                nonplayer_background=reactive.value(
+                        None
+                        ),
+                )
+
+
+__all__ = (
+        "Session_State",
+        )

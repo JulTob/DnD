@@ -1,11 +1,10 @@
-"""The 2024 High Elf Heritage Shape."""
+"""The High Elf Heritage Shape."""
 
 from TagKit import Imprint
 
 from AtlasActorLudi.SpeciesKit.bases import Heritage
 from AtlasActorLudi.SpeciesKit.physiology import Imprint_Heritage
 from AtlasActorLudi.SpeciesKit.Elves.traits import Elven_Lineage
-
 from AtlasActorLudi.SpeciesKit.Elves.base import Elf
 
 

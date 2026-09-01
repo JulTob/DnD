@@ -1,26 +1,34 @@
-"""masonry — temporarily loaded from vaulted bytecode (recovery 2026-08-29)."""
+"""Serve the masonry helper from the application's static assets."""
+
 from __future__ import annotations
 
-import marshal
-import sys
-import types
 from pathlib import Path
 
-_PYC = Path(__file__).resolve().parents[2] / ".recovery-vault" / "app/components" / "masonry.cpython-314.pyc"
+from shiny import ui
 
-_body_name = "app.components._bc_masonry"
-if _body_name not in sys.modules:
-	body = types.ModuleType(_body_name)
-	body.__file__ = str(_PYC)
-	sys.modules[_body_name] = body
-	exec(marshal.loads(_PYC.read_bytes()[16:]), body.__dict__)
-else:
-	body = sys.modules[_body_name]
 
-for _name, _value in list(body.__dict__.items()):
-	if _name.startswith("__"):
-		continue
-	globals()[_name] = _value
+SCRIPT_PATH = (
+        Path(
+                __file__
+                ).resolve().parents[1]
+        / "static"
+        / "js"
+        / "masonry.js"
+        )
+SCRIPT_URL = "/static/js/masonry.js"
 
-if hasattr(body, "__all__"):
-	__all__ = list(body.__all__)
+
+def masonry_head_tags(
+        ) -> list[ui.Tag]:
+    return [
+            ui.tags.script(
+                    src=SCRIPT_URL
+                    ),
+            ]
+
+
+__all__ = [
+        "SCRIPT_PATH",
+        "SCRIPT_URL",
+        "masonry_head_tags",
+        ]

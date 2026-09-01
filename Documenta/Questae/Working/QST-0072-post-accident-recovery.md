@@ -37,8 +37,8 @@ contract or a truncated body.
    Flask as the supported application.
 2. Make `app.main` import cleanly.
 3. Compile the recovered packages and pass their focused self-tests.
-4. Start the Shiny application and verify one Player and one NonPlayer path.
-5. Commit a coherent recovery checkpoint before resuming feature work.
+4. Start the Shiny application and verify the **Player** path (Decree 0004). NonPlayer verification waits until after first publish.
+5. Commit a coherent recovery checkpoint when Julio says so.
 
 ## Recovery law
 
@@ -67,21 +67,6 @@ boundary.
 - `AtlasLusoris/AtlasOfTraining/Map_of_Wizard_Training.py`;
 - `AlignmentKit.py` only after recording a separate claim.
 
-### Claude — bootstrap exit and beta review (joined 2026-08-29 21:10)
-
-- Replace every bytecode bootstrap with real source, prioritized by what the
-  character generator imports: `GuildKit`, the vaulted `AtlasOfGuilds` kits,
-  `AtlasOfTraining` maps, `SpeciesKit` gaps, `AlignmentKit`,
-  `AtlasAlusoris/Map_of_Races`, `AtlasEpica` Titles and Stories,
-  `AtlasInventarium/Map_of_Gear_Titles`, and the `Race_Ingredient` naming;
-- evidence order per the recovery law: session-export transcript payloads
-  first, vault `.pyc` reconstruction (disassembly-verified) second,
-  Canon-constrained rewrite last;
-- full review of the beta path (Decree 0006): generation, sheet, styles,
-  shareable links;
-- works only in worktree `sweet-mclean-44e50b`
-  (branch `Julio_Cl/dnd-genlegend-recovery-ea160e`); merges via the board.
-
 Neither lane edits the other lane's claimed files without a written handoff.
 
 ## Checkpoints
@@ -90,21 +75,11 @@ Neither lane edits the other lane's claimed files without a written handoff.
 - [x] Locate the Claude export, Codex session patches, archive, and bytecode.
 - [x] Reconstruct and isolate-test the Character and Gender foundation.
 - [x] Reconstruct Proficiency, Skills, Tools, Ability Scores, and Minion.
-- [x] Restore Backgrounds and their registered catalogues (TOP tools/roleplay, Codex lane).
-- [ ] Restore Guilds, Wizard training, Alignment, and exposed dependencies.
-- [x] Import and compile the supported Shiny application (`shiny_app`; the
-      modular `app.main` root stays down, deferred to QST-0074 by Decree 0006).
-- [x] Verify Player generation (`summon_player(seed=42, level=1)`, Cursor,
-      2026-08-29 19:37). NonPlayer verification deferred to QST-0075.
-- [ ] Exit bytecode-bootstrap mode: real `.py` for every vaulted module on the
-      beta path (Claude lane). Landed so far: `Map_of_Gear_Titles` (gate
-      PASS), `AlignmentKit` (gate PASS, self-test green), four SpeciesKit
-      modules (gate PASS), and `GuildKit` itself: recovered as its authentic
-      pre-wipe source from dangling git blob `62ece79e` plus two transcript
-      edits, marshalling byte-identical to the vault bytecode. Five valuable
-      dangling blobs are pinned against gc under `recovery-blob-*` tags,
-      including the lost NonPlayer rites grimoire (QST-0075 evidence).
-- [ ] Start and visually smoke-test Shiny (beta scope: character generator).
+- [x] Restore Backgrounds and their registered catalogues (TOP `tools`/`roleplay`; verify fidelity).
+- [~] Restore Guilds, Wizard training, Alignment — **runtime via vault bootstraps**; real `.py` still open.
+- [x] Import and compile player path (`shiny_app`); `app.main` still fails NonPlayer imports.
+- [~] Verify Player generation (green, with `Race_Ingredient` soft-fail). NonPlayer still open.
+- [~] Start and visually smoke-test Shiny (player path).
 - [ ] Record a coherent recovery commit.
 
 ---

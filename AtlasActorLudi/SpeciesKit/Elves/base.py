@@ -3,8 +3,8 @@
 from TagKit import Imprint
 
 from AtlasActorLudi.SpeciesKit.bases import Humanoid
-from AtlasActorLudi.SpeciesKit.kinship import Fey as Kin_Fey
 from AtlasActorLudi.SpeciesKit.bases import Species
+from AtlasActorLudi.SpeciesKit.kinship import Fey as Kin_Fey
 from AtlasActorLudi.SpeciesKit.physiology import Imprint_Species
 from AtlasActorLudi.SpeciesKit.Elves.traits import Darkvision
 from AtlasActorLudi.SpeciesKit.Elves.traits import Fey_Ancestry

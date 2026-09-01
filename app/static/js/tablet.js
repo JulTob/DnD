@@ -4,7 +4,8 @@
         if (!tablet || tablet.dataset.ready === 'true') return false;
 
         const rotator = tablet.querySelector('.tablet-rotator');
-        const panels = Array.from(tablet.querySelectorAll('.generator-panel'));
+        const panels = Array.from(tablet.querySelectorAll('.generator-panel'))
+            .filter((panel) => !panel.classList.contains('is-parked'));
         const titleEl = tablet.querySelector('#tablet-title');
         const dotsRoot = tablet.querySelector('.tablet-dots');
         const prevBtn = tablet.querySelector('.tablet-nav.prev');
@@ -17,13 +18,14 @@
         let currentIndex = panels.findIndex((panel) => panel.classList.contains('is-active'));
         let autoTimer = null;
         let stopped = false;
+        const playerOnly = tablet.dataset.playerOnly === 'true' || panels.length < 2;
 
         if (currentIndex < 0) {
             currentIndex = 0;
             }
 
     const restartAutoRotate = () => {
-        if (stopped) return;
+        if (stopped || playerOnly) return;
         if (autoTimer) clearInterval(autoTimer);
         autoTimer = setInterval(goNext, 12000);
         };

@@ -25,4 +25,9 @@ Elements = Build_Specialization(
 	module=__name__,
 	)
 
-SPECIALIZATIONS = Monk.SPECIALIZATIONS
+SPECIALIZATIONS = (
+	Mercy,
+	OpenHand,
+	Shadow,
+	Elements,
+	)
