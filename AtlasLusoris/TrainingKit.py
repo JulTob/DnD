@@ -28,6 +28,7 @@ from TagKit import Imprint, Pre, Report, Tag
 
 from AtlasActorLudi.CharactersKit import Character
 from AtlasLusoris.FeaturesKit import grant
+from AtlasVenustas import Chip
 
 
 # ---------------------------------------------------------------------------
@@ -178,6 +179,7 @@ def Build_Training(
 						str,
 						str | Callable[[Any], Any],
 						]
+				| Chip
 				] = (),
 		source: str | None = None,
 		apply: Callable[[Any], None] | None = None,

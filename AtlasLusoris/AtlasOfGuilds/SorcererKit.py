@@ -25,4 +25,9 @@ WildMagicSorcery = Build_Specialization(
 	module=__name__,
 	)
 
-SPECIALIZATIONS = Sorcerer.SPECIALIZATIONS
+SPECIALIZATIONS = (
+	AberrantSorcery,
+	ClockworkSorcery,
+	DraconicSorcery,
+	WildMagicSorcery,
+	)

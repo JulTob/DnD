@@ -1,4 +1,28 @@
-"""Inner_Radiance — temporarily loaded from vaulted bytecode (recovery 2026-08-29)."""
-from __future__ import annotations
-from AtlasActorLudi.SpeciesKit._bytecode_mod import load_vaulted
-load_vaulted('Aasimar/Revelations/Inner_Radiance.cpython-314.pyc', globals())
+"""The Inner Radiance Revelation Shape."""
+
+from TagKit import Imprint
+
+from AtlasActorLudi.SpeciesKit.Aasimar.Revelations.base import (
+	Celestial_Revelation,
+	)
+from AtlasActorLudi.SpeciesKit.Aasimar.Revelations.base import (
+	Imprint_Revelation,
+	)
+
+
+class Inner_Radiance(Celestial_Revelation):
+	"""A radiant Revelation carrying a searing aura."""
+
+	DAMAGE_TYPE = "Radiant"
+	BRIGHT_LIGHT_RADIUS = 10
+	DIM_LIGHT_ADDITIONAL_RADIUS = 10
+	AURA_RADIUS = 10
+
+	@Imprint
+	def Set_Revelation(
+		target,
+		):
+		Imprint_Revelation(
+			target,
+			Inner_Radiance,
+			)

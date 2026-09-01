@@ -1,4 +1,41 @@
-"""Forest_Gnome — temporarily loaded from vaulted bytecode (recovery 2026-08-29)."""
-from __future__ import annotations
-from AtlasActorLudi.SpeciesKit._bytecode_mod import load_vaulted
-load_vaulted('Gnomes/Forest_Gnome.cpython-314.pyc', globals())
+"""The 2024 Forest Gnome Heritage Shape."""
+
+from TagKit import Imprint
+
+from AtlasActorLudi.SpeciesKit.bases import Heritage
+from AtlasActorLudi.SpeciesKit.Gnomes.base import Gnome
+from AtlasActorLudi.SpeciesKit.Gnomes.traits import Gnomish_Lineage
+from AtlasActorLudi.SpeciesKit.physiology import Imprint_Heritage
+
+
+class Forest_Gnome(
+	Gnome,
+	Heritage,
+	Gnomish_Lineage,
+	):
+	"""A Gnome Heritage with illusion and animal-speaking magic."""
+
+	HERITAGE_DESCRIPTION = (
+		"""Your family never took the city offer, but put down roots in the forest nearby. You grew up past the last farm where the wood begins, on speaking terms with everything in it. The fae, they say, are nearer out there. Some of it rubbed off."""
+		)
+	SPELLS = (
+		(
+			1,
+			"MinorIllusion",
+			),
+		(
+			1,
+			"SpeakWithAnimals",
+			),
+		)
+	FREE_CAST_SPELL = "SpeakWithAnimals"
+	FREE_CASTS = "PB"
+
+	@Imprint
+	def Set_Heritage(
+		target,
+		):
+		Imprint_Heritage(
+			target,
+			Forest_Gnome,
+			)

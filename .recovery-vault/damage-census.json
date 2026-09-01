@@ -1,0 +1,3183 @@
+{
+ "rows": [
+  {
+   "module": "AtlasActorLudi/AlignmentKit.py",
+   "prewipe_size": 7527,
+   "prewipe_mtime": "2026-08-18 20:34",
+   "now": 318,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/AtlasAlusoris/FeaturesKit.py",
+   "prewipe_size": 9056,
+   "prewipe_mtime": "2026-07-23 01:43",
+   "now": 759,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/AtlasAlusoris/Grimoire_of_NPC.py",
+   "prewipe_size": 17969,
+   "prewipe_mtime": "2026-08-18 20:33",
+   "now": 771,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/AtlasAlusoris/Lodge_of_NonPlayer_Features.py",
+   "prewipe_size": 17167,
+   "prewipe_mtime": "2026-07-23 10:30",
+   "now": 1760,
+   "lost_items": 60,
+   "lost_chars": 2825,
+   "sample": [
+    "Choose a 10-foot area within 60 feet. Creatures in it must resist the NPC's save DC or take {pb} damage and treat the area as difficult terrain until the NPC's next turn.",
+    "After moving at least 10 feet in a straight line, this NPC makes one attack. On a hit, the target must resist the NPC's save DC or move 10 feet in the same direction.",
+    "One creature within 60 feet must resist the NPC's save DC. On a failure, it subtracts {pb} from its next concentration check before the end of its next turn."
+   ],
+   "state": "GUTTED"
+  },
+  {
+   "module": "AtlasActorLudi/AtlasAlusoris/Map_of_Archetypes.py",
+   "prewipe_size": 6005,
+   "prewipe_mtime": "2026-08-06 14:02",
+   "now": 777,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/AtlasAlusoris/Map_of_NPC.py",
+   "prewipe_size": 1275,
+   "prewipe_mtime": "2026-07-23 10:23",
+   "now": 756,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/AtlasAlusoris/Map_of_NonPlayer_Features.py",
+   "prewipe_size": 15350,
+   "prewipe_mtime": "2026-08-06 10:16",
+   "now": 801,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/AtlasAlusoris/Map_of_NonPlayer_Generation.py",
+   "prewipe_size": 11353,
+   "prewipe_mtime": "2026-08-06 14:40",
+   "now": 807,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/AtlasAlusoris/Map_of_NonPlayer_Paths.py",
+   "prewipe_size": 5325,
+   "prewipe_mtime": "2026-08-08 18:13",
+   "now": 5325,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasActorLudi/AtlasAlusoris/Map_of_NonPlayer_Projections.py",
+   "prewipe_size": 4644,
+   "prewipe_mtime": "2026-08-06 14:48",
+   "now": 810,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/AtlasAlusoris/Map_of_Races.py",
+   "prewipe_size": 59559,
+   "prewipe_mtime": "2026-08-27 03:06",
+   "now": 327,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/AtlasAlusoris/RaceKit.py",
+   "prewipe_size": 3750,
+   "prewipe_mtime": "2026-08-06 11:02",
+   "now": 747,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/AtlasAlusoris/__init__.py",
+   "prewipe_size": 1205,
+   "prewipe_mtime": "2026-07-23 10:17",
+   "now": 797,
+   "lost_items": 14,
+   "lost_chars": 364,
+   "sample": [
+    "NonPlayer-specific production within the Character Atlas.",
+    "AtlasActorLudi.AtlasAlusoris.Map_of_NonPlayer_Projections",
+    "AtlasActorLudi.AtlasAlusoris.Map_of_NonPlayer_Features"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasActorLudi/CharactersKit.py",
+   "prewipe_size": 10494,
+   "prewipe_mtime": "2026-07-22 18:08",
+   "now": 12514,
+   "lost_items": 42,
+   "lost_chars": 3098,
+   "sample": [
+    "\nCharactersKit\n\nDepends on:\n        TOP Kit: Role Tags.\n\nContains:\n        Character: shared skeleton (seed, dices, Roll/Dice, dummies)\n        Role / Player / NonPlayer: Core role Tags\n\nSeeds: repeatability between calls.\nDice: the Character's owned RNG (``dices`` bag; ``Roll`` / ``Dice`` draw).\n\nNEVER CHANGE THIS FILE\nLOCKED CODE. DO NOT CHANGE.\n\nExpected behaviour\n\nFor any character, with Role Tags, say charlie:\n```\ncharlie = Character( name= \"Charlie\" )\n\nPlayer(Charlie)\nWizard(Charlie)\nFarmer(Charlie)\n\nthese should return true:\nassert Player in Charlie\nassert \"wizard\" in Charlie\nassert \"They\" in Charlie\n\n```\n\n",
+    "NonPlayer answers its aliases and short-circuits every other string.\n\nIts @Underlay returns False on a string miss without calling underlay,\nso neither the sentinel nor its own spaced NAME leak through; non-string\nkeys still underlay to the Field check.\n",
+    "is_Character Pre rolls the whole tagging back for a non-Character.\n\nThe stub must expose ``__contains__``; otherwise Role's @Underlay\n__contains__ raises TagResolutionError (no visible underlay) before the\nPre can run.\n"
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasActorLudi/GendersKit.py",
+   "prewipe_size": 3689,
+   "prewipe_mtime": "2026-08-18 20:33",
+   "now": 3687,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasActorLudi/Map_of_Personality.py",
+   "prewipe_size": 338047,
+   "prewipe_mtime": "2026-08-06 14:47",
+   "now": 336933,
+   "lost_items": 2,
+   "lost_chars": 48,
+   "sample": [
+    "AtlasActorLudi.AtlasAlusoris.Grimoire_of_NPC",
+    "Pick"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasActorLudi/ProficiencyKit.py",
+   "prewipe_size": 10008,
+   "prewipe_mtime": "2026-08-26 11:08",
+   "now": 9995,
+   "lost_items": 1,
+   "lost_chars": 299,
+   "sample": [
+    "\nProficiencyKit\n\nThe Character-owned relation between capabilities and their sources.\n\nSkills and Tools are typed definitions.  Feature Tags keep semantic identity.\nThis Kit records what each Feature granted without turning every proficiency\ninto another Tag or maintaining parallel writable lists.\n"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasActorLudi/SkillsKit.py",
+   "prewipe_size": 2100,
+   "prewipe_mtime": "2026-08-19 15:02",
+   "now": 2206,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Aasimar/Map_of_Ideals.py",
+   "prewipe_size": 15924,
+   "prewipe_mtime": "2026-08-21 02:16",
+   "now": 10012,
+   "lost_items": 66,
+   "lost_chars": 4539,
+   "sample": [
+    "\nMap of Ideals \u2014 what an Aasimar descends from, and how it shows.\n\nA Celestial is an Ideal with a shape: not a god and not a servant of one, but Justice itself, or Mercy, or Honor, standing where mortals can see it.  An Aasimar carries a spark of one, and the spark is visible in two places.\n\n**Talaria** are the small vestigial wings.  They sit only where a wing could plausibly take a body's weight, which is why none of them are on the face or the front of the chest, and each folds into something a tailor could explain: a torc, a sash, an embroidered collar.\n\n**The aureola** is the halo, and it answers to *fidelity to the Ideal* rather than to virtue.  A tyrant whose ring stays perfect is entirely possible, and is a better story than a tyrant whose halo goes out.  Every tell is written so that it never names the Ideal it belongs to: watching somebody's halo dim tells you they lied, not that they descend from Justice.\n\nAn Aasimar may descend from two Ideals, and then they mix on three axes that are drawn apart: one lends the aureola its **form**, either lends the **gem** it glows like, and either lends the **tell**.  Honor's standing flame, glowing like Beauty's opal, beating once when you see something you like, belongs to that pair and to nobody else at the table.\n\nNothing here is mechanical. Celestial Revelation carries the rules; this carries the face.\n",
+    "\nOne Aasimar's visible descent, drawn once and kept.\n\nTwo axes, deliberately separate.  The talaria take their **metal** and the aureola takes its **gem**, so a silver-winged aasimar under a ruby halo is a different creature from a red-iron-winged one under diamond, and neither is a restatement of the other.  Nothing is *made* of either: the wings shine like a metal and the halo glows like a stone.  Comparison, not actual material.\n",
+    "\nThe whole mark, arranged.\n\nOrder is drawn as well as phrasing, because three sentences that always arrive in the same order read as a form even when each one is different.\nSometimes the descent explains what follows; sometimes it arrives at the end as the reason for what you have just been told.\n"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Aasimar/Revelations/Inner_Radiance.py",
+   "prewipe_size": 559,
+   "prewipe_mtime": "2026-08-06 12:20",
+   "now": 265,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Aasimar/Revelations/Necrotic_Shroud.py",
+   "prewipe_size": 577,
+   "prewipe_mtime": "2026-08-06 12:20",
+   "now": 267,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Aasimar/Revelations/Talarian_Wings.py",
+   "prewipe_size": 503,
+   "prewipe_mtime": "2026-08-13 20:42",
+   "now": 265,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Aasimar/Revelations/__init__.py",
+   "prewipe_size": 753,
+   "prewipe_mtime": "2026-08-13 20:42",
+   "now": 256,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Aasimar/Revelations/base.py",
+   "prewipe_size": 1591,
+   "prewipe_mtime": "2026-08-06 12:25",
+   "now": 245,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Aasimar/__init__.py",
+   "prewipe_size": 2047,
+   "prewipe_mtime": "2026-08-14 02:03",
+   "now": 248,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Aasimar/base.py",
+   "prewipe_size": 871,
+   "prewipe_mtime": "2026-08-13 19:39",
+   "now": 233,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Aasimar/resolution.py",
+   "prewipe_size": 7926,
+   "prewipe_mtime": "2026-08-20 17:51",
+   "now": 8445,
+   "lost_items": 4,
+   "lost_chars": 562,
+   "sample": [
+    " Radiant damage. <i>Radiant.</i> <br><b>Necrotic Shroud.</b> Your eyes briefly become pools of darkness and your talaria spread into flightless wings. Creatures other than your allies within ",
+    "<br><b>Talarian Wings.</b> Your talaria grow in a burst of celestial energy, spreading from vestigial into two full spectral wings. Until the transformation ends, you have a Fly Speed of ",
+    " feet. <i>Radiant.</i> <br><b>Inner Radiance.</b> Your aureola blazes, and searing light radiates from your eyes and mouth. For the duration you shed Bright Light in a "
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Aasimar/traits.py",
+   "prewipe_size": 859,
+   "prewipe_mtime": "2026-08-17 18:18",
+   "now": 237,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Dragonborn.py",
+   "prewipe_size": 615,
+   "prewipe_mtime": "2026-08-06 13:40",
+   "now": 237,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Dragonborn/Map_of_Ancestors.py",
+   "prewipe_size": 1396,
+   "prewipe_mtime": "2026-08-14 11:46",
+   "now": 1396,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Dragonborn/__init__.py",
+   "prewipe_size": 2088,
+   "prewipe_mtime": "2026-08-14 12:55",
+   "now": 254,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Dragonborn/base.py",
+   "prewipe_size": 881,
+   "prewipe_mtime": "2026-08-14 11:46",
+   "now": 881,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Dragonborn/resolution.py",
+   "prewipe_size": 4630,
+   "prewipe_mtime": "2026-08-21 12:34",
+   "now": 4199,
+   "lost_items": 4,
+   "lost_chars": 210,
+   "sample": [
+    "*Dragons have wise eyes, colorful gems each with a vertical slit. Yours are just the same.*\n\n",
+    "Something that was always folded away finally has room to open. As a ",
+    "AtlasActorLudi.SpeciesKit.traits"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Dragonborn/traits.py",
+   "prewipe_size": 1971,
+   "prewipe_mtime": "2026-08-17 18:18",
+   "now": 2071,
+   "lost_items": 1,
+   "lost_chars": 16,
+   "sample": [
+    "Grant_Resistance"
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Dwarves.py",
+   "prewipe_size": 609,
+   "prewipe_mtime": "2026-08-06 13:40",
+   "now": 231,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Dwarves/__init__.py",
+   "prewipe_size": 1588,
+   "prewipe_mtime": "2026-08-13 13:52",
+   "now": 248,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Dwarves/base.py",
+   "prewipe_size": 794,
+   "prewipe_mtime": "2026-08-13 13:27",
+   "now": 794,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Dwarves/resolution.py",
+   "prewipe_size": 3230,
+   "prewipe_mtime": "2026-08-24 12:09",
+   "now": 2912,
+   "lost_items": 9,
+   "lost_chars": 661,
+   "sample": [
+    "*Your Nana used to say: Dwarves eat beyond full, and work beyond exhaustion, so have another bowl.*\n\nYour Hit Point maximum was increased by an extra ",
+    "*What you consider spicy could kill an elf. A dwarven diet made your body hard to poison.*\n\nYou have Resistance to ",
+    " minutes, so long as you are on or touching a stone surface, natural or worked. You can do this "
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Dwarves/traits.py",
+   "prewipe_size": 2817,
+   "prewipe_mtime": "2026-08-17 18:18",
+   "now": 3391,
+   "lost_items": 1,
+   "lost_chars": 16,
+   "sample": [
+    "Grant_Resistance"
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Elves/Dark_Elf.py",
+   "prewipe_size": 1258,
+   "prewipe_mtime": "2026-08-18 20:42",
+   "now": 239,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Elves/Drow.py",
+   "prewipe_size": 1229,
+   "prewipe_mtime": "2026-08-17 19:14",
+   "now": 231,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Elves/Fae_Elf.py",
+   "prewipe_size": 1487,
+   "prewipe_mtime": "2026-08-14 10:38",
+   "now": 1487,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Elves/High_Elf.py",
+   "prewipe_size": 1044,
+   "prewipe_mtime": "2026-08-14 10:36",
+   "now": 239,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Elves/Shadow_Elf.py",
+   "prewipe_size": 1509,
+   "prewipe_mtime": "2026-08-17 19:14",
+   "now": 1460,
+   "lost_items": 1,
+   "lost_chars": 16,
+   "sample": [
+    "DARKVISION_RANGE"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Elves/Wood_Elf.py",
+   "prewipe_size": 987,
+   "prewipe_mtime": "2026-08-14 10:36",
+   "now": 239,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Elves/__init__.py",
+   "prewipe_size": 2356,
+   "prewipe_mtime": "2026-08-18 20:42",
+   "now": 244,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Elves/base.py",
+   "prewipe_size": 796,
+   "prewipe_mtime": "2026-08-17 16:15",
+   "now": 231,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Elves/resolution.py",
+   "prewipe_size": 6130,
+   "prewipe_mtime": "2026-08-19 12:45",
+   "now": 5415,
+   "lost_items": 17,
+   "lost_chars": 1047,
+   "sample": [
+    "*Elves are said to be made of the same essence as dream and nightmare. Perhaps there is more than mere poetry to it.*\n\nYou don't need to sleep, and magic can't put you to sleep. You can finish a Long Rest in 4 hours by meditating.",
+    "\n\nYou always have these spells prepared. You can cast each of them once without a spell slot, regaining that use when you finish a Long Rest, and can also cast them with spell slots.",
+    "The woods have always cared for your people. Now their whispers guide you, their paths open before you, and their shadows protect you."
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Elves/traits.py",
+   "prewipe_size": 1749,
+   "prewipe_mtime": "2026-08-17 19:14",
+   "now": 1749,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Gnomes/Forest_Gnome.py",
+   "prewipe_size": 968,
+   "prewipe_mtime": "2026-08-13 17:12",
+   "now": 248,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Gnomes/Rock_Gnome.py",
+   "prewipe_size": 1244,
+   "prewipe_mtime": "2026-08-13 17:12",
+   "now": 244,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Gnomes/__init__.py",
+   "prewipe_size": 1524,
+   "prewipe_mtime": "2026-08-13 17:12",
+   "now": 246,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Gnomes/base.py",
+   "prewipe_size": 655,
+   "prewipe_mtime": "2026-08-17 16:15",
+   "now": 232,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Gnomes/resolution.py",
+   "prewipe_size": 5671,
+   "prewipe_mtime": "2026-08-25 10:40",
+   "now": 5655,
+   "lost_items": 3,
+   "lost_chars": 547,
+   "sample": [
+    "*You were not supposed to go into the woods, but the Fey felt closer there, and you learnt to listen: to them when you found one, and to the birds and bees when you didn't, until both became friends.*\n\n<b>Spellcasting Ability.</b> ",
+    "*You learned early that anything could be taken apart and improved, and somewhere along the way you learned to do it with a word instead of a screwdriver.*\n\n<b>Spellcasting Ability.</b> ",
+    "*No one can outsmart a gnome! Unless you are distracted.*\n\nYou have Advantage on Intelligence, Wisdom, and Charisma saving throws."
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Gnomes/traits.py",
+   "prewipe_size": 1011,
+   "prewipe_mtime": "2026-08-06 14:16",
+   "now": 236,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Goliaths/Giant_Heritages/Clouds_Jaunt.py",
+   "prewipe_size": 840,
+   "prewipe_mtime": "2026-08-18 18:08",
+   "now": 266,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Goliaths/Giant_Heritages/Fires_Burn.py",
+   "prewipe_size": 932,
+   "prewipe_mtime": "2026-08-18 18:06",
+   "now": 262,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Goliaths/Giant_Heritages/Frosts_Chill.py",
+   "prewipe_size": 1244,
+   "prewipe_mtime": "2026-08-18 18:06",
+   "now": 266,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Goliaths/Giant_Heritages/Hills_Tumble.py",
+   "prewipe_size": 1007,
+   "prewipe_mtime": "2026-08-18 18:06",
+   "now": 266,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Goliaths/Giant_Heritages/Stones_Endurance.py",
+   "prewipe_size": 1010,
+   "prewipe_mtime": "2026-08-18 19:02",
+   "now": 1007,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Goliaths/Giant_Heritages/Storms_Thunder.py",
+   "prewipe_size": 1080,
+   "prewipe_mtime": "2026-08-18 18:06",
+   "now": 270,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Goliaths/Giant_Heritages/__init__.py",
+   "prewipe_size": 1148,
+   "prewipe_mtime": "2026-08-06 12:31",
+   "now": 258,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Goliaths/Giant_Heritages/base.py",
+   "prewipe_size": 1550,
+   "prewipe_mtime": "2026-08-06 12:31",
+   "now": 250,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Goliaths/__init__.py",
+   "prewipe_size": 2790,
+   "prewipe_mtime": "2026-08-14 13:50",
+   "now": 250,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Goliaths/base.py",
+   "prewipe_size": 600,
+   "prewipe_mtime": "2026-08-13 19:39",
+   "now": 234,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Goliaths/resolution.py",
+   "prewipe_size": 5803,
+   "prewipe_mtime": "2026-08-26 00:23",
+   "now": 5800,
+   "lost_items": 1,
+   "lost_chars": 191,
+   "sample": [
+    "*The might of titans still carries on.*\n\nYou have Advantage on ability checks you make to end the Grappled condition, and you count as one size larger when determining your carrying capacity."
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Goliaths/traits.py",
+   "prewipe_size": 1507,
+   "prewipe_mtime": "2026-08-06 12:31",
+   "now": 238,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Halflings/__init__.py",
+   "prewipe_size": 1725,
+   "prewipe_mtime": "2026-08-28 12:15",
+   "now": 252,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Halflings/base.py",
+   "prewipe_size": 793,
+   "prewipe_mtime": "2026-08-06 13:40",
+   "now": 235,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Halflings/resolution.py",
+   "prewipe_size": 2372,
+   "prewipe_mtime": "2026-08-28 11:25",
+   "now": 247,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Halflings/traits.py",
+   "prewipe_size": 1537,
+   "prewipe_mtime": "2026-08-06 12:37",
+   "now": 239,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Humans.py",
+   "prewipe_size": 2038,
+   "prewipe_mtime": "2026-08-29 15:25",
+   "now": 2038,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/NonPlayer.py",
+   "prewipe_size": 1011,
+   "prewipe_mtime": "2026-08-06 13:41",
+   "now": 235,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Orcs/__init__.py",
+   "prewipe_size": 1395,
+   "prewipe_mtime": "2026-08-13 14:22",
+   "now": 242,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Orcs/base.py",
+   "prewipe_size": 693,
+   "prewipe_mtime": "2026-08-06 13:40",
+   "now": 230,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Orcs/resolution.py",
+   "prewipe_size": 2574,
+   "prewipe_mtime": "2026-08-21 14:02",
+   "now": 242,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Orcs/traits.py",
+   "prewipe_size": 1792,
+   "prewipe_mtime": "2026-08-06 12:40",
+   "now": 234,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Tieflings/Abyssal.py",
+   "prewipe_size": 1212,
+   "prewipe_mtime": "2026-08-14 17:43",
+   "now": 241,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Tieflings/Chthonic.py",
+   "prewipe_size": 1217,
+   "prewipe_mtime": "2026-08-14 17:43",
+   "now": 243,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Tieflings/Infernal.py",
+   "prewipe_size": 1073,
+   "prewipe_mtime": "2026-08-15 10:41",
+   "now": 243,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Tieflings/__init__.py",
+   "prewipe_size": 2253,
+   "prewipe_mtime": "2026-08-24 21:52",
+   "now": 252,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Tieflings/base.py",
+   "prewipe_size": 705,
+   "prewipe_mtime": "2026-08-13 19:39",
+   "now": 235,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Tieflings/resolution.py",
+   "prewipe_size": 4988,
+   "prewipe_mtime": "2026-08-25 01:07",
+   "now": 3762,
+   "lost_items": 14,
+   "lost_chars": 883,
+   "sample": [
+    "<br>You always have your legacy spells prepared. You can cast each spell once without a spell slot, and you regain the ability to cast it in that way when you finish a Long Rest. You can also cast the spell using any spell slots you have of the appropriate level.",
+    "Hades' gates are said to be guarded by grim dogs with several heads, strange faceless minotaurs, and foxes with a multitude of tails.",
+    "What runs in you came out of a place that never agreed on a shape, and it is hungry in the way weather is hungry."
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/Tieflings/traits.py",
+   "prewipe_size": 1683,
+   "prewipe_mtime": "2026-08-17 18:18",
+   "now": 1737,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/__init__.py",
+   "prewipe_size": 6661,
+   "prewipe_mtime": "2026-08-29 15:25",
+   "now": 6661,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/__main__.py",
+   "prewipe_size": 42003,
+   "prewipe_mtime": "2026-08-20 18:15",
+   "now": 233,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/application.py",
+   "prewipe_size": 3867,
+   "prewipe_mtime": "2026-08-26 21:27",
+   "now": 239,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/bases.py",
+   "prewipe_size": 4595,
+   "prewipe_mtime": "2026-08-18 20:34",
+   "now": 227,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/catalog.py",
+   "prewipe_size": 5022,
+   "prewipe_mtime": "2026-08-06 14:10",
+   "now": 231,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/declarations.py",
+   "prewipe_size": 6601,
+   "prewipe_mtime": "2026-08-13 12:58",
+   "now": 7813,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/kinship.py",
+   "prewipe_size": 3043,
+   "prewipe_mtime": "2026-08-17 16:15",
+   "now": 231,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/magic.py",
+   "prewipe_size": 3593,
+   "prewipe_mtime": "2026-08-19 00:57",
+   "now": 4668,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/physiology.py",
+   "prewipe_size": 2672,
+   "prewipe_mtime": "2026-08-06 11:17",
+   "now": 237,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/presentation.py",
+   "prewipe_size": 848,
+   "prewipe_mtime": "2026-08-19 11:33",
+   "now": 856,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/resolution.py",
+   "prewipe_size": 3196,
+   "prewipe_mtime": "2026-08-24 20:45",
+   "now": 237,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasActorLudi/SpeciesKit/traits.py",
+   "prewipe_size": 1694,
+   "prewipe_mtime": "2026-08-20 18:14",
+   "now": 1694,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasEpica/Charts_of_The_Monomyth.py",
+   "prewipe_size": 5948,
+   "prewipe_mtime": "2026-08-08 14:41",
+   "now": 5513,
+   "lost_items": 3,
+   "lost_chars": 121,
+   "sample": [
+    "Choice() requires the Adventure or Character Dice owner.",
+    "Weighted_Choice() requires the Adventure Dice owner.",
+    "Random | None"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasEpica/Grimoire_of_Adventure.py",
+   "prewipe_size": 11715,
+   "prewipe_mtime": "2026-08-06 14:48",
+   "now": 10066,
+   "lost_items": 27,
+   "lost_chars": 1522,
+   "sample": [
+    "\nGrimoire of Adventure \u2014 TOP substrate for AtlasEpica (DM Character Oracle).\n\nAn Adventure is a stable Target: seed, level, and one **DM Character** (NPC).\nThat figure is *not* assumed evil: villain, Quest Master, contested guardian,\nor anyone whose will frames the session. Meaning grows by Tags. Session frame\n= Area (biome/place) + Lair (specific seat), collapsed when the DM Character\nis set. Theme Tags remain for a later soft layer (QST-0037.13 / .16).\n\n        Forest(adventure)          # Area\n        Tower(adventure)           # Lair\n        adventure.dm_character     # the DM Character (NPC)\n\nWave collapse here means Tag-gated seeded choice \u2014 same spirit as Titles \u2014\nnot the WorldBuild grid WFC kit. Tracked under QST-0037.16.\n",
+    "\nWhen the DM Character is set: collapse Area + Lair from their keys (Titles-style).\nRequires adventure.dm_character. Idempotent if Area/Lair already applied.\n",
+    "Attach the DM Character (any moral role). Caller should Collapse_Frame after."
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasEpica/Map_of_Scenes.py",
+   "prewipe_size": 15284,
+   "prewipe_mtime": "2026-08-06 14:46",
+   "now": 749,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasEpica/Map_of_Stories.py",
+   "prewipe_size": 122241,
+   "prewipe_mtime": "2026-08-06 10:15",
+   "now": 1464,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasEpica/Map_of_Titles.py",
+   "prewipe_size": 195947,
+   "prewipe_mtime": "2026-08-27 02:42",
+   "now": 742,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasEpica/__init__.py",
+   "prewipe_size": 267,
+   "prewipe_mtime": "2026-07-17 12:22",
+   "now": 245,
+   "lost_items": 1,
+   "lost_chars": 252,
+   "sample": [
+    "AtlasEpica \u2014 syntax of stories: Adventures, Themes, Titles, Stories, Scenes.\n\nPhonotactics / name sound \u2192 AtlasNomina.\nDM Companion session chrome \u2192 AtlasMagistratum (calls this Atlas).\nShared myth collapse \u2192 Charts_of_The_Monomyth (Stories + Scenes).\n"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasInventarium/Compass_of_Recharging.py",
+   "prewipe_size": 264,
+   "prewipe_mtime": "2026-08-06 14:08",
+   "now": 374,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasInventarium/GearKit.py",
+   "prewipe_size": 44465,
+   "prewipe_mtime": "2026-08-25 13:46",
+   "now": 46732,
+   "lost_items": 10,
+   "lost_chars": 1693,
+   "sample": [
+    "\nGearKit \u2014 loadout POLICY over the ItemKit primitives.\n\nThought pattern (read this before the code)\n        1. ``ItemKit`` knows what gear IS. This module knows who gets WHAT.\n           Primitives stay policy-free so a second policy can exist:\n           ``Outfit_Player`` here, ``Outfit_NonPlayer`` later (characteristic\n           weapon, travel light, lootables) without touching the item layer.\n        2. Proficiency \u2014 \"who may use what\" \u2014 is a different question from this\n           module's \"what does this Character end up with\", so it lives in\n           ``Map_of_Gear_Proficiency`` and is imported here, not redefined.\n        3. Every pick is drawn from a per-character seeded stream, so the same\n           seed always outfits the same way (no reroll flicker).\n        4. Nothing is written that a derived read could compute. AC is never\n           stored here: ``armour_class(char, unarmoured=\u2026)`` sums it live.\n\nPublic surface\n        Outfit_Player(char)      \u2014 issue a full starting loadout\n        starting_budget(char)    \u2014 gold for the initial kit\n\n        Re-exported from ``Map_of_Gear_Proficiency`` for existing callers:\n        armour_allowance, weapon_pool, may_use_shield, unarmoured_formula,\n        has_unarmoured_defence.\n",
+    "\nAt hand \u2014 the belt and the back. A multislot field, not a single one.\n\nThis is where a Fighter's other mastered weapons live: owned, not in\nuse, but one swap away rather than at the bottom of a pack.\n",
+    "How many things fit at hand \u2014 two, plus one per Weapon Mastery."
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasInventarium/Grimoire_of_Crafts.py",
+   "prewipe_size": 13290,
+   "prewipe_mtime": "2026-08-01 12:47",
+   "now": 13288,
+   "lost_items": 1,
+   "lost_chars": 24,
+   "sample": [
+    "AtlasInventarium.ItemKit"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasInventarium/Grimoire_of_Objects.py",
+   "prewipe_size": 36744,
+   "prewipe_mtime": "2026-08-06 14:36",
+   "now": 36616,
+   "lost_items": 4,
+   "lost_chars": 22,
+   "sample": [
+    "character",
+    "dices",
+    "Roll"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasInventarium/ItemKit.py",
+   "prewipe_size": 33943,
+   "prewipe_mtime": "2026-08-05 18:42",
+   "now": 386,
+   "lost_items": 206,
+   "lost_chars": 9861,
+   "sample": [
+    "\nItemKit \u2014 one generic Item, and the whole Tag family that crafts it.\n\nPer Convention (Curia/Canon/Conventions.md): a Kit is \"the preferred home for\na stable domain object and its related Tags.\" Item is that domain object;\neverything below is its one canonical Tag family \u2014 proficiency-reading, the\nweapon/armor/gear catalogues, and the loadout policy live elsewhere\n(``AtlasInventarium.Map_of_Gear_Proficiency``, the ``Ledger_of_*`` modules,\n``AtlasInventarium.GearKit``) precisely so this file stays one axis.\n\nThought pattern (read this before the code)\n        1. An Item is almost nothing: a name, a price, a weight, a description.\n           Everything else is a Tag. There are no Armor/Weapon subclasses.\n        2. Tags craft it. ``Wearable``/``Wieldable`` say where it can sit,\n           ``Armour``/``Weapon``/``Shield`` say what it does, ``Simple``/``Martial``\n           gate proficiency, ``Magical`` carries what it grants.\n        3. ``Equipped`` is a Tag, not a slot pointer. So \"is more than one armour\n           equipped?\" is a question you can ASK \u2014 and answer by selling the worse\n           one and rebuilding (``reconcile``).\n        4. Anything an artifact grants is summed at READ time (``armour_class``,\n           ``grant_total``). Natural defences are never overwritten, so removing or\n           selling the artifact simply removes its contribution.\n\nUsage\n        from AtlasInventarium.ItemKit import (\n                        Build_Armour, Build_Weapon, equip, armour_class,\n                        )\n        mail = Build_Armour(name=\"Chain Mail\", base_ac=16, kind=\"Heavy\", value=75)\n        equip(char, mail)\n        armour_class(char)          # derived \u2014 never stored\n",
+    "\nAt hand \u2014 on the belt, the back, the bandolier. Not in use, but reachable.\n\nJulio (2026-08-05): \"we should add a 'carrying' field for an extra weapon\nor item. Maybe fighters may even carry one of these for each weapon\nmastery so they can access all of them.\"\n\nThe tier matters mechanically: a Fighter who drilled six masteries has\nthose six weapons ON them, one swap away, rather than buried in a pack\nthey would have to stop and dig through. It is a Tag for the same reason\n``Equipped`` is \u2014 \"how many things is this hero carrying?\" stays a question\nyou can ask, and ``reconcile`` can answer it.\n\nNothing may be both equipped and carried; ``equip`` and ``carry`` each\nstrip the other, so the three tiers (in use / at hand / in the bag) always\npartition what a hero owns.\n",
+    "Craft a weapon. ``category`` gates proficiency, ``mastery`` its property.\n\n``category=\"Firearm\"`` tags ``Firearm`` instead of the plain ``Weapon`` \u2014\nFirearm IS-A Weapon (Tag inheritance), so ``item in Weapon`` still holds,\nbut a Martial-proficient character does not get firearms for free.\n\n``attack_with`` names the ability this weapon attacks with when it is NOT\nthe usual Strength/Dexterity rule \u2014 \"Intelligence\", \"Wisdom\", \"Charisma\".\nJulio (2026-08-05): \"for magic users it would make sense to have some\nweapons that attack with int/wis/cha, to make them more usable\u2026 It should\nbe clearly described in the description which one is using.\" So it is\nstored as a field and printed in the blurb, never left to prose alone.\n"
+   ],
+   "state": "GUTTED"
+  },
+  {
+   "module": "AtlasInventarium/Ledger_of_Armors.py",
+   "prewipe_size": 5356,
+   "prewipe_mtime": "2026-08-01 13:20",
+   "now": 5364,
+   "lost_items": 1,
+   "lost_chars": 24,
+   "sample": [
+    "AtlasInventarium.ItemKit"
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasInventarium/Ledger_of_Gear.py",
+   "prewipe_size": 9672,
+   "prewipe_mtime": "2026-08-05 10:28",
+   "now": 17078,
+   "lost_items": 1,
+   "lost_chars": 525,
+   "sample": [
+    "\nLedger_of_Gear \u2014 adventuring gear and the seven equipment packs.\n\nTools live in ``Ledger_of_Tools`` (split out 2026-07-31, Julio's request): a\nproficiency kit is a different axis from a survival item or a bundle of them.\n\nBuilt with ``Build_Item``.\n\nData source: the 2024 equipment table (dnd2024.wikidot.com/equipment:\nadventuring-gear), transcribed 2026-07-31. Prices and weights are game FACTS\nand are reproduced as such; every description here is our own wording.\n\nCosts are held in gold: 1 SP = 0.1 GP, 1 CP = 0.01 GP.\n"
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasInventarium/Ledger_of_Tools.py",
+   "prewipe_size": 9609,
+   "prewipe_mtime": "2026-08-25 13:46",
+   "now": 9304,
+   "lost_items": 5,
+   "lost_chars": 179,
+   "sample": [
+    "You can build, carve, reinforce, repair, or dismantle wooden works and read their grain, structure, alterations, and likely failures.",
+    "Woodworker's Tools",
+    "Woodworkers_Tools"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasInventarium/Ledger_of_Weapons.py",
+   "prewipe_size": 11940,
+   "prewipe_mtime": "2026-08-01 12:47",
+   "now": 11946,
+   "lost_items": 1,
+   "lost_chars": 24,
+   "sample": [
+    "AtlasInventarium.ItemKit"
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasInventarium/Ledger_of_Wonders.py",
+   "prewipe_size": 13892,
+   "prewipe_mtime": "2026-08-28 12:48",
+   "now": 13890,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasInventarium/Map_of_Gear_Proficiency.py",
+   "prewipe_size": 6891,
+   "prewipe_mtime": "2026-08-05 11:49",
+   "now": 6871,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasInventarium/Map_of_Gear_Titles.py",
+   "prewipe_size": 58996,
+   "prewipe_mtime": "2026-08-05 10:41",
+   "now": 865,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasInventarium/Map_of_Materials.py",
+   "prewipe_size": 17318,
+   "prewipe_mtime": "2026-08-05 10:42",
+   "now": 17300,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasInventarium/ToolsKit.py",
+   "prewipe_size": 53335,
+   "prewipe_mtime": "2026-08-27 13:06",
+   "now": 53342,
+   "lost_items": 1,
+   "lost_chars": 364,
+   "sample": [
+    "Writing teaches the patience of words. A spoken word has the life of a butterfly; once written, it may last beyond the memory of why it was written. A name may outlive its bearer, and a prayer may cross generations. A single hand can reveal discipline, grief, authority, or defiance before its meaning is read. You have learned to give thought a form that endures."
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasInventarium/__init__.py",
+   "prewipe_size": 48,
+   "prewipe_mtime": "2026-07-07 22:07",
+   "now": 46,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasLudus/Map_of_Languages.py",
+   "prewipe_size": 38415,
+   "prewipe_mtime": "2026-08-06 14:38",
+   "now": 28878,
+   "lost_items": 45,
+   "lost_chars": 1536,
+   "sample": [
+    "\nBuild Player languages (2024 + TOP preference).\n\nAlways Common, then two origin languages (cultural species tongue first,\nremaining slots weighted by species / Guild / subclass), then class-feature\nlanguages. Feature picks are stashed on ``char.language_feature_grants``\nso Training Entries can name them.\n",
+    "\nPreference map for the remaining origin language picks.\n\nStandard tongues start with a baseline weight. Species / Guild /\nSubclass affinities raise them \u2014 rare tongues only enter when an\naffinity gives them weight (e.g. Fiend Warlock \u2192 Infernal).\n",
+    "\n2024 shape: grant ORIGIN_LANGUAGE_COUNT languages beyond Common.\n\n1. Cultural species tongue (guaranteed when mapped).\n2. Fill remaining slots with weighted random picks.\n"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasLudus/Map_of_Useful_Functions.py",
+   "prewipe_size": 2902,
+   "prewipe_mtime": "2026-08-06 14:42",
+   "now": 2874,
+   "lost_items": 4,
+   "lost_chars": 60,
+   "sample": [
+    "AtlasActorLudi.AtlasAlusoris.Map_of_NPC",
+    "AtlasAlusoris",
+    "Roll"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasLudus/__init__.py",
+   "prewipe_size": 64,
+   "prewipe_mtime": "2026-07-07 22:07",
+   "now": 62,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasLusoris/AbilityScoresKit.py",
+   "prewipe_size": 9102,
+   "prewipe_mtime": "2026-08-26 13:17",
+   "now": 7517,
+   "lost_items": 8,
+   "lost_chars": 2044,
+   "sample": [
+    "\nAbility Scores \u2014 the six numbers, and the combat-style bonuses that ride them.\n\n``char.AS`` holds one of these.  It is a **plain value object, not a Tag**: the\nCharacter owns it by reference, and TagKit is not involved.  An earlier draft\ndeclared ``class AbilityScores(Tag)``, and that is worth recording because the\nfailure was not obvious.  TagKit's metaclass intercepts construction, so the\nTag instance and the agent become two different objects: ``__init__`` wrote the\nscores onto the Character while every property read them off the Tag, and\n``super().__init__(agent)`` reached ``object.__init__``, which takes no\narguments.  If this ever wants to become a Tag, the Character's ``AS``\nattribute has to stop being an object first.\n\n**Preferences do not live here.**  How much a Character wants each score raised\nis already answered by ``GuildKit.ability_weights``, whose own docstring calls\nitself \"the one model\": Tags declare ``ABILITY_PREFERENCE`` and\n``ABILITY_WEIGHT``, and every site that chooses a score reads the same numbers.\nA second preference map on this object would be exactly the drift that function\nexists to prevent, so it was removed rather than wired up.\n\nMAR and MAG are different, and they do belong here.  They are not opinions\nabout what a Character should become; they are bonuses applied to whichever\nscore is already highest, so they are a property of the scores themselves.\n",
+    "The six scores, plus the martial and magical style bonuses.\n\n* `_raw_scores` \u2013 dict with keys \"str\", \"dex\", \"con\", \"int\", \"wis\", \"cha\".\n* `mar` - martial combat style bonus (applied dynamically to the highest of str/dex).\n* `mag` - magical combat style bonus (applied dynamically to the highest of int/wis/cha).\n",
+    "Idempotent helper: give the Agent an AbilityScores record if it lacks one."
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfBackgrounds/Map_of_Arcana_Unleashed_Backgrounds.py",
+   "prewipe_size": 1101,
+   "prewipe_mtime": "2026-07-24 19:47",
+   "state": "SOURCE_GONE",
+   "now": 0,
+   "lost_chars": 1101,
+   "lost_items": -1
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfBackgrounds/Map_of_Astarion_Backgrounds.py",
+   "prewipe_size": 8186,
+   "prewipe_mtime": "2026-08-25 13:41",
+   "now": 7126,
+   "lost_items": 5,
+   "lost_chars": 2782,
+   "sample": [
+    "You are in the book. Not a holy book, the other kind: the one behind the bar, the one the parish clerk keeps, the list of people you send for when something has gone wrong in a house and nobody wants to say what. Word travels in a very particular way, which is quietly, and it travels far. So there is always work, and you set the rate. A family that has spent three months pretending nothing is happening will pay up on the day they stop pretending. You get let into houses that would never open for a magistrate, and told things that would never be said to a priest, because you are neither, and because you have already seen worse. But most things like this do not think one at a time. Whatever you cut out of a person had somewhere it belonged, and it went back, and now knows your face and your rate. Every job you finish makes the list of creatures that hate you longer. They always grab you. You have been held by a great many things. You have never yet stayed held. And you are aware that this is a record and not a guarantee.",
+    "You are out. You think so. You want to. Whether you were released, or merely reassigned, is a question you have decided not to hold up to the light. But the masters still have a hold on you. The channel did not close. The debt was never settled. And yet they allow this. A letter reached you, and with it the signet of the house, yours to use in their name: it opens doors that were never going to open, closes others for good, and teaches everyone who sees it something about you that you would rather they did not know. Instructions came with it. They said they were happy for you, happy you had found your calling. But it arrived in a tavern you had not known you would stop at, in a room with the door shut, and it was lying on top of you. The message was clear. They still own you. They will allow this, and it is not something you can get out of your head. You still receive orders. Follow the instructions, they say, and you will buy your freedom. And if you do not... well. You had better, darling.",
+    "Credit finds you. Walk into any town with a back room and somebody will stake you on your face alone, because your face is good and everybody has heard something. You owe them big. Somewhere in a drawer there is paper with your name on it and a number that has never once got smaller. And markers get called. Never in coin. Coin is what people ask for when they have no imagination. There is a thing wants fetching out of somewhere unpleasant. A name wants carrying where it should not go. An evening's work nobody will admit to paying for. There is a job with your name on it, and you will take it, because of what happens to the ones who do not, and because you have never in your life left a table before it was finished."
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfBackgrounds/Map_of_Eberron_Backgrounds.py",
+   "prewipe_size": 14576,
+   "prewipe_mtime": "2026-08-25 10:40",
+   "now": 13238,
+   "lost_items": 10,
+   "lost_chars": 6212,
+   "sample": [
+    "Any temple with a roof will give you a bed and feed you, and nobody asks how long you intend to stay. That is not hospitality. It is what you are owed, and what they would rather not be caught refusing. You get the room at the end of the corridor, and the door closes a little too quickly behind you. Then, some time after dark, somebody knocks. They always come. The woman whose neighbour has not eaten at his own table since spring. The father whose daughter's window is open every morning and he knows he shut it. The sexton who has counted the graves twice and got two different numbers. Frightened people tell you everything, including what they have never said to their own family, because you are the one person who will not laugh, and because you are the one who was sent to be told. And you can answer them. You were given the whole shelf: the seventy-two sealed names and what each of them wants, the were-bestiary with its notes on silver and rue and the turning of the moon, the tables of which dead rise and which merely lie there, the accounts of every contract anyone survived long enough to record. When a thing has a name, you know the name. When it has a rule, you know the rule. If it was written down anywhere, you can send for it and it will come. Nobody writes in the margin whether any of it is true. The book was made by people who were frightened too, who set down what they believed had worked, and who were not always alive afterwards to correct it. Salt, iron, running water, a name said backwards. Some of it is the gathered wisdom of centuries. Some of it is a rumour copied out so many times it hardened into scripture. You will not learn which is which until you are standing in front of the thing, at night, with the page in your memory and no time to check it.",
+    "You are not alone, exactly. You are alone in any particular town, but there is a loose and quarrelsome web of people like you, and it reaches further than it has any right to. An apothecary with a drawer full of cuttings. A lamplighter who has mapped the three streets where dogs will not walk. A widow with forty years of notes in a hand nobody else can read. A bored clerk in a records office who copies out the strange ones for his own amusement. Most of you have never met. All of you write. Arrive anywhere and you can turn up the local one inside a day, because cranks recognise each other on sight. They will give you everything: what happened, when, who saw it, who is lying about it, and what the constable was paid to write down instead. They have been watching this town for years and not one person has ever asked them a single question about any of it. Ask, and you will not get them to stop. The price is that they are cranks. So are you, and you know exactly what that is worth. Perhaps one letter in twenty is a real observation. The rest is an eclipse, a fox, a grudge against a neighbour, or a lonely person who worked out that a good story brings a visitor. You sort it yourself, and sorting takes time you do not always have. And none of it counts. Not to a magistrate, not to a temple, not to anyone with the power to act. Your evidence is a heap of letters from people the world has already decided are unwell, collected by someone the world has decided the same about. When you are wrong, that is fair enough. When you are right, it is the worst thing about your life.",
+    "You were not always running. You remember a house, and a stretch of years with ordinary days in them. You were promised a cure. Then somebody decided your curse was a weapon they wanted to wield. What came after had rules, and you learned them the way anyone learns what is beaten into them. You are dangerous. You are property. You do not get to want things. You do not deserve to walk free among people who never agreed to stand near you. You are a weapon that happens to have a face, and a weapon is not allowed friends, because everything a weapon does is hurt, kill, destroy. They were not wrong. That is the worst of it. But you had to leave. Nobody has stopped looking. They are patient and well funded, and they do not need to be right about where you are, only close. They will come at you through the people around you, because they were taught the same lesson you were and they still believe it. They still know. Anyone who walks beside you is a lever. Your companions are safer not knowing your name, and safest not knowing you at all. There is nothing in this for you. No favour owed, no door that opens, no friend waiting in the next town. Only the next hunter tracking you down. What you have instead is that you go where you like, and you stop to smell the roses and put your hands in cold streams. You are the one deciding your life. You would rather be hunted as a free person than kept as a caged animal."
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfBackgrounds/Map_of_Forgotten_Realms_Backgrounds.py",
+   "prewipe_size": 32801,
+   "prewipe_mtime": "2026-08-25 13:46",
+   "now": 30984,
+   "lost_items": 33,
+   "lost_chars": 13369,
+   "sample": [
+    "Wherever your people were scattered, some of them landed, and they will know you before you speak. A back room, a barbershop, a kitchen with the tea already poured: sit down and they will ask what you need before they ask who you are. Everyone at that table has needed it. Someday you will be asked in turn, and there is no polite way to refuse. Go and sit with the old ones. Here they are invisible: no records, no standing, waiting on grandchildren to translate them at counters. They are also the last library of a world that is being forgotten. They know the true names, the rites that were made illegal, what the pattern on your grandmother's coat actually meant, where a thing was buried the week before the soldiers came. None of it was ever written down. They will tell you, if you carry their stories. Your History. And when it turns, word crosses the network in a day: a shop burned, a permit revoked, a girl taken by men who will not show the warrant, a temple reassigned to a god this country prefers. Everyone gives what they can. What you can give is worth more than the coin they could quietly take away. You are the one who can go. You could stop, of course. Speak only their language, wear only what they wear, let the stories and the gods go quiet, and in a generation nobody would know. Some of yours have. Memories carry a weight and a pain that some cannot bear. Everyone understands. Nobody says anything to them. That is its own kind of sentence.",
+    "Anyone can make magic items with the proper training. You have mastered it. You understand amulets, rings, and anything of metal, gem, crystal, or stone. Given the materials, the hours, and a quiet bench, you can produce trinkets of great power (you must follow the rules for Crafting Magic Items). The difficulty is never skill. It is always materials. What a true piece needs cannot be bought in a market: a scale from a silvery dragon, iron that fell out of the sky and is not cold yet, quicksilver from a spring that exists in one story and no map. So you go and get them, and others come with you, and that is how half your journeys have started. Between those, the commissions find you, because somebody always wants a thing ordinary money cannot buy: a ward for a child, a signet that cannot be forged, something to stop whatever has been visiting the house at night. And somewhere ahead is the piece you have been building toward your whole life, still missing the one component you have not yet discovered.",
+    "You cannot hide what you are forever, and everyone who finds out wants the same thing: You. A guild wants you tested, measured, and replicated. A temple wants to know whether it can be cured. A collector wants you for display, and you are not sure whether that means alive or dead. Somebody's army wants a walking countermeasure. No one will take no for an answer. But there are others. There have always been others. Whatever made you has happened before: a woman who caught a lightning bolt in her bare hand, a boy his village drowned who walked away over the waves, an elder who looks the same age as you. They are hard to find, because the ones who were easy to find are gone. Find them anyway. They are the only people alive who can tell you what you are turning into, which of the stories about your kind are true, and how to survive your gift. Some will want to teach you. Some will want you stopped before you make things worse for the rest. Either way, you need someone who truly understands."
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfBackgrounds/Map_of_Lorwyn_Backgrounds.py",
+   "prewipe_size": 5658,
+   "prewipe_mtime": "2026-08-11 23:52",
+   "now": 4780,
+   "lost_items": 5,
+   "lost_chars": 1721,
+   "sample": [
+    "Things arrive. A ring in the gutter. A key with no door. A letter addressed to a place you happen to be going. Signs of the road you must take. And people run into you in the street. They always have. A woman who has lost something, a man who owes something, a boy who has run from something, and every one of them looks at you and says a version of the same sentence: you are the one who can help me. They are usually right, which you take as further evidence, and you say yes before they have finished asking. You say yes every time. That is the cost, though you would never call it one. The stars always reward you for doing the right thing, marking your path. Every stranger is the prophecy and every errand is the road to your great destiny, so you cannot tell the one that matters from the forty that do not, and you have never once left a town by the road you meant to. Everything happens for a reason.",
+    "Things arrive. A ring in the gutter. A key with no door. A letter addressed to a place you happen to be going. Marks of a fate you share. And people run into you in the street. They always have. A woman who has lost something, a man who owes something, a boy who has run from something, and every one of them looks at you and says a version of the same sentence: you are the only one who can help me. They mean that exactly as it sounds. They have asked everybody else first. You say yes every time. That is the cost, and you know precisely what it is. The stars always punish you for refusing, marking your path. There is nobody coming after you and no second person to ask. And the ones who find you found you because they are as unlucky as you are, and misery loves company.",
+    "Born Under a Star"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfBackgrounds/Map_of_Ravenloft_Backgrounds.py",
+   "prewipe_size": 12091,
+   "prewipe_mtime": "2026-08-24 12:09",
+   "now": 10584,
+   "lost_items": 8,
+   "lost_chars": 4909,
+   "sample": [
+    "You can go back. Not by any door, and not the way a wizard would: you find the deepest shadow to hand, you speak your name in a whisper as you were taught, and you step out of the world the way other people step into sleep. Your body comes with you, which is the part nobody believes until they have watched it happen. It is useful the way a mirror is useful: it shows you the same thing, changed. A locked room may be rotten wood there. A cell, rusted iron. A city, a labyrinth. You can walk that country and learn from it, but the nightmare will not let you escape your reality: whatever ground you cover over there, you wake where you lay down, in the same room, with time having run at the same rate in both worlds. A hunt loses you in the waking world, though another begins on this side. And an hour you were not going to rest through can be spent in the shadow world instead: stay in the nightmare at least as long as a Short Rest takes, and you wake having had one. Go in calm and unafraid, or the nightmares will smell it on you. What waits there is not welcoming. The other side takes its shape from what is feared, and you are the one doing the fearing, so it builds the room out of you. It keeps your worst night in stock and it can run it again. Take somebody with you and it builds one for them too, and you are the reason they are standing in it. That is why you keep the ritual exactly, every time, and never improvise: your own name, said aloud in the dark, at intervals, whether or not there is anything there to hear it. And something there has taken an interest. It does not attack. It waits at the edge of the light while you sleep, a little nearer each time. And it too is whispering your name.",
+    "You keep a practice. In a city that is a door with your name on it and a room behind it with two chairs; on the road it is a table at the back of an inn and a word to a boy who knows everybody. It is never difficult to arrange. There is no shortage of people carrying something they cannot say aloud and still be taken seriously. You take them seriously, and word of that travels. So the work arrives without being sought: a client with a retainer and a rehearsed story, a servant sent ahead to ask your terms, an unsigned letter containing a very exact description of a house. And sometimes somebody arrives who is not a client at all, and observes, most pleasantly, that the matter is better left alone. Such callers always come too early. You have learned to take great pleasure in it. Nothing so reliably confirms that a thing wants looking into as a stranger arriving to say that it does not. A practice is somewhere anybody at all may find you seated. And you cannot let a good case alone. The dull you solve on the spot without effort; the interesting own you from the first sentence, and you will follow one into a swamp, a crypt, or somebody else's war, and those travelling with you will not always have been consulted.",
+    "Wherever people have died, which is everywhere, there is testimony to be had. Set out the board or the cards, and wait. One will come forward. What they offer is not knowledge but grievance. They will name who was in the house because they resented them, tell you where a thing was buried because they worry about it, and describe the eyes in exhaustive detail while being quite unable to put a name to them. Everything they say is bent by what was done to them and by pure feeling, and they are frequently and confidently wrong. But they were present, which no living witness can claim, and they have no reason whatever to protect anybody still breathing. The price is that they notice. When one of them finally passes on, the others see it happen. By morning there is a queue. They follow you out of the house and into the next dungeon. Nobody but you can settle the thing they need settled before they can let go. You cannot decline: you have tried, and found that a spirit has nothing but time, grief, and fury."
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfBackgrounds/OfficialBackgroundsKit.py",
+   "prewipe_size": 1423,
+   "prewipe_mtime": "2026-08-09 00:34",
+   "now": 1782,
+   "lost_items": 4,
+   "lost_chars": 35,
+   "sample": [
+    "ability_preference",
+    "equipment",
+    "hook"
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfBackgrounds/__init__.py",
+   "prewipe_size": 1119,
+   "prewipe_mtime": "2026-08-11 13:09",
+   "now": 1115,
+   "lost_items": 2,
+   "lost_chars": 9,
+   "sample": [
+    "tuple",
+    "type"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfFeats/Map_of_Epic_Boons.py",
+   "prewipe_size": 3985,
+   "prewipe_mtime": "2026-08-24 16:55",
+   "now": 579,
+   "lost_items": 23,
+   "lost_chars": 2946,
+   "sample": [
+    "Increase one ability score by 1, to a maximum of 30. You have a pool of ten d10s. As a Bonus Action, you can expend dice from the pool and regain Hit Points equal to the total. You also regain all expended dice when you finish a Long Rest. If you are reduced to 0 Hit Points but not killed outright, you can drop to 1 Hit Point instead and regain Hit Points equal to half your Hit Point maximum (once per Long Rest).",
+    "Increase one ability score by 1, to a maximum of 30. While you are in Dim Light or Darkness, you have Resistance to all damage except Force, Psychic, and Radiant, and you can take a Bonus Action to become Invisible. The Invisibility ends early after you take an action, Bonus Action, or Reaction.",
+    "Increase one ability score by 1, to a maximum of 30. When you or a creature within 60 feet of you succeeds or fails a D20 Test, you can roll 2d4 and apply the total as a bonus or penalty to the roll. Once you use this Boon, you can't use it again until you finish a Short or Long Rest."
+   ],
+   "state": "GUTTED"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfFeats/Map_of_Fighting_Styles.py",
+   "prewipe_size": 3193,
+   "prewipe_mtime": "2026-08-08 18:13",
+   "now": 3191,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfFeats/Map_of_General_Feats.py",
+   "prewipe_size": 22389,
+   "prewipe_mtime": "2026-08-24 16:53",
+   "state": "SOURCE_GONE",
+   "now": 0,
+   "lost_chars": 22389,
+   "lost_items": -1
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfFeats/__init__.py",
+   "prewipe_size": 67,
+   "prewipe_mtime": "2026-07-25 04:19",
+   "now": 219,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfFeatures/Map_of_Official_Origin_Feats.py",
+   "prewipe_size": 58827,
+   "prewipe_mtime": "2026-08-29 15:25",
+   "now": 61598,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfFeatures/__init__.py",
+   "prewipe_size": 253,
+   "prewipe_mtime": "2026-07-23 11:21",
+   "now": 253,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfGuilds/ArtificerKit.py",
+   "prewipe_size": 553,
+   "prewipe_mtime": "2026-08-06 01:16",
+   "now": 243,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfGuilds/BarbarianKit.py",
+   "prewipe_size": 8314,
+   "prewipe_mtime": "2026-08-25 12:42",
+   "now": 243,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfGuilds/BardKit.py",
+   "prewipe_size": 483,
+   "prewipe_mtime": "2026-08-06 01:16",
+   "now": 233,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfGuilds/ClericKit.py",
+   "prewipe_size": 495,
+   "prewipe_mtime": "2026-08-06 01:16",
+   "now": 537,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfGuilds/DruidKit.py",
+   "prewipe_size": 480,
+   "prewipe_mtime": "2026-08-06 01:16",
+   "now": 235,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfGuilds/FighterKit.py",
+   "prewipe_size": 27821,
+   "prewipe_mtime": "2026-08-28 12:26",
+   "now": 24926,
+   "lost_items": 12,
+   "lost_chars": 123,
+   "sample": [
+    "AtlasLusoris.AtlasOfGuilds.FighterKit",
+    "_package_self_test",
+    "isinstance"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfGuilds/MonkKit.py",
+   "prewipe_size": 496,
+   "prewipe_mtime": "2026-08-06 01:16",
+   "now": 233,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfGuilds/PaladinKit.py",
+   "prewipe_size": 522,
+   "prewipe_mtime": "2026-08-06 01:16",
+   "now": 239,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfGuilds/RangerKit.py",
+   "prewipe_size": 538,
+   "prewipe_mtime": "2026-08-06 01:16",
+   "now": 237,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfGuilds/RogueKit.py",
+   "prewipe_size": 523,
+   "prewipe_mtime": "2026-08-06 01:16",
+   "now": 235,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfGuilds/SorcererKit.py",
+   "prewipe_size": 598,
+   "prewipe_mtime": "2026-08-06 01:17",
+   "now": 241,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfGuilds/WarlockKit.py",
+   "prewipe_size": 14654,
+   "prewipe_mtime": "2026-08-21 11:22",
+   "now": 14692,
+   "lost_items": 3,
+   "lost_chars": 585,
+   "sample": [
+    "\nThe Celestial patron paragraph, naming the one who hired you.\n\nDrawn from the Aasimar's own pool of Celestials, so the two Atlases agree\nabout who is up there.  The kind and the name come out of one named Dice\nBag, which is seeded from the Character rather than from call order, so\nthe paragraph names the same patron every time it renders.\n\nThe Ideal is deliberately not printed, the same way the Aasimar's mark\nnever prints it: you know who hired you, you do not know what they are\nfor.  Which is also the joke the ending turns on, since nobody ever sends\nyou a statement.\n",
+    "names",
+    "kind"
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfGuilds/WizardKit.py",
+   "prewipe_size": 813,
+   "prewipe_mtime": "2026-08-28 14:21",
+   "now": 237,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfGuilds/__init__.py",
+   "prewipe_size": 538,
+   "prewipe_mtime": "2026-08-06 01:16",
+   "now": 537,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfInvocations/Map_of_Eldritch_Invocations.py",
+   "prewipe_size": 22035,
+   "prewipe_mtime": "2026-08-28 20:00",
+   "now": 7384,
+   "lost_items": 144,
+   "lost_chars": 9432,
+   "sample": [
+    "You receive a talisman: an amulet you can wear or give to another creature. The wearer can add 1d4 to a failed ability check, a number of times equal to your Proficiency Bonus, regaining all uses when you finish a Long Rest. As a Magic action you can conjure a new talisman, and the old one crumbles. <br><b>Level 5.</b> When the wearer is hit by an attack, they can take a Reaction to deal Necrotic damage equal to your spellcasting ability modifier to the attacker and push it 10 feet away. <br><b>Level 7.</b> The wearer can add 1d4 to a failed saving throw. <br>Once you use this feature, you can't do so again until you finish a Long Rest. <br><b>Level 9.</b> As a Magic action you can teleport to an unoccupied space within 10 feet of the wearer, if you are both on the same plane.",
+    "As a Bonus Action, you surround yourself with a magical aura of buzzing flies in a 5-foot Emanation for 10 minutes or until you dismiss it. You have Advantage on Charisma (Intimidation) checks and Disadvantage on all other Charisma checks. Any other creature that ends its turn in the aura takes Poison damage equal to your spellcasting ability modifier. Once you use this, you can't again until you finish a Short or Long Rest.",
+    "As a Magic action, touch a creature; it regains Hit Points equal to your Warlock level. One other creature within 30 feet that you can see then takes that much Necrotic damage. An unwilling creature makes a Constitution saving throw against your spell save DC, taking half as much on a success. Once you use this, you can't again until you finish a Short or Long Rest."
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfInvocations/Map_of_Exotic_Familiars.py",
+   "prewipe_size": 39791,
+   "prewipe_mtime": "2026-08-12 12:36",
+   "now": 11634,
+   "lost_items": 169,
+   "lost_chars": 9919,
+   "sample": [
+    "\nMap of Exotic Familiars \u2014 a familiar nobody else at the table has.\n\nThe eight published forms in ``Map_of_Familiars`` are fixed creatures out of\nthe Monster Manual.  This is the other route: the spirit is *built*, from a\ncreature type and a pool of traits, so what answers the summons is a slime, or\na living toy, or a drake the size of a dog, and it belongs to that character.\n\nThe shape is deliberately the one everybody already knows from monster-collecting\ngames.  A **type** decides the damage, the look, and which traits are even\npossible; the traits are the moveset.  Nothing in the pool escalates damage,\nbecause that is where familiars break: every trait buys a *sense*, a *movement\nmode*, or a *trick*.  A familiar that flies, sees the invisible and carries\nmessages is a delight at any level and a threat at none.\n\nBudget is the caster's Proficiency Bonus, and tiers gate what is reachable, so\na level 1 familiar gets two small talents and a level 17 one gets six, some of\nthem strange.  The numbers come from the 2023 playtest Pact Familiar, which is\nthe only version of these rules that scales with its caster:\n\n        AC      10 + spellcasting modifier\n        HP      5 + Warlock level, in d4 Hit Dice\n        strike  2 + half Warlock level, damage by type\n\nNaming follows the type and the look, so the sheet says what it is and what it\nresembles: *Undead Familiar (ghost-like)*, *Ooze Familiar (slime-like)*.\n\n**A familiar keeps its base for life.**  Type and look are drawn once from a\nnamed dice bag, so they follow from the Character's seed and not from the order\nanything else happened in.  A couatl stays a couatl, a drake a drake, a spider a\nspider: nobody should grow attached to a creature and find a different one after\na long rest.\n\nWhat it can *do* is another matter.  Growing up rearranges a skillset the way it\nrearranges a body, so traits are redrawn at every rung rather than piled up, and\na talent can be left behind.  Size prunes as it goes: a spider three metres\nacross has stopped being able to slip through a keyhole, and pretending\notherwise with a clause about being Small or smaller only papers over it.\n",
+    "\nBuild this caster's familiar, or grow the one they already have.\n\nWhat is kept for life is the *base*: the type and the line, a couatl or a\ndrake or a spider, the thing you got attached to.  What it can do is not.\nGrowing up rearranges a skillset the way it rearranges a body, so traits are\nredrawn at every rung rather than piled up, and a spider that has become\nthree metres of spider stops being able to hide in a keyhole.\n\nTwo bags keep that honest.  ``familiar.identity`` settles what it is and is\nnever asked twice; ``familiar.growth`` settles what it can do, and is asked\nagain from the top on every call, so the answer depends on the level and not\non how many times anybody has looked.\n\nThe Invocations in ``EVOLUTIONS`` advance a *stage*, which renames the\ncreature along its own line, widens what it can learn, and hands over for\nfree whatever the Invocation itself granted.\n",
+    "\nWhat a familiar is, and what it can pass for.\n\n``name`` is one word, or one per rung where the change carries meaning of\nits own: a fox's tails are not a synonym for \"bigger\", and how many names it\nis given is how far it climbs.  ``disguise`` overrides the type's, because a\nmimic hides as furniture and a cinder hides by being an ordinary fire.\n``max_size`` caps a creature that is a shape rather than a stage: a pixie is\na pixie at any age.\n"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfInvocations/Map_of_Familiars.py",
+   "prewipe_size": 9815,
+   "prewipe_mtime": "2026-08-12 01:30",
+   "now": 4270,
+   "lost_items": 25,
+   "lost_chars": 2064,
+   "sample": [
+    "\nMap of Familiars \u2014 the special forms Pact of the Chain unlocks.\n\nFind Familiar's ordinary forms are animals.  Pact of the Chain adds eight that\nare not, and a Warlock who takes the invocation is choosing one of *these*, so\nthe choice belongs on the sheet rather than as a list of names in a paragraph\nnobody reads twice.\n\nThe choice is drawn, not enumerated: one form arrives on the sheet, the way a\nBackground draws one tool from the Artisan list.  But it is not drawn blind.\nEach form declares an ``affinity``, and a caster who matches is far more likely\nto be answered by it: a Fiend patron gets an Imp long before a Sphinx of\nWonder.  Affinity is read against everything the caster *is* \u2014 class, patron,\nspecies, Background, and composed Tags \u2014 so an Aasimar draws the celestial, a\nSpirit Medium draws the skeleton, and a Dragon Cultist draws the pseudodragon\nwithout any of them being a Warlock of the matching patron.  That is\n**Familial Preference**, and it is the same idea the Find Familiar spell should\nuse for ordinary animals.\n\nEach form also carries the numbers a table actually reaches for: AC, HP, the\nspeeds, the senses, and the one attack that matters.  Everything else stays in\nthe Monster Manual, because this is a character sheet and not a bestiary.\n",
+    "\nWhat the caster is, as one searchable string.\n\nFolded to lower case: affinity words are matched as substrings, and\n``\"Fey\" in \"Archfey\"`` is False while ``\"fey\" in \"archfey\"`` is not.\n",
+    "Darkvision 120 ft. (unimpeded by magical Darkness), Passive Perception 11"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfInvocations/__init__.py",
+   "prewipe_size": 61,
+   "prewipe_mtime": "2026-07-25 04:14",
+   "now": 213,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfOrders/Grimoire_of_Orders.py",
+   "prewipe_size": 6079,
+   "prewipe_mtime": "2026-08-26 22:06",
+   "now": 2738,
+   "lost_items": 25,
+   "lost_chars": 2400,
+   "sample": [
+    "\nGrimoire of Orders \u2014 the authoring records for generated Secret Orders.\n\nThe immutable records from which one generated Order Tag grows:\n\n        Facet     one face a Domain can turn (a creed and a goal)\n        Domain    a mythic sphere: its facets, its three feat slots, its words\n        Tradition Arcane / Divine / Primal \u2014 places, practices, and a safe pool\n        Relation  how two Domain truths become one doctrine\n        Sign      the complete mechanical promise carried by an Order\n        Legend    epic possibilities offered by one Domain\n        Founding  the calamity, tragedy, founders, and duties of one Order\n        Quest     one coherent MacGuffin route offered by a Domain\n        Summons   one member's resolved mission, victory, and failure\n        Premise   the shared structure owned by one generated Order Tag\n\nAn Order is not stored here.  It is collapsed per Character by OrderKit from\nthese records, so two Characters never receive the same one.\n\nDesign notes that outlive any single record (QST-0048):\n\n* Domains are **tagged, not ranked**.  An Order simply has two of them.  Some\n  come to Hera for vengeance on a cruel husband and some for the safety of the\n  house; neither is her first function.\n* Domains are **mythic, never job descriptions**.  \"Hospitality\" is a trade;\n  ``Home`` is a domain, and every pantheon keeps one.\n* A domain **turns several faces**.  The same sphere gives sanctuary-keepers\n  and the order that offers a last warm night before the knife.\n* Tradition is an **independent axis**.  An Order of the Veil may be Arcane,\n  Divine, or Primal for entirely different reasons, and its practices change\n  completely while its magic does not.\n",
+    "The per-Character Record created by applying one generated Order Tag.",
+    "The open situation and available aid recorded for one Order member."
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfOrders/Map_of_Domains.py",
+   "prewipe_size": 35310,
+   "prewipe_mtime": "2026-08-26 22:01",
+   "now": 28305,
+   "lost_items": 5,
+   "lost_chars": 163,
+   "sample": [
+    "some things deserve to be struck, and you must be the thunderavailable",
+    "nothing that lasts was ever found lying about; it was made, by someone",
+    "ConeofCold"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfOrders/Map_of_Myth.py",
+   "prewipe_size": 26317,
+   "prewipe_mtime": "2026-08-26 22:15",
+   "now": 13410,
+   "lost_items": 123,
+   "lost_chars": 9115,
+   "sample": [
+    "Epic founding legends and personal summons for generated Orders.\n\nEach Domain offers five kinds of material. Two Domains collapse into one\nfounding myth; one of them then supplies a coherent MacGuffin route for the\nmember's summons. Selection lives in OrderKit so every choice comes from the\nOrder's deterministic Dice Bags. This Map only owns immutable possibilities\nand pure narrative projections.\n",
+    "The king's only heir vanished from a locked chapel. In their place, the Plague Mask lay warm upon the altar, breathing like a sleeping child.",
+    "The heir's household, the royal physicians, and a plague cult are already hunting for answers, and each believes you serve one of the others."
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfOrders/Map_of_Relationships.py",
+   "prewipe_size": 2742,
+   "prewipe_mtime": "2026-08-26 13:14",
+   "now": 864,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfOrders/Map_of_Traditions.py",
+   "prewipe_size": 5616,
+   "prewipe_mtime": "2026-08-26 22:01",
+   "now": 5494,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfOrders/__init__.py",
+   "prewipe_size": 0,
+   "prewipe_mtime": "2026-08-07 21:38",
+   "now": 182,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfTraining/Map_of_Artificer_Training.py",
+   "prewipe_size": 17128,
+   "prewipe_mtime": "2026-08-25 13:41",
+   "now": 270,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfTraining/Map_of_Barbarian_Training.py",
+   "prewipe_size": 27305,
+   "prewipe_mtime": "2026-08-29 15:25",
+   "now": 27286,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfTraining/Map_of_Bard_Training.py",
+   "prewipe_size": 15034,
+   "prewipe_mtime": "2026-08-28 01:12",
+   "now": 260,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfTraining/Map_of_Cleric_Training.py",
+   "prewipe_size": 17531,
+   "prewipe_mtime": "2026-08-06 14:15",
+   "now": 19786,
+   "lost_items": 41,
+   "lost_chars": 8961,
+   "sample": [
+    " uses</b> of Channel Divinity. You regain all expended uses when you finish a Short Rest. <br>Standard Channel Divinity options include:<ul><li><b>Divine Spark.</b> Choose a creature you can see within 30 feet. Roll a number of d8s equal to your Wisdom modifier (minimum 1). The creature either regains Hit Points equal to the total or takes Radiant or Necrotic damage equal to the total (your choice).</li><li><b>Turn Undead.</b> Each Undead that can see or hear you within 30 feet must make a Wisdom saving throw against your spell save DC. On a failed save, the creature has the Frightened and Incapacitated conditions for 1 minute.</li></ul><br>If a Channel Divinity effect requires a saving throw, the DC equals your Cleric spell save DC.",
+    "You can call on your deity to intervene on your behalf when your need is great. <b>Magic action:</b> describe the assistance you seek and roll a d100. If you roll a number equal to or lower than your Cleric level, your deity intervenes. The DM chooses the nature of the intervention; the effect of any Cleric spell or Cleric Domain spell would be appropriate. <br>If your deity intervenes, you can't use this feature again for 7 days. Otherwise, you can use it again after a Long Rest.",
+    "<b>Channel Divinity \u2014 Bonus Action.</b> You create a perfect illusory duplicate of yourself in an unoccupied space you can see within 30 feet. The illusion lasts for 1 minute or until you lose Concentration. <br>On each of your turns, you can use a Bonus Action to move the illusion up to 30 feet to a space you can see. <br>You can cast spells as though you were in the illusion's space, and you have Advantage on attack rolls against any creature within 5 feet of the illusion."
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfTraining/Map_of_Druid_Training.py",
+   "prewipe_size": 16267,
+   "prewipe_mtime": "2026-08-29 15:25",
+   "now": 16251,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfTraining/Map_of_Fighter_Training.py",
+   "prewipe_size": 33001,
+   "prewipe_mtime": "2026-08-29 15:25",
+   "now": 36071,
+   "lost_items": 3,
+   "lost_chars": 1122,
+   "sample": [
+    "*A wizard needs a pen. You need something mightier.*\n\nYou learn a ritual that creates a magical bond between yourself and one weapon. You perform the ritual over 1 hour (possible during a Short Rest). The bond fails if another Fighter is bonded to that weapon, or if it is a magic item to which someone else is attuned. Once bonded, you can't be disarmed of that weapon unless you have the Incapacitated condition. If it's on the same plane of existence, you can summon it as a <i>Bonus Action</i>.<br>You can have up to <b>two bonded weapons</b>, but can summon only one at a time. Bonding a third weapon breaks one existing bond of your choice.",
+    "*You know how to find a magical weak spot. That's your best trick.*\n\nWhen you hit a creature with an attack using a weapon, that creature has <b>Disadvantage on the next saving throw</b> it makes against a spell you cast before the end of your next turn.",
+    "*You are not sure how it works, but it works like a charm.*\n\nWhen you use your Action Surge, you can <b>teleport up to 30 feet</b> to an unoccupied space you can see. You can teleport before or after the additional action."
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfTraining/Map_of_Monk_Training.py",
+   "prewipe_size": 23979,
+   "prewipe_mtime": "2026-08-14 13:02",
+   "now": 260,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfTraining/Map_of_Paladin_Training.py",
+   "prewipe_size": 19770,
+   "prewipe_mtime": "2026-08-08 18:13",
+   "now": 19750,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfTraining/Map_of_Ranger_Training.py",
+   "prewipe_size": 21877,
+   "prewipe_mtime": "2026-08-29 15:25",
+   "now": 21869,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfTraining/Map_of_Rogue_Training.py",
+   "prewipe_size": 20415,
+   "prewipe_mtime": "2026-08-29 15:25",
+   "now": 20406,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfTraining/Map_of_Sorcerer_Training.py",
+   "prewipe_size": 14182,
+   "prewipe_mtime": "2026-08-28 20:01",
+   "now": 268,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfTraining/Map_of_Spellbooks.py",
+   "prewipe_size": 10695,
+   "prewipe_mtime": "2026-08-28 19:47",
+   "now": 9021,
+   "lost_items": 59,
+   "lost_chars": 3193,
+   "sample": [
+    "\nEvery tool this Character is trained with, by name.\n\nAsks ProficiencyKit's own ``Is_Trained`` against the canonical registry\nrather than walking the training ledger by hand, so a change to how a\ngrant is recorded cannot silently empty this set.\n",
+    "\nEvery crafted form must name a tool ToolsKit actually has.\n\nWithout this a renamed tool would leave its forms unreachable and nothing\nwould say so: the Wizard would simply stop ever drawing that book.\n",
+    "a ring of tablets bound with cord, each tablet a page raised in dots you read with your fingertips"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfTraining/Map_of_Warlock_Training.py",
+   "prewipe_size": 21012,
+   "prewipe_mtime": "2026-08-28 01:12",
+   "now": 266,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfTraining/Map_of_Wizard_Training.py",
+   "prewipe_size": 19411,
+   "prewipe_mtime": "2026-08-28 20:17",
+   "now": 264,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasLusoris/AtlasOfTraining/__init__.py",
+   "prewipe_size": 414,
+   "prewipe_mtime": "2026-07-25 03:42",
+   "now": 613,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasLusoris/BackgroundKit.py",
+   "prewipe_size": 66799,
+   "prewipe_mtime": "2026-08-26 21:59",
+   "now": 41055,
+   "lost_items": 91,
+   "lost_chars": 25164,
+   "sample": [
+    "*There is a seat others watch, and it bears your name. Perhaps your claim came by birth, election, promise, victory on a field, or merit alone. The seat waits ahead while you are preparing for it, and people measure every step you take toward it. You know the factions and their old precedents, their alliances and rivalries, and that the difference between them often matters less than who survives to write it down. You learned that ceremony is a language, hospitality a negotiation, and a smile may carry farther than a command.*\n\n*The war games are never merely games. They are lessons: which piece may be risked, which must be protected, and how to keep defeat from becoming destruction. Never mistake the board for the game. Your pieces will have families, your opponents will have heirs, and some pieces will change color for the right price. One day, you will make the call. Soldiers will move, granaries will empty, cells will open, and names will end. Your predecessors made such calls. So did theirs. The echoes of their commands have followed you and now lurk in the shadows. Whether you inherit that power, seize it, refuse it, or lose it, it has already shaped the way others see you. You have not once felt entirely safe.*",
+    "There is a second nation inside every city, and no map shows it. Beggars, urchins, day laborers, the woman who sweeps the temple steps, the drifters under the bridge: no crown, no captain, no borders, and yet rules older than the ones carved above the courthouse door. Share what you have. Do not sell your own. Pass it on. You are one of them, so wherever you go there is a fire, a doorway, a name to ask for, and hands willing to hide you from anyone carrying a warrant. And they see everything, because nobody guards their tongue in front of the invisible: which magistrate is bought and by whom, which faction is quietly arming, which street not to walk tonight, who vanished last month and through which door they were dragged. Nobody asks them. They will tell you. What they ask in return is never small: speak where they will not be heard, stand between a fist and a child, find the one no officer will look for. They own nothing and they say nothing, but they are everywhere, and there are more of them than of anyone else. A word from you can move through them like wind across a field of wheat, and no city that has ignored them for a century could survive a week without them.",
+    "*Crown, throne, seat, baton, council, the right to speak first: whatever your people call it, you bear a recognized claim to authority. Your name is not only a key. It is a blade hanging over your head.*\n\nDefine the reach of your station with the GM: who recognizes it, what community or institution it touches, and what duties accompany it. Where your authority is recognized, you can usually secure an audience and hospitality appropriate to your station, and the attention of subjects or allies. Every request tests a loyalty, spends a favor, or creates an obligation.\n\n*The price is that you are always watched. Responsibilities and old grudges sharpen the blade. Every public promise may be treated as policy. Every insult may become a grievance. Blood spilled may become war. Everything you do is read as a move: who you court, who you insult, whose table you sit at, whose funeral you attend. One misjudgment, and the people you love may pay before you do. A crown is not a gift. It is a golden cage with your name already written on it.*"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasLusoris/FeatKit.py",
+   "prewipe_size": 22045,
+   "prewipe_mtime": "2026-08-29 14:14",
+   "now": 22033,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasLusoris/FeaturesKit.py",
+   "prewipe_size": 45692,
+   "prewipe_mtime": "2026-08-29 15:25",
+   "now": 52928,
+   "lost_items": 1,
+   "lost_chars": 506,
+   "sample": [
+    "\nGenerate across every Guild and the levels that hand out feats.\n\nThe Crafter and Musician crashes were invisible to a focused test: they\nneeded the Artisan, Crafter or Entertainer Background to come up, which is\na few percent of draws, so only volume showed them.  Volume is therefore\nthe test.\n\nOnly failures raised from this module fail it.  A generator this size has\nother faults -- an Elf name can still raise -- and folding those in here\nwould make the Feature contract unreadable from its own test.\n"
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasLusoris/Grimoire_of_Backgrounds.py",
+   "prewipe_size": 2575,
+   "prewipe_mtime": "2026-08-09 00:34",
+   "now": 2348,
+   "lost_items": 5,
+   "lost_chars": 970,
+   "sample": [
+    "\nGrimoire of Backgrounds\n\n\nA base class Background\n\nIt carries the full 2024 record set \n-three ability scores,\n- an Origin feat, \n- two skill proficiencies,\n- one tool proficiency, \n- and an equipment package\n\nalongside  \n- a **Name**, \n- a **Description** of the Background adapted to the character, \n- a **Roleplay** note on how the Background colours the way they engage the world.\n\nThe record is the single authoring surface: write one ``Background(...)`` and\nfeed it through ``BackgroundKit.Build_Background`` \u2014 no parallel choice lists.\n\nWhen a de-coupled entry is adapted from an official Background, credit it with a\ndocstring comment above the definition (attribution is for maintainers, not the\ngenerator, so it is not a record field)::\n\n    # Based on the Background Chondathan Freebooter\n    # source: Forgotten Realms: Heroes of Faer\u00fbn\n    Roving_Freebooter = Background(\n        name=\"Roving Freebooter\",\n        ...\n        )\n",
+    "ability_preference",
+    "tool"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasLusoris/Grimoire_of_Features/__init__.py",
+   "prewipe_size": 42867,
+   "prewipe_mtime": "2026-08-06 13:51",
+   "now": 47300,
+   "lost_items": 40,
+   "lost_chars": 2098,
+   "sample": [
+    "<b>Ability Score Increase.</b> +1 to any ability (max 30).<br><b>Resistances.</b> You have resistance to two energy damage types selected when the boon is applied. You can change those damage types during each Long Rest.<br><b>Energy Redirection.</b> When you take one of those damage types, you can use a Reaction to force a Dex save (DC 8 + CON mod + PB) on a creature within 60 ft; it takes 2d12 + CON mod damage on a fail.",
+    "\nLegacy Map wrapper \u2014 unused on the Player path.\n\nHumans awaken AtlasLusoris.FeaturesKit.Versatile via SpeciesKit;\nthat Tag is silent on the sheet and grants the chosen Origin Feat.\n",
+    "\nSheet-only wrapper for Map / legacy paths.\nTag path (pick + proficiency): AtlasLusoris.FeaturesKit.Skillful\n"
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasLusoris/GuildKit.py",
+   "prewipe_size": 65507,
+   "prewipe_mtime": "2026-08-28 20:15",
+   "now": 571,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasLusoris/InvocationKit.py",
+   "prewipe_size": 12136,
+   "prewipe_mtime": "2026-08-26 21:27",
+   "state": "SOURCE_GONE",
+   "now": 0,
+   "lost_chars": 12136,
+   "lost_items": -1
+  },
+  {
+   "module": "AtlasLusoris/Map_of_Classes/Codex_of_Progression.py",
+   "prewipe_size": 5728,
+   "prewipe_mtime": "2026-07-25 04:32",
+   "now": 5553,
+   "lost_items": 2,
+   "lost_chars": 55,
+   "sample": [
+    "AtlasLusoris.Map_of_Classes.Training.Artificer",
+    "Artificer"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasLusoris/Map_of_Classes/Grimoire_of_Health.py",
+   "prewipe_size": 1893,
+   "prewipe_mtime": "2026-08-06 14:37",
+   "now": 1282,
+   "lost_items": 12,
+   "lost_chars": 248,
+   "sample": [
+    "\nReturn the size of this class\u2019s hit die (e.g. 10 \u2192 d10).\nRaise when the Guild has not declared its hit die.\n",
+    "Character has no Guild hit die.",
+    "Unknown Guild hit die: "
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasLusoris/Map_of_Classes/Scroll_of_Constants.py",
+   "prewipe_size": 2198,
+   "prewipe_mtime": "2026-08-06 01:17",
+   "now": 1893,
+   "lost_items": 8,
+   "lost_chars": 90,
+   "sample": [
+    "SPECIALIZATIONS_BY_GUILD",
+    "AtlasLusoris.GuildKit",
+    "specialization"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasLusoris/Map_of_Classes/Training/Artificer.py",
+   "prewipe_size": 1292,
+   "prewipe_mtime": "2026-07-25 04:32",
+   "state": "SOURCE_GONE",
+   "now": 0,
+   "lost_chars": 1292,
+   "lost_items": -1
+  },
+  {
+   "module": "AtlasLusoris/Map_of_Classes/Training/Barbarian.py",
+   "prewipe_size": 1483,
+   "prewipe_mtime": "2026-07-25 03:19",
+   "now": 16126,
+   "lost_items": 4,
+   "lost_chars": 325,
+   "sample": [
+    "\nLegacy Barbarian Progression \u2014 ASI / Epic Boon only when TOP owns the rest.\n\nCore lessons and Path of the Berserker live in\n``AtlasOfTraining/Map_of_Barbarian_Training.py``.\nOther Paths stay here until their Training Maps land.\n",
+    "See PHB 2024 Barbarian \u2014 Training Map unavailable.",
+    "AtlasLusoris.TrainingKit"
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasLusoris/Map_of_Classes/Training/Bard.py",
+   "prewipe_size": 1284,
+   "prewipe_mtime": "2026-07-25 03:47",
+   "now": 15175,
+   "lost_items": 5,
+   "lost_chars": 260,
+   "sample": [
+    "\nLegacy Bard Progression \u2014 ASI / Epic Boon only when TOP owns the rest.\n\nCore lessons and all College Training live in\n``AtlasOfTraining/Map_of_Bard_Training.py``.\n",
+    "See PHB 2024 Bard \u2014 Training Map unavailable.",
+    "AtlasLusoris.TrainingKit"
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasLusoris/Map_of_Classes/Training/Cleric.py",
+   "prewipe_size": 1287,
+   "prewipe_mtime": "2026-07-25 03:47",
+   "now": 1417,
+   "lost_items": 8,
+   "lost_chars": 298,
+   "sample": [
+    "\nLegacy Cleric Progression \u2014 ASI / Epic Boon only when TOP owns the rest.\n\nCore lessons and all Domain Training live in\n``AtlasOfTraining/Map_of_Cleric_Training.py``.\n",
+    "See PHB 2024 Cleric \u2014 Training Map unavailable.",
+    "AtlasLusoris.TrainingKit"
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasLusoris/Map_of_Classes/Training/Druid.py",
+   "prewipe_size": 14948,
+   "prewipe_mtime": "2026-08-06 13:51",
+   "now": 14908,
+   "lost_items": 1,
+   "lost_chars": 4,
+   "sample": [
+    "Pick"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasLusoris/Map_of_Classes/Training/Fighter.py",
+   "prewipe_size": 1300,
+   "prewipe_mtime": "2026-07-25 04:20",
+   "now": 9221,
+   "lost_items": 6,
+   "lost_chars": 299,
+   "sample": [
+    "\nLegacy Fighter Progression \u2014 ASI / Epic Boon only when TOP owns the rest.\n\nCore lessons and all Archetypes live in\n``AtlasOfTraining/Map_of_Fighter_Training.py``.\n",
+    "See PHB 2024 Fighter \u2014 Training Map unavailable.",
+    "AtlasLusoris.TrainingKit"
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasLusoris/Map_of_Classes/Training/Monk.py",
+   "prewipe_size": 1159,
+   "prewipe_mtime": "2026-07-25 03:42",
+   "now": 20649,
+   "lost_items": 6,
+   "lost_chars": 259,
+   "sample": [
+    "\nLegacy Monk Progression \u2014 ASI / Epic Boon only when TOP owns the rest.\n\nCore lessons and all Traditions live in\n``AtlasOfTraining/Map_of_Monk_Training.py``.\n",
+    "See PHB 2024 Monk \u2014 Training Map unavailable.",
+    "AtlasLusoris.TrainingKit"
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasLusoris/Map_of_Classes/Training/Multiclass.py",
+   "prewipe_size": 321,
+   "prewipe_mtime": "2025-07-25 10:31",
+   "now": 321,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasLusoris/Map_of_Classes/Training/Paladin.py",
+   "prewipe_size": 1397,
+   "prewipe_mtime": "2026-07-25 04:20",
+   "now": 10837,
+   "lost_items": 7,
+   "lost_chars": 308,
+   "sample": [
+    "\nLegacy Paladin Progression \u2014 ASI / Epic Boon only when TOP owns the rest.\n\nCore lessons and all Oath Training live in\n``AtlasOfTraining/Map_of_Paladin_Training.py``.\n",
+    "See PHB 2024 Paladin \u2014 Training Map unavailable.",
+    "AtlasLusoris.TrainingKit"
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasLusoris/Map_of_Classes/Training/Ranger.py",
+   "prewipe_size": 1394,
+   "prewipe_mtime": "2026-07-25 04:20",
+   "now": 7436,
+   "lost_items": 7,
+   "lost_chars": 307,
+   "sample": [
+    "\nLegacy Ranger Progression \u2014 ASI / Epic Boon only when TOP owns the rest.\n\nCore lessons and all Order Training live in\n``AtlasOfTraining/Map_of_Ranger_Training.py``.\n",
+    "See PHB 2024 Ranger \u2014 Training Map unavailable.",
+    "AtlasLusoris.TrainingKit"
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasLusoris/Map_of_Classes/Training/Rogue.py",
+   "prewipe_size": 1174,
+   "prewipe_mtime": "2026-07-25 03:42",
+   "now": 16757,
+   "lost_items": 5,
+   "lost_chars": 258,
+   "sample": [
+    "\nLegacy Rogue Progression \u2014 ASI / Epic Boon only when TOP owns the rest.\n\nCore lessons and all Archetypes live in\n``AtlasOfTraining/Map_of_Rogue_Training.py``.\n",
+    "See PHB 2024 Rogue \u2014 Training Map unavailable.",
+    "AtlasLusoris.TrainingKit"
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasLusoris/Map_of_Classes/Training/Sorcerer.py",
+   "prewipe_size": 4944,
+   "prewipe_mtime": "2025-08-01 11:09",
+   "now": 4634,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasLusoris/Map_of_Classes/Training/Warlock.py",
+   "prewipe_size": 1371,
+   "prewipe_mtime": "2026-07-25 04:18",
+   "now": 29646,
+   "lost_items": 8,
+   "lost_chars": 393,
+   "sample": [
+    "\nLegacy Warlock Progression \u2014 ASI / Epic Boon / Invocations when TOP owns the rest.\n\nCore lessons and Patrons live in\n``AtlasOfTraining/Map_of_Warlock_Training.py``.\nEldritch Invocations live in ``InvocationKit`` + ``AtlasOfInvocations``.\n",
+    "See PHB 2024 Warlock \u2014 Training Map unavailable.",
+    "AtlasLusoris.InvocationKit"
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasLusoris/Map_of_Classes/Training/Wizard.py",
+   "prewipe_size": 8182,
+   "prewipe_mtime": "2025-09-29 23:08",
+   "now": 8180,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasLusoris/Map_of_Classes/Training/__init__.py",
+   "prewipe_size": 53,
+   "prewipe_mtime": "2026-07-07 22:07",
+   "now": 53,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasLusoris/Map_of_Classes/__init__.py",
+   "prewipe_size": 1938,
+   "prewipe_mtime": "2026-07-25 04:33",
+   "now": 1850,
+   "lost_items": 2,
+   "lost_chars": 27,
+   "sample": [
+    "Training.Artificer",
+    "Artificer"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasLusoris/Map_of_Species.py",
+   "prewipe_size": 7631,
+   "prewipe_mtime": "2026-08-29 15:25",
+   "now": 7631,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasLusoris/Map_of_Weapon_Masteries.py",
+   "prewipe_size": 13453,
+   "prewipe_mtime": "2026-08-29 15:25",
+   "now": 15785,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasLusoris/OrderKit.py",
+   "prewipe_size": 21225,
+   "prewipe_mtime": "2026-08-26 22:13",
+   "now": 19307,
+   "lost_items": 158,
+   "lost_chars": 3632,
+   "sample": [
+    "Generated Secret Orders as core TOP Tags.\n\nTwo Domain definitions seed one immutable Premise. The Premise owns the\nOrder's shared identity, founding myth, and Sign. Applying the generated Order\nTag to a Character creates Membership, resolves a personal summons, applies\nthe Sign mechanics, and projects the Order, summons, and Sign Entries.\n\nThe Character seeds the Order.  The Order owns independent named Dice Bags for\nits shared identity, while per-member choices remain with the Character.\nRendering is deterministic and never rolls.\n",
+    "* prepared and can cast it once without a spell slot. You regain that use when you finish a Long Rest. ",
+    ", roll 1d4 and add the result to the check.\n\n**Signature Magic.** You know the *"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasLusoris/TrainingKit.py",
+   "prewipe_size": 16044,
+   "prewipe_mtime": "2026-08-29 15:25",
+   "now": 16481,
+   "lost_items": 2,
+   "lost_chars": 66,
+   "sample": [
+    "Drop legacy Features whose names are already Training lessons.",
+    "list"
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasMagia/Ledger_of_Spell_Lists.py",
+   "prewipe_size": 31487,
+   "prewipe_mtime": "2026-07-25 04:34",
+   "state": "SOURCE_GONE",
+   "now": 0,
+   "lost_chars": 31487,
+   "lost_items": -1
+  },
+  {
+   "module": "AtlasMagia/Lodge_of_Spells.py",
+   "prewipe_size": 443607,
+   "prewipe_mtime": "2026-08-06 14:40",
+   "now": 653331,
+   "lost_items": 28,
+   "lost_chars": 435,
+   "sample": [
+    "Create or Destroy Water",
+    "Tenser's Floating Disk",
+    "Purify Food and Drink"
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasMagia/Map_of_Magic.py",
+   "prewipe_size": 93037,
+   "prewipe_mtime": "2026-08-06 14:37",
+   "now": 91831,
+   "lost_items": 16,
+   "lost_chars": 291,
+   "sample": [
+    "Merge spell pools contributed by Guild, Background, and semantic Tags.",
+    "AtlasActorLudi.AtlasAlusoris.Map_of_Archetypes",
+    "_RITUALCASTER_IDENTITIES"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasMagia/SpellsKit.py",
+   "prewipe_size": 23841,
+   "prewipe_mtime": "2026-08-26 00:45",
+   "now": 20489,
+   "lost_items": 27,
+   "lost_chars": 4485,
+   "sample": [
+    "\nSpellsKit \n\nThe TOP implementation of the Spell class and its Tags.\n\nThis library file contains the Spell class and every\nTag that may be applied to one. \n\nThis file contains the abstraction of spells, and specifications. \n\nFor specific spells check the Lodge_of_Spells and import your specific Spells from there.\n\n\nThe Tag families, each rooted on Spell_Tag (whose Precondition\nrestricts every spell Tag to Spell targets \u2014 TagPreconditionError and a\nfull rollback on anything else):\n\n        School        \u2014 the eight canonical schools of magic. Exclusive: a spell\n                        bears exactly one (enforced by School.Single_School).\n                        Applied by __init__ from the school text; its Record\n                        writes the canonical spell.school string.\n        Tradition     \u2014 Arcane / Divine / Primal (the One D&D playtest grouping,\n                        adopted deliberately as a project choice, not core rules).\n                        NOT exclusive: Cure Wounds is Divine and Primal at once.\n        Spell_List    \u2014 \"this spell appears on X's list\", one Tag per caster\n                        class the codebase deals spells to. Not exclusive.\n                        Subclass lists (Eldritch Knight, Arcane Trickster\u2026) do\n                        NOT live here: each subclass mints its own Tag in its own\n                        file, inheriting the class list it draws from\n                        (e.g. class Eldritch_Knight_List(Wizard_List)).\n        Spell_Level   \u2014 Cantrip / Level 1\u20139. Exclusive (Single_Level); applied\n                        by __init__; its Record writes spell.level.\n        Concentration \u2014 the spell demands concentration. Applied by __init__\n                        from the flag or a \"Concentration\u2026\" duration.\n        Ritual        \u2014 castable as a ritual. New explicit input (ritual=True);\n                        also sniffed from legacy casting_time marks\n                        (\"1 Action R\", \"(R)\", \"or Ritual\").\n        Legacy        \u2014 a pre-2024 5e spell with no 2024 printing (legacy=True).\n                        Kept playable; the Tag marks the vintage, and legacy\n                        variable names carry an _L suffix in the Lodge.\n\nMembership reads as TagKit intends:\n        Evocation(fireball)              # tag it (atomic; no-op if already)\n        fireball in Evocation            # IS-check\n        fireball in School               # any school at all\n        for spell in Wizard_List: ...    # the live registry, for free\n        Has(fireball, Evocation)         # explicit semantic query\n",
+    "\n    Spell class:\n    A Spell is a discreet expresion of magical energy (mana) that expresses the will of the caster into the universe.  \n\n    A spell is described by key elements that compose the record:\n            name (required):  The name of the spell\n            level: Cantrip by default\n    School: The tradition of investigative schoolarship that claims the spell. \n    casting time: Action by default\n    ranges: Range of the magical effect. Plural because `range` is a\n            Python builtin \u2014 shadowing it inside spell code invites bugs,\n            so the field carries the extra s. Not a weapons mirror.\nduration: a minute by default\nconcentration: Not a concentration spell by default.\ndefinition (required): The Spells description.  \n    ",
+    "\nThe definition with its scaling resolved for one caster.\n\nSpell records are shared module singletons, so this returns text and\nnever mutates the spell: two Characters of different level must not\noverwrite each other's damage.\n"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasMagia/__init__.py",
+   "prewipe_size": 28,
+   "prewipe_mtime": "2026-07-07 22:07",
+   "now": 26,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasMagistratum/Charts_of_Scene_Binder.py",
+   "prewipe_size": 1994,
+   "prewipe_mtime": "2026-07-23 00:27",
+   "now": 788,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasMagistratum/Map_of_Session_Paths.py",
+   "prewipe_size": 2363,
+   "prewipe_mtime": "2026-07-23 00:29",
+   "now": 782,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "AtlasMagistratum/__init__.py",
+   "prewipe_size": 773,
+   "prewipe_mtime": "2026-07-23 00:06",
+   "now": 915,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Linguistics.py",
+   "prewipe_size": 12968,
+   "prewipe_mtime": "2024-12-03 17:25",
+   "now": 12963,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Map_of_Markov.py",
+   "prewipe_size": 2921,
+   "prewipe_mtime": "2026-08-06 14:07",
+   "now": 4827,
+   "lost_items": 3,
+   "lost_chars": 17,
+   "sample": [
+    "character",
+    "dice",
+    "Pick"
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasNomina/Map_of_Names.py",
+   "prewipe_size": 22698,
+   "prewipe_mtime": "2026-08-06 14:41",
+   "now": 23520,
+   "lost_items": 13,
+   "lost_chars": 276,
+   "sample": [
+    "Generate a stable surname in its own Character Dice Bag.",
+    "\nGenerate a full name for the given lusor (character).\n",
+    "AtlasActorLudi.AtlasAlusoris.Map_of_NPC"
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasNomina/Map_of_Word_Entropy.py",
+   "prewipe_size": 13515,
+   "prewipe_mtime": "2026-08-06 14:41",
+   "now": 13165,
+   "lost_items": 1,
+   "lost_chars": 6,
+   "sample": [
+    "Random"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasNomina/Races/Aberration.py",
+   "prewipe_size": 4216,
+   "prewipe_mtime": "2026-07-17 10:25",
+   "now": 3959,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Races/Aven.py",
+   "prewipe_size": 43229,
+   "prewipe_mtime": "2026-07-17 10:25",
+   "now": 42552,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Races/Beast.py",
+   "prewipe_size": 5303,
+   "prewipe_mtime": "2026-07-17 10:25",
+   "now": 5098,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Races/Beastfolk.py",
+   "prewipe_size": 7123,
+   "prewipe_mtime": "2026-07-17 10:25",
+   "now": 6908,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Races/Catfolk.py",
+   "prewipe_size": 3290,
+   "prewipe_mtime": "2026-07-17 10:25",
+   "now": 3046,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Races/Celestial.py",
+   "prewipe_size": 50339,
+   "prewipe_mtime": "2026-07-17 10:25",
+   "now": 48518,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Races/Construct.py",
+   "prewipe_size": 1754,
+   "prewipe_mtime": "2026-07-17 10:25",
+   "now": 1605,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Races/Dragon.py",
+   "prewipe_size": 25257,
+   "prewipe_mtime": "2026-07-17 10:25",
+   "now": 23353,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Races/Dwarf.py",
+   "prewipe_size": 810082,
+   "prewipe_mtime": "2026-08-27 02:36",
+   "now": 753388,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Races/Elemental.py",
+   "prewipe_size": 41217,
+   "prewipe_mtime": "2026-08-27 02:44",
+   "now": 39743,
+   "lost_items": 2,
+   "lost_chars": 647,
+   "sample": [
+    "\nThe lexicon of Elemental family names.\n\nAn ingredient returns *data*: a list, built from the genus alone. Surname()\nis the other thing, a generator, and it needs a Character to roll with. This\nused to call it with the genus in the Character's place, so it raised\nTypeError on every Elemental ever generated and each of them silently wore\na template surname off plantilla.\n\nThe patronymic is what Surname() reaches for first, so it is what the\nlexicon offers here: an ancestor's name with the Latin ending on it. The\nother half of Surname(), building from syllables, is what Surphonotactic is\nalready for, and NewWord will do that on its own.\n",
+    "list"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasNomina/Races/Elf.py",
+   "prewipe_size": 61928,
+   "prewipe_mtime": "2026-08-27 01:56",
+   "now": 58697,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Races/Fey.py",
+   "prewipe_size": 6992,
+   "prewipe_mtime": "2026-08-27 02:44",
+   "now": 6613,
+   "lost_items": 1,
+   "lost_chars": 4,
+   "sample": [
+    "Pick"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasNomina/Races/Fiend.py",
+   "prewipe_size": 23564,
+   "prewipe_mtime": "2026-07-17 10:25",
+   "now": 22584,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Races/Giant.py",
+   "prewipe_size": 16859,
+   "prewipe_mtime": "2026-07-17 10:25",
+   "now": 16372,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Races/Gnome.py",
+   "prewipe_size": 16961,
+   "prewipe_mtime": "2026-07-17 10:25",
+   "now": 15718,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Races/Goblin.py",
+   "prewipe_size": 23193,
+   "prewipe_mtime": "2026-07-17 10:25",
+   "now": 22025,
+   "lost_items": 1,
+   "lost_chars": 13,
+   "sample": [
+    "GarmGhulghula"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasNomina/Races/Halfling.py",
+   "prewipe_size": 17397,
+   "prewipe_mtime": "2026-07-17 10:25",
+   "now": 16097,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Races/Human.py",
+   "prewipe_size": 18030,
+   "prewipe_mtime": "2026-07-17 10:25",
+   "now": 16605,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Races/HumanLegacy.py",
+   "prewipe_size": 81911,
+   "prewipe_mtime": "2026-08-27 02:36",
+   "now": 80915,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Races/Kobold.py",
+   "prewipe_size": 6894,
+   "prewipe_mtime": "2026-07-17 10:25",
+   "now": 6276,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Races/Lizardfolk.py",
+   "prewipe_size": 7670,
+   "prewipe_mtime": "2026-07-17 10:25",
+   "now": 7340,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Races/Monstrosity.py",
+   "prewipe_size": 5873,
+   "prewipe_mtime": "2026-07-17 10:25",
+   "now": 5503,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Races/Ooze.py",
+   "prewipe_size": 1077,
+   "prewipe_mtime": "2026-07-17 10:25",
+   "now": 1069,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Races/Orc.py",
+   "prewipe_size": 49707,
+   "prewipe_mtime": "2026-07-17 10:25",
+   "now": 45729,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Races/Plant.py",
+   "prewipe_size": 83425,
+   "prewipe_mtime": "2026-07-17 10:25",
+   "now": 77431,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Races/Snakefolk.py",
+   "prewipe_size": 1062,
+   "prewipe_mtime": "2026-07-17 10:25",
+   "now": 1033,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Races/Undead.py",
+   "prewipe_size": 9137,
+   "prewipe_mtime": "2026-08-27 02:36",
+   "now": 8625,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Races/Vampire.py",
+   "prewipe_size": 13495,
+   "prewipe_mtime": "2026-07-17 10:25",
+   "now": 12423,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Races/__init__.py",
+   "prewipe_size": 73,
+   "prewipe_mtime": "2026-07-07 22:07",
+   "now": 73,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/Races/plantilla.py",
+   "prewipe_size": 11080,
+   "prewipe_mtime": "2026-07-17 10:25",
+   "now": 10662,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasNomina/__init__.py",
+   "prewipe_size": 243,
+   "prewipe_mtime": "2026-07-16 10:17",
+   "now": 43,
+   "lost_items": 1,
+   "lost_chars": 234,
+   "sample": [
+    "AtlasNomina \u2014 phonotactics: how names sound (NewName, entropy, race lists, Markov).\n\nMythic Titles and story vocabulary live in AtlasEpica (syntax of stories).\nLegacy: ``AtlasNomina.Map_of_Titles`` re-exports Epica for compatibility.\n"
+   ],
+   "state": "GUTTED"
+  },
+  {
+   "module": "AtlasPugna/Map_of_Movement.py",
+   "prewipe_size": 9799,
+   "prewipe_mtime": "2026-08-06 14:40",
+   "now": 9540,
+   "lost_items": 10,
+   "lost_chars": 95,
+   "sample": [
+    "AtlasActorLudi.AtlasAlusoris.Grimoire_of_NPC",
+    "background",
+    "Roll_Zero"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasPugna/Map_of_Resistances.py",
+   "prewipe_size": 77021,
+   "prewipe_mtime": "2026-08-06 14:35",
+   "now": 77018,
+   "lost_items": 2,
+   "lost_chars": 8,
+   "sample": [
+    "Pick",
+    "Roll"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasPugna/Map_of_Senses.py",
+   "prewipe_size": 22522,
+   "prewipe_mtime": "2026-08-06 14:35",
+   "now": 22240,
+   "lost_items": 7,
+   "lost_chars": 89,
+   "sample": [
+    "AtlasActorLudi.AtlasAlusoris.Map_of_Archetypes",
+    "Identity_Names",
+    "Roll_Zero"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasScriptum/Map_of_Formats.py",
+   "prewipe_size": 1382,
+   "prewipe_mtime": "2026-07-25 11:12",
+   "now": 1308,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasScriptum/__init__.py",
+   "prewipe_size": 68,
+   "prewipe_mtime": "2026-07-07 22:07",
+   "now": 66,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasVenustas/Scriba.py",
+   "prewipe_size": 12482,
+   "prewipe_mtime": "2026-08-08 18:13",
+   "now": 12054,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasVenustas/__init__.py",
+   "prewipe_size": 331,
+   "prewipe_mtime": "2026-08-01 10:30",
+   "now": 321,
+   "lost_items": 2,
+   "lost_chars": 169,
+   "sample": [
+    "Venustas \u2014 the aesthetic/presentation layer.\n\n``Scriba`` packages the self-formatting display primitives (``Entry``, ``Chip``)\nand the decorative ``glyph`` picker.\n",
+    "genus"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasWorldBuild/AtlasOfMapmaking/Compass_of_Biomes.py",
+   "prewipe_size": 29654,
+   "prewipe_mtime": "2026-08-06 14:25",
+   "now": 28582,
+   "lost_items": 6,
+   "lost_chars": 127,
+   "sample": [
+    "AtlasActorLudi.AtlasAlusoris.Map_of_Races",
+    "AtlasLusoris.BackgroundKit",
+    "AtlasEpica.Map_of_Titles"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasWorldBuild/AtlasOfMapmaking/Compass_of_MapConfiguration.py",
+   "prewipe_size": 2028,
+   "prewipe_mtime": "2024-12-30 21:11",
+   "now": 2028,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasWorldBuild/AtlasOfMapmaking/Kit_of_HandDrawing.py",
+   "prewipe_size": 10105,
+   "prewipe_mtime": "2026-08-06 14:26",
+   "now": 10198,
+   "lost_items": 2,
+   "lost_chars": 15,
+   "sample": [
+    "HAND_DICE",
+    "Random"
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "AtlasWorldBuild/AtlasOfMapmaking/Kit_of_ScalableVectorGraphics.py",
+   "prewipe_size": 10802,
+   "prewipe_mtime": "2026-08-06 14:26",
+   "now": 10476,
+   "lost_items": 2,
+   "lost_chars": 14,
+   "sample": [
+    "MAP_DICE",
+    "Random"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "AtlasWorldBuild/AtlasOfMapmaking/Shop_of_Parchment.py",
+   "prewipe_size": 2729,
+   "prewipe_mtime": "2025-01-13 15:17",
+   "now": 2729,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "AtlasWorldBuild/AtlasOfMapmaking/__init__.py",
+   "prewipe_size": 220,
+   "prewipe_mtime": "2024-12-16 16:27",
+   "now": 220,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "Minion.py",
+   "prewipe_size": 12629,
+   "prewipe_mtime": "2026-07-24 12:26",
+   "now": 14362,
+   "lost_items": 7,
+   "lost_chars": 395,
+   "sample": [
+    "\nOn failure: reports bug tree to log, retries with same args until success or max attempts (100).\nOn success: reports result to log system, then returns it.\n",
+    "\nCurrent call stack as a short tree. \nOnly builds when a start file is seen, or falls back to top application frame.\n",
+    "Set custom start files for get_call_tree. Pass a set, list, or tuple of filenames."
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "app/client.py",
+   "prewipe_size": 1467,
+   "prewipe_mtime": "2026-07-22 23:58",
+   "now": 714,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "app/components/__init__.py",
+   "prewipe_size": 1450,
+   "prewipe_mtime": "2026-08-21 11:21",
+   "now": 1392,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "app/components/character_sheet.py",
+   "prewipe_size": 38928,
+   "prewipe_mtime": "2026-08-29 15:25",
+   "now": 38890,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "app/components/eldritch.py",
+   "prewipe_size": 610,
+   "prewipe_mtime": "2026-08-21 11:21",
+   "now": 614,
+   "lost_items": 1,
+   "lost_chars": 22,
+   "sample": [
+    "/static/js/eldritch.js"
+   ],
+   "state": "DIVERGENT"
+  },
+  {
+   "module": "app/components/loader.py",
+   "prewipe_size": 10190,
+   "prewipe_mtime": "2026-07-27 20:04",
+   "now": 736,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "app/components/masonry.py",
+   "prewipe_size": 581,
+   "prewipe_mtime": "2026-07-22 23:51",
+   "now": 739,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "app/components/npc_sheet.py",
+   "prewipe_size": 23999,
+   "prewipe_mtime": "2026-08-06 11:02",
+   "now": 645,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "app/components/number_input.py",
+   "prewipe_size": 617,
+   "prewipe_mtime": "2026-07-23 01:13",
+   "now": 617,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "app/components/shareable_links.py",
+   "prewipe_size": 791,
+   "prewipe_mtime": "2026-08-08 23:16",
+   "now": 763,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "app/components/shared.py",
+   "prewipe_size": 9777,
+   "prewipe_mtime": "2026-08-20 12:44",
+   "now": 11083,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "app/components/spellbook.py",
+   "prewipe_size": 20184,
+   "prewipe_mtime": "2026-08-29 15:25",
+   "now": 20403,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "app/components/styles.py",
+   "prewipe_size": 716,
+   "prewipe_mtime": "2026-07-22 23:51",
+   "now": 736,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "app/components/symbols.py",
+   "prewipe_size": 9384,
+   "prewipe_mtime": "2026-07-22 23:56",
+   "now": 739,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "app/components/tablet.py",
+   "prewipe_size": 583,
+   "prewipe_mtime": "2026-07-22 23:51",
+   "now": 583,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "app/main.py",
+   "prewipe_size": 5155,
+   "prewipe_mtime": "2026-08-06 00:56",
+   "now": 793,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "app/navigation.py",
+   "prewipe_size": 1549,
+   "prewipe_mtime": "2026-07-23 00:21",
+   "now": 726,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "app/pages/__init__.py",
+   "prewipe_size": 728,
+   "prewipe_mtime": "2026-07-23 00:06",
+   "now": 938,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "app/pages/actor_ludi/__init__.py",
+   "prewipe_size": 626,
+   "prewipe_mtime": "2026-07-23 00:04",
+   "now": 820,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "app/pages/actor_ludi/alusoris.py",
+   "prewipe_size": 12704,
+   "prewipe_mtime": "2026-07-24 10:52",
+   "now": 10035,
+   "lost_items": 13,
+   "lost_chars": 125,
+   "sample": [
+    "npc_sheet_background",
+    "npc_sheet_class",
+    "nonplayer_guild"
+   ],
+   "state": "STRIPPED"
+  },
+  {
+   "module": "app/pages/actor_ludi/alusoris_list.py",
+   "prewipe_size": 8396,
+   "prewipe_mtime": "2026-07-23 10:18",
+   "now": 769,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "app/pages/actor_ludi/player.py",
+   "prewipe_size": 23938,
+   "prewipe_mtime": "2026-08-08 19:38",
+   "now": 648,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "app/pages/home.py",
+   "prewipe_size": 9258,
+   "prewipe_mtime": "2026-07-24 10:53",
+   "now": 9258,
+   "lost_items": 0,
+   "lost_chars": 0,
+   "sample": [],
+   "state": "INTACT"
+  },
+  {
+   "module": "app/pages/magistratum.py",
+   "prewipe_size": 22389,
+   "prewipe_mtime": "2026-07-23 10:19",
+   "now": 741,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "app/routing.py",
+   "prewipe_size": 5675,
+   "prewipe_mtime": "2026-07-23 00:22",
+   "now": 717,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "app/session.py",
+   "prewipe_size": 1884,
+   "prewipe_mtime": "2026-07-23 10:17",
+   "now": 717,
+   "state": "SHIM",
+   "lost_chars": 0,
+   "lost_items": 0
+  },
+  {
+   "module": "app/shell.py",
+   "prewipe_size": 7082,
+   "prewipe_mtime": "2026-08-21 11:21",
+   "now": 7023,
+   "lost_items": 1,
+   "lost_chars": 18,
+   "sample": [
+    "eldritch_head_tags"
+   ],
+   "state": "STRIPPED"
+  }
+ ],
+ "unverifiable": [
+  "AtlasActorLudi/Grimoire_of_AbilityScores.py",
+  "AtlasActorLudi/Grimoire_of_SavingThrows.py",
+  "AtlasActorLudi/Grimoire_of_Skills.py",
+  "AtlasActorLudi/Grimoire_of_Training.py",
+  "AtlasActorLudi/Map_of_Alignments.py",
+  "AtlasActorLudi/Map_of_Character_Generation.py",
+  "AtlasActorLudi/Map_of_Conditions.py",
+  "AtlasActorLudi/Map_of_Gender.py",
+  "AtlasActorLudi/Map_of_Scores.py",
+  "AtlasActorLudi/Map_of_Size.py",
+  "AtlasActorLudi/Map_of_Stories.py",
+  "AtlasActorLudi/SpeciesKit/_bytecode_mod.py",
+  "AtlasActorLudi/Tools_of_Legacy_RNG.py",
+  "AtlasActorLudi/__init__.py",
+  "AtlasAlusoris/Grimoire_of_NPC.py",
+  "AtlasAlusoris/Map_of_Archetypes.py",
+  "AtlasAlusoris/Map_of_NPC.py",
+  "AtlasAlusoris/Map_of_Races.py",
+  "AtlasAlusoris/__init__.py",
+  "AtlasEpica/Charts_of_Choice_Collapse.py",
+  "AtlasEpica/Map_of_Prose_Adventure.py",
+  "AtlasIntelligentiaArtificialis/__init__.py",
+  "AtlasIntelligentiaArtificialis/ask_gpt.py",
+  "AtlasIntelligentiaArtificialis/portrait.py",
+  "AtlasIntelligentiaArtificialis/style.py",
+  "AtlasInventarium/Compass_of_Armors.py",
+  "AtlasInventarium/Compass_of_Rarity.py",
+  "AtlasInventarium/Grimoire_of_Items.py",
+  "AtlasInventarium/Grimoire_of_Weapons.py",
+  "AtlasInventarium/Lodge_of_Basic_Weapons.py",
+  "AtlasInventarium/gear_gen.py",
+  "AtlasInventarium/items.py",
+  "AtlasLudus/Compass_of_Conditions.py",
+  "AtlasLudus/Compass_of_Damages.py",
+  "AtlasLudus/Map_of_Damages.py",
+  "AtlasLudus/Map_of_Dice.py",
+  "AtlasLusoris/AtlasOfGuilds/_bytecode_kit.py",
+  "AtlasLusoris/AtlasOfOrders/Map_of_Phrasings.py",
+  "AtlasLusoris/AtlasOfTraining/_bytecode_mod.py",
+  "AtlasLusoris/CharactersKit.py",
+  "AtlasLusoris/Grimoire_of_Characters.py",
+  "AtlasLusoris/Grimoire_of_Spellcasters.py",
+  "AtlasLusoris/Map_of_Backgrounds.py",
+  "AtlasLusoris/Map_of_Classes/Atlas_Subclass/Map_of_Subclasses.py",
+  "AtlasLusoris/Map_of_Classes/Atlas_Subclass/__init__.py",
+  "AtlasLusoris/Map_of_Cleric_Prayers.py",
+  "AtlasLusoris/Map_of_SpellFonts.py",
+  "AtlasLusoris/__init__.py",
+  "AtlasMagia/spell_gen.py",
+  "AtlasNomina/AtlasScriptum/Kit_of_Dwarvish.py",
+  "AtlasNomina/AtlasScriptum/Kit_of_Elvish.py",
+  "AtlasNomina/AtlasScriptum/__init__.py",
+  "AtlasNomina/Map_of_Titles.py",
+  "AtlasPugna/Compass_of_Action.py",
+  "AtlasPugna/Ledger_of_Legendary_Actions.py",
+  "AtlasPugna/Map_of_Abilities.py",
+  "AtlasPugna/Map_of_Attacks.py",
+  "AtlasPugna/Map_of_Legendary_Actions.py",
+  "AtlasPugna/Map_of_Martial_Abilities.py",
+  "AtlasPugna/Map_of_Weakness.py",
+  "AtlasPugna/__init__.py",
+  "AtlasScriptum/Map_of_PDF.py",
+  "AtlasSpecus/Map_of_Prose_Adventure.py",
+  "AtlasTOP/archetypes.py",
+  "AtlasVenustas/Kit_of_Loader.py",
+  "AtlasVenustas/Lodge_of_Symbols.py",
+  "AtlasVenustas/Map_of_Fonts.py",
+  "AtlasVenustas/Scroll_of_Styles.py",
+  "AtlasVenustas/Tools_of_Loader.py",
+  "AtlasVenustas/Tools_of_Masonry.py",
+  "AtlasVenustas/Tools_of_ShareableLinks.py",
+  "AtlasVenustas/Tools_of_Tablet.py",
+  "AtlasVenustas/VenustasKit.py",
+  "AtlasWorldBuild/AtlasOfDungeons/Map_of_Dungeon_Generator.py",
+  "AtlasWorldBuild/AtlasOfDungeons/__init__.py",
+  "AtlasWorldBuild/AtlasOfMapmaking/Astrolabe_of_Grids.py",
+  "AtlasWorldBuild/AtlasOfMapmaking/Compass_of_Filters.py",
+  "AtlasWorldBuild/AtlasOfMapmaking/Kit_of_WaveFunctionCollapse.py",
+  "AtlasWorldBuild/Helm_of_Mapmaking.py",
+  "AtlasWorldBuild/__init__.py",
+  "Avatar/avatar.py",
+  "Enchantments/Grimire_of_Enchantments.py",
+  "app.py",
+  "app/__init__.py",
+  "app/character_url.py",
+  "app/random.py",
+  "app/routes.py",
+  "docs/NPCgen.py",
+  "docs/NPClist.py",
+  "dungeon.py",
+  "items.py",
+  "scripts/check_minion.py",
+  "scripts/next_review.py",
+  "scripts/random_review_prompt.py",
+  "scripts/run_app_catch_errors.py",
+  "scripts/test_character_url.py",
+  "scripts/verify_equipment.py",
+  "shiny_app.py"
+ ]
+}

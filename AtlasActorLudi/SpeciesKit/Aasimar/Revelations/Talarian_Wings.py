@@ -1,4 +1,26 @@
-"""Talarian_Wings — temporarily loaded from vaulted bytecode (recovery 2026-08-29)."""
-from __future__ import annotations
-from AtlasActorLudi.SpeciesKit._bytecode_mod import load_vaulted
-load_vaulted('Aasimar/Revelations/Talarian_Wings.cpython-314.pyc', globals())
+"""The Talarian Wings Revelation Shape."""
+
+from TagKit import Imprint
+
+from AtlasActorLudi.SpeciesKit.Aasimar.Revelations.base import (
+	Celestial_Revelation,
+	)
+from AtlasActorLudi.SpeciesKit.Aasimar.Revelations.base import (
+	Imprint_Revelation,
+	)
+
+
+class Talarian_Wings(Celestial_Revelation):
+	"""A radiant Revelation carrying spectral flight."""
+
+	DAMAGE_TYPE = "Radiant"
+	FLY_SPEED = "Speed"
+
+	@Imprint
+	def Set_Revelation(
+		target,
+		):
+		Imprint_Revelation(
+			target,
+			Talarian_Wings,
+			)

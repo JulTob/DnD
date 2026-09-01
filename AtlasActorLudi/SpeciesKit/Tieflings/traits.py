@@ -4,7 +4,6 @@ from TagKit import Imprint
 
 from AtlasActorLudi.SpeciesKit.physiology import Imprint_Heritage
 from AtlasLusoris.FeaturesKit import Grant_Resistance
-from AtlasLusoris.FeaturesKit import Grant_Resistance
 from AtlasLusoris.FeaturesKit import Trait
 
 

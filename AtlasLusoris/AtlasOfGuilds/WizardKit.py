@@ -24,13 +24,16 @@ Illusionist = Build_Specialization(
 	name="Illusionist",
 	module=__name__,
 	)
-
-# Bladesinger rides in from Tasha's: the one shelf guest beside the PHB four.
-
 Bladesinger = Build_Specialization(
 	guild=Wizard,
 	name="Bladesinger",
 	module=__name__,
 	)
 
-SPECIALIZATIONS = Wizard.SPECIALIZATIONS
+SPECIALIZATIONS = (
+	Abjurer,
+	Diviner,
+	Evoker,
+	Illusionist,
+	Bladesinger,
+	)

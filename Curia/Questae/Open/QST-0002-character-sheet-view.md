@@ -17,7 +17,7 @@ The current dynamic boxes look great for **Skills and Scores** (short gridded va
 - Reference target: `5e.tools` character/statblock layout.
 
 ## 🎯 Desired outcome
-A character (and NPC) display that reads beautifully for both short stats and long prose, is easy to restyle from CSS alone, and looks like a real character sheet — not a form dump.
+A character display that reads beautifully for both short stats and long prose, is easy to restyle from CSS alone, and looks like a real character sheet — not a form dump. First publish is the **Player** sheet (Decree 0004); NPC sheet waits.
 
 ## 🧭 Notes for the Agora / implementer
 - **This needs a decision first → Dialog 0001 is open.** Consuls deliberate; Vox reports; Julio decrees the layout direction before implementation.

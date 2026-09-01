@@ -6,13 +6,28 @@
 
 ---
 
+## The law
+
+**One culture key = one culture.** Never fuse two inspirations into a single
+marker (`japonic_aztec`, `norse_steppe_celtic`, and the like are wrong).
+
+A **species** may draw from many cultures. That is recorded as a *list of
+separate keys*, not as a blended label. Overlap between peoples is modelled by
+the influence network (`_INFLUENCES`), not by merging vocabulary pools.
+
+Fiction registers (`wyrm_myth`, `grimdark`, `arthuriana`, …) are also separate
+keys; they are not real-world cultures, and they do not merge real-world ones.
+
+---
+
 ## The aim
 
 Every people is a **real human culture cranked to romantic excess** — the
 fantasy is the over-the-top version of a recognisable base, plus extra.
 
 - Spain sought gold in America → **gold-fevered Dwarves**.
-- Isolationist and imperial at once → **Dragonborn**, Japan crossed with the Mexica.
+- Isolationist and imperial at once → **Dragonborn**, drawing on Japan **and**
+  the Mexica as two distinct wells.
 - Mysterious and exotic → **Fae**, orientalism multiplied by a thousand.
 
 The point of anchoring on real cultures is that **every character comes from
@@ -22,19 +37,22 @@ Britain with magic Irish and barbarian Scots".
 
 ## The peoples
 
-| People | Primary inspiration | Character |
+Each row lists **separate** culture keys the species may hold. Plus any fiction
+register is listed on its own line of thought, not fused into a real-world key.
+
+| People | Culture keys (each distinct) | Character |
 |---|---|---|
-| **Dragonborn** | Shinto and Daoist Japan, crossed with Mexica/Aztec (the Coatl) | Isolated from the rest, yet imperialist |
-| **Kobold** | Draconic too, so Japan/China — plus **Korea**, between its neighbours and its own thing | A step to one side of the Dragonborn |
-| **Fae** | Qing China, Buddhism and Confucianism, tied through to India | Mysterious and exotic; orientalism ×1000 |
-| **Goblin** | Ancient Indo-Israeli-Persian, exclusively | Not dangerous, but treated as a pest — a marginalised people, **without an explicit parallel** to any single real one |
-| **Human** | Africa — the birthplace, the default continent | The baseline everyone else is measured from |
-| **Elf** | Norse, Rus and Mongol (east to west), with Celts for mysterious magic-nature and aesthetic | A bit Fae and a bit "other people", in a colder nature |
-| **Dwarf** | Iberian conquistadors, deeply shaped by the Umayyads (Omeya) | Gold-fevered |
-| **Gnome** | Italian and German Renaissance, with **Switzerland** between them | The middle point of the two |
-| **Aasimar** | The Roman Empire | |
-| **Giant / Goliath** | The Greeks | |
-| **Monk** *(class, not species)* | A ninja register on top of whatever species gives | Monks read as ninja across every people |
+| **Dragonborn** | `japan`, `aztec` (+ `eragon_dragons`, `wyrm_myth`) | Isolated from the rest, yet imperialist |
+| **Kobold** | `japan`, `china`, `korea` (+ `wyrm_myth`) | A step to one side of the Dragonborn |
+| **Fae** | `china` (+ `fairytale_fae`); India reached via influences | Mysterious and exotic; orientalism ×1000 |
+| **Goblin** | `persia`, `levante` (+ `fairytale_fae`, `grimdark`) | Marginalised; no single real parallel claimed as identity |
+| **Human** | `africa`, `egypt`, `maghreb`, `carthage` (+ `arthuriana`) | The baseline everyone else is measured from |
+| **Elf** | `norse`, `rus`, `mongol`, `celt` (+ `tolkien_elves`, `fairytale_fae`) | A bit Fae and a bit "other people", in a colder nature |
+| **Dwarf** | `iberia`, `andalus` (+ `folklore_dwarf`, `tolkien_dwarves`) | Gold-fevered |
+| **Gnome** | `italy`, `germany`, `switzerland` (+ `folklore_dwarf`, `clockpunk`) | Middle point of the Renaissance pair |
+| **Aasimar** | `rome` (+ `arthuriana`) | |
+| **Giant / Goliath** | `greece` (+ `wyrm_myth`) | |
+| **Monk** *(class)* | adds `ninja` (+ `anime`) on top of species cultures | Monks read as ninja across every people |
 
 ## Cultures overlap, and that is the point
 
@@ -44,10 +62,10 @@ boxes, and a weapon, a word or a custom may belong to several cultures at once.
 - Dwarves and Gnomes trade and share settlements.
 - Elves and Fae are close partners.
 - Goblins live among Humans.
-- Iberia is strongly shaped by the Umayyads.
-- Vikings reached Spain and North Africa.
-- Celts are part of Spain (Galicia) as well as the north.
-- China and India both reach Arabia.
+- Iberia is strongly shaped by the Umayyads — still `iberia` and `andalus`, not one key.
+- Vikings reached Spain and North Africa — still `norse` influencing `iberia`, not a merge.
+- Celts are part of Spain (Galicia) as well as the north — `celt` stays its own key.
+- China and India both reach Arabia — separate keys, linked by `_INFLUENCES`.
 - **Everyone** inherits Greece and Rome.
 
 India is complex, mysterious and ancient all at once; all cultures are
@@ -57,15 +75,17 @@ relatable. Overlap should be modelled, not avoided.
 
 `Map_of_Gear_Titles` holds the first machine-readable version:
 
-- `_CULTURES` — species (and Monk) to a **primary** culture. A people may hold
-  more than one: Kobolds are `japonic_aztec` + `korean`; a Dragonborn Monk is
-  `japonic_aztec` + `ninja`.
-- `_INFLUENCES` — the network above, as weighted neighbours. A Dwarf reaches
-  `indo_persian_levantine` and `african` at 2, `norse_steppe_celtic`, `roman`
-  and `hellenic` at 1.
-- `influences_of(hero)` sums both into a reach map, so the generator **rolls
-  across the network** instead of looking up one box. A Dwarf mostly names
-  things in Iberian, and sometimes reaches for the Andalusi or Punic word.
+- `_CULTURES` — species (and Monk) → a **tuple of distinct culture keys**.
+  Dragonborn is `japan` **and** `aztec`; Kobolds are `japan`, `china`, and
+  `korea`; a Dragonborn Monk adds `ninja` on top of the species list.
+- `_CULTURAL_NOUNS` — vocabulary **per culture key**. Katana lives under
+  `japan`; Macuahuitl under `aztec`. No shared fused pool.
+- `_INFLUENCES` — weighted neighbours between those same keys. Japan reaches
+  China and Korea; Aztec stands as its own pool. A Dwarf's reach can touch
+  Maghreb or Carthage without the Dwarf *becoming* those cultures.
+- `cultures_of(hero)` / `influences_of(hero)` — assemble the list, then roll
+  across the network. A Dragonborn may draw a Katana *or* a Macuahuitl —
+  two cultures, one people.
 
 Two rules that keep it legible:
 
@@ -81,6 +101,6 @@ Two rules that keep it legible:
 
 ## Open directions
 
-The same mapping should eventually inform names, places, cuisine, architecture
-and story vocabulary — not just gear. Nothing outside `Map_of_Gear_Titles`
-reads it yet.
+The same mapping should eventually inform names, places, cuisine, architecture,
+prayer, and story vocabulary — not just gear. Consumers must keep the **one
+key = one culture** law; if a species needs two inspirations, give it two keys.

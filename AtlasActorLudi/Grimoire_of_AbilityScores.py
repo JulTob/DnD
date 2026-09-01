@@ -39,7 +39,22 @@ def RandomAbilityScore():
 class AbilityScores:
 	""" Represents a set of ability scores for a character. """
 
-	def __init__(AS, STR=10, DEX=10, CON=10, INT=10, WIS=10, CHA=10):
+	# RECOVERY NOTE 2026-08-31: vault NPC / FeaturesKit callers pass
+	# character=. AbilityScoresKit already has (target, *, character);
+	# this Grimoire is the class those callers still import. First
+	# positional stays STR so recovered Grimoire_of_NPC(10,10,...,character=)
+	# does not bind the first 10 as a target. See QST-0050.4.
+	def __init__(
+			AS,
+			STR=10,
+			DEX=10,
+			CON=10,
+			INT=10,
+			WIS=10,
+			CHA=10,
+			*,
+			character=None,
+			):
 		"""	Initialize ability scores for a character.	"""
 		AS.STR = STR
 		AS.DEX = DEX
@@ -47,6 +62,7 @@ class AbilityScores:
 		AS.INT = INT
 		AS.WIS = WIS
 		AS.CHA = CHA
+		AS.character = character
 
 	def RandomAbilityScores(AS):
 		""" Assigns random scores to each ability. """

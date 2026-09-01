@@ -204,58 +204,6 @@ class Declared_Species(Tag):
 		return description.strip()
 
 	@Record
-	def DESCRIPTION(
-		target,
-		description=None,
-		) -> str:
-		"""
-		What this Species is, for the person playing one.
-
-		The docstrings elsewhere in this Kit are written for whoever maintains
-		the rules.  This is the other audience: it says what it is like to be
-		one of these, and it closes on a small suggestion rather than a hook,
-		because a Species is not an adventure the way a Background is.
-		"""
-		if description is None:
-			return ""
-
-		if not isinstance(
-			description,
-			str,
-			):
-			raise ValueError(
-				"A Species description must be text."
-				)
-
-		return description.strip()
-
-	@Record
-	def DESCRIPTION(
-		target,
-		description=None,
-		) -> str:
-		"""
-		What this Species is, for the person playing one.
-
-		The docstrings elsewhere in this Kit are written for whoever maintains
-		the rules.  This is the other audience: it says what it is like to be
-		one of these, and it closes on a small suggestion rather than a hook,
-		because a Species is not an adventure the way a Background is.
-		"""
-		if description is None:
-			return ""
-
-		if not isinstance(
-			description,
-			str,
-			):
-			raise ValueError(
-				"A Species description must be text."
-				)
-
-		return description.strip()
-
-	@Record
 	def HERITAGES(
 		target,
 		heritages=(),

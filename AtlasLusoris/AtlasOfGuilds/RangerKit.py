@@ -25,4 +25,9 @@ Hunter = Build_Specialization(
 	module=__name__,
 	)
 
-SPECIALIZATIONS = Ranger.SPECIALIZATIONS
+SPECIALIZATIONS = (
+	BeastMaster,
+	FeyWanderer,
+	GloomStalker,
+	Hunter,
+	)

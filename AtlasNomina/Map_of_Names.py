@@ -2,7 +2,7 @@ import random
 import time
 from contextlib import contextmanager
 from collections import defaultdict, Counter
-from Minion import guardian, watcher, warden, spy, minion, changeling, print_record, report_bug, CHANGELING_MINION, CHANGELING_COLOR
+from Minion import guardian, watcher, warden, spy, minion, changeling, report_bug, print_record, CHANGELING_MINION, CHANGELING_COLOR
 
 try:
 	import AtlasAlusoris.Map_of_NPC as NPC
@@ -23,29 +23,6 @@ MAX_DEPTH = 1
 # exactly, dice for dice, for anyone who needs old seeds to name old characters.
 METHOD_ATTEMPTS = 3
 
-# ─────────────────────────────────────────────────────────────────────────────
-#  The naming ladder
-# ─────────────────────────────────────────────────────────────────────────────
-# Three rungs, each a working generator, each simpler than the one above it:
-#
-#   1. the character's own race module   Elf.Names, Dwarf.Phonotactic, ...
-#   2. plantilla, the generic template   written to answer for any genus
-#   3. the LAST_RESORT rosters           plain tuples, so they cannot fail
-#
-# Every step down is reported by the Minion system, naming what broke, where,
-# and who took over. A silent demotion is the thing to avoid: a generic name is
-# a fine sheet and a bad diagnosis, and nobody goes looking for a bug they were
-# never told about.
-#
-# Note what the ladder replaces. A Dice Bag is opened fresh from
-# ``seed|purpose|version`` on every call, so a second attempt at the same name
-# replays the identical dice and arrives at the identical failure: against a
-# seeded generator, retrying is futile by construction, however many times it is
-# done. The only recovery available is to ask somebody else. That is the whole
-# design, and it is why these functions carry @changeling rather than @guardian.
-
-# Rung three. Deliberately plain: a name off this list should read as somebody's
-# character, not as an error message, because that is exactly when it is used.
 LAST_RESORT_NAMES = (
 	"Ada", "Bran", "Cora", "Dain", "Edda", "Fenn", "Gale", "Hale",
 	"Ida", "Jarl", "Kesh", "Lorn", "Mira", "Nell", "Orin", "Pell",
@@ -59,6 +36,11 @@ LAST_RESORT_SURNAMES = (
 	"Redhill", "Stormcrow", "Thornbury", "Underhill", "Westwind",
 	)
 
+
+# Restored 2026-08-30: Race_Ingredient and its ladder were called from
+# NewName but defined nowhere, so every Character raised NameError and fell
+# through to the last-resort roster. Recovered as real source from the
+# parallel recovery branch, which had kept it rather than shimming it.
 # Onset, nucleus and coda: enough to build a syllable out of nothing.
 LAST_RESORT_PHONOTACTIC = (
 	("b", "br", "d", "dr", "f", "g", "gr", "h", "k", "kr",
@@ -119,25 +101,6 @@ def _plantilla():
 		return None
 
 
-def _groomed(
-		answer,
-		):
-	"""
-	Strip stray whitespace from a roster of name parts, QST-0052.
-
-	Length and order are preserved on purpose: seeded draws pick by index, so
-	grooming an entry may never move its neighbours. Anything that is not a
-	flat collection of strings (the phonotactic triples) passes untouched.
-	"""
-	if isinstance(answer, (list, tuple)) and all(
-			isinstance(entry, str) for entry in answer
-			):
-		return type(answer)(
-			entry.strip() for entry in answer
-			)
-	return answer
-
-
 def Race_Ingredient(
 		race,
 		ingredient,
@@ -183,9 +146,7 @@ def Race_Ingredient(
 				)
 			continue
 		if answer:
-			return _groomed(
-				answer
-				)
+			return answer
 		_report_demotion(source, ingredient, "came back empty", heir)
 	return LAST_RESORT_INGREDIENT[ingredient]
 
@@ -676,15 +637,8 @@ def NewName(lusor):
 		if lusor.gender.title() == "They":
 			FullName = f"Noble {FullName}"
 
-	# One exit, one guarantee (QST-0052): no name reaches a sheet or a
-	# sentence with leading, trailing, or doubled spaces, whichever branch
-	# above assembled it and whichever part came back empty.
-	lusor._name = " ".join(
-		name.split()
-		)
-	return " ".join(
-		FullName.split()
-		).title()
+	lusor._name = name
+	return FullName.title()
 
 # The four ingredient readers below are @guardian no longer. Every one of them
 # reads a seeded generator, so a retry replays the same dice into the same wall;

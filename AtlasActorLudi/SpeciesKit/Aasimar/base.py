@@ -1,4 +1,35 @@
-"""base — temporarily loaded from vaulted bytecode (recovery 2026-08-29)."""
-from __future__ import annotations
-from AtlasActorLudi.SpeciesKit._bytecode_mod import load_vaulted
-load_vaulted('Aasimar/base.cpython-314.pyc', globals())
+"""The shared 2024 Aasimar Species Shape."""
+
+from TagKit import Imprint
+
+from AtlasActorLudi.SpeciesKit.Aasimar.traits import Celestial_Resistance
+from AtlasActorLudi.SpeciesKit.Aasimar.traits import Healing_Hands
+from AtlasActorLudi.SpeciesKit.Aasimar.traits import Light_Bearer
+from AtlasActorLudi.SpeciesKit.bases import Humanoid
+from AtlasActorLudi.SpeciesKit.bases import Species
+from AtlasActorLudi.SpeciesKit.kinship import Celestial as Kin_Celestial
+from AtlasActorLudi.SpeciesKit.physiology import Imprint_Species
+from AtlasActorLudi.SpeciesKit.traits import Darkvision
+
+
+class Aasimar(
+	Species,
+	Humanoid,
+	Kin_Celestial,
+	Darkvision,
+	Celestial_Resistance,
+	Healing_Hands,
+	Light_Bearer,
+	):
+	"""A Humanoid carrying an Upper Planes spark."""
+
+	@Imprint
+	def Set_Physiology(
+		target,
+		size=None,
+		):
+		Imprint_Species(
+			target,
+			Aasimar,
+			size,
+			)

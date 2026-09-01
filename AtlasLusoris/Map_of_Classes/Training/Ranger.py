@@ -8,8 +8,6 @@ from AtlasLusoris.Grimoire_of_Features import (
 	ApplyEpicBoon
 	)
 
-import random
-
 
 class Ranger(Progression):
 	def __init__(self, character):

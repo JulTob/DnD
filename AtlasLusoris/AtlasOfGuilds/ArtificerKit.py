@@ -25,4 +25,9 @@ BattleSmith = Build_Specialization(
 	module=__name__,
 	)
 
-SPECIALIZATIONS = Artificer.SPECIALIZATIONS
+SPECIALIZATIONS = (
+	Alchemist,
+	Armorer,
+	Artillerist,
+	BattleSmith,
+	)
