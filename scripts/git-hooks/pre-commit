@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Decree 0008 / QST-0052 — refuse accidental mass dumps and Finder dupes.
+set -euo pipefail
+
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT"
+
+MAX_STAGED=80
+STAGED="$(git diff --cached --name-only | wc -l | tr -d ' ')"
+
+if [[ "${STAGED}" -gt "${MAX_STAGED}" ]]; then
+	echo "pre-commit: refuse — ${STAGED} staged files (max ${MAX_STAGED})." >&2
+	echo "Stage paths intentionally; never git add -A in a recovery tree." >&2
+	exit 1
+fi
+
+if git diff --cached --name-only | grep -qE ' 2\.(py|md)$'; then
+	echo "pre-commit: refuse — Finder duplicate (* 2.py / * 2.md) is staged." >&2
+	exit 1
+fi
+
+if [[ -x "${ROOT}/.venv/bin/python" ]] && [[ -f "${ROOT}/scripts/loss_detector.py" ]]; then
+	"${ROOT}/.venv/bin/python" "${ROOT}/scripts/loss_detector.py" --staged
+fi
