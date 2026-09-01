@@ -28,6 +28,26 @@ from AtlasVenustas.Tools_of_ShareableLinks import shareable_links_head_tags
 from AtlasVenustas.Tools_of_Tablet import tablet_head_tags
 from AtlasVenustas.Scroll_of_Styles import style_tag
 from Minion import chronicler, minion
+
+
+def _build_stamp() -> str:
+    """The git commit this server imported, read once at start."""
+    import subprocess
+
+    try:
+        sha = subprocess.run(
+            ["git", "rev-parse", "--short", "HEAD"],
+            capture_output=True,
+            text=True,
+            cwd=Path(__file__).resolve().parent,
+            timeout=5,
+        ).stdout.strip()
+        return f"build {sha}" if sha else "build unknown"
+    except Exception:
+        return "build unknown"
+
+
+_BUILD_STAMP = _build_stamp()
 from shiny import App, reactive, render, ui  
 # pyright: ignore[reportMissingImports]
 
@@ -710,6 +730,15 @@ app_ui = ui.page_fluid(
                 style="color: #f6d67c; text-decoration: underline dashed; font-weight: bold;",
             ),
             style="color: #f6d67c;",
+        ),
+        ui.tags.span("|", style="margin: 0 1.5em;"),
+        # The build stamp names the code vintage a server holds in memory, so
+        # an error report is never again chased across the wrong line
+        # (Decree 0008 mechanics; three stale-server hunts paid for this line).
+        ui.tags.span(
+            _BUILD_STAMP,
+            title="Build (git commit at server start)",
+            style="color: #a8945d; font-size: 0.85em;",
         ),
     ),
 )
