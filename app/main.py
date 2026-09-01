@@ -78,7 +78,6 @@ _PAGE_VIEWS = {
                 ),
         Page.ACTOR_LUDI_ALUSORIS: alusoris_page_ui(
                 RACE_CHOICES,
-                NONPLAYER_GUILD_CHOICES,
                 NONPLAYER_BACKGROUND_CHOICES,
                 ),
         Page.ACTOR_LUDI_ALUSORIS_LIST: alusoris_list_page_ui(),
