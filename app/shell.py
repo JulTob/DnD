@@ -13,6 +13,7 @@ from app.components import (
     style_tag,
     tablet_head_tags,
     )
+from app.publish_scope import fantasy_button_class
 
 
 _FONT_STYLESHEETS = (
@@ -96,27 +97,33 @@ def _header() -> ui.Tag:
                     ui.input_action_button(
                             "go_home",
                             "Home",
-                            class_="fantasy-button",
+                            class_=fantasy_button_class(),
                             ),
                     ui.input_action_button(
                             "go_character",
                             "Character",
-                            class_="fantasy-button",
+                            class_=fantasy_button_class(),
                             ),
                     ui.input_action_button(
                             "go_npc",
                             "NPC",
-                            class_="fantasy-button",
+                            class_=fantasy_button_class(
+                                    parked=True
+                                    ),
                             ),
                     ui.input_action_button(
                             "go_npclist",
                             "NPC List",
-                            class_="fantasy-button",
+                            class_=fantasy_button_class(
+                                    parked=True
+                                    ),
                             ),
                     ui.input_action_button(
                             "go_dm",
                             "DM",
-                            class_="fantasy-button",
+                            class_=fantasy_button_class(
+                                    parked=True
+                                    ),
                             ),
                     ),
             )

@@ -11,10 +11,17 @@ from app.character_url import (
     parse_character_params_from_path,
     parse_character_params_from_url,
 )
+from app.publish_scope import character_panel_class
+from app.publish_scope import fantasy_button_class
+from app.publish_scope import home_welcome
+from app.publish_scope import npc_panel_class
+from app.publish_scope import published_page
+from app.publish_scope import tablet_title
+from app.publish_scope import tablet_wrapper_attrs
 
 import app.random as random
-from app.components.eldritch import eldritch_head_tags
 from app.components.character_sheet import build_character_sheet
+from app.components.eldritch import eldritch_head_tags
 from AtlasVenustas.Tools_of_Loader import loader_head_tags, loader_panel
 from AtlasVenustas.Tools_of_Masonry import masonry_head_tags
 from AtlasVenustas.Tools_of_ShareableLinks import shareable_links_head_tags
@@ -36,7 +43,7 @@ from AtlasAlusoris.Map_of_Races import Race, race_weights
 from AtlasLusoris.Grimoire_of_Characters import Character
 from AtlasLusoris.Map_of_Backgrounds import backgrounds
 from AtlasLusoris.Map_of_Classes import classes
-from AtlasLusoris.Map_of_Species import species as species_dict, creature_type_label
+from AtlasLusoris.Map_of_Species import species as species_dict
 from AtlasPugna.Map_of_Legendary_Actions import Lair, Legendary, Region
 
 
@@ -468,9 +475,9 @@ def _specialization_selection(
 home_panel = ui.div(
     {"class": "main-content"},
     ui.h2("Welcome to Gen Legend"),
-    ui.p("Generate legendary Characters and Non-Player Characters for your next adventure."),
+    ui.p(home_welcome()),
     ui.div(
-        {"id": "generator-tablet", "class": "tablet-wrapper"},
+        tablet_wrapper_attrs(),
         ui.div(
             {"class": "tablet-controls"},
             ui.tags.button(
@@ -482,7 +489,7 @@ home_panel = ui.div(
                 },
                 ui.HTML("<span aria-hidden='true' style='display:block;'>&#x2039;</span>"),
             ),
-            ui.h3({"id": "tablet-title", "class": "tablet-title"}, "NPC Generator"),
+            ui.h3({"id": "tablet-title", "class": "tablet-title"}, tablet_title()),
             ui.tags.button(
                 {
                     "class": "tablet-nav next fantasy-button",
@@ -498,7 +505,7 @@ home_panel = ui.div(
             ui.div(
                 {"class": "tablet-rotator"},
                 ui.tags.section(
-                    {"class": "generator-panel", "data-title": "Character Generator"},
+                    {"class": character_panel_class(), "data-title": "Character Generator"},
                     ui.h3("Generate Character"),
                     ui.input_select("char_species", "Species", SPECIES),
                     ui.input_select("char_class", "Class", CLASSES),
@@ -513,7 +520,7 @@ home_panel = ui.div(
                     ),
                 ),
                 ui.tags.section(
-                    {"class": "generator-panel is-active", "data-title": "NPC Generator"},
+                    {"class": npc_panel_class(), "data-title": "NPC Generator"},
                     ui.h3("Generate Non Player Character"),
                     ui.div(
                         {"class": "number-input fantasy-input"},
@@ -560,6 +567,7 @@ character_panel = ui.div(
         ),
         ui.div(
             {"class": "character-level-box"},
+            ui.div({"class": "character-level-label"}, "Level"),
             ui.tags.div(
                 {"class": "character-level-controls"},
                 ui.input_action_button(
@@ -568,11 +576,6 @@ character_panel = ui.div(
                     class_="minus fantasy-button fantasy-input",
                     title="Level Down",
                     aria_label="Level Down",
-                ),
-                ui.tags.div(
-                    {"class": "character-level-value", "aria-live": "polite"},
-                    ui.div({"class": "character-level-label"}, "Level"),
-                    ui.output_text("char_level_display", inline=True),
                 ),
                 ui.input_action_button(
                     "btn_char_level_up",
@@ -664,10 +667,10 @@ app_ui = ui.page_fluid(
         ui.h1(ui.tags.a({"href": "#", "style": "color: inherit; text-decoration: none;"}, "Gen Legend")),
         ui.tags.div(
             {"class": "header-actions"},
-            ui.input_action_button("go_home", "Home", class_="fantasy-button"),
-            ui.input_action_button("go_character", "Character", class_="fantasy-button"),
-            ui.input_action_button("go_npc", "NPC", class_="fantasy-button"),
-            ui.input_action_button("go_npclist", "NPC List", class_="fantasy-button"),
+            ui.input_action_button("go_home", "Home", class_=fantasy_button_class()),
+            ui.input_action_button("go_character", "Character", class_=fantasy_button_class()),
+            ui.input_action_button("go_npc", "NPC", class_=fantasy_button_class(parked=True)),
+            ui.input_action_button("go_npclist", "NPC List", class_=fantasy_button_class(parked=True)),
         ),
     ),
     ui.div(
@@ -725,7 +728,7 @@ def server(input, output, session):
     initial_character_url_processed = reactive.value(False)
 
     def show_page(page: str) -> None:
-        page_state.set(page)
+        page_state.set(published_page(page))
 
     def _send_custom_message(message_type: str, message_data: dict[str, Any]) -> None:
         message = session.send_custom_message(message_type, message_data)
@@ -1055,13 +1058,6 @@ def server(input, output, session):
             "npclist": npclist_panel,
         }
         return pages.get(page_state(), home_panel)
-
-    @output
-    @render.text
-    def char_level_display() -> str:
-        """The number between the level buttons; tracks the reforge state."""
-        current = character_params_state() or _character_params_from_data(character_state())
-        return str(max(1, min(20, _safe_int((current or {}).get("level"), 1))))
 
     @output
     @render.ui

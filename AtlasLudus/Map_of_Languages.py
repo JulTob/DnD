@@ -1337,18 +1337,22 @@ class Linguistics:
 			lingua.AddAnyLanguage(lang_set, n-1)
 
 
-	def AsHTML(linguistics):
+	def AsListHTML(linguistics):
 		final = linguistics.langs
 		if not final:
-			result = "<i>Common</i>"
-		else:
-			langs_html = "<br> ".join(sorted(final))
-			result = f"""<i>{langs_html}</i>"""
+			return "<i>Common</i>"
+		langs_html = "<br>".join(
+				sorted(
+						final
+						)
+				)
+		return f"<i>{langs_html}</i>"
 
+	def AsHTML(linguistics):
 		return f"""
 		<div class="npc-textbox">
 		<h2>Languages</h2>
-		{result}
+		{linguistics.AsListHTML()}
 		</div>
 		"""
 

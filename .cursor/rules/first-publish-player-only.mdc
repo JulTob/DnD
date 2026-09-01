@@ -1,0 +1,14 @@
+---
+description: First publish is the Player Character generator (Decree 0004)
+alwaysApply: true
+---
+
+# First publish — Player only
+
+The first public product is the **Player Character generator** (Home, Generate, sheet, shareable Character URL).
+
+- Do not spend implementation time on NPC, NPC list, DM Companion, dungeons, or Epica unless Julio reopens that cut.
+- Do not delete parked chrome. Restore later by setting `PLAYER_ONLY_PUBLISH = False` in `app/publish_scope.py`.
+- Do not merge live `AtlasAlusoris/` with `AtlasActorLudi/AtlasAlusoris/` (QST-0081.5).
+- Prefer Player-generator Questae (QST-0001, QST-0002, QST-0050.1, QST-0050.2) over parked NPC/DM Questae.
+- A Guild the generator cannot build must not stay in the picker (Artificer: QST-0050.2).
