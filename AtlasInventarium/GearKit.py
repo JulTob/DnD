@@ -7,8 +7,11 @@ Thought pattern (read this before the code)
 	   ``Outfit_Player`` here, ``Outfit_NonPlayer`` later (characteristic
 	   weapon, travel light, lootables) without touching the item layer.
 	2. Proficiency is read from the Guild Tags the Character already carries
-	   (``HeavilyArmored``, ``MartialArms``, ``FinesseArms``, …) — the
-	   machine-readable training data, not string-matched class names.
+	   (``HeavilyArmored``, ``MartialArms``, ``FinesseArms``, …) and from
+	   Unarmored Defense skills (``Unarmed_Monk``, ``Unarmed_Barb``,
+	   ``Unarmed_Dance``) — the machine-readable training data, not
+	   string-matched class names. Who-may-wear-what lives in
+	   ``Map_of_Gear_Proficiency``.
 	3. Every pick is drawn from a per-character seeded stream, so the same
 	   seed always outfits the same way (no reroll flicker).
 	4. Nothing is written that a derived read could compute. AC is never
@@ -20,6 +23,7 @@ Public surface
 	weapon_pool(char)        — weapons this Character may wield
 	may_use_shield(char)     — shield training, and whether it fits the build
 	unarmoured_formula(char) — the natural no-armour AC (Unarmored Defense)
+	armour_voids_unarmoured  — worn armour would turn the formula off
 	starting_budget(char)    — gold for the initial kit
 """
 
@@ -61,11 +65,13 @@ from AtlasInventarium.Ledger_of_Gear import (
 		Explorers_Pack,
 		)
 from AtlasInventarium.Ledger_of_Tools import TOOLS_BY_NAME
-from AtlasInventarium.Ledger_of_Weapons import (
-		MARTIAL_MELEE,
-		MARTIAL_RANGED,
-		SIMPLE_MELEE,
-		SIMPLE_RANGED,
+from AtlasInventarium.Map_of_Gear_Proficiency import (
+		armour_allowance,
+		armour_voids_unarmoured,
+		has_unarmoured_defence,
+		may_use_shield,
+		unarmoured_formula,
+		weapon_pool,
 		)
 
 
@@ -139,177 +145,6 @@ def issue(
 						),
 				)
 	return item
-
-
-# ---------------------------------------------------------------------------
-# Reading training off the Character's Guild Tags
-# ---------------------------------------------------------------------------
-
-
-def armour_allowance(
-		char,
-		) -> tuple[str, ...]:
-	"""Which armour kinds this Character was trained to wear."""
-	from AtlasLusoris.GuildKit import (
-			HeavilyArmored,
-			LightlyArmored,
-			ModeratelyArmored,
-			)
-
-	if char in HeavilyArmored:
-		return (
-				"Light",
-				"Medium",
-				"Heavy",
-				)
-	if char in ModeratelyArmored:
-		return (
-				"Light",
-				"Medium",
-				)
-	if char in LightlyArmored:
-		return (
-				"Light",
-				)
-	return ()
-
-
-def has_unarmoured_defence(
-		char,
-		) -> bool:
-	"""True when the Character's AC comes from a body-discipline formula."""
-	skills = getattr(
-			char,
-			"skills",
-			None,
-			)
-	if skills is None:
-		return False
-	return bool(
-			skills.Unarmed_Monk.is_proficient()
-			or skills.Unarmed_Barb.is_proficient()
-			)
-
-
-def unarmoured_formula(
-		char,
-		) -> int:
-	"""
-	The Character's own no-armour AC.
-
-	Monk adds Wisdom, Barbarian adds Constitution; everyone else is the plain
-	10 + Dexterity. Returned as a number so ``armour_class`` can simply take
-	the better of it and any worn armour — no special-casing downstream.
-	"""
-	scores = getattr(
-			char,
-			"AS",
-			None,
-			)
-	dexterity = _modifier(
-			getattr(
-					scores,
-					"DEX",
-					10,
-					)
-			)
-	base = 10 + dexterity
-
-	skills = getattr(
-			char,
-			"skills",
-			None,
-			)
-	if skills is None:
-		return base
-
-	if skills.Unarmed_Monk.is_proficient():
-		base = max(
-				base,
-				10 + dexterity + _modifier(
-						getattr(
-								scores,
-								"WIS",
-								10,
-								)
-						),
-				)
-	if skills.Unarmed_Barb.is_proficient():
-		base = max(
-				base,
-				10 + dexterity + _modifier(
-						getattr(
-								scores,
-								"CON",
-								10,
-								)
-						),
-				)
-	return base
-
-
-def may_use_shield(
-		char,
-		) -> bool:
-	"""
-	Shield training, tempered by whether a shield suits the build.
-
-	A Monk's Unarmored Defence is void while holding a shield, so the
-	generator does not hand one over; a Barbarian's is not, so it does.
-	"""
-	from AtlasLusoris.GuildKit import HeavilyArmored, ModeratelyArmored
-
-	skills = getattr(
-			char,
-			"skills",
-			None,
-			)
-	if skills is not None and skills.Unarmed_Monk.is_proficient():
-		return False
-
-	return (
-		char in HeavilyArmored
-		or char in ModeratelyArmored
-		)
-
-
-def weapon_pool(
-		char,
-		) -> tuple[Item, ...]:
-	"""
-	Every weapon this Character may wield, from their Guild's arms training.
-
-	Firearms are excluded everywhere: they are DMG-optional and no 2024 Guild
-	trains them by default.
-	"""
-	from AtlasLusoris.GuildKit import (
-			FinesseArms,
-			LightMartialArms,
-			MartialArms,
-			)
-
-	simple = SIMPLE_MELEE + SIMPLE_RANGED
-	martial = MARTIAL_MELEE + MARTIAL_RANGED
-
-	if char in MartialArms:
-		return simple + martial
-
-	if char in FinesseArms:
-		return simple + tuple(
-				weapon
-				for weapon in martial
-				if "Finesse" in weapon.properties
-				or "Light" in weapon.properties
-				)
-
-	if char in LightMartialArms:
-		return simple + tuple(
-				weapon
-				for weapon in martial
-				if "Light" in weapon.properties
-				)
-
-	return simple
 
 
 # ---------------------------------------------------------------------------
@@ -519,6 +354,10 @@ def _fit_armour(
 			char
 			)
 	if not allowance:
+		return None
+	if armour_voids_unarmoured(
+			char,
+			):
 		return None
 
 	spendable = char.purse - reserve
@@ -1645,6 +1484,7 @@ __all__ = (
 		"Loadout",
 		"Outfit_Player",
 		"armour_allowance",
+		"armour_voids_unarmoured",
 		"current_armour_class",
 		"gear_stream",
 		"has_unarmoured_defence",
@@ -1781,6 +1621,24 @@ def _self_test():
 	assert monk_report["armour"] is None, "Monk should stay unarmoured"
 	assert monk_report["armour_class"] == unarmoured_formula(
 			monk
+			)
+
+	with hush():
+		dancer = summon_player(
+				guild="Bard",
+				specialization="Dance",
+				level=5,
+				seed=11,
+				)
+		dancer.belongings = []
+		dance_report = Outfit_Player(
+				dancer
+				)
+	assert dancer.skills.Unarmed_Dance.is_proficient(), "Dance grants Unarmored Defense"
+	assert dance_report["shield"] is None, "a shield voids Dance Unarmored Defense"
+	assert dance_report["armour"] is None, "Dance should stay unarmoured"
+	assert dance_report["armour_class"] == unarmoured_formula(
+			dancer
 			)
 
 	# --- Barbarian MAY carry a shield with Unarmored Defence -------------
@@ -2156,15 +2014,17 @@ def _check_character(
 				f"wears {worn.armour_kind} armour, untrained for it"
 				)
 
-	# Unarmored Defence classes stay unarmoured.
-	if char.skills.Unarmed_Monk.is_proficient():
+	# Unarmored Defence that armour would void stays unarmoured.
+	if armour_voids_unarmoured(
+			char
+			):
 		if worn is not None:
 			fail(
-					f"Monk wears {worn.called}, voiding Unarmored Defence"
+					f"{worn.called} worn, voiding Unarmored Defence"
 					)
 		if loadout.offhand is not None:
 			fail(
-					"Monk carries a shield, voiding Unarmored Defence"
+					"shield carried, voiding Unarmored Defence"
 					)
 
 	# Everything equipped is owned.

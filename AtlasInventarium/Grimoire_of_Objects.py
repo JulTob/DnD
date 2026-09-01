@@ -321,6 +321,18 @@ def set_Armor(char):
 			char.equipment.equip_defense(armor)
 			char.AC = AC_candidate
 
+	dance = getattr(
+			char.skills,
+			"Unarmed_Dance",
+			None,
+			)
+	if dance is not None and dance.is_proficient():
+		AC_candidate = 10 + Modifier(char.abilities.DEX) + Modifier(char.abilities.CHA)
+		if AC_candidate > char.AC:
+			armor = char.equipment.Clothes(Modifier(char.abilities.DEX))
+			char.equipment.equip_defense(armor)
+			char.AC = AC_candidate
+
 	if not char.equipment.defense:
 		armor = char.equipment.Clothes(Modifier(char.abilities.DEX))
 		char.equipment.equip_defense(armor)

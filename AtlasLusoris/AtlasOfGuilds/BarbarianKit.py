@@ -22,12 +22,12 @@ Berserker = Build_Specialization(
 	)
 
 WILD_HEART_DESCRIPTION = (
-	"Your heart beats to the rhythms of nature. Rage does not take you "
-	"out of the world; it is how you listen to it.\n\n"
-	"There is a bestial instinct that maybe all carry and few listen to. "
-	"You listen. You listen to the wolves and to the bears. Both the ones "
-	"you hunt with and the ones you carry in your spirit. You listen to "
-	"your place in the wilds, and you know you belong.\n\n"
+	"Your rage comes from a primal instinct. A connection to your "
+	"animalistic nature. A harmony with the bestial spirit. Your heart "
+	"beats to the rhythms of nature. Rage is how you listen to it.\n\n"
+	"You listen to the wolves and to the bears. Both the ones you hunt "
+	"with and the ones you carry in your spirit. You listen to your "
+	"place in the wilds, and you know you belong.\n\n"
 	"Now the world of civilization calls, and you carry the wild things "
 	"in your heart."
 	)
