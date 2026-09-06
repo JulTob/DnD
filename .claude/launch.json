@@ -3,10 +3,14 @@
   "configurations": [
     {
       "name": "shiny-app",
-      "runtimeExecutable": "/Users/tbs/Desktop/DnD/scripts/run_shiny_preview.sh",
+      "runtimeExecutable": "./scripts/run_shiny_preview.sh",
       "runtimeArgs": [],
       "port": 8000,
       "autoPort": true
+    },
+    {
+      "name": "shiny-attached",
+      "url": "http://localhost:8000"
     }
   ]
 }
