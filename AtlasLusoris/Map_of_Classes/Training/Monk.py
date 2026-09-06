@@ -377,10 +377,18 @@ class Elements(Way):
 				these Monks momentarily tame the energy of the
 				Elemental Chaos to empower themselves in and out of battle.
 				"""))
+			bullet = character.Pick(
+				("🌪️", "🔥", "❄️", "🪨"),
+				dice=character.Dice_Bag(
+					"training.monk.elements.bullet",
+					version="2024",
+					namespace="GenLegendMonk",
+					),
+				)
 			feats.append(Feature("Elemental Attunement",
 				f"""
 				At the start of your turn, you can expend 1 Focus Point to imbue yourself with elemental energy. The energy lasts for 10 minutes or until you have the Incapacitated condition. You gain the following benefits while this feature is active.
-				<ul style="list-style-type: '{random.choice(['🌪️', '🔥', '❄️', '🪨'])}'; align:'left'">
+				<ul style="list-style-type: '{bullet}'; align:'left'">
 					<li><b>Reach </b> When you make an Unarmed Strike, your reach is 10 feet greater than normal, as elemental energy extends from you. </li>
 					<li><b> Elemental Strikes.</b> Whenever you hit with your Unarmed Strike, you can cause it to deal your choice of Acid, Cold, Fire, Lightning, or Thunder damage rather than its normal damage type. When you deal one of these types with it, you can also force the target to make a Strength saving throw. On a failed save, you can move the target up to 10 feet toward or away from you, as elemental energy swirls around it. </li>
 					{elemental_attunement_extra}
@@ -415,12 +423,20 @@ class OpenHand(Way):
 
 		# Level 3 features
 		if level >= 3:
+			bullet = character.Pick(
+				("🫸", "🫷", "🤚", "✋", "🫱", "🫲", "👋", ""),
+				dice=character.Dice_Bag(
+					"training.monk.open_hand.bullet",
+					version="2024",
+					namespace="GenLegendMonk",
+					),
+				)
 			feats.append(Feature("Open Hand Technique",
 			f"""
 			Whenever you hit a creature with an attack granted by your
 			Flurry of Blows, you can impose one of the following effects
 			on that target.
-			<ul style="list-style-type: '{random.choice(['🫸', '🫷', '🤚', '✋', '🫱', '🫲', '👋', ''])}'; align:'left'">
+			<ul style="list-style-type: '{bullet}'; align:'left'">
 				<li><b>Addle.</b> The target can't make Opportunity Attacks
 				until the start of its next turn. </li>
 				<li><b>Push.</b> The target must succeed on a Strength

@@ -20,7 +20,19 @@ class Ranger(Progression):
 			self.char = character
 
 		level = character.Level
-		subclass = character.Subclass or random.choice(subclasses["Ranger"])
+		from AtlasLusoris.GuildKit import Specialization_Choices
+
+		subclass = (
+			character.Subclass
+			or character.Pick(
+				Specialization_Choices("Ranger"),
+				dice=character.Dice_Bag(
+					"training.ranger.archetype",
+					version="2024",
+					namespace="GenLegendRanger",
+					),
+				)
+			)
 		#character.Subclass = subclass
 		features = []
 		favored_enemy = 2
