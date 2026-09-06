@@ -2,7 +2,7 @@
 
 - **Type:** rule-update / chore
 - **Priority:** 🟠 high
-- **Status:** Working
+- **Status:** Working (superseded by Decree 0008; closed out by QST-0090, awaiting Julio's word)
 - **Owner:** Cursor (this session) — remote `product` branch landed; Decree still Julio's
 - **Route to:** Paladin, Artificer, Julio
 - **Parent:** QST-0052
@@ -83,6 +83,13 @@ not force-push `origin/main`.
   session). Local `main` set to track `origin/product`.
 - **Practice/preference to remember:** the checkout is not the product; a
   named remote ref is. Uncommitted trees are other people's sessions.
+- **Closed out 2026-09-06 (QST-0090):** the transition is over. `origin/main` is the
+  one product tip (Decree 0008); `origin/product` and the other transitional remote
+  lines were archived as tags (`archive/product`, `archive/remove-npc-gen`,
+  `archive/codex-recovery-2026-08-29`, …) at the 2026-09-02 consolidation. Local
+  `main` tracks `origin/main`. The Heroku remote is removed; its line lives at
+  `archive/main-heroku-2025-08-07`. Sessions start from `origin/main` in their own
+  worktree, as the README now says.
 
 ---
 
