@@ -1679,18 +1679,9 @@ def _prose_sections(
             sheet_branch(
                     species_name,
                     *_present(
-                            _maybe_branch(
-                                    f"{species_name} Description",
-                                    tree[ "species_description" ],
-                                    ),
-                            _maybe_branch(
-                                    "Extra Origin Feat",
-                                    tree[ "species_versatile" ],
-                                    ),
-                            _maybe_branch(
-                                    f"{species_name} Features",
-                                    tree[ "species_features" ],
-                                    ),
+                            *tree[ "species_description" ],
+                            *tree[ "species_versatile" ],
+                            *tree[ "species_features" ],
                             ),
                     level=2,
                     ),
@@ -2021,10 +2012,8 @@ def _test_sheet_tree() -> None:
             data
             )
 
-    assert f"{species} Description" in sheet
-    assert f"{species} Features" in sheet
+    assert species in sheet
     assert background in sheet
-    assert "Description" in sheet
     assert "Level features" in sheet
     assert guild in sheet
     assert "Tool Proficiencies" in sheet
@@ -2180,12 +2169,7 @@ def _test_sheet_tree() -> None:
     assert "Humans have complex lives, and they adapt quickly." in human_sheet
     assert "You have this extra Origin Feat:" in human_sheet
     assert extra in human_sheet
-    assert human_sheet.index(
-            "Extra Origin Feat"
-            ) < human_sheet.index(
-            ">Farmer<"
-            )
-    assert extra in human_sheet
+    assert "Extra Origin Feat" not in human_sheet
     assert human_sheet.index(
             extra
             ) < human_sheet.index(

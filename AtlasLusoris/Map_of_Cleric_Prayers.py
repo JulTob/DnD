@@ -631,11 +631,8 @@ CLERIC_DESCRIPTION = (
 	"itself, turning its face toward you. Whatever it is, you have "
 	"been carried farther than you know.\n\n"
 	"You can feel it. Maybe you don't see it, and you may not be able "
-	"to explain why, but still you do believe. You believe you are "
-	"meant for something. What it is, you are not sure you want to "
-	"know — and you will not be asked for more than you can carry. "
-	"You only hope you will be enough. In the hour you falter, a hand "
-	"is held out. It was held out before you reached for it.\n\n"
+	"to explain why, but still you do believe. You believe there is a plan for you, and you are meant for something. What it is, you are not sure. You only hope you will be enough. Still, in the hour you falter, a hand "
+	"is there to hold you. It was held out before you reached for it. Of that, you are certain.\n\n"
 	"You have defied the odds, and contemplated miracles long enough "
 	"you started doing your own."
 	)

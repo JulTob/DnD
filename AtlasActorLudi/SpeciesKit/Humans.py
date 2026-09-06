@@ -20,7 +20,22 @@ class Human(
 	Skillful,
 	Versatile,
 	):
-	"""2024 Human species."""
+	"""
+	2024 Human species.
+
+	Human Tag.
+
+	- Underlay:
+		- Species (base)
+			A tagged Human has a Species: Human.
+		- Humanoid
+			A Human is a Humanoid. General game classification.
+
+		Applied Features:
+		- Resourceful
+		- Skillful
+		- Versatile
+	"""
 
 	@Imprint
 	def Set_Physiology(
@@ -47,9 +62,9 @@ Player_Handbook_2024(
 		),
 	speed=30,
 	description=(
-		"""Humans. The wonderful wanderers. There is nowhere humans are not, and nowhere humans wouldn't go. In worlds full of monsters, magic, and dangers, your people learned not just to survive but to thrive. And it is all thanks to the power of friendship. You befriend most species, and coexist with them. You trade, you help each other, you build relationships and even marriages. Humans tend to organize, making institutions and orders part of their legacy. There is always a human "kingdom" a couple of days' walk away.
+		"""Humans. The wonderful wanderers. There is nowhere humans are not, and nowhere humans wouldn't go. In worlds full of monsters, magic, and dangers, our people learned not just to survive but to thrive. And it is all thanks to the power of friendship. We befriend most species, and coexist with them. We trade, we help each other, we build relationships and even marriages. Humans tend to organize, making institutions and orders part of our legacy. There is always a human "kingdom" a couple of days' walk away.
 
-Think of what kinds of organizations {name} may belong to, such as orders, guilds, schools, militias."""
+Think of what kinds of organizations {name} may belong to, such as guilds, schools, or militias."""
 		),
 	)
 
