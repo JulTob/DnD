@@ -217,6 +217,31 @@ def _test_playable_species() -> None:
 		else:
 			assert character.speed == species.SPEED
 
+		# Every Species' projected entries obey the sheet's voice: a feature the
+		# Character has is never announced as a future one, and an entry
+		# without prose is allowed only when its chips are the whole feature.
+		Resolve_Species_Features(character)
+		_assert_already_gained_vocabulary(
+			character.features,
+			)
+		for feature in character.features:
+			if "Species" not in str(
+				getattr(
+					feature,
+					"source",
+					"",
+					)
+				):
+				continue
+			assert (
+				feature.description.strip()
+				or getattr(
+					feature,
+					"chips",
+					None,
+					)
+				), f"{species.__name__} {feature.name!r} has neither prose nor chips"
+
 
 def _test_species_declarations_own_the_catalog() -> None:
 	assert tuple(

@@ -1,6 +1,7 @@
 """Resolve Dwarf rules onto a completed Character sheet."""
 
 from AtlasActorLudi.SpeciesKit.presentation import Project_Species_Feature
+from AtlasActorLudi.SpeciesKit.traits import Darkvision_Rules
 
 
 def _proficiency_bonus(
@@ -30,9 +31,8 @@ def _project_darkvision(
 	Project_Species_Feature(
 		target,
 		"Darkvision",
-		(
-			"<b>Gained at Level 1.</b> Dwarven senses granted Darkvision "
-			f"with a range of {darkvision_range} feet."
+		Darkvision_Rules(
+			darkvision_range
 			),
 		chips=(
 			(
@@ -54,10 +54,9 @@ def _project_dwarven_resilience(
 		target,
 		"Dwarven Resilience",
 		(
-			"<b>Gained at Level 1.</b> Dwarven stock granted Resistance to "
-			f"{Dwarven_Resilience.RESISTANCE} damage, and Advantage on "
-			"saving throws made to avoid or end the "
-			f"{Dwarven_Resilience.SAVE_ADVANTAGE_CONDITION} condition."
+			f"You have Resistance to {Dwarven_Resilience.RESISTANCE} damage. "
+			"You also have Advantage on saving throws you make to avoid or "
+			f"end the {Dwarven_Resilience.SAVE_ADVANTAGE_CONDITION} condition."
 			),
 		chips=(
 			(
@@ -87,9 +86,10 @@ def _project_dwarven_toughness(
 		target,
 		"Dwarven Toughness",
 		(
-			"<b>Gained at Level 1.</b> Dwarven stock granted one extra Hit "
-			"Point, and one more at every level after: "
-			f"{gained} in total at Level {level}."
+			"Your Hit Point maximum increases by "
+			f"{Dwarven_Toughness.HIT_POINTS_PER_LEVEL}, and it increases by "
+			f"{Dwarven_Toughness.HIT_POINTS_PER_LEVEL} again whenever you gain "
+			f"a level: +{gained} at Level {level}."
 			),
 		chips=(
 			(
@@ -113,11 +113,14 @@ def _project_stonecunning(
 		target,
 		"Stonecunning",
 		(
-			f"<b>Gained at Level 1.</b> <b>{Stonecunning.ACTION}.</b> Gain "
-			f"{Stonecunning.SENSE} with a range of {Stonecunning.RANGE} feet "
-			f"for {Stonecunning.DURATION_MINUTES} minutes while on or "
-			"touching a stone surface, natural or worked. The trait carries "
-			f"{proficiency} uses per {Stonecunning.RECOVERY}."
+			f"As a {Stonecunning.ACTION}, you gain {Stonecunning.SENSE} with a "
+			f"range of {Stonecunning.RANGE} feet for "
+			f"{Stonecunning.DURATION_MINUTES} minutes. You must be on a stone "
+			f"surface or touching a stone surface to use this "
+			f"{Stonecunning.SENSE}. The stone can be natural or worked. You can "
+			f"use this {Stonecunning.ACTION} a number of times equal to your "
+			f"Proficiency Bonus ({proficiency}), and you regain all expended "
+			f"uses when you finish a {Stonecunning.RECOVERY}."
 			),
 		chips=(
 			(

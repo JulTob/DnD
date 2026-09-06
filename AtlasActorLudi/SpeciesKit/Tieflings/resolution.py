@@ -7,6 +7,7 @@ from AtlasActorLudi.SpeciesKit.magic import Align_Lineage_Ability
 from AtlasActorLudi.SpeciesKit.magic import Species_Spellcasting_Chips
 from AtlasActorLudi.SpeciesKit.presentation import Project_Species_Feature
 from AtlasActorLudi.SpeciesKit.traits import Darkvision
+from AtlasActorLudi.SpeciesKit.traits import Darkvision_Rules
 
 
 def _project_darkvision(
@@ -22,9 +23,8 @@ def _project_darkvision(
 	Project_Species_Feature(
 		target,
 		"Darkvision",
-		(
-			"Darkvision "
-			f"with a range of {darkvision_range} feet."
+		Darkvision_Rules(
+			darkvision_range
 			),
 		chips=(
 			(
@@ -45,8 +45,8 @@ def _project_otherworldly_presence(
 		target,
 		"Otherworldly Presence",
 		(
-			f"The Thaumaturgy cantrip. {ability_label} is its "
-			"spellcasting ability."
+			f"You know the Thaumaturgy cantrip. {ability_label} is your "
+			"spellcasting ability for it."
 			),
 		level=1,
 		)
@@ -91,17 +91,17 @@ def _project_fiendish_legacy(
 		free_casts
 		)
 	description = (
-		f"Resistance to {heritage.DAMAGE_RESISTANCE} damage "
-		f"and the magic gained by this level: {legacy_names}. "
-		f"{ability_label} is the spellcasting ability."
+		f"You have Resistance to {heritage.DAMAGE_RESISTANCE} damage. "
+		f"You know the spells of your legacy at your level: {legacy_names}. "
+		f"{ability_label} is your spellcasting ability for them."
 		)
-
 	if free_casts:
 		description += (
-			" Each gained leveled spell carries one slot-free cast per "
-			"Long Rest and also accepts an appropriate spell slot."
+			" You can cast each leveled spell among them once without a spell "
+			"slot, and you regain the ability to do so when you finish a Long "
+			"Rest. You can also cast it using any spell slots you have of the "
+			"appropriate level."
 			)
-
 	Project_Species_Feature(
 		target,
 		f"Fiendish Legacy: {heritage.__name__}",
