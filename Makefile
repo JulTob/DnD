@@ -12,7 +12,7 @@ PYTHON := $(shell command -v python3.14 2>/dev/null || command -v python3.13 2>/
 endif
 
 run: setup
-	$(SHINY) run --port $(PORT) shiny_app.py
+	$(SHINY) run --port $(PORT) app.main:app
 
 setup: $(SHINY)
 
@@ -23,7 +23,7 @@ $(SHINY):
 	$(PIP) install -r requirements.txt
 
 smoke-player: setup
-	$(VENV_PYTHON) -c "import shiny_app; from AtlasActorLudi.Map_of_Character_Generation import summon_player; p = summon_player(seed=42, level=1); print('smoke-player OK', getattr(p, 'name', p))"
+	$(VENV_PYTHON) -c "import app.main; from AtlasActorLudi.Map_of_Character_Generation import summon_player; p = summon_player(seed=42, level=1); print('smoke-player OK', getattr(p, 'name', p))"
 
 safepoint:
 	@chmod +x scripts/safepoint.sh

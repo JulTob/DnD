@@ -20,8 +20,8 @@ if str(_project_root) not in sys.path:
 
 def main() -> int:
     try:
-        import shiny_app  # noqa: F401  # validates imports and app construction
-        print("Shiny app loaded successfully (shiny_app module + app object).")
+        import app.main  # noqa: F401  # validates imports and app construction
+        print("Shiny app loaded successfully (app.main module + app object).")
         return 0
     except Exception as exc:
         tb = traceback.format_exc()

@@ -4,8 +4,8 @@
 
 **First publish (Decree 0004):** the public product is the Player Character
 generator. NPC, NPC list, and DM chrome are parked behind
-`PLAYER_ONLY_PUBLISH` in `app/publish_scope.py`. Live preview still launches
-`shiny_app:app`.
+`PLAYER_ONLY_PUBLISH` in `app/publish_scope.py`. Live preview launches
+`app.main:app` (`shiny_app.py` is a compatibility shim).
 
 This ledger separates the approved model from the transitional code. The
 destination is binding in `Canon/Project-Model.md`; this file records evidence,

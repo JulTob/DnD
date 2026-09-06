@@ -72,4 +72,4 @@ fi
 
 # Run the Shiny app. Use PORT=8081 (or any free port) if 8080 is in use.
 SHINY_PORT="${PORT:-8080}"
-./.venv/bin/shiny run --reload --port "$SHINY_PORT" shiny_app.py
+./.venv/bin/shiny run --reload --port "$SHINY_PORT" app.main:app

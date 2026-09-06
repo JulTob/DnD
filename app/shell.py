@@ -5,6 +5,7 @@ from __future__ import annotations
 from shiny import ui
 
 from app.components import (
+    eldritch_head_tags,
     loader_head_tags,
     loader_panel,
     masonry_head_tags,
@@ -75,6 +76,7 @@ def _head() -> ui.Tag:
             *loader_head_tags(),
             *masonry_head_tags(),
             *shareable_links_head_tags(),
+            *eldritch_head_tags(),
             )
 
 
