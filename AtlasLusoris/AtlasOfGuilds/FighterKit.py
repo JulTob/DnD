@@ -309,8 +309,13 @@ class Maneuver(Tag):
 	"""A Battle Master maneuver selected by a Character."""
 
 	@Pre
-	def Character_Only(target):
-		assert target in Character
+	def Character_Only(
+			target,
+			):
+		return isinstance(
+				target,
+				Character,
+				)
 
 
 _MANEUVER_TAGS: dict[str, type[Maneuver]] = {}
