@@ -66,6 +66,7 @@ def _path(
 		min_level: int,
 		description,
 		chips=(),
+		apply=None,
 		):
 	return Build_Training(
 			name=name,
@@ -73,6 +74,7 @@ def _path(
 			min_level=min_level,
 			description=description,
 			chips=chips,
+			apply=apply,
 			path=path_name,
 			source=f"Training: Rogue ({path_name})",
 			)
@@ -100,6 +102,7 @@ def _assassin(
 		min_level: int,
 		description,
 		chips=(),
+		apply=None,
 		):
 	return _path(
 			ASSASSIN,
@@ -107,6 +110,7 @@ def _assassin(
 			min_level=min_level,
 			description=description,
 			chips=chips,
+			apply=apply,
 			)
 
 
@@ -495,6 +499,29 @@ Assassinate = _assassin(
 			),
 		)
 
+
+def _grant_assassins_tools(
+		char,
+		) -> None:
+	"""
+	Assassin's Tools: proficiency with the Disguise Kit and the Poisoner's
+	Kit, and one of each in the Loadout. The kits are issued through GearKit
+	so they are real Items in the bag, not sheet text.
+	"""
+	from AtlasInventarium.GearKit import issue
+	from AtlasInventarium.Ledger_of_Tools import TOOLS_BY_NAME
+
+	char.skills.Disguise_Kit.set_proficiency()
+	char.skills.Poisoners_Kit.set_proficiency()
+	for tool_name in (
+			"Disguise Kit",
+			"Poisoner's Kit",
+			):
+		issue(
+				char,
+				TOOLS_BY_NAME[tool_name],
+				)
+
 Assassins_Tools = _assassin(
 		name="Assassin's Tools",
 		min_level=3,
@@ -502,6 +529,7 @@ Assassins_Tools = _assassin(
 			"You gain a <b>Disguise Kit</b> and a <b>Poisoner's Kit</b>, "
 			"and you have proficiency with both."
 			),
+		apply=_grant_assassins_tools,
 		)
 
 Infiltration_Expertise = _assassin(

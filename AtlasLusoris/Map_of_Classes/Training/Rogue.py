@@ -125,29 +125,8 @@ class Rogue(Progression):
 					damage of the weapon's type equal to your Rogue level.
 					"""
 					))
-				feats.append(Feature("Assassin's Tools", 3,
-					f"""
-					You gain a Disguise Kit and a Poisoner's Kit,
-					and you have proficiency with them.
-					"""
-					))
-				from AtlasInventarium.Grimoire_of_Objects import Object
-				character.skills.Disguise_Kit.set_proficiency()
-				character.skills.Poisoners_Kit.set_proficiency()
-				disguise_kit = Object(
-						name="Disguise Kit",
-						value=0,
-						weight=3,
-						description="Enables proficiency in disguises and appearance alterations."
-						)
-				poisoners_kit = Object(
-						name="Poisoner's Kit",
-						value=0,
-						weight=2,
-						description="Allows crafting and applying poisons."
-						)
-				character.equipment.buy_item(disguise_kit)
-				character.equipment.buy_item(poisoners_kit)
+				# Assassin's Tools (proficiency and the two kits) is granted by the
+				# Training Tag in AtlasOfTraining/Map_of_Rogue_Training.py.
 
 			if character.subclass == "Thief":
 				feats.append(Feature(	"Thief", 3,
