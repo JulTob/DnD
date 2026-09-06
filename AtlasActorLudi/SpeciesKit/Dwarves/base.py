@@ -19,7 +19,13 @@ class Dwarf(
 	Dwarven_Toughness,
 	Stonecunning,
 	):
-	"""A resilient Humanoid with an affinity for stone."""
+	"""
+	Dwarves are a Humanoid species with a cultural basis in historical Iberian
+	and Hispanic cultures. They are deeply familial, living in clans, and they
+	worship gold and metals, both physical metals and soul-metals. Their
+	religion observes the lives of the Saints: Ancestors with pure metallic
+	souls.
+	"""
 
 	@Imprint
 	def Set_Physiology(

@@ -16,9 +16,9 @@ Player_Handbook_2024(
 		),
 	speed=30,
 	description=(
-		"""Dwarves. They remember. Your people ruled the world once. Then the Great Mountain fell, the Guilded Era ended with it, and the dwarves spread out across the world instead, carrying their ledgers and their grudges.
+		"""Dwarves. We remember. Our people ruled the world once. Then the Great Mountain fell, the Guilded Era ended with it, and the dwarves spread out across the world instead, carrying their ledgers and their grudges.
 
-Metal is holy to your people. Everything the dwarves ever built, they built while chasing it: the mines, the bank-cathedrals, the fleets, and the long terrible expeditions. Others call it greed. Greed is not the only reason. Gold never corrupts. A gilded prayer to your Saints and Ancestors will never weaken.
+Metal is holy to our people. Everything we dwarves ever built, we built while chasing it: the mines, the bank-cathedrals, the fleets, and the long terrible expeditions. Others call it greed. They do not understand. Gold never corrupts. A gilded prayer to our Saints and Ancestors will never weaken.
 
 What holds now is the clan. Come back home with enough gold, and your clan will hail you as a hero, no matter your past transgressions.
 
