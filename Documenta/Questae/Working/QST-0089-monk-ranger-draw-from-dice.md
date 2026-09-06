@@ -2,7 +2,7 @@
 
 - **Type:** bug
 - **Priority:** 🔴 urgent *(a selectable Guild crashes for a slice of seeds)*
-- **Status:** Working (fix landed; awaiting Julio's closing word)
+- **Status:** Working (fix landed as `1510cea`; awaiting Julio's closing word)
 - **Owner:** Claude (branch `questa/QST-0089-monk-ranger-draw-from-dice`, 2026-09-06)
 - **Route to:** Methods (Wizard) · Safety (Paladin) · Contracts (Warlock)
 - **Parent:** QST-0016.2 (every Character rolls their own Dice)

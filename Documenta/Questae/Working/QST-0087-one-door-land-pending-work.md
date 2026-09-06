@@ -62,8 +62,16 @@ The recovery worktree's two source files were not touched by the three commits i
 
 ## ✅ Resolution (filled when Solved)
 - **Decided by:** Julio, 2026-09-06 ("one entry point, app as a modular folder")
-- **What changed:** *(commits listed as they land)*
-- **Practice/preference to remember:** *(pending)*
+- **What changed:** landed on `main` 2026-09-06, fast-forward from `questa/QST-0087-one-door-land-pending-work`:
+  - `b01f4c6` AtlasTOP debris cut, stale Open QST-0018 removed (QST-0018.1)
+  - `52af469` one door: every launcher runs `app.main:app`; `shiny_app.py` is a shim; eldritch head tags in the modular shell
+  - `11d05be` seed replays exactly: dual-RNG quarantine, no silent reroll, `scripts/verify_player_replay.py` (QST-0016.6.1)
+  - `9be3a07` voice: Humans as "we", the Cleric's certainty, one Species section on the sheet
+  - `13717ea` `Documenta/Sources/` ignored wholesale
+  - `e9014e8` QST-0018.1 minted, Dialog 0024 question 2 answered
+  - then `a6450a3` (QST-0088) and `1510cea` (QST-0089) on their own branches: the sweep is 78 of 78 with retries off.
+  - Landing mechanics as planned: `refs/backup/QST-0087-main-dirty-20260906` (b68e7ce) and `refs/backup/QST-0087-recovery-dirty-20260906` (20053f5) hold both dirty trees; the main checkout was reset to the new `main`; the `recovery/player-composition` and `Julio_Cl/dnd-genlegend-recovery-ea160e` worktrees and branches are gone.
+- **Practice/preference to remember:** land by patch onto a questa branch in one worktree, back the dirty trees up as refs, then fast-forward; nothing is ever the only copy for longer than it takes to run the gates.
 
 ---
 

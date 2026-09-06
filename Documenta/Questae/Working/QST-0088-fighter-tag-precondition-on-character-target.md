@@ -2,8 +2,8 @@
 
 - **Type:** bug / tagkit
 - **Priority:** 🔴 urgent
-- **Status:** Open
-- **Owner:** unclaimed
+- **Status:** Working (fix landed as `a6450a3`; awaiting Julio's closing word)
+- **Owner:** Claude (2026-09-06; carried over from Codex's QST-0085 in the retired recovery worktree)
 - **Route to:** TagKit (Druid) · Contracts (Warlock) · Methods (Wizard)
 - **Parent:** QST-0016.6.1
 - **Sidequests:** —
@@ -53,8 +53,8 @@ Fighter regression plus the Player sweep.
 
 ## ✅ Resolution (filled when Solved)
 
-- **Decided by:** pending
-- **What changed:** pending
+- **Decided by:** Julio, 2026-09-06 ("land it, fix both right after")
+- **What changed:** `Maneuver.Character_Only` returns `isinstance(target, Character)` like every sibling root (TrainingKit, SpeciesKit bases, Kinship) instead of `assert target in Character`, which tested membership against a plain class and surfaced as a TypeError inside a Precondition. Fighter level 5, seeds 1 to 8: eight of eight. Commit `a6450a3`.
 - **Practice/preference to remember:** a TagKit contract must name a Field or
   semantic Tag, never use Python containment against a Target type.
 
