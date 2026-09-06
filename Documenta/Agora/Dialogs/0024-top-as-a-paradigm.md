@@ -115,3 +115,7 @@ every remaining legacy seam is rent paid twice.
    a deletion.)
 3. Is path 4 (skills as Tags) beta-blocking in your judgment, or the first
    post-launch train? The crash it prevents is already patched point-wise.
+
+## Answers recorded
+
+- **Question 2 (AtlasTOP), answered by Julio 2026-09-06:** Decree 0002 §6 stands; AtlasTOP was explicitly forbidden. The resurrected `AtlasTOP/archetypes.py` is removed under QST-0018.1, and the Doctrine sentences that call it "our layer" are proposed for Julio's Canon edit there. The latest TagKit is the target; composition helpers live in the Kit that owns the axis.
