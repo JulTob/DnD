@@ -104,3 +104,7 @@ $S/
 .safepoint/
 * 2.py
 * 2.md
+
+# Documenta/Sources holds reference material consulted by hand (books, transcripts).
+# It is not repository content (Julio, 2026-09-06, QST-0087).
+Documenta/Sources/
