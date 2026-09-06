@@ -7,7 +7,6 @@ Grimoire is progressively decomposed into Character Tags.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from os import environ
 from secrets import randbits
 from typing import Any
 
@@ -138,7 +137,7 @@ def summon_player(
         gender: str | None = None,
         seed: int | None = None,
         ) -> Character:
-    """Generate one Player Character, retrying with fresh deterministic seeds."""
+    """Generate one Player Character for the exact supplied request."""
     from AtlasLusoris.GuildKit import (
             Specialization_Choices,
             )
@@ -193,42 +192,16 @@ def summon_player(
         raise ValueError(
                 "A Player generation seed must be zero or greater."
                 )
-    last_error: Exception | None = None
 
-    # Retrying re-rolls the seed, which hides real bugs and breaks determinism.
-    # STRICT_GENERATION=1 (tests, verification harnesses) surfaces the first
-    # failure instead of masking it behind four more attempts.
-    attempts = (
-        1
-        if environ.get(
-                "STRICT_GENERATION",
-                )
-        else 5
-        )
-
-    for _ in range(
-            attempts
-            ):
-        try:
-            return _attempt_player(
-                    species=selected_species,
-                    char_class=selected_guild,
-                    background=selected_background,
-                    specialization=selected_specialization,
-                    level=requested_level,
-                    gender=gender,
-                    seed=current_seed,
-                    )
-        except Exception as error:
-            last_error = error
-            current_seed += 1
-
-    if attempts == 1:
-        raise last_error
-
-    raise RuntimeError(
-            "Unable to summon a Player Character after five attempts."
-            ) from last_error
+    return _attempt_player(
+            species=selected_species,
+            char_class=selected_guild,
+            background=selected_background,
+            specialization=selected_specialization,
+            level=requested_level,
+            gender=gender,
+            seed=current_seed,
+            )
 
 
 character_choices = choices
