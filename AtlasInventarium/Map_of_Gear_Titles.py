@@ -101,8 +101,17 @@ _CULTURES: tuple[tuple[tuple[str, ...], tuple[str, ...], tuple[str, ...]], ...] 
 		(("Elf",), ("norse", "rus", "mongol", "celt"), ("tolkien_elves", "fairytale_fae")),
 		(("Dwarf",), ("iberia", "andalus"), ("folklore_dwarf", "tolkien_dwarves")),
 		(("Gnome",), ("italy", "germany", "switzerland"), ("folklore_dwarf", "clockpunk")),
-		(("Aasimar", "Celestial"), ("rome",), ("arthuriana",)),
-		(("Giant", "Goliath"), ("greece",), ("wyrm_myth",)),
+		# Celestials and Goliaths both inherit the classical world, and take
+		# OPPOSITE halves of each side of it (Canon: "the distinctive
+		# comparative"). One `greece` and one `rome` key could not tell them
+		# apart, so the classical markers are split five ways.
+		#
+		# Greek in mind, Roman in office: Athens gives the reasoning, the
+		# Vatican the vestment and the hierarchy it reasons inside.
+		(("Aasimar", "Celestial"), ("athens", "vatican"), ()),
+		# Roman in method, Greek in myth: the legion gives the road and the
+		# drill, Homer the heroes, giants and titans they descend from.
+		(("Giant", "Goliath"), ("rome", "sparta", "homeric"), ("arthuriana",)),
 		(("Monk",), ("ninja",), ("anime",)),
 		(("Barbarian",), (), ("sword_and_sorcery",)),
 		(("Warlock", "Fiend", "Tiefling"), (), ("grimdark",)),
@@ -165,32 +174,42 @@ _INFLUENCES: dict[str, tuple[tuple[str, int], ...]] = {
 		"aztec": (),
 		"india": (("china", 2), ("persia", 2), ("oceania", 1)),
 		"oceania": (("india", 1),),
-		"persia": (("india", 2), ("levante", 2), ("greece", 1), ("mongol", 1)),
-		"levante": (("persia", 2), ("egypt", 2), ("greece", 1), ("rome", 1)),
-		"egypt": (("levante", 2), ("greece", 1), ("rome", 1), ("africa", 1)),
+		"persia": (("india", 2), ("levante", 2), ("sparta", 1), ("mongol", 1)),
+		"levante": (("persia", 2), ("egypt", 2), ("sparta", 1), ("rome", 1), ("homeric", 1)),
+		"egypt": (("levante", 2), ("sparta", 1), ("rome", 1), ("africa", 1)),
 		"africa": (("egypt", 1), ("maghreb", 1), ("carthage", 1), ("rome", 1)),
 		"maghreb": (("andalus", 2), ("africa", 1), ("carthage", 1), ("levante", 1)),
-		"carthage": (("iberia", 2), ("africa", 1), ("rome", 1), ("greece", 1)),
+		"carthage": (("iberia", 2), ("africa", 1), ("rome", 1), ("sparta", 1)),
 		"andalus": (("maghreb", 2), ("iberia", 2), ("levante", 1), ("persia", 1)),
 		"iberia": (("andalus", 2), ("carthage", 1), ("celt", 1), ("rome", 1)),
 		"celt": (("iberia", 1), ("norse", 1), ("rome", 1)),
 		"norse": (("rus", 2), ("celt", 1), ("iberia", 1), ("maghreb", 1)),
-		"rus": (("norse", 2), ("mongol", 2), ("greece", 1)),
+		"rus": (("norse", 2), ("mongol", 2), ("athens", 1)),
 		"mongol": (("rus", 2), ("china", 2), ("persia", 1)),
-		"italy": (("rome", 3), ("germany", 1), ("switzerland", 1), ("greece", 1)),
+		"italy": (("rome", 3), ("vatican", 2), ("germany", 1), ("switzerland", 1), ("athens", 1)),
 		"germany": (("italy", 1), ("switzerland", 2), ("rome", 1)),
 		"switzerland": (("germany", 2), ("italy", 2)),
-		"rome": (("greece", 3), ("egypt", 1), ("carthage", 1)),
-		"greece": (("rome", 2), ("persia", 1), ("egypt", 1)),
+		"rome": (("vatican", 3), ("sparta", 2), ("athens", 1), ("egypt", 1), ("carthage", 1)),
+		# Athens points forward to Italy (the Renaissance read Athens) but not
+		# back to the legion: the influence ran Greece -> Rome, and giving it
+		# a return edge made an Aasimar reach legionary kit harder than a
+		# Goliath did, which inverts the whole comparative.
+		"athens": (("sparta", 2), ("homeric", 2), ("italy", 1)),
+		"sparta": (("athens", 2), ("homeric", 2), ("rome", 1), ("persia", 1)),
+		"homeric": (("sparta", 2), ("athens", 1), ("levante", 1), ("wyrm_myth", 1)),
+		# The Church is Rome's successor, not its continuation: it keeps the
+		# city and the office, not the Gladius and the Lorica. Hence a weak
+		# edge to `rome` and a strong one to the Italy it actually sits in.
+		"vatican": (("italy", 2), ("rome", 1), ("athens", 1)),
 		"ninja": (("japan", 2),),
 		"tolkien_elves": (("norse", 2), ("celt", 2), ("fairytale_fae", 1)),
 		"tolkien_dwarves": (("norse", 2), ("folklore_dwarf", 2)),
 		"folklore_dwarf": (("germany", 2), ("switzerland", 1), ("norse", 1)),
 		"fairytale_fae": (("celt", 2), ("germany", 1)),
 		"eragon_dragons": (("wyrm_myth", 2), ("tolkien_elves", 1)),
-		"wyrm_myth": (("norse", 1), ("greece", 1), ("china", 1)),
+		"wyrm_myth": (("norse", 1), ("homeric", 1), ("china", 1)),
 		"arabian_nights": (("persia", 2), ("levante", 2), ("india", 1)),
-		"arthuriana": (("celt", 2), ("rome", 1), ("italy", 1)),
+		"arthuriana": (("celt", 2), ("vatican", 2), ("rome", 1), ("italy", 1)),
 		"sword_and_sorcery": (("mongol", 1), ("levante", 1), ("grimdark", 1)),
 		"grimdark": (("germany", 1), ("sword_and_sorcery", 1)),
 		"clockpunk": (("italy", 2), ("germany", 2), ("switzerland", 2)),
@@ -416,6 +435,21 @@ _CULTURAL_NOUNS: dict[str, dict[str, tuple[str, ...]]] = {
 				"Spear": ("Ahlspiess Spike",),
 				"Musket": ("Handrohr",),
 				},
+		# Sacerdotal Rome: office, vestment, canon. Historically the clergy
+		# favoured blunt arms, so the pool leans that way rather than being
+		# a second legionary list.
+		"vatican": {
+				"Mace": ("Ferula", "Bishop's Mace"),
+				"Club": ("Ferula",),
+				"Warhammer": ("Sacring Hammer",),
+				"Morningstar": ("Sanctus Star",),
+				"Quarterstaff": ("Crosier", "Pilgrim's Staff"),
+				"Dagger": ("Reliquary Knife",),
+				"Longsword": ("Basilica Blade",),
+				"Shield": ("Keys Shield",),
+				},
+		# Practical Rome: legion, road, aqueduct. Unchanged from the old
+		# `rome` pool, which was already the legionary one.
 		"rome": {
 				"Shortsword": ("Gladius",),
 				"Dagger": ("Pugio Dagger",),
@@ -428,16 +462,41 @@ _CULTURAL_NOUNS: dict[str, dict[str, tuple[str, ...]]] = {
 				"Splint": ("Lorica Segmentata",),
 				"Sling": ("Funda Sling",),
 				},
-		"greece": {
+		# Martial Greece: the agoge, the phalanx, the duel. Inherits the bulk
+		# of the old `greece` pool, because that pool was hoplite kit.
+		"sparta": {
 				"Shortsword": ("Xiphos", "Kopis"),
 				"Spear": ("Dory Spear", "Xyston Lance"),
 				"Pike": ("Sarissa",),
 				"Shield": ("Aspis Shield", "Hoplon Shield"),
 				"Scimitar": ("Makhaira Sabre", "Kopis"),
-				"Club": ("Rhopalon Club",),
 				"Sling": ("Sphendone Sling",),
 				"Padded": ("Linothorax",),
 				"Leather": ("Linothorax",),
+				},
+		# Athens: the academy, the portico, the fleet. A civic and naval
+		# register rather than a hoplite one — the pensive half of Greece.
+		"athens": {
+				"Shortsword": ("Xiphos",),
+				"Dagger": ("Stylus Knife", "Xiphidion"),
+				"Quarterstaff": ("Peripatetic Staff", "Lyceum Staff"),
+				"Javelin": ("Peltast Javelin",),
+				"Shield": ("Pelte Shield",),
+				"Trident": ("Trireme Trident",),
+				"Sling": ("Sphendone Sling",),
+				},
+		# The heroic age: the Iliad, the duel before the walls, the titans
+		# and giants. Bronze, not iron. Julio ruled this its own key rather
+		# than a bundle inside Sparta: a hoplite in formation is not Achilles.
+		"homeric": {
+				"Spear": ("Pelian Ash Spear", "Heroic Ash Spear"),
+				"Club": ("Rhopalon Club",),
+				"Greatclub": ("Titan's Cudgel",),
+				"Battleaxe": ("Labrys",),
+				"Greataxe": ("Labrys",),
+				"Greatsword": ("Bronze Heroic Blade",),
+				"Longsword": ("Bronze Heroic Blade",),
+				"Shield": ("Seven-Hide Shield",),
 				},
 		"ninja": {
 				"Dart": ("Shuriken",),
@@ -1863,6 +1922,67 @@ def _self_test():
 	assert "anime" in legends_of(
 			monk
 			)
+
+	# --- Celestials and Goliaths take OPPOSITE halves of the classics ------
+	# Julio, 2026-09-07: Celestials are Athenian Greece plus Vatican Rome;
+	# Goliaths are Legionary Rome plus Spartan and Homeric Greece. One
+	# `greece` key and one `rome` key could not express that — both peoples
+	# would resolve to the same reach map and the same vocabulary, and the
+	# generator could not tell an Aasimar from a Goliath by their gear.
+	# This is the assertion that split earns.
+	celestial = Hero(
+			"Aasimar , Cleric , Acolyte , Light , She , Legal"
+			)
+	goliath = Hero(
+			"Goliath , Fighter , Soldier , Champion , He , Neutral"
+			)
+	assert set(
+			societies_of(
+					celestial
+					)
+			) == {
+			"athens",
+			"vatican",
+			}
+	assert set(
+			societies_of(
+					goliath
+					)
+			) == {
+			"rome",
+			"sparta",
+			"homeric",
+			}
+
+	celestial_reach = influences_of(
+			celestial
+			)
+	goliath_reach = influences_of(
+			goliath
+			)
+	assert celestial_reach != goliath_reach, (
+			"the two classical peoples collapsed back into one"
+			)
+	# And each leads on its own half, which is the actual claim: the pensive
+	# one reaches Athens hardest, the practical one reaches the legion hardest.
+	assert celestial_reach.get(
+			"athens",
+			0,
+			) > goliath_reach.get(
+			"athens",
+			0,
+			), "a Goliath out-Athenses a Celestial"
+	assert goliath_reach.get(
+			"rome",
+			0,
+			) > celestial_reach.get(
+			"rome",
+			0,
+			), "a Celestial out-legions a Goliath"
+
+	# `greece` is retired: it said two incompatible things at once.
+	assert "greece" not in _CULTURAL_NOUNS
+	assert "greece" not in _INFLUENCES
 
 	# --- legends name things too, beside the peoples -----------------------
 	# Julio (2026-08-05): "'fairytale_elf' or 'folklore_dwarf' … even

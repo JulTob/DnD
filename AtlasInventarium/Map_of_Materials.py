@@ -322,10 +322,29 @@ _CULTURAL_MATERIALS: dict[str, tuple[str, ...]] = {
 				"tinned bronze",
 				"legion-stamped iron",
 				),
-		"greece": (
+		# The Church works in what it consecrates, not what it fights with.
+		"vatican": (
+				"chased silver and gilt",
+				"reliquary gold",
+				"consecrated bronze",
+				),
+		"sparta": (
 				"hoplite bronze",
 				"olive wood and bronze",
+				"laconian iron",
+				),
+		# Athens paid for its fleet with the silver of Laurion, and built in
+		# marble. A civic register, not a battlefield one.
+		"athens": (
 				"marble-inlaid iron",
+				"Laurion silver",
+				"olive wood and ivory",
+				),
+		# The heroic age is a BRONZE age: no steel reaches Troy.
+		"homeric": (
+				"heroic bronze",
+				"boar-tusk and bronze",
+				"Mycenaean gold",
 				),
 		"ninja": (
 				"soot-blacked steel",
