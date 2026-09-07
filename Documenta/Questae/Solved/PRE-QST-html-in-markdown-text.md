@@ -1,3 +1,5 @@
+> Pre-Questae quest note (July 2026), moved from `docs/` when the R-Markdown site retired (QST-0093.3/.8). Kept as memory; its subject continued under the numbered questae (GearKit: QST-0046; feature text: QST-0026 and QST-0094).
+
 # Quest: HTML tags leak into feature text on the sheet
 
 **Status:** open · **Scope:** `app/components/shared.py`, feature/spell description authoring
