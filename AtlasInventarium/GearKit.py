@@ -70,6 +70,7 @@ from AtlasInventarium.Map_of_Gear_Proficiency import (
 		armour_voids_unarmoured,
 		has_unarmoured_defence,
 		may_use_shield,
+		trained_for,
 		unarmoured_formula,
 		weapon_pool,
 		)
@@ -1567,19 +1568,17 @@ def _self_test():
 						)
 				) <= 1, guild
 		# --- weapons are trained ones only ------------------------------
-		allowed = {
-				weapon.name
-				for weapon in weapon_pool(
-						char
-						)
-				}
 		for weapon in equipped(
 				char,
 				Weapon,
 				):
-			# `name` is identity and survives crafting, so this still matches
-			# after a weapon earns a title.
-			assert weapon.name in allowed, (
+			# Asked by Tag, not by catalogue: an implement is a Simple weapon
+			# that lives in Ledger_of_Wonders, so a catalogue lookup calls a
+			# Simple-trained caster untrained in it. See QST-0046.8.
+			assert trained_for(
+					char,
+					weapon,
+					), (
 					f"{guild} wields untrained {weapon.called}"
 					)
 			assert weapon not in Firearm, (
@@ -1891,7 +1890,10 @@ def _check_character(
 			char,
 			Weapon,
 			):
-		if weapon.name not in allowed_weapons:
+		if not trained_for(
+				char,
+				weapon,
+				):
 			fail(
 					f"wields untrained {weapon.called}"
 					)
@@ -2097,8 +2099,27 @@ def _check_character(
 					)
 
 	# No duplicate chip labels on the sheet.
+	#
+	# A rail chip comes in two shapes while QST-0081.4 is open: the Venustas
+	# ``Chip`` (the named model, which carries ``.label``) and the legacy
+	# ``(label, value)`` tuple. Reading ``chip[0]`` works only for the tuple —
+	# on a Chip, which subclasses ``str``, it silently returns the first
+	# CHARACTER of the rendered HTML, so every Chip-bearing feature reported a
+	# duplicate label of ``'<'``. Ask for the label; fall back to the tuple.
+	def chip_label(
+			chip,
+			):
+		if hasattr(
+				chip,
+				"label",
+				):
+			return chip.label
+		return chip[0]
+
 	chip_labels = [
-			chip[0]
+			chip_label(
+					chip
+					)
 			for feature in char.features
 			for chip in getattr(
 					feature,

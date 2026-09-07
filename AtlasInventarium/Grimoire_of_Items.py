@@ -78,6 +78,9 @@ class Item:
 		item.weight = weight
 		item.quantity = quantity
 		item.description = description
+		# Which ability swings this, when it is not the ordinary Str/Dex rule.
+		# Lives on the base Item so ``blurb`` can read it unconditionally.
+		item.attack_with = ""
 		# Filled by Tag Imprints; read by the derived-stat helpers.
 		item.grants: dict[str, int] = {}
 
@@ -126,6 +129,12 @@ class Item:
 			parts.append(
 					line
 					)
+			# Which ability swings it. Said plainly, because a weapon that
+			# quietly used a different score would be a trap on the sheet.
+			if item.attack_with:
+				parts.append(
+						f"Attacks with {item.attack_with}"
+						)
 			if item.mastery:
 				parts.append(
 						f"Mastery: {item.mastery}"
