@@ -6,8 +6,8 @@ import os
 import re
 from datetime import datetime
 
-_STOP_FILES = frozenset({"Minion.py", "app.py"})
-_START_FILES = frozenset({"app.py", "main.py", "shiny_app.py"})
+_STOP_FILES = frozenset({"Minion.py"})
+_START_FILES = frozenset({"main.py"})
 
 # Log system: when set, decorators append plain-text records here.
 # ``MINION_LOG=minion_app.log python3 ...`` enables it for a whole run.
