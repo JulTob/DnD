@@ -322,6 +322,13 @@ _CULTURAL_MATERIALS: dict[str, tuple[str, ...]] = {
 				"tinned bronze",
 				"legion-stamped iron",
 				),
+		# Sacred war has its own metallurgy: the cross cut into the blade,
+		# the relic set into the hilt, everything bleached by a long march.
+		"crusader": (
+				"cross-graven steel",
+				"relic-set silver",
+				"sun-bleached steel",
+				),
 		# The monastery gilds and lacquers; it does not forge for war.
 		"sangha": (
 				"temple bronze",

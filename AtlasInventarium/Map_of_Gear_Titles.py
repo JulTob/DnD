@@ -114,7 +114,7 @@ _CULTURES: tuple[tuple[tuple[str, ...], tuple[str, ...], tuple[str, ...]], ...] 
 		# than hindu." So the Celestial is not the Catholic clergy with a
 		# Greek education: it is the CONTEMPLATIVE ORDER as such, wherever it
 		# is found, which is a much better fit for "the pensive kind".
-		(("Aasimar", "Celestial"), ("athens", "vatican", "sangha"), ()),
+		(("Aasimar", "Celestial"), ("athens", "vatican", "sangha"), ("crusader",)),
 		# Roman in method, Greek in myth: the legion gives the road and the
 		# drill, Homer the heroes, giants and titans they descend from.
 		(("Giant", "Goliath"), ("rome", "sparta", "homeric"), ("arthuriana",)),
@@ -206,7 +206,10 @@ _INFLUENCES: dict[str, tuple[tuple[str, int], ...]] = {
 		# The Church is Rome's successor, not its continuation: it keeps the
 		# city and the office, not the Gladius and the Lorica. Hence a weak
 		# edge to `rome` and a strong one to the Italy it actually sits in.
-		"vatican": (("italy", 2), ("rome", 1), ("athens", 1), ("sangha", 1)),
+		"vatican": (("italy", 2), ("rome", 1), ("athens", 1), ("sangha", 1), ("crusader", 1)),
+		# The crusade is the Church pointed outward: it answers to the Vatican
+		# and it marches on the Levant, which is the whole of its geography.
+		"crusader": (("vatican", 3), ("levante", 2), ("italy", 1), ("celt", 1)),
 		# The order looks to the India it came from and the China its Mahayana
 		# cousins carried it to; the sea route east reaches Oceania.
 		"sangha": (("india", 2), ("china", 2), ("oceania", 1), ("athens", 1)),
@@ -218,7 +221,8 @@ _INFLUENCES: dict[str, tuple[tuple[str, int], ...]] = {
 		"eragon_dragons": (("wyrm_myth", 2), ("tolkien_elves", 1)),
 		"wyrm_myth": (("norse", 1), ("homeric", 1), ("china", 1)),
 		"arabian_nights": (("persia", 2), ("levante", 2), ("india", 1)),
-		"arthuriana": (("celt", 2), ("vatican", 2), ("rome", 1), ("italy", 1)),
+		# Late Arthur is already crusader-flavoured; the two strata touch.
+		"arthuriana": (("celt", 2), ("crusader", 2), ("vatican", 2), ("rome", 1), ("italy", 1)),
 		"sword_and_sorcery": (("mongol", 1), ("levante", 1), ("grimdark", 1)),
 		"grimdark": (("germany", 1), ("sword_and_sorcery", 1)),
 		"clockpunk": (("italy", 2), ("germany", 2), ("switzerland", 2)),
@@ -783,6 +787,27 @@ _LEGEND_NOUNS: dict[str, dict[str, tuple[str, ...]]] = {
 				"Whip": ("Sandstorm Lash",),
 				"Sling": ("Roc-Feather Sling",),
 				"Trident": ("Marid's Trident",),
+				},
+		# The militant-sacred: the Grail cycle, the Temple, the pilgrim road.
+		# Julio, 2026-09-07: the angelic material in LATE Arthurian myth is
+		# really Christian crusader fantasy, and that half belongs to the
+		# Celestials. So Arthur splits by stratum, not by story: the early
+		# layer (fallen garrison, warlord, caste) stays with the Goliaths as
+		# `arthuriana`; the late, sanctified layer is `crusader` here.
+		#
+		# Deliberately overlapping: the Grail Knight appears in BOTH registers,
+		# because he genuinely belongs to both. A weapon may sit under several
+		# markers; that is the point, not a defect.
+		"crusader": {
+				"Longsword": ("Crusader Sword", "Cross-Hilt Blade"),
+				"Greatsword": ("Grail-Knight's Greatsword", "Sepulchre Blade"),
+				"Mace": ("Templar Mace",),
+				"Morningstar": ("Pilgrim's Star",),
+				"Lance": ("Cross Lance", "Pilgrim's Lance"),
+				"Dagger": ("Crusader's Misericorde",),
+				"Shield": ("Cross-Blazoned Shield", "Templar Heater"),
+				"Plate": ("White Harness",),
+				"Half Plate": ("Crusader's Harness",),
 				},
 		"arthuriana": {
 				"Longsword": ("Kingsword", "Sword in the Stone", "Oathblade"),
@@ -2008,6 +2033,25 @@ def _self_test():
 			"rome",
 			0,
 			), "a Celestial out-legions a Goliath"
+
+	# A Guild that carries its own register DILUTES the species reach, because
+	# the budget is shared across every marker held. An Aasimar Paladin holds
+	# five (athens, vatican, sangha, crusader, and arthuriana from the Paladin
+	# row) and reads flatter than an Aasimar Cleric, who holds four. That is
+	# by design, but the comparative must not INVERT under it: whatever else
+	# happens, a Celestial never out-legions a Goliath.
+	celestial_paladin = Hero(
+			"Aasimar , Paladin , Acolyte , Devotion , She , Legal"
+			)
+	assert influences_of(
+			celestial_paladin
+			).get(
+			"rome",
+			0,
+			) < goliath_reach.get(
+			"rome",
+			0,
+			), "a Celestial Paladin out-legioned a Goliath"
 
 	# `greece` is retired: it said two incompatible things at once.
 	assert "greece" not in _CULTURAL_NOUNS

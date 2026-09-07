@@ -51,7 +51,7 @@ register is listed on its own line of thought, not fused into a real-world key.
 | **Elf** | `norse`, `rus`, `mongol`, `celt` (+ `tolkien_elves`, `fairytale_fae`) | A bit Fae and a bit "other people", in a colder nature |
 | **Dwarf** | `iberia`, `andalus` (+ `folklore_dwarf`, `tolkien_dwarves`) | Gold-fevered |
 | **Gnome** | `italy`, `germany`, `switzerland` (+ `folklore_dwarf`, `clockpunk`) | Middle point of the Renaissance pair |
-| **Aasimar / Celestial** | `athens`, `vatican`, `sangha` | The pensive kind: philosophical, contemplative |
+| **Aasimar / Celestial** | `athens`, `vatican`, `sangha` (+ `crusader`) | The pensive kind: philosophical, contemplative |
 | **Giant / Goliath** | `rome`, `sparta`, `homeric` (+ `arthuriana`) | The naturalist kind: physical, practical, with general mysticism and naturalism |
 | **Monk** *(class)* | adds `ninja` (+ `anime`) on top of species cultures | Monks read as ninja across every people |
 
@@ -178,6 +178,45 @@ giant**. Dragonborn and Goliaths are set against each other in the myth layer,
 not merely different from one another. The dragon-slaying knight is a Goliath
 story about a Dragonborn.
 
+#### Arthur splits by stratum, and the Celestials keep the late half
+
+*Julio, 2026-09-07: "the miss in the angelic lore, from late arthurian mythos,
+and a fantasy more belonging to christian crusaders."*
+
+Moving Arthur wholesale to the Goliaths left a hole, because Arthurian myth is
+not one thing. It has an early stratum and a late one, and they point in
+opposite directions:
+
+| | Belongs to | Register |
+|---|---|---|
+| **Early Arthur** (`arthuriana`) | Goliath | The fallen garrison, the warlord, the caste of knights. A decline myth |
+| **Late Arthur** (`crusader`) | Aasimar | The Grail, the sanctified knight, the Temple, the pilgrim road. A myth of election |
+
+The late layer is the Christianised one, and Christianised Arthur is crusader
+fantasy: Galahad in white harness is not a Dark Age warlord's man, he is a
+Templar with better press. That half is **angelic**, and it was exactly what the
+Celestials were missing. It is now their legend register, and their first one.
+
+The two strata deliberately **overlap**: the Grail Knight appears in both, and
+`arthuriana` reaches `crusader` at 2, because late Arthur genuinely is both
+things at once. Splitting them by stratum rather than by story is what lets one
+people keep the ruin and the other keep the sanctity, without either losing the
+Round Table.
+
+Geography follows: `crusader` answers to the `vatican` and marches on the
+`levante`, which is the whole of its map.
+
+### A note on dilution
+
+The budget is shared across **every** marker a Character holds, and a Guild can
+add one of its own. So an Aasimar Paladin holds five markers (three societies,
+`crusader`, and `arthuriana` from the Paladin row) and reads noticeably flatter
+than an Aasimar Cleric, who holds four. This is by design: a hero with a broad
+inheritance draws on more wells, not louder ones.
+
+What must never happen is an **inversion**, and that is asserted: whatever a
+Guild adds, a Celestial never out-legions a Goliath.
+
 ### The Celestial is an order, not a church
 
 *Julio, 2026-09-07: "another society for the celestials is the sanscrit
@@ -252,6 +291,7 @@ network, and a name is a single roll across the pair.
 | `grimdark` | Warglaives, penitent flails, pitted iron | Warlock, Tiefling, Goblin |
 | `clockpunk` | Ratchet crossbows, wheel-locks, geared bronze | Gnome, Artificer |
 | `anime` | The nameless blade, impossible greatswords, twin kama | Monk |
+| `crusader` | The Grail cycle, the Temple, the pilgrim road | Aasimar |
 
 #### Open: `wyrm_myth` is the slayer's register, held by the dragons
 
