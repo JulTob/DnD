@@ -108,7 +108,13 @@ _CULTURES: tuple[tuple[tuple[str, ...], tuple[str, ...], tuple[str, ...]], ...] 
 		#
 		# Greek in mind, Roman in office: Athens gives the reasoning, the
 		# Vatican the vestment and the hierarchy it reasons inside.
-		(("Aasimar", "Celestial"), ("athens", "vatican"), ()),
+		# Three priesthoods and one philosophy. Julio, 2026-09-07: "another
+		# society for the celestials is the sanscrit subculture. The
+		# priesthood in south and southeast asia, in a buddhist style more
+		# than hindu." So the Celestial is not the Catholic clergy with a
+		# Greek education: it is the CONTEMPLATIVE ORDER as such, wherever it
+		# is found, which is a much better fit for "the pensive kind".
+		(("Aasimar", "Celestial"), ("athens", "vatican", "sangha"), ()),
 		# Roman in method, Greek in myth: the legion gives the road and the
 		# drill, Homer the heroes, giants and titans they descend from.
 		(("Giant", "Goliath"), ("rome", "sparta", "homeric"), ("arthuriana",)),
@@ -172,7 +178,7 @@ _INFLUENCES: dict[str, tuple[tuple[str, int], ...]] = {
 		"korea": (("china", 2), ("japan", 2)),
 		"china": (("korea", 1), ("japan", 1), ("india", 2), ("mongol", 1)),
 		"aztec": (),
-		"india": (("china", 2), ("persia", 2), ("oceania", 1)),
+		"india": (("china", 2), ("persia", 2), ("oceania", 1), ("sangha", 1)),
 		"oceania": (("india", 1),),
 		"persia": (("india", 2), ("levante", 2), ("sparta", 1), ("mongol", 1)),
 		"levante": (("persia", 2), ("egypt", 2), ("sparta", 1), ("rome", 1), ("homeric", 1)),
@@ -200,7 +206,10 @@ _INFLUENCES: dict[str, tuple[tuple[str, int], ...]] = {
 		# The Church is Rome's successor, not its continuation: it keeps the
 		# city and the office, not the Gladius and the Lorica. Hence a weak
 		# edge to `rome` and a strong one to the Italy it actually sits in.
-		"vatican": (("italy", 2), ("rome", 1), ("athens", 1)),
+		"vatican": (("italy", 2), ("rome", 1), ("athens", 1), ("sangha", 1)),
+		# The order looks to the India it came from and the China its Mahayana
+		# cousins carried it to; the sea route east reaches Oceania.
+		"sangha": (("india", 2), ("china", 2), ("oceania", 1), ("athens", 1)),
 		"ninja": (("japan", 2),),
 		"tolkien_elves": (("norse", 2), ("celt", 2), ("fairytale_fae", 1)),
 		"tolkien_dwarves": (("norse", 2), ("folklore_dwarf", 2)),
@@ -434,6 +443,23 @@ _CULTURAL_NOUNS: dict[str, dict[str, tuple[str, ...]]] = {
 				"Glaive": ("Vouge Polearm",),
 				"Spear": ("Ahlspiess Spike",),
 				"Musket": ("Handrohr",),
+				},
+		# The Buddhist monastic order of South and Southeast Asia, and the
+		# Sanskrit/Pali textual culture it reasons in. Named for the order
+		# itself (the sangha) rather than for a language, so it sits beside
+		# `vatican` as an institution rather than beside `india` as a place.
+		# Buddhist rather than Hindu: Hindu India is already `india`, and it
+		# belongs to the Elementals.
+		"sangha": {
+				"Quarterstaff": ("Khakkhara Staff", "Ringed Pilgrim Staff"),
+				"Club": ("Vajra Club",),
+				"Mace": ("Vajra Mace",),
+				"Dagger": ("Phurba Dagger", "Keris Dagger"),
+				"Shortsword": ("Dha Blade",),
+				"Longsword": ("Krabi Sword", "Dha Blade"),
+				"Scimitar": ("Dha Sabre",),
+				"Glaive": ("Ngao Glaive",),
+				"Spear": ("Ngao Spear",),
 				},
 		# Sacerdotal Rome: office, vestment, canon. Historically the clergy
 		# favoured blunt arms, so the pool leans that way rather than being
@@ -1936,6 +1962,8 @@ def _self_test():
 	goliath = Hero(
 			"Goliath , Fighter , Soldier , Champion , He , Neutral"
 			)
+	# Three contemplative orders, not one church: Athens reasons, the Vatican
+	# consecrates, the sangha renounces. Julio added the third on 2026-09-07.
 	assert set(
 			societies_of(
 					celestial
@@ -1943,6 +1971,7 @@ def _self_test():
 			) == {
 			"athens",
 			"vatican",
+			"sangha",
 			}
 	assert set(
 			societies_of(

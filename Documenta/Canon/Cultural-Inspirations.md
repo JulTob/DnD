@@ -51,8 +51,8 @@ register is listed on its own line of thought, not fused into a real-world key.
 | **Elf** | `norse`, `rus`, `mongol`, `celt` (+ `tolkien_elves`, `fairytale_fae`) | A bit Fae and a bit "other people", in a colder nature |
 | **Dwarf** | `iberia`, `andalus` (+ `folklore_dwarf`, `tolkien_dwarves`) | Gold-fevered |
 | **Gnome** | `italy`, `germany`, `switzerland` (+ `folklore_dwarf`, `clockpunk`) | Middle point of the Renaissance pair |
-| **Aasimar / Celestial** | Athenian Greece + Vatican Rome | The pensive kind: philosophical, contemplative |
-| **Giant / Goliath** | Legionary Rome + Spartan/Homeric Greece (+ `arthuriana`) | The naturalist kind: physical, practical, with general mysticism and naturalism |
+| **Aasimar / Celestial** | `athens`, `vatican`, `sangha` | The pensive kind: philosophical, contemplative |
+| **Giant / Goliath** | `rome`, `sparta`, `homeric` (+ `arthuriana`) | The naturalist kind: physical, practical, with general mysticism and naturalism |
 | **Monk** *(class)* | adds `ninja` (+ `anime`) on top of species cultures | Monks read as ninja across every people |
 
 ## Elementals: India, Oceania, and a caste that outcasts its own
@@ -126,8 +126,9 @@ are real and named for themselves.
 
 | Key | Holds | Given to |
 |---|---|---|
-| `athens` | Philosophy, the academy, the pensive register | Aasimar |
+| `athens` | Philosophy, the academy, the fleet | Aasimar |
 | `vatican` | Sacerdotal Rome: office, vestment, canon | Aasimar |
+| `sangha` | The Buddhist monastic order of South and Southeast Asia | Aasimar |
 | `sparta` | Martial Greece: the agoge, the phalanx, the duel | Goliath |
 | `homeric` | The Iliad, the heroic age, titans and giants | Goliath |
 | `rome` | Practical Rome: legion, road, aqueduct | Goliath |
@@ -141,10 +142,35 @@ different work under one name.
 Homer, the Vatican reaches Rome), so the two peoples still share a classical
 world without becoming interchangeable inside it.
 
+### The Celestial is an order, not a church
+
+*Julio, 2026-09-07: "another society for the celestials is the sanscrit
+subculture. The priesthood in south and southeast asia, in a buddhist style
+more than hindu."*
+
+`sangha` is the third Celestial marker, and it changes what the species *is*.
+With Athens and the Vatican alone, a Celestial read as a Catholic prelate with
+a Greek education. With the sangha beside them, the through-line is no longer
+any one faith: it is **the contemplative order as such**, wherever it is found.
+Athens reasons, the Vatican consecrates, the sangha renounces. That is a far
+better fit for "the pensive kind" than a single church could be.
+
+Named for the **order**, not for the language, so it sits beside `vatican` as an
+institution rather than beside `india` as a place. Its register is the
+Sanskrit and Pali textual culture and the monasteries of Sri Lanka, Burma,
+Thailand and Cambodia: the Khakkhara staff, the vajra, the dha and the krabi,
+worked in temple bronze and saffron-lacquered wood.
+
+**Buddhist, not Hindu, and that separation is load-bearing.** Hindu India is
+already the key `india`, and `india` belongs to the **Elementals**. Keeping the
+monastic order in its own key is what stops a Celestial and an Elemental
+drawing from the same well. They still touch: `sangha` reaches `india` at 2,
+because the order came from there.
+
 Still undecided: whether `vatican` reads too modern for the setting (`see`,
-`basilica`, `apostolic` are the alternatives), and whether `homeric` is properly
-a *society* key or a *legend* one, given that Goliaths already hold `wyrm_myth`
-and the two would overlap on titans and giants.
+`basilica`, `apostolic` are the alternatives), and whether `sangha` is the right
+name for the third (`theravada` and `nalanda` are the alternatives; `sanskrit`
+was rejected only because it names a language rather than a people).
 
 ## Cultures overlap, and that is the point
 

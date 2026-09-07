@@ -322,6 +322,12 @@ _CULTURAL_MATERIALS: dict[str, tuple[str, ...]] = {
 				"tinned bronze",
 				"legion-stamped iron",
 				),
+		# The monastery gilds and lacquers; it does not forge for war.
+		"sangha": (
+				"temple bronze",
+				"saffron-lacquered wood",
+				"gilded teak",
+				),
 		# The Church works in what it consecrates, not what it fights with.
 		"vatican": (
 				"chased silver and gilt",
