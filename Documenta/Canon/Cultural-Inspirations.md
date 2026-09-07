@@ -142,6 +142,42 @@ different work under one name.
 Homer, the Vatican reaches Rome), so the two peoples still share a classical
 world without becoming interchangeable inside it.
 
+### Why Arthur belongs to the Giants
+
+*Julio, 2026-09-07.*
+
+Arthuriana sits with the Goliaths, not the Celestials, and the reason is the
+whole point of the pair.
+
+**Arthur is the hinge between Rome and the medieval world.** He is what the
+legion becomes once the legion has gone: a washed and half-remembered story of a
+decaying garrison, sprouting a warlord who carves the people into a caste of
+knights above everyone else. That is not a founding myth. It is a **decline**
+myth, and the Goliaths are the fallen civilisation.
+
+The contrast with the Celestials is exact, and it is why the two peoples need
+different registers rather than a shared classical one:
+
+| | **Celestial** | **Goliath** |
+|---|---|---|
+| What happened to their world | It **endured**. They are the chosen, and the Vatican still stands today | It **fell**. The empire split, interbred, and ran itself into oblivion |
+| So their legends are | Continuity: the office, the canon, the unbroken line | Aftermath: the ruin, the warlord, the caste that outlived the reason for it |
+
+"The greater they fall." A Goliath carries the grandeur of Rome and the wreckage
+of it in the same hand, which is a far more interesting thing to hand a player
+than simple bigness.
+
+**The Arthurian epoch is also thick with giants**, which is the second reason it
+fits. The beanstalk and the giant at the top of it; the seven-league boots taken
+from an ogre; the knights who went out to kill dragons. Those are the stories
+this register actually tells, and they are giant-stories before they are
+knight-stories.
+
+That last one carries a further implication worth naming: **dragon versus
+giant**. Dragonborn and Goliaths are set against each other in the myth layer,
+not merely different from one another. The dragon-slaying knight is a Goliath
+story about a Dragonborn.
+
 ### The Celestial is an order, not a church
 
 *Julio, 2026-09-07: "another society for the celestials is the sanscrit
@@ -216,6 +252,34 @@ network, and a name is a single roll across the pair.
 | `grimdark` | Warglaives, penitent flails, pitted iron | Warlock, Tiefling, Goblin |
 | `clockpunk` | Ratchet crossbows, wheel-locks, geared bronze | Gnome, Artificer |
 | `anime` | The nameless blade, impossible greatswords, twin kama | Monk |
+
+#### Open: `wyrm_myth` is the slayer's register, held by the dragons
+
+Worth settling, because the "dragon versus giant" note above sharpens it.
+
+`wyrm_myth` does not contain dragon vocabulary. It contains **anti-dragon**
+vocabulary: Dragonslayer, Wyrmbane, Hoard-Cleaver, Serpent's Bane, Wyrm-Spear,
+Dragon Lance, Scale-Faced Shield. It is Beowulf, Sigurd at Fafnir's throat, and
+Saint George. Its influences say the same (`norse`, `homeric`, `china`).
+
+It is currently held by **Dragonborn and Kobolds**: the dragons are carrying the
+weapons made for killing them. That can be read as a story rather than a fault,
+and by the standing rule that loaded names stay in the pool (a justiciar is not
+automatically just), a Dragonborn drawing a *Wyrmbane* is a kinslayer or a
+trophy-taker, which is good.
+
+But it sits oddly beside the new lore, which puts dragon-slaying on the
+**Goliath** side. Three ways out, none applied:
+
+1. **Leave it.** The mismatch is a story, and Goliaths get their dragon-slaying
+   through `arthuriana` instead.
+2. **Give `wyrm_myth` back to the Goliaths** and leave Dragonborn with
+   `eragon_dragons`, which is genuinely dragon-*side* (Rider's Blade,
+   Oath-Sworn Blade, Wyrmrider's Greatblade, Rider's Scale). This would make
+   "dragon versus giant" real in the vocabulary: the slayers hold the slaying
+   words. Kobolds would then need a register of their own.
+3. **Split it in two**, a dragon-side and a slayer-side register, and give one
+   to each.
 
 Three rules govern the register:
 
