@@ -1,0 +1,17 @@
+.git
+.venv
+__pycache__
+*.pyc
+.claude
+.cursor
+.zed
+.vscode
+.recovery-vault
+Curia
+Documenta
+Avatar
+Enchantments
+SpellsEffects
+AtlasWorldBuild/*.svg
+*.md
+!README.md

@@ -1,16 +1,6 @@
-# Python 3.10+ (recommended 3.14). Web app: Shiny only (no Flask).
-bidict==0.23.1
-chardet==5.2.0
-click==8.1.8
-h11==0.14.0
-pillow>=11.2.1,<12
-python-engineio==4.11.2
-python-socketio==5.12.1
-reportlab==4.2.2
-simple-websocket==1.1.0
-wsproto==1.2.0
-shiny>=0.10.0
+# Python 3.10+ (3.14 in production). Web app: Shiny only. `make setup` installs into .venv.
+shiny==1.6.3
 
-# Tag-Oriented Programming — TagKit reference implementation.
-# Pinned to a GitHub commit for reproducible installs; bump deliberately.
+# Tag-Oriented Programming: the TagKit reference implementation, pinned to a commit
+# for reproducible installs. The pin moves deliberately, on its own questa (QST-0093.5).
 tagkit @ git+https://github.com/JulTob/Tag_Oriented_Programming.git@c7bd3761e8d75de1a13f5f4c0a9a7975ff264b4c
