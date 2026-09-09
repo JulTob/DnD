@@ -171,52 +171,91 @@ in flow.**
 
 ## 📔 Chapter 0: the fixed points, in every page
 
-*"A future team may think 'why do aasimar need talaria?
-let's take it out', but it is not a lore choice, it's a fixed-point mechanic
-that we interpret into lore."*
+*"A future team may think 'why do aasimar need talaria? let's take it out', but
+it is not a lore choice, it's a fixed-point mechanic that we interpret into
+lore."*
 
-Every element page opens with **`## 0. Rules`** before anything else. It states
-what cannot move, so a later editor can tell the load-bearing from the
+Every element page opens with **`## 📜 0. Rules`** before anything else. It
+states what cannot move, so a later hand can tell the load-bearing from the
 decorative and does not delete a mechanic's only explanation in good faith.
-There is no separate register of fixed points: each element's rules live in
-that element's page, next to the reading they produced.
+There is no separate register of fixed points: each element's rules live in that
+element's page, beside the reading they produced.
+
+### The one rule about books
 
 **A book marks only what the formal system owns.** A statement carries a book if
 and only if it can change exclusively through the **Questa / Agora / Decree**
 system: a QST-#### under `Documenta/Questae/`, a Dialog in the Agora, or a
 Decree. Lore or a decision with no Questa and no Decree behind it **carries no
-book**. An unmarked sentence is not lesser; it is simply not yet ratified.
+book**, however settled it feels. An unmarked sentence is not lesser; it is
+simply not yet ratified, and saying so turns the page into a work list.
 
-**The five books**, inside a quote block so the chapter is visible at a glance. Warm covers are the rules layer, cold covers the lore:
+A book is therefore **falsifiable**. It does not mean "somebody judged this
+settled", it means "go and read QST-0046.4", and anyone can check.
 
-| Marker | Means | Argued with |
+Canon documents under `Documenta/Canon/` are **not** the Questa system. A claim
+resting only on a canon file carries no book today. Whether canon files should
+count is an open decision.
+
+### The five books
+
+Warm covers are the rules layer, cold covers the lore.
+
+| Book | Means | What changing it costs |
 |---|---|---|
-| 📕 | **Inherited.** The 2024 rules, unchanged. | Not without leaving rules compatibility, which is the promise the generator makes to a table that has to play the result. |
-| 📙 | **Aesthetic change.** The same rule wearing our name and look. Written as *Our Name* [renames *Published Name*]: the rule, so the entry names the rule and presents it. | Nothing mechanical. The bracket is the translation back to the published name. |
+| 📕 | **Inherited.** The 2024 rules, unchanged. | Rules compatibility, which is the promise the generator makes to a table that has to play the result. |
+| 📙 | **Aesthetic change.** The same rule wearing our name and look. | Nothing mechanical. The bracket is the translation back to the published name. |
 | 📒 | **A rule we changed.** A house rule. | It already cost compatibility. Say so where it happens. |
 | 📘 | **Supportive lore.** Lore holding a rule or a core element up. | A Questa, the Agora, a Decree. Remove it and a mechanic is left with nothing to say for itself. |
-| 📗 | **Deep lore.** Design supporting the fantasy rather than a rule. | No rule notices; the setting does. Change it freely and keep the fantasy coherent. |
+| 📗 | **Deep lore.** Design supporting the fantasy rather than a rule. | No rule notices; the setting does. Keep the fantasy coherent. |
 
-**Then the chapter says what the rules force and what we chose**, in four short
-moves:
+📕 and 📙 are one object in two covers, which is what a reskin is. 📒 is a
+notepad rather than a book, because a house rule is our own writing.
 
-1. **What the rules force.** The thing a body or a class must be able to do.
-2. **Our interpretation.** The lore we chose so the mechanic has a body. It is
-   replaceable and it is not deletable: remove it and the mechanic is left with
-   nothing to say for itself.
-3. **What it buys beyond the rule.** Work the interpretation does that no rule
-   asked for. This is the argument against deletion, and it is the field that
-   actually saves the work.
-4. **Free, and yours to change.** The details with no mechanic underneath. Say
-   them plainly, because a page that never marks what is free implies nothing
-   is, and then nobody touches anything.
+### Two rules about the text itself
 
-**The test** that sorts interpretation from free invention: remove the detail
-and ask whether a rule is left with nothing to say for itself. Run it backwards
-and it also finds gaps, where a mechanic that no interpretation covers has been
-sitting there looking deliberate. The Dragonborn's ten ancestries are one.
+**A 📕 entry is the actual rule, complete enough to resolve at a table.** Not a
+summary, not a label with a number attached, not a cross-reference. Every
+duration, range, save DC, recharge and condition is written out. The Aasimar
+audit found four entries failing this and one of them stating a wrong number, so
+the standard is not pedantry.
 
-[Aasimar](Aasimar.md) carries the first worked chapter.
+**A 📙 entry names the rule and presents it**, in the form
+
+> 📙 **Our Name** [renames **Published Name**]: the rule.
+
+so the entry stands alone and a reader holding the published book can still find
+it under the old name.
+
+### The shape of the chapter
+
+1. **The legend**, once, at the head of the page.
+2. **The rules as given.** Every 📕, plus any 📙 and 📒, written out in full. If
+   the element has no house rule, say so: *"No rule of X has been changed, so
+   this page carries no 📒."* A stated absence is worth more than a silence.
+3. **The supportive lore.** Only 📘 that a Questa or Decree actually ratifies,
+   each naming its identifier.
+4. **Unratified, and what each one needs.** The lore the page rests on that has
+   no backing, stated as design rather than law, each line naming the Questa
+   that would ratify it. This is the work list.
+5. **What the rules force, and what we chose.** The interpretation, and then
+   **what it buys beyond the rule**, which is the field that stops a later hand
+   deleting a mechanic's only explanation.
+6. **The variable detail.** What is drawn per character, and why it is not
+   arbitrary even though it carries no book.
+
+[Aasimar](Aasimar.md) is the worked reference. Read its chapter 0 before writing
+another.
+
+### How a chapter 0 is verified
+
+Never from memory. The rules are read out of the implementation
+(`AtlasActorLudi/SpeciesKit/<People>/`, `AtlasLusoris/AtlasOfTraining/`), and
+every proposed 📘 is checked against `Documenta/Questae/` and the Decrees by
+searching for it, with the searches recorded so a negative result is credible.
+The Aasimar chapter was audited by thirty-six agents, one verifier and one
+adversarial reader per claim; it removed nine of ten lore books and corrected
+five of nine rules.
 
 ## 📜 Standing rules that emerged (beside the Canon's)
 
