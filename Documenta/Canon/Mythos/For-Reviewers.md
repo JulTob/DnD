@@ -123,6 +123,20 @@ hostile read there tells you the most about whether the rest is trustworthy.
 
 ---
 
+## 4b. The four layers
+
+Before objecting that a detail is arbitrary, check which layer it sits in.
+[Fixed-Points](Fixed-Points.md) sorts every element into four: a **fixed point**
+(inherited from the 2024 rules, or ratified by a project Decree), an
+**interpretation** (lore chosen so a fixed point has a body, load-bearing and
+replaceable but not deletable), a **free invention** (ours, with no mechanic
+underneath, and the place a future editor is licensed to play), and a **sugar
+line** (the italic line on the sheet, freely rewritable inside its register).
+
+The commonest wrong objection to this project is "cut this detail, it is not
+needed." Run the test first: remove it and ask whether a rule is left with
+nothing to say for itself.
+
 ## 5. The canon these pages defer to
 
 Four documents outside this folder are settled law, and the pages cite them

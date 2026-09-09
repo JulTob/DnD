@@ -13,9 +13,13 @@ make. The Canon's first rule holds throughout: never explain it on the page.
 
 ---
 
-*Folder size: 49 pages, about 146k words, on branch `Julio_Cl/fantasy-worldbuilding-analysis-4241c5` (pull request 5).*
+*Folder size: 50 pages, about 147k words, on branch `Julio_Cl/fantasy-worldbuilding-analysis-4241c5` (pull request 5).*
 
 ## How to read this folder
+
+**Writing a wiki page?** Read [Fixed-Points](Fixed-Points.md) first: it is the
+shape every page carries, and it is what stops a later editor deleting a
+mechanic's only explanation.
 
 **New here, or reviewing?** Read [For-Reviewers](For-Reviewers.md) first: what
 this folder is, the rules the pages were written against, what a useful
@@ -80,6 +84,7 @@ objection looks like, and how to fetch pages remotely.
 | [Voices-at-the-Table](Voices-at-the-Table.md) | Five archetypes (Wizard, Bard, Dwarf smith, Exorcist, the Ideal Aidos) read one generated sheet aloud in their registers: a Chaotic Evil Devotion Paladin whose story says "her". The registers held. |
 | [Places](Places.md) | The standalone map atlas already names towns, mines, shrines and crossroads by biome and keys the Underdark to Dwarves; the Stories' Anglo hometowns should come from it, culture-keyed. Not wired to the app; import broken. |
 | [Repairs-Ledger](Repairs-Ledger.md) | Every defect the reading found, in one table with file and line: four the app cannot do (three parked, one shipped: a Battle Master can fail to generate), twenty wrong on the sheet, five replay breaks, twelve duplicates, nine design gaps; a Questa cross-reference; two random sweeps. Report, not repair. |
+| [Fixed-Points](Fixed-Points.md) | The shape every wiki page carries: fixed point (inherited or ratified), interpretation, free invention, sugar line; the removal test that tells them apart; four worked examples including the talaria. |
 | [For-Reviewers](For-Reviewers.md) | Orientation for an outside reader or another model: what the folder is and is not, the eight rules to judge it by, the three load-bearing claims, the raw-URL pattern and a reading group per sitting. |
 | [Lenses](Lenses.md) | The generator read whole through the design, worldbuilding, backstory and villain books: purpose and its five inner contradictions; surprise from a second keyed table; the nameless quality; six aspects of magic; the penalty ladder the Orders lack; five sentences every character should say. |
 | [Equipment-and-Masteries](Equipment-and-Masteries.md) | GearKit's doctrine and the titles as the standard (Beak and Windlass of the Reckoning); weapons with no description; no wonder ever bought; a Farmer with a lance; mastery lines; the hook object per background. |
