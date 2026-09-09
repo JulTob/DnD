@@ -1,6 +1,6 @@
 # 📖 The Written Backgrounds: a literary reading of all thirty-two
 
-> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+> 🚧 **In flow.** 1 of 7 chapters are still proposals. 🔒 0 · 🧾 3 · 🔎 3 · 🚧 1
 
 *Wiki entry for the design team. The thirty-two custom backgrounds are the
 project's reference for voice, and every earlier page measured itself against
@@ -16,7 +16,7 @@ named. Compiled 2026-09-09 from the six `Map_of_*_Backgrounds.py` files.*
 
 ---
 
-## 1. The corpus
+## 🧾 1. The corpus
 
 Thirty-two, across six source registers, at three levels of finish.
 
@@ -44,7 +44,7 @@ background in the roster with no `roleplay` field at all.
 
 ---
 
-## 2. The form, stated for the first time
+## 🧾 2. The form, stated for the first time
 
 Every Tier 1 background is built the same way, and the pattern is strong enough
 to be a house rule.
@@ -107,7 +107,7 @@ written it down.
 
 ---
 
-## 3. The traditions, read one by one
+## 🔎 3. The traditions, read one by one
 
 What each background is made of, and whether it earns it.
 
@@ -294,7 +294,7 @@ stole, and takes it back.
 
 ---
 
-## 4. The families nobody had named
+## 🔎 4. The families nobody had named
 
 Reading the corpus whole shows four structural sets. They are worth keeping
 because a player who takes one will be legible against the others.
@@ -326,7 +326,7 @@ Gambler and Renegade (two economies of debt, one personal, one collective).
 
 ---
 
-## 5. Where the corpus meets the canon
+## 🔎 5. Where the corpus meets the canon
 
 ✅ **It never explains the world.** No background states a metaphysic except
 Shadow, and Shadow is the *source* the Elves canon cites for the Fae-dream and
@@ -351,7 +351,7 @@ it and the player never learns why.
 
 ---
 
-## 6. What this page recommends
+## 🚧 6. What this page recommends
 
 1. **Record the four-beat form** (§2) in `Feature-Text.md`, with the debt rule
    as its fourth beat. It was discovered by practice and is the most valuable
@@ -369,7 +369,7 @@ it and the player never learns why.
 
 ---
 
-## 7. Pointers
+## 🧾 7. Pointers
 
 - **Backgrounds-Official**: the sixteen institutional siblings, now drafted in
   this form.

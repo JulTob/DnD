@@ -1,6 +1,6 @@
 # 🧭 Human
 
-> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+> 🚧 **In flow.** 1 of 10 chapters are still proposals. 🔒 4 · 🧾 2 · 🔎 3 · 🚧 1
 
 *Wiki entry for the design team. Deep lore and settled direction, not page text.
 Compiled 2026-09-08 from the Human kit, the species entry, `AtlasNomina/Races/Human.py`,
@@ -12,7 +12,7 @@ Compiled 2026-09-08 from the Human kit, the species entry, `AtlasNomina/Races/Hu
 
 ---
 
-## 1. Where the Human lives in the code
+## 🧾 1. Where the Human lives in the code
 
 | What | Where | State |
 |---|---|---|
@@ -25,7 +25,7 @@ Compiled 2026-09-08 from the Human kit, the species entry, `AtlasNomina/Races/Hu
 
 ---
 
-## 2. Origin: the compact
+## 🔒 2. Origin: the compact
 
 *"In worlds full of monsters, magic, and dangers, our people learned not just to
 survive but to thrive. And it is all thanks to the power of friendship. We
@@ -55,7 +55,7 @@ learned.
 
 ---
 
-## 3. Society: institutions and orders
+## 🔎 3. Society: institutions and orders
 
 *"Humans tend to organize, making institutions and orders part of our legacy."*
 
@@ -74,7 +74,7 @@ applies most literally here.
 
 ---
 
-## 4. Culture and registers
+## 🔒 4. Culture and registers
 
 The Human's wells are the least spent in the class pages and the richest when
 reached for, because every class's *default* is Human and every default is the
@@ -110,7 +110,7 @@ acacia and electrum; Tyrian-dyed bronze, esparto, ivory-inlaid bronze.
 
 ---
 
-## 5. Metaphysics: the people who make between
+## 🔒 5. Metaphysics: the people who make between
 
 **The Human Cleric drifts toward the intercessor.** The only people whose
 watcher is an institution (Cleric page); the background draw decides whether
@@ -139,7 +139,7 @@ other entries carry it.
 
 ---
 
-## 6. The classes: the compact in each
+## 🔎 6. The classes: the compact in each
 
 | Class | The Human in it |
 |---|---|
@@ -159,7 +159,7 @@ other entries carry it.
 
 ---
 
-## 7. Backgrounds
+## 🔎 7. Backgrounds
 
 The Human draws every background, and the custom ones do the work the species
 entry cannot: the Stranger (a people scattered *among* humans), the Servant
@@ -176,7 +176,7 @@ species that most needs its backgrounds to speak has the thinnest ones.
 
 ---
 
-## 8. Decisions log
+## 🔒 8. Decisions log
 
 **Decided**
 
@@ -194,7 +194,7 @@ species that most needs its backgrounds to speak has the thinnest ones.
 
 ---
 
-## 9. Lines
+## 🚧 9. Lines
 
 *The two trait lines exist. One proposal for Versatile, which has none.*
 
@@ -206,7 +206,7 @@ species that most needs its backgrounds to speak has the thinnest ones.
 
 ---
 
-## 10. Pointers
+## 🧾 10. Pointers
 
 - **Cleric page**: the intercessor risk.
 - **Warlock page**: the Dark Gift leak.

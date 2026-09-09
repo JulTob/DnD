@@ -1,6 +1,6 @@
 # ⚙️ Artificer: Understanding Handed Over, read against the whole setting
 
-> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+> 🚧 **In flow.** 2 of 8 chapters are still proposals. 🔒 1 · 🧾 1 · 🔎 4 · 🚧 2
 
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. Builds
 on Dialog 0013 (core fantasy settled as "understanding, made solid enough to hand
@@ -20,7 +20,7 @@ Specialties on the roster: Alchemist, Armorer, Artillerist, Battle Smith.
 
 ---
 
-## 1. What an Artificer player is handed today
+## 🧾 1. What an Artificer player is handed today
 
 Four sheets (Gnome Alchemist, Dwarf Armorer, Human Artillerist, Dragonborn
 Battle Smith). No class text, no specialty text, no lines. *Replicate Magic
@@ -40,7 +40,7 @@ the Materials map. Same mechanism as the spellbook, three more consumers.
 
 ---
 
-## 2. The makers on the culture keys
+## 🔒 2. The makers on the culture keys
 
 Dialog 0013 read Verne, the Mohists, Zhuge Liang, the gunpowder alchemists,
 Paracelsus, Hephaestus by implication, the karakuri. These are the ones on
@@ -91,7 +91,7 @@ before it is a robot.
 
 ---
 
-## 3. The Artificer inside the setting's metaphysics
+## 🔎 3. The Artificer inside the setting's metaphysics
 
 **The Gnome is the Artificer's people, by refusal.** The Gnome entry: *"the
 lenses, the clockwork, the smoking herbs. These were found not by fae magic,
@@ -155,7 +155,7 @@ nobody would give.
 
 ---
 
-## 4. Relationships: species × Artificer
+## 🔎 4. Relationships: species × Artificer
 
 | People | The seed | Specialty | Note |
 |---|---|---|---|
@@ -172,7 +172,7 @@ nobody would give.
 
 ---
 
-## 5. Relationships: backgrounds × Artificer
+## 🔎 5. Relationships: backgrounds × Artificer
 
 - **Debunker.** *"A wizard with guano and charcoal is not calling down fire
   but making powder."* ✅✅ The background already describes the Artillerist's
@@ -226,7 +226,7 @@ nobody would give.
 
 ---
 
-## 6. Flags
+## 🔎 6. Flags
 
 ### ✅ Singular, and to be protected
 
@@ -263,7 +263,7 @@ nobody would give.
 
 ---
 
-## 7. Feature lines: drafts
+## 🚧 7. Feature lines: drafts
 
 *Italic inspiration line only. Register: the maker's log, short declaratives
 that assemble like parts, confident wonder, ending on the next attempt. No
@@ -333,7 +333,7 @@ Proposals.*
 
 ---
 
-## 8. Threads to pull in later cycles
+## 🚧 8. Threads to pull in later cycles
 
 - **A signature-object Kit**: spellbook, instrument, companion, familiar,
   Defender, cannon, armour, replicated items. Eight consumers of one mechanism

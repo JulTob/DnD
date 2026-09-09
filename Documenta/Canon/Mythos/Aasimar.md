@@ -1,7 +1,7 @@
 # ✨ Aasimar
 > The Mortal Angel
 >
-> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+> 🚧 **In flow.** 1 of 13 chapters are still proposals. 🔒 5 · 🧾 2 · 🔎 5 · 🚧 1
 
 *Wiki entry for the design team. Deep lore and settled direction, not page text.
 Compiled 2026-09-08 from the class analyses and the design notes; where a decision is settled, it is stated as such. The companion entry for the Celestials themselves, written for the NPC generator, is [Celestials.md](Celestials.md).*
@@ -11,7 +11,7 @@ Compiled 2026-09-08 from the class analyses and the design notes; where a decisi
 
 ---
 
-## 0. Rules
+## 🔒 0. Rules
 
 *The fixed points. Everything after this chapter is our interpretation of what
 is written here, and may be argued with. This chapter may not: 📕 is inherited
@@ -83,7 +83,7 @@ names. None of these carries a rule.
 
 ---
 
-## 1. Where the Aasimar lives in the code
+## 🧾 1. Where the Aasimar lives in the code
 
 | What | Where | State |
 |---|---|---|
@@ -111,7 +111,7 @@ generator gave it to an Assassin, which by the loaded-names rule is a story).
 
 ---
 
-## 2. Origin: the spark
+## 🔒 2. Origin: the spark
 
 A Celestial is an Ideal with a shape: not a god and not a servant of one, but
 Justice itself, or Mercy, standing where mortals can see it. Celestials are
@@ -165,7 +165,7 @@ Neither is directly named on the page nor directly ported into the system. Just 
 
 ---
 
-## 3. The vessel: physiology
+## 🔎 3. The vessel: physiology
 
 **Talaria.** 
 Small vestigial wings, sitting only where a wing could take a body's weight (lower neck, wrists, forearms, shoulders, shoulder blades, small of the back, base of the spine, ankles, heels), each folding into something a tailor could hide or explain: a collar, bracelets, a sash, sandal straps. 
@@ -223,7 +223,7 @@ who speak of their bodies with pride (the Goliath's size, the Dwarf's beard). An
 
 ---
 
-## 4. Society: a subculture, not a nation
+## 🔎 4. Society: a subculture, not a nation
 
 Decided, superseding the earlier proposal to draw a host
 culture for the body.
@@ -282,7 +282,7 @@ whose isolation is *hostile*. The Aasimar's is upward.
 
 ---
 
-## 5. Culture and registers
+## 🔒 5. Culture and registers
 
 **The markers.** `athens` (the academy, the portico, the fleet), `vatican`
 (sacerdotal Rome: office, vestment, canon), `sangha` (the Buddhist monastic
@@ -344,7 +344,7 @@ importing the real-world institutions as lore.
 
 ---
 
-## 6. Metaphysics
+## 🔒 6. Metaphysics
 
 **The measuring bar.** Stated in §2. Every class an Aasimar takes is a different
 departure from the spark, and the aureola reports every departure.
@@ -378,7 +378,7 @@ antagonist, and the Inquisitor background's superior ("send them on, the gods wi
 
 ---
 
-## 7. Relationships with the other peoples
+## 🔎 7. Relationships with the other peoples
 
 | People | The relation | Deep lore, never on the page |
 |---|---|---|
@@ -391,7 +391,7 @@ antagonist, and the Inquisitor background's superior ("send them on, the gods wi
 
 ---
 
-## 8. The classes: departures from the spark
+## 🔎 8. The classes: departures from the spark
 
 The Celestials' vocabulary names several classes (the project's etymologies). That
 is colour, not fantasy: the *fantasy* of each class is its own, and an Aasimar
@@ -421,7 +421,7 @@ choices, but when they meet, they meet as family.
 
 ---
 
-## 9. Backgrounds: the tell meets the hook
+## 🔎 9. Backgrounds: the tell meets the hook
 
 The Ideal's tell is the Aasimar's hook in every background, because it reports
 on conduct without naming the principle.
@@ -457,7 +457,7 @@ on conduct without naming the principle.
 
 ---
 
-## 10. Decisions log
+## 🔒 10. Decisions log
 
 **Decided**
 
@@ -498,7 +498,7 @@ on conduct without naming the principle.
 
 ---
 
-## 11. Lines
+## 🚧 11. Lines
 
 *the project's drafts, kept as written; the incomplete one is completed with a proposal
 marked as such.*
@@ -514,7 +514,7 @@ marked as such.*
 
 ---
 
-## 12. Pointers
+## 🧾 12. Pointers
 
 - **[Celestials.md](Celestials.md)**: the beings themselves, for the NPC
   generator: Ideals, Descents, temper, how they act, the Celestial as

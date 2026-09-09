@@ -1,6 +1,6 @@
 # 🕯️ Cleric: the Kept, read against the whole setting
 
-> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+> 🚧 **In flow.** 2 of 11 chapters are still proposals. 🔒 0 · 🧾 2 · 🔎 7 · 🚧 2
 
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. Builds
 on Dialog 0016 (core fantasy settled, on the project's seed: to be seen and watched over
@@ -18,7 +18,7 @@ the ledger and the openings but cannot be generated.
 
 ---
 
-## 1. What a Cleric player is handed today
+## 🧾 1. What a Cleric player is handed today
 
 A level 11 Dwarf Life Cleric (seed 4) receives the class block (shipping, warm
 scripture, the triple "Maybe"), the Life opening with its em-dash still in it,
@@ -36,7 +36,7 @@ weakest members, and they are the ones most players will draw.
 
 ---
 
-## 2. The watcher has a different face for every people
+## 🔎 2. The watcher has a different face for every people
 
 The class block offers three guesses and never resolves them: *a god, your
 ancestors, the universe itself*. That is Death of the Author performed in-text,
@@ -65,7 +65,7 @@ needed. See §5.
 
 ---
 
-## 3. Wells the dialog did not draw from
+## 🧾 3. Wells the dialog did not draw from
 
 Dialog 0016 read Psalm 121, the Prodigal Son, Virgil, Hermes and the centurion.
 Each of these adds a *hard edge*, which is what the dialog's own caution asked
@@ -115,7 +115,7 @@ Keep it as a well, never a name.
 
 ---
 
-## 4. The theology of the Guilds
+## 🔎 4. The theology of the Guilds
 
 Dialog 0016 drew the Cleric/Warlock line as **kept / noticed**. The Barbarian
 page added the Zealot as **ridden**. The set is larger, and it is worth
@@ -136,7 +136,7 @@ whose greater thing *loves first*. Protect that: if a later Paladin text says
 
 ---
 
-## 5. The prayer ledger is the setting's only polyphonic voice
+## 🔎 5. The prayer ledger is the setting's only polyphonic voice
 
 `Map_of_Cleric_Prayers.py` does something no other file does: it lets the
 setting's *real* cultures speak in their own proverbs. The Hávamál for the
@@ -179,7 +179,7 @@ Three findings, in order of severity:
 
 ---
 
-## 6. Relationships: backgrounds × Cleric
+## 🔎 6. Relationships: backgrounds × Cleric
 
 - **Survivor.** "Why you, and not the others? … You did not escape. You were
   released." Against "you have been carried farther than you know." ✅ **The
@@ -238,7 +238,7 @@ Three findings, in order of severity:
 
 ---
 
-## 7. Flags
+## 🔎 7. Flags
 
 ### ✅ Singular, and to be protected
 
@@ -273,7 +273,7 @@ Three findings, in order of severity:
 
 ---
 
-## 8. A note on the official backgrounds
+## 🔎 8. A note on the official backgrounds
 
 The Hermit's *"Solitude gave you time to uncover a truth, method, or mystery"*
 is the 2014 book's sentence. The custom backgrounds (Inquisitor, Gambler,
@@ -286,7 +286,7 @@ run alongside this one is the evidence for it.
 
 ---
 
-## 9. Feature lines: drafts
+## 🚧 9. Feature lines: drafts
 
 *Italic inspiration line only. House shape: second person, warm scripture
 (parallelism, concrete images, the care prior), no proper nouns, no dice, no
@@ -345,7 +345,7 @@ drill. Rule text untouched. Proposals for the project's hand, not landed.*
 
 ---
 
-## 10. Threads to pull in later cycles
+## 🚧 10. Threads to pull in later cycles
 
 - **Paladin**: sworn, not kept. The Paladin text must not say "watched over";
   the oath is the Paladin's parent and it is a word, not a face. The `crusader`
@@ -361,7 +361,7 @@ drill. Rule text untouched. Proposals for the project's hand, not landed.*
 
 ---
 
-## 12. What the Kept seat costs
+## 🔎 12. What the Kept seat costs
 
 Every caster's price is named by the canon except the Cleric's (Lenses, the six
 aspects of magic). The Warlock pays in terms, the Sorcerer

@@ -1,6 +1,6 @@
 # 🔤 Names: the first line of every sheet
 
-> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+> 🚧 **In flow.** 1 of 9 chapters are still proposals. 🔒 1 · 🧾 3 · 🔎 4 · 🚧 1
 
 *Wiki entry for the design team. `AtlasNomina/Map_of_Names.py` composes a name
 from a per-people module in `AtlasNomina/Races/`, by list pick, syllable
@@ -14,7 +14,7 @@ cannot fail. Compiled 2026-09-08 from the code and ninety generated names
 
 ---
 
-## 1. The engine
+## 🔎 1. The engine
 
 Each people has a module offering four ingredients: `Names`, `Surnames`,
 `Phonotactic` (onset, nucleus, coda) and `Surphonotactic`, gated by the genus
@@ -37,7 +37,7 @@ page) deterministic by accident, seeded by whichever name was drawn last.
 
 ---
 
-## 2. The shape of a name, by people
+## 🧾 2. The shape of a name, by people
 
 | People | Module | Shape | Documented inspiration | Sample |
 |---|---|---|---|---|
@@ -54,7 +54,7 @@ page) deterministic by accident, seeded by whichever name was drawn last.
 
 ---
 
-## 3. Where the names carry the culture
+## 🔎 3. Where the names carry the culture
 
 ✅✅ **Dwarf.** Four names in the Iberian shape, Golden Age given names
 (Salvaro, Benicia, Felicidad, Octavia, Juanito), and surnames that translate the
@@ -81,7 +81,7 @@ the name pool says so by accident or design. Keep it.
 
 ---
 
-## 4. Where the surname undoes the given name
+## 🔎 4. Where the surname undoes the given name
 
 ⚠️ **Elf.** The given names come from the phonotactics and sound like the
 documented cultures (*Duillinen, Hislin, Durgwen, Eofolin, Thaeka*). The
@@ -134,7 +134,7 @@ material to a Latin-Greek pool.
 
 ---
 
-## 5. Gender
+## 🧾 5. Gender
 
 For the same seed, Human, Aasimar, Goliath and Halfling produced the **same
 name for He, She and They**. Dwarf, Gnome, Elf, Orc, Tiefling and Dragonborn
@@ -148,7 +148,7 @@ the name line. *Noble Frazarme* for They reads as a rank, not an honorific.
 
 ---
 
-## 6. Two copies of the Titles
+## 🔎 6. Two copies of the Titles
 
 `AtlasNomina/Map_of_Titles.py` (9,470 lines) and `AtlasEpica/Map_of_Titles.py`
 (10,049 lines) are two divergent copies of the same vocabulary. Characters use
@@ -157,7 +157,7 @@ record.
 
 ---
 
-## 7. Proposals
+## 🚧 7. Proposals
 
 1. **Elf surnames from the documented cultures**: Persian and Icelandic
    patronymic shapes, Irish *Ó* and *Ní*, Romani; drop the English compounds.
@@ -178,7 +178,7 @@ record.
 
 ---
 
-## 8. Decisions log
+## 🔒 8. Decisions log
 
 **Standing**: the ladder and its last-resort rosters; the Dwarf shape; the Orc
 z-rule; the Dragon docstring.
@@ -188,7 +188,7 @@ surname; *Elohim* and *Mestizo* (Stories page) as loaded names outside lore.
 
 ---
 
-## 9. Pointers
+## 🧾 9. Pointers
 
 - **Cultural-Inspirations canon**: the keys the modules should read.
 - **Dwarf page**: why the four-name shape is the culture.

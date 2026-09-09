@@ -13,7 +13,7 @@ Barbarian as Readability, Lorekeeper as Game-Canon…). Those are code-disciplin
 lenses. The five voices below are in-world archetypes reading a sheet as text;
 they do not speak for any Consul seat.*
 
-## The sheet
+## 🔎 The sheet
 
 **Paregasa Eliz, The Phoenix Of The Swan Shrine.** Aasimar (Sphinx Aidos
 descent; a many-pointed star like a compass rose, aquamarine into jade,
@@ -29,7 +29,7 @@ generous bounty."
 
 ---
 
-## The Wizard
+## 🔎 The Wizard
 
 *What you know, you took. Here is what this one took.*
 
@@ -46,7 +46,7 @@ capitals: *Of The*. A title is not a book's spine. Lower the particles.
 One more thing. The story says "her." The sheet says They. The book does not
 lie to its reader in the second sentence. Fix the one place that does.
 
-## The Bard
+## 🔎 The Bard
 
 *Here is how it was told to me, and I will tell you where the telling breaks.*
 
@@ -65,7 +65,7 @@ Acolyte who watched the altars is now a bounty hunter in a kingdom called
 
 The rule the backgrounds keep: one voice per piece. The story keeps none.
 
-## The Dwarf smith
+## 🔎 The Dwarf smith
 
 *Metal is given. Then it is proved. Let me look at the proving.*
 
@@ -83,7 +83,7 @@ drawn from the Guild's pool and nobody asked what an Acolyte was handed first.
 Give the background one weapon and the drills will follow it. That is how a
 forge works too. The first piece decides the set.
 
-## The Exorcist
+## 🔎 The Exorcist
 
 *It is always the same job, whatever they called it in the letter.*
 
@@ -104,7 +104,7 @@ And "Common Sign Language." Last time it was Halfling. The same person, two
 tongues, depending on the day the machine woke up. That is not a language. That
 is a draft.
 
-## The Celestial
+## 🔎 The Celestial
 
 *I am Aidos. I do not compromise, and I did not send anyone.*
 
@@ -124,7 +124,7 @@ that lies about me.
 
 ---
 
-## What the five agreed on
+## 🔎 What the five agreed on
 
 - **The good lines came from keyed tables**: the Descent, the armour, the
   shield, the spell list, the temple at dawn.

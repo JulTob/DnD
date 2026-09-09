@@ -1,6 +1,6 @@
 # 🐻 Barbarian: the Untamed
 
-> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+> 🚧 **In flow.** 2 of 9 chapters are still proposals. 🔒 1 · 🧾 1 · 🔎 5 · 🚧 2
 
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. Builds on Dialog 0014 (the core fantasy, settled as "the untamed one": Rage is the self
 undiluted, hesitation lost and control kept). This page does not re-litigate that.
@@ -15,7 +15,7 @@ lines: `AtlasOfTraining/Map_of_Barbarian_Training.py`. Legend register:
 
 ---
 
-## 1. The name is an exonym, and the fantasy is not
+## 🔒 1. The name is an exonym, and the fantasy is not
 
 *Bárbaros* is Greek for the one who says "bar-bar": the one who does not speak
 Greek. It is not a people's word for itself. It is the word the portico uses for
@@ -50,7 +50,7 @@ history without a paragraph.
 
 ---
 
-## 2. Four madnesses, four Paths
+## 🔎 2. Four madnesses, four Paths
 
 Dialog 0014 read the Paths against Zorba, Mononoke, the overview effect and the
 Bacchae. There is an older frame that fits the roster as a set rather than one
@@ -79,7 +79,7 @@ is, or whether it is the one Plato did not name.
 
 ---
 
-## 3. The wells the dialog did not draw from
+## 🧾 3. The wells the dialog did not draw from
 
 Each of these carries something the current text could use, and none of them is
 the film Conan.
@@ -144,7 +144,7 @@ anything else, and see §4 for why that matters.
 
 ---
 
-## 4. The Barbarian inside the setting's metaphysics
+## 🔎 4. The Barbarian inside the setting's metaphysics
 
 The Canon gives each people one organising idea (Dwarf: soul-metal, given and
 proven; Celestial: an Ideal, fixed; Elf: a shared dream, drifting; Dragon: a self
@@ -205,7 +205,7 @@ keeps a raging weather-eye on retainer.
 
 ---
 
-## 5. Relationships: species × Barbarian
+## 🔎 5. Relationships: species × Barbarian
 
 The rule for the whole table: the species supplies the *well* and the class
 supplies the *fire*. Where a people already has a martial legend register, the
@@ -228,7 +228,7 @@ Barbarian reads through it; where it does not, the class's own
 
 ---
 
-## 6. Relationships: backgrounds × Barbarian
+## 🔎 6. Relationships: backgrounds × Barbarian
 
 Backgrounds are the reference for the project's voice, so these are the pairings
 where the background's hook and the class's rules meet in a single image. The
@@ -289,7 +289,7 @@ best ones are *tensions*, not reinforcements.
 
 ---
 
-## 7. Flags
+## 🔎 7. Flags
 
 ### ✅ Singular, and to be protected
 
@@ -355,7 +355,7 @@ best ones are *tensions*, not reinforcements.
 
 ---
 
-## 8. Feature lines: drafts
+## 🚧 8. Feature lines: drafts
 
 *Italic inspiration line only, in the house shape: second person, an image before
 the rule, no proper nouns, no dice in the line, no em-dashes. Rule text untouched.
@@ -422,7 +422,7 @@ kept, it says so.*
 
 ---
 
-## 9. Threads to pull in later cycles
+## 🚧 9. Threads to pull in later cycles
 
 - **Monk**: the second no-mind. Read the Monk's lines against §4 and see whether
   the two classes state their difference or only their overlap.

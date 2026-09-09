@@ -1,6 +1,6 @@
 # 📝 Lines Annex
 
-> 🧾 **Record.** A generated index, not a specification.
+> 🧾 **Record.** A report, an index or a working document, not a specification.
 
 *Every drafted inspiration line (the sugar lines), gathered from the element
 pages for wiring. Grouped by page and by the heading its table sits under.

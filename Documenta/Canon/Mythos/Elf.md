@@ -1,6 +1,6 @@
 # 🌙 Elf
 
-> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+> 🚧 **In flow.** 1 of 11 chapters are still proposals. 🔒 5 · 🧾 2 · 🔎 3 · 🚧 1
 
 *Wiki entry for the design team. Deep lore and settled direction, not page text.
 Compiled 2026-09-08 from `Elves-and-the-Dreaming.md`, the Elf kit and its five
@@ -15,7 +15,7 @@ on the page.*
 
 ---
 
-## 1. Where the Elf lives in the code
+## 🧾 1. Where the Elf lives in the code
 
 | What | Where | State |
 |---|---|---|
@@ -30,7 +30,7 @@ on the page.*
 
 ---
 
-## 2. Origin: the Dreaming
+## 🔒 2. Origin: the Dreaming
 
 **Lineages are cultures, not bloodlines.** Dream of the forest for a thousand
 years and you become a Wood Elf: hairier, some with little stag horns. Dream
@@ -71,7 +71,7 @@ centuries; the body is what the Character has tonight.
 
 ---
 
-## 3. The five lineages
+## 🔒 3. The five lineages
 
 | Lineage | The dream | The body (from the "we" paragraphs) | The temper | Where the answers come from |
 |---|---|---|---|---|
@@ -88,7 +88,7 @@ things they establish that later prose must keep: the Dark Elf's legend was
 
 ---
 
-## 4. Society: the Other People
+## 🔎 4. Society: the Other People
 
 **Elvenkind.** *"War after war, we fought each other, but now one word unites
 us… Today a long peace holds, and it holds because nobody is counting grudges
@@ -118,7 +118,7 @@ seen and unseen." The species entry's opening is the same claim from inside:
 
 ---
 
-## 5. Culture and registers
+## 🔒 5. Culture and registers
 
 **Norse**: the berserkr and the úlfheðinn are Odin's, so the Berserker's mythic
 home is Elven (Barbarian page); Egil the poet-berserker and his head-ransom
@@ -153,7 +153,7 @@ QST-0052's trailing-character bug and not a naming choice.)
 
 ---
 
-## 6. Metaphysics: the people decided by what everyone imagines
+## 🔒 6. Metaphysics: the people decided by what everyone imagines
 
 **Against the other Platonisms.** Two peoples are Platonic (Dwarf: soul-metal
 given; Celestial: an Ideal fixed) and the Elves are Jungian: the only people
@@ -192,7 +192,7 @@ affinity between them (Decree 0005) keeps the word rare without closing a door.
 
 ---
 
-## 7. The classes: the Dream in each
+## 🔎 7. The classes: the Dream in each
 
 | Class | The Elf in it |
 |---|---|
@@ -212,7 +212,7 @@ affinity between them (Decree 0005) keeps the word rare without closing a door.
 
 ---
 
-## 8. Backgrounds
+## 🔎 8. Backgrounds
 
 - **Shadow.** The Shadow background ("you were born on the other side, where
   the Fae are made of dream and shadows are made of nightmare") is the Elf
@@ -235,7 +235,7 @@ affinity between them (Decree 0005) keeps the word rare without closing a door.
 
 ---
 
-## 9. Decisions log
+## 🔒 9. Decisions log
 
 **Standing (canon)**
 
@@ -262,7 +262,7 @@ affinity between them (Decree 0005) keeps the word rare without closing a door.
 
 ---
 
-## 10. Lines
+## 🚧 10. Lines
 
 *The Elf's trait lines exist and are the house pattern. Listed here as the
 reference, with one proposal.*
@@ -281,7 +281,7 @@ reference, with one proposal.*
 
 ---
 
-## 11. Pointers
+## 🧾 11. Pointers
 
 - **Druid page**: the species at scale; the Moon Elf.
 - **Bard page**: the Dream drifts on story.

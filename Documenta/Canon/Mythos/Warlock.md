@@ -1,6 +1,6 @@
 # 🕯️ Warlock: the Noticed, read against the whole setting
 
-> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+> 🚧 **In flow.** 2 of 10 chapters are still proposals. 🔒 1 · 🧾 2 · 🔎 5 · 🚧 2
 
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. No
 Dialog exists for the Warlock, but the design commentary above each patron in
@@ -22,7 +22,7 @@ are certainly evil"*) but did not reach the sheets sampled.
 
 ---
 
-## 1. What a Warlock player is handed today
+## 🧾 1. What a Warlock player is handed today
 
 A level 11 Human Great Old One Warlock (seed 12) receives the class block
 (three paragraphs, "you are an investment worth protecting"), then the heading
@@ -39,7 +39,7 @@ it is that the prose stops at level 3.
 
 ---
 
-## 2. What the four patron texts do, stated as a law
+## 🔎 2. What the four patron texts do, stated as a law
 
 Each patron buys alignment-independence with a *substitution*, and each has a
 *device*. The commentary says so; this page states it as the rule the rest of
@@ -68,7 +68,7 @@ does your text do* before *how does it sound*.
 
 ---
 
-## 3. The name: oath-breaker, and the one who cannot break an oath
+## 🔒 3. The name: oath-breaker, and the one who cannot break an oath
 
 *Warlock* is Old English *wǣrloga*: breaker of faith, covenant-liar. By the
 tenth century it also meant *the Devil*, and by the sixteenth *a man in league
@@ -93,7 +93,7 @@ two endings face each other across the page and should keep doing so.
 
 ---
 
-## 4. Wells the commentary did not name
+## 🧾 4. Wells the commentary did not name
 
 The commentary reaches for Shakespeare, Macbeth's witches, Yubaba, Arthur,
 Ofelia, Chihiro, Peter and the Men in White. These are the ones it left, and
@@ -148,7 +148,7 @@ literature without Lovecraft's furniture, which the text rightly avoids.
 
 ---
 
-## 5. The Warlock inside the setting's metaphysics
+## 🔎 5. The Warlock inside the setting's metaphysics
 
 **The Celestial patron is an Ideal with a shape, and an Ideal cannot love
 you.** The Cleric page found the Aasimar's tension: the spark they carry
@@ -197,7 +197,7 @@ engines already describe the same thing from two distances.
 
 ---
 
-## 6. Relationships: species × Warlock
+## 🔎 6. Relationships: species × Warlock
 
 | People | The seed | Patron that sings | Note |
 |---|---|---|---|
@@ -214,7 +214,7 @@ engines already describe the same thing from two distances.
 
 ---
 
-## 7. Relationships: backgrounds × Warlock
+## 🔎 7. Relationships: backgrounds × Warlock
 
 - **Survivor.** "It let you go… It is playing with you. You can sense it.
   Smell it. Never see it." ✅✅ **The Survivor Archfey Warlock's monster is the
@@ -262,7 +262,7 @@ engines already describe the same thing from two distances.
 
 ---
 
-## 8. Flags
+## 🔎 8. Flags
 
 ### ✅ Singular, and to be protected
 
@@ -320,7 +320,7 @@ engines already describe the same thing from two distances.
 
 ---
 
-## 9. Feature lines: drafts
+## 🚧 9. Feature lines: drafts
 
 *Italic inspiration line only, second person, no proper nouns, no dice, no
 em-dashes. Each patron keeps its own device: the Fiend's lines are interior;
@@ -382,7 +382,7 @@ paint them. Rule text untouched. Proposals.*
 
 ---
 
-## 10. Threads to pull in later cycles
+## 🚧 10. Threads to pull in later cycles
 
 - **Feature-Text canon**: add the device law (§2).
 - **Aasimar**: hired by its own blood; the same Planetar in two places on one

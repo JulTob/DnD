@@ -1,6 +1,6 @@
 # 😈 Tiefling
 
-> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+> 🚧 **In flow.** 1 of 11 chapters are still proposals. 🔒 2 · 🧾 2 · 🔎 6 · 🚧 1
 
 *Wiki entry for the design team. Deep lore and settled direction, not page text.
 Compiled 2026-09-08 from `Tieflings-and-the-Shift.md`, the Tiefling kit, the
@@ -14,7 +14,7 @@ end of this entry is [Aasimar.md](Aasimar.md).*
 
 ---
 
-## 1. Where the Tiefling lives in the code
+## 🧾 1. Where the Tiefling lives in the code
 
 | What | Where | State |
 |---|---|---|
@@ -28,7 +28,7 @@ end of this entry is [Aasimar.md](Aasimar.md).*
 
 ---
 
-## 2. Origin: the reading changed
+## 🔎 2. Origin: the reading changed
 
 The setting established how Celestials work: mortal belief is the fuel from
 which they emerge. Apply the rule honestly and it runs both ways. **If belief
@@ -58,7 +58,7 @@ says so. Nobody in authority confirms it.
 
 ---
 
-## 3. The vessel: physiology
+## 🔎 3. The vessel: physiology
 
 **Born to ordinary parents.** The structural fact that separates the Tiefling
 from every other people. "The midwife went quiet, and that was how it began."
@@ -87,7 +87,7 @@ people.
 
 ---
 
-## 4. Society: a diaspora with no homeland
+## 🔎 4. Society: a diaspora with no homeland
 
 **There is no culture** in the sense every other people has one: no elder, no
 quarter of the city, no festival where everyone has horns. Nobody hands down
@@ -136,7 +136,7 @@ too. Neither is the correct one.
 
 ---
 
-## 5. Metaphysics
+## 🔒 5. Metaphysics
 
 **No biological determinism, ever** (canon rule 1). The legacy does things; it
 never makes anyone a kind of person. The three heritage blocks describe bodies
@@ -163,7 +163,7 @@ find the Tiefling in the party is the one it most wants to correct.
 
 ---
 
-## 6. Relations with the other peoples
+## 🔎 6. Relations with the other peoples
 
 | People | The relation | Deep lore, never on the page |
 |---|---|---|
@@ -176,7 +176,7 @@ find the Tiefling in the party is the one it most wants to correct.
 
 ---
 
-## 7. The classes: what the legacy does in each
+## 🔎 7. The classes: what the legacy does in each
 
 | Class | The Tiefling in it |
 |---|---|
@@ -196,7 +196,7 @@ find the Tiefling in the party is the one it most wants to correct.
 
 ---
 
-## 8. Backgrounds
+## 🔎 8. Backgrounds
 
 - **Stranger.** The species' own background in all but name: "a diaspora with
   no homeland to be exiled from", the old ones as the last library, "the rites
@@ -235,7 +235,7 @@ find the Tiefling in the party is the one it most wants to correct.
 
 ---
 
-## 9. Decisions log
+## 🔒 9. Decisions log
 
 **Decided**
 
@@ -274,7 +274,7 @@ find the Tiefling in the party is the one it most wants to correct.
 
 ---
 
-## 10. Lines
+## 🚧 10. Lines
 
 *Proposals for the three trait entries that have none. Second person, the
 species entry's own register (plain, unsentimental, the fact and then the
@@ -293,7 +293,7 @@ voice; the lines above sit under the rules, not in place of the paragraphs.
 
 ---
 
-## 11. Pointers
+## 🧾 11. Pointers
 
 - **[Aasimar.md](Aasimar.md)** and **[Celestials.md](Celestials.md)**: the other
   end of the mechanism, and the beings who prevent.

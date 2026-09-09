@@ -1,6 +1,6 @@
 # 🎻 Bard and Sorcerer: lines for the two quietest Guilds
 
-> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+> 🔒 **Settled.** No chapter is still in flow. 🔒 0 · 🧾 0 · 🔎 3
 
 *Wiki entry for the design team. The coverage sweep put the Bard at 10% and
 the Sorcerer at 19% of Training features carrying a line, the two lowest of
@@ -12,7 +12,7 @@ would sit before the rule, italic, as the Fighter's do.*
 
 ---
 
-## The Bard: the told tale
+## 🔎 The Bard: the told tale
 
 *Register (Bard page, Dialog 0015): oral performance, a drummed cadence, no
 verse. The world listens; your art can move it. The four Colleges keep their
@@ -55,7 +55,7 @@ cuts; Valor is the deed and the telling as one craft.*
 
 ---
 
-## The Sorcerer: the magic felt before it is understood
+## 🔎 The Sorcerer: the magic felt before it is understood
 
 *Register (Sorcerer page): sensation, the body first, the name last; each
 Origin ends on what the body is turning into, unnamed. The mark is suffered,
@@ -98,7 +98,7 @@ never inherited; the species law is not touched. No "bloodline".*
 
 ---
 
-## Notes
+## 🔎 Notes
 
 - The Draconic lines never say ancestor or bloodline; the body overlaps, and
   what it is becoming is left unnamed, per the Sorcerer page's species-law

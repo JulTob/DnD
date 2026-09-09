@@ -1,6 +1,6 @@
 # 🕸 Relationships: what the pairings mean
 
-> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+> 🔒 **Settled.** No chapter is still in flow. 🔒 0 · 🧾 1 · 🔎 7
 
 *Wiki entry for the design team. The generator draws species, Guild and
 background independently (Decree 0005 nudges the odds, never the meaning), so
@@ -14,7 +14,7 @@ settled and the registers the Guild pages found. Compiled 2026-09-08.*
 
 ---
 
-## 1. The ten ideas, restated for pairing
+## 🔎 1. The ten ideas, restated for pairing
 
 | People | The idea | What it asks of a Guild |
 |---|---|---|
@@ -31,7 +31,7 @@ settled and the registers the Guild pages found. Compiled 2026-09-08.*
 
 ---
 
-## 2. Species × Guild
+## 🔎 2. Species × Guild
 
 For each people: the Guilds that fit *with* the grain, and the ones that cut
 across it and are the better story for it. Never a lock; the affinity table
@@ -128,7 +128,7 @@ only tilts the odds.
 
 ---
 
-## 3. Guild × Background
+## 🔎 3. Guild × Background
 
 The thirty-two written backgrounds each have Guilds they were built beside
 (the Origin feat and skills tell you which) and one pairing where the hook and
@@ -171,7 +171,7 @@ the class fantasy argue, which is where the story is.
 
 ---
 
-## 4. Species × Species
+## 🔎 4. Species × Species
 
 The party is where the ten ideas meet. Five fault lines carry most of the
 tension, and none should be stated on a page.
@@ -204,7 +204,7 @@ is always somebody else's trouble).
 
 ---
 
-## 5. Species × Background
+## 🔎 5. Species × Background
 
 Ten pairings where the people's idea and the hook rhyme or fight:
 
@@ -223,7 +223,7 @@ Ten pairings where the people's idea and the hook rhyme or fight:
 
 ---
 
-## 6. What reads pairings today, and what does not
+## 🔎 6. What reads pairings today, and what does not
 
 | Engine | Reads | Verdict |
 |---|---|---|
@@ -242,7 +242,7 @@ gates pass. Twenty such lines exist above. They are enough to start.
 
 ---
 
-## 7. Rules for pairings
+## 🔎 7. Rules for pairings
 
 1. **Never lock.** Every table on this page tilts a story, never a draw.
 2. **The disagreement is the story.** A pairing that agrees needs no line; a
@@ -256,7 +256,7 @@ gates pass. Twenty such lines exist above. They are enough to start.
 
 ---
 
-## 8. Pointers
+## 🧾 8. Pointers
 
 - **Stories-and-Titles**: the three-sentence Story this page's fourth line
   extends.

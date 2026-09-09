@@ -1,6 +1,6 @@
 # ⚔️ Fighter: the Post at Dawn, read against the whole setting
 
-> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+> 🚧 **In flow.** 2 of 9 chapters are still proposals. 🔒 1 · 🧾 2 · 🔎 4 · 🚧 2
 
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. No
 Dialog exists for the Fighter because none was needed: the class text ships,
@@ -20,7 +20,7 @@ No legend register of its own.
 
 ---
 
-## 1. What a Fighter player is handed today
+## 🧾 1. What a Fighter player is handed today
 
 Five sheets (Goliath Champion, Aasimar Battle Master, Human Banneret, Dwarf
 Eldritch Knight, Elf Psi Warrior). Every one receives the class text, its
@@ -37,7 +37,7 @@ wrong with it, and all three are small (§6).
 
 ---
 
-## 2. The core fantasy, read out of the finished text
+## 🔒 2. The core fantasy, read out of the finished text
 
 *"Nobody gave you this. Everyone else was given something. You were not. You
 made yourself."* Then the post: *"You got up at dawn and swung a piece of
@@ -73,7 +73,7 @@ romanticise either.
 
 ---
 
-## 3. The wells the text already points at
+## 🧾 3. The wells the text already points at
 
 **The palus** (`rome`, Goliaths). Vegetius, *De re militari*: the recruit
 trains with a wooden sword against a six-foot post fixed in the ground,
@@ -134,7 +134,7 @@ text trim the beat, because the Fighter said it first.
 
 ---
 
-## 4. The Fighter inside the setting's metaphysics
+## 🔎 4. The Fighter inside the setting's metaphysics
 
 **The Goliaths' class** (§3). The Order of Things is kept by duty and deed;
 the Fighter is deed. A Goliath Fighter needs no reconciliation and the
@@ -185,7 +185,7 @@ kept the street's habit of not affording to lose.
 
 ---
 
-## 5. Relationships: backgrounds × Fighter
+## 🔎 5. Relationships: backgrounds × Fighter
 
 - **Guardian.** *"You learned to be the thing that does not break."* The
   class's own background; "you drill until standing firm is instinct" is the
@@ -227,7 +227,7 @@ kept the street's habit of not affording to lose.
 
 ---
 
-## 6. Flags
+## 🔎 6. Flags
 
 ### ✅ Singular, and to be protected
 
@@ -281,7 +281,7 @@ kept the street's habit of not affording to lose.
 
 ---
 
-## 7. Drafts: the few lines that need replacing
+## 🚧 7. Drafts: the few lines that need replacing
 
 *The Fighter needs almost nothing. These replace the four off-register lines,
 fix the triples by deletion, and give Weapon Mastery its own line. Register:
@@ -300,7 +300,7 @@ the training yard at dawn. Proposals.*
 
 ---
 
-## 8. Threads to pull in later cycles
+## 🚧 8. Threads to pull in later cycles
 
 - **Goliath page**: the Fighter as the Giants' class; the palus and the
   agoge; the Champion's laurel from a funeral.
@@ -313,7 +313,7 @@ the training yard at dawn. Proposals.*
 
 ---
 
-## 12. A Battle Master can fail to generate
+## 🔎 12. A Battle Master can fail to generate
 
 Repairs Ledger A4. Student of War's untrained pick (`_untrained_choice` in
 `Map_of_Fighter_Training.py`, lines 523 to 575) reads tool attributes off

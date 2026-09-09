@@ -1,6 +1,6 @@
 # 🐉 Dragonborn
 
-> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+> 🚧 **In flow.** 1 of 11 chapters are still proposals. 🔒 3 · 🧾 2 · 🔎 5 · 🚧 1
 
 *Wiki entry for the design team. Deep lore and settled direction, not page text.
 Compiled 2026-09-08 from `Dragons-and-the-Overcoming.md`, the Dragonborn kit,
@@ -14,7 +14,7 @@ canon's first rule governs every line here: never explain it on the page.*
 
 ---
 
-## 1. Where the Dragonborn lives in the code
+## 🧾 1. Where the Dragonborn lives in the code
 
 | What | Where | State |
 |---|---|---|
@@ -28,7 +28,7 @@ canon's first rule governs every line here: never explain it on the page.*
 
 ---
 
-## 2. Origin: what a dragon is, and what a Dragonborn is not
+## 🔒 2. Origin: what a dragon is, and what a Dragonborn is not
 
 **A dragon is not a kind of creature. It is something a person becomes.** A
 person carries the potential to overcome the culture that made them and arrive
@@ -59,7 +59,7 @@ names it that.
 
 ---
 
-## 3. The vessel: physiology
+## 🔎 3. The vessel: physiology
 
 Wingless, bipedal dragons: scaled, bright-eyed, thick-boned, horned, coloured
 after the ancestor. **Ten ancestors, five damage types**, drawn once per
@@ -87,7 +87,7 @@ colour is the only thing drawn, and the shape is the player's.
 
 ---
 
-## 4. Society: the clan that learned its rules by watching
+## 🔎 4. Society: the clan that learned its rules by watching
 
 **Three relations to dragons**, all in the entry: *"Some of us follow them as
 our rulers, and some of us as masters, and some of us don't follow them
@@ -127,7 +127,7 @@ Dragon school without a subclass, and keeps the rule that nobody explains.
 
 ---
 
-## 5. Culture and registers
+## 🔒 5. Culture and registers
 
 **Japan.** Katana, yari, folded steel, lacquered silver (Materials). The
 codified clan society, the garden warrior, the *matagi* bear-hunters
@@ -167,7 +167,7 @@ hearth. Repair: War's *"Life is a long battle.."* carries a double stop.
 
 ---
 
-## 6. Metaphysics: the Dragonborn and the classes that touch the Ascending
+## 🔎 6. Metaphysics: the Dragonborn and the classes that touch the Ascending
 
 The Dragon canon runs through more classes than any other principle in the
 setting, and the Dragonborn is where they all land.
@@ -200,7 +200,7 @@ See [Celestials.md](Celestials.md) §6.
 
 ---
 
-## 7. Backgrounds
+## 🔎 7. Backgrounds
 
 - **Dragon Cultist.** The species' own background and its failure case (§4).
   The cultist Dragonborn is the one who could ask the dragon directly and
@@ -237,7 +237,7 @@ See [Celestials.md](Celestials.md) §6.
 
 ---
 
-## 8. Decisions log
+## 🔒 8. Decisions log
 
 **Standing (canon)**
 
@@ -272,7 +272,7 @@ See [Celestials.md](Celestials.md) §6.
 
 ---
 
-## 9. Lines
+## 🚧 9. Lines
 
 *Proposals. Second person, the clan's plain register (the entry's "we" becomes
 the sheet's "you" in the traits), no proper nouns, no em-dashes. The Breath
@@ -290,7 +290,7 @@ wings came with leaving, and stops.
 
 ---
 
-## 10. Pointers
+## 🧾 10. Pointers
 
 - **Dragon canon**: add the Couatl and the Ascendant Dragon's Order slot.
 - **Goliath page**: dragon versus giant; the slayer's words.
@@ -300,7 +300,7 @@ wings came with leaving, and stops.
 
 ---
 
-## 12. Breath Weapon
+## 🔎 12. Breath Weapon
 
 The one trait that opens on a rule with no line of its own:
 

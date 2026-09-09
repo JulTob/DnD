@@ -1,6 +1,6 @@
 # 📜 The Official Backgrounds
 
-> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+> 🚧 **In flow.** 2 of 8 chapters are still proposals. 🔒 0 · 🧾 1 · 🔎 5 · 🚧 2
 
 *Wiki entry for the design team. The sixteen 2024 Player's Handbook backgrounds
 as the project carries them, what they lack against the custom set, and a
@@ -14,7 +14,7 @@ of every class page.*
 
 ---
 
-## 1. The problem, measured
+## 🔎 1. The problem, measured
 
 Across the class pages, forty-nine Characters were generated. The official
 backgrounds appeared on the sheets of the emptiest classes most: the Paladin
@@ -42,7 +42,7 @@ half gift and half debt. The Inquisitor's runs to four hundred words and ends
 
 ---
 
-## 2. The sixteen, as the mechanics already describe them
+## 🔎 2. The sixteen, as the mechanics already describe them
 
 | Background | Abilities | Skills | Tool | Origin feat | Hook title (current) |
 |---|---|---|---|---|---|
@@ -67,7 +67,7 @@ The mechanics are right and stay. The text is what is owed.
 
 ---
 
-## 3. The organising principle: the officials are the institutional versions
+## 🔎 3. The organising principle: the officials are the institutional versions
 
 Several officials already have a custom twin covering the same ground: Soldier
 and Sellsword; Criminal and Renegade; Acolyte and Inquisitor; Sage and
@@ -91,7 +91,7 @@ thing an institution's member has that a loner does not.
 
 ---
 
-## 4. Four drafts
+## 🚧 4. Four drafts
 
 *House rules: second person, concrete, the turn in the third paragraph, a
 bold-titled hook that costs something, no em-dashes, no proper nouns. The
@@ -221,7 +221,7 @@ mechanics stay exactly as the table gives them. Proposals.*
 
 ---
 
-## 5. Angles for the other twelve
+## 🔎 5. Angles for the other twelve
 
 One line each: the institution, the turn, the hook's cost.
 
@@ -271,7 +271,7 @@ One line each: the institution, the turn, the hook's cost.
 
 ---
 
-## 6. Repairs and decisions
+## 🔎 6. Repairs and decisions
 
 **Repairs**
 
@@ -290,7 +290,7 @@ One line each: the institution, the turn, the hook's cost.
 
 ---
 
-## 7. Pointers
+## 🧾 7. Pointers
 
 - **Cleric page §8**: where the finding was first made.
 - **Human page**: the institutions as the Human's principle.
@@ -300,7 +300,7 @@ One line each: the institution, the turn, the hook's cost.
 
 ---
 
-## 8. The other twelve, drafted
+## 🚧 8. The other twelve, drafted
 
 *Same house rules as §4: second person, concrete, the turn in the third
 paragraph, a bold-titled hook that costs something, no em-dashes, no proper

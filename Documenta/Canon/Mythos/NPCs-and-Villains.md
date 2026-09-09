@@ -1,6 +1,6 @@
 # 🎭 NPCs and Villains: the other side of the table
 
-> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+> 🚧 **In flow.** 1 of 8 chapters are still proposals. 🔒 1 · 🧾 2 · 🔎 4 · 🚧 1
 
 *Wiki entry for the design team. The NonPlayer side has three engines: the
 live summoner the app calls (`Map_of_NonPlayer_Generation`, running from
@@ -16,7 +16,7 @@ legacy NPCs, and the villain sourcebook in the project's book folder.*
 
 ---
 
-## 1. State of the engines (report, not repair)
+## 🔎 1. State of the engines (report, not repair)
 
 *Framing, appended after reading Decree 0004: the first publish is the Player
 Character generator, and "NonPlayer Characters, NPC lists, Dungeon Master
@@ -52,7 +52,7 @@ society shouldn't determine one's access to what is right."*).
 
 ---
 
-## 2. The catalogue
+## 🧾 2. The catalogue
 
 Twenty-five kinds in `race_weights` (Aberration, Aven, Beast, Beastfolk,
 Catfolk, Celestial, Construct, Dragon, Dwarf, Elemental, Elf, Fey, Fiend,
@@ -127,7 +127,7 @@ page asks for ("the Penance Wraith is the one that is still apologising").
 
 ---
 
-## 3. Archetypes and backgrounds: two vocabularies
+## 🔎 3. Archetypes and backgrounds: two vocabularies
 
 `Archetypes` (43) mixes the thirteen Guilds with roles (*Artist, Commoner,
 Crafter, Merchant, Mentor, Scholar*) and villain roles (*Bandit, Cultist,
@@ -144,7 +144,7 @@ make one.
 
 ---
 
-## 4. Personality: 4,209 lines, gated by alignment
+## 🔎 4. Personality: 4,209 lines, gated by alignment
 
 `Map_of_Personality` holds introductions, 335 plot hooks, traits and ideals.
 The gates are alignment (Lawful, Chaotic, Good, Evil, Neutral) and a handful of
@@ -195,7 +195,7 @@ that despises worship.
 
 ---
 
-## 5. The Dungeon Master Companion
+## 🔎 5. The Dungeon Master Companion
 
 The Adventure oracle is well shaped: one BBEG ("the DM Character; villain,
 Quest Master, guardian, or other roles are equally valid; the actuators do not
@@ -215,7 +215,7 @@ may print.
 
 ---
 
-## 6. Proposals
+## 🚧 6. Proposals
 
 1. **Restore the NonPlayer lane from source**, then the `Size` call. Until
    then the NPC side of the app is dark, and this page's other proposals wait.
@@ -232,7 +232,7 @@ may print.
 
 ---
 
-## 7. Decisions log
+## 🔒 7. Decisions log
 
 **Standing**: the Adventure oracle's shape (BBEG, Area, Lair, six Themes); the
 undead sub-table; the Fiend docstring's two belief axes; the per-people fiends.
@@ -244,7 +244,7 @@ Bloodline* and *Half-Angel* survive as NPC kinds at all.
 
 ---
 
-## 8. Pointers
+## 🧾 8. Pointers
 
 - **Celestials page**: the Ideals, the Descents, the antagonist shapes an NPC
   Celestial should be drawn from.

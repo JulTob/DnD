@@ -34,14 +34,14 @@ lore is touched.*
 | Q-0032 | Do the Orc and the Halfling receive culture keys in the gear map, and which: for the Orc `kirghiz` with `western` as legend, `scythian` beside it, or `pampa`; for the Halfling `provence` and `flanders` with `pastoral`, or one of them? (Draft-Tables §E) | Mythos review | Lorekeeper, Design-Team, Workshop (Artificer) | — | 🕓 proposed |
 | Q-0033 | Where does Euterpe sit: Mercy's second Muse, the Muse of the Descents, or unassigned on purpose? (Draft-Tables §F; Celestials) | Mythos review | Lorekeeper, Understanding (Bard), Design-Team | — | 🕓 proposed |
 
-## Not questions: repairs
+## 🔎 Not questions: repairs
 
 Rows A, B, C and D of the Repairs Ledger are defects against existing Decrees
 and Canon (Decree 0002 on Dice, the Feature-Text canon on open-choice language,
 the replay contract). They need a Questa each, not a Dialog, and section F of
 the ledger names the Questae that already exist.
 
-## What the Mythos pages already record as decided
+## 🔎 What the Mythos pages already record as decided
 
 For the avoidance of re-asking: the Aasimar's three markers and no host-culture
 draw; Dance as Freedom's Muse; the Barbarian as living true to an emotion;

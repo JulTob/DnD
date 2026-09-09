@@ -1,6 +1,6 @@
 # 🗝️ Rogue: the Exact Moment, read against the whole setting
 
-> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+> 🚧 **In flow.** 2 of 10 chapters are still proposals. 🔒 1 · 🧾 2 · 🔎 5 · 🚧 2
 
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. No
 Dialog exists for the Rogue, no register was decided, and no text survives. This
@@ -21,7 +21,7 @@ project.
 
 ---
 
-## 1. What a Rogue player is handed today
+## 🧾 1. What a Rogue player is handed today
 
 Four sheets (Human Thief, Elf Assassin, Gnome Arcane Trickster, Tiefling
 Soulknife). No class text, no archetype text, *Expertise* says "Choose two"
@@ -32,7 +32,7 @@ prose the Gnome received that sounded like a person.
 
 ---
 
-## 2. The core fantasy: the exact moment, taken
+## 🔒 2. The core fantasy: the exact moment, taken
 
 **Candidate A, the thief.** Bilbo the burglar, Lupin, Locke Lamora. Real, and
 the Thief archetype's own; at class level it explains Fast Hands and nothing
@@ -72,7 +72,7 @@ sentence.
 
 ---
 
-## 3. The register: the picaresque
+## 🔎 3. The register: the picaresque
 
 the project's rule is one register per class, and the set so far runs chant,
 training memoir, shonen arc, warm scripture, the oath remembered, the terms,
@@ -98,7 +98,7 @@ a corner of the world").
 
 ---
 
-## 4. Wells, on the culture keys the setting already holds
+## 🧾 4. Wells, on the culture keys the setting already holds
 
 **The Treasure of Rhampsinitus** (`egypt`, Humans; Herodotus II.121). The
 oldest heist on record: two brothers rob the pharaoh's treasury by a secret
@@ -156,7 +156,7 @@ guild lives (§5).
 
 ---
 
-## 5. The Rogue inside the setting's metaphysics
+## 🔎 5. The Rogue inside the setting's metaphysics
 
 **The Veil domain is the Rogue's Order.** *"There is a mark chalked low on
 walls in every city, and it tells you which door is safe tonight."* Its four
@@ -205,7 +205,7 @@ Levantine key is ever playable. Keep the kunai out of the Rogue's gear theme.
 
 ---
 
-## 6. Relationships: species × Rogue
+## 🔎 6. Relationships: species × Rogue
 
 | People | The seed | Archetype | Note |
 |---|---|---|---|
@@ -222,7 +222,7 @@ Levantine key is ever playable. Keep the kunai out of the Rogue's gear theme.
 
 ---
 
-## 7. Relationships: backgrounds × Rogue
+## 🔎 7. Relationships: backgrounds × Rogue
 
 - **Gambler.** *"Gambling has nothing to do with luck… You were counting."*
   ✅✅ Reliable Talent as a background: nine or lower is a ten because you were
@@ -284,7 +284,7 @@ Levantine key is ever playable. Keep the kunai out of the Rogue's gear theme.
 
 ---
 
-## 8. Flags
+## 🔎 8. Flags
 
 ### ✅ Singular, and to be protected
 
@@ -310,7 +310,7 @@ Levantine key is ever playable. Keep the kunai out of the Rogue's gear theme.
 
 ---
 
-## 9. Drafts
+## 🚧 9. Drafts
 
 *House rules: second person; the picaresque's tone (wry, unsentimental, never
 sorry); no proper nouns; no em-dashes; no open choices. The device: each text
@@ -421,7 +421,7 @@ It is not steel and it is not magic. It is you, sharpened. You were always sharp
 
 ---
 
-## 10. Threads to pull in later cycles
+## 🚧 10. Threads to pull in later cycles
 
 - **Registers**: record the picaresque as the Rogue's, beside the others, in
   one place (a page on the registers per Guild would serve the whole roster).

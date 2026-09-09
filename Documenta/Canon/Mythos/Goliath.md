@@ -1,6 +1,6 @@
 # 🏔️ Goliath
 
-> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+> 🚧 **In flow.** 1 of 11 chapters are still proposals. 🔒 4 · 🧾 3 · 🔎 3 · 🚧 1
 
 *Wiki entry for the design team. Deep lore and settled direction, not page text.
 Compiled 2026-09-08 from the Goliath kit and its six Giant heritages, the species
@@ -14,7 +14,7 @@ Arthur ruling), the class analyses and the design notes on the Aasimar page.*
 
 ---
 
-## 1. Where the Goliath lives in the code
+## 🧾 1. Where the Goliath lives in the code
 
 | What | Where | State |
 |---|---|---|
@@ -28,7 +28,7 @@ Arthur ruling), the class analyses and the design notes on the Aasimar page.*
 
 ---
 
-## 2. Origin: the First Ones
+## 🔒 2. Origin: the First Ones
 
 *"Giants manifested before the first things. And Giants are your ancestors.
 Before anyone had a word for Winter, she had a name and a temper. Your
@@ -65,7 +65,7 @@ never lighter."
 
 ---
 
-## 3. The comparative: Greek in myth, Roman in method
+## 🔎 3. The comparative: Greek in myth, Roman in method
 
 The Celestials and the Giants are the only peoples who hold Greece and Rome as
 *identity*; everyone else inherits them faintly. They do not divide the
@@ -91,7 +91,7 @@ before it is anything else.
 
 ---
 
-## 4. History: the greater they fall
+## 🧾 4. History: the greater they fall
 
 **Arthur belongs to the Giants.** Early Arthur (`arthuriana`) is what the
 legion becomes once the legion has gone: a washed and half-remembered story of
@@ -130,7 +130,7 @@ Paladin is the roster's most native pairing after the Goliath Barbarian.
 
 ---
 
-## 5. Culture and registers
+## 🔒 5. Culture and registers
 
 **Sparta**: the agoge (the Fighter's training, the Champion's laurel), the
 phalanx that marched to a flute (Tyrtaeus: the Goliath Valor Bard), the krypteia
@@ -167,7 +167,7 @@ patronymic, which is the Elves' key.
 
 ---
 
-## 6. Metaphysics: duty, not might
+## 🔒 6. Metaphysics: duty, not might
 
 **The Goliath entry asks three classes' questions.** *"Do you respect and
 protect the land? Do you rage with the storm? Or do you observe the cycles of
@@ -200,7 +200,7 @@ of it" in the Goliath's mouth.
 
 ---
 
-## 7. The classes: the favour in each
+## 🔎 7. The classes: the favour in each
 
 | Class | The Goliath in it |
 |---|---|
@@ -219,7 +219,7 @@ of it" in the Goliath's mouth.
 
 ---
 
-## 8. Backgrounds
+## 🔎 8. Backgrounds
 
 - **Guardian.** "The wall between the weak and the wolves." Duty as a job; the
   Goliath Guardian is the phalanx's one shield.
@@ -242,7 +242,7 @@ of it" in the Goliath's mouth.
 
 ---
 
-## 9. Decisions log
+## 🔒 9. Decisions log
 
 **Decided**
 
@@ -267,7 +267,7 @@ of it" in the Goliath's mouth.
 
 ---
 
-## 10. Lines
+## 🚧 10. Lines
 
 *The Goliath's trait lines exist and are among the best on the roster ("made
 smaller than your ancestors, never lighter"). Listed as the reference; the
@@ -282,7 +282,7 @@ proposed.*
 
 ---
 
-## 11. Pointers
+## 🧾 11. Pointers
 
 - **Celestials page**: the comparative; the war for the heavens.
 - **Paladin page**: the Palatine.

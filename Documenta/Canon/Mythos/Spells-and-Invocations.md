@@ -1,6 +1,6 @@
 # ✨ Spells and Invocations: what a caster knows, and why
 
-> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+> 🔒 **Settled.** No chapter is still in flow. 🔒 1 · 🧾 2 · 🔎 5
 
 *Wiki entry for the design team. `AtlasMagia/Lodge_of_Spells.py` holds the
 spells, `AtlasMagia/SpellsKit.py` their Tags, `Grimoire_of_Spellcasters.py`
@@ -15,7 +15,7 @@ casters (seed 42, levels 5 and 7).*
 
 ---
 
-## 1. Inventory
+## 🧾 1. Inventory
 
 | Layer | Count | State |
 |---|---|---|
@@ -28,7 +28,7 @@ casters (seed 42, levels 5 and 7).*
 
 ---
 
-## 2. How spells are chosen
+## 🔎 2. How spells are chosen
 
 `Spellcaster.available_spells` takes the class list up to the highest slot
 level, adds the Order's spells if the Character swore one, and
@@ -52,7 +52,7 @@ from a named Dice Bag. ✅ This is what every caster should do.
 
 ---
 
-## 3. What the draw should know
+## 🔎 3. What the draw should know
 
 *Decree 0005 §1 already states the principle: "A build's affinity is known before
 anything is drawn… Affinity therefore weights the selection of what the
@@ -84,7 +84,7 @@ Origin's spells are that body's vocabulary.
 
 ---
 
-## 4. The Warlock's clauses
+## 🔎 4. The Warlock's clauses
 
 ✅ **The design is right.** Twenty-eight invocations as seven declared shapes,
 prerequisites as Tags ("Tag membership is the question TagKit exists to
@@ -151,7 +151,7 @@ the same whoever signed:
 
 ---
 
-## 5. The spellcasting section itself
+## 🔎 5. The spellcasting section itself
 
 Each caster's section opens on a sentence, and they are the weakest
 sentences on the sheet: "As a student of arcane magic, you have learned to
@@ -181,7 +181,7 @@ preference for plain Unicode over hosted webfonts applies here; undecided.
 
 ---
 
-## 6. Repairs
+## 🔎 6. Repairs
 
 - Bard pool capped by slot level.
 - Sorcerer subclass spells added (Draconic, Clockwork, Aberrant, Wild Magic).
@@ -195,7 +195,7 @@ preference for plain Unicode over hosted webfonts applies here; undecided.
 
 ---
 
-## 7. Decisions log
+## 🔒 7. Decisions log
 
 **Standing**: the Lodge's rulebook register for spell texts; the invocation
 shapes; the Warlock's patron-keyed spells; uniform draw through the
@@ -209,7 +209,7 @@ eleven opening lines (§5).
 
 ---
 
-## 8. Pointers
+## 🧾 8. Pointers
 
 - **Wizard page**: the class with no line of its own; the list as the line.
 - **Sorcerer page**: the Origin's spells as the body's vocabulary.

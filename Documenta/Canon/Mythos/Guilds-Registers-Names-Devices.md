@@ -1,6 +1,6 @@
 # 🗂️ The Guilds: registers, names, devices, seats
 
-> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+> 🔒 **Settled.** No chapter is still in flow. 🔒 0 · 🧾 1 · 🔎 4
 
 *Wiki entry for the design team. One table for what the thirteen class pages
 established, so the next author of any class text starts from the whole set.
@@ -10,7 +10,7 @@ follow the law the Warlock kit demonstrated.*
 
 ---
 
-## 1. The table
+## 🔎 1. The table
 
 | Guild | Register (how it sounds) | Device (what the text *does*) | Theology seat | The word, and who says it | Culture register | Text on the sheet today |
 |---|---|---|---|---|---|---|
@@ -30,7 +30,7 @@ follow the law the Warlock kit demonstrated.*
 
 ---
 
-## 2. The rules the table implies
+## 🔎 2. The rules the table implies
 
 1. **One register per class, chosen on purpose**. Thirteen registers,
    no two alike, and the Rogue's was the one gap (the picaresque, proposed).
@@ -65,7 +65,7 @@ follow the law the Warlock kit demonstrated.*
 
 ---
 
-## 3. The signature objects
+## 🔎 3. The signature objects
 
 Eight Guilds have an object that *is* the fantasy, and one Guild has it drawn
 on the sheet.
@@ -87,7 +87,7 @@ losable by rule) and eight consumers: a Kit, when wanted it.
 
 ---
 
-## 4. The leaks
+## 🔎 4. The leaks
 
 The 2014 layer in `Map_of_Classes/Training/*.py` still reaches the sheet for:
 the Monk (four Warrior blurbs, third person), the Paladin (Abjure Enemy with a
@@ -102,7 +102,7 @@ that shares a page with "see PHB p145" is not the fantasy.
 
 ---
 
-## 5. Pointers
+## 🧾 5. Pointers
 
 - Every class page, §"Drafts", for the texts.
 - **Feature-Text.md**: add the device law and the signature-object model.

@@ -1,6 +1,6 @@
 # 🐎 Orc
 
-> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+> 🚧 **In flow.** 1 of 11 chapters are still proposals. 🔒 4 · 🧾 3 · 🔎 3 · 🚧 1
 
 *Wiki entry for the design team. Deep lore and settled direction, not page text.
 Compiled 2026-09-08 from the Orc kit, the species entry, `AtlasNomina/Races/Orc.py`,
@@ -13,7 +13,7 @@ notes.*
 
 ---
 
-## 1. Where the Orc lives in the code
+## 🧾 1. Where the Orc lives in the code
 
 | What | Where | State |
 |---|---|---|
@@ -26,7 +26,7 @@ notes.*
 
 ---
 
-## 2. Origin: the wind path
+## 🔒 2. Origin: the wind path
 
 Each people has one organising idea. The Orc's is the only one that is a
 *route* rather than a substance: the Dwarf is a metal, the Celestial an Ideal,
@@ -45,7 +45,7 @@ does not end at nightfall: a body shaped for the long ride.
 
 ---
 
-## 3. History: nobody asked
+## 🧾 3. History: nobody asked
 
 *"Your people were on the plains first. Then the dwarves came for the gold
 underneath, the humans came to call it discovery, and the elves promised trade
@@ -70,7 +70,7 @@ must not.
 
 ---
 
-## 4. Society: riders
+## 🔎 4. Society: riders
 
 **The camp.** No camp is safe, so the camp moves. The Orc entry's closing
 question is "why {name} left the Orc Camp, and what would bring them back": the
@@ -96,7 +96,7 @@ vocabulary is nowhere.
 
 ---
 
-## 5. Culture: the missing keys
+## 🔒 5. Culture: the missing keys
 
 ⚠️ **The Orc has no culture keys.** Every playable people except the Orc and the
 Halfling has a row in the gear map; the Orc draws a plain Longsword where a
@@ -124,7 +124,7 @@ and sinew and felt-bound iron sit under `mongol`.
 
 ---
 
-## 6. Metaphysics: the storm and the path
+## 🔒 6. Metaphysics: the storm and the path
 
 **Rage's second cosmology.** *"If we fall, we carry on"* is Relentless Rage in
 nine words, and the storm is the Orc's Rage. The rider carried by the storm
@@ -148,7 +148,7 @@ the Orc Sea Druid is the species' happiest pairing and the dice found it.
 
 ---
 
-## 7. The classes: the ride in each
+## 🔎 7. The classes: the ride in each
 
 | Class | The Orc in it |
 |---|---|
@@ -167,7 +167,7 @@ the Orc Sea Druid is the species' happiest pairing and the dice found it.
 
 ---
 
-## 8. Backgrounds
+## 🔎 8. Backgrounds
 
 - **Ice Nomad.** *"Your people do not stay; they follow: the herds, the thaw,
   the old roads."* The Orc's background in all but the ice; the two texts
@@ -188,7 +188,7 @@ the Orc Sea Druid is the species' happiest pairing and the dice found it.
 
 ---
 
-## 9. Decisions log
+## 🔒 9. Decisions log
 
 **Decided**
 
@@ -210,7 +210,7 @@ the Orc Sea Druid is the species' happiest pairing and the dice found it.
 
 ---
 
-## 10. Lines
+## 🚧 10. Lines
 
 *The three trait lines exist and are the reference. No additions.*
 
@@ -222,7 +222,7 @@ the Orc Sea Druid is the species' happiest pairing and the dice found it.
 
 ---
 
-## 11. Pointers
+## 🧾 11. Pointers
 
 - **Cultural Inspirations**: the Orc's keys (open).
 - **Ranger, Druid, Bard, Barbarian pages**: the steppe readings.
