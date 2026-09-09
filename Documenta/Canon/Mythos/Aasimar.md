@@ -1,7 +1,15 @@
 # ✨ Aasimar
-> The Mortal Angel
->
+##  The Mortal Angel
+---
 > 📖 **In flow.** 1 of 13 chapters are still proposals. 📜 5 · 📚 2 · 📔 5 · 📖 1
+
+> - 📕 **inherited from the 2024 rules.** Moving it costs rules compatibility.
+> - 📙 **an aesthetic change.** The same rule wearing our name and look.
+> - 📒 **a rule we changed.** A house rule, and it already cost compatibility.
+> - 📘 **supportive lore.** It holds a rule or a core element up. 
+> - 📗 **deep lore.** Design that supports the fantasy rather than a rule.
+Moving any of these takes a Questa, an Agora and a Decree.
+----
 
 *Wiki entry for the design team. Deep lore and settled direction, not page text.
 Compiled from the class analyses and the design notes. Where a decision is
@@ -20,11 +28,7 @@ companion entry for the Celestials themselves is [Celestials](Celestials.md).*
 shape for every element page. The books say where a statement came from and
 what changing it would cost.*
 
-> 📕 **inherited from the 2024 rules.** Moving it costs rules compatibility.
-> 📙 **an aesthetic change.** The same rule wearing our name and look.
-> 📒 **a rule we changed.** A house rule, and it already cost compatibility.
-> 📘 **supportive lore.** It holds a rule or a core element up. Moving it takes a question, a Dialog and a Decree.
-> 📗 **deep lore.** Design that supports the fantasy rather than a rule. No rule notices a change; the setting does.
+
 
 ### The rules as given
 
@@ -45,15 +49,17 @@ what changing it would cost.*
 > once per Long Rest, **choosing one of three options each time you transform**.
 > Once on each of your turns while transformed, deal extra damage equal to your
 > Proficiency Bonus, of the type the chosen option names.
-> **Heavenly Wings**: a Fly Speed equal to your Speed. Radiant.
-> **Inner Radiance**: Bright Light 10 feet and Dim Light 10 beyond it; radiant
-> damage to creatures within 10 feet at the end of each of your turns. Radiant.
-> **Necrotic Shroud**: creatures other than your allies within 10 feet make a
-> Charisma save or are Frightened until the end of your next turn. Necrotic.
 >
-> 📙 **Talarian Wings** is our name for **Heavenly Wings**. The rule is
-> unchanged; only the name and the look are ours. Anyone reading from the
-> published book should look under the old name.
+> 📙 **Talarian Wings** [renames **Heavenly Wings**]: until the transformation
+> ends you have a Fly Speed equal to your Speed. Radiant.
+>
+> 📕 **Inner Radiance**: you shed Bright Light in a 10-foot radius and Dim Light
+> for 10 feet beyond it, and at the end of each of your turns each creature
+> within 10 feet takes radiant damage equal to your Proficiency Bonus. Radiant.
+>
+> 📕 **Necrotic Shroud**: creatures other than your allies within 10 feet must
+> succeed on a Charisma saving throw or have the Frightened condition until the
+> end of your next turn. Necrotic.
 
 No rule of the Aasimar has been changed, so this page carries no 📒.
 

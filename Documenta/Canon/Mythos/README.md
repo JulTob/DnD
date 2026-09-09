@@ -186,7 +186,7 @@ that element's page, next to the reading they produced.
 | Marker | Means | Argued with |
 |---|---|---|
 | 📕 | **Inherited.** The 2024 rules, unchanged. | Not without leaving rules compatibility, which is the promise the generator makes to a table that has to play the result. |
-| 📙 | **Aesthetic change.** The same rule wearing our name and look. | Nothing mechanical. It carries the translation back to the published name. |
+| 📙 | **Aesthetic change.** The same rule wearing our name and look. Written as *Our Name* [renames *Published Name*]: the rule, so the entry names the rule and presents it. | Nothing mechanical. The bracket is the translation back to the published name. |
 | 📒 | **A rule we changed.** A house rule. | It already cost compatibility. Say so where it happens. |
 | 📘 | **Supportive lore.** Lore holding a rule or a core element up. | A question, a Dialog and a Decree. Remove it and a mechanic is left with nothing to say for itself. |
 | 📗 | **Deep lore.** Design supporting the fantasy rather than a rule. | No rule notices; the setting does. Change it freely and keep the fantasy coherent. |
