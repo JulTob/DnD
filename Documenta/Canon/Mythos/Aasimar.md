@@ -10,6 +10,78 @@ Compiled 2026-09-08 from the class analyses and Julio's notes; where Julio has d
 
 ---
 
+## 0. Rules
+
+*The fixed points. Everything after this chapter is our interpretation of what
+is written here, and may be argued with. This chapter may not: 📕 is inherited
+from the 2024 rules and moving it costs rules compatibility; ⚖️ is ratified by
+this project and moving it takes a question, a Dialog and a Decree.*
+
+> 📕 **Creature Type** Humanoid. **Size** Medium or Small, chosen. **Speed** 30 feet.
+>
+> 📕 **Darkvision** 60 feet.
+>
+> 📕 **Celestial Resistance.** Resistance to Necrotic damage and Radiant damage.
+>
+> 📕 **Healing Hands.** As a Magic action, touch a creature and roll a number of
+> d4s equal to your Proficiency Bonus. It regains that many Hit Points. Once per
+> Long Rest.
+>
+> 📕 **Light Bearer.** You know the Light cantrip. Charisma is your spellcasting
+> ability for it.
+>
+> 📕 **Celestial Revelation** (level 3). Transform as a Bonus Action for 1 minute,
+> once per Long Rest, **choosing one of three options each time you transform**.
+> Once on each of your turns while transformed, deal extra damage equal to your
+> Proficiency Bonus, of the type the chosen option names.
+> **Heavenly Wings**: a Fly Speed equal to your Speed. Radiant.
+> **Inner Radiance**: Bright Light 10 feet and Dim Light 10 beyond it; radiant
+> damage to creatures within 10 feet at the end of each of your turns. Radiant.
+> **Necrotic Shroud**: creatures other than your allies within 10 feet make a
+> Charisma save or are Frightened until the end of your next turn. Necrotic.
+>
+> ⚖️ **The spark has no sender and no errand.** The Ideals are prior to the gods
+> and do not ask for anything (`Celestials`, and §2 below).
+>
+> ⚖️ **Three markers, as a subculture, and no host-culture draw.** `athens`,
+> `vatican`, `sangha`; legend register `crusader`. The Aasimar and the Tiefling
+> stay distinct peoples (Julio, 2026-09-08).
+>
+> ⚖️ **Dance is Freedom's Muse** (Julio, 2026-09-08).
+>
+> ⚖️ **Darkvision prints with a line**, not as a bare chip (Julio, 2026-09-08).
+
+### What the rules force, and what we chose
+
+The Revelation is the demanding one. It forces a single body that can sprout
+wings, shed searing light and terrify a room, and that must pick between them
+at each transformation.
+
+**Our interpretation is two organs rather than three powers.** The **talaria**,
+small vestigial wings sitting only where a wing could take a body's weight,
+each folding away as a seam and catching the light like a metal. The
+**aureola**, a halo glowing like a stone, in a shape the Ideal lends.
+
+**What that buys beyond the rule.** The wings *grow* instead of appearing from
+nowhere, because they were always there. Necrotic Shroud uses the same organ
+(*"your talaria spread into flightless wings"*), so the third option belongs to
+the same body instead of being an unrelated third power. Two of the three
+Revelations therefore share one physiology. And the talaria's metals nod at the
+Dwarven soul-metals while confirming nothing, an ambiguity the Dwarf page also
+uses.
+
+⚠️ **What breaks if a later hand removes the talaria as decoration.** Heavenly
+Wings becomes wings from nowhere. Necrotic Shroud's own sentence stops meaning
+anything. The Revelation set loses its unity. The Dwarf ambiguity goes with it.
+The talaria are not a flourish; they are the body the rules were given.
+
+**Free, and yours to change.** Which metal a given character's talaria catch,
+which stone the aureola glows like, where on the body the talaria sit (heels,
+forearms, shoulder blades, the small of the back), and the roster of Descent
+names. None of these carries a rule.
+
+---
+
 ## 1. Where the Aasimar lives in the code
 
 | What | Where | State |

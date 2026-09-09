@@ -126,8 +126,9 @@ hostile read there tells you the most about whether the rest is trustworthy.
 ## 4b. The four layers
 
 Before objecting that a detail is arbitrary, check which layer it sits in.
-[Fixed-Points](Fixed-Points.md) sorts every element into four: a **fixed point**
-(inherited from the 2024 rules, or ratified by a project Decree), an
+Each element page opens with a `0. Rules` chapter (see the README) sorting its
+content into four layers: a **fixed point**
+(marked 📕 inherited from the 2024 rules, or ⚖️ ratified by a project Decree), an
 **interpretation** (lore chosen so a fixed point has a body, load-bearing and
 replaceable but not deletable), a **free invention** (ours, with no mechanic
 underneath, and the place a future editor is licensed to play), and a **sugar
