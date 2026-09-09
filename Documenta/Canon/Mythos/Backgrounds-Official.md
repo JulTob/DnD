@@ -1,5 +1,7 @@
 # 📜 The Official Backgrounds
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. The sixteen 2024 Player's Handbook backgrounds
 as the project carries them, what they lack against the custom set, and a
 treatment. Compiled 2026-09-08 from `BackgroundKit.py` and the generated sheets
@@ -93,7 +95,7 @@ thing an institution's member has that a loner does not.
 
 *House rules: second person, concrete, the turn in the third paragraph, a
 bold-titled hook that costs something, no em-dashes, no proper nouns. The
-mechanics stay exactly as the table gives them. Proposals for Julio's hand.*
+mechanics stay exactly as the table gives them. Proposals.*
 
 ### Soldier
 
@@ -279,7 +281,7 @@ One line each: the institution, the turn, the hook's cost.
 - The Hermit's "Discovery" and the Soldier's "Military Rank" are 2014 feature
   names used as hook titles. Fine as titles; the drafts above keep them.
 
-**Open (Julio's)**
+**Open (the project's)**
 
 - Whether the officials take the institutional principle (§3).
 - Whether the Wayfarer folds into the Vagabond.
@@ -298,11 +300,11 @@ One line each: the institution, the turn, the hook's cost.
 
 ---
 
-## 8. The other twelve, drafted (appended 2026-09-08)
+## 8. The other twelve, drafted
 
 *Same house rules as §4: second person, concrete, the turn in the third
 paragraph, a bold-titled hook that costs something, no em-dashes, no proper
-nouns. Mechanics unchanged from §2. Proposals for Julio's hand; the angles in
+nouns. Mechanics unchanged from §2. Proposals for the project's hand; the angles in
 §5 are what these grew from.*
 
 ### Artisan

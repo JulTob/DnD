@@ -1,8 +1,10 @@
 # 😈 Tiefling
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. Deep lore and settled direction, not page text.
 Compiled 2026-09-08 from `Tieflings-and-the-Shift.md`, the Tiefling kit, the
-class analyses and Julio's notes on the Aasimar page. Where Julio has decided,
+class analyses and the project's notes on the Aasimar page. Where a decision is settled,
 the decision is stated as such; where this page proposes, it says so. The other
 end of this entry is [Aasimar.md](Aasimar.md).*
 
@@ -16,7 +18,7 @@ end of this entry is [Aasimar.md](Aasimar.md).*
 
 | What | Where | State |
 |---|---|---|
-| Species entry (Julio's) | `AtlasActorLudi/SpeciesKit/Tieflings/__init__.py` | Shipping. Second person only; no "we" by design. |
+| Species entry | `AtlasActorLudi/SpeciesKit/Tieflings/__init__.py` | Shipping. Second person only; no "we" by design. |
 | Heritages | `Tieflings/Abyssal.py`, `Chthonic.py`, `Infernal.py` | Each carries a `HERITAGE_DESCRIPTION` paragraph (the body) and a spell list. |
 | Traits and rules | `Tieflings/traits.py`, `resolution.py` | Rulebook voice (QST-0094). No inspiration lines on Darkvision, Otherworldly Presence or Fiendish Legacy. |
 | Names | `AtlasNomina/Races/Fiend.py` | Demonology names, and a second pool of *virtue names* (Glory, Honor, Purity, Flame, Sinner). |
@@ -44,7 +46,7 @@ used to hold a shining flame, and that we were the chosen, long before. It's a
 beautiful fantasy."* Egypt is the register for what was there before, being the
 one inspiration the setting had not spent. Never resolve it.
 
-**The shared priesthood** (Julio, 2026-09-08; deep lore). The Aasimar and the
+**The shared priesthood** (the author, 2026-09-08; deep lore). The Aasimar and the
 Tiefling once shared one priesthood. The Aasimar's side separated,
 dichotomised, and rose above the local cultures; the Tiefling's side was left
 holding the horns. The Aasimar's privilege and the Tiefling's exclusion are one
@@ -98,13 +100,13 @@ They pay the fine, or they feed you, or they simply say the word, but not as
 the insult it is: Tiefling… Children in that house are nobody's, and they are
 ours."* A found family, a network, a subculture recognisable on sight.
 
-**The hated minority** (Julio). Against the Aasimar's model minority, the
+**The hated minority**. Against the Aasimar's model minority, the
 Tiefling is the target of hate by default: the emo and the punk to the
 Aasimar's quarterback and cheerleader. Same structure (born to ordinary
 parents, a subculture recognisable across host peoples, "same symbols on
 different hardware"), opposite integration: the Aasimar is praised upward, the
 Tiefling is pushed out. Both stay distinct from each other and from their host
-peoples; there is no host-culture draw for either (Julio, decided).
+peoples; there is no host-culture draw for either.
 
 **The symbols.** `grimdark` is the register: Warglaive, Penitent's Flail,
 Heretic's Star, Oath-Breaker's Knife, Chastening Lash, Witch-Hunter's Poleaxe.
@@ -120,7 +122,7 @@ one word, and the pool already tells it. Protect the second pool; it is the
 species' quietest device.
 
 **Grammar.** The species entry is the only one written in the second person
-alone, and the isolation is in the grammar rather than asserted. Julio's
+alone, and the isolation is in the grammar rather than asserted. the project's
 reading refines the canon's "the only one with no we": the Tiefling is the only
 people whose lack of a "we" is *hostile*. The Aasimar has no species "we"
 either, but the Aasimar's subculture says "we" from above. The Tiefling house
@@ -153,7 +155,7 @@ kind. Deep lore, never on the page: the Tiefling is a strong candidate for a
 real Ascending precisely because nobody handed them a self to be overcome, and
 what they would become is what they always were, read correctly at last.
 
-**Prevention against punishment** (Julio). The Manichaean shift put a
+**Prevention against punishment**. The Manichaean shift put a
 Celestial on the preventing side and a fiend on the punishing side. The
 Tiefling is punished for a reading, which is the Aasimar's prevention seen from
 below. A campaign whose antagonist is a Celestial "installing the Ideal" will
@@ -235,7 +237,7 @@ find the Tiefling in the party is the one it most wants to correct.
 
 ## 9. Decisions log
 
-**Decided (Julio, 2026-09-08)**
+**Decided**
 
 - The Tiefling stays distinct from the Aasimar and from host peoples; no
   host-culture draw. Subculture, recognisable on sight.
@@ -255,7 +257,7 @@ find the Tiefling in the party is the one it most wants to correct.
 - The canon says "all that survives on the page is one sentence about carvings
   nobody can read any more". The current species entry has the crown-horns
   sentence and no carvings sentence. Either the carvings line was lost in a
-  rewrite or the canon should read "one sentence about the crowns". Julio's
+  rewrite or the canon should read "one sentence about the crowns". the project's
   call.
 - The Fiendish Legacy ability is drawn from Intelligence, Wisdom and Charisma
   at random. A Cleric with a Charisma legacy is legal and a little odd; a
@@ -286,7 +288,7 @@ sentence about the fact). No em-dashes.*
 | **Fiendish Legacy: Abyssal** | *The colours move while you sleep. So, some mornings, does what you can do.* |
 | **Fiendish Legacy: Chthonic** | *No fire, no pain. Only the door, and you know which side of it you stand on.* |
 
-The heritage paragraphs (§3) are Julio's and stand as the species' physical
+The heritage paragraphs (§3) are the project's and stand as the species' physical
 voice; the lines above sit under the rules, not in place of the paragraphs.
 
 ---

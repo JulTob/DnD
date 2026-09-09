@@ -1,8 +1,10 @@
 # 🌙 Elf
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. Deep lore and settled direction, not page text.
 Compiled 2026-09-08 from `Elves-and-the-Dreaming.md`, the Elf kit and its five
-lineages, `AtlasNomina/Races/Elf.py`, the old wiki, the class analyses and Julio's
+lineages, `AtlasNomina/Races/Elf.py`, the old wiki, the class analyses and the design
 notes. The Elf canon's first rule governs every line: never explain the Dreaming
 on the page.*
 
@@ -17,7 +19,7 @@ on the page.*
 
 | What | Where | State |
 |---|---|---|
-| Species entry (Julio's) | `AtlasActorLudi/SpeciesKit/Elves/__init__.py` | Shipping. First person plural. Three wars, one word (Elvenkind), and "seven hundred years to be patient in, and you only need one second to shoot." |
+| Species entry | `AtlasActorLudi/SpeciesKit/Elves/__init__.py` | Shipping. First person plural. Three wars, one word (Elvenkind), and "seven hundred years to be patient in, and you only need one second to shoot." |
 | Lineages | `Elves/Wood_Elf.py`, `High_Elf.py`, `Dark_Elf.py`, `Fae_Elf.py`, `Shadow_Elf.py` (`Drow.py` is the Dark Elf's older name) | Each carries a "we" paragraph (the body and the temper) and a lineage spell set. Fae and Shadow Elves are the Lorwyn pair, renamed. |
 | Traits and rules | `Elves/traits.py`, `resolution.py` | The house pattern (QST-0094): an italic line, then the rule. Trance's line: *"Elves are said to be made of the same essence as dream and nightmare. Perhaps there is more than mere poetry to it."* |
 | Names | `AtlasNomina/Races/Elf.py` | Inspirations: Persian, Nordic Fae (Huldufólk), Iceland, Romani, Celtic Ireland. "Th becomes S, T or Z: elves don't show their tongues." White pupils. Society notes in the file header. |
@@ -63,7 +65,7 @@ never more, or it becomes a lecture.
 so four hours of meditation reach it. Why the Shadow Elf is not a villain: the
 nightmare face is the same substance.
 
-**Physical traits are biological** (Julio's reading of the species law): Keen
+**Physical traits are biological** (the species law permits biology): Keen
 Senses, Fey Ancestry, Trance, Darkvision. The Dream shaped the body over
 centuries; the body is what the Character has tonight.
 
@@ -79,7 +81,7 @@ centuries; the body is what the Character has tonight.
 | **Fae Elf** | The crossings; the branch that never came across | Ears "exquisitely long, sometimes as long as our arms"; the most beautiful of elvenkind "even with our charms off" | Polite, friendly, more open to emotion | The Courts |
 | **Shadow Elf** | The Shadow realm, "what was left"; the other branch that never came across | Skin any grey from perfect white to pitch black; eyes all white | Stoic, reflective, analytic: "to discern dream from thought" | The oracles and mystics |
 
-The lineage paragraphs are Julio's and are the species' physical voice. Two
+The lineage paragraphs are the species' physical voice. Two
 things they establish that later prose must keep: the Dark Elf's legend was
 *poisoned by others* (the Drow slander is in-world slander), and the Shadow Elf
 "feels scary at times, but it's home."
@@ -241,7 +243,7 @@ affinity between them (Decree 0005) keeps the word rare without closing a door.
   bloodlines. Change is slow and shared: no elf transforms in a scene, no elf
   transforms alone. The Fae/Fata/Shadow slip once per text, at most.
 
-**Decided (Julio)**
+**Decided**
 
 - The species entry speaks as "we" (`9be3a07` era); the lineage paragraphs
   likewise.
@@ -270,7 +272,7 @@ reference, with one proposal.*
 | **Keen Senses** | *Your elven eyes are sharp and your attention focused.* |
 | **Fey Ancestry** | *The echoes of the Fae still linger in you, letting you see…* |
 | **Trance** | *Elves are said to be made of the same essence as dream and nightmare. Perhaps there is more than mere poetry to it.* |
-| **Wood Elf lineage** | *The woods have always answered your people, and some of that answer stayed with you.* (Julio removed "first": the nativist undertone.) |
+| **Wood Elf lineage** | *The woods have always answered your people, and some of that answer stayed with you.* ("first" was removed: the nativist undertone.) |
 | **Dark Elf lineage** | *The dark taught your people how to survive it, and some of that lesson still answers when you call.* |
 | **High Elf lineage** | *Your people traded with more than merchants, and not everything you brought home was cargo.* |
 | **Fae Elf lineage** | *The crossing into the Feywild left more on you than long ears.* |

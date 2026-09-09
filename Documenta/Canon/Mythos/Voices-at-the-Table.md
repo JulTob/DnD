@@ -1,6 +1,8 @@
 # 🎙 Voices at the Table: five archetypes read one sheet
 
-*A device Julio invited: "agents that embody the archetype, with a personal
+> 🧾 **Record.** A report, an index or a working document, not a specification.
+
+*A device the brief invited: "agents that embody the archetype, with a personal
 unique voice." One generated character, read aloud by five voices whose
 registers the Guild and background pages settled. The critique is real; the
 voices are the test of whether the registers hold when they have to say

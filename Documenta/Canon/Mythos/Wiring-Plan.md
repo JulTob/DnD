@@ -1,5 +1,7 @@
 # 🔌 Wiring Plan: how the drafted lines reach the sheet
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. The Lines Annex holds every inspiration line
 the Mythos pages drafted. The coverage sweep shows the sheet prints a line for
 41% of class Training features and 0% of feats, while 62 of the 63 lineless
@@ -19,8 +21,8 @@ never inferred).
 | Layer | Where the text lives | The shape today | What wiring means |
 |---|---|---|---|
 | **Class Training** | `AtlasLusoris/AtlasOfTraining/Map_of_<Guild>_Training.py` | `"*You don't stay down. You fight.*\n\n"` + rule (Fighter, Barbarian) | Prepend the annex line in that form to each `description`. Templated Features (the Orders' Sign) take it once in the builder. |
-| **Specializations** | `AtlasLusoris/AtlasOfGuilds/<Guild>Kit.py` (`Build_Specialization`) | Barbarian, Fighter, Warlock, Cleric carry prose; nine are bare | The Dialogs' provisional paragraphs (Bard, Cleric, Druid, Monk, Artificer) plus the Guild pages' drafts; wire after Julio's word on each Dialog. |
-| **Species traits** | `AtlasActorLudi/SpeciesKit/<People>/resolution.py` | The line is the plain first sentence of the entry ("Something in you remembers what a body is supposed to feel like…") | Prepend the annex line as the first sentence where the entry opens on a rule. QST-0094 is the lane ("inspiration lines… await Julio"). |
+| **Specializations** | `AtlasLusoris/AtlasOfGuilds/<Guild>Kit.py` (`Build_Specialization`) | Barbarian, Fighter, Warlock, Cleric carry prose; nine are bare | The Dialogs' provisional paragraphs (Bard, Cleric, Druid, Monk, Artificer) plus the Guild pages' drafts; wire after the project's word on each Dialog. |
+| **Species traits** | `AtlasActorLudi/SpeciesKit/<People>/resolution.py` | The line is the plain first sentence of the entry ("Something in you remembers what a body is supposed to feel like…") | Prepend the annex line as the first sentence where the entry opens on a rule. QST-0094 is the lane ("inspiration lines… await the author"). |
 | **Origin feats** | `AtlasLusoris/AtlasOfFeatures/Map_of_Official_Origin_Feats.py` (`DESCRIPTION`) and `FeaturesKit.py` | Skilled and Skillful carry a line; the rest do not; the Dark Gifts carry theirs as docstrings | Move each Dark Gift docstring into its `DESCRIPTION` in the house form; one line per setting feat from the Feats page. |
 | **General feats, ASI** | `AtlasLusoris/AtlasOfFeats/Map_of_General_Feats.py`; `Grimoire_of_Features/__init__.py` (`Feat("Increased Strength", …)`) | Rules only | Prepend the Feats page §4 lines. |
 | **Epic Boons** | `Grimoire_of_Features/__init__.py` lines 303 to 540 (`Map_of_Epic_Boons.py` is empty) | Abbreviated rules | Write the rules out, prepend the Feats page §5 lines; decide which file owns them. |
@@ -29,7 +31,7 @@ never inferred).
 | **Spellcasting openings** | `Grimoire_of_Spellcasters.py` (each class's `__str__`) | "As a student of arcane magic, you have learned to cast spells." | Replace with the Spells page §5 openings. |
 | **Alignment chip** | `AlignmentKit.py` / the sheet's chip | Value only | A chip carries no prose; the nine lines (Sheet page §2) need a small Entry beside the chip, or a tooltip. Design call. |
 | **Story** | `AtlasEpica/Map_of_Stories.py` (`Myth` dict) | Gated `(gate, text)` rows | Add the twenty Origin rows gated on the written backgrounds and ten Outro rows gated on species; cut the contradicting Goals. |
-| **Frame copy** | `app/publish_scope.py`, `app/pages/*.py` | Labels and one lede | Replace the five sentences (Brand page §2) once Julio picks a variation. |
+| **Frame copy** | `app/publish_scope.py`, `app/pages/*.py` | Labels and one lede | Replace the five sentences (Brand page §2) once the author picks a variation. |
 
 **Two rules to keep while wiring.**
 
@@ -60,7 +62,7 @@ is where a user meets the most silence.
 
 Each Questa's test is the coverage sweep re-run on the same seeds: a number
 before, a number after, in the Questa's rationale. The sweep script is in the
-session scratchpad and belongs in `scripts/` once Julio wants it.
+session scratchpad and belongs in `scripts/` once wanted it.
 
 ---
 

@@ -1,5 +1,7 @@
 # 🔥 Sorcerer: the Marked, read against the whole setting
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. No
 Dialog exists for the Sorcerer. The Aasimar and Cleric pages flagged this class
 as a collision with the species law (traits are taught or gifted, never
@@ -40,12 +42,13 @@ when it gets out*, and the sheet cannot say.
 
 **Candidate A, the bloodline.** The dragon-blooded, the child of a god, the
 mutant. Merlin's incubus father; the Nephilim; Harry Potter's "born wizard";
-the 2014 book's own framing. The popular reading, and it fails in this
-setting on the species law: *taught, not inherited* guards against moral
-determinism, and "your blood makes you magic" is one step from "your blood
-makes you good". It also fails on the 2024 text, which moved: Spellcasting
-now opens *"An event in your past left an indelible mark, flooding you with
-raw magic."* An event, not a parent.
+the 2014 book's own framing. The popular reading, and **"born different" is a
+legitimate Sorcerer fantasy in this setting**: the species law guards against
+monoculture and moral determinism, not against biology, and nobody cultures
+themselves into darkvision. A class or a subclass is not a species trait in any
+case, so the question never arises. What weakens the bloodline is not the law
+but the 2024 text, which moved: Spellcasting now opens *"An event in your past
+left an indelible mark, flooding you with raw magic."* An event, not a parent.
 
 **Candidate B, the marked.** Something happened, and afterwards the magic was
 in you the way a fever is in you. Not learned (Wizard), not lent (Warlock),
@@ -269,7 +272,7 @@ Thoughts on the Aberrant list, Fear on the Draconic. The mark sees.
 
 *House rules: second person; sensation before rule; no proper nouns; no
 em-dashes; no open choices. Each Origin text ends on what the body is turning
-into, unnamed. Proposals for Julio's hand.*
+into, unnamed. Proposals.*
 
 ### Class text (new)
 
@@ -390,29 +393,29 @@ Something in you is turning into what looked in. You are trying to find out whet
 
 ---
 
-## 10. Julio's correction (2026-09-08, appended)
+## 10. Synergies, and the open question
 
-Julio, on the Aasimar page: *"The writer of the canon misunderstood the rule.
-The point is not having a monoculture, a planet of hats or a bioessentialist
-culture; not to have biological traits justified by training or culture.
-Darkvision already breaks this stupid rule. You cannot culturise yourself into
-darkvision. Sorcerer is the 'I'm born different' fantasy to an extreme… A class
-or subclass is not a cultural or species trait anyway. Sorcerer may bring
-forward synergies, but the choices are independent."*
+**Synergies are welcome and independent.** The Origin is drawn separately from
+species and background, and where two axes agree the sheet should say so once
+rather than twice: a Dragonborn Draconic Sorcerer draws the **same** ancestry as
+the species (one draw, one colour), the way an Aasimar Celestial Warlock's
+patron is the descent ancestor (Aasimar §8). A Human Draconic Sorcerer still
+needs an ancestry drawn, and the sheet still must name it.
 
-§2 above argued that "born" collides with the species law. It does not: the law
-guards against monoculture and moral determinism, not against biology. The
-*marked* seat stands on its own merits (the 2024 text says "an event… left an
-indelible mark", and the register of sensation is right), but it is no longer
-a rescue from a collision that was never there. "Born different" is a
-legitimate Sorcerer fantasy, and the class text may say so.
+**For an Aasimar Sorcerer**, the spark from the Ideal awakens something, or it
+may have been a way for something else to get in. Only a Celestial-flavoured
+Origin draws on the spark; a Draconic or Aberrant Origin needs another
+explanation, and the player supplies it.
 
-Two consequences. First, **synergies are welcome and independent**: a
-Dragonborn Draconic Sorcerer should draw the *same* ancestry as the species
-(one draw, one colour), the way an Aasimar Celestial Warlock's patron is now
-the descent ancestor (Aasimar page §8); a Human Draconic Sorcerer still needs
-an ancestry drawn, and the sheet still must name it. Second, for an Aasimar
-Sorcerer, Julio's reading is the one to keep: *"the spark from the Ideal
-awakens something. Or it may have been a way for something else to get in."*
-Only a Celestial-flavoured origin draws on the spark; a Draconic or Aberrant
-origin needs another explanation, and the player gives it.
+❓ **Open: is the core fantasy Talent rather than the mark?** The reading under
+discussion is that the Sorcerer is not blood, lineage or being born with magic,
+but **talent**: you still level up, you still gain experience, and talent has to
+be polished. Under it the Origin answers *what kind of talent* and the species,
+the background, or nothing at all answers *why you have it*, which is the
+Aasimar's Ideal-and-Descent shape. The mechanics favour it (Innate Sorcery is
+rationed and expands, Font of Magic is conversion, Metamagic is bending), and it
+completes a set: the six casters as six relationships to the source, taken by
+the Wizard, granted to the Cleric, lent to the Druid, contracted by the Warlock,
+performed by the Bard, and simply **had** by the Sorcerer, who is the only
+caster with no counterparty. It would rename the seat, since *marked* would
+become one *why* among several. Undecided; no Dialog exists for this class.

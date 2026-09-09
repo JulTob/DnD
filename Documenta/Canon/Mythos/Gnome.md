@@ -1,9 +1,11 @@
 # 🔧 Gnome
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. Deep lore and settled direction, not page text.
 Compiled 2026-09-08 from the Gnome kit and its two lineages, the species entry,
 `AtlasNomina/Races/Gnome.py`, `Cultural-Inspirations.md`, the class analyses and
-Julio's notes.*
+the design notes.*
 
 > **In one sentence.** Everyone's favourite neighbours, nobody's countrymen: a
 > people who came out of the Fae like the Elves and chose curiosity over the
@@ -17,7 +19,7 @@ Julio's notes.*
 
 | What | Where | State |
 |---|---|---|
-| Species entry (Julio's) | `AtlasActorLudi/SpeciesKit/Gnomes/__init__.py` | Shipping. "Your people", "your family": second person with a collective inside it. Closes on "what {name} carries that is worth more than it looks." |
+| Species entry | `AtlasActorLudi/SpeciesKit/Gnomes/__init__.py` | Shipping. "Your people", "your family": second person with a collective inside it. Closes on "what {name} carries that is worth more than it looks." |
 | Lineages | `Gnomes/Forest_Gnome.py`, `Rock_Gnome.py` | "Your family never took the city offer" / "took the city offer and filled a workshop with it." The two lineages are one decision, taken two ways. |
 | Traits and rules | `Gnomes/resolution.py`, `traits.py` | Darkvision: *"The Fae are said to be part of the Dream. Maybe Gnomes still carry some of it, because you have always felt the night welcomes you."* Gnomish Cunning: *"Curiosity got your people through worse than a spell, and it still does."* Lineage lines for both. |
 | Names | `AtlasNomina/Races/Gnome.py` | Italian (Renaissance lists), Galician. The generator's Gnomes: Barbato Wedello Walvittar Mindtwister, Dorella Gionora Giovanini Fishreicheck, Teodora Lichola Orsa Kochwegsohn: Italian and German compounds four names long. |
@@ -176,7 +178,7 @@ and flat; the Gnome Wild Magic Sorcerer is curiosity that would not wait.
 
 ## 8. Decisions log
 
-**Decided (Julio)**
+**Decided**
 
 - The three keys and the two legends; the Gnome as the Renaissance pair's
   middle point; gems lean to the Gnome.

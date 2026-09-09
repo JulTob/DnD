@@ -1,8 +1,10 @@
 # ⛏️ Dwarf
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. Deep lore and settled direction, not page text.
 Compiled 2026-09-08 from the Dwarf kit, the species entry, `Cultural-Inspirations.md`,
-the old wiki's Dwarf paragraph, the class analyses, and QST-0094. Where Julio
+the old wiki's Dwarf paragraph, the class analyses, and QST-0094. Where the project owner
 has decided, the decision is stated as such; where this page proposes, it says so.*
 
 > **In one sentence.** Dwarves remember. They ruled the world once, the Great
@@ -16,8 +18,8 @@ has decided, the decision is stated as such; where this page proposes, it says s
 
 | What | Where | State |
 |---|---|---|
-| Species entry (Julio's) | `AtlasActorLudi/SpeciesKit/Dwarves/__init__.py` | Shipping. First person plural ("we remember"). Closes on what to do with the gold. |
-| Traits and rules | `Dwarves/traits.py`, `resolution.py` | Rule voice landed (QST-0094). **No inspiration lines yet**; four were proposed in QST-0094 and await Julio (§9). Darkvision 120, Resilience, Toughness, Stonecunning. |
+| Species entry | `AtlasActorLudi/SpeciesKit/Dwarves/__init__.py` | Shipping. First person plural ("we remember"). Closes on what to do with the gold. |
+| Traits and rules | `Dwarves/traits.py`, `resolution.py` | Rule voice landed (QST-0094). **No inspiration lines yet**; four were proposed in QST-0094 and await ratification (§9). Darkvision 120, Resilience, Toughness, Stonecunning. |
 | Names | `AtlasNomina/Races/Dwarf.py` | Inspirations: the Golden Age of Spain (conquistadores), Renaissance Italy, Portuguese, the Carthaginian empire (Hannibal). |
 | Culture keys | `iberia`, `andalus`; legends `folklore_dwarf`, `tolkien_dwarves` | Toledo steel in the Materials map; mithril through the Tolkien register. Dwarves lean to metals through extra weight, never a closed door. |
 | Prayer | `Map_of_Cleric_Prayers.py` | *Metal shapes in the forge. People in the challenge.* *A saint is a sinner trying to be better.* *Forgetting is hard, but harder is forgiving.* Plus Life, Knowledge (Cervantes), War (*No hay atajo sin trabajo*), Grave (Teresa of Ávila, Quevedo). |
@@ -213,17 +215,17 @@ Great Mountain as the covenant's breach.
 
 ## 8. Decisions log
 
-**Decided (Julio)**
+**Decided**
 
 - Iberia and al-Andalus are two keys, never fused (the law).
 - Saints are Dwarven and stay out of the Celestials' table.
 - The species entry speaks as "we" (`a1221a1`).
 - Rule voice for the four traits (QST-0094).
 
-**Awaiting Julio (QST-0094)**
+**Awaiting ratification (QST-0094)**
 
 - The four inspiration lines proposed there (§9).
-- Whether Darkvision prints or is chip-only; Julio decided *print, with a
+- Whether Darkvision prints or is chip-only; settled *print, with a
   line* for the Aasimar, which settles the convention if applied here.
 
 **Open (this page proposes)**
@@ -240,7 +242,7 @@ Great Mountain as the covenant's breach.
 ## 9. Lines
 
 *QST-0094's four proposals, in the taught-or-gifted register the Species traits
-use, awaiting Julio. Kept here so the page is the reference.*
+use, awaiting ratification. Kept here so the page is the reference.*
 
 | Entry | Proposed line (QST-0094) |
 |---|---|

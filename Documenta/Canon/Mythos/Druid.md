@@ -1,5 +1,7 @@
 # 🌿 Druid: the Lent, read against the whole setting
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. Builds
 on Dialog 0017 (core fantasy settled as the elder belonging, sharpened to
 membership maintained through attention; the register is the walker's field
@@ -272,7 +274,7 @@ touch on the page.
 
 *Italic inspiration line only. Register: the walker's field diary, concrete
 senses, warmth without awe, no proper nouns, no dice, no em-dashes. Rule text
-untouched except the em-dashes. Proposals for Julio's hand.*
+untouched except the em-dashes. Proposals.*
 
 ### Core lessons
 
@@ -345,14 +347,3 @@ untouched except the em-dashes. Proposals for Julio's hand.*
   the em-dashes.
 
 
----
-
-## 12. Correction (2026-09-08, appended)
-
-This page seated the Druid as *the Owed*. Dialog 0017's recorded choice is
-**the elder belonging**: "an older society you never left… its shapes are lent
-to you like a friend's coat," with hospitality chosen over duty ("welcomed in,"
-not "sworn to"). *Owed* reads as duty. The seat is renamed **the Lent**: the
-land lends, the way a friend does, and what is lent is given back. The theology
-table on the Cleric page and the Guild table are updated; the field-diary
-register stands.

@@ -1,5 +1,7 @@
 # ⚙️ Artificer: Understanding Handed Over, read against the whole setting
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. Builds
 on Dialog 0013 (core fantasy settled as "understanding, made solid enough to hand
 to someone else"; the register is the maker's log; the kit is distributive, so
@@ -255,7 +257,7 @@ nobody would give.
    open choice the rules genuinely keep.
 6. **The name.** *Artificer* is Latin (*artifex*, the maker), and *artificio*
    is a machine in Spanish. The Vatican and Rome are Celestial and Goliath
-   keys; Iberia is the Dwarf's. Julio's rule that the classical peoples name
+   keys; Iberia is the Dwarf's. the project's rule that the classical peoples name
    the classes puts this one, by its bones, with the Dwarves. Worth a line in
    the names page when it is written.
 
@@ -266,7 +268,7 @@ nobody would give.
 *Italic inspiration line only. Register: the maker's log, short declaratives
 that assemble like parts, confident wonder, ending on the next attempt. No
 proper nouns, no dice, no em-dashes. Rule text untouched except the em-dashes.
-Proposals for Julio's hand.*
+Proposals.*
 
 ### Core lessons
 

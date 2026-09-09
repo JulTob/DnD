@@ -1,5 +1,7 @@
 # ⚔️ Equipment and Masteries: what the character is holding
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. `AtlasInventarium/GearKit.py` is the loadout
 policy over `Grimoire_of_Items`; `Ledger_of_Weapons`, `Ledger_of_Gear` and
 `Ledger_of_Wonders` are the catalogues; `Map_of_Gear_Titles` and
@@ -164,7 +166,7 @@ lines; the background-to-first-weapon table; the mastery line and eight
 property lines; the hook object per background; a decision on wonders (budget,
 or never, on purpose).
 
-**Julio's call**: whether a high-level character should ever own a wonder.
+**Undecided:** whether a high-level character should ever own a wonder.
 
 ---
 

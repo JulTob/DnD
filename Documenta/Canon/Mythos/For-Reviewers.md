@@ -1,5 +1,7 @@
 # 👁 For Reviewers: how to read this folder
 
+> 🧾 **Record.** A report, an index or a working document, not a specification.
+
 *Orientation for anyone brought in to review these pages: a person, or another
 model. Read this first. It states what the folder is, the rules the pages were
 written against, and what a useful objection looks like here. Written

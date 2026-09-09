@@ -1,5 +1,7 @@
 # 🗝️ Rogue: the Exact Moment, read against the whole setting
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. No
 Dialog exists for the Rogue, no register was decided, and no text survives. This
 page derives the core fantasy from the rules, proposes the register (the
@@ -72,7 +74,7 @@ sentence.
 
 ## 3. The register: the picaresque
 
-Julio's rule is one register per class, and the set so far runs chant,
+the project's rule is one register per class, and the set so far runs chant,
 training memoir, shonen arc, warm scripture, the oath remembered, the terms,
 sensation, field diary, told tale, adventure novel, the Dao De Jing, the
 maker's log. The Rogue is missing, and the standing ruling prefers Iberian
@@ -171,10 +173,18 @@ background and Warrior of Shadow. The Rogue adds the `shadow` gear theme
 with the Shadow background is handed a Quiet Answer. Three "shadow"s on one
 sheet by composition; the Decree 0005 nudge applies here too.
 
-**The Aasimar Rogue is a walking confession** (Aasimar page §6). Justice's
-halo dims at every lie; Truth's scatters at every strong feeling. The Rogue is
-the Aasimar's hardest class and therefore its best, and the generated Assassin
-of Aidos (Shame) is the roster's own joke about it.
+**The Aasimar Rogue is a walking confession** (Aasimar page §6). Justice's halo
+dims at every lie; Truth's scatters at every strong feeling. The Rogue is the
+Aasimar's hardest class and therefore its best, and the generated Assassin of
+Aidos (Shame) is the roster's own joke about it.
+
+**The Celestial Reaper** is the Assassin's named form, and the kit already
+carries its tell. Sacrifice's aureola *"darkens for a moment whenever you see
+someone die"*, and the Assassin's trade is the first blow that finishes: a halo
+that darkens at every kill is a tally the Reaper cannot stop keeping. Justice's
+Reaper is the other face, since that halo *"dims when you are not being
+honest"*, so the Assassin who kills without a disguise keeps a perfect ring and
+the one who wears a face pays for it above the face.
 
 **The Tiefling and Elusive.** *"No attack roll can have Advantage against
 you."* The Tiefling entry: "once in a while somebody takes a swing in a
@@ -304,7 +314,7 @@ Levantine key is ever playable. Keep the kunai out of the Rogue's gear theme.
 
 *House rules: second person; the picaresque's tone (wry, unsentimental, never
 sorry); no proper nouns; no em-dashes; no open choices. The device: each text
-admits one thing and refuses to apologise for it. Proposals for Julio's hand.*
+admits one thing and refuses to apologise for it. Proposals.*
 
 ### Class text (new)
 
@@ -422,18 +432,3 @@ It is not steel and it is not magic. It is you, sharpened. You were always sharp
 - **Monk**: the ninja stays with the Monk; the Rogue's gear theme should not
   reach `japan`.
 
----
-
-## 11. Julio's comment, followed up (2026-09-08, appended)
-
-Julio, on the Aasimar page: *"the assassin, which is a cool concept in itself:
-the Celestial Reaper."*
-
-The kit already carries the tell. Sacrifice's aureola "darkens for a moment
-whenever you see someone die"; the Assassin's trade is the first blow that
-finishes. ✅ An Aasimar Assassin of Sacrifice has a halo that darkens at every
-kill, a tally the Reaper cannot stop keeping. Justice's Reaper is the other
-face: "It dims when you are not being honest", so the Assassin who kills
-without a disguise keeps a perfect ring, and the one who wears a face pays
-for it above the face. §6's Aasimar row ("hardest, therefore best") stands;
-the Reaper is its named form. See Aasimar page §11.

@@ -1,5 +1,7 @@
 # 🗺 Places: the map that names things, and the story that needs names
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. `AtlasWorldBuild/AtlasOfMapmaking` is a
 standalone world-map generator (height field by wave-function collapse on a
 triangular or hexagonal grid, biomes by height, parchment SVG output). It is

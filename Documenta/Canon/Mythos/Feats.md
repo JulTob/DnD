@@ -1,5 +1,7 @@
 # 🎯 Feats, Gifts and Boons
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. The feats are on every sheet at levels 1, 4, 8,
 12, 16 and 19, and they are the largest surface of the generator that no page
 has read for its fantasy. Compiled 2026-09-08 from `Map_of_Official_Origin_Feats.py`,
@@ -86,7 +88,7 @@ house register (second person, the fact and the unease, no proper noun), they
 are one sentence each, and they are hidden in the source. Moving them to the
 sheet is the cheapest improvement on the roster.
 
-**Versatile draws them, by Julio's call.** *"A Human's Versatile draws from base
+**Versatile draws them, by design.** *"A Human's Versatile draws from base
 feats and every setting Origin feat, Dark Gifts included."* The Warlock and
 Human pages flagged a Human Tomb Raider carrying *Shadow Cast* ("It Follows")
 with no story as a leak; it is a decision, and the pages are corrected. What
@@ -132,7 +134,7 @@ taught, and the line says where.** Never a mood; a place or a habit.
 | **Ritual Caster** | *Slow magic, from a book, by candlelight. It works, and nobody stops you.* |
 | **Skill Expert** | *One more thing you do the way other people breathe.* |
 
-The rest follow the same rule when Julio wants them; twenty is the set the
+The rest follow the same rule when they are wanted; twenty is the set the
 generator draws most.
 
 ---
@@ -175,7 +177,7 @@ possible break in the seeded replay at level 19. Rules work; recorded.
 
 ## 6. Decisions log
 
-**Decided (Julio)**
+**Decided**
 
 - Versatile draws from base feats and every setting Origin feat, Dark Gifts
   included.
@@ -205,7 +207,7 @@ possible break in the seeded replay at level 19. Rules work; recorded.
 ## 7. Pointers
 
 - **Backgrounds-Official**: the Origin feat is the half that already works.
-- **Human page**: Versatile corrected to Julio's call.
+- **Human page**: Versatile as designed, drawing Dark Gifts.
 - **Warlock page**: the Dark Gift finding corrected.
 - **Dragonborn page**: the Boon as the Ascending's whisper.
 - **Feature-Text canon**: the docstring-as-line pattern.

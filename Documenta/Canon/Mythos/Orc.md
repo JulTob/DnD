@@ -1,8 +1,10 @@
 # 🐎 Orc
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. Deep lore and settled direction, not page text.
 Compiled 2026-09-08 from the Orc kit, the species entry, `AtlasNomina/Races/Orc.py`,
-the peoples table in the Dragon and Elf canon, the class analyses and Julio's
+the peoples table in the Dragon and Elf canon, the class analyses and the design
 notes.*
 
 > **In one sentence.** The children of the horizon: the people who were on the
@@ -15,7 +17,7 @@ notes.*
 
 | What | Where | State |
 |---|---|---|
-| Species entry (Julio's) | `AtlasActorLudi/SpeciesKit/Orcs/__init__.py` | Shipping. First person plural. Closes on "why {name} left the Orc Camp, and what would bring them back." |
+| Species entry | `AtlasActorLudi/SpeciesKit/Orcs/__init__.py` | Shipping. First person plural. Closes on "why {name} left the Orc Camp, and what would bring them back." |
 | Traits and rules | `Orcs/resolution.py`, `traits.py` | House pattern (QST-0094). Adrenaline Rush: *"The winds of your storm are hard to catch, rider. Run, be free, and run."* Darkvision: *"The ride does not end at nightfall, and neither does your watch."* Relentless Endurance: *"Do not fall, rider! Be strong! Carry on!"* |
 | Names | `AtlasNomina/Races/Orc.py` | A phonetic rule with a body inside it: "big fangs: S would bite the tongue, Z instead" (Th→z, S→Z, Gue→ke, ou→u, J→X, h→j, V→B). Inspirations listed as a fusion (§5). |
 | Culture keys | **none** | ⚠️ The Orc has no row in `_CULTURES`; gear draws from the generic pool only. |
@@ -103,7 +105,7 @@ Celts, Vikings, cowboy America, Native Americans, pre-Columbian languages, the
 Boyz of 40k), which the brief's law forbids as keys ("one culture key = one
 culture; never fuse"), and none of them is assigned.
 
-This is Julio's decision to make, and the page records the directions without
+This is the decision to make, and the page records the directions without
 choosing:
 
 - The entry's *temper* is the steppe rider (the horse, the eagle, the long
@@ -188,19 +190,19 @@ the Orc Sea Druid is the species' happiest pairing and the dice found it.
 
 ## 9. Decisions log
 
-**Decided (Julio)**
+**Decided**
 
 - The species entry speaks as "we"; the three trait lines are the house
   pattern's reference along with the Elf's and the Halfling's (QST-0094).
 - The wind path as the metaphysic (peoples table).
 
-**Open (Julio's to decide)**
+**Open**
 
 - **The Orc's culture keys.** None assigned; the name file's list fuses. The
   steppe temper is in the entry.
 - **Materials**: none of the Orc's own until a key exists.
 - **The name file's inspirations** should be split into distinct keys or
-  cut, per the law, whichever Julio chooses.
+  cut, per the law, whichever the author chooses.
 
 **Repairs**
 

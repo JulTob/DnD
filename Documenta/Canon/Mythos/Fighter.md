@@ -1,5 +1,7 @@
 # ⚔️ Fighter: the Post at Dawn, read against the whole setting
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. No
 Dialog exists for the Fighter because none was needed: the class text ships,
 all five archetype texts ship with design commentary in `FighterKit.py`, and
@@ -283,7 +285,7 @@ kept the street's habit of not affording to lose.
 
 *The Fighter needs almost nothing. These replace the four off-register lines,
 fix the triples by deletion, and give Weapon Mastery its own line. Register:
-the training yard at dawn. Proposals for Julio's hand.*
+the training yard at dawn. Proposals.*
 
 | Feature | Current | Draft |
 |---|---|---|
@@ -311,7 +313,7 @@ the training yard at dawn. Proposals for Julio's hand.*
 
 ---
 
-## 12. Addendum (2026-09-08, appended): a Battle Master can fail to generate
+## 12. A Battle Master can fail to generate
 
 Repairs Ledger A4. Student of War's untrained pick (`_untrained_choice` in
 `Map_of_Fighter_Training.py`, lines 523 to 575) reads tool attributes off

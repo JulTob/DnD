@@ -1,5 +1,7 @@
 # 📄 The Sheet, Alignment and Languages: the order a stranger meets you in
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. `app/components/character_sheet.py` decides
 what a reader sees first; `AtlasActorLudi/AlignmentKit.py` draws the two
 alignment axes; `AtlasLudus/Map_of_Languages.py` fills the Languages box.
@@ -64,7 +66,7 @@ naming; it is a voice.
 ⚠️ **The draw is uniform thirds on each axis**, so a third of all player
 characters are Evil and a ninth are True Evil. Of twelve sampled level-one
 characters, six were Evil (five True Evil). For a *player* generator that is a
-design decision worth making on purpose: Julio's call, and Decree 0005 gives
+design decision worth making on purpose: undecided, and Decree 0005 gives
 the shape (a nudge, never a lock). The docstring promises "these tags influence
 further decisions, like titles, story beats, and motivation"; the Stories page
 found the one story beat that reads Evil ("always resented being a {species}")
@@ -143,7 +145,7 @@ the *True* display names; the docstring definitions.
 cultures, species-agnostic, drawn by the Character's Dice; the script kit put
 to use.
 
-**Julio's call**: the Evil rate on a player generator (uniform thirds today).
+**Undecided:** the Evil rate on a player generator (uniform thirds today).
 
 **Repairs**: `char == "Elf"` in `Character_Languages`; `set.pop()` as a draw;
 the Rogue legacy Training's two extra `AddAnyLanguage` calls.

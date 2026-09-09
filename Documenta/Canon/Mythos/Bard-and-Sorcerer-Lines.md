@@ -1,11 +1,13 @@
 # 🎻 Bard and Sorcerer: lines for the two quietest Guilds
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. The coverage sweep put the Bard at 10% and
 the Sorcerer at 19% of Training features carrying a line, the two lowest of
 thirteen, and the Lines Annex showed one drafted line each for them across
 forty pages. This page closes that gap: one line per Training feature, in the
 register each Guild page settled and Dialog 0015 confirmed. Proposals for
-Julio's hand, 2026-09-08. The Training maps carry no lines today; each of these
+the project's hand, 2026-09-08. The Training maps carry no lines today; each of these
 would sit before the rule, italic, as the Fighter's do.*
 
 ---

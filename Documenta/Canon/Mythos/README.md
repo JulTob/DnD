@@ -1,19 +1,21 @@
 # 📚 Mythos
 
+> 🧾 **Record.** A report, an index or a working document, not a specification.
+
 *The design team's wiki for the setting's fantasy: what each people and each
 class is in this project, read against the code, the canon, the backgrounds and
 one another. Started 2026-09-08 as a cycle of analyses; the Aasimar page was
-the first to be rewritten as a wiki entry on Julio's direction, and the species
+the first to be rewritten as a wiki entry on the project's direction, and the species
 pages follow that shape. The class pages are analyses with drafts; they carry
 the same findings in a looser form.*
 
 **Nothing in this folder is page text.** These are the reasons behind the page
-text, the wells it draws from, and the decisions Julio has made or has yet to
+text, the wells it draws from, and the decisions the project has made or has yet to
 make. The Canon's first rule holds throughout: never explain it on the page.
 
 ---
 
-*Folder size: 49 pages, about 147k words, on branch `Julio_Cl/fantasy-worldbuilding-analysis-4241c5` (pull request 5).*
+*Folder size: 49 pages, about 147k words, on branch `Julio_Cl/fantasy-worldbuilding-analysis-4241c5` (pull request 5). Status: 49 drafts, 0 fixed.*
 
 ## How to read this folder
 
@@ -24,7 +26,7 @@ objection looks like, and how to fetch pages remotely.
 1. **README** (this file): index, standing rules, decisions, open items.
 2. **Lenses**: the whole generator in one reading.
 3. **Repairs-Ledger**: what is broken, with file and line.
-4. **Agora-Questions-Proposed**: what only Julio can decide, in the Agora's rows.
+4. **Agora-Questions-Proposed**: what only the author can decide, in the Agora's rows.
 5. **Lines-Annex**: every drafted line, for wiring.
 6. Then any people, Guild or engine page as the work touches it.
 
@@ -76,7 +78,7 @@ objection looks like, and how to fetch pages remotely.
 | [Draft-Tables](Draft-Tables.md) | The content behind six open decisions: the Orders' penalty ladder with a Major per Domain; background to first weapon (48 rows); a Celestial NPC as Ideal by Descent (8 × 7); one value per written background; culture keys for the Orc and the Halfling; Euterpe. |
 | [Lines-Annex](Lines-Annex.md) | Generated: every drafted inspiration line across the pages, grouped by page and heading, for wiring. |
 | [Brand-Voice](Brand-Voice.md) | The words around the sheet: a generic lede, plain labels, the URL as the one true brand statement, one sentence of lore in the view layer, nineteen hosted font families where three carry the identity, gold and gules on a tablet. |
-| [Agora-Questions-Proposed](Agora-Questions-Proposed.md) | Twenty open decisions from the pages drafted as Agora rows (Q-0014 to Q-0033) with the Consuls each would call, for Julio to file or discard. |
+| [Agora-Questions-Proposed](Agora-Questions-Proposed.md) | Twenty open decisions from the pages drafted as Agora rows (Q-0014 to Q-0033) with the Consuls each would call, for the author to file or discard. |
 | [Voices-at-the-Table](Voices-at-the-Table.md) | Five archetypes (Wizard, Bard, Dwarf smith, Exorcist, the Ideal Aidos) read one generated sheet aloud in their registers: a Chaotic Evil Devotion Paladin whose story says "her". The registers held. |
 | [Places](Places.md) | The standalone map atlas already names towns, mines, shrines and crossroads by biome and keys the Underdark to Dwarves; the Stories' Anglo hometowns should come from it, culture-keyed. Not wired to the app; import broken. |
 | [Repairs-Ledger](Repairs-Ledger.md) | Every defect the reading found, in one table with file and line: four the app cannot do (three parked, one shipped: a Battle Master can fail to generate), twenty wrong on the sheet, five replay breaks, twelve duplicates, nine design gaps; a Questa cross-reference; two random sweeps. Report, not repair. |
@@ -89,7 +91,7 @@ objection looks like, and how to fetch pages remotely.
 | [Relationships](Relationships.md) | Species × Guild with and across the grain; thirty-two backgrounds with their built-beside Guilds and productive misfits; five species fault lines; what reads pairings today (the Story does not). |
 | [Names](Names.md) | The name engine and its ladder; the Dwarf module as the standard; Elf, Halfling, Goliath and Human surnames undoing their given names; the Human male typo; Tiefling's empty surname; gender response by accident. |
 | [Stories-and-Titles](Stories-and-Titles.md) | The Backstory on every sheet: a sound engine with the project's oldest register; zero gates for the twenty custom backgrounds; species gates that contradict the canon; twenty Origin and ten Outro drafts. |
-| [Feats](Feats.md) | Origin feats as the backgrounds' mechanical half (the rebrand comments as record); the Dark Gifts' docstrings as ready lines; General feats and Epic Boons with no fantasy; Versatile draws Dark Gifts by Julio's call. |
+| [Feats](Feats.md) | Origin feats as the backgrounds' mechanical half (the rebrand comments as record); the Dark Gifts' docstrings as ready lines; General feats and Epic Boons with no fantasy; Versatile draws Dark Gifts by undecided. |
 
 ---
 
@@ -144,9 +146,27 @@ by people and gender), `sweep.py` (30 random seeds, text leaks), `crashsweep.py`
 above). Each calls `summon_player` from the worktree with a fixed seed list, so
 every number in these pages can be reproduced.
 
+## Status: which pages are fixed
+
+Every page opens with its status, so a reader knows whether they are holding a
+specification or a proposal.
+
+| Marker | Means |
+|---|---|
+| 🔒 **Fixed** | Authoritative. The page is the specification, and the code answers to it, not the other way round. Review the code against this page. |
+| 🚧 **Draft** | Analysis and proposals. Not yet authoritative, and under review. |
+| 🧾 **Record** | A report, an index or a working document. Never a specification. |
+
+**The whole of a fixed page is authoritative.** There are no attributions in the
+text and no provenance trail: a statement on a fixed page is settled because it
+is on the page. Anything wrong is corrected by editing the page.
+
+**Today: 49 drafts, 0 fixed.** A page becomes fixed when it has been read and
+corrected, and the count above moves.
+
 ## Chapter 0: the fixed points, in every page
 
-*Julio, 2026-09-09: "A future team may think 'why do aasimar need talaria?
+*"A future team may think 'why do aasimar need talaria?
 let's take it out', but it is not a lore choice, it's a fixed-point mechanic
 that we interpret into lore."*
 
@@ -161,7 +181,7 @@ that element's page, next to the reading they produced.
 | Marker | Means | Argued with |
 |---|---|---|
 | 📕 | **Inherited.** The 2024 rules. | Not without leaving rules compatibility, which is the promise the generator makes to a table that has to play the result. |
-| ⚖️ | **Ratified.** A project Decree, a canon document, or a decision Julio recorded. | In the Agora: a question, a Dialog, a Decree. |
+| ⚖️ | **Ratified.** A project Decree, a canon document, or a decision the author recorded. | In the Agora: a question, a Dialog, a Decree. |
 
 **Then the chapter says what the rules force and what we chose**, in four short
 moves:
@@ -205,11 +225,11 @@ sitting there looking deliberate. The Dragonborn's ten ancestries are one.
 
 ---
 
-## Decisions Julio has made in this cycle (2026-09-08)
+## Decisions the project has made in this cycle (2026-09-08)
 
 *Provisional record. Decree 0006: "A choice that lives only in a chat log does
 not exist. Decrees record decisions; Questae record work and rationale." These
-were said in the session; they stand here until Julio ratifies them into a
+were said in the session; they stand here until the author ratifies them into a
 Decree or a Questa.*
 
 - The Aasimar keep their three markers as a subculture; no host-culture draw;
@@ -256,7 +276,7 @@ Decree or a Questa.*
   of the Fiend table; the written backgrounds available to NPCs; values, not
   alignment, as the personality gate.
 - **Loaded names outside lore**: *Mestizo* (Rank pool), *Elohim* (Celestial
-  names). Julio's call.
+  names). Undecided.
 
 ## Broken today, found while reading (report, not repair)
 

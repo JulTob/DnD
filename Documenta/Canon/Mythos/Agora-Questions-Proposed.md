@@ -1,9 +1,11 @@
 # ❓ Proposed questions for the Agora
 
-*The Mythos pages end in decisions only Julio can take. The Agora Protocol
+> 🧾 **Record.** A report, an index or a working document, not a specification.
+
+*The Mythos pages end in decisions that only the project owner can take. The Agora Protocol
 says a decision enters the project as a row in `Agora/Questions.md`, becomes a
 Dialog, and settles as a Decree. These are the rows, drafted in that format and
-numbered after the last one in the queue (Q-0013), Q-0014 to Q-0033, so any Julio accepts can be
+numbered after the last one in the queue (Q-0013), Q-0014 to Q-0033, so any that are accepted can be
 pasted. None is filed; this is a proposal of proposals. The "Consuls called"
 follow the charters in `Curia/Agora/Consuls/`; the Design-Team is called where
 original content must be written; the Lorekeeper wherever canon or the peoples'

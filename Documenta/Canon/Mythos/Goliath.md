@@ -1,9 +1,11 @@
 # 🏔️ Goliath
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. Deep lore and settled direction, not page text.
 Compiled 2026-09-08 from the Goliath kit and its six Giant heritages, the species
 entry, `Cultural-Inspirations.md` (the Celestial/Giant comparative and the
-Arthur ruling), the class analyses and Julio's notes on the Aasimar page.*
+Arthur ruling), the class analyses and the design notes on the Aasimar page.*
 
 > **In one sentence.** Giants manifested before the first things and are still
 > here if you know how to look at a mountain; each Goliath carries one Giant's
@@ -16,7 +18,7 @@ Arthur ruling), the class analyses and Julio's notes on the Aasimar page.*
 
 | What | Where | State |
 |---|---|---|
-| Species entry (Julio's) | `AtlasActorLudi/SpeciesKit/Goliaths/__init__.py` | Shipping. First person plural ("we tend the world"). Closes on three questions that are three classes (§7). Speed 35. |
+| Species entry | `AtlasActorLudi/SpeciesKit/Goliaths/__init__.py` | Shipping. First person plural ("we tend the world"). Closes on three questions that are three classes (§7). Speed 35. |
 | Giant heritages | `Goliaths/Giant_Heritages/` (Cloud's Jaunt, Fire's Burn, Frost's Chill, Hill's Tumble, Stone's Endurance, Storm's Thunder) | Each carries a line: *"The favour you carry came down from a Storm Giant, and it answers weather with weather."* |
 | Traits and rules | `Goliaths/resolution.py`, `traits.py` | Powerful Build: *"You were made smaller than your ancestors, never lighter."* Large Form: *"For a few minutes you are the size your ancestors never stopped being."* Dice notation settled here (`_signed_die`). |
 | Names | `AtlasNomina/Races/Giant.py` | "Giants (meaning)"; Wairimu, Ōga; an Oni subtype. Thin header. |
@@ -112,7 +114,7 @@ open whether it comes to the Goliaths, and the Ranger page offers a fourth
 option (the Ranger holds it by Guild). A Goliath with dragon magic is the
 myth's defector.
 
-**The war for the heavens** (Julio, Aasimar page). *"The gods took the heavens
+**The war for the heavens** (the author, Aasimar page). *"The gods took the heavens
 and the songs. The First Ones kept the world."* Read the Trojan War as
 Celestials against Titans: the Trojans are the Titans, the Iliad's gods
 striking on the field are the Celestials' register, and the Odyssey (the long
@@ -242,7 +244,7 @@ of it" in the Goliath's mouth.
 
 ## 9. Decisions log
 
-**Decided (Julio)**
+**Decided**
 
 - The crossed comparative (Greek in myth, Roman in method); the five atomic
   keys (QST-0046.4); early Arthur to the Giants, late Arthur to the Celestials
@@ -253,7 +255,7 @@ of it" in the Goliath's mouth.
 
 - **`wyrm_myth`**: the brief's three options, and the Ranger page's fourth.
 - **The name pool** does not carry the three keys (§5).
-- **The Trojans as Titans** (Julio): a war of Celestials and Titans for the
+- **The Trojans as Titans**: a war of Celestials and Titans for the
   heavens, the Odyssey as the Goliaths', Rhodes with the Giants. Worth a
   paragraph in `Cultural-Inspirations.md` beside the comparative, as deep lore.
 - **Darkvision**: the Goliath has none; nothing to decide.

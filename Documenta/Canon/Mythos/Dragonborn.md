@@ -1,8 +1,10 @@
 # 🐉 Dragonborn
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. Deep lore and settled direction, not page text.
 Compiled 2026-09-08 from `Dragons-and-the-Overcoming.md`, the Dragonborn kit,
-`AtlasNomina/Races/Dragon.py`, the class analyses and Julio's notes. The Dragon
+`AtlasNomina/Races/Dragon.py`, the class analyses and the design notes. The Dragon
 canon's first rule governs every line here: never explain it on the page.*
 
 > **In one sentence.** The children of dragons, and none the wiser for it: a
@@ -16,7 +18,7 @@ canon's first rule governs every line here: never explain it on the page.*
 
 | What | Where | State |
 |---|---|---|
-| Species entry (Julio's) | `AtlasActorLudi/SpeciesKit/Dragonborn/__init__.py` | Shipping. First person plural ("we"), the clan's voice. Closes on "which observance you have kept, and which one you have quietly stopped keeping." |
+| Species entry | `AtlasActorLudi/SpeciesKit/Dragonborn/__init__.py` | Shipping. First person plural ("we"), the clan's voice. Closes on "which observance you have kept, and which one you have quietly stopped keeping." |
 | Ancestors | `Dragonborn/Map_of_Ancestors.py` | Ten colours, five damage types, drawn once and kept. |
 | Traits and rules | `Dragonborn/traits.py`, `resolution.py` | Reference kit for voice (QST-0062). Breath Weapon carries a line; Draconic Ancestry names the colour and its damage; Darkvision is chip-only; Draconic Flight has no line. |
 | Names | `AtlasNomina/Races/Dragon.py` | Opens with the canon in one sentence: "Dragons are not born, they become." Draconic morphemes (*ji* wing, *-on* / *-in* dragonkin). Inspirations: real dragons, Chinese, Japanese. |
@@ -72,7 +74,7 @@ Character and kept:
 | Copper | Acid | White | Cold |
 
 **Breath Weapon** (a cone or a line, the ancestor's damage; the line on the
-sheet is Julio's: *"Never exasperate a Dragonborn, for they will sigh and you
+sheet is the project's: *"Never exasperate a Dragonborn, for they will sigh and you
 will burn."*). **Draconic Flight** at 5: spectral wings made of the same energy
 as the breath, ten minutes, once a day. **Darkvision** at sixty feet.
 
@@ -173,7 +175,7 @@ setting, and the Dragonborn is where they all land.
 | Class | The Dragonborn in it | The Ascending, unspoken |
 |---|---|---|
 | **Barbarian** | "A dragon has no rules." The Dragonborn who stopped translating. The World Tree's "if you can see through the veil, you can cross it" is the only Path text about crossing. | The roster's quietest Ascending candidate. |
-| **Sorcerer** | Two sets of wings: Draconic Flight at 5 (species), Dragon Wings at 14 (Draconic Sorcery, lasting until dismissed). **Decided (Julio, general rule): the Sorcerer's ancestry is the species' ancestry, one draw, one colour.** | The mini-Ascension, then something more. |
+| **Sorcerer** | Two sets of wings: Draconic Flight at 5 (species), Dragon Wings at 14 (Draconic Sorcery, lasting until dismissed). **Decided (the author, general rule): the Sorcerer's ancestry is the species' ancestry, one draw, one colour.** | The mini-Ascension, then something more. |
 | **Monk** | The most literal ninja on the roster; the Aztec jaguar knight. The Ascendant Dragon is an Order devotion, not a subclass. | The canon's own monks, "and they mean it". |
 | **Wizard** | The Wizard's register is the Dao De Jing, and the Laozian dragon speaks "in parables and weather". The entry complains that dragons speak in riddles nobody should waste a life translating; the Dragonborn Wizard translates. | The clan's translator, reading the idiom the clan refuses. |
 | **Bard** | Flower and song; the clan's one licensed liar; and the Mythopoeic loop ("the story changes the next dragon born out of it"): a Dragonborn Bard's tale about a dragon changes the next dragon. | The Bard operates the mechanism from outside. |
@@ -191,7 +193,7 @@ each other: the dragon-slaying knight is a Goliath story about a Dragonborn
 (`arthuriana`). A Goliath with dragon magic is the myth's defector; a
 Dragonborn Ranger holding `wyrm_myth` is the slayer from inside the family.
 
-**The Couatl** (Julio, Aasimar page). A dragon bound to an Ideal, or an Ideal
+**The Couatl** (the author, Aasimar page). A dragon bound to an Ideal, or an Ideal
 that came to wear a dragon's shape: the Celestial Dragons. The Dragonborn are
 the people who would recognise a Couatl as *both* things, and would not say so.
 See [Celestials.md](Celestials.md) §6.
@@ -243,7 +245,7 @@ See [Celestials.md](Celestials.md) §6.
   Dragonborn are not a joke and not a failure: play the dignity, the cost and
   the nearness together. No east/west split.
 
-**Decided (Julio, 2026-09-08, general)**
+**Decided (the author, 2026-09-08, general)**
 
 - Species-and-subclass synergies are drawn as one where they share a source:
   the Draconic Sorcerer's ancestry is the Dragonborn's ancestry.
@@ -255,7 +257,7 @@ See [Celestials.md](Celestials.md) §6.
 - **`wyrm_myth`**: leave it as a story, give it to the Goliaths, split it, or
   give it to the Ranger by Guild. The brief's own question, with a fourth
   option from the Ranger page.
-- **Darkvision**: chip-only here and on the Aasimar, printed elsewhere. Julio
+- **Darkvision**: chip-only here and on the Aasimar, printed elsewhere. the author
   decided the Aasimar prints with a line; the same convention applied here
   would want a line (§9).
 - **Draconic Flight has no line**, and it is the canon's tell. A line that
@@ -274,7 +276,7 @@ See [Celestials.md](Celestials.md) §6.
 
 *Proposals. Second person, the clan's plain register (the entry's "we" becomes
 the sheet's "you" in the traits), no proper nouns, no em-dashes. The Breath
-Weapon's saying is Julio's and stands.*
+Weapon's saying is the project's and stands.*
 
 | Entry | Line |
 |---|---|
@@ -298,10 +300,9 @@ wings came with leaving, and stops.
 
 ---
 
-## 12. Addendum (2026-09-08, appended): the one trait the page left bare
+## 12. Breath Weapon
 
-A level-5 sweep found every Dragonborn trait that opens on a rule already
-drafted on this page except **Breath Weapon**. For symmetry:
+The one trait that opens on a rule with no line of its own:
 
 | Trait | Line |
 |---|---|

@@ -1,5 +1,7 @@
 # 🧰 Repairs Ledger: every defect the reading found, in one table
 
+> 🧾 **Record.** A report, an index or a working document, not a specification.
+
 *Companion to the Mythos pages. Each row was observed in generated output or
 read in source on 2026-09-08 in this worktree; line numbers are from that day.
 This ledger reports; it does not fix. Rows are ordered by what a player or DM
@@ -112,7 +114,7 @@ are not part of the repository.
 | B5, B6 | QST-0057 Granted spells belong in the Magic section; QST-0069 feat-granted spells; QST-0067 Chef and Resilient must resolve, record and print their choices | The enhanced cantrip is the same rule as QST-0067. |
 | B8 | **QST-0052 Generated names can carry a trailing space** | Open already; the Fiend empty surname is the cause. |
 | B16 | QST-0051, QST-0055, QST-0062, QST-0094 (voice); QST-0054 (Warlock) | The 2014 leaks per Guild page. |
-| Species inspiration lines (every people page) | QST-0094 Species entries speak the rulebook's present voice ("inspiration lines and two conventions await Julio") | The lines drafted on the people pages belong in that Questa's lane. |
+| Species inspiration lines (every people page) | QST-0094 Species entries speak the rulebook's present voice ("inspiration lines and two conventions await the author") | The lines drafted on the people pages belong in that Questa's lane. |
 | B15 | QST-0060 Sheet presentation; QST-0046.12 re-evaluate the item system | |
 | C1, C2, C3 | QST-0089 Monk and Ranger training Maps call `random`; QST-0016.6.1 seeded replay | Three more global-`random` sites. |
 | C5 | QST-0077 `Map_of_Stories.Name()` silently failed on every character | The NPC branch of the same silence. |

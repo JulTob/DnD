@@ -1,5 +1,7 @@
 # 📖 Stories and Titles: the Backstory on every sheet
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. Every player sheet ends in a "Backstory"
 node headed "The story of {Title}", composed by `AtlasEpica/Map_of_Stories.py`
 (2,889 lines) with a title from `Map_of_Titles.py` (10,049 lines). Compiled
@@ -162,7 +164,7 @@ and sounds cool, X goes here."
 - ❓ `Rank` contains "Mestizo" (line 4478). In Spanish it is a neutral word; in
   an English title (*The Star Mestizo*) it reads as a racial category applied
   to a character. The loaded-names rule keeps lore names in the pool; this is
-  not a lore name. Julio's call.
+  not a lore name. Undecided.
 
 ---
 
@@ -247,7 +249,7 @@ contradiction list in §4 resolved by cutting or rewriting to canon; the
 Archetype filler pool retired; the title vocabulary keyed by culture the way
 the Gear Titles are.
 
-**Julio's call**: "Mestizo" in the Rank pool.
+**Undecided:** "Mestizo" in the Rank pool.
 
 ---
 

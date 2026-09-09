@@ -1,5 +1,7 @@
 # 📖 The Written Backgrounds: a literary reading of all thirty-two
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. The thirty-two custom backgrounds are the
 project's reference for voice, and every earlier page measured itself against
 them. None had been read **as literature** in its own right. This page does

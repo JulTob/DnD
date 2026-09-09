@@ -1,5 +1,7 @@
 # 🏷 Brand Voice: the words around the sheet
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. Decree 0006 ranks the beta's priorities:
 aesthetics, brand, the service. The sheet's voice has forty pages; the frame
 around it (home page, buttons, empty states, errors, the share link, the type
@@ -91,7 +93,7 @@ face), plus two local names in the stacks (Kings and Pirates, Nordic Chance).
 Cinzel, one script); the other sixteen requests are weight without identity,
 and every request is load time on a page that is meant to look like craft.
 The house preference for plain Unicode over hosted fonts applies with force
-here: Julio's call, and the Spells page's gothic-title question is the same
+here: undecided, and the Spells page's gothic-title question is the same
 question.
 
 ---
@@ -116,7 +118,7 @@ plain labels for buttons.
 variations each); the font stack pruned to three families and one accent; the
 Versatile sentence moved out of the view; the share status sentence.
 
-**Julio's call**: hosted fonts versus plain Unicode; whether the tablet is
+**Undecided:** hosted fonts versus plain Unicode; whether the tablet is
 named.
 
 ---

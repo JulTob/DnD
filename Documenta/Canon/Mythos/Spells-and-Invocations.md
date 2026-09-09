@@ -1,5 +1,7 @@
 # ✨ Spells and Invocations: what a caster knows, and why
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. `AtlasMagia/Lodge_of_Spells.py` holds the
 spells, `AtlasMagia/SpellsKit.py` their Tags, `Grimoire_of_Spellcasters.py`
 the per-Guild draw, `InvocationKit.py` and `Map_of_Eldritch_Invocations.py`
@@ -175,7 +177,7 @@ The Guild pages settled a register per class. One opening line each, in it:
 The Warlock's section title wears a gothic face while every other class uses
 the house header (`Map_of_SpellFonts.py`); the file's own note is right that a
 page of it would be noise, and one title in it is a voice. ❓ The house
-preference for plain Unicode over hosted webfonts applies here; Julio's call.
+preference for plain Unicode over hosted webfonts applies here; undecided.
 
 ---
 
@@ -203,7 +205,7 @@ Character's Dice.
 drawn object (§3); patron-tilted invocations (§4); twenty invocation lines;
 eleven opening lines (§5).
 
-**Julio's call**: the gothic title face.
+**Undecided:** the gothic title face.
 
 ---
 

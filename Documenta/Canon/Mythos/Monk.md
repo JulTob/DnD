@@ -1,5 +1,7 @@
 # 🥋 Monk: the Exempt, read against the whole setting
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. Builds
 on Dialog 0018 (core fantasy settled as the shonen ninja: training arcs, named
 techniques, speed as freedom, the body as the one weapon nobody can take). This
@@ -24,7 +26,7 @@ A level 11 Aasimar Monk of Mercy (seed 3) receives: the Aasimar entry, the
 Gambler, thirty rules paragraphs, and one italic sentence from 2014 in the third
 person. No class fantasy, no Warrior fantasy, no line above any feature. By the
 backgrounds' standard the Monk is the least-inspired sheet on the roster, and it
-is the class Julio seeded most precisely.
+is the class the author seeded most precisely.
 
 ⚠️ **This is the widest gap between designed and shipped.** Dialog 0018's texts
 are good (see §7) and have sat provisional since 2026-08-31. The two rules-text
@@ -55,12 +57,18 @@ before you arrive."* Do not add a reclaiming line to the Monk. Indifference to
 the label is the class's character, and it keeps the device from becoming a
 house tic.
 
-✅ **The Aasimar Monk is the one Monk for whom the word is literally true**,
-and the class fantasy refuses exactly the thing the Aasimar is (the pensive
-kind, reasoning it through first). The portico's child who joined the running
-art. This is the same shape as the Aasimar Barbarian and it is a pattern worth
-naming once, in the Aasimar page: *the Celestials name everything, and their
-children keep leaving.*
+✅ **The Aasimar Monk is the one Monk for whom the word is literally true**, and
+the pairing is not a departure from the spark but the spark embodied. An
+Aasimar so in tune with the mortal body that they take it as sacred transcends
+its limits through it, merging the mortal and the celestial and channelling the
+soul through the fists. The setting already holds the well: the aureola *is*
+the crown centre made visible, the thousand-petalled lotus drawn above the head,
+and `sangha` reaches `india` at two. **The Aasimar Monk's Focus flows from the
+aureola down, through the body, into the fist.** One species-keyed line carries
+it, on Monk's Focus, for Aasimar only:
+
+> *It comes down from the ring above your head and out through your hands. The
+> body was always the instrument. You only had to consecrate it.*
 
 ---
 
@@ -335,7 +343,7 @@ they disagree (Aasimar, Dwarf) the disagreement is the character.
 
 *Italic inspiration line only, house shape: second person, an image before the
 rule, no proper nouns, no dice, no em-dashes. Rule text untouched except the two
-sweep items. Proposals for Julio's hand, not landed.*
+sweep items. Proposals for the project's hand, not landed.*
 
 ### Core lessons
 
@@ -418,24 +426,3 @@ sweep items. Proposals for Julio's hand, not landed.*
 - **Dragonborn**: the jaguar knight is unspent Aztec vocabulary, and it belongs
   to the Monk before the Barbarian.
 
----
-
-## 11. Julio's comment, followed up (2026-09-08, appended)
-
-Julio, on the Aasimar Monk: *"they could be so in tune with their mortal body,
-taking it as sacred, that they transcended the limits. They merge the mortal
-and the celestial and channel their souls through their fists. A bit of
-Chakra concept or Ki there?"*
-
-Yes, and the setting already holds the well: the halo *is* the crown chakra
-(sahasrara, drawn above the head as a disc of light), and `sangha` reaches
-`india` at 2. §6's reading of the Aasimar Monk (the pensive kind's child who
-took the running art) is replaced: **the Aasimar Monk's Focus flows from the
-aureola down, through the body, into the fist.** Not a departure from the
-spark; the spark embodied. One species-keyed line would carry it, on Monk's
-Focus, for Aasimar only:
-
-> *It comes down from the ring above your head and out through your hands.
-> The body was always the instrument. You only had to consecrate it.*
-
-See Aasimar page §11.

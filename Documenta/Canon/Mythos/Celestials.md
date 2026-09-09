@@ -1,10 +1,12 @@
 # 🕊️ Celestials
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team, written for the NPC generator first. Deep
 lore, never page text: nothing here is explained on a sheet, and a Character
 who works it out is never confirmed. Compiled 2026-09-08 from `Map_of_Ideals.py`,
 QST-0050, `Cultural-Inspirations.md`, the Warlock kit's design commentary and
-Julio's notes on the Aasimar page. The mortal end of this entry is
+the project's notes on the Aasimar page. The mortal end of this entry is
 [Aasimar.md](Aasimar.md).*
 
 > **In one sentence.** A Celestial is an Ideal with a shape: Justice itself, or
@@ -48,7 +50,7 @@ attending the highest god, each one an abstraction with a face.
 | **Mercy** | a glow with no edge, light that fades | gold / amber | a cold feeling down your spine when someone near you is afraid | Sacred Song (Polyhymnia) |
 | **Sacrifice** | a broken ring, an arc missing | red iron / ruby | darkens for a moment whenever you see someone die | Tragedy (Melpomene) |
 | **Truth** | a ring of small lights, each orbiting on its own | silver / diamond | falls into chaos when you feel anything strongly | Astronomy (Urania) |
-| **Freedom** | a star of many points, set like a compass rose | verdigris / aquamarine | twinkles when you run, harder when you fly | **Dance (Terpsichore)**, decided by Julio 2026-09-08; the empty field was a mistake |
+| **Freedom** | a star of many points, set like a compass rose | verdigris / aquamarine | twinkles when you run, harder when you fly | **Dance (Terpsichore)**, decided by the author 2026-09-08; the empty field was a mistake |
 | **Beauty** | slow waves of colour, one after another | pearl / opal | beats once when you look at something you find beautiful | Love Poetry (Erato) |
 | **Hope** | faint in daylight, one unmistakable star in the dark | tin / moonstone | spreads slowly over you when you are happy | Comedy (Thalia) |
 | **Honor** | a standing flame that burns without moving | bronze / jade | its colour changes with your mood | Epic (Calliope) |
@@ -71,7 +73,7 @@ Rules that hold across the table:
 
 Categories, not a ladder. An Angel does not answer to a Seraph; a Muse is not
 junior to a Planetar. They are different sorts of thing, from three
-mythologies, and none outranks another. Julio's list in `Map_of_Ideals.py`,
+mythologies, and none outranks another. the project's list in `Map_of_Ideals.py`,
 with a proposed *manner* for each kind so an NPC of one reads differently from
 an NPC of another:
 
@@ -93,7 +95,7 @@ Orthography per the standing rule: Greek concepts, Latin and Spanish spelling
 
 ## 4. How Celestials act in the world
 
-**They prevent, or they redeem.** The Manichaean shift (Julio, via Nietzsche's
+**They prevent, or they redeem.** The Manichaean shift (via Nietzsche's
 Zarathustra) turned a Platonic beyond, where principles balance, into a
 division of Principle and Punishment with reward notably absent: *you must be
 good, and reward is not guaranteed*. A Celestial is therefore
@@ -112,7 +114,7 @@ certain and less funny.
 the mortal who grows around it is an Aasimar. The Holy Horror of the Aasimar
 page is the Celestial's method seen from below: a life shaped as the answer to
 somebody else's decision. From above it is simply *a job that needed a hand*.
-For an Aasimar Celestial Warlock the patron is the descent ancestor (Julio):
+For an Aasimar Celestial Warlock the patron is the descent ancestor:
 the same Descent, the same Ideal, and family.
 
 **They never explain.** The Dragon canon's rule applies to Celestials without
@@ -132,7 +134,7 @@ fidelity is what a tyrant has.
 
 ## 5. The Celestial as antagonist
 
-Julio: "A campaign's BBEG can be a Celestial in pursuit of preventing
+"A campaign's BBEG can be a Celestial in pursuit of preventing
 corruption of the ideal, or the installation of the ideal into a person or
 into the party."
 
@@ -162,8 +164,8 @@ decided is a principle.
 |---|---|
 | **Gods** | Prior to them, and bound differently: gods by the wills of others, Celestials by one principle. A god can be bargained with; a Celestial cannot, and will tell you so with perfect courtesy. |
 | **Fiends** | One mechanism, opposite reading. Belief made both. The Aasimar and the Tiefling are the mortal ends; the shared priesthood that split (Aasimar page §4) is where the two sides were last one thing. |
-| **Dragons** | The fixed against the self-authored. A dragon authors itself alone and resists godhood; a Celestial is authored by the Ideal and has no self to overcome. They should find each other faintly absurd. **The Couatl**: a dragon bound to an Ideal, or an Ideal that came to wear a dragon's shape. Julio: "That may be how Couatls are made. Celestial Dragons." The Dragon Cultist Aasimar is one road (the fixed and the self-authored in one body, in a cult); an Ascending that happened to somebody whose only true possession was a principle is another. Never confirmed. |
-| **Titans and Giants** | The war for the heavens. The Goliath entry: "The gods took the heavens and the songs. The First Ones kept the world." Julio: the Trojan War read as Celestials against Titans, two camps of one war, with the Iliad's gods striking on the field as the Celestials' own register and the Odyssey as the Goliaths'. Rhodes stands with the Giants. |
+| **Dragons** | The fixed against the self-authored. A dragon authors itself alone and resists godhood; a Celestial is authored by the Ideal and has no self to overcome. They should find each other faintly absurd. **The Couatl**: a dragon bound to an Ideal, or an Ideal that came to wear a dragon's shape. "That may be how Couatls are made. Celestial Dragons." The Dragon Cultist Aasimar is one road (the fixed and the self-authored in one body, in a cult); an Ascending that happened to somebody whose only true possession was a principle is another. Never confirmed. |
+| **Titans and Giants** | The war for the heavens. The Goliath entry: "The gods took the heavens and the songs. The First Ones kept the world." the author: the Trojan War read as Celestials against Titans, two camps of one war, with the Iliad's gods striking on the field as the Celestials' own register and the Odyssey as the Goliaths'. Rhodes stands with the Giants. |
 | **Saints** | Dwarven, separate, deliberately similar from a distance. A Saint is a Dwarf who transcended into their own pure metal; a Celestial never was a mortal. The talaria's metals nod and confirm nothing. |
 | **The Dream** | The Elves' collective drift is everything a Celestial is not: malleable, shared, slow. A Celestial in the Feywild is a fixed point in a substance that has none, and the Fae find that either hilarious or intolerable. |
 | **The sea** | Athens' register is naval, and Plato's own Atlantis is a Celestial well: the sea-people from before, with a faint shimmer of "celestial" in the literal sense. Minoan and Ionian Greece belong here too, and the fishermen's register on the Vatican key. |
@@ -210,7 +212,7 @@ decided is a principle.
 
 ## 9. Sayings (a pool, not lore)
 
-Per Julio: take sayings from the wells, never the institutions. Candidates for a
+The rule: take sayings from the wells, never the institutions. Candidates for a
 Celestial's mouth, or for the prayer ledger's `athens`, `vatican` and `sangha`
 keys:
 

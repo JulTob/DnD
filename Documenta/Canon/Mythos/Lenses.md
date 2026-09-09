@@ -1,5 +1,7 @@
 # 🔭 Lenses: the generator read as a designed thing
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. The thirty-six pages before this one read
 the generator element by element. This one reads it whole, through the three
 craft books in the project's book folder (a game-design lens book, a

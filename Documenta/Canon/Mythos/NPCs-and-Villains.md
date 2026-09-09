@@ -1,5 +1,7 @@
 # 🎭 NPCs and Villains: the other side of the table
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. The NonPlayer side has three engines: the
 live summoner the app calls (`Map_of_NonPlayer_Generation`, running from
 vaulted bytecode since the 2026-08-29 recovery), the legacy `NPC` class in
@@ -208,7 +210,7 @@ them "evil." ✅ The page copy: "They may be a villain, a Quest Master, a
 contested…" carries the design.
 
 ⚠️ The scene layer behind it does not import (§1). ❓ The Dungeon Area's
-description reads "Tragones y Mazmorras sense": Julio's pun, in a string that
+description reads "Tragones y Mazmorras sense": the project's pun, in a string that
 may print.
 
 ---
@@ -237,7 +239,7 @@ undead sub-table; the Fiend docstring's two belief axes; the per-people fiends.
 
 **Open (this page proposes)**: §6.
 
-**Julio's call**: "Tragones y Mazmorras" on the sheet; whether *Angelic
+**Undecided:** "Tragones y Mazmorras" on the sheet; whether *Angelic
 Bloodline* and *Half-Angel* survive as NPC kinds at all.
 
 ---

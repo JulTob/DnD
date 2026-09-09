@@ -1,9 +1,11 @@
 # 🗂️ The Guilds: registers, names, devices, seats
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. One table for what the thirteen class pages
 established, so the next author of any class text starts from the whole set.
-Compiled 2026-09-08. The etymologies are Julio's (Aasimar page); the registers
-follow Julio's rule of one register per class, chosen on purpose; the devices
+Compiled 2026-09-08. The etymologies are the project's (Aasimar page); the registers
+follow the project's rule of one register per class, chosen on purpose; the devices
 follow the law the Warlock kit demonstrated.*
 
 ---
@@ -30,7 +32,7 @@ follow the law the Warlock kit demonstrated.*
 
 ## 2. The rules the table implies
 
-1. **One register per class, chosen on purpose** (Julio). Thirteen registers,
+1. **One register per class, chosen on purpose**. Thirteen registers,
    no two alike, and the Rogue's was the one gap (the picaresque, proposed).
 2. **One device per text, not only a register** (from the Warlock kit).
    Recorded here so the next author is asked *what does your text do* before
@@ -81,7 +83,7 @@ on the sheet.
 | Sorcerer (Draconic) | The ancestry | ⚠️ Never drawn for a non-Dragonborn; decided to be the species' for a Dragonborn. |
 
 One mechanism (form by tool or culture, material by the Materials map,
-losable by rule) and eight consumers: a Kit, when Julio wants it.
+losable by rule) and eight consumers: a Kit, when wanted it.
 
 ---
 

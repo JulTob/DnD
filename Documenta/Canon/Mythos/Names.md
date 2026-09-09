@@ -1,5 +1,7 @@
 # 🔤 Names: the first line of every sheet
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. `AtlasNomina/Map_of_Names.py` composes a name
 from a per-people module in `AtlasNomina/Races/`, by list pick, syllable
 mixing and phonotactic construction, on a ladder that ends in a roster that
@@ -126,7 +128,7 @@ Skullrend, Demonblood*. Two entries fuse for a missing comma (`"Honesty" "Zephyr
 ⚠️ **Aasimar.** *Taurus, Gemini, Leo, Orion, Perseus, Metatron, Elohim, Anubis*
 as given names. The loaded-names rule keeps lore names in the pool; *Elohim*
 is not a lore name, it is the word for God, in a setting whose Celestials
-have no sender. Julio's call. The orthography rule is half applied: *Ofiucus,
+have no sender. Undecided. The orthography rule is half applied: *Ofiucus,
 Casiopea* beside *Cassiopea, Athena, Nyx*. The `Valkyrie` gate adds Norse
 material to a Latin-Greek pool.
 

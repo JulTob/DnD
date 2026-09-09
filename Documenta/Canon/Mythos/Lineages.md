@@ -1,5 +1,7 @@
 # 🧬 Lineages: what a sub-identity is, people by people
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. Every people page read its species whole. None
 read the layer underneath: the Elf's six lineages, the Tiefling's three
 legacies, the Gnome's two, the Goliath's six heritages, the Dragonborn's ten

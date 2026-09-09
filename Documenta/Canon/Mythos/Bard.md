@@ -1,5 +1,7 @@
 # 🎭 Bard: the Told, read against the whole setting
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. Builds
 on Dialog 0015 (core fantasy settled as "the world listens; your art can move
 it", with the collector as supporting current and the persona refracted into
@@ -83,18 +85,19 @@ design. That leaves **Euterpe** (music, lyric) and **Terpsichore** (dance)
 unassigned, and Muses are Celestials, and the Bard is the Muses' class.
 
 ✅ **Two Ideals are waiting to be named, and the Bard is the class to name
-them.** Candidates, offered for Julio, in the shape the map already uses
+them.** Candidates, offered in the shape the map already uses
 (alignment-independent, twistable, tell never naming the Ideal):
 
 | Ideal | Muse | Form of the aureola | Metal / gem | Tell |
 |---|---|---|---|---|
-| **Joy** | Terpsichore | a ring that turns, slowly, and faster when it has reason | copper / citrine | *It spins when you move to music, whether or not anyone else can hear any.* |
 | **Grace** | Euterpe | a soft line that follows the shape of your head like a second hairline of light | pale gold / pearl | *It steadies when you are forgiven, and it does not care whether you deserved it.* |
 
-Both are twistable in the canon's sense: "joy at your expense", "grace is what
-I decide you deserve". Joy's Muse is the College of Dance's; an Aasimar of Joy
-in the College of Dance is the one Bard whose spark and profession are the
-same thing, which the Aasimar page asked for. Grace is the harder Ideal and
+**Terpsichore belongs to Freedom, and Dance is Freedom's college.** Dance is an
+expression of freedom, so the College of Dance is where an Aasimar of Freedom
+finds spark and profession in the same place: the compass-rose halo that
+"twinkles when you run, and harder when you fly" is its tell. Grace is
+twistable in the canon's sense ("grace is what I decide you deserve"), and
+Euterpe, music and lyric, is the one Muse still unassigned. Grace is the harder Ideal and
 the better one: the setting has Mercy (the open hand) and Hope (the star in
 the dark) and nothing for *unearned ease*, which every Bard's art is.
 
@@ -203,7 +206,7 @@ page §5), which is the whole point of the Tiefling.
 
 | People | The seed | College | Note |
 |---|---|---|---|
-| **Aasimar** | The Muses' children (§3). Plainchant; the kithara. | Dance (Joy), Lore (Clio, History). | ✅ The one species whose spark is an art. |
+| **Aasimar** | The Muses' children (§3). Plainchant; the kithara. | Dance (Freedom, Terpsichore), Lore (Clio, History). | ✅ The one species whose spark is an art. |
 | **Elf** | Egil's head-ransom; the skald's *níð*; the harp. And the Dream drifts on story. | Lore, Glamour. | ✅ An Elf Glamour Bard "performed for a court that does not admit mortals twice"; the Elf *came out of* that court. ⚠️ The Glamour text assumes a mortal outsider; on an Elf, the loan reads as family, and the closing line ("still counts you as part of the show") is truer than it knows. Worth one sentence's care. |
 | **Dwarf** | *Escarnio*, the *romancero*, the Cid's juglar, the vihuela, the duende. | Lore, Valor. | ✅ The Dwarf Bard is the richest well on the roster and the least expected. "Gold never corrupts" against a satirist who is paid in it. |
 | **Dragonborn** | Flower and song; Noh; the shamisen and the huehuetl. Two silhouettes. | Valor (Nezahualcóyotl), Glamour (the mask). | ✅ A codified society "of rules" and an art whose name means the only truth: the Dragonborn Bard is the clan's one licensed liar. |
@@ -306,7 +309,7 @@ page §5), which is the whole point of the Tiefling.
 *Italic inspiration line only. Register: the told tale, second person, a
 drummed cadence kept as seasoning, no proper nouns, no dice, no em-dashes. Rule
 text untouched except the open choices, which are rules work. Proposals for
-Julio's hand.*
+proposals.*
 
 ### Core lessons
 
@@ -366,7 +369,7 @@ Julio's hand.*
 - **Canon**: one paragraph recording that the Bard operates the setting's
   plastic metaphysics (§2), placed in the Dragon or Elf canon where the loop
   is already stated.
-- **Aasimar / QST-0050**: Joy and Grace as the ninth and tenth Ideals (§3).
+- **Aasimar / QST-0050**: Grace as a candidate ninth Ideal, and where Euterpe sits (§3).
 - **Gear**: `Map_of_Instruments` (§5), and the Bard's Spellcasting Focus
   seated as a named instrument.
 - **Tiefling**: the host-culture instrument as the species' first inheritance.
@@ -375,30 +378,15 @@ Julio's hand.*
 - **Rules work outside this page**: the five open choices, the verbatim
   paragraphs.
 
----
-
-## 11. Julio's decision (2026-09-08, appended)
-
-Julio, on the Aasimar page: *"The obvious answer is that it's just a mistake:
-Dance is an expression of freedom! We should update to link them."*
-
-§3 above proposed Joy as a ninth Ideal for Terpsichore. Withdrawn: **Freedom's
-Muse is Dance**, and the empty `muse` field on Freedom in `Map_of_Ideals.py`
-is the bug. The College of Dance is therefore Freedom's college, and an Aasimar
-of Freedom in the College of Dance is the pairing where spark and profession
-coincide, with the compass-rose halo that "twinkles when you run, and harder
-when you fly" as its tell. Euterpe (music, lyric) is the only Muse still
-unassigned; Grace remains a candidate for it, and it is Julio's to accept or
-leave. See Celestials page §2.
 
 ---
 
-## 12. Correction (2026-09-08, appended)
+## 11. The Tiefling's instrument
 
-§5 and §10 give the Tiefling "whatever the host culture plays" as their
-instrument. Julio has decided there is no host-culture draw for the Aasimar or
-the Tiefling; both stay distinct (Tiefling page §5). The instrument should come
-from the Tiefling's own register instead: the carvings nobody can read are the
-one inheritance the canon allows, and the register behind them is Egypt. A
-sistrum, or a frame drum, drawn from the `grimdark` pool with one Tiefling-only
-entry, keeps the species distinct without saying why. The Halfling line stands.
+There is no host-culture draw for the Aasimar or the Tiefling; both stay
+distinct peoples. So the Tiefling's instrument comes from their own register
+rather than from whatever the host culture plays. The carvings nobody can read
+are the one inheritance the canon allows them, and the register behind those is
+Egypt: a sistrum, or a frame drum, drawn from the `grimdark` pool with one
+Tiefling-only entry. That keeps the species distinct without saying why. The
+Halfling's fiddle and spoon stand.

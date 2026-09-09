@@ -1,5 +1,7 @@
 # ⚔️ Paladin: the Sworn, read against the whole setting
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. No
 Dialog exists for the Paladin; this page does the archetypal read from a blank
 sheet, in the shape the Barbarian, Monk and Cleric dialogs established, and then
@@ -92,9 +94,13 @@ Barbarian's).
 
 ## 3. The name, and the oath-breaker next door
 
-*Palatinus*: of the palace. Charlemagne's Twelve Peers. A Latin word, and by
-the pattern the Barbarian and Monk pages found, a Celestial-vocabulary word
-(`vatican`, `rome`). The founding text is the *Song of Roland*, and the Song
+*Palatinus*: of the palace, from the Palatine Hill. The royal guard, the
+imperial one. Charlemagne's Twelve Peers. By the pattern the Barbarian and Monk
+pages found, the Guilds are named in somebody's vocabulary, and this one is the
+**Goliaths'**: `rome` (the legion, the road, the Palatine) is theirs, while
+`vatican` is the Celestials'. The Paladin is named by the Giants, and since the
+Goliaths are the civilisation that fell, the class name means *the guard of a
+palace that is gone*, which is the oath outliving its reason. The founding text is the *Song of Roland*, and the Song
 of Roland happens at **Roncevaux, in the Pyrenees, against the Saracens of
 Zaragoza**. In this setting that is the Dwarves' border, and the enemy in the
 poem is the Dwarves' other half (`andalus`). ✅ The Paladin's founding myth is
@@ -292,7 +298,7 @@ vow, and nobody in-world will read it correctly.
 *House rules: second person; no em-dashes; no proper nouns; no open choices; no
 "watched over"; the oath is never quoted. Plain prose for the Guild block and
 the four `extends=` texts, then italic lines for the features. Proposals for
-Julio's hand.*
+proposals.*
 
 ### Class text (new)
 
@@ -417,29 +423,10 @@ Mercy is not forbidden to you. It is simply not what you promised, and you do no
 - **Names of the Guilds**: barbaros, monachos, palatinus, wǣrloga. A page on
   who names whom.
 
----
-
-## 11. Julio's correction (2026-09-08, appended)
-
-Julio: *"Palatinus, from the Palatine Hill in Rome. Royal Guard. Imperial."*
-
-§3 above files *palatinus* under the Celestials' vocabulary. Wrong key: `rome`
-(the legion, the road, the Palatine) is the **Goliaths'**; `vatican` is the
-Celestials'. The Paladin is named by the Giants. This strengthens §3's own
-finding rather than weakening it: the Palatine guard is the imperial guard,
-and the Goliaths are the civilisation that fell, so the class name is *the
-guard of a palace that is gone*, which is the oath outliving its reason. The
-Aasimar page §11 records the corrected pattern (Athens names the Barbarian,
-the sangha the Monk, Rome the Paladin; the Warlock is named by nobody
-classical).
 
 ---
 
-## 12. Addendum (2026-09-08, appended): the one line the page missed
-
-A level-20 sweep of Training features without a line found every Paladin
-feature already drafted on this page except **Oath Spells**. For symmetry with
-the others:
+## 11. Oath Spells
 
 | Feature | Line |
 |---|---|

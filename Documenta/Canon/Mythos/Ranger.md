@@ -1,7 +1,9 @@
 # 🏹 Ranger: the One Who Does Not Let Go, read against the whole setting
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. No
-Dialog exists for the Ranger. Julio's standing rule fixes the register (one
+Dialog exists for the Ranger. The standing register rule fixes it (one
 register per class: "the Ranger reads like an adventure novel"), but no text
 was ever written to it and none survives in the vault. This page derives the
 core fantasy from the rules, places the class inside the setting's peoples,
@@ -81,7 +83,7 @@ pursuer. The class text should carry it, the way the Druid's Sea carries Ahab
 and the Barbarian carries Ajax: not as a warning, as the thing that makes the
 fantasy cost something.
 
-**Register.** The adventure novel, per Julio's rule: concrete geography,
+**Register.** The adventure novel, by the register rule, concrete geography,
 weather, the map with an edge, sentences that move forward, and the device
 of the chapter break: **each archetype text ends on a sentence that stops
 mid-pursuit.** Second person, as everywhere in the house. Distinct from the
@@ -310,7 +312,7 @@ means by "the thing itself".
 *House rules: second person; the adventure novel's texture (geography,
 weather, the edge of the map); no proper nouns; no em-dashes; no open choices;
 the Ranger comes back out with something, never merely belongs. Every
-archetype text ends mid-pursuit. Proposals for Julio's hand.*
+archetype text ends mid-pursuit. Proposals.*
 
 ### Class text (new)
 

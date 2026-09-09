@@ -1,5 +1,7 @@
 # 🕸 Relationships: what the pairings mean
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. The generator draws species, Guild and
 background independently (Decree 0005 nudges the odds, never the meaning), so
 every pairing is possible and every pairing has to be tellable. This page
@@ -56,7 +58,7 @@ only tilts the odds.
 ### Aasimar
 - **With the grain**: Paladin (the oath is the Aasimar's own; the Ideal did not
   ask for it and does not care), Monk (the spark channelled through the body,
-  Julio's decision), Cleric (the Kept seat, with the twist that what is kept in
+  the decision), Cleric (the Kept seat, with the twist that what is kept in
   them is not a god's).
 - **Across**: **Warlock**, especially Celestial, which is *not* the spark: an
   Aasimar hired by an Ideal-being while carrying an Ideal of their own, and the

@@ -1,5 +1,7 @@
 # 🐻 Barbarian: the Untamed
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. Builds on Dialog 0014 (the core fantasy, settled as "the untamed one": Rage is the self
 undiluted, hesitation lost and control kept). This page does not re-litigate that.
 It asks what the Barbarian becomes once it stands inside this setting's peoples,
@@ -13,7 +15,7 @@ lines: `AtlasOfTraining/Map_of_Barbarian_Training.py`. Legend register:
 
 ---
 
-## 1. The name is an exonym, and the chant knows it
+## 1. The name is an exonym, and the fantasy is not
 
 *Bárbaros* is Greek for the one who says "bar-bar": the one who does not speak
 Greek. It is not a people's word for itself. It is the word the portico uses for
@@ -30,11 +32,13 @@ deliberately rather than by accident: *"somebody says the word, but not as the
 insult it is: Tiefling."* Two identities on the roster are reclaimed exonyms. The
 class and the species rhyme, and a Tiefling Barbarian carries the rhyme twice.
 
-⚠️ **It is not yet on the page.** The chant reclaims the word without ever
-admitting it was somebody else's. One sentence would do it and should never
-explain who "they" are: *"It is not our word. We kept it anyway."* Recommended,
-not landed. (Rule from the Canon: never write the scene where somebody explains
-it and is believed.)
+⚠️ **The exonym is colour, not the fantasy.** The Barbarian is not about being
+uncivilised. It is about **living true to an emotion**, coded as Rage, and
+Dialog 0014 settled that as the untamed one: authenticity, the self undiluted.
+The etymology is a fact a Dungeon Master may put in an NPC's mouth. It does not
+belong in the chant, and no line reclaiming the word should be added. (Rule
+from the Canon: never write the scene where somebody explains it and is
+believed.)
 
 **Implication for lore.** Every people has a word for the Barbarian that is not
 "Barbarian". The Goliaths, being Sparta, would not use the Athenian word at all.
@@ -355,7 +359,7 @@ best ones are *tensions*, not reinforcements.
 
 *Italic inspiration line only, in the house shape: second person, an image before
 the rule, no proper nouns, no dice in the line, no em-dashes. Rule text untouched.
-These are proposals for Julio's hand, not landed text. Where a current line is
+These are proposals for the project's hand, not landed text. Where a current line is
 kept, it says so.*
 
 ### Core lessons
@@ -433,19 +437,3 @@ kept, it says so.*
 - **Orders**: a Primal Order of the Storm with a Barbarian in it is the default;
   the Arcane one is the story.
 
----
-
-## 11. Julio's correction (2026-09-08, appended)
-
-Julio, on the Aasimar page: *"Barbarian itself is not about being uncivilized,
-but about living true to an emotion, coded as the Rage of the barbarian."*
-
-§1 above reads the class name as an exonym reclaimed. That is etymological
-colour, and it is not the fantasy; Dialog 0014 had it right (the untamed one:
-authenticity, the self undiluted). The proposed line *"It is not our word. We
-kept it anyway."* is withdrawn as a recommendation. The exonym stays a fact a
-DM may use in an NPC's mouth; it does not belong in the chant. The Aasimar
-row in §5 should be read through Julio's three figures: the zealot for the
-Ideal, the wanderer who takes everything as a miracle (World Tree), the
-philosopher who loves the Ideal (the Berserker's whole-of-the-moment turned
-toward the one fixed thing). See Aasimar page §11.

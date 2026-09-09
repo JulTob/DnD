@@ -1,8 +1,10 @@
 # 📖 Wizard: the Argument Against Forgetting, read against the whole setting
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. No
 Dialog exists for the Wizard, but the class text is finished and shipping from
-the vault, and Julio's register rule names it ("the Wizard reads like the Dao De
+the vault, and the register rule names it ("the Wizard reads like the Dao De
 Jing"). This page reads that text as the settled fantasy, places the class in
 the setting, and drafts what is missing: five tradition texts and the feature
 lines. Nothing here is landed.*
@@ -77,7 +79,7 @@ one. Not a contradiction: the Wizard is the class that knows what writing
 the corpus ("I know that I know nothing" is already in the Knowledge prayer
 pool) is the Wizard's epistemology.
 
-**Register.** The Dao De Jing, per Julio's rule, and the class text already
+**Register.** The Dao De Jing, by the register rule, and the class text already
 performs it: short paragraphs that turn on a paradox, concrete and plain. The
 tradition texts should be **chapters** in the same book: each one a paradox
 the school lives by, two paragraphs, no proper nouns. The device: *the first
@@ -295,7 +297,7 @@ of memory, and the Ascending is the one that stops needing the page.
 *House rules: second person; the Dao De Jing's shape (short, plain, turning on
 a paradox); no proper nouns; no em-dashes; no open choices. Device: the first
 sentence of each tradition text could be carved over a door. Proposals for
-Julio's hand.*
+proposals.*
 
 ### Abjurer (new)
 

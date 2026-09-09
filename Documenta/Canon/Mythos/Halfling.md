@@ -1,8 +1,10 @@
 # 🧀 Halfling
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. Deep lore and settled direction, not page text.
 Compiled 2026-09-08 from the Halfling kit, the species entry, `AtlasNomina/Races/Halfling.py`,
-the class analyses and Julio's notes.*
+the class analyses and the design notes.*
 
 > **In one sentence.** Nothing bad ever happens to Halflings, and it is paradise,
 > and it is unbearable; sooner or later one of them stands in the valley on a
@@ -14,7 +16,7 @@ the class analyses and Julio's notes.*
 
 | What | Where | State |
 |---|---|---|
-| Species entry (Julio's) | `AtlasActorLudi/SpeciesKit/Halflings/__init__.py` | Shipping. "Concerning Halflings" (the Tolkien nod in the first word). First person plural, then "you left". Closes on the foods missed and the stories to tell on getting back. |
+| Species entry | `AtlasActorLudi/SpeciesKit/Halflings/__init__.py` | Shipping. "Concerning Halflings" (the Tolkien nod in the first word). First person plural, then "you left". Closes on the foods missed and the stories to tell on getting back. |
 | Traits and rules | `Halflings/resolution.py`, `traits.py` | House pattern (QST-0094). Brave: *"You were brave enough to leave home. You can handle this."* Nimbleness: *"This is just like child's play. Try not to get caught."* Luck: *"Halflings are said to be the luckiest people alive. You hope…"* Naturally Stealthy: *"You read in your stories that halflings can become invisible. You often wish it were true."* |
 | Names | `AtlasNomina/Races/Halfling.py` | Inspirations: food, the delights of life, hobbits. Names in English, surnames in French. The generator's Halflings: Apricot Pecan, Achunne Efrisemoot, Macedonon. |
 | Culture keys | **none** | ⚠️ No row in `_CULTURES`; gear from the generic pool. |
@@ -72,7 +74,7 @@ promises.
 peoples with no row in the gear map. The name file (English names, French
 surnames, food) and the entry (the wide green valley, the wet spring, the
 cellar of cheese and dried tomatoes) suggest a temperate farming register that
-the brief has not keyed. Julio's call; the wells the class pages reached for
+the brief has not keyed. Undecided; the wells the class pages reached for
 were the fiddle and the spoon (Bard), the recipe book (Wizard, Alchemist), the
 pony and the goose (Beast Master).
 
@@ -132,12 +134,12 @@ Dwarf's homecoming needs gold; the Halfling's needs a story. Two returns.
 
 ## 6. Decisions log
 
-**Decided (Julio)**
+**Decided**
 
 - The species entry and the four trait lines are the house pattern's
   reference (QST-0094). "Concerning Halflings" stays.
 
-**Open (Julio's to decide)**
+**Open**
 
 - **Culture keys**: none. The temperate farming register is implied and
   unkeyed.

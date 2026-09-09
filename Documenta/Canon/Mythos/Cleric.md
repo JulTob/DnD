@@ -1,7 +1,9 @@
 # 🕯️ Cleric: the Kept, read against the whole setting
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. Builds
-on Dialog 0016 (core fantasy settled, on Julio's seed: to be seen and watched over
+on Dialog 0016 (core fantasy settled, on the project's seed: to be seen and watched over
 by a parental entity; Domains are parenting styles; being watched over teaches you
 to watch over). This page does not re-litigate that. It asks what the watcher is
 in each people's cosmology, where the warm register has to earn its warmth, what
@@ -289,7 +291,7 @@ run alongside this one is the evidence for it.
 *Italic inspiration line only. House shape: second person, warm scripture
 (parallelism, concrete images, the care prior), no proper nouns, no dice, no
 em-dashes. Each Domain keeps its parenting style: lullaby, lesson, conspiracy,
-drill. Rule text untouched. Proposals for Julio's hand, not landed.*
+drill. Rule text untouched. Proposals for the project's hand, not landed.*
 
 ### Core lessons
 
@@ -359,14 +361,14 @@ drill. Rule text untouched. Proposals for Julio's hand, not landed.*
 
 ---
 
-## 12. Addendum (2026-09-08, appended): what the Kept seat costs
+## 12. What the Kept seat costs
 
-The Lenses page's six-aspects table found one blank: every caster's price is
-named by the canon except the Cleric's. The Warlock pays in terms, the Sorcerer
+Every caster's price is named by the canon except the Cleric's (Lenses, the six
+aspects of magic). The Warlock pays in terms, the Sorcerer
 in the body, the Dwarf in proof, the Aasimar in an Ideal that does not care
 what they meant. The Cleric is kept, watched over by a parent, and the page
 never says what that costs. Three options, in the parent frame Dialog 0016
-settled, for Julio's hand:
+settled, :
 
 | Option | The cost | Line it would give the class |
 |---|---|---|

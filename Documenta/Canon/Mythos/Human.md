@@ -1,8 +1,10 @@
 # 🧭 Human
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. Deep lore and settled direction, not page text.
 Compiled 2026-09-08 from the Human kit, the species entry, `AtlasNomina/Races/Human.py`,
-`Cultural-Inspirations.md`, the class analyses and Julio's notes.*
+`Cultural-Inspirations.md`, the class analyses and the design notes.*
 
 > **In one sentence.** The wonderful wanderers: there is nowhere humans are not
 > and nowhere humans wouldn't go, they thrive by friendship, and they organise;
@@ -14,7 +16,7 @@ Compiled 2026-09-08 from the Human kit, the species entry, `AtlasNomina/Races/Hu
 
 | What | Where | State |
 |---|---|---|
-| Species entry (Julio's) | `AtlasActorLudi/SpeciesKit/Humans.py` | Shipping. First person plural ("our people"). Closes on "what kinds of organizations {name} may belong to, such as guilds, schools, or militias." |
+| Species entry | `AtlasActorLudi/SpeciesKit/Humans.py` | Shipping. First person plural ("our people"). Closes on "what kinds of organizations {name} may belong to, such as guilds, schools, or militias." |
 | Traits and rules | `Humans.py` (Resourceful, Skillful, Versatile) | Resourceful: *"Today is **the** day, my friend."* Skillful: *"You learnt by trying."* Versatile grants a second Origin feat, drawn from the whole pool. |
 | Names | `AtlasNomina/Races/Human.py`, `HumanLegacy.py` | "Agender-neutral from African, Native, Aboriginal origins" and beyond; a per-Character *nomina culture* is drawn (`identity.species.Human.nomina_culture`), so a Human's name comes from one culture at a time. |
 | Culture keys | `africa`, `egypt`, `maghreb`, `carthage`; legend `arthuriana` | "The baseline everyone else is measured from." Bloomery iron, ebony; gilded bronze, carnelian, electrum; nickel-silver, cedar, camel bone; Tyrian-dyed bronze, esparto, ivory. |
@@ -121,11 +123,13 @@ four keys. The Human page's one rule for writers: *a Human Character is never
 generic; a Human Character is Egyptian, Carthaginian, Maghrebi or African, and
 the sheet should know which.*
 
-**Versatile leaks Dark Gifts.** A Human's second Origin feat is drawn from the
-whole pool, so a Human Tomb Raider carried the Shadow background's *Shadow
-Cast* ("It Follows") with no shadow in sight (Warlock page). A Dark Gift is a
-background's story, not a feat pool entry. Either gate them, or give Versatile
-a line that admits the gift arrived unexplained, which is a Human story too.
+**Versatile draws Dark Gifts, and that is the design.** A Human's second Origin
+feat is drawn from base feats and every setting Origin feat, Dark Gifts
+included, so a Human Tomb Raider can carry the Shadow background's *Shadow
+Cast* ("It Follows") with no shadow in sight. What such a sheet needs is not a
+gate but the gift's own line, which already exists as a docstring in the source
+and never reaches the page. A Human carrying one is the compact's shadow: the
+boon from the one alliance nobody chose.
 
 **Against everyone.** The Human is measured from, and the other peoples measure
 themselves *against*: the Orc entry names Humans among the takers ("came to
@@ -174,7 +178,7 @@ species that most needs its backgrounds to speak has the thinnest ones.
 
 ## 8. Decisions log
 
-**Decided (Julio)**
+**Decided**
 
 - The four keys, and the refusal of the Britain default (the brief).
 - The species entry speaks as "we" (`9be3a07`).
@@ -183,7 +187,7 @@ species that most needs its backgrounds to speak has the thinnest ones.
 **Open (this page proposes)**
 
 - **The metaphysic**: *the compact*, for the peoples table.
-- **Versatile and Dark Gifts** (§5).
+- **The Dark Gift lines onto the sheet** (§5, and the Feats page §3).
 - **The writer's rule**: a Human Character is never generic; the sheet should
   know which of the four wells it is drawing from, and the gear and name
   should agree.
@@ -210,14 +214,3 @@ species that most needs its backgrounds to speak has the thinnest ones.
 - **Cultural Inspirations**: the baseline's four keys; the brief's whole point.
 - **Official backgrounds**: the Human's thinnest draws.
 
----
-
-## 11. Correction (2026-09-08, appended)
-
-§5 and §8 treat Versatile drawing a Dark Gift as a leak to gate. It is Julio's
-call: the pool includes every setting Origin feat, Dark Gifts included. The
-page's second option stands as the recommendation: the Dark Gift's own docstring
-line on the sheet ("Something is always looking, and it is not on your side"),
-so the gift that arrived unexplained explains itself in one sentence. The Human
-who carries one is the compact's shadow: the boon from the one alliance nobody
-chose. See the Feats page §3.

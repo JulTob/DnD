@@ -1,11 +1,13 @@
 # 🧮 Draft Tables: the content behind six open decisions
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. Four of the proposed Agora questions (Q-0019,
 Q-0024, Q-0027, and the value line of Lenses §13) and two README open items
 (the Orc and Halfling culture keys; Euterpe) ask whether a table should exist.
 Sections E and F answer the two README items. These are the tables, drafted so the question can be answered by
 reading them. House rules throughout: one line each, no em-dashes, the Order's
-or the background's own register, nothing explained. Proposals for Julio's
+or the background's own register, nothing explained. Proposals for the project's
 hand, 2026-09-08.*
 
 ---
@@ -191,7 +193,7 @@ Orc names ("S would bite the tongue") survives any choice.
 |---|---|---|---|---|
 | **A** | `kirghiz` | `western` | The class pages already reached for the berkutchi's eagle, the manaschi's half-million lines and the *nerge* hunt; this key lands them. Distinct from the Elves' `mongol` by nation and by epic (Manas, not the Secret History). The cowboy strand of the name file becomes a legend register (*western*: the drover, the long drive, the standard that is not a flag), not a society. | One living culture carries the whole people; the canon's Tiefling caution about mascots applies, and the Orc's "old hatreds" story engine line must go first. |
 | **B** | `scythian`, `kirghiz` | `western` | Two steppes, ancient and living: kurgan gold, the recurve bow, griffins on the horse-gear; and the eagle and the epic. The wind path has two ages. | Two keys to write prayers, materials and nouns for. |
-| **C** | `pampa` | `western` | The horse plains of the south: the gaucho's *facón*, the poncho, the *payada* sung in the pulpería, the *rastra* belt of silver coins; a plains-rider culture in Julio's own tongue, and no nation's costume. *Martín Fierro* as the legend that sits under `western`. | Leaves the class pages' steppe readings as wells the DM reaches for rather than keys. |
+| **C** | `pampa` | `western` | The horse plains of the south: the gaucho's *facón*, the poncho, the *payada* sung in the pulpería, the *rastra* belt of silver coins; a plains-rider culture in the project's own tongue, and no nation's costume. *Martín Fierro* as the legend that sits under `western`. | Leaves the class pages' steppe readings as wells the DM reaches for rather than keys. |
 
 Consequences for any option: four Orc rows in the prayer ledger (the storm
 lines exist; the key gives them a voice), materials (felt, horn, sinew; or
@@ -213,7 +215,7 @@ linen, cheese-cloth, cider-oak).
 ## F. Euterpe (README open item)
 
 Nine Muses, eight Ideals. The Celestials page seats Clio (Justice), Polihimnia
-(Mercy), Melpomene (Sacrifice), Urania (Truth), Terpsicore (Freedom, by Julio's
+(Mercy), Melpomene (Sacrifice), Urania (Truth), Terpsicore (Freedom, by the project's
 decision), Erato (Beauty), Talia (Hope), Calliope (Honor). Euterpe, lyric and
 the flute, is unseated; *Joy* as a ninth Ideal was superseded.
 

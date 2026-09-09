@@ -1,8 +1,10 @@
 # 🕯️ Warlock: the Noticed, read against the whole setting
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. No
 Dialog exists for the Warlock, but the design commentary above each patron in
-`AtlasOfGuilds/WarlockKit.py` (Julio, 2026-08-19 to 08-21) is the most complete
+`AtlasOfGuilds/WarlockKit.py` (the author, 2026-08-19 to 08-21) is the most complete
 record of authorial intent in the project and the standard the Barbarian, Monk
 and Cleric dialogs cite. This page reads that standard back at the rest of the
 roster, places the Warlock in the setting's metaphysics, and drafts the feature
@@ -297,12 +299,14 @@ engines already describe the same thing from two distances.
    *"{patron}'s aims are certainly evil"*, which moral-locks the Fiend and
    contradicts the toxicity design. They did not reach the sampled sheets;
    retire them before they do.
-4. **Dark Gifts through Versatile.** A Human can draw *Shadow Cast* (the
-   Shadow background's Dark Gift, with "It Follows") as a free origin feat,
-   with the Tomb Raider background and no shadow in sight. A Dark Gift is a
-   background's *story*, not a feat pool entry. Either gate Dark Gifts to
-   their backgrounds or give Versatile a line that admits the curse arrived
-   unexplained, which is itself a Warlock story.
+4. **Dark Gifts reach the sheet without their line.** A Human's Versatile draws
+   from base feats and every setting Origin feat, Dark Gifts included, which is
+   the intended pool: a Human Tomb Raider can carry *Shadow Cast* ("It
+   Follows") with no shadow in sight. The gap is not the draw but the silence.
+   A Dark Gift arriving through Versatile needs its line more than any other
+   feat, because no background explained it, and each Dark Gift already carries
+   one as a docstring in the source ("Something in you is already partway
+   across"). Move them onto the page.
 5. **The casting variants are silent on the sheet.** "Occultist (Warlock)" as
    a heading with no sentence. One line each would keep the egg and hand the
    player the difference: Occultist, *"You did not sign. You studied, and the
@@ -322,7 +326,7 @@ engines already describe the same thing from two distances.
 em-dashes. Each patron keeps its own device: the Fiend's lines are interior;
 the Celestial's are the briefing voice; the Archfey's are rhymed couplets, end-
 stopped; the Great Old One's are two or three words, so the eldritch span can
-paint them. Rule text untouched. Proposals for Julio's hand.*
+paint them. Rule text untouched. Proposals.*
 
 ### Core lessons
 
@@ -392,14 +396,3 @@ paint them. Rule text untouched. Proposals for Julio's hand.*
   signed; the Sorcerer is the one who never had to. Decide what separates them
   before the Sorcerer page.
 
----
-
-## 11. Correction (2026-09-08, appended)
-
-§8 flag 4 treats a Human's Versatile drawing a Dark Gift as a leak. It is
-Julio's recorded call (`Map_of_Official_Origin_Feats.py`): *"a Human's Versatile
-draws from base feats and every setting Origin feat, Dark Gifts included."* The
-finding that survives is the second half of the flag: a Dark Gift arriving
-through Versatile needs its line on the sheet more than any other feat, and the
-Dark Gifts already carry those lines as docstrings ("Something in you is already
-partway across"). See the Feats page §3.

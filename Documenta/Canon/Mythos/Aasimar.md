@@ -1,12 +1,13 @@
 # ✨ Aasimar
 > The Mortal Angel
+>
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
 
 *Wiki entry for the design team. Deep lore and settled direction, not page text.
-Compiled 2026-09-08 from the class analyses and Julio's notes; where Julio has decided, the decision is stated as such. The companion entry for the Celestials themselves, written for the NPC generator, is [Celestials.md](Celestials.md).*
+Compiled 2026-09-08 from the class analyses and the design notes; where a decision is settled, it is stated as such. The companion entry for the Celestials themselves, written for the NPC generator, is [Celestials.md](Celestials.md).*
 
 > ### **In one sentence.**
 > An Aasimar carries the Spark of something perfect, and it is the measuring bar; but the Aasimar is mortal, inperfect, and is always short. Not an angel, but someone who **has to live**. 
-> *(Julio, 2026-09-08.)*
 
 ---
 
@@ -45,11 +46,11 @@ this project and moving it takes a question, a Dialog and a Decree.*
 >
 > ⚖️ **Three markers, as a subculture, and no host-culture draw.** `athens`,
 > `vatican`, `sangha`; legend register `crusader`. The Aasimar and the Tiefling
-> stay distinct peoples (Julio, 2026-09-08).
+> stay distinct peoples.
 >
-> ⚖️ **Dance is Freedom's Muse** (Julio, 2026-09-08).
+> ⚖️ **Dance is Freedom's Muse**.
 >
-> ⚖️ **Darkvision prints with a line**, not as a bare chip (Julio, 2026-09-08).
+> ⚖️ **Darkvision prints with a line**, not as a bare chip.
 
 ### What the rules force, and what we chose
 
@@ -86,7 +87,7 @@ names. None of these carries a rule.
 
 | What | Where | State |
 |---|---|---|
-| Species entry (Julio's) | `AtlasActorLudi/SpeciesKit/Aasimar/__init__.py` | Shipping. Second person, no "we". Closes on an open invitation, which stays (§10). |
+| Species entry | `AtlasActorLudi/SpeciesKit/Aasimar/__init__.py` | Shipping. Second person, no "we". Closes on an open invitation, which stays (§10). |
 | The Ideals, the Descents, the mark | `SpeciesKit/Aasimar/Map_of_Ideals.py` | Shipping. Belongs to a shared CelestialKit once QST-0050 lands. |
 | Traits and their lines | `SpeciesKit/Aasimar/resolution.py` | Healing Hands, Light Bearer, Celestial Resistance, Celestial Revelation carry a line. Darkvision is chip-only (to change, §10). |
 | Names | `AtlasNomina/Races/Celestial.py` | Celestial bodies from every language: a deliberate mosaic. |
@@ -149,7 +150,7 @@ One lends the aureola its form, the other its gem-like color, and either may len
 Honor's standing flame, glowing like Beauty's opal, belongs to that pair and to nobody else at the table.
 
 **The spark shapes the vessel** 
-(Julio). The Aasimar is not a human with wings.
+The Aasimar is not a human with wings.
 The body is a biological actualisation apt for the spark it carries: the greenish or bluish skin of the published art, the talaria, the aureola, and perhaps other features pushed toward the "ideal being". 
 This is a *physical* inheritance, and the species law permits it: that law guards against monoculture and moral determinism, not against biology (Darkvision already settles the point; nobody culturises themselves into seeing in the dark).
 **Self-Actualization.** An aasimar can choose the expression of their wings each time. 
@@ -199,7 +200,7 @@ Three rules govern the tell:
 2. **It only ever says no.** Socrates' daimonion never told him what to do, only
    what not to; the tell is a daimonion made visible. No later tell may be
    written as an instruction.
-3. **Open (Julio):** is the oversight internal or external? Does the Aasimar
+3. **Open:** is the oversight internal or external? Does the Aasimar
    *cause* the halo to change, or does injustice in the room disturb it? "Do you
    feel a disturbance in Justice, or does injustice disturb you?" Both readings
    are live and the sheet must not settle it.
@@ -213,10 +214,10 @@ A well, not a rule; it also keeps Saints (round, dead, Dwarven) apart.
 species entry's sentence is the tell's charter, and Celestial Revelation is
 the rule: for one minute the thing usually hidden stops hiding.
 
-**Darkvision.** Decided (Julio): printed as an entry with a description and a
+**Darkvision.** Decided: printed as an entry with a description and a
 brief flavour line, not chip-only. *"Darkness cannot hide the truth from you."*
 
-**Celestials do not care much about the vessel** (Julio). The body is apparatus
+**Celestials do not care much about the vessel**. The body is apparatus
 for the spark. This is a temperament, and it separates them from every people
 who speak of their bodies with pride (the Goliath's size, the Dwarf's beard). An aasimar may take this biew by default, but some may revel (Monks, barbarians...) and focus on the vessel instead of the soul. 
 
@@ -224,7 +225,7 @@ who speak of their bodies with pride (the Goliath's size, the Dwarf's beard). An
 
 ## 4. Society: a subculture, not a nation
 
-Decided (Julio, 2026-09-08), superseding the earlier proposal to draw a host
+Decided, superseding the earlier proposal to draw a host
 culture for the body.
 
 **The Aasimar are recognisable and distinct wherever they are born.** "An emo or
@@ -290,7 +291,7 @@ bronze and saffron lacquer). Legend register `crusader`: late Arthur, the
 Grail, the Temple, the pilgrim road, "a myth of election". `crusader` answers
 to the Vatican and marches on the Levante.
 
-**Subtler influences (Julio).** Zoroastrianism and the Persian angels;
+**Subtler influences.** Zoroastrianism and the Persian angels;
 Manichaeism. Nietzsche's Zarathustra marks the division of heaven and hell:
 the departure from a Realm of Death and manifestation of Ideals (a Platonic
 beyond, where principles *balance* the world) toward a Manichaean division of
@@ -301,7 +302,7 @@ and the Aasimar/Tiefling separation is tainted by this prevention/punishment
 moral division and control. See the Celestials page for the NPC consequences,
 including the Celestial as a campaign's antagonist.
 
-**The sea (Julio).** Athens' gear is naval: Trireme Trident, Peltast Javelin,
+**The sea.** Athens' gear is naval: Trireme Trident, Peltast Javelin,
 Pelte Shield. The fishing and sea imagery invites two readings at once, and
 both are welcome as wells:
 
@@ -339,7 +340,7 @@ This for the player must be just a reading.
 **Prayer.** The ledger should take sayings and prayers from the Athens,
 Vatican and sangha wells (Delphi's "nothing in excess", the Dhammapada's
 "hatred is never appeased by hatred", and so on) as *sayings*, without
-importing the real-world institutions as lore (Julio).
+importing the real-world institutions as lore.
 
 ---
 
@@ -358,7 +359,7 @@ that need never be resolved.
 
 > What about the reading of the Mythic Greece? The Hero that was not good, just mighty?
 
-**The Holy Horror** (Julio). "He made you just to do its bidding?" A Celestial
+**The Holy Horror**. "He made you just to do its bidding?" A Celestial
 cannot love an Aasimar; it can *hire* one, and it can *make* one for the job.
 The crusader register is "a myth of election", and election's shadow is exactly
 this cosmic-plan horror: if you were chosen, the choosing was the Ideal's,
@@ -383,7 +384,7 @@ antagonist, and the Inquisitor background's superior ("send them on, the gods wi
 |---|---|---|
 | **Tiefling** | The mirror. One mechanism (belief makes celestials; belief makes fiends), opposite readings. Model minority against hated minority. | The shared priesthood, split by the Aasimar's side (§4). A Tiefling and an Aasimar are cousins who were told different stories about the same flame. |
 | **Goliath** | The other people who hold Greece and Rome as identity, opposite halves. Athens against Sparta; the Vatican against the legion. | The Trojan War as Celestials against Titans (§5). Two camps, one war. |
-| **Dragon / Dragonborn** | The fixed against the self-authored. An Ideal cannot bend; a dragon authors itself alone. | **Couatl.** A dragon bound to an Ideal, or an Ideal that Ascended into a dragon's shape: the Celestial Dragons. Julio: "That may be how Couatls are made." The Dragon Cultist Aasimar is one road to it. |
+| **Dragon / Dragonborn** | The fixed against the self-authored. An Ideal cannot bend; a dragon authors itself alone. | **Couatl.** A dragon bound to an Ideal, or an Ideal that Ascended into a dragon's shape: the Celestial Dragons. "That may be how Couatls are made." The Dragon Cultist Aasimar is one road to it. |
 | **Dwarf** | Saints are the Dwarves' and stay there; the talaria's metals nod at the soul-metals and confirm nothing. | Two systems that look like one from a distance. The ambiguity is deliberate DM space. |
 | **Elf** | Fixed against malleable: the Ideal against the collective Dream. | The Elves are the only people whose nature is decided by what everyone agrees to imagine; the Aasimar is a fixed ideal, only it's power being empowered by the affinity to that belief. |
 | **Human** | Institutions. The temples and academies that take Aasimar children are mostly Human-built ("there is always a human kingdom"). | The Human Cleric's watcher is a church; the Aasimar is what the church points at. |
@@ -392,7 +393,7 @@ antagonist, and the Inquisitor background's superior ("send them on, the gods wi
 
 ## 8. The classes: departures from the spark
 
-The Celestials' vocabulary names several classes (Julio's etymologies). That
+The Celestials' vocabulary names several classes (the project's etymologies). That
 is colour, not fantasy: the *fantasy* of each class is its own, and an Aasimar
 in it is one more mortal departing from a fixed thing.
 
@@ -402,7 +403,7 @@ in it is one more mortal departing from a fixed thing.
 | **Monk** | *monachos*, the one who lives alone | The body taken as sacred, and the spark channelled through it: Focus flowing from the aureola down through the body into the fist. Not a departure: the spark embodied. Lived. |
 | **Cleric** | *klērikos*, the allotted | The spark cannot love you, so the Aasimar Cleric looks for the parent the Ideal is not. The most obvious pairing and the best drama. |
 | **Paladin** | *palatinus*, the Palatine guard (Rome, Byzantium) | Blood and vow both impeteritous, since an oath cannot bend either. The interesting Aasimar Paladin swears an Oath *against* or *in conflict* with the Ideal, and the aureola shows the strain. |
-| **Warlock** | *convenire*, *diathēkē*, *berith*: the covenant. "Form, not belief; not principle but contract." | Hired by its own blood. **Decided (Julio): for an Aasimar Celestial Warlock, the patron is the descent ancestor** (same Descent, same Ideal). Drama is higher with a family member; the Holy Horror (§6) is the second horror beside instrumentality. The Fiendish or GOO patron's are interesting in the sense of corruption to the ideal. "The self vs the job". |
+| **Warlock** | *convenire*, *diathēkē*, *berith*: the covenant. "Form, not belief; not principle but contract." | Hired by its own blood. **Decided: for an Aasimar Celestial Warlock, the patron is the descent ancestor** (same Descent, same Ideal). Drama is higher with a family member; the Holy Horror (§6) is the second horror beside instrumentality. The Fiendish or GOO patron's are interesting in the sense of corruption to the ideal. "The self vs the job". |
 | **Sorcerer** | *sortiarius*, the bender of fate | Independent of species, as every class is; a synergy is welcome, not required. The spark from the Ideal may have awakened something, or been a way for something else to get in. Only a Celestial-flavoured origin would draw on the spark; a draconic or shadow origin needs another explanation, and the player gives it. |
 | **Wizard** | *magi*, the astronomers and intellectuals of the East | Native through Athens, and therefore flat; the interesting Aasimar Wizard is the sangha's renouncer who studies. |
 | **Bard** | *bardos*, the praiser | The Muses' class. An Aasimar of Muse descent playing the Muse's own art is the one pairing where spark and profession coincide. |
@@ -412,7 +413,7 @@ in it is one more mortal departing from a fixed thing.
 | **Rogue** | *rogare*, the vagabond | Rejects the calling in every incarnation but one: the **Celestial Reaper**. An Assassin of Sacrifice has a halo that darkens at every kill, a tally it cannot stop keeping; an Assassin of Justice who kills without a disguise keeps a perfect ring. |
 | **Artificer** | *artifex* | Daedalus was Athenian: wings built for someone else. |
 
-**Synergies as a general mechanism** (Julio). The Warlock decision above is the
+**Synergies as a general mechanism**. The Warlock decision above is the
 first of a family: where a species and a subclass share a source (the Aasimar
 and the Celestial patron; the Dragonborn and the Draconic Sorcerer's ancestry;
 others in other species), the generator should draw them as one. Independent
@@ -434,7 +435,7 @@ on conduct without naming the principle.
   halo dims when they say "send them on"; or one who watched a superior's halo
   stay perfect through it: the tyrant with a perfect ring, seen from below.
 - **Fortune Teller × Truth.** The ring scatters when you feel strongly; or
-  (Julio) the halo is what *sells* the reading, when contact is real.
+  the halo is what *sells* the reading, when contact is real.
 - **Spirit Medium × Sacrifice.** The halo darkens for a death and not for the
   already dead: how the Medium tells a death from a haunting.
 - **Revolutionary × Freedom.** "It twinkles when you run." The compass rose as
@@ -458,7 +459,7 @@ on conduct without naming the principle.
 
 ## 10. Decisions log
 
-**Decided (Julio, 2026-09-08)**
+**Decided**
 
 - The Aasimar keep `athens`, `vatican`, `sangha` as their own culture. They are
   a subculture recognisable across host peoples; no host-culture draw for the
@@ -499,14 +500,14 @@ on conduct without naming the principle.
 
 ## 11. Lines
 
-*Julio's drafts, kept as written; the incomplete one is completed with a proposal
+*the project's drafts, kept as written; the incomplete one is completed with a proposal
 marked as such.*
 
 | Entry | Line |
 |---|---|
 | **Darkvision** | *Darkness cannot hide the truth from you.* |
 | **Celestial Revelation, Talarian Wings** | *You spread your wings to show your true self.* |
-| **Celestial Revelation, Inner Radiance** | *You can feel your inner light giving you the…* (Julio's, unfinished). Proposal to complete: *You can feel your inner light, and for one minute you let it be seen.* |
+| **Celestial Revelation, Inner Radiance** | *You can feel your inner light giving you the…* (the project's, unfinished). Proposal to complete: *You can feel your inner light, and for one minute you let it be seen.* |
 | **Celestial Revelation, Necrotic Shroud** | *The brighter the light, the darker the shadow.* The only place the kit lets the Aasimar show the Tiefling's face; exactly one sentence. |
 | **Monk's Focus, Aasimar only** (proposal) | *It comes down from the ring above your head and out through your hands. The body was always the instrument. You only had to consecrate it.* |
 | **Celestial Patron, Aasimar only** (proposal, for the ancestor synergy) | *You know exactly who hired you. You have their wings.* |

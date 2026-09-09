@@ -1,11 +1,11 @@
-# 📝 Lines Annex: every drafted line, gathered for wiring
+# 📝 Lines Annex
 
-*Generated 2026-09-09 from the Mythos pages by collecting every table row that
-carries a wholly italic cell of sentence length (the house shape for a drafted
-inspiration line). Grouped by page and by the heading the table sits under, so
-each line can be traced back to its argument. Proposals, not decisions: nothing
-here is wired, and Julio decides which survive. Regenerate rather than edit.*
-*628 lines across the pages.*
+> 🧾 **Record.** A generated index, not a specification.
+
+*Every drafted inspiration line (the sugar lines), gathered from the element
+pages for wiring. Grouped by page and by the heading its table sits under.
+Regenerate rather than edit.*
+*627 lines.*
 
 
 ## Aasimar
@@ -170,7 +170,6 @@ here is wired, and Julio decides which survive. Regenerate rather than edit.*
 
 **3. The Muses: two open slots**
 
-- Joy: *It spins when you move to music, whether or not anyone else can hear any.*
 - Grace: *It steadies when you are forgiven, and it does not care whether you deserved it.*
 **Core lessons**
 
@@ -255,7 +254,7 @@ here is wired, and Julio decides which survive. Regenerate rather than edit.*
 - War Priest (3): *One more, because you were told one more, and it was always true.*
 - War God's Blessing (6): *The drill instructor takes the field beside you. It has been waiting to.*
 - Avatar of Battle (17): *This is what the bar was for. You can take the hit and stand.*
-**12. Addendum (2026-09-08, appended): what the Kept seat costs**
+**12. What the Kept seat costs**
 
 - A. Attention: *Somebody is always watching over you. That is the whole of the word.*
 - B. Precedence: *You wanted this. You are almost sure you wanted it first.*
@@ -321,7 +320,7 @@ here is wired, and Julio decides which survive. Regenerate rather than edit.*
 
 - Darkvision: *A dragon sees in the dark. So, a little, do you.*
 - Draconic Flight: *The ones who stayed home never grew these. You did not ask why. You went.*
-**12. Addendum (2026-09-08, appended): the one trait the page left bare**
+**12. Breath Weapon**
 
 - Breath Weapon: *Everything you were taught to hold in, let out once, at something.*
 
@@ -630,7 +629,7 @@ here is wired, and Julio decides which survive. Regenerate rather than edit.*
 - Relentless Avenger (7): *They cannot run. You made sure of that a long time ago.*
 - Soul of Vengeance (15): *They cannot swing without an answer.*
 - Avenging Angel (20): *The wings come. You find out what the wrong made of you.*
-**12. Addendum (2026-09-08, appended): the one line the page missed**
+**11. Oath Spells**
 
 - Oath Spells: *The oath comes with a vocabulary. These are the words it lets you say.*
 

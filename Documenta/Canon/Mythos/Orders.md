@@ -1,5 +1,7 @@
 # 🕯️ The Secret Orders
 
+> 🚧 **Draft.** Analysis and proposals, not yet authoritative. Under review.
+
 *Wiki entry for the design team. The Orders are the one engine in the project
 that generates prose the way the custom backgrounds are written, and the layer
 of the setting that sits between a people and a class: the house a Character
@@ -167,7 +169,7 @@ fortune erasing."*
    are the setting's middle layer and no generated Character belongs to one.
 2. **The template shows.** Two of three sampled hooks opened *"Ask what
    membership is worth… Ask what it costs… Ask what it is all for"*: four hook
-   forms is too few, and the "Ask" form is the most recognisable. Julio's
+   forms is too few, and the "Ask" form is the most recognisable. the project's
    complaint ("they all sound off") is this.
 3. **The Teaching beat confesses its own seam.** *"Nobody has ever presented
    these as a contradiction. Behind them stands…"* appears in every sampled
@@ -236,7 +238,7 @@ never places a long clause into a slot written for a noun phrase."*
 
 Seven names survive with no text. **Drafts**, each taking `{creed_a}` and
 `{creed_b}` as full sentences, to replace *"Nobody has ever presented these as a
-contradiction"* in the Teaching beat. Proposals for Julio's hand.
+contradiction"* in the Teaching beat. Proposals.
 
 | Form | Draft |
 |---|---|
@@ -255,7 +257,7 @@ sampled descriptions lack: a reason the two creeds are in one house.
 
 ## 9. Decisions log
 
-**Decided (Julio, via QST-0048)**
+**Decided (via QST-0048)**
 
 - The Order precedes the Character and owns its dice.
 - Domains are mythic, tagged not ranked, and turn several faces. Tradition is
