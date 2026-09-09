@@ -1,6 +1,6 @@
 # 🔥 Sorcerer: the Marked, read against the whole setting
 
-> 🚧 **In flow.** 3 of 10 chapters are still proposals. 🔒 1 · 🧾 2 · 🔎 4 · 🚧 3
+> 📖 **In flow.** 3 of 10 chapters are still proposals. 📜 1 · 📚 2 · 📔 4 · 📖 3
 
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. No
 Dialog exists for the Sorcerer. The Aasimar and Cleric pages flagged this class
@@ -19,7 +19,7 @@ Draconic, Wild Magic. No legend register of its own.
 
 ---
 
-## 🧾 1. What a Sorcerer player is handed today
+## 📚 1. What a Sorcerer player is handed today
 
 A level 11 Dragonborn Draconic Sorcerer (seed 9) receives: the Dragonborn
 entry; a Criminal background that is one sentence; *Innate Sorcery* as a
@@ -38,7 +38,7 @@ when it gets out*, and the sheet cannot say.
 
 ---
 
-## 🔒 2. The core fantasy: not born. Marked.
+## 📜 2. The core fantasy: not born. Marked.
 
 **Candidate A, the bloodline.** The dragon-blooded, the child of a god, the
 mutant. Merlin's incubus father; the Nephilim; Harry Potter's "born wizard";
@@ -92,7 +92,7 @@ sworn, marked, owed.
 
 ---
 
-## 🔎 3. The Sorcerer is the Dragon canon's second class
+## 📔 3. The Sorcerer is the Dragon canon's second class
 
 The Barbarian page found *ziran* in "we live out our inner nature": the
 Barbarian *embodies* the Dragon's principle. The Sorcerer *casts* it.
@@ -131,7 +131,7 @@ gifted, the magic is the event the spark had.
 
 ---
 
-## 🧾 4. Wells
+## 📚 4. Wells
 
 **Ovid.** The Metamorphoses are the Sorcerer's book: nobody in them chooses
 to change, and every change is the truth of the person made physical. Daphne,
@@ -167,7 +167,7 @@ Thoughts on the Aberrant list, Fear on the Draconic. The mark sees.
 
 ---
 
-## 🔎 5. Relationships: species × Sorcerer
+## 📔 5. Relationships: species × Sorcerer
 
 | People | The seed | Origin that sings | Note |
 |---|---|---|---|
@@ -184,7 +184,7 @@ Thoughts on the Aberrant list, Fear on the Draconic. The mark sees.
 
 ---
 
-## 🔎 6. Relationships: backgrounds × Sorcerer
+## 📔 6. Relationships: backgrounds × Sorcerer
 
 - **Arcane Mutant.** "Magic comes to you and does not pass through. When a
   spell hits you, part of it stays." That is Font of Magic as a background.
@@ -232,7 +232,7 @@ Thoughts on the Aberrant list, Fear on the Draconic. The mark sees.
 
 ---
 
-## 🔎 7. Flags
+## 📔 7. Flags
 
 ### ✅ Singular, and to be protected
 
@@ -268,7 +268,7 @@ Thoughts on the Aberrant list, Fear on the Draconic. The mark sees.
 
 ---
 
-## 🚧 8. Drafts
+## 📖 8. Drafts
 
 *House rules: second person; sensation before rule; no proper nouns; no
 em-dashes; no open choices. Each Origin text ends on what the body is turning
@@ -378,7 +378,7 @@ Something in you is turning into what looked in. You are trying to find out whet
 
 ---
 
-## 🚧 9. Threads to pull in later cycles
+## 📖 9. Threads to pull in later cycles
 
 - **Cleric page, theology table**: rename *born* to *marked*.
 - **Dragon canon**: add a line that the Draconic and Aberrant Origins are
@@ -393,7 +393,7 @@ Something in you is turning into what looked in. You are trying to find out whet
 
 ---
 
-## 🚧 10. Synergies, and the open question
+## 📖 10. Synergies, and the open question
 
 **Synergies are welcome and independent.** The Origin is drawn separately from
 species and background, and where two axes agree the sheet should say so once

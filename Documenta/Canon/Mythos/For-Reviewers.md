@@ -1,6 +1,6 @@
 # 👁 For Reviewers: how to read this folder
 
-> 🧾 **Record.** A report, an index or a working document, not a specification.
+> 📚 **Record.** A report, an index or a working document, not a specification.
 
 *Orientation for anyone brought in to review these pages: a person, or another
 model. Read this first. It states what the folder is, the rules the pages were
@@ -9,7 +9,7 @@ written against, and what a useful objection looks like here. Written
 
 ---
 
-## 🔎 1. What you are reading
+## 📔 1. What you are reading
 
 Analysis of a Dungeons & Dragons 2024 **character generator**: a program that
 produces a finished, playable character sheet from a seed. There are no player
@@ -27,7 +27,7 @@ proposal in them is waiting on the author's decision.
 
 ---
 
-## 🔎 2. The rules the pages are written against
+## 📔 2. The rules the pages are written against
 
 Judge the material by these, not by general fantasy-writing advice. Several of
 them invert the usual advice on purpose.
@@ -60,7 +60,7 @@ them invert the usual advice on purpose.
 
 ---
 
-## 🔎 3. What a useful objection looks like
+## 📔 3. What a useful objection looks like
 
 Blunt and specific, quoting the line being judged. In order of value:
 
@@ -86,7 +86,7 @@ If those three survive a hostile read, the framework stands.
 
 ---
 
-## 🔎 4. Reading it remotely
+## 📔 4. Reading it remotely
 
 The repository is public. A single page can be fetched raw:
 
@@ -125,22 +125,23 @@ hostile read there tells you the most about whether the rest is trustworthy.
 
 ---
 
-## 🧾 4b. The four layers
+## 📚 4b. The four layers
 
 Before objecting that a detail is arbitrary, check which layer it sits in.
 Each element page opens with a `0. Rules` chapter (see the README) sorting its
 content into four layers: a **fixed point**
-(marked 📕 inherited from the 2024 rules, or ⚖️ ratified by a project Decree), an
-**interpretation** (lore chosen so a fixed point has a body, load-bearing and
-replaceable but not deletable), a **free invention** (ours, with no mechanic
-underneath, and the place a future editor is licensed to play), and a **sugar
-line** (the italic line on the sheet, freely rewritable inside its register).
+(marked 📕 inherited from the 2024 rules, 📙 an aesthetic change, or 📒 a rule we
+changed), an
+**supportive lore** 📘 (chosen so a fixed point has a body: replaceable, never
+deletable), **deep lore** 📗 (design that supports the fantasy rather than a
+rule, and the place a later hand is licensed to play), and a **sugar line** (the
+italic line on the sheet, freely rewritable inside its register).
 
 The commonest wrong objection to this project is "cut this detail, it is not
 needed." Run the test first: remove it and ask whether a rule is left with
 nothing to say for itself.
 
-## 🧾 5. The canon these pages defer to
+## 📚 5. The canon these pages defer to
 
 Four documents outside this folder are settled law, and the pages cite them
 rather than arguing with them. A reviewer should know they exist before

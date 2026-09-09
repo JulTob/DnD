@@ -1,6 +1,6 @@
 # 🧀 Halfling
 
-> 🚧 **In flow.** 1 of 8 chapters are still proposals. 🔒 3 · 🧾 2 · 🔎 2 · 🚧 1
+> 📖 **In flow.** 1 of 8 chapters are still proposals. 📜 3 · 📚 2 · 📔 2 · 📖 1
 
 *Wiki entry for the design team. Deep lore and settled direction, not page text.
 Compiled 2026-09-08 from the Halfling kit, the species entry, `AtlasNomina/Races/Halfling.py`,
@@ -12,7 +12,7 @@ the class analyses and the design notes.*
 
 ---
 
-## 🧾 1. Where the Halfling lives in the code
+## 📚 1. Where the Halfling lives in the code
 
 | What | Where | State |
 |---|---|---|
@@ -25,7 +25,7 @@ the class analyses and the design notes.*
 
 ---
 
-## 🔒 2. Origin: the unbearable paradise
+## 📜 2. Origin: the unbearable paradise
 
 *"Our homeland is a wide green valley where the soil is so generous nobody has
 gone hungry in living memory, the worst weather is a wet spring, and the
@@ -57,7 +57,7 @@ Stealthy. The valley did not culturise anyone into rerolling a 1.
 
 ---
 
-## 🔎 3. Society: the valley
+## 📔 3. Society: the valley
 
 Three hundred years of peace, recipe books as the literature, the scandal of
 the decade a friendship with a human. The Halfling is the setting's control
@@ -80,7 +80,7 @@ pony and the goose (Beast Master).
 
 ---
 
-## 🔒 4. Metaphysics: what happens to someone nothing happened to
+## 📜 4. Metaphysics: what happens to someone nothing happened to
 
 The Halfling is the setting's best instrument for reading every class *comically
 and correctly at once*, because the class arrives at a person the valley did not
@@ -108,7 +108,7 @@ Dwarf's homecoming needs gold; the Halfling's needs a story. Two returns.
 
 ---
 
-## 🔎 5. Backgrounds
+## 📔 5. Backgrounds
 
 - **Vagabond.** "The day a place starts to feel like a cage, you're already
   gone." The valley as the cage, gently.
@@ -132,7 +132,7 @@ Dwarf's homecoming needs gold; the Halfling's needs a story. Two returns.
 
 ---
 
-## 🔒 6. Decisions log
+## 📜 6. Decisions log
 
 **Decided**
 
@@ -149,7 +149,7 @@ Dwarf's homecoming needs gold; the Halfling's needs a story. Two returns.
 
 ---
 
-## 🚧 7. Lines
+## 📖 7. Lines
 
 *The four trait lines exist and are the reference; no additions.*
 
@@ -162,7 +162,7 @@ Dwarf's homecoming needs gold; the Halfling's needs a story. Two returns.
 
 ---
 
-## 🧾 8. Pointers
+## 📚 8. Pointers
 
 - **Cultural Inspirations**: the Halfling's keys (open).
 - **Barbarian, Monk, Rogue, Bard, Wizard pages**: the comic-heroic pairings.

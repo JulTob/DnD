@@ -1,6 +1,6 @@
 # 🥋 Monk: the Exempt, read against the whole setting
 
-> 🚧 **In flow.** 2 of 10 chapters are still proposals. 🔒 1 · 🧾 2 · 🔎 5 · 🚧 2
+> 📖 **In flow.** 2 of 10 chapters are still proposals. 📜 1 · 📚 2 · 📔 5 · 📖 2
 
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. Builds
 on Dialog 0018 (core fantasy settled as the shonen ninja: training arcs, named
@@ -20,7 +20,7 @@ alone among Guilds adds `ninja` (society) and `anime` (legend) to any species.
 
 ---
 
-## 🧾 1. What a Monk player is handed today
+## 📚 1. What a Monk player is handed today
 
 A level 11 Aasimar Monk of Mercy (seed 3) receives: the Aasimar entry, the
 Gambler, thirty rules paragraphs, and one italic sentence from 2014 in the third
@@ -35,7 +35,7 @@ Focus, Shadow Arts) and the em-dash in Implements of Mercy.
 
 ---
 
-## 🔒 2. The name is the sangha's, and the class does not want it
+## 📜 2. The name is the sangha's, and the class does not want it
 
 *Monachos*: the solitary one. A word from the contemplative orders, and in this
 setting the contemplative order is a **Celestial marker** (`sangha`). So "Monk"
@@ -72,7 +72,7 @@ it, on Monk's Focus, for Aasimar only:
 
 ---
 
-## 🔎 3. Five rings, four Warriors and a capstone
+## 📔 3. Five rings, four Warriors and a capstone
 
 Dialog 0018 read the Warriors through Naruto, Shaolin, Destreza and Avatar. The
 Japanese well the `ninja` key reaches (japan 2) holds an older structure that
@@ -100,7 +100,7 @@ into a school, which Musashi would call a mistake.
 
 ---
 
-## 🧾 4. Wells the dialog did not draw from
+## 📚 4. Wells the dialog did not draw from
 
 None of these is a costume. Each carries a *doctrine* the current text can use.
 
@@ -164,7 +164,7 @@ Hand's soul.
 
 ---
 
-## 🔎 5. The Monk inside the setting's metaphysics
+## 📔 5. The Monk inside the setting's metaphysics
 
 The Canon gives each people one organising idea. The Monk has none and leans on
 several.
@@ -217,7 +217,7 @@ Monk needs no reconciliation; the species text was reaching for the class.
 
 ---
 
-## 🔎 6. Relationships: species × Monk
+## 📔 6. Relationships: species × Monk
 
 The species supplies the *school's culture*; `ninja` supplies the *idiom of
 technique* on top. Where the two agree (Dragonborn) the Monk is literal; where
@@ -238,7 +238,7 @@ they disagree (Aasimar, Dwarf) the disagreement is the character.
 
 ---
 
-## 🔎 7. Relationships: backgrounds × Monk
+## 📔 7. Relationships: backgrounds × Monk
 
 - **Herald.** "You walk in alone, past the guards… If the talking fails, you are
   already inside their lines, and you are the first blade they meet." ✅ That is
@@ -290,7 +290,7 @@ they disagree (Aasimar, Dwarf) the disagreement is the character.
 
 ---
 
-## 🔎 8. Flags
+## 📔 8. Flags
 
 ### ✅ Singular, and to be protected
 
@@ -339,7 +339,7 @@ they disagree (Aasimar, Dwarf) the disagreement is the character.
 
 ---
 
-## 🚧 9. Feature lines: drafts
+## 📖 9. Feature lines: drafts
 
 *Italic inspiration line only, house shape: second person, an image before the
 rule, no proper nouns, no dice, no em-dashes. Rule text untouched except the two
@@ -410,7 +410,7 @@ sweep items. Proposals for the project's hand, not landed.*
 
 ---
 
-## 🚧 10. Threads to pull in later cycles
+## 📖 10. Threads to pull in later cycles
 
 - **Fighter**: "Nobody gave you this" and "ten thousand mornings" are one idea
   in two Guilds. When the Fighter page is written, decide which Guild owns the

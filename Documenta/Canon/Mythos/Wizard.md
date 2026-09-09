@@ -1,6 +1,6 @@
 # 📖 Wizard: the Argument Against Forgetting, read against the whole setting
 
-> 🚧 **In flow.** 2 of 9 chapters are still proposals. 🔒 1 · 🧾 2 · 🔎 4 · 🚧 2
+> 📖 **In flow.** 2 of 9 chapters are still proposals. 📜 1 · 📚 2 · 📔 4 · 📖 2
 
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. No
 Dialog exists for the Wizard, but the class text is finished and shipping from
@@ -20,7 +20,7 @@ No tradition texts. Culture: no register of its own; Athens is the Celestials'.
 
 ---
 
-## 🧾 1. What a Wizard player is handed today
+## 📚 1. What a Wizard player is handed today
 
 Five sheets (Human Evoker, Elf Bladesinger, Gnome Illusionist, Dwarf Abjurer,
 Aasimar Diviner). The class text, in full; a Spellbook paragraph that names
@@ -41,7 +41,7 @@ Paladin's steed).
 
 ---
 
-## 🔒 2. The core fantasy, read out of the finished text
+## 📜 2. The core fantasy, read out of the finished text
 
 The class text opens on the Dao De Jing's forty-eighth chapter, inverted:
 *"In the pursuit of learning, something is gained every day. In the pursuit
@@ -88,7 +88,7 @@ door.*
 
 ---
 
-## 🧾 3. Wells, on the culture keys the setting already holds
+## 📚 3. Wells, on the culture keys the setting already holds
 
 **The peripatetics** (`athens`, Celestials). Aristotle taught walking. The
 gear map already hands Athens the *Peripatetic Staff* and the *Lyceum
@@ -141,7 +141,7 @@ read.
 
 ---
 
-## 🔎 4. The Wizard inside the setting's metaphysics
+## 📔 4. The Wizard inside the setting's metaphysics
 
 **The stolen fire against the fire itself.** The Sorcerer page's thread: the
 Wizard takes fire (Prometheus), the Sorcerer *is* it. The Wizard text agrees
@@ -188,7 +188,7 @@ of memory, and the Ascending is the one that stops needing the page.
 
 ---
 
-## 🔎 5. Relationships: species × Wizard
+## 📔 5. Relationships: species × Wizard
 
 | People | The seed | Tradition | Note |
 |---|---|---|---|
@@ -205,7 +205,7 @@ of memory, and the Ascending is the one that stops needing the page.
 
 ---
 
-## 🔎 6. Relationships: backgrounds × Wizard
+## 📔 6. Relationships: backgrounds × Wizard
 
 - **Archaeologist.** *"You are not a scholar who travels. You are a traveller
   who reads."* ✅✅ That sentence is the class text's third paragraph in the
@@ -261,7 +261,7 @@ of memory, and the Ascending is the one that stops needing the page.
 
 ---
 
-## 🔎 7. Flags
+## 📔 7. Flags
 
 ### ✅ Singular, and to be protected
 
@@ -292,7 +292,7 @@ of memory, and the Ascending is the one that stops needing the page.
 
 ---
 
-## 🚧 8. Drafts
+## 📖 8. Drafts
 
 *House rules: second person; the Dao De Jing's shape (short, plain, turning on
 a paradox); no proper nouns; no em-dashes; no open choices. Device: the first
@@ -404,7 +404,7 @@ Somewhere a dancer's blade taught a calligrapher his hand, and that is the whole
 
 ---
 
-## 🚧 9. Threads to pull in later cycles
+## 📖 9. Threads to pull in later cycles
 
 - **Feature-Text canon**: record the Spellbook map as the model for signature
   objects (instrument, companion, steed, familiar).

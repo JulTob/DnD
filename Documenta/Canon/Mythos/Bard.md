@@ -1,6 +1,6 @@
 # 🎭 Bard: the Told, read against the whole setting
 
-> 🚧 **In flow.** 2 of 11 chapters are still proposals. 🔒 0 · 🧾 2 · 🔎 7 · 🚧 2
+> 📖 **In flow.** 2 of 11 chapters are still proposals. 📜 0 · 📚 2 · 📔 7 · 📖 2
 
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. Builds
 on Dialog 0015 (core fantasy settled as "the world listens; your art can move
@@ -22,7 +22,7 @@ legend register of its own.
 
 ---
 
-## 🧾 1. What a Bard player is handed today
+## 📚 1. What a Bard player is handed today
 
 Four sheets (Aasimar Dance, Gnome Lore, Dwarf Valor, Elf Glamour). No class
 text; no College text of the project's; every College entry is the rulebook's
@@ -40,7 +40,7 @@ texts land, and before that if the sheet ships.
 
 ---
 
-## 🔎 2. In this setting, the world really does listen
+## 📔 2. In this setting, the world really does listen
 
 Dialog 0015's thesis is *art as literal power*. It reached that by reading the
 rules. The setting's canon reaches it from the other side, three times, and
@@ -75,7 +75,7 @@ the *Word*, and the dialog was right to find that beautiful.
 
 ---
 
-## 🔎 3. The Muses: two open slots
+## 📔 3. The Muses: two open slots
 
 The Aasimar's Ideals each answer to a Muse (`Map_of_Ideals.py`): Justice to
 History (Clio), Sacrifice to Tragedy (Melpomene), Truth to Astronomy (Urania),
@@ -103,7 +103,7 @@ the dark) and nothing for *unearned ease*, which every Bard's art is.
 
 ---
 
-## 🧾 4. Wells the dialog did not draw from
+## 📚 4. Wells the dialog did not draw from
 
 The dialog's shelf is the longest in the series. These are the ones that sit
 on culture keys the setting already assigns, so a species' Bard has a home.
@@ -159,7 +159,7 @@ plainchant". The Aasimar Bard's art is the office sung.
 
 ---
 
-## 🔎 5. The instrument is the character, and it is never named
+## 📔 5. The instrument is the character, and it is never named
 
 ⚠️ A Bard sheet never says what the Bard plays. The tool ledger holds
 "Musical Instrument (a Flute or Shawm runs 2 GP, a Horn 3, a Drum 6, a Lyre
@@ -202,7 +202,7 @@ page §5), which is the whole point of the Tiefling.
 
 ---
 
-## 🔎 6. Relationships: species × Bard
+## 📔 6. Relationships: species × Bard
 
 | People | The seed | College | Note |
 |---|---|---|---|
@@ -219,7 +219,7 @@ page §5), which is the whole point of the Tiefling.
 
 ---
 
-## 🔎 7. Relationships: backgrounds × Bard
+## 📔 7. Relationships: backgrounds × Bard
 
 - **Revolutionary.** *"A song can do what a sword can't: fill a room with
   courage, then empty it into the streets."* ✅✅ The Bard's thesis in the
@@ -276,7 +276,7 @@ page §5), which is the whole point of the Tiefling.
 
 ---
 
-## 🔎 8. Flags
+## 📔 8. Flags
 
 ### ✅ Singular, and to be protected
 
@@ -304,7 +304,7 @@ page §5), which is the whole point of the Tiefling.
 
 ---
 
-## 🚧 9. Feature lines: drafts
+## 📖 9. Feature lines: drafts
 
 *Italic inspiration line only. Register: the told tale, second person, a
 drummed cadence kept as seasoning, no proper nouns, no dice, no em-dashes. Rule
@@ -364,7 +364,7 @@ proposals.*
 
 ---
 
-## 🚧 10. Threads to pull in later cycles
+## 📖 10. Threads to pull in later cycles
 
 - **Canon**: one paragraph recording that the Bard operates the setting's
   plastic metaphysics (§2), placed in the Dragon or Elf canon where the loop
@@ -381,7 +381,7 @@ proposals.*
 
 ---
 
-## 🔎 11. The Tiefling's instrument
+## 📔 11. The Tiefling's instrument
 
 There is no host-culture draw for the Aasimar or the Tiefling; both stay
 distinct peoples. So the Tiefling's instrument comes from their own register

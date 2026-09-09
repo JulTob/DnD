@@ -1,6 +1,6 @@
 # ⛏️ Dwarf
 
-> 🚧 **In flow.** 1 of 10 chapters are still proposals. 🔒 4 · 🧾 3 · 🔎 2 · 🚧 1
+> 📖 **In flow.** 1 of 10 chapters are still proposals. 📜 4 · 📚 3 · 📔 2 · 📖 1
 
 *Wiki entry for the design team. Deep lore and settled direction, not page text.
 Compiled 2026-09-08 from the Dwarf kit, the species entry, `Cultural-Inspirations.md`,
@@ -14,7 +14,7 @@ has decided, the decision is stated as such; where this page proposes, it says s
 
 ---
 
-## 🧾 1. Where the Dwarf lives in the code
+## 📚 1. Where the Dwarf lives in the code
 
 | What | Where | State |
 |---|---|---|
@@ -28,7 +28,7 @@ has decided, the decision is stated as such; where this page proposes, it says s
 
 ---
 
-## 🔒 2. Origin: soul-metal
+## 📜 2. Origin: soul-metal
 
 Each people has one organising idea. The Dwarf's: **a soul is a metal, given,
 and it must be proven.** The Celestial's Ideal is fixed and cannot bend; the
@@ -54,7 +54,7 @@ on stone). The species law permits biology; these are the mines in the body.
 
 ---
 
-## 🧾 3. History: the Great Mountain fell
+## 📚 3. History: the Great Mountain fell
 
 *"Our people ruled the world once. Then the Great Mountain fell, the Gilded Era
 ended with it, and the dwarves spread out across the world instead, carrying
@@ -92,7 +92,7 @@ side from inside (*"Gold held is not living. Gold earned is gold spent."*
 
 ---
 
-## 🔒 4. Culture: Iberia and Andalus, two keys, one people
+## 📜 4. Culture: Iberia and Andalus, two keys, one people
 
 **The law:** one key, one culture; Iberia and al-Andalus are two keys, not a
 blend, and the overlap is modelled by influence, not by merging. The wiki names
@@ -135,7 +135,7 @@ the Tolkien register); gems lean to the Gnomes. "Leanings, not laws."
 
 ---
 
-## 🔒 5. Metaphysics: given, proven, spent
+## 📜 5. Metaphysics: given, proven, spent
 
 **Against the Celestials.** Fixed against given-and-proven: an Aasimar cannot
 change the spark; a Dwarf must change the metal. The two peoples are the
@@ -165,7 +165,7 @@ Great Mountain as the covenant's breach.
 
 ---
 
-## 🔎 6. The classes: what the metal does in each
+## 📔 6. The classes: what the metal does in each
 
 | Class | The Dwarf in it |
 |---|---|
@@ -185,7 +185,7 @@ Great Mountain as the covenant's breach.
 
 ---
 
-## 🔎 7. Backgrounds
+## 📔 7. Backgrounds
 
 - **Squire.** "You served someone the songs are about." Sancho. A Dwarf Squire
   Paladin who *became* the one the songs are about is a Quixote who won.
@@ -213,7 +213,7 @@ Great Mountain as the covenant's breach.
 
 ---
 
-## 🔒 8. Decisions log
+## 📜 8. Decisions log
 
 **Decided**
 
@@ -239,7 +239,7 @@ Great Mountain as the covenant's breach.
 
 ---
 
-## 🚧 9. Lines
+## 📖 9. Lines
 
 *QST-0094's four proposals, in the taught-or-gifted register the Species traits
 use, awaiting ratification. Kept here so the page is the reference.*
@@ -256,7 +256,7 @@ ledger as a body.
 
 ---
 
-## 🧾 10. Pointers
+## 📚 10. Pointers
 
 - **Paladin page**: Roncevaux, the Cid, Quixote.
 - **Fighter page**: the alférez and the tercio.

@@ -1,6 +1,6 @@
 # 🧮 Draft Tables: the content behind six open decisions
 
-> 🚧 **In flow.** 1 of 7 chapters are still proposals. 🔒 0 · 🧾 1 · 🔎 5 · 🚧 1
+> 📖 **In flow.** 1 of 7 chapters are still proposals. 📜 0 · 📚 1 · 📔 5 · 📖 1
 
 *Wiki entry for the design team. Four of the proposed Agora questions (Q-0019,
 Q-0024, Q-0027, and the value line of Lenses §13) and two README open items
@@ -12,7 +12,7 @@ hand, 2026-09-08.*
 
 ---
 
-## 🔎 A. The Orders' penalty ladder (Q-0027)
+## 📔 A. The Orders' penalty ladder (Q-0027)
 
 The backstory workbook grades a broken code Minor, Medium, Major. The Orders
 have a Sign and seven Relationship forms and no consequence. One draw per
@@ -46,7 +46,7 @@ Sign was broken.
 
 ---
 
-## 🔎 B. Background to first weapon (Q-0024)
+## 📔 B. Background to first weapon (Q-0024)
 
 One weapon issued by the background before the drills are drawn; the drills
 then follow what the hero already carries (the ordering rule GearKit already
@@ -105,7 +105,7 @@ has). All from the 2024 weapon table; the clause says why.
 
 ---
 
-## 🔎 C. A Celestial NPC is an Ideal and a manner (Q-0019)
+## 📔 C. A Celestial NPC is an Ideal and a manner (Q-0019)
 
 Eight Ideals down, seven Descent kinds across. Each cell is the manner the
 Ideal takes in that kind: the phrase a Dungeon Master reads before the
@@ -130,7 +130,7 @@ Sacrifice), with Freedom and Beauty as the two that do neither on purpose.
 
 ---
 
-## 🔎 D. One value per written background (Lenses §13)
+## 📔 D. One value per written background (Lenses §13)
 
 The villain sourcebook's rule, applied to everyone: a value is what the
 character will not do, stated so the table can play it. Under the hook, one
@@ -173,7 +173,7 @@ line.
 
 ---
 
-## 🚧 E. Culture keys for the Orc and the Halfling (README open item)
+## 📖 E. Culture keys for the Orc and the Halfling (README open item)
 
 The gear map (`_CULTURES` in `Map_of_Gear_Titles.py`) gives every playable
 people two to four **society** keys and one or two **legend** keys, except the
@@ -212,7 +212,7 @@ Consequences: the food given-names retire (Names page); the surnames stay; the
 prayer ledger gains Halfling rows in the valley's voice; materials (oak, wicker,
 linen, cheese-cloth, cider-oak).
 
-## 🔎 F. Euterpe (README open item)
+## 📔 F. Euterpe (README open item)
 
 Nine Muses, eight Ideals. The Celestials page seats Clio (Justice), Polihimnia
 (Mercy), Melpomene (Sacrifice), Urania (Truth), Terpsicore (Freedom, by the project's
@@ -228,7 +228,7 @@ the flute, is unseated; *Joy* as a ninth Ideal was superseded.
 A leans on what exists; B is the more original and the riskier; C is the one
 the Joy decision already refused.
 
-## 🧾 G. Pointers
+## 📚 G. Pointers
 
 - **Orders**: the arc, the Sign, the Relationship forms these penalties follow.
 - **Equipment-and-Masteries §3**: the ordering rule that makes table B work.

@@ -1,6 +1,6 @@
 # 📚 Mythos
 
-> 🧾 **Record.** A report, an index or a working document, not a specification.
+> 📚 **Record.** A report, an index or a working document, not a specification.
 
 *The design team's wiki for the setting's fantasy: what each people and each
 class is in this project, read against the code, the canon, the backgrounds and
@@ -17,7 +17,7 @@ make. The Canon's first rule holds throughout: never explain it on the page.
 
 *Folder size: 49 pages, 421 marked chapters, about 148k words, on branch `Julio_Cl/fantasy-worldbuilding-analysis-4241c5` (pull request 5).*
 
-## 🔎 How to read this folder
+## 📔 How to read this folder
 
 **New here, or reviewing?** Read [For-Reviewers](For-Reviewers.md) first: what
 this folder is, the rules the pages were written against, what a useful
@@ -30,7 +30,7 @@ objection looks like, and how to fetch pages remotely.
 5. **Lines-Annex**: every drafted line, for wiring.
 6. Then any people, Guild or engine page as the work touches it.
 
-## 🔎 The peoples
+## 📔 The peoples
 
 | Page | In one sentence |
 |---|---|
@@ -47,7 +47,7 @@ objection looks like, and how to fetch pages remotely.
 | [Human](Human.md) | The wonderful wanderers; the compact (proposed); the baseline, deliberately African and southern Mediterranean. |
 | [Lineages](Lineages.md) | The layer under the species: what a lineage *is* differs by people (a migration remembered, an ancestor's decision, a body described, a deed, a damage type, a compass direction). The Elf's four-slot form and the Gnome's city-offer device as the models. |
 
-## 🔎 The Guilds
+## 📔 The Guilds
 
 | Page | Seat | Register |
 |---|---|---|
@@ -65,7 +65,7 @@ objection looks like, and how to fetch pages remotely.
 | [Wizard](Wizard.md) | the stolen fire | the Dao De Jing |
 | [Artificer](Artificer.md) | handed over | the maker's log |
 
-## 🧾 The engines and the cross-cuts
+## 📚 The engines and the cross-cuts
 
 | Page | What it covers |
 |---|---|
@@ -95,7 +95,7 @@ objection looks like, and how to fetch pages remotely.
 
 ---
 
-## 🔎 Voice coverage, measured (2026-09-08)
+## 📔 Voice coverage, measured (2026-09-08)
 
 Twenty-six generated sheets (two per Guild, levels 5 to 20), 585 distinct
 Features. A Feature "has a line" when its first sentence contains no number and
@@ -137,7 +137,7 @@ them already have a drafted line on their Guild page (the Lines Annex holds them
 all). Wiring the annex is the whole distance between 41% and the backgrounds'
 92%. The plan is on [Wiring-Plan](Wiring-Plan.md).
 
-## 🔎 How this was verified
+## 📔 How this was verified
 
 Scripts in the session scratchpad (not the repository): `dump_sheet.py` (one
 sheet's Features), `dump_story.py` (titles and stories), `dump_names.py` (names
@@ -146,7 +146,7 @@ by people and gender), `sweep.py` (30 random seeds, text leaks), `crashsweep.py`
 above). Each calls `summon_player` from the worktree with a fixed seed list, so
 every number in these pages can be reproduced.
 
-## 🧾 The four markers, one per chapter
+## 📚 The four markers, one per chapter
 
 Every chapter carries a marker saying what kind of content it is, because a
 single page mixes all four and a reader needs to know, per chapter, how much to
@@ -154,22 +154,22 @@ trust it and whether they may change it.
 
 | Marker | The chapter holds | May a later hand change it? |
 |---|---|---|
-| 🔒 | **The design.** Settled decisions: fixed points, canon, ratified choices. | Not without the Agora: a question, a Dialog, a Decree. |
-| 🧾 | **Plain information.** What exists, what the rules say, what the code prints, counts and inventories. | Only when the fact changes. Verify against the code. |
-| 🔎 | **Derived implications and possible conflicts.** What follows from the above, and where things contradict. | Argue with it freely. It is a reading, not a rule. |
-| 🚧 | **Ideas in flow.** Proposals not yet decided: draft lines, candidate readings, open questions. | Take it or leave it. Nothing here is settled. |
+| 📜 | **The design.** Settled decisions: fixed points, canon, ratified choices. | Not without the Agora: a question, a Dialog, a Decree. |
+| 📚 | **Plain information.** What exists, what the rules say, what the code prints, counts and inventories. | Only when the fact changes. Verify against the code. |
+| 📔 | **Derived implications and possible conflicts.** What follows from the above, and where things contradict. | Argue with it freely. It is a reading, not a rule. |
+| 📖 | **Ideas in flow.** Proposals not yet decided: draft lines, candidate readings, open questions. | Take it or leave it. Nothing here is settled. |
 
 **The whole of a settled chapter is authoritative.** There are no attributions
-in the text and no provenance trail: a statement in a 🔒 chapter is settled
+in the text and no provenance trail: a statement in a 📜 chapter is settled
 because it is there. Anything wrong is corrected by editing it.
 
-**The page's own first line is derived from its chapters.** A page with no 🚧
-chapter reads **🔒 Settled**; otherwise **🚧 In flow** with the count, followed
+**The page's own first line is derived from its chapters.** A page with no 📖
+chapter reads **📜 Settled**; otherwise **📖 In flow** with the count, followed
 by the composition. That signal cannot drift, because it is computed from the
-markers rather than asserted. Today: **18 pages settled, 31 with chapters still
+markers rather than asserted. Today: **12 pages settled, 31 with chapters still
 in flow.**
 
-## 🔎 Chapter 0: the fixed points, in every page
+## 📔 Chapter 0: the fixed points, in every page
 
 *"A future team may think 'why do aasimar need talaria?
 let's take it out', but it is not a lore choice, it's a fixed-point mechanic
@@ -181,12 +181,15 @@ decorative and does not delete a mechanic's only explanation in good faith.
 There is no separate register of fixed points: each element's rules live in
 that element's page, next to the reading they produced.
 
-**The two markers**, inside a quote block so the chapter is visible at a glance:
+**The five books**, inside a quote block so the chapter is visible at a glance. Warm covers are the rules layer, cold covers the lore:
 
 | Marker | Means | Argued with |
 |---|---|---|
-| 📕 | **Inherited.** The 2024 rules. | Not without leaving rules compatibility, which is the promise the generator makes to a table that has to play the result. |
-| ⚖️ | **Ratified.** A project Decree, a canon document, or a decision the author recorded. | In the Agora: a question, a Dialog, a Decree. |
+| 📕 | **Inherited.** The 2024 rules, unchanged. | Not without leaving rules compatibility, which is the promise the generator makes to a table that has to play the result. |
+| 📙 | **Aesthetic change.** The same rule wearing our name and look. | Nothing mechanical. It carries the translation back to the published name. |
+| 📒 | **A rule we changed.** A house rule. | It already cost compatibility. Say so where it happens. |
+| 📘 | **Supportive lore.** Lore holding a rule or a core element up. | A question, a Dialog and a Decree. Remove it and a mechanic is left with nothing to say for itself. |
+| 📗 | **Deep lore.** Design supporting the fantasy rather than a rule. | No rule notices; the setting does. Change it freely and keep the fantasy coherent. |
 
 **Then the chapter says what the rules force and what we chose**, in four short
 moves:
@@ -209,7 +212,7 @@ sitting there looking deliberate. The Dragonborn's ten ancestries are one.
 
 [Aasimar](Aasimar.md) carries the first worked chapter.
 
-## 🔒 Standing rules that emerged (beside the Canon's)
+## 📜 Standing rules that emerged (beside the Canon's)
 
 1. **Never explain it on the page.** The Ascending, the Dreaming, the Shift,
    the Holy Horror, the shared priesthood, the Couatl: deep lore, and a
@@ -230,7 +233,7 @@ sitting there looking deliberate. The Dragonborn's ten ancestries are one.
 
 ---
 
-## 🔎 Decisions the project has made in this cycle (2026-09-08)
+## 📔 Decisions the project has made in this cycle (2026-09-08)
 
 *Provisional record. Decree 0006: "A choice that lives only in a chat log does
 not exist. Decrees record decisions; Questae record work and rationale." These
@@ -246,7 +249,7 @@ Decree or a Questa.*
 - The Aasimar Monk channels the spark through the body.
 - The species law reading (rule 4 above).
 
-## 🔎 Open decisions, consolidated
+## 📔 Open decisions, consolidated
 
 *Drafted as Agora rows in [Agora-Questions-Proposed](Agora-Questions-Proposed.md); the project settles decisions through `Agora/Questions.md`, a Dialog, and a Decree.*
 
@@ -283,7 +286,7 @@ Decree or a Questa.*
 - **Loaded names outside lore**: *Mestizo* (Rank pool), *Elohim* (Celestial
   names). Undecided.
 
-## 🔎 Broken today, found while reading (report, not repair)
+## 📔 Broken today, found while reading (report, not repair)
 
 - **The live NonPlayer summoner fails on every attempt** (`Size` called with
   two arguments); the Alusoris sheet and DM Companion cannot summon.

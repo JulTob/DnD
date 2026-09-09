@@ -1,6 +1,6 @@
 # 🏹 Ranger: the One Who Does Not Let Go, read against the whole setting
 
-> 🚧 **In flow.** 2 of 10 chapters are still proposals. 🔒 1 · 🧾 2 · 🔎 5 · 🚧 2
+> 📖 **In flow.** 2 of 10 chapters are still proposals. 📜 1 · 📚 2 · 📔 5 · 📖 2
 
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. No
 Dialog exists for the Ranger. The standing register rule fixes it (one
@@ -19,7 +19,7 @@ Gloom Stalker, Hunter. No legend register of its own.
 
 ---
 
-## 🧾 1. What a Ranger player is handed today
+## 📚 1. What a Ranger player is handed today
 
 Four sheets (Elf Fey Wanderer, Orc Hunter, Elf Gloom Stalker, Halfling Beast
 Master). No class text; each archetype's only prose is *"You adopt the Hunter
@@ -38,7 +38,7 @@ point at.
 
 ---
 
-## 🔒 2. The core fantasy: the mark that does not let go
+## 📜 2. The core fantasy: the mark that does not let go
 
 **Candidate A, the warden.** The unthanked watch on the border: Aragorn's
 Dúnedain, the ranger of the old wiki line ("hunting the dangers at the edge of
@@ -92,7 +92,7 @@ back out with something*.
 
 ---
 
-## 🧾 3. Wells, on the culture keys the setting already holds
+## 📚 3. Wells, on the culture keys the setting already holds
 
 **Jim Corbett.** The man-eaters of Kumaon: one specific tiger, tracked for
 months, named. The best real model for Favored Enemy anywhere in print, and
@@ -139,7 +139,7 @@ Wanderer's and the Gloom Stalker's shared night.
 
 ---
 
-## 🔎 4. The Ranger inside the setting's metaphysics
+## 📔 4. The Ranger inside the setting's metaphysics
 
 **The Ranger and the Druid.** Both cast from Wisdom; both are attention paid
 to the wild. The Druid's attention ends in membership; the Ranger's ends in
@@ -186,7 +186,7 @@ horde's own hunt.
 
 ---
 
-## 🔎 5. Relationships: species × Ranger
+## 📔 5. Relationships: species × Ranger
 
 | People | The seed | Archetype | Companion (Beast Master), by key |
 |---|---|---|---|
@@ -208,7 +208,7 @@ a Kit.
 
 ---
 
-## 🔎 6. Relationships: backgrounds × Ranger
+## 📔 6. Relationships: backgrounds × Ranger
 
 - **Survivor.** *"So you went back. For revenge, and something more… It has
   your face. Every time you have come close it was because you were allowed
@@ -257,7 +257,7 @@ a Kit.
 
 ---
 
-## 🔎 7. The Quarry: a line the sheet could draw
+## 📔 7. The Quarry: a line the sheet could draw
 
 The 2024 *Favored Enemy* promises an enemy in its name and delivers a spell in
 its rule. ✅ In this setting the sheet can keep the promise without a rule:
@@ -280,7 +280,7 @@ means by "the thing itself".
 
 ---
 
-## 🔎 8. Flags
+## 📔 8. Flags
 
 ### ✅ Singular, and to be protected
 
@@ -307,7 +307,7 @@ means by "the thing itself".
 
 ---
 
-## 🚧 9. Drafts
+## 📖 9. Drafts
 
 *House rules: second person; the adventure novel's texture (geography,
 weather, the edge of the map); no proper nouns; no em-dashes; no open choices;
@@ -418,7 +418,7 @@ The court has not finished with you. You are fairly sure you have not finished w
 
 ---
 
-## 🚧 10. Threads to pull in later cycles
+## 📖 10. Threads to pull in later cycles
 
 - **Cultural Inspirations**: the `wyrm_myth` question (§4), with the Ranger as
   a fourth option.

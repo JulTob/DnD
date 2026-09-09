@@ -1,6 +1,6 @@
 # 🕯️ The Secret Orders
 
-> 🚧 **In flow.** 1 of 10 chapters are still proposals. 🔒 1 · 🧾 1 · 🔎 7 · 🚧 1
+> 📖 **In flow.** 1 of 10 chapters are still proposals. 📜 1 · 📚 1 · 📔 7 · 📖 1
 
 *Wiki entry for the design team. The Orders are the one engine in the project
 that generates prose the way the custom backgrounds are written, and the layer
@@ -16,7 +16,7 @@ actually belongs to. Compiled 2026-09-08 from `OrderKit.py`, the four Maps in
 
 ---
 
-## 🔎 1. Where the Orders live in the code
+## 📔 1. Where the Orders live in the code
 
 | What | Where | State |
 |---|---|---|
@@ -32,7 +32,7 @@ actually belongs to. Compiled 2026-09-08 from `OrderKit.py`, the four Maps in
 
 ---
 
-## 🔎 2. What an Order is
+## 📔 2. What an Order is
 
 **It precedes the Character.** *"It is a thing already standing in the world
 when someone knocks on its door, so it owns its own dice and picks its own
@@ -67,7 +67,7 @@ loaded-names rule.
 
 ---
 
-## 🔎 3. The twelve Domains
+## 📔 3. The twelve Domains
 
 Mythic spheres, never job descriptions: "Hospitality is a trade; Home is a
 domain, and every pantheon keeps one." Each turns four faces.
@@ -92,7 +92,7 @@ absent: the uncontrolled-power archetype is already the Arcane Mutant.
 
 ---
 
-## 🔎 4. The three Traditions
+## 📔 4. The three Traditions
 
 *"An Order of the Veil may be Arcane, Divine, or Primal for entirely different
 reasons: one keeps a laboratory, one keeps a calendar of rites, one keeps a
@@ -118,7 +118,7 @@ that they are there.
 
 ---
 
-## 🔎 5. The prose: an arc, not a bag
+## 📔 5. The prose: an arc, not a bag
 
 The description is six beats, each written to arrive after the one before:
 **Before** (who you were and what was missing), **Contact** ("Then…"),
@@ -163,7 +163,7 @@ fortune erasing."*
 
 ---
 
-## 🔎 6. What is wrong (QST-0061, confirmed)
+## 📔 6. What is wrong (QST-0061, confirmed)
 
 1. **The door is gone.** No player background reaches the engine. The Orders
    are the setting's middle layer and no generated Character belongs to one.
@@ -192,7 +192,7 @@ fortune erasing."*
 
 ---
 
-## 🔎 7. The Orders inside the setting
+## 📔 7. The Orders inside the setting
 
 **The middle layer.** A species gives the spark; a class gives the fire; the
 Order is the house. The Aasimar's temples and academies are Orders; the Tiefling's
@@ -229,7 +229,7 @@ could draw from if the Orders ever take a key.
 
 ---
 
-## 🚧 8. Relationships: the lost layer, redrafted
+## 📖 8. Relationships: the lost layer, redrafted
 
 The docstring survives: *"No pair is forbidden. A Relationship does not add
 another subject to the Order; it decides how the two selected Domain truths
@@ -255,7 +255,7 @@ sampled descriptions lack: a reason the two creeds are in one house.
 
 ---
 
-## 🔒 9. Decisions log
+## 📜 9. Decisions log
 
 **Decided (via QST-0048)**
 
@@ -283,7 +283,7 @@ sampled descriptions lack: a reason the two creeds are in one house.
 
 ---
 
-## 🧾 10. Pointers
+## 📚 10. Pointers
 
 - **Ranger, Rogue, Artificer, Wizard pages**: the Domains as the classes' guilds.
 - **Dragonborn page**: the Ascendant Dragon as a Primal devotion.

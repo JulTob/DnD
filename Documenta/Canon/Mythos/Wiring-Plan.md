@@ -1,6 +1,6 @@
 # 🔌 Wiring Plan: how the drafted lines reach the sheet
 
-> 🔒 **Settled.** No chapter is still in flow. 🔒 0 · 🧾 2 · 🔎 2
+> 📜 **Settled.** No chapter is still in flow. 📜 0 · 📚 2 · 📔 2
 
 *Wiki entry for the design team. The Lines Annex holds every inspiration line
 the Mythos pages drafted. The coverage sweep shows the sheet prints a line for
@@ -11,7 +11,7 @@ Questae. Nothing here is done; it is the map for doing it. 2026-09-08.*
 
 ---
 
-## 🧾 1. The shape, per layer
+## 📚 1. The shape, per layer
 
 The house shape already exists and is used by four Guilds. A line is the first
 thing in a Feature's description, italic, followed by a blank line, then the
@@ -42,7 +42,7 @@ never inferred).
 
 ---
 
-## 🔎 2. Order of work, by coverage
+## 📔 2. Order of work, by coverage
 
 The coverage sweep (README) gives the order: lowest share first, because that
 is where a user meets the most silence.
@@ -66,7 +66,7 @@ session scratchpad and belongs in `scripts/` once wanted it.
 
 ---
 
-## 🔎 3. What wiring must not do
+## 📔 3. What wiring must not do
 
 - **Not explain.** A line names the feeling or the fact; it never says why the
   people or the Guild is the way it is (the canon's first rule, four times).
@@ -81,7 +81,7 @@ session scratchpad and belongs in `scripts/` once wanted it.
 
 ---
 
-## 🧾 4. Pointers
+## 📚 4. Pointers
 
 - **Lines-Annex**: the lines.
 - **README, Voice coverage**: the numbers this plan moves.

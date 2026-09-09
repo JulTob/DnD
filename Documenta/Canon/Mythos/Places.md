@@ -1,6 +1,6 @@
 # 🗺 Places: the map that names things, and the story that needs names
 
-> 🚧 **In flow.** 1 of 5 chapters are still proposals. 🔒 0 · 🧾 1 · 🔎 3 · 🚧 1
+> 📖 **In flow.** 1 of 5 chapters are still proposals. 📜 0 · 📚 1 · 📔 3 · 📖 1
 
 *Wiki entry for the design team. `AtlasWorldBuild/AtlasOfMapmaking` is a
 standalone world-map generator (height field by wave-function collapse on a
@@ -14,7 +14,7 @@ import from the repository root today (a bare `AtlasOfMapmaking` import).*
 
 ---
 
-## 🔎 1. What the atlas does
+## 📔 1. What the atlas does
 
 - **Height to biome**: Hell (below -20), Underdark, Sea, Water, Sand, Plains,
   Forest, Mountain, Snow. A geography with a Hell at the bottom of the height
@@ -36,7 +36,7 @@ it is the pattern the rest should follow.
 
 ---
 
-## 🔎 2. Where the story needs it
+## 📔 2. Where the story needs it
 
 The Stories page found the hometowns: *Stormtor, Stormkirk, Raingate, Rainglade,
 Rockspring, Rockcross, Rockspire*: Weather plus Anglo suffix, for every people,
@@ -67,7 +67,7 @@ key) instead of a fresh stub makes the town speak the character's language.
 
 ---
 
-## 🔎 3. State
+## 📔 3. State
 
 - ⚠️ Not wired into the app; `Helm_of_Mapmaking.main()` writes SVG files to
   disk. No page or route reaches it.
@@ -81,7 +81,7 @@ key) instead of a fresh stub makes the town speak the character's language.
 
 ---
 
-## 🚧 4. Proposals
+## 📖 4. Proposals
 
 1. **Hometown from the atlas**: the Stories' `hometown` and `kingdom` tokens
    drawn from the biome patterns, keyed to the Character's culture, through the
@@ -96,7 +96,7 @@ key) instead of a fresh stub makes the town speak the character's language.
 
 ---
 
-## 🧾 5. Pointers
+## 📚 5. Pointers
 
 - **Stories-and-Titles §6**: the hometowns that need this.
 - **Names**: the culture keys the inner names should use.

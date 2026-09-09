@@ -1,6 +1,6 @@
 # ⚔️ Paladin: the Sworn, read against the whole setting
 
-> 🚧 **In flow.** 2 of 11 chapters are still proposals. 🔒 2 · 🧾 2 · 🔎 5 · 🚧 2
+> 📖 **In flow.** 2 of 11 chapters are still proposals. 📜 2 · 📚 2 · 📔 5 · 📖 2
 
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. No
 Dialog exists for the Paladin; this page does the archetypal read from a blank
@@ -19,7 +19,7 @@ Ancients, Glory, Vengeance.
 
 ---
 
-## 🧾 1. What a Paladin player is handed today
+## 📚 1. What a Paladin player is handed today
 
 A level 11 Tiefling Vengeance Paladin (seed 8) receives the Tiefling entry, a
 Guard background that renders under its feature's title (*"Watcher's Eye"*, one
@@ -30,7 +30,7 @@ the roster, and it is the Guild with the most legend attached to its name.
 
 ---
 
-## 🔒 2. The core fantasy: a sentence that does what it says
+## 📜 2. The core fantasy: a sentence that does what it says
 
 **Candidate A, the holy knight.** Galahad, the Templar, the crusader, the
 white harness. God's champion; the sword as sacrament. Its literature is late
@@ -92,7 +92,7 @@ Barbarian's).
 
 ---
 
-## 🔒 3. The name, and the oath-breaker next door
+## 📜 3. The name, and the oath-breaker next door
 
 *Palatinus*: of the palace, from the Palatine Hill. The royal guard, the
 imperial one. Charlemagne's Twelve Peers. By the pattern the Barbarian and Monk
@@ -128,7 +128,7 @@ and for a page on the names of the Guilds.
 
 ---
 
-## 🧾 4. Four oaths, four wells
+## 📚 4. Four oaths, four wells
 
 | Oath | The vow, in one line | Mythic well (Iberian and Eastern where martial) | Rules echo |
 |---|---|---|---|
@@ -145,7 +145,7 @@ Lawful Evil Vengeance Paladin is Hannibal. The texts below moral-lock nothing.
 
 ---
 
-## 🔎 5. The Paladin inside the setting's metaphysics
+## 📔 5. The Paladin inside the setting's metaphysics
 
 **Sworn, not kept.** The Cleric's greater thing loves first; the Paladin's is a
 word the self gave. The Cleric's hand "was held out before you reached for
@@ -194,7 +194,7 @@ vow, and nobody in-world will read it correctly.
 
 ---
 
-## 🔎 6. Relationships: species × Paladin
+## 📔 6. Relationships: species × Paladin
 
 | People | The seed | Oath that sings | Note |
 |---|---|---|---|
@@ -211,7 +211,7 @@ vow, and nobody in-world will read it correctly.
 
 ---
 
-## 🔎 7. Relationships: backgrounds × Paladin
+## 📔 7. Relationships: backgrounds × Paladin
 
 - **Squire.** "You stood where you were told and did not run." Reinforcement,
   and the Paladin's most obvious background. The interesting Squire Paladin
@@ -261,7 +261,7 @@ vow, and nobody in-world will read it correctly.
 
 ---
 
-## 🔎 8. Flags
+## 📔 8. Flags
 
 ### ✅ Singular, and to be protected
 
@@ -293,7 +293,7 @@ vow, and nobody in-world will read it correctly.
 
 ---
 
-## 🚧 9. Drafts
+## 📖 9. Drafts
 
 *House rules: second person; no em-dashes; no proper nouns; no open choices; no
 "watched over"; the oath is never quoted. Plain prose for the Guild block and
@@ -408,7 +408,7 @@ Mercy is not forbidden to you. It is simply not what you promised, and you do no
 
 ---
 
-## 🚧 10. Threads to pull in later cycles
+## 📖 10. Threads to pull in later cycles
 
 - **Warlock**: sworn and forsworn (§3). The Warlock page must confirm
   "noticed" survives all four patrons, and should end on the terms, as this one
@@ -426,7 +426,7 @@ Mercy is not forbidden to you. It is simply not what you promised, and you do no
 
 ---
 
-## 🔎 11. Oath Spells
+## 📔 11. Oath Spells
 
 | Feature | Line |
 |---|---|

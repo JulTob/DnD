@@ -1,6 +1,6 @@
 # 🏷 Brand Voice: the words around the sheet
 
-> 🔒 **Settled.** No chapter is still in flow. 🔒 1 · 🧾 1 · 🔎 4
+> 📜 **Settled.** No chapter is still in flow. 📜 1 · 📚 1 · 📔 4
 
 *Wiki entry for the design team. Decree 0006 ranks the beta's priorities:
 aesthetics, brand, the service. The sheet's voice has forty pages; the frame
@@ -15,7 +15,7 @@ and the palette) has none. Compiled 2026-09-08 from `app/pages`,
 
 ---
 
-## 🔎 1. Every word the frame says
+## 📔 1. Every word the frame says
 
 | Where | Text |
 |---|---|
@@ -47,7 +47,7 @@ Human entry, not in the view.
 
 ---
 
-## 🔎 2. The voice the frame should borrow
+## 📔 2. The voice the frame should borrow
 
 The sheet already has a voice and the frame should be its outer edge, not a
 different product. Three rules carry over:
@@ -73,7 +73,7 @@ plain, the way chips do on the sheet. The voice belongs in the sentences.
 
 ---
 
-## 🔎 3. Type
+## 📔 3. Type
 
 Nineteen font families are requested from the hosted service: eight IM Fell
 variants, Cinzel and Cinzel Decorative, Spectral SC, Eagle Lake, four scripts
@@ -98,7 +98,7 @@ question.
 
 ---
 
-## 🔎 4. Colour and metaphor
+## 📔 4. Colour and metaphor
 
 Gold (`#ffd700`, `#d4af37`, `#cda410`), red (`#cd1017`, `#aa0a12`), parchment
 (`#fff9f0`). Heraldic gold and gules on vellum, and the CSS calls the page a
@@ -109,7 +109,7 @@ is neither.
 
 ---
 
-## 🔒 5. Decisions log
+## 📜 5. Decisions log
 
 **Standing**: the URL shape; the Fell and Cinzel pairing; the tablet metaphor;
 plain labels for buttons.
@@ -123,7 +123,7 @@ named.
 
 ---
 
-## 🧾 6. Pointers
+## 📚 6. Pointers
 
 - **Lenses §10**: atmosphere as the wordless layer.
 - **Spells-and-Invocations §5**: the Warlock's title face.

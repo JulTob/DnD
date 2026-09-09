@@ -1,6 +1,6 @@
 # 🔧 Gnome
 
-> 🚧 **In flow.** 1 of 10 chapters are still proposals. 🔒 4 · 🧾 2 · 🔎 3 · 🚧 1
+> 📖 **In flow.** 1 of 10 chapters are still proposals. 📜 4 · 📚 2 · 📔 3 · 📖 1
 
 *Wiki entry for the design team. Deep lore and settled direction, not page text.
 Compiled 2026-09-08 from the Gnome kit and its two lineages, the species entry,
@@ -15,7 +15,7 @@ the design notes.*
 
 ---
 
-## 🧾 1. Where the Gnome lives in the code
+## 📚 1. Where the Gnome lives in the code
 
 | What | Where | State |
 |---|---|---|
@@ -29,7 +29,7 @@ the design notes.*
 
 ---
 
-## 🔒 2. Origin: curiosity, not fae magic
+## 📜 2. Origin: curiosity, not fae magic
 
 *"Your family has been in this house for four hundred years, and you will still
 be asked to go back to the Feywild. But everyone loves what your people made:
@@ -56,7 +56,7 @@ Prestidigitation and the Clockwork Device).
 
 ---
 
-## 🔎 3. Society: ways kept in things
+## 📔 3. Society: ways kept in things
 
 *"Your own keep their ways in things rather than in land, because land can be
 taken. A song, a recipe, a pattern in a rug, a joke that only works in the
@@ -90,7 +90,7 @@ the pieces."* The Rock Gnome's creed, and the Renaissance's.
 
 ---
 
-## 🔒 4. Culture and registers
+## 📜 4. Culture and registers
 
 **Italy**: the Renaissance workshop, Milanese steel, the commedia dell'arte
 (Arlecchino's mask and the improvised scene: the Gnome Glamour and Lore Bards),
@@ -112,7 +112,7 @@ as a proverb.
 
 ---
 
-## 🔒 5. Metaphysics: the reverse Elf
+## 📜 5. Metaphysics: the reverse Elf
 
 **The Gnome and the Elf.** Both came out of the Fae. The Elf stayed in the Dream
 and is shaped by it; the Gnome left it for curiosity and is shaped by what they
@@ -134,7 +134,7 @@ and flat; the Gnome Wild Magic Sorcerer is curiosity that would not wait.
 
 ---
 
-## 🔎 6. The classes: curiosity in each
+## 📔 6. The classes: curiosity in each
 
 | Class | The Gnome in it |
 |---|---|
@@ -154,7 +154,7 @@ and flat; the Gnome Wild Magic Sorcerer is curiosity that would not wait.
 
 ---
 
-## 🔎 7. Backgrounds
+## 📔 7. Backgrounds
 
 - **Hermeticist.** "A traveling jeweler you hosted for a winter." The Gnome's
   own background by marker: correspondence, jewels, the locked cabinet. The
@@ -176,7 +176,7 @@ and flat; the Gnome Wild Magic Sorcerer is curiosity that would not wait.
 
 ---
 
-## 🔒 8. Decisions log
+## 📜 8. Decisions log
 
 **Decided**
 
@@ -195,7 +195,7 @@ and flat; the Gnome Wild Magic Sorcerer is curiosity that would not wait.
 
 ---
 
-## 🚧 9. Lines
+## 📖 9. Lines
 
 *The lines exist and are strong; listed as the reference.*
 
@@ -208,7 +208,7 @@ and flat; the Gnome Wild Magic Sorcerer is curiosity that would not wait.
 
 ---
 
-## 🧾 10. Pointers
+## 📚 10. Pointers
 
 - **Artificer page**: native by refusal.
 - **Elf page**: the reverse Gnome.

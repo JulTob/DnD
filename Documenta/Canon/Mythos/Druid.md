@@ -1,6 +1,6 @@
 # 🌿 Druid: the Lent, read against the whole setting
 
-> 🚧 **In flow.** 2 of 8 chapters are still proposals. 🔒 0 · 🧾 3 · 🔎 3 · 🚧 2
+> 📖 **In flow.** 2 of 8 chapters are still proposals. 📜 0 · 📚 3 · 📔 3 · 📖 2
 
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. Builds
 on Dialog 0017 (core fantasy settled as the elder belonging, sharpened to
@@ -22,7 +22,7 @@ the owing").
 
 ---
 
-## 🧾 1. What a Druid player is handed today
+## 📚 1. What a Druid player is handed today
 
 Four sheets were generated (Elf Land, Goliath Moon, Halfling Stars, Orc Sea).
 All four: no class text, no Circle text, no line above any feature, and the
@@ -47,7 +47,7 @@ contradiction in it.
 
 ---
 
-## 🧾 2. The forms are the vocabulary, so draw them
+## 📚 2. The forms are the vocabulary, so draw them
 
 Proposal, not landed. Wild Shape says the forms are *learned*; the generator
 should learn them for the Character, the way it draws a Background's tool or
@@ -75,7 +75,7 @@ sentence about the wolf.
 
 ---
 
-## 🧾 3. Wells the dialog did not draw from
+## 📚 3. Wells the dialog did not draw from
 
 The dialog's shelf is long and good. These add *places* the culture map
 already holds.
@@ -131,7 +131,7 @@ is a Goblin key. The sky is the one wilderness the Goblins named.
 
 ---
 
-## 🔎 4. The Druid inside the setting's metaphysics
+## 📔 4. The Druid inside the setting's metaphysics
 
 **The Elves are Druids at species scale.** Canon: *"Dream of the forest for a
 thousand years and you become a Wood Elf."* The dialog's class close: *"Keep
@@ -189,7 +189,7 @@ touch on the page.
 
 ---
 
-## 🔎 5. Relationships: backgrounds × Druid
+## 📔 5. Relationships: backgrounds × Druid
 
 - **Herald × Sea** (seed 31). *"A herald carries power that is not their own:
   a council, a temple, a patron, a forest…"* ✅✅ The background lists **a
@@ -239,7 +239,7 @@ touch on the page.
 
 ---
 
-## 🔎 6. Flags
+## 📔 6. Flags
 
 ### ✅ Singular, and to be protected
 
@@ -270,7 +270,7 @@ touch on the page.
 
 ---
 
-## 🚧 7. Feature lines: drafts
+## 📖 7. Feature lines: drafts
 
 *Italic inspiration line only. Register: the walker's field diary, concrete
 senses, warmth without awe, no proper nouns, no dice, no em-dashes. Rule text
@@ -334,7 +334,7 @@ untouched except the em-dashes. Proposals.*
 
 ---
 
-## 🚧 8. Threads to pull in later cycles
+## 📖 8. Threads to pull in later cycles
 
 - **Elf page**: the species as Druids at scale; the Moon Elf's elders.
 - **Dwarf page**: the Basajaun and Mari; the mountain's creditor.

@@ -1,6 +1,6 @@
 # 🎯 Feats, Gifts and Boons
 
-> 🔒 **Settled.** No chapter is still in flow. 🔒 1 · 🧾 2 · 🔎 4
+> 📜 **Settled.** No chapter is still in flow. 📜 1 · 📚 2 · 📔 4
 
 *Wiki entry for the design team. The feats are on every sheet at levels 1, 4, 8,
 12, 16 and 19, and they are the largest surface of the generator that no page
@@ -15,7 +15,7 @@ has read for its fantasy. Compiled 2026-09-08 from `Map_of_Official_Origin_Feats
 
 ---
 
-## 🔎 1. Where the feats live
+## 📔 1. Where the feats live
 
 | Layer | Where | State |
 |---|---|---|
@@ -28,7 +28,7 @@ has read for its fantasy. Compiled 2026-09-08 from `Map_of_Official_Origin_Feats
 
 ---
 
-## 🧾 2. The Origin feats: the backgrounds' mechanical half
+## 📚 2. The Origin feats: the backgrounds' mechanical half
 
 Every custom background has an Origin feat, and most are published faction
 feats with the faction taken out and the setting put in. The design comments in
@@ -65,7 +65,7 @@ would make the background's mechanical half speak in the background's voice.
 
 ---
 
-## 🔎 3. The Dark Gifts
+## 📔 3. The Dark Gifts
 
 *"A boon that arrived uninvited and kept a share of you."* Nine, from the
 Ravenloft register, and every one of them carries a one-line identity as a
@@ -100,7 +100,7 @@ the boon that came from the one alliance nobody chose.
 
 ---
 
-## 🔎 4. The General feats: what the road taught
+## 📔 4. The General feats: what the road taught
 
 Forty-three feats, drawn at levels 4, 8, 12 and 16, printed as 2024 rules with
 the ability-score clause first: *"Increase your Constitution or Wisdom by 1, to
@@ -139,7 +139,7 @@ generator draws most.
 
 ---
 
-## 🔎 5. The Epic Boons: level 19, and the cap
+## 📔 5. The Epic Boons: level 19, and the cap
 
 Twelve Boons, one at level 19 (and the Fighter's at 19 by class). Every Boon
 opens *"Increase one ability score by 1, to a maximum of 30"*: the one place on
@@ -175,7 +175,7 @@ possible break in the seeded replay at level 19. Rules work; recorded.
 
 ---
 
-## 🔒 6. Decisions log
+## 📜 6. Decisions log
 
 **Decided**
 
@@ -204,7 +204,7 @@ possible break in the seeded replay at level 19. Rules work; recorded.
 
 ---
 
-## 🧾 7. Pointers
+## 📚 7. Pointers
 
 - **Backgrounds-Official**: the Origin feat is the half that already works.
 - **Human page**: Versatile as designed, drawing Dark Gifts.

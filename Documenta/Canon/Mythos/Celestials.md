@@ -1,6 +1,6 @@
 # 🕊️ Celestials
 
-> 🔒 **Settled.** No chapter is still in flow. 🔒 0 · 🧾 1 · 🔎 9
+> 📜 **Settled.** No chapter is still in flow. 📜 0 · 📚 1 · 📔 9
 
 *Wiki entry for the design team, written for the NPC generator first. Deep
 lore, never page text: nothing here is explained on a sheet, and a Character
@@ -15,7 +15,7 @@ the project's notes on the Aasimar page. The mortal end of this entry is
 
 ---
 
-## 🔎 1. What a Celestial is
+## 📔 1. What a Celestial is
 
 - **An emanation of a Platonic Form**, prior to the gods and not a worshipper of
   any. The gods are bound by the wills of others; a Celestial is bound by one
@@ -42,7 +42,7 @@ attending the highest god, each one an abstraction with a face.
 
 ---
 
-## 🔎 2. The eight Ideals
+## 📔 2. The eight Ideals
 
 | Ideal | Aureola form | Metal / gem | Tell (never names the Ideal) | Muse |
 |---|---|---|---|---|
@@ -69,7 +69,7 @@ Rules that hold across the table:
 
 ---
 
-## 🔎 3. The Descents
+## 📔 3. The Descents
 
 Categories, not a ladder. An Angel does not answer to a Seraph; a Muse is not
 junior to a Planetar. They are different sorts of thing, from three
@@ -93,7 +93,7 @@ Orthography per the standing rule: Greek concepts, Latin and Spanish spelling
 
 ---
 
-## 🔎 4. How Celestials act in the world
+## 📔 4. How Celestials act in the world
 
 **They prevent, or they redeem.** The Manichaean shift (via Nietzsche's
 Zarathustra) turned a Platonic beyond, where principles balance, into a
@@ -132,7 +132,7 @@ fidelity is what a tyrant has.
 
 ---
 
-## 🔎 5. The Celestial as antagonist
+## 📔 5. The Celestial as antagonist
 
 "A campaign's BBEG can be a Celestial in pursuit of preventing
 corruption of the ideal, or the installation of the ideal into a person or
@@ -158,7 +158,7 @@ decided is a principle.
 
 ---
 
-## 🔎 6. Relations
+## 📔 6. Relations
 
 | With | The relation |
 |---|---|
@@ -172,7 +172,7 @@ decided is a principle.
 
 ---
 
-## 🔎 7. Registers for NPC prose
+## 📔 7. Registers for NPC prose
 
 - **The Celestial itself:** certain, courteous, methodological. It does not
   argue whether; it argues how. It says *no* more than *yes*, like the tell.
@@ -187,7 +187,7 @@ decided is a principle.
 
 ---
 
-## 🔎 8. Generation notes (for the NPC generator)
+## 📔 8. Generation notes (for the NPC generator)
 
 - **QST-0050** asks for a `CelestialKit` holding the Ideals, the aureola
   vocabulary and the Descents, read by the Aasimar Species, by the NPC
@@ -210,7 +210,7 @@ decided is a principle.
 
 ---
 
-## 🔎 9. Sayings (a pool, not lore)
+## 📔 9. Sayings (a pool, not lore)
 
 The rule: take sayings from the wells, never the institutions. Candidates for a
 Celestial's mouth, or for the prayer ledger's `athens`, `vatican` and `sangha`
@@ -228,7 +228,7 @@ keys:
 
 ---
 
-## 🧾 10. Pointers
+## 📚 10. Pointers
 
 - **[Aasimar.md](Aasimar.md)**: the mortal end.
 - **Tiefling page**: the other mortal end, and the shared priesthood.

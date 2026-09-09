@@ -1,22 +1,31 @@
 # ✨ Aasimar
 > The Mortal Angel
 >
-> 🚧 **In flow.** 1 of 13 chapters are still proposals. 🔒 5 · 🧾 2 · 🔎 5 · 🚧 1
+> 📖 **In flow.** 1 of 13 chapters are still proposals. 📜 5 · 📚 2 · 📔 5 · 📖 1
 
 *Wiki entry for the design team. Deep lore and settled direction, not page text.
-Compiled 2026-09-08 from the class analyses and the design notes; where a decision is settled, it is stated as such. The companion entry for the Celestials themselves, written for the NPC generator, is [Celestials.md](Celestials.md).*
+Compiled 2026-09-08 from the class analyses and the design notes; where a decision is settled, it is stated as such. The companion entry for the Celestials themselves, written for the NPC generator, is [Celestials.md](Celestials.md).   
+🚧 **In flow.** 1 of 13 chapters are still proposals. 🔒 5 · 🧾 2 · 🔎 5 · 🚧 1*
+
 
 > ### **In one sentence.**
 > An Aasimar carries the Spark of something perfect, and it is the measuring bar; but the Aasimar is mortal, inperfect, and is always short. Not an angel, but someone who **has to live**. 
 
 ---
 
-## 🔒 0. Rules
+## 📜 0. Rules
 
-*The fixed points. Everything after this chapter is our interpretation of what
-is written here, and may be argued with. This chapter may not: 📕 is inherited
-from the 2024 rules and moving it costs rules compatibility; ⚖️ is ratified by
-this project and moving it takes a question, a Dialog and a Decree.*
+*The fixed points, and what we made of them. This chapter is the reference
+shape for every element page. The books say where a statement came from and
+what changing it would cost.*
+
+> 📕 **inherited from the 2024 rules.** Moving it costs rules compatibility.
+> 📙 **an aesthetic change.** The same rule wearing our name and look.
+> 📒 **a rule we changed.** A house rule, and it already cost compatibility.
+> 📘 **supportive lore.** It holds a rule or a core element up. Moving it takes a question, a Dialog and a Decree.
+> 📗 **deep lore.** Design that supports the fantasy rather than a rule. No rule notices a change; the setting does.
+
+### The rules as given
 
 > 📕 **Creature Type** Humanoid. **Size** Medium or Small, chosen. **Speed** 30 feet.
 >
@@ -41,16 +50,24 @@ this project and moving it takes a question, a Dialog and a Decree.*
 > **Necrotic Shroud**: creatures other than your allies within 10 feet make a
 > Charisma save or are Frightened until the end of your next turn. Necrotic.
 >
-> ⚖️ **The spark has no sender and no errand.** The Ideals are prior to the gods
-> and do not ask for anything (`Celestials`, and §2 below).
+> 📙 **Talarian Wings** is our name for **Heavenly Wings**. The rule is
+> unchanged; only the name and the look are ours. Anyone reading from the
+> published book should look under the old name.
+
+No rule of the Aasimar has been changed, so this page carries no 📒.
+
+### The supportive lore
+
+> 📘 **The spark has no sender and no errand.** The Ideals are prior to the gods
+> and ask for nothing (§2, and the Celestials page).
 >
-> ⚖️ **Three markers, as a subculture, and no host-culture draw.** `athens`,
-> `vatican`, `sangha`; legend register `crusader`. The Aasimar and the Tiefling
-> stay distinct peoples.
+> 📘 **Three markers, held as a subculture, and no host-culture draw.** `athens`,
+> `vatican`, `sangha`, with `crusader` as the legend register. The Aasimar and
+> the Tiefling stay distinct peoples.
 >
-> ⚖️ **Dance is Freedom's Muse**.
+> 📘 **Dance is Freedom's Muse.**
 >
-> ⚖️ **Darkvision prints with a line**, not as a bare chip.
+> 📘 **Darkvision prints with a line**, never as a bare chip.
 
 ### What the rules force, and what we chose
 
@@ -58,13 +75,12 @@ The Revelation is the demanding one. It forces a single body that can sprout
 wings, shed searing light and terrify a room, and that must pick between them
 at each transformation.
 
-**Our interpretation is two organs rather than three powers.** The **talaria**,
-small vestigial wings sitting only where a wing could take a body's weight,
-each folding away as a seam and catching the light like a metal. The
-**aureola**, a halo glowing like a stone, in a shape the Ideal lends.
+> 📘 **Two organs, not three powers.** The **talaria**: small vestigial wings
+> sitting only where a wing could take a body's weight, each folding away as a
+> seam. The **aureola**: a halo, in a shape the Ideal lends.
 
 **What that buys beyond the rule.** The wings *grow* instead of appearing from
-nowhere, because they were always there. Necrotic Shroud uses the same organ
+nowhere, because they were always there. Necrotic Shroud spends the same organ
 (*"your talaria spread into flightless wings"*), so the third option belongs to
 the same body instead of being an unrelated third power. Two of the three
 Revelations therefore share one physiology. And the talaria's metals nod at the
@@ -76,14 +92,26 @@ Wings becomes wings from nowhere. Necrotic Shroud's own sentence stops meaning
 anything. The Revelation set loses its unity. The Dwarf ambiguity goes with it.
 The talaria are not a flourish; they are the body the rules were given.
 
-**Free, and yours to change.** Which metal a given character's talaria catch,
-which stone the aureola glows like, where on the body the talaria sit (heels,
-forearms, shoulder blades, the small of the back), and the roster of Descent
-names. None of these carries a rule.
+### The deep lore
 
----
+> 📗 Which metal a character's talaria catch (black iron, gold, red iron, silver,
+> verdigris, pearl, tin, bronze).
+>
+> 📗 Which stone the aureola glows like (onyx, amber, ruby, diamond, aquamarine,
+> opal, moonstone, jade).
+>
+> 📗 Where on the body the talaria sit: heels, ankles, wrists, forearms,
+> shoulders, shoulder blades, the small of the back, the base of the spine.
+>
+> 📗 The roster of Descent names.
 
-## 🧾 1. Where the Aasimar lives in the code
+None of these carries a rule, and each was chosen rather than filled in: the
+metals answer the Dwarven soul-metals, the aureola's forms are lent by the
+Ideals, and the Descent names follow the orthography rule. Change them freely,
+and keep the fantasy coherent while you do. A detail with nothing at stake at
+all carries no book.
+
+## 📚 1. Where the Aasimar lives in the code
 
 | What | Where | State |
 |---|---|---|
@@ -111,7 +139,7 @@ generator gave it to an Assassin, which by the loaded-names rule is a story).
 
 ---
 
-## 🔒 2. Origin: the spark
+## 📜 2. Origin: the spark
 
 A Celestial is an Ideal with a shape: not a god and not a servant of one, but
 Justice itself, or Mercy, standing where mortals can see it. Celestials are
@@ -165,7 +193,7 @@ Neither is directly named on the page nor directly ported into the system. Just 
 
 ---
 
-## 🔎 3. The vessel: physiology
+## 📔 3. The vessel: physiology
 
 **Talaria.** 
 Small vestigial wings, sitting only where a wing could take a body's weight (lower neck, wrists, forearms, shoulders, shoulder blades, small of the back, base of the spine, ankles, heels), each folding into something a tailor could hide or explain: a collar, bracelets, a sash, sandal straps. 
@@ -223,7 +251,7 @@ who speak of their bodies with pride (the Goliath's size, the Dwarf's beard). An
 
 ---
 
-## 🔎 4. Society: a subculture, not a nation
+## 📔 4. Society: a subculture, not a nation
 
 Decided, superseding the earlier proposal to draw a host
 culture for the body.
@@ -282,7 +310,7 @@ whose isolation is *hostile*. The Aasimar's is upward.
 
 ---
 
-## 🔒 5. Culture and registers
+## 📜 5. Culture and registers
 
 **The markers.** `athens` (the academy, the portico, the fleet), `vatican`
 (sacerdotal Rome: office, vestment, canon), `sangha` (the Buddhist monastic
@@ -344,7 +372,7 @@ importing the real-world institutions as lore.
 
 ---
 
-## 🔒 6. Metaphysics
+## 📜 6. Metaphysics
 
 **The measuring bar.** Stated in §2. Every class an Aasimar takes is a different
 departure from the spark, and the aureola reports every departure.
@@ -378,7 +406,7 @@ antagonist, and the Inquisitor background's superior ("send them on, the gods wi
 
 ---
 
-## 🔎 7. Relationships with the other peoples
+## 📔 7. Relationships with the other peoples
 
 | People | The relation | Deep lore, never on the page |
 |---|---|---|
@@ -391,7 +419,7 @@ antagonist, and the Inquisitor background's superior ("send them on, the gods wi
 
 ---
 
-## 🔎 8. The classes: departures from the spark
+## 📔 8. The classes: departures from the spark
 
 The Celestials' vocabulary names several classes (the project's etymologies). That
 is colour, not fantasy: the *fantasy* of each class is its own, and an Aasimar
@@ -421,7 +449,7 @@ choices, but when they meet, they meet as family.
 
 ---
 
-## 🔎 9. Backgrounds: the tell meets the hook
+## 📔 9. Backgrounds: the tell meets the hook
 
 The Ideal's tell is the Aasimar's hook in every background, because it reports
 on conduct without naming the principle.
@@ -457,7 +485,7 @@ on conduct without naming the principle.
 
 ---
 
-## 🔒 10. Decisions log
+## 📜 10. Decisions log
 
 **Decided**
 
@@ -498,7 +526,7 @@ on conduct without naming the principle.
 
 ---
 
-## 🚧 11. Lines
+## 📖 11. Lines
 
 *the project's drafts, kept as written; the incomplete one is completed with a proposal
 marked as such.*
@@ -514,7 +542,7 @@ marked as such.*
 
 ---
 
-## 🧾 12. Pointers
+## 📚 12. Pointers
 
 - **[Celestials.md](Celestials.md)**: the beings themselves, for the NPC
   generator: Ideals, Descents, temper, how they act, the Celestial as

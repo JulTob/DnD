@@ -1,6 +1,6 @@
 # 📄 The Sheet, Alignment and Languages: the order a stranger meets you in
 
-> 🔒 **Settled.** No chapter is still in flow. 🔒 1 · 🧾 5 · 🔎 0
+> 📜 **Settled.** No chapter is still in flow. 📜 1 · 📚 5 · 📔 0
 
 *Wiki entry for the design team. `app/components/character_sheet.py` decides
 what a reader sees first; `AtlasActorLudi/AlignmentKit.py` draws the two
@@ -13,7 +13,7 @@ Compiled 2026-09-08 from the code and sixteen generated characters.*
 
 ---
 
-## 🧾 1. The reading order
+## 📚 1. The reading order
 
 The main column is a tree: **Species, then Background (hook, Secret Order,
 Order hook, Origin feat), then Class (Guild, Training, Fighting Style, Weapon
@@ -36,7 +36,7 @@ no sentence anywhere.
 
 ---
 
-## 🧾 2. Alignment: two axes, and the house names
+## 📚 2. Alignment: two axes, and the house names
 
 `AlignmentKit` is a two-axis geometry. Morality (Evil, Neutral, Good) and Order
 (Lawful, Neutral, Chaotic) are independent Tags; Neutral is the absence of a
@@ -83,7 +83,7 @@ Nine lines, one per cell, in the docstring's own register:
 
 ---
 
-## 🧾 3. Languages: one line, every sheet, the same
+## 📚 3. Languages: one line, every sheet, the same
 
 `Character_Languages` adds Common, then a species language (`if char ==
 "Elf": Elvish` and so on), then a class language, then one from the standard
@@ -126,7 +126,7 @@ carving on the Tomb Raider's find, the Tiefling's carvings nobody reads).
 
 ---
 
-## 🧾 4. Gender
+## 📚 4. Gender
 
 The other chip with no sentence. The species entries use second person and
 the Guild lines avoid pronouns; the Stories engine hard-codes *her* in two
@@ -136,7 +136,7 @@ Nothing to write on the sheet; something to make the engines read.
 
 ---
 
-## 🔒 5. Decisions log
+## 📜 5. Decisions log
 
 **Standing**: the tree order; the two-axis alignment with Neutral as absence;
 the *True* display names; the docstring definitions.
@@ -152,7 +152,7 @@ the Rogue legacy Training's two extra `AddAnyLanguage` calls.
 
 ---
 
-## 🧾 6. Pointers
+## 📚 6. Pointers
 
 - **Stories-and-Titles**: the fourth section this order was made for; the Evil
   gate.

@@ -1,6 +1,6 @@
 # 🧬 Lineages: what a sub-identity is, people by people
 
-> 🚧 **In flow.** 1 of 9 chapters are still proposals. 🔒 0 · 🧾 1 · 🔎 7 · 🚧 1
+> 📖 **In flow.** 1 of 9 chapters are still proposals. 📜 0 · 📚 1 · 📔 7 · 📖 1
 
 *Wiki entry for the design team. Every people page read its species whole. None
 read the layer underneath: the Elf's six lineages, the Tiefling's three
@@ -17,7 +17,7 @@ do not agree on what a lineage **is**. Compiled 2026-09-09 from
 
 ---
 
-## 🔎 1. The seven answers
+## 📔 1. The seven answers
 
 | People | A lineage is… | Count | Verdict |
 |---|---|---|---|
@@ -36,7 +36,7 @@ idea is thin, the lineage is a lookup.
 
 ---
 
-## 🔎 2. Elf: six migrations, and the fourth slot nobody named
+## 📔 2. Elf: six migrations, and the fourth slot nobody named
 
 Each Elf lineage entry carries the same four things, in the same order, in the
 first person plural the Elves canon requires:
@@ -69,7 +69,7 @@ either. Decide which name the setting keeps; the *text* is right whichever wins.
 
 ---
 
-## 🔎 3. Gnome: a lineage as an ancestor's decision
+## 📔 3. Gnome: a lineage as an ancestor's decision
 
 Two lineages, and they are two answers to a single question the species entry
 poses without asking it: **did your family take the city offer?**
@@ -95,7 +95,7 @@ are where that happened.
 
 ---
 
-## 🔎 4. Tiefling: three bodies, no personalities
+## 📔 4. Tiefling: three bodies, no personalities
 
 | Legacy | The description |
 |---|---|
@@ -129,7 +129,7 @@ other two say so. One word.
 
 ---
 
-## 🔎 5. Goliath: heritages named as verbs
+## 📔 5. Goliath: heritages named as verbs
 
 Cloud's Jaunt, Fire's Burn, Frost's Chill, Hill's Tumble, Stone's Endurance,
 Storm's Thunder.
@@ -149,7 +149,7 @@ matters) and cost six sentences.
 
 ---
 
-## 🔎 6. Aasimar: the choice re-made
+## 📔 6. Aasimar: the choice re-made
 
 Inner Radiance, Necrotic Shroud, Talarian Wings, chosen at each
 transformation, plus the seven Descents (Angel, Muse, Constellation, Star,
@@ -167,7 +167,7 @@ you may belong to its lineage."* The **may** is the whole design.
 
 ---
 
-## 🔎 7. Dragonborn and Human: the two thin ones
+## 📔 7. Dragonborn and Human: the two thin ones
 
 **Dragonborn.** Ten colours, each resolving to a damage type and a resistance.
 The species entry does the work (*"their origins do not determine their
@@ -189,7 +189,7 @@ Cultural-Inspirations rows the Human already holds.
 
 ---
 
-## 🚧 8. What this page recommends
+## 📖 8. What this page recommends
 
 1. **Adopt the Elf's four-slot form** (migration, temperament, mark, counsel)
    as the house shape for a lineage entry. The Goliath's six heritages and the
@@ -208,7 +208,7 @@ peoples and a sentence short in three.
 
 ---
 
-## 🧾 9. Pointers
+## 📚 9. Pointers
 
 - **Elves-and-the-Dreaming canon**: lineages are cultures, drift is collective.
 - **Tieflings-and-the-Shift canon**: describe the body and stop.

@@ -1,6 +1,6 @@
 # ⚔️ Equipment and Masteries: what the character is holding
 
-> 🔒 **Settled.** No chapter is still in flow. 🔒 2 · 🧾 1 · 🔎 5
+> 📜 **Settled.** No chapter is still in flow. 📜 2 · 📚 1 · 📔 5
 
 *Wiki entry for the design team. `AtlasInventarium/GearKit.py` is the loadout
 policy over `Grimoire_of_Items`; `Ledger_of_Weapons`, `Ledger_of_Gear` and
@@ -16,7 +16,7 @@ from the code and six generated loadouts (levels 3 to 16).*
 
 ---
 
-## 🔒 1. The design, which is right
+## 📜 1. The design, which is right
 
 GearKit's own "thought pattern" is the doctrine: items are policy-free
 primitives crafted by Tags; proficiency is read from Guild Tags, never from
@@ -36,7 +36,7 @@ then filled from the Guild's training.
 
 ---
 
-## 🔎 2. What six loadouts looked like
+## 📔 2. What six loadouts looked like
 
 | Character | Armour | Weapons | Titles |
 |---|---|---|---|
@@ -63,7 +63,7 @@ silently never.
 
 ---
 
-## 🔎 3. The bare line
+## 📔 3. The bare line
 
 `Ledger_of_Weapons` has 38 weapons and **two descriptions** (Musket and
 Pistol). `Ledger_of_Gear` has 30 adventuring items and 18 descriptions. So the
@@ -92,7 +92,7 @@ Decree 0005 shape.
 
 ---
 
-## 🔎 4. Weapon Mastery on the sheet
+## 📔 4. Weapon Mastery on the sheet
 
 The Feature prints *"You feel comfortable with the weapons you trained with,"*
 then the weapons in bold, then one blurb per mastery ("On a hit you have
@@ -120,7 +120,7 @@ And one line per mastery, in the same register, before the rule:
 
 ---
 
-## 🔎 5. Tool Practices: the second-best prose on the sheet
+## 📔 5. Tool Practices: the second-best prose on the sheet
 
 Twenty-one tools carry a **Practice**: a flavour paragraph, then rules
 sections ("Principles of Transformation", "Works of Wonder") with a worked
@@ -143,7 +143,7 @@ gives the Monk its own.
 
 ---
 
-## 🔎 6. The hook object
+## 📔 6. The hook object
 
 Several background hooks already name an object: the Servant's *signet of the
 house*, the Gambler's *paper with your name and a number*, the Exorcist's
@@ -156,7 +156,7 @@ object the story already gave.
 
 ---
 
-## 🔒 7. Decisions log
+## 📜 7. Decisions log
 
 **Standing**: GearKit's doctrine; masteries as carried weapons; the pack
 opened; titles and personalised shields; tool Practices.
@@ -170,7 +170,7 @@ or never, on purpose).
 
 ---
 
-## 🧾 8. Pointers
+## 📚 8. Pointers
 
 - **Fighter page**: the yard register the mastery lines are written in.
 - **Guilds-Registers-Names-Devices**: the signature-object Kit proposal.

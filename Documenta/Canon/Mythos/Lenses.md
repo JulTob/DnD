@@ -1,6 +1,6 @@
 # 🔭 Lenses: the generator read as a designed thing
 
-> 🔒 **Settled.** No chapter is still in flow. 🔒 0 · 🧾 1 · 🔎 14
+> 📜 **Settled.** No chapter is still in flow. 📜 0 · 📚 1 · 📔 14
 
 *Wiki entry for the design team. The thirty-six pages before this one read
 the generator element by element. This one reads it whole, through the three
@@ -16,7 +16,7 @@ books ask and the answer the generator gives today.*
 
 ---
 
-## 🔎 1. Purpose, and the contradictions against it
+## 📔 1. Purpose, and the contradictions against it
 
 **The lens of the problem statement.** What is this for? The Canon answers
 across three documents: a generator, not a builder; every pick made before the
@@ -42,7 +42,7 @@ brief.
 
 ---
 
-## 🔎 2. The toy, and surprise
+## 📔 2. The toy, and surprise
 
 **The lens of the toy** ("if my game had no goal, would it be fun at all?").
 The generator has no goal. It is a toy first: a seed, a button, a stranger.
@@ -65,7 +65,7 @@ draws surprise once and then bore; constant results never surprise.
 
 ---
 
-## 🔎 3. Resonance, and the hidden power
+## 📔 3. Resonance, and the hidden power
 
 **The lens of resonance** ("what is it about my game that feels powerful and
 special?"). Three things, and all three are already in the Canon:
@@ -84,7 +84,7 @@ fillers have no register, the NPC Celestial table refutes the Ideals.
 
 ---
 
-## 🔎 4. Meaningful choice, removed on purpose
+## 📔 4. Meaningful choice, removed on purpose
 
 **The lens of meaningful choices** ("what choices am I asking the player to
 make?"). The generator's answer is radical: none, before play. The choice it
@@ -100,7 +100,7 @@ two piles. The leaks are listed in §1.
 
 ---
 
-## 🔎 5. Reward and visible progress
+## 📔 5. Reward and visible progress
 
 **The lens of reward** and **the lens of visible progress.** A level-N sheet is
 a record of progress that happened offstage, and the generator's device for
@@ -116,7 +116,7 @@ reader.
 
 ---
 
-## 🔎 6. Transparency
+## 📔 6. Transparency
 
 **The lens of transparency** ("the ideal interface becomes invisible"). The
 chips are lookups and the prose is the entry: correct. The interface shows
@@ -133,7 +133,7 @@ of its own.
 
 ---
 
-## 🔎 7. Fantasy, projection and the avatar
+## 📔 7. Fantasy, projection and the avatar
 
 **The lens of fantasy** ("who does the player fantasize about being?"), **the
 lens of projection** ("what is there that players can relate to?"), **the lens
@@ -155,7 +155,7 @@ that is only theirs.
 
 ---
 
-## 🔎 8. The world, and its gateways
+## 📔 8. The world, and its gateways
 
 **The lens of the world** ("how is my world better than the real world? Can
 there be multiple gateways?"). Better: nobody explains it, nobody is refuted,
@@ -167,7 +167,7 @@ as the door.
 
 ---
 
-## 🔎 9. The nameless quality
+## 📔 9. The nameless quality
 
 **The lens of the nameless quality** asks which of Alexander's fifteen
 properties the design has. Where the generator has them:
@@ -188,7 +188,7 @@ full.
 
 ---
 
-## 🔎 10. Atmosphere
+## 📔 10. Atmosphere
 
 **The lens of atmosphere** ("without using words, how can I describe the
 atmosphere of my game?"). The wordless layer is thin: chip emoji, one gothic
@@ -202,7 +202,7 @@ hosted fonts is the constraint; Tibetan glyphs as Elvish already honour it.
 
 ---
 
-## 🔎 11. The worldbuilding workbook: six aspects of magic
+## 📔 11. The worldbuilding workbook: six aspects of magic
 
 The workbook's frame for any magic is **Source, Cost, Potency, Commonality and
 Accessibility, Mastery**, across paths it names *Scientific, Artisan, Arcane,
@@ -222,7 +222,7 @@ one place the generator is more original than the workbook.
 
 ---
 
-## 🔎 12. The backstory workbook: what a person carries
+## 📔 12. The backstory workbook: what a person carries
 
 The workbook builds a fantasy backstory from **Accessory, Food, Sound, Tool,
 Reputation** (Renown, Concealability, Authority, Utility) and **a Code of
@@ -251,7 +251,7 @@ the Order's Dice.
 
 ---
 
-## 🔎 13. The villain sourcebook: values, not morals
+## 📔 13. The villain sourcebook: values, not morals
 
 "Rather than thinking of villains in terms of morality, frame them in terms
 of values. Morals are shaped by external forces; values exist internally."
@@ -268,7 +268,7 @@ printed under the hook, would give the sheet its fourth sentence.
 
 ---
 
-## 🔎 14. Five sentences
+## 📔 14. Five sentences
 
 Every character the generator makes should be able to say five things, and the
 sheet should say them in this order:
@@ -289,7 +289,7 @@ the time, the species 58%, the Guild 41%, the feats never.*
 
 ---
 
-## 🧾 15. Pointers
+## 📚 15. Pointers
 
 - **README**: the consolidated open decisions this page argues for.
 - **Stories-and-Titles**: the composed Backstory (§14).

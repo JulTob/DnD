@@ -1,6 +1,6 @@
 # 📖 Stories and Titles: the Backstory on every sheet
 
-> 🔒 **Settled.** No chapter is still in flow. 🔒 1 · 🧾 1 · 🔎 9
+> 📜 **Settled.** No chapter is still in flow. 📜 1 · 📚 1 · 📔 9
 
 *Wiki entry for the design team. Every player sheet ends in a "Backstory"
 node headed "The story of {Title}", composed by `AtlasEpica/Map_of_Stories.py`
@@ -14,7 +14,7 @@ node headed "The story of {Title}", composed by `AtlasEpica/Map_of_Stories.py`
 
 ---
 
-## 🔎 1. How a story is made
+## 📔 1. How a story is made
 
 A `Myth` dict of tokens, each a list of `(gate, text)` pairs. The host is the
 Character's genus string (species, class, background, gender, alignment). A
@@ -35,7 +35,7 @@ engines explicitly follow its shape. Nothing here needs rebuilding.
 
 ---
 
-## 🔎 2. What the twelve stories showed
+## 📔 2. What the twelve stories showed
 
 | Character | What the story did |
 |---|---|
@@ -56,7 +56,7 @@ Poet, The Wildfire Honor, The Deadly Traveler.*
 
 ---
 
-## 🔎 3. The story never reads the background
+## 📔 3. The story never reads the background
 
 Gates per background in the story file:
 
@@ -81,7 +81,7 @@ This is the single largest gap between the sheet's two halves, larger than any
 
 ---
 
-## 🔎 4. Contradictions with the peoples' canon
+## 📔 4. Contradictions with the peoples' canon
 
 The species gates were written before the canon and say the opposite of it:
 
@@ -101,7 +101,7 @@ The species gates were written before the canon and say the opposite of it:
 
 ---
 
-## 🔎 5. The registers
+## 📔 5. The registers
 
 Three voices share every paragraph:
 
@@ -123,7 +123,7 @@ four sentences.
 
 ---
 
-## 🔎 6. Names of places
+## 📔 6. Names of places
 
 Hometowns: *Stormtor, Stormkirk, Raingate, Rainglade, Rockspring, Rockcross,
 Rockspire.* Kingdoms: *United Nation, Free Court, Hollow Kingdoms, Shattered
@@ -136,7 +136,7 @@ culture key. "United Nation" reads as the UN.
 
 ---
 
-## 🔎 7. Titles
+## 📔 7. Titles
 
 *Decree 0002 §2 makes the pair mandatory: "we always generate a `Name, Title`
 pair ('John Doe, the Person of the Place')." The critique below is of the
@@ -168,7 +168,7 @@ and sounds cool, X goes here."
 
 ---
 
-## 🔎 8. What the story should be
+## 📔 8. What the story should be
 
 The sheet already has three voices that work: the species entry (who you are),
 the background (what happened to you) and the class lines (what you can do).
@@ -222,7 +222,7 @@ one register each, and every line drawn from a table that already exists.
 
 ---
 
-## 🔎 9. Repairs
+## 📔 9. Repairs
 
 - The hard-coded pronouns ("Known for her fearless resolve", "channels her
   fighting spirit"): a `{they}/{their}` token from the Character's gender, or
@@ -238,7 +238,7 @@ one register each, and every line drawn from a table that already exists.
 
 ---
 
-## 🔒 10. Decisions log
+## 📜 10. Decisions log
 
 **Standing**: the Story engine (seeded, gated, degrading) is kept as is; the
 Gear Titles and Materials engines copy its shape.
@@ -253,7 +253,7 @@ the Gear Titles are.
 
 ---
 
-## 🧾 11. Pointers
+## 📚 11. Pointers
 
 - **Backgrounds-Official**: the sixteen thin ones; their hooks are the missing
   Origins for the official set as well.

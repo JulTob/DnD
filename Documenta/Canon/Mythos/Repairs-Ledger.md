@@ -1,13 +1,13 @@
 # 🧰 Repairs Ledger: every defect the reading found, in one table
 
-> 🧾 **Record.** A report, an index or a working document, not a specification.
+> 📚 **Record.** A report, an index or a working document, not a specification.
 
 *Companion to the Mythos pages. Each row was observed in generated output or
 read in source on 2026-09-08 in this worktree; line numbers are from that day.
 This ledger reports; it does not fix. Rows are ordered by what a player or DM
 meets first. "Page" names the Mythos page that explains why it matters.*
 
-## 🔎 A. The app cannot do it today (all three are in the path Decree 0004 parks behind `PLAYER_ONLY_PUBLISH`)
+## 📔 A. The app cannot do it today (all three are in the path Decree 0004 parks behind `PLAYER_ONLY_PUBLISH`)
 
 | # | What happens | Where | Page |
 |---|---|---|---|
@@ -16,7 +16,7 @@ meets first. "Page" names the Mythos page that explains why it matters.*
 | A3 | `generate_npcs` calls `NPC.NPC(...)` on the class. | `AtlasAlusoris/Map_of_NPC.py:51` | NPCs-and-Villains §1 |
 | A4 | **A Battle Master can fail to generate** (Player path, shipped). Student of War's untrained pick reads tool attributes off `char.skills` (`getattr(char.skills, "Woodworker_Tools")`), which holds no tools; when the seeded shuffle reaches a tool before an untrained skill, `AttributeError` becomes `TagImprintError: Imprint Build_Training.<locals>.Awaken failed`. Reproduced: Tiefling Fighter, seed 974460, levels 13 and 14. Same family as QST-0092 (Assassin). | `AtlasLusoris/AtlasOfTraining/Map_of_Fighter_Training.py:523-575` | Fighter page; this sweep |
 
-## 🔎 B. Wrong on the player sheet
+## 📔 B. Wrong on the player sheet
 
 | # | What happens | Where | Page |
 |---|---|---|---|
@@ -41,7 +41,7 @@ meets first. "Page" names the Mythos page that explains why it matters.*
 | B19 | Open-choice phrases ("of your choice", "Choose one/two") at 79 source sites; 35 hits across 29 swept sheets (Expertise, Otherworldly Glamour, Metamagic Options…). Some are in-play choices and stay; most are elections the generator already made. | `Map_of_General_Feats.py` (8), `Map_of_Classes/Training/Warlock.py` (7), `Map_of_Bard_Training.py` (6), `Map_of_Barbarian_Training.py` (6)… | Feature-Text canon; QST-0067 |
 | B20 | "a Aasimar" in a Story ("{name} is a young {species}"): the article does not agree with a vowel. | `AtlasEpica/Map_of_Stories.py` (Archetype: "a young {species}") | Stories-and-Titles |
 
-## 🔎 C. Breaks the replay or the Dice doctrine
+## 📔 C. Breaks the replay or the Dice doctrine
 
 | # | What happens | Where | Page |
 |---|---|---|---|
@@ -51,7 +51,7 @@ meets first. "Page" names the Mythos page that explains why it matters.*
 | C4 | Legacy `NPC.alignment` assigns the drawn alignment and returns a local "Neutral". | `AtlasAlusoris/Grimoire_of_NPC.py:65-77` | NPCs-and-Villains §1 |
 | C5 | Legacy NPC story always empty: `SetMyStory` swallows the `TypeError` from `~npc`. | `Grimoire_of_NPC.py:529-535`; `AtlasActorLudi/Map_of_Stories.py` | NPCs-and-Villains §1 |
 
-## 🔎 D. Duplicates and dead files
+## 📔 D. Duplicates and dead files
 
 | # | What | Where |
 |---|---|---|
@@ -68,7 +68,7 @@ meets first. "Page" names the Mythos page that explains why it matters.*
 | D11 | Rogue legacy Training adds two `AddAnyLanguage` calls (2024 grants one). | `AtlasLusoris/Map_of_Classes/Training/Rogue.py:49-51` |
 | D12 | The design documents live in two trees: `Curia/` (188 files; Decrees 0001-0004, 0007, 0008; Agentia, Consuls, Vademecum) and `Documenta/` (133 files; Decrees 0005-0006; Sources; this Mythos). Decree 0002, cited by code and Questae as the Dice doctrine, resolves only in `Curia`. | `Curia/Agora/Decrees/0002-character-root-and-dice.md` |
 
-## 🔎 E. Design gaps that read as defects (decisions, not bugs)
+## 📔 E. Design gaps that read as defects (decisions, not bugs)
 
 | # | What | Page |
 |---|---|---|
@@ -82,7 +82,7 @@ meets first. "Page" names the Mythos page that explains why it matters.*
 | E8 | Draconic Sorcerer draws no ancestry; Wild Magic Surge table absent. | Sorcerer page |
 | E9 | Goliath `son` patronymic; Elf surnames off-culture; Halfling food names. | Names §4 |
 
-## 🔎 G. The random sweep (30 seeds, 2026-09-08)
+## 📔 G. The random sweep (30 seeds, 2026-09-08)
 
 Thirty random species × Guild × level × seed summons: 29 generated, 1 crashed
 (A4). Across the 29 sheets: 35 open-choice hits (B19), 18 em-dash features
@@ -94,7 +94,7 @@ in the session scratchpad, not the repository. A second sweep of sixty seeds at
 levels 3 to 20 generated 60 of 60, so the Battle Master failure (A4) is
 seed-dependent: about one in ninety across the two sweeps.
 
-## 🔎 How this ledger was made
+## 📔 How this ledger was made
 
 Every A and B row was reproduced from generated output in this worktree
 (`summon_player`, `summon_nonplayer`, `spellcaster`, the Story and Title
@@ -103,7 +103,7 @@ design findings whose pages carry the argument. Verification commands used are
 recorded in the session; the dump scripts live in the session scratchpad and
 are not part of the repository.
 
-## 🔎 F. Where a Questa already exists
+## 📔 F. Where a Questa already exists
 
 | Ledger row | Questa | Note |
 |---|---|---|
