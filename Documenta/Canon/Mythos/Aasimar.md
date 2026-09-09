@@ -8,7 +8,9 @@
 > - 📒 **a rule we changed.** A house rule, and it already cost compatibility.
 > - 📘 **supportive lore.** It holds a rule or a core element up. 
 > - 📗 **deep lore.** Design that supports the fantasy rather than a rule.   
-> - Moving any of these takes a Questa, an Agora and a Decree.
+> - A book marks a statement only if it can change exclusively through the
+>   Questa / Agora / Decree system. Anything with no Questa and no Decree behind
+>   it carries no book, however settled it feels.
 
 ----
 
@@ -25,67 +27,99 @@ companion entry for the Celestials themselves is [Celestials](Celestials.md).*
 
 ## 📜 0. Rules
 
-*The fixed points, and what we made of them. This chapter is the reference
-shape for every element page. The books say where a statement came from and
-what changing it would cost.*
-
-
+*The fixed points, and what we made of them. The books are defined at the head
+of the page.*
 
 ### The rules as given
 
-> 📕 **Creature Type** Humanoid. **Size** Medium or Small, chosen. **Speed** 30 feet.
+*Each entry is the rule itself, complete enough to resolve at a table. Not a
+summary and not a cross-reference.*
+
+> 📕 **Creature Type** Humanoid. **Size** Medium or Small, chosen when you make
+> the character. **Speed** 30 feet.
 >
-> 📕 **Darkvision** 60 feet.
+> 📕 **Darkvision.** You can see in Dim Light within 60 feet as if it were Bright
+> Light. In Darkness within that range you see as if it were Dim Light: you have
+> Disadvantage on Wisdom (Perception) checks that rely on sight, and you discern
+> colors there only as shades of gray.
 >
-> 📕 **Celestial Resistance.** Resistance to Necrotic damage and Radiant damage.
+> 📕 **Celestial Resistance.** You have Resistance to Necrotic damage and Radiant
+> damage.
 >
-> 📕 **Healing Hands.** As a Magic action, touch a creature and roll a number of
-> d4s equal to your Proficiency Bonus. It regains that many Hit Points. Once per
-> Long Rest.
+> 📕 **Healing Hands.** As a Magic action, you touch a creature and roll a number
+> of d4s equal to your Proficiency Bonus. The creature regains a number of Hit
+> Points equal to **the total rolled**. Once you use this trait, you can't use it
+> again until you finish a Long Rest.
 >
 > 📕 **Light Bearer.** You know the Light cantrip. Charisma is your spellcasting
 > ability for it.
 >
-> 📕 **Celestial Revelation** (level 3). Transform as a Bonus Action for 1 minute,
-> once per Long Rest, **choosing one of three options each time you transform**.
-> Once on each of your turns while transformed, deal extra damage equal to your
-> Proficiency Bonus, of the type the chosen option names.
+> 📕 **Celestial Revelation** (level 3). You can transform as a Bonus Action,
+> using one of the three options below and **choosing the option each time you
+> transform**. The transformation lasts 1 minute or until you end it (no action
+> required). Once you transform, you can't do so again until you finish a Long
+> Rest. Once on each of your turns before the transformation ends, you can deal
+> extra damage equal to your Proficiency Bonus to one target when you deal damage
+> to it with an attack or a spell, of the type named by the option you chose.
 >
 > 📙 **Talarian Wings** [renames **Heavenly Wings**]: until the transformation
 > ends you have a Fly Speed equal to your Speed. Radiant.
 >
-> 📕 **Inner Radiance**: you shed Bright Light in a 10-foot radius and Dim Light
-> for 10 feet beyond it, and at the end of each of your turns each creature
-> within 10 feet takes radiant damage equal to your Proficiency Bonus. Radiant.
+> 📕 **Inner Radiance**: for the duration you shed Bright Light in a 10-foot
+> radius and Dim Light for an additional 10 feet, and at the end of each of your
+> turns each creature within 10 feet of you takes Radiant damage equal to your
+> Proficiency Bonus. Radiant.
 >
-> 📕 **Necrotic Shroud**: creatures other than your allies within 10 feet must
-> succeed on a Charisma saving throw or have the Frightened condition until the
-> end of your next turn. Necrotic.
+> 📕 **Necrotic Shroud**: creatures other than your allies within 10 feet of you
+> must succeed on a Charisma saving throw (**DC 8 + your Proficiency Bonus + your
+> Charisma modifier**) or have the Frightened condition until the end of your next
+> turn. Necrotic.
 
 No rule of the Aasimar has been changed, so this page carries no 📒.
 
 ### The supportive lore
 
-> 📘 **The spark has no sender and no errand.** The Ideals are prior to the gods
-> and ask for nothing (§2, and the Celestials page).
->
-> 📘 **Three markers, held as a subculture, and no host-culture draw.** `athens`,
-> `vatican`, `sangha`, with `crusader` as the legend register. The Aasimar and
-> the Tiefling stay distinct peoples.
->
-> 📘 **Dance is Freedom's Muse.**
->
-> 📘 **Darkvision prints with a line**, never as a bare chip.
+> 📘 **Celestials are emanations from the Platonic World of Forms, prior to the
+> gods and not worshippers of any. They embody an Ideal without compromise.**
+> The eight Ideals are alignment-independent and twistable, and some hold a Greek
+> Muse's domain, recorded on `Ideal.muse`.
+> Ratified by **QST-0050**.
+
+That is the whole of the supportive lore this page can currently mark. Everything
+below rests on the canon documents and on this page's own decisions log, which are
+not the Questa / Agora / Decree system, so it carries no book until a Questa says
+otherwise.
+
+### Unratified, and what each one needs
+
+*Stated as design, not as law. Each line names the Questa that would ratify it.*
+
+- **The spark has no sender and no errand.** QST-0050 establishes the cosmology
+  (emanations, prior to gods, no worship) but says nothing about the spark an
+  Aasimar carries, nor that the Ideals ask nothing of them. Needs its own Questa.
+- **Three markers held as a subculture, and no host-culture draw.** `athens`,
+  `vatican`, `sangha`, with `crusader` as the legend register. The keys are in
+  `Cultural-Inspirations.md` and the split is settled by **QST-0046.4**; the
+  *subculture* reading and the refusal of a host-culture draw are not.
+- **Dance is Freedom's Muse.** QST-0050 ratifies that Ideals hold Muses; it does
+  not assign Terpsichore to Freedom. The assignment needs a Questa, and it also
+  needs the empty `muse` field in `Map_of_Ideals.py` filled.
+- **Darkvision prints with a line, never as a bare chip.** QST-0094 records the
+  cross-species Darkvision convention as still open, and QST-0051 lists the
+  Aasimar as chip-only by design today. So this is a proposal against the current
+  code, not a ratified decision.
+- **Two organs, not three powers**: the talaria and the aureola. The whole
+  interpretation below rests on this, and nothing ratifies it.
 
 ### What the rules force, and what we chose
 
 The Revelation is the demanding one. It forces a single body that can sprout
-wings, shed searing light and terrify a room, and that must pick between them
-at each transformation.
+wings, shed searing light and terrify a room, and that must pick between them at
+each transformation.
 
-> 📘 **Two organs, not three powers.** The **talaria**: small vestigial wings
-> sitting only where a wing could take a body's weight, each folding away as a
-> seam. The **aureola**: a halo, in a shape the Ideal lends.
+Our answer is **two organs rather than three powers**. The **talaria**: small
+vestigial wings sitting only where a wing could take a body's weight, each
+folding away as a seam. The **aureola**: a halo, in a shape the Ideal lends.
 
 **What that buys beyond the rule.** The wings *grow* instead of appearing from
 nowhere, because they were always there. Necrotic Shroud spends the same organ
@@ -98,26 +132,22 @@ uses.
 ⚠️ **What breaks if a later hand removes the talaria as decoration.** Heavenly
 Wings becomes wings from nowhere. Necrotic Shroud's own sentence stops meaning
 anything. The Revelation set loses its unity. The Dwarf ambiguity goes with it.
-The talaria are not a flourish; they are the body the rules were given.
+The talaria are not a flourish; they are the body the rules were given. That this
+reasoning is unratified is an argument for writing the Questa, not for treating
+the talaria as free.
 
-### The deep lore
+### The variable detail
 
-> 📗 Which metal a character's talaria catch (black iron, gold, red iron, silver,
-> verdigris, pearl, tin, bronze).
->
-> 📗 Which stone the aureola glows like (onyx, amber, ruby, diamond, aquamarine,
-> opal, moonstone, jade).
->
-> 📗 Where on the body the talaria sit: heels, ankles, wrists, forearms,
-> shoulders, shoulder blades, the small of the back, the base of the spine.
->
-> 📗 The roster of Descent names.
+Drawn per character, and none of it ratified: which metal the talaria catch
+(black iron, gold, red iron, silver, verdigris, pearl, tin, bronze); which stone
+the aureola glows like (onyx, amber, ruby, diamond, aquamarine, opal, moonstone,
+jade); where on the body the talaria sit (heels, ankles, wrists, forearms,
+shoulders, shoulder blades, the small of the back, the base of the spine); and
+the roster of Descent names.
 
-None of these carries a rule, and each was chosen rather than filled in: the
-metals answer the Dwarven soul-metals, the aureola's forms are lent by the
-Ideals, and the Descent names follow the orthography rule. Change them freely,
-and keep the fantasy coherent while you do. A detail with nothing at stake at
-all carries no book.
+None of it was filled in at random: the metals answer the Dwarven soul-metals,
+the aureola's forms are lent by the Ideals, and the Descent names follow the
+orthography rule. It carries no book because no Questa says so.
 
 ## 📚 1. Where the Aasimar lives in the code
 
