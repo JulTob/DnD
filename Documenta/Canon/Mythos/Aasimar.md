@@ -7,8 +7,9 @@
 > - 📙 **an aesthetic change.** The same rule wearing our name and look.
 > - 📒 **a rule we changed.** A house rule, and it already cost compatibility.
 > - 📘 **supportive lore.** It holds a rule or a core element up. 
-> - 📗 **deep lore.** Design that supports the fantasy rather than a rule.
-Moving any of these takes a Questa, an Agora and a Decree.
+> - 📗 **deep lore.** Design that supports the fantasy rather than a rule.   
+> - Moving any of these takes a Questa, an Agora and a Decree.
+
 ----
 
 *Wiki entry for the design team. Deep lore and settled direction, not page text.

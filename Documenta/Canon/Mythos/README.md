@@ -154,7 +154,7 @@ trust it and whether they may change it.
 
 | Marker | The chapter holds | May a later hand change it? |
 |---|---|---|
-| 📜 | **The design.** Settled decisions: fixed points, canon, ratified choices. | Not without the Agora: a question, a Dialog, a Decree. |
+| 📜 | **The design.** Settled decisions: fixed points, canon, ratified choices. | Only through the Questa/Agora/Decree system. |
 | 📚 | **Plain information.** What exists, what the rules say, what the code prints, counts and inventories. | Only when the fact changes. Verify against the code. |
 | 📔 | **Derived implications and possible conflicts.** What follows from the above, and where things contradict. | Argue with it freely. It is a reading, not a rule. |
 | 📖 | **Ideas in flow.** Proposals not yet decided: draft lines, candidate readings, open questions. | Take it or leave it. Nothing here is settled. |
@@ -181,6 +181,12 @@ decorative and does not delete a mechanic's only explanation in good faith.
 There is no separate register of fixed points: each element's rules live in
 that element's page, next to the reading they produced.
 
+**A book marks only what the formal system owns.** A statement carries a book if
+and only if it can change exclusively through the **Questa / Agora / Decree**
+system: a QST-#### under `Documenta/Questae/`, a Dialog in the Agora, or a
+Decree. Lore or a decision with no Questa and no Decree behind it **carries no
+book**. An unmarked sentence is not lesser; it is simply not yet ratified.
+
 **The five books**, inside a quote block so the chapter is visible at a glance. Warm covers are the rules layer, cold covers the lore:
 
 | Marker | Means | Argued with |
@@ -188,7 +194,7 @@ that element's page, next to the reading they produced.
 | 📕 | **Inherited.** The 2024 rules, unchanged. | Not without leaving rules compatibility, which is the promise the generator makes to a table that has to play the result. |
 | 📙 | **Aesthetic change.** The same rule wearing our name and look. Written as *Our Name* [renames *Published Name*]: the rule, so the entry names the rule and presents it. | Nothing mechanical. The bracket is the translation back to the published name. |
 | 📒 | **A rule we changed.** A house rule. | It already cost compatibility. Say so where it happens. |
-| 📘 | **Supportive lore.** Lore holding a rule or a core element up. | A question, a Dialog and a Decree. Remove it and a mechanic is left with nothing to say for itself. |
+| 📘 | **Supportive lore.** Lore holding a rule or a core element up. | A Questa, the Agora, a Decree. Remove it and a mechanic is left with nothing to say for itself. |
 | 📗 | **Deep lore.** Design supporting the fantasy rather than a rule. | No rule notices; the setting does. Change it freely and keep the fantasy coherent. |
 
 **Then the chapter says what the rules force and what we chose**, in four short
