@@ -4,8 +4,9 @@
 > 📖 **In flow.** 1 of 13 chapters are still proposals. 📜 5 · 📚 2 · 📔 5 · 📖 1
 
 *Wiki entry for the design team. Deep lore and settled direction, not page text.
-Compiled 2026-09-08 from the class analyses and the design notes; where a decision is settled, it is stated as such. The companion entry for the Celestials themselves, written for the NPC generator, is [Celestials.md](Celestials.md).   
-🚧 **In flow.** 1 of 13 chapters are still proposals. 🔒 5 · 🧾 2 · 🔎 5 · 🚧 1*
+Compiled from the class analyses and the design notes. Where a decision is
+settled it is stated as settled, and the chapter marks say which is which. The
+companion entry for the Celestials themselves is [Celestials](Celestials.md).*
 
 
 > ### **In one sentence.**
