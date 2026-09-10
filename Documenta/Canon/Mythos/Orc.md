@@ -46,7 +46,7 @@ summary and not a cross-reference.*
 > Bright Light. In Darkness within that range you can see as if it were Dim
 > Light: you have Disadvantage on Wisdom (Perception) checks that rely on sight
 > there, and you discern colors in that Darkness only as shades of gray.
-> > 📘 _The ride does not end at nightfall, and neither does your watch._ (proposed)
+> > 📘 _The ride does not end at nightfall, and neither does your watch._ (authored, not wired)
 >
 > 📕 **Relentless Endurance.** When you are reduced to 0 Hit Points but not
 > killed outright, you can drop to 1 Hit Point instead. Once you use this trait,

@@ -66,7 +66,7 @@ summary and not a cross-reference.*
 > to 4, 3 at 5 to 8, 4 at 9 to 12, 5 at 13 to 16, 6 at 17 to 20), and you regain
 > all expended uses when you finish a Long Rest. You can also cast it using any
 > spell slots you have.
-> > 📘 _You were not supposed to go into the woods, but the Fey felt closer there._ (proposed)
+> > 📘 _You were not supposed to go into the woods, but the Fey felt closer there._ (authored, not wired)
 >
 > 📙 **Rock Gnome Lineage** [renames **Gnomish Lineage**, its **Rock Gnome**
 > option]: you know the Mending and Prestidigitation cantrips. In addition, you

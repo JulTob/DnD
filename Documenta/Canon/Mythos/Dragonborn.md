@@ -41,7 +41,7 @@ summary and not a cross-reference.*
 > range you can see as if it were Dim Light: you have Disadvantage on Wisdom
 > (Perception) checks that rely on sight there, and you discern colors there
 > only as shades of gray.
-> > 📘 _A dragon sees in the dark. So, a little, do you._ (proposed)
+> > 📘 _A dragon sees in the dark. So, a little, do you._ (authored, not wired)
 >
 > 📕 **Draconic Ancestry.** Your lineage traces back to a dragon progenitor of
 > one of ten kinds, fixed once when the Character is made. That kind determines
@@ -67,7 +67,7 @@ summary and not a cross-reference.*
 > 4, 2d10 at 5 to 10, 3d10 at 11 to 16, and 4d10 at 17 and above. You can use
 > this trait a number of times equal to your Proficiency Bonus, and you regain
 > all expended uses when you finish a Long Rest.
-> > 📘 _Everything you were taught to hold in, let out once, at something._ (proposed)
+> > 📘 _Everything you were taught to hold in, let out once, at something._ (authored, not wired)
 >
 > 📕 **Draconic Flight** (level 5). As a Bonus Action you sprout spectral wings
 > on your back, which appear to be made of the same energy as your Breath
@@ -76,7 +76,7 @@ summary and not a cross-reference.*
 > Fly Speed equal to your Speed, which is 30 feet for a Dragonborn with no other
 > speed modifier. Once you use this trait, you can't use it again until you
 > finish a Long Rest.
-> > 📘 _The ones who stayed home never grew these. You did not ask why. You went._ (proposed)
+> > 📘 _The ones who stayed home never grew these. You did not ask why. You went._ (authored, not wired)
 
 No rule of the Dragonborn has been changed, so this page carries no 📒. Three
 things in the block above are presentation and not rule. The Resistance folded

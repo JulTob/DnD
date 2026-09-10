@@ -50,16 +50,16 @@ summary and not a cross-reference.*
 > Lightly Obscured, and the kit prints it deliberately, scoped to that Darkness,
 > because a player reading the sheet would otherwise assume darkvision cancels the
 > penalty.
-> > 📘 _The dark is only the Dream with the lights off. You have never been afraid of it._ (proposed)
+> > 📘 _The dark is only the Dream with the lights off. You have never been afraid of it._ (authored, not wired)
 >
 > 📕 **Fey Ancestry.** You have Advantage on saving throws you make to avoid or
 > end the Charmed condition.
-> > 📘 _The echoes of the Fae still linger in you._ (proposed)
+> > 📘 _The echoes of the Fae still linger in you._ (authored, not wired)
 >
 > 📕 **Keen Senses.** You have proficiency in one skill of your choice from
 > Insight, Perception, or Survival. On a generated sheet the choice is already
 > made, and the entry names the one skill.
-> > 📘 _Your elven eyes are sharp and your attention focused._ (proposed)
+> > 📘 _Your elven eyes are sharp and your attention focused._ (authored, not wired)
 >
 > 📕 **Trance.** You don't need to sleep, and magic can't put you to sleep. You
 > can finish a Long Rest in 4 hours if you spend those hours in a trancelike
@@ -80,7 +80,7 @@ summary and not a cross-reference.*
 > 📕 **High Elf**: you know Prestidigitation, and whenever you finish a Long Rest
 > you can replace it with a different cantrip from the Wizard spell list. At
 > character level 3 you gain Detect Magic, and at character level 5, Misty Step.
-> > 📘 _Your people traded with more than merchants, and not everything you brought home was cargo._ (proposed)
+> > 📘 _Your people traded with more than merchants, and not everything you brought home was cargo._ (authored, not wired)
 >
 > 📕 **Wood Elf**: your Speed becomes 35 feet. You know Druidcraft. At character
 > level 3 you gain Longstrider, and at character level 5, Pass Without Trace.
@@ -89,18 +89,18 @@ summary and not a cross-reference.*
 > 📙 **Dark Elf** [renames **Drow**]: your Darkvision range becomes 120 feet. You
 > know Dancing Lights. At character level 3 you gain Faerie Fire, and at character
 > level 5, Darkness. Rule for rule the published Drow, under our name.
-> > 📘 _The dark taught your people how to survive it, and some of that lesson still answers to you._ (proposed)
+> > 📘 _The dark taught your people how to survive it, and some of that lesson still answers to you._ (authored, not wired)
 >
 > 📒 **Fae Elf** [renames **Lorwyn Elf**]: you know Thorn Whip. At character level
 > 3 you gain Command, and at character level 5, Silence. Published in another
 > book, not as 2024 rules content.
-> > 📘 _The crossing into the Feywild left more on you than long ears._ (proposed)
+> > 📘 _The crossing into the Feywild left more on you than long ears._ (authored, not wired)
 >
 > 📒 **Shadow Elf** [renames **Shadowmoor Elf**]: your Darkvision range becomes
 > 120 feet. You know Starry Wisp. At character level 3 you gain Heroism, and at
 > character level 5, Gentle Repose. Published in another book, not as 2024 rules
 > content.
-> > 📘 _Telling dream from thought took practice, and the practice stayed._ (proposed)
+> > 📘 _Telling dream from thought took practice, and the practice stayed._ (authored, not wired)
 
 **Four entries carry a 📒, and three separate changes stand behind them.** First,
 the **option list**: the 2024 rules offer three lineages, and this kit offers

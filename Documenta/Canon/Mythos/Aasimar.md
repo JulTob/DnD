@@ -66,17 +66,19 @@ summary and not a cross-reference.*
 >
 > 📙 **Talarian Wings** [renames **Heavenly Wings**]: until the transformation
 > ends you have a Fly Speed equal to your Speed. Radiant.
-> > 📘 _You spread your wings to show your true self._
+> > 📘 _You spread your wings to show your true self._ (authored, not wired)
 >
 > 📕 **Inner Radiance**: for the duration you shed Bright Light in a 10-foot
 > radius and Dim Light for an additional 10 feet, and at the end of each of your
 > turns each creature within 10 feet of you takes Radiant damage equal to your
 > Proficiency Bonus. Radiant.
+> > 📘 _You can feel your inner light giving you the …_ (authored, unfinished in the source)
 >
 > 📕 **Necrotic Shroud**: creatures other than your allies within 10 feet of you
 > must succeed on a Charisma saving throw (**DC 8 + your Proficiency Bonus + your
 > Charisma modifier**) or have the Frightened condition until the end of your next
 > turn. Necrotic.
+> > 📘 _The brighter the light, the darker the shadow._ (authored, not wired)
 
 No rule of the Aasimar has been changed, so this page carries no 📒.
 
@@ -568,6 +570,23 @@ on conduct without naming the principle.
 ---
 
 ## 📖 11. Lines
+
+**Where these came from.** The Darkvision clause and the three Celestial
+Revelation clauses are the author's own, written by hand into the working notes
+under a heading that reads *Drafts*, and carried from there onto this page. They
+are in no Questa and no Decree, and a search of the whole repository history
+finds them in no commit that predates this folder. That is not a defect in them;
+it is the shape of authored text that was written straight into a page. It does
+mean the trail is this paragraph, so it should not be deleted.
+
+**What is wired and what is not.** Four Aasimar traits carry a line in the code
+today (Celestial Resistance, Healing Hands, Light Bearer, Celestial Revelation),
+and those are quoted in chapter 0 verbatim. The Darkvision clause and the three
+Revelation clauses reach no sheet. One of the four is unfinished in the source:
+*"You can feel your inner light giving you the ."* It ends there. It has not
+been completed here, because finishing somebody else's sentence in their own
+voice is the substitution this whole system exists to prevent.
+
 
 *the project's drafts, kept as written; the incomplete one is completed with a proposal
 marked as such.*

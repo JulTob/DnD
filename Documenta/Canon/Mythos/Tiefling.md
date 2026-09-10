@@ -40,7 +40,7 @@ summary and not a cross-reference.*
 > Light. In Darkness within that range you see as if it were Dim Light: you have
 > Disadvantage on Wisdom (Perception) checks that rely on sight, and you discern
 > colors there only as shades of gray. No legacy extends the range.
-> > 📘 _Nobody ever lit a lamp for you. You learned to do without._ (proposed)
+> > 📘 _Nobody ever lit a lamp for you. You learned to do without._ (authored, not wired)
 >
 > 📕 **Otherworldly Presence.** You know the *Thaumaturgy* cantrip. The ability
 > you chose for Fiendish Legacy (Intelligence, Wisdom or Charisma) is your
@@ -53,7 +53,7 @@ summary and not a cross-reference.*
 > door or window flies open or slams shut; or your eyes change appearance for the
 > duration. You can have up to three of the duration effects running at once, and
 > you can dismiss one as an action.)
-> > 📘 _A little theatre. It is the one thing they expect from you, so you learned to do it well._ (proposed)
+> > 📘 _A little theatre. It is the one thing they expect from you, so you learned to do it well._ (authored, not wired)
 >
 > 📕 **Fiendish Legacy.** Choose one legacy: Abyssal, Chthonic or Infernal. It
 > grants a damage Resistance and three spells, arriving at character levels 1, 3
@@ -78,7 +78,7 @@ summary and not a cross-reference.*
 > can see must succeed on a Wisdom saving throw or have the Paralyzed condition for
 > the duration, repeating the save at the end of each of its turns and ending the
 > spell on itself on a success; one additional Humanoid per slot level above 2).
-> > 📘 _The colours move while you sleep. So, some mornings, does what you can do._ (proposed)
+> > 📘 _The colours move while you sleep. So, some mornings, does what you can do._ (authored, not wired)
 >
 > 📕 **Chthonic**: Resistance to Necrotic damage. *Chill Touch* (cantrip,
 > Necromancy, Action, Touch, Instantaneous, V/S: melee spell attack for 1d10
@@ -92,7 +92,7 @@ summary and not a cross-reference.*
 > Strength-based D20 Tests and subtracts 1d8 from all its damage rolls for the
 > duration, repeating the save at the end of each of its turns and ending the spell
 > on a success. A successful save costs the target nothing).
-> > 📘 _No fire, no pain. Only the door, and you know which side of it you stand on._ (proposed)
+> > 📘 _No fire, no pain. Only the door, and you know which side of it you stand on._ (authored, not wired)
 >
 > 📕 **Infernal**: Resistance to Fire damage. *Fire Bolt* (cantrip, Evocation,
 > Action, 120 feet, Instantaneous, V/S: ranged spell attack for 1d10 Fire damage,
@@ -109,7 +109,7 @@ summary and not a cross-reference.*
 > light cannot illuminate it, covering that object with something opaque blocks it,
 > and any Bright Light or Dim Light created in the overlap by a spell of level 2 or
 > lower is dispelled).
-> > 📘 _The fire was always there. What it is for was never decided by them._ (proposed)
+> > 📘 _The fire was always there. What it is for was never decided by them._ (authored, not wired)
 
 No rule of the Tiefling has been changed, so this page carries no 📒. All three
 traits and all three legacies match the published rules in name, number, level,
