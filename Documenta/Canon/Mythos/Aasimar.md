@@ -9,8 +9,10 @@
 > - 📘 **supportive lore.** It holds a rule or a core element up. 
 > - 📗 **deep lore.** Design that supports the fantasy rather than a rule.   
 > - A book marks a statement only if it can change exclusively through the
->   Questa / Agora / Decree system. Anything with no Questa and no Decree behind
->   it carries no book, however settled it feels.
+>   Questa / Agora / Decree system.
+>   Julio has privileges to edit directly. Code must realize the structural  changes through new QST. 
+>   Curly brackets {} represent the resolution of the calculation.
+>   Game terms should be in **bold** text, and flavor in _italic_.
 
 ----
 
@@ -37,12 +39,31 @@ Angels, Muses, Constellations, Celestials... different cultures call your people
 
 All Celestials are inclined towards a higher ideal: Justice, Sacrifice, Freedom... Think about which ideal can inspire {name} and guide their path as an adventurer.
 ```
+# 📗 Celestial Descent.
+Generated text. One of the best features of the app. It makes each aasimar unique and characteristic in physical and evocative form at the same time. 
+
+It presents:
+- Talaria as the small wings hidden as apparell, based on Hermes and Kairos small wings.
+- Halo. A shining circle or crown around the head. 
+- A color relationship to the ideals. Two for a complex but easy reading. Metalic colors for the wings, and gemstones for the halo.
+- A specific Ideal Celestial as a lineage.
+- It never mentions the specific Ideals, leaving the interpretation free for the player. It may inspire a more complex reading than a simple convination. 
+
+Example:
+```txt
+Your talaria and aureola resemble the traits of the Angel Barakiel, so you may belong to its lineage. At your heels you carry talaria that catch the light like verdigris, barred across with red iron, and folded they pass for the straps of your sandals. Your aureola is a star of many points, set like a compass rose, and it glows like aquamarine shading into ruby. It twinkles when you run, and beats when you fly.
+```
+ToDo: List the Ideals, its metal, its gem-shine, and the Celestial Personification (Muses are the top layer), and halo's shapes. 
+ToDo: List talarias' random characteristics for the generator (placement, how it looks like...)
+
 
 ### The rules as given
 
 *Each entry is the rule itself as presented to the player in the app, complete enough to resolve at a table. Not a summary and not a cross-reference. Bullets indicate chips. ENTRIES NEED FLAVOR TEXT, in italics and sepparate.*
 
 > * 📙 **Creature Type** Humanoid (Celestial).   
+Added Celestial subtype, as that is the core of the fantasy. Internally, an Aasimar should trigger Celestial tags. 
+
 > * 📕 **Size** Medium or Small.
 >     [Proportion is 90% Medium, 10% Small.]
 > * 📕 **Speed** 30 feet.   
@@ -59,7 +80,7 @@ All Celestials are inclined towards a higher ideal: Justice, Sacrifice, Freedom.
 > > 📘 _Life finds your way._
 >
 > 📕 **Light Bearer.** You know the ***Light*** cantrip. **Charisma** is your **Spellcasting Ability** for it.
-> > 📘 _There is always a spark of light inside of you._
+> > 📘 _There is always a spark of light inside of you. Relentless._
 >
 > 📕 **Celestial Revelation** (level 3+).
 > You can transform as a **Bonus Action**, using one of the three options below and choosing the option each time you transform.
@@ -68,46 +89,36 @@ All Celestials are inclined towards a higher ideal: Justice, Sacrifice, Freedom.
 >
 > Once on each of your turns before the transformation ends, you can deal
 > extra damage equal to your **Proficiency Bonus** to one target when you deal damage to it with an attack or a spell, of the type named by the option you chose.
-> > 📘 _You reveal your inner spark to light a great fire._
+> > 📘 _Be not afraid, for you bear a star._
 >
-> 📙 **Talarian Wings** [renames **Heavenly Wings**]: until the transformation
-> ends you have a Fly Speed equal to your Speed. Radiant.
-> > 📘 _You spread your wings to show your true self._ 
+> 📙 **Talarian Wings** [renames **Heavenly Wings**]: You spread your talaria into fully grown wings. Until the transformation ends you have a **Fly Speed** equal to your **Speed**. Your extra damage is **Radiant**.
+> > 📘 _This is your true self._ 
 >
-> 📕 **Inner Radiance**: for the duration you shed Bright Light in a 10-foot
-> radius and Dim Light for an additional 10 feet, and at the end of each of your
-> turns each creature within 10 feet of you takes Radiant damage equal to your
-> Proficiency Bonus. Radiant.
-> > 📘 _You can feel your inner light giving you the …_ (authored, unfinished in the source)
+> 📕 **Inner Radiance**: Your eyes shine brightly and your halo grows into a brigh aurora. For the duration you shed Bright Light in a 10-foot radius and Dim Light for an additional 10 feet, and at the end of each of your turns each creature within 10 feet of you takes **{PB} Radiant damage**. Your extra damage is **Radiant**.
+> > 📘 _Your inner spark becomes an aurora of pure light._
 >
-> 📕 **Necrotic Shroud**: creatures other than your allies within 10 feet of you
-> must succeed on a Charisma saving throw (**DC 8 + your Proficiency Bonus + your
-> Charisma modifier**) or have the Frightened condition until the end of your next
-> turn. Necrotic.
-> > 📘 _The brighter the light, the darker the shadow._ (authored, not wired)
+> 📕 **Necrotic Shroud**: Your eyes briefly become pools of darkness and your halo collapses like a Dark Sun. Creatures other than your allies within 10 feet of you must succeed on a **Charisma Saving Throw** (**DC {8 + PB + CHA}**) or have the Frightened condition until the end of your next
+> turn. Your extra damage is **Necrotic**.
+> > 📘 _The brighter the light, the darker the shadow._ 
 
-No rule of the Aasimar has been changed, so this page carries no 📒.
+### 📗📘 The Lore
 
-### The supportive lore
+> 📘 **Celestials are emanations from the Platonic World of Forms. Perfect Ideals. Aasimars have a spark, a fraction from those ideals, as part of them.**
 
-> 📘 **Celestials are emanations from the Platonic World of Forms, prior to the
-> gods and not worshippers of any. They embody an Ideal without compromise.**
-> The eight Ideals are alignment-independent and twistable, and some hold a Greek
-> Muse's domain, recorded on `Ideal.muse`.
-> Ratified by **QST-0050**.
+📗 The spark is a constant, not an inheritance. An Aasimar is part of the sky and walks among mortals as one. They are continuosly both Mortal and Celestial. A spark cannot be taken away. Is identity. Is soul-bound. 
 
-That is the whole of the supportive lore this page can currently mark. Everything
-below rests on the canon documents and on this page's own decisions log, which are
-not the Questa / Agora / Decree system, so it carries no book until a Questa says
-otherwise.
+📘 Two elements carry every rule on the page. The talaria, small vestigial wings that sit only where a wing could take a body's weight and fold away as clothing. The aureola, a halo whose shape is lent by the Ideal and whose shine resembles a gem. Between them they account for the wings that grow, the light that blazes and the darkness that collapses, so the three Revelation options belong to one body rather than being three unrelated powers.
+
+📗 The Descent is an ancestor read off the sky, and it is never confirmed.
+
+📗 Which is why the Aasimar produces astrologers. Here the charts are not divination, they are observation, and to observe means both to watch and to keep. An Aasimar following the sky is not superstitious. They are checking on family, and the family is visible most nights. This is the one habit the species generates on its own, and it costs nothing to give a character.
+
+📗 The spark sets a bar the mortal cannot clear. An Ideal cannot bend, cannot compromise and cannot love the one who carries it. The aureola reports on fidelity rather than virtue, so a tyrant may keep a perfect ring. That gap between the fixed thing and the person carrying it is the drama every Aasimar starts with, and it needs no villain.
+
+For the Celestials themselves, their Virtue, their plans and their use as antagonists, see (Celestials)[Celestials.md].
 
 ### Unratified, and what each one needs
 
-*Stated as design, not as law. Each line names the Questa that would ratify it.*
-
-- **The spark has no sender and no errand.** QST-0050 establishes the cosmology
-  (emanations, prior to gods, no worship) but says nothing about the spark an
-  Aasimar carries, nor that the Ideals ask nothing of them. Needs its own Questa.
 - **Three markers held as a subculture, and no host-culture draw.** `athens`,
   `vatican`, `sangha`, with `crusader` as the legend register. The keys are in
   `Cultural-Inspirations.md` and the split is settled by **QST-0046.4**; the

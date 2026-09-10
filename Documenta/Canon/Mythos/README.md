@@ -183,19 +183,23 @@ element's page, beside the reading they produced.
 
 ### The one rule about books
 
-**A book marks only what the formal system owns.** A statement carries a book if
-and only if it can change exclusively through the **Questa / Agora / Decree**
-system: a QST-#### under `Documenta/Questae/`, a Dialog in the Agora, or a
-Decree. Lore or a decision with no Questa and no Decree behind it **carries no
-book**, however settled it feels. An unmarked sentence is not lesser; it is
-simply not yet ratified, and saying so turns the page into a work list.
+**A book means locked.** A statement carrying a book is settled, and **the code
+adapts to the book**, never the reverse. The page is the authority: it is the
+compendium of the rules this project respects and the lore it has established.
 
-A book is therefore **falsifiable**. It does not mean "somebody judged this
-settled", it means "go and read QST-0046.4", and anyone can check.
+Three consequences, and they are the whole protocol:
 
-Canon documents under `Documenta/Canon/` are **not** the Questa system. A claim
-resting only on a canon file carries no book today. Whether canon files should
-count is an open decision.
+1. **Editing a book, or editing code to match one, goes through a Questa.**
+   Both directions are a review process, not a hand edit.
+2. **Only Julio edits a book.** Anyone else proposes.
+3. **A Questa is lower resolution than the page.** Cite it as where the work is
+   tracked and where authorial intent is recorded, never as what makes a claim
+   true. A page does not derive its authority from a ticket.
+
+The earlier reading of this rule, that a book had to be *earned* by finding a
+Questa behind it, was wrong and is retired. A book is not evidence that somebody
+already ratified a claim. It is a lock placed on a claim, and the lock is what
+sends any future change through the process.
 
 ### The five books
 
