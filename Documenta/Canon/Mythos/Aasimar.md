@@ -117,9 +117,20 @@ Added Celestial subtype, as that is the core of the fantasy. Internally, an Aasi
 
 For the Celestials themselves, their Virtue, their plans and their use as antagonists, see (Celestials)[Celestials.md].
 
+### 📗📘 The Cultural references
+- `Athens`
+   - the pensive philosopher.
+   - Plato's Cave and Ideals.
+   - Daedalus and Icaros.
+   - Minos.
+   - The Atlantis Mythos.
+   - Naval weaponry.
+   - Togas and greek clothing. 
+
+- 
 ### Unratified, and what each one needs
 
-- **Three markers held as a subculture, and no host-culture draw.** `athens`,
+- **Three markers held as a subculture, and no host-culture draw.** 
   `vatican`, `sangha`, with `crusader` as the legend register. The keys are in
   `Cultural-Inspirations.md` and the split is settled by **QST-0046.4**; the
   *subculture* reading and the refusal of a host-culture draw are not.

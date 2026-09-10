@@ -159,3 +159,54 @@ objecting to something they explain:
 Decisions are recorded as Decrees in `Documenta/Agora/Decrees/` and
 `Curia/Agora/Decrees/`, and open questions become Dialogs. A choice that lives
 only in a chat log does not exist.
+
+---
+
+## 📜 6. Belief is the only mechanism
+
+*The setting's general law. Read it before objecting that a people's
+metaphysics is inconsistent with another's: they are not competing
+explanations, they are different kinds of belief.*
+
+**All magic is belief.** Anything else is physics, and physics is not fantasy.
+
+What differs between the powers of this world is not whether belief made them.
+It is **how** belief made them, and **whose** belief it was.
+
+**Two ways a thing becomes real.** By **manifestation**, when one person's
+belief puts something into the world. By **actualization**, when a collective's
+belief does. Every order of being sits somewhere on that line, and where it sits
+is its nature.
+
+| Power | The belief that makes it | What it is like as a result |
+|---|---|---|
+| **Fae and Elves** | The Dreaming | Dream-natured: soft, drifting, reshaped by what is dreamt |
+| **Celestials** | Philosophical belief, and virtue | Well defined, the way an idea is well defined, and powerful in proportion to the goodness they are held to have |
+| **Dragons** | A single will imposed on itself | Nietzsche's overcoming: a person who believes themselves into a superior being |
+| **Titans** | Animist belief in the personality of nature | Nature with a temper, older than any order laid over it |
+| **Gods** | A believed **order imposed on** nature by a personal deity | Rule rather than substance: a shape the world is told to hold |
+| **Fiends** | The same engine turned to name an enemy | Made lower by being called lower |
+
+**Before any of them there were primates who began to imagine.** They built
+their dreams, their nightmares, their hopes and their pictures of themselves, by
+accident, by pure actualization. That is as far back as the setting goes, and it
+is deliberately not a creation myth.
+
+**No order is ever stated between the classes of being.** Nothing is prior to
+anything. A reviewer who finds an ordering anywhere in these pages has found a
+defect, not a rule.
+
+**Mystery is kept on purpose.** The Dwarven saint may be an ancestor watching by
+their own will, or a manifestation raised by the living, or a soul attuning to a
+metal believed real and therefore real. The setting never picks. A mechanism
+that can be confirmed stops being a mechanism and becomes a rule.
+
+### What this corrects
+
+Two canon documents still carry a table calling the Aasimar *"Platonic Ideals,
+prior to the gods, fixed and incapable of compromise"* against the Elf's
+*"Jungian collective dreaming"*, and describe the contrast as a joke about the
+elves being the only people shaped by what everyone imagines. That table
+predates this law and is wrong twice: every people is shaped by belief, and no
+ordering exists. It should become a table of **kinds of belief** rather than of
+philosophies.
