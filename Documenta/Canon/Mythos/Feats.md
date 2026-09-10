@@ -1,213 +1,248 @@
 # 🎯 Feats, Gifts and Boons
 
-> 📜 **Settled.** No chapter is still in flow. 📜 1 · 📚 2 · 📔 4
+> 🎯 The fourth thing on every sheet
+>
+> 📜 **Settled.** No chapter is still in flow.
+>
+> - 📕 **inherited from the 2024 rules.** Moving it costs rules compatibility.
+> - 📙 **an aesthetic change.** The same rule wearing our name and look.
+> - 📒 **a rule we changed.** A house rule, and it already cost compatibility.
+> - 📘 **supportive lore.** It holds a rule or a core element up.
+> - 📗 **deep lore.** Design that supports the fantasy rather than a rule.
+> - A book marks a statement only if it can change exclusively through the
+>   Questa / Agora / Decree system. Anything with no Questa and no Decree behind
+>   it carries no book, however settled it feels.
 
-*Wiki entry for the design team. The feats are on every sheet at levels 1, 4, 8,
-12, 16 and 19, and they are the largest surface of the generator that no page
-has read for its fantasy. Compiled 2026-09-08 from `Map_of_Official_Origin_Feats.py`,
-`Map_of_General_Feats.py`, `Map_of_Epic_Boons.py`, `FeaturesKit.py` and
-`Grimoire_of_Features/__init__.py`.*
-
-> **In one sentence.** The Origin feats are the backgrounds' mechanical half
-> and carry their fantasy well; the General feats are what the road taught and
-> say nothing about it; the Epic Boons are every class's level-19 capstone and
-> the closest the rules come to the Ascending, and they arrive as abbreviations.
+*Wiki entry for the design team. Every feat in the generator, classified,
+checked against the 2024 rules, and flagged where it departs. Audited by twelve
+agents in two passes, every count taken by running the code rather than reading
+it.*
 
 ---
 
-## 📔 1. Where the feats live
+## 📜 0. Rules
 
-| Layer | Where | State |
+*The books are defined at the head of the page.*
+
+### The rules as given
+
+> 📕 **A feat is one of four categories**, and the category is the gate.
+>
+> 📕 **Origin feat.** Granted by a background at level 1. **No prerequisite.**
+> A character may take one, and the Human takes a second through Versatile.
+>
+> 📕 **General feat.** Chosen at levels 4, 8, 12 and 16 in place of an Ability
+> Score Increase, and at 19 for the Fighter's extra. **Prerequisite: level 4.**
+> Most raise one ability score by 1 to a maximum of 20.
+>
+> 📕 **Fighting Style feat.** Granted by a class feature (Fighter, Paladin,
+> Ranger) rather than chosen freely. **Prerequisite: a Fighting Style feature.**
+>
+> 📕 **Epic Boon.** Chosen at level 19. **Prerequisite: level 19.** Each raises
+> one ability score by 1 **to a maximum of 30**, which is the only place in the
+> rules a mortal passes 20.
+
+The category is the classification this page organises by, because it is the
+only thing about a feat the rules actually gate on.
+
+**No 📒 is claimed for a category.** All four gates are the published ones.
+
+### The supportive lore
+
+> 📘 **A Human's Versatile draws from base feats and every setting Origin feat,
+> Dark Gifts included.** The pool is deliberately enlarged rather than
+> shadowed, so the species sees the same table without importing the setting
+> module. Recorded at the merge site itself.
+
+### Unratified, and what each one needs
+
+- **That an Origin feat may carry a drawback.** Nine Dark Gifts each write a
+  permanent penalty onto the sheet. No published Origin feat has one; all ten
+  are pure upside. This is the category's defining departure and no Questa
+  states it.
+- **That the enlarged Versatile pool is a house rule rather than a defect.**
+  It is marked 📒 below on the evidence of the code comment, not of a Decree.
+
+---
+
+## 📚 1. The inventory
+
+106 feats, counted by running the catalogues rather than reading them.
+
+| Category | Count | Compliant | Renamed | Changed | Benefit removed | Other |
+|---|---|---|---|---|---|---|
+| Origin, base | 12 | 4 | 0 | 4 | 4 | |
+| Origin, setting | 17 | 1 | 10 | 4 | 1 | 1 absent |
+| Dark Gifts | 9 | 0 | 0 | 8 | 1 | |
+| General | 44 | 22 | 0 | 16 | 5 | 1 not from 2024 |
+| Fighting Styles | 12 | 9 | 0 | 1 | 2 | |
+| Epic Boons | 12 | 6 | 0 | 6 | 0 | |
+| **Total** | **106** | **42** | **10** | **39** | **13** | **2** |
+
+**The base twelve are exactly the published Origin feats**, with nothing
+invented and nothing missing. **The twelve Fighting Styles are exactly the
+published list**, and it is the cleanest category in the repository.
+
+---
+
+## 📔 2. The 2014 question
+
+There is **no 2014 feat set** in the generator, so a 2024/2014 pair cannot be
+shown from the code. What exists instead is a **legacy twin layer**: every base
+Origin feat has a duplicate in `Grimoire_of_Features`, left from before the
+current kit. Nothing calls them, but a module star-imports that namespace, so
+the names are live.
+
+Two things make the twins worth keeping in view rather than deleting blind.
+
+- **Two twins are closer to the book than the live feat.** The legacy Alert
+  carries the full published text; the legacy Tavern Brawler carries the 1d4
+  plus Strength modifier and the 5-foot push. The legacy Magic Initiate
+  actually picks the spells, prints them, and names the spellcasting ability.
+  The live Tag does none of that.
+- **One twin crashes if called.** The legacy `Lucky()` raises `NameError` on
+  `char` because its description interpolates a Character at build time rather
+  than at apply time.
+
+If a 2014 set is wanted, it has to be authored. The twins are not it: they are
+2024 feats implemented earlier, not the 2014 rules.
+
+---
+
+## 📙 3. The rebrands
+
+Ten setting Origin feats are published faction feats with the faction removed
+and the name chosen for the background. Same mechanics, our name.
+
+| Ours | Renames | Background |
 |---|---|---|
-| Origin feats (base 2024) | `FeaturesKit.py` (`ORIGIN_FEATS`) | Skilled and Skillful carry a line (*"You trained and studied, gaining a few skills along the way. Time will tell which of them you'll need."*); the rest are rules. |
-| Origin feats (setting) | `AtlasOfFeatures/Map_of_Official_Origin_Feats.py` | Twenty-five, most of them **rebrands of published faction feats** with design comments; nine are **Dark Gifts**. Rules on the sheet; no lines. `Strong Arm` is defined twice (lines 864 and 2021). |
-| General feats | `AtlasOfFeats/Map_of_General_Feats.py` | Forty-three, 2024 text, no lines. The level 4, 8, 12 and 16 draws. |
-| Ability Score Improvement | `Grimoire_of_Features/__init__.py` lines 329 to 339 | *"You gain +2 Strength."* Flat; "Intellicence" is a typo. |
-| Epic Boons | `Grimoire_of_Features/__init__.py` lines 303 to 540 | Twelve, compressed ("+1 to any ability (max 30)", "PB", "Re-charges"). `Map_of_Epic_Boons.py` is a file of `None`s after the wipe. `ApplyEpicBoon` draws with the **global** `random`, against Decree 0002 (a QST-0089 shape). |
-| Fighting Styles | `AtlasOfFeats/Map_of_Fighting_Styles.py` and a second dict in `Grimoire_of_Features` | Two definitions of the same catalogue. |
+| 📙 Agitator | Harper Agent | Revolutionary |
+| 📙 Bastion | Tyro of the Gauntlet | Guardian |
+| 📙 Banner Bearer | Lords' Alliance Agent | Herald |
+| 📙 Field Lieutenant | Purple Dragon Rook | Squire |
+| 📙 Arcane Conduit | Spellfire Spark | Arcane Mutant |
+| 📙 Strong Arm | Zhentarim Ruffian | Bailiff |
+| 📙 Spared | Survivor (the feat) | Survivor |
+| 📙 Cupbearer | Vampire's Plaything | Servant |
+| 📙 On a Roll | Tireless Reveler | Gambler |
+| 📙 Jinx | Shadowmoor Hexer | Fated |
+
+✅ The method is the setting's own applied to rules: keep the mechanic exactly,
+remove the publisher's faction, choose a name that means the background's thing.
+Each carries a design comment explaining the choice, and those comments are the
+best writing in the feat layer.
+
+⚠️ None of the ten states its published name on the sheet, so a reader holding
+the book cannot find the feat. The 📙 form exists for exactly this and should be
+applied: *Cupbearer [renames Vampire's Plaything]: the rule.*
 
 ---
 
-## 📚 2. The Origin feats: the backgrounds' mechanical half
+## 📔 4. Benefits removed: thirteen, and only three on purpose
 
-Every custom background has an Origin feat, and most are published faction
-feats with the faction taken out and the setting put in. The design comments in
-the file are the project's own reasoning and are worth keeping as lore:
+This is the question that prompted the audit, and the answer is that **removal
+is systematic and mostly unintentional**.
 
-| Feat | Rebrand of | Background | The comment's insight |
-|---|---|---|---|
-| **Cupbearer** | Vampire's Plaything | Servant | "A cupbearer served the drink *and* tasted it first for poison." The removed benefit "settled the one question the Background refuses to settle, namely whether you were a victim or an accomplice." |
-| **On a Roll** | Tireless Reveler | Gambler | "The published name reads as a party. The rule is a streak: somebody else spends their luck and yours comes back, which is the hot hand, not a feast." |
-| **Hard to Hold** | Vampire Hunter | Exorcist | "Both benefits are about *not being taken*. You get out of what holds you." The Exorcist's whole trade, as a feat. |
-| **Aurora** | Child of the Sun | Destined | "It is an *aura*: allies within 10 feet share it, which is why the Background is about the people who follow you." |
-| **Jinx** | Shadowmoor Hexer | Fated | Hex always prepared, and Backfire: the curse aimed. |
-| **Spared** | Survivor (the feat) | Survivor | Renamed "so the Background may take the name." Hypervigilance and Steel Yourself: the one who was let go, and is ready. |
-| **Agitator** | Harper Agent | Revolutionary | Thieves' Cant, an instrument, and "Cause a Scene" from 30 feet. |
-| **Wildwarden** | Emerald Enclave Fledgling | Wildkeeper | Speak with Animals as a ritual for eight hours; "Warden's Shift". |
-| **Bastion** | Tyro of the Gauntlet | Guardian | "Stand as One": the ally cannot be pushed while you stand there. |
-| **Banner Bearer** | Lords' Alliance Agent | Herald | Inspiring Strike, Reassert Honor. |
-| **Field Lieutenant** | Purple Dragon Rook | Squire | Rallying Cry on Initiative: "greatness has logistics." |
-| **Arcane Conduit** | Spellfire Spark | Arcane Mutant | Magic Absorption, Overflow. "Magic comes to you and does not pass through." |
-| **Strong Arm** | Zhentarim Ruffian | Bailiff | Exploit Opening, On My Mark. |
-| **Mutant Aberration** | Aberrant Dragonmark | Aberrant Mutant | Mutant Fortitude, Mutant Magic. |
-| **Dragon Cult Initiate** | Cult of the Dragon Initiate | Dragon Cultist | Dragon's Tongue, Dragon's Terror, Inspired by Fear. "Kept flavor." |
-| **Sharp Eye** | Sharp Eye | Investigator | Advantage on Search and Study, Proficiency Bonus times. |
+### Deliberate, and therefore 📒
 
-✅ **The rebrands are the setting's method applied to rules**: the mechanic is
-kept exactly, the faction is removed (Death of the Author), and the name is
-chosen to mean the background's thing rather than the publisher's. The
-comments explain each choice, which is the standard the Warlock kit set.
+> 📒 **Skilled** chooses from skills, artisan's tools and thieves' tools only.
+> The published feat offers *any* combination of three skills or tools, so
+> Gaming Sets, Musical Instruments, and also the Disguise, Forgery, Herbalism
+> and Poisoner's kits are cut from the choice. Eighteen of thirty-five tools.
+>
+> 📒 **Shadow Cast** drops **Domain Traveler**, Mist Walker's planar-travel
+> benefit. The class docstring states the reason: it was the one benefit whose
+> text named Ravenloft's geography.
+>
+> 📒 **Cupbearer** drops the benefit that settled whether the Servant was a
+> victim or an accomplice, which the background refuses to settle.
 
-⚠️ **None of it reaches the sheet as a line.** An Origin feat prints its bold
-sub-features and rules. The design comments are the mythos, and the player never
-sees a sentence of it. One italic line per Origin feat, drawn from the comment,
-would make the background's mechanical half speak in the background's voice.
+Three deliberate removals, each with its reasoning recorded at the site. That
+is the standard the rest should have met.
 
----
+### Not deliberate: ten defects wearing the same clothes
 
-## 📔 3. The Dark Gifts
-
-*"A boon that arrived uninvited and kept a share of you."* Nine, from the
-Ravenloft register, and every one of them carries a one-line identity as a
-Python docstring:
-
-| Dark Gift | Docstring (not on the sheet) | Background |
-|---|---|---|
-| **Gathered Whispers** | (Spirit Medium's; Grave Words, Augury without slot) | Spirit Medium |
-| **Shadow Cast** | Mist Walker renamed; "Domain Traveler is deliberately absent. It was the one benefit whose text named Ravenloft's geography." | Shadow |
-| **Aberrant Anatomy** | *Exposure to something from outside has rearranged you.* | (pool) |
-| **Echoing Soul** | *You remember a life that was not this one.* | (pool) |
-| **Living Shadow** | *Your shadow moves on its own, and occasionally on its own behalf.* | (pool) |
-| **Touch of Death** | *Something in you is already partway across.* | (pool) |
-| **Watchers** | *Something is always looking, and it is not on your side.* | (pool) |
-| **Second Skin** | *There is another shape in you, and it does not always wait to be asked.* | (pool) |
-| **Symbiotic Being** | *Something else lives in you, helps you, and is not on your errand.* | (pool) |
-
-✅✅ **These docstrings are already the inspiration lines.** They are in the
-house register (second person, the fact and the unease, no proper noun), they
-are one sentence each, and they are hidden in the source. Moving them to the
-sheet is the cheapest improvement on the roster.
-
-**Versatile draws them, by design.** *"A Human's Versatile draws from base
-feats and every setting Origin feat, Dark Gifts included."* The Warlock and
-Human pages flagged a Human Tomb Raider carrying *Shadow Cast* ("It Follows")
-with no story as a leak; it is a decision, and the pages are corrected. What
-remains true: a Dark Gift that arrives through Versatile needs *its line* on the
-sheet more than any other feat does, because the background did not explain
-it. "Something in you is already partway across" under Touch of Death does the
-whole job. The Dark Gift is the Human entry's "power of friendship" turned over:
-the boon that came from the one alliance nobody chose.
-
----
-
-## 📔 4. The General feats: what the road taught
-
-Forty-three feats, drawn at levels 4, 8, 12 and 16, printed as 2024 rules with
-the ability-score clause first: *"Increase your Constitution or Wisdom by 1, to
-a maximum of 20. You have proficiency with Cook's Utensils…"*. No lines. The
-Ability Score Improvement prints *"You gain +2 Constitution."*
-
-These are the sheet's account of the years between the levels, and they say
-nothing about them. The principle for a line: **a General feat is what the road
-taught, and the line says where.** Never a mood; a place or a habit.
-
-| Feat | Draft line |
+| Feat | What is missing |
 |---|---|
-| **Ability Score Improvement** | *The road asked, and the body answered.* |
-| **Alert** | *You stopped being surprised. It was cheaper than being brave.* |
-| **Lucky** | *Three times in your life the dice were wrong in your favour. You have not asked why.* |
-| **Tough** | *You have been hit more than you have been missed, and you are still here.* |
-| **Resilient** | *One thing used to get past you. It does not any more.* |
-| **Durable** | *You heal like someone who cannot afford to stay hurt.* |
-| **Speedy** | *You learned that most trouble is slower than you are.* |
-| **Chef** | *Somebody has to feed them. You found out it was you, and you got good at it.* |
-| **Fey-Touched** | *Something on the other side of a hedge took an interest. You can step the way it does.* |
-| **Shadow-Touched** | *The dark did you a favour once. You have not finished paying.* |
-| **Inspiring Leader** | *You say the thing before the fight that lets them walk into it.* |
-| **Keen Mind** | *You read faster than trouble arrives, and you remember what you read.* |
-| **Observant** | *You watched. That was the whole training.* |
-| **War Caster** | *You can hold a spell in one hand and a sword in the other and lose neither.* |
-| **Great Weapon Master** | *You stopped swinging carefully. It turned out careful was the problem.* |
-| **Sharpshooter** | *Distance is a number, and you learned to ignore it.* |
-| **Sentinel** | *Nobody walks past you to get to them.* |
-| **Polearm Master** | *You learned the reach, then the butt of it, then the moment they step in.* |
-| **Ritual Caster** | *Slow magic, from a book, by candlelight. It works, and nobody stops you.* |
-| **Skill Expert** | *One more thing you do the way other people breathe.* |
+| **Resilient** | The saving-throw proficiency, which is the entire feat. Described, never granted. QST-0067 already names it. |
+| **Blessed Warrior** | The whole mechanical payload. No `apply=` is passed, so it grants a paragraph and no cantrips. |
+| **Druidic Warrior** | The same, and the legacy copy at least sampled the cantrips. |
+| **Magic Initiate** (Cleric, Druid, Wizard) | Grants nothing at all: no cantrips, no level-1 spell, no use tracking. Also drops "you can cast it using spell slots" and the spellcasting-ability clause. |
+| **Athlete** | The Climb Speed. |
+| **Dual Wielder** | Quick Draw. |
+| **Medium Armor Master** | The Stealth benefit, and the armour-training prerequisite. |
+| **Ritual Caster** | The ritual casting itself. The text says only that the spells are prepared. |
+| **Dragon Cult Initiate** | Dragon's Tongue is half implemented: the "if you already know Draconic" branch never fires. |
 
-The rest follow the same rule when they are wanted; twenty is the set the
-generator draws most.
+**A defect is not a house rule.** None of these carries 📒, on the precedent set
+on the Goliath page: a dropped benefit with no stated intent is a bug, and it
+belongs on the Repairs Ledger.
 
 ---
 
-## 📔 5. The Epic Boons: level 19, and the cap
+## 📔 5. Flagged as unorthodox
 
-Twelve Boons, one at level 19 (and the Fighter's at 19 by class). Every Boon
-opens *"Increase one ability score by 1, to a maximum of 30"*: the one place on
-the sheet where a mortal passes the mortal cap of 20.
+**Field Marshal** is the one General feat with no published equivalent. It
+grants 2d6 plus an ability modifier in temporary hit points at 30 feet,
+proficiency-bonus times per Long Rest, **and standing Advantage on attack rolls
+while Bloodied**, uncapped, with no action cost and no duration. No published
+General feat grants standing Advantage on attack rolls. It is the level-4 half
+of Field Lieutenant, and it makes the page's old count of forty-three wrong.
 
-✅ **The Boon is the rules' whisper of the Ascending, for every class.** Primal
-Champion, Body and Mind, Arcane Apotheosis and the Boon all say the same thing
-in the same round: the inner nature, fully lived, exceeds the species. The
-Dragon canon's mechanism ("realisation actualises the body") is a level-19
-feat with a different name on every sheet. Never say so; let the line hint.
+**Every Dark Gift carries a drawback.** No published Origin feat does. That is
+the category's real unorthodoxy rather than any individual gift, and it is the
+file's stated design.
 
-⚠️ The texts arrive compressed ("+1 to any ability (max 30)", "PB", "CON mod",
-"Re-charges on initiative", "Once you use this benefit. (once per Long Rest)"),
-which is the one place on the sheet a capstone should not read as a note to
-self. And `ApplyEpicBoon` draws with the global `random` and prints "Epic
-Boom!": a QST-0089 shape (a Character's draws go through its own Dice), and a
-possible break in the seeded replay at level 19. Rules work; recorded.
+**Arcane Infiltrator does not exist.** It is named as the Agent of the Ninth
+Quill's Origin feat and implemented nowhere in the repository.
 
-| Boon | Draft line |
-|---|---|
-| **Boon of Irresistible Offense** | *Nothing they are made of turns your blow any more.* |
-| **Boon of Combat Prowess** | *Once a round, you decide the miss did not happen.* |
-| **Boon of Dimensional Travel** | *Distance stopped applying to you between one thing and the next.* |
-| **Boon of Energy Resistance** | *Two kinds of fire chose you, and you choose which two each morning.* |
-| **Boon of Fate** | *Luck within sixty feet of you is yours to lean on.* |
-| **Boon of Fortitude** | *Forty more of you, and every mending mends more.* |
-| **Boon of Spell Recall** | *Sometimes the slot does not spend. You have stopped counting on it and started noticing it.* |
-| **Boon of Recovery** | *You have gone down for the last time. It did not take.* |
-| **Boon of Skill** | *Everything, a little. One thing, entirely.* |
-| **Boon of Speed** | *Thirty more feet, and nothing can hold you.* |
-| **Boon of the Night Spirit** | *The dark stopped hiding you and started being you.* |
-| **Boon of Truesight** | *You see what is there. All of it. It is not always a gift.* |
+**Blind Fighting states no rule**, only a Blindsight chip, where all eleven
+siblings print theirs.
+
+**Boon of Truesight prints a sense the character does not carry.** The working
+line is commented out, so the boon raises an ability score and stops.
 
 ---
 
-## 📜 6. Decisions log
+## 📔 6. Structural defects
 
-**Decided**
-
-- Versatile draws from base feats and every setting Origin feat, Dark Gifts
-  included.
-- The rebrand method: published mechanics kept, faction removed, name chosen
-  for the background.
-
-**Open (this page proposes)**
-
-- Move the Dark Gift docstrings to the sheet as italic lines (§3).
-- One line per setting Origin feat, drawn from its design comment (§2).
-- General feat lines on the rule "where the road taught it" (§4).
-- Epic Boon texts written out and given lines (§5).
-- A line for the Ability Score Improvement.
-
-**Repairs**
-
-- `Strong Arm` defined twice; keep one.
-- "Intellicence".
-- `Map_of_Epic_Boons.py` is a file of `None`s; `ApplyEpicBoon` uses the global
-  `random` and prints "Epic Boom!".
-- Fighting Styles defined twice.
-- The Epic Boon texts' abbreviations and the broken "Once you use this
-  benefit." sentence.
+- **The General feat catalogue is orphaned.** Nothing outside its own folder
+  imports `FeatKit`. The live level 4, 8, 12 and 16 draw is `ApplyRandomFeats`
+  in `Grimoire_of_Features`, which reads a different catalogue. The gated,
+  prerequisite-checking path is exercised only by its own self-test.
+- **`Map_of_Epic_Boons.py` defines nothing.** All twelve names are bound to
+  `None`, so the entire TagKit boon path, including its real level-19
+  precondition, is dead. The texts that reach a sheet live elsewhere.
+- **Two Dark Gifts crash on apply.** Echoing Soul and Symbiotic Being import a
+  name that exists nowhere. Measured: 4 per cent of seeded level-1 Humans fail
+  to generate.
+- **`Strong_Arm` is defined twice and the surviving copy is the degraded one.**
+  The dead copy has the `<br>`; the live one does not, so its two sub-benefits
+  print run together.
+- **The Fighting Style catalogue exists twice**, and so does the base Origin
+  feat set.
+- **`BACKGROUND_ORIGIN_FEATS` is a no-op merge**, since the dict it spreads was
+  already updated four lines above.
 
 ---
 
-## 📚 7. Pointers
+## 📔 7. What the feats do not say
 
-- **Backgrounds-Official**: the Origin feat is the half that already works.
-- **Human page**: Versatile as designed, drawing Dark Gifts.
-- **Warlock page**: the Dark Gift finding corrected.
-- **Dragonborn page**: the Boon as the Ascending's whisper.
-- **Feature-Text canon**: the docstring-as-line pattern.
+Measured across generated sheets, the feat layer carries **no inspiration line
+at all**: General feats 0 of 44, Fighting Styles 0 of 12, Epic Boons 0 of 12.
+
+The Dark Gifts are the exception and they do not know it. Each carries its line
+already, as a docstring the sheet never prints: *"Something in you is already
+partway across."* *"Something is always looking, and it is not on your side."*
+Moving those nine strings into the descriptions is the cheapest voice
+improvement available anywhere in the project.
+
+---
+
+## 📚 8. Pointers
+
+- **Backgrounds-Written**: the backgrounds these Origin feats belong to.
+- **Repairs-Ledger**: the defects in section 4 and 6.
+- **Wiring-Plan**: the lines in section 7.
+- **Human**: Versatile and the enlarged pool.
+- **Aasimar**: the worked chapter 0 this page follows.

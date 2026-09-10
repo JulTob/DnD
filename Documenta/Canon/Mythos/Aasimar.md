@@ -3,7 +3,7 @@
 ---
 > 📖 **In flow.** 1 of 13 chapters are still proposals. 📜 5 · 📚 2 · 📔 5 · 📖 1
 
-> - 📕 **inherited from the 2024 rules.** Moving it costs rules compatibility.
+> - 📕 **inherited from the 2014/2024 rules.** Moving it costs rules compatibility.
 > - 📙 **an aesthetic change.** The same rule wearing our name and look.
 > - 📒 **a rule we changed.** A house rule, and it already cost compatibility.
 > - 📘 **supportive lore.** It holds a rule or a core element up. 
@@ -27,29 +27,36 @@ companion entry for the Celestials themselves is [Celestials](Celestials.md).*
 
 ## 📜 0. Rules
 
-*The fixed points, and what we made of them. The books are defined at the head
-of the page.*
+*The fixed points.*
+
+### 📘 Description
+The presentation to the player:
+
+```txt
+Angels, Muses, Constellations, Celestials... different cultures call your people by different names. Truth is, you never lived among them. You are mortal, and you are part of the many cultures of the world. But you also have something in you from the Higher Planes. Your aspect resembles your mortal side, but you also have tells from your heavenly origin: Talaria, small vestigial wings, and Aureola, a barely perceptible shining halo around your head. You can hide them or empower them depending on your emotional state.
+
+All Celestials are inclined towards a higher ideal: Justice, Sacrifice, Freedom... Think about which ideal can inspire {name} and guide their path as an adventurer.
+```
 
 ### The rules as given
 
-*Each entry is the rule itself, complete enough to resolve at a table. Not a
-summary and not a cross-reference.*
+*Each entry is the rule itself as presented to the player in the app, complete enough to resolve at a table. Not a summary and not a cross-reference. Bullets indicate chips. ENTRIES NEED FLAVOR TEXT, in italics and sepparate.*
 
-> 📕 **Creature Type** Humanoid.   
-> 📕 **Size** Medium or Small, chosen when you make the character.   
-> 📕 **Speed** 30 feet.   
+> * 📙 **Creature Type** Humanoid (Celestial).   
+> * 📕 **Size** Medium or Small.
+>     [Proportion is 90% Medium, 10% Small.]
+> * 📕 **Speed** 30 feet.   
 >
-> 📕 **Darkvision.** You can see in Dim Light within 60 feet as if it were Bright Light. In Darkness within that range you see as if it were Dim Light: you have Disadvantage on Wisdom (Perception) checks that rely on sight, and you discern colors there only as shades of gray.
+> 📕 **Darkvision.** You can see in **Dim Light** within **60 feet** as if it were **Bright Light**. In **Darkness** within that range you see as if it were **Dim Light**: you have **Disadvantage** on **Wisdom (Perception) checks** that rely on sight, and you discern colors there only as shades of gray.
 > > 📘 _Darkness cannot hide the truth from you._
+> * **Darkvision**: 60 ft
 >
 > 📕 **Celestial Resistance.** You have **Resistance** to **Necrotic** damage and **Radiant** damage.
-> > 📘 _Whatever burns or rots reaches you and finds nothing to take hold of._
+> > 📘 _Life flows through you. Death passes over you._
+> * 📕 Resistances += {Radiant, Necrotic}
 >
-> 📕 **Healing Hands.** As a Magic action, you touch a creature and roll a number
-> of d4s equal to your Proficiency Bonus. The creature regains a number of Hit
-> Points equal to **the total rolled**. Once you use this trait, you can't use it
-> again until you finish a Long Rest.
-> > 📘 _Something in you remembers what a body is supposed to feel like, and lends it out._
+> 📕 **Healing Hands.** As a **Magic Action**, you touch a creature and roll **{PB}d4**. The creature regains a number of **Hit Points** equal to the total rolled. Once you use this trait, you can't use it again until you finish a **Long Rest**.
+> > 📘 _Life finds your way._
 >
 > 📕 **Light Bearer.** You know the Light cantrip. Charisma is your spellcasting
 > ability for it.

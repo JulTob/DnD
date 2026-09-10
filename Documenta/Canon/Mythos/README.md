@@ -91,7 +91,7 @@ objection looks like, and how to fetch pages remotely.
 | [Relationships](Relationships.md) | Species × Guild with and across the grain; thirty-two backgrounds with their built-beside Guilds and productive misfits; five species fault lines; what reads pairings today (the Story does not). |
 | [Names](Names.md) | The name engine and its ladder; the Dwarf module as the standard; Elf, Halfling, Goliath and Human surnames undoing their given names; the Human male typo; Tiefling's empty surname; gender response by accident. |
 | [Stories-and-Titles](Stories-and-Titles.md) | The Backstory on every sheet: a sound engine with the project's oldest register; zero gates for the twenty custom backgrounds; species gates that contradict the canon; twenty Origin and ten Outro drafts. |
-| [Feats](Feats.md) | Origin feats as the backgrounds' mechanical half (the rebrand comments as record); the Dark Gifts' docstrings as ready lines; General feats and Epic Boons with no fantasy; Versatile draws Dark Gifts by undecided. |
+| [Feats](Feats.md) | All 106 feats classified by the four 2024 categories and checked against the rules: 42 compliant, 39 changed, 13 with a published benefit removed but only 3 on purpose, 10 rebrands, 1 feat that is not from 2024 and 1 that does not exist. The General catalogue is orphaned and the Epic Boon map defines nothing. |
 
 ---
 
