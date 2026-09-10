@@ -25,8 +25,7 @@ eight that was not geometry. The page now reads:
 | `tell` | *When you are happy it spreads, slowly, until it covers all of you.* | **Faint in daylight, but unmistakable in the dark.** |
 
 The new form is the laurel of victors and triumphs, which sits at the temples by
-nature. It floats rather than rests, in line with the physiology chapter: the
-aureola never touches the body whatever shape it takes.
+nature. Whether it rests there or floats is not stated, and should not be.
 
 Note the consequence for the tell column. The other seven tells react to the
 Aasimar's own state; this one reacts to circumstance. That is deliberate.

@@ -323,8 +323,7 @@ Small vestigial wings, sitting only where a wing could take a body's weight (low
 They catch the light like a metal (black iron, gold, red iron, silver, verdigris, pearl, tin, bronze), which nods at the Dwarven soul-metals without confirming anything.
 
 **Aureola.** 
-The halo floats and never rests on the body, whatever shape it takes and however
-low it sits. Glowing like a stone (onyx, amber, ruby, diamond, aquamarine, opal, moonstone, jade) in a form the Ideal lends: 
+The halo, glowing like a stone (onyx, amber, ruby, diamond, aquamarine, opal, moonstone, jade) in a form the Ideal lends: 
 - a circle perfectly round from wherever anyone stands (Justice),
 - a broken ring (Sacrifice),
 - a compass rose (Freedom),
