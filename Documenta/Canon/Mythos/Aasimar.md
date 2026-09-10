@@ -53,7 +53,8 @@ Example:
 ```txt
 Your talaria and aureola resemble the traits of the Angel Barakiel, so you may belong to its lineage. At your heels you carry talaria that catch the light like verdigris, barred across with red iron, and folded they pass for the straps of your sandals. Your aureola is a star of many points, set like a compass rose, and it glows like aquamarine shading into ruby. It twinkles when you run, and beats when you fly.
 ```
-#### The eight Ideals, as the generator holds them
+
+#### 📗 The eight Ideals
 
 The **metal** dresses the talaria, the **gem** is what the aureola glows like,
 the **form** is the halo's shape, and the **tell** is the one thing that halo
@@ -65,9 +66,9 @@ does. The tell never names the Ideal it belongs to.
 | **Mercy** | a glow with no edge, light that fades | gold | amber | *When someone near you is afraid, it sends a cold feeling down your spine.* | Sacred Song (Polihimnia) |
 | **Sacrifice** | a broken ring, with an arc of it missing | red iron | ruby | *It darkens for a moment whenever you see someone die.* | Tragedy (Melpomene) |
 | **Truth** | a ring of small lights, each orbiting on its own | silver | diamond | *It falls into chaos when you feel anything strongly, good or bad.* | Astronomy (Urania) |
-| **Freedom** | a star of many points, set like a compass rose | verdigris | aquamarine | *It twinkles when you run, and beats when you fly.* | **empty in the code** |
+| **Freedom** | a star of many points, set like a compass rose | verdigris | aquamarine | *It twinkles when you run, and beats when you fly.* | Dance(Terpsicore) |
 | **Beauty** | slow waves of colour, one running after another | pearl | opal | *It beats once when you look at something you find beautiful.* | Love Poetry (Erato) |
-| **Hope** | a faint thing in daylight and one unmistakable star in the dark | tin | moonstone | *When you are happy it spreads, slowly, until it covers all of you.* | Comedy (Talia) |
+| **Hope** | A band crowning your temples | tin | moonstone | *Faint in daylight, but unmistakable in the dark.* | Comedy (Talia) |
 | **Honor** | a standing flame that burns without moving | bronze | jade | *Its colour changes with your mood.* | Epic Tales (Calliope) |
 
 ⚠️ **Freedom's `muse` field is empty.** Dance (Terpsicore) is the decided
@@ -322,7 +323,8 @@ Small vestigial wings, sitting only where a wing could take a body's weight (low
 They catch the light like a metal (black iron, gold, red iron, silver, verdigris, pearl, tin, bronze), which nods at the Dwarven soul-metals without confirming anything.
 
 **Aureola.** 
-The halo, glowing like a stone (onyx, amber, ruby, diamond, aquamarine, opal, moonstone, jade) in a form the Ideal lends: 
+The halo floats and never rests on the body, whatever shape it takes and however
+low it sits. Glowing like a stone (onyx, amber, ruby, diamond, aquamarine, opal, moonstone, jade) in a form the Ideal lends: 
 - a circle perfectly round from wherever anyone stands (Justice),
 - a broken ring (Sacrifice),
 - a compass rose (Freedom),
