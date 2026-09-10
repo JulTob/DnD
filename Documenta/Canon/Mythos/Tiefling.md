@@ -1,6 +1,15 @@
 # 😈 Tiefling
 
-> 📖 **In flow.** 1 of 11 chapters are still proposals. 📜 2 · 📚 2 · 📔 6 · 📖 1
+> 📖 **In flow.** 1 of 12 chapters are still proposals. 📜 3 · 📚 2 · 📔 6 · 📖 1
+
+> - 📕 **inherited from the 2024 rules.** Moving it costs rules compatibility.
+> - 📙 **an aesthetic change.** The same rule wearing our name and look.
+> - 📒 **a rule we changed.** A house rule, and it already cost compatibility.
+> - 📘 **supportive lore.** It holds a rule or a core element up.
+> - 📗 **deep lore.** Design that supports the fantasy rather than a rule.
+> - A book marks a statement only if it can change exclusively through the
+>   Questa / Agora / Decree system. Anything with no Questa and no Decree behind
+>   it carries no book, however settled it feels.
 
 *Wiki entry for the design team. Deep lore and settled direction, not page text.
 Compiled 2026-09-08 from `Tieflings-and-the-Shift.md`, the Tiefling kit, the
@@ -11,6 +20,347 @@ end of this entry is [Aasimar.md](Aasimar.md).*
 > **In one sentence.** A Tiefling has never done anything, and that has never
 > been the relevant fact. The legacy is power; what is decided about it is the
 > sentence.
+
+---
+
+## 📜 0. Rules
+
+*The fixed points, and what we made of them. The books are defined at the head
+of the page.*
+
+### The rules as given
+
+*Each entry is the rule itself, complete enough to resolve at a table. Not a
+summary and not a cross-reference.*
+
+> 📕 **Creature Type** Humanoid. **Size** Medium or Small, chosen when you make
+> the character. **Speed** 30 feet.
+>
+> 📕 **Darkvision.** You can see in Dim Light within 60 feet as if it were Bright
+> Light. In Darkness within that range you see as if it were Dim Light: you have
+> Disadvantage on Wisdom (Perception) checks that rely on sight, and you discern
+> colors there only as shades of gray. No legacy extends the range.
+>
+> 📕 **Otherworldly Presence.** You know the *Thaumaturgy* cantrip. The ability
+> you chose for Fiendish Legacy (Intelligence, Wisdom or Charisma) is your
+> spellcasting ability for it. (*Thaumaturgy*: cantrip, Transmutation, Action, 30
+> feet, up to 1 minute, V. You manifest one minor wonder of your choice: your
+> voice booms up to three times as loud for the duration; flames flicker,
+> brighten, dim or change color for the duration; harmless tremors run through
+> the ground for the duration; an instantaneous sound sounds from a point you
+> choose in range, such as a rumble of thunder or an ominous whisper; an unlocked
+> door or window flies open or slams shut; or your eyes change appearance for the
+> duration. You can have up to three of the duration effects running at once, and
+> you can dismiss one as an action.)
+>
+> 📕 **Fiendish Legacy.** Choose one legacy: Abyssal, Chthonic or Infernal. It
+> grants a damage Resistance and three spells, arriving at character levels 1, 3
+> and 5. You always have those spells prepared. You can cast each leveled spell
+> of the legacy once without expending a spell slot, and you regain that use when
+> you finish a Long Rest. Each spell recharges separately, so at character level 5
+> you have one free level 1 spell and one free level 2 spell per Long Rest. You
+> can also cast them using any spell slots you have of the appropriate level.
+> Intelligence, Wisdom or Charisma is your spellcasting ability for every spell of
+> this trait, chosen when you make the character. Your spell save DC for them is
+> **8 + your Proficiency Bonus + that ability's modifier**, and your spell attack
+> bonus is **your Proficiency Bonus + that ability's modifier**.
+>
+> 📕 **Abyssal**: Resistance to Poison damage. *Poison Spray* (cantrip,
+> Necromancy, Action, 30 feet, Instantaneous, V/S: ranged spell attack for 1d12
+> Poison damage, rising to 2d12 at level 5, 3d12 at level 11 and 4d12 at level
+> 17). At character level 3, *Ray of Sickness* (level 1 Necromancy, Action, 60
+> feet, Instantaneous, V/S: ranged spell attack for 2d8 Poison damage and the
+> Poisoned condition until the end of your next turn, +1d8 per slot level above
+> 1). At character level 5, *Hold Person* (level 2 Enchantment, Action, 60 feet,
+> Concentration up to 1 minute, V/S/M (a straight piece of iron): one Humanoid you
+> can see must succeed on a Wisdom saving throw or have the Paralyzed condition for
+> the duration, repeating the save at the end of each of its turns and ending the
+> spell on itself on a success; one additional Humanoid per slot level above 2).
+>
+> 📕 **Chthonic**: Resistance to Necrotic damage. *Chill Touch* (cantrip,
+> Necromancy, Action, Touch, Instantaneous, V/S: melee spell attack for 1d10
+> Necrotic damage, and the target cannot regain Hit Points until the end of your
+> next turn; rising to 2d10 at level 5, 3d10 at level 11 and 4d10 at level 17). At
+> character level 3, *False Life* (level 1 Necromancy, Action, Self,
+> Instantaneous, V/S/M (a drop of alcohol): you gain 2d4 + 4 Temporary Hit Points,
+> and 5 more per slot level above 1). At character level 5, *Ray of Enfeeblement*
+> (level 2 Necromancy, Action, 60 feet, Concentration up to 1 minute, V/S: the
+> target makes a Constitution saving throw; on a failure it has Disadvantage on
+> Strength-based D20 Tests and subtracts 1d8 from all its damage rolls for the
+> duration, repeating the save at the end of each of its turns and ending the spell
+> on a success. A successful save costs the target nothing).
+>
+> 📕 **Infernal**: Resistance to Fire damage. *Fire Bolt* (cantrip, Evocation,
+> Action, 120 feet, Instantaneous, V/S: ranged spell attack for 1d10 Fire damage,
+> and a flammable object it hits starts burning if nobody is wearing or carrying
+> it; rising to 2d10 at level 5, 3d10 at level 11 and 4d10 at level 17). At
+> character level 3, *Hellish Rebuke* (level 1 Evocation, Reaction taken when a
+> creature damages you, 60 feet, Instantaneous, V/S: that creature makes a
+> Dexterity saving throw, taking 2d10 Fire damage on a failure and half as much on
+> a success, +1d10 per slot level above 1). At character level 5, *Darkness* (level
+> 2 Evocation, Action, 60 feet, Concentration up to 10 minutes, V/M (bat fur and a
+> piece of coal): magical Darkness fills a 15-foot-radius Sphere from a point you
+> choose in range, or a 15-foot Emanation from an object that is not being worn or
+> carried and that you cast it on; Darkvision cannot see through it and nonmagical
+> light cannot illuminate it, covering that object with something opaque blocks it,
+> and any Bright Light or Dim Light created in the overlap by a spell of level 2 or
+> lower is dispelled).
+
+No rule of the Tiefling has been changed, so this page carries no 📒. All three
+traits and all three legacies match the published rules in name, number, level,
+Resistance, spell and recharge.
+
+**The Creature Type, held.** A Tiefling carries a Fiend *kinship* Tag
+(`AtlasActorLudi/SpeciesKit/kinship.py`). It is classification for names, titles,
+gear vocabulary and familiar affinity, and it grants no Resistance, no sense and
+no trait. It is deliberately not the Fiend Creature Type: a spell that seeks
+Fiends does not find a Tiefling, because the rules Creature Type stays Humanoid,
+as the first entry above already says. The kinship layer is project code and no
+Questa or Decree stands behind it, so it carries no book of its own.
+
+**What ships wrong.** Six items, none of them a declared house rule, so none is a
+📒 yet. The Repairs Ledger does **not** yet carry any of them, so the file and
+line are given here and a row in [Repairs-Ledger](Repairs-Ledger.md) is owed.
+
+- *Fire Bolt* is tagged as a Concentration spell
+  (`AtlasMagia/Lodge_of_Spells.py:1801`), so every Infernal Tiefling's cantrip
+  behaves as though it held Concentration; the published spell is Instantaneous
+  and holds nothing.
+- *Ray of Enfeeblement* carries a clause that penalises a *successful* save
+  ("Disadvantage on the next attack roll it makes"), which the published spell
+  does not have and which contradicts its own next sentence. It is written twice,
+  identically, at `Lodge_of_Spells.py:3226` and `:3478`; the second wins. It is
+  the Chthonic legacy's level 5 spell, so it lands on real sheets.
+- *Hold Person* drops its higher-level clause (`Lodge_of_Spells.py:3765-3775`).
+  The Abyssal Tiefling can cast the legacy spell from any slot of the appropriate
+  level, so the missing "one additional Humanoid per slot level above 2" is a
+  live loss at the table.
+- *Thaumaturgy* reaches the sheet from the compressed dictionary rather than the
+  full registry (`Lodge_of_Spells.py:1531`, via `spell_from_data` at `:1853`).
+  What prints is a one-line abbreviation, not the six effects and the
+  three-at-a-time rule, and the stored line carries an em-dash against the
+  project's own formatting law. Every Tiefling has this cantrip at level 1.
+  Ledger row D4 already names the two-registry cause.
+- The trait prose says you *know* the legacy spells
+  (`AtlasActorLudi/SpeciesKit/Tieflings/resolution.py:95`) where the rule says you
+  always have them prepared, and for a prepared caster that difference decides
+  whether the spells cost a prepared slot.
+- `Fiendish_Legacy` sits on each legacy rather than on the Tiefling Form
+  (`Tieflings/base.py:15-21`), so the `TRAITS` Record, which reads the Form's own
+  bases (`SpeciesKit/declarations.py:247`), reports two traits instead of three.
+  The sheet is unaffected: `Resolve_Tiefling_Features` projects all three entries.
+  Its only reader today is a self-test that restates the Record's own definition,
+  so nothing currently prints a two-trait Tiefling, but anything built on the
+  Record would. The undercount is the kit's shape rather than a Tiefling slip:
+  the Aasimar's Celestial Revelation and the Goliath's Giant Heritage go
+  uncounted the same way.
+
+Each is a defect until a Questa either repairs it or records it as a house rule.
+The four spell-text items belong to QST-0059's lane; the last two are the
+Tiefling kit's own.
+
+The entries above are the whole trait. A generated sheet prints only the part
+unlocked at the character's level, so a level 1 sheet does not say that the level
+1 spell has company coming. That is deliberate, and it means the printed entry is
+never the full published trait.
+
+### The supportive lore
+
+> 📘 **A Resistance granted by a legacy is made true on the sheet through the
+> shared `Grant_Resistance` helper, not a local copy, so it lands in
+> `damage_resistances` rather than only in the prose.** Recorded by
+> **QST-0081.1** (`Curia/Questae/Open/`), whose subject is that FeaturesKit
+> declares the helper twice and which names `Imprint_Fiendish_Heritage` as
+> calling it correctly. The questa is Open, and its desired outcome keeps Species
+> Imprints calling the one helper.
+>
+> 📘 **The three trait entries speak the rulebook's voice and carry no inspiration
+> line of their own.** Ratified by **QST-0094**, which leaves the cross-species
+> conventions open. The lines in §10 are therefore proposals against a ratified
+> text.
+>
+> 📘 **Thaumaturgy is costume: casting it earns zero affinity.** Ratified by
+> **Decree 0005** §2, and it is what the §9 question about steering the legacy
+> ability has to argue with.
+>
+> 📘 **Deep lore stays off the page.** User-facing text invites and inspires; it
+> never lectures. Ratified by **Decree 0006**, as a general standard, not as cover
+> for any particular Tiefling secret.
+
+⚠️ **A warning about citations on this page.** The two document trees give one
+number to two questae (ledger row D12). `QST-0079` names a Solved recovery questa
+in `Documenta` and an Open vault survey in the same folder; `QST-0081` names a
+Solved presentation questa in `Documenta` and a Working vault restore in `Curia`,
+whose sidequest is the `QST-0081.1` cited above. Always give the tree with the
+number.
+
+That is the whole of it, and every line of it is structure or standard. **No
+cosmological claim on this page carries a book.** The Shift, the shared
+priesthood, the house, the body, the three hells: all of it rests on the canon
+documents and on this page's own decisions log, which are not the Questa / Agora
+/ Decree system.
+
+### Unratified, and what each one needs
+
+*Stated as design, not as law. Each line names the Questa that would ratify it.*
+
+- **The one lineage set is the three legacies, named Abyssal, Chthonic and
+  Infernal, held as sibling modules under the species, exactly one carried per
+  Character.** The same shape as the Aasimar's Revelations and the Giant
+  Heritages, and the code enforces the "exactly one" in `Imprint_Heritage`. No
+  Questa decides it. `QST-0079` (Documenta, Open) *observes* the shape in a vault
+  survey ("Tieflings' legacies ×3") without deciding anything, and `QST-0081`
+  (Curia, Working) restored the four files without ruling on their arrangement.
+  QST-0091.1 is the lane that would settle it, since it redesigns how a Species
+  declares its Form, its Heritages and its Traits.
+- **Belief makes fiends as it makes celestials, and the Lower Planes were made
+  lower by being called it** (§2). QST-0050 states the Celestial half differently
+  (emanations from the World of Forms, changing as mortal understanding of the
+  Ideal changes) and never mentions fiends in its lore block. Needs a Questa on
+  the Shift, reconciled with QST-0050 so both ends of one mechanism agree.
+- **The proof is retroactive** (§2), which is the species' organising principle.
+  The canon's metaphysics table lists five peoples (Dwarf, Aasimar, Elf,
+  Dragonborn, Orc) and has no Tiefling row.
+- **The shared priesthood** (§2): one event behind the Aasimar's privilege and the
+  Tiefling's exclusion. It also amends QST-0050's lore block, so it is one Questa
+  serving both pages.
+- **Prevention against punishment** (§5): the Manichaean axis, reward absent.
+  Nothing in the formal system decides it. One Questa, settled once for the
+  Aasimar and the Tiefling together.
+- **Born to ordinary parents** (§3), the structural fact that separates the
+  Tiefling from every other people. The same Questa would settle why neither
+  Tiefling nor Aasimar takes a host-culture draw.
+- **The body is furred and crowned, not red-skinned** (§3). A divergence from the
+  published art direction, and the most deletable thing on this page. It needs
+  recording where a later pass cannot quietly undo it. It also needs narrowing or
+  widening first: of the three shipped paragraphs only the Chthonic one puts the
+  horns close to the head like a crown or a tiara. The Abyssal's are twisted,
+  spiky and uneven, and the Infernal's are onyx with no position given. The
+  metallic sheen is genuinely all three.
+- **The heritage ledger** (§3): which hell, which body, which Resistance, which
+  spells, per legacy. The three names and the fact of a Resistance are ratified;
+  the four columns are not. A sibling of QST-0057, so the lists are verified as
+  data.
+- **`grimdark` alone, `egypt` as the unspoken before, and no society key at all**
+  (§1, §2, §4). QST-0046.5 owns marker assignment and ratifies only that the
+  markers exist. Three claims for one sidequest: the register and its reach to
+  `germany` and `sword_and_sorcery`, the Egyptian well, and the deliberate hole
+  where every other people has a society.
+- **The house replaces the homeland** (§4). Nothing in the formal system. The same
+  Questa would settle whether the Renegade is the house seen from inside, as §8
+  asserts.
+- **The hated minority against the model minority, and no host-culture draw for
+  either** (§4, §9). Logged as Decided and backed by nothing. The draw is a
+  generator contract as much as lore, and belongs beside QST-0046.5.
+- **The two name pools, and the virtue pool as the species' quietest device**
+  (§4). Needs a Questa, so the virtue names survive the QST-0091.1 move to
+  one-file species with an explicit corpus. The same Questa should look at what
+  the corpus actually does: `AtlasNomina/Races/Fiend.py:891-896` concatenates the
+  virtue pool and the demonology pool into one list, and the `if TIEFLING`
+  branch that would return the virtue pool alone never fires for a finished
+  sheet, because the Tiefling's subrace has become the legacy name by then.
+- **The second person alone, and the missing "we" read as hostile** (§4, §9).
+  Logged as Decided, while QST-0094 files the same question as an open convention
+  where consistency is a taste call. A wiki Decided standing against an open Agora
+  question is the one contradiction on this page. Closing convention 2 of QST-0094
+  closes both.
+- **Never name the parallel** (§3), and **no biological determinism, the legacy
+  being power rather than impairment** (§5). Given as canon, and restated in the
+  Agora as an inherited constraint rather than decided there. Two Questae: one
+  raising the never-name rule to a standing content standard, one raising "taught,
+  not inherited" from canon to a Decree.
+- **Both answers stay open** (§4): the crowns, or claim the Nine Hells and hit
+  back. A player-agency question as much as lore, to be checked against Decree
+  0007's third standard (premise may be stated, personality may not be
+  prescribed).
+- **The Tiefling as an Ascending candidate** (§5). The Ascending appears in the
+  Agora's Dialogs twice, for the Barbarian (Dialog 0014, Curia) and the Druid
+  (Dialog 0017), both times as reserved ground nobody on the page may claim, and
+  never as an assignment to a people. Needs the metaphysics table answered per
+  people, which QST-0053 already assumes exists when it requires a new Species to
+  take a principle or bring one.
+- **The three tables**: relations with the other peoples (§6), the thirteen class
+  readings (§7), the fourteen background readings (§8). No Questa or Decree
+  decides a pairing, a species-times-class reading, or a species-coded background.
+  Three Questae, and the class one must first decide whether the class Dialogs may
+  carry a per-species row at all.
+- **The prayer line** (*Ash remembers the flame*) **and the Tiefling × War typo**
+  (§9). A one-line repair Questa that also settles where the ledger lives under
+  QST-0091.1.
+- **The three items §9 files as Open** exist only on this page: the carvings
+  against the crowns, the synergy nudge on the legacy ability, and `grimdark`
+  reaching armour and focus. None is a Questa in Open, Working or Solved, so
+  nothing can decide them. Mint one each, so the Open list points at files rather
+  than at itself.
+
+### What the rules force, and what we chose
+
+The rules force a very precise gap. A Tiefling is a Humanoid whose Creature Type
+nothing changes, carrying a damage Resistance and a fiend's spell list, in a body
+the published art marks as unmistakable. So the rules hand over every sign of a
+fiend and none of the substance. A divination that hunts Fiends comes back empty.
+The kinship Tag grants nothing, and was written not to.
+
+**Our answer is that the gap is the species.** A Tiefling has never done
+anything, the rules agree, and the world does not. What a Tiefling carries is
+real and means nothing, and the meaning is supplied from outside and enforced
+anyway. The body follows: furred, with a metallic sheen, and horns that in at
+least one of the three bodies sit close to the head like a crown. Not a human
+with horns, and not the published red skin.
+
+**What that buys beyond the rule.** The Humanoid Creature Type stops being a
+compatibility footnote and becomes the argument: every anti-fiend effect in the
+game fails to find what the town is certain about, and the engine is the one
+thing in the setting that never gets the reading wrong. Horns close to the head
+make the single sentence of history the species entry is allowed physically
+possible; a crown is what a horn like that looks like, and also what somebody
+wants it to be, so the claim stays an observation and never becomes proof. Today
+only the Chthonic paragraph carries that shape, which is either the point (the
+crown survives in one hell and not the others) or an unfinished pass across the
+other two, and §3 has to say which. The three bodies then do work across the
+three legacies: Chthonic passes for human most easily and Abyssal is the hardest
+to hide, which turns "some of us can pass under a hood, and the ones who cannot
+are never left alone" into a difference rather than a mood, and a Resistance
+choice into a place. And Darkvision at sixty feet, extended by no legacy, keeps
+all three identical in the dark. Whatever else the reading separates, it does not
+separate that.
+
+⚠️ **What breaks if a later hand tidies this away.** Correct the Fiend kinship
+into the Fiend Creature Type, on the grounds that it looks like an oversight, and
+the species collapses: the reading becomes true, the injustice becomes a fact,
+and every effect that hunts fiends starts working on a Humanoid. One edit, and it
+costs rules compatibility and the whole fantasy together. Flatten the body back
+to red skin with sweeping horns and the crown sentence has nothing to stand on,
+so the entry's one permitted piece of history becomes decoration. Level the three
+heritage bodies into three damage types and the hood sentence stops describing
+anybody. That this reasoning is unratified is an argument for writing the Questa,
+not for treating any of it as free.
+
+### The variable detail
+
+Drawn per character, and none of it ratified: which of the three legacies
+(unweighted, and one is always assigned, so a Tiefling with no legacy never
+reaches a sheet); Medium or Small, a straight 50/50 because no size weighting is
+declared; the spellcasting ability for Otherworldly Presence and Fiendish Legacy,
+drawn from Intelligence, Wisdom and Charisma and then overridden by the class's
+own casting ability wherever that is one of the three, the draw standing as the
+fallback for a non-caster; and the name, from the Fiend corpus.
+
+**The body is not drawn.** Each legacy carries one fixed `HERITAGE_DESCRIPTION`
+paragraph, printed verbatim, so the fur, the horns and the eyes are the same
+sentences on every Abyssal sheet ever generated. This is the sharpest difference
+between this species and the Aasimar, whose talaria metal, aureola stone and
+placement are three separate draws. Whether the Tiefling should gain the same
+apparatus is a real design question and nobody has asked it yet.
+
+None of what *is* drawn was filled in at random. The size pair and the ability are
+published *player* choices, and a generated sheet never prints a choice it has
+already made, so the roll stands in for the player. Steering the ability toward
+the class is what keeps the sheet playable, and whether it should be steered
+further is the open question in §9. The two name pools carry the species'
+argument in a single word, although the corpus currently merges them rather than
+choosing between them. And the three bodies are three hells rather than three
+palettes. It carries no book because no Questa says so.
 
 ---
 

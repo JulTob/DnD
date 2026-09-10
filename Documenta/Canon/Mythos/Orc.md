@@ -1,6 +1,15 @@
 # 🐎 Orc
 
-> 📖 **In flow.** 1 of 11 chapters are still proposals. 📜 4 · 📚 3 · 📔 3 · 📖 1
+> 📖 **In flow.** 1 of 12 chapters are still proposals. 📜 5 · 📚 3 · 📔 3 · 📖 1
+
+> - 📕 **inherited from the 2024 rules.** Moving it costs rules compatibility.
+> - 📙 **an aesthetic change.** The same rule wearing our name and look.
+> - 📒 **a rule we changed.** A house rule, and it already cost compatibility.
+> - 📘 **supportive lore.** It holds a rule or a core element up.
+> - 📗 **deep lore.** Design that supports the fantasy rather than a rule.
+> - A book marks a statement only if it can change exclusively through the
+>   Questa / Agora / Decree system. Anything with no Questa and no Decree behind
+>   it carries no book, however settled it feels.
 
 *Wiki entry for the design team. Deep lore and settled direction, not page text.
 Compiled 2026-09-08 from the Orc kit, the species entry, `AtlasNomina/Races/Orc.py`,
@@ -10,6 +19,295 @@ notes.*
 > **In one sentence.** The children of the horizon: the people who were on the
 > plains first, were never asked, and are called raiders for riding the roads
 > that were theirs. Every soul walks a wind path, and if they fall, they carry on.
+
+---
+
+## 📜 0. Rules
+
+*The fixed points, and what we made of them. The books are defined at the head
+of the page.*
+
+### The rules as given
+
+*Each entry is the rule itself, complete enough to resolve at a table. Not a
+summary and not a cross-reference.*
+
+> 📕 **Creature Type** Humanoid. **Size** Medium. **Speed** 30 feet.
+>
+> 📕 **Adrenaline Rush.** You can take the Dash action as a Bonus Action. When
+> you do so, you gain a number of Temporary Hit Points equal to your Proficiency
+> Bonus. You can use this trait a number of times equal to your Proficiency
+> Bonus, and you regain all expended uses when you finish a Short Rest or a Long
+> Rest. Both quantities are the same number: 2 at levels 1 to 4, 3 at 5 to 8, 4
+> at 9 to 12, 5 at 13 to 16, 6 at 17 to 20.
+>
+> 📕 **Darkvision.** You can see in Dim Light within 120 feet as if it were
+> Bright Light. In Darkness within that range you can see as if it were Dim
+> Light: you have Disadvantage on Wisdom (Perception) checks that rely on sight
+> there, and you discern colors in that Darkness only as shades of gray.
+>
+> 📕 **Relentless Endurance.** When you are reduced to 0 Hit Points but not
+> killed outright, you can drop to 1 Hit Point instead. Once you use this trait,
+> you can't use it again until you finish a Long Rest. One use, and a Short Rest
+> does not restore it.
+
+No rule of the Orc has been changed, so this page carries no 📒, and no trait
+wears a house name, so it carries no 📙 either. Two further absences are worth
+stating, because both are correct rather than missing. The Orc has no lineage,
+heritage or ancestry choice: `Orcs/__init__.py` passes no `heritages=`, and
+`Heritages_By_Species` skips any species whose `HERITAGES` is empty, so the Orc
+never reaches `HERITAGES_BY_SPECIES`. And the species grants no language, which
+is the 2024 arrangement: languages come with the background rather than with the
+people.
+
+Four implementation facts sit under those entries.
+
+**The size is never rolled.** `size_options=("Medium",)` is a single option, and
+`_selected_size` in `physiology.py` takes the one option directly instead of
+opening a Dice Bag. Only a species declaring two or more options rolls for it.
+
+**The 120 feet is a floor, not a value.** It is the Orc's own published range,
+twice the 60 that `SpeciesKit/traits.py` holds as the standard, and
+`Set_Orc_Range` writes it as `max(current, 120)`, so a wider darkvision from
+another source is never reduced to it.
+
+**The Disadvantage clause is printed on purpose.** It is not in the 2024
+glossary's Darkvision entry. It follows from Darkness-seen-as-Dim-Light being
+Lightly Obscured, and the shared `Darkvision_Rules` helper prints it because a
+player reading the sheet would otherwise assume darkvision cancels the penalty.
+Both scope clauses ("within that range", "in that Darkness") are load-bearing
+and an earlier wording lost both, which promised unlimited darkvision in true
+Darkness and claimed the Orc could not tell red from blue at noon. It is a
+consequence written out rather than a rule changed, so it takes no 📒.
+
+**Adrenaline Rush prints the number and drops the formula.** The projected entry
+resolves the Proficiency Bonus, so at level 1 it reads "you gain 2 Temporary Hit
+Points. You can do this 2 times", with two chips ("Adrenaline Rush Uses", "Rush
+Temporary HP"). Darkvision carries one chip reading "120 ft" and Relentless
+Endurance one reading "1 / Long Rest". The scaling itself survives on the Tag as
+`adrenaline_rush_use_scaling`, so the record loses nothing, but it leaves the
+printed entry, and `Feature-Text.md` asks for the other form.
+
+### The supportive lore
+
+> 📘 **One culture key is one culture. A species holds a list of keys, never a
+> blend.** Fused keys were rejected by name, markers are atomic, and a people
+> that sits between traditions holds both markers rather than an invented middle
+> one. Culture-marked words are reachable only through the key that owns them,
+> the generic pools are deliberately culture-neutral, and overlap between
+> peoples is modelled by weighted influence rather than by sharing a key.
+> Ratified by **QST-0046.2** and **QST-0046.5**.
+
+> 📘 **`mongol` belongs to the Elf.** It sits on the Elf row of the culture
+> table with `norse`, `rus` and `celt`, and on no other species row. The
+> influence mechanism, not a second owner, is how a people reaches a neighbour's
+> well.
+> Ratified by **QST-0046.2**.
+
+> 📘 **Cultural materials ride the same species row as the gear titles.**
+> `Map_of_Materials._CULTURAL_MATERIALS` is keyed by the same markers as
+> `Map_of_Gear_Titles._CULTURES`, so one row decides both a people's names and
+> its substances, and correcting a species corrects both at once. A species with
+> no row therefore loses both in one stroke.
+> Ratified by **QST-0046.6**.
+
+> 📘 **The metaphysics table holds one organising principle per people, and a
+> species may not be metaphysically silent.** A species either takes an existing
+> principle or brings its own. The requirement is formal; which row the Orc
+> holds is not, because the questa names no row.
+> Ratified by **QST-0053**.
+
+> 📘 **The three trait entries are written in the house pattern**: an italic
+> inspiration line in the project's voice, a blank line, then the rule in the
+> 2024 rulebook's present tense. The Orc is one of the four kits that exemplify
+> it, rewritten out of the earlier "Gained at Level 1. X granted Y" voice, and
+> the agent-prefixed phrasing for Adrenaline Rush was rejected as bloat.
+> Ratified by **QST-0094** and **QST-0062**.
+
+> 📘 **A sheet prints the number the sheet already knows; a chip is a lookup and
+> the prose is the entry.** Feature text is compared against the Feature-Text
+> standards before it lands: explicit breaks, dice notation, resolved numbers,
+> no open-choice language. That is what licenses Adrenaline Rush printing 2
+> instead of "your Proficiency Bonus", and the chips beside the three entries.
+> Ratified by **Decree 0007**.
+
+> 📘 **The reading stays class- and alignment-agnostic.** For prose a player
+> reads, premise may be stated and personality may not be prescribed. This is
+> what holds the Rogue caveat in §7: the raider reading is available and must
+> never be the default.
+> Ratified by **Decree 0007**.
+
+That is the whole of the supportive lore this page can currently mark, and none
+of it is about the Orc in particular: four are laws the page invokes and three
+are conventions it obeys. Everything below rests on the canon documents, on the
+species entry itself and on this page's own decisions log, which are not the
+Questa / Agora / Decree system, so it carries no book until a Questa says
+otherwise.
+
+### Unratified, and what each one needs
+
+*Stated as design, not as law. Each line names the Questa that would ratify it.*
+
+- **The wind path as the metaphysic.** A route each soul walks rather than a
+  substance it is made of, and the only route among the five peoples the table
+  names. It rests on one line of that table in `Dragons-and-the-Overcoming.md`
+  and on the entry's own prose. QST-0053 binds the table but names no row.
+  Needs a Questa ratifying the metaphysics table row by row, and the same
+  Questa would say what the five other peoples hold.
+- **The Orc's culture keys.** None assigned. The code genuinely has no Orc row
+  in `_CULTURES`, and neither QST-0046.2's species table nor the canon brief in
+  `Cultural-Inspirations.md` mentions the Orc at all, so the omission is in both
+  places and no Questa raises it. Needs an Orc row as a sibling of QST-0046.4,
+  deciding the keys or ruling the Orc deliberately unkeyed.
+- **Cultural materials: none of the Orc's own.** Horn, sinew and felt-bound iron
+  sit under `mongol`. The Orc does hold a trade-theme materials row of its own
+  ("hide-bound iron", "scarred oak", "rough-forged steel"), so this is a missing
+  culture axis and not a missing people. By QST-0046.6 the culture-key Questa
+  above decides it in the same stroke, so it needs no Questa of its own.
+- **The name file's fused inspirations.** `AtlasNomina/Races/Orc.py` heads its
+  list with eight: Britain, `Skales`, the Celts, the Vikings (`Bikings`), cowboy
+  America, Native Americans, pre-Columbian American languages, and the Boyz of
+  40k. The header is written in the file's own orthography, which is why two of
+  the eight read as misspellings. The law against fusion is ratified; its
+  application to this file is decided nowhere and the file is untouched. Needs a
+  Questa choosing between splitting the eight into keys and cutting the header.
+- **The phonetic rule as a design that survives any key.** The file states it as
+  *"Big Fangs: 'S' wuld bite the tonke, 'z' inztead"*, with the substitutions
+  under it. Nothing in the formal system mentions it. Needs the same name-file
+  Questa, ratifying the rule as kept before deciding what happens to the header
+  around it.
+- **The steppe by temper.** The horse, the eagle, the long ride, the standard
+  that is not a flag, the epic without a book, and the class pages' readings
+  (the berkutchi's golden eagle, the *nerge* ring-hunt, the manaschi's
+  half-million lines, the yak-tail tug, the morin khuur). The word "Orc" does
+  not appear once in the Agora's Dialogs, and the only occurrence of "steppe" in
+  the Questae is inside `norse_steppe_celtic`, the fused key that was rejected.
+  Needs a Questa deciding whether these are the Orc's canon or wells a DM may
+  reach for, which the culture-key Questa settles either way.
+- **The history: nobody asked.** The plains first, the dwarves for the gold
+  underneath, the humans to call it discovery, the elves with trade and curses.
+  It rests on the species entry and the three other canon pages. Needs a
+  species-lore Questa ratifying the origin account and its cross-reads as canon
+  rather than as shipped prose.
+- **The exonym carried, not reclaimed.** "You are called raiders instead of
+  riders" is the species' wound, and unlike the Barbarian's it is not taken
+  back. Needs the same species-lore Questa, stating this plainly so later text
+  cannot quietly reclaim it.
+- **The four storm prayers, and their disagreement.** Two of the four
+  contradict each other on purpose (does the rider master the storm or follow
+  it), which is the Zealot against the Berserker. No Questa records the lines or
+  the design. Needs a Questa ratifying the species prayer pools, which would
+  also settle whether a people with no culture key should be short a whole
+  source in the ledger.
+- **The rule about parallels.** The Tiefling canon forbids naming a parallel or
+  writing a line traceable to one real group. Death of the Author, which both
+  **Decree 0006** and **Decree 0007** carry, decides lore-dumping rather than
+  traceability, and no decree extends the Tiefling rule to another people. Needs
+  a Questa promoting it to a project-wide decree, with the Orc named.
+- **The species entry's voice.** The file is second person throughout except for
+  one first person plural clause and the sentence after it ("we orcs carry our
+  own through the storm. If we fall, we carry on"), and QST-0094 files the Orc
+  among the seven kits that address the reader as "you" while leaving the
+  convention open. The decisions log's "the entry speaks as 'we'" therefore
+  states more than the Questa does. Needs the Questa that settles QST-0094's
+  open convention, one description voice for all ten peoples or two by design.
+- **The class table and the backgrounds list.** The Ranger reading, the Sea
+  Druid as the happiest pairing, the pact as the first consent, the Wizard as
+  the first rider to write the epic down, the Steel Defender as the first horse
+  an Orc never had to bury, and the whole of §8. All of it rests on the canon
+  class pages and this page. Needs a Questa ratifying the readings as design
+  record, or filing them as DM-facing suggestion with no claim on canon.
+- **The Repairs line.** "None found in the Orc's own text" is true of the three
+  defects QST-0062 names: `Orcs/resolution.py` and `Orcs/traits.py` carry no
+  "granted", no "Gained at Level", no "The X carries N" and no "this Character".
+  It still reads against the two Questae as filed, because QST-0062 lists the
+  Orc among five kits using a clipped agentless notation and QST-0051 lists
+  `Orcs/` under the same defect, and neither has been closed for this kit. One
+  real gap is left, and it is the fourth implementation fact above:
+  `Feature-Text.md` gives the resolved-number form as "4 times (equal to your
+  Proficiency Bonus)" and the Gnome kit writes it that way, while Adrenaline
+  Rush drops the parenthetical as the Aasimar kit does. Close QST-0062 and
+  QST-0051 for the Orc kit and settle which of the two forms is the house one,
+  and the line can then read "none" with backing instead of against it.
+
+### What the rules force, and what we chose
+
+The set is the demanding thing, not any one trait. The rules force a body with
+no lineage and no choice to make: one size, 30 feet, a Dash it can spend as a
+Bonus Action for a small cushion of Temporary Hit Points, sight at twice the
+standard darkvision range, and one refusal to fall at 0 Hit Points that comes
+back only after a Long Rest. Three traits that no rulebook connects.
+
+Our answer is **the wind path**: a route each soul walks, rather than a
+substance it is made of. On the peoples table the Dwarf is a metal, the
+Celestial an Ideal, the Elf a dream, the Dragon a self. The Orc is the one whose
+organising idea is a road. *"Every soul walks a wind path, and we orcs carry our
+own through the storm. If we fall, we carry on."*
+
+**What that buys beyond the rule.** The three traits stop being three numbers
+and become one body shaped for the long ride: the burst that gets a rider clear
+and gives them something to spend, the watch that does not end at nightfall, and
+the refusal to be left behind. Relentless Endurance is not a survival gadget, it
+is the entry's last sentence turned into a rule, and prose and mechanic are
+tied there as tightly as anywhere on the roster. The route also carries the
+quarrel. Nothing in the metaphysic is a possession, so the fencing of the plains
+is a wrong done to a people who never claimed to own them, and the entry can
+accuse without making a property claim. That is what keeps the history readable
+as grievance rather than as title. And because a route can be followed or
+mastered, the two storm prayers that disagree are a design, not a slip: the
+Berserker carried by the storm against the Zealot who commands it. The Primal
+Tradition's practice ("nothing is written; it is walked, and shown, and walked
+again") is the same idea in an Order's mouth, which is why an Orc Wizard writing
+the epic down is a transgression and not a career change.
+
+⚠️ **What breaks if a later hand takes the wind path for decoration.**
+Relentless Endurance loses its only explanation and reads as a free extra life.
+The three traits fall apart, and the next hand to touch them has no reason to
+keep Darkvision at 120 rather than trim it to the standard 60. The plains
+history turns into a land claim, which is the one reading the entry was written
+to avoid, and the rule about parallels gets harder to keep. The two storm
+prayers stop disagreeing on purpose and look like a drafting accident somebody
+should tidy. The Barbarian, Wizard, Druid and Warlock readings all lose their
+hinge at once. That the wind path is unratified is an argument for writing the
+Questa, not for treating the route as free.
+
+### The variable detail
+
+Drawn per character, and none of it ratified: the name, the gear title and the
+material, and, for a Cleric only, the prayer.
+
+**The name.** It is composed from hand-written pools in
+`AtlasNomina/Races/Orc.py`: a given-name list, a surname list, and onset, nuclei
+and coda syllables. The phonetic rule (Th to z, S to Z, Gue to ke, ou to u, J to
+X, h to j, and Va, Ve and Vi to B) is an authoring rule rather than a runtime
+transformation, already baked into every syllable in the file. The phonetics are
+physiology rather than flavour: big fangs, so an S would bite the tongue and a Z
+takes its place, and every substitution follows from a mouth.
+
+**The gear and the material.** Both draw on two axes the Orc holds and one it
+does not. It holds `savage` on the title side, with its own nouns
+("Skullsplitter", "Bonebreaker", "Boar Spear") and epithets ("the Red Hour",
+"the Wild"), and a trade row on the material side ("hide-bound iron", "scarred
+oak", "rough-forged steel"). What it has no row for is the culture axis, so its
+Longsword takes its noun from the generic pool, which is culture-neutral by
+design and not by omission (QST-0046.2), where a Dwarf reaches "Toledo Blade";
+and `cultural_materials` returns nothing for it at all, because it reads
+`influences_of`, which is built from the culture markers. The gap therefore
+shows in the noun rather than in the whole title, which is why it is easy to
+miss on a sheet. Where an Orc does reach a culture it comes from a class row and
+never from the people: the Barbarian row carries `sword_and_sorcery`, whose
+influence reaches `mongol` at weight 1, which is the neighbour mechanism working
+exactly as the first book describes it.
+
+**The prayer.** The four storm lines are Cleric lines. `prayer_ledger` assembles
+the defaults, the Domain's lines, the species' own and, for a people with keys,
+the culture's, and `pick_prayer` draws one from the whole assembly. The Orc has
+no species-by-Domain entry and no culture keys, so the four are the only lines
+the people contributes, and the missing row costs it a third thing here as well.
+The four are two pairs, and one pair disagrees on purpose.
+
+None of it is arbitrary, and none of it carries a book, because no Questa says
+so.
 
 ---
 

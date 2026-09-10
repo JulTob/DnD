@@ -15,7 +15,7 @@ make. The Canon's first rule holds throughout: never explain it on the page.
 
 ---
 
-*Folder size: 49 pages, 421 marked chapters, about 148k words, on branch `Julio_Cl/fantasy-worldbuilding-analysis-4241c5` (pull request 5).*
+*Folder size: 49 pages, 430 marked chapters, about 180k words, on branch `Julio_Cl/fantasy-worldbuilding-analysis-4241c5` (pull request 5).*
 
 ## 📔 How to read this folder
 
@@ -245,7 +245,7 @@ it under the old name.
    arbitrary even though it carries no book.
 
 [Aasimar](Aasimar.md) is the worked reference. Read its chapter 0 before writing
-another.
+another. All ten peoples now carry one.
 
 ### How a chapter 0 is verified
 
