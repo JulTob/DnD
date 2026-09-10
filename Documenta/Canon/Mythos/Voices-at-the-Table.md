@@ -1,6 +1,6 @@
 # 🎙 Voices at the Table: five archetypes read one sheet
 
-> 📚 **Record.** A report, an index or a working document, not a specification.
+> 📜 **Settled.** No chapter is still in flow. 📜 0 · 📚 0 · 📔 7
 
 *A device the brief invited: "agents that embody the archetype, with a personal
 unique voice." One generated character, read aloud by five voices whose

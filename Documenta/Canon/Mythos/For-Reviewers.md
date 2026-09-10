@@ -1,6 +1,6 @@
 # 👁 For Reviewers: how to read this folder
 
-> 📚 **Record.** A report, an index or a working document, not a specification.
+> 📜 **Settled.** No chapter is still in flow. 📜 1 · 📚 2 · 📔 4
 
 *Orientation for anyone brought in to review these pages: a person, or another
 model. Read this first. It states what the folder is, the rules the pages were

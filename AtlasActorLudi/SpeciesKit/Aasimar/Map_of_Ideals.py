@@ -94,7 +94,7 @@ IDEALS = {
 			form="a star of many points, set like a compass rose",
 			metal="verdigris",
 			gem="aquamarine",
-			tell="It twinkles when you run, and harder when you fly.",
+			tell="It twinkles when you run, and beats when you fly.",
 			muse="",
 			),
 		Ideal(

@@ -2,7 +2,7 @@
 
 > 🎯 The fourth thing on every sheet
 >
-> 📜 **Settled.** No chapter is still in flow.
+> 📜 **Settled.** No chapter is still in flow. 📜 1 · 📚 2 · 📔 5
 >
 > - 📕 **inherited from the 2024 rules.** Moving it costs rules compatibility.
 > - 📙 **an aesthetic change.** The same rule wearing our name and look.

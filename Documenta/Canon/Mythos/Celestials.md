@@ -1,6 +1,6 @@
 # 🕊️ Celestials
 
-> 📜 **Settled.** No chapter is still in flow. 📜 0 · 📚 1 · 📔 9
+> 📜 **Settled.** No chapter is still in flow. 📜 2 · 📚 1 · 📔 9
 
 *Wiki entry for the design team, written for the NPC generator first. Deep
 lore, never page text: nothing here is explained on a sheet, and a Character
@@ -228,7 +228,76 @@ keys:
 
 ---
 
-## 📚 10. Pointers
+## 📜 10. Observation: the stars, and the keeping of Ideals
+
+**To observe a Celestial means two things at once, and the setting should never
+separate them.** To observe is to watch, as one watches a star. To observe is
+also to keep, as one observes a holy day or a rule. Nobody watches a Celestial
+without keeping something, and nobody keeps an Ideal without watching where it
+went.
+
+**Astrology here is not divination. It is observation.** The Descents are the
+sky and always were: Polaris, Vega, Sirius and Altair among the Stars; Lucifer,
+Hesperus, Fosforos and Eosforus among the Planetars, which are the wandering
+stars under their Greek names. An astrologer in this world is not reading omens
+off indifferent lights. They are watching beings who are up there, who act, and
+who can be seen to act.
+
+This costs the setting nothing and settles a question that cannot be settled any
+other way. There is no line to draw between astrology and Celestials because
+there was never a difference.
+
+**For an Aasimar, a chart is a genealogy that moves.** The Descent names an
+ancestor and hedges it: *you may belong to its lineage*. A lineage read off the
+sky is exactly the kind nobody can confirm, and exactly the kind everybody
+checks.
+
+Two backgrounds already speak this language and did not know they were being
+literal. **Destined** carries *Born Under a Star*. **Fated** carries
+*Star-Crossed*. Under this reading the comic twins turn out to be the only two
+who were telling the plain truth.
+
+**Virtue is a Celestial's power, and it is collective.** A Celestial is strong
+in proportion to how much goodness its Ideal is held to have, gathered across
+everyone who holds it. If most people think Mercy is good, Mercy is mighty.
+Demons run the same engine in the other direction, where the currency is Vile
+rather than Virtue.
+
+Two consequences follow and neither should be stated on a page a player reads.
+**Goodness itself, and the Greater Good, are Celestials in their own right**, at
+the power of Plato's Sun. And Celestial power is unrelated to divine power,
+since gods hold Domains and Celestials hold Virtue. A god is an ally to the
+degree its own Virtue runs high, which is a friendship of accounting rather than
+of kind.
+
+**The Greater Good is the commonest goal of a Celestial antagonist**, and the
+trap is always the same shape: the Greater Good turns out to be *this specific
+Ideal*, pressed further.
+
+---
+
+## 📜 11. How a Celestial is defined, and how a new one is born
+
+**A Celestial's meaning never drifts.** Justice does not quietly become
+something else while nobody is looking. What happens instead is that **a new
+definition makes a new Celestial**.
+
+**The vaguer the Ideal, the greater the power.** Justice is unchanging and
+broad, and therefore mighty. **Retribution** and **Compensation** stand in the
+Lineage of Justice: more exact, more complex, and weaker for it. Precision costs
+power, because power is collective and few people hold a precise thing.
+
+**Concepts merge, and their lineages merge with them.** Freedom and Truth
+together give **Exploration**, and the new Celestial descends from both.
+
+**This is what the Aasimar's two Ideals are.** A spark drawn from two Ideals is
+not a coincidence of the generator. It is a descent from a merged lineage, which
+is why one Ideal lends the aureola its form and the other lends its colour: two
+ancestors, both showing.
+
+---
+
+## 📚 12. Pointers
 
 - **[Aasimar.md](Aasimar.md)**: the mortal end.
 - **Tiefling page**: the other mortal end, and the shared priesthood.
@@ -236,22 +305,3 @@ keys:
 - **Goliath page**: the war for the heavens; Rhodes.
 - **Bard page**: the Muses' class; Euterpe open.
 - **Cleric page**: the triple "Maybe" as the mortal register for Celestials.
-
-
-📔 Observation: the stars, and the keeping of Ideals
-
-To observe a Celestial means two things at once, and the setting should never separate them. To observe is to watch, as one watches a star. To observe is also to keep, as one observes a holy day or a rule. Nobody watches a Celestial without keeping something, and nobody keeps an Ideal without watching where it went.
-
-Astrology here is not divination. It is observation. The Descents are the sky and always were: Polaris, Vega, Sirius and Altair among the Stars; Lucifer, Hesperus, Fosforos and Eosforus among the Planetars, which are the wandering stars under their Greek names. An astrologer in this world is not reading omens off indifferent lights. They are watching beings who are up there, who act, and who can be seen to act.
-
-This costs the setting nothing and settles a question that cannot be settled any other way. There is no line to draw between astrology and Celestials because there was never a difference.
-
-For an Aasimar, a chart is a genealogy that moves. The Descent names an ancestor and hedges it: you may belong to its lineage. A lineage read off the sky is exactly the kind nobody can confirm, and exactly the kind everybody checks. An Aasimar who follows the charts is not superstitious. They are checking on family, and the family is visible most nights.
-
-Two backgrounds already speak this language and did not know they were being literal. Destined carries Born Under a Star. Fated carries Star-Crossed. Under this reading the comic twins turn out to be the only two who were telling the plain truth.
-
-Virtue is a Celestial's power, and it is collective. A Celestial is strong in proportion to how much goodness its Ideal is held to have, gathered across everyone who holds it. If most people think Mercy is good, Mercy is mighty. Demons run the same engine in the other direction, where the currency is Vile rather than Virtue.
-
-Two consequences follow and neither should be stated on a page a player reads. Goodness itself, and the Greater Good, are Celestials in their own right, at the power of Plato's Sun. And Celestial power is unrelated to divine power, since gods hold Domains and Celestials hold Virtue. A god is an ally to the degree its own Virtue runs high, which is a friendship of accounting rather than of kind.
-
-The Greater Good is the commonest goal of a Celestial antagonist, and the trap is always the same shape: the Greater Good turns out to be this specific Ideal, pressed further.

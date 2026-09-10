@@ -1,6 +1,6 @@
 # 📚 Mythos
 
-> 📚 **Record.** A report, an index or a working document, not a specification.
+> 📜 **Settled.** No chapter is still in flow. 📜 1 · 📚 2 · 📔 9
 
 *The design team's wiki for the setting's fantasy: what each people and each
 class is in this project, read against the code, the canon, the backgrounds and
@@ -15,7 +15,7 @@ make. The Canon's first rule holds throughout: never explain it on the page.
 
 ---
 
-*Folder size: 49 pages, 430 marked chapters, about 180k words, on branch `Julio_Cl/fantasy-worldbuilding-analysis-4241c5` (pull request 5).*
+*Folder size: 49 pages, 434 marked chapters, about 184k words, on branch `Julio_Cl/fantasy-worldbuilding-analysis-4241c5` (pull request 5).*
 
 ## 📔 How to read this folder
 

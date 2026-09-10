@@ -1,6 +1,6 @@
 # 🧰 Repairs Ledger: every defect the reading found, in one table
 
-> 📚 **Record.** A report, an index or a working document, not a specification.
+> 📜 **Settled.** No chapter is still in flow. 📜 0 · 📚 0 · 📔 8
 
 *Companion to the Mythos pages. Each row was observed in generated output or
 read in source on 2026-09-08 in this worktree; line numbers are from that day.

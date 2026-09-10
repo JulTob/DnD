@@ -1,6 +1,6 @@
 # ❓ Proposed questions for the Agora
 
-> 📚 **Record.** A report, an index or a working document, not a specification.
+> 📜 **Settled.** No chapter is still in flow. 📜 0 · 📚 0 · 📔 2
 
 *The Mythos pages end in decisions that only the project owner can take. The Agora Protocol
 says a decision enters the project as a row in `Agora/Questions.md`, becomes a
