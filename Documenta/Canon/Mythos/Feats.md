@@ -175,8 +175,10 @@ is the standard the rest should have met.
 | **Dragon Cult Initiate** | Dragon's Tongue is half implemented: the "if you already know Draconic" branch never fires. |
 
 **A defect is not a house rule.** None of these carries 📒, on the precedent set
-on the Goliath page: a dropped benefit with no stated intent is a bug, and it
-belongs on the Repairs Ledger.
+on the Goliath page: a dropped benefit with no stated intent is a bug. Each now
+has its own open Questa: QST-0096 (Blessed and Druidic Warrior), QST-0097 (Magic
+Initiate), QST-0098 (the four General feats), QST-0100 (Dragon Cult Initiate).
+Resilient was already QST-0067.
 
 ---
 
@@ -240,6 +242,9 @@ improvement available anywhere in the project.
 ---
 
 ## 📚 8. Pointers
+
+**Fifteen Questae opened from this page**, one per issue: QST-0095 to QST-0109.
+They are listed in section F of the Repairs Ledger.
 
 - **Backgrounds-Written**: the backgrounds these Origin feats belong to.
 - **Repairs-Ledger**: the defects in section 4 and 6.
