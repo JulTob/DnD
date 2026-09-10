@@ -46,6 +46,7 @@ summary and not a cross-reference.*
 > it grants one). No other condition is covered, and the Disadvantage the
 > Frightened condition itself imposes on ability checks and attack rolls is not
 > touched. Unlimited uses, no recharge.
+> > 📘 _You were brave enough to leave home. You can handle this._
 >
 > 📒 **Halfling Nimbleness.** You can move through the space of any creature that
 > is at least one size larger than you, though you can't stop there. For a Small
@@ -54,6 +55,7 @@ summary and not a cross-reference.*
 > and it is those rules, not this trait, that forbid ending a move in another
 > creature's space. No action, unlimited uses, no recharge. The published trait
 > reads "a size larger"; the difference is set out below.
+> > 📘 _This is just like child's play. Try not to get caught._
 >
 > 📕 **Luck.** When you roll a 1 on the d20 of a D20 Test, you can roll the die
 > again, and you must use the new roll. A D20 Test is any attack roll, ability
@@ -61,6 +63,7 @@ summary and not a cross-reference.*
 > total of 1, and it is the d20 only, never a damage die. The reroll is optional
 > and its result is binding: once the die is rerolled the 1 cannot be kept.
 > Unlimited uses, no per-turn and no per-round cap, no recharge of any kind.
+> > 📘 _Halflings are said to be the luckiest people alive._
 >
 > 📕 **Naturally Stealthy.** You can take the Hide action even when the only
 > thing concealing you is a creature that is at least one size larger than you.
@@ -73,6 +76,7 @@ summary and not a cross-reference.*
 > (Perception) check, and you stop being hidden as soon as you make a sound louder
 > than a whisper, an enemy finds you, you make an attack roll, or you cast a spell
 > with a Verbal component. Unlimited uses, no recharge.
+> > 📘 _You read in your stories that halflings can become invisible._
 
 The Halfling has no Darkvision, no ability score increase and no granted
 language. The 2024 rules put ability scores and languages in the Background. In

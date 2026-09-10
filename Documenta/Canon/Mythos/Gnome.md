@@ -45,10 +45,12 @@ summary and not a cross-reference.*
 > Bright. (The Disadvantage sentence is not in the 2024 glossary's Darkvision
 > entry. It is the Lightly Obscured rule spelled out, because Darkness seen as
 > Dim Light is Lightly Obscured, so printing it adds nothing to the rule.)
+> > 📘 _The Fae are said to be part of the Dream. Maybe Gnomes still carry some of it._
 >
 > 📕 **Gnomish Cunning.** You have Advantage on Intelligence, Wisdom, and
 > Charisma saving throws. There is no trigger, no use limit and no recharge: the
 > Advantage applies to every one of those saves.
+> > 📘 _Curiosity got your people through worse than a spell, and it still does._
 >
 > 📕 **Gnomish Lineage.** You are part of a lineage that grants you supernatural
 > abilities. Choose one option: Forest Gnome or Rock Gnome. Whichever you choose,
@@ -64,6 +66,7 @@ summary and not a cross-reference.*
 > to 4, 3 at 5 to 8, 4 at 9 to 12, 5 at 13 to 16, 6 at 17 to 20), and you regain
 > all expended uses when you finish a Long Rest. You can also cast it using any
 > spell slots you have.
+> > 📘 _You were not supposed to go into the woods, but the Fey felt closer there._ (proposed)
 >
 > 📙 **Rock Gnome Lineage** [renames **Gnomish Lineage**, its **Rock Gnome**
 > option]: you know the Mending and Prestidigitation cantrips. In addition, you
@@ -75,6 +78,7 @@ summary and not a cross-reference.*
 > Action to activate the device while touching it. You can have three such
 > devices in existence at a time. Each one lasts 8 hours from its creation, or
 > until you dismantle it with a touch as a Utilize action.
+> > 📘 _You learned early that anything could be taken apart and improved, and somewhere along the way you learned to do it with a word instead of a screwdriver._
 
 **No rule of the Gnome has been changed, so this page carries no 📒.** One line
 looks like a house rule and is not. `AtlasLudus/Map_of_Languages.py:1388` reads

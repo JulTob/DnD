@@ -43,6 +43,7 @@ summary and not a cross-reference.*
 > range you can see as if it were Dim Light: within that Darkness you have
 > Disadvantage on Wisdom (Perception) checks that rely on sight, and you discern
 > colors there only as shades of gray.
+> > 📘 _The mines taught our eyes to work where the lamps do not reach._ (proposed)
 >
 > 📕 **Dwarven Resilience.** You have Resistance to Poison damage (you take half
 > damage from it, rounded down, and the halving applies after all other modifiers
@@ -50,12 +51,14 @@ summary and not a cross-reference.*
 > end the Poisoned condition. The Advantage is on the condition, not on poison as
 > a damage type: it covers both the save to avoid becoming Poisoned and any save
 > to end it. No limit on uses, no recharge.
+> > 📘 _Every dwarf grows up tasting the mine air and the smelter's fumes. What did not kill your people taught them._ (proposed)
 >
 > 📕 **Dwarven Toughness.** Your Hit Point maximum increases by 1, and it
 > increases by 1 again whenever you gain a level. At Level N your Hit Point
 > maximum is therefore N higher than it would otherwise be (+1 at Level 1, +5 at
 > Level 5, +20 at Level 20). This stacks with, and is calculated separately from,
 > the Constitution modifier you add per level.
+> > 📘 _A dwarf is built like a ledger: every year adds a line, and none is ever struck out._ (proposed)
 >
 > 📕 **Stonecunning.** As a Bonus Action, you gain Tremorsense with a range of 60
 > feet for 10 minutes. You must be on a stone surface or touching a stone surface
@@ -63,6 +66,7 @@ summary and not a cross-reference.*
 > Bonus Action a number of times equal to your Proficiency Bonus (2 at Levels
 > 1-4, 3 at 5-8, 4 at 9-12, 5 at 13-16, 6 at 17-20), and you regain all expended
 > uses when you finish a Long Rest.
+> > 📘 _Lay a hand on the stone and listen. The mountain still keeps our accounts._ (proposed)
 
 No rule of the Dwarf has been changed, so this page carries no 📒. All four
 traits also keep their published names, so there is no 📙 either: the Dwarf is

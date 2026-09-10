@@ -40,16 +40,19 @@ summary and not a cross-reference.*
 > Bonus, and you regain all expended uses when you finish a Short Rest or a Long
 > Rest. Both quantities are the same number: 2 at levels 1 to 4, 3 at 5 to 8, 4
 > at 9 to 12, 5 at 13 to 16, 6 at 17 to 20.
+> > 📘 _The winds of your storm are hard to catch, rider. Run, be free, and run._
 >
 > 📕 **Darkvision.** You can see in Dim Light within 120 feet as if it were
 > Bright Light. In Darkness within that range you can see as if it were Dim
 > Light: you have Disadvantage on Wisdom (Perception) checks that rely on sight
 > there, and you discern colors in that Darkness only as shades of gray.
+> > 📘 _The ride does not end at nightfall, and neither does your watch._ (proposed)
 >
 > 📕 **Relentless Endurance.** When you are reduced to 0 Hit Points but not
 > killed outright, you can drop to 1 Hit Point instead. Once you use this trait,
 > you can't use it again until you finish a Long Rest. One use, and a Short Rest
 > does not restore it.
+> > 📘 _Do not fall, rider! Be strong! Carry on!_
 
 No rule of the Orc has been changed, so this page carries no 📒, and no trait
 wears a house name, so it carries no 📙 either. Two further absences are worth

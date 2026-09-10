@@ -69,10 +69,12 @@ summary and not a cross-reference.*
 > on Strength checks and your Speed increases by 10 feet (45 feet, from the
 > Goliath's 35-foot base). Once you use this trait, you can't use it again until
 > you finish a Long Rest.
+> > 📘 _For a few minutes you are the size your ancestors never stopped being._
 >
 > 📕 **Powerful Build.** You have Advantage on any ability check you make to end
 > the Grappled condition, and you count as one size larger when determining your
 > carrying capacity.
+> > 📘 _You were made smaller than your ancestors, never lighter._
 
 **Two of the six ancestries lost the word that makes them optional, and nobody
 chose it.** Fire's Burn and Frost's Chill are printed as mandatory: the 2024 rule

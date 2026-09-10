@@ -35,16 +35,14 @@ of the page.*
 *Each entry is the rule itself, complete enough to resolve at a table. Not a
 summary and not a cross-reference.*
 
-> 📕 **Creature Type** Humanoid. **Size** Medium or Small, chosen when you make
-> the character. **Speed** 30 feet.
+> 📕 **Creature Type** Humanoid.   
+> 📕 **Size** Medium or Small, chosen when you make the character.   
+> 📕 **Speed** 30 feet.   
 >
-> 📕 **Darkvision.** You can see in Dim Light within 60 feet as if it were Bright
-> Light. In Darkness within that range you see as if it were Dim Light: you have
-> Disadvantage on Wisdom (Perception) checks that rely on sight, and you discern
-> colors there only as shades of gray.
+> 📕 **Darkvision.** You can see in Dim Light within 60 feet as if it were Bright Light. In Darkness within that range you see as if it were Dim Light: you have Disadvantage on Wisdom (Perception) checks that rely on sight, and you discern colors there only as shades of gray.
+> > 📘 _Darkness cannot hide the truth from you._
 >
-> 📕 **Celestial Resistance.** You have Resistance to Necrotic damage and Radiant
-> damage.
+> 📕 **Celestial Resistance.** You have **Resistance** to **Necrotic** damage and **Radiant** damage.
 >
 > 📕 **Healing Hands.** As a Magic action, you touch a creature and roll a number
 > of d4s equal to your Proficiency Bonus. The creature regains a number of Hit

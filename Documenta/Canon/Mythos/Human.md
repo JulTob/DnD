@@ -61,6 +61,7 @@ summary and not a cross-reference.*
 > meet its prerequisites. The generator draws the feat and prints it under its
 > own name, with the full feat rules in its own entry; the trait's own name never
 > appears on the sheet.
+> > 📘 _Somebody, somewhere along the road, taught you one more thing. You did not always ask what it would cost._ (proposed)
 
 Nothing in the Human is renamed, so this page carries no 📙. One rule is changed,
 so it carries one 📒.
