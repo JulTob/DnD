@@ -43,14 +43,17 @@ summary and not a cross-reference.*
 > > 📘 _Darkness cannot hide the truth from you._
 >
 > 📕 **Celestial Resistance.** You have **Resistance** to **Necrotic** damage and **Radiant** damage.
+> > 📘 _Whatever burns or rots reaches you and finds nothing to take hold of._
 >
 > 📕 **Healing Hands.** As a Magic action, you touch a creature and roll a number
 > of d4s equal to your Proficiency Bonus. The creature regains a number of Hit
 > Points equal to **the total rolled**. Once you use this trait, you can't use it
 > again until you finish a Long Rest.
+> > 📘 _Something in you remembers what a body is supposed to feel like, and lends it out._
 >
 > 📕 **Light Bearer.** You know the Light cantrip. Charisma is your spellcasting
 > ability for it.
+> > 📘 _Your aureola never fully goes out, not even when you'd rather it did._
 >
 > 📕 **Celestial Revelation** (level 3). You can transform as a Bonus Action,
 > using one of the three options below and **choosing the option each time you
@@ -59,9 +62,11 @@ summary and not a cross-reference.*
 > Rest. Once on each of your turns before the transformation ends, you can deal
 > extra damage equal to your Proficiency Bonus to one target when you deal damage
 > to it with an attack or a spell, of the type named by the option you chose.
+> > 📘 _For a little while, the thing you usually hide stops hiding._
 >
 > 📙 **Talarian Wings** [renames **Heavenly Wings**]: until the transformation
 > ends you have a Fly Speed equal to your Speed. Radiant.
+> > 📘 _You spread your wings to show your true self._
 >
 > 📕 **Inner Radiance**: for the duration you shed Bright Light in a 10-foot
 > radius and Dim Light for an additional 10 feet, and at the end of each of your
