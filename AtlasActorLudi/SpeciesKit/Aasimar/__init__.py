@@ -21,6 +21,12 @@ Player_Handbook_2024(
 		"Medium",
 		"Small",
 		),
+	# The page fixes the proportion at nine Medium to one Small.  Without this
+	# the draw was even, which made every tenth Aasimar a coin flip instead.
+	size_weights=(
+		90,
+		10,
+		),
 	speed=30,
 	description=(
 		"""Angels, Muses, Constellations, Celestials... different cultures call your people by different names. Truth is, you never lived among them. You are mortal, and you are part of one of the many cultures of the world. But you also have something in you from the Higher Planes. Your aspect resembles your mortal side, but you also have tells from your heavenly origin: Talaria, small vestigial wings, and Aureola, a barely perceptible shining halo around your head. You can hide them or empower them depending on your emotional state.

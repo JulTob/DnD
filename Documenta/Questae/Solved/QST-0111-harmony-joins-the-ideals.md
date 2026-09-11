@@ -2,8 +2,8 @@
 
 - **Type:** code / lore
 - **Priority:** 🟠 high
-- **Status:** Open
-- **Owner:** unclaimed
+- **Status:** Solved
+- **Owner:** Claude
 - **Route to:** Technical Team · Lorekeeper · Julio
 - **Related:** QST-0110 · QST-0050 · `Documenta/Canon/Mythos/Aasimar.md` §0 · `AtlasActorLudi/SpeciesKit/Aasimar/Map_of_Ideals.py`
 
@@ -52,3 +52,20 @@ this Questa.
    take brass while its aureola glows like quartz.
 4. `Ideal.muse` is allowed to be empty without that meaning the entry is
    unfinished.
+
+## ✅ Resolution
+
+1. **Harmony is in**, exactly as the page states it: *rotating triangles with
+   perfect proportions*, brass, quartz, *It stutters when you are in pain, of
+   body or of mind.*, Lyric & Flute (Euterpe). Over 4000 marks it is drawn as
+   often as the other eight.
+2. **Nothing counts the Ideals.** `WarlockKit` already read the map rather than a
+   number, so the Celestial Warlock can now be signed by the Muse of Harmony with
+   no change. No test, module or page asserts a total. The page's own list in §2
+   gained Harmony and lost *"All eight"*; §0's draw lists gained brass and quartz.
+3. **An empty `muse` is a statement, not a to-do.** The field's comment now says
+   so: the Muses are the principal Celestials of their kind, not the whole set,
+   so an Ideal may answer to none of them. No Ideal is empty today.
+
+The page's §0 table is the authority for every column. `Map_of_Ideals.py` was
+read back against it row by row after the change.

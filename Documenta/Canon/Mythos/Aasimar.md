@@ -143,7 +143,7 @@ Added Celestial subtype, as that is the core of the fantasy. Internally, an Aasi
 > > 📘 _Be not afraid, for you bear a star._
 >
 > 📙 **Talarian Wings** [renames **Heavenly Wings**]: You spread your talaria into fully grown wings. Until the transformation ends you have a **Fly Speed** equal to your **Speed**. Your extra damage is **Radiant**.
-> > 📘 _This is your true self._ 
+> > 📘 _Something in you answers the sky's calling._ 
 >
 > 📕 **Inner Radiance**: Your eyes shine brightly and your halo grows into a brigh aurora. For the duration you shed Bright Light in a 10-foot radius and Dim Light for an additional 10 feet, and at the end of each of your turns each creature within 10 feet of you takes **{PB} Radiant damage**. Your extra damage is **Radiant**.
 > > 📘 _Your inner spark becomes an aurora of pure light._
@@ -169,7 +169,7 @@ Added Celestial subtype, as that is the core of the fantasy. Internally, an Aasi
 For the Celestials themselves, their Virtue, their plans and their use as antagonists, see (Celestials)[Celestials.md].
 
 ### 📗📘 The Cultural references
-- `Athens`
+- Athens
    - the pensive philosopher.
    - Plato's Cave and Ideals.
    - Daedalus and Icaros.
@@ -177,70 +177,50 @@ For the Celestials themselves, their Virtue, their plans and their use as antago
    - The Atlantis Mythos.
    - Naval weaponry.
    - Togas and greek clothing.
-   - Classic greek aesthetics. 
+   - Classic greek aesthetics.
+   - Muses
 
-- 
-### Unratified, and what each one needs
+- Vatican
+   - Neoclassic
+   - Dogma
+   - Authority and Calling
+   - Artistic depiction of Angels
+   - Thrones, Planetars, Angels
 
-- **Three markers held as a subculture, and no host-culture draw.** 
-  `vatican`, `sangha`, with `crusader` as the legend register. The keys are in
-  `Cultural-Inspirations.md` and the split is settled by **QST-0046.4**; the
-  *subculture* reading and the refusal of a host-culture draw are not.
-- **Dance is Freedom's Muse.** QST-0050 ratifies that Ideals hold Muses; it does
-  not assign Terpsichore to Freedom. The assignment needs a Questa, and it also
-  needs the empty `muse` field in `Map_of_Ideals.py` filled.
-- **Darkvision prints with a line, never as a bare chip.** QST-0094 records the
-  cross-species Darkvision convention as still open, and QST-0051 lists the
-  Aasimar as chip-only by design today. So this is a proposal against the current
-  code, not a ratified decision.
-- **Two organs, not three powers**: the talaria and the aureola. The whole
-  interpretation below rests on this, and nothing ratifies it.
+- Sangha
 
-### What the rules force, and what we chose
+- Crusader in Fantasy and History
+   - Imperium of Men in 40k
+   - Arthur and the quest for the Grail
+   - Hamelin Pipper
+   - Zealots 
 
-The Revelation is the demanding one. It forces a single body that can sprout
-wings, shed searing light and terrify a room, and that must pick between them at
-each transformation.
 
-Our answer is **two organs rather than three powers**. The **talaria**: small
-vestigial wings sitting only where a wing could take a body's weight, each
-folding away as a seam. The **aureola**: a halo, in a shape the Ideal lends.
+### 📘📗 What the rules force, and what we chose
 
-**What that buys beyond the rule.** The wings *grow* instead of appearing from
-nowhere, because they were always there. Necrotic Shroud spends the same organ
-(*"your talaria spread into flightless wings"*), so the third option belongs to
-the same body instead of being an unrelated third power. Two of the three
-Revelations therefore share one physiology. And the talaria's metals nod at the
-Dwarven soul-metals while confirming nothing, an ambiguity the Dwarf page also
-uses.
+The Revelation is the demanding one. It forces a single body that can sprout wings, shed searing light and terrify a room, and that must pick between them at each transformation.
 
-⚠️ **What breaks if a later hand removes the talaria as decoration.** Heavenly
-Wings becomes wings from nowhere. Necrotic Shroud's own sentence stops meaning
-anything. The Revelation set loses its unity. The Dwarf ambiguity goes with it.
-The talaria are not a flourish; they are the body the rules were given. That this
-reasoning is unratified is an argument for writing the Questa, not for treating
-the talaria as free.
+📘 Our answer is **one source: the spark**. 
+The spark is a connection to the stellar realm, and it brings two changes onto the carrier (as well as the aesthetic choices of the player): 
+- The **talaria**: small vestigial wings sitting only where a wing could take a body's weight, each folding away as a seam. They carry the colors of the spark. Reminiscent of Hermes and Kairos winged feet.
+- The **aureola**: a halo, in a shape the spark lends. Typical in christian art, but with themed variations.
 
-### The variable detail
+### 📗 The variable detail
+Spark influences: 
+- Which metal the talaria catch (black iron, gold, red iron, silver, verdigris, pearl, tin, bronze, brass);
+- Which stone the aureola glows like (onyx, amber, ruby, diamond, aquamarine, opal, moonstone, jade, quartz);
+- and the roster of Descent names
 
-Drawn per character, and none of it ratified: which metal the talaria catch
-(black iron, gold, red iron, silver, verdigris, pearl, tin, bronze); which stone
-the aureola glows like (onyx, amber, ruby, diamond, aquamarine, opal, moonstone,
-jade); where on the body the talaria sit (heels, ankles, wrists, forearms,
-shoulders, shoulder blades, the small of the back, the base of the spine); and
-the roster of Descent names.
-
-None of it was filled in at random: the metals answer the Dwarven soul-metals,
-the aureola's forms are lent by the Ideals, and the Descent names follow the
-orthography rule. It carries no book because no Questa says so.
+Chosen at random:
+-  Where on the body the talaria sit (heels, ankles, wrists, forearms, shoulders, shoulder blades, the small of the back, the base of the spine).
 
 ## 📚 1. Where the Aasimar lives in the code
 
 | What | Where | State |
 |---|---|---|
-| Species entry | `AtlasActorLudi/SpeciesKit/Aasimar/__init__.py` | Shipping. Second person, no "we". Closes on an open invitation, which stays (§10). |
+| Species entry | `AtlasActorLudi/SpeciesKit/Aasimar/__init__.py` | Shipping.  Closes on an open invitation, which stays (§10). |
 | The Ideals, the Descents, the mark | `SpeciesKit/Aasimar/Map_of_Ideals.py` | Shipping. Belongs to a shared CelestialKit once QST-0050 lands. |
-| Traits and their lines | `SpeciesKit/Aasimar/resolution.py` | Healing Hands, Light Bearer, Celestial Resistance, Celestial Revelation carry a line. Darkvision is chip-only (to change, §10). |
+| Traits and their lines | `SpeciesKit/Aasimar/resolution.py` | Shipping, and matching this page. All eight lines are wired: Darkvision, Celestial Resistance, Healing Hands, Light Bearer, Celestial Revelation, and one on each of the three Revelation options. Darkvision prints its rule with its line, not a bare chip. |
 | Names | `AtlasNomina/Races/Celestial.py` | Celestial bodies from every language: a deliberate mosaic. |
 | Culture keys | `athens`, `vatican`, `sangha`; legend `crusader` | The subculture's own three, kept (§4). |
 | Prayer | `Map_of_Cleric_Prayers.py` | One species line. No lines yet for the three markers. |
@@ -252,11 +232,11 @@ generated Aasimar entry reads, for example:
 > *Your talaria rest at your shoulder blades and fold away as the seams of a
 > toga, shining like verdigris, barred across with silver. Above your head, a
 > star of many points, set like a compass rose, glowing like aquamarine shading
-> into diamond. It twinkles when you run, and harder when you fly. These are the
+> into diamond. It twinkles when you run, and beats when you fly. These are the
 > traits of the Sphinx Aidos, so you may belong to its lineage.*
 
 Two axes drawn apart (the wings take the metal, the halo the gem), a tell that
-never names the Ideal, four sentence arrangements, and an ancestor whose name is
+never names the Ideal, four sentence arrangements in four voices, and an ancestor whose name is
 the thing it guards (*Aidos* is Shame, the reverence that stops a hand; the
 generator gave it to an Assassin, which by the loaded-names rule is a story).
 
@@ -289,16 +269,19 @@ the Celestials page carries the full table):
 - Freedom,
 - Beauty,
 - Hope,
-- Honor.
-All eight are alignment-independent and twistable ("I claim Justice for your
-offence"; "Truth is what I say it is").
+- Honor,
+- Harmony.
+They are alignment-independent and twistable ("I claim Justice for your
+offence"; "Truth is what I say it is"). The list is open: a merged concept makes
+a new Celestial, so it is never counted and never closed.
 Vengeance is not an Ideal, because it belongs to the Demons theme: Punishment. 
 
 Saints belong to the Dwarves and are a different system.
 
-**A spark may come from two Ideals.** 
-One lends the aureola its form, the other its gem-like color, and either may lend the tell. 
-Honor's standing flame, glowing like Beauty's opal, belongs to that pair and to nobody else at the table.
+**A spark comes from two Ideals**, each drawn from the whole list at uniform random. 
+The same Ideal may come up twice, and that is a single descent: no weighting, and nothing taken out of the pool between the two draws. 
+The first lends the aureola its form, both lend the gem-like colour it glows with, and either may lend the tell. 
+Honor's standing flame, glowing like jade shading into Beauty's opal, belongs to that pair and to nobody else at the table.
 
 **The spark shapes the vessel** 
 The Aasimar is not a human with wings.
@@ -338,10 +321,11 @@ Each aureola does one thing, and the thing never names the Ideal it belongs to:
 - it sends a chill down your spine when someone near you is afraid;
 - it darkens for a moment whenever you see someone die;
 - it falls into chaos when you feel anything strongly;
-- it twinkles when you run and harder when you fly;
+- it twinkles when you run and beats when you fly;
 - it beats once when you see something beautiful;
-- it spreads slowly over you when you are happy;
-- its colour changes with your mood.
+- it is faint when you wake and brighter as you tire;
+- its colour changes with your mood;
+- it stutters when you are in pain, of body or of mind.
 Watching a halo dim tells you somebody lied, not what they descend from.
 
 Three rules govern the tell:
@@ -619,11 +603,20 @@ on conduct without naming the principle.
   {name}") **stays as written**. The design principle (the drawn Ideal) is not
   the play principle; the player reads whatever they want from the mark, and an
   Ideal may be complex, a synthesis, or not there at all. Death of the Author.
-- **Freedom's Muse is Dance** (Terpsichore). Dance is an expression of freedom;
-  the empty `muse` field was a mistake, not a design. Update `Map_of_Ideals.py`.
+- **Freedom's Muse is Dance** (Terpsicore). Dance is an expression of freedom;
+  the empty `muse` field was a mistake, not a design. ✅ Wired.
 - Darkvision is printed as an entry with a line: *"Darkness cannot hide the
-  truth from you."*
-- `DESCENTS` keeps one Hesperus.
+  truth from you."* ✅ Wired.
+- `DESCENTS` keeps one Hesperus. ✅ Wired.
+- **A spark is two draws at uniform random**, and the same Ideal may come up
+  twice. The 2:3 weighting toward a single Ideal is deleted and not replaced
+  (QST-0110). ✅ Wired.
+- **Harmony is a primary Ideal**, brass and quartz, and it closes Euterpe
+  (QST-0111). ✅ Wired.
+- **The talaria do not perch on the neck.** The arms, the legs and the back;
+  nothing on the face and nothing on the front side. ✅ Wired.
+- **Nine Medium to one Small**, as the Size entry states. The draw was even
+  until now, and it was the page's only unnoticed Size discrepancy. ✅ Wired.
 - The prayer ledger takes sayings from the three wells; it does not import
   real-world institutions as lore.
 - The species law ("taught, not inherited") guards against monoculture and
@@ -650,36 +643,51 @@ on conduct without naming the principle.
 
 ## 📖 11. Lines
 
-**Where these came from.** The Darkvision clause and the three Celestial
-Revelation clauses are the author's own, written by hand into the working notes
+**Where they came from.** The Darkvision clause and the three Celestial
+Revelation clauses were the author's own, written by hand into the working notes
 under a heading that reads *Drafts*, and carried from there onto this page. They
 are in no Questa and no Decree, and a search of the whole repository history
 finds them in no commit that predates this folder. That is not a defect in them;
-it is the shape of authored text that was written straight into a page. It does
-mean the trail is this paragraph, so it should not be deleted.
+it is the shape of authored text written straight into a page. It does mean the
+trail is this chapter, so it should not be deleted.
 
-**What is wired and what is not.** Four Aasimar traits carry a line in the code
-today (Celestial Resistance, Healing Hands, Light Bearer, Celestial Revelation),
-and those are quoted in chapter 0 verbatim. The Darkvision clause and the three
-Revelation clauses reach no sheet. One of the four is unfinished in the source:
-*"You can feel your inner light giving you the ."* It ends there. It has not
-been completed here, because finishing somebody else's sentence in their own
-voice is the substitution this whole system exists to prevent.
+**What is wired.** All eight, and chapter 0 carries them as the authority. The
+code was brought to them rather than the reverse: where a feature's own paragraph
+said something else, the paragraph was the mistake.
 
+| Entry | Line | Was |
+|---|---|---|
+| **Darkvision** | *Darkness cannot hide the truth from you.* | nothing; a bare chip |
+| **Celestial Resistance** | *Life flows through you. Death passes over you.* | *Whatever burns or rots reaches you and finds nothing to take hold of.* |
+| **Healing Hands** | *Life finds your way.* | *Something in you remembers what a body is supposed to feel like, and lends it out.* |
+| **Light Bearer** | *There is always a spark of light inside of you. Relentless.* | *Your aureola never fully goes out, not even when you'd rather it did.* |
+| **Celestial Revelation** | *Be not afraid, for you bear a star.* | *For a little while, the thing you usually hide stops hiding.* |
+| **Talarian Wings** | *Something in you answers the sky's calling.* | *This is your true self.* (and before it, *You spread your wings to show your true self.*) |
+| **Inner Radiance** | *Your inner spark becomes an aurora of pure light.* | *You can feel your inner light giving you the…* — the draft ended there, unfinished, and was never completed in another hand |
+| **Necrotic Shroud** | *The brighter the light, the darker the shadow.* | unchanged; the only place the kit lets the Aasimar show the Tiefling's face, and exactly one sentence |
 
-*the project's drafts, kept as written; the incomplete one is completed with a proposal
-marked as such.*
+**What the drafting taught.** Four things, kept because each was learned by
+getting it wrong first:
+
+- **A line teaches the fantasy, not the mechanic.** Players can read the rule.
+  The line inspires a trope.
+- **No mechanical detail in a line.** "For a minute" is obvious to any player
+  after one use, and it spends the one sentence that could have inspired.
+- **The tells are emotional, not logical and not environmental.** The irony is
+  that the feeling moves the Ideal, and never the other way.
+- **Hope is not desperation.** Hope goes on against all odds. It comforts, it
+  warms, it says stand up again. A faro for the future, a *try again tomorrow*
+  sign.
+
+**Still proposals, for entries that do not exist yet:**
 
 | Entry | Line |
 |---|---|
-| **Darkvision** | *Darkness cannot hide the truth from you.* |
-| **Celestial Revelation, Talarian Wings** | *You spread your wings to show your true self.* |
-| **Celestial Revelation, Inner Radiance** | *You can feel your inner light giving you the…* (the project's, unfinished). Proposal to complete: *You can feel your inner light, and for one minute you let it be seen.* |
-| **Celestial Revelation, Necrotic Shroud** | *The brighter the light, the darker the shadow.* The only place the kit lets the Aasimar show the Tiefling's face; exactly one sentence. |
-| **Monk's Focus, Aasimar only** (proposal) | *It comes down from the ring above your head and out through your hands. The body was always the instrument. You only had to consecrate it.* |
-| **Celestial Patron, Aasimar only** (proposal, for the ancestor synergy) | *You know exactly who hired you. You have their wings.* |
+| **Monk's Focus, Aasimar only** | *It comes down from the ring above your head and out through your hands. The body was always the instrument. You only had to consecrate it.* |
+| **Celestial Patron, Aasimar only** (for the ancestor synergy, §8) | *You know exactly who hired you. You have their wings.* |
 
 ---
+
 
 ## 📚 12. Pointers
 

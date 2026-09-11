@@ -2,8 +2,8 @@
 
 - **Type:** code / lore-fidelity
 - **Priority:** 🟠 high
-- **Status:** Open
-- **Owner:** unclaimed
+- **Status:** Solved
+- **Owner:** Claude
 - **Route to:** Technical Team · Lorekeeper · Julio
 - **Related:** QST-0050 · `Documenta/Canon/Mythos/Aasimar.md` §0 · `AtlasActorLudi/SpeciesKit/Aasimar/Map_of_Ideals.py`
 
@@ -62,3 +62,39 @@ Read out of the module: `IDEALS` carries the stale Hope strings and the empty
 5. A spark comes from one Ideal or two with equal chance, and no constant in the
    module encodes a preference.
 5. No other field is touched: the metals, gems and remaining tells are current.
+
+## ✅ Resolution
+
+All four landed in `Map_of_Ideals.py`, and the page moved once more while the
+work was in flight, so the values below are the page's and not this ticket's.
+
+1. **Hope.** `form` = *a band crowning your temples*; `tell` = *It is faint when
+   you wake up, but brighter as you get tired.* The diagnosis above quotes an
+   earlier pass of the dialogue (*"a band crowning around your temples"*,
+   *"Faint in daylight, but unmistakable in the dark."*): both were superseded on
+   the page before this was implemented, the first for reading better without the
+   *around*, the second because it was a tell about the light in the room rather
+   than about the person carrying it. Hope is not desperation; it is the sign
+   that says try again tomorrow, and it burns brightest when the day has run you
+   down.
+   The form is stored lower case, like every other form, because it is always
+   read mid-sentence: *"Your aureola is a band crowning your temples."*
+2. **Freedom's Muse is Dance** (Terpsicore). The empty string is gone.
+3. **Hesperus appears once** in the Planetar roster.
+4. **The weighting is deleted and not replaced.** A spark is now two draws from
+   the whole list at uniform random, as the page states, with nothing removed
+   from the pool between them. The same Ideal coming up twice *is* the single
+   descent, so it needs no separate roll: over 4000 marks it lands at 10.5%,
+   against the 11.1% an even nine-way draw predicts.
+
+Two things not in the diagnosis were fixed in the same pass, both consequences of
+the page rather than of the ticket:
+
+- **The neck perch is gone.** Julio removed *the back of your neck | an
+  embroidered collar* from the page's table in `aa43b74`, and the 📘 talaria
+  paragraph he wrote in the same commit places them on *the arms and the legs,
+  and the back*. Eight perches now, and the module comment follows the page's
+  *nothing on the front side*.
+- **Nine Medium to one Small.** The Size entry has stated the proportion all
+  along and `Aasimar/__init__.py` declared no `size_weights`, so the draw was an
+  even coin. It now declares `(90, 10)`, the way `Humans.py` declares `(95, 5)`.

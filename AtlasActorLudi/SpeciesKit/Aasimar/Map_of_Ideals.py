@@ -3,11 +3,11 @@ Map of Ideals — what an Aasimar descends from, and how it shows.
 
 A Celestial is an Ideal with a shape: not a god and not a servant of one, but Justice itself, or Mercy, or Honor, standing where mortals can see it.  An Aasimar carries a spark of one, and the spark is visible in two places.
 
-**Talaria** are the small vestigial wings.  They sit only where a wing could plausibly take a body's weight, which is why none of them are on the face or the front of the chest, and each folds into something a tailor could explain: a torc, a sash, an embroidered collar.
+**Talaria** are the small vestigial wings.  They sit only where a wing could plausibly take a body's weight, which is why none of them are on the face or the front side, and each folds into something a tailor could explain: a bracer, a sash, the straps of a sandal.
 
 **The aureola** is the halo, and it answers to *fidelity to the Ideal* rather than to virtue.  A tyrant whose ring stays perfect is entirely possible, and is a better story than a tyrant whose halo goes out.  Every tell is written so that it never names the Ideal it belongs to: watching somebody's halo dim tells you they lied, not that they descend from Justice.
 
-An Aasimar may descend from two Ideals, and then they mix on three axes that are drawn apart: one lends the aureola its **form**, either lends the **gem** it glows like, and either lends the **tell**.  Honor's standing flame, glowing like Beauty's opal, beating once when you see something you like, belongs to that pair and to nobody else at the table.
+An Aasimar descends from two Ideals, each drawn from the whole list at uniform random, and the same Ideal may come up twice: that is a single descent, and it is neither rarer nor commoner than any particular pair.  A mixed descent then splits across three axes that are drawn apart: the first lends the aureola its **form**, both lend the **gem** it glows like, and either may lend the **tell**.  Honor's standing flame, glowing like Beauty's opal, beating once when you see something you like, belongs to that pair and to nobody else at the table.
 
 Nothing here is mechanical. Celestial Revelation carries the rules; this carries the face.
 """
@@ -15,17 +15,6 @@ Nothing here is mechanical. Celestial Revelation carries the rules; this carries
 from __future__ import annotations
 
 from dataclasses import dataclass
-
-
-def _opening(
-		phrase: str,
-		) -> str:
-	"""A phrase promoted to the start of a sentence, capital and all."""
-	return phrase[
-		:1
-		].upper() + phrase[
-		1:
-		]
 
 
 @dataclass(
@@ -45,8 +34,10 @@ class Ideal:
 	gem: str
 	# What the halo does, never naming the Ideal that causes it.
 	tell: str
-	# The Muse who holds this domain, where one does.  Some Ideals are older
-	# than the Muses and answer to nobody.
+	# The Muse who holds this domain, where one does.  The Muses are the main
+	# Celestials, not the whole set, so an Ideal may answer to none of them: an
+	# empty Muse says that, and never that the entry is unfinished.  The list is
+	# open on purpose and is not counted anywhere.
 	muse: str = ""
 
 
@@ -95,7 +86,7 @@ IDEALS = {
 			metal="verdigris",
 			gem="aquamarine",
 			tell="It twinkles when you run, and beats when you fly.",
-			muse="",
+			muse="Dance",
 			),
 		Ideal(
 			name="Beauty",
@@ -107,10 +98,11 @@ IDEALS = {
 			),
 		Ideal(
 			name="Hope",
-			form="a faint thing in daylight and one unmistakable star in the dark",
+			# The laurel of the victor, worn before the victory.
+			form="a band crowning your temples",
 			metal="tin",
 			gem="moonstone",
-			tell="When you are happy it spreads, slowly, until it covers all of you.",
+			tell="It is faint when you wake up, but brighter as you get tired.",
 			muse="Comedy",
 			),
 		Ideal(
@@ -120,6 +112,16 @@ IDEALS = {
 			gem="jade",
 			tell="Its colour changes with your mood.",
 			muse="Epic Tales",
+			),
+		Ideal(
+			name="Harmony",
+			# Brass is what the instrument is made of and quartz is what keeps
+			# the time.  Both of them only work by holding a ratio.
+			form="rotating triangles with perfect proportions",
+			metal="brass",
+			gem="quartz",
+			tell="It stutters when you are in pain, of body or of mind.",
+			muse="Lyric & Flute",
 			),
 		)
 	}
@@ -207,7 +209,6 @@ DESCENTS = (
 			"Hesperus",
 			"Fosforos",
 			"Eosforus",
-			"Hesperus",
 			"Piroeis",
 			"Faezon",
 			"Stilbon",
@@ -295,9 +296,8 @@ class Perch:
 
 
 # Only where a wing could take a body's weight: nothing on the face, nothing on
-# the front of the chest.
+# the front side.  The arms, the legs and the back, and nowhere else.
 PERCHES = (
-	Perch("the back of your neck", "an embroidered collar"),
 	Perch("your wrists", "a pair of bracelets"),
 	Perch("your forearms", "wound bracers"),
 	Perch("your shoulders", "a mantle clasp"),
@@ -308,10 +308,6 @@ PERCHES = (
 	Perch("your heels", "the straps of your sandals"),
 	)
 
-
-# How likely a spark is to come from two Ideals rather than one.
-MIXED_DESCENT = 2
-SINGLE_DESCENT = 3
 
 
 @dataclass(
@@ -435,7 +431,7 @@ class Celestial_Mark:
 				f"Your talaria rest at {place} and fold away as {disguise}, shining like {metal}.",
 				f"At {place} you carry talaria that catch the light like {metal}, and folded they pass for {disguise}.",
 				f"Talaria sit at {place}, shining like {metal}, and whoever notices takes them for {disguise}.",
-				f"Most people wouldn't suspect your {disguise} actually hide talarian wings, as its shining surface resembles {metal}, and they rest comfortably at {place}",
+				f"Most people wouldn't suspect {disguise} could hide talarian wings, but yours rest at {place}, shining like {metal}.",
 				)
 			)
 
@@ -522,42 +518,33 @@ def celestial_marks(
 	pool = list(
 		IDEALS
 		)
+	# A Spark comes from two Ideals, each drawn from the whole list at uniform
+	# random.  The same Ideal may be drawn twice, and that is a single descent:
+	# not a separate roll, and not weighted against a mixed one.  Nothing is
+	# taken out of the pool between the two draws.
 	first = IDEALS[
 		char.Pick(
 			pool,
 			dice=dice,
 			)
 		]
-	mixed = char.Pick(
-		(
-			True,
-			False,
-			),
-		(
-			MIXED_DESCENT,
-			SINGLE_DESCENT,
-			),
-		dice=dice,
-		)
-	ideals = (
-		first,
-		)
-
-	if mixed:
-		rest = [
-			name
-			for name in pool
-			if name != first.name
-			]
-		ideals = (
-			first,
-			IDEALS[
-				char.Pick(
-					rest,
-					dice=dice,
-					)
-				],
+	second = IDEALS[
+		char.Pick(
+			pool,
+			dice=dice,
 			)
+		]
+	mixed = second.name != first.name
+	ideals = (
+		(
+			first,
+			second,
+			)
+		if mixed
+		else (
+			first,
+			)
+		)
 
 	# The form and the glow; with a single descent both are the same Ideal.
 	shape_from = ideals[
@@ -627,6 +614,7 @@ def celestial_marks(
 				0,
 				1,
 				2,
+				3,
 				),
 			dice=dice,
 			),
