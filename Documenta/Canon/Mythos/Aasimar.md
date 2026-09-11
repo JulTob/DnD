@@ -175,9 +175,9 @@ Added Celestial subtype, as that is the core of the fantasy. Internally, an Aasi
 
 📗 The Descent is an ancestor read off the sky, and it is never confirmed.
 
-📗 Which is why the Aasimar produces astrologers. Here the charts are not divination, they are observation, and to observe means both to watch and to keep. An Aasimar following the sky is not superstitious. They are checking on family, and the family is visible most nights. This is the one habit the species generates on its own, and it costs nothing to give a character.
+📗 **Celestial Observation**. The Aasimar produce astrologers. Here the charts are not divination, they are observation, and to observe means both to watch and to keep. An Aasimar following the sky is not superstitious. They are checking on family, and the family is visible most nights. This is the one habit the species generates on its own, and it costs nothing to give a character.
 
-📗 The spark sets a bar the mortal cannot clear. An Ideal cannot bend, cannot compromise and cannot love the one who carries it. The aureola reports on fidelity rather than virtue, so a tyrant may keep a perfect ring. That gap between the fixed thing and the person carrying it is the drama every Aasimar starts with, and it needs no villain.
+📗 The spark sets a bar the mortal cannot clear. An Ideal cannot bend, cannot compromise and cannot love the one who carries it. The aureola reports on fidelity rather than goodness, so a tyrant may keep a perfect ring. That gap between the fixed thing and the person carrying it is the drama every Aasimar starts with, and it needs no villain.
 
 For the Celestials themselves, their Virtue, their plans and their use as antagonists, see [Celestials](Celestials.md).
 
@@ -274,7 +274,7 @@ confirm nothing, which is deliberate DM space (§7).
 
 Three rules govern the tell:
 
-1. **It answers to fidelity, not virtue.** A tyrant whose ring stays perfect is  entirely possible, and a better story than one whose halo goes out.
+1. **It answers to fidelity, not goodness.** A tyrant whose ring stays perfect is  entirely possible, and a better story than one whose halo goes out.
 2. **It only ever says no.** Socrates' daimonion never told him what to do, only
    what not to; the tell is a daimonion made visible. No later tell may be
    written as an instruction.
@@ -449,7 +449,7 @@ importing the real-world institutions as lore.
 ## 📜 6. Metaphysics
 
 **Stated elsewhere, and not restated here.** The measuring bar and the drama it
-creates (§2). The tell that answers to fidelity rather than virtue, so the tyrant
+creates (§2). The tell that answers to fidelity rather than goodness, so the tyrant
 keeps a perfect ring (§3). Every class an Aasimar takes is a different departure
 from the spark, and the aureola reports every departure (§8).
 

@@ -68,6 +68,7 @@ them invert the usual advice on purpose.
 8. **A sheet states what the character has**, never a choice still pending, and
    prints resolved numbers rather than formulas.
 
+Flavor is in italic. This includes descriptions, lore and hooks. 
 ---
 
 ## 📔 3. What a useful objection looks like
