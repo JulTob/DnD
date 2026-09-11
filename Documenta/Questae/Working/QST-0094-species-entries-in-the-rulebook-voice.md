@@ -24,9 +24,9 @@ Audit of every playable Species at levels 1 and 5, 2026-09-07:
 | Species | Entries | State before |
 |---|---|---|
 | Elf, Halfling, Human, Orc | all | italic line + rulebook voice: the pattern |
-| Gnome, Goliath, Aasimar | all | authored prose paragraph, then the rule; no italic marker (a second convention) |
+| Gnome, Goliath | all | authored prose paragraph, then the rule; no italic marker (a second convention) |
+| ~~Aasimar~~ | all | **Settled 2026-09-11 (QST-0113).** Eight entries, each an italic line then the rule, quoted from `Canon/Mythos/Aasimar.md` §0, which is the authority. |
 | Dragonborn | Breath Weapon | pattern; **Draconic Flight** opened "Gained at Level 5."; Darkvision is chip-only by design ("a record, not a paragraph") |
-| Aasimar | Darkvision | chip-only by design |
 | **Dwarf** | all four | "Gained at Level 1. Dwarven senses/stock granted …": level announcement, retrospective voice, no inspiration line |
 | **Tiefling** | Darkvision, Otherworldly Presence, Fiendish Legacy | bare fragments ("Darkvision with a range of 60 feet.", "The Thaumaturgy cantrip. Charisma is its spellcasting ability.") |
 
@@ -55,7 +55,7 @@ Every Species entry on the sheet is a feature the Character has, in the rulebook
 
 **Two conventions to decide:**
 
-1. Darkvision across Species: Elf, Orc, Gnome, Dwarf and Tiefling print the rule; Aasimar and Dragonborn print the chip only. One convention or two?
+1. ~~Darkvision across Species~~ **Half settled.** Elf, Orc, Gnome, Dwarf, Tiefling and now **Aasimar** print the rule under an italic line; Julio settled the Aasimar on its page (*"Darkness cannot hide the truth from you."*) and the code followed on 2026-09-11. **Dragonborn is the last one printing a bare chip**, and it is the whole of what is left of this question: one convention or two?
 2. Species description voice: Humans, Dwarves and Elves now speak as "we/our"; Aasimar, Gnome, Goliath, Halfling, Orc, Tiefling and Dragonborn address the reader as "you". The rule exempts descriptions from the voice law; consistency is a taste call.
 
 ---
