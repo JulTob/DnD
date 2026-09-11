@@ -6,6 +6,7 @@ from AtlasActorLudi.SpeciesKit.Aasimar.traits import Light_Bearer
 from AtlasActorLudi.SpeciesKit.magic import Resolve_Species_Spells
 from AtlasActorLudi.SpeciesKit.presentation import Project_Species_Feature
 from AtlasActorLudi.SpeciesKit.traits import Darkvision
+from AtlasActorLudi.SpeciesKit.traits import Darkvision_Rules
 
 
 def _proficiency_bonus(
@@ -76,38 +77,29 @@ def _revelation_options(
 	target.celestial_revelation_end_action = "No Action"
 	target.celestial_revelation_aura_radius = Inner_Radiance.AURA_RADIUS
 	target.celestial_revelation_condition = Necrotic_Shroud.CONDITION
-	# Facts shared by all three options, published rather than only narrated.
-	# There is deliberately no ``damage_type``: the type follows the option, and
-	# the option is chosen each time the Aasimar transforms.
-	target.celestial_revelation_extra_damage = proficiency
-	target.celestial_revelation_uses = Talarian_Wings.USES
-	target.celestial_revelation_duration_minutes = (
-		Talarian_Wings.DURATION_MINUTES
-		)
-	target.celestial_revelation_end_action = "No Action"
-	target.celestial_revelation_aura_radius = Inner_Radiance.AURA_RADIUS
-	target.celestial_revelation_condition = Necrotic_Shroud.CONDITION
 
 	return (
 		(
-			"<b>Talarian Wings.</b> Your talaria grow in a burst of celestial "
-			"energy, spreading from vestigial into two full spectral wings. "
-			"Until the transformation ends, you have a Fly Speed of "
-			f"{fly_speed} feet. <i>Radiant.</i> "
-			"<b>Inner Radiance.</b> Your aureola blazes, and searing light "
-			"radiates from your eyes and mouth. For the duration you shed "
+			"<b>Talarian Wings.</b> <i>Something in you answers the sky's "
+			"calling.</i> You spread your talaria into fully grown wings. "
+			"Until the transformation ends you have a Fly Speed of "
+			f"{fly_speed} feet. Your extra damage is Radiant. "
+			"<b>Inner Radiance.</b> <i>Your inner spark becomes an aurora of "
+			"pure light.</i> Your eyes shine brightly and your halo grows "
+			"into a bright aurora. For the duration you shed "
 			f"Bright Light in a {Inner_Radiance.BRIGHT_LIGHT_RADIUS}-foot "
 			"radius and Dim Light for an additional "
 			f"{Inner_Radiance.DIM_LIGHT_ADDITIONAL_RADIUS} feet, and at the "
 			"end of each of your turns each creature within "
 			f"{Inner_Radiance.AURA_RADIUS} feet of you takes {proficiency} "
-			"Radiant damage. <i>Radiant.</i> "
-			"<b>Necrotic Shroud.</b> Your eyes briefly become pools of "
-			"darkness and your talaria spread into flightless wings. "
+			"Radiant damage. Your extra damage is Radiant. "
+			"<b>Necrotic Shroud.</b> <i>The brighter the light, the darker "
+			"the shadow.</i> Your eyes briefly become pools of darkness and "
+			"your aureola collapses like a Dark Sun. "
 			"Creatures other than your allies within "
 			f"{Necrotic_Shroud.RADIUS} feet of you must succeed on a Charisma "
 			f"saving throw (DC {save_dc}) or have the Frightened condition "
-			"until the end of your next turn. <i>Necrotic.</i>"
+			"until the end of your next turn. Your extra damage is Necrotic."
 			),
 		(
 			(
@@ -154,8 +146,7 @@ def _project_revelation(
 		target,
 		"Celestial Revelation",
 		(
-			"For a little while, the thing you usually hide stops "
-			"hiding. "
+			"*Be not afraid, for you bear a star.*\n\n"
 			f"You can transform "
 			f"as a {Talarian_Wings.ACTION} using one of the options below, "
 			"choosing the option each time you transform. The transformation "
@@ -195,12 +186,13 @@ def Resolve_Aasimar_Features(
 	"""
 	Project only the Aasimar features already gained at this level.
 
-	The rules are printed as the rulebook writes them: second person, present
-	tense, no invented attribution.  The only liberties are the ones settled
-	with Julio -- talaria and aureola in place of metallic freckles and glowing
-	eyes, and Talarian Wings in place of Heavenly Wings -- and the numbers,
-	which are resolved rather than left as "equal to your Proficiency Bonus"
-	when the sheet already knows what that is.
+	Every rule and every line here is quoted from ``Canon/Mythos/Aasimar.md`` §0,
+	which is the authority: where this file and that page disagree, this file is
+	wrong.  The page settles the liberties (talaria and aureola in place of
+	metallic freckles and glowing eyes, Talarian Wings in place of Heavenly
+	Wings, and a halo that collapses where the published Shroud grew wings), and
+	the numbers are resolved rather than left as "equal to your Proficiency
+	Bonus" when the sheet already knows what that is.
 	"""
 	from AtlasActorLudi.SpeciesKit.Aasimar import Aasimar
 
@@ -216,11 +208,15 @@ def Resolve_Aasimar_Features(
 			Darkvision.RANGE,
 			)
 		)
-	# A record, not a paragraph: the chip is the whole feature.
 	Project_Species_Feature(
 		target,
 		"Darkvision",
-		"",
+		(
+			"*Darkness cannot hide the truth from you.*\n\n"
+			+ Darkvision_Rules(
+				darkvision_range
+				)
+			),
 		chips=(
 			(
 				"Darkvision",
@@ -234,9 +230,8 @@ def Resolve_Aasimar_Features(
 		target,
 		"Celestial Resistance",
 		(
-			"Whatever burns or rots reaches you and finds nothing to "
-			"take hold of. You have Resistance to Necrotic damage and "
-			"Radiant damage."
+			"*Life flows through you. Death passes over you.*\n\n"
+			"You have Resistance to Necrotic damage and Radiant damage."
 			),
 		chips=(
 			(
@@ -256,8 +251,7 @@ def Resolve_Aasimar_Features(
 		target,
 		"Healing Hands",
 		(
-			"Something in you remembers what a body is supposed to "
-			"feel like, and lends it out. "
+			"*Life finds your way.*\n\n"
 			f"As a {Healing_Hands.ACTION} action, you touch a creature and "
 			f"roll {proficiency}d{Healing_Hands.DIE}. The creature regains a "
 			"number of Hit Points equal to the total rolled. Once you use "
@@ -287,9 +281,10 @@ def Resolve_Aasimar_Features(
 		target,
 		"Light Bearer",
 		(
-			"Your aureola never fully goes out, not even when you'd "
-			"rather it did. You know the Light cantrip. Charisma is "
-			"your spellcasting ability for it."
+			"*There is always a spark of light inside of you. "
+			"Relentless.*\n\n"
+			"You know the Light cantrip. Charisma is your spellcasting "
+			"ability for it."
 			),
 		chips=(
 			(

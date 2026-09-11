@@ -184,7 +184,7 @@ def CELESTIAL_DESCRIPTION(
 		dice=dice,
 		)
 	return CELESTIAL_DESCRIPTION_TEMPLATE.format(
-		patron=f"{descent} of {ideal.name}",
+		patron=f"the {descent.kind} of {ideal.name}",
 		)
 
 

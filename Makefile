@@ -2,7 +2,7 @@
 #   make run            serve app.main:app on $(PORT)      make dev   the same, reloading on edits
 #   make smoke-player   boot and generate seed 42           make replay-player   the seeded-replay rite
 #   make sweep-player   every Guild at levels 1 and 5 (add WIDE=1 for every level, Species, Background, Specialization)
-.PHONY: run dev setup smoke-player sweep-player replay-player safepoint install-hooks loss-check
+.PHONY: run dev setup smoke-player sweep-player replay-player verify-aasimar safepoint install-hooks loss-check
 
 PORT ?= 8080
 VENV := .venv
@@ -40,6 +40,11 @@ smoke-player: setup
 
 replay-player: setup
 	$(VENV_PYTHON) scripts/verify_player_replay.py
+
+# The Aasimar page is locked and owns its code.  This proves the code still
+# agrees with it; if it fails, the page is right.
+verify-aasimar: setup
+	$(VENV_PYTHON) scripts/verify_aasimar_page.py
 
 sweep-player: setup
 	$(VENV_PYTHON) scripts/sweep_player.py $(if $(WIDE),--wide,)
