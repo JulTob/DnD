@@ -288,10 +288,6 @@ person, against the round halo of the dead saint.
 The Aasimar's halo is the imperfect one, the work in progress; a Celestial's is finished. 
 A well, not a rule; it also keeps Saints (round, dead, Dwarven) apart.
 
-**"You can hide them or empower them depending on your emotional state."** The
-species entry's sentence is the tell's charter, and Celestial Revelation is
-the rule: for one minute the thing usually hidden stops hiding.
-
 **Celestials do not care much about the vessel**. The body is apparatus
 for the spark. This is a temperament, and it separates them from every people
 who speak of their bodies with pride (the Goliath's size, the Dwarf's beard). An aasimar may take this view by default, but some may revel (Monks, barbarians...) and focus on the vessel instead of the soul. 
@@ -366,6 +362,7 @@ whose isolation is *hostile*. The Aasimar's is upward.
    - Daedalus and Icaros.
    - Minos.
    - The Atlantis Mythos.
+      - Ancient Astronauts.
    - Naval weaponry.
    - Togas and greek clothing.
    - Classic greek aesthetics.
@@ -477,7 +474,7 @@ and the hero finds out late. And it gives the drama its oldest shape: the
 half-god is measured against the parent and comes up short, because the hero dies
 and the god does not. Perseus is already in the Descent roster as a
 Constellation, which is where that story ends. The hero is not raised into the
-sky for being good. He is put there for being remembered.
+sky for being good. He is put there for being remembered. To carry the message of the Ideal he enacted.
 
 **The Holy Horror**. "He made you just to do its bidding?" A Celestial
 cannot love an Aasimar; it can *hire* one, and it can *make* one for the job.
@@ -486,15 +483,13 @@ this cosmic-plan horror: if you were chosen, the choosing was the Ideal's,
 and your life is the shape of somebody else's decision. An Aasimar may come to
 suspect that "you never lived among them" was a placement, not an accident.
 Nobody confirms it. The Celestial patron's briefing voice already says the true
-thing as a joke: "They will tell the one you crossed that it was your own free
-will."
+thing as a joke: "They will tell the one you crossed that it was your own free will."
 
 **Prevention and punishment.** 
 A Celestial prevents the corruption of an Ideal, or redeems toward it; 
 a fiend deters or punishes. 
 Neither is kind. 
-A Celestial that tries to installs an Ideal *into* a person, or into a party, is a legitimate
-antagonist, and the Inquisitor background's superior ("send them on, the gods will know their own") is what that looks like from below.
+A Celestial that tries to install an Ideal *into* a person, or into a party, is a legitimate antagonist, and the Inquisitor background's superior ("send them on, the gods will know their own") is what that looks like from below.
 
 ---
 
@@ -528,16 +523,10 @@ in it is one more mortal departing from a fixed thing.
 | **Wizard** | *magi*, the astronomers and intellectuals of the East | Native through Athens, and therefore flat; the interesting Aasimar Wizard is the sangha's renouncer who studies. |
 | **Bard** | *bardos*, the praiser | The Muses' class. An Aasimar of Muse descent playing the Muse's own art is the one pairing where spark and profession coincide. |
 | **Druid** | the most external to a Celestial (Caesar, Pliny) | Two readings: a keeper of balance and order from the principle inherited, or a renegade who embraces the mortal world. The Circle of Stars relates to the Celestials' own realm. |
-| **Ranger** | *saltuarius*, *limitanei*, *horoi*, *peripoloi*: the wardens of the frontier | The Aasimar itself is a warden of the frontier between the Celestial and the mortal realms. Hope's halo, "one unmistakable star in the dark", navigates by its own head. |
+| **Ranger** | *saltuarius*, *limitanei*, *horoi*, *peripoloi*: the wardens of the frontier | The Aasimar itself is a warden of the frontier between the Celestial and the mortal realms. |
 | **Fighter** | *pugnator*, *bellator*, *agonistēs*, *polemistēs*: "the hand that holds the sword" | The justiciar. The hand of the heavens. Achilles, Heracles, the Hero: the Iliad's register of gods striking on the field. And through Athens' naval gear, a marine of the fleet rather than a hoplite. |
 | **Rogue** | *rogare*, the vagabond | Rejects the calling in every incarnation but one: the **Celestial Reaper**. An Assassin of Sacrifice has a halo that darkens at every kill, a tally it cannot stop keeping; an Assassin of Justice who kills without a disguise keeps a perfect ring. |
 | **Artificer** | *artifex* | Daedalus was Athenian: wings built for someone else. |
-
-**Synergies as a general mechanism**. The Warlock decision above is the
-first of a family: where a species and a subclass share a source (the Aasimar
-and the Celestial patron; the Dragonborn and the Draconic Sorcerer's ancestry;
-others in other species), the generator should draw them as one. Independent
-choices, but when they meet, they meet as family.
 
 ---
 
@@ -556,22 +545,17 @@ on conduct without naming the principle.
   stay perfect through it: the tyrant with a perfect ring, seen from below.
 - **Fortune Teller × Truth.** The ring scatters when you feel strongly; or
   the halo is what *sells* the reading, when contact is real.
-- **Spirit Medium × Sacrifice.** The halo darkens for a death and not for the
-  already dead: how the Medium tells a death from a haunting.
-- **Revolutionary × Freedom.** "It twinkles when you run." The compass rose as
-  a getaway light.
+- **Spirit Medium × Sacrifice.** The halo darkens for a death: how the Medium tells a haunting from the wind.
+- **Revolutionary × Freedom.** "It twinkles when you run." The compass rose as a getaway light.
 - **Shadow.** A light casts no shadow of its own; the Shadow Aasimar is
   physically consistent and nobody believes the explanation.
-- **Destined.** "You glow." On an Aasimar, twice. Right, and everyone is tired
-  of it.
-- **Exorcist.** Celestial Resistance: the one who cannot be possessed, and so
-  cannot be sure the procedure works on anyone else.
+- **Destined.** "You glow." On an Aasimar, twice. Right, and everyone is tired of it.
+- **Exorcist.** Celestial Resistance: the one who cannot be possessed, and so cannot be sure the procedure works on anyone else.
 - **Debunker.** The Debunker with a halo, who has an explanation for it.
-- **Bailiff × Honor.** The Badge and a mood ring; the open question of §3
+- **Bailiff × Honor.** The Badge is your aureola? The open question of §3
   (internal or external oversight) lives here most sharply.
 - **Herald.** The aureola as credential.
-- **Dragon Cultist.** The fixed against the self-authored, in a cult: the road
-  to a Couatl (§7).
+- **Dragon Cultist.** The fixed against the self-authored, in a cult: the road to a Couatl (§7).
 - **Stranger.** Doubly from elsewhere; the old ones are the only people who
   might know what the halo used to mean.
 
@@ -612,17 +596,14 @@ on conduct without naming the principle.
 
 **Open**
 
-- Whether the aureola's oversight is internal or external (§3). Keep both.
 - Whether `vatican` reads too modern (`see`, `basilica`, `apostolic` are the
   alternatives) and whether `sangha` is the right name (`theravada`, `nalanda`);
   from `Cultural-Inspirations.md`.
-- ~~Which Ideal takes Euterpe~~ **Settled: Harmony**, a primary Ideal.
-- **Seven copy decisions wait on Julio, and only on Julio (QST-0114):** Inner
-  Radiance still says *halo* where Necrotic Shroud now says *aureola*; the 📕 on
-  the two rewritten Revelation options, which the legend makes 📙; a reversed
-  Celestials link; a dropped *"one of"* in the description; a short spelling
-  list; and whether the Descent roster is 🌟 or 🎲. These are the last things
-  between this page and being locked.
+- **Three proposals stand against the lock (QST-0114):** Inner Radiance still
+  says *halo* where Necrotic Shroud says *aureola*; the 📕 on the two rewritten
+  Revelation options, which the legend makes 📙; and whether the Descent roster
+  is 🌟 or 🎲, which is the only one that moves the generator. The spelling, the
+  reversed link and the dropped *"one of"* landed on 2026-09-11.
 
 **Rejected**
 
