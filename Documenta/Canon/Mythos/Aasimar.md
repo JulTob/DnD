@@ -71,15 +71,17 @@ Your talaria and aureola resemble the traits of the Angel Barakiel, so you may b
 | **Honor** | a standing flame that burns without moving | bronze | jade | *Its colour changes with your mood.* | Epic Tales (Calliope) |
 | **Harmony** | rotating triangles with perfect proportions | brass | quartz | *It stutters when you are in pain, of body or of mind.* | Lyric & Flute (Euterpe) |
 
+A Spark is the celestial side of the Aasimar, and it comes from two Ideals selected at uniform random from the list. The same ideal may be selected twice. 
 
-#### The talaria, as the generator draws them
+#### 📘 The talaria
 
-**Where they sit, and what they pass for folded.** A wing may only sit where a wing could take a body's
-weight: nothing on the face, nothing on the front of the chest.
+📘 Talaria are the small wings that greek gods like hermes and kairos have. For Aasimar, these are small and vestigial of their celestial origin. They may lie in places like the arms and the legs, and the back. They must always carry weight, as when unfolded by the lvl 3 transformation, where they grow into magnificent wings of great power. 
+
+📘 **Where they sit, and what they pass for folded.** Rule: A wing may only sit where a wing could reasonably take a body's weight: nothing on the face, nothing on the front side.
+
 
 | Perch | Folded, it passes for |
-|---|---|
-| the back of your neck | an embroidered collar |
+|------|---|
 | your wrists | a pair of bracelets |
 | your forearms | wound bracers |
 | your shoulders | a mantle clasp |
@@ -89,17 +91,21 @@ weight: nothing on the face, nothing on the front of the chest.
 | your ankles | anklets |
 | your heels | the straps of your sandals |
 
-**How the metals wear.** With two Ideals the two metals share one pair of wings,
-seven ways: *{a} on the back and {b} beneath* · *{a} at the base, running to {b}
-at the tips* · *{a}, every feather edged in {b}* · *{a}, barred across with {b}*
-· *{a}, speckled with {b}* · *{a} above, and {b} that only shows when they open*
-· *{a} with one band of {b} across them*.
+📗 **How the metals wear.** With two Ideals the two metals share one pair of wings, seven ways: 
+- *{a} on the back and {b} beneath* ·
+- *{a} at the base, running to {b} at the tips* ·
+- *{a}, every feather edged in {b}* ·
+- *{a}, barred across with {b}*
+- *{a}, speckled with {b}* ·
+- *{a} above, and {b} that only shows when they open*
+- *{a} with one band of {b} across them*.
 
-With one Ideal, four ways: *{a}* · *{a}, darker at the tips* · *{a}, paler
-underneath* · *{a} all the way through*.
+With one Ideal, four ways: 
+- *{a}* ·
+- *{a}, darker at the tips* ·
+- *{a}, paler underneath* ·
+- *{a} all the way through*.
 
-A spark comes from two Ideals two times in five, and from one three times in
-five.
 
 
 ### The rules as given

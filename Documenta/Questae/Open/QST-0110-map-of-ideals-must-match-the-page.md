@@ -35,6 +35,19 @@ decided answer. Euterpe remains the one Muse with no Ideal.
 
 **3. The Planetar roster lists Hesperus twice.** One should go.
 
+**4. The mixed-descent weighting is deleted.** `MIXED_DESCENT = 2` and
+`SINGLE_DESCENT = 3` skew a spark toward one Ideal three times in five. No
+reason for the ratio is recorded anywhere: the comment above the constants
+restates them without justifying them.
+
+Nothing in the lore supports the skew, and one thing argues against it. Merged
+concepts are how new Celestials come into being, so a mixed lineage is an
+ordinary fact of the family tree rather than an exception. Primary Ideals are
+few and mergers are combinatorial, so if the weighting leaned anywhere on
+in-world grounds it would lean the other way.
+
+The draw becomes even. Do not replace 2:3 with a different ratio.
+
 ## 🧾 Evidence
 
 Read out of the module: `IDEALS` carries the stale Hope strings and the empty
@@ -46,4 +59,6 @@ Read out of the module: `IDEALS` carries the stale Hope strings and the empty
 2. A generated Aasimar of Hope shows the new form and the new tell.
 3. A generated Aasimar of Freedom can reach Dance through `Ideal.muse`.
 4. Hesperus appears once in the Planetar roster.
+5. A spark comes from one Ideal or two with equal chance, and no constant in the
+   module encodes a preference.
 5. No other field is touched: the metals, gems and remaining tells are current.
