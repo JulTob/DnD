@@ -1,22 +1,22 @@
 # ✨ Aasimar
 ##  The Mortal Angel
 ---
-> 📜 **Settled.** All 12 chapters. 📜 5 · 📚 2 · 📔 5
-> The eight flavour lines are 📘 in §0 and the code matches them. How a line is
-> written is [For-Reviewers §7](For-Reviewers.md); why these eight read as they do
-> is QST-0113. What is still open is copy, and it is listed below.
+> 🔒 **LOCKED.** All 12 chapters settled. 📜 5 · 📚 2 · 📔 5
+> The eight flavour lines are 📘 in §0.
+> This page is the authority over `SpeciesKit/Aasimar/`: the code adapts to it,
+> never the reverse, and a disagreement is a defect in the code.
+> `scripts/verify_aasimar_page.py` proves the match, and passes.
+> It is also the worked reference. Read chapter 0 before writing another species.
 
 > - 📕 **inherited from the 2014/2024 rules.** Moving it costs rules compatibility.
 > - 📙 **an aesthetic change.** The same rule wearing our name and look.
 > - 📒 **a rule we changed.** A house rule, and it already cost compatibility.
 > - 📘 **supportive lore.** It holds a rule or a core element up. 
 > - 📗 **deep lore.** Design that supports the fantasy rather than a rule.   
-> - 🌟 **assigned by the spark.** The Ideal decides it, and two Aasimar of the
->   same Ideal share it.
-> - 🎲 **drawn at random.** Nothing decides it, and it says nothing about the
+> - 🌟 **assigned by the spark.** The Spark guides the random choice it.
+> - 🎲 **drawn at random.** Random choice.
 >   Ideal.
-> - A book marks a statement only if it can change exclusively through the
->   Questa / Agora / Decree system.
+> - A book marks a statement only if it can change exclusively through the Questa / Agora / Decree system.
 >   Julio has privileges to edit directly. Code must realize the structural  changes through new QST. 
 >   Curly brackets {} represent the resolution of the calculation.
 >   Game terms should be in **bold** text, and flavor in _italic_.
@@ -24,13 +24,13 @@
 ----
 
 *Wiki entry for the design team. Deep lore and settled direction, not page text.
-Compiled from the class analyses and the design notes. Where a decision is
-settled it is stated as settled, and the chapter marks say which is which. The
-companion entry for the Celestials themselves is [Celestials](Celestials.md).*
+Compiled from the class analyses and the design notes. 
+Where a decision is settled it is stated as settled, and the chapter marks say which is which. 
+The companion entry for the Celestials themselves is [Celestials](Celestials.md).*
 
 
 > ### **In one sentence.**
-> An Aasimar carries the Spark of something perfect, and it is the measuring bar; but the Aasimar is mortal, inperfect, and is always short. Not an angel, but someone who **has to live**. 
+> An Aasimar carries the Spark of something perfect, and it is the measuring bar; but the Aasimar is mortal, imperfect, and is always short. Not an angel, but someone who **has to live**. 
 
 ---
 
@@ -42,7 +42,7 @@ companion entry for the Celestials themselves is [Celestials](Celestials.md).*
 The presentation to the player:
 
 ```txt
-Angels, Muses, Constellations, Celestials... different cultures call your people by different names. Truth is, you never lived among them. You are mortal, and you are part of the many cultures of the world. But you also have something in you from the Higher Planes. Your aspect resembles your mortal side, but you also have tells from your heavenly origin: Talaria, small vestigial wings, and Aureola, a barely perceptible shining halo around your head. You can hide them or empower them depending on your emotional state.
+Angels, Muses, Constellations, Celestials... different cultures call your people by different names. Truth is, you never lived among them. You are mortal, and you are part of one of the many cultures of the world. But you also have something in you from the Higher Planes. Your aspect resembles your mortal side, but you also have tells from your heavenly origin: Talaria, small vestigial wings, and Aureola, a barely perceptible shining halo around your head. You can hide them or empower them depending on your emotional state.
 
 All Celestials are inclined towards a higher ideal: Justice, Sacrifice, Freedom... Think about which ideal can inspire {name} and guide their path as an adventurer.
 ```
@@ -50,11 +50,11 @@ All Celestials are inclined towards a higher ideal: Justice, Sacrifice, Freedom.
 Generated text. One of the best features of the app. It makes each aasimar unique and characteristic in physical and evocative form at the same time. 
 
 It presents:
-- Talaria as the small wings hidden as apparell, based on Hermes and Kairos small wings.
+- Talaria as the small wings hidden as apparel, based on Hermes and Kairos small wings.
 - Aureola. A shining circle or crown around the head. 
 - A color relationship to the ideals. Two for a complex but easy reading. Metalic colors for the wings, and gemstones for the halo.
 - A specific Ideal Celestial as a lineage.
-- It never mentions the specific Ideals, leaving the interpretation free for the player. It may inspire a more complex reading than a simple convination. 
+- It never mentions the specific Ideals, leaving the interpretation free for the player. It may inspire a more complex reading than a simple combination. 
 
 Example:
 ```txt
@@ -74,7 +74,7 @@ Your talaria and aureola resemble the traits of the Angel Barakiel, so you may b
 | **Truth** | a ring of small lights, each orbiting on its own | silver | diamond | *It falls into chaos when you feel anything strongly, good or bad.* | Astronomy (Urania) |
 | **Freedom** | a star of many points, set like a compass rose | verdigris | aquamarine | *It twinkles when you run, and beats when you fly.* | Dance (Terpsicore) |
 | **Beauty** | slow waves of colour, one running after another | pearl | opal | *It beats once when you look at something you find beautiful.* | Love Poetry (Erato) |
-| **Hope** | A band crowning your temples | tin | moonstone | *It is faint when you wake up, but brighter as you get tired.* | Comedy (Talia) |
+| **Hope** | a band crowning your temples | tin | moonstone | *It is faint when you wake up, but brighter as you get tired.* | Comedy (Talia) |
 | **Honor** | a standing flame that burns without moving | bronze | jade | *Its colour changes with your mood.* | Epic Tales (Calliope) |
 | **Harmony** | rotating triangles with perfect proportions | brass | quartz | *It stutters when you are in pain, of body or of mind.* | Lyric & Flute (Euterpe) |
 
@@ -82,7 +82,7 @@ A Spark is the celestial side of the Aasimar, and it comes from two Ideals selec
 
 #### 📘 The talaria
 
-📘 Talaria are the small wings that greek gods like hermes and kairos have. For Aasimar, these are small and vestigial of their celestial origin. They may lie in places like the arms and the legs, and the back. They must always carry weight, as when unfolded by the lvl 3 transformation, where they grow into magnificent wings of great power. 
+📘 Talaria are the small wings that greek gods like hermes and kairos have. For Aasimar, these are small and vestigial of their celestial origin. They may lie in places like the arms and the legs, and the back. They must always carry weight, as when unfolded by the level 3 transformation, where they grow into magnificent wings of great power. 
 
 📘🎲 **Where they sit, and what they pass for folded.** Rule: A wing may only sit where a wing could reasonably take a body's weight: nothing on the face, nothing on the front side.
 
@@ -117,7 +117,7 @@ With one Ideal, four ways:
 
 ### The rules as given
 
-*Each entry is the rule itself as presented to the player in the app, complete enough to resolve at a table. Not a summary and not a cross-reference. Bullets indicate chips. ENTRIES NEED FLAVOR TEXT, in italics and sepparate.*
+*Each entry is the rule itself as presented to the player in the app, complete enough to resolve at a table. Not a summary and not a cross-reference. Bullets indicate chips. ENTRIES NEED FLAVOR TEXT, in italics and separate.*
 
 > * 📙 **Creature Type** Humanoid (Celestial).   
 Added Celestial subtype, as that is the core of the fantasy. Internally, an Aasimar should trigger Celestial tags. 
@@ -152,7 +152,7 @@ Added Celestial subtype, as that is the core of the fantasy. Internally, an Aasi
 > 📙 **Talarian Wings** [renames **Heavenly Wings**]: You spread your talaria into fully grown wings. Until the transformation ends you have a **Fly Speed** equal to your **Speed**. Your extra damage is **Radiant**.
 > > 📘 _Something in you answers the sky's calling._ 
 >
-> 📕 **Inner Radiance**: Your eyes shine brightly and your halo grows into a brigh aurora. For the duration you shed Bright Light in a 10-foot radius and Dim Light for an additional 10 feet, and at the end of each of your turns each creature within 10 feet of you takes **{PB} Radiant damage**. Your extra damage is **Radiant**.
+> 📕 **Inner Radiance**: Your eyes shine brightly and your halo grows into a bright aurora. For the duration you shed Bright Light in a 10-foot radius and Dim Light for an additional 10 feet, and at the end of each of your turns each creature within 10 feet of you takes **{PB} Radiant damage**. Your extra damage is **Radiant**.
 > > 📘 _Your inner spark becomes an aurora of pure light._
 >
 > 📕 **Necrotic Shroud**: Your eyes briefly become pools of darkness and your aureola collapses like a Dark Sun. Creatures other than your allies within 10 feet of you must succeed on a **Charisma Saving Throw** (**DC {8 + PB + CHA}**) or have the Frightened condition until the end of your next
@@ -163,7 +163,7 @@ Added Celestial subtype, as that is the core of the fantasy. Internally, an Aasi
 
 > 📘 **Celestials are emanations from the Platonic World of Forms. Perfect Ideals. Aasimars have a spark, a fraction from those ideals, as part of them.**
 
-📗 The spark is a constant, not an inheritance. An Aasimar is part of the sky and walks among mortals as one. They are continuosly both Mortal and Celestial. A spark cannot be taken away. Is identity. Is soul-bound. 
+📗 The spark is a constant, not an inheritance. An Aasimar is part of the sky and walks among mortals as one. They are continuously both Mortal and Celestial. A spark cannot be taken away. Is identity. Is soul-bound. 
 
 📘 **The problem the rules set.** The Revelation is the demanding one. It forces a single body that can sprout wings, shed searing light and terrify a room, and that must pick between them at each transformation.
 
@@ -179,7 +179,7 @@ Added Celestial subtype, as that is the core of the fantasy. Internally, an Aasi
 
 📗 The spark sets a bar the mortal cannot clear. An Ideal cannot bend, cannot compromise and cannot love the one who carries it. The aureola reports on fidelity rather than virtue, so a tyrant may keep a perfect ring. That gap between the fixed thing and the person carrying it is the drama every Aasimar starts with, and it needs no villain.
 
-For the Celestials themselves, their Virtue, their plans and their use as antagonists, see (Celestials)[Celestials.md].
+For the Celestials themselves, their Virtue, their plans and their use as antagonists, see [Celestials](Celestials.md).
 
 ### 📗 The variable detail
 
@@ -219,7 +219,7 @@ generator gave it to an Assassin, which by the loaded-names rule is a story).
 
 A Celestial is an Ideal with a shape: not a god and not a servant of one, but
 Justice itself, or Mercy, standing where mortals can see it. Celestials are
-emanations of the Platonic Forms, encarnated by pure collective (jungian?) belief on the goodness of the concept, and each carries a Virtue level that defines their might. An Aasimar carries a *spark* of one.
+emanations of the Platonic Forms, incarnated by pure collective (jungian?) belief on the goodness of the concept, and each carries a Virtue level that defines their might. An Aasimar carries a *spark* of one.
 
 > **؂ Note:**  
 > 💡 A Celestial and a Demon both gain power from this collective belief in the same way: How good a concept is, that Celestial is more powerful. How bad a concept is, its Demon is more powerful. Same axis, different directions. Demons punish what Celestials prevent. Both are part of the same system of control. Devils, and Fallen Angels do not participate on this axis. 
@@ -294,7 +294,7 @@ the rule: for one minute the thing usually hidden stops hiding.
 
 **Celestials do not care much about the vessel**. The body is apparatus
 for the spark. This is a temperament, and it separates them from every people
-who speak of their bodies with pride (the Goliath's size, the Dwarf's beard). An aasimar may take this biew by default, but some may revel (Monks, barbarians...) and focus on the vessel instead of the soul. 
+who speak of their bodies with pride (the Goliath's size, the Dwarf's beard). An aasimar may take this view by default, but some may revel (Monks, barbarians...) and focus on the vessel instead of the soul. 
 
 ---
 
@@ -383,7 +383,7 @@ whose isolation is *hostile*. The Aasimar's is upward.
 - Crusader in Fantasy and History
    - Imperium of Men in 40k
    - Arthur and the quest for the Grail
-   - Hamelin Pipper
+   - Hamelin Piper
    - Zealots 
 
 
@@ -436,7 +436,7 @@ the fall is a *reading* (Tiefling canon), and the morning star never fell.
 Keep him in the pool; never comment.
 Another reading is that a Fallen Planetar or an "angel" (common term for celestials in generals, as most people only see angels, not thrones or planetars.) is not automatically a demon or devil. 
 Just a Satan (adversary), and the Fallen may still serve an ideal. 
-I could see a Planetar of Freedom revelling against the whole plan of controlling the morality of mortals. And both Devils and Fallen Angels being "the imaginary axis" to the controlling paradigm, where they are maybe good or bad, but free people from the simple machiavelian  reading of morality. Maybe a Devil wants to control you, and Lucifer may want you to just be free to be yourself. 
+I could see a Planetar of Freedom revelling against the whole plan of controlling the morality of mortals. And both Devils and Fallen Angels being "the imaginary axis" to the controlling paradigm, where they are maybe good or bad, but free people from the simple machiavellian reading of morality. Maybe a Devil wants to control you, and Lucifer may want you to just be free to be yourself. 
 This for the player must be just a reading. 
 
 **Prayer.** The ledger should take sayings and prayers from the Athens,
@@ -522,7 +522,7 @@ in it is one more mortal departing from a fixed thing.
 | **Barbarian** | *barbaros*, outsider: "the foreigners of heaven, the mortal with impulses and wants" | Living true to an emotion, coded as Rage. Plato's Sun against Plato's charioteer: no auriga, but a wild horse can still see the sun and run toward it. Three shapes: the Zealot for the Ideal; the deeply feeling wanderer who takes everything as a miracle; the philosopher who loves the Ideal and the wisdom to understand it. |
 | **Monk** | *monachos*, the one who lives alone | The body taken as sacred, and the spark channelled through it: Focus flowing from the aureola down through the body into the fist. Not a departure: the spark embodied. Lived. |
 | **Cleric** | *klērikos*, the allotted | The spark cannot love you, so the Aasimar Cleric looks for the parent the Ideal is not. The most obvious pairing and the best drama. |
-| **Paladin** | *palatinus*, the Palatine guard (Rome, Byzantium) | Blood and vow both impeteritous, since an oath cannot bend either. The interesting Aasimar Paladin swears an Oath *against* or *in conflict* with the Ideal, and the aureola shows the strain. |
+| **Paladin** | *palatinus*, the Palatine guard (Rome, Byzantium) | Blood and vow both unflinching, since an oath cannot bend either. The interesting Aasimar Paladin swears an Oath *against* or *in conflict* with the Ideal, and the aureola shows the strain. |
 | **Warlock** | *convenire*, *diathēkē*, *berith*: the covenant. "Form, not belief; not principle but contract." | Hired by its own blood. **Decided: for an Aasimar Celestial Warlock, the patron is the descent ancestor** (same Descent, same Ideal). Drama is higher with a family member; the Holy Horror (§6) is the second horror beside instrumentality. The Fiendish or GOO patron's are interesting in the sense of corruption to the ideal. "The self vs the job". |
 | **Sorcerer** | *sortiarius*, the bender of fate | Independent of species, as every class is; a synergy is welcome, not required. The spark from the Ideal may have awakened something, or been a way for something else to get in. Only a Celestial-flavoured origin would draw on the spark; a draconic or shadow origin needs another explanation, and the player gives it. |
 | **Wizard** | *magi*, the astronomers and intellectuals of the East | Native through Athens, and therefore flat; the interesting Aasimar Wizard is the sangha's renouncer who studies. |
@@ -646,3 +646,9 @@ on conduct without naming the principle.
 - **Sorcerer**: the species law read correctly; synergy, not collision.
 - **QST-0050**: the CelestialKit shared between players and NPCs, which this
   page and the Celestials page both need.
+- **[For-Reviewers §7](For-Reviewers.md)**: how a flavour line is written, for
+  every species. Learned here, so it left this page.
+- **QST-0113**: where these eight lines came from, what each replaced, and the
+  one still proposed.
+- **QST-0114**: what is proposed against the lock. **QST-0115**: two leftovers in
+  the kit that no sheet shows.

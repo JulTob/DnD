@@ -1,4 +1,4 @@
-# QST-0114 — The Aasimar page's own copy, for Julio
+# QST-0114 — Three proposals against the Aasimar lock
 
 - **Type:** lore / copy
 - **Priority:** 🟡 normal
@@ -11,10 +11,11 @@
 
 ## 🔍 Diagnosis (what & where)
 
-Seven things found while bringing the code to the page. None of them were
-touched, because each is either a booked statement or a wording choice, and a
-book is edited by Julio alone. They are collected here so they survive the
-session that found them.
+Seven things found while bringing the code to the page. **Four have landed; three
+have not**, and the page was locked on 2026-09-11 with those three as they stand.
+That is not an oversight: a locked page is changed through a Questa, and this is
+the Questa. Two of the three are wording, and the third changes the generator if
+it goes the other way.
 
 **1. Inner Radiance still says *halo* where Necrotic Shroud now says *aureola*.**
 Julio changed the Shroud on 2026-09-11 and the code followed the same day. The
@@ -27,17 +28,22 @@ eyes and mouth"*; the Shroud loses the flightless wings and collapses the aureol
 like a Dark Sun). By the page's own legend that makes them 📙 *an aesthetic
 change*, which is what Talarian Wings already carries.
 
-**3. The Celestials link is reversed.** `(Celestials)[Celestials.md]` in §0's
-Lore renders as text, not a link. It wants `[Celestials](Celestials.md)`.
+**3. ~~The Celestials link is reversed.~~ Fixed 2026-09-11.**
 
-**4. The species description dropped two words.** §0 reads *"you are part of the
-many cultures of the world"*. §4 quotes it back as *"part of **one of** the many
-cultures"*, and so does the shipping code. §0 looks like the transcription slip.
+**4. ~~The species description dropped two words.~~ Fixed 2026-09-11**, restored
+from §4's own quotation and the shipping code: *"part of **one of** the many
+cultures of the world"*. The description now matches `__init__.py` byte for byte,
+and `scripts/verify_aasimar_page.py` holds it there.
 
-**5. Spelling.** *brigh* → bright (§0, Inner Radiance) · *inperfect* (the
-one-sentence summary) · *apparell* (Celestial Descent) · *convination* (Celestial
-Descent) · *sepparate* (The rules as given) · *continuosly* (The Lore) · *Hamelin
-Pipper* → Piper (the cultural wells).
+**5. ~~Spelling.~~ Fixed 2026-09-11**, by dictionary sweep of the whole page
+rather than by the list this ticket first carried: *inperfect*, *apparell*,
+*convination*, *sepparate*, *brigh*, *continuosly*, *encarnated*, *biew*,
+*Pipper*, *machiavelian*, and *lvl 3* spelled out as *level 3*. Hope's halo form
+was lower-cased to match the other eight, which are all read mid-sentence.
+One idiom was changed rather than corrected and is worth a second look: the
+Paladin row read *"Blood and vow both impeteritous"*, which is not an English
+word; it now reads **unflinching**, on the reading that it came from
+*impertérrito*. Revert it if the sense was different.
 
 **6. The Descent roster was moved from 🌟 to 🎲**, on 2026-09-11, when the two
 marks were introduced. The page had it under *Spark influences*. The generator

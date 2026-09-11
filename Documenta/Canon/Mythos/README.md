@@ -34,7 +34,7 @@ objection looks like, and how to fetch pages remotely.
 
 | Page | In one sentence |
 |---|---|
-| [Aasimar](Aasimar.md) | Carries something perfect, the measuring bar, and is mortal, and always short. A subculture recognisable anywhere; a model minority. |
+| 🔒 [Aasimar](Aasimar.md) | **Locked, and the worked reference.** Carries something perfect, the measuring bar, and is mortal, and always short. A subculture recognisable anywhere; a model minority. |
 | [Celestials](Celestials.md) | Ideals with shapes, prior to gods, certain, unkind in any way that serves an individual. For the NPC generator. |
 | [Tiefling](Tiefling.md) | Has never done anything, and that has never been the relevant fact. The Aasimar's mirror; the hated minority; the shared priesthood, split. |
 | [Dragonborn](Dragonborn.md) | Built a civilisation of rules by watching beings who kept none; nearest to the Ascending, never told. |
@@ -250,6 +250,12 @@ it under the old name.
 
 [Aasimar](Aasimar.md) is the worked reference. Read its chapter 0 before writing
 another. All ten peoples now carry one.
+
+🔒 **The Aasimar page is locked** (2026-09-11), the first one to be. It is the
+authority over `SpeciesKit/Aasimar/`: the code adapts to the page, a disagreement
+is a defect in the code, changes go through a Questa, and only Julio edits it.
+`scripts/verify_aasimar_page.py` enforces it and passes. Lock a page when its
+chapter 0 is complete, its code matches it, and a script can prove the match.
 
 ### How a chapter 0 is verified
 

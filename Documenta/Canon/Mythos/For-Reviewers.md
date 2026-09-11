@@ -25,6 +25,16 @@ told.
 code works. Not a specification. Nothing in them is implemented, and every
 proposal in them is waiting on the author's decision.
 
+**One page is the exception, and it is the one to read first.**
+[Aasimar](Aasimar.md) is 🔒 **locked** as of 2026-09-11, the first page to be, and
+locked inverts the paragraph above. It *is* implemented, and it is the authority
+over its own code: where `SpeciesKit/Aasimar/` and that page disagree, the code is
+wrong and the code changes. `scripts/verify_aasimar_page.py` checks that claim
+mechanically and passes. It is also the **worked reference** for the shape the
+other species pages are growing into, so read its chapter 0 before judging
+another one. Objections to it are still wanted, but they land as Questae against
+a lock rather than as edits, and only Julio edits it.
+
 ---
 
 ## 📔 2. The rules the pages are written against
