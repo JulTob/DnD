@@ -8,6 +8,10 @@
 > - 📒 **a rule we changed.** A house rule, and it already cost compatibility.
 > - 📘 **supportive lore.** It holds a rule or a core element up. 
 > - 📗 **deep lore.** Design that supports the fantasy rather than a rule.   
+> - 🌟 **assigned by the spark.** The Ideal decides it, and two Aasimar of the
+>   same Ideal share it.
+> - 🎲 **drawn at random.** Nothing decides it, and it says nothing about the
+>   Ideal.
 > - A book marks a statement only if it can change exclusively through the
 >   Questa / Agora / Decree system.
 >   Julio has privileges to edit directly. Code must realize the structural  changes through new QST. 
@@ -39,12 +43,12 @@ Angels, Muses, Constellations, Celestials... different cultures call your people
 
 All Celestials are inclined towards a higher ideal: Justice, Sacrifice, Freedom... Think about which ideal can inspire {name} and guide their path as an adventurer.
 ```
-# 📗 Celestial Descent.
+### 📗 Celestial Descent
 Generated text. One of the best features of the app. It makes each aasimar unique and characteristic in physical and evocative form at the same time. 
 
 It presents:
 - Talaria as the small wings hidden as apparell, based on Hermes and Kairos small wings.
-- Halo. A shining circle or crown around the head. 
+- Aureola. A shining circle or crown around the head. 
 - A color relationship to the ideals. Two for a complex but easy reading. Metalic colors for the wings, and gemstones for the halo.
 - A specific Ideal Celestial as a lineage.
 - It never mentions the specific Ideals, leaving the interpretation free for the player. It may inspire a more complex reading than a simple convination. 
@@ -56,10 +60,10 @@ Your talaria and aureola resemble the traits of the Angel Barakiel, so you may b
 
 #### 📗 The Ideals
 
-📗 The **metal** dresses the talaria, the **gem** is what the aureola glows like, the **form** is the halo's shape, and the **tell** is the one thing that halo does. The tell never names the Ideal it belongs to.
+📗🌟 The **metal** dresses the talaria, the **gem** is what the aureola glows like, the **form** is the aureola's shape, and the **tell** is the one thing that aureola does. All four are assigned by the spark: this table is the whole of what the Ideal decides. The tell never names the Ideal it belongs to.
 
 
-| 📗 Ideal | Halo form | Metal | Gem | Tell | Muse |
+| 📗 Ideal | Aureola form | Metal | Gem | Tell | Muse |
 |---|---|---|---|---|---|
 | **Justice** | a circle perfectly round from wherever anyone stands | black iron | onyx | *It dims when you are not being honest.* | History (Clio) |
 | **Mercy** | a glow with no edge, light that fades | gold | amber | *When someone near you is afraid, it sends a cold feeling down your spine.* | Sacred Song (Polihimnia) |
@@ -77,7 +81,7 @@ A Spark is the celestial side of the Aasimar, and it comes from two Ideals selec
 
 📘 Talaria are the small wings that greek gods like hermes and kairos have. For Aasimar, these are small and vestigial of their celestial origin. They may lie in places like the arms and the legs, and the back. They must always carry weight, as when unfolded by the lvl 3 transformation, where they grow into magnificent wings of great power. 
 
-📘 **Where they sit, and what they pass for folded.** Rule: A wing may only sit where a wing could reasonably take a body's weight: nothing on the face, nothing on the front side.
+📘🎲 **Where they sit, and what they pass for folded.** Rule: A wing may only sit where a wing could reasonably take a body's weight: nothing on the face, nothing on the front side.
 
 
 | Perch | Folded, it passes for |
@@ -91,7 +95,7 @@ A Spark is the celestial side of the Aasimar, and it comes from two Ideals selec
 | your ankles | anklets |
 | your heels | the straps of your sandals |
 
-📗 **How the metals wear.** With two Ideals the two metals share one pair of wings, seven ways: 
+📗🎲 **How the metals wear.** The metals are the spark's; the arrangement is not. With two Ideals the two metals share one pair of wings, seven ways: 
 - *{a} on the back and {b} beneath* ·
 - *{a} at the base, running to {b} at the tips* ·
 - *{a}, every feather edged in {b}* ·
@@ -148,7 +152,7 @@ Added Celestial subtype, as that is the core of the fantasy. Internally, an Aasi
 > 📕 **Inner Radiance**: Your eyes shine brightly and your halo grows into a brigh aurora. For the duration you shed Bright Light in a 10-foot radius and Dim Light for an additional 10 feet, and at the end of each of your turns each creature within 10 feet of you takes **{PB} Radiant damage**. Your extra damage is **Radiant**.
 > > 📘 _Your inner spark becomes an aurora of pure light._
 >
-> 📕 **Necrotic Shroud**: Your eyes briefly become pools of darkness and your halo collapses like a Dark Sun. Creatures other than your allies within 10 feet of you must succeed on a **Charisma Saving Throw** (**DC {8 + PB + CHA}**) or have the Frightened condition until the end of your next
+> 📕 **Necrotic Shroud**: Your eyes briefly become pools of darkness and your aureola collapses like a Dark Sun. Creatures other than your allies within 10 feet of you must succeed on a **Charisma Saving Throw** (**DC {8 + PB + CHA}**) or have the Frightened condition until the end of your next
 > turn. Your extra damage is **Necrotic**.
 > > 📘 _The brighter the light, the darker the shadow._ 
 
@@ -158,7 +162,13 @@ Added Celestial subtype, as that is the core of the fantasy. Internally, an Aasi
 
 📗 The spark is a constant, not an inheritance. An Aasimar is part of the sky and walks among mortals as one. They are continuosly both Mortal and Celestial. A spark cannot be taken away. Is identity. Is soul-bound. 
 
-📘 Two elements carry every rule on the page. The talaria, small vestigial wings that sit only where a wing could take a body's weight and fold away as clothing. The aureola, a halo whose shape is lent by the Ideal and whose shine resembles a gem. Between them they account for the wings that grow, the light that blazes and the darkness that collapses, so the three Revelation options belong to one body rather than being three unrelated powers.
+📘 **The problem the rules set.** The Revelation is the demanding one. It forces a single body that can sprout wings, shed searing light and terrify a room, and that must pick between them at each transformation.
+
+📘 **Our answer is one source: the spark.** The spark is a connection to the stellar realm, and it brings two changes onto the carrier (as well as the aesthetic choices of the player):
+- The **talaria**: small vestigial wings sitting only where a wing could take a body's weight, each folding away as a seam. They carry the colors of the spark. Reminiscent of Hermes and Kairos winged feet.
+- The **aureola**: a halo, in a shape the spark lends, whose shine resembles a gem. Typical in christian art, but with themed variations.
+
+📘 Between them the two account for the wings that grow, the light that blazes and the darkness that collapses, so the three Revelation options belong to one body rather than being three unrelated powers.
 
 📗 The Descent is an ancestor read off the sky, and it is never confirmed.
 
@@ -168,51 +178,15 @@ Added Celestial subtype, as that is the core of the fantasy. Internally, an Aasi
 
 For the Celestials themselves, their Virtue, their plans and their use as antagonists, see (Celestials)[Celestials.md].
 
-### 📗📘 The Cultural references
-- Athens
-   - the pensive philosopher.
-   - Plato's Cave and Ideals.
-   - Daedalus and Icaros.
-   - Minos.
-   - The Atlantis Mythos.
-   - Naval weaponry.
-   - Togas and greek clothing.
-   - Classic greek aesthetics.
-   - Muses
-
-- Vatican
-   - Neoclassic
-   - Dogma
-   - Authority and Calling
-   - Artistic depiction of Angels
-   - Thrones, Planetars, Angels
-
-- Sangha
-
-- Crusader in Fantasy and History
-   - Imperium of Men in 40k
-   - Arthur and the quest for the Grail
-   - Hamelin Pipper
-   - Zealots 
-
-
-### 📘📗 What the rules force, and what we chose
-
-The Revelation is the demanding one. It forces a single body that can sprout wings, shed searing light and terrify a room, and that must pick between them at each transformation.
-
-📘 Our answer is **one source: the spark**. 
-The spark is a connection to the stellar realm, and it brings two changes onto the carrier (as well as the aesthetic choices of the player): 
-- The **talaria**: small vestigial wings sitting only where a wing could take a body's weight, each folding away as a seam. They carry the colors of the spark. Reminiscent of Hermes and Kairos winged feet.
-- The **aureola**: a halo, in a shape the spark lends. Typical in christian art, but with themed variations.
-
 ### 📗 The variable detail
-Spark influences: 
-- Which metal the talaria catch (black iron, gold, red iron, silver, verdigris, pearl, tin, bronze, brass);
-- Which stone the aureola glows like (onyx, amber, ruby, diamond, aquamarine, opal, moonstone, jade, quartz);
-- and the roster of Descent names
 
-Chosen at random:
--  Where on the body the talaria sit (heels, ankles, wrists, forearms, shoulders, shoulder blades, the small of the back, the base of the spine).
+🌟 **Assigned by the spark**, and tabled once above: the metal the talaria catch,
+the stone the aureola glows like, the aureola's form, and its tell. One row per
+Ideal, and a mixed descent splits them.
+
+🎲 **Drawn at random**, and saying nothing about the Ideal: where on the body the
+talaria sit, how two metals share one pair of wings, which ancestor the marks are
+read as, and which of the four sentence patterns the entry is written in.
 
 ## 📚 1. Where the Aasimar lives in the code
 
@@ -229,11 +203,7 @@ Chosen at random:
 The Aasimar and the Dragonborn are the reference kits for voice (QST-0062). A
 generated Aasimar entry reads, for example:
 
-> *Your talaria rest at your shoulder blades and fold away as the seams of a
-> toga, shining like verdigris, barred across with silver. Above your head, a
-> star of many points, set like a compass rose, glowing like aquamarine shading
-> into diamond. It twinkles when you run, and beats when you fly. These are the
-> traits of the Sphinx Aidos, so you may belong to its lineage.*
+> *Your talaria rest at your shoulder blades and fold away as the seams of a toga, shining like verdigris, barred across with silver. Above your head, a star of many points, set like a compass rose, glowing like aquamarine shading into diamond. It twinkles when you run, and beats when you fly. These are the traits of the Sphinx Aidos, so you may belong to its lineage.*
 
 Two axes drawn apart (the wings take the metal, the halo the gem), a tell that
 never names the Ideal, four sentence arrangements in four voices, and an ancestor whose name is
@@ -246,42 +216,31 @@ generator gave it to an Assassin, which by the loaded-names rule is a story).
 
 A Celestial is an Ideal with a shape: not a god and not a servant of one, but
 Justice itself, or Mercy, standing where mortals can see it. Celestials are
-emanations of the Platonic Forms, encarnated by pure collective (jungian?) belief on the goodness of the concept, and each carries a True Name that defines and limits it (QST-0050). An Aasimar carries a *spark* of one.
+emanations of the Platonic Forms, encarnated by pure collective (jungian?) belief on the goodness of the concept, and each carries a Virtue level that defines their might. An Aasimar carries a *spark* of one.
 
 > **؂ Note:**  
 > 💡 A Celestial and a Demon both gain power from this collective belief in the same way: How good a concept is, that Celestial is more powerful. How bad a concept is, its Demon is more powerful. Same axis, different directions. Demons punish what Celestials prevent. Both are part of the same system of control. Devils, and Fallen Angels do not participate on this axis. 
 
 
-**The spark is fixed. The Aasimar is not.** 
-An Ideal cannot bend, cannot care for a worshipper, cannot love. 
-Only the Ideal is important. 
-You are important as an artefact of this ideal. 
-A mortal chooses, makes mistakes, grows, and has free will. 
-The spark sets the bar and the Aasimar lives under it, always a little short, and the aureola reminds him of the distance without judging it.
-This is the drama intrinsic to every Aasimar and it needs no villain.
+**The spark is fixed. The Aasimar is not.** The bar, the gap and the drama it
+creates are stated in §0. What the gap costs the person standing in it: only the
+Ideal is important, and you are important as an artefact of it. A mortal chooses,
+makes mistakes, grows and has free will; the thing measuring them does none of
+that. The aureola reminds them of the distance without judging it.
 
-**The Ideals** (from `Map_of_Ideals.py`; 
-the Celestials page carries the full table): 
-- Justice,
-- Mercy,
-- Sacrifice,
-- Truth,
-- Freedom,
-- Beauty,
-- Hope,
-- Honor,
-- Harmony.
+**The Ideals** are tabled in §0, with their metals, gems, aureola forms and
+tells. What the table does not say:
+
 They are alignment-independent and twistable ("I claim Justice for your
-offence"; "Truth is what I say it is"). The list is open: a merged concept makes
-a new Celestial, so it is never counted and never closed.
-Vengeance is not an Ideal, because it belongs to the Demons theme: Punishment. 
+offence"; "Truth is what I say it is"). The list is open: a merged concept makes a new Celestial, so it is never counted and never closed.
+Vengeance is not an Ideal, because it belongs to the Demons' theme: Punishment. 
 
 Saints belong to the Dwarves and are a different system.
 
-**A spark comes from two Ideals**, each drawn from the whole list at uniform random. 
-The same Ideal may come up twice, and that is a single descent: no weighting, and nothing taken out of the pool between the two draws. 
-The first lends the aureola its form, both lend the gem-like colour it glows with, and either may lend the tell. 
-Honor's standing flame, glowing like jade shading into Beauty's opal, belongs to that pair and to nobody else at the table.
+**A spark comes from two Ideals**, drawn as §0 states; the same Ideal coming up
+twice is a single descent. In a mixed descent the first lends the aureola its
+form, both lend the gem-like colour it glows with, and either may lend the tell. Honor's standing flame, glowing like jade shading
+into Beauty's opal, belongs to that pair and to nobody else at the table.
 
 **The spark shapes the vessel** 
 The Aasimar is not a human with wings.
@@ -301,37 +260,18 @@ Neither is directly named on the page nor directly ported into the system. Just 
 
 ## 📔 3. The vessel: physiology
 
-**Talaria.** 
-Small vestigial wings, sitting only where a wing could take a body's weight (lower neck, wrists, forearms, shoulders, shoulder blades, small of the back, base of the spine, ankles, heels), each folding into something a tailor could hide or explain: a collar, bracelets, a sash, sandal straps. 
-They catch the light like a metal (black iron, gold, red iron, silver, verdigris, pearl, tin, bronze), which nods at the Dwarven soul-metals without confirming anything.
+**What §0 settles and this chapter does not repeat.** The talaria and their
+perches, the plumages, and every Ideal's metal, gem, aureola form and tell. One
+thing sits outside that table: the metals nod at the Dwarven soul-metals and
+confirm nothing, which is deliberate DM space (§7).
 
-**Aureola.** 
-The halo, glowing like a stone (onyx, amber, ruby, diamond, aquamarine, opal, moonstone, jade) in a form the Ideal lends: 
-- a circle perfectly round from wherever anyone stands (Justice),
-- a broken ring (Sacrifice),
-- a compass rose (Freedom),
-- a standing flame (Honor),
-and so on.
+**The aureola has a second well.** In the yogic map the halo is the crown centre made visible, the thousand-petalled lotus drawn above the head; `sangha` reaches `india` at 2, so the Aasimar's own third marker carries the well.
 
-In the yogic map the halo is the crown centre made visible, the thousand-petalled lotus drawn above the head; `sangha` reaches `india` at 2, so the Aasimar's own third marker carries the well.
-
-**The tell.** 
-Each aureola does one thing, and the thing never names the Ideal it belongs to: 
-- it dims when you are not honest;
-- it sends a chill down your spine when someone near you is afraid;
-- it darkens for a moment whenever you see someone die;
-- it falls into chaos when you feel anything strongly;
-- it twinkles when you run and beats when you fly;
-- it beats once when you see something beautiful;
-- it is faint when you wake and brighter as you tire;
-- its colour changes with your mood;
-- it stutters when you are in pain, of body or of mind.
-Watching a halo dim tells you somebody lied, not what they descend from.
+**The tell.** The nine are in §0's table, one per Ideal. Watching a halo dim tells you somebody lied, not what they descend from.
 
 Three rules govern the tell:
 
-1. **It answers to fidelity, not virtue.** A tyrant whose ring stays perfect is
-   entirely possible, and a better story than one whose halo goes out.
+1. **It answers to fidelity, not virtue.** A tyrant whose ring stays perfect is  entirely possible, and a better story than one whose halo goes out.
 2. **It only ever says no.** Socrates' daimonion never told him what to do, only
    what not to; the tell is a daimonion made visible. No later tell may be
    written as an instruction.
@@ -348,9 +288,6 @@ A well, not a rule; it also keeps Saints (round, dead, Dwarven) apart.
 **"You can hide them or empower them depending on your emotional state."** The
 species entry's sentence is the tell's charter, and Celestial Revelation is
 the rule: for one minute the thing usually hidden stops hiding.
-
-**Darkvision.** Decided: printed as an entry with a description and a
-brief flavour line, not chip-only. *"Darkness cannot hide the truth from you."*
 
 **Celestials do not care much about the vessel**. The body is apparatus
 for the spark. This is a temperament, and it separates them from every people
@@ -419,6 +356,34 @@ whose isolation is *hostile*. The Aasimar's is upward.
 
 ## 📜 5. Culture and registers
 
+### 📗📘 The Cultural references
+- Athens
+   - the pensive philosopher.
+   - Plato's Cave and Ideals.
+   - Daedalus and Icaros.
+   - Minos.
+   - The Atlantis Mythos.
+   - Naval weaponry.
+   - Togas and greek clothing.
+   - Classic greek aesthetics.
+   - Muses
+
+- Vatican
+   - Neoclassic
+   - Dogma
+   - Authority and Calling
+   - Artistic depiction of Angels
+   - Thrones, Planetars, Angels
+
+- Sangha
+
+- Crusader in Fantasy and History
+   - Imperium of Men in 40k
+   - Arthur and the quest for the Grail
+   - Hamelin Pipper
+   - Zealots 
+
+
 **The markers.** `athens` (the academy, the portico, the fleet), `vatican`
 (sacerdotal Rome: office, vestment, canon), `sangha` (the Buddhist monastic
 order of South and Southeast Asia: the khakkhara, the vajra, the dha, temple
@@ -465,8 +430,7 @@ Never on the page; a DM's gift.
 **Lucifer is a Celestial, unfallen.** The Planetars carry the Greek names of
 the wandering stars and the Latin morning star is among them. In this setting
 the fall is a *reading* (Tiefling canon), and the morning star never fell.
-Keep him in the pool; never comment. (`DESCENTS` lists Hesperus twice: keep
-one.) 
+Keep him in the pool; never comment.
 Another reading is that a Fallen Planetar or an "angel" (common term for celestials in generals, as most people only see angels, not thrones or planetars.) is not automatically a demon or devil. 
 Just a Satan (adversary), and the Fallen may still serve an ideal. 
 I could see a Planetar of Freedom revelling against the whole plan of controlling the morality of mortals. And both Devils and Fallen Angels being "the imaginary axis" to the controlling paradigm, where they are maybe good or bad, but free people from the simple machiavelian  reading of morality. Maybe a Devil wants to control you, and Lucifer may want you to just be free to be yourself. 
@@ -481,10 +445,10 @@ importing the real-world institutions as lore.
 
 ## 📜 6. Metaphysics
 
-**The measuring bar.** Stated in §2. Every class an Aasimar takes is a different
-departure from the spark, and the aureola reports every departure.
-
-**Fidelity, not virtue.** The tyrant with a perfect ring is intended.
+**Stated elsewhere, and not restated here.** The measuring bar and the drama it
+creates (§2). The tell that answers to fidelity rather than virtue, so the tyrant
+keeps a perfect ring (§3). Every class an Aasimar takes is a different departure
+from the spark, and the aureola reports every departure (§8).
 
 **The Nephilim.** The Abrahamic root of the half-celestial is ambivalent:
 "mighty men of old, men of renown", and the stated reason for the flood. The
@@ -492,7 +456,25 @@ blessed reading is also a reading. It rhymes with the Tiefling's theological
 shift (one mechanism, opposite ends) and gives the Aasimar an unspoken history
 that need never be resolved.
 
-> What about the reading of the Mythic Greece? The Hero that was not good, just mighty?
+**The Greek hero.** A child of the heavens is the definition of a Greek hero,
+and goodness is no part of the definition. Herakles kills his own children;
+Achilles sulks while his friends die and then drags a corpse around a city;
+Theseus leaves Ariadne on a beach; Jason breaks the oath the moment it stops
+paying. The word for what they have is *aretē*, excellence at being the
+thing you are, and it never meant virtue. The divine parent hands down capacity.
+What the hero is owed for it is *kleos*, renown, and nothing else.
+
+That is the Nephilim verse in another language: *mighty men of old, men of
+renown*. Two traditions with no contact between them agree that mixing heaven and
+earth makes might, and that might is not goodness. It gives this page's oldest
+rule a second root, since the spark makes you **more** and never **better**, and
+it is the readiest argument against playing every Aasimar as a Paladin. It gives
+the Holy Horror below its Greek half, because a god fathers a hero for a purpose
+and the hero finds out late. And it gives the drama its oldest shape: the
+half-god is measured against the parent and comes up short, because the hero dies
+and the god does not. Perseus is already in the Descent roster as a
+Constellation, which is where that story ends. The hero is not raised into the
+sky for being good. He is put there for being remembered.
 
 **The Holy Horror**. "He made you just to do its bidding?" A Celestial
 cannot love an Aasimar; it can *hire* one, and it can *make* one for the job.
@@ -632,6 +614,12 @@ on conduct without naming the principle.
   alternatives) and whether `sangha` is the right name (`theravada`, `nalanda`);
   from `Cultural-Inspirations.md`.
 - ~~Which Ideal takes Euterpe~~ **Settled: Harmony**, a primary Ideal.
+- **Seven copy decisions wait on Julio, and only on Julio (QST-0114):** Inner
+  Radiance still says *halo* where Necrotic Shroud now says *aureola*; the 📕 on
+  the two rewritten Revelation options, which the legend makes 📙; a reversed
+  Celestials link; a dropped *"one of"* in the description; a short spelling
+  list; whether the Descent roster is 🌟 or 🎲; and whether chapter 11 stops
+  being 📖, which is the last thing keeping this page unfinished.
 
 **Rejected**
 
@@ -683,7 +671,6 @@ getting it wrong first:
 
 | Entry | Line |
 |---|---|
-| **Monk's Focus, Aasimar only** | *It comes down from the ring above your head and out through your hands. The body was always the instrument. You only had to consecrate it.* |
 | **Celestial Patron, Aasimar only** (for the ancestor synergy, §8) | *You know exactly who hired you. You have their wings.* |
 
 ---

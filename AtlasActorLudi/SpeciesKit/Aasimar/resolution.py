@@ -95,7 +95,7 @@ def _revelation_options(
 			"Radiant damage. Your extra damage is Radiant. "
 			"<b>Necrotic Shroud.</b> <i>The brighter the light, the darker "
 			"the shadow.</i> Your eyes briefly become pools of darkness and "
-			"your halo collapses like a Dark Sun. "
+			"your aureola collapses like a Dark Sun. "
 			"Creatures other than your allies within "
 			f"{Necrotic_Shroud.RADIUS} feet of you must succeed on a Charisma "
 			f"saving throw (DC {save_dc}) or have the Frightened condition "
