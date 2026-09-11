@@ -32,7 +32,7 @@ lore is touched.*
 | Q-0030 | Does every General feat get a one-line "where the road taught it," on the model of the tool Practices? (Feats §4, Equipment §5) | Mythos review | Readability (Barbarian), Design-Team | — | 🕓 proposed |
 | Q-0031 | Which of the two Titles files and the two Story engines is the record, and does the other go? (Names §6, Repairs D2-D3) | Mythos review | Architecture (Druid), Simplicity (Monk), Testing (Rogue) | — | 🕓 proposed |
 | Q-0032 | Do the Orc and the Halfling receive culture keys in the gear map, and which: for the Orc `kirghiz` with `western` as legend, `scythian` beside it, or `pampa`; for the Halfling `provence` and `flanders` with `pastoral`, or one of them? (Draft-Tables §E) | Mythos review | Lorekeeper, Design-Team, Workshop (Artificer) | — | 🕓 proposed |
-| Q-0033 | Where does Euterpe sit: Mercy's second Muse, the Muse of the Descents, or unassigned on purpose? (Draft-Tables §F; Celestials) | Mythos review | Lorekeeper, Understanding (Bard), Design-Team | — | 🕓 proposed |
+| ~~Q-0033~~ | ~~Where does Euterpe sit?~~ **Settled without the Agora:** she holds **Harmony**, a primary Ideal added to the roster. Code in QST-0111. | Mythos review | | — | ✅ closed |
 
 ## 📔 Not questions: repairs
 

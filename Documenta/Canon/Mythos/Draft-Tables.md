@@ -107,7 +107,7 @@ has). All from the 2024 weapon table; the clause says why.
 
 ## 📔 C. A Celestial NPC is an Ideal and a manner (Q-0019)
 
-Eight Ideals down, seven Descent kinds across. Each cell is the manner the
+The Ideals down, the Descent kinds across. Each cell is the manner the
 Ideal takes in that kind: the phrase a Dungeon Master reads before the
 statblock. The kind-names mortals use (Seraph, Throne, Archon) are distances,
 not kinds; this grid replaces the Monster Manual table in the NPC Celestial
@@ -212,21 +212,21 @@ Consequences: the food given-names retire (Names page); the surnames stay; the
 prayer ledger gains Halfling rows in the valley's voice; materials (oak, wicker,
 linen, cheese-cloth, cider-oak).
 
-## 📔 F. Euterpe (README open item)
+## 📔 F. Euterpe (settled)
 
-Nine Muses, eight Ideals. The Celestials page seats Clio (Justice), Polihimnia
-(Mercy), Melpomene (Sacrifice), Urania (Truth), Terpsicore (Freedom, by the project's
-decision), Erato (Beauty), Talia (Hope), Calliope (Honor). Euterpe, lyric and
-the flute, is unseated; *Joy* as a ninth Ideal was superseded.
+Euterpe holds **Harmony**, a primary Ideal added to the roster. The three
+options once drafted here (Mercy's second Muse, the Muse of the Descents, or
+unassigned on purpose) are all superseded: none was needed once an Ideal existed
+for her to hold.
 
-| Option | Euterpe is | Tradeoff |
-|---|---|---|
-| **A** | Mercy's second Muse, beside Polihimnia: the hymn is Mercy sung *to* the Ideal, the lyric is Mercy sung *to the wounded*. Mercy has the most occasions of any Ideal and earns two arts. | Mercy becomes the only Ideal with two Muses; the table's symmetry breaks where the canon says Mercy is anyway the least symmetrical Ideal ("a glow with no edge"). |
-| **B** | The Muse of the Descents: not of an Ideal but of the *manner*, the music heard when a Celestial takes a shape or falls into one. She belongs to every Ideal at the moment it descends and to none at rest. | A Muse without an Ideal strains "the Muse is the Ideal as an art"; defensible only if the Descent is read as an art of its own, which §3 of the Celestials page half-says already. |
-| **C** | Unassigned, on purpose: the ninth Muse is the setting's admission that eight Ideals do not cover everything, and she plays for none of them. An Aasimar marked by Euterpe carries no Ideal. | Contradicts the fixed-Ideal canon at its root; recorded so it is not proposed again. |
+Two things that decision established and which outlive this section. **Harmony
+is primary, not a merger**: Justice does not affect mathematics and Beauty does
+not affect a ratio, even when the ratio makes a beautiful sound. And **the
+roster is open**, so no document states how many Ideals there are. The Muses are
+the principal Celestials of their kind rather than a complete set, so a later
+Ideal may arrive with no Muse and that is not a gap.
 
-A leans on what exists; B is the more original and the riskier; C is the one
-the Joy decision already refused.
+See **QST-0111** for the code.
 
 ## 📚 G. Pointers
 

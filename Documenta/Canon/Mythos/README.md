@@ -307,7 +307,7 @@ Decree or a Questa.*
 - **The Darkvision convention** across the Dragonborn (chip-only) and the rest.
 - **The Orders' door**: a player background that Swears, with three entries.
 - **The Relationships layer** of the Orders (drafts on the Orders page).
-- **Euterpe**: the one Muse still unassigned (three options on Draft-Tables §G).
+- ~~Euterpe~~ Settled: she holds Harmony, a primary Ideal (Draft-Tables §F).
 - **The peoples table**: sufficiency, curiosity, the compact (proposed).
 - **The official backgrounds**: the institutional principle; the Wayfarer.
 - **The signature-object Kit**: eight consumers of the Spellbook's mechanism.

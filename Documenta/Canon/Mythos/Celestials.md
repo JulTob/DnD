@@ -42,7 +42,7 @@ attending the highest god, each one an abstraction with a face.
 
 ---
 
-## 📔 2. The eight Ideals
+## 📔 2. The Ideals
 
 | Ideal | Aureola form | Metal / gem | Tell (never names the Ideal) | Muse |
 |---|---|---|---|---|
@@ -65,7 +65,7 @@ Rules that hold across the table:
   A Celestial launders grievance as Justice, which is more frightening.
 - **Saints are Dwarven** and stay out of this table. Two systems that look like
   one from a distance; the resemblance is deliberate DM space.
-- **Euterpe** (music, lyric) is the one Muse still unassigned. Open.
+- **Euterpe** (music, lyric) holds **Harmony**. Every Muse now holds an Ideal, and the roster is open rather than complete.
 
 ---
 
@@ -303,5 +303,8 @@ ancestors, both showing.
 - **Tiefling page**: the other mortal end, and the shared priesthood.
 - **Dragon canon**: add the Couatl as an Ideal-bound dragon, never confirmed.
 - **Goliath page**: the war for the heavens; Rhodes.
-- **Bard page**: the Muses' class; Euterpe open.
+- **Bard page**: the Muses' class.
 - **Cleric page**: the triple "Maybe" as the mortal register for Celestials.
+
+---
+⚠️ **The Planetar roster lists Hesperus twice.**

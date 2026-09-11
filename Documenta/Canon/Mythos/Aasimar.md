@@ -54,33 +54,27 @@ Example:
 Your talaria and aureola resemble the traits of the Angel Barakiel, so you may belong to its lineage. At your heels you carry talaria that catch the light like verdigris, barred across with red iron, and folded they pass for the straps of your sandals. Your aureola is a star of many points, set like a compass rose, and it glows like aquamarine shading into ruby. It twinkles when you run, and beats when you fly.
 ```
 
-#### 📗 The eight Ideals
+#### 📗 The Ideals
 
-The **metal** dresses the talaria, the **gem** is what the aureola glows like,
-the **form** is the halo's shape, and the **tell** is the one thing that halo
-does. The tell never names the Ideal it belongs to.
+📗 The **metal** dresses the talaria, the **gem** is what the aureola glows like, the **form** is the halo's shape, and the **tell** is the one thing that halo does. The tell never names the Ideal it belongs to.
 
-| Ideal | Halo form | Metal | Gem | Tell | Muse |
+
+| 📗 Ideal | Halo form | Metal | Gem | Tell | Muse |
 |---|---|---|---|---|---|
 | **Justice** | a circle perfectly round from wherever anyone stands | black iron | onyx | *It dims when you are not being honest.* | History (Clio) |
 | **Mercy** | a glow with no edge, light that fades | gold | amber | *When someone near you is afraid, it sends a cold feeling down your spine.* | Sacred Song (Polihimnia) |
 | **Sacrifice** | a broken ring, with an arc of it missing | red iron | ruby | *It darkens for a moment whenever you see someone die.* | Tragedy (Melpomene) |
 | **Truth** | a ring of small lights, each orbiting on its own | silver | diamond | *It falls into chaos when you feel anything strongly, good or bad.* | Astronomy (Urania) |
-| **Freedom** | a star of many points, set like a compass rose | verdigris | aquamarine | *It twinkles when you run, and beats when you fly.* | Dance(Terpsicore) |
+| **Freedom** | a star of many points, set like a compass rose | verdigris | aquamarine | *It twinkles when you run, and beats when you fly.* | Dance (Terpsicore) |
 | **Beauty** | slow waves of colour, one running after another | pearl | opal | *It beats once when you look at something you find beautiful.* | Love Poetry (Erato) |
-| **Hope** | A band crowning your temples | tin | moonstone | *Faint in daylight, but unmistakable in the dark.* | Comedy (Talia) |
+| **Hope** | A band crowning your temples | tin | moonstone | *It is faint when you wake up, but brighter as you get tired.* | Comedy (Talia) |
 | **Honor** | a standing flame that burns without moving | bronze | jade | *Its colour changes with your mood.* | Epic Tales (Calliope) |
+| **Harmony** | rotating triangles with perfect proportions | brass | quartz | *It stutters when you are in pain, of body or of mind.* | Lyric & Flute (Euterpe) |
 
-⚠️ **Freedom's `muse` field is empty.** Dance (Terpsicore) is the decided
-answer and the code does not carry it yet. Euterpe, lyric and the flute, is the
-one Muse with no Ideal.
-
-⚠️ **The Planetar roster lists Hesperus twice.**
 
 #### The talaria, as the generator draws them
 
-**Where they sit, and what they pass for folded.** Nine perches, and the rule
-behind the list is that a wing may only sit where a wing could take a body's
+**Where they sit, and what they pass for folded.** A wing may only sit where a wing could take a body's
 weight: nothing on the face, nothing on the front of the chest.
 
 | Perch | Folded, it passes for |
@@ -280,7 +274,7 @@ A mortal chooses, makes mistakes, grows, and has free will.
 The spark sets the bar and the Aasimar lives under it, always a little short, and the aureola reminds him of the distance without judging it.
 This is the drama intrinsic to every Aasimar and it needs no villain.
 
-**Eight Ideals** (from `Map_of_Ideals.py`; 
+**The Ideals** (from `Map_of_Ideals.py`; 
 the Celestials page carries the full table): 
 - Justice,
 - Mercy,
@@ -638,8 +632,7 @@ on conduct without naming the principle.
 - Whether `vatican` reads too modern (`see`, `basilica`, `apostolic` are the
   alternatives) and whether `sangha` is the right name (`theravada`, `nalanda`);
   from `Cultural-Inspirations.md`.
-- Which Ideal, if any, takes Euterpe (music, lyric); the only Muse still
-  unassigned.
+- ~~Which Ideal takes Euterpe~~ **Settled: Harmony**, a primary Ideal.
 
 **Rejected**
 
@@ -691,7 +684,7 @@ marked as such.*
   exclusion.
 - **Goliath**: Celestials against Titans; Rhodes; the Odyssey.
 - **Dragon canon**: the Couatl as an Ideal-bound dragon.
-- **Bard**: Dance is Freedom's; Euterpe open.
+- **Bard**: Dance is Freedom's; Euterpe holds Harmony.
 - **Sorcerer**: the species law read correctly; synergy, not collision.
 - **QST-0050**: the CelestialKit shared between players and NPCs, which this
   page and the Celestials page both need.

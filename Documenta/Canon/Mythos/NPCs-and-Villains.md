@@ -80,7 +80,7 @@ and the horoscope in one list.
 - ⚠️ "Angelic Bloodline" and "Half-Angel" are the Aasimar told as ancestry,
   which the Aasimar page spent a section refusing.
 - **Proposal.** A Celestial NPC is **an Ideal and a manner**: draw one of the
-  eight Ideals, then a Descent from the Celestials page (Star, Muse, and the
+  the Ideals, then a Descent from the Celestials page (Star, Muse, and the
   rest), and let the kind-name be the manner's name. *Seraph, Throne, Archon*
   can stay as the words mortals use for the same thing seen at different
   distances, the way Fae, Fata and Shadow are one substance with three names.

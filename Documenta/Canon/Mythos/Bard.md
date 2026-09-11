@@ -97,7 +97,7 @@ expression of freedom, so the College of Dance is where an Aasimar of Freedom
 finds spark and profession in the same place: the compass-rose halo that
 "twinkles when you run, and harder when you fly" is its tell. Grace is
 twistable in the canon's sense ("grace is what I decide you deserve"), and
-Euterpe, music and lyric, is the one Muse still unassigned. Grace is the harder Ideal and
+Euterpe, music and lyric, holds **Harmony**. Grace is the harder Ideal and
 the better one: the setting has Mercy (the open hand) and Hope (the star in
 the dark) and nothing for *unearned ease*, which every Bard's art is.
 
@@ -369,7 +369,7 @@ proposals.*
 - **Canon**: one paragraph recording that the Bard operates the setting's
   plastic metaphysics (§2), placed in the Dragon or Elf canon where the loop
   is already stated.
-- **Aasimar / QST-0050**: Grace as a candidate ninth Ideal, and where Euterpe sits (§3).
+- **Aasimar**: Grace as a candidate Ideal (§3). Euterpe is settled: she holds Harmony.
 - **Gear**: `Map_of_Instruments` (§5), and the Bard's Spellcasting Focus
   seated as a named instrument.
 - **Tiefling**: the host-culture instrument as the species' first inheritance.
