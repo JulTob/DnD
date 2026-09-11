@@ -210,3 +210,40 @@ elves being the only people shaped by what everyone imagines. That table
 predates this law and is wrong twice: every people is shaped by belief, and no
 ordering exists. It should become a table of **kinds of belief** rather than of
 philosophies.
+
+---
+
+## 📜 7. How a flavour line is written
+
+Every feature entry on a sheet is one rule and, above it, one italic sentence.
+The sentence is the only place the project speaks to the player in its own voice,
+and it is the part a reviewer is most likely to judge by the wrong standard. Four
+rules govern it. Each was learned by getting it wrong first, on the Aasimar,
+whose eight lines were drafted and redrafted until the rules below fell out of
+the failures.
+
+1. **A line teaches the fantasy, not the mechanic.** The player can read the
+   rule; it is printed directly underneath. The line exists to inspire a trope or
+   an archetype. A line that explains what the feature does has spent the one
+   sentence it had.
+2. **No mechanical detail in a line.** *"For a minute"* is obvious to any player
+   after a single use, and putting it in the line costs the sentence that could
+   have inspired. Durations, dice, ranges and recharges belong to the rule.
+3. **A tell is an emotional reaction, not a logical step and not an
+   environmental reading.** Where a feature reports on its carrier, the irony is
+   that the feeling moves the thing being reported on, and never the other way.
+   *"It dims when you are not being honest"* is a tell. *"It is dim in sunlight"*
+   is weather, and *"it fades as your reasons run out"* is an argument.
+4. **Write the emotion the way the emotion actually behaves.** Hope is the one
+   that catches people out, so it is the worked example: hope is not
+   desperation. Hope goes on against all odds. It comforts, it warms, it says
+   stand up again. It is a faro for the future, a *try again tomorrow* sign, and
+   the line it earned is *"It is faint when you wake up, but brighter as you get
+   tired."*
+
+**What this means for an objection.** "This line does not explain the feature"
+is not a finding; it is rule 1 working. "This line would read better with the
+duration in it" is rule 2 inverted and will be discarded. A useful objection
+about a line says that it teaches the wrong fantasy, that it names a mechanic,
+that it reads as an instruction rather than a reaction, or that the feeling in it
+is not how that feeling behaves.

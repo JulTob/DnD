@@ -46,11 +46,16 @@ Ideals, and the page's own 📗 line says *"The Descent is an ancestor read off 
 sky, and it is never confirmed"*, which only holds if the spark did not assign
 it. **If Julio meant 🌟, the generator is what changes, not the page.**
 
-**7. Chapter 11 is still marked 📖 *in flow*.** Its content is now settled: all
-eight lines are wired and the chapter records what each replaced. It is the only
-chapter keeping the page at *"1 of 13 chapters are still proposals"*. Whether it
-becomes 📚 is Julio's call, and it is the last thing standing between this page
-and being marked finished.
+**7. ~~Chapter 11~~ Settled 2026-09-11.** Julio removed it: the explanation of the
+flavour lines belongs in `For-Reviewers.md`, not on one species' page. The four
+craft rules are now For-Reviewers §7, generalised to every species; the
+Aasimar-specific history (where the lines came from, what each replaced, and the
+one line still proposed) is kept in QST-0113. Pointers renumbered to §11 and the
+page's head line now reads **📜 Settled**, all 12 chapters.
+
+**With that, items 1 to 6 are the whole of what stands between this page and
+being locked.** Five of them are copy (1 to 5); item 6 is the only one that
+changes the generator if it goes the other way.
 
 ## 🎯 Desired outcome
 

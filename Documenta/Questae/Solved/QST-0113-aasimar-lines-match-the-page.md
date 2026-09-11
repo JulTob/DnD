@@ -5,7 +5,7 @@
 - **Status:** Solved
 - **Owner:** Claude
 - **Route to:** Technical Team · Lorekeeper · Julio
-- **Related:** QST-0110 · QST-0111 · QST-0094 · `Documenta/Canon/Mythos/Aasimar.md` §0 §11 · `AtlasActorLudi/SpeciesKit/Aasimar/resolution.py`
+- **Related:** QST-0110 · QST-0111 · QST-0094 · `Documenta/Canon/Mythos/Aasimar.md` §0 · `Documenta/Canon/Mythos/For-Reviewers.md` §7 · `AtlasActorLudi/SpeciesKit/Aasimar/resolution.py`
 
 ---
 
@@ -83,3 +83,32 @@ Julio's:
   behind all three), but its evidence needs restating. The ⚠️ warning below it
   says *"Necrotic Shroud's own sentence stops meaning anything"* if a later hand
   removes the talaria, and that sentence has already gone.
+
+## 🧭 The trail, kept here because the page no longer carries it
+
+The Aasimar page had a chapter 11 holding the lines' history. It came out on
+2026-09-11, on Julio's ruling that *"the explanation of the flavour lines does not
+belong in the aasimar, but in the For-Reviewers"*. The craft rules went to
+`For-Reviewers.md` §7, where they belong to every species rather than to this
+one. What was left is Aasimar-specific history, and it is kept here.
+
+**Where the lines came from.** The Darkvision clause and the three Celestial
+Revelation clauses were the author's own, written by hand into the working notes
+under a heading that reads *Drafts*, and carried from there onto the page. They
+are in no Questa and no Decree, and a search of the whole repository history
+finds them in no commit that predates the Mythos folder. That is not a defect in
+them; it is the shape of authored text written straight into a page. It does mean
+the trail is this section. **It should not be deleted.** The before-and-after of
+all eight is the table in the Diagnosis above.
+
+**One line is still a proposal**, for an entry that does not exist yet:
+
+| Entry | Line |
+|---|---|
+| **Celestial Patron, Aasimar only** (for the ancestor synergy, Aasimar §8) | *You know exactly who hired you. You have their wings.* |
+
+A second proposal, a Monk's Focus line for Aasimar (*"It comes down from the ring
+above your head and out through your hands. The body was always the instrument.
+You only had to consecrate it."*), was cut by Julio during the same pass. It is
+recoverable from commit `634f411` if it is ever wanted; it is recorded here so
+that nobody has to know it existed in order to find it.

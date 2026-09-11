@@ -1,7 +1,10 @@
 # ✨ Aasimar
 ##  The Mortal Angel
 ---
-> 📖 **In flow.** 1 of 13 chapters are still proposals. 📜 5 · 📚 2 · 📔 5 · 📖 1
+> 📜 **Settled.** All 12 chapters. 📜 5 · 📚 2 · 📔 5
+> The eight flavour lines are 📘 in §0 and the code matches them. How a line is
+> written is [For-Reviewers §7](For-Reviewers.md); why these eight read as they do
+> is QST-0113. What is still open is copy, and it is listed below.
 
 > - 📕 **inherited from the 2014/2024 rules.** Moving it costs rules compatibility.
 > - 📙 **an aesthetic change.** The same rule wearing our name and look.
@@ -618,8 +621,8 @@ on conduct without naming the principle.
   Radiance still says *halo* where Necrotic Shroud now says *aureola*; the 📕 on
   the two rewritten Revelation options, which the legend makes 📙; a reversed
   Celestials link; a dropped *"one of"* in the description; a short spelling
-  list; whether the Descent roster is 🌟 or 🎲; and whether chapter 11 stops
-  being 📖, which is the last thing keeping this page unfinished.
+  list; and whether the Descent roster is 🌟 or 🎲. These are the last things
+  between this page and being locked.
 
 **Rejected**
 
@@ -629,54 +632,8 @@ on conduct without naming the principle.
 
 ---
 
-## 📖 11. Lines
 
-**Where they came from.** The Darkvision clause and the three Celestial
-Revelation clauses were the author's own, written by hand into the working notes
-under a heading that reads *Drafts*, and carried from there onto this page. They
-are in no Questa and no Decree, and a search of the whole repository history
-finds them in no commit that predates this folder. That is not a defect in them;
-it is the shape of authored text written straight into a page. It does mean the
-trail is this chapter, so it should not be deleted.
-
-**What is wired.** All eight, and chapter 0 carries them as the authority. The
-code was brought to them rather than the reverse: where a feature's own paragraph
-said something else, the paragraph was the mistake.
-
-| Entry | Line | Was |
-|---|---|---|
-| **Darkvision** | *Darkness cannot hide the truth from you.* | nothing; a bare chip |
-| **Celestial Resistance** | *Life flows through you. Death passes over you.* | *Whatever burns or rots reaches you and finds nothing to take hold of.* |
-| **Healing Hands** | *Life finds your way.* | *Something in you remembers what a body is supposed to feel like, and lends it out.* |
-| **Light Bearer** | *There is always a spark of light inside of you. Relentless.* | *Your aureola never fully goes out, not even when you'd rather it did.* |
-| **Celestial Revelation** | *Be not afraid, for you bear a star.* | *For a little while, the thing you usually hide stops hiding.* |
-| **Talarian Wings** | *Something in you answers the sky's calling.* | *This is your true self.* (and before it, *You spread your wings to show your true self.*) |
-| **Inner Radiance** | *Your inner spark becomes an aurora of pure light.* | *You can feel your inner light giving you the…* — the draft ended there, unfinished, and was never completed in another hand |
-| **Necrotic Shroud** | *The brighter the light, the darker the shadow.* | unchanged; the only place the kit lets the Aasimar show the Tiefling's face, and exactly one sentence |
-
-**What the drafting taught.** Four things, kept because each was learned by
-getting it wrong first:
-
-- **A line teaches the fantasy, not the mechanic.** Players can read the rule.
-  The line inspires a trope.
-- **No mechanical detail in a line.** "For a minute" is obvious to any player
-  after one use, and it spends the one sentence that could have inspired.
-- **The tells are emotional, not logical and not environmental.** The irony is
-  that the feeling moves the Ideal, and never the other way.
-- **Hope is not desperation.** Hope goes on against all odds. It comforts, it
-  warms, it says stand up again. A faro for the future, a *try again tomorrow*
-  sign.
-
-**Still proposals, for entries that do not exist yet:**
-
-| Entry | Line |
-|---|---|
-| **Celestial Patron, Aasimar only** (for the ancestor synergy, §8) | *You know exactly who hired you. You have their wings.* |
-
----
-
-
-## 📚 12. Pointers
+## 📚 11. Pointers
 
 - **[Celestials.md](Celestials.md)**: the beings themselves, for the NPC
   generator: Ideals, Descents, temper, how they act, the Celestial as
