@@ -7,6 +7,18 @@ Thought pattern
 	3. Lay on Hands pool and Channel Divinity uses live as Chips and
 	   in callable Entries — not as separate Tag members.
 	4. ASI / Epic Boon / Fighting Style picks stay on legacy Progression.
+
+Every lesson that reaches the sheet opens with one line in the Guild's
+voice, then the rule. The line is the Paladin's register (the oath,
+remembered) applied to a single feature, and it obeys the same law the
+Guild text does: the sentence the Character swore is referred to and never
+quoted. See AtlasOfGuilds/PaladinKit and Canon/Mythos/Paladin.md §9.
+
+Two lessons deliberately carry no line. ``Spellcasting`` and ``Fighting
+Style`` awaken for identity and Pre gates but never render, because the
+Spells section and the Fighting Style feat pick own that prose
+(TrainingKit suppresses them by name). A line written for either would be
+written into the dark.
 """
 
 from __future__ import annotations
@@ -20,6 +32,20 @@ ANCIENTS = "Ancients"
 DEVOTION = "Devotion"
 GLORY = "Glory"
 VENGEANCE = "Vengeance"
+
+
+def _lesson(
+		spoken: str,
+		rules: str,
+		) -> str:
+	"""
+	One lesson as the sheet reads it: the line, then the rule.
+
+	The line renders italic (Markdown) and the blank line between them is
+	the paragraph break. Labels inside ``rules`` still take their own
+	explicit ``<br>``; this helper never infers one.
+	"""
+	return f"*{spoken}*\n\n{rules}"
 
 
 def _rank(
@@ -168,7 +194,9 @@ def _lay_entry(
 	pool = _lay_pool(
 			char
 			)
-	return (
+	return _lesson(
+		"A pool of mending from nothing but the word. You said you would. "
+		"So you can.",
 		"You have a pool of healing power that replenishes when you finish "
 		"a Long Rest. With that pool, you can restore a total of "
 		f"<b>{pool}</b> Hit Points. "
@@ -187,7 +215,8 @@ def _channel_entry(
 	uses = _channel_uses(
 			char
 			)
-	return (
+	return _lesson(
+		"You can feel what the oath is against. It is never far.",
 		"You can channel divine energy to fuel magical effects. "
 		f"You can use Channel Divinity <b>{uses} times</b>. "
 		"You regain one expended use when you finish a Short Rest, and you "
@@ -203,7 +232,8 @@ def _aura_protection_entry(
 	r = _aura_range(
 			char
 			)
-	return (
+	return _lesson(
+		"Stand near you and the vow covers them too. That is what it was for.",
 		f"You and friendly creatures within <b>{r} feet</b> of you gain a bonus "
 		"to all saving throws equal to your Charisma modifier (minimum +1). "
 		"This aura is inactive while you have the Incapacitated condition. "
@@ -218,9 +248,10 @@ def _aura_courage_entry(
 	r = _aura_range(
 			char
 			)
-	return (
+	return _lesson(
+		"You have already decided. Deciding is contagious.",
 		f"You and friendly creatures within <b>{r} feet</b> of you can't be "
-		"<em>Frightened</em> while you are conscious."
+		"<em>Frightened</em> while you are conscious.",
 		)
 
 
@@ -289,7 +320,9 @@ Fighting_Style = _core(
 Paladins_Smite = _core(
 		name="Paladin's Smite",
 		min_level=2,
-		description=(
+		description=_lesson(
+			"The word goes into the blow. Whatever you hit finds out what "
+			"you promised.",
 			"You always have the <em>Divine Smite</em> spell prepared. "
 			"When you hit a target with a melee weapon or Unarmed Strike, "
 			"you can expend a Paladin spell slot to cast <em>Divine Smite</em> "
@@ -309,24 +342,56 @@ Channel_Divinity = _core(
 Extra_Attack = _core(
 		name="Extra Attack",
 		min_level=5,
-		description=(
+		description=_lesson(
+			"Twice, because once was a wish and the vow is not a wish.",
 			"You can attack twice instead of once whenever you take the "
 			"Attack action on your turn."
 			),
 		)
 
+# Find Steed offers the player Celestial, Fey or Fiendish. A generated sheet
+# may not carry that offer: Canon/Feature-Text forbids open-choice language,
+# because the pick was already made in a seeded Dice Bag. So the kind is drawn
+# from the Oath and the sheet states what came. See Map_of_Paladin_Steeds for
+# why drawing it is the better fantasy as well as the lawful one.
+def _apply_faithful_steed(
+		char,
+		) -> None:
+	"""Settle which steed answered, once, before any Entry reads it."""
+	from AtlasLusoris.AtlasOfTraining.Map_of_Paladin_Steeds import Draw_Steed
+
+	Draw_Steed(
+			char
+			)
+
+
+def _faithful_steed_entry(
+		char,
+		) -> str:
+	from AtlasLusoris.AtlasOfTraining.Map_of_Paladin_Steeds import Steed_Sentence
+
+	answered = Steed_Sentence(
+			char
+			)
+
+	return _lesson(
+		"Something answered the oath and agreed to carry it. You did not "
+		"ask what kind.",
+		"You always have the <em>Find Steed</em> spell prepared. "
+		"You can cast it once without expending a spell slot, and you regain "
+		"the ability to do so when you finish a Long Rest. "
+		f"<br>{answered} It obeys your commands, understands one language "
+		"you speak, and vanishes at 0 Hit Points. "
+		"While it is within 1 mile you can communicate telepathically, and any spell "
+		"you cast that targets only you can also target the steed."
+		)
+
+
 Faithful_Steed = _core(
 		name="Faithful Steed",
 		min_level=5,
-		description=(
-			"You always have the <em>Find Steed</em> spell prepared. "
-			"You can cast it once without expending a spell slot, and you regain "
-			"the ability to do so when you finish a Long Rest. "
-			"<br>The steed is Celestial, Fey, or Fiendish (your choice), obeys your "
-			"commands, understands one language you speak, and vanishes at 0 Hit Points. "
-			"While it is within 1 mile you can communicate telepathically, and any spell "
-			"you cast that targets only you can also target the steed."
-			),
+		description=_faithful_steed_entry,
+		apply=_apply_faithful_steed,
 		)
 
 Aura_of_Protection = _core(
@@ -341,7 +406,8 @@ Aura_of_Protection = _core(
 Abjure_Foes = _core(
 		name="Abjure Foes",
 		min_level=9,
-		description=(
+		description=_lesson(
+			"Whatever the oath is against knows it, and steps back.",
 			"<b>Channel Divinity — Magic action.</b> "
 			"Choose creatures you can see within 60 feet. "
 			"Each target must succeed on a Wisdom saving throw against your Paladin "
@@ -365,7 +431,8 @@ Aura_of_Courage = _core(
 Radiant_Strikes = _core(
 		name="Radiant Strikes",
 		min_level=11,
-		description=(
+		description=_lesson(
+			"Every blow carries the word now, not only the ones you spend on.",
 			"Whenever you hit a creature with a melee weapon or an Unarmed Strike, "
 			"the target takes an extra <b>1d8</b> Radiant damage."
 			),
@@ -374,7 +441,9 @@ Radiant_Strikes = _core(
 Restoring_Touch = _core(
 		name="Restoring Touch",
 		min_level=14,
-		description=(
+		description=_lesson(
+			"Your hand gives people back to themselves. Somebody once did that "
+			"for you, and you swore.",
 			"When you use Lay on Hands on a creature, you can expend 5 Hit Points "
 			"from the pool (without restoring HP) to end one of these conditions on it: "
 			"<em>Blinded, Charmed, Deafened, Frightened, Paralyzed,</em> or "
@@ -385,7 +454,9 @@ Restoring_Touch = _core(
 Aura_Expansion = _core(
 		name="Aura Expansion",
 		min_level=18,
-		description=(
+		description=_lesson(
+			"The circle widens. The vow has held more people than it was made "
+			"for, and it grew.",
 			"Your Aura of Protection and Aura of Courage now extend "
 			"to <b>30 feet</b>."
 			),
@@ -400,7 +471,8 @@ Aura_Expansion = _core(
 Ancients_Oath_Spells = _ancients(
 		name="Oath Spells",
 		min_level=3,
-		description=(
+		description=_lesson(
+			"The oath comes with a vocabulary. These are the words it lets you say.",
 			"You always have the following spells prepared:"
 			"<ul>"
 			"<li><b>3rd:</b> <em>Ensnaring Strike, Speak with Animals</em></li>"
@@ -415,7 +487,8 @@ Ancients_Oath_Spells = _ancients(
 Natures_Wrath = _ancients(
 		name="Nature's Wrath",
 		min_level=3,
-		description=(
+		description=_lesson(
+			"What was here first still has hands.",
 			"<b>Channel Divinity — Action.</b> "
 			"You call on the powers of nature to restrain a creature you can see "
 			"within 10 feet. The target must succeed on a Strength or Dexterity "
@@ -428,7 +501,8 @@ Natures_Wrath = _ancients(
 Aura_of_Warding = _ancients(
 		name="Aura of Warding",
 		min_level=7,
-		description=(
+		description=_lesson(
+			"New magic breaks against the old. You are standing on the old.",
 			"Ancient magic lies so heavily upon you that it forms an aura. "
 			"You and friendly creatures within the range of your Aura of Protection "
 			"have Resistance to damage from spells."
@@ -438,7 +512,9 @@ Aura_of_Warding = _ancients(
 Undying_Sentinel = _ancients(
 		name="Undying Sentinel",
 		min_level=15,
-		description=(
+		description=_lesson(
+			"The old things do not age. Neither, quite, do you. It was not "
+			"asked for.",
 			"When you are reduced to 0 Hit Points and not killed outright, you can "
 			"choose to drop to 1 Hit Point instead. Once you use this feature, you "
 			"can't do so again until you finish a Long Rest. "
@@ -450,7 +526,8 @@ Undying_Sentinel = _ancients(
 Elder_Champion = _ancients(
 		name="Elder Champion",
 		min_level=20,
-		description=(
+		description=_lesson(
+			"The green comes back. For a minute, it comes back through you.",
 			"As a Bonus Action, you can assume the form of an ancient force of nature "
 			"for 1 minute or until you end it (no action required). "
 			"<br>While transformed:"
@@ -476,7 +553,8 @@ Elder_Champion = _ancients(
 Devotion_Oath_Spells = _devotion(
 		name="Oath Spells",
 		min_level=3,
-		description=(
+		description=_lesson(
+			"The oath comes with a vocabulary. These are the words it lets you say.",
 			"You always have the following spells prepared:"
 			"<ul>"
 			"<li><b>3rd:</b> <em>Protection from Evil and Good, Shield of Faith</em></li>"
@@ -491,7 +569,8 @@ Devotion_Oath_Spells = _devotion(
 Sacred_Weapon = _devotion(
 		name="Sacred Weapon",
 		min_level=3,
-		description=(
+		description=_lesson(
+			"Your blade gives light. You could not bear to fight in the dark.",
 			"<b>Channel Divinity — Bonus Action.</b> "
 			"You imbue a weapon you are holding with positive energy. "
 			"For 1 minute, you add your Charisma modifier to attack rolls made "
@@ -505,7 +584,8 @@ Sacred_Weapon = _devotion(
 Aura_of_Devotion = _devotion(
 		name="Aura of Devotion",
 		min_level=7,
-		description=(
+		description=_lesson(
+			"Nobody near you can be talked into being someone else.",
 			"You and friendly creatures within the range of your Aura of Protection "
 			"can't be <em>Charmed</em> while you are conscious."
 			),
@@ -514,7 +594,8 @@ Aura_of_Devotion = _devotion(
 Smite_of_Protection = _devotion(
 		name="Smite of Protection",
 		min_level=15,
-		description=(
+		description=_lesson(
+			"The word lands, and it shields the one it struck through.",
 			"Your magical smites now shield their targets with holy power. "
 			"Whenever you cast Divine Smite, the creature you hit gains a +2 bonus "
 			"to AC until the start of your next turn."
@@ -524,7 +605,8 @@ Smite_of_Protection = _devotion(
 Holy_Nimbus = _devotion(
 		name="Holy Nimbus",
 		min_level=20,
-		description=(
+		description=_lesson(
+			"There is nowhere near you left to hide, including from yourself.",
 			"As a Bonus Action, you can emanate an aura of sunlight for 1 minute. "
 			"For the duration, bright light fills a 30-foot Emanation originating from you. "
 			"<br>Whenever an enemy starts its turn in the bright light, it takes "
@@ -545,7 +627,8 @@ Holy_Nimbus = _devotion(
 Glory_Oath_Spells = _glory(
 		name="Oath Spells",
 		min_level=3,
-		description=(
+		description=_lesson(
+			"The oath comes with a vocabulary. These are the words it lets you say.",
 			"You always have the following spells prepared:"
 			"<ul>"
 			"<li><b>3rd:</b> <em>Guiding Bolt, Heroism</em></li>"
@@ -560,7 +643,8 @@ Glory_Oath_Spells = _glory(
 Inspiring_Smite = _glory(
 		name="Inspiring Smite",
 		min_level=3,
-		description=(
+		description=_lesson(
+			"The deed feeds the ones who saw it.",
 			"Immediately after you cast Divine Smite, you can use a Channel Divinity "
 			"(no action required) and distribute Temporary Hit Points equal to "
 			"<b>2d8 + your Paladin level</b> among yourself and any creatures of your "
@@ -571,7 +655,8 @@ Inspiring_Smite = _glory(
 Peerless_Athlete = _glory(
 		name="Peerless Athlete",
 		min_level=3,
-		description=(
+		description=_lesson(
+			"Nine or lower is a number for people who are not being watched.",
 			"<b>Channel Divinity — Bonus Action.</b> "
 			"For 10 minutes, whenever you make a Strength (Athletics) or Dexterity "
 			"(Acrobatics) check, you treat a roll of 9 or lower on the d20 as a 10. "
@@ -583,7 +668,8 @@ Peerless_Athlete = _glory(
 Aura_of_Alacrity = _glory(
 		name="Aura of Alacrity",
 		min_level=7,
-		description=(
+		description=_lesson(
+			"The crowd runs with you. It always has.",
 			"Your Speed increases by 10 feet. "
 			"In addition, whenever an ally starts their turn within your Aura of "
 			"Protection, their Speed increases by 10 feet until the end of that turn."
@@ -593,7 +679,8 @@ Aura_of_Alacrity = _glory(
 Glorious_Defense = _glory(
 		name="Glorious Defense",
 		min_level=15,
-		description=(
+		description=_lesson(
+			"Another's failure, turned into your story, and their survival.",
 			"You can turn another's failure into your own glory. "
 			"When you or another creature you can see within 10 feet of you is hit by "
 			"an attack roll, you can use your Reaction to add your Charisma modifier "
@@ -609,7 +696,9 @@ Glorious_Defense = _glory(
 Living_Legend = _glory(
 		name="Living Legend",
 		min_level=20,
-		description=(
+		description=_lesson(
+			"Whether or not it happened that way, it is told that way, and the "
+			"telling is armour.",
 			"You can empower yourself with the legends — whether true or exaggerated "
 			"— of your past deeds. As a Bonus Action, you gain the following benefits "
 			"for 1 minute:"
@@ -635,7 +724,8 @@ Living_Legend = _glory(
 Vengeance_Oath_Spells = _vengeance(
 		name="Oath Spells",
 		min_level=3,
-		description=(
+		description=_lesson(
+			"The oath comes with a vocabulary. These are the words it lets you say.",
 			"You always have the following spells prepared:"
 			"<ul>"
 			"<li><b>3rd:</b> <em>Bane, Hunter's Mark</em></li>"
@@ -650,7 +740,8 @@ Vengeance_Oath_Spells = _vengeance(
 Vow_of_Enmity = _vengeance(
 		name="Vow of Enmity",
 		min_level=3,
-		description=(
+		description=_lesson(
+			"One name. When it falls, the vow does not; it moves.",
 			"<b>Channel Divinity — Bonus Action.</b> "
 			"You utter a vow of enmity against a creature you can see within 30 feet. "
 			"You gain Advantage on attack rolls against the creature for 1 minute or "
@@ -663,7 +754,8 @@ Vow_of_Enmity = _vengeance(
 Relentless_Avenger = _vengeance(
 		name="Relentless Avenger",
 		min_level=7,
-		description=(
+		description=_lesson(
+			"They cannot run. You made sure of that a long time ago.",
 			"Your supernatural focus helps you close off a foe's retreat. "
 			"When you hit a creature with an Opportunity Attack, you can reduce the "
 			"creature's Speed to 0 until the end of the current turn, and you can "
@@ -675,7 +767,8 @@ Relentless_Avenger = _vengeance(
 Soul_of_Vengeance = _vengeance(
 		name="Soul of Vengeance",
 		min_level=15,
-		description=(
+		description=_lesson(
+			"They cannot swing without an answer.",
 			"The authority with which you speak your Vow of Enmity gives you "
 			"enhanced power. When a creature under the effect of your Vow of Enmity "
 			"makes an attack, you can use your Reaction to make a melee weapon attack "
@@ -686,7 +779,8 @@ Soul_of_Vengeance = _vengeance(
 Avenging_Angel = _vengeance(
 		name="Avenging Angel",
 		min_level=20,
-		description=(
+		description=_lesson(
+			"The wings come. You find out what the wrong made of you.",
 			"You can assume the form of an angelic avenger. As a Bonus Action, "
 			"you sprout wings and gain the following benefits for 1 hour:"
 			"<ul>"

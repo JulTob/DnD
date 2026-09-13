@@ -18,7 +18,7 @@ follow the law the Warlock kit demonstrated.*
 | **Fighter** | The training memoir: a yard at dawn | The Banneret's bold **We**; the Psi Warrior's branch on the Order axis; the Eldritch Knight answering the Wizard | (none: the self) | *pugnator, bellator, agonistēs*: "the hand that holds the sword" | (none) | Class and five archetypes shipping; lines on nearly all |
 | **Monk** | The shonen training arc: kinetic, one held breath, the named release | Each Warrior closes on an inversion; the Fighter/Monk "secret" echo | (none: the self, subtracted) | *monachos*, the one who lives alone; the sangha (Celestial). The class ignores its name | `ninja` + `anime` | Nothing wired; 2014 blurbs leak |
 | **Cleric** | Warm scripture: parallelism, the triple "Maybe" | The seated prayer from a species- and culture-keyed ledger; parenting styles per Domain | Kept | *klērikos*, the allotted | (none) | Class and Life shipping; Domains in the plain pass; no lines |
-| **Paladin** | The oath remembered: austere, one unquoted sentence | The sentence once said, never quoted; the Warlock as the oath-breaker next door | Sworn | *palatinus*, the Palatine guard; Rome (Goliath). The guard of a palace that is gone | `arthuriana` (early Arthur) | Nothing; 2014 features leak |
+| **Paladin** | The oath remembered: austere, one unquoted sentence | The sentence once said, never quoted; the Warlock as the oath-breaker next door; the steed drawn in the Oath's nature | Sworn | *palatinus*, the Palatine guard; Rome (Goliath). The guard of a palace that is gone | `arthuriana` (early Arthur) | Class and four Oaths shipping; lines on every rendered lesson |
 | **Ranger** | The adventure novel: geography, weather, the edge of the map | Each archetype text ends mid-pursuit; the Quarry line | (none: the mark) | *saltuarius, limitanei, horoi, peripoloi*: the wardens of the frontier | (none; `wyrm_myth` proposed) | Nothing |
 | **Rogue** | The picaresque: the confession that is not sorry | Each text admits one thing and refuses to apologise | (none: the moment) | *rogare*, the vagabond | `shadow` gear theme | Nothing; "Arcane Trickster: 3" leaks |
 | **Bard** | The told tale: oral performance, a drummed cadence, no verse | The Glamour echo of the Archfey poem; Lorca's duende as the quality bar | (none: the world listens) | *bardos*, the praiser | (none; instrument map proposed) | Nothing wired; rulebook paragraphs verbatim leak |
@@ -36,10 +36,20 @@ follow the law the Warlock kit demonstrated.*
    no two alike, and the Rogue's was the one gap (the picaresque, proposed).
 2. **One device per text, not only a register** (from the Warlock kit).
    Recorded here so the next author is asked *what does your text do* before
-   *how does it sound*. Ten devices exist now: the chant's refrain, the bold
+   *how does it sound*. Eleven devices exist now: the chant's refrain, the bold
    We, the Order-axis branch, the seated prayer, the `{name}` slot, the
    unquoted sentence, the mid-pursuit close, the unapologetic confession, the
    glyph span, the verse, the drawn object.
+
+   The **unquoted sentence** is the Paladin's, and it is the first device that
+   works by refusal. Across the Guild text and four Oath texts the sentence the
+   Character swore is referred to in thirteen of the fifteen paragraphs and
+   printed in none: it is called a sentence, a word, a vow, and the thing you
+   said. The two that let it go are closing lines, where the cost is named
+   instead. The blank is what the sheet hands back to the player, because a
+   generator that supplied the words would be writing their single most
+   private line for them. A later hand will be tempted to "finish" it. That is
+   the one edit the device forbids.
 3. **Six theology seats, six Guilds, no overlap**: kept (Cleric), noticed
    (Warlock), ridden (Zealot), sworn (Paladin), marked (Sorcerer), owed
    (Druid). Two Guilds face each other across the page: sworn and forsworn.
@@ -67,8 +77,8 @@ follow the law the Warlock kit demonstrated.*
 
 ## 📔 3. The signature objects
 
-Eight Guilds have an object that *is* the fantasy, and one Guild has it drawn
-on the sheet.
+Eight Guilds have an object that *is* the fantasy, and three Guilds have it
+drawn on the sheet.
 
 | Guild | The object | State |
 |---|---|---|
@@ -78,27 +88,46 @@ on the sheet.
 | Druid | The known forms | ⚠️ "Chosen from among Beast stat blocks." Pool by culture and terrain proposed (Druid page §2). |
 | Warlock (Chain) | The familiar | ✅ Drawn, with *Familial Preference*; the exotic familiars' looks are the backgrounds' voice on a creature. |
 | Artificer | The replicated items, the Steel Defender, the cannon, the armour | ⚠️ Unnamed, unformed, unmaterialled (Artificer page §1). |
-| Paladin | The steed | ⚠️ "Celestial, Fey, or Fiendish, your choice." |
+| Paladin | The steed | ✅ Drawn (`Map_of_Paladin_Steeds`), kind keyed to the Oath by the familiars' own affinity weight, twelve shapes over three kinds. Replaces an open choice the Feature-Text law forbade. |
 | Fighter | The weapons | ✅ Drawn (three or four masteries) and bought by the loadout; culture-titled. |
 | Sorcerer (Draconic) | The ancestry | ⚠️ Never drawn for a non-Dragonborn; decided to be the species' for a Dragonborn. |
 
 One mechanism (form by tool or culture, material by the Materials map,
-losable by rule) and eight consumers: a Kit, when wanted it.
+losable by rule) and eight consumers: a Kit, when wanted it. Three
+implementations now exist and none of them shares code: the Spellbook draws by
+tool, the familiar by patron affinity, the steed by Oath affinity. The third
+was written by reading the second, which is the argument for the Kit.
 
 ---
 
 ## 📔 4. The leaks
 
 The 2014 layer in `Map_of_Classes/Training/*.py` still reaches the sheet for:
-the Monk (four Warrior blurbs, third person), the Paladin (Abjure Enemy with a
-literal "CHA", Turn the Unholy, "Oath of {subclass} feature."), the Sorcerer
-("see PHB '24 pp145-150"; markdown asterisks), the Druid (a second Primal Order;
-"Number of Wild Shape"; "Known Forms"), the Ranger ("You adopt the Hunter
+the Monk (four Warrior blurbs, third person), the Sorcerer ("see PHB '24
+pp145-150"; markdown asterisks), the Druid (a second Primal Order; "Number of
+Wild Shape"; "Known Forms"), the Ranger ("You adopt the Hunter
 specialization."; a second Hunter's Lore), the Rogue ("Arcane Trickster: 3"),
 the Bard (the four College paragraphs from the rulebook, verbatim), the Wizard
-(a second Spellbook paragraph). The Fighter, Barbarian, Warlock and Cleric are
-clean. These are rules and presentation work, recorded here because a fantasy
-that shares a page with "see PHB p145" is not the fantasy.
+(a second Spellbook paragraph). The Fighter, Barbarian, Warlock, Cleric and
+Paladin are clean. These are rules and presentation work, recorded here because
+a fantasy that shares a page with "see PHB p145" is not the fantasy.
+
+**How the leak works, and the trap in closing one.** `filter_legacy_features`
+drops a legacy Feature whose *name* matches a 2024 Training. So a leak is
+always a feature 2024 **renamed or deleted**, never one it kept: the Paladin's
+five were *Abjure Enemy* (folded into core Abjure Foes), *Turn the Unholy*
+(deleted), *Purity of Spirit* (replaced by Smite of Protection), and the
+`"Oath of {subclass} feature."` placeholder that stood in for Ancients and
+Glory at four levels each, because the 2014 branch knew only two Oaths of four.
+
+The trap is that these files also do work nothing else does. Trimming the
+Paladin's to the Cleric's shape silently cost a level 20 Paladin 96 Hit Points
+and its Fighting Style, because `roll_health` and `add_new_fighting_style` were
+sitting among the blurbs. Both were restored as named steps. **Measure a trim
+against the untrimmed file rather than reasoning about it**, and expect three
+kinds of line in these modules: 2014 prose (delete), 2024 prose the Training
+already owns (delete), and mutations (keep). The Cleric's own module is missing
+`roll_health`, which every other class calls; recorded on the Paladin page §8.
 
 ---
 

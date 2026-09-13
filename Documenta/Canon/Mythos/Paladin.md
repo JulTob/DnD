@@ -1,32 +1,53 @@
 # ⚔️ Paladin: the Sworn, read against the whole setting
 
-> 📖 **In flow.** 2 of 11 chapters are still proposals. 📜 2 · 📚 2 · 📔 5 · 📖 2
+> 📖 **In flow.** 1 of 12 chapters is still a proposal. 📜 4 · 📚 2 · 📔 5 · 📖 1
 
 *Mythos analysis, 2026-09-08. Design and literary criticism, not page text. No
 Dialog exists for the Paladin; this page does the archetypal read from a blank
 sheet, in the shape the Barbarian, Monk and Cleric dialogs established, and then
-goes on to the setting relationships and the feature lines. Because nothing is
-written, it also drafts a class text and four Oath texts. Nothing here is
-landed.*
+goes on to the setting relationships and the feature lines. Because nothing was
+written, it also drafted a class text and four Oath texts.*
 
-**Where the text lives.** Class and Oath paragraphs: *nowhere*. Lessons:
-`AtlasOfTraining/Map_of_Paladin_Training.py` (rules only, no lines). A 2014-era
-layer in `Map_of_Classes/Training/Paladin.py` still emits *Abjure Enemy* (with
-the literal placeholder "CHA"), *Turn the Unholy*, *Sacred Weapon* in the old
-text, and the string `"Oath of {subclass} feature."` beside the 2024 features.
-Legend register: `arthuriana`, granted by Guild. Oaths on the roster: Devotion,
-Ancients, Glory, Vengeance.
+*Landed 2026-09-13. The drafts in §9 are now the shipping text, the lessons
+carry their lines, the 2014 layer no longer reaches the sheet, and the steed
+is drawn (§12). §10 is the only chapter still in flow.*
+
+**Where the text lives.** Class paragraph and the four Oath paragraphs:
+`AtlasOfGuilds/PaladinKit.py`, seated on the Guild Tag by `bind_paladin_voice`
+because the vaulted kit built the Paladin without a description, which is the
+same repair `bind_cleric_voice` makes for the Cleric. Lessons and their lines:
+`AtlasOfTraining/Map_of_Paladin_Training.py`. The steed:
+`AtlasOfTraining/Map_of_Paladin_Steeds.py`. The 2014 layer in
+`Map_of_Classes/Training/Paladin.py` is trimmed to the three grants that are
+mutations rather than prose (health roll, Fighting Style draw, ASI and Epic
+Boon feats). Legend register: `arthuriana`, granted by Guild. Oaths on the
+roster: Devotion, Ancients, Glory, Vengeance.
 
 ---
 
 ## 📚 1. What a Paladin player is handed today
 
-A level 11 Tiefling Vengeance Paladin (seed 8) receives the Tiefling entry, a
-Guard background that renders under its feature's title (*"Watcher's Eye"*, one
-sentence), the 2024 lessons bare, the 2014 lessons bare beside them, and a
-third-person story about "the Horde League". No class fantasy, no Oath fantasy,
-no line above any feature. The Paladin is, with the Monk, the emptiest sheet on
-the roster, and it is the Guild with the most legend attached to its name.
+*Before (2026-09-08).* A level 11 Tiefling Vengeance Paladin (seed 8) received
+the Tiefling entry, a Guard background rendering under its feature's title
+(*"Watcher's Eye"*, one sentence), the 2024 lessons bare, the 2014 lessons bare
+beside them, and a third-person story about "the Horde League". No class
+fantasy, no Oath fantasy, no line above any feature. The Paladin was, with the
+Monk, the emptiest sheet on the roster, and it is the Guild with the most
+legend attached to its name.
+
+*After (2026-09-13).* The same request receives the Guild paragraph, the Oath
+paragraph under its own heading, a line above every lesson that reaches the
+sheet, and a named steed. Five 2014 features stopped arriving: *Abjure Enemy*
+(which printed the literal placeholder "CHA"), *Turn the Unholy*, *Purity of
+Spirit*, and the `"Oath of {subclass} feature."` string that stood in for every
+Ancients and Glory feature at levels 3, 7, 15 and 20. The Guard background's
+name/title swap is untouched and still open (§8).
+
+Two lessons carry no line on purpose. `Spellcasting` and `Fighting Style`
+awaken for identity and Pre gates but never render, because `TrainingKit`
+suppresses them by name so the Spells section and the drawn Fighting Style feat
+can own that prose. The §9 drafts wrote a line for each; both were dropped
+rather than shipped into the dark.
 
 ---
 
@@ -266,39 +287,70 @@ vow, and nobody in-world will read it correctly.
 ### ✅ Singular, and to be protected
 
 1. **Aura of Protection as thesis.** The Paladin is the Guild whose power is a
-   radius. Every line should keep the oath *outward*.
+   radius. Every line keeps the oath *outward*.
 2. **The register agrees with the theology.** `arthuriana` is the aftermath
    stratum; the oath outlives its reason in the vocabulary.
 3. **Warlock = oath-breaker** (§3). Sworn and forsworn, next door.
 4. **The Tiefling Avenging Angel** (§5). Already in the rules.
 5. **Don Quixote is Living Legend** (§4). The Dwarf Glory Paladin.
 6. **Hannibal's oath on the Human key** (§6).
+7. **The unquoted sentence** is the Guild's device (§9). Five texts refer to
+   the sentence the Character swore and none of them prints it. The blank is
+   what the sheet hands back to the player, and it is the one line a generator
+   must not write for them.
+8. **The steed is drawn in the Oath's own nature** (§12). The first thing in
+   the rules that answers the word rather than the person.
 
 ### ⚠️ Stock, contradictory, or thin
 
-1. **Nothing is written.** No class text, no Oath text, no lines, and the 2014
-   layer leaks (Abjure Enemy with "CHA" in it; *Oath of {subclass} feature.*).
-2. **The holy-knight costume** is what the sheet will read as by default,
-   because the only prose a Paladin currently gets is a feature list full of
-   "Radiant", "Holy", "Sacred", "Divine". Without a class text the Cleric-with-
-   a-sword reading wins by vocabulary.
+1. ~~**Nothing is written.**~~ ✅ Landed 2026-09-13: class text, four Oath
+   texts, a line on every rendered lesson, and the five leaking 2014 features
+   gone. `Spellcasting` and `Fighting Style` are the two lessons with no line,
+   and that is deliberate (§1).
+2. ~~**The holy-knight costume**~~ ✅ answered by the class text, which names
+   no god and no deity anywhere in its three paragraphs. The feature list is
+   still full of "Radiant", "Holy", "Sacred" and "Divine", because those are
+   rules and rules keep their words; it now sits under prose that says the
+   power came from a sentence.
 3. **The Guard background** renders under its feature's title ("Watcher's
    Eye"). A name/title swap in `BackgroundKit.py`, and a symptom of the
-   official-backgrounds problem (Cleric page §8).
+   official-backgrounds problem (Cleric page §8). **Still open.**
 4. **The Human Paladin doubles `arthuriana`** and is the flattest pairing.
-5. **Undying Sentinel gives an Elf nothing** (§5).
+5. **Undying Sentinel gives an Elf nothing** (§5). The shipped Ancients text
+   takes the second reading and says the oath asked for the one thing the Elf
+   could give without cost: *"That was not asked for. It came with the word."*
 6. **"Yolande's Regal Presence"** on the Glory list is a proper noun from the
    2024 book. Spell names are rules, and rules may keep them; but it is the
    only named person on the Paladin sheet, and it is a stranger.
+7. **The Cleric's legacy module does not roll health** the way the Paladin's
+   does, and the two were compared while trimming this one. Either the Cleric
+   is short its per-level Hit Die or health arrives elsewhere for it. Not
+   investigated here; recorded because the comparison was in hand.
 
 ---
 
-## 📖 9. Drafts
+## 📜 9. The texts, as shipped
 
 *House rules: second person; no em-dashes; no proper nouns; no open choices; no
 "watched over"; the oath is never quoted. Plain prose for the Guild block and
-the four `extends=` texts, then italic lines for the features. Proposals for
-proposals.*
+the four `extends=` texts, then italic lines for the features.*
+
+**Landed 2026-09-13, as drafted.** The five paragraphs below are the shipping
+text, word for word, in `AtlasOfGuilds/PaladinKit.py`; the feature lines are in
+`AtlasOfTraining/Map_of_Paladin_Training.py`. Three notes on the crossing from
+draft to code, because a later hand will want to know what moved:
+
+1. **Two lines were dropped, not forgotten.** `Spellcasting` and `Fighting
+   Style` never render (§1), so the lines drafted for them would have been
+   written into the dark.
+2. **The Faithful Steed line kept its wording and gained an object.** *"You did
+   not ask what kind"* now stands over a sheet that names the kind, which is
+   the point: the oath answered, and the answer was not a preference (§12).
+3. **The device was named.** The register was already fixed as the oath
+   remembered; what the text *does* is refuse to quote the sentence. Across the
+   five texts the sentence is called a sentence, a word, a vow and the thing
+   you said, and it is never given. The blank is what the sheet hands back to
+   the player. Recorded in the Guilds table as the eleventh device.
 
 ### Class text (new)
 
@@ -422,6 +474,20 @@ Mercy is not forbidden to you. It is simply not what you promised, and you do no
 - **Official backgrounds**: the Guard's name/title swap is one symptom.
 - **Names of the Guilds**: barbaros, monachos, palatinus, wǣrloga. A page on
   who names whom.
+- **The steed and the background.** §12 keys the steed's kind to the Oath,
+  because the Paladin page's own reading of Find Steed says the mount is
+  whatever kind of thing you swore to. The alternative was the **background**,
+  which is what the exotic familiars use: a Renegade's steed and a Squire's
+  would not be the same animal, and the Servant Paladin's steed could be the
+  one thing that is theirs. That is richer and it couples the module to the
+  backgrounds; it was left unbuilt rather than rejected. If it is taken up, the
+  kind should stay the Oath's and only the *shape* should answer the
+  background, or the device stops saying what it currently says.
+- **A Kit for drawn objects.** Three implementations now exist that share no
+  code (Spellbook by tool, familiar by patron, steed by Oath). The third was
+  written by reading the second. Guilds page §3 has wanted the Kit since it
+  was compiled; the steed is the argument that it should be built before the
+  Bard's instrument makes four.
 
 
 ---
@@ -431,3 +497,59 @@ Mercy is not forbidden to you. It is simply not what you promised, and you do no
 | Feature | Line |
 |---|---|
 | Oath Spells | *The oath comes with a vocabulary. These are the words it lets you say.* |
+
+---
+
+## 📜 12. The steed
+
+*Landed 2026-09-13. `AtlasOfTraining/Map_of_Paladin_Steeds.py`. This closes the
+Paladin's row in the signature-objects table (Guilds page §3), which read
+"Celestial, Fey, or Fiendish, your choice" and ⚠️ unbuilt.*
+
+**Why it had to be drawn.** Find Steed offers the player three kinds. A
+generated sheet may not print that offer: `Canon/Feature-Text` forbids
+open-choice language, because every pick was made inside a seeded Dice Bag
+before the page existed. The sheet was carrying "(your choice)" on a character
+nobody will ever level up. So the lawful fix was to draw it.
+
+**Why drawing it is the better fantasy, and not merely the legal one.** The
+Paladin's power is downstream of a word. The steed is the first thing in the
+rules that answers *the word* rather than the person: you did not summon a
+servant, you said something once and something agreed with it. That is why the
+kind follows the **Oath** and never the Character's alignment, species or
+manners, and why the feature's line is *"You did not ask what kind."* The line
+and the drawn kind are not in tension. They are the whole reading.
+
+**The two rules of the pool**, in the shape `Map_of_Spellbooks` fixed for the
+Wizard's book.
+
+1. **The oath is answered in its own nature.** Devotion and Glory are met by
+   the Celestial, Ancients by the Fey, Vengeance by the Fiendish. Devotion and
+   Glory share one kind for different reasons: one swore to a way of being that
+   keeps its word, the other swore to be worth telling, and a story gives its
+   hero a white horse. This is the Pact of the Chain's *Familial Preference*
+   asked of an Oath instead of a patron, and it reuses that module's weight.
+2. **Nothing is excluded.** A weight is not a gate. Measured over sixty seeds
+   per Oath, the oath's own nature answers about five times in six:
+
+   | Oath | Celestial | Fey | Fiendish |
+   |---|---|---|---|
+   | Devotion | 50 | 4 | 6 |
+   | Ancients | 6 | 48 | 6 |
+   | Glory | 50 | 4 | 6 |
+   | Vengeance | 6 | 7 | 47 |
+
+   So roughly one Paladin in six is answered by something nobody expected, and
+   the rules deliberately allow it: they refuse to say the steed must be holy.
+   A Devotion Paladin carried by something Fiendish is a story, and the sheet
+   states it without apology. Seed 42 at level 11 is one.
+
+**Twelve shapes, four to a kind**, each completing *"and it came as ..."*. They
+are written to be ridden rather than admired, and none of them is a monster: a
+mare who will not cross running water until she is asked politely, a lion that
+has never once roared in your hearing, a ram whose horns ring like struck iron.
+
+**Where it is settled.** `Draw_Steed` runs from the lesson's `apply`, never
+from its Entry, which is the Primal Order rule in `Canon/Feature-Text`: an
+Entry that decides re-decides on every read of the sheet. Verified: five reads
+of one sheet give one answer, and the same request replays to the same steed.
