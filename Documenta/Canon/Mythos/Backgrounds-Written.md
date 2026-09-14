@@ -82,7 +82,7 @@ it is worth stating flatly:
 
 > **Every hook is a benefit that is also a leash.**
 
-The 2024 official backgrounds give a benefit (a bed, a contact, a proficiency).
+The rulebook's backgrounds give a benefit (a bed, a contact, a proficiency).
 These give a benefit and name its price in the same paragraph:
 
 | Background | What it gives | What it costs |
@@ -101,6 +101,9 @@ These give a benefit and name its price in the same paragraph:
 | Survivor | the only expertise of its kind | you have it because it let you go, and it is not finished |
 | Shadow | a door to the other side | the other side builds the room out of your worst night |
 | Spirit Medium | testimony no living witness can give | by morning there is a queue, and you cannot decline |
+
+The project's sixteen officials were written to the same rule
+(Backgrounds-Official §0).
 
 That table is the corpus's real contribution to the game, and no page had
 written it down.
@@ -371,8 +374,8 @@ it and the player never learns why.
 
 ## 📚 7. Pointers
 
-- **Backgrounds-Official**: the sixteen institutional siblings, now drafted in
-  this form.
+- **Backgrounds-Official**: the sixteen official backgrounds, written in the
+  same form.
 - **Feats**: the Origin feats these backgrounds carry, and their rebrand
   comments.
 - **Relationships**: each background's productive misfit Guild.

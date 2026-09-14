@@ -22,11 +22,12 @@ Ancients, Glory, Vengeance.
 ## 📚 1. What a Paladin player is handed today
 
 A level 11 Tiefling Vengeance Paladin (seed 8) receives the Tiefling entry, a
-Guard background that renders under its feature's title (*"Watcher's Eye"*, one
-sentence), the 2024 lessons bare, the 2014 lessons bare beside them, and a
-third-person story about "the Horde League". No class fantasy, no Oath fantasy,
-no line above any feature. The Paladin is, with the Monk, the emptiest sheet on
-the roster, and it is the Guild with the most legend attached to its name.
+Guard background printed as the wipe's stub (an old hook title, *"Watcher's
+Eye"*, in the name slot, and no Hook), the 2024 lessons bare, the 2014 lessons
+bare beside them, and a third-person story about "the Horde League". No class
+fantasy, no Oath fantasy, no line above any feature. The Paladin is, with the
+Monk, the emptiest sheet on the roster, and it is the Guild with the most
+legend attached to its name.
 
 ---
 
@@ -282,9 +283,10 @@ vow, and nobody in-world will read it correctly.
    because the only prose a Paladin currently gets is a feature list full of
    "Radiant", "Holy", "Sacred", "Divine". Without a class text the Cleric-with-
    a-sword reading wins by vocabulary.
-3. **The Guard background** renders under its feature's title ("Watcher's
-   Eye"). A name/title swap in `BackgroundKit.py`, and a symptom of the
-   official-backgrounds problem (Cleric page §8).
+3. **The Guard background** renders under an old hook title ("Watcher's Eye")
+   where its name belongs. It is one of the stubs the 2026-08-29 wipe left in
+   `BackgroundKit.py` (Repairs-Ledger B17); the settled Guard, with its Hook
+   *Network of Favors*, is on Backgrounds-Official.
 4. **The Human Paladin doubles `arthuriana`** and is the flattest pairing.
 5. **Undying Sentinel gives an Elf nothing** (§5).
 6. **"Yolande's Regal Presence"** on the Glory list is a proper noun from the
@@ -419,7 +421,8 @@ Mercy is not forbidden to you. It is simply not what you promised, and you do no
   against the Ideal.
 - **Dwarf**: Roncevaux, the Cid, Santiago, Quixote. The Dwarf page should
   record that the Paladin's whole founding literature happens on their border.
-- **Official backgrounds**: the Guard's name/title swap is one symptom.
+- **Official backgrounds**: the Guard's old hook title in the name slot goes
+  when the settled records reach the sheet (Repairs-Ledger B17).
 - **Names of the Guilds**: barbaros, monachos, palatinus, wǣrloga. A page on
   who names whom.
 

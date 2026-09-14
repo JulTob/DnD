@@ -220,10 +220,10 @@ kept the street's habit of not affording to lose.
   Shift.
 - **Stranger.** *"A way of standing that ends a conversation before it
   begins."* The Fighter's bearing, learned elsewhere.
-- **Official backgrounds.** Soldier (*Military Rank*), Guard (*Watcher's
-  Eye*), Artisan (*Craftsperson*), Noble (*Position of Privilege*): the
-  Fighter draws them most and they are one sentence each (Cleric page §8).
-  Three of five sampled Fighters drew one.
+- **Official backgrounds.** Soldier (*Old Company*), Guard (*Network of
+  Favors*), Artisan (*The Guild*), Noble (*The Weight of the Crown*): the
+  Fighter draws them most (Backgrounds-Official §3). Three of five sampled
+  Fighters drew one, printed as a post-wipe stub.
 
 ---
 
@@ -275,7 +275,8 @@ kept the street's habit of not affording to lose.
    *alias* the way a weapon carries a culture-keyed title, without touching
    the rule. Over-design unless it is one dictionary; noted, not
    recommended.
-6. **The Fighter draws the thinnest official backgrounds most** (§5).
+6. **The official backgrounds the Fighter draws most printed as stubs** (§5):
+   a code repair (Repairs-Ledger B17), not a rewrite.
 7. **"Ten thousand mornings"** is claimed by both the Fighter and the Monk
    texts (§3). One should own it.
 

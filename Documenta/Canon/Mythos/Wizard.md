@@ -256,8 +256,9 @@ of memory, and the Ascending is the one that stops needing the page.
   it.
 - **Herald.** The Word domain: "a letter in your hand reaches people who
   refuse every other letter."
-- **Official backgrounds.** Sage (*Researcher*) and Scribe (*Scholarly
-  Insight*) are the Wizard's own officials and one sentence each.
+- **Official backgrounds.** Sage (*Working Hypothesis*) and Scribe (*Alumni*)
+  are the officials most natural to a Wizard: the one who knows and the one
+  who is learning (Backgrounds-Official §3).
 
 ---
 

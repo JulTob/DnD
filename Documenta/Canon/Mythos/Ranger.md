@@ -23,11 +23,12 @@ Gloom Stalker, Hunter. No legend register of its own.
 
 Four sheets (Elf Fey Wanderer, Orc Hunter, Elf Gloom Stalker, Halfling Beast
 Master). No class text; each archetype's only prose is *"You adopt the Hunter
-specialization."*; three of the four drew official one-sentence backgrounds
-(Hermit, Charlatan, Acolyte). The Beast Master's *Primal Companion* says
-"Choose a Beast of the Land, Beast of the Sea, or Beast of the Sky", which the
-generator was supposed to have chosen, and the companion is the archetype's
-entire fantasy. *Otherworldly Glamour* says "of your choice".
+specialization."*; three of the four drew official backgrounds (Hermit,
+Charlatan, Acolyte), all three printed as post-wipe stubs. The
+Beast Master's *Primal Companion* says "Choose a Beast of the Land, Beast of
+the Sea, or Beast of the Sky", which the generator was supposed to have
+chosen, and the companion is the archetype's entire fantasy. *Otherworldly
+Glamour* says "of your choice".
 
 ⚠️ The Ranger and the Paladin are the two emptiest sheets on the roster, and
 the Ranger's is worse in one way: its species entries are already written *for*
@@ -300,8 +301,9 @@ means by "the thing itself".
 3. **Hunter's Lore prints twice** (2024 and legacy).
 4. **The Elf Ranger is the cliché's landing zone**; the register and Skaði
    rescue it only if the class text refuses "archer".
-5. **Three of four sampled sheets drew one-sentence official backgrounds.**
-   The Ranger's natural officials (Guide, Sailor, Wayfarer) are the thin ones.
+5. **Three of four sampled sheets drew official backgrounds printed as
+   stubs** (§1; Repairs-Ledger B17). The officials most natural to a Ranger
+   are the Guide and the Sailor.
 6. **The Ranger has no legend register**; it is the class that most needs the
    slayer's words (§4).
 

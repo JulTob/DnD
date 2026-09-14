@@ -232,10 +232,11 @@ touch on the page.
   rather than someone out". The land under the land.
 - **Servant, Gambler.** The Druid in a drawing room: "Fog follows you like a
   dog" at a card table. Underrated.
-- **Official backgrounds.** Guide (*Magic Initiate: Druid*, one sentence),
-  Farmer (*Rustic Hospitality*, one sentence), Hermit, Sailor. ⚠️ The
-  Druid's three most natural official backgrounds are the three thinnest
-  texts on the roster (Cleric page §8).
+- **Official backgrounds.** Guide (*The Ways Between*), Farmer (*Rustic
+  Hospitality*), Hermit (*What You Found Out There*), Sailor (*Ship's
+  Passage*): the officials most natural to a Druid. The Guide's Magic
+  Initiate (Druid) is the part it does not talk about (Backgrounds-Official
+  §3).
 
 ---
 
@@ -266,7 +267,9 @@ touch on the page.
 6. **The Land's terrain** is re-chosen per Long Rest and may stay open, but
    the *current* one should be seated (the sheet knows what country it was
    generated in only if it says so).
-7. **The official backgrounds** most natural to the class are the emptiest.
+7. **The official backgrounds** most natural to the class printed as stubs
+   on the sampled sheets (§5): a code repair (Repairs-Ledger B17), not a
+   rewrite.
 
 ---
 
