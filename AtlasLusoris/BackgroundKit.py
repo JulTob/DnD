@@ -1751,8 +1751,41 @@ Wayfarer = _Build_Player_Handbook_Background(
 	origin_feat=Lucky,
 	title="Wayfarer",
 	description=(
-		"You survived through observation, odd jobs, quick decisions, and the "
-		"refusal to surrender your hope to difficult circumstances."
+		"You have slept in doorways, in haylofts, in the bottom of a boat, and "
+		"in places you would rather not describe. Nobody was coming to help, so "
+		"you learned to read people quickly: who gives, who takes, who is about "
+		"to become a problem, and who is lying about which. You can be gone "
+		"before a hand closes on your shoulder, get a lock open when the "
+		"alternative is a night in the rain, and eat a real meal without "
+		"letting on how long it has been since the last one. You have been "
+		"shown kindness by people with nothing to spare and cruelty by people "
+		"who had everything, and you have never once confused the two. By "
+		"rights you should have died three or four times over. You did not. "
+		"Either somebody is watching over you or nobody is, and it makes no "
+		"difference: you yourself are always watching."
+		),
+	hook=Entry(
+		title="The Overlooked",
+		definition=(
+			"There is a second nation inside every city, and no map shows it. "
+			"Beggars, urchins, day laborers, the woman who sweeps the temple steps, "
+			"the drifters under the bridge: no crown, no captain, no borders, and "
+			"yet rules older than the ones carved above the courthouse door. Share "
+			"what you have. Do not sell your own. Pass it on. You are one of them, "
+			"so wherever you go there is a fire, a doorway, a name to ask for, and "
+			"hands willing to hide you from anyone carrying a warrant. And they see "
+			"everything, because nobody guards their tongue in front of the "
+			"invisible: which magistrate is bought and by whom, which faction is "
+			"quietly arming, which street not to walk tonight, who vanished last "
+			"month and through which door they were dragged. Nobody asks them. They "
+			"will tell you. What they ask in return is never small: speak where "
+			"they will not be heard, stand between a fist and a child, find the one "
+			"no officer will look for. They own nothing and they say nothing, but "
+			"they are everywhere, and there are more of them than of anyone else. A "
+			"word from you can move through them like wind across a field of wheat, "
+			"and no city that has ignored them for a century could survive a week "
+			"without them."
+			),
 		),
 	)
 
