@@ -1,7 +1,7 @@
 ---
 name: Questa
 about: Describe a need, its context, and acceptance criteria.
-title: "[Questa] "
+title: "QST-### — [Description] "
 labels: ""
 assignees: ""
 ---
