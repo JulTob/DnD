@@ -1644,10 +1644,41 @@ Scribe = _Build_Player_Handbook_Background(
 		),
 	tools="Calligrapher_Supplies",
 	origin_feat=Skilled,
-	title="Scholarly Insight",
+	title="Scribe",
 	description=(
-		"You understand records, libraries, and institutions well enough to "
-		"locate documents and recognize suspicious omissions."
+		"Few people reach the highest levels of education: a University, an "
+		"Academy, the {guild} School. Somebody paid for yours. A family that "
+		"could not afford it, a patron with expectations, or years of your own "
+		"life signed away in advance: the door opened, and you have been paying "
+		"for it ever since. You have watched a master do something impossible, "
+		"and you knew it would be worth it. You draw diagrams, write notes, and "
+		"watch closely. Then you practice, practice, and practice, until you "
+		"can replicate your own wonders. Good is not good enough. You have to "
+		"be perfect. You are not finished. You may never be. But you have "
+		"already seen what knowledge does to a room, to a wound, to a mind, to "
+		"a system... and you would gladly trade years of your life to master "
+		"it. Knowledge is power. Power to change things. To make them better. "
+		"To give back what you received."
+		),
+	hook=Entry(
+		title="Alumni",
+		definition=(
+			"There is a bond unique to learning together. You made friends, you "
+			"made rivals, you even made enemies. All of them, you know them better "
+			"than their families do. You helped a classmate prepare for a "
+			"challenge, and unexpectedly received a pen worth a year's salary. You "
+			"needed help when you were sick, and somebody gave you their notes and "
+			"brought you a warm meal. You celebrated together, and mourned "
+			"together. Now those bonds stay with you. You may find colleagues now "
+			"working in positions of power, making the best of their skills and "
+			"knowledge. They have goals, and so do you. But you can still help each "
+			"other. Your network is tight, and refusing to participate and help "
+			"others may cut you off completely, but favors move like waves on a "
+			"string. You may find a name, a job opportunity, a document that was "
+			"meant to stay hidden, or a door left open after hours. But others may "
+			"come to you with their own favors to ask. You are part of the team, so "
+			"will you play your part?"
+			),
 		),
 	)
 
