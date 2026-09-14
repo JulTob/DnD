@@ -53,24 +53,24 @@ VENGEANCE = "Vengeance"
 
 VOWS = {
 	DEVOTION: (
-		"I am sworn to the thing that does not bend.",
-		"I am sworn to do it right when doing it wrong would be easier.",
-		"I am sworn to a way of standing, and I have stood that way since.",
+		"I am sworn to the Eternal Truth.",
+		"I am sworn to stand unbent and unbroken.",
+		"I am sworn to be the same in the dark as in the daylight.",
 		),
 	ANCIENTS: (
-		"I am sworn to the green that comes back.",
-		"I am sworn to what was here first and will be here after.",
-		"I am sworn to the light, and to the hour before it returns.",
+		"I am sworn to what was and what will be.",
+		"I am sworn to the light. Even the night has stars.",
+		"I am sworn to the green, which has outlasted every fire.",
 		),
 	GLORY: (
-		"I am sworn to be worth the telling.",
-		"I am sworn to the deed that makes the next one braver.",
-		"I am sworn to leave the story better than I found it.",
+		"I am sworn to valour.",
+		"I am sworn to be worth the song.",
+		"I am sworn to the deed that outlives the doer.",
 		),
 	VENGEANCE: (
 		"I am sworn against.",
-		"I am sworn to the ledger, and the ledger closes.",
-		"I am sworn to the answer, and I am the answer.",
+		"I am sworn to the reckoning.",
+		"I am sworn to be the weight on the balance.",
 		),
 	}
 
@@ -82,50 +82,50 @@ VOWS = {
 
 HEARTS = {
 	"Human": (
-		"My heart is short-lived and it is not spending that on nothing.",
-		"My heart was born late to a long argument and it has picked a side.",
+		"My heart is true, and my friends are my rest.",
+		"My heart is short-lived, and will not waste a day of it.",
 		),
 	"Dwarf": (
-		"My heart was made in a forge and it keeps its shape under heat.",
-		"My heart is worked metal, and worked metal remembers the hammer.",
+		"My heart was made in the forge of my clan.",
+		"My soul is golden, and gold never corrupts.",
 		),
 	"Elf": (
-		"My heart has time, and it is spending the time on this.",
-		"My heart is older than the grievance and it has not forgotten it.",
+		"My heart keeps a peace older than any kingdom standing.",
+		"My heart has all the time there is, and spends it here.",
 		),
 	"Orc": (
-		"My heart is open country and it was fenced without being asked.",
-		"My heart rides, and it does not ride away from things.",
+		"My heart is the heart of a rider, and a rider does not turn back.",
+		"My heart rides the storm, and the winds will carry me.",
 		),
 	"Goliath": (
-		"My heart came down off a mountain that fell, and remembers the height.",
-		"My heart keeps what was made, because keeping it is the duty.",
+		"My heart carries the weight of the world, and is not bent by it.",
+		"My heart came down from a fallen height, and kept the height.",
 		),
 	"Halfling": (
-		"My heart knows a place where nobody ever needed guarding.",
-		"My heart is small and it is standing here anyway.",
+		"My heart carries the homeland, and the stories I will tell.",
+		"My heart is small, and there is no room in it for fear.",
 		),
 	"Dragonborn": (
-		"My heart was raised in a hall where a word given was a deed done.",
-		"My heart knows which hand takes the cup, and it knows why.",
+		"My heart was given its words at birth, and chose these instead.",
+		"My heart keeps the old courtesies, and keeps them to the death.",
 		),
 	"Tiefling": (
-		"My heart has been read wrong my whole life and it is still mine.",
-		"My heart was named a warning. I have made it a promise.",
+		"My heart protects the ones like me: born alone.",
+		"My heart was alone. No more.",
 		),
 	"Gnome": (
-		"My heart keeps its ways in small things and the small things hold.",
-		"My heart was handed down, and I am not the one who drops it.",
+		"My heart is astonished by the world, and always was.",
+		"My heart keeps its ways in small things, and the small things hold.",
 		),
 	"Aasimar": (
-		"My heart carries a spark it did not ask for and has chosen anyway.",
-		"My heart cannot compromise, and has stopped apologising for that.",
+		"My heart holds the stars. My arm carries the might.",
+		"My heart carries a spark I did not ask for, and a vow I did.",
 		),
 	}
 
 DEFAULT_HEARTS = (
-	"My heart is the part of me that did not get a vote.",
-	"My heart was not consulted and has never once complained.",
+	"My heart carries no shame, and it has been offered plenty.",
+	"My heart was not consulted, and has never once complained.",
 	)
 
 
@@ -136,9 +136,9 @@ DEFAULT_HEARTS = (
 
 BLADES = {
 	DEVOTION: (
-		"My blade is bright, so that nothing I do is done in the dark.",
-		"My blade is honest, and it has never once been quick about it.",
-		"My blade does what I said it would do, in front of whoever is looking.",
+		"My blade is bright. Nothing I do is done in the dark.",
+		"My blade has never once been drawn in secret.",
+		"My blade answers for me, and it has never had to lie.",
 		),
 	ANCIENTS: (
 		"My blade is for the winter, and the winter is patient.",
@@ -147,8 +147,8 @@ BLADES = {
 		),
 	GLORY: (
 		"My blade is for the moment the song will need.",
-		"My blade goes first, because someone has to and it may as well be seen.",
-		"My blade is the part of this that people will describe afterwards.",
+		"My blade goes first. It has always gone first.",
+		"My blade is drawn where everyone can see it drawn.",
 		),
 	VENGEANCE: (
 		"My blade carries one name at a time, and it finishes.",
@@ -205,7 +205,7 @@ WORD_CLUSTERS = {
 
 WORDS = {
 	"sworn": (
-		"My word was spoken once before, to a smaller thing, and I kept that too.",
+		"My word was given once before, to a smaller thing, and I kept it.",
 		"My word has been given to men who did not deserve it. This one is mine.",
 		),
 	"held": (
@@ -217,23 +217,23 @@ WORDS = {
 		"My word is the one thing I never sold, and I sold a great deal.",
 		),
 	"learned": (
-		"My word is checked before it is given, and then it is not checked again.",
-		"My word is the one claim I have never needed a source for.",
+		"My word is proved before it is given, and never after.",
+		"My word needs no authority. It is the authority.",
 		),
 	"wandering": (
 		"My word travels ahead of me and arrives before I do.",
-		"My word is all a stranger has, so I made sure mine was good.",
+		"My word is all a stranger has. Mine is good.",
 		),
 	"marked": (
 		"My word is mine, whatever else about me was decided elsewhere.",
 		"My word is the part of my fate I got to write.",
 		),
 	"alone": (
-		"My word was given where nobody could hear it, which is when it counts.",
+		"My word was given where nobody could hear it.",
 		"My word is kept the same whether there is anyone there or not.",
 		),
 	"watched": (
-		"My word is given in front of people, and that is the point of it.",
+		"My word is given where it can be held against me.",
 		"My word has an audience now, and the audience is not why I keep it.",
 		),
 	"lost": (
@@ -244,7 +244,7 @@ WORDS = {
 
 DEFAULT_WORDS = (
 	"My word is the whole of my estate.",
-	"My word costs me something every time, which is how I know it is real.",
+	"My word costs me something every time.",
 	)
 
 
@@ -277,7 +277,7 @@ REFUSALS = {
 		"I will not mistake the vestment for the thing it stands for.",
 		),
 	"sangha": (
-		"I will not pretend the wanting has stopped. I will act anyway.",
+		"I will not pretend the wanting has stopped. I act regardless.",
 		),
 	"carthage": (
 		"I will not forget it. I was young and I have not forgotten it.",
@@ -295,7 +295,7 @@ REFUSALS = {
 		"I will not outlive the keeping of it by very long.",
 		),
 	"china": (
-		"I will not do to them what I would not have done to mine.",
+		"I will not ask of them what I have not already given.",
 		),
 	"egypt": (
 		"I will not be weighed and found wanting.",
@@ -311,7 +311,7 @@ REFUSALS = {
 	"arthuriana": (
 		"I will not be the one who put it down.",
 		"I will not ask first whether the kingdom deserves it.",
-		"I will not stop keeping it because the keeping has gone out of fashion.",
+		"I will not put it down for a change in fashion.",
 		"I will not hand it to somebody better. Nobody better is coming.",
 		"I will not wait for the order. The order is not coming either.",
 		),
@@ -360,17 +360,17 @@ CLOSES = {
 	ANCIENTS: (
 		"The light is older than the dark, and it is coming back.",
 		"Let it go out everywhere else. It will not go out in me.",
-		"I am a short season in a very long spring, and I am this season.",
+		"I am one season in a very long spring. I am this one.",
 		),
 	GLORY: (
 		"Say it after me, and say it right.",
 		"They will tell it wrong. Tell it wrong in my favour.",
-		"I would rather be the story they need than the man I was.",
+		"I will be the story they need, not the one I was.",
 		),
 	VENGEANCE: (
 		"Let them run. It changes nothing.",
 		"It ends. I have decided that it ends.",
-		"I am not owed this. They are.",
+		"The debt is not mine. The paying of it is.",
 		),
 	}
 
@@ -401,7 +401,7 @@ CIRCUMSTANCES = {
 		),
 	"held": (
 		"You said it where nobody important was listening.",
-		"You said it at the end of a long day, which is when people mean things.",
+		"You said it at the end of a long day.",
 		),
 	"outside": (
 		"You said it in a room you had no business being in.",
@@ -421,7 +421,7 @@ CIRCUMSTANCES = {
 		),
 	"alone": (
 		"You said it to the weather.",
-		"You said it aloud with nobody in earshot, which is the hardest way.",
+		"You said it aloud with nobody in earshot.",
 		),
 	"watched": (
 		"You said it in front of a crowd who thought it was part of the act.",
@@ -438,10 +438,10 @@ DEFAULT_CIRCUMSTANCES = (
 	"You whispered it to yourself, where nobody could possibly hear.",
 	"You said it in front of witnesses, every one of them still living.",
 	"You said it alone, to nobody at all.",
-	"You said it twice, because the first time your voice went.",
+	"You said it twice. The first time your voice went.",
 	"You said it without meaning to, and then again on purpose.",
 	"You said it in the old words, which you had to be taught.",
-	"You said it in your own words, because the old ones did not fit.",
+	"You said it in your own words. The old ones did not fit.",
 	"You said it kneeling, which you have not done since.",
 	"You said it quietly, the way a person says a thing already decided.",
 	"You have never written it down, and neither has anyone else.",
