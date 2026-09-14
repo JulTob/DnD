@@ -1232,12 +1232,34 @@ Farmer = _Build_Player_Handbook_Background(
 		"Animal_Handling",
 		"Nature",
 		),
-	tools="Carpenter_Tools",
+	tools="Woodworker_Tools",
 	origin_feat=Tough,
-	title="Rustic Hospitality",
+	title="Farmer",
 	description=(
-		"Working communities recognize your practical experience and often "
-		"offer simple aid in exchange for honest labour."
+		"You came up with dirt under your nails and the seasons in your bones. "
+		"You know the weight of real work: the ache of a long harvest, the "
+		"patience of raising a beast from a shaking newborn to a plow-puller, "
+		"the quiet arithmetic of whether the rain will come before the seed "
+		"rots. You can build a fence that holds, mend what breaks, read a sky, "
+		"and calm a frightened animal with a hand and a low word. The land does "
+		"not care who your father was or what gods you keep, and neither, in "
+		"the end, do you. It taught you that anything worth having is grown "
+		"slowly, and that a person who will not do the hard, dull work is not "
+		"to be trusted with the rest."
+		),
+	hook=Entry(
+		title="Rustic Hospitality",
+		definition=(
+			"Working people know one of their own. In any village, farmstead, or "
+			"waystation, you can find a dry barn to sleep in, a plain meal, and "
+			"hands willing to help someone who has clearly done a day's labor in "
+			"their life. They will hide you from those who ride fine horses and ask "
+			"hard questions, tend you when you are hurt, and in return they will "
+			"tell you their troubles: the beast that has been taking the sheep, the "
+			"tax collector who takes too much, the neighbor who walked into the "
+			"woods and never came back. Small troubles, until they are yours to "
+			"solve."
+			),
 		),
 	)
 
