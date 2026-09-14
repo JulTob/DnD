@@ -1053,10 +1053,30 @@ Artisan = _Build_Player_Handbook_Background(
 		),
 	tools=ARTISAN_TOOLS,
 	origin_feat=Crafter_Feature,
-	title="Craftsperson",
+	title="Artisan",
 	description=(
-		"You have craft-guild connections and practical access to workshops, "
-		"materials, and specialist knowledge."
+		"You make things, and you make them well. Somewhere there is a guild "
+		"hall with your mark in its ledgers, a master who taught you, and a "
+		"trade that shaped your hands long before it shaped your character. You "
+		"can look at a lock, a hinge, a flawed casting, or a rival's handiwork "
+		"and see at a glance how it was made and where it will fail. You know "
+		"the worth of honest work and the true cost of cutting corners, and you "
+		"have bargained with enough suppliers and patrons to talk your way to a "
+		"fair price (or a workshop after closing). Whatever road you walk now, "
+		"you still measure the world by whether it was built to last."
+		),
+	hook=Entry(
+		title="The Guild",
+		definition=(
+			"Your trade opens doors that coin alone cannot. In most towns you can "
+			"find the guild, workshop, or craftsfolk of your art, and among them "
+			"your skill earns a fair hearing: a place to work, tools and materials "
+			"at cost, and word of who needs a thing made or mended. Build a "
+			"reputation and the commissions come to you, some stranger than they "
+			"first appear (a key for a lock no one will name, a repair no honest "
+			"smith would touch), and every odd request is a call worth answering to "
+			"make a name for yourself."
+			),
 		),
 	)
 
