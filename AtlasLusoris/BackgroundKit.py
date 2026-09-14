@@ -1375,10 +1375,31 @@ Hermit = _Build_Player_Handbook_Background(
 		),
 	tools="Herbalism_Kit",
 	origin_feat=Healer_Feature,
-	title="Discovery",
+	title="Hermit",
 	description=(
-		"Solitude gave you time to uncover a truth, method, or mystery that "
-		"still shapes your decisions."
+		"You went out to the quiet places and stayed long enough for the noise "
+		"to drain out of you. A cave, a cliff cell, a hut past the last field: "
+		"it does not matter which, only that no one was there to interrupt the "
+		"thinking. You learned which roots break a fever and which look "
+		"identical and stop a heart, how to set a bone with nobody to hold the "
+		"patient still, and how to sit with the dying without flinching. You "
+		"prayed, or studied, or simply listened, until something answered: an "
+		"insight, a vision, a truth you have never been able to put down. Then "
+		"you came back to a world that talks constantly and says very little. "
+		"You are out of practice with people, but not with what matters."
+		),
+	hook=Entry(
+		title="What You Found Out There",
+		definition=(
+			"In your solitude you came to know one thing the world does not (the "
+			"meaning of a symbol nobody can read, where something old was buried "
+			"and why, a heresy that happens to be true, the cure for a sickness "
+			"that has no cure). Work it out with your GM. You are not the only one "
+			"who wants it: scholars, priests, and quieter parties come looking for "
+			"the hermit who knows, and not all of them ask politely. And wherever "
+			"you go, the sick and the desperate find you, because someone always "
+			"remembers a healer who asks for nothing."
+			),
 		),
 	)
 
