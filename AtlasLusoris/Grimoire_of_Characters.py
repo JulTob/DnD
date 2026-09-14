@@ -832,6 +832,15 @@ class Character(Character_Skeleton):
 					"Persuasion",
 					"Religion",
 					])
+				# A level-3 Paladin of the Noble Genies gains one more skill
+				# from Genie's Splendor, which grants it itself so the entry
+				# can name it. The grant is a no-op for every other Oath. See
+				# AtlasLusoris/AtlasOfTraining/Map_of_Paladin_Training.py.
+				if char.level >= 3:
+					from AtlasLusoris.AtlasOfTraining.Map_of_Paladin_Training import (
+						Grant_Genies_Splendor_Skill,
+						)
+					Grant_Genies_Splendor_Skill(char)
 				char.skills.Simple_Weapons.set_proficiency()
 				char.skills.Martial_Weapons.set_proficiency()
 				char.skills.Light.set_proficiency()

@@ -43,6 +43,7 @@ DEVOTION = "Devotion"
 ANCIENTS = "Ancients"
 GLORY = "Glory"
 VENGEANCE = "Vengeance"
+NOBLE_GENIES = "Noble Genies"
 
 
 @dataclass(
@@ -198,6 +199,50 @@ REGISTERS = {
 			"Say it after me, and say it right.",
 			"They will tell it wrong. Tell it wrong in my favour.",
 			"I would rather be the story than the one who lived it.",
+			),
+		),
+	# Holding register, in Scheherazade and Lorca, until the poets' version
+	# replaces it. The Noble Genie is the one who could refuse and does not.
+	NOBLE_GENIES: Oath_Register(
+		name=NOBLE_GENIES,
+		sworn_to="the Noble Genies",
+		paragon="splendor and grace",
+		poets="Scheherazade; Lorca",
+		vows=(
+			"I am sworn to the door, and to whoever stands at it.",
+			"I am sworn to grant what is asked, and to ask nothing back.",
+			"I am sworn to the four courts, and the courts have received me.",
+			"I am sworn to splendor, and splendor is a debt I pay daily.",
+			),
+		hearts=(
+			"My heart is a lamp, and it does not choose who rubs it.",
+			"My heart is an orange grove under a green moon, and it is open.",
+			"My heart keeps a table laid for whoever comes in from the dark.",
+			"My heart holds a wish it has never once spent on itself.",
+			),
+		arms=(
+			"My blade is earth that rises, and wind that carries.",
+			"My blade is fire that leaps, and water that will not be held.",
+			"My sword bows first, and strikes second, and never the other way.",
+			"My blade is the knife in the court, and the court around the knife.",
+			),
+		words=(
+			"My word is the lamp lit. What comes out is yours.",
+			"My word is a tale that outlasts the dawn, and the dawn has tried.",
+			"My word was given to a guest, and a guest is a king in my house.",
+			"My word is granted as it was asked, and I do not improve on it.",
+			),
+		refusals=(
+			"I will not close the door on the one who knocked.",
+			"I will not grant less than was asked. It was asked.",
+			"I will not let the dawn end the tale.",
+			"I will not be the last wish. I will be the one they should have made.",
+			),
+		closes=(
+			"Ask. I have already said yes.",
+			"The moon is up over the orange trees. Say what you want.",
+			"Three wishes were never the limit. Kindness was.",
+			"The door is open. It has always been open. Come in.",
 			),
 		),
 	VENGEANCE: Oath_Register(

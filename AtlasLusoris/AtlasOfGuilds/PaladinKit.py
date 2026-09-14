@@ -18,6 +18,32 @@ from AtlasLusoris.GuildKit import Describe_Layer
 from AtlasLusoris.GuildKit import Paladin
 
 
+def _with_oath(
+		paragraph: str,
+		):
+	"""
+	The Oath paragraph with the recited oath beneath it.
+
+	The recital is drawn once, when the Oath Spells lesson applies at level
+	3, and recorded on the Character; this only reads the record. Below
+	level 3 no oath has been sworn and the paragraph stands alone.
+	"""
+	def describe(
+			character,
+			) -> str:
+		from AtlasLusoris.AtlasOfTraining.Map_of_Paladin_Oaths import Oath_Entry
+
+		recital = Oath_Entry(
+				character
+				)
+		if not recital:
+			return paragraph
+
+		return f"{paragraph}\n\n{recital}"
+
+	return describe
+
+
 # The register is **the oath, remembered**: second person, present tense,
 # austere rather than warm. Documenta/Canon/Mythos/Paladin.md §2 fixes it and
 # names what it must not borrow. Three neighbours are close enough to collide
@@ -97,7 +123,9 @@ Devotion = Build_Specialization(
 	guild=Paladin,
 	name="Devotion",
 	module=__name__,
-	extends=DEVOTION_DESCRIPTION,
+	extends=_with_oath(
+		DEVOTION_DESCRIPTION
+		),
 	heading="Oath of Devotion",
 	)
 
@@ -124,7 +152,9 @@ Ancients = Build_Specialization(
 	guild=Paladin,
 	name="Ancients",
 	module=__name__,
-	extends=ANCIENTS_DESCRIPTION,
+	extends=_with_oath(
+		ANCIENTS_DESCRIPTION
+		),
 	heading="Oath of the Ancients",
 	)
 
@@ -154,7 +184,9 @@ Glory = Build_Specialization(
 	guild=Paladin,
 	name="Glory",
 	module=__name__,
-	extends=GLORY_DESCRIPTION,
+	extends=_with_oath(
+		GLORY_DESCRIPTION
+		),
 	heading="Oath of Glory",
 	)
 
@@ -186,8 +218,40 @@ Vengeance = Build_Specialization(
 	guild=Paladin,
 	name="Vengeance",
 	module=__name__,
-	extends=VENGEANCE_DESCRIPTION,
+	extends=_with_oath(
+		VENGEANCE_DESCRIPTION
+		),
 	heading="Oath of Vengeance",
+	)
+
+# Forgotten Realms: Heroes of Faerun. Sworn to the four genie courts: dao of
+# earth, djinn of air, efreet of fire, marids of water. The core fantasy, as
+# settled with Julio: the one who could refuse and does not. A being of great
+# power who opens the door, keeps the table and grants what is asked, whose
+# cost is that the wish is granted as it was asked and never as it was wise.
+# Register: Scheherazade and Lorca. This paragraph is a holding text; the
+# poets' version replaces it.
+NOBLE_GENIES_DESCRIPTION = (
+	"Others swore to a truth, or a wood, or a wrong. You swore to the door, "
+	"and to whoever stands at it.\n\n"
+	"Four courts answer you: the earth that rises, the wind that carries, "
+	"the fire that leaps, the water that will not be held. You did not "
+	"conquer them. You were received by them, as a guest is received, and "
+	"a guest keeps the house's laws. Lead with splendor. Lead with grace. "
+	"Grant what is asked.\n\n"
+	"That is the whole of the price, and it is not small. You will grant "
+	"what is asked and not what is wise, and the wish will be theirs, and "
+	"the granting will be yours, and you will not be permitted to confuse "
+	"the two."
+	)
+NobleGenies = Build_Specialization(
+	guild=Paladin,
+	name="Noble Genies",
+	module=__name__,
+	extends=_with_oath(
+		NOBLE_GENIES_DESCRIPTION
+		),
+	heading="Oath of the Noble Genies",
 	)
 
 
@@ -195,6 +259,7 @@ SPECIALIZATIONS = (
 	Ancients,
 	Devotion,
 	Glory,
+	NobleGenies,
 	Vengeance,
 	)
 

@@ -32,6 +32,7 @@ ANCIENTS = "Ancients"
 DEVOTION = "Devotion"
 GLORY = "Glory"
 VENGEANCE = "Vengeance"
+NOBLE_GENIES = "Noble Genies"
 
 
 def _lesson(
@@ -107,6 +108,7 @@ def _path(
 		min_level: int,
 		description,
 		chips=(),
+		apply=None,
 		):
 	return Build_Training(
 			name=name,
@@ -114,6 +116,7 @@ def _path(
 			min_level=min_level,
 			description=description,
 			chips=chips,
+			apply=apply,
 			path=path_name,
 			source=f"Training: Oath of {path_name}",
 			)
@@ -183,6 +186,22 @@ def _vengeance(
 			)
 
 
+def _genies(
+		*,
+		name: str,
+		min_level: int,
+		description,
+		chips=(),
+		):
+	return _path(
+			NOBLE_GENIES,
+			name=name,
+			min_level=min_level,
+			description=description,
+			chips=chips,
+			)
+
+
 # ---------------------------------------------------------------------------
 # Callable entries (level-sensitive text)
 # ---------------------------------------------------------------------------
@@ -217,12 +236,18 @@ def _channel_entry(
 			)
 	return _lesson(
 		"You can feel what the oath is against. It is never far.",
-		"You can channel divine energy to fuel magical effects. "
-		f"You can use Channel Divinity <b>{uses} times</b>. "
+		"You can channel divine energy directly from the Outer Planes to fuel "
+		f"magical effects. You can use Channel Divinity <b>{uses} times</b>. "
 		"You regain one expended use when you finish a Short Rest, and you "
 		"regain all expended uses when you finish a Long Rest. "
 		"<br>If a Channel Divinity effect requires a saving throw, the DC equals "
 		"your Paladin spell save DC."
+		"<br><b>Divine Sense.</b> As a Bonus Action, you can open your awareness "
+		"to detect Celestials, Fiends, and Undead. For the next 10 minutes or "
+		"until you have the Incapacitated condition, you know the location and "
+		"creature type of any such creature within 60 feet of yourself, and you "
+		"detect any place or object within that radius that has been consecrated "
+		"or desecrated, as with the <em>Hallow</em> spell."
 		)
 
 
@@ -324,9 +349,8 @@ Paladins_Smite = _core(
 			"The word goes into the blow. Whatever you hit finds out what "
 			"you promised.",
 			"You always have the <em>Divine Smite</em> spell prepared. "
-			"When you hit a target with a melee weapon or Unarmed Strike, "
-			"you can expend a Paladin spell slot to cast <em>Divine Smite</em> "
-			"as part of that attack (no action required)."
+			"You can cast it once without expending a spell slot, and you regain "
+			"the ability to do so when you finish a Long Rest."
 			),
 		)
 
@@ -403,20 +427,53 @@ Aura_of_Protection = _core(
 				),
 		)
 
+def _charisma_modifier(
+		char,
+		) -> int:
+	"""The Charisma modifier as the sheet will print it, or +0 before scores exist."""
+	from AtlasActorLudi.Map_of_Scores import Modifier
+
+	scores = getattr(
+			char,
+			"AS",
+			None,
+			)
+	if scores is None:
+		return 0
+
+	return Modifier(
+			scores.CHA
+			)
+
+
+def _abjure_foes_entry(
+		char,
+		) -> str:
+	targets = max(
+			1,
+			_charisma_modifier(
+				char
+				),
+			)
+	plural = "creatures" if targets != 1 else "creature"
+	return _lesson(
+		"Whatever the oath is against knows it, and steps back.",
+		"<b>Channel Divinity — Magic action.</b> "
+		"As you present your Holy Symbol or weapon, you can target "
+		f"<b>{targets}</b> {plural} (equal to your Charisma modifier, minimum "
+		"one) that you can see within 60 feet of yourself. "
+		"Each target must succeed on a Wisdom saving throw against your Paladin "
+		"spell save DC or have the <em>Frightened</em> condition for 1 minute or "
+		"until it takes any damage. "
+		"<br>While Frightened in this way, a target can do only one of the following "
+		"on its turns: move, take an action, or take a Bonus Action."
+		)
+
+
 Abjure_Foes = _core(
 		name="Abjure Foes",
 		min_level=9,
-		description=_lesson(
-			"Whatever the oath is against knows it, and steps back.",
-			"<b>Channel Divinity — Magic action.</b> "
-			"Choose creatures you can see within 60 feet. "
-			"Each target must succeed on a Wisdom saving throw against your Paladin "
-			"spell save DC or have the <em>Frightened</em> condition for 1 minute. "
-			"<br>While frightened this way, a creature can do only one of the following "
-			"on its turn: move, take an action, or take a Bonus Action. "
-			"<br>Frightened creatures repeat the save at the end of each of their turns, "
-			"ending the effect on a success."
-			),
+		description=_abjure_foes_entry,
 		)
 
 Aura_of_Courage = _core(
@@ -464,11 +521,30 @@ Aura_Expansion = _core(
 
 
 # ---------------------------------------------------------------------------
+# The oath itself is settled when the Oath is sworn. Every Oath's spells
+# lesson lands at level 3, path-gated, so its apply is where the recital is
+# drawn once and recorded; the Oath paragraph then reads the record. The draw
+# never runs from an Entry: see Canon/Feature-Text on the Primal Order.
+# ---------------------------------------------------------------------------
+
+
+def _apply_oath(
+		char,
+		) -> None:
+	from AtlasLusoris.AtlasOfTraining.Map_of_Paladin_Oaths import Draw_Oath
+
+	Draw_Oath(
+			char
+			)
+
+
+# ---------------------------------------------------------------------------
 # Oath of the Ancients
 # ---------------------------------------------------------------------------
 
 
-Ancients_Oath_Spells = _ancients(
+Ancients_Oath_Spells = _path(
+		ANCIENTS,
 		name="Oath Spells",
 		min_level=3,
 		description=_lesson(
@@ -482,6 +558,7 @@ Ancients_Oath_Spells = _ancients(
 			"<li><b>17th:</b> <em>Commune with Nature, Tree Stride</em></li>"
 			"</ul>"
 			),
+		apply=_apply_oath,
 		)
 
 Natures_Wrath = _ancients(
@@ -550,7 +627,8 @@ Elder_Champion = _ancients(
 # ---------------------------------------------------------------------------
 
 
-Devotion_Oath_Spells = _devotion(
+Devotion_Oath_Spells = _path(
+		DEVOTION,
 		name="Oath Spells",
 		min_level=3,
 		description=_lesson(
@@ -564,6 +642,7 @@ Devotion_Oath_Spells = _devotion(
 			"<li><b>17th:</b> <em>Commune, Flame Strike</em></li>"
 			"</ul>"
 			),
+		apply=_apply_oath,
 		)
 
 Sacred_Weapon = _devotion(
@@ -624,7 +703,8 @@ Holy_Nimbus = _devotion(
 # ---------------------------------------------------------------------------
 
 
-Glory_Oath_Spells = _glory(
+Glory_Oath_Spells = _path(
+		GLORY,
 		name="Oath Spells",
 		min_level=3,
 		description=_lesson(
@@ -638,6 +718,7 @@ Glory_Oath_Spells = _glory(
 			"<li><b>17th:</b> <em>Legend Lore, Yolande's Regal Presence</em></li>"
 			"</ul>"
 			),
+		apply=_apply_oath,
 		)
 
 Inspiring_Smite = _glory(
@@ -717,11 +798,249 @@ Living_Legend = _glory(
 
 
 # ---------------------------------------------------------------------------
+# Oath of the Noble Genies (Forgotten Realms: Heroes of Faerun)
+# ---------------------------------------------------------------------------
+
+
+def _oath_of(
+		char,
+		) -> str | None:
+	"""Which Oath this Paladin swore, by name, or None before it is chosen."""
+	for attribute in (
+			"specialization",
+			"Specialization",
+			"subclass",
+			"Subclass",
+			):
+		value = getattr(
+				char,
+				attribute,
+				None,
+				)
+		if isinstance( value, str ) and value:
+			return value
+	return None
+
+
+GENIES_SPLENDOR_SKILLS = (
+	"Acrobatics",
+	"Intimidation",
+	"Performance",
+	"Persuasion",
+	)
+
+
+def Grant_Genies_Splendor_Skill(
+		char,
+		) -> None:
+	"""
+	Take Genie's Splendor's skill, and record which one it was.
+
+	The rule reads "one of the following skills of your choice", which a
+	generated sheet may not print: the choice was made before the page
+	existed (Canon/Feature-Text). It cannot run from the lesson's own apply
+	either, because Trainings apply before the builder assigns class skills
+	and ``char.skills`` does not exist yet; the builder calls this at the
+	moment the two class skills are granted, exactly as it does for the
+	Barbarian's Primal Knowledge.
+	"""
+	if _oath_of( char ) != NOBLE_GENIES:
+		return
+
+	skills = getattr(
+		char,
+		"skills",
+		None,
+		)
+	if skills is None or getattr( char, "genies_splendor_skill", None ):
+		return
+
+	untrained = [
+		name
+		for name in GENIES_SPLENDOR_SKILLS
+		if getattr(
+			getattr(
+				skills,
+				name.replace( " ", "_" ),
+				None,
+				),
+			"proficiency_level",
+			0,
+			) < 1
+		]
+	if not untrained:
+		char.genies_splendor_skill = ""
+		return
+
+	chosen = char.Pick(
+		untrained,
+		dice=char.Dice_Bag(
+			"paladin.genies.splendor",
+			version="1",
+			namespace="GenLegendTraining",
+			),
+		)
+	getattr(
+		skills,
+		chosen.replace( " ", "_" ),
+		).set_proficiency()
+	char.genies_splendor_skill = chosen
+
+
+def _genies_splendor_entry(
+		char,
+		) -> str:
+	# Three states, as Primal Knowledge distinguishes them: a recorded name is
+	# printed; an empty string means every listed skill was already trained;
+	# a missing attribute means this ran outside the normal build.
+	gained = getattr(
+		char,
+		"genies_splendor_skill",
+		None,
+		)
+	if gained:
+		skill = f"You also gained proficiency in <b>{gained}</b>."
+	elif gained == "":
+		skill = (
+			"You were already trained in every skill this splendor teaches, "
+			"so it sharpened what you had."
+			)
+	else:
+		skill = "You also gained proficiency in one of the skills of the court."
+
+	return _lesson(
+		"You need no iron. Grace is the armour, and it has never once come off.",
+		"When you aren't wearing any armor, your base Armor Class equals "
+		"<b>10 plus your Dexterity and Charisma modifiers</b>. You can use a "
+		"Shield and still gain this benefit. "
+		f"<br>{skill}"
+		)
+
+
+def _elemental_rebuke_entry(
+		char,
+		) -> str:
+	cha = _charisma_modifier(
+			char
+			)
+	uses = max(
+			1,
+			cha,
+			)
+	return _lesson(
+		"Strike, and the element strikes back. It was never yours to hit.",
+		"When you are hit by an attack roll, you can take a Reaction to halve "
+		"the attack's damage against yourself (round down) and force the "
+		"attacker to make a Dexterity saving throw against your spell save DC. "
+		f"On a failed save, the attacker takes <b>2d10 + {cha}</b> damage of one "
+		"of the following types (your choice): Acid, Cold, Fire, Lightning, or "
+		"Thunder. On a successful save, the attacker takes half as much damage. "
+		f"<br>You can use this feature <b>{uses} time{'s' if uses != 1 else ''}</b> "
+		"(equal to your Charisma modifier, minimum once), and you regain all "
+		"expended uses when you finish a Long Rest."
+		)
+
+
+Genies_Oath_Spells = _path(
+		NOBLE_GENIES,
+		name="Oath Spells",
+		min_level=3,
+		description=_lesson(
+			"The oath comes with a vocabulary, and this one was learned in "
+			"four courts.",
+			"You always have the following spells prepared:"
+			"<ul>"
+			"<li><b>3rd:</b> <em>Chromatic Orb, Elementalism, Thunderous Smite</em></li>"
+			"<li><b>5th:</b> <em>Mirror Image, Phantasmal Force</em></li>"
+			"<li><b>9th:</b> <em>Fly, Gaseous Form</em></li>"
+			"<li><b>13th:</b> <em>Conjure Minor Elementals, Summon Elemental</em></li>"
+			"<li><b>17th:</b> <em>Banishing Smite, Contact Other Plane</em></li>"
+			"</ul>"
+			),
+		apply=_apply_oath,
+		)
+
+Elemental_Smite = _genies(
+		name="Elemental Smite",
+		min_level=3,
+		description=_lesson(
+			"Earth, wind, fire, water. Whichever the hour needs, you have "
+			"already asked.",
+			"Immediately after you cast <em>Divine Smite</em>, you can expend one "
+			"use of your Channel Divinity and invoke one of the following effects."
+			"<br><b>Dao's Crush.</b> Earth rises up around the target of your Divine "
+			"Smite. The target has the <em>Grappled</em> condition (escape DC equal "
+			"to your spell save DC). While Grappled, the target has the "
+			"<em>Restrained</em> condition."
+			"<br><b>Djinni's Escape.</b> You teleport to an unoccupied space you can "
+			"see within 30 feet of yourself and take on a semi-incorporeal form, "
+			"which lasts until the end of your next turn. While in this form, you "
+			"have Resistance to Bludgeoning, Piercing, and Slashing damage, and you "
+			"have Immunity to the Grappled, Prone, and Restrained conditions."
+			"<br><b>Efreeti's Fury.</b> The target of your Divine Smite takes an "
+			"extra <b>2d4</b> Fire damage, and fire jumps from the target to another "
+			"creature you can see within 30 feet of yourself. The second creature "
+			"also takes <b>2d4</b> Fire damage."
+			"<br><b>Marid's Surge.</b> The target of your Divine Smite and each "
+			"creature of your choice in a 10-foot Emanation originating from you "
+			"make a Strength saving throw against your spell save DC. On a failed "
+			"save, a creature is pushed 15 feet straight away from you and has the "
+			"<em>Prone</em> condition."
+			),
+		)
+
+Genies_Splendor = _genies(
+		name="Genie's Splendor",
+		min_level=3,
+		description=_genies_splendor_entry,
+		)
+
+Aura_of_Elemental_Shielding = _genies(
+		name="Aura of Elemental Shielding",
+		min_level=7,
+		description=_lesson(
+			"Stand near you and the fire forgets its own name.",
+			"Choose one of the following damage types: Acid, Cold, Fire, "
+			"Lightning, or Thunder. You and your allies have Resistance to that "
+			"damage type while in your Aura of Protection. "
+			"<br>At the start of each of your turns, you can change the damage "
+			"type affected by this feature to one of the other listed options "
+			"(no action required)."
+			),
+		)
+
+Elemental_Rebuke = _genies(
+		name="Elemental Rebuke",
+		min_level=15,
+		description=_elemental_rebuke_entry,
+		)
+
+Noble_Scion = _genies(
+		name="Noble Scion",
+		min_level=20,
+		description=_lesson(
+			"For ten minutes the sky is a floor, and a failed wish is only a "
+			"first draft.",
+			"As a Bonus Action, you gain the benefits below for 10 minutes or "
+			"until you end them (no action required). Once you use this feature, "
+			"you can't use it again until you finish a Long Rest. You can also "
+			"restore your use of it by expending a level 5 spell slot (no action "
+			"required)."
+			"<br><b>Flight.</b> You have a Fly Speed of 60 feet and can hover."
+			"<br><b>Minor Wish.</b> When you or an ally in your Aura of Protection "
+			"fails a D20 Test, you can take a Reaction to make you or that ally "
+			"succeed instead."
+			),
+		)
+
+
+# ---------------------------------------------------------------------------
 # Oath of Vengeance
 # ---------------------------------------------------------------------------
 
 
-Vengeance_Oath_Spells = _vengeance(
+Vengeance_Oath_Spells = _path(
+		VENGEANCE,
 		name="Oath Spells",
 		min_level=3,
 		description=_lesson(
@@ -735,6 +1054,7 @@ Vengeance_Oath_Spells = _vengeance(
 			"<li><b>17th:</b> <em>Hold Monster, Scrying</em></li>"
 			"</ul>"
 			),
+		apply=_apply_oath,
 		)
 
 Vow_of_Enmity = _vengeance(
