@@ -55,6 +55,7 @@ from AtlasLusoris.FeaturesKit import (
 	grant,
 	)
 from AtlasLusoris.GuildKit import guild_ability_prefs
+from AtlasVenustas import Entry
 
 
 _ALL_ABILITIES = (
@@ -211,6 +212,7 @@ def _validate_background_construction(
 	origin_feat: type[Origin_Feat],
 	title: str,
 	description: str,
+	hook: Entry | None,
 	origin_feat_options: tuple[str, ...],
 	source_title: str,
 	source_url: str,
@@ -364,6 +366,18 @@ def _validate_background_construction(
 		):
 		raise ValueError(
 			f"Background {name!r} requires a title and description."
+			)
+
+	if hook is not None and (
+		not isinstance(
+			hook,
+			Entry,
+			)
+		or not hook.title.strip()
+		or not hook.definition.strip()
+		):
+		raise ValueError(
+			f"Background {name!r} declares a Hook without a title and text."
 			)
 
 	if (
@@ -712,6 +726,44 @@ def _grant_tool(
 		skill.set_proficiency()
 
 
+def _background_slots(
+	char,
+	) -> dict[str, str]:
+	"""The values a Background's prose may name: ``{guild}`` for now."""
+	guild = str(
+		getattr(
+			char,
+			"char_class",
+			"",
+			)
+		or ""
+		).strip()
+
+	return {
+		"guild": guild or "guild",
+		}
+
+
+def _describe(
+	text: str,
+	):
+	"""
+	Project a Background's prose, filling any slots it declares.
+
+	Returned as a callable when there is anything to fill, so the text resolves
+	when the sheet is read rather than when the Background is applied.  See
+	FeaturesKit.Feature: an Entry is a projection.
+	"""
+	if "{" not in text:
+		return text
+
+	return lambda char: text.format(
+		**_background_slots(
+			char
+			)
+		)
+
+
 def _grant_narrative(
 	char,
 	title: str,
@@ -720,8 +772,30 @@ def _grant_narrative(
 	grant(
 		char,
 		name=title,
-		description=description,
+		description=_describe(
+			description
+			),
 		source="Background",
+		narrative=True,
+		)
+
+
+def _grant_hook(
+	char,
+	hook: Entry | None,
+	):
+	"""Carry a Background's Hook onto the sheet as its own titled entry."""
+	if hook is None:
+		return
+
+	grant(
+		char,
+		name=hook.title,
+		description=_describe(
+			hook.definition
+			),
+		source="Background Hook",
+		narrative=True,
 		)
 
 
@@ -748,6 +822,10 @@ def _awaken(
 		tag.TITLE,
 		tag.DESCRIPTION,
 		)
+	_grant_hook(
+		char,
+		tag.HOOK,
+		)
 
 
 def Build_Background(
@@ -760,6 +838,7 @@ def Build_Background(
 	origin_feat: type[Origin_Feat],
 	title: str,
 	description: str,
+	hook: Entry | None = None,
 	origin_feat_options: tuple[str, ...] = (),
 	source_title: str = "Project Original",
 	source_url: str = "",
@@ -806,6 +885,7 @@ def Build_Background(
 		origin_feat=origin_feat,
 		title=title,
 		description=description,
+		hook=hook,
 		origin_feat_options=resolved_origin_feat_options,
 		source_title=source_title,
 		source_url=source_url,
@@ -848,6 +928,9 @@ def Build_Background(
 				),
 			"DESCRIPTION": Report(
 				description
+				),
+			"HOOK": Report(
+				hook
 				),
 			"ABILITIES": Report(
 				resolved_abilities
@@ -2364,11 +2447,93 @@ def _test_apply_by_name():
 	assert f"{character:Background}" == "Soldier"
 
 
+def _test_hook_and_slots():
+	"""A Hook is its own titled entry, and ``{guild}`` resolves on reading."""
+	character = Character(
+		seed=25
+		)
+	Player(
+		character
+		)
+	character.char_class = "Barbarian"
+
+	_grant_narrative(
+		character,
+		"Scribe",
+		"the {guild} School",
+		)
+	_grant_hook(
+		character,
+		Entry(
+			title="Alumni",
+			definition="Your {guild} classmates remember you.",
+			),
+		)
+	background, hook = character.features[ -2: ]
+
+	assert (
+		background.name,
+		background.source,
+		background.description,
+		) == (
+		"Scribe",
+		"Background",
+		"the Barbarian School",
+		)
+	assert (
+		hook.name,
+		hook.source,
+		hook.description,
+		) == (
+		"Alumni",
+		"Background Hook",
+		"Your Barbarian classmates remember you.",
+		)
+	assert background.narrative and hook.narrative
+
+	_grant_hook(
+		character,
+		None,
+		)
+	assert character.features[ -1 ] is hook
+
+	try:
+		_validate_background_construction(
+			name="Untitled Hook",
+			audiences=(
+				Available,
+				),
+			abilities=Soldier.ABILITIES,
+			skills=Soldier.SKILLS,
+			tools=Soldier.TOOLS,
+			origin_feat=Soldier.ORIGIN_FEAT,
+			title="Untitled Hook",
+			description="A life.",
+			hook=Entry(
+				definition="A price with no name.",
+				),
+			origin_feat_options=Soldier.ORIGIN_FEAT_OPTIONS,
+			source_title="Test",
+			source_url="",
+			source_locator="",
+			source_kind="test",
+			)
+	except ValueError as error:
+		assert "Hook" in str(
+			error
+			), error
+	else:
+		raise AssertionError(
+			"A Hook without a title must be refused."
+			)
+
+
 def _self_test():
 	_test_meta_fields()
 	_test_all_backgrounds()
 	_test_ability_boost_soft_opt()
 	_test_apply_by_name()
+	_test_hook_and_slots()
 
 	print(
 		"OK — BackgroundKit MetaTOP self-test "
