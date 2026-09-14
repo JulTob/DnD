@@ -2947,12 +2947,42 @@ def _test_hook_and_slots():
 			)
 
 
+def _test_official_hooks():
+	"""The sixteen settled officials: own name as title, and a titled Hook."""
+	hooks = {
+		Acolyte: "Shelter of the Faithful",
+		Artisan: "The Guild",
+		Charlatan: "False Identity",
+		Criminal: "Criminal Contact",
+		Entertainer: "By Popular Demand",
+		Farmer: "Rustic Hospitality",
+		Guard: "Network of Favors",
+		Guide: "The Ways Between",
+		Hermit: "What You Found Out There",
+		Merchant: "I Know Where to Get It",
+		Noble: "The Weight of the Crown",
+		Sage: "Working Hypothesis",
+		Sailor: "Ship's Passage",
+		Scribe: "Alumni",
+		Soldier: "Old Company",
+		Wayfarer: "The Overlooked",
+		}
+
+	for tag, hook_title in hooks.items():
+		assert tag.TITLE == tag.NAME, tag.NAME
+		assert tag.HOOK.title == hook_title, tag.NAME
+		assert tag.HOOK.definition.strip(), tag.NAME
+
+	assert "the {guild} School" in Scribe.DESCRIPTION
+
+
 def _self_test():
 	_test_meta_fields()
 	_test_all_backgrounds()
 	_test_ability_boost_soft_opt()
 	_test_apply_by_name()
 	_test_hook_and_slots()
+	_test_official_hooks()
 
 	print(
 		"OK — BackgroundKit MetaTOP self-test "
