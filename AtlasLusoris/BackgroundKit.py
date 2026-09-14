@@ -1474,10 +1474,55 @@ Noble = _Build_Player_Handbook_Background(
 		),
 	tools="Gaming_Set",
 	origin_feat=Skilled,
-	title="Position of Privilege",
+	title="Noble",
 	description=(
-		"Your name, education, or bearing grants access to circles where rank "
-		"and reputation carry practical weight."
+		"*There is a seat others watch, and it bears your name. Perhaps your "
+		"claim came by birth, election, promise, victory on a field, or merit "
+		"alone. The seat waits ahead while you are preparing for it, and people "
+		"measure every step you take toward it. You know the factions and their "
+		"old precedents, their alliances and rivalries, and that the difference "
+		"between them often matters less than who survives to write it down. "
+		"You learned that ceremony is a language, hospitality a negotiation, "
+		"and a smile may carry farther than a command.*"
+		"\n"
+		"\n"
+		"*The war games are never merely games. They are lessons: which piece "
+		"may be risked, which must be protected, and how to keep defeat from "
+		"becoming destruction. Never mistake the board for the game. Your "
+		"pieces will have families, your opponents will have heirs, and some "
+		"pieces will change color for the right price. One day, you will make "
+		"the call. Soldiers will move, granaries will empty, cells will open, "
+		"and names will end. Your predecessors made such calls. So did theirs. "
+		"The echoes of their commands have followed you and now lurk in the "
+		"shadows. Whether you inherit that power, seize it, refuse it, or lose "
+		"it, it has already shaped the way others see you. You have not once "
+		"felt entirely safe.*"
+		),
+	hook=Entry(
+		title="The Weight of the Crown",
+		definition=(
+			"*Crown, throne, seat, baton, council, the right to speak first: "
+			"whatever your people call it, you bear a recognized claim to "
+			"authority. Your name is not only a key. It is a blade hanging over "
+			"your head.*"
+			"\n"
+			"\n"
+			"Define the reach of your station with the GM: who recognizes it, what "
+			"community or institution it touches, and what duties accompany it. "
+			"Where your authority is recognized, you can usually secure an audience "
+			"and hospitality appropriate to your station, and the attention of "
+			"subjects or allies. Every request tests a loyalty, spends a favor, or "
+			"creates an obligation."
+			"\n"
+			"\n"
+			"*The price is that you are always watched. Responsibilities and old "
+			"grudges sharpen the blade. Every public promise may be treated as "
+			"policy. Every insult may become a grievance. Blood spilled may become "
+			"war. Everything you do is read as a move: who you court, who you "
+			"insult, whose table you sit at, whose funeral you attend. One "
+			"misjudgment, and the people you love may pay before you do. A crown is "
+			"not a gift. It is a golden cage with your name already written on it.*"
+			),
 		),
 	)
 
