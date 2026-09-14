@@ -264,8 +264,9 @@ page §5), which is the whole point of the Tiefling.
   job."* The performer at the table.
 - **Herald.** "The mouth and the hand." Any College; the Herald Bard's word
   opens gates because the world listens.
-- **Vagabond.** *Bearer of News.* The minstrel's oldest function; the
-  official Entertainer (*Musician*, one sentence) is the thin version.
+- **Vagabond.** *Bearer of News.* The minstrel's oldest function, which the
+  official Entertainer's Hook, *By Popular Demand*, also carries: "a message
+  carried somewhere only a minstrel can go unremarked".
 - **Shadow × Glamour.** *"You have been kind, and funny, and useful, and none
   of it ever quite closes the gap."* ✅ The Glamour loan on someone who
   performs to be accepted; the light that "rubbed off" on a thing with no

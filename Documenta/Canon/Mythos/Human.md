@@ -289,11 +289,11 @@ second system.
   ledger, so each grievance is recorded once and each entry either carries it or
   does not.
 - **The backgrounds as the Human's identity layer**, the written ones doing what
-  the species entry cannot, and the official ones being the Human's natural draws
-  and its thinnest prose. Documenta's Q-0011 with Dialog 0008 is still open on the
-  written roster, and Q-0012 on the catalogues. Needs both settled into a Decree,
-  plus a Questa on whether any people is background-first, and one on the official
-  backgrounds' prose depth.
+  the species entry cannot, and the official ones being the Human's natural draws.
+  Documenta's Q-0011 with Dialog 0008 is still open on the written roster, and
+  Q-0012 on the catalogues. Needs both settled into a Decree, plus a Questa on
+  whether any people is background-first. The officials' settled text reaching
+  the sheet is Repairs-Ledger B17.
 
 ### What the rules force, and what we chose
 
@@ -520,8 +520,7 @@ whom the *background* is the identity, which is what "think of what kinds of
 organizations {name} may belong to" already says.
 
 The official backgrounds (Acolyte, Artisan, Guard, Noble, Soldier, Sage…) are
-the Human's natural draws and are one sentence each (Cleric page §8). ⚠️ The
-species that most needs its backgrounds to speak has the thinnest ones.
+the Human's natural draws. Their settled text is on Backgrounds-Official.
 
 ---
 
@@ -561,5 +560,5 @@ species that most needs its backgrounds to speak has the thinnest ones.
 - **Warlock page**: the Dark Gift leak.
 - **Orders**: the Human as the Orders' builder.
 - **Cultural Inspirations**: the baseline's four keys; the brief's whole point.
-- **Official backgrounds**: the Human's thinnest draws.
+- **Backgrounds-Official**: the Human's natural draws, as written.
 

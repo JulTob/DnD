@@ -71,7 +71,7 @@ objection looks like, and how to fetch pages remotely.
 |---|---|
 | [Orders](Orders.md) | The Secret Orders: the middle layer between a people and a class; the one engine that collapses prose in the backgrounds' voice; orphaned from the player path; the lost Relationships, redrafted. |
 | [Backgrounds-Written](Backgrounds-Written.md) | A literary reading of all thirty-two custom backgrounds: the four-beat house form and the rule that every hook is a debt; the traditions each draws on; the four families (borrowed power, epistemologies, collectors, mutations); the weak six and what beat each is missing. |
-| [Backgrounds-Official](Backgrounds-Official.md) | The sixteen one-sentence backgrounds against the thirty written ones; the institutional principle; all sixteen drafted in the house voice (four in §4, twelve in §8). |
+| [Backgrounds-Official](Backgrounds-Official.md) | The sixteen 2024 backgrounds as the project wrote them, in their authoritative form: the 2024 mechanics, a description in the house voice and a titled Hook each; what the sheet prints today instead (Repairs-Ledger B17). |
 | [Guilds-Registers-Names-Devices](Guilds-Registers-Names-Devices.md) | One table: register, device, seat, word, culture, state, per Guild; the rules the table implies; the signature objects; the 2014 leaks. |
 | [Wiring-Plan](Wiring-Plan.md) | How the 624 drafted lines reach the sheet: the shape per layer, one Questa per Guild and people in coverage order, the coverage sweep as the acceptance test. |
 | [Bard-and-Sorcerer-Lines](Bard-and-Sorcerer-Lines.md) | One line per Training feature for the two Guilds with the lowest voice coverage (Bard 10%, Sorcerer 19%): 26 Bard, 28 Sorcerer, in their settled registers. |
@@ -166,8 +166,8 @@ because it is there. Anything wrong is corrected by editing it.
 **The page's own first line is derived from its chapters.** A page with no 📖
 chapter reads **📜 Settled**; otherwise **📖 In flow** with the count, followed
 by the composition. That signal cannot drift, because it is computed from the
-markers rather than asserted. Today: **12 pages settled, 31 with chapters still
-in flow.**
+markers rather than asserted. Today: **19 pages settled, 29 with chapters still
+in flow**, and one record (Lines-Annex).
 
 ## 📔 Chapter 0: the fixed points, in every page
 
@@ -315,7 +315,6 @@ Decree or a Questa.*
 - **The Relationships layer** of the Orders (drafts on the Orders page).
 - ~~Euterpe~~ Settled: she holds Harmony, a primary Ideal (Draft-Tables §F).
 - **The peoples table**: sufficiency, curiosity, the compact (proposed).
-- **The official backgrounds**: the institutional principle; the Wayfarer.
 - **The signature-object Kit**: eight consumers of the Spellbook's mechanism.
 - **The device law and the register list** into `Feature-Text.md`.
 - **The shadow budget**: a Decree 0005 nudge across four sites.
@@ -357,3 +356,6 @@ Decree or a Questa.*
 - `generate_npcs` calls `NPC.NPC`; the legacy NPC story is always empty.
 - Every character speaks Common and Halfling: `Character_Languages` compares
   the Character to a string, and the extra language is a `set.pop()`.
+- The sixteen official backgrounds print stubs with no Hook, most under a hook
+  title instead of their name; the text they should print is on
+  Backgrounds-Official §3 (Repairs-Ledger B17).

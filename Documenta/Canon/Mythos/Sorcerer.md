@@ -22,10 +22,11 @@ Draconic, Wild Magic. No legend register of its own.
 ## 📚 1. What a Sorcerer player is handed today
 
 A level 11 Dragonborn Draconic Sorcerer (seed 9) receives: the Dragonborn
-entry; a Criminal background that is one sentence; *Innate Sorcery* as a
-bullet list; *Metamagic* that says "Choose 4 Metamagic options", which the
-generator was supposed to have chosen; *Elemental Affinity* keyed to "the
-damage type of your draconic ancestry", which for a Dragonborn the sheet
+entry; a Criminal background printed as the wipe's stub, with no Hook
+(Backgrounds-Official §4); *Innate Sorcery* as a bullet list; *Metamagic* that
+says "Choose 4 Metamagic options", which the generator was supposed to have
+chosen; *Elemental Affinity* keyed to "the damage type of your draconic
+ancestry", which for a Dragonborn the sheet
 already knows and does not say, and which for any other species is never
 drawn at all; and a closing line that sends the player to a page number in a
 book. A Halfling Wild Magic Sorcerer (seed 16) is told a Surge "occurs" and

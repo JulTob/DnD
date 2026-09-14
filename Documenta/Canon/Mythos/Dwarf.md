@@ -535,8 +535,10 @@ Great Mountain as the covenant's breach.
 - **Tomb Raider.** The Great Mountain's tombs. A Dwarf who robs their own
   ancestors and is hailed for the gold.
 - **Guardian, Soldier.** The tercio's rank and file.
-- **Artisan, Merchant (official).** The Dwarf's most natural officials are one
-  sentence each.
+- **Artisan, Merchant (official).** The officials most natural to a Dwarf: the
+  maker who measures the world by whether it was built to last, and the trader
+  of the long routes. Their Hooks are *The Guild* and *I Know Where to Get It*
+  (Backgrounds-Official §3).
 
 ---
 

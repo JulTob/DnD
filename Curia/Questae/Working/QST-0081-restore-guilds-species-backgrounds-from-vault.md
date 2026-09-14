@@ -32,6 +32,12 @@ Guilds, species Pins/catalog/physiology, and the missing Background map exist as
 - TagKit pin `@c7bd376`: membership is `agent in Tag`, not `__contains__` overrides (QST-0051).
 - Doctrine names Expectation/Exclusion/Augmentation do not match this pin (QST-0036); use `Pre`, `Record`, `Imprint`, `Pin` Fields.
 - Vault `BackgroundKit.pyc` predates the Crafter/Musician fix — comparison copy only.
+  - **Correction (2026-09-14):** "comparison copy" holds for its code, which
+    must not be restored over live `BackgroundKit`. Its authored text is
+    another matter: the sixteen official backgrounds' descriptions, hook titles
+    and Hooks in the pre-wipe pyc are the settled source, now written out on
+    `Documenta/Canon/Mythos/Backgrounds-Official.md`. The live file still holds
+    the post-wipe stubs (Repairs-Ledger B17).
 - Arcana pyc used `tool=`; live `Background` takes `tools=`.
 
 ---
