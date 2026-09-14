@@ -4,7 +4,10 @@ Grimoire of Backgrounds — one declarative record per Character Background.
 A :class:`Background` carries the full 2024 record set — three ability scores,
 an Origin feat, two skill proficiencies, one tool proficiency, and an equipment
 package — alongside a **Name**, a **Description** of who the character is, and a
-**Roleplay** note on how the Background colours the way they engage the world.
+**Hook**: an ``Entry`` whose title and text the sheet prints as its own entry,
+the benefit that is also a price.  ``roleplay`` is the post-wipe form of the
+same text, glued to the description, and is kept only until every record
+declares its Hook (QST-0122.3).
 
 The record is the single authoring surface: write one ``Background(...)`` and
 feed it through ``BackgroundKit.Build_Background`` (``OfficialBackgroundsKit``
@@ -67,6 +70,7 @@ class Background:
 	skills: tuple[str, str]
 	tools: str | tuple[str, ...]
 	roleplay: str = ""
+	hook: Entry | None = None
 	equipment: str = "50 GP"
 	origin_feat_options: tuple[str, ...] = ()
 
@@ -79,6 +83,11 @@ class Background:
 				f"# {self.name}",
 				self.description,
 				self.roleplay,
+				(
+					f"**{self.hook.title}.** {self.hook.definition}"
+					if self.hook
+					else ""
+					),
 				f"**Ability Scores:** {', '.join(self.abilities)}",
 				f"**Feat:** {self.origin_feat}",
 				"**Skill Proficiencies:** "

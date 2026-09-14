@@ -53,6 +53,7 @@ def Register_Backgrounds(
 					origin_feat_options=record.origin_feat_options,
 					title=record.name,
 					description=description,
+					hook=record.hook,
 					source_title=source_title,
 					source_url=source_url,
 					source_locator=source_locator,
