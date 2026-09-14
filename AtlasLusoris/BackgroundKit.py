@@ -1418,12 +1418,42 @@ Merchant = _Build_Player_Handbook_Background(
 		"Animal_Handling",
 		"Persuasion",
 		),
-	tools="Navigator_Tools",
+	tools="Cartographer_Tools",
 	origin_feat=Lucky,
-	title="Business Acumen",
+	title="Merchant",
 	description=(
-		"You can find trade contacts and negotiate transport, information, "
-		"supplies, or a more favorable bargain."
+		"Anyone can sell trinkets in a town square. You wanted the long routes: "
+		"the spice from the desert nomads, the dyes of emperors, the items "
+		"nobody in this land has ever seen. You knew it was hard, but you made "
+		"it worth it. You heard the tales: the dunes where something moves "
+		"underneath, the route where sailors sing of sirens, the valley where "
+		"the old dragon counts every coin that crosses. And you loaded up and "
+		"went anyway. Determined not to just survive, but to make a profit. You "
+		"respect your beasts as more than carriers, you can find your road by "
+		"the stars or by the smell of the wind, and you have turned an ambush "
+		"into a business partner. Everyone in this trade is out there. Willing "
+		"to go beyond reason. But when a stranger admires something in your "
+		"pack and asks where it came from, you get to smile and say: if you "
+		"like it, I know where to get more."
+		),
+	hook=Entry(
+		title="I Know Where to Get It",
+		definition=(
+			"You do not need to own a thing to sell it. Put an object in your hands "
+			"and you can tell what it is worth, whose workshop or century it came "
+			"out of, and who in this world would pay stupid money to own it. Better "
+			"still: you know where, and how, to get it and sell it. A book no one "
+			"dares to open, a sword nobody has managed to pull from the stone (with "
+			"the stone included), the heirloom a family has been mourning for three "
+			"generations, the relic a temple would empty its vaults to have back... "
+			"You may ask favors and promise cuts, but you will make your sale. Word "
+			"gets around, so the commissions will come to you: appraise an "
+			"antiquity, retrieve a unique item, or open a trade deal for a guild. "
+			"The world is full of wonders, and people who want them. You are merely "
+			"helping and getting your skills' worth. And when a job is beyond you? "
+			"You know exactly which unreasonable people to put in a tavern together "
+			"for the (almost) perfect plan."
+			),
 		),
 	)
 
