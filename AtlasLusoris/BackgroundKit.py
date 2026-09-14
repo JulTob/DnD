@@ -1189,10 +1189,31 @@ Entertainer = _Build_Player_Handbook_Background(
 		),
 	tools="Musical_Instrument",
 	origin_feat=Musician,
-	title="By Popular Demand",
+	title="Entertainer",
 	description=(
-		"You can usually earn food, lodging, and local attention through a "
-		"well-judged performance."
+		"You were born for an audience, or you found one and never looked back. "
+		"You know how to hold a room: the timing of a joke, the hush before the "
+		"high note, the tumble that looks like an accident and lands like a "
+		"promise. You have played to drunk sailors and bored nobles and "
+		"children who had never seen a coin spent on wonder, and you learned "
+		"that the right performance can lift a room's sorrow, or its silver, or "
+		"just its attention for one shining hour. The road is hard on "
+		"performers, but you would rather be booed than forgotten, and you have "
+		"never once wanted the quiet life."
+		),
+	hook=Entry(
+		title="By Popular Demand",
+		definition=(
+			"Give you a stage, a crate, or a cleared corner of a common room, and "
+			"you can earn your keep: a meal, a bed, a few coins, and the goodwill "
+			"of a crowd that came in strangers and leaves knowing your name. A "
+			"performer who pleases is remembered, and being remembered has a way of "
+			"finding you work, and trouble: an admirer with a request, a rival who "
+			"wants you gone, a patron who needs a message carried somewhere only a "
+			"minstrel can go unremarked. So take your bow, and always leave them "
+			"wanting more: a face a crowd cheers for is worth more than a full "
+			"purse on the road, and it opens doors that stay shut to strangers."
+			),
 		),
 	)
 
