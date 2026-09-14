@@ -1007,10 +1007,32 @@ Acolyte = _Build_Player_Handbook_Background(
 		),
 	tools="Calligrapher_Supplies",
 	origin_feat=Magic_Initiate_Cleric,
-	title="Shelter of the Faithful",
+	title="Acolyte",
 	description=(
-		"You and your companions can expect healing and care from communities "
-		"that share your faith."
+		"You belong to something greater than yourself (a god, a pantheon, a "
+		"cause, a truth), and in its service you found a purpose the world "
+		"could not give you. You learned its rites and its scriptures, copied "
+		"its holy words by candlelight until they were written on your heart, "
+		"and learned to read the soul beneath the face of everyone who knelt to "
+		"you for comfort or confession. Sometimes, when the need is real and "
+		"your faith is steady, a prayer is answered, and even you cannot always "
+		"say whether it was your hand or the power you serve. Whether you tend "
+		"a quiet shrine or carry the word into the streets, you move through "
+		"the world as its instrument, and those who share your faith will "
+		"always know you for one of their own."
+		),
+	hook=Entry(
+		title="Shelter of the Faithful",
+		definition=(
+			"Anywhere your faith has taken root (a grand temple, a roadside shrine, "
+			"a few believers gathered in secret), you and your companions can count "
+			"on a welcome: a meal, a bed, care for your wounds, and sanctuary when "
+			"you have nowhere else to turn. The faithful ask only that you honor "
+			"the creed while you shelter beneath it. And where there is a "
+			"congregation, there is always someone who needs what the devout can "
+			"give (a blessing, a burial, a wrong set right), and they will bring it "
+			"to you."
+			),
 		),
 	)
 
