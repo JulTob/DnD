@@ -43,7 +43,7 @@ DEVOTION = "Devotion"
 ANCIENTS = "Ancients"
 GLORY = "Glory"
 VENGEANCE = "Vengeance"
-NOBLE_GENIES = "Noble Genies"
+CREATION = "Creation"
 
 
 @dataclass(
@@ -201,11 +201,11 @@ REGISTERS = {
 			"I would rather be the story than the one who lived it.",
 			),
 		),
-	# Holding register, in Scheherazade and Lorca, until the poets' version
-	# replaces it. The Noble Genie is the one who could refuse and does not.
-	NOBLE_GENIES: Oath_Register(
-		name=NOBLE_GENIES,
-		sworn_to="the Noble Genies",
+	# Holding register until the poets' version replaces it. Sworn to Creation:
+	# the small demiurge, the four elements as the stuff of everything made.
+	CREATION: Oath_Register(
+		name=CREATION,
+		sworn_to="Creation",
 		paragon="splendor and grace",
 		poets="Scheherazade; Lorca",
 		vows=(

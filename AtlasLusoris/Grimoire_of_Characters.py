@@ -832,7 +832,7 @@ class Character(Character_Skeleton):
 					"Persuasion",
 					"Religion",
 					])
-				# A level-3 Paladin of the Noble Genies gains one more skill
+				# A level-3 Paladin of Creation gains one more skill
 				# from Genie's Splendor, which grants it itself so the entry
 				# can name it. The grant is a no-op for every other Oath. See
 				# AtlasLusoris/AtlasOfTraining/Map_of_Paladin_Training.py.

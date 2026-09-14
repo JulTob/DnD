@@ -32,7 +32,7 @@ ANCIENTS = "Ancients"
 DEVOTION = "Devotion"
 GLORY = "Glory"
 VENGEANCE = "Vengeance"
-NOBLE_GENIES = "Noble Genies"
+CREATION = "Creation"
 
 
 def _lesson(
@@ -186,7 +186,7 @@ def _vengeance(
 			)
 
 
-def _genies(
+def _creation(
 		*,
 		name: str,
 		min_level: int,
@@ -194,7 +194,7 @@ def _genies(
 		chips=(),
 		):
 	return _path(
-			NOBLE_GENIES,
+			CREATION,
 			name=name,
 			min_level=min_level,
 			description=description,
@@ -798,7 +798,7 @@ Living_Legend = _glory(
 
 
 # ---------------------------------------------------------------------------
-# Oath of the Noble Genies (Forgotten Realms: Heroes of Faerun)
+# Oath of Creation (mechanics: the Heroes of Faerun elemental Oath; lore ours)
 # ---------------------------------------------------------------------------
 
 
@@ -844,7 +844,7 @@ def Grant_Genies_Splendor_Skill(
 	moment the two class skills are granted, exactly as it does for the
 	Barbarian's Primal Knowledge.
 	"""
-	if _oath_of( char ) != NOBLE_GENIES:
+	if _oath_of( char ) != CREATION:
 		return
 
 	skills = getattr(
@@ -941,8 +941,8 @@ def _elemental_rebuke_entry(
 		)
 
 
-Genies_Oath_Spells = _path(
-		NOBLE_GENIES,
+Creation_Oath_Spells = _path(
+		CREATION,
 		name="Oath Spells",
 		min_level=3,
 		description=_lesson(
@@ -960,7 +960,7 @@ Genies_Oath_Spells = _path(
 		apply=_apply_oath,
 		)
 
-Elemental_Smite = _genies(
+Elemental_Smite = _creation(
 		name="Elemental Smite",
 		min_level=3,
 		description=_lesson(
@@ -989,13 +989,13 @@ Elemental_Smite = _genies(
 			),
 		)
 
-Genies_Splendor = _genies(
+Genies_Splendor = _creation(
 		name="Genie's Splendor",
 		min_level=3,
 		description=_genies_splendor_entry,
 		)
 
-Aura_of_Elemental_Shielding = _genies(
+Aura_of_Elemental_Shielding = _creation(
 		name="Aura of Elemental Shielding",
 		min_level=7,
 		description=_lesson(
@@ -1009,13 +1009,13 @@ Aura_of_Elemental_Shielding = _genies(
 			),
 		)
 
-Elemental_Rebuke = _genies(
+Elemental_Rebuke = _creation(
 		name="Elemental Rebuke",
 		min_level=15,
 		description=_elemental_rebuke_entry,
 		)
 
-Noble_Scion = _genies(
+Noble_Scion = _creation(
 		name="Noble Scion",
 		min_level=20,
 		description=_lesson(

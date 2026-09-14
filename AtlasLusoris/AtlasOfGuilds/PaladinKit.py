@@ -224,14 +224,17 @@ Vengeance = Build_Specialization(
 	heading="Oath of Vengeance",
 	)
 
-# Forgotten Realms: Heroes of Faerun. Sworn to the four genie courts: dao of
-# earth, djinn of air, efreet of fire, marids of water. The core fantasy, as
-# settled with Julio: the one who could refuse and does not. A being of great
-# power who opens the door, keeps the table and grants what is asked, whose
-# cost is that the wish is granted as it was asked and never as it was wise.
-# Register: Scheherazade and Lorca. This paragraph is a holding text; the
-# poets' version replaces it.
-NOBLE_GENIES_DESCRIPTION = (
+# The fifth Oath. Its mechanics are the Heroes of Faerun elemental subclass;
+# its lore is ours, because an oath to a genie is a pact and a pact is the
+# Warlock's seat. Sworn to Creation itself, as settled with Julio: a small
+# demiurge, will so strong it shapes the world, the four elements as the stuff
+# everything is made of. It winks at the Wizard's True Names without breaking
+# them: the Wizard writes and knows what writing cannot hold; this one speaks,
+# unwritten, and the world yields a little. Neither holds a True Name. Its
+# cost is the demiurge's: everything you make you answer for, and cannot
+# unmake. Register: Lorca, Neruda's elemental odes, Scheherazade. This
+# paragraph is a holding text; the poets' version replaces it.
+CREATION_DESCRIPTION = (
 	"Others swore to a truth, or a wood, or a wrong. You swore to the door, "
 	"and to whoever stands at it.\n\n"
 	"Four courts answer you: the earth that rises, the wind that carries, "
@@ -244,14 +247,14 @@ NOBLE_GENIES_DESCRIPTION = (
 	"the granting will be yours, and you will not be permitted to confuse "
 	"the two."
 	)
-NobleGenies = Build_Specialization(
+Creation = Build_Specialization(
 	guild=Paladin,
-	name="Noble Genies",
+	name="Creation",
 	module=__name__,
 	extends=_with_oath(
-		NOBLE_GENIES_DESCRIPTION
+		CREATION_DESCRIPTION
 		),
-	heading="Oath of the Noble Genies",
+	heading="Oath of Creation",
 	)
 
 
@@ -259,7 +262,7 @@ SPECIALIZATIONS = (
 	Ancients,
 	Devotion,
 	Glory,
-	NobleGenies,
+	Creation,
 	Vengeance,
 	)
 
