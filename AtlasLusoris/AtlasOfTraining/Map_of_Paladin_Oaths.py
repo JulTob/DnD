@@ -3,41 +3,37 @@ The Oath a Paladin actually says.
 
 The Guild text says a principle is held. This is the principle spoken, and it
 is the one place on a whole sheet where the Character talks instead of being
-talked about. Everything else on the page is the sheet addressing the player.
-Six lines in the middle of it are the player's own mouth, and they are written
-to be read aloud at a table.
+talked about. Six lines in the middle of the page are the player's own mouth,
+written to be read aloud at a table, and written to make the reader a
+believer.
 
-**The shape is the knight's code**: six short declaratives, each giving one
-part of the person a duty. The form is old and public rather than private and
-confessional, which is why it takes the first person without becoming a diary:
-a code is recited, not confided.
+**Each Oath consults its own poet.** The Cleric reads prayers; the Paladin is
+the one Guild tied to a poem, so its four Oaths are written in four registers,
+chosen by Julio, and nothing in a Devotion oath sounds like a Vengeance oath:
 
-**It is assembled, never chosen.** Six slots draw from six pools, each pool
-keyed to a different thing the Character already is, exactly the way an
-Aasimar's aureola takes its form from one Ideal, its gem from another and its
-tell from either. No Paladin is handed a finished oath out of a list, and two
-Paladins of the same Oath will share a line or two and never the whole.
+	Devotion    the Psalms, the reverence of the King James
+	Ancients    Shakespeare, the touch and the wonder, the green
+	Glory       Twain and Espronceda, Moore and Gaiman: the swagger of the told
+	Vengeance   Byron, the midnight and the storm
 
-	1. THE VOW     the Oath itself, and the only slot that names it
-	2. THE HEART   the people they come from
-	3. THE BLADE   the Oath again, turned toward what it is for
-	4. THE WORD    the life they had before this one
-	5. THE REFUSAL the culture keys, the network gear titles already use
-	6. THE CLOSE   the Oath a third time, and the line that has to land
+**It is assembled, never chosen.** Six slots, six pools, the way an Aasimar's
+aureola takes form, gem and tell from different Ideals. Every pool is written
+in the Oath's own register, so the six lines cohere as one poem. The people,
+the life before and the culture keys then add grace notes: a handful of lines
+each, drawn with preference when they exist, written only where there was
+something worth saying. A tag is an invitation to the poem, not a form to be
+filled. Where no line sings for a people, the Oath's own voice carries.
 
-Three of six sit on the Oath so that an Oath of Vengeance never sounds like an
-Oath of Glory. The other three sit on species, background and culture, so that
-two Vengeance Paladins from different peoples and different lives do not
-recite the same thing.
-
-**Nothing here hands the Character a past.** A line may name what they were,
-because the sheet already says that out loud, and never what happened to them.
-The day they swore, the wrong they saw and the face they remember belong to
-the player, and a generator that supplied those would be writing somebody
-else's character.
+**Death of the author.** No line here hands the Character a past. A line may
+say what they are, because the sheet already says so, and never what happened
+to them. The day they swore, the wrong they saw and the face they remember are
+the player's, and the lines are left open enough to hold whatever the player
+puts in them. Dragonheart in the epic, not in the structure.
 """
 
 from __future__ import annotations
+
+from dataclasses import dataclass
 
 
 DEVOTION = "Devotion"
@@ -46,128 +42,259 @@ GLORY = "Glory"
 VENGEANCE = "Vengeance"
 
 
+@dataclass(
+	frozen=True,
+	slots=True,
+	)
+class Oath_Register:
+	"""One Oath's poet, and every pool written in that poet's voice."""
+
+	name: str
+	# How the Oath is named in "You swore an oath to ...": the Ancients take
+	# their article, the others do not.
+	sworn_to: str
+	# Completes "To be a paragon of ...", the line that opens the recital.
+	paragon: str
+	poets: str
+	vows: tuple[str, ...]
+	hearts: tuple[str, ...]
+	arms: tuple[str, ...]
+	words: tuple[str, ...]
+	refusals: tuple[str, ...]
+	closes: tuple[str, ...]
+
+
 # ---------------------------------------------------------------------------
-# 1. The vow. Keyed to the Oath, and the only slot that says what was sworn.
+# The four registers
 # ---------------------------------------------------------------------------
 
 
-VOWS = {
-	DEVOTION: (
-		"I am sworn to the Eternal Truth.",
-		"I am sworn to stand unbent and unbroken.",
-		"I am sworn to be the same in the dark as in the daylight.",
+REGISTERS = {
+	DEVOTION: Oath_Register(
+		name=DEVOTION,
+		sworn_to="Devotion",
+		paragon="constancy and truth",
+		poets="the Psalms; the King James",
+		vows=(
+			"I am sworn to the Eternal Truth.",
+			"I am sworn to stand unbent and unbroken.",
+			"I am sworn unto the Truth; it is my rock and my high tower.",
+			"I am sworn to walk uprightly, though the whole earth be moved.",
+			),
+		hearts=(
+			"My heart is set as a flint, and it shall not be turned.",
+			"My heart is a lamp that goeth not out by night.",
+			"My heart hath one law, and keepeth it, and seeketh no other.",
+			"My heart is a stronghold, and the gates of it stand open.",
+			),
+		arms=(
+			"My blade is bright. Nothing I do is done in the dark.",
+			"My arm is lifted in the daylight, and my hand knoweth no secret work.",
+			"My sword is girded on before all eyes, and it is a clean sword.",
+			"My blade hath never once been drawn in secret.",
+			),
+		words=(
+			"My word is yea, and my word is nay, and there is no third word in me.",
+			"My word is given once; heaven and earth shall pass before it is taken back.",
+			"My word hath been given to the unworthy, and kept. This word is kept likewise.",
+			"My word standeth. Let the mountains be removed; my word standeth.",
+			),
+		refusals=(
+			"I will not bow, though the seven hills bow down.",
+			"I will not stand in the way of the crooked, nor sit where the mockers sit.",
+			"I will not lie, though the lie would save me, nor flee, though the truth would slay me.",
+			"I will not bend, not for the friend who begs, not for the king who commands.",
+			),
+		closes=(
+			"And if I am the last one keeping it, it is still kept.",
+			"Though all the world forsake it, it shall not be forsaken.",
+			"This is my portion, and I shall not want another.",
+			"So it standeth, and so I stand.",
+			),
 		),
-	ANCIENTS: (
-		"I am sworn to what was and what will be.",
-		"I am sworn to the light. Even the night has stars.",
-		"I am sworn to the green, which has outlasted every fire.",
+	ANCIENTS: Oath_Register(
+		name=ANCIENTS,
+		sworn_to="the Ancients",
+		paragon="the green and the returning light",
+		poets="Shakespeare; the Green Knight",
+		vows=(
+			"I am sworn to what was and what will be.",
+			"I am sworn to the light. Even the night has stars.",
+			"I am sworn to the green, which has outlasted every fire.",
+			"I am sworn to the spring, that comes though no one bid it come.",
+			"I am sworn to the sweet o' the year, and to its keeping.",
+			),
+		hearts=(
+			"My heart is a wood in winter, and knows the green sleeps and is not dead.",
+			"My heart keeps a garden no frost has ever taken.",
+			"My heart is old as the oak and light as the leaf upon it.",
+			"My heart is made of such stuff as springs are made on.",
+			),
+		arms=(
+			"My blade is for the winter, and the winter is patient.",
+			"My blade stands between the small green thing and the frost.",
+			"My sword is a bough of the old tree, and it remembers the root.",
+			"My blade is a young thing, and it serves a very old one.",
+			),
+		words=(
+			"My word is kept as the year is kept: the spring comes because it was promised.",
+			"My word is given as the oak gives shade, to whoever stands beneath.",
+			"My word was whispered to the wood, and the wood has not forgotten.",
+			"My word is a seed. Bury it, and see what comes up.",
+			),
+		refusals=(
+			"I will not let the light go out, though the night be long as winter.",
+			"I will not curse the frost. I will outlast it.",
+			"I will not mistake one felled tree for the end of the forest.",
+			"I will not weep for the fallen leaf while the bough still lives.",
+			),
+		closes=(
+			"My sorrow will not stop the grass.",
+			"Let it go out everywhere else. It will not go out in me.",
+			"The green comes back. It always has. I am here to see that it does.",
+			"Winter is a season. I am the one after.",
+			),
 		),
-	GLORY: (
-		"I am sworn to valour.",
-		"I am sworn to be worth the song.",
-		"I am sworn to the deed that outlives the doer.",
+	GLORY: Oath_Register(
+		name=GLORY,
+		sworn_to="Glory",
+		paragon="valour and renown",
+		poets="Twain and Espronceda; Moore and Gaiman",
+		vows=(
+			"I am sworn to valour.",
+			"I am sworn to be worth the song.",
+			"I am sworn to the deed that outlives the doer.",
+			"I am sworn to the story, and the story is not finished with me.",
+			),
+		hearts=(
+			"My heart is a ship, my treasure the horizon, my only country the sea.",
+			"My heart was built for a story bigger than a life, and has grown to fit it.",
+			"My heart laughs at the odds. The odds have never once laughed back.",
+			"My heart is the drum they march to, and it has never missed a beat.",
+			),
+		arms=(
+			"My blade goes first. It has always gone first.",
+			"My blade is for the moment the song will need.",
+			"My blade writes the verse they will sing loudest.",
+			"My sword is my law and the wind, and I answer to no other.",
+			),
+		words=(
+			"My word is my name, and my name is not for sale.",
+			"My word is the one thing I never sold, and I sold a great deal.",
+			"My word is a promise to the poets: I will give them something worth the rhyme.",
+			"My word travels ahead of me, and arrives before I do.",
+			),
+		refusals=(
+			"I will not die in bed. I have been offered it.",
+			"I will not be the footnote. I will be the chapter.",
+			"I will not choose the long life. I have been offered it.",
+			"I will not fold. I have never once folded.",
+			),
+		closes=(
+			"If I fall, that is the life I chose. Nothing lost, but me.",
+			"Say it after me, and say it right.",
+			"They will tell it wrong. Tell it wrong in my favour.",
+			"I would rather be the story than the one who lived it.",
+			),
 		),
-	VENGEANCE: (
-		"I am sworn against.",
-		"I am sworn to the reckoning.",
-		"I am sworn to be the weight on the balance.",
+	VENGEANCE: Oath_Register(
+		name=VENGEANCE,
+		sworn_to="Vengeance",
+		paragon="retribution and justice",
+		poets="Byron",
+		vows=(
+			"I am sworn against the perpetrators of injustice.",
+			"I am sworn to the reckoning, and the reckoning wears my face.",
+			"I am sworn to be the storm they prayed would never break.",
+			"I am sworn to hunt what the law forgave.",
+			),
+		hearts=(
+			"My heart rides the storm, and my arm wields the thunder.",
+			"My heart is a midnight that keeps one lamp burning.",
+			"My heart was broken once, and what remained of it is iron.",
+			"My heart keeps a ledger, written in a hand that does not shake.",
+			),
+		arms=(
+			"My blade carries the names and balances their crimes.",
+			"My blade is the last argument, and I have never lost it.",
+			"My blade does not hate. Hatred tires. My blade remembers.",
+			"My blade comes down like the wolf upon the fold.",
+			),
+		words=(
+			"My word is fair, but never kind. It is strong, and it never negotiates.",
+			"My word was given to the dead, and the dead do not release you.",
+			"My word is the one debt I have never let run past its day.",
+			"My word is a sentence passed, and I am its executioner.",
+			),
+		refusals=(
+			"I will not be the one who put down my shield or my word.",
+			"I will not forgive what was never confessed.",
+			"I will not sleep while the guilty sleep soundly.",
+			"I will not be told that it was long ago.",
+			),
+		closes=(
+			"I am the rider that brings the storm.",
+			"Let them run. The storm runs faster.",
+			"It ends. I have decided that it ends.",
+			"They made me. Let them look upon what they made.",
+			),
 		),
 	}
 
 
 # ---------------------------------------------------------------------------
-# 2. The heart. Keyed to the people, never to what happened to the person.
+# Grace notes: the people, the life before, the culture keys
+#
+# Sparse on purpose. A line lives here only where the tag gave the poem
+# something, and a people with no line simply speaks in the Oath's own voice.
+# Each empowers the species fantasy rather than arguing with it: the Aasimar
+# owns being chosen, because the Paladin is the one Aasimar who chooses back.
 # ---------------------------------------------------------------------------
 
 
-HEARTS = {
-	"Human": (
-		"My heart is true, and my friends are my rest.",
-		"My heart is short-lived, and will not waste a day of it.",
+SPECIES_HEARTS = {
+	"Aasimar": (
+		"My heart carries a spark of greatness. I was chosen.",
+		"I was chosen. I chose back, and mine was the louder yes.",
+		"My heart holds the stars. My arm carries the might.",
 		),
 	"Dwarf": (
-		"My heart was made in the forge of my clan.",
 		"My soul is golden, and gold never corrupts.",
-		),
-	"Elf": (
-		"My heart keeps a peace older than any kingdom standing.",
-		"My heart has all the time there is, and spends it here.",
+		"My heart was made in the forge of my clan.",
 		),
 	"Orc": (
-		"My heart is the heart of a rider, and a rider does not turn back.",
 		"My heart rides the storm, and the winds will carry me.",
+		"My heart is the heart of a rider, and a rider does not turn back.",
+		),
+	"Halfling": (
+		"My heart is small, and there is no room in it for fear.",
+		"My heart carries the homeland, and the stories I will tell.",
+		),
+	"Tiefling": (
+		"My heart was alone. No more.",
+		"My heart protects the ones like me: born alone.",
+		),
+	"Human": (
+		"My heart is true, and my friends are my rest.",
+		"My heart is brief, and burns the brighter for it.",
+		),
+	"Elf": (
+		"My heart has all the time there is, and spends it here.",
 		),
 	"Goliath": (
 		"My heart carries the weight of the world, and is not bent by it.",
 		"My heart came down from a fallen height, and kept the height.",
 		),
-	"Halfling": (
-		"My heart carries the homeland, and the stories I will tell.",
-		"My heart is small, and there is no room in it for fear.",
-		),
 	"Dragonborn": (
-		"My heart was given its words at birth, and chose these instead.",
 		"My heart keeps the old courtesies, and keeps them to the death.",
-		),
-	"Tiefling": (
-		"My heart protects the ones like me: born alone.",
-		"My heart was alone. No more.",
 		),
 	"Gnome": (
 		"My heart is astonished by the world, and always was.",
-		"My heart keeps its ways in small things, and the small things hold.",
-		),
-	"Aasimar": (
-		"My heart holds the stars. My arm carries the might.",
-		"My heart carries a spark I did not ask for, and a vow I did.",
-		),
-	}
-
-DEFAULT_HEARTS = (
-	"My heart carries no shame, and it has been offered plenty.",
-	"My heart was not consulted, and has never once complained.",
-	)
-
-
-# ---------------------------------------------------------------------------
-# 3. The blade. The Oath again, turned toward what the hand is for.
-# ---------------------------------------------------------------------------
-
-
-BLADES = {
-	DEVOTION: (
-		"My blade is bright. Nothing I do is done in the dark.",
-		"My blade has never once been drawn in secret.",
-		"My blade answers for me, and it has never had to lie.",
-		),
-	ANCIENTS: (
-		"My blade is for the winter, and the winter is patient.",
-		"My blade stands between the small green thing and the frost.",
-		"My blade is a young thing serving a very old one.",
-		),
-	GLORY: (
-		"My blade is for the moment the song will need.",
-		"My blade goes first. It has always gone first.",
-		"My blade is drawn where everyone can see it drawn.",
-		),
-	VENGEANCE: (
-		"My blade carries one name at a time, and it finishes.",
-		"My blade is not angry. Anger runs out.",
-		"My blade is the shortest distance between a wrong and its end.",
 		),
 	}
 
 
-# ---------------------------------------------------------------------------
-# 4. The word. Keyed to the life before this one.
-#
-# Backgrounds cluster rather than each taking a line: forty-six lines would be
-# forty-six chances to write a weak one, and the clusters are what the oath
-# actually cares about, which is what a person's word was worth before they
-# gave this one.
-# ---------------------------------------------------------------------------
-
-
+# Backgrounds cluster by what a person's word was worth before this one.
 WORD_CLUSTERS = {
 	"sworn": (
 		"Acolyte", "Bailiff", "Guard", "Herald", "Inquisitor",
@@ -203,99 +330,52 @@ WORD_CLUSTERS = {
 		),
 	}
 
-WORDS = {
+BACKGROUND_WORDS = {
 	"sworn": (
-		"My word was given once before, to a smaller thing, and I kept it.",
-		"My word has been given to men who did not deserve it. This one is mine.",
+		"My word was given before, to lesser things, and kept.",
 		),
 	"held": (
 		"My word was the only thing about me that nobody else owned.",
-		"My word was worth nothing to the people above me, and everything to me.",
 		),
 	"outside": (
-		"My word was cheap for years. It is not cheap now.",
 		"My word is the one thing I never sold, and I sold a great deal.",
 		),
-	"learned": (
-		"My word is proved before it is given, and never after.",
-		"My word needs no authority. It is the authority.",
-		),
 	"wandering": (
-		"My word travels ahead of me and arrives before I do.",
-		"My word is all a stranger has. Mine is good.",
+		"My word travels ahead of me, and arrives before I do.",
 		),
 	"marked": (
-		"My word is mine, whatever else about me was decided elsewhere.",
 		"My word is the part of my fate I got to write.",
 		),
 	"alone": (
 		"My word was given where nobody could hear it.",
-		"My word is kept the same whether there is anyone there or not.",
-		),
-	"watched": (
-		"My word is given where it can be held against me.",
-		"My word has an audience now, and the audience is not why I keep it.",
 		),
 	"lost": (
-		"My word is what I have left, so I have made it enough.",
 		"My word outlived everything else I had. It will outlive me too.",
 		),
 	}
 
-DEFAULT_WORDS = (
-	"My word is the whole of my estate.",
-	"My word costs me something every time.",
-	)
 
-
-# ---------------------------------------------------------------------------
-# 5. The refusal. Keyed to the culture network gear titles and Cleric prayers
-# already use, so a Paladin's oath sounds like the rest of their sheet.
-# ---------------------------------------------------------------------------
-
-
-REFUSALS = {
+CULTURE_REFUSALS = {
 	"iberia": (
 		"I will not serve a bad lord well and call it honour.",
 		),
 	"andalus": (
 		"I will not burn the library to win the argument.",
 		),
-	"rome": (
-		"I will not obey an order that the road was not built for.",
+	"homeric": (
+		"I will not choose the long life. I have been offered it.",
 		),
 	"sparta": (
 		"I will not count them before I decide.",
 		),
-	"homeric": (
-		"I will not choose the long life. I have been offered it.",
-		),
-	"athens": (
-		"I will not be argued out of it by a better speaker.",
-		),
-	"vatican": (
-		"I will not mistake the vestment for the thing it stands for.",
-		),
-	"sangha": (
-		"I will not pretend the wanting has stopped. I act regardless.",
-		),
 	"carthage": (
-		"I will not forget it. I was young and I have not forgotten it.",
-		),
-	"norse": (
-		"I will not be told the ending and behave differently.",
+		"I will not forget it. I was young, and I have not forgotten it.",
 		),
 	"celt": (
 		"I will not break it for a king, and I have been asked by one.",
 		),
-	"mongol": (
-		"I will not stop at the edge of the map.",
-		),
-	"japan": (
-		"I will not outlive the keeping of it by very long.",
-		),
-	"china": (
-		"I will not ask of them what I have not already given.",
+	"norse": (
+		"I will not be told the ending and behave differently.",
 		),
 	"egypt": (
 		"I will not be weighed and found wanting.",
@@ -303,17 +383,8 @@ REFUSALS = {
 	"persia": (
 		"I will not be consoled by this too shall pass.",
 		),
-	# Every Paladin carries this key from the Guild, so it needs depth the
-	# species keys do not: an Orc has no other entry in the culture map, and
-	# with one line here it answered for three Orc Paladins in four. The
-	# register is the aftermath stratum, the garrison that outlived its
-	# reason, which is the Guild's own legend register.
-	"arthuriana": (
-		"I will not be the one who put it down.",
-		"I will not ask first whether the kingdom deserves it.",
-		"I will not put it down for a change in fashion.",
-		"I will not hand it to somebody better. Nobody better is coming.",
-		"I will not wait for the order. The order is not coming either.",
+	"japan": (
+		"I will not outlive the keeping of it by very long.",
 		),
 	"crusader": (
 		"I will not need the banner. The banner needs me.",
@@ -321,132 +392,26 @@ REFUSALS = {
 	"grimdark": (
 		"I will not become the thing. I have watched it happen to better.",
 		),
+	# The Noble Genies: Scheherazade, and the night that must not end the tale.
+	"arabian_nights": (
+		"I will not let the dawn end the tale.",
+		"I will not be the last wish. I will be the one they should have made.",
+		),
+	# Every Paladin carries this key from the Guild, so it is a weaker mark
+	# than a people's own key and is weighted as one.
+	"arthuriana": (
+		"I will not be the one who put it down.",
+		"I will not hand it to somebody better. Nobody better is coming.",
+		),
 	}
 
-DEFAULT_REFUSALS = (
-	"I will not be talked out of it by anyone who was not standing there.",
-	"I will not be told what I am by people who have not tried it.",
-	"I will not make my peace with it, and I have been given every chance.",
-	)
 
-
-# A refusal the Character's own cultures unlock beats a default by this much.
-# Same number and the same reasoning as AFFINITY_WEIGHT in Map_of_Familiars:
-# high enough that the keyed line is what a table usually hears, low enough
-# that the defaults are not dead entries.
-CULTURE_AFFINITY_WEIGHT = 8
-
-# The Guild grants this key to every Paladin, so it is not a distinguishing
-# mark and must not be weighted like one. Measured: with arthuriana weighted
-# as a species key, its five lines answered for most Paladins of every people
-# and the Dwarf stopped refusing like a Dwarf. It keeps a weight above the
-# defaults, because it is still the Guild's own register, and below the
-# species keys, because those are the ones that say who this Paladin is.
+# A grace note outweighs one line of the Oath's own pool by this much. Kept
+# low so the Oath's register carries the poem and the grace notes land as
+# grace notes. The Guild's own key is not a mark of anything, so it draws at
+# one, level with the Oath's lines.
+GRACE_WEIGHT = 3
 GUILD_KEY = "arthuriana"
-GUILD_AFFINITY_WEIGHT = 3
-
-
-# ---------------------------------------------------------------------------
-# 6. The close. The line that has to land, and the Oath's third and last slot.
-# ---------------------------------------------------------------------------
-
-
-CLOSES = {
-	DEVOTION: (
-		"And if I am the last one keeping it, it is still kept.",
-		"There is no finishing this. There is only tomorrow, and I will be there.",
-		"Ask me again in thirty years. The answer is already written.",
-		),
-	ANCIENTS: (
-		"The light is older than the dark, and it is coming back.",
-		"Let it go out everywhere else. It will not go out in me.",
-		"I am one season in a very long spring. I am this one.",
-		),
-	GLORY: (
-		"Say it after me, and say it right.",
-		"They will tell it wrong. Tell it wrong in my favour.",
-		"I will be the story they need, not the one I was.",
-		),
-	VENGEANCE: (
-		"Let them run. It changes nothing.",
-		"It ends. I have decided that it ends.",
-		"The debt is not mine. The paying of it is.",
-		),
-	}
-
-
-# ---------------------------------------------------------------------------
-# The frame: what the oath was sworn to, and how it was said
-#
-# A circumstance describes the SAYING and never the reason. "Whispered to
-# yourself" is a fact about the oath; "with your hand on a dying friend" would
-# be a fact about the Character's life, and that is the player's to write. The
-# line between them is the same one the Guild text holds: the sheet may say
-# what this person is, never what happened to them.
-# ---------------------------------------------------------------------------
-
-
-OATH_OBJECTS = {
-	DEVOTION: "Devotion, which has no enemy and so can never be finished",
-	ANCIENTS: "the Ancients, who were here before anything had a word for them",
-	GLORY: "Glory, which is not winning and never was",
-	VENGEANCE: "Vengeance, which is a debt and not a mood",
-	}
-
-
-CIRCUMSTANCES = {
-	"sworn": (
-		"You swore it a second time, over one you had already given.",
-		"You said it in the form the service uses, and meant it another way.",
-		),
-	"held": (
-		"You said it where nobody important was listening.",
-		"You said it at the end of a long day.",
-		),
-	"outside": (
-		"You said it in a room you had no business being in.",
-		"You said it to the one witness who would never repeat it.",
-		),
-	"learned": (
-		"You wrote it out first, said it once, and then burned the paper.",
-		"You said it in a language you had chosen on purpose.",
-		),
-	"wandering": (
-		"You said it on a road, in a country that was not yours.",
-		"You said it at a border, facing the way you were going.",
-		),
-	"marked": (
-		"You said it back to the thing that had already claimed you.",
-		"You said it as an answer, and it was the first word you chose yourself.",
-		),
-	"alone": (
-		"You said it to the weather.",
-		"You said it aloud with nobody in earshot.",
-		),
-	"watched": (
-		"You said it in front of a crowd who thought it was part of the act.",
-		"You said it to an audience, and not for them.",
-		),
-	"lost": (
-		"You said it into the quiet afterwards.",
-		"You said it once and have not needed to say it again.",
-		),
-	}
-
-DEFAULT_CIRCUMSTANCES = (
-	"You said it out loud, to the gods, whoever they turned out to be.",
-	"You whispered it to yourself, where nobody could possibly hear.",
-	"You said it in front of witnesses, every one of them still living.",
-	"You said it alone, to nobody at all.",
-	"You said it twice. The first time your voice went.",
-	"You said it without meaning to, and then again on purpose.",
-	"You said it in the old words, which you had to be taught.",
-	"You said it in your own words. The old ones did not fit.",
-	"You said it kneeling, which you have not done since.",
-	"You said it quietly, the way a person says a thing already decided.",
-	"You have never written it down, and neither has anyone else.",
-	"You said it with your eyes open.",
-	)
 
 
 # ---------------------------------------------------------------------------
@@ -454,16 +419,12 @@ DEFAULT_CIRCUMSTANCES = (
 # ---------------------------------------------------------------------------
 
 
-def _oath_of(
+def _first_string(
 		char,
+		*attributes,
 		) -> str | None:
-	"""Which Oath this Paladin swore, by name, or None before it is chosen."""
-	for attribute in (
-			"specialization",
-			"Specialization",
-			"subclass",
-			"Subclass",
-			):
+	"""The first named attribute that holds a non-empty string."""
+	for attribute in attributes:
 		value = getattr(
 				char,
 				attribute,
@@ -475,91 +436,82 @@ def _oath_of(
 				) and value:
 			return value
 	return None
+
+
+def _oath_of(
+		char,
+		) -> str | None:
+	return _first_string(
+			char,
+			"specialization",
+			"Specialization",
+			"subclass",
+			"Subclass",
+			)
 
 
 def _species_of(
 		char,
 		) -> str | None:
-	"""The people this Paladin comes from, by name."""
-	for attribute in (
+	return _first_string(
+			char,
 			"species",
 			"Species",
 			"race",
 			"Race",
-			):
-		value = getattr(
-				char,
-				attribute,
-				None,
-				)
-		if isinstance(
-				value,
-				str,
-				) and value:
-			return value
-	return None
+			)
 
 
 def _background_of(
 		char,
 		) -> str | None:
-	"""The life this Paladin had before the Oath, by name."""
-	for attribute in (
+	return _first_string(
+			char,
 			"background",
 			"Background",
-			):
-		value = getattr(
-				char,
-				attribute,
-				None,
-				)
-		if isinstance(
-				value,
-				str,
-				) and value:
-			return value
-	return None
+			)
 
 
 def _cultures_of(
 		char,
 		) -> tuple[str, ...]:
 	"""
-	The culture keys this Character answers to.
-
-	Same network as gear titles and Cleric prayers, so an oath, a sword's
-	name and a prayer all come out of one vocabulary. A failure here costs
-	the refusal its keyed line and nothing else, so it is swallowed.
+	The culture keys this Character answers to: the network gear titles and
+	Cleric prayers already use. A failure here costs a grace note and nothing
+	else, so it is swallowed.
 	"""
 	try:
 		from AtlasInventarium.Map_of_Gear_Titles import cultures_of
-	except Exception:
-		return ()
-
-	try:
-		found = cultures_of(
-			char
+		return tuple(
+			cultures_of(
+				char
+				) or ()
 			)
 	except Exception:
 		return ()
 
-	return tuple(
-		found or ()
-		)
 
-
-def _cluster_of_background(
+def _cluster_of(
 		background: str | None,
 		) -> str | None:
-	"""Which word-cluster a background belongs to, or None if unlisted."""
 	if not background:
 		return None
-
 	for cluster, members in WORD_CLUSTERS.items():
 		if background in members:
 			return cluster
-
 	return None
+
+
+def _register_of(
+		char,
+		) -> Oath_Register:
+	"""The Oath's register, or Devotion's before an Oath is sworn."""
+	return REGISTERS.get(
+			_oath_of(
+				char
+				),
+			REGISTERS[ DEVOTION ],
+			)
 
 
 # ---------------------------------------------------------------------------
@@ -567,40 +519,55 @@ def _cluster_of_background(
 # ---------------------------------------------------------------------------
 
 
+def _weighted(
+		own,
+		grace,
+		) -> tuple[tuple[str, int], ...]:
+	"""The Oath's own lines at one, the grace notes at GRACE_WEIGHT, no repeats."""
+	seen: set[str] = set()
+	pool: list[tuple[str, int]] = []
+
+	for line, weight in grace:
+		if line in seen:
+			continue
+		seen.add(
+			line
+			)
+		pool.append(
+			(
+				line,
+				weight,
+				)
+			)
+
+	for line in own:
+		if line in seen:
+			continue
+		seen.add(
+			line
+			)
+		pool.append(
+			(
+				line,
+				1,
+				)
+			)
+
+	return tuple(
+		pool
+		)
+
+
 def _draw(
 		char,
 		pool,
 		purpose: str,
 		) -> str | None:
-	"""One line from a pool, against a named Dice Bag. Empty pool draws none."""
-	options = [
-		line
-		for line in pool
-		if line
-		]
-	if not options:
-		return None
-
-	return char.Pick(
-			options,
-			dice=char.Dice_Bag(
-				purpose,
-				version="1",
-				namespace="GenLegendLusoris",
-				),
-			)
-
-
-def _draw_weighted(
-		char,
-		weighted,
-		purpose: str,
-		) -> str | None:
-	"""One line from a pool of (line, weight) pairs, against a named Bag."""
+	"""One line from a weighted pool, against a named Dice Bag."""
 	entries = [
 		pair
-		for pair in weighted
-		if pair[0]
+		for pair in pool
+		if pair[ 0 ]
 		]
 	if not entries:
 		return None
@@ -616,83 +583,68 @@ def _draw_weighted(
 				],
 			dice=char.Dice_Bag(
 				purpose,
-				version="1",
+				version="2",
 				namespace="GenLegendLusoris",
 				),
 			)
 
 
-def _keyed_pool(
-		ledger,
-		key: str | None,
-		fallback,
-		):
-	"""The pool for a key, or the fallback when the key has no entry."""
-	if key is None:
-		return fallback
-
-	return ledger.get(
-			key,
-			fallback,
-			)
-
-
-def _culture_refusals(
+def _species_grace(
 		char,
-		) -> tuple[tuple[str, int], ...]:
-	"""
-	Every refusal open to this Character, each with its weight.
+		):
+	return tuple(
+		(
+			line,
+			GRACE_WEIGHT,
+			)
+		for line in SPECIES_HEARTS.get(
+			_species_of(
+				char
+				),
+			(),
+			)
+		)
 
-	A line one of their own culture keys unlocks outweighs a default, so a
-	Dwarf usually refuses like a Dwarf. Nothing is excluded: the defaults
-	stay drawable, because a Paladin who refuses in nobody's accent in
-	particular is a person too.
 
-	Keys are read in the order gear titles return them, so the pool is the
-	same on every generation of the same Character.
-	"""
-	weighted: list[tuple[str, int]] = []
-	seen: set[str] = set()
+def _background_grace(
+		char,
+		):
+	return tuple(
+		(
+			line,
+			GRACE_WEIGHT,
+			)
+		for line in BACKGROUND_WORDS.get(
+			_cluster_of(
+				_background_of(
+					char
+					)
+				),
+			(),
+			)
+		)
 
+
+def _culture_grace(
+		char,
+		):
+	notes: list[tuple[str, int]] = []
 	for key in _cultures_of(
 			char
 			):
-		weight = (
-			GUILD_AFFINITY_WEIGHT
-			if key == GUILD_KEY
-			else CULTURE_AFFINITY_WEIGHT
-			)
-		for line in REFUSALS.get(
+		weight = 1 if key == GUILD_KEY else GRACE_WEIGHT
+		for line in CULTURE_REFUSALS.get(
 				key,
 				(),
 				):
-			if line in seen:
-				continue
-			seen.add(
-				line
-				)
-			weighted.append(
+			notes.append(
 				(
 					line,
 					weight,
 					)
 				)
-
-	for line in DEFAULT_REFUSALS:
-		if line in seen:
-			continue
-		seen.add(
-			line
-			)
-		weighted.append(
-			(
-				line,
-				1,
-				)
-			)
-
 	return tuple(
-		weighted
+		notes
 		)
 
 
@@ -702,83 +654,71 @@ def Compose_Oath(
 	"""
 	The six lines, in order, for this Character.
 
-	Pure assembly: it draws but decides nothing that outlives the call, so
+	Pure assembly: it draws but decides nothing that outlives the call.
 	``Draw_Oath`` owns the settling and this owns the shape.
 	"""
-	oath = _oath_of(
+	voice = _register_of(
 			char
-			)
-	cluster = _cluster_of_background(
-			_background_of(
-				char
-				)
 			)
 
 	slots = (
 		(
 			"paladin.oath.vow",
-			_keyed_pool(
-				VOWS,
-				oath,
-				VOWS[DEVOTION],
+			_weighted(
+				voice.vows,
+				(),
 				),
 			),
 		(
 			"paladin.oath.heart",
-			_keyed_pool(
-				HEARTS,
-				_species_of(
+			_weighted(
+				voice.hearts,
+				_species_grace(
 					char
 					),
-				DEFAULT_HEARTS,
 				),
 			),
 		(
-			"paladin.oath.blade",
-			_keyed_pool(
-				BLADES,
-				oath,
-				BLADES[DEVOTION],
+			"paladin.oath.arm",
+			_weighted(
+				voice.arms,
+				(),
 				),
 			),
 		(
 			"paladin.oath.word",
-			_keyed_pool(
-				WORDS,
-				cluster,
-				DEFAULT_WORDS,
+			_weighted(
+				voice.words,
+				_background_grace(
+					char
+					),
 				),
 			),
 		(
 			"paladin.oath.refusal",
-			None,
+			_weighted(
+				voice.refusals,
+				_culture_grace(
+					char
+					),
+				),
 			),
 		(
 			"paladin.oath.close",
-			_keyed_pool(
-				CLOSES,
-				oath,
-				CLOSES[DEVOTION],
+			_weighted(
+				voice.closes,
+				(),
 				),
 			),
 		)
 
 	lines = []
 	for purpose, pool in slots:
-		if pool is None:
-			line = _draw_weighted(
-					char,
-					_culture_refusals(
-						char
-						),
-					purpose,
-					)
-		else:
-			line = _draw(
-					char,
-					pool,
-					purpose,
-					)
+		line = _draw(
+				char,
+				pool,
+				purpose,
+				)
 		if line:
 			lines.append(
 				line
@@ -789,61 +729,11 @@ def Compose_Oath(
 		)
 
 
-def _circumstances_of(
-		char,
-		) -> tuple[tuple[str, int], ...]:
-	"""
-	Every way this Paladin might have said it, each with its weight.
-
-	A circumstance the life before the Oath unlocks outweighs a default, so
-	a Squire's swearing sounds like a Squire's. The defaults stay drawable:
-	most people say a thing in no particular manner at all.
-	"""
-	cluster = _cluster_of_background(
-			_background_of(
-				char
-				)
-			)
-	weighted: list[tuple[str, int]] = []
-	seen: set[str] = set()
-
-	for line in CIRCUMSTANCES.get(
-			cluster,
-			(),
-			):
-		seen.add(
-			line
-			)
-		weighted.append(
-			(
-				line,
-				CULTURE_AFFINITY_WEIGHT,
-				)
-			)
-
-	for line in DEFAULT_CIRCUMSTANCES:
-		if line in seen:
-			continue
-		seen.add(
-			line
-			)
-		weighted.append(
-			(
-				line,
-				1,
-				)
-			)
-
-	return tuple(
-		weighted
-		)
-
-
 def Draw_Oath(
 		char,
 		) -> tuple[str, ...]:
 	"""
-	Settle what this Paladin swore and how they said it, once.
+	Settle what this Paladin swore, once.
 
 	Called from a lesson's ``apply``, never from its Entry. An Entry that
 	draws re-draws on every read of the sheet, which is the Primal Order
@@ -863,13 +753,6 @@ def Draw_Oath(
 			char,
 			)
 	char.paladin_oath_lines = lines
-	char.paladin_oath_circumstance = _draw_weighted(
-			char,
-			_circumstances_of(
-				char
-				),
-			"paladin.oath.circumstance",
-			)
 
 	return lines
 
@@ -878,66 +761,50 @@ def Oath_Entry(
 		char,
 		) -> str:
 	"""
-	The whole oath block: what it was sworn to, how it was said, and the words.
+	The recital as one block: what was sworn, and the words.
 
-	Set roman rather than italic, one line to a line, so it reads as a code
-	carved somewhere rather than as a quotation. Breaks are written and never
-	inferred, per Canon/Feature-Text, so every line after the first carries
-	its own ``<br>`` from here, in the source.
+		You swore an oath to Vengeance. To be a paragon of retribution and justice:
+		I am sworn against the perpetrators of injustice.
+		...
+
+	Set roman, one line to a line, so it reads as a code carved somewhere
+	rather than as a quotation. Breaks are written and never inferred, per
+	Canon/Feature-Text, so every line after the first carries its own ``<br>``
+	from here, in the source.
 	"""
 	lines = getattr(
 			char,
 			"paladin_oath_lines",
 			None,
 			) or ()
-
 	if not lines:
 		return ""
 
-	sworn_to = OATH_OBJECTS.get(
-			_oath_of(
-				char
-				),
+	voice = _register_of(
+			char
 			)
-	circumstance = getattr(
-			char,
-			"paladin_oath_circumstance",
-			None,
-			)
-
 	opening = (
-		f"You swore an oath to {sworn_to}."
-		if sworn_to
-		else "You swore an oath."
+		f"You swore an oath to {voice.sworn_to}. "
+		f"To be a paragon of {voice.paragon}:"
 		)
-	frame = [
-		opening,
-		f"{circumstance} It said:"
-		if circumstance
-		else "It said:",
-		]
 
 	return "<br>".join(
 			(
-				*frame,
+				opening,
 				*lines,
 				)
 			)
 
 
 __all__ = (
-	"VOWS",
-	"HEARTS",
-	"BLADES",
-	"WORDS",
+	"Oath_Register",
+	"REGISTERS",
+	"SPECIES_HEARTS",
 	"WORD_CLUSTERS",
-	"REFUSALS",
-	"OATH_OBJECTS",
-	"CIRCUMSTANCES",
-	"CULTURE_AFFINITY_WEIGHT",
-	"GUILD_AFFINITY_WEIGHT",
+	"BACKGROUND_WORDS",
+	"CULTURE_REFUSALS",
+	"GRACE_WEIGHT",
 	"GUILD_KEY",
-	"CLOSES",
 	"Compose_Oath",
 	"Draw_Oath",
 	"Oath_Entry",
