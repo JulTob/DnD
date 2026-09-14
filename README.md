@@ -1,8 +1,10 @@
 # D&D — Gen Legend
 
-Tools for Dungeon Masters: generate Player Characters and NPCs, and in time a companion for building worlds. The first public product is the Player Character generator (Decree 0004).
+Tools for Players and Dungeon Masters: generate Player Characters, NPCs, maps, and in time a companion for building worlds. The first public product is the Player Character generator.
 
-The living handbook is [Curia/Vademecum.md](Curia/Vademecum.md). Tickets (questae) live in `Documenta/Questae/` (new) and `Curia/Questae/` (older, being merged into Documenta). Decisions live in the Agora.
+The living handbook is [the Wiki](https://github.com/JulTob/GenLegend/wiki). 
+
+Tickets (questae) live in `Documenta/Questae/` (new) and `Curia/Questae/` (older, being merged into Documenta). Decisions live in the Agora.
 
 ## Run
 
