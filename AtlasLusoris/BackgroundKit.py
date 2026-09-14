@@ -1232,7 +1232,11 @@ Farmer = _Build_Player_Handbook_Background(
 		"Animal_Handling",
 		"Nature",
 		),
-	tools="Woodworker_Tools",
+	# Settled as Woodworker's Tools, and ToolsKit already makes Carpenter_Tools
+	# its alias.  The sheet's Char_Skills has no Woodworker_Tools attribute yet,
+	# so the settled key would grant nothing: keep the key that reaches the sheet
+	# until QST-0116.1 gives the tool one identity.
+	tools="Carpenter_Tools",
 	origin_feat=Tough,
 	title="Farmer",
 	description=(
