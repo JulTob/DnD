@@ -406,7 +406,9 @@ Dwarf's homecoming needs gold; the Halfling's needs a story. Two returns.
 - **Squire.** "Greatness has logistics": the Halfling who kept the packs dry and
   knew exactly how many days of food were left, which is the species' one
   professional skill.
-- **Farmer (official).** The Halfling's own background is one sentence.
+- **Farmer (official).** "You came up with dirt under your nails and the seasons
+  in your bones." The background most natural to a Halfling; Hook: *Rustic
+  Hospitality* (Backgrounds-Official §3).
 
 ---
 

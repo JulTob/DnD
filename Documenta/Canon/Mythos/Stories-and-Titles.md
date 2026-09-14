@@ -230,8 +230,8 @@ one register each, and every line drawn from a table that already exists.
 - Sorcerer silver-dragon Origin: cut, or read the Draconic Ancestry the sheet
   already has.
 - `custom_cases`: lower *of, the, and* inside titles.
-- The gladiator Archetypes: gate them on a background that earns them (a
-  Gladiator background exists in the 2024 list), not on the Guild.
+- The gladiator Archetypes: gate them on a background that earns them, not on
+  the Guild. (The 2024 list has no Gladiator background.)
 - The Evil Origin: cut.
 - Hometowns through AtlasNomina's culture keys.
 - "United Nation".
@@ -255,8 +255,8 @@ the Gear Titles are.
 
 ## 📚 11. Pointers
 
-- **Backgrounds-Official**: the sixteen thin ones; their hooks are the missing
-  Origins for the official set as well.
+- **Backgrounds-Official**: the sixteen official backgrounds and their Hooks,
+  which §8's principle can tell as Origins too.
 - **Orders page**: the six-beat arc engine is the same collapse and could
   supply the Story's spine for a Sworn character.
 - **Cultural-Inspirations canon**: place-name keys for §6.

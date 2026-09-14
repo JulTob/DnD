@@ -26,9 +26,9 @@ Four sheets (Gnome Alchemist, Dwarf Armorer, Human Artillerist, Dragonborn
 Battle Smith). No class text, no specialty text, no lines. *Replicate Magic
 Item* says "one or more magic items from your known plans" and never names a
 plan. *Steel Defender* never says what shape the defender took. Two of the
-four drew official one-sentence backgrounds (Sage, Artisan); the other two
-drew the Squire and the Servant, both of which turned out to be Artificer
-stories (§6).
+four drew official backgrounds (Sage, Artisan), both printed as post-wipe
+stubs; the other two drew the Squire and the Servant, both of
+which turned out to be Artificer stories (§6).
 
 ⚠️ **The Artificer's signature objects are absent from the sheet.** The Wizard
 page found the Spellbook map drawing a book per Character by tool; the
@@ -220,9 +220,10 @@ nobody would give.
 - **Gambler.** "You carry with you a game that grounds you" is the Arcane
   Mutant's; the Gambler Artificer builds the loaded die and never uses it.
 - **Bailiff.** Forgery Kit, and a badge that can be made.
-- **Official backgrounds.** Sage and Artisan drew on two of four sheets;
-  *Craftsperson* is the Artificer's own official background and it is one
-  sentence.
+- **Official backgrounds.** Sage (*Working Hypothesis*) and Artisan (*The
+  Guild*) drew on two of four sheets. The Artisan is the official most natural
+  to an Artificer. Its sampled sheet printed the stub, with the old hook title
+  "Craftsperson" where the name belongs (Repairs-Ledger B17).
 
 ---
 

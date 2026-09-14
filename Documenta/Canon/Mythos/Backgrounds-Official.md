@@ -1,627 +1,387 @@
 # 📜 The Official Backgrounds
 
-> 📖 **In flow.** 2 of 8 chapters are still proposals. 📜 0 · 📚 1 · 📔 5 · 📖 2
+> 📜 **Settled.** No chapter is still in flow. 📜 3 · 📚 3 · 📔 1
 
 *Wiki entry for the design team. The sixteen 2024 Player's Handbook backgrounds
-as the project carries them, what they lack against the custom set, and a
-treatment. Compiled 2026-09-08 from `BackgroundKit.py` and the generated sheets
-of every class page.*
+as the project wrote them: the rules, a description in the house voice, and a
+titled Hook for each. This page is their authoritative and only form. The code
+adapts to it.*
 
-> **In one sentence.** Thirty of the forty-six player backgrounds are written in
-> the house voice at three hundred words with a hook that costs something; the
-> sixteen official ones are one sentence each, and they are the ones the
-> generator draws for the classes that have no text of their own.
-
----
-
-## 📔 1. The problem, measured
-
-Across the class pages, forty-nine Characters were generated. The official
-backgrounds appeared on the sheets of the emptiest classes most: the Paladin
-(Guard, Ice Nomad), the Ranger (Hermit, Charlatan, Acolyte), the Rogue
-(Charlatan, Entertainer, Soldier), the Fighter (Guard, Artisan, Noble), the
-Sorcerer (Criminal), the Artificer (Sage, Artisan), the Wizard (Dragon Cultist
-aside), the Cleric (Hermit). A player who rolls Acolyte beside a player who
-rolls Inquisitor is reading two different books.
-
-**What an official background prints today:**
-
-> **[Background] Watcher's Eye.** You recognize the habits of lawkeepers and
-> lawbreakers, and they often recognize your bearing in return.
-
-Three defects in one line. The entry's *name* is the hook's title, not the
-background's (the Guard renders as "Watcher's Eye", the Charlatan as "False
-Identity", the Soldier as "Military Rank", the Hermit as "Discovery"). The
-description is a mechanics summary in the third person's clothes. And there is
-no hook: nothing that costs, nothing that arrives, nothing that pulls.
-
-**What a custom background prints:** three paragraphs of a life in the second
-person, a turn ("Then there was the other one"), and a bold-titled hook that is
-half gift and half debt. The Inquisitor's runs to four hundred words and ends
-"You believe, and you keep working, and you do not sleep well."
+> **In one sentence.** The sixteen official backgrounds keep the 2024 mechanics
+> and take the same form as the custom set: a description that turns the
+> proficiencies into a life, and a Hook that opens doors and names their price,
+> open to any class and any alignment.
 
 ---
 
-## 📔 2. The sixteen, as the mechanics already describe them
+## 📜 0. Rules
 
-| Background | Abilities | Skills | Tool | Origin feat | Hook title (current) |
+*The fixed points.*
+
+1. **The mechanics are the 2024 rules** (§1): three abilities, two skills, one
+   tool, one Origin feat. The tools carry the project's names, where
+   Carpenter's Tools are Woodworker's Tools and Navigator's Tools are
+   Cartographer's Tools.
+2. **Two entries on the sheet.** The Background entry carries the background's
+   own name and its description. The **Hook** is a separate entry under its own
+   title. The field is called Hook: *Feature* says nothing, and *Boon* is taken
+   by the super-feats.
+3. **Class- and alignment-agnostic.** The description presents the skills
+   neutrally and leaves the target and the purpose to the player. Where a range
+   is named, the text names both extremes and hands the choice over: the
+   Charlatan's "the needy, the corrupt", the Criminal's "to survive, or for the
+   thrill, or because the law protected everyone but you".
+4. **The description carries the proficiencies.** Each skill, tool and feat is
+   something the life taught, not a list beside it.
+5. **A Hook is a plot engine, not a free roll.** It gives access, leads,
+   hospitality, work, and the people who come asking, and it names its price.
+   It never passes a check automatically: the Sage's answer is always
+   incomplete, and the Guide finds the people off the roads, not a guaranteed
+   route.
+6. **No em-dashes.** Parentheses or colons instead.
+7. **Slots and italics.** `{guild}` in the Scribe resolves to the Character's
+   own Guild when the sheet is read ("the Barbarian School"). In the Noble,
+   italics mark the evocation and plain text marks the rule.
+
+---
+
+## 📚 1. The sixteen, mechanically
+
+| Background | Abilities | Skills | Tool | Origin feat | Hook |
 |---|---|---|---|---|---|
-| Acolyte | INT WIS CHA | Insight, Religion | Calligrapher's Supplies | Magic Initiate (Cleric) | Shelter of the Faithful |
-| Artisan | STR DEX INT | Investigation, Persuasion | an Artisan's Tool | Crafter | Craftsperson |
-| Charlatan | DEX CON CHA | Deception, Sleight of Hand | Forgery Kit | Skilled | False Identity |
-| Criminal | DEX CON INT | Sleight of Hand, Stealth | Thieves' Tools | Alert | Criminal Contact |
-| Entertainer | STR DEX CHA | Acrobatics, Performance | Musical Instrument | Musician | By Popular Demand |
-| Farmer | STR CON WIS | Animal Handling, Nature | Carpenter's Tools | Tough | Rustic Hospitality |
-| Guard | STR INT WIS | Athletics, Perception | Gaming Set | Alert | Watcher's Eye |
-| Guide | DEX CON WIS | Stealth, Survival | Cartographer's Tools | Magic Initiate (Druid) | Pathfinder |
-| Hermit | CON WIS CHA | Medicine, Religion | Herbalism Kit | Healer | Discovery |
-| Merchant | CON INT CHA | Animal Handling, Persuasion | Navigator's Tools | Lucky | Business Acumen |
-| Noble | STR INT CHA | History, Persuasion | Gaming Set | Skilled | Position of Privilege |
-| Sage | CON INT WIS | Arcana, History | Calligrapher's Supplies | Magic Initiate (Wizard) | Researcher |
-| Sailor | STR DEX WIS | Acrobatics, Perception | Navigator's Tools | Tavern Brawler | Ship's Passage |
-| Scribe | DEX INT WIS | Investigation, Perception | Calligrapher's Supplies | Skilled | Scholarly Insight |
-| Soldier | STR DEX CON | Athletics, Intimidation | Gaming Set | Savage Attacker | Military Rank |
-| Wayfarer | DEX WIS CHA | Insight, Stealth | Thieves' Tools | Lucky | Wayfarer |
-
-The mechanics are right and stay. The text is what is owed.
+| Acolyte | INT WIS CHA | Insight, Religion | Calligrapher's Supplies | Magic Initiate (Cleric) | *Shelter of the Faithful* |
+| Artisan | STR DEX INT | Investigation, Persuasion | one Artisan's Tool | Crafter | *The Guild* |
+| Charlatan | DEX CON CHA | Deception, Sleight of Hand | Forgery Kit | Skilled | *False Identity* |
+| Criminal | DEX CON INT | Sleight of Hand, Stealth | Thieves' Tools | Alert | *Criminal Contact* |
+| Entertainer | STR DEX CHA | Acrobatics, Performance | Musical Instrument | Musician | *By Popular Demand* |
+| Farmer | STR CON WIS | Animal Handling, Nature | Woodworker's Tools | Tough | *Rustic Hospitality* |
+| Guard | STR INT WIS | Athletics, Perception | Gaming Set | Alert | *Network of Favors* |
+| Guide | DEX CON WIS | Stealth, Survival | Cartographer's Tools | Magic Initiate (Druid) | *The Ways Between* |
+| Hermit | CON WIS CHA | Medicine, Religion | Herbalism Kit | Healer | *What You Found Out There* |
+| Merchant | CON INT CHA | Animal Handling, Persuasion | Cartographer's Tools | Lucky | *I Know Where to Get It* |
+| Noble | STR INT CHA | History, Persuasion | Gaming Set | Skilled | *The Weight of the Crown* |
+| Sage | CON INT WIS | Arcana, History | Calligrapher's Supplies | Magic Initiate (Wizard) | *Working Hypothesis* |
+| Sailor | STR DEX WIS | Acrobatics, Perception | Cartographer's Tools | Tavern Brawler | *Ship's Passage* |
+| Scribe | DEX INT WIS | Investigation, Perception | Calligrapher's Supplies | Skilled | *Alumni* |
+| Soldier | STR DEX CON | Athletics, Intimidation | Gaming Set | Savage Attacker | *Old Company* |
+| Wayfarer | DEX WIS CHA | Insight, Stealth | Thieves' Tools | Lucky | *The Overlooked* |
 
 ---
 
-## 📔 3. The organising principle: the officials are the institutional versions
+## 📜 2. What each one is
 
-Several officials already have a custom twin covering the same ground: Soldier
-and Sellsword; Criminal and Renegade; Acolyte and Inquisitor; Sage and
-Archaeologist; Scribe and Investigator; Guide and Survivalist or Wildkeeper;
-Wayfarer and Vagabond; Guard and Bailiff. Written carelessly, the pairs read as
-one idea twice.
-
-✅ **Proposal: the official background is always the *institution's* version;
-the custom one is the person who left it, refused it, or never had it.** The
-Soldier is the army; the Sellsword fights for no flag. The Criminal is the
-guild; the Renegade is the crew that picked itself. The Acolyte is the temple;
-the Inquisitor is its left hand. The Sage is the archive; the Archaeologist is
-the field. The Guard is the gate; the Bailiff is the warrant. This makes the
-sixteen the Human entry's own sentence ("Humans tend to organize, making
-institutions and orders part of our legacy") and gives each official a *place*
-a Character belongs to and can be thrown out of, which is what a hook needs.
-
-It also settles the voice: the official background's turn is always the same
-kind of turn, **the day the institution was wrong**, because that is the one
-thing an institution's member has that a loner does not.
+| Background | Hook | The life |
+|---|---|---|
+| **Acolyte** | *Shelter of the Faithful* | Someone who belongs to something greater than themselves (a god, a pantheon, a cause, a truth), in a quiet shrine or in the streets. The Cleric flavor is earned by the Cleric spells. |
+| **Artisan** | *The Guild* | Someone who makes things, and makes them well. The odd commission is a call worth answering to make a name. |
+| **Charlatan** | *False Identity* | A master of people. Who they turn the gift on, from the needy to the corrupt, is the player's affair. |
+| **Criminal** | *Criminal Contact* | Someone who lived on the wrong side of the law, for survival, for the thrill, or because the law protected everyone else. Favors in that world are never free. |
+| **Entertainer** | *By Popular Demand* | The performer who takes the bow. Being remembered brings the meal, the bed, and the requests. |
+| **Farmer** | *Rustic Hospitality* | One of the working people, known by them at a glance. "A beast" stays unspecified so any people can read itself in. |
+| **Guard** | *Network of Favors* | The noir city detective, with favors on both sides of the law and a price that coin may not cover. |
+| **Guide** | *The Ways Between* | The one who leads others through country that kills the unprepared. The Druid's magic is the part they do not talk about. |
+| **Hermit** | *What You Found Out There* | Someone who came back knowing one thing the world does not, worked out with the GM. The secret draws seekers, and the sick find the healer. |
+| **Merchant** | *I Know Where to Get It* | The long-route trader, a bit crazy: an appraiser, a finder, and the one who gathers the crew for the (almost) perfect plan. |
+| **Noble** | *The Weight of the Crown* | A recognized claim to authority, by birth, election, promise, victory or merit: a prince in the making. Its reach is set with the GM, and every request costs something. |
+| **Sage** | *Working Hypothesis* | The one who knows where the answer is kept. The answer is never the whole of it. |
+| **Sailor** | *Ship's Passage* | Someone who lives by the law of the sea, which the navy, the merchant and the pirate share. |
+| **Scribe** | *Alumni* | The student. The Sage is the one who knows; the Scribe is the one who is learning, and the school is the Character's own Guild. |
+| **Soldier** | *Old Company* | The line soldier. The orders they have not stopped thinking about fit the honorable veteran and the one who did something terrible. |
+| **Wayfarer** | *The Overlooked* | What used to be the Urchin: street savvy, and one of the second nation hidden in plain sight. |
 
 ---
 
-## 📖 4. Four drafts
+## 📜 3. The sixteen, as written
 
-*House rules: second person, concrete, the turn in the third paragraph, a
-bold-titled hook that costs something, no em-dashes, no proper nouns. The
-mechanics stay exactly as the table gives them. Proposals.*
-
-### Soldier
-
-> You were issued a number before you were issued a name, and you learned to
-> answer to both. Somebody else decided where you slept, when you ate, and who
-> stood next to you when the line was formed, and for a long time that was the
-> most restful thing that had ever happened to you. You know how to march
-> hungry. You know how to dig in wet ground and sleep in it. You know exactly how
-> long a man can hold a shield up before his arm starts to lie to him, because
-> you have watched yours do it.
->
-> The army taught you the thing nobody else teaches: that courage is mostly the
-> people beside you, and that fear is mostly the people beside you too, and that
-> the trick is to be the one both of them are looking at. You look like someone
-> who has been shouted at professionally and stopped minding.
->
-> Then there was the order you carried out. Not the ones you refused; those are
-> easy to remember and easy to tell. The one you did. It was correct, it was
-> lawful, it was what the line needed, and there is a village that will not say
-> your regiment's name. You still keep your kit clean. You are not sure any more
-> who for.
->
-> **Military Rank.** The rank was never yours; it was the army's, on loan, and
-> the army has a long memory for its own. Show the mark and soldiers stand a
-> little straighter, quartermasters find the thing that was not in stock, and
-> officers who never met you decide you are somebody's problem rather than
-> theirs. Barracks will feed you. Sentries will let you pass. And then, as you
-> always knew it would, the army remembers where you are. A letter finds you
-> with a seal you recognise, and it does not ask. There is a post to be held, a
-> deserter to be brought back, a thing to be done in the army's name that the
-> army would rather not do in uniform. You can refuse. Deserters can, too.
+*The text the player reads, word for word.*
 
 ### Acolyte
 
-> You were never the one at the altar. You were the one who swept under it. You
-> lit the lamps before dawn and put them out after the last petitioner left, you
-> carried the water and the wine and the letters nobody else was allowed to
-> read, and you learned the whole liturgy the way a cook learns a kitchen: not
-> what it means, what it needs. Which hymn goes with which hour. Which door the
-> sick come to. What the priests say when they think the room is empty.
->
-> You believe. That is not in question, and it was never about the sermons. It
-> is about the hundred small kindnesses the house does every day without being
-> asked and without being thanked, and about the fact that you were one of them.
->
-> And you know what the house does not say aloud, because you were in the room.
-> The offering that went to the wrong purse. The petitioner who was turned away
-> for the wrong reason. The night the door was locked when it should not have
-> been. You did not leave over any of it. You left because you understood that
-> if you stayed you would stop noticing, and noticing was the only thing you had
-> that the house had not given you.
->
-> **Shelter of the Faithful.** Any house of your faith will take you in, feed
-> you, and ask nothing, because that is what the house is for and because you
-> know how it works from the inside: which door, which hour, which words. You
-> and your companions have a roof wherever the faith has one. The roof has a
-> price, and it is never money. The house hears things, and now so do you: the
-> sick who came in the night and said too much, the letter that arrived
-> misaddressed, the elder who has started forgetting the liturgy and cannot be
-> allowed to. You will be asked to carry something between two houses that
-> should not be seen to speak to each other. You will be asked because you are
-> the one who sweeps, and nobody watches the one who sweeps.
+**Description**
 
-### Criminal
+```txt
+You belong to something greater than yourself (a god, a pantheon, a cause, a truth), and in its service you found a purpose the world could not give you. You learned its rites and its scriptures, copied its holy words by candlelight until they were written on your heart, and learned to read the soul beneath the face of everyone who knelt to you for comfort or confession. Sometimes, when the need is real and your faith is steady, a prayer is answered, and even you cannot always say whether it was your hand or the power you serve. Whether you tend a quiet shrine or carry the word into the streets, you move through the world as its instrument, and those who share your faith will always know you for one of their own.
+```
 
-> There is a guild for it, and you were in it. Not a gang, not a crew: a
-> guild, with dues and a ledger and a man who decides which street is whose.
-> You paid your share and you were protected, and the protection was real. You
-> learned the trade the way any apprentice does: badly, then less badly, then
-> well enough that people who did not know your face knew your work.
->
-> You know how a lock thinks. You know which watchman drinks and which one only
-> pretends to. You know that the most dangerous person in any room is the one
-> who is not afraid of the guild, because everyone else is, and that fear is a
-> currency that spends further than coin.
->
-> Then the guild made a decision about somebody you knew. It was correct, by
-> the guild's arithmetic. The ledger balanced. You had helped it balance, more
-> than once, for other people. This time you did not sleep, and in the morning
-> you had a trade and no guild, which is the one thing the trade never
-> prepares you for.
->
-> **Criminal Contact.** You still know the door, and the door still knows you.
-> In any city with a guild, and every city has one, there is a person who will
-> take your message, sell you what cannot be bought, and tell you what the watch
-> will not: who is owed, who is hiding, what the mansion on the hill is
-> guarding this month. They do it for old friendship and for the guild, which
-> is keeping an account. Every favour is a line in it. One day the account is
-> called, and the guild will ask for the one thing it always asks: a job done
-> by somebody whose face the city does not connect to the guild's. That is you.
-> It was always going to be you. You left; the ledger did not.
+**Hook: Shelter of the Faithful**
 
-### Hermit
-
-> You went somewhere nobody would follow and you stayed until the silence
-> stopped being silence. A cave, a hut above the snowline, a hollow in a marsh,
-> a tower everyone believed was empty. You learned to set your own bones and
-> to tell which green thing eases a fever and which one ends the conversation.
-> You learned the difference between being alone and being lonely, which took
-> about a year, and the difference between thinking and praying, which you have
-> not finished learning.
->
-> People imagine a hermit spends the time on wisdom. You spent most of it on
-> firewood. Wisdom happened in the gaps, the way weather does, and you have
-> long since stopped trying to make it come.
->
-> Then you found the thing. Or worked it out, or were told it, or dreamed it
-> three nights running and woke up certain. You will not say what it is, not
-> yet, and not because it is secret: because you have said it aloud exactly
-> once, to the birds, and it sounded insane, and it is still true. You came down
-> from the hill because a thing like that does not belong to one person. You
-> came down slowly.
->
-> **Discovery.** What you found up there is the reason you are on the road, and
-> it is not finished. It points. It tells you which town to go to next, which
-> door to knock on, which stranger to sit beside, the way a compass tells you
-> nothing about where you are going and everything about which way. People who
-> spend time with you notice that you are following something, and some of
-> them want to know what, and a few of them already do, because they found a
-> piece of it too, in their own silence. When you meet one of those, you will
-> know at once, and so will they. The thing you found wants to be whole. It is
-> using you to get there, and you have decided not to mind.
-
----
-
-## 📔 5. Angles for the other twelve
-
-One line each: the institution, the turn, the hook's cost.
-
-- **Artisan.** The guild hall and the mark on the work. The turn: a piece you
-  signed that failed and killed nobody, this time. Hook (*Craftsperson*): a
-  bench and a fire in any guild hall, and the guild's commission you cannot
-  refuse twice.
-- **Charlatan.** The invented person has better references than you. The turn:
-  the day somebody loved the invention. Hook (*False Identity*): the second
-  self has a life, debts and friends, and they are calling.
-- **Entertainer.** The crowd is a creditor. The turn: the night you were
-  applauded for the wrong thing. Hook (*By Popular Demand*): supper and a bed
-  anywhere there is a room to fill, and a request you cannot say no to.
-- **Farmer.** You know what a bad year smells like in spring. The turn: the
-  year the lord's granary was full. Hook (*Rustic Hospitality*): working people
-  feed you and hide you, and expect you to carry the message the steward must
-  not see.
-- **Guard.** The gate, and the one you let through. The turn: it was the right
-  call and the wrong person. Hook (*Watcher's Eye*): lawkeepers and lawbreakers
-  both know your bearing, and both assume you are still on duty.
-- **Guide.** You have never been lost; you have been somewhere you did not
-  intend to be. The turn: the party you brought back one short. Hook
-  (*Pathfinder*): routes, weather, water, and the people who hire a guide for
-  places nobody should go.
-- **Merchant.** Everything has a price and you were the first to say it aloud.
-  The turn: the deal that was legal. Hook (*Business Acumen*): contacts,
-  passage, credit, and the partner who still holds your paper.
-- **Noble.** Your name opens doors and you have not decided whether you are the
-  name. The turn: the tenant you met. Hook (*Position of Privilege*): access to
-  the rooms where things are decided, and the family's expectation that you
-  decide them the family's way.
-- **Sage.** You know which archive holds it and which will not let you in. The
-  turn: the footnote that was wrong for two hundred years. Hook
-  (*Researcher*): scholars answer your letters, and one of them wants the thing
-  you found badly enough to have followed you.
-- **Sailor.** *La mar*, loved and never trusted. The turn: the night the captain
-  was wrong and you obeyed. Hook (*Ship's Passage*): a berth on any ship whose
-  crew knows your kind, worked for, and a captain who remembers your name from
-  a manifest you would rather forget.
-- **Scribe.** The lie is in what is left out. The turn: the document you copied
-  faithfully. Hook (*Scholarly Insight*): registries open to your hand, and the
-  omission you have noticed that somebody very careful maintained for years.
-- **Wayfarer.** ⚠️ The Vagabond already owns this ground ("The road raised you");
-  the official Wayfarer should be the *institution's* version of the road: the
-  pilgrim, the courier, the one who walks for somebody. Or fold it into the
-  Vagabond and give the roster back a slot.
-
----
-
-## 📔 6. Repairs and decisions
-
-**Repairs**
-
-- The Background entry prints the hook's *title* as its name (Guard renders as
-  "Watcher's Eye"). The name should be the background's; the title should head
-  the hook paragraph in bold, as the custom set does.
-- The Hermit's "Discovery" and the Soldier's "Military Rank" are 2014 feature
-  names used as hook titles. Fine as titles; the drafts above keep them.
-
-**Open (the project's)**
-
-- Whether the officials take the institutional principle (§3).
-- Whether the Wayfarer folds into the Vagabond.
-- The order of writing: the ones the emptiest classes draw most (Soldier, Guard,
-  Criminal, Acolyte, Sage, Charlatan, Noble) first.
-
----
-
-## 📚 7. Pointers
-
-- **Cleric page §8**: where the finding was first made.
-- **Human page**: the institutions as the Human's principle.
-- **Orders page**: the Orders are the *secret* institutions; the officials are
-  the public ones. The Acolyte's temple and a Divine Order's "back room behind
-  a public shrine, reached through the kitchen" are one building.
-
----
-
-## 📖 8. The other twelve, drafted
-
-*Same house rules as §4: second person, concrete, the turn in the third
-paragraph, a bold-titled hook that costs something, no em-dashes, no proper
-nouns. Mechanics unchanged from §2. Proposals for the project's hand; the angles in
-§5 are what these grew from.*
+```txt
+Anywhere your faith has taken root (a grand temple, a roadside shrine, a few believers gathered in secret), you and your companions can count on a welcome: a meal, a bed, care for your wounds, and sanctuary when you have nowhere else to turn. The faithful ask only that you honor the creed while you shelter beneath it. And where there is a congregation, there is always someone who needs what the devout can give (a blessing, a burial, a wrong set right), and they will bring it to you.
+```
 
 ### Artisan
 
-> The hall taught you the mark before it taught you the trade. Every piece that
-> leaves a bench carries a sign cut into it somewhere the buyer will not look,
-> and the sign says who answers if it fails. You learned to put yours on things
-> when you were still ruining more than you finished, and the master let you,
-> because a mark you are afraid of is the only teacher that never sleeps.
->
-> You know what a thing costs before it is made: the hours, the waste, the two
-> attempts that go in the fire. You know the buyer's face when the price is
-> said, and the second face, the real one, when the work is in their hands. You
-> can tell a joint that will hold from one that will hold for a year.
->
-> Then there was the piece that failed. Not badly. A hinge, a seam, a haft. It
-> gave in somebody's hands and nobody died, this time, and you found your mark
-> on it afterwards and stood there a long while. Nobody else ever knew. You do,
-> and you check your joints twice now, and you have started to wonder what
-> else you signed.
->
-> **Craftsperson.** Any guild hall will give you a bench and a fire, and the
-> tools you did not bring, and a bed above the shop if the night is bad. The
-> hall keeps its own, and it keeps a ledger. Sooner or later a commission comes
-> with the hall's seal on it: a piece for someone the hall would rather not
-> name, in a place the hall would rather not send an apprentice. You can refuse
-> a commission once. The second refusal costs you the mark.
+**Description**
+
+```txt
+You make things, and you make them well. Somewhere there is a guild hall with your mark in its ledgers, a master who taught you, and a trade that shaped your hands long before it shaped your character. You can look at a lock, a hinge, a flawed casting, or a rival's handiwork and see at a glance how it was made and where it will fail. You know the worth of honest work and the true cost of cutting corners, and you have bargained with enough suppliers and patrons to talk your way to a fair price (or a workshop after closing). Whatever road you walk now, you still measure the world by whether it was built to last.
+```
+
+**Hook: The Guild**
+
+```txt
+Your trade opens doors that coin alone cannot. In most towns you can find the guild, workshop, or craftsfolk of your art, and among them your skill earns a fair hearing: a place to work, tools and materials at cost, and word of who needs a thing made or mended. Build a reputation and the commissions come to you, some stranger than they first appear (a key for a lock no one will name, a repair no honest smith would touch), and every odd request is a call worth answering to make a name for yourself.
+```
 
 ### Charlatan
 
-> There is a person who does not exist, and they are better than you. They have
-> references. They have a family seat, a school, a widow's inheritance, a way of
-> holding a glass. You built them one detail at a time, the way a forger builds
-> a signature, and you have watched doors open for them that stayed shut for
-> you.
->
-> You learned the trade the honest way: by noticing what people want to be true
-> and giving it to them first. A title before the name. A grief mentioned once
-> and never again. You know that the mark is never the fool; the mark is the one
-> who wanted it. You know how long a story holds and when to leave.
->
-> Then somebody loved the invention. Not the mark. Someone who met the person
-> who does not exist and stayed for them, and you had to choose which of you
-> would be in the room. You are still choosing. You have caught yourself, more
-> than once, telling the invention's stories as if they had happened to you.
->
-> **False Identity.** The second self has papers that pass, a hand that matches,
-> and a history that checks if nobody checks hard. What you did not plan for is
-> that a person who exists on paper acquires a life: debts run up in their
-> name, a friend who asks after them, a letter addressed to them that you
-> should not open and will. Somewhere, someone is looking for the person you
-> invented, and they mean it kindly, or they do not, and you cannot tell which
-> without answering.
+**Description**
+
+```txt
+You have never met a mark you couldn't read or a story you couldn't improve. Somewhere along the way you learned that the truth is not as important as your objective. Facts are to be used or set aside as the moment asks, and most people will believe a nice story over their own eyes. You mastered people, and learned how to move them, scare them, or even inspire them. Whether you turn that gift on the needy, the corrupt, or anyone with a full purse is your own affair. But a life of masks has shaped you into someone you barely recognize, and brought you enemies who would like their gold back.
+```
+
+**Hook: False Identity**
+
+```txt
+You are never only one person. You can be a grieving widow, a visiting dignitary, a healer with a miracle cure, or a nobody not worth a second glance, complete with the reputation, the papers, the quick hands, and the steady nerve to carry it off. You keep at least one false identity fully dressed: a name, a history, papers that pass inspection, and people who will swear they have known that name for years. Given time and something to copy, you can forge a document to suit almost any need, from a letter of introduction to an official writ. The danger, and the opportunity, is that a good lie takes on a life of its own: sooner or later someone comes looking for the person you invented, wanting something only they can give.
+```
+
+### Criminal
+
+**Description**
+
+```txt
+You have lived on the wrong side of the law, and you learned its lessons well: how to move without being seen, how to open what someone wanted kept shut, how to read a room for the exits and the easy marks and the one person watching too closely. You know the folk who work the dark hours (the fences, the smugglers, the lookouts, the ones who never give a straight name) and how to speak to them without saying too much. Maybe you did it to survive, or for the thrill, or because the law protected everyone but you. Whatever set you on that road, the habits it taught you do not wash off, and neither, sometimes, do the debts. Even the ones you thought were already paid off.
+```
+
+**Hook: Criminal Contact**
+
+```txt
+You know how the underworld passes what it does not want overheard. Wherever you go, you can find the local version of the people you used to run with (a fence, a smuggler, a tavern that asks no questions) and make yourself known without a word out of place. Through them you can get a message to almost anyone, quietly, or learn who really runs the streets and what they are afraid of. The catch is that favors in that world are never free, and the people who trade in them remember exactly what they are owed.
+```
 
 ### Entertainer
 
-> A crowd is a creditor. It pays in advance, in silence and in the one held
-> breath before the fall, and it collects if you do not deliver. You learned
-> that on a board in a market square at an age when other children were
-> learning to be quiet, and you have never once since walked into a room without
-> counting the exits and the faces.
->
-> You know how to fall so it looks like an accident and how to fall so it looks
-> like a miracle. You know the note that makes a tavern go still and the joke
-> that makes it forgive you for the note. You can read a room from the doorway
-> and tell which table is dangerous and which one will pay.
->
-> Then there was the night you were applauded for the wrong thing. A slip, a
-> word, a face you pulled in fear, and they roared, and you took the bow because
-> a bow is what the moment asks for. You have done the wrong thing on purpose
-> every night since. It works. You have not decided whether that is the craft or
-> the end of it.
->
-> **By Popular Demand.** Wherever there is a room to fill, there is supper and a
-> bed for you: an inn, a hall, a festival, a lord's kitchen. Play, and you eat.
-> What the room does not tell you is that it remembers. Someone, somewhere, saw
-> you once and has asked for you by name, and the request has been passed hand
-> to hand until it reaches you as an invitation you did not seek to a place you
-> would not choose. The audience wants the piece you are known for. You know
-> which one that is.
+**Description**
+
+```txt
+You were born for an audience, or you found one and never looked back. You know how to hold a room: the timing of a joke, the hush before the high note, the tumble that looks like an accident and lands like a promise. You have played to drunk sailors and bored nobles and children who had never seen a coin spent on wonder, and you learned that the right performance can lift a room's sorrow, or its silver, or just its attention for one shining hour. The road is hard on performers, but you would rather be booed than forgotten, and you have never once wanted the quiet life.
+```
+
+**Hook: By Popular Demand**
+
+```txt
+Give you a stage, a crate, or a cleared corner of a common room, and you can earn your keep: a meal, a bed, a few coins, and the goodwill of a crowd that came in strangers and leaves knowing your name. A performer who pleases is remembered, and being remembered has a way of finding you work, and trouble: an admirer with a request, a rival who wants you gone, a patron who needs a message carried somewhere only a minstrel can go unremarked. So take your bow, and always leave them wanting more: a face a crowd cheers for is worth more than a full purse on the road, and it opens doors that stay shut to strangers.
+```
 
 ### Farmer
 
-> You know what a bad year smells like in spring. Not in autumn, when everybody
-> knows; in the wet weeks when the seed is in and the sky decides. You learned
-> weather from your knees and animals from your hands, and the lesson under both
-> was the same: things live if you are there every day and die if you are not,
-> and no one will ever thank you for the days you were there.
->
-> You can mend a gate, a fence, a roof and a leg. You know which beast is lying
-> about being lame and which child is lying about the beast. You have killed
-> what you raised and cooked it and said grace over it, and you know that this
-> is not a contradiction, it is a year.
->
-> Then there was the year the harvest failed and the lord's granary was full.
-> You carried your share to the gate and watched it go in, and you watched the
-> door shut, and you learned in one afternoon what a whole village of grown
-> people had spent their lives not saying. You still say grace. You say it
-> shorter.
->
-> **Rustic Hospitality.** Working people know you for one of them at a glance,
-> and they will feed you, hide you, and lie to a steward's face about having
-> seen you. In return they will hand you the thing they cannot carry themselves:
-> a message the bailiff must not read, a boy who must not be found, a name.
-> They will not ask whether you can do it. They will assume, the way you would
-> have, that someone who came from the land does what the land needs.
+**Description**
+
+```txt
+You came up with dirt under your nails and the seasons in your bones. You know the weight of real work: the ache of a long harvest, the patience of raising a beast from a shaking newborn to a plow-puller, the quiet arithmetic of whether the rain will come before the seed rots. You can build a fence that holds, mend what breaks, read a sky, and calm a frightened animal with a hand and a low word. The land does not care who your father was or what gods you keep, and neither, in the end, do you. It taught you that anything worth having is grown slowly, and that a person who will not do the hard, dull work is not to be trusted with the rest.
+```
+
+**Hook: Rustic Hospitality**
+
+```txt
+Working people know one of their own. In any village, farmstead, or waystation, you can find a dry barn to sleep in, a plain meal, and hands willing to help someone who has clearly done a day's labor in their life. They will hide you from those who ride fine horses and ask hard questions, tend you when you are hurt, and in return they will tell you their troubles: the beast that has been taking the sheep, the tax collector who takes too much, the neighbor who walked into the woods and never came back. Small troubles, until they are yours to solve.
+```
 
 ### Guard
 
-> You stood at a gate. That is the whole of it and it took years to learn. Who
-> comes through, who waits, who turns back, who pays; the gate is a question
-> asked of everyone, and you were the one who had to answer it while the line
-> grew and the light went. You learned faces the way others learn letters.
->
-> You know how a man walks when the papers are wrong and how he walks when he
-> is simply tired. You can stand for a watch without your mind leaving, and you
-> can wake from a dead sleep with a hand already on the haft. You know that
-> most trouble announces itself an hour early to anyone who is looking.
->
-> Then there was the one you let through. It was the right call: the papers
-> were good, the story was straight, the face was nobody's. It was the wrong
-> person. You found out later, the way everyone found out, and no one blamed you
-> and you have never once stopped seeing that face in the line.
->
-> **Watcher's Eye.** Lawkeepers and lawbreakers both read your bearing in an
-> instant, and both draw the same conclusion: you are still on duty. The watch
-> will share a fire and a word with you; the ones who avoid the watch will
-> avoid you, or test you. Sooner or later someone in a uniform you no longer
-> wear asks you to stand at a gate one more time, because they are short, and
-> because you will not be able to say no to a line that is growing while the
-> light goes.
+**Description**
+
+```txt
+Rain on the cobbles, a lantern guttering out, and one detail that refuses to sit right. Your mind goes back to that one case when the world finally quiets. The one you can't let go. You protect the city. You are the watcher, and the enforcer. The city needs eyes, fists, and compromise. You learned your part of it cold. You can run a suspect down three streets, hear the rehearsed line in a story told too smoothly, and sit across from a criminal with only a bluff. You do your best thinking at a dark window with a glass you are not drinking. You are good at it. But then came the case that would not close, and it cost you the post, or the sleep, or the people who used to trust you. You are still working it. You always will be.
+```
+
+**Hook: Network of Favors**
+
+```txt
+You never worked alone, and you never worked clean. The years left you names on both sides of the lamplight: a sergeant who owes you for a night that never made it into the report, a clerk who lets you read what you should not, a fence, a beggar, a dock hand who notices every crate that comes in wrong. Any of them can tell you what is moving through their district (who arrived, who vanished, who is suddenly paying old debts), and some will look the other way while you do what the law will not, or cannot. But every favor is a loan, and you have borrowed from dangerous people on both sides of that law. One night they will come to collect, and coin may not be enough.
+```
 
 ### Guide
 
-> You have never been lost. You have been somewhere you did not intend to be,
-> which is a different thing, and you have always known how to make it a place
-> instead. You learned the country by walking it for people who would pay to
-> not have to, and you learned the people by what they did on the third day,
-> when the boots hurt and the wonder wore off.
->
-> You read water in a dry gully and weather in the birds. You know which
-> plants forgive a mistake and which do not, and you can walk a party through a
-> pass in the dark because you have counted the steps in daylight. You know how
-> to make strangers eat when they are too frightened to be hungry.
->
-> Then there was the party you brought back one short. It was not your fault;
-> everyone said so, the survivors most of all, loudly, as if it were a rope they
-> could throw you. You have gone over the route a thousand times. You would take
-> it again. You count heads now at every rest, out loud, and pretend it is a
-> habit.
->
-> **Pathfinder.** Routes, water, weather and the places to sleep are yours to
-> find anywhere there is ground, and people who need to reach somewhere nobody
-> should go will hear your name before they hear the price. That is the cost.
-> The ones who hire a guide for the wrong places are the ones going there on
-> purpose, and they will tell you the destination only when you are too far in
-> to turn back, and expect you to bring them home.
+**Description**
+
+```txt
+You know the ways that are not on any map, and you made the maps for the ones that are. Far from roads and lanterns, you learned to move quietly enough that the wood forgets you are in it, to sleep light, to find water, and to be somewhere else by the time the thing that was following gives up. You have led pilgrims, smugglers, surveyors, and fools through country that kills the unprepared, and buried a few who would not listen. Out there you picked up something else, too: a word for the weather that sometimes answers, a way of asking the green things to let you pass. You do not talk about that part. You just know that the wild is not empty, and that it notices whoever walks through it.
+```
+
+**Hook: The Ways Between**
+
+```txt
+There is a whole country of people who live off the roads: trappers, hermits, herders, border-runners, the last family on the last farm before the trees. You know how to find them, and how to be welcome: a night by their fire, a meal, and a warning about what has changed since you last came through. From them you hear what never reaches a town (a pass gone bad, lights in the hills, a village that has stopped sending anyone to market, something in the deep wood that has begun to hunt in daylight). Guiding pays well, and there is always someone who needs to reach a place no sensible person will take them.
+```
+
+### Hermit
+
+**Description**
+
+```txt
+You went out to the quiet places and stayed long enough for the noise to drain out of you. A cave, a cliff cell, a hut past the last field: it does not matter which, only that no one was there to interrupt the thinking. You learned which roots break a fever and which look identical and stop a heart, how to set a bone with nobody to hold the patient still, and how to sit with the dying without flinching. You prayed, or studied, or simply listened, until something answered: an insight, a vision, a truth you have never been able to put down. Then you came back to a world that talks constantly and says very little. You are out of practice with people, but not with what matters.
+```
+
+**Hook: What You Found Out There**
+
+```txt
+In your solitude you came to know one thing the world does not (the meaning of a symbol nobody can read, where something old was buried and why, a heresy that happens to be true, the cure for a sickness that has no cure). Work it out with your GM. You are not the only one who wants it: scholars, priests, and quieter parties come looking for the hermit who knows, and not all of them ask politely. And wherever you go, the sick and the desperate find you, because someone always remembers a healer who asks for nothing.
+```
 
 ### Merchant
 
-> Everything has a price and you were the first in the room to say it aloud.
-> That was the trade, and it took nerve before it took arithmetic. You learned
-> it at a stall and a ledger and the long silence after the number, and you
-> learned that most people are not haggling for money; they are haggling to be
-> told they matter. You told them. It cost nothing and it sold everything.
->
-> You know a good horse and a good lie and which one a caravan needs more. You
-> know how far a rumour travels ahead of a shipment and how to be the rumour.
-> You have been paid in coin, in favours, in silence and in a daughter's
-> wedding, and you kept a ledger for each, and you can read them all.
->
-> Then there was the deal that was legal. Every clause. Witnessed. Sealed. You
-> got the better of it, the way you were supposed to, and a family on the other
-> side of it lost the thing they had been counting on, and nothing in the
-> contract was wrong. You keep that contract. You read it sometimes to check.
->
-> **Business Acumen.** Contacts in every market, passage on any road that has
-> a toll, credit where your name has been heard: the trade opens its doors to
-> its own. The trade also keeps its paper, and somewhere your name is on some,
-> under a number that has interest. The partner who holds it has never once
-> called it in coin. What they want fetched, carried or forgotten is worth
-> more, and you will do it, because you have read the clause.
+**Description**
+
+```txt
+Anyone can sell trinkets in a town square. You wanted the long routes: the spice from the desert nomads, the dyes of emperors, the items nobody in this land has ever seen. You knew it was hard, but you made it worth it. You heard the tales: the dunes where something moves underneath, the route where sailors sing of sirens, the valley where the old dragon counts every coin that crosses. And you loaded up and went anyway. Determined not to just survive, but to make a profit. You respect your beasts as more than carriers, you can find your road by the stars or by the smell of the wind, and you have turned an ambush into a business partner. Everyone in this trade is out there. Willing to go beyond reason. But when a stranger admires something in your pack and asks where it came from, you get to smile and say: if you like it, I know where to get more.
+```
+
+**Hook: I Know Where to Get It**
+
+```txt
+You do not need to own a thing to sell it. Put an object in your hands and you can tell what it is worth, whose workshop or century it came out of, and who in this world would pay stupid money to own it. Better still: you know where, and how, to get it and sell it. A book no one dares to open, a sword nobody has managed to pull from the stone (with the stone included), the heirloom a family has been mourning for three generations, the relic a temple would empty its vaults to have back... You may ask favors and promise cuts, but you will make your sale. Word gets around, so the commissions will come to you: appraise an antiquity, retrieve a unique item, or open a trade deal for a guild. The world is full of wonders, and people who want them. You are merely helping and getting your skills' worth. And when a job is beyond you? You know exactly which unreasonable people to put in a tavern together for the (almost) perfect plan.
+```
 
 ### Noble
 
-> Your name opens doors, and you have not yet decided whether you are the name.
-> You were raised by people paid to raise you, in rooms built by people you
-> never met, to be a person your grandparents designed. You learned how to be
-> waited on before you learned to read, and you learned to read so you could
-> know what was owed to you.
->
-> You know the history of every house in the province, which is to say every
-> grudge. You know how to enter a room so it rearranges itself, and how to lose
-> at cards to a man you need. You know that power is mostly a matter of who is
-> expected to speak first, and you have never once had to check.
->
-> Then there was the tenant you met. Not the tenant class; a man, with a name,
-> on land your family has drawn rent from for six generations, who showed you
-> the roof and the child and the ledger, and did not ask for anything, because
-> he knew better. You went home. Supper was served at the usual hour. You have
-> not been able to eat it the same way since.
->
-> **Position of Privilege.** You are admitted to the rooms where things are
-> decided and seated where the decision can hear you. Nobody will ask for your
-> papers; your face is your papers. And the family that made the face expects
-> the decisions to go the family's way, and will hear of it, promptly and in
-> detail, when they do not. You can disappoint them. Others in your line have.
-> Their portraits are in the corridor nobody uses.
+**Description**
+
+```txt
+*There is a seat others watch, and it bears your name. Perhaps your claim came by birth, election, promise, victory on a field, or merit alone. The seat waits ahead while you are preparing for it, and people measure every step you take toward it. You know the factions and their old precedents, their alliances and rivalries, and that the difference between them often matters less than who survives to write it down. You learned that ceremony is a language, hospitality a negotiation, and a smile may carry farther than a command.*
+
+*The war games are never merely games. They are lessons: which piece may be risked, which must be protected, and how to keep defeat from becoming destruction. Never mistake the board for the game. Your pieces will have families, your opponents will have heirs, and some pieces will change color for the right price. One day, you will make the call. Soldiers will move, granaries will empty, cells will open, and names will end. Your predecessors made such calls. So did theirs. The echoes of their commands have followed you and now lurk in the shadows. Whether you inherit that power, seize it, refuse it, or lose it, it has already shaped the way others see you. You have not once felt entirely safe.*
+```
+
+**Hook: The Weight of the Crown**
+
+```txt
+*Crown, throne, seat, baton, council, the right to speak first: whatever your people call it, you bear a recognized claim to authority. Your name is not only a key. It is a blade hanging over your head.*
+
+Define the reach of your station with the GM: who recognizes it, what community or institution it touches, and what duties accompany it. Where your authority is recognized, you can usually secure an audience and hospitality appropriate to your station, and the attention of subjects or allies. Every request tests a loyalty, spends a favor, or creates an obligation.
+
+*The price is that you are always watched. Responsibilities and old grudges sharpen the blade. Every public promise may be treated as policy. Every insult may become a grievance. Blood spilled may become war. Everything you do is read as a move: who you court, who you insult, whose table you sit at, whose funeral you attend. One misjudgment, and the people you love may pay before you do. A crown is not a gift. It is a golden cage with your name already written on it.*
+```
 
 ### Sage
 
-> You know which archive holds it and which one will not let you in. That is
-> the whole scholarship: not the knowing, the knowing where, and the long patient
-> war with the people who keep the where. You learned to read in three
-> alphabets and to be quiet in a fourth, and you have spent more of your life
-> with the dead than the living, and found them better company.
->
-> You can date a hand by its ink and a lie by its footnotes. You know that
-> every library has a shelf that is not on the catalogue and a keeper who will
-> pretend not to understand the question. You have learned to ask the question
-> so it sounds like a different one.
->
-> Then there was the footnote that was wrong for two hundred years. You found
-> it. It was small, a name, a date, a place that was not where everyone had
-> agreed it was, and everything built on it since was built on a mistake, and
-> you have watched very learned people decide not to know that. You wrote it
-> up. It is in the archive that will not let you in.
->
-> **Researcher.** Scholars answer your letters and libraries open the doors
-> they keep for their own kind, because you have proved you can be trusted
-> with a page. One of them has read what you found and wants the source badly
-> enough to have followed the letters back to you. They will not say why.
-> Scholars never do. They will offer help, and access, and a great deal of
-> patience, and they will not leave.
+**Description**
+
+```txt
+You wanted to know, and wanting to know is a harder master than any lord. You have spent years where the good books are kept: copying failing manuscripts before the ink gave out entirely, chasing one citation through four libraries, arguing with people three centuries dead in the margins of their own work. You know which empires told the truth about themselves and which are still being believed, and you can read a spell's structure the way a mason reads a wall, seeing where the weight sits and what would happen if you pulled the wrong stone. You have cast a little of it yourself, carefully, because theory is not the same as practice and you have read what happens to those who forget the difference. There is always one more question. That is the trouble with answers.
+```
+
+**Hook: Working Hypothesis**
+
+```txt
+You may not have the answer, but you always know where it might be kept, and who to ask. Archives, temple libraries, private collections, a retired scholar who has not spoken to anyone about her life's work in twenty years: you can find the door and, more often than not, get through it, because scholars extend to one another a professional courtesy that has nothing to do with liking each other. What you learn is never the whole of it. A book will be missing its final pages, a source will contradict a better source, and a name will appear where no name should be. Word travels that you chase such things, so people bring you what they cannot read: an inscription, a diary in a dead hand, a map of somewhere that is not supposed to exist.
+```
 
 ### Sailor
 
-> *La mar.* Loved, and never once trusted, which is the only way to love it and
-> live. You learned the deck before you learned your letters, if you ever did,
-> and you learned that a ship is a village where everybody can see the weather
-> and nobody can leave. The sea taught you to obey fast and think afterwards,
-> because the ones who did it the other way round are not here to argue.
->
-> You know knots, weather and the exact moment a mood turns below deck. You can
-> fight in a space the width of a table and sleep through a gale and wake for a
-> footstep. You know which captains pay before the drink and which pay after,
-> and you know that the difference is the whole of a man's character.
->
-> Then there was the night the captain was wrong and you obeyed. Everyone did.
-> That is what a ship is. The order was given, the sail was set, and the sea
-> took what it was offered, and afterwards the log said weather and the crew
-> said nothing and you said nothing too. You still obey fast. You think
-> beforehand now, and it does not help.
->
-> **Ship's Passage.** A berth on any ship whose crew knows your kind, worked for
-> and honestly earned, wherever the water goes. Sailors look after their own.
-> Captains keep manifests, and your name is on one from a voyage you would
-> rather not discuss, and a captain who remembers it will one day offer you
-> passage on terms: a watch you did not ask for, a cargo you will not be told
-> about, a port where you are still remembered. You can stay ashore. The sea
-> will still be there, and so will they.
+**Description**
+
+```txt
+The sea has its own law, and none of it is written down on land. It does not care whose flag you fly or what a magistrate decided about you in some other country: it asks only whether you can hold a course, hold your watch, and hold your nerve. You go up wet rigging in a gale and come down faster, smell weather an hour before it breaks, hear the one rope in a hundred that is about to part, and steer by stars half the world never bothered to name. You have slept soundly through a storm that had landsmen praying. You have turned back for a boat when nobody would have blamed you for sailing on, because that is the law too. In port you drink like someone with one night to live, because that is the arithmetic, and you have brawled over a card game, a song, and an insult in a language you do not speak. Let others keep their fields and their fences. Out there the sea is honest with you, and you would rather be lost on it than safe anywhere else.
+```
+
+**Hook: Ship's Passage**
+
+```txt
+You speak the language of decks and harbors, and it opens the water to you. In any port you can find a berth: work your passage, or trade on a name that some captain in the crowd will recognize, and bring your companions aboard on your word (with the understanding that they will be expected to earn it, and that a captain's mercy has limits). Dockside, you hear what sailors hear before anyone on land does: which ships came in short-crewed and why, what the harbor master is being paid to overlook, which vessel sailed for a coast that no chart shows and has not come back. And there is always a berth going on a voyage that no sensible sailor will sign for.
+```
 
 ### Scribe
 
-> The lie is in what is left out. You learned that with a pen in your hand and
-> a text in front of you and a man at your shoulder saying *not that line*. You
-> copied for a living: contracts, registers, sermons, the letters of people who
-> could not write and the letters of people who could not be seen to. You have
-> the cleanest hand in the province and you have never once signed it.
->
-> You know how a document is built to be misread and how to build one. You
-> notice the seal that is a shade wrong and the date that falls on a feast day.
-> You can read a register upside down across a table and you can tell, from the
-> pressure of a pen, where the writer began to hurry.
->
-> Then there was the document you copied faithfully. Every word. It was a deed,
-> or a sentence, or a will, and it was correct, and your copy was correct, and
-> a person you never met lost something that could not be given back because
-> the copy was correct. You keep your hand clean. You have started to keep a
-> second copy of everything, and to leave one word out, and to remember which.
->
-> **Scholarly Insight.** Registries, chanceries and record rooms open to your
-> hand, because a clean hand is trusted where a face is not, and what you find
-> in them you can read faster than the clerk who filed it. What you found last
-> is an omission: small, maintained for years by somebody very careful, in a
-> record that many people rely on. You know what is missing. You have not yet
-> decided whether the careful person knows you know, and you have noticed
-> that the record room is always open to you now.
+**Description**
+
+```txt
+Few people reach the highest levels of education: a University, an Academy, the {guild} School. Somebody paid for yours. A family that could not afford it, a patron with expectations, or years of your own life signed away in advance: the door opened, and you have been paying for it ever since. You have watched a master do something impossible, and you knew it would be worth it. You draw diagrams, write notes, and watch closely. Then you practice, practice, and practice, until you can replicate your own wonders. Good is not good enough. You have to be perfect. You are not finished. You may never be. But you have already seen what knowledge does to a room, to a wound, to a mind, to a system... and you would gladly trade years of your life to master it. Knowledge is power. Power to change things. To make them better. To give back what you received.
+```
+
+**Hook: Alumni**
+
+```txt
+There is a bond unique to learning together. You made friends, you made rivals, you even made enemies. All of them, you know them better than their families do. You helped a classmate prepare for a challenge, and unexpectedly received a pen worth a year's salary. You needed help when you were sick, and somebody gave you their notes and brought you a warm meal. You celebrated together, and mourned together. Now those bonds stay with you. You may find colleagues now working in positions of power, making the best of their skills and knowledge. They have goals, and so do you. But you can still help each other. Your network is tight, and refusing to participate and help others may cut you off completely, but favors move like waves on a string. You may find a name, a job opportunity, a document that was meant to stay hidden, or a door left open after hours. But others may come to you with their own favors to ask. You are part of the team, so will you play your part?
+```
+
+### Soldier
+
+**Description**
+
+```txt
+You know what a formation sounds like when it is about to break. Someone taught you to march, to dig, to carry a pack until the straps wore through your shirt, and to hold a line with people you did not choose and would now die for. You learned that violence is a craft like any other: where to put your weight, which threats end a fight before it starts, how to make yourself look like too much trouble to be worth it. You have won and lost, buried friends, and taken orders you have not stopped thinking about since. Between all that there were the long stretches of nothing, and the dice and cards that kept a company from turning on itself. You still count the exits like a soldier, and some part of you is still waiting for a horn that is not going to sound.
+```
+
+**Hook: Old Company**
+
+```txt
+You were baptized into an army with your first blood, and that stain cannot be washed away. You know the ranks and the courtesies, how to talk to a quartermaster, and which requests get answered and which get you laughed out of the tent, so soldiers, guards, and mercenaries tend to treat you as one of theirs: a meal, a bunk, and honest talk about what has been moving through the district. Better still, your old company is scattered across the world now, in garrisons, in gutters, in service to people you would not have chosen for them, and they remember who carried whom. Any one of them will hear you out. Some of them will need you to come at once, and no letter that begins "you owe me" has ever been about something small.
+```
 
 ### Wayfarer
 
-> You walk for somebody. That is the difference between you and the ones who
-> simply walk: there is a name at the far end of every road, a letter, a relic,
-> a message that must arrive in a mouth and not on paper. You were raised on
-> the road by people who were also walking for somebody, and you learned early
-> that a stranger's kindness is a loan, and that you will pay it to a different
-> stranger.
->
-> You know the inns that will hide you and the shrines that will not ask. You
-> know how to be nobody in a crowd and somebody at a gate. You can read a face
-> for the lie underneath it, because everyone on the road is carrying
-> something, and you can tell the ones carrying it for themselves.
->
-> Then there was the errand you did not deliver. You reached the far end and
-> found the name, and you looked at what you carried, and you turned round. It
-> was the right thing. You have never told anyone whose errand it was, and you
-> have never stopped walking, and you are not sure any more whether you are
-> going somewhere or leaving.
->
-> **Somebody's Errand.** Pilgrims, couriers and the people who use them know
-> your gait and trust it: a bed, a meal and a blind eye wherever a road-house
-> keeps faith with its own. What they hand you in return is the next errand,
-> and the road's rule is that you do not ask what it is. Somewhere ahead is a
-> name and a thing to be delivered into a hand, and you will carry it, because
-> the alternative is to stop walking, and you have never learned how.
+**Description**
 
-*Wayfarer note: this keeps the roster slot and gives the Vagabond ("the road
-raised you") its institutional sibling: the one who walks for somebody. The
-hook is retitled from the background's own name so the sheet does not print
-"Wayfarer" twice.*
+```txt
+You have slept in doorways, in haylofts, in the bottom of a boat, and in places you would rather not describe. Nobody was coming to help, so you learned to read people quickly: who gives, who takes, who is about to become a problem, and who is lying about which. You can be gone before a hand closes on your shoulder, get a lock open when the alternative is a night in the rain, and eat a real meal without letting on how long it has been since the last one. You have been shown kindness by people with nothing to spare and cruelty by people who had everything, and you have never once confused the two. By rights you should have died three or four times over. You did not. Either somebody is watching over you or nobody is, and it makes no difference: you yourself are always watching.
+```
+
+**Hook: The Overlooked**
+
+```txt
+There is a second nation inside every city, and no map shows it. Beggars, urchins, day laborers, the woman who sweeps the temple steps, the drifters under the bridge: no crown, no captain, no borders, and yet rules older than the ones carved above the courthouse door. Share what you have. Do not sell your own. Pass it on. You are one of them, so wherever you go there is a fire, a doorway, a name to ask for, and hands willing to hide you from anyone carrying a warrant. And they see everything, because nobody guards their tongue in front of the invisible: which magistrate is bought and by whom, which faction is quietly arming, which street not to walk tonight, who vanished last month and through which door they were dragged. Nobody asks them. They will tell you. What they ask in return is never small: speak where they will not be heard, stand between a fist and a child, find the one no officer will look for. They own nothing and they say nothing, but they are everywhere, and there are more of them than of anyone else. A word from you can move through them like wind across a field of wheat, and no city that has ignored them for a century could survive a week without them.
+```
+
+---
+
+## 📚 4. What the generator prints today
+
+*As of 2026-09-14. This chapter changes when the code does.*
+
+- **The code does not match this page.** `AtlasLusoris/BackgroundKit.py` still
+  holds the stubs the 2026-08-29 recovery left: one sentence each, no Hook, and
+  an old hook title printed where the background's name belongs (the Guard
+  renders as "Watcher's Eye", the Soldier as "Military Rank").
+- **Where the text survives.** Every description and Hook in §3 was recovered
+  character for character from the pre-wipe bytecode,
+  `.recovery-vault/_prewipe-pyc-mirror/AtlasLusoris/BackgroundKit.29bfd8e2057f.pyc`
+  (source saved 2026-08-26). It matches the `BackgroundKit` section of
+  `.recovery-vault/AUTHORED-TEXT-ARCHIVE.md`. One word has changed since, by
+  decision on 2026-09-14: the Hermit's Hook says GM, as the Noble's does.
+- **The shape the code returns to.** Before the wipe, each official background
+  declared `title` as its own name and `hook` as an entry with a title and a
+  text, granted as its own sheet entry. The description was filled when the
+  sheet was read, so the Scribe's `{guild}` resolves. Without that step the
+  sheet prints a literal `{guild}`.
+- **Tools.** The code declares `Carpenter_Tools` for the Farmer and
+  `Navigator_Tools` for the Merchant and the Sailor. `AtlasInventarium/ToolsKit.py`
+  aliases them to Woodworker's Tools and Cartographer's Tools, so the sheet
+  already prints the tools in §1.
+- **Withdrawn.** An earlier version of this page, written from the stubs,
+  carried sixteen unapproved drafts, an "institutional" principle, and the
+  retitled hooks that went with them. None of it stands.
+- **The restoration** is QST-0122: the hook architecture (.1), the sixteen
+  officials (.2), the custom set's Hooks (.3) and this page (.4). When .2 and
+  .3 reach `main`, this chapter and Repairs-Ledger B17 close.
+
+---
+
+## 📔 5. Loose ends
+
+- Draft-Tables §B gives five of the officials a first weapon for a reason taken
+  from the withdrawn drafts: the Acolyte's temple, the Guard's gate, the
+  Merchant's counter, the Noble's family sword, the Wayfarer's road.
+  Equipment-and-Masteries repeats the Guard's halberd. Whether a background
+  issues a first weapon at all was never a rule: it is in the Agora as
+  Q-0040 (QST-0123).
+- The Origin story templates in `AtlasEpica/Map_of_Stories.py` (and its twin in
+  `AtlasActorLudi`) predate §3 in places: the Wayfarer's walk the road ("kept
+  horizons") while the settled Wayfarer is the street survivor, an "Urchin"
+  goal survives with no Urchin background, one Merchant "would sell trinkets
+  and rocks in the market" against "Anyone can sell trinkets in a town
+  square", and the Scribe "copied ancient texts" as the copyist the student
+  replaced.
+- QST-0046.2's `rustic` gear theme groups the Wayfarer with the Farmer, the
+  Guide and the Vagabond, which is the road reading too.
+
+---
+
+## 📚 6. Pointers
+
+- **Backgrounds-Written**: the thirty-two custom backgrounds, in the same form.
+- **Feats**: the Origin feats in §1.
+- **Repairs-Ledger B17**: the stubs on the sheet.
+- **Draft-Tables §B**: the first weapon per background.

@@ -260,8 +260,8 @@ gates pass. Twenty such lines exist above. They are enough to start.
 
 - **Stories-and-Titles**: the three-sentence Story this page's fourth line
   extends.
-- **Backgrounds-Official**: the sixteen thin backgrounds, which need hooks
-  before they can have misfits.
+- **Backgrounds-Official**: the sixteen official backgrounds and their Hooks,
+  which §3 has not yet read for a misfit Guild.
 - **Celestials**, **Aasimar**, **Tiefling**: the central pairing's two ends.
 - **Goliath**, **Aasimar**: the antiquity split.
 - **Guilds-Registers-Names-Devices**: the register each Guild's line is

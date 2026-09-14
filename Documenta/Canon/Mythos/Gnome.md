@@ -470,7 +470,8 @@ and flat; the Gnome Wild Magic Sorcerer is curiosity that would not wait.
 - **Stranger.** The Gnome's four hundred years, without the welcome.
 - **Fated.** "You break things." The Gnome who breaks things and makes
   something out of the pieces: the species' creed as a curse.
-- **Artisan (official).** One sentence.
+- **Artisan (official).** "You make things, and you make them well." Hook:
+  *The Guild* (Backgrounds-Official §3).
 
 ---
 

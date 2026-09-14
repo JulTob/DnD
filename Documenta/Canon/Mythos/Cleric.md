@@ -27,12 +27,11 @@ them. Dialog 0016's three new openings (Light, Trickery, War) are provisional an
 not wired; the sheet still carries the plainer ones ("Light always shows the
 way.", "The bar does not move.").
 
-The same sheet drew the **Hermit** background, whose feature reads *"Solitude
-gave you time to uncover a truth, method, or mystery that still shapes your
-decisions."* That is the 2014 Hermit's "Discovery" in the 2014 register, one
-sentence, third-person-flat, beside backgrounds like the Inquisitor that run to
-four hundred words. ⚠️ See §8: the official backgrounds are the reference's
-weakest members, and they are the ones most players will draw.
+The same sheet drew the **Hermit** background. The sheet printed it as the
+stub the 2026-08-29 wipe left, with no Hook: *"Solitude gave you time to uncover a
+truth, method, or mystery that still shapes your decisions."* The settled
+Hermit, with its Hook *What You Found Out There*, is on Backgrounds-Official
+§3. See §8.
 
 ---
 
@@ -275,14 +274,17 @@ Three findings, in order of severity:
 
 ## 📔 8. A note on the official backgrounds
 
-The Hermit's *"Solitude gave you time to uncover a truth, method, or mystery"*
-is the 2014 book's sentence. The custom backgrounds (Inquisitor, Gambler,
-Servant, Stranger, Investigator, Spirit Medium) are the reference the whole
-project is being held to; the sixteen official ones are what most Characters
-draw, because they are sixteen. ⚠️ A player who rolls Acolyte beside a player
-who rolls Inquisitor is reading two different books. This is out of the
-Cleric's scope and in everyone's; it deserves its own page, and the extraction
-run alongside this one is the evidence for it.
+The Hermit in §1 is not the design. The sixteen official backgrounds printed
+as stubs because the 2026-08-29 wipe left them that way in
+`AtlasLusoris/BackgroundKit.py`: a sentence, no Hook, and in fifteen of them an
+old hook title where the name belongs (Repairs-Ledger B17). Their settled text,
+a description and a titled Hook in the same form as the custom set, is on
+Backgrounds-Official.
+
+The one that touches this page is the **Acolyte** (§2, §7). In its settled
+text the Acolyte serves "a god, a pantheon, a cause, a truth", in a quiet shrine
+or in the streets, and its Cleric flavor is earned by its Magic Initiate
+(Cleric) spells.
 
 ---
 
@@ -354,7 +356,8 @@ drill. Rule text untouched. Proposals for the project's hand, not landed.*
   confirms "noticed" survives the four patrons.
 - **Aasimar**: the unloving Ideal (§2). Belongs in the Aasimar page as the
   species' central irony.
-- **Official backgrounds**: a page of their own (§8).
+- **Official backgrounds**: settled on Backgrounds-Official; the stubs on the
+  sheet are Repairs-Ledger B17 (§8).
 - **Cultural Inspirations canon**: record that prayer is the first consumer to
   reach the "names, places, cuisine, prayer" goal, and that every new marker
   needs a prayer or the people go silent.

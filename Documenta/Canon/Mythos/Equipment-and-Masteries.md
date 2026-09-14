@@ -174,7 +174,8 @@ or never, on purpose).
 
 - **Fighter page**: the yard register the mastery lines are written in.
 - **Guilds-Registers-Names-Devices**: the signature-object Kit proposal.
-- **Backgrounds-Official**: the hooks that name objects.
+- **Backgrounds-Official**: the official Hooks (§3), some of which name an
+  object too (the Charlatan's "papers that pass inspection").
 - **Feats page**: the Practices as the model for feat and Boon prose.
 - **Cultural-Inspirations canon**: the keys the titles and shields already
   read.

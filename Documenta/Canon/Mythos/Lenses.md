@@ -274,8 +274,8 @@ Every character the generator makes should be able to say five things, and the
 sheet should say them in this order:
 
 1. **Who you are.** The species entry. Written.
-2. **What happened to you.** The background and its hook. Written, for thirty-two;
-   sixteen thin.
+2. **What happened to you.** The background and its hook. Written, for all
+   forty-eight (the sixteen officials on Backgrounds-Official §3).
 3. **What you do.** The Guild and its lines. Written for four Guilds; drafted
    for nine.
 4. **What you want.** The value. Not written anywhere; implied by every hook.

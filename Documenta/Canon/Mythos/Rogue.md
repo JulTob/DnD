@@ -26,9 +26,10 @@ project.
 Four sheets (Human Thief, Elf Assassin, Gnome Arcane Trickster, Tiefling
 Soulknife). No class text, no archetype text, *Expertise* says "Choose two"
 twice, the Arcane Trickster's legacy entry is the number 3, and three of the
-four drew official one-sentence backgrounds (Charlatan, Entertainer, Soldier).
-The fourth drew the Renegade, which is the class's own background and the only
-prose the Gnome received that sounded like a person.
+four drew official backgrounds (Charlatan, Entertainer, Soldier), all three
+printed as post-wipe stubs. The fourth drew the Renegade, which is
+the class's own background and the only prose the Gnome received that sounded
+like a person.
 
 ---
 
@@ -279,8 +280,9 @@ Levantine key is ever playable. Keep the kunai out of the Rogue's gear theme.
   guard is the one whose charge never learns how close it came".
 - **Agent of the Ninth Quill.** The Arcane Trickster's own background, and
   one sentence long. ⚠️ Needs the treatment the other custom backgrounds got.
-- **Official backgrounds.** Charlatan, Criminal, Urchin, Soldier: the Rogue
-  draws them most and they are one sentence each (Cleric page §8).
+- **Official backgrounds.** Charlatan (*False Identity*), Criminal (*Criminal
+  Contact*), Wayfarer (*The Overlooked*), Soldier (*Old Company*): the
+  officials most natural to a Rogue (Backgrounds-Official §3).
 
 ---
 
@@ -305,7 +307,8 @@ Levantine key is ever playable. Keep the kunai out of the Rogue's gear theme.
 4. **The Human and Halfling Thief** are the cliché; the register and the
    Egyptian heist are the rescue.
 5. **The ninja** must stay the Monk's (§5).
-6. **The Rogue draws the thinnest official backgrounds most.**
+6. **The official backgrounds the Rogue draws most printed as stubs** (§7): a
+   code repair (Repairs-Ledger B17), not a rewrite.
 7. **Agent of the Ninth Quill** is one sentence.
 
 ---
