@@ -18,11 +18,14 @@ chosen by Julio, and nothing in a Devotion oath sounds like a Vengeance oath:
 
 **It is assembled, never chosen.** Six slots, six pools, the way an Aasimar's
 aureola takes form, gem and tell from different Ideals. Every pool is written
-in the Oath's own register, so the six lines cohere as one poem. The people,
-the life before and the culture keys then add grace notes: a handful of lines
-each, drawn with preference when they exist, written only where there was
-something worth saying. A tag is an invitation to the poem, not a form to be
-filled. Where no line sings for a people, the Oath's own voice carries.
+in the Oath's own register, so the six lines cohere as one poem. Exactly two
+lines are then personal, on Julio's ruling that the personalization should be
+small: the heart comes from the people, the word from the life before, each
+drawn with preference from a small pool where every line had to earn its
+place. Nothing else varies by tag. The culture keys are not an axis here; the
+poets who wrote the species lines were told to use them as inspiration for
+diction, never as a list to fill. Where no line sings for a people, the
+Oath's own voice carries.
 
 **Death of the author.** No line here hands the Character a past. A line may
 say what they are, because the sheet already says so, and never what happened
@@ -243,7 +246,7 @@ REGISTERS = {
 
 
 # ---------------------------------------------------------------------------
-# Grace notes: the people, the life before, the culture keys
+# Grace notes: the people, and the life before
 #
 # Sparse on purpose. A line lives here only where the tag gave the poem
 # something, and a people with no line simply speaks in the Oath's own voice.
@@ -355,63 +358,10 @@ BACKGROUND_WORDS = {
 	}
 
 
-CULTURE_REFUSALS = {
-	"iberia": (
-		"I will not serve a bad lord well and call it honour.",
-		),
-	"andalus": (
-		"I will not burn the library to win the argument.",
-		),
-	"homeric": (
-		"I will not choose the long life. I have been offered it.",
-		),
-	"sparta": (
-		"I will not count them before I decide.",
-		),
-	"carthage": (
-		"I will not forget it. I was young, and I have not forgotten it.",
-		),
-	"celt": (
-		"I will not break it for a king, and I have been asked by one.",
-		),
-	"norse": (
-		"I will not be told the ending and behave differently.",
-		),
-	"egypt": (
-		"I will not be weighed and found wanting.",
-		),
-	"persia": (
-		"I will not be consoled by this too shall pass.",
-		),
-	"japan": (
-		"I will not outlive the keeping of it by very long.",
-		),
-	"crusader": (
-		"I will not need the banner. The banner needs me.",
-		),
-	"grimdark": (
-		"I will not become the thing. I have watched it happen to better.",
-		),
-	# The Noble Genies: Scheherazade, and the night that must not end the tale.
-	"arabian_nights": (
-		"I will not let the dawn end the tale.",
-		"I will not be the last wish. I will be the one they should have made.",
-		),
-	# Every Paladin carries this key from the Guild, so it is a weaker mark
-	# than a people's own key and is weighted as one.
-	"arthuriana": (
-		"I will not be the one who put it down.",
-		"I will not hand it to somebody better. Nobody better is coming.",
-		),
-	}
-
-
-# A grace note outweighs one line of the Oath's own pool by this much. Kept
-# low so the Oath's register carries the poem and the grace notes land as
-# grace notes. The Guild's own key is not a mark of anything, so it draws at
-# one, level with the Oath's lines.
+# A personal line outweighs one line of the Oath's own pool by this much. Kept
+# low so the Oath's register carries the poem and the personal lines land as
+# grace notes rather than as a second voice.
 GRACE_WEIGHT = 3
-GUILD_KEY = "arthuriana"
 
 
 # ---------------------------------------------------------------------------
@@ -470,27 +420,6 @@ def _background_of(
 			"background",
 			"Background",
 			)
-
-
-def _cultures_of(
-		char,
-		) -> tuple[str, ...]:
-	"""
-	The culture keys this Character answers to: the network gear titles and
-	Cleric prayers already use. A failure here costs a grace note and nothing
-	else, so it is swallowed.
-	"""
-	try:
-		from AtlasInventarium.Map_of_Gear_Titles import cultures_of
-		return tuple(
-			cultures_of(
-				char
-				) or ()
-			)
-	except Exception:
-		return ()
-
-
 def _cluster_of(
 		background: str | None,
 		) -> str | None:
@@ -623,31 +552,6 @@ def _background_grace(
 			(),
 			)
 		)
-
-
-def _culture_grace(
-		char,
-		):
-	notes: list[tuple[str, int]] = []
-	for key in _cultures_of(
-			char
-			):
-		weight = 1 if key == GUILD_KEY else GRACE_WEIGHT
-		for line in CULTURE_REFUSALS.get(
-				key,
-				(),
-				):
-			notes.append(
-				(
-					line,
-					weight,
-					)
-				)
-	return tuple(
-		notes
-		)
-
-
 def Compose_Oath(
 		char,
 		) -> tuple[str, ...]:
@@ -698,9 +602,7 @@ def Compose_Oath(
 			"paladin.oath.refusal",
 			_weighted(
 				voice.refusals,
-				_culture_grace(
-					char
-					),
+				(),
 				),
 			),
 		(
@@ -802,9 +704,7 @@ __all__ = (
 	"SPECIES_HEARTS",
 	"WORD_CLUSTERS",
 	"BACKGROUND_WORDS",
-	"CULTURE_REFUSALS",
 	"GRACE_WEIGHT",
-	"GUILD_KEY",
 	"Compose_Oath",
 	"Draw_Oath",
 	"Oath_Entry",
