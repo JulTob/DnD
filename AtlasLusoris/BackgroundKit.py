@@ -1591,12 +1591,39 @@ Sailor = _Build_Player_Handbook_Background(
 		"Acrobatics",
 		"Perception",
 		),
-	tools="Navigator_Tools",
+	tools="Cartographer_Tools",
 	origin_feat=Tavern_Brawler,
-	title="Ship's Passage",
+	title="Sailor",
 	description=(
-		"Your knowledge of vessels and crews can secure passage or work when "
-		"a suitable ship and captain are available."
+		"The sea has its own law, and none of it is written down on land. It "
+		"does not care whose flag you fly or what a magistrate decided about "
+		"you in some other country: it asks only whether you can hold a course, "
+		"hold your watch, and hold your nerve. You go up wet rigging in a gale "
+		"and come down faster, smell weather an hour before it breaks, hear the "
+		"one rope in a hundred that is about to part, and steer by stars half "
+		"the world never bothered to name. You have slept soundly through a "
+		"storm that had landsmen praying. You have turned back for a boat when "
+		"nobody would have blamed you for sailing on, because that is the law "
+		"too. In port you drink like someone with one night to live, because "
+		"that is the arithmetic, and you have brawled over a card game, a song, "
+		"and an insult in a language you do not speak. Let others keep their "
+		"fields and their fences. Out there the sea is honest with you, and you "
+		"would rather be lost on it than safe anywhere else."
+		),
+	hook=Entry(
+		title="Ship's Passage",
+		definition=(
+			"You speak the language of decks and harbors, and it opens the water to "
+			"you. In any port you can find a berth: work your passage, or trade on "
+			"a name that some captain in the crowd will recognize, and bring your "
+			"companions aboard on your word (with the understanding that they will "
+			"be expected to earn it, and that a captain's mercy has limits). "
+			"Dockside, you hear what sailors hear before anyone on land does: which "
+			"ships came in short-crewed and why, what the harbor master is being "
+			"paid to overlook, which vessel sailed for a coast that no chart shows "
+			"and has not come back. And there is always a berth going on a voyage "
+			"that no sensible sailor will sign for."
+			),
 		),
 	)
 
