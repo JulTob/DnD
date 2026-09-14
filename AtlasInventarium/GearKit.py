@@ -806,60 +806,54 @@ def _fit_pack(
 def _proficient_tools(
 		char,
 		) -> tuple[str, ...]:
-	"""Tool names this Character is proficient with, read off their skills."""
-	skills = getattr(
+	"""
+	The kits this Character carries: every tool they know, and of each kind
+	(Musical Instrument, Gaming Set) the one they learned first.  A musician who
+	knows seven instruments travels with one, not a wagon of them.
+	"""
+	from AtlasActorLudi.ProficiencyKit import Ensure_Training_Record
+	from AtlasInventarium.ToolsKit import TOOLS, Tool_Proficiency_Names
+
+	known = Tool_Proficiency_Names(
 			char,
-			"skills",
-			None,
-			)
-	if skills is None:
-		return ()
-
-	# skill attribute -> Ledger name, for the tools the skill sheet tracks.
-	pairs = (
-			("Alchemist_Supplies", "Alchemist's Supplies"),
-			("Brewer_Supplies", "Brewer's Supplies"),
-			("Calligrapher_Supplies", "Calligrapher's Supplies"),
-			("Woodworker_Tools", "Woodworker's Tools"),
-			("Cartographer_Tools", "Cartographer's Tools"),
-			("Cobbler_Tools", "Cobbler's Tools"),
-			("Cook_Utensils", "Cook's Utensils"),
-			("Glassblower_Tools", "Glassblower's Tools"),
-			("Jeweler_Tools", "Jeweler's Tools"),
-			("Leatherworker_Tools", "Leatherworker's Tools"),
-			("Mason_Tools", "Mason's Tools"),
-			("Painter_Supplies", "Painter's Supplies"),
-			("Potter_Tools", "Potter's Tools"),
-			("Smith_Tools", "Smith's Tools"),
-			("Tinker_Tools", "Tinker's Tools"),
-			("Weaver_Tools", "Weaver's Tools"),
-			("Herbalism_Kit", "Herbalism Kit"),
-			("Gaming_Set", "Gaming Set"),
-			("Forgery_Kit", "Forgery Kit"),
-			("Disguise_Kit", "Disguise Kit"),
-			("Thieves_Tools", "Thieves' Tools"),
-			("Musical_Instrument", "Musical Instrument"),
-			)
-
-	found: list[str] = []
-	for attribute, ledger_name in pairs:
-		skill = getattr(
-				skills,
-				attribute,
+			getattr(
+				char,
+				"skills",
 				None,
+				),
+			)
+	learned = [
+			grant.capability.name
+			for batch in Ensure_Training_Record(
+				char
+				).gains
+			for grant in batch.grants
+			]
+	variants = {
+			tool.name: tool.category
+			for tool in TOOLS
+			if tool.variant
+			}
+	first_of_kind: dict[str, str] = {}
+
+	for name in sorted(
+			( name for name in known if name in variants ),
+			key=lambda name: (
+				learned.index( name )
+				if name in learned
+				else len( learned )
+				),
+			):
+		first_of_kind.setdefault(
+				variants[ name ],
+				name,
 				)
-		if skill is None:
-			continue
-		try:
-			if skill.is_proficient():
-				found.append(
-						ledger_name
-						)
-		except Exception:
-			continue
 
 	return tuple(
-			found
+			name
+			for name in known
+			if name not in variants
+			or first_of_kind[ variants[ name ] ] == name
 			)
 
 

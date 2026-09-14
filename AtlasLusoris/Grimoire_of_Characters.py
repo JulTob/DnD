@@ -265,7 +265,7 @@ class Character(Character_Skeleton):
 		char.features = unique
 
 		char.skills.sync_with_abilities(char.AS)
-		char.other_proficiencies = get_other_proficiencies(char.skills)
+		char.other_proficiencies = get_other_proficiencies(char.skills, char)
 		# AC stays DERIVED from what is equipped, so an artifact's bonus is
 		# summed rather than written over the natural formula.
 		char.AC = current_armour_class(char)
@@ -978,11 +978,6 @@ class Character(Character_Skeleton):
 				char.skills.Shields.set_proficiency()
 				char.skills.Unarmed_Barb.set_proficiency()
 		return
-
-	@minion
-	def set_Objects(char):
-		from AtlasInventarium.Grimoire_of_Objects import setObjects
-		return setObjects(char)
 
 	@property
 	def proficiency_bonus(char):
