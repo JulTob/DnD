@@ -331,21 +331,22 @@ There is a second nation inside every city, and no map shows it. Beggars, urchin
 
 *As of 2026-09-14. This chapter changes when the code does.*
 
-- **The code does not match this page.** `AtlasLusoris/BackgroundKit.py` still
-  holds the stubs the 2026-08-29 recovery left: one sentence each, no Hook, and
-  an old hook title printed where the background's name belongs (the Guard
-  renders as "Watcher's Eye", the Soldier as "Military Rank").
+- **The code matches this page** (QST-0122.2). Each official in
+  `AtlasLusoris/BackgroundKit.py` declares its own name as its title, the
+  description in §3, and its Hook, which the sheet prints as its own entry.
+  Until then the sheet printed the stubs the 2026-08-29 recovery left: one
+  sentence each, no Hook, and an old hook title where the name belongs (the
+  Guard as "Watcher's Eye", the Soldier as "Military Rank").
 - **Where the text survives.** Every description and Hook in §3 was recovered
   character for character from the pre-wipe bytecode,
   `.recovery-vault/_prewipe-pyc-mirror/AtlasLusoris/BackgroundKit.29bfd8e2057f.pyc`
   (source saved 2026-08-26). It matches the `BackgroundKit` section of
   `.recovery-vault/AUTHORED-TEXT-ARCHIVE.md`. One word has changed since, by
   decision on 2026-09-14: the Hermit's Hook says GM, as the Noble's does.
-- **The shape the code returns to.** Before the wipe, each official background
-  declared `title` as its own name and `hook` as an entry with a title and a
-  text, granted as its own sheet entry. The description was filled when the
-  sheet was read, so the Scribe's `{guild}` resolves. Without that step the
-  sheet prints a literal `{guild}`.
+- **The shape the code has again** (QST-0122.1). As before the wipe, each
+  background declares `title` as its own name and `hook` as an entry with a
+  title and a text, granted as its own sheet entry, and the description is
+  filled when the sheet is read, so the Scribe's `{guild}` resolves.
 - **Tools.** The code declares `Carpenter_Tools` for the Farmer and
   `Navigator_Tools` for the Merchant and the Sailor. `AtlasInventarium/ToolsKit.py`
   aliases them to Woodworker's Tools and Cartographer's Tools, so the sheet
@@ -354,8 +355,8 @@ There is a second nation inside every city, and no map shows it. Beggars, urchin
   carried sixteen unapproved drafts, an "institutional" principle, and the
   retitled hooks that went with them. None of it stands.
 - **The restoration** is QST-0122: the hook architecture (.1), the sixteen
-  officials (.2), the custom set's Hooks (.3) and this page (.4). When .2 and
-  .3 reach `main`, this chapter and Repairs-Ledger B17 close.
+  officials (.2) and this page (.4) are done, and Repairs-Ledger B17 is closed.
+  The custom set's Hooks (.3) are still printed inside their descriptions.
 
 ---
 

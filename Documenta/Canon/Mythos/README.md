@@ -356,6 +356,5 @@ Decree or a Questa.*
 - `generate_npcs` calls `NPC.NPC`; the legacy NPC story is always empty.
 - Every character speaks Common and Halfling: `Character_Languages` compares
   the Character to a string, and the extra language is a `set.pop()`.
-- The sixteen official backgrounds print stubs with no Hook, most under a hook
-  title instead of their name; the text they should print is on
-  Backgrounds-Official §3 (Repairs-Ledger B17).
+- ~~The sixteen official backgrounds print stubs with no Hook, most under a
+  hook title instead of their name.~~ Fixed by QST-0122.2 (Repairs-Ledger B17).
