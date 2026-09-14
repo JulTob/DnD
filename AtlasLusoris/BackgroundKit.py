@@ -1543,10 +1543,36 @@ Sage = _Build_Player_Handbook_Background(
 		),
 	tools="Calligrapher_Supplies",
 	origin_feat=Magic_Initiate_Wizard,
-	title="Researcher",
+	title="Sage",
 	description=(
-		"When you do not know a piece of lore, you usually know which archive, "
-		"expert, or tradition might hold it."
+		"You wanted to know, and wanting to know is a harder master than any "
+		"lord. You have spent years where the good books are kept: copying "
+		"failing manuscripts before the ink gave out entirely, chasing one "
+		"citation through four libraries, arguing with people three centuries "
+		"dead in the margins of their own work. You know which empires told the "
+		"truth about themselves and which are still being believed, and you can "
+		"read a spell's structure the way a mason reads a wall, seeing where "
+		"the weight sits and what would happen if you pulled the wrong stone. "
+		"You have cast a little of it yourself, carefully, because theory is "
+		"not the same as practice and you have read what happens to those who "
+		"forget the difference. There is always one more question. That is the "
+		"trouble with answers."
+		),
+	hook=Entry(
+		title="Working Hypothesis",
+		definition=(
+			"You may not have the answer, but you always know where it might be "
+			"kept, and who to ask. Archives, temple libraries, private collections, "
+			"a retired scholar who has not spoken to anyone about her life's work "
+			"in twenty years: you can find the door and, more often than not, get "
+			"through it, because scholars extend to one another a professional "
+			"courtesy that has nothing to do with liking each other. What you learn "
+			"is never the whole of it. A book will be missing its final pages, a "
+			"source will contradict a better source, and a name will appear where "
+			"no name should be. Word travels that you chase such things, so people "
+			"bring you what they cannot read: an inscription, a diary in a dead "
+			"hand, a map of somewhere that is not supposed to exist."
+			),
 		),
 	)
 
