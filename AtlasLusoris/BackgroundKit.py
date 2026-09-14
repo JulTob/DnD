@@ -1280,10 +1280,34 @@ Guard = _Build_Player_Handbook_Background(
 		),
 	tools="Gaming_Set",
 	origin_feat=Alert,
-	title="Watcher's Eye",
+	title="Guard",
 	description=(
-		"You recognize the habits of lawkeepers and lawbreakers, and they "
-		"often recognize your bearing in return."
+		"Rain on the cobbles, a lantern guttering out, and one detail that "
+		"refuses to sit right. Your mind goes back to that one case when the "
+		"world finally quiets. The one you can't let go. You protect the city. "
+		"You are the watcher, and the enforcer. The city needs eyes, fists, and "
+		"compromise. You learned your part of it cold. You can run a suspect "
+		"down three streets, hear the rehearsed line in a story told too "
+		"smoothly, and sit across from a criminal with only a bluff. You do "
+		"your best thinking at a dark window with a glass you are not drinking. "
+		"You are good at it. But then came the case that would not close, and "
+		"it cost you the post, or the sleep, or the people who used to trust "
+		"you. You are still working it. You always will be."
+		),
+	hook=Entry(
+		title="Network of Favors",
+		definition=(
+			"You never worked alone, and you never worked clean. The years left you "
+			"names on both sides of the lamplight: a sergeant who owes you for a "
+			"night that never made it into the report, a clerk who lets you read "
+			"what you should not, a fence, a beggar, a dock hand who notices every "
+			"crate that comes in wrong. Any of them can tell you what is moving "
+			"through their district (who arrived, who vanished, who is suddenly "
+			"paying old debts), and some will look the other way while you do what "
+			"the law will not, or cannot. But every favor is a loan, and you have "
+			"borrowed from dangerous people on both sides of that law. One night "
+			"they will come to collect, and coin may not be enough."
+			),
 		),
 	)
 
