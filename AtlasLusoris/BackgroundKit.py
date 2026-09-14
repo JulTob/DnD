@@ -1699,10 +1699,36 @@ Soldier = _Build_Player_Handbook_Background(
 		),
 	tools="Gaming_Set",
 	origin_feat=Savage_Attacker,
-	title="Military Rank",
+	title="Soldier",
 	description=(
-		"Your service and bearing can earn recognition, shelter, or limited "
-		"cooperation from military organizations."
+		"You know what a formation sounds like when it is about to break. "
+		"Someone taught you to march, to dig, to carry a pack until the straps "
+		"wore through your shirt, and to hold a line with people you did not "
+		"choose and would now die for. You learned that violence is a craft "
+		"like any other: where to put your weight, which threats end a fight "
+		"before it starts, how to make yourself look like too much trouble to "
+		"be worth it. You have won and lost, buried friends, and taken orders "
+		"you have not stopped thinking about since. Between all that there were "
+		"the long stretches of nothing, and the dice and cards that kept a "
+		"company from turning on itself. You still count the exits like a "
+		"soldier, and some part of you is still waiting for a horn that is not "
+		"going to sound."
+		),
+	hook=Entry(
+		title="Old Company",
+		definition=(
+			"You were baptized into an army with your first blood, and that stain "
+			"cannot be washed away. You know the ranks and the courtesies, how to "
+			"talk to a quartermaster, and which requests get answered and which get "
+			"you laughed out of the tent, so soldiers, guards, and mercenaries tend "
+			"to treat you as one of theirs: a meal, a bunk, and honest talk about "
+			"what has been moving through the district. Better still, your old "
+			"company is scattered across the world now, in garrisons, in gutters, "
+			"in service to people you would not have chosen for them, and they "
+			"remember who carried whom. Any one of them will hear you out. Some of "
+			"them will need you to come at once, and no letter that begins \"you owe "
+			"me\" has ever been about something small."
+			),
 		),
 	)
 
