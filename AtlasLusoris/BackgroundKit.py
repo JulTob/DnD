@@ -1328,10 +1328,33 @@ Guide = _Build_Player_Handbook_Background(
 		),
 	tools="Cartographer_Tools",
 	origin_feat=Magic_Initiate_Druid,
-	title="Pathfinder",
+	title="Guide",
 	description=(
-		"You read terrain, weather, and tracks well enough to find safer "
-		"routes and the necessities of travel."
+		"You know the ways that are not on any map, and you made the maps for "
+		"the ones that are. Far from roads and lanterns, you learned to move "
+		"quietly enough that the wood forgets you are in it, to sleep light, to "
+		"find water, and to be somewhere else by the time the thing that was "
+		"following gives up. You have led pilgrims, smugglers, surveyors, and "
+		"fools through country that kills the unprepared, and buried a few who "
+		"would not listen. Out there you picked up something else, too: a word "
+		"for the weather that sometimes answers, a way of asking the green "
+		"things to let you pass. You do not talk about that part. You just know "
+		"that the wild is not empty, and that it notices whoever walks through "
+		"it."
+		),
+	hook=Entry(
+		title="The Ways Between",
+		definition=(
+			"There is a whole country of people who live off the roads: trappers, "
+			"hermits, herders, border-runners, the last family on the last farm "
+			"before the trees. You know how to find them, and how to be welcome: a "
+			"night by their fire, a meal, and a warning about what has changed "
+			"since you last came through. From them you hear what never reaches a "
+			"town (a pass gone bad, lights in the hills, a village that has stopped "
+			"sending anyone to market, something in the deep wood that has begun to "
+			"hunt in daylight). Guiding pays well, and there is always someone who "
+			"needs to reach a place no sensible person will take them."
+			),
 		),
 	)
 
