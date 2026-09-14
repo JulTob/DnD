@@ -2674,8 +2674,14 @@ def Apply_Background(
 			)
 
 	if char not in tag:
+		# The Origin Feat awakens as a base of this Tag, before the Background
+		# grants its Tool.  Passing the Background lets the Feat reserve what
+		# the Background will certainly grant, so a random draw cannot spend a
+		# proficiency on it twice (Hermeticist's Crafter took Jeweler's Tools in
+		# 13 of 60 seeds without it).
 		tag(
-			char
+			char,
+			background_tag=tag,
 			)
 
 	return tag
@@ -3023,6 +3029,42 @@ def _test_background_training_reaches_the_ledger():
 	assert batches() == first
 
 
+def _test_one_tool_is_never_spent_twice():
+	"""No menu offers one tool twice, and no Background re-grants its Feat's."""
+	from collections import Counter
+
+	for name, tag in BACKGROUNDS.items():
+		menu = Background_Tool_Menu(
+			tag
+			)
+		assert len( menu ) == len( set( menu ) ), name
+
+	for name in (
+			"Hermeticist",
+			"Archaeologist",
+			"Artisan",
+			):
+		for seed in range( 20 ):
+			character = Character(
+				seed=seed
+				)
+			Player(
+				character
+				)
+			Apply_Background(
+				character,
+				name,
+				)
+			spent = Counter(
+				grant.capability
+				for batch in Ensure_Training_Record(
+					character
+					).gains
+				for grant in batch.grants
+				)
+			assert max( spent.values() ) == 1, ( name, seed, spent )
+
+
 def _self_test():
 	_test_meta_fields()
 	_test_all_backgrounds()
@@ -3031,6 +3073,7 @@ def _self_test():
 	_test_hook_and_slots()
 	_test_official_hooks()
 	_test_background_training_reaches_the_ledger()
+	_test_one_tool_is_never_spent_twice()
 
 	print(
 		"OK — BackgroundKit MetaTOP self-test "
