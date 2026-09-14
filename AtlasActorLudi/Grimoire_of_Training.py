@@ -192,13 +192,12 @@ class Training:
 
 		training.Herbalism_Kit = Tool("Herbalism Kit")
 
-		training.Navigator_Tools = Tool("Navigator's Tools")
 
 		# ARTISAN TOOLS
 		training.Alchemist_Supplies = Tool("Alchemist's Supplies")
 		training.Brewer_Supplies = Tool("Brewer's Supplies")
 		training.Calligrapher_Supplies = Tool("Calligrapher's Supplies")
-		training.Carpenter_Tools = Tool("Carpenter's Tools")
+		training.Woodworker_Tools = Tool("Woodworker's Tools")
 		training.Cartographer_Tools = Tool("Cartographer's Tools")
 		training.Cobbler_Tools = Tool("Cobbler's Tools")
 		training.Cook_Utensils = Tool("Cook's Utensils")
@@ -211,7 +210,10 @@ class Training:
 		training.Smith_Tools = Tool("Smith's Tools")
 		training.Tinker_Tools = Tool("Tinker's Tools")
 		training.Weaver_Tools = Tool("Weaver's Tools")
-		training.Woodcarver_Tools = Tool("Woodcarver's Tools")
+		# One tool each (QST-0116): the old names are the same object.
+		training.Carpenter_Tools = training.Woodworker_Tools
+		training.Woodcarver_Tools = training.Woodworker_Tools
+		training.Navigator_Tools = training.Cartographer_Tools
 
 
 	def Set_Weapon_Training(training):
@@ -549,9 +551,9 @@ class Training:
 					skill_names.remove(s)
 					return training.activate_proficiencies(n,skill_names)
 
-			elif s == "Cartographer's Supplies":
-				if training.Cartographer_Supplies.proficiency_level < 1:
-					training.Cartographer_Supplies.proficiency_level = 1
+			elif s in ("Cartographer's Tools", "Navigator's Tools"):
+				if training.Cartographer_Tools.proficiency_level < 1:
+					training.Cartographer_Tools.proficiency_level = 1
 					skill_names.remove(s)
 					return training.activate_proficiencies(n-1,skill_names)
 				else:
@@ -773,9 +775,9 @@ class Training:
 					skill_names.remove(s)
 					return training.activate_expertise(n,skill_names)
 
-			elif s == "Cartographer's Supplies":
-				if training.Cartographer_Supplies.proficiency_level < 2:
-					training.Cartographer_Supplies.proficiency_level = 2
+			elif s in ("Cartographer's Tools", "Navigator's Tools"):
+				if training.Cartographer_Tools.proficiency_level < 2:
+					training.Cartographer_Tools.proficiency_level = 2
 					skill_names.remove(s)
 					return training.activate_expertise(n-1,skill_names)
 				else:

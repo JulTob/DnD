@@ -32,7 +32,10 @@ from AtlasActorLudi.Grimoire_of_Skills import Char_Skills
 # They look unused from a glance at the Background Tags; they are not.  See the
 # banner on _still_open before removing either.
 from AtlasActorLudi.ProficiencyKit import Is_Trained
-from AtlasInventarium.ToolsKit import TOOLS_BY_KEY
+from AtlasInventarium.ToolsKit import (
+	ARTISAN_TOOLS as _ARTISAN_TOOL_DEFINITIONS,
+	TOOLS_BY_KEY,
+	)
 from AtlasLusoris.AtlasOfBackgrounds import (
 	Register_Official_2024_Backgrounds,
 	)
@@ -67,24 +70,12 @@ _ALL_ABILITIES = (
 	"CHA",
 	)
 
-ARTISAN_TOOLS = (
-	"Alchemist_Supplies",
-	"Brewer_Supplies",
-	"Calligrapher_Supplies",
-	"Carpenter_Tools",
-	"Cartographer_Tools",
-	"Cobbler_Tools",
-	"Cook_Utensils",
-	"Glassblower_Tools",
-	"Jeweler_Tools",
-	"Leatherworker_Tools",
-	"Mason_Tools",
-	"Painter_Supplies",
-	"Potter_Tools",
-	"Smith_Tools",
-	"Tinker_Tools",
-	"Weaver_Tools",
-	"Woodcarver_Tools",
+# The Artisan's Tools menu, as keys.  ToolsKit authors the list (QST-0116): a
+# copy kept here drifted once, listing Carpenter's and Woodcarver's Tools after
+# they became one tool and drawing Woodworker's Tools twice as often.
+ARTISAN_TOOLS = tuple(
+	tool.key
+	for tool in _ARTISAN_TOOL_DEFINITIONS
 	)
 
 
@@ -1232,11 +1223,7 @@ Farmer = _Build_Player_Handbook_Background(
 		"Animal_Handling",
 		"Nature",
 		),
-	# Settled as Woodworker's Tools, and ToolsKit already makes Carpenter_Tools
-	# its alias.  The sheet's Char_Skills has no Woodworker_Tools attribute yet,
-	# so the settled key would grant nothing: keep the key that reaches the sheet
-	# until QST-0116.1 gives the tool one identity.
-	tools="Carpenter_Tools",
+	tools="Woodworker_Tools",
 	origin_feat=Tough,
 	title="Farmer",
 	description=(
@@ -1882,7 +1869,7 @@ Commoner = Build_Background(
 		"Animal_Handling",
 		"Insight",
 		),
-	tools="Carpenter_Tools",
+	tools="Woodworker_Tools",
 	origin_feat=Tough,
 	title="Local Roots",
 	description=(
@@ -2204,7 +2191,7 @@ Pirate = Build_Background(
 		"Acrobatics",
 		"Intimidation",
 		),
-	tools="Navigator_Tools",
+	tools="Cartographer_Tools",
 	origin_feat=Tavern_Brawler,
 	title="Freebooter's Reputation",
 	description=(
@@ -2342,7 +2329,7 @@ Traveler = Build_Background(
 		"Insight",
 		"Survival",
 		),
-	tools="Navigator_Tools",
+	tools="Cartographer_Tools",
 	origin_feat=Lucky,
 	title="Roadwise",
 	description=(

@@ -15,7 +15,7 @@ def setObjects(char):
 		"Alchemist's Supplies": 'Intelligence',
 		"Brewer's Supplies": 'Intelligence',
 		"Calligrapher's Supplies": 'Dexterity',
-		"Carpenter's Tools": 'Strength',
+		"Woodworker's Tools": 'Strength or Dexterity',
 		"Cartographer's Tools": 'Wisdom',
 		"Cobbler's Tools": 'Dexterity',
 		"Cook's Utensils": 'Wisdom',
@@ -28,8 +28,6 @@ def setObjects(char):
 		"Smith's Tools": 'Strength',
 		"Tinker's Tools": 'Dexterity',
 		"Weaver's Tools": 'Dexterity',
-		"Woodcarver's Tools": 'Dexterity',
-		"Navigator's Tools": 'Wisdom',
 		"Herbalism Kit": 'Intelligence',
 		"Gaming Set": 'Wisdom',
 		"Forgery Kit": 'Dexterity',
@@ -65,12 +63,15 @@ def setObjects(char):
 			description = "Ability: Dexterity")
 		char.equipment.buy_item(calligrapher_supplies)
 
-	if char.skills.Carpenter_Tools.is_proficient():
-		carpenter_Tools = objects.Object(
-			name = "Carpenter's Tools",
+	# Carpenter_Tools and Woodcarver_Tools are this same tool now, and
+	# Navigator_Tools is Cartographer_Tools (QST-0116): one branch each, or a
+	# woodworker would buy the kit twice.
+	if char.skills.Woodworker_Tools.is_proficient():
+		woodworker_Tools = objects.Object(
+			name = "Woodworker's Tools",
 			value=20, weight=9,
-			description = "Ability: Strength")
-		char.equipment.buy_item(carpenter_Tools)
+			description = "Ability: Strength or Dexterity")
+		char.equipment.buy_item(woodworker_Tools)
 
 	if char.skills.Cartographer_Tools.is_proficient():
 		cartographer_Tools = objects.Object(
@@ -155,20 +156,6 @@ def setObjects(char):
 			value=1, weight=5,
 			description = "Ability: Dexterity")
 		char.equipment.buy_item(weaver_Tools)
-
-	if char.skills.Woodcarver_Tools.is_proficient():
-		woodcarver_Tools = objects.Object(
-			name = "Woodcarver's Tools",
-			value=1, weight=5,
-			description = "Ability: Dexterity")
-		char.equipment.buy_item(woodcarver_Tools)
-
-	if char.skills.Navigator_Tools.is_proficient():
-		navigator_Tools = objects.Object(
-			name = "Navigator's Tools",
-			value=25, weight=2,
-			description = "Ability: Wisdom")
-		char.equipment.buy_item(navigator_Tools)
 
 	if char.skills.Herbalism_Kit.is_proficient():
 		herbalism_Kit = objects.Object(

@@ -67,16 +67,27 @@ Calligraphers_Supplies = _tool(
 		"You can spot a forged signature, match an unfamiliar hand, and set "
 		"down a document that looks like it came from a chancery.",
 		)
-Carpenters_Tools = _tool(
-		"Carpenter's Tools", "Strength", 6, 8,
+# GenLegend keeps one Woodworker's Tools where the 2024 table lists
+# Carpenter's and Woodcarver's Tools (QST-0116): priced as the carpenter's kit,
+# and both trades' lines kept.
+Woodworkers_Tools = _tool(
+		"Woodworker's Tools", "Strength or Dexterity", 6, 8,
 		"You can bar a door so it holds, build a shelter that survives the "
-		"night, and see at a glance which beam is about to give.",
+		"night, and see at a glance which beam is about to give. You can shape "
+		"an arrow or a splint, carve a likeness or a seal, and tell worm-eaten "
+		"timber from sound wood before you trust it.",
 		)
+# Navigation is one application of Cartography, not a second kit (QST-0116).
 Cartographers_Tools = _tool(
 		"Cartographer's Tools", "Wisdom", 6, 15,
 		"You can draw a route others can follow, estimate a march from the "
-		"lie of the land, and tell when a map has been quietly altered.",
+		"lie of the land, and tell when a map has been quietly altered. You "
+		"can hold a course out of sight of land, find your position from the "
+		"stars, and know when a guide is leading you astray.",
 		)
+Carpenters_Tools = Woodworkers_Tools
+Woodcarvers_Tools = Woodworkers_Tools
+Navigators_Tools = Cartographers_Tools
 Cobblers_Tools = _tool(
 		"Cobbler's Tools", "Dexterity", 5, 5,
 		"You can keep a company walking, read where a boot's owner has been "
@@ -132,18 +143,13 @@ Weavers_Tools = _tool(
 		"You can mend and alter clothing, recognise a region or house by its "
 		"weave, and turn cloth into rope, sail, or disguise.",
 		)
-Woodcarvers_Tools = _tool(
-		"Woodcarver's Tools", "Dexterity", 5, 1,
-		"You can shape an arrow or a splint, carve a likeness or a seal, and "
-		"tell worm-eaten timber from sound wood before you trust it.",
-		)
 
 ARTISANS_TOOLS: tuple[Item, ...] = (
 		Alchemists_Supplies, Brewers_Supplies, Calligraphers_Supplies,
-		Carpenters_Tools, Cartographers_Tools, Cobblers_Tools, Cooks_Utensils,
+		Woodworkers_Tools, Cartographers_Tools, Cobblers_Tools, Cooks_Utensils,
 		Glassblowers_Tools, Jewelers_Tools, Leatherworkers_Tools, Masons_Tools,
 		Painters_Supplies, Potters_Tools, Smiths_Tools, Tinkers_Tools,
-		Weavers_Tools, Woodcarvers_Tools,
+		Weavers_Tools,
 		)
 
 
@@ -166,11 +172,6 @@ Herbalism_Kit = _tool(
 		"Herbalism Kit", "Intelligence", 3, 5,
 		"You can identify a plant and what it does to a body, treat a fever "
 		"or a poisoning on the road, and gather what you need as you travel.",
-		)
-Navigators_Tools = _tool(
-		"Navigator's Tools", "Wisdom", 2, 25,
-		"You can hold a course out of sight of land, find your position from "
-		"the stars, and know when a guide is leading you astray.",
 		)
 Poisoners_Kit = _tool(
 		"Poisoner's Kit", "Intelligence", 2, 50,
@@ -203,7 +204,7 @@ Musical_Instrument = _tool(
 		)
 
 OTHER_TOOLS: tuple[Item, ...] = (
-		Disguise_Kit, Forgery_Kit, Herbalism_Kit, Navigators_Tools,
+		Disguise_Kit, Forgery_Kit, Herbalism_Kit,
 		Poisoners_Kit, Thieves_Tools, Gaming_Set, Musical_Instrument,
 		)
 
@@ -213,6 +214,14 @@ TOOLS_BY_NAME: dict[str, Item] = {
 		tool.name: tool
 		for tool in TOOLS
 		}
+# The names a merged tool used to have still find it.
+TOOLS_BY_NAME.update(
+		{
+			"Carpenter's Tools": Woodworkers_Tools,
+			"Woodcarver's Tools": Woodworkers_Tools,
+			"Navigator's Tools": Cartographers_Tools,
+			}
+		)
 
 
 __all__ = (
@@ -228,7 +237,10 @@ def _self_test():
 	assert len(tool_names) == len(set(tool_names)), (
 			"duplicate tool names in the ledger"
 			)
-	assert len(ARTISANS_TOOLS) == 17, len(ARTISANS_TOOLS)
+	assert len(ARTISANS_TOOLS) == 16, len(ARTISANS_TOOLS)
+	assert TOOLS_BY_NAME["Carpenter's Tools"] is Woodworkers_Tools
+	assert TOOLS_BY_NAME["Woodcarver's Tools"] is Woodworkers_Tools
+	assert TOOLS_BY_NAME["Navigator's Tools"] is Cartographers_Tools
 
 	for tool in TOOLS:
 		assert tool.ability, f"{tool.name} has no governing ability"

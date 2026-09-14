@@ -340,13 +340,12 @@ class Char_Skills:
 
 		self.Herbalism_Kit = Tool("Herbalism Kit")
 
-		self.Navigator_Tools = Tool("Navigator's Tools")
 
 		# ARTISAN TOOLS
 		self.Alchemist_Supplies = Tool("Alchemist's Supplies")
 		self.Brewer_Supplies = Tool("Brewer's Supplies")
 		self.Calligrapher_Supplies = Tool("Calligrapher's Supplies")
-		self.Carpenter_Tools = Tool("Carpenter's Tools")
+		self.Woodworker_Tools = Tool("Woodworker's Tools")
 		self.Cartographer_Tools = Tool("Cartographer's Tools")
 		self.Cobbler_Tools = Tool("Cobbler's Tools")
 		self.Cook_Utensils = Tool("Cook's Utensils")
@@ -359,7 +358,11 @@ class Char_Skills:
 		self.Smith_Tools = Tool("Smith's Tools")
 		self.Tinker_Tools = Tool("Tinker's Tools")
 		self.Weaver_Tools = Tool("Weaver's Tools")
-		self.Woodcarver_Tools = Tool("Woodcarver's Tools")
+		# One tool each (QST-0116): the old names are the same object, so a
+		# grant through either spelling lands on the one the sheet prints.
+		self.Carpenter_Tools = self.Woodworker_Tools
+		self.Woodcarver_Tools = self.Woodworker_Tools
+		self.Navigator_Tools = self.Cartographer_Tools
 
 		# Weapons
 		self.Simple_Weapons = Weapon('Simple Weapons')
@@ -718,9 +721,9 @@ class Char_Skills:
 					skill_names.remove(s)
 					return self.activate_proficiencies(n,skill_names)
 
-			elif s == "Cartographer's Supplies":
-				if self.Cartographer_Supplies.proficiency_level < 1:
-					self.Cartographer_Supplies.proficiency_level = 1
+			elif s in ("Cartographer's Tools", "Navigator's Tools"):
+				if self.Cartographer_Tools.proficiency_level < 1:
+					self.Cartographer_Tools.proficiency_level = 1
 					skill_names.remove(s)
 					return self.activate_proficiencies(n-1,skill_names)
 				else:
@@ -945,9 +948,9 @@ class Char_Skills:
 					skill_names.remove(s)
 					return self.activate_expertise(n,skill_names)
 
-			elif s == "Cartographer's Supplies":
-				if self.Cartographer_Supplies.proficiency_level < 2:
-					self.Cartographer_Supplies.proficiency_level = 2
+			elif s in ("Cartographer's Tools", "Navigator's Tools"):
+				if self.Cartographer_Tools.proficiency_level < 2:
+					self.Cartographer_Tools.proficiency_level = 2
 					skill_names.remove(s)
 					return self.activate_expertise(n-1,skill_names)
 				else:
@@ -1018,12 +1021,11 @@ def get_other_proficiencies(skills):
 			skills.Disguise_Kit,
 			skills.Forgery_Kit,
 			skills.Gaming_Set,
-			skills.Navigator_Tools,
 			skills.Herbalism_Kit,
 			skills.Alchemist_Supplies,
 			skills.Brewer_Supplies,
 			skills.Calligrapher_Supplies,
-			skills.Carpenter_Tools,
+			skills.Woodworker_Tools,
 			skills.Cartographer_Tools,
 			skills.Cobbler_Tools,
 			skills.Cook_Utensils,
@@ -1036,7 +1038,6 @@ def get_other_proficiencies(skills):
 			skills.Smith_Tools,
 			skills.Tinker_Tools,
 			skills.Weaver_Tools,
-			skills.Woodcarver_Tools,
 		] if tool.is_proficient()
 	]
 	# 2. add weapon proficiencies (avoid duplicates)

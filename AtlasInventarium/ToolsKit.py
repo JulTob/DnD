@@ -366,7 +366,9 @@ Woodworker_Tools = _Tool(
 	)
 
 # The 2024 rules split structural and carved woodwork into two proficiencies.
-# GenLegend treats both as one Practice so one choice cannot grant it twice.
+# GenLegend keeps one Woodworker's Tools (a house rule, Julio 2026-09-14,
+# QST-0116), so one choice cannot grant it twice.  The old names stay public
+# aliases of the same definition, here, on the sheet, and in the item ledger.
 Carpenter_Tools = Woodworker_Tools
 Woodcarver_Tools = Woodworker_Tools
 Cartographer_Tools = _Tool(
@@ -421,7 +423,8 @@ Cartographer_Tools = _Tool(
 		),
 	)
 
-# Navigation is one application of Cartography, not a second proficiency.
+# Navigation is one application of Cartography, not a second proficiency
+# (a house rule, like the woodworker's; QST-0116).
 # Keep the former key readable for existing saves and rule declarations.
 Navigator_Tools = Cartographer_Tools
 Cobbler_Tools = _Tool(
