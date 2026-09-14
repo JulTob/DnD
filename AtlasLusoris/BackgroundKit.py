@@ -1097,10 +1097,33 @@ Charlatan = _Build_Player_Handbook_Background(
 		),
 	tools="Forgery_Kit",
 	origin_feat=Skilled,
-	title="False Identity",
+	title="Charlatan",
 	description=(
-		"You maintain a convincing second identity supported by practiced "
-		"mannerisms, documents, and useful acquaintances."
+		"You have never met a mark you couldn't read or a story you couldn't "
+		"improve. Somewhere along the way you learned that the truth is not as "
+		"important as your objective. Facts are to be used or set aside as the "
+		"moment asks, and most people will believe a nice story over their own "
+		"eyes. You mastered people, and learned how to move them, scare them, "
+		"or even inspire them. Whether you turn that gift on the needy, the "
+		"corrupt, or anyone with a full purse is your own affair. But a life of "
+		"masks has shaped you into someone you barely recognize, and brought "
+		"you enemies who would like their gold back."
+		),
+	hook=Entry(
+		title="False Identity",
+		definition=(
+			"You are never only one person. You can be a grieving widow, a visiting "
+			"dignitary, a healer with a miracle cure, or a nobody not worth a "
+			"second glance, complete with the reputation, the papers, the quick "
+			"hands, and the steady nerve to carry it off. You keep at least one "
+			"false identity fully dressed: a name, a history, papers that pass "
+			"inspection, and people who will swear they have known that name for "
+			"years. Given time and something to copy, you can forge a document to "
+			"suit almost any need, from a letter of introduction to an official "
+			"writ. The danger, and the opportunity, is that a good lie takes on a "
+			"life of its own: sooner or later someone comes looking for the person "
+			"you invented, wanting something only they can give."
+			),
 		),
 	)
 
