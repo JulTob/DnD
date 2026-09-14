@@ -1144,10 +1144,31 @@ Criminal = _Build_Player_Handbook_Background(
 		),
 	tools="Thieves_Tools",
 	origin_feat=Alert,
-	title="Criminal Contact",
+	title="Criminal",
 	description=(
-		"You know how to reach people who trade in secrets, contraband, and "
-		"quietly solved problems."
+		"You have lived on the wrong side of the law, and you learned its "
+		"lessons well: how to move without being seen, how to open what someone "
+		"wanted kept shut, how to read a room for the exits and the easy marks "
+		"and the one person watching too closely. You know the folk who work "
+		"the dark hours (the fences, the smugglers, the lookouts, the ones who "
+		"never give a straight name) and how to speak to them without saying "
+		"too much. Maybe you did it to survive, or for the thrill, or because "
+		"the law protected everyone but you. Whatever set you on that road, the "
+		"habits it taught you do not wash off, and neither, sometimes, do the "
+		"debts. Even the ones you thought were already paid off."
+		),
+	hook=Entry(
+		title="Criminal Contact",
+		definition=(
+			"You know how the underworld passes what it does not want overheard. "
+			"Wherever you go, you can find the local version of the people you used "
+			"to run with (a fence, a smuggler, a tavern that asks no questions) and "
+			"make yourself known without a word out of place. Through them you can "
+			"get a message to almost anyone, quietly, or learn who really runs the "
+			"streets and what they are afraid of. The catch is that favors in that "
+			"world are never free, and the people who trade in them remember "
+			"exactly what they are owed."
+			),
 		),
 	)
 
