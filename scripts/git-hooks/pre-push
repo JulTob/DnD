@@ -5,6 +5,11 @@ set -euo pipefail
 ROOT="$(git rev-parse --show-toplevel)"
 cd "$ROOT"
 
+# Finder duplicates of ref files ("name 2") break every fetch; repair them.
+if [[ -x "${ROOT}/scripts/repair-duplicate-refs.sh" ]]; then
+	"${ROOT}/scripts/repair-duplicate-refs.sh"
+fi
+
 while read -r local_ref local_sha remote_ref remote_sha; do
 	[[ -z "${remote_ref:-}" ]] && continue
 	if [[ "${remote_ref}" == *"/main" ]] || [[ "${remote_ref}" == *"/product" ]]; then

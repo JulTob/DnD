@@ -3,7 +3,8 @@ set -euo pipefail
 
 ROOT="$(git rev-parse --show-toplevel)"
 HOOK_SRC="${ROOT}/scripts/git-hooks"
-HOOK_DST="${ROOT}/.git/hooks"
+# Hooks live in the common git dir, which a worktree's .git file points to.
+HOOK_DST="$(cd "$(git rev-parse --git-common-dir)" && pwd)/hooks"
 
 for hook in pre-commit pre-push; do
 	src="${HOOK_SRC}/${hook}"
