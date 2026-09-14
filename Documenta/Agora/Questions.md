@@ -30,6 +30,7 @@ Append a row. Keep it to one line; detail goes in the Dialog file.
 | Q-0012 | Which later official Background sources and setting-specific options should the default generators expose? | Julio | Julio's product review first | `Dialogs/0009-official-background-catalogue-review.md` | 🟡 implemented catalogue awaiting review |
 | Q-0013 | Should ability scores follow interests the build declares for its **goal level** (counting what the finished character actually uses) rather than a class's static preference order? | Julio | Architecture (Druid), Methods (Wizard), Contracts (Warlock), Flow (Sorcerer), Testing (Rogue), Simplicity (Monk), Lorekeeper | `Dialogs/0010-build-interests-and-goal-level.md` | 🟢 converged — awaiting Julio |
 | Q-0013 | Should ability scores follow interests the build declares for its **goal level** (counting what the finished character actually uses) rather than a class's static preference order? | Julio | Architecture (Druid), Methods (Wizard), Contracts (Warlock), Flow (Sorcerer), Testing (Rogue), Simplicity (Monk), Lorekeeper | `Dialogs/0010-build-interests-and-goal-level.md` | 🟢 converged — awaiting Julio |
+| Q-0034 | Tools: how does a tool get one authored identity, so the sheet, menus, training ledger and its bridge cannot disagree? (QST-0116) | Agent (Claude), from Julio's review 2026-09-13 | Architecture (Druid), Contracts (Warlock), Repair (Cleric), Simplicity (Monk), Testing (Rogue); Lorekeeper advisory | `Dialogs/0025-one-identity-for-a-tool.md` | 🔵 decided by Julio 2026-09-14 (QST-0116 Solved) |
 
 ---
 

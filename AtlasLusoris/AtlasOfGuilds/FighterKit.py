@@ -19,6 +19,9 @@ from types import MappingProxyType
 from TagKit import Pre, Report, Tag
 
 from AtlasActorLudi.CharactersKit import Character
+from AtlasInventarium.ToolsKit import (
+	ARTISAN_TOOLS as _ARTISAN_TOOL_DEFINITIONS,
+	)
 from AtlasLusoris.GuildKit import Build_Specialization, Fighter
 
 
@@ -451,23 +454,10 @@ FIGHTER_SKILLS = (
 	"Survival",
 	)
 
-ARTISAN_TOOLS = (
-	"Alchemist's Supplies",
-	"Brewer's Supplies",
-	"Calligrapher's Supplies",
-	"Woodworker's Tools",
-	"Cartographer's Tools",
-	"Cobbler's Tools",
-	"Cook's Utensils",
-	"Glassblower's Tools",
-	"Jeweler's Tools",
-	"Leatherworker's Tools",
-	"Mason's Tools",
-	"Painter's Supplies",
-	"Potter's Tools",
-	"Smith's Tools",
-	"Tinker's Tools",
-	"Weaver's Tools",
+# Display names of the Artisan's Tools, from ToolsKit's one list (QST-0116).
+ARTISAN_TOOLS = tuple(
+	tool.name
+	for tool in _ARTISAN_TOOL_DEFINITIONS
 	)
 
 
