@@ -366,7 +366,9 @@ Woodworker_Tools = _Tool(
 	)
 
 # The 2024 rules split structural and carved woodwork into two proficiencies.
-# GenLegend treats both as one Practice so one choice cannot grant it twice.
+# GenLegend keeps one Woodworker's Tools (a house rule, Julio 2026-09-14,
+# QST-0116), so one choice cannot grant it twice.  The old names stay public
+# aliases of the same definition, here, on the sheet, and in the item ledger.
 Carpenter_Tools = Woodworker_Tools
 Woodcarver_Tools = Woodworker_Tools
 Cartographer_Tools = _Tool(
@@ -421,7 +423,8 @@ Cartographer_Tools = _Tool(
 		),
 	)
 
-# Navigation is one application of Cartography, not a second proficiency.
+# Navigation is one application of Cartography, not a second proficiency
+# (a house rule, like the woodworker's; QST-0116).
 # Keep the former key readable for existing saves and rule declarations.
 Navigator_Tools = Cartographer_Tools
 Cobbler_Tools = _Tool(
@@ -1363,6 +1366,86 @@ TOOLS_BY_KEY.update(
 		"Navigator_Tools": Cartographer_Tools,
 		}
 	)
+
+
+def Sheet_Tool_Attributes() -> tuple[tuple[str, str], ...]:
+	"""
+	Each tool attribute of the old mutable sheet, once, with the name it prints.
+
+	Derived from the catalog so the sheet cannot keep its own list: a kind
+	(Musical Instrument, Gaming Set) is one attribute for all its variants.
+	"""
+	attributes: dict[str, str] = {}
+
+	for tool in TOOLS:
+		attributes.setdefault(
+			tool.legacy_attribute,
+			tool.category if tool.variant else tool.name,
+			)
+
+	return tuple( attributes.items() )
+
+
+def Sheet_Tool_Aliases() -> tuple[tuple[str, str], ...]:
+	"""Old sheet names that are another tool now, as (alias, attribute) pairs."""
+	return tuple(
+		( key, tool.legacy_attribute )
+		for key, tool in TOOLS_BY_KEY.items()
+		if key != tool.key
+		)
+
+
+def Tool_Proficiency_Names(
+		character,
+		skills=None,
+		) -> tuple[str, ...]:
+	"""
+	The tools a Character knows, by name, in catalog order.
+
+	Every instrument and game is named, because the training ledger knows which
+	one.  A kind the old sheet granted without naming one still prints as the
+	kind, so nothing a Character holds disappears from the list.
+	"""
+	names: list[str] = []
+
+	if character is not None:
+		names.extend(
+			tool.name
+			for tool in TOOLS
+			if Is_Trained(
+				character,
+				tool,
+				)
+			)
+
+	if skills is None:
+		return tuple( names )
+
+	for attribute, name in Sheet_Tool_Attributes():
+		legacy = getattr(
+			skills,
+			attribute,
+			None,
+			)
+
+		if legacy is None or not legacy.is_proficient():
+			continue
+
+		variants = tuple(
+			tool
+			for tool in TOOLS
+			if tool.legacy_attribute == attribute
+			)
+
+		if any(
+			tool.name in names
+			for tool in variants
+			):
+			continue
+
+		names.append( name )
+
+	return tuple( names )
 
 
 def Find_Practice_Entries(

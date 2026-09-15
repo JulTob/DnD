@@ -328,38 +328,20 @@ class Char_Skills:
 		self.Performance = Skill('Performance', AS.CHA, ProficiencyBonus)
 		self.Persuasion = Skill('Persuasion', AS.CHA, ProficiencyBonus)
 
-		# Tools
-		self.Thieves_Tools = Tool("Thieves' Tools")
-		self.Disguise_Kit = Tool("Disguise Kit")
-		self.Forgery_Kit = Tool("Forgery Kit")
-		self.Poisoners_Kit = Tool("Poisoner's Kit")
+		# Tools: one attribute per tool in ToolsKit's catalog, a kind (Musical
+		# Instrument, Gaming Set) standing for all its variants, and every old
+		# name the same object as the tool it became (QST-0116).  The sheet
+		# keeps no list of its own.
+		from AtlasInventarium.ToolsKit import (
+			Sheet_Tool_Aliases,
+			Sheet_Tool_Attributes,
+			)
 
+		for attribute, name in Sheet_Tool_Attributes():
+			setattr(self, attribute, Tool(name))
 
-		self.Musical_Instrument = Tool("Musical Instrument")
-		self.Gaming_Set = Tool("Gaming Set")
-
-		self.Herbalism_Kit = Tool("Herbalism Kit")
-
-		self.Navigator_Tools = Tool("Navigator's Tools")
-
-		# ARTISAN TOOLS
-		self.Alchemist_Supplies = Tool("Alchemist's Supplies")
-		self.Brewer_Supplies = Tool("Brewer's Supplies")
-		self.Calligrapher_Supplies = Tool("Calligrapher's Supplies")
-		self.Carpenter_Tools = Tool("Carpenter's Tools")
-		self.Cartographer_Tools = Tool("Cartographer's Tools")
-		self.Cobbler_Tools = Tool("Cobbler's Tools")
-		self.Cook_Utensils = Tool("Cook's Utensils")
-		self.Glassblower_Tools = Tool("Glassblower's Tools")
-		self.Jeweler_Tools = Tool("Jeweler's Tools")
-		self.Leatherworker_Tools = Tool("Leatherworker's Tools")
-		self.Mason_Tools = Tool("Mason's Tools")
-		self.Painter_Supplies = Tool("Painter's Supplies")
-		self.Potter_Tools = Tool("Potter's Tools")
-		self.Smith_Tools = Tool("Smith's Tools")
-		self.Tinker_Tools = Tool("Tinker's Tools")
-		self.Weaver_Tools = Tool("Weaver's Tools")
-		self.Woodcarver_Tools = Tool("Woodcarver's Tools")
+		for alias, attribute in Sheet_Tool_Aliases():
+			setattr(self, alias, getattr(self, attribute))
 
 		# Weapons
 		self.Simple_Weapons = Weapon('Simple Weapons')
@@ -718,9 +700,9 @@ class Char_Skills:
 					skill_names.remove(s)
 					return self.activate_proficiencies(n,skill_names)
 
-			elif s == "Cartographer's Supplies":
-				if self.Cartographer_Supplies.proficiency_level < 1:
-					self.Cartographer_Supplies.proficiency_level = 1
+			elif s in ("Cartographer's Tools", "Navigator's Tools"):
+				if self.Cartographer_Tools.proficiency_level < 1:
+					self.Cartographer_Tools.proficiency_level = 1
 					skill_names.remove(s)
 					return self.activate_proficiencies(n-1,skill_names)
 				else:
@@ -945,9 +927,9 @@ class Char_Skills:
 					skill_names.remove(s)
 					return self.activate_expertise(n,skill_names)
 
-			elif s == "Cartographer's Supplies":
-				if self.Cartographer_Supplies.proficiency_level < 2:
-					self.Cartographer_Supplies.proficiency_level = 2
+			elif s in ("Cartographer's Tools", "Navigator's Tools"):
+				if self.Cartographer_Tools.proficiency_level < 2:
+					self.Cartographer_Tools.proficiency_level = 2
 					skill_names.remove(s)
 					return self.activate_expertise(n-1,skill_names)
 				else:
@@ -1009,36 +991,19 @@ class Char_Skills:
 			self.Persuasion ,
 		]
 
-def get_other_proficiencies(skills):
-	result = [
-		tool.name for tool in [
-			skills.Musical_Instrument,
-			skills.Thieves_Tools,
-			skills.Poisoners_Kit,
-			skills.Disguise_Kit,
-			skills.Forgery_Kit,
-			skills.Gaming_Set,
-			skills.Navigator_Tools,
-			skills.Herbalism_Kit,
-			skills.Alchemist_Supplies,
-			skills.Brewer_Supplies,
-			skills.Calligrapher_Supplies,
-			skills.Carpenter_Tools,
-			skills.Cartographer_Tools,
-			skills.Cobbler_Tools,
-			skills.Cook_Utensils,
-			skills.Glassblower_Tools,
-			skills.Jeweler_Tools,
-			skills.Leatherworker_Tools,
-			skills.Mason_Tools,
-			skills.Painter_Supplies,
-			skills.Potter_Tools,
-			skills.Smith_Tools,
-			skills.Tinker_Tools,
-			skills.Weaver_Tools,
-			skills.Woodcarver_Tools,
-		] if tool.is_proficient()
-	]
+def get_other_proficiencies(skills, character=None):
+	from AtlasInventarium.ToolsKit import Tool_Proficiency_Names
+
+	# 1. tools, each instrument and game by name: the Character's training
+	# ledger knows which (ToolsKit reads it); the sheet alone knows only kinds.
+	result = list(
+		Tool_Proficiency_Names(
+			character
+			if character is not None
+			else getattr(skills, "character", None),
+			skills,
+			)
+		)
 	# 2. add weapon proficiencies (avoid duplicates)
 	for wpn in skills.get_proficient_weapons():
 		if wpn.name not in result:

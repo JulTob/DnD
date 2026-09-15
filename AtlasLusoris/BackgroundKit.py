@@ -27,12 +27,21 @@ from AtlasActorLudi.CharactersKit import (
 	Player,
 	)
 from AtlasActorLudi.Grimoire_of_AbilityScores import AbilityScores
-from AtlasActorLudi.Grimoire_of_Skills import Char_Skills
-# RECOVERY NOTE 2026-08-30: both imports below exist only for _still_open().
-# They look unused from a glance at the Background Tags; they are not.  See the
-# banner on _still_open before removing either.
-from AtlasActorLudi.ProficiencyKit import Is_Trained
-from AtlasInventarium.ToolsKit import TOOLS_BY_KEY
+# A Background's Skills and Tool are training like any Feature's: they are
+# committed to the ledger, which projects them onto the sheet (QST-0116.4).
+from AtlasActorLudi.ProficiencyKit import (
+	Apply_Training_Record,
+	Commit_Training_Gain,
+	Ensure_Training_Record,
+	Is_Trained,
+	Provenance,
+	Training_Batch,
+	Training_Grant,
+	)
+from AtlasActorLudi.SkillsKit import SKILLS_BY_KEY
+from AtlasInventarium.ToolsKit import (
+	ARTISAN_TOOLS as _ARTISAN_TOOL_DEFINITIONS,
+	)
 from AtlasLusoris.AtlasOfBackgrounds import (
 	Register_Official_2024_Backgrounds,
 	)
@@ -52,6 +61,7 @@ from AtlasLusoris.FeaturesKit import (
 	Skilled,
 	Tavern_Brawler,
 	Tough,
+	Background_Tool_Menu,
 	grant,
 	)
 from AtlasLusoris.GuildKit import guild_ability_prefs
@@ -67,24 +77,12 @@ _ALL_ABILITIES = (
 	"CHA",
 	)
 
-ARTISAN_TOOLS = (
-	"Alchemist_Supplies",
-	"Brewer_Supplies",
-	"Calligrapher_Supplies",
-	"Carpenter_Tools",
-	"Cartographer_Tools",
-	"Cobbler_Tools",
-	"Cook_Utensils",
-	"Glassblower_Tools",
-	"Jeweler_Tools",
-	"Leatherworker_Tools",
-	"Mason_Tools",
-	"Painter_Supplies",
-	"Potter_Tools",
-	"Smith_Tools",
-	"Tinker_Tools",
-	"Weaver_Tools",
-	"Woodcarver_Tools",
+# The Artisan's Tools menu, as keys.  ToolsKit authors the list (QST-0116): a
+# copy kept here drifted once, listing Carpenter's and Woodcarver's Tools after
+# they became one tool and drawing Woodworker's Tools twice as often.
+ARTISAN_TOOLS = tuple(
+	tool.key
+	for tool in _ARTISAN_TOOL_DEFINITIONS
 	)
 
 
@@ -582,40 +580,65 @@ def _grant_ability_boosts(
 			)
 
 
-def _grant_skills(
+def _commit_background_training(
 	char,
-	skill_names,
+	tag,
+	part: str,
+	capabilities,
 	):
-	skills = getattr(
-		char,
-		"skills",
-		None,
-		)
+	"""
+	Commit one part of a Background's training (its Skills or its Tool), once.
 
-	if not isinstance(
-		skills,
-		Char_Skills,
+	The grant ID is the Background's and the part's, so a replay finds the batch
+	already in the ledger and only projects it onto the sheet.  Nothing is drawn
+	twice, which matters for the Tool: a second draw could name another one under
+	the same ID.
+	"""
+	grant_id = f"Background.{tag.__name__}.{part}"
+
+	if any(
+		batch.grant_id == grant_id
+		for batch in Ensure_Training_Record(
+			char
+			).gains
 		):
-		char.background_skills = list(
-			skill_names
+		Apply_Training_Record(
+			char
 			)
 		return
 
-	for name in skill_names:
-		skill = getattr(
-			skills,
-			name,
-			None,
-			)
+	Commit_Training_Gain(
+		char,
+		Training_Batch(
+			grant_id=grant_id,
+			feature=tag,
+			grants=tuple(
+				Training_Grant(
+					capability
+					)
+				for capability in capabilities
+				),
+			provenance=Provenance(
+				source="Background",
+				locator=tag.NAME,
+				),
+			),
+		)
 
-		if (
-			skill is not None
-			and hasattr(
-				skill,
-				"set_proficiency",
-				)
-			):
-			skill.set_proficiency()
+
+def _grant_skills(
+	char,
+	tag,
+	):
+	_commit_background_training(
+		char,
+		tag,
+		"skills",
+		tuple(
+			SKILLS_BY_KEY[ name ]
+			for name in tag.SKILLS
+			),
+		)
 
 
 # ---------------------------------------------------------------------------
@@ -646,14 +669,14 @@ def _grant_skills(
 
 def _still_open(
 	char,
-	tools,
+	capabilities,
 	):
 	"""
 	Narrow a Background's Tool menu to what the Character has yet to learn.
 
 	A Background grants its Tool *after* its Origin Feat, and the two often
 	draw on the same menu: Artisan grants one Artisan's Tool and Crafter grants
-	three.  Reading the sheet at this point is what keeps those four distinct,
+	three.  Reading the ledger at this point is what keeps those four distinct,
 	and it is why the Feat itself no longer has to reserve anything -- see
 	``FeaturesKit.Reserved_Background_Training``.
 
@@ -661,69 +684,59 @@ def _still_open(
 	a Background that has nothing new to teach still grants a Tool rather than
 	failing to pick one.
 	"""
-	open_keys = [
-		key
-		for key in tools
-		if key not in TOOLS_BY_KEY
-		or not Is_Trained(
+	open_capabilities = [
+		capability
+		for capability in capabilities
+		if not Is_Trained(
 			char,
-			TOOLS_BY_KEY[ key ],
+			capability,
 			)
 		]
 
-	return open_keys or list( tools )
+	return open_capabilities or list( capabilities )
 
 
 def _grant_tool(
 	char,
-	tools,
+	tag,
 	):
-	if not tools:
+	"""
+	Grant a Background's one Tool: a named Tool, a pick from a menu, or a kind
+	drawn from a category.  A category is never granted as itself: "a Musical
+	Instrument" names no instrument, and the ledger can only answer for one it
+	was told (QST-0116.3).
+	"""
+	menu = Background_Tool_Menu(
+		tag
+		)
+
+	if not menu:
 		return
 
-	pick = (
-		char.Pick(
+	if any(
+		batch.grant_id == f"Background.{tag.__name__}.tool"
+		for batch in Ensure_Training_Record(
+			char
+			).gains
+		):
+		pick = None
+	else:
+		pick = char.Pick(
 			_still_open(
 				char,
-				tools,
-				)
-			)
-		if isinstance(
-			tools,
-			(
-				tuple,
-				list,
+				menu,
 				),
+			purpose="background.tool",
 			)
-		else tools
-		)
-	skills = getattr(
+
+	_commit_background_training(
 		char,
-		"skills",
-		None,
+		tag,
+		"tool",
+		(
+			pick,
+			) if pick is not None else (),
 		)
-
-	if not isinstance(
-		skills,
-		Char_Skills,
-		):
-		char.background_tool = pick
-		return
-
-	skill = getattr(
-		skills,
-		pick,
-		None,
-		)
-
-	if (
-		skill is not None
-		and hasattr(
-			skill,
-			"set_proficiency",
-			)
-		):
-		skill.set_proficiency()
 
 
 def _background_slots(
@@ -811,11 +824,11 @@ def _awaken(
 		)
 	_grant_skills(
 		char,
-		tag.SKILLS,
+		tag,
 		)
 	_grant_tool(
 		char,
-		tag.TOOLS,
+		tag,
 		)
 	_grant_narrative(
 		char,
@@ -1232,11 +1245,7 @@ Farmer = _Build_Player_Handbook_Background(
 		"Animal_Handling",
 		"Nature",
 		),
-	# Settled as Woodworker's Tools, and ToolsKit already makes Carpenter_Tools
-	# its alias.  The sheet's Char_Skills has no Woodworker_Tools attribute yet,
-	# so the settled key would grant nothing: keep the key that reaches the sheet
-	# until QST-0116.1 gives the tool one identity.
-	tools="Carpenter_Tools",
+	tools="Woodworker_Tools",
 	origin_feat=Tough,
 	title="Farmer",
 	description=(
@@ -1882,7 +1891,7 @@ Commoner = Build_Background(
 		"Animal_Handling",
 		"Insight",
 		),
-	tools="Carpenter_Tools",
+	tools="Woodworker_Tools",
 	origin_feat=Tough,
 	title="Local Roots",
 	description=(
@@ -2204,7 +2213,7 @@ Pirate = Build_Background(
 		"Acrobatics",
 		"Intimidation",
 		),
-	tools="Navigator_Tools",
+	tools="Cartographer_Tools",
 	origin_feat=Tavern_Brawler,
 	title="Freebooter's Reputation",
 	description=(
@@ -2342,7 +2351,7 @@ Traveler = Build_Background(
 		"Insight",
 		"Survival",
 		),
-	tools="Navigator_Tools",
+	tools="Cartographer_Tools",
 	origin_feat=Lucky,
 	title="Roadwise",
 	description=(
@@ -2665,8 +2674,14 @@ def Apply_Background(
 			)
 
 	if char not in tag:
+		# The Origin Feat awakens as a base of this Tag, before the Background
+		# grants its Tool.  Passing the Background lets the Feat reserve what
+		# the Background will certainly grant, so a random draw cannot spend a
+		# proficiency on it twice (Hermeticist's Crafter took Jeweler's Tools in
+		# 13 of 60 seeds without it).
 		tag(
-			char
+			char,
+			background_tag=tag,
 			)
 
 	return tag
@@ -2690,27 +2705,16 @@ def Apply_Background_Training(
 			f"Cannot apply training for unknown Background {name!r}."
 			)
 
-	skill_names = getattr(
-		char,
-		"background_skills",
-		tag.SKILLS,
-		)
-	tool = getattr(
-		char,
-		"background_tool",
-		None,
-		)
-
+	# Both parts are already in the ledger from the Background's Imprint; this
+	# projects them onto the sheet that now exists.
 	_grant_skills(
 		char,
-		skill_names,
+		tag,
 		)
-
-	if tool:
-		_grant_tool(
-			char,
-			tool,
-			)
+	_grant_tool(
+		char,
+		tag,
+		)
 
 	return char.skills
 
@@ -2976,6 +2980,91 @@ def _test_official_hooks():
 	assert "the {guild} School" in Scribe.DESCRIPTION
 
 
+def _test_background_training_reaches_the_ledger():
+	"""Skills and a named Tool reach the ledger once, and replay adds nothing."""
+	from AtlasInventarium.ToolsKit import MUSICAL_INSTRUMENTS
+
+	character = Character(
+		seed=26
+		)
+	Player(
+		character
+		)
+	Entertainer(
+		character
+		)
+
+	def batches():
+		return {
+			batch.grant_id: batch
+			for batch in Ensure_Training_Record(
+				character
+				).gains
+			if batch.grant_id.startswith( "Background." )
+			}
+
+	first = batches()
+	skills = first[ "Background.Entertainer.skills" ]
+	tool = first[ "Background.Entertainer.tool" ]
+
+	assert [
+		grant.capability.key
+		for grant in skills.grants
+		] == list( Entertainer.SKILLS )
+	assert len( tool.grants ) == 1
+	assert tool.grants[ 0 ].capability in MUSICAL_INSTRUMENTS
+	assert Is_Trained(
+		character,
+		tool.grants[ 0 ].capability,
+		)
+
+	_grant_skills(
+		character,
+		Entertainer,
+		)
+	_grant_tool(
+		character,
+		Entertainer,
+		)
+	assert batches() == first
+
+
+def _test_one_tool_is_never_spent_twice():
+	"""No menu offers one tool twice, and no Background re-grants its Feat's."""
+	from collections import Counter
+
+	for name, tag in BACKGROUNDS.items():
+		menu = Background_Tool_Menu(
+			tag
+			)
+		assert len( menu ) == len( set( menu ) ), name
+
+	for name in (
+			"Hermeticist",
+			"Archaeologist",
+			"Artisan",
+			):
+		for seed in range( 20 ):
+			character = Character(
+				seed=seed
+				)
+			Player(
+				character
+				)
+			Apply_Background(
+				character,
+				name,
+				)
+			spent = Counter(
+				grant.capability
+				for batch in Ensure_Training_Record(
+					character
+					).gains
+				for grant in batch.grants
+				)
+			assert max( spent.values() ) == 1, ( name, seed, spent )
+
+
 def _self_test():
 	_test_meta_fields()
 	_test_all_backgrounds()
@@ -2983,6 +3072,8 @@ def _self_test():
 	_test_apply_by_name()
 	_test_hook_and_slots()
 	_test_official_hooks()
+	_test_background_training_reaches_the_ledger()
+	_test_one_tool_is_never_spent_twice()
 
 	print(
 		"OK — BackgroundKit MetaTOP self-test "

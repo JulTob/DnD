@@ -661,7 +661,14 @@ _TOOL_MARKERS = (
 def _is_tool_proficiency(
         name: str,
         ) -> bool:
-    return any(
+    # A tool is known by its catalog name ("Lute", "Dice Set"); the markers
+    # still catch a kind the old sheet printed without naming one.
+    from AtlasInventarium.ToolsKit import TOOLS
+
+    return name in {
+            tool.name
+            for tool in TOOLS
+            } or any(
             marker in name
             for marker in _TOOL_MARKERS
             )

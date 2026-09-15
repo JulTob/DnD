@@ -265,7 +265,7 @@ class Character(Character_Skeleton):
 		char.features = unique
 
 		char.skills.sync_with_abilities(char.AS)
-		char.other_proficiencies = get_other_proficiencies(char.skills)
+		char.other_proficiencies = get_other_proficiencies(char.skills, char)
 		# AC stays DERIVED from what is equipped, so an artifact's bonus is
 		# summed rather than written over the natural formula.
 		char.AC = current_armour_class(char)
@@ -896,25 +896,40 @@ class Character(Character_Skeleton):
 					"Stealth",
 					])
 
-				char.skills.activate_proficiencies(1, [
-					"Musical Instrument",
-					"Alchemist's Supplies",
-					"Brewer's Supplies",
-					"Calligrapher's Supplies",
-					"Woodworker's Tools",
-					"Cartographer's Tools",
-					"Cobbler's Tools",
-					"Cook's Utensils",
-					"Glassblower's Tools",
-					"Jeweler's Tools",
-					"Leatherworker's Tools",
-					"Mason's Tools",
-					"Painter's Supplies",
-					"Potter's Tools",
-					"Smith's Tools",
-					"Tinker's Tools",
-					"Weaver's Tools",
-					])
+				# One Artisan's Tool or Musical Instrument, planned in the
+				# training ledger (QST-0116): the sheet built a moment ago does
+				# not yet show what the Background and its Feat taught, so a
+				# pick read off it could spend the proficiency on a known tool.
+				from AtlasActorLudi.ProficiencyKit import (
+					Apply_Training_Record,
+					Commit_Training_Gain,
+					Ensure_Training_Record,
+					)
+				from AtlasInventarium.ToolsKit import (
+					ARTISAN_TOOLS,
+					MUSICAL_INSTRUMENTS,
+					)
+				from AtlasLusoris.FeaturesKit import Plan_Feature_Training
+				from AtlasLusoris.GuildKit import Monk as Monk_Guild
+
+				if any(
+						batch.grant_id == "Guild.Monk.tool"
+						for batch in Ensure_Training_Record(char).gains
+						):
+					Apply_Training_Record(char)
+				else:
+					monk_tool = Plan_Feature_Training(
+						char,
+						Monk_Guild,
+						( *ARTISAN_TOOLS, *MUSICAL_INSTRUMENTS ),
+						1,
+						source="Class Proficiency",
+						purpose="guild.Monk.tool",
+						grant_id="Guild.Monk.tool",
+						allow_short=True,
+						)
+					if monk_tool is not None:
+						Commit_Training_Gain(char, monk_tool)
 			elif char.character_class == "Druid":
 				char.skills.Light.set_proficiency()
 				char.skills.Shields.set_proficiency()
@@ -978,11 +993,6 @@ class Character(Character_Skeleton):
 				char.skills.Shields.set_proficiency()
 				char.skills.Unarmed_Barb.set_proficiency()
 		return
-
-	@minion
-	def set_Objects(char):
-		from AtlasInventarium.Grimoire_of_Objects import setObjects
-		return setObjects(char)
 
 	@property
 	def proficiency_bonus(char):

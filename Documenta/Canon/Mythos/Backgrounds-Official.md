@@ -19,9 +19,9 @@ adapts to it.*
 *The fixed points.*
 
 1. **The mechanics are the 2024 rules** (§1): three abilities, two skills, one
-   tool, one Origin feat. The tools carry the project's names, where
-   Carpenter's Tools are Woodworker's Tools and Navigator's Tools are
-   Cartographer's Tools.
+   tool, one Origin feat. The tools carry the project's names: Carpenter's and
+   Woodcarver's Tools are one Woodworker's Tools, and Navigator's Tools are
+   Cartographer's Tools, one proficiency and one kit each (a house rule).
 2. **Two entries on the sheet.** The Background entry carries the background's
    own name and its description. The **Hook** is a separate entry under its own
    title. The field is called Hook: *Feature* says nothing, and *Boon* is taken
@@ -347,10 +347,11 @@ There is a second nation inside every city, and no map shows it. Beggars, urchin
   background declares `title` as its own name and `hook` as an entry with a
   title and a text, granted as its own sheet entry, and the description is
   filled when the sheet is read, so the Scribe's `{guild}` resolves.
-- **Tools.** The code declares `Carpenter_Tools` for the Farmer and
-  `Navigator_Tools` for the Merchant and the Sailor. `AtlasInventarium/ToolsKit.py`
-  aliases them to Woodworker's Tools and Cartographer's Tools, so the sheet
-  already prints the tools in §1.
+- **Tools** (QST-0116). The Farmer declares `Woodworker_Tools`, the Merchant and
+  the Sailor `Cartographer_Tools`; the old names are aliases of the same tool
+  everywhere, so the sheet prints and carries the tools in §1. A Tool written as
+  a category (the Entertainer's instrument, the Guard's gaming set) names its
+  kind: the sheet lists a Shawm or a Dice Set, not "a Musical Instrument".
 - **Withdrawn.** An earlier version of this page, written from the stubs,
   carried sixteen unapproved drafts, an "institutional" principle, and the
   retitled hooks that went with them. None of it stands.
