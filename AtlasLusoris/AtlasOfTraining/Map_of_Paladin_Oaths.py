@@ -11,9 +11,9 @@ believer.
 the one Guild tied to a poem, so its five Oaths are written in five registers,
 chosen by Julio, and nothing in a Devotion oath sounds like a Vengeance oath:
 
-	Devotion    the Psalms, the reverence of the King James
+	Devotion    the Psalms, the reverence of the King James; Cavafy's pass; Hesse's pilgrim
 	Ancients    Shakespeare, the touch and the wonder, the green
-	Glory       Twain and Espronceda, Moore and Gaiman: the swagger of the told
+	Glory       Twain and Espronceda, Moore and Gaiman: the swagger of the told; Cavafy's road
 	Vengeance   Byron and Bécquer, the storm and the wound
 	Creation    Lorca and Neruda, Scheherazade: the maker's word
 
@@ -70,7 +70,7 @@ class Oath_Register:
 
 
 # ---------------------------------------------------------------------------
-# The four registers
+# The five registers
 # ---------------------------------------------------------------------------
 
 
@@ -79,42 +79,54 @@ REGISTERS = {
 		name=DEVOTION,
 		sworn_to="Devotion",
 		paragon="constancy and truth",
-		poets="the Psalms; the King James",
+		poets="the Psalms; the King James; Cavafy; Hesse",
 		vows=(
 			"I am sworn to the Eternal Truth.",
 			"I am sworn to stand unbent and unbroken.",
 			"I am sworn unto the Truth; it is my rock and my high tower.",
 			"I am sworn to walk uprightly, though the whole earth be moved.",
+			"I am sworn to a narrow pass. I know how narrow passes end.",
+			"I am sworn, and it asks little: I can think, I can wait, I can go without.",
 			),
 		hearts=(
 			"My heart is set as a flint, and it shall not be turned.",
 			"My heart is a lamp that goeth not out by night.",
 			"My heart hath one law, and keepeth it, and seeketh no other.",
 			"My heart is a stronghold, and the gates of it stand open.",
+			"My heart had its Yes ready before anyone asked.",
+			"My heart keeps ready for parting, and at every parting begins again.",
 			),
 		arms=(
 			"My blade is bright. Nothing I do is done in the dark.",
 			"My arm is lifted in the daylight, and my hand knoweth no secret work.",
 			"My sword is girded on before all eyes, and it is a clean sword.",
 			"My blade hath never once been drawn in secret.",
+			"My blade is just and upright, and keeps its pity for the one it stops.",
+			"My sword serves. Whoever would lead has first to serve.",
 			),
 		words=(
 			"My word is yea, and my word is nay, and there is no third word in me.",
 			"My word is given once; heaven and earth shall pass before it is taken back.",
 			"My word hath been given to the unworthy, and kept. This word is kept likewise.",
 			"My word standeth. Let the mountains be removed; my word standeth.",
+			"My word is the truth, always, and without hatred for the one who lies.",
+			"My word cannot be told to another. It can only be kept.",
 			),
 		refusals=(
 			"I will not bow, though the seven hills bow down.",
 			"I will not stand in the way of the crooked, nor sit where the mockers sit.",
 			"I will not lie, though the lie would save me, nor flee, though the truth would slay me.",
 			"I will not bend, not for the friend who begs, not for the king who commands.",
+			"I will not degrade my life. This much, as much as I can: I will not degrade it.",
+			"I will not say it left me. It does not leave. Only I can.",
 			),
 		closes=(
 			"And if I am the last one keeping it, it is still kept.",
 			"Though all the world forsake it, it shall not be forsaken.",
 			"This is my portion, and I shall not want another.",
 			"So it standeth, and so I stand.",
+			"The traitor will come. The pass will fall. It will have been kept.",
+			"Well then, heart. Take your leave, and be well.",
 			),
 		),
 	ANCIENTS: Oath_Register(
@@ -164,42 +176,48 @@ REGISTERS = {
 		name=GLORY,
 		sworn_to="Glory",
 		paragon="valour and renown",
-		poets="Twain and Espronceda; Moore and Gaiman",
+		poets="Twain and Espronceda; Moore and Gaiman; Cavafy",
 		vows=(
 			"I am sworn to valour.",
 			"I am sworn to be worth the song.",
 			"I am sworn to the deed that outlives the doer.",
 			"I am sworn to the story, and the story is not finished with me.",
+			"I am sworn to the road, not the island. The island only made me set out.",
 			),
 		hearts=(
 			"My heart is a ship, my treasure the horizon, my only country the sea.",
 			"My heart was built for a story bigger than a life, and has grown to fit it.",
 			"My heart laughs at the odds. The odds have never once laughed back.",
 			"My heart is the drum they march to, and it has never missed a beat.",
+			"My heart wants no province from a king. It wants the crowd's hard-won well done.",
 			),
 		arms=(
 			"My blade goes first. It has always gone first.",
 			"My blade is for the moment the song will need.",
 			"My blade writes the verse they will sing loudest.",
 			"My sword is my law and the wind, and I answer to no other.",
+			"My blade is on the first step. To have come this far is no small thing.",
 			),
 		words=(
 			"My word is my name, and my name is not for sale.",
 			"My word is the one thing I never sold, and I sold a great deal.",
 			"My word is a promise to the poets: I will give them something worth the rhyme.",
 			"My word travels ahead of me, and arrives before I do.",
+			"My word is not a costume. When the theatre empties, I am still wearing it.",
 			),
 		refusals=(
 			"I will not die in bed. I have been offered it.",
 			"I will not be the footnote. I will be the chapter.",
 			"I will not choose the long life. I have been offered it.",
 			"I will not fold. I have never once folded.",
+			"I will not hurry the road. Better it lasts for years, and I arrive old.",
 			),
 		closes=(
 			"If I fall, that is the life I chose. Nothing lost, but me.",
 			"Say it after me, and say it right.",
 			"They will tell it wrong. Tell it wrong in my favour.",
 			"I would rather be the story than the one who lived it.",
+			"If I find the island poor, it did not fool me. I know now what islands are for.",
 			),
 		),
 	# Sworn to Creation. The maker's register: Lorca's short line that cuts,
