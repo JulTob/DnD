@@ -49,16 +49,30 @@ therefore full and unpruned by design. This Dialog is the pruning.
   named: "too formulaic. Too... AI." His own examples of the mark: "My sorrow
   will not stop the grass"; "If I fall, that's the life I chose. Nothing lost,
   but me."
-- **Register ruling (Julio, 2026-09-15, after the framing).** Each Oath speaks
-  in one voice, and the poets are inspirations carried into that voice, never
-  a second voice beside it. Devotion speaks the archaic speech of the Psalms,
-  and the Cavafy and Hesse inspirations are to be re-voiced into it, to keep
-  the solemn oath. Ancients speaks Shakespearean, the Green Knight's. Glory
-  speaks Homeric. Creation speaks the analytic, Newton the alchemist: laws,
-  forces, the four elements weighed and named. Vengeance stays Byron and
-  Bécquer, one Romantic voice already. So a line that keeps its inspiration
-  and changes its speech is a rewrite, not a cut, and the Devotion flag below
-  (three poets in one draw) is answered by the ruling rather than by weights.
+- **Register ruling (Julio, 2026-09-15, after the framing; refined the same
+  day).** A line has two layers: the idea and feeling, and the aesthetic and
+  cadence. The poets are inspiration for the ideas; the aesthetic is the
+  Oath's own epic form. In Julio's words: "we do not want a psalm. We want
+  Hesse's Siddhartha or Steppenwolf as a Psalm. Lorca's with Arabian cadence,
+  Byron and Bécquer sounding like Byron and Bécquer (in this case the
+  aesthetic fits the meaning). And we want Cavafy in the structure of the epic
+  poem of Homer. We need a specific Romanticist style by looking back at the
+  past." Then, on Devotion: Hesse is withdrawn as a source ("probably the
+  start of postmodernism so it rejects romanticism"). Devotion's ideas come
+  from Espronceda, the Cid, the knights of the Round Table, Zorrilla's Don
+  Juan Tenorio ("No es verdad, ángel de amor"), "a psalm of lovers, a romantic
+  romance, a knight in pursuit of a princess' heart, probably not knowing her
+  at all", and the boy at the start of Stardust: pure love is devotion, and
+  anyone at the Round Table is a Devotion Paladin, oriented differently.
+  Working reading (Claude, to be confirmed): Devotion = courtly love and
+  knightly loyalty in the psalm's form (the psalm of lovers is the Song of
+  Songs: parallelism, the seal, the beloved); Ancients = the Green Knight,
+  Shakespearean, unchanged; Glory = Cavafy's and Espronceda's ideas in
+  Homer's epic structure (epithet, simile, catalogue, the singers); Creation =
+  Lorca's and Neruda's ideas in the Arabian cadence (the Nights, the casida);
+  Vengeance = Byron and Bécquer as they are. A line that keeps its idea and
+  changes its sound is a rewrite, not a cut. The Devotion flag below (three
+  poets in one draw) is answered by the ruling rather than by weights.
 - The mechanical lint (in session, to be moved to `scripts/` under QST-0127):
   84 characters at most; no modern or bureaucratic words; no hedges; no wry
   deflation; no explanatory connectives. Three flags are defended and stay:
