@@ -15,7 +15,7 @@ RECORDS = (
 	Background(
 		name='Gambler',
 		description=(
-			'Gambling has nothing to do with luck.\n\nLuck is what the mark calls it later, when he is explaining himself to his wife. You were counting. You were watching his hands, his collar, and the exact second he stopped enjoying himself. You can tell three beats early when a man is about to double down.\n\nThe cards still turn. They always turn. That is when the second trade starts, and the second trade is people. You get staked. You get forgiven. You get dealt back in by men who swore last time was the last time, because you were charming about it, and because they want to see how this one ends.\n\nYou have been rich. Twice in one night you have been nothing. You stood up smiling both times. Standing up smiling is the job. The cards were never the job.'
+			'Gambling has nothing to do with luck.\n\nLuck is what the mark calls it later, when he is explaining himself to his wife. You were counting. You were watching his hands, his collar, and the exact second he stopped enjoying himself. You can tell three beats early when a man is about to double down.\n\nThe cards still turn. They always turn. That is when the second trade starts, and the second trade is people. You get staked. You get forgiven. You get dealt back in by men who swore last time was the last time, because you were charming about it, and because they want to see how this one ends.\n\nYou have been rich. Twice in one night you have been nothing. You stood up smiling both times. Standing up smiling is the job. The cards are the easy part.'
 			),
 		abilities=('DEX', 'INT', 'CHA',),
 		origin_feat='On a Roll',
