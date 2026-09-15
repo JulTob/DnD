@@ -2,8 +2,8 @@
 
 - **Type:** design
 - **Priority:** 🟢 low
-- **Status:** Open
-- **Owner:** unclaimed
+- **Status:** Solved
+- **Owner:** Claude
 - **Route to:** Julio · Lorekeeper (Elf Sage) · Venustas (Bard)
 - **Parent:** —
 - **Sidequests:** —
@@ -40,9 +40,9 @@ wants one.
 ---
 
 ## ✅ Resolution (filled when Solved)
-- **Decided by:** —
-- **What changed:** —
-- **Practice/preference to remember:** —
+- **Decided by:** Julio, in chat, 2026-09-15: "a demiurge would have a celestial steed if I had to choose, but we could change it to an elemental. It's our reflavour's kind anyway. We can personalize those things better than a printed book."
+- **What changed:** `Map_of_Paladin_Steeds.py` gains a fourth kind, Elemental, keyed to Creation in `OATH_NATURE` at the same affinity weight as the other three pairings, with four forms, one per element (stone, wind, quiet flame, river water). The kind draw runs over four kinds; its Dice Bag is at version 2 because the candidate list changed. The module docstring records the ruling; the lesson comment in `Map_of_Paladin_Training.py` names the fourth kind as ours. Commit on PR #7.
+- **Practice/preference to remember:** where the Oath is ours, its answer may be ours too. The book's list is a floor for a printed sheet, not a ceiling for a generated one; when the reflavour adds a kind, the module says so in its own voice and the sheet prints it without apology.
 
 ---
 

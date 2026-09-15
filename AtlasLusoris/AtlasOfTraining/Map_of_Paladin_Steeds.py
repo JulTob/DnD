@@ -25,6 +25,12 @@ Pact of the Chain familiars already use, asked of an Oath instead of a patron.
 answered by something Fiendish, and the rules deliberately allow it: they
 refuse to say the steed must be holy. When it happens it is a story, and the
 sheet states it without apology or explanation.
+
+**Four kinds, not three.** The rules offer Celestial, Fey and Fiend. The fifth
+Oath is ours, sworn to Creation, and so is what answers it: an Elemental, the
+stuff the oath commands, which is the reflavour's own kind. A generated sheet
+can personalise what a printed book cannot. Julio's ruling, 2026-09-15: a
+demiurge might ride a Celestial if the book were the limit; it is not.
 """
 
 from __future__ import annotations
@@ -35,6 +41,7 @@ from dataclasses import dataclass
 CELESTIAL = "Celestial"
 FEY = "Fey"
 FIENDISH = "Fiendish"
+ELEMENTAL = "Elemental"
 
 
 # How much the oath's own nature outweighs the other two. High enough that the
@@ -64,6 +71,7 @@ OATH_NATURE = {
 	"Ancients": FEY,
 	"Glory": CELESTIAL,
 	"Vengeance": FIENDISH,
+	"Creation": ELEMENTAL,
 	}
 
 
@@ -121,6 +129,24 @@ STEED_FORMS: tuple[Steed_Form, ...] = (
 	Steed_Form(
 		FIENDISH,
 		"a ram with horns that ring like struck iron when it turns its head",
+		),
+	Steed_Form(
+		ELEMENTAL,
+		"a horse cut from one grey stone, warm on the side the sun was on",
+		),
+	Steed_Form(
+		ELEMENTAL,
+		"a horse you cannot see in still weather, and can in wind",
+		),
+	Steed_Form(
+		ELEMENTAL,
+		"a horse of quiet flame that does not burn what it carries, and burns "
+		"what it is told to",
+		),
+	Steed_Form(
+		ELEMENTAL,
+		"a horse of river water that holds its shape while you ride, and not "
+		"a moment longer",
 		),
 	)
 
@@ -193,7 +219,7 @@ def _draw_kind(
 		char,
 		) -> str:
 	"""
-	Which of the three kinds answered, weighted by the Oath's nature.
+	Which of the four kinds answered, weighted by the Oath's nature.
 
 	Before an Oath is sworn there is nothing for the weight to prefer, so the
 	three kinds come up evenly. That is the right answer rather than a
@@ -210,6 +236,7 @@ def _draw_kind(
 		CELESTIAL,
 		FEY,
 		FIENDISH,
+		ELEMENTAL,
 		]
 	weights = [
 		OATH_AFFINITY_WEIGHT
@@ -223,7 +250,7 @@ def _draw_kind(
 			weights,
 			dice=char.Dice_Bag(
 				"paladin.steed.kind",
-				version="1",
+				version="2",
 				namespace="GenLegendLusoris",
 				),
 			)
@@ -284,6 +311,7 @@ __all__ = (
 	"CELESTIAL",
 	"FEY",
 	"FIENDISH",
+	"ELEMENTAL",
 	"OATH_AFFINITY_WEIGHT",
 	"OATH_NATURE",
 	"STEED_FORMS",

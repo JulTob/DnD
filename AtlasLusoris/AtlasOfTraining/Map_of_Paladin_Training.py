@@ -373,7 +373,8 @@ Extra_Attack = _core(
 			),
 		)
 
-# Find Steed offers the player Celestial, Fey or Fiendish. A generated sheet
+# Find Steed offers the player Celestial, Fey or Fiendish, and the fifth Oath
+# adds Elemental, which is ours (QST-0130). A generated sheet
 # may not carry that offer: Canon/Feature-Text forbids open-choice language,
 # because the pick was already made in a seeded Dice Bag. So the kind is drawn
 # from the Oath and the sheet states what came. See Map_of_Paladin_Steeds for

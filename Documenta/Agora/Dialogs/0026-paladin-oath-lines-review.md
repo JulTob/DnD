@@ -4,7 +4,7 @@
 - **Raised by:** Julio (in chat, 2026-09-15: "Start an agora to review the lines of the oaths"; the pools were pushed in full on his ruling "push the full pools and we'll review later")
 - **Related Questae:** QST-0127 (echoes and leaks) · QST-0126 (the paragraphs, out of scope here) · QST-0130 (the steed, out of scope here) · PR #7
 - **Consuls called:** Lorekeeper (Elf Sage), Venustas (Bard), Contracts (Warlock), Simplicity (Monk)
-- **Status:** 🟡 open · framed 2026-09-15, deliberation not yet run
+- **Status:** 🟡 open · framed 2026-09-15, register ruling added the same day, deliberation not yet run
 
 ---
 
@@ -49,6 +49,16 @@ therefore full and unpruned by design. This Dialog is the pruning.
   named: "too formulaic. Too... AI." His own examples of the mark: "My sorrow
   will not stop the grass"; "If I fall, that's the life I chose. Nothing lost,
   but me."
+- **Register ruling (Julio, 2026-09-15, after the framing).** Each Oath speaks
+  in one voice, and the poets are inspirations carried into that voice, never
+  a second voice beside it. Devotion speaks the archaic speech of the Psalms,
+  and the Cavafy and Hesse inspirations are to be re-voiced into it, to keep
+  the solemn oath. Ancients speaks Shakespearean, the Green Knight's. Glory
+  speaks Homeric. Creation speaks the analytic, Newton the alchemist: laws,
+  forces, the four elements weighed and named. Vengeance stays Byron and
+  Bécquer, one Romantic voice already. So a line that keeps its inspiration
+  and changes its speech is a rewrite, not a cut, and the Devotion flag below
+  (three poets in one draw) is answered by the ruling rather than by weights.
 - The mechanical lint (in session, to be moved to `scripts/` under QST-0127):
   84 characters at most; no modern or bureaucratic words; no hedges; no wry
   deflation; no explanatory connectives. Three flags are defended and stay:
@@ -58,8 +68,8 @@ therefore full and unpruned by design. This Dialog is the pruning.
 **What a good answer must satisfy.**
 
 1. **A verdict per line**: keep, cut, or rewrite, with the reason, and every
-   rewrite offered in the Oath's own poets. Julio decides; the council
-   recommends.
+   rewrite offered in the Oath's ruled voice (the register ruling above),
+   keeping the poet's inspiration. Julio decides; the council recommends.
 2. **The Lorekeeper's "ours to use" pass.** Byron, Bécquer, Cavafy, Lorca,
    Shakespeare, the Psalms, Twain and Espronceda are in the public domain.
    Hesse (d. 1962), Neruda (d. 1973), Moore and Gaiman (living) are not. A line
