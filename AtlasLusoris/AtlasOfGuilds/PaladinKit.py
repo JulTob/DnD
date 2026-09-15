@@ -44,55 +44,61 @@ def _with_oath(
 	return describe
 
 
-# The register is **the oath, remembered**: second person, present tense,
-# austere rather than warm. Documenta/Canon/Mythos/Paladin.md §2 fixes it and
-# names what it must not borrow. Three neighbours are close enough to collide
-# with, and each is kept out on purpose:
+# The core fantasy is **a principle held**. The oath is that principle said
+# out loud, and the Character keeps it because it is theirs, not because
+# anyone is listening. Documenta/Canon/Mythos/Paladin.md records the register
+# and names what it must not borrow. Three neighbours are close enough to
+# collide with, and each is kept out on purpose:
 #
 #   the Cleric    "watched over", a hand held out before you reached for it
 #   the Fighter   "nobody gave you this", the yard at dawn
-#   the Barbarian "you will not be tamed", the chant
+#   the Barbarian rage, which is emotion turned inward; the chant
 #
-# Nothing below watches over anyone, and that is the whole class boundary. The
-# Cleric's greater thing loves first. The Paladin's power exists *because* they
-# reached: it is downstream of a word the self gave, and of nothing else.
+# The Paladin is will turned outward: the will to change the world, or the
+# kingdom, or one corrupt court. No celestial and no fiend stands behind the
+# text, because the Character knows of none. Right makes might: the power is
+# downstream of the principle, and of nothing else.
 #
-# **The device is the unquoted sentence.** Every text here turns on one
-# sentence the Character once said out loud, and not one of them prints it.
-# It is called a sentence, a word, a vow, the thing you said; it is referred to
-# in all five texts and quoted in none. That is not coyness. A generator that
-# supplied the words would be writing the Character's single most private line
-# for them, and the one thing a sheet should hand back to a player is the blank
-# they get to fill. The refusal is the feature. Cf. the Great Old One, where
-# what the text *does* is also the description.
+# **The register is the political romantic.** A Knight's tale in storybook
+# aesthetic, not storybook structure; the civic speech that asks who holds
+# power and answers with a person standing still. No hedging. No origin: the
+# text never says what the Character saw or lost, because that story belongs
+# to the player (death of the author). No rule is explained ahead of the
+# rules that print it. The archetype is the paragon who acts: the activist,
+# never the static protagonist.
+#
+# **The device is the oath recited.** The class text never quotes it. Each
+# Oath paragraph below is followed by the Character's own oath, drawn by
+# Map_of_Paladin_Oaths in that Oath's poets, one line by species and one by
+# background, set in roman, one line each.
 #
 # **Alignment-independence**, completing the set the Warlock kit opened. The
 # Fiend buys it with toxicity rather than malice, the Celestial with
 # instrumentality, the Archfey with spectacle, the Great Old One with
 # indifference. The Paladin buys it with **bindingness rather than virtue**:
-# an oath sworn to a gang binds exactly as hard as one sworn in a chapel, and
-# the 2024 Oaths are alignment-free. Nothing below moral-locks anything. A
+# Honor, Justice and Hope are names the Character gives the dream, not
+# virtues the sheet awards them, and the 2024 Oaths are alignment-free. A
 # Lawful Evil Devotion Paladin is a good vassal with a bad lord, and the text
 # has to fit them as well as it fits the knight in white.
 #
 # **Sworn and forsworn.** *Warlock* is Old English *wǣrloga*, the oath-breaker;
 # in the setting's own vocabulary a Paladin who breaks the oath becomes one.
 # Never say so on a sheet. It governs only how the two Guild texts end: the
-# Warlock's on the terms, this one on the morning.
+# Warlock's on the terms, this one on the stand.
 PALADIN_DESCRIPTION = (
-	"You said something out loud once, and it has been true ever since. "
-	"That is the whole of it. Others carry a god, or a grudge, or a gift "
-	"they were born holding. You carry a sentence. You chose the words, "
-	"and the words chose everything after.\n\n"
-	"Power came with it. Not as a reward. As a consequence. Your hand "
-	"closes a wound because you said it would. Your blade burns because "
-	"you said what it was for. Stand near you and the fear goes out of "
-	"people, because you have already decided, and deciding is contagious.\n\n"
-	"The word does not care whether you still want it. That is the "
-	"terrible thing about a vow, and the reason it works. Kings die. "
-	"Causes rot. The reason you swore may be dust by now. The sentence "
-	"stands, and you stand where it stands. Every morning you choose it "
-	"again. One morning you will find out what happens if you do not."
+	"Ask who holds power in this world and many will point you to a crown. "
+	"Some will point to a temple, to a vault, or to an army camp. They are "
+	"wrong. You are the standing proof of it. Power is held by whoever will "
+	"stand for something true. Whoever believes. Whoever acts. Your oath is "
+	"true, so you are mighty.\n\n"
+	"They tell you to move. They call you a dreamer. You are. You dreamed a "
+	"world that does not yet exist. This world needs it. Call it Honor. Call "
+	"it Justice. Call it Hope. You will manifest your dream. So you went and "
+	"stood in the one place it would have to begin: here and now. And here "
+	"and now you act. You will bring forth a new world. You know what "
+	"happens if you move. Justice will fall. The walls of civilization will "
+	"fall. Those standing behind you will fall. Your honor will fall. So you "
+	"stand, shield ready. You won't move. They will."
 	)
 
 
