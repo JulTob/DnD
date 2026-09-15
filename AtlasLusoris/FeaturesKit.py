@@ -636,11 +636,11 @@ def _Tool_Proficiency_Clause(
 # editing, reverting, or restoring this file from vault bytecode.
 #
 # WHAT THIS IS.  Crafter and Musician each draw three capabilities from a pool
-# (the seventeen Artisan's Tools, the ten Musical Instruments) while excluding
+# (the sixteen Artisan's Tools, the ten Musical Instruments) while excluding
 # whatever the Character's Background is about to grant.  The exclusion used to
 # be computed from the Background's TOOLS field as though every entry in it were
 # a certain grant.  It is not: a Background grants exactly ONE Tool, and most
-# write that Tool as a seventeen-item menu or as a category name.  Excluding the
+# write that Tool as a sixteen-item menu or as a category name.  Excluding the
 # whole menu emptied the pool, _Plan_Training raised, and the Imprint failed.
 #
 # WHAT IT COST.  The Artisan, Crafter and Entertainer Backgrounds were 100%
@@ -2131,7 +2131,7 @@ def _test_a_background_reserves_only_what_it_certainly_grants() -> None:
 	from AtlasLusoris.BackgroundKit import BACKGROUNDS
 
 	for name, expected in (
-			# Seventeen Artisan's Tools written out as a menu, one granted.
+			# Sixteen Artisan's Tools written out as a menu, one granted.
 			( "Artisan", 0 ),
 			# A category name standing for one pick out of ten instruments.
 			( "Entertainer", 0 ),

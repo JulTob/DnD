@@ -13,6 +13,9 @@ Thought pattern
 
 from __future__ import annotations
 
+from AtlasInventarium.ToolsKit import (
+	ARTISAN_TOOLS as _ARTISAN_TOOL_DEFINITIONS,
+	)
 from AtlasLusoris.AtlasOfGuilds.FighterKit import (
 	Apply_Battle_Master_Choices,
 	ARTISAN_TOOLS,
@@ -497,26 +500,11 @@ _SKILL_ATTRIBUTES = {
 	"Survival": "Survival",
 	}
 
+# Student of War's tool names to their sheet attributes, from ToolsKit's one
+# catalog (QST-0116): the old hand-kept copy listed each collapsed tool twice.
 _TOOL_ATTRIBUTES = {
-	"Alchemist's Supplies": "Alchemist_Supplies",
-	"Brewer's Supplies": "Brewer_Supplies",
-	"Calligrapher's Supplies": "Calligrapher_Supplies",
-	"Woodworker's Tools": "Woodworker_Tools",
-	"Carpenter's Tools": "Woodworker_Tools",
-	"Cartographer's Tools": "Cartographer_Tools",
-	"Navigator's Tools": "Cartographer_Tools",
-	"Cobbler's Tools": "Cobbler_Tools",
-	"Cook's Utensils": "Cook_Utensils",
-	"Glassblower's Tools": "Glassblower_Tools",
-	"Jeweler's Tools": "Jeweler_Tools",
-	"Leatherworker's Tools": "Leatherworker_Tools",
-	"Mason's Tools": "Mason_Tools",
-	"Painter's Supplies": "Painter_Supplies",
-	"Potter's Tools": "Potter_Tools",
-	"Smith's Tools": "Smith_Tools",
-	"Tinker's Tools": "Tinker_Tools",
-	"Weaver's Tools": "Weaver_Tools",
-	"Woodcarver's Tools": "Woodworker_Tools",
+	tool.name: tool.legacy_attribute
+	for tool in _ARTISAN_TOOL_DEFINITIONS
 	}
 
 

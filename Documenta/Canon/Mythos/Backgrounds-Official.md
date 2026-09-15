@@ -19,9 +19,9 @@ adapts to it.*
 *The fixed points.*
 
 1. **The mechanics are the 2024 rules** (§1): three abilities, two skills, one
-   tool, one Origin feat. The tools carry the project's names, where
-   Carpenter's Tools are Woodworker's Tools and Navigator's Tools are
-   Cartographer's Tools.
+   tool, one Origin feat. The tools carry the project's names: Carpenter's and
+   Woodcarver's Tools are one Woodworker's Tools, and Navigator's Tools are
+   Cartographer's Tools, one proficiency and one kit each (a house rule).
 2. **Two entries on the sheet.** The Background entry carries the background's
    own name and its description. The **Hook** is a separate entry under its own
    title. The field is called Hook: *Feature* says nothing, and *Boon* is taken
@@ -331,31 +331,33 @@ There is a second nation inside every city, and no map shows it. Beggars, urchin
 
 *As of 2026-09-14. This chapter changes when the code does.*
 
-- **The code does not match this page.** `AtlasLusoris/BackgroundKit.py` still
-  holds the stubs the 2026-08-29 recovery left: one sentence each, no Hook, and
-  an old hook title printed where the background's name belongs (the Guard
-  renders as "Watcher's Eye", the Soldier as "Military Rank").
+- **The code matches this page** (QST-0122.2). Each official in
+  `AtlasLusoris/BackgroundKit.py` declares its own name as its title, the
+  description in §3, and its Hook, which the sheet prints as its own entry.
+  Until then the sheet printed the stubs the 2026-08-29 recovery left: one
+  sentence each, no Hook, and an old hook title where the name belongs (the
+  Guard as "Watcher's Eye", the Soldier as "Military Rank").
 - **Where the text survives.** Every description and Hook in §3 was recovered
   character for character from the pre-wipe bytecode,
   `.recovery-vault/_prewipe-pyc-mirror/AtlasLusoris/BackgroundKit.29bfd8e2057f.pyc`
   (source saved 2026-08-26). It matches the `BackgroundKit` section of
   `.recovery-vault/AUTHORED-TEXT-ARCHIVE.md`. One word has changed since, by
   decision on 2026-09-14: the Hermit's Hook says GM, as the Noble's does.
-- **The shape the code returns to.** Before the wipe, each official background
-  declared `title` as its own name and `hook` as an entry with a title and a
-  text, granted as its own sheet entry. The description was filled when the
-  sheet was read, so the Scribe's `{guild}` resolves. Without that step the
-  sheet prints a literal `{guild}`.
-- **Tools.** The code declares `Carpenter_Tools` for the Farmer and
-  `Navigator_Tools` for the Merchant and the Sailor. `AtlasInventarium/ToolsKit.py`
-  aliases them to Woodworker's Tools and Cartographer's Tools, so the sheet
-  already prints the tools in §1.
+- **The shape the code has again** (QST-0122.1). As before the wipe, each
+  background declares `title` as its own name and `hook` as an entry with a
+  title and a text, granted as its own sheet entry, and the description is
+  filled when the sheet is read, so the Scribe's `{guild}` resolves.
+- **Tools** (QST-0116). The Farmer declares `Woodworker_Tools`, the Merchant and
+  the Sailor `Cartographer_Tools`; the old names are aliases of the same tool
+  everywhere, so the sheet prints and carries the tools in §1. A Tool written as
+  a category (the Entertainer's instrument, the Guard's gaming set) names its
+  kind: the sheet lists a Shawm or a Dice Set, not "a Musical Instrument".
 - **Withdrawn.** An earlier version of this page, written from the stubs,
   carried sixteen unapproved drafts, an "institutional" principle, and the
   retitled hooks that went with them. None of it stands.
 - **The restoration** is QST-0122: the hook architecture (.1), the sixteen
-  officials (.2), the custom set's Hooks (.3) and this page (.4). When .2 and
-  .3 reach `main`, this chapter and Repairs-Ledger B17 close.
+  officials (.2) and this page (.4) are done, and Repairs-Ledger B17 is closed.
+  The custom set's Hooks (.3) are still printed inside their descriptions.
 
 ---
 

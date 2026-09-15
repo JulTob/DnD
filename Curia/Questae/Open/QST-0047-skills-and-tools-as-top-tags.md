@@ -79,8 +79,9 @@ QST-0020:
   the thing being replaced or wrapped. Decide **wrap vs. replace** before
   starting: a wrapper keeps sheet code working during migration.
 - Canonical skill names already exist as `CORE_SKILLS` in
-  `AtlasLusoris/FeaturesKit.py`; tool names are the `ARTISAN_TOOLS` tuple in
-  `AtlasLusoris/BackgroundKit.py`. Neither should be re-invented.
+  `AtlasLusoris/FeaturesKit.py`; tools are the `Tool_Definition`s in
+  `AtlasInventarium/ToolsKit.py` (every list, sheet attribute and kit derives
+  from them since QST-0116). Neither should be re-invented.
 - Grant sites to migrate, in dependency order: Background (`_grant_skills`,
   `_grant_tool`), Origin Feats (`_grant_training`, `Skilled`), Guild training,
   Species traits.
