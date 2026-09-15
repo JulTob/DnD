@@ -822,7 +822,7 @@ def _oath_of(
 	return None
 
 
-GENIES_SPLENDOR_SKILLS = (
+FORCE_OF_WILL_SKILLS = (
 	"Acrobatics",
 	"Intimidation",
 	"Performance",
@@ -830,11 +830,11 @@ GENIES_SPLENDOR_SKILLS = (
 	)
 
 
-def Grant_Genies_Splendor_Skill(
+def Grant_Force_of_Will_Skill(
 		char,
 		) -> None:
 	"""
-	Take Genie's Splendor's skill, and record which one it was.
+	Take Force of Will's skill, and record which one it was.
 
 	The rule reads "one of the following skills of your choice", which a
 	generated sheet may not print: the choice was made before the page
@@ -852,12 +852,12 @@ def Grant_Genies_Splendor_Skill(
 		"skills",
 		None,
 		)
-	if skills is None or getattr( char, "genies_splendor_skill", None ):
+	if skills is None or getattr( char, "force_of_will_skill", None ):
 		return
 
 	untrained = [
 		name
-		for name in GENIES_SPLENDOR_SKILLS
+		for name in FORCE_OF_WILL_SKILLS
 		if getattr(
 			getattr(
 				skills,
@@ -869,13 +869,13 @@ def Grant_Genies_Splendor_Skill(
 			) < 1
 		]
 	if not untrained:
-		char.genies_splendor_skill = ""
+		char.force_of_will_skill = ""
 		return
 
 	chosen = char.Pick(
 		untrained,
 		dice=char.Dice_Bag(
-			"paladin.genies.splendor",
+			"paladin.creation.force_of_will",
 			version="1",
 			namespace="GenLegendTraining",
 			),
@@ -884,10 +884,10 @@ def Grant_Genies_Splendor_Skill(
 		skills,
 		chosen.replace( " ", "_" ),
 		).set_proficiency()
-	char.genies_splendor_skill = chosen
+	char.force_of_will_skill = chosen
 
 
-def _genies_splendor_entry(
+def _force_of_will_entry(
 		char,
 		) -> str:
 	# Three states, as Primal Knowledge distinguishes them: a recorded name is
@@ -895,21 +895,21 @@ def _genies_splendor_entry(
 	# a missing attribute means this ran outside the normal build.
 	gained = getattr(
 		char,
-		"genies_splendor_skill",
+		"force_of_will_skill",
 		None,
 		)
 	if gained:
 		skill = f"You also gained proficiency in <b>{gained}</b>."
 	elif gained == "":
 		skill = (
-			"You were already trained in every skill this splendor teaches, "
+			"You were already trained in every skill this will teaches, "
 			"so it sharpened what you had."
 			)
 	else:
-		skill = "You also gained proficiency in one of the skills of the court."
+		skill = "You also gained proficiency in one skill of bearing."
 
 	return _lesson(
-		"You need no iron. Grace is the armour, and it has never once come off.",
+		"You can move the world.",
 		"When you aren't wearing any armor, your base Armor Class equals "
 		"<b>10 plus your Dexterity and Charisma modifiers</b>. You can use a "
 		"Shield and still gain this benefit. "
@@ -917,7 +917,7 @@ def _genies_splendor_entry(
 		)
 
 
-def _elemental_rebuke_entry(
+def _opposite_reaction_entry(
 		char,
 		) -> str:
 	cha = _charisma_modifier(
@@ -928,7 +928,7 @@ def _elemental_rebuke_entry(
 			cha,
 			)
 	return _lesson(
-		"Strike, and the element strikes back. It was never yours to hit.",
+		"To every action, an opposite and massive reaction.",
 		"When you are hit by an attack roll, you can take a Reaction to halve "
 		"the attack's damage against yourself (round down) and force the "
 		"attacker to make a Dexterity saving throw against your spell save DC. "
@@ -946,8 +946,7 @@ Creation_Oath_Spells = _path(
 		name="Oath Spells",
 		min_level=3,
 		description=_lesson(
-			"The oath comes with a vocabulary, and this one was learned in "
-			"four courts.",
+			"The oath comes with a vocabulary. These are the words it lets you say.",
 			"You always have the following spells prepared:"
 			"<ul>"
 			"<li><b>3rd:</b> <em>Chromatic Orb, Elementalism, Thunderous Smite</em></li>"
@@ -960,46 +959,45 @@ Creation_Oath_Spells = _path(
 		apply=_apply_oath,
 		)
 
-Elemental_Smite = _creation(
-		name="Elemental Smite",
+Smite_of_the_Elements = _creation(
+		name="Smite of the Elements",
 		min_level=3,
 		description=_lesson(
-			"Earth, wind, fire, water. Whichever the hour needs, you have "
-			"already asked.",
+			"Your light commands the elements.",
 			"Immediately after you cast <em>Divine Smite</em>, you can expend one "
 			"use of your Channel Divinity and invoke one of the following effects."
-			"<br><b>Dao's Crush.</b> Earth rises up around the target of your Divine "
+			"<br><b>Earth.</b> Earth rises up around the target of your Divine "
 			"Smite. The target has the <em>Grappled</em> condition (escape DC equal "
 			"to your spell save DC). While Grappled, the target has the "
 			"<em>Restrained</em> condition."
-			"<br><b>Djinni's Escape.</b> You teleport to an unoccupied space you can "
-			"see within 30 feet of yourself and take on a semi-incorporeal form, "
-			"which lasts until the end of your next turn. While in this form, you "
-			"have Resistance to Bludgeoning, Piercing, and Slashing damage, and you "
-			"have Immunity to the Grappled, Prone, and Restrained conditions."
-			"<br><b>Efreeti's Fury.</b> The target of your Divine Smite takes an "
-			"extra <b>2d4</b> Fire damage, and fire jumps from the target to another "
+			"<br><b>Air.</b> You teleport to an unoccupied space you can see within "
+			"30 feet of yourself and take on a semi-incorporeal form, which lasts "
+			"until the end of your next turn. While in this form, you have "
+			"Resistance to Bludgeoning, Piercing, and Slashing damage, and you have "
+			"Immunity to the Grappled, Prone, and Restrained conditions."
+			"<br><b>Fire.</b> The target of your Divine Smite takes an extra "
+			"<b>2d4</b> Fire damage, and fire jumps from the target to another "
 			"creature you can see within 30 feet of yourself. The second creature "
 			"also takes <b>2d4</b> Fire damage."
-			"<br><b>Marid's Surge.</b> The target of your Divine Smite and each "
-			"creature of your choice in a 10-foot Emanation originating from you "
-			"make a Strength saving throw against your spell save DC. On a failed "
-			"save, a creature is pushed 15 feet straight away from you and has the "
-			"<em>Prone</em> condition."
+			"<br><b>Water.</b> The target of your Divine Smite and each creature of "
+			"your choice in a 10-foot Emanation originating from you make a Strength "
+			"saving throw against your spell save DC. On a failed save, a creature "
+			"is pushed 15 feet straight away from you and has the <em>Prone</em> "
+			"condition."
 			),
 		)
 
-Genies_Splendor = _creation(
-		name="Genie's Splendor",
+Force_of_Will = _creation(
+		name="Force of Will",
 		min_level=3,
-		description=_genies_splendor_entry,
+		description=_force_of_will_entry,
 		)
 
-Aura_of_Elemental_Shielding = _creation(
-		name="Aura of Elemental Shielding",
+Event_Horizon = _creation(
+		name="Event Horizon",
 		min_level=7,
 		description=_lesson(
-			"Stand near you and the fire forgets its own name.",
+			"You become unmovable. You become the mover.",
 			"Choose one of the following damage types: Acid, Cold, Fire, "
 			"Lightning, or Thunder. You and your allies have Resistance to that "
 			"damage type while in your Aura of Protection. "
@@ -1009,27 +1007,27 @@ Aura_of_Elemental_Shielding = _creation(
 			),
 		)
 
-Elemental_Rebuke = _creation(
-		name="Elemental Rebuke",
+Opposite_Reaction = _creation(
+		name="Opposite Reaction",
 		min_level=15,
-		description=_elemental_rebuke_entry,
+		description=_opposite_reaction_entry,
 		)
 
-Noble_Scion = _creation(
-		name="Noble Scion",
+Demiurge = _creation(
+		name="Demiurge",
 		min_level=20,
 		description=_lesson(
-			"For ten minutes the sky is a floor, and a failed wish is only a "
-			"first draft.",
+			"The Genesis of your power is complete. You may rest.",
 			"As a Bonus Action, you gain the benefits below for 10 minutes or "
 			"until you end them (no action required). Once you use this feature, "
 			"you can't use it again until you finish a Long Rest. You can also "
 			"restore your use of it by expending a level 5 spell slot (no action "
 			"required)."
-			"<br><b>Flight.</b> You have a Fly Speed of 60 feet and can hover."
-			"<br><b>Minor Wish.</b> When you or an ally in your Aura of Protection "
-			"fails a D20 Test, you can take a Reaction to make you or that ally "
-			"succeed instead."
+			"<br><b>Ascent.</b> <em>From here, you see everything.</em> You have a "
+			"Fly Speed of 60 feet and can hover."
+			"<br><b>Omnipotent.</b> <em>And so it was.</em> When you or an ally in "
+			"your Aura of Protection fails a D20 Test, you can take a Reaction to "
+			"make you or that ally succeed instead."
 			),
 		)
 
