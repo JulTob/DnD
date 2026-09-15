@@ -3,7 +3,7 @@ The Oath a Paladin actually says.
 
 The Guild text says a principle is held. This is the principle spoken, and it
 is the one place on a whole sheet where the Character talks instead of being
-talked about. Six lines in the middle of the page are the player's own mouth,
+talked about. Four lines in the middle of the page are the player's own mouth,
 written to be read aloud at a table, and written to make the reader a
 believer.
 
@@ -23,7 +23,15 @@ in the Oath's own register, so the six lines cohere as one poem. Exactly two
 lines are then personal, on Julio's ruling that the personalization should be
 small: the heart comes from the people, the word from the life before, each
 drawn with preference from a small pool where every line had to earn its
-place. Nothing else varies by tag. The culture keys are not an axis here; the
+place. Nothing else varies by tag.
+
+**Six are sworn; four are recited.** Julio's ruling, 2026-09-15: six lines
+are too long to take in while making a character, and an oath heard whole
+keeps no mystery. So the whole oath is settled on the Character, and the
+sheet speaks four of it: the close always, since an oath must land, and
+three of the other five in their own order. Ten structures, one drawn per
+Character, so two Paladins of one Oath do not scan alike. A personal line
+may be among the two left unspoken; that is the mystery working as intended. The culture keys are not an axis here; the
 poets who wrote the species lines were told to use them as inspiration for
 diction, never as a list to fill. Where no line sings for a people, the
 Oath's own voice carries.
@@ -38,6 +46,7 @@ puts in them. Dragonheart in the epic, not in the structure.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from itertools import combinations
 
 
 DEVOTION = "Devotion"
@@ -732,15 +741,71 @@ def Compose_Oath(
 		)
 
 
+# Which of the six sworn lines are spoken. The close is always the last word;
+# three of the other five are recited in their own order. Listing the ten
+# shapes and drawing one keeps the choice as plain as the pools are.
+SWORN_LINES = 6
+RECITED_LINES = 4
+RECITAL_STRUCTURES: tuple[tuple[int, ...], ...] = tuple(
+	(
+		*spoken,
+		SWORN_LINES - 1,
+		)
+	for spoken in combinations(
+		range(
+			SWORN_LINES - 1
+			),
+		RECITED_LINES - 1,
+		)
+	)
+
+
+def Recite(
+		char,
+		sworn: tuple[str, ...],
+		) -> tuple[str, ...]:
+	"""
+	The four lines the sheet speaks, out of the six that were sworn.
+
+	An oath with fewer than six lines (a register with an empty pool) is
+	recited whole: there is nothing to leave unspoken.
+	"""
+	if len(
+			sworn
+			) < SWORN_LINES:
+		return tuple(
+			sworn
+			)
+
+	structure = char.Pick(
+			list(
+				RECITAL_STRUCTURES
+				),
+			dice=char.Dice_Bag(
+				"paladin.oath.structure",
+				version="1",
+				namespace="GenLegendLusoris",
+				),
+			)
+
+	return tuple(
+		sworn[ index ]
+		for index in structure
+		)
+
+
 def Draw_Oath(
 		char,
 		) -> tuple[str, ...]:
 	"""
-	Settle what this Paladin swore, once.
+	Settle what this Paladin swore, once, and which of it is spoken.
 
 	Called from a lesson's ``apply``, never from its Entry. An Entry that
 	draws re-draws on every read of the sheet, which is the Primal Order
 	mistake recorded in Canon/Feature-Text.
+
+	``paladin_oath_sworn`` keeps all six lines; ``paladin_oath_lines`` is
+	the recital the sheet prints.
 	"""
 	standing = getattr(
 			char,
@@ -752,23 +817,29 @@ def Draw_Oath(
 			standing
 			)
 
-	lines = Compose_Oath(
+	sworn = Compose_Oath(
 			char,
 			)
-	char.paladin_oath_lines = lines
+	recited = Recite(
+			char,
+			sworn,
+			)
+	char.paladin_oath_sworn = sworn
+	char.paladin_oath_lines = recited
 
-	return lines
+	return recited
 
 
 def Oath_Entry(
 		char,
 		) -> str:
 	"""
-	The recital as one block: what was sworn, and the words.
+	The recital as one block: what was sworn, and the four spoken lines.
 
 		You swore an oath to Vengeance. To be a paragon of retribution and justice:
 		I am sworn against the perpetrators of injustice.
 		...
+		I am the rider that brings the storm.
 
 	Set roman, one line to a line, so it reads as a code carved somewhere
 	rather than as a quotation. Breaks are written and never inferred, per
@@ -801,6 +872,10 @@ def Oath_Entry(
 
 __all__ = (
 	"Oath_Register",
+	"SWORN_LINES",
+	"RECITED_LINES",
+	"RECITAL_STRUCTURES",
+	"Recite",
 	"REGISTERS",
 	"SPECIES_HEARTS",
 	"WORD_CLUSTERS",

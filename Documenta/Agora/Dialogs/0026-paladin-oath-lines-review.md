@@ -119,8 +119,15 @@ therefore full and unpruned by design. This Dialog is the pruning.
 - Species: the Human heart line ("My heart is true, and my friends are my
   rest") reads generic beside every register.
 
+**The recital (Julio, 2026-09-15).** Six lines are sworn and settled; four
+are recited: the close always, and three of the other five in their own
+order, one of ten structures drawn per Character. So the echo invariants
+apply to the four spoken lines, and a personal line may be among the two
+left unspoken.
+
 **Out of scope.** The class text (ruled). The five Oath paragraphs
-(QST-0126). The steed (QST-0130). The frame line. The six-slot shape.
+(QST-0126). The steed (QST-0130). The frame line. The six-slot shape and the
+four-line recital.
 
 ---
 
