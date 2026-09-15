@@ -33,6 +33,17 @@ ordinary generation request.
   lines and a note in `Documenta/Canon/Mythos/Human.md`.
 - The module does define `all_languages` and `standard_languages` in lower case.
 
+## 🧾 Field note (2026-09-15, Claude)
+
+PR #7 (branch `julio_cl/funny-gauss-movzis`, the Paladin) carries the fix for
+outcomes 1 and 2 without knowing this Questa existed: both imports now read
+`standard_languages`, both sites draw with `sorted(...)` instead of
+`list(a_set)` so a seed replays across processes, and a wide sweep of 1167
+requests plus Human on seed 4 generate. Outcome 3, whether a failing Origin
+feat should abort a Character at all, is untouched. When PR #7 merges this
+Questa can move to Solved on outcomes 1 and 2, with outcome 3 thrown as a
+sidequest. QST-0128 (issue #26) records why the sweep never caught the crash.
+
 ## 🎯 Desired outcome
 
 1. The two gifts import a name that exists, or build their language list the way

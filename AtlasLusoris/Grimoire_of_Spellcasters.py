@@ -3155,7 +3155,7 @@ class Paladin(Spellcaster):
 				]
 
 	def __str__(self):
-		return html(self)
+		return self.html()
 
 	def html(self):
 		prepared = self.get_stats("prepared")
