@@ -8,13 +8,14 @@ written to be read aloud at a table, and written to make the reader a
 believer.
 
 **Each Oath consults its own poet.** The Cleric reads prayers; the Paladin is
-the one Guild tied to a poem, so its four Oaths are written in four registers,
+the one Guild tied to a poem, so its five Oaths are written in five registers,
 chosen by Julio, and nothing in a Devotion oath sounds like a Vengeance oath:
 
 	Devotion    the Psalms, the reverence of the King James
 	Ancients    Shakespeare, the touch and the wonder, the green
 	Glory       Twain and Espronceda, Moore and Gaiman: the swagger of the told
-	Vengeance   Byron, the midnight and the storm
+	Vengeance   Byron and Bécquer, the storm and the wound
+	Creation    Lorca and Neruda, Scheherazade: the maker's word
 
 **It is assembled, never chosen.** Six slots, six pools, the way an Aasimar's
 aureola takes form, gem and tell from different Ideals. Every pool is written
@@ -252,42 +253,60 @@ REGISTERS = {
 		name=VENGEANCE,
 		sworn_to="Vengeance",
 		paragon="retribution and justice",
-		poets="Byron",
+		poets="Byron; Bécquer",
 		vows=(
 			"I am sworn against the perpetrators of injustice.",
-			"I am sworn to the reckoning, and the reckoning wears my face.",
-			"I am sworn to be the storm they prayed would never break.",
-			"I am sworn to hunt what the law forgave.",
+			"I am sworn to the deep, and the deep gives back nothing it has taken.",
+			"I am sworn to stand among them, and never of them.",
+			"I am sworn to no king and no court. The debt is mine, and mine the keeping.",
+			"I am sworn, torn but flying, to stream like the storm against the wind.",
+			"I am sworn to be my own hereafter, and theirs.",
+			"I am sworn to the dark swallows that will not return.",
 			),
 		hearts=(
 			"My heart rides the storm, and my arm wields the thunder.",
-			"My heart is a midnight that keeps one lamp burning.",
-			"My heart was broken once, and what remained of it is iron.",
-			"My heart keeps a ledger, written in a hand that does not shake.",
+			"My heart knows why one weeps. My heart knows why one kills.",
+			"My heart leaves the dagger in. Drawn out, the wound would only close.",
+			"My heart keeps the dead company, and knows how alone they are left.",
+			"My heart is a wound that does not bleed. It rides.",
+			"My heart knows why we weep, and it knows why we kill.",
+			"My heart has a dagger in it already. Let them bring another.",
 			),
 		arms=(
 			"My blade carries the names and balances their crimes.",
-			"My blade is the last argument, and I have never lost it.",
-			"My blade does not hate. Hatred tires. My blade remembers.",
-			"My blade comes down like the wolf upon the fold.",
+			"My sword outwears its sheath, and the sheath is the only thing that tires.",
+			"My arm is the shore, and their power stops at the shore.",
+			"My blade is the lightning, and the lightning knows where it falls.",
+			"My blade is where my tears go. Not one of them reaches the sea.",
+			"My sword is love with the tenderness torn out, and it is love still.",
+			"My blade does not come from behind. They will see it coming.",
 			),
 		words=(
 			"My word is fair, but never kind. It is strong, and it never negotiates.",
-			"My word was given to the dead, and the dead do not release you.",
-			"My word is the one debt I have never let run past its day.",
-			"My word is a sentence passed, and I am its executioner.",
+			"My word is not a pardon. The pardon rises to my lip, and dies there.",
+			"My word is what remains when the sigh goes to the air and the tear to the sea.",
+			"My word is given in a whisper, and the whole sky hears it kept.",
+			"My word keeps the dead company, and the dead are left so alone.",
+			"My word is today as yesterday, tomorrow as today, and always the same.",
+			"My word is an arrow, and it knows where it will tremble and lodge.",
 			),
 		refusals=(
 			"I will not be the one who put down my shield or my word.",
-			"I will not forgive what was never confessed.",
-			"I will not sleep while the guilty sleep soundly.",
-			"I will not be told that it was long ago.",
+			"I will not be called off, not by the crown, not by the pit, not by the dead.",
+			"I will not let the years plead for them. The years write no wrinkle on me.",
+			"I will not take gold for it. There is not gold enough in the earth.",
+			"I will not say the word of pardon. It comes to my lips, and dies there.",
+			"I will not ask how they can laugh. I will be the answer.",
+			"I will not sit alone with my grief. I carry it to their door.",
 			),
 		closes=(
 			"I am the rider that brings the storm.",
-			"Let them run. The storm runs faster.",
-			"It ends. I have decided that it ends.",
-			"They made me. Let them look upon what they made.",
+			"I am the deep, and I am dark, and I do not end.",
+			"It is midnight, and I am awake, and I am coming.",
+			"I am a ruin, and what a ruin. Kingdoms were quarried from less.",
+			"They are the high tower, and I am the hurricane. One of us must fall.",
+			"If I meet them after long years, how shall I greet them? With silence and steel.",
+			"What was lost does not return. What returns is me.",
 			),
 		),
 	}
