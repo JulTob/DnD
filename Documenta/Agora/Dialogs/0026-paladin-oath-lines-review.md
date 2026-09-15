@@ -161,12 +161,11 @@ Vox: *(pending deliberation)*
 ## 📜 Appendix: the corpus under review
 
 Generated from `Map_of_Paladin_Oaths.py` at PR #7 head, 2026-09-15, after the
-register ruling: Hesse and Cavafy withdrawn from Devotion, Glory's Cavafy
-lines re-voiced in Homer's structure, Creation tilted to the Arabian
-cadence. The first line of every Vengeance slot is Julio's. Species and
-background lines are the grace pools.
+register ruling and the courtly-love Devotion lines. The first line of every
+Vengeance slot is Julio's. Species and background lines are the grace pools.
+Six lines are sworn per Character and four recited.
 
-### Devotion (24 lines) · poets: the Psalms and the King James, for the sound; courtly love, for the ideas · paragon of constancy and truth
+### Devotion (46 lines) · poets: the Psalms and the King James, for the sound; courtly love, for the ideas · paragon of constancy and truth
 
 **vows**
 
@@ -174,6 +173,11 @@ background lines are the grace pools.
 - I am sworn to stand unbent and unbroken.
 - I am sworn unto the Truth; it is my rock and my high tower.
 - I am sworn to walk uprightly, though the whole earth be moved.
+- I am sworn to my beloved, and my beloved is without fault; I have looked.
+- I am sworn to the far love; I have not seen its face, and I know it is fair.
+- I am sworn to a star I promised, before I knew what stars were.
+- I am sworn as the seal upon the arm is sworn: set once, and not unset.
+- I am sworn to the cup no hand hath held, and mine shall be the hand.
 
 **hearts**
 
@@ -181,6 +185,10 @@ background lines are the grace pools.
 - My heart is a lamp that goeth not out by night.
 - My heart hath one law, and keepeth it, and seeketh no other.
 - My heart is a stronghold, and the gates of it stand open.
+- My heart hath one face in it, and the face is perfect, and it doth not age.
+- My heart is a pilgrim, and its shrine is a face, and the road is my whole life.
+- My heart is my beloved's and my beloved's is mine, and it was so before the name.
+- My heart rode out for a face it had not seen, and came home knowing it.
 
 **arms**
 
@@ -188,6 +196,9 @@ background lines are the grace pools.
 - My arm is lifted in the daylight, and my hand knoweth no secret work.
 - My sword is girded on before all eyes, and it is a clean sword.
 - My blade hath never once been drawn in secret.
+- My blade is not drawn for gold, nor for a crown; for love only, and love sufficeth.
+- My arm is the one thing my beloved may lean upon that shall not move.
+- My sword is girded on for one, and knoweth for whom, and that is its whole edge.
 
 **words**
 
@@ -195,6 +206,9 @@ background lines are the grace pools.
 - My word is given once; heaven and earth shall pass before it is taken back.
 - My word hath been given to the unworthy, and kept. This word is kept likewise.
 - My word standeth. Let the mountains be removed; my word standeth.
+- My word was given once, to one, and many waters cannot quench it.
+- My word is a promise made young to a face not yet known, and it is kept old.
+- My word is a troth, and a troth is older than any crown that heareth it.
 
 **refusals**
 
@@ -202,6 +216,9 @@ background lines are the grace pools.
 - I will not stand in the way of the crooked, nor sit where the mockers sit.
 - I will not lie, though the lie would save me, nor flee, though the truth would slay me.
 - I will not bend, not for the friend who begs, not for the king who commands.
+- I will not find a fault in my beloved. There is none to find.
+- I will not ask what my beloved is worth; a seal doth not ask what it sealeth.
+- I will not love the less for being far; far is where love is proved.
 
 **closes**
 
@@ -209,6 +226,10 @@ background lines are the grace pools.
 - Though all the world forsake it, it shall not be forsaken.
 - This is my portion, and I shall not want another.
 - So it standeth, and so I stand.
+- Set me as a seal upon thy heart; I am set, and I hold.
+- Love is strong as death. I have tried it against death, and love held.
+- Is it not true, angel of love, that on this far shore the moon shineth purer?
+- The star I promised thee is on its way, and I am the one carrying it.
 
 ### Ancients (25 lines) · poets: Shakespeare; the Green Knight · paragon of the green and the returning light
 
