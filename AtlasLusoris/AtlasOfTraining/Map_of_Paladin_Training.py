@@ -997,7 +997,7 @@ Event_Horizon = _creation(
 		name="Event Horizon",
 		min_level=7,
 		description=_lesson(
-			"You become unmovable. You become the mover.",
+			"You become immovable. You become the mover.",
 			"Choose one of the following damage types: Acid, Cold, Fire, "
 			"Lightning, or Thunder. You and your allies have Resistance to that "
 			"damage type while in your Aura of Protection. "

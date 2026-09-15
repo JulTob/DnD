@@ -233,19 +233,22 @@ Vengeance = Build_Specialization(
 # unwritten, and the world yields a little. Neither holds a True Name. Its
 # cost is the demiurge's: everything you make you answer for, and cannot
 # unmake. Register: Lorca, Neruda's elemental odes, Scheherazade. This
-# paragraph is a holding text; the poets' version replaces it.
+# paragraph is the first full draft, for Julio's review.
 CREATION_DESCRIPTION = (
-	"Others swore to a truth, or a wood, or a wrong. You swore to the door, "
-	"and to whoever stands at it.\n\n"
-	"Four courts answer you: the earth that rises, the wind that carries, "
-	"the fire that leaps, the water that will not be held. You did not "
-	"conquer them. You were received by them, as a guest is received, and "
-	"a guest keeps the house's laws. Lead with splendor. Lead with grace. "
-	"Grant what is asked.\n\n"
-	"That is the whole of the price, and it is not small. You will grant "
-	"what is asked and not what is wise, and the wish will be theirs, and "
-	"the granting will be yours, and you will not be permitted to confuse "
-	"the two."
+	"You swore to nothing that exists. You swore to what is not yet, and to "
+	"being the reason it comes. Others hold a truth, or a wood, or a wrong, "
+	"or a song. You hold the four elements the way a poet holds a language "
+	"he has not finished learning, and you speak it anyway, and it answers.\n\n"
+	"Earth rises where you say. Fire goes where you send it. There is a line "
+	"around you that nothing you have named can cross, and steel bends going "
+	"through the field of your will. None of this was lent, and none of it "
+	"was bought. It is what happens when a will is pointed at the world and "
+	"does not look away.\n\n"
+	"The cost is the maker's. Everything you make, you answer for, and you "
+	"cannot unmake it. A city is a creation. So is a wall, and so are the "
+	"people on the wrong side of it. One day you will look at a thing you "
+	"called into being and not be able to call it back, and that is the day "
+	"you find out what you swore."
 	)
 Creation = Build_Specialization(
 	guild=Paladin,
