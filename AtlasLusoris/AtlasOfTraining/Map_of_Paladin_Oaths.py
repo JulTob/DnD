@@ -280,6 +280,9 @@ REGISTERS = {
 			"I am sworn, torn but flying, to stream like the storm against the wind.",
 			"I am sworn to be my own hereafter, and theirs.",
 			"I am sworn to the dark swallows that will not return.",
+			"I am sworn to the reckoning, and the reckoning wears my face.",
+			"I am sworn to be the storm they prayed would never break.",
+			"I am sworn to hunt what the law forgave.",
 			),
 		hearts=(
 			"My heart rides the storm, and my arm wields the thunder.",
@@ -289,6 +292,9 @@ REGISTERS = {
 			"My heart is a wound that does not bleed. It rides.",
 			"My heart knows why we weep, and it knows why we kill.",
 			"My heart has a dagger in it already. Let them bring another.",
+			"My heart is a midnight that keeps one lamp burning.",
+			"My heart was broken once, and what remained of it is iron.",
+			"My heart keeps a ledger, written in a hand that does not shake.",
 			),
 		arms=(
 			"My blade carries the names and balances their crimes.",
@@ -298,6 +304,9 @@ REGISTERS = {
 			"My blade is where my tears go. Not one of them reaches the sea.",
 			"My sword is love with the tenderness torn out, and it is love still.",
 			"My blade does not come from behind. They will see it coming.",
+			"My blade is the last argument, and I have never lost it.",
+			"My blade does not hate. Hatred tires. My blade remembers.",
+			"My blade comes down like the wolf upon the fold.",
 			),
 		words=(
 			"My word is fair, but never kind. It is strong, and it never negotiates.",
@@ -307,6 +316,9 @@ REGISTERS = {
 			"My word keeps the dead company, and the dead are left so alone.",
 			"My word is today as yesterday, tomorrow as today, and always the same.",
 			"My word is an arrow, and it knows where it will tremble and lodge.",
+			"My word was given to the dead, and the dead do not release you.",
+			"My word is the one debt I have never let run past its day.",
+			"My word is a sentence passed, and I am its executioner.",
 			),
 		refusals=(
 			"I will not be the one who put down my shield or my word.",
@@ -316,6 +328,9 @@ REGISTERS = {
 			"I will not say the word of pardon. It comes to my lips, and dies there.",
 			"I will not ask how they can laugh. I will be the answer.",
 			"I will not sit alone with my grief. I carry it to their door.",
+			"I will not forgive what was never confessed.",
+			"I will not sleep while the guilty sleep soundly.",
+			"I will not be told that it was long ago.",
 			),
 		closes=(
 			"I am the rider that brings the storm.",
@@ -325,6 +340,9 @@ REGISTERS = {
 			"They are the high tower, and I am the hurricane. One of us must fall.",
 			"If I meet them after long years, how shall I greet them? With silence and steel.",
 			"What was lost does not return. What returns is me.",
+			"Let them run. The storm runs faster.",
+			"It ends. I have decided that it ends.",
+			"They made me. Let them look upon what they made.",
 			),
 		),
 	}
