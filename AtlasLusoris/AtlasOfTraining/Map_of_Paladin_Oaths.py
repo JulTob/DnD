@@ -214,7 +214,7 @@ REGISTERS = {
 		vows=(
 			"I am sworn to what is not yet, and to making it so.",
 			"I am sworn to the four elements, and to the fifth, the word.",
-			"I am sworn to the first light. Let there be, and there was.",
+			"I am sworn to the first light, the one that came before the sun.",
 			"I am sworn to make, and to answer for the made.",
 			),
 		hearts=(
